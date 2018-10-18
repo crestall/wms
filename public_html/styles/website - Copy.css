@@ -1,0 +1,384 @@
+
+/*****
+Navigation Bar
+******/
+.navbar-default{
+    background-color: #224f77;
+    border-color: #224f77;
+}
+
+.nav > li > a{
+    color: #f2f2f2;
+}
+
+.nav > li > a.active,
+.nav > li > a.active i{
+    color:#555;
+    background-color: #fefefe;
+}
+
+.nav > li > a:hover,
+.nav > li.active > a{
+    color: #555;
+    background-color: #fefefe;
+}
+
+.nav .open > a{
+    color:#555;
+}
+
+.nav .img-user{
+    background-color: #fff;
+    width: 55px;
+    height: auto;
+    border: 3px solid #fff;
+    border-radius: 5px;
+}
+
+@media(min-width:768px)
+{
+    .sidebar ul li#logo {
+        margin-bottom: 25px;
+        border: none;
+        margin-top: -30px;
+    }
+}
+/*
+@media(max-width:767px)
+{
+    .sidebar ul li#logo {
+        margin-bottom: 10px;
+        border: none;
+        margin-top: 10px;
+    }
+}
+
+****
+Form Feedback
+******/
+div.errorbox{
+	background: none repeat scroll 0 0 #f8dbdb;
+    border: 1px solid #ff3333;
+    color: #ff3333;
+    margin-bottom: 10px;
+    padding: 20px;
+    font-size: 18px;
+}
+
+div.feedbackbox{
+	background: none repeat scroll 0 0 #ccebd6;
+    border: 1px solid #009933;
+    color: #009933;
+    margin-bottom: 10px;
+    padding: 20px;
+    font-size:18px;
+}
+
+label.error{
+    color: #009933;
+    font-weight: normal;
+    font-style: italic;
+}
+
+/*****
+Error Pages
+******/
+div.broken_page{
+    min-height:666px;
+    background: url(/images/backgrounds/error-bg.jpg) center center no-repeat #fff!important;
+    width: 100%;
+}
+
+/*****
+Form adjustments
+*****
+input.form-control,
+select.form-control,
+.bootstrap-select > .dropdown-toggle,
+.form-group .bootstrap-select.btn-group {
+    max-width:450px;
+}
+*/
+input.number,
+input.digits{
+    text-align: right;
+}
+
+p.inst, span.inst{
+    margin-top:2px;
+    margin-bottom:2px;
+    color:#221111;
+    font-size:12px;
+    font-style:italic;
+    line-height:normal;
+}
+
+label.form-check-label{
+    margin-top: 10px;
+}
+
+div.checkbox > label.form-check-label{
+    margin-top: 0;
+}
+
+.delete-image-holder{
+    height: 34px;
+    line-height: 34px;
+    max-width: 40px;
+}
+
+ul#fileList {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/*
+.btn-default{
+    color: #fff;
+    background-color: #aeaeae;
+    border-color: #222;
+}
+*/
+/*****
+Standard Tables
+******/
+table{
+    margin:10px auto;
+    border-bottom:solid 2px #106ea4;
+    font-size:12px;
+}
+
+td{
+    padding:5px;
+    vertical-align:top;
+    border-left:thin dotted #106ea4;
+    border-right:thin dotted #106ea4;
+    border-bottom:solid 1px #106ea4;
+}
+
+table.pickslip td{
+    vertical-align:middle;
+}
+
+th{
+    text-align:center;
+    border-bottom:solid thin #106ea4;
+    border-left:thin dotted #106ea4;
+    border-right:thin dotted #106ea4;
+    text-align:center;
+    font-size:14px;
+    background-color: #fff;
+}
+
+td.number{
+    max-width: 87px;
+    text-align:right;
+}
+
+td.shipped_to{
+    max-width:195px;
+    overflow:auto;
+}
+
+td.right{
+    text-align:right;
+}
+
+td.middle{
+    vertical-align: middle;
+}
+
+td.middle img{
+    vertical-align: middle;
+}
+
+tr.total{
+    font-weight:bold;
+}
+
+tr.total td{
+    border-top: 3px double #106ea4;
+    vertical-align: middle;
+}
+
+td.nowrap{
+    white-space:nowrap;
+}
+
+td.chkbox{
+    width: 75px;
+    text-align: center;
+}
+
+tr.updated,
+tr.replacement{
+    background:url(/styles/images/ui_images/ui-bg_diagonals-thick_0b3e6f_18_40x40.png);
+}
+
+tr.order_error{
+    background:url(/styles/images/ui_images/ui-bg_diagonals-thick_75_f3d8d8_40x40.png);
+}
+
+tr.order_comments{
+    background:url(/styles/images/ui_images/ui-bg_diagonals-thick_0b3e6f_18_40x40.png);
+}
+
+tr.pick_notice,
+tr.notice{
+    background:url(/styles/images/ui_images/ui-bg_highlight-soft_100_deedf7_1x100.png) 50% 50% repeat-x;
+}
+
+tr.order_comments td,
+tr.pick_notice td{
+   color: black;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    font-size: larger;
+}
+
+tr.express{
+    background:url(/styles/images/ui_images/ui-bg_gloss-wave_35_f6a828_500x100.png);
+}
+
+/*****
+Responsive Tables
+******/
+ @media
+    only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1023px) {
+    table:not(.ui-datepicker-calendar),
+    table:not(.ui-datepicker-calendar) thead,
+    table:not(.ui-datepicker-calendar) tbody,
+    table:not(.ui-datepicker-calendar) th,
+    table:not(.ui-datepicker-calendar) td,
+    table:not(.ui-datepicker-calendar) tr {
+        display: block;
+    }
+
+    table:not(.ui-datepicker-calendar) thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    table:not(.ui-datepicker-calendar) tr + tr:not(.full_width) {
+        margin-top: 1.5rem;
+    }
+
+    table:not(.ui-datepicker-calendar) tr:not(.full_width) td {
+        /* Behave  like a "row" */
+        border: none;
+        padding-right: 0;
+        border-bottom:dotted 1px #106ea4;
+        position: relative;
+        padding-left: 50%;
+        width: 50% !important;
+        text-align: left !important;
+        min-height: 30px;
+        vertical-align: middle;
+    }
+
+    table:not(.ui-datepicker-calendar) tr:not(.full_width) td:before {
+        /* Now like a table header    */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: left;
+        content: attr(data-label);
+        border-right:thin solid #106ea4;
+        /*
+        display: inline-block;
+        font-weight: bold;
+        line-height: 1.5;
+        margin-left: -100%;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+        */
+    }
+
+    td.number{
+        max-width: none;
+    }
+
+}
+/********
+Select Styles
+*******  */
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn)
+{
+    width:150px;
+    margin: 0 0 5px 5px;
+}
+/********
+current orders flip angle
+*******  */
+a#toggle_orders .fa.arrow:before {
+    content: "\f106";
+}
+
+a#toggle_orders.hiding .fa.arrow:before {
+    content: "\f107";
+}
+/********
+current pickups flip angle
+*******  */
+a#toggle_pickups .fa.arrow:before {
+    content: "\f106";
+}
+
+a#toggle_pickups.hiding .fa.arrow:before {
+    content: "\f107";
+}
+/********
+manage users flip angle
+*******  */
+a.toggle_roles .fa.arrow:before {
+    content: "\f106";
+}
+
+a.toggle_roles.hiding .fa.arrow:before {
+    content: "\f107";
+}
+
+/********
+user profile image
+*******  */
+img.profile-thumb{
+    width:100px;
+}
+
+/********
+highlighting sections
+*******  */
+.highlight{
+    padding: 15px;
+    border-width: 1px;
+    border-style: solid;
+    margin: 12px;
+}
+
+.grey-back{
+    background-color: #ededed;
+    border-color: #dedede;
+}
+
+/********
+bootsrap adjustments
+*******  */
+@media(max-width:767px){
+    .row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+

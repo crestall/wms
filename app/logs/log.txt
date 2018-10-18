@@ -1,0 +1,20 @@
+29/05/2018 14:49:04 | D:\Work\Dropbox (Personal)\websites\updated_portal\app\models\Database.php | 48 | PDOException
+SQLSTATE[HY000] [1049] Unknown database 'miniphp_68dozftn'
+*******************************************************************
+
+29/05/2018 15:40:56 | D:\Work\Dropbox (Personal)\websites\updated_portal\app\views\login\index.php | 86 | ErrorException
+syntax error, unexpected end of file
+*******************************************************************
+
+30/05/2018 4:12:51 | D:\Dropbox\websites\updated_portal\app\core\App.php | 66 | ErrorException
+Trying to get property of non-object
+*******************************************************************
+
+30/05/2018 4:12:51 | D:\Dropbox\websites\updated_portal\app\core\App.php | 66 | ErrorException
+Trying to get property of non-object
+*******************************************************************
+
+30/05/2018 6:17:28 | D:\Dropbox\websites\updated_portal\app\core\components\SecurityComponent.php | 136 | Exception
+The request has been deined
+*******************************************************************
+

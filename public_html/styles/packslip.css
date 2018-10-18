@@ -1,0 +1,87 @@
+@charset "utf-8";
+/*************************************************
+ *	Standard Tables Settings
+ *************************************************/
+body{
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+}
+
+table{
+	font-size:14pt;
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+}
+
+td{
+	padding:5px;
+	vertical-align:top;
+}
+
+td.number{
+	width:80px;
+	text-align:right;
+}
+
+td.w70{
+    width:140mm;
+}
+
+td.w30{
+    width:50mm;
+}
+
+/*
+table tr:nth-child(odd) {
+    background-color: #ddd;
+}
+
+
+
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+*/
+
+
+td.right{
+	text-align:right;
+}
+
+td.centre{
+    text-align: center;
+}
+
+td.middle{
+	vertical-align: middle;
+}
+
+td.middle img{
+	vertical-align: middle;
+}
+
+td.spacer{
+    height: 12mm;
+}
+
+td.item{
+    height:12mm;
+    border-bottom: thin dotted #ccc;
+    vertical-align: middle;
+}
+
+td.head{
+    font-size:20pt;
+    border-bottom: medium solid #000;
+}
+
+span.address{
+    font-size: 16pt;
+}
+
+span.bb_address{
+    font-size: 11pt;
+}
+
+h2{
+    font-size:36pt;
+    font-weight:normal;
+}

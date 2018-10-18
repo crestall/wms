@@ -1,0 +1,99 @@
+@charset "utf-8";
+/*************************************************
+ *	Standard Tables Settings
+ *************************************************/
+table{
+	margin:10px auto;
+	border-bottom:solid 2px #106ea4;
+	font-size:12px;
+	width:90%;
+}
+
+table.pickslip{
+    font-size:10px;
+}
+
+td{
+	padding:5px;
+	vertical-align:top;
+	border-left:thin dotted #106ea4;
+	border-right:thin dotted #106ea4;
+    border-bottom:thin solid #106ea4;
+}
+
+table.pickslip td{
+	vertical-align:middle;
+}
+
+th{
+	text-align:center;
+	border-bottom:solid thin #106ea4;
+	border-left:thin dotted #106ea4;
+	border-right:thin dotted #106ea4;
+	text-align:center;
+	font-size:14px;
+
+}
+
+td.number{
+	width:80px;
+	text-align:right;
+}
+
+tr.even, tbody.even {
+	background-color: #eee;
+}
+tr.odd, tbody.odd {
+	background-color: #ddd;
+}
+
+
+/*
+table tr:nth-child(odd) {
+    background-color: #ddd;
+}
+
+
+
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+*/
+
+
+td.right{
+	text-align:right;
+}
+
+td.middle{
+	vertical-align: middle;
+}
+
+td.middle img{
+	vertical-align: middle;;
+}
+
+tr.total{
+	font-weight:bold;
+}
+
+tr.total td{
+	border-top: 3px double #106ea4;
+    vertical-align: middle;
+}
+
+div.pickslip{
+	width:148mm;
+}
+
+table.pickslip td{
+	vertical-align:middle;
+}
+
+span.check_box{
+	display:inline-block;
+	width:40px;
+	height:40px;
+	margin:8px;
+	border:2px solid #000;
+}

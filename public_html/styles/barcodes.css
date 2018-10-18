@@ -1,0 +1,40 @@
+@charset "utf-8";
+/*************************************************
+ *	Standard Tables Settings
+ *************************************************/
+table{
+	width:201mm;
+}
+
+td{
+	vertical-align:top;
+    text-align:center;
+    font-size: 20px;
+}
+
+div.body{
+	width:205mm;
+	padding-top:2mm;
+}
+
+div.holder{
+    text-align:center;
+    font-size: 14px;
+	width: 96mm;
+	height:33mm;
+	float:left;
+}
+
+div.left{
+	margin-left: 14mm;
+}
+
+.barcode {
+    /*padding: 3mm;*/
+    margin: 3mm 3mm 0 3mm;
+}
+
+p.text{
+	margin-bottom:0;
+	font-size:14px;
+}

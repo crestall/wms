@@ -1,0 +1,221 @@
+<html>
+    <head>
+        <style>
+            body{
+                font-family: "Helvetica",sans-serif;
+            }
+            a{
+                color: #18A1D9;
+                text-decoration: underline;
+            }
+            .centre{
+                text-align: centre;
+            }
+            .bold{
+                font-weight:bold;
+            }
+
+            table.noa{
+                width:450pt;
+                padding:0;
+                background:#FDFDFD;
+                border: solid gainsboro 1.0pt;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.1) !important;
+                border-radius: 3px !important"
+            }
+            td{
+                border:none;
+                padding:0;
+                vertical-align: top;
+            }
+            td.header{
+                padding:27.0pt 36.0pt 27.0pt 36.0pt;
+                background: #18A1D9;
+            }
+            td.header h1{
+                margin:0cm;
+                margin-bottom:.0001pt;
+                line-height:150%;
+                text-shadow:0 1px 0 #46b4e1;
+                -webkit-font-smoothing: antialiased;
+                font-size:22.5pt;
+                line-height:150%;
+                font-family:"Helvetica",sans-serif;
+                color:white;
+                font-weight:normal
+            }
+            table.body{
+                width:450.0pt;
+            }
+            table.items{
+                width:100.0%;
+                border:solid #E4E4E4 1.0pt;
+                font-size:11pt;
+            }
+            table.items thead td{
+                border:solid #E4E4E4 1.0pt;
+                padding:9.0pt 9.0pt 9.0pt 9.0pt;
+                color: #787473;
+                font-weight: bold;
+            }
+            table.items tbody td{
+                border:solid #EEEEEE 1.0pt;
+                padding:9.0pt 9.0pt 9.0pt 9.0pt;
+                word-wrap: break-word;
+                color:#787473;
+            }
+            table.addresses{
+                width:100%;
+            }
+            table.addresses td{
+                width:50.0%;
+                border:solid #E4E4E4 1.0pt;
+                padding:9.0pt 9.0pt 9.0pt 9.0pt;
+                margin-top:12.0pt;
+                margin-right:0cm;
+                margin-bottom:6.0pt;
+                margin-left:0cm;
+                line-height:130%;
+                font-family:"Helvetica",sans-serif;
+                color:#565150;
+                font-size: 11pt;
+            }
+            table.addresses td h3{
+                margin-top:12.0pt;
+                margin-right:0cm;
+                margin-bottom:6.0pt;
+                margin-left:0cm;
+                line-height:130%;
+                font-size:12.0pt;
+                font-family:"Helvetica",sans-serif;
+                color:#18A1D9;
+            }
+
+            ul li{
+                color:#787743;
+                line-height: 150%;
+                font-size:11pt;
+                font-family: "Calibri",sans-serif;
+            }
+            span.extax{
+                font-size:7.5pt;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="centre" align="center">
+            <img src="https://www.noasleep.com/wp-content/uploads/sites/29/2017/02/email-header.png" alt="Noa Sleep Logo" style="margin-bottom: 15px;" />
+        </div>
+        <div class="centre"align="center">
+            <table class="noa">
+                <tbody>
+                    <tr>
+                        <td class="header">
+                            <!-- header -->
+                            <h1>Your Noa mattress has shipped</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="body">
+                            <!-- body -->
+                            <table class="body"  width="600" cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding:36.0pt 36.0pt 36.0pt 36.0pt" valign="top">
+                                            <p style="margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt; margin-left:0cm;line-height:150%">
+                                                <span style="font-size:10.5pt; line-height:150%;font-family:&quot;Helvetica&quot;,sans-serif;color:#787473">
+                                                    Hi {NAME}! Your Noa mattress has shipped and is on its way to your home. Deliveries typically take place within 2-7 business days (excluding weekends and holidays) after your order is shipped<br/>
+                                                    Please visit <a href="http://www.hunterexpress.com.au/">www.hunterexpress.com.au</a> and enter {CONSIGNMENT_ID} as the consignment number in the 'Quick Track' form at the top right of the webpage<br/>
+                                                    If you have any questions or concerns regarding your delivery, kindly contact our distribution centre directly by emailing <a href="mailto:customersupport@3plplus.com.au">customersupport@3plplus.com.au</a> or calling 03 8512 1444.
+
+                                                </span>
+                                            </p>
+                                            <h2 style="margin-top:12.0pt;margin-right:0cm;margin-bottom:6.0pt; margin-left:0cm;line-height:130%">
+                                                <span style="font-size:13.5pt; line-height:130%;font-family:&quot;Helvetica&quot;,sans-serif;mso-fareast-font-family: &quot;Times New Roman&quot;;color:#18A1D9">
+                                                    Order #{ORDER_NUMBER}
+                                                </span>
+                                            </h2>
+                                            <table class="items" cellspacing="0" cellpadding="0" border="1">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="product">Product</td>
+                                                        <td>Quantity</td>
+                                                        <td>Price</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {ITEM_BODY}
+                                                </tbody>
+                                            </table>
+                                            <h2 style="margin-top:12.0pt;margin-right:0cm;margin-bottom:6.0pt; margin-left:0cm;line-height:130%">
+                                                <span style="font-size:13.5pt; line-height:130%;font-family:&quot;Helvetica&quot;,sans-serif;mso-fareast-font-family: &quot;Times New Roman&quot;;color:#18A1D9">
+                                                    Customer details
+                                                </span>
+                                            </h2>
+                                            <ul type="disc">
+                                                <li><span class="bold">Email address:</span> {EMAIL_LINK}</li>
+                                                <li><span class="bold">Phone:</span> {PHONE_NUMBER}</li>
+                                            </ul>
+                                            <table class="addresses" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                <tr>
+                                                    <td>
+                                                        <h3>Billing Address</h3>
+                                                        {BILLING_STRING}
+                                                    </td>
+                                                    <td>
+                                                        <h3>Shipping Address</h3>
+                                                        {SHIPPING_STRING}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <p class="MsoNormal" style="line-height:150%; font-size:11pt;" >&nbsp;</p>
+                                            <hr size="2" width="100%" align="center" />
+                                            <p style="line-height:150%">
+                                                <span style="color:#18A1D9"><img src="https://www.noasleep.com/au-en/wp-content/themes/noa/img/facebook@2x.png" style="display:inline-block;outline: none;border-bottom-width:0px; border-left-width:0px;border-right-width:0px;border-top-width:0px; color:white;font-family:sans-serif;font-size:20px;font-weight:bold; height:auto;line-height:100%;max-width:19px;padding-right:7px; text-decoration:none;text-transform:capitalize;width:100%" alt="facebook" width="19" border="0"></span>
+                                                <span style="color:#18A1D9"><img src="https://www.noasleep.com/au-en/wp-content/themes/noa/img/instagram@2x.png" style="display:inline-block;outline: none;border-bottom-width:0px; border-left-width:0px;border-right-width:0px;border-top-width:0px; color:white;font-family:sans-serif;font-size:20px;font-weight:bold; height:auto;line-height:100%;max-width:29px;padding-right:7px; text-decoration:none;text-transform:capitalize;width:100%" alt="instagram" width="29" border="0"></span>
+                                                <span style="color:#18A1D9"><img src="https://www.noasleep.com/au-en/wp-content/themes/noa/img/twitter@2x.png" style="display:inline-block;outline: none;border-bottom-width:0px; border-left-width:0px;border-right-width:0px;border-top-width:0px; color:white;font-family:sans-serif;font-size:20px;font-weight:bold; height:auto;line-height:100%;max-width:29px;padding-right:7px; text-decoration:none;text-transform:capitalize;width:100%" alt="twitter" width="29" border="0"></span>
+                                            </p>
+                                            <p style="margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt; margin-left:0cm;line-height:150%">
+                                                <span style="font-size:10.5pt; line-height:150%;font-family:&quot;Helvetica&quot;,sans-serif;color:#787473">
+                                                    <a href="mailto:support@noasleep.com">support@noasleep.com</a>
+                                                </span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:none;padding:0cm 0cm 0cm 0cm" valign="top"><!-- Footer -->
+                                            <div align="center">
+                                                <table class="MsoNormalTable" style="width:450.0pt;" width="600" cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="padding:0cm 0cm 0cm 0cm;-webkit-border-radius: 6px" valign="top">
+                                                                <table style="width:100.0%;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td style="padding:0cm 36.0pt 36.0pt 36.0pt;-webkit-border-radius: 6px">
+                                                                                <p style="text-align:center;line-height:125%" align="center">
+                                                                                    <span style="font-size:9.0pt;line-height:125%;font-family:&quot;Arial&quot;,sans-serif;color:#74C7E8">
+                                                                                        Noa Sleep, 2017. All Rights Reserved.
+                                                                                    </span>
+                                                                                </p>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <!-- End Footer --></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
