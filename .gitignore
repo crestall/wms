@@ -3,4 +3,4 @@ _installation/
 app/config/constants.php
 public_html/client_uploads
 public_html/*pdf
-app/logs
+app/logs/
