@@ -54,7 +54,7 @@ class Logger{
         $logfile = APP . "logs/".$file;
         file_put_contents($logfile, $content, FILE_APPEND);
     }
-
+    // for the dispatch reports
     public static function logReportsSent($file, $content)
     {
         $file .= date('Ymd').'.txt';
