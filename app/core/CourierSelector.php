@@ -145,7 +145,7 @@
     private function assignHunters($order_id, $courier_id, $plu = false, $pal = false)
     {
         $db = Database::openConnection();
-        if(!Config::get('SITE_LIVE'))
+        if(SITE_LIVE)
         {
             $huntersClass = "HuntersTest";
         }

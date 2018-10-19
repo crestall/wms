@@ -32,10 +32,10 @@ class Database {
      */
 	private function __construct()
 	{
-		$dsn = 'mysql:dbname='.Config::get('DB_NAME').';host='.Config::get('DB_HOST').'';
+		$dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST;
 		try
 		{
-			$this->pdo = new PDO($dsn, Config::get('DB_USER'), Config::get('DB_PASS'), $this->options);
+			$this->pdo = new PDO($dsn, DB_USER, DB_PASS, $this->options);
 		}
 		catch (PDOException $e)
 		{

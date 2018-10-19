@@ -1,5 +1,2 @@
 # Auto detect text files and perform LF normalization
-
 * text=auto
-
-app/config/config.php merge=ours
