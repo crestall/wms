@@ -11,12 +11,12 @@ return array(
     /*************************************************************************
     * Is Site Live?
     **************************************************************************/
-    'SITE_LIVE' => false,
+    'SITE_LIVE' => true,
     /*************************************************************************
     * Database Configuration
     **************************************************************************/
     "DB_HOST"       => "localhost",
-    "DB_NAME"       => "cobaltma_newclient_portal_dev",
+    "DB_NAME"       => "cobaltma_newclienportal",
     "DB_USER"       => "cobaltma_cpsite",
     "DB_PASS"       => "{,e3^bfcfcMp",
     'DB_CHARSET'    => 'utf8',
