@@ -8,15 +8,6 @@
   */
 
 return array(
-    /*************************************************************************
-    * Database Configuration
-    **************************************************************************/
-    "DB_HOST"       => "localhost",
-    "DB_NAME"       => "cobaltma_newclienportal",
-    "DB_USER"       => "cobaltma_cpsite",
-    "DB_PASS"       => "{,e3^bfcfcMp",
-    'DB_CHARSET'    => 'utf8',
-
     /**
      * Configuration for: Paths
      * Paths from App directory
