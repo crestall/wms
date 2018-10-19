@@ -1,3 +1,4 @@
 vendor/
 _installation/
 app/config/constants.php
+public_html/client_uploads
