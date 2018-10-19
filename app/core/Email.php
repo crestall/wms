@@ -84,7 +84,7 @@
 
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-        if(Config::get("SITE_LIVE"))
+        if(SITE_LIVE)
         {
 		    $mail->AddAddress($email, $name);
             $mail->AddBCC('daniel.mackenzie@3plplus.com.au', 'Daniel Mackenzie');
