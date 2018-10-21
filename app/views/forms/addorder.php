@@ -107,7 +107,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Upload PDF Attachment</label>
                 <div class="col-md-4">
-                    <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" />  
+                    <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" />
                     <span class="inst">(if required) - use ctrl click to select multiple files</span>
                     <ul id="fileList"></ul>
                     <?php echo Form::displayError('invoice');?>
@@ -126,7 +126,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 <div class="form-check">
                     <label class="form-check-label col-md-3" for="b2b">Bulk Store Order</label>
                     <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="b2b" name="b2b" />
+                        <input class="form-check-input styled" type="checkbox" id="b2b" name="b2b" <?php if(!empty(Form::value('b2b'))) echo 'checked';?> />
                         <label for="b2b"></label>
                     </div>
                 </div>
