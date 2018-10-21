@@ -127,7 +127,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <label class="form-check-label col-md-3" for="b2b">Bulk Store Order</label>
                     <div class="col-md-4 checkbox checkbox-default">
                         <input class="form-check-input styled" type="checkbox" id="b2b" name="b2b" <?php if(!empty(Form::value('b2b'))) echo 'checked';?> />
-                        <label for="b2b"></label>
+                        <label for="b2b">bb so</label>
                     </div>
                 </div>
             </div>
