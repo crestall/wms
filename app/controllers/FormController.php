@@ -2624,12 +2624,14 @@ class FormController extends Controller {
 				if(!isset($details['qty']))
 				{
                     $error = true;
-                    Form::setError('items', 'Please ensure all items have a quantity');					
+                    Form::setError('items', 'Please ensure all items have a quantity');
+                    break;
 				}
 				if(!isset($details['id']))
 				{
 					$error = true;
                     Form::setError('items', 'There has been an error recognising an item');
+                    break;
 				}
 				if(!$error)
 				{
