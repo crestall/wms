@@ -2621,26 +2621,40 @@ class FormController extends Controller {
             $error = false;
             foreach($this->request->data['items'] as $itid => $details)
             {
-                $array = array(
-                    'qty'   => $details['qty'],
-                    'id'    => $details['id']
-                );
-                if(!empty($details['pallet_qty']))
-                {
-                    $array['qty'] = $details['pallet_qty'];
-                    $array['whole_pallet'] = true;
-                }
-                else
-                {
-                    $array['qty'] = $details['qty'];
-                    $array['whole_pallet'] = false;
-                }
-                if(empty($array['qty']))
-                {
+				if(!isset($details['qty']))
+				{
                     $error = true;
-                    Form::setError('items', 'Please ensure all items have a quantity');
-                }
-                $orders_items[] = $array ;
+                    Form::setError('items', 'Please ensure all items have a quantity');					
+				}
+				if(!isset($details['id']))
+				{
+					$error = true;
+                    Form::setError('items', 'There has been an error recognising an item');
+				}
+				if(!$error)
+				{
+					$array = array(
+						'qty'   => $details['qty'],
+						'id'    => $details['id']
+					);
+					if(!empty($details['pallet_qty']))
+					{
+						$array['qty'] = $details['pallet_qty'];
+						$array['whole_pallet'] = true;
+					}
+					else
+					{
+						$array['qty'] = $details['qty'];
+						$array['whole_pallet'] = false;
+					}
+					if(empty($array['qty']))
+					{
+						$error = true;
+						Form::setError('items', 'Please ensure all items have a quantity');
+					}
+					$orders_items[] = $array ;					
+				}
+
             }
             //echo "<pre>",print_r($orders_items),"</pre>"; die();
             if(count($orders_items) == 0)
@@ -2661,10 +2675,12 @@ class FormController extends Controller {
                     }
                 }
             }
+			/*
             else
             {
                 Form::setError('items', 'Please check your items');
             }
+			*/
         }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
