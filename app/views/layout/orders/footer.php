@@ -31,7 +31,7 @@
                             html += "<div class='col-sm-3 qty-location'></div>";
                             html += "<input type='hidden' name='items["+item_count+"][id]' class='item_id' />"
                             html += "</div>"; //row
-                            $('div#items_holder').append(html);
+                            $('div#items_holder').append(html).find('input.item-searcher').focus();
 
                             actions['item-searcher'].init();
                             itemsUpdater.itemDelete();
