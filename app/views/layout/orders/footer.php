@@ -311,7 +311,8 @@
                             $.validator.addClassRules('item_qty',{
                                 required: function(el){
                                     console.log('element name is: '+$(el).attr('name'));
-                                    return $(el).next('.pallet_qty').val() == 0;
+                                    console.log('next element name is: '+$(el).next('.pallet_qty').attr('name'));
+                                    return ($(el).next('.pallet_qty').val() == 0);
                                 },
                                 digits: true
                             });
