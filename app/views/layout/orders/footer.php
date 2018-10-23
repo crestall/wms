@@ -312,13 +312,14 @@
                             });
                             $.validator.addClassRules('item_qty',{
                                 required: function(el){
+                                    console.log('next element name: '+$(el).prev('.pallet_qty').attr('name'));
                                     return ($(el).next('.pallet_qty').val() === 0 || $(el).next('.pallet_qty').val() === undefined );
                                 },
                                 digits: true
                             });
                             $.validator.addClassRules('pallet_qty',{
                                 notNone: function(el){
-                                    console.log($(el).prev('.item_qty').attr('name'));
+                                    console.log('prev element name: '+$(el).prev('.item_qty').attr('name'));
                                     return ( $(el).prev('.item_qty').val() === 0 || $(el).prev('.item_qty').val() === "" );
                                 }
                             });
