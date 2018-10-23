@@ -310,9 +310,8 @@
                             $( "input.item_qty, select.pallet_qty" ).rules( "remove");
                             $.validator.addClassRules('item_qty',{
                                 required: function(el){
-                                    console.log('element name is: '+$(el).attr('name'));
                                     console.log('next element value is: '+$(el).next('.pallet_qty').val());
-                                    return ($(el).next('.pallet_qty').val() == 0 || $(el).next('.pallet_qty') === undefined );
+                                    return ($(el).next('.pallet_qty').val() === 0 || $(el).next('.pallet_qty').val() === undefined );
                                 },
                                 digits: true
                             });
