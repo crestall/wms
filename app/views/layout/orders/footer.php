@@ -313,7 +313,7 @@
                             $.validator.addClassRules('item_qty',{
                                 required: function(el){
                                     //console.log('next element name: '+$(el).parent().next().find('.pallet_qty').attr('name'));
-                                    console.log('parent class: '+$(el).parent().attr('class'));
+                                    console.log('next parent class: '+$(el).parent().next().attr('class'));
                                     return ($(el).next('.pallet_qty').val() === 0 || $(el).next('.pallet_qty').val() === undefined );
                                 },
                                 digits: true
