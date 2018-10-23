@@ -306,6 +306,15 @@
                             $holder.find('input.item_qty').focus();
                             $('.selectpicker').selectpicker();
                             //actions['item-searcher-test'].init();
+                            //add some validation for the for
+                            $( "input.item_qty, select.pallet_qty" ).rules( "remove");
+                            $.validator.addClassRules('item_qty',{
+                                required: function(el){
+                                    console.log('element name is: '+$(el).attr('name'));
+                                    return $(el).next('.pallet_qty').val() == 0;
+                                },
+                                digits: true
+                            });
                             return false;
                         }
                         function changeCallback(event, ui)
