@@ -306,11 +306,10 @@
                             $holder.find('input.item_qty').focus();
                             $('.selectpicker').selectpicker();
                             //actions['item-searcher-test'].init();
-                            //add some validation for the for
+                            //add some validation for the form
                             $( "input.item_qty, select.pallet_qty" ).rules( "remove");
                             $.validator.addClassRules('item_qty',{
                                 required: function(el){
-                                    console.log('next element value is: '+$(el).next('.pallet_qty').val());
                                     return ($(el).next('.pallet_qty').val() === 0 || $(el).next('.pallet_qty').val() === undefined );
                                 },
                                 digits: true
