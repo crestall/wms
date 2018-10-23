@@ -318,6 +318,7 @@
                             });
                             $.validator.addClassRules('pallet_qty',{
                                 notNone: function(el){
+                                    console.log($(el).prev('.item_qty').attr('name'));
                                     return ( $(el).prev('.item_qty').val() === 0 || $(el).prev('.item_qty').val() === "" );
                                 }
                             });
