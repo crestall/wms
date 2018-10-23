@@ -312,7 +312,7 @@
                             });
                             $.validator.addClassRules('item_qty',{
                                 required: function(el){
-                                    console.log('next element name: '+$(el).prev('.pallet_qty').attr('name'));
+                                    console.log('next element name: '+$(el).next('.pallet_qty').attr('name'));
                                     return ($(el).next('.pallet_qty').val() === 0 || $(el).next('.pallet_qty').val() === undefined );
                                 },
                                 digits: true
