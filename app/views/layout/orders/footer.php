@@ -307,7 +307,9 @@
                             $('.selectpicker').selectpicker();
                             //actions['item-searcher-test'].init();
                             //add some validation for the form
-                            $( "input.item_qty, select.pallet_qty" ).rules( "remove");
+                            $( "input.item_qty, select.pallet_qty" ).each(function(i,e){
+                                $(this).rules( "remove");
+                            });
                             $.validator.addClassRules('item_qty',{
                                 required: function(el){
                                     return ($(el).next('.pallet_qty').val() === 0 || $(el).next('.pallet_qty').val() === undefined );

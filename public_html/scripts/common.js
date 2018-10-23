@@ -161,7 +161,9 @@ var itemsUpdater = {
             $(this).closest('div.item_holder').find('select.pallet_qty').attr('name', 'items['+i+'][pallet_qty]');
             $(this).closest('div.item_holder').find('input.item_id').attr('name', 'items['+i+'][id]');
             //adjust the validation
-            $( "input.item_qty, select.pallet_qty" ).rules( "remove");
+            $( "input.item_qty, select.pallet_qty" ).each(function(i,e){
+                $(this).rules( "remove");
+            });
             $.validator.addClassRules('item_qty',{
                 required: function(el){
                     return ($(el).next('.pallet_qty').val() === 0 || $(el).next('.pallet_qty').val() === undefined );
