@@ -166,13 +166,19 @@ var itemsUpdater = {
             });
             $.validator.addClassRules('item_qty',{
                 required: function(el){
-                    return ($(el).next('.pallet_qty').val() === 0 || $(el).next('.pallet_qty').val() === undefined );
+                    var $holder = $(el).closest('div.item_holder');
+                    var val = $holder.find('select.pallet_qty').val();
+                    //console.log('pallet_qty val: '+ val);
+                    return (val === 0 || val === undefined );
                 },
                 digits: true
             });
             $.validator.addClassRules('pallet_qty',{
                 notNone: function(el){
-                    return ( $(el).prev('.item_qty').val() === 0 || $(el).prev('.item_qty').val() === "" );
+                    var $holder = $(el).closest('div.item_holder');
+                    var val = $holder.find('input.item_qty').val();
+                    //console.log('item_qty val: '+ val);
+                    return ( val === 0 || val === "" );
                 }
             });
         });
