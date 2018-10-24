@@ -535,7 +535,11 @@
                                 dangerMode: true,
                             }).then( function(willCancel) {
                                 if (willCancel) {
-                                    console.log(pickupid);
+                                    //console.log(pickupid);
+                                    var data = {pickupid: pickupid}
+                                    $.post('/ajaxfunctions/cancel-pickup', data, function(d){
+                                        location.reload();
+                                    });
                                 }
                             });
                         });

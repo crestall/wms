@@ -522,6 +522,12 @@ class ajaxfunctionsController extends Controller
         $this->order->cancelOrders($this->request->data['orderids']);
     }
 
+    public function cancelPickup()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->pickup->cancelPickup($this->request->data['pickupid']);
+    }
+
     public function updateFreightCharge()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
