@@ -528,7 +528,7 @@ class Item extends Model{
                 WHERE
                     o.status_id != 4
                 GROUP BY
-                    oi.location_id
+                    oi.location_id, oi.item_id
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
             group by a.item_id
@@ -749,7 +749,7 @@ class Item extends Model{
                 WHERE
                     o.status_id != 4
                 GROUP BY
-                    oi.item_id, oi.item_id
+                    oi.location_id, oi.item_id
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
             ORDER BY available DESC
