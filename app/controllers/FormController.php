@@ -3724,6 +3724,13 @@ class FormController extends Controller {
       	}
       	else
 		{
+            return filter_var($email, FILTER_VALIDATE_EMAIL);
+
+
+
+
+
+
         	 /* Check if valid email address */
          	$regex = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i";
          	if(!preg_match($regex,$email))
