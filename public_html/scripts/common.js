@@ -172,7 +172,7 @@ var itemsUpdater = {
             required: function(el){
                 var $holder = $(el).closest('div.item_holder');
                 var val = $holder.find('select.pallet_qty').val();
-                //console.log('pallet_qty val: '+ val);
+                console.log('pallet_qty val: '+ val);
                 return (val === 0 || val === undefined );
             },
             digits: true
@@ -181,7 +181,7 @@ var itemsUpdater = {
             notNone: function(el){
                 var $holder = $(el).closest('div.item_holder');
                 var val = $holder.find('input.item_qty').val();
-                //console.log('item_qty val: '+ val);
+                console.log('item_qty val: '+ val);
                 return ( val === 0 || val === "" );
             }
         });
