@@ -191,12 +191,14 @@ var itemsUpdater = {
                 $(this).valid();
             });
         });
+        /*
         $('input.item_qty').each(function(i,e){
             $(this).off('change');
             $(this).change(function(e){
                 $(this).valid();
             });
         });
+        */
     }
 }
 /************
