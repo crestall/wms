@@ -35,7 +35,7 @@
 
                             actions['item-searcher'].init();
                             itemsUpdater.itemDelete();
-                            itemsUpdater.updateValidation();
+                            //itemsUpdater.updateValidation();
                         });
                     }
                 },
