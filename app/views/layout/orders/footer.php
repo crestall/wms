@@ -313,7 +313,8 @@
                             $.validator.addClassRules('item_qty',{
                                 required: function(el){
                                     var $holder = $(el).closest('div.item_holder');
-                                    console.log('item_qty name: '+ $holder.find('select.pallet_qty').attr('name'));
+                                    var val = $holder.find('select.pallet_qty').val()
+                                    console.log('pallet_qty val: '+ val);
 
 
 
