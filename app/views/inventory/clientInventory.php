@@ -55,7 +55,7 @@
                                 <td data-label="On Hand" class="number"><?php echo $onhand;?></td>
                                 <td data-label="Allocated" class='number'><?php echo $allocated;?></td>
                                 <td data-label="Under Quality Control" class="number"><?php echo $underqc;?></td>
-                                <td data-label="Available" class="number"><?php echo $available;?></td>
+                                <td data-label="Available" class="available number"><?php echo $available;?></td>
                                 <td data-label="Total Bay Usage" class="text-nowrap"><?php echo $location_string;?></td>
                                 <td>
                                     <p><input type="text" class="form-control number" id="lowstock_<?php echo $p['id'];?>" name="lowstock_<?php echo $p['id'];?>" value="<?php echo $p['low_stock_warning'];?>" /></p>
