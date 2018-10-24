@@ -312,8 +312,17 @@
                             });
                             $.validator.addClassRules('item_qty',{
                                 required: function(el){
+                                    var $holder = $(el).closest('div.item_holder');
+                                    console.log('item_qty name: '+ $holder.find('select.pallet_qty').attr('name'));
+
+
+
+
                                     //console.log('next element name: '+$(el).parent().next().find('.pallet_qty').attr('name'));
-                                    console.log('next parent child: '+$(el).parent().next().find('.pallet_qty').first().attr('name'));
+                                    //console.log('next parent child: '+$(el).parent().next().find('.pallet_qty').attr('name'));
+
+
+
                                     return ($(el).next('.pallet_qty').val() === 0 || $(el).next('.pallet_qty').val() === undefined );
                                 },
                                 digits: true
