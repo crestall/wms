@@ -188,7 +188,9 @@ var itemsUpdater = {
         $('select.pallet_qty').each(function(i,e){
             $(this).off('change');
             $(this).change(function(e){
-                $(this).valid();
+                //$(this).valid();
+                var $holder = $(el).closest('div.item_holder');
+                $holder.find('input.item_qty').valid();
             });
         });
         /*

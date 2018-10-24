@@ -528,7 +528,7 @@ class Item extends Model{
                 WHERE
                     o.status_id != 4
                 GROUP BY
-                    oi.location_id
+                    oi.location_id, oi.item_id
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
             group by a.item_id
@@ -542,6 +542,7 @@ class Item extends Model{
         $rows = $db->queryData($query, $array);
         foreach($rows as $row)
         {
+            if(empty($row['available'])) continue;
             $row_array['value'] = $row['name']." (".$row['sku'].")";
             if(!empty($row['publisher'])) $row_array['value'] = $row['name']." (".$row['publisher'].")";
             $row_array['sku'] = $row['sku'];
@@ -749,7 +750,7 @@ class Item extends Model{
                 WHERE
                     o.status_id != 4
                 GROUP BY
-                    oi.item_id, oi.item_id
+                    oi.location_id, oi.item_id
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
             ORDER BY available DESC
