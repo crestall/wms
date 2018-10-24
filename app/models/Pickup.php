@@ -106,5 +106,11 @@ class Pickup extends Model{
         return true;
     }
 
+    public function cancelPickup($id)
+    {
+        $db = Database::openConnection();
+        $db->deleteQuery($this->table, $id);
+    }
+
 }
 ?>

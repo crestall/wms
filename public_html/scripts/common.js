@@ -160,7 +160,45 @@ var itemsUpdater = {
             $(this).closest('div.item_holder').find('input.item_qty').attr('name', 'items['+i+'][qty]');
             $(this).closest('div.item_holder').find('select.pallet_qty').attr('name', 'items['+i+'][pallet_qty]');
             $(this).closest('div.item_holder').find('input.item_id').attr('name', 'items['+i+'][id]');
+            //adjust the validation
+            itemsUpdater.updateValidation();
         });
+    },
+    updateValidation: function(){
+        $( "input.item_qty, select.pallet_qty" ).each(function(i,e){
+            $(this).rules( "remove");
+        });
+        $.validator.addClassRules('item_qty',{
+            required: function(el){
+                var $holder = $(el).closest('div.item_holder');
+                var val = $holder.find('select.pallet_qty').val();
+                //console.log('pallet_qty val: '+ val);
+                return (val === 0 || val === undefined );
+            },
+            digits: true
+        });
+        $.validator.addClassRules('pallet_qty',{
+            notNone: function(el){
+                var $holder = $(el).closest('div.item_holder');
+                var val = $holder.find('input.item_qty').val();
+                //console.log('item_qty val: '+ val);
+                return ( val === 0 || val === "" );
+            }
+        });
+        $('select.pallet_qty').each(function(i,e){
+            $(this).off('change');
+            $(this).change(function(e){
+                $(this).valid();
+            });
+        });
+        /*
+        $('input.item_qty').each(function(i,e){
+            $(this).off('change');
+            $(this).change(function(e){
+                $(this).valid();
+            });
+        });
+        */
     }
 }
 /************

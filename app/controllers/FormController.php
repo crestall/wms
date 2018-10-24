@@ -2624,12 +2624,14 @@ class FormController extends Controller {
 				if(!isset($details['qty']))
 				{
                     $error = true;
-                    Form::setError('items', 'Please ensure all items have a quantity');					
+                    Form::setError('items', 'Please ensure all items have a quantity');
+                    break;
 				}
 				if(!isset($details['id']))
 				{
 					$error = true;
                     Form::setError('items', 'There has been an error recognising an item');
+                    break;
 				}
 				if(!$error)
 				{
@@ -3722,7 +3724,8 @@ class FormController extends Controller {
       	}
       	else
 		{
-        	 /* Check if valid email address */
+            return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+        	 /* Check if valid email address
          	$regex = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i";
          	if(!preg_match($regex,$email))
 			{
@@ -3732,6 +3735,7 @@ class FormController extends Controller {
 			{
 				return true;
 			}
+            */
       	}
 	}//end emailValid()
 

@@ -17,7 +17,7 @@
                         $("a.add").click(function(e){
                             e.preventDefault;
                             var item_count = $(":input.item-searcher").length;
-                            console.log('items: '+item_count);
+                            //console.log('items: '+item_count);
                             var html = "<div class='row item_holder'>"
                             html += "<div class='col-sm-1 delete-image-holder'>";
                             html += "<a class='delete' title='remove this item'><i class='fas fa-times-circle fa-2x text-danger'></i></a>";
@@ -31,9 +31,11 @@
                             html += "<div class='col-sm-3 qty-location'></div>";
                             html += "<input type='hidden' name='items["+item_count+"][id]' class='item_id' />"
                             html += "</div>"; //row
-                            $('div#items_holder').append(html);
+                            $('div#items_holder').append(html).find('input.item-searcher').focus();
+
                             actions['item-searcher'].init();
                             itemsUpdater.itemDelete();
+                            itemsUpdater.updateValidation();
                         });
                     }
                 },
@@ -298,10 +300,11 @@
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
                                 inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
                             }
-                            $holder.find('div.qty-holder').html(qty_html);
+                            $holder.find('div.qty-holder').html(qty_html).find('input').focus();
                             $holder.find('input.item_id').val(ui.item.item_id);
                             $holder.find('div.qty-location').html(inst);
                             itemsUpdater.itemDelete();
+                            itemsUpdater.updateValidation();
                             $holder.find('input.item_qty').focus();
                             $('.selectpicker').selectpicker();
                             //actions['item-searcher-test'].init();
@@ -532,7 +535,11 @@
                                 dangerMode: true,
                             }).then( function(willCancel) {
                                 if (willCancel) {
-                                    console.log(pickupid);
+                                    //console.log(pickupid);
+                                    var data = {pickupid: pickupid}
+                                    $.post('/ajaxfunctions/cancel-pickup', data, function(d){
+                                        location.reload();
+                                    });
                                 }
                             });
                         });
