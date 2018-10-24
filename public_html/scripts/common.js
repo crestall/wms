@@ -185,6 +185,12 @@ var itemsUpdater = {
                 return ( val === 0 || val === "" );
             }
         });
+        $('select.pallet_qty').each(function(i,e){
+            $(this).off('change');
+            $(this).change(function(e){
+                $(this).valid();
+            });
+        });
     }
 }
 /************

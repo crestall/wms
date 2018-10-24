@@ -280,11 +280,18 @@
                 $this->controller->courier->huntersPalId =>  $hpal
             );
 
-            //return $sResponse;
+            if($this->order_details['client_id'] == 59)
+            {
+                //no eparcel for NOA
+                $min = min(array_filter(array($h3kg, $hplu, $hpal)));
+                $courier_id = array_search($min, $cs);
+            }
+            else
+            {
+                $min = min(array_filter(array($h3kg,$ep, $hplu, $hpal)));
+                $courier_id = array_search($min, $cs);
+            }
 
-            //$min = min(array_filter(array($h3kg,$hplu,$ep,$dhl_charge)));
-            $min = min(array_filter(array($h3kg,$ep, $hplu, $hpal)));
-            $courier_id = array_search($min, $cs);
             $this->assignCourier($order_id, $courier_id);
         }
     }
