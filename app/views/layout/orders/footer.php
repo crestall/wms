@@ -283,6 +283,7 @@
                             if(ui.item.palletized > 0)
                             {
                                 var pallet_vals = ui.item.select_values.split(',');
+                                var line_item_vals = ui.item.max_values.split(',');
                                 qty_html = "<div class='col-sm-4'><input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' /></div>";
                                 qty_html += "<div class='col-sm-8'><select class='form-control selectpicker pallet_qty' name='items["+item_count+"][pallet_qty]'><option value='0'>Whole Pallet Qty</option>";
                                 pallet_vals.forEach(function(pallet_val) {
@@ -291,8 +292,29 @@
                                 });
                                 qty_html += "</select></div>";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
-                                inst += "<p class='inst'>Select whole pallet amounts from the dropdown selector <strong>OR</strong>";
-                                inst += "<br/>If you require us to break a pallet, enter an amount in the 'Qty' text field</p>";
+                                inst += "<p class='inst'>Select whole pallet amounts from the dropdown selector <br/>";
+                                inst += "There are currently ";
+                                var li = 0;
+                                var count = 1;
+                                line_item_vals.forEach(function(max){
+                                    if(max == li)
+                                    {
+                                        ++count;
+                                    }
+                                    else if(li == 0)
+                                    {
+                                        //first pass
+                                        //++count;
+                                    }
+                                    else
+                                    {
+                                        inst += "<strong>"+count+"</strong> pallets with "+li+" items, ";
+                                        count = 1;
+                                    }
+                                    li = max;
+                                });
+                                inst += "<strong>"+count+"</strong> pallets with "+li+" items ";
+                                inst += "<strong>OR</strong><br/>If you require us to break a pallet, enter an amount in the 'Qty' text field</p>";
                             }
                             else
                             {
