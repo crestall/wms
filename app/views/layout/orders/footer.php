@@ -292,7 +292,7 @@
                                 });
                                 qty_html += "</select></div>";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>";
-                                inst += "<p class='inst'>There are currently<br/>";
+                                inst += "<p class='inst'>There are<br/>";
                                 var li = 0;
                                 var count = 1;
                                 line_item_vals.forEach(function(max){
