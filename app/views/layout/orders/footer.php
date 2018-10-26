@@ -308,13 +308,13 @@
                                     }
                                     else
                                     {
-                                        inst += "<strong>"+count+"</strong> pallets with "+li+" items, ";
+                                        inst += "<strong>"+count+"</strong> pallets with "+li+" items,<br/>";
                                         count = 1;
                                     }
                                     li = max;
                                 });
-                                inst += "<strong>"+count+"</strong> pallets with "+li+" items ";
-                                inst += "<strong>OR</strong><br/>If you require us to break a pallet, enter an amount in the 'Qty' text field</p>";
+                                inst += "<strong>"+count+"</strong> pallets with "+li+" items<br/>";
+                                inst += "<strong>OR</strong>If you require us to break a pallet, enter an amount in the 'Qty' text field</p>";
                             }
                             else
                             {
