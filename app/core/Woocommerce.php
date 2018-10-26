@@ -845,7 +845,8 @@ class Woocommerce{
                 else
                 {
                     $order['quantity'] = $qty;
-                    $order['weight'] = Config::get('BBBOX_WEIGHTS')[$qty];
+                    //$order['weight'] = Config::get('BBBOX_WEIGHTS')[$qty];
+                    $order['weight'] = $weight;
                     if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
                     $order['items'] = $items;
                     $orders_items[$o['id']] = $items;
@@ -1123,7 +1124,8 @@ class Woocommerce{
                     'signature_req'         => 0,
                     'contact_phone'         => $o['billing_address']['phone'],
                     'import_error'          => false,
-                    'import_error_string'   => ''
+                    'import_error_string'   => '',
+                    'weight'                => 0
                 );
                 if(!empty($o['shipping_lines']) && strtolower($o['shipping_lines'][0]['method_id']) == "express shipping") $order['eparcel_express'] = 1;
                 if( !filter_var($o['billing_address']['email'], FILTER_VALIDATE_EMAIL) )
