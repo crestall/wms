@@ -719,7 +719,7 @@ class Woocommerce{
                     'date_ordered'          => strtotime( $o['date_created'] ),
                     'status_id'             => $this->controller->order->ordered_id,
                     'eparcel_express'       => 0,
-                    'signature_req'         => 0,
+                    'signature_req'         => 1,
                     'contact_phone'         => $o['billing']['phone'],
                     'import_error'          => false,
                     'import_error_string'   => ''
@@ -782,26 +782,10 @@ class Woocommerce{
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
-                if(empty($o['customer_note']))
-                {
-                    if( count($o['line_items']) > 1 || !empty($o['shipping']['company']) )
-                        $delivery_instructions =  "";
-                    else
-                        $delivery_instructions =  "Please leave in a safe place out of the weather";
-                }
-                else
-                {
-                    $delivery_instructions = $o['customer_note'];
-                }
-                $order['instructions'] = $delivery_instructions;
-
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {
-                    if(in_array($item['sku'], $ignored_skus))
-                    {
-                       continue;
-                    }
+                    //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
                     $product = $this->controller->item->getItemBySku($item['sku']);
                     if(!$product)
                     {
@@ -818,9 +802,20 @@ class Woocommerce{
                             'whole_pallet'  => false
                         );
                         $qty += $item['quantity'];
+                        $weight += $product['weight'] * $item['quantity'];
                     }
 
                 }
+                //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;  always signature required for NOA
+                if(empty($o['customer_note']))
+                {
+                    $delivery_instructions =  "";$delivery_instructions =  "Please leave in a safe place out of the weather";
+                }
+                else
+                {
+                    $delivery_instructions = $o['customer_note'];
+                }
+                $order['instructions'] = $delivery_instructions;
                 //echo "<pre>",print_r($order),"</pre>";die();
                 if($items_errors)
                 {
@@ -1008,19 +1003,6 @@ class Woocommerce{
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
-                if(empty($o['customer_note']))
-                {
-                    if( count($o['line_items']) > 1 || !empty($o['shipping']['company']) )
-                        $delivery_instructions =  "";
-                    else
-                        $delivery_instructions =  "Please leave in a safe place out of the weather";
-                }
-                else
-                {
-                    $delivery_instructions = $o['customer_note'];
-                }
-                $order['instructions'] = $delivery_instructions;
-
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {
@@ -1044,6 +1026,19 @@ class Woocommerce{
                     }
 
                 }
+                if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
+                if(empty($o['customer_note']))
+                {
+                    if( $qty > 1 || !empty($o['shipping']['company']) )
+                        $delivery_instructions =  "";
+                    else
+                        $delivery_instructions =  "Please leave in a safe place out of the weather";
+                }
+                else
+                {
+                    $delivery_instructions = $o['customer_note'];
+                }
+                $order['instructions'] = $delivery_instructions;
                 //echo "<pre>",print_r($order),"</pre>";die();
                 if($items_errors)
                 {
@@ -1075,7 +1070,7 @@ class Woocommerce{
                 {
                     $order['quantity'] = $qty;
                     $order['weight'] = Config::get('BBBOX_WEIGHTS')[$qty];
-                    if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
+                    //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
                     $order['items'] = $items;
                     $orders_items[$o['id']] = $items;
                     $order = array_merge($order, $ad);
@@ -1188,19 +1183,6 @@ class Woocommerce{
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
-                if(empty($o['customer_note']))
-                {
-                    if( count($o['line_items']) > 1 || !empty($o['shipping_address']['company']) )
-                        $delivery_instructions =  "";
-                    else
-                        $delivery_instructions =  "Please leave in a safe place out of the weather";
-                }
-                else
-                {
-                    $delivery_instructions = $o['customer_note'];
-                }
-                $order['instructions'] = $delivery_instructions;
-
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {
@@ -1224,6 +1206,19 @@ class Woocommerce{
                     }
 
                 }
+                if(!empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
+                if(empty($o['customer_note']))
+                {
+                    if( !empty($o['shipping']['company']) )
+                        $delivery_instructions =  "";
+                    else
+                        $delivery_instructions =  "Please leave in a safe place out of the weather";
+                }
+                else
+                {
+                    $delivery_instructions = $o['customer_note'];
+                }
+                $order['instructions'] = $delivery_instructions;
                 //echo "<pre>",print_r($order),"</pre>";die();
                 if($items_errors)
                 {
@@ -1253,7 +1248,7 @@ class Woocommerce{
                 else
                 {
                     $order['quantity'] = $qty;
-                    $order['weight'] = Config::get('BBBOX_WEIGHTS')[$qty];
+                    //$order['weight'] = Config::get('BBBOX_WEIGHTS')[$qty];
                     if($qty > 1 || !empty($o['shipping_address']['company'])) $order['signature_req'] = 1;
                     $order['items'] = $items;
                     $orders_items[$o['id']] = $items;
