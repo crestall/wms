@@ -291,9 +291,8 @@
                                     qty_html += "<option>"+pallet_val+"</option>";
                                 });
                                 qty_html += "</select></div>";
-                                inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
-                                inst += "<p class='inst'>Select whole pallet amounts from the dropdown selector <br/>";
-                                inst += "There are currently ";
+                                inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>";
+                                inst += "<p class='inst'>There are currently<br/>";
                                 var li = 0;
                                 var count = 1;
                                 line_item_vals.forEach(function(max){
@@ -313,8 +312,9 @@
                                     }
                                     li = max;
                                 });
-                                inst += "<strong>"+count+"</strong> pallets with "+li+" items<br/>";
-                                inst += "<strong>OR</strong>If you require us to break a pallet, enter an amount in the 'Qty' text field</p>";
+                                inst += "<strong>"+count+"</strong> pallets with "+li+" items</p>";
+                                inst += "<p class='inst'>Select whole pallet amounts from the dropdown selector <br/>";
+                                inst += "<strong>OR</strong><br/>If you require us to break a pallet, enter an amount in the 'Qty' text field</p>";
                             }
                             else
                             {
