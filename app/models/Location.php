@@ -212,7 +212,7 @@ class Location extends Model{
 			{
 				$check = ($value == $selected)? "selected='selected'" : "";
 			}
-			$ret_string .= "<option $check value='$value'>$label</option>";
+			$ret_string .= "<option $check value='$value' data-multipallet='{$l['multi_pallet']}'>$label</option>";
         }
         return $ret_string;
     }
