@@ -188,7 +188,7 @@ class Location extends Model{
 
         $q = "
             SELECT
-                id, location
+                id, location, multi_pallet
             FROM
                 locations
             WHERE
