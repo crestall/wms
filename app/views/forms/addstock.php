@@ -1,6 +1,8 @@
 <?php
 $add_to_location = (empty(Form::value('add_to_location')))? $product_info['preferred_pick_location_id'] : Form::value('add_to_location');
 $item_id = $product_id;
+$div_class = "col-md-7";
+$label_class = "col-md-5";
 ?>
 <div class="row">
     <div class="col-md-12">
