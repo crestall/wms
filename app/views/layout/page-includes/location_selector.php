@@ -1,5 +1,5 @@
 <?php
-$display = ($add_to_location == $this->controller->location->getReceivingId())? "block" : "none";
+$display = ($add_to_location == $this->controller->location->receiving_id)? "block" : "none";
 //$display = "block";
 $pallet_multiplier = empty(Form::value('pallet_multiplier'))? 1 : Form::value('pallet_multiplier');
 ?>
