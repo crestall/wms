@@ -54,7 +54,7 @@
                         </thead>
                         <tbody>
                             <?php foreach($products as $p):
-                                $ppl = $this->controller->location->getLocationName($p['preferred_pick_location_id']);  
+                                $ppl = !empty($p['preferred_pick_location_id'])? $this->controller->location->getLocationName($p['preferred_pick_location_id']): "";  
                                 ?>
                                 <tr>
                                     <td data-label="Name"><a href="/products/edit-product/product=<?php echo $p['id'];?>"><?php echo $p['name'];?></a></td>
