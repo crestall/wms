@@ -192,6 +192,8 @@ class Location extends Model{
             FROM
                 locations
             WHERE
+                selectable = 1
+                AND
                 CASE WHEN multi_sku = 0
                 THEN id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)
                 ELSE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0)
@@ -199,9 +201,9 @@ class Location extends Model{
 
         if( $item_id )
         {
-            $q .= " OR id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id)";
+            $q .= " OR ( id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id) AND (selectable = 1) )";
         }
-        $q .= " AND (selectable = 1) ORDER BY location";
+        $q .= " ORDER BY location";
         echo $q;die();
         $locations = $db->queryData($q);
         foreach($locations as $l)
@@ -229,6 +231,10 @@ class Location extends Model{
             FROM locations
             WHERE
             (
+                selectable = 1
+            )
+            AND
+            (
                 CASE WHEN multi_sku = 0
                 THEN id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)
                 ELSE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0)
@@ -243,12 +249,11 @@ class Location extends Model{
         {
             $q .= " OR
                     (
-                         id IN (SELECT location_id FROM items_locations WHERE item_id = :item_id)
+                        id IN (SELECT location_id FROM items_locations WHERE item_id = :item_id) AND (selectable = 1)
                     )";
             $array['item_id'] = $item_id;
         }
         $q .= "
-            AND (selectable = 1)
             ORDER BY
                 location
         ";
@@ -505,7 +510,7 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $location_array = array();
-        $locations = $db->queryData("SELECT l.location, l.id FROM items_locations il JOIN locations l ON il.location_id = l.id WHERE il.item_id = $item_id AND il.qc_count > 0 AND (selectable = 1)");
+        $locations = $db->queryData("SELECT l.location, l.id FROM items_locations il JOIN locations l ON il.location_id = l.id WHERE il.item_id = $item_id AND il.qc_count > 0");
         $check = "";
         $ret_string = "";
         foreach($locations as $l)
