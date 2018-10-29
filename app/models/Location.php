@@ -202,7 +202,7 @@ class Location extends Model{
             $q .= " OR id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id)";
         }
         $q .= " AND (selectable = 1) ORDER BY location";
-        //echo $q;die();
+        echo $q;die();
         $locations = $db->queryData($q);
         foreach($locations as $l)
         {
