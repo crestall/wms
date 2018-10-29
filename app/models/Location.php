@@ -40,7 +40,7 @@ class Location extends Model{
 
     public function __construct()
     {
-        $this->receiving_id = $this->getReceivingId();
+        $this->receiving_id = $this->getLocationId('receiving');
     }
 
     private function getReceivingId()
