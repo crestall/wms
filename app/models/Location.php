@@ -35,6 +35,20 @@
   */
 
 class Location extends Model{
+
+    public $receiving_id;
+
+    public function __construct()
+    {
+        $this->receiving_id = $this->getReceivingId();
+    }
+
+    private function getReceivingId()
+    {
+        $db = Database::openConnection();
+        return ($db->queryValue($this->table, array('location' => 'Receiving')));
+    }
+
     public function getLocationUsage()
     {
         $db = Database::openConnection();

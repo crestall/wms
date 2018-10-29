@@ -317,7 +317,8 @@ class inventoryController extends Controller
             "qualityControl",
             "scanToInventory",
             "goodsIn",
-            "goodsOut"
+            "goodsOut",
+            "packItemsManage"
         ));
 
         //client users

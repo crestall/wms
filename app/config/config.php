@@ -445,7 +445,8 @@ return array(
             'goods-out'             =>  true,
             'goods-in'               =>  true,
             'add-subtract-stock'    =>  false,
-            'quality-control'       =>  false
+            'quality-control'       =>  false,
+            'pack-items-manage'     =>  true,
         ),
         'staff'   =>  array(
             'time-sheets'   =>  true,
