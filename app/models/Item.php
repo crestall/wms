@@ -136,11 +136,11 @@ class Item extends Model{
         $db = Database::openConnection();
 
         return $db->queryData(
-            "SELECT a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, IFNULL(b.allocated,0) as allocated, a.name, a.sku, a.barcode, a.item_id, a.location
+            "SELECT a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, IFNULL(b.allocated,0) as allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
             FROM
             (
                 SELECT
-                    l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location
+                    l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item
                 FROM
                     items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
                 WHERE
