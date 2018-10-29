@@ -23,7 +23,7 @@
                 </div>
             </div>
         <?php else:
-            $make_to_location = (empty(Form::value('make_to_location')))? $make_to_location : Form::value('make_to_location');?>
+            $add_to_location = (empty(Form::value('add_to_location')))? $make_to_location : Form::value('add_to_location'); ?>
             <hr/>
             <div class="row">
                 <div class="col-lg-12">
@@ -51,13 +51,7 @@
                             <?php echo Form::displayError('make_count');?>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
-                        <div class="col-md-4">
-                            <select id="make_to_location" name="make_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations($make_to_location, $item_id);?></select>
-                            <?php echo Form::displayError('add_to_location');?>
-                        </div>
-                    </div>
+                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/location_selector.php");?>
                     <div class="row">
                         <div class="col-lg-12">
                             <h3>Pick items from the following locations</h3>
