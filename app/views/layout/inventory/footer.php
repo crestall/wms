@@ -21,12 +21,12 @@
                             {
                                 //$('select#add_to_location').prop('disabled', true).addClass('disabled');
                                 //$('#qty_add').prop('disabled', true).addClass('disabled');
-                                $('select#add_to_location').prop('disabled', true).addClass('disabled');
-                                $('select#add_to_location').selectpicker('render');
+                                //$('select#add_to_location');
+                                $('select#add_to_location').prop('disabled', true).selectpicker('hide').addClass('disabled');
                             }
                             else
                             {
-                                $('select#add_to_location').prop('disabled', false).removeClass('disabled');
+                                $('select#add_to_location').prop('disabled', false).selectpicker('show').removeClass('disabled');
                             }
 
                         });
