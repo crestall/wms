@@ -20,7 +20,9 @@
                             if(this.checked)
                             {
                                 //$('select#add_to_location').prop('disabled', true).addClass('disabled');
-                                $('#qty_add').prop('disabled', true).addClass('disabled');
+                                //$('#qty_add').prop('disabled', true).addClass('disabled');
+                                $('select#add_to_location').prop('disabled', true).addClass('disabled');
+                                $('select#add_to_location').selectpicker('render');
                             }
                             else
                             {
