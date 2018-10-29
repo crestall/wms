@@ -23,9 +23,7 @@
                 </div>
             </div>
         <?php else:
-            $add_to_location = (empty(Form::value('add_to_location')))? $make_to_location : Form::value('add_to_location');
-            $div_class = "col-md-7";
-            $label_class = "col-md-5";?>
+            $add_to_location = (empty(Form::value('add_to_location')))? $make_to_location : Form::value('add_to_location');?>
             <hr/>
             <div class="row">
                 <div class="col-lg-12">
