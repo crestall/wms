@@ -187,7 +187,7 @@ class Location extends Model{
         $db = Database::openConnection();
         //return $db->queryValue($this->table, array('id' => $location_id), 'location');
         $res = $db->queryRow("SELECT location FROM {$this->table} WHERE id = $location_id");
-        return $res['location'];'
+        return $res['location'];
     }
 
     public function getLocationId($name)
