@@ -54,7 +54,8 @@
                         </thead>
                         <tbody>
                             <?php foreach($products as $p):
-                                $ppl = !empty($p['preferred_pick_location_id'])? $this->controller->location->getLocationName($p['preferred_pick_location_id']): "";
+                                //$ppl = !empty($p['preferred_pick_location_id'])? $this->controller->location->getLocationName($p['preferred_pick_location_id']): "";
+                                echo "<pre>",print_r($p),"</pre>";
                                 ?>
                                 <tr>
                                     <td data-label="Name"><a href="/products/edit-product/product=<?php echo $p['id'];?>"><?php echo $p['name'];?></a></td>
@@ -65,7 +66,7 @@
                                     <td data-label="Pallet Item" class='text-center'><?php if($p['palletized'] > 0) echo "Yes"; else echo "No";?></td>
                                     <td data-label="Double Bay" class='text-center'><?php if($p['double_bay'] > 0) echo "Yes"; else echo "No";?></td>
                                     <td data-label="Requires Bubblewrap" class='text-center'><?php if($p['requires_bubblewrap'] > 0) echo "Yes"; else echo "No";?></td>
-                                    <td data-label="Preferred pick Location"><?php echo $ppl;?></td>
+                                    <td data-label="Preferred pick Location"><?php echo //$ppl;?></td>
                                     <td></td>
                                 </tr>
                             <?php endforeach;?>
