@@ -1596,9 +1596,9 @@ class FormController extends Controller {
                 }
             }
         }
-        if($make_to_location == "0")
+        if($add_to_location == "0")
         {
-            Form::setError('make_to_location', 'Please select a location');
+            Form::setError('add_to_location', 'Please select a location');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
