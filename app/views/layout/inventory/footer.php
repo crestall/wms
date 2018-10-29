@@ -17,7 +17,15 @@
                     {
                         $('#to_receiving').click(function(){
                             $('#pallet_count_holder').slideToggle();
-                            $('select#add_to_location').prop('disabled', this.checked);
+                            if(this.checked)
+                            {
+                                $('select#add_to_location').prop('disabled', true).addClass(disabled);
+                            }
+                            else
+                            {
+                                $('select#add_to_location').prop('disabled', false).removeClass(disabled);
+                            }
+
                         });
                     }
                 },
