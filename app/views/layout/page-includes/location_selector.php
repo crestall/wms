@@ -1,5 +1,5 @@
 <?php
-$display = ($add_to_location == $this->controller->location->receiving_id)? "block" : "none";
+$display = (!empty(Form::value('to_receiving')))? "block" : "none";
 //$display = "block";
 $pallet_multiplier = empty(Form::value('pallet_multiplier'))? 1 : Form::value('pallet_multiplier');
 ?>
@@ -8,6 +8,15 @@ $pallet_multiplier = empty(Form::value('pallet_multiplier'))? 1 : Form::value('p
     <div class="<?php if(isset($div_class)) echo $div_class; else echo "col-md-4";?>">
         <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations($add_to_location, $item_id);?></select>
         <?php echo Form::displayError('add_to_location');?>
+    </div>
+</div>
+<div class="form-group row">
+    <div class="form-check">
+        <label class="<?php if(isset($label_class)) echo $label_class; else echo "col-md-3";?> col-form-label" for="b2b">Add To Receiving</label>
+        <div class="<?php if(isset($div_class)) echo $div_class; else echo "col-md-4";?> checkbox checkbox-default">
+            <input class="form-check-input styled" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
+            <label for="to_receiving"></label>
+        </div>
     </div>
 </div>
 <div class="form-group-row" id="pallet_count_holder" style="display: <?php echo $display;?>;">
