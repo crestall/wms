@@ -19,11 +19,11 @@
                             $('#pallet_count_holder').slideToggle();
                             if(this.checked)
                             {
-                                $('select#add_to_location').prop('disabled', true).addClass(disabled);
+                                $('select#add_to_location').prop('disabled', true).addClass('disabled');
                             }
                             else
                             {
-                                $('select#add_to_location').prop('disabled', false).removeClass(disabled);
+                                $('select#add_to_location').prop('disabled', false).removeClass('disabled');
                             }
 
                         });
