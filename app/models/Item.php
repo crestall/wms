@@ -278,7 +278,7 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $pack_item_id = $data['add_product_id'];
-        $make_to_location = $data['make_to_location'];
+        $make_to_location = $data['add_to_location'];
         $make_count = $data['make_count'];
         $item = $this->getItemById($pack_item_id);
         //make the packs
