@@ -17,6 +17,7 @@
                     {
                         $('#to_receiving').click(function(){
                             $('#pallet_count_holder').slideToggle();
+                            $('select#add_to_location').prop('disabled', this.checked);
                         });
                     }
                 },
