@@ -188,7 +188,7 @@ class Location extends Model{
 
         $q = "
             SELECT
-                id, location, multi_pallet
+                id, location
             FROM
                 locations
             WHERE
@@ -201,7 +201,7 @@ class Location extends Model{
         {
             $q .= " OR id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id)";
         }
-        $q .= " ORDER BY location";
+        $q .= " AND (selectable = 1) ORDER BY location";
         //echo $q;die();
         $locations = $db->queryData($q);
         foreach($locations as $l)
@@ -212,7 +212,7 @@ class Location extends Model{
 			{
 				$check = ($value == $selected)? "selected='selected'" : "";
 			}
-			$ret_string .= "<option $check value='$value' data-multipallet='{$l['multi_pallet']}'>$label</option>";
+			$ret_string .= "<option $check value='$value'>$label</option>";
         }
         return $ret_string;
     }
