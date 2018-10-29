@@ -248,7 +248,7 @@ class Location extends Model{
             $array['item_id'] = $item_id;
         }
         $q .= "
-             AND (selectable = 1)
+            AND (selectable = 1)
             ORDER BY
                 location
         ";
@@ -505,7 +505,7 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $location_array = array();
-        $locations = $db->queryData("SELECT l.location, l.id FROM items_locations il JOIN locations l ON il.location_id = l.id WHERE il.item_id = $item_id AND il.qc_count > 0");
+        $locations = $db->queryData("SELECT l.location, l.id FROM items_locations il JOIN locations l ON il.location_id = l.id WHERE il.item_id = $item_id AND il.qc_count > 0 AND (selectable = 1)");
         $check = "";
         $ret_string = "";
         foreach($locations as $l)
