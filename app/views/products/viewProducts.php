@@ -54,9 +54,9 @@
                         </thead>
                         <tbody>
                             <?php foreach($products as $p):
-                                $ppl = ($p['preferred_pick_location_id'] > 0)? $this->controller->location->getLocationName($p['preferred_pick_location_id']): "";
+                                $ppl = $this->controller->location->getLocationName($p['preferred_pick_location_id']);
                                 //$ppl = ($p['preferred_pick_location_id'] > 0)? $p['preferred_pick_location_id'] : "no";
-                                echo "<pre>",print_r($p),"</pre>";
+                                //echo "<pre>",print_r($p),"</pre>";
                                 ?>
                                 <tr>
                                     <td data-label="Name"><a href="/products/edit-product/product=<?php echo $p['id'];?>"><?php echo $p['name'];?></a></td>
