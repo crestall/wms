@@ -1869,7 +1869,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($post_data),"</pre>"; die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
             $this->location->addToLocation($post_data);
             $this->clientsbays->stockAdded($client_id, $add_to_location);
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
