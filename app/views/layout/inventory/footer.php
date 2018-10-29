@@ -12,10 +12,17 @@
                             e.preventDefault();
                             shippingQuote.getQuotes($(this).data('orderid'));
                         });
+                    },
+                    'add-to-receiving': function()
+                    {
+                        $('#to_receiving').click(function(){
+                            $('#pallet_count_holder').slideToggle();
+                        });
                     }
                 },
                 'add-subtract-stock' : {
                     init: function(){
+                        actions['add-to-receiving']();
                         $('form#add_to_stock').submit(function(e){
                             if($(this).valid())
                             {
@@ -94,6 +101,7 @@
                 },
                 "pack-items-manage" : {
                     init: function(){
+                        actions['add-to-receiving']();
                         $('#product_selector').change(function(e){
                             if($(this).val() > 0)
                             {
@@ -116,6 +124,7 @@
                 },
                 "scan-to-inventory": {
                     init: function(){
+                        actions['add-to-receiving']();
                         $('#client_selector').change(function(e){
                             if($(this).val() > 0)
                             {
