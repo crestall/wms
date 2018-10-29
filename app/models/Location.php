@@ -182,10 +182,10 @@ class Location extends Model{
         return true;
     }
 
-    public function getLocationName($id)
+    public function getLocationName($location_id)
     {
         $db = Database::openConnection();
-        return $db->queryValue($this->table, array('id' => $id), 'location');
+        return $db->queryValue($this->table, array('id' => $location_id), 'location');
     }
 
     public function getLocationId($name)
