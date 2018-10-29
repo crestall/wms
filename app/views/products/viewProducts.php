@@ -66,7 +66,7 @@
                                     <td data-label="Pallet Item" class='text-center'><?php if($p['palletized'] > 0) echo "Yes"; else echo "No";?></td>
                                     <td data-label="Double Bay" class='text-center'><?php if($p['double_bay'] > 0) echo "Yes"; else echo "No";?></td>
                                     <td data-label="Requires Bubblewrap" class='text-center'><?php if($p['requires_bubblewrap'] > 0) echo "Yes"; else echo "No";?></td>
-                                    <td data-label="Preferred pick Location"><?php echo //$ppl;?></td>
+                                    <td data-label="Preferred pick Location"><?php //echo $ppl;?></td>
                                     <td></td>
                                 </tr>
                             <?php endforeach;?>
