@@ -1832,7 +1832,7 @@ class FormController extends Controller {
 
     public function procAddToStock()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1846,7 +1846,14 @@ class FormController extends Controller {
         {
             Form::setError('qty_add', 'Please enter only positive whole numbers');
         }
-        if($add_to_location == "0")
+        if(isset($to_receiving))
+        {
+            if(filter_var($pallet_multiplier, FILTER_VALIDATE_INT) === false && $pallet_multiplier <= 0)
+            {
+                Form::setError('pallet_multiplier', 'Please enter only positive whole numbers');
+            }
+        }
+        elseif($add_to_location == "0")
         {
             Form::setError('add_to_location', 'Please select a location');
         }
@@ -1862,6 +1869,7 @@ class FormController extends Controller {
         }
         else
         {
+            echo "<pre>",print_r($post_data),"</pre>"; die();
             $this->location->addToLocation($post_data);
             $this->clientsbays->stockAdded($client_id, $add_to_location);
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
