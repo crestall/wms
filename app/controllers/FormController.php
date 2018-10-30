@@ -1466,7 +1466,8 @@ class FormController extends Controller {
 
     public function procScanToInventory()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $pallet_multiplier = 1;
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -1474,14 +1475,23 @@ class FormController extends Controller {
                 ${$field} = $value;
             }
         }
+
         $post_data = array(
             'reference'         =>  'New Stock',
             'reason_id'         =>  $this->stockmovementlabels->getLabelId("New Stock"),
             'qty_add'           =>  $qty,
-            'add_to_location'   =>  $add_to_location,
             'add_product_id'    =>  $item_id
         );
-
+        if(isset($to_receiving))
+        {
+            $add_to_location = 0;
+            $post_data['add_to_location'] = $this->location->receiving_id;
+        }
+        else
+        {
+            $to_receiving = 0;
+            $post_data['add_to_location'] = $add_to_location;
+        }
 
         $this->location->addToLocation($post_data);
         $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
