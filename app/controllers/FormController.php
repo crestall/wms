@@ -1852,10 +1852,15 @@ class FormController extends Controller {
             {
                 Form::setError('pallet_multiplier', 'Please enter only positive whole numbers');
             }
+            $add_to_location = 0;
         }
         elseif($add_to_location == "0")
         {
             Form::setError('add_to_location', 'Please select a location');
+        }
+        else
+        {
+            $to_receiving = 0;
         }
         if($reason_id == "0")
         {
@@ -1871,7 +1876,7 @@ class FormController extends Controller {
         {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
             $this->location->addToLocation($post_data);
-            $this->clientsbays->stockAdded($client_id, $add_to_location);
+            $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving);
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id);

@@ -106,22 +106,44 @@ class Clientsbays extends Model{
         );
     }
 
-    public function stockAdded($client_id, $location_id)
+    public function stockAdded($client_id, $location_id, $to_recieving = 0, $pallet_multiplier = 1)
     {
         $db = Database::openConnection();
-
-        if(!$db->queryValue($this->table, array(
-            'client_id'     =>  $client_id,
-            'location_id'   =>  $location_id,
-            'date_removed'  =>  0
-        )))
+        if($to_receiving)
         {
-            $db->insertQuery($this->table, array(
+            $location = new Location();
+            $location_id = $location->receiving_id;
+
+            if($updater = $db->queryValue($this->table, array('client_id' => $client_id, 'location_id' => $location_id, 'date_removed'  =>  0)))
+            {
+                $db->query("UPDATE {$this->table} SET pallet_multiplier = pallet_multiplier + $pallet_multiplier WHERE id = $updater");
+            }
+            else
+            {
+                $db->insertQuery($this->table, array(
+                    'client_id'         =>  $client_id,
+                    'location_id'       =>  $location_id,
+                    'date_added'        =>  time(),
+                    'pallet_multiplier' =>  $pallet_multiplier
+                ));
+            }
+        }
+        else
+        {
+            if(!$db->queryValue($this->table, array(
                 'client_id'     =>  $client_id,
                 'location_id'   =>  $location_id,
-                'date_added'    =>  time()
-            ));
+                'date_removed'  =>  0
+            )))
+            {
+                $db->insertQuery($this->table, array(
+                    'client_id'     =>  $client_id,
+                    'location_id'   =>  $location_id,
+                    'date_added'    =>  time()
+                ));
+            }
         }
+
 
         return true;
     }
