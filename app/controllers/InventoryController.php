@@ -299,7 +299,7 @@ class inventoryController extends Controller
             'available_packs'   =>  $available_packs,
             'make_to_location'  =>  $make_to_location,
             's'                 =>  $s,
-            'client_id'         =>  $clients_id
+            'client_id'         =>  $client_id
         ]);
     }
 
