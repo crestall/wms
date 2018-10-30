@@ -78,6 +78,7 @@ class Clientsbays extends Model{
                     client_id
             ";
             $treps = $db->queryData($tquery);
+            
             foreach($treps as $trep)
             {
                 $client_name = $db->queryValue('clients', array('id' => $trep['client_id']), 'client_name');
