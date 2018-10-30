@@ -19,16 +19,12 @@
                             $('#pallet_count_holder').slideToggle();
                             if(this.checked)
                             {
-                                //$('select#add_to_location').prop('disabled', true).addClass('disabled');
-                                //$('#qty_add').prop('disabled', true).addClass('disabled');
-                                //$('select#add_to_location');
                                 $('select#add_to_location').prop('disabled', true).selectpicker('hide').addClass('disabled');
                             }
                             else
                             {
                                 $('select#add_to_location').prop('disabled', false).selectpicker('show').removeClass('disabled');
                             }
-
                         });
                     }
                 },
@@ -136,7 +132,7 @@
                 },
                 "scan-to-inventory": {
                     init: function(){
-                        actions.common['add-to-receiving']();
+
                         $('#client_selector').change(function(e){
                             if($(this).val() > 0)
                             {
@@ -173,6 +169,7 @@
                                 .html("<div class='row'><div class='col-md-12'><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Finding Item...</p></div></div>")
                                 .load(url, data, function(d){
                                     //$('#available').focus();
+                                    actions.common['add-to-receiving']();
                                     $('.selectpicker').selectpicker('refresh');
 
                                     $('#add_to_stock').validate({
