@@ -106,7 +106,7 @@ class Clientsbays extends Model{
         );
     }
 
-    public function stockAdded($client_id, $location_id, $to_recieving = 0, $pallet_multiplier = 1)
+    public function stockAdded($client_id, $location_id, $to_receiving = 0, $pallet_multiplier = 1)
     {
         $db = Database::openConnection();
         if($to_receiving)
