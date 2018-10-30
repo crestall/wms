@@ -1832,7 +1832,7 @@ class FormController extends Controller {
 
     public function procAddToStock()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1853,6 +1853,7 @@ class FormController extends Controller {
                 Form::setError('pallet_multiplier', 'Please enter only positive whole numbers');
             }
             $add_to_location = 0;
+            $post_data['add_to_location'] = $this->location->receiving_id;
         }
         elseif($add_to_location == "0")
         {
