@@ -51,14 +51,19 @@ class Clientsbays extends Model{
             $qfrom = isset($fridays[$i - 1])? $fridays[$i - 1]['stamp'] : $from;
             $qto = $f['stamp'];
             $bquery = "
-                SELECT
-                    client_id, SUM(cb.pallet_multiplier) AS bays
-                FROM
-                    clients_bays cb join locations l on cb.location_id = l.id
-                WHERE
-                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 0
-                GROUP BY
-                    client_id
+                SELECT client_id, SUM(bays) AS bays FROM
+                (
+                    SELECT
+                        client_id, MAX(pallet_multiplier) AS bays
+                    FROM
+                        clients_bays JOIN locations ON clients_bays.location_id = locations.id
+                    WHERE
+                        (date_added < $qto) AND (date_removed > $qfrom OR date_removed = 0 )
+                    	AND tray = 0
+                    GROUP BY
+                        location_id, client_id
+                ) tbl1
+                GROUP BY tbl1.client_id
             ";
             //echo "<p>$bquery</p>";
             $reps = $db->queryData($bquery);
@@ -68,14 +73,21 @@ class Clientsbays extends Model{
                 $data[$client_name][$f['string']] = $rep['bays'];
             }
             $tquery = "
-                SELECT
-                    client_id, count(*) AS bays
-                FROM
-                    clients_bays cb join locations l on cb.location_id = l.id
-                WHERE
-                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 1
-                GROUP BY
-                    client_id
+                SELECT client_id, SUM(bays) AS bays FROM
+                (
+                    SELECT
+                        client_id, COUNT(*) AS bays
+                    FROM
+                        clients_bays JOIN locations ON clients_bays.location_id = locations.id
+                    WHERE
+                        (
+                            (date_added < $qto) AND (date_removed > $qfrom OR date_removed = 0 )
+                        )
+                    	AND tray = 1
+                    GROUP BY
+                        location_id, client_id
+                ) tbl1
+                GROUP BY tbl1.client_id
             ";
             $treps = $db->queryData($tquery);
 
@@ -87,7 +99,7 @@ class Clientsbays extends Model{
                 else
                     $data[$client_name][$f['string']] = $trep['bays']/9;
             }
-            $lquery = "SELECT client_id, count(*) AS bays FROM clients_locations WHERE date_added < $qto AND (date_removed > $qto OR date_removed = 0) GROUP BY client_id";
+            $lquery = "SELECT client_id, count(*) AS bays FROM clients_locations WHERE date_added < $qto AND (date_removed > $qfrom OR date_removed = 0) GROUP BY client_id";
             //echo "<p>$lquery</p>";
             $lreps = $db->queryData($lquery);
             foreach($lreps as $lrep)
