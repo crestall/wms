@@ -11,11 +11,6 @@ if(!empty(Form::value('items')))
     $idisp = "block";
 if($user_role == "client")
     $idisp = "block";
-/*
-$fitem_name = (is_array(Form::value('items')))? Form::value('items')[0]['name'] : "";
-$fitem_qty = (is_array(Form::value('items')))? Form::value('items')[0]['qty'] : "";
-$fitem_id = (is_array(Form::value('items')))? Form::value('items')[0]['id'] : "";
-*/
 $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') : 0;
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
