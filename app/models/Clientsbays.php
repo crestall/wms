@@ -78,7 +78,7 @@ class Clientsbays extends Model{
                     client_id
             ";
             $treps = $db->queryData($tquery);
-            
+
             foreach($treps as $trep)
             {
                 $client_name = $db->queryValue('clients', array('id' => $trep['client_id']), 'client_name');
@@ -151,18 +151,45 @@ class Clientsbays extends Model{
     public function stockRemoved($client_id, $location_id, $product_id)
     {
         $db = Database::openConnection();
+        $location = new Location();
 
-        if(!$db->queryValue('items_locations', array(
-            'item_id'       =>  $product_id,
-            'location_id'   =>  $location_id
-        )))
+        if($location_id == $location->receiving_id)
         {
-            $db->query("
-                UPDATE {$this->table}
-                SET date_removed = ".time()."
-                WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id
-            ");
+            $this_row = $db->queryRow("SELECT * FROM {$this->table} WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id ");
+            $pallet_multiplier = $this_row['pallet_multiplier'] - 1;
+            if($pallet_multiplier < 1)
+                $pallet_multiplier = 1;
+
+            $db->updateDatabaseField($this->table, 'date_removed', time(), $this_row['id']);
+
+            if($db->queryValue('items_locations', array(
+                'item_id'       =>  $product_id,
+                'location_id'   =>  $location_id
+            )))
+            {
+                $db->insertQuery($this->table, array(
+                    'client_id'         =>  $client_id,
+                    'location_id'       =>  $location_id,
+                    'date_added'        =>  time(),
+                    'pallet_multiplier' =>  $pallet_multiplier
+                ));
+            }
         }
+        else
+        {
+            if(!$db->queryValue('items_locations', array(
+                'item_id'       =>  $product_id,
+                'location_id'   =>  $location_id
+            )))
+            {
+                $db->query("
+                    UPDATE {$this->table}
+                    SET date_removed = ".time()."
+                    WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id
+                ");
+            }
+        }
+
         return true;
     }
 
