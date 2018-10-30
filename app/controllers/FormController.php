@@ -1565,6 +1565,7 @@ class FormController extends Controller {
     {
         echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
+        $pallet_multiplier = 1;
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -1609,9 +1610,22 @@ class FormController extends Controller {
                 }
             }
         }
-        if($add_to_location == "0")
+        if(isset($to_receiving))
+        {
+            if(filter_var($pallet_multiplier, FILTER_VALIDATE_INT) === false && $pallet_multiplier <= 0)
+            {
+                Form::setError('pallet_multiplier', 'Please enter only positive whole numbers');
+            }
+            $add_to_location = 0;
+            $post_data['add_to_location'] = $this->location->receiving_id;
+        }
+        elseif($add_to_location == "0")
         {
             Form::setError('add_to_location', 'Please select a location');
+        }
+        else
+        {
+            $to_receiving = 0;
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -1624,6 +1638,7 @@ class FormController extends Controller {
             //echo "<pre>",print_r($this->request->data),"</pre>";
             //echo "<pre>",print_r($items),"</pre>"; die();
             $this->item->makePacks($post_data, $items);
+            $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
             Session::set('makefeedback', 'Those packs have been created');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/pack-items-manage/product=$add_product_id");
