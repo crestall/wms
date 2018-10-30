@@ -809,7 +809,7 @@ class Woocommerce{
                 //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;  always signature required for NOA
                 if(empty($o['customer_note']))
                 {
-                    $delivery_instructions =  "";$delivery_instructions =  "Please leave in a safe place out of the weather";
+                    $delivery_instructions =  "";
                 }
                 else
                 {
