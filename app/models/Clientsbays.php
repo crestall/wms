@@ -50,10 +50,9 @@ class Clientsbays extends Model{
         {
             $qfrom = isset($fridays[$i - 1])? $fridays[$i - 1]['stamp'] : $from;
             $qto = $f['stamp'];
-            $bquery = "SELECT client_id, count(*) AS bays FROM clients_bays WHERE date_added < $qto AND (date_removed > $qto OR date_removed = 0) AND trays = 0 GROUP BY client_id";
             $bquery = "
                 SELECT
-                    client_id, count(*) AS bays
+                    client_id, SUM(cb.pallet_multiplier) AS bays
                 FROM
                     clients_bays cb join locations l on cb.location_id = l.id
                 WHERE
