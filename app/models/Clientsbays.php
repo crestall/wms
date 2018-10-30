@@ -65,7 +65,7 @@ class Clientsbays extends Model{
                 ) tbl1
                 GROUP BY tbl1.client_id
             ";
-            echo "<p>$bquery</p>";
+            //echo "<p>$bquery</p>";
             $reps = $db->queryData($bquery);
             foreach($reps as $rep)
             {
