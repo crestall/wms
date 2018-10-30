@@ -1466,7 +1466,7 @@ class FormController extends Controller {
 
     public function procScanToInventory()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -1481,7 +1481,10 @@ class FormController extends Controller {
             'add_to_location'   =>  $add_to_location,
             'add_product_id'    =>  $item_id
         );
+
+
         $this->location->addToLocation($post_data);
+        $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
         Session::set('feedback', $qty.' of '.$name.' have been added to the system');
         return $this->redirector->to(PUBLIC_ROOT."inventory/scan-to-inventory/client=$client_id");
     }
