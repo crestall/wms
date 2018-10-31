@@ -36,10 +36,25 @@ foreach($db_item_movements as $dbim)
         if($dbim['date'] === $dbim['date_added'])
         {
             echo "<p>Will add for $next_location : $next_location_id</p>";
+            $sql = "
+                INSERT INTO clients_locations (location_id, client_id, notes, date_added)
+                VALUES (?,?,?,?)
+            ";
+
+            $pdo->prepare($sql)->execute([$next_location_id, $dbim['client_id'], 'Double Bay Item', $dbim['date_added']]);
         }
         elseif($dbim['date'] === $dbim['date_removed'])
         {
             echo "<p>Will remove for $next_location : $next_location_id</p>";
+            $sql = "
+                SELECT id FROM clients_locations WHERE location_id = ? AND client_id = ? AND date_removed = ?
+            ";
+            $row = $pdo->prepare($sql)->execute([$next_location_id, $dbim['client_id'], 0]);
+            $row_id = $row['id'];
+            $sql = "
+                UPDATE clients_locations SET date_removed = ? WHERE id = ?
+            ";
+            $pdo->prepare($sql)->execute([$dbim['date_removed'], $row_id]);
         }
         else
         {
