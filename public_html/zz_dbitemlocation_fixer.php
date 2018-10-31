@@ -28,19 +28,23 @@ foreach($db_item_movements as $dbim)
     echo "<pre>",print_r($dbim),"</pre>";
     if( preg_match("/\d{1,2}\.\d{1,2}\.\w{1}\.a/i", $dbim['location']) )
     {
-        echo "<p>Will update</p>";
         $next_location = substr($dbim['location'], 0, -1)."b";
         $stmt = $pdo->prepare("SELECT id FROM locations WHERE location=?");
         $stmt->execute([$next_location]);
         $row = $stmt->fetch();
         $next_location_id =  $row['id'];
-        echo "<p>Will insert for $next_location : $next_location_id</p>";
+        if($dbim['date'] === $dbim['date_added'])
+        {
+            echo "<p>Will add for $next_location : $next_location_id</p>";
+        }
+        elseif($dbim['date'] === $dbim['date_removed'])
+        {
+            echo "<p>Will remove for $next_location : $next_location_id</p>";
+        }
+        else
+        {
+            echo "<p>Date mismatch</p>";
+        }
     }
-    /*
-
-;
-    $this_location_name = $row['location'];
-    echo "<p>$this_location_name</p>";
-    */
 }
 ?>
