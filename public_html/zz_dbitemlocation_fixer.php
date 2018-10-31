@@ -47,9 +47,9 @@ foreach($db_item_movements as $dbim)
         {
             echo "<p>Will remove for $next_location : $next_location_id</p>";
             $sql = "
-                SELECT id FROM clients_locations WHERE location_id = ? AND client_id = ? AND date_removed = ?
+                SELECT id FROM clients_locations WHERE location_id = ? AND client_id = ? AND date_removed = 0
             ";
-            $row = $pdo->prepare($sql)->execute([$next_location_id, $dbim['client_id'], 0]);
+            $row = $pdo->prepare($sql)->execute([$next_location_id, $dbim['client_id'], 0])->fetch();
             $row_id = $row['id'];
             $sql = "
                 UPDATE clients_locations SET date_removed = ? WHERE id = ?
