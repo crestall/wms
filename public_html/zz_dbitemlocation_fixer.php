@@ -25,6 +25,11 @@ $db_item_movements = $pdo->query($sql)->fetchAll();
 
 foreach($db_item_movements as $dbim)
 {
-    echo "<pre>",print_r($dbim),"</pre>";
+    //echo "<pre>",print_r($dbim),"</pre>";
+    $stmt = $pdo->prepare("SELECT location FROM locations WHERE id=?");
+    $stmt->execute([$dbim['location_id']]);
+    $row = $stmt->fetch();
+    $this_location_name = $row['location'];
+    echo "<p>$this_location_name</p>";
 }
 ?>
