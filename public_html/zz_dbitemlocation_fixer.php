@@ -30,16 +30,15 @@ foreach($db_item_movements as $dbim)
     {
         echo "<p>Will update</p>";
         $next_location = substr($dbim['location'], 0, -1)."b";
-        echo "<p>Will insert for $next_location</p>";
-    }
-    else
-    {
-        echo "<p>Will Not</p>";
+        $stmt = $pdo->prepare("SELECT id FROM locations WHERE location=?");
+        $stmt->execute([$next_location]);
+        $row = $stmt->fetch();
+        $next_location_id =  $row['id'];
+        echo "<p>Will insert for $next_location : $next_location_id</p>";
     }
     /*
-    $stmt = $pdo->prepare("SELECT location FROM locations WHERE id=?");
-    $stmt->execute([$dbim['location_id']]);
-    $row = $stmt->fetch();
+
+;
     $this_location_name = $row['location'];
     echo "<p>$this_location_name</p>";
     */
