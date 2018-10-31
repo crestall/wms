@@ -54,7 +54,10 @@ foreach($db_item_movements as $dbim)
             $sql = "
                 UPDATE clients_locations SET date_removed = ? WHERE id = ?
             ";
-            $pdo->prepare($sql)->execute([$dbim['date_removed'], $row_id]);
+            $array = [$dbim['date_removed'], $row_id];
+            $pdo->prepare($sql)->execute($array);
+            echo "<p>SELECT id FROM clients_locations WHERE location_id = ? AND client_id = ? AND date_removed = ?</p>";
+            echo "<pre>",print_r($array),"</pre>";
         }
         else
         {
