@@ -29,6 +29,8 @@ foreach($db_item_movements as $dbim)
     if( preg_match("/\d{1,2}\.\d{1,2}\.\w{1}\.a/i", $dbim['location']) )
     {
         echo "<p>Will update</p>";
+        $next_location = substr($dbim['location'], 0, -1)."b";
+        echo "<p>Will insert for $next_location</p>";
     }
     else
     {
