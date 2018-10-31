@@ -490,7 +490,7 @@ class Location extends Model{
         $q = "
           SELECT id, location
           FROM locations
-          WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)
+          WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations) AND tray = 0
           ORDER BY location + 0
         ";
         return $db->queryData($q);
