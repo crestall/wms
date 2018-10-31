@@ -49,8 +49,9 @@ foreach($db_item_movements as $dbim)
             $sql = "
                 SELECT id FROM clients_locations WHERE location_id = ? AND client_id = ? AND date_removed = 0
             ";
+            echo "<p>SELECT id FROM clients_locations WHERE location_id = $next_location_id AND client_id = $dbim['client_id'] AND date_removed = 0 </p>";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([$next_location_id, $dbim['client_id'], 0]);
+            $stmt->execute([$next_location_id, $dbim['client_id']]);
             $row = $stmt->fetch();
             $row_id = $row['id'];
             $sql = "
@@ -58,8 +59,8 @@ foreach($db_item_movements as $dbim)
             ";
             $array = [$dbim['date_removed'], $row_id];
             $pdo->prepare($sql)->execute($array);
-            echo "<p>SELECT id FROM clients_locations WHERE location_id = ? AND client_id = ? AND date_removed = ?</p>";
-            echo "<pre>",print_r($array),"</pre>";
+            echo "<p>UPDATE clients_locations SET date_removed = {$dbim['date_removed']} WHERE id = $row_id </p>";
+            //echo "<pre>",print_r($array),"</pre>";
         }
         else
         {
