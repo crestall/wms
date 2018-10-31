@@ -49,7 +49,7 @@ foreach($db_item_movements as $dbim)
             $sql = "
                 SELECT id FROM clients_locations WHERE location_id = ? AND client_id = ? AND date_removed = 0
             ";
-            echo "<p>SELECT id FROM clients_locations WHERE location_id = $next_location_id AND client_id = $dbim['client_id'] AND date_removed = 0 </p>";
+            echo "<p>SELECT id FROM clients_locations WHERE location_id = $next_location_id AND client_id = {$dbim['client_id']} AND date_removed = 0 </p>";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$next_location_id, $dbim['client_id']]);
             $row = $stmt->fetch();
