@@ -26,6 +26,14 @@ $db_item_movements = $pdo->query($sql)->fetchAll();
 foreach($db_item_movements as $dbim)
 {
     echo "<pre>",print_r($dbim),"</pre>";
+    if( preg_match("/\d{1,2}\.\d{1,2}\.\w{1}\.a/i", $dbim['location']) )
+    {
+        echo "<p>Will update</p>";
+    }
+    else
+    {
+        echo "<p>Will Not</p>";
+    }
     /*
     $stmt = $pdo->prepare("SELECT location FROM locations WHERE id=?");
     $stmt->execute([$dbim['location_id']]);
