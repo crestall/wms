@@ -15,8 +15,8 @@ $opt = [
 $pdo = new PDO($dsn, $user, $pass, $opt);
 
 $sql = "
-SELECT im.*, i.name, i.client_id, cb.*
-FROM `items_movement` im join items i on i.id = im.item_id join clients_bays cb on im.location_id = cb.location_id AND (cb.date_added = im.date OR cb.date_removed = im.date)
+SELECT im.*, i.name, i.client_id, cb.*, l.location
+FROM `items_movement` im join items i on i.id = im.item_id join clients_bays cb on im.location_id = cb.location_id AND (cb.date_added = im.date OR cb.date_removed = im.date) join locations l on l.id = im.location_id
 WHERE i.double_bay = 1
 ";
 
@@ -25,11 +25,13 @@ $db_item_movements = $pdo->query($sql)->fetchAll();
 
 foreach($db_item_movements as $dbim)
 {
-    //echo "<pre>",print_r($dbim),"</pre>";
+    echo "<pre>",print_r($dbim),"</pre>";
+    /*
     $stmt = $pdo->prepare("SELECT location FROM locations WHERE id=?");
     $stmt->execute([$dbim['location_id']]);
     $row = $stmt->fetch();
     $this_location_name = $row['location'];
     echo "<p>$this_location_name</p>";
+    */
 }
 ?>
