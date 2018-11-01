@@ -50,16 +50,20 @@ class Clientsbays extends Model{
         {
             $qfrom = isset($fridays[$i - 1])? $fridays[$i - 1]['stamp'] : $from;
             $qto = $f['stamp'];
-            $bquery = "SELECT client_id, count(*) AS bays FROM clients_bays WHERE date_added < $qto AND (date_removed > $qto OR date_removed = 0) AND trays = 0 GROUP BY client_id";
             $bquery = "
-                SELECT
-                    client_id, count(*) AS bays
-                FROM
-                    clients_bays cb join locations l on cb.location_id = l.id
-                WHERE
-                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 0
-                GROUP BY
-                    client_id
+                SELECT client_id, SUM(bays) AS bays FROM
+                (
+                    SELECT
+                        client_id, MAX(pallet_multiplier) AS bays
+                    FROM
+                        clients_bays JOIN locations ON clients_bays.location_id = locations.id
+                    WHERE
+                        (date_added < $qto) AND (date_removed > $qfrom OR date_removed = 0 )
+                    	AND tray = 0
+                    GROUP BY
+                        location_id, client_id
+                ) tbl1
+                GROUP BY tbl1.client_id
             ";
             //echo "<p>$bquery</p>";
             $reps = $db->queryData($bquery);
@@ -69,16 +73,24 @@ class Clientsbays extends Model{
                 $data[$client_name][$f['string']] = $rep['bays'];
             }
             $tquery = "
-                SELECT
-                    client_id, count(*) AS bays
-                FROM
-                    clients_bays cb join locations l on cb.location_id = l.id
-                WHERE
-                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 1
-                GROUP BY
-                    client_id
+                SELECT client_id, SUM(bays) AS bays FROM
+                (
+                    SELECT
+                        client_id, COUNT(*) AS bays
+                    FROM
+                        clients_bays JOIN locations ON clients_bays.location_id = locations.id
+                    WHERE
+                        (
+                            (date_added < $qto) AND (date_removed > $qfrom OR date_removed = 0 )
+                        )
+                    	AND tray = 1
+                    GROUP BY
+                        location_id, client_id
+                ) tbl1
+                GROUP BY tbl1.client_id
             ";
             $treps = $db->queryData($tquery);
+
             foreach($treps as $trep)
             {
                 $client_name = $db->queryValue('clients', array('id' => $trep['client_id']), 'client_name');
@@ -87,7 +99,7 @@ class Clientsbays extends Model{
                 else
                     $data[$client_name][$f['string']] = $trep['bays']/9;
             }
-            $lquery = "SELECT client_id, count(*) AS bays FROM clients_locations WHERE date_added < $qto AND (date_removed > $qto OR date_removed = 0) GROUP BY client_id";
+            $lquery = "SELECT client_id, count(*) AS bays FROM clients_locations WHERE date_added < $qto AND (date_removed > $qfrom OR date_removed = 0) GROUP BY client_id";
             //echo "<p>$lquery</p>";
             $lreps = $db->queryData($lquery);
             foreach($lreps as $lrep)
@@ -106,22 +118,44 @@ class Clientsbays extends Model{
         );
     }
 
-    public function stockAdded($client_id, $location_id)
+    public function stockAdded($client_id, $location_id, $to_receiving = 0, $pallet_multiplier = 1)
     {
         $db = Database::openConnection();
-
-        if(!$db->queryValue($this->table, array(
-            'client_id'     =>  $client_id,
-            'location_id'   =>  $location_id,
-            'date_removed'  =>  0
-        )))
+        if($to_receiving)
         {
-            $db->insertQuery($this->table, array(
+            $location = new Location();
+            $location_id = $location->receiving_id;
+
+            if($updater = $db->queryValue($this->table, array('client_id' => $client_id, 'location_id' => $location_id, 'date_removed'  =>  0)))
+            {
+                $db->query("UPDATE {$this->table} SET pallet_multiplier = pallet_multiplier + $pallet_multiplier WHERE id = $updater");
+            }
+            else
+            {
+                $db->insertQuery($this->table, array(
+                    'client_id'         =>  $client_id,
+                    'location_id'       =>  $location_id,
+                    'date_added'        =>  time(),
+                    'pallet_multiplier' =>  $pallet_multiplier
+                ));
+            }
+        }
+        else
+        {
+            if(!$db->queryValue($this->table, array(
                 'client_id'     =>  $client_id,
                 'location_id'   =>  $location_id,
-                'date_added'    =>  time()
-            ));
+                'date_removed'  =>  0
+            )))
+            {
+                $db->insertQuery($this->table, array(
+                    'client_id'     =>  $client_id,
+                    'location_id'   =>  $location_id,
+                    'date_added'    =>  time()
+                ));
+            }
         }
+
 
         return true;
     }
@@ -129,18 +163,45 @@ class Clientsbays extends Model{
     public function stockRemoved($client_id, $location_id, $product_id)
     {
         $db = Database::openConnection();
+        $location = new Location();
 
-        if(!$db->queryValue('items_locations', array(
-            'item_id'       =>  $product_id,
-            'location_id'   =>  $location_id
-        )))
+        if($location_id == $location->receiving_id)
         {
-            $db->query("
-                UPDATE {$this->table}
-                SET date_removed = ".time()."
-                WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id
-            ");
+            $this_row = $db->queryRow("SELECT * FROM {$this->table} WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id ");
+            $pallet_multiplier = $this_row['pallet_multiplier'] - 1;
+            if($pallet_multiplier < 1)
+                $pallet_multiplier = 1;
+
+            $db->updateDatabaseField($this->table, 'date_removed', time(), $this_row['id']);
+
+            if($db->queryValue('items_locations', array(
+                'item_id'       =>  $product_id,
+                'location_id'   =>  $location_id
+            )))
+            {
+                $db->insertQuery($this->table, array(
+                    'client_id'         =>  $client_id,
+                    'location_id'       =>  $location_id,
+                    'date_added'        =>  time(),
+                    'pallet_multiplier' =>  $pallet_multiplier
+                ));
+            }
         }
+        else
+        {
+            if(!$db->queryValue('items_locations', array(
+                'item_id'       =>  $product_id,
+                'location_id'   =>  $location_id
+            )))
+            {
+                $db->query("
+                    UPDATE {$this->table}
+                    SET date_removed = ".time()."
+                    WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id
+                ");
+            }
+        }
+
         return true;
     }
 

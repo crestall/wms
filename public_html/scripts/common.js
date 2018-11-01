@@ -189,7 +189,7 @@ var itemsUpdater = {
             $(this).off('change');
             $(this).change(function(e){
                 //$(this).valid();
-                var $holder = $(el).closest('div.item_holder');
+                var $holder = $(this).closest('div.item_holder');
                 $holder.find('input.item_qty').valid();
             });
         });

@@ -1,8 +1,8 @@
 <?php
-
 ?>
 <?php if(!empty($item)):
-    $add_to_location = (empty(Form::value('make_to_location')))? $item['preferred_pick_location_id'] : Form::value('make_to_location');?>
+    $item_id = $item['id'];
+    $add_to_location = (empty(Form::value('add_to_location')))? $item['preferred_pick_location_id'] : Form::value('add_to_location');?>
     <div class="row">
         <form id="add_to_stock" method="post" action="/form/procScanToInventory">
             <div class="form-group row">
@@ -17,12 +17,7 @@
                     <input type="text" class="form-control number required" name="qty" id="qty" value="" />
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Add To Location</label>
-                <div class="col-md-4">
-                    <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations($add_to_location, $item['id']);?></select>
-                </div>
-            </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/location_selector.php");?>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>" />
             <input type="hidden" name="client_id" value="<?php echo $item['client_id']; ?>" />

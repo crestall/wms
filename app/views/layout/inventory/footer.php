@@ -12,10 +12,25 @@
                             e.preventDefault();
                             shippingQuote.getQuotes($(this).data('orderid'));
                         });
+                    },
+                    'add-to-receiving': function()
+                    {
+                        $('#to_receiving').click(function(){
+                            $('#pallet_count_holder').slideToggle();
+                            if(this.checked)
+                            {
+                                $('select#add_to_location').prop('disabled', true).selectpicker('hide').addClass('disabled');
+                            }
+                            else
+                            {
+                                $('select#add_to_location').prop('disabled', false).selectpicker('show').removeClass('disabled');
+                            }
+                        });
                     }
                 },
                 'add-subtract-stock' : {
                     init: function(){
+                        actions.common['add-to-receiving']();
                         $('form#add_to_stock').submit(function(e){
                             if($(this).valid())
                             {
@@ -94,6 +109,7 @@
                 },
                 "pack-items-manage" : {
                     init: function(){
+                        actions.common['add-to-receiving']();
                         $('#product_selector').change(function(e){
                             if($(this).val() > 0)
                             {
@@ -116,6 +132,7 @@
                 },
                 "scan-to-inventory": {
                     init: function(){
+
                         $('#client_selector').change(function(e){
                             if($(this).val() > 0)
                             {
@@ -152,6 +169,7 @@
                                 .html("<div class='row'><div class='col-md-12'><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Finding Item...</p></div></div>")
                                 .load(url, data, function(d){
                                     //$('#available').focus();
+                                    actions.common['add-to-receiving']();
                                     $('.selectpicker').selectpicker('refresh');
 
                                     $('#add_to_stock').validate({

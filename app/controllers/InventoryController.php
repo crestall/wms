@@ -273,6 +273,7 @@ class inventoryController extends Controller
     public function packItemsManage()
     {
         $item_id = 0;
+        $client_id = 0;
         $items = array();
         $make_to_location = 0;
         $s = "";
@@ -282,6 +283,8 @@ class inventoryController extends Controller
             if(isset($this->request->params['args']['product']))
             {
                 $item_id = $this->request->params['args']['product'];
+                $product_info = $this->item->getItemById($item_id);
+                $client_id = $product_info['client_id'];
                 $items = $this->item->getPackItemDetails($item_id);
                 $available_packs = $this->item->getAvailableStock($item_id, $this->order->fulfilled_id);
                 $make_to_location = $this->item->getPreferredPickLocationId($item_id);
@@ -295,7 +298,8 @@ class inventoryController extends Controller
             'items'             =>  $items,
             'available_packs'   =>  $available_packs,
             'make_to_location'  =>  $make_to_location,
-            's'                 =>  $s
+            's'                 =>  $s,
+            'client_id'         =>  $client_id
         ]);
     }
 
@@ -317,7 +321,8 @@ class inventoryController extends Controller
             "qualityControl",
             "scanToInventory",
             "goodsIn",
-            "goodsOut"
+            "goodsOut",
+            "packItemsManage"
         ));
 
         //client users

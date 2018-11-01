@@ -1467,6 +1467,7 @@ class FormController extends Controller {
     public function procScanToInventory()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $pallet_multiplier = 1;
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -1474,14 +1475,26 @@ class FormController extends Controller {
                 ${$field} = $value;
             }
         }
+
         $post_data = array(
             'reference'         =>  'New Stock',
             'reason_id'         =>  $this->stockmovementlabels->getLabelId("New Stock"),
             'qty_add'           =>  $qty,
-            'add_to_location'   =>  $add_to_location,
             'add_product_id'    =>  $item_id
         );
+        if(isset($to_receiving))
+        {
+            $add_to_location = 0;
+            $post_data['add_to_location'] = $this->location->receiving_id;
+        }
+        else
+        {
+            $to_receiving = 0;
+            $post_data['add_to_location'] = $add_to_location;
+        }
+
         $this->location->addToLocation($post_data);
+        $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
         Session::set('feedback', $qty.' of '.$name.' have been added to the system');
         return $this->redirector->to(PUBLIC_ROOT."inventory/scan-to-inventory/client=$client_id");
     }
@@ -1552,6 +1565,7 @@ class FormController extends Controller {
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
+        $pallet_multiplier = 1;
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -1596,9 +1610,22 @@ class FormController extends Controller {
                 }
             }
         }
-        if($make_to_location == "0")
+        if(isset($to_receiving))
         {
-            Form::setError('make_to_location', 'Please select a location');
+            if(filter_var($pallet_multiplier, FILTER_VALIDATE_INT) === false && $pallet_multiplier <= 0)
+            {
+                Form::setError('pallet_multiplier', 'Please enter only positive whole numbers');
+            }
+            $add_to_location = 0;
+            $post_data['add_to_location'] = $this->location->receiving_id;
+        }
+        elseif($add_to_location == "0")
+        {
+            Form::setError('add_to_location', 'Please select a location');
+        }
+        else
+        {
+            $to_receiving = 0;
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -1611,6 +1638,7 @@ class FormController extends Controller {
             //echo "<pre>",print_r($this->request->data),"</pre>";
             //echo "<pre>",print_r($items),"</pre>"; die();
             $this->item->makePacks($post_data, $items);
+            $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
             Session::set('makefeedback', 'Those packs have been created');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/pack-items-manage/product=$add_product_id");
@@ -1833,6 +1861,7 @@ class FormController extends Controller {
     public function procAddToStock()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $pallet_multiplier = 1;
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1846,9 +1875,22 @@ class FormController extends Controller {
         {
             Form::setError('qty_add', 'Please enter only positive whole numbers');
         }
-        if($add_to_location == "0")
+        if(isset($to_receiving))
+        {
+            if(filter_var($pallet_multiplier, FILTER_VALIDATE_INT) === false && $pallet_multiplier <= 0)
+            {
+                Form::setError('pallet_multiplier', 'Please enter only positive whole numbers');
+            }
+            $add_to_location = 0;
+            $post_data['add_to_location'] = $this->location->receiving_id;
+        }
+        elseif($add_to_location == "0")
         {
             Form::setError('add_to_location', 'Please select a location');
+        }
+        else
+        {
+            $to_receiving = 0;
         }
         if($reason_id == "0")
         {
@@ -1862,8 +1904,9 @@ class FormController extends Controller {
         }
         else
         {
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
             $this->location->addToLocation($post_data);
-            $this->clientsbays->stockAdded($client_id, $add_to_location);
+            $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id);

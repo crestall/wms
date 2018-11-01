@@ -1,5 +1,8 @@
 <?php
-
+$add_to_location = (empty(Form::value('add_to_location')))? $product_info['preferred_pick_location_id'] : Form::value('add_to_location');
+$item_id = $product_id;
+$div_class = "col-md-7";
+$label_class = "col-md-5";
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -36,13 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
-                <div class="col-md-7">
-                    <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations(Form::value('add_to_location'), $product_id);?></select>
-                    <?php echo Form::displayError('add_to_location');?>
-                </div>
-            </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/location_selector.php");?>
             <div class="form-group row">
                 <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
                 <div class="col-md-7">
@@ -52,7 +49,7 @@
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="add_product_id" value="<?php echo $product_id; ?>" />
-            <input type="hidden" name="client_id" value="<?php echo $product_info['client_id']; ?>" /> 
+            <input type="hidden" name="client_id" value="<?php echo $product_info['client_id']; ?>" />
             <input type="hidden" name="add_product_name" value="<?php echo $product_info['name']; ?>" />
             <div class="form-group row">
                 <label class="col-md-5 col-form-label">&nbsp;</label>
