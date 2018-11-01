@@ -340,7 +340,8 @@ class inventoryController extends Controller
         //client users
         Permission::allow('client', $resource, array(
             "clientInventory",
-            'expectedShipments'
+            'expectedShipments',
+            'registerNewStock'
         ));
 
         return Permission::check($role, $resource, $action);
