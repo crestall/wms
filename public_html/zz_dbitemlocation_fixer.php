@@ -43,7 +43,7 @@ foreach($db_item_movements as $dbim)
             $stmt->execute([$next_location_id, $dbim['client_id']]);
             $row = $stmt->fetch();
             echo "<pre>",print_r($row),"</pre>";
-            if(count($row))
+            if(!count($row))
             {
                 echo "<p>Will add for $next_location : $next_location_id</p>";
                 $sql = "
