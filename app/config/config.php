@@ -110,7 +110,7 @@ return array(
     /*************************************************************************
     * Hunters API constants
     **************************************************************************/
-    'HUNTERS_TEST'  => false,
+    'HUNTERS_TEST'  => true,
     //Testbed
     /* */
     'HUNTERS_TEST_CUSTOMER_CODE'    => '3PLVIC',
