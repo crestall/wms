@@ -110,7 +110,7 @@ return array(
     /*************************************************************************
     * Hunters API constants
     **************************************************************************/
-    'HUNTERS_TEST'  => false,
+    'HUNTERS_TEST'  => true,
     //Testbed
     /* */
     'HUNTERS_TEST_CUSTOMER_CODE'    => '3PLVIC',
@@ -464,7 +464,8 @@ return array(
 		),
 		'inventory'			=>	array(
 			'client-inventory'	=>	true,
-            'expected-shipments'    =>  true
+            'expected-shipments'    =>  true,
+            'register-new-stock'    => true
 		),
         'reports'           =>  array(
             'dispatch-report'   =>  true,
