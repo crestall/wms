@@ -14,6 +14,18 @@ class inventoryController extends Controller
         parent::beforeAction();
     }
 
+    public function registerNewStock()
+    {
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        Config::setJsConfig('curPage', "register-newstock");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/registerNewStock.php',[
+            'page_title'    =>  'Register New Stock',
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name
+        ]);
+    }
+
     public function expectedShipments()
     {
         $client_id = Session::getUserClientId();
