@@ -28,6 +28,11 @@
                         });
                     }
                 },
+                'register-newstock': {
+                    init: function(){
+                        
+                    }
+                },
                 'add-subtract-stock' : {
                     init: function(){
                         actions.common['add-to-receiving']();

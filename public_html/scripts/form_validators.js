@@ -89,6 +89,21 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+	$("#register_new_stock").validate({
+    	rules:{
+    		sku: {
+				remote: {
+                    url: '/ajaxfunctions/checkSkus'
+                }
+			}
+    	},
+		messages:{
+			sku: {
+				remote: 'This SKU is already in use. SKUs must be unique'
+			}
+		}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("#make_pack_items").validate({
          rules:{
     		make_to_location:{
