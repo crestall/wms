@@ -1406,7 +1406,7 @@ class FormController extends Controller {
 
     public function procScanToInventory()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $pallet_multiplier = 1;
         foreach($this->request->data as $field => $value)
         {
