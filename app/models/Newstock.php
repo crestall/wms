@@ -25,6 +25,13 @@ class Newstock extends Model{
         return true;
     }
 
+    public function getInputsForClient($client_id)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT ns.*, i.name, i.sku FROM {$this->table} ns JOIN items i ON ns.item_id = i.id WHERE ns.client_id = $client_id AND ns.recorded = 1 AND ns.mail_sent = 0";
+        return $db->queryData($q);
+    }
+
     public function isRegistered($item_id)
     {
         $db = Database::openConnection();
