@@ -1436,7 +1436,7 @@ class FormController extends Controller {
         if($lid = $this->newstock->isRegistered($item_id))
         {
             $this->newstock->updateRecorded($lid);
-            $this->newstock->updateInCount($lid, $qty)
+            $this->newstock->updateInCount($lid, $qty);
         }
 
         $this->location->addToLocation($post_data);
