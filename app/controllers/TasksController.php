@@ -130,6 +130,8 @@ class TasksController extends Controller
                 $output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
                 $output .= "Doing stock in report for $client_name".PHP_EOL;
                 $items = $this->newstock->getInputsForClient($client_id);
+                $output .= print_r($items).PHP_EOL;
+                Logger::logReportsSent('sent_reports/log', $output); //die();
                 if(count($items))
                 {
                     $filename = tempnam(sys_get_temp_dir(), 'stockin_report_') . '.csv';
