@@ -123,6 +123,7 @@ class Itemmovement extends Model{
     public function getStockAtDateArray($client_id, $date = 0)
     {
         $date = ($date == 0)? time(): $date;
+        echo date("l jS \of F Y h:i:s A", $date);
         $db = Database::openConnection();
         $return = array();
         $items = $db->queryData("SELECT id, name, sku, image FROM items WHERE client_id = $client_id AND active = 1 ORDER BY name");
