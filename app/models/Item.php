@@ -66,6 +66,13 @@ class Item extends Model{
         $this->getPackagingTypes();
     }
 
+    public function recordData($data)
+    {
+        $db = Database::openConnection();
+        $id = $db->insertQuery($this->table, $data);
+        return $id;
+    }
+
     public function getPalletCountSelect($item_id)
     {
         $db = Database::openConnection();

@@ -109,7 +109,7 @@ class FormController extends Controller {
 
     public function procRegisterNewStock()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -119,6 +119,49 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name', 'A product name is required');
+        }
+        if( !$this->dataSubbed($sku) )
+        {
+            Form::setError('sku', 'An SKU is required');
+        }
+        elseif($this->item->skuTaken($sku))
+        {
+            Form::setError('sku', 'This SKU is already in use');
+        }
+        if(filter_var($qty, FILTER_VALIDATE_INT) === false && $qty <= 0)
+        {
+            Form::setError('qty', 'Please enter only positive whole numbers');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $array = array(
+                'name'      => $name,
+                'sku'       => $sku,
+                'client_id' => $client_id
+            );
+            if($this->dataSubbed($supplier))
+                $array['supplier'] = $supplier;
+            $item_id = $this->item->recordData($array);
+            $this->newstock->recordData(
+                array(
+                    'client_id'     => $client_id,
+                    'item_id'       => $item_id,
+                    'qty'           => $qty,
+                    'entered'       => time(),
+                    'entered_by'    => Session::getUserId()
+                )
+            );
+            Session::set("feedback", "<h2><i class='far fa-check-circle'></i>New Item Recorder</h2><p>An email will be sent when the item arrives and is scanned into the system</p>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."inventory/register-new-stock");
     }
 
     public function procRecordPickup()
