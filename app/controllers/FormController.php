@@ -88,6 +88,7 @@ class FormController extends Controller {
             'procProfileUpdate',
             'procQualityControl',
             'procRecordPickup',
+            'procRegisterNewStock',
             'procRepAdd',
             'procRepEdit',
             'procScanToInventory',
