@@ -1433,6 +1433,12 @@ class FormController extends Controller {
             $post_data['add_to_location'] = $add_to_location;
         }
 
+        if($lid = $this->newstock->isRegistered($item_id))
+        {
+            $this->newstock->updateRecorded($lid);
+            $this->newstock->updateInCount($lid, $qty)
+        }
+
         $this->location->addToLocation($post_data);
         $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
         Session::set('feedback', $qty.' of '.$name.' have been added to the system');
