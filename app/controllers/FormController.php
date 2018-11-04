@@ -88,6 +88,7 @@ class FormController extends Controller {
             'procProfileUpdate',
             'procQualityControl',
             'procRecordPickup',
+            'procRegisterNewStock',
             'procRepAdd',
             'procRepEdit',
             'procScanToInventory',
@@ -106,13 +107,10 @@ class FormController extends Controller {
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
     }
-    /*
-    public function procClientDailyReports()
+
+    public function procRegisterNewStock()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
-        $send_dispatch = $send_returns = false;
-        $from = strtotime('today midnight');
-        $to = time();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -122,109 +120,51 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if($client_id == "0")
+        if( !$this->dataSubbed($name) )
         {
-            Form::setError('client_id', "Please select a client");
+            Form::setError('name', 'A product name is required');
         }
-        if(!count($this->request->data['client_reports']))
+        if( !$this->dataSubbed($sku) )
         {
-            Form::setError('client_reports', "Please select at least one report type");
+            Form::setError('sku', 'An SKU is required');
         }
-        elseif($client_id != "0")
+        elseif($this->item->skuTaken($sku))
         {
-            if(in_array("dispatch_report", $this->request->data['client_reports']))
-            {
-                $send_dispatch = true;
-                $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
-                if(!count($orders))
-                {
-                    Form::setError('client_id', "No orders dispatched today");
-                }
-            }
-            if(in_array("returns_report", $this->request->data['client_reports']))
-            {
-                //this is to come
-            }
+            Form::setError('sku', 'This SKU is already in use');
         }
-        if(Form::$num_errors > 0)		/* Errors exist, have user correct them
+        if(filter_var($qty, FILTER_VALIDATE_INT) === false && $qty <= 0)
+        {
+            Form::setError('qty', 'Please enter only positive whole numbers');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
         else
         {
-            Session::set("feedback", "<h2><i class='far fa-check-circle'></i>Daily Reports Have Been Sent</h2>");
-            $filenames = array();
-            if($send_dispatch)
-            {
-                $hidden = Config::get("HIDE_CHARGE_CLIENTS");
-                $filename = tempnam(sys_get_temp_dir(), 'dispatch_report_') . '.csv';
-                $filenames[] = $filename;
-                $fp = fopen($filename, 'w');
-                $headers = array(
-                    "Date Ordered",
-                    "Entered By",
-                    "Date Dispatched",
-                    "WMS Order Number",
-                    "Your Order Number",
-                    "Shipped To",
-                    "Items",
-                    "total Items",
-                    "Courier",
-                    "Charge Code",
-                    "Consignment ID"
-                );
-                if( !in_array($client_id, $hidden) )
-                {
-                    $headers[] = "Estimated Freight Charge";
-                }
-                fputcsv($fp, $headers);
-                foreach($orders as $o)
-                {
-                    $row = array(
-                        $o['date_ordered'],
-                        $o['entered_by'],
-                        $o['date_fulfilled'],
-                        $o['order_number'],
-                        $o['client_order_number'],
-                        str_replace("<br/>", ", ",$o['shipped_to']),
-                        str_replace("<br/>", "",$o['items']),
-                        $o['total_items'],
-                        $o['courier'],
-                        $o['charge_code'],
-                        $o['consignment_id']
-                    );
-                    if( !in_array($client_id, $hidden) )
-                    {
-                        $row[] = $o['charge'];
-                    }
-                	fputcsv($fp, $row);
-                }
-                $_SESSION['feedback'] .= "<p>Dispatch Report successfully sent</p>";
-                //save the record
-                $this->clientreportssent->recordData(array(
-                    'client_id'     =>  $client_id,
-                    'report_type'   =>  'Dispatch Report',
-                    'date'          =>  time(),
-                    'entered_by'    =>  Session::getUserId()
-                ));
-            }
-            if($send_returns)
-            {
-                //this is to come
-            }
-
-            //send the mail
-            Email::sendDailyReport($filenames, $client_id);
-            //delete the files
-            foreach($filenames as $f)
-            {
-                unlink($f);
-            }
+            $array = array(
+                'name'      => $name,
+                'sku'       => $sku,
+                'client_id' => $client_id
+            );
+            if($this->dataSubbed($supplier))
+                $array['supplier'] = $supplier;
+            $item_id = $this->item->recordData($array);
+            $this->newstock->recordData(
+                array(
+                    'client_id'     => $client_id,
+                    'item_id'       => $item_id,
+                    'qty'           => $qty,
+                    'entered'       => time(),
+                    'entered_by'    => Session::getUserId()
+                )
+            );
+            Session::set("feedback", "<h2><i class='far fa-check-circle'></i>New Item Recorded</h2><p>An email will be sent when the item arrives and is scanned into the system</p>");
         }
-        return $this->redirector->to(PUBLIC_ROOT."reports/client-daily-reports");
+        return $this->redirector->to(PUBLIC_ROOT."inventory/register-new-stock");
     }
-    */
+
     public function procRecordPickup()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();$post_data = array();
@@ -1491,6 +1431,12 @@ class FormController extends Controller {
         {
             $to_receiving = 0;
             $post_data['add_to_location'] = $add_to_location;
+        }
+
+        if($lid = $this->newstock->isRegistered($item_id))
+        {
+            $this->newstock->updateRecorded($lid);
+            $this->newstock->updateInCount($lid, $qty);
         }
 
         $this->location->addToLocation($post_data);

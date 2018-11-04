@@ -126,6 +126,42 @@ class TasksController extends Controller
                 $output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
                 $output .= "Doing returns report for $client_name".PHP_EOL;
 
+                //Stock In Report
+                $output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
+                $output .= "Doing stock in report for $client_name".PHP_EOL;
+                $items = $this->newstock->getInputsForClient($client_id);
+                if(count($items))
+                {
+                    $filename = tempnam(sys_get_temp_dir(), 'stockin_report_') . '.csv';
+                    $filenames[] = $filename;
+                    $fp = fopen($filename, 'w');
+                    $headers = array(
+                        "Item",
+                        "SKU",
+                        "Quantity Expected",
+                        "Quantity Received"
+                    );
+                    fputcsv($fp, $headers);
+                    foreach($items as $i)
+                    {
+                        $row = array(
+                            $i['name'],
+                            $i['sku'],
+                            $i['qty'],
+                            $i['qty_added']
+                        );
+                    	fputcsv($fp, $row);
+                        //update database
+                        $this->newstock->updateMailed($i['id']);
+                    }
+                    fclose($fp);
+                    $output .= "Stock In report with $filename will be sent for $client_name".PHP_EOL;
+                }
+                else
+                {
+                    $output .= "No items scanned in today".PHP_EOL;
+                }
+
                 if(count($filenames))
                 {
                     //send the mail

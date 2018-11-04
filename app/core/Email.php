@@ -40,16 +40,22 @@
         }
 
         $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
-        /*
-        $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
-        */
-        $mail->AddAddress($cd['billing_email'], $cd['contact_name']);
-        if($client_id == 6)
+
+        //if(SITE_LIVE) 
+        if(Config::get("SITE_LIVE"))
         {
-            $mail->AddAddress($cd['inventory_email'], $cd['inventory_contact']);
-            $mail->AddAddress('kimberly@thebigbottleco.com', 'Kimberly Lacsa');
+            $mail->AddAddress($cd['billing_email'], $cd['contact_name']);
+            if($client_id == 6)
+            {
+                $mail->AddAddress($cd['inventory_email'], $cd['inventory_contact']);
+                $mail->AddAddress('kimberly@thebigbottleco.com', 'Kimberly Lacsa');
+            }
+            $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
         }
-        $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+        else
+        {
+            $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
+        }
 
         $mail->Send();
     }
@@ -84,7 +90,8 @@
 
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-        if(SITE_LIVE)
+        //if(SITE_LIVE)
+        if(Config::get("SITE_LIVE"))
         {
 		    $mail->AddAddress($email, $name);
             $mail->AddBCC('daniel.mackenzie@3plplus.com.au', 'Daniel Mackenzie');

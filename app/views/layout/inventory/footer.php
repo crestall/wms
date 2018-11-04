@@ -28,6 +28,16 @@
                         });
                     }
                 },
+                'register-newstock': {
+                    init: function(){
+                        $('form#register_new_stock').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Data...</h2></div>' });
+                            }
+                        });
+                    }
+                },
                 'add-subtract-stock' : {
                     init: function(){
                         actions.common['add-to-receiving']();
