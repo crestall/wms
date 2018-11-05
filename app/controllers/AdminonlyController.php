@@ -27,7 +27,7 @@ class adminonlyController extends Controller
     {
         $db = Database::openConnection();
         $orders = $db->queryData("
-            SELECT * FROM orders WHERE client_id = 6 AND date_fulfilled > 1541080800 AND store_order = 0
+            SELECT * FROM orders WHERE client_id = 6 AND date_fulfilled > 1541080800 AND store_order = 0 AND customer_emailed = 0
         ");
         foreach($orders as $o)
         {
