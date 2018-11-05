@@ -36,7 +36,8 @@ class adminonlyController extends Controller
                 //$this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
                 echo "<p>Will send tracking email to {$o['tracking_email']}</p>";
                 //$mailer->sendTrackingEmail($id);
-                Email::sendTrackingEmail($o['id']);
+                //Email::sendTrackingEmail($o['id']);
+                $db->updateDatabaseField('orders', 'customer_emailed', 1, $o['id']);
             }
             else
             {
