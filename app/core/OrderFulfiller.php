@@ -231,6 +231,8 @@
                     $this->output .= "Updating Orders".PHP_EOL;
                     $this->output .= print_r($o_values, true).PHP_EOL;
         			$db->updateDatabaseFields('orders', $o_values, $id);
+
+                    $od = $this->controller->order->getOrderDetail($id);
                     if( !empty($od['tracking_email']) )
                     {
                         $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
