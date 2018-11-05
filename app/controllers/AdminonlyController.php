@@ -23,6 +23,15 @@ class adminonlyController extends Controller
         ]);
     }
 
+    public function sendTrackingEmails()
+    {
+        $db = Database::openConnection();
+        $orders = $db->queryData("
+            SELECT * FROM orders WHERE client_id = 6 AND date_fulfilled > 1541080800
+        ");
+        echo "<pre>",print_r($orders),"</pre>";
+    }
+
     public function isAuthorized(){
         $role = Session::getUserRole();
         if( $role === "super admin" )
