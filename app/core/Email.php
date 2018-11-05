@@ -41,8 +41,8 @@
 
         $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
 
-        //if(SITE_LIVE) 
-        if(Config::get("SITE_LIVE"))
+        if(SITE_LIVE)
+        //if(Config::get("SITE_LIVE"))
         {
             $mail->AddAddress($cd['billing_email'], $cd['contact_name']);
             if($client_id == 6)
@@ -90,8 +90,8 @@
 
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-        //if(SITE_LIVE)
-        if(Config::get("SITE_LIVE"))
+        if(SITE_LIVE)
+        //if(Config::get("SITE_LIVE"))
         {
 		    $mail->AddAddress($email, $name);
             $mail->AddBCC('daniel.mackenzie@3plplus.com.au', 'Daniel Mackenzie');
