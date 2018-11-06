@@ -2,8 +2,7 @@
     <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
-    <?php if(count($client_orders)):
-    echo "$client_id<pre>",print_r($hidden),"</pre>";?>
+    <?php if(count($client_orders)):?>
         <div id="waiting" class="row">
             <div class="col-lg-12 text-center">
                 <h2>Drawing Table..</h2>
