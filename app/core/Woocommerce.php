@@ -719,7 +719,7 @@ class Woocommerce{
                     'date_ordered'          => strtotime( $o['date_created'] ),
                     'status_id'             => $this->controller->order->ordered_id,
                     'eparcel_express'       => 0,
-                    'signature_req'         => 1,
+                    'signature_req'         => 0,
                     'contact_phone'         => $o['billing']['phone'],
                     'import_error'          => false,
                     'import_error_string'   => ''
@@ -809,7 +809,7 @@ class Woocommerce{
                 //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;  always signature required for NOA
                 if(empty($o['customer_note']))
                 {
-                    $delivery_instructions =  "";
+                    $delivery_instructions =  "Please leave in a safe place out of the weather";
                 }
                 else
                 {
