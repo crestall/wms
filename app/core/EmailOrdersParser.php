@@ -209,7 +209,7 @@ class EmailOrdersParser{
             $this->output .= print_r($this->nuchevsampleitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
             /**/
-            if(!imap_mail_move ( $this->inbox , $x , 'INBOX.processed'  ))
+            if(!imap_mail_move ( $this->inbox , $x , 'INBOX.processed_ok'  ))
             {
                 $this->output .=  "Error moving message $x to Processed folder".PHP_EOL;
             }
@@ -438,7 +438,7 @@ class EmailOrdersParser{
                         'postcode'  =>  $postcode
                     );
                     $db->insertQuery('nuchev_samples', $rec_details);
-                    if(!imap_mail_move ( $this->inbox , $x , 'INBOX.processed'  ))
+                    if(!imap_mail_move ( $this->inbox , $x , 'INBOX.processed_ok'  ))
                     {
                         $this->output .=  "Error moving message $x to Processed folder".PHP_EOL;
                     }
