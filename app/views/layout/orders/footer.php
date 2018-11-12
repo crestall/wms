@@ -619,6 +619,13 @@
                              })
                         });
 
+                        $('#select_all_np').click(function(e){
+                            var checked = this.checked;
+                             $('.select_np').each(function(e){
+                                this.checked =  checked;
+                             })
+                        });
+
                         $('.selectpicker').selectpicker({});
 
                         $('select#courier_all').change(function(e){
