@@ -648,7 +648,7 @@
                             e.preventDefault();
                             if($('input.select:checked').length)
                             {
-                                var ids = {};
+                                var ids = [];
                                 $('input.select').each(function(i,e){
                                     var thisid = $(this).data('orderid');
                                     //console.log('orderid: '+thisid);
