@@ -619,6 +619,13 @@
                              })
                         });
 
+                        $('#select_all_np').click(function(e){
+                            var checked = this.checked;
+                             $('.select_np').each(function(e){
+                                this.checked =  checked;
+                             })
+                        });
+
                         $('.selectpicker').selectpicker({});
 
                         $('select#courier_all').change(function(e){
@@ -641,7 +648,7 @@
                             e.preventDefault();
                             if($('input.select:checked').length)
                             {
-                                var ids = {};
+                                var ids = [];
                                 $('input.select').each(function(i,e){
                                     var thisid = $(this).data('orderid');
                                     //console.log('orderid: '+thisid);
@@ -649,7 +656,14 @@
                     				if( $(this).prop('checked') && courier_id >= 0)
                     				{
                     					//ids.push($(this).data('orderid'));
-                    					ids[thisid] = courier_id;
+                                        var ip = ( $('#ignoreprice_'+thisid).prop('checked') )? 1: 0;
+                                        var ent = {
+                                            order_id: thisid,
+                                            courier_id: courier_id,
+                                            ip: ip
+                                        }
+                    					//ids[thisid][courier_id] = ip;
+                                        ids.push(ent);
                     				}
                                 });
                                 if(Object.keys(ids).length)

@@ -1130,11 +1130,12 @@ class FormController extends Controller {
         }
         else
         {
-            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Fulfilled</h2><p>Reasons are listed below</p>");
+            $ip = (isset($ignore_pc))? 1 : 0;
+            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>This Order Could Not Be Assigned</h2><p>Reasons are listed below</p>");
             Session::set('showerrorfeedback', false);
             $courier_name = !$this->dataSubbed($courier_name)? "":$courier_name;
             Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Courier has been assigned</h2>");
-            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name);
+            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, $ip);
         }
         if(Session::getAndDestroy('showerrorfeedback') == false)
         {

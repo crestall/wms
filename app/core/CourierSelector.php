@@ -30,7 +30,7 @@
         $this->controller = $controller;
     }
 
-    public function assignCourier($order_id, $courier_id, $courier_name = "")
+    public function assignCourier($order_id, $courier_id, $courier_name = "", $ip = 0)
     {
         //die('dcourier_id '.$courier_id);
         $this->order_details = $this->controller->order->getOrderDetail($order_id);
@@ -41,15 +41,15 @@
             $courier_id = $this->controller->courier->eParcelExpressId;
         }
         if($courier_id == $this->controller->courier->eParcelId)
-            $this->assignEparcel($order_id, $courier_id);
+            $this->assignEparcel($order_id, $courier_id, false, $ip);
         elseif($courier_id == $this->controller->courier->eParcelExpressId)
-            $this->assignEparcel($order_id, $courier_id, true);
+            $this->assignEparcel($order_id, $courier_id, true, $ip);
         elseif($courier_id == $this->controller->courier->huntersId)
-            $this->assignHunters($order_id, $courier_id);
+            $this->assignHunters($order_id, $courier_id, false, false, $ip);
         elseif($courier_id == $this->controller->courier->huntersPluId)
-            $this->assignHunters($order_id, $courier_id, true);
+            $this->assignHunters($order_id, $courier_id, true, false, $ip);
         elseif($courier_id == $this->controller->courier->huntersPalId)
-            $this->assignHunters($order_id, $courier_id, false, true);
+            $this->assignHunters($order_id, $courier_id, false, true, 1);
         elseif($courier_id == $this->controller->courier->threePlTruckId)
             $this->assign3PLTruck($order_id);
         elseif($courier_id == $this->controller->courier->localId)
@@ -78,7 +78,7 @@
         return false;
     }
 
-    private function assignEparcel($order_id, $courier_id, $express = false)
+    private function assignEparcel($order_id, $courier_id, $express = false, $ip = 0)
     {
         $db = Database::openConnection();
         $eParcelClass = "Eparcel";
@@ -92,6 +92,20 @@
         $eparcel_details = $this->controller->{$eParcelClass}->getShipmentDetails($this->order_details, $this->items, $express);
         //echo "<pre>",print_r($eparcel_details),"</pre>"; die();
         $eparcel_shipments['shipments'][0] = $eparcel_details;
+        if($ip == 0)
+        {
+            $eparcel_response = $this->controller->{$eParcelClass}->GetQuote($eparcel_shipments);
+            if(!isset($eparcel_response['errors']))
+            {
+                if( $eparcel_response['shipments'][0]['shipment_summary']['total_cost'] > Config::get('MAX_SHIPPING_CHARGE') )
+                {
+            	    Session::set('showerrorfeedback', true);
+            	    $_SESSION['errorfeedback'] .= "<h3>Please check the value for {$this->order_details['order_number']}</h3>";
+                    $_SESSION['errorfeedback'] .= "<h4>The quoted eParcel charge is $".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2)."</h4>";
+                    return;
+                }
+            }
+        }
        	$sResponse = $this->controller->{$eParcelClass}->CreateShipments($eparcel_shipments);
         //echo "<pre>",print_r($sResponse),"</pre>"; die();
         if(isset($sResponse['errors']))
@@ -142,7 +156,7 @@
         }
     }
 
-    private function assignHunters($order_id, $courier_id, $plu = false, $pal = false)
+    private function assignHunters($order_id, $courier_id, $plu = false, $pal = false, $ip = 0)
     {
         $db = Database::openConnection();
         if(HUNTERS_TEST)
@@ -163,8 +177,21 @@
             $huntersClass = "Hunters3KG";
         }
         $h_details = $this->controller->{$huntersClass}->getDetails($this->order_details, $this->items);
+        if($ip == 0)
+        {
+            $quote_result = $this->controller->{$huntersClass}->getQuote($h_details);
+            if(!empty($quote_result) && !isset($quote_result['errorCode']))
+            {
+                if( $quote_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE') > Config::get('MAX_SHIPPING_CHARGE') )
+                {
+            	    Session::set('showerrorfeedback', true);
+            	    $_SESSION['errorfeedback'] .= "<h3>Please check the value for {$this->order_details['order_number']}</h3>";
+                    $_SESSION['errorfeedback'] .= "<h4>The quoted Hunters charge is $".number_format($quote_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2)."</h4>";
+                    return;
+                }
+            }
+        }
         $result = $this->controller->{$huntersClass}->bookJob($h_details);
-
         if( empty($result) )
         {
             Session::set('showerrorfeedback', true);
