@@ -98,8 +98,9 @@
                         <?php endif;?>
                         <th>
                             <div class="checkbox checkbox-default">
+                                Ignore Price Restriction
                                 <input id="select_all_np" class="styled" type="checkbox">
-                                <label for="select_all_np">Ignore Price Restriction</label>&nbsp;<em><small>(all)</small></em>
+                                <label for="select_all_np"><em><small>(all)</small></em></label>
                             </div>
                         </th>
                         <th></th>
@@ -206,7 +207,7 @@
                             <?php endif;?>
                             <td data-label="Ignore Price Restriction" class="chkbox">
                                 <div class="checkbox checkbox-default">
-                                    <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
+                                    <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select_np styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
                                     <label for="ignoreprice_<?php echo $co['id'];?>"></label>
                                 </div>
                             </td>
