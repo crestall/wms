@@ -304,6 +304,15 @@ $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form:
                                 <select id="courier_id" name="courier_id" class="form-control selectpicker"><option value="0">-- Select One --</option><?php echo $this->controller->courier->getSelectCouriers(Form::value('courier_id'), false, true);?></select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="form-check">
+                                <label class="form-check-label col-md-3" for="ignore_pc">Ignore Price Check</label>
+                                <div class="col-md-4 checkbox checkbox-default">
+                                    <input class="form-check-input styled" type="checkbox" id="ignore_pc" name="ignore_pc" />
+                                    <label for="ignore_pc"></label>
+                                </div>
+                            </div>
+                        </div>
                         <div id="local-details" style="display:<?php echo $local_display;?>">
                             <input type="hidden" name="local_display" id="local_display" value="1" <?php if(empty(Form::value('local_display'))) echo "disabled";?> />
                             <div class="form-group row">

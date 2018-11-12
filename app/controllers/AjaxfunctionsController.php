@@ -185,7 +185,7 @@ class ajaxfunctionsController extends Controller
 
     public function selectCourier()
     {
-        echo "<pre>",print_r($this->request->data['order_ids']),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data['order_ids']),"</pre>"; die();
         $data = array(
             'error'         => false,
             'error_string'  => '',
@@ -195,12 +195,15 @@ class ajaxfunctionsController extends Controller
         Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Assigned</h2><p>Reasons are listed below</p>");
         Session::set('showfeedback', false);
         Session::set('showerrorfeedback', false);
-        foreach($this->request->data['order_ids'] as $order_id => $courier_id)
+        //foreach($this->request->data['order_ids'] as $order_id => $courier_id)
+        foreach($this->request->data['order_ids'] as $details)
         {
+            $order_id = $details['order_id'];
+            $courier_id = $details['courier_id'];
             /************************   DO NOT UPDATE IF COURIER ALREADY CHOSEN!!!  *******************************/
                 if($this->order->courierAssigned($order_id)) continue;
             /************************   DO NOT UPDATE IF COURIER ALREADY CHOSEN!!!  *******************************/
-            $this->courierselector->assignCourier($order_id, $courier_id);
+            $this->courierselector->assignCourier($order_id, $courier_id, "", $details['ip']);
         }
         if(Session::getAndDestroy('showfeedback') == false)
         {
