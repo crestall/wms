@@ -102,8 +102,8 @@
                             //echo "<pre>",print_r($order),"</pre>";
                             $hc = str_replace("$",'', $row[15]);
                             $hcgst = round(floatval($hc * 1.1), 2);
-                            $hcfuel = round(floatval($hc * 1.1 * 1.125), 2);
-                            $hcmarkup = round(floatval($hc * 1.1 * 1.125 * 1.3), 2);
+                            $hcfuel = round(floatval($hc * 1.1 * Config::get('HUNTERS_FUEL_SURCHARGE')), 2);
+                            $hcmarkup = round(floatval($hc * 1.1 * Config::get('HUNTERS_FUEL_SURCHARGE') * 1.3), 2);
                             $rowclass = ($order['total_cost'] == $hcmarkup)? "" : "class='order_error error'";?>
                             <tr <?php echo $rowclass;?>>
                                 <td class="number"><?php echo $c;?></td>
