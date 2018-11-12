@@ -96,6 +96,12 @@
                         <?php elseif($user_role == "warehouse"):?>
                             <th>Courier</th>
                         <?php endif;?>
+                        <th>
+                            <div class="checkbox checkbox-default">
+                                <input id="select_all_np" class="styled" type="checkbox">
+                                <label for="select_all_np">Ignore Price Restriction</label>&nbsp;<em><small>(all)</small></em>
+                            </div>
+                        </th>
                         <th></th>
                         <th nowrap>
                             <div class="checkbox checkbox-default">
@@ -197,6 +203,12 @@
                                     <p><select name="courier" class="selectpicker courier" id="courier_<?php echo $co['id'];?>" disabled><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                 </td>
                             <?php endif;?>
+                            <td data-label="Ignore Price Restriction" class="chkbox">
+                                <div class="checkbox checkbox-default">
+                                    <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
+                                    <label for="ignoreprice_<?php echo $co['id'];?>"></label>
+                                </div>
+                            </td>
                             <td><?php echo $invoice; ?><br/><?php echo $ps; ?></td>
         					<td data-label="Select" class="chkbox">
                                 <div class="checkbox checkbox-default">
