@@ -657,7 +657,7 @@
                     				{
                     					//ids.push($(this).data('orderid'));
                                         var ip = ( $('#ignoreprice_'+thisid).prop('checked') )? 1: 0;
-                    					ids[thisid] = {courier_id: ip};
+                    					ids[thisid][courier_id] = ip;
                     				}
                                 });
                                 if(Object.keys(ids).length)
