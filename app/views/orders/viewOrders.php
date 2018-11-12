@@ -105,8 +105,9 @@
                         <th></th>
                         <th nowrap>
                             <div class="checkbox checkbox-default">
+                                Select<br/>
                                 <input id="select_all" class="styled" type="checkbox">
-                                <label for="select_all"><strong>Select</strong></label>&nbsp;<em><small>(all)</small></em>
+                                <label for="select_all"><em><small>(all)</small></em></label>
                             </div>
                         </th>
         			</tr>
