@@ -97,8 +97,8 @@
                             <th>Courier</th>
                         <?php endif;?>
                         <th>
+                            Ignore Price Check
                             <div class="checkbox checkbox-default">
-                                Ignore Price Restriction
                                 <input id="select_all_np" class="styled" type="checkbox">
                                 <label for="select_all_np"><em><small>(all)</small></em></label>
                             </div>
