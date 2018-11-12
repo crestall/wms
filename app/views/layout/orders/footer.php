@@ -656,7 +656,8 @@
                     				if( $(this).prop('checked') && courier_id >= 0)
                     				{
                     					//ids.push($(this).data('orderid'));
-                    					ids[thisid] = courier_id;
+                                        var ip = ( $('#ignoreprice_'+thisid).prop('checked') )? 1: 0;
+                    					ids[thisid] = {courier_id: ip};
                     				}
                                 });
                                 if(Object.keys(ids).length)

@@ -102,7 +102,11 @@
     		{
     			$_SESSION['errorfeedback'] .= "<h3>Error Code: ".$e['code']."</h3><h4>".$e['name']."</h4><p>".$e['message']."</p>";
     		}
-    	}
+    	}/*
+        elseif( $sResponse['shipments'][0]['shipment_summary']['total_cost'] > Config::get('MAX_SHIPPING_CHARGE') )
+        {
+
+        }*/
         else
         {
             Session::set('showfeedback', true);
