@@ -310,6 +310,7 @@ $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form:
                                 <div class="col-md-4 checkbox checkbox-default">
                                     <input class="form-check-input styled" type="checkbox" id="ignore_pc" name="ignore_pc" />
                                     <label for="ignore_pc"></label>
+                                    
                                 </div>
                             </div>
                         </div>
