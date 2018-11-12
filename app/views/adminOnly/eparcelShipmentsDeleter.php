@@ -64,7 +64,7 @@
     </div>
     <?php foreach($response['shipments'] as $a):
         if($c > 235) break;
-        $order = $this->controller->order->getOrderByShipmentId($shipment_id);
+        $order = $this->controller->order->getOrderByShipmentId($a['shipment_id']);
         if(empty($order)){
             $id_string .= $a['shipment_id'].",";
             ++$c;
