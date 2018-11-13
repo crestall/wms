@@ -98,6 +98,10 @@
                         Email::sendTrackingEmail($id);
                     }
                 }
+                if($od['client_id'] == 52) //figure8
+                {
+                    $this->notifyFigure8($od);
+                }
                 Session::set('showfeedback', true);
                 $_SESSION['feedback'] .= "<p>{$od['order_number']} has been successfully fulfilled</p>";
             }
@@ -137,6 +141,10 @@
             $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
             //$mailer->sendTrackingEmail($id);
             Email::sendTrackingEmail($od['id']);
+        }
+        if($od['client_id'] == 52) //figure8
+        {
+            $this->notifyFigure8($od);
         }
         Session::set('showfeedback', true);
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by {$od['courier_name']}</p>";
@@ -240,6 +248,10 @@
                         Email::sendTrackingEmail($id);
                         $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
                     }
+                    if($od['client_id'] == 52) //figure8
+                    {
+                        $this->notifyFigure8($od);
+                    }
                     //order is now fulfilled, reduce stock
                     $items = $this->controller->order->getItemsForOrder($id);
                     $this->output .= "Reducing Stock and recording movement fo order id: $id".PHP_EOL;
@@ -321,6 +333,24 @@
     private function recordOutput($file)
     {
         Logger::logOrderFulfillment($file, $this->output);
+    }
+
+    private function notifyFigure8($od, $url = "http://autom8.figure8services.com.au/engage/jobPartsConsignmentStore.php")
+    {
+        $db = Database::openConnection();
+        $courier = $db->queryValue('couriers', array('id' => $od['courier_id']), 'name');
+        if($courier == "Local")
+        {
+            $courier = $od['courier_name'];
+        }
+        $data = array(
+            'figure8_order_id'  => $od['client-order_id'],
+            'courier_name'      => $courier,
+            'consignment_id'    => $od['consignment_id']
+        );
+        $this->output .= "Notifying Figure 8".PHP_EOL;
+        $this->output .= print_r($data, true).PHP_EOL;
+        Curl::sendPostRequest($url, $data);
     }
 
 }
