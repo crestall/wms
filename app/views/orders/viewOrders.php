@@ -91,11 +91,6 @@
         				<th>Date Ordered</th>
         				<!--th>Status</th-->
         				<th>Slip Printed</th>
-                        <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
-                        <?php elseif($user_role == "warehouse"):?>
-                            <th>Courier</th>
-                        <?php endif;?>
                         <th>
                             Ignore Price Check
                             <div class="checkbox checkbox-default">
@@ -103,6 +98,11 @@
                                 <label for="select_all_np"><em><small>(all)</small></em></label>
                             </div>
                         </th>
+                        <?php if($user_role == "admin" || $user_role == "super admin"):?>
+        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
+                        <?php elseif($user_role == "warehouse"):?>
+                            <th>Courier</th>
+                        <?php endif;?>
                         <th></th>
                         <th nowrap>
                             Select
@@ -195,6 +195,12 @@
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
         					<!--td data-label="Status"><?php echo $order_status;?></td-->
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
+                            <td data-label="Ignore Price Restriction" class="chkbox">
+                                <div class="checkbox checkbox-default">
+                                    <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select_np styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
+                                    <label for="ignoreprice_<?php echo $co['id'];?>"></label>
+                                </div>
+                            </td>
                             <?php if($user_role == "admin" || $user_role == "super admin"):?>
             					<td data-label="Courier" nowrap>
             					    <p><select name="courier" class="selectpicker courier" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
@@ -205,12 +211,6 @@
                                     <p><select name="courier" class="selectpicker courier" id="courier_<?php echo $co['id'];?>" disabled><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                 </td>
                             <?php endif;?>
-                            <td data-label="Ignore Price Restriction" class="chkbox">
-                                <div class="checkbox checkbox-default">
-                                    <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select_np styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
-                                    <label for="ignoreprice_<?php echo $co['id'];?>"></label>
-                                </div>
-                            </td>
                             <td><?php echo $invoice; ?><br/><?php echo $ps; ?></td>
         					<td data-label="Select" class="chkbox">
                                 <div class="checkbox checkbox-default">
