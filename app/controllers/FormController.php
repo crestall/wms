@@ -774,10 +774,13 @@ class FormController extends Controller {
                 'instructions'      => NULL,
                 '3pl_comments'      => NULL,
                 'uploaded_file'     => NULL,
-                'eparcel_express'   => 0
+                'eparcel_express'   => 0,
+                'client_order_id'   => NULL
             );
             if($this->dataSubbed($company_name))
                 $vals['company_name'] = $company_name;
+            if($this->dataSubbed($client_order_id))
+                $vals['client_order_id'] = $client_order_id;
             if($this->dataSubbed($contact_phone))
                 $vals['contact_phone'] = $contact_phone;
             if($this->dataSubbed($tracking_email))
