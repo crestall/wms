@@ -3,6 +3,7 @@ $deliver_to = empty(Form::value('deliver_to'))? $deliver_to: Form::value('delive
 $tracking_email = empty(Form::value('tracking_email'))? $tracking_email: Form::value('tracking_email');
 $signature_req = !empty(Form::value('signature_req'))? true: $signature_req;
 $express_post = !empty(Form::value('express_post'))? true: $express_post;
+$client_order_id = empty(Form::value('client_order_id'))? $client_order_id : Form::value('client_order_id')
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -74,6 +75,12 @@ $express_post = !empty(Form::value('express_post'))? true: $express_post;
                         <?php endif;?>
                         <ul id="fileList"></ul>
                         <?php echo Form::displayError('invoice');?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Client Order Number</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="client_order_id" id="client_order_id" value="<?php echo $client_order_id;?>" />
                     </div>
                 </div>
                 <div class="form-group row">
