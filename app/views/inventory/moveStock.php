@@ -4,6 +4,9 @@
         <div class="col-lg-3">
             <p><a class="btn btn-primary" href="/inventory/view-inventory/client=<?php echo $product_info['client_id'];?>">Return to Clients Inventory</a></p>
         </div>
+        <div class="col-lg-3">
+            <p><a class="btn btn-primary" href="/inventory/add-subtract-stock/product=<?php echo $product_id;?>">Add/Subtract Stock for This Item</a></p>
+        </div>
     </div>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
     <div class="row">
