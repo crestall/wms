@@ -3,7 +3,7 @@ $deliver_to = empty(Form::value('deliver_to'))? $deliver_to: Form::value('delive
 $tracking_email = empty(Form::value('tracking_email'))? $tracking_email: Form::value('tracking_email');
 $signature_req = !empty(Form::value('signature_req'))? true: $signature_req;
 $express_post = !empty(Form::value('express_post'))? true: $express_post;
-$client_order_id = empty(Form::value('client_order_id'))? : $client_order_id : Form::value('client_order_id')
+$client_order_id = empty(Form::value('client_order_id'))? $client_order_id : Form::value('client_order_id')
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
