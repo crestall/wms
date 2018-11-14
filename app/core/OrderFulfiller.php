@@ -344,7 +344,7 @@
             $courier = $od['courier_name'];
         }
         $data = array(
-            'figure8_order_id'  => $od['client-order_id'],
+            'figure8_order_id'  => $od['client_order_id'],
             'courier_name'      => $courier,
             'consignment_id'    => $od['consignment_id']
         );
