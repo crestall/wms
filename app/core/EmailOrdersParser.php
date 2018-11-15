@@ -664,7 +664,7 @@ class EmailOrdersParser{
                     'items'                 => array(),
                     'ref2'                  => '',
                     'client_order_id'       => $o['JobNo'],
-                    'customer_order_id'     => $o['Parts'][0]['partsOrderedGroupId']
+                    'customer_order_id'     => $o['Parts'][0]['partsOrderedGroupId'],
                     'errors'                => 0,
                     'tracking_email'        => "",
                     'ship_to'               => "",
