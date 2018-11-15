@@ -81,8 +81,8 @@ class Woocommerce{
         /* */
         if($orders = $this->procTTOrders($collected_orders))
         {
-            echo "<pre>",print_r($this->ttoitems),"</pre>";die();
-            //$this->addBBOrders($orders);
+            //echo "<pre>",print_r($this->ttoitems),"</pre>";die();
+            $this->addTTOrders($orders);
         }
         Logger::logOrderImports('order_imports/tt_aust', $this->output); //die();
         //if (php_sapi_name() !='cli')
@@ -721,6 +721,95 @@ class Woocommerce{
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($this->bboitems[$o['client_order_id']], true).PHP_EOL;
+            ++$this->return_array['import_count'];
+             /*change status in woocommerce */
+            $this->output .= "Updating woocommerce status to completed fo order id ".$o['client_order_id'].PHP_EOL;
+            try{
+                $this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));
+            }
+            catch (HttpClientException $e) {
+                $this->output .=  $e->getMessage() .PHP_EOL;
+                //$output .=  $e->getRequest() .PHP_EOL;
+                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            }
+        }
+    }
+
+    private function addTTOrders($orders)
+    {
+        foreach($orders as $o)
+        {
+            //check for errors first
+            $item_error = false;
+            $error_string = "";
+            foreach($this->ttoitems[$o['client_order_id']] as $item)
+            {
+                if($item['item_error'])
+                {
+                    $item_error = true;
+                    $error_string .= $item['item_error_string'];
+                }
+            }
+            if($item_error)
+            {
+                $message = "<p>There was a problem with some items</p>";
+                $message .= $error_string;
+                $message .= "<p>Orders with these items will not be processed at the moment</p>";
+                $message .= "<p>Order ID: {$o['client_order_id']}</p>";
+                $message .= "<p>Customer: {$o['ship_to']}</p>";
+                $message .= "<p>Address: {$o['address']}</p>";
+                $message .= "<p>{$o['address_2']}</p>";
+                $message .= "<p>{$o['suburb']}</p>";
+                $message .= "<p>{$o['state']}</p>";
+                $message .= "<p>{$o['postcode']}</p>";
+                $message .= "<p>{$o['country']}</p>";
+                $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
+                //if (php_sapi_name() !='cli')
+                if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+                {
+                    ++$this->return_array['error_count'];
+                    $this->return_array['error_string'] .= $message;
+                }
+                else
+                {
+                    Email::sendBBImportError($message);
+
+                }
+                continue;
+            }
+            if($o['import_error'])
+            {
+                $this->return_array['import_error'] = true;
+                $this->return_array['import_error_string'] = $o['import_error_string'];
+                continue;
+            }
+            //insert the order
+            $vals = array(
+                'client_order_id'       => $o['client_order_id'],
+                'client_id'             => 66,
+                'deliver_to'            => $o['ship_to'],
+                'company_name'          => $o['company_name'],
+                'date_ordered'          => $o['date_ordered'],
+                'tracking_email'        => $o['tracking_email'],
+                'weight'                => $o['weight'],
+                'delivery_instructions' => $o['instructions'],
+                'errors'                => $o['errors'],
+                'error_string'          => $o['error_string'],
+                'address'               => $o['address'],
+                'address2'              => $o['address_2'],
+                'state'                 => $o['state'],
+                'suburb'                => $o['suburb'],
+                'postcode'              => $o['postcode'],
+                'country'               => $o['country'],
+                'contact_phone'         => $o['contact_phone']
+            );
+            if($o['signature_req'] == 1) $vals['signature_req'] = 1;
+            if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
+            $itp = array($this->ttoitems[$o['client_order_id']]);
+            $order_number = $this->controller->order->addOrder($vals, $itp);
+            $this->output .= "Inserted Order: $order_number".PHP_EOL;
+            $this->output .= print_r($vals,true).PHP_EOL;
+            $this->output .= print_r($this->ttoitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
              /*change status in woocommerce */
             $this->output .= "Updating woocommerce status to completed fo order id ".$o['client_order_id'].PHP_EOL;
