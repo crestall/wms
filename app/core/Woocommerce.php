@@ -81,7 +81,7 @@ class Woocommerce{
         /* */
         if($orders = $this->procTTOrders($collected_orders))
         {
-            //echo "<pre>",print_r($this->bboitems),"</pre>";die();
+            echo "<pre>",print_r($this->ttoitems),"</pre>";die();
             //$this->addBBOrders($orders);
         }
         Logger::logOrderImports('order_imports/tt_aust', $this->output); //die();
@@ -1318,7 +1318,7 @@ class Woocommerce{
                     $orders[] = $order;
                 }
             }//endforeach order
-            echo "<pre>",print_r($orders),"</pre>";die();
+            echo "<pre>",print_r($orders),"</pre>";//die();
             $this->ttoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
 
             return $orders;
