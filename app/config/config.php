@@ -148,6 +148,12 @@ return array(
     'NSWOOCONSUMERSECRET'   => 'cs_1f06eb7816ca9c703b7234881fe4d8b43cbcc134',
 
     /*************************************************************************
+    * TTAUST WOO COMMERCE API constants
+    **************************************************************************/
+    'TTWOOCONSUMERRKEY'     => 'ck_c35deeeb03f80f698a77ebf8567b889664d3959c',
+    'TTWOOCONSUMERSECRET'   => 'cs_de63e0f9fe17d8adc4d7b3b03ec3b054106d9d8b',
+
+    /*************************************************************************
     * TradeGecko API constants
     **************************************************************************/
     'TRADEGECKO_BEARER' => 'd775545a80bb2cdbfe573a960f840e67c29c91b4b82ad10e1e0b756f72e7a06c',

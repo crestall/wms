@@ -53,7 +53,7 @@
         </div>
     </div>
     <?php
-    $response = $this->controller->Eparcel->GetShipments(0, 400, array('status' => 'initiated'));
+    $response = $this->controller->Eparcel->GetShipments(0, 400, array('status' => 'created'));
     $id_string = "";
     $c = 0;
     ?>

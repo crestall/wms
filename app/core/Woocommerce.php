@@ -33,6 +33,66 @@ class Woocommerce{
         $this->controller = $controller;
     }
 
+    public function getTTOrders()
+    {
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "TTAust ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $this->woocommerce = new Client(
+            'https://foreversharpknives.com.au',
+            Config::get('TTWOOCONSUMERRKEY'),
+            Config::get('TTWOOCONSUMERSECRET'),
+            [
+                'wp_api' => true,
+                'version' => 'wc/v1',
+                'query_string_auth' => true
+            ]
+        );
+        $collected_orders = array();
+        try {
+            $page = 1;
+            $next_page = $this->woocommerce->get('orders', array('status' => 'processing', 'orderby' => 'date', 'per_page' => 100, 'page' => $page));
+            //$next_page = $this->woocommerce->get('orders/100595');
+            $collected_orders = $next_page;
+            while(count($next_page))
+            {
+                ++$page;
+                $next_page = $this->woocommerce->get('orders', array('status' => 'processing', 'orderby' => 'date', 'per_page' => 100, 'page' => $page));
+                $collected_orders = array_merge($collected_orders, $next_page);
+            }
+            //$collected_orders = $this->woocommerce->get('orders', array('status' => 'processing', 'orderby' => 'date', 'per_page' => 100));
+        } catch (HttpClientException $e) {
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            //$output .=  $e->getRequest() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+            {
+                Email::sendCronError($e, "Big Bottle");
+                return;
+            }
+            else
+            {
+                $this->return_array['import_error'] = true;
+                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                return $this->return_array;
+            }
+        }
+        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        /*
+        if($orders = $this->procBBOrders($collected_orders))
+        {
+            //echo "<pre>",print_r($this->bboitems),"</pre>";die();
+            $this->addBBOrders($orders);
+        }
+        Logger::logOrderImports('order_imports/big_bottle', $this->output); //die();
+        //if (php_sapi_name() !='cli')
+        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        {
+            return $this->return_array;
+        }
+        */
+    }
+
     public function getBBOrder($wcorder_id = false)
     {
         if(!$wcorder_id)
