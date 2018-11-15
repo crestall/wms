@@ -66,7 +66,8 @@ class OrdersController extends Controller
             'page_title'        =>  "Import Orders From External Sites",
             'bb_clientid'       =>  $this->client->getClientId("THE BIG BOTTLE CO"),
             'nuchev_clientid'   =>  $this->client->getClientId("NUCHEV"),
-            'noa_clientid'      =>  $this->client->getClientId("Noa Sleep")
+            'noa_clientid'      =>  $this->client->getClientId("Noa Sleep"),
+            'tt_clientid'       =>  $this->client->getClientId("Two T Australia")
         ]);
     }
 
@@ -208,6 +209,21 @@ class OrdersController extends Controller
     {
        $response = $this->woocommerce->getBBOrders();
        $feedback = "<h2><i class='far fa-check-circle'></i>Big Bottle Orders Imported</h2>";
+       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
+       if($response['error_count'] > 0)
+       {
+           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
+           $feedback .= "<p>The error response is listed below</p>";
+           $feedback .= $response['error_string'];
+       }
+       Session::set('feedback', $feedback);
+       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
+    }
+
+    public function importTTOrders()
+    {
+       $response = $this->woocommerce->getTTOrders();
+       $feedback = "<h2><i class='far fa-check-circle'></i>TT Aust Orders Imported</h2>";
        $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
        if($response['error_count'] > 0)
        {

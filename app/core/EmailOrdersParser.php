@@ -602,6 +602,7 @@ class EmailOrdersParser{
             //insert the order
             $vals = array(
                 'client_order_id'       => $o['client_order_id'],
+                'customer_order_id'     => $o['customer_order_id'],
                 'client_id'             => 52,
                 'deliver_to'            => $o['ship_to'],
                 'company_name'          => $o['company_name'],
@@ -663,6 +664,7 @@ class EmailOrdersParser{
                     'items'                 => array(),
                     'ref2'                  => '',
                     'client_order_id'       => $o['JobNo'],
+                    'customer_order_id'     => $o['Parts'][0]['partsOrderedGroupId']
                     'errors'                => 0,
                     'tracking_email'        => "",
                     'ship_to'               => "",

@@ -23,10 +23,10 @@ class Allocations{
         $oi_index = 0;
         //echo "<pre>",print_r($items),"</pre>"; die();
         $import_error = false;
-        $import_error_string = "";
         foreach($items as $oid => $order_items)
         {
             $values = array();
+            $import_error_string = "";
             $item_error = false;
             $item_error_string = "<ul>";
             $order_error_string = "";
