@@ -344,13 +344,13 @@
             $courier = $od['courier_name'];
         }
         $data = array(
-            'figure8_order_id'  => $od['client_order_id'],
-            'courier_name'      => $courier,
-            'consignment_id'    => $od['consignment_id']
+            'partsOrderedGroupid'   => $od['customer_order_id'],
+            'courier_name'          => $courier,
+            'consignment_id'        => $od['consignment_id']
         );
         $this->output .= "Notifying Figure 8".PHP_EOL;
         $this->output .= print_r($data, true).PHP_EOL;
-        Curl::sendPostRequest($url, $data);
+        Curl::sendPostRequest($url, $data, 'form');
     }
 
 }
