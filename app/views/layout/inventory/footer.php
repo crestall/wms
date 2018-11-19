@@ -263,6 +263,7 @@
                             "drawCallback": function( settings ) {
                                 $('button.deletebutton').click(function(e){
                                     e.preventDefault();
+                                    var $but = $(e.target);
                                     swal({
                                         title: "Really delete this allocation?",
                                         text: "This cannot be undone",
@@ -271,8 +272,9 @@
                                         dangerMode: true,
                                     }).then( function(willDelete) {
                                         if (willDelete) {
+                                            console.log('target: '+e.target);
                                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deleting allocation...</h1></div>' });
-                                            $.post('/ajaxfunctions/deleteClientLocation', {id: $(this).data('allocationid')}, function(d){
+                                            $.post('/ajaxfunctions/deleteClientLocation', {id: $but.data('allocationid')}, function(d){
                                                 //window.location.reload();
                                             })
                                         }
