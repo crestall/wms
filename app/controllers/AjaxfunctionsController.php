@@ -232,7 +232,7 @@ class ajaxfunctionsController extends Controller
 
     public function deleteClientLocation()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $this->clientslocation->deleteAllocation($this->request->data['id']);
         Session::set('feedback', 'That location has had its allocation removed');
     }
