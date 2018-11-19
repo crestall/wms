@@ -259,7 +259,26 @@
                         dataTable.init($('table#client_locations_table'), {
                             "columnDefs": [
                                 { "orderable": false, "targets": [2,3] }
-                            ]
+                            ],
+                            "drawCallback": function( settings ) {
+                                $('button.deletebutton').click(function(e){
+                                    e.preventDefault();
+                                    swal({
+                                        title: "Really delete this allocation?",
+                                        text: "This cannot be undone",
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true,
+                                    }).then( function(willDelete) {
+                                        if (willDelete) {
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deleting allocation...</h1></div>' });
+                                            $.post('/ajaxfunctions/deleteClientLocation', {id: $(this).data('allocationid')}, function(d){
+                                                window.location.reload();
+                                            })
+                                        }
+                                    });
+                                });
+                            }
                         } );
 
                         $('select#client_id, select#location').change(function(e){
