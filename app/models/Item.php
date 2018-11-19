@@ -666,7 +666,7 @@ class Item extends Model{
         {
             //$client_id = $db->queryValue('items', array('id' => $id), 'client_id');
             $locations = $db->queryData("SELECT * FROM items_locations WHERE item_id = $item_id");
-            echo "<pre>",print_r($locations),"</pre>"; die();
+            //echo "<pre>",print_r($locations),"</pre>"; die();
             foreach($locations as $l)
             {
                 $chosen_location = $db->queryValue('locations', array('id' => $l['location_id']), 'location');
