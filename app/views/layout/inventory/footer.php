@@ -273,7 +273,7 @@
                                         if (willDelete) {
                                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deleting allocation...</h1></div>' });
                                             $.post('/ajaxfunctions/deleteClientLocation', {id: $(this).data('allocationid')}, function(d){
-                                                window.location.reload();
+                                                //window.location.reload();
                                             })
                                         }
                                     });
