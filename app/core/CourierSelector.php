@@ -201,7 +201,7 @@
         elseif( isset($result['errorCode']) )
         {
             Session::set('showerrorfeedback', true);
-            $_SESSION['errorfeedback'] .= "<p>There was an error submitting $order_no to Hunters</p>";
+            $_SESSION['errorfeedback'] .= "<p>There was an error submitting {$this->order_details['order_number']} to Hunters</p>";
             $_SESSION['errorfeedback'] .= "<p>Error Code: {$result['errorCode']}</p>";
             $_SESSION['errorfeedback'] .= "<p>Error Message: {$result['errorMessage']}</p>";
         }
