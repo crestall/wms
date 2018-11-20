@@ -30,7 +30,7 @@ class Curl{
                 )
             );
             $fields_string = '';
-            foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+            foreach($data as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
             rtrim($fields_string, '&');
             curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         }
