@@ -704,7 +704,7 @@ class Order extends Model{
         {
             $q .= " AND store_order = $store_order";
         }
-        $q .= " ORDER BY client_id, courier_id ASC, country, consignment_id, date_ordered ASC";
+        $q .= " ORDER BY errors DESC, client_id, courier_id ASC, country, consignment_id, date_ordered ASC";
         //die($q);
         return ($db->queryData($q));
     }
