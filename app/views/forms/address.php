@@ -42,7 +42,7 @@
             <div class="col-md-4">
                 <input type="text" class="form-control required" name="country" id="country" value="<?php echo $country;?>" />
                 <span class="inst">use the 2 letter ISO code</span>
-                <p><a href="https://www.nationsonline.org/oneworld/country_code_list.htm" target="_blank">Click Here To Look Up Codes</a></p>
+                <p><a href="https://www.nationsonline.org/oneworld/country_code_list.htm" target="_blank" class="btn btn-success">Click Here To Look Up Codes</a></p>
                 <?php echo Form::displayError('country');?>
             </div>
         </div>
