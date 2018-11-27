@@ -132,8 +132,8 @@ return array(
     /*************************************************************************
     * BIG BOTTLE WOO COMMERCE API constants
     **************************************************************************/
-    'BBWOOCONSUMERRKEY'     => 'ck_9c6362afa32a5e35b461c077f7513eb936310efe',
-    'BBWOOCONSUMERSECRET'   => 'cs_ea86707d76401fe25759739c327d49afd7929934',
+    'BBWOOCONSUMERRKEY'     => 'ck_99e22a0fb0e0c80de41df7352f7b4fb4903bbed8',
+    'BBWOOCONSUMERSECRET'   => 'cs_c682973552f96637cd2d09d7a820343bdb7f2585',
 
     /*************************************************************************
     * NUCHEV WOO COMMERCE API constants
