@@ -490,6 +490,7 @@ class ajaxfunctionsController extends Controller
             $h_details = $this->Hunters3KG->getDetails($od, $items);
             //echo "<pre>",print_r($h_details),"</pre>";
             $h3kg_result = $this->Hunters3KG->getQuote($h_details);
+			//echo "<pre>",print_r($h3kg_result),"</pre>";
             $hunters3kg_charge =  "$".number_format($h3kg_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
             $hplu_result = $this->HuntersPLU->getQuote($h_details);
             $huntersplu_charge =  "$".number_format($hplu_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);

@@ -467,29 +467,29 @@
 
         $courier_name = $db->queryValue('couriers', array('id' => $od['courier_id']), 'name');
         $content = "";
-        if(!empty($od['customer_order_id']))
+        if( !empty($od['customer_order_id']) )
         {
-            $content .= "<p>Your order number: {$od['customer_order_id']}</p>";
+            $content .= "<p>Your order number: {$od['customer_order_id']}</p><p></p>";
         }
-        if($courier_name == "Hunters")
+        if($courier_name == "Hunters Small" || $courier_name == "Hunters Bulk" || $courier_name == "Hunters Pallet")
         {
             $content .= "
-                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong></p>
-                <p>Please visit <a href='https://www.hunterexpress.com.au'>www.hunterexpress.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Quick Track' form at the top right of the webpage</p>
+                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                <p>Please visit <a href='https://www.hunterexpress.com.au'>www.hunterexpress.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Quick Track' form at the top right of the webpage.</p>
             ";
         }
         elseif($courier_name == "eParcel" || $courier_name == "eParcel Express")
         {
             $content .= "
-                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong></p>
-                <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order</p>
+                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order.</p>
             ";
         }
         elseif($courier_name == "DHL")
         {
             $content .= "
-                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong></p>
-                    <p>Click the following link <a href='https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}'>https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}</a> to track your order</p>
+                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                    <p>Click the following link <a href='https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}'>https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}</a> to track your order.</p>
             ";
         }
         else
@@ -498,22 +498,22 @@
             if(preg_match("/hunter(s)?/i", $courier_name, $matches))
             {
                     $content .= "
-                            <p>Your tracking number is <strong>{$od['consignment_id']}</strong></p>
-                            <p>Please visit <a href='https://www.hunterexpress.com.au'>www.hunterexpress.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Quick Track' form at the top right of the webpage</p>
+                            <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                            <p>Please visit <a href='https://www.hunterexpress.com.au'>www.hunterexpress.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Quick Track' form at the top right of the webpage.</p>
                     ";
             }
             elseif(preg_match("/eparcel( express)?/i", $courier_name, $matches))
             {
                     $content .= "
-                            <p>Your tracking number is <strong>{$od['consignment_id']}</strong></p>
-                            <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order</p>
+                            <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                            <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order.</p>
                     ";
             }
             else
             {
                     $content .= "
-                            <p>Your tracking number is <strong>{$od['consignment_id']}</strong></p>
-                            <p>Your order has been shipped with $courier_name</p><p>To check the status of your order, please contact them and quote {$od['consignment_id']}</p>
+                            <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                            <p>Your order has been shipped with $courier_name</p><p>To check the status of your order, please contact them and quote {$od['consignment_id']}.</p>
                     ";
             }
         }
