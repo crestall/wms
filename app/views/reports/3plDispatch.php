@@ -34,6 +34,7 @@
                                 <th>Entered By</th>
                                 <th>Date Dispatched</th>
                             	<th>Order No</th>
+                                <th>Client Order Number</th>
                                 <th>Shipped To</th>
                                 <th>Items</th>
                                 <th>Charge Code</th>
@@ -53,6 +54,7 @@
                                 <td data-label="Entered By"><?php echo $co['entered_by'];?></td>
                                 <td data-label="Date Fulfilled" class="number" ><?php echo $co['date_fulfilled'];?></td>
                             	<td data-label="WMS Order Number"  class="number"><a href="/orders/order-update/order=<?php echo $co['id'];?>"><?php echo str_pad($co['order_number'],8,'0',STR_PAD_LEFT);?></a></td>
+                                <td data-label="Client Order ID" class="number"><?php echo $co['client_order_number'];?></td> 
                                 <td data-label="Shipped To" class="nowrap shipped_to"><?php echo $co['shipped_to'];?></td>
                                 <td data-label="Items" class="nowrap items"><?php echo $co['items'];?></td>
                                 <td data-label="Charge Code"><?php echo $co['charge_code'];?></td>
