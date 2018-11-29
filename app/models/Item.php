@@ -37,9 +37,11 @@
   getPackingTypesForItem($item_id)
   getPalletCountSelect($item_id)
   getPreferredPickLocationId($item_id)
+  getSelectCollectionItems($selected = false)
   getSelectPackitems($selected = false)
   getStockOnHand($item_id)
   getStockUnderQC($item_id)
+  isCollection($item_id)
   isDoubleBayItem($item_id)
   isPalletItem($item_id)
   makePackes($data)
@@ -494,11 +496,35 @@ class Item extends Model{
         return $return_string;
     }
 
+    public function getSelectCollectionItems($selected = false)
+    {
+        $db = Database::openConnection();
+        $return_string = "";
+        $items = $db->queryData("SELECT * FROM items WHERE collection = 1 ORDER BY name");
+        foreach($items as $i)
+        {
+            $return_string .= "<option value='{$i['id']}'";
+            if($selected && $selected == $i['id'])
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+            $return_string .= ">{$i['name']} ({$i['sku']})</option>";
+        }
+        return $return_string;
+    }
+
     public function getPackItemDetails($item_id)
     {
         $db = Database::openConnection();
 
         return $db->queryData("SELECT * FROM pack_items pi JOIN items i ON pi.linked_item_id = i.id WHERE item_id = $item_id");
+    }
+
+    public function getCollectionDetails($item_id)
+    {
+        $db = Database::openConnection();
+
+        return $db->queryData("SELECT * FROM collections c JOIN items i ON c.linked_item_id = i.id WHERE item_id = $item_id");
     }
 
     public function getAutocompleteItems($data, $fulfilled_id)
@@ -995,6 +1021,12 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         return $db->queryValue($this->table, array('id' => $item_id), 'pack_item') > 0;
+    }
+
+    public function isCollection($item_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $item_id), 'collection') > 0;
     }
 
     public function getLocationsForItem($item_id)

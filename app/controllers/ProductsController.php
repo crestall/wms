@@ -61,6 +61,45 @@ class productsController extends Controller
         ]);
     }
 
+    public function collectionsEdit()
+    {
+        $client_id = 0;
+        $item_id = 0;
+        $client_name = "";
+        $items = array();
+        $sis = 0;
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['product']))
+            {
+                $item_id = $this->request->params['args']['product'];
+                $item_details = $this->item->getItemById($item_id);
+                $items = $this->item->getCollectionDetails($item_id);
+                if(count($items))
+                {
+                    $sis = '';
+                    foreach($items as $i):
+                        $sis .= $i['linked_item_id'].",";
+                    endforeach;
+                    $sis = rtrim($sis, ",");
+                }
+                $client_id = $item_details['client_id'];
+            }
+        }
+
+        //render the page
+        Config::setJsConfig('curPage', "collections-edit");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/collectionsEdit.php',
+        [
+            'page_title'  =>  "Collection Update",
+            'items'       =>  $items,
+            'item_id'     =>  $item_id,
+            'sis'         =>  $sis,
+            'client_id'   =>  $client_id,
+            'item_details'
+        ]);
+    }
+
     public function editProduct()
     {
         $product_id = $this->request->params['args']['product'];
