@@ -11,6 +11,22 @@
                             $("#per_pallet_holder").slideToggle('slow');
                         });
 
+                        $('#collection').click(function(e){
+                            if(this.checked)
+                            {
+                                $('#pack_item').prop('checked', false);
+                            }
+
+                        });
+
+                        $('#pack_item').click(function(e){
+                            if(this.checked)
+                            {
+                                $('#collection').prop('checked', false);
+                            }
+
+                        });
+
                         $('#package_type').change(function(e){
                             var html = "";
                             $("option:selected", this).each(function(){
