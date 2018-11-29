@@ -132,6 +132,15 @@ $per_pallet_display = (empty(Form::value('palletized')))? "none" : "block";
             </div>
             <div class="form-group row">
                 <div class="form-check">
+                    <label class="form-check-label col-md-3" for="collection">Collection</label>
+                    <div class="col-md-4 checkbox checkbox-default">
+                        <input class="form-check-input styled" type="checkbox" id="collection" name="collection" <?php if(!empty(Form::value('collection'))) echo "checked";?> />
+                        <label for="collection"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-check">
                     <label class="form-check-label col-md-3" for="double_bay">Double Bay Item</label>
                     <div class="col-md-4 checkbox checkbox-default">
                         <input class="form-check-input styled" type="checkbox" id="double_bay" name="double_bay" <?php if(!empty(Form::value('double_bay'))) echo "checked";?> />
