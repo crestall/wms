@@ -335,6 +335,7 @@ return array(
 			'edit-product'			=> false,
 			//'bulk-product-upload'	=>	true,
             'pack-items-edit'       =>  true,
+            'collections-edit'      =>  true,
             'product-search'        =>  true,
 		),
         'inventory'   =>  array(
