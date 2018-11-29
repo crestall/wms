@@ -489,7 +489,7 @@ class Item extends Model{
         	{
         		$return_string .= "selected='selected' ";
         	}
-            $return_string .= ">{$i['name']} ({$i['sku']}</option>";
+            $return_string .= ">{$i['name']} ({$i['sku']})</option>";
         }
         return $return_string;
     }
