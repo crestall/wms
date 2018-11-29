@@ -591,6 +591,7 @@ class Item extends Model{
             'palletized'                    =>  $palletized
         );
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
+        $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (isset($per_pallet))? $per_pallet : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
@@ -632,6 +633,7 @@ class Item extends Model{
         $item_values['active'] = (isset($active))? 1 : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
+        $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (isset($per_pallet))? $per_pallet : 0;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
         elseif(isset($delete_image)) $item_values['image'] = null;
