@@ -546,6 +546,30 @@ class Item extends Model{
         return $db->queryData("SELECT * FROM collections c JOIN items i ON c.linked_item_id = i.id WHERE item_id = $item_id");
     }
 
+    public function getAutocompleteAllItems($data, $fulfilled_id)
+    {
+        $db = Database::openConnection();
+        $return_array = array();
+        $q = $data["item"];
+        $client_id = $data['clientid'];
+        $query = "SELECT * FROM items WHERE active = 1 AND (name LIKE :term1 OR sku LIKE :term2) AND client_id = $client_id ORDER BY name";
+        $array = array(
+            'term1' =>  '%'.$q.'%',
+            'term2' =>  '%'.$q.'%'
+        );
+        //echo $query;die();
+        $rows = $db->queryData($query, $array);
+        foreach($rows as $row)
+        {
+            $row_array['value'] = $row['name']." (".$row['sku'].")";
+            if(!empty($row['publisher'])) $row_array['value'] = $row['name']." (".$row['publisher'].")";
+            $row_array['sku'] = $row['sku'];
+            $row_array['item_id'] = $row['item_id'];
+            array_push($return_array,$row_array);
+        }
+        return $return_array;
+    }
+
     public function getAutocompleteItems($data, $fulfilled_id)
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
