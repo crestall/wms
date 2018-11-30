@@ -586,7 +586,7 @@ var autoCompleter = {
                 }
                 else
                 {
-                   url = "/ajaxfunctions/getItems/?item="+req.term+"&clientid="+$('#client_id').val()+"&checkavailable="+check_available;
+                   url = "/ajaxfunctions/getAllItems/?item="+req.term+"&clientid="+$('#client_id').val()+"&checkavailable="+check_available;
                 }
                 //console.log(url);
             	$.getJSON(url, function(data){
