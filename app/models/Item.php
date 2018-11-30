@@ -47,6 +47,7 @@
   makePackes($data)
   moveStock($data)
   skuTaken($sku, $current_sku = false)
+  updateCollection($items, $item_id)
   updatePackItem($items, $id),
   updateWarningLevel($data)
 

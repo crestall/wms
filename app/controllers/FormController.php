@@ -1678,7 +1678,7 @@ class FormController extends Controller {
         }
         else
         {
-            $this->item->updatePackItem($this->request->data['items'], $item_id);
+            $this->item->updateCollection($this->request->data['items'], $item_id);
             Session::set('feedback', 'Those details have been updated');
         }
         return $this->redirector->to(PUBLIC_ROOT."products/collections-edit/product=$item_id");
