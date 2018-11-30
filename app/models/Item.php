@@ -479,6 +479,25 @@ class Item extends Model{
             }
     }
 
+    public function updateCollection($items, $item_id)
+    {
+        $db = Database::openConnection();
+
+        //delete previous entries
+            $db->deleteQuery('collections', $item_id, 'item_id');
+            //add the new ones
+            foreach($items as $id => $array)
+            {
+                $number = $array['qty'];
+                $values = array(
+                    'item_id'           =>  $item_id,
+                    'linked_item_id'    =>  $id,
+                    'number'            =>  $number
+                );
+                $db->insertQuery('pack_items', $values);
+            }
+    }
+
     public function getSelectPackitems($selected = false)
     {
         $db = Database::openConnection();
