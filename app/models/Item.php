@@ -564,7 +564,7 @@ class Item extends Model{
             $row_array['value'] = $row['name']." (".$row['sku'].")";
             if(!empty($row['publisher'])) $row_array['value'] = $row['name']." (".$row['publisher'].")";
             $row_array['sku'] = $row['sku'];
-            $row_array['item_id'] = $row['item_id'];
+            $row_array['item_id'] = $row['id'];
             array_push($return_array,$row_array);
         }
         return $return_array;
