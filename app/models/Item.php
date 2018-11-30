@@ -495,7 +495,7 @@ class Item extends Model{
                     'linked_item_id'    =>  $id,
                     'number'            =>  $number
                 );
-                $db->insertQuery('pack_items', $values);
+                $db->insertQuery('collections', $values);
             }
     }
 
