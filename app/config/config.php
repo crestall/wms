@@ -350,7 +350,8 @@ return array(
             'goods-out'             =>  true,
             'goods-in'               =>  true,
             'add-subtract-stock'    =>  false,
-            'quality-control'       =>  false
+            'quality-control'       =>  false,
+            'replenish-pickface'    => true
         ),
 		'reports'			=> array(
           	//'product-movement-summary'	=>	true,
@@ -457,6 +458,7 @@ return array(
             'add-subtract-stock'    =>  false,
             'quality-control'       =>  false,
             'pack-items-manage'     =>  true,
+            'replenish-pickface'    => true
         ),
         'staff'   =>  array(
             'time-sheets'   =>  true,
