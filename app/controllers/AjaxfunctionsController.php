@@ -559,6 +559,13 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function getAllItems()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";
+        $data = $this->item->getAutocompleteAllItems($this->request->query, $this->order->fulfilled_id);
+        $this->view->renderJson($data);
+    }
+
     public function checkBarcodes()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();

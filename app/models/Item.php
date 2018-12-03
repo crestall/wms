@@ -37,14 +37,17 @@
   getPackingTypesForItem($item_id)
   getPalletCountSelect($item_id)
   getPreferredPickLocationId($item_id)
+  getSelectCollectionItems($selected = false)
   getSelectPackitems($selected = false)
   getStockOnHand($item_id)
   getStockUnderQC($item_id)
+  isCollection($item_id)
   isDoubleBayItem($item_id)
   isPalletItem($item_id)
   makePackes($data)
   moveStock($data)
   skuTaken($sku, $current_sku = false)
+  updateCollection($items, $item_id)
   updatePackItem($items, $id),
   updateWarningLevel($data)
 
@@ -477,6 +480,25 @@ class Item extends Model{
             }
     }
 
+    public function updateCollection($items, $item_id)
+    {
+        $db = Database::openConnection();
+
+        //delete previous entries
+            $db->deleteQuery('collections', $item_id, 'item_id');
+            //add the new ones
+            foreach($items as $id => $array)
+            {
+                $number = $array['qty'];
+                $values = array(
+                    'item_id'           =>  $item_id,
+                    'linked_item_id'    =>  $id,
+                    'number'            =>  $number
+                );
+                $db->insertQuery('collections', $values);
+            }
+    }
+
     public function getSelectPackitems($selected = false)
     {
         $db = Database::openConnection();
@@ -489,7 +511,24 @@ class Item extends Model{
         	{
         		$return_string .= "selected='selected' ";
         	}
-            $return_string .= ">{$i['name']}</option>";
+            $return_string .= ">{$i['name']} ({$i['sku']})</option>";
+        }
+        return $return_string;
+    }
+
+    public function getSelectCollectionItems($selected = false)
+    {
+        $db = Database::openConnection();
+        $return_string = "";
+        $items = $db->queryData("SELECT * FROM items WHERE collection = 1 ORDER BY name");
+        foreach($items as $i)
+        {
+            $return_string .= "<option value='{$i['id']}'";
+            if($selected && $selected == $i['id'])
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+            $return_string .= ">{$i['name']} ({$i['sku']})</option>";
         }
         return $return_string;
     }
@@ -499,6 +538,37 @@ class Item extends Model{
         $db = Database::openConnection();
 
         return $db->queryData("SELECT * FROM pack_items pi JOIN items i ON pi.linked_item_id = i.id WHERE item_id = $item_id");
+    }
+
+    public function getCollectionDetails($item_id)
+    {
+        $db = Database::openConnection();
+
+        return $db->queryData("SELECT * FROM collections c JOIN items i ON c.linked_item_id = i.id WHERE item_id = $item_id");
+    }
+
+    public function getAutocompleteAllItems($data, $fulfilled_id)
+    {
+        $db = Database::openConnection();
+        $return_array = array();
+        $q = $data["item"];
+        $client_id = $data['clientid'];
+        $query = "SELECT * FROM items WHERE active = 1 AND (name LIKE :term1 OR sku LIKE :term2) AND client_id = $client_id ORDER BY name";
+        $array = array(
+            'term1' =>  '%'.$q.'%',
+            'term2' =>  '%'.$q.'%'
+        );
+        //echo $query;die();
+        $rows = $db->queryData($query, $array);
+        foreach($rows as $row)
+        {
+            $row_array['value'] = $row['name']." (".$row['sku'].")";
+            if(!empty($row['publisher'])) $row_array['value'] = $row['name']." (".$row['publisher'].")";
+            $row_array['sku'] = $row['sku'];
+            $row_array['item_id'] = $row['id'];
+            array_push($return_array,$row_array);
+        }
+        return $return_array;
     }
 
     public function getAutocompleteItems($data, $fulfilled_id)
@@ -550,7 +620,7 @@ class Item extends Model{
         $rows = $db->queryData($query, $array);
         foreach($rows as $row)
         {
-            if(empty($row['available'])) continue;
+            if( empty($row['available']) && $data['checkavailable']) continue;
             $row_array['value'] = $row['name']." (".$row['sku'].")";
             if(!empty($row['publisher'])) $row_array['value'] = $row['name']." (".$row['publisher'].")";
             $row_array['sku'] = $row['sku'];
@@ -591,6 +661,7 @@ class Item extends Model{
             'palletized'                    =>  $palletized
         );
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
+        $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (isset($per_pallet))? $per_pallet : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
@@ -632,6 +703,7 @@ class Item extends Model{
         $item_values['active'] = (isset($active))? 1 : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
+        $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (isset($per_pallet))? $per_pallet : 0;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
         elseif(isset($delete_image)) $item_values['image'] = null;
@@ -993,6 +1065,12 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         return $db->queryValue($this->table, array('id' => $item_id), 'pack_item') > 0;
+    }
+
+    public function isCollection($item_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $item_id), 'collection') > 0;
     }
 
     public function getLocationsForItem($item_id)

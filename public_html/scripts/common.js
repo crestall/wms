@@ -579,7 +579,15 @@ var autoCompleter = {
         }
         element.autocomplete({
             source: function(req, response){
-            	var url = "/ajaxfunctions/getItems/?item="+req.term+"&clientid="+$('#client_id').val()+"&checkavailable="+check_available;
+                var url;
+                if(check_available)
+                {
+                    url = "/ajaxfunctions/getItems/?item="+req.term+"&clientid="+$('#client_id').val()+"&checkavailable="+check_available;
+                }
+                else
+                {
+                   url = "/ajaxfunctions/getAllItems/?item="+req.term+"&clientid="+$('#client_id').val()+"&checkavailable="+check_available;
+                }
                 //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);

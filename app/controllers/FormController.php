@@ -1639,6 +1639,51 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."products/pack-items-edit/product=$item_id");
     }
 
+    public function procCollectionEdit()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $item_error = false;
+        if(!isset($this->request->data['items']))
+        {
+            Form::setError('items', 'At least one item must be selected');
+        }
+        else
+        {
+            foreach($this->request->data['items'] as $id => $array)
+            {
+                $number = $array['qty'];
+                if(filter_var($number, FILTER_VALIDATE_INT) === false && $number <= 0)
+                {
+                    $item_error = true;
+                }
+            }
+        }
+        if($item_error)
+        {
+            Form::setError('items', 'Only positive whole numbers should be used');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $this->item->updateCollection($this->request->data['items'], $item_id);
+            Session::set('feedback', 'Those details have been updated');
+        }
+        return $this->redirector->to(PUBLIC_ROOT."products/collections-edit/product=$item_id");
+    }
+
     public function procAddLocation()
     {
         $post_data = array();
