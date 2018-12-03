@@ -91,6 +91,16 @@ class inventoryController extends Controller
         ]);
     }
 
+    public function replenishPickface()
+    {
+
+
+        Config::setJsConfig('curPage', "replenish-pickface");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/replenishPickface.php',[
+            'page_title'    =>  'Replenish Pickfaces'
+        ]);
+    }
+
     public function scanToInventory()
     {
         $client_id = 0;
