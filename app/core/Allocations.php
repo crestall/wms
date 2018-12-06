@@ -57,6 +57,7 @@ class Allocations{
 
                     foreach($collection_items as $ci)
                     {
+                        echo "<pre>",print_r($oi_values),"</pre>";continue;
                         $pick_count = $left = $ci['number'] * $details['qty'];
                         $item_name = $ci['name'];
                         $id = $ci['id'];
