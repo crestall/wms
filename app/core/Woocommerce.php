@@ -873,7 +873,7 @@ class Woocommerce{
                     'import_error'          => false,
                     'import_error_string'   => ''
                 );
-                if(strtolower($o['shipping_lines'][0]['method_title']) == "express shipping") $order['eparcel_express'] = 1;
+                //if(strtolower($o['shipping_lines'][0]['method_title']) == "express shipping") $order['eparcel_express'] = 1;
                 if( !filter_var($o['billing']['email'], FILTER_VALIDATE_EMAIL) )
                 {
                     $order['errors'] = 1;
