@@ -56,9 +56,9 @@ return array(
      * Configuration for Email
      *
      */
-    "EMAIL_FROM"        => "warehouse@wms.3plplus.com.au",
+    "EMAIL_FROM"        => "no-reply@3plplus.com.au",
     "EMAIL_FROM_NAME"   => "3PL Plus Warehouse Management System",
-    "EMAIL_REPLY_TO"    => "warehouse@wms.3plplus.com.au",
+    "EMAIL_REPLY_TO"    => "no-reply@3plplus.com.au",
 
     "EMAIL_PASSWORD_RESET_URL" => PUBLIC_ROOT . "login/resetPassword",
 
