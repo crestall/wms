@@ -28,6 +28,11 @@
                         });
                     }
                 },
+                'replenish-pickface':{
+                    init: function(){
+                        
+                    }
+                },
                 'register-newstock': {
                     init: function(){
                         $('form#register_new_stock').submit(function(e){
