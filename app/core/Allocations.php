@@ -49,9 +49,9 @@ class Allocations{
                     }
                     else
                     {
+                        $item['number'] = 1;
                         $collection_items = array(
-                            $item,
-                            'number'    =>  1
+                            $item
                         );
 
                     }
