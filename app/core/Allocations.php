@@ -53,6 +53,7 @@ class Allocations{
                             $item,
                             'number'    =>  1
                         );
+
                     }
 
                     foreach($collection_items as $ci)
