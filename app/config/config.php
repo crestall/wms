@@ -416,7 +416,8 @@ return array(
             'manage-users'	            =>	true,
             'packing-types'             =>  true,
             'store-chains'              =>  true,
-            'user-roles'                =>  true
+            'user-roles'                =>  true,
+            'pickfaces'                 => true
 		),
         'financials'    =>  array(
             'hunters-check' => true
