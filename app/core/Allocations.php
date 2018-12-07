@@ -145,39 +145,31 @@ class Allocations{
                             $import_error = true;
                             $import_error_string .= "Could not find a location for $item_name for a quantity of $pick_count. ";
                         }
-                        if(!$import_error)
-                        {
-                            $values[] = array(
-                                'item_id'               => $id,
-                                'qty'                   => $details['qty'],
-                                'locations'             => $f_locations,
-                                'order_error_string'    => $order_error_string,
-                                'item_error'            => $item_error,
-                                'item_error_string'     => $item_error_string."</ul>",
-                                'import_error'          => false
-                            );
-                        }
-                        else
+                        $varray = array(
+                            'item_id'               => $id,
+                            'locations'             => $f_locations,
+                            'item_error_string'     => $item_error_string."</ul>",
+                            'item_error'            => $item_error,
+                            'order_error_string'    => $order_error_string,
+                            'import_error'          => false,
+                            'qty'                   => $pick_count
+                        );
+                        if($import_error)
                         {
                             $values[] = array(
                                 'import_error_string'   => $import_error_string,
-                                'import_error'          => true,
-                                'item_id'               => $id,
-                                'qty'                   => $details['qty'],
-                                'locations'             => $f_locations,
-                                'order_error_string'    => $order_error_string,
-                                'item_error'            => $item_error,
-                                'item_error_string'     => $item_error_string."</ul>",
                                 'import_error'          => true
                             );
                         }
+                        $values[] = $varray;
                     }
+
                 }
             }//endforeach items
             //die();
             $oi_values[$oid] = $values;
         }//endforeach order
-        echo "<pre>",print_r($oi_values),"</pre>";  die();
+        //echo "<pre>",print_r($oi_values),"</pre>";  die();
         //echo "<pre>",print_r($allocations),"</pre>";
         //echo "<pre>",print_r($l_allocations),"</pre>";
         return $oi_values;
