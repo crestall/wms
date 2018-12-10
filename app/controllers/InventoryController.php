@@ -93,11 +93,25 @@ class inventoryController extends Controller
 
     public function replenishPickface()
     {
-
+        $client_id = 0;
+        $client_name = "";
+        //$products = array();
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+                //$products = $this->item->getItemsForClient($client_id, $active);
+                //$products = $this->item->getClientInventoryArray($client_id, $active);
+            }
+        }
 
         Config::setJsConfig('curPage', "replenish-pickface");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/replenishPickface.php',[
-            'page_title'    =>  'Replenish Pickfaces'
+            'page_title'    =>  'Replenish Pickfaces',
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name,
         ]);
     }
 

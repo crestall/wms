@@ -21,6 +21,7 @@ foreach($orders_ids as $id):
     $this->controller->order->setSlipPrinted($id);
     $picked_id = $this->controller->order->picked_id;
     $ordered_id = $this->controller->order->ordered_id;
+    $satchels = 0;
     if($od['status_id'] == $ordered_id)
         $this->controller->order->updateStatus($picked_id, $id);
     ?>
