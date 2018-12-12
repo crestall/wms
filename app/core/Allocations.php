@@ -156,10 +156,8 @@ class Allocations{
                         );
                         if($import_error)
                         {
-                            $values[] = array(
-                                'import_error_string'   => $import_error_string,
-                                'import_error'          => true
-                            );
+                            $varray['import_error'] = true;
+                            $varray['import_error_string'] = $import_error_string;
                         }
                         $values[] = $varray;
                     }
