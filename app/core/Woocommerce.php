@@ -935,6 +935,8 @@ class Woocommerce{
                 foreach($o['line_items'] as $item)
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
+                    if(in_array($item['sku'], $ignored_skus))
+                        continue;
                     $product = $this->controller->item->getItemBySku($item['sku']);
                     if(!$product)
                     {
