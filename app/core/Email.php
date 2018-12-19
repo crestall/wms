@@ -304,7 +304,8 @@
 
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-		$mail->AddAddress('Jean-Claude Renaud@noasleep.com');
+		$mail->AddAddress('jc@noasleep.com', 'Jean-Claude Renaud');
+        $mail->AddAddress('jeremykopek@noasleep.com', 'Jeremy');
 
         $mail->AddAddress('customersupport@3plplus.com.au');
 
