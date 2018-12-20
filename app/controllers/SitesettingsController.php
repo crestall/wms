@@ -26,6 +26,18 @@ class sitesettingsController extends Controller
         ]);
     }
 
+    public function pickfaces()
+    {
+        $pickfaces = $this->pickface->getAllPickfaces();
+        //render the page
+        Config::setJsConfig('curPage', "pickfaces");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/pickfaces.php',
+        [
+            'page_title'    =>  'Manage Pickfaces',
+            'pickfaces'     =>  $pickfaces
+        ]);
+    }
+
     public function manageUsers()
     {
         $client_users = $this->user->getAllUsers('client');
