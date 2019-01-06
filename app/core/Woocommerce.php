@@ -1566,7 +1566,7 @@ class Woocommerce{
                     $message .= "<p>{$ad['state']}</p>";
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
-                    $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
+
                     //if (php_sapi_name() == 'cli')
                     if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
                     {
@@ -1574,6 +1574,7 @@ class Woocommerce{
                     }
                     else
                     {
+                        $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
                         $this->return_array['error_string'] .= $message;
                         ++$this->return_array['error_count'];
                     }
