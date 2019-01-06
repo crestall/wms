@@ -351,7 +351,7 @@ return array(
             'goods-in'               =>  true,
             'add-subtract-stock'    =>  false,
             'quality-control'       =>  false,
-            'replenish-pickface'    => true
+            //'replenish-pickface'    => true
         ),
 		'reports'			=> array(
           	//'product-movement-summary'	=>	true,
@@ -417,7 +417,7 @@ return array(
             'packing-types'             =>  true,
             'store-chains'              =>  true,
             'user-roles'                =>  true,
-            'pickfaces'                 => true
+            //'pickfaces'                 => true
 		),
         'financials'    =>  array(
             'hunters-check' => true
@@ -459,7 +459,7 @@ return array(
             'add-subtract-stock'    =>  false,
             'quality-control'       =>  false,
             'pack-items-manage'     =>  true,
-            'replenish-pickface'    => true
+            //'replenish-pickface'    => true
         ),
         'staff'   =>  array(
             'time-sheets'   =>  true,

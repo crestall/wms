@@ -276,7 +276,9 @@
 
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-		$mail->AddAddress('customersupport@3plplus.com.au');
+		$mail->AddAddress('rachel.wang@nuchev.com.au');
+
+        $mail->AddBCC('customersupport@3plplus.com.au');
 
         $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
 

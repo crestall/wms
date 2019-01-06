@@ -127,7 +127,7 @@ class Itemmovement extends Model{
         $date += 24 * 60 *60; //move to end of day
         $db = Database::openConnection();
         $return = array();
-        $items = $db->queryData("SELECT id, name, sku, image FROM items WHERE client_id = $client_id AND active = 1 ORDER BY name");
+        $items = $db->queryData("SELECT id, name, sku, image FROM items WHERE client_id = $client_id AND active = 1 AND collection = 0 AND pack_item = 0 ORDER BY name");
         foreach($items as $i)
         {
             $ohq = $db->queryRow("SELECT SUM(qty) AS on_hand FROM items_locations WHERE item_id = {$i['id']} GROUP BY item_id");
