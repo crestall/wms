@@ -94,8 +94,8 @@
         //if(Config::get("SITE_LIVE"))
         {
 		    $mail->AddAddress($email, $name);
-            $mail->AddBCC('daniel.mackenzie@3plplus.com.au', 'Daniel Mackenzie');
-            $mail->AddBCC('fred.scherzer@3plplus.com.au', 'Fred Scherzer');
+            //$mail->AddBCC('daniel.mackenzie@3plplus.com.au', 'Daniel Mackenzie');
+            //$mail->AddBCC('fred.scherzer@3plplus.com.au', 'Fred Scherzer');
             $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
         }
         else
@@ -250,7 +250,7 @@
         //$mail->AddAddress('fred.scherzer@3plplus.com.au', 'Fred Scherzer');
 
 		$mail->AddBCC('customersupport@3plplus.com.au');
-        $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
 
 		$mail->Subject = $subject;
 
