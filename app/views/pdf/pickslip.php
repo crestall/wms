@@ -17,6 +17,10 @@ foreach($orders_ids as $id):
     {
         $ship_to =  $od['ship_to'];
     }
+    if(!empty($od['contact_phone']))
+    {
+        $ship_to .= "<br/>".$od['contact_phone'];
+    }
     $items = $this->controller->order->getItemsForOrder($id);
     $this->controller->order->setSlipPrinted($id);
     $picked_id = $this->controller->order->picked_id;
