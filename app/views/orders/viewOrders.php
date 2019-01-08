@@ -19,7 +19,7 @@
             <div class="col-lg-3 text-center">
                 <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
                 <p><a class="btn btn-info hunters-label-print"><i class="fas fa-tags"></i> Print Hunters Labels For Selected</a> </p>
-                <p><a class="btn btn-secondary viclocal-label-print"><i class="fas fa-tags"></i> Print Vic Local Labels For Selected</a> </p>
+                <p><a class="btn btn-default viclocal-label-print"><i class="fas fa-tags"></i> Print Vic Local Labels For Selected</a> </p>
             </div>
             <?php if($fulfilled == 0):?>
                 <div class="col-lg-3 text-center">
@@ -43,7 +43,7 @@
             <div class="col-lg-3 text-center">
                 <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
                 <p><a class="btn btn-info hunters-label-print"><i class="fas fa-tags"></i> Print Hunters Labels For Selected</a> </p>
-                <p><a class="btn btn-secondary viclocal-label-print"><i class="fas fa-tags"></i> Print Vic Local Labels For Selected</a> </p> 
+                <p><a class="btn btn-secondary viclocal-label-print"><i class="fas fa-tags"></i> Print Vic Local Labels For Selected</a> </p>
             </div>
         </div>
     <?php endif;?>
