@@ -3,4 +3,5 @@
 <input type="hidden" id="hunters_id" value="<?php echo $this->controller->courier->huntersId;?>" />
 <input type="hidden" id="huntersplu_id" value="<?php echo $this->controller->courier->huntersPluId;?>" />
 <input type="hidden" id="three3pltruck_id" value="<?php echo $this->controller->courier->threePlTruckId;?>" />
+<input type="hidden" id="viclocal_id" value="<?php echo $this->controller->courier->vicLocalId;?>" /> 
 <input type="hidden" id="local_id" value="<?php echo $this->controller->courier->localId;?>" />
