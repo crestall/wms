@@ -25,6 +25,7 @@
                 <div class="col-lg-3 text-center">
                     <p><a class="btn btn-primary eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
                     <p><a class="btn btn-info hunters-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Hunters Orders</a> </p>
+                    <p><a class="btn btn-default viclocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Vic Local Orders</a> </p>
                 </div>
             <?php endif;?>
             <div class="col-lg-3 text-center">
