@@ -52,6 +52,8 @@
             $this->assignHunters($order_id, $courier_id, false, true, 1);
         elseif($courier_id == $this->controller->courier->threePlTruckId)
             $this->assign3PLTruck($order_id);
+        elseif($courier_id == $this->controller->courier->vicLocalId)
+            $this->assignVicLocal($order_id);
         elseif($courier_id == $this->controller->courier->localId)
             $this->assignLocal($order_id, $courier_name);
         elseif($courier_id == 0)
@@ -253,6 +255,19 @@
             $order_values['bubble_wrap'] = 1;
         $db->updateDatabaseFields('orders', $order_values, $order_id);
         $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to $courier_name</p>";
+    }
+
+    private function assignVicLocal($order_id)
+    {
+        $db = Database::openConnection();
+        Session::set('showfeedback', true);
+        $order_values = array(
+            'courier_id'    => $this->controller->courier->vicLocalId
+        );
+        if($this->addBubblewrap())
+            $order_values['bubble_wrap'] = 1;
+        $db->updateDatabaseFields('orders', $order_values, $order_id);
+        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Vic Local Courier</p>";
     }
 
     private function addBubblewrap()

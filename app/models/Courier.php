@@ -7,6 +7,7 @@ class Courier extends Model{
     public $huntersPalId;
     public $threePlTruckId;
     public $localId;
+    public $vicLocalId;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class Courier extends Model{
         $this->huntersPalId = $this->getCourierId('Hunters Pallet');
         $this->threePlTruckId = $this->getCourierId('3PL Truck');
         $this->localId = $this->getCourierId('Local');
+        $this->vicLocalId = $this->getCourierId('Vic Local');
     }
 
     public function getSelectCouriers( $selected = false, $choose_none = true, $include_local = true, $exclude = array() )
@@ -81,6 +83,11 @@ class Courier extends Model{
     public function getLocalId()
     {
         return $this->getCourierId('Local');
+    }
+
+    public function getVicLocalId()
+    {
+        return $this->getCourierId('Vic Local');
     }
 
     public function getCourierId($name)
