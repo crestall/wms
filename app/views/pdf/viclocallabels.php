@@ -25,22 +25,22 @@ foreach($orders_ids as $id):
     ?>
         <table width="100%">
             <tr>
+                <td colspan="2">
+                    <h1 style="font-size:40px; text-align:center"><?php echo $od['suburb'];?></h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><?php echo $ship_to;?></p>
+                    <?php echo $delivery_address;?>
+                </td>
                 <td>
                     <p>Order Number: <?php echo $od['order_number'];?></p>
                     <p></p>
                     <p>Item <?php echo $this_item;?> of <?php echo $total_items;?></p>
                 </td>
-                <td>
-                    <h1 style="font-size:40px"><?php echo $od['suburb'];?></h1>
-                </td>
             </tr>
-            <tr>
-                <td colspan="2">
-                    <p><?php echo $ship_to;?></p>
-                    <?php echo $delivery_address;?>
-                </td>
-            </tr>
-        </table> 
+        </table>
         <pagebreak />
         <?php
         ++$this_item;
