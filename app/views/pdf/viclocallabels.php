@@ -23,13 +23,21 @@ foreach($orders_ids as $id):
     //continue;
     foreach($items as $item):
     ?>
-        <h1><?php echo $od['suburb'];?></h1>
-        <p><?php echo $ship_to;?></p>
-        <?php echo $delivery_address;?>
-        <table width='100%'>
+        <table width="100%">
             <tr>
-                <td><barcode type='ean13' code='<?php echo $od['order_number'];?>' /></td>
-                <td><h3>Item <?php echo $this_item;?> of <?php echo $total_items;?></h3></td>
+                <td>
+                    <h1><?php echo $od['suburb'];?></h1>
+                </td>
+                <td>
+                    <p><?php echo $od['order_number'];?></p>
+                    <p>Item <?php echo $this_item;?> of <?php echo $total_items;?></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p><?php echo $ship_to;?></p>
+                    <?php echo $delivery_address;?>
+                </td>
             </tr>
         </table>
         <pagebreak />
