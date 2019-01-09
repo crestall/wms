@@ -23,7 +23,7 @@ foreach($orders_ids as $id):
     //continue;
     foreach($items as $item):
     ?>
-        <table width="100%">
+        <table width="100%" style="font-size:15px">
             <tr>
                 <td colspan="2" align="center">
                     <h1 style="font-size:50px"><?php echo $od['suburb'];?></h1>
