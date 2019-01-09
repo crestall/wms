@@ -24,7 +24,7 @@ class pdfController extends Controller
             'orders_ids'    =>  $order_ids
         ]);
         $stylesheet = file_get_contents(STYLES."pickslip.css");
-        //$pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
     }
