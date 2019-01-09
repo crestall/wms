@@ -3,7 +3,7 @@ foreach($orders_ids as $id):
     //$order_ids_string .= $id."-";
     $od = $this->controller->order->getOrderDetail($id);
     //echo "<pre>",print_r($od),"</pre>";//die();
-    $delivery_address = $this->controller->address->getAddressStringForOrder($id);
+    //$delivery_address = $this->controller->address->getAddressStringForOrder($id);
     if(empty($od['ship_to']))
     {
         $ship_to = $this->controller->customer->getCustomerName($od['customer_id']) ;
@@ -23,8 +23,8 @@ foreach($orders_ids as $id):
     //continue;
     foreach($items as $item):
     ?>
-    <div class='pickslip'>
-        <h2><?php echo $ship_to;?></h2>
+        <h1><?php echo $od['suburb'];?></h1>
+        <p><?php echo $ship_to;?></p>
         <?php echo $delivery_address;?>
         <table width='100%'>
             <tr>
@@ -32,10 +32,9 @@ foreach($orders_ids as $id):
                 <td><h3>Item <?php echo $this_item;?> of <?php echo $total_items;?></h3></td>
             </tr>
         </table>
-    </div>
-    <pagebreak />
-    <?php
-    ++$this_item;
+        <pagebreak />
+        <?php
+        ++$this_item;
     endforeach;
     ?>
 <?php endforeach; ?>
