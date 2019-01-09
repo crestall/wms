@@ -23,8 +23,7 @@ foreach($orders_ids as $id):
     //continue;
     foreach($items as $item):
     ?>
-        <div class='pickslip'>
-        <table width="100%" class='pickslip'>
+        <table width="100%">
             <tr>
                 <td>
                     <p>Order Number: <?php echo $od['order_number'];?></p>
@@ -41,8 +40,7 @@ foreach($orders_ids as $id):
                     <?php echo $delivery_address;?>
                 </td>
             </tr>
-        </table>
-        </div>
+        </table> 
         <pagebreak />
         <?php
         ++$this_item;
