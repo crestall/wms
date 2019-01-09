@@ -2,7 +2,7 @@
 foreach($orders_ids as $id):
     //$order_ids_string .= $id."-";
     $od = $this->controller->order->getOrderDetail($id);
-    //echo "<pre>",print_r($od),"</pre>";die();
+    echo "<pre>",print_r($od),"</pre>";//die();
     $delivery_address = $this->controller->address->getAddressStringForOrder($id);
     if(empty($od['ship_to']))
     {
