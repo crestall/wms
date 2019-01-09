@@ -359,7 +359,7 @@ class Woocommerce{
         $collected_orders = array();
         try {
             $page = 1;
-            $next_page = $this->woocommerce->get('orders', array('status' => 'processing', 'orderby' => 'date', 'per_page' => 100, 'page' => $page));
+            $next_page = $this->woocommerce->get('orders', array('status' => 'processing', 'orderby' => 'date', 'order' => 'asc', 'per_page' => 100, 'page' => $page));
             $collected_orders = $next_page;
             /*
             while(count($next_page))
