@@ -24,7 +24,7 @@ foreach($orders_ids as $id):
     foreach($items as $item):
     ?>
         <div class='pickslip'>
-        <table width="100%">
+        <table width="100%" class='pickslip'>
             <tr>
                 <td>
                     <p>Order Number: <?php echo $od['order_number'];?></p>
