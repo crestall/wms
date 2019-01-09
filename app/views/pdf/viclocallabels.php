@@ -26,7 +26,7 @@ foreach($orders_ids as $id):
         <table width="100%">
             <tr>
                 <td colspan="2" align="center">
-                    <h1 style="font-size:60px"><?php echo $od['suburb'];?></h1>
+                    <h1><?php echo $od['suburb'];?></h1>
                 </td>
             </tr>
             <tr>
