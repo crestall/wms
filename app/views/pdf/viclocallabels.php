@@ -103,6 +103,7 @@ foreach($orders_ids as $id):
     </div>
     <pagebreak />
 <?php endforeach;
+/*
 //echo "<pre>",print_r($summary_pick),"</pre>";
 //echo "<pre>",print_r($summary_scan),"</pre>";die();
 $ids_barcode = $this->controller->pickorder->savePickSummary($summary_scan);
@@ -143,4 +144,5 @@ foreach($summary_pick as $l_id => $details)
 }
 $html .= "</table></div>";
 echo $html;
+*/
 ?>
