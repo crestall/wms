@@ -15,6 +15,20 @@ class pdfController extends Controller
         $this->Security->config("validateForm", false);
     }
 
+    public function printVicLocalLabels()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => [148,105]]);
+        $order_ids  = $this->request->data['orders'];
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/viclocallabels.php', [
+            'orders_ids'    =>  $order_ids
+        ]);
+        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
+        //$pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
     public function printHuntersLabels()
     {
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => [148,105]]);

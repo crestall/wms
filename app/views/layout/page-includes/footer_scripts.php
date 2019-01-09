@@ -59,6 +59,7 @@
         Config::setJsConfig('huntersPalId', $this->controller->courier->huntersPalId);
         Config::setJsConfig('threePlTruckId', $this->controller->courier->threePlTruckId);
         Config::setJsConfig('localId', $this->controller->courier->localId);
+        Config::setJsConfig('vicLocalId', $this->controller->courier->vicLocalId); 
         ?>
         <!-- Assign all configuration variables -->
         <script>config = <?php echo json_encode(Config::getJsConfig()); ?>;</script>
