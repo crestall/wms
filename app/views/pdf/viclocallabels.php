@@ -26,11 +26,12 @@ foreach($orders_ids as $id):
         <table width="100%">
             <tr>
                 <td>
-                    <h1><?php echo $od['suburb'];?></h1>
+                    <p>Order Number: <?php echo $od['order_number'];?></p>
+                    <p></p>
+                    <p>Item <?php echo $this_item;?> of <?php echo $total_items;?></p>
                 </td>
                 <td>
-                    <p><?php echo $od['order_number'];?></p>
-                    <p>Item <?php echo $this_item;?> of <?php echo $total_items;?></p>
+                    <h1 style="font-size:40px"><?php echo $od['suburb'];?></h1>
                 </td>
             </tr>
             <tr>
