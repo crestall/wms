@@ -23,7 +23,7 @@ foreach($orders_ids as $id):
     //continue;
     foreach($items as $item):
     ?>
-        <table width="100%" style="font-size:16px; line-height:1.5">
+        <table width="100%" style="font-size:16px; line-height:1.25">
             <tr>
                 <td colspan="2" align="center">
                     <h1 style="font-size:50px"><?php echo $od['suburb'];?></h1>
@@ -39,6 +39,10 @@ foreach($orders_ids as $id):
                     <p></p>
                     <p>Item <?php echo $this_item;?> of <?php echo $total_items;?></p>
                 </td>
+            </tr>
+            <tr>
+                <td>Ship To</td>
+                <td></td>
             </tr>
         </table>
         <pagebreak />
