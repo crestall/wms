@@ -150,7 +150,7 @@
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by {$od['courier_name']}</p>";
     }
 
-    public function fulfillVicLocalOrder()
+    public function fulfillVicLocalOrder($order_ids)
     {
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "FULFILLING VIC LOCAL ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;

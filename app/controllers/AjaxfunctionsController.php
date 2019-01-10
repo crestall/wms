@@ -167,7 +167,7 @@ class ajaxfunctionsController extends Controller
             }
             elseif($this->request->data['courier_id'] == $this->courier->vicLocalId)
             {
-                $this->orderfulfiller->fulfillVicLocalOrder();
+                $this->orderfulfiller->fulfillVicLocalOrder($order_ids);
             }
             else
             {
