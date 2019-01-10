@@ -473,7 +473,6 @@
 		$mail->MsgHTML($body);
 		$mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
 
-		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
         if(SITE_LIVE)
         //if(Config::get("SITE_LIVE"))
         {
