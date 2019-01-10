@@ -18,7 +18,14 @@ class pdfController extends Controller
     public function printVicLocalLabels()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => [148,105]]);
+        $pdf = new Mympdf([
+            'mode'          => 'utf-8',
+            'format'        => [148,105],
+            'margin_left'   => 5,
+            'margin_right'  => 5,
+            'margin_top'    => 5,
+            'margin_bottom' => 5
+        ]);
         $order_ids  = $this->request->data['orders'];
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/viclocallabels.php', [
             'orders_ids'    =>  $order_ids

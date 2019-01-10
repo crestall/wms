@@ -23,26 +23,26 @@ foreach($orders_ids as $id):
     //continue;
     foreach($items as $item):
     ?>
-        <table width="100%" style="font-size:16px; line-height:1.25">
+        <table width="100%" style="font-size:16px; line-height:1.5">
             <tr>
                 <td colspan="2" align="center">
                     <h1 style="font-size:50px"><?php echo $od['suburb'];?></h1>
                 </td>
             </tr>
             <tr>
+                <td>Ship To</td>
+                <td><?php echo $ship_to;?></td>
+            </tr>
+            <tr>
+                <td>Order Number</td>
                 <td>
-                    <p><?php echo $ship_to;?></p>
-                    <?php echo $delivery_address;?>
-                </td>
-                <td>
-                    <p>Order Number: <?php echo $od['order_number'];?></p>
-                    <p></p>
-                    <p>Item <?php echo $this_item;?> of <?php echo $total_items;?></p>
+                    <?php echo $od['order_number'];?><br/>
+                    <strong>Item <?php echo $this_item;?> of <?php echo $total_items;?></strong>
                 </td>
             </tr>
             <tr>
-                <td>Ship To</td>
-                <td></td>
+                <td>Address</td>
+                <td><?php echo $delivery_address;?></td>
             </tr>
         </table>
         <pagebreak />

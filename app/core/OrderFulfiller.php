@@ -150,6 +150,46 @@
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by {$od['courier_name']}</p>";
     }
 
+    public function fulfillVicLocalOrder($order_ids)
+    {
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "FULFILLING VIC LOCAL ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $db = Database::openConnection();
+        $emails_to_send = array();
+        foreach($order_ids as $id)
+        {
+            $od = $this->controller->order->getOrderDetail($id);
+            if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
+            {
+                $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
+                $this->output .= "Doing Order Number: ".$od['order_number']." Using ".$this->controller->courier->getCourierName($od['courier_id']).PHP_EOL;
+                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time()), $id);
+                //order is now fulfilled, reduce stock
+                $items = $this->controller->order->getItemsForOrder($id);
+                $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
+                $this->removeStock($items, $id);
+                if($od['client_id'] == 59)
+                {
+                    $emails_to_send[] = $od['client_order_id'];
+                }
+                Session::set('showfeedback', true);
+                $_SESSION['feedback'] .= "<p>{$od['order_number']} has been successfully fulfilled</p>";
+            }
+            else
+            {
+                Session::set('showerrorfeedback', true);
+        	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
+            }
+        }
+        if( count($emails_to_send) )
+        {
+            $this->output .= "Sending Noa Sleep confirmations".PHP_EOL;
+            Email::sendNoaLocalConfirmEmail($emails_to_send);
+        }
+        $this->recordOutput("order_fulfillment/viclocal");
+    }
+
     public function fulfillOurTruckOrder()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
