@@ -35,7 +35,10 @@ foreach($orders_ids as $id):
             </tr>
             <tr>
                 <td>Order Number</td>
-                <td><?php echo $od['order_number'];?></td>
+                <td>
+                    <?php echo $od['order_number'];?><br/>
+                    Item <?php echo $this_item;?> of <?php eco $total_items;?>
+                </td>
             </tr>
             <tr>
                 <td>Address</td>
