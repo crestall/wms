@@ -23,7 +23,7 @@ class pdfController extends Controller
             'format'        => [148,105],
             'margin_left'   => 5,
             'margin_right'  => 5,
-            'margin_top'    => 0,
+            'margin_top'    => 5,
             'margin_bottom' => 5
         ]);
         $order_ids  = $this->request->data['orders'];
