@@ -165,6 +165,10 @@ class ajaxfunctionsController extends Controller
             {
                 $this->orderfulfiller->fulfillLocalOrder();
             }
+            elseif($this->request->data['courier_id'] == $this->courier->vicLocalId)
+            {
+                $this->orderfulfiller->fulfillVicLocalOrder();
+            }
             else
             {
                 Session::set('showerrorfeedback', true);
