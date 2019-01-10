@@ -31,7 +31,14 @@ class pdfController extends Controller
 
     public function printHuntersLabels()
     {
-        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => [148,105]]);
+        $pdf = new Mympdf([
+            'mode'          => 'utf-8',
+            'format'        => [148,105],
+            'margin_left'   => 5,
+            'margin_right'  => 5,
+            'margin_top'    => 5,
+            'margin_bottom' => 5
+        ]);
         $order_ids  = $this->request->data['orders'];
         foreach($order_ids as $order_id)
         {
