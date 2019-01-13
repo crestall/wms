@@ -600,7 +600,7 @@
                 'view-orders': {
                     init: function(){
                         actions.common.init();
-                        $('#client_selector, #courier_selector').change(function(e){
+                        $('#client_selector, #courier_selector, #state_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
                             var href = '/orders/view-orders';
                             if($('#client_selector').val() != 0)
@@ -609,6 +609,8 @@
                                 href += "/courier="+$('#courier_selector').val();
                             if($('#fulfilled').val() != 0)
                                 href += "/fulfilled="+$('#fulfilled').val();
+                            if($('#state_selector').val() != 0)
+                                href += "/state="+$('#state_selector').val();
                             window.location.href = href;
                         });
 
