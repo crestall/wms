@@ -63,6 +63,22 @@
         </div>
         <div class="col-lg-3">
             <div class="form-group">
+                <label>Filter By State</label>
+                <select id="state_selector" class="form-control selectpicker">
+                    <option value="-1">All States</option>
+                    <option>ACT</option>
+                    <option>NSW</option>
+                    <option>QLD</option>
+                    <option>VIC</option>
+                    <option>TAS</option>
+                    <option>NT</option>
+                    <option>SA</option>
+                    <option>WA</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
                 <label>Search</label>
                 <input type="text" class="form-control" id="table_searcher" />
             </div>
