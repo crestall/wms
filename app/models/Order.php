@@ -678,10 +678,11 @@ class Order extends Model{
         return ($db->queryData($q));
     }
 
-    public function getAllOrders($client_id, $courier_id = -1, $fulfilled = 0, $store_order = -1)
+    public function getAllOrders($client_id, $courier_id = -1, $fulfilled = 0, $store_order = -1, $state = "")
     {
         $db = Database::openConnection();
         $status_id = $this->fulfilled_id;
+        $array = array();
         //echo "SELECT * FROM {$this->table} WHERE status_id != $status_id AND client_id NOT IN ({$this->excluded_clients}) ORDER BY date_ordered ASC"; die();
         if($fulfilled > 0)
         {
@@ -704,9 +705,14 @@ class Order extends Model{
         {
             $q .= " AND store_order = $store_order";
         }
+        if(!empty($state))
+        {
+            $q .= " AND state = :state";
+            $array['state'] = $state;
+        }
         $q .= " ORDER BY errors DESC, client_id, courier_id ASC, country, consignment_id, date_ordered ASC";
         //die($q);
-        return ($db->queryData($q));
+        return ($db->queryData($q, $array));
     }
 
     public function getUnfulfilledOrders($client_id, $courier_id, $store_order = -1)

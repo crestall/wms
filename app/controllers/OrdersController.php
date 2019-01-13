@@ -677,6 +677,7 @@ class OrdersController extends Controller
         $courier_id = -1;
         $client_id = 0;
         $fulfilled = 0;
+        $state = "";
         $ff = "Unfulfilled";
         if(!empty($this->request->params['args']))
         {
@@ -694,10 +695,14 @@ class OrdersController extends Controller
                 $fulfilled = $this->request->params['args']['fulfilled'];
                 $ff = "Fulfilled";
             }
+            if(isset($this->request->params['args']['state']))
+            {
+                $state = $this->request->params['args']['state'];
+            }
         }
         $page_title = "$ff Orders For $client_name";
         //$orders = $this->order->getUnfulfilledOrders($client_id, $courier_id, 0);     getAllOrders($client_id, $courier_id = -1, $fulfilled = 0, $store_order = -1)
-        $orders = $this->order->getAllOrders($client_id, $courier_id, $fulfilled, 0);
+        $orders = $this->order->getAllOrders($client_id, $courier_id, $fulfilled, 0, $state);
         //render the page
         Config::setJsConfig('curPage', "view-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/viewOrders.php', [
@@ -706,7 +711,8 @@ class OrdersController extends Controller
             'client_id'     =>  $client_id,
             'courier_id'    =>  $courier_id,
             'orders'        =>  $orders,
-            'fulfilled'     =>  $fulfilled
+            'fulfilled'     =>  $fulfilled,
+            'state'         =>  $state
         ]);
     }
 
