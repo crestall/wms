@@ -78,7 +78,7 @@
             <div class="form-group">
                 <label>Filter By State</label>
                 <select id="state_selector" class="form-control selectpicker">
-                    <option value="-1">All States</option>
+                    <option value="0">All States</option>
                     <?php
                     foreach($states as $s)
                     {
@@ -90,14 +90,6 @@
                         echo ">$s</option>";
                     }
                     ?>
-                    <!--option>ACT</option>
-                    <option>NSW</option>
-                    <option>QLD</option>
-                    <option>VIC</option>
-                    <option>TAS</option>
-                    <option>NT</option>
-                    <option>SA</option>
-                    <option>WA</option-->
                 </select>
             </div>
         </div>
