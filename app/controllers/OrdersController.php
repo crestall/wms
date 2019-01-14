@@ -508,6 +508,8 @@ class OrdersController extends Controller
             $company_name = "";
             $contact_phone = "";
             $client_order_id = "";
+            $delivery_instructions = "";
+            $comments = "";
         }
         else
         {
@@ -521,6 +523,8 @@ class OrdersController extends Controller
             $signature_req = $order['signature_req'] > 0;
             $express_post = $order['eparcel_express'] > 0;
             $client_order_id = $order['client_order_id'];
+            $delivery_instructions = $order['instructions'];
+            $comments = $order['3pl_comments'];
         }
         //render the page
         Config::setJsConfig('curPage', "order-edit");
@@ -535,7 +539,9 @@ class OrdersController extends Controller
             'express_post'      =>  $express_post,
             'company_name'      =>  $company_name,
             'contact_phone'     =>  $contact_phone,
-            'client_order_id'   =>  $client_order_id
+            'client_order_id'   =>  $client_order_id,
+            'instructions'      =>  $delivery_instructions,
+            'comments'          =>  $comments
         ]);
     }
 
