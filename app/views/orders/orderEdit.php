@@ -3,7 +3,9 @@ $deliver_to = empty(Form::value('deliver_to'))? $deliver_to: Form::value('delive
 $tracking_email = empty(Form::value('tracking_email'))? $tracking_email: Form::value('tracking_email');
 $signature_req = !empty(Form::value('signature_req'))? true: $signature_req;
 $express_post = !empty(Form::value('express_post'))? true: $express_post;
-$client_order_id = empty(Form::value('client_order_id'))? $client_order_id : Form::value('client_order_id')
+$client_order_id = empty(Form::value('client_order_id'))? $client_order_id : Form::value('client_order_id') ;
+$intructions = empty(Form::value('delivery_instructions'))? $intructions : Form::value('delivery_instructions') ;
+$comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_comments') ;
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -133,14 +135,14 @@ $client_order_id = empty(Form::value('client_order_id'))? $client_order_id : For
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">Delivery Instructions</label>
                     <div class="col-md-4">
-                        <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Leave in a safe place out of the weather"><?php echo Form::value('delivery_instructions');?></textarea>
+                        <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Leave in a safe place out of the weather"><?php echo $instructions;?></textarea>
                         <span class="inst">Appears on shipping label. Defaults to 'Leave in a safe place out of the weather' for orders with an Authority To Leave</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">3PLPLUS Instructions</label>
                     <div class="col-md-4">
-                        <textarea class="form-control" name="tpl_comments" id="tpl_comments"><?php echo Form::value('3pl_comments');?></textarea>
+                        <textarea class="form-control" name="tpl_comments" id="tpl_comments"><?php echo $comments;?></textarea>
                         <span class="inst">Instructions for the pickers and packers</span>
                     </div>
                 </div>
