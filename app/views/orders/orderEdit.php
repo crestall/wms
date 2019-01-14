@@ -4,7 +4,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $tracking_email: Form::v
 $signature_req = !empty(Form::value('signature_req'))? true: $signature_req;
 $express_post = !empty(Form::value('express_post'))? true: $express_post;
 $client_order_id = empty(Form::value('client_order_id'))? $client_order_id : Form::value('client_order_id') ;
-$intructions = empty(Form::value('delivery_instructions'))? $intructions : Form::value('delivery_instructions') ;
+$instructions = empty(Form::value('delivery_instructions'))? $instructions : Form::value('delivery_instructions') ;
 $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_comments') ;
 ?>
 <div id="page-wrapper">
