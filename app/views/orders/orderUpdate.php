@@ -148,6 +148,8 @@ $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form:
                         <dd><?php echo $order['uploaded_file'];?></dd>
                         <dt>3PL Instructions</dt>
                         <dd><?php echo $order['3pl_comments'];?></dd>
+                        <dt>Entered By</dt>
+                        <dd><?php echo $order['3pl_comments'];?></dd>
                     </dl>
                 </div>
             </div>

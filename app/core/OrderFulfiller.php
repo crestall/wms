@@ -164,7 +164,7 @@
             {
                 $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
                 $this->output .= "Doing Order Number: ".$od['order_number']." Using ".$this->controller->courier->getCourierName($od['courier_id']).PHP_EOL;
-                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time()), $id);
+                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time(), 'total_cost' => Config::get('VIC_LOCAL_CHARGE')), $id);
                 //order is now fulfilled, reduce stock
                 $items = $this->controller->order->getItemsForOrder($id);
                 $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
