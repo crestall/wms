@@ -1,3 +1,16 @@
+<?php
+  $states = array(
+    "VIC",
+    "NSW",
+    "TAS",
+    "ACT",
+    "QLD",
+    "NT",
+    "SA",
+    "WA",
+  );
+  asort($states);
+?>
 <div id="page-wrapper">
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -66,14 +79,25 @@
                 <label>Filter By State</label>
                 <select id="state_selector" class="form-control selectpicker">
                     <option value="-1">All States</option>
-                    <option>ACT</option>
+                    <?php
+                    foreach($states as $s)
+                    {
+                        echo "<option";
+                        if($s == $state)
+                        {
+                            echo " selected";
+                        }
+                        echo ">$s</option>";
+                    }
+                    ?>
+                    <!--option>ACT</option>
                     <option>NSW</option>
                     <option>QLD</option>
                     <option>VIC</option>
                     <option>TAS</option>
                     <option>NT</option>
                     <option>SA</option>
-                    <option>WA</option>
+                    <option>WA</option-->
                 </select>
             </div>
         </div>
