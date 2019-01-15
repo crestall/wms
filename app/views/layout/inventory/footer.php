@@ -400,7 +400,7 @@
                                 else
                                 {
                                     //var ep = new RegExp("RJM\d{7}|HKM\d{7}|S2U\d{7}|F24\d{7}|F25\d{7}|XTS\d{7}", "i");
-                                    var ep = /RJM\d{7}|HKM\d{7}|S2U\d{7}|F24\d{7}|F25\d{7}|XTS\d{7}|LH\d{9}AU/i;
+                                    var ep = /RJM\d{7}|HKM\d{7}|S2U\d{7}|F24\d{7}|F25\d{7}|XTS\d{7}|LH\d{9}AU|CH\d{9}AU/i;
                                     //ep.lastIndex = 0;
                                     var conida = ep.exec(barcode);
                                     if(!conida)
