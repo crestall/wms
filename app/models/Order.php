@@ -264,6 +264,7 @@ class Order extends Model{
 
             $packages = $this->getPackagesForOrder($co['id']);
 
+
             $address = Utility::formatAddressWeb($ad);
             $shipped_to = "";
             if(!empty($co['company_name'])) $shipped_to .= $co['company_name']."<br/>";
@@ -271,6 +272,7 @@ class Order extends Model{
             $shipped_to .= $address;
             $products = $this->getItemsCountForOrder($co['id']);
             //$num_items = count($products);
+            $parcels = Packaging::getPackingForOrder($co,$products,$packages);
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
             {
@@ -348,7 +350,7 @@ class Order extends Model{
                 'store_order'           => $co['store_order'],
                 'csv_items'             => $csv_items,
                 'cartons'               => max(count($packages), $co['labels']),
-                'packages'              => $packages
+                'parcels'               => $parcels
             );
             $return[] = $row;
         }
