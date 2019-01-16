@@ -111,7 +111,28 @@ class reportsController extends Controller
             'client_name'   =>  $client_name
         ]);
     }
+    /*
+    public function carrierReport()
+    {
+        $carriert_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        //$client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
 
+        Config::setJsConfig('curPage', "carrier-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/carrierReport.php',[
+            'page_title'    =>  'Carier Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Dispatched",
+            'client_orders' =>  $orders,
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name
+        ]);
+    }
+    */
     public function stockMovementReport()
     {
         if(Session::getUserRole() == "client")

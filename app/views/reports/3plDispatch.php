@@ -42,6 +42,7 @@
                                 <th>Courier</th>
                                 <th>Con Note</th>
                                 <th>Cartons</th>
+                                <th>Packages</th>
                                 <th>Extras<br/><button class="btn btn-success btn-sm" id="extras_update">Update Extras</button></th>
                                 <th></th>
                                 <th></th>
@@ -54,7 +55,7 @@
                                 <td data-label="Entered By"><?php echo $co['entered_by'];?></td>
                                 <td data-label="Date Fulfilled" class="number" ><?php echo $co['date_fulfilled'];?></td>
                             	<td data-label="WMS Order Number"  class="number"><a href="/orders/order-update/order=<?php echo $co['id'];?>"><?php echo str_pad($co['order_number'],8,'0',STR_PAD_LEFT);?></a></td>
-                                <td data-label="Client Order ID" class="number"><?php echo $co['client_order_number'];?></td> 
+                                <td data-label="Client Order ID" class="number"><?php echo $co['client_order_number'];?></td>
                                 <td data-label="Shipped To" class="nowrap shipped_to"><?php echo $co['shipped_to'];?></td>
                                 <td data-label="Items" class="nowrap items"><?php echo $co['items'];?></td>
                                 <td data-label="Charge Code"><?php echo $co['charge_code'];?></td>
@@ -62,6 +63,7 @@
                                 <td data-label="Courier" ><?php echo $co['courier'];?></td>
                                 <td data-label="Con Note"><?php echo $co['consignment_id'];?></td>
                                 <td data-label="Cartons" class="number"><?php echo $co['cartons'];?></td>
+                                <td data-label="Packages"><pre><?php print_r($packages);?></pre></td>
                                 <!--td data-label="Comments"><textarea class="form-control 3pl_comments" data-orderid="<?php echo $co['id'];?>"><?php echo $co['comments'];?></textarea></td-->
                                 <td data-label="Extras Update" class="extras">
                                     <div class="checkbox checkbox-default">
