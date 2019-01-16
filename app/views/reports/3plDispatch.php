@@ -63,7 +63,7 @@
                                 <td data-label="Courier" ><?php echo $co['courier'];?></td>
                                 <td data-label="Con Note"><?php echo $co['consignment_id'];?></td>
                                 <td data-label="Cartons" class="number"><?php echo $co['cartons'];?></td>
-                                <td data-label="Packages"><pre><?php print_r($packages);?></pre></td>
+                                <td data-label="Packages"><pre><?php print_r($co['packages']);?></pre></td>
                                 <!--td data-label="Comments"><textarea class="form-control 3pl_comments" data-orderid="<?php echo $co['id'];?>"><?php echo $co['comments'];?></textarea></td-->
                                 <td data-label="Extras Update" class="extras">
                                     <div class="checkbox checkbox-default">
