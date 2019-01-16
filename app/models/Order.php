@@ -271,8 +271,9 @@ class Order extends Model{
             if(!empty($co['ship_to'])) $shipped_to .= $co['ship_to']."<br/>";
             $shipped_to .= $address;
             $products = $this->getItemsCountForOrder($co['id']);
+            $order_items = $this->getItemsForOrder($order_id);
             //$num_items = count($products);
-            $parcels = Packaging::getPackingForOrder($co,$products,$packages);
+            $parcels = Packaging::getPackingForOrder($co,$order_items,$packages);
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
             {
