@@ -262,6 +262,8 @@ class Order extends Model{
                 'country'   =>  $co['country']
             );
 
+            $packages = $this->getPackagesForOrder($co['id']);
+
             $address = Utility::formatAddressWeb($ad);
             $shipped_to = "";
             if(!empty($co['company_name'])) $shipped_to .= $co['company_name']."<br/>";
@@ -345,7 +347,8 @@ class Order extends Model{
                 'dispatched_by'         => $dd,
                 'store_order'           => $co['store_order'],
                 'csv_items'             => $csv_items,
-                'cartons'               => max(count($this->getPackagesForOrder($co['id'])), $co['labels'])
+                'cartons'               => max(count($packages)), $co['labels']),
+                'packages'              => $packages
             );
             $return[] = $row;
         }
