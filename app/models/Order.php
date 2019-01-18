@@ -273,8 +273,8 @@ class Order extends Model{
             $products = $this->getItemsCountForOrder($co['id']);
             $order_items = $this->getItemsForOrder($co['id']);
             //$num_items = count($products);
-            $parcels = Packaging::getPackingForOrder($co,$order_items,$packages);
-            //$parcels = array();
+            //$parcels = Packaging::getPackingForOrder($co,$order_items,$packages);
+            $parcels = array();
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
             {
