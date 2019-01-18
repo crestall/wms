@@ -65,13 +65,13 @@
                                 <td data-label="Cartons" class="number"><?php echo $co['cartons'];?></td>
                                 <td data-label="Packages">
                                     <?php $p = 1; foreach($co['parcels'] as $parcel):?>
-                                        <p>
+                                        <!--p>
                                             Parcel <?php echo $p;?><br/>
                                             Weight: <?php echo $parcel['weight'];?><br/>
                                             Width: <?php echo $parcel['width'];?><br/>
                                             Depth: <?php echo $parcel['depth'];?><br/>
                                             height: <?php echo $parcel['height'];?><br/>
-                                        </p>
+                                        </p-->
                                     <?php ++$p; endforeach;?>
                                 </td>
                                 <!--td data-label="Comments"><textarea class="form-control 3pl_comments" data-orderid="<?php echo $co['id'];?>"><?php echo $co['comments'];?></textarea></td-->
