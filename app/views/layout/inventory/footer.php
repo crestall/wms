@@ -176,6 +176,7 @@
                                     return;
                                 }
                                 $("#item_barcode").val(barcode);
+                                $('button#get_item').click();
                             }
                         });
 
