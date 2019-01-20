@@ -557,6 +557,7 @@ class OrdersController extends Controller
             $client_name = "";
             $truck_id = $local_id = -5;
             $store_order = false;
+            $eb = "";
         }
         else
         {
@@ -576,6 +577,11 @@ class OrdersController extends Controller
             $address_string .= " ".$order['postcode'];
             $address_string .= " ".$order['country'];
             $store_order = $order['store_order'] > 0;
+            $eb = $this->user->getUserName( $order['entered_by'] )
+            if(empty($eb))
+            {
+                $eb = "Automatically Imported";
+            }
         }
         //render the page
         Config::setJsConfig('curPage', "order-update");
@@ -589,8 +595,9 @@ class OrdersController extends Controller
             'client_name'       =>  $client_name,
             'truck_id'          =>  $truck_id,
             'local_id'          =>  $local_id,
-            'address_string'    => $address_string,
-            'store_order'       =>  $store_order
+            'address_string'    =>  $address_string,
+            'store_order'       =>  $store_order,
+            'entered_by'        =>  $eb
         ]);
     }
 
