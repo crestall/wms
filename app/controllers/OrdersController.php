@@ -577,7 +577,7 @@ class OrdersController extends Controller
             $address_string .= " ".$order['postcode'];
             $address_string .= " ".$order['country'];
             $store_order = $order['store_order'] > 0;
-            $eb = $this->user->getUserName( $order['entered_by'] )
+            $eb = $this->user->getUserName( $order['entered_by'] );
             if(empty($eb))
             {
                 $eb = "Automatically Imported";
