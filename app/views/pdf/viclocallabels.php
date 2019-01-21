@@ -21,7 +21,10 @@ foreach($orders_ids as $id):
     $this_item = 1;
     //echo "<pre>",print_r($items),"</pre>";
     //continue;
+
     foreach($items as $item):
+        $c = 1;
+        while($c <= $item('qty')):
     ?>
         <table width="100%" style="font-size:16px; line-height:1.5">
             <tr>
@@ -48,6 +51,8 @@ foreach($orders_ids as $id):
         <pagebreak />
         <?php
         ++$this_item;
+        ++$c;
+        endwhile;
     endforeach;
     ?>
 <?php endforeach; ?>
