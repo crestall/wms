@@ -24,7 +24,7 @@ foreach($orders_ids as $id):
 
     foreach($items as $item):
         $c = 1;
-        while($c <= $item('qty')):
+        while($c <= $item['qty']):
     ?>
         <table width="100%" style="font-size:16px; line-height:1.5">
             <tr>
