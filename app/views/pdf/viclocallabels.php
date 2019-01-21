@@ -1,4 +1,5 @@
 <?php
+$this_order = 1;
 foreach($orders_ids as $id):
     //$order_ids_string .= $id."-";
     $od = $this->controller->order->getOrderDetail($id);
@@ -49,9 +50,12 @@ foreach($orders_ids as $id):
                 <td><?php echo $delivery_address;?></td>
             </tr>
         </table>
-        <pagebreak />
+        <?php if($this_order < count($order_ids)):?>
+            <pagebreak />
+        <?php endif;?>
         <?php
         ++$c;
+        ++$this_order;
     endwhile;
     ?>
 <?php endforeach; ?>
