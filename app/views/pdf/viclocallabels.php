@@ -16,15 +16,16 @@ foreach($orders_ids as $id):
     {
         $ship_to .= "<br/>".$od['contact_phone'];
     }
-    $items = $this->controller->order->getItemsForOrder($id);
-    $total_items = count($items);
-    $this_item = 1;
+    $items = $this->controller->order->getItemsForOrderNoLocations($id);
     //echo "<pre>",print_r($items),"</pre>";
     //continue;
-
-    foreach($items as $item):
-        $c = 1;
-        while($c <= $item['qty']):
+    $total_items = 0;
+    foreach($items as $i)
+    {
+        $total_items += $i['qty'];
+    }
+    $c = 1;
+    while($c <= $total_items):
     ?>
         <table width="100%" style="font-size:16px; line-height:1.5">
             <tr>
@@ -40,7 +41,7 @@ foreach($orders_ids as $id):
                 <td>Order Number</td>
                 <td>
                     <?php echo $od['order_number'];?><br/>
-                    <strong>Item <?php echo $this_item;?> of <?php echo $total_items;?></strong>
+                    <strong>Item <?php echo $c;?> of <?php echo $total_items;?></strong>
                 </td>
             </tr>
             <tr>
@@ -50,9 +51,7 @@ foreach($orders_ids as $id):
         </table>
         <pagebreak />
         <?php
-        ++$this_item;
         ++$c;
-        endwhile;
-    endforeach;
+    endwhile;
     ?>
 <?php endforeach; ?>
