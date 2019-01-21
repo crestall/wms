@@ -487,7 +487,7 @@ class ajaxfunctionsController extends Controller
         if($this->courierselector->chooseEparcel($od))
         {
             $huntersplu_charge = $hunters3kg_charge = $hunterspal_charge = "No Hunters for express post, PO Boxes or international destinations";
-            $eparcel_charge = "";
+            $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);
         }
         else
         {
