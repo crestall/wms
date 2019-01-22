@@ -167,6 +167,8 @@ class Order extends Model{
             $o_values['tracking_email'] = $data['tracking_email'];
         if(isset($data['express_post']))
             $o_values['eparcel_express'] = 1;
+        if(isset($data['satchels']))
+            $o_values['satchels'] = $data['satchels'];
         if(isset($data['date_ordered']))
             $o_values['date_ordered'] = $data['date_ordered'];
         if(isset($data['weight']))
