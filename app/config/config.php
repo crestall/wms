@@ -225,7 +225,7 @@ return array(
         6
     ),
     "BBBOX_DIMENSIONS" => array(
-        array(0,0,0),
+        array(14,14,28),
         array(14,14,28),
         array(14,28,28),
         array(28,28,28),
