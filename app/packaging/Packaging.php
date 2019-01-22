@@ -209,16 +209,26 @@ class Packaging{
         elseif($od['client_id'] == 6)   //Big Bottle
         {
             $total_bottles = 0;
+            $ar_bottles = 0;
+            $weight = 0;
             foreach($items as $i)
             {
-                $total_bottles += $i['qty'];
+                if( in_array($i['id'], Config::get('BB_ADRANGE_IDS') ) )
+                {
+                    $weight += $i['weight'];
+                    $ar_bottles += $i['qty'];
+                }
+                else
+                {
+                    $total_bottles += $i['qty'];
+                }
                 $array['item_reference'] = $i['item_id'];
             }
             list($w, $d, $h) = Config::get('BBBOX_DIMENSIONS')[$total_bottles];
             $array['width'] = $w;
             $array['height'] = $h;
             $array['depth'] = $d;
-            $array['weight'] = Config::get('BBBOX_WEIGHTS')[$total_bottles];
+            $array['weight'] = Config::get('BBBOX_WEIGHTS')[$total_bottles] + $weight;
             $array['pieces'] = 1;
             $array['type_code'] = 'CTN';
             $return[] = $array;

@@ -716,6 +716,7 @@ class Woocommerce{
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
+            if(isset($o['satchels'])) $vals['satchels'] = $o['satchels'];
             $itp = array($this->bboitems[$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
@@ -1155,7 +1156,7 @@ class Woocommerce{
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
-                $qty = 0;
+                $qty = $ar_qty = 0;
                 foreach($o['line_items'] as $item)
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
@@ -1174,11 +1175,21 @@ class Woocommerce{
                             'id'            =>  $item_id,
                             'whole_pallet'  => false
                         );
-                        $qty += $item['quantity'];
+                        if( in_array($item_id, Config::get('BB_ADRANGE_IDS') ) )
+                        {
+                            $weight += $product['weight'];
+                            $ar_qty += $item['quantity'];
+                            $order['satchels'] = 1;
+                        }
+                        else
+                        {
+                            $qty += $item['quantity'];
+                        }
+;
                     }
 
                 }
-                if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
+                if( ($qty + $ar_qty) > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
                 if(empty($o['customer_note']))
                 {
                     if( $qty > 1 || !empty($o['shipping']['company']) )
@@ -1220,8 +1231,8 @@ class Woocommerce{
                 }
                 else
                 {
-                    $order['quantity'] = $qty;
-                    $order['weight'] = Config::get('BBBOX_WEIGHTS')[$qty];
+                    $order['quantity'] = $qty + $ar_qty;
+                    $order['weight'] = Config::get('BBBOX_WEIGHTS')[$qty] + $weight;
                     //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
                     $order['items'] = $items;
                     $orders_items[$o['id']] = $items;
