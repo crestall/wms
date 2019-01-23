@@ -48,6 +48,8 @@ class LabelsController extends Controller
         $i = 0;
         $eparcel_clients = array();
         $single_order = (count($this->request->data['orders']) == 1);
+        //$eparcel_clients[$od['client_id']]['do_ep'] = false;
+        //$eparcel_clients[$od['client_id']]['do_pp'] = false;
         foreach($this->request->data['orders'] as $id)
         {
             $order_id = $id;
@@ -62,6 +64,8 @@ class LabelsController extends Controller
                 $details = $this->{$eParcelClass}->getShipmentDetails($od, $items);
                 $this->order->updateOrderValue('labels', count( $details['items'] ), $id);
             }
+
+
 
             $courier = $this->courier->getCourierName($od['courier_id']);
             if($courier == "eParcel" || $courier == "eParcel Express")
@@ -78,13 +82,11 @@ class LabelsController extends Controller
                     );
                 }
                 $eparcel_clients[$od['client_id']]["client"] = $client;
-                $eparcel_clients[$od['client_id']]['do_ep'] = false;
-                $eparcel_clients[$od['client_id']]['do_pp'] = false; 
                 if($od['eparcel_express'] == 1 || $courier == "eParcel Express")
                 {
                     $eparcel_clients[$od['client_id']]['do_ep'] = true;
                 }
-                else
+                if($od['eparcel_express'] == 0 || $courier != "eParcel Express")
                 {
                 	$eparcel_clients[$od['client_id']]['do_pp'] = true;
                 }
@@ -92,6 +94,8 @@ class LabelsController extends Controller
                 //$eparcel_clients[$od['client_id']]['request']['shipments'][$i] = array("shipment_id"	=>	$od['eparcel_shipment_id'], 'ship_to' => $od['ship_to']);
                 $eparcel_clients[$od['client_id']]['request']['shipments'][$i] = array("shipment_id"	=>	$od['eparcel_shipment_id']);
                 ++$i;
+                if(!isset($eparcel_clients[$od['client_id']]['do_ep'])) $eparcel_clients[$od['client_id']]['do_ep'] = false;
+                if(!isset($eparcel_clients[$od['client_id']]['do_pp'])) $eparcel_clients[$od['client_id']]['do_p'] = false;
             }
         }
         $order_id = ($single_order)? $order_id: 0;
@@ -101,8 +105,10 @@ class LabelsController extends Controller
         //echo "<pre>",print_r($eparcel_clients),"</pre>"; die();
         foreach($eparcel_clients as $client_id => $array)
         {
+            //echo "<pre>",print_r($array),"</pre>";
             if($array['do_ep']) $array['request']['preferences']['groups'][] = $ep_group;
             if($array['do_pp']) $array['request']['preferences']['groups'][] = $pp_group;
+            //echo "<pre>",print_r($array['request']),"</pre>"; continue;
             $lResponse = $this->{$eParcelClass}->CreateLabels($array['request']);
             //echo "<pre>",print_r($lResponse),"</pre>"; //die();
             /* */
@@ -146,7 +152,7 @@ class LabelsController extends Controller
     }
 
     public function isAuthorized(){
-        
+
         return true;
     }
 }
