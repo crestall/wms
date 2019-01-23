@@ -95,7 +95,7 @@ class LabelsController extends Controller
                 $eparcel_clients[$od['client_id']]['request']['shipments'][$i] = array("shipment_id"	=>	$od['eparcel_shipment_id']);
                 ++$i;
                 if(!isset($eparcel_clients[$od['client_id']]['do_ep'])) $eparcel_clients[$od['client_id']]['do_ep'] = false;
-                if(!isset($eparcel_clients[$od['client_id']]['do_pp'])) $eparcel_clients[$od['client_id']]['do_p'] = false;
+                if(!isset($eparcel_clients[$od['client_id']]['do_pp'])) $eparcel_clients[$od['client_id']]['do_pp'] = false;
             }
         }
         $order_id = ($single_order)? $order_id: 0;
