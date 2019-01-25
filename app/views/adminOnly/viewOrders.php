@@ -29,30 +29,12 @@
         </div>
         <div class="col-lg-3">
             <div class="form-group">
-                <label>Filter By State</label>
-                <select id="state_selector" class="form-control selectpicker">
-                    <option value="0">All States</option>
-                    <?php
-                    foreach($states as $s)
-                    {
-                        echo "<option";
-                        if($s == $state)
-                        {
-                            echo " selected";
-                        }
-                        echo ">$s</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="form-group">
                 <label>Search</label>
                 <input type="text" class="form-control" id="table_searcher" />
             </div>
         </div>
     </div>
+    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?> 
     <div class="row">
         <div class="col-lg-12">
             <?php if(isset($_SESSION['feedback'])) :?>

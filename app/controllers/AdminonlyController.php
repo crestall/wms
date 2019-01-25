@@ -22,7 +22,6 @@ class adminonlyController extends Controller
         $client_id = 0;
         $fulfilled = 0;
         $state = "";
-        $ff = "Unfulfilled";
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['client']))
@@ -34,17 +33,14 @@ class adminonlyController extends Controller
             {
                 $courier_id = $this->request->params['args']['courier'];
             }
-            if(isset($this->request->params['args']['fulfilled']))
-            {
-                $fulfilled = $this->request->params['args']['fulfilled'];
-                $ff = "Fulfilled";
-            }
             if(isset($this->request->params['args']['state']))
             {
                 $state = $this->request->params['args']['state'];
             }
         }
-        $page_title = "$ff Orders For $client_name";
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $page_title = "Fulfilled Orders For $client_name";
         //$orders = $this->order->getUnfulfilledOrders($client_id, $courier_id, 0);     getAllOrders($client_id, $courier_id = -1, $fulfilled = 0, $store_order = -1)
         $orders = $this->order->getAllOrders($client_id, $courier_id, $fulfilled, 0, $state);
         //render the page
@@ -56,7 +52,10 @@ class adminonlyController extends Controller
             'courier_id'    =>  $courier_id,
             'orders'        =>  $orders,
             'fulfilled'     =>  $fulfilled,
-            'state'         =>  $state
+            'state'         =>  $state,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Dispatched",
         ]);
     }
 
