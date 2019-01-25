@@ -14,6 +14,11 @@ class adminonlyController extends Controller
         parent::beforeAction();
     }
 
+    public function dispatchedOrdersUpdater()
+    {
+        
+    }
+
     public function eparcelShipmentDeleter()
     {
         $clients = $this->client->getEparcelClients();
