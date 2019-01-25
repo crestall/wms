@@ -703,17 +703,12 @@ class OrdersController extends Controller
             {
                 $courier_id = $this->request->params['args']['courier'];
             }
-            if(isset($this->request->params['args']['fulfilled']))
-            {
-                $fulfilled = $this->request->params['args']['fulfilled'];
-                $ff = "Fulfilled";
-            }
             if(isset($this->request->params['args']['state']))
             {
                 $state = $this->request->params['args']['state'];
             }
         }
-        $page_title = "$ff Orders For $client_name";
+        $page_title = "Fulfilled Orders For $client_name";
         //$orders = $this->order->getUnfulfilledOrders($client_id, $courier_id, 0);     getAllOrders($client_id, $courier_id = -1, $fulfilled = 0, $store_order = -1)
         $orders = $this->order->getAllOrders($client_id, $courier_id, $fulfilled, 0, $state);
         //render the page

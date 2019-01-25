@@ -14,53 +14,6 @@
 <div id="page-wrapper">
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        <div class="row">
-            <div class="col-lg-3 text-center">
-                <?php if($fulfilled == 0):?>
-                    <p><button class="btn btn-info" id="show_fulfilled">Show Only Fulfilled Orders</button></p>
-                <?php else:?>
-                    <p><button class="btn btn-primary" id="show_unfulfilled">Show Only Unfulfilled Orders</button></p>
-                <?php endif;?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-primary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
-                <p><a class="btn btn-primary select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
-            </div>
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
-                <p><a class="btn btn-info hunters-label-print"><i class="fas fa-tags"></i> Print Hunters Labels For Selected</a> </p>
-                <p><a class="btn btn-default viclocal-label-print"><i class="fas fa-tags"></i> Print Vic Local Labels For Selected</a> </p>
-            </div>
-            <?php if($fulfilled == 0):?>
-                <div class="col-lg-3 text-center">
-                    <p><a class="btn btn-primary eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
-                    <p><a class="btn btn-info hunters-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Hunters Orders</a> </p>
-                    <p><a class="btn btn-default viclocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Vic Local Orders</a> </p>
-                </div>
-            <?php endif;?>
-            <div class="col-lg-3 text-center">
-                <?php if($fulfilled == 0):?>
-                    <p><a class="btn btn-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
-                <?php endif;?>
-                <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
-            </div>
-        </div>
-    <?php elseif($user_role == "warehouse"):?>
-        <div class="row">
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-primary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
-                <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
-            </div>
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
-                <p><a class="btn btn-info hunters-label-print"><i class="fas fa-tags"></i> Print Hunters Labels For Selected</a> </p>
-                <p><a class="btn btn-secondary viclocal-label-print"><i class="fas fa-tags"></i> Print Vic Local Labels For Selected</a> </p>
-            </div>
-        </div>
-    <?php endif;?>
     <div class="row">
         <div class="col-lg-3">
             <div class="form-group">
