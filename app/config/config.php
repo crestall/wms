@@ -443,7 +443,8 @@ return array(
         ),
         'admin-only'    => array(
             'super_admin_only'  => true,
-            'eparcel-shipment-deleter'  => true
+            'eparcel-shipment-deleter'  => true,
+            'dispatched-orders-updater' => true
         ),
     ),
     'WAREHOUSE_PAGES' => array(
