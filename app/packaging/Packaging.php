@@ -218,6 +218,14 @@ class Packaging{
                     $weight += $i['weight'];
                     $ar_bottles += $i['qty'];
                 }
+                elseif( in_array($i['id'], Config::get('BB_WEIGHTED_IDS') ))
+                {
+                    $weight += $i['weight'];
+                }
+                elseif( stripos($i['name'], 'replacement cap') !== false )
+                {
+                    $weight += $i['weight'];
+                }
                 else
                 {
                     $total_bottles += $i['qty'];
