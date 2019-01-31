@@ -75,7 +75,7 @@ class DownloadsController extends Controller {
             'Country',
             'Charge Code',
             'Total Charge',
-            'Weight'
+            'Weight',
             'Shrink Wrap',
             'Bubble Wrap',
             'Pallets',
@@ -103,7 +103,7 @@ class DownloadsController extends Controller {
                 $o['country'],
                 $o['charge_code'],
                 $o['charge'],
-                $o['weight'];
+                $o['weight'],
                 $o['shrink_wrap'],
                 $o['bubble_wrap'],
                 $o['pallets'],
