@@ -354,7 +354,8 @@ class Order extends Model{
                 'store_order'           => $co['store_order'],
                 'csv_items'             => $csv_items,
                 'cartons'               => max(count($packages), $co['labels']),
-                'parcels'               => $parcels
+                'parcels'               => $parcels,
+                'weight'                => $co['weight']
             );
             $return[] = $row;
         }
