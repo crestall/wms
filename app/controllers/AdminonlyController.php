@@ -14,6 +14,51 @@ class adminonlyController extends Controller
         parent::beforeAction();
     }
 
+    public function dispatchedOrdersUpdater()
+    {
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        $client_name = "All Clients";
+        $courier_id = -1;
+        $client_id = 0;
+        $fulfilled = 0;
+        $state = "";
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+            }
+            if(isset($this->request->params['args']['courier']))
+            {
+                $courier_id = $this->request->params['args']['courier'];
+            }
+            if(isset($this->request->params['args']['state']))
+            {
+                $state = $this->request->params['args']['state'];
+            }
+        }
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $page_title = "Fulfilled Orders For $client_name";
+        //$orders = $this->order->getUnfulfilledOrders($client_id, $courier_id, 0);     getAllOrders($client_id, $courier_id = -1, $fulfilled = 0, $store_order = -1)
+        $orders = $this->order->getAllOrders($client_id, $courier_id, $fulfilled, 0, $state);
+        //render the page
+        Config::setJsConfig('curPage', "view-orders");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'adminOnly/viewOrders.php', [
+            'page_title'    =>  $page_title,
+            'client_name'   =>  $client_name,
+            'client_id'     =>  $client_id,
+            'courier_id'    =>  $courier_id,
+            'orders'        =>  $orders,
+            'fulfilled'     =>  $fulfilled,
+            'state'         =>  $state,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Dispatched",
+        ]);
+    }
+
     public function eparcelShipmentDeleter()
     {
         $clients = $this->client->getEparcelClients();

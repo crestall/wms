@@ -195,6 +195,18 @@ return array(
         11597
     ),
     /*************************************************************************
+    * Big Bottle Weighted IDS
+    **************************************************************************/
+    "BB_WEIGHTED_IDS" => array(
+        6067,   //big brush
+        6040,   //royal chill
+        6041,   //blush chill
+        6042,    //plum chill
+        6030,
+        6031,
+        10889
+    ),
+    /*************************************************************************
     * Big Bottle Boxes
     **************************************************************************/
     "BBBOX_WEIGHTS" => array(
@@ -443,7 +455,8 @@ return array(
         ),
         'admin-only'    => array(
             'super_admin_only'  => true,
-            'eparcel-shipment-deleter'  => true
+            'eparcel-shipment-deleter'  => true,
+            'dispatched-orders-updater' => true
         ),
     ),
     'WAREHOUSE_PAGES' => array(
