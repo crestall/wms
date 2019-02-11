@@ -135,17 +135,27 @@
         $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
         $this->output .= "Reducing Stock and recording movement fo order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
         $this->removeStock($items, $this->controller->request->data['order_ids']);
-        $this->recordOutput('order_fulfillment/local');
+
         if( !empty($od['tracking_email']) )
         {
-            $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-            //$mailer->sendTrackingEmail($id);
-            Email::sendTrackingEmail($od['id']);
+            if($od['client_id'] == 59)
+            {
+                $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
+                Email::sendNoaConfirmEmail($id);
+            }
+            else
+            {
+                 $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                //$mailer->sendTrackingEmail($id);
+                Email::sendTrackingEmail($od['id']);
+            }
+
         }
         if($od['client_id'] == 52) //figure8
         {
             $this->notifyFigure8($od);
         }
+        $this->recordOutput('order_fulfillment/local');
         Session::set('showfeedback', true);
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by {$od['courier_name']}</p>";
     }
