@@ -141,7 +141,7 @@
             if($od['client_id'] == 59)
             {
                 $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
-                Email::sendNoaConfirmEmail($id);
+                Email::sendNoaConfirmEmail($od['id']);
             }
             else
             {
