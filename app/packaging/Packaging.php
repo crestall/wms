@@ -215,7 +215,7 @@ class Packaging{
             {
                 if( in_array($i['id'], Config::get('BB_ADRANGE_IDS') ) )
                 {
-                    $weight += $i['weight'];
+                    $weight += $i['weight'] * $i['qty'];
                     $ar_bottles += $i['qty'];
                 }
                 elseif( in_array($i['id'], Config::get('BB_WEIGHTED_IDS') ))
