@@ -44,6 +44,7 @@
                                 <th>SKU</th>
                                 <th>Supplier</th>
                                 <th>Barcode</th>
+                                <th>Dimensions</th>
                                 <th>Weight</th>
                                 <th>Pallet Item</th>
                                 <th>Double Bay</th>
@@ -63,6 +64,7 @@
                                     <td data-label="SKU"><?php echo $p['sku'];?></td>
                                     <td data-label="Supplier"><?php echo $p['supplier'];?></td>
                                     <td data-label="Barcode" class="number"><?php echo $p['barcode'];?></td>
+                                    <td data-label="Dimensions"><?php echo $p['width']."X".$p['depth']."X".$p['height'];?></td>
                                     <td data-label="Weight" class="number"><?php echo $p['weight'];?> kg</td>
                                     <td data-label="Pallet Item" class='text-center'><?php if($p['palletized'] > 0) echo "Yes"; else echo "No";?></td>
                                     <td data-label="Double Bay" class='text-center'><?php if($p['double_bay'] > 0) echo "Yes"; else echo "No";?></td>

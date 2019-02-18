@@ -494,12 +494,28 @@ class ajaxfunctionsController extends Controller
             $h_details = $this->Hunters3KG->getDetails($od, $items);
             //echo "<pre>",print_r($h_details),"</pre>";
             $h3kg_result = $this->Hunters3KG->getQuote($h_details);
-			//echo "<pre>",print_r($h3kg_result),"</pre>";
-            $hunters3kg_charge =  "$".number_format($h3kg_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
+            //echo "<pre>",print_r($h3kg_result),"</pre>"; die();
+            if(isset($h3kg_result['errorCode']))
+            {
+                $hunters3kg_charge = "<div class='errorbox'><p>".$h3kg_result['errorMessage']."</p></div>";
+            }
+            else
+            {
+                $hunters3kg_charge =  "$".number_format($h3kg_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
+            }
+
             $hplu_result = $this->HuntersPLU->getQuote($h_details);
-            $huntersplu_charge =  "$".number_format($hplu_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
-            $hpal_result = $this->HuntersPAL->getQuote($h_details);
-            $hunterspal_charge =  "$".number_format($hpal_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
+            //echo "<pre>",print_r($hplu_result),"</pre>";die();
+            if(isset($hplu_result['errorCode']))
+            {
+                $huntersplu_charge = "<div class='errorbox'><p>".$hplu_result['errorMessage']."</p></div>";
+            }
+            else
+            {
+                $huntersplu_charge =  "$".number_format($hplu_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
+            }
+            //$hpal_result = $this->HuntersPAL->getQuote($h_details);
+            //$hunterspal_charge =  "$".number_format($hpal_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
         }
 
 
@@ -510,7 +526,7 @@ class ajaxfunctionsController extends Controller
             'items'                     =>  $items,
             'hunters3kg_charge'         =>  $hunters3kg_charge,
             'huntersplu_charge'         =>  $huntersplu_charge,
-            'hunterspal_charge'         =>  $hunterspal_charge,
+            'hunterspal_charge'         =>  '',
             'eparcel_charge'            =>  $eparcel_charge,
             'eparcel_express_charge'    =>  $eparcel_express_charge,
             'client_name'               =>  $this->client->getClientName($od['client_id']),
