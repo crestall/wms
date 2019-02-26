@@ -378,6 +378,17 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function addOriginOrder()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "add-origin-order");
+        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addoriginorder.php");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addOriginOrder.php', [
+            'page_title'    =>  "Add Origin Order",
+            'form'          =>  $form
+        ]);
+    }
+
     public function errorData()
     {
         $this->view->assign('page_title', "Error Data");

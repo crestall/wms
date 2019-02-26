@@ -87,7 +87,7 @@
                             {
                                 $('#local-details').slideDown();
                                 $('#local_display').removeAttr('disabled');
-                                $("#courier_name").focus(); 
+                                $("#courier_name").focus();
                             }
                             else
                             {
@@ -396,6 +396,12 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
                             }
                         });
+                    }
+                },
+                'add-origin-order': {
+                    init: function()
+                    {
+                        
                     }
                 },
                 'view-storeorders' : {
