@@ -86,7 +86,8 @@
                             if($(this).val() == $("#local_id").val())
                             {
                                 $('#local-details').slideDown();
-                                $('#local_display').removeAttr('disabled').focus(); 
+                                $('#local_display').removeAttr('disabled');
+                                $("#courier_name").focus(); 
                             }
                             else
                             {
