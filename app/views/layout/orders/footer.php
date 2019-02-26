@@ -86,7 +86,7 @@
                             if($(this).val() == $("#local_id").val())
                             {
                                 $('#local-details').slideDown();
-                                $('#local_display').removeAttr('disabled');
+                                $('#local_display').removeAttr('disabled').focus(); 
                             }
                             else
                             {
