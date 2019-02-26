@@ -872,7 +872,7 @@ class OrdersController extends Controller
             "viewStoreorders"
         ));
         //only for clients
-        Permission::allow('client', $resource, array(
+        $allowed_resources = array(
             "addOrder",
             "addOrderTest",
             "bookPickup",
@@ -880,8 +880,12 @@ class OrdersController extends Controller
             "clientOrders",
             "orderTracking",
             "orderDetail",
-        ));
-
+        );
+        if(Session::getUserClientId() == 67)
+        {
+            $allowed_resources[] = "addOriginOrder";
+        }
+        Permission::allow('client', $resource, $allowed_resources);
         return Permission::check($role, $resource, $action);
     }
 }
