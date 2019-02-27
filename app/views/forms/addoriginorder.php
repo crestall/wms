@@ -71,7 +71,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Add Order</button>
+                    <button type="submit" class="btn btn-primary" id="add_origin_order_submitter" disabled>Add Order</button>
                 </div>
             </div>
         </form>
