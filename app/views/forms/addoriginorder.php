@@ -38,8 +38,8 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php echo Form::displayError('panel');?>
                 </div>
                 <div class="col-md-4">
-                    <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty</label>
-                    <div class="col-md-8">
+                    <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty</label>
+                    <div class="col-md-3">
                         <input type="text" class="form-control required number" name="panel_qty" id="panel_qty" value="<?php echo Form::value('panel_qty');?>" />
                         <?php echo Form::displayError('panel_qty');?>
                     </div>
