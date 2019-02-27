@@ -19,7 +19,20 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
 <div class="row">
     <div class="col-lg-12">
         <form id="add_origin_order" method="post" action="/form/procOriginOrderAdd"  enctype="multipart/form-data" autocomplete="off">
-
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Order Details</h3>
+                </div>
+            </div>
+            <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+            <input type="hidden" name="selected_items" id="selected_items" />
+            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">&nbsp;</label>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Add Order</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
