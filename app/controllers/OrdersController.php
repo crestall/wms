@@ -369,6 +369,11 @@ class OrdersController extends Controller
 
     public function addOrder()
     {
+        $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+        if( $user_role == "client" && Session::getUserClientId() == 67 )
+        {
+            return $this->addOriginOrder();
+        }
         //render the page
         Config::setJsConfig('curPage', "add-order");
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addorder.php");

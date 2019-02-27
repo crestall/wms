@@ -502,7 +502,7 @@ return array(
             'add-order'          =>  true,
             'bulk-upload-orders'     =>  true,
             'book-pickup'   => true,
-            'add-origin-order'  => true
+            //'add-origin-order'  => true
 		),
 		'inventory'			=>	array(
 			'client-inventory'	=>	true,
