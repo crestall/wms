@@ -86,13 +86,13 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                         <?php endforeach;?>
                     <?php else:?>
                         <div class="row bank_holder">
+                            <div class="col-sm-4">
+                                <p><input type="text" class="form-control number" name="banks[0][qty]" placeholder="Panel Qty" /></p>
+                            </div>
                             <div class="col-sm-1 add-image-holder">
                                 <a class="add" style="cursor:pointer" title="Add Another Bank">
                                     <i class="fas fa-plus-circle fa-2x text-success"></i>
                                 </a>
-                            </div>
-                            <div class="col-sm-4">
-                                <p><input type="text" class="form-control item-searcher" name="banks[0][qty]" placeholder="Qty" /></p>
                             </div>
                         </div>
                     <?php endif;?>
