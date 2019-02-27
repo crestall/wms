@@ -11,7 +11,6 @@ if(!empty(Form::value('items')))
     $idisp = "block";
 if($user_role == "client")
     $idisp = "block";
-$client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') : 0;
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
