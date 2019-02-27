@@ -11,7 +11,7 @@ if(!empty(Form::value('items')))
     $idisp = "block";
 if($user_role == "client")
     $idisp = "block";
-$client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') : 0;
+$inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qty');
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
@@ -42,6 +42,20 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <div class="col-md-3">
                         <input type="text" class="form-control required number" name="panel_qty" id="panel_qty" value="<?php echo Form::value('panel_qty');?>" />
                         <?php echo Form::displayError('panel_qty');?>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Inverter</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
+                    <?php echo Form::displayError('inverter');?>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control required number" name="inverter_qty" id="inverter_qty" value="<?php echo $inverter_qty;?>" />
+                        <?php echo Form::displayError('inverter_qty');?>
                     </div>
                 </div>
             </div>
