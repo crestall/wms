@@ -31,6 +31,23 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php echo Form::displayError('work_order');?>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Panel</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
+                    <?php echo Form::displayError('panel');?>
+                </div>
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty</label>
+                <div class="col-md-2">
+                    <input type="text" class="form-control required number" name="panel_qty" id="panel_qty" value="<?php echo Form::value('panel_qty');?>" />
+                    <?php echo Form::displayError('panel_qty');?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Address Details</h3>
+                </div>
+            </div>
             <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
             <input type="hidden" name="selected_items" id="selected_items" />
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
