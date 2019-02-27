@@ -59,14 +59,54 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                     </div>
                 </div>
             </div>
+            <div id="banks" class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Banks</label>
+                <div class="col-md-9" id="banks_holder">
+                    <?php if(is_array(Form::value('banks'))):?>
+                        <?php foreach(Form::value('banks') as $b => $bank):
+                            $qty = (isset($bank['qty']))? $bank['qty']: "";?>
+                            <div class="row bank_holder">
+                                <?php if($i == 0):?>
+                                    <div class="col-sm-1 add-image-holder">
+                                        <a class="add" style="cursor:pointer" title="Add Another Bank">
+                                            <i class="fas fa-plus-circle fa-2x text-success"></i>
+                                        </a>
+                                    </div>
+                                <?php else:?>
+                                    <div class="col-sm-1 delete-image-holder">
+                                        <a class="delete" style="cursor:pointer" title="Remove This Bank">
+                                            <i class="fas fa-times-circle fa-2x text-danger"></i>
+                                        </a>
+                                    </div>
+                                <?php endif;?>
+                                <div class="col-sm-4">
+                                    <p><input type="text" class="form-control number" name="banks[<?php echo $i;?>][qty]" placeholder="Qty" value="<?php echo $qty;?>" /> Panels</p>
+                                </div>
+                            </div>
+                        <?php endforeach;?>
+                    <?php else:?>
+                        <div class="row bank_holder">
+                            <div class="col-sm-1 add-image-holder">
+                                <a class="add" style="cursor:pointer" title="Add Another Bank">
+                                    <i class="fas fa-plus-circle fa-2x text-success"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <p><input type="text" class="form-control item-searcher" name="banks[0][qty]" placeholder="Qty" /></p>
+                            </div>
+                        </div>
+                    <?php endif;?>
+                </div>
+                <?php echo Form::displayError('banks');?>
+            </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button class="btn btn-success btn-small" id="calc_items">Get Parts</button>
+                    <button class="btn btn-success btn-small" id="calc_items" disabled>Get Parts</button>
                 </div>
             </div>
             <div class="row" id="items_holder" style="display:none">
-                
+
             </div>
             <div class="row">
                 <div class="col-lg-12">
