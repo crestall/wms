@@ -59,6 +59,15 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                     </div>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">&nbsp;</label>
+                <div class="col-md-4">
+                    <button class="btn btn-success btn-small" id="calc_items">Get Parts</button>
+                </div>
+            </div>
+            <div class="row" id="items_holder" style="display:none">
+                
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Address Details</h3>
