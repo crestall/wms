@@ -501,7 +501,8 @@ return array(
 			'order-tracking'		=>	false,
             'add-order'          =>  true,
             'bulk-upload-orders'     =>  true,
-            'book-pickup'   => true
+            'book-pickup'   => true,
+            'add-origin-order'  => true
 		),
 		'inventory'			=>	array(
 			'client-inventory'	=>	true,
