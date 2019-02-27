@@ -390,6 +390,7 @@ class OrdersController extends Controller
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addoriginorder.php");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addOriginOrder.php', [
             'page_title'    =>  "Add Origin Order",
+            'client_id'     =>  67,
             'form'          =>  $form
         ]);
     }
