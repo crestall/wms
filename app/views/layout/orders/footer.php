@@ -443,7 +443,7 @@
                             var bank_count = $(":input.banks").length;
                             var html = "<div class='row bank_holder'>"
                             html += "<div class='col-sm-4'>";
-                            html += "<p><input type='text' class='form-control number banks' name=banks["+bank_count+"][qty]' placeholder='Panel Count' /></p>";
+                            html += "<p><input type='text' class='form-control required number banks' name=banks["+bank_count+"][qty]' placeholder='Panel Count' /></p>";
                             html += "</div>"; //col-sm-4
                             html += "<div class='col-sm-1 delete-image-holder'>";
                             html += "<a class='delete' title='remove this bank'><i class='fas fa-times-circle fa-2x text-danger'></i></a>";
@@ -456,6 +456,14 @@
                                 .off('click')
                                 .click(function(e){
                                     $(this).closest('div.bank_holder').remove();
+                            });
+                        });
+                        $('input.banks').each(function(i,e){
+                            $(this).change(function(){
+                                if($(this).valid())
+                                {
+                                    $("button#cal_items").removeAttr('disabled');
+                                }
                             });
                         });
                     }
