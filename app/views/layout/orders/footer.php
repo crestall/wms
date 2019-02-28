@@ -420,7 +420,7 @@
                         function selectCallback(event, ui)
                         {
                             var $this = event.target;
-                            $this.val(ui.item.name)
+                            $this.val(ui.item.item_id) ;
                             if($this.id == "panel")
                             {
                                 $("#panel_id").val(ui.item.item_id)
