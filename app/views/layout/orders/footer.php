@@ -401,7 +401,9 @@
                 'add-origin-order': {
                     init: function()
                     {
-                        
+                        actions.common.init();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                     }
                 },
                 'view-storeorders' : {
