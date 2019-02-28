@@ -420,7 +420,6 @@
                         function selectCallback(event, ui)
                         {
                             var $this = $(event.target);
-                            $this.val(ui.item.item_id) ;
                             if($this.id == "panel")
                             {
                                 $("#panel_id").val(ui.item.item_id)
@@ -429,6 +428,7 @@
                             {
                                 $("#inverter_id").val(ui.item.item_id)
                             }
+                            $this.val(ui.item.item_id) ;
                             return false;
                         }
                         function changeCallback(event, ui)
