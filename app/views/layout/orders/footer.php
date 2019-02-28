@@ -463,6 +463,7 @@
                                 if($(this).valid())
                                 {
                                     $("button#cal_items").removeAttr('disabled');
+                                    console.log('open up!');
                                 }
                             });
                         });
