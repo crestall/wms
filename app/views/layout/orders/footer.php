@@ -404,12 +404,6 @@
                         actions.common.init();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
-
-
-
-
-
-
                         $("input.item-searcher").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
                             {
@@ -419,7 +413,7 @@
                         })
                         function selectCallback(event, ui)
                         {
-                            var $this = $(event.target);
+                            var $this = event.target;
                             if($this.id == "panel")
                             {
                                 $("#panel_id").val(ui.item.item_id)
@@ -428,7 +422,6 @@
                             {
                                 $("#inverter_id").val(ui.item.item_id)
                             }
-                            $this.val(ui.item.item_id) ;
                             return false;
                         }
                         function changeCallback(event, ui)
@@ -438,19 +431,33 @@
                                 $(event.target).val("");
                                 return false;
                             }
-                            itemsUpdater.itemDelete();
-                            //actions['item-searcher-test'].init();
+                            $('a.delete')
+                                .css('cursor', 'pointer')
+                                .off('click')
+                                .click(function(e){
+                                    $(this).closest('div.bank_holder').remove();
+                            });
                         }
-
-
-
-
-
-
-
-
-
-
+                        $("a.add").click(function(e){
+                            e.preventDefault;
+                            var bank_count = $(":input.banks").length;
+                            var html = "<div class='row bank_holder'>"
+                            html += "<div class='col-sm-4'>";
+                            html += "<p><input type='text' class='form-control number banks' name=banks["+bank_count+"][qty]' placeholder='Panel Count' /> Panels</p>";
+                            html += "</div>"; //col-sm-4
+                            html += "<div class='col-sm-1 delete-image-holder'>";
+                            html += "<a class='delete' title='remove this bank'><i class='fas fa-times-circle fa-2x text-danger'></i></a>";
+                            html += "</div>"; //col-sm-1 item_id' />"
+                            html += "</div>"; //row
+                            $('div#banks_holder').append(html);
+                            //itemsUpdater.itemDelete();
+                            $('a.delete')
+                                .css('cursor', 'pointer')
+                                .off('click')
+                                .click(function(e){
+                                    $(this).closest('div.bank_holder').remove();
+                            });
+                        });
                     }
                 },
                 'view-storeorders' : {
