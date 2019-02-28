@@ -458,15 +458,20 @@
                                     $(this).closest('div.bank_holder').remove();
                             });
                         });
+                        var lock = false;
                         $('input.banks').each(function(i,e){
-                            $(this).change(function(){
+                            //$(this).change(function(){
                                 if($(this).valid())
                                 {
-                                    $("button#cal_items").removeAttr('disabled');
-                                    console.log('open up!');
+
                                 }
-                            });
+                                else
+                                {
+                                    lock = true;
+                                }
+                            //});
                         });
+                        $("button#cal_items").prop("disabled", lock);
                     }
                 },
                 'view-storeorders' : {
