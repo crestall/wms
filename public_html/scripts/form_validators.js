@@ -62,6 +62,7 @@ $(document).ready(function() {
 
 	////////////////////////////////////////////////////////////
 	//Validator default
+    console.log('validator loaded');
     $.validator.setDefaults({
         //errorElement: "p",
         errorElement: "em",
