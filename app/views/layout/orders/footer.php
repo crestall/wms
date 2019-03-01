@@ -477,6 +477,7 @@
                                 }
                             //});
                         });
+                        console.log("lock is "+lock);
                         $("button#cal_items").prop("disabled", lock);
                     }
                 },
