@@ -80,7 +80,7 @@ $(document).ready(function() {
         		error.insertAfter( element.parent().find( "label" ) );
         	}
             else if( (element.prop( "type" ) === "radio") ) {
-                error.insertAfter( element.parents('form-radio') ); 
+                error.insertAfter( element.parents('form-radio') );
             }
             else if( element.prop( "type" ) === "select-one" ) {
                 error.insertAfter( element.closest( "div.bootstrap-select" ) );
@@ -447,6 +447,10 @@ $(document).ready(function() {
                 remote: 'User Role names must be unique'
             }
         }
+    });
+    ////////////////////////////////////////////////////////////
+    $('form#add_origin_order').validate({
+
     });
     ////////////////////////////////////////////////////////////
     $('form#form-forgot-password').validate({
