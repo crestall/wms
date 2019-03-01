@@ -476,7 +476,7 @@
 
 
                         $('input.banks').each(function(i,e){
-                            if(!validator.element($(this)))
+                            if(!validator.check($(this)))
                             {
                                 lock = true;
                             }
