@@ -458,6 +458,7 @@
                                     $(this).closest('div.bank_holder').remove();
                                     actions['add-origin-order'].openCalcButton();
                             });
+                            actions['add-origin-order'].openCalcButton();
                         });
                         actions['add-origin-order'].openCalcButton();
                         $('input.banks').change(function(e){
