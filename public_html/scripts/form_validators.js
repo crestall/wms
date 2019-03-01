@@ -76,9 +76,12 @@ $(document).ready(function() {
             //console.log(element.prop( "type" ))
         	error.addClass( "text-danger" );
             //error.addClass("font-italic");
-        	if ( (element.prop( "type" ) === "checkbox") || (element.prop( "type" ) === "radio") ) {
+        	if ( (element.prop( "type" ) === "checkbox")  ) {
         		error.insertAfter( element.parent().find( "label" ) );
         	}
+            else if( (element.prop( "type" ) === "radio") ) {
+                error.insertAfter( element.parents('form-radio') ); 
+            }
             else if( element.prop( "type" ) === "select-one" ) {
                 error.insertAfter( element.closest( "div.bootstrap-select" ) );
             }else {
