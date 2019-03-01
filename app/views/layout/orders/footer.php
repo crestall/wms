@@ -431,13 +431,9 @@
                                 $(event.target).val("");
                                 return false;
                             }
-                            $('a.delete')
-                                .css('cursor', 'pointer')
-                                .off('click')
-                                .click(function(e){
-                                    $(this).closest('div.bank_holder').remove();
-                            });
+                            actions['add-origin-order'].deleteBank();
                         }
+                        
                         $("a.add").click(function(e){
                             e.preventDefault;
                             var bank_count = $(":input.banks").length;
@@ -451,13 +447,7 @@
                             html += "</div>"; //row
                             $('div#banks_holder').append(html);
                             //itemsUpdater.itemDelete();
-                            $('a.delete')
-                                .css('cursor', 'pointer')
-                                .off('click')
-                                .click(function(e){
-                                    $(this).closest('div.bank_holder').remove();
-                                    actions['add-origin-order'].openCalcButton();
-                            });
+                            actions['add-origin-order'].deleteBank();
                             actions['add-origin-order'].openCalcButton();
                         });
                         actions['add-origin-order'].openCalcButton();
@@ -481,6 +471,15 @@
                         });
                         console.log("lock is "+lock);
                         $("button#calc_items").prop("disabled", lock);
+                    },
+                    deleteBank: function(){
+                        $('a.delete')
+                            .css('cursor', 'pointer')
+                            .off('click')
+                            .click(function(e){
+                                $(this).closest('div.bank_holder').remove();
+                                actions['add-origin-order'].openCalcButton();
+                        });
                     }
                 },
                 'view-storeorders' : {
