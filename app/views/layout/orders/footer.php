@@ -449,11 +449,17 @@
                             $('div#banks_holder').append(html);
                             //itemsUpdater.itemDelete();
                             actions['add-origin-order'].deleteBank();
+                            actions['add-origin-order'].checkBanks();
                             actions['add-origin-order'].openCalcButton();
                         });
+                        actions['add-origin-order'].checkBanks();
                         actions['add-origin-order'].openCalcButton();
-                        $('input.banks').change(function(e){
-                            actions['add-origin-order'].openCalcButton();
+                    },
+                    checkBanks: function(){
+                        $('input.banks')
+                            .off('change')
+                            .change(function(e){
+                                actions['add-origin-order'].openCalcButton();
                         });
                     },
                     openCalcButton: function(){
