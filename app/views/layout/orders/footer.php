@@ -485,6 +485,7 @@
                         $("button#calc_items").click(function(e){
                             e.preventDefault();
                             console.log('click');
+                            
                         });
                     }
                 },
