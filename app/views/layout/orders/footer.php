@@ -458,6 +458,12 @@
                                     $(this).closest('div.bank_holder').remove();
                             });
                         });
+                        actions['add-origin-order'].openCalcButton;
+                        $('input.banks').change(function(e){
+                            actions['add-origin-order'].openCalcButton;
+                        });
+                    },
+                    openCalcButton: function(){
                         var lock = false;
                         $('input.banks').each(function(i,e){
                             //$(this).change(function(){
