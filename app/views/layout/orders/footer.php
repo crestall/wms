@@ -456,6 +456,7 @@
                                 .off('click')
                                 .click(function(e){
                                     $(this).closest('div.bank_holder').remove();
+                                    actions['add-origin-order'].openCalcButton();
                             });
                         });
                         actions['add-origin-order'].openCalcButton();
@@ -478,7 +479,7 @@
                             //});
                         });
                         console.log("lock is "+lock);
-                        $("button#cal_items").prop("disabled", lock);
+                        $("button#calc_items").prop("disabled", lock);
                     }
                 },
                 'view-storeorders' : {
