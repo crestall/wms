@@ -402,6 +402,7 @@
                     init: function()
                     {
                         actions.common.init();
+                        actions['add-origin-order'].calcItems();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         $("input.item-searcher").each(function(i,e){
@@ -433,7 +434,7 @@
                             }
                             actions['add-origin-order'].deleteBank();
                         }
-                        
+
                         $("a.add").click(function(e){
                             e.preventDefault;
                             var bank_count = $(":input.banks").length;
@@ -458,18 +459,11 @@
                     openCalcButton: function(){
                         var lock = false;
                         $('input.banks').each(function(i,e){
-                            //$(this).change(function(){
-                                if($(this).valid())
-                                {
-                                    console.log('unlock');
-                                }
-                                else
-                                {
-                                    lock = true;
-                                }
-                            //});
+                            if(!$(this).valid())
+                            {
+                                lock = true;
+                            }
                         });
-                        console.log("lock is "+lock);
                         $("button#calc_items").prop("disabled", lock);
                     },
                     deleteBank: function(){
@@ -479,6 +473,12 @@
                             .click(function(e){
                                 $(this).closest('div.bank_holder').remove();
                                 actions['add-origin-order'].openCalcButton();
+                        });
+                    },
+                    calcItems: function(){
+                        $("button#calc_items").click(function(e){
+                            e.preventDefault();
+                            console.log('click');
                         });
                     }
                 },
