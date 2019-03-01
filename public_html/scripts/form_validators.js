@@ -76,7 +76,7 @@ $(document).ready(function() {
             //console.log(element.prop( "type" ))
         	error.addClass( "text-danger" );
             //error.addClass("font-italic");
-        	if ( (element.prop( "type" ) === "checkbox") ) {
+        	if ( (element.prop( "type" ) === "checkbox") || (element.prop( "type" ) === "radio") ) {
         		error.insertAfter( element.parent().find( "label" ) );
         	}
             else if( element.prop( "type" ) === "select-one" ) {
