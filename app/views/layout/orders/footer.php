@@ -483,9 +483,10 @@
                     },
                     calcItems: function(){
                         $("button#calc_items").click(function(e){
-                            e.preventDefault();
+                            //e.preventDefault();
+
                             console.log('click');
-                            
+
                         });
                     }
                 },
