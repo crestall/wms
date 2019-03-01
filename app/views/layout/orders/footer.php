@@ -476,10 +476,10 @@
 
 
                         $('input.banks').each(function(i,e){
-                            if(!validator.check($(this)))
-                            {
+                            //if(!validator.check($(this)))
+                            //{
                                 lock = true;
-                            }
+                            //}
                         });
                         $("button#calc_items").prop("disabled", lock);
                     },
