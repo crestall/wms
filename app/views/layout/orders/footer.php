@@ -405,6 +405,12 @@
                         actions['add-origin-order'].calcItems();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+                        $("form#add_origin_order").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                            }
+                        });
                         $("input.item-searcher").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
                             {
