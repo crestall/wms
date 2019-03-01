@@ -470,8 +470,13 @@
                     },
                     openCalcButton: function(){
                         var lock = false;
+
+                        var validator = $( "#add_origin_order" ).validate();
+                        //validator.element( "#myselect" );
+
+
                         $('input.banks').each(function(i,e){
-                            if(!$(this).valid())
+                            if(!validator.element($(this)))
                             {
                                 lock = true;
                             }
