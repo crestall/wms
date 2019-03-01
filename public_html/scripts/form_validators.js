@@ -62,7 +62,7 @@ $(document).ready(function() {
 
 	////////////////////////////////////////////////////////////
 	//Validator default
-    console.log('validator loaded');
+    //console.log('validator loaded');
     $.validator.setDefaults({
         //errorElement: "p",
         errorElement: "em",
@@ -450,7 +450,7 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
-    $('form#add_origin_order').validate({
+    $('#add_origin_order').validate({
 
     });
     ////////////////////////////////////////////////////////////
