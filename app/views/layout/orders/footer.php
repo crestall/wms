@@ -408,7 +408,7 @@
                         $("form#add_origin_order").submit(function(e){
                             if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing order...</h2></div>' });
                             }
                         });
                         $("input.item-searcher").each(function(i,e){
@@ -470,16 +470,13 @@
                     },
                     openCalcButton: function(){
                         var lock = false;
-
                         var validator = $( "#add_origin_order" ).validate();
                         //validator.element( "#myselect" );
-
-
                         $('input.banks').each(function(i,e){
-                            //if(!validator.check($(this)))
-                            //{
+                            if(!validator.check($(this)))
+                            {
                                 lock = true;
-                            //}
+                            }
                         });
                         $("button#calc_items").prop("disabled", lock);
                     },
