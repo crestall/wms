@@ -328,6 +328,7 @@ return array(
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,
+            'add-origin-order'  => true,
             'order-update'			    => false,
 			'process-backorders'	    =>	false,
 			'order-summaries'		    =>	true,
@@ -500,7 +501,8 @@ return array(
 			'order-tracking'		=>	false,
             'add-order'          =>  true,
             'bulk-upload-orders'     =>  true,
-            'book-pickup'   => true
+            'book-pickup'   => true,
+            //'add-origin-order'  => true
 		),
 		'inventory'			=>	array(
 			'client-inventory'	=>	true,

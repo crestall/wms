@@ -369,11 +369,28 @@ class OrdersController extends Controller
 
     public function addOrder()
     {
+        $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+        if( $user_role == "client" && Session::getUserClientId() == 67 )
+        {
+            return $this->addOriginOrder();
+        }
         //render the page
         Config::setJsConfig('curPage', "add-order");
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addorder.php");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addOrder.php', [
             'page_title'    =>  "Add Order",
+            'form'          =>  $form
+        ]);
+    }
+
+    public function addOriginOrder()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "add-origin-order");
+        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addoriginorder.php");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addOriginOrder.php', [
+            'page_title'    =>  "Add Origin Order",
+            'client_id'     =>  67,
             'form'          =>  $form
         ]);
     }
@@ -861,7 +878,7 @@ class OrdersController extends Controller
             "viewStoreorders"
         ));
         //only for clients
-        Permission::allow('client', $resource, array(
+        $allowed_resources = array(
             "addOrder",
             "addOrderTest",
             "bookPickup",
@@ -869,8 +886,12 @@ class OrdersController extends Controller
             "clientOrders",
             "orderTracking",
             "orderDetail",
-        ));
-
+        );
+        if(Session::getUserClientId() == 67)
+        {
+            $allowed_resources[] = "addOriginOrder";
+        }
+        Permission::allow('client', $resource, $allowed_resources);
         return Permission::check($role, $resource, $action);
     }
 }

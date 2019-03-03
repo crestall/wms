@@ -1109,8 +1109,8 @@ class Woocommerce{
                     }
                     else
                     {
-                        $order['import_error'] = true;
-                        $order['import_error_string'] .= "<li>This is a non AU or NZ order. It must be entered manually</li>";
+                        //$order['import_error'] = true;
+                        //$order['import_error_string'] .= "<li>This is a non AU or NZ order. It must be entered manually</li>";
                     }
                 }
                 if($ad['country'] == "AU")

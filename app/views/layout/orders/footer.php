@@ -87,7 +87,7 @@
                             {
                                 $('#local-details').slideDown();
                                 $('#local_display').removeAttr('disabled');
-                                $("#courier_name").focus(); 
+                                $("#courier_name").focus();
                             }
                             else
                             {
@@ -395,6 +395,106 @@
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
                             }
+                        });
+                    }
+                },
+                'add-origin-order': {
+                    init: function()
+                    {
+                        actions.common.init();
+                        actions['add-origin-order'].calcItems();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        $("form#add_origin_order").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing order...</h2></div>' });
+                            }
+                        });
+                        $("input.item-searcher").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.itemAutoComplete($(this), selectCallback, changeCallback);
+                        })
+                        function selectCallback(event, ui)
+                        {
+                            var $this = event.target;
+                            if($this.id == "panel")
+                            {
+                                $("#panel_id").val(ui.item.item_id)
+                            }
+                            else if($this.id == "inverter")
+                            {
+                                $("#inverter_id").val(ui.item.item_id)
+                            }
+                            return false;
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                            actions['add-origin-order'].deleteBank();
+                        }
+
+                        $("a.add").click(function(e){
+                            e.preventDefault;
+                            var bank_count = $(":input.banks").length;
+                            var html = "<div class='row bank_holder'>"
+                            html += "<div class='col-sm-4'>";
+                            html += "<p><input type='text' class='form-control required number banks' name=banks["+bank_count+"][qty]' placeholder='Panel Count' /></p>";
+                            html += "</div>"; //col-sm-4
+                            html += "<div class='col-sm-1 delete-image-holder'>";
+                            html += "<a class='delete' title='remove this bank'><i class='fas fa-times-circle fa-2x text-danger'></i></a>";
+                            html += "</div>"; //col-sm-1 item_id' />"
+                            html += "</div>"; //row
+                            $('div#banks_holder').append(html);
+                            //itemsUpdater.itemDelete();
+                            actions['add-origin-order'].deleteBank();
+                            actions['add-origin-order'].checkBanks();
+                            actions['add-origin-order'].openCalcButton();
+                        });
+                        actions['add-origin-order'].checkBanks();
+                        actions['add-origin-order'].openCalcButton();
+                    },
+                    checkBanks: function(){
+                        $('input.banks')
+                            .off('change')
+                            .change(function(e){
+                                actions['add-origin-order'].openCalcButton();
+                        });
+                    },
+                    openCalcButton: function(){
+                        var lock = false;
+                        var validator = $( "#add_origin_order" ).validate();
+                        //validator.element( "#myselect" );
+                        $('input.banks').each(function(i,e){
+                            if(!validator.check($(this)))
+                            {
+                                lock = true;
+                            }
+                        });
+                        $("button#calc_items").prop("disabled", lock);
+                    },
+                    deleteBank: function(){
+                        $('a.delete')
+                            .css('cursor', 'pointer')
+                            .off('click')
+                            .click(function(e){
+                                $(this).closest('div.bank_holder').remove();
+                                actions['add-origin-order'].openCalcButton();
+                        });
+                    },
+                    calcItems: function(){
+                        $("button#calc_items").click(function(e){
+                            //e.preventDefault();
+
+                            console.log('click');
+
                         });
                     }
                 },
