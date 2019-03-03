@@ -1087,8 +1087,8 @@ class Woocommerce{
                     }
                     else
                     {
-                        $order['import_error'] = true;
-                        $order['import_error_string'] .= "<li>This is an order for the UK, US, or Canada and cannot be processed through the WMS</li>";
+                        //$order['import_error'] = true;
+                        //$order['import_error_string'] .= "<li>This is an order for the UK, US, or Canada and cannot be processed through the WMS</li>";
                     }
                 }
                 elseif( !($ad['country'] == "NZ" || $ad['country'] == "AU" ) )
