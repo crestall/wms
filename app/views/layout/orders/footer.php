@@ -401,17 +401,45 @@
                 'add-origin-order': {
                     init: function()
                     {
-                        actions.common['add-item']();
-                        actions['item-searcher'].init();
+                        actions.common.init();
+                        actions['add-origin-order'].calcItems();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
-                        //itemsUpdater.itemDelete();
                         $("form#add_origin_order").submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing order...</h2></div>' });
                             }
                         });
+                        $("input.item-searcher").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.itemAutoComplete($(this), selectCallback, changeCallback);
+                        })
+                        function selectCallback(event, ui)
+                        {
+                            var $this = event.target;
+                            if($this.id == "panel")
+                            {
+                                $("#panel_id").val(ui.item.item_id)
+                            }
+                            else if($this.id == "inverter")
+                            {
+                                $("#inverter_id").val(ui.item.item_id)
+                            }
+                            return false;
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                            actions['add-origin-order'].deleteBank();
+                        }
                         $("input[name='roof_type']").click(function(e){
                             actions['add-origin-order'].openCalcButton();
                         })
@@ -434,7 +462,6 @@
                         });
                         actions['add-origin-order'].checkBanks();
                         actions['add-origin-order'].openCalcButton();
-                        actions['add-origin-order'].calcItems();
                     },
                     checkBanks: function(){
                         $('input.banks')
@@ -473,7 +500,7 @@
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Calculating Required Parts...</h1></div>' });
                             //console.log( 'roof type: '+ $("input[name='roof_type']:checked").val() );
-                            console.log('click');
+                            //console.log('click');
                             var url = "/ajaxfunctions/calc-origin-pick";
                             var data = $("#add_origin_order").serialize();
                             $("div#origin_items_holder").load(
@@ -482,7 +509,6 @@
                                 function(h){
                                     $.unblockUI();
                                     actions['item-searcher'].init();
-                                    actions.common['add-item']();
                                     $(this).show();
                             });
                         });
