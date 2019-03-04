@@ -491,8 +491,8 @@
                     },
                     calcItems: function(){
                         $("button#calc_items").click(function(e){
-                            //e.preventDefault();
-
+                            e.preventDefault();
+                            console.log('roof type: '+$("input[name='roof_type']").val());
                             console.log('click');
 
                         });
