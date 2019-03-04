@@ -440,7 +440,9 @@
                             }
                             actions['add-origin-order'].deleteBank();
                         }
-
+                        $("input[name='roof_type']").click(function(e){
+                            actions['add-origin-order'].openCalcButton();
+                        })
                         $("a.add").click(function(e){
                             e.preventDefault;
                             var bank_count = $(":input.banks").length;
