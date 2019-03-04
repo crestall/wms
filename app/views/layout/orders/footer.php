@@ -509,6 +509,7 @@
                                 function(h){
                                     $.unblockUI();
                                     actions['item-searcher'].init();
+                                    actions.common['add-item'](); 
                                     $(this).show();
                             });
                         });
