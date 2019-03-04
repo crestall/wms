@@ -59,14 +59,12 @@ class ajaxfunctionsController extends Controller
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
-            $bank_count = count($this->request->query['banks']);
-
         }
         $rails = 0;
         foreach($this->request->query['banks'] as $bank)
         {
             $rc = ceil($bank['qty'] / 2);
-            $rails += $rc
+            $rails += $rc;
         }
         echo $rails
     }
