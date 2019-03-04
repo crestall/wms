@@ -472,7 +472,7 @@
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Calculating Required Parts...</h1></div>' });
                             //console.log( 'roof type: '+ $("input[name='roof_type']:checked").val() );
-                            //console.log('click');
+                            console.log('click');
                             var url = "/ajaxfunctions/calc-origin-pick";
                             var data = $("#add_origin_order").serialize();
                             $("div#origin_items_holder").load(
