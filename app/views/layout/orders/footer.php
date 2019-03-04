@@ -492,7 +492,7 @@
                     calcItems: function(){
                         $("button#calc_items").click(function(e){
                             e.preventDefault();
-                            console.log('roof type: '+$("input[name='roof_type']").val());
+                            console.log('roof type: '+$("input[name='roof_type']:checked").val());
                             console.log('click');
 
                         });
