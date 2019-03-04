@@ -411,7 +411,7 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing order...</h2></div>' });
                             }
                         });
-                        $("input.item-searcher").each(function(i,e){
+                        $("input.origin-item-searcher").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
                             {
                                 $(this).autocomplete( "destroy" );

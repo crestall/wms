@@ -34,7 +34,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Panel</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control required item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
+                    <input type="text" class="form-control required origin-item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
                     <?php echo Form::displayError('panel');?>
                 </div>
                 <div class="col-md-4">
@@ -48,7 +48,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Inverter</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control required item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
+                    <input type="text" class="form-control required origin-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
                     <?php echo Form::displayError('inverter');?>
                 </div>
                 <div class="col-md-4">
