@@ -501,7 +501,7 @@
                             console.log( 'roof type: '+ $("input[name='roof_type']:checked").val() );
                             console.log('click');
                             var url = "/ajaxfunctions/calc-origin-pick";
-                            var data = {};
+                            var data = $("#add_origin_order").serialize();
                             $("div#items_holder").load(
                                 url,
                                 data,
