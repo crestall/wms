@@ -119,7 +119,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                     <button class="btn btn-success btn-small" id="calc_items" disabled>Get Parts</button>
                 </div>
             </div>
-            <div id="items_holder" style="display:none">
+            <div id="origin_items_holder" style="display:none">
 
             </div>
             <div class="row">

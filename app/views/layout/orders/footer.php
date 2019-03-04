@@ -503,7 +503,7 @@
                             //console.log('click');
                             var url = "/ajaxfunctions/calc-origin-pick";
                             var data = $("#add_origin_order").serialize();
-                            $("div#items_holder").load(
+                            $("div#origin_items_holder").load(
                                 url,
                                 data,
                                 function(h){
