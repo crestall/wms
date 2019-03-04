@@ -443,7 +443,7 @@
                         $("input[name='roof_type']").click(function(e){
                             actions['add-origin-order'].openCalcButton();
                         })
-                        $("a.add").click(function(e){
+                        $("a.addbank").click(function(e){
                             e.preventDefault;
                             var bank_count = $(":input.banks").length;
                             var html = "<div class='row bank_holder'>"
@@ -451,7 +451,7 @@
                             html += "<p><input type='text' class='form-control required number banks' name=banks["+bank_count+"][qty]' placeholder='Panel Count' /></p>";
                             html += "</div>"; //col-sm-4
                             html += "<div class='col-sm-1 delete-image-holder'>";
-                            html += "<a class='delete' title='remove this bank'><i class='fas fa-times-circle fa-2x text-danger'></i></a>";
+                            html += "<a class='deletebank' title='remove this bank'><i class='fas fa-times-circle fa-2x text-danger'></i></a>";
                             html += "</div>"; //col-sm-1 item_id' />"
                             html += "</div>"; //row
                             $('div#banks_holder').append(html);
@@ -487,7 +487,7 @@
                         $("button#calc_items").prop("disabled", lock);
                     },
                     deleteBank: function(){
-                        $('a.delete')
+                        $('a.deletebank')
                             .css('cursor', 'pointer')
                             .off('click')
                             .click(function(e){
@@ -508,6 +508,7 @@
                                 data,
                                 function(h){
                                     $.unblockUI();
+                                    actions['item-searcher'].init();
                                     $(this).show();
                             });
                         });

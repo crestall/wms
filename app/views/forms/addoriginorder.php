@@ -82,7 +82,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                             <div class="row bank_holder">
                                 <?php if($i == 0):?>
                                     <div class="col-sm-1 add-image-holder">
-                                        <a class="add" style="cursor:pointer" title="Add Another Bank">
+                                        <a class="addbank" style="cursor:pointer" title="Add Another Bank">
                                             <i class="fas fa-plus-circle fa-2x text-success"></i>
                                         </a>
                                     </div>
@@ -104,7 +104,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                                 <p><input type="text" class="form-control required number banks" name="banks[0][qty]" placeholder="Panel Count" /></p>
                             </div>
                             <div class="col-sm-1 add-image-holder">
-                                <a class="add" style="cursor:pointer" title="Add Another Bank">
+                                <a class="addbank" style="cursor:pointer" title="Add Another Bank">
                                     <i class="fas fa-plus-circle fa-2x text-success"></i>
                                 </a>
                             </div>
