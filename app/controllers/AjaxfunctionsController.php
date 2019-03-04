@@ -71,9 +71,11 @@ class ajaxfunctionsController extends Controller
         ++$rails;
         $end_clamps = 4 * $bank_count + 2;
         $interclamps = 2 * $joins + 4;
+        $earth_lugs = 2 * $joins + 2;
         echo "<p>Rails: $rails</p>";;
         echo "<p>End Clamps: $end_clamps</p>";
         echo "<p>Inter Clamps: $interclamps</p>";
+        echo "<p>Earth Lugs: $earth_lugs</p>";
     }
 
     public function getScannedItem()
