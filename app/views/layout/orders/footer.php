@@ -401,8 +401,8 @@
                 'add-origin-order': {
                     init: function()
                     {
-                        //actions.common['add-item']();
-                        //actions['item-searcher'].init();
+                        actions.common['add-item']();
+                        actions['item-searcher'].init();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         //itemsUpdater.itemDelete();
@@ -434,6 +434,7 @@
                         });
                         actions['add-origin-order'].checkBanks();
                         actions['add-origin-order'].openCalcButton();
+                        actions['add-origin-order'].calcItems();
                     },
                     checkBanks: function(){
                         $('input.banks')
