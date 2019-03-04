@@ -12,6 +12,6 @@ $i = 0;
 <?php ++$i; endforeach;?>
 <div class="row">
     <div class="col-lg-12">
-        <h3>Order Details</h3>
+        <h4>Additional Items</h4>
     </div>
 </div>
