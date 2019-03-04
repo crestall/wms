@@ -470,15 +470,15 @@
                     },
                     openCalcButton: function(){
                         var lock = false;
-                        /*var validator = $( "#add_origin_order" ).validate();
+                        //var validator = $( "#add_origin_order" ).validate();
                         //validator.element( "#myselect" );
                         $('input.banks').each(function(i,e){
-                            if(!validator.check($(this)))
+                            if( !(isNaN($(this).val())) )
                             {
                                 lock = true;
                             }
                         });
-                        $("button#calc_items").prop("disabled", lock); */
+                        $("button#calc_items").prop("disabled", lock);
                     },
                     deleteBank: function(){
                         $('a.delete')
