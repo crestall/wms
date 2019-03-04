@@ -118,6 +118,17 @@ class ajaxfunctionsController extends Controller
             'qty'   => $tile_feet
         );
 
+        $parts = array(
+            'rails'         => $rails,
+            'end_clamps'    => $end_clamps,
+            'inter_clamps'   => $interclamps,
+            'earth_lugs'    => $earth_lugs,
+            'ground_clips'  => $ground_clips,
+            'rail_joiners'  => $rail_joiners,
+            'tin_feet'      => $tin_feet,
+            'tile_feet'     => $tile_feet
+        );
+
         /*echo "<pre>",print_r($rails),"</pre>";
 
         echo "<p>Rails: $rails</p>";;
@@ -130,14 +141,7 @@ class ajaxfunctionsController extends Controller
         echo "<p>Tile Feet: $tile_feet</p>";
         */
         $this->view->render(Config::get('VIEWS_PATH') . 'forms/origin_order_parts.php', [
-            'rails'         => $rails,
-            'end_clamps'    => $end_clamps,
-            'interclamps'   => $interclamps,
-            'earth_lugs'    => $earth_lugs,
-            'ground_clips'  => $ground_clips,
-            'rail_joiners'  => $rail_joiners,
-            'tin_feet'      => $tin_feet,
-            'tile_feet'     => $tile_feet
+            'parts' => $parts
         ]);
     }
 
