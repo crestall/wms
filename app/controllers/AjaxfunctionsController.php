@@ -85,12 +85,12 @@ class ajaxfunctionsController extends Controller
         $interclamps = 2 * $joins + 4;
         $earth_lugs = 2 * $bank_count + 2;
 
-        $rails = array(
+        $railsd = array(
             'id'    => 1165,
             'qty'   => $rails;
         );
 
-        echo "<pre>",print_r($rails),"</pre>";
+        echo "<pre>",print_r($railsd),"</pre>";
         /*
         echo "<p>Rails: $rails</p>";;
         echo "<p>End Clamps: $end_clamps</p>";
