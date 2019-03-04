@@ -458,7 +458,7 @@ $(document).ready(function() {
         },
         messages:{
             roof_type:{
-                required: "Please selcet a roof type"
+                required: "Please select a roof type"
             }
         }
     });
