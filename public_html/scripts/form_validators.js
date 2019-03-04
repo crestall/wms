@@ -81,7 +81,7 @@ $(document).ready(function() {
         		error.insertAfter( element.parent().find( "label" ) );
         	}
             else if( (element.prop( "type" ) === "radio") ) {
-                error.insertAfter( element );
+                error.insertAfter( element.parent().parent() );
             }
             else if( element.prop( "type" ) === "select-one" ) {
                 error.insertAfter( element.closest( "div.bootstrap-select" ) );
