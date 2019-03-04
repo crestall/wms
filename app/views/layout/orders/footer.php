@@ -475,7 +475,7 @@
                         //var validator = $( "#add_origin_order" ).validate();
                         //validator.element( "#myselect" );
                         $('input.banks').each(function(i,e){
-                            if( ( isNaN( $(this).val() ) ) )
+                            if( isNaN($(this).val()) || $(this).val() == '' )
                             {
                                 lock = true;
                             }
