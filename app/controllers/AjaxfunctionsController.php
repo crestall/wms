@@ -14,6 +14,7 @@ class ajaxfunctionsController extends Controller
     {
         parent::beforeAction();
         $actions = [
+            'calcOriginPick',
             'deleteClientLocation',
             'deletePackage',
             'fulfillOrder',
@@ -46,6 +47,12 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function calcOriginPick()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
+
     }
 
     public function getScannedItem()

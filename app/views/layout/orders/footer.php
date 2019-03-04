@@ -500,7 +500,8 @@
                             e.preventDefault();
                             console.log( 'roof type: '+ $("input[name='roof_type']:checked").val() );
                             console.log('click');
-
+                            var url = "/ajaxfunctions/calc-origin-pick";
+                            $("div#items_holder").load(url);
                         });
                     }
                 },
