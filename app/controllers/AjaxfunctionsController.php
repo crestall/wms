@@ -66,7 +66,7 @@ class ajaxfunctionsController extends Controller
         {
             $rc = ceil($bank['qty'] / 2);
             $rails += $rc;
-            $joins += $bank['qty'] - 1
+            $joins += $bank['qty'] - 1;
         }
         ++$rails;
         $end_clamps = 4 * $bank_count + 2;
