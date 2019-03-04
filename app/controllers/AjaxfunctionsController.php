@@ -73,7 +73,7 @@ class ajaxfunctionsController extends Controller
         $interclamps = 2 * $joins + 4;
         echo "<p>Rails: $rails</p>";;
         echo "<p>End Clamps: $end_clamps</p>";
-        echo "<p>Inter Clamps: $inter_clamps</p>"; 
+        echo "<p>Inter Clamps: $interclamps</p>";
     }
 
     public function getScannedItem()
