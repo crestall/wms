@@ -60,16 +60,19 @@ class ajaxfunctionsController extends Controller
                 $post_data[$field] = $value;
             }
         }
-        $rails = $joins = $ground_clips = 0;
+        $rails = $joins = $ground_clips = $rail_joiners = 0;
         $bank_count = count($this->request->query['banks']);
         foreach($this->request->query['banks'] as $bank)
         {
             $rc = ceil($bank['qty'] / 2);
+            $rj = floor($bank['qty'] / 4);
             $rails += $rc;
             $joins += $bank['qty'] - 1;
             $ground_clips += $bank['qty'];
+            $rail_joiners += $rj;
         }
         ++$rails;
+        ++$rail_joiners;
         $end_clamps = 4 * $bank_count + 2;
         $interclamps = 2 * $joins + 4;
         $earth_lugs = 2 * $bank_count + 2;
@@ -78,6 +81,7 @@ class ajaxfunctionsController extends Controller
         echo "<p>Inter Clamps: $interclamps</p>";
         echo "<p>Earth Lugs: $earth_lugs</p>";
         echo "<p>Ground Clips: $ground_clips</p>";
+        echo "<p>Rail Joiners: $rail_joiners</p>";
     }
 
     public function getScannedItem()
