@@ -86,12 +86,40 @@ class ajaxfunctionsController extends Controller
         $earth_lugs = 2 * $bank_count + 2;
 
         $rails = array(
-            'id'    => 1165,
+            'id'    => 11650,
             'qty'   => $rails
         );
+        $end_clamps = array(
+            'id'    => 11651,
+            'qty'   => $end_clamps
+        );
+        $interclamps = array(
+            'id'    => 11655,
+            'qty'   => $interclamps
+        );
+        $earth_lugs = array(
+            'id'    => 11654,
+            'qty'   => $earth_lugs
+        );
+        $ground_clips = array(
+            'id'    => 11653,
+            'qty'   => $ground_clips
+        );
+        $rail_joiners = array(
+            'id'    => 11659,
+            'qty'   => $rail_joiners
+        );
+        $tin_feet = array(
+            'id'    => 11660,
+            'qty'   => $tin_feet
+        );
+        $tile_feet = array(
+            'id'    => 11661,
+            'qty'   => $tile_feet
+        );
 
-        echo "<pre>",print_r($rails),"</pre>";
-        /*
+        /*echo "<pre>",print_r($rails),"</pre>";
+
         echo "<p>Rails: $rails</p>";;
         echo "<p>End Clamps: $end_clamps</p>";
         echo "<p>Inter Clamps: $interclamps</p>";
@@ -100,7 +128,7 @@ class ajaxfunctionsController extends Controller
         echo "<p>Rail Joiners: $rail_joiners</p>";
         echo "<p>Tin Feet: $tin_feet</p>";
         echo "<p>Tile Feet: $tile_feet</p>";
-
+        */
         $this->view->render(Config::get('VIEWS_PATH') . 'forms/origin_order_parts.php', [
             'rails'         => $rails,
             'end_clamps'    => $end_clamps,
@@ -110,7 +138,7 @@ class ajaxfunctionsController extends Controller
             'rail_joiners'  => $rail_joiners,
             'tin_feet'      => $tin_feet,
             'tile_feet'     => $tile_feet
-        ]); */
+        ]);
     }
 
     public function getScannedItem()
