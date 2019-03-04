@@ -10,3 +10,8 @@ $i = 0;
         <input type="hidden" name="items[<?php echo $i;?>][id]" value="<?php echo $details['id'];?>" />
     </div>
 <?php ++$i; endforeach;?>
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Order Details</h3>
+    </div>
+</div>
