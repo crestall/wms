@@ -51,7 +51,7 @@ class ajaxfunctionsController extends Controller
 
     public function calcOriginPick()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
         foreach($this->request->query as $field => $value)
         {
             if(!is_array($value))
@@ -61,12 +61,16 @@ class ajaxfunctionsController extends Controller
             }
         }
         $rails = 0;
+        $bank_count = count($this->request->query['banks']);
         foreach($this->request->query['banks'] as $bank)
         {
             $rc = ceil($bank['qty'] / 2);
             $rails += $rc;
         }
-        echo $rails;
+        ++$rails;
+        $end_clamps = 4 * $bank_count + 2;
+        echo "<p>Rails: $rails</p>";;
+        echo "<p>End Clamps: $end_clamps</p>";
     }
 
     public function getScannedItem()
