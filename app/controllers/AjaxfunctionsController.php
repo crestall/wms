@@ -81,7 +81,7 @@ class ajaxfunctionsController extends Controller
         }
         ++$rails;
         ++$rail_joiners;
-        $end_clamps = 4 * $bank_count + 2;
+        $end_clamps = 4 * $bank_count + 4;
         $interclamps = 2 * $joins + 4;
         $earth_lugs = 2 * $bank_count + 2;
 
