@@ -477,6 +477,10 @@
                             {
                                 lock = true;
                             }
+                            if(!$("input[name='roof_type']:checked").val())
+                            {
+                                lock = true;
+                            }
                         });
                         $("button#calc_items").prop("disabled", lock);
                     },
@@ -492,7 +496,7 @@
                     calcItems: function(){
                         $("button#calc_items").click(function(e){
                             e.preventDefault();
-                            console.log('roof type: '+$("input[name='roof_type']:checked").val());
+                            console.log( 'roof type: '+ $("input[name='roof_type']:checked").val() );
                             console.log('click');
 
                         });
