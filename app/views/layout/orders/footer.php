@@ -401,11 +401,11 @@
                 'add-origin-order': {
                     init: function()
                     {
-                        actions.common['add-item']();
-                        actions['item-searcher'].init();
+                        //actions.common['add-item']();
+                        //actions['item-searcher'].init();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
-                        itemsUpdater.itemDelete();
+                        //itemsUpdater.itemDelete();
                         $("form#add_origin_order").submit(function(e){
                             if($(this).valid())
                             {
