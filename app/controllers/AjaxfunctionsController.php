@@ -60,17 +60,20 @@ class ajaxfunctionsController extends Controller
                 $post_data[$field] = $value;
             }
         }
-        $rails = 0;
+        $rails = $joins = 0;
         $bank_count = count($this->request->query['banks']);
         foreach($this->request->query['banks'] as $bank)
         {
             $rc = ceil($bank['qty'] / 2);
             $rails += $rc;
+            $joins += $bank['qty'] - 1
         }
         ++$rails;
         $end_clamps = 4 * $bank_count + 2;
+        $interclamps = 2 * $joins + 4;
         echo "<p>Rails: $rails</p>";;
         echo "<p>End Clamps: $end_clamps</p>";
+        echo "<p>Inter Clamps: $inter_clamps</p>"; 
     }
 
     public function getScannedItem()
