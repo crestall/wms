@@ -81,7 +81,7 @@ $(document).ready(function() {
         		error.insertAfter( element.parent().find( "label" ) );
         	}
             else if( (element.prop( "type" ) === "radio") ) {
-                error.insertAfter( element.parent().parent() );
+                error.insertAfter( element.parent().parent().parent() );
             }
             else if( element.prop( "type" ) === "select-one" ) {
                 error.insertAfter( element.closest( "div.bootstrap-select" ) );
@@ -451,7 +451,16 @@ $(document).ready(function() {
     });
     ////////////////////////////////////////////////////////////
     $('#add_origin_order').validate({
-
+        rules:{
+            roof_type:{
+                required:true
+            }
+        },
+        messages:{
+            roof_type:{
+                required: "Please selcet a roof type"
+            }
+        }
     });
     ////////////////////////////////////////////////////////////
     $('form#form-forgot-password').validate({
