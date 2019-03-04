@@ -68,7 +68,7 @@ class ajaxfunctionsController extends Controller
             $rj = floor($bank['qty'] / 4) * 2;
             $rails += $rc;
             $joins += $bank['qty'] - 1;
-            $ground_clips += $bank['qty'];
+            $ground_clips += 2 * $bank['qty'];
             $rail_joiners += $rj;
         }
         if($this->request->query['roof_type'] == "tin")
