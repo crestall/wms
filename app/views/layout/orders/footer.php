@@ -509,6 +509,8 @@
                                 function(h){
                                     $.unblockUI();
                                     actions['item-searcher'].init();
+                                    actions.common['add-item']();
+                                    itemsUpdater.itemDelete();
                                     $(this).show();
                             });
                         });
