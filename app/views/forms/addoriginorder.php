@@ -68,7 +68,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                     </div>
                     <div class="col-md-3">&nbsp;</div>
                     <div class="col-md-8 checkbox checkbox-default">
-                        <input type="radio" class="radio" id="tile" name="roof_type" <?php if(Form::value('roof_type') == "tile") echo 'checked';?> value="tin" />
+                        <input type="radio" class="radio" id="tile" name="roof_type" <?php if(Form::value('roof_type') == "tile") echo 'checked';?> value="tile" />
                         <label for="tile"> Tile</label>
                     </div>
                 </div>
