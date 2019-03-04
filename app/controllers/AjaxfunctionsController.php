@@ -84,6 +84,14 @@ class ajaxfunctionsController extends Controller
         $end_clamps = 4 * $bank_count + 2;
         $interclamps = 2 * $joins + 4;
         $earth_lugs = 2 * $bank_count + 2;
+
+        $rails = array(
+            'id'    => 1165,
+            'qty'   => $rails;
+        );
+
+        echo "<pre>",print_r($rails),"</pre>";
+        /*
         echo "<p>Rails: $rails</p>";;
         echo "<p>End Clamps: $end_clamps</p>";
         echo "<p>Inter Clamps: $interclamps</p>";
@@ -92,6 +100,17 @@ class ajaxfunctionsController extends Controller
         echo "<p>Rail Joiners: $rail_joiners</p>";
         echo "<p>Tin Feet: $tin_feet</p>";
         echo "<p>Tile Feet: $tile_feet</p>";
+
+        $this->view->render(Config::get('VIEWS_PATH') . 'forms/origin_order_parts.php', [
+            'rails'         => $rails,
+            'end_clamps'    => $end_clamps,
+            'interclamps'   => $interclamps,
+            'earth_lugs'    => $earth_lugs,
+            'ground_clips'  => $ground_clips,
+            'rail_joiners'  => $rail_joiners,
+            'tin_feet'      => $tin_feet,
+            'tile_feet'     => $tile_feet
+        ]); */
     }
 
     public function getScannedItem()
