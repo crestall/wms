@@ -66,7 +66,7 @@ class ajaxfunctionsController extends Controller
             $rc = ceil($bank['qty'] / 2);
             $rails += $rc;
         }
-        echo $rails
+        echo $rails;
     }
 
     public function getScannedItem()
