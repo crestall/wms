@@ -1,7 +1,7 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 $host = 'localhost';
-$db   = 'cobaltma_newclientportal';
+$db   = 'cobaltma_newclient_portal_dev';
 $user = 'cobaltma_cpsite';
 $pass = '{,e3^bfcfcMp';
 $charset = 'utf8';
