@@ -19,7 +19,7 @@ $rfile = fopen($root.'/data/sunbank_stock_20190306.csv', 'r') or die('could not 
 
 $line = 1;
 //$skip_first = isset($_POST['header_row']);
-$skip_first = true;
+$skip_first = false;
 while (($row = fgetcsv($rfile)) !== FALSE)
 {
     if($skip_first)
