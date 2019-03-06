@@ -17,6 +17,7 @@ class DashboardController extends Controller
     {
         $orders = array();
         $store_orders = array();
+        $solar_orders = array();
         $pickups = array();
         $client_id = 0;
         $clients = array();
@@ -46,6 +47,7 @@ class DashboardController extends Controller
             'clients'       =>  $clients,
             'pickups'       =>  $pickups,
             'store_orders'  =>  $store_orders,
+            'solar_orders'  =>  $solar_orders,
             'user_role'     =>  $user_role
         ]);
     }
