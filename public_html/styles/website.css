@@ -337,6 +337,16 @@ a#toggle_orders.hiding .fa.arrow:before {
     content: "\f107";
 }
 /********
+current solar orders flip angle
+*******  */
+a#toggle_solarorders .fa.arrow:before {
+    content: "\f106";
+}
+
+a#toggle_solarorders.hiding .fa.arrow:before {
+    content: "\f107";
+}
+/********
 current pickups flip angle
 *******  */
 a#toggle_pickups .fa.arrow:before {
