@@ -131,7 +131,17 @@ class FormController extends Controller {
             'qty'   => $inverter_qty
         );
         $items = array_merge($items, $this->request->data['consumables'], $this->request->data['items']);
-        echo "<pre>",print_r($items),"</pre>"; die();
+        $orders_items = array();
+        foreach($items as $item)
+        {
+            $array = array(
+                'qty'           => $item['qty'],
+                'id'            => $item['id'],
+                'whole_pallet'  => false
+            );
+            $orders_items[] = $array;
+        }
+        echo "<pre>",print_r($orders_items),"</pre>"; die();
     }
 
     public function procRegisterNewStock()
