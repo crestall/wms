@@ -152,7 +152,16 @@ class FormController extends Controller {
                 Form::setError('items', $item['import_error_string']);
             }
         }
-        echo "<pre>",print_r($oitems),"</pre>"; die();
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            echo "<pre>",print_r($oitems),"</pre>"; die();
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/add-origin-order");
     }
 
     public function procRegisterNewStock()

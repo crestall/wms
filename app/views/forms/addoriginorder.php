@@ -122,6 +122,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <div id="origin_items_holder" style="display:none">
 
             </div>
+            <?php echo Form::displayError('items');?> 
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Address Details</h3>
