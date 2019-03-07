@@ -181,7 +181,7 @@ $c = 1;
                                     <div class="col-lg-6">
                                         <div class="panel panel-<?php echo $panel_classes[$c % count($panel_classes)];?>">
                                             <div class="panel-heading order-panel">
-                                                <h3 class="text-center"><?php echo $so['name'];?></h3>
+                                                <h3 class="text-center"><?php echo ucwords($so['name']);?></h3>
                                             </div>
                                             <div class="panel-footer">
                                                 <div class="row">
