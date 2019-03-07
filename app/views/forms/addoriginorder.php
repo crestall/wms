@@ -80,7 +80,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                         <?php foreach(Form::value('banks') as $b => $bank):
                             $qty = (isset($bank['qty']))? $bank['qty']: "";?>
                             <div class="row bank_holder">
-                                <?php if($i == 0):?>
+                                <?php if($b == 0):?>
                                     <div class="col-sm-1 add-image-holder">
                                         <a class="addbank" style="cursor:pointer" title="Add Another Bank">
                                             <i class="fas fa-plus-circle fa-2x text-success"></i>
@@ -94,7 +94,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                                     </div>
                                 <?php endif;?>
                                 <div class="col-sm-4">
-                                    <p><input type="text" class="form-control required number banks" name="banks[<?php echo $i;?>][qty]" placeholder="Panel Count" value="<?php echo $qty;?>" /></p>
+                                    <p><input type="text" class="form-control required number banks" name="banks[<?php echo $b;?>][qty]" placeholder="Panel Count" value="<?php echo $qty;?>" /></p>
                                 </div>
                             </div>
                         <?php endforeach;?>
@@ -122,7 +122,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <div id="origin_items_holder" style="display:none">
 
             </div>
-            <?php echo Form::displayError('items');?> 
+            <?php echo Form::displayError('items');?>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Address Details</h3>
