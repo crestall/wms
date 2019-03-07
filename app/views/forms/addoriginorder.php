@@ -12,6 +12,7 @@ if(!empty(Form::value('items')))
 if($user_role == "client")
     $idisp = "block";
 $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qty');
+$type_id = $this->controller->solarordertypes->getTypeId('origin')
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
@@ -134,6 +135,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <input type="hidden" name="client_id" id="client_id" value="67" />
             <input type="hidden" name="panel_id" id="panel_id" value="<?php echo Form::value('panel_id') ?>" />
             <input type="hidden" name="inverter_id" id="inverter_id" value="<?php echo Form::value('inverter_id') ?>" />
+            <input type="hidden" name="type_id" id="type_id" value="<?php echo $type_id; ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
