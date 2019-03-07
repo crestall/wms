@@ -10,14 +10,14 @@
 
 
   */
-  class Originorder extends Order{
+  class Solarorder extends Order{
 
     /**
       * Table name for this & extending classes.
       *
       * @var string
       */
-    public $table = "origin_orders";
+    public $table = "solar_orders";
 
     public function __construct()
     {
@@ -38,6 +38,7 @@
         }
         $o_values = array(
             'work_order'    => $data['work_order'],
+            'type_id'       => $data['type_id'],
             'client_id'     => $data['client_id'],
             'date_ordered'  => time(),
             'status_id'     => $this->ordered_id,

@@ -111,7 +111,27 @@ class FormController extends Controller {
 
     public function procOriginOrderAdd()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $items = array();
+        $items[] = array(
+            'id'    => $panel_id,
+            'qty'   => $panel_qty
+        );
+        $items[] = array(
+            'id'    => $inverter_id,
+            'qty'   => $inverter_qty
+        );
+        $items = array_merge($items, $this->request->data['consumables'], $this->request->data['items']);
+        echo "<pre>",print_r($items),"</pre>"; die();
     }
 
     public function procRegisterNewStock()
