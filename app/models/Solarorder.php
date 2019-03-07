@@ -24,7 +24,7 @@
         parent::__construct();
     }
 
-    public function getCurrentOrders()
+    public function getCurrentOrders($store_order = 0)
     {
         $db = Database::openConnection();
         $q = "  select
