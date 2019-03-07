@@ -512,6 +512,7 @@
                                     actions.common['add-item']();
                                     itemsUpdater.itemDelete();
                                     $(this).show();
+                                    $("button#add_origin_order_submitter").prop("disabled", false);
                             });
                         });
                     }
