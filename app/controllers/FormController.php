@@ -169,7 +169,12 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($oitems),"</pre>"; die();
+            //echo "<pre>",print_r($oitems),"</pre>"; die();
+            //all good, add details
+            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $order_id = $this->solarorder->addOrder($post_data, $oitems);
+            Session::set('feedback', "An order with number: <strong>$order_number</strong> has been created");
         }
         return $this->redirector->to(PUBLIC_ROOT."orders/add-origin-order");
     }
