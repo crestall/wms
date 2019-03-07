@@ -141,7 +141,18 @@ class FormController extends Controller {
             );
             $orders_items[] = $array;
         }
-        echo "<pre>",print_r($orders_items),"</pre>"; die();
+        $the_items = array(
+            0 => $orders_items
+        );
+        $oitems = $this->allocations->createOrderItemsArray($the_items, 0, false);
+        foreach($oitems[0] as $item)//there is only one order
+        {
+            if($item['import_error'])
+            {
+                Form::setError('items', $item['import_error_string']);
+            }
+        }
+        echo "<pre>",print_r($oitems),"</pre>"; die();
     }
 
     public function procRegisterNewStock()
