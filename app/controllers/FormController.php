@@ -130,7 +130,11 @@ class FormController extends Controller {
             'id'    => $inverter_id,
             'qty'   => $inverter_qty
         );
-        $items = array_merge($items, $this->request->data['consumables'], $this->request->data['items']);
+        $items = array_merge($items, $this->request->data['consumables']);
+        if( count($this->request->data['items']) )
+        {
+            $items = array_merge($items, $this->request->data['items']);
+        }
         $orders_items = array();
         foreach($items as $item)
         {
