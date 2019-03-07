@@ -132,8 +132,8 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <input type="hidden" name="selected_items" id="selected_items" />
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="client_id" id="client_id" value="67" />
-            <input type="hidden" name="panel_id" id="panel_id" />
-            <input type="hidden" name="inverter_id" id="inverter_id" />
+            <input type="hidden" name="panel_id" id="panel_id" value="<?php echo Form::value('panel_id') ?>" />
+            <input type="hidden" name="inverter_id" id="inverter_id" value="<?php echo Form::value('inverter_id') ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
