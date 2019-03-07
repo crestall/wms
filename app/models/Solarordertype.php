@@ -1,5 +1,5 @@
 <?php
-class Solarordertpes extends Model{
+class Solarordertype extends Model{
     public $table = "solar_order_types";
 
     public function getSelectSolarOrderTypes($selected = false)
