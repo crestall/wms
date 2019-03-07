@@ -135,7 +135,7 @@ class FormController extends Controller {
         {
             $items = array_merge($items, $this->request->data['items']);
         }
-        echo "<pre>",print_r($items),"</pre>"; die();
+        //echo "<pre>",print_r($items),"</pre>"; die();
         $orders_items = array();
         foreach($items as $item)
         {
