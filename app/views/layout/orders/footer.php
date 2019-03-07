@@ -717,6 +717,11 @@
                         });
                     }
                 },
+                'view-solarorders': {
+                    init: function(){
+                        actions.common.init();
+                    }
+                },
                 'view-orders': {
                     init: function(){
                         actions.common.init();
