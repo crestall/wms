@@ -151,6 +151,7 @@ class FormController extends Controller {
         $the_items = array(
             0 => $orders_items
         );
+        echo "<pre>",print_r($the_items),"</pre>"; die();
         $oitems = $this->allocations->createOrderItemsArray($the_items, 0, false);
         foreach($oitems[0] as $item)//there is only one order
         {
