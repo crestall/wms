@@ -139,8 +139,10 @@ class FormController extends Controller {
         $orders_items = array();
         foreach($items as $item)
         {
-            if($item['qty'] === 0)
+            if($item['qty'] == 0)
+            {
                 continue;
+            }
             $array = array(
                 'qty'           => $item['qty'],
                 'id'            => $item['id'],
