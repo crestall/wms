@@ -7,7 +7,7 @@
 
     FUNCTIONS
     addOrder($data, $oitems)
-
+    getCurrentOrders()
 
   */
   class Solarorder extends Order{
@@ -22,6 +22,23 @@
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function getCurrentOrders()
+    {
+        $db = Database::openConnection();
+        $q = "  select
+                    count(*) as order_count, ot.name, o.client_id, o.type_id
+                from
+                    solar_orders o join solar_order_types ot on o.type_id = ot.id
+                where
+                    o.status_id != 4
+                group by
+                    o.type_id
+                order by
+                    ot.name";
+
+        return $db->queryData($q);
     }
 
     public function addOrder($data, $oitems)

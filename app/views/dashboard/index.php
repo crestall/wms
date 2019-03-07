@@ -181,13 +181,13 @@ $c = 1;
                                     <div class="col-lg-6">
                                         <div class="panel panel-<?php echo $panel_classes[$c % count($panel_classes)];?>">
                                             <div class="panel-heading order-panel">
-                                                <h3 class="text-center"><?php echo $so['type'];?></h3>
+                                                <h3 class="text-center"><?php echo $so['name'];?></h3>
                                             </div>
                                             <div class="panel-footer">
                                                 <div class="row">
                                                     <div class="col-xs-8">
                                                         <div><span class="huge"><?php echo $so['order_count'];?></span> Order<?php echo $s;?></div>
-                                                        <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-solarorders/type=<?php echo $so['type'];?>">Manage Orders</a></div>
+                                                        <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-solarorders/type=<?php echo $so['type_id'];?>">Manage Orders</a></div>
                                                     </div>
                                                     <div class="col-xs-4">
                                                         <i class="fas fa-truck fa-3x"></i>
