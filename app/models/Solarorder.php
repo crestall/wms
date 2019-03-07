@@ -26,7 +26,7 @@
 
     public function addOrder($data, $oitems)
     {
-        echo "<pre>",print_r($data),"</pre>"; die();
+        //echo "<pre>",print_r($data),"</pre>"; die();
         $db = Database::openConnection();
 
         if(empty(Session::getUserId()))
