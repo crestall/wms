@@ -7,7 +7,7 @@ class Solarordertype extends Model{
         $db = Database::openConnection();
         $check = "";
         $ret_string = "";
-        $types = $db->queryData("SELECT id, name FROM {$this->table} ORDER BY name WHERE active = 1 AND selectable = 1");
+        $types = $db->queryData("SELECT id, name FROM {$this->table} WHERE active = 1 AND selectable = 1 ORDER BY name");
         foreach($types as $t)
         {
             $label = $t['name'];
