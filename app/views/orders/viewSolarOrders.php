@@ -118,7 +118,7 @@
         	            	<td class="filterable number" data-label="Work Order">
                                 <?php echo $co['work_order'];?>
                             </td>
-        					<!--td data-label="Client Name"><?php echo $client_name;?></td-->
+        					<!--td data-label="Client Name"><?php //echo $client_name;?></td-->
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
         					<td data-label="Items" class="number"></td>
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
