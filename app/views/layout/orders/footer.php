@@ -37,6 +37,14 @@
                             itemsUpdater.itemDelete();
                             //itemsUpdater.updateValidation();
                         });
+                    },
+                    'select-all': function(){
+                        $('#select_all').click(function(e){
+                            var checked = this.checked;
+                             $('.select').each(function(e){
+                                this.checked =  checked;
+                             })
+                        });
                     }
                 },
                 'order-edit': {
@@ -638,12 +646,7 @@
                             });
                         });
 
-                        $('#select_all').click(function(e){
-                            var checked = this.checked;
-                             $('.select').each(function(e){
-                                this.checked =  checked;
-                             })
-                        });
+                        actions.common['select-all']();
 
                         $('.selectpicker').selectpicker({});
 
@@ -720,6 +723,7 @@
                 'view-solarorders': {
                     init: function(){
                         actions.common.init();
+                        actions.common['select-all']();
                     }
                 },
                 'view-orders': {
@@ -739,12 +743,7 @@
                             window.location.href = href;
                         });
 
-                        $('#select_all').click(function(e){
-                            var checked = this.checked;
-                             $('.select').each(function(e){
-                                this.checked =  checked;
-                             })
-                        });
+                        actions.common['select-all']();
 
                         $('#select_all_np').click(function(e){
                             var checked = this.checked;
