@@ -80,7 +80,6 @@
         				<th>Date Ordered</th>
         				<!--th>Status</th-->
         				<th>Slip Printed</th>
-                        <th></th>
                         <th nowrap>
                             Select
                             <div class="checkbox checkbox-default">
