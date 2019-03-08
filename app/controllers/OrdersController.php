@@ -750,7 +750,9 @@ class OrdersController extends Controller
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
         $order_type = "All Types";
+        $type_id = 0;
         $ff = "Unfulfilled";
+        $fulfilled = 0;
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['type']))
@@ -766,7 +768,7 @@ class OrdersController extends Controller
         }
         $page_title = "$ff Orders For $order_type";
 
-        $orders = $this->order->getAllOrders($client_id, $courier_id, $fulfilled, 0, $state);
+        $orders = $this->solarorder->getSolarAllOrders($type_id, $fulfilled);
         //render the page
         Config::setJsConfig('curPage', "view-solarorders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/viewSolarOrders.php', [

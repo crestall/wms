@@ -24,6 +24,30 @@
         parent::__construct();
     }
 
+    public function getSolarAllOrders($type_id, $fulfilled)
+    {
+        $db = Database::openConnection();
+        $status_id = $this->fulfilled_id;
+        $array = array();
+        //echo "SELECT * FROM {$this->table} WHERE status_id != $status_id AND client_id NOT IN ({$this->excluded_clients}) ORDER BY date_ordered ASC"; die();
+        if($fulfilled > 0)
+        {
+            $status_clause = "WHERE status_id = $status_id";
+        }
+        else
+        {
+            $status_clause = "WHERE status_id != $status_id";
+        }
+        $q = "SELECT * FROM {$this->table} $status_clause";
+        if($type_id > 0)
+        {
+            $q .= " AND type_id = $type_id";
+        }
+        $q .= " ORDER BY date_ordered ASC";
+        //die($q);
+        return ($db->queryData($q, $array));
+    }
+
     public function getCurrentOrders($store_order = 0)
     {
         $db = Database::openConnection();
