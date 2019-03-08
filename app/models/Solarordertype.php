@@ -10,7 +10,7 @@ class Solarordertype extends Model{
         $types = $db->queryData("SELECT id, name FROM {$this->table} WHERE active = 1 AND selectable = 1 ORDER BY name");
         foreach($types as $t)
         {
-            $label = $t['name'];
+            $label = ucwords($t['name']);
             $value = $t['id'];
             if($selected)
             {
