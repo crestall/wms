@@ -111,7 +111,7 @@
                         'qty'           => $il['qty'],
                         'order_id'      => $order_id
                     );
-                    $db->insertQuery('origin_orders_items', $vals);
+                    $db->insertQuery('solar_orders_items', $vals);
 
                 }
             endforeach;

@@ -125,7 +125,7 @@
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
         					<td data-label="Select" class="chkbox">
                                 <div class="checkbox checkbox-default">
-                                    <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-orderid='<?php echo $co['id'];?>' name="select_<?php echo $co['id'];?>" id="select_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
+                                    <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-orderid='<?php echo $co['id'];?>' name="select_<?php echo $co['id'];?>" id="select_<?php echo $co['id'];?>" />
                                     <label for="select_<?php echo $co['id'];?>"></label>
                                 </div>
                             </td>
