@@ -12,6 +12,7 @@ if(!empty(Form::value('items')))
 if($user_role == "client")
     $idisp = "block";
 $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qty');
+$type_id = $this->controller->solarordertype->getTypeId('origin')
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
@@ -34,7 +35,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Panel</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control required item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
+                    <input type="text" class="form-control required origin-item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
                     <?php echo Form::displayError('panel');?>
                 </div>
                 <div class="col-md-4">
@@ -48,7 +49,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Inverter</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control required item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
+                    <input type="text" class="form-control required origin-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
                     <?php echo Form::displayError('inverter');?>
                 </div>
                 <div class="col-md-4">
@@ -68,7 +69,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                     </div>
                     <div class="col-md-3">&nbsp;</div>
                     <div class="col-md-8 checkbox checkbox-default">
-                        <input type="radio" class="radio" id="tile" name="roof_type" <?php if(Form::value('roof_type') == "tile") echo 'checked';?> value="tin" />
+                        <input type="radio" class="radio" id="tile" name="roof_type" <?php if(Form::value('roof_type') == "tile") echo 'checked';?> value="tile" />
                         <label for="tile"> Tile</label>
                     </div>
                 </div>
@@ -80,9 +81,9 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                         <?php foreach(Form::value('banks') as $b => $bank):
                             $qty = (isset($bank['qty']))? $bank['qty']: "";?>
                             <div class="row bank_holder">
-                                <?php if($i == 0):?>
+                                <?php if($b == 0):?>
                                     <div class="col-sm-1 add-image-holder">
-                                        <a class="add" style="cursor:pointer" title="Add Another Bank">
+                                        <a class="addbank" style="cursor:pointer" title="Add Another Bank">
                                             <i class="fas fa-plus-circle fa-2x text-success"></i>
                                         </a>
                                     </div>
@@ -94,7 +95,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                                     </div>
                                 <?php endif;?>
                                 <div class="col-sm-4">
-                                    <p><input type="text" class="form-control required number banks" name="banks[<?php echo $i;?>][qty]" placeholder="Panel Count" value="<?php echo $qty;?>" /></p>
+                                    <p><input type="text" class="form-control required number banks" name="banks[<?php echo $b;?>][qty]" placeholder="Panel Count" value="<?php echo $qty;?>" /></p>
                                 </div>
                             </div>
                         <?php endforeach;?>
@@ -104,7 +105,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                                 <p><input type="text" class="form-control required number banks" name="banks[0][qty]" placeholder="Panel Count" /></p>
                             </div>
                             <div class="col-sm-1 add-image-holder">
-                                <a class="add" style="cursor:pointer" title="Add Another Bank">
+                                <a class="addbank" style="cursor:pointer" title="Add Another Bank">
                                     <i class="fas fa-plus-circle fa-2x text-success"></i>
                                 </a>
                             </div>
@@ -119,9 +120,10 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
                     <button class="btn btn-success btn-small" id="calc_items" disabled>Get Parts</button>
                 </div>
             </div>
-            <div class="row" id="items_holder" style="display:none">
+            <div id="origin_items_holder" style="display:none">
 
             </div>
+            <?php echo Form::displayError('items');?>
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Address Details</h3>
@@ -131,12 +133,13 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qt
             <input type="hidden" name="selected_items" id="selected_items" />
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="client_id" id="client_id" value="67" />
-            <input type="hidden" name="panel_id" id="panel_id" />
-            <input type="hidden" name="inverter_id" id="inverter_id" />
+            <input type="hidden" name="panel_id" id="panel_id" value="<?php echo Form::value('panel_id') ?>" />
+            <input type="hidden" name="inverter_id" id="inverter_id" value="<?php echo Form::value('inverter_id') ?>" />
+            <input type="hidden" name="type_id" id="type_id" value="<?php echo $type_id; ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary" id="add_origin_order_submitter">Add Order</button>
+                    <button type="submit" class="btn btn-primary" id="add_origin_order_submitter" disabled>Add Order</button>
                 </div>
             </div>
         </form>

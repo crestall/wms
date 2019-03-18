@@ -17,6 +17,7 @@ class DashboardController extends Controller
     {
         $orders = array();
         $store_orders = array();
+        $solar_orders = array();
         $pickups = array();
         $client_id = 0;
         $clients = array();
@@ -25,6 +26,7 @@ class DashboardController extends Controller
         if($user_role == "admin" ||  $user_role == "warehouse")
         {
             $orders = $this->order->getCurrentOrders();
+            $solar_orders = $this->solarorder->getCurrentOrders();
             $pickups = $this->pickup->getCurrentPickups();
             $store_orders = $this->order->getCurrentStoreOrders();
         }
@@ -46,6 +48,7 @@ class DashboardController extends Controller
             'clients'       =>  $clients,
             'pickups'       =>  $pickups,
             'store_orders'  =>  $store_orders,
+            'solar_orders'  =>  $solar_orders,
             'user_role'     =>  $user_role
         ]);
     }

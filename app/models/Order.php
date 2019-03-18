@@ -571,7 +571,7 @@ class Order extends Model{
         return (int)$res['qty'];
     }
 
-    private function getStatusses()
+    public function getStatusses()
     {
         $db = Database::openConnection();
         $statusses = $db->queryData("SELECT id, name FROM order_status ORDER BY name");
