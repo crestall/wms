@@ -74,6 +74,20 @@ class pdfController extends Controller
         $pdf->Output();
     }
 
+    public function printSolarPickslips()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
+        $order_ids  = $this->request->data['items'];
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/solarpickslip.php', [
+            'orders_ids'    =>  $order_ids
+        ]);
+        $stylesheet = file_get_contents(STYLES."pickslip.css");
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
     public function printInvoices()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
