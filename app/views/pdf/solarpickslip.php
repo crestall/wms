@@ -7,7 +7,7 @@ foreach($orders_ids as $id):
     $type = $this->controller->solarordertype->getSolarOrderType($od['type_id']);
     $delivery_address = $this->controller->solarorder->getAddressStringForOrder($id);
     //$items = array();
-    $items = $this->controller->order->getItemsForOrder($id);
+    $items = $this->controller->solarorder->getItemsForOrder($id);
     $this->controller->solarorder->setSlipPrinted($id);
     $picked_id = $this->controller->solarorder->picked_id;
     $ordered_id = $this->controller->solarorder->ordered_id;
