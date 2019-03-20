@@ -54,7 +54,7 @@ foreach($orders_ids as $id):
         <?php endforeach;?>
         </table>
     </div>
-    <?php if ($c < count($order_ids)):?>
+    <?php if ($c < count($orders_ids)):?>
         <pagebreak />
     <?php endif;
     ++$c;?>
