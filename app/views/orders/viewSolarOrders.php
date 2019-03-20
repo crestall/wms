@@ -93,7 +93,7 @@
                     <?php $c = 0; foreach($orders as $co):
                         ++$c;
 
-        				$address = $this->controller->order->getAddressStringForOrder($co['id']);
+        				$address = $this->controller->solarorder->getAddressStringForOrder($co['id']);
         				$order_status = $this->controller->order->getStatusName($co['status_id']);
         				$slip_printed = ($co['slip_printed'] > 0)? "Yes": "No";
                         //$link = ( $co['store_order'] == 1 )? "/orders/big-bottle-store-orders/order={$co['xero_invoiceno']}":"/orders/order-update/order={$co['id']}";
