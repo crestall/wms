@@ -1,5 +1,5 @@
 <?php
-
+$c = 1;
 foreach($orders_ids as $id):
     //$order_ids_string .= $id."-";
     $od = $this->controller->solarorder->getOrderDetail($id);
@@ -54,5 +54,8 @@ foreach($orders_ids as $id):
         <?php endforeach;?>
         </table>
     </div>
-    <pagebreak />
+    <?php if $c < count($order_ids):?>
+        <pagebreak />
+    <?php endif;
+    ++$c;?>
 <?php endforeach; ?>
