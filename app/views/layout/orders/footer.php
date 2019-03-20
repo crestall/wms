@@ -726,8 +726,7 @@
                         actions.common['select-all']();
 
                         $('table#solar_orders_table').filterTable({
-                            inputSelector: '#table_searcher',
-                            ignoreColumns: [5,6]
+                            inputSelector: '#table_searcher'
                         });
 
                         $('a.slip-print').click(function(e){
