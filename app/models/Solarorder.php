@@ -65,6 +65,25 @@
         return $db->queryData($q);
     }
 
+    public function getItemsForOrder($order_id, $picked = -1)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT i.*, oi.qty, oi.location_id, oi.item_id, oi.id AS line_id, il.qty AS location_qty
+            FROM solar_orders_items oi JOIN items i ON oi.item_id = i.id LEFT JOIN items_locations il on oi.location_id = il.location_id AND il.item_id = i.id
+            WHERE oi.order_id = $order_id
+        ";
+        if($picked === 1)
+            $q .= " AND oi.picked = 1";
+        elseif($picked === 0)
+            $q .= " AND oi.picked = 0";
+        //$q .= " GROUP BY i.id";
+        $q .= " GROUP BY oi.location_id, i.id";
+        $q .= " ORDER BY i.name";
+        //die($q);
+        return $db->queryData($q);
+    }
+
     public function addOrder($data, $oitems)
     {
         //echo "<pre>",print_r($data),"</pre>"; die();

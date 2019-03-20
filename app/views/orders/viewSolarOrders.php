@@ -100,17 +100,7 @@
                         //$item_count = $this->controller->order->getItemCountForOrder($co['id']);
                         //$items = $this->controller->order->getItemsForOrder($co['id']);
         				$fulfill = true;
-                        /*
-                        $invoice = "";
-                        $address = $co['address'];
-                        if(!empty($co['address_2']))
-                            $address .= "<br/>".$co['address_2'];
-                        $address .= "<br/>".$co['suburb'];
-                        $address .= "<br/>".$co['state'];
-                        $address .= "<br/>".$co['postcode'];
-                        $address .= "<br/>".$co['country'];
-
-                        */
+                        /* */
                         ?>
         	        	<tr>
                             <td class="number" data-label="Count"><?php echo $c;?></td>
