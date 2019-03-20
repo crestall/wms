@@ -20,7 +20,7 @@ foreach($orders_ids as $id):
         </tr>
         <tr>
             <td>Work Order</td>
-            <td><?php echo $od['work_order'];?></td>
+            <td><strong><?php echo $od['work_order'];?></strong></td>
         </tr>
         <tr>
             <td>Address</td>
