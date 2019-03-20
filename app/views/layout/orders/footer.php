@@ -729,6 +729,36 @@
                             inputSelector: '#table_searcher'
                         });
 
+                        $('a.order-label-print').click(function(e){
+                            e.preventDefault();
+                            var ids = [];
+                            $('input.select').each(function(i,e){
+                                var order_id = $(this).data('orderid');
+                                if( $(this).prop('checked') )
+                                {
+                                    ids.push(order_id);
+                                }
+                            });
+                            if(ids.length)
+                            {
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/pdf/printSolarLabels");
+                                form.setAttribute("target", "formresult");
+                                $.each( ids, function( index, value ) {
+                                    var hiddenField = document.createElement("input");
+                                    hiddenField.setAttribute("type", "hidden");
+                                    hiddenField.setAttribute("name", "orders[]");
+                                    hiddenField.setAttribute("value", value);
+                                    form.appendChild(hiddenField);
+                                });
+                                document.body.appendChild(form);
+                                window.open('','formresult');
+                                form.submit();
+                            }
+
+                        });
+
                         $('a.slip-print').click(function(e){
                             e.preventDefault();
                             //console.log('click');
