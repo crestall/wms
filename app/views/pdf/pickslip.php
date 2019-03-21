@@ -37,7 +37,7 @@ foreach($orders_ids as $id):
             </tr>
             <tr>
                 <td>Date : <?php echo date("d/m/Y");?></td>
-                <td></td>
+                <td>Date Ordered: <?php echo date("d/m/Y", $od['date_ordered']);?></td>
             </tr>
         </table>
         <table width='100%'>

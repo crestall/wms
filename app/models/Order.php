@@ -81,6 +81,27 @@ class Order extends Model{
         $this->getStatusses();
     }
 
+    public function getAddressStringForOrder($id)
+    {
+        $db = Database::openConnection();
+        $ret_string = "";
+        if(!empty($id))
+        {
+            //$address = $db->queryRow("SELECT * FROM addresses WHERE id = $id");
+            $address = $db->queryRow("SELECT address, address_2, suburb, state, postcode, country FROM ".$this->table." WHERE id = $id");
+            if(!empty($address))
+            {
+            	$ret_string = "<p>".$address['address'];
+                if(!empty($address['address_2'])) $ret_string .= "<br/>".$address['address_2'];
+                $ret_string .= "<br/>".$address['suburb'];
+                $ret_string .= "<br/>".$address['state'];
+                $ret_string .= "<br/>".$address['country'];
+                $ret_string .= "<br/>".$address['postcode']."</p>";
+            }
+        }
+        return $ret_string;
+    }
+
     public function getItemCountInOrder($order_id, $item_id)
     {
         $db = Database::openConnection();

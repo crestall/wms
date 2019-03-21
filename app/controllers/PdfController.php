@@ -15,6 +15,27 @@ class pdfController extends Controller
         $this->Security->config("validateForm", false);
     }
 
+    public function printSolarLabels()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $pdf = new Mympdf([
+            'mode'          => 'utf-8',
+            'format'        => [148,105],
+            'margin_left'   => 5,
+            'margin_right'  => 5,
+            'margin_top'    => 5,
+            'margin_bottom' => 5
+        ]);
+        $order_ids  = $this->request->data['orders'];
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/solarlabels.php', [
+            'orders_ids'    =>  $order_ids
+        ]);
+        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
+        //$pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
     public function printVicLocalLabels()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
@@ -69,6 +90,20 @@ class pdfController extends Controller
         ]);
         $stylesheet = file_get_contents(STYLES."pickslip.css");
         $pdf->SetWatermarkText('REPLACEMENT');
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
+    public function printSolarPickslips()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
+        $order_ids  = $this->request->data['items'];
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/solarpickslip.php', [
+            'orders_ids'    =>  $order_ids
+        ]);
+        $stylesheet = file_get_contents(STYLES."pickslip.css");
         $pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
