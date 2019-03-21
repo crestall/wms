@@ -45,6 +45,38 @@
                                 this.checked =  checked;
                              })
                         });
+                    },
+                    'cancel-orders': function(){
+                        $('a.cancel-order').click(function(e){
+                            e.preventDefault();
+                            swal({
+                                title: "Really cancel these orders?",
+                                text: "This cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willCancel) {
+                                if (willCancel) {
+                                    if($('input.select:checked').length)
+                                    {
+                                    	var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            if( $(this).prop('checked'))
+                                            {
+                                                ids.push($(this).data('orderid'));
+                                            }
+                                        });
+
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Cancelling Orders...</h1></div>' });
+
+                                        var data = {orderids: ids}
+                                        $.post('/ajaxfunctions/cancel-orders', data, function(d){
+                                            location.reload();
+                                        });
+                                    }
+                                }
+                            });
+                        });
                     }
                 },
                 'order-edit': {
@@ -528,6 +560,7 @@
                 'view-storeorders' : {
                     init: function(){
                         actions.common.init();
+                        actions.common['cancel-orders']();
                         $("button#show_fulfilled").click(function(e){
                             var href = '/orders/view-storeorders';
                             if($('#client_selector').val() != 0)
@@ -615,37 +648,6 @@
                             }
                         });
 
-                        $('a.cancel-order').click(function(e){
-                            e.preventDefault();
-                            swal({
-                                title: "Really cancel these orders?",
-                                text: "This cannot be undone",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            }).then( function(willCancel) {
-                                if (willCancel) {
-                                    if($('input.select:checked').length)
-                                    {
-                                    	var ids = [];
-                                        $('input.select').each(function(i,e){
-                                            if( $(this).prop('checked'))
-                                            {
-                                                ids.push($(this).data('orderid'));
-                                            }
-                                        });
-
-                                        $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Cancelling Orders...</h1></div>' });
-
-                                        var data = {orderids: ids}
-                                        $.post('/ajaxfunctions/cancel-orders', data, function(d){
-                                            location.reload();
-                                        });
-                                    }
-                                }
-                            });
-                        });
-
                         actions.common['select-all']();
 
                         $('.selectpicker').selectpicker({});
@@ -724,6 +726,7 @@
                     init: function(){
                         actions.common.init();
                         actions.common['select-all']();
+                        actions.common['cancel-orders'](); 
 
                         $('table#solar_orders_table').filterTable({
                             inputSelector: '#table_searcher'
@@ -795,6 +798,8 @@
                 'view-orders': {
                     init: function(){
                         actions.common.init();
+                        actions.common['select-all']();
+                        actions.common['cancel-orders']();
                         $('#client_selector, #courier_selector, #state_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
                             var href = '/orders/view-orders';
@@ -808,8 +813,6 @@
                                 href += "/state="+$('#state_selector').val();
                             window.location.href = href;
                         });
-
-                        actions.common['select-all']();
 
                         $('#select_all_np').click(function(e){
                             var checked = this.checked;
@@ -1038,37 +1041,6 @@
                                 window.open('','formresult');
                                 form.submit();
                             }
-                        });
-
-                        $('a.cancel-order').click(function(e){
-                            e.preventDefault();
-                            swal({
-                                title: "Really cancel these orders?",
-                                text: "This cannot be undone",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            }).then( function(willCancel) {
-                                if (willCancel) {
-                                    if($('input.select:checked').length)
-                                    {
-                                    	var ids = [];
-                                        $('input.select').each(function(i,e){
-                                            if( $(this).prop('checked'))
-                                            {
-                                                ids.push($(this).data('orderid'));
-                                            }
-                                        });
-
-                                        $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Cancelling Orders...</h1></div>' });
-
-                                        var data = {orderids: ids}
-                                        $.post('/ajaxfunctions/cancel-orders', data, function(d){
-                                            location.reload();
-                                        });
-                                    }
-                                }
-                            });
                         });
 
                         $('a.eparcel-fulfill').click(function(e){
