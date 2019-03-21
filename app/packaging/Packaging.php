@@ -209,6 +209,7 @@ class Packaging{
         elseif($od['client_id'] == 6)   //Big Bottle
         {
             $total_bottles = 0;
+            $total_small_bottels = 0;
             $ar_bottles = 0;
             $weight = 0;
             foreach($items as $i)
@@ -222,6 +223,11 @@ class Packaging{
                 {
                     $weight += $i['weight'];
                 }
+                elseif( in_array($i['id'], Config::get('BB_1.5L_IDS') ))
+                {
+                    $total_small_bottels += $i['qty'];
+                    $total_bottles += $i['qty'];
+                }
                 elseif( stripos($i['name'], 'replacement cap') !== false )
                 {
                     $weight += $i['weight'];
@@ -233,10 +239,13 @@ class Packaging{
                 $array['item_reference'] = $i['item_id'];
             }
             list($w, $d, $h) = Config::get('BBBOX_DIMENSIONS')[$total_bottles];
+            //subtract weight diff//
+            $bottle_weight = Config::get('BBBOX_WEIGHTS')[$total_bottles];
+            $bottle_weight = $bottle_weight - ($total_small_bottels * 0.035);
             $array['width'] = $w;
             $array['height'] = $h;
             $array['depth'] = $d;
-            $array['weight'] = Config::get('BBBOX_WEIGHTS')[$total_bottles] + $weight;
+            $array['weight'] = $bottle_weight + $weight;
             $array['pieces'] = 1;
             $array['type_code'] = 'CTN';
             $return[] = $array;
