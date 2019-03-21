@@ -24,6 +24,16 @@
         parent::__construct();
     }
 
+    public function cancelOrders($ids)
+    {
+        $db = Database::openConnection();
+        foreach($ids as $id)
+        {
+            $db->deleteQuery('solar_orders', $id);
+            $db->deleteQuery('solar_orders_items', $id, 'order_id');
+        }
+    }
+
     public function getSolarAllOrders($type_id, $fulfilled)
     {
         $db = Database::openConnection();
