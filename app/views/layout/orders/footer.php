@@ -46,7 +46,10 @@
                              })
                         });
                     },
-                    'cancel-orders': function(){
+                    'cancel-orders': function(solar){
+                        if(solar === undefined) {
+                            solar = false;
+                        }
                         $('a.cancel-order').click(function(e){
                             e.preventDefault();
                             swal({
@@ -70,9 +73,19 @@
                                         $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Cancelling Orders...</h1></div>' });
 
                                         var data = {orderids: ids}
-                                        $.post('/ajaxfunctions/cancel-orders', data, function(d){
-                                            location.reload();
-                                        });
+                                        if(solar)
+                                        {
+                                            $.post('/ajaxfunctions/cancel-solarorders', data, function(d){
+                                                location.reload();
+                                            });
+                                        }
+                                        else
+                                        {
+                                            $.post('/ajaxfunctions/cancel-orders', data, function(d){
+                                                location.reload();
+                                            });
+                                        }
+
                                     }
                                 }
                             });
@@ -726,7 +739,7 @@
                     init: function(){
                         actions.common.init();
                         actions.common['select-all']();
-                        actions.common['cancel-orders'](); 
+                        actions.common['cancel-orders'](true);
 
                         $('table#solar_orders_table').filterTable({
                             inputSelector: '#table_searcher'
