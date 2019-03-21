@@ -60,7 +60,7 @@ class ajaxfunctionsController extends Controller
                 $post_data[$field] = $value;
             }
         }
-        $rails = $joins = $ground_clips = $rail_joiners = $tile_feet = $tin_feet = 0;
+        $rails = $joins = $ground_clips = $rail_joiners = $tile_feet = $tin_feet = $z_bolts = 0;
         $bank_count = count($this->request->query['banks']);
         foreach($this->request->query['banks'] as $bank)
         {
@@ -77,7 +77,7 @@ class ajaxfunctionsController extends Controller
         }
         elseif($this->request->query['roof_type'] == "tile")
         {
-            $tile_feet = 4 * $rails + 2;
+            $tile_feet = $z_bolts = 4 * $rails + 2;
         }
         ++$rails;
         ++$rail_joiners;
@@ -116,6 +116,10 @@ class ajaxfunctionsController extends Controller
         $tile_feet = array(
             'id'    => 11661,
             'qty'   => $tile_feet
+        );
+        $z_bolts = array(
+            'id'    => 11838,
+            'qty'   => $z_bolts
         );
 
         $parts = array(
