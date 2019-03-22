@@ -108,9 +108,9 @@
                             </td>
         					<!--td data-label="Client Name"><?php //echo $client_name;?></td-->
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
-        					<td data-label="Panels" class="number"><?php echo $co['panels']</td>
+        					<td data-label="Panels" class="number"><?php echo $co['panels'];?></td>
         					<td data-label="Date Entered" nowrap><?php echo date('d-m-Y', $co['date_entered']);?></td>
-        					<td data-label="Install Date" nowrap><?php echo date('d-m-Y', $co['install_date']);?></td> 
+        					<td data-label="Install Date" nowrap><?php echo date('d-m-Y', $co['install_date']);?></td>
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
         					<td data-label="Select" class="chkbox">
                                 <div class="checkbox checkbox-default">
