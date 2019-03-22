@@ -149,6 +149,7 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $items_table = (in_array($client_id, $this->solar_client_ids))? "solar_orders_items": "orders_items";
+        $orders_table = (in_array($client_id, $this->solar_client_ids))? "solar_orders": "orders";
         return $db->queryData(
             "SELECT a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, IFNULL(b.allocated,0) as allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
             FROM
