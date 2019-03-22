@@ -33,6 +33,13 @@ $type_id = $this->controller->solarordertype->getTypeId('origin')
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                    <?php echo Form::displayError('customer_name');?>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Panel</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control required origin-item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
