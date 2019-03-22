@@ -157,7 +157,7 @@ class Item extends Model{
     public function getClientInventory($client_id, $active = 1)
     {
         $db = Database::openConnection();
-        if($this->isSolarItem($item_id))
+        if(in_array($client_id, $this->solar_client_ids))
         {
             $orders_table = "solar_orders";
             $items_table = "solar_orders_items";
@@ -598,7 +598,8 @@ class Item extends Model{
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
-        if($this->isSolarItem($item_id))
+
+        if(in_array($data['client_id'], $this->solar_client_ids))
         {
             $orders_table = "solar_orders";
             $items_table = "solar_orders_items";
