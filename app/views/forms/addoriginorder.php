@@ -12,7 +12,8 @@ if(!empty(Form::value('items')))
 if($user_role == "client")
     $idisp = "block";
 $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qty');
-$type_id = $this->controller->solarordertype->getTypeId('origin')
+$type_id = $this->controller->solarordertype->getTypeId('origin');
+$date_filter = "Install Date";
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
@@ -39,6 +40,7 @@ $type_id = $this->controller->solarordertype->getTypeId('origin')
                     <?php echo Form::displayError('customer_name');?>
                 </div>
             </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Panel</label>
                 <div class="col-md-4">
