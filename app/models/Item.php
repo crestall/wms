@@ -166,7 +166,7 @@ class Item extends Model{
                 SELECT
                     COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                 FROM
-                    $items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                 WHERE
                     o.status_id != 4
                 GROUP BY
