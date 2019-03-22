@@ -31,6 +31,9 @@ class Client extends Model{
       * @var string
       */
     public $table = "clients";
+    public $solar_client_ids = array(
+        67  //TLJ Solar
+    );
 
     public function getClientId($name)
     {

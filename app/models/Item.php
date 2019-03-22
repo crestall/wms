@@ -63,6 +63,9 @@ class Item extends Model{
       */
     public $table = "items";
     public $packaging_types = array();
+    public $solar_client_ids = array(
+        67  //TLJ Solar
+    );
 
     public function __construct()
     {
@@ -76,9 +79,10 @@ class Item extends Model{
         return $id;
     }
 
-    public function getPalletCountSelect($item_id, $items_table = "orders_items")
+    public function getPalletCountSelect($item_id)
     {
         $db = Database::openConnection();
+        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
         $q = "
             SELECT DISTINCT ( a.available - IFNULL(b.qty, 0) ) AS available
             FROM
@@ -141,10 +145,10 @@ class Item extends Model{
         return $rows;
     }
 
-    public function getClientInventory($client_id, $active = 1, $items_table = "orders_items")
+    public function getClientInventory($client_id, $active = 1)
     {
         $db = Database::openConnection();
-
+        $items_table = (in_array($client_id, $this->solar_client_ids))? "solar_orders_items": "orders_items";
         return $db->queryData(
             "SELECT a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, IFNULL(b.allocated,0) as allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
             FROM
@@ -438,9 +442,10 @@ class Item extends Model{
         return true;
     }
 
-    public function getAvailableInLocation($item_id, $location_id, $items_table = "orders_items")
+    public function getAvailableInLocation($item_id, $location_id)
     {
         $db = database::openConnection();
+        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
         $res = $db->queryRow("
             select
                 (onhand.qty - IFNULL(SUM(allocated.qty), 0)) as available
@@ -571,10 +576,11 @@ class Item extends Model{
         return $return_array;
     }
 
-    public function getAutocompleteItems($data, $fulfilled_id, $items_table = "orders_items")
+    public function getAutocompleteItems($data, $fulfilled_id)
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
+        $items_table = (in_array($data['client_id'], $this->solar_client_ids))? "solar_orders_items": "orders_items";
         $return_array = array();
         $q = $data["item"];
         $client_id = $data['clientid'];
@@ -772,9 +778,10 @@ class Item extends Model{
 		return $under_qc;
 	}
 
-    public function getAllocatedStock($item_id, $fulfilled_id, $items_table = "orders_items")
+    public function getAllocatedStock($item_id, $fulfilled_id)
     {
         $db = Database::openConnection();
+        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
         $asq = $db->queryRow("
             SELECT
             	oi.item_id, i.name, sum(oi.qty) AS allocated
@@ -788,11 +795,11 @@ class Item extends Model{
         $allocated = (empty($asq['allocated']))? 0 : $asq['allocated'];
         return $allocated;
     }
-
-    public function getAllocatedStockForLocation($location_id, $items_table = "orders_items")
+    /*
+    public function getAllocatedStockForLocation($location_id)
     {
         $db = Database::openConnection();
-
+        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
         $asq = $db->queryData("
             SELECT
             	oi.location_id, i.name, sum(oi.qty) AS allocated, oi.item_id, oi.id
@@ -805,10 +812,11 @@ class Item extends Model{
         ");
         return (count($asq))? $asq : false;
     }
-
-    public function getAvailableLocationsForAutoselectItem($item_id, $items_table = "orders_items")
+    */
+    public function getAvailableLocationsForAutoselectItem($item_id)
     {
         $db = Database::openConnection();
+        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
         $item = $this->getItemById($item_id);
         $locations = $db->queryData("
             SELECT
@@ -839,10 +847,11 @@ class Item extends Model{
         return $locations;
     }
 
-    public function getAvailableLocationsForItem($item_id, $pallet = false, $order_id = 0, $items_table = "orders_items")
+    public function getAvailableLocationsForItem($item_id, $pallet = false, $order_id = 0)
     {
         $db = Database::openConnection();
         $item = $this->getItemById($item_id);
+        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
         if($pallet)
         {
             $locations = $db->queryData("
@@ -1019,7 +1028,7 @@ class Item extends Model{
     public function getLowStock($item_id)
     {
        $item = $this->getItemById($item_id);
-       return $item['low_stock_warning']; 
+       return $item['low_stock_warning'];
     }
 
     public function getPackingTypesForItem($item_id)
@@ -1074,9 +1083,10 @@ class Item extends Model{
         return $db->queryValue($this->table, array('id' => $item_id), 'collection') > 0;
     }
 
-    public function getLocationsForItem($item_id, $items_table = "orders_items")
+    public function getLocationsForItem($item_id)
     {
         $db = Database::openConnection();
+        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
         return $db->queryData("
             SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated
                 FROM
@@ -1105,9 +1115,10 @@ class Item extends Model{
         ");
     }
 
-    public function getLocationForItem($item_id, $location_id, $items_table = "orders_items")
+    public function getLocationForItem($item_id, $location_id)
     {
         $db = Database::openConnection();
+        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
         return $db->queryRow("
             SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated
                 FROM
@@ -1138,5 +1149,11 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $db->query("DELETE FROM items_locations WHERE qty <= 0 AND qc_count <= 0");
+    }
+
+    private function isSolarItem($id)
+    {
+        $item = $this->getItemById($id);
+        return in_array($item['client_id'], $this->solar_client_ids);
     }
 }
