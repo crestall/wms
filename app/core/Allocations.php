@@ -266,7 +266,7 @@ class Allocations{
                             else
                             {
                                 //individual items
-                                $locations = $this->controller->item->getAvailableLocationsForItem($id, false, $order_id, 'solar_orders_items');
+                                $locations = $this->controller->item->getAvailableLocationsForItem($id, false, $order_id);
                                 //echo "Individual Locations for $id<pre>",print_r($locations),"</pre>";//die();
                                 //continue;
                                 foreach($locations as $l)
