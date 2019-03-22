@@ -76,9 +76,9 @@
         	        	<th>Work Order</th>
         				<!--th>Client</th-->
         				<th>Address</th>
-        				<th>Items</th>
-        				<th>Date Ordered</th>
-        				<!--th>Status</th-->
+        				<th>Panels</th>
+        				<th>Date Entered</th>
+        				<th>Install Date</th>
         				<th>Slip Printed</th>
                         <th nowrap>
                             Select
@@ -99,7 +99,6 @@
                         //$link = ( $co['store_order'] == 1 )? "/orders/big-bottle-store-orders/order={$co['xero_invoiceno']}":"/orders/order-update/order={$co['id']}";
                         //$item_count = $this->controller->order->getItemCountForOrder($co['id']);
                         //$items = $this->controller->order->getItemsForOrder($co['id']);
-        				$fulfill = true;
                         /* */
                         ?>
         	        	<tr>
@@ -109,9 +108,9 @@
                             </td>
         					<!--td data-label="Client Name"><?php //echo $client_name;?></td-->
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
-        					<td data-label="Items" class="number"></td>
-        					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
-        					<!--td data-label="Status"><?php echo $order_status;?></td-->
+        					<td data-label="Panels" class="number"><?php echo $co['panels']</td>
+        					<td data-label="Date Entered" nowrap><?php echo date('d-m-Y', $co['date_entered']);?></td>
+        					<td data-label="Install Date" nowrap><?php echo date('d-m-Y', $co['install_date']);?></td> 
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
         					<td data-label="Select" class="chkbox">
                                 <div class="checkbox checkbox-default">
