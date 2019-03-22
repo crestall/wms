@@ -740,6 +740,7 @@
                         actions.common.init();
                         actions.common['select-all']();
                         actions.common['cancel-orders'](true);
+                        datePicker.fromDate();
 
                         $('table#solar_orders_table').filterTable({
                             inputSelector: '#table_searcher'
