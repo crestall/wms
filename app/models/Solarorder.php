@@ -53,7 +53,7 @@
         {
             $q .= " AND type_id = $type_id";
         }
-        $q .= " ORDER BY date_ordered ASC";
+        $q .= " ORDER BY install_date DESC";
         //die($q);
         return ($db->queryData($q, $array));
     }
