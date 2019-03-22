@@ -76,7 +76,7 @@ class Item extends Model{
         return $id;
     }
 
-    public function getPalletCountSelect($item_id)
+    public function getPalletCountSelect($item_id, $items_table = "orders_items")
     {
         $db = Database::openConnection();
         $q = "
@@ -90,7 +90,7 @@ class Item extends Model{
             LEFT JOIN
             (
                 SELECT oi.qty, oi.location_id
-                FROM orders_items oi JOIN orders o ON oi.order_id = o.id
+                FROM $items_table oi JOIN orders o ON oi.order_id = o.id
                 WHERE o.status_id != 4
             ) b
             ON a.location_id = b.location_id
@@ -141,7 +141,7 @@ class Item extends Model{
         return $rows;
     }
 
-    public function getClientInventory($client_id, $active = 1)
+    public function getClientInventory($client_id, $active = 1, $items_table = "orders_items")
     {
         $db = Database::openConnection();
 
@@ -161,7 +161,7 @@ class Item extends Model{
                 SELECT
                     COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                 FROM
-                    orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                    $items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                 WHERE
                     o.status_id != 4
                 GROUP BY
@@ -438,14 +438,14 @@ class Item extends Model{
         return true;
     }
 
-    public function getAvailableInLocation($item_id, $location_id)
+    public function getAvailableInLocation($item_id, $location_id, $items_table = "orders_items")
     {
         $db = database::openConnection();
         $res = $db->queryRow("
             select
                 (onhand.qty - IFNULL(SUM(allocated.qty), 0)) as available
             from
-                (select (qty - qc_count) as qty, item_id, location_id from items_locations) onhand left join (select qty, location_id, item_id, order_id from orders_items where order_id not in(select id from orders where status_id = 4)) allocated on onhand.item_id = allocated.item_id and onhand.location_id = allocated.location_id
+                (select (qty - qc_count) as qty, item_id, location_id from items_locations) onhand left join (select qty, location_id, item_id, order_id from $items_table where order_id not in(select id from orders where status_id = 4)) allocated on onhand.item_id = allocated.item_id and onhand.location_id = allocated.location_id
             where
                 onhand.item_id = $item_id and onhand.location_id = $location_id
             group by
@@ -571,7 +571,7 @@ class Item extends Model{
         return $return_array;
     }
 
-    public function getAutocompleteItems($data, $fulfilled_id)
+    public function getAutocompleteItems($data, $fulfilled_id, $items_table = "orders_items")
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
@@ -602,7 +602,7 @@ class Item extends Model{
                 SELECT
                     COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                 FROM
-                    orders_items oi JOIN orders o ON oi.order_id = o.id
+                    $items_table oi JOIN orders o ON oi.order_id = o.id
                 WHERE
                     o.status_id != 4
                 GROUP BY
@@ -772,14 +772,14 @@ class Item extends Model{
 		return $under_qc;
 	}
 
-    public function getAllocatedStock($item_id, $fulfilled_id)
+    public function getAllocatedStock($item_id, $fulfilled_id, $items_table = "orders_items")
     {
         $db = Database::openConnection();
         $asq = $db->queryRow("
             SELECT
             	oi.item_id, i.name, sum(oi.qty) AS allocated
             FROM
-            	orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+            	$items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
             WHERE
             	o.status_id != $fulfilled_id AND oi.item_id = $item_id AND o.cancelled = 0
             GROUP BY
@@ -789,7 +789,7 @@ class Item extends Model{
         return $allocated;
     }
 
-    public function getAllocatedStockForLocation($location_id)
+    public function getAllocatedStockForLocation($location_id, $items_table = "orders_items")
     {
         $db = Database::openConnection();
 
@@ -797,7 +797,7 @@ class Item extends Model{
             SELECT
             	oi.location_id, i.name, sum(oi.qty) AS allocated, oi.item_id, oi.id
             FROM
-            	orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+            	$items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
             WHERE
             	o.status_id != 4 AND oi.location_id = $location_id AND o.cancelled = 0
             GROUP BY
@@ -806,7 +806,7 @@ class Item extends Model{
         return (count($asq))? $asq : false;
     }
 
-    public function getAvailableLocationsForAutoselectItem($item_id)
+    public function getAvailableLocationsForAutoselectItem($item_id, $items_table = "orders_items")
     {
         $db = Database::openConnection();
         $item = $this->getItemById($item_id);
@@ -827,7 +827,7 @@ class Item extends Model{
                 SELECT
                     COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                 FROM
-                    orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                    $items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                 WHERE
                     o.status_id != 4
                 GROUP BY
@@ -839,7 +839,7 @@ class Item extends Model{
         return $locations;
     }
 
-    public function getAvailableLocationsForItem($item_id, $pallet = false, $order_id = 0)
+    public function getAvailableLocationsForItem($item_id, $pallet = false, $order_id = 0, $items_table = "orders_items")
     {
         $db = Database::openConnection();
         $item = $this->getItemById($item_id);
@@ -864,7 +864,7 @@ class Item extends Model{
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        $items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4 AND o.id != $order_id
                     GROUP BY
@@ -894,7 +894,7 @@ class Item extends Model{
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        $items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4 AND o.id != $order_id
                     GROUP BY
@@ -1074,7 +1074,7 @@ class Item extends Model{
         return $db->queryValue($this->table, array('id' => $item_id), 'collection') > 0;
     }
 
-    public function getLocationsForItem($item_id)
+    public function getLocationsForItem($item_id, $items_table = "orders_items")
     {
         $db = Database::openConnection();
         return $db->queryData("
@@ -1095,7 +1095,7 @@ class Item extends Model{
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        $items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4
                     GROUP BY
@@ -1105,7 +1105,7 @@ class Item extends Model{
         ");
     }
 
-    public function getLocationForItem($item_id, $location_id)
+    public function getLocationForItem($item_id, $location_id, $items_table = "orders_items")
     {
         $db = Database::openConnection();
         return $db->queryRow("
@@ -1124,7 +1124,7 @@ class Item extends Model{
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        $items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4
                     GROUP BY
