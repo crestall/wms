@@ -1,6 +1,6 @@
 <?php if(!isset($date_filter)) $date_filter = "Date";?>
 <div class="row form-group">
-    <label class="col-md-3 col-form-label"><?php echo $date_filter;?></label>
+    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php echo $date_filter;?></label>
     <div class="col-md-2">
         <div class="input-group">
             <input type="text" class="required form-control" name="date" id="date" value="<?php echo date('d/m/Y', $date);?>" />
