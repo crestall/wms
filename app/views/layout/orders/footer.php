@@ -456,6 +456,7 @@
                     {
                         actions.common.init();
                         actions['add-origin-order'].calcItems();
+                        datePicker.fromDate(); 
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         $("form#add_origin_order").submit(function(e){
@@ -740,7 +741,6 @@
                         actions.common.init();
                         actions.common['select-all']();
                         actions.common['cancel-orders'](true);
-                        datePicker.fromDate();
 
                         $('table#solar_orders_table').filterTable({
                             inputSelector: '#table_searcher'
