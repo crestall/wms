@@ -599,7 +599,7 @@ class Item extends Model{
         //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
 
-        if(in_array($data['client_id'], $this->solar_client_ids))
+        if(in_array($data['clientid'], $this->solar_client_ids))
         {
             $orders_table = "solar_orders";
             $items_table = "solar_orders_items";
