@@ -14,6 +14,7 @@ if($user_role == "client")
 $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qty');
 $type_id = $this->controller->solarordertype->getTypeId('origin');
 $date_filter = "Install Date";
+$date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
