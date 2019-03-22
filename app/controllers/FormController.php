@@ -111,7 +111,7 @@ class FormController extends Controller {
 
     public function procOriginOrderAdd()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -154,7 +154,7 @@ class FormController extends Controller {
             0 => $orders_items
         );
         //echo "<pre>",print_r($the_items),"</pre>"; die();
-        $oitems = $this->allocations->createOrderItemsArray($the_items, 0, false);
+        $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
         foreach($oitems[0] as $item)//there is only one order
         {
             if($item['import_error'])
