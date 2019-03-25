@@ -63,9 +63,6 @@ class Item extends Model{
       */
     public $table = "items";
     public $packaging_types = array();
-    public $solar_client_ids = array(
-        67  //TLJ Solar
-    );
 
     public function __construct()
     {
@@ -82,16 +79,6 @@ class Item extends Model{
     public function getPalletCountSelect($item_id)
     {
         $db = Database::openConnection();
-        if($this->isSolarItem($item_id))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         $q = "
             SELECT DISTINCT ( a.available - IFNULL(b.qty, 0) ) AS available
             FROM
@@ -103,7 +90,7 @@ class Item extends Model{
             LEFT JOIN
             (
                 SELECT oi.qty, oi.location_id
-                FROM $items_table oi JOIN $orders_table o ON oi.order_id = o.id
+                FROM orders_items oi JOIN orders o ON oi.order_id = o.id
                 WHERE o.status_id != 4
             ) b
             ON a.location_id = b.location_id
@@ -157,16 +144,7 @@ class Item extends Model{
     public function getClientInventory($client_id, $active = 1)
     {
         $db = Database::openConnection();
-        if(in_array($client_id, $this->solar_client_ids))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
+
         return $db->queryData(
             "SELECT a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, IFNULL(b.allocated,0) as allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
             FROM
@@ -183,7 +161,7 @@ class Item extends Model{
                 SELECT
                     COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                 FROM
-                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                    orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                 WHERE
                     o.status_id != 4
                 GROUP BY
@@ -463,12 +441,11 @@ class Item extends Model{
     public function getAvailableInLocation($item_id, $location_id)
     {
         $db = database::openConnection();
-        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
         $res = $db->queryRow("
             select
                 (onhand.qty - IFNULL(SUM(allocated.qty), 0)) as available
             from
-                (select (qty - qc_count) as qty, item_id, location_id from items_locations) onhand left join (select qty, location_id, item_id, order_id from $items_table where order_id not in(select id from orders where status_id = 4)) allocated on onhand.item_id = allocated.item_id and onhand.location_id = allocated.location_id
+                (select (qty - qc_count) as qty, item_id, location_id from items_locations) onhand left join (select qty, location_id, item_id, order_id from orders_items where order_id not in(select id from orders where status_id = 4)) allocated on onhand.item_id = allocated.item_id and onhand.location_id = allocated.location_id
             where
                 onhand.item_id = $item_id and onhand.location_id = $location_id
             group by
@@ -598,17 +575,6 @@ class Item extends Model{
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
-
-        if(in_array($data['clientid'], $this->solar_client_ids))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         $return_array = array();
         $q = $data["item"];
         $client_id = $data['clientid'];
@@ -636,7 +602,7 @@ class Item extends Model{
                 SELECT
                     COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                 FROM
-                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id
+                    orders_items oi JOIN orders o ON oi.order_id = o.id
                 WHERE
                     o.status_id != 4
                 GROUP BY
@@ -809,21 +775,11 @@ class Item extends Model{
     public function getAllocatedStock($item_id, $fulfilled_id)
     {
         $db = Database::openConnection();
-        if($this->isSolarItem($item_id))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         $asq = $db->queryRow("
             SELECT
             	oi.item_id, i.name, sum(oi.qty) AS allocated
             FROM
-            	$items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+            	orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
             WHERE
             	o.status_id != $fulfilled_id AND oi.item_id = $item_id AND o.cancelled = 0
             GROUP BY
@@ -832,16 +788,16 @@ class Item extends Model{
         $allocated = (empty($asq['allocated']))? 0 : $asq['allocated'];
         return $allocated;
     }
-    /*
+
     public function getAllocatedStockForLocation($location_id)
     {
         $db = Database::openConnection();
-        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
+
         $asq = $db->queryData("
             SELECT
             	oi.location_id, i.name, sum(oi.qty) AS allocated, oi.item_id, oi.id
             FROM
-            	$items_table oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+            	orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
             WHERE
             	o.status_id != 4 AND oi.location_id = $location_id AND o.cancelled = 0
             GROUP BY
@@ -849,20 +805,10 @@ class Item extends Model{
         ");
         return (count($asq))? $asq : false;
     }
-    */
+
     public function getAvailableLocationsForAutoselectItem($item_id)
     {
         $db = Database::openConnection();
-        if($this->isSolarItem($item_id))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         $item = $this->getItemById($item_id);
         $locations = $db->queryData("
             SELECT
@@ -881,7 +827,7 @@ class Item extends Model{
                 SELECT
                     COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                 FROM
-                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                    orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                 WHERE
                     o.status_id != 4
                 GROUP BY
@@ -897,16 +843,6 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $item = $this->getItemById($item_id);
-        if($this->isSolarItem($item_id))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         if($pallet)
         {
             $locations = $db->queryData("
@@ -921,14 +857,14 @@ class Item extends Model{
                     WHERE
                         il.item_id = $item_id AND il.qty = {$item['per_pallet']}
                     ORDER BY
-                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2), SUBSTRING_INDEX(l.location, '.', -3)
+                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2)
                 ) a
                 LEFT JOIN
                 (
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        $items_table oi JOIN $order_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4 AND o.id != $order_id
                     GROUP BY
@@ -951,14 +887,14 @@ class Item extends Model{
                     WHERE
                         il.item_id = $item_id AND (il.qty - il.qc_count) > 0
                     ORDER BY
-                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2), SUBSTRING_INDEX(l.location, '.', -3)
+                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2)
                 ) a
                 LEFT JOIN
                 (
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4 AND o.id != $order_id
                     GROUP BY
@@ -1083,7 +1019,7 @@ class Item extends Model{
     public function getLowStock($item_id)
     {
        $item = $this->getItemById($item_id);
-       return $item['low_stock_warning'];
+       return $item['low_stock_warning']; 
     }
 
     public function getPackingTypesForItem($item_id)
@@ -1141,16 +1077,6 @@ class Item extends Model{
     public function getLocationsForItem($item_id)
     {
         $db = Database::openConnection();
-        if($this->isSolarItem($item_id))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         return $db->queryData("
             SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated
                 FROM
@@ -1169,7 +1095,7 @@ class Item extends Model{
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4
                     GROUP BY
@@ -1182,16 +1108,6 @@ class Item extends Model{
     public function getLocationForItem($item_id, $location_id)
     {
         $db = Database::openConnection();
-        if($this->isSolarItem($item_id))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         return $db->queryRow("
             SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated
                 FROM
@@ -1208,7 +1124,7 @@ class Item extends Model{
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4
                     GROUP BY
@@ -1222,11 +1138,5 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $db->query("DELETE FROM items_locations WHERE qty <= 0 AND qc_count <= 0");
-    }
-
-    private function isSolarItem($id)
-    {
-        $item = $this->getItemById($id);
-        return in_array($item['client_id'], $this->solar_client_ids);
     }
 }

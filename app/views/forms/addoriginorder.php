@@ -12,7 +12,9 @@ if(!empty(Form::value('items')))
 if($user_role == "client")
     $idisp = "block";
 $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qty');
-$type_id = $this->controller->solarordertype->getTypeId('origin')
+$type_id = $this->controller->solarordertype->getTypeId('origin');
+$date_filter = "Install Date";
+$date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
@@ -32,6 +34,14 @@ $type_id = $this->controller->solarordertype->getTypeId('origin')
                     <?php echo Form::displayError('work_order');?>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                    <?php echo Form::displayError('customer_name');?>
+                </div>
+            </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Panel</label>
                 <div class="col-md-4">

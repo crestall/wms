@@ -53,7 +53,7 @@
         {
             $q .= " AND type_id = $type_id";
         }
-        $q .= " ORDER BY date_ordered ASC";
+        $q .= " ORDER BY install_date DESC";
         //die($q);
         return ($db->queryData($q, $array));
     }
@@ -109,16 +109,19 @@
         }
         $o_values = array(
             'work_order'    => $data['work_order'],
+            'customer_name' => $data['customer_name'],
             'type_id'       => $data['type_id'],
             'client_id'     => $data['client_id'],
-            'date_ordered'  => time(),
+            'date_entered'  => time(),
+            'install_date'  => $data['date_value'],
             'status_id'     => $this->ordered_id,
             'address'       => $data['address'],
             'suburb'        => $data['suburb'],
             'state'         => $data['state'],
             'postcode'      => $data['postcode'],
             'country'       => $data['country'],
-            'entered_by'    => $eb
+            'entered_by'    => $eb,
+            'panels'        => $data['panel_qty']
         );
 
         $order_id = $db->insertQuery($this->table, $o_values);

@@ -456,6 +456,7 @@
                     {
                         actions.common.init();
                         actions['add-origin-order'].calcItems();
+                        datePicker.fromDate(); 
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         $("form#add_origin_order").submit(function(e){
