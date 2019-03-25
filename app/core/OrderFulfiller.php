@@ -217,8 +217,6 @@
                 //order is now fulfilled, reduce stock
                 $items = $this->controller->solarorder->getItemsForOrder($id);
 
-                print_r($items);die();
-
                 $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
                 $this->removeStock($items, $id);
 
