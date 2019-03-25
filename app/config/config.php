@@ -341,6 +341,7 @@ return array(
             'add-order' =>  true,
             'add-origin-order'  => true,
             'order-update'			    => false,
+            'solar-order-update'	    => false,
 			'process-backorders'	    =>	false,
 			'order-summaries'		    =>	true,
             //'add-b2B-order'             =>  true,

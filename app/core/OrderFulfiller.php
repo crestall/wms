@@ -200,6 +200,38 @@
         $this->recordOutput("order_fulfillment/viclocal");
     }
 
+    public function fulfillSolarOrder($order_ids)
+    {
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "FULFILLING SOLAR ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $db = Database::openConnection();
+        foreach($order_ids as $id)
+        {
+            $od = $this->controller->solarorder->getOrderDetail($id);
+            if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
+            {
+                $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
+                $this->output .= "Doing Order ID: ".$od['id'].PHP_EOL;
+                $db->updateDatabaseFields('solar_orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time() ), $id);
+                //order is now fulfilled, reduce stock
+                $items = $this->controller->solarorder->getItemsForOrder($id);
+
+                $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
+                $this->removeStock($items, $id);
+
+                Session::set('showfeedback', true);
+                $_SESSION['feedback'] .= "<p>{$od['id']} has been successfully fulfilled</p>";
+            }
+            else
+            {
+                Session::set('showerrorfeedback', true);
+        	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
+            }
+        }
+        $this->recordOutput("order_fulfillment/solar");
+    }
+
     public function fulfillOurTruckOrder()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
