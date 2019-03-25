@@ -210,15 +210,16 @@
         {
             $od = $this->controller->solarorder->getOrderDetail($id);
 
-            print_r($od);die();
-
             if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
             {
                 $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
                 $this->output .= "Doing Order Number: ".$od['order_number']." Using ".$this->controller->courier->getCourierName($od['courier_id']).PHP_EOL;
-                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time(), 'total_cost' => Config::get('VIC_LOCAL_CHARGE')), $id);
+                $db->updateDatabaseFields('solar_orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time() ), $id);
                 //order is now fulfilled, reduce stock
-                $items = $this->controller->order->getItemsForOrder($id);
+                $items = $this->controller->solarorder->getItemsForOrder($id);
+
+                print_r($items);die();
+
                 $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
                 $this->removeStock($items, $id);
                 if($od['client_id'] == 59)
