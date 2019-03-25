@@ -239,52 +239,24 @@ class ajaxfunctionsController extends Controller
             'error_string'  => '',
             'feedback'      => ''
         );
-        /*
-        if(!Session::getIsLoggedIn())
+
+        $order_ids = ( is_array($this->request->data['order_ids']) )? $this->request->data['order_ids']: (array)$this->request->data['order_ids'];
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Have Been Fulfilled</h2>");
+        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Fulfilled</h2><p>Reasons are listed below</p>");
+        Session::set('showfeedback', false);
+        Session::set('showerrorfeedback', false);
+
+        $this->orderfulfiller->fulfillSolarOrder($order_ids)
+
+        if(Session::getAndDestroy('showfeedback') == false)
         {
-            $data['not_logged'] = true;
+            Session::destroy('feedback');
         }
-        else
-        {*/
-            $order_ids = ( is_array($this->request->data['order_ids']) )? $this->request->data['order_ids']: (array)$this->request->data['order_ids'];
-            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Have Been Fulfilled</h2>");
-            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Fulfilled</h2><p>Reasons are listed below</p>");
-            Session::set('showfeedback', false);
-            Session::set('showerrorfeedback', false);
-            if($this->request->data['courier_id'] == $this->courier->eParcelId || $this->request->data['courier_id'] == $this->courier->eParcelExpressId)
-            {
-                $this->orderfulfiller->fulfillEparcelOrders($order_ids);
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->huntersId || $this->request->data['courier_id'] == $this->courier->huntersPluId || $this->request->data['courier_id'] == $this->courier->huntersPalId)
-            {
-                $this->orderfulfiller->fulfillHuntersOrders($order_ids);
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->threePlTruckId)
-            {
-                $this->orderfulfiller->fulfillOurTruckOrder();
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->localId)
-            {
-                $this->orderfulfiller->fulfillLocalOrder();
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->vicLocalId)
-            {
-                $this->orderfulfiller->fulfillVicLocalOrder($order_ids);
-            }
-            else
-            {
-                Session::set('showerrorfeedback', true);
-                $_SESSION['errorfeedback'] .= "<p>The selected courier could not be located in the system</p>";
-            }
-            if(Session::getAndDestroy('showfeedback') == false)
-            {
-                Session::destroy('feedback');
-            }
-            if(Session::getAndDestroy('showerrorfeedback') == false)
-            {
-                Session::destroy('errorfeedback');
-            }
-        //}
+        if(Session::getAndDestroy('showerrorfeedback') == false)
+        {
+            Session::destroy('errorfeedback');
+        }
+
 
         $this->view->renderJson($data);
     }
