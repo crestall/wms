@@ -267,7 +267,7 @@ class Allocations{
                             {
                                 //individual items
                                 $locations = $this->controller->item->getAvailableLocationsForItem($id, false, $order_id);
-                                //echo "Individual Locations for $id<pre>",print_r($locations),"</pre>";//die();
+                                //echo "Individual Locations for $id : $item_name<pre>",print_r($locations),"</pre>";//die();
                                 //continue;
                                 foreach($locations as $l)
                                 {
@@ -275,28 +275,35 @@ class Allocations{
                                     if(!isset($l_allocations[$l['location_id']][$id]))
                                         $l_allocations[$l['location_id']][$id] = 0;
                                     $available = $l['available'] - $l_allocations[$l['location_id']][$id];
+									//echo "Allocation<pre>",print_r($l_allocations),"</pre>";
+									//echo "<p>Available: $available</p>";
+									//echo "<p>Left: $left</p>";
                                     if($available <= 0)
                                         continue;
-                                    if($store_order && $l['preferred'] == 1 && count($locations) > 1)
-                                        continue;
-                                    if($available < $pick_count)
-                                    {
-                                        if($l['preferred'] == 1 && !$store_order)
-                                            $order_error_string .= "<p>$item_name picked from non preferred location</p>";
-                                    }
-                                    else
+                                    if($available <= $left)
                                     {
                                         $f_locations[] = array(
                                             'location_id'   =>  $l['location_id'],
-                                            'qty'           =>  $pick_count
+                                            'qty'           =>  $available
                                         );
-                                        $l_allocations[$l['location_id']][$id] += $pick_count;
-                                        break;
+                                        $l_allocations[$l['location_id']][$id] += $available;
+										$left -= $available;
                                     }
+									else
+									{
+										$f_locations[] = array(
+                                            'location_id'   =>  $l['location_id'],
+                                            'qty'           =>  $left
+                                        );
+                                        $l_allocations[$l['location_id']][$id] += $left;
+										break;
+									}
                                 }
                                 //die();
                             }
+							//die();
                         }
+						//die();
                         if(empty($f_locations))
                         {
                             $import_error = true;

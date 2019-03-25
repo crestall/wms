@@ -921,7 +921,7 @@ class Item extends Model{
                     WHERE
                         il.item_id = $item_id AND il.qty = {$item['per_pallet']}
                     ORDER BY
-                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2)
+                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2), SUBSTRING_INDEX(l.location, '.', -3)
                 ) a
                 LEFT JOIN
                 (
@@ -951,7 +951,7 @@ class Item extends Model{
                     WHERE
                         il.item_id = $item_id AND (il.qty - il.qc_count) > 0
                     ORDER BY
-                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2)
+                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2), SUBSTRING_INDEX(l.location, '.', -3)
                 ) a
                 LEFT JOIN
                 (
