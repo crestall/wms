@@ -213,7 +213,7 @@
             if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
             {
                 $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
-                $this->output .= "Doing Order Number: ".$od['order_number']." Using ".$this->controller->courier->getCourierName($od['courier_id']).PHP_EOL;
+                $this->output .= "Doing Order ID: ".$od['id'].PHP_EOL;
                 $db->updateDatabaseFields('solar_orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time() ), $id);
                 //order is now fulfilled, reduce stock
                 $items = $this->controller->solarorder->getItemsForOrder($id);
