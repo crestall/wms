@@ -209,7 +209,6 @@
         foreach($order_ids as $id)
         {
             $od = $this->controller->solarorder->getOrderDetail($id);
-
             if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
             {
                 $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
@@ -222,10 +221,7 @@
 
                 $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
                 $this->removeStock($items, $id);
-                if($od['client_id'] == 59)
-                {
-                    $emails_to_send[] = $od['client_order_id'];
-                }
+
                 Session::set('showfeedback', true);
                 $_SESSION['feedback'] .= "<p>{$od['order_number']} has been successfully fulfilled</p>";
             }
@@ -234,11 +230,6 @@
                 Session::set('showerrorfeedback', true);
         	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
             }
-        }
-        if( count($emails_to_send) )
-        {
-            $this->output .= "Sending Noa Sleep confirmations".PHP_EOL;
-            Email::sendNoaLocalConfirmEmail($emails_to_send);
         }
         $this->recordOutput("order_fulfillment/viclocal");
     }
