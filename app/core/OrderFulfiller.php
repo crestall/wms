@@ -221,7 +221,7 @@
                 $this->removeStock($items, $id);
 
                 Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>{$od['order_number']} has been successfully fulfilled</p>";
+                $_SESSION['feedback'] .= "<p>{$od['id']} has been successfully fulfilled</p>";
             }
             else
             {
@@ -229,7 +229,7 @@
         	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
             }
         }
-        $this->recordOutput("order_fulfillment/viclocal");
+        $this->recordOutput("order_fulfillment/solar");
     }
 
     public function fulfillOurTruckOrder()
