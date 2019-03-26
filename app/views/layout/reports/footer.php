@@ -130,7 +130,7 @@
                         });
                         dataTable.init($('table#inventory_report_table'), {
                             "columnDefs": [
-                                { "orderable": true, "targets": [0,1,2,3,4] }
+                                { "orderable": false, "targets": [6] }
                             ],
                             "order": [],
                             fixedHeader: true
