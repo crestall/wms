@@ -400,7 +400,7 @@ return array(
 			//'client-activity-report'	=>	true,
 			'dispatch-report'			=>	true,
 			//'backorder-report'		=>	true,
-			//'current-inventory'			=>	true,
+			'inventory-report'			=>	true,
             'location-report'           =>  true,
 			//'audit-log'				=>	true,
             'client-space-usage-report'   =>  true,

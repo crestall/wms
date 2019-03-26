@@ -117,6 +117,19 @@
                         });
                     }
                 },
+                'inventory-report':{
+                    init: function()
+                    {
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                var client_id = $(this).val();
+                                var url = '/reports/inventory-report/client='+client_id;
+                                window.location.href = url;
+                            }
+                        });
+                    }
+                },
                 '3pl-dispatch-report': {
                     init: function()
                     {

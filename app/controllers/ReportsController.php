@@ -159,6 +159,31 @@ class reportsController extends Controller
         ]);
     }
 
+    public function inventoryReport()
+    {
+        $client_id = 0;
+        $active = 1;
+        $client_name = "";
+        $products = array();
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+                //$products = $this->item->getItemsForClient($client_id, $active);
+                $products = $this->item->getClientInventoryArray($client_id, $active);
+            }
+        }
+        Config::setJsConfig('curPage', "inventory-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/inventoryReport.php',[
+            'page_title'    =>  'Current Inventory',
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name,
+            'products'      =>  $products
+        ]);
+    }
+
     public function stockMovementSummary()
     {
         if(Session::getUserRole() == "client")
