@@ -128,6 +128,13 @@
                                 window.location.href = url;
                             }
                         });
+                        dataTable.init($('table#inventory_report_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [0,2,5,10,11,12] }
+                            ],
+                            "order": [],
+                            fixedHeader: true
+                        } );
                     }
                 },
                 '3pl-dispatch-report': {
