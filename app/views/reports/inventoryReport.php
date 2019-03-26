@@ -48,6 +48,7 @@
                                     <td data-label="Currently Allocated" class="number"><?php echo $p['allocated'];?></td>
                                     <td data-label="Under Quality Control" class="number"><?php echo $p['qc_count'];?></td>
                                     <td data-label="Total Available" class="number"><?php echo $available;?></td>
+                                    <td></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
