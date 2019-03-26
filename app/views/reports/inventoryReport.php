@@ -34,11 +34,22 @@
                                 <th>Total On Hand</th>
                                 <th>Currently Allocated</th>
                                 <th>Under Quality Controll</th>
+                                <th>Total Available</th>
                                 <th>Locations</th>
                         	</tr>
                         </thead>
                         <tbody>
-
+                            <?php foreach($products as $p):
+                                $available = $p['onhand'] - $p['qc_count'] - $p['allocated'];?>
+                                <tr>
+                                    <td data-label="Name"><?php echo $p['name'];?></td>
+                                    <td data-label="SKU"><?php echo $p['sku'];?></td>
+                                    <td data-label="Total On Hand" class="number"><?php echo $p['onhand'];?></td>
+                                    <td data-label="Currently Allocated" class="number"><?php echo $p['allocated'];?></td>
+                                    <td data-label="Under Quality Control" class="number"><?php echo $p['qc_count'];?></td>
+                                    <td data-label="Total Available" class="number"><?php echo $available;?></td>
+                                </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
