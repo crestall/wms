@@ -9,7 +9,7 @@
     </div>
     <?php if($client_id > 0):?>
         <?php if(count($products)):?>
-            <?php echo "<pre>",print_r($products),"</pre>";?>
+            <?php //echo "<pre>",print_r($products),"</pre>";?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Drawing Table..</h2>
