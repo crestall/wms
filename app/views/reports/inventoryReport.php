@@ -9,6 +9,7 @@
     </div>
     <?php if($client_id > 0):?>
         <?php if(count($products)):?>
+            <?php echo "<pre>",print_r($products),"</pre>";?>
         <?php else:?>
             <div class="row">
                 <div class="col-lg-12">
