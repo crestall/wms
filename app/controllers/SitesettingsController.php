@@ -79,7 +79,7 @@ class sitesettingsController extends Controller
         //render the page
         $reasons = $this->stockmovementlabels->getMovementLabels();
         Config::setJsConfig('curPage', "stock-movement-reasons");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'sitesettings/stockMovementReasons.php',
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/stockMovementReasons.php',
         [
             'page_title'    =>  'Manage Stock Movement Reasons',
             'reasons'        =>  $reasons
