@@ -14,6 +14,18 @@ class Stockmovementlabels extends Model{
         return $db->queryValue($this->table, array('name' =>  $name));
     }
 
+    public function getMovementLabels($active = -1)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM ".$this->table;
+        if($active >= 0)
+        {
+            $q .= " WHERE active = $active";
+        }
+        $q .= " ORDER BY name";
+        return $db->queryData($q);
+    }
+
     public function getSelectStockMovementLabels($selected = false)
     {
         $db = Database::openConnection();
