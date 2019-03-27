@@ -28,7 +28,8 @@ class DownloadsController extends Controller {
             'locationReportCSV',
             'returnsReportCSV',
             'stockAtDateCSV',
-            'truckRunSheetCSV'
+            'truckRunSheetCSV',
+            'inventoryReportCSV'
         ];
         if(in_array($action, $secure_downloads))
         {
