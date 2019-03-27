@@ -135,6 +135,14 @@
                             "order": [],
                             fixedHeader: true
                         } );
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/inventoryReportCSV";
+                            fileDownload.download(url, data);
+                        });
                     }
                 },
                 '3pl-dispatch-report': {
