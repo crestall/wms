@@ -64,7 +64,7 @@ $role = Session::getUserRole();
                         </div>
                         <?php if($role === "super admin"):?>
                             <div class="col-md-1">
-                                <label class="col-form-label">Active</label>
+                                <label class="col-form-label">Locked</label>
                                 <div class="checkbox checkbox-default">
                                     <input class="form-check-input styled" type="checkbox" id="locked_<?php echo $r['id'];?>" name="locked_<?php echo $r['id'];?>" <?php if($r['locked'] > 0) echo "checked";?> />
                                     <label for="locked_<?php echo $r['id'];?>"></label>
