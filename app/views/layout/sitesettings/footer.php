@@ -95,42 +95,54 @@
 
                         $('a.update').click(function(e){
                             e.preventDefault();
-                            actions.update.click(this);
+                            actions['locations'].update.click(this);
                         });
+                    },
+                    'update':{
+                        click: function(el){
+                            var id = $(el).data('locationid');
+                            var data = {
+                                'id': id,
+                                'location': $('#location_'+id).val(),
+                                'current_location': $('#current_location_'+id).val(),
+                                'multisku': $('#multisku_'+id).prop('checked'),
+                                'tray': $('#trays_'+id).prop('checked')
+                            };
+                            //console.log(data);
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Location...</h2></div>' });
+                            $.post('/ajaxfunctions/updateLocation', data, function(d){
+                                $.unblockUI();
+                                if(d.error)
+                                {
+                                    swal({
+                                        title: 'Could not update',
+                                        text: d.feedback,
+                                        icon: "error"
+                                    });
+                                }
+                                else
+                                {
+                                    $('span#updated_'+id).html('Updated');
+                                    $('tr#row_'+id).addClass('updated').delay(3500).queue(function(next){
+                                        $(this).removeClass('updated');
+                                        $('span#updated_'+id).html('');
+                        			});
+                                    $.unblockUI();
+                                }
+                            });
+                        }
                     }
                 },
-                'update':{
-                    click: function(el){
-                        var id = $(el).data('locationid');
-                        var data = {
-                            'id': id,
-                            'location': $('#location_'+id).val(),
-                            'current_location': $('#current_location_'+id).val(),
-                            'multisku': $('#multisku_'+id).prop('checked'),
-                            'tray': $('#trays_'+id).prop('checked')
-                        };
-                        //console.log(data);
-                        $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Location...</h2></div>' });
-                        $.post('/ajaxfunctions/updateLocation', data, function(d){
-                            $.unblockUI();
-                            if(d.error)
-                            {
-                                swal({
-                                    title: 'Could not update',
-                                    text: d.feedback,
-                                    icon: "error"
+                'stock-movement-reasons': {
+                    init: function(){
+                        dataTable.init($('table#view_reasons_table') , {
+                            "drawCallback": function( settings ) {
+                                $('a.update').click(function(e){
+                                    e.preventDefault();
+                                    //actions.update.click(this);
                                 });
                             }
-                            else
-                            {
-                                $('span#updated_'+id).html('Updated');
-                                $('tr#row_'+id).addClass('updated').delay(3500).queue(function(next){
-                                    $(this).removeClass('updated');
-                                    $('span#updated_'+id).html('');
-                    			});
-                                $.unblockUI();
-                            }
-                        });
+                         } );
                     }
                 }
             }

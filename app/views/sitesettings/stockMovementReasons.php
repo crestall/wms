@@ -39,58 +39,70 @@ $role = Session::getUserRole();
             </div>
         </form>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h2>Current Reasons</h2>
+    <div id="waiting" class="row">
+        <div class="col-lg-12 text-center">
+            <h2>Drawing Table..</h2>
+            <p>May take a few moments</p>
+            <img class='loading' src='/images/preloader.gif' alt='loading...' />
         </div>
     </div>
-    <?php if(count($reasons)):?>
-        <div class="row">
-            <?php foreach($reasons as $r):?>
-                <form class="edit-movementreason" action="/form/procMovementReasonEdit" method="post">
-                    <div class="form-group row">
-                        <div class="col-md-3">
-                            <label class="col-form-label">Name</label>
-                            <input type="text" class="form-control required userrolename" name="name_<?php echo $r['id'];?>" id="name_<?php echo $r['id'];?>" value="<?php echo ucwords($r['name']);?>" />
-                            <input type="hidden" name="currentname_<?php echo $r['id'];?>" value="<?php echo $r['name'];?>"/>
-                            <?php echo Form::displayError("name_{$r['id']}");?>
-                        </div>
-                        <div class="col-md-1">
-                            <label class="col-form-label">Active</label>
-                            <div class="checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo "checked";?> />
-                                <label for="active_<?php echo $r['id'];?>"></label>
-                            </div>
-                        </div>
-                        <?php if($role === "super admin"):?>
-                            <div class="col-md-1">
-                                <label class="col-form-label">Locked</label>
-                                <div class="checkbox checkbox-default">
-                                    <input class="form-check-input styled" type="checkbox" id="locked_<?php echo $r['id'];?>" name="locked_<?php echo $r['id'];?>" <?php if($r['locked'] > 0) echo "checked";?> />
-                                    <label for="locked_<?php echo $r['id'];?>"></label>
-                                </div>
-                            </div>
-                        <?php endif;?>
-                        <div class="col-md-1">
-                            <label class="col-form-label">&nbsp;</label>
-                            <div class="input-group">
-                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                                <input type="hidden" name="line_id" value="<?php echo $r['id'];?>" />
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            <?php endforeach;?>
-        </div>
-    <?php else:?>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="errorbox">
-                    <h2><i class="fas fa-exclamation-triangle"></i> No Movement Reasons Listed</h2>
-                    <p>You will need to add some first</p>
+    <div id="table_holder" style="display:none">
+        <div class="row" id="tablefeedback" style="display: none"></div>
+        <?php if(count($reasons)):?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table width="100%" class="table-striped table-hover" id="view_reasons_table">
+                        <thead>
+                            <tr>
+                                <th>Reason</th>
+                                <th>Edit</th>
+                                <th>Active</th>
+                                <?php if($role === "super admin"):?>
+                                    <th>Locked</th>
+                                <?php endif;?>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($reasons as $r): ?>
+                                <tr id="row_<?php echo $r['id'];?>">
+                                    <td data-label="Reason"><?php echo $r['name'];?></td>
+                                    <td data-label="Edit">
+                                        <input type="text" class="form-control required" name="name_<?php echo $r['id'];?>" id="name_<?php echo $r['id'];?>" value="<?php echo $r['name'];?>" <?php if($role != "super admin" && $r['locked'] > 0) echo "disabled";?>  />
+                                        <input type="hidden" name="current_name_<?php echo $r['id'];?>" id="current_name_<?php echo $r['id'];?>" value="<?php echo $r['name'];?>" />
+                                    </td>
+                                    <td data-label="Active">
+                                        <div class="checkbox checkbox-default">
+                                            <input class="form-check-input styled" type="checkbox" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo "checked";?> />
+                                            <label for="active_<?php echo $r['id'];?>"></label>
+                                        </div>
+                                    </td>
+                                    <?php if($role === "super admin"):?>
+                                        <td data-label="Trays">
+                                            <div class="checkbox checkbox-default">
+                                                <input class="form-check-input styled" type="checkbox" id="locked_<?php echo $r['id'];?>" name="locked_<?php echo $r['id'];?>" <?php if($r['locked'] > 0) echo "checked";?> />
+                                                <label for="locked_<?php echo $r['id'];?>"></label>
+                                            </div>
+                                        </td>
+                                    <?php endif;?>
+                                    <td>
+                                        <p>
+                                            <a class="btn btn-primary update" data-locationid="<?php echo $r['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $r['id'];?>"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            <?php endforeach;?>
+                        </tbody>
+
+                    </table>
                 </div>
             </div>
-        </div>
-    <?php endif;?>
+        <?php else:?>
+            <div class="col-lg-12">
+                <div class="errorbox">
+                    <p>No locations listed yet</p>
+                </div>
+            </div>
+        <?php endif;?>
+    </div>
 </div>
