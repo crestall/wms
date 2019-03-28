@@ -35,6 +35,18 @@ class Courier extends Model{
         return $db->insertQuery($this->table, $vals);
     }
 
+    public function editCourier($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'name'      =>  $data['name']
+        );
+        $vals['active'] = (isset($data['active']))? 1:0;
+        $vals['table_name'] = (isset($data['table_name']))? $data['table_name']:NULL;
+        $db->updateDatabaseFields($this->table, $vals, $data['id']);
+        return true;
+    }
+
     public function getSelectCouriers( $selected = false, $choose_none = true, $include_local = true, $exclude = array() )
     {
         $db = Database::openConnection();
