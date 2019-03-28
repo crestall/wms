@@ -95,7 +95,7 @@
 
                         $('a.update').click(function(e){
                             e.preventDefault();
-                            actions['locations']['update'].click(this);
+                            actions.locations.update.click(this);
                         });
                     },
                     'update':{
