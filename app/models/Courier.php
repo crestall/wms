@@ -22,6 +22,19 @@ class Courier extends Model{
         $this->vicLocalId = $this->getCourierId('Vic Local');
     }
 
+    public function addCourier($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'name'      =>  $data['name']
+        );
+        if(isset($data['table_name']))
+        {
+            $vals['table_name'] = $data['table_name'];
+        }
+        return $db->insertQuery($this->table, $vals);
+    }
+
     public function getSelectCouriers( $selected = false, $choose_none = true, $include_local = true, $exclude = array() )
     {
         $db = Database::openConnection();
