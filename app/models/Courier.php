@@ -75,6 +75,18 @@ class Courier extends Model{
             return $db->queryValue($this->table, array('id' => $id), 'name');
     }
 
+    public function getCouriers($active = -1)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM {$this->table}";
+        if($active >= 0)
+        {
+            $q .= " WHERE active = $active";
+        }
+        $q .= " ORDER BY name";
+        return $db->queryData($q);
+    }
+
     public function getTruckId()
     {
         return $this->getCourierId('3PL Truck');
