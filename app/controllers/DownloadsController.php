@@ -28,7 +28,8 @@ class DownloadsController extends Controller {
             'locationReportCSV',
             'returnsReportCSV',
             'stockAtDateCSV',
-            'truckRunSheetCSV'
+            'truckRunSheetCSV',
+            'inventoryReportCSV'
         ];
         if(in_array($action, $secure_downloads))
         {
@@ -139,6 +140,66 @@ class DownloadsController extends Controller {
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "dispatch_report_".$extra_cols]);
+    }
+
+    public function inventoryReportCSV()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $products = $this->item->getClientInventoryArray( $client_id );
+        $cols = array(
+            "Name",
+            "SKU",
+            "Total On Hand",
+            "Currently Allocated",
+            "Under Quality Control",
+            "Total Available"
+        );
+
+        $rows = array();
+        $extra_cols = 0;
+        foreach($products as $p)
+        {
+            $available = $p['onhand'] - $p['qc_count'] - $p['allocated'];
+            $row = array(
+                $p['name'],
+                $p['sku'],
+                $p['onhand'],
+                $p['allocated'],
+                $p['qc_count'],
+                $available
+            );
+            $extra_cols = max($extra_cols, count($p['locations']));
+            $i = 1;
+            foreach($p['locations'] as $array)
+            {
+                $row[] = $array['name'];
+                $row[] = $array['onhand'];
+                $row[] = $array['allocated'];
+                $row[] = $array['qc_count'];
+                ++$i;
+            }
+            $rows[] = $row;
+        }
+        $i = 1;
+        while($i <= $extra_cols)
+        {
+            $cols[] = "Location $i Name";
+            $cols[] = "Location $i On Hand";
+            $cols[] = "Location $i Allocated";
+            $cols[] = "Location $i Under Quality Control";
+            ++$i;
+        }
+
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "inventory_report"]);
     }
 
     public function clientDispatchReportCSV()

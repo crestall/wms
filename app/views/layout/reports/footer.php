@@ -117,6 +117,34 @@
                         });
                     }
                 },
+                'inventory-report':{
+                    init: function()
+                    {
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                var client_id = $(this).val();
+                                var url = '/reports/inventory-report/client='+client_id;
+                                window.location.href = url;
+                            }
+                        });
+                        dataTable.init($('table#inventory_report_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [6] }
+                            ],
+                            "order": [],
+                            fixedHeader: true
+                        } );
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/inventoryReportCSV";
+                            fileDownload.download(url, data);
+                        });
+                    }
+                },
                 '3pl-dispatch-report': {
                     init: function()
                     {
