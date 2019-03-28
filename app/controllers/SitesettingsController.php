@@ -97,6 +97,17 @@ class sitesettingsController extends Controller
         ]);
     }
 
+    public function couriers()
+    {
+        $couriers = $this->courier->getCouriers();
+        //render the page
+        Config::setJsConfig('curPage', "couriers");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/couriers.php',[
+            'page_title'    =>  'Manage Couriers',
+            'couriers'      =>  $couriers
+        ]);
+    }
+
     public function storeChains()
     {
         $chains = $this->storechain->getChains();

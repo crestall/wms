@@ -22,6 +22,31 @@ class Courier extends Model{
         $this->vicLocalId = $this->getCourierId('Vic Local');
     }
 
+    public function addCourier($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'name'      =>  $data['name']
+        );
+        if(isset($data['table_name']))
+        {
+            $vals['table_name'] = $data['table_name'];
+        }
+        return $db->insertQuery($this->table, $vals);
+    }
+
+    public function editCourier($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'name'      =>  $data['name']
+        );
+        $vals['active'] = (isset($data['active']))? 1:0;
+        $vals['table_name'] = (isset($data['table_name']))? $data['table_name']:NULL;
+        $db->updateDatabaseFields($this->table, $vals, $data['id']);
+        return true;
+    }
+
     public function getSelectCouriers( $selected = false, $choose_none = true, $include_local = true, $exclude = array() )
     {
         $db = Database::openConnection();
@@ -73,6 +98,18 @@ class Courier extends Model{
             return $db->queryValue('orders', array('id' => $order_id), 'courier_name');
         else
             return $db->queryValue($this->table, array('id' => $id), 'name');
+    }
+
+    public function getCouriers($active = -1)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM {$this->table}";
+        if($active >= 0)
+        {
+            $q .= " WHERE active = $active";
+        }
+        $q .= " ORDER BY name";
+        return $db->queryData($q);
     }
 
     public function getTruckId()

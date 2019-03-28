@@ -456,7 +456,8 @@ return array(
             'packing-types'             =>  true,
             'store-chains'              =>  true,
             'user-roles'                =>  true,
-            //'pickfaces'                 => true
+            //'pickfaces'                 => true,
+            'couriers'                  => true
 		),
         'financials'    =>  array(
             'hunters-check' => true
