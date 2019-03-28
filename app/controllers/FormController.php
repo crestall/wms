@@ -2535,7 +2535,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."site-settings/store-chains");
+        return $this->redirector->to(PUBLIC_ROOT."site-settings/couriers");
     }
 
     public function procStoreChainAdd()
