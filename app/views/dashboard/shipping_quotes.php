@@ -15,24 +15,6 @@
         </div>
     <?php endif;?>
     <div class="row">
-        <label class="col-md-8 col-form-label">Hunters Small</label>
-        <div class="col-md-4">
-            <?php echo $hunters3kg_charge;?>
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-md-8 col-form-label">Hunters Bulk</label>
-        <div class="col-md-4">
-            <?php echo $huntersplu_charge;?>
-        </div>
-    </div>
-    <div class="row">
-        <label class="col-md-8 col-form-label">Hunters Pallet</label>
-        <div class="col-md-4">
-            <?php echo $hunterspal_charge;?>
-        </div>
-    </div>
-    <div class="row">
         <label class="col-md-8 col-form-label">eParcel</label>
         <div class="col-md-4">
             <?php echo $eparcel_charge;?>

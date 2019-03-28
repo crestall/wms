@@ -616,7 +616,7 @@ class ajaxfunctionsController extends Controller
             $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);
         }
 
-
+        /*
         if($this->courierselector->chooseEparcel($od))
         {
             $huntersplu_charge = $hunters3kg_charge = $hunterspal_charge = "No Hunters for express post, PO Boxes or international destinations";
@@ -650,16 +650,13 @@ class ajaxfunctionsController extends Controller
             //$hpal_result = $this->HuntersPAL->getQuote($h_details);
             //$hunterspal_charge =  "$".number_format($hpal_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
         }
-
+        */
 
 
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/shipping_quotes.php', [
             'od'                        =>  $od,
             'express'                   =>  $od['eparcel_express'] == 1,
             'items'                     =>  $items,
-            'hunters3kg_charge'         =>  $hunters3kg_charge,
-            'huntersplu_charge'         =>  $huntersplu_charge,
-            'hunterspal_charge'         =>  '',
             'eparcel_charge'            =>  $eparcel_charge,
             'eparcel_express_charge'    =>  $eparcel_express_charge,
             'client_name'               =>  $this->client->getClientName($od['client_id']),
