@@ -178,7 +178,7 @@ class Allocations{
         $oi_values = array();
         $allocations = array();
         $oi_index = 0;
-        //echo "<pre>",print_r($items),"</pre>"; die();
+        echo "<pre>",print_r($items),"</pre>"; die();
         $import_error = false;
         foreach($items as $oid => $order_items)
         {
@@ -328,7 +328,7 @@ class Allocations{
 
                 }
             }//endforeach items
-            //die();
+            die();
             $oi_values[$oid] = $values;
         }//endforeach order
         //echo "<pre>",print_r($oi_values),"</pre>";  die();
