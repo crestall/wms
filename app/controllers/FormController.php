@@ -132,6 +132,14 @@ class FormController extends Controller {
             'id'    => $inverter_id,
             'qty'   => $inverter_qty
         );
+        foreach($this->request->data['consumables'] as $i)
+        {
+            $items[] = array(
+                'id'    => $i['id'],
+                'qty'   => $i['qty']
+            );
+        }
+
         $items = array_merge($items, $this->request->data['consumables']);
         if( isset($this->request->data['items'][0]['qty']) )
         {
