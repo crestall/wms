@@ -146,7 +146,7 @@ class FormController extends Controller {
         {
             $items = array_merge($items, $this->request->data['items']);
         }
-        //echo "<pre>",print_r($items),"</pre>"; //die();
+        //echo "<pre>",print_r($items),"</pre>"; die();
         $orders_items = array();
         foreach($items as $item)
         {
@@ -164,7 +164,7 @@ class FormController extends Controller {
         $the_items = array(
             0 => $orders_items
         );
-        //echo "<pre>",print_r($the_items),"</pre>"; die();
+        echo "<pre>",print_r($the_items),"</pre>"; die();
         $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
         foreach($oitems[0] as $item)//there is only one order
         {
