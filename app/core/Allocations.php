@@ -267,8 +267,8 @@ class Allocations{
                             {
                                 //individual items
                                 $locations = $this->controller->item->getAvailableLocationsForItem($id, false, $order_id);
-                                //echo "Individual Locations for $id : $item_name<pre>",print_r($locations),"</pre>";//die();
-                                //continue;
+                                echo "Individual Locations for $id : $item_name<pre>",print_r($locations),"</pre>";//die();
+                                continue;
                                 foreach($locations as $l)
                                 {
                                     //echo "Location<pre>",print_r($l),"</pre>";
