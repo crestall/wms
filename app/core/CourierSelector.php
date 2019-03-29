@@ -294,11 +294,12 @@
             $eparcel_shipments['shipments'][0]  = $eparcel_details;
             $sResponse = $this->controller->Eparcel->GetQuote($eparcel_shipments);
 
+            /*
             $h_details = $this->controller->Hunters3KG->getDetails($this->order_details, $this->items);
             $h3kg_result = $this->controller->Hunters3KG->getQuote($h_details);
             $hplu_result = $this->controller->HuntersPLU->getQuote($h_details);
-            //$hpal_result = $this->controller->HuntersPAL->getQuote($h_details);
-
+            //$hpal_result = $this->controller->HuntersPAL->getQuote($h_details);*/
+             /*
             if( empty($h3kg_result) || isset($h3kg_result['errorCode']))
                 $h3kg = "";
             else
@@ -307,7 +308,7 @@
                 $hplu = "";
             else
                 $hplu = ($hplu_result[0]['fee']*1.1 > 0)? $hplu_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE') : "";
-            /*
+
             if( empty($hpal_result) || isset($hpal_result['errorCode']))
                 $hpal = "";
             else
@@ -320,8 +321,8 @@
 
             $cs = array(
                 $this->controller->courier->eParcelId    =>  $ep,
-                $this->controller->courier->huntersId    =>  $h3kg,
-                $this->controller->courier->huntersPluId =>  $hplu,
+                //$this->controller->courier->huntersId    =>  $h3kg,
+                //$this->controller->courier->huntersPluId =>  $hplu,
                 //$this->controller->courier->huntersPalId =>  $hpal
             );
 

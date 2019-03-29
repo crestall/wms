@@ -113,7 +113,7 @@ class FormController extends Controller {
 
     public function procOriginOrderAdd()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -132,6 +132,15 @@ class FormController extends Controller {
             'id'    => $inverter_id,
             'qty'   => $inverter_qty
         );
+        /*
+        foreach($this->request->data['items'] as $i)
+        {
+            $items[] = array(
+                'id'    => $i['id'],
+                'qty'   => $i['qty']
+            );
+        }
+        */
         $items = array_merge($items, $this->request->data['consumables']);
         if( isset($this->request->data['items'][0]['qty']) )
         {
