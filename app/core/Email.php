@@ -436,8 +436,8 @@
             $tracking_info = 'Please visit <a href="https://directfreight.com.au/">Direct Freight</a> and enter '.$od['consignment_id'].' in the Track & Trace form and click "Track" for the latest on your delivery. In the event of your absence at the time of delivery, the driver may occasionally, based on careful judgment and inspection of the premises, leave your order in a safe place on your property without your signature ("Authority To Leave"). The driver is not responsible for in home or room placement of your order.<br/>';
         }
 
-        $replace_array = array("{NAME}", "{ORDER_NUMBER}", "{EMAIL_LINK}", "{PHONE_NUMBER}", "{BILLING_STRING}", "{SHIPPING_STRING}", "{CONSIGNMENT_ID}", "{ITEM_BODY}");
-		$replace_with_array = array($od['ship_to'], $od['client_order_id'], $email_link, $od['contact_phone'], $billing_string, $shipping_string, $od['consignment_id'], $items_string);
+        $replace_array = array("{NAME}", "{ORDER_NUMBER}", "{EMAIL_LINK}", "{PHONE_NUMBER}", "{BILLING_STRING}", "{SHIPPING_STRING}", "{TRACKING_INFO}", "{ITEM_BODY}");
+		$replace_with_array = array($od['ship_to'], $od['client_order_id'], $email_link, $od['contact_phone'], $billing_string, $shipping_string, $tracking_info, $items_string);
 		$body = str_replace($replace_array, $replace_with_array, $body);
 
 		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
