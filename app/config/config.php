@@ -509,12 +509,12 @@ return array(
     ),
     'CLIENT_PAGES' => array(
         'orders'			=>	array(
-			'client-orders'			=>	true,
-			'order-detail'	=>	false,
-			'order-tracking'		=>	false,
-            'add-order'          =>  true,
+			'client-orders'		=>	true,
+			'order-detail'	    =>	false,
+			'order-tracking'	=>	false,
+            'add-order'         =>  true,
             'bulk-upload-orders'     =>  true,
-            'book-pickup'   => true,
+            'book-pickup'       => true,
             //'add-origin-order'  => true
 		),
 		'inventory'			=>	array(

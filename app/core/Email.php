@@ -430,6 +430,12 @@
         $items_string .= "<tr><td colspan='2' class='bold'>Subtotal:</td><td>$total_price <span class='extax'>(ex.tax)</span></td></tr>";
         $items_string .= "<tr><td colspan='2' class='bold'>Shipping:</td><td>Free shipping</td></tr>";
 
+        $tracking_info = 'Please visit <a href="https://startrack.com.au/">startrack.com.au</a> and click the "Track & Trace" link at the top of the page. Enter '.$od['consignment_id'].' as the Tracking / reference number(s) for the latest on your delivery. In the event of your absence at the time of delivery, the driver may occasionally, based on careful judgment and inspection of the premises, leave your order in a safe place on your property without your signature ("Authority To Leave"). The driver is not responsible for in home or room placement of your order.<br/>';
+        if(strtolower($od['courier_name']) == "direct freight")
+        {
+            $tracking_info = 'Please visit <a href="https://directfreight.com.au/">Direct Freight</a> and enter '.$od['consignment_id'].' in the Track & Trace form and click "Track" for the latest on your delivery. In the event of your absence at the time of delivery, the driver may occasionally, based on careful judgment and inspection of the premises, leave your order in a safe place on your property without your signature ("Authority To Leave"). The driver is not responsible for in home or room placement of your order.<br/>';
+        }
+
         $replace_array = array("{NAME}", "{ORDER_NUMBER}", "{EMAIL_LINK}", "{PHONE_NUMBER}", "{BILLING_STRING}", "{SHIPPING_STRING}", "{CONSIGNMENT_ID}", "{ITEM_BODY}");
 		$replace_with_array = array($od['ship_to'], $od['client_order_id'], $email_link, $od['contact_phone'], $billing_string, $shipping_string, $od['consignment_id'], $items_string);
 		$body = str_replace($replace_array, $replace_with_array, $body);
