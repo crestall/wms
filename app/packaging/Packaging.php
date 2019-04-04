@@ -241,7 +241,7 @@ class Packaging{
             list($w, $d, $h) = Config::get('BBBOX_DIMENSIONS')[$total_bottles];
             //subtract weight diff//
             $bottle_weight = Config::get('BBBOX_WEIGHTS')[$total_bottles];
-            $bottle_weight = $bottle_weight - ($total_small_bottels * 0.035);
+            $bottle_weight = $bottle_weight - ($total_small_bottels * 0.050);
             $array['width'] = $w;
             $array['height'] = $h;
             $array['depth'] = $d;
