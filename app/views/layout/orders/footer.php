@@ -1003,7 +1003,7 @@
                                 });
                                 var data = {
                                     client_id: $('#client_id').val(),
-                                    order_ids: ids
+                                    order_ids: ids,
                                     csrf_token: config.csrfToken
                                 }
                                 var url = "/downloads/orderExportCSV";
