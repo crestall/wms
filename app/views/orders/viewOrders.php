@@ -24,7 +24,7 @@
                 <?php endif;?>
             </div>
             <div class="col-lg-3 text-center">
-                <p><button class="btn btn-info export_csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</button></p>
+                <p><a class="btn btn-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
         </div>
         <div class="row">
