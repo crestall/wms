@@ -23,6 +23,9 @@
                     <p><button class="btn btn-primary" id="show_unfulfilled">Show Only Unfulfilled Orders</button></p>
                 <?php endif;?>
             </div>
+            <div class="col-lg-3 text-center">
+                <p><a class="btn btn-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-3 text-center">

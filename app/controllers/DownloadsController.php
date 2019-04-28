@@ -29,7 +29,8 @@ class DownloadsController extends Controller {
             'returnsReportCSV',
             'stockAtDateCSV',
             'truckRunSheetCSV',
-            'inventoryReportCSV'
+            'inventoryReportCSV',
+            'orderExportCSV'
         ];
         if(in_array($action, $secure_downloads))
         {
@@ -140,6 +141,49 @@ class DownloadsController extends Controller {
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "dispatch_report_".$extra_cols]);
+    }
+
+    public function orderExportCSV()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $client_info = $this->client->getClientInfo($client_id);
+        $cols = array(
+            "ConID",
+            "Receiver Name",
+            "Receiver Address1",
+            "Receiver Address2",
+            "Receiver City",
+            "Receiver State",
+            "Receiver Postcode",
+            "Customer Reference",
+            "Special Instruction",
+            "Line Reference",
+            "Package Description",
+            "Item Count",
+            "Weight",
+            "Length",
+            "Width",
+            "Height",
+            "Qty",
+            "Cubic",
+            "Receiver Contact Name",
+            "Receiver Contact Email",
+            "receiver Contact Mobile",
+            "ATL",
+            "Dangerous Goods",
+            "End of Record"
+        );
+        foreach($this->request->data['order_ids'] as $order_id)
+        {
+
+        }
     }
 
     public function inventoryReportCSV()

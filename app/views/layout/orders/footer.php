@@ -990,6 +990,27 @@
 
                         });
 
+                        $('a.export-csv').click(function(e){
+                            e.preventDefault();
+                            if($('input.select:checked').length)
+                            {
+                                var ids = [];
+                                $('input.select').each(function(i,e){
+                                    if($(this).prop('checked'))
+                                    {
+                                        ids.push($(this).data('orderid'));
+                                    }
+                                });
+                                var data = {
+                                    client_id: $('#client_id').val(),
+                                    order_ids: ids,
+                                    csrf_token: config.csrfToken
+                                }
+                                var url = "/downloads/orderExportCSV";
+                                fileDownload.download(url, data);
+                            }
+                        });
+
 
                         $('a.slip-print').click(function(e){
                             e.preventDefault();
