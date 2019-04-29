@@ -153,7 +153,7 @@ class DownloadsController extends Controller {
                 ${$field} = $value;
             }
         }
-        $client_info = $this->client->getClientInfo($client_id);
+        //$client_info = $this->client->getClientInfo($client_id);
         $cols = array(
             "ConID",
             "Receiver Name",

@@ -1002,7 +1002,7 @@
                                     }
                                 });
                                 var data = {
-                                    client_id: $('#client_id').val(),
+                                    client_id: $('#client_selector').val(),
                                     order_ids: ids,
                                     csrf_token: config.csrfToken
                                 }
