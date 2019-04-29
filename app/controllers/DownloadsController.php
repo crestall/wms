@@ -180,10 +180,14 @@ class DownloadsController extends Controller {
             "Dangerous Goods",
             "End of Record"
         );
+        $rows = array();
         foreach($this->request->data['order_ids'] as $order_id)
         {
 
         }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "order_export"]);
     }
 
     public function inventoryReportCSV()
