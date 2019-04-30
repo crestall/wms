@@ -186,11 +186,17 @@ class DownloadsController extends Controller {
             if( $od = $this->order->getOrderDetail($order_id) )
             {
                 $ci = $this->client->getClientInfo($od['client_id']);
-                $items = $this->order->getItemsForOrder($order_id);
                 $name = empty($od['company_name'])? $od['ship_to']: $od['company_name'];
                 $phone = preg_replace("/\+61/","0",$od['contact_phone']);
                 $phone = preg_replace("/[^\d]/","",$phone);
-                foreach($items as $i)
+
+                $items = $this->order->getItemsForOrder($order_id);
+                $packages = $this->order->getPackagesForOrder($order_id);
+                //$products = $this->getItemsCountForOrder($co['id']);
+
+                $parcels = Packaging::getPackingForOrder($od,$items,$packages);
+
+                foreach($parcels as $i)
                 {
                     $weight = ceil($i['qty'] * $i['weight']);
                     $cubic = round($i['width'] * $i['depth'] *$i['height'] / 1000000, 3);
