@@ -279,15 +279,11 @@ class Location extends Model{
         /* */
         foreach($locations as $l)
         {
+            $next_location_id = 0;
             $label = $l['location'];
             $value = $l['id'];
             $next_location = substr($label, 0, -1)."b";
             $next_location_id = $db->queryValue('locations', array('location' => $next_location));
-
-
-            //echo $label." ".$value." ".$next_location." ".$next_location_id.PHP_EOL;//die();
-
-
             if( !$this->isEmptyLocation($next_location_id) ) continue;
             if($selected)
             {
@@ -423,6 +419,7 @@ class Location extends Model{
         $locations = $db->queryData($q);
         foreach($locations as $l)
         {
+            $next_location_id = 0;
             $label = $l['location'];
             $value = $l['id'];
             $next_location = substr($label, 0, -1)."b";
@@ -459,6 +456,10 @@ class Location extends Model{
 
     public function isEmptyLocation($id)
     {
+        if($id == 0)
+        {
+            return false;
+        }
         $db = Database::openConnection();
         $q = "
             SELECT * FROM locations l
