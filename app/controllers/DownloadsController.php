@@ -175,7 +175,7 @@ class DownloadsController extends Controller {
             "Cubic",
             "Receiver Contact Name",
             "Receiver Contact Email",
-            "receiver Contact Mobile",
+            "Receiver Contact Mobile",
             "ATL",
             "Dangerous Goods",
             "End of Record"
@@ -183,6 +183,46 @@ class DownloadsController extends Controller {
         $rows = array();
         foreach($this->request->data['order_ids'] as $order_id)
         {
+            if( $od = $this->order->getOrderDetail($order_id) )
+            {
+                $ci = $this->client->getClientInfo($od['client_id']);
+                $items = $this->order->getItemsForOrder($order_id);
+                $name = empty($od['company_name'])? $od['ship_to']: $od['company_name'];
+                $phone = preg_replace("/\+61/","0",$od['contact_phone']);
+                $phone = preg_replace("/[^\d]/","",$phone);
+                foreach($items as $i)
+                {
+                    $weight = ceil($i['qty'] * $i['weight']);
+                    $cubic = round($i['width'] * $i['depth'] *$i['height'] / 1000000, 3);
+                    $row = array(
+                        "",
+                        $name,
+                        $od['address'],
+                        $od['address_2'],
+                        $od['suburb'],
+                        $od['state'],
+                        $od['postcode'],
+                        $ci['ref_1'],
+                        "",
+                        $i['id'],
+                        "CARTON",
+                        $i['qty'],
+                        $weight,
+                        ceil($i['width']),
+                        ceil($i['depth']),
+                        ceil($i['height']),
+                        $i['qty'],
+                        $cubic,
+                        $od['ship_to'],
+                        $od['tracking_email'],
+                        $phone,
+                        "N",
+                        "N",
+                        "EOR"
+                    );
+                    $rows[] = $row;
+                }
+            }
 
         }
         $expire=time()+60;
