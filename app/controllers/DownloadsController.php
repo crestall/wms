@@ -187,13 +187,13 @@ class DownloadsController extends Controller {
             {
                 $ci = $this->client->getClientInfo($od['client_id']);
                 $items = $this->order->getItemsForOrder($order_id);
-                $weight = ceil($i['qty'] * $i['weight']);
-                $cubic = round($i['width'] * $i['depth'] *$i['height'] / 1000000, 3);
                 $name = empty($od['company_name'])? $od['ship_to']: $od['company_name'];
                 $phone = preg_replace("/\+61/","0",$od['contact_phone']);
                 $phone = preg_replace("/[^\d]/","",$phone);
                 foreach($items as $i)
                 {
+                    $weight = ceil($i['qty'] * $i['weight']);
+                    $cubic = round($i['width'] * $i['depth'] *$i['height'] / 1000000, 3);
                     $row = array(
                         "",
                         $name,
