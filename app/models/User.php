@@ -47,6 +47,12 @@ class User extends Model{
         return ($db->queryRow("SELECT * FROM users WHERE email = :email LIMIT 1", array("email" => $email)));
     }
 
+    public function isUserActive($email)
+    {
+        $user = $this->getUserByEmail($email);
+        return ($user['active'] > 0);
+    }
+
     public function updateProfileInfo($data, $userId)
     {
         $db = Database::openConnection();

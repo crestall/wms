@@ -3276,6 +3276,10 @@ class FormController extends Controller {
         {
             Form::setError('email', 'Please enter a valid email address');
         }
+        elseif( !$this->user->isUserActive($email) )
+        {
+            Form::setError('general', 'Sorry, your account has been deactivated'); 
+        }
         elseif(!$this->login->isLoginAttemptAllowed($email))
         {
             Form::setError('general', "You exceeded number of possible attempts, please try again later after " .$this->login->getMinutesBeforeLogin($email) . " minutes");
