@@ -198,7 +198,7 @@ class DownloadsController extends Controller {
 
                 foreach($parcels as $i)
                 {
-                    $weight = ceil($i['qty'] * $i['weight']);
+                    $weight = ceil($i['pieces'] * $i['weight']);
                     $cubic = round($i['width'] * $i['depth'] *$i['height'] / 1000000, 3);
                     $row = array(
                         "",
@@ -212,12 +212,12 @@ class DownloadsController extends Controller {
                         "",
                         $i['id'],
                         "CARTON",
-                        $i['qty'],
+                        $i['pieces'],
                         $weight,
                         ceil($i['width']),
                         ceil($i['depth']),
                         ceil($i['height']),
-                        $i['qty'],
+                        $i['pieces'],
                         $cubic,
                         $od['ship_to'],
                         $od['tracking_email'],
