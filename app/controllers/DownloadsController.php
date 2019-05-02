@@ -186,13 +186,19 @@ class DownloadsController extends Controller {
             if( $od = $this->order->getOrderDetail($order_id) )
             {
                 $ci = $this->client->getClientInfo($od['client_id']);
-                $items = $this->order->getItemsForOrder($order_id);
                 $name = empty($od['company_name'])? $od['ship_to']: $od['company_name'];
                 $phone = preg_replace("/\+61/","0",$od['contact_phone']);
                 $phone = preg_replace("/[^\d]/","",$phone);
-                foreach($items as $i)
+
+                $items = $this->order->getItemsForOrder($order_id);
+                $packages = $this->order->getPackagesForOrder($order_id);
+                //$products = $this->getItemsCountForOrder($co['id']);
+
+                $parcels = Packaging::getPackingForOrder($od,$items,$packages);
+
+                foreach($parcels as $i)
                 {
-                    $weight = ceil($i['qty'] * $i['weight']);
+                    $weight = ceil($i['pieces'] * $i['weight']);
                     $cubic = round($i['width'] * $i['depth'] *$i['height'] / 1000000, 3);
                     $row = array(
                         "",
@@ -202,16 +208,16 @@ class DownloadsController extends Controller {
                         $od['suburb'],
                         $od['state'],
                         $od['postcode'],
-                        $ci['ref_1'],
+                        $ci['ref_1']."|".$od['order_number'],
                         "",
-                        $i['id'],
+                        $i['item_reference'],
                         "CARTON",
-                        $i['qty'],
+                        $i['pieces'],
                         $weight,
                         ceil($i['width']),
                         ceil($i['depth']),
                         ceil($i['height']),
-                        $i['qty'],
+                        $i['pieces'],
                         $cubic,
                         $od['ship_to'],
                         $od['tracking_email'],
