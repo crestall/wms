@@ -208,7 +208,7 @@ class DownloadsController extends Controller {
                         $od['suburb'],
                         $od['state'],
                         $od['postcode'],
-                        $ci['ref_1'],
+                        $ci['ref_1']."|".$od['order_number'],
                         "",
                         $i['item_reference'],
                         "CARTON",
