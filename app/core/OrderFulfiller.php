@@ -160,6 +160,51 @@
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by {$od['courier_name']}</p>";
     }
 
+    public function fulfillDirectFreightOrder()
+    {
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "FULFILLING DIRECT FREIGHT ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $db = Database::openConnection();
+        //echo "<pre>",print_r($this->controller->request->data),"</pre>";die();
+        $od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
+
+        $o_values = array(
+            'status_id'			=>	$this->controller->order->fulfilled_id,
+            'date_fulfilled'	=>	time(),
+            'consignment_id'    =>  $this->controller->request->data['consignment_id'],
+            'total_cost'        =>  $this->controller->request->data['local_charge']
+        );
+        $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
+        //order is now fulfilled, reduce stock
+        $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
+        $this->output .= "Reducing Stock and recording movement for order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
+        $this->removeStock($items, $this->controller->request->data['order_ids']);
+
+        if( !empty($od['tracking_email']) )
+        {
+            if($od['client_id'] == 59)
+            {
+                $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
+                Email::sendNoaConfirmEmail($od['id']);
+            }
+            else
+            {
+                 $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                //$mailer->sendTrackingEmail($id);
+                Email::sendTrackingEmail($od['id']);
+            }
+
+        }
+        if($od['client_id'] == 52) //figure8
+        {
+            $this->notifyFigure8($od);
+        }
+        $this->recordOutput('order_fulfillment/local');
+        Session::set('showfeedback', true);
+        $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Direct Freight</p>";
+    }
+
     public function fulfillVicLocalOrder($order_ids)
     {
         $this->output = "=========================================================================================================".PHP_EOL;
