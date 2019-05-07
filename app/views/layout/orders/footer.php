@@ -234,6 +234,22 @@
                                     progress = true;
                                 }
                             }
+                            if(courier_id == $('#direct_freight_id').val())
+                            {
+                                    consignment_id = $('#direct_consignment_id').val();
+                                    local_charge = $('#direct_charge').val();
+                                    if(consignment_id == "")
+                                    {
+                                        valid = false;
+                                        text += "Consignment ID is required\n";
+                                    }
+                                    if(local_charge == "")
+                                    {
+                                        valid = false;
+                                        text += "A charge for is required\n";
+                                    }
+                                    progress = true;
+                            }
                             if(progress)
                             {
                                 if(!valid)
