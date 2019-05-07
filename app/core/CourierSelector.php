@@ -56,6 +56,8 @@
             $this->assignVicLocal($order_id);
         elseif($courier_id == $this->controller->courier->localId)
             $this->assignLocal($order_id, $courier_name);
+        elseif($courier_id == $this->controller->courier->directFreightId)
+            $this->assignDirectFreight($order_id);
         elseif($courier_id == 0)
             $this->assignBest($order_id);
     }
