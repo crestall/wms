@@ -257,6 +257,19 @@
         $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to $courier_name</p>";
     }
 
+    private function assignDirectFreight($order_id)
+    {
+        $db = Database::openConnection();
+        Session::set('showfeedback', true);
+        $order_values = array(
+            'courier_id'    => $this->controller->courier->directFreightId
+        );
+        if($this->addBubblewrap())
+            $order_values['bubble_wrap'] = 1;
+        $db->updateDatabaseFields('orders', $order_values, $order_id);
+        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Direct Freight</p>";
+    }
+
     private function assignVicLocal($order_id)
     {
         $db = Database::openConnection();
