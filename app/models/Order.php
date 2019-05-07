@@ -88,7 +88,7 @@ class Order extends Model{
     public function isVicMetro($id)
     {
         $od = $this->getOrderDetail($id);
-        return ($od['postcode'] >= $this->vic_metro_postcodes['min'] && $od['postcode'] <= $this->vic_metro_postcodes['max'])
+        return ($od['postcode'] >= $this->vic_metro_postcodes['min'] && $od['postcode'] <= $this->vic_metro_postcodes['max']);
     }
 
     public function getAddressStringForOrder($id)
