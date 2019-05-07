@@ -407,6 +407,11 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                         </form>
                     <?php elseif($order['courier_id'] == $this->controller->courier->directFreightId):?>
                         <form id="direct_freight">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Direct Freight</h4>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
                                 <div class="col-md-4">
