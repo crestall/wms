@@ -165,7 +165,7 @@ class DownloadsController extends Controller {
             {
                 $row = array(
                     $od['order_number'],
-                    $this->order->isVicMetro($order_id);
+                    $this->order->isVicMetro($order_id)
                 );
 
                 $rows[] = $row;
