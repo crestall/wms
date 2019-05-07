@@ -6,6 +6,7 @@ $pallets = (empty(Form::value('pallets')))? 1:Form::value('pallets');
 $truck_charge = (empty(Form::value('truck_charge')))? $order['total_cost']:Form::value('truck_charge');
 $courier_name = (empty(Form::value('courier_name')))? $order['courier_name']:Form::value('courier_name');
 $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form::value('local_charge');
+$direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:Form::value('direct_charge');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -401,6 +402,26 @@ $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form:
                                 <label class="col-md-3 col-form-label">&nbsp;</label>
                                 <div class="col-md-4 text-right">
                                     <button class="btn btn-warning" id="truck_charge_calc" data-destination="<?php echo $address_string;?>">Calculate Truck Charge</button>
+                                </div>
+                            </div>
+                        </form>
+                    <?php elseif($order['courier_id'] == $this->controller->courier->directFreightId):?>
+                        <form id="direct_freight">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control required" name="direct_consignment_id" id="direct_consignment_id" value="<?php echo Form::value('direct_consignment_id');?>" />
+                                    <?php echo Form::displayError('direct_consignment_id');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Charge Amount</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control number" name="direct_charge" id="direct_charge" value="<?php echo $direct_charge;?>" />
+                                    </div>
+                                    <?php echo Form::displayError('direct_charge');?>
                                 </div>
                             </div>
                         </form>
