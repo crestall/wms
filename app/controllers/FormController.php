@@ -129,7 +129,7 @@ class FormController extends Controller {
         {
             if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
             {
-
+                echo "<pre>",print_r($_FILES),"</pre>";die();
             }
             else
             {
@@ -145,10 +145,6 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-        }
-        else
-        {
-            echo "<pre>",print_r($_FILES),"</pre>";die();
         }
         return $this->redirector->to(PUBLIC_ROOT."orders/order-csv-upload");
     }
