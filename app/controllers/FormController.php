@@ -127,7 +127,15 @@ class FormController extends Controller {
         }
         if($_FILES['csv_file']["size"] > 0)
         {
+            if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
+            {
 
+            }
+            else
+            {
+                $error_message = $this->file_upload_error_message($_FILES['csv_file']['error']);
+                Form::setError('csv_file', $error_message);
+            }
         }
         else
         {
