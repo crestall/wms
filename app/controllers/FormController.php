@@ -41,11 +41,11 @@ class FormController extends Controller {
         ]);
 
         $this->loadHuntersLocations([
-                '3KG',
-                'PLU',
-                'PAL',
-                'Test'
-            ]);
+            '3KG',
+            'PLU',
+            'PAL',
+            'Test'
+        ]);
 
     }
 
@@ -76,6 +76,7 @@ class FormController extends Controller {
             'procLogin',
             'procMakePacks',
             'procOrderAdd',
+            'procOrderCsvUpload',
             'procOrderCourierUpdate',
             'procOrderEdit',
             'procOrderUpload',
@@ -109,6 +110,21 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procOrderCsvUpload()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+
     }
 
     public function procOriginOrderAdd()
@@ -3278,7 +3294,7 @@ class FormController extends Controller {
         }
         elseif( !$this->user->isUserActive($email) )
         {
-            Form::setError('general', 'Sorry, your account has been deactivated'); 
+            Form::setError('general', 'Sorry, your account has been deactivated');
         }
         elseif(!$this->login->isLoginAttemptAllowed($email))
         {
