@@ -124,7 +124,24 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if($_FILES['csv_file']["size"][0] > 0)
+        {
 
+        }
+        else
+        {
+            Form::setError('csv_file', 'Please upload a file');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            echo "Is Good"; die();
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/order-csv-upload");
     }
 
     public function procOriginOrderAdd()
