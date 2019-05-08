@@ -48,6 +48,16 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function orderCSVUpload()
+    {
+
+        //render the page
+        Config::setJsConfig('curPage', "order-csv-upload");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/csvUpload.php', [
+            'page_title'    =>  "CSV Import"
+        ]);
+    }
+
     public function truckUsage()
     {
         //render the page
