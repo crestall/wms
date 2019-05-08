@@ -115,7 +115,7 @@ class FormController extends Controller {
     public function procOrderCsvUpload()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
-        echo "<pre>",print_r($_FILES),"</pre>";die();
+        //echo "<pre>",print_r($_FILES),"</pre>";die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -125,7 +125,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if($_FILES['csv_file']["size"][0] > 0)
+        if($_FILES['csv_file']["size"] > 0)
         {
 
         }
