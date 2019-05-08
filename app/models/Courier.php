@@ -8,6 +8,7 @@ class Courier extends Model{
     public $threePlTruckId;
     public $localId;
     public $vicLocalId;
+    public $directFreightId;
 
     public function __construct()
     {
@@ -20,6 +21,7 @@ class Courier extends Model{
         $this->threePlTruckId = $this->getCourierId('3PL Truck');
         $this->localId = $this->getCourierId('Local');
         $this->vicLocalId = $this->getCourierId('Vic Local');
+        $this->directFreightId = $this->getCourierId('Direct Freight');
     }
 
     public function addCourier($data)

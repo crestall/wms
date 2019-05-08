@@ -143,6 +143,39 @@ class DownloadsController extends Controller {
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "dispatch_report_".$extra_cols]);
     }
 
+    public function cometCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+
+        $cols = array(
+            "Order Number",
+            "isVIC"
+        );
+
+        $rows = array();
+        foreach($this->request->data['order_ids'] as $order_id)
+        {
+            if( $od = $this->order->getOrderDetail($order_id) )
+            {
+                $row = array(
+                    $od['order_number'],
+                    $this->order->isVicMetro($order_id)
+                );
+
+                $rows[] = $row;
+            }
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "comet_export"]);
+    }
+
     public function orderExportCSV()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();

@@ -433,7 +433,7 @@
         $items_string .= "<tr><td colspan='2' class='bold'>Shipping:</td><td>Free shipping</td></tr>";
 
         $tracking_info = 'Please visit <a href="https://startrack.com.au/">startrack.com.au</a> and click the "Track & Trace" link at the top of the page. Enter '.$od['consignment_id'].' as the Tracking / reference number(s) for the latest on your delivery. In the event of your absence at the time of delivery, the driver may occasionally, based on careful judgment and inspection of the premises, leave your order in a safe place on your property without your signature ("Authority To Leave"). The driver is not responsible for in home or room placement of your order.<br/>';
-        if(strtolower($od['courier_name']) == "direct freight")
+        if($od['courier_id'] == $db->queryValue("couriers", array('name' => 'Direct Freight')))
         {
             $tracking_info = 'Please visit <a href="https://directfreight.com.au/">Direct Freight</a> and enter '.$od['consignment_id'].' in the Track & Trace form and click "Track" for the latest on your delivery. In the event of your absence at the time of delivery, the driver may occasionally, based on careful judgment and inspection of the premises, leave your order in a safe place on your property without your signature ("Authority To Leave"). The driver is not responsible for in home or room placement of your order.<br/>';
         }
@@ -447,14 +447,15 @@
 		$mail->MsgHTML($body);
 		//$mail->AddEmbeddedImage("$root/images/3pl_logo.png", "emailfoot", "3pl_logo.png");
 
-		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
-        //$mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
-
+		//$mail->AddAddress($od['tracking_email'], $od['ship_to']);
+        $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
+        /*
         $mail->AddBCC('jc@noasleep.com');
         $mail->AddBCC('jeremykopek@noasleep.com');
         $mail->AddBCC('customersupport@3plplus.com.au');
-        $mail->AddAddress('viviannenguyen@noasleep.com', 'Vivianne');
+        $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
         //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+        */
         if(!$mail->Send())
 		{
 			die($mail->ErrorInfo);
