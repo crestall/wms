@@ -71,6 +71,10 @@ class Order extends Model{
     public $status = array();
 
     private $excluded_clients = "6, 14";
+    private $vic_metro_postcodes = array(
+        'min'   => 3000,
+        'max'   => 3207
+    );
 
     public function __construct()
     {
@@ -79,6 +83,12 @@ class Order extends Model{
         $this->packed_id    = $this->getStatusId('packed');
         $this->fulfilled_id = $this->getStatusId('fulfilled');
         $this->getStatusses();
+    }
+
+    public function isVicMetro($id)
+    {
+        $od = $this->getOrderDetail($id);
+        return ($od['postcode'] >= $this->vic_metro_postcodes['min'] && $od['postcode'] <= $this->vic_metro_postcodes['max']);
     }
 
     public function getAddressStringForOrder($id)

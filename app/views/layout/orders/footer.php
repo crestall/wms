@@ -234,6 +234,22 @@
                                     progress = true;
                                 }
                             }
+                            if(courier_id == $('#direct_freight_id').val())
+                            {
+                                    consignment_id = $('#direct_consignment_id').val();
+                                    local_charge = $('#direct_charge').val();
+                                    if(consignment_id == "")
+                                    {
+                                        valid = false;
+                                        text += "Consignment ID is required\n";
+                                    }
+                                    if(local_charge == "")
+                                    {
+                                        valid = false;
+                                        text += "A charge for is required\n";
+                                    }
+                                    progress = true;
+                            }
                             if(progress)
                             {
                                 if(!valid)
@@ -1007,6 +1023,27 @@
                                     csrf_token: config.csrfToken
                                 }
                                 var url = "/downloads/orderExportCSV";
+                                fileDownload.download(url, data);
+                            }
+                        });
+
+                        $('a.comet-csv').click(function(e){
+                            e.preventDefault();
+                            if($('input.select:checked').length)
+                            {
+                                var ids = [];
+                                $('input.select').each(function(i,e){
+                                    if($(this).prop('checked'))
+                                    {
+                                        ids.push($(this).data('orderid'));
+                                    }
+                                });
+                                var data = {
+                                    client_id: $('#client_selector').val(),
+                                    order_ids: ids,
+                                    csrf_token: config.csrfToken
+                                }
+                                var url = "/downloads/cometCSV";
                                 fileDownload.download(url, data);
                             }
                         });
