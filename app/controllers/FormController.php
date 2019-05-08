@@ -115,7 +115,7 @@ class FormController extends Controller {
     public function procOrderCsvUpload()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
-        //echo "<pre>",print_r($_FILES),"</pre>";die();
+        echo "<pre>",print_r($_FILES),"</pre>";die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -140,7 +140,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($_FILES),"</pre>";die(); 
+            echo "<pre>",print_r($_FILES),"</pre>";die();
         }
         return $this->redirector->to(PUBLIC_ROOT."orders/order-csv-upload");
     }
