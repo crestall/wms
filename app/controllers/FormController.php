@@ -131,7 +131,14 @@ class FormController extends Controller {
             {
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                echo "<pre>",print_r($csv_array),"</pre>"; die();
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
+                foreach($csv_array as $r)
+                {
+                    $d_array = explode("|", $r[24]);
+                    echo "<pre>",print_r($d_array),"</pre>";
+                    //$order_number = $d_array[2];
+                    //$od = $this->order->getOrderByOrderNumber($order_number);
+                }
             }
             else
             {

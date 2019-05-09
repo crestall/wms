@@ -200,7 +200,7 @@
         {
             $this->notifyFigure8($od);
         }
-        $this->recordOutput('order_fulfillment/local');
+        $this->recordOutput('order_fulfillment/direct');
         Session::set('showfeedback', true);
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Direct Freight</p>";
     }
