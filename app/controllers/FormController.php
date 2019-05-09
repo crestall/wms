@@ -132,7 +132,7 @@ class FormController extends Controller {
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
                 //echo "<pre>",print_r($csv_array),"</pre>"; die();
-                $feedback = "<h2><i class='far fa-check-circle'></i>Orders have been fulfilled</h2>";
+                Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders have been fulfilled</h2>");
                 foreach($csv_array as $r)
                 {
                     $d_array = explode("|", $r[24]);
@@ -144,9 +144,7 @@ class FormController extends Controller {
                     $this->request->data['local_charge'] = ($r[29] + 5.2);
                     $this->request->data['order_ids'] = $od['id'];
                     $this->orderfulfiller->fulfillDirectFreightOrder();
-                    $feedback .= "<p>{data['consignment_id']}</p>";
                 }
-                Session::set("feedback", $feedback);
             }
             else
             {
