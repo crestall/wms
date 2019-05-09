@@ -142,7 +142,7 @@ class FormController extends Controller {
                     //echo "<pre>",print_r($od),"</pre>";
                     $this->request->data['consignment_id'] = $r[18];
                     $this->request->data['local_charge'] = ($r[29] + 5.2);
-                    $this->request-data['order_ids'] = $od['id'];
+                    $this->request->data['order_ids'] = $od['id'];
                     $this->orderfulfiller->fulfillDirectFreightOrder();
                     $feedback .= "<p>{data['consignment_id']}</p>";
                 }
