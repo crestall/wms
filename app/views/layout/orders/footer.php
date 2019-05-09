@@ -1680,7 +1680,12 @@
                 },
                 'order-csv-upload': {
                     init: function(){
-                        
+                        $('form#order-csv-upload').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Updating Orders...</h1></div>' });
+                            }
+                        });
                     }
                 },
                 'order-importing': {
