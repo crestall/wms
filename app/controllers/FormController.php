@@ -131,7 +131,7 @@ class FormController extends Controller {
             {
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                echo "<pre>",print_r($csv_array),"</pre>"; die();
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
                 foreach($csv_array as $r)
                 {
                     $d_array = explode("|", $r[24]);
@@ -139,8 +139,8 @@ class FormController extends Controller {
                     $order_number = trim($d_array[2]);
                     $od = $this->order->getOrderByOrderNumber($order_number);
                     //echo "<pre>",print_r($od),"</pre>";
-                    $this->request->data['consignment_id'] = 34;
-                    $this->request->data['direct_charge'] = 34;
+                    $this->request->data['consignment_id'] = $r[18];
+                    $this->request->data['direct_charge'] = ($r[29] + 5.2);
                     $this->orderfulfiller->fulfillDirectFreightOrder();
                 }
             }
