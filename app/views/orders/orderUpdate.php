@@ -188,33 +188,35 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                 </div>
             <?php endif;?>
         </div>
-        <?php if(count($packages)):?>
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>Packages in this Order</h4>
+        <?php if($order['courier_id'] > 0):?>
+            <?php if(count($packages)):?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Packages in this Order</h3>
+                    </div>
                 </div>
-            </div>
-            <?php $pc = 1; foreach($packages as $p):?>
-                <div class="row alert alert-info">
-                    <div class="col-md-9">
+                <div class="bs-callout bs-callout-primary bs-callout-more">
+                    <?php $pc = 1; foreach($packages as $p):?>
                         <div class="row">
-                            <label class="col-md-4 col-form-label">Width</label>
-                            <div class="col-md-2"><?php echo $p['width'];?> cm</div>
-                            <label class="col-md-4 col-form-label">Depth</label>
-                            <div class="col-md-2"><?php echo $p['depth'];?> cm</div>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <label class="col-md-4 col-form-label">Width</label>
+                                    <div class="col-md-2"><?php echo $p['width'];?> cm</div>
+                                    <label class="col-md-4 col-form-label">Depth</label>
+                                    <div class="col-md-2"><?php echo $p['depth'];?> cm</div>
+                                </div>
+                                <div class='row'>
+                                    <label class="col-md-4 col-form-label">Height</label>
+                                    <div class="col-md-2"><?php echo $p['height'];?> cm</div>
+                                    <label class="col-md-4 col-form-label">Weight</label>
+                                    <div class="col-md-2"><?php echo $p['weight'];?> kg</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class='row'>
-                            <label class="col-md-4 col-form-label">Height</label>
-                            <div class="col-md-2"><?php echo $p['height'];?> cm</div>
-                            <label class="col-md-4 col-form-label">Weight</label>
-                            <div class="col-md-2"><?php echo $p['weight'];?> kg</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-3x text-danger"></i></a>
-                    </div>
+                    <?php ++$pc; endforeach;?>
                 </div>
-            <?php ++$pc; endforeach;?>
+
+            <?php endif;?>
         <?php endif;?>
         <?php if($order['courier_id'] == 0):?>
             <div class="row">
@@ -287,6 +289,34 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                     </div>
                 </div>
             </div>
+            <?php if(count($packages)):?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Packages in this Order</h4>
+                    </div>
+                </div>
+                <?php $pc = 1; foreach($packages as $p):?>
+                    <div class="row alert alert-info">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <label class="col-md-4 col-form-label">Width</label>
+                                <div class="col-md-2"><?php echo $p['width'];?> cm</div>
+                                <label class="col-md-4 col-form-label">Depth</label>
+                                <div class="col-md-2"><?php echo $p['depth'];?> cm</div>
+                            </div>
+                            <div class='row'>
+                                <label class="col-md-4 col-form-label">Height</label>
+                                <div class="col-md-2"><?php echo $p['height'];?> cm</div>
+                                <label class="col-md-4 col-form-label">Weight</label>
+                                <div class="col-md-2"><?php echo $p['weight'];?> kg</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-3x text-danger"></i></a>
+                        </div>
+                    </div>
+                <?php ++$pc; endforeach;?>
+            <?php endif;?>
             <?php if( $user_role == "admin" || $user_role == "super admin" ):?>
                 <div class="row">
                     <div class="col-md-12">
