@@ -20,6 +20,8 @@ class Itemmovement extends Model{
                 items i JOIN items_movement im ON i.id = im.item_id JOIN locations l ON im.location_id = l.id
             WHERE
                 i.client_id = :client_id $exids AND date >= :from AND date <= :to
+            ORDER BY
+                im.date DESC
         ";
         $array = array(
             'client_id' => 	$client_id,
