@@ -188,7 +188,7 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                 </div>
             <?php endif;?>
         </div>
-        <?php if($order['courier_id']) > 0):?>
+        <?php if($order['courier_id'] > 0):?>
             <?php if(count($packages)):?>
                 <div class="row">
                     <div class="col-md-12">
