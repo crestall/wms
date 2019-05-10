@@ -361,7 +361,8 @@ return array(
             'order-importing'           =>  true,
             'view-storeorders'          => true,
             'view-pickups'              => false,
-            'record-pickup'   => true
+            'record-pickup'   => true,
+            'order-csv-upload'  => true
         ),
 		'clients'	=> array(
 			'view-clients'	=> true,

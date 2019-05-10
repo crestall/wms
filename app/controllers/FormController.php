@@ -41,11 +41,11 @@ class FormController extends Controller {
         ]);
 
         $this->loadHuntersLocations([
-                '3KG',
-                'PLU',
-                'PAL',
-                'Test'
-            ]);
+            '3KG',
+            'PLU',
+            'PAL',
+            'Test'
+        ]);
 
     }
 
@@ -76,6 +76,7 @@ class FormController extends Controller {
             'procLogin',
             'procMakePacks',
             'procOrderAdd',
+            'procOrderCsvUpload',
             'procOrderCourierUpdate',
             'procOrderEdit',
             'procOrderUpload',
@@ -109,6 +110,58 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procOrderCsvUpload()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($_FILES),"</pre>";die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($_FILES['csv_file']["size"] > 0)
+        {
+            if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
+            {
+                $tmp_name = $_FILES['csv_file']['tmp_name'];
+                $csv_array = array_map('str_getcsv', file($tmp_name));
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
+                Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders have been fulfilled</h2>");
+                foreach($csv_array as $r)
+                {
+                    $d_array = explode("|", $r[24]);
+                    //echo "<pre>",print_r($d_array),"</pre>";
+                    $order_number = trim($d_array[2]);
+                    $od = $this->order->getOrderByOrderNumber($order_number);
+                    //echo "<pre>",print_r($od),"</pre>";
+                    $this->request->data['consignment_id'] = $r[18];
+                    $this->request->data['local_charge'] = ($r[29] + 5.2);
+                    $this->request->data['order_ids'] = $od['id'];
+                    $this->orderfulfiller->fulfillDirectFreightOrder();
+                }
+            }
+            else
+            {
+                $error_message = $this->file_upload_error_message($_FILES['csv_file']['error']);
+                Form::setError('csv_file', $error_message);
+            }
+        }
+        else
+        {
+            Form::setError('csv_file', 'Please upload a file');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/order-csv-upload");
     }
 
     public function procOriginOrderAdd()
@@ -3278,7 +3331,7 @@ class FormController extends Controller {
         }
         elseif( !$this->user->isUserActive($email) )
         {
-            Form::setError('general', 'Sorry, your account has been deactivated'); 
+            Form::setError('general', 'Sorry, your account has been deactivated');
         }
         elseif(!$this->login->isLoginAttemptAllowed($email))
         {
