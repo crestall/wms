@@ -58,6 +58,8 @@
             $this->assignLocal($order_id, $courier_name);
         elseif($courier_id == $this->controller->courier->directFreightId)
             $this->assignDirectFreight($order_id);
+        elseif($courier_id == $this->controller->courier->cometLocalId)
+            $this->assignCometLocal($order_id);
         elseif($courier_id == 0)
             $this->assignBest($order_id);
     }
@@ -270,6 +272,19 @@
             $order_values['bubble_wrap'] = 1;
         $db->updateDatabaseFields('orders', $order_values, $order_id);
         $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Direct Freight</p>";
+    }
+
+    private function assignCometLocal($order_id)
+    {
+        $db = Database::openConnection();
+        Session::set('showfeedback', true);
+        $order_values = array(
+            'courier_id'    => $this->controller->courier->cometLocalId
+        );
+        if($this->addBubblewrap())
+            $order_values['bubble_wrap'] = 1;
+        $db->updateDatabaseFields('orders', $order_values, $order_id);
+        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Comet Local</p>";
     }
 
     private function assignVicLocal($order_id)

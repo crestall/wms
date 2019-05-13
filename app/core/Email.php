@@ -488,6 +488,48 @@
             $mail->AddAddress('jc@noasleep.com');
             $mail->AddAddress('jeremykopek@noasleep.com');
             $mail->AddBCC('customersupport@3plplus.com.au');
+            $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
+            $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+        }
+        else
+        {
+            $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
+        }
+
+        if(!$mail->Send())
+		{
+			die($mail->ErrorInfo);
+		}
+		else
+		{
+		    //$db->updateDatabaseField('orders', 'customer_emailed', 1, $order_id);
+			return true;
+		}
+
+    }
+
+    public static function sendNoaCometConfirmEmail($order_ids)
+    {
+        $db = Database::openConnection();
+		$mail = new PHPMailer(); // defaults to using php "mail()"
+		$body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."noacometnotification.html");
+        $o_nums = implode(",<br/>", $order_ids);
+        $replace_array = array("{ORDER_NUMBERS}");
+		$replace_with_array = array($o_nums);
+		$body = str_replace($replace_array, $replace_with_array, $body);
+
+		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+		$mail->Subject = "Noa Orders Dispatched";
+		$mail->MsgHTML($body);
+		$mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+
+        if(SITE_LIVE)
+        //if(Config::get("SITE_LIVE"))
+        {
+            $mail->AddAddress('jc@noasleep.com');
+            $mail->AddAddress('jeremykopek@noasleep.com');
+            $mail->AddBCC('customersupport@3plplus.com.au');
+            $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
             $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
         }
         else
