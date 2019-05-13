@@ -359,7 +359,7 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                         </div>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <input type="hidden" name="truck_id" id="truck_id" value="<?php echo $truck_id;?>" />
-                        <input type="hidden" name="local_id" id="local_id" value="<?php echo $local_id;?>" />
+                        <input type="hidden" name="local_id" id="local_id" value="<?php echo $local_id;?>" /> 
                         <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">&nbsp;</label>
