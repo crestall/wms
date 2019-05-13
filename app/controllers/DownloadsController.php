@@ -183,7 +183,7 @@ class DownloadsController extends Controller {
                     $name,
                     $od['address'],
                     $od['address_2'],
-                    $od['suburb'], 
+                    $od['suburb'],
                     $od['postcode'],
                     $phone
                 );
@@ -210,7 +210,7 @@ class DownloadsController extends Controller {
         }
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
-        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "comet_export"]);
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "comet_export".date("YMD")]);
     }
 
     public function orderExportCSV()
