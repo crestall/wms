@@ -183,8 +183,7 @@ class DownloadsController extends Controller {
                     $name,
                     $od['address'],
                     $od['address_2'],
-                    $od['suburb'],
-                    $od['state'],
+                    $od['suburb'], 
                     $od['postcode'],
                     $phone
                 );
