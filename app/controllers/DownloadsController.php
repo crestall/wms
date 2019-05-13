@@ -177,7 +177,7 @@ class DownloadsController extends Controller {
                 $phone = preg_replace("/[^\d]/","",$phone);
                 $row = array(
                     $od['order_number'],
-                    date("d/M/Y"),
+                    date("d/m/Y"),
                     "HM2",
                     "DEL",
                     $name,
@@ -210,7 +210,7 @@ class DownloadsController extends Controller {
         }
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
-        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "comet_export".date("YMD")]);
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "comet_export".date("Ymd")]);
     }
 
     public function orderExportCSV()
