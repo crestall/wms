@@ -154,26 +154,63 @@ class DownloadsController extends Controller {
         }
 
         $cols = array(
-            "Order Number",
-            "isVIC"
+            "3PL Order Number",
+            "Date",
+            "Service Code",
+            "DEL/PUP",
+            "Customer Name",
+            "Customer Address",
+            "Customer Address 2",
+            "Customer Suburb",
+            "Customer Postcode",
+            "Customer Phone"
         );
 
         $rows = array();
+        $extra_cols = 0;
         foreach($this->request->data['order_ids'] as $order_id)
         {
             if( $od = $this->order->getOrderDetail($order_id) )
             {
+                $name = empty($od['company_name'])? $od['ship_to']: $od['company_name'];
+                $phone = preg_replace("/\+61/","0",$od['contact_phone']);
+                $phone = preg_replace("/[^\d]/","",$phone);
                 $row = array(
                     $od['order_number'],
-                    $this->order->isVicMetro($order_id)
+                    date("d/m/Y"),
+                    "HM2",
+                    "DEL",
+                    $name,
+                    $od['address'],
+                    $od['address_2'],
+                    $od['suburb'],
+                    $od['postcode'],
+                    $phone
                 );
-
+                $items = $this->order->getItemsForOrderNoLocations($order_id);
+                $extra_cols = max($extra_cols, count($items));
+                $i = 1;
+                foreach($items as $item)
+                {
+                    $row[] = $item['name'];
+                    $row[] = $item['sku'];
+                    $row[] = $item['qty'];
+                    ++$i;
+                }
                 $rows[] = $row;
             }
         }
+        $i = 1;
+        while($i <= $extra_cols)
+        {
+            $cols[] = "Item $i Name";
+            $cols[] = "Item $i SKU";
+            $cols[] = "Item $i Qty";
+            ++$i;
+        }
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
-        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "comet_export"]);
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "comet_export".date("Ymd")]);
     }
 
     public function orderExportCSV()
