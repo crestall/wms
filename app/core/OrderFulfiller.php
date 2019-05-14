@@ -280,7 +280,7 @@
         if( count($emails_to_send) )
         {
             $this->output .= "Sending Noa Sleep confirmations".PHP_EOL;
-            Email::sendNoaLocalConfirmEmail($emails_to_send);
+            Email::sendNoaCometConfirmEmail($emails_to_send);
         }
         $this->recordOutput("order_fulfillment/cometlocal");
     }
