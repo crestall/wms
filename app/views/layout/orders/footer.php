@@ -1230,7 +1230,7 @@
                                         method: 'post',
                                         data: {
                                             order_ids: ids,
-                                            courier_id: config.vicLocalId
+                                            courier_id: config.cometLocalId
                                         },
                                         dataType: 'json',
                                         beforeSend: function(){
