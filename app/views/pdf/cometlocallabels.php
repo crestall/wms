@@ -30,14 +30,13 @@ foreach($orders_ids as $id):
     ?>
         <table width="100%" style="font-size:18px; line-height:1.5">
             <tr>
-                <td>Ship To</td>
-                <td><?php echo $ship_to;?></td>
+                <td colspan="2" align="center">
+                    <h1 style="font-size:30px"><?php echo $od['order_number'];?></h1>
+                </td>
             </tr>
             <tr>
-                <td>Order Number</td>
-                <td>
-                    <?php echo $od['order_number'];?><br/>
-                </td>
+                <td>Ship To</td>
+                <td><?php echo $ship_to;?></td>
             </tr>
             <tr>
                 <td>Address</td>
