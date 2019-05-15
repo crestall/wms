@@ -63,7 +63,7 @@ foreach($orders_ids as $id):
             if( isset($summary_pick[$i['location_id']][$i['id']]) )
             {
                 $summary_pick[$i['location_id']][$i['id']]['qty'] += $i['qty'];
-                $summary_pick[$i['location_id']][$i['id']]['item_name'] = $i['name'];
+                $summary_pick[$i['location_id']][$i['id']]['item_name'] = $i['name']." (".$i['sku'].")";
 
             }
             else
