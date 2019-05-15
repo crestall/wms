@@ -38,12 +38,13 @@
             <div class="col-lg-3 text-center">
                 <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
                 <p><a class="btn btn-default viclocal-label-print"><i class="fas fa-tags"></i> Print Vic Local Labels For Selected</a> </p>
+                <p><a class="btn btn-default cometlocal-label-print"><i class="fas fa-tags"></i> Print Comet Local Labels For Selected</a> </p> 
             </div>
             <?php if($fulfilled == 0):?>
                 <div class="col-lg-3 text-center">
                     <p><a class="btn btn-primary eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
                     <p><a class="btn btn-default viclocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Vic Local Orders</a> </p>
-                    <p><a class="btn btn-default cometlocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Comet Local Orders</a> </p> 
+                    <p><a class="btn btn-default cometlocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Comet Local Orders</a> </p>
                 </div>
             <?php endif;?>
             <div class="col-lg-3 text-center">
