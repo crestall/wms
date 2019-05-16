@@ -154,6 +154,12 @@ return array(
     'TTWOOCONSUMERSECRET'   => 'cs_de63e0f9fe17d8adc4d7b3b03ec3b054106d9d8b',
 
     /*************************************************************************
+    * TEAMTIMBUKTU SHOPIFY API constants
+    **************************************************************************/
+    'TEAMTIMBUKTUAPIKEY'    => '69243c9b8c3d769b13f3f6a13f686086',
+    'TEAMTIMBUKTUAPIPASS'   => 'b05f99ea0bacf86cb826579bd2c63495',
+
+    /*************************************************************************
     * TradeGecko API constants
     **************************************************************************/
     'TRADEGECKO_BEARER' => 'd775545a80bb2cdbfe573a960f840e67c29c91b4b82ad10e1e0b756f72e7a06c',
@@ -321,6 +327,7 @@ return array(
     "HIDE_CHARGE_CLIENTS"   =>  array(
         63, //cocoon
         59, //noasleep
+        69, //Team Timbuktu
     ),
     /*************************************************************************
     * Pages and icons

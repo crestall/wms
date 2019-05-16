@@ -49,8 +49,8 @@ class TasksController extends Controller
             $to = time();
             $clients = array(
                 "Nuchev"        => 5,
-                "Big Bottle"    => 6,
-                "Freedom"       => 7
+                "Freedom"       => 7,
+                "Team Timbuktu" => 69
             );
             $output = "=========================================================================================================".PHP_EOL;
             $output .= "SENDING CLIENT REPORTS FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
