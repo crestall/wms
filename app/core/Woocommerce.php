@@ -14,6 +14,7 @@ class Woocommerce{
 
     private $output;
     private $bboitems;
+    private $ttoitems;
     private $nuchevoitems;
     private $noaoitems;
     private $woocommerce;
