@@ -42,6 +42,10 @@ class Shopify{
         );
         $this->shopify = new PHPShopify\ShopifySDK($config);
         $collected_orders = array();
+        $params = array(
+            'status'    => 'open',
+            'fields'    => 'id,email,note,total_weight,phone,order_number,line_items,shipping_address'
+        );
         try {
           $collected_orders = $this->shopify->Order->get();
         } catch (HttpClientException $e) {
@@ -74,7 +78,7 @@ class Shopify{
         {
             return $this->return_array;
         }
-        */ 
+        */
     }
 
 }
