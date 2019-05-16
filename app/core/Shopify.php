@@ -125,8 +125,8 @@ class Shopify{
                 }
                 //validate address
                 $ad = array(
-                    'address'   => $o['shipping_address']['address_1'],
-                    'address_2' => $o['shipping_address']['address_2'],
+                    'address'   => $o['shipping_address']['address1'],
+                    'address_2' => $o['shipping_address']['address2'],
                     'suburb'    => $o['shipping_address']['city'],
                     'state'     => $o['shipping_address']['province_code'],
                     'postcode'  => $o['shipping_address']['zip'],
