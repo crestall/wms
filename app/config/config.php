@@ -327,6 +327,7 @@ return array(
     "HIDE_CHARGE_CLIENTS"   =>  array(
         63, //cocoon
         59, //noasleep
+        69, //Team Timbuktu
     ),
     /*************************************************************************
     * Pages and icons
