@@ -273,8 +273,8 @@ class DownloadsController extends Controller {
                     $row = array(
                         "",
                         $name,
-                        $od['address'],
-                        $od['address_2'],
+                        str_replace(",", " ",$od['address']),
+                        str_replace(",", " ",$od['address_2']),
                         $od['suburb'],
                         $od['state'],
                         $od['postcode'],
