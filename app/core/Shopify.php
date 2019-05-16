@@ -66,7 +66,7 @@ class Shopify{
             }
         }
 
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        echo "<pre>",print_r($collected_orders),"</pre>";die();
         /*  */
         if($orders = $this->procTeamTimbuktuOrders($collected_orders))
         {
