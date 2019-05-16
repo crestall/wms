@@ -66,7 +66,7 @@ class Shopify{
             }
         }
 
-        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
         /*  */
         if($orders = $this->procTeamTimbuktuOrders($collected_orders))
         {
@@ -109,7 +109,7 @@ class Shopify{
                     'tracking_email'        => $o['email'],
                     'ship_to'               => $o['shipping_address']['first_name']." ".$o['shipping_address']['last_name'],
                     'company_name'          => $o['shipping_address']['company'],
-                    'date_ordered'          => strtotime( $o['date_created'] ),
+                    'date_ordered'          => strtotime( $o['created_at'] ),
                     'status_id'             => $this->controller->order->ordered_id,
                     'eparcel_express'       => 0,
                     'signature_req'         => 0,
