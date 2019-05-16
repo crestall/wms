@@ -53,6 +53,8 @@ class Controller {
 
     public $woocommerce;
 
+    public $shopify;
+
     public $allocations;
 
     public $courierselector;
@@ -72,6 +74,7 @@ class Controller {
         $this->view                =  new View($this);
         $this->redirector          =  new Redirector();
         $this->woocommerce         =  new Woocommerce($this);
+        $this->shopify             =  new Shopfy($this);
         $this->allocations         =  new Allocations($this);
         $this->courierselector     =  new CourierSelector($this);
         $this->orderfulfiller      =  new OrderFulfiller($this);

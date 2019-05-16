@@ -48,8 +48,7 @@ class TasksController extends Controller
             $from = strtotime('today midnight');
             $to = time();
             $clients = array(
-                "Nuchev"        => 5,
-                "Big Bottle"    => 6,
+                "Nuchev"        => 5, 
                 "Freedom"       => 7
             );
             $output = "=========================================================================================================".PHP_EOL;

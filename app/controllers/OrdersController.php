@@ -230,6 +230,12 @@ class OrdersController extends Controller
        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
     }
 
+    public function importTeamTimbuktuOrders()
+    {
+        $response = $this->shopify->getTeamTimbuktuOrders();
+        echo "Response<pre>",print_r($response),"</pre>";
+    }
+
     public function importTTOrders()
     {
        $response = $this->woocommerce->getTTOrders();

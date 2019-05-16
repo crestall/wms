@@ -32,6 +32,39 @@
             <?php endif; ?>
         </div>
     </div>
+
+    <div class="bs-callout bs-callout-primary bs-callout-more">
+        <a name="team_timbuktu"></a>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Team Timbuktu Orders</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-4">
+                <h3>Import single Order</h3>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-4">
+                <h3>Run Full Import</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-4">
+                <p><button class="btn btn-primary" id="tt_full_import" data-function="importTeamTimbuktuOrders">Run It</button></p>
+            </div>
+        </div>
+    </div>
+
+
     <div class="bs-callout bs-callout-primary bs-callout-more">
         <a name="tt_aust"></a>
         <div class="row">
