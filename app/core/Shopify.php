@@ -66,7 +66,7 @@ class Shopify{
             }
         }
 
-        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
         /*  */
         if($orders = $this->procTeamTimbuktuOrders($collected_orders))
         {
@@ -113,7 +113,7 @@ class Shopify{
                     'status_id'             => $this->controller->order->ordered_id,
                     'eparcel_express'       => 0,
                     'signature_req'         => 0,
-                    'contact_phone'         => $o['billing']['phone'],
+                    'contact_phone'         => $o['shipping_address']['phone'],
                     'import_error'          => false,
                     'import_error_string'   => ''
                 );
@@ -125,12 +125,12 @@ class Shopify{
                 }
                 //validate address
                 $ad = array(
-                    'address'   => $o['shipping']['address_1'],
-                    'address_2' => $o['shipping']['address_2'],
-                    'suburb'    => $o['shipping']['city'],
-                    'state'     => $o['shipping']['state'],
-                    'postcode'  => $o['shipping']['postcode'],
-                    'country'   => $o['shipping']['country']
+                    'address'   => $o['shipping_address']['address_1'],
+                    'address_2' => $o['shipping_address']['address_2'],
+                    'suburb'    => $o['shipping_address']['city'],
+                    'state'     => $o['shipping_address']['province_code'],
+                    'postcode'  => $o['shipping_address']['zip'],
+                    'country'   => $o['shipping_address']['country_code']
                 );
                 if($ad['country'] == "AU")
                 {
@@ -199,16 +199,16 @@ class Shopify{
 
                 }
                 if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
-                if(empty($o['customer_note']))
+                if(empty($o['note']))
                 {
-                    if( $qty > 1 || !empty($o['shipping']['company']) )
+                    if( $qty > 1 || !empty($o['shipping_address']['company']) )
                         $delivery_instructions =  "";
                     else
                         $delivery_instructions =  "Please leave in a safe place out of the weather";
                 }
                 else
                 {
-                    $delivery_instructions = $o['customer_note'];
+                    $delivery_instructions = $o['note'];
                 }
                 $order['instructions'] = $delivery_instructions;
                 //echo "<pre>",print_r($order),"</pre>";die();
@@ -241,7 +241,7 @@ class Shopify{
                 else
                 {
                     $order['quantity'] = $qty;
-                    $order['weight'] = $weight;
+                    $order['weight'] = $o['total_weight'];
                     //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
                     $order['items'] = $items;
                     $orders_items[$o['id']] = $items;
@@ -250,7 +250,7 @@ class Shopify{
                 }
             }//endforeach order
             //echo "<pre>",print_r($orders),"</pre>";//die();
-            $this->ttoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            $this->teamtimbuktuoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
 
             return $orders;
         }//end if count orders
