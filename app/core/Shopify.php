@@ -47,7 +47,7 @@ class Shopify{
             'fields'    => 'id,email,note,total_weight,phone,order_number,line_items,shipping_address'
         );
         try {
-          $collected_orders = $this->shopify->Order->get();
+          $collected_orders = $this->shopify->Order->get($params);
         } catch (HttpClientException $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
