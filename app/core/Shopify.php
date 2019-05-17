@@ -172,7 +172,7 @@ class Shopify{
         {
             $allocations = array();
             $orders_items = array();
-            foreach($collected_orders as $o)
+            foreach($collected_orders as $o)   
             {
                 $items_errors = false;
                 $weight = 0;
