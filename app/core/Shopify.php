@@ -158,16 +158,6 @@ class Shopify{
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($this->teamtimbuktuoitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
-             /*change status in woocommerce */
-            $this->output .= "Updating woocommerce status to completed fo order id ".$o['client_order_id'].PHP_EOL;
-            try{
-                $this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));
-            }
-            catch (HttpClientException $e) {
-                $this->output .=  $e->getMessage() .PHP_EOL;
-                //$output .=  $e->getRequest() .PHP_EOL;
-                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-            }
         }
     }
 
