@@ -257,9 +257,9 @@ class Packaging{
             {
                 $weight += $i['weight'];
             }
-            $array['width'] = 250;
+            $array['width'] = 25;
             $array['height'] = 2;
-            $array['depth'] = 350;
+            $array['depth'] = 35;
             $array['weight'] = $weight;
             $array['pieces'] = 1;
             $array['type_code'] = 'CTN';
