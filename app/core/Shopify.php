@@ -323,7 +323,7 @@ class Shopify{
                     $order['weight'] = $o['total_weight'];
                     //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
                     $order['items'] = $items;
-                    $orders_items[$o['id']] = $items;
+                    $orders_items[$o['order_number']] = $items;
                     $order = array_merge($order, $ad);
                     $orders[] = $order;
                 }
