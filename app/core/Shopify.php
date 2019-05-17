@@ -133,7 +133,7 @@ class Shopify{
             //insert the order
             $vals = array(
                 'client_order_id'       => $o['client_order_id'],
-                'client_id'             => 66,
+                'client_id'             => 69,
                 'deliver_to'            => $o['ship_to'],
                 'company_name'          => $o['company_name'],
                 'date_ordered'          => $o['date_ordered'],
@@ -172,7 +172,7 @@ class Shopify{
         {
             $allocations = array();
             $orders_items = array();
-            foreach($collected_orders as $o)   
+            foreach($collected_orders as $o)
             {
                 $items_errors = false;
                 $weight = 0;
