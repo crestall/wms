@@ -263,6 +263,7 @@ class Packaging{
             $array['weight'] = $weight;
             $array['pieces'] = 1;
             $array['type_code'] = 'CTN';
+            $array['item_reference'] = $i['item_id'];
             $return[] = $array;
         }
         //item specific packages
