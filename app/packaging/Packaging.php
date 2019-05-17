@@ -250,6 +250,21 @@ class Packaging{
             $array['type_code'] = 'CTN';
             $return[] = $array;
         }
+        elseif($od['client_id'] == 69)   //Team Timbuktu
+        {
+            $weight = 0;
+            foreach($items as $i)
+            {
+                $weight += $i['weight'];
+            }
+            $array['width'] = 250;
+            $array['height'] = 2;
+            $array['depth'] = 350;
+            $array['weight'] = $weight;
+            $array['pieces'] = 1;
+            $array['type_code'] = 'CTN';
+            $return[] = $array;
+        }
         //item specific packages
         else
         {
