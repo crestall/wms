@@ -114,7 +114,7 @@ class EmailOrdersParser{
             {
                 $this->addNuchevSamples($orders);
             }
-             else
+            else
             {
                 $this->return_array['error'] = true;
             }
