@@ -410,10 +410,13 @@
                     $od = $this->controller->order->getOrderDetail($id);
                     if( !empty($od['tracking_email']) )
                     {
-                        $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-                        //$mailer->sendTrackingEmail($id);
-                        Email::sendTrackingEmail($id);
-                        $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
+                        if($od['client_id'] != 69)
+                        {
+                            $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                            //$mailer->sendTrackingEmail($id);
+                            Email::sendTrackingEmail($id);
+                            $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
+                        }
                     }
                     if($od['client_id'] == 52) //figure8
                     {
