@@ -453,7 +453,7 @@
         $mail->AddBCC('jeremykopek@noasleep.com');
         $mail->AddBCC('customersupport@3plplus.com.au');
         $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
-        $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
 
         if(!$mail->Send())
 		{
