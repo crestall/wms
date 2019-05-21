@@ -410,7 +410,11 @@
                     $od = $this->controller->order->getOrderDetail($id);
                     if( !empty($od['tracking_email']) )
                     {
-                        if($od['client_id'] != 69)
+                        if($od['client_id'] == 69)
+                        {
+                            //Email::notifyTeamTimbuktu($id);
+                        }
+                        else
                         {
                             $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
                             //$mailer->sendTrackingEmail($id);
