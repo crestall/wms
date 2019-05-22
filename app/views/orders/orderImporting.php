@@ -107,7 +107,7 @@
         <div class="row">
             <div class="col-md-3">&nbsp;</div>
             <div class="col-md-4">
-                <p><button class="btn btn-primary" id="tt_full_import" data-function="importTTOrders">Run It</button></p>
+                <p><button class="btn btn-primary" id="tt_full_import" data-function="importTTAUOrders">Run It</button></p>
             </div>
         </div>
     </div>
