@@ -5,7 +5,7 @@
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div class="row">
         <div class="col-md-2">
-            <p><a class="btn btn-primary" href="#big_bottle">Big Bottle</a> </p>
+            <p><a class="btn btn-primary" href="#team_timbuktu">Team Timbuktu</a> </p>
         </div>
         <div class="col-md-2">
             <p><a class="btn btn-primary" href="#nuchev">Nuchev</a></p>
@@ -17,7 +17,7 @@
             <p><a class="btn btn-primary" href="#noa">Noa Sleep</a></p>
         </div>
         <div class="col-md-2">
-            <p><a class="btn btn-primary" href="#figure_8">Figure 8</a></p>
+            <p><a class="btn btn-primary" href="#ttau">Twin Towers Australia</a></p>
         </div>
     </div>
     <div class="row">
@@ -112,10 +112,10 @@
         </div>
     </div>
     <div class="bs-callout bs-callout-primary bs-callout-more">
-        <a name="big_bottle"></a>
+        <a name="ttau"></a>
         <div class="row">
             <div class="col-md-12">
-                <h2>Big Bottle Orders</h2>
+                <h2>Twin Towers Orders</h2>
             </div>
         </div>
         <div class="row">
@@ -125,16 +125,16 @@
             </div>
         </div>
         <div class="row">
-            <form id="bb_single_import" action="/orders/importBBOrder" method="post">
+            <form id="ttau_single_import" action="/orders/importTTAUOrder" method="post">
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">WooCommerce Order ID</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control required" name="bbwoocommerce_id" id="bbwoocommerce_id" value="<?php echo Form::value('bbwoocommerce_id');?>" />
-                        <?php echo Form::displayError('bbwoocommerce_id');?>
+                        <input type="text" class="form-control required" name="ttauwoocommerce_id" id="ttauwoocommerce_id" value="<?php echo Form::value('ttauwoocommerce_id');?>" />
+                        <?php echo Form::displayError('ttauwoocommerce_id');?>
                     </div>
                 </div>
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                <input type="hidden" name="client_id" value="<?php echo $bb_clientid; ?>" />
+                <input type="hidden" name="client_id" value="<?php echo $ttau_clientid; ?>" />
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
@@ -153,7 +153,7 @@
         <div class="row">
             <div class="col-md-3">&nbsp;</div>
             <div class="col-md-4">
-                <p><button class="btn btn-primary" id="bb_full_import" data-function="importBBOrders">Run It</button></p>
+                <p><button class="btn btn-primary" id="ttau_full_import" data-function="importTTAUOrders">Run It</button></p>
             </div>
         </div>
     </div>

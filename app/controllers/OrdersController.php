@@ -77,7 +77,7 @@ class OrdersController extends Controller
             'bb_clientid'       =>  $this->client->getClientId("THE BIG BOTTLE CO"),
             'nuchev_clientid'   =>  $this->client->getClientId("NUCHEV"),
             'noa_clientid'      =>  $this->client->getClientId("Noa Sleep"),
-            'tt_clientid'       =>  $this->client->getClientId("Two T Australia")
+            'ttau_clientid'     =>  $this->client->getClientId("Two T Australia")
         ]);
     }
 
@@ -246,7 +246,7 @@ class OrdersController extends Controller
        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
     }
 
-    public function importTTOrders()
+    public function importTTAUOrders()
     {
        $response = $this->woocommerce->getTTOrders();
        $feedback = "<h2><i class='far fa-check-circle'></i>TT Aust Orders Imported</h2>";
