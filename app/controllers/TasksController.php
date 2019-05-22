@@ -191,6 +191,18 @@ class TasksController extends Controller
         }
     }
 
+    public function teamTimbuktuTask()
+    {
+        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->shopify->getTeamTimbuktuOrders();
+        }
+    }
+
     public function nuchevTask()
     {
         if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
