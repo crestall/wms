@@ -89,6 +89,7 @@
                             })
                         });
                         $("button.deactivate").click(function(e){
+                            console.log('click');
                             swal({
                                 title: "Deactivate User?",
                                 icon: "warning",
