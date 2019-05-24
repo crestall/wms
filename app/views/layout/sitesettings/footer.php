@@ -90,7 +90,8 @@
                         });
                         $("a.deactivate").click(function(e){
                             //console.log('click');
-                            var thisuserid = $(this).data('userid');
+                            var $but = $(this);
+                            var thisuserid = $but.data('userid');
                             var data = {userid: thisuserid};
                             swal({
                                 title: "Deactivate User?",
@@ -102,7 +103,8 @@
                                     $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deactivating User...</h1></div>' });
                                     //console.log(data);
                                     $.post('/ajaxfunctions/deactivateUser', data, function(d){
-                                        $(this).closest('p').html('<a class="btn btn-success reactivate" data-userid="'+thisuserid+'>Reactivate User</a>');
+                                        $but.closest('p').html('<a class="btn btn-success reactivate" data-userid="'+thisuserid+'>Reactivate User</a>');
+                                        $.unblockUI();
                                     });
                                 }
                             });
@@ -121,6 +123,7 @@
                                     $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reactivating User...</h1></div>' });
                                     $.post('/ajaxfunctions/reactivateUser', data, function(d){
                                         $(this).closest('p').html('<a class="btn btn-danger deactivate" data-userid="'+thisuserid+'>Deactivate User</a>');
+                                        $.unblockUI();
                                     });
                                 }
                             });
