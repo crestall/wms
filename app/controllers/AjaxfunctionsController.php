@@ -15,6 +15,7 @@ class ajaxfunctionsController extends Controller
         parent::beforeAction();
         $actions = [
             'calcOriginPick',
+            'deactivateUser',
             'deleteClientLocation',
             'deletePackage',
             'fulfillOrder',
@@ -38,6 +39,7 @@ class ajaxfunctionsController extends Controller
             'checkBarcodes',
             'checkBoxBarcodes',
             'checkLocations',
+            'reactivateUser',
             'recordDispatch',
             'selectCourier',
             'updateLocation',
