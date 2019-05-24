@@ -27,7 +27,7 @@
                                     $.post('/ajaxfunctions/deactivateUser', data, function(d){
                                         $but.closest('p').html("<a class='btn btn-success reactivate' data-userid='"+thisuserid+"'>Reactivate User</a>");
                                         $.unblockUI();
-                                        actions.common['userActivation'];
+                                        actions.common.userActivation();
                                     });
                                 }
                             });
@@ -47,7 +47,7 @@
                                     $.post('/ajaxfunctions/reactivateUser', data, function(d){
                                         $(this).closest('p').html("<a class='btn btn-danger deactivate' data-userid='"+thisuserid+"'>Deactivate User</a>");
                                         $.unblockUI();
-                                        actions.common['userActivation'];
+                                        actions.common.userActivation();
                                     });
                                 }
                             });
@@ -132,7 +132,7 @@
                                 $(this).toggleClass('hiding');
                             })
                         });
-                        actions.common['userActivation'];
+                        actions.common.userActivation();
                     }
                 },
                 'locations' : {
