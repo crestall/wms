@@ -89,9 +89,9 @@
                             })
                         });
                         $("a.deactivate").click(function(e){
-                            console.log('click');
+                            //console.log('click');
                             var thisuserid = $(this).data('userid');
-                            var data = {userid: thisuserid}
+                            var data = {userid: thisuserid};
                             swal({
                                 title: "Deactivate User?",
                                 icon: "warning",
@@ -100,15 +100,17 @@
                             }).then( function(willDeactivate) {
                                 if (willDeactivate) {
                                     $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deactivating User...</h1></div>' });
-                                    console.log(data);
+                                    //console.log(data);
                                     $.post('/ajaxfunctions/deactivateUser', data, function(d){
-                                        $(this).closest('p').html('<a class="btn btn-success reactivate" data-userid="'+userid+'>Reactivate User</a>');
+                                        $(this).closest('p').html('<a class="btn btn-success reactivate" data-userid="'+thisuserid+'>Reactivate User</a>');
                                     });
                                 }
                             });
                         });
 
                         $("a.reactivate").click(function(e){
+                            var thisuserid = $(this).data('userid');
+                            var data = {userid: thisuserid};
                             swal({
                                 title: "Reactivate User?",
                                 icon: "warning",
@@ -117,10 +119,8 @@
                             }).then( function(willReactivate) {
                                 if (willReactivate) {
                                     $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reactivating User...</h1></div>' });
-                                    var thisuserid = $(this).data('userid');
-                                    var data = {userid: thisuserid}
                                     $.post('/ajaxfunctions/reactivateUser', data, function(d){
-                                        $(this).closest('p').html('<a class="btn btn-danger deactivate" data-userid="'+userid+'>Deactivate User</a>');
+                                        $(this).closest('p').html('<a class="btn btn-danger deactivate" data-userid="'+thisuserid+'>Deactivate User</a>');
                                     });
                                 }
                             });
