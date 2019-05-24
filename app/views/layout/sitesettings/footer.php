@@ -90,6 +90,7 @@
                         });
                         $("a.deactivate").click(function(e){
                             console.log('click');
+                                    var data = {userid: thisuserid}
                             swal({
                                 title: "Deactivate User?",
                                 icon: "warning",
@@ -99,7 +100,6 @@
                                 if (willDeactivate) {
                                     $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deactivating User...</h1></div>' });
                                     var thisuserid = $(this).data('userid');
-                                    var data = {userid: thisuserid}
                                     console.log(data);
                                     $.post('/ajaxfunctions/deactivateUser', data, function(d){
                                         $(this).closest('p').html('<a class="btn btn-success reactivate" data-userid="'+userid+'>Reactivate User</a>');
