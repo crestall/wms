@@ -49,6 +49,18 @@ class ajaxfunctionsController extends Controller
         $this->Security->requireAjax($actions);
     }
 
+    public function deactivateUser()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->user->deactivateUser($this->request->data['userid']);
+    }
+
+    public function reactivateUser()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->user->reactivateUser($this->request->data['userid']);
+    }
+
     public function calcOriginPick()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
