@@ -56,14 +56,14 @@ class User extends Model{
     public function deactivateUser($userId)
     {
         $db = Database::openConnection();
-        $db->updateDatabaseFields($this->table, 'active', 0, $userId);
+        $db->updateDatabaseField($this->table, 'active', 0, $userId);
         return true;
     }
 
     public function reactivateUser($userId)
     {
         $db = Database::openConnection();
-        $db->updateDatabaseFields($this->table, 'active', 1, $userId);
+        $db->updateDatabaseField($this->table, 'active', 1, $userId);
         return true;
     }
 
