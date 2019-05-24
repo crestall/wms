@@ -53,6 +53,20 @@ class User extends Model{
         return ($user['active'] > 0);
     }
 
+    public function deactivateUser($userId)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'active', 0, $userId);
+        return true;
+    }
+
+    public function reactivateUser($userId)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'active', 1, $userId);
+        return true;
+    }
+
     public function updateProfileInfo($data, $userId)
     {
         $db = Database::openConnection();
