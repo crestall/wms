@@ -8,6 +8,50 @@
                 common: {
                     init: function(){
 
+                    },
+                    userActivation: function(){
+                        $("a.deactivate").off('click').click(function(e){
+                            //console.log('click');
+                            var $but = $(this);
+                            var thisuserid = $but.data('userid');
+                            var data = {userid: thisuserid};
+                            swal({
+                                title: "Deactivate User?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willDeactivate) {
+                                if (willDeactivate) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deactivating User...</h1></div>' });
+                                    //console.log(data);
+                                    $.post('/ajaxfunctions/deactivateUser', data, function(d){
+                                        $but.closest('p').html("<a class='btn btn-success reactivate' data-userid='"+thisuserid+"'>Reactivate User</a>");
+                                        $.unblockUI();
+                                        actions.common['userActivation'];
+                                    });
+                                }
+                            });
+                        });
+
+                        $("a.reactivate").off('click').click(function(e){
+                            var thisuserid = $(this).data('userid');
+                            var data = {userid: thisuserid};
+                            swal({
+                                title: "Reactivate User?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willReactivate) {
+                                if (willReactivate) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reactivating User...</h1></div>' });
+                                    $.post('/ajaxfunctions/reactivateUser', data, function(d){
+                                        $(this).closest('p').html("<a class='btn btn-danger deactivate' data-userid='"+thisuserid+"'>Deactivate User</a>");
+                                        $.unblockUI();
+                                        actions.common['userActivation'];
+                                    });
+                                }
+                            });
+                        });
                     }
                 },
                 'packing-types': {
@@ -88,46 +132,7 @@
                                 $(this).toggleClass('hiding');
                             })
                         });
-                        $("a.deactivate").click(function(e){
-                            //console.log('click');
-                            var $but = $(this);
-                            var thisuserid = $but.data('userid');
-                            var data = {userid: thisuserid};
-                            swal({
-                                title: "Deactivate User?",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            }).then( function(willDeactivate) {
-                                if (willDeactivate) {
-                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deactivating User...</h1></div>' });
-                                    //console.log(data);
-                                    $.post('/ajaxfunctions/deactivateUser', data, function(d){
-                                        $but.closest('p').html("<a class='btn btn-success reactivate' data-userid='"+thisuserid+"'>Reactivate User</a>");
-                                        $.unblockUI();
-                                    });
-                                }
-                            });
-                        });
-
-                        $("a.reactivate").click(function(e){
-                            var thisuserid = $(this).data('userid');
-                            var data = {userid: thisuserid};
-                            swal({
-                                title: "Reactivate User?",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            }).then( function(willReactivate) {
-                                if (willReactivate) {
-                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reactivating User...</h1></div>' });
-                                    $.post('/ajaxfunctions/reactivateUser', data, function(d){
-                                        $(this).closest('p').html("<a class='btn btn-danger deactivate' data-userid='"+thisuserid+"'>Deactivate User</a>");
-                                        $.unblockUI();
-                                    });
-                                }
-                            });
-                        });
+                        actions.common['userActivation'];
                     }
                 },
                 'locations' : {
