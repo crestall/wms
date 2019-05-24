@@ -88,7 +88,7 @@
                                 $(this).toggleClass('hiding');
                             })
                         });
-                        $("button.deactivate").click(function(e){
+                        $("a.deactivate").click(function(e){
                             console.log('click');
                             swal({
                                 title: "Deactivate User?",
@@ -107,7 +107,7 @@
                             });
                         });
 
-                        $("button.reactivate").click(function(e){
+                        $("a.reactivate").click(function(e){
                             swal({
                                 title: "Reactivate User?",
                                 icon: "warning",
