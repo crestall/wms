@@ -53,7 +53,7 @@ class ajaxfunctionsController extends Controller
 
     public function deactivateUser()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
         $this->user->deactivateUser($this->request->data['userid']);
     }
 
