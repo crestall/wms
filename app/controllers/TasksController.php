@@ -227,6 +227,18 @@ class TasksController extends Controller
         }
     }
 
+    public function ttTask()
+    {
+        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->woocommerce->getTTOrders();
+        }
+    }
+
     public function figureEightTask()
     {
         if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')

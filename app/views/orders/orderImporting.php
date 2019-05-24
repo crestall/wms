@@ -17,7 +17,7 @@
             <p><a class="btn btn-primary" href="#noa">Noa Sleep</a></p>
         </div>
         <div class="col-md-2">
-            <p><a class="btn btn-primary" href="#ttau">Twin Towers Australia</a></p>
+            <p><a class="btn btn-primary" href="#tt_au">Twin Towers Australia</a></p>
         </div>
     </div>
     <div class="row">
@@ -63,13 +63,11 @@
             </div>
         </div>
     </div>
-
-
     <div class="bs-callout bs-callout-primary bs-callout-more">
-        <a name="tt_aust"></a>
+        <a name="tt_au"></a>
         <div class="row">
             <div class="col-md-12">
-                <h2>TT Aust Orders</h2>
+                <h2>TT Australia Orders</h2>
             </div>
         </div>
         <div class="row">
@@ -79,58 +77,12 @@
             </div>
         </div>
         <div class="row">
-            <form id="tt_single_import" action="/orders/importTTOrder" method="post">
+            <form id="ttau_single_import" action="/orders/importTTOrder" method="post">
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">WooCommerce Order ID</label>
                     <div class="col-md-4">
                         <input type="text" class="form-control required" name="ttwoocommerce_id" id="ttwoocommerce_id" value="<?php echo Form::value('ttwoocommerce_id');?>" />
                         <?php echo Form::displayError('ttwoocommerce_id');?>
-                    </div>
-                </div>
-                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                <input type="hidden" name="client_id" value="<?php echo $ttau_clientid; ?>" />
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">&nbsp;</label>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary">Import It</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <hr/>
-        <div class="row">
-            <div class="col-md-3">&nbsp;</div>
-            <div class="col-md-4">
-                <h3>Run Full Import</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">&nbsp;</div>
-            <div class="col-md-4">
-                <p><button class="btn btn-primary" id="ttau_full_import" data-function="importTTAUOrders">Run It</button></p>
-            </div>
-        </div>
-    </div>
-    <div class="bs-callout bs-callout-primary bs-callout-more">
-        <a name="ttau"></a>
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Twin Towers Orders</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">&nbsp;</div>
-            <div class="col-md-4">
-                <h3>Import single Order</h3>
-            </div>
-        </div>
-        <div class="row">
-            <form id="ttau_single_import" action="/orders/importTTAUOrder" method="post">
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">WooCommerce Order ID</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control required" name="ttauwoocommerce_id" id="ttauwoocommerce_id" value="<?php echo Form::value('ttauwoocommerce_id');?>" />
-                        <?php echo Form::displayError('ttauwoocommerce_id');?>
                     </div>
                 </div>
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
