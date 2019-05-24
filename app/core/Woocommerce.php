@@ -68,7 +68,7 @@ class Woocommerce{
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
             {
-                Email::sendCronError($e, "Big Bottle");
+                Email::sendCronError($e, "Twin Towers Australia");
                 return;
             }
             else
