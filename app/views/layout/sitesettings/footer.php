@@ -34,7 +34,8 @@
                         });
 
                         $("a.reactivate").off('click').click(function(e){
-                            var thisuserid = $(this).data('userid');
+                            var $but = $(this);
+                            var thisuserid = $but.data('userid');
                             var data = {userid: thisuserid};
                             swal({
                                 title: "Reactivate User?",
