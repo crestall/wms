@@ -652,6 +652,7 @@
 		$mail->MsgHTML($body);
 
 		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
+        $mail->AddBCC("mark.solly@3plplus.com.au", "Mark Solly");
 
         if($client_details['id'] == 55)
         {
