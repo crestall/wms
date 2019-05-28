@@ -354,6 +354,8 @@ class FormController extends Controller {
                 $vals['cartons'] = $cartons;
             if($this->dataSubbed($pallets))
                 $vals['pallets'] = $pallets;
+            if($this->dataSubbed($courier_charge))
+                $vals['courier_charge'] = $courier_charge;
             if(isset($address2))
                 $vals['address_2'] = $address2;
             $this->recordedpickup->recordData($vals);
