@@ -206,65 +206,40 @@ class Packaging{
                 $return[] = $array;
             }
         }
-        elseif($od['client_id'] == 6)   //Big Bottle
-        {
-            $total_bottles = 0;
-            $total_small_bottels = 0;
-            $ar_bottles = 0;
-            $weight = 0;
-            foreach($items as $i)
-            {
-                if( in_array($i['id'], Config::get('BB_ADRANGE_IDS') ) )
-                {
-                    $weight += $i['weight'] * $i['qty'];
-                    $ar_bottles += $i['qty'];
-                }
-                elseif( in_array($i['id'], Config::get('BB_WEIGHTED_IDS') ))
-                {
-                    $weight += $i['weight'];
-                }
-                elseif( in_array($i['id'], Config::get('BB_1.5L_IDS') ))
-                {
-                    $total_small_bottels += $i['qty'];
-                    $total_bottles += $i['qty'];
-                }
-                elseif( stripos($i['name'], 'replacement cap') !== false )
-                {
-                    $weight += $i['weight'];
-                }
-                else
-                {
-                    $total_bottles += $i['qty'];
-                }
-                $array['item_reference'] = $i['item_id'];
-            }
-            list($w, $d, $h) = Config::get('BBBOX_DIMENSIONS')[$total_bottles];
-            //subtract weight diff//
-            $bottle_weight = Config::get('BBBOX_WEIGHTS')[$total_bottles];
-            $bottle_weight = $bottle_weight - ($total_small_bottels * 0.050);
-            $array['width'] = $w;
-            $array['height'] = $h;
-            $array['depth'] = $d;
-            $array['weight'] = $bottle_weight + $weight;
-            $array['pieces'] = 1;
-            $array['type_code'] = 'CTN';
-            $return[] = $array;
-        }
         elseif($od['client_id'] == 69)   //Team Timbuktu
         {
             $weight = 0;
+            $item_count = 0;
             foreach($items as $i)
             {
                 $weight += $i['weight'];
+                $item_count += $i['qty'];
             }
-            $array['width'] = 25;
-            $array['height'] = 2;
-            $array['depth'] = 35;
-            $array['weight'] = $weight;
-            $array['pieces'] = 1;
-            $array['type_code'] = 'CTN';
-            $array['item_reference'] = $i['item_id'];
-            $return[] = $array;
+
+            $c = 1;
+            while($c <= $item_count)
+            {
+                if($c % 2 == 0)
+                {
+                    $array['weight'] = 0.6;
+                    $return[] = $array;
+                }
+                else
+                {
+                    $array['width'] = 25;
+                    $array['height'] = 5;
+                    $array['depth'] = 35;
+                    $array['weight'] = 0.3;
+                    $array['pieces'] = 1;
+                    $array['type_code'] = 'CTN';
+                    $array['item_reference'] = $i['item_id'];
+                }
+                ++$c;
+            }
+            if($c % 2 == 0)
+            {
+                $return[] = $array;
+            }
         }
         //item specific packages
         else
