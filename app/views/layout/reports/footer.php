@@ -238,6 +238,16 @@
                                 window.location.href = url;
                             }
                         });
+                        datePicker.betweenDates();
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var client_id = $('#client_id').val();
+                            var url = '/reports/pickups-report/client='+client_id+"/from="+from+"/to="+to;
+                            window.location.href = url;
+                        });
                         /*
                         dataTable.init($('table#client_dispatch_table'), {
                             "columnDefs": [
@@ -246,16 +256,6 @@
                             "order": [],
                             fixedHeader: true
                         } );
-                        datePicker.betweenDates();
-                        $('button#change_dates').click(function(e){
-                            e.preventDefault();
-                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
-                            var from = $('#date_from_value').val();
-                            var to = $('#date_to_value').val();
-                            var client_id = $('#client_id').val();
-                            var url = '/reports/dispatch-report/client='+client_id+"/from="+from+"/to="+to;
-                            window.location.href = url;
-                        });
                         $('button#csv_download').click(function(e) {
                             var data = {
                                 from: $('#date_from_value').val(),
