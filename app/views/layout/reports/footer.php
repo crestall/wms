@@ -221,6 +221,83 @@
                         });
                     }
                 },
+                'pickups-report': {
+                    init: function()
+                    {
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                var from = $('#date_from_value').val();
+                                var to = $('#date_to_value').val();
+                                var client_id = $(this).val();
+                                var url = '/reports/pickups-report/client='+client_id;
+                                if($('#date_from_value').val())
+                                    url += "/from="+$('#date_from_value').val();
+                                if($('#date_to_value').val())
+                                    url += "/from="+$('#date_to_value').val();
+                                window.location.href = url;
+                            }
+                        });
+                        /*
+                        dataTable.init($('table#client_dispatch_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [0,2,5,10,11,12] }
+                            ],
+                            "order": [],
+                            fixedHeader: true
+                        } );
+                        datePicker.betweenDates();
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var client_id = $('#client_id').val();
+                            var url = '/reports/dispatch-report/client='+client_id+"/from="+from+"/to="+to;
+                            window.location.href = url;
+                        });
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/dispatchReportCSV";
+                            fileDownload.download(url, data);
+                        });
+                        $('button#comment_update').click(function(e) {
+                            $('#block_message')
+                                .css({height: 160, paddingTop:40})
+                                .html("<h1>Updating Comments...</h1>");
+                            $.blockUI({ message: $('#block_message') });
+                            var updates = {};
+                            $('textarea.3pl_comments').each(function(index, element)
+                            {
+                                if($(this).val() != "")
+                                {
+                                    var order_id = $(this).data('orderid');
+                                    var comment = $(this).val();
+                                    console.log('order_id: '+order_id);
+                                    updates[order_id] = comment;
+                                }
+                            });
+                             $.ajax({
+                                url: '/ajaxfunctions/updateOrderComments',
+                                method: 'post',
+                                data: {updates: updates},
+                                success: function(d){
+                                    $('#block_message').html("<h1>All comments updated</h1>");
+                                    setTimeout(function () {
+                                       $.unblockUI();
+                                    }, 2000);
+                                }
+                            });
+                            return false;
+                        });
+                        */
+                    }
+                },
                 'client-dispatch-report': {
                     init: function()
                     {

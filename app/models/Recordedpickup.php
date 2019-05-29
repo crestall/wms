@@ -49,17 +49,23 @@ class Recordedpickup extends Model{
         return $ret_string;
     }
 
-    public function getPickups($client_id = 0)
+    public function getPickups($from, $to, $client_id)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM {$this->table} WHERE date_completed = 0";
-        if($client_id > 0)
-        {
-            $q .= " AND client_id = $client_id";
-        }
-        $q .= " ORDER BY client_id, date ASC";
-        //die($q);
-        return ($db->queryData($q));
+
+        $query = "
+        SELECT
+            *
+        FROM
+            {$this->table}
+        WHERE
+            client_id = :client_id AND date_recorded >= :from AND date_recorded <= :to ORDER BY date_recorded DESC";
+        $array = array(
+            'client_id' => 	$client_id,
+            'to'        =>  $to,
+            'from'      =>  $from
+        );
+        return $db->queryData($query, $array);
     }
 
     public function updatePickupValues($values, $id)
