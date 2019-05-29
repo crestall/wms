@@ -9,7 +9,7 @@
     </div>
     <?php if($client_id > 0):?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
-        <?php if(count($client_orders)):?>
+        <?php if(count($pickups)):?>
             <?php echo "<pre>",print_r($pickups),"</pre>"; die();?>
 
         <?php else:?>
