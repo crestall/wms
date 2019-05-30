@@ -280,12 +280,13 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
                             <div class="form-group row">
+                                <label class="col-md-2 col-form-label">&nbsp;</label>
                                 <div class="form-check">
-                                    <label class="form-check-label col-md-2" for="pallet">Pallet</label>
-                                    <div class="col-md-4 checkbox checkbox-default">
+                                    <div class="col-md-2 checkbox checkbox-default">
                                         <input class="form-check-input styled" type="checkbox" id="pallet" name="pallet" <?php if(!empty(Form::value('pallet'))) echo 'checked';?> />
                                         <label for="pallet"></label>
                                     </div>
+                                    <label class="form-check-label col-md-2" for="pallet">Pallet</label>
                                 </div>
                                 <label class="col-md-2 col-form-label">&nbsp;</label>
                                 <div class="col-md-4">
