@@ -45,7 +45,7 @@ class Shopify{
         $collected_orders = array();
         $params = array(
             'status'    => 'open',
-            'fields'    => 'id,created_at,email,note,total_weight,phone,order_number,line_items,shipping_address'
+            'fields'    => 'id,created_at,email,note,total_weight,phone,order_number,line_items,shipping_address, shipping_lines'
         );
         try {
           $collected_orders = $this->shopify->Order->get($params);
@@ -196,7 +196,7 @@ class Shopify{
                     'import_error'          => false,
                     'import_error_string'   => ''
                 );
-                //if(strtolower($o['shipping_lines'][0]['method_title']) == "express shipping") $order['eparcel_express'] = 1;
+                if(strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
                 if( !filter_var($o['email'], FILTER_VALIDATE_EMAIL) )
                 {
                     $order['errors'] = 1;

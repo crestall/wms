@@ -435,7 +435,8 @@ return array(
             '3pl-dispatch-report'   =>  false,
             '3pl-stock-movement-report' =>  false,
             'empty-bay-report'      => true,
-            //'client-daily-reports'  => true
+            //'client-daily-reports'  => true,
+            'pickups-report'    => true
 		),
         'sales-reps'        =>  array(
             'view-reps'                 =>  true,
