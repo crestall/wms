@@ -1766,7 +1766,7 @@
                 },
                 'order-importing': {
                     init:function(){
-                        $("button#bb_full_import, button#noa_full_import, button#nuchev_full_import, button#ttau_full_import").click(function(e){
+                        $("button#bb_full_import, button#noa_full_import, button#nuchev_full_import, button#ttau_full_import, button#tt_full_import").click(function(e){
                             var action = $(this).data('function');
                             swal({
                                 title: "Really run a full import?",
