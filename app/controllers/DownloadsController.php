@@ -269,7 +269,7 @@ class DownloadsController extends Controller {
                 foreach($parcels as $i)
                 {
                     $weight = ceil($i['pieces'] * $i['weight']);
-                    $cubic = round($i['width'] * $i['depth'] *$i['height'] / 1000000, 3);
+                    $cubic = round($i['width'] * $i['depth'] * $i['height'] * $i['pieces'] / 1000000, 3);
                     $row = array(
                         "",
                         $name,

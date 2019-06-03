@@ -280,7 +280,15 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
                             <div class="form-group row">
-                                <label class="col-md-8 col-form-label">&nbsp;</label>
+                                <label class="col-md-2 col-form-label">&nbsp;</label>
+                                <div class="form-check">
+                                    <div class="col-md-1 checkbox checkbox-default">
+                                        <input class="form-check-input styled" type="checkbox" id="pallet" name="pallet" <?php if(!empty(Form::value('pallet'))) echo 'checked';?> />
+                                        <label for="pallet"></label>
+                                    </div>
+                                    <label class="form-check-label col-md-3" for="pallet">Pallet</label>
+                                </div>
+                                <label class="col-md-2 col-form-label">&nbsp;</label>
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary">Add Package</button>
                                 </div>
@@ -359,7 +367,7 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                         </div>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <input type="hidden" name="truck_id" id="truck_id" value="<?php echo $truck_id;?>" />
-                        <input type="hidden" name="local_id" id="local_id" value="<?php echo $local_id;?>" /> 
+                        <input type="hidden" name="local_id" id="local_id" value="<?php echo $local_id;?>" />
                         <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">&nbsp;</label>
