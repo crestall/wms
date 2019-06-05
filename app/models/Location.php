@@ -144,11 +144,11 @@ class Location extends Model{
     public function addToLocation($data)
     {
         $db = Database::openConnection();
-        echo "<pre>",print_r($data),"</pre>"; die();
+        //echo "<pre>",print_r($data),"</pre>"; die();
         //add the stock
         if($updater = $db->queryValue('items_locations', array('item_id' => $data['add_product_id'], 'location_id' => $data['add_to_location'])))
         {
-            if(isset($data['under_qc']))
+            if(isset($data['qc_stock']))
             {
                 $db->query("UPDATE items_locations SET qty = qty + {$data['qty_add']}, qc_count = qc_count + {$data['qty_add']} WHERE id = $updater");
             }
