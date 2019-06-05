@@ -208,7 +208,7 @@ class Item extends Model{
                 'location_id'   =>  $location_id,
                 'qty'           =>  $qty
             );
-            $db->insertQuery('items_locations', $vals); 
+            $db->insertQuery('items_locations', $vals);
         }
     }
 
@@ -1192,7 +1192,7 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         return $db->queryRow("
-            SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated
+            SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated, b.order_id
                 FROM
                 (
                     SELECT
@@ -1205,7 +1205,7 @@ class Item extends Model{
                 LEFT JOIN
                 (
                     SELECT
-                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id, oi.order_id
                     FROM
                         $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
