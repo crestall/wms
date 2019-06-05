@@ -29,6 +29,15 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <div class="form-check">
+                        <label class="form-check-label col-md-5" for="qc_stock">Move Allocated Stock</label>
+                        <div class="col-md-7 checkbox checkbox-default">
+                            <input class="form-check-input styled" type="checkbox" id="allocated_stock" name="allocated_stock" <?php if(!empty(Form::value('allocated_stock'))) echo 'checked';?> />
+                            <label for="allocated_stock"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Move From Location</label>
                     <div class="col-md-7">
                         <select id="move_from_location" name="move_from_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectItemInLocations($product_id, Form::value('move_from_location'));?></select>
