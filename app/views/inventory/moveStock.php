@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="form-check">
-                        <label class="form-check-label col-md-5" for="qc_stock">Move Allocated Stock</label>
+                        <label class="form-check-label col-md-5" for="allocated_stock">Move Allocated Stock</label>
                         <div class="col-md-7 checkbox checkbox-default">
                             <input class="form-check-input styled" type="checkbox" id="allocated_stock" name="allocated_stock" <?php if(!empty(Form::value('allocated_stock'))) echo 'checked';?> />
                             <label for="allocated_stock"></label>
