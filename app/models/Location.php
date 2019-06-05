@@ -111,10 +111,11 @@ class Location extends Model{
     public function subtractFromLocation($data)
     {
         $db = Database::openConnection();
-        echo "<pre>",print_r($data),"</pre>"; //die();
+        //echo "<pre>",print_r($data),"</pre>"; //die();
         //subtract the stock
         $updater = $db->queryValue('items_locations', array('item_id' => $data['subtract_product_id'], 'location_id' => $data['subtract_from_location']));
-        die('updatr :'.$updater);
+        //die('updatr :'.$updater);
+        return;
         if(isset($data['qc_stock']))
         {
             $db->query("UPDATE items_locations SET qty = qty - {$data['qty_subtract']}, qc_count = qc_count - {$data['qty_subtract']} WHERE id = $updater");
@@ -143,7 +144,7 @@ class Location extends Model{
     public function addToLocation($data)
     {
         $db = Database::openConnection();
-        //echo "<pre>",print_r($data),"</pre>"; die();
+        echo "<pre>",print_r($data),"</pre>"; die();
         //add the stock
         if($updater = $db->queryValue('items_locations', array('item_id' => $data['add_product_id'], 'location_id' => $data['add_to_location'])))
         {
