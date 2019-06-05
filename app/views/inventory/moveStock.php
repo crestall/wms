@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
+                <!--div class="form-group row">
                     <div class="form-check">
                         <label class="form-check-label col-md-5" for="allocated_stock">Move Allocated Stock</label>
                         <div class="col-md-7 checkbox checkbox-default">
@@ -36,7 +36,7 @@
                             <label for="allocated_stock"></label>
                         </div>
                     </div>
-                </div>
+                </div-->
                 <div class="form-group row">
                     <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Move From Location</label>
                     <div class="col-md-7">
