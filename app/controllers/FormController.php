@@ -1286,7 +1286,7 @@ class FormController extends Controller {
 
     public function procStockMovement()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1309,7 +1309,7 @@ class FormController extends Controller {
             Form::setError('move_from_location', 'Please select a location');
         }
         $l_details = $this->item->getLocationForItem($move_product_id, $move_from_location);
-        echo "<pre>",print_r($l_details),"</pre>"; die();
+        //echo "<pre>",print_r($l_details),"</pre>"; die();
         if(isset($qc_stock))
         {
             if($l_details['qc_count'] < $qty_move)
@@ -1317,7 +1317,13 @@ class FormController extends Controller {
                 Form::setError('qty_move', 'You cannot move more quality control stock than there is available');
             }
         }
-        //elseif(isset)
+        elseif(isset($allocated_stock))
+        {
+            if($l_details['allocated'] < $qty_move)
+            {
+                Form::setError('qty_move', 'You cannot move more allocated stock than there is');
+            }
+        }
         else
         {
             if( ($l_details['qty'] - $l_details['qc_count'] - $l_details['allocated']) < $qty_move )
