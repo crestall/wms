@@ -47,7 +47,7 @@ foreach($orders_ids as $id):
             <tr><td>Deliver To</td><td><?php echo $ship_to;?></td></tr>
             <tr><td>Delivery address</td><td><?php echo $delivery_address;?></td></tr>
         </table>
-        <table class='pickslip'>
+        <table class='pickslip' width='100%'>
         <tr>
             <th>Item</th>
             <th>SKU</th>
@@ -68,7 +68,7 @@ foreach($orders_ids as $id):
             }
             else
             {
-                $summary_pick[$i['location_id']][$i['id']]['qty'] = $i['qty'];     
+                $summary_pick[$i['location_id']][$i['id']]['qty'] = $i['qty'];
                 $summary_pick[$i['location_id']][$i['id']]['item_name'] = $i['name']." (".$i['sku'].")";
                 $summary_pick[$i['location_id']]['location'] = $location;
             }
