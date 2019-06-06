@@ -49,7 +49,7 @@ class Stockmovementlabels extends Model{
     {
         $db = Database::openConnection();
         $db->insertQuery($this->table, array(
-            'name'  => $name
+            'name'  => $label
         ));
     }
 }
