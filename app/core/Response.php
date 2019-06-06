@@ -233,16 +233,27 @@ class Response {
         $out = fopen("php://output", 'w');
         if($this->header_row)
         {
-            fputcsv($out, $cols, ',', '"');
+            //fputcsv($out, $cols, ',', '"');
+            $this->fputcsv_eol($out,$cols,',','"','\r\n');
         }
 
         foreach($rows as $row)
         {
-            fputcsv($out, array_values($row), ',', '"');
+            //fputcsv($out, array_values($row), ',', '"');
+            $this->fputcsv_eol($out,array_values($row),',','"','\r\n');
         }
 
         fclose($out);
         return $this;
+    }
+
+
+    private function fputcsv_eol($handle, $array, $delimiter = ',', $enclosure = '"', $eol = "\n") {
+        $return = fputcsv($handle, $array, $delimiter, $enclosure);
+        if($return !== FALSE && "\n" != $eol && 0 === fseek($handle, -1, SEEK_CUR)) {
+            fwrite($handle, $eol);
+        }
+        return $return;
     }
 
     /**
