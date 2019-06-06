@@ -202,7 +202,13 @@
                                     //actions.update.click(this);
                                 });
                             }
-                         } );
+                        } );
+                        $("form#add-movementreason").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Reason...</h2></div>' });
+                            }
+                        });
                     }
                 }
             }
