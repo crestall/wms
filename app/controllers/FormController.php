@@ -115,7 +115,7 @@ class FormController extends Controller {
 
     public function procMovementreasonAdd()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -140,6 +140,7 @@ class FormController extends Controller {
         }
         else
         {
+            $this->stockmovementlabels->addLabel($name);
             Session::set('feedback', "That reason has been added");
         }
         return $this->redirector->to(PUBLIC_ROOT."site-settings/stock-movement-reasons");

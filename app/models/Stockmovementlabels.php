@@ -44,5 +44,13 @@ class Stockmovementlabels extends Model{
         }
         return $ret_string;
     }
+
+    public function addLabel($label)
+    {
+        $db = Database::openConnection();
+        $db->insertQuery($this->table, array(
+            'name'  => $name
+        ));
+    }
 }
 ?>
