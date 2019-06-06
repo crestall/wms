@@ -231,9 +231,13 @@ class Response {
         $rows = $this->csv["rows"];
 
         $out = fopen("php://output", 'w');
+        if($this->header_row)
+        {
+            fputcsv($out, $cols, ',', '"');
+        }
 
-        fputcsv($out, $cols, ',', '"');
-        foreach($rows as $row) {
+        foreach($rows as $row)
+        {
             fputcsv($out, array_values($row), ',', '"');
         }
 
@@ -329,9 +333,10 @@ class Response {
      * @return Response
      * @see    core/Response/writeCSV()
      */
-    public function csv(array $csvData, array $file){
+    public function csv(array $csvData, array $file, $header_row = false){
 
         $this->csv = $csvData;
+        $this->header_row = $header_row;
         $this->setStatusCode(200);
 
         $basename = $file["filename"] . ".csv";
