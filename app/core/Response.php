@@ -248,12 +248,11 @@ class Response {
     }
 
 
-    private function fputcsv_eol($handle, $array, $delimiter = ',', $enclosure = '"', $eol = "\n") {
-        $return = fputcsv($handle, $array, $delimiter, $enclosure);
-        if($return !== FALSE && "\n" != $eol && 0 === fseek($handle, -1, SEEK_CUR)) {
-            fwrite($handle, $eol);
-        }
-        return $return;
+    private function fputcsv_eol($fp, $array, $delimiter = ',', $enclosure = '"', $eol = "\n") {
+      fputcsv($fp, $array, $delimiter, $enclosure);
+      if("\n" != $eol && 0 === fseek($fp, -1, SEEK_CUR)) {
+        fwrite($fp, $eol);
+      }
     }
 
     /**
