@@ -125,6 +125,24 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if(!$this->dataSubbed($name))
+        {
+            Form::setError('name', 'The reason name is required');
+        }
+        elseif($this->stockmovementlabels->getLabelId($name) )
+        {
+            Form::setError('name', 'This reason is already in use. Reason names need to be unique');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            Session::set('feedback', "That reason has been added");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."site-settings/stock-movement-reasons");
     }
 
     public function procOrderCsvUpload()
