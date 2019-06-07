@@ -514,7 +514,8 @@
                 'transfer-location': {
                     init: function(){
                         $('select#move_from_location').change(function(e){
-                            $('div#move_to_holder').slideDown();
+                            var loc_id = $(this).val();
+                            $('div#move_to_holder').html('<p>'+loc_id+'</p>').slideDown();
                         });
                     }
                 }
