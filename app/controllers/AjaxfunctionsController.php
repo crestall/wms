@@ -25,6 +25,7 @@ class ajaxfunctionsController extends Controller
             'getASummary',
             'getItemByBarcode',
             'getItems',
+            'getItemsInLocation',
             'getOrderByConID',
             'getScannedItem',
             'getSuburbs',
@@ -55,6 +56,12 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $this->user->deactivateUser($this->request->data['userid']);
+    }
+
+    public function getItemsInLocation()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
+
     }
 
     public function reactivateUser()

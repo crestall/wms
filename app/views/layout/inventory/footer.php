@@ -515,7 +515,14 @@
                     init: function(){
                         $('select#move_from_location').change(function(e){
                             var loc_id = $(this).val();
-                            $('div#move_to_holder').html('<p>'+loc_id+'</p>').slideDown();
+                            var url = "/ajax-functions/get-items-in-location";
+                            var data = {loc_id:loc_id};
+                            $('div#move_to_holder')
+                                .slideDown()
+                                .html("<div class='row'><div class='col-md-12'><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Finding Items...</p></div></div>")
+                                .load(url, data, function(d){
+
+                                });
                         });
                     }
                 }
