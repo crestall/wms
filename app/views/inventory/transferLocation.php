@@ -12,6 +12,11 @@
                         <?php echo Form::displayError('move_from_location');?>
                     </div>
                 </div>
+                <div id="move_to_holder" styel="display:none">
+                    <div id="content_holder">
+                        
+                    </div>
+                </div>
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>

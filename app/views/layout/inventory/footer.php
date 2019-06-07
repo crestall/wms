@@ -510,6 +510,13 @@
                         });
                     }
 
+                },
+                'transfer-location': {
+                    init: function(){
+                        $('select#move_from_location').change(function(e){
+                            $('div#move_to_holder').slideDown();
+                        });
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);
