@@ -234,13 +234,13 @@ class Response {
         if($this->header_row)
         {
             //fputcsv($out, $cols, ',', '"');
-            $this->fputcsv_eol($out,$cols,',','"',PHP_EOL);
+            $this->fputcsv_eol($out,$cols,',','"',"\r\n");
         }
 
         foreach($rows as $row)
         {
             //fputcsv($out, array_values($row), ',', '"');
-            $this->fputcsv_eol($out,array_values($row),',','"',PHP_EOL);
+            $this->fputcsv_eol($out,array_values($row),',','"',"\r\n");
         }
 
         fclose($out);
