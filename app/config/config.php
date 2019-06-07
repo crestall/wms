@@ -403,7 +403,8 @@ return array(
             'goods-in'               =>  true,
             'add-subtract-stock'    =>  false,
             'quality-control'       =>  false,
-            //'replenish-pickface'    => true
+            //'replenish-pickface'    => true,
+            'transfer-location' => true
         ),
 		'reports'			=> array(
           	//'product-movement-summary'	=>	true,
