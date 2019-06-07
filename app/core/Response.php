@@ -247,7 +247,11 @@ class Response {
         return $this;
     }
 
-
+    /**
+     * adjustment for default php fputcsv function to handle microsoft line endings
+     *
+     *
+     */
     private function fputcsv_eol($fp, $fields, $delimiter = ',', $enclosure = '"', $eol = "\n") {
         $str = '';
         $escape_char = '\\';
@@ -381,7 +385,7 @@ class Response {
      * @return Response
      * @see    core/Response/writeCSV()
      */
-    public function csv(array $csvData, array $file, $header_row = false){
+    public function csv(array $csvData, array $file, $header_row = true){
 
         $this->csv = $csvData;
         $this->header_row = $header_row;
