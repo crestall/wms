@@ -16,7 +16,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary" id="form_submitter">Transfer</button>
+                        <button type="submit" class="btn btn-primary" id="form_submitter" disabled>Transfer</button>
                     </div>
                 </div>
             </form>
