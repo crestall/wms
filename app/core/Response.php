@@ -230,15 +230,67 @@ class Response {
         $cols = $this->csv["cols"];
         $rows = $this->csv["rows"];
 
-        $out = fopen("php://output", 'w');
+        $out = fopen('php://output', 'w');
+        if($this->header_row)
+        {
+            //fputcsv($out, $cols, ',', '"');
+            $this->fputcsv_eol($out,$cols,',','"',"\r\n");
+        }
 
-        fputcsv($out, $cols, ',', '"');
-        foreach($rows as $row) {
-            fputcsv($out, array_values($row), ',', '"');
+        foreach($rows as $row)
+        {
+            //fputcsv($out, array_values($row), ',', '"');
+            $this->fputcsv_eol($out,array_values($row),',','"',"\r\n");
         }
 
         fclose($out);
         return $this;
+    }
+
+
+    private function fputcsv_eol($fp, $fields, $delimiter = ',', $enclosure = '"', $eol = "\n") {
+        $str = '';
+        $escape_char = '\\';
+        foreach ($fields as $value)
+        {
+            if (    strpos($value, $delimiter) !== false ||
+                    strpos($value, $enclosure) !== false ||
+                    strpos($value, "\n") !== false ||
+                    strpos($value, "\r") !== false ||
+                    strpos($value, "\t") !== false ||
+                    strpos($value, ' ') !== false
+                )
+            {
+                $str2 = $enclosure;
+                $escaped = 0;
+                $len = strlen($value);
+                for ($i=0;$i<$len;$i++)
+                {
+                    if ($value[$i] == $escape_char)
+                    {
+                        $escaped = 1;
+                    }
+                    else if (!$escaped && $value[$i] == $enclosure)
+                    {
+                        $str2 .= $enclosure;
+                    }
+                    else
+                    {
+                        $escaped = 0;
+                    }
+                    $str2 .= $value[$i];
+                }
+                $str2 .= $enclosure;
+                $str .= $str2.$delimiter;
+            }
+            else
+            {
+                $str .= $value.$delimiter;
+            }
+        }
+        $str = substr($str,0,-1);
+        $str .= $eol;
+        return fwrite($fp, $str);
     }
 
     /**
@@ -329,9 +381,10 @@ class Response {
      * @return Response
      * @see    core/Response/writeCSV()
      */
-    public function csv(array $csvData, array $file){
+    public function csv(array $csvData, array $file, $header_row = false){
 
         $this->csv = $csvData;
+        $this->header_row = $header_row;
         $this->setStatusCode(200);
 
         $basename = $file["filename"] . ".csv";
