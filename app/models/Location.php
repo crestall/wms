@@ -455,6 +455,39 @@ class Location extends Model{
         return $ret_string;
     }
 
+    public function getSelectNonEmptyUnallocatedLocations($selected = false)
+    {
+       $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $q = "  SELECT
+                    id, location
+                FROM
+                    locations
+                WHERE
+                    id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed IS NULL)
+                    AND id IN (SELECT location_id FROM items_locations)
+                    AND (selectable = 1)
+                ORDER BY location";
+        $locations = $db->queryData($q);
+        foreach($locations as $l)
+        {
+            $label = $l['location'];
+            $value = $l['id'];
+            $c = $db->queryRow("SELECT count(*) AS count FROM orders_items oi JOIN orders o ON oi.order_id = o.id WHERE o.status_id != 4 AND oi.location_id = $value");
+            //echo "SELECT count(*) AS count FROM orders_items oi JOIN orders o ON oi.order_id = o.id WHERE o.status_id != 4 AND oi.location_id = $value";
+            if($c['count'] == 0)
+            {
+                if($selected)
+                {
+                    $check = ($value == $selected)? "selected='selected'" : "";
+                }
+                $ret_string .= "<option $check value='$value'>$label</option>";
+            }
+        }
+        return $ret_string;
+    }
+
     public function isEmptyLocation($id)
     {
         if($id == 0)
