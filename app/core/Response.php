@@ -230,7 +230,7 @@ class Response {
         $cols = $this->csv["cols"];
         $rows = $this->csv["rows"];
 
-        $out = fopen('php://temp/maxmemory:'. (5*1024*1024), 'r+');
+        $out = fopen('php://output', 'w');
         if($this->header_row)
         {
             //fputcsv($out, $cols, ',', '"');
