@@ -290,7 +290,7 @@ class Response {
         }
         $str = substr($str,0,-1);
         $str .= $eol;
-        return fwrite($handle, $str);
+        return fwrite($fp, $str);
     }
 
     /**
