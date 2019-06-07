@@ -14,6 +14,14 @@ class inventoryController extends Controller
         parent::beforeAction();
     }
 
+    public function transferLocation()
+    {
+        Config::setJsConfig('curPage', "transfer-location");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/transferLocation.php',[
+            'page_title'    =>  'Transfer a Location', 
+        ]);
+    }
+
     public function registerNewStock()
     {
         $client_id = Session::getUserClientId();
