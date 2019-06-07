@@ -475,6 +475,7 @@ class Location extends Model{
             $label = $l['location'];
             $value = $l['id'];
             $count = $db->queryData("SELECT count(*) AS count FROM orders_items oi JOIN orders o ON oi.order_id = o.id WHERE o.status_id != 4 AND oi.location_id = $value");
+            echo "SELECT count(*) AS count FROM orders_items oi JOIN orders o ON oi.order_id = o.id WHERE o.status_id != 4 AND oi.location_id = $value";
             if($count == 0)
             {
                 if($selected)
