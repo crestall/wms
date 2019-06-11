@@ -52,6 +52,7 @@
                     <p><a class="btn btn-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
                 <?php endif;?>
                 <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
+                <p><a class="btn btn-primary add-packages"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p> 
             </div>
         </div>
     <?php elseif($user_role == "warehouse"):?>
