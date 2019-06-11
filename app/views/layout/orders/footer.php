@@ -1290,7 +1290,7 @@
                                 $('input.select').each(function(i,e){
                                     var order_id = $(this).data('orderid');
                                     console.log('order_id: '+ order_id);
-                                    if($(this).prop('checked') && ( $('select#courier_'+order_id).val() == 0) )
+                                    if($(this).prop('checked') && ( $('select#courier_'+order_id).val() == -1) )
                                     {
                                         ids.push(order_id);
                                     }
