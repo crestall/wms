@@ -1,6 +1,6 @@
 <div class="page-wrapper">
     <div class="row">
-        <form id="order-add-package" method="post" action="/form/procAddPackage">
+        <form id="orders-add-package" method="post" action="/form/procAddPackages">
             <div class="form-group row">
                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
                 <div class="col-md-8">
