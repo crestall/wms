@@ -1281,6 +1281,48 @@
                                 }
                             });
                         });
+
+                        $('a.add_package').click(function(e){
+                            e.preventDefault();
+                            var ids = [];
+                            $('input.select').each(function(i,e){
+                                var order_id = $(this).data('orderid');
+                                console.log('order_id: '+ order_id);
+                                if($(this).prop('checked') && ( $('select#courier_'+order_id).val() == 0) )
+                                {
+                                    ids.push(order_id);
+                                }
+                            });
+                            //make the package form window
+                            $('<div id="package_pop" title="Add Package For Selected Orders">').appendTo($('body'));
+                            $("#package_pop")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addPackageForm',{order_ids: ids},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                    }
+                            });
+                            $("#package_pop").dialog({
+                                    draggable: false,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: 520,
+                                    width: 620,
+                                    close: function(){
+                                        $("#package_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#quote_pop').dialog('close');
+                                        });
+
+                                    }
+                            });
+                            $("#package_pop").dialog('open');
+                        });
                     }
                 },
                 'order-search':{

@@ -645,43 +645,6 @@ class ajaxfunctionsController extends Controller
             $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);
         }
 
-        /*
-        if($this->courierselector->chooseEparcel($od))
-        {
-            $huntersplu_charge = $hunters3kg_charge = $hunterspal_charge = "No Hunters for express post, PO Boxes or international destinations";
-            $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);
-        }
-        else
-        {
-            $h_details = $this->Hunters3KG->getDetails($od, $items);
-            //echo "<pre>",print_r($h_details),"</pre>";
-            $h3kg_result = $this->Hunters3KG->getQuote($h_details);
-            //echo "<pre>",print_r($h3kg_result),"</pre>"; die();
-            if(isset($h3kg_result['errorCode']))
-            {
-                $hunters3kg_charge = "<div class='errorbox'><p>".$h3kg_result['errorMessage']."</p></div>";
-            }
-            else
-            {
-                $hunters3kg_charge =  "$".number_format($h3kg_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
-            }
-
-            $hplu_result = $this->HuntersPLU->getQuote($h_details);
-            //echo "<pre>",print_r($hplu_result),"</pre>";die();
-            if(isset($hplu_result['errorCode']))
-            {
-                $huntersplu_charge = "<div class='errorbox'><p>".$hplu_result['errorMessage']."</p></div>";
-            }
-            else
-            {
-                $huntersplu_charge =  "$".number_format($hplu_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
-            }
-            //$hpal_result = $this->HuntersPAL->getQuote($h_details);
-            //$hunterspal_charge =  "$".number_format($hpal_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
-        }
-        */
-
-
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/shipping_quotes.php', [
             'od'                        =>  $od,
             'express'                   =>  $od['eparcel_express'] == 1,
@@ -692,6 +655,12 @@ class ajaxfunctionsController extends Controller
             'ship_to'                   =>  $od['ship_to'],
             'address_string'            =>  $this->request->data['address_string']
         ]);
+    }
+
+    public function addPackageForm()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; //die();
+
     }
 
     public function deletePackage()
