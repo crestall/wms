@@ -668,7 +668,7 @@ class ajaxfunctionsController extends Controller
 
     public function adjustAllocationForm()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
         $od = $this->order->getOrderDetail($this->request->data['order_id']);
         $items = $this->order->getItemsForOrder($od['id']);
         echo "<pre>",print_r($items),"</pre>"; //die();
