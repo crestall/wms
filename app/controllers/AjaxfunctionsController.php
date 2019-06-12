@@ -70,7 +70,7 @@ class ajaxfunctionsController extends Controller
             }
         }
         $order_items = array();
-        //print_r($this->request->data['allocation']);die();
+        print_r($this->request->data['allocation']);die();
         foreach($this->request->data['allocation'] as $item_id => $array)
         {
             //echo "will update $item_id to $location_id";
