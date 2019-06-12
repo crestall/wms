@@ -74,7 +74,7 @@ class ajaxfunctionsController extends Controller
         foreach($this->request->data['allocation'] as $item_id => $array)
         {
             //echo "will update $item_id to $location_id";
-            echo "<pre>",print_r($array),"</pre>"; die();
+            //echo "<pre>",print_r($array),"</pre>"; die();
             $order_items[] = array(
                 'locations' => array(
                     'location_id'   => $array['location_id'],
