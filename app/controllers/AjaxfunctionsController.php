@@ -73,7 +73,6 @@ class ajaxfunctionsController extends Controller
         //print_r($this->request->data['allocation']);die();
         foreach($this->request->data['allocation'] as $item_id => $array)
         {
-            //echo "will update $item_id to $location_id";
             //echo "<pre>",print_r($array),"</pre>"; die();
             $order_items[] = array(
                 'locations' => array(
@@ -83,8 +82,8 @@ class ajaxfunctionsController extends Controller
                 'item_id'   => $item_id
             );
         }
-        echo "<pre>",print_r($order_items),"</pre>"; die();
-        //$this->order->updateItemsForOrder($order_items, $order_id);
+        //echo "<pre>",print_r($order_items),"</pre>"; die();
+        $this->order->updateItemsForOrder($order_items, $order_id);
         $this->view->renderJson($data);
     }
 
