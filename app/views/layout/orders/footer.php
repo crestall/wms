@@ -1336,6 +1336,31 @@
                                 $("#package_pop").dialog('open');
                             }
                         });
+
+                        $('button.adjust_allocation').click(function(e){
+                            e.preventDefault();
+                            var order_id = $(this).data('orderid')
+                            //make the form window
+                            $('<div id="allocation_pop" title="Adjust Allocation">').appendTo($('body'));
+                            $("#allocation_pop")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Getting Details...</p>")
+                                .load('/ajaxfunctions/adjustAllocationForm',{order_id: order_id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                    }
+                                    $('form#orders-add-package').submit(function(e){
+                                        if($(this).valid())
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            e.preventDefault();
+                                        }
+                                    });
+                            });
+                        });
                     }
                 },
                 'order-search':{

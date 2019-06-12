@@ -666,6 +666,11 @@ class ajaxfunctionsController extends Controller
         ]);
     }
 
+    public function adjustAllocationForm()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; //die();
+    }
+
     public function deletePackage()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
