@@ -1353,7 +1353,12 @@
                                     $('.selectpicker').selectpicker().rules("add",{
                                         notNone: true
                                     });
-                                    $("form#adjust-allocation").validate({});
+                                    $("form#adjust-allocation").submit(function(e){
+                                        if($(this).valid())
+                                        {
+                                            console.log('Valid Form');
+                                        }
+                                    });
 
                             });
                             $("#allocation_pop").dialog({
