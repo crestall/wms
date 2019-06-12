@@ -1361,7 +1361,9 @@
                                                 method: "post",
                                                 dataType: "json",
                                                 beforeSend: function(){
-                                                    $("#allocation_pop").html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Adjusting allocation...</p>");
+                                                    $("#div#feedback_holder")
+                                                        .slideDown()
+                                                        .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Adjusting allocation...</p>");
                                                 },
                                                 success: function(d){
                                                     if(d.error)
