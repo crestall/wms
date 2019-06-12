@@ -1381,7 +1381,7 @@
                                                             .hide()
                                                             .removeClass()
                                                             .addClass("feedbackbox")
-                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-primary slip-reprint'><i class='fas fa-file-alt'></i> Reprint Pickingslip</a></p>")
+                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-warning slip-reprint'><i class='fas fa-file-alt'></i> Reprint Pickingslip</a></p>")
                                                             .slideDown({
                                                                 complete: function(){
                                                                     $('a.slip-reprint').click(function(e){
