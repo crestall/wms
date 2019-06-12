@@ -1366,11 +1366,42 @@
                                                 success: function(d){
                                                     if(d.error)
                                                     {
-                                                        alert('error');
+                                                        $("div#feedback_holder")
+                                                            .hide()
+                                                            .removeClass()
+                                                            .addClass("errorbox")
+                                                            .slideDown()
+                                                            .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
                                                     }
                                                     else
                                                     {
-                                                        //console.log(data);
+                                                        $("div#feedback_holder")
+                                                            .hide()
+                                                            .removeClass()
+                                                            .addClass("feedbackbox")
+                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-primary slip-reprint'><i class='fas fa-file-alt'></i> Reprint Pickingslip</a></p>")
+                                                            .slideDown({
+                                                                complete: function(){
+                                                                    $('a.slip-reprint').click(function(e){
+                                                                        e.preventDefault();
+                                                                        var ids = [order_id];
+                                                                        var form = document.createElement('form');
+                                                                        form.setAttribute("method", "post");
+                                                                        form.setAttribute("action", "/pdf/printPickslips");
+                                                                        form.setAttribute("target", "pickslipformresult");
+                                                                        $.each( ids, function( index, value ) {
+                                                                            var hiddenField = document.createElement("input");
+                                                                            hiddenField.setAttribute("type", "hidden");
+                                                                            hiddenField.setAttribute("name", "items[]");
+                                                                            hiddenField.setAttribute("value", value);
+                                                                            form.appendChild(hiddenField);
+                                                                        });
+                                                                        document.body.appendChild(form);
+                                                                        window.open('','pickslipformresult');
+                                                                        form.submit();
+                                                                    });
+                                                                }
+                                                        });
                                                     }
                                                 }
                                             }) ;
@@ -1391,7 +1422,7 @@
                                     },
                                     open: function(){
                                         $('.ui-widget-overlay').bind('click',function(){
-                                            $('#quote_pop').dialog('close');
+                                            $('#allocation_pop').dialog('close');
                                         });
 
                                     }

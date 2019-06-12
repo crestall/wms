@@ -71,7 +71,7 @@ class ajaxfunctionsController extends Controller
         }
         foreach($this->request->data['allocation_id'] as $item_id => $location_id)
         {
-            echo "will update $item_id to $location_id";
+            //echo "will update $item_id to $location_id";
         }
 
         $this->view->renderJson($data);
