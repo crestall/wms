@@ -1352,7 +1352,7 @@
 
                                     $('.selectpicker').selectpicker()
                                     $('.selectpicker').rules("add",{
-                                        notNone: true
+                                        required: true
                                     });
 
                                     $("form#adjust-allocation").submit(function(e){
