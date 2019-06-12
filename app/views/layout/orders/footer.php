@@ -1350,16 +1350,8 @@
                                         $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
                                     }
                                     $('.selectpicker').selectpicker();
-                                    $('form#adjust-allocation').submit(function(e){
-                                        if($(this).valid())
-                                        {
-
-                                        }
-                                        else
-                                        {
-                                            e.preventDefault();
-                                        }
-                                    });
+                                    $("form#adjust-allocation").validate();
+                                    
                             });
                             $("#allocation_pop").dialog({
                                     draggable: false,
