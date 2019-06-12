@@ -14,6 +14,7 @@ class ajaxfunctionsController extends Controller
     {
         parent::beforeAction();
         $actions = [
+            'adjustAllocationForm',
             'calcOriginPick',
             'deactivateUser',
             'deleteClientLocation',
@@ -43,13 +44,33 @@ class ajaxfunctionsController extends Controller
             'reactivateUser',
             'recordDispatch',
             'selectCourier',
-            'updateLocation',
+            'updateAllocation',
             'updateFreightCharge',
+            'updateLocation',
             'updateOrderComments',
             'updateWarningLevel'
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function updateAllocation()
+    {
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+
+        $this->view->renderJson($data);
     }
 
     public function deactivateUser()

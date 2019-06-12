@@ -1349,9 +1349,33 @@
                                     if(textStatus == 'error') {
                                         $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
                                     }
-
-                                    $('.selectpicker').selectpicker();
-                                    
+                                    else
+                                    {
+                                        $('.selectpicker').selectpicker();
+                                        $('form#adjust-allocation').submit(function(e){
+                                            e.preventDefault();
+                                            var data = $(this).serialize();
+                                            $.ajax({
+                                                url: "/ajaxfunctions/update-allocation",
+                                                data: data,
+                                                method: "post",
+                                                dataType: "json",
+                                                beforeSend: function(){
+                                                    $("#allocation_pop").html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Adjusting allocation...</p>");
+                                                },
+                                                success: function(d){
+                                                    if(d.error)
+                                                    {
+                                                        alert('error');
+                                                    }
+                                                    else
+                                                    {
+                                                        console.log(data);
+                                                    }
+                                                }
+                                            }) ;
+                                        });
+                                    }
 
                             });
                             $("#allocation_pop").dialog({
