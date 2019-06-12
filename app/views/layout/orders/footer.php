@@ -1350,9 +1350,11 @@
                                         $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
                                     }
 
-                                    $('.selectpicker').selectpicker().rules("add",{
+                                    $('.selectpicker').selectpicker()
+                                    $('.selectpicker').rules("add",{
                                         notNone: true
                                     });
+
                                     $("form#adjust-allocation").submit(function(e){
                                         if($(this).valid())
                                         {
