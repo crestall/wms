@@ -52,7 +52,7 @@
                     <p><a class="btn btn-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
                 <?php endif;?>
                 <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
-                <p><a class="btn btn-primary add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p> 
+                <p><a class="btn btn-primary add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
             </div>
         </div>
     <?php elseif($user_role == "warehouse"):?>
@@ -246,6 +246,7 @@
             					<td data-label="Courier" nowrap>
             					    <p><select name="courier" class="selectpicker courier" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                     <p><button class="ship_quote btn btn-primary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
+                                    <p><button class="btn btn-warning adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
                                 </td>
                             <?php elseif($user_role == "warehouse"):?>
                                 <td>
