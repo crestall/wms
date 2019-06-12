@@ -1349,7 +1349,7 @@
                                     if(textStatus == 'error') {
                                         $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
                                     }
-                                    $('form#orders-add-package').submit(function(e){
+                                    $('form#adjust-allocation').submit(function(e){
                                         if($(this).valid())
                                         {
 
@@ -1360,6 +1360,25 @@
                                         }
                                     });
                             });
+                            $("#allocation_pop").dialog({
+                                    draggable: false,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: 520,
+                                    width: 620,
+                                    close: function(){
+                                        $("#allocation_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#quote_pop').dialog('close');
+                                        });
+
+                                    }
+                            });
+                            $("#allocation_pop").dialog('open');
                         });
                     }
                 },
