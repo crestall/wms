@@ -539,7 +539,7 @@ class Order extends Model{
 
     public function updateItemsForOrder(array $order_items, $order_id)
     {
-        //echo "<pre>",print_r($order_items),"</pre>";
+        echo "<pre>",print_r($order_items),"</pre>";
         $db = Database::openConnection();
         //delete the old ones
         $db->deleteQuery('orders_items', $order_id, 'order_id');
