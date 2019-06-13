@@ -36,7 +36,7 @@
             						<td  data-label="Submitted On"><?php echo $date_submitted;?></td>
             						<td class="number" data-label="Number of Orders"><?php echo $order_count;?></td>
                                     <td data-label="Client"><?php echo $client_name;?></td>
-                                    <td class="centre" data-label="Printed"><?php echo $printed;?></td>
+                                    <td class="centre printed" data-label="Printed"><?php echo $printed;?></td>
                                     <td class="nowrap"><a href="/pdf/order-summary/summary=<?php echo $s['id'];?>" class="summary btn btn-primary" target="_blank">Open Order Summary</a></td>
             					</tr>
             				<?php endif;?>
