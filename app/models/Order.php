@@ -546,7 +546,7 @@ class Order extends Model{
         //update with new data
         foreach($order_items as $oi)
         {
-            echo "<pre>",print_r($oi['locations']),"</pre>";die();
+            //echo "<pre>",print_r($oi['locations']),"</pre>";die();
             foreach($oi['locations'] as $oil)
             {
                 $vals = array(
