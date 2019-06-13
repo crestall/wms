@@ -84,8 +84,6 @@ class ajaxfunctionsController extends Controller
                 'item_id'   => $item_id
             );
         }
-        echo "<pre>",print_r($order_items),"</pre>"; die();
-        //$this->order->updateItemsForOrder($order_items, $order_id);
 
         if($this->order->updateItemsForOrder($order_items, $order_id))
         {
