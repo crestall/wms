@@ -1784,7 +1784,8 @@
                         } );
 
                         $('a.summary').click(function(e){
-                            window.location.reload();
+                            //window.location.reload();
+                            $(this).parent().siblings(".printed").html("Yes");
                         });
                     }
                 },
