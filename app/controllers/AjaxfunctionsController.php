@@ -74,16 +74,29 @@ class ajaxfunctionsController extends Controller
         foreach($this->request->data['allocation'] as $item_id => $array)
         {
             //echo "<pre>",print_r($array),"</pre>"; die();
+            $location = array();
+            $location[] = array(
+                'location_id'   => $array['location_id'],
+                'qty'           => $array['qty']
+            );
             $order_items[] = array(
-                'locations' => array(
-                    'location_id'   => $array['location_id'],
-                    'qty'           => $array['qty']
-                ),
+                'locations' => $location,
                 'item_id'   => $item_id
             );
         }
-        //echo "<pre>",print_r($order_items),"</pre>"; die();
-        $this->order->updateItemsForOrder($order_items, $order_id);
+        echo "<pre>",print_r($order_items),"</pre>"; die();
+        //$this->order->updateItemsForOrder($order_items, $order_id);
+
+        if($this->order->updateItemsForOrder($order_items, $order_id))
+        {
+            //do nothing
+        }
+        else
+        {
+            $data['error'] = true;
+            $data['feedback'] = 'A database error has occurred. Please try again';
+        }
+
         $this->view->renderJson($data);
     }
 
