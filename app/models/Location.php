@@ -275,7 +275,7 @@ class Location extends Model{
             ORDER BY
                 location
         ";
-        echo $q;die();
+        //echo $q;die();
         $locations = $db->queryData($q, $array);
         /* */
         foreach($locations as $l)
