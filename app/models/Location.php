@@ -531,7 +531,7 @@ class Location extends Model{
         return $db->queryData($q);
     }
 
-    public function getSelectItemInLocations($item_id, $selected = false, $add_ppl = false)
+    public function getSelectItemInLocations($item_id, $selected = false, $add_ppl = false, $qty = 0)
     {
         $db = Database::openConnection();
         $qi = "";
@@ -539,10 +539,15 @@ class Location extends Model{
         {
             $ppl_id = $db->queryValue("items", array('id' => $item_id), "preferred_pick_location_id");
             if($ppl_id > 0)
-                $qi = " OR l.id = $ppl_id ";
+                $qi = " OR (l.id = $ppl_id) ";
         }
         $location_array = array();
-        $locations = $db->queryData("SELECT l.location, l.id FROM items_locations il JOIN locations l ON il.location_id = l.id WHERE il.item_id = $item_id $qi GROUP BY l.id");
+        $locations = $db->queryData("
+            SELECT l.location, l.id
+            FROM items_locations il JOIN locations l ON il.location_id = l.id
+            WHERE (il.item_id = $item_id AND (qty - qc_count) >= $qty) $qi
+            GROUP BY l.id
+            ORDER BY l.location");
         $check = "";
         $ret_string = "";
         foreach($locations as $l)

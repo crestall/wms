@@ -1281,6 +1281,156 @@
                                 }
                             });
                         });
+
+                        $('a.add-package').click(function(e){
+                            e.preventDefault();
+                            if($('input.select:checked').length)
+                            {
+                                var ids = [];
+                                $('input.select').each(function(i,e){
+                                    var order_id = $(this).data('orderid');
+                                    console.log('order_id: '+ order_id);
+                                    if($(this).prop('checked') && ( $('select#courier_'+order_id).val() == -1) )
+                                    {
+                                        ids.push(order_id);
+                                    }
+                                });
+                                //make the package form window
+                                $('<div id="package_pop" title="Add Package For Selected Orders">').appendTo($('body'));
+                                $("#package_pop")
+                                    .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                    .load('/ajaxfunctions/addPackageForm',{order_ids: ids},
+                                        function(responseText, textStatus, XMLHttpRequest){
+                                        if(textStatus == 'error') {
+                                            $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                        }
+                                        $('form#orders-add-package').submit(function(e){
+                                            if($(this).valid())
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                e.preventDefault();
+                                            }
+                                        });
+                                });
+                                $("#package_pop").dialog({
+                                        draggable: false,
+                                        modal: true,
+                                        show: true,
+                                        hide: true,
+                                        autoOpen: false,
+                                        height: 520,
+                                        width: 620,
+                                        close: function(){
+                                            $("#package_pop").remove();
+                                        },
+                                        open: function(){
+                                            $('.ui-widget-overlay').bind('click',function(){
+                                                $('#quote_pop').dialog('close');
+                                            });
+
+                                        }
+                                });
+                                $("#package_pop").dialog('open');
+                            }
+                        });
+
+                        $('button.adjust_allocation').click(function(e){
+                            e.preventDefault();
+                            var order_id = $(this).data('orderid')
+                            //make the form window
+                            $('<div id="allocation_pop" title="Adjust Allocation">').appendTo($('body'));
+                            $("#allocation_pop")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Getting Details...</p>")
+                                .load('/ajaxfunctions/adjustAllocationForm',{order_id: order_id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                    }
+                                    else
+                                    {
+                                        $('.selectpicker').selectpicker();
+                                        $('form#adjust-allocation').submit(function(e){
+                                            e.preventDefault();
+                                            var data = $(this).serialize();
+                                            $.ajax({
+                                                url: "/ajaxfunctions/update-allocation",
+                                                data: data,
+                                                method: "post",
+                                                dataType: "json",
+                                                beforeSend: function(){
+                                                    $("#div#feedback_holder")
+                                                        .slideDown()
+                                                        .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Adjusting allocation...</p>");
+                                                },
+                                                success: function(d){
+                                                    if(d.error)
+                                                    {
+                                                        $("div#feedback_holder")
+                                                            .hide()
+                                                            .removeClass()
+                                                            .addClass("errorbox")
+                                                            .slideDown()
+                                                            .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
+                                                    }
+                                                    else
+                                                    {
+                                                        $("div#feedback_holder")
+                                                            .hide()
+                                                            .removeClass()
+                                                            .addClass("feedbackbox")
+                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-warning slip-reprint'><i class='fas fa-file-alt'></i> Reprint Pickingslip</a></p>")
+                                                            .slideDown({
+                                                                complete: function(){
+                                                                    $('a.slip-reprint').click(function(e){
+                                                                        e.preventDefault();
+                                                                        var ids = [order_id];
+                                                                        var form = document.createElement('form');
+                                                                        form.setAttribute("method", "post");
+                                                                        form.setAttribute("action", "/pdf/printPickslips");
+                                                                        form.setAttribute("target", "pickslipformresult");
+                                                                        $.each( ids, function( index, value ) {
+                                                                            var hiddenField = document.createElement("input");
+                                                                            hiddenField.setAttribute("type", "hidden");
+                                                                            hiddenField.setAttribute("name", "items[]");
+                                                                            hiddenField.setAttribute("value", value);
+                                                                            form.appendChild(hiddenField);
+                                                                        });
+                                                                        document.body.appendChild(form);
+                                                                        window.open('','pickslipformresult');
+                                                                        form.submit();
+                                                                    });
+                                                                }
+                                                        });
+                                                    }
+                                                }
+                                            }) ;
+                                        });
+                                    }
+
+                            });
+                            $("#allocation_pop").dialog({
+                                    draggable: false,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: 520,
+                                    width: 620,
+                                    close: function(){
+                                        $("#allocation_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#allocation_pop').dialog('close');
+                                        });
+
+                                    }
+                            });
+                            $("#allocation_pop").dialog('open');
+                        });
                     }
                 },
                 'order-search':{

@@ -14,6 +14,7 @@ class ajaxfunctionsController extends Controller
     {
         parent::beforeAction();
         $actions = [
+            'adjustAllocationForm',
             'calcOriginPick',
             'deactivateUser',
             'deleteClientLocation',
@@ -25,6 +26,7 @@ class ajaxfunctionsController extends Controller
             'getASummary',
             'getItemByBarcode',
             'getItems',
+            'getItemsInLocation',
             'getOrderByConID',
             'getScannedItem',
             'getSuburbs',
@@ -42,8 +44,9 @@ class ajaxfunctionsController extends Controller
             'reactivateUser',
             'recordDispatch',
             'selectCourier',
-            'updateLocation',
+            'updateAllocation',
             'updateFreightCharge',
+            'updateLocation',
             'updateOrderComments',
             'updateWarningLevel'
         ];
@@ -51,10 +54,60 @@ class ajaxfunctionsController extends Controller
         $this->Security->requireAjax($actions);
     }
 
+    public function updateAllocation()
+    {
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $order_items = array();
+        //print_r($this->request->data['allocation']);die();
+        foreach($this->request->data['allocation'] as $item_id => $array)
+        {
+            //echo "<pre>",print_r($array),"</pre>"; die();
+            $location = array();
+            $location[] = array(
+                'location_id'   => $array['location_id'],
+                'qty'           => $array['qty']
+            );
+            $order_items[] = array(
+                'locations' => $location,
+                'item_id'   => $item_id
+            );
+        }
+
+        if($this->order->updateItemsForOrder($order_items, $order_id))
+        {
+            //do nothing
+        }
+        else
+        {
+            $data['error'] = true;
+            $data['feedback'] = 'A database error has occurred. Please try again';
+        }
+
+        $this->view->renderJson($data);
+    }
+
     public function deactivateUser()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $this->user->deactivateUser($this->request->data['userid']);
+    }
+
+    public function getItemsInLocation()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
+
     }
 
     public function reactivateUser()
@@ -638,43 +691,6 @@ class ajaxfunctionsController extends Controller
             $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);
         }
 
-        /*
-        if($this->courierselector->chooseEparcel($od))
-        {
-            $huntersplu_charge = $hunters3kg_charge = $hunterspal_charge = "No Hunters for express post, PO Boxes or international destinations";
-            $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);
-        }
-        else
-        {
-            $h_details = $this->Hunters3KG->getDetails($od, $items);
-            //echo "<pre>",print_r($h_details),"</pre>";
-            $h3kg_result = $this->Hunters3KG->getQuote($h_details);
-            //echo "<pre>",print_r($h3kg_result),"</pre>"; die();
-            if(isset($h3kg_result['errorCode']))
-            {
-                $hunters3kg_charge = "<div class='errorbox'><p>".$h3kg_result['errorMessage']."</p></div>";
-            }
-            else
-            {
-                $hunters3kg_charge =  "$".number_format($h3kg_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
-            }
-
-            $hplu_result = $this->HuntersPLU->getQuote($h_details);
-            //echo "<pre>",print_r($hplu_result),"</pre>";die();
-            if(isset($hplu_result['errorCode']))
-            {
-                $huntersplu_charge = "<div class='errorbox'><p>".$hplu_result['errorMessage']."</p></div>";
-            }
-            else
-            {
-                $huntersplu_charge =  "$".number_format($hplu_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
-            }
-            //$hpal_result = $this->HuntersPAL->getQuote($h_details);
-            //$hunterspal_charge =  "$".number_format($hpal_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2);
-        }
-        */
-
-
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/shipping_quotes.php', [
             'od'                        =>  $od,
             'express'                   =>  $od['eparcel_express'] == 1,
@@ -684,6 +700,28 @@ class ajaxfunctionsController extends Controller
             'client_name'               =>  $this->client->getClientName($od['client_id']),
             'ship_to'                   =>  $od['ship_to'],
             'address_string'            =>  $this->request->data['address_string']
+        ]);
+    }
+
+    public function addPackageForm()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $order_ids = implode(",", $this->request->data['order_ids']) ;
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_package.php', [
+            'order_ids' =>  $order_ids
+        ]);
+    }
+
+    public function adjustAllocationForm()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $od = $this->order->getOrderDetail($this->request->data['order_id']);
+        $items = $this->order->getItemsForOrder($od['id']);
+        //echo "<pre>",print_r($items),"</pre>"; //die();
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/adjust_allocation.php', [
+            'items'         => $items,
+            'order_number'  => $od['order_number'],
+            'order_id'      => $od['id']
         ]);
     }
 
