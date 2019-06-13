@@ -65,7 +65,7 @@ class Clientsbays extends Model{
                 ) tbl1
                 GROUP BY tbl1.client_id
             ";
-            echo "<p>$bquery</p>"; die();
+            echo "<p>$bquery</p>"; //die();
             $reps = $db->queryData($bquery);
             foreach($reps as $rep)
             {
@@ -100,7 +100,7 @@ class Clientsbays extends Model{
                     $data[$client_name][$f['string']] = $trep['bays']/9;
             }
             $lquery = "SELECT client_id, count(*) AS bays FROM clients_locations WHERE date_added < $qto AND (date_removed > $qfrom OR date_removed = 0) GROUP BY client_id";
-            echo "<p>$lquery</p>";
+            echo "<p>$lquery</p>";die();
             $lreps = $db->queryData($lquery);
             foreach($lreps as $lrep)
             {
