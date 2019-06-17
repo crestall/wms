@@ -112,9 +112,9 @@
                         $invoice = "";
                         if(!empty($co['uploaded_file']))
                         {
-                            $invoice = "<a href='/client_uploads/{$co['client_id']}/{$co['uploaded_file']}' target='_blank'>Print Invoice</a>";
+                            $invoice = "<p><a href='/client_uploads/{$co['client_id']}/{$co['uploaded_file']}' target='_blank' class='btn btn-primary'>Print Invoice</a></p>";
                         }
-                        $ps = "<a href='/pdf/packing-slip/order={$co['id']}' target='_blank'>Print Packing Slip</a>";
+                        $ps = "<p><a href='/pdf/packing-slip/order={$co['id']}' target='_blank' class='btn btn-primary'>Print Packing Slip</a></p>";
                         ?>
         	        	<tr <?php echo $row_class;?> >
                             <td class="number" data-label="Count"><?php echo $c;?></td>
@@ -126,7 +126,11 @@
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
         					<td data-label="Items" class="number"><?php echo $item_count;?></td>
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
-                            <td><?php echo $invoice; ?><br/><?php echo $ps; ?></td>
+                            <td>
+                                <?php echo $invoice; ?>
+                                <?php echo $ps; ?>
+                                <p><button class="btn btn-warning adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
+                            </td>
         					<td data-label="Select" class="chkbox">
                                 <div class="checkbox checkbox-default">
                                     <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-orderid='<?php echo $co['id'];?>' name="select_<?php echo $co['id'];?>" id="select_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />

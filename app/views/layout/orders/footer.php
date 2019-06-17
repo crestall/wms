@@ -90,6 +90,102 @@
                                 }
                             });
                         });
+                    },
+                    'adjust-allocations': function(){
+                        $('button.adjust_allocation').click(function(e){
+                            e.preventDefault();
+                            var order_id = $(this).data('orderid')
+                            //make the form window
+                            $('<div id="allocation_pop" title="Adjust Allocation">').appendTo($('body'));
+                            $("#allocation_pop")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Getting Details...</p>")
+                                .load('/ajaxfunctions/adjustAllocationForm',{order_id: order_id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                    }
+                                    else
+                                    {
+                                        $('.selectpicker').selectpicker();
+                                        $('form#adjust-allocation').submit(function(e){
+                                            e.preventDefault();
+                                            var data = $(this).serialize();
+                                            $.ajax({
+                                                url: "/ajaxfunctions/update-allocation",
+                                                data: data,
+                                                method: "post",
+                                                dataType: "json",
+                                                beforeSend: function(){
+                                                    $("#div#feedback_holder")
+                                                        .slideDown()
+                                                        .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Adjusting allocation...</p>");
+                                                },
+                                                success: function(d){
+                                                    if(d.error)
+                                                    {
+                                                        $("div#feedback_holder")
+                                                            .hide()
+                                                            .removeClass()
+                                                            .addClass("errorbox")
+                                                            .slideDown()
+                                                            .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
+                                                    }
+                                                    else
+                                                    {
+                                                        $("div#feedback_holder")
+                                                            .hide()
+                                                            .removeClass()
+                                                            .addClass("feedbackbox")
+                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-warning slip-reprint'><i class='fas fa-file-alt'></i> Reprint Pickingslip</a></p>")
+                                                            .slideDown({
+                                                                complete: function(){
+                                                                    $('a.slip-reprint').click(function(e){
+                                                                        e.preventDefault();
+                                                                        var ids = [order_id];
+                                                                        var form = document.createElement('form');
+                                                                        form.setAttribute("method", "post");
+                                                                        form.setAttribute("action", "/pdf/printPickslips");
+                                                                        form.setAttribute("target", "pickslipformresult");
+                                                                        $.each( ids, function( index, value ) {
+                                                                            var hiddenField = document.createElement("input");
+                                                                            hiddenField.setAttribute("type", "hidden");
+                                                                            hiddenField.setAttribute("name", "items[]");
+                                                                            hiddenField.setAttribute("value", value);
+                                                                            form.appendChild(hiddenField);
+                                                                        });
+                                                                        document.body.appendChild(form);
+                                                                        window.open('','pickslipformresult');
+                                                                        form.submit();
+                                                                    });
+                                                                }
+                                                        });
+                                                    }
+                                                }
+                                            }) ;
+                                        });
+                                    }
+
+                            });
+                            $("#allocation_pop").dialog({
+                                    draggable: false,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: 520,
+                                    width: 620,
+                                    close: function(){
+                                        $("#allocation_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#allocation_pop').dialog('close');
+                                        });
+
+                                    }
+                            });
+                            $("#allocation_pop").dialog('open');
+                        });
                     }
                 },
                 'order-edit': {
@@ -568,6 +664,7 @@
                     init: function(){
                         actions.common.init();
                         actions.common['cancel-orders']();
+                        actions.common['adjust-allocations'](); 
                         $("button#show_fulfilled").click(function(e){
                             var href = '/orders/view-storeorders';
                             if($('#client_selector').val() != 0)
@@ -852,6 +949,7 @@
                         actions.common.init();
                         actions.common['select-all']();
                         actions.common['cancel-orders']();
+                        actions.common['adjust-allocations']();
                         $('#client_selector, #courier_selector, #state_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
                             var href = '/orders/view-orders';
@@ -1335,101 +1433,6 @@
                                 });
                                 $("#package_pop").dialog('open');
                             }
-                        });
-
-                        $('button.adjust_allocation').click(function(e){
-                            e.preventDefault();
-                            var order_id = $(this).data('orderid')
-                            //make the form window
-                            $('<div id="allocation_pop" title="Adjust Allocation">').appendTo($('body'));
-                            $("#allocation_pop")
-                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Getting Details...</p>")
-                                .load('/ajaxfunctions/adjustAllocationForm',{order_id: order_id},
-                                    function(responseText, textStatus, XMLHttpRequest){
-                                    if(textStatus == 'error') {
-                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
-                                    }
-                                    else
-                                    {
-                                        $('.selectpicker').selectpicker();
-                                        $('form#adjust-allocation').submit(function(e){
-                                            e.preventDefault();
-                                            var data = $(this).serialize();
-                                            $.ajax({
-                                                url: "/ajaxfunctions/update-allocation",
-                                                data: data,
-                                                method: "post",
-                                                dataType: "json",
-                                                beforeSend: function(){
-                                                    $("#div#feedback_holder")
-                                                        .slideDown()
-                                                        .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Adjusting allocation...</p>");
-                                                },
-                                                success: function(d){
-                                                    if(d.error)
-                                                    {
-                                                        $("div#feedback_holder")
-                                                            .hide()
-                                                            .removeClass()
-                                                            .addClass("errorbox")
-                                                            .slideDown()
-                                                            .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
-                                                    }
-                                                    else
-                                                    {
-                                                        $("div#feedback_holder")
-                                                            .hide()
-                                                            .removeClass()
-                                                            .addClass("feedbackbox")
-                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-warning slip-reprint'><i class='fas fa-file-alt'></i> Reprint Pickingslip</a></p>")
-                                                            .slideDown({
-                                                                complete: function(){
-                                                                    $('a.slip-reprint').click(function(e){
-                                                                        e.preventDefault();
-                                                                        var ids = [order_id];
-                                                                        var form = document.createElement('form');
-                                                                        form.setAttribute("method", "post");
-                                                                        form.setAttribute("action", "/pdf/printPickslips");
-                                                                        form.setAttribute("target", "pickslipformresult");
-                                                                        $.each( ids, function( index, value ) {
-                                                                            var hiddenField = document.createElement("input");
-                                                                            hiddenField.setAttribute("type", "hidden");
-                                                                            hiddenField.setAttribute("name", "items[]");
-                                                                            hiddenField.setAttribute("value", value);
-                                                                            form.appendChild(hiddenField);
-                                                                        });
-                                                                        document.body.appendChild(form);
-                                                                        window.open('','pickslipformresult');
-                                                                        form.submit();
-                                                                    });
-                                                                }
-                                                        });
-                                                    }
-                                                }
-                                            }) ;
-                                        });
-                                    }
-
-                            });
-                            $("#allocation_pop").dialog({
-                                    draggable: false,
-                                    modal: true,
-                                    show: true,
-                                    hide: true,
-                                    autoOpen: false,
-                                    height: 520,
-                                    width: 620,
-                                    close: function(){
-                                        $("#allocation_pop").remove();
-                                    },
-                                    open: function(){
-                                        $('.ui-widget-overlay').bind('click',function(){
-                                            $('#allocation_pop').dialog('close');
-                                        });
-
-                                    }
-                            });
-                            $("#allocation_pop").dialog('open');
                         });
                     }
                 },
