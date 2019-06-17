@@ -664,6 +664,7 @@
                     init: function(){
                         actions.common.init();
                         actions.common['cancel-orders']();
+                        actions.common['adjust-allocations'](); 
                         $("button#show_fulfilled").click(function(e){
                             var href = '/orders/view-storeorders';
                             if($('#client_selector').val() != 0)
