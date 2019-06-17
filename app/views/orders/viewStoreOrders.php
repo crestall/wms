@@ -127,7 +127,8 @@
         					<td data-label="Items" class="number"><?php echo $item_count;?></td>
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
                             <td>
-                                <?php echo $invoice; ?><br/><?php echo $ps; ?>
+                                <?php echo $invoice; ?>
+                                <?php echo $ps; ?>
                                 <p><button class="btn btn-warning adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
                             </td>
         					<td data-label="Select" class="chkbox">
