@@ -325,7 +325,6 @@ return array(
     * Hide Estimated Shipping Charge From
     **************************************************************************/
     "HIDE_CHARGE_CLIENTS"   =>  array(
-        63, //cocoon
         59, //noasleep
         69, //Team Timbuktu
     ),
