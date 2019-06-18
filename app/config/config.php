@@ -394,7 +394,7 @@ return array(
             'pack-items-manage'     =>  true,
             //'product-to-location'   =>  true,
             'scan-to-inventory'     =>  true,
-            'client-locations'      =>  true,
+            //'client-locations'      =>  true,
             'product-movement'      =>  false,
             //'location-scanner'      =>  true,
             //'returns-input'         =>  true,
