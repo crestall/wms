@@ -43,6 +43,15 @@
             </div>
         </div>
         <div class="form-group row">
+            <div class="form-check">
+                <label class="form-check-label col-md-3" for="oversize">Remove Oversize</label>
+                <div class="col-md-4 checkbox checkbox-default">
+                    <input class="form-check-input styled" type="checkbox" id="oversize" name="oversize" <?php if(!empty(Form::value('oversize'))) echo 'checked';?> />
+                    <label for="oversize"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
             <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
             <div class="col-md-4">
                 <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
