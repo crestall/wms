@@ -2,7 +2,7 @@
 $display = (!empty(Form::value('to_receiving')))? "block" : "none";
 //$display = "block";
 $pallet_multiplier = empty(Form::value('pallet_multiplier'))? 1 : Form::value('pallet_multiplier');
-$double_bay = (isset($product_info) && $product_info['double_bay'] == 1)
+$double_bay = ( (isset($product_info) && $product_info['double_bay'] == 1) || (isset($item) && $item['double_bay'] == 1) )
 ?>
 <div class="form-group row">
     <label class="<?php if(isset($label_class)) echo $label_class; else echo "col-md-3";?> col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
