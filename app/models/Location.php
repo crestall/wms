@@ -28,6 +28,7 @@
   getSelectQCItemInLocations($item_id, $selected = false)
   isEmptyLocation
   isEmptyOfItem($id, $item_id)
+  isOversize($id)
   subtractFromLocation
   updateLocation
 
@@ -48,6 +49,18 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         //return ($db->queryValue($this->table, array('location' => 'Receiving')));
+    }
+
+    public function isOversize($id)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT * FROM clients_bays WHERE location_id = $id AND oversize = 1 AND date_removed = 0
+        ";
+        //die($q);
+        $res = $db->queryRow($q);
+        //echo "<pre>",print_r($res),"</pre>"; die();
+        return ( !empty($res) );
     }
 
     public function getLocationUsage()
