@@ -2,6 +2,7 @@
 $display = (!empty(Form::value('to_receiving')))? "block" : "none";
 //$display = "block";
 $pallet_multiplier = empty(Form::value('pallet_multiplier'))? 1 : Form::value('pallet_multiplier');
+$double_bay = (isset($product_info) && $product_info['double_bay'] == 1)
 ?>
 <div class="form-group row">
     <label class="<?php if(isset($label_class)) echo $label_class; else echo "col-md-3";?> col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
@@ -13,7 +14,7 @@ $pallet_multiplier = empty(Form::value('pallet_multiplier'))? 1 : Form::value('p
 <div class="form-group row form-check">
     <label class="<?php if(isset($label_class)) echo $label_class; else echo "col-md-3";?> col-form-label" for="oversize">Oversize Location</label>
     <div class="<?php if(isset($div_class)) echo $div_class; else echo "col-md-4";?> checkbox checkbox-default">
-        <input class="form-check-input styled" type="checkbox" id="oversize" name="oversize" <?php if(!empty(Form::value('oversize')) || $product_info['double_bay'] == 1) echo 'checked';?> />
+        <input class="form-check-input styled" type="checkbox" id="oversize" name="oversize" <?php if(!empty(Form::value('oversize')) || $double_bay) echo 'checked';?> />
         <label for="oversize"></label>
     </div>
 </div>
