@@ -44,10 +44,10 @@
         </div>
         <div class="form-group row">
             <div class="form-check">
-                <label class="form-check-label col-md-3" for="oversize">Remove Oversize</label>
+                <label class="form-check-label col-md-3" for="remove_oversize">Remove remove_oversize</label>
                 <div class="col-md-4 checkbox checkbox-default">
-                    <input class="form-check-input styled" type="checkbox" id="oversize" name="oversize" <?php if(!empty(Form::value('oversize'))) echo 'checked';?> />
-                    <label for="oversize"></label>
+                    <input class="form-check-input styled" type="checkbox" id="remove_oversize" name="remove_oversize" <?php if(!empty(Form::value('remove_oversize'))) echo 'checked';?> />
+                    <label for="remove_oversize"></label>
                 </div>
             </div>
         </div>
