@@ -4,7 +4,7 @@ $item_id = $product_id;
 $div_class = "col-md-7";
 $label_class = "col-md-5";
 
-echo "<pre>",print_r($product_info),"</pre>";
+//echo "<pre>",print_r($product_info),"</pre>";
 ?>
 <div class="row">
     <div class="col-md-12">
