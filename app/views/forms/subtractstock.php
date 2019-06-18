@@ -44,7 +44,7 @@
         </div>
         <div class="form-group row">
             <div class="form-check">
-                <label class="form-check-label col-md-3" for="remove_oversize">Remove remove_oversize</label>
+                <label class="form-check-label col-md-3" for="remove_oversize">Remove Oversize</label>
                 <div class="col-md-4 checkbox checkbox-default">
                     <input class="form-check-input styled" type="checkbox" id="remove_oversize" name="remove_oversize" <?php if(!empty(Form::value('remove_oversize'))) echo 'checked';?> />
                     <label for="remove_oversize"></label>
