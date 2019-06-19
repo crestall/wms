@@ -69,7 +69,7 @@ class Location extends Model{
         $query = "
             SELECT l.id, l.location, cb.oversize, il.qty, i.name, i.sku, c.client_name
             FROM locations l
-            items_locations il ON l.id = il.location_id
+            JOIN items_locations il ON l.id = il.location_id
             JOIN items i ON i.id = il.item_id
             JOIN clients c ON i.client_id = c.id
             LEFT JOIN clients_bays cb ON cb.location_id = il.location_id AND cb.date_removed = 0 AND cb.client_id = c.id
