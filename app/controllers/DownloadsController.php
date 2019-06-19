@@ -830,19 +830,21 @@ class DownloadsController extends Controller {
         $locations = $this->location->getLocationUsage();
         $cols = array(
             "Location",
+            "Oversize",
             "Client",
-            "Item/Notes",
+            "Item",
             "SKU",
             "Count"
         );
         $rows = array();
         foreach($locations as $l)
         {
-            $in = (empty($l['notes']))? $l['name']: $l['notes'];
+            $os = ($l['oversize'] > 0)? "Yes":"No";
             $row = array(
                 $l['location'],
+                $os,
                 $l['client_name'],
-                $in,
+                $l['name'],
                 $l['sku'],
                 $l['qty']
             );
