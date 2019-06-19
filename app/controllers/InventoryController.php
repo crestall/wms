@@ -247,6 +247,10 @@ class inventoryController extends Controller
             {
                 $location_string .= ", Allocated(".$il['allocated'].")";
             }
+            if($il['oversize'] > 0)
+            {
+                $location_string .= " - Oversize Location";
+            }
             $location_string .= "\n";
         }
         $rows = (count($item_locations) > 5)? count($item_locations) + 2 : 7;
