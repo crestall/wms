@@ -67,14 +67,12 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $query = "
-            SELECT l.id, l.location, cl.notes, il.qty, i.name, i.sku, IFNULL(c.client_name, c2.client_name) as client_name
+            SELECT l.id, l.location, cb.oversize, il.qty, i.name, i.sku, c.client_name
             FROM locations l
-            LEFT JOIN items_locations il ON l.id = il.location_id
-            LEFT JOIN items i ON i.id = il.item_id
-            LEFT JOIN clients c ON i.client_id = c.id
-            LEFT JOIN clients_locations cl ON cl.location_id = l.id AND cl.date_removed = 0
-            LEFT JOIN clients c2 ON c2.id = cl.client_id
-            WHERE (c.client_name IS NOT NULL OR c2.client_name IS NOT NULL)
+            items_locations il ON l.id = il.location_id
+            JOIN items i ON i.id = il.item_id
+            JOIN clients c ON i.client_id = c.id
+            LEFT JOIN clients_bays cb ON cb.location_id = il.location_id AND cb.date_removed = 0 AND cb.client_id = c.id
             ORDER BY l.location
         ";
 
