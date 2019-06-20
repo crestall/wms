@@ -40,10 +40,7 @@ class Clientsbays extends Model{
         {
             $fridays[] = array(
                 'stamp'     =>  $friday,
-                'string'    =>  date("d-M-y", $friday),
-                'oversize'  =>  0,
-                'standard'  =>  0,
-                'pickfaces' =>  0
+                'string'    =>  date("d-M-y", $friday)
             );
             $friday = strtotime($gap, $friday);
         }
@@ -76,8 +73,8 @@ class Clientsbays extends Model{
             {
                 $client_name = $db->queryValue('clients', array('id' => $rep['client_id']), 'client_name');
                 //$data[$client_name][$f['string']] = $rep['bays'];
-                $data[$client_name][$f['oversize']] = $rep['oversize'];
-                $data[$client_name][$f['standard']] = $rep['standard'];
+                $data[$client_name]['oversize'] = $rep['oversize'];
+                $data[$client_name]['standard'] = $rep['standard'];
             }
             $tquery = "
                 SELECT client_id, SUM(bays) AS bays FROM
@@ -103,9 +100,9 @@ class Clientsbays extends Model{
                 $client_name = $db->queryValue('clients', array('id' => $trep['client_id']), 'client_name');
                 /* */
                 if(isset($data[$client_name][$f['pickfaces']] ))
-                    $data[$client_name][$f['pickfaces']] += $trep['bays'];
+                    $data[$client_name]['pickfaces'] += $trep['bays'];
                 else
-                    $data[$client_name][$f['fickfaces']] = $trep['bays'];
+                    $data[$client_name]['fickfaces'] = $trep['bays'];
 
                 //$data[$client_name][$f['pickfaces']] = $trep['bays'];
             }
