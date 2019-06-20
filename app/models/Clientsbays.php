@@ -40,7 +40,7 @@ class Clientsbays extends Model{
         {
             $fridays[] = array(
                 'stamp'     =>  $friday,
-                'string'    =>  date("d-M-y", $friday)
+                'string'    =>  date("d-M-y", $friday),
                 'oversize'  =>  0,
                 'standard'  =>  0,
                 'pickface'  =>  0
