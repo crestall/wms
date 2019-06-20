@@ -33,10 +33,10 @@
                         <tr>
                             <td data-label="Client"><?php echo $client_name;?></td>
                             <?php foreach($fridays as $f):
-                                $usage = (isset($carray[$f['string']]['oversize']))? round($carray[$f['string']]['oversize']) : 0 ;?>
-                                <td data-label="<?php echo $f['string'];?> oversize" class="number"><?php echo $usage;?></td>
-                                <?php $usage = (isset($carray[$f['string']]['standard']))? round($carray[$f['string']]['standard']) : 0 ;?>
+                                $usage = (isset($carray[$f['string']]['standard']))? round($carray[$f['string']]['standard']) : 0 ;?>
                                 <td data-label="<?php echo $f['string'];?> standard" class="number"><?php echo $usage;?></td>
+                                <?php $usage = (isset($carray[$f['string']]['oversize']))? round($carray[$f['string']]['oversize']) : 0 ;?>
+                                <td data-label="<?php echo $f['string'];?> oversize" class="number"><?php echo $usage;?></td>
                                 <?php $usage = (isset($carray[$f['string']]['pickfaces']))? round($carray[$f['string']]['pickfaces']) : 0 ;?>
                                 <td data-label="<?php echo $f['string'];?> pickfaces" class="number"><?php echo $usage;?></td>
                             <?php endforeach;?>
