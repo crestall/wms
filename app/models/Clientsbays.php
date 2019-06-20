@@ -68,11 +68,13 @@ class Clientsbays extends Model{
             ";
             //echo "<p>$bquery</p>"; //die();
             $reps = $db->queryData($bquery);
-            echo "<pre>",print_r($reps),"</pre>";die();
+            //echo "<pre>",print_r($reps),"</pre>";die();
             foreach($reps as $rep)
             {
                 $client_name = $db->queryValue('clients', array('id' => $rep['client_id']), 'client_name');
-                $data[$client_name][$f['string']] = $rep['bays'];
+                //$data[$client_name][$f['string']] = $rep['bays'];
+                $data[$client_name][$f['oversize']] = $rep['oversize'];
+                $data[$client_name][$f['standard']] = $rep['standard'];
             }
             $tquery = "
                 SELECT client_id, SUM(bays) AS bays FROM
@@ -96,11 +98,15 @@ class Clientsbays extends Model{
             foreach($treps as $trep)
             {
                 $client_name = $db->queryValue('clients', array('id' => $trep['client_id']), 'client_name');
-                if(isset($data[$client_name][$f['string']] ))
-                    $data[$client_name][$f['string']] += $trep['bays']/9;
+                /* */
+                if(isset($data[$client_name][$f['pickfaces']] ))
+                    $data[$client_name][$f['pickfaces']] += $trep['bays'];
                 else
-                    $data[$client_name][$f['string']] = $trep['bays']/9;
+                    $data[$client_name][$f['fickfaces']] = $trep['bays'];
+
+                //$data[$client_name][$f['pickfaces']] = $trep['bays'];
             }
+            /*
             $lquery = "SELECT client_id, count(*) AS bays FROM clients_locations WHERE date_added < $qto AND (date_removed > $qfrom OR date_removed = 0) GROUP BY client_id";
             //echo "<p>$lquery</p>";die();
             $lreps = $db->queryData($lquery);
@@ -112,6 +118,7 @@ class Clientsbays extends Model{
                 else
                     $data[$client_name][$f['string']] = $lrep['bays'];
             }
+            */
         }
         ksort($data);
         echo "<pre>",print_r($data),"</pre>";die();
