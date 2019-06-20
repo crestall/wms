@@ -102,7 +102,7 @@ class Clientsbays extends Model{
                 if(isset($data[$client_name]['pickfaces'] ))
                     $data[$client_name]['pickfaces'] += $trep['bays'];
                 else
-                    $data[$client_name]['fickfaces'] = $trep['bays'];
+                    $data[$client_name]['pickfaces'] = $trep['bays'];
 
                 //$data[$client_name][$f['pickfaces']] = $trep['bays'];
             }
