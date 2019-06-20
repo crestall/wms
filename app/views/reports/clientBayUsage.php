@@ -20,9 +20,11 @@
                             <?php endforeach;?>
                         </tr>
                         <tr>
-                            <th>Standard Bays</th>
-                            <th>Oversize Bays</th>
-                            <th>Pickfaces</th>
+                            <?php foreach($fridays as $f):?>
+                                <th>Standard Bays</th>
+                                <th>Oversize Bays</th>
+                                <th>Pickfaces</th>
+                            <?php endforeach;?>
                         </tr>
                     </thead>
                     <tbody>
