@@ -121,7 +121,7 @@ class Clientsbays extends Model{
             */
         }
         ksort($data);
-        echo "<pre>",print_r($data),"</pre>";die();
+        //echo "<pre>",print_r($data),"</pre>";die();
         return array(
             'data'      => $data,
             'fridays'   => $fridays
