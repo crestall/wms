@@ -2751,7 +2751,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."solar-teams/edit-solar-team/team=$rep_id");
+        return $this->redirector->to(PUBLIC_ROOT."solar-teams/edit-solar-team/team=$team_id");
     }
 
     public function procRepAdd()
