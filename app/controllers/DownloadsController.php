@@ -890,8 +890,22 @@ class DownloadsController extends Controller {
         foreach($bays['fridays'] as $f)
         {
             $cols[] = $f['string'];
+            $cols[] = "";
+            $cols[] = "";
         }
         $rows = array();
+        $c = 0;
+        foreach($bays['fridays'] as $f)
+        {
+            $row = array();
+            if($c == 0)
+                $row[] = "";
+            $row[] = "Standard Bays";
+            $row[] =  "Oversize Bays";
+            $row[] =  "Pickfaces";
+            ++$c;
+        }
+        $rows[] = $row;
         foreach($bays['data'] as $client_name => $carray)
         {
             $row = array(
@@ -899,7 +913,11 @@ class DownloadsController extends Controller {
             );
             foreach($bays['fridays'] as $f)
             {
-                $usage = (isset($carray[$f['string']]))? round($carray[$f['string']]) : 0;
+                $usage = (isset($carray[$f['string']]['standard']))? round($carray[$f['string']]['standard']) : 0;
+                $row[] = $usage;
+                $usage = (isset($carray[$f['string']]['oversize']))? round($carray[$f['string']]['oversize']) : 0;
+                $row[] = $usage;
+                $usage = (isset($carray[$f['string']]['pickfaces']))? round($carray[$f['string']]['pickfaces']) : 0;
                 $row[] = $usage;
             }
             $rows[] = $row;
