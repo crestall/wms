@@ -68,6 +68,7 @@ class Clientsbays extends Model{
             ";
             //echo "<p>$bquery</p>"; //die();
             $reps = $db->queryData($bquery);
+            echo "<pre>",print_r($reps),"</pre>";die();
             foreach($reps as $rep)
             {
                 $client_name = $db->queryValue('clients', array('id' => $rep['client_id']), 'client_name');
