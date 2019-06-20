@@ -895,9 +895,9 @@ class DownloadsController extends Controller {
         }
         $rows = array();
         $c = 0;
+        $row = array();
         foreach($bays['fridays'] as $f)
         {
-            $row = array();
             if($c == 0)
                 $row[] = "";
             $row[] = "Standard Bays";
