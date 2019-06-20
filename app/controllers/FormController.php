@@ -97,6 +97,7 @@ class FormController extends Controller {
             'procRepAdd',
             'procRepEdit',
             'procScanToInventory',
+            'procSolarTeamAdd',
             'procStockMovement',
             'procStoreAdd',
             'procStoreEdit',
@@ -2714,6 +2715,20 @@ class FormController extends Controller {
             }
         }
         return $this->redirector->to(PUBLIC_ROOT."site-settings/couriers");
+    }
+
+    public function procSolarTeamAdd()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
     }
 
     public function procRepAdd()
