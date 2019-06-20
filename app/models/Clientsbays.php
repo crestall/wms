@@ -99,7 +99,7 @@ class Clientsbays extends Model{
             {
                 $client_name = $db->queryValue('clients', array('id' => $trep['client_id']), 'client_name');
                 /* */
-                if(isset($data[$client_name][$f['pickfaces']] ))
+                if(isset($data[$client_name]['pickfaces'] ))
                     $data[$client_name]['pickfaces'] += $trep['bays'];
                 else
                     $data[$client_name]['fickfaces'] = $trep['bays'];
