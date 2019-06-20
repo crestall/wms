@@ -43,7 +43,7 @@ class Clientsbays extends Model{
                 'string'    =>  date("d-M-y", $friday),
                 'oversize'  =>  0,
                 'standard'  =>  0,
-                'pickface'  =>  0
+                'pickfaces' =>  0
             );
             $friday = strtotime($gap, $friday);
         }
