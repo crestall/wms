@@ -51,7 +51,7 @@ class Clientsbays extends Model{
             $qfrom = isset($fridays[$i - 1])? $fridays[$i - 1]['stamp'] : $from;
             $qto = $f['stamp'];
             $bquery = "
-                client_id, SUM(oversize) AS oversize, SUM(standard) AS standard FROM
+                SELECT client_id, SUM(oversize) AS oversize, SUM(standard) AS standard FROM
                 (
                     SELECT
                         client_id,
