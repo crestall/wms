@@ -73,8 +73,8 @@ class Clientsbays extends Model{
             {
                 $client_name = $db->queryValue('clients', array('id' => $rep['client_id']), 'client_name');
                 //$data[$client_name][$f['string']] = $rep['bays'];
-                $data[$client_name]['oversize'] = $rep['oversize'];
-                $data[$client_name]['standard'] = $rep['standard'];
+                $data[$client_name][$f['string']]['oversize'] = $rep['oversize'];
+                $data[$client_name][$f['string']]['standard'] = $rep['standard'];
             }
             $tquery = "
                 SELECT client_id, SUM(bays) AS bays FROM
@@ -99,10 +99,10 @@ class Clientsbays extends Model{
             {
                 $client_name = $db->queryValue('clients', array('id' => $trep['client_id']), 'client_name');
                 /* */
-                if(isset($data[$client_name]['pickfaces'] ))
-                    $data[$client_name]['pickfaces'] += $trep['bays'];
+                if(isset($data[$client_name][$f['string']]['pickfaces'] ))
+                    $data[$client_name][$f['string']]['pickfaces'] += $trep['bays'];
                 else
-                    $data[$client_name]['pickfaces'] = $trep['bays'];
+                    $data[$client_name][$f['string']]['pickfaces'] = $trep['bays'];
 
                 //$data[$client_name][$f['pickfaces']] = $trep['bays'];
             }
