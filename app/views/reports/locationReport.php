@@ -21,8 +21,9 @@
                     <thead>
                     	<tr>
                             <th>Location</th>
+                            <th>Oversize</th>
                             <th>Client</th>
-                            <th>Item/Notes</th>
+                            <th>Item</th>
                             <th>SKU</th>
                             <th>Count</th>
                         </tr>
@@ -31,8 +32,9 @@
                     <?php foreach($locations as $l):?>
                     	<tr>
                             <td data-label="Location"><?php echo $l['location'];?></td>
+                            <td data-label="Oversize"><?php if($l['oversize'] > 0) echo "Yes"; else echo "No";?></td>
                             <td data-label="Client"><?php echo $l['client_name'];?></td>
-                            <td data-label="Item/Notes"><?php if(empty($l['notes'])) echo $l['name']; else echo $l['notes'];?></td>
+                            <td data-label="Item/Notes"><?php echo $l['name'];?></td>
                             <td data-label="SKU"><?php echo $l['sku'];?></td>
                             <td data-label="Count"><?php echo $l['qty'];?></td>
                         </tr>

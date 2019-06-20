@@ -247,6 +247,10 @@ class inventoryController extends Controller
             {
                 $location_string .= ", Allocated(".$il['allocated'].")";
             }
+            if($il['oversize'] > 0)
+            {
+                $location_string .= " - Oversize Location";
+            }
             $location_string .= "\n";
         }
         $rows = (count($item_locations) > 5)? count($item_locations) + 2 : 7;
@@ -322,6 +326,7 @@ class inventoryController extends Controller
         $make_to_location = 0;
         $s = "";
         $available_packs = array();
+        $product_info = array();
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['product']))
@@ -343,7 +348,8 @@ class inventoryController extends Controller
             'available_packs'   =>  $available_packs,
             'make_to_location'  =>  $make_to_location,
             's'                 =>  $s,
-            'client_id'         =>  $client_id
+            'client_id'         =>  $client_id,
+            'product_info'      =>  $product_info
         ]);
     }
 

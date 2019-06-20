@@ -830,19 +830,21 @@ class DownloadsController extends Controller {
         $locations = $this->location->getLocationUsage();
         $cols = array(
             "Location",
+            "Oversize",
             "Client",
-            "Item/Notes",
+            "Item",
             "SKU",
             "Count"
         );
         $rows = array();
         foreach($locations as $l)
         {
-            $in = (empty($l['notes']))? $l['name']: $l['notes'];
+            $os = ($l['oversize'] > 0)? "Yes":"No";
             $row = array(
                 $l['location'],
+                $os,
                 $l['client_name'],
-                $in,
+                $l['name'],
                 $l['sku'],
                 $l['qty']
             );
@@ -888,8 +890,22 @@ class DownloadsController extends Controller {
         foreach($bays['fridays'] as $f)
         {
             $cols[] = $f['string'];
+            $cols[] = "";
+            $cols[] = "";
         }
         $rows = array();
+        $c = 0;
+        $row = array();
+        foreach($bays['fridays'] as $f)
+        {
+            if($c == 0)
+                $row[] = "";
+            $row[] = "Standard Bays";
+            $row[] =  "Oversize Bays";
+            $row[] =  "Pickfaces";
+            ++$c;
+        }
+        $rows[] = $row;
         foreach($bays['data'] as $client_name => $carray)
         {
             $row = array(
@@ -897,7 +913,11 @@ class DownloadsController extends Controller {
             );
             foreach($bays['fridays'] as $f)
             {
-                $usage = (isset($carray[$f['string']]))? round($carray[$f['string']]) : 0;
+                $usage = (isset($carray[$f['string']]['standard']))? round($carray[$f['string']]['standard']) : 0;
+                $row[] = $usage;
+                $usage = (isset($carray[$f['string']]['oversize']))? round($carray[$f['string']]['oversize']) : 0;
+                $row[] = $usage;
+                $usage = (isset($carray[$f['string']]['pickfaces']))? round($carray[$f['string']]['pickfaces']) : 0;
                 $row[] = $usage;
             }
             $rows[] = $row;
