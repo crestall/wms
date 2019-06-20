@@ -55,8 +55,8 @@ class Clientsbays extends Model{
                 (
                     SELECT
                         client_id,
-                        SUM( CASE WHEN oversize = 1 THEN pallet_multiplier ELSE 0 END ) AS oversize,
-                        SUM( CASE WHEN oversize = 0 THEN pallet_multiplier ELSE 0 END ) AS standard
+                        SUM( CASE WHEN oversize = 1 THEN 1 ELSE 0 END ) AS oversize,
+                        SUM( CASE WHEN oversize = 0 THEN 1 ELSE 0 END ) AS standard
                     FROM
                         clients_bays
                     WHERE
