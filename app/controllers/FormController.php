@@ -2729,6 +2729,29 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name', 'A name is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            if($team_id = $this->solarteam->addRep($post_data))
+            {
+                Session::set('feedback', "That team has been added to the system");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."solar-teams/edit-solar-team/team=$rep_id");
     }
 
     public function procRepAdd()
