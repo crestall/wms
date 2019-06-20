@@ -51,15 +51,16 @@ class Clientsbays extends Model{
             $qfrom = isset($fridays[$i - 1])? $fridays[$i - 1]['stamp'] : $from;
             $qto = $f['stamp'];
             $bquery = "
-                SELECT client_id, SUM(bays) AS bays FROM
+                client_id, SUM(oversize) AS oversize, SUM(standard) AS standard FROM
                 (
                     SELECT
-                        client_id, MAX(pallet_multiplier) AS bays
+                        client_id,
+                        SUM( CASE WHEN oversize = 1 THEN pallet_multiplier * 2 ELSE 0 END ) AS oversize,
+                        SUM( CASE WHEN oversize = 0 THEN pallet_multiplier ELSE 0 END ) AS standard
                     FROM
-                        clients_bays JOIN locations ON clients_bays.location_id = locations.id
+                        clients_bays
                     WHERE
                         (date_added < $qto) AND (date_removed > $qfrom OR date_removed = 0 )
-                    	AND tray = 0
                     GROUP BY
                         location_id, client_id
                 ) tbl1
@@ -112,6 +113,7 @@ class Clientsbays extends Model{
             }
         }
         ksort($data);
+        echo "<pre>",print_r($data),"</pre>";die();
         return array(
             'data'      => $data,
             'fridays'   => $fridays
