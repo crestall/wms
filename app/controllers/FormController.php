@@ -2830,7 +2830,7 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            echo "<pre>",print_r($post_data),"</pre>"; die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
             if($this->solarteam->editTeam($post_data))
             {
                 Session::set('feedback', "Those details have been updated");

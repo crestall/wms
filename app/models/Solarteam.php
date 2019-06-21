@@ -59,6 +59,7 @@ class Solarteam extends Model{
 
     public function addTeam($data)
     {
+        echo "<pre>",print_r($data),"</pre>"; die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  $data['name']
