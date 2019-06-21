@@ -30,17 +30,17 @@
                 },
                 'replenish-pickface':{
                     init: function(){
+
+                    }
+                },
+                'solar-returns':{
+                    init: function(){
                         $('#order_type_id').change(function(e){
                             if($(this).val() > 0)
                             {
                                 $("div#item_holder").slideDown();
                             }
                         });
-                    }
-                },
-                'solar-returns':{
-                    init: function(){
-
                     }
                 },
                 'register-newstock': {
