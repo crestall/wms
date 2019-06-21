@@ -45,7 +45,7 @@ class Solarteam extends Model{
         return $ret_string;
     }
 
-    public function getAllReps($active = 1)
+    public function getAllTeams($active = 1)
     {
         $db = Database::openConnection();
         return $db->queryData("SELECT * FROM {$this->table} WHERE active = $active ORDER BY name");
