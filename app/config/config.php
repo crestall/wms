@@ -404,7 +404,8 @@ return array(
             'add-subtract-stock'    =>  false,
             'quality-control'       =>  false,
             //'replenish-pickface'    => true,
-            'transfer-location' => true
+            'transfer-location' => true,
+            'solar-returns' => true
         ),
 		'reports'			=> array(
           	//'product-movement-summary'	=>	true,
