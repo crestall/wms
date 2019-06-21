@@ -49,20 +49,20 @@ class solarteamsController extends Controller
         ]);
     }
 
-    public function viewReps()
+    public function viewTeams()
     {
         $active = 1;
         if(!empty($this->request->params['args']))
         {
             $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
         }
-        $reps = $this->salesrep->getAllReps($active);
+        $teams = $this->solarteams->getAllTeams($active);
         //render the page
         Config::setJsConfig('curPage', "view-reps");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/viewReps.php',
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarteams/", Config::get('VIEWS_PATH') . 'salesreps/viewTeams.php',
         [
-            'page_title'    =>  'Manage Sales Reps',
-            'reps'          =>  $reps,
+            'page_title'    =>  'Manage Solar Teams',
+            'reps'          =>  $teams,
             'active'        =>  $active
         ]);
     }

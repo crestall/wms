@@ -10,7 +10,7 @@
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
     <?php echo Form::displayError('general');?>
     <div class="row">
-        <form id="edit-sales-rep" method="post" action="/form/procSolarTeamEdit">
+        <form id="edit-solar-team" method="post" action="/form/procSolarTeamEdit">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
                 <div class="col-md-4">

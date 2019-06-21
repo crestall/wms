@@ -32,7 +32,7 @@
                         });
                     }
                 },
-                'view-reps':{
+                'view-teams':{
                     init: function(){
                         //console.log('correct');
                         $('table#view_reps_table').filterTable({
@@ -42,16 +42,6 @@
                         $('table#view_reps_table').stickyTableHeaders();
                     }
                 },
-                'shipto-reps' :{
-                    init: function(){
-                        $("select#client_selector").change(function(e){
-                            if($(this).val() > 0)
-                            {
-                                window.location.href = "/sales-reps/ship-to-reps/client="+$(this).val();
-                            }
-                        });
-                    }
-                }
             }
 
             //run the script for the current page
