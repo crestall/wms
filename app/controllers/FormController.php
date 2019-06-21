@@ -98,6 +98,7 @@ class FormController extends Controller {
             'procRepEdit',
             'procScanToInventory',
             'procSolarTeamAdd',
+            'procSolarTeamEdit',
             'procStockMovement',
             'procStoreAdd',
             'procStoreEdit',
@@ -2742,7 +2743,7 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            if($team_id = $this->solarteam->addRep($post_data))
+            if($team_id = $this->solarteam->addTeam($post_data))
             {
                 Session::set('feedback', "That team has been added to the system");
             }
@@ -2804,6 +2805,41 @@ class FormController extends Controller {
             }
         }
         return $this->redirector->to(PUBLIC_ROOT."sales-reps/edit-sales-rep/rep=$rep_id");
+    }
+
+    public function procSolarTeamEdit()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name', 'A name is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            if($this->solarteam->editTeam($post_data))
+            {
+                Session::set('feedback', "Those details have been updated");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."solar-teams/edit-team/team=$team_id");
     }
 
     public function procRepEdit()

@@ -57,7 +57,7 @@ class Solarteam extends Model{
         return $db->queryById($this->table, $id);
     }
 
-    public function addRep($data)
+    public function addTeam($data)
     {
         $db = Database::openConnection();
         $vals = array(
@@ -69,35 +69,16 @@ class Solarteam extends Model{
         return $id;
     }
 
-    public function editRep($data)
+    public function editTeam($data)
     {
         $db = Database::openConnection();
         $vals = array(
-            'client_id'     =>  $data['client_id'],
             'name'          =>  $data['name'],
-            'email'         =>  $data['email'],
-            'phone'         =>  $data['phone'],
-            'tfn'           =>  null,
-            'abn'           =>  null,
             'comments'      =>  null,
-            'address'       =>  null,
-            'address_2'     =>  null,
-            'suburb'        =>  null,
-            'state'         =>  null,
-            'postcode'      =>  null,
-            'country'       =>  'AU'
         );
         $vals['active'] = isset($data['active'])? 1 : 0;
-        if(!empty($data['tfn'])) $vals['tfn'] = $data['tfn'];
-        if(!empty($data['abn'])) $vals['abn'] = $data['abn'];
         if(!empty($data['comments'])) $vals['comments'] = $data['comments'];
-        if(!empty($data['address'])) $vals['address'] = $data['address'];
-        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
-        if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
-        if(!empty($data['state'])) $vals['state'] = $data['state'];
-        if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
-        if(!empty($data['country'])) $vals['country'] = $data['country'];
-        $id = $db->updateDatabaseFields($this->table, $vals, $data['rep_id']);
+        $id = $db->updateDatabaseFields($this->table, $vals, $data['team_id']);
         return $id;
     }
 }
