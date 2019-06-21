@@ -29,7 +29,7 @@ class solarteamsController extends Controller
     public function addTeam()
     {
         //render the page
-        Config::setJsConfig('curPage', "add-solar-team");
+        Config::setJsConfig('curPage', "add-team");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarteams/", Config::get('VIEWS_PATH') . 'solarteams/addTeam.php',
         [
             'page_title'    =>  'Add New Solar Team'
@@ -41,7 +41,7 @@ class solarteamsController extends Controller
         $team_id = $this->request->params['args']['team'];
         $team_info = $this->solarteam->getTeamById($team_id);
         //render the page
-        Config::setJsConfig('curPage', "edit-solar-team");
+        Config::setJsConfig('curPage', "edit-team");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarteams/", Config::get('VIEWS_PATH') . 'solarteams/editTeam.php',
         [
             'page_title'     =>  'Edit Solar Team Details',

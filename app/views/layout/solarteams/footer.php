@@ -10,7 +10,7 @@
 
                     }
                 },
-                'add-solar-team':{
+                'add-team':{
                     init: function()
                     {
                         $('form#add-solar-team').submit(function(){
@@ -21,7 +21,7 @@
                         });
                     }
                 },
-                'edit-solar-team':{
+                'edit-team':{
                     init: function()
                     {
                         $('form#edit-solar-team').submit(function(){
