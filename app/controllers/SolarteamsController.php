@@ -39,7 +39,7 @@ class solarteamsController extends Controller
     public function editTeam()
     {
         $team_id = $this->request->params['args']['team'];
-        $team_info = $this->solarteam->getTeamById($rep_id);
+        $team_info = $this->solarteam->getTeamById($team_id);
         //render the page
         Config::setJsConfig('curPage', "edit-solar-team");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarteams/", Config::get('VIEWS_PATH') . 'solarteams/editTeam.php',
