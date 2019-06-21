@@ -59,7 +59,7 @@ class solarteamsController extends Controller
         $teams = $this->solarteams->getAllTeams($active);
         //render the page
         Config::setJsConfig('curPage', "view-teams");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarteams/", Config::get('VIEWS_PATH') . 'salesreps/viewTeams.php',
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarteams/", Config::get('VIEWS_PATH') . 'solarteams/viewTeams.php',
         [
             'page_title'    =>  'Manage Solar Teams',
             'teams'          =>  $teams,

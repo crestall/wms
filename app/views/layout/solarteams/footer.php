@@ -39,7 +39,7 @@
                             inputSelector: '#table_searcher'
                         });
 
-                        $('table#view_reps_table').stickyTableHeaders();
+                        $('table#view_teams_table').stickyTableHeaders();
                     }
                 },
             }
