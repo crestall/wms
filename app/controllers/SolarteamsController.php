@@ -56,7 +56,7 @@ class solarteamsController extends Controller
         {
             $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
         }
-        $teams = $this->solarteams->getAllTeams($active);
+        $teams = $this->solarteam->getAllTeams($active);
         //render the page
         Config::setJsConfig('curPage', "view-teams");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarteams/", Config::get('VIEWS_PATH') . 'solarteams/viewTeams.php',
