@@ -36,16 +36,16 @@ class solarteamsController extends Controller
         ]);
     }
 
-    public function editSalesRep()
+    public function editTeam()
     {
-        $rep_id = $this->request->params['args']['rep'];
-        $rep_info = $this->salesrep->getRepById($rep_id);
+        $team_id = $this->request->params['args']['team'];
+        $team_info = $this->solarteam->getTeamById($rep_id);
         //render the page
-        Config::setJsConfig('curPage', "edit-sales-rep");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/editRep.php',
+        Config::setJsConfig('curPage', "edit-solar-team");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarteams/", Config::get('VIEWS_PATH') . 'solarteams/editTeam.php',
         [
-            'page_title'    =>  'Edit Sales Rep details',
-            'rep'           =>  $rep_info
+            'page_title'     =>  'Edit Solar Team Details',
+            'team'           =>  $team_info
         ]);
     }
 

@@ -21,12 +21,10 @@
                         });
                     }
                 },
-                'edit-sales-rep':{
+                'edit-solar-team':{
                     init: function()
                     {
-                        autoCompleter.addressAutoComplete($('#address'));
-                        autoCompleter.suburbAutoComplete($('#suburb'));
-                        $('form#edit-sales-rep').submit(function(){
+                        $('form#edit-solar-team').submit(function(){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
