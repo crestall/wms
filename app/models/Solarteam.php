@@ -51,7 +51,7 @@ class Solarteam extends Model{
         return $db->queryData("SELECT * FROM {$this->table} WHERE active = $active ORDER BY name");
     }
 
-    public function getRepById($id = 0)
+    public function getTeamById($id = 0)
     {
         $db = Database::openConnection();
         return $db->queryById($this->table, $id);
