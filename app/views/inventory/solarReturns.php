@@ -16,7 +16,7 @@ if(!empty(Form::value('csrf_token')))
                         <?php echo Form::displayError('order_type_id');?>
                     </div>
                 </div>
-                <div id="item_holder" style="display:<?php echo $idsip;?>">
+                <div id="item_holder" style="display:<?php echo $idisp;?>">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
                         <div class="col-md-4">
