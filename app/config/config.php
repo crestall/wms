@@ -342,7 +342,7 @@ return array(
         'stock-movement'    =>  'fas fa-dolly',
         'data-entry'        =>  'fas fa-indent',
         'sales-reps'		=>	'fas fa-users',
-        'solar-teams'		=>	'fas fa-users', 
+        'solar-teams'		=>	'fas fa-users',
         'stores'            =>  'fas fa-store-alt',
         'downloads'         =>  'fas fa-download',
         'financials'        =>  'fas fa-file-invoice-dollar',
@@ -447,7 +447,8 @@ return array(
         ),
         'solar-teams'   =>array(
             'add-team'  => true,
-            'edit-team' => false
+            'edit-team' => false,
+            'view-teams'    => true
         ),
         'stores'        =>  array(
             'view-stores'           =>  true,

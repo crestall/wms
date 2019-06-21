@@ -35,7 +35,7 @@
                 'view-teams':{
                     init: function(){
                         //console.log('correct');
-                        $('table#view_reps_table').filterTable({
+                        $('table#view_teams_table').filterTable({
                             inputSelector: '#table_searcher'
                         });
 
