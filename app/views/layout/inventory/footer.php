@@ -30,11 +30,15 @@
                 },
                 'replenish-pickface':{
                     init: function(){
-                        $('#client_selector').change(function(e){
+
+                    }
+                },
+                'solar-returns':{
+                    init: function(){
+                        $('#order_type_id').change(function(e){
                             if($(this).val() > 0)
                             {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Calculating Movements...</h2></div>' });
-                                window.location.href = "/inventory/replenish-pickface/client=" + $(this).val();
+                                $("div#item_holder").slideDown();
                             }
                         });
                     }
