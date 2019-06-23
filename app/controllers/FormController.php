@@ -1204,6 +1204,8 @@ class FormController extends Controller {
         }
         else
         {
+            $pallet_count = ($this->dataSubbed($pallet_count))? $pallet_count: 0;
+            $carton_count = ($this->dataSubbed($carton_count))? $carton_count: 0; 
             $this->inwardsgoods->recordData(array(
                 'client_id'     =>  $client_id,
                 'pallets'       =>  $pallet_count,
