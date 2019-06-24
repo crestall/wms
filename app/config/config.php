@@ -479,7 +479,7 @@ return array(
             'user-roles'                =>  true,
             //'pickfaces'                 => true,
             'couriers'                  => true,
-            'solar-companies'   => true
+            'solar-order-types'   => true
 		),
         'financials'    =>  array(
             'hunters-check' => true
