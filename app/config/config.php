@@ -439,23 +439,23 @@ return array(
             'empty-bay-report'      => true,
             //'client-daily-reports'  => true,
             'pickups-report'    => true
-		),
+		),/*
         'sales-reps'        =>  array(
             'view-reps'                 =>  true,
             'add-sales-rep'             =>  true,
             'edit-sales-rep'            =>  false,
             'ship-to-reps'              =>  true
-        ),
+        ),*/
         'solar-teams'   =>array(
             'add-team'  => true,
             'edit-team' => false,
             'view-teams'    => true
-        ),
+        ),/*
         'stores'        =>  array(
             'view-stores'           =>  true,
             'add-store'             =>  true,
             'edit-store'            =>  false
-        ),
+        ),*/
         /*
         'staff'             => array(
             'time-sheets'   =>  true,
@@ -475,10 +475,11 @@ return array(
             'staff'                     =>  true,
             'manage-users'	            =>	true,
             'packing-types'             =>  true,
-            'store-chains'              =>  true,
+            //'store-chains'              =>  true,
             'user-roles'                =>  true,
             //'pickfaces'                 => true,
-            'couriers'                  => true
+            'couriers'                  => true,
+            'solar-order-types'   => true
 		),
         'financials'    =>  array(
             'hunters-check' => true
