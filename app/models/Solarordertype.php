@@ -33,7 +33,7 @@ class Solarordertype extends Model{
         return $db->queryValue($this->table, array('name' =>  $name));
     }
 
-    public function addTypes($data)
+    public function addType($data)
     {
         $db = Database::openConnection();
         $vals = array(
