@@ -475,7 +475,7 @@ return array(
             'staff'                     =>  true,
             'manage-users'	            =>	true,
             'packing-types'             =>  true,
-            'store-chains'              =>  true,
+            //'store-chains'              =>  true,
             'user-roles'                =>  true,
             //'pickfaces'                 => true,
             'couriers'                  => true,
