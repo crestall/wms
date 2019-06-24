@@ -110,7 +110,7 @@ class sitesettingsController extends Controller
 
     public function solarOrderTypes()
     {
-        $types = $this->storechain->getTypes();
+        $types = $this->solarordertype->getTypes();
         //render the page
         Config::setJsConfig('curPage', "solar-order-types");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/solarOrderTypes.php',[
