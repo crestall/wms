@@ -2756,7 +2756,7 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            if($type_id = $this->solarordertpe->addType($post_data))
+            if($type_id = $this->solarordertype->addType($post_data))
             {
                 Session::set('feedback', "That solar type has been added to the system");
             }
