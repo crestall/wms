@@ -919,8 +919,6 @@ class Item extends Model{
                         items_locations il JOIN locations l ON il.location_id = l.id
                     WHERE
                         il.item_id = $item_id AND il.qty = {$item['per_pallet']}
-                    ORDER BY
-                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2), SUBSTRING_INDEX(l.location, '.', -3)
                 ) a
                 LEFT JOIN
                 (
@@ -934,6 +932,8 @@ class Item extends Model{
                         oi.location_id, oi.item_id
                 ) b
                 ON a.item_id = b.item_id AND a.location_id = b.location_id
+                ORDER BY
+                    a.location_id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(a.location, '.', -2), SUBSTRING_INDEX(a.location, '.', -3)
             ");
         }
         else
@@ -949,8 +949,6 @@ class Item extends Model{
                         items_locations il JOIN locations l ON il.location_id = l.id
                     WHERE
                         il.item_id = $item_id AND (il.qty - il.qc_count) > 0
-                    ORDER BY
-                        l.id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(l.location, '.', -2), SUBSTRING_INDEX(l.location, '.', -3)
                 ) a
                 LEFT JOIN
                 (
@@ -964,6 +962,8 @@ class Item extends Model{
                         oi.location_id, oi.item_id
                 ) b
                 ON a.item_id = b.item_id AND a.location_id = b.location_id
+                ORDER BY
+                    a.location_id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(a.location, '.', -2), SUBSTRING_INDEX(a.location, '.', -3)
         	");
         }
 
@@ -1160,8 +1160,6 @@ class Item extends Model{
                         items_locations il JOIN locations l ON il.location_id = l.id JOIN items i ON il.item_id = i.id JOIN clients_bays cb ON cb.location_id = il.location_id AND cb.date_removed = 0 AND cb.client_id = i.client_id
                     WHERE
                         il.item_id = $item_id
-                    ORDER BY
-                        l.location
                 ) a
                 LEFT JOIN
                 (
@@ -1175,6 +1173,8 @@ class Item extends Model{
                         oi.location_id, oi.item_id
                 ) b
                 ON a.item_id = b.item_id AND a.location_id = b.location_id
+                ORDER BY
+                    a.location
         ");
     }
 
