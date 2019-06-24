@@ -478,7 +478,8 @@ return array(
             'store-chains'              =>  true,
             'user-roles'                =>  true,
             //'pickfaces'                 => true,
-            'couriers'                  => true
+            'couriers'                  => true,
+            'solar-companies'   => true
 		),
         'financials'    =>  array(
             'hunters-check' => true
