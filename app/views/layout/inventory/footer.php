@@ -42,6 +42,16 @@
                                 $("#form_submitter").removeAttr('disabled');
                             }
                         });
+                        $("form#solar_return").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Return...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        })
                     }
                 },
                 'register-newstock': {
