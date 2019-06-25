@@ -51,7 +51,26 @@
                             {
                                 return false;
                             }
-                        })
+                        });
+                        $("input.item-searcher").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.itemAutoComplete($(this), selectCallback, changeCallback);
+                        });
+                        function selectCallback(event, ui)
+                        {
+                            $("#item_id").val(ui.item.item_id);
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                        }
                     }
                 },
                 'register-newstock': {
