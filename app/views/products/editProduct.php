@@ -7,7 +7,9 @@ $depth = ($product['depth'] > 0)? $product['depth']: "";
 $height = ($product['height'] > 0)? $product['height']: "";
 $price = ($product['price'] > 0)? $product['price']: "";
 $weight = ($product['weight'] > 0)? $product['weight']: "";
+$supplier = (!empty($product['supplier']))? $pruduct['supplier']: "";
 $client_id = $product['client_id'];
+
 ?>
 <div id="page-wrapper">
     <?php //echo "<pre>",print_r($packing_types),"</pre>"; ?>
@@ -62,6 +64,18 @@ $client_id = $product['client_id'];
                 <div class="col-md-4">
                     <select id="client_id" name="client_id" class="form-control selectpicker disabled" disabled><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($product['client_id']);?></select>
                     <?php echo Form::displayError('client_id');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" id="type_label">Supplier</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="supplier" id="supplier" value="<?php echo $supplier;?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Solar Supplier</label>
+                <div class="col-md-4">
+                    <select id="solar_type_id" name="solar_type_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes($product['solar_type_id']);?></select>
                 </div>
             </div>
             <div class="form-group row">
