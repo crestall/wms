@@ -35,6 +35,18 @@ $per_pallet_display = (empty(Form::value('palletized')))? "none" : "block";
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-md-3 col-form-label" id="type_label">Supplier</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="supplier" id="supplier" value="<?php echo Form::value('supplier');?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Solar Supplier</label>
+                <div class="col-md-4">
+                    <select id="solar_type_id" name="solar_type_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes(Form::value('solar_type_id'));?></select>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> SKU</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="sku" id="sku" value="<?php echo Form::value('sku');?>" />

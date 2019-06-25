@@ -134,13 +134,13 @@ class FormController extends Controller {
         {
             Form::setError('name', 'The item name is required');
         }
-        if(!$this->dataSubbed(#serial_number))
+        if(!$this->dataSubbed($serial_number))
         {
             Form::setError('name', 'The item serial number is required');
         }
     }
 
-    public function procMovementreasonAdd()
+    public function procMovementReasonAdd()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
