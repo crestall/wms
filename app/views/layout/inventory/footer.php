@@ -39,6 +39,7 @@
                             if($(this).val() > 0)
                             {
                                 $("div#item_holder").slideDown();
+                                $("#form_submitter").removeAttr('disabled');
                             }
                         });
                     }
