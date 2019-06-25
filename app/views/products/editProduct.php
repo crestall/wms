@@ -75,7 +75,7 @@ $client_id = $product['client_id'];
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Solar Supplier</label>
                 <div class="col-md-4">
-                    <select id="solar_type_id" name="solar_type_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes($product['solar_type_id']);?></select>
+                    <select id="solar_type_id" name="solar_type_id" class="form-control selectpicker" <?php if($product['client_id'] != 67) echo "disabled"?>><option value="0">--Select One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes($product['solar_type_id']);?></select>
                 </div>
             </div>
             <div class="form-group row">
