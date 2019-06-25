@@ -32,7 +32,6 @@ if(!empty(Form::value('csrf_token')))
                         </div>
                     </div>
                 </div>
-
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="item_id" id="item_id" />
                 <div class="form-group row">

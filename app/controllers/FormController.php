@@ -97,8 +97,11 @@ class FormController extends Controller {
             'procRepAdd',
             'procRepEdit',
             'procScanToInventory',
+            'procSolarReturn',
             'procSolarTeamAdd',
             'procSolarTeamEdit',
+            'procSolarTypeAdd',
+            'procSolarTypeEdit',
             'procStockMovement',
             'procStoreAdd',
             'procStoreEdit',
@@ -113,6 +116,28 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procSolarReturn()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($name))
+        {
+            Form::setError('name', 'The item name is required');
+        }
+        if(!$this->dataSubbed(#serial_number))
+        {
+            Form::setError('name', 'The item serial number is required');
+        }
     }
 
     public function procMovementreasonAdd()

@@ -39,8 +39,38 @@
                             if($(this).val() > 0)
                             {
                                 $("div#item_holder").slideDown();
+                                $("#form_submitter").removeAttr('disabled');
                             }
                         });
+                        $("form#solar_return").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Return...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
+                        $("input.item-searcher").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.itemAutoComplete($(this), selectCallback, changeCallback);
+                        });
+                        function selectCallback(event, ui)
+                        {
+                            $("#item_id").val(ui.item.item_id);
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                        }
                     }
                 },
                 'register-newstock': {
