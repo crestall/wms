@@ -699,7 +699,7 @@ class Item extends Model{
         $item_values['per_pallet'] = (!empty($per_pallet))? $per_pallet : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
-        if(isset($price)) $item_values['price'] = $price;
+        if(!empty($price)) $item_values['price'] = $price;
         if(isset($supplier)) $item_values['supplier'] = $supplier;
         if(isset($solar_type_id)) $item_values['solar_type_id'] = $solar_type_id;
         if(isset($small_satchel) && !empty($small_satchel)) $item_values['satchel_small'] = 1 / $small_satchel;
