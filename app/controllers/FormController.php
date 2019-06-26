@@ -120,7 +120,7 @@ class FormController extends Controller {
 
     public function procSolarReturn()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -138,6 +138,17 @@ class FormController extends Controller {
         {
             Form::setError('name', 'The item serial number is required');
         }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $this->solarreturn->addReturn($post_data);
+            Session::set('feedback', "That return has been recorded");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."inventory/solar-returns");
     }
 
     public function procMovementReasonAdd()
