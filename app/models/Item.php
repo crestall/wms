@@ -735,7 +735,7 @@ class Item extends Model{
             'last_activity'		            =>	time(),
             'preferred_pick_location_id'    =>  $preferred_pick_location_id,
             'palletized'                    =>  $palletized,
-            'price'                         =>  0
+            'price'                         =>  0.00
         );
         $item_values['active'] = (isset($active))? 1 : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
