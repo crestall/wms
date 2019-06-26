@@ -25,6 +25,7 @@ class Solarreturn extends Model{
             'date_entered'  => time()
         );
         $return_id = $db->insertQuery($this->table, $values);
+        
         return $return_id;
     }
 }
