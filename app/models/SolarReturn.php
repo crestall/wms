@@ -19,7 +19,7 @@ class Solarreturn extends Model{
     {
         $db = Database::openConnection();
         $values = array(
-            'item_id'       => $data['item'],
+            'item_id'       => $data['item_id'],
             'solar_type_id' => $data['order_type_id'],
             'serial_number' => $data['serial_number'],
             'date_entered'  => time()
