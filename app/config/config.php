@@ -359,6 +359,11 @@ return array(
             'edit-product'			=> false,
             //'bulk-product-upload'	=>	true,
             'product-search'        =>  true,
+        ),
+        'solar-teams'   =>array(
+            'add-team'  => true,
+            'edit-team' => false,
+            'view-teams'    => true
         )
     ),
     "SOLAR_PAGES"   => array(
