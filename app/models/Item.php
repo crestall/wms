@@ -714,7 +714,7 @@ class Item extends Model{
 
     public function editItem($data)
     {
-        echo "The request<pre>",print_r($data),"</pre>";die();
+        //echo "The request<pre>",print_r($data),"</pre>";die();
         foreach($data as $field => $value)
         {
             if(!is_array($value))
@@ -744,7 +744,7 @@ class Item extends Model{
         $item_values['per_pallet'] = (isset($per_pallet))? $per_pallet : 0;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
         elseif(isset($delete_image)) $item_values['image'] = null;
-        if(isset($price)) $item_values['price'] = $price;
+        if(!empty($price)) $item_values['price'] = $price;
         $item_values['double_bay'] = (isset($double_bay))? 1 : 0;
         if(!empty($barcode)) $item_values['barcode'] = $barcode;
         if(!empty($box_barcode)) $item_values['barcode'] = $box_barcode;
