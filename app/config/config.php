@@ -348,6 +348,22 @@ return array(
         'financials'        =>  'fas fa-file-invoice-dollar',
         'admin-only'        =>  'fas fa-lock'
     ),
+    "SOLAR_ADMIN_PAGES" => array(
+        'orders'    =>  array(
+            'add-origin-order'  => true,
+            'order-update'	    => false,
+        ),
+        'products'	=> array(
+            'view-products'			=> true,
+            'add-product'			=> true,
+            'edit-product'			=> false,
+            //'bulk-product-upload'	=>	true,
+            'product-search'        =>  true,
+        )
+    ),
+    "SOLAR_PAGES"   => array(
+
+    ),
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,

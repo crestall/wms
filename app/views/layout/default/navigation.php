@@ -6,7 +6,7 @@ if(Session::getIsLoggedIn()):
     if(empty($user_role))
         //return $this->controller->redirector->login();
         return;
-    $pages = Config::get(strtoupper($user_role."_PAGES"));
+    $pages = Config::get(strtoupper(str_replace($user_role," ","_")."_PAGES"));
     $user_info = $this->controller->user->getProfileInfo(Session::getUserId());
     $image = $user_info['image'];
 else:
