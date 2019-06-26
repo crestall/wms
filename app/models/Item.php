@@ -714,7 +714,7 @@ class Item extends Model{
 
     public function editItem($data)
     {
-        //echo "The request<pre>",print_r($data),"</pre>";die();
+        echo "The request<pre>",print_r($data),"</pre>";die();
         foreach($data as $field => $value)
         {
             if(!is_array($value))
