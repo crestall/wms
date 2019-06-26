@@ -130,9 +130,9 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if(!$this->dataSubbed($name))
+        if(!$this->dataSubbed($item_name))
         {
-            Form::setError('name', 'The item name is required');
+            Form::setError('item_name', 'The item name is required');
         }
         if(!$this->dataSubbed($serial_number))
         {
