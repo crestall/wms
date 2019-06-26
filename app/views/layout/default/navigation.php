@@ -6,7 +6,7 @@ if(Session::getIsLoggedIn()):
     if(empty($user_role))
         //return $this->controller->redirector->login();
         return;
-    $user_role = str_replace($user_role," ","_");
+    $user_role = str_replace(" ","_", $user_role);
     echo strtoupper($user_role."_PAGES");
     $pages = Config::get(strtoupper($user_role."_PAGES"));
     $user_info = $this->controller->user->getProfileInfo(Session::getUserId());
