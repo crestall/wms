@@ -158,6 +158,11 @@ class productsController extends Controller
             "editProduct"
         ));
 
+        //solar admin users
+        Permission::allow('solar admin', $resource, array(
+            "viewProducts"
+        ));
+
         return Permission::check($role, $resource, $action);
         return false;
     }
