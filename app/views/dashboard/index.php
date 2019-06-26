@@ -268,6 +268,24 @@ $c = 1;
                 <div id="products_chart"></div>
             </div>
         </div>
+    <?php elseif($user_role == "solar_admin"):?>
+        <div class="row">
+            <div class="col-lg-6">
+                column 1
+            </div>
+            <div class="col-lg-6">
+                column 2
+            </div>
+        </div>
+    <?php elseif($user_role == "solar"):?>
+        <div class="row">
+            <div class="col-lg-6">
+                column 11
+            </div>
+            <div class="col-lg-6">
+                column 12
+            </div>
+        </div>
     <?php else:?>
         <div class="row">
             <div class="col-lg-12">
