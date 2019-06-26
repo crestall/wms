@@ -602,6 +602,26 @@ var autoCompleter = {
             minLength: 2
         });
     },
+    solarItemAutoComplete: function(element, selectCallback, changeCallback)
+    {
+        element.autocomplete({
+            source: function(req, response){
+                var url;
+                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&solar_type_id="+$('#order_type_id').val(); 
+                //console.log(url);
+            	$.getJSON(url, function(data){
+            		response(data);
+            	});
+            },
+            select: function(event, ui) {
+                selectCallback(event, ui);
+            },
+            change: function (event, ui) {
+                changeCallback(event, ui);
+            },
+            minLength: 2
+        });
+    },
     addressAutoComplete: function(element, prefix)
     {
         if(prefix === undefined) {

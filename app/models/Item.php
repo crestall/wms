@@ -593,6 +593,29 @@ class Item extends Model{
         return $return_array;
     }
 
+    public function getAutocompleteSolarItems($data, $fulfilled_id)
+    {
+        $db = Database::openConnection();
+        $return_array = array();
+        $q = $data["item"];
+        $solar_type_id = $data['solar_type_id'];
+        $query = "SELECT * FROM items WHERE active = 1 AND (name LIKE :term1 OR sku LIKE :term2) AND solar_type_id = $solar_type_id ORDER BY name";
+        $array = array(
+            'term1' =>  '%'.$q.'%',
+            'term2' =>  '%'.$q.'%'
+        );
+        //echo $query;die();
+        $rows = $db->queryData($query, $array);
+        foreach($rows as $row)
+        {
+            $row_array['value'] = $row['name']." (".$row['sku'].")";
+            $row_array['sku'] = $row['sku'];
+            $row_array['item_id'] = $row['id'];
+            array_push($return_array,$row_array);
+        }
+        return $return_array;
+    }
+
     public function getAutocompleteItems($data, $fulfilled_id)
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
