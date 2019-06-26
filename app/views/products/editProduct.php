@@ -7,7 +7,7 @@ $depth = ($product['depth'] > 0)? $product['depth']: "";
 $height = ($product['height'] > 0)? $product['height']: "";
 $price = ($product['price'] > 0)? $product['price']: "";
 $weight = ($product['weight'] > 0)? $product['weight']: "";
-$supplier = (!empty($product['supplier']))? $pruduct['supplier']: "";
+$supplier = (!empty($product['supplier']))? $product['supplier']: "";
 $client_id = $product['client_id'];
 
 ?>
