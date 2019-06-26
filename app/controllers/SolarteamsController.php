@@ -70,7 +70,7 @@ class solarteamsController extends Controller
     public function isAuthorized(){
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        if( isset($role) && ($role === "admin"  || $role === "super admin") )
+        if( isset($role) && ($role === "admin"  || $role === "super admin" || $role === "solar admin") )
         {
             return true;
         }
