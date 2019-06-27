@@ -64,7 +64,7 @@
             <div class="col-lg-12">
                 <div class="errorbox">
                     <h2><i class='far fa-times-circle'></i>No Products Listed</h2>
-                    <p>There does not appear to be any <?php if($active == 1) echo "active"; else echo "inactive";?> products listed for <?php echo $client_name;?></p>
+                    <p>There does not appear to be any <?php if($active == 1) echo "active"; else echo "inactive";?> products listed</p>
                     <?php if($active == 1):?>
                         <p><a class="btn btn-warning" href="/products/view-products/active=0">View Inactive Products</a></p>
                     <?php else:?>
