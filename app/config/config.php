@@ -351,7 +351,7 @@ return array(
         'jobs'              =>  'fas fa-tools'
     ),
     "SOLAR_ADMIN_PAGES" => array(
-        'jobs'  => array(
+        'solar-jobs'  => array(
             'add-solar-job'             => true,
             'update-solar-job'          => false,
             'add-service-job'           => true,
@@ -388,7 +388,7 @@ return array(
         'scheduling'    => array(
             'view-schedule' => true
         ),
-        'jobs'  => array(
+        'solar-jobs'  => array(
             'view-jobs'                 => true
         ),
     ),
@@ -420,7 +420,7 @@ return array(
             'record-pickup'   => true,
             'order-csv-upload'  => true
         ),
-        'jobs'  => array(
+        'solar-jobs'  => array(
             'add-solar-job' => true,
             'update-solar-job'          => false,
             'add-service-job'           => true,
