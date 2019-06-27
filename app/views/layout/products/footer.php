@@ -89,7 +89,7 @@
 
                         dataTable.init($('table#view_solar_items_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [1,2,3,4,8,9] }
+                                { "orderable": false, "targets": [1,2,3,4] }
                             ]
                         } );
                     }
