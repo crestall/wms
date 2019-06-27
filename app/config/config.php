@@ -354,7 +354,9 @@ return array(
             'order-update'	    => false,
             'view-orders'   => true,
             'order-search'  => true,
-            'add-origin-order'  => false
+            'add-origin-order'  => false,
+            'add-service-job'   => true,
+            'add-origin-service-job'    => false
         ),
         'products'	=> array(
             'view-products'			=> true,
