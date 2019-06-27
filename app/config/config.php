@@ -348,7 +348,7 @@ return array(
         'financials'        =>  'fas fa-file-invoice-dollar',
         'admin-only'        =>  'fas fa-lock',
         'scheduling'        =>  'far fa-calendar-alt',
-        'jobs'              =>  'fas fa-tools'
+        'solar-jobs'        =>  'fas fa-tools'
     ),
     "SOLAR_ADMIN_PAGES" => array(
         'solar-jobs'  => array(
