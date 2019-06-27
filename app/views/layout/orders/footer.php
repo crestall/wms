@@ -195,7 +195,7 @@
                             {
 
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
-                                window.location.href = "/orders-add-origin-order;
+                                window.location.href = "/orders/add-origin-order";
                             }
                         });
                     }
