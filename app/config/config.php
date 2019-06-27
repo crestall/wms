@@ -350,21 +350,29 @@ return array(
     ),
     "SOLAR_ADMIN_PAGES" => array(
         'orders'    =>  array(
-            'add-origin-order'  => true,
+            'add-solar-order'  => true,
             'order-update'	    => false,
+            'view-orders'   => true,
+            'order-search'  => true
         ),
         'products'	=> array(
             'view-products'			=> true,
             'add-product'			=> true,
             'edit-product'			=> false,
-            //'bulk-product-upload'	=>	true,
-            'product-search'        =>  true,
         ),
-        'solar-teams'   =>array(
+        'inventory' => array(
+            'view-inventory'    => true
+        ),
+        'solar-teams'   => array(
             'add-team'  => true,
             'edit-team' => false,
             'view-teams'    => true
-        )
+        ),
+        'reports'   => array(
+            'inventory-report'  => true,
+            'jobs-report'       => true,
+            'returns-report'    => true
+        ),
     ),
     "SOLAR_PAGES"   => array(
 
@@ -372,7 +380,7 @@ return array(
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,
-            'add-origin-order'  => true,
+            'add-solar-order'  => true,
             'order-update'			    => false,
             'solar-order-update'	    => false,
 			'process-backorders'	    =>	false,
