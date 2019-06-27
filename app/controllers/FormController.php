@@ -3628,6 +3628,10 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if(Session::getUserRole() == "solar admin")
+        {
+            $client_id = $this->client->solar_client_id;
+        }
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name', 'A product name is required');
