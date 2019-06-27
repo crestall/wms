@@ -353,7 +353,8 @@ return array(
             'add-solar-order'  => true,
             'order-update'	    => false,
             'view-orders'   => true,
-            'order-search'  => true
+            'order-search'  => true,
+            'add-origin-order'  => false
         ),
         'products'	=> array(
             'view-products'			=> true,
