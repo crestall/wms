@@ -86,6 +86,12 @@
                                 { "orderable": false, "targets": [1,2,3,4,8,9] }
                             ]
                         } );
+
+                        dataTable.init($('table#view_solar_items_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [1,2,3,4,8,9] }
+                            ]
+                        } );
                     }
                 },
                 'pack-items-edit': {
