@@ -176,6 +176,7 @@ class productsController extends Controller
 
         //solar admin users
         Permission::allow('solar admin', $resource, array(
+            "addProduct",
             "editProduct",
             "viewProducts"
         ));
