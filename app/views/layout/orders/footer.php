@@ -195,7 +195,8 @@
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
                                 var urls = {
-                                    1 : "/orders/add-origin-order"
+                                    1 : "/orders/add-origin-order",
+                                    2 : "/orders/add-tlj-order"
                                 }
                                 window.location.href = urls[$(this).val()];
                             }
