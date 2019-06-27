@@ -117,6 +117,10 @@ class productsController extends Controller
 
     public function viewProducts()
     {
+        if(Session::getUserRole() == "solar admin")
+        {
+            return $this->viewSolarProducts();
+        }
         $client_id = 0;
         $active = 1;
         $client_name = "";
@@ -136,6 +140,18 @@ class productsController extends Controller
             'page_title'    =>  'View Products',
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
+            'products'      =>  $products,
+            'active'        =>  $active
+        ]);
+    }
+
+    public function viewSolarProducts()
+    {
+        $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
+        $products = array();
+        Config::setJsConfig('curPage', "view-products");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/viewSolarProducts.php',[
+            'page_title'    =>  'View Solar Products',
             'products'      =>  $products,
             'active'        =>  $active
         ]);
