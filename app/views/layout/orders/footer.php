@@ -190,7 +190,14 @@
                 },
                 'add-solar-order': {
                     init: function(){
-                        
+                        $("#type_selector").change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $("div#form_holder")
+                                    .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                    
+                            }
+                        });
                     }
                 },
                 'order-edit': {

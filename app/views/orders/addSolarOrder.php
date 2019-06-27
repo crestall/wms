@@ -6,4 +6,5 @@
             <p><select id="type_selector" class="form-control selectpicker"><option value="0">--Choose One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes();?></select></p>
         </div>
     </div>
+    <div class="row" id="form_holder"></div>
 </div>
