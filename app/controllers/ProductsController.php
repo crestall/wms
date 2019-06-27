@@ -148,7 +148,7 @@ class productsController extends Controller
     public function viewSolarProducts()
     {
         $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
-        $products = array();
+        $products = $this->item->getItemsForClient($this->client->solar_client_id, $active);
         Config::setJsConfig('curPage', "view-products");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/viewSolarProducts.php',[
             'page_title'    =>  'View Solar Products',
