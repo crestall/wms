@@ -346,7 +346,8 @@ return array(
         'stores'            =>  'fas fa-store-alt',
         'downloads'         =>  'fas fa-download',
         'financials'        =>  'fas fa-file-invoice-dollar',
-        'admin-only'        =>  'fas fa-lock'
+        'admin-only'        =>  'fas fa-lock',
+        'scheduling'        =>  'far fa-calendar-alt'
     ),
     "SOLAR_ADMIN_PAGES" => array(
         'orders'    =>  array(
