@@ -203,6 +203,21 @@
                         });
                     }
                 },
+                'add-service-job': {
+                    init: function(){
+                        $("#type_selector").change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
+                                var urls = {
+                                    1 : "/orders/add-origin-service-job",
+                                    2 : "/orders/add-tlj-service-job"
+                                }
+                                window.location.href = urls[$(this).val()];
+                            }
+                        });
+                    }
+                },
                 'order-edit': {
                     init: function(){
                         $('form#order-edit').submit(function(e){

@@ -357,6 +357,7 @@ return array(
             'add-origin-order'  => false,
             'add-service-job'   => true,
             'add-origin-service-job'    => false
+            'add-tlj-service-job'   => false
         ),
         'products'	=> array(
             'view-products'			=> true,
@@ -370,6 +371,9 @@ return array(
             'add-team'  => true,
             'edit-team' => false,
             'view-teams'    => true
+        ),
+        'scheduling'    => array(
+            'view-schedule' => true
         ),
         'reports'   => array(
             'inventory-report'  => true,

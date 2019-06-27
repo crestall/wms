@@ -25,6 +25,16 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function addServiceJob()
+    {
+        $page_title = "Add a Solar Service Job";
+
+        Config::setJsConfig('curPage', "add-service-job");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addServiceJob.php',[
+            'page_title'    =>  $page_title
+        ]);
+    }
+
     public function recordPickup()
     {
         $client_id = 0;
