@@ -351,15 +351,16 @@ return array(
         'jobs'              =>  'fas fa-tools'
     ),
     "SOLAR_ADMIN_PAGES" => array(
-        'jobs'    =>  array(
-            'add-solar-order'  => true,
-            'order-update'	    => false,
-            'view-orders'   => true,
-            'order-search'  => true,
-            'add-origin-order'  => false,
-            'add-service-job'   => true,
+        'jobs'  => array(
+            'add-solar-job'             => true,
+            'update-solar-job'          => false,
+            'add-service-job'           => true,
+            'view-jobs'                 => true,
+            'add-origin-job'            => false,
+            'add-tlj-job'               => false,
+            'job-search'                => true,
             'add-origin-service-job'    => false,
-            'add-tlj-service-job'   => false
+            'add-tlj-service-job'       => false
         ),
         'products'	=> array(
             'view-products'			=> true,
@@ -387,7 +388,9 @@ return array(
         'scheduling'    => array(
             'view-schedule' => true
         ),
-
+        'jobs'  => array(
+            'view-jobs'                 => true
+        ),
     ),
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
@@ -417,10 +420,21 @@ return array(
             'record-pickup'   => true,
             'order-csv-upload'  => true
         ),
+        'jobs'  => array(
+            'add-solar-job' => true,
+            'update-solar-job'          => false,
+            'add-service-job'           => true,
+            'view-jobs'                 => true,
+            'add-origin-job'            => false,
+            'add-tlj-job'               => false,
+            'job-search'                => true,
+            'add-origin-service-job'    => false,
+            'add-tlj-service-job'       => false
+        ),
 		'clients'	=> array(
 			'view-clients'	=> true,
 			'add-client'	=> true,
-			'edit-client'	=> false
+			'edit-client'	=> false,
 		),
 		'products'	=> array(
 			'view-products'			=> true,
