@@ -356,7 +356,7 @@ return array(
             'order-search'  => true,
             'add-origin-order'  => false,
             'add-service-job'   => true,
-            'add-origin-service-job'    => false
+            'add-origin-service-job'    => false,
             'add-tlj-service-job'   => false
         ),
         'products'	=> array(
