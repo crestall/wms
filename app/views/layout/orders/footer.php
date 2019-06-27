@@ -188,6 +188,11 @@
                         });
                     }
                 },
+                'add-solar-order': {
+                    init: function(){
+                        
+                    }
+                },
                 'order-edit': {
                     init: function(){
                         $('form#order-edit').submit(function(e){

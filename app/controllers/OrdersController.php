@@ -15,6 +15,16 @@ class OrdersController extends Controller
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
     }
 
+    public function addSolarorder()
+    {
+        $page_title = "Add a Solar Order";
+
+        Config::setJsConfig('curPage', "add0-solar-order");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addSolarOrder.php',[
+            'page_title'    =>  $page_title
+        ]);
+    }
+
     public function recordPickup()
     {
         $client_id = 0;
@@ -947,10 +957,11 @@ class OrdersController extends Controller
             "orderTracking",
             "orderDetail",
         );
-        if(Session::getUserClientId() == 67)
-        {
-            $allowed_resources[] = "addOriginOrder";
-        }
+        //solar admin users
+        Permission::allow('solar admin', $resource, array(
+            "addSolarOrder",
+            "addOriginOrder"
+        ));
         Permission::allow('client', $resource, $allowed_resources);
         return Permission::check($role, $resource, $action);
     }
