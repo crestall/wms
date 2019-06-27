@@ -15,26 +15,6 @@ class OrdersController extends Controller
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
     }
 
-    public function addSolarorder()
-    {
-        $page_title = "Add a Solar Order";
-
-        Config::setJsConfig('curPage', "add-solar-order");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addSolarOrder.php',[
-            'page_title'    =>  $page_title
-        ]);
-    }
-
-    public function addServiceJob()
-    {
-        $page_title = "Add a Solar Service Job";
-
-        Config::setJsConfig('curPage', "add-service-job");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addServiceJob.php',[
-            'page_title'    =>  $page_title
-        ]);
-    }
-
     public function recordPickup()
     {
         $client_id = 0;
