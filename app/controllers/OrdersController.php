@@ -19,7 +19,7 @@ class OrdersController extends Controller
     {
         $page_title = "Add a Solar Order";
 
-        Config::setJsConfig('curPage', "add0-solar-order");
+        Config::setJsConfig('curPage', "add-solar-order");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addSolarOrder.php',[
             'page_title'    =>  $page_title
         ]);
