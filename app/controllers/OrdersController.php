@@ -970,7 +970,11 @@ class OrdersController extends Controller
         //solar admin users
         Permission::allow('solar admin', $resource, array(
             "addSolarOrder",
-            "addOriginOrder"
+            "addOriginOrder",
+            "addServiceJob",
+            "addOriginServiceJob",
+            "addTLJServiceJob",
+            "addTLJOrder"
         ));
         Permission::allow('client', $resource, $allowed_resources);
         return Permission::check($role, $resource, $action);
