@@ -3631,6 +3631,7 @@ class FormController extends Controller {
         if(Session::getUserRole() == "solar admin")
         {
             $client_id = $this->client->solar_client_id;
+            $post_data['client_id'] = $client_id;
         }
         if( !$this->dataSubbed($name) )
         {
