@@ -193,9 +193,11 @@
                         $("#type_selector").change(function(e){
                             if($(this).val() > 0)
                             {
-
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
-                                window.location.href = "/orders/add-origin-order";
+                                var urls = {
+                                    1 : "/orders/add-origin-order"
+                                }
+                                window.location.href = urls[$(this).val()];
                             }
                         });
                     }
