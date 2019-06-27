@@ -93,7 +93,6 @@ class SolarjobsController extends Controller
             "addTLJServiceJob",
             "addTLJJob"
         ));
-        Permission::allow('client', $resource, $allowed_resources);
         return Permission::check($role, $resource, $action);
     }
 }
