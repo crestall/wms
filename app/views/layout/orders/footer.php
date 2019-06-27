@@ -193,9 +193,9 @@
                         $("#type_selector").change(function(e){
                             if($(this).val() > 0)
                             {
-                                $("div#form_holder")
-                                    .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
-                                    
+
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
+                                window.location.href = "/orders-add-origin-order;
                             }
                         });
                     }
@@ -676,7 +676,7 @@
                     init: function(){
                         actions.common.init();
                         actions.common['cancel-orders']();
-                        actions.common['adjust-allocations'](); 
+                        actions.common['adjust-allocations']();
                         $("button#show_fulfilled").click(function(e){
                             var href = '/orders/view-storeorders';
                             if($('#client_selector').val() != 0)
