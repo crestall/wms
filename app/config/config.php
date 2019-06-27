@@ -347,10 +347,11 @@ return array(
         'downloads'         =>  'fas fa-download',
         'financials'        =>  'fas fa-file-invoice-dollar',
         'admin-only'        =>  'fas fa-lock',
-        'scheduling'        =>  'far fa-calendar-alt'
+        'scheduling'        =>  'far fa-calendar-alt',
+        'jobs'              =>  'fas fa-tools'
     ),
     "SOLAR_ADMIN_PAGES" => array(
-        'orders'    =>  array(
+        'jobs'    =>  array(
             'add-solar-order'  => true,
             'order-update'	    => false,
             'view-orders'   => true,
@@ -383,6 +384,9 @@ return array(
         ),
     ),
     "SOLAR_PAGES"   => array(
+        'scheduling'    => array(
+            'view-schedule' => true
+        ),
 
     ),
     "ADMIN_PAGES"   =>  array(
