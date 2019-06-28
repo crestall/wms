@@ -244,6 +244,11 @@
                         });
                     }
                 },
+                'add-origin-service-job' : {
+                    init: function(){
+                        actions.common.init();
+                    }
+                },
                 'add-tlj-job' : {
                     init: function(){
                         actions.common.init();
