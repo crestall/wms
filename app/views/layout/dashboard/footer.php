@@ -149,7 +149,7 @@
                                 }
                             });
                         }
-                        $('a#toggle_orders, a#client_activity, a#toggle_inventory, a#toggle_pickups, a#toggle_storeorders, a#toggle_solarorders').click(function(e){
+                        $('a#toggle_orders, a#client_activity, a#toggle_inventory, a#toggle_pickups, a#toggle_storeorders, a#toggle_solarorders, a#toggle_solarinstalls, a#toggle_solarservice').click(function(e){
                             $(this).toggleClass('hiding');
                         });
 
@@ -285,6 +285,16 @@
                     }
                 },
                 warehouse: {
+                    init: function(){
+                        actions.common.init();
+                        var maxHeight = 0;
+                        $("div.inventory-panel").each(function(){
+                            if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
+                        });
+                        $("div.inventory-panel").height(maxHeight);
+                    }
+                },
+                'solar admin': {
                     init: function(){
                         actions.common.init();
                         var maxHeight = 0;

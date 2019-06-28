@@ -268,6 +268,60 @@ $c = 1;
                 <div id="products_chart"></div>
             </div>
         </div>
+    <?php elseif($user_role == "solar_admin"):?>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-10 text-center">
+                                <h2>Active Solar Installs </h2>
+                            </div>
+                            <div class="col-xs-2 text-right">
+                                 <a id="toggle_solarinstalls" data-toggle="collapse" href="#new_solarinstalls"><span class="fa arrow huge"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="collapse in" id="new_solarinstalls">
+                            <div class="row">
+                               Install Info Will Appear Here
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-10 text-center">
+                                <h2>Active Solar Service Jobs </h2>
+                            </div>
+                            <div class="col-xs-2 text-right">
+                                 <a id="toggle_solarservice" data-toggle="collapse" href="#new_solarservice"><span class="fa arrow huge"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="collapse in" id="new_solarservice">
+                            <div class="row">
+                               Service Info Will Appear Here
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php elseif($user_role == "solar"):?>
+        <div class="row">
+            <div class="col-lg-6">
+                column 11
+            </div>
+            <div class="col-lg-6">
+                column 12
+            </div>
+        </div>
     <?php else:?>
         <div class="row">
             <div class="col-lg-12">

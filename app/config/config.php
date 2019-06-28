@@ -346,14 +346,56 @@ return array(
         'stores'            =>  'fas fa-store-alt',
         'downloads'         =>  'fas fa-download',
         'financials'        =>  'fas fa-file-invoice-dollar',
-        'admin-only'        =>  'fas fa-lock'
+        'admin-only'        =>  'fas fa-lock',
+        'scheduling'        =>  'far fa-calendar-alt',
+        'solar-jobs'        =>  'fas fa-tools'
+    ),
+    "SOLAR_ADMIN_PAGES" => array(
+        'solar-jobs'  => array(
+            'add-solar-install'             => true,
+            'update-solar-job'          => false,
+            'add-service-job'           => true,
+            'view-jobs'                 => true,
+            'add-origin-job'            => false,
+            'add-tlj-job'               => false,
+            'job-search'                => true,
+            'add-origin-service-job'    => false,
+            'add-tlj-service-job'       => false
+        ),
+        'products'	=> array(
+            'view-products'			=> true,
+            'add-product'			=> true,
+            'edit-product'			=> false,
+        ),
+        'inventory' => array(
+            'view-inventory'    => true
+        ),
+        'solar-teams'   => array(
+            'add-team'  => true,
+            'edit-team' => false,
+            'view-teams'    => true
+        ),
+        'scheduling'    => array(
+            'view-schedule' => true
+        ),
+        'reports'   => array(
+            'inventory-report'  => true,
+            'jobs-report'       => true,
+            'returns-report'    => true
+        ),
+    ),
+    "SOLAR_PAGES"   => array(
+        'scheduling'    => array(
+            'view-schedule' => true
+        ),
+        'solar-jobs'  => array(
+            'view-jobs'                 => true
+        ),
     ),
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,
-            'add-origin-order'  => true,
-            'order-update'			    => false,
-            'solar-order-update'	    => false,
+            'order-update'			    => false,   
 			'process-backorders'	    =>	false,
 			'order-summaries'		    =>	true,
             //'add-b2B-order'             =>  true,
@@ -376,10 +418,21 @@ return array(
             'record-pickup'   => true,
             'order-csv-upload'  => true
         ),
+        'solar-jobs'  => array(
+            'add-solar-install'             => true,
+            'update-solar-job'          => false,
+            'add-service-job'           => true,
+            'view-jobs'                 => true,
+            'add-origin-job'            => false,
+            'add-tlj-job'               => false,
+            'job-search'                => true,
+            'add-origin-service-job'    => false,
+            'add-tlj-service-job'       => false
+        ),
 		'clients'	=> array(
 			'view-clients'	=> true,
 			'add-client'	=> true,
-			'edit-client'	=> false
+			'edit-client'	=> false,
 		),
 		'products'	=> array(
 			'view-products'			=> true,

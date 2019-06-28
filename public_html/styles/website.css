@@ -376,6 +376,19 @@ a.toggle_roles.hiding .fa.arrow:before {
 }
 
 /********
+solar admin flip angle
+*******  */
+a#toggle_solarinstalls .fa.arrow:before,
+a#toggle_solarservice .fa.arrow:before {
+    content: "\f106";
+}
+
+a#toggle_solarinstalls.hiding .fa.arrow:before,
+a#toggle_solarservice.hiding .fa.arrow:before {
+    content: "\f107";
+}
+
+/********
 user profile image
 *******  */
 img.profile-thumb{

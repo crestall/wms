@@ -1,6 +1,7 @@
 <?php
 $per_pallet_display = (empty(Form::value('palletized')))? "none" : "block";
 //die('form val: '.print_r((array)Form::value('package_type')));
+$client_id = (Session::getUserRole() == "solar admin")? $this->controller->client->solar_client_id : Form::value('client_id');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -30,7 +31,7 @@ $per_pallet_display = (empty(Form::value('palletized')))? "none" : "block";
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                 <div class="col-md-4">
-                    <select id="client_id" name="client_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients(Form::value('client_id'));?></select>
+                    <select id="client_id" name="client_id" class="form-control selectpicker" <?php if(Session::getUserRole() == "solar admin") echo "disabled";?>><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                     <?php echo Form::displayError('client_id');?>
                 </div>
             </div>

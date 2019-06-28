@@ -47,6 +47,7 @@
         <?php
         if(Session::getIsLoggedIn()):
             $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+            $user_role = str_replace(" ","_", $user_role);
             $pages = Config::get(strtoupper($user_role."_PAGES"));
             Config::setJsConfig('allPages', $pages);
         else:

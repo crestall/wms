@@ -57,7 +57,7 @@
                             {
                                 $(this).autocomplete( "destroy" );
                             }
-                            autoCompleter.itemAutoComplete($(this), selectCallback, changeCallback);
+                            autoCompleter.solarItemAutoComplete($(this), selectCallback, changeCallback);
                         });
                         function selectCallback(event, ui)
                         {

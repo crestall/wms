@@ -120,7 +120,7 @@ class FormController extends Controller {
 
     public function procSolarReturn()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -130,14 +130,25 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if(!$this->dataSubbed($name))
+        if(!$this->dataSubbed($item_name))
         {
-            Form::setError('name', 'The item name is required');
+            Form::setError('item_name', 'The item name is required');
         }
         if(!$this->dataSubbed($serial_number))
         {
             Form::setError('name', 'The item serial number is required');
         }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $this->solarreturn->addReturn($post_data);
+            Session::set('feedback', "That return has been recorded");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."inventory/solar-returns");
     }
 
     public function procMovementReasonAdd()
@@ -3616,6 +3627,11 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+        }
+        if(Session::getUserRole() == "solar admin")
+        {
+            $client_id = $this->client->solar_client_id;
+            $post_data['client_id'] = $client_id;
         }
         if( !$this->dataSubbed($name) )
         {
