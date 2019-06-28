@@ -14,6 +14,7 @@
     </div>
     <div class="row" id="table_holder" style="display:none">
         <?php if(count($products)):?>
+            <?php echo "<pre>",print_r($products),"</pre>"; die();?>
             <div class="col-md-12">
                 <table class="table-striped table-hover" id="client_inventory_table">
                     <thead>
