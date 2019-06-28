@@ -48,6 +48,19 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function addTljJob()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "add-tlj-job");
+        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addtljorder.php");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addTLJJob.php', [
+            'page_title'    =>  "Add TLJ Services Install",
+            'client_id'     =>  67,
+            'order_type_id' =>  2,
+            'form'          =>  $form
+        ]);
+    }
+
     public function viewJobs()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
