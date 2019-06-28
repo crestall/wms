@@ -389,11 +389,6 @@ class inventoryController extends Controller
             'registerNewStock'
         ));
 
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            "viewInventory"
-        ));
-
         return Permission::check($role, $resource, $action);
         return false;
     }
