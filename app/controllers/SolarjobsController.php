@@ -19,7 +19,7 @@ class SolarjobsController extends Controller
     {
         $page_title = "Add a Solar Install Job";
 
-        Config::setJsConfig('curPage', "add-solar-job");
+        Config::setJsConfig('curPage', "add-solar-install");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolarJob.php',[
             'page_title'    =>  $page_title
         ]);
