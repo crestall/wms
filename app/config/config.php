@@ -421,7 +421,7 @@ return array(
             'order-csv-upload'  => true
         ),
         'solar-jobs'  => array(
-            'add-solar-job' => true,
+            'add-solar-install'             => true,
             'update-solar-job'          => false,
             'add-service-job'           => true,
             'view-jobs'                 => true,
