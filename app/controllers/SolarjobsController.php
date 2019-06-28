@@ -66,7 +66,7 @@ class SolarjobsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "add-origin-service-job");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addOriginServiceJob.php', [
-            'page_title'    =>  "Add TLJ Services Install",
+            'page_title'    =>  "Add Origin Service Job",
             'client_id'     =>  67,
             'order_type_id' =>  1
         ]);
