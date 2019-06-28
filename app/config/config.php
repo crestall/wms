@@ -395,9 +395,7 @@ return array(
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,
-            'add-solar-install'  => true,
-            'order-update'			    => false,
-            'solar-order-update'	    => false,
+            'order-update'			    => false,   
 			'process-backorders'	    =>	false,
 			'order-summaries'		    =>	true,
             //'add-b2B-order'             =>  true,
