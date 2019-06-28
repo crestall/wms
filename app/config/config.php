@@ -352,7 +352,7 @@ return array(
     ),
     "SOLAR_ADMIN_PAGES" => array(
         'solar-jobs'  => array(
-            'add-solar-job'             => true,
+            'add-solar-install'             => true,
             'update-solar-job'          => false,
             'add-service-job'           => true,
             'view-jobs'                 => true,
@@ -395,7 +395,7 @@ return array(
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,
-            'add-solar-order'  => true,
+            'add-solar-install'  => true,
             'order-update'			    => false,
             'solar-order-update'	    => false,
 			'process-backorders'	    =>	false,

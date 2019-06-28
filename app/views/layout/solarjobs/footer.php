@@ -99,8 +99,8 @@
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
                                 var urls = {
-                                    1 : "/solar-jobs/add-origin-order",
-                                    2 : "/solar-jobs/add-tlj-order"
+                                    1 : "/solar-jobs/add-origin-job",
+                                    2 : "/solar-jobs/add-tlj-job"
                                 }
                                 window.location.href = urls[$(this).val()];
                             }

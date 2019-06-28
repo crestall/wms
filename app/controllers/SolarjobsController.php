@@ -15,7 +15,7 @@ class SolarjobsController extends Controller
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
     }
 
-    public function addSolarjob()
+    public function addSolarInstall()
     {
         $page_title = "Add a Solar Job";
 
@@ -32,6 +32,18 @@ class SolarjobsController extends Controller
         Config::setJsConfig('curPage', "add-service-job");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addServiceJob.php',[
             'page_title'    =>  $page_title
+        ]);
+    }
+
+    public function addOriginJob()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "add-origin-job");
+        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addoriginorder.php");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addOriginJob.php', [
+            'page_title'    =>  "Add Origin Order",
+            'client_id'     =>  67,
+            'form'          =>  $form
         ]);
     }
 
