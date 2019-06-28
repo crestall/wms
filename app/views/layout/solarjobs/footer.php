@@ -272,7 +272,7 @@
                     init: function()
                     {
                         actions.common.init();
-                        actions['add-origin-order'].calcItems();
+                        actions['add-origin-job'].calcItems();
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
@@ -309,10 +309,10 @@
                                 $(event.target).val("");
                                 return false;
                             }
-                            actions['add-origin-order'].deleteBank();
+                            actions['add-origin-job'].deleteBank();
                         }
                         $("input[name='roof_type']").click(function(e){
-                            actions['add-origin-order'].openCalcButton();
+                            actions['add-origin-job'].openCalcButton();
                         })
                         $("a.addbank").click(function(e){
                             e.preventDefault;
@@ -327,18 +327,18 @@
                             html += "</div>"; //row
                             $('div#banks_holder').append(html);
                             //itemsUpdater.itemDelete();
-                            actions['add-origin-order'].deleteBank();
-                            actions['add-origin-order'].checkBanks();
-                            actions['add-origin-order'].openCalcButton();
+                            actions['add-origin-job'].deleteBank();
+                            actions['add-origin-job'].checkBanks();
+                            actions['add-origin-job'].openCalcButton();
                         });
-                        actions['add-origin-order'].checkBanks();
-                        actions['add-origin-order'].openCalcButton();
+                        actions['add-origin-job'].checkBanks();
+                        actions['add-origin-job'].openCalcButton();
                     },
                     checkBanks: function(){
                         $('input.banks')
                             .off('change')
                             .change(function(e){
-                                actions['add-origin-order'].openCalcButton();
+                                actions['add-origin-job'].openCalcButton();
                         });
                     },
                     openCalcButton: function(){
@@ -363,7 +363,7 @@
                             .off('click')
                             .click(function(e){
                                 $(this).closest('div.bank_holder').remove();
-                                actions['add-origin-order'].openCalcButton();
+                                actions['add-origin-job'].openCalcButton();
                         });
                     },
                     calcItems: function(){

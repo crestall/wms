@@ -41,8 +41,9 @@ class SolarjobsController extends Controller
         Config::setJsConfig('curPage', "add-origin-job");
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addoriginorder.php");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addOriginJob.php', [
-            'page_title'    =>  "Add Origin Order",
+            'page_title'    =>  "Add Origin Job",
             'client_id'     =>  67,
+            'order_type_id' =>  1,
             'form'          =>  $form
         ]);
     }
