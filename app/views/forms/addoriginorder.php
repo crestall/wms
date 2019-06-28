@@ -24,7 +24,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
         <form id="add_origin_order" method="post" action="/form/procOriginOrderAdd"  enctype="multipart/form-data" autocomplete="off">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Order Details</h3>
+                    <h3>Job Details</h3>
                 </div>
             </div>
             <div class="form-group row">
