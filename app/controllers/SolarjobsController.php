@@ -91,19 +91,12 @@ class SolarjobsController extends Controller
         Permission::allow('admin', $resource, "*");
         Permission::allow('super admin', $resource, "*");
         Permission::allow('md admin', $resource, "*");
+        //solar admin users
+        Permission::allow('solar admin', $resource, "*");
         //warehouse users
         Permission::allow('warehouse', $resource, array(
             "jobSearch",
             "viewJobs",
-        ));
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            "addSolarJob",
-            "addOriginJob",
-            "addServiceJob",
-            "addOriginServiceJob",
-            "addTLJServiceJob",
-            "addTLJJob"
         ));
         return Permission::check($role, $resource, $action);
     }
