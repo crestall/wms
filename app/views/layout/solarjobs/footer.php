@@ -92,7 +92,7 @@
                         });
                     }
                 },
-                'add-solar-job': {
+                'add-solar-install': {
                     init: function(){
                         $("#type_selector").change(function(e){
                             if($(this).val() > 0)
@@ -268,7 +268,7 @@
                         });
                     }
                 },
-                'add-origin-order': {
+                'add-origin-job': {
                     init: function()
                     {
                         actions.common.init();
