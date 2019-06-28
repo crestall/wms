@@ -294,6 +294,16 @@
                         $("div.inventory-panel").height(maxHeight);
                     }
                 },
+                'solar admin': {
+                    init: function(){
+                        actions.common.init();
+                        var maxHeight = 0;
+                        $("div.inventory-panel").each(function(){
+                            if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
+                        });
+                        $("div.inventory-panel").height(maxHeight);
+                    }
+                },
                 'dashboard':{
                     init: function(){
                         actions['<?php echo $user_role;?>'].init();
