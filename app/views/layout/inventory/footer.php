@@ -165,11 +165,12 @@
                 'view-solar-inventory': {
                     init: function()
                     {
-                        //console.log('solar');
+                        console.log('solar start');
                         dataTable.init($('table#solar_inventory_table'), {
                             "order": [],
                             fixedHeader: true
                         } );
+                        console.log('solar end');
                     }
                 },
                 "pack-items-manage" : {
