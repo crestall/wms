@@ -318,12 +318,14 @@ class inventoryController extends Controller
     public function viewSolarInventory()
     {
         $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
-        $products = $this->item->getClientInventoryArray($this->client->solar_client_id, $active);
+        //$products = $this->item->getClientInventoryArray($this->client->solar_client_id, $active);
+        $products = $this->item->getItemsForClient($this->client->solar_client_id);
         Config::setJsConfig('curPage', "view-solar-inventory");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/viewSolarInventory.php',[
-            'page_title'    =>  'View Solar Inventory',
-            'products'      =>  $products,
-            'active'        =>  $active
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/clientInventory.php',[
+            'page_title'    =>  'Current Solar Inventory',
+            'client_id'     =>  $this->client->solar_client_id,
+            'client_name'   =>  "",
+            'products'      =>  $products
         ]);
     }
 
