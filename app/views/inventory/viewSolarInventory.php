@@ -17,7 +17,8 @@
                         <tr>
                             <th>Name</th>
                             <th>SKU</th>
-                            <th>Details</th>
+                            <th>Supplier</th>
+                            <th>Owner</th>
                             <th>On Hand</th>
                             <th>Allocated</th>
                             <th>Under Quality Control</th>
@@ -30,17 +31,13 @@
                             $allocated = $this->controller->item->getAllocatedStock($p['id'], $this->controller->order->fulfilled_id);
                             $underqc = $this->controller->item->getStockUnderQC($p['id']);
                             $available = $onhand - $allocated - $underqc;
-                            $image = (!empty($p['image']))? "<img src='/images/products/tn_{$p['image']}' alt='product_image' class='thumbnail' /><br/>":"";
-                            $details = "";
-                            if(!empty($p['width'])) $details .= "Width: ".$p['width']."cm<br/>";
-                            if(!empty($p['depth'])) $details .= "Depth: ".$p['depth']."cm<br/>";
-                            if(!empty($p['height'])) $details .= "Height: ".$p['height']."cm<br/>";
-                            if(!empty($p['weight'])) $details .= "Weight: ".$p['weight']."kg";
+                            $owner = ($p['solar_type_id'] > 0)?$this->controller->solarordertype->getSolarOrderType($p['solar_type_id']): "";
                             ?>
                             <tr>
-                                <td data-label="Name"><?php echo $image.$p['name'];?></td>
+                                <td data-label="Name"><?php echo $p['name'];?></td>
                                 <td data-label="SKU"><?php echo $p['sku'];?></td>
-                                <td data-label="Detals"><?php echo $details;?></td>
+                                <td data-label="Supplier"><?php echo $p['supplier'];?></td>
+                                <td data-label="Owner"><?php echo $owner;?></td>
                                 <td data-label="On Hand" class="number"><?php echo $onhand;?></td>
                                 <td data-label="Allocated" class='number'><?php echo $allocated;?></td>
                                 <td data-label="Under Quality Control" class="number"><?php echo $underqc;?></td>
