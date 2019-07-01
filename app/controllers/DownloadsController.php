@@ -27,6 +27,7 @@ class DownloadsController extends Controller {
             'goodsOutReportCSV',
             'locationReportCSV',
             'returnsReportCSV',
+            'solarInventoryCSV',
             'stockAtDateCSV',
             'truckRunSheetCSV',
             'inventoryReportCSV',
@@ -54,6 +55,45 @@ class DownloadsController extends Controller {
         }
 
         $this->response->download($fullPath, ["basename" => $file_name, "extension" => $ext]);
+    }
+
+    public function solarInventoryCSV()
+    {
+        $products = $this->item->getItemsForClient($this->client->solar_client_id);
+        $cols = array(
+            "Name",
+            "SKU",
+            "Supplier",
+            "Owner",
+            "On Hand",
+            "Allocated",
+            "Under QC",
+            "Available"
+        );
+        $rows = array();
+        foreach($products as $p)
+        {
+            $onhand = $this->item->getStockOnHand($p['id']);
+            $allocated = $this->item->getAllocatedStock($p['id'], $this->order->fulfilled_id);
+            $underqc = $this->item->getStockUnderQC($p['id']);
+            $available = $onhand - $allocated - $underqc;
+            $owner = ($p['solar_type_id'] > 0)?$this->solarordertype->getSolarOrderType($p['solar_type_id']): "";
+
+            $row = array(
+                $p['name'],
+                $p['sku'],
+                $p['supplier'],
+                $owner,
+                $onhand,
+                $allocated,
+                $underqc,
+                $available
+            );
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "solar_inventory".date("Ymd")]);
     }
 
     public function dispatchReportCSV()

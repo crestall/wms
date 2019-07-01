@@ -170,6 +170,13 @@
                                 { "orderable": false, "targets": [2,3] }
                             ]
                          } );
+                         $('button#csv_download').click(function(e) {
+                            var data = {
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/solarInventoryCSV";
+                            fileDownload.download(url, data);
+                        });
                     }
                 },
                 "pack-items-manage" : {
