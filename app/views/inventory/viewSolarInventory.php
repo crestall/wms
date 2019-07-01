@@ -12,7 +12,7 @@
     <div class="row" id="table_holder" style="display:none">
         <?php if(count($products)):?>
             <div class="col-md-12">
-                <table class="table-striped table-hover" id=solar-inventory-table">
+                <table class="table-striped table-hover" id="solar-inventory-table">
                     <thead>
                         <tr>
                             <th>Name</th>
