@@ -166,11 +166,7 @@
                     init: function()
                     {
                         console.log('solar');
-                        dataTable.init($('table#solar_inventory_table'), {
-                            "columnDefs": [
-                                { "orderable": false, "targets": [6,7] }
-                            ]
-                        } );
+                        dataTable.init($('table#solar_inventory_table'), {} );
                     }
                 },
                 "pack-items-manage" : {
