@@ -117,8 +117,10 @@ var barcodeScanner = {
 ************/
 var dataTable = {
     init: function(el, options){
+        //console.log('init');
         var opts = {
             "initComplete": function( settings, json ) {
+                //console.log('initComplete');
                 $("div#waiting").remove();
                 $("div#table_holder").show();
                 $(".dataTables_length select").addClass("form-control selectpicker");
@@ -132,6 +134,7 @@ var dataTable = {
             "lengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
             "pageLength": 25
         };
+
         $.extend( opts, options );
         el.DataTable( opts );
     }

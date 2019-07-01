@@ -286,6 +286,10 @@ class inventoryController extends Controller
 
     public function viewInventory()
     {
+        if(Session::getUserRole() == "solar admin")
+        {
+            return $this->viewSolarInventory();
+        }
         $client_id = 0;
         $active = 1;
         $client_name = "";
@@ -308,6 +312,19 @@ class inventoryController extends Controller
             'client_name'   =>  $client_name,
             'products'      =>  $products,
             'active'        =>  $active
+        ]);
+    }
+
+    public function viewSolarInventory()
+    {
+        $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
+        //$products = $this->item->getClientInventoryArray($this->client->solar_client_id, $active);
+        $products = $this->item->getItemsForClient($this->client->solar_client_id);
+        Config::setJsConfig('curPage', "view-solar-inventory");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/viewSolarInventory.php',[
+            'page_title'    =>  'Current Solar Inventory',
+            'client_id'     =>  $this->client->solar_client_id, 
+            'products'      =>  $products
         ]);
     }
 

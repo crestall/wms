@@ -368,7 +368,8 @@ return array(
             'edit-product'			=> false,
         ),
         'inventory' => array(
-            'view-inventory'    => true
+            'view-inventory'    => true,
+            'view-solar-inventory'  => false
         ),
         'solar-teams'   => array(
             'add-team'  => true,
@@ -379,7 +380,6 @@ return array(
             'view-schedule' => true
         ),
         'reports'   => array(
-            'inventory-report'  => true,
             'jobs-report'       => true,
             'returns-report'    => true
         ),
@@ -395,7 +395,7 @@ return array(
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,
-            'order-update'			    => false,   
+            'order-update'			    => false,
 			'process-backorders'	    =>	false,
 			'order-summaries'		    =>	true,
             //'add-b2B-order'             =>  true,

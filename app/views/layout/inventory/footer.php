@@ -162,6 +162,23 @@
                         } );
                     }
                 },
+                'view-solar-inventory': {
+                    init: function()
+                    {
+                        dataTable.init($('table#solar-inventory-table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [2,3] }
+                            ]
+                         } );
+                         $('button#csv_download').click(function(e) {
+                            var data = {
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/solarInventoryCSV";
+                            fileDownload.download(url, data);
+                        });
+                    }
+                },
                 "pack-items-manage" : {
                     init: function(){
                         actions.common['add-to-receiving']();
@@ -561,7 +578,7 @@
                     }
                 }
             }
-            //console.log('current page: '+config.curPage);
+            console.log('current page: '+config.curPage);
             //run the script for the current page
             actions[config.curPage].init();
         </script>
