@@ -5,7 +5,14 @@
         <div class="col-lg-12 text-center">
             <h2>Drawing Table..</h2>
             <p>May take a few moments</p>
-            <img class='loading' src='/images/preloader.gif' alt='loading...' /> 
+            <img class='loading' src='/images/preloader.gif' alt='loading...' />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="text-right">
+                <button id="csv_download" class="btn btn-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
+            </p>
         </div>
     </div>
     <div class="row" id="table_holder" style="display:none">
