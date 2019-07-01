@@ -1,11 +1,6 @@
 <div id="page-wrapper">
     <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <div class="row">
-        <div class="col-lg-12">
-            <h2>Products for <?php echo $client_name;?></h2>
-        </div>
-    </div>
     <div id="waiting" class="row">
         <div class="col-lg-12 text-center">
             <h2>Drawing Table..</h2>
@@ -58,7 +53,7 @@
         <?php else:?>
             <div class="col-lg-12">
                 <div class="errorbox">
-                    <p>No products listed for <?php echo $client_name;?></p>
+                    <p>No solar products currently listed</p>
                 </div>
             </div>
         <?php endif;?>
