@@ -178,7 +178,7 @@ class Clientsbays extends Model{
                 'client_id'     => $client_id,
                 'location_id'   => $location_id
             ));
-            print_r($row);//die(); 
+            echo "<pre>The row",print_r($row),"</pre>";//die(); 
             die("row count".count($row));
             if(count($row) && $row['oversize'] == $not_oversize)
             {
