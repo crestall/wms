@@ -571,7 +571,7 @@
                     }
                 }
             }
-            //console.log('current page: '+config.curPage);
+            console.log('current page: '+config.curPage);
             //run the script for the current page
             actions[config.curPage].init();
         </script>
