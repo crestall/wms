@@ -128,9 +128,10 @@ class Clientsbays extends Model{
         );
     }
 
-    public function stockAdded($client_id, $location_id, $to_receiving = 0, $pallet_multiplier = 1)
+    public function stockAdded($client_id, $location_id, $to_receiving = 0, $pallet_multiplier = 1, $is_oversize = false)
     {
         $db = Database::openConnection();
+        $oversize = ($is_oversize)? 1 : 0;
         if($to_receiving)
         {
             $location = new Location();
@@ -155,7 +156,8 @@ class Clientsbays extends Model{
             if(!$db->queryValue($this->table, array(
                 'client_id'     =>  $client_id,
                 'location_id'   =>  $location_id,
-                'date_removed'  =>  0
+                'date_removed'  =>  0,
+                'oversize'      =>  $oversize
             )))
             {
                 $db->insertQuery($this->table, array(
