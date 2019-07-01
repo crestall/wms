@@ -167,7 +167,7 @@
                     {
                         dataTable.init($('table#solar-inventory-table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [2] }
+                                { "orderable": false, "targets": [2,3] }
                             ]
                          } );
                     }
