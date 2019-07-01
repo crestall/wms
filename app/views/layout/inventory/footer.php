@@ -166,10 +166,7 @@
                     init: function()
                     {
                         console.log('solar start');
-                        dataTable.init($('table#solar_inventory_table'), {
-                            "order": [],
-                            fixedHeader: true
-                        } );
+                        dataTable.init($('table#solar-inventory-table'), {} );
                         console.log('solar end');
                     }
                 },

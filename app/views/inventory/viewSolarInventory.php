@@ -6,12 +6,13 @@
             <h2>Drawing Table..</h2>
             <p>May take a few moments</p>
             <img class='loading' src='/images/preloader.gif' alt='loading...' />
+            <?php echo "<pre>",print_r($products),"</pre>";?>
         </div>
     </div>
     <div class="row" id="table_holder" style="display:none">
         <?php if(count($products)):?>
             <div class="col-md-12">
-                <table class="table-striped table-hover" id=solar_inventory_table">
+                <table class="table-striped table-hover" id=solar-inventory-table">
                     <thead>
                         <tr>
                             <th>Name</th>
