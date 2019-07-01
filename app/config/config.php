@@ -368,7 +368,8 @@ return array(
             'edit-product'			=> false,
         ),
         'inventory' => array(
-            'view-inventory'    => true
+            'view-inventory'    => true,
+            'view-solar-inventory'  => false
         ),
         'solar-teams'   => array(
             'add-team'  => true,
