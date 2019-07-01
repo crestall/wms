@@ -178,7 +178,7 @@ class Clientsbays extends Model{
                 'client_id'     => $client_id,
                 'location_id'   => $location_id
             ));
-
+            die(count($row));
             if(count($row) && $row['oversize'] == $not_oversize)
             {
                 $db->updateDatabaseField($this->table, 'date_removed', time(), $row['id']);
