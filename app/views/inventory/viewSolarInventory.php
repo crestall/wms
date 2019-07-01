@@ -5,8 +5,7 @@
         <div class="col-lg-12 text-center">
             <h2>Drawing Table..</h2>
             <p>May take a few moments</p>
-            <img class='loading' src='/images/preloader.gif' alt='loading...' />
-            <?php echo "<pre>",print_r($products),"</pre>";?>
+            <img class='loading' src='/images/preloader.gif' alt='loading...' /> 
         </div>
     </div>
     <div class="row" id="table_holder" style="display:none">
