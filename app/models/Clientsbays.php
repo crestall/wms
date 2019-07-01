@@ -132,6 +132,7 @@ class Clientsbays extends Model{
     {
         $db = Database::openConnection();
         $oversize = ($is_oversize)? 1 : 0;
+        die('oversize '.$oversize);
         if($to_receiving)
         {
             $location = new Location();

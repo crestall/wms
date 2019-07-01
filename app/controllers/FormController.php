@@ -2090,7 +2090,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        die('oversize'.$oversize);
+        //die('oversize'.$oversize);
         if(filter_var($qty_add, FILTER_VALIDATE_INT) === false && $qty_add <= 0)
         {
             Form::setError('qty_add', 'Please enter only positive whole numbers');
