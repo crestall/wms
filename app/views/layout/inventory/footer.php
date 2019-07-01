@@ -165,9 +165,9 @@
                 'view-solar-inventory': {
                     init: function()
                     {
-                        dataTable.init($('table#solar_inventory_table'), {
+                        dataTable.init($('table#client_inventory_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [1,2,7,8] }
+                                { "orderable": false, "targets": [6,7] }
                             ]
                         } );
                     }
