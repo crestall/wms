@@ -321,10 +321,10 @@ class inventoryController extends Controller
         //$products = $this->item->getClientInventoryArray($this->client->solar_client_id, $active);
         $products = $this->item->getItemsForClient($this->client->solar_client_id);
         Config::setJsConfig('curPage', "view-solar-inventory");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/clientInventory.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/viewSolarInventory.php',[
             'page_title'    =>  'Current Solar Inventory',
             'client_id'     =>  $this->client->solar_client_id,
-            'client_name'   =>  "",
+            'client_name'   =>  "TLJ Solar",
             'products'      =>  $products
         ]);
     }
