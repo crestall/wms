@@ -119,6 +119,7 @@ var dataTable = {
     init: function(el, options){
         var opts = {
             "initComplete": function( settings, json ) {
+                console.log('initComplete');
                 $("div#waiting").remove();
                 $("div#table_holder").show();
                 $(".dataTables_length select").addClass("form-control selectpicker");
