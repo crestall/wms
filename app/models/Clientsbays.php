@@ -132,7 +132,8 @@ class Clientsbays extends Model{
     {
         $db = Database::openConnection();
         $oversize = ($is_oversize)? 1 : 0;
-        die('oversize '.$oversize);
+        $not_oversize = ($is_oversize)? 0 : 1;
+        //die('oversize '.$oversize);
         if($to_receiving)
         {
             $location = new Location();
@@ -154,6 +155,7 @@ class Clientsbays extends Model{
         }
         else
         {
+            /*
             if(!$db->queryValue($this->table, array(
                 'client_id'     =>  $client_id,
                 'location_id'   =>  $location_id,
@@ -164,7 +166,29 @@ class Clientsbays extends Model{
                 $db->insertQuery($this->table, array(
                     'client_id'     =>  $client_id,
                     'location_id'   =>  $location_id,
-                    'date_added'    =>  time()
+                    'date_added'    =>  time(),
+                    'oversize'      =>  $oversize
+                ));
+            }
+            */
+            $row = $db->queryRow("
+                SELECT * FROM {$this->table} WHERE client_id = :client_id AND location_id = :location_id AND date_removed = 0
+            ",
+            array(
+                'client_id'     => $client_id,
+                'location_id'   => $location_id
+            ));
+            if(count($row) && $row['oversize'] == $not_oversize)
+            {
+                $db->updateDatabaseField($this->table, 'date_removed', time(), $row['id']);
+            }
+            elseif( !count($row) )
+            {
+                $db->insertQuery($this->table, array(
+                    'client_id'     =>  $client_id,
+                    'location_id'   =>  $location_id,
+                    'date_added'    =>  time(),
+                    'oversize'      =>  $oversize
                 ));
             }
         }
