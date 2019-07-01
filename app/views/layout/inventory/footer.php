@@ -165,7 +165,11 @@
                 'view-solar-inventory': {
                     init: function()
                     {
-                        dataTable.init($('table#solar-inventory-table'), { } );
+                        dataTable.init($('table#solar-inventory-table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [2] }
+                            ]
+                         } );
                     }
                 },
                 "pack-items-manage" : {
