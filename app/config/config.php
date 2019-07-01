@@ -379,7 +379,6 @@ return array(
             'view-schedule' => true
         ),
         'reports'   => array(
-            'inventory-report'  => true,
             'jobs-report'       => true,
             'returns-report'    => true
         ),
@@ -395,7 +394,7 @@ return array(
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,
-            'order-update'			    => false,   
+            'order-update'			    => false,
 			'process-backorders'	    =>	false,
 			'order-summaries'		    =>	true,
             //'add-b2B-order'             =>  true,
