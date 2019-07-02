@@ -15,7 +15,7 @@ define('UPLOADS',  DOC_ROOT. "/client_uploads/");
 /*************************************************************************
 * Is Site Live?
 **************************************************************************/
-define('SITE_LIVE', true);
+define('SITE_LIVE', false);
 define('HUNTERS_TEST', false);
 /*************************************************************************
 * Database Configuration
