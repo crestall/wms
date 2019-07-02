@@ -191,12 +191,10 @@ class Clientsbays extends Model{
         return true;
     }
 
-    public function stockRemoved($client_id, $location_id, $product_id, $take_oversize = false)
+    public function stockRemoved($client_id, $location_id, $product_id, $remove_oversize = false)
     {
         $db = Database::openConnection();
         $location = new Location();
-        $remove_oversize = ($take_oversize)? 1 : 0;
-        $leave_oversize = ($take_oversize)? 0 : 1;
         if($location_id == $location->receiving_id)
         {
             $this_row = $db->queryRow("SELECT * FROM {$this->table} WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id ");
@@ -237,8 +235,39 @@ class Clientsbays extends Model{
             $locations = $db->queryData("
                 SELECT il.* FROM items_locations il JOIN items i ON il.item_id = i.id WHERE i.client_id = $client_id AND il.location_id = $location_id
             ");
-            echo "<pre>The row",print_r($locations),"</pre>";die();
-            
+            //echo "<pre>The row",print_r($locations),"</pre>";die();
+            if(count($locations))
+            {
+                //do oversize update
+                $row = $db->queryRow("
+                    SELECT * FROM {$this->table} WHERE client_id = :client_id AND location_id = :location_id AND date_removed = 0
+                ",
+                array(
+                    'client_id'     => $client_id,
+                    'location_id'   => $location_id
+                ));
+                if(isset($row['oversize']) && $row['oversize'] == 1 && $remove_oversize)
+                {
+                    $db->updateDatabaseField($this->table, 'date_removed', time(), $row['id']);
+                    $array = array(
+                        'client_id'     =>  $client_id,
+                        'location_id'   =>  $location_id,
+                        'date_added'    =>  time(),
+                        'oversize'      =>  0
+                    );
+                    //echo "<pre>The row",print_r($array),"</pre>";die();
+                    $db->insertQuery($this->table, $array);
+                }
+            }
+            else
+            {
+                //remove allocation
+                $db->query("
+                    UPDATE {$this->table}
+                    SET date_removed = ".time()."
+                    WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id
+                ");
+            }
         }
 
         return true;
