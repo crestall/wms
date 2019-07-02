@@ -192,6 +192,7 @@ class Clientsbays extends Model{
                     'date_added'    =>  time(),
                     'oversize'      =>  $oversize
                 );
+                echo "<pre>The row",print_r($row),"</pre>";die();
                 $db->insertQuery($this->table, $array);
             }
         }
