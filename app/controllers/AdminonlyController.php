@@ -14,6 +14,12 @@ class adminonlyController extends Controller
         parent::beforeAction();
     }
 
+    public function clientBayFixer()
+    {
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        $client_name = $this->client->getClientName($client_id);
+    }
+
     public function dispatchedOrdersUpdater()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
