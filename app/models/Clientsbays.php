@@ -183,6 +183,14 @@ class Clientsbays extends Model{
             if(isset($row['id']) && $row['oversize'] == $not_oversize)
             {
                 $db->updateDatabaseField($this->table, 'date_removed', time(), $row['id']);
+                $array = array(
+                    'client_id'     =>  $client_id,
+                    'location_id'   =>  $location_id,
+                    'date_added'    =>  time(),
+                    'oversize'      =>  $oversize
+                );
+                //echo "<pre>The row",print_r($array),"</pre>";die();
+                $db->insertQuery($this->table, $array);
             }
             elseif( !isset($row['id']) )
             {
