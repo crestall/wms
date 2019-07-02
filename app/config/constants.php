@@ -15,15 +15,14 @@ define('UPLOADS',  DOC_ROOT. "/client_uploads/");
 /*************************************************************************
 * Is Site Live?
 **************************************************************************/
-define('SITE_LIVE', true);
-define('HUNTERS_TEST', false);
+define('SITE_LIVE', false);
+define('HUNTERS_TEST', true);
 /*************************************************************************
 * Database Configuration
 **************************************************************************/
 define('DB_HOST', "localhost");
-define('DB_NAME', "cobaltma_newclientportal");
+define('DB_NAME', "cobaltma_newclient_portal_dev");
 define('DB_USER', "cobaltma_cpsite");
 define('DB_PASS', "{,e3^bfcfcMp");
 define('DB_CHARSET', "utf8");
-
 ?>

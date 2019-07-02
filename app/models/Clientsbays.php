@@ -128,9 +128,12 @@ class Clientsbays extends Model{
         );
     }
 
-    public function stockAdded($client_id, $location_id, $to_receiving = 0, $pallet_multiplier = 1)
+    public function stockAdded($client_id, $location_id, $to_receiving = 0, $pallet_multiplier = 1, $is_oversize = false)
     {
         $db = Database::openConnection();
+        $oversize = ($is_oversize)? 1 : 0;
+        $not_oversize = ($is_oversize)? 0 : 1;
+        //die('oversize '.$oversize);
         if($to_receiving)
         {
             $location = new Location();
@@ -152,29 +155,46 @@ class Clientsbays extends Model{
         }
         else
         {
-            if(!$db->queryValue($this->table, array(
-                'client_id'     =>  $client_id,
-                'location_id'   =>  $location_id,
-                'date_removed'  =>  0
-            )))
+            $row = $db->queryRow("
+                SELECT * FROM {$this->table} WHERE client_id = :client_id AND location_id = :location_id AND date_removed = 0
+            ",
+            array(
+                'client_id'     => $client_id,
+                'location_id'   => $location_id
+            ));
+            //echo "<pre>The row",print_r($row),"</pre>";die();
+            //die("row count".count($row));
+            if(isset($row['id']) && $row['oversize'] == $not_oversize)
             {
-                $db->insertQuery($this->table, array(
+                $db->updateDatabaseField($this->table, 'date_removed', time(), $row['id']);
+                $array = array(
                     'client_id'     =>  $client_id,
                     'location_id'   =>  $location_id,
-                    'date_added'    =>  time()
-                ));
+                    'date_added'    =>  time(),
+                    'oversize'      =>  $oversize
+                );
+                //echo "<pre>The row",print_r($array),"</pre>";die();
+                $db->insertQuery($this->table, $array);
+            }
+            elseif( !isset($row['id']) )
+            {
+                $array = array(
+                    'client_id'     =>  $client_id,
+                    'location_id'   =>  $location_id,
+                    'date_added'    =>  time(),
+                    'oversize'      =>  $oversize
+                );
+                //echo "<pre>The row",print_r($array),"</pre>";die();
+                $db->insertQuery($this->table, $array);
             }
         }
-
-
         return true;
     }
 
-    public function stockRemoved($client_id, $location_id, $product_id)
+    public function stockRemoved($client_id, $location_id, $product_id, $remove_oversize = false)
     {
         $db = Database::openConnection();
         $location = new Location();
-
         if($location_id == $location->receiving_id)
         {
             $this_row = $db->queryRow("SELECT * FROM {$this->table} WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id ");
@@ -199,11 +219,49 @@ class Clientsbays extends Model{
         }
         else
         {
+            /*
             if(!$db->queryValue('items_locations', array(
                 'item_id'       =>  $product_id,
                 'location_id'   =>  $location_id
             )))
             {
+                $db->query("
+                    UPDATE {$this->table}
+                    SET date_removed = ".time()."
+                    WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id
+                ");
+            }
+            */
+            $locations = $db->queryData("
+                SELECT il.* FROM items_locations il JOIN items i ON il.item_id = i.id WHERE i.client_id = $client_id AND il.location_id = $location_id
+            ");
+            //echo "<pre>The row",print_r($locations),"</pre>";die();
+            if(count($locations))
+            {
+                //do oversize update
+                $row = $db->queryRow("
+                    SELECT * FROM {$this->table} WHERE client_id = :client_id AND location_id = :location_id AND date_removed = 0
+                ",
+                array(
+                    'client_id'     => $client_id,
+                    'location_id'   => $location_id
+                ));
+                if(isset($row['oversize']) && $row['oversize'] == 1 && $remove_oversize)
+                {
+                    $db->updateDatabaseField($this->table, 'date_removed', time(), $row['id']);
+                    $array = array(
+                        'client_id'     =>  $client_id,
+                        'location_id'   =>  $location_id,
+                        'date_added'    =>  time(),
+                        'oversize'      =>  0
+                    );
+                    //echo "<pre>The row",print_r($array),"</pre>";die();
+                    $db->insertQuery($this->table, $array);
+                }
+            }
+            else
+            {
+                //remove allocation
                 $db->query("
                     UPDATE {$this->table}
                     SET date_removed = ".time()."

@@ -2071,7 +2071,7 @@ class FormController extends Controller {
         else
         {
             $this->location->subtractFromLocation($post_data);
-            $this->clientsbays->stockRemoved($client_id, $subtract_from_location, $subtract_product_id);
+            $this->clientsbays->stockRemoved($client_id, $subtract_from_location, $subtract_product_id, isset($remove_oversize));
             Session::set('subtractfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$subtract_product_id);
@@ -2090,6 +2090,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        //die('oversize'.$oversize);
         if(filter_var($qty_add, FILTER_VALIDATE_INT) === false && $qty_add <= 0)
         {
             Form::setError('qty_add', 'Please enter only positive whole numbers');
@@ -2125,7 +2126,7 @@ class FormController extends Controller {
         {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
             $this->location->addToLocation($post_data);
-            $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
+            $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier, isset($oversize));
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id);
