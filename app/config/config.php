@@ -545,7 +545,8 @@ return array(
         'admin-only'    => array(
             'super_admin_only'  => true,
             'eparcel-shipment-deleter'  => true,
-            'dispatched-orders-updater' => true
+            'dispatched-orders-updater' => false,
+            'client-bay-fixer'  => true
         ),
     ),
     'WAREHOUSE_PAGES' => array(
