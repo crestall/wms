@@ -155,22 +155,6 @@ class Clientsbays extends Model{
         }
         else
         {
-            /*
-            if(!$db->queryValue($this->table, array(
-                'client_id'     =>  $client_id,
-                'location_id'   =>  $location_id,
-                'date_removed'  =>  0,
-                'oversize'      =>  $oversize
-            )))
-            {
-                $db->insertQuery($this->table, array(
-                    'client_id'     =>  $client_id,
-                    'location_id'   =>  $location_id,
-                    'date_added'    =>  time(),
-                    'oversize'      =>  $oversize
-                ));
-            }
-            */
             $row = $db->queryRow("
                 SELECT * FROM {$this->table} WHERE client_id = :client_id AND location_id = :location_id AND date_removed = 0
             ",
@@ -204,16 +188,15 @@ class Clientsbays extends Model{
                 $db->insertQuery($this->table, $array);
             }
         }
-
-
         return true;
     }
 
-    public function stockRemoved($client_id, $location_id, $product_id)
+    public function stockRemoved($client_id, $location_id, $product_id, $take_oversize = false)
     {
         $db = Database::openConnection();
         $location = new Location();
-
+        $remove_oversize = ($take_oversize)? 1 : 0;
+        $leave_oversize = ($take_oversize)? 0 : 1;
         if($location_id == $location->receiving_id)
         {
             $this_row = $db->queryRow("SELECT * FROM {$this->table} WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id ");
@@ -238,6 +221,7 @@ class Clientsbays extends Model{
         }
         else
         {
+            /*
             if(!$db->queryValue('items_locations', array(
                 'item_id'       =>  $product_id,
                 'location_id'   =>  $location_id
@@ -249,6 +233,12 @@ class Clientsbays extends Model{
                     WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id
                 ");
             }
+            */
+            $locations = $db->queryData("
+                SELECT il.* FROM items_locations il JOIN items i ON il.item_id = i.id WHERE i.client_id = $client_id AND il.location_id = $location_id
+            ");
+            echo "<pre>The row",print_r($locations),"</pre>";die();
+            
         }
 
         return true;

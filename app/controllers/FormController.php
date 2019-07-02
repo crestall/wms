@@ -2019,7 +2019,7 @@ class FormController extends Controller {
 
     public function procSubtractFromStock()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -2071,7 +2071,7 @@ class FormController extends Controller {
         else
         {
             $this->location->subtractFromLocation($post_data);
-            $this->clientsbays->stockRemoved($client_id, $subtract_from_location, $subtract_product_id);
+            $this->clientsbays->stockRemoved($client_id, $subtract_from_location, $subtract_product_id, isset($remove_oversize));
             Session::set('subtractfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$subtract_product_id);
