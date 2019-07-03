@@ -282,6 +282,9 @@
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+                        $('select#team_id, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
+                        });
                         $("form#add_origin_order").submit(function(e){
                             if($(this).valid())
                             {
