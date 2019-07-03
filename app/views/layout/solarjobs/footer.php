@@ -247,6 +247,9 @@
                 'add-origin-service-job' : {
                     init: function(){
                         actions.common.init();
+                        datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                     }
                 },
                 'add-tlj-service-job' : {

@@ -45,7 +45,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary" id="add_origin_service_submitter" disabled>Submit</button>
+                        <button type="submit" class="btn btn-primary" id="add_origin_service_submitter">Submit</button>
                     </div>
                 </div>
             </form>
