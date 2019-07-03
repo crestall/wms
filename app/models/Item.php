@@ -807,7 +807,7 @@ class Item extends Model{
                 $db->query(
                     "UPDATE clients_locations
                     SET date_removed = ".time()."
-                    WHERE 'client_id' = $client_id AND location_id = $next_location_id"
+                    WHERE client_id = $client_id AND location_id = $next_location_id"
                 );
             }
         }
