@@ -256,7 +256,7 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Job...</h2></div>' });
                             }
                         });
-                        $('select#team_id').change(function(e){
+                        $('select#team_id, #address, #suburb, #postcode, #country').change(function(e){
                             $(this).valid();
                         });
                     }
