@@ -19,23 +19,19 @@
 class Solarteam extends Model{
     public $table = "solar_teams";
 
-    public function getSelectSalesReps($selected = false, $client_id = 0)
+    public function getSelectTeam($selected = false)
     {
         $db = Database::openConnection();
 
         $check = "";
         $ret_string = "";
         $q = "SELECT id, name FROM {$this->table} WHERE active = 1";
-        if($client_id > 0)
-        {
-            $q .= " AND client_id = $client_id";
-        }
         $q .= " ORDER BY name";
-        $reps = $db->queryData($q);
-        foreach($reps as $r)
+        $teams = $db->queryData($q);
+        foreach($teams as $t)
         {
-            $label = $r['name'];
-            $value = $r['id'];
+            $label = $t['name'];
+            $value = $t['id'];
             if($selected)
             {
                 $check = ($value == $selected)? "selected='selected'" : "";

@@ -13,7 +13,13 @@ $country = (empty(Form::value('country')))? "AU" : Form::value('country');
     <div class="row">
         <div class="col-lg-12">
             <form id="origin-service-job" method="post" action="/form/procAddOriginServiceJob" autocomplete="off">
-
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Team</label>
+                    <div class="col-md-4">
+                        <select id="team_id" name="team_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarteam->getSelectTeam(Form::value('team_id'));?></select>
+                        <?php echo Form::displayError('team_id');?>
+                    </div>
+                </div>
 
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                 <input type="hidden" name="selected_items" id="selected_items" />
