@@ -2,9 +2,9 @@
 $address = Form::value('address');
 $address2 = Form::value('address2');
 $suburb = Form::value('suburb');
-$state = Form::value('state');
+$state =  (empty(Form::value('state')))? "VIC" : Form::value('state');
 $postcode = Form::value('postcode');
-$country = Form::value('country');
+$country = (empty(Form::value('country')))? "AU" : Form::value('country');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
