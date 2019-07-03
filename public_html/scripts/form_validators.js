@@ -463,6 +463,19 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
+    $('#origin-service-job').validate({
+        rules:{
+            team_id:{
+                notNone:true
+            }
+        },
+        messages:{
+            team_id:{
+                notNone: "Please select a team"
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
     $('form#form-forgot-password').validate({
 
     });
