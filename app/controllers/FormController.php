@@ -57,6 +57,7 @@ class FormController extends Controller {
             'procAddClientLocation',
             'procAddLocation',
             'procAddMiscToOrder',
+            'procAddOriginServiceJob',
             'procAddPackage',
             'procAddressUpdate',
             'procAddToStock',
@@ -116,6 +117,20 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procAddOriginServiceJob()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
     }
 
     public function procSolarReturn()
@@ -312,7 +327,7 @@ class FormController extends Controller {
             $order_id = $this->solarorder->addOrder($post_data, $oitems);
             Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/add-origin-order");
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-origin-job");
     }
 
     public function procRegisterNewStock()

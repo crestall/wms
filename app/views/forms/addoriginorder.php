@@ -28,6 +28,13 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 </div>
             </div>
             <div class="form-group row">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Team</label>
+                    <div class="col-md-4">
+                        <select id="team_id" name="team_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarteam->getSelectTeam(Form::value('team_id'));?></select>
+                        <?php echo Form::displayError('team_id');?>
+                    </div>
+                </div>
+            <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Work Order</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="work_order" id="work_order" value="<?php echo Form::value('work_order');?>" />

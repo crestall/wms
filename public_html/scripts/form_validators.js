@@ -454,11 +454,30 @@ $(document).ready(function() {
         rules:{
             roof_type:{
                 required:true
+            },
+            team_id:{
+                notNone:true
             }
         },
         messages:{
             roof_type:{
                 required: "Please select a roof type"
+            },
+            team_id:{
+                notNone: "Please select a team"
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
+    $('#origin-service-job').validate({
+        rules:{
+            team_id:{
+                notNone:true
+            }
+        },
+        messages:{
+            team_id:{
+                notNone: "Please select a team"
             }
         }
     });
