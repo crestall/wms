@@ -181,7 +181,7 @@ class Woocommerce{
         $this->output .= "IMPORTING SINGLE NUCHEV ORDER ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $this->woocommerce = new Client(
-            'https://www.oli6.com.au',
+            'https://www.oli6.com',
             Config::get('NUWOOCONSUMERRKEY'),
             Config::get('NUWOOCONSUMERSECRET'),
             [
@@ -413,7 +413,7 @@ class Woocommerce{
         $this->output .= "NUCHEV ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $this->woocommerce = new Client(
-            'https://www.oli6.com.au',
+            'https://www.oli6.com',
             Config::get('NUWOOCONSUMERRKEY'),
             Config::get('NUWOOCONSUMERSECRET'),
             [

@@ -16,6 +16,16 @@
 class Clientsbays extends Model{
     public $table = "clients_bays";
 
+    public function getCurrentBayUsage($client_id)
+    {
+        $db = Database::openConnection();
+        $bays = $db->queryData("
+            SELECT * FROM {$this->table} WHERE client_id = $client_id AND date_removed = 0;
+        ");
+
+        return $bays;
+    }
+
     public function getBayUsage($from, $to)
     {
         $db = Database::openConnection();

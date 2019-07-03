@@ -14,6 +14,20 @@ class adminonlyController extends Controller
         parent::beforeAction();
     }
 
+    public function clientBayFixer()
+    {
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        $client_name = $this->client->getClientName($client_id);
+        $bays = $this->clientsbays->getCurrentBayUsage($client_id);
+        Config::setJsConfig('curPage', "client-bay-fixer");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/clientBayFixer.php', [
+            'page_title'    =>  "Client Bay Fixer",
+            'client_name'   =>  $client_name,
+            'client_id'     =>  $client_id,
+            'bays'          =>  $bays
+        ]);
+    }
+
     public function dispatchedOrdersUpdater()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
