@@ -5,6 +5,8 @@ $suburb = Form::value('suburb');
 $state =  (empty(Form::value('state')))? "VIC" : Form::value('state');
 $postcode = Form::value('postcode');
 $country = (empty(Form::value('country')))? "AU" : Form::value('country');
+$date_filter = "Job Date";
+$date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -20,7 +22,21 @@ $country = (empty(Form::value('country')))? "AU" : Form::value('country');
                         <?php echo Form::displayError('team_id');?>
                     </div>
                 </div>
-
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Work Order</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control required" name="work_order" id="work_order" value="<?php echo Form::value('work_order');?>" />
+                        <?php echo Form::displayError('work_order');?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control required" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                        <?php echo Form::displayError('customer_name');?>
+                    </div>
+                </div>
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
