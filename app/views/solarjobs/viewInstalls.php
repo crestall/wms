@@ -5,7 +5,7 @@
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        <div class="row">
+        <!--div class="row">
             <div class="col-lg-3 text-center">
                 <?php if($fulfilled == 0):?>
                     <p><button class="btn btn-info" id="show_fulfilled">Show Only Fulfilled Orders</button></p>
@@ -13,7 +13,7 @@
                     <p><button class="btn btn-primary" id="show_unfulfilled">Show Only Unfulfilled Orders</button></p>
                 <?php endif;?>
             </div>
-        </div>
+        </div-->
         <div class="row">
             <div class="col-lg-3 text-center">
                 <p><a class="btn btn-primary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>

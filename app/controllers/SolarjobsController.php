@@ -104,7 +104,7 @@ class SolarjobsController extends Controller
                 $ff = "Fulfilled";
             }
         }
-        $page_title = "$ff Orders For $order_type";
+        $page_title = "Latest Installs For $order_type";
 
         $orders = $this->solarorder->getSolarAllOrders($type_id, $fulfilled);
         //render the page
