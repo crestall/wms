@@ -51,7 +51,7 @@ class SolarjobsController extends Controller
             2   => "editTLJInstall.php"
         );
         $details = $this->solarorder->getOrderDetail($id);
-        //$order_items =
+        $order_items = $this->solarorder->getItemsForOrder($id);
         $order_type = $this->solarordertype->getSolarOrderType($type);
         /*  */
         Config::setJsConfig('curPage', "update-solar-install");
@@ -60,7 +60,8 @@ class SolarjobsController extends Controller
             'details'       =>  $details,
             'id'            =>  $id,
             'type'          =>  $type,
-            'order_type'    =>  $order_type
+            'order_type'    =>  $order_type,
+            'order_items'   =>  $order_items
         ]);
 
     }

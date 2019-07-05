@@ -75,9 +75,32 @@
             <div class='row'>
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <a class="btn btn-primary" href="/solarjobs/update-details/id=<?php echo $id;?>">Update These Details</a>
+                    <a class="btn btn-primary" href="/solar-jobs/update-details/id=<?php echo $id;?>">Update These Details</a>
                 </div>
             </div>
+            <div class="row">
+            <div class="col-md-12">
+                <h3>Job Items</h3>
+            </div>
+        </div>
+        <div class="bs-callout bs-callout-primary bs-callout-more">
+            <div class="row">
+                <div class="col-md-10">
+                    <dl class="dl-horizontal order-items">
+                        <?php foreach($order_items as $oi):?>
+                            <dt><?php echo $oi['name'];?></dt>
+                            <dd><?php echo $oi['qty'];?></dd>
+                        <?php endforeach;?>
+                    </dl>
+                </div>
+            </div>
+            <div class='row'>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <a class="btn btn-primary" href="/orders/items-update/order=<?php echo $order_id;?>">Update Order Items</a>
+                </div>
+            </div>
+        </div>
         </div>
     <?php endif;?>
 </div>
