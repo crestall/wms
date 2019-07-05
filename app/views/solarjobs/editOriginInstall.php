@@ -97,7 +97,7 @@
             <div class='row'>
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <a class="btn btn-primary" href="/orders/items-update/order=<?php echo $order_id;?>">Update Order Items</a>
+                    <a class="btn btn-primary" href="/orders/items-update/order=<?php echo $id;?>">Update Order Items</a>
                 </div>
             </div>
         </div>
