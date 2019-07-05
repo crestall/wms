@@ -37,14 +37,14 @@ class SolarjobsController extends Controller
 
     public function editInstall()
     {
-        echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
         if(empty($this->request->params['args']))
         {
             return $this->redirector->to(PUBLIC_ROOT."solar-jobs/view-installs");
         }
         $page_title = "Update a Solar Install Job";
         $type = $this->request->params['args']['type'];
-        $id = $this->request->params['args']['type']['id'];
+        $id = $this->request->params['args']['id'];
         /*
         Config::setJsConfig('curPage', "update-solar-install");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addServiceJob.php',[
