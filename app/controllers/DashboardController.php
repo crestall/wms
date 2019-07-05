@@ -30,13 +30,13 @@ class DashboardController extends Controller
             //$pickups = $this->pickup->getCurrentPickups();
             $store_orders = $this->order->getCurrentStoreOrders();
         }
-        /*
-        elseif(Session::getUserRole() == "warehouse")
+        /* */
+        elseif($user_role == 'solar admin')
         {
             //$clients = $this->client->getAllClients();
-            $orders = $this->order->getCurrentOrders();
+            $solar_installs = $this->solarorder->getCurrentOrders();
         }
-        */
+
         elseif($user_role == 'client')
         {
             $client_id = $this->user->getUserClientId( Session::getUserId() );
