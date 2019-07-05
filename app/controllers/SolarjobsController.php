@@ -55,7 +55,7 @@ class SolarjobsController extends Controller
 
         /*  */
         Config::setJsConfig('curPage', "update-solar-install");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/'.$forms[$id],[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/'.$forms[$type],[
             'page_title'    =>  $page_title
         ]);
 
