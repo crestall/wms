@@ -140,8 +140,8 @@ $c = 1;
                                             <div class="panel-footer">
                                                 <div class="row">
                                                     <div class="col-xs-8">
-                                                        <div><span class="huge"><?php echo $so['order_count'];?></span> Order<?php echo $s;?></div>
-                                                        <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-solarorders/type=<?php echo $so['type_id'];?>">Manage Orders</a></div>
+                                                        <div><span class="huge"><?php echo $so['order_count'];?></span> Job<?php echo $s;?></div>
+                                                        <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-solarorders/type=<?php echo $so['type_id'];?>">Manage Jobs</a></div>
                                                     </div>
                                                     <div class="col-xs-4">
                                                         <i class="fas fa-tools fa-3x"></i>
@@ -186,8 +186,8 @@ $c = 1;
                                                 <div class="panel-footer">
                                                     <div class="row">
                                                         <div class="col-xs-8">
-                                                            <div><span class="huge"><?php echo $p['pickup_count'];?></span> Pickup<?php echo $s;?></div>
-                                                            <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-pickups/client=<?php echo $p['client_id'];?>">Manage Pickups</a></div>
+                                                            <div><span class="huge"><?php echo $p['pickup_count'];?></span> Job<?php echo $s;?></div>
+                                                            <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-pickups/client=<?php echo $p['client_id'];?>">Manage Jobs</a></div>
                                                         </div>
                                                         <div class="col-xs-4">
                                                             <i class="fas fa-tools fa-3x"></i>
