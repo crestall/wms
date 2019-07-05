@@ -45,12 +45,20 @@ class SolarjobsController extends Controller
         $page_title = "Update a Solar Install Job";
         $type = $this->request->params['args']['type'];
         $id = $this->request->params['args']['id'];
-        /*
+
+        $forms = array(
+            1   => "editOriginInstall.php",
+            2   => "editTLJInstall.php"
+        );
+        $details = $this->solarorder->getOrderDetail($id);
+        //$order_items =
+
+        /*  */
         Config::setJsConfig('curPage', "update-solar-install");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addServiceJob.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/'.$forms[$id],[
             'page_title'    =>  $page_title
         ]);
-        */
+
     }
 
     public function addOriginJob()
