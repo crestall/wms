@@ -397,7 +397,7 @@
                         });
                     }
                 },
-                'view-jobs': {
+                'view-installs': {
                     init: function(){
                         actions.common.init();
                         actions.common['select-all']();
