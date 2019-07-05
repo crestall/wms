@@ -108,7 +108,7 @@ class SolarjobsController extends Controller
 
         $orders = $this->solarorder->getSolarAllOrders($type_id, $fulfilled);
         //render the page
-        Config::setJsConfig('curPage', "view-jobs");
+        Config::setJsConfig('curPage', "view-installs");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/viewInstalls.php', [
             'page_title'    =>  $page_title,
             'order_type'    =>  $order_type,

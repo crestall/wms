@@ -422,7 +422,7 @@ return array(
             'add-solar-install'             => true,
             'update-solar-job'          => false,
             'add-service-job'           => true,
-            'view-jobs'                 => true,
+            'view-installs'                 => true,
             'add-origin-job'            => false,
             'add-tlj-job'               => false,
             'job-search'                => true,
