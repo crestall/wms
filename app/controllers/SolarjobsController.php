@@ -84,7 +84,7 @@ class SolarjobsController extends Controller
         ]);
     }
 
-    public function viewJobs()
+    public function viewInstalls()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
         $order_type = "All Types";
@@ -108,8 +108,8 @@ class SolarjobsController extends Controller
 
         $orders = $this->solarorder->getSolarAllOrders($type_id, $fulfilled);
         //render the page
-        Config::setJsConfig('curPage', "view-jobs");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/viewSolarJobs.php', [
+        Config::setJsConfig('curPage', "view-installs");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/viewInstalls.php', [
             'page_title'    =>  $page_title,
             'order_type'    =>  $order_type,
             'type_id'       =>  $type_id,
