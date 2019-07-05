@@ -78,6 +78,7 @@
                     <a class="btn btn-primary" href="/solar-jobs/update-details/id=<?php echo $id;?>">Update These Details</a>
                 </div>
             </div>
+        </div>
             <div class="row">
             <div class="col-md-12">
                 <h3>Job Items</h3>
@@ -100,7 +101,6 @@
                     <a class="btn btn-primary" href="/orders/items-update/order=<?php echo $id;?>">Update Order Items</a>
                 </div>
             </div>
-        </div>
         </div>
     <?php endif;?>
 </div>
