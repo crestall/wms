@@ -37,6 +37,7 @@ class SolarjobsController extends Controller
 
     public function editInstall()
     {
+        echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
         if(empty($this->request->params['args']))
         {
             return $this->redirector->to(PUBLIC_ROOT."solar-jobs/view-installs");
