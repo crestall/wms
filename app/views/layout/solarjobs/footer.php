@@ -403,6 +403,14 @@
                         actions.common['select-all']();
                         actions.common['cancel-orders'](true);
 
+                        $('#type_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Job Data...</h2></div>' });
+                                window.location.href = "/solar-jobs/view-installs/type=" + $(this).val();
+                            }
+                        });
+
                         $('table#solar_orders_table').filterTable({
                             inputSelector: '#table_searcher'
                         });
