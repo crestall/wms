@@ -319,7 +319,7 @@ $c = 1;
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-10 text-center">
-                                <h2>Active Solar Service Jobs </h2>
+                                <h2>Latest Service Jobs </h2>
                             </div>
                             <div class="col-xs-2 text-right">
                                  <a id="toggle_solarservice" data-toggle="collapse" href="#new_solarservice"><span class="fa arrow huge"></span></a>
