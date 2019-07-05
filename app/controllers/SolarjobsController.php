@@ -53,6 +53,11 @@ class SolarjobsController extends Controller
         $details = $this->solarorder->getOrderDetail($id);
         $order_items = $this->solarorder->getItemsForOrder($id);
         $order_type = $this->solarordertype->getSolarOrderType($type);
+        $eb = $this->user->getUserName( $details['entered_by'] );
+        if(empty($eb))
+        {
+            $eb = "Automatically Imported";
+        }
         /*  */
         Config::setJsConfig('curPage', "update-solar-install");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/'.$forms[$type],[
@@ -61,7 +66,8 @@ class SolarjobsController extends Controller
             'id'            =>  $id,
             'type'          =>  $type,
             'order_type'    =>  $order_type,
-            'order_items'   =>  $order_items
+            'order_items'   =>  $order_items,
+            'entered_by'    =>  $eb
         ]);
 
     }

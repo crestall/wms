@@ -49,7 +49,7 @@
         </div>
         <div class="bs-callout bs-callout-primary bs-callout-more">
             <div class="row ">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <dl class="dl-horizontal order-details">
                         <dt>Work Order</dt>
                         <dd><?php echo $details['work_order'];?></dd>
@@ -69,6 +69,16 @@
                         <dd><?php echo $details['postcode'];?></dd>
                         <dt>&nbsp;</dt>
                         <dd><?php echo $details['country'];?></dd>
+                    </dl>
+                </div>
+                <div class="col-md-5">
+                    <dl class="dl-horizontal order-details">
+                        <dt>Install date</dt>
+                        <dd><?php echo date("m/d/Y", $details['install_date']);?></dd>
+                        <dt>Team</dt>
+                        <dd></dd>
+                        <dt>Entered By</dt>
+                        <dd><?php echo $entered_by;?></dd>
                     </dl>
                 </div>
             </div>
