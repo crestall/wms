@@ -285,7 +285,30 @@ $c = 1;
                     <div class="panel-body">
                         <div class="collapse in" id="new_solarinstalls">
                             <div class="row">
-                               Install Info Will Appear Here
+                               <?php foreach($solar_orders as $so):
+                                    $s = ($so['order_count'] > 1)? "s" : ""; ?>
+                                    <div class="col-lg-6">
+                                        <div class="panel panel-<?php echo $panel_classes[$c % count($panel_classes)];?>">
+                                            <div class="panel-heading order-panel">
+                                                <h3 class="text-center"><?php echo ucwords($so['name']);?></h3>
+                                            </div>
+                                            <div class="panel-footer">
+                                                <div class="row">
+                                                    <div class="col-xs-8">
+                                                        <div><span class="huge"><?php echo $so['order_count'];?></span> Job<?php echo $s;?></div>
+                                                        <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/solar-jobs/view-installs/type=<?php echo $so['type_id'];?>">View Jobs</a></div>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <i class="fas fa-tools fa-3x"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php if($c % 2 == 0):?>
+                                        </div><div class="row">
+                                    <?php endif;++$c;?>
+                                <?php endforeach;?>
                             </div>
                         </div>
                     </div>
