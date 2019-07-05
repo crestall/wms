@@ -52,11 +52,15 @@ class SolarjobsController extends Controller
         );
         $details = $this->solarorder->getOrderDetail($id);
         //$order_items =
-
+        $order_type = $this->solarordertype->getSolarOrderType($type);
         /*  */
         Config::setJsConfig('curPage', "update-solar-install");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/'.$forms[$type],[
-            'page_title'    =>  $page_title
+            'page_title'    =>  $page_title,
+            'details'       =>  $details,
+            'id'            =>  $id,
+            'type'          =>  $type
+            'order_type'    =>  $order_type
         ]);
 
     }
