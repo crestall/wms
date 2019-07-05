@@ -144,7 +144,7 @@ $c = 1;
                                                         <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-solarorders/type=<?php echo $so['type_id'];?>">Manage Orders</a></div>
                                                     </div>
                                                     <div class="col-xs-4">
-                                                        <i class="fas fa-truck fa-3x"></i>
+                                                        <i class="fas fa-tools fa-3x"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -190,7 +190,7 @@ $c = 1;
                                                             <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-pickups/client=<?php echo $p['client_id'];?>">Manage Pickups</a></div>
                                                         </div>
                                                         <div class="col-xs-4">
-                                                            <i class="fas fa-truck fa-3x"></i>
+                                                            <i class="fas fa-tools fa-3x"></i>
                                                         </div>
                                                     </div>
                                                 </div>
