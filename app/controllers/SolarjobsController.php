@@ -59,7 +59,7 @@ class SolarjobsController extends Controller
             'page_title'    =>  $page_title,
             'details'       =>  $details,
             'id'            =>  $id,
-            'type'          =>  $type
+            'type'          =>  $type,
             'order_type'    =>  $order_type
         ]);
 
