@@ -14,7 +14,7 @@
                         <div class="col-md-6">
                             <h2>No Job Found</h2>
                             <p>No job was found with that ID</p>
-                            <p><a href="/solar-jobs/view-installs/type=<?php echo $type;?>">Please click here to view all <?php echo $order_type;?> jobs to choose from</a></p>
+                            <p><a href="/solar-jobs/view-installs/type=<?php echo $type;?>">Please click here to view all <?php echo $order_type;?> installs to choose from</a></p>
                         </div>
                     </div>
                 </div>
