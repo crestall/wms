@@ -21,6 +21,16 @@
             </div>
         </div>
     <?php else:?>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Updating Job Number <?php echo $details['work_order'];?></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Instal For <?php echo $order_type;?></h3>
+            </div>
+        </div>
         <?php echo "<pre>",print_r($details),"</pre>";?>
     <?php endif;?>
 </div>
