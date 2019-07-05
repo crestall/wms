@@ -104,7 +104,7 @@
         	        	<tr>
                             <td class="number" data-label="Count"><?php echo $c;?></td>
         	            	<td class="filterable number" data-label="Work Order">
-                                <a href="/solar-jobs/edit-install/id=<?php echo $co['id'];?>"><?php echo $co['work_order'];?> </a>
+                                <a href="/solar-jobs/edit-install/type=<?php echo $co['type_id'];?>/id=<?php echo $co['id'];?>"><?php echo $co['work_order'];?> </a>
                             </td>
         					<!--td data-label="Client Name"><?php //echo $client_name;?></td-->
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
