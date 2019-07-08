@@ -264,6 +264,10 @@
                         $('select#team_id, #address, #suburb, #postcode, #country').change(function(e){
                             $(this).valid();
                         });
+                },
+                'add-solargain-service-job' : {
+                    init: function(){
+                        actions.common.init();
                     }
                 },
                 'add-tlj-service-job' : {

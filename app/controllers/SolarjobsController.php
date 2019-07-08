@@ -121,6 +121,17 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function addSolargainServiceJob()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "add-solargain-service-job");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolargainServiceJob.php', [
+            'page_title'    =>  "Add TLJ Services Service Job",
+            'client_id'     =>  67,
+            'order_type_id' =>  3
+        ]);
+    }
+
     public function viewInstalls()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
