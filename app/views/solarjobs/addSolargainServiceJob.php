@@ -1,5 +1,12 @@
 <?php
-
+$address = Form::value('address');
+$address2 = Form::value('address2');
+$suburb = Form::value('suburb');
+$state = Form::value('state');
+$postcode = Form::value('postcode');
+$country = Form::value('country');
+$date_filter = "Install Date";
+$date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
