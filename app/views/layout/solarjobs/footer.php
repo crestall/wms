@@ -264,6 +264,7 @@
                         $('select#team_id, #address, #suburb, #postcode, #country').change(function(e){
                             $(this).valid();
                         });
+                    }
                 },
                 'add-solargain-service-job' : {
                     init: function(){
