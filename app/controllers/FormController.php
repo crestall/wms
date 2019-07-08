@@ -59,6 +59,7 @@ class FormController extends Controller {
             'procAddMiscToOrder',
             'procAddOriginServiceJob',
             'procAddPackage',
+            'procAddSolargainServiceJob',
             'procAddressUpdate',
             'procAddToStock',
             'procBasicProductAdd',
@@ -117,6 +118,20 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procAddSolargainServiceJob()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
     }
 
     public function procAddOriginServiceJob()
