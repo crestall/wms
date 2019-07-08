@@ -44,11 +44,6 @@ if(!empty(Form::value('items')))
                 </div>
             </div>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3>Address Details</h3>
-                </div>
-            </div>
             <div id="item_selector" class="form-group row">
                 <div class="bs-callout bs-callout-primary bs-callout-more col-md-11">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Line Items</label>
@@ -115,6 +110,12 @@ if(!empty(Form::value('items')))
                     <?php echo Form::displayError('items');?>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Address Details</h3>
+                </div>
+            </div>
+
             <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
             <input type="hidden" name="selected_items" id="selected_items" />
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
