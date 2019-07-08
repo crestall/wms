@@ -117,7 +117,7 @@
                                 var urls = {
                                     1 : "/solar-jobs/add-origin-service-job",
                                     2 : "/solar-jobs/add-tlj-service-job",
-                                    3 : "solar-jobs/add-solargain-service-job"
+                                    3 : "/solar-jobs/add-solargain-service-job"
                                 }
                                 window.location.href = urls[$(this).val()];
                             }
