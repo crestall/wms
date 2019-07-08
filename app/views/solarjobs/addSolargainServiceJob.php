@@ -13,7 +13,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
     <?php echo Form::displayError('general');?>
     <div class="col-lg-12">
-        <form id="add-solargain-service-job" method="post" action="/form/procAddSolargainServiceJob" autocomplete="off">
+        <form id="solargain-service-job" method="post" action="/form/procAddSolargainServiceJob" autocomplete="off">
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Job Details</h3>
