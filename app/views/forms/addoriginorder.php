@@ -28,12 +28,12 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 </div>
             </div>
             <div class="form-group row">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Team</label>
-                    <div class="col-md-4">
-                        <select id="team_id" name="team_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarteam->getSelectTeam(Form::value('team_id'));?></select>
-                        <?php echo Form::displayError('team_id');?>
-                    </div>
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Team</label>
+                <div class="col-md-4">
+                    <select id="team_id" name="team_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarteam->getSelectTeam(Form::value('team_id'));?></select>
+                    <?php echo Form::displayError('team_id');?>
                 </div>
+            </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Work Order</label>
                 <div class="col-md-4">
@@ -80,12 +80,11 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
             <div class="form-group row">
                 <div class="form-radio">
                     <label class="col-form-label col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Roof Type</label>
-                    <div class="col-md-8 checkbox checkbox-default">
+                    <div class="col-md-4 checkbox checkbox-default">
                         <input class="required radio" type="radio" id="tin" name="roof_type" <?php if(Form::value('roof_type') == "tin") echo 'checked';?> value="tin" />
                         <label for="tin"> Tin</label>
                     </div>
-                    <div class="col-md-3">&nbsp;</div>
-                    <div class="col-md-8 checkbox checkbox-default">
+                    <div class="col-md-4 checkbox checkbox-default">
                         <input type="radio" class="radio" id="tile" name="roof_type" <?php if(Form::value('roof_type') == "tile") echo 'checked';?> value="tile" />
                         <label for="tile"> Tile</label>
                     </div>
