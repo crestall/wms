@@ -16,6 +16,33 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
         <form id="add-solargain-service-job" method="post" action="/form/procAddSolargainServiceJob" autocomplete="off">
             <div class="row">
                 <div class="col-lg-12">
+                    <h3>Job Details</h3>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Team</label>
+                <div class="col-md-4">
+                    <select id="team_id" name="team_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarteam->getSelectTeam(Form::value('team_id'));?></select>
+                    <?php echo Form::displayError('team_id');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Work Order</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="work_order" id="work_order" value="<?php echo Form::value('work_order');?>" />
+                    <?php echo Form::displayError('work_order');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                    <?php echo Form::displayError('customer_name');?>
+                </div>
+            </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
+            <div class="row">
+                <div class="col-lg-12">
                     <h3>Address Details</h3>
                 </div>
             </div>
