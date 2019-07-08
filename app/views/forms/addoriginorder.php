@@ -79,7 +79,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
             </div>
             <div class="form-group row">
                 <div class="form-radio">
-                    <label class="col-form-label col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Roof Type</label>
+                    <label class="form-check-label col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Roof Type</label>
                     <div class="col-md-2 checkbox checkbox-default">
                         <input class="required radio" type="radio" id="tin" name="roof_type" <?php if(Form::value('roof_type') == "tin") echo 'checked';?> value="tin" />
                         <label for="tin"> Tin</label>
