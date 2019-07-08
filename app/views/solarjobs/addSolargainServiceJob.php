@@ -7,6 +7,9 @@ $postcode = Form::value('postcode');
 $country = Form::value('country');
 $date_filter = "Install Date";
 $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
+$idisp = "none";
+if(!empty(Form::value('items')))
+    $idisp = "block";
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
