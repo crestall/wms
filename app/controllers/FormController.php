@@ -207,6 +207,7 @@ class FormController extends Controller {
         }
         echo "<pre>",print_r($oitems),"</pre>";
         echo "<pre>",print_r(Form::getErrorArray()),"</pre>";
+        die();
     }
 
     public function procAddOriginServiceJob()
