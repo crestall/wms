@@ -132,6 +132,81 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if(!isset($this->request->data['items']))
+        {
+            Form::setError('items', 'At least one item must be selected');
+        }
+        else
+        {
+            $orders_items = array();
+            $error = false;
+            foreach($this->request->data['items'] as $itid => $details)
+            {
+                if(!isset($details['qty']))
+                {
+                    $error = true;
+                    Form::setError('items', 'Please ensure all items have a quantity');
+                    break;
+                }
+                if(!isset($details['id']))
+                {
+                    $error = true;
+                    Form::setError('items', 'There has been an error recognising an item');
+                    break;
+                }
+                if(!$error)
+                {
+                    $array = array(
+                        'qty'   => $details['qty'],
+                        'id'    => $details['id']
+                    );
+                    if(!empty($details['pallet_qty']))
+                    {
+                        $array['qty'] = $details['pallet_qty'];
+                        $array['whole_pallet'] = true;
+                    }
+                    else
+                    {
+                        $array['qty'] = $details['qty'];
+                        $array['whole_pallet'] = false;
+                    }
+                    if(empty($array['qty']))
+                    {
+                        $error = true;
+                        Form::setError('items', 'Please ensure all items have a quantity');
+                    }
+                    $orders_items[] = $array ;
+                }
+
+            }
+            //echo "<pre>",print_r($orders_items),"</pre>"; die();
+            if(count($orders_items) == 0)
+            {
+                Form::setError('items', 'At least one item must be selected');
+            }
+            elseif(!$error)
+            {
+                $the_items = array(
+                    0 => $orders_items
+                );
+                $oitems = $this->allocations->createOrderItemsArray($the_items, 0, $store_order);
+                foreach($oitems[0] as $item)//there is only one order
+                {
+                    if($item['import_error'])
+                    {
+                        Form::setError('items', $item['import_error_string']);
+                    }
+                }
+            }
+            /*
+            else
+            {
+                Form::setError('items', 'Please check your items');
+            }
+            */
+        }
+        echo "<pre>",print_r($oitems),"</pre>";
+        echo "<pre>",print_r(Form::getErrorArray()),"</pre>";
     }
 
     public function procAddOriginServiceJob()
