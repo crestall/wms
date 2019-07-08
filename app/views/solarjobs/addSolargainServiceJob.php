@@ -49,7 +49,7 @@ if(!empty(Form::value('items')))
                     <h3>Address Details</h3>
                 </div>
             </div>
-            <div id="item_selector" class="form-group row" style="display:<?php echo $idisp;?>">
+            <div id="item_selector" class="form-group row">
                 <div class="bs-callout bs-callout-primary bs-callout-more col-md-11">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Line Items</label>
                     <div class="col-md-9" id="items_holder">
