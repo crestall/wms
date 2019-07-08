@@ -90,15 +90,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                     </div>
                 </div>
             </div>
-            <!--div class="form-group row">
-                <div class="form-radio">
-                    <label class="col-md-3 col-form-label" for="battery">Battery Install</label>
-                    <div class="col-md-2 checkbox checkbox-default">
-                        <input type="checkbox" name="battery" id="battery" <?php if(isset(Form::value('battery'))) echo 'checked';?> />
-                        <label for="battery"></label>
-                    </div>
-                </div>
-            </div-->
+
             <div id="banks" class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Banks</label>
                 <div class="col-md-9" id="banks_holder">
