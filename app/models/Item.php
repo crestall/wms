@@ -542,7 +542,16 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $return_string = "";
-        $items = $db->queryData("SELECT * FROM items WHERE collection = 1 ORDER BY name");
+        $items = $db->queryData("
+            SELECT
+                i.id, i.name, i.sku
+            FROM
+                items i JOIN clients c ON i.client_id = c.id
+            WHERE
+                i.collection = 1 AND i.active = 1 AND c.active = 1
+            ORDER BY
+                i.name
+        ");
         foreach($items as $i)
         {
             $return_string .= "<option value='{$i['id']}'";

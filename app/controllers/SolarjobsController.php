@@ -35,6 +35,43 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function editInstall()
+    {
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        if(empty($this->request->params['args']))
+        {
+            return $this->redirector->to(PUBLIC_ROOT."solar-jobs/view-installs");
+        }
+        $page_title = "Update a Solar Install Job";
+        $type = $this->request->params['args']['type'];
+        $id = $this->request->params['args']['id'];
+
+        $forms = array(
+            1   => "editOriginInstall.php",
+            2   => "editTLJInstall.php"
+        );
+        $details = $this->solarorder->getOrderDetail($id);
+        $order_items = $this->solarorder->getItemsForOrder($id);
+        $order_type = $this->solarordertype->getSolarOrderType($type);
+        $eb = $this->user->getUserName( $details['entered_by'] );
+        if(empty($eb))
+        {
+            $eb = "Automatically Imported";
+        }
+        /*  */
+        Config::setJsConfig('curPage', "update-solar-install");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/'.$forms[$type],[
+            'page_title'    =>  $page_title,
+            'details'       =>  $details,
+            'id'            =>  $id,
+            'type'          =>  $type,
+            'order_type'    =>  $order_type,
+            'order_items'   =>  $order_items,
+            'entered_by'    =>  $eb
+        ]);
+
+    }
+
     public function addOriginJob()
     {
         //render the page
@@ -84,6 +121,17 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function addSolargainServiceJob()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "add-solargain-service-job");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolargainServiceJob.php', [
+            'page_title'    =>  "Add Solargain Service Job",
+            'client_id'     =>  67,
+            'order_type_id' =>  3
+        ]);
+    }
+
     public function viewInstalls()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
@@ -104,7 +152,7 @@ class SolarjobsController extends Controller
                 $ff = "Fulfilled";
             }
         }
-        $page_title = "$ff Orders For $order_type";
+        $page_title = "Latest Installs For $order_type";
 
         $orders = $this->solarorder->getSolarAllOrders($type_id, $fulfilled);
         //render the page

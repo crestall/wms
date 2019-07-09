@@ -472,6 +472,10 @@ checkboxes
     padding-left: 20px;
 }
 
+.checkbox+.checkbox, .radio+.radio {
+    margin-top: 10px;
+}
+
 td .checkbox {
     padding-left: 5px;
 }

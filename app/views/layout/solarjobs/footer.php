@@ -100,7 +100,8 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
                                 var urls = {
                                     1 : "/solar-jobs/add-origin-job",
-                                    2 : "/solar-jobs/add-tlj-job"
+                                    2 : "/solar-jobs/add-tlj-job",
+                                    3 : "/solar-jobs/add-solargain-job"
                                 }
                                 window.location.href = urls[$(this).val()];
                             }
@@ -115,7 +116,8 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
                                 var urls = {
                                     1 : "/solar-jobs/add-origin-service-job",
-                                    2 : "/solar-jobs/add-tlj-service-job"
+                                    2 : "/solar-jobs/add-tlj-service-job",
+                                    3 : "/solar-jobs/add-solargain-service-job"
                                 }
                                 window.location.href = urls[$(this).val()];
                             }
@@ -264,6 +266,30 @@
                         });
                     }
                 },
+                'add-solargain-service-job' : {
+                    init: function(){
+                        actions.common.init();
+                        actions['item-searcher'].init();
+                        actions.common['add-item']();
+                        itemsUpdater.itemDelete();
+                        datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        $("form#solargain-service-job").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Job...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
+                        $('select#team_id, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
+                        });
+                    }
+                },
                 'add-tlj-service-job' : {
                     init: function(){
                         actions.common.init();
@@ -397,11 +423,19 @@
                         });
                     }
                 },
-                'view-jobs': {
+                'view-installs': {
                     init: function(){
                         actions.common.init();
                         actions.common['select-all']();
                         actions.common['cancel-orders'](true);
+
+                        $('#type_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Job Data...</h2></div>' });
+                                window.location.href = "/solar-jobs/view-installs/type=" + $(this).val();
+                            }
+                        });
 
                         $('table#solar_orders_table').filterTable({
                             inputSelector: '#table_searcher'
