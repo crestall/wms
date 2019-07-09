@@ -5,7 +5,7 @@ $suburb = Form::value('suburb');
 $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
-$date_filter = "Install Date";
+$date_filter = "Job Date";
 $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
 $idisp = "none";
 if(!empty(Form::value('items')))
