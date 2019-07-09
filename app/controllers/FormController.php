@@ -219,7 +219,7 @@ class FormController extends Controller {
             Session::set('feedback', "An order with number: <strong>$order_number</strong> has been created");
         }
         //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
-        return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solargain-service-job");
     }
 
     public function procAddOriginServiceJob()
