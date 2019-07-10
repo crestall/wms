@@ -159,9 +159,9 @@ $si_string = rtrim($si_string, ",");
 
 
 
-                <input type="hidden" name="order_id" value="<?php echo $order['id'];?>" />
+                <input type="hidden" name="order_id" value="<?php echo $job['id'];?>" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                <input type="hidden" name="client_id" id="client_id" value="<?php echo $order['client_id'];?>" />
+                <input type="hidden" name="client_id" id="client_id" value="<?php echo $job['client_id'];?>" />
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
