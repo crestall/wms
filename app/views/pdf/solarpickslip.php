@@ -38,7 +38,6 @@ foreach($orders_ids as $id):
             <th>SKU</th>
             <th>Location</th>
             <th>Quantity</th>
-            <th></th>
             <th>Picked</th>
             <th>Checked</th>
             <th>Used</th>
@@ -57,7 +56,7 @@ foreach($orders_ids as $id):
                 </tr>
             <?php endforeach;?>
             <tr>
-                <td colspan="6">Signed</td>
+                <td colspan="6" style="text-align:right; font-weight:bold">Signed</td>
                 <td class='centre'><span class='check_box'></span></td>
             </tr>
         </table>
