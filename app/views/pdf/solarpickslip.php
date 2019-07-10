@@ -11,6 +11,7 @@ foreach($orders_ids as $id):
     $this->controller->solarorder->setSlipPrinted($id);
     $picked_id = $this->controller->solarorder->picked_id;
     $ordered_id = $this->controller->solarorder->ordered_id;
+    $team = $this->controller->solarteam->getTeamName($od['team_id']);
     if($od['status_id'] == $ordered_id)
         $this->controller->solarorder->updateStatus($picked_id, $id);
     ?>
@@ -28,6 +29,7 @@ foreach($orders_ids as $id):
         <table width='100%'>
             <tr><td><h4>Order Type</h4></td><td><h4><?php echo $type;?></h4></td></tr>
             <tr><td><h4>Work Order:</h4></td><td><h4><?php echo $od['work_order'];?></h4></td></tr>
+            <tr><td><h4>Team:</h4></td><td><h4><?php echo $team;?></h4></td></tr>
             <tr><td>Address</td><td><?php echo $delivery_address;?></td></tr>
         </table>
         <table class='pickslip'>

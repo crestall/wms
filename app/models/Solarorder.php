@@ -121,7 +121,8 @@
             'postcode'      => $data['postcode'],
             'country'       => $data['country'],
             'entered_by'    => $eb,
-            'panels'        => $data['panel_qty']
+            'panels'        => $data['panel_qty'],
+            'team_id'       => $data['team_id']
         );
 
         $order_id = $db->insertQuery($this->table, $o_values);
