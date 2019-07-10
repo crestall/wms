@@ -11,23 +11,23 @@ foreach($orders_ids as $id):
     $this->controller->solarorder->setSlipPrinted($id);
     $picked_id = $this->controller->solarorder->picked_id;
     $ordered_id = $this->controller->solarorder->ordered_id;
+    $team = $this->controller->solarteam->getTeamName($od['team_id']);
     if($od['status_id'] == $ordered_id)
         $this->controller->solarorder->updateStatus($picked_id, $id);
     ?>
     <div class='pickslip'>
         <table width='100%'>
             <tr>
-                <td><h3>3PL Solar Packing Slip</h3></td>
-                <td></td>
+                <td><h2>3PL Solar Packing Slip</h2></td>
             </tr>
             <tr>
                 <td>Date : <?php echo date("d/m/Y");?></td>
-                <td></td>
             </tr>
         </table>
         <table width='100%'>
             <tr><td><h4>Order Type</h4></td><td><h4><?php echo $type;?></h4></td></tr>
             <tr><td><h4>Work Order:</h4></td><td><h4><?php echo $od['work_order'];?></h4></td></tr>
+            <tr><td><h4>Team:</h4></td><td><h4><?php echo $team;?></h4></td></tr>
             <tr><td>Address</td><td><?php echo $delivery_address;?></td></tr>
         </table>
         <table class='pickslip'>
@@ -36,22 +36,27 @@ foreach($orders_ids as $id):
             <th>SKU</th>
             <th>Location</th>
             <th>Quantity</th>
-            <th></th>
             <th>Picked</th>
             <th>Checked</th>
+            <th>Used</th>
         </tr>
-        <?php foreach($items as $i):
-            $location = $this->controller->location->getLocationName($i['location_id']);
-            ?>
+            <?php foreach($items as $i):
+                $location = $this->controller->location->getLocationName($i['location_id']);
+                ?>
+                <tr>
+                   	<td><?php echo $i['name'];?></td>
+                    <td><?php echo $i['sku'];?></td>
+                    <td><?php echo $location;?></td>
+                    <td class='number bold'><?php echo $i['qty'];?></td>
+                    <td class='centre'><span class='check_box'></span></td>
+                    <td class='centre'><span class='check_box'></span></td>
+                    <td class='centre'><span class='check_box'></span></td>
+                </tr>
+            <?php endforeach;?>
             <tr>
-               	<td><?php echo $i['name'];?></td>
-                <td><?php echo $i['sku'];?></td>
-                <td><?php echo $location;?></td>
-                <td class='number bold'><?php echo $i['qty'];?></td><td>
-                </td><td class='centre'><span class='check_box'></span></td>
+                <td colspan="6" style="text-align:right; font-weight:bold;height:50px">Signed</td>
                 <td class='centre'><span class='check_box'></span></td>
             </tr>
-        <?php endforeach;?>
         </table>
     </div>
     <?php if ($c < count($orders_ids)):?>

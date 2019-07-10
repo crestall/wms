@@ -122,7 +122,7 @@ class FormController extends Controller {
 
     public function procAddSolargainServiceJob()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -205,9 +205,21 @@ class FormController extends Controller {
             }
             */
         }
-        echo "<pre>",print_r($oitems),"</pre>";
-        echo "<pre>",print_r(Form::getErrorArray()),"</pre>";
-        die();
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            echo "<pre>oitems",print_r($oitems),"</pre>";die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $order_number = $this->order->addOrder($post_data, $oitems);
+            Session::set('feedback', "An order with number: <strong>$order_number</strong> has been created");
+        }
+        //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solargain-service-job");
     }
 
     public function procAddOriginServiceJob()

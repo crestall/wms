@@ -41,6 +41,12 @@ class Solarteam extends Model{
         return $ret_string;
     }
 
+    public function getTeamName($id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $id), 'name');
+    }
+
     public function getAllTeams($active = 1)
     {
         $db = Database::openConnection();
