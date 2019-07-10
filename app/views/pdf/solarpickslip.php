@@ -55,7 +55,7 @@ foreach($orders_ids as $id):
                     <td class='centre'><span class='check_box'></span></td>
                 </tr>
             <?php endforeach;?>
-            <tr>
+            <tr style="height:130px">
                 <td colspan="6" style="text-align:right; font-weight:bold">Signed</td>
                 <td class='centre'><span class='check_box'></span></td>
             </tr>
