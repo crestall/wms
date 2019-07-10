@@ -41,19 +41,25 @@ foreach($orders_ids as $id):
             <th></th>
             <th>Picked</th>
             <th>Checked</th>
+            <th>Used</th>
         </tr>
-        <?php foreach($items as $i):
-            $location = $this->controller->location->getLocationName($i['location_id']);
-            ?>
+            <?php foreach($items as $i):
+                $location = $this->controller->location->getLocationName($i['location_id']);
+                ?>
+                <tr>
+                   	<td><?php echo $i['name'];?></td>
+                    <td><?php echo $i['sku'];?></td>
+                    <td><?php echo $location;?></td>
+                    <td class='number bold'><?php echo $i['qty'];?></td>
+                    <td class='centre'><span class='check_box'></span></td>
+                    <td class='centre'><span class='check_box'></span></td>
+                    <td class='centre'><span class='check_box'></span></td>
+                </tr>
+            <?php endforeach;?>
             <tr>
-               	<td><?php echo $i['name'];?></td>
-                <td><?php echo $i['sku'];?></td>
-                <td><?php echo $location;?></td>
-                <td class='number bold'><?php echo $i['qty'];?></td><td>
-                </td><td class='centre'><span class='check_box'></span></td>
+                <td colspan="6">Signed</td>
                 <td class='centre'><span class='check_box'></span></td>
             </tr>
-        <?php endforeach;?>
         </table>
     </div>
     <?php if ($c < count($orders_ids)):?>
