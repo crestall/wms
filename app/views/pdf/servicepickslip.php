@@ -5,7 +5,7 @@ foreach($orders_ids as $id):
     $od = $this->controller->solarservicejob->getJobDetail($id);
     //echo "<pre>",print_r($od),"</pre>";die();
     $type = $this->controller->solarordertype->getSolarOrderType($od['type_id']);
-    $delivery_address = $this->controller->solarservicejob->getAddressStringForOrder($id);
+    $delivery_address = $this->controller->solarservicejob->getAddressStringForJob($id);
     //$items = array();
     $items = $this->controller->solarservicejob->getItemsForJob($id);
     $this->controller->solarservicejob->setSlipPrinted($id);
