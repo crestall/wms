@@ -121,7 +121,7 @@ class FormController extends Controller {
 
     public function procAddServiceJob()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -225,10 +225,10 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            echo "<pre>oitems",print_r($oitems),"</pre>";die();
+            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
             //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $order_number = $this->order->addOrder($post_data, $oitems);
-            Session::set('feedback', "An order with number: <strong>$order_number</strong> has been created");
+            $job_id = $this->solarservicejob->addJob($post_data, $oitems);
+            Session::set('feedback', "That job has been created and entered in the system");
         }
         //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
         return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solargain-service-job");
