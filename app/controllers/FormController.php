@@ -131,6 +131,19 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if($job_type == "0")
+        {
+            Form::setError('job_type', "A job type must be chosen");
+        }
+        if($team_id == "0")
+        {
+            Form::setError('team_id', "A team must be chosen");
+        }
+        if(!$this->dataSubbed($work_order))
+        {
+            Form::setError('work_order', 'A work order number is required');
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(!isset($this->request->data['items']))
         {
             Form::setError('items', 'At least one item must be selected');
