@@ -566,7 +566,7 @@
                     init: function(){
                         actions.common.init();
                         actions.common['select-all']();
-                        actions.common['cancel-orders'](true);
+                        actions.common['cancel-orders'](false, true);
 
                         $('#type_selector').change(function(e){
                             if($(this).val() > 0)
