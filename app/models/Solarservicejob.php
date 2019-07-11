@@ -32,7 +32,7 @@
         foreach($ids as $id)
         {
             $db->deleteQuery($this->table, $id);
-            $db->deleteQuery($this->items_table, $id, 'order_id');
+            $db->deleteQuery($this->items_table, $id, 'job_id');
         }
     }
 
