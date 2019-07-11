@@ -469,28 +469,21 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
-    $('#origin-service-job').validate({
+    $('#add-service-job').validate({
         rules:{
             team_id:{
+                notNone:true
+            },
+            job_type:{
                 notNone:true
             }
         },
         messages:{
             team_id:{
                 notNone: "Please select a team"
-            }
-        }
-    });
-    ////////////////////////////////////////////////////////////
-    $('#solargain-service-job').validate({
-        rules:{
-            team_id:{
-                notNone:true
-            }
-        },
-        messages:{
-            team_id:{
-                notNone: "Please select a team"
+            },
+            job_type:{
+                notNone: "Please select the job type"
             }
         }
     });
