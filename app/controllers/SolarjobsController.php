@@ -161,6 +161,40 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function viewServiceJobs()
+    {
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        $order_type = "All Types";
+        $type_id = 0;
+        $ff = "Unfulfilled";
+        $fulfilled = 0;
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['type']))
+            {
+                $type_id = $this->request->params['args']['type'];
+                $order_type = $this->solarordertype->getSolarOrderType($type_id);
+            }
+            if(isset($this->request->params['args']['fulfilled']))
+            {
+                $fulfilled = $this->request->params['args']['fulfilled'];
+                $ff = "Fulfilled";
+            }
+        }
+        $page_title = "Latest Service Jobs For $order_type";
+
+        $orders = $this->solarservicejob->getAllServiceJobs($type_id, $fulfilled);
+        //render the page
+        Config::setJsConfig('curPage', "view-service-jobs");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/viewServiceJobs.php', [
+            'page_title'    =>  $page_title,
+            'order_type'    =>  $order_type,
+            'type_id'       =>  $type_id,
+            'orders'        =>  $orders,
+            'fulfilled'     =>  $fulfilled
+        ]);
+    }
+
     public function isAuthorized(){
         $action = $this->request->param('action');
         //$role = Session::getUserRole();

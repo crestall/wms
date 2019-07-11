@@ -553,6 +553,132 @@
                         });
                     }
                 },
+                'view-service-jobs': {
+                    init: function(){
+                        actions.common.init();
+                        actions.common['select-all']();
+                        actions.common['cancel-orders'](true);
+
+                        $('#type_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Job Data...</h2></div>' });
+                                window.location.href = "/solar-jobs/view-service-jobs/type=" + $(this).val();
+                            }
+                        });
+
+                        $('table#service_jobs_table').filterTable({
+                            inputSelector: '#table_searcher'
+                        });
+
+                        $('a.order-label-print').click(function(e){
+                            e.preventDefault();
+                            var ids = [];
+                            $('input.select').each(function(i,e){
+                                var order_id = $(this).data('orderid');
+                                if( $(this).prop('checked') )
+                                {
+                                    ids.push(order_id);
+                                }
+                            });
+                            if(ids.length)
+                            {
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/pdf/printSolarLabels");
+                                form.setAttribute("target", "formresult");
+                                $.each( ids, function( index, value ) {
+                                    var hiddenField = document.createElement("input");
+                                    hiddenField.setAttribute("type", "hidden");
+                                    hiddenField.setAttribute("name", "orders[]");
+                                    hiddenField.setAttribute("value", value);
+                                    form.appendChild(hiddenField);
+                                });
+                                document.body.appendChild(form);
+                                window.open('','formresult');
+                                form.submit();
+                            }
+
+                        });
+
+                        $('a.slip-print').click(function(e){
+                            e.preventDefault();
+                            //console.log('click');
+                            if($('input.select:checked').length)
+                            {
+                                var ids = [];
+                                $('input.select').each(function(i,e){
+                                    if($(this).prop('checked'))
+                                    {
+                                        ids.push($(this).data('orderid'));
+                                    }
+                                });
+
+
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/pdf/printSolarPickslips");
+                                //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
+                                form.setAttribute("target", "formresult");
+                                $.each( ids, function( index, value ) {
+                                    var hiddenField = document.createElement("input");
+                                    hiddenField.setAttribute("type", "hidden");
+                                    hiddenField.setAttribute("name", "items[]");
+                                    hiddenField.setAttribute("value", value);
+                                    form.appendChild(hiddenField);
+                                });
+                                document.body.appendChild(form);
+                                window.open('','formresult');
+                                form.submit();
+                            }
+                        });
+
+                        $('a.order-fulfill').click(function(e){
+                            e.preventDefault();
+                            swal({
+                                title: "Fulfill These Orders?",
+                                text: "This will close each order and adjust stock\n\nIt cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then( function(willFulfill) {
+                                if (willFulfill) {
+                                    var ids = [];
+                                    $('input.select').each(function(i,e){
+                                        var order_id = $(this).data('orderid');
+                                        console.log('order_id: '+ order_id);
+                                        if( $(this).prop('checked') )
+                                        {
+                                            ids.push(order_id);
+                                        }
+                                    });
+                                    $.ajax({
+                                        url: '/ajaxfunctions/fulfill-solarorder',
+                                        method: 'post',
+                                        data: {
+                                            order_ids: ids
+                                        },
+                                        dataType: 'json',
+                                        beforeSend: function(){
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
+                                        },
+                                        success: function(d){
+                                            if(d.error)
+                                            {
+                                                $.unblockUI();
+                                                alert('error');
+                                            }
+                                            else
+                                            {
+                                                location.reload();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    }
+                },
                 'order-search':{
                     init: function(){
                         $("form#order_search").submit(function(e){
