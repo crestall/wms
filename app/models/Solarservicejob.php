@@ -110,7 +110,7 @@
         }
         $o_values = array(
             'work_order'    => $data['work_order'],
-            'type_id'       => $data['type_id'],
+            'type_id'       => $data['job_type'],
             'client_id'     => $data['client_id'],
             'date_entered'  => time(),
             'job_date'      => $data['date_value'],
