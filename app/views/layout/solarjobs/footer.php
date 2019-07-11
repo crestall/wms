@@ -110,7 +110,6 @@
                 },
                 'add-service-job': {
                     init: function(){
-                        init: function(){
                         actions.common.init();
                         actions['item-searcher'].init();
                         actions.common['add-item']();
@@ -127,7 +126,6 @@
                         $('select#team_id, select#job_type, #address, #suburb, #postcode, #country').change(function(e){
                             $(this).valid();
                         });
-                    }
                     }
                 },
                 'update-solar-job': {
