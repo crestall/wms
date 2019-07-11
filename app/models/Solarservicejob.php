@@ -129,6 +129,7 @@
             $o_values['customer_name'] = $data['customer_name'];
         if(!empty($data['address2']))
             $o_values['address_2'] = $data['address2'];
+        $o_values['battery'] = (isset($data['battery']))? 1:0;
 
         $job_id = $db->insertQuery($this->table, $o_values);
         //echo "<pre>",print_r($oitems),"</pre>"; die();

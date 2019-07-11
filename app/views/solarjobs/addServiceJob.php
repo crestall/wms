@@ -36,6 +36,15 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                     </div>
                 </div>
                 <div class="form-group row">
+                    <div class="form-check">
+                        <label class="form-check-label col-md-3" for="battery">Battery Install</label>
+                        <div class="col-md-4 checkbox checkbox-default">
+                            <input class="form-check-input styled" type="checkbox" id="battery" name="battery" <?php if(!empty(Form::value('battery'))) echo 'checked';?> />
+                            <label for="battery"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-md-3 col-form-label">Customer Name</label>
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
@@ -44,7 +53,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 </div>
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
-                <?php include(Config::get('VIEWS_PATH')."forms/item_adder.php");?> 
+                <?php include(Config::get('VIEWS_PATH')."forms/item_adder.php");?>
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id; ?>" />
