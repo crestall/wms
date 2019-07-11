@@ -72,8 +72,8 @@
                 </div>
                 <div class="col-md-5">
                     <dl class="dl-horizontal order-details">
-                        <dt>Install date</dt>
-                        <dd><?php echo date("d/m/Y", $details['install_date']);?></dd>
+                        <dt>Job date</dt>
+                        <dd><?php echo date("d/m/Y", $details['job_date']);?></dd>
                         <dt>Team</dt>
                         <dd></dd>
                         <dt>Entered By</dt>
