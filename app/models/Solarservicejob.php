@@ -108,13 +108,14 @@
         {
             $eb = Session::getUserId();
         }
+
         $o_values = array(
             'work_order'    => $data['work_order'],
             'type_id'       => $data['job_type'],
             'client_id'     => $data['client_id'],
             'date_entered'  => time(),
             'job_date'      => $data['date_value'],
-            'status_id'     => $this->ordered_id,
+            'status_id'     => 1,
             'address'       => $data['address'],
             'suburb'        => $data['suburb'],
             'state'         => $data['state'],
