@@ -64,7 +64,7 @@
     {
         $db = Database::openConnection();
         $q = "  select
-                    count(*) as order_count, ot.name, o.client_id, o.type_id
+                    count(*) as job_count, ot.name, o.client_id, o.type_id
                 from
                     {$this->table} o join {$this->order_type_table} ot on o.type_id = ot.id
                 where
