@@ -59,7 +59,7 @@ $si_string = rtrim($si_string, ",");
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
         <div class="row">
-            <form id="items-update" method="post" action="/form/procItemsUpdate">
+            <form id="items-update" method="post" action="/form/procSolarItemsUpdate">
 
 
 <div id="item_selector" class="form-group row">
