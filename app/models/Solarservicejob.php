@@ -56,7 +56,7 @@
         {
             $q .= " AND type_id = $type_id";
         }
-        $q .= " ORDER BY date DESC";
+        $q .= " ORDER BY job_date DESC";
         //die($q);
         return ($db->queryData($q, $array));
     }
