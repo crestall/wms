@@ -115,11 +115,11 @@ $c = 1;
         </div><!-- end 1st row -->
         <div class="row"><!-- second row -->
             <div class="col-lg-6">
-                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installsp.php");?>
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installs.php");?>
             </div>
             <div class="col-lg-6">
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboar_service_jobs.php");?>
-            </div> 
+            </div>
         </div> <!-- end 2nd row -->
         <div class="row">
             <div class="col-md-12">
@@ -185,7 +185,7 @@ $c = 1;
     <?php elseif($user_role == "solar_admin"):?>
         <div class="row">
             <div class="col-lg-6">
-                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installsp.php");?>
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installs.php");?>
             </div>
             <div class="col-lg-6">
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboar_service_jobs.php");?>
