@@ -13,8 +13,8 @@
                         </div>
                         <div class="col-md-6">
                             <h2>No Job Found</h2>
-                            <p>No job was found with that ID</p>
-                            <p><a href="/solar-jobs/view-installs/type=<?php echo $type;?>">Please click here to view all <?php echo $order_type;?> installs to choose from</a></p>
+                            <p>No service job was found with that ID</p>
+                            <p><a href="/solar-jobs/view-service-jobs">Please click here to view all service jobs to choose from</a></p>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,6 @@
                 <h3>Install For <?php echo $order_type;?></h3>
             </div>
         </div>
-        <?php echo "<pre>",print_r($details),"</pre>";?>
         <div class="row">
             <div class="col-md-12">
                 <?php if(isset($_SESSION['feedback'])) :?>

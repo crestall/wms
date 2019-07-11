@@ -73,6 +73,37 @@ class SolarjobsController extends Controller
 
     }
 
+    public function editServicejob()
+    {
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        if(empty($this->request->params['args']))
+        {
+            return $this->redirector->to(PUBLIC_ROOT."solar-jobs/view-service-jobs");
+        }
+        $page_title = "Update a Solar Service Job";
+        $id = $this->request->params['args']['id'];
+
+        $details = $this->solarservicejob->getJobDetail($id);
+        $order_items = $this->solarservicejob->getItemsForJob($id);
+        $order_type = $this->solarordertype->getSolarOrderType($details['type_id']);
+        $eb = $this->user->getUserName( $details['entered_by'] );
+        if(empty($eb))
+        {
+            $eb = "Automatically Imported";
+        }
+        /*  */
+        Config::setJsConfig('curPage', "update-service-job");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateServiceJob.php',[
+            'page_title'    =>  $page_title,
+            'details'       =>  $details,
+            'id'            =>  $id,
+            'order_type'    =>  $order_type,
+            'order_items'   =>  $order_items,
+            'entered_by'    =>  $eb
+        ]);
+
+    }
+
     public function itemsUpdate()
     {
         if(!isset($this->request->params['args']['job']))
