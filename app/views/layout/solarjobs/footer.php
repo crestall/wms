@@ -151,6 +151,11 @@
                         });
                     }
                 },
+                'edit-servicejob': {
+                    init: function(){
+
+                    }
+                },
                 'item-searcher':{
                     init: function(){
                         $("input.item-searcher").each(function(i,e){
