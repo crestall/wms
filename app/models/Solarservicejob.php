@@ -39,7 +39,8 @@
     public function getAllServiceJobs($type_id, $fulfilled)
     {
         $db = Database::openConnection();
-        $status_id = $this->fulfilled_id;
+        $order = new Order();
+        $status_id = $order->fulfilled_id;
         $array = array();
         //echo "SELECT * FROM {$this->table} WHERE status_id != $status_id AND client_id NOT IN ({$this->excluded_clients}) ORDER BY date_ordered ASC"; die();
         if($fulfilled > 0)
