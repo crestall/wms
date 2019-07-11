@@ -19,6 +19,7 @@
       */
     public $table = "solar_service_jobs";
     public $items_table = "solar_service_jobs_items";
+    public $order_type_table = "solar_order_types";
 
     public function __construct()
     {
@@ -65,7 +66,7 @@
         $q = "  select
                     count(*) as order_count, ot.name, o.client_id, o.type_id
                 from
-                    {$this->table} o join solar_order_types ot on o.type_id = ot.id
+                    {$this->table} o join {$this->order_type_table} ot on o.type_id = ot.id
                 where
                     o.status_id != 4
                 group by

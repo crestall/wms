@@ -27,7 +27,7 @@ class DashboardController extends Controller
         {
             $orders = $this->order->getCurrentOrders();
             $solar_installs = $this->solarorder->getCurrentOrders();
-            //$pickups = $this->pickup->getCurrentPickups();
+            $solar_service_jobs = $this->solarservicejob->getCurrentServiceJobs();
             $store_orders = $this->order->getCurrentStoreOrders();
         }
         /* */
@@ -35,8 +35,8 @@ class DashboardController extends Controller
         {
             //$clients = $this->client->getAllClients();
             $solar_installs = $this->solarorder->getCurrentOrders();
+            $solar_service_jobs = $this->solarservicejob->getCurrentServiceJobs();
         }
-
         elseif($user_role == 'client')
         {
             $client_id = $this->user->getUserClientId( Session::getUserId() );

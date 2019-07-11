@@ -231,7 +231,7 @@ class FormController extends Controller {
             Session::set('feedback', "That job has been created and entered in the system");
         }
         //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solargain-service-job");
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-service-job");
     }
 
     public function procSolarReturn()

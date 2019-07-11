@@ -114,98 +114,12 @@ $c = 1;
             <!-- store orders -->
         </div><!-- end 1st row -->
         <div class="row"><!-- second row -->
-            <!-- Solar installs -->
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-10 text-center">
-                                <h2>Latest Solar Install Jobs </h2>
-                            </div>
-                            <div class="col-xs-2 text-right">
-                                 <a id="toggle_solarorders" data-toggle="collapse" href="#new_solarorders"><span class="fa arrow huge"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="collapse in" id="new_solarorders">
-                            <div class="row">
-                               <?php foreach($solar_orders as $so):
-                                    $s = ($so['order_count'] > 1)? "s" : ""; ?>
-                                    <div class="col-lg-6">
-                                        <div class="panel panel-<?php echo $panel_classes[$c % count($panel_classes)];?>">
-                                            <div class="panel-heading order-panel">
-                                                <h3 class="text-center"><?php echo ucwords($so['name']);?></h3>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <div class="row">
-                                                    <div class="col-xs-8">
-                                                        <div><span class="huge"><?php echo $so['order_count'];?></span> Job<?php echo $s;?></div>
-                                                        <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/solar-jobs/view-installs/type=<?php echo $so['type_id'];?>">Manage Jobs</a></div>
-                                                    </div>
-                                                    <div class="col-xs-4">
-                                                        <i class="fas fa-tools fa-3x"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php if($c % 2 == 0):?>
-                                        </div><div class="row">
-                                    <?php endif;++$c;?>
-                                <?php endforeach;?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-6">
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installsp.php");?>
             </div>
-            <!-- solar service jobs -->
-            <?php if($user_role == "admin"):?>
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-10 text-center">
-                                    <h2>Latest Solar Service Jobs</h2>
-                                </div>
-                                <div class="col-xs-2 text-right">
-                                     <a id="toggle_pickups" data-toggle="collapse" href="#new_pickups"><span class="fa arrow huge"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="collapse in" id="new_pickups">
-                                <div class="row">
-                                   <?php foreach($solar_service_jobs as $p):
-                                        $s = ($p['pickup_count'] > 1)? "s" : ""; ?>
-                                        <div class="col-lg-6">
-                                            <div class="panel panel-<?php echo $panel_classes[$c % count($panel_classes)];?>">
-                                                <div class="panel-heading order-panel">
-                                                    <h3 class="text-center"><?php echo $p['client_name'];?></h3>
-                                                </div>
-                                                <div class="panel-footer">
-                                                    <div class="row">
-                                                        <div class="col-xs-8">
-                                                            <div><span class="huge"><?php echo $p['pickup_count'];?></span> Job<?php echo $s;?></div>
-                                                            <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-pickups/client=<?php echo $p['client_id'];?>">Manage Jobs</a></div>
-                                                        </div>
-                                                        <div class="col-xs-4">
-                                                            <i class="fas fa-tools fa-3x"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?php if($c % 2 == 0):?>
-                                            </div><div class="row">
-                                        <?php endif;++$c;?>
-                                    <?php endforeach;?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endif;?>
+            <div class="col-lg-6">
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboar_service_jobs.php");?>
+            </div> 
         </div> <!-- end 2nd row -->
         <div class="row">
             <div class="col-md-12">
@@ -271,69 +185,10 @@ $c = 1;
     <?php elseif($user_role == "solar_admin"):?>
         <div class="row">
             <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-10 text-center">
-                                <h2>Latest Install Jobs </h2>
-                            </div>
-                            <div class="col-xs-2 text-right">
-                                 <a id="toggle_solarinstalls" data-toggle="collapse" href="#new_solarinstalls"><span class="fa arrow huge"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="collapse in" id="new_solarinstalls">
-                            <div class="row">
-                               <?php foreach($solar_orders as $so):
-                                    $s = ($so['order_count'] > 1)? "s" : ""; ?>
-                                    <div class="col-lg-6">
-                                        <div class="panel panel-<?php echo $panel_classes[$c % count($panel_classes)];?>">
-                                            <div class="panel-heading order-panel">
-                                                <h3 class="text-center"><?php echo ucwords($so['name']);?></h3>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <div class="row">
-                                                    <div class="col-xs-8">
-                                                        <div><span class="huge"><?php echo $so['order_count'];?></span> Job<?php echo $s;?></div>
-                                                        <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/solar-jobs/view-installs/type=<?php echo $so['type_id'];?>">View Jobs</a></div>
-                                                    </div>
-                                                    <div class="col-xs-4">
-                                                        <i class="fas fa-tools fa-3x"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php if($c % 2 == 0):?>
-                                        </div><div class="row">
-                                    <?php endif;++$c;?>
-                                <?php endforeach;?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installsp.php");?>
             </div>
             <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-10 text-center">
-                                <h2>Latest Service Jobs </h2>
-                            </div>
-                            <div class="col-xs-2 text-right">
-                                 <a id="toggle_solarservice" data-toggle="collapse" href="#new_solarservice"><span class="fa arrow huge"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="collapse in" id="new_solarservice">
-                            <div class="row">
-                               Service Info Will Appear Here
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboar_service_jobs.php");?>
             </div>
         </div>
     <?php elseif($user_role == "solar"):?>
