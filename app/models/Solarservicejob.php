@@ -36,10 +36,18 @@
         }
     }
 
+    public function getJobDetail($id)
+    {
+        $db = Database::openConnection();
+        $job = $db->queryById($this->table, $id);
+        return (empty($job))? false : $job;
+    }
+
     public function getAllServiceJobs($type_id, $fulfilled)
     {
         $db = Database::openConnection();
-        $status_id = $this->fulfilled_id;
+        $order = new Order();
+        $status_id = $order->fulfilled_id;
         $array = array();
         //echo "SELECT * FROM {$this->table} WHERE status_id != $status_id AND client_id NOT IN ({$this->excluded_clients}) ORDER BY date_ordered ASC"; die();
         if($fulfilled > 0)
@@ -55,7 +63,7 @@
         {
             $q .= " AND type_id = $type_id";
         }
-        $q .= " ORDER BY date DESC";
+        $q .= " ORDER BY job_date DESC";
         //die($q);
         return ($db->queryData($q, $array));
     }
@@ -83,7 +91,7 @@
         $q = "
             SELECT i.*, oi.qty, oi.location_id, oi.item_id, oi.id AS line_id, il.qty AS location_qty
             FROM {$this->items_table} oi JOIN items i ON oi.item_id = i.id LEFT JOIN items_locations il on oi.location_id = il.location_id AND il.item_id = i.id
-            WHERE oi.order_id = $job_id
+            WHERE oi.job_id = $job_id
         ";
         if($picked === 1)
             $q .= " AND oi.picked = 1";
@@ -94,6 +102,18 @@
         $q .= " ORDER BY i.name";
         //die($q);
         return $db->queryData($q);
+    }
+
+    public function setSlipPrinted($id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table,'slip_printed', 1, $id);
+    }
+
+    public function updateStatus($status_id, $id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table,'status_id', $status_id, $id);
     }
 
     public function addJob($data, $oitems)
@@ -129,6 +149,7 @@
             $o_values['customer_name'] = $data['customer_name'];
         if(!empty($data['address2']))
             $o_values['address_2'] = $data['address2'];
+        $o_values['battery'] = (isset($data['battery']))? 1:0;
 
         $job_id = $db->insertQuery($this->table, $o_values);
         //echo "<pre>",print_r($oitems),"</pre>"; die();
@@ -158,6 +179,28 @@
         return $job_id;
     }
 
+    public function getAddressStringForJob($id)
+    {
+        $db = Database::openConnection();
+        $ret_string = "";
+        if(!empty($id))
+        {
+            //$address = $db->queryRow("SELECT * FROM addresses WHERE id = $id");
+            $address = $db->queryRow("SELECT address, address_2, suburb, state, postcode, country, customer_name FROM ".$this->table." WHERE id = $id");
+            if(!empty($address))
+            {
+                $ret_string = "<p>";
+                if(!empty($address['customer_name'])) $ret_string .= $address['customer_name']."<br/>";
+            	$ret_string .= $address['address'];
+                if(!empty($address['address_2'])) $ret_string .= "<br/>".$address['address_2'];
+                $ret_string .= "<br/>".$address['suburb'];
+                $ret_string .= "<br/>".$address['state'];
+                $ret_string .= "<br/>".$address['country'];
+                $ret_string .= "<br/>".$address['postcode']."</p>";
+            }
+        }
+        return $ret_string;
+    }
 
   }
 
