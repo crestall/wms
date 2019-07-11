@@ -110,17 +110,21 @@
                 },
                 'add-service-job': {
                     init: function(){
-                        $("#type_selector").change(function(e){
-                            if($(this).val() > 0)
+                        actions.common.init();
+                        actions['item-searcher'].init();
+                        actions.common['add-item']();
+                        itemsUpdater.itemDelete();
+                        datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        $("form#add-service-job").submit(function(e){
+                            if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
-                                var urls = {
-                                    1 : "/solar-jobs/add-origin-service-job",
-                                    2 : "/solar-jobs/add-tlj-service-job",
-                                    3 : "/solar-jobs/add-solargain-service-job"
-                                }
-                                window.location.href = urls[$(this).val()];
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Job...</h2></div>' });
                             }
+                        });
+                        $('select#team_id, select#job_type, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
                         });
                     }
                 },

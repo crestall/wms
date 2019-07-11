@@ -57,10 +57,9 @@ class FormController extends Controller {
             'procAddClientLocation',
             'procAddLocation',
             'procAddMiscToOrder',
-            'procAddOriginServiceJob',
             'procAddPackage',
-            'procAddSolargainServiceJob',
             'procAddressUpdate',
+            'procAddServiceJob',
             'procAddToStock',
             'procBasicProductAdd',
             'procBookPickup',
@@ -120,7 +119,7 @@ class FormController extends Controller {
         $this->Security->requirePost($actions);
     }
 
-    public function procAddSolargainServiceJob()
+    public function procAddServiceJob()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
@@ -132,6 +131,19 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if($job_type == "0")
+        {
+            Form::setError('job_type', "A job type must be chosen");
+        }
+        if($team_id == "0")
+        {
+            Form::setError('team_id', "A team must be chosen");
+        }
+        if(!$this->dataSubbed($work_order))
+        {
+            Form::setError('work_order', 'A work order number is required');
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(!isset($this->request->data['items']))
         {
             Form::setError('items', 'At least one item must be selected');
@@ -213,27 +225,13 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            echo "<pre>oitems",print_r($oitems),"</pre>";die();
+            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
             //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $order_number = $this->order->addOrder($post_data, $oitems);
-            Session::set('feedback', "An order with number: <strong>$order_number</strong> has been created");
+            $job_id = $this->solarservicejob->addJob($post_data, $oitems);
+            Session::set('feedback', "That job has been created and entered in the system");
         }
         //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solargain-service-job");
-    }
-
-    public function procAddOriginServiceJob()
-    {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
-        $post_data = array();
-        foreach($this->request->data as $field => $value)
-        {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
-        }
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-service-job");
     }
 
     public function procSolarReturn()
@@ -2291,6 +2289,87 @@ class FormController extends Controller {
     public function procItemsUpdate()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!isset($this->request->data['items']))
+        {
+            Form::setError('items', 'At least one item must be selected');
+        }
+        else
+        {
+            $orders_items = array();
+            foreach($this->request->data['items'] as $itid => $details)
+            {
+                $array = array(
+                    'qty'   => $details['qty'],
+                    'id'    => $details['id']
+                );
+                if(!empty($details['pallet_qty']))
+                {
+                    $array['qty'] = $details['pallet_qty'];
+                    $array['whole_pallet'] = true;
+                }
+                else
+                {
+                    $array['qty'] = $details['qty'];
+                    $array['whole_pallet'] = false;
+                }
+                $orders_items[] = $array ;
+            }
+            //echo "<pre>orders_items",print_r($orders_items),"</pre>"; //die();
+            $item_array = array(
+                $order_id => $orders_items
+            );
+            //echo "<pre>item_array",print_r($item_array),"</pre>"; //die();
+            $oitems = $this->allocations->createOrderItemsArray($item_array, $order_id);
+            //echo "<pre>oitems",print_r($oitems),"</pre>"; die();
+
+            foreach($oitems[$order_id] as $item)
+            {
+                //echo "<pre>",print_r($items),"</pre>"; die();
+                //foreach($items as $item)
+                //{
+                    if($item['item_error'])
+                    {
+                        Form::setError('items', $item['item_error_string']);
+                        Session::set('errorfeedback', '<ul>'.$item['item_error_string'].'</ul>');
+                        Session::set('value_array', $_POST);
+                        Session::set('error_array', Form::getErrorArray());
+                        return $this->redirector->to(PUBLIC_ROOT."orders/items-update/order=".$order_id);
+                    }
+                //}
+            }
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "<pre>",print_r($oitems['values']),"</pre>"; die();
+            if($this->order->updateItemsForOrder($oitems[$order_id], $order_id))
+            {
+                Session::set('feedback', "Those items have been updated");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/items-update/order=".$order_id);
+    }
+
+    public function procSolarItemsUpdate()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {

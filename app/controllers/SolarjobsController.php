@@ -31,7 +31,8 @@ class SolarjobsController extends Controller
 
         Config::setJsConfig('curPage', "add-service-job");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addServiceJob.php',[
-            'page_title'    =>  $page_title
+            'page_title'    =>  $page_title,
+            'client_id'     =>  67
         ]);
     }
 
@@ -72,6 +73,34 @@ class SolarjobsController extends Controller
 
     }
 
+    public function itemsUpdate()
+    {
+        if(!isset($this->request->params['args']['job']))
+        {
+            $error = true;
+            $job_id = 0;
+            $job = array();
+            $job_items = array();
+        }
+        else
+        {
+            $error = false;
+            $job_id = $this->request->params['args']['job'];
+            $job = $this->solarorder->getOrderDetail($job_id);
+            $job_items = $this->solarorder->getItemsForOrder($job_id);
+        }
+        //echo "<pre>",print_r($order_items),"</pre>";
+        //render the page
+        Config::setJsConfig('curPage', "items-update");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/itemsUpdate.php', [
+            'page_title'    =>  "Update Items for Solar Job",
+            'job_id'        =>  $job_id,
+            'job'           =>  $job,
+            'error'         =>  $error,
+            'job_items'     =>  $job_items
+        ]);
+    }
+
     public function addOriginJob()
     {
         //render the page
@@ -95,40 +124,6 @@ class SolarjobsController extends Controller
             'client_id'     =>  67,
             'order_type_id' =>  2,
             'form'          =>  $form
-        ]);
-    }
-
-    public function addOriginServiceJob()
-    {
-        $type_id = $this->controller->solarordertype->getTypeId('origin');
-        //render the page
-        Config::setJsConfig('curPage', "add-origin-service-job");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addOriginServiceJob.php', [
-            'page_title'    =>  "Add Origin Service Job",
-            'client_id'     =>  67,
-            'type_id'       =>  $type_id
-        ]);
-    }
-
-    public function addTljServiceJob()
-    {
-        //render the page
-        Config::setJsConfig('curPage', "add-tlj-service-job");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addTLJServiceJob.php', [
-            'page_title'    =>  "Add TLJ Services Service Job",
-            'client_id'     =>  67,
-            'order_type_id' =>  2
-        ]);
-    }
-
-    public function addSolargainServiceJob()
-    {
-        //render the page
-        Config::setJsConfig('curPage', "add-solargain-service-job");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolargainServiceJob.php', [
-            'page_title'    =>  "Add Solargain Service Job",
-            'client_id'     =>  67,
-            'order_type_id' =>  3
         ]);
     }
 
