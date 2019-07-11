@@ -585,7 +585,7 @@
                             {
                                 var form = document.createElement('form');
                                 form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printSolarLabels");
+                                form.setAttribute("action", "/pdf/printServiceLabels");
                                 form.setAttribute("target", "formresult");
                                 $.each( ids, function( index, value ) {
                                     var hiddenField = document.createElement("input");
