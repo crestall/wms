@@ -36,6 +36,13 @@
         }
     }
 
+    public function getJobDetail($id)
+    {
+        $db = Database::openConnection();
+        $job = $db->queryById($this->table, $id);
+        return (empty($job))? false : $job;
+    }
+
     public function getAllServiceJobs($type_id, $fulfilled)
     {
         $db = Database::openConnection();
@@ -95,6 +102,18 @@
         $q .= " ORDER BY i.name";
         //die($q);
         return $db->queryData($q);
+    }
+
+    public function setSlipPrinted($id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table,'slip_printed', 1, $id);
+    }
+
+    public function updateStatus($status_id, $id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table,'status_id', $status_id, $id);
     }
 
     public function addJob($data, $oitems)

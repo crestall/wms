@@ -617,7 +617,7 @@
 
                                 var form = document.createElement('form');
                                 form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printSolarPickslips");
+                                form.setAttribute("action", "/pdf/printServicePickslips");
                                 //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
                                 form.setAttribute("target", "formresult");
                                 $.each( ids, function( index, value ) {
