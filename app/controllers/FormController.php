@@ -57,10 +57,9 @@ class FormController extends Controller {
             'procAddClientLocation',
             'procAddLocation',
             'procAddMiscToOrder',
-            'procAddOriginServiceJob',
             'procAddPackage',
-            'procAddSolargainServiceJob',
             'procAddressUpdate',
+            'procAddServiceJob',
             'procAddToStock',
             'procBasicProductAdd',
             'procBookPickup',
@@ -120,7 +119,7 @@ class FormController extends Controller {
         $this->Security->requirePost($actions);
     }
 
-    public function procAddSolargainServiceJob()
+    public function procAddServiceJob()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
@@ -220,20 +219,6 @@ class FormController extends Controller {
         }
         //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
         return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solargain-service-job");
-    }
-
-    public function procAddOriginServiceJob()
-    {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
-        $post_data = array();
-        foreach($this->request->data as $field => $value)
-        {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
-        }
     }
 
     public function procSolarReturn()
