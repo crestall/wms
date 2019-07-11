@@ -78,6 +78,7 @@
         				<th>Job Address</th>
         				<th>Job Date</th>
         				<th>Slip Printed</th>
+                        <th>Battery Install</th>
                         <th nowrap>
                             Select
                             <div class="checkbox checkbox-default">
@@ -93,6 +94,7 @@
         				$address = $this->controller->solarservicejob->getAddressStringForJob($co['id']);
         				$order_status = $this->controller->order->getStatusName($co['status_id']);
         				$slip_printed = ($co['slip_printed'] > 0)? "Yes": "No";
+                        $battery = ($co['battery'] > 0)? "Yes": "No";
                         $team = $this->controller->solarteam->getTeamName($co['team_id']);
                         ?>
         	        	<tr>
@@ -104,6 +106,7 @@
         					<td data-label="Job Address" class="filterable"><?php echo $address;?></td>
         					<td data-label="Job Date" nowrap><?php echo date('d-m-Y', $co['job_date']);?></td>
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
+                            <td data-label="Battery"><?php echo $battery; ?></td>
         					<td data-label="Select" class="chkbox">
                                 <div class="checkbox checkbox-default">
                                     <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-orderid='<?php echo $co['id'];?>' name="select_<?php echo $co['id'];?>" id="select_<?php echo $co['id'];?>" />
