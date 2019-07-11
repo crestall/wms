@@ -46,9 +46,12 @@
                              })
                         });
                     },
-                    'cancel-orders': function(solar){
+                    'cancel-orders': function(solar, service){
                         if(solar === undefined) {
                             solar = false;
+                        }
+                        if(service === undefined) {
+                            service = false;
                         }
                         $('a.cancel-order').click(function(e){
                             e.preventDefault();
@@ -76,6 +79,12 @@
                                         if(solar)
                                         {
                                             $.post('/ajaxfunctions/cancel-solarorders', data, function(d){
+                                                location.reload();
+                                            });
+                                        }
+                                        else if(service)
+                                        {
+                                            $.post('/ajaxfunctions/cancel-serviceorders', data, function(d){
                                                 location.reload();
                                             });
                                         }
