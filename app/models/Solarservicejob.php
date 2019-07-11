@@ -146,7 +146,7 @@
                         'item_id'       => $item_id,
                         'location_id'   => $il['location_id'],
                         'qty'           => $il['qty'],
-                        'order_id'      => $order_id
+                        'job_id'        => $job_id
                     );
                     $db->insertQuery($this->items_table, $vals);
 
