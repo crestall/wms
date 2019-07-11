@@ -18,7 +18,7 @@ foreach($orders_ids as $id):
     <div class='pickslip'>
         <table width='100%'>
             <tr>
-                <td><h2>3PL Solar Packing Slip</h2></td>
+                <td><h2>3PL Solar Service Job Packing Slip</h2></td>
             </tr>
             <tr>
                 <td>Date : <?php echo date("d/m/Y");?></td>
