@@ -84,7 +84,7 @@
             <div class='row'>
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <a class="btn btn-primary" href="/solar-jobs/update-details/id=<?php echo $id;?>">Update These Details</a>
+                    <a class="btn btn-primary" href="/solar-jobs/update-service-details/id=<?php echo $id;?>">Update These Details</a>
                 </div>
             </div>
         </div>
