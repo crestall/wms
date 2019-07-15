@@ -12,7 +12,6 @@ foreach($orders_ids as $id):
     $picked_id = $this->controller->solarorder->picked_id;
     $ordered_id = $this->controller->solarorder->ordered_id;
     $team = $this->controller->solarteam->getTeamName($od['team_id']);
-    $date = (isset($od['install_date']))? date("d/m/Y", $od['install_date']) : date("d/m/Y", $od['job_date']);
     if($od['status_id'] == $ordered_id)
         $this->controller->solarorder->updateStatus($picked_id, $id);
     ?>
@@ -22,7 +21,7 @@ foreach($orders_ids as $id):
                 <td><h2>3PL Solar Packing Slip</h2></td>
             </tr>
             <tr>
-                <td><h4>Job Date : <?php echo $date;?></h4></td>
+                <td><h4>Install Date : <?php echo date("d/m/Y", $od['install_date']);?></h4></td>
             </tr>
         </table>
         <table width='100%'>
