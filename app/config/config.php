@@ -359,8 +359,8 @@ return array(
             'add-origin-job'            => false,
             'add-tlj-job'               => false,
             'job-search'                => true,
-            'add-origin-service-job'    => false,
-            'add-tlj-service-job'       => false
+            'edit-servicejob'           => false,
+            'update-service-details'    => false
         ),
         'products'	=> array(
             'view-products'			=> true,
@@ -426,8 +426,8 @@ return array(
             'add-origin-job'            => false,
             'add-tlj-job'               => false,
             'job-search'                => true,
-            'add-origin-service-job'    => false,
-            'add-tlj-service-job'       => false
+            'edit-servicejob'           => false,
+            'update-service-details'    => false
         ),
 		'clients'	=> array(
 			'view-clients'	=> true,

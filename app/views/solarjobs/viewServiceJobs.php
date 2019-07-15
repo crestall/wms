@@ -100,7 +100,7 @@
         	        	<tr>
                             <td class="number" data-label="Count"><?php echo $c;?></td>
         	            	<td class="filterable number" data-label="Work Order">
-                                <a href="/solar-jobs/edit-servicejob/type=<?php echo $co['type_id'];?>/id=<?php echo $co['id'];?>"><?php echo $co['work_order'];?> </a>
+                                <a href="/solar-jobs/edit-servicejob/id=<?php echo $co['id'];?>"><?php echo $co['work_order'];?> </a>
                             </td>
         					<td data-label="Team"><?php echo $team;?></td>
         					<td data-label="Job Address" class="filterable"><?php echo $address;?></td>
