@@ -21,7 +21,7 @@ foreach($orders_ids as $id):
                 <td><h2>3PL Solar Service Job Packing Slip</h2></td>
             </tr>
             <tr>
-                <td><h4>Date : <?php echo date("d/m/Y", $od['job_date']);?></h4</td>
+                <td><h4>Date : <?php echo date("d/m/Y", $od['job_date']);?></h4></td>
             </tr>
         </table>
         <table width='100%'>
