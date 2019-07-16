@@ -217,24 +217,39 @@ class Packaging{
             }
 
             $c = 1;
-            while($c <= $item_count)
+            $jumper_ids = array(12407,12408,14209,12410,12411,12412,12413,12414,12415,12416,12417,12418,12419,12420,12421,12422,14423,12424,12425,12426,12428,12429,12430);
+            foreach($items as $i)
             {
-                if($c % 2 == 0)
+                if(array_search($i['item_id'], $jumper_ids) !== false)
                 {
-                    $array['weight'] = 0.6;
+                    $array['width']	= 27;
+                    $array['height'] = 8;
+                    $array['depth'] = 40;
+                    $array['weight'] = $i['weight'];
+                    $array['pieces'] = 1;
+                    $array['type_code'] = 'CTN';
+                    $array['item_reference'] = $i['item_id'];
                     $return[] = $array;
                 }
                 else
                 {
-                    $array['width'] = 25;
-                    $array['height'] = 5;
-                    $array['depth'] = 35;
-                    $array['weight'] = 0.3;
-                    $array['pieces'] = 1;
-                    $array['type_code'] = 'CTN';
-                    $array['item_reference'] = $i['item_id'];
+                    if($c % 2 == 0)
+                    {
+                        $array['weight'] = 0.6;
+                        $return[] = $array;
+                    }
+                    else
+                    {
+                        $array['width'] = 25;
+                        $array['height'] = 5;
+                        $array['depth'] = 35;
+                        $array['weight'] = 0.3;
+                        $array['pieces'] = 1;
+                        $array['type_code'] = 'CTN';
+                        $array['item_reference'] = $i['item_id'];
+                    }
+                    ++$c;
                 }
-                ++$c;
             }
             if($c % 2 == 0)
             {
