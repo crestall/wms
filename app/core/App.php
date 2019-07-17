@@ -69,7 +69,7 @@ class App {
         {
             //die('will invoke login');
             //return $this->invoke("LoginController", 'index', $this->args);
-            return $this->toLogin();
+            //return $this->toLogin();
             //return;
             //return $this->redirector->login();
         }
