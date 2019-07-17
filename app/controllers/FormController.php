@@ -2437,7 +2437,7 @@ class FormController extends Controller {
         else
         {
             //echo "<pre>",print_r($oitems['values']),"</pre>"; die();
-            if($this->order->updateSolarItemsForOrder($oitems[$order_id], $order_id))
+            if($this->solarorder->updateSolarItemsForOrder($oitems[$order_id], $order_id))
             {
                 Session::set('feedback', "Those items have been updated");
             }
