@@ -94,6 +94,30 @@
         return $db->queryData($q);
     }
 
+    public function updateSolarItemsForOrder(array $order_items, $order_id)
+    {
+        //echo "<pre>",print_r($order_items),"</pre>";
+        $db = Database::openConnection();
+        //delete the old ones
+        $db->deleteQuery('solar_orders_items', $order_id, 'order_id');
+        //update with new data
+        foreach($order_items as $oi)
+        {
+            //echo "<pre>",print_r($oi['locations']),"</pre>";die();
+            foreach($oi['locations'] as $oil)
+            {
+                $vals = array(
+                    'order_id'      =>  $order_id,
+                    'item_id'       =>  $oi['item_id'],
+                    'location_id'   =>  $oil['location_id'],
+                    'qty'           =>  $oil['qty']
+                );
+                $db->insertQuery('solar_orders_items', $vals);
+            }
+        }
+        return true;
+    }
+
     public function addOrder($data, $oitems)
     {
         //echo "<pre>",print_r($data),"</pre>"; die();
