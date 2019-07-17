@@ -76,8 +76,7 @@
         	        	<th>Work Order</th>
         				<!--th>Client</th-->
         				<th>Address</th>
-        				<th>Panels</th>
-        				<th>Date Entered</th>
+        				<th>Panels</th> 
         				<th>Install Date</th>
         				<th>Slip Printed</th>
                         <th nowrap>
@@ -109,7 +108,6 @@
         					<!--td data-label="Client Name"><?php //echo $client_name;?></td-->
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
         					<td data-label="Panels" class="number"><?php echo $co['panels'];?></td>
-        					<td data-label="Date Entered" nowrap><?php echo date('d-m-Y', $co['date_entered']);?></td>
         					<td data-label="Install Date" nowrap><?php echo date('d-m-Y', $co['install_date']);?></td>
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
         					<td data-label="Select" class="chkbox">
