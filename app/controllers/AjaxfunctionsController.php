@@ -328,6 +328,37 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function fulfillSolarservice()
+    {
+       //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $data = array(
+            'error'         => false,
+            'not_logged'    => false,
+            'error_string'  => '',
+            'feedback'      => ''
+        );
+
+        $order_ids = ( is_array($this->request->data['order_ids']) )? $this->request->data['order_ids']: (array)$this->request->data['order_ids'];
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Have Been Fulfilled</h2>");
+        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Fulfilled</h2><p>Reasons are listed below</p>");
+        Session::set('showfeedback', false);
+        Session::set('showerrorfeedback', false);
+
+        $this->orderfulfiller->fulfillSolarService($order_ids);
+
+        if(Session::getAndDestroy('showfeedback') == false)
+        {
+            Session::destroy('feedback');
+        }
+        if(Session::getAndDestroy('showerrorfeedback') == false)
+        {
+            Session::destroy('errorfeedback');
+        }
+
+
+        $this->view->renderJson($data);
+    }
+
     public function fulfillOrder()
     {
        //echo "<pre>",print_r($this->request),"</pre>"; die();
