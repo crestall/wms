@@ -59,8 +59,7 @@ class SolarjobsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateInstall.php',[
             'page_title'    =>  $page_title,
             'details'       =>  $details,
-            'id'            =>  $id,
-            'type'          =>  $type,
+            'id'            =>  $id, 
             'order_type'    =>  $order_type,
             'order_items'   =>  $order_items,
             'entered_by'    =>  $eb
