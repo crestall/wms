@@ -38,7 +38,7 @@ foreach($orders_ids as $id):
             <th>Quantity</th>
             <th>Picked</th>
             <th>Checked</th>
-            <th>Used</th>
+            <th colspan="2">Used</th>
         </tr>
             <?php foreach($items as $i):
                 $location = $this->controller->location->getLocationName($i['location_id']);
@@ -50,12 +50,18 @@ foreach($orders_ids as $id):
                     <td class='number bold'><?php echo $i['qty'];?></td>
                     <td class='centre'><span class='check_box'></span></td>
                     <td class='centre'><span class='check_box'></span></td>
-                    <td class='centre'><span class='check_box'></span></td>
+                    <td class='centre' colspan="2"><span class='check_box'></span></td>
                 </tr>
             <?php endforeach;?>
             <tr>
+                <td colspan="2" style="text-align:right; font-weight:bold;height:50px">Time In</td>
+                <td class='centre' colspan="2"><span class='check_box'></span></td>
+                <td colspan="2" style="text-align:right; font-weight:bold;height:50px">Time Out</td>
+                <td class='centre' colspan="2"><span class='check_box'></span></td>
+            </tr>
+            <tr>
                 <td colspan="6" style="text-align:right; font-weight:bold;height:50px">Signed</td>
-                <td class='centre'><span class='check_box'></span></td>
+                <td class='centre' colsapn="2"><span class='check_box'></span></td>
             </tr>
         </table>
     </div>
