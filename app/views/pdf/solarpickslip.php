@@ -61,7 +61,7 @@ foreach($orders_ids as $id):
             </tr>
             <tr>
                 <td colspan="6" style="text-align:right; font-weight:bold;height:50px">Signed</td>
-                <td class='centre' colsapn="2"><span class='check_box'></span></td>
+                <td class='centre' colspan="2"><span class='check_box'></span></td>
             </tr>
         </table>
     </div>
