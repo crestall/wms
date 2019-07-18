@@ -54,6 +54,7 @@ class SecurityComponent extends Component{
 
         if($this->config["validateCsrfToken"]){
             if(!$this->CsrfToken()){
+                Logger::log("Csrf Validation", "CSRF Token is Invalid", __FILE__, __LINE__);
                 return $this->invalidRequest();
             }
         }

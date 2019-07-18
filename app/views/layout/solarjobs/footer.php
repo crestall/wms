@@ -667,7 +667,7 @@
                                         }
                                     });
                                     $.ajax({
-                                        url: '/ajaxfunctions/fulfill-solarorder',
+                                        url: '/ajaxfunctions/fulfill-solarservice',
                                         method: 'post',
                                         data: {
                                             order_ids: ids

@@ -23,12 +23,12 @@
             </div>
             <?php if($fulfilled == 0):?>
                 <div class="col-lg-3 text-center">
-                    <p><a class="btn btn-primary order-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Orders</a></p>
+                    <p><a class="btn btn-primary order-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Jobs</a></p>
                 </div>
             <?php endif;?>
             <div class="col-lg-3 text-center">
                 <?php if($fulfilled == 0):?>
-                    <p><a class="btn btn-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
+                    <p><a class="btn btn-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Jobs</a></p>
                 <?php endif;?>
             </div>
         </div>
