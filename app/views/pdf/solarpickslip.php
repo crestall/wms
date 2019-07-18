@@ -48,20 +48,20 @@ foreach($orders_ids as $id):
                     <td><?php echo $i['sku'];?></td>
                     <td><?php echo $location;?></td>
                     <td class='number bold'><?php echo $i['qty'];?></td>
-                    <td class='centre'><span class='check_box'></span></td>
-                    <td class='centre'><span class='check_box'></span></td>
-                    <td class='centre' colspan="2"><span class='check_box'></span></td>
+                    <td class='centre'><span class='check_box'>&nbsp;</span></td>
+                    <td class='centre'><span class='check_box'>&nbsp;</span></td>
+                    <td class='centre' colspan="2"><span class='check_box'>&nbsp;</span></td>
                 </tr>
             <?php endforeach;?>
             <tr>
                 <td colspan="2" style="text-align:right; font-weight:bold;height:50px">Time In</td>
-                <td class='centre' colspan="2"><span class='check_box'></span></td>
+                <td class='centre' colspan="2"><span class='check_box'>&nbsp;</span></td>
                 <td colspan="2" style="text-align:right; font-weight:bold;height:50px">Time Out</td>
-                <td class='centre' colspan="2"><span class='check_box'></span></td>
+                <td class='centre' colspan="2"><span class='check_box'>&nbsp;</span></td>
             </tr>
             <tr>
                 <td colspan="6" style="text-align:right; font-weight:bold;height:50px">Signed</td>
-                <td class='centre' colspan="2"><span class='check_box'></span></td>
+                <td class='centre' colspan="2"><span class='check_box'>&nbsp;</span></td>
             </tr>
         </table>
     </div>
