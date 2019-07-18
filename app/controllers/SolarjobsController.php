@@ -44,16 +44,11 @@ class SolarjobsController extends Controller
             return $this->redirector->to(PUBLIC_ROOT."solar-jobs/view-installs");
         }
         $page_title = "Update a Solar Install Job";
-        $type = $this->request->params['args']['type'];
         $id = $this->request->params['args']['id'];
 
-        $forms = array(
-            1   => "editOriginInstall.php",
-            2   => "editTLJInstall.php"
-        );
         $details = $this->solarorder->getOrderDetail($id);
         $order_items = $this->solarorder->getItemsForOrder($id);
-        $order_type = $this->solarordertype->getSolarOrderType($type);
+        $order_type = $this->solarordertype->getSolarOrderType($details['type_id']);
         $eb = $this->user->getUserName( $details['entered_by'] );
         if(empty($eb))
         {
@@ -61,7 +56,7 @@ class SolarjobsController extends Controller
         }
         /*  */
         Config::setJsConfig('curPage', "update-solar-install");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/'.$forms[$type],[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateInstall.php',[
             'page_title'    =>  $page_title,
             'details'       =>  $details,
             'id'            =>  $id,
