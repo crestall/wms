@@ -38,7 +38,7 @@ foreach($orders_ids as $id):
             <th>Qty</th>
             <th>Picked</th>
             <th>Checked</th>
-            <th colspan="2" style="width:160px">Used</th>
+            <th colspan="2" style="width:60px">Used</th>
         </tr>
             <?php foreach($items as $i):
                 $location = $this->controller->location->getLocationName($i['location_id']);
