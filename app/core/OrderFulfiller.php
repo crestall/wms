@@ -330,7 +330,7 @@
             {
                 $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
                 $this->output .= "Doing Order ID: ".$od['id'].PHP_EOL;
-                $db->updateDatabaseFields('solar_service_jobs', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time() ), $id);
+                $db->updateDatabaseFields('solar_service_jobs', array('status_id' => $this->controller->order->fulfilled_id, 'date_completed' => time() ), $id);
                 //order is now fulfilled, reduce stock
                 $items = $this->controller->solarservicejob->getItemsForJob($id);
 
