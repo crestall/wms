@@ -35,7 +35,7 @@ foreach($orders_ids as $id):
             <th>Item</th>
             <th>SKU</th>
             <th>Location</th>
-            <th>Quantity</th>
+            <th>Qty</th>
             <th>Picked</th>
             <th>Checked</th>
             <th colspan="2">Used</th>
