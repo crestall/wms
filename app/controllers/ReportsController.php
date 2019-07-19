@@ -353,17 +353,7 @@ class reportsController extends Controller
 
     public function solarReturnsReport()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
-        $summary = $this->outwardsgoods->getSummaryArray($from, $to);
-        Config::setJsConfig('curPage', "goods-out-summary");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/goodsOutSummary.php',[
-            'page_title'    =>  'Goods Out Summary',
-            'from'          =>  $from,
-            'to'            =>  $to,
-            'summary'       =>  $summary,
-            'date_filter'   =>  ''
-        ]);
+        return $this->error(400);
     }
 
     public function unloadedContainersReport()
@@ -380,13 +370,7 @@ class reportsController extends Controller
             'date_filter'           =>  ''
         ]);
     }
-    /*
-    public function solarReturnsReport()
-    {
-        die('hello'};)
-        return $this->error(400);
-    }
-    */
+
     public function isAuthorized(){
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
