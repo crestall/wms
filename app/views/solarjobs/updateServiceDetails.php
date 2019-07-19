@@ -57,7 +57,7 @@ $battery = (empty(Form::value('battery')))? $details['battery'] : Form::value('b
                 </div>
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
-                <input type="hidden" name="selected_items" id="selected_items" />
+                <input type="hidden" name="job_id" id="job_id" value="<?php echo $id;?>" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="67" />
                 <div class="form-group row">
