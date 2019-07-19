@@ -43,7 +43,7 @@ $si_string = rtrim($si_string, ",");
         <?php echo Form::displayError('general');?>
         <div class="row">
             <form id="items-update" method="post" action="/form/procServiceItemsUpdate">
-                <?php include(Config::get('VIEWS_PATH')."forms/item_adder.php");?>
+                <?php include(Config::get('VIEWS_PATH')."forms/item_updater.php");?> 
                 <input type="hidden" name="order_id" value="<?php echo $job['id'];?>" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo $job['client_id'];?>" />
