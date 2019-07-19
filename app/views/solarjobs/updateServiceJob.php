@@ -112,7 +112,7 @@
             <div class='row'>
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <a class="btn btn-primary" href="/solar-jobs/items-update/job=<?php echo $id;?>">Update These Items</a>
+                    <a class="btn btn-primary" href="/solar-jobs/service-items-update/job=<?php echo $id;?>">Update These Items</a>
                 </div>
             </div>
         </div>
