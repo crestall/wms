@@ -154,7 +154,7 @@ class FormController extends Controller {
             Session::set('feedback', "That job has been updated in the system");
         }
         //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-service-details/id=".$id);
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-service-details/id=".$job_id);
     }
 
     public function procAddServiceJob()
