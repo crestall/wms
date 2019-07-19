@@ -264,19 +264,16 @@
                         });
                     }
                 },
-                'add-origin-service-job' : {
+                'update-service-details' : {
                     init: function(){
                         actions.common.init();
-                        actions['item-searcher'].init();
-                        actions.common['add-item']();
-                        itemsUpdater.itemDelete();
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
-                        $("form#origin-service-job").submit(function(e){
+                        $("form#edit-service-job").submit(function(e){
                             if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Job...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Job Details...</h2></div>' });
                             }
                         });
                         $('select#team_id, #address, #suburb, #postcode, #country').change(function(e){
