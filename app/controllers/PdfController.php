@@ -41,7 +41,7 @@ class pdfController extends Controller
         //echo "<pre>",print_r($this->request),"</pre>";die();
         $pdf = new Mympdf([
             'mode'          => 'utf-8',
-            'format'        => 'A4',
+            'format'        => 'A4-L',
             'margin_left'   => 5,
             'margin_right'  => 5,
             'margin_top'    => 5,
