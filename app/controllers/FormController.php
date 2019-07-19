@@ -149,11 +149,32 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
-            //$job_id = $this->solarservicejob->addJob($post_data, $oitems);
+            //required and defaults
+            $vals = array(
+                "client_id"           => $client_id,
+                'type_id'      => $type_id,
+                'team_id'    => $team_id,
+                'work_order'     => $work_order,
+                'job_date'      => $date_value,
+                'battery'      => 0,
+                'customer_name'     => NULL,
+                'address'   => $address,
+                'address_2'   => NULL,
+                'suburb'    => $suburb,
+                'state'     => $state,
+                'postcode'  => $postcode,
+                'country'   => $country,
+                'entered_by'    =>  Session::getUserId()
+            );
+            if(isset($battery))
+                $vals['battery'] = 1;
+            if($this->dataSubbed($customer_name))
+                $vals['customer_name'] = $customer_name;
+            if($this->dataSubbed($address2))
+                $vals['address_2'] = $address2;
+            $this->solarservicejob->updateJobValues($vals, $job_id) ;
             Session::set('feedback', "That job has been updated in the system");
         }
-        //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
         return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-service-details/id=".$job_id);
     }
 
