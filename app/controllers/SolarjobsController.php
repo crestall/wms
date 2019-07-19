@@ -168,7 +168,7 @@ class SolarjobsController extends Controller
         //echo "<pre>",print_r($order_items),"</pre>";
         //render the page
         Config::setJsConfig('curPage', "items-update");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/itemsUpdate.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/serviceItemsUpdate.php', [
             'page_title'    =>  "Update Items for Solar Service Job",
             'job_id'        =>  $job_id,
             'job'           =>  $job,
