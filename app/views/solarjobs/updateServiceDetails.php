@@ -2,7 +2,7 @@
 $address = (empty(Form::value('address')))? $details['address'] : Form::value('address');
 $address2 = (empty(Form::value('address2')))? $details['address_2'] : Form::value('address2');
 $suburb = (empty(Form::value('suburb')))? $details['suburb'] : Form::value('suburb');
-$state =  (empty(Form::value('state')))? $detail['state'] : Form::value('state');
+$state =  (empty(Form::value('state')))? $details['state'] : Form::value('state');
 $postcode = (empty(Form::value('postcode')))? $details['postacode'] : Form::value('postcode');
 $country = (empty(Form::value('country')))? $details['country'] : Form::value('country');
 $date_filter = "Job Date";
