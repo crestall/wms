@@ -402,6 +402,12 @@ class reportsController extends Controller
 
         ));
 
+        //solar admin users
+        Permission::allow('client', $resource, array(
+            "jobsReport",
+            "returnsReport"
+        ));
+
         //client users
         Permission::allow('client', $resource, array(
             "dispatchReport",
