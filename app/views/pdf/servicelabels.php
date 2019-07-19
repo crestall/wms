@@ -10,7 +10,7 @@ foreach($orders_ids as $id):
     <table width="100%" style="font-size:16px; line-height:1.5">
         <tr>
             <td colspan="2" align="center">
-                <h1 style="font-size:50px"><?php echo $type;?></h1>
+                <h1 style="font-size:100px"><?php echo $type;?></h1>
             </td>
         </tr>
         <tr>
