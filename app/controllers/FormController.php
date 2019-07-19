@@ -2505,7 +2505,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/items-update/job=".$order_id);
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/service-items-update/job=".$order_id);
     }
 
     public function procServiceItemsUpdate()
