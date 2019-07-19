@@ -222,7 +222,7 @@
             foreach($oi['locations'] as $oil)
             {
                 $vals = array(
-                    'order_id'      =>  $order_id,
+                    'job_id'        =>  $job_id,
                     'item_id'       =>  $oi['item_id'],
                     'location_id'   =>  $oil['location_id'],
                     'qty'           =>  $oil['qty']
