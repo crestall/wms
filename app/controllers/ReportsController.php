@@ -380,13 +380,13 @@ class reportsController extends Controller
             'date_filter'           =>  ''
         ]);
     }
-
+    /*
     public function solarReturnsReport()
     {
         die('hello'};)
         return $this->error(400);
     }
-
+    */
     public function isAuthorized(){
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
