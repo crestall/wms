@@ -309,6 +309,11 @@
                         actions['<?php echo $user_role;?>'].init();
                     }
 
+                },
+                'comingsoon':{
+                    init: function(){
+                        
+                    }
                 }
             }
             //run the script for the current page
