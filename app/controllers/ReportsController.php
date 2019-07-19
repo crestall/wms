@@ -383,6 +383,7 @@ class reportsController extends Controller
 
     public function solarReturnsReport()
     {
+        die('hello'};)
         return $this->error(400);
     }
 
