@@ -113,7 +113,7 @@ class SolarjobsController extends Controller
         $eb = $this->user->getUserName( $details['entered_by'] );
 
         Config::setJsConfig('curPage', "update-service-details");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateServiceJob.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateServiceDetails.php',[
             'page_title'    =>  $page_title,
             'details'       =>  $details,
             'id'            =>  $id,
