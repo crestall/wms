@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class ComingsoonController extends ComingsoonController
+class ComingsoonController extends DashboardController
 {
     /**
      * show coming soon page
