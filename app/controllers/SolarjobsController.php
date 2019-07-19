@@ -59,7 +59,7 @@ class SolarjobsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateInstall.php',[
             'page_title'    =>  $page_title,
             'details'       =>  $details,
-            'id'            =>  $id, 
+            'id'            =>  $id,
             'order_type'    =>  $order_type,
             'order_items'   =>  $order_items,
             'entered_by'    =>  $eb
@@ -107,6 +107,10 @@ class SolarjobsController extends Controller
         $page_title = "Update Solar Service Job Details";
         $id = $this->request->params['args']['id'];
 
+        $details = $this->solarservicejob->getJobDetail($id);
+        $order_items = $this->solarservicejob->getItemsForJob($id);
+        $order_type = $this->solarordertype->getSolarOrderType($details['type_id']);
+        $eb = $this->user->getUserName( $details['entered_by'] );
 
         Config::setJsConfig('curPage', "update-service-details");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateServiceJob.php',[
