@@ -108,7 +108,6 @@ class SolarjobsController extends Controller
         $id = $this->request->params['args']['id'];
 
         $details = $this->solarservicejob->getJobDetail($id);
-        $order_items = $this->solarservicejob->getItemsForJob($id);
         $order_type = $this->solarordertype->getSolarOrderType($details['type_id']);
         $eb = $this->user->getUserName( $details['entered_by'] );
 
@@ -118,7 +117,6 @@ class SolarjobsController extends Controller
             'details'       =>  $details,
             'id'            =>  $id,
             'order_type'    =>  $order_type,
-            'order_items'   =>  $order_items,
             'entered_by'    =>  $eb
         ]);
     }
