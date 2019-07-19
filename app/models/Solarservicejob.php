@@ -216,7 +216,7 @@
         //delete the old ones
         $db->deleteQuery($this->items_table, $job_id, 'job_id');
         //update with new data
-        foreach($order_items as $oi)
+        foreach($job_items as $oi)
         {
             //echo "<pre>",print_r($oi['locations']),"</pre>";die();
             foreach($oi['locations'] as $oil)
