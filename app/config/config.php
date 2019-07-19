@@ -428,7 +428,8 @@ return array(
             'add-tlj-job'               => false,
             'job-search'                => true,
             'edit-servicejob'           => false,
-            'update-service-details'    => false
+            'update-service-details'    => false,
+            'view-service-jobs'         => true
         ),
 		'clients'	=> array(
 			'view-clients'	=> true,
