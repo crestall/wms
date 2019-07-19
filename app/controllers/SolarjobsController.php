@@ -149,6 +149,34 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function serviceItemsUpdate()
+    {
+        if(!isset($this->request->params['args']['job']))
+        {
+            $error = true;
+            $job_id = 0;
+            $job = array();
+            $job_items = array();
+        }
+        else
+        {
+            $error = false;
+            $job_id = $this->request->params['args']['job'];
+            $job = $this->solarservicejob->getJobDetail($job_id);
+            $job_items = $this->solarservicejob->getItemsForJob($job_id);
+        }
+        //echo "<pre>",print_r($order_items),"</pre>";
+        //render the page
+        Config::setJsConfig('curPage', "items-update");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/itemsUpdate.php', [
+            'page_title'    =>  "Update Items for Solar Service Job",
+            'job_id'        =>  $job_id,
+            'job'           =>  $job,
+            'error'         =>  $error,
+            'job_items'     =>  $job_items
+        ]);
+    }
+
     public function addOriginJob()
     {
         //render the page
