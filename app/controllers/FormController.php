@@ -70,6 +70,7 @@ class FormController extends Controller {
             'procContainerUnload',
             'procCourierAdd',
             'procCourierEdit',
+            'procEditServiceJob',
             'procForgotPassword',
             'procGoodsIn',
             'procGoodsOut',
@@ -117,6 +118,121 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procEditServiceJob()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($job_type == "0")
+        {
+            Form::setError('job_type', "A job type must be chosen");
+        }
+        if($team_id == "0")
+        {
+            Form::setError('team_id', "A team must be chosen");
+        }
+        if(!$this->dataSubbed($work_order))
+        {
+            Form::setError('work_order', 'A work order number is required');
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(!isset($this->request->data['items']))
+        {
+            Form::setError('items', 'At least one item must be selected');
+        }
+        else
+        {
+            $orders_items = array();
+            $error = false;
+            foreach($this->request->data['items'] as $itid => $details)
+            {
+                if(!isset($details['qty']))
+                {
+                    $error = true;
+                    Form::setError('items', 'Please ensure all items have a quantity');
+                    break;
+                }
+                if(!isset($details['id']))
+                {
+                    $error = true;
+                    Form::setError('items', 'There has been an error recognising an item');
+                    break;
+                }
+                if(!$error)
+                {
+                    $array = array(
+                        'qty'   => $details['qty'],
+                        'id'    => $details['id']
+                    );
+                    if(!empty($details['pallet_qty']))
+                    {
+                        $array['qty'] = $details['pallet_qty'];
+                        $array['whole_pallet'] = true;
+                    }
+                    else
+                    {
+                        $array['qty'] = $details['qty'];
+                        $array['whole_pallet'] = false;
+                    }
+                    if(empty($array['qty']))
+                    {
+                        $error = true;
+                        Form::setError('items', 'Please ensure all items have a quantity');
+                    }
+                    $orders_items[] = $array ;
+                }
+
+            }
+            //echo "<pre>",print_r($orders_items),"</pre>"; die();
+            if(count($orders_items) == 0)
+            {
+                Form::setError('items', 'At least one item must be selected');
+            }
+            elseif(!$error)
+            {
+                $the_items = array(
+                    0 => $orders_items
+                );
+                $oitems = $this->allocations->createOrderItemsArray($the_items, 0, false);
+                foreach($oitems[0] as $item)//there is only one order
+                {
+                    if($item['import_error'])
+                    {
+                        Form::setError('items', $item['import_error_string']);
+                    }
+                }
+            }
+            /*
+            else
+            {
+                Form::setError('items', 'Please check your items');
+            }
+            */
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $job_id = $this->solarservicejob->addJob($post_data, $oitems);
+            Session::set('feedback', "That job has been created and entered in the system");
+        }
+        //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-service-job");
     }
 
     public function procAddServiceJob()
