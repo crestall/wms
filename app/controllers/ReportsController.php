@@ -383,7 +383,7 @@ class reportsController extends Controller
 
     private function clientDispatchReport()
     {
-        returns $this->error(400);
+        return $this->error(400);
     }
 
     public function isAuthorized(){
