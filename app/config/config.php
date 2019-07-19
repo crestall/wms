@@ -382,7 +382,7 @@ return array(
         ),
         'reports'   => array(
             'jobs-report'       => true,
-            'returns-report'    => true
+            'solar-returns-report'    => true
         ),
     ),
     "SOLAR_PAGES"   => array(
@@ -493,7 +493,8 @@ return array(
             '3pl-stock-movement-report' =>  false,
             'empty-bay-report'      => true,
             //'client-daily-reports'  => true,
-            'pickups-report'    => true
+            'pickups-report'    => true,
+            'solar-returns-report'    => true
 		),/*
         'sales-reps'        =>  array(
             'view-reps'                 =>  true,
