@@ -27,15 +27,15 @@ $si_string = rtrim($si_string, ",");
         </div>
     <?php else:?>
         <div class="row">
-            <div class="col-lg-4">
-                <a class="btn btn-primary" href="/solar-jobs/edit-install/type=<?php echo $job['type_id'];?>/id=<?php echo $job_id;?>">Return to Job</a>
+            <div class="col-md-4">
+                <a class="btn btn-primary" href="/solar-jobs/edit-servicejob/type=<?php echo $job['type_id'];?>/id=<?php echo $job_id;?>">Return to Job</a>
             </div>
-            <div class="col-lg-4">
-                <a class="btn btn-primary" href="/solar-jobs/view-installs/type=<?php echo $job['type_id'];?>">View All Install of this type</a>
+            <div class="col-md-4">
+                <a class="btn btn-primary" href="/solar-jobs/edit-servicejob/id=<?php echo $details['id'];?>">View This Job Details</a>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-md-12">
                 <h2>Updating Items For Job Number <?php echo $job['work_order'];?></h2>
             </div>
         </div>
@@ -43,7 +43,7 @@ $si_string = rtrim($si_string, ",");
         <?php echo Form::displayError('general');?>
         <div class="row">
             <form id="items-update" method="post" action="/form/procServiceItemsUpdate">
-                <?php include(Config::get('VIEWS_PATH')."forms/item_updater.php");?> 
+                <?php include(Config::get('VIEWS_PATH')."forms/item_updater.php");?>
                 <input type="hidden" name="order_id" value="<?php echo $job['id'];?>" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo $job['client_id'];?>" />
