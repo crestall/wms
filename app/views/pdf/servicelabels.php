@@ -7,7 +7,7 @@ foreach($orders_ids as $id):
     $type = $this->controller->solarordertype->getSolarOrderType($od['type_id']);
     $delivery_address = $this->controller->solarservicejob->getAddressStringForJob($id); 
     ?>
-    <table width="100%" style="font-size:16px; line-height:1.5">
+    <table width="100%" style="font-size:24px; line-height:1.5">
         <tr>
             <td colspan="2" align="center">
                 <h1 style="font-size:100px"><?php echo $type;?></h1>
