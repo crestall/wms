@@ -2483,7 +2483,7 @@ class FormController extends Controller {
                         Session::set('errorfeedback', '<ul>'.$item['item_error_string'].'</ul>');
                         Session::set('value_array', $_POST);
                         Session::set('error_array', Form::getErrorArray());
-                        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/service-items-update/job=".$order_id);
+                        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/items-update/job=".$order_id);
                     }
                 //}
             }
@@ -2505,7 +2505,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/service-items-update/job=".$order_id);
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/items-update/job=".$order_id);
     }
 
     public function procServiceItemsUpdate()
@@ -2551,7 +2551,7 @@ class FormController extends Controller {
             );
             //echo "<pre>item_array",print_r($item_array),"</pre>"; //die();
             //$oitems = $this->allocations->createOrderItemsArray($item_array, $order_id);
-            $oitems = $this->allocations->createSolarOrderItemsArray($item_array, $order_id, false);
+            $oitems = $this->allocations->createOrderItemsArray($item_array, $order_id, false);
             //echo "<pre>oitems",print_r($oitems),"</pre>"; die();
 
             foreach($oitems[$order_id] as $item)
@@ -2565,7 +2565,7 @@ class FormController extends Controller {
                         Session::set('errorfeedback', '<ul>'.$item['item_error_string'].'</ul>');
                         Session::set('value_array', $_POST);
                         Session::set('error_array', Form::getErrorArray());
-                        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/items-update/job=".$order_id);
+                        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/service-items-update/job=".$order_id);
                     }
                 //}
             }
@@ -2587,7 +2587,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/items-update/job=".$order_id);
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/service-items-update/job=".$order_id); 
     }
 
     public function procAddressUpdate()
