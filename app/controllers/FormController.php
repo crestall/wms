@@ -149,12 +149,12 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            echo "<pre>",print_r($post_data),"</pre>"; die();
-            $job_id = $this->solarservicejob->addJob($post_data, $oitems);
-            Session::set('feedback', "That job has been created and entered in the system");
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            //$job_id = $this->solarservicejob->addJob($post_data, $oitems);
+            Session::set('feedback', "That job has been updated in the system");
         }
         //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-service-job");
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-service-details/id=".$id);
     }
 
     public function procAddServiceJob()
