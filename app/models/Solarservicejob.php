@@ -209,6 +209,30 @@
         return true;
     }
 
+    public function updateItemsForJob(array $job_items, $job_id)
+    {
+        //echo "<pre>",print_r($order_items),"</pre>";
+        $db = Database::openConnection();
+        //delete the old ones
+        $db->deleteQuery($this->items_table, $job_id, 'order_id');
+        //update with new data
+        foreach($order_items as $oi)
+        {
+            //echo "<pre>",print_r($oi['locations']),"</pre>";die();
+            foreach($oi['locations'] as $oil)
+            {
+                $vals = array(
+                    'order_id'      =>  $order_id,
+                    'item_id'       =>  $oi['item_id'],
+                    'location_id'   =>  $oil['location_id'],
+                    'qty'           =>  $oil['qty']
+                );
+                $db->insertQuery($this->items_table, $vals);
+            }
+        }
+        return true;
+    }
+
   }
 
 ?>

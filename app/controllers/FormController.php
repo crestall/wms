@@ -2483,6 +2483,88 @@ class FormController extends Controller {
                         Session::set('errorfeedback', '<ul>'.$item['item_error_string'].'</ul>');
                         Session::set('value_array', $_POST);
                         Session::set('error_array', Form::getErrorArray());
+                        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/service-items-update/job=".$order_id);
+                    }
+                //}
+            }
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "<pre>",print_r($oitems['values']),"</pre>"; die();
+            if($this->solarorder->updateSolarItemsForOrder($oitems[$order_id], $order_id))
+            {
+                Session::set('feedback', "Those items have been updated");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/items-update/job=".$order_id);
+    }
+
+    public function procServiceItemsUpdate()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!isset($this->request->data['items']))
+        {
+            Form::setError('items', 'At least one item must be selected');
+        }
+        else
+        {
+            $orders_items = array();
+            foreach($this->request->data['items'] as $itid => $details)
+            {
+                $array = array(
+                    'qty'   => $details['qty'],
+                    'id'    => $details['id']
+                );
+                if(!empty($details['pallet_qty']))
+                {
+                    $array['qty'] = $details['pallet_qty'];
+                    $array['whole_pallet'] = true;
+                }
+                else
+                {
+                    $array['qty'] = $details['qty'];
+                    $array['whole_pallet'] = false;
+                }
+                $orders_items[] = $array ;
+            }
+            //echo "<pre>orders_items",print_r($orders_items),"</pre>"; //die();
+            $item_array = array(
+                $order_id => $orders_items
+            );
+            //echo "<pre>item_array",print_r($item_array),"</pre>"; //die();
+            //$oitems = $this->allocations->createOrderItemsArray($item_array, $order_id);
+            $oitems = $this->allocations->createSolarOrderItemsArray($item_array, $order_id, false);
+            //echo "<pre>oitems",print_r($oitems),"</pre>"; die();
+
+            foreach($oitems[$order_id] as $item)
+            {
+                //echo "<pre>",print_r($items),"</pre>"; die();
+                //foreach($items as $item)
+                //{
+                    if($item['item_error'])
+                    {
+                        Form::setError('items', $item['item_error_string']);
+                        Session::set('errorfeedback', '<ul>'.$item['item_error_string'].'</ul>');
+                        Session::set('value_array', $_POST);
+                        Session::set('error_array', Form::getErrorArray());
                         return $this->redirector->to(PUBLIC_ROOT."solar-jobs/items-update/job=".$order_id);
                     }
                 //}
