@@ -157,6 +157,7 @@ class SolarjobsController extends Controller
             $job_id = 0;
             $job = array();
             $job_items = array();
+            $job_type = "";
         }
         else
         {
@@ -164,6 +165,7 @@ class SolarjobsController extends Controller
             $job_id = $this->request->params['args']['job'];
             $job = $this->solarservicejob->getJobDetail($job_id);
             $job_items = $this->solarservicejob->getItemsForJob($job_id);
+            $job_type = $this->solarordertype->getSolarOrderType($job['type_id']);
         }
         //echo "<pre>",print_r($order_items),"</pre>";
         //render the page
@@ -173,7 +175,8 @@ class SolarjobsController extends Controller
             'job_id'        =>  $job_id,
             'job'           =>  $job,
             'error'         =>  $error,
-            'job_items'     =>  $job_items
+            'job_items'     =>  $job_items,
+            'job_type'      =>  $job_type,
         ]);
     }
 

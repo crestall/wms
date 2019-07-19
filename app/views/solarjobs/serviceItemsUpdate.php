@@ -28,7 +28,7 @@ $si_string = rtrim($si_string, ",");
     <?php else:?>
         <div class="row">
             <div class="col-md-4">
-                <a class="btn btn-primary" href="/solar-jobs/edit-servicejob/type=<?php echo $job['type_id'];?>/id=<?php echo $job_id;?>">Return to Job</a>
+                <a class="btn btn-primary" href="/solar-jobs/view-service-jobs/type=<?php echo $job['type_id'];?>">View Service Jobs For <?php echo $job_type;?></a>
             </div>
             <div class="col-md-4">
                 <a class="btn btn-primary" href="/solar-jobs/edit-servicejob/id=<?php echo $job['id'];?>">View This Job Details</a>
