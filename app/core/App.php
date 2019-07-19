@@ -64,6 +64,7 @@ class App {
     {
         // split the requested URL
         $this->splitUrl();
+        die($this->controller." / ".$this->method);
         /*Ya gotta be logged in  */
         if(Session::getIsLoggedIn() === false && !Cookie::isCookieValid())
         {
