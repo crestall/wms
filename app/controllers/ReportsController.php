@@ -381,7 +381,7 @@ class reportsController extends Controller
         ]);
     }
 
-    private function clientDispatchReport()
+    private function solarReturnsReport()
     {
         return $this->error(400);
     }
