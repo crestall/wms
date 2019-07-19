@@ -28,7 +28,12 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3>Install For <?php echo $order_type;?></h3>
+                <h3>Service Job For <?php echo $order_type;?></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p><a class="btn btn-primary" href="/solar-jobs/view-service-jobs/type=<?php echo $details['type_id'];?>">View Service Jobs For <?php echo $order_type;?></a></p>
             </div>
         </div>
         <div class="row">
