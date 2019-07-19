@@ -202,6 +202,13 @@
         return $ret_string;
     }
 
+    public function updateJobValues($values, $id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseFields($this->table, $values, $id);
+        return true;
+    }
+
   }
 
 ?>
