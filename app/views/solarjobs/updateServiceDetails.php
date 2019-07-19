@@ -19,7 +19,7 @@ $battery = (empty(Form::value('battery')))? $details['battery'] : Form::value('b
             <p><a class="btn btn-primary" href="/solar-jobs/view-service-jobs/type=<?php echo $details['type_id'];?>">View Service Jobs For <?php echo $order_type;?></a></p>
         </div>
         <div class="col-md-4">
-            <p><a class="btn btn-primary" href="/solar-jobs/edit-servicejob/id=<?php echo $details['id'];?>">View Service Jobs Details</a></p>
+            <p><a class="btn btn-primary" href="/solar-jobs/edit-servicejob/id=<?php echo $details['id'];?>">View This Job Details</a></p>
         </div>
     </div>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
