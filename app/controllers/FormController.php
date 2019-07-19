@@ -70,6 +70,7 @@ class FormController extends Controller {
             'procContainerUnload',
             'procCourierAdd',
             'procCourierEdit',
+            'procEditServiceJob',
             'procForgotPassword',
             'procGoodsIn',
             'procGoodsOut',
@@ -117,6 +118,64 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procEditServiceJob()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($team_id == "0")
+        {
+            Form::setError('team_id', "A team must be chosen");
+        }
+        if(!$this->dataSubbed($work_order))
+        {
+            Form::setError('work_order', 'A work order number is required');
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            //required and defaults
+            $vals = array(
+                "client_id"           => $client_id,
+                'type_id'      => $type_id,
+                'team_id'    => $team_id,
+                'work_order'     => $work_order,
+                'job_date'      => $date_value,
+                'battery'      => 0,
+                'customer_name'     => NULL,
+                'address'   => $address,
+                'address_2'   => NULL,
+                'suburb'    => $suburb,
+                'state'     => $state,
+                'postcode'  => $postcode,
+                'country'   => $country,
+                'entered_by'    =>  Session::getUserId()
+            );
+            if(isset($battery))
+                $vals['battery'] = 1;
+            if($this->dataSubbed($customer_name))
+                $vals['customer_name'] = $customer_name;
+            if($this->dataSubbed($address2))
+                $vals['address_2'] = $address2;
+            $this->solarservicejob->updateJobValues($vals, $job_id) ;
+            Session::set('feedback', "That job has been updated in the system");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-service-details/id=".$job_id);
     }
 
     public function procAddServiceJob()
