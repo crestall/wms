@@ -2549,10 +2549,10 @@ class FormController extends Controller {
             $item_array = array(
                 $order_id => $orders_items
             );
-            //echo "<pre>item_array",print_r($item_array),"</pre>"; //die();
+            echo "<pre>item_array",print_r($item_array),"</pre>"; //die();
             //$oitems = $this->allocations->createOrderItemsArray($item_array, $order_id);
             $oitems = $this->allocations->createOrderItemsArray($item_array, $order_id, false);
-            //echo "<pre>oitems",print_r($oitems),"</pre>"; die();
+            echo "<pre>oitems",print_r($oitems),"</pre>"; die();
 
             foreach($oitems[$order_id] as $item)
             {
