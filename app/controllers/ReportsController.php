@@ -353,7 +353,7 @@ class reportsController extends Controller
 
     public function solarReturnsReport()
     {
-        return $this->error(400);
+        return $this->redirector->cominSoon();
     }
 
     public function unloadedContainersReport()
