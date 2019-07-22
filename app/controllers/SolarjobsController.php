@@ -206,9 +206,18 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function viewSolarTeamInstalls()
+    {
+        return $this->redirector->comingSoon();
+    }
+
     public function viewInstalls()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        if(Session::getUserRole() == "solar")
+        {
+            return $this->viewSolarTeamInstalls();
+        }
         $order_type = "All Types";
         $type_id = 0;
         $ff = "Unfulfilled";
@@ -278,7 +287,7 @@ class SolarjobsController extends Controller
         $action = $this->request->param('action');
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        $resource = "orders";
+        $resource = "solarjobs";
 
         //only for admin
         Permission::allow('admin', $resource, "*");
@@ -290,6 +299,10 @@ class SolarjobsController extends Controller
         Permission::allow('warehouse', $resource, array(
             "jobSearch",
             "viewJobs",
+        ));
+        //solar users
+        Permission::allow('solar', $resource, array(
+            "viewSolarTeamInstalls"
         ));
         return Permission::check($role, $resource, $action);
     }
