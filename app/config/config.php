@@ -333,6 +333,7 @@ return array(
     **************************************************************************/
     "MENU_ICONS"    =>  array(
         'orders'            =>  'fas fa-truck',
+        'ordering'          =>  'fas fa-cash-register',
 		'clients'	        =>	'fas fa-user-tie',
 		'products'	        =>	'fas fa-dolly',
 		'inventory'	        =>	'fas fa-tasks',
