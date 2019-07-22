@@ -211,6 +211,11 @@ class SolarjobsController extends Controller
         return $this->redirector->comingSoon();
     }
 
+    public function viewSolarTeamServiceJobs()
+    {
+        return $this->redirector->comingSoon();
+    }
+
     public function viewInstalls()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
@@ -252,6 +257,10 @@ class SolarjobsController extends Controller
     public function viewServiceJobs()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        if(Session::getUserRole() == "solar")
+        {
+            return $this->viewSolarTeamServiceJobs();
+        }
         $order_type = "All Types";
         $type_id = 0;
         $ff = "Unfulfilled";
@@ -302,7 +311,8 @@ class SolarjobsController extends Controller
         ));
         //solar users
         Permission::allow('solar', $resource, array(
-            "viewInstalls"
+            "viewInstalls",
+            "viewServiceJobs"
         ));
         return Permission::check($role, $resource, $action);
     }
