@@ -302,7 +302,7 @@ class SolarjobsController extends Controller
         ));
         //solar users
         Permission::allow('solar', $resource, array(
-            "viewSolarTeamInstalls"
+            "viewInstalls"
         ));
         return Permission::check($role, $resource, $action);
     }
