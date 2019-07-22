@@ -16,7 +16,12 @@ class orderingController extends Controller
 
     public function orderConsumables()
     {
-        return $this->redirector->comingSoon();
+
+        //render the page
+        Config::setJsConfig('curPage', "order-consumables");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/ordering/", Config::get('VIEWS_PATH') . 'ordering/orderConsumables.php', [
+            'page_title'    =>  "Order Consumables For Truck"
+        ]);
     }
 
     public function isAuthorized(){
