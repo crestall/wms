@@ -213,6 +213,19 @@ $c = 1;
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Some Job Info Will Be Here</h2>
+            </div>
+            <div class="col-lg-6">
+                <h2>Some Scheduling Info Will Be Here</h2>
+            </div>
+        </div>
     <?php else:?>
         <div class="row">
             <div class="col-lg-12">
