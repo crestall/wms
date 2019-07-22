@@ -192,12 +192,25 @@ $c = 1;
             </div>
         </div>
     <?php elseif($user_role == "solar"):?>
-        <div class="row">
-            <div class="col-lg-6">
-                column 11
+        <div class="bs-callout bs-callout-primary row bs-callout-more">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Quick Links</h2>
+                </div>
             </div>
-            <div class="col-lg-6">
-                column 12
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <p><a class="btn btn-primary btn-lg" href="/solar-jobs/view-installs"><i class="fa fas fa-tools"></i> View Installs For Your Team</a></p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <p><a class="btn btn-primary btn-lg" href="/solar-jobs/view-service-jobs"><i class="fa fas fa-tools"></i> View Service Jobs For Your Team</a></p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <p><a class="btn btn-success btn-lg" href="/ordering/order-consumables"><i class="fa fas fa-cash-register"></i> Order Consumables For Truck</a></p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <p><a class="btn btn-info btn-lg" href="/scheduling/view-schedulr"><i class="fa far fa-calendar-alt fa-fw"></i> Scheduling For Your Team</a></p>
+                </div>
             </div>
         </div>
     <?php else:?>
