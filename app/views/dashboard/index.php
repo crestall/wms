@@ -206,7 +206,7 @@ $c = 1;
                     <p><a class="btn btn-primary btn-lg" href="/solar-jobs/view-service-jobs"><i class="fa fas fa-tools"></i> View Service Jobs</a></p>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <p><a class="btn btn-success btn-lg" href="/ordering/order-consumables"><i class="fa fas fa-cash-register"></i> Order Consumables For Truck</a></p>
+                    <p><a class="btn btn-success btn-lg" href="/ordering/order-consumables"><i class="fa fas fa-cash-register"></i> Order Consumables</a></p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <p><a class="btn btn-info btn-lg" href="/scheduling/view-schedule"><i class="fa far fa-calendar-alt fa-fw"></i> Scheduling</a></p>
