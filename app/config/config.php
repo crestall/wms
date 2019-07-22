@@ -386,11 +386,15 @@ return array(
         ),
     ),
     "SOLAR_PAGES"   => array(
+        'solar-jobs'  => array(
+            'view-installs'                 => true,
+            'view-service-jobs'         => true
+        ),
+        'ordering'  => array(
+            'order-consumables' => true
+        ),
         'scheduling'    => array(
             'view-schedule' => true
-        ),
-        'solar-jobs'  => array(
-            'view-jobs'                 => true
         ),
     ),
     "ADMIN_PAGES"   =>  array(
