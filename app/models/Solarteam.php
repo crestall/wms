@@ -41,6 +41,28 @@ class Solarteam extends Model{
         return $ret_string;
     }
 
+    public function getSelectTeamLeaders($selected = false)
+    {
+        $db = Database::openConnection();
+
+        $check = "";
+        $ret_string = "";
+        $q = "SELECT id, name FROM users WHERE active = 1 AND solar_team_leader = 1";
+        $q .= " ORDER BY name";
+        $teams = $db->queryData($q);
+        foreach($teams as $t)
+        {
+            $label = $t['name'];
+            $value = $t['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function getTeamName($id)
     {
         $db = Database::openConnection();

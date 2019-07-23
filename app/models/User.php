@@ -202,6 +202,12 @@ class User extends Model{
         return $db->queryValue("user_roles", array('name' => 'client'));
     }
 
+    public function getSolarUserRoleId()
+    {
+        $db = Database::openConnection();
+        return $db->queryValue("user_roles", array('name' => 'solar'));
+    }
+
     public function getSelectUserRoles($selected = false)
     {
         $db = Database::openConnection();

@@ -39,6 +39,27 @@
                             }
                             $(this).valid();
                         });
+                        $('select#role_id').change(function(e){
+                            if($(this).val() == $('#solar_role_id').val())
+                            {
+                                $('#solar_holder').slideDown();
+                                $('#solar_team_id').rules('add', 'notNone');
+                            }
+                            else
+                            {
+                                $('#solar_holder').slideUp();
+                                $('#solar_team_id').rules('remove');
+                            }
+                            $(this).valid();
+                        });
+                        $('select#role_id, select#client_id, select#solar_team_id').change(function(e){
+                            $(this).valid();
+                        });
+                    }
+                },
+                'edit-user-profile':{
+                    init: function(){
+
                     }
                 }
             }

@@ -540,7 +540,8 @@ return array(
             'user-roles'                =>  true,
             //'pickfaces'                 => true,
             'couriers'                  => true,
-            'solar-order-types'   => true
+            'solar-order-types'   => true,
+            'edit-user-profile'     => false
 		),
         'financials'    =>  array(
             'hunters-check' => true
