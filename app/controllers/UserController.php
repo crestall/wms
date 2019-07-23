@@ -28,11 +28,27 @@ class UserController extends Controller{
     public function profile(){
         //data
         $info = $this->user->getProfileInfo(Session::getUserId());
-        
+
         //render the page
         Config::setJsConfig('curPage', "profile");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/users/", Config::get('VIEWS_PATH') . 'user/profile.php',[
             'page_title'    =>  "User Profile",
+            'info'          =>  $info
+        ]);
+    }
+
+    public function editUserProfile(){
+        if(!isset($this->request->params['args']['user']))
+        {
+            return $this->redirector->to("/site-settings/manage-users");
+        }
+        //data
+        $info = $this->user->getProfileInfo(Session::getUserId($this->request->params['args']['user'])));
+
+        //render the page
+        Config::setJsConfig('curPage', "edit-user-profile");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/users/", Config::get('VIEWS_PATH') . 'user/editUserProfile.php',[
+            'page_title'    =>  "Edit User Profile",
             'info'          =>  $info
         ]);
     }

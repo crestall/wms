@@ -39,6 +39,24 @@
                             }
                             $(this).valid();
                         });
+                        $('select#client_id').change(function(e){
+                            if($(this).val() == $('#solar_client_id').val())
+                            {
+                                $('#solar_holder').slideDown();
+                                $('#solar_team_id').rules('add', 'notNone');
+                            }
+                            else
+                            {
+                                $('#solar_holder').slideUp();
+                                $('#solar_team_id').rules('remove');
+                            }
+                            $(this).valid();
+                        });
+                    }
+                },
+                'edit-user-profile':{
+                    init: function(){
+
                     }
                 }
             }

@@ -541,7 +541,7 @@ return array(
             //'pickfaces'                 => true,
             'couriers'                  => true,
             'solar-order-types'   => true,
-            //'edit-user-profile'     => false
+            'edit-user-profile'     => false
 		),
         'financials'    =>  array(
             'hunters-check' => true
