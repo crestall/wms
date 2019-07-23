@@ -1,6 +1,6 @@
 <?php
 $display = (!empty(Form::value('role_id')) && Form::value('role_id') == $client_role_id)? "block" : "none";
-$sdisplay = !empty(Form::value('client_id')) && Form::value('client_id') == 67)? "block" : "none";
+$sdisplay = (!empty(Form::value('client_id')) && Form::value('client_id') == 67)? "block" : "none";
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
