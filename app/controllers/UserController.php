@@ -15,7 +15,7 @@ class UserController extends Controller{
 
     public function addUser()
     {
-        $client_role_id = $this->user->getClientRoleId();\
+        $client_role_id = $this->user->getClientRoleId();
         $solar_role_id = $this->user->getSolarUserRoleId();
         //render the page
         Config::setJsConfig('curPage', "add-user");
