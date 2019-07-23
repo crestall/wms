@@ -39,8 +39,8 @@
                             }
                             $(this).valid();
                         });
-                        $('select#client_id').change(function(e){
-                            if($(this).val() == $('#solar_client_id').val())
+                        $('select#role_id').change(function(e){
+                            if($(this).val() == $('#solar_role_id').val())
                             {
                                 $('#solar_holder').slideDown();
                                 $('#solar_team_id').rules('add', 'notNone');
