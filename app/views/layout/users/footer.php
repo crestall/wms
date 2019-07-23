@@ -52,6 +52,9 @@
                             }
                             $(this).valid();
                         });
+                        $('select#role_id, select#client_id, select#solar_team_id').change(function(e){
+                            $(this).valid();
+                        });
                     }
                 },
                 'edit-user-profile':{
