@@ -43,7 +43,7 @@ class UserController extends Controller{
             return $this->redirector->to("/site-settings/manage-users");
         }
         //data
-        $info = $this->user->getProfileInfo(Session::getUserId($this->request->params['args']['user'])));
+        $info = $this->user->getProfileInfo(Session::getUserId($this->request->params['args']['user']));
 
         //render the page
         Config::setJsConfig('curPage', "edit-user-profile");
