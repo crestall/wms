@@ -149,6 +149,37 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function serviceItemsUpdate()
+    {
+        if(!isset($this->request->params['args']['job']))
+        {
+            $error = true;
+            $job_id = 0;
+            $job = array();
+            $job_items = array();
+            $job_type = "";
+        }
+        else
+        {
+            $error = false;
+            $job_id = $this->request->params['args']['job'];
+            $job = $this->solarservicejob->getJobDetail($job_id);
+            $job_items = $this->solarservicejob->getItemsForJob($job_id);
+            $job_type = $this->solarordertype->getSolarOrderType($job['type_id']);
+        }
+        //echo "<pre>",print_r($order_items),"</pre>";
+        //render the page
+        Config::setJsConfig('curPage', "items-update");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/serviceItemsUpdate.php', [
+            'page_title'    =>  "Update Items for Solar Service Job",
+            'job_id'        =>  $job_id,
+            'job'           =>  $job,
+            'error'         =>  $error,
+            'job_items'     =>  $job_items,
+            'job_type'      =>  $job_type,
+        ]);
+    }
+
     public function addOriginJob()
     {
         //render the page
@@ -175,9 +206,23 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function viewSolarTeamInstalls()
+    {
+        return $this->redirector->comingSoon();
+    }
+
+    public function viewSolarTeamServiceJobs()
+    {
+        return $this->redirector->comingSoon();
+    }
+
     public function viewInstalls()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        if(Session::getUserRole() == "solar")
+        {
+            return $this->viewSolarTeamInstalls();
+        }
         $order_type = "All Types";
         $type_id = 0;
         $ff = "Unfulfilled";
@@ -212,6 +257,10 @@ class SolarjobsController extends Controller
     public function viewServiceJobs()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        if(Session::getUserRole() == "solar")
+        {
+            return $this->viewSolarTeamServiceJobs();
+        }
         $order_type = "All Types";
         $type_id = 0;
         $ff = "Unfulfilled";
@@ -247,7 +296,7 @@ class SolarjobsController extends Controller
         $action = $this->request->param('action');
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        $resource = "orders";
+        $resource = "solarjobs";
 
         //only for admin
         Permission::allow('admin', $resource, "*");
@@ -259,6 +308,11 @@ class SolarjobsController extends Controller
         Permission::allow('warehouse', $resource, array(
             "jobSearch",
             "viewJobs",
+        ));
+        //solar users
+        Permission::allow('solar', $resource, array(
+            "viewInstalls",
+            "viewServiceJobs"
         ));
         return Permission::check($role, $resource, $action);
     }

@@ -867,3 +867,8 @@ div.pallets input.number{
 div.pallets label{
     font-weight:normal;
 }
+
+div#coming-soon img{
+    width: 100%;
+    height: auto;
+}

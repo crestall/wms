@@ -333,6 +333,7 @@ return array(
     **************************************************************************/
     "MENU_ICONS"    =>  array(
         'orders'            =>  'fas fa-truck',
+        'ordering'          =>  'fas fa-cash-register',
 		'clients'	        =>	'fas fa-user-tie',
 		'products'	        =>	'fas fa-dolly',
 		'inventory'	        =>	'fas fa-tasks',
@@ -360,7 +361,8 @@ return array(
             'add-tlj-job'               => false,
             'job-search'                => true,
             'edit-servicejob'           => false,
-            'update-service-details'    => false
+            'update-service-details'    => false,
+            'view-service-jobs'         => true
         ),
         'products'	=> array(
             'view-products'			=> true,
@@ -381,15 +383,19 @@ return array(
         ),
         'reports'   => array(
             'jobs-report'       => true,
-            'returns-report'    => true
+            'solar-returns-report'    => true
         ),
     ),
     "SOLAR_PAGES"   => array(
+        'solar-jobs'  => array(
+            'view-installs'                 => true,
+            'view-service-jobs'         => true
+        ),
+        'ordering'  => array(
+            'order-consumables' => true
+        ),
         'scheduling'    => array(
             'view-schedule' => true
-        ),
-        'solar-jobs'  => array(
-            'view-jobs'                 => true
         ),
     ),
     "ADMIN_PAGES"   =>  array(
@@ -427,7 +433,8 @@ return array(
             'add-tlj-job'               => false,
             'job-search'                => true,
             'edit-servicejob'           => false,
-            'update-service-details'    => false
+            'update-service-details'    => false,
+            'view-service-jobs'         => true
         ),
 		'clients'	=> array(
 			'view-clients'	=> true,
@@ -491,7 +498,8 @@ return array(
             '3pl-stock-movement-report' =>  false,
             'empty-bay-report'      => true,
             //'client-daily-reports'  => true,
-            'pickups-report'    => true
+            'pickups-report'    => true,
+            'solar-returns-report'    => true
 		),/*
         'sales-reps'        =>  array(
             'view-reps'                 =>  true,

@@ -50,6 +50,13 @@ class Redirector{
     }
 
     /**
+     * Redirect to the coming soon page
+     */
+    public function comingSoon(){
+        return $this->to(PUBLIC_ROOT . "coming-soon");
+    }
+
+    /**
      * Redirect to the login page
      * $redirect_url is to send the user back to where he/she came from after login
      *

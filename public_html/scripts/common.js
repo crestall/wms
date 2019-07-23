@@ -142,7 +142,6 @@ var dataTable = {
 /************
 * Items Updater
 ************/
-
 var itemsUpdater = {
     itemSearch: function(){
 
