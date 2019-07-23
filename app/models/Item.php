@@ -843,10 +843,23 @@ class Item extends Model{
     public function getAllocatedStock($item_id, $fulfilled_id)
     {
         $db = Database::openConnection();
+        $allocated = 0;
         if($this->isSolarItem($item_id))
         {
             $orders_table = "solar_orders";
             $items_table = "solar_orders_items";
+
+            $asjq = $db->queryRow("
+                SELECT
+                	oi.item_id, i.name, sum(oi.qty) AS allocated
+                FROM
+                	solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                	o.status_id != $fulfilled_id AND oi.item_id = $item_id
+                GROUP BY
+                	oi.item_id
+            ");
+            $allocated += (empty($asjq['allocated']))? 0 : $asjq['allocated'];
         }
         else
         {
@@ -863,7 +876,7 @@ class Item extends Model{
             GROUP BY
             	oi.item_id
         ");
-        $allocated = (empty($asq['allocated']))? 0 : $asq['allocated'];
+        $allocated += (empty($asq['allocated']))? 0 : $asq['allocated'];
         return $allocated;
     }
     /*
