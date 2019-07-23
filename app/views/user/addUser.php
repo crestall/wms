@@ -70,7 +70,7 @@ $sdisplay = (!empty(Form::value('client_id')) && Form::value('client_id') == 67)
             <!-- Hidden Inputs -->
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="client_role_id" id="client_role_id" value="<?php echo $client_role_id;?>" />
-            <input type="hidden" name="solar_client_id" id="solar_client_id" value="67>" />
+            <input type="hidden" name="solar_client_id" id="solar_client_id" value="67" />
             <!-- Hidden Inputs -->
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
