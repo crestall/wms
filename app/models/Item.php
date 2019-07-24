@@ -168,7 +168,7 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         return $db->queryData(
-            "SELECT a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, IFNULL(b.allocated,0) as allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
+            "SELECT a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
             FROM
             (
                 SELECT
@@ -190,6 +190,18 @@ class Item extends Model{
                     oi.location_id, oi.item_id
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) c
+            ON a.item_id = c.item_id AND a.location_id = c.location_id
             ORDER BY a.name"
         );
     }
