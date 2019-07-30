@@ -371,6 +371,27 @@ class reportsController extends Controller
         ]);
     }
 
+    private function clientDispatchReport()
+    {
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
+        $hidden = Config::get("HIDE_CHARGE_CLIENTS");
+        Config::setJsConfig('curPage', "client-dispatch-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDispatch.php',[
+            'page_title'        =>  'Client Dispatch Report',
+            'from'              =>  $from,
+            'to'                =>  $to,
+            'date_filter'       =>  "Dispatched",
+            'client_orders'     =>  $orders,
+            'hidden'            =>  $hidden,
+            'client_id'         =>  $client_id,
+            'client_name'       =>  $client_name
+        ]);
+    }
+
     public function isAuthorized(){
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
