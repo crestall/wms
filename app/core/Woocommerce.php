@@ -238,7 +238,7 @@ class Woocommerce{
         $this->output .= "IMPORTING SINGLE NOA SLEEP ORDER ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $this->woocommerce = new Client(
-            'https://www.noasleep.com/au-en',
+            'https://www.noahome.com/au-en',
             Config::get('NSWOOCONSUMERRKEY'),
             Config::get('NSWOOCONSUMERSECRET'),
             [
@@ -348,7 +348,7 @@ class Woocommerce{
         $this->output .= "NOA SLEEP ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $this->woocommerce = new Client(
-            'https://www.noasleep.com/au-en',
+            'https://www.noahome.com/au-en',
             Config::get('NSWOOCONSUMERRKEY'),
             Config::get('NSWOOCONSUMERSECRET'),
             [
@@ -838,7 +838,13 @@ class Woocommerce{
             "SUNRISE-K-BED-AU",
             "SUNSET-D-BED-AU",
             "SUNSET-Q-BED-AU",
-            "SUNSET-K-BED-AU"
+            "SUNSET-K-BED-AU",
+            "SUNRISE-DOUBLE-BED-AU",
+            "SUNRISE-QUEEN-BED-AU",
+            "SUNRISE-KING-BED-AU",
+            "SUNSET-DOUBLE-BED-AU",
+            "SUNSET-QUEEN-BED-AU",
+            "SUNSET-KING-BED-AU"
         );
         $orders = array();
         if(!isset($the_orders[0]))
