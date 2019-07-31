@@ -1287,7 +1287,7 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         return $db->queryRow("
-            SELECT a.location, a.location_id, a.qty, a.qc_count, (IFNULL(b.allocated,0) + IFNULL(c.allocated,0)) as allocated, b.order_id
+            SELECT a.location, a.location_id, a.qty, a.qc_count, (IFNULL(b.allocated,0) + IFNULL(c.allocated,0)) as allocated, b.order_id, c.job_id
                 FROM
                 (
                     SELECT
@@ -1311,7 +1311,7 @@ class Item extends Model{
                 LEFT JOIN
                 (
                     SELECT
-                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id, o.job_id
                     FROM
                         solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
