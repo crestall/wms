@@ -93,7 +93,7 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "
-            SELECT DISTINCT ( a.available - IFNULL(b.qty, 0) ) AS available
+            SELECT DISTINCT ( a.available - IFNULL(b.qty, 0) - IFNULL(c.allocated, 0) ) AS available
             FROM
             (
                 SELECT (il.qty - il.qc_count) AS available, il.location_id
@@ -107,6 +107,18 @@ class Item extends Model{
                 WHERE o.status_id != 4
             ) b
             ON a.location_id = b.location_id
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) c
+            ON a.location_id = c.location_id
             ORDER BY available DESC
         ";
         return ($db->queryData($q));
@@ -167,43 +179,20 @@ class Item extends Model{
             $orders_table = "orders";
             $items_table = "orders_items";
         }
-        return $db->queryData(
-            "SELECT a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
-            FROM
-            (
-                SELECT
-                    l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item
+        $q = "  SELECT
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
                 FROM
-                    items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
-                WHERE
-                    i.client_id = $client_id AND i.active = $active
-            ) a
-            LEFT JOIN
-            (
-                SELECT
-                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
-                FROM
-                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
-                WHERE
-                    o.status_id != 4
-                GROUP BY
-                    oi.location_id, oi.item_id
-            ) b
-            ON a.item_id = b.item_id AND a.location_id = b.location_id
-            LEFT JOIN
-            (
-                SELECT
-                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
-                FROM
-                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
-                WHERE
-                    o.status_id != 4
-                GROUP BY
-                    oi.location_id, oi.item_id
-            ) c
-            ON a.item_id = c.item_id AND a.location_id = c.location_id
-            ORDER BY a.name"
-        );
+                (
+                    SELECT
+                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item
+                    FROM
+                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
+                    WHERE
+                        i.client_id = $client_id AND i.active = $active
+                ) a";
+        $q .= $this->constructQuery($orders_table, $items_table);
+        $q .= "ORDER BY a.name";
+        return $db->queryData($q);
     }
 
     public function addStockToLocation($item_id, $location_id, $qty)
@@ -474,16 +463,50 @@ class Item extends Model{
     public function getAvailableInLocation($item_id, $location_id)
     {
         $db = database::openConnection();
-        $items_table = ($this->isSolarItem($item_id))? "solar_orders_items": "orders_items";
+        if($this->isSolarItem($item_id))
+        {
+            $orders_table = "solar_orders";
+            $items_table = "solar_orders_items";
+        }
+        else
+        {
+            $orders_table = "orders";
+            $items_table = "orders_items";
+        }
         $res = $db->queryRow("
-            select
-                (onhand.qty - IFNULL(SUM(allocated.qty), 0)) as available
-            from
-                (select (qty - qc_count) as qty, item_id, location_id from items_locations) onhand left join (select qty, location_id, item_id, order_id from $items_table where order_id not in(select id from orders where status_id = 4)) allocated on onhand.item_id = allocated.item_id and onhand.location_id = allocated.location_id
-            where
-                onhand.item_id = $item_id and onhand.location_id = $location_id
-            group by
-                onhand.location_id
+            SELECT
+            (a.qty - IFNULL(SUM(b.qty),0) - IFNULL(SUM(c.qty),0)) AS available
+            FROM
+                (
+                    SELECT
+                        (qty - qc_count) as qty, item_id, location_id
+                    FROM
+                        items_locations
+                    WHERE
+                        item_id = $item_id AND location_id = $location_id
+                ) a
+                LEFT JOIN
+                (
+                    SELECT
+                        qty, location_id, item_id, order_id
+                    FROM
+                        $items_table
+                    WHERE
+                        order_id NOT IN(SELECT id FROM $orders_table WHERE status_id = 4)
+                ) b
+                ON a.item_id = b.item_id AND a.location_id = b.location_id
+                LEFT JOIN
+                (
+                    SELECT
+                        qty, location_id, item_id, job_id
+                    FROM
+                        solar_service_jobs_items
+                    WHERE
+                        job_id NOT IN(SELECT id FROM solar_service_jobs WHERE status_id = 4)
+                ) c
+                ON a.item_id = c.item_id AND a.location_id = c.location_id
+            GROUP BY
+                a.location_id
         ");
 
         return $res['available'];
@@ -1211,30 +1234,42 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         return $db->queryData("
-            SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated, a.oversize
+            SELECT a.location, a.location_id, a.qty, a.qc_count, (IFNULL(b.allocated,0) + IFNULL(c.allocated,0)) as allocated, a.oversize
+            FROM
+            (
+                SELECT
+                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, cb.oversize
                 FROM
-                (
-                    SELECT
-                        l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, cb.oversize
-                    FROM
-                        items_locations il JOIN locations l ON il.location_id = l.id JOIN items i ON il.item_id = i.id LEFT JOIN clients_bays cb ON cb.location_id = il.location_id AND cb.date_removed = 0 AND cb.client_id = i.client_id
-                    WHERE
-                        il.item_id = $item_id
-                ) a
-                LEFT JOIN
-                (
-                    SELECT
-                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
-                    FROM
-                        $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
-                    WHERE
-                        o.status_id != 4
-                    GROUP BY
-                        oi.location_id, oi.item_id
-                ) b
-                ON a.item_id = b.item_id AND a.location_id = b.location_id
-                ORDER BY
-                    a.location
+                    items_locations il JOIN locations l ON il.location_id = l.id JOIN items i ON il.item_id = i.id LEFT JOIN clients_bays cb ON cb.location_id = il.location_id AND cb.date_removed = 0 AND cb.client_id = i.client_id
+                WHERE
+                    il.item_id = $item_id
+            ) a
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) b
+            ON a.item_id = b.item_id AND a.location_id = b.location_id
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) c
+            ON a.item_id = c.item_id AND a.location_id = c.location_id
+            ORDER BY
+                a.location
         ");
     }
 
@@ -1287,5 +1322,35 @@ class Item extends Model{
     {
         $item = $this->getItemById($id);
         return in_array($item['client_id'], $this->solar_client_ids);
+    }
+
+    private function constructQuery($orders_table, $items_table)
+    {
+        return "
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) b
+            ON a.item_id = b.item_id AND a.location_id = b.location_id
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) c
+            ON a.item_id = c.item_id AND a.location_id = c.location_id
+        ";
     }
 }

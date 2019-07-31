@@ -400,8 +400,16 @@
         $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
 		$mail->Subject = "3PLPlus WMS: Low Stock Warning";
 		$mail->MsgHTML($body);
-        $mail->AddAddress($email, $name);
-        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+
+        if(SITE_LIVE)
+        {
+            $mail->AddAddress($email, $name);
+            //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+        }
+        else
+        {
+            $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
+        }
 
 		if(!$mail->Send())
         {
