@@ -172,7 +172,7 @@ class Item extends Model{
                 FROM
                 (
                     SELECT
-                        *
+                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item
                     FROM
                         items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
                     WHERE
