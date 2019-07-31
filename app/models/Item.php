@@ -1308,10 +1308,11 @@ class Item extends Model{
                     GROUP BY
                         oi.location_id, oi.item_id
                 ) b
+                ON a.item_id = b.item_id AND a.location_id = b.location_id
                 LEFT JOIN
                 (
                     SELECT
-                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id, o.job_id
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id, oi.job_id
                     FROM
                         solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
