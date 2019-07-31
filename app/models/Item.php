@@ -167,7 +167,17 @@ class Item extends Model{
             $orders_table = "orders";
             $items_table = "orders_items";
         }
-        $q = "SELECT a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item";
+        $q = "  SELECT
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
+                FROM
+                (
+                    SELECT
+                        *
+                    FROM
+                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
+                    WHERE
+                        i.client_id = $client_id AND i.active = $active
+                ) a";
         $q .= $this->constructQuery($orders_table, $items_table);
         $q .= "ORDER BY a.name";
         return $db->queryData($q);
@@ -1259,15 +1269,6 @@ class Item extends Model{
     private function constructQuery($orders_table, $items_table)
     {
         return "
-          FROM
-            (
-                SELECT
-                    *
-                FROM
-                    items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
-                WHERE
-                    i.client_id = $client_id AND i.active = $active
-            ) a
             LEFT JOIN
             (
                 SELECT
