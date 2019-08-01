@@ -34,6 +34,13 @@
         }
     }
 
+    public function countItemForOrder($item_id, $order_id)
+    {
+        $db = Database::openConnection();
+        $res = $db->queryRow("SELECT SUM(qty) AS qty FROM solar_orders_items WHERE item_id = $item_id AND order_id = $order_id");
+        return (int)$res['qty'];
+    }
+
     public function getSolarAllOrders($type_id, $fulfilled)
     {
         $db = Database::openConnection();
