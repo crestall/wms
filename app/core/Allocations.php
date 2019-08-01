@@ -178,7 +178,7 @@ class Allocations{
         $oi_values = array();
         $allocations = array();
         $oi_index = 0;
-        $an_item = new Item();
+        //$an_item = new Item();
         echo "<pre>",print_r($items),"</pre>"; //die();
         $import_error = false;
         foreach($items as $oid => $order_items)
@@ -230,7 +230,7 @@ class Allocations{
                         {
                             //$total_available += $this->controller->order->countItemForOrder($id, $order_id);
                             //Add what is in this order
-                            if(in_array($ci['client_id'], $an_item->solar_client_ids))
+                            if(in_array($ci['client_id'], $this-controller-item->solar_client_ids))
                             {
                                 echo "<p>Solar item</p>";
                                 $total_available += $this->controller->solarorder->countItemForOrder($id, $order_id);
