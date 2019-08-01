@@ -224,6 +224,7 @@ class Allocations{
 
                         if(!isset($allocations[$id])) $allocations[$id] = 0;
                         $total_available = $this->controller->item->getAvailableStock($id, $this->controller->order->fulfilled_id, 'solar_orders_items') - $allocations[$id];
+                        echo "<p>Allocation: {$allocations[$id]}</p>";
                         echo "<p>Total Available: $total_available</p>"; continue;
                         if($order_id > 0)
                         {
