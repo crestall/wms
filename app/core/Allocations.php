@@ -178,6 +178,7 @@ class Allocations{
         $oi_values = array();
         $allocations = array();
         $oi_index = 0;
+        $an_item = new Item();
         echo "<pre>",print_r($items),"</pre>"; //die();
         $import_error = false;
         foreach($items as $oid => $order_items)
@@ -225,11 +226,21 @@ class Allocations{
                         if(!isset($allocations[$id])) $allocations[$id] = 0;
                         $total_available = $this->controller->item->getAvailableStock($id, $this->controller->order->fulfilled_id, 'solar_orders_items') - $allocations[$id];
                         echo "<p>Allocation: {$allocations[$id]}</p>";
-                        echo "<p>Total Available: $total_available</p>"; continue;
                         if($order_id > 0)
                         {
-                            $total_available += $this->controller->order->countItemForOrder($id, $order_id);
+                            //$total_available += $this->controller->order->countItemForOrder($id, $order_id);
+                            //Add what is in this order
+                            if(in_array($ci['client_id'], $an_item->solar_client_ids))
+                            {
+                                $total_available += $this->controller->solarorder->countItemForOrder($id, $order_id);
+                                $total_available += $this->controller->solarservicejob->countItemForJob($id, $order_id);
+                            }
+                            else
+                            {
+                                $total_available += $this->controller->order->countItemForOrder($id, $order_id);
+                            }
                         }
+                        echo "<p>Total Available: $total_available</p>"; continue;
                         if( $total_available < $pick_count)
                         {
                             $item_error = true;

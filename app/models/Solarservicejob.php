@@ -233,6 +233,13 @@
         return true;
     }
 
+    public function countItemForJob($item_id, $job_id)
+    {
+        $db = Database::openConnection();
+        $res = $db->queryRow("SELECT SUM(qty) AS qty FROM solar_service_jobs_items WHERE item_id = $item_id AND job_id = $job_id");
+        return (int)$res['qty'];
+    }
+
   }
 
 ?>
