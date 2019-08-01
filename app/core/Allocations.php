@@ -179,7 +179,7 @@ class Allocations{
         $allocations = array();
         $oi_index = 0;
         //$an_item = new Item();
-        echo "<pre>",print_r($items),"</pre>"; //die();
+        //echo "<pre>",print_r($items),"</pre>"; //die();
         $import_error = false;
         foreach($items as $oid => $order_items)
         {
@@ -216,7 +216,7 @@ class Allocations{
 
                     foreach($collection_items as $ci)
                     {
-                        echo "<pre>",print_r($collection_items),"</pre>"; //continue;
+                        //echo "<pre>",print_r($collection_items),"</pre>"; //continue;
                         $pick_count = $left = $ci['number'] * $details['qty'];
                         $item_name = $ci['name'];
                         $id = $ci['id'];
@@ -225,14 +225,14 @@ class Allocations{
 
                         if(!isset($allocations[$id])) $allocations[$id] = 0;
                         $total_available = $this->controller->item->getAvailableStock($id, $this->controller->order->fulfilled_id, 'solar_orders_items') - $allocations[$id];
-                        echo "<p>Allocation: {$allocations[$id]}</p>";
+                        //echo "<p>Allocation: {$allocations[$id]}</p>";
                         if($order_id > 0)
                         {
                             //$total_available += $this->controller->order->countItemForOrder($id, $order_id);
                             //Add what is in this order
                             if(in_array($ci['client_id'], $this->controller->item->solar_client_ids))
                             {
-                                echo "<p>Solar item</p>";
+                                //echo "<p>Solar item</p>";
                                 $total_available += $this->controller->solarorder->countItemForOrder($id, $order_id);
                                 $total_available += $this->controller->solarservicejob->countItemForJob($id, $order_id);
                             }
@@ -241,7 +241,7 @@ class Allocations{
                                 $total_available += $this->controller->order->countItemForOrder($id, $order_id);
                             }
                         }
-                        echo "<p>Total Available: $total_available</p>"; continue;
+                        //echo "<p>Total Available: $total_available</p>"; continue;
                         if( $total_available < $pick_count)
                         {
                             $item_error = true;
@@ -342,7 +342,7 @@ class Allocations{
 
                 }
             }//endforeach items
-            die();
+            //die();
             $oi_values[$oid] = $values;
         }//endforeach order
         //echo "<pre>",print_r($oi_values),"</pre>";  die();
