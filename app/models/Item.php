@@ -681,12 +681,12 @@ class Item extends Model{
         //$query = "SELECT * FROM items WHERE active = 1 AND (name LIKE :term1 OR sku LIKE :term2) AND client_id = $client_id ORDER BY name";
 
         $query = "
-            SELECT a.location, a.location_id, a.qty, a.qc_count, SUM(a.qty - IFNULL(b.allocated,0) - a.qc_count) as available, a.name, a.sku, a.palletized, a.per_pallet, a.item_id,
+            SELECT a.location, a.location_id, a.qty, a.qc_count, SUM(a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) as available, a.name, a.sku, a.palletized, a.per_pallet, a.item_id,
             GROUP_CONCAT(
-                IF( (a.qty - IFNULL(b.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - a.qc_count), NULL ) ORDER BY (a.qty - IFNULL(b.allocated,0) - a.qc_count) DESC
+                IF( (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count), NULL ) ORDER BY (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) DESC
             ) AS choices,
             GROUP_CONCAT(
-                DISTINCT IF( (a.qty - IFNULL(b.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - a.qc_count), NULL ) ORDER BY (a.qty - IFNULL(b.allocated,0) - a.qc_count) DESC
+                DISTINCT IF( (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count), NULL ) ORDER BY (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) DESC
             ) AS select_choices
             FROM
             (
@@ -709,6 +709,18 @@ class Item extends Model{
                     oi.location_id, oi.item_id
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) b
+            ON a.item_id = c.item_id AND a.location_id = c.location_id
             group by a.item_id
             ORDER BY name
         ";
@@ -970,6 +982,18 @@ class Item extends Model{
                     oi.location_id, oi.item_id
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) b
+            ON a.item_id = c.item_id AND a.location_id = c.location_id
             ORDER BY available DESC
     	");
         return $locations;
@@ -1023,7 +1047,7 @@ class Item extends Model{
         {
             $locations = $db->queryData("
                 SELECT
-                    a.location, a.location_id, (a.in_location - IFNULL(b.allocated,0)) as available, IF(a.location_id = {$item['preferred_pick_location_id']}, 1, 0) as preferred
+                    a.location, a.location_id, (a.in_location - IFNULL(b.allocated,0) - IFNULL(c.allocated,0)) as available, IF(a.location_id = {$item['preferred_pick_location_id']}, 1, 0) as preferred
                 FROM
                 (
                     SELECT
@@ -1045,6 +1069,18 @@ class Item extends Model{
                         oi.location_id, oi.item_id
                 ) b
                 ON a.item_id = b.item_id AND a.location_id = b.location_id
+                LEFT JOIN
+                (
+                    SELECT
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                    FROM
+                        solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
+                    WHERE
+                        o.status_id != 4 AND o.id != $order_id
+                    GROUP BY
+                        oi.location_id, oi.item_id
+                ) c
+                ON a.item_id = c.item_id AND a.location_id = c.location_id
                 ORDER BY
                     a.location_id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(a.location, '.', -2), SUBSTRING_INDEX(a.location, '.', -3)
         	");
@@ -1287,7 +1323,7 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         return $db->queryRow("
-            SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated, b.order_id
+            SELECT a.location, a.location_id, a.qty, a.qc_count, (IFNULL(b.allocated,0) + IFNULL(c.allocated,0)) as allocated, b.order_id, c.job_id
                 FROM
                 (
                     SELECT
@@ -1309,6 +1345,18 @@ class Item extends Model{
                         oi.location_id, oi.item_id
                 ) b
                 ON a.item_id = b.item_id AND a.location_id = b.location_id
+                LEFT JOIN
+                (
+                    SELECT
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id, oi.job_id
+                    FROM
+                        solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
+                    WHERE
+                        o.status_id != 4
+                    GROUP BY
+                        oi.location_id, oi.item_id
+                ) c
+                ON a.item_id = c.item_id AND a.location_id = c.location_id
         ");
     }
 
