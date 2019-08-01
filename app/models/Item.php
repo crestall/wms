@@ -719,7 +719,7 @@ class Item extends Model{
                     o.status_id != 4
                 GROUP BY
                     oi.location_id, oi.item_id
-            ) b
+            ) c
             ON a.item_id = c.item_id AND a.location_id = c.location_id
             group by a.item_id
             ORDER BY name
@@ -992,7 +992,7 @@ class Item extends Model{
                     o.status_id != 4
                 GROUP BY
                     oi.location_id, oi.item_id
-            ) b
+            ) c
             ON a.item_id = c.item_id AND a.location_id = c.location_id
             ORDER BY available DESC
     	");
