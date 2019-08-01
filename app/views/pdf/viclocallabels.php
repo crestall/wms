@@ -50,7 +50,7 @@ foreach($orders_ids as $id):
                 <td><?php echo $delivery_address;?></td>
             </tr>
         </table>
-        <?php if($this_order < count($orders_ids)):?>
+        <?php if($this_order <= count($orders_ids)):?>
             <pagebreak />
         <?php endif;?>
         <?php
