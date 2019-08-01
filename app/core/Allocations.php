@@ -232,6 +232,7 @@ class Allocations{
                             //Add what is in this order
                             if(in_array($ci['client_id'], $an_item->solar_client_ids))
                             {
+                                echo "<p>Solar item</p>";
                                 $total_available += $this->controller->solarorder->countItemForOrder($id, $order_id);
                                 $total_available += $this->controller->solarservicejob->countItemForJob($id, $order_id);
                             }
