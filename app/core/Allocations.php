@@ -178,7 +178,7 @@ class Allocations{
         $oi_values = array();
         $allocations = array();
         $oi_index = 0;
-        echo "<pre>",print_r($items),"</pre>"; die();
+        //echo "<pre>",print_r($items),"</pre>"; die();
         $import_error = false;
         foreach($items as $oid => $order_items)
         {
@@ -215,7 +215,7 @@ class Allocations{
 
                     foreach($collection_items as $ci)
                     {
-                        //echo "<pre>",print_r($collection_items),"</pre>";continue;
+                        echo "<pre>",print_r($collection_items),"</pre>"; die();
                         $pick_count = $left = $ci['number'] * $details['qty'];
                         $item_name = $ci['name'];
                         $id = $ci['id'];
