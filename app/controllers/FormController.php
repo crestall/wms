@@ -513,7 +513,7 @@ class FormController extends Controller {
             );
         }
 
-        echo "Items<pre>",print_r($items),"</pre>"; die();
+        echo "Items<pre>",print_r($items),"</pre>"; //die();
         $orders_items = array();
         foreach($items as $item)
         {
