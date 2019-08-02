@@ -193,7 +193,7 @@ class SolarjobsController extends Controller
         ]);
     }
 
-    public function addTljJob()
+    public function addTljInstall()
     {
         //render the page
         Config::setJsConfig('curPage', "add-tlj-job");
