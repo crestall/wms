@@ -493,7 +493,7 @@ class FormController extends Controller {
 
     public function procAddTljOrder()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "POST<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -504,15 +504,7 @@ class FormController extends Controller {
             }
         }
         $items = array();
-        $items[] = array(
-            'id'    => $panel_id,
-            'qty'   => $panel_qty
-        );
-        $items[] = array(
-            'id'    => $inverter_id,
-            'qty'   => $inverter_qty
-        );
-        /*
+        /* */
         foreach($this->request->data['items'] as $i)
         {
             $items[] = array(
@@ -520,13 +512,8 @@ class FormController extends Controller {
                 'qty'   => $i['qty']
             );
         }
-        */
-        $items = array_merge($items, $this->request->data['consumables']);
-        if( isset($this->request->data['items'][0]['qty']) )
-        {
-            $items = array_merge($items, $this->request->data['items']);
-        }
-        //echo "<pre>",print_r($items),"</pre>"; //die();
+
+        echo "Items<pre>",print_r($items),"</pre>"; die();
         $orders_items = array();
         foreach($items as $item)
         {
