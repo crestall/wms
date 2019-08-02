@@ -56,7 +56,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
             <?php include(Config::get('VIEWS_PATH')."forms/item_adder.php");?>
             <input type="hidden" name="selected_items" id="selected_items" />
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id; ?>" />
+            <input type="hidden" name="client_id" id="client_id" value="67" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
