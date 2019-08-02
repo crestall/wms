@@ -65,6 +65,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="67" />
+                <input type="hidden" name="type_id" id="type_id" value="<?php echo $type_id;?>" /> 
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
