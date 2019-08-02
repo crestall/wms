@@ -493,7 +493,7 @@ class FormController extends Controller {
 
     public function procAddTljOrder()
     {
-        //echo "POST<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "POST<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
