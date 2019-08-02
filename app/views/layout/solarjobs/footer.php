@@ -305,6 +305,11 @@
                         });
                     }
                 },
+                'add-solargain-job' : {
+                    init: function(){
+                        actions.common.init();
+                    }
+                },
                 'add-tlj-service-job' : {
                     init: function(){
                         actions.common.init();
