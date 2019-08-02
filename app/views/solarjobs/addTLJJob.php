@@ -61,11 +61,39 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 </div>
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Panel</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control required item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
+                        <?php echo Form::displayError('panel');?>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control required number" name="panel_qty" id="panel_qty" value="<?php echo Form::value('panel_qty');?>" />
+                            <?php echo Form::displayError('panel_qty');?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Inverter</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control required item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
+                        <?php echo Form::displayError('inverter');?>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control required number" name="inverter_qty" id="inverter_qty" value="<?php echo $inverter_qty;?>" />
+                            <?php echo Form::displayError('inverter_qty');?>
+                        </div>
+                    </div>
+                </div>
                 <?php include(Config::get('VIEWS_PATH')."forms/item_adder.php");?>
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="67" />
-                <input type="hidden" name="type_id" id="type_id" value="<?php echo $type_id;?>" /> 
+                <input type="hidden" name="type_id" id="type_id" value="<?php echo $type_id;?>" />
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
