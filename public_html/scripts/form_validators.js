@@ -469,6 +469,19 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
+    $('#add-tlj-order').validate({
+        rules:{
+            team_id:{
+                notNone:true
+            }
+        },
+        messages:{
+            team_id:{
+                notNone: "Please select a team"
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
     $('#add-service-job').validate({
         rules:{
             team_id:{
