@@ -180,7 +180,7 @@ class SolarjobsController extends Controller
         ]);
     }
 
-    public function addOriginJob()
+    public function addOriginInstall()
     {
         //render the page
         Config::setJsConfig('curPage', "add-origin-job");
