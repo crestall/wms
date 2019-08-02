@@ -531,7 +531,7 @@ class FormController extends Controller {
         $the_items = array(
             0 => $orders_items
         );
-        echo "The items<pre>",print_r($the_items),"</pre>"; die();
+        echo "The items<pre>",print_r($the_items),"</pre>"; //die();
         $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
         foreach($oitems[0] as $item)//there is only one order
         {
@@ -547,7 +547,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($oitems),"</pre>"; die();
+            echo "oitems<pre>",print_r($oitems),"</pre>"; die();
             //all good, add details
             //echo "<pre>oitems",print_r($oitems),"</pre>";die();
             //echo "<pre>",print_r($post_data),"</pre>"; die();
