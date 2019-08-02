@@ -20,7 +20,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
 <?php echo Form::displayError('general');?>
 <div class="row">
     <div class="col-lg-12">
-        <form id="add-solargain-order" method="post" action="/form/procAddTljOrder" autocomplete="off">
+        <form id="add-tlj-order" method="post" action="/form/procAddTljOrder" autocomplete="off">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Team</label>
                 <div class="col-md-4">

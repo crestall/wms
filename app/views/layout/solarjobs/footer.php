@@ -321,11 +321,27 @@
                 'add-tlj-service-job' : {
                     init: function(){
                         actions.common.init();
+
                     }
                 },
                 'add-tlj-job' : {
                     init: function(){
                         actions.common.init();
+                        actions['item-searcher'].init();
+                        actions.common['add-item']();
+                        itemsUpdater.itemDelete();
+                        datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        $("form#add-tlj-order").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Install...</h2></div>' });
+                            }
+                        });
+                        $('select#team_id, select#job_type, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
+                        });
                     }
                 },
                 'add-origin-job': {
