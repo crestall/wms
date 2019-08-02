@@ -493,7 +493,7 @@ class FormController extends Controller {
 
     public function procAddTljOrder()
     {
-        echo "POST<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "POST<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -513,7 +513,7 @@ class FormController extends Controller {
             );
         }
 
-        echo "Items<pre>",print_r($items),"</pre>"; //die();
+        //echo "Items<pre>",print_r($items),"</pre>"; //die();
         $orders_items = array();
         foreach($items as $item)
         {
@@ -531,7 +531,7 @@ class FormController extends Controller {
         $the_items = array(
             0 => $orders_items
         );
-        echo "The items<pre>",print_r($the_items),"</pre>"; //die();
+        //echo "The items<pre>",print_r($the_items),"</pre>"; //die();
         $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
         foreach($oitems[0] as $item)//there is only one order
         {
@@ -547,14 +547,14 @@ class FormController extends Controller {
         }
         else
         {
-            echo "oitems<pre>",print_r($oitems),"</pre>"; die();
+            //echo "oitems<pre>",print_r($oitems),"</pre>"; die();
             //all good, add details
             //echo "<pre>oitems",print_r($oitems),"</pre>";die();
             //echo "<pre>",print_r($post_data),"</pre>"; die();
             $order_id = $this->solarorder->addOrder($post_data, $oitems);
             Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
         }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-origin-install");
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-tlj-install");
     }
 
     public function procRegisterNewStock()
