@@ -109,8 +109,8 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
                                 var urls = {
                                     1 : "/solar-jobs/add-origin-install",
-                                    2 : "/solar-jobs/add-tlj-job",
-                                    3 : "/solar-jobs/add-solargain-job"
+                                    2 : "/solar-jobs/add-tlj-install",
+                                    3 : "/solar-jobs/add-solargain-install"
                                 }
                                 window.location.href = urls[$(this).val()];
                             }
