@@ -167,9 +167,23 @@ var itemsUpdater = {
         });
     },
     updateValidation: function(){
+        /*
         $( "input.item_qty, select.pallet_qty" ).each(function(i,e){
             $(this).rules( "remove");
         });
+        */
+        if( $("input.item_qty").length ){
+             $( "input.item_qty" ).each(function(i,e){
+                $(this).rules( "remove");
+            });
+        };
+        if( $("input.pallet_qty").length ){
+             $( "input.pallet_qty" ).each(function(i,e){
+                $(this).rules( "remove");
+            });
+        };
+
+
         $.validator.addClassRules('item_qty',{
             required: function(el){
                 var $holder = $(el).closest('div.item_holder');
@@ -609,7 +623,7 @@ var autoCompleter = {
         element.autocomplete({
             source: function(req, response){
                 var url;
-                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&solar_type_id="+$('#order_type_id').val(); 
+                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&solar_type_id="+$('#order_type_id').val();
                 //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);
