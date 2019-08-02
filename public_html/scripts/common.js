@@ -167,23 +167,9 @@ var itemsUpdater = {
         });
     },
     updateValidation: function(){
-        /*
         $( "input.item_qty, select.pallet_qty" ).each(function(i,e){
             $(this).rules( "remove");
         });
-        */
-        if( $("input.item_qty").length ){
-             $( "input.item_qty" ).each(function(i,e){
-                $(this).rules( "remove");
-            });
-        };
-        if( $("input.pallet_qty").length ){
-             $( "input.pallet_qty" ).each(function(i,e){
-                $(this).rules( "remove");
-            });
-        };
-
-
         $.validator.addClassRules('item_qty',{
             required: function(el){
                 var $holder = $(el).closest('div.item_holder');
