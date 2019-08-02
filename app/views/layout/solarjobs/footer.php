@@ -309,6 +309,12 @@
                 'add-solargain-job' : {
                     init: function(){
                         actions.common.init();
+                        actions['item-searcher'].init();
+                        actions.common['add-item']();
+                        itemsUpdater.itemDelete();
+                        datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                     }
                 },
                 'add-tlj-service-job' : {
