@@ -179,7 +179,7 @@
                                 qty_html = "<div class='col-sm-4'><input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' /></div>";
                                 qty_html += "<div class='col-sm-8'><select class='form-control selectpicker pallet_qty' name='items["+item_count+"][pallet_qty]'><option value='0'>Whole Pallet Qty</option>";
                                 pallet_vals.forEach(function(pallet_val) {
-                                    //console.log(pallet_val);
+                                    console.log(pallet_val);
                                     qty_html += "<option>"+pallet_val+"</option>";
                                 });
                                 qty_html += "</select></div>";
@@ -214,6 +214,7 @@
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
                                 inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
                             }
+                            console.log(inst);
                             $holder.find('div.qty-holder').html(qty_html).find('input').focus();
                             $holder.find('input.item_id').val(ui.item.item_id);
                             $holder.find('div.qty-location').html(inst);
