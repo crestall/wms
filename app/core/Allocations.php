@@ -216,7 +216,7 @@ class Allocations{
 
                     foreach($collection_items as $ci)
                     {
-                        //echo "<pre>",print_r($collection_items),"</pre>"; //continue;
+                        echo "<pre>",print_r($collection_items),"</pre>"; //continue;
                         $pick_count = $left = $ci['number'] * $details['qty'];
                         $item_name = $ci['name'];
                         $id = $ci['id'];
@@ -225,7 +225,7 @@ class Allocations{
 
                         if(!isset($allocations[$id])) $allocations[$id] = 0;
                         $total_available = $this->controller->item->getAvailableStock($id, $this->controller->order->fulfilled_id, 'solar_orders_items') - $allocations[$id];
-                        //echo "<p>Allocation: {$allocations[$id]}</p>";
+                        echo "<p>Allocation: {$allocations[$id]}</p>";
                         if($order_id > 0)
                         {
                             //$total_available += $this->controller->order->countItemForOrder($id, $order_id);
@@ -241,7 +241,7 @@ class Allocations{
                                 $total_available += $this->controller->order->countItemForOrder($id, $order_id);
                             }
                         }
-                        //echo "<p>Total Available: $total_available</p>"; continue;
+                        echo "<p>Total Available: $total_available</p>"; continue;
                         if( $total_available < $pick_count)
                         {
                             $item_error = true;
@@ -281,7 +281,7 @@ class Allocations{
                             {
                                 //individual items
                                 $locations = $this->controller->item->getAvailableLocationsForItem($id, false, $order_id);
-                                //echo "Individual Locations for $id : $item_name<pre>",print_r($locations),"</pre>";//die();
+                                echo "Individual Locations for $id : $item_name<pre>",print_r($locations),"</pre>";//die();
                                 //continue;
                                 foreach($locations as $l)
                                 {
@@ -317,7 +317,7 @@ class Allocations{
                             }
 							//die();
                         }
-						//die();
+						die();
                         if(empty($f_locations))
                         {
                             $import_error = true;
