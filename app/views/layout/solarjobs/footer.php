@@ -12,6 +12,18 @@
                             e.preventDefault();
                             shippingQuote.getQuotes($(this).data('orderid'), $(this).data('destination'));
                         });
+                        $("#type_selector").change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
+                                var urls = {
+                                    1 : "/solar-jobs/add-origin-install",
+                                    2 : "/solar-jobs/add-tlj-install",
+                                    3 : "/solar-jobs/add-solargain-install"
+                                }
+                                window.location.href = urls[$(this).val()];
+                            }
+                        });
                     },
                     'add-item': function(){
                         $("a.add").click(function(e){
@@ -103,18 +115,7 @@
                 },
                 'add-solar-install': {
                     init: function(){
-                        $("#type_selector").change(function(e){
-                            if($(this).val() > 0)
-                            {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Finding Correct Form...</h2></div>' });
-                                var urls = {
-                                    1 : "/solar-jobs/add-origin-job",
-                                    2 : "/solar-jobs/add-tlj-job",
-                                    3 : "/solar-jobs/add-solargain-job"
-                                }
-                                window.location.href = urls[$(this).val()];
-                            }
-                        });
+                        actions.common.init();
                     }
                 },
                 'add-service-job': {
@@ -178,7 +179,7 @@
                                 qty_html = "<div class='col-sm-4'><input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' /></div>";
                                 qty_html += "<div class='col-sm-8'><select class='form-control selectpicker pallet_qty' name='items["+item_count+"][pallet_qty]'><option value='0'>Whole Pallet Qty</option>";
                                 pallet_vals.forEach(function(pallet_val) {
-                                    //console.log(pallet_val);
+                                    console.log(pallet_val);
                                     qty_html += "<option>"+pallet_val+"</option>";
                                 });
                                 qty_html += "</select></div>";
@@ -213,6 +214,7 @@
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
                                 inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
                             }
+                            console.log(inst);
                             $holder.find('div.qty-holder').html(qty_html).find('input').focus();
                             $holder.find('input.item_id').val(ui.item.item_id);
                             $holder.find('div.qty-location').html(inst);
@@ -305,14 +307,69 @@
                         });
                     }
                 },
+                'add-solargain-job' : {
+                    init: function(){
+                        actions.common.init();
+                        actions['item-searcher'].init();
+                        actions.common['add-item']();
+                        itemsUpdater.itemDelete();
+                        datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
+                    }
+                },
                 'add-tlj-service-job' : {
                     init: function(){
                         actions.common.init();
+
                     }
                 },
                 'add-tlj-job' : {
                     init: function(){
                         actions.common.init();
+                        actions['item-searcher'].init();
+                        actions.common['add-item']();
+                        itemsUpdater.itemDelete();
+                        datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        $("form#add-tlj-order").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Install...</h2></div>' });
+                            }
+                        });
+                        $('select#team_id, select#job_type, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
+                        });
+                        $("input.tlj-item-searcher").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.itemAutoComplete($(this), selectCallback, changeCallback);
+                        })
+                        function selectCallback(event, ui)
+                        {
+                            var $this = event.target;
+                            if($this.id == "panel")
+                            {
+                                $("#panel_id").val(ui.item.item_id)
+                            }
+                            else if($this.id == "inverter")
+                            {
+                                $("#inverter_id").val(ui.item.item_id)
+                            }
+                            return false;
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                        }
                     }
                 },
                 'add-origin-job': {

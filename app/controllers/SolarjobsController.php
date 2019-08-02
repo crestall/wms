@@ -180,7 +180,7 @@ class SolarjobsController extends Controller
         ]);
     }
 
-    public function addOriginJob()
+    public function addOriginInstall()
     {
         //render the page
         Config::setJsConfig('curPage', "add-origin-job");
@@ -193,15 +193,26 @@ class SolarjobsController extends Controller
         ]);
     }
 
-    public function addTljJob()
+    public function addTljInstall()
     {
         //render the page
         Config::setJsConfig('curPage', "add-tlj-job");
-        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addtljorder.php");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addTLJJob.php', [
             'page_title'    =>  "Add TLJ Services Install",
             'client_id'     =>  67,
-            'order_type_id' =>  2,
+            'order_type_id' =>  2
+        ]);
+    }
+
+    public function addSolargainInstall()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "add-solargain-job");
+        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addsolargainorder.php");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolargainJob.php', [
+            'page_title'    =>  "Add Solargain Install",
+            'client_id'     =>  67,
+            'order_type_id' =>  3,
             'form'          =>  $form
         ]);
     }
