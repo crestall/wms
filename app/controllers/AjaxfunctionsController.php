@@ -774,6 +774,12 @@ class ajaxfunctionsController extends Controller
         $this->solarorder->cancelOrders($this->request->data['orderids']);
     }
 
+    public function cancelSwatchrequests()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->swatch->cancelRequests($this->request->data['orderids']);
+    }
+
     public function cancelServiceorders()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();

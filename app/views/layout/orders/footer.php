@@ -46,8 +46,11 @@
                              })
                         });
                     },
-                    'cancel-orders': function(solar){
+                    'cancel-orders': function(solar, swatch){
                         if(solar === undefined) {
+                            solar = false;
+                        }
+                        if(swatch === undefined) {
                             solar = false;
                         }
                         $('a.cancel-order').click(function(e){
@@ -76,6 +79,12 @@
                                         if(solar)
                                         {
                                             $.post('/ajaxfunctions/cancel-solarorders', data, function(d){
+                                                location.reload();
+                                            });
+                                        }
+                                        else if(swatch)
+                                        {
+                                            $.post('/ajaxfunctions/cancel-swatchrequests', data, function(d){
                                                 location.reload();
                                             });
                                         }
@@ -190,7 +199,8 @@
                 },
                 'manage-swatches': {
                     init: function(){
-
+                        actions.common.init();
+                        actions.common['cancel-orders'](false, true);
                     }
                 },
                 'order-edit': {

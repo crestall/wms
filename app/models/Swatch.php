@@ -69,4 +69,13 @@ class Swatch extends Model{
         return ($db->queryData($q, $array));
     }
 
+    public function cancelRequests($ids)
+    {
+        $db = Database::openConnection();
+        foreach($ids as $id)
+        {
+            $db->deleteQuery('swatches', $id);
+        }
+    }
+
 }
