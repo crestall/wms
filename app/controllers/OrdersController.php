@@ -19,7 +19,7 @@ class OrdersController extends Controller
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
         $client_id = 59;
-        $client_name = "NOA Home";
+        $client_name = "NOA Sleep";
         $state = "";
         $posted = 0;
         $ff = "Not Posted";
