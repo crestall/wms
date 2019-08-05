@@ -140,7 +140,7 @@ class FormController extends Controller {
         {
             if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
             {
-                if($this->$item->getAvailableStock($swatch_id, 4) <= 0)
+                if($this->item->getAvailableStock($swatch_id, 4) <= 0)
                 {
                     $_SESSION['errorfeedback'] = "<h2><i class='far fa-times-circle'></i>Swatches cannot be uploaded</h2><p>There are not enough swatches left</p>";
                     return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
