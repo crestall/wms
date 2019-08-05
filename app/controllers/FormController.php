@@ -127,6 +127,7 @@ class FormController extends Controller {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         //echo "Files<pre>",print_r($_FILES),"</pre>";die();
         $swatch_id = 12521;
+        $office_id = 1336;
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -221,13 +222,11 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>The customer email is not valid</p>";
                     }
-                    $request['items'][] = array(
-                        'id'            => $swatch_id,
-                        'qty'           => 1,
-                        'whole_pallet'  => false
+                    $request['items'] = array(
+                        'id'       => $swatch_id,
+                        'qty'      => 1,
+                        'location' => $office_id
                     );
-                    $orders_items[] = $request['items'] ;
-                    $request['order_items'] = $this->allocations->createOrderItemsArray($orders_items);
                     $requests[] = $request;
                 }
 
