@@ -126,6 +126,7 @@ class FormController extends Controller {
     {
         echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         //echo "Files<pre>",print_r($_FILES),"</pre>";die();
+        $swatch_id = 12521;
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -139,15 +140,63 @@ class FormController extends Controller {
         {
             if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
             {
+                if($item->getAvailableStock($swatch_id, 4) <= 0)
+                {
+                    $_SESSION['errorfeedback'] = "<h2><i class='far fa-times-circle'></i>Swatches cannot be uploaded</h2><p>There are not enough swatches left</p>";
+                    return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
+                }
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                echo "<pre>",print_r($csv_array),"</pre>"; die();
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
                 Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Swatches have been uploaded</h2><p>You should be able to see them below</p>");
                 $requests = array();
                 foreach($csv_array as $r)
                 {
-                    
+                    $request = array(
+                        'name'          => $r[0],
+                        'client_id'     => $client_id,
+                        'email'         => $r[6],
+                        'address'       => $r[1],
+                        'suburb'        => $r[2],
+                        'state'         => $r[3],
+                        'postcode'      => $r[5],
+                        'date'          => time(),
+                        'errors'        => 0,
+                        'error_string'  => ''
+                    );
+                    if( strlen($r['1']) > 40 )
+                    {
+                        $request['errors'] = 1;
+                        $request['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
+                    }
+                    $aResponse = $this->controller->BigBottleEparcel->ValidateSuburb($r['2'], $r['3'], str_pad($r['5'],4,'0',STR_PAD_LEFT));
+
+                    //echo "<pre>",print_r($aResponse),"</pre>";
+                    if(isset($aResponse['errors']))
+                    {
+                        $request['errors'] = 1;
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $request['error_string'] .= "<p>{$e['message']}</p>";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $request['errors'] = 1;
+                        $request['error_string'] .= "<p>Postcode does not match suburb or state</p>";
+                    }
+                    if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $r['1']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $r['1'])))
+                    {
+                        $request['errors'] = 1;
+                        $request['error_string'] .= "<p>The address is missing either a number or a word</p>";
+                    }
+                    if( $this->dataSubbed($r[6]) && !filter_var($r[6], FILTER_VALIDATE_EMAIL) )
+                    {
+                        $request['errors'] = 1;
+                        $request['error_string'] = "<p>The customer email is not valid</p>";
+                    }
                 }
+                $requests[] = $request;
             }
             else
             {
@@ -164,7 +213,7 @@ class FormController extends Controller {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-csv-upload");
+        return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
     }
 
     public function procEditServiceJob()
