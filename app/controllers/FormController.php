@@ -189,6 +189,7 @@ class FormController extends Controller {
                         'errors'        => 0,
                         'error_string'  => ''
                     );
+                    $orders_items = array();
                     if( strlen($request['address']) > 40 )
                     {
                         $request['errors'] = 1;
@@ -225,8 +226,8 @@ class FormController extends Controller {
                         'qty'           => 1,
                         'whole_pallet'  => false
                     );
-                    $orders_items[0] = $request['items'] ;
-                    $request['order_items'] = $this->allocations->createOrderItemsArray($orders_items[0]);
+                    $orders_items[] = $request['items'] ;
+                    $request['order_items'] = $this->allocations->createOrderItemsArray($orders_items);
                     $requests[] = $request;
                 }
 
