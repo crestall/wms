@@ -220,13 +220,13 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>The customer email is not valid</p>";
                     }
-                    $request['items'][0] = array(
+                    $request['items'][] = array(
                         'id'            => $swatch_id,
                         'qty'           => 1,
                         'whole_pallet'  => false
                     );
-                    $orders_items[] = $request['items'] ;
-                    $request['order_items'] = $this->allocations->createOrderItemsArray($orders_items);
+                    $orders_items[0] = $request['items'] ;
+                    $request['order_items'] = $this->allocations->createOrderItemsArray($orders_items[0]);
                     $requests[] = $request;
                 }
 
