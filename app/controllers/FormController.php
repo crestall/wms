@@ -225,9 +225,11 @@ class FormController extends Controller {
                         'qty'           => 1,
                         'whole_pallet'  => false
                     );
+                    $orders_items[] = $request['items'] ;
+                    $request['order_items'] = $this->allocations->createOrderItemsArray($orders_items);
                     $requests[] = $request;
                 }
-
+                echo "<pre>",print_r($requests),"</pre>"; die(); 
             }
             else
             {
@@ -244,7 +246,7 @@ class FormController extends Controller {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
-        echo "<pre>",print_r($requests),"</pre>"; die();
+
         return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
     }
 
