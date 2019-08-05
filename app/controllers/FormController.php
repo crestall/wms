@@ -153,23 +153,23 @@ class FormController extends Controller {
                 foreach($csv_array as $r)
                 {
                     $request = array(
-                        'name'          => $r[0],
+                        'name'          => trim($r[0]),
                         'client_id'     => $client_id,
-                        'email'         => $r[6],
-                        'address'       => $r[1],
-                        'suburb'        => $r[2],
-                        'state'         => $r[3],
-                        'postcode'      => $r[5],
+                        'email'         => trim($r[6]),
+                        'address'       => trim($r[1]),
+                        'suburb'        => trim($r[2]),
+                        'state'         => trim($r[3]),
+                        'postcode'      => trim($r[5]),
                         'date'          => time(),
                         'errors'        => 0,
                         'error_string'  => ''
                     );
-                    if( strlen($r['1']) > 40 )
+                    if( strlen($request['address']) > 40 )
                     {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
                     }
-                    $aResponse = $this->BigBottleEparcel->ValidateSuburb($r['2'], $r['3'], str_pad($r['5'],4,'0',STR_PAD_LEFT));
+                    $aResponse = $this->BigBottleEparcel->ValidateSuburb($request['suburb'], $request['state'], str_pad($request['postcode'],4,'0',STR_PAD_LEFT));
 
                     //echo "<pre>",print_r($aResponse),"</pre>";
                     if(isset($aResponse['errors']))
@@ -185,7 +185,7 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>Postcode does not match suburb or state</p>";
                     }
-                    if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $r['1']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $r['1'])))
+                    if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $request['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $request['address'])))
                     {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>The address is missing either a number or a word</p>";
@@ -214,7 +214,7 @@ class FormController extends Controller {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
-        echo "<pre>",print_r($requests),"</pre>"; die(); 
+        echo "<pre>",print_r($requests),"</pre>"; die();
         return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
     }
 
