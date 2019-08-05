@@ -29,11 +29,7 @@ class Swatch extends Model{
     {
         $db = Database::openConnection();
         $array = array();
-        $posted_clause = "";
-        if($posted > 0)
-        {
-            $posted_clause = "WHERE shipped = $posted";
-        }
+        $posted_clause = "WHERE shipped = $posted";
         $q = "SELECT * FROM {$this->table} $posted_clause";
         if($client_id > 0)
         {
