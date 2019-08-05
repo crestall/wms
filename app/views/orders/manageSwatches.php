@@ -133,10 +133,15 @@
                         $address_string .= " ".$sw['postcode']."<br/>";
                         $address_string .= " ".$sw['country'];
                         $errors = ( $sw['errors'] == 1 ) ;
+                        $row_class = "class='filterable'";
+                        if($errors)
+                        {
+                            $row_class = "class='filterable order_error'";
+                        }
                         /*
                         */
                         ?>
-        	        	<tr>
+        	        	<tr <?php echo $row_class;?>>
                             <td class="number" data-label="Count"><?php echo $c;?></td>
         					<td data-label="Client Name"><?php echo $client_name;?></td>
         	                <td class="filterable" data-label="Ship To"><?php echo $ship_to;?></td>
