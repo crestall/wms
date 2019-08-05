@@ -142,18 +142,11 @@ class FormController extends Controller {
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
                 echo "<pre>",print_r($csv_array),"</pre>"; die();
-                Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders have been fulfilled</h2>");
+                Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Swatches have been uploaded</h2><p>You should be able to see them below</p>");
+                $requests = array();
                 foreach($csv_array as $r)
                 {
-                    $d_array = explode("|", $r[24]);
-                    //echo "<pre>",print_r($d_array),"</pre>";
-                    $order_number = trim($d_array[2]);
-                    $od = $this->order->getOrderByOrderNumber($order_number);
-                    //echo "<pre>",print_r($od),"</pre>";
-                    $this->request->data['consignment_id'] = $r[18];
-                    $this->request->data['local_charge'] = ($r[29] + 5.2);
-                    $this->request->data['order_ids'] = $od['id'];
-                    $this->orderfulfiller->fulfillDirectFreightOrder();
+                    
                 }
             }
             else
