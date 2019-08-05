@@ -125,7 +125,7 @@ class FormController extends Controller {
     public function procSwatchCsvUpload()
     {
         echo "<pre>",print_r($this->request->data),"</pre>"; //die();
-        echo "Files<pre>",print_r($_FILES),"</pre>";die();
+        //echo "Files<pre>",print_r($_FILES),"</pre>";die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -141,7 +141,7 @@ class FormController extends Controller {
             {
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                //echo "<pre>",print_r($csv_array),"</pre>"; die();
+                echo "<pre>",print_r($csv_array),"</pre>"; die();
                 Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders have been fulfilled</h2>");
                 foreach($csv_array as $r)
                 {
