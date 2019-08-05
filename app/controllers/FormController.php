@@ -220,7 +220,7 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>The customer email is not valid</p>";
                     }
-                    $request['items'] = array(
+                    $request['items'][] = array(
                         'id'            => $swatch_id,
                         'qty'           => 1,
                         'whole_pallet'  => false
