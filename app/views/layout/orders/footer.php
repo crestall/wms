@@ -201,6 +201,7 @@
                     init: function(){
                         actions.common.init();
                         actions.common['cancel-orders'](false, true);
+                        actions.common['select-all'];
                     }
                 },
                 'order-edit': {
