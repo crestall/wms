@@ -169,7 +169,7 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
                     }
-                    $aResponse = $this->controller->BigBottleEparcel->ValidateSuburb($r['2'], $r['3'], str_pad($r['5'],4,'0',STR_PAD_LEFT));
+                    $aResponse = $this->BigBottleEparcel->ValidateSuburb($r['2'], $r['3'], str_pad($r['5'],4,'0',STR_PAD_LEFT));
 
                     //echo "<pre>",print_r($aResponse),"</pre>";
                     if(isset($aResponse['errors']))
