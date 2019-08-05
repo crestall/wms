@@ -169,7 +169,7 @@ class FormController extends Controller {
                         $skip_first = false;
                         continue;
                     }
-                    $state = (array_search(strtolower(trim($r[3])), $state) === false)? trim($r[3]): array_search(trim($r[3]));
+                    $state = (array_search(strtolower(trim($r[3])), $states) === false)? trim($r[3]): array_search(trim($r[3]));
                     $request = array(
                         'name'          => trim($r[0]),
                         'client_id'     => $client_id,
