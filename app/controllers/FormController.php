@@ -199,7 +199,7 @@ class FormController extends Controller {
                     if( $this->dataSubbed($request['email']) && !filter_var($request['email'], FILTER_VALIDATE_EMAIL) )
                     {
                         $request['errors'] = 1;
-                        $request['error_string'] = "<p>The customer email is not valid</p>";
+                        $request['error_string'] .= "<p>The customer email is not valid</p>";
                     }
                     $requests[] = $request;
                 }
