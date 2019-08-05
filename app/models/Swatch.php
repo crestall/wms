@@ -40,6 +40,11 @@ class Swatch extends Model{
         );
         if(!empty($data['email']))
             $values['email'] = $data['email'];
+        if($data['errors'] > 0)
+        {
+            $values['errors'] = 1;
+            $values['error_string'] = $data['error_string'];
+        }
         $request_id = $db->insertQuery($this->table, $values);
         return $request_id;
     }
