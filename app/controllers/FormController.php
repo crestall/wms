@@ -226,10 +226,10 @@ class FormController extends Controller {
                         'whole_pallet'  => false
                     );
                     $orders_items[] = $request['items'] ;
-                    $request['order_items'] = $this->allocations->createOrderItemsArray($orders_items);
+                    //$request['order_items'] = $this->allocations->createOrderItemsArray($orders_items);
                     $requests[] = $request;
                 }
-                echo "<pre>",print_r($requests),"</pre>"; die(); 
+                echo "<pre>",print_r($requests),"</pre>"; die();
             }
             else
             {
