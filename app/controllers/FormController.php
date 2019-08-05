@@ -136,6 +136,17 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        $states = array(
+            "NSW"   => "new south wales",
+            "VIC"   => "victoria",
+            "QLD"   => "queensland",
+            "TAS"   => "tasmania",
+            "SA"    => "south australia",
+            "WA"    => "western australia",
+            "NT"    => "northern territory",
+            "ACT"   => "australian capital territory"
+        );
+
         if($_FILES['csv_file']["size"] > 0)
         {
             if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
@@ -158,13 +169,14 @@ class FormController extends Controller {
                         $skip_first = false;
                         continue;
                     }
+                    $state = (array_search(trim($r[3]), $state) === false)? trim($r[3]): array_search(trim($r[3]);
                     $request = array(
                         'name'          => trim($r[0]),
                         'client_id'     => $client_id,
                         'email'         => trim($r[6]),
                         'address'       => trim($r[1]),
                         'suburb'        => trim($r[2]),
-                        'state'         => trim($r[3]),
+                        'state'         => $state,
                         'postcode'      => trim($r[5]),
                         'date'          => time(),
                         'errors'        => 0,
