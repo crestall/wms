@@ -25,6 +25,25 @@ class Swatch extends Model{
 
     }
 
+    public function addSwatch($data)
+    {
+        $db = Database::openConnection();
+
+        $values = array(
+            'client_id'     => $data['client_id'],
+            'name'          => $data['name'],
+            'date'          => time(),
+            'address'       => $data['address'],
+            'suburb'        => $data['suburb'],
+            'state'         => $data['state'],
+            'postcode'      => $data['postcode']
+        );
+        if(!empty($data['email']))
+            $values['email'] = $data['email'];
+        $request_id = $db->insertQuery($this->table, $values);
+        return $request_id;
+    }
+
     public function getAllSwatches($client_id, $posted = 0, $state = "")
     {
         $db = Database::openConnection();
