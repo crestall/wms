@@ -16,6 +16,7 @@
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
     <div class="row">
+        <h2>Upload Swatch Requests</h2>
         <form id="order-csv-upload" method="post" action="/form/procSwatchCsvUpload" enctype="multipart/form-data">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> CSV File</label>
@@ -33,6 +34,7 @@
             </div>
         </form>
     </div>
+    <hr/>
     <div class="row">
         <div class="col-lg-3 text-center">
             <?php if($posted == 0):?>
