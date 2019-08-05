@@ -26,7 +26,7 @@
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <input type="hidden" name="client_id" value="<?php echo $client_id; ?>" /> 
+            <input type="hidden" name="client_id" value="<?php echo $client_id; ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
@@ -132,6 +132,7 @@
                         $address_string .= " ".$sw['state']."<br/>";
                         $address_string .= " ".$sw['postcode']."<br/>";
                         $address_string .= " ".$sw['country'];
+                        $errors = ( $sw['errors'] == 1 ) ;
                         /*
                         */
                         ?>
@@ -148,6 +149,14 @@
                                 </div>
                             </td>
         				</tr>
+                        <?php if($errors):?>
+                            <tr class="full_width">
+                                <td colspan="6" class="error">
+                                    <?php echo $sw['error_string'];?>
+                                    <p><a class="btn btn-primary" href="/orders/address-update/swatch=<?php echo $sw['id'];?>">Fix this Address</a></p>
+                                </td>
+                            </tr>
+                        <?php endif;?>
         			<?php endforeach;?>
                 </tbody>
             </table>
