@@ -197,7 +197,7 @@ class FormController extends Controller {
                     }
                     $requests[] = $request;
                 }
-                echo "<pre>",print_r($requests),"</pre>"; die();
+
             }
             else
             {
@@ -214,6 +214,7 @@ class FormController extends Controller {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
+        echo "<pre>",print_r($requests),"</pre>"; die(); 
         return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
     }
 
