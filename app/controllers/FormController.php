@@ -146,7 +146,7 @@ class FormController extends Controller {
             "NT"    => "northern territory",
             "ACT"   => "australian capital territory"
         );
-        $the_states = array_keys($states);
+        //$the_states = array_keys($states);
         if($_FILES['csv_file']["size"] > 0)
         {
             if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
@@ -175,7 +175,7 @@ class FormController extends Controller {
                     }
                     else
                     {
-                        $state = $the_states[array_search(strtolower(trim($r[3])), $states)];
+                        $state = array_search(strtolower(trim($r[3])), $states);
                     }
                     $request = array(
                         'name'          => trim($r[0]),
