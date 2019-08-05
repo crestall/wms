@@ -195,8 +195,9 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] = "<p>The customer email is not valid</p>";
                     }
+                    $requests[] = $request;
                 }
-                $requests[] = $request;
+                echo "<pre>",print_r($requests),"</pre>"; die();
             }
             else
             {
