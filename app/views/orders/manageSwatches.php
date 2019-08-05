@@ -47,6 +47,11 @@
         <div class="col-lg-3 text-center">
             <p><a class="btn btn-primary label-print"><i class="fas fa-tags"></i> Print Labels For Selected</a></p>
         </div>
+        <div class="col-lg-3 text-center">
+            <?php if($posted == 0):?>
+                <p><a class="btn btn-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
+            <?php endif;?>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-3">
