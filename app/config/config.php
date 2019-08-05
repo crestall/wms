@@ -422,7 +422,8 @@ return array(
             'view-storeorders'          => true,
             'view-pickups'              => false,
             'record-pickup'   => true,
-            'order-csv-upload'  => true
+            'order-csv-upload'  => true,
+            'manage-swatches'   => true
         ),
         'solar-jobs'  => array(
             'add-solar-install'             => true,

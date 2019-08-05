@@ -15,6 +15,48 @@ class OrdersController extends Controller
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
     }
 
+    public function manageSwatches()
+    {
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        $client_id = 59;
+        $client_name = "NOA Home";
+        $state = "";
+        $posted = 0;
+        $ff = "Not Posted";
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+            }
+            if(isset($this->request->params['args']['posted']))
+            {
+                $posted = $this->request->params['args']['fulfilled'];
+                $ff = "Posted";
+            }
+            if(isset($this->request->params['args']['state']))
+            {
+                $state = $this->request->params['args']['state'];
+            }
+        }
+        $page_title = "$ff Swatches For $client_name";
+        $swatches = $this->swatch->getAllSwatches($client_id, $posted, $state);
+        //render the page
+        Config::setJsConfig('curPage', "manage-swatches");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/manageSwatches.php', [
+            'page_title'    =>  $page_title,
+            'client_name'   =>  $client_name,
+            'client_id'     =>  $client_id,
+            'swatches'      =>  $swatches,
+            'posted'        =>  $posted,
+            'state'         =>  $state
+        ]);
+
+
+
+    }
+
     public function recordPickup()
     {
         $client_id = 0;
