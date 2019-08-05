@@ -21,7 +21,7 @@ class Allocations{
         $oi_values = array();
         $allocations = array();
         $oi_index = 0;
-        echo "<pre>",print_r($items),"</pre>"; die();
+        //echo "<pre>",print_r($items),"</pre>"; die();
         $import_error = false;
         foreach($items as $oid => $order_items)
         {
@@ -35,6 +35,7 @@ class Allocations{
                 $i_id = $details['id'];
                 //$pick_count = $left = (int)$details['qty'];
                 $item = $this->controller->item->getItemById($i_id);
+                echo "<pre>",print_r($item),"</pre>"; die(); 
                 //$item_name = $item['name'];
                 if(filter_var($details['qty'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
                 {
