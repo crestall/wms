@@ -150,8 +150,14 @@ class FormController extends Controller {
                 //echo "<pre>",print_r($csv_array),"</pre>"; die();
                 Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Swatches have been uploaded</h2><p>You should be able to see them below</p>");
                 $requests = array();
+                $skip_first = true;
                 foreach($csv_array as $r)
                 {
+                    if($skip_first)
+                    {
+                        $skip_first = false;
+                        continue;
+                    }
                     $request = array(
                         'name'          => trim($r[0]),
                         'client_id'     => $client_id,
