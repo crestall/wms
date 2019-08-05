@@ -64,7 +64,7 @@ class Swatch extends Model{
             $q .= " AND state = :state";
             $array['state'] = $state;
         }
-        $q .= " ORDER BY errors, date ASC";
+        $q .= " ORDER BY errors DESC, date ASC";
         //die($q);
         return ($db->queryData($q, $array));
     }
