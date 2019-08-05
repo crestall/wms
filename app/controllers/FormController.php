@@ -220,16 +220,16 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>The customer email is not valid</p>";
                     }
-                    $request['items'][] = array(
+                    $request['items'] = array(
                         'id'            => $swatch_id,
                         'qty'           => 1,
                         'whole_pallet'  => false
                     );
                     $orders_items[] = $request['items'] ;
-                    //$request['order_items'] = $this->allocations->createOrderItemsArray($orders_items);
+                    $request['order_items'] = $this->allocations->createOrderItemsArray($orders_items);
                     $requests[] = $request;
                 }
-                echo "<pre>",print_r($requests),"</pre>"; die();
+
             }
             else
             {
@@ -246,7 +246,10 @@ class FormController extends Controller {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
-
+        else
+        {
+            echo "<pre>",print_r($requests),"</pre>"; die();
+        }
         return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
     }
 
