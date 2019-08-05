@@ -124,7 +124,7 @@ class FormController extends Controller {
 
     public function procSwatchCsvUpload()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         //echo "Files<pre>",print_r($_FILES),"</pre>";die();
         $swatch_id = 12521;
         $post_data = array();
