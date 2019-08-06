@@ -5,7 +5,7 @@
     foreach($orders_ids as $id):
         $od = $this->controller->swatch->getSwatchDetail($id);
         //echo "<pre>",print_r($od),"</pre>";//die();
-        $address_string = $od['name'];
+        $address_string = $od['name']."br/>";
         $address_string .= $od['address']."<br/>";
         if(!empty($od['address_2']))
             $address_string .= " ".$od['address_2']."<br/>";
@@ -17,7 +17,7 @@
         elseif($this_order % 2 == 0)
             echo "</tr><tr>";
         ?>
-        <td>
+        <td style="margin:8mm; text-align: right">
             <?php echo $address_string;?>
         </td>
         <?php ++$this_order;
