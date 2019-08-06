@@ -223,11 +223,16 @@
                                     hiddenField.setAttribute("name", "orders[]");
                                     hiddenField.setAttribute("value", value);
                                     form.appendChild(hiddenField);
+                                    var hiddenField2 = document.createElement("input");
+                                    hiddenField2.setAttribute("type", "hidden");
+                                    hiddenField2.setAttribute("name", "csrf_token");
+                                    hiddenField2.setAttribute("value", config.csrfToken );
+                                    form.appendChild(hiddenField2);
                                 });
                                 document.body.appendChild(form);
                                 window.open('','formresult');
                                 form.submit();
-                            }
+                            } 
                         });
                     }
                 },

@@ -54,6 +54,7 @@ class FormController extends Controller {
         parent::beforeAction();
         $action = $this->request->param('action');
         $actions = [
+            'printSwatchLabels',
             'procAddClientLocation',
             'procAddLocation',
             'procAddMiscToOrder',
