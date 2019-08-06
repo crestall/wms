@@ -38,10 +38,8 @@
                             //itemsUpdater.updateValidation();
                         });
                     },
-                    'select-all': function(){
-                        console.log('select-all');
+                    'select-all': function(){   
                         $('#select_all').click(function(e){
-                            console.log('click');
                             var checked = this.checked;
                              $('.select').each(function(e){
                                 this.checked =  checked;
@@ -49,7 +47,6 @@
                         });
                     },
                     'cancel-orders': function(solar, swatch){
-                        console.log('cancel-orders');
                         if(solar === undefined) {
                             solar = false;
                         }
