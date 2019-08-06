@@ -433,9 +433,9 @@
 
         // Set headers
         header("Cache-Control: public");
-        header("Content-Description: File Transfer");
-        header("Content-Disposition: attachment; filename=".$filename);
         header("Content-Type: application/vnd.ms-word.main+xml");
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: inline; filename=".$filename);
         header("Content-Transfer-Encoding: binary");
         echo $output;
 
