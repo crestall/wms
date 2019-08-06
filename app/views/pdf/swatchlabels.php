@@ -18,7 +18,7 @@
             echo "</tr><tr>";
         ?>
         <td>
-            <?php echo %address_string;?>
+            <?php echo $address_string;?>
         </td>
         <?php ++$this_order;
     endforeach; ?>
