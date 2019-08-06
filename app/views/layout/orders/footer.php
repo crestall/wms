@@ -214,8 +214,8 @@
                             {
                                 var form = document.createElement('form');
                                 form.setAttribute("method", "post");
-                                //form.setAttribute("action", "/pdf/printSwatchLabels");
-                                form.setAttribute("action", "/form/printSwatchLabels");
+                                form.setAttribute("action", "/pdf/printSwatchLabels");
+                                //form.setAttribute("action", "/form/printSwatchLabels");
                                 form.setAttribute("target", "formresult");
                                 $.each( ids, function( index, value ) {
                                     var hiddenField = document.createElement("input");
@@ -232,7 +232,7 @@
                                 document.body.appendChild(form);
                                 window.open('','formresult');
                                 form.submit();
-                            } 
+                            }
                         });
                     }
                 },
