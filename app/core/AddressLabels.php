@@ -389,7 +389,7 @@
             </w:body>
         </w:wordDocument>';
 
-        $this->output_file('labels.doc', $output);
+        $this->output_file('labels.docx', $output);
 
     }
 
