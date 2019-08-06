@@ -9,7 +9,7 @@
 
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
- class Addresslabels{
+ class AddressLabels{
 
     var $format				= "word"; // word, pdf or html
     var $labels_across		= 2; // number of labels horizontally across the page

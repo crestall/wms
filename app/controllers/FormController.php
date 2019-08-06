@@ -125,7 +125,10 @@ class FormController extends Controller {
 
     public function printSwatchLabels()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $labels = new AddressLabels;
+        $config['layout'] = "name<br />address_1<br />address_2<br />suburb<br />state<br />postcode";
+        $labels->initialize($config); die();
     }
 
     public function procSwatchCsvUpload()
