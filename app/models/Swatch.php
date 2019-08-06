@@ -69,6 +69,13 @@ class Swatch extends Model{
         return ($db->queryData($q, $array));
     }
 
+    public function getSwatchDetail($id)
+    {
+        $db = Database::openConnection();
+        $swatch = $db->queryById($this->table, $id);
+        return (empty($swatch))? false : $swatch;
+    }
+
     public function cancelRequests($ids)
     {
         $db = Database::openConnection();

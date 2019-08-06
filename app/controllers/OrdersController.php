@@ -413,17 +413,26 @@ class OrdersController extends Controller
 
     public function addressUpdate()
     {
-        if(!isset($this->request->params['args']['order']))
-        {
-            $error = true;
-            $order_id = 0;
-            $order = array();
-        }
-        else
+        if(isset($this->request->params['args']['order']))
         {
             $error = false;
             $order_id = $this->request->params['args']['order'];
             $order = $this->order->getOrderDetail($order_id);
+            $table = "orders";
+        }
+        elseif(isset($this->request->params['args']['swatch']))
+        {
+            $error = false;
+            $order_id = $this->request->params['args']['swatch'];
+            $order = $this->swatch->getSwatchDetail($order_id);
+            $table = "swatches";
+        }
+        else
+        {
+            $error = true;
+            $order_id = 0;
+            $order = array();
+            $table = "";
         }
         //render the page
         Config::setJsConfig('curPage', "address-update");
@@ -431,7 +440,8 @@ class OrdersController extends Controller
             'page_title'    =>  "Update Address",
             'order_id'      =>  $order_id,
             'order'         =>  $order,
-            'error'         =>  $error
+            'error'         =>  $error,
+            'table'         =>  $table
         ]);
     }
 
