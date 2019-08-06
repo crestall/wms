@@ -1,4 +1,4 @@
-<table width="100%" style="font-size:16px;">
+<table width="100%" style="font-size:16px; margin: 0 auto;">
     <tr>
     <?php
     $this_order = 1;
