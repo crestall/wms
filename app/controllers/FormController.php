@@ -2804,7 +2804,7 @@ class FormController extends Controller {
 
     public function procAddressUpdate()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -2826,8 +2826,17 @@ class FormController extends Controller {
         }
         else
         {
-            $this->order->updateOrderAddress($post_data);
-            $this->order->removeError($order_id);
+            if($table == "orders")
+            {
+                $this->order->updateOrderAddress($post_data);
+                $this->order->removeError($order_id);
+            }
+            else
+            {
+                $this->swatch->updateSwatchAddress($post_data);
+                $this->swatch->removeError($order_id);
+            }
+
             Session::set('feedback', "That address has been updated");
         }
         return $this->redirector->to(PUBLIC_ROOT."orders/address-update/order=".$order_id);

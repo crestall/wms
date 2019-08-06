@@ -76,6 +76,29 @@ class Swatch extends Model{
         return (empty($swatch))? false : $swatch;
     }
 
+    public function updateSwatchAddress($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'name'          =>  $data['ship_to'],
+            'address'		=>	$data['address'],
+            'address_2'     =>  null,
+            'suburb'		=>	$data['suburb'],
+            'state'		    =>	$data['state'],
+            'postcode'	    =>	$data['postcode'],
+            'country'       =>  $data['country']
+        );
+        if(isset($data['address2'])) $vals['address_2'] = $data['address2'];
+        $db->updatedatabaseFields($this->table, $vals, $data['order_id']);
+        return true;
+    }
+
+    public function removeError($swatch_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseFields($this->table, array('errors' => 0, 'error_string' => NULL), $swatch_id);
+    }
+
     public function cancelRequests($ids)
     {
         $db = Database::openConnection();
