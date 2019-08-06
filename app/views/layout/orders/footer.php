@@ -49,6 +49,7 @@
                         });
                     },
                     'cancel-orders': function(solar, swatch){
+                        console.log('cancel-orders');
                         if(solar === undefined) {
                             solar = false;
                         }
@@ -201,6 +202,7 @@
                 },
                 'manage-swatches': {
                     init: function(){
+                        console.log('manage swatches');
                         actions.common['cancel-orders'](false, true);
                         actions.common['select-all'];
                     }
