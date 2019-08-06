@@ -2839,7 +2839,15 @@ class FormController extends Controller {
 
             Session::set('feedback', "That address has been updated");
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/address-update/order=".$order_id);
+        if($table == "orders")
+        {
+            return $this->redirector->to(PUBLIC_ROOT."orders/address-update/order=".$order_id);
+        }
+        else
+        {
+           return $this->redirector->to(PUBLIC_ROOT."orders/address-update/swatch=".$order_id);
+        }
+
     }
 
     public function procUserAdd()
