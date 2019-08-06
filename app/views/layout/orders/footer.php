@@ -202,12 +202,13 @@
                         actions.common['select-all']();
                         actions.common['cancel-orders'](false, true);
                         $('a.label-print').click(function(e){
-                            console.log('click'); 
+                            console.log('click');
                             e.preventDefault();
                             var ids = [];
                             $('input.select').each(function(i,e){
                                 var order_id = $(this).data('orderid');
                             });
+                            console.log(ids);
                             if(ids.length)
                             {
                                 var form = document.createElement('form');
