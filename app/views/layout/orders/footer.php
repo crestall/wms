@@ -202,7 +202,7 @@
                 },
                 'manage-swatches': {
                     init: function(){
-                        actions.common['select-all'];
+                        actions.common['select-all']();
                         actions.common['cancel-orders'](false, true);
                     }
                 },
