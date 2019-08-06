@@ -38,7 +38,7 @@
                             //itemsUpdater.updateValidation();
                         });
                     },
-                    'select-all': function(){   
+                    'select-all': function(){
                         $('#select_all').click(function(e){
                             var checked = this.checked;
                              $('.select').each(function(e){
@@ -202,6 +202,7 @@
                         actions.common['select-all']();
                         actions.common['cancel-orders'](false, true);
                         $('a.label-print').click(function(e){
+                            console.log('click'); 
                             e.preventDefault();
                             var ids = [];
                             $('input.select').each(function(i,e){
