@@ -84,20 +84,20 @@ class pdfController extends Controller
         $pdf = new Mympdf([
             'mode'          => 'utf-8',
             'format'        => 'A4',
-            'margin_left'   => 1,
-            'margin_right'  => 1,
+            'margin_left'   => 3,
+            'margin_right'  => 3,
             'margin_top'    => 13,
             'margin_bottom' => 13
         ]);
-        $pdf->SetImportUse();
-        $pdf->SetDocTemplate('data/labels_16perpage.pdf',true);
+        //$pdf->SetImportUse();
+        //$pdf->SetDocTemplate('data/labels_16perpage.pdf',true);
         $order_ids  = $this->request->data['orders'];
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/swatchlabels.php', [
             'orders_ids'    =>  $order_ids
         ]);
         //$stylesheet = file_get_contents(STYLES."local_sticker.css");
         //$pdf->WriteHTML($stylesheet,1);
-        $pdf->AddPage();
+        //$pdf->AddPage();
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
     }
