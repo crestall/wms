@@ -90,7 +90,7 @@ class pdfController extends Controller
             'margin_bottom' => 13
         ]);
         $pdf->SetImportUse();
-        $pdf->SetDocTemplate('/data/labels_16perpage.pdf',true);
+        $pdf->SetDocTemplate('data/labels_16perpage.pdf',true);
         $order_ids  = $this->request->data['orders'];
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/swatchlabels.php', [
             'orders_ids'    =>  $order_ids
