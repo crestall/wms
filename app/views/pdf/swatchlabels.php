@@ -1,7 +1,7 @@
 <table width="100%" style="font-size:16px; margin: 0 auto; border: thin solid black">
-    <tr style="white-space:nowrap; height: 24mm">
+    <tr>
     <?php
-    $this_order = 1;
+    $this_order = 0;
     foreach($orders_ids as $id):
         $od = $this->controller->swatch->getSwatchDetail($id);
         //echo "<pre>",print_r($od),"</pre>";//die();
@@ -13,9 +13,9 @@
         $address_string .= strtoupper($od['state'])."<br/>";
         $address_string .= $od['postcode'];
         if($this_order % 16 == 0)
-            echo "</tr></table><pagebreak/><table width='100%' style='font-size:16px'><tr style='white-space:nowrap; height: 24mm'>";
+            echo "</tr></table><pagebreak/><table width='100%' style='font-size:16px'><tr>";
         elseif($this_order % 2 == 0)
-            echo '</tr><tr style="white-space:nowrap; height: 24mm">';
+            echo '</tr><tr>';
         ?>
         <td style="padding:3mm; text-align:right; width:96mm; border:thin dotted black">
             <?php echo $address_string;?>
