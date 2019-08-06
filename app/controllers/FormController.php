@@ -128,6 +128,7 @@ class FormController extends Controller {
         //echo "<pre>",print_r($this->request->data),"</pre>";die();
         $labels = new AddressLabels;
         $config['layout'] = "name<br />address_1<br />address_2<br />suburb<br />state<br />postcode";
+        $config['format'] = 'html';
         $labels->initialize($config);
         $addresses = array();
         foreach($this->request->data['orders'] as $id)
