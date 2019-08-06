@@ -122,6 +122,11 @@ class FormController extends Controller {
         $this->Security->requirePost($actions);
     }
 
+    public function printSwatchLabels()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+    }
+
     public function procSwatchCsvUpload()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();

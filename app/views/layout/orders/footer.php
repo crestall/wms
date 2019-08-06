@@ -207,14 +207,15 @@
                             var ids = [];
                             $('input.select').each(function(i,e){
                                 var order_id = $(this).data('orderid');
-                                ids.push(order_id); 
+                                ids.push(order_id);
                             });
                             console.log(ids);
                             if(ids.length)
                             {
                                 var form = document.createElement('form');
                                 form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printSwatchLabels");
+                                //form.setAttribute("action", "/pdf/printSwatchLabels");
+                                form.setAttribute("action", "/form/printSwatchLabels");
                                 form.setAttribute("target", "formresult");
                                 $.each( ids, function( index, value ) {
                                     var hiddenField = document.createElement("input");
