@@ -5,13 +5,13 @@
     foreach($orders_ids as $id):
         $od = $this->controller->swatch->getSwatchDetail($id);
         //echo "<pre>",print_r($od),"</pre>";//die();
-        $address_string = $od['name']."<br/>";
-        $address_string .= $od['address']."<br/>";
+        $address_string = ucwords($od['name'])."<br/>";
+        $address_string .= ucwords($od['address'])."<br/>";
         if(!empty($od['address_2']))
-            $address_string .= " ".$od['address_2']."<br/>";
-        $address_string .= " ".$od['suburb']."<br/>";
-        $address_string .= " ".$od['state']."<br/>";
-        $address_string .= " ".$od['postcode'];
+            $address_string .= ucwords($od['address_2'])."<br/>";
+        $address_string .= strtoupper($od['suburb'])."<br/>";
+        $address_string .= strtoupper($od['state'])."<br/>";
+        $address_string .= $od['postcode'];
         if($this_order % 16 == 0)
             echo "</tr></table><pagebreak/><table width='100%' style='font-size:16px; line-height:1.5>";
         elseif($this_order % 2 == 0)
