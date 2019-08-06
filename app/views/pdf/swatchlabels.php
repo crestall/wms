@@ -1,4 +1,4 @@
-<table width="100%" style="font-size:16px; line-height:1.5">
+<table width="100%" style="font-size:16px;">
     <tr>
     <?php
     $this_order = 1;
@@ -13,11 +13,11 @@
         $address_string .= strtoupper($od['state'])."<br/>";
         $address_string .= $od['postcode'];
         if($this_order % 16 == 0)
-            echo "</tr></table><pagebreak/><table width='100%' style='font-size:16px; line-height:1.5>";
+            echo "</tr></table><pagebreak/><table width='100%' style='font-size:16px'>";
         elseif($this_order % 2 == 0)
             echo "</tr><tr>";
         ?>
-        <td style="padding:3mm; text-align:right; width:92mm; border:thin solid black">
+        <td style="padding:3mm; text-align:right; width:85mm; border:thin solid black">
             <?php echo $address_string;?>
         </td>
         <?php ++$this_order;
