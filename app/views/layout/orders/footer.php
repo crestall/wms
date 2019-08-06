@@ -39,7 +39,9 @@
                         });
                     },
                     'select-all': function(){
+                        console.log('select-all');
                         $('#select_all').click(function(e){
+                            console.log('click');
                             var checked = this.checked;
                              $('.select').each(function(e){
                                 this.checked =  checked;
@@ -199,7 +201,6 @@
                 },
                 'manage-swatches': {
                     init: function(){
-                        console.log("manage swatches");
                         actions.common['cancel-orders'](false, true);
                         actions.common['select-all'];
                     }
