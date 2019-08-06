@@ -17,7 +17,7 @@
         elseif($this_order % 2 == 0)
             echo "</tr><tr>";
         ?>
-        <td style="padding:3mm; text-align:right; width:85mm; border:thin solid black">
+        <td style="padding:3mm; text-align:right; width:85mm;">
             <?php echo $address_string;?>
         </td>
         <?php ++$this_order;
