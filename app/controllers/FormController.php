@@ -125,10 +125,24 @@ class FormController extends Controller {
 
     public function printSwatchLabels()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>";die();
         $labels = new AddressLabels;
         $config['layout'] = "name<br />address_1<br />address_2<br />suburb<br />state<br />postcode";
-        $labels->initialize($config); die();
+        $labels->initialize($config);
+        $addresses = array();
+        foreach($this->request->data['orders'] as $id)
+        {
+            $od = $this->swatch->getSwatchDetail($id);
+            $addresses[] = array(
+                "name"      => ucwords($od['name']),
+                "address_1" => ucwords($od['address']),
+                "address_2" => ucwords($od['address_2']),
+                "suburb"    => strtoupper($od['suburb']),
+                "state"     => strtoupper($od['state']),
+                "postcode"  => $od['postcode']
+            );
+        }
+        $labels->output($addresses);
     }
 
     public function procSwatchCsvUpload()
