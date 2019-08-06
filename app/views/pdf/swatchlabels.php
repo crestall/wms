@@ -1,5 +1,5 @@
 <table width="100%" style="font-size:16px; margin: 0 auto; border: thin solid black">
-    <tr>
+    <tr style="white-space:nowrap; height: 28mm">
     <?php
     $this_order = 1;
     foreach($orders_ids as $id):
@@ -13,9 +13,9 @@
         $address_string .= strtoupper($od['state'])."<br/>";
         $address_string .= $od['postcode'];
         if($this_order % 16 == 0)
-            echo "</tr></table><pagebreak/><table width='100%' style='font-size:16px'>";
+            echo "</tr></table><pagebreak/><table width='100%' style='font-size:16px'><tr style='white-space:nowrap; height: 28mm'>";
         elseif($this_order % 2 == 0)
-            echo "</tr><tr>";
+            echo '</tr><tr style="white-space:nowrap; height: 28mm">';
         ?>
         <td style="padding:3mm; text-align:right; width:96mm; border:thin dotted black">
             <?php echo $address_string;?>
