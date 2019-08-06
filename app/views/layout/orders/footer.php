@@ -202,9 +202,8 @@
                 },
                 'manage-swatches': {
                     init: function(){
-                        console.log('manage swatches');
-                        actions.common['cancel-orders'](false, true);
                         actions.common['select-all'];
+                        actions.common['cancel-orders'](false, true);
                     }
                 },
                 'order-edit': {
