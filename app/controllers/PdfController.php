@@ -80,28 +80,6 @@ class pdfController extends Controller
 
     public function printSwatchLabels()
     {
-        /*
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf([
-            'mode'          => 'utf-8',
-            'format'        => 'A4',
-            'margin_left'   => 3,
-            'margin_right'  => 3,
-            'margin_top'    => 13,
-            'margin_bottom' => 13
-        ]);
-        //$pdf->SetImportUse();
-        //$pdf->SetDocTemplate('data/labels_16perpage.pdf',true);
-        $order_ids  = $this->request->data['orders'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/swatchlabels.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
-        //$pdf->WriteHTML($stylesheet,1);
-        //$pdf->AddPage();
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-         */
         $config = array(
             'paper-size' =>'A4',
             'metric'    =>'mm',
@@ -117,11 +95,10 @@ class pdfController extends Controller
         );
         $pdf = new AddressLabels($config);
         $pdf->AddPage();
-        //$pdf->debug = true;
-        //$pdf->setConfig('3422');
         $order_ids  = $this->request->data['orders'];
         foreach($order_ids as $id)
         {
+            $this->swatch->dispatchSwatch($id);
             $od = $this->controller->swatch->getSwatchDetail($id);
             //echo "<pre>",print_r($od),"</pre>";//die();
             $address_string = ucwords($od['name'])."\n";
@@ -131,14 +108,9 @@ class pdfController extends Controller
             $address_string .= strtoupper($od['suburb'])."\n";
             $address_string .= strtoupper($od['state'])."\n";
             $address_string .= $od['postcode'];
-
-            $text = sprintf("%s\n%s\n%s\n%s\n%s", ucwords($od['name']), ucwords($od['address']), strtoupper($od['suburb']), strtoupper($od['state']), $od['postcode']);
-            //$text = sprintf("%s\n%s\n%s\n%s %s, %s", "Laurent", 'Immeuble Toto', 'av. Fragonard', '06000', 'NICE', 'FRANCE');
             $pdf->Add_Label($address_string);
         }
-        //$pdf->AddPage();
         $pdf->Output();
-
     }
 
     public function printCometLocalLabels()

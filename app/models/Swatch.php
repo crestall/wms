@@ -93,6 +93,12 @@ class Swatch extends Model{
         return true;
     }
 
+    public function dispatchSwatch($id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'shipped', 1, $swatch_id);
+    }
+
     public function removeError($swatch_id)
     {
         $db = Database::openConnection();
