@@ -207,7 +207,10 @@
                             var ids = [];
                             $('input.select').each(function(i,e){
                                 var order_id = $(this).data('orderid');
-                                ids.push(order_id);
+                                if( $(this).prop('checked'))
+                                {
+                                    ids.push($(this).data('order_id'));
+                                } 
                             });
                             console.log(ids);
                             if(ids.length)
