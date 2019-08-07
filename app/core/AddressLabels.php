@@ -55,7 +55,7 @@
         $this->_Set_Format($Tformat);
         $this->SetFont('Arial');
         $this->SetMargins(0,0,0);
-        $this->SetAutoPageBreak(false);
+        $this->autoPageBreak = false;;
         $this->_COUNTX = $posX-2;
         $this->_COUNTY = $posY-1;
     }

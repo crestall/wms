@@ -124,22 +124,23 @@ class pdfController extends Controller
                 'margin_top'    => 1,
                 'margin_bottom' => 1
             ]);
+            $pdf->debug = true;
             $pdf->setConfig($config);
             $order_ids  = $this->request->data['orders'];
             foreach($order_ids as $id)
             {
                 $od = $this->controller->swatch->getSwatchDetail($id);
                 //echo "<pre>",print_r($od),"</pre>";//die();
-                $address_string = ucwords($od['name'])."<br/>";
-                $address_string .= ucwords($od['address'])."<br/>";
+                $address_string = ucwords($od['name'])."\n";
+                $address_string .= ucwords($od['address'])."\n";
                 if(!empty($od['address_2']))
-                    $address_string .= ucwords($od['address_2'])."<br/>";
-                $address_string .= strtoupper($od['suburb'])."<br/>";
-                $address_string .= strtoupper($od['state'])."<br/>";
+                    $address_string .= ucwords($od['address_2'])."\n";
+                $address_string .= strtoupper($od['suburb'])."\n";
+                $address_string .= strtoupper($od['state'])."\n";
                 $address_string .= $od['postcode'];
 
                 $text = sprintf("%s\n%s\n%s\n%s\n%s", ucwords($od['name']), ucwords($od['address']), strtoupper($od['suburb']), strtoupper($od['state']), $od['postcode']);
-                $pdf->Add_Label($text);
+                $pdf->Add_Label($address_string);
             }
             $pdf->Output();
         }   catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
