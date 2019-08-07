@@ -125,7 +125,7 @@ class pdfController extends Controller
                 'margin_bottom' => 1
             ]);
             $pdf->debug = true;
-            $pdf->setConfig(3422);
+            $pdf->setConfig('3422');
             $order_ids  = $this->request->data['orders'];
             foreach($order_ids as $id)
             {
@@ -140,9 +140,10 @@ class pdfController extends Controller
                 $address_string .= $od['postcode'];
 
                 $text = sprintf("%s\n%s\n%s\n%s\n%s", ucwords($od['name']), ucwords($od['address']), strtoupper($od['suburb']), strtoupper($od['state']), $od['postcode']);
-                $pdf->Add_Label($address_string);
+                $text = sprintf("%s\n%s\n%s\n%s %s, %s", "Laurent", 'Immeuble Toto', 'av. Fragonard', '06000', 'NICE', 'FRANCE');
+                $pdf->Add_Label($text);
             }
-            $pdf->AddPage();
+            //$pdf->AddPage();
             $pdf->Output();
         }   catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
             // Process the exception, log, print etc.
