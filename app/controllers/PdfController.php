@@ -102,8 +102,8 @@ class pdfController extends Controller
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
         */
-        $pdf = new AddressLabels(array('
-            paper-size' =>'A4',
+        $pdf = new AddressLabels(array(
+            'paper-size' =>'A4',
             'metric'    =>'mm',
             'marginLeft'=>1,
             'marginTop' =>1,
