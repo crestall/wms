@@ -80,7 +80,7 @@ class pdfController extends Controller
 
     public function printSwatchLabels()
     {
-
+        /*
         //echo "<pre>",print_r($this->request),"</pre>";die();
         $pdf = new Mympdf([
             'mode'          => 'utf-8',
@@ -101,7 +101,7 @@ class pdfController extends Controller
         //$pdf->AddPage();
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
-        /*
+         */
         $config = array(
             'paper-size' =>'A4',
             'metric'    =>'mm',
@@ -115,41 +115,36 @@ class pdfController extends Controller
             'height'    =>33,
             'font-size' =>14
         );
-        try{
-            $pdf = new AddressLabels([
-                'mode'          => 'utf-8',
-                'format'        => 'A4',
-                'margin_left'   => 1,
-                'margin_right'  => 1,
-                'margin_top'    => 1,
-                'margin_bottom' => 1
-            ]);
-            $pdf->debug = true;
-            $pdf->setConfig('3422');
-            $order_ids  = $this->request->data['orders'];
-            foreach($order_ids as $id)
-            {
-                $od = $this->controller->swatch->getSwatchDetail($id);
-                //echo "<pre>",print_r($od),"</pre>";//die();
-                $address_string = ucwords($od['name'])."\n";
-                $address_string .= ucwords($od['address'])."\n";
-                if(!empty($od['address_2']))
-                    $address_string .= ucwords($od['address_2'])."\n";
-                $address_string .= strtoupper($od['suburb'])."\n";
-                $address_string .= strtoupper($od['state'])."\n";
-                $address_string .= $od['postcode'];
+        $pdf = new AddressLabels([
+            'mode'          => 'utf-8',
+            'format'        => 'A4',
+            'margin_left'   => 1,
+            'margin_right'  => 1,
+            'margin_top'    => 1,
+            'margin_bottom' => 1
+        ]);
+        $pdf->debug = true;
+        $pdf->setConfig('3422');
+        $order_ids  = $this->request->data['orders'];
+        foreach($order_ids as $id)
+        {
+            $od = $this->controller->swatch->getSwatchDetail($id);
+            //echo "<pre>",print_r($od),"</pre>";//die();
+            $address_string = ucwords($od['name'])."\n";
+            $address_string .= ucwords($od['address'])."\n";
+            if(!empty($od['address_2']))
+                $address_string .= ucwords($od['address_2'])."\n";
+            $address_string .= strtoupper($od['suburb'])."\n";
+            $address_string .= strtoupper($od['state'])."\n";
+            $address_string .= $od['postcode'];
 
-                $text = sprintf("%s\n%s\n%s\n%s\n%s", ucwords($od['name']), ucwords($od['address']), strtoupper($od['suburb']), strtoupper($od['state']), $od['postcode']);
-                $text = sprintf("%s\n%s\n%s\n%s %s, %s", "Laurent", 'Immeuble Toto', 'av. Fragonard', '06000', 'NICE', 'FRANCE');
-                $pdf->Add_Label($text);
-            }
-            //$pdf->AddPage();
-            $pdf->Output();
-        }   catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
-            // Process the exception, log, print etc.
-            echo $e->getMessage();
+            $text = sprintf("%s\n%s\n%s\n%s\n%s", ucwords($od['name']), ucwords($od['address']), strtoupper($od['suburb']), strtoupper($od['state']), $od['postcode']);
+            $text = sprintf("%s\n%s\n%s\n%s %s, %s", "Laurent", 'Immeuble Toto', 'av. Fragonard', '06000', 'NICE', 'FRANCE');
+            $pdf->Add_Label($text);
         }
-        */
+        //$pdf->AddPage();
+        $pdf->Output();
+
     }
 
     public function printCometLocalLabels()
