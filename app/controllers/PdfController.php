@@ -102,7 +102,7 @@ class pdfController extends Controller
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
         */
-        $pdf = new AddressLabels(array(
+        $config = array(
             'paper-size' =>'A4',
             'metric'    =>'mm',
             'marginLeft'=>1,
@@ -114,8 +114,16 @@ class pdfController extends Controller
             'width'     =>99,
             'height'    =>33,
             'font-size' =>14
-            )
         );
+        $pdf = new AddressLabels([
+            'mode'          => 'utf-8',
+            'format'        => 'A4',
+            'margin_left'   => 1,
+            'margin_right'  => 1,
+            'margin_top'    => 1,
+            'margin_bottom' => 1
+        ]);
+        $pdf->setConfig($config);
         $order_ids  = $this->request->data['orders'];
         foreach($order_ids as $id)
         {

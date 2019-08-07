@@ -39,8 +39,8 @@
         '3422' => array('paper-size'=>'A4',		'metric'=>'mm',	'marginLeft'=>0,		'marginTop'=>8.5, 		'NX'=>3,	'NY'=>8,	'SpaceX'=>0,		'SpaceY'=>0,	'width'=>70,		'height'=>35,		'font-size'=>9)
     );
 
-    // Constructor
-    function __construct($format, $unit='mm', $posX=1, $posY=1) {
+    // Set The Configuration
+    function setConfig($format, $unit='mm', $posX=1, $posY=1) {
         if (is_array($format)) {
             // Custom format
             $Tformat = $format;
@@ -51,7 +51,6 @@
             $Tformat = $this->_Avery_Labels[$format];
         }
 
-        //parent::__construct('P', $unit, $Tformat['paper-size']);
         $this->_Metric_Doc = $unit;
         $this->_Set_Format($Tformat);
         $this->SetFont('Arial');
@@ -121,14 +120,6 @@
         $this->SetXY($_PosX, $_PosY);
         $this->MultiCell($this->_Width - $this->_Padding, $this->_Line_Height, $text, 0, 'L');
     }
-
-    function _putcatalog()
-    {
-        parent::_putcatalog();
-        // Disable the page scaling option in the printing dialog
-        $this->_put('/ViewerPreferences <</PrintScaling /None>>');
-    }
-
 
  }
 
