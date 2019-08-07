@@ -51,11 +51,12 @@
             $Tformat = $this->_Avery_Labels[$format];
         }
 
+        parent::__construct('P', $unit, $Tformat['paper-size']);
         $this->_Metric_Doc = $unit;
         $this->_Set_Format($Tformat);
         $this->SetFont('Arial');
         $this->SetMargins(0,0);
-        $this->autoPageBreak = false;;
+        $this->SetAutoPageBreak(false);
         $this->_COUNTX = $posX-2;
         $this->_COUNTY = $posY-1;
     }
