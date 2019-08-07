@@ -40,7 +40,7 @@
     );
 
     // Set The Configuration
-    function setConfig($format, $unit='mm', $posX=1, $posY=1) {
+    function __construct($format, $unit='mm', $posX=1, $posY=1) {
         if (is_array($format)) {
             // Custom format
             $Tformat = $format;
@@ -54,7 +54,7 @@
         $this->_Metric_Doc = $unit;
         $this->_Set_Format($Tformat);
         $this->SetFont('Arial');
-        $this->SetMargins(0,0,0);
+        $this->SetMargins(0,0);
         $this->autoPageBreak = false;;
         $this->_COUNTX = $posX-2;
         $this->_COUNTY = $posY-1;

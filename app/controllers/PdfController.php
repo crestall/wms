@@ -115,16 +115,9 @@ class pdfController extends Controller
             'height'    =>33,
             'font-size' =>14
         );
-        $pdf = new AddressLabels([
-            'mode'          => 'utf-8',
-            'format'        => 'A4',
-            'margin_left'   => 1,
-            'margin_right'  => 1,
-            'margin_top'    => 1,
-            'margin_bottom' => 1
-        ]);
-        $pdf->debug = true;
-        $pdf->setConfig('3422');
+        $pdf = new AddressLabels($config);
+        //$pdf->debug = true;
+        //$pdf->setConfig('3422');
         $order_ids  = $this->request->data['orders'];
         foreach($order_ids as $id)
         {
@@ -139,7 +132,7 @@ class pdfController extends Controller
             $address_string .= $od['postcode'];
 
             $text = sprintf("%s\n%s\n%s\n%s\n%s", ucwords($od['name']), ucwords($od['address']), strtoupper($od['suburb']), strtoupper($od['state']), $od['postcode']);
-            $text = sprintf("%s\n%s\n%s\n%s %s, %s", "Laurent", 'Immeuble Toto', 'av. Fragonard', '06000', 'NICE', 'FRANCE');
+            //$text = sprintf("%s\n%s\n%s\n%s %s, %s", "Laurent", 'Immeuble Toto', 'av. Fragonard', '06000', 'NICE', 'FRANCE');
             $pdf->Add_Label($text);
         }
         //$pdf->AddPage();
