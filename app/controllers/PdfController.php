@@ -78,6 +78,41 @@ class pdfController extends Controller
         $pdf->Output();
     }
 
+    public function printSwatchLabels()
+    {
+        $config = array(
+            'paper-size' =>'A4',
+            'metric'    =>'mm',
+            'marginLeft'=>3,
+            'marginTop' =>9,
+            'NX'        =>2,
+            'NY'        =>8,
+            'SpaceX'    =>2,
+            'SpaceY'    =>0,
+            'width'     =>99,
+            'height'    =>33,
+            'font-size' =>10
+        );
+        $pdf = new AddressLabels($config);
+        $pdf->AddPage();
+        $order_ids  = $this->request->data['orders'];
+        foreach($order_ids as $id)
+        {
+            $this->swatch->dispatchSwatch($id);
+            $od = $this->controller->swatch->getSwatchDetail($id);
+            //echo "<pre>",print_r($od),"</pre>";//die();
+            $address_string = ucwords($od['name'])."\n";
+            $address_string .= ucwords($od['address'])."\n";
+            if(!empty($od['address_2']))
+                $address_string .= ucwords($od['address_2'])."\n";
+            $address_string .= strtoupper($od['suburb'])."\n";
+            $address_string .= strtoupper($od['state'])."\n";
+            $address_string .= $od['postcode'];
+            $pdf->Add_Label($address_string);
+        }
+        $pdf->Output();
+    }
+
     public function printCometLocalLabels()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
