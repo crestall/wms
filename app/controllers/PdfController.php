@@ -105,8 +105,8 @@ class pdfController extends Controller
         $config = array(
             'paper-size' =>'A4',
             'metric'    =>'mm',
-            'marginLeft'=>1,
-            'marginTop' =>1,
+            'marginLeft'=>3,
+            'marginTop' =>13,
             'NX'        =>2,
             'NY'        =>8,
             'SpaceX'    =>2,
