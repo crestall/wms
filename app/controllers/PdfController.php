@@ -80,6 +80,7 @@ class pdfController extends Controller
 
     public function printSwatchLabels()
     {
+        /*
         //echo "<pre>",print_r($this->request),"</pre>";die();
         $pdf = new Mympdf([
             'mode'          => 'utf-8',
@@ -99,6 +100,38 @@ class pdfController extends Controller
         //$pdf->WriteHTML($stylesheet,1);
         //$pdf->AddPage();
         $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+        */
+        $pdf = new AddressLabels(array('
+            paper-size' =>'A4',
+            'metric'    =>'mm',
+            'marginLeft'=>1,
+            'marginTop' =>1,
+            'NX'        =>2,
+            'NY'        =>8,
+            'SpaceX'    =>2,
+            'SpaceY'    =>0,
+            'width'     =>99,
+            'height'    =>33,
+            'font-size' =>14
+            )
+        );
+        $order_ids  = $this->request->data['orders'];
+        foreach($order_ids as $id)
+        {
+            $od = $this->controller->swatch->getSwatchDetail($id);
+            //echo "<pre>",print_r($od),"</pre>";//die();
+            $address_string = ucwords($od['name'])."<br/>";
+            $address_string .= ucwords($od['address'])."<br/>";
+            if(!empty($od['address_2']))
+                $address_string .= ucwords($od['address_2'])."<br/>";
+            $address_string .= strtoupper($od['suburb'])."<br/>";
+            $address_string .= strtoupper($od['state'])."<br/>";
+            $address_string .= $od['postcode'];
+
+            $text = sprintf("%s\n%s\n%s\n%s\n%s", ucwords($od['name']), ucwords($od['address']), strtoupper($od['suburb']), strtoupper($od['state']), $od['postcode']);
+            $pdf->Add_Label($text);
+        }
         $pdf->Output();
     }
 

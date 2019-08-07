@@ -4,442 +4,131 @@
  * The addresslabels class.
  *
  * handles the printing of address labels
- * pdf public functionality to come
+ * extends MPDF and uses original FDPF functionality
  *
 
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
- class AddressLabels{
+ use Mpdf\Mpdf;
+ class AddressLabels extends mPDF{
 
-    var $format				= "word"; // word, pdf or html
-    var $labels_across		= 2; // number of labels horizontally across the page
-    var $labels_down		= 7; // number of labels vertically down the page
-    var $label_height		= 3.81; // the height, in centimeters, of each label
-    var $label_width		= 9.9; // the width, in centimeters, of each label
-    var $pitch_horizontal	= 10.16; // the width of the label plus horizontal spacing, in centimeters, of each label
-    var $pitch_vertical		= 3.81; // the width of the label plus vertical spacing, in centimeters, of each label
-    var $page_margin_top	= 1.51; // the top page margin, in centimeters
-    var $page_margin_side	= 0.47; // the left/right page margin, in centimeters
-    var $page_height 		= 29.69; // the height of the paper. defaults to A4 dimensions
-    var $page_width 		= 21; // the width of the paper. defaults to A4 dimensions
-    var $align_horizontal 	= "left"; // the horizontal justification of each label. left, center or right
-    var $align_vertical 	= "center"; // the vertical alignment of each label. top, center or bottom
-    var $padding_left		= 1; // the left padding, in centimeters, of each label
-    var $padding_top		= 0; // the top padding, in centimeters, of each label
-    var $font_face			= "Arial"; // The font face to use
-    var $font_size			= 12; // The font size, in pt, to use
+    // Private properties
+    protected $_Margin_Left;		// Left margin of labels
+    protected $_Margin_Top;			// Top margin of labels
+    protected $_X_Space;			// Horizontal space between 2 labels
+    protected $_Y_Space;			// Vertical space between 2 labels
+    protected $_X_Number;			// Number of labels horizontally
+    protected $_Y_Number;			// Number of labels vertically
+    protected $_Width;				// Width of label
+    protected $_Height;				// Height of label
+    protected $_Line_Height;		// Line height
+    protected $_Padding;			// Padding
+    protected $_Metric_Doc;			// Type of metric for the document
+    protected $_COUNTX;				// Current x position
+    protected $_COUNTY;				// Current y position
 
-    var $addresses 			= array();
-    var $layout 			= "";
+    // List of label formats
+    protected $_Avery_Labels = array(
+        '5160' => array('paper-size'=>'letter',	'metric'=>'mm',	'marginLeft'=>1.762,	'marginTop'=>10.7,		'NX'=>3,	'NY'=>10,	'SpaceX'=>3.175,	'SpaceY'=>0,	'width'=>66.675,	'height'=>25.4,		'font-size'=>8),
+        '5161' => array('paper-size'=>'letter',	'metric'=>'mm',	'marginLeft'=>0.967,	'marginTop'=>10.7,		'NX'=>2,	'NY'=>10,	'SpaceX'=>3.967,	'SpaceY'=>0,	'width'=>101.6,		'height'=>25.4,		'font-size'=>8),
+        '5162' => array('paper-size'=>'letter',	'metric'=>'mm',	'marginLeft'=>0.97,		'marginTop'=>20.224,	'NX'=>2,	'NY'=>7,	'SpaceX'=>4.762,	'SpaceY'=>0,	'width'=>100.807,	'height'=>35.72,	'font-size'=>8),
+        '5163' => array('paper-size'=>'letter',	'metric'=>'mm',	'marginLeft'=>1.762,	'marginTop'=>10.7, 		'NX'=>2,	'NY'=>5,	'SpaceX'=>3.175,	'SpaceY'=>0,	'width'=>101.6,		'height'=>50.8,		'font-size'=>8),
+        '5164' => array('paper-size'=>'letter',	'metric'=>'in',	'marginLeft'=>0.148,	'marginTop'=>0.5, 		'NX'=>2,	'NY'=>3,	'SpaceX'=>0.2031,	'SpaceY'=>0,	'width'=>4.0,		'height'=>3.33,		'font-size'=>12),
+        '8600' => array('paper-size'=>'letter',	'metric'=>'mm',	'marginLeft'=>7.1, 		'marginTop'=>19, 		'NX'=>3, 	'NY'=>10, 	'SpaceX'=>9.5, 		'SpaceY'=>3.1, 	'width'=>66.6, 		'height'=>25.4,		'font-size'=>8),
+        'L7163'=> array('paper-size'=>'A4',		'metric'=>'mm',	'marginLeft'=>5,		'marginTop'=>15, 		'NX'=>2,	'NY'=>7,	'SpaceX'=>25,		'SpaceY'=>0,	'width'=>99.1,		'height'=>38.1,		'font-size'=>9),
+        '3422' => array('paper-size'=>'A4',		'metric'=>'mm',	'marginLeft'=>0,		'marginTop'=>8.5, 		'NX'=>3,	'NY'=>8,	'SpaceX'=>0,		'SpaceY'=>0,	'width'=>70,		'height'=>35,		'font-size'=>9)
+    );
 
-    public function __construct($config = array())
-    {
-        if (count($config) > 0)
-        {
-            $this->initialize($config);
+    // Constructor
+    function __construct($format, $unit='mm', $posX=1, $posY=1) {
+        if (is_array($format)) {
+            // Custom format
+            $Tformat = $format;
+        } else {
+            // Built-in format
+            if (!isset($this->_Avery_Labels[$format]))
+                $this->Error('Unknown label format: '.$format);
+            $Tformat = $this->_Avery_Labels[$format];
+        }
+
+        parent::__construct('P', $unit, $Tformat['paper-size']);
+        $this->_Metric_Doc = $unit;
+        $this->_Set_Format($Tformat);
+        $this->SetFont('Arial');
+        $this->SetMargins(0,0);
+        $this->SetAutoPageBreak(false);
+        $this->_COUNTX = $posX-2;
+        $this->_COUNTY = $posY-1;
+    }
+
+    function _Set_Format($format) {
+        $this->_Margin_Left	= $this->_Convert_Metric($format['marginLeft'], $format['metric']);
+        $this->_Margin_Top	= $this->_Convert_Metric($format['marginTop'], $format['metric']);
+        $this->_X_Space 	= $this->_Convert_Metric($format['SpaceX'], $format['metric']);
+        $this->_Y_Space 	= $this->_Convert_Metric($format['SpaceY'], $format['metric']);
+        $this->_X_Number 	= $format['NX'];
+        $this->_Y_Number 	= $format['NY'];
+        $this->_Width 		= $this->_Convert_Metric($format['width'], $format['metric']);
+        $this->_Height	 	= $this->_Convert_Metric($format['height'], $format['metric']);
+        $this->Set_Font_Size($format['font-size']);
+        $this->_Padding		= $this->_Convert_Metric(3, 'mm');
+    }
+
+    // convert units (in to mm, mm to in)
+    // $src must be 'in' or 'mm'
+    function _Convert_Metric($value, $src) {
+        $dest = $this->_Metric_Doc;
+        if ($src != $dest) {
+            $a['in'] = 39.37008;
+            $a['mm'] = 1000;
+            return $value * $a[$dest] / $a[$src];
+        } else {
+            return $value;
         }
     }
 
-    public function initialize($config = array())
-    {
-        foreach ($config as $key => $val)
-        {
-            if (isset($this->$key))
-            {
-                $this->$key = $val;
-            }
-        }
+    // Give the line height for a given font size
+    function _Get_Height_Chars($pt) {
+        $a = array(6=>2, 7=>2.5, 8=>3, 9=>4, 10=>5, 11=>6, 12=>7, 13=>8, 14=>9, 15=>10);
+        if (!isset($a[$pt]))
+            $this->Error('Invalid font size: '.$pt);
+        return $this->_Convert_Metric($a[$pt], 'mm');
     }
 
-    public function output($addresses=array())
-    {
-
-        $this->addresses = $addresses;
-        $this->labels_total = $this->labels_across*$this->labels_down;
-
-        if (count($this->addresses)) {
-            switch ($this->format) {
-                case "word": { $output = $this->generate_labels_word();  break; }
-                case "html": { $output = $this->generate_labels_html();  break; }
-                case "pdf": { die("PDF output is work in progress. Check back soon :)"); $output = $this->generate_labels_pdf();  break; }
-                default: { die("Invalid format provided. Must be word, pdf or html"); }
-            }
-        }else{
-            die("No addresses provided");
-        }
-
+    // Set the character size
+    // This changes the line height too
+    function Set_Font_Size($pt) {
+        $this->_Line_Height = $this->_Get_Height_Chars($pt);
+        $this->SetFontSize($pt);
     }
 
-    public function generate_labels_pdf()
-    {
-
-        // calculate the padding
-        $this->padding_left = $this->convert($this->padding_left, "cm", "px");
-        $this->padding_top = $this->convert($this->padding_top, "cm", "pt");
-
-        // calculate left and top margins
-        $this->page_margin_side = $this->convert($this->page_margin_side, "cm", "cm");
-        $this->page_margin_top = $this->convert($this->page_margin_top, "cm", "cm");
-
-        // calculate label width and label height
-        $this->label_height = $this->convert($this->label_height, "cm", "pt");
-        $this->label_width = $this->convert($this->label_width, "cm", "pt");
-
-        // calculate paper width and height
-        $this->page_height = $this->convert($this->page_height, "cm", "cm");
-        $this->page_width = $this->convert($this->page_width, "cm", "cm");
-
-        // calculate the spacing
-        $this->pitch_horizontal = $this->convert($this->pitch_horizontal, "cm", "pt");
-        $this->pitch_vertical = $this->convert($this->pitch_vertical, "cm", "pt");
-
-        $CI =& get_instance();
-        $CI->load->library("cezpdf", array($this->page_width, $this->page_height));
-
-        $CI->cezpdf->selectFont(APPPATH.'libraries/fonts/Helvetica.afm');
-        $CI->cezpdf->ezSetCmMargins($this->page_margin_top, 0, $this->page_margin_side, $this->page_margin_side);
-
-        // setup columns
-        $col_names = array();
-        $col_options = array();
-        for ($i=0; $i<$this->labels_across; $i++) {
-            if ($this->pitch_horizontal-$this->label_width>0 && $i>0) {
-                $col_names['padding'.$i] = '';
-                $col_options['padding'.$i] = array('width'=>$this->pitch_horizontal-$this->label_width);
+    // Print a label
+    function Add_Label($text) {
+        $this->_COUNTX++;
+        if ($this->_COUNTX == $this->_X_Number) {
+            // Row full, we start a new one
+            $this->_COUNTX=0;
+            $this->_COUNTY++;
+            if ($this->_COUNTY == $this->_Y_Number) {
+                // End of page reached, we start a new one
+                $this->_COUNTY=0;
+                $this->AddPage();
             }
-            $col_names['column'.$i] = '';
-            $col_options['column'.$i] = array('width'=>$this->label_width);
         }
-        $table_options = array('width'=>550, 'showLines'=>0, 'showHeadings'=>0, 'shaded'=>0, 'cols'=>$col_options);
 
-        $num_x = 0;
-        $num_y = 0;
-        $num_total = 0;
-        $table_data = array();
-        $row_table_data = array();
-        foreach ($this->addresses as $address) {
-
-            if ($num_total==$this->labels_total) {
-                array_push($table_data, $row_table_data);
-                $CI->cezpdf->ezTable($table_data, $col_names, '', $table_options);
-                $CI->cezpdf->ezNewPage();
-                $num_x = 0;
-                $num_y = 0;
-                $table_data = array();
-                $row_table_data = array();
-            }
-
-            if ($num_x==$this->labels_across) {
-                array_push($table_data, $row_table_data);
-                $row_table_data = array();
-                $num_y++;
-                $num_x = 0;
-            }
-
-            if ($num_x<$this->labels_across) {
-
-                // loop through and replace address elements
-                $prespace = "";
-                for ($i=0; $i<$this->padding_left/4; $i++) {
-                    $prespace .= " ";
-                }
-                $search_array = array("<br />", "<br>", "<BR />", "<BR>");
-                $replace_array = array("\n".$prespace, "\n".$prespace, "\n".$prespace, "\n".$prespace);
-                foreach ($address as $address_key=>$address_value) {
-                    array_push($search_array, $address_key);
-                    array_push($replace_array, $address[$address_key]);
-                }
-                if ($this->pitch_horizontal-$this->label_width>0 && $num_x>0) {
-                    $row_table_data['padding'.$num_x] = '';
-                }
-                $row_table_data['column'.$num_x] = $prespace.str_replace($search_array, $replace_array, $this->layout);
-
-            }
-
-            $num_x++;
-            $num_total++;
-
-        }
-        array_push($table_data, $row_table_data);
-        $CI->cezpdf->ezTable($table_data, $col_names, '', $table_options);
-        $CI->cezpdf->ezStream();
-
+        $_PosX = $this->_Margin_Left + $this->_COUNTX*($this->_Width+$this->_X_Space) + $this->_Padding;
+        $_PosY = $this->_Margin_Top + $this->_COUNTY*($this->_Height+$this->_Y_Space) + $this->_Padding;
+        $this->SetXY($_PosX, $_PosY);
+        $this->MultiCell($this->_Width - $this->_Padding, $this->_Line_Height, $text, 0, 'L');
     }
 
-    public function generate_labels_html()
+    function _putcatalog()
     {
-
-        // calculate the padding
-        $this->padding_left = $this->convert($this->padding_left, "cm", "cm");
-        $this->padding_top = $this->convert($this->padding_top, "cm", "cm");
-
-        // calculate left and top margins
-        $this->page_margin_side = $this->convert($this->page_margin_side, "cm", "cm");
-        $this->page_margin_top = $this->convert($this->page_margin_top, "cm", "cm");
-
-        // calculate label width and label height
-        $this->label_height = $this->convert($this->label_height, "cm", "cm");
-        $this->label_width = $this->convert($this->label_width, "cm", "cm");
-
-        // calculate paper width and height
-        $this->page_height = $this->convert($this->page_height, "cm", "cm");
-        $this->page_width = $this->convert($this->page_width, "cm", "cm");
-
-        // calculate the spacing
-        $this->pitch_horizontal = $this->convert($this->pitch_horizontal, "cm", "cm");
-        $this->pitch_vertical = $this->convert($this->pitch_vertical, "cm", "cm");
-
-        $output = '<html>
-            <head>
-
-            </head>
-            <body style="margin:0; font-family:'.$this->font_face.'; font-size:'.$this->font_size.'pt">';
-
-        // loop through addresses
-        $num_x = 0;
-        $num_y = 0;
-        $num_total = 0;
-        foreach ($this->addresses as $address) {
-
-            // add page break / start and end table tag
-            if ($num_total==$this->labels_total) {
-                $output .= '</tr></table><br style="page-break-after:always" />';
-                $num_total = 0;
-                $num_x = 0;
-                $num_y = 0;
-            }
-            if ($num_total==0) { $output .= '<table width="100%" cellpadding="0" cellspacing="0">'; }
-
-            // start and end row tag
-            if ($num_x==$this->labels_across) { $output .= '</tr>'; $num_x = 0; $num_y++; }
-            if ($num_x==0) {
-                if ($this->pitch_vertical-$this->label_height>0 && $num_y>0) { // if row required
-                    $output .= '<tr>
-                                    <td colspan="'.$this->labels_across.'" style="font-size:1px; height:'.($this->pitch_vertical-$this->label_height).'cm">&nbsp;</td>
-                                </tr>';
-                }
-                $output .= '<tr>';
-            }
-
-            if ($this->pitch_horizontal-$this->label_width>0 && $num_x>0) { // if cell required
-                $output .= '<td style="width:'.($this->pitch_horizontal-$this->label_width).'cm; font-size:1pt">&nbsp;</td>';
-            }
-
-            $output .= '<td style="width:'.$this->label_width.'cm; height:'.$this->label_height.'cm; padding-left:'.$this->padding_left.'cm; padding-top:'.$this->padding_top.'cm" align="'.$this->align_horizontal.'" valign="'.$this->align_vertical.'">';
-
-            // loop through and replace address elements
-            $search_array = array();
-            $replace_array = array();
-            foreach ($address as $address_key=>$address_value) {
-                array_push($search_array, $address_key);
-                array_push($replace_array, $address[$address_key]);
-            }
-            $address_item = str_replace($search_array, $replace_array, $this->layout);
-
-            $output .= $address_item;
-
-            $output .= '</td>';
-
-            $num_x++;
-            $num_total++;
-        }
-        // Output any remaining cells from the last row
-        for ($i=0; $i<$this->labels_across-$num_x; $i++) {
-            if ($this->pitch_horizontal-$this->label_width>0) { // if cell required
-                $output .= '<td style="font-size:1pt">&nbsp;</td>';
-            }
-            $output .= '<td></td>';
-        }
-        $output .= '</tr>
-                </table>
-
-            </body>
-        </html>';
-
-        echo $output;
-
+        parent::_putcatalog();
+        // Disable the page scaling option in the printing dialog
+        $this->_put('/ViewerPreferences <</PrintScaling /None>>');
     }
 
-    public function generate_labels_word()
-    {
-
-        // calculate the padding
-        $this->padding_left = $this->convert($this->padding_left);
-        $this->padding_top = $this->convert($this->padding_top);
-
-        // calculate left and top margins
-        $this->page_margin_side = $this->convert($this->page_margin_side);
-        $this->page_margin_top = $this->convert($this->page_margin_top);
-
-        // calculate label width and label height
-        $this->label_height = $this->convert($this->label_height);
-        $this->label_width = $this->convert($this->label_width);
-
-        // calculate paper width and height
-        $this->page_height = $this->convert($this->page_height);
-        $this->page_width = $this->convert($this->page_width);
-
-        // calculate the spacing
-        $this->pitch_horizontal = $this->convert($this->pitch_horizontal);
-        $this->pitch_vertical = $this->convert($this->pitch_vertical);
-
-        $output = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-        <?mso-application progid="Word.Document"?>
-        <w:wordDocument xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml">
-            <w:docPr>
-                <w:view w:val="print"/>
-    				<w:zoom w:val="full-page" w:percent="100"/>
-            </w:docPr>
-            <w:body>';
-
-        $table_definition = '	<w:tblPr>
-                                  	<w:tblW w:w="0" w:type="auto"/>
-                                </w:tblPr>
-                                <w:tblGrid>
-                                   <w:gridCol w:w="'.$this->label_width.'"/>
-                                   <w:gridCol w:w="'.$this->label_width.'"/>
-                                </w:tblGrid>';
-
-        // loop through addresses
-        $num_x = 0;
-        $num_y = 0;
-        $num_total = 0;
-        foreach ($this->addresses as $address) {
-
-            // add page break / start and end table tag
-            if ($num_total==$this->labels_total) {
-                $output .= '</w:tr></w:tbl><w:p><w:r><w:pageBreakBefore/></w:r></w:p>';
-                $num_total = 0;
-                $num_x = 0;
-                $num_y = 0;
-            }
-            if ($num_total==0) { $output .= '<w:tbl>'.$table_definition; }
-
-            // start and end row tag
-            if ($num_x==$this->labels_across) { $output .= '</w:tr>'; $num_x = 0; $num_y++; }
-            if ($num_x==0) {
-                if ($this->pitch_vertical-$this->label_height>0 && $num_y>0) { // if row required
-                    $output .= '<w:tr><w:trPr><w:trHeight w:val="'.($this->pitch_vertical-$this->label_height).'"/></w:trPr>
-                                    <w:tc><w:p><w:r><w:t></w:t></w:r></w:p></w:tc>
-                                    <w:tc><w:p><w:r><w:t></w:t></w:r></w:p></w:tc>
-                                    <w:tc><w:p><w:r><w:t></w:t></w:r></w:p></w:tc>
-                                </w:tr>';
-                }
-                $output .= '<w:tr><w:trPr><w:trHeight w:val="'.$this->label_height.'"/></w:trPr>';
-            }
-
-            if ($this->pitch_horizontal-$this->label_width>0 && $num_x>0) { // if cell required
-                $output .= '<w:tc><w:tcPr><w:tcW w:w="'.($this->pitch_horizontal-$this->label_width).'" w:type="dxa"/></w:tcPr><w:p><w:r><w:t></w:t></w:r></w:p></w:tc>';
-            }
-
-            $output .= '<w:tc>
-                            <w:tcPr>
-                                <w:tcW w:w="'.$this->label_width.'" w:type="dxa"/>
-                                <w:vAlign w:val="'.$this->align_vertical.'"/>
-                            </w:tcPr>
-                            <w:p>
-                                <w:pPr>
-                                    <w:jc w:val="'.$this->align_horizontal.'"/>
-                                    <w:spacing w:before="'.$this->padding_top.'"/>
-                                    <w:ind w:left="'.$this->padding_left.'"/>
-                              	</w:pPr>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:ascii="'.$this->font_face.'" w:h-ansi="'.$this->font_face.'" w:cs="'.$this->font_face.'"/>
-                                   		<w:sz w:val="'.($this->font_size*2).'"/>
-                                        <w:sz-cs w:val="'.($this->font_size*2).'"/>
-                                    </w:rPr>
-                                    <w:t>';
-
-            // loop through and replace address elements
-            $search_array = array();
-            $replace_array = array();
-            foreach ($address as $address_key=>$address_value) {
-                array_push($search_array, $address_key);
-                array_push($replace_array, $address[$address_key]);
-            }
-            $address_item = str_replace($search_array, $replace_array, $this->layout);
-
-            // replace html with WordML valid tags
-            $address_item = str_replace(array("<br />", "<br>", "<BR />", "<BR>"), "<w:br/>", $address_item);
-
-            $output .= $address_item;
-
-            $output .= '</w:t>
-                                </w:r>
-                            </w:p>
-                        </w:tc>';
-
-            $num_x++;
-            $num_total++;
-        }
-        // Output any remaining cells from the last row
-        for ($i=0; $i<$this->labels_across-$num_x; $i++) {
-            if ($this->pitch_horizontal-$this->label_width>0) { // if cell required
-                $output .= '<w:tc><w:tcPr><w:tcW w:w="'.($this->pitch_horizontal-$this->label_width).'" w:type="dxa"/></w:tcPr><w:p><w:r><w:t></w:t></w:r></w:p></w:tc>';
-            }
-            $output .= '<w:tc><w:tcPr><w:tcW w:w="'.$this->label_width.'" w:type="dxa"/></w:tcPr><w:p><w:r><w:t></w:t></w:r></w:p></w:tc>';
-        }
-        $output .= '</w:tr>
-                </w:tbl>
-                <w:sectPr>
-                    <w:pgSz w:w="'.$this->page_width.'" w:h="'.$this->page_height.'"/>
-                    <w:pgMar w:top="'.$this->page_margin_top.'" w:right="'.$this->page_margin_side.'" w:bottom="0" w:left="'.$this->page_margin_side.'" />
-                </w:sectPr>
-            </w:body>
-        </w:wordDocument>';
-
-        $this->output_file('labels.docx', $output);
-
-    }
-
-    public function convert($input=0, $unit_from="cm", $unit_to="dxa")
-    {
-        $output = 0;
-
-        switch ($unit_from) {
-            case "in": {
-                switch ($unit_to) {
-                    case "dxa": { $output = ceil($input*1440); break; }
-                    case "px": { $output = ceil(($input*2.54)*37.795275591); break; }
-                    case "pt": { $output = ceil(($input*2.54)*28.346456693); break; }
-                }
-                break;
-            }
-            case "mm": {
-                switch ($unit_to) {
-                    case "dxa": { $output = ceil((($input/10)/2.54)*1440); break; }
-                    case "px": { $output = ceil(($input/10)*37.795275591); break; }
-                    case "pt": { $output = ceil(($input/10)*28.346456693); break; }
-                }
-                break;
-            }
-            default: { // presume cm
-                switch ($unit_to) {
-                    case "dxa": { $output = ceil(($input/2.54)*1440); break; }
-                    case "px": { $output = ceil($input*37.795275591); break; }
-                    case "pt": { $output = ceil($input*28.346456693); break; }
-                    case "cm": { $output = $input; break; }
-                }
-                break;
-            }
-        }
-
-        return $output;
-    }
-
-    public function output_file($filename='', $output='')
-    {
-
-        // Set headers
-        header("Cache-Control: public");
-        header("Content-Type: application/vnd.ms-word.main+xml");
-        header("Content-Description: File Transfer");
-        header("Content-Disposition: inline; filename=".$filename);
-        header("Content-Transfer-Encoding: binary");
-        echo $output;
-
-    }
 
  }
 
