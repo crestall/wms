@@ -194,6 +194,9 @@ class FormController extends Controller {
                         $skip_first = false;
                         continue;
                     }
+                    if(!empty($r[7]))
+                        continue;
+
                     if(array_search(strtolower(trim($r[3])), $states) === false)
                     {
                         $state = trim($r[3]);
