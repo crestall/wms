@@ -134,7 +134,7 @@ class pdfController extends Controller
 
             $text = sprintf("%s\n%s\n%s\n%s\n%s", ucwords($od['name']), ucwords($od['address']), strtoupper($od['suburb']), strtoupper($od['state']), $od['postcode']);
             //$text = sprintf("%s\n%s\n%s\n%s %s, %s", "Laurent", 'Immeuble Toto', 'av. Fragonard', '06000', 'NICE', 'FRANCE');
-            $pdf->Add_Label($text);
+            $pdf->Add_Label($address_string);
         }
         //$pdf->AddPage();
         $pdf->Output();
