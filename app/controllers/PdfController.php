@@ -125,7 +125,7 @@ class pdfController extends Controller
                 'margin_bottom' => 1
             ]);
             $pdf->debug = true;
-            $pdf->setConfig(25);
+            $pdf->setConfig(3422);
             $order_ids  = $this->request->data['orders'];
             foreach($order_ids as $id)
             {
