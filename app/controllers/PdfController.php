@@ -113,7 +113,7 @@ class pdfController extends Controller
             'SpaceY'    =>0,
             'width'     =>99,
             'height'    =>33,
-            'font-size' =>12
+            'font-size' =>10
         );
         $pdf = new AddressLabels($config);
         $pdf->AddPage();
