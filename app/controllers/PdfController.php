@@ -116,6 +116,7 @@ class pdfController extends Controller
             'font-size' =>14
         );
         $pdf = new AddressLabels($config);
+        $pdf->AddPage();
         //$pdf->debug = true;
         //$pdf->setConfig('3422');
         $order_ids  = $this->request->data['orders'];
