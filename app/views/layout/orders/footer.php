@@ -209,8 +209,8 @@
                                 var order_id = $(this).data('orderid');
                                 if( $(this).prop('checked'))
                                 {
-                                    ids.push($(this).data('order_id'));
-                                } 
+                                    ids.push($(this).data('orderid'));
+                                }
                             });
                             console.log(ids);
                             if(ids.length)
