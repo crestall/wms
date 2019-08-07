@@ -106,7 +106,7 @@ class pdfController extends Controller
             'paper-size' =>'A4',
             'metric'    =>'mm',
             'marginLeft'=>3,
-            'marginTop' =>13,
+            'marginTop' =>9,
             'NX'        =>2,
             'NY'        =>8,
             'SpaceX'    =>2,
