@@ -80,7 +80,7 @@ class pdfController extends Controller
 
     public function printSwatchLabels()
     {
-        /*
+
         //echo "<pre>",print_r($this->request),"</pre>";die();
         $pdf = new Mympdf([
             'mode'          => 'utf-8',
@@ -101,7 +101,7 @@ class pdfController extends Controller
         //$pdf->AddPage();
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
-        */
+        /*
         $config = array(
             'paper-size' =>'A4',
             'metric'    =>'mm',
@@ -149,7 +149,7 @@ class pdfController extends Controller
             // Process the exception, log, print etc.
             echo $e->getMessage();
         }
-
+        */
     }
 
     public function printCometLocalLabels()
