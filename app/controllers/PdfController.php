@@ -142,6 +142,7 @@ class pdfController extends Controller
                 $text = sprintf("%s\n%s\n%s\n%s\n%s", ucwords($od['name']), ucwords($od['address']), strtoupper($od['suburb']), strtoupper($od['state']), $od['postcode']);
                 $pdf->Add_Label($address_string);
             }
+            $pdf->AddPage();
             $pdf->Output();
         }   catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
             // Process the exception, log, print etc.
