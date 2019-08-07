@@ -9,8 +9,8 @@
 
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
- use Mpdf\Mpdf;
- class AddressLabels extends mPDF{
+ use Fpdf\Fpdf;
+ class AddressLabels extends Fpdf{
 
     // Private properties
     protected $_Margin_Left;		// Left margin of labels
