@@ -121,6 +121,16 @@
                 'add-solar-install-new': {
                     init: function(){
                         //actions.common.init();
+                        datePicker.fromDate();
+                        $("form#add-solar-install").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Job...</h2></div>' });
+                            }
+                        });
+                        $('select#team_id, select#job_type, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
+                        });
                     }
                 },
                 'add-service-job': {

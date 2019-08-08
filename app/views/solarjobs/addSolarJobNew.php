@@ -14,7 +14,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
     <?php echo Form::displayError('general');?>
     <div class="row">
         <div class="col-lg-12">
-            <form id="add-service-job" method="post" action="/form/procAddSolarInstall" autocomplete="off">
+            <form id="add-solar-install" method="post" action="/form/procAddSolarInstall" autocomplete="off">
                 <div class="row form-group">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Select a Job Type</label>
                     <div class="col-md-4">
