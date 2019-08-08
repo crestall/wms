@@ -469,7 +469,7 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
-    $('#add_solar_install').validate({
+    $('#add-solar-install').validate({
         rules:{
             team_id:{
                 notNone:true
