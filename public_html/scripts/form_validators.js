@@ -469,6 +469,19 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
+    $('#add_solar_install').validate({
+        rules:{
+            team_id:{
+                notNone:true
+            }
+        },
+        messages:{
+            team_id:{
+                notNone: "Please select a team"
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
     $('#add-tlj-order, #add-solargain-order').validate({
         rules:{
             team_id:{

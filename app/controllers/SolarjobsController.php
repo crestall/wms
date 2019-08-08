@@ -21,7 +21,8 @@ class SolarjobsController extends Controller
 
         Config::setJsConfig('curPage', "add-solar-install-new");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolarJobNew.php',[
-            'page_title'    =>  $page_title
+            'page_title'    =>  $page_title,
+            'client_id'     =>  67 
         ]);
     }
 
