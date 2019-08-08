@@ -135,7 +135,7 @@ class SolarjobsController extends Controller
         $eb = $this->user->getUserName( $details['entered_by'] );
 
         Config::setJsConfig('curPage', "update-install-details");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateIntallDetails.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateInstallDetails.php',[
             'page_title'    =>  $page_title,
             'details'       =>  $details,
             'id'            =>  $id,
