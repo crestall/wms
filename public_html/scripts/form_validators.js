@@ -469,6 +469,25 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
+    $('#add-solar-install').validate({
+        rules:{
+            team_id:{
+                notNone:true
+            },
+            type_id:{
+                notNone:true
+            }
+        },
+        messages:{
+            team_id:{
+                notNone: "Please select a team"
+            },
+            type_id:{
+                notNone: "Please select an install type"
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
     $('#add-tlj-order, #add-solargain-order').validate({
         rules:{
             team_id:{

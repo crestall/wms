@@ -15,6 +15,17 @@ class SolarjobsController extends Controller
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
     }
 
+    public function addSolarInstallNew()
+    {
+        $page_title = "Add a Solar Install Job";
+
+        Config::setJsConfig('curPage', "add-solar-install-new");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolarJobNew.php',[
+            'page_title'    =>  $page_title,
+            'client_id'     =>  67 
+        ]);
+    }
+
     public function addSolarInstall()
     {
         $page_title = "Add a Solar Install Job";
@@ -113,6 +124,29 @@ class SolarjobsController extends Controller
 
         Config::setJsConfig('curPage', "update-service-details");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateServiceDetails.php',[
+            'page_title'    =>  $page_title,
+            'details'       =>  $details,
+            'id'            =>  $id,
+            'order_type'    =>  $order_type,
+            'entered_by'    =>  $eb
+        ]);
+    }
+
+    public function updateDetails()
+    {
+        if(empty($this->request->params['args']))
+        {
+            return $this->redirector->to(PUBLIC_ROOT."solar-jobs/view-installs");
+        }
+        $page_title = "Update Solar Install Job Details";
+        $id = $this->request->params['args']['id'];
+
+        $details = $this->solarorder->getOrderDetail($id);
+        $order_type = $this->solarordertype->getSolarOrderType($details['type_id']);
+        $eb = $this->user->getUserName( $details['entered_by'] );
+
+        Config::setJsConfig('curPage', "update-install-details");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateInstallDetails.php',[
             'page_title'    =>  $page_title,
             'details'       =>  $details,
             'id'            =>  $id,

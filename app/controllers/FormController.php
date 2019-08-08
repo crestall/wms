@@ -123,6 +123,11 @@ class FormController extends Controller {
         $this->Security->requirePost($actions);
     }
 
+    public function procAddSolarInstall()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>";die(); 
+    }
+
     public function printSwatchLabels()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>";die();
