@@ -679,7 +679,7 @@ class FormController extends Controller {
         /* */
         foreach($this->request->data['items'] as $i)
         {
-            if(empty$i['id'])
+            if(empty($i['id']))
                 continue;
             $items[] = array(
                 'id'    => $i['id'],
