@@ -16,9 +16,9 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
         <div class="col-lg-12">
             <form id="add-solar-install" method="post" action="/form/procAddSolarInstall" autocomplete="off">
                 <div class="row form-group">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Select a Job Type</label>
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Select an Install Type</label>
                     <div class="col-md-4">
-                        <p><select id="job_type" name="job_type" class="form-control selectpicker"><option value="0">--Choose One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes(Form::value('job_type'));?></select></p>
+                        <p><select id="type_id" name="type_id" class="form-control selectpicker"><option value="0">--Choose One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes(Form::value('type_id'));?></select></p>
                     </div>
                 </div>
                 <div class="form-group row">

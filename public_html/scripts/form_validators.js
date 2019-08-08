@@ -473,11 +473,17 @@ $(document).ready(function() {
         rules:{
             team_id:{
                 notNone:true
+            },
+            type_id:{
+                notNone:true
             }
         },
         messages:{
             team_id:{
                 notNone: "Please select a team"
+            },
+            type_id:{
+                notNone: "Please select an install type"
             }
         }
     });
