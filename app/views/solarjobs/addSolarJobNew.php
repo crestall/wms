@@ -35,6 +35,15 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                         <?php echo Form::displayError('work_order');?>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Customer Name</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                        <?php echo Form::displayError('customer_name');?>
+                    </div>
+                </div>
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
+                <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
             </form>
         </div>
     </div>
