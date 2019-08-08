@@ -121,6 +121,29 @@ class SolarjobsController extends Controller
         ]);
     }
 
+    public function updateDetails()
+    {
+        if(empty($this->request->params['args']))
+        {
+            return $this->redirector->to(PUBLIC_ROOT."solar-jobs/view-installs");
+        }
+        $page_title = "Update Solar Install Job Details";
+        $id = $this->request->params['args']['id'];
+
+        $details = $this->solarorder->getOrderDetail($id);
+        $order_type = $this->solarordertype->getSolarOrderType($details['type_id']);
+        $eb = $this->user->getUserName( $details['entered_by'] );
+
+        Config::setJsConfig('curPage', "update-install-details");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/updateIntallDetails.php',[
+            'page_title'    =>  $page_title,
+            'details'       =>  $details,
+            'id'            =>  $id,
+            'order_type'    =>  $order_type,
+            'entered_by'    =>  $eb
+        ]);
+    }
+
     public function itemsUpdate()
     {
         if(!isset($this->request->params['args']['job']))
