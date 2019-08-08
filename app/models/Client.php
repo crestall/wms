@@ -35,7 +35,7 @@ class Client extends Model{
 
     public function __construct()
     {
-        $this->solar_client_id = $this->getClientId('TLJ Services Pty Ltd');
+        $this->solar_client_id = $this->getClientId('TLJ Solar Pty Ltd');
     }
 
     public function getClientId($name)
