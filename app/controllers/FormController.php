@@ -801,7 +801,7 @@ class FormController extends Controller {
             $order_id = $this->solarorder->addOrder($post_data, $oitems);
             Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
         }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-tlj-install");
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solargain-install");
     }
 
     public function procRegisterNewStock()
