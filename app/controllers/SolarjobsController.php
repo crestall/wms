@@ -208,7 +208,7 @@ class SolarjobsController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "add-solargain-job");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addTLJJob.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolargainJob.php', [
             'page_title'    =>  "Add Solargain Install",
             'client_id'     =>  67,
             'order_type_id' =>  3
