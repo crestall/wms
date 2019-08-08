@@ -127,7 +127,7 @@
                         $("form#add-solar-install").submit(function(e){
                             if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Job...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Install...</h2></div>' });
                             }
                         });
                         $('select#team_id, select#type_id, #address, #suburb, #postcode, #country').change(function(e){
