@@ -122,6 +122,8 @@
                     init: function(){
                         //actions.common.init();
                         datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                         $("form#add-solar-install").submit(function(e){
                             if($(this).valid())
                             {
