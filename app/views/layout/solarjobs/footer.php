@@ -118,6 +118,11 @@
                         actions.common.init();
                     }
                 },
+                'add-solar-install-new': {
+                    init: function(){
+                        //actions.common.init();
+                    }
+                },
                 'add-service-job': {
                     init: function(){
                         actions.common.init();
