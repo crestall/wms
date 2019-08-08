@@ -733,7 +733,7 @@ class FormController extends Controller {
 
     public function procAddSolargainOrder()
     {
-        echo "POST<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "POST<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -744,52 +744,49 @@ class FormController extends Controller {
             }
         }
         $items = array();
-        $items[] = array(
-            'id'    => $panel_id,
-            'qty'   => $panel_qty
-        );
-        $items[] = array(
-            'id'    => $inverter_id,
-            'qty'   => $inverter_qty
-        );
-        /* */
-        foreach($this->request->data['items'] as $i)
+        if(!isset($this->request->data['items']) || empty($this->request->data['items'][0]['name']))
         {
-            if(empty($i['id']))
-                continue;
-            $items[] = array(
-                'id'    => $i['id'],
-                'qty'   => $i['qty']
-            );
+            Form::setError('items', 'At least one item must be selected');
+        }
+        else
+        {
+            foreach($this->request->data['items'] as $i)
+            {
+                $items[] = array(
+                    'id'    => $i['id'],
+                    'qty'   => $i['qty']
+                );
+                //echo "Items<pre>",print_r($items),"</pre>"; die();
+                $orders_items = array();
+                foreach($items as $item)
+                {
+                    if($item['qty'] == 0)
+                    {
+                        continue;
+                    }
+                    $array = array(
+                        'qty'           => $item['qty'],
+                        'id'            => $item['id'],
+                        'whole_pallet'  => false
+                    );
+                    $orders_items[] = $array;
+                }
+                $the_items = array(
+                    0 => $orders_items
+                );
+                //echo "The items<pre>",print_r($the_items),"</pre>"; //die();
+                $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
+                foreach($oitems[0] as $item)//there is only one order
+                {
+                    if($item['import_error'])
+                    {
+                        Form::setError('items', $item['import_error_string']);
+                    }
+                }
+            }
         }
 
-        //echo "Items<pre>",print_r($items),"</pre>"; die();
-        $orders_items = array();
-        foreach($items as $item)
-        {
-            if($item['qty'] == 0)
-            {
-                continue;
-            }
-            $array = array(
-                'qty'           => $item['qty'],
-                'id'            => $item['id'],
-                'whole_pallet'  => false
-            );
-            $orders_items[] = $array;
-        }
-        $the_items = array(
-            0 => $orders_items
-        );
-        //echo "The items<pre>",print_r($the_items),"</pre>"; //die();
-        $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
-        foreach($oitems[0] as $item)//there is only one order
-        {
-            if($item['import_error'])
-            {
-                Form::setError('items', $item['import_error_string']);
-            }
-        }
+
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
