@@ -657,7 +657,7 @@ class FormController extends Controller {
 
     public function procAddTljOrder()
     {
-        //echo "POST<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "POST<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -679,6 +679,8 @@ class FormController extends Controller {
         /* */
         foreach($this->request->data['items'] as $i)
         {
+            if(empty($i['id']))
+                continue;
             $items[] = array(
                 'id'    => $i['id'],
                 'qty'   => $i['qty']
@@ -727,6 +729,79 @@ class FormController extends Controller {
             Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
         }
         return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-tlj-install");
+    }
+
+    public function procAddSolargainOrder()
+    {
+        echo "POST<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $items = array();
+        if(!isset($this->request->data['items']) || empty($this->request->data['items'][0]['name']))
+        {
+            Form::setError('items', 'At least one item must be selected');
+        }
+        else
+        {
+            foreach($this->request->data['items'] as $i)
+            {
+                $items[] = array(
+                    'id'    => $i['id'],
+                    'qty'   => $i['qty']
+                );
+                //echo "Items<pre>",print_r($items),"</pre>"; die();
+                $orders_items = array();
+                foreach($items as $item)
+                {
+                    if($item['qty'] == 0)
+                    {
+                        continue;
+                    }
+                    $array = array(
+                        'qty'           => $item['qty'],
+                        'id'            => $item['id'],
+                        'whole_pallet'  => false
+                    );
+                    $orders_items[] = $array;
+                }
+                $the_items = array(
+                    0 => $orders_items
+                );
+                //echo "The items<pre>",print_r($the_items),"</pre>"; //die();
+                $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
+                foreach($oitems[0] as $item)//there is only one order
+                {
+                    if($item['import_error'])
+                    {
+                        Form::setError('items', $item['import_error_string']);
+                    }
+                }
+            }
+        }
+
+
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "oitems<pre>",print_r($oitems),"</pre>"; die();
+            //all good, add details
+            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $order_id = $this->solarorder->addOrder($post_data, $oitems);
+            Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solargain-install");
     }
 
     public function procRegisterNewStock()

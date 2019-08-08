@@ -432,6 +432,7 @@ return array(
             'view-installs'                 => true,
             'add-origin-job'            => false,
             'add-tlj-job'               => false,
+            'add-solargain-job'               => false,
             'job-search'                => true,
             'edit-servicejob'           => false,
             'update-service-details'    => false,

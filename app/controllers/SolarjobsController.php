@@ -208,12 +208,10 @@ class SolarjobsController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "add-solargain-job");
-        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addsolargainorder.php");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolargainJob.php', [
             'page_title'    =>  "Add Solargain Install",
             'client_id'     =>  67,
-            'order_type_id' =>  3,
-            'form'          =>  $form
+            'order_type_id' =>  3
         ]);
     }
 

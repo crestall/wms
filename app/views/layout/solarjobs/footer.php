@@ -316,6 +316,15 @@
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+                        $("form#add-solargain-order").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Install...</h2></div>' });
+                            }
+                        });
+                        $('select#team_id, select#job_type, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
+                        });
                     }
                 },
                 'add-tlj-service-job' : {

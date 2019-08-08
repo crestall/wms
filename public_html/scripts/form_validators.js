@@ -469,7 +469,7 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
-    $('#add-tlj-order').validate({
+    $('#add-tlj-order, #add-solargain-order').validate({
         rules:{
             team_id:{
                 notNone:true
