@@ -743,6 +743,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        $post_data['panel_qty'] = 0;
         $items = array();
         if(!isset($this->request->data['items']) || empty($this->request->data['items'][0]['name']))
         {
