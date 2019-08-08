@@ -88,6 +88,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                         </div>
                     </div>
                 </div>
+                
                 <?php include(Config::get('VIEWS_PATH')."forms/item_adder.php");?>
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
