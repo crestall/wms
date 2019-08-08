@@ -12,7 +12,6 @@ if(!empty(Form::value('items')))
 if($user_role == "client")
     $idisp = "block";
 $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qty');
-$type_id = $this->controller->solarordertype->getTypeId('tlj services');
 $date_filter = "Install Date";
 $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
 ?>
@@ -28,7 +27,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
     <?php echo Form::displayError('general');?>
     <div class="row">
         <div class="col-lg-12">
-            <form id="add-tlj-order" method="post" action="/form/procAddSolargainOrder" autocomplete="off">
+            <form id="add-solargain-order" method="post" action="/form/procAddSolargainOrder" autocomplete="off">
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Team</label>
                     <div class="col-md-4">
@@ -64,7 +63,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Panel</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control required tlj-item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
+                        <input type="text" class="form-control required solargain-item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
                         <?php echo Form::displayError('panel');?>
                     </div>
                     <div class="col-md-4">
@@ -78,7 +77,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Inverter</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control required tlj-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
+                        <input type="text" class="form-control required solargain-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
                         <?php echo Form::displayError('inverter');?>
                     </div>
                     <div class="col-md-4">
@@ -93,7 +92,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="67" />
-                <input type="hidden" name="type_id" id="type_id" value="<?php echo $type_id;?>" />
+                <input type="hidden" name="type_id" id="type_id" value="<?php echo $order_type_id;?>" />
                 <input type="hidden" name="panel_id" id="panel_id" value="<?php echo Form::value('panel_id') ?>" />
                 <input type="hidden" name="inverter_id" id="inverter_id" value="<?php echo Form::value('inverter_id') ?>" />
                 <div class="form-group row">

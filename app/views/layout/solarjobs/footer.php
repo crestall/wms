@@ -316,6 +316,43 @@
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+                        $("form#add-solargain-order").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Install...</h2></div>' });
+                            }
+                        });
+                        $('select#team_id, select#job_type, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
+                        });
+                        $("input.solargain-item-searcher").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.itemAutoComplete($(this), selectCallback, changeCallback);
+                        })
+                        function selectCallback(event, ui)
+                        {
+                            var $this = event.target;
+                            if($this.id == "panel")
+                            {
+                                $("#panel_id").val(ui.item.item_id)
+                            }
+                            else if($this.id == "inverter")
+                            {
+                                $("#inverter_id").val(ui.item.item_id)
+                            }
+                            return false;
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                        }
                     }
                 },
                 'add-tlj-service-job' : {

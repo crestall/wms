@@ -12,7 +12,6 @@ if(!empty(Form::value('items')))
 if($user_role == "client")
     $idisp = "block";
 $inverter_qty = empty(Form::value('inverter_qty'))? 1 : Form::value('inverter_qty');
-$type_id = $this->controller->solarordertype->getTypeId('tlj services');
 $date_filter = "Install Date";
 $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
 ?>
@@ -93,7 +92,7 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="67" />
-                <input type="hidden" name="type_id" id="type_id" value="<?php echo $type_id;?>" />
+                <input type="hidden" name="type_id" id="type_id" value="<?php echo $order_type_id;?>" />
                 <input type="hidden" name="panel_id" id="panel_id" value="<?php echo Form::value('panel_id') ?>" />
                 <input type="hidden" name="inverter_id" id="inverter_id" value="<?php echo Form::value('inverter_id') ?>" />
                 <div class="form-group row">
