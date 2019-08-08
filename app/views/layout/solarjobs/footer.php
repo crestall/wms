@@ -127,6 +127,10 @@
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Job...</h2></div>' });
                             }
+                            else
+                            {
+                                return false;
+                            }
                         });
                         $('select#team_id, select#job_type, #address, #suburb, #postcode, #country').change(function(e){
                             $(this).valid();
