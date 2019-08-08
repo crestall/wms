@@ -427,6 +427,7 @@ return array(
         ),
         'solar-jobs'  => array(
             'add-solar-install'             => true,
+            'add-solar-install-new'             => false,
             'update-solar-job'          => false,
             'add-service-job'           => true,
             'view-installs'                 => true,
