@@ -133,6 +133,16 @@
                         $('select#team_id, select#type_id, #address, #suburb, #postcode, #country').change(function(e){
                             $(this).valid();
                         });
+                        $('select#type_id').change(function(e){
+                            if($(this).val() == config.OriginId)
+                            {
+                                $('div#origin_cal_holder').slideDown();
+                            }
+                            else
+                            {
+                                $('div#origin_cal_holder').slideUp();
+                            }
+                        });
                     }
                 },
                 'add-service-job': {
