@@ -7,6 +7,7 @@ $postcode = Form::value('postcode');
 $country = (empty(Form::value('country')))? "AU" : Form::value('country');
 $date_filter = "Install Date";
 $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
+$odisp = (Form::value('type_id') == $origin_id)? "block":"none";
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -44,7 +45,9 @@ $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
                 </div>
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
-
+                <div id="origin_calc_holder" style="display:<?php echo $odisp;?>" >
+                    origin calcs
+                </div>
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id; ?>" />

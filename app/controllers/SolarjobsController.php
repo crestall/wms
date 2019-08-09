@@ -18,11 +18,12 @@ class SolarjobsController extends Controller
     public function addSolarInstallNew()
     {
         $page_title = "Add a Solar Install Job";
-
+        $origin_id = $this->solarordertype->OriginId;
         Config::setJsConfig('curPage', "add-solar-install-new");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/solarjobs/", Config::get('VIEWS_PATH') . 'solarjobs/addSolarJobNew.php',[
             'page_title'    =>  $page_title,
-            'client_id'     =>  67 
+            'origin_id'     =>  $origin_id,
+            'client_id'     =>  67
         ]);
     }
 
