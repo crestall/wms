@@ -141,7 +141,7 @@
                             }
                             else
                             {
-                                $('div#origin_calc_holder').sliedUp();
+                                $('div#origin_calc_holder').slideUp();
                             }
                         });
                     }
