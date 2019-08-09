@@ -138,10 +138,12 @@
                             if($(this).val() == config.OriginId)
                             {
                                 $('div#origin_cal_holder').slideDown();
+                                console.log('show');
                             }
                             else
                             {
                                 $('div#origin_cal_holder').slideUp();
+                                console.log('hide'); 
                             }
                         });
                     }
