@@ -482,10 +482,12 @@ $(document).ready(function() {
                 notNone:true
             },
             inverter_qty:{
-                postiveNumber0: true
+                min: 0,
+                integer: true
             },
             panel_qty:{
-                postiveNumber0: true
+                integer: true,
+                min: 0
             }
         },
         messages:{
@@ -496,10 +498,10 @@ $(document).ready(function() {
                 notNone: "Please select an install type"
             },
             inverter_qty:{
-                positiveNumber0: "Only whole numbers greater than or equal to zero"
+                integer: "Only whole numbers greater than or equal to zero"
             },
             panel_qty:{
-                positiveNumber0: "Only whole numbers greater than or equal to zero"
+                integer: "Only whole numbers greater than or equal to zero"
             }
         }
     });
