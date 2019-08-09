@@ -9,7 +9,7 @@ class Solarordertype extends Model{
     public function __construct()
     {
         parent::__construct();
-        $this->TLJSolarId = $this->getTypeId('TLJ Solar Pty Ltd');
+        $this->TLJSolarId = $this->getTypeId('TLJ Solar');
         $this->OriginId = $this->getTypeId('Origin');
         $this->SolargainId = $this->getTypeId('Solar Gain');
         $this->BeyondId = $this->getTypeId('Beyond Solar');
