@@ -66,7 +66,7 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">Panel</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control solar-item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
+                        <input type="text" class="form-control panel-item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
                         <?php echo Form::displayError('panel');?>
                     </div>
                     <div class="col-md-4">
@@ -80,7 +80,7 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">Inverter</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control solar-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
+                        <input type="text" class="form-control inverter-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
                         <?php echo Form::displayError('inverter');?>
                     </div>
                     <div class="col-md-4">

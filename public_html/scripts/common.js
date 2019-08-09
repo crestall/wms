@@ -607,9 +607,29 @@ var autoCompleter = {
     solarItemAutoComplete: function(element, selectCallback, changeCallback)
     {
         element.autocomplete({
+            source: function(req, response)
+            {
+                var url;
+                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&type_id="+$('$type_id').val();
+                $.getJSON(url, function(data){
+            		response(data);
+            	});
+            },
+            select: function(event, ui) {
+                selectCallback(event, ui);
+            },
+            change: function (event, ui) {
+                changeCallback(event, ui);
+            },
+            minLength: 2
+        });
+    },
+    solarAllItemsAutoComplete: function(element, selectCallback, changeCallback)
+    {
+        element.autocomplete({
             source: function(req, response){
                 var url;
-                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&solar_type_id="+$('#order_type_id').val();
+                url = "/ajaxfunctions/getAllSolarItems/?item="+req.term+"&solar_type_id="+$('#order_type_id').val();
                 //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);

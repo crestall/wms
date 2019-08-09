@@ -637,7 +637,22 @@ class Item extends Model{
         return $return_array;
     }
 
-    public function getAutocompleteSolarItems($data, $fulfilled_id)
+    public function getAutocompleteSolarItems($data, $fulfilled_id, $solar_type_id)
+    {
+        $return_array = array();
+        if(in_array($data['clientid'], $this->solar_client_ids))
+        {
+            $the_items = $this->getAutocompleteItems($data, $fulfilled_id);
+            foreach($the_items as $i)
+            {
+                if($i['solar_type_id'] == $solar_type_id)
+                    $return_array[] = $i;
+            }
+        }
+        return $return_array();
+    }
+
+    public function getAutocompleteAllSolarItems($data, $fulfilled_id)
     {
         $db = Database::openConnection();
         $return_array = array();
@@ -681,7 +696,7 @@ class Item extends Model{
         //$query = "SELECT * FROM items WHERE active = 1 AND (name LIKE :term1 OR sku LIKE :term2) AND client_id = $client_id ORDER BY name";
 
         $query = "
-            SELECT a.location, a.location_id, a.qty, a.qc_count, SUM(a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) as available, a.name, a.sku, a.palletized, a.per_pallet, a.item_id,
+            SELECT a.location, a.location_id, a.qty, a.qc_count, SUM(a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) as available, a.name, a.sku, a.palletized, a.per_pallet, a.item_id, a.solar_type_id
             GROUP_CONCAT(
                 IF( (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count), NULL ) ORDER BY (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) DESC
             ) AS choices,
@@ -691,7 +706,7 @@ class Item extends Model{
             FROM
             (
                 SELECT
-                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku, i.palletized, i.per_pallet
+                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku, i.palletized, i.per_pallet, i.solar_type_id
                 FROM
                     items_locations il JOIN locations l ON il.location_id = l.id join items i on il.item_id = i.id
                 WHERE

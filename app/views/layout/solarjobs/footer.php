@@ -133,17 +133,35 @@
                         $('select#team_id, select#type_id, #address, #suburb, #postcode, #country').change(function(e){
                             $(this).valid();
                         });
-                        $('select#type_id').change(function(e){
-                            console.log('val '+$(this).val());
-                            if($(this).val() == config.OriginId)
+                        $("input.solar-item-searcher").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
                             {
-                                $('div#origin_calc_holder').slideDown();
+                                $(this).autocomplete( "destroy" );
                             }
-                            else
+                            autoCompleter.solarItemAutoComplete($(this), selectCallback, changeCallback);
+                        })
+                        function selectCallback(event, ui)
+                        {
+                            var $this = event.target;
+                            if($this.id == "panel")
                             {
-                                $('div#origin_calc_holder').slideUp();
+                                $("#panel_id").val(ui.item.item_id)
                             }
-                        });
+                            else if($this.id == "inverter")
+                            {
+                                $("#inverter_id").val(ui.item.item_id)
+                            }
+                            return false;
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                            actions['add-origin-job'].deleteBank();
+                        }
                     }
                 },
                 'add-service-job': {
