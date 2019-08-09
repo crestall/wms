@@ -7,7 +7,8 @@ $postcode = Form::value('postcode');
 $country = (empty(Form::value('country')))? "AU" : Form::value('country');
 $date_filter = "Install Date";
 $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
-$odisp = (Form::value('type_id') == $origin_id)? "block":"none";
+$inverter_qty = empty(Form::value('inverter_qty'))? 0 : Form::value('inverter_qty');
+$panel_qty = empty(Form::value('panel_qty'))? 0 : Form::value('panel_qty');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -69,7 +70,7 @@ $odisp = (Form::value('type_id') == $origin_id)? "block":"none";
                     <div class="col-md-4">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control required number" name="panel_qty" id="panel_qty" value="<?php echo Form::value('panel_qty');?>" />
+                            <input type="text" class="form-control required number" name="panel_qty" id="panel_qty" value="<?php echo $panel_qty;?>" />
                             <?php echo Form::displayError('panel_qty');?>
                         </div>
                     </div>
