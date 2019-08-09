@@ -151,6 +151,7 @@
                             {
                                 $("#inverter_id").val(ui.item.item_id)
                             }
+                            console.log('vals '+ui.item.max_values);
                             return false;
                         }
                         function changeCallback(event, ui)
