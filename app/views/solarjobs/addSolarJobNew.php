@@ -9,6 +9,8 @@ $date_filter = "Install Date";
 $date = (empty(Form::value('date_value')))? time() : Form::value('date_value');
 $inverter_qty = empty(Form::value('inverter_qty'))? 0 : Form::value('inverter_qty');
 $panel_qty = empty(Form::value('panel_qty'))? 0 : Form::value('panel_qty');
+$panel_id = empty(Form::value('panel_id'))? 0 : Form::value('panel_id');
+$inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -120,6 +122,8 @@ $panel_qty = empty(Form::value('panel_qty'))? 0 : Form::value('panel_qty');
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id; ?>" />
+                <input type="hidden" name="panel_id" id="panel_id" value="<?php echo $panel_id ?>" />
+                <input type="hidden" name="inverter_id" id="inverter_id" value="<?php echo $inverter_id ?>" />
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
