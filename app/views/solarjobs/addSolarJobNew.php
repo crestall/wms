@@ -64,27 +64,27 @@ $panel_qty = empty(Form::value('panel_qty'))? 0 : Form::value('panel_qty');
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">Panel</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control origin-item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
+                        <input type="text" class="form-control solar-item-searcher" name="panel" id="panel" value="<?php echo Form::value('panel');?>" />
                         <?php echo Form::displayError('panel');?>
                     </div>
                     <div class="col-md-4">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty</label>
+                        <label class="col-md-3 col-form-label">Qty</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control required number" name="panel_qty" id="panel_qty" value="<?php echo $panel_qty;?>" />
+                            <input type="text" class="form-control number" name="panel_qty" id="panel_qty" value="<?php echo $panel_qty;?>" />
                             <?php echo Form::displayError('panel_qty');?>
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Inverter</label>
+                    <label class="col-md-3 col-form-label">Inverter</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control required origin-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
+                        <input type="text" class="form-control solar-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
                         <?php echo Form::displayError('inverter');?>
                     </div>
                     <div class="col-md-4">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty</label>
+                        <label class="col-md-3 col-form-label">Qty</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control required number" name="inverter_qty" id="inverter_qty" value="<?php echo $inverter_qty;?>" />
+                            <input type="text" class="form-control number" name="inverter_qty" id="inverter_qty" value="<?php echo $inverter_qty;?>" />
                             <?php echo Form::displayError('inverter_qty');?>
                         </div>
                     </div>
