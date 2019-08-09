@@ -758,6 +758,7 @@ class Item extends Model{
             $row_array['max_values'] = $row['choices'];
             $row_array['select_values'] = $row['select_choices'];
             $row_array['name'] = $row['name'];
+            $row_array['solar_type_id'] = $row['solar_type_id'];
             array_push($return_array,$row_array);
         }
         return $return_array;
