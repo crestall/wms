@@ -49,6 +49,7 @@ $odisp = (Form::value('type_id') == $origin_id)? "block":"none";
                     <p>This should slide down</p>
                     <p>There will be calcs in here</p>
                 </div>
+                <?php include(Config::get('VIEWS_PATH')."forms/item_adder.php");?> 
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id; ?>" />
