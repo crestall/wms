@@ -137,13 +137,13 @@
                             console.log('val '+$(this).val());
                             if($(this).val() == config.OriginId)
                             {
-                                $('div#origin_cal_holder').slideDown();
+                                $('div#origin_cal_holder').show();
                                 console.log('show');
                             }
                             else
                             {
-                                $('div#origin_cal_holder').slideUp();
-                                console.log('hide'); 
+                                $('div#origin_cal_holder').hide();
+                                console.log('hide');
                             }
                         });
                     }
