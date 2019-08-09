@@ -1,6 +1,19 @@
 <?php
 class Solarordertype extends Model{
     public $table = "solar_order_types";
+    public $TLJSolarId;
+    public $OriginId;
+    public $SolargainId;
+    public $BeyondId;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->TLJSolarId = $this->getTypeId('TLJ Solar Pty Ltd');
+        $this->OriginId = $this->getTypeId('Origin');
+        $this->SolargainId = $this->getTypeId('Solar Gain');
+        $this->BeyondId = $this->getTypeId('Beyond Solar');
+    }
 
     public function getSelectSolarOrderTypes($selected = false)
     {

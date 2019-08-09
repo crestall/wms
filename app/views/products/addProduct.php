@@ -1,7 +1,7 @@
 <?php
 $per_pallet_display = (empty(Form::value('palletized')))? "none" : "block";
 //die('form val: '.print_r((array)Form::value('package_type')));
-$client_id = (Session::getUserRole() == "solar admin")? $this->controller->client->solar_client_id : Form::value('client_id');
+$client_id = (Session::getUserRole() == "solar admin")? $this->controller->solarordertype->TLJSolarId : Form::value('client_id');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
