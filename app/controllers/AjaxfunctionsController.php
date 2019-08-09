@@ -821,7 +821,7 @@ class ajaxfunctionsController extends Controller
     public function getSolarItems()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->item->getAutocompleteSolarItems($this->request->query['item'], $this->order->fulfilled_id, $this->request->query['type_id']);
+        $data = $this->item->getAutocompleteSolarItems($this->request->query, $this->order->fulfilled_id, $this->request->query['type_id']);
         $this->view->renderJson($data);
     }
 

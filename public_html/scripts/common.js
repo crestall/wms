@@ -610,7 +610,7 @@ var autoCompleter = {
             source: function(req, response)
             {
                 var url;
-                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&type_id="+$('#type_id').val();
+                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&type_id="+$('#type_id').val()+"&clientid="+$('#client_id').val();
                 $.getJSON(url, function(data){
             		response(data);
             	});
