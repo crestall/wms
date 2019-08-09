@@ -46,7 +46,8 @@ $odisp = (Form::value('type_id') == $origin_id)? "block":"none";
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/select_date.php");?>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                 <div id="origin_calc_holder" style="display:<?php echo $odisp;?>" >
-                    origin calcs
+                    <p>This should slide down</p>
+                    <p>There will be calcs in here</p>
                 </div>
                 <input type="hidden" name="selected_items" id="selected_items" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
