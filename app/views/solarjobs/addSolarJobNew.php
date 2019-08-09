@@ -84,7 +84,7 @@ $panel_qty = empty(Form::value('panel_qty'))? 0 : Form::value('panel_qty');
                     <div class="col-md-4">
                         <label class="col-md-3 col-form-label">Qty</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control number" name="inverter_qty" id="inverter_qty" value="<?php echo $inverter_qty;?>" />
+                            <input type="text" class="form-control integer" name="inverter_qty" id="inverter_qty" value="<?php echo $inverter_qty;?>" />
                             <?php echo Form::displayError('inverter_qty');?>
                         </div>
                     </div>
