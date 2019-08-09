@@ -30,7 +30,11 @@ $(document).ready(function() {
 
     $.validator.addMethod('positiveNumber', function (value, element) {
         	return (this.optional(element) || Number(value) > 0 );
-    }, 'Enter a positive number.');
+    }, 'Enter a positive whole number.');
+
+    $.validator.addMethod('positiveNumber0', function (value, element) {
+        	return (this.optional(element) || Number(value) >= 0 );
+    }, 'Enter a positive whole number or zero.');
 
     $.validator.addMethod('wholePallets', function (value, element){
             var item_id = $(element).data('itemid');
@@ -476,6 +480,12 @@ $(document).ready(function() {
             },
             type_id:{
                 notNone:true
+            },
+            inverter_qty:{
+                postiveNumber0: true
+            },
+            panel_qty:{
+                postiveNumber0: true
             }
         },
         messages:{
@@ -484,6 +494,12 @@ $(document).ready(function() {
             },
             type_id:{
                 notNone: "Please select an install type"
+            },
+            inverter_qty:{
+                positiveNumber0: "Only whole numbers greater than or equal to zero"
+            },
+            panel_qty:{
+                positiveNumber0: "Only whole numbers greater than or equal to zero"
             }
         }
     });
