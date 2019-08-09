@@ -649,7 +649,7 @@ class Item extends Model{
                     $return_array[] = $i;
             }
         }
-        return $return_array();
+        return $return_array;
     }
 
     public function getAutocompleteAllSolarItems($data, $fulfilled_id)
