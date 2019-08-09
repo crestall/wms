@@ -696,7 +696,7 @@ class Item extends Model{
         //$query = "SELECT * FROM items WHERE active = 1 AND (name LIKE :term1 OR sku LIKE :term2) AND client_id = $client_id ORDER BY name";
 
         $query = "
-            SELECT a.location, a.location_id, a.qty, a.qc_count, SUM(a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) as available, a.name, a.sku, a.palletized, a.per_pallet, a.item_id, a.solar_type_id
+            SELECT a.location, a.location_id, a.qty, a.qc_count, SUM(a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) as available, a.name, a.sku, a.palletized, a.per_pallet, a.item_id, a.solar_type_id,
             GROUP_CONCAT(
                 IF( (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count), NULL ) ORDER BY (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) DESC
             ) AS choices,
