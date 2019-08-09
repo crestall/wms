@@ -134,6 +134,7 @@
                             $(this).valid();
                         });
                         $('select#type_id').change(function(e){
+                            console.log('val '+$(this).val());
                             if($(this).val() == config.OriginId)
                             {
                                 $('div#origin_cal_holder').slideDown();
