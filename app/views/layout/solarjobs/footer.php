@@ -121,6 +121,7 @@
                 'add-solar-install-new': {
                     init: function(){
                         //actions.common.init();
+                        actions.common['add-item']();
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
@@ -171,6 +172,9 @@
                                 $holder.find('div.qty-holder').html(qty_html).find('input').focus();
                                 $holder.find('input.item_id').val(ui.item.item_id);
                                 $holder.find('div.qty-location').html(inst);
+                                itemsUpdater.itemDelete();
+                                itemsUpdater.updateValidation();
+                                $holder.find('input.item_qty').focus();
                             }
                             console.log('vals '+ui.item.max_values);
                             console.log('total available '+ui.item.total_available);
