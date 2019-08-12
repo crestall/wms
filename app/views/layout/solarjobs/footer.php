@@ -200,7 +200,7 @@
                 'add-solar-install-new': {
                     init: function(){
                         //actions.common.init();
-                        action['pallet-counts'].init();
+                        actions['pallet-counts'].init();
                         actions.common['add-item']();
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
