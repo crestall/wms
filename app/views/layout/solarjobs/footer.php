@@ -202,6 +202,7 @@
                     init: function(){
                         //actions.common.init();
                         actions['panel-calcs'].init();
+                        actions['panel-calcs'].calcItems();
                         actions.common['add-item']();
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
