@@ -162,6 +162,7 @@
                             {
                                 $("#inverter_id").val(ui.item.item_id);
                                 $("#inverter_qty").removeAttr("disabled").focus().val(1);
+                                $("span#inverter_count").html("<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>");
                             }
                             else
                             {
