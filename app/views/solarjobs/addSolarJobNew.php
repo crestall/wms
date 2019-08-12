@@ -73,7 +73,7 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
                         <label class="col-md-3 col-form-label">Qty</label>
                         <div class="col-md-3">
                             <input type="text" class="form-control number" name="panel_qty" id="panel_qty" value="<?php echo $panel_qty;?>" <?php if($panel_qty == 0) echo "disabled";?> />
-                            <span class="inst"></span>
+                            <span class="inst" id="panel_count"></span>
                             <?php echo Form::displayError('panel_qty');?>
                         </div>
                     </div>

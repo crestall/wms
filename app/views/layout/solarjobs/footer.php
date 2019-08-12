@@ -158,7 +158,7 @@
                                 $("#panel_qty").removeAttr("disabled").focus();
                                 var text = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
                                 text += "(Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong>)</p>";
-                                $($this).next(".inst").html(text);
+                                $("span#panel_count").html(text);
                             }
                             else if($this.id == "inverter")
                             {
@@ -181,8 +181,8 @@
                                 itemsUpdater.updateValidation();
                                 $holder.find('input.item_qty').focus();
                             }
-                            console.log('vals '+ui.item.max_values);
-                            console.log('total available '+ui.item.total_available);
+                            //console.log('vals '+ui.item.max_values);
+                            //console.log('total available '+ui.item.total_available);
                             return false;
                         }
                         function changeCallback(event, ui)
