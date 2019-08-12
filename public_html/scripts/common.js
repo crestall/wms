@@ -174,7 +174,7 @@ var itemsUpdater = {
             required: function(el){
                 var $holder = $(el).closest('div.item_holder');
                 var val = $holder.find('select.pallet_qty').val();
-                console.log('pallet_qty val: '+ val);
+                //console.log('pallet_qty val: '+ val);
                 return (val === 0 || val === undefined );
             },
             digits: true
@@ -183,7 +183,7 @@ var itemsUpdater = {
             notNone: function(el){
                 var $holder = $(el).closest('div.item_holder');
                 var val = $holder.find('input.item_qty').val();
-                console.log('item_qty val: '+ val);
+                //console.log('item_qty val: '+ val);
                 return ( val === 0 || val === "" );
             }
         });
@@ -607,9 +607,29 @@ var autoCompleter = {
     solarItemAutoComplete: function(element, selectCallback, changeCallback)
     {
         element.autocomplete({
+            source: function(req, response)
+            {
+                var url;
+                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&type_id="+$('#type_id').val()+"&clientid="+$('#client_id').val();
+                $.getJSON(url, function(data){
+            		response(data);
+            	});
+            },
+            select: function(event, ui) {
+                selectCallback(event, ui);
+            },
+            change: function (event, ui) {
+                changeCallback(event, ui);
+            },
+            minLength: 2
+        });
+    },
+    solarAllItemsAutoComplete: function(element, selectCallback, changeCallback)
+    {
+        element.autocomplete({
             source: function(req, response){
                 var url;
-                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&solar_type_id="+$('#order_type_id').val();
+                url = "/ajaxfunctions/getAllSolarItems/?item="+req.term+"&solar_type_id="+$('#order_type_id').val();
                 //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);

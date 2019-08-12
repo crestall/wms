@@ -197,8 +197,7 @@ class ajaxfunctionsController extends Controller
             'ground_clips'  => $ground_clips,
             'rail_joiners'  => $rail_joiners,
             'tin_feet'      => $tin_feet,
-            'tile_feet'     => $tile_feet,
-            'z_bolts'       => $z_bolts
+            'tile_feet'     => $tile_feet
         );
 
         /*echo "<pre>",print_r($rails),"</pre>";
@@ -821,7 +820,14 @@ class ajaxfunctionsController extends Controller
     public function getSolarItems()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->item->getAutocompleteSolarItems($this->request->query, $this->order->fulfilled_id);
+        $data = $this->item->getAutocompleteSolarItems($this->request->query, $this->order->fulfilled_id, $this->request->query['type_id']);
+        $this->view->renderJson($data);
+    }
+
+    public function getAllSolarItems()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";
+        $data = $this->item->getAutocompleteAllSolarItems($this->request->query, $this->order->fulfilled_id);
         $this->view->renderJson($data);
     }
 

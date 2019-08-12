@@ -637,7 +637,22 @@ class Item extends Model{
         return $return_array;
     }
 
-    public function getAutocompleteSolarItems($data, $fulfilled_id)
+    public function getAutocompleteSolarItems($data, $fulfilled_id, $solar_type_id)
+    {
+        $return_array = array();
+        if(in_array($data['clientid'], $this->solar_client_ids))
+        {
+            $the_items = $this->getAutocompleteItems($data, $fulfilled_id);
+            foreach($the_items as $i)
+            {
+                if($i['solar_type_id'] == $solar_type_id)
+                    $return_array[] = $i;
+            }
+        }
+        return $return_array;
+    }
+
+    public function getAutocompleteAllSolarItems($data, $fulfilled_id)
     {
         $db = Database::openConnection();
         $return_array = array();
@@ -681,7 +696,7 @@ class Item extends Model{
         //$query = "SELECT * FROM items WHERE active = 1 AND (name LIKE :term1 OR sku LIKE :term2) AND client_id = $client_id ORDER BY name";
 
         $query = "
-            SELECT a.location, a.location_id, a.qty, a.qc_count, SUM(a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) as available, a.name, a.sku, a.palletized, a.per_pallet, a.item_id,
+            SELECT a.location, a.location_id, a.qty, a.qc_count, SUM(a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) as available, a.name, a.sku, a.palletized, a.per_pallet, a.item_id, a.solar_type_id,
             GROUP_CONCAT(
                 IF( (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count), NULL ) ORDER BY (a.qty - IFNULL(b.allocated,0) - IFNULL(c.allocated,0) - a.qc_count) DESC
             ) AS choices,
@@ -691,7 +706,7 @@ class Item extends Model{
             FROM
             (
                 SELECT
-                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku, i.palletized, i.per_pallet
+                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku, i.palletized, i.per_pallet, i.solar_type_id
                 FROM
                     items_locations il JOIN locations l ON il.location_id = l.id join items i on il.item_id = i.id
                 WHERE
@@ -743,6 +758,7 @@ class Item extends Model{
             $row_array['max_values'] = $row['choices'];
             $row_array['select_values'] = $row['select_choices'];
             $row_array['name'] = $row['name'];
+            $row_array['solar_type_id'] = $row['solar_type_id'];
             array_push($return_array,$row_array);
         }
         return $return_array;
@@ -814,8 +830,10 @@ class Item extends Model{
             'last_activity'		            =>	time(),
             'preferred_pick_location_id'    =>  $preferred_pick_location_id,
             'palletized'                    =>  $palletized,
-            'price'                         =>  0.00
+            'price'                         =>  0.00,
+            'solar_type_id'                 =>  $solar_type_id
         );
+        if(!empty($supplier)) $item_values['supplier'] = $supplier; 
         $item_values['active'] = (isset($active))? 1 : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;

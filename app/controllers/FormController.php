@@ -61,6 +61,7 @@ class FormController extends Controller {
             'procAddPackage',
             'procAddressUpdate',
             'procAddServiceJob',
+            'procAddSolarInstall',
             'procAddTljOrder',
             'procAddToStock',
             'procBasicProductAdd',
@@ -125,7 +126,77 @@ class FormController extends Controller {
 
     public function procAddSolarInstall()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>";die(); 
+        //echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $items = array();
+        if($panel_id > 0)
+        {
+            $items[] = array(
+                'id'    => $panel_id,
+                'qty'   => $panel_qty
+            );
+        }
+        if($inverter_id > 0)
+        {
+            $items[] = array(
+                'id'    => $inverter_id,
+                'qty'   => $inverter_qty
+            );
+        }
+        $items = array_merge($items, $this->request->data['consumables']);
+        if( isset($this->request->data['items'][0]['qty']) )
+        {
+            $items = array_merge($items, $this->request->data['items']);
+        }
+        //echo "<pre>",print_r($items),"</pre>"; die();
+        $orders_items = array();
+        foreach($items as $item)
+        {
+            if($item['qty'] == 0)
+            {
+                continue;
+            }
+            $array = array(
+                'qty'           => $item['qty'],
+                'id'            => $item['id'],
+                'whole_pallet'  => false
+            );
+            $orders_items[] = $array;
+        }
+        $the_items = array(
+            0 => $orders_items
+        );
+        $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
+        foreach($oitems[0] as $item)//there is only one order
+        {
+            if($item['import_error'])
+            {
+                Form::setError('items', $item['import_error_string']);
+            }
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "<pre>",print_r($oitems),"</pre>"; die();
+            //all good, add details
+            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $order_id = $this->solarorder->addOrder($post_data, $oitems);
+            Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solar-install");
     }
 
     public function printSwatchLabels()
