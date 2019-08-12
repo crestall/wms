@@ -113,6 +113,85 @@
                         });
                     }
                 },
+                'panel-calcs':{
+                    init: function() {
+                        $("input[name='roof_type']").click(function(e){
+                            actions['panel-calcs'].openCalcButton();
+                        })
+                        $("a.addbank").click(function(e){
+                            e.preventDefault;
+                            var bank_count = $(":input.banks").length;
+                            var html = "<div class='row bank_holder'>"
+                            html += "<div class='col-sm-4'>";
+                            html += "<p><input type='text' class='form-control required number banks' name=banks["+bank_count+"][qty]' placeholder='Panel Count' /></p>";
+                            html += "</div>"; //col-sm-4
+                            html += "<div class='col-sm-1 delete-image-holder'>";
+                            html += "<a class='deletebank' title='remove this bank'><i class='fas fa-times-circle fa-2x text-danger'></i></a>";
+                            html += "</div>"; //col-sm-1 item_id' />"
+                            html += "</div>"; //row
+                            $('div#banks_holder').append(html);
+                            //itemsUpdater.itemDelete();
+                            actions['panel-calcs'].deleteBank();
+                            actions['panel-calcs'].checkBanks();
+                            actions['panel-calcs'].openCalcButton();
+                        });
+                        actions['panel-calcs'].checkBanks();
+                        actions['panel-calcs'].openCalcButton();
+                    },
+                    checkBanks: function(){
+                        $('input.banks')
+                            .off('change')
+                            .change(function(e){
+                                actions['panel-calcs'].openCalcButton();
+                        });
+                    },
+                    openCalcButton: function(){
+                        var lock = false;
+                        //var validator = $( "#add_origin_order" ).validate();
+                        //validator.element( "#myselect" );
+                        $('input.banks').each(function(i,e){
+                            if( isNaN($(this).val()) || $(this).val() == '' )
+                            {
+                                lock = true;
+                            }
+                            if(!$("input[name='roof_type']:checked").val())
+                            {
+                                lock = true;
+                            }
+                        });
+                        $("button#calc_items").prop("disabled", lock);
+                    },
+                    deleteBank: function(){
+                        $('a.deletebank')
+                            .css('cursor', 'pointer')
+                            .off('click')
+                            .click(function(e){
+                                $(this).closest('div.bank_holder').remove();
+                                actions['panel-calcs'].openCalcButton();
+                        });
+                    },
+                    calcItems: function(){
+                        $("button#calc_items").click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Calculating Required Parts...</h1></div>' });
+                            //console.log( 'roof type: '+ $("input[name='roof_type']:checked").val() );
+                            //console.log('click');
+                            var url = "/ajaxfunctions/calc-origin-pick";
+                            var data = $("#add_origin_order").serialize();
+                            $("div#origin_items_holder").load(
+                                url,
+                                data,
+                                function(h){
+                                    $.unblockUI();
+                                    actions['item-searcher'].init();
+                                    actions.common['add-item']();
+                                    itemsUpdater.itemDelete();
+                                    $(this).show();
+                                    $("button#add_origin_order_submitter").prop("disabled", false);
+                            });
+                        });
+                    }
+                },
                 'add-solar-install': {
                     init: function(){
                         actions.common.init();
