@@ -118,7 +118,7 @@ class ajaxfunctionsController extends Controller
 
     public function calcOriginPick()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
         foreach($this->request->query as $field => $value)
         {
             if(!is_array($value))
