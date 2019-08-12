@@ -232,14 +232,13 @@
                             if($this.id == "panel")
                             {
                                 $("#panel_id").val(ui.item.item_id);
-                                $("#panel_qty").removeAttr("disabled").focus().val('');
-                                $("span#panel_count").html("<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>");
-                                $("#panel_qty").addClass('required');
+                                $("#panel_qty").removeAttr("disabled").focus().val('').addClass('required');
+                                $("span#panel_count").html("<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>");  
                             }
                             else if($this.id == "inverter")
                             {
                                 $("#inverter_id").val(ui.item.item_id);
-                                $("#inverter_qty").removeAttr("disabled").focus().val(1);
+                                $("#inverter_qty").removeAttr("disabled").focus().val(1).addClass('required');
                                 $("span#inverter_count").html("<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>");
                             }
                             else
