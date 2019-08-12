@@ -26,7 +26,7 @@
                         });
                     },
                     'add-item': function(){
-                        $("a.add").click(function(e){
+                        $("a.add").off("click").click(function(e){
                             e.preventDefault;
                             var item_count = $(":input.item-searcher").length;
                             //console.log('items: '+item_count);
