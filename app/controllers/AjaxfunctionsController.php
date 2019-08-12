@@ -197,8 +197,7 @@ class ajaxfunctionsController extends Controller
             'ground_clips'  => $ground_clips,
             'rail_joiners'  => $rail_joiners,
             'tin_feet'      => $tin_feet,
-            'tile_feet'     => $tile_feet,
-            'z_bolts'       => $z_bolts
+            'tile_feet'     => $tile_feet
         );
 
         /*echo "<pre>",print_r($rails),"</pre>";
