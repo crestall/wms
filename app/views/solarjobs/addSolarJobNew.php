@@ -21,7 +21,7 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
             <form id="add_solar_install" method="post" action="/form/procAddSolarInstall" autocomplete="off">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3>Job Details Solar Job New</h3>
+                        <h3>Job Details</h3>
                     </div>
                 </div>
                 <div class="row form-group">
