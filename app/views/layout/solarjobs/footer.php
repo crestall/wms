@@ -140,6 +140,13 @@
                             }
                             autoCompleter.solarItemAutoComplete($(this), selectCallback, changeCallback);
                         })
+                        $("input.item-searcher").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.solarItemAutoComplete($(this), selectCallback, changeCallback);
+                        })
                         function selectCallback(event, ui)
                         {
                             var $this = event.target;
@@ -161,7 +168,7 @@
                                 $(event.target).val("");
                                 return false;
                             }
-                            actions['add-origin-job'].deleteBank();
+                            //actions['add-origin-job'].deleteBank();
                         }
                     }
                 },
