@@ -150,6 +150,7 @@
                         function selectCallback(event, ui)
                         {
                             var $this = event.target;
+
                             if($this.id == "panel")
                             {
                                 $("#panel_id").val(ui.item.item_id)
@@ -157,6 +158,19 @@
                             else if($this.id == "inverter")
                             {
                                 $("#inverter_id").val(ui.item.item_id)
+                            }
+                            else
+                            {
+                                var item_count = ($(":input.item-searcher").length) - 1;
+                                var $holder = $this.closest('div.item_holder');
+                                var qty_html;
+                                var inst;
+                                qty_html = "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' />";
+                                inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
+                                inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
+                                $holder.find('div.qty-holder').html(qty_html).find('input').focus();
+                                $holder.find('input.item_id').val(ui.item.item_id);
+                                $holder.find('div.qty-location').html(inst);
                             }
                             console.log('vals '+ui.item.max_values);
                             console.log('total available '+ui.item.total_available);
