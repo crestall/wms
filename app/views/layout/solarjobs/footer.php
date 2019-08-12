@@ -202,7 +202,7 @@
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
-                        $("form#add-solar-install").submit(function(e){
+                        $("form#add_solar_install").submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Install...</h2></div>' });
@@ -232,7 +232,7 @@
                             if($this.id == "panel")
                             {
                                 $("#panel_id").val(ui.item.item_id);
-                                $("#panel_qty").removeAttr("disabled").focus();
+                                $("#panel_qty").removeAttr("disabled").focus().val('');
                                 $("span#panel_count").html("<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>");
                             }
                             else if($this.id == "inverter")
