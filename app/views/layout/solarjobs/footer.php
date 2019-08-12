@@ -162,7 +162,7 @@
                             else
                             {
                                 var item_count = ($(":input.item-searcher").length) - 1;
-                                var $holder = $this.closest('div.item_holder');
+                                var $holder = $($this).closest('div.item_holder');
                                 var qty_html;
                                 var inst;
                                 qty_html = "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' />";
