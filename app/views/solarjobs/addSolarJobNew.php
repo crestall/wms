@@ -21,7 +21,7 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
             <form id="add-solar-install" method="post" action="/form/procAddSolarInstall" autocomplete="off">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3>Job Details</h3>
+                        <h3>Job Details Solar Job New</h3>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -81,7 +81,7 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
                     <label class="col-md-3 col-form-label">Inverter</label>
                     <div class="col-md-4">
                         <input type="text" class="form-control solar-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
-                        
+
                         <?php echo Form::displayError('inverter');?>
                     </div>
                     <div class="col-md-4">
