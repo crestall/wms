@@ -196,6 +196,12 @@
                 'add-solar-install': {
                     init: function(){
                         //actions.common.init();
+                        $('select#type_id').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $('div#rest_of_form').slideDown();
+                            }
+                        });
                         actions['panel-calcs'].init();
                         actions['panel-calcs'].calcItems();
                         actions.common['add-item']();
@@ -233,7 +239,7 @@
                             {
                                 $("#panel_id").val(ui.item.item_id);
                                 $("#panel_qty").removeAttr("disabled").focus().val('').addClass('required');
-                                $("span#panel_count").html("<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>");  
+                                $("span#panel_count").html("<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>");
                             }
                             else if($this.id == "inverter")
                             {
