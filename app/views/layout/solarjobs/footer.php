@@ -234,6 +234,7 @@
                                 $("#panel_id").val(ui.item.item_id);
                                 $("#panel_qty").removeAttr("disabled").focus().val('');
                                 $("span#panel_count").html("<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>");
+                                $("#panel_qty").valid();
                             }
                             else if($this.id == "inverter")
                             {
