@@ -81,6 +81,7 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
                     <label class="col-md-3 col-form-label">Inverter</label>
                     <div class="col-md-4">
                         <input type="text" class="form-control solar-item-searcher" name="inverter" id="inverter" value="<?php echo Form::value('inverter');?>" />
+                        
                         <?php echo Form::displayError('inverter');?>
                     </div>
                     <div class="col-md-4">
