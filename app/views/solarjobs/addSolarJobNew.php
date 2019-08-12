@@ -89,7 +89,7 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
                         <label class="col-md-3 col-form-label">Qty</label>
                         <div class="col-md-3">
                             <input type="text" class="form-control number" name="inverter_qty" id="inverter_qty" value="<?php echo $inverter_qty;?>" <?php if($inverter_qty == 0) echo "disabled";?> />
-                            <span class="inst" id="inverter_count"></span> 
+                            <span class="inst" id="inverter_count"></span>
                             <?php echo Form::displayError('inverter_qty');?>
                         </div>
                     </div>
@@ -115,6 +115,46 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
                             <label for="battery"></label>
                         </div>
                     </div>
+                </div>
+                <div id="banks" class="form-group row">
+                    <label class="col-md-3 col-form-label">Banks</label>
+                    <div class="col-md-9" id="banks_holder">
+                        <?php if(is_array(Form::value('banks'))):?>
+                            <?php foreach(Form::value('banks') as $b => $bank):
+                                $qty = (isset($bank['qty']))? $bank['qty']: "";?>
+                                <div class="row bank_holder">
+                                    <?php if($b == 0):?>
+                                        <div class="col-sm-1 add-image-holder">
+                                            <a class="addbank" style="cursor:pointer" title="Add Another Bank">
+                                                <i class="fas fa-plus-circle fa-2x text-success"></i>
+                                            </a>
+                                        </div>
+                                    <?php else:?>
+                                        <div class="col-sm-1 delete-image-holder">
+                                            <a class="delete" style="cursor:pointer" title="Remove This Bank">
+                                                <i class="fas fa-times-circle fa-2x text-danger"></i>
+                                            </a>
+                                        </div>
+                                    <?php endif;?>
+                                    <div class="col-sm-4">
+                                        <p><input type="text" class="form-control number banks" name="banks[<?php echo $b;?>][qty]" placeholder="Panel Count" value="<?php echo $qty;?>" /></p>
+                                    </div>
+                                </div>
+                            <?php endforeach;?>
+                        <?php else:?>
+                            <div class="row bank_holder">
+                                <div class="col-sm-4">
+                                    <p><input type="text" class="form-control number banks" name="banks[0][qty]" placeholder="Panel Count" /></p>
+                                </div>
+                                <div class="col-sm-1 add-image-holder">
+                                    <a class="addbank" style="cursor:pointer" title="Add Another Bank">
+                                        <i class="fas fa-plus-circle fa-2x text-success"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endif;?>
+                    </div>
+                    <?php echo Form::displayError('banks');?>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
