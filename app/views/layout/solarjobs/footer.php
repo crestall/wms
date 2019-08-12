@@ -156,9 +156,7 @@
                             {
                                 $("#panel_id").val(ui.item.item_id);
                                 $("#panel_qty").removeAttr("disabled").focus();
-                                var text = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
-                                text += "(Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong>)</p>";
-                                $("span#panel_count").html(text);
+                                $("span#panel_count").html("<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>");
                             }
                             else if($this.id == "inverter")
                             {
