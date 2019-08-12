@@ -177,8 +177,8 @@
                             //console.log( 'roof type: '+ $("input[name='roof_type']:checked").val() );
                             //console.log('click');
                             var url = "/ajaxfunctions/calc-origin-pick";
-                            var data = $("#add_origin_order").serialize();
-                            $("div#origin_items_holder").load(
+                            var data = $("#add_solar_install").serialize();
+                            $("div#install_items_holder").load(
                                 url,
                                 data,
                                 function(h){

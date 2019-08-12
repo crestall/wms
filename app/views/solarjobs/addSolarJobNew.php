@@ -156,6 +156,15 @@ $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id')
                     </div>
                     <?php echo Form::displayError('banks');?>
                 </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">&nbsp;</label>
+                    <div class="col-md-4">
+                        <button class="btn btn-success btn-small" id="calc_items" disabled>Get Parts</button>
+                    </div>
+                </div>
+                <div id="install_items_holder" style="display:none">
+
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <h3>Additional Items</h3>
