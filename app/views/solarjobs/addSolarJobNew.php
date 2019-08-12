@@ -11,7 +11,7 @@ $inverter_qty = empty(Form::value('inverter_qty'))? 0 : Form::value('inverter_qt
 $panel_qty = empty(Form::value('panel_qty'))? 0 : Form::value('panel_qty');
 $panel_id = empty(Form::value('panel_id'))? 0 : Form::value('panel_id');
 $inverter_id = empty(Form::value('inverter_id'))? 0 : Form::value('inverter_id');
-$disp = (empty(From::value('csrf_token')))? 'none' : 'block';
+$disp = (empty(Form::value('csrf_token')))? 'none' : 'block';
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
