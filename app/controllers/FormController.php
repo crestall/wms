@@ -156,7 +156,33 @@ class FormController extends Controller {
         {
             $items = array_merge($items, $this->request->data['items']);
         }
-        echo "<pre>",print_r($items),"</pre>"; die();
+        //echo "<pre>",print_r($items),"</pre>"; die();
+        $orders_items = array();
+        foreach($items as $item)
+        {
+            if($item['qty'] == 0)
+            {
+                continue;
+            }
+            $array = array(
+                'qty'           => $item['qty'],
+                'id'            => $item['id'],
+                'whole_pallet'  => false
+            );
+            $orders_items[] = $array;
+        }
+        $the_items = array(
+            0 => $orders_items
+        );
+        $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
+        echo "oitems<pre>",print_r($oitems),"</pre>"; die();
+        foreach($oitems[0] as $item)//there is only one order
+        {
+            if($item['import_error'])
+            {
+                Form::setError('items', $item['import_error_string']);
+            }
+        }
     }
 
     public function printSwatchLabels()
