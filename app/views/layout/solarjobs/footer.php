@@ -154,11 +154,13 @@
 
                             if($this.id == "panel")
                             {
-                                $("#panel_id").val(ui.item.item_id)
+                                $("#panel_id").val(ui.item.item_id);
+                                $("#panel_qty").removeAttr("disabled");
                             }
                             else if($this.id == "inverter")
                             {
-                                $("#inverter_id").val(ui.item.item_id)
+                                $("#inverter_id").val(ui.item.item_id);
+                                $("#inverter_qty").removeAttr("disabled");
                             }
                             else
                             {
