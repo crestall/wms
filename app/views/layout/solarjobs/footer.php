@@ -159,6 +159,7 @@
                                 $("#inverter_id").val(ui.item.item_id)
                             }
                             console.log('vals '+ui.item.max_values);
+                            console.log('total available '+ui.item.total_available);
                             return false;
                         }
                         function changeCallback(event, ui)
