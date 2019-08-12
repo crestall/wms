@@ -61,6 +61,7 @@ class FormController extends Controller {
             'procAddPackage',
             'procAddressUpdate',
             'procAddServiceJob',
+            'procAddSolarInstall',
             'procAddTljOrder',
             'procAddToStock',
             'procBasicProductAdd',
@@ -125,7 +126,37 @@ class FormController extends Controller {
 
     public function procAddSolarInstall()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>";die(); 
+        echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $items = array();
+        if($panel_id > 0)
+        {
+            $items[] = array(
+                'id'    => $panel_id,
+                'qty'   => $panel_qty
+            );
+        }
+        if($inverter_id > 0)
+        {
+            $items[] = array(
+                'id'    => $inverter_id,
+                'qty'   => $inverter_qty
+            );
+        }
+        $items = array_merge($items, $this->request->data['consumables']);
+        if( isset($this->request->data['items'][0]['qty']) )
+        {
+            $items = array_merge($items, $this->request->data['items']);
+        }
+        echo "<pre>",print_r($items),"</pre>"; die();
     }
 
     public function printSwatchLabels()
