@@ -172,6 +172,7 @@
                     },
                     calcItems: function(){
                         $("button#calc_items").click(function(e){
+                            console.log('click');
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Calculating Required Parts...</h1></div>' });
                             //console.log( 'roof type: '+ $("input[name='roof_type']:checked").val() );
@@ -187,7 +188,7 @@
                                     actions.common['add-item']();
                                     itemsUpdater.itemDelete();
                                     $(this).show();
-                                    $("button#add_origin_order_submitter").prop("disabled", false);
+                                    //$("button#add_origin_order_submitter").prop("disabled", false);
                             });
                         });
                     }
