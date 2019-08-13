@@ -155,9 +155,44 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            //echo "<pre>Good",print_r($post_data),"</pre>"; die();
+            echo "<pre>Good",print_r($post_data),"</pre>"; die();
+            $vals = array(
+                "ship_to"           => $deliver_to,
+                'company_name'      => NULL,
+                'tracking_email'    => NULL,
+                'contact_phone'     => NULL,
+                'instructions'      => NULL,
+                '3pl_comments'      => NULL,
+                'uploaded_file'     => NULL,
+                'eparcel_express'   => 0,
+                'client_order_id'   => NULL
+            );
+            if($this->dataSubbed($company_name))
+                $vals['company_name'] = $company_name;
+            if($this->dataSubbed($client_order_id))
+                $vals['client_order_id'] = $client_order_id;
+            if($this->dataSubbed($contact_phone))
+                $vals['contact_phone'] = $contact_phone;
+            if($this->dataSubbed($tracking_email))
+                $vals['tracking_email'] = $tracking_email;
+            if($this->dataSubbed($delivery_instructions))
+                $vals['instructions'] = $delivery_instructions;
+            if($this->dataSubbed($tpl_comments))
+                $vals['3pl_comments'] = $tpl_comments;
+            if(isset($express_post))
+                $vals['eparcel_express'] = 1;
+            if(isset($uploaded_file) || isset($delete_file))
+            {
+                if(isset($uploaded_file))
+                    $vals['uploaded_file'] = $uploaded_file;
+                $od = $this->order->getOrderDetail($order_id);
+                if(!empty($od['uploaded_file']) && file_exists(UPLOADS.$client_id."/".$od['uploaded_file']))
+                {
+                    unlink(UPLOADS.$client_id."/".$od['uploaded_file']);
+                }
+            }
             Session::set('feedback', "Those details have been updated");
-            $this->solarorder->updateOrderValues($post_data, $order_id);
+            $this->solarorder->updateOrderValues($vals, $order_id);
         }
         return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-details/id=".$order_id);
     }
