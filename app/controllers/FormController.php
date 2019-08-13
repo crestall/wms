@@ -153,7 +153,7 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            echo "<pre>Good",print_r($post_data),"</pre>"; die();
+            //echo "<pre>Good",print_r($post_data),"</pre>"; die();
             Session::set('feedback', "Those details have been updated");
             $this->solarorder->updateOrderValues($post_data, $order_id);
         }
