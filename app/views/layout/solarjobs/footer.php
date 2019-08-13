@@ -130,6 +130,7 @@
                             html += "</div>"; //col-sm-1 item_id' />"
                             html += "</div>"; //row
                             $('div#banks_holder').append(html);
+                            $('div#banks_holder:last-child').find('input').focus();
                             //itemsUpdater.itemDelete();
                             actions['panel-calcs'].deleteBank();
                             actions['panel-calcs'].checkBanks();
