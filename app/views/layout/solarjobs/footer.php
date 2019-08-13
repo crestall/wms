@@ -746,6 +746,13 @@
                     init: function(){
                         actions['order-search'].init();
                     }
+                },
+                'update-install-details':{
+                    init: function(){
+                        datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);

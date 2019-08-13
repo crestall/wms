@@ -356,11 +356,12 @@ return array(
             'add-solar-install'             => true,
             'update-solar-job'          => false,
             'add-service-job'           => true,
-            'view-installs'                 => true, 
+            'view-installs'                 => true,
             'job-search'                => true,
             'edit-servicejob'           => false,
             'update-service-details'    => false,
-            'view-service-jobs'         => true
+            'view-service-jobs'         => true,
+            'update-install-details'    => false
         ),
         'products'	=> array(
             'view-products'			=> true,
@@ -435,7 +436,8 @@ return array(
             'job-search'                => true,
             'edit-servicejob'           => false,
             'update-service-details'    => false,
-            'view-service-jobs'         => true
+            'view-service-jobs'         => true,
+            'update-install-details'
         ),
 		'clients'	=> array(
 			'view-clients'	=> true,
