@@ -752,6 +752,9 @@
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+                        $('select#team_id, select#type_id, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
+                        });
                         $("form#edit-solar-install").submit(function(e){
                             if($(this).valid())
                             {
