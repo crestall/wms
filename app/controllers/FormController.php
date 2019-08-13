@@ -151,7 +151,8 @@ class FormController extends Controller {
                 'qty'   => $inverter_qty
             );
         }
-        $items = array_merge($items, $this->request->data['consumables']);
+        if(isset($this->request->data['consumables']))
+            $items = array_merge($items, $this->request->data['consumables']);
         if( isset($this->request->data['items'][0]['qty']) )
         {
             $items = array_merge($items, $this->request->data['items']);
