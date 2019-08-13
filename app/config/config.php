@@ -437,7 +437,7 @@ return array(
             'edit-servicejob'           => false,
             'update-service-details'    => false,
             'view-service-jobs'         => true,
-            'update-install-details'
+            'update-install-details'    => false
         ),
 		'clients'	=> array(
 			'view-clients'	=> true,
