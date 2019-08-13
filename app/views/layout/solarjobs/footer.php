@@ -745,12 +745,6 @@
                 'order-search-results':{
                     init: function(){
                         actions['order-search'].init();
-                        $("form#edit-solar-install").submit(function(e){
-                            if($(this).valid())
-                            {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Install Details...</h2></div>' });
-                            }
-                        });
                     }
                 },
                 'update-install-details':{
@@ -758,6 +752,12 @@
                         datePicker.fromDate();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+                        $("form#edit-solar-install").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Install Details...</h2></div>' });
+                            }
+                        });
                     }
                 }
             }
