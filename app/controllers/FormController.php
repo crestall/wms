@@ -154,8 +154,8 @@ class FormController extends Controller {
         {
             //all good, add details
             echo "<pre>Good",print_r($post_data),"</pre>"; die();
-            //$order_id = $this->solarorder->addOrder($post_data, $oitems);
-            //Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
+            Session::set('feedback', "Those details have been updated");
+            $this->solarorder->updateOrderValues($post_data, $order_id);
         }
         return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-details/id=".$order_id);
     }
