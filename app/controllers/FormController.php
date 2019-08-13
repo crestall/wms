@@ -137,6 +137,8 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        $post_data['install_date'] = $post_data['date'];
+        unset($post_data['date']);
         if($team_id == 0)
         {
             Form::setError('team_id', 'Please select a team');
