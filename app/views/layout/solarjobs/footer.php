@@ -402,6 +402,7 @@
                 'install-items-update' : {
                     init: function(){
                         actions.common['add-item']();
+                        console.log('instal items update');
                         itemsUpdater.itemDelete();
                         //actions['item-searcher'].init();
                         $("form#items-update").submit(function(e){
