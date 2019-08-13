@@ -645,7 +645,7 @@ class Item extends Model{
             $the_items = $this->getAutocompleteItems($data, $fulfilled_id);
             foreach($the_items as $i)
             {
-                if($i['solar_type_id'] == $solar_type_id)
+                if( ($i['solar_type_id'] == $solar_type_id) || (stripos($i['name'], "consumable") !== false) )
                     $return_array[] = $i;
             }
         }
