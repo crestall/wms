@@ -138,6 +138,7 @@
         {
             $eb = Session::getUserId();
         }
+        $panel_qty = (isset($data['panel_qty']))?$data['panel_qty']: 0;
         $o_values = array(
             'work_order'    => $data['work_order'],
             'customer_name' => $data['customer_name'],
@@ -152,7 +153,7 @@
             'postcode'      => $data['postcode'],
             'country'       => $data['country'],
             'entered_by'    => $eb,
-            'panels'        => $data['panel_qty'],
+            'panels'        => $panel_qty,
             'team_id'       => $data['team_id']
         );
 
