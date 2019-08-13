@@ -361,7 +361,8 @@ return array(
             'edit-servicejob'           => false,
             'update-service-details'    => false,
             'view-service-jobs'         => true,
-            'update-install-details'    => false
+            'update-install-details'    => false,
+            'install-items-update'      => false
         ),
         'products'	=> array(
             'view-products'			=> true,
@@ -437,7 +438,8 @@ return array(
             'edit-servicejob'           => false,
             'update-service-details'    => false,
             'view-service-jobs'         => true,
-            'update-install-details'    => false
+            'update-install-details'    => false,
+            'install-items-update'      => false
         ),
 		'clients'	=> array(
 			'view-clients'	=> true,

@@ -399,7 +399,7 @@
 
                     }
                 },
-                'items-update' : {
+                'install-items-update' : {
                     init: function(){
                         actions.common['add-item']();
                         itemsUpdater.itemDelete();
