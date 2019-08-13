@@ -127,7 +127,7 @@ class FormController extends Controller {
 
     public function procEditInstall()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>";die();
+        //echo "<pre>",print_r($this->request->data),"</pre>";die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -137,6 +137,27 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if($team_id == 0)
+        {
+            Form::setError('team_id', 'Please select a team');
+        }
+        if(!$this->dataSubbed($work_order))
+        {
+            Form::setError('work_order', 'A work order number is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            echo "<pre>Good",print_r($post_data),"</pre>"; die();
+            //$order_id = $this->solarorder->addOrder($post_data, $oitems);
+            //Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-details/id=".$order_id);
     }
 
     public function procAddSolarInstall()
