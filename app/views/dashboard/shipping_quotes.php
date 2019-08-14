@@ -4,7 +4,7 @@
             <h2>Calculated Charges</h2>
             <span class="inst">(these charges do not include markup)</span><br/>
             <span class="inst">(these charges are GST inclusive)</span>
-            <?php echo "<pre>",print_r($eparcel_details),"</pre>";?>
+            <?php //echo "<pre>",print_r($eparcel_details),"</pre>";?>
         </div>
     </div>
     <?php if($express):?>
