@@ -729,7 +729,8 @@ class ajaxfunctionsController extends Controller
             'eparcel_express_charge'    =>  $eparcel_express_charge,
             'client_name'               =>  $this->client->getClientName($od['client_id']),
             'ship_to'                   =>  $od['ship_to'],
-            'address_string'            =>  $this->request->data['address_string']
+            'address_string'            =>  $this->request->data['address_string'],
+            'eparcel_details'           =>  $eparcel_details
         ]);
     }
 

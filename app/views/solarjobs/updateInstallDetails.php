@@ -25,7 +25,7 @@ $customer_name = (empty(Form::value('customer_name')))? $details['customer_name'
     <?php echo Form::displayError('general');?>
     <div class="row">
         <div class="col-lg-12">
-            <form id="edit-service-job" method="post" action="/form/procEditInstall" autocomplete="off">
+            <form id="edit-solar-install" method="post" action="/form/procEditInstall" autocomplete="off">
                 <div class="row form-group">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Select an Install Type</label>
                     <div class="col-md-4">

@@ -506,15 +506,21 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
-    $('#add-tlj-order, #add-solargain-order').validate({
+    $('#edit-solar-install').validate({
         rules:{
             team_id:{
+                notNone:true
+            },
+            type_id:{
                 notNone:true
             }
         },
         messages:{
             team_id:{
                 notNone: "Please select a team"
+            },
+            type_id:{
+                notNone: "Please select an install type"
             }
         }
     });

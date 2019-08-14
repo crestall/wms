@@ -130,6 +130,7 @@
                             html += "</div>"; //col-sm-1 item_id' />"
                             html += "</div>"; //row
                             $('div#banks_holder').append(html);
+                            $('div#banks_holder:last-child').find('input').focus();
                             //itemsUpdater.itemDelete();
                             actions['panel-calcs'].deleteBank();
                             actions['panel-calcs'].checkBanks();
@@ -398,11 +399,12 @@
 
                     }
                 },
-                'items-update' : {
+                'install-items-update' : {
                     init: function(){
                         actions.common['add-item']();
+                        console.log('instal items update');
                         itemsUpdater.itemDelete();
-                        actions['item-searcher'].init();
+
                         $("form#items-update").submit(function(e){
                             if($(this).valid())
                             {
@@ -412,6 +414,44 @@
                         $.validator.addClassRules("item-group", {
                             wholePallets : true
                         });
+                        $("input.item-searcher").each(function(i,e){
+                            $(this).css({color:"red"});
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.solarItemAutoComplete($(this), selectCallback, changeCallback);
+                        })
+                        function selectCallback(event, ui)
+                        {
+                            var $this = event.target;
+
+                            var item_count = ($(":input.item-searcher").length) - 1;
+                            var $holder = $($this).closest('div.item_holder');
+                            var qty_html;
+                            var inst;
+                            qty_html = "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' />";
+                            inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
+                            inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
+                            $holder.find('div.qty-holder').html(qty_html).find('input').focus();
+                            $holder.find('input.item_id').val(ui.item.item_id);
+                            $holder.find('div.qty-location').html(inst);
+                            itemsUpdater.itemDelete();
+                            itemsUpdater.updateValidation();
+                            $holder.find('input.item_qty').focus();
+                            //console.log('vals '+ui.item.max_values);
+                            //console.log('total available '+ui.item.total_available);
+                            return false;
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                            //actions['add-origin-job'].deleteBank();
+                        }
                     }
                 },
                 'address-update':{
@@ -744,6 +784,22 @@
                 'order-search-results':{
                     init: function(){
                         actions['order-search'].init();
+                    }
+                },
+                'update-install-details':{
+                    init: function(){
+                        datePicker.fromDate();
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        $('select#team_id, select#type_id, #address, #suburb, #postcode, #country').change(function(e){
+                            $(this).valid();
+                        });
+                        $("form#edit-solar-install").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Install Details...</h2></div>' });
+                            }
+                        });
                     }
                 }
             }

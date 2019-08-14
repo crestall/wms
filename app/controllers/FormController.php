@@ -74,6 +74,7 @@ class FormController extends Controller {
             'procCourierAdd',
             'procCourierEdit',
             'procEditServiceJob',
+            'procEditInstall',
             'procForgotPassword',
             'procGoodsIn',
             'procGoodsOut',
@@ -122,6 +123,60 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procEditInstall()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>";die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $post_data['install_date'] = $post_data['date'];
+        unset($post_data['date']);
+        if($team_id == 0)
+        {
+            Form::setError('team_id', 'Please select a team');
+        }
+        if(!$this->dataSubbed($work_order))
+        {
+            Form::setError('work_order', 'A work order number is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            //echo "<pre>Good",print_r($post_data),"</pre>"; die();
+            $vals = array(
+                "team_id"       => $team_id,
+                'work_order'    => $work_order,
+                'customer_name' => NULL,
+                'install_date'  => $date_value,
+                'address'       => $address,
+                'address_2'     => NULL,
+                'suburb'        => $suburb,
+                'state'         => $state,
+                'country'       => 'AU',
+                'client_id'     => $client_id,
+                'type_id'       => $type_id
+            );
+            if($this->dataSubbed($customer_name))
+                $vals['customer_name'] = $customer_name;
+            if($this->dataSubbed($address2))
+                $vals['address_2'] = $address2;
+            Session::set('feedback', "Those details have been updated");
+            $this->solarorder->updateOrderValues($vals, $order_id);
+        }
+        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-details/id=".$order_id);
     }
 
     public function procAddSolarInstall()
