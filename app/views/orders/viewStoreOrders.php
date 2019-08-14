@@ -62,6 +62,7 @@
         				<th>Delivery Address</th>
         				<th>Items</th>
         				<th>Date Ordered</th>
+                        <th>Package Entered</th>
                         <th></th>
                         <th nowrap>
                             <div class="checkbox checkbox-default">
@@ -115,6 +116,7 @@
                             $invoice = "<p><a href='/client_uploads/{$co['client_id']}/{$co['uploaded_file']}' target='_blank' class='btn btn-primary'>Print Invoice</a></p>";
                         }
                         $ps = "<p><a href='/pdf/packing-slip/order={$co['id']}' target='_blank' class='btn btn-primary'>Print Packing Slip</a></p>";
+                        $pe = ($this->controller->order->hasAssociatedPackage($co['id']))? "Yes":"No";
                         ?>
         	        	<tr <?php echo $row_class;?> >
                             <td class="number" data-label="Count"><?php echo $c;?></td>
@@ -126,6 +128,7 @@
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
         					<td data-label="Items" class="number"><?php echo $item_count;?></td>
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
+                            <td data-label="Package Entered"><?php echo $pe;?></td>
                             <td>
                                 <?php echo $invoice; ?>
                                 <?php echo $ps; ?>

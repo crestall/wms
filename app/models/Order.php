@@ -45,6 +45,7 @@
     getStatusses()
     getTopProducts($from, $to, $client_id)
     getUnfulfilledOrders($client_id, $courier_id, $store_order = -1)
+    hasAssociatedPackage($id)
     recordDispatch($data, $recording)
     removeError($order_id)
     setSlipPrinted($id)
@@ -83,6 +84,12 @@ class Order extends Model{
         $this->packed_id    = $this->getStatusId('packed');
         $this->fulfilled_id = $this->getStatusId('fulfilled');
         $this->getStatusses();
+    }
+
+    public function hasAssociatedPackage($id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue('orders_packages', array('order_id' => $id)); 
     }
 
     public function isVicMetro($id)
