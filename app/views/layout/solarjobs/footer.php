@@ -404,7 +404,7 @@
                         actions.common['add-item']();
                         console.log('instal items update');
                         itemsUpdater.itemDelete();
-
+                        //actions['item-searcher'].init();
                         $("form#items-update").submit(function(e){
                             if($(this).valid())
                             {
@@ -415,7 +415,6 @@
                             wholePallets : true
                         });
                         $("input.item-searcher").each(function(i,e){
-                            $(this).css({color:"red"});
                             if($(this).data('ui-autocomplete') != undefined)
                             {
                                 $(this).autocomplete( "destroy" );
