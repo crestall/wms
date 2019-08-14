@@ -846,6 +846,38 @@ class Woocommerce{
             "SUNSET-QUEEN-BED-AU",
             "SUNSET-KING-BED-AU"
         );
+        $box_array = array(
+            'IMC-FLOW-SECT-CREAM'   => array(
+                'FLOW-CREAM-BOX1',
+                'FLOW-CREAM-BOX2',
+                'FLOW-CREAM-BOX3'
+            ),
+            'IMC-FLOW-SECT-CHARCOAL'   => array(
+                'FLOW-CHARCOAL-BOX1',
+                'FLOW-CHARCOAL-BOX2',
+                'FLOW-CHARCOAL-BOX3'
+            ),
+            'IMC-VENICE-QUEEN-BEIGE-AU'   => array(
+                'VENICE-QUEEN-BEIGE-BOX1',
+                'VENICE-QUEEN-BEIGE-BOX2',
+                'VENICE-QUEEN-BEIGE-BOX3'
+            ),
+            'IMC-VENICE-QUEEN-CHARCOAL-AU'   => array(
+                'VENICE-QUEEN-CHARCOAL-BOX1',
+                'VENICE-QUEEN-CHARCOAL-BOX2',
+                'VENICE-QUEEN-CHARCOAL-BOX3'
+            ),
+            'IMC-VENICE-KING-BEIGE-AU'   => array(
+                'VENICE-KING-BEIGE-BOX1',
+                'VENICE-KING-BEIGE-BOX2',
+                'VENICE-KING-BEIGE-BOX3'
+            ),
+            'IMC-VENICE-KING-CHARCOAL-AU'   => array(
+                'VENICE-KING-CHARCOAL-BOX1',
+                'VENICE-KING-CHARCOAL-BOX2',
+                'VENICE-KING-CHARCOAL-BOX3'
+            )
+        );
         $orders = array();
         if(!isset($the_orders[0]))
             $collected_orders[] = $the_orders;
@@ -944,26 +976,54 @@ class Woocommerce{
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
                     if(in_array($item['sku'], $ignored_skus))
-                        continue;
-                    $product = $this->controller->item->getItemBySku($item['sku']);
-                    if(!$product)
                     {
-                        $items_errors = true;
-                        $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        continue;
+                    }
+                    elseif(array_key_exists($item['sku'], $box_array))
+                    {
+                         foreach($box_array[$item['sku']] as $sku)
+                         {
+                            $product = $this->controller->item->getItemBySku($sku);
+                            if(!$product)
+                            {
+                                $items_errors = true;
+                                $mm .= "<li>Could not find {$item['name']} in WMS based on {$sku}</li>";
+                            }
+                            else
+                            {
+                                $n_name = $product['name'];
+                                $item_id = $product['id'];
+                                $items[] = array(
+                                    'qty'           =>  $item['quantity'],
+                                    'id'            =>  $item_id,
+                                    'whole_pallet'  => false
+                                );
+                                $qty += $item['quantity'];
+                                $weight += $product['weight'] * $item['quantity'];
+                            }
+                         }
                     }
                     else
                     {
-                        $n_name = $product['name'];
-                        $item_id = $product['id'];
-                        $items[] = array(
-                            'qty'           =>  $item['quantity'],
-                            'id'            =>  $item_id,
-                            'whole_pallet'  => false
-                        );
-                        $qty += $item['quantity'];
-                        $weight += $product['weight'] * $item['quantity'];
+                        $product = $this->controller->item->getItemBySku($item['sku']);
+                        if(!$product)
+                        {
+                            $items_errors = true;
+                            $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        }
+                        else
+                        {
+                            $n_name = $product['name'];
+                            $item_id = $product['id'];
+                            $items[] = array(
+                                'qty'           =>  $item['quantity'],
+                                'id'            =>  $item_id,
+                                'whole_pallet'  => false
+                            );
+                            $qty += $item['quantity'];
+                            $weight += $product['weight'] * $item['quantity'];
+                        }
                     }
-
                 }
                 //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;  always signature required for NOA
                 if(empty($o['customer_note']))
