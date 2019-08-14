@@ -116,7 +116,7 @@
                             $invoice = "<p><a href='/client_uploads/{$co['client_id']}/{$co['uploaded_file']}' target='_blank' class='btn btn-primary'>Print Invoice</a></p>";
                         }
                         $ps = "<p><a href='/pdf/packing-slip/order={$co['id']}' target='_blank' class='btn btn-primary'>Print Packing Slip</a></p>";
-                        $pe = ($this->controller-order->hasassociatedPackage($co['id']))? "Yes":"No";
+                        $pe = ($this->controller->order->hasAssociatedPackage($co['id']))? "Yes":"No";
                         ?>
         	        	<tr <?php echo $row_class;?> >
                             <td class="number" data-label="Count"><?php echo $c;?></td>
