@@ -71,18 +71,21 @@ class ajaxfunctionsController extends Controller
         }
         $order_items = array();
         //print_r($this->request->data['allocation']);die();
-        foreach($this->request->data['allocation'] as $item_id => $array)
+        foreach($this->request->data['allocation'] as $item_id => $marray)
         {
-            echo "<pre>",print_r($array),"</pre>";
-            $location = array();
-            $location[] = array(
-                'location_id'   => $array['location_id'],
-                'qty'           => $array['qty']
-            );
-            $order_items[] = array(
-                'locations' => $location,
-                'item_id'   => $item_id
-            );
+            echo "<pre>",print_r($marray),"</pre>";
+            foreach($marray as $key => $array)
+            {
+                $location = array();
+                $location[] = array(
+                    'location_id'   => $array['location_id'],
+                    'qty'           => $array['qty']
+                );
+                $order_items[] = array(
+                    'locations' => $location,
+                    'item_id'   => $item_id
+                );
+            }
         }
         echo "<pre>",print_r($order_items),"</pre>";die();
         if($this->order->updateItemsForOrder($order_items, $order_id))
