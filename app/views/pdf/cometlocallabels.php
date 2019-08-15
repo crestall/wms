@@ -44,7 +44,7 @@ foreach($orders_ids as $id):
             </tr>
         </table>
         <p><strong>Item <?php echo $c;?> of <?php echo $total_items;?></strong></p>
-        <?php if($this_order < count($orders_ids)):?>
+        <?php if($this_order <= count($orders_ids)):?>
             <pagebreak />
         <?php endif;?>
         <?php
