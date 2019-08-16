@@ -831,7 +831,7 @@ class Item extends Model{
             'preferred_pick_location_id'    =>  $preferred_pick_location_id,
             'palletized'                    =>  $palletized,
             'price'                         =>  0.00,
-            'solar_type_id'                 =>  $solar_type_id
+            'solar_type_id'                 =>  0
         );
         if(!empty($supplier)) $item_values['supplier'] = $supplier; 
         $item_values['active'] = (isset($active))? 1 : 0;
@@ -839,6 +839,7 @@ class Item extends Model{
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (isset($per_pallet))? $per_pallet : 0;
+        if(isset($solar_type_id)) $item_values['solar_type_id'] = $solar_type_id;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
         elseif(isset($delete_image)) $item_values['image'] = null;
         if(!empty($price)) $item_values['price'] = $price;
