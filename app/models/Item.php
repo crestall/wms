@@ -747,7 +747,7 @@ class Item extends Model{
         $rows = $db->queryData($query, $array);
         foreach($rows as $row)
         {
-            if( empty($row['available']) && $data['checkavailable']) continue;
+            if( empty($row['available']) && ( isset($data['checkavailable']) && $data['checkavailable'] )) continue;
             $row_array['value'] = $row['name']." (".$row['sku'].")";
             if(!empty($row['publisher'])) $row_array['value'] = $row['name']." (".$row['publisher'].")";
             $row_array['sku'] = $row['sku'];
