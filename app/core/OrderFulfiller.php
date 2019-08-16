@@ -311,7 +311,7 @@
             else
             {
                 Session::set('showerrorfeedback', true);
-        	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
+        	    $_SESSION['errorfeedback'] .= "<h3>{$od['work_order']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
             }
         }
         $this->recordOutput("order_fulfillment/solar");
