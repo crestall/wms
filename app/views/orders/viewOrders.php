@@ -132,6 +132,7 @@
         				<th>Date Ordered</th>
         				<!--th>Status</th-->
         				<th>Slip Printed</th>
+
                         <th>
                             Ignore Price Check
                             <div class="checkbox checkbox-default">
@@ -220,6 +221,7 @@
                         $address_string .= " ".$co['state'];
                         $address_string .= " ".$co['postcode'];
                         $address_string .= " ".$co['country'];
+                        $pe = ($this->controller->order->hasAssociatedPackage($co['id']))? "Yes":"No";
                         /*
                         */
                         ?>
@@ -236,6 +238,7 @@
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
         					<!--td data-label="Status"><?php echo $order_status;?></td-->
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
+                            <td data-label="Package Entered"><?php echo $pe;?></td>
                             <td data-label="Ignore Price Restriction" class="chkbox">
                                 <div class="checkbox checkbox-default">
                                     <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select_np styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
