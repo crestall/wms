@@ -27,6 +27,10 @@ foreach($orders_ids as $id):
             <td><strong><?php echo $this->controller->solarteam->getTeamName($od['team_id']);?></strong></td>
         </tr>
         <tr>
+            <td>Install Date</td>
+            <td><strong><?php echo date("d/m/Y",$od['install_date']);?></strong></td>
+        </tr>
+        <tr>
             <td>Address</td>
             <td><?php echo $delivery_address;?></td>
         </tr>
