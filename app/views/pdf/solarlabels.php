@@ -23,6 +23,10 @@ foreach($orders_ids as $id):
             <td><strong><?php echo $od['work_order'];?></strong></td>
         </tr>
         <tr>
+            <td>Team</td>
+            <td><strong><?php echo $this->controller->solarteam->getTeamName($od['team_id']);?></strong></td>
+        </tr>
+        <tr>
             <td>Address</td>
             <td><?php echo $delivery_address;?></td>
         </tr>
