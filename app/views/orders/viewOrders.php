@@ -132,7 +132,7 @@
         				<th>Date Ordered</th>
         				<!--th>Status</th-->
         				<th>Slip Printed</th>
-
+                        <th>Package Entered</th> 
                         <th>
                             Ignore Price Check
                             <div class="checkbox checkbox-default">
