@@ -526,7 +526,7 @@
             $mail->AddAddress('jc@noasleep.com');
             $mail->AddAddress('jeremykopek@noasleep.com');
             $mail->AddBCC('customersupport@3plplus.com.au');
-            $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
+            $mail->AddAddress('viviannenguyen@noasleep.com', 'Vivianne');
             $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
         }
         else
@@ -567,7 +567,7 @@
             $mail->AddAddress('jc@noasleep.com');
             $mail->AddAddress('jeremykopek@noasleep.com');
             $mail->AddBCC('customersupport@3plplus.com.au');
-            $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
+            $mail->AddAddress('viviannenguyen@noasleep.com', 'Vivianne');
             $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
         }
         else
