@@ -132,7 +132,7 @@
         				<th>Date Ordered</th>
         				<!--th>Status</th-->
         				<th>Slip Printed</th>
-                        <th>Package Entered</th> 
+                        <th>Package Entered</th>
                         <th>
                             Ignore Price Check
                             <div class="checkbox checkbox-default">
@@ -266,7 +266,7 @@
         				</tr>
                         <?php if($errors):?>
                             <tr class="full_width">
-                                <td colspan="13" class="error">
+                                <td colspan="14" class="error">
                                     <?php echo $co['error_string'];?>
                                     <p><a class="btn btn-primary" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                 </td>
@@ -274,12 +274,12 @@
                         <?php endif;?>
                         <?php if($comments):?>
                             <tr class="order_comments full_width">
-                                <td colspan="13"><?php echo $co['3pl_comments'];?></td>
+                                <td colspan="14"><?php echo $co['3pl_comments'];?></td>
                             </tr>
                         <?php endif;?>
                         <?php if($pick_notice):?>
                             <tr class="pick_notice full_width">
-                                <td colspan="13"><?php echo $co['pick_notices'];?></td>
+                                <td colspan="14"><?php echo $co['pick_notices'];?></td>
                             </tr>
                         <?php endif;?>
         			<?php endforeach;?>
