@@ -99,14 +99,14 @@ class Itemmovement extends Model{
                 {
                    $od = $db->queryByID('solar_orders', $sm['order_id']);
                    $on = $od['work_order'];
+                   $row['client_order_id'] = "";
                 }
                 else
                 {
                     $od = $db->queryByID('orders', $sm['order_id']);
                     $on = $od['order_number'];
+                    $row['client_order_id'] = $od['client_order_id'];
                 }
-
-                $row['client_order_id'] = $od['client_order_id'];
                 $row['order_number'] = $on;
                 $ad = array(
                     'address'   =>  $od['address'],
