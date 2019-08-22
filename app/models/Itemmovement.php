@@ -100,12 +100,14 @@ class Itemmovement extends Model{
                    $od = $db->queryByID('solar_orders', $sm['order_id']);
                    $on = $od['work_order'];
                    $row['client_order_id'] = "";
+                   $row['address'] = $od['customer_name'];
                 }
                 else
                 {
                     $od = $db->queryByID('orders', $sm['order_id']);
                     $on = $od['order_number'];
                     $row['client_order_id'] = $od['client_order_id'];
+                    $row['address'] = $od['ship_to'];
                 }
                 $row['order_number'] = $on;
                 $ad = array(
@@ -116,7 +118,7 @@ class Itemmovement extends Model{
                     'postcode'  =>  $od['postcode'],
                     'country'   =>  $od['country']
                 );
-                $row['address'] = $od['ship_to'];
+
                 if(!empty($od['company_name']))
                     $row['address'] .= "<br/>".$od['company_name'];
                 $row['address'] .= "<br/>".Utility::formatAddressWeb($ad);
