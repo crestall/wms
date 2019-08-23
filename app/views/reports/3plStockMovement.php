@@ -10,7 +10,8 @@
     <?php if($client_id > 0):?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
         <?php //echo "<pre>",print_r($movements),"</pre>";?>
-        <?php if(count($movements)):?>
+        <?php if(count($movements)):
+            $h = ($client_id == 67)? "Work Order":"Order Number";?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Drawing Table..</h2>
@@ -36,7 +37,7 @@
                                 <th>Number In</th>
                                 <th>Number Out</th>
                                 <th>Reason</th>
-                                <th>Reference<br/>Order Number</th>
+                                <th>Reference<br/><?php echo $h;?></th>
                                 <th>Location</th>
                                 <th>Entered by</th>
                             </tr>

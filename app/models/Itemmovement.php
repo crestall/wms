@@ -95,9 +95,21 @@ class Itemmovement extends Model{
             }
             else
             {
-                $od = $db->queryByID('orders', $sm['order_id']);
-                $row['client_order_id'] = $od['client_order_id'];
-                $row['order_number'] = $od['order_number'];
+                if($client_id == 67)
+                {
+                   $od = $db->queryByID('solar_orders', $sm['order_id']);
+                   $on = $od['work_order'];
+                   $row['client_order_id'] = "";
+                   $row['address'] = $od['customer_name'];
+                }
+                else
+                {
+                    $od = $db->queryByID('orders', $sm['order_id']);
+                    $on = $od['order_number'];
+                    $row['client_order_id'] = $od['client_order_id'];
+                    $row['address'] = $od['ship_to'];
+                }
+                $row['order_number'] = $on;
                 $ad = array(
                     'address'   =>  $od['address'],
                     'address_2' =>  $od['address_2'],
@@ -106,11 +118,11 @@ class Itemmovement extends Model{
                     'postcode'  =>  $od['postcode'],
                     'country'   =>  $od['country']
                 );
-                $row['address'] = $od['ship_to'];
+
                 if(!empty($od['company_name']))
                     $row['address'] .= "<br/>".$od['company_name'];
                 $row['address'] .= "<br/>".Utility::formatAddressWeb($ad);
-                $row['ref'] = "<a href='/client-order-detail/{$sm['order_id']}'>Order No: ".str_pad($od['order_number'],8,'0',STR_PAD_LEFT)."</a>";
+                $row['ref'] = "<a href='/client-order-detail/{$sm['order_id']}'>Order No: ".str_pad($on,8,'0',STR_PAD_LEFT)."</a>";
             }
             $row['reason'] = $db->queryValue('stock_movement_labels', array('id'=>$sm['reason_id']), 'name');
             $row['sku'] = $sm['sku'];

@@ -303,7 +303,7 @@
                 $items = $this->controller->solarorder->getItemsForOrder($id);
 
                 $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
-                $this->removeStock($items, $id);
+                $this->removeSolarOrderStock($items, $id);
 
                 Session::set('showfeedback', true);
                 $_SESSION['feedback'] .= "<p>{$od['id']} has been successfully fulfilled</p>";
@@ -335,7 +335,7 @@
                 $items = $this->controller->solarservicejob->getItemsForJob($id);
 
                 $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
-                $this->removeStock($items, $id);
+                $this->removeSolarServiceJobStock($items, $id);
 
                 Session::set('showfeedback', true);
                 $_SESSION['feedback'] .= "<p>{$od['work_order']} has been successfully fulfilled</p>";
@@ -493,6 +493,100 @@
             	'date'		    =>	time(),
                 'entered_by'    =>  Session::getUserId() ,
                 'location_id'   =>  $location_id
+            );
+            $this->output .= "Inserting movement reason".PHP_EOL;
+            $this->output .= print_r($im_values, true).PHP_EOL;
+            $db->insertQuery('items_movement', $im_values);
+            $cc =  $db->queryValue('items_locations', array('item_id' => $item_id, 'location_id' => $location_id), 'qty') ;
+            if($cc <= 0)
+            {
+                $check = $db->queryRow("SELECT * FROM items_locations WHERE location_id = $location_id AND qty > 0");
+                if(empty($check))
+                {
+                    $db->query("UPDATE clients_bays SET date_removed = ".time()." WHERE location_id = $location_id AND client_id = {$item_d['client_id']} AND date_removed = 0");
+                    if($item_d['double_bay'] > 0)
+                    {
+                        $this_location = $db->queryValue('locations', array('id' => $location_id), 'location');
+                        $next_location = substr($this_location, 0, -1)."b";
+                        $next_location_id = $db->queryValue('locations', array('location' => $next_location));
+                        $db->query("UPDATE clients_locations SET date_removed = ".time()." WHERE location_id = $next_location_id AND client_id = {$item_d['client_id']} AND date_removed = 0");
+                    }
+                }
+            }
+            //stock notifications
+            $this->checkStockLevels($item_id);
+        }
+    }
+
+    private function removeSolarOrderStock($items, $order_id)
+    {
+        $db = Database::openConnection();
+        foreach($items as $i)
+        {
+            $qty = $i['qty'];
+            $item_id = $i['item_id'];
+            $location_id = $i['location_id'];
+            $item_d = $db->queryByID('items', $item_id);
+            //remove from stock
+            $this->output .= "Removing from stock : UPDATE items_locations SET qty = qty - $qty WHERE item_id = $item_id AND location_id = $location_id".PHP_EOL;
+            $db->query("UPDATE items_locations SET qty = qty - $qty WHERE item_id = $item_id AND location_id = $location_id");
+            //item movement reason
+            $reason_id = $this->controller->stockmovementlabels->getLabelId("Order Fulfillment");
+            $im_values = array(
+            	'reason_id'	        =>	$reason_id,
+            	'qty_out'	        =>	$qty,
+            	'item_id'	        =>	$item_id,
+            	'solar_order_id'    =>	$order_id,
+            	'date'		        =>	time(),
+                'entered_by'        =>  Session::getUserId() ,
+                'location_id'       =>  $location_id
+            );
+            $this->output .= "Inserting movement reason".PHP_EOL;
+            $this->output .= print_r($im_values, true).PHP_EOL;
+            $db->insertQuery('items_movement', $im_values);
+            $cc =  $db->queryValue('items_locations', array('item_id' => $item_id, 'location_id' => $location_id), 'qty') ;
+            if($cc <= 0)
+            {
+                $check = $db->queryRow("SELECT * FROM items_locations WHERE location_id = $location_id AND qty > 0");
+                if(empty($check))
+                {
+                    $db->query("UPDATE clients_bays SET date_removed = ".time()." WHERE location_id = $location_id AND client_id = {$item_d['client_id']} AND date_removed = 0");
+                    if($item_d['double_bay'] > 0)
+                    {
+                        $this_location = $db->queryValue('locations', array('id' => $location_id), 'location');
+                        $next_location = substr($this_location, 0, -1)."b";
+                        $next_location_id = $db->queryValue('locations', array('location' => $next_location));
+                        $db->query("UPDATE clients_locations SET date_removed = ".time()." WHERE location_id = $next_location_id AND client_id = {$item_d['client_id']} AND date_removed = 0");
+                    }
+                }
+            }
+            //stock notifications
+            $this->checkStockLevels($item_id);
+        }
+    }
+
+    private function removeSolarServiceJobStock($items, $order_id)
+    {
+        $db = Database::openConnection();
+        foreach($items as $i)
+        {
+            $qty = $i['qty'];
+            $item_id = $i['item_id'];
+            $location_id = $i['location_id'];
+            $item_d = $db->queryByID('items', $item_id);
+            //remove from stock
+            $this->output .= "Removing from stock : UPDATE items_locations SET qty = qty - $qty WHERE item_id = $item_id AND location_id = $location_id".PHP_EOL;
+            $db->query("UPDATE items_locations SET qty = qty - $qty WHERE item_id = $item_id AND location_id = $location_id");
+            //item movement reason
+            $reason_id = $this->controller->stockmovementlabels->getLabelId("Order Fulfillment");
+            $im_values = array(
+            	'reason_id'	            =>	$reason_id,
+            	'qty_out'	            =>	$qty,
+            	'item_id'	            =>	$item_id,
+            	'solar_service_job_id'  =>	$order_id,
+            	'date'		            =>	time(),
+                'entered_by'            =>  Session::getUserId() ,
+                'location_id'           =>  $location_id
             );
             $this->output .= "Inserting movement reason".PHP_EOL;
             $this->output .= print_r($im_values, true).PHP_EOL;
