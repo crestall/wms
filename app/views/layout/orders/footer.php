@@ -1051,6 +1051,48 @@
                             }
                         });
 
+                        $('a.remove_courier').click(function(e){
+                            e.preventDefault();
+                            swal({
+                                title: "Remove the courier from this order?",
+                                text: "This will reset the courie and cancell the shipment",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then( function(willFulfill) {
+                                var order_id = $('a.remove_courier').data('orderid');
+                                console.log('order id: '+order_id);
+                                $.ajax({
+                                    url: '/ajaxfunctions/remove-courier',
+                                    method: 'post',
+                                    data: {
+                                        order_id: order_id
+                                    },
+                                    dataType: 'json',
+                                    beforeSend: function(){
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing Courier...</h1></div>' });
+                                    },
+                                    success: function(d){
+                                        if(d.error)
+                                        {
+                                            $.unblockUI();
+                                            alert('error');
+                                        }
+                                        else
+                                        {
+                                            location.reload();
+                                        }
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown){
+                                        $.unblockUI();
+                                        document.open();
+                                        document.write(jqXHR.responseText);
+                                        document.close();
+                                    }
+                                });
+                            })
+                        });
+
                         $('a.eparcel-fulfill').click(function(e){
                             e.preventDefault();
                             swal({

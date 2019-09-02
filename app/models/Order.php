@@ -47,6 +47,7 @@
     getUnfulfilledOrders($client_id, $courier_id, $store_order = -1)
     hasAssociatedPackage($id)
     recordDispatch($data, $recording)
+    removeCourier($order_id)
     removeError($order_id)
     setSlipPrinted($id)
     updateItemsForOrder(array $order_items, $order_id)
@@ -86,10 +87,21 @@ class Order extends Model{
         $this->getStatusses();
     }
 
+    public function removeCourier($order_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseFields($this->table, array(
+            'courier_id'            => 0,
+            'eparcel_shipment_id'   => NULL,
+            'consignment_id'        => NULL,
+            'total_cost'            => 0
+        ), $order_id);
+    }
+
     public function hasAssociatedPackage($id)
     {
         $db = Database::openConnection();
-        return $db->queryValue('orders_packages', array('order_id' => $id)); 
+        return $db->queryValue('orders_packages', array('order_id' => $id));
     }
 
     public function isVicMetro($id)

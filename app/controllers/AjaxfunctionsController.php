@@ -43,6 +43,7 @@ class ajaxfunctionsController extends Controller
             'checkLocations',
             'reactivateUser',
             'recordDispatch',
+            'removeCourier',
             'selectCourier',
             'updateAllocation',
             'updateFreightCharge',
@@ -52,6 +53,18 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function removeCourier()
+    {
+        $order_id = $this->request->data['order_id'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        $this->order->removeCourier($order_id);
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Courier has been removed</h2>");
+        $this->view->renderJson($data);
     }
 
     public function updateAllocation()
