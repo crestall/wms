@@ -968,13 +968,12 @@ class Order extends Model{
         //echo $query2;
 
         $orders = $db->queryData($query1);
-        $errors = $db->queryData($query2);
+        //$errors = $db->queryData($query2);
 
         $return_array = array(
             array(
                 'Week Ending',
-                'Total Orders',
-                'Pick Errors'
+                'Total Orders'
             )
         );
 
@@ -983,23 +982,6 @@ class Order extends Model{
             $row_array = array();
             $row_array[0] = date("d/m/y", $o['friday']);
             $row_array[1] = $o['total_orders'];
-            if(count($errors))
-            {
-                foreach($errors as $e)
-                {
-                    if($e['friday'] == $o['friday'])
-                    {
-                       $row_array[2] = (int)$e['errors'];
-                       break;
-                    }
-                    $row_array[2] = 0;
-                }
-            }
-            else
-            {
-                $row_array[2] = 0;
-            }
-
             $return_array[] = $row_array;
         }
         return $return_array;
