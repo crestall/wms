@@ -1070,7 +1070,7 @@
                                     },
                                     dataType: 'json',
                                     beforeSend: function(){
-                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Cancelling Courier...</h1></div>' });
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing Courier...</h1></div>' });
                                     },
                                     success: function(d){
                                         if(d.error)
