@@ -1051,6 +1051,11 @@
                             }
                         });
 
+                        $('a.remove_courier').click(function(e){
+                            e.preventDefault();
+                            console.log('order id: '+$(this).data('orderid'));
+                        });
+
                         $('a.eparcel-fulfill').click(function(e){
                             e.preventDefault();
                             swal({

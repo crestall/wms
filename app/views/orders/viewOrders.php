@@ -251,10 +251,7 @@
                                     <p><button class="ship_quote btn btn-primary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
                                     <p><button class="btn btn-warning adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
                                     <?php if( Session::getUserRole() == "super admin" && $co['courier_id'] > 0): ?>
-                                        <p><button class="btn btn-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</button></p>
-                                    <?php else:?>
-                                        <p><?php echo "User Role: $user_role";?></p>
-                                        <p><?php echo "Courier ID: {$co['courier_id']}";?></p>
+                                        <p><a class="btn btn-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
                                     <?php endif;?>
                                 </td>
                             <?php elseif($user_role == "warehouse"):?>
