@@ -252,6 +252,8 @@
                                     <p><button class="btn btn-warning adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
                                     <?php if( $user_role == "super admin" && $co['courier_id'] > 0): ?>
                                         <p><button class="btn btn-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</button></p>
+                                    <?php else:?>
+                                        <p>WTF!!!</p>
                                     <?php endif;?>
                                 </td>
                             <?php elseif($user_role == "warehouse"):?>
