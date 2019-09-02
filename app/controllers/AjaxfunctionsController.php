@@ -63,6 +63,7 @@ class ajaxfunctionsController extends Controller
             'feedback'  =>  ''
         );
         $this->order->removeCourier($order_id);
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Courier has been removed</h2>");
         $this->view->renderJson($data);
     }
 
