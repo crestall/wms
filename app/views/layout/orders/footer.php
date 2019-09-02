@@ -1053,7 +1053,7 @@
 
                         $('a.remove_courier').click(function(e){
                             e.preventDefault();
-                            console.log('order id: '+$(this).data('orderid'));
+                            //console.log('order id: '+$(this).data('orderid'));
                             swal({
                                 title: "Remove the courier from this order?",
                                 text: "This will reset the courie and cancell the shipment",
@@ -1061,7 +1061,35 @@
                                 buttons: true,
                                 dangerMode: true
                             }).then( function(willFulfill) {
-
+                                var order_id = $(this).data('orderid');
+                                $.ajax({
+                                    url: '/ajaxfunctions/remove-courier',
+                                    method: 'post',
+                                    data: {
+                                        order_id: order_id
+                                    },
+                                    dataType: 'json',
+                                    beforeSend: function(){
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Cancelling Courier...</h1></div>' });
+                                    },
+                                    success: function(d){
+                                        if(d.error)
+                                        {
+                                            $.unblockUI();
+                                            alert('error');
+                                        }
+                                        else
+                                        {
+                                            location.reload();
+                                        }
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown){
+                                        $.unblockUI();
+                                        document.open();
+                                        document.write(jqXHR.responseText);
+                                        document.close();
+                                    }
+                                });
                             })
                         });
 
