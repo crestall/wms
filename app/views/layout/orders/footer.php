@@ -1060,7 +1060,7 @@
                                 buttons: true,
                                 dangerMode: true
                             }).then( function(willFulfill) {
-                                var order_id = $(this).data('orderid');
+                                var order_id = $('a.remove_courier').data('orderid');
                                 console.log('order id: '+order_id);
                                 $.ajax({
                                     url: '/ajaxfunctions/remove-courier',
