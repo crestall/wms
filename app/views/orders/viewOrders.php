@@ -253,7 +253,7 @@
                                     <?php if( $user_role == "super admin" && $co['courier_id'] > 0): ?>
                                         <p><button class="btn btn-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</button></p>
                                     <?php else:?>
-                                        <p>WTF!!!</p>
+                                        <p><?php echo "User Role: $user_role";?></p>
                                     <?php endif;?>
                                 </td>
                             <?php elseif($user_role == "warehouse"):?>
