@@ -1053,7 +1053,7 @@
 
                         $('a.remove_courier').click(function(e){
                             e.preventDefault();
-                            //console.log('order id: '+$(this).data('orderid'));
+                            console.log('order id: '+$(this).data('orderid'));
                             swal({
                                 title: "Remove the courier from this order?",
                                 text: "This will reset the courie and cancell the shipment",
