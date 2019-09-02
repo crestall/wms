@@ -58,7 +58,12 @@ class ajaxfunctionsController extends Controller
     public function removeCourier()
     {
         $order_id = $this->request->data['order_id'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
         $this->order->removeCourier($order_id);
+        $this->view->renderJson($data);
     }
 
     public function updateAllocation()
