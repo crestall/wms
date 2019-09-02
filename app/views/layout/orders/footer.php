@@ -1080,7 +1080,7 @@
                                         }
                                         else
                                         {
-                                            //location.reload();
+                                            location.reload();
                                         }
                                     },
                                     error: function(jqXHR, textStatus, errorThrown){
