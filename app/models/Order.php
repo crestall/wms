@@ -951,24 +951,9 @@ class Order extends Model{
             $query1 .= " AND client_id = ".$client_id;
         $query1 .= "  GROUP BY
                 UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 )))";
-        //echo $query1;
-
-        $query2 = "
-            SELECT
-                sum(errors) as errors, UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m-%d') ) -7, 7 ))) + 6*24*60*60 AS friday
-            FROM
-                pick_errors
-            WHERE
-                date >= $from AND date <= $to
-        ";
-        if($client_id > 0)
-            $query2 .= " AND client_id = ".$client_id;
-        $query2 .= " GROUP BY UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m-%d') ) -7, 7 )))";
-
-        //echo $query2;
+        echo $query1;
 
         $orders = $db->queryData($query1);
-        //$errors = $db->queryData($query2);
 
         $return_array = array(
             array(
