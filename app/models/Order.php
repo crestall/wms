@@ -936,6 +936,8 @@ class Order extends Model{
 
     public function getPickErrors($from, $to, $client_id = 0)
     {
+        $from += 24*60*60;
+        $to += 24*60*60;
         $db = Database::openConnection();
         $query1 = "
             SELECT
