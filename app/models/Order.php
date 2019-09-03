@@ -942,7 +942,7 @@ class Order extends Model{
 
         $query1 = "
             SELECT
-                (a.total_orders + b.total_orders + c.total_orders) AS all_orders,
+                (a.total_orders + b.total_orders + c.total_orders) AS total_orders,
                 a.friday
                 FROM
                 (
