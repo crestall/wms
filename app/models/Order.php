@@ -951,7 +951,7 @@ class Order extends Model{
             $query1 .= " AND client_id = ".$client_id;
         $query1 .= "  GROUP BY
                 UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 )))";
-        echo $query1;
+        //echo $query1;
 
         $orders = $db->queryData($query1);
 

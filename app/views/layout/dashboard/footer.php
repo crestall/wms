@@ -41,10 +41,7 @@
                             			  	slantedTextAngle:-45
                                         },
                                         vAxis: {
-                                            title: 'Total Orders',
-                                            viewWindow: {
-                                                min: 0
-                                            }
+                                            title: 'Total Orders'
                                         },
                                         legend: {
                                             position: 'top'
