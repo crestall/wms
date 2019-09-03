@@ -50,47 +50,7 @@
                                     };
 
                                     var chart = new google.visualization.ComboChart(document.getElementById('error_activity_chart'));
-                                    /*
-                                    google.visualization.events.addListener(chart, 'ready', function () {
-                                        var imgUri = chart.getImageURI();
 
-
-                                        var form = document.createElement('form');
-                                        form.setAttribute("method", "post");
-                                        form.setAttribute("action", "/make-pickerror-pdf");
-                                        //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
-                                        form.setAttribute("target", "_blank");
-                                        var hiddenField = document.createElement("input");
-                                        hiddenField.setAttribute("type", "hidden");
-                                        hiddenField.setAttribute("name", "chart_data");
-                                        hiddenField.setAttribute("value", imgUri);
-                                        var hiddenField2 = document.createElement("input");
-                                        hiddenField2.setAttribute("type", "hidden");
-                                        hiddenField2.setAttribute("name", "client_id");
-                                        hiddenField2.setAttribute("value", $('#client_id').val());
-                                        var hiddenField3 = document.createElement("input");
-                                        hiddenField3.setAttribute("type", "hidden");
-                                        hiddenField3.setAttribute("name", "from");
-                                        hiddenField3.setAttribute("value", $('#from').val());
-                                        var hiddenField4 = document.createElement("input");
-                                        hiddenField4.setAttribute("type", "hidden");
-                                        hiddenField4.setAttribute("name", "to");
-                                        hiddenField4.setAttribute("value", $('#to').val());
-                                        form.appendChild(hiddenField);
-                                        form.appendChild(hiddenField2);
-                                        form.appendChild(hiddenField3);
-                                        form.appendChild(hiddenField4);
-                                        var submitButton = document.createElement("input");
-                                        submitButton.setAttribute("type", "submit");
-                                        submitButton.setAttribute("value", "Print PDF");
-                                        submitButton.setAttribute("class", "button");
-                                        form.appendChild(submitButton);
-                                        document.getElementById('the_chart').appendChild(form);
-
-
-
-                                    });
-                                    */
                                     chart.draw(data, options);
                                 }
                             });
@@ -130,6 +90,49 @@
 
                                     var chart = new google.visualization.ComboChart(document.getElementById('order_activity_chart'));
                                     chart.draw(data, options);
+
+                                    var columns = [];
+                                    var series = {};
+                                    for (var i = 0; i < data.getNumberOfColumns(); i++) {
+                                        columns.push(i);
+                                        if (i > 0) {
+                                            series[i - 1] = {};
+                                        }
+                                    }
+
+                                    options.series = series;
+
+                                    google.visualization.events.addListener(chart, 'select', function () {
+                                        var sel = chart.getSelection();
+                                        // if selection length is 0, we deselected an element
+                                        if (sel.length > 0) {
+                                            // if row is undefined, we clicked on the legend
+                                            if (sel[0].row === null) {
+                                                var col = sel[0].column;
+                                                if (columns[col] == col) {
+                                                    // hide the data series
+                                                    columns[col] = {
+                                                        label: data.getColumnLabel(col),
+                                                        type: data.getColumnType(col),
+                                                        calc: function () {
+                                                            return null;
+                                                        }
+                                                    };
+
+                                                    // grey out the legend entry
+                                                    series[col - 1].color = '#CCCCCC';
+                                                }
+                                                else {
+                                                    // show the data series
+                                                    columns[col] = col;
+                                                    series[col - 1].color = null;
+                                                }
+                                                var view = new google.visualization.DataView(data);
+                                                view.setColumns(columns);
+                                                chart.draw(view, options);
+                                            }
+                                        }
+                                    });
                                 }
                             });
                         }
