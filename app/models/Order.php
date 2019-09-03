@@ -405,7 +405,9 @@ class Order extends Model{
                 'csv_items'             => $csv_items,
                 'cartons'               => max(count($packages), $co['labels']),
                 'parcels'               => $parcels,
-                'weight'                => $co['weight']
+                'weight'                => $co['weight'],
+                'uploaded_file'         => $co['uploaded_file'],
+                'client_id'             => $co['client_id']
             );
             $return[] = $row;
         }

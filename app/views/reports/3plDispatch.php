@@ -43,14 +43,17 @@
                                 <th>Courier</th>
                                 <th>Con Note</th>
                                 <th>Cartons</th>
-                                <th>Packages</th>
                                 <th>Extras<br/><button class="btn btn-success btn-sm" id="extras_update">Update Extras</button></th>
-                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($client_orders as $co):?>
+                        <?php foreach($client_orders as $co):
+                            $invoice = "";
+                            if(!empty($co['uploaded_file']))
+                            {
+                                $invoice = "<a href='/client_uploads/{$co['client_id']}/{$co['uploaded_file']}' target='_blank'>Print Invoice</a>";
+                            }?>
                         	<tr>
                                 <td data-label="Date Ordered" class="number" ><?php echo $co['date_ordered'];?></td>
                                 <td data-label="Entered By"><?php echo $co['entered_by'];?></td>
@@ -65,17 +68,6 @@
                                 <td data-label="Courier" ><?php echo $co['courier'];?></td>
                                 <td data-label="Con Note"><?php echo $co['consignment_id'];?></td>
                                 <td data-label="Cartons" class="number"><?php echo $co['cartons'];?></td>
-                                <td data-label="Packages">
-                                    <?php $p = 1; foreach($co['parcels'] as $parcel):?>
-                                        <!--p>
-                                            Parcel <?php echo $p;?><br/>
-                                            Weight: <?php echo $parcel['weight'];?><br/>
-                                            Width: <?php echo $parcel['width'];?><br/>
-                                            Depth: <?php echo $parcel['depth'];?><br/>
-                                            height: <?php echo $parcel['height'];?><br/>
-                                        </p-->
-                                    <?php ++$p; endforeach;?>
-                                </td>
                                 <!--td data-label="Comments"><textarea class="form-control 3pl_comments" data-orderid="<?php echo $co['id'];?>"><?php echo $co['comments'];?></textarea></td-->
                                 <td data-label="Extras Update" class="extras">
                                     <div class="checkbox checkbox-default">
@@ -91,8 +83,7 @@
                                         <label class="col-form-label">Pallets</label>
                                     </div>
                                 </td>
-                                <td><?php echo $co['dispatched_by'];?></td>
-                                <td><?php echo $co['packed_by'];?></td>
+                                <td><?php echo $invoice; ?></td>
                             </tr>
                         <?php endforeach;?>
                         </tbody>
