@@ -197,6 +197,10 @@
                 'add-solar-install': {
                     init: function(){
                         //actions.common.init();
+                        if(!$('button#calc_items').prop('disabled'))
+                        {
+                            $('button#calc_items').click();
+                        }
                         $('select#type_id').change(function(e){
                             if($(this).val() > 0)
                             {
