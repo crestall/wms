@@ -936,21 +936,56 @@ class Order extends Model{
 
     public function getPickErrors($from, $to, $client_id = 0)
     {
+        $from += 24*60*60;
+        $to += 24*60*60;
         $db = Database::openConnection();
+
         $query1 = "
             SELECT
-                count(*) as total_orders, UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 ))) + 6*24*60*60 AS friday
-            FROM
-                orders
-            WHERE
-                date_fulfilled >= $from AND date_fulfilled <= $to
+                (a.total_orders + b.total_orders + c.total_orders) AS total_orders,
+                a.friday
+                FROM
+                (
+                    SELECT
+                        count(*) as total_orders,
+                        MAX(`date_fulfilled`) AS 'friday',
+                        date_fulfilled
+                    FROM
+                        orders
+                    WHERE
+                        date_fulfilled >= $from AND date_fulfilled <= $to
+                    GROUP BY
+                        UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 )))
+                ) a,
+                (
+                    SELECT
+                        count(*) as total_orders
+                    FROM
+                        solar_orders
+                    WHERE
+                        date_fulfilled >= $from AND date_fulfilled <= $to
+                    GROUP BY
+                        UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 )))
+                ) b,
+                (
+                    SELECT
+                        count(*) as total_orders
+                    FROM
+                        solar_service_jobs
+                    WHERE
+                        date_completed >= $from AND date_completed <= $to
+                    GROUP BY
+                        UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_completed), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_completed), '%Y-%m-%d') ) -7, 7 )))
+                )c
+                WHERE
+                    a.date_fulfilled >= $from AND a.date_fulfilled <= $to
         ";
 
 
-        if($client_id > 0)
-            $query1 .= " AND client_id = ".$client_id;
+        //if($client_id > 0)
+            //$query1 .= " AND client_id = ".$client_id;
         $query1 .= "  GROUP BY
-                UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 )))";
+                    UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(a.date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(a.date_fulfilled), '%Y-%m-%d') ) -7, 7 )))";
         //echo $query1;
 
         $orders = $db->queryData($query1);
