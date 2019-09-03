@@ -207,6 +207,10 @@
                         actions['panel-calcs'].calcItems();
                         actions.common['add-item']();
                         datePicker.fromDate();
+                        if(!$('button#calc_items').prop('disabled'))
+                        {
+                            $('button#calc_items').click();
+                        }
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         $("form#add_solar_install").submit(function(e){
