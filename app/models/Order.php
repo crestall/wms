@@ -941,7 +941,7 @@ class Order extends Model{
         $db = Database::openConnection();
         $query1 = "
             SELECT
-                count(*) as total_orders, UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 ))) + 6*24*60*60 AS friday
+                count(*) as total_orders,  DATE_FORMAT(FROM_UNIXTIME(MAX(`date_fulfilled`)), '%Y-%m-%d') AS 'friday'
             FROM
                 orders
             WHERE
