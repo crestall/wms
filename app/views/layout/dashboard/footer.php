@@ -28,7 +28,7 @@
                                     console.log(jsonData);
                                     var data = google.visualization.arrayToDataTable(jsonData);
                                     var options = {
-                                        title :'Weekly Orders and Errors',
+                                        title :'Total Weekly Orders',
                                         titleTextStyle: {
                                             fontSize: 21,
                                             bold: false,
@@ -40,29 +40,16 @@
                             				slantedText:true,
                             			  	slantedTextAngle:-45
                                         },
-                                        vAxes: {
-                                            0: {
-                                                title: 'Total Orders',
-                                                viewWindow: {
-                                                    min: 0
-                                                }
-                                            },
-                                            1: {
-                                                title: 'Pick Errors',
-                                                viewWindow: {
-                                                    min: 0,
-                                                    max: 20
-                                                }
+                                        vAxis: {
+                                            title: 'Total Orders',
+                                            viewWindow: {
+                                                min: 0
                                             }
                                         },
                                         legend: {
                                             position: 'top'
                                         },
-                                        height: 450,
-                                        series: {
-                                			0:{type: "line", targetAxisIndex:0},
-                                            1:{type: "line", targetAxisIndex:1}
-                                		},
+                                        height: 450
                                     };
 
                                     var chart = new google.visualization.ComboChart(document.getElementById('error_activity_chart'));

@@ -340,6 +340,7 @@
 		$mail->AddAddress('jc@noasleep.com', 'Jean-Claude Renaud');
         $mail->AddAddress('jeremykopek@noasleep.com', 'Jeremy');
         $mail->AddAddress('viviannenguyen@noasleep.com', 'Vivianne');
+        $mail->AddAddress('janikakopek@noahome.com', 'Janika');
 
         $mail->AddAddress('customersupport@3plplus.com.au');
 
@@ -491,6 +492,7 @@
         $mail->AddBCC('jeremykopek@noasleep.com');
         $mail->AddBCC('customersupport@3plplus.com.au');
         $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
+        $mail->AddBCC('janikakopek@noahome.com', 'Janika');
         //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
 
         if(!$mail->Send())
@@ -528,6 +530,7 @@
             $mail->AddBCC('customersupport@3plplus.com.au');
             $mail->AddAddress('viviannenguyen@noasleep.com', 'Vivianne');
             $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+            $mail->AddAddress('janikakopek@noahome.com', 'Janika');
         }
         else
         {
@@ -569,6 +572,7 @@
             $mail->AddBCC('customersupport@3plplus.com.au');
             $mail->AddAddress('viviannenguyen@noasleep.com', 'Vivianne');
             $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+            $mail->AddAddress('janikakopek@noahome.com', 'Janika');
         }
         else
         {
