@@ -406,7 +406,8 @@ class Order extends Model{
                 'cartons'               => max(count($packages), $co['labels']),
                 'parcels'               => $parcels,
                 'weight'                => $co['weight'],
-                'uploaded_file'         => $co['uploaded_file']
+                'uploaded_file'         => $co['uploaded_file'],
+                'client_id'             => $co['client_id']
             );
             $return[] = $row;
         }
