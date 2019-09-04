@@ -38,6 +38,11 @@
                             <h3>Listed Items</h3>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <p>A total of <?php echo count($items);?> items listed</p>
+                        </div>
+                    </div>
                     <div class="bs-callout bs-callout-primary bs-callout-more">
                         <div id="the_items">
                             <?php foreach($items as $i):?>
