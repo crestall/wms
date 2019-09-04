@@ -610,7 +610,7 @@ class Item extends Model{
     {
         $db = Database::openConnection();
 
-        return $db->queryData("SELECT * FROM collections c JOIN items i ON c.linked_item_id = i.id WHERE item_id = $item_id");
+        return $db->queryData("SELECT * FROM collections c JOIN items i ON c.linked_item_id = i.id WHERE item_id = $item_id ORDER BY i.name");
     }
 
     public function getAutocompleteAllItems($data, $fulfilled_id)
