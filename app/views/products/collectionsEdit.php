@@ -48,8 +48,8 @@
                             <?php foreach($items as $i):?>
                                 <div class="form-group row">
                                     <div class='item_holder'>
-                                        <label class="col-md-3 col-form-label"><?php echo $i['name']." (".$i['sku'].")";?></label>
-                                        <div class="col-md-4">
+                                        <label class="col-md-5 col-form-label"><?php echo $i['name']." (".$i['sku'].")";?></label>
+                                        <div class="col-md-2">
                                             <input type="text" class="form-control required number" name="items[<?php echo $i['linked_item_id'];?>][qty]"  value="<?php echo $i['number'];?>" />
                                         </div>
                                         <div class='col-md-1 delete-image-holder'>
