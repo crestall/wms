@@ -90,8 +90,16 @@
                         dataTable.init($('table#view_solar_items_table'), {
                             "columnDefs": [
                                 { "orderable": false, "targets": [4, 5] }
-                            ]
+                            ],
+                            "drawCallback": function( settings ) {
+                                $('button.update_product').click(function(e){
+                                    actions.update.click(this);
+                                });
+                            }
                         } );
+                        $('button.update_product').click(function(e) {
+                            actions.update.click(this);
+                        });
                     }
                 },
                 'pack-items-edit': {
@@ -194,6 +202,41 @@
                                 return false;
                             }
                         });
+                    }
+                },
+                'update':{
+                    click: function(el){
+                        var prod_id = $(el).data('productid');
+                        var $feedbackbox = $('div#feedback_'+prod_id);
+                        var $errorbox = $('div#error_'+prod_id);
+                        var value = $('#lowstock_'+prod_id).val();
+                        $feedbackbox.slideUp('slow');
+                        $errorbox.slideUp('slow');
+                        if(value != "")
+                        {
+                            if( (!isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))) && value > 0 )
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Records...</h2></div>' });
+                                url = "/ajaxfunctions/updateWarningLevel";
+                                $.ajax({
+                                    url: url,
+                                    type:"post",
+                                    data: {product_id: prod_id, value: value},
+                                    error: function(request, status, error){
+                                        $errorbox.html(error).slideDown('slow');
+                                        $.unblockUI();
+                                    },
+                                    success: function(d){
+                                        $feedbackbox.slideDown('slow');
+                                        $.unblockUI();
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                $errorbox.slideDown('slow');
+                            }
+                        }
                     }
                 }
             }
