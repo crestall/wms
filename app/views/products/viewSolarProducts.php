@@ -40,7 +40,7 @@
                                 <td data-label="Owner"><?php echo $owner;?></td>
                                 <td data-label="Barcode" class="number"><?php echo $p['barcode'];?></td>
                                 <td>
-                                    <p><input type="text" class="form-control number" id="lowstock_<?php echo $p['id'];?>" name="lowstock_<?php echo $p['id'];?>" value="<?php echo $p['low_stock_warning'];?>" /></p>
+                                    <p><input type="text" class="form-control number" id="lowstock_<?php echo $p['id'];?>" name="lowstock_<?php echo $p['id'];?>" value="<?php echo $p['low_stock_warning'];?>" placeholder="Enter Min Value" /></p>
                 					<p><button class="btn btn-primary btn-sm update_product" data-productid="<?php echo $p['id'];?>">Update</button> </p>
                                     <div class="errorbox" style="display:none;" id="error_<?php echo$p['id'];?>">Only input whole, positive numbers please</div>
                                 	<div class="feedbackbox" style="display:none;" id="feedback_<?php echo$p['id'];?>">Product warning level updated</div>
