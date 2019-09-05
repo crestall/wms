@@ -371,7 +371,8 @@ return array(
         ),
         'inventory' => array(
             'view-inventory'    => true,
-            'view-solar-inventory'  => false
+            'view-solar-inventory'  => false,
+            'reorder-items'     => true
         ),
         'solar-teams'   => array(
             'add-team'  => true,
@@ -470,7 +471,8 @@ return array(
             'quality-control'       =>  false,
             //'replenish-pickface'    => true,
             'transfer-location' => true,
-            'solar-returns' => true
+            'solar-returns' => true,
+            'reorder-items' => true
         ),
 		'reports'			=> array(
           	//'product-movement-summary'	=>	true,
