@@ -124,10 +124,10 @@
         	    	<tr>
                         <th></th>
         	        	<th>Order No</th>
-                        <th>Client Order Number</th>
+                        <th>Client Order<br/>Number</th>
         				<th>Client</th>
         				<th>Deliver To</th>
-        				<th>Delivery Address</th>
+        				<th>Delivery<br/>Address</th>
         				<th>Items</th>
         				<th>Date<br/>Ordered</th>
         				<!--th>Status</th-->
