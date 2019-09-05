@@ -27,7 +27,7 @@
                             <th>Supplier</th>
                             <th>Owner</th>
                             <th>Barcode</th>
-                            <th></th>
+                            <th>Low Stock Level</th>
                         </tr>
                     </thead>
                     <tbody>
