@@ -129,10 +129,10 @@
         				<th>Deliver To</th>
         				<th>Delivery Address</th>
         				<th>Items</th>
-        				<th>Date Ordered</th>
+        				<th>Date<br/>Ordered</th>
         				<!--th>Status</th-->
-        				<th>Slip Printed</th>
-                        <th>Package Entered</th>
+        				<th>Slip<br/>Printed</th>
+                        <th>Package<br/>Entered</th>
                         <th>
                             Ignore Price Check
                             <div class="checkbox checkbox-default">
