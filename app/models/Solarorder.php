@@ -44,11 +44,11 @@
             SELECT
                 count(*) as total_orders, ot.name, UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(ss.job_date), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(ss.job_date), '%Y-%m-%d') ) -7, 7 ))) + 6*24*60*60 AS friday
             FROM
-                solar_orders so JOIN solar_order_types ot ON so.type_id = ot.id
+                solar_service_jobs ss JOIN solar_order_types ot ON ss.type_id = ot.id
             WHERE
                 ss.job_date >= $from AND ss.job_date <= $to
             GROUP BY
-                friday, so.type_id
+                friday, ss.type_id
             ORDER BY
             	friday, ot.id
         ";
