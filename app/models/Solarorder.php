@@ -74,7 +74,7 @@
             $row_array[4] = ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
             $return_array[] = $row_array;
         }
-        print_r($return_array); return
+        print_r($return_array); return;
 
         return $return_array;
     }
