@@ -67,7 +67,13 @@
         $stamp = 0;
         foreach($installs as $o)
         {
-            $row_array = array();
+            $row_array = array(
+                date("d/m/y", $o['friday']),
+                0,
+                0,
+                0,
+                0
+            );
             if($o['friday'] > $stamp)
             {
                 $row_array[0] = date("d/m/y", $o['friday']);
@@ -86,7 +92,7 @@
                 $row_array[4] += ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
             }
         }
-        if(count($row_array)) $return_array[] $row_array;
+        if(count($row_array)) $return_array[] = $row_array;
         print_r($return_array); return;
 
         return $return_array;
