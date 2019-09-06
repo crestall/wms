@@ -71,21 +71,22 @@
             if($o['friday'] > $stamp)
             {
                 $row_array[0] = date("d/m/y", $o['friday']);
-                $row_array[1] = ($o['name'] == 'Origin')? $o['total_orders']: 0;
-                $row_array[2] = ($o['name'] == 'TLJ Solar')? $o['total_orders']: 0;
-                $row_array[3] = ($o['name'] == 'Solar Gain')? $o['total_orders']: 0;
-                $row_array[4] = ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
+                $row_array[1] += ($o['name'] == 'Origin')? $o['total_orders']: 0;
+                $row_array[2] += ($o['name'] == 'TLJ Solar')? $o['total_orders']: 0;
+                $row_array[3] += ($o['name'] == 'Solar Gain')? $o['total_orders']: 0;
+                $row_array[4] += ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
                 $stamp = $o['friday'];
                 $return_array[] = $row_array;
             }
             else
             {
-                $row_array[1] = ($o['name'] == 'Origin')? $o['total_orders']: 0;
-                $row_array[2] = ($o['name'] == 'TLJ Solar')? $o['total_orders']: 0;
-                $row_array[3] = ($o['name'] == 'Solar Gain')? $o['total_orders']: 0;
-                $row_array[4] = ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
+                $row_array[1] += ($o['name'] == 'Origin')? $o['total_orders']: 0;
+                $row_array[2] += ($o['name'] == 'TLJ Solar')? $o['total_orders']: 0;
+                $row_array[3] += ($o['name'] == 'Solar Gain')? $o['total_orders']: 0;
+                $row_array[4] += ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
             }
         }
+        if(count($row_array)) $return_array[] $row_array;
         print_r($return_array); return;
 
         return $return_array;
