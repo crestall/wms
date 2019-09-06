@@ -316,7 +316,7 @@
                                     console.log(jsonData);
                                     var data = google.visualization.arrayToDataTable(jsonData);
                                     var options = {
-                                        title :'Total Weekly Orders',
+                                        title :'Total Weekly Installs',
                                         titleTextStyle: {
                                             fontSize: 21,
                                             bold: false,
@@ -334,10 +334,11 @@
                                         legend: {
                                             position: 'top'
                                         },
-                                        height: 450
+                                        height: 450,
+                                        isStacked: true
                                     };
 
-                                    var chart = new google.visualization.ComboChart(document.getElementById('error_activity_chart'));
+                                    var chart = new google.visualization.ColumChart(document.getElementById('error_activity_chart'));
 
                                     chart.draw(data, options);
                                 }

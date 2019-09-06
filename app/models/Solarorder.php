@@ -97,7 +97,7 @@
             ++$c;
         }
         if(count($row_array)) $return_array[] = $row_array;
-        print_r($return_array); return;
+       //print_r($return_array); return;
 
         return $return_array;
     }
