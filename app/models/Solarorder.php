@@ -64,7 +64,7 @@
             )
         );
 
-        foreach($install as $o)
+        foreach($installs as $o)
         {
             $row_array = array();
             $row_array[0] = date("d/m/y", $o['friday']);
