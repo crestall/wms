@@ -65,24 +65,27 @@
         );
 
         $stamp = 0;
+        $c = 1;
         foreach($installs as $o)
         {
-            $row_array = array(
-                date("d/m/y", $o['friday']),
-                0,
-                0,
-                0,
-                0
-            );
+
             if($o['friday'] > $stamp)
             {
-                $row_array[0] = date("d/m/y", $o['friday']);
+                if($c != 1)
+                    $return_array[] = $row_array;
+                $row_array = array(
+                    date("d/m/y", $o['friday']),
+                    0,
+                    0,
+                    0,
+                    0
+                );
                 $row_array[1] += ($o['name'] == 'Origin')? $o['total_orders']: 0;
                 $row_array[2] += ($o['name'] == 'TLJ Solar')? $o['total_orders']: 0;
                 $row_array[3] += ($o['name'] == 'Solar Gain')? $o['total_orders']: 0;
                 $row_array[4] += ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
                 $stamp = $o['friday'];
-                $return_array[] = $row_array;
+                //$return_array[] = $row_array;
             }
             else
             {
@@ -91,6 +94,7 @@
                 $row_array[3] += ($o['name'] == 'Solar Gain')? $o['total_orders']: 0;
                 $row_array[4] += ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
             }
+            ++$c;
         }
         if(count($row_array)) $return_array[] = $row_array;
         print_r($return_array); return;
