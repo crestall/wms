@@ -67,6 +67,18 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function getSolarInstalls()
+    {
+        $data = $this->solarorder->getInstalls($this->request->data['from'], $this->request->data['to']);
+        $this->view->renderJson($data);
+    }
+
+    public function getSolarServiceJobs()
+    {
+        $data = $this->solarorder->getServiceJobs($this->request->data['from'], $this->request->data['to']);
+        $this->view->renderJson($data);
+    }
+
     public function updateAllocation()
     {
         $post_data = array();
