@@ -42,13 +42,13 @@
 
         $q = "
             SELECT
-                count(*) as total_orders, max(install_date) AS friday
+                count(*) as total_orders, ot.name, UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(so.install_date), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(so.install_date), '%Y-%m-%d') ) -7, 7 ))) + 6*24*60*60 AS friday
             FROM
-                solar_orders
+                solar_orders so JOIN solar_order_types ot ON so.type_id = ot.id
             WHERE
-                install_date >= $from AND install_date <= $to
+                so.install_date >= $from AND so.install_date <= $to
             GROUP BY
-                UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(install_date), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(install_date), '%Y-%m-%d') ) -7, 7 )))
+                UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(so.install_date), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(so.install_date), '%Y-%m-%d') ) -7, 7 ))), so.type_id
         ";
 
         echo $q; return;
