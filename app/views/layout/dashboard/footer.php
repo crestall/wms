@@ -293,6 +293,9 @@
                         $('a#toggle_solarorders, a#toggle_solarinstalls, a#toggle_solarservice, a#solar_activity').click(function(e){
                             $(this).toggleClass('hiding');
                         });
+
+                        $('div#solar_install_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
+                        $('div#solar_service_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                     }
                 },
                 'dashboard':{
