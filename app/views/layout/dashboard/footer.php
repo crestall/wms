@@ -338,7 +338,7 @@
                                         isStacked: true
                                     };
 
-                                    var chart = new google.visualization.ColumChart(document.getElementById('error_activity_chart'));
+                                    var chart = new google.visualization.ColumnChart(document.getElementById('error_activity_chart'));
 
                                     chart.draw(data, options);
                                 }
