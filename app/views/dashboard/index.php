@@ -9,7 +9,7 @@ $panel_classes = array(
 $c = 1;
 ?>
 <div id="page-wrapper">
-    <?php //echo $user_role;?>
+    <?php echo $user_role;?>
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">3PL Plus Warehouse Management System</h1>
