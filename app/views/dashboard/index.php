@@ -191,6 +191,34 @@ $c = 1;
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_service_jobs.php");?>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-10 text-center">
+                                <h2>Job Activity Last 3 Months</h2>
+                            </div>
+                            <div class="col-xs-2 text-right">
+                                 <a id="toggle_orders" data-toggle="collapse" href="#solar_activity"><span class="fa arrow huge"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="collapse in" id="solar_activity">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="solar_install_chart"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="solar_service_chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <?php elseif($user_role == "solar"):?>
         <div class="bs-callout bs-callout-primary row bs-callout-more">
             <div class="row">

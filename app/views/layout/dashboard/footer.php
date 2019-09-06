@@ -290,7 +290,7 @@
                         });
                         $("div.inventory-panel").height(maxHeight);
 
-                        $('a#toggle_solarorders, a#toggle_solarinstalls, a#toggle_solarservice').click(function(e){
+                        $('a#toggle_solarorders, a#toggle_solarinstalls, a#toggle_solarservice, a#solar_activity').click(function(e){
                             $(this).toggleClass('hiding');
                         });
                     }
