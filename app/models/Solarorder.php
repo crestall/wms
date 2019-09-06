@@ -34,6 +34,76 @@
         }
     }
 
+    public function getServiceJobs($from, $to)
+    {
+        $from += 24*60*60;
+        $to += 24*60*60;
+        $db = Database::openConnection();
+
+        $q = "
+            SELECT
+                count(*) as total_orders, ot.name, UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(ss.job_date), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(ss.job_date), '%Y-%m-%d') ) -7, 7 ))) + 6*24*60*60 AS friday
+            FROM
+                solar_orders so JOIN solar_order_types ot ON so.type_id = ot.id
+            WHERE
+                ss.job_date >= $from AND ss.job_date <= $to
+            GROUP BY
+                friday, so.type_id
+            ORDER BY
+            	friday, ot.id
+        ";
+
+        //echo $q; return;
+        $jobs = $db->queryData($q);
+
+        $return_array = array(
+            array(
+                'Week Ending',
+                'Origin',
+                'TLJ Solar',
+                'Solar Gain',
+                'Beyond Solar'
+            )
+        );
+
+        $stamp = 0;
+        $c = 1;
+        foreach($jobs as $o)
+        {
+
+            if($o['friday'] > $stamp)
+            {
+                if($c != 1)
+                    $return_array[] = $row_array;
+                $row_array = array(
+                    date("d/m/y", $o['friday']),
+                    0,
+                    0,
+                    0,
+                    0
+                );
+                $row_array[1] += ($o['name'] == 'Origin')? $o['total_orders']: 0;
+                $row_array[2] += ($o['name'] == 'TLJ Solar')? $o['total_orders']: 0;
+                $row_array[3] += ($o['name'] == 'Solar Gain')? $o['total_orders']: 0;
+                $row_array[4] += ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
+                $stamp = $o['friday'];
+                //$return_array[] = $row_array;
+            }
+            else
+            {
+                $row_array[1] += ($o['name'] == 'Origin')? $o['total_orders']: 0;
+                $row_array[2] += ($o['name'] == 'TLJ Solar')? $o['total_orders']: 0;
+                $row_array[3] += ($o['name'] == 'Solar Gain')? $o['total_orders']: 0;
+                $row_array[4] += ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
+            }
+            ++$c;
+        }
+        if(count($row_array)) $return_array[] = $row_array;
+       //print_r($return_array); return;
+
+        return $return_array;
+    }
+
     public function getInstalls($from, $to)
     {
         $from += 24*60*60;

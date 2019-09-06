@@ -344,6 +344,44 @@
                                 }
                             });
 
+                            $.ajax({
+                    			url: "/ajaxfunctions/getSolarServiceJobs",
+                    			dataType:"json",
+                    			data: params,
+                    			type: 'post',
+                                success: function(jsonData)
+                                {
+                                    console.log(jsonData);
+                                    var data = google.visualization.arrayToDataTable(jsonData);
+                                    var options = {
+                                        title :'Total Weekly Service Jobs',
+                                        titleTextStyle: {
+                                            fontSize: 21,
+                                            bold: false,
+                                            fontColor: "#333"
+                                        },
+                                        hAxis: {
+                                            title: 'Week Ending',
+                                            //showTextEvery: 1,
+                            				slantedText:true,
+                            			  	slantedTextAngle:-45
+                                        },
+                                        vAxis: {
+                                            title: 'Total Jobs'
+                                        },
+                                        legend: {
+                                            position: 'top'
+                                        },
+                                        height: 450,
+                                        isStacked: true
+                                    };
+
+                                    var chart = new google.visualization.ColumnChart(document.getElementById('solar_service_chart'));
+
+                                    chart.draw(data, options);
+                                }
+                            });
+
                         }
                     }
                 },
