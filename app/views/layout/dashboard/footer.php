@@ -296,6 +296,19 @@
 
                         $('div#solar_install_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                         $('div#solar_service_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
+
+                        google.charts.load('current', {'packages':['corechart']});
+                        google.charts.setOnLoadCallback(drawSolarCharts);
+                        var params = {
+                            from: $('#solar_admin_from_value').val(),
+                            to: $('#solar_admin_to_value').val()
+                        }
+
+                        function drawSolarCharts()
+                        {
+
+
+                        }
                     }
                 },
                 'dashboard':{
