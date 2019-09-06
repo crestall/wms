@@ -338,7 +338,7 @@
                                         isStacked: true
                                     };
 
-                                    var chart = new google.visualization.ColumnChart(document.getElementById('error_activity_chart'));
+                                    var chart = new google.visualization.ColumnChart(document.getElementById('solar_install_chart'));
 
                                     chart.draw(data, options);
                                 }
