@@ -51,23 +51,31 @@
                 UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(so.install_date), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(so.install_date), '%Y-%m-%d') ) -7, 7 ))), so.type_id
         ";
 
-        echo $q; return;
+        //echo $q; return;
         $installs = $db->queryData($q);
 
         $return_array = array(
             array(
                 'Week Ending',
-                'Total Orders'
+                'Origin',
+                'TLJ Solar',
+                'Solar Gain',
+                'Beyond Solar'
             )
         );
 
-        foreach($orders as $o)
+        foreach($install as $o)
         {
             $row_array = array();
             $row_array[0] = date("d/m/y", $o['friday']);
-            $row_array[1] = $o['total_orders'];
+            $row_array[1] = ($o['name'] == 'Origin')? $o['total_orders']: 0;
+            $row_array[2] = ($o['name'] == 'TLJ Solar')? $o['total_orders']: 0;
+            $row_array[3] = ($o['name'] == 'Solar Gain')? $o['total_orders']: 0;
+            $row_array[4] = ($o['name'] == 'Beyond Solar')? $o['total_orders']: 0;
             $return_array[] = $row_array;
         }
+        print_r($return_array); return
+
         return $return_array;
     }
 
