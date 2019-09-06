@@ -283,12 +283,16 @@
                 },
                 'solar_admin': {
                     init: function(){
-                        actions.common.init();
+                        //actions.common.init();
                         var maxHeight = 0;
                         $("div.inventory-panel").each(function(){
                             if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
                         });
                         $("div.inventory-panel").height(maxHeight);
+
+                        $('a#toggle_solarorders, a#toggle_solarinstalls, a#toggle_solarservice').click(function(e){
+                            $(this).toggleClass('hiding');
+                        });
                     }
                 },
                 'dashboard':{
