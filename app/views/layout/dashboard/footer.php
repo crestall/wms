@@ -306,7 +306,42 @@
 
                         function drawSolarCharts()
                         {
+                            $.ajax({
+                    			url: "/ajaxfunctions/getSolarInstalls",
+                    			dataType:"json",
+                    			data: params,
+                    			type: 'post',
+                                success: function(jsonData)
+                                {
+                                    console.log(jsonData);
+                                    var data = google.visualization.arrayToDataTable(jsonData);
+                                    var options = {
+                                        title :'Total Weekly Orders',
+                                        titleTextStyle: {
+                                            fontSize: 21,
+                                            bold: false,
+                                            fontColor: "#333"
+                                        },
+                                        hAxis: {
+                                            title: 'Week Ending',
+                                            //showTextEvery: 1,
+                            				slantedText:true,
+                            			  	slantedTextAngle:-45
+                                        },
+                                        vAxis: {
+                                            title: 'Total Orders'
+                                        },
+                                        legend: {
+                                            position: 'top'
+                                        },
+                                        height: 450
+                                    };
 
+                                    var chart = new google.visualization.ComboChart(document.getElementById('error_activity_chart'));
+
+                                    chart.draw(data, options);
+                                }
+                            });
 
                         }
                     }

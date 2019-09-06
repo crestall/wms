@@ -34,6 +34,43 @@
         }
     }
 
+    public function getInstalls($from, $to)
+    {
+        $from += 24*60*60;
+        $to += 24*60*60;
+        $db = Database::openConnection();
+
+        $q = "
+            SELECT
+                count(*) as total_orders, max(install_date) AS friday
+            FROM
+                solar_orders
+            WHERE
+                install_date >= $from AND install_date <= $to
+            GROUP BY
+                UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(install_date), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(install_date), '%Y-%m-%d') ) -7, 7 )))
+        ";
+
+        echo $q; return;
+        $installs = $db->queryData($q);
+
+        $return_array = array(
+            array(
+                'Week Ending',
+                'Total Orders'
+            )
+        );
+
+        foreach($orders as $o)
+        {
+            $row_array = array();
+            $row_array[0] = date("d/m/y", $o['friday']);
+            $row_array[1] = $o['total_orders'];
+            $return_array[] = $row_array;
+        }
+        return $return_array;
+    }
+
     public function countItemForOrder($item_id, $order_id)
     {
         $db = Database::openConnection();
