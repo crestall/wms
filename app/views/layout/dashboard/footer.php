@@ -281,7 +281,7 @@
                         $("div.inventory-panel").height(maxHeight);
                     }
                 },
-                'solar admin': {
+                'solar_admin': {
                     init: function(){
                         actions.common.init();
                         var maxHeight = 0;
