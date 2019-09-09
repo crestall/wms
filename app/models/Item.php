@@ -83,6 +83,8 @@ class Item extends Model{
             $available = $this->getAvailableStock($item['id'], $order->fulfilled_id);
             if( $available < $item['low_stock_warning'])
             {
+                $item['currently_available'] = $available;
+                $item['minimum_reorder_amount'] = $item['low_stock_warning'] - $available;
                 $reorder_items[] = $item;
             }
         }
