@@ -76,7 +76,15 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $reorder_items = array();
-
+        $items = $db->queryData("SELECT * FROM {$this->table} WHERE client_id = 67 AND active = 1");
+        foreach($items as $item)
+        {
+            $available = $this->getAvailableStock($item_id, $this->controller->order->fulfilled_id);
+            if( $available < $item['low_stock_warning'])
+            {
+                $reorder_items[] = $item;
+            }
+        }
         return $reorder_items;
     }
 
