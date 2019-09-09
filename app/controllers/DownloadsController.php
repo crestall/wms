@@ -1052,7 +1052,8 @@ class DownloadsController extends Controller {
 
         //solar admin users
         Permission::allow('solar admin', $resource, array(
-            'solarInventoryCSV'
+            'solarInventoryCSV',
+            'solarConsumablesReorderCSV'
         ));
 
         //client users
