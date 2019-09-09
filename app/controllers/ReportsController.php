@@ -28,9 +28,9 @@ class reportsController extends Controller
     public function solarConsumablesReorder()
     {
 
-        Config::setJsConfig('curPage', "solar-consumable-reorder");
+        Config::setJsConfig('curPage', "solar-consumables-reorder");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/solarConsumablesReorder.php',[
-            'page_title'            =>  'Solar Consumable Requiring Ordering'
+            'page_title'            =>  'Solar Consumables Requiring Ordering'
         ]);
     }
 
