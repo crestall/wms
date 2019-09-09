@@ -39,8 +39,8 @@ $c = 1;
                                 <td class="number"><?php echo $c;?></td>
                                 <td data-label="Name"><?php echo $p['name'];?></td>
                                 <td data-label="SKU"><?php echo $p['sku'];?></td>
-                                <td data-label="Currently Available" class="number"></td>
-                                <td data-label="Minimum Reorder Amount" class="number"></td>
+                                <td data-label="Currently Available" class="number"><?php echo $p['currently_available'];?></td>
+                                <td data-label="Minimum Reorder Amount" class="number"><?php echo $p['minimum_reorder_amount'];?></td>
                             </tr>
                         <?php endforeach;?>
                     </tbody>
