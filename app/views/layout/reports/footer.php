@@ -16,6 +16,25 @@
 
                     }
                 },
+                'solar-consumables-reorder':{
+                    init: function()
+                    {
+                        dataTable.init($('table#consumables_reorder_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [0] }
+                            ],
+                            "order": [],
+                            fixedHeader: true
+                        } );
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/solarConsumablesReorderCSV";
+                            fileDownload.download(url, data);
+                        });
+                    }
+                },
                 'client-stock-movement-summary': {
                     init: function()
                     {

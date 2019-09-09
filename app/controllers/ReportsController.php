@@ -24,6 +24,17 @@ class reportsController extends Controller
         ]);
     }
     */
+
+    public function solarConsumablesReorder()
+    {
+        $products = $this->item->getSolarConsumablesReordering();
+        Config::setJsConfig('curPage', "solar-consumables-reorder");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/solarConsumablesReorder.php',[
+            'page_title'    =>  'Solar Consumables Requiring Ordering',
+            'products'      => $products
+        ]);
+    }
+
     public function stockAtDate()
     {
         $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : time();
@@ -410,7 +421,8 @@ class reportsController extends Controller
         //solar admin users
         Permission::allow('solar admin', $resource, array(
             "jobsReport",
-            "solarReturnsReport"
+            "solarReturnsReport",
+            "solarConsumablesReorder"
         ));
 
         //client users

@@ -6,7 +6,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js" ></script>
         <script src="/scripts/form_validators.js" ></script>
         <!-- Bootstrap JavaScript -->
-        <script src="/scripts/bootstrap.min.js"></script>
+        <script src="/scripts/bootstrap.3.3.4.min.js"></script>
         <!-- Menu JavaScript -->
         <script src="//cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.js"></script>
         <!-- DataTables JavaScript -->

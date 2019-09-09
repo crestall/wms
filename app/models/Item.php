@@ -72,6 +72,25 @@ class Item extends Model{
         $this->getPackagingTypes();
     }
 
+    public function getSolarConsumablesReordering()
+    {
+        $db = Database::openConnection();
+        $reorder_items = array();
+        $items = $db->queryData("SELECT * FROM {$this->table} WHERE client_id = 67 AND active = 1");
+        $order = new Order();
+        foreach($items as $item)
+        {
+            $available = $this->getAvailableStock($item['id'], $order->fulfilled_id);
+            if( $available < $item['low_stock_warning'])
+            {
+                $item['currently_available'] = $available;
+                $item['minimum_reorder_amount'] = $item['low_stock_warning'] - $available;
+                $reorder_items[] = $item;
+            }
+        }
+        return $reorder_items;
+    }
+
     public function recordData($data)
     {
         $db = Database::openConnection();
