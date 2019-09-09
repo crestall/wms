@@ -1,3 +1,6 @@
+<?php
+$c = 1;
+?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php if(count($products)):?>
@@ -18,45 +21,26 @@
         </div>
         <div class="row" id="table_holder" style="display:none">
             <div class="col-lg-12">
-                <table id="inventory_report_table" class="table-striped table-hover">
+                <table id="consumables_reorder_table" class="table-striped table-hover">
                     <thead>
                     	<tr>
+                    	    <th></th>
                             <th>Name</th>
                             <th>SKU</th>
-                            <th>Total On Hand</th>
-                            <th>Currently Allocated</th>
-                            <th>Under Quality Controll</th>
-                            <th>Total Available</th>
-                            <th>Locations</th>
+                            <th>Currently Available</th>
+                            <th>Minimum<br/>Reorder Amount</th>
                     	</tr>
                     </thead>
                     <tbody>
                         <?php foreach($products as $p):
-                            $available = $p['onhand'] - $p['qc_count'] - $p['allocated'];
-                            $ls = "";
-                            foreach($p['locations'] as $l)
-                            {
-                                $ls .= $l['name']." (".$l['onhand'].")";
-                                if($l['allocated'] > 0)
-                                {
-                                    $ls .= " Allocated (".$l['allocated'].")";
-                                }
-                                if($l['qc_count'] > 0)
-                                {
-                                    $ls .= " Under Quality Control (".$l['qc_count'].")";
-                                }
-                                $ls .= "<br/>";
-                            }
-                            $ls = rtrim($ls, "<br/>");
+
                             ?>
                             <tr>
+                                <td class="number"><?php echo $c;?></td>
                                 <td data-label="Name"><?php echo $p['name'];?></td>
                                 <td data-label="SKU"><?php echo $p['sku'];?></td>
-                                <td data-label="Total On Hand" class="number"><?php echo $p['onhand'];?></td>
-                                <td data-label="Currently Allocated" class="number"><?php echo $p['allocated'];?></td>
-                                <td data-label="Under Quality Control" class="number"><?php echo $p['qc_count'];?></td>
-                                <td data-label="Total Available" class="number"><?php echo $available;?></td>
-                                <td data-label="Locations"><?php echo $ls;?></td>
+                                <td data-label="Currently Available" class="number"></td>
+                                <td data-label="Minimum Reorder Amount" class="number"></td>
                             </tr>
                         <?php endforeach;?>
                     </tbody>
