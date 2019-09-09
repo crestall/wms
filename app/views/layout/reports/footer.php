@@ -16,6 +16,12 @@
 
                     }
                 },
+                'solar-consumables-reorder':{
+                    init: function()
+                    {
+                        
+                    }
+                },
                 'client-stock-movement-summary': {
                     init: function()
                     {
