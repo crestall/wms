@@ -29,7 +29,7 @@ class reportsController extends Controller
     {
 
         Config::setJsConfig('curPage', "solar-consumable-reorder");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/colarConsumablesReorder.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/solarConsumablesReorder.php',[
             'page_title'            =>  'Solar Consumable Requiring Ordering'
         ]);
     }
