@@ -20,6 +20,9 @@
                     init: function()
                     {
                         dataTable.init($('table#consumables_reorder_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [0] }
+                            ],
                             "order": [],
                             fixedHeader: true
                         } );
