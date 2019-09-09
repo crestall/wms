@@ -72,6 +72,14 @@ class Item extends Model{
         $this->getPackagingTypes();
     }
 
+    public function getSolarConsumablesReordering()
+    {
+        $db = Database::openConnection();
+        $reorder_items = array();
+
+        return $reorder_items;
+    }
+
     public function recordData($data)
     {
         $db = Database::openConnection();
