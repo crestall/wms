@@ -4,7 +4,7 @@ $c = 1;
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php if(count($products)):?>
-        <?php echo "<pre>",print_r($products),"</pre>";?>
+        <?php //echo "<pre>",print_r($products),"</pre>";?>
         <div id="waiting" class="row">
             <div class="col-lg-12 text-center">
                 <h2>Drawing Table..</h2>
