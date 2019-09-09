@@ -96,6 +96,31 @@ class DownloadsController extends Controller {
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "solar_inventory".date("Ymd")]);
     }
 
+    public function solarConsumablesReorderCSV()
+    {
+        $products = $this->item->getSolarConsumablesReordering();
+        $cols = array(
+            "Name",
+            "SKU",
+            "Currently Available",
+            "Minimum Reorder Amount"
+        );
+        $rows = array();
+        foreach($products as $p)
+        {
+            $row = array(
+                $p['name'],
+                $p['sku'],
+                $p['currently_available'],
+                $p['minimum_reorder_amount']
+            );
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "solar_consumables_reorder".date("Ymd")]);
+    }
+
     public function dispatchReportCSV()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
