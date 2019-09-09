@@ -371,8 +371,7 @@ return array(
         ),
         'inventory' => array(
             'view-inventory'    => true,
-            'view-solar-inventory'  => false,
-            'reorder-items'     => true
+            'view-solar-inventory'  => false
         ),
         'solar-teams'   => array(
             'add-team'  => true,
@@ -384,7 +383,8 @@ return array(
         ),
         'reports'   => array(
             'jobs-report'       => true,
-            'solar-returns-report'    => true
+            'solar-returns-report'    => true,
+            'solar-consumables-reorder' => true
         ),
     ),
     "SOLAR_PAGES"   => array(
