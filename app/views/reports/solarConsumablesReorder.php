@@ -1,5 +1,5 @@
 <?php
-$c = 1;
+$c = 0;
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -33,7 +33,7 @@ $c = 1;
                     </thead>
                     <tbody>
                         <?php foreach($products as $p):
-
+                            ++$c;
                             ?>
                             <tr>
                                 <td class="number"><?php echo $c;?></td>
