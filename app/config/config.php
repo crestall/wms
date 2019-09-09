@@ -471,8 +471,7 @@ return array(
             'quality-control'       =>  false,
             //'replenish-pickface'    => true,
             'transfer-location' => true,
-            'solar-returns' => true,
-            'reorder-items' => true
+            'solar-returns' => true
         ),
 		'reports'			=> array(
           	//'product-movement-summary'	=>	true,
@@ -506,7 +505,8 @@ return array(
             'empty-bay-report'      => true,
             //'client-daily-reports'  => true,
             'pickups-report'    => true,
-            'solar-returns-report'    => true
+            'solar-returns-report'    => true,
+            'solar-consumables-reorder' => true
 		),/*
         'sales-reps'        =>  array(
             'view-reps'                 =>  true,
