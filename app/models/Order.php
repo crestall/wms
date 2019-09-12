@@ -985,7 +985,7 @@ class Order extends Model{
                 o.date_completed,
                 DATE(FROM_UNIXTIME(o.date_completed)) AS 'date_index'
             FROM
-                solar_orders o JOIN clients c ON o.client_id = c.id
+                solar_service_jobs o JOIN clients c ON o.client_id = c.id
             WHERE
                 o.date_completed >= $from AND o.date_completed <= $to AND c.active = 1
             GROUP BY
