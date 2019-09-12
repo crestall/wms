@@ -995,7 +995,7 @@ class Order extends Model{
         ";
         $solar_service_jobs = $db->queryData($query3);
 
-        $clients = $db->queryData("SELECT id, client_name FROM clients WHERE active = 1 ORDER BY id");
+        $clients = $db->queryData("SELECT id, client_name FROM clients WHERE active = 1 ORDER BY name");
         $return_array = array();
         $array = array('Date');
         foreach($clients as $c)
