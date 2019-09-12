@@ -841,7 +841,7 @@ class Order extends Model{
         return $return_array;
     }
 
-    public function getClientActivity($from, $to, $clients = "")
+    /*public function getClientActivity($from, $to, $clients = "")
     {
         $db = Database::openConnection();
         $query = "
@@ -934,6 +934,76 @@ class Order extends Model{
         }
         $return_array[] = $row_array;
         return $return_array;
+    }*/
+
+    public function getClientActivity($from, $to)
+    {
+        $from += 24*60*60;
+        $to += 24*60*60;
+        $db = Database::openConnection();
+        $query1 = "
+            SELECT
+                count(*) as total_orders,
+                o.client_id,
+                c.client_name,
+                o.date_fulfilled,
+                DATE(FROM_UNIXTIME(o.date_fulfilled)) AS 'date_index'
+            FROM
+                orders o JOIN clients c ON o.client_id = c.id
+            WHERE
+                o.date_fulfilled >= $from AND o.date_fulfilled <= $to AND c.active = 1
+            GROUP BY
+                DATE(FROM_UNIXTIME(o.date_fulfilled)), o.client_id
+            ORDER BY
+                date_index, o.client_id
+        ";
+        $orders = $db->queryData($query1);
+
+        $query2 = "
+            SELECT
+                count(*) as total_orders,
+                o.client_id,
+                c.client_name,
+                o.date_fulfilled,
+                DATE(FROM_UNIXTIME(o.date_fulfilled)) AS 'date_index'
+            FROM
+                solar_orders o JOIN clients c ON o.client_id = c.id
+            WHERE
+                o.date_fulfilled >= $from AND o.date_fulfilled <= $to AND c.active = 1
+            GROUP BY
+                DATE(FROM_UNIXTIME(o.date_fulfilled)), o.client_id
+            ORDER BY
+                date_index, o.client_id
+        ";
+        $solar_orders = $db->queryData($query2);
+
+        $query3 = "
+            SELECT
+                count(*) as total_orders,
+                o.client_id,
+                c.client_name,
+                o.date_completed,
+                DATE(FROM_UNIXTIME(o.date_completed)) AS 'date_index'
+            FROM
+                solar_orders o JOIN clients c ON o.client_id = c.id
+            WHERE
+                o.date_completed >= $from AND o.date_completed <= $to AND c.active = 1
+            GROUP BY
+                DATE(FROM_UNIXTIME(o.date_completed)), o.client_id
+            ORDER BY
+                date_index, o.client_id
+        ";
+        $solar_service_jobs = $db->queryData($query3);
+
+        $clients = $db->queryData("SELECT id, client_name FROM clients WHERE active = 1 ORDER BY id");
+        $return_array = array();
+        $array = array('Date');
+        foreach($clients as $c)
+        {
+            $array[] = $c['client_name'];
+        }
+        $return_array[] = $array;
+        print_r($return_array);
     }
 
     public function getPickErrors($from, $to, $client_id = 0)
