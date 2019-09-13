@@ -64,6 +64,7 @@
         Config::setJsConfig('vicLocalId', $this->controller->courier->vicLocalId);
         Config::setJsConfig('directFreightId', $this->controller->courier->directFreightId);
         Config::setJsConfig('cometLocalId', $this->controller->courier->cometLocalId);
+        Config::setJsConfig('sydneyCometId', $this->controller->courier->sydneyCometId);
         //assign solar ids to javascript
         Config::setJsConfig('TLJSolarId', $this->controller->solarordertype->TLJSolarId);
         Config::setJsConfig('OriginId', $this->controller->solarordertype->OriginId);
