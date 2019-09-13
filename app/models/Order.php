@@ -841,7 +841,7 @@ class Order extends Model{
         return $return_array;
     }
 
-    public function getClientActivity($from, $to, $clients = "")
+    /*public function getClientActivity($from, $to, $clients = "")
     {
         $db = Database::openConnection();
         $query = "
@@ -933,6 +933,118 @@ class Order extends Model{
             $date = $o['date_fulfilled'];
         }
         $return_array[] = $row_array;
+        return $return_array;
+    }*/
+
+    public function getClientActivity($from, $to)
+    {
+        $from += 24*60*60;
+        $to += 24*60*60;
+        $db = Database::openConnection();
+        $query1 = "
+            SELECT
+                count(*) as total_orders,
+                o.client_id,
+                c.client_name,
+                o.date_fulfilled,
+                DATE(FROM_UNIXTIME(o.date_fulfilled)) AS 'date_index'
+            FROM
+                orders o JOIN clients c ON o.client_id = c.id
+            WHERE
+                o.date_fulfilled >= $from AND o.date_fulfilled <= $to AND c.active = 1
+            GROUP BY
+                DATE(FROM_UNIXTIME(o.date_fulfilled)), o.client_id
+            ORDER BY
+                date_index, o.client_id
+        ";
+        $orders = $db->queryData($query1);
+        //print_r($orders);
+        $query2 = "
+            SELECT
+                count(*) as total_orders,
+                o.client_id,
+                c.client_name,
+                o.date_fulfilled,
+                DATE(FROM_UNIXTIME(o.date_fulfilled)) AS 'date_index'
+            FROM
+                solar_orders o JOIN clients c ON o.client_id = c.id
+            WHERE
+                o.date_fulfilled >= $from AND o.date_fulfilled <= $to AND c.active = 1
+            GROUP BY
+                DATE(FROM_UNIXTIME(o.date_fulfilled)), o.client_id
+            ORDER BY
+                date_index, o.client_id
+        ";
+        $solar_orders = $db->queryData($query2);
+        //print_r($solar_orders);
+        $query3 = "
+            SELECT
+                count(*) as total_orders,
+                o.client_id,
+                c.client_name,
+                o.date_completed,
+                DATE(FROM_UNIXTIME(o.date_completed)) AS 'date_index'
+            FROM
+                solar_service_jobs o JOIN clients c ON o.client_id = c.id
+            WHERE
+                o.date_completed >= $from AND o.date_completed <= $to AND c.active = 1
+            GROUP BY
+                DATE(FROM_UNIXTIME(o.date_completed)), o.client_id
+            ORDER BY
+                date_index, o.client_id
+        ";
+        $solar_service_jobs = $db->queryData($query3);
+        //print_r($solar_service_jobs);
+        $clients = $db->queryData("SELECT id, client_name FROM clients WHERE active = 1 ORDER BY client_name");
+        $return_array = array();
+        $array = array('Date');
+        foreach($clients as $c)
+        {
+            $array[] = $c['client_name'];
+        }
+        $return_array[] = $array;
+        $day_array = array();
+        foreach($clients as $c)
+        {
+            foreach($orders as $o)
+            {
+                if(!isset($day_array[$o['date_index']]))
+                    $day_array[$o['date_index']] = array();
+                if(!isset($day_array[$o['date_index']][$c['id']]))
+                    $day_array[$o['date_index']][$c['id']] = 0;
+                elseif($c['id'] == $o['client_id'])
+                    $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
+            }
+            foreach($solar_orders as $o)
+            {
+                if(!isset($day_array[$o['date_index']]))
+                    $day_array[$o['date_index']] = array();
+                if(!isset($day_array[$o['date_index']][$c['id']]))
+                    $day_array[$o['date_index']][$c['id']] = 0;
+                elseif($c['id'] == $o['client_id'])
+                    $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
+            }
+            foreach($solar_service_jobs as $o)
+            {
+                if(!isset($day_array[$o['date_index']]))
+                    $day_array[$o['date_index']] = array();
+                if(!isset($day_array[$o['date_index']][$c['id']]))
+                    $day_array[$o['date_index']][$c['id']] = 0;
+                elseif($c['id'] == $o['client_id'])
+                    $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
+            }
+        }
+        //print_r($day_array);
+        foreach($day_array as $date => $orders)
+        {
+            $a = array($date);
+            foreach($orders as $cid => $to)
+            {
+                $a[] = $to;
+            }
+            $return_array[] = $a;
+        }
+        //print_r($return_array);
         return $return_array;
     }
 

@@ -85,10 +85,11 @@
                                         legend: {
                                             position: 'top'
                                         },
-                                        height: 450
+                                        height: 450,
+                                        isStacked: true
                                     };
 
-                                    var chart = new google.visualization.ComboChart(document.getElementById('order_activity_chart'));
+                                    var chart = new google.visualization.ColumnChart(document.getElementById('order_activity_chart'));
                                     chart.draw(data, options);
 
                                     var columns = [];
