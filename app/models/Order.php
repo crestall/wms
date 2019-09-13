@@ -1003,7 +1003,20 @@ class Order extends Model{
             $array[] = $c['client_name'];
         }
         $return_array[] = $array;
-
+        $day_array = array();
+        foreach($clients as $c)
+        {
+            foreach($orders as $o)
+            {
+                if(!isset($day_array[$o['date_index']]))
+                    $day_array[$o['date_index']] = array();
+                if(!isset($day_array[$o['date_index']][$c['id']]))
+                    $day_array[$o['date_index']][$c['id']] = 0;
+                else
+                    $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
+            }
+        }
+        print_r($day_array);
         print_r($return_array);
     }
 
