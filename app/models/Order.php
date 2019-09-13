@@ -1015,6 +1015,24 @@ class Order extends Model{
                 elseif($c['id'] == $o['client_id'])
                     $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
             }
+            foreach($solar_orders as $o)
+            {
+                if(!isset($day_array[$o['date_index']]))
+                    $day_array[$o['date_index']] = array();
+                if(!isset($day_array[$o['date_index']][$c['id']]))
+                    $day_array[$o['date_index']][$c['id']] = 0;
+                elseif($c['id'] == $o['client_id'])
+                    $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
+            }
+            foreach($solar_service_jobs as $o)
+            {
+                if(!isset($day_array[$o['date_index']]))
+                    $day_array[$o['date_index']] = array();
+                if(!isset($day_array[$o['date_index']][$c['id']]))
+                    $day_array[$o['date_index']][$c['id']] = 0;
+                elseif($c['id'] == $o['client_id'])
+                    $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
+            }
         }
         print_r($day_array);
         print_r($return_array);
