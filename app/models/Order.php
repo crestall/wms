@@ -1012,7 +1012,7 @@ class Order extends Model{
                     $day_array[$o['date_index']] = array();
                 if(!isset($day_array[$o['date_index']][$c['id']]))
                     $day_array[$o['date_index']][$c['id']] = 0;
-                else
+                elseif($c['id'] == $o['client_id'])
                     $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
             }
         }
