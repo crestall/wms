@@ -958,7 +958,7 @@ class Order extends Model{
                 date_index, o.client_id
         ";
         $orders = $db->queryData($query1);
-        print_r($orders);
+        //print_r($orders);
         $query2 = "
             SELECT
                 count(*) as total_orders,
@@ -976,7 +976,7 @@ class Order extends Model{
                 date_index, o.client_id
         ";
         $solar_orders = $db->queryData($query2);
-        print_r($solar_orders);
+        //print_r($solar_orders);
         $query3 = "
             SELECT
                 count(*) as total_orders,
@@ -994,7 +994,7 @@ class Order extends Model{
                 date_index, o.client_id
         ";
         $solar_service_jobs = $db->queryData($query3);
-        print_r($solar_service_jobs);
+        //print_r($solar_service_jobs);
         $clients = $db->queryData("SELECT id, client_name FROM clients WHERE active = 1 ORDER BY client_name");
         $return_array = array();
         $array = array('Date');
@@ -1044,7 +1044,8 @@ class Order extends Model{
             }
             $return_array[] = $a;
         }
-        print_r($return_array);
+        //print_r($return_array);
+        return $return_array;
     }
 
     public function getPickErrors($from, $to, $client_id = 0)
