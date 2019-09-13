@@ -1034,7 +1034,16 @@ class Order extends Model{
                     $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
             }
         }
-        print_r($day_array);
+        //print_r($day_array);
+        foreach($day_array as $date => $orders)
+        {
+            $a = array($date);
+            foreach($orders as $cid => $to)
+            {
+                $a[] = $to;
+            }
+            $return_array[] = $a;
+        }
         print_r($return_array);
     }
 
