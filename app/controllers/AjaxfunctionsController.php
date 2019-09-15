@@ -441,6 +441,10 @@ class ajaxfunctionsController extends Controller
             {
                 $this->orderfulfiller->fulfillDirectFreightOrder($order_ids);
             }
+            elseif($this->request->data['courier_id'] == $this->courier->sydneyCometId)
+            {
+                $this->orderfulfiller->fulfillSydneyCometOrder($order_ids);
+            }
             else
             {
                 Session::set('showerrorfeedback', true);

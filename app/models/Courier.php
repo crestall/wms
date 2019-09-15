@@ -10,6 +10,7 @@ class Courier extends Model{
     public $vicLocalId;
     public $directFreightId;
     public $cometLocalId;
+    public $sydneyCometId;
 
     public function __construct()
     {
@@ -24,6 +25,7 @@ class Courier extends Model{
         $this->vicLocalId = $this->getCourierId('Vic Local');
         $this->directFreightId = $this->getCourierId('Direct Freight');
         $this->cometLocalId = $this->getCourierId('Comet White Glove');
+        $this->sydneyCometId = $this->getCourierId('Sydney Comet');
     }
 
     public function addCourier($data)
