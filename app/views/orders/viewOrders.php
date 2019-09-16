@@ -45,6 +45,7 @@
                     <p><a class="btn btn-primary eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
                     <p><a class="btn btn-default viclocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Vic Local Orders</a> </p>
                     <p><a class="btn btn-default cometlocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Comet Local Orders</a> </p>
+                    <p><a class="btn btn-default cometsydney-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Sydney Comet Orders</a> </p> 
                 </div>
             <?php endif;?>
             <div class="col-lg-3 text-center">
