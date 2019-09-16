@@ -394,7 +394,7 @@ class ajaxfunctionsController extends Controller
 
     public function fulfillOrder()
     {
-       //echo "<pre>",print_r($this->request),"</pre>"; die();
+       echo "<pre>",print_r($this->request),"</pre>"; die();
         $data = array(
             'error'         => false,
             'not_logged'    => false,
