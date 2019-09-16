@@ -1259,7 +1259,7 @@
                                         method: 'post',
                                         data: {
                                             order_ids: ids,
-                                            courier_id: config.cometLocalId
+                                            courier_id: config.sydneyCometId
                                         },
                                         dataType: 'json',
                                         beforeSend: function(){
