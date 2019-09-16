@@ -552,12 +552,10 @@
         $items_string = "";
         foreach($items as $i)
         {
-            $item_price = "$".number_format($i['price'], 2);
-            $items_string .= "<tr><td><a href='#'>{$i['name']}</a></td><td>{$i['qty']}</td><td>$item_price <span class='extax'>(ex.tax)</span></td></tr>";
+            $items_string .= "<tr><td><a href='#'>{$i['name']}</a></td><td>{$i['qty']}</td></tr>";
         }
-        $total_price = "$".number_format($od['order_total'], 2);
-        $items_string .= "<tr><td colspan='2' class='bold'>Subtotal:</td><td>$total_price <span class='extax'>(ex.tax)</span></td></tr>";
-        $items_string .= "<tr><td colspan='2' class='bold'>Shipping:</td><td>Free shipping</td></tr>";
+
+        $items_string .= "<tr><td class='bold'>Shipping:</td><td>Free shipping</td></tr>";
 
         $tracking_info = 'Please visit <a href="https://startrack.com.au/">startrack.com.au</a> and click the "Track & Trace" link at the top of the page. Enter '.$od['consignment_id'].' as the Tracking / reference number(s) for the latest on your delivery. In the event of your absence at the time of delivery, the driver may occasionally, based on careful judgment and inspection of the premises, leave your order in a safe place on your property without your signature ("Authority To Leave"). The driver is not responsible for in home or room placement of your order.<br/>';
         if($od['courier_id'] == $db->queryValue("couriers", array('name' => 'Direct Freight')))
