@@ -511,7 +511,7 @@
     {
         $db = Database::openConnection();
 		$mail = new PHPMailer(); // defaults to using php "mail()"
-		$body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."noa_shipped_syd_commet_email.html");
+		$body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."noa_shipped_syd_comet_email.html");
         $od = $db->queryRow("SELECT * FROM orders WHERE id = $order_id");
         $items = $db->queryData("SELECT i.*, oi.qty, oi.location_id
             FROM orders_items oi JOIN items i ON oi.item_id = i.id
