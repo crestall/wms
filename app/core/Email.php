@@ -571,16 +571,16 @@
 		$mail->Subject = "Your Order With Noa Home Has Been Dispatched";
 		$mail->MsgHTML($body);
 		//$mail->AddEmbeddedImage("$root/images/3pl_logo.png", "emailfoot", "3pl_logo.png");
-        $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
-		//$mail->AddAddress($od['tracking_email'], $od['ship_to']);
-        /*
+        //$mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
+		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
+        /*  */
         $mail->AddBCC('jc@noasleep.com');
         $mail->AddBCC('jeremykopek@noasleep.com');
         $mail->AddBCC('customersupport@3plplus.com.au');
         $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
         $mail->AddBCC('janikakopek@noahome.com', 'Janika');
-        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
-        */
+        $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+
         if(!$mail->Send())
 		{
 			die($mail->ErrorInfo);
