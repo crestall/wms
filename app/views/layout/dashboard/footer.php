@@ -83,7 +83,8 @@
                                             }
                                         },
                                         legend: {
-                                            position: 'top'
+                                            position: 'top',
+                                            maxLines: 3
                                         },
                                         height: 450,
                                         isStacked: true
