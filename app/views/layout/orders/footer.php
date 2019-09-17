@@ -1052,6 +1052,7 @@
                         });
 
                         $('a.remove_courier').click(function(e){
+                            var order_id = $(this).data('orderid');
                             e.preventDefault();
                             swal({
                                 title: "Remove the courier from this order?",
@@ -1060,7 +1061,6 @@
                                 buttons: true,
                                 dangerMode: true
                             }).then( function(willFulfill) {
-                                var order_id = $('a.remove_courier').data('orderid');
                                 console.log('order id: '+order_id);
                                 $.ajax({
                                     url: '/ajaxfunctions/remove-courier',
