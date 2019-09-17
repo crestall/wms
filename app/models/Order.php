@@ -938,8 +938,10 @@ class Order extends Model{
 
     public function getClientActivity($from, $to)
     {
-        $from += 24*60*60;
-        $to += 24*60*60;
+        //$from += 24*60*60;
+        //$to += 24*60*60;
+        $from = strtotime("3 months ago");
+        $to = strtotime("tomorrow");
         $db = Database::openConnection();
         $query1 = "
             SELECT
