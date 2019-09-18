@@ -959,6 +959,7 @@ class Order extends Model{
             ORDER BY
                 date_index, o.client_id
         ";
+        die($query1);
         $orders = $db->queryData($query1);
         //print_r($orders); die();
         $query2 = "
@@ -1046,7 +1047,7 @@ class Order extends Model{
             }
             $return_array[] = $a;
         }
-        print_r($return_array); die();
+        //print_r($return_array); die();
         return $return_array;
     }
 
