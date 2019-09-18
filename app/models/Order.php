@@ -960,7 +960,7 @@ class Order extends Model{
                 date_index, o.client_id
         ";
         $orders = $db->queryData($query1);
-        print_r($orders); die();
+        //print_r($orders); die();
         $query2 = "
             SELECT
                 count(*) as total_orders,
@@ -1046,7 +1046,7 @@ class Order extends Model{
             }
             $return_array[] = $a;
         }
-        //print_r($return_array);
+        print_r($return_array); die();
         return $return_array;
     }
 
