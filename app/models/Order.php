@@ -945,20 +945,31 @@ class Order extends Model{
         $db = Database::openConnection();
         $query1 = "
             SELECT
-                count(*) as total_orders,
-                o.client_id,
-                c.client_name,
-                o.date_fulfilled,
-                DATE(FROM_UNIXTIME(o.date_fulfilled)) AS 'date_index'
+                AVG(a.total_orders) AS 'average',
+                a.total_orders,
+                a.client_id,
+                a.client_name,
+                a.date_fulfilled,
+                a.date_index
             FROM
-                orders o JOIN clients c ON o.client_id = c.id
-            WHERE
-                o.date_fulfilled >= $from AND o.date_fulfilled <= $to AND c.active = 1
-            GROUP BY
-                DATE(FROM_UNIXTIME(o.date_fulfilled)), o.client_id
-            ORDER BY
-                date_index, o.client_id
+            (
+                SELECT
+                    count(*) as total_orders,
+                    o.client_id,
+                    c.client_name,
+                    o.date_fulfilled,
+                    DATE(FROM_UNIXTIME(o.date_fulfilled)) AS 'date_index'
+                FROM
+                    orders o JOIN clients c ON o.client_id = c.id
+                WHERE
+                    o.date_fulfilled >= $from AND o.date_fulfilled <= $to AND c.active = 1
+                GROUP BY
+                    DATE(FROM_UNIXTIME(o.date_fulfilled)), o.client_id
+                ORDER BY
+                    date_index, o.client_id
+            ) a
         ";
+        die($query1);
         $orders = $db->queryData($query1);
         //print_r($orders);
         $query2 = "
