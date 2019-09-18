@@ -199,11 +199,11 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "  SELECT
-                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.solar_type_id
                 FROM
                 (
                     SELECT
-                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item
+                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.solar_type_id
                     FROM
                         items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
                     WHERE
