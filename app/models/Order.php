@@ -959,8 +959,9 @@ class Order extends Model{
             ORDER BY
                 date_index, o.client_id
         ";
+        //die($query1);
         $orders = $db->queryData($query1);
-        //print_r($orders);
+        //print_r($orders); die();
         $query2 = "
             SELECT
                 count(*) as total_orders,
@@ -1013,7 +1014,11 @@ class Order extends Model{
                 if(!isset($day_array[$o['date_index']]))
                     $day_array[$o['date_index']] = array();
                 if(!isset($day_array[$o['date_index']][$c['id']]))
+                {
                     $day_array[$o['date_index']][$c['id']] = 0;
+                    if($c['id'] == $o['client_id'])
+                        $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
+                }
                 elseif($c['id'] == $o['client_id'])
                     $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
             }
@@ -1022,7 +1027,11 @@ class Order extends Model{
                 if(!isset($day_array[$o['date_index']]))
                     $day_array[$o['date_index']] = array();
                 if(!isset($day_array[$o['date_index']][$c['id']]))
+                {
                     $day_array[$o['date_index']][$c['id']] = 0;
+                    if($c['id'] == $o['client_id'])
+                        $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
+                }
                 elseif($c['id'] == $o['client_id'])
                     $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
             }
@@ -1031,7 +1040,11 @@ class Order extends Model{
                 if(!isset($day_array[$o['date_index']]))
                     $day_array[$o['date_index']] = array();
                 if(!isset($day_array[$o['date_index']][$c['id']]))
+                {
                     $day_array[$o['date_index']][$c['id']] = 0;
+                    if($c['id'] == $o['client_id'])
+                        $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
+                }
                 elseif($c['id'] == $o['client_id'])
                     $day_array[$o['date_index']][$c['id']] += $o['total_orders'];
             }
@@ -1046,7 +1059,7 @@ class Order extends Model{
             }
             $return_array[] = $a;
         }
-        //print_r($return_array);
+        //print_r($return_array); die();
         return $return_array;
     }
 
