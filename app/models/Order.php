@@ -959,9 +959,9 @@ class Order extends Model{
             ORDER BY
                 date_index, o.client_id
         ";
-        die($query1);
+        //die($query1);
         $orders = $db->queryData($query1);
-        //print_r($orders); die();
+        print_r($orders); die();
         $query2 = "
             SELECT
                 count(*) as total_orders,
