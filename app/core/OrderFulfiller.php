@@ -259,9 +259,20 @@
             {
                 $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
                 $this->output .= "Doing Order Number: ".$od['order_number']." Using ".$this->controller->courier->getCourierName($od['courier_id']).PHP_EOL;
-                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time(), 'total_cost' => Config::get('COMET_VIC_CHARGE')), $id);
-                //order is now fulfilled, reduce stock
+                //calculate the charge
+                $charge = 72.52;
+                //$items = $this->controller->order->getItemsForOrderNoLocations($id);
                 $items = $this->controller->order->getItemsForOrder($id);
+                foreach($items as $item)
+                {
+                    if( 12564 <= $item['id'] && $item['id'] <= 12581 )
+                    {
+                        $charge = 102.60;
+                    }
+                }
+                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time(), 'total_cost' => $charge), $id);
+                //order is now fulfilled, reduce stock
+
                 $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
                 $this->removeStock($items, $id);
                 if($od['client_id'] == 59)
