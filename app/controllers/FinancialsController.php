@@ -150,7 +150,7 @@ class financialsController extends Controller
         else
         {
             $skip_first = isset($header_row);
-            Config::setJsConfig('curPage', "hunters-check");
+            Config::setJsConfig('curPage', "df-check");
             $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/directfreightCheck.php',
                 [
                     'page_title'    => "Hunters Invoice Checking",
