@@ -34,7 +34,7 @@
         </div>
     </div>
     <?php if($show_table):?>
-        <?php //echo "<pre>",print_r($csv_array),"</pre>";?>
+        <?php echo "<pre>",print_r($csv_array),"</pre>";?>
         <div class="row">
             <div class="col-md-12">
                 <h2>Invoice Check Result</h2>
