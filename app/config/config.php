@@ -552,7 +552,7 @@ return array(
 		),
         'financials'    =>  array(
             //'hunters-check' => true,
-            'directfrieght-check'   => true
+            'directfreight-check'   => true
         ),
         'downloads' => array(
             'super_admin_only'  => true,

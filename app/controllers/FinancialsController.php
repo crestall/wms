@@ -42,7 +42,7 @@ class financialsController extends Controller
         );
     }
 
-    public function directFreightCheck()
+    public function directfreightCheck()
     {
 
         //render the page
