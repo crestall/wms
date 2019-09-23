@@ -49,7 +49,7 @@ class financialsController extends Controller
         Config::setJsConfig('curPage', "hunters-check");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/huntersCheck.php',
             [
-                'page_title'    =>  "Hunters Invoice Checking",
+                'page_title'    =>  "Direct Frieght Invoice Checking",
                 'show_table'    =>  false
             ]
         );
