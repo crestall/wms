@@ -47,7 +47,7 @@ class financialsController extends Controller
 
         //render the page
         Config::setJsConfig('curPage', "hunters-check");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/huntersCheck.php',
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/directfreightCheck.php',
             [
                 'page_title'    =>  "Direct Frieght Invoice Checking",
                 'show_table'    =>  false
