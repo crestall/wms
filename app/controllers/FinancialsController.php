@@ -153,7 +153,7 @@ class financialsController extends Controller
             Config::setJsConfig('curPage', "df-check");
             $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/directfreightCheck.php',
                 [
-                    'page_title'    => "Hunters Invoice Checking",
+                    'page_title'    => "Direct Freight Invoice Checking Results",
                     'show_table'    => true,
                     'csv_array'     => $csv_array,
                     'skip_first'    => $skip_first
