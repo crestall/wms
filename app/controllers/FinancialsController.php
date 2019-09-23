@@ -145,7 +145,7 @@ class financialsController extends Controller
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            return $this->redirector->to(PUBLIC_ROOT."financials/hunters-check");
+            return $this->redirector->to(PUBLIC_ROOT."financials/directfreight-check");
         }
         else
         {
