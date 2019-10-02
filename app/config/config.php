@@ -551,7 +551,8 @@ return array(
             'edit-user-profile'     => false
 		),
         'financials'    =>  array(
-            'hunters-check' => true
+            //'hunters-check' => true,
+            'directfreight-check'   => true
         ),
         'downloads' => array(
             'super_admin_only'  => true,
