@@ -79,7 +79,7 @@ class Mympdf extends mPDF {
     					'orientation' => $array['orientation']
                     ));
 
-                    $pagesInFile = $this->SetSourceFile($array['file']);
+                    $pagesInFile = $this->SetSourceFile('new-file.pdf');
                     for ($i = 1; $i <= $pagesInFile; $i++)
                     {
                         $tplId = $this->ImportPage($i);
