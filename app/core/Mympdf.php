@@ -74,12 +74,12 @@ class Mympdf extends mPDF {
                 {
                     /*$this->AddPage();*/
 
-                    shell_exec( "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=new-file.pdf ".$array['file']);
+                    //shell_exec( "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=new-file.pdf ".$array['file']);
                     $this->AddPageByArray(array(
     					'orientation' => $array['orientation']
                     ));
 
-                    $pagesInFile = $this->SetSourceFile('new-file.pdf');
+                    $pagesInFile = $this->SetSourceFile($array['file']);
                     for ($i = 1; $i <= $pagesInFile; $i++)
                     {
                         $tplId = $this->ImportPage($i);
