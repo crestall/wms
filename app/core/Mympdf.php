@@ -58,6 +58,7 @@ class Mympdf extends mPDF {
 
     function mergePDFFilesToServer(Array $filenames, $outFile, $path = "")
     {
+        $c = 1;
         if ($filenames)
         {
             $filesTotal = sizeof($filenames);
@@ -73,13 +74,13 @@ class Mympdf extends mPDF {
                 if (file_exists($array['file']))
                 {
                     /*$this->AddPage();*/
-
-                    shell_exec( "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=new-file.pdf ".$array['file']);
+                    $new_file = "new_file_".$c.".pdf";
+                    shell_exec( "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=".$new_file." ".$array['file']);
                     $this->AddPageByArray(array(
     					'orientation' => $array['orientation']
                     ));
 
-                    $pagesInFile = $this->SetSourceFile('new-file.pdf');
+                    $pagesInFile = $this->SetSourceFile($new_file);
                     for ($i = 1; $i <= $pagesInFile; $i++)
                     {
                         $tplId = $this->ImportPage($i);
@@ -92,7 +93,7 @@ class Mympdf extends mPDF {
                             ));
                         }
                     }
-
+                    ++$c;
                 }
                 //$fileNumber++;
             }
