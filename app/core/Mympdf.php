@@ -16,7 +16,7 @@ class Mympdf extends mPDF {
         {
             $filesTotal = sizeof($filenames);
             //$fileNumber = 1;
-            //$this->SetImportUse();
+            $this->SetImportUse();
             if (!file_exists($outFile))
             {
                 $handle = fopen($outFile, 'w');
