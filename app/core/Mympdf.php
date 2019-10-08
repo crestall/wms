@@ -16,7 +16,7 @@ class Mympdf extends mPDF {
         {
             $filesTotal = sizeof($filenames);
             //$fileNumber = 1;
-            $this->SetImportUse();
+            //$this->SetImportUse();
             if (!file_exists($outFile))
             {
                 $handle = fopen($outFile, 'w');
@@ -27,10 +27,13 @@ class Mympdf extends mPDF {
                 if (file_exists($array['file']))
                 {
                     //$this->AddPage();
+
+                    shell_exec( "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=new-file.pdf ".$array['file']);
+
                     $this->AddPageByArray(array(
     					'orientation' => $array['orientation']
                     ));
-                    $pagesInFile = $this->SetSourceFile($array['file']);
+                    $pagesInFile = $this->SetSourceFile('new-file.pdf');
                     //die('pages: '.$pagesInFile);
                     for ($i = 1; $i <= $pagesInFile; $i++)
                     {
@@ -70,11 +73,13 @@ class Mympdf extends mPDF {
                 if (file_exists($array['file']))
                 {
                     /*$this->AddPage();*/
+
+                    shell_exec( "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=new-file.pdf ".$array['file']);
                     $this->AddPageByArray(array(
     					'orientation' => $array['orientation']
                     ));
 
-                    $pagesInFile = $this->SetSourceFile($array['file']);
+                    $pagesInFile = $this->SetSourceFile('new-file.pdf');
                     for ($i = 1; $i <= $pagesInFile; $i++)
                     {
                         $tplId = $this->ImportPage($i);
