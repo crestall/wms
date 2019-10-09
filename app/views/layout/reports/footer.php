@@ -136,7 +136,7 @@
                         });
                     }
                 },
-                'swatch-report':{
+                'swatches-report':{
                     init: function()
                     {
                         $('select#client_selector').change(function(e){

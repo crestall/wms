@@ -224,7 +224,7 @@ class reportsController extends Controller
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('Monday last week');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('Friday last week');
         $swatches = $this->swatch->getSentSwatches($client_id, $from, $to);
-        Config::setJsConfig('curPage', "swatch-report");
+        Config::setJsConfig('curPage', "swatches-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/swatchesReport.php',[
             'page_title'    =>  'Dispatched Swatches',
             'from'          =>  $from,
