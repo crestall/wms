@@ -506,7 +506,8 @@ return array(
             //'client-daily-reports'  => true,
             'pickups-report'    => true,
             'solar-returns-report'    => true,
-            'solar-consumables-reorder' => true
+            'solar-consumables-reorder' => true,
+            'swatches-report'       => true
 		),/*
         'sales-reps'        =>  array(
             'view-reps'                 =>  true,
