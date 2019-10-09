@@ -136,6 +136,26 @@
                         });
                     }
                 },
+                'swatch-report':{
+                    init: function()
+                    {
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                var client_id = $(this).val();
+                                var url = '/reports/inventory-report/client='+client_id;
+                                window.location.href = url;
+                            }
+                        });
+                        dataTable.init($('table#swatch_report_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [6] }
+                            ],
+                            "order": [],
+                            fixedHeader: true
+                        } );
+                    }
+                },
                 'inventory-report':{
                     init: function()
                     {

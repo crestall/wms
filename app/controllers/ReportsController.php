@@ -217,6 +217,25 @@ class reportsController extends Controller
         ]);
     }
 
+    public function swatchesReport()
+    {
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 59;   //Only NOA has swatches
+        $client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('Monday last week');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('Friday last week');
+        $swatches = $this->swatch->getSentSwatches($client_id, $from, $to);
+        Config::setJsConfig('curPage', "swatch-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/swatchesReport.php',[
+            'page_title'    =>  'Dispatched Swatches',
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "",
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name,
+            'swatches'      =>  $swatches
+        ]);
+    }
+
     public function stockMovementSummary()
     {
         if(Session::getUserRole() == "client")
