@@ -197,10 +197,12 @@
                         });
                     }
                 },
-                'add-serials': function(){
-                    $('button#find_order').click(function(e){
-                        console.log('click');
-                    });
+                'add-serials': {
+                    init:function(){
+                        $('button#find_order').click(function(e){
+                            console.log('click');
+                        });
+                    }
                 },
                 'manage-swatches': {
                     init: function(){
