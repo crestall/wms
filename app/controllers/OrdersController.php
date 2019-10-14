@@ -17,7 +17,7 @@ class OrdersController extends Controller
 
     public function addSerials()
     {
-        echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
         $order_id = $order_number = 0;
         $od = $items = array();
         if(!empty($this->request->params['args']))
