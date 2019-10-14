@@ -18,13 +18,27 @@ class OrdersController extends Controller
     public function addSerials()
     {
         //die('add serials');
-        $order_number = 0;
+        $order_id = $order_number = 0;
+        $od = $items = array();
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['order']))
+            {
+                $order_id = $this->request->params['args']['order'];
+                $od = $this->order->getOrderDetail($order_id);
+                $items = $this->order->getItemsForOrderNoLocations($order_id);
+                $order_number = $od['order_number'];
+            }
+        }
 
         //render the page
         Config::setJsConfig('curPage', "add-serials");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addSerials.php', [
             'page_title'    =>  'Add Serial Numbers to Order',
-            'order_number'  =>  $order_number
+            'order_id'      =>  $order_id,
+            'order_number'  =>  $order_number,
+            'od'            =>  $od,
+            'items'         =>  $items
         ]);
     }
 
