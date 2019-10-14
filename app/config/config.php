@@ -424,7 +424,8 @@ return array(
             'view-pickups'              => false,
             'record-pickup'   => true,
             'order-csv-upload'  => true,
-            'manage-swatches'   => true
+            'manage-swatches'   => true,
+            'add-serials'   => true
         ),
         'solar-jobs'  => array(
             'add-solar-install'             => true,
