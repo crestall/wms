@@ -31,6 +31,7 @@ class ajaxfunctionsController extends Controller
             'getScannedItem',
             'getSuburbs',
             'getUnfulfilledAdmin',
+            'getOrderItems',
             'getOrderTrends',
             'getPickErrors',
             'getShippingQuotes',
@@ -53,6 +54,16 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function getOrderItems()
+    {
+        $order_id = $this->request->data['ordernumber'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        $this->view->renderJson($data);
     }
 
     public function removeCourier()

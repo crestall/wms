@@ -201,10 +201,18 @@
                     init:function(){
                         $('button#find_order').click(function(e){
                             //console.log('click');
-                            var data = {
-                                ordernumber: $('input#order_number').val()
+                            var ordernumber = $('input#order_number').val();
+                            if(ordernumber != "")
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Fetching Items...</h1></div>' });
+                                var data = {
+                                    ordernumber: ordernumber
+                                }
+                                $.post('/ajaxfunctions/getOrderItems', data, function(d){
+                                    $.unblockUI();
+                                    $('div#order_details').html(d);
+                                });
                             }
-                            console.log(data);
                         });
                     }
                 },
