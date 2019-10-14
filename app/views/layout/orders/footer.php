@@ -204,7 +204,7 @@
                             var data = {
                                 ordernumber: $('input#order_number').val()
                             }
-                            console.log('data');
+                            console.log(data);
                         });
                     }
                 },
