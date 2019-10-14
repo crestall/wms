@@ -200,7 +200,11 @@
                 'add-serials': {
                     init:function(){
                         $('button#find_order').click(function(e){
-                            console.log('click');
+                            //console.log('click');
+                            var data = {
+                                ordernumber: $('input#order_number').val();
+                            }
+                            console.log('data');
                         });
                     }
                 },
@@ -209,7 +213,7 @@
                         actions.common['select-all']();
                         actions.common['cancel-orders'](false, true);
                         $('a.label-print').click(function(e){
-                            console.log('click');
+                            //console.log('click');
                             e.preventDefault();
                             var ids = [];
                             $('input.select').each(function(i,e){
