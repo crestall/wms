@@ -1,5 +1,5 @@
 <?php
-$order_val = ($order_number == 0)? "": $order_number
+$order_val = ($order_number == 0)? "": $order_number;
 
 echo "<pre>",print_r($od),"</pre>";
 ?>
