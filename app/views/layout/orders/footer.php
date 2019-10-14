@@ -197,6 +197,11 @@
                         });
                     }
                 },
+                'add-serials': function(){
+                    $('button#find_order').click(function(e){
+                        console.log('click');
+                    });
+                },
                 'manage-swatches': {
                     init: function(){
                         actions.common['select-all']();
