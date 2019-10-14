@@ -1,5 +1,7 @@
 <?php
 $order_val = ($order_number == 0)? "": $order_number
+
+echo "<pre>",print_r($od),"</pre>";
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
