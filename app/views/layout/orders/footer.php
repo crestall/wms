@@ -202,7 +202,7 @@
                         $('button#find_order').click(function(e){
                             //console.log('click');
                             var data = {
-                                ordernumber: $('input#order_number').val();
+                                ordernumber: $('input#order_number').val()
                             }
                             console.log('data');
                         });
