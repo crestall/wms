@@ -49,6 +49,24 @@ class Swatch extends Model{
         return $request_id;
     }
 
+    public function getSentSwatches($from, $to, $client_id)
+    {
+        $db = Database::openConnection();
+        $query = "
+        SELECT
+            *
+        FROM
+            {$this->table}
+        WHERE
+            client_id = :client_id AND shipped = 1 AND date >= :from AND date <= :to ORDER BY date DESC";
+        $array = array(
+            'client_id' => 	$client_id,
+            'to'        =>  $to,
+            'from'      =>  $from
+        );
+        return $db->queryData($query, $array);
+    }
+
     public function getAllSwatches($client_id, $posted = 0, $state = "")
     {
         $db = Database::openConnection();
