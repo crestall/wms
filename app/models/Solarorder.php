@@ -233,7 +233,7 @@
         elseif($picked === 0)
             $q .= " AND oi.picked = 0";
         //$q .= " GROUP BY i.id";
-        $q .= " GROUP BY oi.location_id, i.id";
+        //$q .= " GROUP BY oi.location_id, i.id";
         $q .= " ORDER BY i.name";
         //die($q);
         return $db->queryData($q);
