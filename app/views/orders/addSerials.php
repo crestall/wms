@@ -1,7 +1,7 @@
 <?php
 $order_val = ($order_number == 0)? "": $order_number;
 
-echo "<pre>",print_r($od),"</pre>";
+//echo "<pre>",print_r($od),"</pre>";
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -17,5 +17,5 @@ echo "<pre>",print_r($od),"</pre>";
             <button style="display:none" class="btn btn-sm btn-warning" id="clear_order">Clear Order Items</button>
         </div>
     </div>
-    <div id="order_details"></div>
+    <div id="order_details"><?php echo "<pre>",print_r($od),"</pre>";?></div>
 </div>
