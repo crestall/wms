@@ -1,9 +1,12 @@
+<?php
+$order_val = ($order_number == 0)? "": $order_number
+?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div class="form-group row">
-        <label class="col-form-label col-md-3">Consignment ID</label>
+        <label class="col-form-label col-md-3">Order Number</label>
         <div class="col-md-4">
-            <input type="text" class="form-control" name="order_number" id="order_number" placeholder="Order Number" value="<?php echo Form::value('order_number');?>" />
+            <input type="text" class="form-control" name="order_number" id="order_number" placeholder="Order Number" value="<?php echo $order_val;?>" />
         </div>
         <div class="col-md-2">
             <button id="find_order" class="btn btn-sm btn-success">Locate Order Items</button>
