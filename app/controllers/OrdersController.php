@@ -17,7 +17,15 @@ class OrdersController extends Controller
 
     public function addSerials()
     {
-        die('add serials');
+        //die('add serials');
+        $order_number = 0;
+
+        //render the page
+        Config::setJsConfig('curPage', "add-serials");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addSerials.php', [
+            'page_title'    =>  'Add Serial Numbers to Order',
+            'order_number'  =>  $order_number
+        ]);
     }
 
     public function manageSwatches()
