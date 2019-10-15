@@ -213,8 +213,6 @@
                             }
                         });
 
-
-
                         $('button#find_order').click(function(e){
                             //console.log('click');
                             var ordernumber = $('input#order_number').val();
@@ -235,6 +233,7 @@
                                     else
                                     {
                                         $('div#order_details').html(d.html);
+                                        $('form#add_serials').validate();'
                                     }
                                 });
                             }

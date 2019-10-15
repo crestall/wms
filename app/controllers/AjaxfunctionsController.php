@@ -72,7 +72,8 @@ class ajaxfunctionsController extends Controller
             $data['feedback'] = 'No items found for that order number';
         }
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
-            'items' =>  $items
+            'items'     =>  $items,
+            'order_id'  =>  $order['id']
         ]);
         $data['html'] = $html;
         $this->view->renderJson($data);
