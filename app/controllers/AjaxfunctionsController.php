@@ -64,14 +64,15 @@ class ajaxfunctionsController extends Controller
             'feedback'  =>  '',
             'html'      =>  ''
         );
-        $details = $this->order->getOrderByOrderNumber($order_number);
+        $order = $this->order->getOrderByOrderNumber($order_number);
+        $items = $this->order->getItemsForOrderNoLocations($order['id']);
         if(!count($details))
         {
             $data['error'] = true;
             $data['feedback'] = 'No items found for that order number';
         }
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
-            'items' =>  $details
+            'items' =>  $items
         ]);
         $data['html'] = $html;
         $this->view->renderJson($data);
