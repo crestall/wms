@@ -233,7 +233,7 @@
                                     else
                                     {
                                         $('div#order_details').html(d.html);
-                                        $('form#add_serials').validate();'
+                                        $('form#add_serials').validate();
                                     }
                                 });
                             }
