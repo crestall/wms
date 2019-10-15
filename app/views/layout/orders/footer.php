@@ -200,6 +200,7 @@
                 'add-serials': {
                     init:function(){
                         $('button#find_order').prop('disabled', true);
+                        $('input#order_number').focus();
                         barcodeScanner.init({
                             /**/ preventDefault: true,
                             onError: function(string, qty) {
