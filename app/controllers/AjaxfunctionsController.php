@@ -56,13 +56,19 @@ class ajaxfunctionsController extends Controller
         $this->Security->requireAjax($actions);
     }
 
-    public function getOrderItems()
+    public function getOrderItemsForSerials()
     {
-        $order_id = $this->request->data['ordernumber'];
+        $order_number = $this->request->data['ordernumber'];
         $data = array(
             'error'     =>  false,
             'feedback'  =>  ''
         );
+        $details = getOrderByOrderNumber($order_number);
+        if(!count($details))
+        {
+            $data['error'] = true;
+            $data['feedback'] = 'No items found for that order number';
+        }
         $this->view->renderJson($data);
     }
 
