@@ -199,6 +199,20 @@
                 },
                 'add-serials': {
                     init:function(){
+                        $('button#find_order').prop('disabled', true);
+                        barcodeScanner.init({
+                            /**/ preventDefault: true,
+                            onError: function(string, qty) {
+                                //$('#userInput').val ($('#userInput').val()  + string);
+                                $( document.activeElement ).val( $( document.activeElement ).val() + string);
+                            },
+                            onComplete: function(barcode, qty){
+                                $('button#find_order').prop('disabled', false);
+                            }
+                        )};
+
+
+
                         $('button#find_order').click(function(e){
                             //console.log('click');
                             var ordernumber = $('input#order_number').val();
