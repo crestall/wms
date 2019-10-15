@@ -62,7 +62,7 @@ class ajaxfunctionsController extends Controller
         $data = array(
             'error'     =>  false,
             'feedback'  =>  '',
-            'html'      =>  ''0
+            'html'      =>  ''
         );
         $details = $this->order->getOrderByOrderNumber($order_number);
         if(!count($details))
