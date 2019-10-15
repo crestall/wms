@@ -66,7 +66,7 @@ class ajaxfunctionsController extends Controller
         );
         $order = $this->order->getOrderByOrderNumber($order_number);
         $items = $this->order->getItemsForOrderNoLocations($order['id']);
-        if(!count($details))
+        if(!count($items))
         {
             $data['error'] = true;
             $data['feedback'] = 'No items found for that order number';
