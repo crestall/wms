@@ -208,9 +208,18 @@
                                 var data = {
                                     ordernumber: ordernumber
                                 }
-                                $.post('/ajaxfunctions/getOrderItems', data, function(d){
+                                $.post('/ajaxfunctions/getOrderItemsForSerials', data, function(d){
                                     $.unblockUI();
-                                    $('div#order_details').html(d);
+                                    //$('div#order_details').html(d);
+                                    if(d.error)
+                                    {
+                                        $('div#order_details').html('');
+                                        alert(d.feedback);
+                                    }
+                                    else
+                                    {
+                                        $('div#order_details').html('get the form');
+                                    }
                                 });
                             }
                         });
