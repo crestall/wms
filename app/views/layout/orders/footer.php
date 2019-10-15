@@ -208,6 +208,7 @@
                             },
                             onComplete: function(barcode, qty){
                                 $('button#find_order').prop('disabled', false);
+                                $( document.activeElement ).val(barcode);
                             }
                         });
 
