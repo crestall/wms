@@ -61,7 +61,8 @@ class ajaxfunctionsController extends Controller
         $order_number = $this->request->data['ordernumber'];
         $data = array(
             'error'     =>  false,
-            'feedback'  =>  ''
+            'feedback'  =>  '',
+            'html'      =>  ''0
         );
         $details = $this->order->getOrderByOrderNumber($order_number);
         if(!count($details))
@@ -69,6 +70,10 @@ class ajaxfunctionsController extends Controller
             $data['error'] = true;
             $data['feedback'] = 'No items found for that order number';
         }
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
+            'items' =>  $details
+        ]);
+        $data['html'] = $html;
         $this->view->renderJson($data);
     }
 

@@ -218,7 +218,7 @@
                                     }
                                     else
                                     {
-                                        $('div#order_details').html('get the form');
+                                        $('div#order_details').html(d.html);
                                     }
                                 });
                             }
