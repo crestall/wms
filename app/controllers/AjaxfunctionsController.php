@@ -75,7 +75,19 @@ class ajaxfunctionsController extends Controller
             'items'     =>  $items,
             'order_id'  =>  $order['id']
         ]);
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Serials Have Been Recorded</h2>");
+        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>Serials Cannot Be Recorded</h2><p>Reasons are listed below</p>");
+        Session::set('showfeedback', false);
+        Session::set('showerrorfeedback', false);
 
+        if(Session::getAndDestroy('showfeedback') == false)
+        {
+            Session::destroy('feedback');
+        }
+        if(Session::getAndDestroy('showerrorfeedback') == false)
+        {
+            Session::destroy('errorfeedback');
+        }
         $data['html'] = $html;
         $this->view->renderJson($data);
     }
