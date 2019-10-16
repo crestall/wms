@@ -129,7 +129,7 @@ class FormController extends Controller {
     public function procAddSerials()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>";//die();
-        $db = Database::openConnection(); 
+        $db = Database::openConnection();
         $post_data = array();
         foreach($this->request->data['serial'] as $c =>$array)
         {
@@ -139,7 +139,7 @@ class FormController extends Controller {
                 {
                     Form::setError('general', 'A serial Number is required for all items');
                 }
-                elseif($db->fieldValueTaken($this->table, $details['number'], 'serial_number'))
+                elseif($db->fieldValueTaken('order_item_serials', $details['number'], 'serial_number'))
                 {
                    Form::setError('general', 'Serial Numbers must be unique');
                 }
