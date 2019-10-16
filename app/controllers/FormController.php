@@ -138,7 +138,7 @@ class FormController extends Controller {
                     'item_id'   => $item_id,
                     'order_id'  => $this->request->data['order_id'],
                     'serial_number' => $details['number'],
-                    'serial_id'     => $details['line_id]']
+                    'serial_id'     => $details['line_id']
                 );
             }
         }
