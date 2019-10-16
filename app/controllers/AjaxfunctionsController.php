@@ -80,8 +80,6 @@ class ajaxfunctionsController extends Controller
         Session::set('showfeedback', false);
         Session::set('showerrorfeedback', false);
 
-        $this->orderfulfiller->fulfillSolarOrder($order_ids);
-
         if(Session::getAndDestroy('showfeedback') == false)
         {
             Session::destroy('feedback');
