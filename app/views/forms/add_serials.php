@@ -4,7 +4,7 @@
 <form id="add_serials" method="post" action="/form/procAddSerials">
     <?php foreach($items as $item):
         $serials = $this->controller->orderitemserials->getRecordedSerials($item['order_id'], $item['item_id']);
-        echo "<pre>",print_r($serials),"</pre>";
+        //echo "<pre>",print_r($serials),"</pre>";
         $c = 1;
         while($c <= $item['qty'])
         {
@@ -18,7 +18,7 @@
             <?php endforeach;?>
             <div class="form-group row">
                 <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php echo $item['name']." (".$item['sku'].")";?></label>
-                <div class="col-md-3"><input type="text" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>]" class="form-control required" placeholder="Serial Number" /></div>
+                <div class="col-md-3"><input type="text" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>][number]" class="form-control required" placeholder="Serial Number" /></div>
                 <input type="hidden" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>][line_id]" value="0" />
             </div>
             <?php ++$c;
