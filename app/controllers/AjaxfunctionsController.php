@@ -75,10 +75,6 @@ class ajaxfunctionsController extends Controller
         Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>Serials Cannot Be Recorded</h2><p>Reasons are listed below</p>");
         Session::set('showfeedback', false);
         Session::set('showerrorfeedback', false);
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
-            'items'     =>  $items,
-            'order_id'  =>  $order['id']
-        ]);
         if(Session::getAndDestroy('showfeedback') == false)
         {
             Session::destroy('feedback');
@@ -87,6 +83,10 @@ class ajaxfunctionsController extends Controller
         {
             Session::destroy('errorfeedback');
         }
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
+            'items'     =>  $items,
+            'order_id'  =>  $order['id']
+        ]);
         $data['html'] = $html;
         $this->view->renderJson($data);
     }
