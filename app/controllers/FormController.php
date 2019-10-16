@@ -131,6 +131,8 @@ class FormController extends Controller {
         //echo "<pre>",print_r($this->request->data),"</pre>";//die();
         $db = Database::openConnection();
         $post_data = array();
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Serials Have Been Recorded</h2>");
+        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>Serials Cannot Be Recorded</h2><p>Reasons are listed below</p>");
         foreach($this->request->data['serial'] as $c =>$array)
         {
             foreach($array as $item_id => $details)
