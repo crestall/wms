@@ -71,8 +71,7 @@ class ajaxfunctionsController extends Controller
             $data['error'] = true;
             $data['feedback'] = 'No items found for that order number';
         }
-        Session::set('showfeedback', false);
-        Session::set('showerrorfeedback', false);
+        
         if(Session::getAndDestroy('showfeedback') == false)
         {
             Session::destroy('feedback');
