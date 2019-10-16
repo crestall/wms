@@ -1,5 +1,5 @@
 <?php
-//echo "<pre>",print_r($items),"</pre>";
+echo "<pre>",print_r($items),"</pre>";
 ?>
 <form id="add_serials" method="post" action="/form/procAddSerials">
     <?php foreach($items as $item): ?>
