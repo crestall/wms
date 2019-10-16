@@ -128,16 +128,21 @@ class FormController extends Controller {
 
     public function procAddSerials()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>";die();
-        $post_data = array();
-        foreach($this->request->data as $field => $value)
+        echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        $data = array();
+        foreach($this->request->data['serial'] as $c =>$array)
         {
-            if(!is_array($value))
+            foreach($array as $item_id => $details)
             {
-                ${$field} = $value;
-                $post_data[$field] = $value;
+                $data[] = array(
+                    'item_id'   => $item_id,
+                    'order_id'  => $this->request->data['order_id'],
+                    'serial_number' => $details['number'],
+                    'serial_id'     => $details['line_id]']
+                );
             }
         }
+        echo "<pre>",print_r($data),"</pre>";
     }
 
     public function procEditInstall()
