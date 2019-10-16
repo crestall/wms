@@ -137,11 +137,17 @@ class FormController extends Controller {
             {
                 if(!$this->dataSubbed($details['number']))
                 {
-                    Form::setError('general', 'A serial Number is required for all items');
+                    $_SESSION['showerrorfeedback'] = true;
+                    $_SESSION['showfeedback'] = false;
+                    $_SESSION['errorfeedback'] .= "<li>A serial Number is required for all items</li>";
+
                 }
                 elseif($db->fieldValueTaken('order_item_serials', $details['number'], 'serial_number'))
                 {
                    Form::setError('general', 'Serial Numbers must be unique');
+                   $_SESSION['showerrorfeedback'] = true;
+                   $_SESSION['showfeedback'] = false;
+                   $_SESSION['errorfeedback'] .= "<li>Serial Numbers must be unique</li>";
                 }
                 $post_data[] = array(
                     'item_id'       => $item_id,
@@ -151,14 +157,17 @@ class FormController extends Controller {
                 );
             }
         }
-        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        if(Session::getAndDestroy('showfeedback') == false)
         {
-            Session::set('value_array', $_POST);
-            Session::set('error_array', Form::getErrorArray());
+            Session::destroy('feedback');
         }
         else
         {
-            echo "<pre>",print_r($post_data),"</pre>"; die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+        }
+        if(Session::getAndDestroy('showerrorfeedback') == false)
+        {
+            Session::destroy('errorfeedback');
         }
         return $this->redirector->to(PUBLIC_ROOT."orders/add-serials/order=".$this->request->data['order_id']);
     }
