@@ -233,7 +233,12 @@
                                     else
                                     {
                                         $('div#order_details').html(d.html);
-                                        $('form#add_serials').validate();
+                                        $('form#add_serials').validate().submit(function(e){
+                                            if($(this).valid())
+                                            {
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Serials...</h2></div>' });
+                                            }
+                                        });
                                     }
                                 });
                             }
