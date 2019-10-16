@@ -129,6 +129,7 @@ class FormController extends Controller {
     public function procAddSerials()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        $db = Database::openConnection(); 
         $post_data = array();
         foreach($this->request->data['serial'] as $c =>$array)
         {
