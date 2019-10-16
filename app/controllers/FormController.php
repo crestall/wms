@@ -134,15 +134,32 @@ class FormController extends Controller {
         {
             foreach($array as $item_id => $details)
             {
+                if(!$this->dataSubbed($details['number']))
+                {
+                    Form::setError('general', 'A serial Number is required for all items');
+                }
+                elseif($db->fieldValueTaken($this->table, $details['number'], 'serial_number'))
+                {
+                   Form::setError('general', 'Serial Numbers must be unique');
+                }
                 $post_data[] = array(
-                    'item_id'   => $item_id,
-                    'order_id'  => $this->request->data['order_id'],
+                    'item_id'       => $item_id,
+                    'order_id'      => $this->request->data['order_id'],
                     'serial_number' => $details['number'],
                     'serial_id'     => $details['line_id']
                 );
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>";
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            echo "<pre>",print_r($post_data),"</pre>"; die();
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/add-serials/order=".$this->request->data['order_id']);
     }
 
     public function procEditInstall()

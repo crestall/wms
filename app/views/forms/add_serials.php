@@ -1,6 +1,8 @@
 <?php
 //echo "<pre>",print_r($items),"</pre>";
 ?>
+<?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+<?php echo Form::displayError('general');?>
 <form id="add_serials" method="post" action="/form/procAddSerials">
     <?php foreach($items as $item):
         $serials = $this->controller->orderitemserials->getRecordedSerials($item['order_id'], $item['item_id']);
