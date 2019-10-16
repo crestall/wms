@@ -199,19 +199,26 @@
                 },
                 'add-serials': {
                     init:function(){
-                        $('button#find_order').prop('disabled', true);
-                        $('input#order_number').focus();
-                        barcodeScanner.init({
-                            /**/ preventDefault: true,
-                            onError: function(string, qty) {
-                                //$('#userInput').val ($('#userInput').val()  + string);
-                                $( document.activeElement ).val( $( document.activeElement ).val() + string);
-                            },
-                            onComplete: function(barcode, qty){
-                                $('button#find_order').prop('disabled', false);
-                                $( document.activeElement ).val(barcode);
-                            }
-                        });
+                        if($('input#order_number').val() != "")
+                        {
+                            $('button#find_order').prop('disabled', false).click();
+                        }
+                        else
+                        {
+                            $('button#find_order').prop('disabled', true);
+                            $('input#order_number').focus();
+                            barcodeScanner.init({
+                                /**/ preventDefault: true,
+                                onError: function(string, qty) {
+                                    //$('#userInput').val ($('#userInput').val()  + string);
+                                    $( document.activeElement ).val( $( document.activeElement ).val() + string);
+                                },
+                                onComplete: function(barcode, qty){
+                                    $('button#find_order').prop('disabled', false);
+                                    $( document.activeElement ).val(barcode);
+                                }
+                            });
+                        }
 
                         $('button#find_order').click(function(e){
                             //console.log('click');

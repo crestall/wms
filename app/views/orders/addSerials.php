@@ -17,5 +17,5 @@ $order_val = ($order_number == 0)? "": $order_number;
             <button style="display:none" class="btn btn-sm btn-warning" id="clear_order">Clear Order Items</button>
         </div>
     </div>
-    <div id="order_details"><?php echo "<pre>",print_r($items),"</pre>";?></div>
+    <div id="order_details"></div>
 </div>
