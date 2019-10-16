@@ -71,15 +71,14 @@ class ajaxfunctionsController extends Controller
             $data['error'] = true;
             $data['feedback'] = 'No items found for that order number';
         }
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
-            'items'     =>  $items,
-            'order_id'  =>  $order['id']
-        ]);
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Serials Have Been Recorded</h2>");
         Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>Serials Cannot Be Recorded</h2><p>Reasons are listed below</p>");
         Session::set('showfeedback', false);
         Session::set('showerrorfeedback', false);
-
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
+            'items'     =>  $items,
+            'order_id'  =>  $order['id']
+        ]);
         if(Session::getAndDestroy('showfeedback') == false)
         {
             Session::destroy('feedback');
