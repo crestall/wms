@@ -72,14 +72,6 @@ class ajaxfunctionsController extends Controller
             $data['feedback'] = 'No items found for that order number';
         }
         
-        if(Session::getAndDestroy('showfeedback') == false)
-        {
-            Session::destroy('feedback');
-        }
-        if(Session::getAndDestroy('showerrorfeedback') == false)
-        {
-            Session::destroy('errorfeedback');
-        }
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
             'items'     =>  $items,
             'order_id'  =>  $order['id']
