@@ -254,7 +254,7 @@
                                     <?php if( Session::getUserRole() == "super admin" && $co['courier_id'] > 0): ?>
                                         <p><a class="btn btn-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
                                     <?php endif;?>
-                                    <p><a class="btn btn-secondary" href="/orders/add-serials/order=<?php echo $co['id'];?>">Add Serial Numbers</a></p>
+                                    <p><a class="btn btn-danger" href="/orders/add-serials/order=<?php echo $co['id'];?>">Add Serial Numbers</a></p>
                                 </td>
                             <?php elseif($user_role == "warehouse"):?>
                                 <td>
