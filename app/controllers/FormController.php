@@ -168,7 +168,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            echo "<pre>",print_r($post_data),"</pre>";die();
         }
         if(Session::getAndDestroy('showerrorfeedback') == false)
         {
