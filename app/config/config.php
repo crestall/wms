@@ -508,7 +508,8 @@ return array(
             'pickups-report'    => true,
             'solar-returns-report'    => true,
             'solar-consumables-reorder' => true,
-            'swatches-report'       => true
+            'swatches-report'       => true,
+            'order-serial-numbers-report'   => true
 		),/*
         'sales-reps'        =>  array(
             'view-reps'                 =>  true,
