@@ -147,7 +147,7 @@ class FormController extends Controller {
                     $_SESSION['errorfeedback'] .= "<li>A serial Number is required for all items</li>";
 
                 }
-                elseif($db->fieldValueTaken('order_item_serials', $details['number'], 'serial_number') && in_array($details['number'], $entered_serials) === false)s
+                elseif($db->fieldValueTaken('order_item_serials', $details['number'], 'serial_number') && in_array($details['number'], $entered_serials) === false)
                 {
                    Form::setError('general', 'Serial Numbers must be unique');
                    $_SESSION['showerrorfeedback'] = true;
