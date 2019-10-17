@@ -7,7 +7,7 @@
     <?php foreach($items as $item):
         $serials = $this->controller->orderitemserials->getRecordedSerials($item['order_id'], $item['item_id']);
         $entered_serials = array();
-        //echo "<pre>",print_r($serials),"</pre>";
+        echo "<pre>",print_r($serials),"</pre>";
         $c = 1;
         while($c <= $item['qty'])
         {
