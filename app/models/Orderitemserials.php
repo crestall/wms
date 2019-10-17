@@ -11,7 +11,7 @@ class Orderitemserials extends Model{
     public function insertData($post_data)
     {
         $db = Database::openConnection();
-        foreach($postdata as $data)
+        foreach($post_data as $data)
         {
             $vals = array(
                 'order_id'      => $data['order_id'],
