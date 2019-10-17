@@ -27,10 +27,11 @@
             </div>
             <?php ++$c;
         }?>
-    <?php endforeach;?>
+    <?php endforeach;
+    $sers = implode(",", $entered_serials);?>
     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
     <input type="hidden" name="order_id" id="order_id" value="<?php echo $order_id;?>" />
-    <input type="hidden" name="entered_serials" id="entered_serials" value="<?php echo implode(",", $entered_serials);?>" />
+    <input type="hidden" name="entered_serials" id="entered_serials" value="<?php echo $sers?>" />
     <div class="form-group row">
         <label class="col-md-5 col-form-label">&nbsp;</label>
         <div class="col-md-3">
