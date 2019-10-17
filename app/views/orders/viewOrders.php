@@ -45,7 +45,7 @@
                     <p><a class="btn btn-primary eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
                     <p><a class="btn btn-default viclocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Vic Local Orders</a> </p>
                     <p><a class="btn btn-default cometlocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Comet Local Orders</a> </p>
-                    <p><a class="btn btn-default cometsydney-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Sydney Comet Orders</a> </p> 
+                    <p><a class="btn btn-default cometsydney-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Sydney Comet Orders</a> </p>
                 </div>
             <?php endif;?>
             <div class="col-lg-3 text-center">
@@ -254,6 +254,7 @@
                                     <?php if( Session::getUserRole() == "super admin" && $co['courier_id'] > 0): ?>
                                         <p><a class="btn btn-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
                                     <?php endif;?>
+                                    <p><a class="btn btn-secondary" href="/orders/add-serials/order=<?php echo $co['id'];?>">Add Serial Numbers</a></p>
                                 </td>
                             <?php elseif($user_role == "warehouse"):?>
                                 <td>
