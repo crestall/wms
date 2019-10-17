@@ -15,18 +15,20 @@ echo "<pre>",print_r($items),"</pre>";
                 //echo "<pre>",print_r($s),"</pre>";
                 $entered_serials[] = $s['serial_number'];?>
                 <div class="form-group row">
-                    <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php echo $item['name']." (".$item['sku'].")";?></label>
+                    <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> serial<?php echo $item['name']." (".$item['sku'].")";?></label>
                     <div class="col-md-3"><input type="text" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>][number]" class="form-control required unique" placeholder="Serial Number" value="<?php echo $s['serial_number'];?>" /></div>
                     <input type="hidden" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>][line_id]" value="<?php echo $s['id'];?>" />
                 </div>
                 <?php ++$c;?>
             <?php endforeach;?>
-            <div class="form-group row">
-                <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php echo $item['name']." (".$item['sku'].")";?></label>
-                <div class="col-md-3"><input type="text" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>][number]" class="form-control required unique" placeholder="Serial Number" /></div>
-                <input type="hidden" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>][line_id]" value="0" />
-            </div>
-            <?php ++$c;
+            <?php if($c <= $item['qty']):?>
+                <div class="form-group row">
+                    <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php echo $item['name']." (".$item['sku'].")";?></label>
+                    <div class="col-md-3"><input type="text" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>][number]" class="form-control required unique" placeholder="Serial Number" /></div>
+                    <input type="hidden" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>][line_id]" value="0" />
+                </div>
+                <?php ++$c;
+            endif;
         }?>
     <?php endforeach;
     //echo "<pre>",print_r($entered_serials),"</pre>";
