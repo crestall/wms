@@ -1,5 +1,5 @@
 <?php
-echo "<pre>",print_r($items),"</pre>";
+//echo "<pre>",print_r($items),"</pre>";
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 
@@ -7,7 +7,7 @@ echo "<pre>",print_r($items),"</pre>";
     <?php $entered_serials = array();
     foreach($items as $item):
         $serials = $this->controller->orderitemserials->getRecordedSerials($item['order_id'], $item['item_id']);
-        echo "<pre>",print_r($serials),"</pre>";
+        //echo "<pre>",print_r($serials),"</pre>";
         $c = 1;
         while($c <= $item['qty'])
         {
