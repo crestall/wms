@@ -29,7 +29,7 @@
             <?php ++$c;
         }?>
     <?php endforeach;
-    echo "<pre>",print_r($entered_serials),"</pre>";
+    //echo "<pre>",print_r($entered_serials),"</pre>";
     $sers = implode(",", $entered_serials);?>
     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
     <input type="hidden" name="order_id" id="order_id" value="<?php echo $order_id;?>" />
