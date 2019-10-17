@@ -168,7 +168,8 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($post_data),"</pre>";die();
+            //echo "<pre>",print_r($post_data),"</pre>";die();
+            $this->Orderitemserials->insertData($post_data);
         }
         if(Session::getAndDestroy('showerrorfeedback') == false)
         {
