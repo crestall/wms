@@ -62,6 +62,17 @@ $(document).ready(function() {
         }
     }, 'Pick count is wrong');
 
+    $.validator.addMethod("unique", function(value, element) {
+        var matches = new Array();
+        $('input.unique').each(function(index, item) {
+            if (value == $(item).val()) {
+                matches.push(item);
+            }
+        });
+
+        return matches.length == 0;
+    }, "Duplicate input detected.");
+
     //$.validator.addMethod("uniqueUserRole", $.validator.methods.remote, "User Role names need to be unique");
 
 	////////////////////////////////////////////////////////////
