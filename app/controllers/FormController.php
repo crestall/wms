@@ -128,9 +128,10 @@ class FormController extends Controller {
 
     public function procAddSerials()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>";die();
+        //echo "<pre>",print_r($this->request->data),"</pre>";die();
         $db = Database::openConnection();
         $post_data = array();
+        $entered_serials = explode(",", $this->request->data['entered_serials']);
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Serials Have Been Recorded</h2>");
         Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>Serials Cannot Be Recorded</h2><p>Reasons are listed below</p>");
         Session::set('showfeedback', true);
@@ -146,7 +147,7 @@ class FormController extends Controller {
                     $_SESSION['errorfeedback'] .= "<li>A serial Number is required for all items</li>";
 
                 }
-                elseif($db->fieldValueTaken('order_item_serials', $details['number'], 'serial_number'))
+                elseif($db->fieldValueTaken('order_item_serials', $details['number'], 'serial_number') && in_array($details['number'], $entered_serials) === false)s
                 {
                    Form::setError('general', 'Serial Numbers must be unique');
                    $_SESSION['showerrorfeedback'] = true;
