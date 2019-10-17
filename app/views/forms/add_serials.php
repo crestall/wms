@@ -6,11 +6,13 @@
 <form id="add_serials" method="post" action="/form/procAddSerials">
     <?php foreach($items as $item):
         $serials = $this->controller->orderitemserials->getRecordedSerials($item['order_id'], $item['item_id']);
+        $entered_serials = array();
         //echo "<pre>",print_r($serials),"</pre>";
         $c = 1;
         while($c <= $item['qty'])
         {
-            foreach($serials as $s):?>
+            foreach($serials as $s):
+                $entered_serials[] = $s['serial_number'];?>
                 <div class="form-group row">
                     <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php echo $item['name']." (".$item['sku'].")";?></label>
                     <div class="col-md-3"><input type="text" name="serial[<?php echo $c;?>][<?php echo $item['item_id'];?>][number]" class="form-control required" placeholder="Serial Number" value="<?php echo $s['serial_number'];?>" /></div>
@@ -28,6 +30,7 @@
     <?php endforeach;?>
     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
     <input type="hidden" name="order_id" id="order_id" value="<?php echo $order_id;?>" />
+    <input type="hidden" name="entered_serials" id="entered_serials" value="<?php echo implode(",", $entered_serials);?>" />
     <div class="form-group row">
         <label class="col-md-5 col-form-label">&nbsp;</label>
         <div class="col-md-3">

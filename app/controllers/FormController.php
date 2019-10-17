@@ -128,7 +128,7 @@ class FormController extends Controller {
 
     public function procAddSerials()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        echo "<pre>",print_r($this->request->data),"</pre>";//die();
         $db = Database::openConnection();
         $post_data = array();
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Serials Have Been Recorded</h2>");
