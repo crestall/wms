@@ -414,6 +414,82 @@ class Order extends Model{
         return $return;
     }
 
+    public function getUndispatchedOrdersWithSerials($from, $to, $client_id)
+    {
+        $db = Database::openConnection();
+        $query = "
+        SELECT
+            o.*, ois.serial_number
+        FROM
+            orders o JOIN order_item_serials ois ON o.id = ois.order_id
+        WHERE
+            client_id = :client_id AND status_id != :status_id AND date_ordered >= :from AND date_ordered <= :to ORDER BY date_ordered DESC";
+        $array = array(
+            'client_id' => 	$client_id,
+            'status_id' =>  $this->fulfilled_id,
+            'to'        =>  $to,
+            'from'      =>  $from
+        );
+        return $db->queryData($query, $array);
+    }
+
+    public function getUndispatchedOrdersWithSerialsArray($from, $to, $client_id)
+    {
+        $db = Database::openConnection();
+        $orders = $this->getUndispatchedOrdersWithSerials($from, $to, $client_id);
+        $return = array();
+        foreach($orders as $co)
+        {
+            $ad = array(
+                'address'   =>  $co['address'],
+                'address_2' =>  $co['address_2'],
+                'suburb'    =>  $co['suburb'],
+                'state'     =>  $co['state'],
+                'postcode'  =>  $co['postcode'],
+                'country'   =>  $co['country']
+            );
+
+            $address = Utility::formatAddressWeb($ad);
+            $shipped_to = "";
+            if(!empty($co['company_name'])) $shipped_to .= $co['company_name']."<br/>";
+            if(!empty($co['ship_to'])) $shipped_to .= $co['ship_to']."<br/>";
+            $shipped_to .= $address;
+            $products = $this->getItemsWithSerialForOrder($co['id']);
+            $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
+            if(empty($eb))
+            {
+                $eb = "Automatically Imported";
+            }
+            $num_items = 0;
+            $items = "";
+            $csv_items = array();
+            foreach($products as $p)
+            {
+                $items .= $p['name']." (".$p['sku'].") - ".$p['serial_number'].",<br/>";
+
+                $csv_items[] = array(
+                    'name'          =>  $p['name'],
+                    'sku'           =>  $p['sku'],
+                    'serial_number' =>  $p['serial_number']
+                );
+            }
+            $items = rtrim($items, ",<br/>");
+
+            $row = array(
+                'date_ordered'          => date('d-m-Y', $co['date_ordered']),
+                'entered_by'            => $eb,
+                'order_number'          => $co['order_number'],
+                'client_order_number'   => $co['client_order_id'],
+                'shipped_to'            => $shipped_to,
+                'country'               => $co['country'],
+                'items'                 => $items,
+
+            );
+            $return[] = $row;
+        }
+        return $return;
+    }
+
     public function getSearchResults($args)
     {
         extract($args);
@@ -1250,5 +1326,22 @@ class Order extends Model{
             $order_number = Utility::ean13_check_digit(Utility::randomNumber(12));
         }
         return $order_number;
+    }
+
+    public function getItemsWithSerialForOrder($id)
+    {
+        $db = Database::openConnection();
+
+        $q = "
+            SELECT
+                ois.serial_number, i.name, i.sku
+            FROM
+                order_item_serials ois JOIN items i ON ois.item_id = i.id
+            WHERE
+                ois.order_id = $id
+            ORDER BY
+                i.name
+        ";
+        return $db->queryData($q);
     }
 }

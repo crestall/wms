@@ -509,7 +509,8 @@ return array(
             'solar-returns-report'    => true,
             'solar-consumables-reorder' => true,
             'swatches-report'       => true,
-            'order-serial-numbers-report'   => true
+            'order-serial-numbers-report'   => true,
+            '3pl-order-serials-report'  => false
 		),/*
         'sales-reps'        =>  array(
             'view-reps'                 =>  true,
