@@ -7,13 +7,12 @@
     <?php $entered_serials = array();
     foreach($items as $item):
         $serials = $this->controller->orderitemserials->getRecordedSerials($item['order_id'], $item['item_id']);
-
         //echo "<pre>",print_r($serials),"</pre>";
         $c = 1;
         while($c <= $item['qty'])
         {
             foreach($serials as $s):
-                echo "<pre>",print_r($s),"</pre>";
+                //echo "<pre>",print_r($s),"</pre>";
                 $entered_serials[] = $s['serial_number'];?>
                 <div class="form-group row">
                     <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php echo $item['name']." (".$item['sku'].")";?></label>
