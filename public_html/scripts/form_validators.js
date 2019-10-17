@@ -69,7 +69,7 @@ $(document).ready(function() {
                 matches.push(item);
             }
         });
-        console.log(matches);
+        console.log(matches.length);
         return matches.length > 1;
     }, "Duplicate input detected.");
 
