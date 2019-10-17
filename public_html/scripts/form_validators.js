@@ -70,7 +70,7 @@ $(document).ready(function() {
             }
         });
 
-        return matches.length == 0;
+        return matches.length > 1;
     }, "Duplicate input detected.");
 
     //$.validator.addMethod("uniqueUserRole", $.validator.methods.remote, "User Role names need to be unique");
