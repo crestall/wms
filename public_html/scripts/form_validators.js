@@ -62,8 +62,8 @@ $(document).ready(function() {
         }
     }, 'Pick count is wrong');
 
-    $.validator.addMethod("unique", function(value, element) {
-        var matches = new Array();
+    $.validator.addMethod("noDuplicates", function(value, element) {
+        var matches  =  new Array();
         $('input.unique').each(function(index, item) {
             if (value == $(item).val()) {
                 matches.push(item);
