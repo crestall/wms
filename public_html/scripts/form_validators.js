@@ -69,8 +69,8 @@ $(document).ready(function() {
                 matches.push(item);
             }
         });
-        console.log(matches.length);
-        return matches.length > 1;
+        //console.log(matches.length);
+        return matches.length == 1;
     }, "Duplicate input detected.");
 
     //$.validator.addMethod("uniqueUserRole", $.validator.methods.remote, "User Role names need to be unique");
