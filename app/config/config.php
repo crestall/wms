@@ -424,7 +424,8 @@ return array(
             'view-pickups'              => false,
             'record-pickup'   => true,
             'order-csv-upload'  => true,
-            'manage-swatches'   => true
+            'manage-swatches'   => true,
+            'add-serials'   => true
         ),
         'solar-jobs'  => array(
             'add-solar-install'             => true,
@@ -507,7 +508,9 @@ return array(
             'pickups-report'    => true,
             'solar-returns-report'    => true,
             'solar-consumables-reorder' => true,
-            'swatches-report'       => true
+            'swatches-report'       => true,
+            'order-serial-numbers-report'   => true,
+            '3pl-order-serials-report'  => false
 		),/*
         'sales-reps'        =>  array(
             'view-reps'                 =>  true,

@@ -197,12 +197,70 @@
                         });
                     }
                 },
+                'add-serials': {
+                    init:function(){
+                        $('button#find_order').click(function(e){
+                            //console.log('click');
+                            var ordernumber = $('input#order_number').val();
+                            if(ordernumber != "")
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Fetching Items...</h1></div>' });
+                                var data = {
+                                    ordernumber: ordernumber
+                                }
+                                $.post('/ajaxfunctions/getOrderItemsForSerials', data, function(d){
+                                    $.unblockUI();
+                                    //$('div#order_details').html(d);
+                                    if(d.error)
+                                    {
+                                        $('div#order_details').html('');
+                                        alert(d.feedback);
+                                    }
+                                    else
+                                    {
+                                        $('div#order_details').html(d.html);
+                                        $.validator.addClassRules("unique", {
+                                            noDuplicates: true
+                                        });
+                                        $('form#add_serials').validate();
+                                        $('form#add_serials').submit(function(e){
+                                            if($(this).valid())
+                                            {
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Serials...</h2></div>' });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                        if($('input#order_number').val() != "")
+                        {
+                            $('button#find_order').prop('disabled', false).click();
+                        }
+                        else
+                        {
+                            $('button#find_order').prop('disabled', true);
+                            $('input#order_number').focus();
+                            barcodeScanner.init({
+                                /**/ preventDefault: true,
+                                onError: function(string, qty) {
+                                    //$('#userInput').val ($('#userInput').val()  + string);
+                                    $( document.activeElement ).val( $( document.activeElement ).val() + string);
+                                },
+                                onComplete: function(barcode, qty){
+                                    $('button#find_order').prop('disabled', false);
+                                    $( document.activeElement ).val(barcode);
+                                }
+                            });
+                        }
+                    }
+                },
                 'manage-swatches': {
                     init: function(){
                         actions.common['select-all']();
                         actions.common['cancel-orders'](false, true);
                         $('a.label-print').click(function(e){
-                            console.log('click');
+                            //console.log('click');
                             e.preventDefault();
                             var ids = [];
                             $('input.select').each(function(i,e){

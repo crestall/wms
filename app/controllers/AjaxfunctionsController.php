@@ -31,6 +31,7 @@ class ajaxfunctionsController extends Controller
             'getScannedItem',
             'getSuburbs',
             'getUnfulfilledAdmin',
+            'getOrderItems',
             'getOrderTrends',
             'getPickErrors',
             'getShippingQuotes',
@@ -53,6 +54,30 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function getOrderItemsForSerials()
+    {
+        $order_number = $this->request->data['ordernumber'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $order = $this->order->getOrderByOrderNumber($order_number);
+        $items = $this->order->getItemsForOrderNoLocations($order['id']);
+        if(!count($items))
+        {
+            $data['error'] = true;
+            $data['feedback'] = 'No items found for that order number';
+        }
+        
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
+            'items'     =>  $items,
+            'order_id'  =>  $order['id']
+        ]);
+        $data['html'] = $html;
+        $this->view->renderJson($data);
     }
 
     public function removeCourier()

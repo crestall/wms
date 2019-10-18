@@ -183,7 +183,15 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                 <div class='row'>
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <a class="btn btn-primary" href="/orders/items-update/order=<?php echo $order_id;?>">Update Order Items</a>
+                        <p><a class="btn btn-primary" href="/orders/add-serials/order=<?php echo $order_id;?>">Add Serial Numbers</a> </p>
+                    </div>
+                </div>
+            <?php endif;?>
+            <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
+                <div class='row'>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <p><a class="btn btn-primary" href="/orders/items-update/order=<?php echo $order_id;?>">Update Order Items</a></p>
                     </div>
                 </div>
             <?php endif;?>

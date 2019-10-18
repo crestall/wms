@@ -61,6 +61,7 @@ class FormController extends Controller {
             'procAddPackage',
             'procAddressUpdate',
             'procAddServiceJob',
+            'procAddSerials',
             'procAddSolarInstall',
             'procAddTljOrder',
             'procAddToStock',
@@ -123,6 +124,58 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procAddSerials()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>";die();
+        $db = Database::openConnection();
+        $post_data = array();
+        $entered_serials = explode(",", $this->request->data['entered_serials']);
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Serials Have Been Recorded</h2>");
+        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>Serials Cannot Be Recorded</h2><p>Reasons are listed below</p>");
+        Session::set('showfeedback', true);
+        Session::set('showerrorfeedback', false);
+        foreach($this->request->data['serial'] as $c =>$array)
+        {
+            foreach($array as $item_id => $details)
+            {
+                if(!$this->dataSubbed($details['number']))
+                {
+                    $_SESSION['showerrorfeedback'] = true;
+                    $_SESSION['showfeedback'] = false;
+                    $_SESSION['errorfeedback'] .= "<li>A serial Number is required for all items</li>";
+
+                }
+                elseif($db->fieldValueTaken('order_item_serials', $details['number'], 'serial_number') && in_array($details['number'], $entered_serials) === false)
+                {
+                   Form::setError('general', 'Serial Numbers must be unique');
+                   $_SESSION['showerrorfeedback'] = true;
+                   $_SESSION['showfeedback'] = false;
+                   $_SESSION['errorfeedback'] .= "<li>Serial Numbers must be unique</li>";
+                }
+                $post_data[] = array(
+                    'item_id'       => $item_id,
+                    'order_id'      => $this->request->data['order_id'],
+                    'serial_number' => $details['number'],
+                    'serial_id'     => $details['line_id']
+                );
+            }
+        }
+        if(Session::getAndDestroy('showfeedback') == false)
+        {
+            Session::destroy('feedback');
+        }
+        else
+        {
+            //echo "<pre>",print_r($post_data),"</pre>";die();
+            $this->Orderitemserials->insertData($post_data);
+        }
+        if(Session::getAndDestroy('showerrorfeedback') == false)
+        {
+            Session::destroy('errorfeedback');
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/add-serials/order=".$this->request->data['order_id']);
     }
 
     public function procEditInstall()
