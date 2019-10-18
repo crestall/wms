@@ -424,6 +424,7 @@ class Order extends Model{
             orders o JOIN order_item_serials ois ON o.id = ois.order_id
         WHERE
             client_id = :client_id AND status_id != :status_id AND date_ordered >= :from AND date_ordered <= :to ORDER BY date_ordered DESC";
+        echo $query;
         $array = array(
             'client_id' => 	$client_id,
             'status_id' =>  $this->fulfilled_id,
