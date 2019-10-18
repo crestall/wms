@@ -33,11 +33,10 @@
                                 <th>Date Ordered</th>
                                 <th>Entered By</th>
                             	<th>WMS Order No</th>
-                                <th>Client Order Number</th>
-                                <th>Customer Order Number</th>
+                                <th>Client Order<br/>Number</th>
+                                <th>Customer Order<br/>Number</th>
                                 <th>Shipped To</th>
                                 <th>Items</th>
-                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -51,7 +50,6 @@
                                 <td data-label="Customer Order Number" class="number"><?php echo $co['customer_order_number'];?></td>
                                 <td data-label="Shipped To" class="nowrap shipped_to"><?php echo $co['shipped_to'];?></td>
                                 <td data-label="Items" class="nowrap items"><?php echo $co['items'];?></td>
-                                <td></td>
                                 <td></td>
                             </tr>
                         <?php endforeach;?>
