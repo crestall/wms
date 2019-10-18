@@ -280,7 +280,7 @@
 
                         dataTable.init($('table#client_dispatch_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [0,2,5,6,7,8] }
+                                { "orderable": false, "targets": [0,2,5,6,7] }
                             ],
                             "order": [],
                             fixedHeader: true
