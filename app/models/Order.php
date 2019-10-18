@@ -489,6 +489,7 @@ class Order extends Model{
                 'shipped_to'            => $shipped_to,
                 'country'               => $co['country'],
                 'items'                 => $items,
+                'id'                    => $co['id']
 
             );
             $return[] = $row;
