@@ -485,7 +485,7 @@ class Order extends Model{
                 'entered_by'            => $eb,
                 'order_number'          => $co['order_number'],
                 'client_order_number'   => $co['client_order_id'],
-                'customer_order_number' => $co['customer_order_id']
+                'customer_order_number' => $co['customer_order_id'],
                 'shipped_to'            => $shipped_to,
                 'country'               => $co['country'],
                 'items'                 => $items,
