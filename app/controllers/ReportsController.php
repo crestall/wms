@@ -138,7 +138,7 @@ class reportsController extends Controller
             $orders = $this->order->getUndispatchedOrdersWithSerialsArray($from, $to, $client_id);
         }
         Config::setJsConfig('curPage', "3pl-order-serials-report");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plDispatch.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plUndispatchedSerials.php',[
             'page_title'    =>  '3PL Undispatched With Invoices Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
