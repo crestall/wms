@@ -419,18 +419,20 @@ class Order extends Model{
         $db = Database::openConnection();
         $query = "
         SELECT
-            o.*, ois.serial_number
+            o.*
         FROM
             orders o JOIN order_item_serials ois ON o.id = ois.order_id
         WHERE
-            client_id = :client_id AND status_id != :status_id AND date_ordered >= :from AND date_ordered <= :to ORDER BY date_ordered DESC";
+            client_id = :client_id AND status_id != :status_id AND date_ordered >= :from AND date_ordered <= :to ORDER BY date_ordered DESC
+        GROUP BY
+            o.id";
         $array = array(
             'client_id' => 	$client_id,
             'status_id' =>  $this->fulfilled_id,
             'to'        =>  $to,
             'from'      =>  $from
         );
-        echo $query;print_r($array);
+        //echo $query;print_r($array);
         return $db->queryData($query, $array);
     }
 
