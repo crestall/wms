@@ -1182,7 +1182,7 @@ class FormController extends Controller {
 
     public function procOrderUpload()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1327,8 +1327,8 @@ class FormController extends Controller {
                         $qty = $row[$i];
                         ++$i;
                         $whole_pallet = false;
-                        //if()
-                        $whole_pallet = ($row[$i] == 1);
+                        if(Session::getUserClientId() != 72)   //SELECTRONIC think everything is a whole pallet
+                            $whole_pallet = ($row[$i] == 1);
                         $item = $this->item->getItemBySku($sku);
                         if(empty($item))
                         {
