@@ -1434,37 +1434,42 @@ class FormController extends Controller {
                     }
                 }
                 $data_error_string .= "</ul>";
-            }
-            if($import_orders)
-            {
-                Session::set('feedback', "<h2><i class='far fa-check-circle'></i>$imported_order_count Orders Have Been Successfully Imported</h2>");
-                foreach($imported_orders as $oind => $o)
+
+                if($import_orders)
                 {
-                    $vals = array(
-                        'client_order_id'       => $o['client_order_id'],
-                        'client_id'             => Session::getUserClientId(),
-                        'deliver_to'            => $o['ship_to'],
-                        'company_name'          => $o['company_name'],
-                        'date_ordered'          => $o['date_ordered'],
-                        'tracking_email'        => $o['tracking_email'],
-                        'weight'                => $o['weight'],
-                        'delivery_instructions' => $o['instructions'],
-                        '3pl_comments'          => $o['3pl_comments'],
-                        'errors'                => $o['errors'],
-                        'error_string'          => $o['error_string'],
-                        'address'               => $o['address'],
-                        'address2'              => $o['address_2'],
-                        'state'                 => $o['state'],
-                        'suburb'                => $o['suburb'],
-                        'postcode'              => $o['postcode'],
-                        'country'               => $o['country'],
-                        'contact_phone'         => $o['contact_phone']
-                    );
-                    if($o['signature_req'] == 1) $vals['signature_req'] = 1;
-                    if($o['eparcel_express'] == 1) $vals['eparcel_express'] = 1;
-                    $itp = array($all_items[$oind]);
-                    $order_number = $this->controller->order->addOrder($vals, $itp);
-                    $_SESSION['feedback'] .= "<p>$order_number has been created</p>";
+                    Session::set('feedback', "<h2><i class='far fa-check-circle'></i>$imported_order_count Orders Have Been Successfully Imported</h2>");
+                    foreach($imported_orders as $oind => $o)
+                    {
+                        $vals = array(
+                            'client_order_id'       => $o['client_order_id'],
+                            'client_id'             => Session::getUserClientId(),
+                            'deliver_to'            => $o['ship_to'],
+                            'company_name'          => $o['company_name'],
+                            'date_ordered'          => $o['date_ordered'],
+                            'tracking_email'        => $o['tracking_email'],
+                            'weight'                => $o['weight'],
+                            'delivery_instructions' => $o['instructions'],
+                            '3pl_comments'          => $o['3pl_comments'],
+                            'errors'                => $o['errors'],
+                            'error_string'          => $o['error_string'],
+                            'address'               => $o['address'],
+                            'address2'              => $o['address_2'],
+                            'state'                 => $o['state'],
+                            'suburb'                => $o['suburb'],
+                            'postcode'              => $o['postcode'],
+                            'country'               => $o['country'],
+                            'contact_phone'         => $o['contact_phone']
+                        );
+                        if($o['signature_req'] == 1) $vals['signature_req'] = 1;
+                        if($o['eparcel_express'] == 1) $vals['eparcel_express'] = 1;
+                        $itp = array($all_items[$oind]);
+                        $order_number = $this->controller->order->addOrder($vals, $itp);
+                        $_SESSION['feedback'] .= "<p>$order_number has been created</p>";
+                    }
+                }
+                else
+                {
+                    Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Imported</h2><p>Reasons are listed below</p>$data_error_string");
                 }
             }
             else
