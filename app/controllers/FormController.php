@@ -1182,7 +1182,7 @@ class FormController extends Controller {
 
     public function procOrderUpload()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1198,7 +1198,7 @@ class FormController extends Controller {
             {
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                echo "<pre>",print_r($csv_array),"</pre>"; die();
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
             }
             else
             {
@@ -1264,17 +1264,17 @@ class FormController extends Controller {
                         $data_error_string .= "<li>Invalid tracking email on line: $line</li>";
                     }
                 }
-                if(!$this->dataSubbed($row[2]))
+                if(!$this->dataSubbed($row[3]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Name is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[3]))
+                if(!$this->dataSubbed($row[4]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Address is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[5]))
+                if(!$this->dataSubbed($row[6]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Suburb/City is required on line: $line</li>";
@@ -1303,13 +1303,13 @@ class FormController extends Controller {
                         'client_order_id'       => $row[0],
                         'errors'                => 0,
                         'tracking_email'        => $row[11],
-                        'ship_to'               => $row[2],
-                        'company_name'          => $row[1],
+                        'ship_to'               => $row[3],
+                        'company_name'          => $row[2],
                         'date_ordered'          => time(),
                         'status_id'             => $this->controller->order->ordered_id,
                         'eparcel_express'       => 0,
                         'signature_req'         => 0,
-                        'contact_phone'         => $row[9],
+                        'contact_phone'         => $row[10],
                         'import_error'          => false,
                         'import_error_string'   => '',
                         'weight'                => 0,
@@ -1326,6 +1326,8 @@ class FormController extends Controller {
                         ++$i;
                         $qty = $row[$i];
                         ++$i;
+                        $whole_pallet = false;
+                        if()
                         $whole_pallet = ($row[$i] == 1);
                         $item = $this->item->getItemBySku($sku);
                         if(empty($item))
