@@ -1420,7 +1420,7 @@ class FormController extends Controller {
             if($import_orders)
             {
                 $all_items = $this->allocations->createOrderItemsArray($orders_items);
-                echo "<pre>",print_r($orders_items),"</pre>";die();
+                //echo "<pre>",print_r($orders_items),"</pre>";die();
                 $item_error = false;
                 $error_string = "";
                 foreach($all_items as $oind => $order_items)
@@ -1463,7 +1463,7 @@ class FormController extends Controller {
                         );
                         if($o['signature_req'] == 1) $vals['signature_req'] = 1;
                         if($o['eparcel_express'] == 1) $vals['eparcel_express'] = 1;
-                        $itp = array($all_items[$oind]);
+                        $itp = array($all_items[$imported_order_count][$oind]);
                         $order_number = $this->controller->order->addOrder($vals, $itp);
                         $_SESSION['feedback'] .= "<p>$order_number has been created</p>";
                     }
