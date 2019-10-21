@@ -419,17 +419,22 @@ class Order extends Model{
         $db = Database::openConnection();
         $query = "
         SELECT
-            o.*, ois.serial_number
+            o.*
         FROM
             orders o JOIN order_item_serials ois ON o.id = ois.order_id
         WHERE
-            client_id = :client_id AND status_id != :status_id AND date_ordered >= :from AND date_ordered <= :to ORDER BY date_ordered DESC";
+            client_id = :client_id AND status_id != :status_id AND date_ordered >= :from AND date_ordered <= :to
+        GROUP BY
+            o.id
+        ORDER BY
+            date_ordered DESC";
         $array = array(
             'client_id' => 	$client_id,
             'status_id' =>  $this->fulfilled_id,
             'to'        =>  $to,
             'from'      =>  $from
         );
+        //echo $query;print_r($array);
         return $db->queryData($query, $array);
     }
 
@@ -480,9 +485,11 @@ class Order extends Model{
                 'entered_by'            => $eb,
                 'order_number'          => $co['order_number'],
                 'client_order_number'   => $co['client_order_id'],
+                'customer_order_number' => $co['customer_order_id'],
                 'shipped_to'            => $shipped_to,
                 'country'               => $co['country'],
                 'items'                 => $items,
+                'id'                    => $co['id']
 
             );
             $return[] = $row;

@@ -32,23 +32,27 @@
                         	<tr>
                                 <th>Date Ordered</th>
                                 <th>Entered By</th>
-                                <th>Date Dispatched</th>
-                            	<th>Order No</th>
-                                <th>Client Order Number</th>
+                            	<th>WMS Order No</th>
+                                <th>Client Order<br/>Number</th>
+                                <th>Customer Order<br/>Number</th>
                                 <th>Shipped To</th>
                                 <th>Items</th>
-                                <th>Charge Code</th>
-                                <th>Total Charge</th>
-                                <th>Weight</th>
-                                <th>Courier</th>
-                                <th>Con Note</th>
-                                <th>Cartons</th>
-                                <th>Extras<br/><button class="btn btn-success btn-sm" id="extras_update">Update Extras</button></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php echo "<pre>",print_r($client_orders),"</pre>";?>
+                        <?php foreach($client_orders as $co):?>
+                        	<tr>
+                                <td data-label="Date Ordered" class="number" ><?php echo $co['date_ordered'];?></td>
+                                <td data-label="Entered By"><?php echo $co['entered_by'];?></td>
+                            	<td data-label="WMS Order Number"  class="number"><a href="/orders/order-update/order=<?php echo $co['id'];?>"><?php echo str_pad($co['order_number'],8,'0',STR_PAD_LEFT);?></a></td>
+                                <td data-label="Client Order Number" class="number"><?php echo $co['client_order_number'];?></td>
+                                <td data-label="Customer Order Number" class="number"><?php echo $co['customer_order_number'];?></td>
+                                <td data-label="Shipped To" class="nowrap shipped_to"><?php echo $co['shipped_to'];?></td>
+                                <td data-label="Items" class="nowrap items"><?php echo $co['items'];?></td>
+                                <td></td>
+                            </tr>
+                        <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -58,7 +62,7 @@
                 <div class="col-lg-12">
                     <div class="errorbox">
                         <h2>No Orders Listed</h2>
-                        <p>There are no orders listed as being dispatched between <?php echo date("d/m/Y", $from);?> and <?php echo date("d/m/Y", $to);?></p>
+                        <p>There are no undispatched orders listed between <?php echo date("d/m/Y", $from);?> and <?php echo date("d/m/Y", $to);?></p>
                         <p>If you believe this is an error, please let Solly know</p>
                         <p>Alternatively, use the date selectors above to change the date range</p>
                     </div>
