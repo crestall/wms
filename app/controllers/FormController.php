@@ -1420,7 +1420,7 @@ class FormController extends Controller {
             if($import_orders)
             {
                 $all_items = $this->allocations->createOrderItemsArray($orders_items);
-                echo "<pre>",print_r($all_items),"</pre>";die();
+                echo "<pre>",print_r($orders_items),"</pre>";die();
                 $item_error = false;
                 $error_string = "";
                 foreach($all_items as $oind => $order_items)
