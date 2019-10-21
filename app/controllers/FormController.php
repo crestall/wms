@@ -1417,21 +1417,24 @@ class FormController extends Controller {
                 }
                 ++$line;
             }
-            $all_items = $this->allocations->createOrderItemsArray($orders_items);
-            $item_error = false;
-            $error_string = "";
-            foreach($all_items as $oind => $order_items)
+            if($import_orders)
             {
-                foreach($order_items as $item)
+                $all_items = $this->allocations->createOrderItemsArray($orders_items);
+                $item_error = false;
+                $error_string = "";
+                foreach($all_items as $oind => $order_items)
                 {
-                    if($item['item_error'])
+                    foreach($order_items as $item)
                     {
-                        $import_orders = false;
-                        $data_error_string .= "<li>".$item['item_error_string']." for order {$imported_orders[$oind]['client_order_id']}</li>";
+                        if($item['item_error'])
+                        {
+                            $import_orders = false;
+                            $data_error_string .= "<li>".$item['item_error_string']." for order {$imported_orders[$oind]['client_order_id']}</li>";
+                        }
                     }
                 }
+                $data_error_string .= "</ul>";
             }
-            $data_error_string .= "</ul>";
             if($import_orders)
             {
                 Session::set('feedback', "<h2><i class='far fa-check-circle'></i>$imported_order_count Orders Have Been Successfully Imported</h2>");
