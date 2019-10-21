@@ -1354,12 +1354,12 @@ class FormController extends Controller {
                         $orders_items[$imported_order_count] = $items;
                         //validate address
                         $ad = array(
-                            'address'   => $row[3],
-                            'address_2' => $row[4],
-                            'suburb'    => $row[5],
-                            'state'     => $row[6],
-                            'postcode'  => $row[7],
-                            'country'   => $row[8]
+                            'address'   => $row[4],
+                            'address_2' => $row[5],
+                            'suburb'    => $row[6],
+                            'state'     => $row[7],
+                            'postcode'  => $row[8],
+                            'country'   => $row[9]
                         );
                         if($ad['country'] == "AU")
                         {
