@@ -1327,7 +1327,7 @@ class FormController extends Controller {
                         $qty = $row[$i];
                         ++$i;
                         $whole_pallet = false;
-                        if()
+                        //if()
                         $whole_pallet = ($row[$i] == 1);
                         $item = $this->item->getItemBySku($sku);
                         if(empty($item))
