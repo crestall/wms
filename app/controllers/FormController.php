@@ -1347,7 +1347,7 @@ class FormController extends Controller {
                         ++$i;
                     }
                     while(!empty($row[$i]));
-                    $orders_items = array();
+                    //$orders_items = array();
                     if(!$item_error)
                     {
                         $order['items'] = $items;
