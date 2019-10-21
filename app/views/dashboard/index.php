@@ -152,7 +152,7 @@ $c = 1;
     <?php elseif($user_role == "client"):?>
         <input type="hidden" id="client_id" value="<?php echo $client_id; ?>" />
         <input type="hidden" id="from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
-        <input type="hidden" id="to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
+        <input type="hidden" id="to_value" value="<?php echo strtotime('last saturday', strtotime('tomorrow'));?>" />
         <div class="bs-callout bs-callout-primary row bs-callout-more">
             <div class="row">
                 <div class="col-lg-12">
