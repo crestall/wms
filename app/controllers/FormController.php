@@ -1463,8 +1463,8 @@ class FormController extends Controller {
                         );
                         if($o['signature_req'] == 1) $vals['signature_req'] = 1;
                         if($o['eparcel_express'] == 1) $vals['eparcel_express'] = 1;
-                        echo "<pre>",print_r($all_items),"</pre>";die();
-                        $itp = array($all_items[$imported_order_count][$oind]);
+                        //echo "<pre>",print_r($all_items),"</pre>";die();
+                        $itp = array($all_items[$oind]);
                         $order_number = $this->controller->order->addOrder($vals, $itp);
                         $_SESSION['feedback'] .= "<p>$order_number has been created</p>";
                     }
