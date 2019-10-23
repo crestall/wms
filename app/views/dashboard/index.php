@@ -184,7 +184,7 @@ $c = 1;
         </div>
     <?php elseif($user_role == "solar_admin"):?>
         <input type="hidden" id="solar_admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
-        <input type="hidden" id="solar_admin_to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
+        <input type="hidden" id="solar_admin_to_value" value="<?php echo strtotime('last saturday', strtotime('tomorrow'));?>" />
         <div class="row">
             <div class="col-lg-6">
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installs.php");?>
