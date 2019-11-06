@@ -611,6 +611,7 @@ class OrdersController extends Controller
             $tracking_email = "";
             $signature_req = false;
             $express_post = false;
+            $store_order = false;
             $company_name = "";
             $contact_phone = "";
             $client_order_id = "";
@@ -628,6 +629,7 @@ class OrdersController extends Controller
             $tracking_email = $order['tracking_email'];
             $signature_req = $order['signature_req'] > 0;
             $express_post = $order['eparcel_express'] > 0;
+            $store_order = $order['store_order'] > 0;
             $client_order_id = $order['client_order_id'];
             $delivery_instructions = $order['instructions'];
             $comments = $order['3pl_comments'];
@@ -643,6 +645,7 @@ class OrdersController extends Controller
             'tracking_email'    =>  $tracking_email,
             'signature_req'     =>  $signature_req,
             'express_post'      =>  $express_post,
+            'store_order'       =>  $store_order,
             'company_name'      =>  $company_name,
             'contact_phone'     =>  $contact_phone,
             'client_order_id'   =>  $client_order_id,
