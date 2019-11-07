@@ -3,6 +3,7 @@ $deliver_to = empty(Form::value('deliver_to'))? $deliver_to: Form::value('delive
 $tracking_email = empty(Form::value('tracking_email'))? $tracking_email: Form::value('tracking_email');
 $signature_req = !empty(Form::value('signature_req'))? true: $signature_req;
 $express_post = !empty(Form::value('express_post'))? true: $express_post;
+$store_order = !empty(Form::value('store_order'))? true: $store_order;
 $client_order_id = empty(Form::value('client_order_id'))? $client_order_id : Form::value('client_order_id') ;
 $instructions = empty(Form::value('delivery_instructions'))? $instructions : Form::value('delivery_instructions') ;
 $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_comments') ;
@@ -114,6 +115,15 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                         <div class="col-md-4 checkbox checkbox-default">
                             <input class="form-check-input styled" type="checkbox" id="express_post" name="express_post" <?php if($express_post) echo "checked";?> />
                             <label for="express_post"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="form-check">
+                        <label class="form-check-label col-md-3" for="store_order">Store Order</label>
+                        <div class="col-md-4 checkbox checkbox-default">
+                            <input class="form-check-input styled" type="checkbox" id="store_order" name="store_order" <?php if($store_order) echo "checked";?> />
+                            <label for="store_order"></label>
                         </div>
                     </div>
                 </div>
