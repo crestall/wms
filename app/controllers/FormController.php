@@ -1672,6 +1672,7 @@ class FormController extends Controller {
                 '3pl_comments'      => NULL,
                 'uploaded_file'     => NULL,
                 'eparcel_express'   => 0,
+                'store_order'       => 0,
                 'client_order_id'   => NULL
             );
             if($this->dataSubbed($company_name))
@@ -1688,6 +1689,8 @@ class FormController extends Controller {
                 $vals['3pl_comments'] = $tpl_comments;
             if(isset($express_post))
                 $vals['eparcel_express'] = 1;
+            if(isset($store_order))
+                $vals['store_order'] = 1;
             if(isset($uploaded_file) || isset($delete_file))
             {
                 if(isset($uploaded_file))
