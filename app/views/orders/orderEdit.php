@@ -122,7 +122,7 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                     <div class="form-check">
                         <label class="form-check-label col-md-3" for="store_order">Store Order</label>
                         <div class="col-md-4 checkbox checkbox-default">
-                            <input class="form-check-input styled" type="checkbox" id="store_order" name="store_order" <?php if($express_post) echo "checked";?> />
+                            <input class="form-check-input styled" type="checkbox" id="store_order" name="store_order" <?php if($store_order) echo "checked";?> />
                             <label for="store_order"></label>
                         </div>
                     </div>
