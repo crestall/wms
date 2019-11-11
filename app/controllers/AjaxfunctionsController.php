@@ -780,8 +780,8 @@ class ajaxfunctionsController extends Controller
         }
         else
         {
-            $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'], 2);
-            $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);
+            $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35, 2);
+            $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35, 2);
         }
 
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/shipping_quotes.php', [
