@@ -130,7 +130,7 @@
             Session::set('showfeedback', true);
             $order_values['eparcel_shipment_id'] = $sResponse['shipments'][0]['shipment_id'];;
             $order_values['consignment_id'] = $sResponse['shipments'][0]['items'][0]['tracking_details']['consignment_id'];
-            $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.3, 2);
+            $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.35, 2); //GST already include 35% markup
             $order_values['charge_code'] = $sResponse['shipments'][0]['items'][0]['product_id'];
             /***************************** special deals for Big Bottle *****************************/
                 if($this->order_details['client_id'] == 6)
