@@ -738,7 +738,7 @@ class FormController extends Controller {
                     $od = $this->order->getOrderByOrderNumber($order_number);
                     //echo "<pre>",print_r($od),"</pre>";
                     $this->request->data['consignment_id'] = $r[18];
-                    $this->request->data['local_charge'] = ($r[29] + 6.46);
+                    $this->request->data['local_charge'] = ($r[29] + 6.77);  //includes fuel levy
                     $this->request->data['order_ids'] = $od['id'];
                     $this->orderfulfiller->fulfillDirectFreightOrder();
                 }
