@@ -5131,10 +5131,9 @@ class FormController extends Controller {
 
     private function uploadImage($field, $width, $height = false, $picturename = "image", $format = 'jpg', $overwrite = false, $dir = '/images/uploads/')
     {
+        //namespace Verot\Upload;
         if ($_FILES[$field]['error']  === UPLOAD_ERR_OK)
         {//////////////////////////////////////////////////////////////////////only if entered?
-
-                namespace Verot\Upload;
                 $handle = new Upload($_FILES[$field]);
                 if($handle->uploaded)
                 {
