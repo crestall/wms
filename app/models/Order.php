@@ -886,6 +886,8 @@ class Order extends Model{
 
     public function getOrderTrends($from, $to, $client_id)
     {
+        $from += 24*60*60;
+        $to += 24*60*60;
         $db = Database::openConnection();
         $query1 = "
             SELECT
