@@ -5134,7 +5134,7 @@ class FormController extends Controller {
         if ($_FILES[$field]['error']  === UPLOAD_ERR_OK)
         {//////////////////////////////////////////////////////////////////////only if entered?
 
-                $handle = new upload($_FILES[$field]);
+                $handle = new Upload($_FILES[$field]);
                 if($handle->uploaded)
                 {
                     //file uploaded.
