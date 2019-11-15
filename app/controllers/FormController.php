@@ -5134,7 +5134,8 @@ class FormController extends Controller {
         //namespace Verot\Upload;
         if ($_FILES[$field]['error']  === UPLOAD_ERR_OK)
         {//////////////////////////////////////////////////////////////////////only if entered?
-                $handle = new Upload($_FILES[$field]);
+                //$handle = new Upload($_FILES[$field]);
+                $handle = new \Verot\Upload\Upload($_FILES[$field]);
                 if($handle->uploaded)
                 {
                     //file uploaded.
