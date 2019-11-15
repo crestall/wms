@@ -10,8 +10,8 @@
     "require": {
         "php": ">=5.5.0",
         "phpmailer/phpmailer": "~5.2",
-        "verot/class.upload.php": "dev-master",
-        "mpdf/mpdf": "^7.1",
+        "verot/class.upload.php": "*",
+        "mpdf/mpdf": "^8.0.2",
         "onokumus/metismenu": "dev-master",
         "picqer/php-barcode-generator": "^0.2.2",
 		"calcinai/xero-php": "1.5.*",
