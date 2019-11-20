@@ -48,7 +48,7 @@ class Squarespace{
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-                "Postman-Token: a023abe4-57e7-4a52-85a5-f8be7e21ee42",
+                "Authorization: Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4", 
                 "cache-control: no-cache"
             ),
         ));
