@@ -62,54 +62,34 @@ class Squarespace{
 
         if ($err)
         {
-            echo "cURL Error #:" . $err;
-        }
-        else
-        {
-            //echo "<pre>Response",print_r($response),"</pre>";
-            $collected_orders = $response;
-            echo "<pre>",print_r($collected_orders),"</pre>";die();
-        }
-
-        die();
-        /*
-        $config = array(
-            'ShopUrl'   => 'https://mister-timbuktu.myshopify.com/',
-            'ApiKey'    => Config::get('TEAMTIMBUKTUAPIKEY'),
-            'Password'  => Config::get('TEAMTIMBUKTUAPIPASS')
-        );
-        $this->shopify = new PHPShopify\ShopifySDK($config);
-        $collected_orders = array();
-        $params = array(
-            'status'    => 'open',
-            'fields'    => 'id,created_at,email,note,total_weight,phone,order_number,line_items,shipping_address, shipping_lines'
-        );
-        try {
-          $collected_orders = $this->shopify->Order->get($params);
-        } catch (HttpClientException $e) {
-            echo "<pre>",print_r($e),"</pre>";die();
-            $this->output .=  $e->getMessage() .PHP_EOL;
-            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
             {
-                Email::sendCronError($e, "Big Bottle");
+                Email::sendCronError($err, "Natural Distilling Company");
                 return;
             }
             else
             {
                 $this->return_array['import_error'] = true;
-                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                $this->return_array['import_error_string'] .= print_r($err, true);
                 return $this->return_array;
             }
+
+        }
+        else
+        {
+            $collected_orders = $response;
+            //echo "<pre>",print_r($collected_orders),"</pre>";
         }
 
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
-        /*
-        if($orders = $this->procTeamTimbuktuOrders($collected_orders))
+        //die();
+
+
+        if($orders = $this->procNaturalDistillingOrders($collected_orders))
         {
             //echo "<pre>",print_r($this->teamtimbuktuoitems),"</pre>";die();
             $this->addTeamTibuktuOrders($orders);
         }
+        /*
         Logger::logOrderImports('order_imports/tt_aust', $this->output); //die();
         //if (php_sapi_name() !='cli')
         if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
@@ -199,10 +179,10 @@ class Squarespace{
     }
 
 
-    private function procTeamTimbuktuOrders($collected_orders)
+    private function procNaturalDistillingOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
-        //echo "<pre>",print_r($collected_orders),"</pre>";//die();
+        echo "procNaturalDistillingOrders<pre>",print_r($collected_orders),"</pre>";die();
         //echo $_SERVER['HTTP_USER_AGENT'];
         $orders = array();
         if(count($collected_orders))
