@@ -37,7 +37,7 @@ class Squarespace{
         $this->output .= "Natural Distilling Co ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
 
-        $curl = curl_init();
+        $ch = curl_init();
 
         $options =  array(
             CURLOPT_URL => "https://api.squarespace.com/1.0/commerce/orders?fulfillmentStatus=PENDING",
@@ -53,13 +53,15 @@ class Squarespace{
                 "cache-control: no-cache"
             ),
         );
-        curl_setopt_array($curl, $options);
+
+
+        curl_setopt_array($ch, $options);
         echo "<pre>Response",print_r($options),"</pre>";
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+        $response = curl_exec($ch);
+        $err = curl_error($ch);
 
-        curl_close($curl);
+        curl_close($ch);
 
         if ($err)
         {
