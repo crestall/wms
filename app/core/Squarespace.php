@@ -77,7 +77,7 @@ class Squarespace{
         }
         else
         {
-            $collected_orders = $response;
+            $collected_orders = $response['result'];
             //echo "<pre>",print_r($collected_orders),"</pre>";
         }
 
