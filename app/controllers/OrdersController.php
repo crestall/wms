@@ -334,7 +334,7 @@ class OrdersController extends Controller
     public function importNaturalDistillingOrders()
     {
        $response = $this->squarespace->getNatutralDistillingOrders();
-       $feedback = "<h2><i class='far fa-check-circle'></i>TT Aust Orders Imported</h2>";
+       $feedback = "<h2><i class='far fa-check-circle'></i>Natural Distilling Co Orders Imported</h2>";
        $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
        if($response['error_count'] > 0)
        {

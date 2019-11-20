@@ -64,10 +64,10 @@ class Squarespace{
         }
         else
         {
-            echo $response;
+            echo "<pre>",print_r($response),"</pre>";
         }
 
-
+        die();
         /*
         $config = array(
             'ShopUrl'   => 'https://mister-timbuktu.myshopify.com/',
@@ -112,7 +112,7 @@ class Squarespace{
         {
             return $this->return_array;
         }
-        */ 
+        */
     }
 
     private function addTeamTibuktuOrders($orders)
