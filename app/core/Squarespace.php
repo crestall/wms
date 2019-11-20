@@ -55,7 +55,8 @@ class Squarespace{
             ),
         ));
 
-        $response = json_decode(curl_exec($ch));
+        $response = curl_exec($ch);
+        $response2 = json_decode($response);
         $err = curl_error($ch);
 
         curl_close($ch);
@@ -77,7 +78,7 @@ class Squarespace{
         }
         else
         {
-            $collected_orders = $response['results'];
+            $collected_orders = $response2['results'];
             //echo "<pre>",print_r($collected_orders),"</pre>";
         }
 
