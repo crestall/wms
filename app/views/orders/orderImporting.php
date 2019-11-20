@@ -5,7 +5,7 @@
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div class="row">
         <div class="col-md-2">
-            <p><a class="btn btn-primary" href="#team_timbuktu">Team Timbuktu</a> </p>
+            <p><a class="btn btn-primary" href="#ndc">Natural Distilling Co</a> </p>
         </div>
         <div class="col-md-2">
             <p><a class="btn btn-primary" href="#nuchev">Nuchev</a></p>
@@ -34,6 +34,37 @@
     </div>
 
     <div class="bs-callout bs-callout-primary bs-callout-more">
+        <a name="ndc"></a>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Natural Distilling Co Orders</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-4">
+                <h3>Import single Order</h3>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-4">
+                <h3>Run Full Import</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-4">
+                <p><button class="btn btn-primary" id="ndc_full_import" data-function="importNaturalDistillingOrders">Run It</button></p>
+            </div>
+        </div>
+    </div>
+
+    <!--div class="bs-callout bs-callout-primary bs-callout-more">
         <a name="team_timbuktu"></a>
         <div class="row">
             <div class="col-md-12">
@@ -62,7 +93,7 @@
                 <p><button class="btn btn-primary" id="tt_full_import" data-function="importTeamTimbuktuOrders">Run It</button></p>
             </div>
         </div>
-    </div>
+    </div-->
     <div class="bs-callout bs-callout-primary bs-callout-more">
         <a name="tt_au"></a>
         <div class="row">

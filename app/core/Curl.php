@@ -58,7 +58,6 @@ class Curl{
         curl_close($ch);
         if ($err)
         {
-            //die('Could not write to eParcel API '.$err);
             Logger::log("CURL Error", $err." ".$url." ".print_r($data, true), __FILE__, __LINE__);
             return false;
         }
