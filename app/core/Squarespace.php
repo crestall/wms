@@ -57,12 +57,12 @@ class Squarespace{
         */
         curl_setopt($ch, CURLOPT_URL,"https://api.squarespace.com/1.0/commerce/orders?fulfillmentStatus=PENDING");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , "Authorization: Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4" ));
-        curl_setopt($ch, CURLOPT_ENCODING, "");
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        //curl_setopt($ch, CURLOPT_ENCODING, "");
+        //curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+        //curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        //curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        //curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         //curl_setopt_array($ch, $options);
         //echo "<pre>Response",print_r($options),"</pre>";
