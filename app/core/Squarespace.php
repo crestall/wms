@@ -39,7 +39,7 @@ class Squarespace{
 
         $ch = curl_init();
 
-        $options =  array(
+        curl_setopt_array($ch,array(
             CURLOPT_URL => "https://api.squarespace.com/1.0/commerce/orders?fulfillmentStatus=PENDING",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
@@ -51,12 +51,12 @@ class Squarespace{
                 "Authorization: Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4",
                 "Postman-Token: f867dcf4-0042-4245-81f5-531fad748452",
                 "cache-control: no-cache"
-            ),
+            )),
         );
 
 
-        curl_setopt_array($ch, $options);
-        echo "<pre>Response",print_r($options),"</pre>";
+        //curl_setopt_array($ch, $options);
+        //echo "<pre>Response",print_r($options),"</pre>";
 
         $response = curl_exec($ch);
         $err = curl_error($ch);
