@@ -51,8 +51,8 @@ class Squarespace{
                 "Authorization: Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4",
                 "Postman-Token: f867dcf4-0042-4245-81f5-531fad748452",
                 "cache-control: no-cache"
-            )),
-        );
+            ),
+        ));
 
 
         //curl_setopt_array($ch, $options);
