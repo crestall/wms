@@ -37,27 +37,25 @@ class Squarespace{
         $this->output .= "Natural Distilling Co ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
 
-        $request = new HttpRequest();
-        $request->setUrl('https://api.squarespace.com/1.0/commerce/orders');
-        $request->setMethod(HTTP_METH_GET);
+        $client = new http\Client;
+        $request = new http\Client\Request;
 
-        $request->setQueryData(array(
+        $request->setRequestUrl('https://api.squarespace.com/1.0/commerce/orders');
+        $request->setRequestMethod('GET');
+        $request->setQuery(new http\QueryString(array(
             'fulfillmentStatus' => 'PENDING'
-        ));
+        )));
 
         $request->setHeaders(array(
-            'Postman-Token' => '1bee5645-e457-4246-b892-1049cc2f0e4b',
+            'Postman-Token' => 'd1cce8db-4a84-47a2-a002-3a00a0b09af3',
             'cache-control' => 'no-cache',
             'Authorization' => 'Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4'
         ));
 
-        try {
-            $response = $request->send();
+        $client->enqueue($request)->send();
+        $response = $client->getResponse();
 
-            echo $response->getBody();
-        } catch (HttpException $ex) {
-            echo $ex;
-        }
+        echo $response->getBody();
 
         die();
         /*
