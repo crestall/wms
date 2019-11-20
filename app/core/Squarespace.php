@@ -37,25 +37,41 @@ class Squarespace{
         $this->output .= "Natural Distilling Co ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
 
-        $client = new http\Client;
-        $request = new http\Client\Request;
+        $ch = curl_init();
 
-        $request->setRequestUrl('https://api.squarespace.com/1.0/commerce/orders');
-        $request->setRequestMethod('GET');
-        $request->setQuery(new http\QueryString(array(
-            'fulfillmentStatus' => 'PENDING'
-        )));
-
-        $request->setHeaders(array(
-            'Postman-Token' => 'd1cce8db-4a84-47a2-a002-3a00a0b09af3',
-            'cache-control' => 'no-cache',
-            'Authorization' => 'Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4'
+        curl_setopt_array($ch,array(
+            CURLOPT_URL => "https://api.squarespace.com/1.0/commerce/orders?fulfillmentStatus=PENDING",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4",
+                "Postman-Token: f867dcf4-0042-4245-81f5-531fad748452",
+                "cache-control: no-cache",
+                'Content-Type: application/json'
+            ),
         ));
 
-        $client->enqueue($request)->send();
-        $response = $client->getResponse();
 
-        echo $response->getBody();
+        //curl_setopt_array($ch, $options);
+        //echo "<pre>Response",print_r($options),"</pre>";
+
+        $response = curl_exec($ch);
+        $err = curl_error($ch);
+
+        curl_close($ch);
+
+        if ($err)
+        {
+            echo "cURL Error #:" . $err;
+        }
+        else
+        {
+            echo "<pre>Response",print_r($response),"</pre>";
+        }
 
         die();
         /*
