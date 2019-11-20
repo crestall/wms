@@ -37,39 +37,26 @@ class Squarespace{
         $this->output .= "Natural Distilling Co ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
 
-        $ch = curl_init();
+        $request = new HttpRequest();
+        $request->setUrl('https://api.squarespace.com/1.0/commerce/orders');
+        $request->setMethod(HTTP_METH_GET);
 
-        curl_setopt_array($ch,array(
-            CURLOPT_URL => "https://api.squarespace.com/1.0/commerce/orders?fulfillmentStatus=PENDING",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4",
-                "Postman-Token: f867dcf4-0042-4245-81f5-531fad748452",
-                "cache-control: no-cache"
-            ),
+        $request->setQueryData(array(
+            'fulfillmentStatus' => 'PENDING'
         ));
 
+        $request->setHeaders(array(
+            'Postman-Token' => '1bee5645-e457-4246-b892-1049cc2f0e4b',
+            'cache-control' => 'no-cache',
+            'Authorization' => 'Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4'
+        ));
 
-        //curl_setopt_array($ch, $options);
-        //echo "<pre>Response",print_r($options),"</pre>";
+        try {
+            $response = $request->send();
 
-        $response = curl_exec($ch);
-        $err = curl_error($ch);
-
-        curl_close($ch);
-
-        if ($err)
-        {
-            echo "cURL Error #:" . $err;
-        }
-        else
-        {
-            echo "<pre>Response",print_r($response),"</pre>";
+            echo $response->getBody();
+        } catch (HttpException $ex) {
+            echo $ex;
         }
 
         die();
