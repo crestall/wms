@@ -13,7 +13,7 @@
 class Squarespace{
 
     private $output;
-    private $squarespace;
+    //private $squarespace;
     private $naturaldistillingitems;
     private $return_array = array(
         'import_count'          => 0,
@@ -65,7 +65,7 @@ class Squarespace{
         }
         else
         {
-            echo "<pre>",print_r($response),"</pre>";
+            echo "<pre>Response",print_r($response),"</pre>";
         }
 
         die();
