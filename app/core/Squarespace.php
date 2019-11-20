@@ -57,7 +57,7 @@ class Squarespace{
 
         $response = curl_exec($ch);
         $response2 = json_decode(json_encode($response));
-        //echo "<pre>",print_r($response2),"</pre>"; die();
+        echo "<pre>",print_r($response2),"</pre>"; die();
         $err = curl_error($ch);
 
         curl_close($ch);
