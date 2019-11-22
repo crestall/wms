@@ -322,6 +322,21 @@ return array(
         'dimensions'    =>  array(40,28,19)
     ),
     /*************************************************************************
+    * Natural Distilling Boxes
+    **************************************************************************/
+    "NDC1box" => array(
+        'weight'        => 0.2,
+        'dimensions'    => array(20,20,25)
+    ),
+    "NDC2box" => array(
+        'weight'        => 0.45,
+        'dimensions'    => array(20,40,25)
+    ),
+    "NDC4box" => array(
+        'weight'        => 1.0,
+        'dimensions'    => array(40,40,25)
+    ),
+    /*************************************************************************
     * Hide Estimated Shipping Charge From
     **************************************************************************/
     "HIDE_CHARGE_CLIENTS"   =>  array(

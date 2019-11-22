@@ -259,6 +259,12 @@ class Packaging{
         elseif($od['client_id'] == 73)   //Natural Distilling Co
         {
             echo "<pre>",print_r($items),"</pre>"; die();
+            $item_count = 0;
+            foreach($items as $i)
+            {
+                $item_count += $i['qty'];
+            }
+            return self::getNDCboxes($item_count);
         }
         //item specific packages
         else
@@ -328,6 +334,54 @@ class Packaging{
                 }
 
             }
+        }
+
+        return $return;
+    }
+
+    private static function getNDCboxes($qty)
+    {
+        $return = array();
+        if($qty > 4)
+        {
+            return false;
+        }
+        elseif($qty == 4)
+        {
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC4box')['weight'],
+                'dimensions'    =>  Config::get('NDC4box')['dimensions']
+            );
+        }
+        elseif($qty == 3)
+        {
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC1box')['weight'],
+                'dimensions'    =>  Config::get('NDC1box')['dimensions']
+            );
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC2box')['weight'],
+                'dimensions'    =>  Config::get('NDC2box')['dimensions']
+            );
+        }
+        elseif($qty == 2)
+        {
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC2box')['weight'],
+                'dimensions'    =>  Config::get('NDC2box')['dimensions']
+            );
+        }
+        elseif($qty == 1)
+        {
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC1box')['weight'],
+                'dimensions'    =>  Config::get('NDC1box')['dimensions']
+            );
         }
 
         return $return;
