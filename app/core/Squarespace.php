@@ -56,8 +56,8 @@ class Squarespace{
         ));
 
         $response = curl_exec($ch);
-        $response2 = json_decode(json_encode($response),true);
-        echo "<pre>",print_r($response2),"</pre>"; die();
+        $response2 = json_decode($response, true);
+        //echo "<pre>",print_r($response2['result']),"</pre>"; die();
         $err = curl_error($ch);
 
         curl_close($ch);
@@ -184,7 +184,7 @@ class Squarespace{
     private function procNaturalDistillingOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
-        echo "procNaturalDistillingOrders<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "procNaturalDistillingOrders<pre>",print_r($collected_orders),"</pre>";die();
         //echo $_SERVER['HTTP_USER_AGENT'];
         $orders = array();
         if(count($collected_orders))
@@ -202,38 +202,38 @@ class Squarespace{
                     'error_string'          => '',
                     'items'                 => array(),
                     'ref2'                  => '',
-                    'client_order_id'       => $o['order_number'],
+                    'client_order_id'       => $o['orderNumber'],
                     'errors'                => 0,
-                    'tracking_email'        => $o['email'],
-                    'ship_to'               => $o['shipping_address']['first_name']." ".$o['shipping_address']['last_name'],
-                    'company_name'          => $o['shipping_address']['company'],
-                    'date_ordered'          => strtotime( $o['created_at'] ),
+                    'tracking_email'        => $o['customerEmail'],
+                    'ship_to'               => $o['shippingAddress']['firstName']." ".$o['shippingAddress']['lastName'],
+                    'date_ordered'          => strtotime( $o['createdOn'] ),
                     'status_id'             => $this->controller->order->ordered_id,
                     'eparcel_express'       => 0,
                     'signature_req'         => 0,
-                    'contact_phone'         => $o['shipping_address']['phone'],
+                    'contact_phone'         => $o['shippingAddress']['phone'],
                     'import_error'          => false,
-                    'import_error_string'   => ''
+                    'import_error_string'   => '',
+                    'delivery_instructions'	=>	"Please leave in a safe place out of the weather"
                 );
-                //if(strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
-                if(isset($o['shipping_lines'][0]) && strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
-                if( !filter_var($o['email'], FILTER_VALIDATE_EMAIL) )
+                //echo "procNaturalDistillingOrder<pre>",print_r($order),"</pre>";die();
+                //if(isset($o['shipping_lines'][0]) && strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
+                if( !filter_var($o['customerEmail'], FILTER_VALIDATE_EMAIL) )
                 {
                     $order['errors'] = 1;
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
                 //validate address
                 $ad = array(
-                    'address'   => $o['shipping_address']['address1'],
-                    'address_2' => $o['shipping_address']['address2'],
-                    'suburb'    => $o['shipping_address']['city'],
-                    'state'     => $o['shipping_address']['province_code'],
-                    'postcode'  => $o['shipping_address']['zip'],
-                    'country'   => $o['shipping_address']['country_code']
+                    'address'   => $o['shippingAddress']['address1'],
+                    'address_2' => $o['shippingAddress']['address2'],
+                    'suburb'    => $o['shippingAddress']['city'],
+                    'state'     => $o['shippingAddress']['state'],
+                    'postcode'  => $o['shippingAddress']['postalCode'],
+                    'country'   => $o['shippingAddress']['countryCode']
                 );
                 if($ad['country'] == "AU")
                 {
-                    if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40 || strlen($order['company_name'])  > 40)
+                    if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40)
                     {
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
@@ -262,7 +262,7 @@ class Squarespace{
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
                     }
-                    if( strlen($order['ship_to']) > 30 || strlen($order['company_name']) > 30 )
+                    if( strlen($order['ship_to']) > 30 )
                     {
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
@@ -274,14 +274,15 @@ class Squarespace{
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
+
                 $qty = 0;
-                foreach($o['line_items'] as $item)
+                foreach($o['lineItems'] as $item)
                 {
                     $product = $this->controller->item->getItemBySku($item['sku']);
                     if(!$product)
                     {
                         $items_errors = true;
-                        $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        $mm .= "<li>Could not find {$item['productName']} in WMS based on {$item['sku']}</li>";
                     }
                     else
                     {
@@ -297,19 +298,8 @@ class Squarespace{
                     }
 
                 }
-                if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
-                if(empty($o['note']))
-                {
-                    if( $qty > 1 || !empty($o['shipping_address']['company']) )
-                        $delivery_instructions =  "";
-                    else
-                        $delivery_instructions =  "Please leave in a safe place out of the weather";
-                }
-                else
-                {
-                    $delivery_instructions = $o['note'];
-                }
-                $order['instructions'] = $delivery_instructions;
+                //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
+
                 //echo "<pre>",print_r($order),"</pre>";die();
                 if($items_errors)
                 {
@@ -340,15 +330,14 @@ class Squarespace{
                 else
                 {
                     $order['quantity'] = $qty;
-                    $order['weight'] = $o['total_weight'];
-                    //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
+                     //$order['weight'] = $o['total_weight'];
                     $order['items'] = $items;
-                    $orders_items[$o['order_number']] = $items;
+                    $orders_items[$o['orderNumber']] = $items;
                     $order = array_merge($order, $ad);
                     $orders[] = $order;
                 }
             }//endforeach order
-            //echo "<pre>",print_r($orders),"</pre>";//die();
+            //echo "All orders<pre>",print_r($orders),"</pre>";die();
             $this->teamtimbuktuoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
 
             return $orders;
@@ -359,6 +348,7 @@ class Squarespace{
             $this->output .= "No New Orders";
             $this->output .= "=========================================================================================================".PHP_EOL;
         }
+        die();
         return false;
     }
 
