@@ -258,7 +258,7 @@ class Packaging{
         }
         elseif($od['client_id'] == 73)   //Natural Distilling Co
         {
-            echo "<pre>",print_r($items),"</pre>"; die();
+            //echo "<pre>",print_r($items),"</pre>"; die();
             $item_count = 0;
             foreach($items as $i)
             {
