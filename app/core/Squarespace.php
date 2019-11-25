@@ -82,23 +82,96 @@ class Squarespace{
             $collected_orders = $response2['result'];
             //echo "<pre>",print_r($collected_orders),"</pre>";
         }
-
-        //die();
-
-
         if($orders = $this->procNaturalDistillingOrders($collected_orders))
         {
-            //echo "<pre>",print_r($this->teamtimbuktuoitems),"</pre>";die();
-            $this->addTeamTibuktuOrders($orders);
+            $this->addNDCOrders($orders);
         }
-        /*
-        Logger::logOrderImports('order_imports/tt_aust', $this->output); //die();
+        /*  */
+        Logger::logOrderImports('order_imports/natural_distilling_company', $this->output); //die();
         //if (php_sapi_name() !='cli')
         if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
         {
             return $this->return_array;
         }
-        */
+
+    }
+
+    private function addNDCOrders($orders)
+    {
+        foreach($orders as $o)
+        {
+            //check for errors first
+            $item_error = false;
+            $error_string = "";
+            foreach($this->naturaldistillingitems[$o['client_order_id']] as $item)
+            {
+                if($item['item_error'])
+                {
+                    $item_error = true;
+                    $error_string .= $item['item_error_string'];
+                }
+            }
+            if($item_error)
+            {
+                $message = "<p>There was a problem with some items</p>";
+                $message .= $error_string;
+                $message .= "<p>Orders with these items will not be processed at the moment</p>";
+                $message .= "<p>Order ID: {$o['client_order_id']}</p>";
+                $message .= "<p>Customer: {$o['ship_to']}</p>";
+                $message .= "<p>Address: {$o['address']}</p>";
+                $message .= "<p>{$o['address_2']}</p>";
+                $message .= "<p>{$o['suburb']}</p>";
+                $message .= "<p>{$o['state']}</p>";
+                $message .= "<p>{$o['postcode']}</p>";
+                $message .= "<p>{$o['country']}</p>";
+                $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
+                //if (php_sapi_name() !='cli')
+                if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+                {
+                    ++$this->return_array['error_count'];
+                    $this->return_array['error_string'] .= $message;
+                }
+                else
+                {
+                    //Email::sendBBImportError($message);
+
+                }
+                continue;
+            }
+            if($o['import_error'])
+            {
+                $this->return_array['import_error'] = true;
+                $this->return_array['import_error_string'] = $o['import_error_string'];
+                continue;
+            }
+            //insert the order
+            $vals = array(
+                'client_order_id'       => $o['client_order_id'],
+                'client_id'             => 73,
+                'deliver_to'            => $o['ship_to'],
+                'company_name'          => $o['company_name'],
+                'date_ordered'          => $o['date_ordered'],
+                'tracking_email'        => $o['tracking_email'],
+                'delivery_instructions' => $o['delivery_instructions'],
+                'errors'                => $o['errors'],
+                'error_string'          => $o['error_string'],
+                'address'               => $o['address'],
+                'address2'              => $o['address_2'],
+                'state'                 => $o['state'],
+                'suburb'                => $o['suburb'],
+                'postcode'              => $o['postcode'],
+                'country'               => $o['country'],
+                'contact_phone'         => $o['contact_phone']
+            );
+            if($o['signature_req'] == 1) $vals['signature_req'] = 1;
+            if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
+            $itp = array($this->naturaldistillingitems[$o['client_order_id']]);
+            $order_number = $this->controller->order->addOrder($vals, $itp);
+            $this->output .= "Inserted Order: $order_number".PHP_EOL;
+            $this->output .= print_r($vals,true).PHP_EOL;
+            $this->output .= print_r($this->naturaldistillingitems[$o['client_order_id']], true).PHP_EOL;
+            ++$this->return_array['import_count'];
+        }
     }
 
     private function addTeamTibuktuOrders($orders)
@@ -154,9 +227,11 @@ class Squarespace{
                 'client_order_id'       => $o['client_order_id'],
                 'client_id'             => 69,
                 'deliver_to'            => $o['ship_to'],
+                'company_name'          => $o['company_name'],
                 'date_ordered'          => $o['date_ordered'],
                 'tracking_email'        => $o['tracking_email'],
-                'delivery_instructions' => $o['delivery_instructions'],
+                'weight'                => $o['weight'],
+                'delivery_instructions' => $o['instructions'],
                 'errors'                => $o['errors'],
                 'error_string'          => $o['error_string'],
                 'address'               => $o['address'],
@@ -316,7 +391,7 @@ class Squarespace{
                     //if (php_sapi_name() == 'cli')
                     if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
                     {
-                        Email::sendTTImportError($message);
+                        Email::sendNDCImportError($message);
                     }
                     else
                     {
@@ -336,7 +411,7 @@ class Squarespace{
                 }
             }//endforeach order
             //echo "All orders<pre>",print_r($orders),"</pre>";die();
-            $this->teamtimbuktuoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            $this->naturaldistillingitems = $this->controller->allocations->createOrderItemsArray($orders_items);
 
             return $orders;
         }//end if count orders
@@ -346,7 +421,7 @@ class Squarespace{
             $this->output .= "No New Orders";
             $this->output .= "=========================================================================================================".PHP_EOL;
         }
-        die();
+        //die();
         return false;
     }
 
