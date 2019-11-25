@@ -171,7 +171,7 @@ class Squarespace{
             $this->output .= print_r($this->naturaldistillingitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
             //update the online shop
-            //$this->closeNDCOrder($o['squarespace_id']);
+            $this->closeNDCOrder($o['squarespace_id']);
         }
     }
 
