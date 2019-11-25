@@ -148,8 +148,7 @@ class Squarespace{
             $vals = array(
                 'client_order_id'       => $o['client_order_id'],
                 'client_id'             => 73,
-                'deliver_to'            => $o['ship_to'],
-                'company_name'          => $o['company_name'],
+                'deliver_to'            => $o['ship_to'], 
                 'date_ordered'          => $o['date_ordered'],
                 'tracking_email'        => $o['tracking_email'],
                 'delivery_instructions' => $o['delivery_instructions'],
