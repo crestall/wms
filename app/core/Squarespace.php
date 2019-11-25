@@ -148,7 +148,7 @@ class Squarespace{
             $vals = array(
                 'client_order_id'       => $o['client_order_id'],
                 'client_id'             => 73,
-                'deliver_to'            => $o['ship_to'], 
+                'deliver_to'            => $o['ship_to'],
                 'date_ordered'          => $o['date_ordered'],
                 'tracking_email'        => $o['tracking_email'],
                 'delivery_instructions' => $o['delivery_instructions'],
@@ -170,7 +170,35 @@ class Squarespace{
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($this->naturaldistillingitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
+            //update the online shop
+            $this->closeNDCOrder($o['squarespace_id']);
         }
+    }
+
+    private function closeNDCOrder($ndc_orderid)
+    {
+        echo "closeNDCOrder<pre>".$ndc_orderid."</pre>";die();
+        $ch = curl_init();
+
+        curl_setopt_array($ch,array(
+            CURLOPT_URL => "https://api.squarespace.com/1.0/commerce/orders/".$ndc_orderid."/fulfillments",
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4",
+                "cache-control: no-cache",
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($ch);
+        $response2 = json_decode($response, true);
+        //echo "<pre>",print_r($response2['result']),"</pre>"; die();
     }
 
     private function addTeamTibuktuOrders($orders)
@@ -285,7 +313,8 @@ class Squarespace{
                     'contact_phone'         => $o['shippingAddress']['phone'],
                     'import_error'          => false,
                     'import_error_string'   => '',
-                    'delivery_instructions'	=>	"Please leave in a safe place out of the weather"
+                    'delivery_instructions'	=>	"Please leave in a safe place out of the weather",
+                    'squarespace_id'        => $o['id']
                 );
                 //echo "procNaturalDistillingOrder<pre>",print_r($order),"</pre>";die();
                 //if(isset($o['shipping_lines'][0]) && strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
