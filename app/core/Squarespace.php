@@ -177,7 +177,7 @@ class Squarespace{
 
     private function closeNDCOrder($ndc_orderid)
     {
-        echo "closeNDCOrder<pre>".$ndc_orderid."</pre>";die();
+        //echo "closeNDCOrder<pre>".$ndc_orderid."</pre>";die();
         $ch = curl_init();
 
         curl_setopt_array($ch,array(
@@ -189,6 +189,7 @@ class Squarespace{
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "{\n    \"shouldSendNotification\": false\n}",
             CURLOPT_HTTPHEADER => array(
                 "Authorization: Bearer 95f6b0a4-8bd7-456d-b4b3-809ce1e2aec4",
                 "cache-control: no-cache",
@@ -198,7 +199,8 @@ class Squarespace{
 
         $response = curl_exec($ch);
         $response2 = json_decode($response, true);
-        //echo "<pre>",print_r($response2['result']),"</pre>"; die();
+        echo "<pre>The result",print_r($response2['result']),"</pre>"; die();
+
     }
 
     private function addTeamTibuktuOrders($orders)
