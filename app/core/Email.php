@@ -262,6 +262,38 @@
             throw new Exception("Email couldn't be sent ");
         }
     }
+
+    public static function sendNDCImportError($message)
+    {
+        $mail = new PHPMailer();
+
+        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."naturaldistillingcoimporterror.html");
+        $replace_array = array("{CONTENT}");
+		$replace_with_array = array($message);
+		$body = str_replace($replace_array, $replace_with_array, $body);
+
+        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+		//$mail->AddAddress('hello@teamtimbuktu.com', 'Rhianna Knight');
+        $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
+
+		//$mail->AddBCC('customersupport@3plplus.com.au');
+
+        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+
+		$mail->Subject = "Order with item error for Natural Distilling Company";
+
+        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+
+		$mail->MsgHTML($body);
+
+        if(!$mail->Send())
+        {
+            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+            throw new Exception("Email couldn't be sent ");
+        }
+    }
+
     public static function sendFigure8ImportError($message, $subject = "Order Importing Error")
     {
         $mail = new PHPMailer();

@@ -55,6 +55,8 @@ class Controller {
 
     public $shopify;
 
+    public $squarespace;
+
     public $allocations;
 
     public $courierselector;
@@ -74,6 +76,7 @@ class Controller {
         $this->view                =  new View($this);
         $this->redirector          =  new Redirector();
         $this->woocommerce         =  new Woocommerce($this);
+        $this->squarespace         =  new Squarespace($this);
         $this->shopify             =  new Shopify($this);
         $this->allocations         =  new Allocations($this);
         $this->courierselector     =  new CourierSelector($this);

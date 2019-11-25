@@ -146,7 +146,8 @@ class OrdersController extends Controller
             'bb_clientid'       =>  $this->client->getClientId("THE BIG BOTTLE CO"),
             'nuchev_clientid'   =>  $this->client->getClientId("NUCHEV"),
             'noa_clientid'      =>  $this->client->getClientId("Noa Sleep"),
-            'ttau_clientid'     =>  $this->client->getClientId("Two T Australia")
+            'ttau_clientid'     =>  $this->client->getClientId("Two T Australia"),
+            'ndc_clientid'      =>  $this->client->getClientId("Natural Distilling Co")
         ]);
     }
 
@@ -319,6 +320,21 @@ class OrdersController extends Controller
     {
        $response = $this->woocommerce->getTTOrders();
        $feedback = "<h2><i class='far fa-check-circle'></i>TT Aust Orders Imported</h2>";
+       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
+       if($response['error_count'] > 0)
+       {
+           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
+           $feedback .= "<p>The error response is listed below</p>";
+           $feedback .= $response['error_string'];
+       }
+       Session::set('feedback', $feedback);
+       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
+    }
+
+    public function importNaturalDistillingOrders()
+    {
+       $response = $this->squarespace->getNatutralDistillingOrders();
+       $feedback = "<h2><i class='far fa-check-circle'></i>Natural Distilling Co Orders Imported</h2>";
        $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
        if($response['error_count'] > 0)
        {

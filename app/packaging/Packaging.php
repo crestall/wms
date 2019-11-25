@@ -256,6 +256,37 @@ class Packaging{
                 $return[] = $array;
             }
         }
+        elseif($od['client_id'] == 73)   //Natural Distilling Co
+        {
+            //echo "<pre>",print_r($items),"</pre>"; die();
+            $item_count = 0;
+            foreach($items as $i)
+            {
+                $item_count += $i['qty'];
+            }
+            $boxes = self::getNDCboxes($item_count);
+            //$array['item_reference'] = Utility::generateRandString();
+            foreach($boxes as $b)
+            {
+                list($w, $d, $h) = $b['dimensions'];
+                $c = 0;
+                while($c < $b['count'])
+                {
+                    $array = array();
+                    $array['item_reference'] = Utility::generateRandString();
+                    $array['width'] = $w;
+                    $array['height'] = $h;
+                    $array['depth'] = $d;
+                    $array['weight'] = $b['weight'];
+                    $array['pieces'] = 1;
+                    $array['type_code'] = 'CTN';
+                    $return[] = $array;
+                    ++$c;
+                }
+            }
+
+            //$return[] = $array;
+        }
         //item specific packages
         else
         {
@@ -324,6 +355,54 @@ class Packaging{
                 }
 
             }
+        }
+
+        return $return;
+    }
+
+    private static function getNDCboxes($qty)
+    {
+        $return = array();
+        if($qty > 4)
+        {
+            return false;
+        }
+        elseif($qty == 4)
+        {
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC4box')['weight'],
+                'dimensions'    =>  Config::get('NDC4box')['dimensions']
+            );
+        }
+        elseif($qty == 3)
+        {
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC1box')['weight'],
+                'dimensions'    =>  Config::get('NDC1box')['dimensions']
+            );
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC2box')['weight'],
+                'dimensions'    =>  Config::get('NDC2box')['dimensions']
+            );
+        }
+        elseif($qty == 2)
+        {
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC2box')['weight'],
+                'dimensions'    =>  Config::get('NDC2box')['dimensions']
+            );
+        }
+        elseif($qty == 1)
+        {
+            $return[] = array(
+                'count'         => 1,
+                'weight'        =>  Config::get('NDC1box')['weight'],
+                'dimensions'    =>  Config::get('NDC1box')['dimensions']
+            );
         }
 
         return $return;
