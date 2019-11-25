@@ -325,16 +325,16 @@ return array(
     * Natural Distilling Boxes
     **************************************************************************/
     "NDC1box" => array(
-        'weight'        => 0.2,
-        'dimensions'    => array(20,20,25)
+        'weight'        => 1.8,
+        'dimensions'    => array(28,14,14)
     ),
     "NDC2box" => array(
-        'weight'        => 0.45,
-        'dimensions'    => array(20,40,25)
+        'weight'        => 3.6,
+        'dimensions'    => array(28,14,29)
     ),
     "NDC4box" => array(
-        'weight'        => 1.0,
-        'dimensions'    => array(40,40,25)
+        'weight'        => 7.2,
+        'dimensions'    => array(28,29,29)
     ),
     /*************************************************************************
     * Hide Estimated Shipping Charge From
@@ -342,6 +342,7 @@ return array(
     "HIDE_CHARGE_CLIENTS"   =>  array(
         59, //noasleep
         69, //Team Timbuktu
+        73, //Natural Distilling Co
     ),
     /*************************************************************************
     * Pages and icons
