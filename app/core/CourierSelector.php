@@ -131,6 +131,12 @@
             $order_values['eparcel_shipment_id'] = $sResponse['shipments'][0]['shipment_id'];;
             $order_values['consignment_id'] = $sResponse['shipments'][0]['items'][0]['tracking_details']['consignment_id'];
             $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.35, 2); //GST already include 35% markup
+            /*********** charge FREEDOM more *******************/
+                if($this->order_details['client_id'] == 7)
+                {
+                    $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.4, 2);
+                }
+            /*********** charge FREEDOM more *******************/
             $order_values['charge_code'] = $sResponse['shipments'][0]['items'][0]['product_id'];
             /***************************** special deals for Big Bottle *****************************/
                 if($this->order_details['client_id'] == 6)
@@ -218,7 +224,13 @@
             Session::set('showfeedback', true);
             $hunters_label = $result['shippingLabel'];
             $hunters_tracking = $result['trackingNumber'];
-            $hunters_charge = round($result['fee'] * 1.1 * Config::get('HUNTERS_FUEL_SURCHARGE') * 1.3, 2) ;
+            $hunters_charge = round($result['fee'] * 1.1 * Config::get('HUNTERS_FUEL_SURCHARGE') * 1.35, 2) ;
+            /*********** charge FREEDOM more *******************/
+                if($this->order_details['client_id'] == 7)
+                {
+                    $hunters_charge = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.4, 2);
+                }
+            /*********** charge FREEDOM more *******************/
             //add heavy goods surcharge
             if($this->client_details['heavy_goods'] > 0)
                 $hunters_charge += 30;
