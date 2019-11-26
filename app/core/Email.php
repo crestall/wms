@@ -871,8 +871,8 @@
 		$mail->Subject = "Your Order With $client_name Has Been Dispatched";
 		$mail->MsgHTML($body);
 
-		//$mail->AddAddress($od['tracking_email'], $od['ship_to']);
-        $mail->AddAddress("mark.solly@3plplus.com.au", "Mark Solly");
+		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
+        $mail->AddBCC("mark.solly@3plplus.com.au", "Mark Solly");
 
         if(!$mail->Send())
 		{
