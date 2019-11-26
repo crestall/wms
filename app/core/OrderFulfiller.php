@@ -516,8 +516,8 @@
                     $this->removeStock($items, $id);
         		}
                 Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>Manifest ID: $order_id successfully created and submitted to eParcel</p>";
-                //$_SESSION['feedback'] .= "<p>Manifest ID: AP04177950 successfully created and submitted to eParcel</p>";
+                //$_SESSION['feedback'] .= "<p>Manifest ID: $order_id successfully created and submitted to eParcel</p>";
+                $_SESSION['feedback'] .= "<p>Manifest ID: AP04177950 successfully created and submitted to eParcel</p>";
             }
             ++$c;
         }
