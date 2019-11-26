@@ -445,11 +445,11 @@
             $eParcelClass = "Eparcel";
             if(!is_null($client_details['eparcel_location']))
                 $eParcelClass = $client_details['eparcel_location']."Eparcel";
-            /* */
+            /*
             $response = $this->controller->{$eParcelClass}->CreateOrderFromShipment($array['request']);
             $this->output .= "eParcel create order response".PHP_EOL;
             $this->output .= print_r($response, true);
-
+            */
             if(isset($response['errors']))
         	{
         	    Session::set('showerrorfeedback', true);
@@ -461,6 +461,7 @@
         	}
             else
             {
+                /*
         		$order_id = $response['order']['order_id'];
                 $values = array(
                    	'manifest_id'	=>	$order_id,
@@ -473,12 +474,12 @@
         		$eparcel_order_id = $db->insertQuery('eparcel_orders', $values);
 
         		$this->controller->{$eParcelClass}->GetOrderSummary($order_id, $eparcel_order_id);
-
+                */
         		foreach($array['order_ids'] as $id)
         		{
         	        $o_values = array(
-        				'eparcel_order_id'	=>	$eparcel_order_id,
-                        //'eparcel_order_id'	=>	1322,
+        				//'eparcel_order_id'	=>	$eparcel_order_id,
+                        'eparcel_order_id'	=>	1322,
         				'status_id'			=>	$this->controller->order->fulfilled_id,
         				'date_fulfilled'	=>	time()
         			);
@@ -492,6 +493,10 @@
                         if($od['client_id'] == 69)
                         {
                             //Email::notifyTeamTimbuktu($id);
+                        }
+                        elseif($od['client_id'] == 69)
+                        {
+                            Email::sendNDCTracking($id);
                         }
                         else
                         {
