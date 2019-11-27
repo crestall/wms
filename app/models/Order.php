@@ -965,8 +965,11 @@ class Order extends Model{
                 FROM
                     orders o
                 WHERE
-                    o.date_fulfilled >= ((UNIX_TIMESTAMP('2019-08-26')) - (60*24*60*60)) AND o.date_fulfilled <= (UNIX_TIMESTAMP('2019-11-30')) AND o.client_id = 59
-                GROUP BY
+                    o.date_fulfilled >= ((UNIX_TIMESTAMP('2019-08-26')) - (60*24*60*60)) AND o.date_fulfilled <= (UNIX_TIMESTAMP('2019-11-30'))";
+
+                if($client_id > 0)
+                    $query1 .= " AND o.client_id = ".$client_id;
+            $query1 = "    GROUP BY
                     WEEK(DATE(FROM_UNIXTIME(o.date_fulfilled))), YEAR(DATE(FROM_UNIXTIME(o.date_fulfilled)))
 
             ) b ON b.date_fulfilled BETWEEN a.date_fulfilled - (60*24*60*60) AND a.date_fulfilled
