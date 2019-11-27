@@ -1025,8 +1025,10 @@ class Order extends Model{
 
     public function getClientActivity($from, $to)
     {
+        //$from += 24*60*60;
+        //$to += 24*60*60;
         $from = strtotime('yesterday', strtotime('-3 months'));
-        $to = strtotime("tomorrow", strtotime('this Friday'));
+        $to = strtotime("tomorrow");
         $db = Database::openConnection();
         $query1 = "
             SELECT
@@ -1150,8 +1152,8 @@ class Order extends Model{
 
     public function getPickErrors($from, $to, $client_id = 0)
     {
-        $from += 24*60*60;
-        $to += 24*60*60;
+        $from = strtotime('yesterday', strtotime('-3 months'));
+        $to = strtotime("tomorrow", strtotime('this Friday'));
         $db = Database::openConnection();
 
         $query1 = "
