@@ -1225,6 +1225,8 @@ class Order extends Model{
 
     public function getTopProducts($from, $to, $client_id)
     {
+        $from = strtotime('yesterday', strtotime('-3 months'));
+        $to = strtotime("tomorrow");
         $db = Database::openConnection();
         $query1 = "
             SELECT
