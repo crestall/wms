@@ -203,6 +203,18 @@ class TasksController extends Controller
         }
     }
 
+    public function naturalDistillingCoTask()
+    {
+        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->squarespace->getNatutralDistillingOrders();
+        }
+    }
+
     public function nuchevTask()
     {
         if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
