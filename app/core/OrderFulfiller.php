@@ -35,7 +35,7 @@
             $od = $this->controller->order->getOrderDetail($id);
             if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
             {
-                //Session::set('showfeedback', true);
+                Session::set('showfeedback', true);
                 if(!array_key_exists($od['client_id'], $eparcel_clients))
         		{
                     $eparcel_clients[$od['client_id']]['request'] = array(
