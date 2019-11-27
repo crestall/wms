@@ -883,7 +883,7 @@ class Order extends Model{
         //die($q);
         return ($db->queryData($q));
     }
-
+    /*
     public function getOrderTrends($from, $to, $client_id)
     {
         //$from += 24*60*60;
@@ -922,6 +922,75 @@ class Order extends Model{
             $row_array[0] = date("d/m/y", $o['friday']);
             $row_array[1] = $o['total_orders'];
 
+            $return_array[] = $row_array;
+        }
+
+        return $return_array;
+    }
+    */
+    public function getOrderTrends($from, $to, $client_id)
+    {
+        //$from += 24*60*60;
+        //$to += 24*60*60;
+        $from = strtotime('yesterday', strtotime('-3 months'));
+        $to = strtotime("tomorrow", strtotime('this Friday'));
+        $db = Database::openConnection();
+        $query1 = "
+            SELECT
+                a.date_index,
+                a.total_orders,
+                ROUND(AVG(b.total_orders), 1) AS order_average
+            FROM
+            (
+                SELECT
+                    count(*) as total_orders,
+                    o.date_fulfilled,
+                    DATE(FROM_UNIXTIME(o.date_fulfilled)) AS 'date_index'
+                FROM
+                    orders o
+                WHERE
+                    o.date_fulfilled >= $from AND o.date_fulfilled <= $to
+        ";
+
+
+        if($client_id > 0)
+            $query1 .= " AND o.client_id = ".$client_id;
+        $query1 .= "  GROUP BY
+                WEEK(DATE(FROM_UNIXTIME(o.date_fulfilled))), YEAR(DATE(FROM_UNIXTIME(o.date_fulfilled)))
+            )a JOIN
+            (
+                SELECT
+                    count(*) as total_orders,
+                    o.date_fulfilled
+                FROM
+                    orders o
+                WHERE
+                    o.date_fulfilled >= ((UNIX_TIMESTAMP('2019-08-26')) - (60*24*60*60)) AND o.date_fulfilled <= (UNIX_TIMESTAMP('2019-11-30')) AND o.client_id = 59
+                GROUP BY
+                    WEEK(DATE(FROM_UNIXTIME(o.date_fulfilled))), YEAR(DATE(FROM_UNIXTIME(o.date_fulfilled)))
+
+            ) b ON b.date_fulfilled BETWEEN a.date_fulfilled - (60*24*60*60) AND a.date_fulfilled
+            GROUP BY
+                a.date_fulfilled
+                ";
+        echo $query1; die();
+
+        $orders = $db->queryData($query1);
+
+        $return_array = array(
+            array(
+                'Week Beginning',
+                'Total Orders',
+                'Order Average'
+            )
+        );
+
+        foreach($orders as $o)
+        {
+            $row_array = array();
+            $row_array[0] = $o['date_index'];
+            $row_array[1] = $o['total_orders'];
+            $row_array[2] = $o['order_average'];
             $return_array[] = $row_array;
         }
 
