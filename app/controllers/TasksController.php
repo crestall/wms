@@ -203,7 +203,7 @@ class TasksController extends Controller
         }
     }
 
-    public function naturalDistillingCoTask()
+    public function ndcTask()
     {
         if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
         {
