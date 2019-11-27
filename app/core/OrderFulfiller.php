@@ -500,11 +500,10 @@
                         }
                         else
                         {
-                            $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-                            //$mailer->sendTrackingEmail($id);
                             Email::sendTrackingEmail($id);
-                            $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
                         }
+                        $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                        $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
                     }
                     if($od['client_id'] == 52) //figure8
                     {
