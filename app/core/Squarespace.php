@@ -133,7 +133,7 @@ class Squarespace{
                 }
                 else
                 {
-                    //Email::sendBBImportError($message);
+                    Email::sendNDCImportError($message);
 
                 }
                 continue;
