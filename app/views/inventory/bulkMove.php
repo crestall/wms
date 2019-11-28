@@ -33,7 +33,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>SKU</th>
-                                <th>Locations</th>
+                                <th>Current Locations</th>
                                 <th></th>
                             </tr>
                         </thead>
