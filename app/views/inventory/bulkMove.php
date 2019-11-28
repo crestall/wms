@@ -33,11 +33,6 @@
                             <tr>
                                 <th>Name</th>
                                 <th>SKU</th>
-                                <th>Barcode</th>
-                                <th>On Hand</th>
-                                <th>Allocated</th>
-                                <th>Under Quality Control</th>
-                                <th>Available</th>
                                 <th>Locations</th>
                                 <th></th>
                             </tr>
@@ -49,15 +44,8 @@
                                 $ls = "";
                                 foreach($details['locations'] as $l)
                                 {
-                                    $ls .= $l['name']." (".$l['onhand'].")";
-                                    if($l['allocated'] > 0)
-                                    {
-                                        $ls .= " Allocated (".$l['allocated'].")";
-                                    }
-                                    if($l['qc_count'] > 0)
-                                    {
-                                        $ls .= " Under Quality Control (".$l['qc_count'].")";
-                                    }
+                                    $atm = $l['onhand'] - $l['allocated'] - $l['qc_count'];
+                                    $ls .= $l['name']." ( can move ".$atm.")";
                                     $ls .= "<br/>";
                                 }
                                 $ls = rtrim($ls, "<br/>");
@@ -65,11 +53,6 @@
                                 <tr>
                                     <td data-label="Name"><a href="/products/edit-product/product=<?php echo $item_id;?>"><?php echo $details['name'];?></a></td>
                                     <td data-label="SKU"><?php echo $details['sku'];?></td>
-                                    <td data-label="Barcode" class="number"><?php echo $details['barcode'];?></td>
-                                    <td data-label="On Hand" class="number"><?php echo $details['onhand'];?></td>
-                                    <td data-label="Allocated" class='number'><?php echo $details['allocated'];?></td>
-                                    <td data-label="Under Quality Control" class="number"><?php echo $details['qc_count'];?></td>
-                                    <td data-label="Available" class="number"><?php echo $available;?></td>
                                     <td data-label="Locations" class="text-nowrap"><?php echo $ls;?></td>
                                     <td>
                                         <?php if($details['pack_item'] > 0):?>
