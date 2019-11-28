@@ -172,6 +172,11 @@
                                 window.location.href = "/inventory/move-bulk-items/client=" + $(this).val();
                             }
                         });
+                        dataTable.init($('table#view_items_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [1,2,7,8] }
+                            ]
+                        } );
                     }
                 },
                 'view-solar-inventory': {
