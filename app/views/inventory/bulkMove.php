@@ -28,6 +28,14 @@
         <div class="row" id="table_holder" style="display:none">
             <?php if(count($products)):?>
                 <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Move selected items to</label>
+                        <div class="col-md-4">
+                            <select id="move_to_location" name="move_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations(Form::value('move_to_location'));?></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
                     <table class="table-striped table-hover" id="view_items_table">
                         <thead>
                             <tr>
