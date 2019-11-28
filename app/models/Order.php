@@ -983,7 +983,7 @@ class Order extends Model{
         $return_array = array(
             array(
                 'Week Beginning',
-                'Total Orders',
+                'Total Orders Per Week',
                 '3 Month Weekly Average'
             )
         );
