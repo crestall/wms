@@ -193,12 +193,6 @@
                                 					viewWindow: {
                                 						min: 0
                                 					}
-                                				},
-                                                1: {
-                                					title: 'Average Weekly Orders',
-                                					viewWindow: {
-                                						min: 0
-                                					}
                                 				}
                                 			},
                                 			legend: {
@@ -207,7 +201,7 @@
                                 			height: 450,
                                 			series: {
                                 				0:{type: "line", targetAxisIndex:0} ,
-                                                1:{type: "line", targetAxisIndex:1}
+                                                1:{type: "line", targetAxisIndex:0}
                                 			},
                                             title: "Weekly Orders: Totals/Averages Last Three Months",
                                             titleTextStyle: {
