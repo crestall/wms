@@ -42,7 +42,7 @@
                             foreach($products as $item_id => $details):
                                 $available = $details['onhand'] - $details['allocated'] - $details['qc_count'];
                                 $ls = "";
-                                foreach($details['locations'] as $l)
+                                foreach($details['locations'] as $lid => $l)
                                 {
                                     $atm = $l['onhand'] - $l['allocated'] - $l['qc_count'];
                                     $ls .= $l['name']." ( can move ".$atm.")";
@@ -53,7 +53,9 @@
                                 <tr>
                                     <td data-label="Name"><a href="/products/edit-product/product=<?php echo $item_id;?>"><?php echo $details['name'];?></a></td>
                                     <td data-label="SKU"><?php echo $details['sku'];?></td>
-                                    <td data-label="Locations" class="text-nowrap"><?php echo $ls;?></td>
+                                    <td data-label="Locations" class="text-nowrap">
+                                        <?php echo $ls;?>
+                                    </td>
                                     <td>
                                         <?php if($details['pack_item'] > 0):?>
                                             <p><a class="btn btn-primary" href="/inventory/pack-items-manage/product=<?php echo $item_id;?>">Manage Pack Item</a></p>
