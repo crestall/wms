@@ -182,14 +182,14 @@
                             		{
                                 		var options = {
                                 			hAxis: {
-                                				title: 'Week Ending',
+                                				title: 'Week Beginning',
                                 				showTextEvery: 1,
                                 				slantedText:true,
                                 				slantedTextAngle:-45
                                 			},
                                 			vAxes: {
                                 				0: {
-                                					title: 'Total Orders',
+                                					title: 'Order Count',
                                 					viewWindow: {
                                 						min: 0
                                 					}
@@ -200,9 +200,10 @@
                                 			},
                                 			height: 450,
                                 			series: {
-                                				0:{type: "line", targetAxisIndex:0}
+                                				0:{type: "line", targetAxisIndex:0} ,
+                                                1:{type: "line", targetAxisIndex:0}
                                 			},
-                                            title: "Weekly Orders: Last Three Months",
+                                            title: "Weekly Orders: Totals/Averages Last Three Months",
                                             titleTextStyle: {
                             					fontSize: 20,
                             					color: '##5F5F5E;',
