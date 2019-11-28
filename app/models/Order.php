@@ -996,7 +996,7 @@ class Order extends Model{
             $row_array[2] = $o['order_average'];
             $return_array[] = $row_array;
         }
-
+        print_r($return_array);
         return $return_array;
     }
 
