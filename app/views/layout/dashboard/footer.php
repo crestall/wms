@@ -189,7 +189,7 @@
                                 			},
                                 			vAxes: {
                                 				0: {
-                                					title: 'Total Orders',
+                                					title: 'Order Count',
                                 					viewWindow: {
                                 						min: 0
                                 					}
