@@ -162,6 +162,19 @@
                         } );
                     }
                 },
+                'move-bulk-items': {
+                    init: function()
+                    {
+                        $('#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Products...</h2></div>' });
+                                window.location.href = "/inventory/move-bulk-items/client=" + $(this).val();
+                            }
+                        });
+                        
+                    }
+                },
                 'view-solar-inventory': {
                     init: function()
                     {
