@@ -972,7 +972,7 @@ class Order extends Model{
             $query1 .= "    GROUP BY
                     WEEK(DATE(FROM_UNIXTIME(o.date_fulfilled))), YEAR(DATE(FROM_UNIXTIME(o.date_fulfilled)))
 
-            ) b ON b.date_fulfilled BETWEEN a.date_fulfilled - (60*24*60*60) AND a.date_fulfilled
+            ) b ON b.date_fulfilled <= a.date_fulfilled
             GROUP BY
                 a.date_fulfilled
                 ";
