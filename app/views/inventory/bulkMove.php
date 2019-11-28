@@ -45,7 +45,7 @@
                                 foreach($details['locations'] as $lid => $l)
                                 {
                                     $atm = $l['onhand'] - $l['allocated'] - $l['qc_count'];
-                                    $ls .= $l['name']." ( can move ".$atm.")&nbsp;&nbsp;<input type='text' name='number_from_".$lid."' id='number_from_".$lid."' value='".$atm."' class='number' />";
+                                    $ls .= $l['name']." ( can move ".$atm.")&nbsp;&nbsp;<input type='text' name='number_from_".$lid."' id='number_from_".$lid."' value='".$atm."' class='form-control number' />";
                                     $ls .= "<br/>";
                                 }
                                 $ls = rtrim($ls, "<br/>");
