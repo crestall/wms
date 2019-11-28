@@ -991,7 +991,7 @@ class Order extends Model{
         foreach($orders as $o)
         {
             $row_array = array();
-            $row_array[0] = $o['date_index'];
+            $row_array[0] = $o['week_start'];
             $row_array[1] = $o['total_orders'];
             $row_array[2] = $o['order_average'];
             $return_array[] = $row_array;
