@@ -992,8 +992,8 @@ class Order extends Model{
         {
             $row_array = array();
             $row_array[0] = $o['week_start'];
-            $row_array[1] = $o['total_orders'];
-            $row_array[2] = $o['order_average'];
+            $row_array[1] = (int)$o['total_orders'];
+            $row_array[2] = (float)$o['order_average'];
             $return_array[] = $row_array;
         }
         print_r($return_array);
