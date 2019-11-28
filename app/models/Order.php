@@ -937,7 +937,7 @@ class Order extends Model{
         $db = Database::openConnection();
         $query1 = "
             SELECT
-                a.date_index,
+                date(a.date_index - interval weekday(a.date_index) day) AS week_start,
                 a.total_orders,
                 ROUND(AVG(b.total_orders), 1) AS order_average
             FROM
@@ -976,7 +976,7 @@ class Order extends Model{
             GROUP BY
                 a.date_fulfilled
                 ";
-        echo $query1; die();
+        //echo $query1; die();
 
         $orders = $db->queryData($query1);
 
