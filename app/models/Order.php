@@ -965,7 +965,7 @@ class Order extends Model{
                 FROM
                     orders o
                 WHERE
-                    o.date_fulfilled >= (($from) - (30*24*60*60)) AND (o.date_fulfilled <= $to)";
+                    o.date_fulfilled >= (($from) - (90*24*60*60)) AND (o.date_fulfilled <= $to)";
 
                 if($client_id > 0)
                     $query1 .= " AND o.client_id = ".$client_id;
