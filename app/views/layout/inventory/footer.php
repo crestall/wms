@@ -172,7 +172,6 @@
                                 window.location.href = "/inventory/move-bulk-items/client=" + $(this).val();
                             }
                         });
-                        
                     }
                 },
                 'view-solar-inventory': {

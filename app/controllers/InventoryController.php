@@ -298,7 +298,7 @@ class inventoryController extends Controller
             }
         }
         Config::setJsConfig('curPage', "move-bulk-items");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/BulkMove.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/bulkMove.php',[
             'page_title'    =>  'Move Multiple Items',
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
