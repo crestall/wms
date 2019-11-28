@@ -984,7 +984,7 @@ class Order extends Model{
             array(
                 'Week Beginning',
                 'Total Orders',
-                'Weekly Average'
+                '3 Month Weekly Average'
             )
         );
 
