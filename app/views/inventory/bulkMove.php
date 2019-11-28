@@ -31,7 +31,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Move selected items to</label>
                         <div class="col-md-4">
-                            <select id="move_to_location" name="move_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations(Form::value('move_to_location'));?></select>
+                            <select id="move_to_location" name="move_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectAllLocations(Form::value('move_to_location'));?></select>
                         </div>
                     </div>
                 </div>

@@ -209,6 +209,34 @@ class Location extends Model{
         return $db->queryValue($this->table, array('location' => $name));
     }
 
+    public function getSelectAllLocations($selected = false)
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $q = "
+            SELECT
+                id, location
+            FROM
+                locations
+            WHERE
+                selectable = 1
+            ORDER BY location";
+        $locations = $db->queryData($q);
+        foreach($locations as $l)
+        {
+            $label = $l['location'];
+            $value = $l['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+
+    }
+
     public function getSelectLocations($selected = false, $item_id = false)
     {
         $db = Database::openConnection();
