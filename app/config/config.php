@@ -488,7 +488,8 @@ return array(
             'quality-control'       =>  false,
             //'replenish-pickface'    => true,
             'transfer-location' => true,
-            'solar-returns' => true
+            'solar-returns' => true,
+            'move-bulk-items'   => true
         ),
 		'reports'			=> array(
           	//'product-movement-summary'	=>	true,
