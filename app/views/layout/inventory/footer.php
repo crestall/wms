@@ -183,7 +183,11 @@
                                     }
                                     else
                                     {
-                                        console.log("no move click"); 
+                                        swal({
+                                            title: "Please select something to move",
+                                            text: text,
+                                            icon: "error"
+                                        });
                                     }
                                 })
                             }
