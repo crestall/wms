@@ -177,7 +177,14 @@
                             {
                                 $("div#go_button_holder").slideDown();
                                 $("button#move_stock_button").off('click').click(function(e){
-                                    console.log("click");
+                                    if($('input.select_move:checked').length)
+                                    {
+                                        console.log("can move click");
+                                    }
+                                    else
+                                    {
+                                        console.log("no move click"); 
+                                    }
                                 })
                             }
                         });
