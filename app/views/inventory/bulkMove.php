@@ -34,6 +34,13 @@
                             <select id="move_to_location" name="move_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectAllLocations(Form::value('move_to_location'));?></select>
                         </div>
                     </div>
+                    <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                    <div class="form-group row" id="go_button_holder" style="display:none">
+                        <label class="col-md-5 col-form-label">&nbsp;</label>
+                        <div class="col-md-7">
+                            <button type="submit" class="btn btn-primary">Move Stock</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <table class="table-striped table-hover" id="view_items_table">

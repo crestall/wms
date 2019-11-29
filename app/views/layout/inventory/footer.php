@@ -172,6 +172,12 @@
                                 window.location.href = "/inventory/move-bulk-items/client=" + $(this).val();
                             }
                         });
+                        $('#move_to_location').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $("div#go_button_holder").dropDown();
+                            }
+                        });
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
                                 { "orderable": false, "targets": [1,2] }
