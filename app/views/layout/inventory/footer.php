@@ -191,7 +191,7 @@
                                                 ids.push(ota);
                                             }
                                         });
-                                        console.log("ids: "+ids);
+                                        console.log(ids);
                                         /*
                                         $.ajax({
                                             url: "/ajaxfunctions/update-allocation",
