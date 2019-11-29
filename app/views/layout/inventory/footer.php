@@ -180,7 +180,7 @@
                                     if($('input.select_move:checked').length)
                                     {
                                         var ids = [];
-                                        $('input.select').each(function(i,e){
+                                        $('input.select_move').each(function(i,e){
                                             if($(this).prop('checked'))
                                             {
                                                 var lid = $(this).data('locationid');
