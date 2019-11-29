@@ -179,7 +179,72 @@
                                 $("button#move_stock_button").off('click').click(function(e){
                                     if($('input.select_move:checked').length)
                                     {
-                                        console.log("can move click");
+                                        var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            if($(this).prop('checked'))
+                                            {
+                                                var lid = $(this).data('locationid');
+                                                var ntm = $("input#number_from_".lid).val();
+                                                var ota = {};
+                                                ota.id = lid;
+                                                ota.ntm = ntm;
+                                                ids.push(ota);
+                                            }
+                                        });
+                                        console.log("ids: "+ids);
+                                        /*
+                                        $.ajax({
+                                            url: "/ajaxfunctions/update-allocation",
+                                            data: data,
+                                            method: "post",
+                                            dataType: "json",
+                                            beforeSend: function(){
+                                                $("#div#feedback_holder")
+                                                    .slideDown()
+                                                    .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Adjusting allocation...</p>");
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $("div#feedback_holder")
+                                                        .hide()
+                                                        .removeClass()
+                                                        .addClass("errorbox")
+                                                        .slideDown()
+                                                        .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
+                                                }
+                                                else
+                                                {
+                                                    $("div#feedback_holder")
+                                                        .hide()
+                                                        .removeClass()
+                                                        .addClass("feedbackbox")
+                                                        .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-warning slip-reprint'><i class='fas fa-file-alt'></i> Reprint Pickingslip</a></p>")
+                                                        .slideDown({
+                                                            complete: function(){
+                                                                $('a.slip-reprint').click(function(e){
+                                                                    e.preventDefault();
+                                                                    var ids = [order_id];
+                                                                    var form = document.createElement('form');
+                                                                    form.setAttribute("method", "post");
+                                                                    form.setAttribute("action", "/pdf/printPickslips");
+                                                                    form.setAttribute("target", "pickslipformresult");
+                                                                    $.each( ids, function( index, value ) {
+                                                                        var hiddenField = document.createElement("input");
+                                                                        hiddenField.setAttribute("type", "hidden");
+                                                                        hiddenField.setAttribute("name", "items[]");
+                                                                        hiddenField.setAttribute("value", value);
+                                                                        form.appendChild(hiddenField);
+                                                                    });
+                                                                    document.body.appendChild(form);
+                                                                    window.open('','pickslipformresult');
+                                                                    form.submit();
+                                                                });
+                                                            }
+                                                    });
+                                                }
+                                            }
+                                        }) ;*/
                                     }
                                     else
                                     {
