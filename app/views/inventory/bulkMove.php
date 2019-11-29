@@ -38,7 +38,7 @@
                     <div class="form-group row" id="go_button_holder" style="display:none">
                         <label class="col-md-5 col-form-label">&nbsp;</label>
                         <div class="col-md-7">
-                            <button type="submit" class="btn btn-primary">Move Stock</button>
+                            <button type="submit" id="move_stock_button" class="btn btn-primary">Move Stock</button>
                         </div>
                     </div>
                 </div>

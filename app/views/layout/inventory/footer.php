@@ -176,6 +176,9 @@
                             if($(this).val() > 0)
                             {
                                 $("div#go_button_holder").slideDown();
+                                $("button#move_stock_button").off('click').click(function(e){
+                                    console.log("click");
+                                })
                             }
                         });
                         dataTable.init($('table#view_items_table'), {
