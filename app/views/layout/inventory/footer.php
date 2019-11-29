@@ -184,7 +184,7 @@
                                             if($(this).prop('checked'))
                                             {
                                                 var lid = $(this).data('locationid');
-                                                var ntm = $("input#number_from_".lid).val();
+                                                var ntm = $("input#number_from_"+lid).val();
                                                 var ota = {};
                                                 ota.id = lid;
                                                 ota.ntm = ntm;
