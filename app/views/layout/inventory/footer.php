@@ -175,7 +175,7 @@
                         $('#move_to_location').change(function(e){
                             if($(this).val() > 0)
                             {
-                                $("div#go_button_holder").dropDown();
+                                $("div#go_button_holder").slideDown();
                             }
                         });
                         dataTable.init($('table#view_items_table'), {
