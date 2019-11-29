@@ -184,8 +184,8 @@
                                     else
                                     {
                                         swal({
-                                            title: "Please select something to move",
-                                            text: text,
+                                            title: "No Locations Chosen",
+                                            text: "Please select something to move",
                                             icon: "error"
                                         });
                                     }
