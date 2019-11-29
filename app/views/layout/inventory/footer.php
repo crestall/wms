@@ -186,7 +186,8 @@
                                                 var lid = $(this).data('locationid');
                                                 var ntm = $("input#number_from_"+lid).val();
                                                 var ota = {};
-                                                ota.id = lid;
+                                                ota.fromid = lid;
+                                                ota.toid = $('#move_to_location').val();
                                                 ota.ntm = ntm;
                                                 ids.push(ota);
                                             }
