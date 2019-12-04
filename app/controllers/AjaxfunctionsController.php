@@ -65,7 +65,11 @@ class ajaxfunctionsController extends Controller
             'error'     =>  false,
             'feedback'  =>  ''
         );
-
+        foreach($this->request->data['ids'] as $array)
+        {
+            echo "<pre>",print_r($array),"</pre>";
+        }
+        die();
         $this->view->renderJson($data);
     }
 
