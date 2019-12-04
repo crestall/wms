@@ -200,7 +200,7 @@
                                             method: "post",
                                             dataType: "json",
                                             beforeSend: function(){
-                                                $("#div#feedback_holder")
+                                                $("div#feedback_holder")
                                                     .slideDown()
                                                     .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Moving Items...</p>");
                                             }
