@@ -202,7 +202,7 @@
                                             beforeSend: function(){
                                                 $("div#feedback_holder")
                                                     .slideDown()
-                                                    .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Moving Items...</p>");
+                                                    .html("<p></p><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Moving Items...</p>");
                                             }
                                         }) ;
                                         /*
