@@ -220,10 +220,10 @@
                                                         .hide()
                                                         .removeClass()
                                                         .addClass("feedbackbox")
-                                                        .html("<h2><i class='far fa-check-circle'></i>Items have been moved</h2><p>Page will reload sooooooooooon</p>")
+                                                        .html("<h2><i class='far fa-check-circle'></i>Items have been moved</h2><p>Please wait for page to reload</p>")
                                                         .slideDown({
                                                             complete: function(){
-                                                                setTimeout(location.reload.bind(location), 3000);
+                                                                setTimeout(location.reload.bind(location), 2000);
                                                             }
                                                     });
                                                 }
