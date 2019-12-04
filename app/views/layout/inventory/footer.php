@@ -189,6 +189,7 @@
                                                 ota.fromid = lid;
                                                 ota.toid = $('#move_to_location').val();
                                                 ota.ntm = ntm;
+                                                ota.iid = $(this).data('itemid');
                                                 ids.push(ota);
                                             }
                                         });
