@@ -223,7 +223,7 @@
                                                         .html("<h2><i class='far fa-check-circle'></i>Items have been moved</h2><p>Page will reload sooooooooooon</p>")
                                                         .slideDown({
                                                             complete: function(){
-                                                                setTimeout(location.reload.bind(location), 10000);
+                                                                setTimeout(location.reload.bind(location), 3000);
                                                             }
                                                     });
                                                 }
