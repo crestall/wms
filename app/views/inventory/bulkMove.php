@@ -14,7 +14,7 @@
     </div>
     <?php if($client_id > 0):?>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" id="feedback_holder">
                 <p></p>
             </div>
         </div>

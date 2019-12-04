@@ -192,7 +192,18 @@
                                                 ids.push(ota);
                                             }
                                         });
-                                        console.log(ids);
+                                        //console.log(ids);
+                                        $.ajax({
+                                            url: "/ajaxfunctions/bulk-move-stock",
+                                            data: { ids: ids},
+                                            method: "post",
+                                            dataType: "json",
+                                            beforeSend: function(){
+                                                $("#div#feedback_holder")
+                                                    .slideDown()
+                                                    .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Moving Items...</p>");
+                                            }
+                                        }) ;
                                         /*
                                         $.ajax({
                                             url: "/ajaxfunctions/update-allocation",
