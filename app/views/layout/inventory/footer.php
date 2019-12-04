@@ -204,7 +204,7 @@
                                                     .slideDown()
                                                     .html("<p></p><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Moving Items...</p>");
                                             },
-                                            success: function(){
+                                            success: function(d){
                                                 if(d.error)
                                                 {
                                                     $("div#feedback_holder")
