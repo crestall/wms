@@ -59,7 +59,7 @@ class ajaxfunctionsController extends Controller
 
     public function bulkMoveStock()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die(); 
+        echo "<pre>",print_r($this->request),"</pre>"; //die(); 
     }
 
     public function getOrderItemsForSerials()
