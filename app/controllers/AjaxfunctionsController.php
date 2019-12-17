@@ -15,6 +15,7 @@ class ajaxfunctionsController extends Controller
         parent::beforeAction();
         $actions = [
             'adjustAllocationForm',
+            'bulkMoveStock',
             'calcOriginPick',
             'deactivateUser',
             'deleteClientLocation',
@@ -54,6 +55,22 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function bulkMoveStock()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data['ids'] as $array)
+        {
+            echo "<pre>",print_r($array),"</pre>";
+        }
+        die();
+        $this->view->renderJson($data);
     }
 
     public function getOrderItemsForSerials()

@@ -1078,7 +1078,7 @@ class Item extends Model{
                 ) b
                 ON a.item_id = b.item_id AND a.location_id = b.location_id
                 ORDER BY
-                    a.location_id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(a.location, '.', -2), SUBSTRING_INDEX(a.location, '.', -3)
+                    a.location_id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(a.location, '.', -2), SUBSTRING_INDEX(a.location, '.', -3) DESC
             ");
         }
         else
@@ -1120,7 +1120,7 @@ class Item extends Model{
                 ) c
                 ON a.item_id = c.item_id AND a.location_id = c.location_id
                 ORDER BY
-                    a.location_id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(a.location, '.', -2), SUBSTRING_INDEX(a.location, '.', -3)
+                    a.location_id = {$item['preferred_pick_location_id']} desc, SUBSTRING_INDEX(a.location, '.', -2), SUBSTRING_INDEX(a.location, '.', -3) DESC
         	");
         }
 

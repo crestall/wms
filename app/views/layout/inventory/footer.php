@@ -162,6 +162,145 @@
                         } );
                     }
                 },
+                'move-bulk-items': {
+                    init: function()
+                    {
+                        $('#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Products...</h2></div>' });
+                                window.location.href = "/inventory/move-bulk-items/client=" + $(this).val();
+                            }
+                        });
+                        $('#move_to_location').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $("div#go_button_holder").slideDown();
+                                $("button#move_stock_button").off('click').click(function(e){
+                                    if($('input.select_move:checked').length)
+                                    {
+                                        var ids = [];
+                                        $('input.select_move').each(function(i,e){
+                                            if($(this).prop('checked'))
+                                            {
+                                                var lid = $(this).data('locationid');
+                                                var ntm = $("input#number_from_"+lid).val();
+                                                var ota = {};
+                                                ota.fromid = lid;
+                                                ota.toid = $('#move_to_location').val();
+                                                ota.ntm = ntm;
+                                                ota.iid = $(this).data('itemid');
+                                                ids.push(ota);
+                                            }
+                                        });
+                                        //console.log(ids);
+                                        $.ajax({
+                                            url: "/ajaxfunctions/bulk-move-stock",
+                                            data: { ids: ids},
+                                            method: "post",
+                                            dataType: "json",
+                                            beforeSend: function(){
+                                                $("div#feedback_holder")
+                                                    .slideDown()
+                                                    .html("<p></p><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Moving Items...</p>");
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $("div#feedback_holder")
+                                                        .hide()
+                                                        .removeClass()
+                                                        .addClass("errorbox")
+                                                        .slideDown()
+                                                        .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
+                                                }
+                                                else
+                                                {
+                                                    $("div#feedback_holder")
+                                                        .hide()
+                                                        .removeClass()
+                                                        .addClass("feedbackbox")
+                                                        .html("<h2><i class='far fa-check-circle'></i>Items have been moved</h2><p>Please wait for page to reload</p>")
+                                                        .slideDown({
+                                                            complete: function(){
+                                                                setTimeout(location.reload.bind(location), 2000);
+                                                            }
+                                                    });
+                                                }
+                                            }
+                                        }) ;
+                                        /*
+                                        $.ajax({
+                                            url: "/ajaxfunctions/update-allocation",
+                                            data: data,
+                                            method: "post",
+                                            dataType: "json",
+                                            beforeSend: function(){
+                                                $("#div#feedback_holder")
+                                                    .slideDown()
+                                                    .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Adjusting allocation...</p>");
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $("div#feedback_holder")
+                                                        .hide()
+                                                        .removeClass()
+                                                        .addClass("errorbox")
+                                                        .slideDown()
+                                                        .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
+                                                }
+                                                else
+                                                {
+                                                    $("div#feedback_holder")
+                                                        .hide()
+                                                        .removeClass()
+                                                        .addClass("feedbackbox")
+                                                        .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-warning slip-reprint'><i class='fas fa-file-alt'></i> Reprint Pickingslip</a></p>")
+                                                        .slideDown({
+                                                            complete: function(){
+                                                                $('a.slip-reprint').click(function(e){
+                                                                    e.preventDefault();
+                                                                    var ids = [order_id];
+                                                                    var form = document.createElement('form');
+                                                                    form.setAttribute("method", "post");
+                                                                    form.setAttribute("action", "/pdf/printPickslips");
+                                                                    form.setAttribute("target", "pickslipformresult");
+                                                                    $.each( ids, function( index, value ) {
+                                                                        var hiddenField = document.createElement("input");
+                                                                        hiddenField.setAttribute("type", "hidden");
+                                                                        hiddenField.setAttribute("name", "items[]");
+                                                                        hiddenField.setAttribute("value", value);
+                                                                        form.appendChild(hiddenField);
+                                                                    });
+                                                                    document.body.appendChild(form);
+                                                                    window.open('','pickslipformresult');
+                                                                    form.submit();
+                                                                });
+                                                            }
+                                                    });
+                                                }
+                                            }
+                                        }) ;*/
+                                    }
+                                    else
+                                    {
+                                        swal({
+                                            title: "No Locations Chosen",
+                                            text: "Please select something to move",
+                                            icon: "error"
+                                        });
+                                    }
+                                })
+                            }
+                        });
+                        dataTable.init($('table#view_items_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [1,2] }
+                            ]
+                        } );
+                    }
+                },
                 'view-solar-inventory': {
                     init: function()
                     {

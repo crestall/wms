@@ -283,6 +283,28 @@ class inventoryController extends Controller
             'product_info'      =>  $product_info
         ]);
     }
+    public function moveBulkItems()
+    {
+        $client_id = 0;
+        $client_name = "";
+        $products = array();
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+                $products = $this->item->getClientInventoryArray($client_id);
+            }
+        }
+        Config::setJsConfig('curPage', "move-bulk-items");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/bulkMove.php',[
+            'page_title'    =>  'Move Multiple Items',
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name,
+            'products'      =>  $products
+        ]);
+    }
 
     public function viewInventory()
     {

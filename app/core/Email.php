@@ -514,7 +514,7 @@
 		$body = str_replace($replace_array, $replace_with_array, $body);
 
 		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-		$mail->Subject = "Your Order With Noa Sleep Has Been Dispatched";
+		$mail->Subject = "Your Order With Noa Home Has Been Dispatched";
 		$mail->MsgHTML($body);
 		//$mail->AddEmbeddedImage("$root/images/3pl_logo.png", "emailfoot", "3pl_logo.png");
         //$mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
