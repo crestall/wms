@@ -369,9 +369,9 @@
 
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-		$mail->AddAddress('jc@noasleep.com', 'Jean-Claude Renaud');
-        $mail->AddAddress('jeremykopek@noasleep.com', 'Jeremy');
-        $mail->AddAddress('viviannenguyen@noasleep.com', 'Vivianne');
+		$mail->AddAddress('jc@noahome.com', 'Jean-Claude Renaud');
+        $mail->AddAddress('jeremykopek@noahome.com', 'Jeremy');
+        $mail->AddAddress('brendasaccomando@noahome.com', 'Brenda');
         $mail->AddAddress('janikakopek@noahome.com', 'Janika');
 
         $mail->AddAddress('customersupport@3plplus.com.au');
@@ -520,10 +520,10 @@
         //$mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
 		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
         /*   */
-        $mail->AddBCC('jc@noasleep.com');
-        $mail->AddBCC('jeremykopek@noasleep.com');
+        $mail->AddBCC('jc@noahome.com');
+        $mail->AddBCC('jeremykopek@noahome.com');
         $mail->AddBCC('customersupport@3plplus.com.au');
-        $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
+        $mail->AddBCC('brendasaccomando@noahome.com', 'Brenda');
         $mail->AddBCC('janikakopek@noahome.com', 'Janika');
         //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
 
@@ -606,10 +606,10 @@
         //$mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
 		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
         /*  */
-        $mail->AddBCC('jc@noasleep.com');
-        $mail->AddBCC('jeremykopek@noasleep.com');
+        $mail->AddBCC('jc@noahome.com');
+        $mail->AddBCC('jeremykopek@noahome.com');
         $mail->AddBCC('customersupport@3plplus.com.au');
-        $mail->AddBCC('viviannenguyen@noasleep.com', 'Vivianne');
+        $mail->AddBCC('brendasaccomando@noahome.com', 'Brenda');
         $mail->AddBCC('janikakopek@noahome.com', 'Janika');
         $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
 
@@ -643,10 +643,10 @@
         if(SITE_LIVE)
         //if(Config::get("SITE_LIVE"))
         {
-            $mail->AddAddress('jc@noasleep.com');
-            $mail->AddAddress('jeremykopek@noasleep.com');
+            $mail->AddAddress('jc@noahome.com');
+            $mail->AddAddress('jeremykopek@noahome.com');
             $mail->AddBCC('customersupport@3plplus.com.au');
-            $mail->AddAddress('viviannenguyen@noasleep.com', 'Vivianne');
+            $mail->AddAddress('brendasaccomando@noahome.com', 'Brenda');
             $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
             $mail->AddAddress('janikakopek@noahome.com', 'Janika');
         }
@@ -685,10 +685,10 @@
         if(SITE_LIVE)
         //if(Config::get("SITE_LIVE"))
         {
-            $mail->AddAddress('jc@noasleep.com');
-            $mail->AddAddress('jeremykopek@noasleep.com');
+            $mail->AddAddress('jc@noahome.com');
+            $mail->AddAddress('jeremykopek@noahome.com');
             $mail->AddBCC('customersupport@3plplus.com.au');
-            $mail->AddAddress('viviannenguyen@noasleep.com', 'Vivianne');
+            $mail->AddAddress('brendasaccomando@noahome.com', 'Brenda');
             $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
             $mail->AddAddress('janikakopek@noahome.com', 'Janika');
         }
