@@ -21,6 +21,12 @@
             </div>
         </div>
         <div class="form-group row">
+            <label class="col-md-3 col-form-label">Item Name</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="item_name" id="item_name" placeholder="search by name" />
+            </div
+        </div>
+        <div class="form-group row">
             <label class="col-md-3 col-form-label">Item Barcode</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="item_barcode" id="item_barcode" placeholder="scan the barcode or manually type it in" />
