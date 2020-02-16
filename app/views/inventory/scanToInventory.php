@@ -20,12 +20,12 @@
                 <?php endif; ?>
             </div>
         </div>
-        <div class="form-group row">
+        <!--div class="form-group row">
             <label class="col-md-3 col-form-label">Item Name</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="item_name" id="item_name" placeholder="search by name" />
             </div>
-        </div>
+        </div-->
         <div class="form-group row">
             <label class="col-md-3 col-form-label">Item Barcode</label>
             <div class="col-md-4">
