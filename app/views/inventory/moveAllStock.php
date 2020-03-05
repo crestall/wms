@@ -24,7 +24,7 @@
                 <div class="form-group row">
                     <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Move all stock to</label>
                     <div class="col-md-5">
-                        <select id="location_selector" class="form-control selectpicker">
+                        <select id="location_selector" class="form-control selectpicker" name="move_to_location">
                             <option value="0">Select</option>
                             <option value="<?php echo $bayswater_receiving_id;?>">Bayswater Receiving</option>
                             <option value="<?php echo $receiving_id;?>">Receiving</option>
