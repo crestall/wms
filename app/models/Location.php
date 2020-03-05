@@ -38,11 +38,13 @@
 class Location extends Model{
 
     public $receiving_id;
+    public $bayswater_receiving_id;
     public $table = "locations";
 
     public function __construct()
     {
         $this->receiving_id = $this->getLocationId('receiving');
+        $this->bayswater_receiving_id = $this->getLocationId('bayswater receiving');
     }
 
     private function getReceivingId()

@@ -18,6 +18,8 @@ class inventoryController extends Controller
         $client_id = 0;
         $client_name = "";
         $page_title =  'Move All Stock For Client';
+        $receiving_id = $this->location->receiving_id;
+        $bayswtaer_receiving_id = $this->location->bayswater_receiving_id
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['client']))
@@ -29,9 +31,11 @@ class inventoryController extends Controller
         }
         Config::setJsConfig('curPage', "move-all-client-stock");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/moveAllStock.php',[
-            'page_title'    =>  $page_title,
-            'client_name'   =>  $client_name,
-            'client_id'     =>  $client_id
+            'page_title'                =>  $page_title,
+            'client_name'               =>  $client_name,
+            'client_id'                 =>  $client_id
+            'receiving_id'              =>  $receiving_id,
+            'bayswtaer_receiving_id'    =>  $bayswater_receiving_id
         ]);
     }
 

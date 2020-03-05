@@ -18,6 +18,6 @@
                 <p></p>
             </div>
         </div>
-        
+        <?php echo $bayswater_receiving_id;?>
     <?php endif;?>
 </div>
