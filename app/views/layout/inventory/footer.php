@@ -28,6 +28,11 @@
                         });
                     }
                 },
+                'move-all-client-stock':{
+                    init: function(){
+
+                    }
+                },
                 'replenish-pickface':{
                     init: function(){
 
