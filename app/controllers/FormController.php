@@ -82,6 +82,7 @@ class FormController extends Controller {
             'procItemsUpdate',
             'procLogin',
             'procMakePacks',
+            'procMoveAllClientStock',
             'procMovementreasonAdd',
             'procOrderAdd',
             'procOrderCsvUpload',
@@ -124,6 +125,13 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+     public function procMoveAllClientStock()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>";die();
+        $db = Database::openConnection();
+
     }
 
     public function procAddSerials()
