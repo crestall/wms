@@ -37,6 +37,16 @@
                                 window.location.href = "/inventory/move-all-client-stock/client=" + $(this).val();
                             }
                         });
+                        $("form#move_all_client_stock").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing Movement...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
                     }
                 },
                 'replenish-pickface':{
