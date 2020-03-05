@@ -34,7 +34,7 @@
                     <input type="hidden" name="client_id" value="<?php echo $client_id; ?>" />
                     <div class="form-group row">
                         <label class="col-md-5 col-form-label">&nbsp;</label>
-                        <div class="col-md-7">
+                        <div class="col-md-5">
                             <p><button type="submit" class="btn btn-primary">Move Stock Now</button> </p>
                         </div>
                     </div>
