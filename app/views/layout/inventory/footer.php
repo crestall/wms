@@ -30,7 +30,13 @@
                 },
                 'move-all-client-stock':{
                     init: function(){
-
+                        $('#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Client Details...</h2></div>' });
+                                window.location.href = "/inventory/move-all-client-stock/client=" + $(this).val();
+                            }
+                        });
                     }
                 },
                 'replenish-pickface':{
