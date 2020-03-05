@@ -35,7 +35,7 @@ class inventoryController extends Controller
             'client_name'               =>  $client_name,
             'client_id'                 =>  $client_id,
             'receiving_id'              =>  $receiving_id,
-            'bayswtaer_receiving_id'    =>  $bayswater_receiving_id
+            'bayswater_receiving_id'    =>  $bayswater_receiving_id
         ]);
     }
 
