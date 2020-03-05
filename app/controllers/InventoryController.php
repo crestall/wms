@@ -19,7 +19,7 @@ class inventoryController extends Controller
         $client_name = "";
         $page_title =  'Move All Stock For Client';
         $receiving_id = $this->location->receiving_id;
-        $bayswtaer_receiving_id = $this->location->bayswater_receiving_id
+        $bayswtaer_receiving_id = $this->location->bayswater_receiving_id;
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['client']))
