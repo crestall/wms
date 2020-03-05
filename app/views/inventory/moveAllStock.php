@@ -18,6 +18,28 @@
                 <p></p>
             </div>
         </div>
-        <?php echo $bayswater_receiving_id;?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <div class="col-md-12">
+            <form id="move_all_client_stock" method="post" action="/form/procMoveAllClientStock">
+                <div class="form-group row">
+                    <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Move all stock to</label>
+                    <div class="col-md-5">
+                        <select id="location_selector" class="form-control selectpicker">
+                            <option value="0">Select</option>
+                            <option value="<?php echo $bayswater_receiving_id;?>">Bayswater Receiving</option>
+                            <option value="<?php echo $receiving_id;?>">Receiving</option>
+                        </select>
+                    </div
+                    <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                    <input type="hidden" name="client_id" value="<?php echo $client_id; ?>" />
+                    <div class="form-group row">
+                        <label class="col-md-5 col-form-label">&nbsp;</label>
+                        <div class="col-md-7">
+                            <button type="submit" class="btn btn-primary">Move Stock Now</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     <?php endif;?>
 </div>
