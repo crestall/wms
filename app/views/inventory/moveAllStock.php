@@ -29,15 +29,16 @@
                             <option value="<?php echo $bayswater_receiving_id;?>">Bayswater Receiving</option>
                             <option value="<?php echo $receiving_id;?>">Receiving</option>
                         </select>
-                    </div
+                    </div>
+                </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <input type="hidden" name="client_id" value="<?php echo $client_id; ?>" />
-                    <div class="form-group row">
-                        <label class="col-md-5 col-form-label">&nbsp;</label>
-                        <div class="col-md-5">
-                            <p><button type="submit" class="btn btn-primary">Move Stock Now</button> </p>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-md-5 col-form-label">&nbsp;</label>
+                    <div class="col-md-5">
+                        <p><button type="submit" class="btn btn-primary">Move Stock Now</button> </p>
                     </div>
+                </div>
                 </div>
             </form>
         </div>
