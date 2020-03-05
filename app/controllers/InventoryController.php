@@ -33,7 +33,7 @@ class inventoryController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/moveAllStock.php',[
             'page_title'                =>  $page_title,
             'client_name'               =>  $client_name,
-            'client_id'                 =>  $client_id
+            'client_id'                 =>  $client_id,
             'receiving_id'              =>  $receiving_id,
             'bayswtaer_receiving_id'    =>  $bayswater_receiving_id
         ]);
