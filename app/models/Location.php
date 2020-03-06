@@ -687,7 +687,7 @@ class Location extends Model{
             l.location
         ";
         $array = array(
-            'client_id' => $clinet_id
+            'client_id' => $client_id
         );
         return $db->queryData($q, $array);
     }
