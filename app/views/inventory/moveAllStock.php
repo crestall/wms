@@ -29,6 +29,7 @@
                             <option value="<?php echo $bayswater_receiving_id;?>">Bayswater Receiving</option>
                             <option value="<?php echo $receiving_id;?>">Receiving</option>
                         </select>
+                        <?php echo Form::displayError('move_to_location');?>
                     </div>
                 </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />

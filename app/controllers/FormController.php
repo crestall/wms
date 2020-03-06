@@ -129,8 +129,26 @@ class FormController extends Controller {
 
      public function procMoveAllClientStock()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>";die();
+        //echo "<pre>",print_r($this->request->data),"</pre>";die();
         $db = Database::openConnection();
+        if(!isset($this->request->data['move_to_location']) || $this->request->data['move_to_location'] == 0)
+        {
+            Form::setError('move_to_location', 'Please select a location to move to');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $client_id = $this->request->data['client_id'];
+            $move_to_id = $this->request->data['move_to_location'];
+            //find all locations and details for client
+            $locations = $this->location->getAllLocationsForClient($client_id);
+            echo "<pre>",print_r($locations),"</pre>";die();
+        }
+
 
     }
 

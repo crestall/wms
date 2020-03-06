@@ -672,6 +672,25 @@ class Location extends Model{
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return true;
     }
+
+    public function getAllLocationsForClient($client_id)
+    {
+        $db = Database::openConnection();
+        $q = "
+          SELECT
+            l.id, l.location, il.*, i.name, i.client_id
+          FROM
+            locations l JOIN items_locations il ON l.id = il.location_id JOIN items i ON il.item_id = i.id
+          WHERE
+            i.client_id = :client_id
+          ORDER BY
+            l.location
+        ";
+        $array = array(
+            'client_id' => $clinet_id
+        );
+        return $db->queryData($q, $array);
+    }
 }
 
 ?>
