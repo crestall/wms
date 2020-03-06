@@ -178,13 +178,13 @@ class FormController extends Controller {
                 {
                     $remove_from_data['qc_stock'] = 1;
                     $remove_from_data['qty_saubtract'] = $l['qc_count'];
-                    $this->location->subtractToLocation($remove_from_data);
+                    $this->location->subtractFromLocation($remove_from_data);
                 }
                 if($l['qty'] - $l['qc_count'] > 0)
                 {
                     $remove_from_data['qty_add'] = $l['qty'] - $l['qc_count'];
                     if(isset($remove_from_data['qc_stock'])) unset($remove_from_data['qc_stock']);
-                    $this->location->addToLocation($remove_from_data);
+                    $this->location->subtractFromLocation($remove_from_data);
                 }
             }
             die("Done");
