@@ -146,7 +146,48 @@ class FormController extends Controller {
             $move_to_id = $this->request->data['move_to_location'];
             //find all locations and details for client
             $locations = $this->location->getAllLocationsForClient($client_id);
-            echo "<pre>",print_r($locations),"</pre>";die();
+            echo "<pre>",print_r($locations),"</pre>";//die();
+            foreach($locations as $l)
+            {
+                $move_from_data = array(
+                    'add_product_id'    => $l['item_id'],
+                    'add_to_location'   => $move_to_id,
+                    'reason_id'         => 0,
+                    'reference'         => 'move all stock to receiving'
+                );
+                if($l['qc_count'] > 0)
+                {
+                    $move_from_data['qc_stock'] = 1;
+                    $move_from_data['qty_add'] = $l['qc_count'];
+                    $this->location->addToLocation($move_from_data);
+                }
+                if($l['qty'] - $l['qc_count'] > 0)
+                {
+                    $move_from_data['qty_add'] = $l['qty'] - $l['qc_count'];
+                    if(isset($move_from_data['qc_stock'])) unset($move_from_data['qc_stock']);
+                    $this->location->addToLocation($move_from_data);
+                }
+
+                $remove_from_data = array(
+                    'subtract_product_id'       => $l['item_id'],
+                    'subtract_from_location'    => $move_to_id,
+                    'reason_id'                 => 0,
+                    'reference'                 => 'move all stock to receiving'
+                );
+                if($l['qc_count'] > 0)
+                {
+                    $remove_from_data['qc_stock'] = 1;
+                    $remove_from_data['qty_saubtract'] = $l['qc_count'];
+                    $this->location->subtractToLocation($remove_from_data);
+                }
+                if($l['qty'] - $l['qc_count'] > 0)
+                {
+                    $remove_from_data['qty_add'] = $l['qty'] - $l['qc_count'];
+                    if(isset($remove_from_data['qc_stock'])) unset($remove_from_data['qc_stock']);
+                    $this->location->addToLocation($remove_from_data);
+                }
+            }
+            die("Done");
         }
 
 
