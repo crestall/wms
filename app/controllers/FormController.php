@@ -170,7 +170,7 @@ class FormController extends Controller {
 
                 $remove_from_data = array(
                     'subtract_product_id'       => $l['item_id'],
-                    'subtract_from_location'    => $move_to_id,
+                    'subtract_from_location'    => $l['location_id'],
                     'reason_id'                 => 0,
                     'reference'                 => 'move all stock to receiving'
                 );
