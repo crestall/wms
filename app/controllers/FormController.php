@@ -189,7 +189,7 @@ class FormController extends Controller {
             }
             Session::set('feedback', "Those items have all been moved");
         }
-        return $this->redirector->to(PUBLIC_ROOT."inventory/move-all-client-stock");
+        return $this->redirector->to(PUBLIC_ROOT."inventory/move-all-client-stock/client=".$client_id);
 
     }
 
