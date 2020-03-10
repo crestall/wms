@@ -159,12 +159,14 @@ class FormController extends Controller {
                 {
                     $move_from_data['qc_stock'] = 1;
                     $move_from_data['qty_add'] = $l['qc_count'];
+                    echo "qc move<pre>",print_r($locations),"</pre>";
                     $this->location->addToLocation($move_from_data);
                 }
                 if($l['qty'] - $l['qc_count'] > 0)
                 {
                     $move_from_data['qty_add'] = $l['qty'] - $l['qc_count'];
                     if(isset($move_from_data['qc_stock'])) unset($move_from_data['qc_stock']);
+                    echo "No qc move<pre>",print_r($locations),"</pre>";
                     $this->location->addToLocation($move_from_data);
                 }
 
@@ -178,17 +180,20 @@ class FormController extends Controller {
                 {
                     $remove_from_data['qc_stock'] = 1;
                     $remove_from_data['qty_subtract'] = $l['qc_count'];
+                    echo "qc remove<pre>",print_r($locations),"</pre>";
                     $this->location->subtractFromLocation($remove_from_data);
                 }
                 if($l['qty'] - $l['qc_count'] > 0)
                 {
                     $remove_from_data['qty_subtract'] = $l['qty'] - $l['qc_count'];
                     if(isset($remove_from_data['qc_stock'])) unset($remove_from_data['qc_stock']);
+                    echo "no qc remove<pre>",print_r($locations),"</pre>";
                     $this->location->subtractFromLocation($remove_from_data);
                 }
             }
             Session::set('feedback', "Those items have all been moved");
         }
+        die();
         return $this->redirector->to(PUBLIC_ROOT."inventory/move-all-client-stock/client=".$client_id);
 
     }
