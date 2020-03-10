@@ -146,7 +146,7 @@ class FormController extends Controller {
             $move_to_id = $this->request->data['move_to_location'];
             //find all locations and details for client
             $locations = $this->location->getAllLocationsForClient($client_id);
-            echo "<pre>",print_r($locations),"</pre>";//die();
+            //echo "<pre>",print_r($locations),"</pre>";//die();
             foreach($locations as $l)
             {
                 $move_from_data = array(
