@@ -177,7 +177,7 @@ class Location extends Model{
                 'location_id'   =>  $data['add_to_location'],
                 'qty'           =>  $data['qty_add']
             );
-            if(isset($data['under_qc']))
+            if(isset($data['qc_stock']))
             {
                 $vals['qc_count'] = $data['qty_add'];
             }
