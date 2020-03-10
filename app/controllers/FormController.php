@@ -149,6 +149,7 @@ class FormController extends Controller {
             //echo "<pre>",print_r($locations),"</pre>";//die();
             foreach($locations as $l)
             {
+                echo "location<pre>",print_r($l),"</pre>";
                 $move_from_data = array(
                     'add_product_id'    => $l['item_id'],
                     'add_to_location'   => $move_to_id,
