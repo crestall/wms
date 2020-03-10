@@ -14,6 +14,31 @@ class inventoryController extends Controller
         parent::beforeAction();
     }
 
+    public function moveAllClientStock(){
+        $client_id = 0;
+        $client_name = "";
+        $page_title =  'Move All Stock For Client';
+        $receiving_id = $this->location->receiving_id;
+        $bayswater_receiving_id = $this->location->bayswater_receiving_id;
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+                $page_title =  'Move All Stock For '.$client_name;
+            }
+        }
+        Config::setJsConfig('curPage', "move-all-client-stock");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/moveAllStock.php',[
+            'page_title'                =>  $page_title,
+            'client_name'               =>  $client_name,
+            'client_id'                 =>  $client_id,
+            'receiving_id'              =>  $receiving_id,
+            'bayswater_receiving_id'    =>  $bayswater_receiving_id
+        ]);
+    }
+
     public function solarReturns(){
         Config::setJsConfig('curPage', "solar-returns");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/solarReturns.php',[

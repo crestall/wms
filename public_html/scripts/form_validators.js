@@ -136,6 +136,20 @@ $(document).ready(function() {
 		}
 	});
     ///////////////////////////////////////////////////////////////////////////////
+    $("#move_all_client_stock").validate({
+         rules:{
+    		move_to_location:{
+    			notNone: true
+    		}
+    	},
+		messages:{
+			move_to_location:{
+				notNone: "A location must be chosen"
+			},
+
+		}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("#container_unloading").validate({
         rules:{
             container_size:{

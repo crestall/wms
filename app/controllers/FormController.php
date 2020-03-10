@@ -82,6 +82,7 @@ class FormController extends Controller {
             'procItemsUpdate',
             'procLogin',
             'procMakePacks',
+            'procMoveAllClientStock',
             'procMovementreasonAdd',
             'procOrderAdd',
             'procOrderCsvUpload',
@@ -124,6 +125,78 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+     public function procMoveAllClientStock()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>";die();
+        $db = Database::openConnection();
+        if(!isset($this->request->data['move_to_location']) || $this->request->data['move_to_location'] == 0)
+        {
+            Form::setError('move_to_location', 'Please select a location to move to');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $client_id = $this->request->data['client_id'];
+            $move_to_id = $this->request->data['move_to_location'];
+            //find all locations and details for client
+            $locations = $this->location->getAllLocationsForClient($client_id);
+            //echo "<pre>",print_r($locations),"</pre>";//die();
+            foreach($locations as $l)
+            {
+                //echo "location<pre>",print_r($l),"</pre>";
+                $move_from_data = array(
+                    'add_product_id'    => $l['item_id'],
+                    'add_to_location'   => $move_to_id,
+                    'reason_id'         => 0,
+                    'reference'         => 'move all stock to receiving'
+                );
+                if($l['qc_count'] > 0)
+                {
+                    $move_from_data['qc_stock'] = 1;
+                    $move_from_data['qty_add'] = $l['qc_count'];
+                    //echo "qc move<pre>",print_r($move_from_data),"</pre>";
+                    $this->location->addToLocation($move_from_data);
+                }
+                if($l['qty'] - $l['qc_count'] > 0)
+                {
+                    $move_from_data['qty_add'] = $l['qty'] - $l['qc_count'];
+                    if(isset($move_from_data['qc_stock'])) unset($move_from_data['qc_stock']);
+                    //echo "No qc move<pre>",print_r($move_from_data),"</pre>";
+                    $this->location->addToLocation($move_from_data);
+                }
+
+                $remove_from_data = array(
+                    'subtract_product_id'       => $l['item_id'],
+                    'subtract_from_location'    => $l['location_id'],
+                    'reason_id'                 => 0,
+                    'reference'                 => 'move all stock to receiving'
+                );
+                if($l['qc_count'] > 0)
+                {
+                    $remove_from_data['qc_stock'] = 1;
+                    $remove_from_data['qty_subtract'] = $l['qc_count'];
+                    //echo "qc remove<pre>",print_r($remove_from_data),"</pre>";
+                    $this->location->subtractFromLocation($remove_from_data);
+                }
+                if($l['qty'] - $l['qc_count'] > 0)
+                {
+                    $remove_from_data['qty_subtract'] = $l['qty'] - $l['qc_count'];
+                    if(isset($remove_from_data['qc_stock'])) unset($remove_from_data['qc_stock']);
+                    //echo "no qc remove<pre>",print_r($remove_from_data),"</pre>";
+                    $this->location->subtractFromLocation($remove_from_data);
+                }
+            }
+            Session::set('feedback', "Those items have all been moved");
+        }
+        //die();
+        return $this->redirector->to(PUBLIC_ROOT."inventory/move-all-client-stock/client=".$client_id);
+
     }
 
     public function procAddSerials()

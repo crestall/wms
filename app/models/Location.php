@@ -38,11 +38,13 @@
 class Location extends Model{
 
     public $receiving_id;
+    public $bayswater_receiving_id;
     public $table = "locations";
 
     public function __construct()
     {
         $this->receiving_id = $this->getLocationId('receiving');
+        $this->bayswater_receiving_id = $this->getLocationId('bayswater receiving');
     }
 
     private function getReceivingId()
@@ -175,7 +177,7 @@ class Location extends Model{
                 'location_id'   =>  $data['add_to_location'],
                 'qty'           =>  $data['qty_add']
             );
-            if(isset($data['under_qc']))
+            if(isset($data['qc_stock']))
             {
                 $vals['qc_count'] = $data['qty_add'];
             }
@@ -669,6 +671,25 @@ class Location extends Model{
             $vals['tray'] = 1;
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return true;
+    }
+
+    public function getAllLocationsForClient($client_id)
+    {
+        $db = Database::openConnection();
+        $q = "
+          SELECT
+            l.id, l.location, il.*, i.name, i.client_id
+          FROM
+            locations l JOIN items_locations il ON l.id = il.location_id JOIN items i ON il.item_id = i.id
+          WHERE
+            i.client_id = :client_id
+          ORDER BY
+            l.location
+        ";
+        $array = array(
+            'client_id' => $client_id
+        );
+        return $db->queryData($q, $array);
     }
 }
 
