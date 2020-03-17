@@ -1230,7 +1230,7 @@ class Order extends Model{
 
         $query1 = "
             SELECT
-                (a.total_orders + b.total_orders + c.total_orders) AS total_orders,
+                (a.total_orders) AS total_orders,
                 a.friday
                 FROM
                 (
@@ -1244,27 +1244,7 @@ class Order extends Model{
                         date_fulfilled >= $from AND date_fulfilled <= $to
                     GROUP BY
                         UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 )))
-                ) a,
-                (
-                    SELECT
-                        count(*) as total_orders
-                    FROM
-                        solar_orders
-                    WHERE
-                        date_fulfilled >= $from AND date_fulfilled <= $to
-                    GROUP BY
-                        UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 )))
-                ) b,
-                (
-                    SELECT
-                        count(*) as total_orders
-                    FROM
-                        solar_service_jobs
-                    WHERE
-                        date_completed >= $from AND date_completed <= $to
-                    GROUP BY
-                        UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_completed), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_completed), '%Y-%m-%d') ) -7, 7 )))
-                )c
+                ) a
                 WHERE
                     a.date_fulfilled >= $from AND a.date_fulfilled <= $to
         ";
