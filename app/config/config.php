@@ -185,6 +185,12 @@ return array(
     'MAX_SHIPPING_CHARGE' => 80,
 
     /*************************************************************************
+    * Direct Freight API Constants
+    **************************************************************************/
+    'DIRECT_FREIGHT_API_KEY'    => '5D74557B-84A4-46CB-87FD-4C93CF69530C',
+    'DIRECT_FREIGHT_ACC_NUMBER' => 34269,
+
+    /*************************************************************************
     * 3PL Address
     **************************************************************************/
     "THREEPL_ADDRESS" => array(
@@ -443,6 +449,7 @@ return array(
             'manage-swatches'   => true,
             'add-serials'   => true
         ),
+        /*
         'solar-jobs'  => array(
             'add-solar-install'             => true,
             'add-solar-install-new'             => false,
@@ -459,6 +466,7 @@ return array(
             'update-install-details'    => false,
             'install-items-update'      => false
         ),
+        */
 		'clients'	=> array(
 			'view-clients'	=> true,
 			'add-client'	=> true,
