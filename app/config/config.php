@@ -373,54 +373,6 @@ return array(
         'scheduling'        =>  'far fa-calendar-alt',
         'solar-jobs'        =>  'fas fa-tools'
     ),
-    "SOLAR_ADMIN_PAGES" => array(
-        'solar-jobs'  => array(
-            'add-solar-install'             => true,
-            'update-solar-job'          => false,
-            'add-service-job'           => true,
-            'view-installs'                 => true,
-            'job-search'                => true,
-            'edit-servicejob'           => false,
-            'update-service-details'    => false,
-            'view-service-jobs'         => true,
-            'update-install-details'    => false,
-            'install-items-update'      => false
-        ),
-        'products'	=> array(
-            'view-products'			=> true,
-            'add-product'			=> true,
-            'edit-product'			=> false,
-        ),
-        'inventory' => array(
-            'view-inventory'    => true,
-            'view-solar-inventory'  => false
-        ),
-        'solar-teams'   => array(
-            'add-team'  => true,
-            'edit-team' => false,
-            'view-teams'    => true
-        ),
-        'scheduling'    => array(
-            'view-schedule' => true
-        ),
-        'reports'   => array(
-            'jobs-report'       => true,
-            'solar-returns-report'    => true,
-            'solar-consumables-reorder' => true
-        ),
-    ),
-    "SOLAR_PAGES"   => array(
-        'solar-jobs'  => array(
-            'view-installs'                 => true,
-            'view-service-jobs'         => true
-        ),
-        'ordering'  => array(
-            'order-consumables' => true
-        ),
-        'scheduling'    => array(
-            'view-schedule' => true
-        ),
-    ),
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,
@@ -543,7 +495,7 @@ return array(
             'add-sales-rep'             =>  true,
             'edit-sales-rep'            =>  false,
             'ship-to-reps'              =>  true
-        ),*/
+        ),
         'solar-teams'   =>array(
             'add-team'  => true,
             'edit-team' => false,
