@@ -113,12 +113,12 @@ $c = 1;
             </div>
             <!-- store orders -->
         </div><!-- end 1st row -->
-        <div class="row"><!-- second row -->
+        <div class="row"><!-- second row>
             <div class="col-lg-6">
-                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installs.php");?>
+                <?php //include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installs.php");?>
             </div>
             <div class="col-lg-6">
-                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_service_jobs.php");?>
+                <?php //include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_service_jobs.php");?>
             </div>
         </div> <!-- end 2nd row -->
         <div class="row">
@@ -180,80 +180,6 @@ $c = 1;
             </div>
             <div class="col-lg-6">
                 <div id="products_chart"></div>
-            </div>
-        </div>
-    <?php elseif($user_role == "solar_admin"):?>
-        <input type="hidden" id="solar_admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
-        <input type="hidden" id="solar_admin_to_value" value="<?php echo strtotime('last saturday', strtotime('tomorrow'));?>" />
-        <div class="row">
-            <div class="col-lg-6">
-                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installs.php");?>
-            </div>
-            <div class="col-lg-6">
-                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_service_jobs.php");?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-10 text-center">
-                                <h2>Job Activity Last 3 Months</h2>
-                            </div>
-                            <div class="col-xs-2 text-right">
-                                 <a id="toggle_orders" data-toggle="collapse" href="#solar_activity"><span class="fa arrow huge"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="collapse in" id="solar_activity">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div id="solar_install_chart"></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div id="solar_service_chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php elseif($user_role == "solar"):?>
-        <div class="bs-callout bs-callout-primary row bs-callout-more">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Quick Links</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <p><a class="btn btn-primary btn-lg" href="/solar-jobs/view-installs"><i class="fa fas fa-tools"></i> View Installs</a></p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <p><a class="btn btn-primary btn-lg" href="/solar-jobs/view-service-jobs"><i class="fa fas fa-tools"></i> View Service Jobs</a></p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <p><a class="btn btn-success btn-lg" href="/ordering/order-consumables"><i class="fa fas fa-cash-register"></i> Order Consumables</a></p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <p><a class="btn btn-info btn-lg" href="/scheduling/view-schedule"><i class="fa far fa-calendar-alt fa-fw"></i> Scheduling</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <hr/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <h2>Some Job Info Will Be Here</h2>
-            </div>
-            <div class="col-lg-6">
-                <h2>Some Scheduling Info Will Be Here</h2>
             </div>
         </div>
     <?php else:?>

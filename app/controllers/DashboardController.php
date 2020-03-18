@@ -26,17 +26,16 @@ class DashboardController extends Controller
         if($user_role == "admin" ||  $user_role == "warehouse")
         {
             $orders = $this->order->getCurrentOrders();
-            $solar_installs = $this->solarorder->getCurrentOrders();
-            $solar_service_jobs = $this->solarservicejob->getCurrentServiceJobs();
             $store_orders = $this->order->getCurrentStoreOrders();
         }
-        /* */
+        /*
         elseif($user_role == 'solar admin')
         {
             //$clients = $this->client->getAllClients();
             $solar_installs = $this->solarorder->getCurrentOrders();
             $solar_service_jobs = $this->solarservicejob->getCurrentServiceJobs();
         }
+        */
         elseif($user_role == 'client')
         {
             $client_id = $this->user->getUserClientId( Session::getUserId() );
@@ -46,9 +45,7 @@ class DashboardController extends Controller
             'client_id'             =>  $client_id,
             'orders'                =>  $orders,
             'clients'               =>  $clients,
-            'solar_service_jobs'    =>  $solar_service_jobs,
             'store_orders'          =>  $store_orders,
-            'solar_orders'          =>  $solar_installs,
             'user_role'             =>  $user_role
         ]);
     }
