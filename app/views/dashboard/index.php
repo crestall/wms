@@ -115,10 +115,10 @@ $c = 1;
         </div><!-- end 1st row -->
         <div class="row"><!-- second row>
             <div class="col-lg-6">
-                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installs.php");?>
+                <?php //include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installs.php");?>
             </div>
             <div class="col-lg-6">
-                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_service_jobs.php");?>
+                <?php //include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_service_jobs.php");?>
             </div>
         </div> <!-- end 2nd row -->
         <div class="row">
