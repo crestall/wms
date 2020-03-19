@@ -8,7 +8,7 @@
 
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
- class Direcrfreight{
+ class Directfreight{
     protected $controller;
     protected $USER_NAME;
     protected $PWD;
