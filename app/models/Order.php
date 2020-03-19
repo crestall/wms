@@ -682,7 +682,8 @@ class Order extends Model{
             'weight'    =>  $data['weight'],
             'pallet'    =>  0
         );
-        if(isset($data['pallet']) $values['pallet'] = 1;)
+        if(isset($data['pallet']))
+            $values['pallet'] = 1;
         return $db->insertQuery("orders_packages", $values);
     }
 
