@@ -23,13 +23,14 @@ class Packaging{
         {
             foreach($packages as $p)
             {
+                $rate_type = ($p['pallet'] > 0)? "PALLET": "ITEM";
                 $pval = round($val/count($packages), 2);
                 $array['item_reference'] = Utility::generateRandString();
                 $array['width'] = $p['width'];
                 $array['height'] = $p['height'];
                 $array['depth'] = $p['depth'];
                 $array['weight'] = $p['weight'];
-                $array['type_code'] = 'CTN';
+                $array['type_code'] = $rate_type;
                 $array['pieces'] = 1;
                 $return[] = $array;
             }
@@ -91,7 +92,7 @@ class Packaging{
                             $array['depth'] = $d;
                             $array['weight'] = $b['weight'];
                             $array['pieces'] = 1;
-                            $array['type_code'] = 'CTN';
+                            $array['type_code'] = 'ITEM';
                             $return[] = $array;
                             ++$c;
                         }
@@ -112,7 +113,7 @@ class Packaging{
                             $array['depth'] = $d;
                             $array['weight'] = $b['weight'];
                             $array['pieces'] = 1;
-                            $array['type_code'] = 'CTN';
+                            $array['type_code'] = 'ITEM';
                             $return[] = $array;
                             ++$c;
                         }
@@ -131,7 +132,7 @@ class Packaging{
                             $array['depth'] = 28;
                             $array['weight'] = 4.3;
                             $array['pieces'] = 1;
-                            $array['type_code'] = 'CTN';
+                            $array['type_code'] = 'ITEM';
                             $return[] = $array;
                             ++$sachet_box;
                         }
@@ -147,7 +148,7 @@ class Packaging{
                             $array['depth'] = 28;
                             $array['weight'] = 4.3;
                             $array['pieces'] = 1;
-                            $array['type_code'] = 'CTN';
+                            $array['type_code'] = 'ITEM';
                             $return[] = $array;
                             ++$sachet_box;
                         }
@@ -163,7 +164,7 @@ class Packaging{
                             $array['depth'] = 30;
                             $array['weight'] = 2.5 + 0.033;
                             $array['pieces'] = 1;
-                            $array['type_code'] = 'CTN';
+                            $array['type_code'] = 'ITEM';
                             $return[] = $array;
                             ++$c;
                         }
@@ -178,7 +179,7 @@ class Packaging{
                             $array['depth'] = 25;
                             $array['weight'] = 1.5 + 0.025;
                             $array['pieces'] = 1;
-                            $array['type_code'] = 'CTN';
+                            $array['type_code'] = 'ITEM';
                             $return[] = $array;
                             ++$c;
                         }
@@ -190,7 +191,7 @@ class Packaging{
                         $array['depth'] = 25;
                         $array['weight'] = $total_sachets * 0.05 + 0.025;
                         $array['pieces'] = 1;
-                        $array['type_code'] = 'CTN';
+                        $array['type_code'] = 'ITEM';
                         $return[] = $array;
                     }
                 }
@@ -202,90 +203,9 @@ class Packaging{
                 $array['depth'] = $d;
                 $array['weight'] = $weight;
                 $array['pieces'] = 1;
-                $array['type_code'] = 'CTN';
+                $array['type_code'] = 'ITEM';
                 $return[] = $array;
             }
-        }
-        elseif($od['client_id'] == 69)   //Team Timbuktu
-        {
-            $weight = 0;
-            $item_count = 0;
-            foreach($items as $i)
-            {
-                $weight += $i['weight'];
-                $item_count += $i['qty'];
-            }
-
-            $c = 1;
-            $jumper_ids = array(12407,12408,14209,12410,12411,12412,12413,12414,12415,12416,12417,12418,12419,12420,12421,12422,14423,12424,12425,12426,12428,12429,12430);
-            foreach($items as $i)
-            {
-                if(array_search($i['item_id'], $jumper_ids) !== false)
-                {
-                    $array['width']	= 27;
-                    $array['height'] = 8;
-                    $array['depth'] = 40;
-                    $array['weight'] = $i['weight'];
-                    $array['pieces'] = 1;
-                    $array['type_code'] = 'CTN';
-                    $array['item_reference'] = $i['item_id'];
-                    $return[] = $array;
-                }
-                else
-                {
-                    if($c % 2 == 0)
-                    {
-                        $array['weight'] = 0.6;
-                        $return[] = $array;
-                    }
-                    else
-                    {
-                        $array['width'] = 25;
-                        $array['height'] = 5;
-                        $array['depth'] = 35;
-                        $array['weight'] = 0.3;
-                        $array['pieces'] = 1;
-                        $array['type_code'] = 'CTN';
-                        $array['item_reference'] = $i['item_id'];
-                    }
-                    ++$c;
-                }
-            }
-            if($c % 2 == 0)
-            {
-                $return[] = $array;
-            }
-        }
-        elseif($od['client_id'] == 73)   //Natural Distilling Co
-        {
-            //echo "<pre>",print_r($items),"</pre>"; die();
-            $item_count = 0;
-            foreach($items as $i)
-            {
-                $item_count += $i['qty'];
-            }
-            $boxes = self::getNDCboxes($item_count);
-            //$array['item_reference'] = Utility::generateRandString();
-            foreach($boxes as $b)
-            {
-                list($w, $d, $h) = $b['dimensions'];
-                $c = 0;
-                while($c < $b['count'])
-                {
-                    $array = array();
-                    $array['item_reference'] = Utility::generateRandString();
-                    $array['width'] = $w;
-                    $array['height'] = $h;
-                    $array['depth'] = $d;
-                    $array['weight'] = $b['weight'];
-                    $array['pieces'] = 1;
-                    $array['type_code'] = 'CTN';
-                    $return[] = $array;
-                    ++$c;
-                }
-            }
-
-            //$return[] = $array;
         }
         //item specific packages
         else
@@ -311,7 +231,7 @@ class Packaging{
                     $array['depth'] = $i['depth'];
                     $array['weight'] = $i['weight'];
                     $array['item_reference'] = $i['item_id'];
-                    $array['type_code'] = 'CTN';
+                    $array['type_code'] = 'ITEM';
                     $array['pieces'] = $i['qty'];
                     $return[] = $array;
                 }
@@ -339,7 +259,7 @@ class Packaging{
                     $array['height'] = 32;
                     $array['depth'] = 14;
                     $array['weight'] = $weight;
-                    $array['type_code'] = "PPS";
+                    $array['type_code'] = "ITEM";
                     $array['pieces'] = $whole_large;
                     $return[] = $array;
                 }
@@ -349,7 +269,7 @@ class Packaging{
                     $array['height'] = 34;
                     $array['depth'] = 8;
                     $array['weight'] = $weight;
-                    $array['type_code'] = "PPS";
+                    $array['type_code'] = "ITEM";
                     $array['pieces'] = $whole_small;
                     $return[] = $array;
                 }
