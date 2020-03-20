@@ -116,6 +116,10 @@
 
     public function getQuote($data_array, $client = "3PL Plus")
     {
+        foreach($data_array['ConsignmentLineItems'] as $da)
+        {
+            unset($da['SenderLineReference']);
+        }
         $threepl_address = Config::get("THREEPL_ADDRESS");
         $request = array(
             'SuburbFrom'            => $threepl_address['suburb'],
