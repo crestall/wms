@@ -119,8 +119,9 @@
         foreach($data_array['ConsignmentLineItems'] as $da)
         {
             unset($da['SenderLineReference']);
-            echo "<pre>",print_r($da),"</pre>";
+            //echo "<pre>",print_r($da),"</pre>";
         }
+        echo "<pre>",print_r($data_array['ConsignmentLineItems']),"</pre>";
         $threepl_address = Config::get("THREEPL_ADDRESS");
         $request = array(
             'SuburbFrom'            => $threepl_address['suburb'],
