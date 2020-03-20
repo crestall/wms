@@ -43,7 +43,7 @@
             'Authorisation: '. $this->API_KEY ,
             'AccountNumber: '.$this->ACCOUNT_NO
         );
-        echo "<pre>",print_r($headers),"</pre>";die();
+        //echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
         //curl_setopt_array ( $ch, $this->curl_options );
         curl_setopt($ch, CURLOPT_URL, $url);
