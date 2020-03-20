@@ -38,6 +38,7 @@
     {
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         $data_string = json_encode($data);
+        echo $data_string; die();
         $ch = curl_init();
         //curl_setopt_array ( $ch, $this->curl_options );
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -126,7 +127,7 @@
             'SuburbFrom'            => $threepl_address['suburb'],
             'PostcodeFrom'          => $threepl_address['postcode'],
             'SuburbTo'              => $data_array['ReceiverDetails']['Suburb'],
-            'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
+            'PostcodeTo'             => $data_array['ReceiverDetails']['Postcode'],
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
         echo "<pre>",print_r($request),"</pre>";//die();
