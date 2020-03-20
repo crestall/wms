@@ -33,7 +33,7 @@
         $url = directfreight::API_SCHEME . $this->API_HOST . directfreight::API_BASE_URL . $action;
         $data_string = json_encode($data);
         $ch = curl_init();
-        curl_setopt_array ( $ch, $this->curl_options );
+        //curl_setopt_array ( $ch, $this->curl_options );
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
