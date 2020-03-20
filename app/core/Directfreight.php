@@ -30,7 +30,7 @@
 
     protected function sendPostRequest($action, $data = array())
     {
-        $url = directfreight::API_SCHEME . $this->API_HOST . directfreight::API_BASE_URL . $action;
+        $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         $data_string = json_encode($data);
         $ch = curl_init();
         //curl_setopt_array ( $ch, $this->curl_options );
@@ -119,8 +119,8 @@
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
         echo "<pre>",print_r($request),"</pre>";//die();
-        echo json_encode($request);
-        $response = $this->sendPostRequest('/GetConsignmentPrice/', json_encode($request));
+        //echo json_encode($request);
+        $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
         echo "<pre>",print_r($response),"</pre>";die();
         list($a_headers,$a_data) = $this->getResponse($response);
         echo "<pre>",print_r($a_data),"</pre>";
