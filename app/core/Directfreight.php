@@ -38,17 +38,18 @@
     {
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         $data_string = json_encode($data);
-        //echo $data_string; die();
+        $headers = array(
+            'Content-Type: application/json',
+            'Authorisation: Basic '. $this->API_KEY ,
+            'AccountNumber: '.$this->ACCOUNT_NO
+        );
+        echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
         //curl_setopt_array ( $ch, $this->curl_options );
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Authorisation: Basic '. $this->API_KEY ,
-            'AccountNumber: '.$this->ACCOUNT_NO
-        ));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
