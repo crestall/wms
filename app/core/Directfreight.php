@@ -47,6 +47,23 @@
         );
         //echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => "https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS =>"{\"SuburbFrom\":\"Rowville\",\"PostcodeFrom\":\"3178\",\"SuburbTo\":\"WEST RYDE\",\"PostcodeTo\":\"2114\",\"ConsignmentLineItems\":[{\"SenderLineReference\":\"MdX0zWU7\",\"RateType\":\"ITEM\",\"Items\":1,\"Width\":22,\"Height\":2,\"Length\":28,\"KGS\":1}]}",
+            CURLOPT_HTTPHEADER => array(
+                "Authorisation: 5D74557B-84A4-46CB-87FD-4C93CF69530C",
+                "AccountNumber: 34269",
+                "Content-Type: application/json"
+            ),
+        ));
+        /*
         //curl_setopt_array ( $ch, $this->curl_options );
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
@@ -56,6 +73,8 @@
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+        */
+
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
