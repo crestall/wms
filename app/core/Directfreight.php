@@ -114,11 +114,11 @@
         $request = array(
             'SuburbFrom'            => $threepl_address['suburb'],
             'PostcodeFrom'          => $threepl_address['postcode'],
-            'SuburbTo'              => $data_array['to_address']['suburbName'],
-            'PostodeTo'             => $data_array['to_address']['postCode'],
-            'ConsignmentLineItems'  => $data_array['goods']
+            'SuburbTo'              => $data_array['ReceiverDetails']['Suburb'],
+            'PostodeTo'             => $data_array['ReceiverDetails']['Postcode'],
+            'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
-        //echo "<pre>",print_r($request),"</pre>";
+        echo "<pre>",print_r($request),"</pre>";
         //echo json_encode($request);
         $response = $this->sendPostRequest('/GetConsignmentPrice/', $request);
 

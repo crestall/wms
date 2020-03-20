@@ -787,7 +787,7 @@ class ajaxfunctionsController extends Controller
         $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
 
         $df_details = $this->directfreight->getDetails($od, $items);
-        echo "<pre>",print_r($df_details),"</pre>"; die(); 
+        //echo "<pre>",print_r($df_details),"</pre>"; die(); 
 
         $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
         //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
