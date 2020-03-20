@@ -196,7 +196,7 @@
 
     public function getDetails($od, $items)
     {
-        $ci = $this->client->getClientInfo($od['client_id']);
+        $ci = $this->controller->client->getClientInfo($od['client_id']);
         $packages = $this->controller->order->getPackagesForOrder($od['id']);
         $parcels = Packaging::getPackingForOrder($od,$items,$packages);
         $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "Please leave in a safe place out of the weather";
