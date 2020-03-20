@@ -218,7 +218,7 @@
             'State'                 => $od['state'],
             'Postcode'              => $od['postcode'],
             'ReceiverContactMobile' => $od['contact_phone'],
-            'ReceiverContactEmail'  => $od['email'],
+            'ReceiverContactEmail'  => $od['tracking_email'],
             'IsAuthorityToLeave'    => $od['signature_req'] == 0,
             'DeliveryInstructions'  => $delivery_instructions
         );
