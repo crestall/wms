@@ -40,7 +40,7 @@
         $data_string = json_encode($data);
         $headers = array(
             'Content-Type: application/json',
-            'Authorisation: Basic '. $this->API_KEY ,
+            'Authorisation: '. $this->API_KEY ,
             'AccountNumber: '.$this->ACCOUNT_NO
         );
         echo "<pre>",print_r($headers),"</pre>";die();
