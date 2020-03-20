@@ -38,6 +38,7 @@
     {
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         $data_string = json_encode($data);
+        echo $data_string; die();
         $ch = curl_init();
         //curl_setopt_array ( $ch, $this->curl_options );
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -120,8 +121,7 @@
         {
             unset($da['SenderLineReference']);
             //echo "<pre>",print_r($da),"</pre>";
-        }
-        echo "<pre>",print_r($data_array['ConsignmentLineItems']),"</pre>";
+        } 
         $threepl_address = Config::get("THREEPL_ADDRESS");
         $request = array(
             'SuburbFrom'            => $threepl_address['suburb'],
