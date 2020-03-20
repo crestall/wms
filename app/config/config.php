@@ -188,7 +188,7 @@ return array(
     * Direct Freight API Constants
     **************************************************************************/
     'DIRECT_FREIGHT_API_KEY'    => '5D74557B-84A4-46CB-87FD-4C93CF69530C',
-    'DIRECT_FREIGHT_ACC_NUMBER' => 34269,
+    'DIRECT_FREIGHT_ACC_NUMBER' => '34269',
 
     /*************************************************************************
     * 3PL Address

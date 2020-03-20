@@ -16,6 +16,9 @@
     protected $CUSTOMER_CODE;
     protected $curl_options;
     protected $sandbox = false;
+    protected $API_KEY ;
+    protected $ACCOUNT_NO;
+
 
     const   API_SCHEME   = 'https://';
     const   API_BASE_URL = 'webservices.directfreight.com.au/Dispatch/api/';
@@ -26,6 +29,9 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
+        $this->controller = $controller;
+        $this->API_KEY    = Config::get('DIRECT_FREIGHT_API_KEY');
+        $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
     }
 
     protected function sendPostRequest($action, $data = array())
@@ -38,9 +44,9 @@
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorisation: ".Config::get('DIRECT_FREIGHT_API_KEY'),
-            "AccountNumber: ".Config::get('DIRECT_FREIGHT_ACC_NUMBER'),
-            "Content-Type: application/json"
+            'Content-Type: application/json',
+            'Authorisation: Basic '. $this->API_KEY ,
+            'AccountNumber: '.$this->ACCOUNT_NO
         ));
         $result = curl_exec($ch);
         $err = curl_error($ch);
