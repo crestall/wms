@@ -119,7 +119,7 @@
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
         echo "<pre>",print_r($request),"</pre>";//die();
-        //echo json_encode($request);
+        echo json_encode($request);
         $response = $this->sendPostRequest('/GetConsignmentPrice/', json_encode($request));
         echo "<pre>",print_r($response),"</pre>";die();
         list($a_headers,$a_data) = $this->getResponse($response);
