@@ -45,8 +45,8 @@
             'Authorisation: '. $this->API_KEY ,
             'AccountNumber: '.$this->ACCOUNT_NO
         );
-        require_once 'HTTP/Request2.php';
-        die($data_string);
+        //require_once 'HTTP/Request2.php';
+        //die($data_string);
         $request = new HTTP_Request2();
         $request->setUrl('https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/');
         $request->setMethod(HTTP_Request2::METHOD_POST);
