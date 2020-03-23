@@ -61,7 +61,7 @@
         try {
             $response = $request->send();
             if ($response->getStatus() == 200) {
-                echo $response->getBody();
+                echo 'Response: '.$response->getBody();
             }
             else {
                 echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
@@ -71,7 +71,7 @@
         catch(HTTP_Request2_Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }
-        die();
+        die('Request');
         /*
         //echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
