@@ -45,6 +45,23 @@
             'Authorisation: '. $this->API_KEY ,
             'AccountNumber: '.$this->ACCOUNT_NO
         );
+        $client = new http\Client;
+        $request = new http\Client\Request;
+        $request->setRequestUrl('https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/');
+        $request->setRequestMethod('POST');
+        $body = new http\Message\Body;
+        $body->append('{"SuburbFrom":"Rowville","PostcodeFrom":"3178","SuburbTo":"WEST RYDE","PostcodeTo":"2114","ConsignmentLineItems":[{"SenderLineReference":"MdX0zWU7","RateType":"ITEM","Items":1,"Width":22,"Height":2,"Length":28,"KGS":1}]}');
+        $request->setBody($body);
+        $request->setOptions(array());
+        $request->setHeaders(array(
+            'Authorisation' => '5D74557B-84A4-46CB-87FD-4C93CF69530C',
+            'AccountNumber' => '34269',
+            'Content-Type' => 'application/json'
+        ));
+        $client->enqueue($request)->send();
+        $response = $client->getResponse();
+        echo $response->getBody(); die();
+        /*
         //echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
         curl_setopt_array($ch, array(
@@ -63,7 +80,7 @@
                 "Content-Type: application/json"
             ),
         ));
-        /*
+
         //curl_setopt_array ( $ch, $this->curl_options );
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
