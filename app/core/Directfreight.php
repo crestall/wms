@@ -45,22 +45,33 @@
             'Authorisation: '. $this->API_KEY ,
             'AccountNumber: '.$this->ACCOUNT_NO
         );
-        $client = new http\Client;
-        $request = new http\Client\Request;
-        $request->setRequestUrl('https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/');
-        $request->setRequestMethod('POST');
-        $body = new http\Message\Body;
-        $body->append('{"SuburbFrom":"Rowville","PostcodeFrom":"3178","SuburbTo":"WEST RYDE","PostcodeTo":"2114","ConsignmentLineItems":[{"SenderLineReference":"MdX0zWU7","RateType":"ITEM","Items":1,"Width":22,"Height":2,"Length":28,"KGS":1}]}');
-        $request->setBody($body);
-        $request->setOptions(array());
-        $request->setHeaders(array(
+        require_once 'HTTP/Request2.php';
+        $request = new HTTP_Request2();
+        $request->setUrl('https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/');
+        $request->setMethod(HTTP_Request2::METHOD_POST);
+        $request->setConfig(array(
+            'follow_redirects' => TRUE
+        ));
+        $request->setHeader(array(
             'Authorisation' => '5D74557B-84A4-46CB-87FD-4C93CF69530C',
             'AccountNumber' => '34269',
             'Content-Type' => 'application/json'
         ));
-        $client->enqueue($request)->send();
-        $response = $client->getResponse();
-        echo $response->getBody(); die();
+        $request->setBody('{"SuburbFrom":"Rowville","PostcodeFrom":"3178","SuburbTo":"WEST RYDE","PostcodeTo":"2114","ConsignmentLineItems":[{"SenderLineReference":"MdX0zWU7","RateType":"ITEM","Items":1,"Width":22,"Height":2,"Length":28,"KGS":1}]}');
+        try {
+            $response = $request->send();
+            if ($response->getStatus() == 200) {
+                echo $response->getBody();
+            }
+            else {
+                echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+                $response->getReasonPhrase();
+            }
+        }
+        catch(HTTP_Request2_Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+        die();
         /*
         //echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
