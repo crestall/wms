@@ -39,7 +39,7 @@
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         //die($url);
         $data_string = json_encode($data);
-        //die($data_string);
+        die($data_string);
         $headers = array(
             'Content-Type: application/json',
             'Authorisation: '. $this->API_KEY ,
