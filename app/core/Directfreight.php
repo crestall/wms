@@ -85,7 +85,7 @@
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS =>"{\"SuburbFrom\":\"Rowville\",\"PostcodeFrom\":\"3178\",\"SuburbTo\":\"WEST RYDE\",\"PostcodeTo\":\"2114\",\"ConsignmentLineItems\":[{\"SenderLineReference\":\"MdX0zWU7\",\"RateType\":\"ITEM\",\"Items\":1,\"Width\":22,\"Height\":2,\"Length\":28,\"KGS\":1}]}",
+            CURLOPT_POSTFIELDS =>"{\"SuburbFrom\":\"Rowville\",\"PostcodeFrom\":\"3178\",\"SuburbTo\":\"WEST RYDE\",\"PostcodeTo\":\"2114\",\"ConsignmentLineItems\":[{\"SenderLineReference\":\"MdX0zWU7\",\"RateType\":\"ITEM\",\"Items\":1,\"Width\":22,\"Height\":2,\"Length\":28,\"KGS\":1,'\"Cubic\":0}]}",
             CURLOPT_HTTPHEADER => array(
                 "Authorisation: 5D74557B-84A4-46CB-87FD-4C93CF69530C",
                 "AccountNumber: 34269",
