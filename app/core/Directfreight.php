@@ -91,6 +91,7 @@
                 "AccountNumber: 34269",
                 "Content-Type: application/json"
             ),
+            CURLOPT_VERBOSE => true
         ));
         /*
         //curl_setopt_array ( $ch, $this->curl_options );
