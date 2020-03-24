@@ -44,7 +44,7 @@
             'Content-Type: application/json',
             'Authorisation: '. $this->API_KEY ,
             'AccountNumber: '.$this->ACCOUNT_NO
-        );
+        );/*
         require_once '/opt/cpanel/ea-php56/root/usr/share/pear/HTTP/Request2.php';
         //die($data_string);
         $request = new HTTP_Request2();
@@ -73,7 +73,7 @@
             echo 'Error: ' . $e->getMessage();
         }
         die('Request');
-        /*
+          */
         //echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
         curl_setopt_array($ch, array(
@@ -102,7 +102,7 @@
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 0);
-        */
+
 
         $result = curl_exec($ch);
         $err = curl_error($ch);
