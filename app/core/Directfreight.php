@@ -94,7 +94,7 @@
             CURLOPT_VERBOSE => true
         ));
         $verbose = fopen('php://temp', 'w+');
-        curl_setopt($handle, CURLOPT_STDERR, $verbose);
+        curl_setopt($ch, CURLOPT_STDERR, $verbose);
         /*
         //curl_setopt_array ( $ch, $this->curl_options );
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -110,8 +110,8 @@
         $result = curl_exec($ch);
 
         if ($result === FALSE) {
-            printf("cUrl error (#%d): %s<br>\n", curl_errno($handle),
-                   htmlspecialchars(curl_error($handle)));
+            printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
+                   htmlspecialchars(curl_error($ch)));
         }
 
         rewind($verbose);
