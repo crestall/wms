@@ -98,7 +98,7 @@
             $oi_ids[$i['line_id']] = $i['item_id'];
     	}
         $eparcel_details = $this->controller->{$eParcelClass}->getShipmentDetails($this->order_details, $this->items, $express);
-        echo "<pre>",print_r($eparcel_details),"</pre>"; die();
+        //echo "<pre>",print_r($eparcel_details),"</pre>"; die();
         $eparcel_shipments['shipments'][0] = $eparcel_details;
         if($ip == 0)
         {
