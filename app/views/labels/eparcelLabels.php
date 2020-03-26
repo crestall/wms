@@ -44,6 +44,7 @@
                         <div class='feedbackbox'>
                             <h2><i class="far fa-check-circle"></i>Labels Have Been Generated</h2>
                             <p>Click the button to download them</p>
+                            <?php echo "<pre>",print_r($response),"</pre>"; die(); ?>
                             <p><a href="<?php echo $response['labels'][0]['url'];?>" class="btn btn-primary" target="_blank">Download</a></p>
                         </div>
                     <?php endif;?>
