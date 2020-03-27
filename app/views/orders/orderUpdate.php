@@ -508,6 +508,31 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                                 </div>
                             </div>
                         </form>
+                    <?php elseif($order['courier_id'] == $this->controller->courier->bayswaterEparcelId):?>
+                        <form id="bayswater_eparcel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Bayswater Eparcel</h4>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control required" name="consignment_id" id="consignment_id" value="<?php echo Form::value('consignment_id');?>" />
+                                    <?php echo Form::displayError('consignment_id');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Charge Amount</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control number" name="local_charge" id="local_charge" value="<?php echo $local_charge;?>" />
+                                    </div>
+                                    <?php echo Form::displayError('local_charge');?>
+                                </div>
+                            </div>
+                        </form>
                     <?php endif;?>
                 </div>
                 <div class="row">
