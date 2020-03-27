@@ -11,6 +11,7 @@ class Courier extends Model{
     public $directFreightId;
     public $cometLocalId;
     public $sydneyCometId;
+    public $bayswaterEparcelId;
 
     public function __construct()
     {
@@ -26,6 +27,7 @@ class Courier extends Model{
         $this->directFreightId = $this->getCourierId('Direct Freight');
         $this->cometLocalId = $this->getCourierId('Comet White Glove');
         $this->sydneyCometId = $this->getCourierId('Sydney Comet');
+        $this->bayswaterEparcelId = $this->getCourierId('Bayswater Eparcel');
     }
 
     public function addCourier($data)

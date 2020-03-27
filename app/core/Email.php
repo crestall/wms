@@ -734,7 +734,7 @@
                 <p>Please visit <a href='https://www.hunterexpress.com.au'>www.hunterexpress.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Quick Track' form at the top right of the webpage.</p>
             ";
         }
-        elseif($courier_name == "eParcel" || $courier_name == "eParcel Express")
+        elseif($courier_name == "eParcel" || $courier_name == "eParcel Express" || $courier_name == "Bayswater Eparcel")
         {
             $content .= "
                     <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
@@ -782,7 +782,8 @@
 		$mail->MsgHTML($body);
 
 		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
-        //$mail->AddBCC("mark.solly@3plplus.com.au", "Mark Solly");
+        //$mail->AddAddress("mark.solly@3plplus.com.au", "Mark Solly");
+        $mail->AddBCC("mark.solly@3plplus.com.au", "Mark Solly");
 
         if($client_details['id'] == 55)
         {

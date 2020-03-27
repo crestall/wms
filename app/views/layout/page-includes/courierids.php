@@ -7,3 +7,4 @@
 <input type="hidden" id="direct_freight_id" value="<?php echo $this->controller->courier->directFreightId;?>" />
 <input type="hidden" id="local_id" value="<?php echo $this->controller->courier->localId;?>" />
 <input type="hidden" id="comet_local_id" value="<?php echo $this->controller->courier->cometLocalId;?>" />
+<input type="hidden" id="bayswater_eparcel_id" value="<?php echo $this->controller->courier->bayswaterEparcelId;?>" /> 

@@ -487,6 +487,10 @@ class ajaxfunctionsController extends Controller
             {
                 $this->orderfulfiller->fulfillSydneyCometOrder($order_ids);
             }
+            elseif($this->request->data['courier_id'] == $this->courier->bayswaterEparcelId)
+            {
+                $this->orderfulfiller->fulfillBayswaterEparcelOrder();
+            }
             else
             {
                 Session::set('showerrorfeedback', true);
@@ -785,6 +789,10 @@ class ajaxfunctionsController extends Controller
         $eparcel_express_details    = $this->Eparcel->getShipmentDetails($od, $items, true);
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
         $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
+
+        //$df_details = $this->directfreight->getDetails($od, $items);
+        //echo "<pre>",print_r($df_details),"</pre>"; die();
+        //$df_response = $this->directfreight->getQuote($df_details);
 
         $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
         //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();

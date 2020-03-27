@@ -53,6 +53,8 @@ class Controller {
 
     public $woocommerce;
 
+    public $directfreight;
+
     public $shopify;
 
     public $squarespace;
@@ -76,6 +78,7 @@ class Controller {
         $this->view                =  new View($this);
         $this->redirector          =  new Redirector();
         $this->woocommerce         =  new Woocommerce($this);
+        $this->directfreight       =  new Directfreight($this);
         $this->squarespace         =  new Squarespace($this);
         $this->shopify             =  new Shopify($this);
         $this->allocations         =  new Allocations($this);

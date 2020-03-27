@@ -679,8 +679,11 @@ class Order extends Model{
             'width'     =>  $data['width'],
             'height'    =>  $data['height'],
             'depth'     =>  $data['depth'],
-            'weight'    =>  $data['weight']
+            'weight'    =>  $data['weight'],
+            'pallet'    =>  0
         );
+        if(isset($data['pallet']))
+            $values['pallet'] = 1;
         return $db->insertQuery("orders_packages", $values);
     }
 

@@ -65,6 +65,40 @@
         $this->recordOutput("order_fulfillment/eparcel");
     }
 
+    public function fulfillBayswaterEparcelOrder()
+    {
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "FULFILLING BAYSWATER EPARCEL ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
+
+        $db = Database::openConnection(); 
+
+        $o_values = array(
+            'status_id'			=>	$this->controller->order->fulfilled_id,
+            'date_fulfilled'	=>	time(),
+            'consignment_id'    =>  $this->controller->request->data['consignment_id'],
+            'total_cost'        =>  $this->controller->request->data['local_charge']
+        );
+        $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
+        //order is now fulfilled, reduce stock
+        $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
+        $this->output .= "Reducing Stock and recording movement fo order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
+        $this->removeStock($items, $this->controller->request->data['order_ids']);
+
+        if( !empty($od['tracking_email']) )
+        {
+            $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+            //$mailer->sendTrackingEmail($id);
+            Email::sendTrackingEmail($od['id']);
+        }
+
+        $this->recordOutput('order_fulfillment/baywatereparcel');
+        Session::set('showfeedback', true);
+        $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Bayswter Eparcel</p>";
+
+    }
+
     public function fulfillHuntersOrders(Array $order_ids)
     {
         $this->output = "=========================================================================================================".PHP_EOL;
@@ -332,70 +366,6 @@
         $this->recordOutput("order_fulfillment/sydneycomet");
     }
 
-    public function fulfillSolarOrder($order_ids)
-    {
-        $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "FULFILLING SOLAR ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
-        $this->output .= "=========================================================================================================".PHP_EOL;
-        $db = Database::openConnection();
-        foreach($order_ids as $id)
-        {
-            $od = $this->controller->solarorder->getOrderDetail($id);
-            if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
-            {
-                $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
-                $this->output .= "Doing Order ID: ".$od['id'].PHP_EOL;
-                $db->updateDatabaseFields('solar_orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time() ), $id);
-                //order is now fulfilled, reduce stock
-                $items = $this->controller->solarorder->getItemsForOrder($id);
-
-                $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
-                $this->removeSolarOrderStock($items, $id);
-
-                Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>{$od['id']} has been successfully fulfilled</p>";
-            }
-            else
-            {
-                Session::set('showerrorfeedback', true);
-        	    $_SESSION['errorfeedback'] .= "<h3>{$od['work_order']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
-            }
-        }
-        $this->recordOutput("order_fulfillment/solar");
-    }
-
-    public function fulfillSolarService($order_ids)
-    {
-        $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "FULFILLING SOLAR SERVICE JOBS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
-        $this->output .= "=========================================================================================================".PHP_EOL;
-        $db = Database::openConnection();
-        foreach($order_ids as $id)
-        {
-            $od = $this->controller->solarservicejob->getJobDetail($id);
-            if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
-            {
-                $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
-                $this->output .= "Doing Order ID: ".$od['id'].PHP_EOL;
-                $db->updateDatabaseFields('solar_service_jobs', array('status_id' => $this->controller->order->fulfilled_id, 'date_completed' => time() ), $id);
-                //order is now fulfilled, reduce stock
-                $items = $this->controller->solarservicejob->getItemsForJob($id);
-
-                $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
-                $this->removeSolarServiceJobStock($items, $id);
-
-                Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>{$od['work_order']} has been successfully fulfilled</p>";
-            }
-            else
-            {
-                Session::set('showerrorfeedback', true);
-        	    $_SESSION['errorfeedback'] .= "<h3>{$od['work_order']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
-            }
-        }
-        $this->recordOutput("order_fulfillment/solar-service");
-    }
-
     public function fulfillOurTruckOrder()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
@@ -544,100 +514,6 @@
             	'date'		    =>	time(),
                 'entered_by'    =>  Session::getUserId() ,
                 'location_id'   =>  $location_id
-            );
-            $this->output .= "Inserting movement reason".PHP_EOL;
-            $this->output .= print_r($im_values, true).PHP_EOL;
-            $db->insertQuery('items_movement', $im_values);
-            $cc =  $db->queryValue('items_locations', array('item_id' => $item_id, 'location_id' => $location_id), 'qty') ;
-            if($cc <= 0)
-            {
-                $check = $db->queryRow("SELECT * FROM items_locations WHERE location_id = $location_id AND qty > 0");
-                if(empty($check))
-                {
-                    $db->query("UPDATE clients_bays SET date_removed = ".time()." WHERE location_id = $location_id AND client_id = {$item_d['client_id']} AND date_removed = 0");
-                    if($item_d['double_bay'] > 0)
-                    {
-                        $this_location = $db->queryValue('locations', array('id' => $location_id), 'location');
-                        $next_location = substr($this_location, 0, -1)."b";
-                        $next_location_id = $db->queryValue('locations', array('location' => $next_location));
-                        $db->query("UPDATE clients_locations SET date_removed = ".time()." WHERE location_id = $next_location_id AND client_id = {$item_d['client_id']} AND date_removed = 0");
-                    }
-                }
-            }
-            //stock notifications
-            $this->checkStockLevels($item_id);
-        }
-    }
-
-    private function removeSolarOrderStock($items, $order_id)
-    {
-        $db = Database::openConnection();
-        foreach($items as $i)
-        {
-            $qty = $i['qty'];
-            $item_id = $i['item_id'];
-            $location_id = $i['location_id'];
-            $item_d = $db->queryByID('items', $item_id);
-            //remove from stock
-            $this->output .= "Removing from stock : UPDATE items_locations SET qty = qty - $qty WHERE item_id = $item_id AND location_id = $location_id".PHP_EOL;
-            $db->query("UPDATE items_locations SET qty = qty - $qty WHERE item_id = $item_id AND location_id = $location_id");
-            //item movement reason
-            $reason_id = $this->controller->stockmovementlabels->getLabelId("Order Fulfillment");
-            $im_values = array(
-            	'reason_id'	        =>	$reason_id,
-            	'qty_out'	        =>	$qty,
-            	'item_id'	        =>	$item_id,
-            	'solar_order_id'    =>	$order_id,
-            	'date'		        =>	time(),
-                'entered_by'        =>  Session::getUserId() ,
-                'location_id'       =>  $location_id
-            );
-            $this->output .= "Inserting movement reason".PHP_EOL;
-            $this->output .= print_r($im_values, true).PHP_EOL;
-            $db->insertQuery('items_movement', $im_values);
-            $cc =  $db->queryValue('items_locations', array('item_id' => $item_id, 'location_id' => $location_id), 'qty') ;
-            if($cc <= 0)
-            {
-                $check = $db->queryRow("SELECT * FROM items_locations WHERE location_id = $location_id AND qty > 0");
-                if(empty($check))
-                {
-                    $db->query("UPDATE clients_bays SET date_removed = ".time()." WHERE location_id = $location_id AND client_id = {$item_d['client_id']} AND date_removed = 0");
-                    if($item_d['double_bay'] > 0)
-                    {
-                        $this_location = $db->queryValue('locations', array('id' => $location_id), 'location');
-                        $next_location = substr($this_location, 0, -1)."b";
-                        $next_location_id = $db->queryValue('locations', array('location' => $next_location));
-                        $db->query("UPDATE clients_locations SET date_removed = ".time()." WHERE location_id = $next_location_id AND client_id = {$item_d['client_id']} AND date_removed = 0");
-                    }
-                }
-            }
-            //stock notifications
-            $this->checkStockLevels($item_id);
-        }
-    }
-
-    private function removeSolarServiceJobStock($items, $order_id)
-    {
-        $db = Database::openConnection();
-        foreach($items as $i)
-        {
-            $qty = $i['qty'];
-            $item_id = $i['item_id'];
-            $location_id = $i['location_id'];
-            $item_d = $db->queryByID('items', $item_id);
-            //remove from stock
-            $this->output .= "Removing from stock : UPDATE items_locations SET qty = qty - $qty WHERE item_id = $item_id AND location_id = $location_id".PHP_EOL;
-            $db->query("UPDATE items_locations SET qty = qty - $qty WHERE item_id = $item_id AND location_id = $location_id");
-            //item movement reason
-            $reason_id = $this->controller->stockmovementlabels->getLabelId("Order Fulfillment");
-            $im_values = array(
-            	'reason_id'	            =>	$reason_id,
-            	'qty_out'	            =>	$qty,
-            	'item_id'	            =>	$item_id,
-            	'solar_service_job_id'  =>	$order_id,
-            	'date'		            =>	time(),
-                'entered_by'            =>  Session::getUserId() ,
-                'location_id'           =>  $location_id
             );
             $this->output .= "Inserting movement reason".PHP_EOL;
             $this->output .= print_r($im_values, true).PHP_EOL;

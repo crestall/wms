@@ -9,9 +9,11 @@
 class NuchevEparcel extends Eparcel
 {
     private $client_id = 5;
+    const    API_BASE_URL = '/testbed/shipping/v1/';
 	public function init()
 	{
     	$cd = $this->controller->client->getClientInfo($this->client_id);
+
         if(!empty($cd['api_key']))
         {
             $this->API_KEY = $cd['api_key'];
