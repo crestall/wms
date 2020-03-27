@@ -65,7 +65,7 @@
         $this->recordOutput("order_fulfillment/eparcel");
     }
 
-    public function fulfillBayswaterEparcelOrders()
+    public function fulfillBayswaterEparcelOrder()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "FULFILLING BAYSWATER EPARCEL ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
