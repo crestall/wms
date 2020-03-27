@@ -439,6 +439,26 @@
                                     progress = true;
                                 }
                             }
+                            if(courier_id == $('#bayswater_eparcel_id').val())
+                            {
+                                //$("#our_truck").validate().element('#consignment_id');
+                                if($('#bayswater_eparcel').valid())
+                                {
+                                    consignment_id = $('#consignment_id').val();
+                                    local_charge = $('#local_charge').val();
+                                    if(consignment_id == "")
+                                    {
+                                        valid = false;
+                                        text += "Consignment ID for this courier is required\n";
+                                    }
+                                    if(local_charge == "")
+                                    {
+                                        valid = false;
+                                        text += "A charge for this courier is required\n";
+                                    }
+                                    progress = true;
+                                }
+                            }
                             if(courier_id == $('#direct_freight_id').val())
                             {
                                     consignment_id = $('#direct_consignment_id').val();
