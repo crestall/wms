@@ -280,7 +280,7 @@ class DownloadsController extends Controller {
 
     public function orderAuspostExportCSV()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -290,30 +290,36 @@ class DownloadsController extends Controller {
         }
         //$client_info = $this->client->getClientInfo($client_id);
         $cols = array(
-            "ConID",
-            "Receiver Name",
-            "Receiver Address1",
-            "Receiver Address2",
-            "Receiver City",
-            "Receiver State",
-            "Receiver Postcode",
-            "Customer Reference",
-            "Special Instruction",
-            "Line Reference",
-            "Package Description",
-            "Item Count",
+            "Row type",
+            "Sender account",
+            "Payer account",
+            "Recipient contact name",
+            "Recipient business name",
+            "Recipient address line 1",
+            "Recipient address line 2",
+            "Recipient address line 3",
+            "Recipient suburb",
+            "Recipient state",
+            "Recipient postcode",
+            "Send tracking email to recipient",
+            "Recipient email address",
+            "Recipient phone number",
+            "Delivery/special instruction 1",
+            "Special instruction 2",
+            "Special instruction 3",
+            "Sender reference 1 ",
+            "Sender reference 2",
+            "Product id",
+            "Authority to leave",
+            "Safe drop ",
+            "Quantity",
+            "Packaging type",
             "Weight",
             "Length",
             "Width",
             "Height",
-            "Qty",
-            "Cubic",
-            "Receiver Contact Name",
-            "Receiver Contact Email",
-            "Receiver Contact Mobile",
-            "ATL",
-            "Dangerous Goods",
-            "End of Record"
+            "Parcel contents",
+            "Transit cover value"
         );
         $rows = array();
         foreach($this->request->data['order_ids'] as $order_id)
@@ -330,6 +336,7 @@ class DownloadsController extends Controller {
                 //$products = $this->getItemsCountForOrder($co['id']);
 
                 $parcels = Packaging::getPackingForOrder($od,$items,$packages);
+                echo "<pre>",print_r($parcels),"</pre>"; continue;
 
                 foreach($parcels as $i)
                 {
@@ -366,9 +373,9 @@ class DownloadsController extends Controller {
             }
 
         }
-        $expire=time()+60;
-        setcookie("fileDownload", "true", $expire, "/");
-        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "order_export"], false);
+        //$expire=time()+60;
+        //setcookie("fileDownload", "true", $expire, "/");
+        //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "order_export"], false);
     }
 
     public function orderExportCSV()
