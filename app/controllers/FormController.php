@@ -1329,28 +1329,33 @@ class FormController extends Controller {
                     $skip_first = false;
                     continue;
                 }
-                if(!empty($row[11]))
+                if(!empty($row[10]))
                 {
-                    if(!$this->emailValid($row[11]))
+                    if(!$this->emailValid($row[10]))
                     {
                         $data_errors = true;
                         $data_error_string .= "<li>Invalid tracking email on line: $line</li>";
                     }
                 }
-                if(!$this->dataSubbed($row[3]))
+                if(!$this->dataSubbed($row[2]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Name is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[4]))
+                if(!$this->dataSubbed($row[3]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Address is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[6]))
+                if(!$this->dataSubbed($row[5]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Suburb/City is required on line: $line</li>";
+                }
+                if(!$this->dataSubbed($row[6]))
+                {
+                    $data_errors = true;
+                    $data_error_string .= "<li>A Ship To State is required on line: $line</li>";
                 }
                 if(!$this->dataSubbed($row[7]))
                 {
@@ -1373,22 +1378,21 @@ class FormController extends Controller {
                         'error_string'          => '',
                         'items'                 => array(),
                         'ref2'                  => '',
-                        'client_order_id'       => $row[1],
-                        'customer_order_id'     => $row[0],
+                        'client_order_id'       => $row[0],
                         'errors'                => 0,
-                        'tracking_email'        => $row[11],
-                        'ship_to'               => $row[3],
-                        'company_name'          => $row[2],
+                        'tracking_email'        => $row[10],
+                        'ship_to'               => $row[2],
+                        'company_name'          => $row[1],
                         'date_ordered'          => time(),
                         'status_id'             => $this->controller->order->ordered_id,
                         'eparcel_express'       => 0,
                         'signature_req'         => 0,
-                        'contact_phone'         => $row[10],
+                        'contact_phone'         => $row[9],
                         'import_error'          => false,
                         'import_error_string'   => '',
                         'weight'                => 0,
-                        'instructions'          => $row[13],
-                        '3pl_comments'          => $row[15]
+                        'instructions'          => $row[12],
+                        '3pl_comments'          => $row[14]
                     );
                     //the items
                     $items = array();
@@ -1428,12 +1432,12 @@ class FormController extends Controller {
                         $orders_items[$imported_order_count] = $items;
                         //validate address
                         $ad = array(
-                            'address'   => $row[4],
-                            'address_2' => $row[5],
-                            'suburb'    => $row[6],
-                            'state'     => $row[7],
-                            'postcode'  => $row[8],
-                            'country'   => $row[9]
+                            'address'   => $row[3],
+                            'address_2' => $row[4],
+                            'suburb'    => $row[5],
+                            'state'     => $row[6],
+                            'postcode'  => $row[7],
+                            'country'   => $row[8]
                         );
                         if($ad['country'] == "AU")
                         {
