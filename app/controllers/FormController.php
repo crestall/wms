@@ -1352,17 +1352,17 @@ class FormController extends Controller {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Suburb/City is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[8]))
+                if(!$this->dataSubbed($row[7]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Postcode is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[9]))
+                if(!$this->dataSubbed($row[8]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Country is required on line: $line</li>";
                 }
-                elseif(strlen($row[9]) > 2)
+                elseif(strlen($row[8]) > 2)
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>Please use the two letter ISO code for countries on line: $line</li>";
