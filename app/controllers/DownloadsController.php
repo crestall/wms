@@ -278,6 +278,99 @@ class DownloadsController extends Controller {
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "comet_export".date("Ymd")]);
     }
 
+    public function orderAuspostExportCSV()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        //$client_info = $this->client->getClientInfo($client_id);
+        $cols = array(
+            "ConID",
+            "Receiver Name",
+            "Receiver Address1",
+            "Receiver Address2",
+            "Receiver City",
+            "Receiver State",
+            "Receiver Postcode",
+            "Customer Reference",
+            "Special Instruction",
+            "Line Reference",
+            "Package Description",
+            "Item Count",
+            "Weight",
+            "Length",
+            "Width",
+            "Height",
+            "Qty",
+            "Cubic",
+            "Receiver Contact Name",
+            "Receiver Contact Email",
+            "Receiver Contact Mobile",
+            "ATL",
+            "Dangerous Goods",
+            "End of Record"
+        );
+        $rows = array();
+        foreach($this->request->data['order_ids'] as $order_id)
+        {
+            if( $od = $this->order->getOrderDetail($order_id) )
+            {
+                $ci = $this->client->getClientInfo($od['client_id']);
+                $name = empty($od['company_name'])? $od['ship_to']: $od['company_name'];
+                $phone = preg_replace("/\+61/","0",$od['contact_phone']);
+                $phone = preg_replace("/[^\d]/","",$phone);
+
+                $items = $this->order->getItemsForOrder($order_id);
+                $packages = $this->order->getPackagesForOrder($order_id);
+                //$products = $this->getItemsCountForOrder($co['id']);
+
+                $parcels = Packaging::getPackingForOrder($od,$items,$packages);
+
+                foreach($parcels as $i)
+                {
+                    $weight = ceil($i['pieces'] * $i['weight']);
+                    $cubic = round($i['width'] * $i['depth'] * $i['height'] * $i['pieces'] / 1000000, 3);
+                    $row = array(
+                        "",
+                        $name,
+                        str_replace(",", " ",$od['address']),
+                        str_replace(",", " ",$od['address_2']),
+                        $od['suburb'],
+                        $od['state'],
+                        $od['postcode'],
+                        "|".$ci['ref_1']."|".$od['order_number'],
+                        "",
+                        $od['client_order_id'],
+                        "CARTON",
+                        $i['pieces'],
+                        $weight,
+                        ceil($i['width']),
+                        ceil($i['depth']),
+                        ceil($i['height']),
+                        $i['pieces'],
+                        $cubic,
+                        $od['ship_to'],
+                        $od['tracking_email'],
+                        $phone,
+                        "N",
+                        "N",
+                        "EOR"
+                    );
+                    $rows[] = $row;
+                }
+            }
+
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "order_export"], false);
+    }
+
     public function orderExportCSV()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
