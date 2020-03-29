@@ -307,10 +307,14 @@ class DownloadsController extends Controller {
                 //$products = $this->getItemsCountForOrder($co['id']);
 
                 $parcels = Packaging::getPackingForOrder($od,$items,$packages);
-                $row = array(
-                    print_r($parcels)
-                );
-                $rows[] = $row;
+                foreach($parcels as $p)
+                {
+                    $row = array(
+                        $p['width']
+                    );
+                    $rows[] = $row;
+                }
+
                 /*
                 foreach($parcels as $i)
                 {
