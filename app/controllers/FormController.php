@@ -1412,7 +1412,7 @@ class FormController extends Controller {
                         {
                             $item_error = true;
                             $import_orders = false;
-                            $data_error_string .= "<li>$sku could not be matched to any items</li>";
+                            $data_error_string .= "<li>$sku could not be matched to any items in cell $i on row $line</li>";
                         }
                         else
                         {
