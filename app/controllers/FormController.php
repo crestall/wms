@@ -1393,7 +1393,7 @@ class FormController extends Controller {
                     //the items
                     $items = array();
                     $item_error = false;
-                    $i = 16;
+                    $i = 15;
                     do
                     {
                         $sku = $row[$i];
