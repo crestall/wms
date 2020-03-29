@@ -290,36 +290,7 @@ class DownloadsController extends Controller {
         }
         //$client_info = $this->client->getClientInfo($client_id);
         $cols = array(
-            "Row type",
-            "Sender account",
-            "Payer account",
-            "Recipient contact name",
-            "Recipient business name",
-            "Recipient address line 1",
-            "Recipient address line 2",
-            "Recipient address line 3",
-            "Recipient suburb",
-            "Recipient state",
-            "Recipient postcode",
-            "Send tracking email to recipient",
-            "Recipient email address",
-            "Recipient phone number",
-            "Delivery/special instruction 1",
-            "Special instruction 2",
-            "Special instruction 3",
-            "Sender reference 1 ",
-            "Sender reference 2",
-            "Product id",
-            "Authority to leave",
-            "Safe drop ",
-            "Quantity",
-            "Packaging type",
-            "Weight",
-            "Length",
-            "Width",
-            "Height",
-            "Parcel contents",
-            "Transit cover value"
+            "Row type"
         );
         $rows = array();
         foreach($this->request->data['order_ids'] as $order_id)
@@ -336,8 +307,11 @@ class DownloadsController extends Controller {
                 //$products = $this->getItemsCountForOrder($co['id']);
 
                 $parcels = Packaging::getPackingForOrder($od,$items,$packages);
-                echo "<pre>",print_r($parcels),"</pre>"; continue;
-
+                $row = array(
+                    print_r($parcels)
+                );
+                $rows[] = $row;
+                /*
                 foreach($parcels as $i)
                 {
                     $weight = ceil($i['pieces'] * $i['weight']);
@@ -370,12 +344,13 @@ class DownloadsController extends Controller {
                     );
                     $rows[] = $row;
                 }
+                */
             }
 
         }
-        //$expire=time()+60;
-        //setcookie("fileDownload", "true", $expire, "/");
-        //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "order_export"], false);
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "order_export"], false);
     }
 
     public function orderExportCSV()
