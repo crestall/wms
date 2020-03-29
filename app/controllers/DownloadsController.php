@@ -31,6 +31,7 @@ class DownloadsController extends Controller {
             'stockAtDateCSV',
             'truckRunSheetCSV',
             'inventoryReportCSV',
+            'orderAuspostExportCSV',
             'orderExportCSV'
         ];
         if(in_array($action, $secure_downloads))
@@ -385,7 +386,7 @@ class DownloadsController extends Controller {
         }
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
-        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "Eparcel_csv"], false);
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "Eparcel_csv".date("Ymd")], false);
     }
 
     public function orderExportCSV()
