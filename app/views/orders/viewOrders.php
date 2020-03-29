@@ -54,7 +54,7 @@
                 <?php endif;?>
                 <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
                 <p><a class="btn btn-primary add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
-                <p><a class="btn btn-warning auspost-csv"><i class="fas fa-download"></i> Create eParcel CSV For Selected</a> </p>
+                <p><a class="btn btn-warning auspost-csv"><i class="fas fa-download"></i> Download eParcel CSV For Selected</a> </p>
             </div>
         </div>
     <?php elseif($user_role == "warehouse"):?>
