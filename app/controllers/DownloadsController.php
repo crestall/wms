@@ -31,6 +31,7 @@ class DownloadsController extends Controller {
             'stockAtDateCSV',
             'truckRunSheetCSV',
             'inventoryReportCSV',
+            'orderAuspostExportCSV',
             'orderExportCSV'
         ];
         if(in_array($action, $secure_downloads))
@@ -276,6 +277,116 @@ class DownloadsController extends Controller {
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "comet_export".date("Ymd")]);
+    }
+
+    public function orderAuspostExportCSV()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        //$client_info = $this->client->getClientInfo($client_id);
+        $cols = array(
+            "Row type",
+            "Sender account",
+            "Payer account",
+            "Recipient contact name",
+            "Recipient business name",
+            "Recipient address line 1",
+            "Recipient address line 2",
+            "Recipient address line 3",
+            "Recipient suburb",
+            "Recipient state",
+            "Recipient postcode",
+            "Send tracking email to recipient",
+            "Recipient email address",
+            "Recipient phone number",
+            "Delivery/special instruction 1",
+            "Special instruction 2",
+            "Special instruction 3",
+            "Sender reference 1 ",
+            "Sender reference 2",
+            "Product id",
+            "Authority to leave",
+            "Safe drop ",
+            "Quantity",
+            "Packaging type",
+            "Weight",
+            "Length",
+            "Width",
+            "Height",
+            "Parcel contents",
+            "Transit cover value"
+        );
+        $rows = array();
+        foreach($this->request->data['order_ids'] as $order_id)
+        {
+            if( $od = $this->order->getOrderDetail($order_id) )
+            {
+                $ci = $this->client->getClientInfo($od['client_id']);
+                $name = empty($od['company_name'])? $od['ship_to']: $od['company_name'];
+                $phone = preg_replace("/\+61/","0",$od['contact_phone']);
+                $phone = preg_replace("/[^\d]/","",$phone);
+                $ste = (!empty($od['tracking_email']))? "YES":"NO";
+                $e = (!empty($od['tracking_email']))? $od['tracking_email']:"";
+                $items = $this->order->getItemsForOrder($order_id);
+                $packages = $this->order->getPackagesForOrder($order_id);
+                //$products = $this->getItemsCountForOrder($co['id']);
+                $pcode = ($od['eparcel_express'] == 1)? "7I85":"7C85";
+                $atl = ($od['signature_req'] == 1)? "NO":"YES";
+
+
+                $parcels = Packaging::getPackingForOrder($od,$items,$packages);
+                /*    */
+                foreach($parcels as $i)
+                {
+                    $weight = ceil($i['pieces'] * $i['weight']);
+                    $cubic = round($i['width'] * $i['depth'] * $i['height'] * $i['pieces'] / 1000000, 3);
+                    $row = array(
+                        "S",
+                        "",
+                        "",
+                        $od['ship_to'],
+                        "",
+                        str_replace(",", " ",$od['address']),
+                        str_replace(",", " ",$od['address_2']),
+                        "",
+                        $od['suburb'],
+                        $od['state'],
+                        $od['postcode'],
+                        $ste,
+                        $e,
+                        $od['contact_phone'],
+                        "",
+                        "",
+                        "",
+                        $od['ref_1'],
+                        $od['order_number'],
+                        $pcode,
+                        $atl,
+                        "",
+                        "",
+                        "",
+                        $i['weight'],
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                    $rows[] = $row;
+                }
+
+            }
+
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "Eparcel_csv".date("Ymd")]);
     }
 
     public function orderExportCSV()
