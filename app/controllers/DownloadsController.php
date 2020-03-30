@@ -336,7 +336,7 @@ class DownloadsController extends Controller {
                 $items = $this->order->getItemsForOrder($order_id);
                 $packages = $this->order->getPackagesForOrder($order_id);
                 //$products = $this->getItemsCountForOrder($co['id']);
-                $pcode = ($od['eparcel_express'] == 1)? "7C85":"7I85";
+                $pcode = ($od['eparcel_express'] == 1)? "7I85":"7C85";
                 $atl = ($od['signature_req'] == 1)? "NO":"YES";
 
 
@@ -386,7 +386,7 @@ class DownloadsController extends Controller {
         }
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
-        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "Eparcel_csv".date("Ymd")], false);
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "Eparcel_csv".date("Ymd")]);
     }
 
     public function orderExportCSV()
