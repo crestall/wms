@@ -1380,7 +1380,7 @@ class FormController extends Controller {
                         'items'                 => array(),
                         'ref2'                  => '',
                         'client_order_id'       => $row[0],
-                        'customer_order_id'     => $row[1]
+                        'customer_order_id'     => $row[1],
                         'errors'                => 0,
                         'tracking_email'        => $row[11],
                         'ship_to'               => $row[3],
