@@ -789,6 +789,7 @@ class ajaxfunctionsController extends Controller
             $eParcelClass = $client_details['eparcel_location']."Eparcel";
         $items = $this->order->getItemsForOrder($od['id']);
         $eparcel_details            = $this->{$eParcelClass}->getShipmentDetails($od, $items);
+        echo "<pre>",print_r($eparcel_details),"</pre>"; die();
         $eparcel_express_details    = $this->{$eParcelClass}->getShipmentDetails($od, $items, true);
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
         $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
