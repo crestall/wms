@@ -552,7 +552,7 @@
 
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
-        return "7C85";
+        return "7E55";
         $pti8_countries = array(
             "BE",
             "CA",
