@@ -324,12 +324,6 @@
         if(empty($od['ref_1']))
         {
             $ref_1 = strtoupper(str_replace(" ", "", $this->controller->client->getClientName($od['client_id'])));
-            $ref_2 = $od['order_number'];
-        }
-        else
-        {
-            $ref_1 = $od['ref_1'];
-            $ref_2 = $od['ref_2'];
         }
         if($od['signature_req'] == 1)
             $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "";
@@ -339,7 +333,7 @@
             'from'						=>	array(),
             'to'						=>	array(),
             'items'						=>	array(),
-            "sender_references"			=>	array($ref_1, $ref_2),
+            "sender_references"			=>	array($ref_1, $od['order_number']),
 
         );
         $shipment['to'] = array(
