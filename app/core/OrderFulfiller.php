@@ -72,7 +72,7 @@
         $this->output .= "=========================================================================================================".PHP_EOL;
         $od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
 
-        $db = Database::openConnection(); 
+        $db = Database::openConnection();
 
         $o_values = array(
             'status_id'			=>	$this->controller->order->fulfilled_id,
@@ -418,7 +418,7 @@
             /*  */
             $response = $this->controller->{$eParcelClass}->CreateOrderFromShipment($array['request']);
             $this->output .= "eParcel create order response".PHP_EOL;
-            $this->output .= print_r($response, true);
+            $this->output .= print_r(json_encode($response), true);
 
             if(isset($response['errors']))
         	{
