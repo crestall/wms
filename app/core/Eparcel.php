@@ -324,12 +324,7 @@
         if(empty($od['ref_1']))
         {
             $ref_1 = strtoupper(str_replace(" ", "", $this->controller->client->getClientName($od['client_id'])));
-            $ref_2 = $od['ref_2'];
-        }
-        elseif(empty($od['ref_2']))
-        {
-            $ref_2 = strtoupper(str_replace(" ", "", $this->controller->client->getClientName($od['client_id'])));
-            $ref_1 = $od['ref_1'];
+            $ref_2 = $od['order_number'];
         }
         else
         {
