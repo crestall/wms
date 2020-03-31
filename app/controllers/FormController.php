@@ -1292,17 +1292,18 @@ class FormController extends Controller {
         {
             /*
             [0] => Client Order Number
-            [1] => Company
-            [2] => Addressee
-            [3] => Shipping Address Line 1
-            [4] => Shipping Address Line 2
-            [5] => Shipping City
-            [6] => Shipping State
-            [7] => Shipping Zip/Postcode
-            [8] => Shipping Country
-            [9] => Shipping Address Phone
-            [10] => Shipping Email
-            [11] => Customer Email
+            [1] => Customer Order Number
+            [2] => Company
+            [3] => Addressee
+            [4] => Shipping Address Line 1
+            [5] => Shipping Address Line 2
+            [6] => Shipping City
+            [7] => Shipping State
+            [8] => Shipping Zip/Postcode
+            [9] => Shipping Country
+            [10] => Shipping Address Phone
+            [11] => Tracking Email
+            [11] => Customer Email gone for now - where? dunno
             [12] => ATL
             [13] => Instructions
             [14] => Use Express Post
@@ -1329,45 +1330,45 @@ class FormController extends Controller {
                     $skip_first = false;
                     continue;
                 }
-                if(!empty($row[10]))
+                if(!empty($row[11]))
                 {
-                    if(!$this->emailValid($row[10]))
+                    if(!$this->emailValid($row[11]))
                     {
                         $data_errors = true;
                         $data_error_string .= "<li>Invalid tracking email on line: $line</li>";
                     }
                 }
-                if(!$this->dataSubbed($row[2]))
+                if(!$this->dataSubbed($row[3]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Name is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[3]))
+                if(!$this->dataSubbed($row[4]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Address is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[5]))
+                if(!$this->dataSubbed($row[6]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Suburb/City is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[6]))
+                if(!$this->dataSubbed($row[7]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To State is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[7]))
+                if(!$this->dataSubbed($row[8]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Postcode is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[8]))
+                if(!$this->dataSubbed($row[9]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Country is required on line: $line</li>";
                 }
-                elseif(strlen($row[8]) > 2)
+                elseif(strlen($row[9]) > 2)
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>Please use the two letter ISO code for countries on line: $line</li>";
@@ -1379,25 +1380,26 @@ class FormController extends Controller {
                         'items'                 => array(),
                         'ref2'                  => '',
                         'client_order_id'       => $row[0],
+                        'customer_order_id'     => $row[1]
                         'errors'                => 0,
-                        'tracking_email'        => $row[10],
-                        'ship_to'               => $row[2],
-                        'company_name'          => $row[1],
+                        'tracking_email'        => $row[11],
+                        'ship_to'               => $row[3],
+                        'company_name'          => $row[2],
                         'date_ordered'          => time(),
                         'status_id'             => $this->controller->order->ordered_id,
                         'eparcel_express'       => 0,
                         'signature_req'         => 0,
-                        'contact_phone'         => $row[9],
+                        'contact_phone'         => $row[10],
                         'import_error'          => false,
                         'import_error_string'   => '',
                         'weight'                => 0,
-                        'instructions'          => $row[12],
-                        '3pl_comments'          => $row[14]
+                        'instructions'          => $row[13],
+                        '3pl_comments'          => $row[15]
                     );
                     //the items
                     $items = array();
                     $item_error = false;
-                    $i = 15;
+                    $i = 16;
                     do
                     {
                         $sku = $row[$i];
@@ -1432,12 +1434,12 @@ class FormController extends Controller {
                         $orders_items[$imported_order_count] = $items;
                         //validate address
                         $ad = array(
-                            'address'   => $row[3],
-                            'address_2' => $row[4],
-                            'suburb'    => $row[5],
-                            'state'     => $row[6],
-                            'postcode'  => $row[7],
-                            'country'   => $row[8]
+                            'address'   => $row[4],
+                            'address_2' => $row[5],
+                            'suburb'    => $row[6],
+                            'state'     => $row[7],
+                            'postcode'  => $row[8],
+                            'country'   => $row[9]
                         );
                         if($ad['country'] == "AU")
                         {
