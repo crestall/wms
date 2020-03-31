@@ -782,6 +782,7 @@ class ajaxfunctionsController extends Controller
     public function getShippingQuotes()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        
 
         $od = $this->order->getOrderDetail($this->request->data['order_id']);
         $items = $this->order->getItemsForOrder($od['id']);
@@ -795,9 +796,9 @@ class ajaxfunctionsController extends Controller
         //$df_response = $this->directfreight->getQuote($df_details);
 
         $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
-        //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
+        echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
         $express_response = $this->Eparcel->GetQuote($eeparcel_shipments);
-        //echo "<pre>",print_r($express_response),"</pre>"; die();
+        echo "<pre>",print_r($express_response),"</pre>"; die();
         if(isset($eparcel_response['errors']))
         {
             $eparcel_charge = "";
