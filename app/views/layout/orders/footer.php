@@ -875,8 +875,7 @@
 
                         /**/
                         $('table#client_orders_table').filterTable({
-                            inputSelector: '#table_searcher',
-                            ignoreColumns: [9,10,11]
+                            inputSelector: '#table_searcher'
                         });
 
                         //$('table#client_orders_table').stickyTableHeaders();
