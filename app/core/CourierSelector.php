@@ -117,7 +117,7 @@
             }
         }
        	$sResponse = $this->controller->{$eParcelClass}->CreateShipments($eparcel_shipments);
-        echo "<pre>",print_r($sResponse),"</pre>"; die();
+        echo "<pre>",print_r(json_encode($sResponse)),"</pre>"; die();
         if(isset($sResponse['errors']))
     	{
     	    Session::set('showerrorfeedback', true);
