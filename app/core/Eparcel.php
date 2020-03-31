@@ -325,6 +325,10 @@
         {
             $ref_1 = strtoupper(str_replace(" ", "", $this->controller->client->getClientName($od['client_id'])));
         }
+        else
+        {
+            $ref_1 = $od['ref_1'];
+        }
         if($od['signature_req'] == 1)
             $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "";
         $shipment = array(
