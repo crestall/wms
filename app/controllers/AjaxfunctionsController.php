@@ -782,9 +782,11 @@ class ajaxfunctionsController extends Controller
     public function getShippingQuotes()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
-        
+
 
         $od = $this->order->getOrderDetail($this->request->data['order_id']);
+        $client_details = $this->client->getClientInfo($od['client_id']);
+        echo "<pre>",print_r($client_details),"</pre>";
         $items = $this->order->getItemsForOrder($od['id']);
         $eparcel_details            = $this->Eparcel->getShipmentDetails($od, $items);
         $eparcel_express_details    = $this->Eparcel->getShipmentDetails($od, $items, true);
