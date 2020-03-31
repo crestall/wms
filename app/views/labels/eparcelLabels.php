@@ -43,7 +43,7 @@
                     <?php else:?>
                         <div class='feedbackbox'>
                             <h2><i class="far fa-check-circle"></i>Labels Have Been Generated</h2>
-                            <?php echo "<pre>",print_r($response),"</pre>";?>
+                            <?php echo "<pre>",print_r(json_encode($response)),"</pre>";?>
                             <p>Click the button to download them</p>
                             <p><a href="<?php echo $response['labels'][0]['url'];?>" class="btn btn-primary" target="_blank">Download</a></p>
                         </div>
