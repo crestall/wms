@@ -418,7 +418,7 @@
             /*  */
             $response = $this->controller->{$eParcelClass}->CreateOrderFromShipment($array['request']);
             $this->output .= "eParcel create order response".PHP_EOL;
-            $this->output .= print_r(json_encode($response), true);
+            $this->output .= print_r($response, true);
 
             if(isset($response['errors']))
         	{

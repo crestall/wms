@@ -789,7 +789,7 @@ class ajaxfunctionsController extends Controller
             $eParcelClass = $client_details['eparcel_location']."Eparcel";
         $items = $this->order->getItemsForOrder($od['id']);
         $eparcel_details            = $this->{$eParcelClass}->getShipmentDetails($od, $items);
-        echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
+        //echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
         $eparcel_express_details    = $this->{$eParcelClass}->getShipmentDetails($od, $items, true);
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
         $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
@@ -799,9 +799,9 @@ class ajaxfunctionsController extends Controller
         //$df_response = $this->directfreight->getQuote($df_details);
 
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
-        echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
+        //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
         $express_response = $this->{$eParcelClass}->GetQuote($eeparcel_shipments);
-        echo "<pre>",print_r(json_encode($express_response)),"</pre>"; die();
+        //echo "<pre>",print_r(json_encode($express_response)),"</pre>"; die();
         if(isset($eparcel_response['errors']))
         {
             $eparcel_charge = "";
