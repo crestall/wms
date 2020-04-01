@@ -1255,7 +1255,7 @@ class FormController extends Controller {
 
     public function procOrderUpload()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1523,6 +1523,7 @@ class FormController extends Controller {
                     {
                         $vals = array(
                             'client_order_id'       => $o['client_order_id'],
+                            'customer_order_id'     => $o['customer_order_id'],
                             'client_id'             => Session::getUserClientId(),
                             'deliver_to'            => $o['ship_to'],
                             'company_name'          => $o['company_name'],

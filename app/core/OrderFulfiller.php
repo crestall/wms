@@ -72,7 +72,7 @@
         $this->output .= "=========================================================================================================".PHP_EOL;
         $od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
 
-        $db = Database::openConnection(); 
+        $db = Database::openConnection();
 
         $o_values = array(
             'status_id'			=>	$this->controller->order->fulfilled_id,

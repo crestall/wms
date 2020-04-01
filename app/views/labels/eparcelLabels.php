@@ -27,8 +27,8 @@
                     while ($response['labels'][0]['status'] == "PENDING")
                     {
                         $response = $this->controller->{$eParcelClass}->GetLabel($request_id);
-                        //echo "<hr/>";
-                        //echo "<p>".$response['labels'][0]['status']."</p>";
+                        echo "<hr/>";
+                        echo "<p>".$response['labels'][0]['status']."</p>";
                     }
                     ?>
                 </div>

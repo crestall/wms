@@ -20,8 +20,8 @@
     const    API_SCHEME   = 'https://';
     const    API_HOST     = 'digitalapi.auspost.com.au';
     const    API_PORT     = 443;                            // ssl port
-    //const    API_BASE_URL = '/test/shipping/v1/';        // for production use, remove '/test'
-    const    API_BASE_URL = '/shipping/v1/';        // for production use, remove '/test'
+    const    API_BASE_URL = '/test/shipping/v1/';        // for production use, remove '/test'
+    //const    API_BASE_URL = '/shipping/v1/';        // for production use, remove '/test'
     const   HEADER_EOL = "\r\n";
 
     private $fSock;         // socket handle
@@ -324,17 +324,10 @@
         if(empty($od['ref_1']))
         {
             $ref_1 = strtoupper(str_replace(" ", "", $this->controller->client->getClientName($od['client_id'])));
-            $ref_2 = $od['ref_2'];
-        }
-        elseif(empty($od['ref_2']))
-        {
-            $ref_2 = strtoupper(str_replace(" ", "", $this->controller->client->getClientName($od['client_id'])));
-            $ref_1 = $od['ref_1'];
         }
         else
         {
             $ref_1 = $od['ref_1'];
-            $ref_2 = $od['ref_2'];
         }
         if($od['signature_req'] == 1)
             $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "";
@@ -344,7 +337,7 @@
             'from'						=>	array(),
             'to'						=>	array(),
             'items'						=>	array(),
-            "sender_references"			=>	array($ref_1, $ref_2),
+            "sender_references"			=>	array($ref_1, $od['order_number']),
 
         );
         $shipment['to'] = array(
@@ -559,6 +552,7 @@
 
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
+        //return "7C85";
         $pti8_countries = array(
             "BE",
             "CA",
