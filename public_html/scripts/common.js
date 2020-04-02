@@ -287,7 +287,7 @@ var shippingQuote = {
 				}
                 else
                 {
-                    truckCost.getQuote();
+                    //truckCost.getQuote();
                 }
 		});
 		$("#quote_pop").dialog({
