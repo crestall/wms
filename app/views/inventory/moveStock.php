@@ -28,6 +28,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <div class="form-check">
+                        <label class="form-check-label col-md-5" for="os_location">Oversize Location</label>
+                        <div class="col-md-7 checkbox checkbox-default">
+                            <input class="form-check-input styled" type="checkbox" id="os_location" name="os_location" <?php if(!empty(Form::value('os_location'))) echo 'checked';?> />
+                            <label for="os_location"></label>
+                        </div>
+                    </div>
+                </div>
                 <!--div class="form-group row">
                     <div class="form-check">
                         <label class="form-check-label col-md-5" for="allocated_stock">Move Allocated Stock</label>
