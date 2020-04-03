@@ -97,7 +97,7 @@
     protected function sendPostRequest($s_action, $a_data)
     {
         $data_string = json_encode($a_data);
-        echo $data_string; die();
+        echo $data_string; //die();
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
         //echo $url;
         //echo $this->ACCOUNT_NO;
@@ -118,7 +118,7 @@
             'account-number: '.$this->ACCOUNT_NO)
         );
         $result = curl_exec($ch);
-        //echo "<pre>",print_r($result),"</pre>"; die();
+        echo "<pre>",print_r($result),"</pre>"; die();
         $err = curl_error($ch);
         curl_close($ch);
         if ($err)
@@ -552,7 +552,7 @@
 
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
-        //return "7C85";
+        return "7C85";
         $pti8_countries = array(
             "BE",
             "CA",
