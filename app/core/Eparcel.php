@@ -97,7 +97,7 @@
     protected function sendPostRequest($s_action, $a_data)
     {
         $data_string = json_encode($a_data);
-        //echo $data_string;
+        echo $data_string; die();
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
         //echo $url;
         //echo $this->ACCOUNT_NO;
