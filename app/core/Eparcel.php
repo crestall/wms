@@ -207,7 +207,7 @@
     public function CreateShipments($a_shipments)
     {
         $response = $this->sendPostRequest('shipments', $a_shipments);
-        print_r($response);die();
+        print_r($response);
         return json_decode($response, true);
     }
 
