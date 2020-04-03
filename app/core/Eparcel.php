@@ -238,7 +238,9 @@
 
     public function CreateOrderFromShipment($a_shipmentorder)
     {
+        echo "REQUEST<pre>",print_r(json_encode($a_shipmentorder)),"</pre>";
         $response = $this->sendPutRequest('orders',$a_shipmentorder);
+        echo "RESPONSE<pre>",print_r($response),"</pre>"; die();
         return json_decode($response, true);
     }
 
