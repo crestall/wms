@@ -413,11 +413,11 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                         <div class="col-md-4">
                             <p><a class="btn btn-primary hunters-label" data-orderid="<?php echo $order_id;?>">Print Hunters Label</a></p>
                         </div>
-                    <?php elseif($order['courier_id'] == $this->controller->courier->threePlTruckId):?>
+                    <?php elseif($order['courier_id'] == $this->controller->courier->fsgId):?>
                         <form id="our_truck">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h4>3PL Truck</h4>
+                                    <h4>FSG Deliveries</h4>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -442,12 +442,6 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                                         <input type="text" class="form-control required number" data-rule-min="0" name="truck_charge" id="truck_charge" value="<?php echo $truck_charge;?>" />
                                     </div>
                                     <?php echo Form::displayError('truck_charge');?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">&nbsp;</label>
-                                <div class="col-md-4 text-right">
-                                    <button class="btn btn-warning" id="truck_charge_calc" data-destination="<?php echo $address_string;?>">Calculate Truck Charge</button>
                                 </div>
                             </div>
                         </form>
