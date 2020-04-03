@@ -393,7 +393,7 @@
                             var pallet_count = 0;
                             var truck_charge = 0;
                             var local_charge = 0;
-                            if(courier_id == $('#three3pltruck_id').val())
+                            if(courier_id == $('#fsg_id').val())
                             {
                                 //$("#our_truck").validate().element('#consignment_id');
                                 if($('#our_truck').valid())

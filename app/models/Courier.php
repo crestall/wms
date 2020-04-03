@@ -6,6 +6,7 @@ class Courier extends Model{
     public $huntersPluId;
     public $huntersPalId;
     public $threePlTruckId;
+    public $fsgId;
     public $localId;
     public $vicLocalId;
     public $directFreightId;
@@ -21,7 +22,7 @@ class Courier extends Model{
         $this->huntersId = $this->getCourierId('Hunters Small');
         $this->huntersPluId = $this->getCourierId('Hunters Bulk');
         $this->huntersPalId = $this->getCourierId('Hunters Pallet');
-        $this->threePlTruckId = $this->getCourierId('3PL Truck');
+        $this->fsgId = $this->getCourierId('FSG Delivery');
         $this->localId = $this->getCourierId('Local');
         $this->vicLocalId = $this->getCourierId('Vic Local');
         $this->directFreightId = $this->getCourierId('Direct Freight');

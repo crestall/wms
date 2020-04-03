@@ -76,6 +76,7 @@
           */
         //echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
+        /*
         curl_setopt_array($ch, array(
             CURLOPT_URL => "https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/",
             CURLOPT_RETURNTRANSFER => true,
@@ -92,10 +93,9 @@
                 "Content-Type: application/json"
             ),
             CURLOPT_VERBOSE => true
-        ));
+        ));*/
         $verbose = fopen('php://temp', 'w+');
         curl_setopt($ch, CURLOPT_STDERR, $verbose);
-        /*
         //curl_setopt_array ( $ch, $this->curl_options );
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
@@ -105,22 +105,22 @@
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 0);
-        */
+
 
         $result = curl_exec($ch);
 
         if ($result === FALSE) {
             printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
                    htmlspecialchars(curl_error($ch)));
+
+
+            rewind($verbose);
+            $verboseLog = stream_get_contents($verbose);
+
+            echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
+
+            die();
         }
-
-        rewind($verbose);
-        $verboseLog = stream_get_contents($verbose);
-
-        echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
-
-        die();
-
         $err = curl_error($ch);
         curl_close($ch);
         if ($err)
@@ -188,25 +188,20 @@
 
     public function getQuote($data_array, $client = "3PL Plus")
     {
-        foreach($data_array['ConsignmentLineItems'] as $da)
-        {
-            unset($da['SenderLineReference']);
-            //echo "<pre>",print_r($da),"</pre>";
-        }
         $threepl_address = Config::get("THREEPL_ADDRESS");
         $request = array(
             'SuburbFrom'            => $threepl_address['suburb'],
             'PostcodeFrom'          => $threepl_address['postcode'],
             'SuburbTo'              => $data_array['ReceiverDetails']['Suburb'],
-            'PostcodeTo'             => $data_array['ReceiverDetails']['Postcode'],
+            'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
         //echo "<pre>",print_r($request),"</pre>";//die();
-        //echo json_encode($request);
+        echo json_encode($request);
         $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
-        echo "<pre>",print_r($response),"</pre>";die();
+        //echo "<pre>",print_r($response),"</pre>";die();
         list($a_headers,$a_data) = $this->getResponse($response);
-        echo "<pre>",print_r($a_data),"</pre>";
+        //echo "<pre>",print_r($a_data),"</pre>";
         json_decode($a_date[0], true); die();
         return json_decode($a_data[0], true);
         //return $request;
