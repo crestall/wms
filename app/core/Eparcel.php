@@ -118,7 +118,7 @@
             'account-number: '.$this->ACCOUNT_NO)
         );
         $result = curl_exec($ch);
-        echo "<pre>",print_r($result),"</pre>"; die();
+        //echo "<pre>",print_r($result),"</pre>"; die();
         $err = curl_error($ch);
         curl_close($ch);
         if ($err)
@@ -207,6 +207,7 @@
     public function CreateShipments($a_shipments)
     {
         $response = $this->sendPostRequest('shipments', $a_shipments);
+        print_r($response);die();
         return json_decode($response, true);
     }
 
