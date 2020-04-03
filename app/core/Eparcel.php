@@ -97,7 +97,7 @@
     protected function sendPostRequest($s_action, $a_data)
     {
         $data_string = json_encode($a_data);
-        echo $data_string; //die();
+        //echo $data_string; //die();
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
         //echo $url;
         //echo $this->ACCOUNT_NO;
@@ -207,7 +207,7 @@
     public function CreateShipments($a_shipments)
     {
         $response = $this->sendPostRequest('shipments', $a_shipments);
-        print_r($response);
+        //print_r($response);
         return json_decode($response, true);
     }
 
