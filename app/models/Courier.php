@@ -6,6 +6,7 @@ class Courier extends Model{
     public $huntersPluId;
     public $huntersPalId;
     public $threePlTruckId;
+    public $fsgId;
     public $localId;
     public $vicLocalId;
     public $directFreightId;
