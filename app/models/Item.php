@@ -235,7 +235,7 @@ class Item extends Model{
     public function moveStock($data, $reason_id)
     {
         $db = Database::openConnection();
-        echo "<pre>",print_r($data),"</pre>"; die();
+        //echo "<pre>",print_r($data),"</pre>"; die();
         $data['reference'] = "Internal Stock Movement";
         $data['reason_id'] = $reason_id;
         $location = new Location();
