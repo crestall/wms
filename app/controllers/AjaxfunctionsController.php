@@ -463,9 +463,9 @@ class ajaxfunctionsController extends Controller
             {
                 $this->orderfulfiller->fulfillHuntersOrders($order_ids);
             }
-            elseif($this->request->data['courier_id'] == $this->courier->threePlTruckId)
+            elseif($this->request->data['courier_id'] == $this->courier->fsgId)
             {
-                $this->orderfulfiller->fulfillOurTruckOrder();
+                $this->orderfulfiller->fulfillFSGTruckOrder();
             }
             elseif($this->request->data['courier_id'] == $this->courier->localId)
             {
