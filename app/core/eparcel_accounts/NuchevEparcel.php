@@ -24,8 +24,12 @@ class NuchevEparcel extends Eparcel
 
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
-        if($expresspost) return '3J85';
+        if($expresspost)
+        {
+            return '3J85';
+        }
         return '3D85';
+    }
 }//end class
 
 ?>
