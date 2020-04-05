@@ -97,7 +97,7 @@
     protected function sendPostRequest($s_action, $a_data)
     {
         $data_string = json_encode($a_data);
-        //echo $data_string;
+        //echo $data_string; //die();
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
         //echo $url;
         //echo $this->ACCOUNT_NO;
@@ -207,6 +207,7 @@
     public function CreateShipments($a_shipments)
     {
         $response = $this->sendPostRequest('shipments', $a_shipments);
+        //print_r($response);
         return json_decode($response, true);
     }
 
@@ -237,7 +238,9 @@
 
     public function CreateOrderFromShipment($a_shipmentorder)
     {
+        //echo "REQUEST<pre>",print_r(json_encode($a_shipmentorder)),"</pre>";
         $response = $this->sendPutRequest('orders',$a_shipmentorder);
+        //echo "RESPONSE<pre>",print_r($response),"</pre>"; die();
         return json_decode($response, true);
     }
 
@@ -552,7 +555,7 @@
 
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
-        //return "7C85";
+        return "7E55";
         $pti8_countries = array(
             "BE",
             "CA",
