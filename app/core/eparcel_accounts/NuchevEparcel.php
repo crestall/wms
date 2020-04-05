@@ -21,6 +21,11 @@ class NuchevEparcel extends Eparcel
             $this->ACCOUNT_NO = str_pad($cd['charge_account'], 10, '0', STR_PAD_LEFT);
         }
 	}
+
+    protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
+    {
+        if($expresspost) return '3J85';
+        return '3D85';
 }//end class
 
 ?>
