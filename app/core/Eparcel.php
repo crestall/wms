@@ -20,8 +20,8 @@
     const    API_SCHEME   = 'https://';
     const    API_HOST     = 'digitalapi.auspost.com.au';
     const    API_PORT     = 443;                            // ssl port
-    const    API_BASE_URL = '/test/shipping/v1/';        // for production use, remove '/test'
-    //const    API_BASE_URL = '/shipping/v1/';        // for production use, remove '/test'
+    //const    API_BASE_URL = '/test/shipping/v1/';        // for production use, remove '/test'
+    const    API_BASE_URL = '/shipping/v1/';        // for production use, remove '/test'
     const   HEADER_EOL = "\r\n";
 
     private $fSock;         // socket handle
