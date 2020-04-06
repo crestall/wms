@@ -798,7 +798,7 @@ class ajaxfunctionsController extends Controller
         echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
         $df_response = $this->directfreight->getQuote($df_details);
         echo "<pre>",print_r($df_response),"</pre>"; die();
-        */
+         */ 
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
         //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
         $express_response = $this->{$eParcelClass}->GetQuote($eeparcel_shipments);
