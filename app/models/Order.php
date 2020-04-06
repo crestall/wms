@@ -979,7 +979,7 @@ class Order extends Model{
             GROUP BY
                 a.date_fulfilled
                 ";
-        echo $query1; die();
+        //echo $query1; die();
 
         $orders = $db->queryData($query1);
 
