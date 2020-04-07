@@ -118,9 +118,9 @@
             rewind($verbose);
             $verboseLog = stream_get_contents($verbose);
 
-            echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
+            //echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
 
-            die();
+            //die();
         }
         $err = curl_error($ch);
         curl_close($ch);
