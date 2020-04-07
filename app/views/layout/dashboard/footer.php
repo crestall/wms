@@ -19,39 +19,57 @@
                         function drawAdminCharts()
                         {
                             $.ajax({
-                    			url: "/ajaxfunctions/getPickErrors",
+                    			url: "/ajaxfunctions/getAdminClientActivity",
                     			dataType:"json",
                     			data: params,
                     			type: 'post',
                                 success: function(jsonData)
                                 {
-                                    console.log(jsonData);
-                                    var data = google.visualization.arrayToDataTable(jsonData);
-                                    var options = {
-                                        title :'Total Weekly Orders',
-                                        titleTextStyle: {
-                                            fontSize: 21,
-                                            bold: false,
-                                            fontColor: "#333"
-                                        },
-                                        hAxis: {
-                                            title: 'Week Ending',
-                                            //showTextEvery: 1,
-                            				slantedText:true,
-                            			  	slantedTextAngle:-45
-                                        },
-                                        vAxis: {
-                                            title: 'Total Orders'
-                                        },
-                                        legend: {
-                                            position: 'top'
-                                        },
-                                        height: 450
-                                    };
+                                    //var jData =  $.parseJSON(jsonData);
+                            		var data = google.visualization.arrayToDataTable(jsonData);
+                                    var num_orders = jsonData.length - 1;
+                            		if(num_orders > 0)
+                            		{
+                                		var options = {
+                                			hAxis: {
+                                				title: 'Week Beginning',
+                                				showTextEvery: 1,
+                                				slantedText:true,
+                                				slantedTextAngle:-45
+                                			},
+                                			vAxes: {
+                                				0: {
+                                					title: 'Order Count',
+                                					viewWindow: {
+                                						min: 0
+                                					}
+                                				}
+                                			},
+                                			legend: {
+                                				position: 'top'
+                                			},
+                                			height: 450,
+                                			series: {
+                                				0:{type: "line", targetAxisIndex:0} ,
+                                                1:{type: "line", targetAxisIndex:0}
+                                			},
+                                            title: "Weekly Orders: Totals/Averages Last Three Months",
+                                            titleTextStyle: {
+                            					fontSize: 20,
+                            					color: '##5F5F5E;',
+                            					bold: false,
+                            					italic: false,
+                            					marginBottom: 20
+                                            },
+                                		};
 
-                                    var chart = new google.visualization.ComboChart(document.getElementById('error_activity_chart'));
-
-                                    chart.draw(data, options);
+                                		var chart = new google.visualization.LineChart(document.getElementById('error_activity_chart'));
+                                		chart.draw(data, options);
+                                    }
+                                    else
+                                    {
+                                        $('div#error_activity_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
+                                    }
                                 }
                             });
 

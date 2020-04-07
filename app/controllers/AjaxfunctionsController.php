@@ -793,7 +793,7 @@ class ajaxfunctionsController extends Controller
         $eparcel_express_details    = $this->{$eParcelClass}->getShipmentDetails($od, $items, true);
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
         $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
-        /* */ 
+        /* */
         $df_details = $this->directfreight->getDetails($od, $items);
         echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
         $df_response = $this->directfreight->getQuote($df_details);
@@ -1007,6 +1007,12 @@ class ajaxfunctionsController extends Controller
     public function getPickErrors()
     {
         $data = $this->order->getPickErrors($this->request->data['from'], $this->request->data['to']);
+        $this->view->renderJson($data);
+    }
+
+    public function getAdminClientActivity()
+    {
+        $data = $this->order->getOrderTrends($this->request->data['from'], $this->request->data['to']);
         $this->view->renderJson($data);
     }
 

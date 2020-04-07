@@ -931,7 +931,7 @@ class Order extends Model{
         return $return_array;
     }
     */
-    public function getOrderTrends($from, $to, $client_id)
+    public function getOrderTrends($from, $to, $client_id = 0)
     {
         //$from += 24*60*60;
         //$to += 24*60*60;
@@ -1002,101 +1002,6 @@ class Order extends Model{
         //print_r($return_array);
         return $return_array;
     }
-
-    /*public function getClientActivity($from, $to, $clients = "")
-    {
-        $db = Database::openConnection();
-        $query = "
-            SELECT
-                DATE(from_unixtime(date_fulfilled)) AS date_fulfilled, COUNT(*) AS orders, client_id
-            FROM
-                orders o join clients c on c.id = o.client_id
-        ";
-
-        $date_clause = " WHERE date_fulfilled > 0";
-        $client_clause = "";
-
-        if(isset($from) || isset($to))
-        {
-            $date_clause = " WHERE";
-            if(isset($from))
-            {
-                $date_clause .= " date_fulfilled > {$from}";
-            }
-            if(isset($to))
-            {
-                if(isset($from))
-                {
-                    $date_clause .= " AND ";
-                }
-                $date_clause .= " date_fulfilled < {$to}";
-            }
-        }
-        $client_query = "SELECT id, client_name FROM clients WHERE active = 1";
-        if(!empty($clients))
-        {
-            $clients = rtrim($clients, ",");
-            $client_clause = " AND client_id IN($clients)";
-            $client_query .= " AND id IN($clients)";
-        }
-        $query .= $date_clause.$client_clause;
-        $query .= "
-            GROUP BY
-                client_id, DATE(from_unixtime(date_fulfilled))
-            ORDER BY
-                DATE(from_unixtime(date_fulfilled))
-
-        ";
-
-        $clients = $db->queryData($client_query);
-        //echo $query; //die();
-        $orders = $db->queryData($query);
-
-        $keys = array('Date');
-        $i = 1;
-        foreach($clients as $c)
-        {
-            $keys[$i] = $c['client_name'];
-            ++$i;
-        }
-
-        $return_array = array(
-            $keys
-        );
-
-        $date = "";
-        foreach($orders as $o)
-        {
-            if($o['date_fulfilled'] != $date)
-            {
-                if(!empty($date))
-                {
-                    $return_array[] = $row_array;
-                }
-                $row_array = array();
-                $row_array[0] = date("d/m/Y", strtotime($o['date_fulfilled']));
-                $i = 1;
-                foreach($clients as $c)
-                {
-                    $row_array[$i] = 0;
-                    ++$i;
-                }
-            }
-            $i = 1;
-            foreach($clients as $c)
-            {
-                if($o['client_id'] == $c['id'])
-                {
-                    $row_array[$i] = $o['orders'];
-                }
-                ++$i;
-            }
-
-            $date = $o['date_fulfilled'];
-        }
-        $return_array[] = $row_array;
-        return $return_array;
-    }*/
 
     public function getClientActivity($from, $to)
     {
