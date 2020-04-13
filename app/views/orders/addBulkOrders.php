@@ -16,7 +16,7 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> CSV File</label>
                 <div class="col-md-4">
-                    <input type="file" name="csv_file" id="csv_file" />
+                    <input type="file" name="csv_file" id="csv_file" class="required" />
                     <?php echo Form::displayError('csv_file');?>
                 </div>
             </div>
