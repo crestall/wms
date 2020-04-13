@@ -100,11 +100,6 @@
                             });
                         });
                     },
-                    'bulk-upload-orders': function(){
-                        $('select#client_id').change(function(e){
-                            $(this).valid();
-                        });
-                    },
                     'adjust-allocations': function(){
                         $('button.adjust_allocation').click(function(e){
                             e.preventDefault();
@@ -199,6 +194,13 @@
                                     }
                             });
                             $("#allocation_pop").dialog('open');
+                        });
+                    }
+                },
+                'bulk-upload-orders': {
+                    init:function(){
+                        $('select#client_id').change(function(e){
+                            $(this).valid();
                         });
                     }
                 },
