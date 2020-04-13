@@ -100,6 +100,11 @@
                             });
                         });
                     },
+                    'bulk-upload-orders': function(){
+                        $('select#client_id').change(function(e){
+                            $(this).valid();
+                        });
+                    },
                     'adjust-allocations': function(){
                         $('button.adjust_allocation').click(function(e){
                             e.preventDefault();
