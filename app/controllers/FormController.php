@@ -506,10 +506,11 @@ class FormController extends Controller {
                         $request['error_string'] .= "<p>The customer email is not valid</p>";
                     }
 
-                    $locations = array(
+                    $location = array(
                                     'location_id'   => 2901,
                                     'qty'           => $r[12]
                     );
+                    $locations[] = $location;
                     $request['items'][] = array(
                         'item_id'  => $r[11],
                         'locations' => $locations
@@ -535,7 +536,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($requests),"</pre>"; die();
+            //echo "<pre>",print_r($requests),"</pre>"; die();
             //create the order
             foreach($requests as $r)
             {
