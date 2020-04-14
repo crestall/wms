@@ -464,7 +464,7 @@ class FormController extends Controller {
                         'suburb'        => trim($r[8]),
                         'state'         => trim($r[9]),
                         'postcode'      => trim($r[10]),
-                        'contact_phone' => trim($r[5])
+                        'contact_phone' => trim($r[5]),
                         'date'          => time(),
                         'signature_req' => 0
                         'errors'        => 0,
