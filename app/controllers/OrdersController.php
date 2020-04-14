@@ -808,6 +808,16 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function bulkUploadOrders()
+    {
+        //For Clients
+        //render the page
+        Config::setJsConfig('curPage', "import-orders");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/importOrders.php', [
+            'page_title'    =>  "Import/Bulk Upload Orders"
+        ]);
+    }
+
     public function viewOrders()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
