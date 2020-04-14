@@ -508,7 +508,7 @@ class FormController extends Controller {
                     $request['items'][0] = array(
                         'item_id'  => $r[11],
                         'locations' => array(
-                            array   =>  (
+                            [0]   => array (
                                 'location_id'   => 2901,
                                 'qty'           => $r[12]
                             )
