@@ -455,9 +455,9 @@ class FormController extends Controller {
 
 
                     $request = array(
-                        'name'          => trim($r[3]),
+                        'deliver_to'    => trim($r[3]),
                         'client_id'     => $client_id,
-                        'email'         => trim($r[2]),
+                        'tracking_email'=> trim($r[2]),
                         'company_name'  => trim($r[4]),
                         'address'       => trim($r[6]),
                         'address_2'     => trim($r[7]),
@@ -468,8 +468,10 @@ class FormController extends Controller {
                         'date'          => time(),
                         'signature_req' => 0,
                         'errors'        => 0,
-                        'error_string'  => ''
+                        'error_string'  => '',
+                        'weight'        => 0.41
                     );
+
                     $orders_items = array();
                     if( strlen($request['address']) > 40 )
                     {
@@ -532,10 +534,10 @@ class FormController extends Controller {
             //create the request
             foreach($requests as $r)
             {
-                $this->swatch->addSwatch($r);
+                $this->order->addOrder($r, $r['items']);
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
+        return $this->redirector->to(PUBLIC_ROOT."/orders/add-bulk-orders");
     }
 
     public function procSwatchCsvUpload()

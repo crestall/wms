@@ -201,6 +201,7 @@ class Order extends Model{
             'date_ordered'  => time(),
             'status_id'     => $this->ordered_id,
             'ref_1'         => $ref_1,
+            'ref_2'         => $order_number,
             'instructions'  => $instructions,
             'address'       => $data['address'],
             'suburb'        => $data['suburb'],
