@@ -24,7 +24,7 @@
                 <div class="form-check">
                     <label class="form-check-label col-md-3" for="header_row">My CSV has a header row</label>
                     <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="header_row" name="header_row" />
+                        <input class="form-check-input styled" type="checkbox" id="header_row" name="header_row" checked="checked" />
                         <label for="header_row"></label>
                     </div>
                 </div>
