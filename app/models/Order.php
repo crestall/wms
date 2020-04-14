@@ -244,6 +244,7 @@ class Order extends Model{
             $o_values['store_order'] = 1;
         $order_id = $db->insertQuery('orders', $o_values);
         //echo "<pre>",print_r($oitems),"</pre>"; die();
+        $the_items = array();
         foreach($oitems as $items)
         {
             //$items = (array)$items;
