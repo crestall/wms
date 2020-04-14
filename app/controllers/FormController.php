@@ -408,10 +408,7 @@ class FormController extends Controller {
     public function procBulkOrderAdd()
     {
         echo "<pre>",print_r($this->request->data),"</pre>"; //die();
-        echo "Files<pre>",print_r($_FILES),"</pre>";die();
-        $swatch_id = 12521;
-        $office_id = 1336;
-        $post_data = array();
+        echo "Files<pre>",print_r($_FILES),"</pre>";//die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -435,14 +432,16 @@ class FormController extends Controller {
         {
             if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
             {
+                /*
                 if($this->item->getAvailableStock($swatch_id, 4) <= 0)
                 {
                     $_SESSION['errorfeedback'] = "<h2><i class='far fa-times-circle'></i>Swatches cannot be uploaded</h2><p>There are not enough swatches left</p>";
                     return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
                 }
+                */
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                //echo "<pre>",print_r($csv_array),"</pre>"; die();
+                echo "<pre>",print_r($csv_array),"</pre>"; die();
                 Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Swatches have been uploaded</h2><p>You should be able to see them below</p>");
                 $requests = array();
                 $skip_first = true;
