@@ -505,7 +505,7 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>The customer email is not valid</p>";
                     }
-                    $request['items'] = array(
+                    $request['items'][0] = array(
                         'id'       => $r[11],
                         'qty'      => $r[12],
                         'location' => 2901
