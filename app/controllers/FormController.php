@@ -530,7 +530,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($requests),"</pre>"; die();
+            //echo "<pre>",print_r($requests),"</pre>"; die();
             //create the request
             foreach($requests as $r)
             {
