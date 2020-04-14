@@ -535,7 +535,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($requests),"</pre>"; die();
+            echo "<pre>",print_r($requests),"</pre>"; die();
             //create the order
             foreach($requests as $r)
             {
