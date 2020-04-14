@@ -225,6 +225,14 @@ $(document).ready(function() {
             }
         }
     });
+    ////////////////////////////////////////////////////////////
+    $('form#bulk-order-csv-upload').validate({
+        rules:{
+            client_id:{
+                notNone: true
+            }
+        }
+    });
     ///////////////////////////////////////////////////////////////////////////////
     $("#book-pickup").validate({
         rules:{

@@ -201,6 +201,7 @@ class Order extends Model{
             'date_ordered'  => time(),
             'status_id'     => $this->ordered_id,
             'ref_1'         => $ref_1,
+            'ref_2'         => $order_number,
             'instructions'  => $instructions,
             'address'       => $data['address'],
             'suburb'        => $data['suburb'],
@@ -242,7 +243,8 @@ class Order extends Model{
         if(isset($data['b2b']))
             $o_values['store_order'] = 1;
         $order_id = $db->insertQuery('orders', $o_values);
-        //echo "<pre>",print_r($oitems),"</pre>"; die();
+        //echo "<pre>",print_r($oitems),"</pre>"; //die();
+        $the_items = array();
         foreach($oitems as $items)
         {
             //$items = (array)$items;
@@ -251,7 +253,7 @@ class Order extends Model{
                 $the_items[] = $items;
             else
                 $the_items = $items;
-            //echo "<pre>",print_r($the_items),"</pre>"; //die();
+            //echo "<pre>",print_r($the_items),"</pre>"; continue;
             foreach($the_items as $item):
                 //echo "The Item<pre>",print_r($item),"</pre>"; //die();
                 $item_id = $item['item_id'];

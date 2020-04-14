@@ -388,6 +388,7 @@ return array(
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'add-order' =>  true,
+            'add-bulk-orders'           =>  true,
             'order-update'			    => false,
 			'process-backorders'	    =>	false,
 			'order-summaries'		    =>	true,

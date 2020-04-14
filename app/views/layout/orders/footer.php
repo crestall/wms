@@ -197,6 +197,19 @@
                         });
                     }
                 },
+                'bulk-upload-orders': {
+                    init:function(){
+                        $('select#client_id').change(function(e){
+                            $(this).valid();
+                        });
+                        $('form#bulk-order-csv-upload').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Uploading and Processing Orders...</h2></div>' });
+                            }
+                        });
+                    }
+                },
                 'add-serials': {
                     init:function(){
                         $('button#find_order').click(function(e){
