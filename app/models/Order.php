@@ -253,11 +253,11 @@ class Order extends Model{
                 $the_items[] = $items;
             else
                 $the_items = $items;
-            echo "<pre>",print_r($the_items),"</pre>"; continue;
+            //echo "<pre>",print_r($the_items),"</pre>"; continue;
             foreach($the_items as $item):
-                echo "The Item<pre>",print_r($item),"</pre>"; //die();
+                //echo "The Item<pre>",print_r($item),"</pre>"; //die();
                 $item_id = $item['item_id'];
-                echo "<pre>",print_r($item),"</pre>";
+                //echo "<pre>",print_r($item),"</pre>";
                 foreach($item['locations'] as $il)
                 {
                     /* */
@@ -277,7 +277,7 @@ class Order extends Model{
                 }
             endforeach;
         }
-        die();
+        //die();
         return $order_number;
     }
 
