@@ -508,8 +508,11 @@ class FormController extends Controller {
                     $request['items'][0] = array(
                         'item_id'  => $r[11],
                         'locations' => array(
-                            'location_id'   => 2901,
-                            'qty'           => $r[12]
+                            array   =>  (
+                                'location_id'   => 2901,
+                                'qty'           => $r[12]
+                            )
+
                         )
                     );
                     $requests[] = $request;
@@ -533,7 +536,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($requests),"</pre>"; die();
+            //echo "<pre>",print_r($requests),"</pre>"; die();
             //create the order
             foreach($requests as $r)
             {
