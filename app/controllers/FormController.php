@@ -407,8 +407,8 @@ class FormController extends Controller {
 
     public function procBulkOrderAdd()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
-        echo "Files<pre>",print_r($_FILES),"</pre>";//die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "Files<pre>",print_r($_FILES),"</pre>";//die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -499,7 +499,7 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>The address is missing either a number or a word</p>";
                     }
-                    if( $this->dataSubbed($request['email']) && !filter_var($request['email'], FILTER_VALIDATE_EMAIL) )
+                    if( $this->dataSubbed($request['tracking_email']) && !filter_var($request['tracking_email'], FILTER_VALIDATE_EMAIL) )
                     {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>The customer email is not valid</p>";
