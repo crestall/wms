@@ -407,8 +407,8 @@ class FormController extends Controller {
 
     public function procBulkOrderAdd()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
-        //echo "Files<pre>",print_r($_FILES),"</pre>";//die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        echo "Files<pre>",print_r($_FILES),"</pre>";die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
