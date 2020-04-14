@@ -533,8 +533,8 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($requests),"</pre>"; die();
-            //create the request
+            echo "<pre>",print_r($requests),"</pre>"; die();
+            //create the order
             foreach($requests as $r)
             {
                 $this->order->addOrder($r, $r['items']);
