@@ -441,10 +441,10 @@ class FormController extends Controller {
                 */
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                echo "<pre>",print_r($csv_array),"</pre>"; die();
-                Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Swatches have been uploaded</h2><p>You should be able to see them below</p>");
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
+                Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Added to the system</h2>");
                 $requests = array();
-                $skip_first = true;
+                $skip_first = isset($header_row);
                 foreach($csv_array as $r)
                 {
                     if($skip_first)
@@ -452,26 +452,21 @@ class FormController extends Controller {
                         $skip_first = false;
                         continue;
                     }
-                    if(!empty($r[7]))
-                        continue;
 
-                    if(array_search(strtolower(trim($r[3])), $states) === false)
-                    {
-                        $state = trim($r[3]);
-                    }
-                    else
-                    {
-                        $state = array_search(strtolower(trim($r[3])), $states);
-                    }
+
                     $request = array(
-                        'name'          => trim($r[0]),
+                        'name'          => trim($r[3]),
                         'client_id'     => $client_id,
-                        'email'         => trim($r[6]),
-                        'address'       => trim($r[1]),
-                        'suburb'        => trim($r[2]),
-                        'state'         => $state,
-                        'postcode'      => trim($r[5]),
+                        'email'         => trim($r[2]),
+                        'company_name'  => trim($r[4]),
+                        'address'       => trim($r[6]),
+                        'address_2'     => trim($r[7]),
+                        'suburb'        => trim($r[8]),
+                        'state'         => trim($r[9]),
+                        'postcode'      => trim($r[10]),
+                        'contact_phone' => trim($r[5])
                         'date'          => time(),
+                        'signature_req' => 0
                         'errors'        => 0,
                         'error_string'  => ''
                     );
@@ -508,9 +503,9 @@ class FormController extends Controller {
                         $request['error_string'] .= "<p>The customer email is not valid</p>";
                     }
                     $request['items'] = array(
-                        'id'       => $swatch_id,
-                        'qty'      => 1,
-                        'location' => $office_id
+                        'id'       => $r[11],
+                        'qty'      => $r[12],
+                        'location' => 2901
                     );
                     $requests[] = $request;
                 }
@@ -533,7 +528,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($requests),"</pre>"; die();
+            echo "<pre>",print_r($requests),"</pre>"; die();
             //create the request
             foreach($requests as $r)
             {
