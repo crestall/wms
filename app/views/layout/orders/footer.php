@@ -1167,7 +1167,7 @@
                             e.preventDefault();
                             swal({
                                 title: "Remove the courier from this order?",
-                                text: "This will reset the courie and cancell the shipment",
+                                text: "This will reset the courier and cancel the shipment with them",
                                 icon: "warning",
                                 buttons: true,
                                 dangerMode: true
