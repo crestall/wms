@@ -68,6 +68,7 @@ class FormController extends Controller {
             'procBasicProductAdd',
             'procBookPickup',
             'procBreakPacks',
+            'procBulkOrderAdd',
             'procClientAdd',
             'procClientDailyReports',
             'procClientEdit',
@@ -402,6 +403,145 @@ class FormController extends Controller {
             );
         }
         $labels->output($addresses);
+    }
+
+    public function procBulkOrderAdd()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        echo "Files<pre>",print_r($_FILES),"</pre>";die();
+        $swatch_id = 12521;
+        $office_id = 1336;
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $states = array(
+            "NSW"   => "new south wales",
+            "VIC"   => "victoria",
+            "QLD"   => "queensland",
+            "TAS"   => "tasmania",
+            "SA"    => "south australia",
+            "WA"    => "western australia",
+            "NT"    => "northern territory",
+            "ACT"   => "australian capital territory"
+        );
+        //$the_states = array_keys($states);
+        if($_FILES['csv_file']["size"] > 0)
+        {
+            if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
+            {
+                if($this->item->getAvailableStock($swatch_id, 4) <= 0)
+                {
+                    $_SESSION['errorfeedback'] = "<h2><i class='far fa-times-circle'></i>Swatches cannot be uploaded</h2><p>There are not enough swatches left</p>";
+                    return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
+                }
+                $tmp_name = $_FILES['csv_file']['tmp_name'];
+                $csv_array = array_map('str_getcsv', file($tmp_name));
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
+                Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Swatches have been uploaded</h2><p>You should be able to see them below</p>");
+                $requests = array();
+                $skip_first = true;
+                foreach($csv_array as $r)
+                {
+                    if($skip_first)
+                    {
+                        $skip_first = false;
+                        continue;
+                    }
+                    if(!empty($r[7]))
+                        continue;
+
+                    if(array_search(strtolower(trim($r[3])), $states) === false)
+                    {
+                        $state = trim($r[3]);
+                    }
+                    else
+                    {
+                        $state = array_search(strtolower(trim($r[3])), $states);
+                    }
+                    $request = array(
+                        'name'          => trim($r[0]),
+                        'client_id'     => $client_id,
+                        'email'         => trim($r[6]),
+                        'address'       => trim($r[1]),
+                        'suburb'        => trim($r[2]),
+                        'state'         => $state,
+                        'postcode'      => trim($r[5]),
+                        'date'          => time(),
+                        'errors'        => 0,
+                        'error_string'  => ''
+                    );
+                    $orders_items = array();
+                    if( strlen($request['address']) > 40 )
+                    {
+                        $request['errors'] = 1;
+                        $request['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
+                    }
+                    $aResponse = $this->BigBottleEparcel->ValidateSuburb($request['suburb'], $request['state'], str_pad($request['postcode'],4,'0',STR_PAD_LEFT));
+
+                    //echo "<pre>",print_r($aResponse),"</pre>";
+                    if(isset($aResponse['errors']))
+                    {
+                        $request['errors'] = 1;
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $request['error_string'] .= "<p>{$e['message']}</p>";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $request['errors'] = 1;
+                        $request['error_string'] .= "<p>Postcode does not match suburb or state</p>";
+                    }
+                    if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $request['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $request['address'])))
+                    {
+                        $request['errors'] = 1;
+                        $request['error_string'] .= "<p>The address is missing either a number or a word</p>";
+                    }
+                    if( $this->dataSubbed($request['email']) && !filter_var($request['email'], FILTER_VALIDATE_EMAIL) )
+                    {
+                        $request['errors'] = 1;
+                        $request['error_string'] .= "<p>The customer email is not valid</p>";
+                    }
+                    $request['items'] = array(
+                        'id'       => $swatch_id,
+                        'qty'      => 1,
+                        'location' => $office_id
+                    );
+                    $requests[] = $request;
+                }
+
+            }
+            else
+            {
+                $error_message = $this->file_upload_error_message($_FILES['csv_file']['error']);
+                Form::setError('csv_file', $error_message);
+            }
+        }
+        else
+        {
+            Form::setError('csv_file', 'Please upload a file');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "<pre>",print_r($requests),"</pre>"; die();
+            //create the request
+            foreach($requests as $r)
+            {
+                $this->swatch->addSwatch($r);
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
     }
 
     public function procSwatchCsvUpload()
