@@ -257,7 +257,7 @@ class Order extends Model{
             foreach($the_items as $item):
                 //echo "The Item<pre>",print_r($item),"</pre>"; //die();
                 $item_id = $item['item_id'];
-                //echo "<pre>",print_r($item),"</pre>";
+                echo "<pre>",print_r($item),"</pre>";
                 foreach($item['locations'] as $il)
                 {
                     /* */
@@ -267,7 +267,7 @@ class Order extends Model{
                         'qty'           => $il['qty'],
                         'order_id'      => $order_id
                     );
-                    $db->insertQuery('orders_items', $vals);
+                    //$db->insertQuery('orders_items', $vals);
 
                 }
                 if(!empty($item['order_error_string']))
@@ -277,7 +277,7 @@ class Order extends Model{
                 }
             endforeach;
         }
-        //die();
+        die();
         return $order_number;
     }
 
