@@ -198,7 +198,7 @@ class Database {
 			++$v;
 		}
 		$row = $this->queryRow("SELECT `$field` FROM $table $where", $params);
-		if(count($row))
+		if($row)
 		{
 			$id = $row[$field];
 		}

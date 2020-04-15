@@ -58,11 +58,20 @@ class Utility{
 
     public static function toCamelCase($str, $capitalise_first_char = false)
     {
-        if($capitalise_first_char) {
-          $str[0] = strtoupper($str[0]);
+        /*
+         * This will take any dash or underscore turn it into a space, run ucwords against
+         * it so it capitalizes the first letter in all words separated by a space then it
+         * turns and deletes all spaces.
+         */
+        if($capitalise_first_char)
+        {
+            return str_replace(' ', '', ucwords(preg_replace('/[^a-zA-Z0-9]+/', ' ', $str))); 
         }
-        $func = create_function('$c', 'return strtoupper($c[1]);');
-        return preg_replace_callback('/-([a-z])/', $func, $str);
+        else
+        {
+            return lcfirst(str_replace(' ', '', ucwords(preg_replace('/[^a-zA-Z0-9]+/', ' ', $str))));
+        }
+
     }
 
     public static function getStateSelect($selected = false)
