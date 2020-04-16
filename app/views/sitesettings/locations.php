@@ -105,7 +105,7 @@
                                         <p>
                                             <a class="btn btn-primary update" data-locationid="<?php echo $l['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $l['id'];?>"></span>
                                         </p>
-                                        <?php if($active == 0):?>
+                                        <?php if($active == 1):?>
                                             <p>
                                                 <a class="btn btn-danger deactivate" data-locationid="<?php echo $l['id'];?>">Deactivate Location</a>
                                             </p>
