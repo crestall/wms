@@ -398,40 +398,22 @@ return array(
             'edit-customer'             =>  false,
             'order-search'              =>  true,
             'order-search-results'      =>  false,
-            'order-picking'             =>  true,
+            //'order-picking'             =>  true,
             'order-details'             =>  false,
-            'order-packing'             =>  true,
-            'order-dispatching'         =>  true,
-            'truck-usage'               =>  true,
+            //'order-packing'             =>  true,
+            //'order-dispatching'         =>  true,
+            //'truck-usage'               =>  true,
             'view-orders'               =>  true,
             'address-update'            =>  false,
             'items-update'              =>  false,
             'order-importing'           =>  true,
-            'view-storeorders'          => true,
-            'view-pickups'              => false,
+            //'view-storeorders'          => true,
+            //'view-pickups'              => false,
             'record-pickup'   => true,
             'order-csv-upload'  => true,
-            'manage-swatches'   => true,
-            'add-serials'   => true
+            //'manage-swatches'   => true,
+            //'add-serials'   => true
         ),
-        /*
-        'solar-jobs'  => array(
-            'add-solar-install'             => true,
-            'add-solar-install-new'             => false,
-            'update-solar-job'          => false,
-            'add-service-job'           => true,
-            'view-installs'                 => true,
-            'add-origin-job'            => false,
-            'add-tlj-job'               => false,
-            'add-solargain-job'               => false,
-            'job-search'                => true,
-            'edit-servicejob'           => false,
-            'update-service-details'    => false,
-            'view-service-jobs'         => true,
-            'update-install-details'    => false,
-            'install-items-update'      => false
-        ),
-        */
 		'clients'	=> array(
 			'view-clients'	=> true,
 			'add-client'	=> true,
@@ -542,7 +524,6 @@ return array(
             'user-roles'                =>  true,
             //'pickfaces'                 => true,
             'couriers'                  => true,
-            'solar-order-types'   => true,
             'edit-user-profile'     => false
 		),
         'financials'    =>  array(
