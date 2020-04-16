@@ -555,6 +555,15 @@
 
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
+        if($expresspost)
+        {
+            return '3J85';
+        }
+        return '3D85';
+    }
+     /*
+    protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
+    {
         //return "7E55";
         $pti8_countries = array(
             "BE",
@@ -602,4 +611,5 @@
             }
         }
     }
+    */
 }
