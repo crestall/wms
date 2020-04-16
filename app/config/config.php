@@ -409,8 +409,8 @@ return array(
             'order-importing'           =>  true,
             //'view-storeorders'          => true,
             //'view-pickups'              => false,
-            'record-pickup'   => true,
-            'order-csv-upload'  => true,
+            //'record-pickup'   => true,
+            'order-csv-update'  => true,
             //'manage-swatches'   => true,
             //'add-serials'   => true
         ),
