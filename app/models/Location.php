@@ -98,11 +98,18 @@ class Location extends Model{
         return $valid;
     }
 
-    public function getAllLocations()
+    public function getAllLocations($active = -1)
     {
         $db = Database::openConnection();
 
-        return $db->queryData("SELECT * FROM locations ORDER BY location + 0");
+        $q = "SELECT * FROM locations";
+        if($active >= 0)
+        {
+            $q .= " WHERE active = $active";
+        }
+        $q .= " ORDER BY location + 0";
+
+        return $db->queryData($q);
         //return $db->queryData("SELECT * FROM locations WHERE SUBSTRING_INDEX(location, '.', 1) = '7'" );
     }
 
@@ -222,7 +229,7 @@ class Location extends Model{
             FROM
                 locations
             WHERE
-                selectable = 1
+                active = 1
             ORDER BY location";
         $locations = $db->queryData($q);
         foreach($locations as $l)
@@ -251,7 +258,7 @@ class Location extends Model{
             FROM
                 locations
             WHERE
-                selectable = 1
+                active = 1
                 AND
                 CASE WHEN multi_sku = 0
                 THEN id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)
@@ -260,7 +267,7 @@ class Location extends Model{
 
         if( $item_id )
         {
-            $q .= " OR ( id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id) AND (selectable = 1) )";
+            $q .= " OR ( id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id) AND (active = 1) )";
         }
         $q .= " ORDER BY location";
         //echo $q;die();
@@ -290,7 +297,7 @@ class Location extends Model{
             FROM locations
             WHERE
             (
-                selectable = 1
+                active = 1
             )
             AND
             (
@@ -308,7 +315,7 @@ class Location extends Model{
         {
             $q .= " OR
                     (
-                        id IN (SELECT location_id FROM items_locations WHERE item_id = :item_id) AND (selectable = 1)
+                        id IN (SELECT location_id FROM items_locations WHERE item_id = :item_id) AND (active = 1)
                     )";
             $array['item_id'] = $item_id;
         }
@@ -417,7 +424,7 @@ class Location extends Model{
         $db = Database::openConnection();
         $check = "";
         $ret_string = "";
-        $q = "SELECT id, location FROM locations WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)  AND (selectable = 1) ORDER BY location";
+        $q = "SELECT id, location FROM locations WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)  AND (active = 1) ORDER BY location";
         $locations = $db->queryData($q);
         foreach($locations as $l)
         {
@@ -437,7 +444,7 @@ class Location extends Model{
        $db = Database::openConnection();
         $check = "";
         $ret_string = "";
-        $q = "SELECT id, location FROM locations WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed IS NULL UNION SELECT location_id FROM items_locations) AND (selectable = 1) ORDER BY location";
+        $q = "SELECT id, location FROM locations WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed IS NULL UNION SELECT location_id FROM items_locations) AND (active = 1) ORDER BY location";
         $locations = $db->queryData($q);
         foreach($locations as $l)
         {
@@ -457,7 +464,7 @@ class Location extends Model{
        $db = Database::openConnection();
         $check = "";
         $ret_string = "";
-        $q = "SELECT id, location FROM locations WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed IS NULL UNION SELECT location_id FROM items_locations) AND SUBSTRING(location, -1) = 'a'  AND (selectable = 1) ORDER BY location";
+        $q = "SELECT id, location FROM locations WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed IS NULL UNION SELECT location_id FROM items_locations) AND SUBSTRING(location, -1) = 'a'  AND (active = 1) ORDER BY location";
         $locations = $db->queryData($q);
         foreach($locations as $l)
         {
@@ -481,7 +488,7 @@ class Location extends Model{
        $db = Database::openConnection();
         $check = "";
         $ret_string = "";
-        $q = "SELECT id, location FROM locations WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed IS NULL) AND id IN (SELECT location_id FROM items_locations) AND (selectable = 1) ORDER BY location";
+        $q = "SELECT id, location FROM locations WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed IS NULL) AND id IN (SELECT location_id FROM items_locations) AND (active = 1) ORDER BY location";
         $locations = $db->queryData($q);
         foreach($locations as $l)
         {
@@ -508,7 +515,7 @@ class Location extends Model{
                 WHERE
                     id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed IS NULL)
                     AND id IN (SELECT location_id FROM items_locations)
-                    AND (selectable = 1)
+                    AND (active = 1)
                 ORDER BY location";
         $locations = $db->queryData($q);
         foreach($locations as $l)
