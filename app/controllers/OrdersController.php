@@ -121,7 +121,7 @@ class OrdersController extends Controller
     {
 
         //render the page
-        Config::setJsConfig('curPage', "order-csv-upload");
+        Config::setJsConfig('curPage', "order-csv-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/csvUpload.php', [
             'page_title'    =>  "CSV Update"
         ]);
