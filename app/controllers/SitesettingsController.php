@@ -23,7 +23,8 @@ class sitesettingsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/locations.php',
         [
             'page_title'    =>  'Manage Locations',
-            'locations'     =>  $locations
+            'locations'     =>  $locations,
+            'active'        =>  $active
         ]);
     }
 
