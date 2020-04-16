@@ -209,6 +209,7 @@
                                     e.preventDefault();
                                     actions.locations.update.click(this);
                                 });
+                                actions.common.locationActivation();
                             }
                          } );
 
