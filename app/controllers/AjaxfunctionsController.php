@@ -186,6 +186,18 @@ class ajaxfunctionsController extends Controller
         $this->user->reactivateUser($this->request->data['userid']);
     }
 
+    public function deactivateLocation()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->location->deactivateLocation($this->request->data['locationid']);
+    }
+
+    public function reactivateLocation()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->location->reactivateLocation($this->request->data['locationid']);
+    }
+
     public function calcOriginPick()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();

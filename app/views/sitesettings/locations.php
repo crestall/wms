@@ -1,8 +1,21 @@
 <?php
-
+    if($active == 0)
+    {
+            $link_text = "<a href='/site-settings/locations' class='btn btn-primary'>View Active Locations</a>";
+    }
+    else
+    {
+            $link_text = "<a href='/site-settings/locations/active=0' class='btn btn-warning'>View Inactive Locations</a>";
+    }
+    $i = 1;
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="text-right"><?php echo $link_text;?></p>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <h2>Add a New Location</h2>
@@ -92,6 +105,15 @@
                                         <p>
                                             <a class="btn btn-primary update" data-locationid="<?php echo $l['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $l['id'];?>"></span>
                                         </p>
+                                        <?php if($active == 1):?>
+                                            <p>
+                                                <a class="btn btn-danger deactivate" data-locationid="<?php echo $l['id'];?>">Deactivate Location</a>
+                                            </p>
+                                        <?php else:?>
+                                            <p>
+                                                <a class="btn btn-warning reactivate" data-locationid="<?php echo $l['id'];?>">Reactivate Location</a>
+                                            </p>
+                                        <?php endif;?>
                                     </td>
                                 </tr>
                             <?php endforeach;?>

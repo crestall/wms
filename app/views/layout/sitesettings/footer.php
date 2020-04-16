@@ -53,6 +53,51 @@
                                 }
                             });
                         });
+                    },
+                    locationActivation: function(){
+                        $("a.deactivate").off('click').click(function(e){
+                            //console.log('click');
+                            var $but = $(this);
+                            var thislocationid = $but.data('locationid');
+                            var data = {locationid: thislocationid};
+                            swal({
+                                title: "Deactivate Location?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willDeactivate) {
+                                if (willDeactivate) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deactivating Location...</h1></div>' });
+                                    //console.log(data);
+                                    $.post('/ajaxfunctions/deactivateLocation', data, function(d){
+                                        $but.closest('p').html("<a class='btn btn-success reactivate' data-locationid='"+thislocationid+"'>Reactivate Location</a>");
+                                        $.unblockUI();
+                                        actions.common.locationActivation();
+                                    });
+                                }
+                            });
+                        });
+
+                        $("a.reactivate").off('click').click(function(e){
+                            var $but = $(this);
+                            var thislocationid = $but.data('locationid');
+                            var data = {locationid: thislocationid};
+                            swal({
+                                title: "Reactivate Location?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willReactivate) {
+                                if (willReactivate) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reactivating Location...</h1></div>' });
+                                    $.post('/ajaxfunctions/reactivateLocation', data, function(d){
+                                        $but.closest('p').html("<a class='btn btn-danger deactivate' data-locationid='"+thislocationid+"'>Deactivate Location</a>");
+                                        $.unblockUI();
+                                        actions.common.userActivation();
+                                    });
+                                }
+                            });
+                        });
                     }
                 },
                 'packing-types': {
@@ -164,6 +209,7 @@
                                     e.preventDefault();
                                     actions.locations.update.click(this);
                                 });
+                                actions.common.locationActivation();
                             }
                          } );
 
@@ -171,6 +217,7 @@
                             e.preventDefault();
                             actions.locations.update.click(this);
                         });
+                        actions.common.locationActivation();
                     },
                     'update':{
                         click: function(el){
