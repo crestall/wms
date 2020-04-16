@@ -47,6 +47,20 @@ class Location extends Model{
         $this->bayswater_receiving_id = $this->getLocationId('bayswater receiving');
     }
 
+    public function deactivateLocation($id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'active', 0, $id);
+        return true;
+    }
+
+    public function reactivateLocation($id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'active', 1, $id);
+        return true;
+    }
+
     private function getReceivingId()
     {
         $db = Database::openConnection();
