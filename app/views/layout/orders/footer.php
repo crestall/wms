@@ -1920,7 +1920,7 @@
                         });
                     }
                 },
-                'order-csv-upload': {
+                'order-csv-update': {
                     init: function(){
                         $('form#order-csv-upload').submit(function(e){
                             if($(this).valid())

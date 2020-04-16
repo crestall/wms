@@ -84,11 +84,16 @@ return array(
     'API_KEY'       =>  '37515c42-aa3e-441a-bf24-8d20e125a483',
     'API_PWD'       =>  'xac75c284b8d81524a4d',
     'ACCOUNT_NO'    =>  '1000579543',
-    */
-    //Live
+
+    //3PL
     'API_KEY'       =>  'dbcc9679-996a-49f9-8156-2aab3708485c',
     'API_PWD'       =>  '0404Jaffa',
     'ACCOUNT_NO'    =>  '0007018074',
+    */
+    //FSG
+    'API_KEY'       =>  'e5e25c00-c317-4929-950d-1d2631281f4f',
+    'API_PWD'       =>  'xe5f23caf4c7edf3f5bf',
+    'ACCOUNT_NO'    =>  '0007378183',
 
     /*************************************************************************
     * DHL API constants
@@ -398,40 +403,22 @@ return array(
             'edit-customer'             =>  false,
             'order-search'              =>  true,
             'order-search-results'      =>  false,
-            'order-picking'             =>  true,
+            //'order-picking'             =>  true,
             'order-details'             =>  false,
-            'order-packing'             =>  true,
-            'order-dispatching'         =>  true,
-            'truck-usage'               =>  true,
+            //'order-packing'             =>  true,
+            //'order-dispatching'         =>  true,
+            //'truck-usage'               =>  true,
             'view-orders'               =>  true,
             'address-update'            =>  false,
             'items-update'              =>  false,
             'order-importing'           =>  true,
-            'view-storeorders'          => true,
-            'view-pickups'              => false,
-            'record-pickup'   => true,
-            'order-csv-upload'  => true,
-            'manage-swatches'   => true,
-            'add-serials'   => true
+            //'view-storeorders'          => true,
+            //'view-pickups'              => false,
+            //'record-pickup'   => true,
+            'order-csv-update'  => true,
+            //'manage-swatches'   => true,
+            //'add-serials'   => true
         ),
-        /*
-        'solar-jobs'  => array(
-            'add-solar-install'             => true,
-            'add-solar-install-new'             => false,
-            'update-solar-job'          => false,
-            'add-service-job'           => true,
-            'view-installs'                 => true,
-            'add-origin-job'            => false,
-            'add-tlj-job'               => false,
-            'add-solargain-job'               => false,
-            'job-search'                => true,
-            'edit-servicejob'           => false,
-            'update-service-details'    => false,
-            'view-service-jobs'         => true,
-            'update-install-details'    => false,
-            'install-items-update'      => false
-        ),
-        */
 		'clients'	=> array(
 			'view-clients'	=> true,
 			'add-client'	=> true,
@@ -542,7 +529,6 @@ return array(
             'user-roles'                =>  true,
             //'pickfaces'                 => true,
             'couriers'                  => true,
-            'solar-order-types'   => true,
             'edit-user-profile'     => false
 		),
         'financials'    =>  array(

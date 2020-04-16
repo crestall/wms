@@ -974,7 +974,7 @@ class FormController extends Controller {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-csv-upload");
+        return $this->redirector->to(PUBLIC_ROOT."orders/order-csv-update");
     }
 
     public function procOriginOrderAdd()
