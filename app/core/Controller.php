@@ -127,7 +127,8 @@ class Controller {
          $this->loadEparcelLocations([
             'BigBottle',
             'Freedom',
-            'Nuchev'
+            'Nuchev',
+            'TT'
          ]);
 
          $this->loadHuntersLocations([
