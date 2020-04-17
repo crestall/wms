@@ -357,14 +357,14 @@
         if(!empty($od['contact_phone'])) $shipment['to']['phone'] = $od['contact_phone'];
         $shipment['to']['lines'][] = $od['address'];
         if(!empty($od['address_2'])) $shipment['to']['lines'][] = $od['address_2'];
-        $threepl_address = Config::get("THREEPL_ADDRESS");
+        $fsg_address = Config::get("FSG_ADDRESS");
         $shipment['from'] = array(
-            'name'      =>  '3PLPLUS',
-            'lines'		=>	array($threepl_address['address']),
-            'suburb'	=>	$threepl_address['suburb'],
-            'postcode'	=>	$threepl_address['postcode'],
-            'state'		=>	$threepl_address['state'],
-            'country'	=>  $threepl_address['country']
+            'name'      =>  'Murphy Bros Printing Pty Ltd',
+            'lines'		=>	array($fsg_address['address']),
+            'suburb'	=>	$fsg_address['suburb'],
+            'postcode'	=>	$fsg_address['postcode'],
+            'state'		=>	$fsg_address['state'],
+            'country'	=>  $fsg_address['country']
         );
         $packages = $this->controller->order->getPackagesForOrder($order_id);
         $weight = 0;
@@ -400,7 +400,7 @@
             $array['item_contents'] = array();
             if($ad['country'] != "AU")
             {
-                $pval = round($val/count($parcels), 2);
+                $pval = round( $val/count($parcels) , 2);
                 if(empty($this->controller->client->getProductsDescription($od['client_id'])))
                 {
                     if(empty($items[0]['description']))
