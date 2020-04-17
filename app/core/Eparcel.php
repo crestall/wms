@@ -551,7 +551,7 @@
         }
         return $shipment;
     }
-    */
+
 
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
@@ -561,7 +561,7 @@
         }
         return '3D85';
     }
-     /*
+    */
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
         //return "7E55";
@@ -594,8 +594,8 @@
         );
         if($ad['country'] == "AU")
         {
-            if($expresspost) return '7J85';
-            return '7D85';
+            if($expresspost) return '3J85';
+            return '3D85';
         }
         else
         {
@@ -607,9 +607,9 @@
             }
             else
             {
-                return 'PTI8';
+                return 'PTI7';
             }
         }
     }
-    */
+
 }
