@@ -128,7 +128,7 @@ class Controller {
             'BigBottle',
             'Freedom',
             'Nuchev',
-            'TT'
+            'TTAU'
          ]);
 
          $this->loadHuntersLocations([
