@@ -6,7 +6,7 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class TTEparcel extends Eparcel
+class TTAUEparcel extends Eparcel
 {
     private $client_id = 66;
     //const    API_BASE_URL = '/testbed/shipping/v1/';
