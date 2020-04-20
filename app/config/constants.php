@@ -21,7 +21,7 @@ define('HUNTERS_TEST', false);
 * Database Configuration
 **************************************************************************/
 define('DB_HOST', "localhost");
-define('DB_NAME', "cobaltma_newclientportal");
+define('DB_NAME', "fsg_wms");
 define('DB_USER', "website");
 define('DB_PASS', "66ihu#9J");
 define('DB_CHARSET', "utf8");
