@@ -15,7 +15,7 @@ require '../app/config/constants.php';
  Register Error & Exception handlers
 --------------------------------------------------------------------------
 */
-
+die('about to handle');
 Handler::register();
 
 /*
