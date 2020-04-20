@@ -1,4 +1,4 @@
-ite<?php
+<?php
 /*
 --------------------------------------------------------------------------
  Define Application Configuration Constants
