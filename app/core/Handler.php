@@ -16,7 +16,7 @@ class Handler{
      * Constructor
      *
      */
-    private function __construct(){die('Handler');}
+    private function __construct(){}
 
     /**
      * Register the error and exception handlers.
@@ -25,7 +25,7 @@ class Handler{
      * @return void
      */
     public static function register(){
-
+        die('Handler::register');
         // turn off all error reporting as well,
         // because we will take care of it
         error_reporting(0);
