@@ -1,4 +1,4 @@
-<?php
+ite<?php
 /*
 --------------------------------------------------------------------------
  Define Application Configuration Constants
@@ -22,7 +22,7 @@ define('HUNTERS_TEST', false);
 **************************************************************************/
 define('DB_HOST', "localhost");
 define('DB_NAME', "cobaltma_newclientportal");
-define('DB_USER', "cobaltma_cpsite");
-define('DB_PASS', "{,e3^bfcfcMp");
+define('DB_USER', "website");
+define('DB_PASS', "66ihu#9J");
 define('DB_CHARSET', "utf8");
 ?>
