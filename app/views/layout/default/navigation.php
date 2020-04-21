@@ -53,7 +53,7 @@ endif;
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
 						<li id="logo" class="text-center">
-                            <img src="/images/backgrounds/3pl_logo.png" />
+                            <img src="/images/backgrounds/FSG_logo.png" />
                         </li>
                         <li id="dashboard">
                             <a href="/dashboard"><i class="fa fas fa-home fa-fw"></i> Home</a>
