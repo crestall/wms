@@ -6,7 +6,7 @@ if(!((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SER
     exit();
 }
 /* Load dependencies */
-require  '../../vendor/autoload.php';
+require  '../vendor/autoload.php';
 
 /* load the contants */
 require '../app/config/constants.php';
