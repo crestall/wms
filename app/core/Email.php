@@ -6,7 +6,7 @@
   * Sending emails via SMTP.
   * It uses PHPMailer library to send emails.
   *
-  
+
   * @author     Mark Solly <mark.solly@3plplus.com.au>
   */
 
@@ -127,7 +127,7 @@
 
 		$mail->AddAddress($email, $name);
 
-		$mail->Subject = "Reset your password for 3PLPLUS WMS system";
+		$mail->Subject = "Reset your password for FSG WMS system";
 
         $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
 
