@@ -15,9 +15,7 @@ require '../app/config/constants.php';
  Register Error & Exception handlers
 --------------------------------------------------------------------------
 */
-
 Handler::register();
-die('handled');
 /*
 --------------------------------------------------------------------------
  Start Session and Form Objects
