@@ -22,14 +22,14 @@
     "autoload": {
     	"psr-4": {
     	    "": [
-            "/wms.fsg.com.au/app/core/",
-            "/wms.fsg.com.au/app/models/",
-            "/wms.fsg.com.au/app/utility/",
-            "/wms.fsg.com.au/app/packaging/",
-            "/wms.fsg.com.au/app/controllers/",
-            "/wms.fsg.com.au/app/core/components/",
-            "/wms.fsg.com.au/app/core/eparcel_accounts/",
-            "/wms.fsg.com.au/app/core/hunters_accounts/"
+            "/wms\.fsg\.com\.au/app/core/",
+            "/wms\.fsg\.com\.au/app/models/",
+            "/wms\.fsg\.com\.au/app/utility/",
+            "/wms\.fsg\.com\.au/app/packaging/",
+            "/wms\.fsg\.com\.au/app/controllers/",
+            "/wms\.fsg\.com\.au/app/core/components/",
+            "/wms\.fsg\.com\.au/app/core/eparcel_accounts/",
+            "/wms\.fsg\.com\.au/app/core/hunters_accounts/"
             ]
         }
     }
