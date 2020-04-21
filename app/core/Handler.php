@@ -16,7 +16,9 @@ class Handler{
      * Constructor
      *
      */
-    private function __construct(){}
+    private function __construct(){
+        die('Handler Constructed');
+    }
 
     /**
      * Register the error and exception handlers.
