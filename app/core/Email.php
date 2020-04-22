@@ -118,37 +118,44 @@
      {
         $mail = new PHPMailer(true);
         $mail->IsSMTP();
-        $mail->Host = "smtp.office365.com";
-        $mail->Port = 587;
-        $mail->SMTPDebug  = 2;
-        $mail->SMTPSecure = "tls";
-        $mail->SMTPAuth = true;
-        $mail->Username = "mark@fsg.com.au";
-        $mail->Password = "125FluShots#";
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = 587;
+            $mail->SMTPDebug  = 2;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = "mark@fsg.com.au";
+            $mail->Password = "125FluShots#";
 
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."passwordreset.html");
-        $replace_array = array("{LINK}", "{NAME}");
-		$replace_with_array = array(Config::get('EMAIL_PASSWORD_RESET_URL') . "?id=" . urlencode(Encryption::encryptId($user_id)) . "&token=" . urlencode($password_token), $name);
-		$body = str_replace($replace_array, $replace_with_array, $body);
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."passwordreset.html");
+            $replace_array = array("{LINK}", "{NAME}");
+    		$replace_with_array = array(Config::get('EMAIL_PASSWORD_RESET_URL') . "?id=" . urlencode(Encryption::encryptId($user_id)) . "&token=" . urlencode($password_token), $name);
+    		$body = str_replace($replace_array, $replace_with_array, $body);
 
-        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-		$mail->AddAddress($email, $name);
+    		$mail->AddAddress($email, $name);
 
-        $mail->AddBCC('mark@fsg.com.au', 'Mark Solly');
+            $mail->AddBCC('mark@fsg.com.au', 'Mark Solly');
 
-		$mail->Subject = "Reset your password for FSG WMS system";
+    		$mail->Subject = "Reset your password for FSG WMS system";
 
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+            $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
 
-		$mail->MsgHTML($body);
+    		$mail->MsgHTML($body);
 
-        if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-            throw new Exception("Email couldn't be sent to ". $name);
-            return false;
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent to ". $name);
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());
+        } catch (Exception $e) {
+            print_r($e->getMessage());
         }
+
         return true;
      }
     public static function sendBBInternationOrder($message, $header = "International Order", $subject = "Big Bottle International Order")
