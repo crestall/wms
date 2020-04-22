@@ -151,9 +151,9 @@
                 return false;
             }
         } catch (phpmailerException $e) {
-            print_r($e->errorMessage());
+            print_r($e->errorMessage());die();
         } catch (Exception $e) {
-            print_r($e->getMessage());
+            print_r($e->getMessage());die();
         }
 
         return true;
