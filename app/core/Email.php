@@ -116,7 +116,15 @@
 
      public static function sendPasswordReset($user_id, $name, $email, $password_token)
      {
-        $mail = new PHPMailer();
+        $mail = new PHPMailer(true);
+        $mail->IsSMTP();
+        $mail->Host = "smtp.office365.com";
+        $mail->Port = 587;
+        $mail->SMTPDebug  = 2;
+        $mail->SMTPSecure = "tls";
+        $mail->SMTPAuth = true;
+        $mail->Username = "mark@fsg.com.au";
+        $mail->Password = "125FluShots#";
 
         $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."passwordreset.html");
         $replace_array = array("{LINK}", "{NAME}");
