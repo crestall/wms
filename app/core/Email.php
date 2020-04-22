@@ -139,7 +139,9 @@
         {
             Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
             throw new Exception("Email couldn't be sent to ". $name);
+            return false;
         }
+        return true;
      }
     public static function sendBBInternationOrder($message, $header = "International Order", $subject = "Big Bottle International Order")
     {

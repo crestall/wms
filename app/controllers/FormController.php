@@ -4596,7 +4596,7 @@ class FormController extends Controller {
 
     public function procForgotPassword()
     {
-        //echo "<pre>",print_r($this->request),"</pre>";
+        echo "<pre>",print_r($this->request),"</pre>"; die();
         $email      = $this->request->data('email');
         $userIp     = $this->request->clientIp();
         $userAgent  = $this->request->userAgent();
@@ -4632,7 +4632,10 @@ class FormController extends Controller {
                     return $this->redirector->login();
                 }
                 $newPasswordToken = $this->login->generateForgottenPasswordToken($user["id"], $forgottenPassword);
-                Email::sendPasswordReset($user['id'], $user['name'], $email, $newPasswordToken);
+                if(!Email::sendPasswordReset($user['id'], $user['name'], $email, $newPasswordToken))
+                {
+                    die('mail error');
+                }
             }
             Session::set('feedback', "<p>An email has been sent with a reset password link. This link will remain valid for 24 hours</p>");
         }
