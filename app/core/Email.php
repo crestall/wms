@@ -119,7 +119,7 @@
      public static function sendPasswordReset($user_id, $name, $email, $password_token)
      {
 
-        $mail = new PHPMailer();
+        $mail = new PHPMailer(true);
         $mail->IsSMTP();
         try{
             $mail->Host = "smtp.office365.com";
