@@ -470,7 +470,7 @@ class FormController extends Controller {
                         'signature_req' => 0,
                         'errors'        => 0,
                         'error_string'  => '',
-                        'weight'        => 0.41
+                        'weight'        => 0.46
                     );
 
                     $orders_items = array();
@@ -4596,7 +4596,7 @@ class FormController extends Controller {
 
     public function procForgotPassword()
     {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        echo "<pre>",print_r($this->request),"</pre>"; die();
         $email      = $this->request->data('email');
         $userIp     = $this->request->clientIp();
         $userAgent  = $this->request->userAgent();

@@ -125,7 +125,7 @@
             $mail->SMTPSecure = "tls";
             $mail->SMTPAuth = true;
             $mail->Username = "mark@fsg.com.au";
-            $mail->Password = "125FluShots#";
+            $mail->Password = "501BigBuckets!";
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."passwordreset.html");
             $replace_array = array("{LINK}", "{NAME}");
