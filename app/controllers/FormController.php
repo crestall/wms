@@ -4596,7 +4596,7 @@ class FormController extends Controller {
 
     public function procForgotPassword()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
         $email      = $this->request->data('email');
         $userIp     = $this->request->clientIp();
         $userAgent  = $this->request->userAgent();
@@ -4619,6 +4619,7 @@ class FormController extends Controller {
         {
             if($db->fieldValueTaken('users', $email, 'email'))
             {
+                die('email found');
                 //only do stuf if the email exists in the system
                 $user     = $db->queryRow("SELECT * FROM users WHERE email = :email", array('email' => $email));
                 $forgottenPassword = $db->queryRow("SELECT * FROM forgotten_passwords WHERE user_id = ".$user['id']);
@@ -4636,6 +4637,10 @@ class FormController extends Controller {
                 {
                     die('mail error');
                 }
+            }
+            else
+            {
+                die('no email found');
             }
             Session::set('feedback', "<p>An email has been sent with a reset password link. This link will remain valid for 24 hours</p>");
         }
