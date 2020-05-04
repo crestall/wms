@@ -56,9 +56,9 @@ return array(
      * Configuration for Email
      *
      */
-    "EMAIL_FROM"        => "no-reply@fsg.com.au",
+    "EMAIL_FROM"        => "FSGWMS@fsg.com.au",
     "EMAIL_FROM_NAME"   => "Film Shot Graphics Warehouse Management System",
-    "EMAIL_REPLY_TO"    => "no-reply@fsg.com.au",
+    "EMAIL_REPLY_TO"    => "FSGWMS@fsg.com.au",
 
     "EMAIL_PASSWORD_RESET_URL" => PUBLIC_ROOT . "login/resetPassword",
 
