@@ -5,7 +5,9 @@ if(!((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SER
     header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
     exit();
 }
-/* Load dependencies */
+/* Load dependencies and namespaces*/
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 require  '../vendor/autoload.php';
 
 /* load the contants */
