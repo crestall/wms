@@ -9,6 +9,8 @@
 
   * @author     Mark Solly <mark.solly@3plplus.com.au>
   */
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
 
  class Email{
 
@@ -116,8 +118,7 @@
 
      public static function sendPasswordReset($user_id, $name, $email, $password_token)
      {
-        use PHPMailer\PHPMailer\PHPMailer;
-        use PHPMailer\PHPMailer\Exception;
+
         $mail = new PHPMailer(true);
         $mail->IsSMTP();
         try{
