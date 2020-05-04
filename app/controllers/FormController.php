@@ -4619,7 +4619,7 @@ class FormController extends Controller {
         {
             if($db->fieldValueTaken('users', $email, 'email'))
             {
-                die('email found');
+                //die('email found');
                 //only do stuf if the email exists in the system
                 $user     = $db->queryRow("SELECT * FROM users WHERE email = :email", array('email' => $email));
                 $forgottenPassword = $db->queryRow("SELECT * FROM forgotten_passwords WHERE user_id = ".$user['id']);
