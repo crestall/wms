@@ -121,13 +121,13 @@
         $mail = new PHPMailer();
         $mail->IsSMTP();
         try{
-            $mail->Host = "smtp.office365.com";
-            $mail->Port = 587;
+            $mail->Host = Config::get('EMAIL_HOST');
+            $mail->Port = Config::get('EMAIL_PORT');
             //$mail->SMTPDebug  = 2;
             $mail->SMTPSecure = "tls";
             $mail->SMTPAuth = true;
-            $mail->Username = "FSGWMS@fsg.com.au";
-            $mail->Password = "noreply865!";
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."passwordreset.html");
             $replace_array = array("{LINK}", "{NAME}");
