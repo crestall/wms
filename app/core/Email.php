@@ -138,7 +138,7 @@
 
     		$mail->AddAddress($email, $name);
 
-            $mail->AddBCC('mark@fsg.com.au', 'Mark Solly');
+            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
 
     		$mail->Subject = "Reset your password for FSG WMS system";
 
