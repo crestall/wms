@@ -9,7 +9,7 @@
 
   * @author     Mark Solly <mark.solly@3plplus.com.au>
   */
-  use PHPMailer\PHPMailer\PHPMailer; 
+  use PHPMailer\PHPMailer\PHPMailer;
 
  class Email{
 
@@ -123,7 +123,7 @@
         try{
             $mail->Host = "smtp.office365.com";
             $mail->Port = 587;
-            $mail->SMTPDebug  = 2;
+            //$mail->SMTPDebug  = 2;
             $mail->SMTPSecure = "tls";
             $mail->SMTPAuth = true;
             $mail->Username = "FSGWMS@fsg.com.au";
