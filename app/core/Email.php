@@ -119,7 +119,7 @@
      public static function sendPasswordReset($user_id, $name, $email, $password_token)
      {
 
-        $mail = new PHPMailer(true);
+        $mail = new PHPMailer();
         $mail->IsSMTP();
         try{
             $mail->Host = "smtp.office365.com";
@@ -158,7 +158,7 @@
         } catch (Exception $e) {
             print_r($e->getMessage());die();
         }
-        die('email');
+        //die('email');
         return true;
      }
     public static function sendBBInternationOrder($message, $header = "International Order", $subject = "Big Bottle International Order")
