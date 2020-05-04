@@ -9,8 +9,7 @@
 
   * @author     Mark Solly <mark.solly@3plplus.com.au>
   */
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\Exception;
+  use PHPMailer\PHPMailer\PHPMailer; 
 
  class Email{
 
@@ -119,7 +118,7 @@
      public static function sendPasswordReset($user_id, $name, $email, $password_token)
      {
 
-        $mail = new PHPMailer(true);
+        $mail = new PHPMailer();
         $mail->IsSMTP();
         try{
             $mail->Host = "smtp.office365.com";
