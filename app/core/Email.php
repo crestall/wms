@@ -120,15 +120,15 @@
      {
 
         $mail = new PHPMailer(true);
-        $mail->IsSMTP();
+        //$mail->IsSMTP();
         try{
-            $mail->Host = "smtp.office365.com";
-            $mail->Port = 587;
-            $mail->SMTPDebug  = 2;
-            $mail->SMTPSecure = "tls";
-            $mail->SMTPAuth = true;
-            $mail->Username = "mark@fsg.com.au";
-            $mail->Password = "501BigBuckets!";
+            //$mail->Host = "smtp.office365.com";
+            //$mail->Port = 587;
+            //$mail->SMTPDebug  = 2;
+            //$mail->SMTPSecure = "tls";
+            //$mail->SMTPAuth = true;
+            //$mail->Username = "mark@fsg.com.au";
+            //$mail->Password = "501BigBuckets!";
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."passwordreset.html");
             $replace_array = array("{LINK}", "{NAME}");
