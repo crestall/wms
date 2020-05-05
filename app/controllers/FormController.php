@@ -4629,7 +4629,7 @@ class FormController extends Controller {
                 $time_elapsed = time() - $last_time;
                 if ($count >= 5 && $time_elapsed < $block_time)
                 {
-                    Form::setError('general', "You exceeded number of possible attempts, please try again later after " .date("i", $block_time - $time_elapsed) . " minutes");
+                    Form::setError('toomanytimes', "You exceeded number of possible attempts, please try again later after " .date("i", $block_time - $time_elapsed) . " minutes");
                     return $this->redirector->login();
                 }
                 $newPasswordToken = $this->login->generateForgottenPasswordToken($user["id"], $forgottenPassword);

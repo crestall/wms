@@ -42,7 +42,7 @@
                         </form>
 						<form action="/form/procForgotPassword" id="form-forgot-password" method="post"
                             <?php if($display_form !== "forgot-password"){ echo "class='display-none'"; } ?> >
-                            <?php echo Form::displayError('general');?> 
+                            <p>too many times error <?php echo Form::displayError('toomanytimes');?>  </p>
                             <fieldset>
                                 <div class="form-group">
                                     <input type="email" name="email" class="form-control required email" placeholder="E-mail" autofocus />
