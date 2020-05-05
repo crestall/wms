@@ -123,7 +123,7 @@
         try{
             $mail->Host = "smtp.office365.com";
             $mail->Port = 587;
-            //$mail->SMTPDebug  = 2;
+            $mail->SMTPDebug  = 0;
             $mail->SMTPSecure = "tls";
             $mail->SMTPAuth = true;
             $mail->Username = Config::get('EMAIL_UNAME');
