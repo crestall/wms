@@ -8,7 +8,7 @@
                     <div class="panel-body">
                     <?php $display_form = Session::getAndDestroy('display-form'); ?>
                         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-                        <?php echo Form::displayError('general');?>
+                        <?php echo Form::displayError('toomanytimes');?>
                         <form action="/form/procLogin" id="form-login" method="post"
                             <?php if(!empty($display_form)){ echo "class='display-none'"; } ?> >
                             <fieldset>
@@ -42,7 +42,6 @@
                         </form>
 						<form action="/form/procForgotPassword" id="form-forgot-password" method="post"
                             <?php if($display_form !== "forgot-password"){ echo "class='display-none'"; } ?> >
-                            <p>too many times error <?php echo Form::displayError('toomanytimes');?>  </p>
                             <fieldset>
                                 <div class="form-group">
                                     <input type="email" name="email" class="form-control required email" placeholder="E-mail" autofocus />
