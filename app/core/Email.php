@@ -123,7 +123,7 @@
         try{
             $mail->Host = Config::get('EMAIL_HOST');
             $mail->Port = Config::get('EMAIL_PORT');
-            $mail->SMTPDebug  = 0;
+            $mail->SMTPDebug  = 2;
             $mail->SMTPSecure = "tls";
             $mail->SMTPAuth = true;
             $mail->Username = Config::get('EMAIL_UNAME');
