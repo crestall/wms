@@ -203,7 +203,7 @@
         //echo "<pre>",print_r($response),"</pre>";die();
         list($a_headers,$a_data) = $this->getResponse($response);
         //echo "<pre>",print_r($a_data),"</pre>";
-        json_decode($a_date[0], true); die();
+        json_decode($a_data[0], true); die();
         return json_decode($a_data[0], true);
         //return $request;
     }
