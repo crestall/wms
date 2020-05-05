@@ -123,11 +123,11 @@
         try{
             $mail->Host = "smtp.office365.com";
             $mail->Port = 587;
-            $mail->SMTPDebug  = 1;
+            $mail->SMTPDebug  = 2;
             $mail->SMTPSecure = "tls";
             $mail->SMTPAuth = true;
-            $mail->Username = Config::get('EMAIL_UNAME');
-            $mail->Password = Config::get('EMAIL_PWD');
+            $mail->Username = "FSGWMS@fsg.com.au";
+            $mail->Password = "noreply865!";
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."passwordreset.html");
             $replace_array = array("{LINK}", "{NAME}");
