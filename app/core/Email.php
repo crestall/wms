@@ -16,10 +16,9 @@
      /**
       * This is the constructor for Email object.
       *
-      * @access private
       */
-    private function __construct(){
-        $this->mail = new PHPMailer()
+    public function __construct(){
+        $this->mail = new PHPMailer();
         $this->mail->IsSMTP();
         $this->mail->Host = "smtp.office365.com";
         $this->mail->Port = Config::get('EMAIL_PORT');
