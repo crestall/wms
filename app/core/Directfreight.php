@@ -200,10 +200,10 @@
         //echo "<pre>",print_r($request),"</pre>";//die();
         echo json_encode($request);
         $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
-        //echo "<pre>",print_r($response),"</pre>";die();
+        echo "<pre>",print_r($response),"</pre>";die();
         list($a_headers,$a_data) = $this->getResponse($response);
         //echo "<pre>",print_r($a_data),"</pre>";
-        json_decode($a_data[0], true); die();
+        //json_decode($a_data[0], true); die();
         return json_decode($a_data[0], true);
         //return $request;
     }
