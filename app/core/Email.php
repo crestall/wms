@@ -23,7 +23,7 @@
         $this->mail->IsSMTP();
         $this->mail->Host = "smtp.office365.com";
         $this->mail->Port = Config::get('EMAIL_PORT');
-        $this->mail->SMTPDebug  = 0;
+        $this->mail->SMTPDebug  = 2;
         $this->mail->SMTPSecure = "tls";
         $this->mail->SMTPAuth = true;
         $this->mail->Username = Config::get('EMAIL_UNAME');
