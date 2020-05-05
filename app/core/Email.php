@@ -141,7 +141,7 @@
 
     		$mail->Subject = "Reset your password for FSG WMS system";
 
-            $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+            $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
 
     		$mail->MsgHTML($body);
 
