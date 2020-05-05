@@ -18,7 +18,9 @@
       *
       * @access private
       */
-    private function __construct(){
+    public function __construct(){
+        $this->mail = new PHPMailer();
+        $this->mail->IsSMTP();
     }
 
 
@@ -119,35 +121,34 @@
      public static function sendPasswordReset($user_id, $name, $email, $password_token)
      {
 
-        $mail = new PHPMailer();
-        $mail->IsSMTP();
+
         try{
-            $mail->Host = "smtp.office365.com";
-            $mail->Port = Config::get('EMAIL_PORT');
-            $mail->SMTPDebug  = 0;
-            $mail->SMTPSecure = "tls";
-            $mail->SMTPAuth = true;
-            $mail->Username = Config::get('EMAIL_UNAME');
-            $mail->Password = Config::get('EMAIL_PWD');
+            $this->mail->Host = "smtp.office365.com";
+            $this->mail->Port = Config::get('EMAIL_PORT');
+            $this->mail->SMTPDebug  = 0;
+            $this->mail->SMTPSecure = "tls";
+            $this->mail->SMTPAuth = true;
+            $this->mail->Username = Config::get('EMAIL_UNAME');
+            $this->mail->Password = Config::get('EMAIL_PWD');
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."passwordreset.html");
             $replace_array = array("{LINK}", "{NAME}");
     		$replace_with_array = array(Config::get('EMAIL_PASSWORD_RESET_URL') . "?id=" . urlencode(Encryption::encryptId($user_id)) . "&token=" . urlencode($password_token), $name);
     		$body = str_replace($replace_array, $replace_with_array, $body);
 
-            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $this->mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-    		$mail->AddAddress($email, $name);
+    		$this->mail->AddAddress($email, $name);
 
-            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+            $this->mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
 
-    		$mail->Subject = "Reset your password for FSG WMS system";
+    		$this->mail->Subject = "Reset your password for FSG WMS system";
 
-            $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+            $this->mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
 
-    		$mail->MsgHTML($body);
+    		$this->mail->MsgHTML($body);
 
-            if(!$mail->Send())
+            if(!$this->mail->Send())
             {
                 Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
                 throw new Exception("Email couldn't be sent to ". $name);
