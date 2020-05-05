@@ -74,7 +74,7 @@
         }
         die('Request');
           */
-        echo "<pre>",print_r($headers),"</pre>";die();
+        //echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
         /*
         curl_setopt_array($ch, array(
