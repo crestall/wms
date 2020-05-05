@@ -121,7 +121,7 @@
         $mail = new PHPMailer();
         $mail->IsSMTP();
         try{
-            $mail->Host = Config::get('EMAIL_HOST');
+            $mail->Host = "smtp.office365.com";
             $mail->Port = Config::get('EMAIL_PORT');
             $mail->SMTPDebug  = 2;
             $mail->SMTPSecure = "tls";
