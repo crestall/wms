@@ -4627,7 +4627,7 @@ class FormController extends Controller {
                 $count     = isset($forgottenPassword["forgotten_password_attempts"])? $forgottenPassword["forgotten_password_attempts"]: null;
                 $block_time = (10 * 60);
                 $time_elapsed = time() - $last_time;
-                if ($count >= 2 && $time_elapsed < $block_time)
+                if ($count >= 5 && $time_elapsed < $block_time)
                 {
                     Form::setError('toomanytimes', "You exceeded number of possible attempts, please try again later after " .date("i", $block_time - $time_elapsed) . " minutes");
                     Session::set('value_array', $_POST);
