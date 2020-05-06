@@ -189,10 +189,10 @@
 
     public function getQuote($data_array, $client = "3PL Plus")
     {
-        $threepl_address = Config::get("THREEPL_ADDRESS");
+        $fsg_address = Config::get("FSG_ADDRESS");
         $request = array(
-            'SuburbFrom'            => $threepl_address['suburb'],
-            'PostcodeFrom'          => $threepl_address['postcode'],
+            'SuburbFrom'            => $fsg_address['suburb'],
+            'PostcodeFrom'          => $fsg_address['postcode'],
             'SuburbTo'              => $data_array['ReceiverDetails']['Suburb'],
             'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
