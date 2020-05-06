@@ -76,7 +76,7 @@
                               */
         //echo "<pre>",print_r($headers),"</pre>";die();
         $ch = curl_init();
-
+        /*
         curl_setopt_array($ch, array(
             CURLOPT_URL => "https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/",
             CURLOPT_RETURNTRANSFER => true,
@@ -93,7 +93,7 @@
                 "Content-Type: application/json"
             ),
             CURLOPT_VERBOSE => true
-        )); /*
+        ));  */
         $verbose = fopen('php://temp', 'w+');
         curl_setopt($ch, CURLOPT_STDERR, $verbose);
         //curl_setopt_array ( $ch, $this->curl_options );
@@ -106,7 +106,7 @@
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 0);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-        */
+
 
         $result = curl_exec($ch);
 
