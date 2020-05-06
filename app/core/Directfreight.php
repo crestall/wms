@@ -44,56 +44,10 @@
             'Content-Type: application/json',
             'Authorisation: '. $this->API_KEY ,
             'AccountNumber: '.$this->ACCOUNT_NO
-        );/*
-        require_once '/opt/cpanel/ea-php56/root/usr/share/pear/HTTP/Request2.php';
-        //die($data_string);
-        $request = new HTTP_Request2();
-        $request->setUrl('https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/');
-        $request->setMethod(HTTP_Request2::METHOD_POST);
-        $request->setConfig(array(
-            'follow_redirects' => TRUE
-        ));
-        $request->setHeader(array(
-            'Authorisation' => '5D74557B-84A4-46CB-87FD-4C93CF69530C',
-            'AccountNumber' => '34269',
-            'Content-Type' => 'application/json'
-        ));
-        $request->setBody('{"SuburbFrom":"Rowville","PostcodeFrom":"3178","SuburbTo":"WEST RYDE","PostcodeTo":"2114","ConsignmentLineItems":[{"SenderLineReference":"MdX0zWU7","RateType":"ITEM","Items":1,"Width":22,"Height":2,"Length":28,"KGS":1}]}');
-        try {
-            $response = $request->send();
-            if ($response->getStatus() == 200) {
-                echo 'Response: '.$response->getBody();
-            }
-            else {
-                echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-                $response->getReasonPhrase();
-            }
-        }
-        catch(HTTP_Request2_Exception $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
-        die('Request');
-                              */
-        //echo "<pre>",print_r($headers),"</pre>";die();
+        );
+
         $ch = curl_init();
-        /*
-        curl_setopt_array($ch, array(
-            CURLOPT_URL => "https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS =>"{\"SuburbFrom\":\"Rowville\",\"PostcodeFrom\":\"3178\",\"SuburbTo\":\"WEST RYDE\",\"PostcodeTo\":\"2114\",\"ConsignmentLineItems\":[{\"SenderLineReference\":\"MdX0zWU7\",\"RateType\":\"ITEM\",\"Items\":1,\"Width\":22,\"Height\":2,\"Length\":28,\"KGS\":1,'\"Cubic\":0}]}",
-            CURLOPT_HTTPHEADER => array(
-                "Authorisation: F5B293A6-0118-457C-AD81-24D870A8BB75",
-                "AccountNumber: 34495",
-                "Content-Type: application/json"
-            ),
-            CURLOPT_VERBOSE => true
-        ));  */
+        /* */
         $verbose = fopen('php://temp', 'w+');
         curl_setopt($ch, CURLOPT_STDERR, $verbose);
         //curl_setopt_array ( $ch, $this->curl_options );
@@ -113,14 +67,10 @@
         if ($result === FALSE) {
             printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
                    htmlspecialchars(curl_error($ch)));
-
-
             rewind($verbose);
             $verboseLog = stream_get_contents($verbose);
-
-            //echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
-
-            //die();
+            echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
+            die();
         }
         $err = curl_error($ch);
         curl_close($ch);
