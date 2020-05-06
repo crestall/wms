@@ -45,7 +45,6 @@
             'Authorisation: '. $this->API_KEY ,
             'AccountNumber: '.$this->ACCOUNT_NO
         );
-
         $ch = curl_init();
         /* */
         $verbose = fopen('php://temp', 'w+');
@@ -137,7 +136,7 @@
         return json_decode($a_data[0], true);
     }
 
-    public function getQuote($data_array, $client = "3PL Plus")
+    public function getQuote($data_array, $client = "Filmshot Graphics")
     {
         $fsg_address = Config::get("FSG_ADDRESS");
         $request = array(
@@ -150,9 +149,9 @@
         //echo "<pre>",print_r($request),"</pre>";//die();
         echo json_encode($request);
         $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
-        echo "<pre>",print_r($response),"</pre>";die();
+        echo "<pre>",print_r($response),"</pre>";//die();
         list($a_headers,$a_data) = $this->getResponse($response);
-        //echo "<pre>",print_r($a_data),"</pre>";
+        echo "<pre>ADATA",print_r($a_data),"</pre>";die();
         //json_decode($a_data[0], true); die();
         return json_decode($a_data[0], true);
         //return $request;
