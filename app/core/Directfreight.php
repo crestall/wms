@@ -88,7 +88,7 @@
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS =>"{\"SuburbFrom\":\"Rowville\",\"PostcodeFrom\":\"3178\",\"SuburbTo\":\"WEST RYDE\",\"PostcodeTo\":\"2114\",\"ConsignmentLineItems\":[{\"SenderLineReference\":\"MdX0zWU7\",\"RateType\":\"ITEM\",\"Items\":1,\"Width\":22,\"Height\":2,\"Length\":28,\"KGS\":1,'\"Cubic\":0}]}",
             CURLOPT_HTTPHEADER => array(
-                "Authorisation: 12C1290F-9388-4FC3-B968-C014C1460CBB",
+                "Authorisation: F5B293A6-0118-457C-AD81-24D870A8BB75",
                 "AccountNumber: 34495",
                 "Content-Type: application/json"
             ),
