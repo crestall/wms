@@ -853,7 +853,18 @@ class Item extends Model{
             'solar_type_id'                 =>  0
         );
         if(!empty($supplier)) $item_values['supplier'] = $supplier; 
-        $item_values['active'] = (isset($active))? 1 : 0;
+        //$item_values['active'] = (isset($active))? 1 : 0;
+        //added '-deactivated' to SKU to maintain uniqueness
+        if(isset($active))
+        {
+            $item_values['active'] = 1;
+            $item_values['sku'] = str_replace("-deactivated", "",$sku);
+        }
+        else
+        {
+            $item_values['active'] = 1;
+            $item_values['sku'] = $sku."-deactivated";
+        }
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
