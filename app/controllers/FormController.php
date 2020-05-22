@@ -453,7 +453,7 @@ class FormController extends Controller {
                         continue;
                     }
 
-
+                    /*
                     $request = array(
                         'deliver_to'    => trim($r[3]),
                         'client_id'     => $client_id,
@@ -471,6 +471,24 @@ class FormController extends Controller {
                         'errors'        => 0,
                         'error_string'  => '',
                         'weight'        => 0.41
+                    );
+                    */
+                    $request = array(
+                        'deliver_to'    => trim($r[3]),
+                        'client_id'     => $client_id,
+                        'tracking_email'=> "",
+                        //'company_name'  => trim($r[4]),
+                        'address'       => trim($r[4]),
+                        'address_2'     => trim($r[5]),
+                        'suburb'        => trim($r[6]),
+                        'state'         => trim($r[7]),
+                        'postcode'      => trim($r[8]),
+                        'contact_phone' => trim($r[11]),
+                        'date'          => time(),
+                        'country'       => 'AU',
+                        'errors'        => 0,
+                        'error_string'  => '',
+                        'weight'        => 1.87
                     );
 
                     $orders_items = array();
@@ -505,15 +523,28 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>The customer email is not valid</p>";
                     }
-
+                    /*
                     $location = array(
-                                    'location_id'   => 2901,
+                                    'location_id'   => 2901, //Bayswater Receiving
                                     'qty'           => $r[12]
                     );
+                    */
+                    $location = array(
+                                    'location_id'   => 1138, //packing
+                                    'qty'           => 1
+                    );
+                    /*
                     $locations = array();
                     $locations[] = $location;
                     $request['items'][] = array(
                         'item_id'  => $r[11],
+                        'locations' => $locations
+                    );
+                    */
+                    $locations = array();
+                    $locations[] = $location;
+                    $request['items'][] = array(
+                        'item_id'  => 13301,
                         'locations' => $locations
                     );
                     $requests[] = $request;
