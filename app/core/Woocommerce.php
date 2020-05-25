@@ -393,8 +393,8 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        echo "<pre>",print_r($collected_orders),"</pre>";die();
-        if($orders = $this->procNoaOrders($collected_orders))
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        if($orders = $this->procOnePlateOrders($collected_orders))
         {
             //echo "<pre>",print_r($orders),"</pre>";die();
             $this->addNoaOrders($orders);
@@ -826,58 +826,12 @@ class Woocommerce{
         }
     }
 
-    private function procNoaOrders($the_orders)
+    private function procOnePlateOrders($the_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
         //echo "<pre>",print_r($the_orders),"</pre>";die();
 		if(count($the_orders) == 0)
 			return false;
-        $ignored_skus = array(
-            "SUNRISE-D-BED-AU",
-            "SUNRISE-Q-BED-AU",
-            "SUNRISE-K-BED-AU",
-            "SUNSET-D-BED-AU",
-            "SUNSET-Q-BED-AU",
-            "SUNSET-K-BED-AU",
-            "SUNRISE-DOUBLE-BED-AU",
-            "SUNRISE-QUEEN-BED-AU",
-            "SUNRISE-KING-BED-AU",
-            "SUNSET-DOUBLE-BED-AU",
-            "SUNSET-QUEEN-BED-AU",
-            "SUNSET-KING-BED-AU"
-        );
-        $box_array = array(
-            'IMC-FLOW-SECT-CREAM'   => array(
-                'FLOW-CREAM-BOX1',
-                'FLOW-CREAM-BOX2',
-                'FLOW-CREAM-BOX3'
-            ),
-            'IMC-FLOW-SECT-CHARCOAL'   => array(
-                'FLOW-CHARCOAL-BOX1',
-                'FLOW-CHARCOAL-BOX2',
-                'FLOW-CHARCOAL-BOX3'
-            ),
-            'IMC-VENICE-QUEEN-BEIGE-AU'   => array(
-                'VENICE-QUEEN-BEIGE-BOX1',
-                'VENICE-QUEEN-BEIGE-BOX2',
-                'VENICE-QUEEN-BEIGE-BOX3'
-            ),
-            'IMC-VENICE-QUEEN-CHARCOAL-AU'   => array(
-                'VENICE-QUEEN-CHARCOAL-BOX1',
-                'VENICE-QUEEN-CHARCOAL-BOX2',
-                'VENICE-QUEEN-CHARCOAL-BOX3'
-            ),
-            'IMC-VENICE-KING-BEIGE-AU'   => array(
-                'VENICE-KING-BEIGE-BOX1',
-                'VENICE-KING-BEIGE-BOX2',
-                'VENICE-KING-BEIGE-BOX3'
-            ),
-            'IMC-VENICE-KING-CHARCOAL-AU'   => array(
-                'VENICE-KING-CHARCOAL-BOX1',
-                'VENICE-KING-CHARCOAL-BOX2',
-                'VENICE-KING-CHARCOAL-BOX3'
-            )
-        );
         $orders = array();
         if(!isset($the_orders[0]))
             $collected_orders[] = $the_orders;
@@ -974,37 +928,7 @@ class Woocommerce{
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {
-                    //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
-                    if(in_array($item['sku'], $ignored_skus))
-                    {
-                        continue;
-                    }
-                    elseif(array_key_exists($item['sku'], $box_array))
-                    {
-                         foreach($box_array[$item['sku']] as $sku)
-                         {
-                            $product = $this->controller->item->getItemBySku($sku);
-                            if(!$product)
-                            {
-                                $items_errors = true;
-                                $mm .= "<li>Could not find {$item['name']} in WMS based on {$sku}</li>";
-                            }
-                            else
-                            {
-                                $n_name = $product['name'];
-                                $item_id = $product['id'];
-                                $items[] = array(
-                                    'qty'           =>  $item['quantity'],
-                                    'id'            =>  $item_id,
-                                    'whole_pallet'  => false
-                                );
-                                $qty += $item['quantity'];
-                                $weight += $product['weight'] * $item['quantity'];
-                            }
-                         }
-                    }
-                    else
-                    {
+
                         $product = $this->controller->item->getItemBySku($item['sku']);
                         if(!$product)
                         {
@@ -1023,9 +947,8 @@ class Woocommerce{
                             $qty += $item['quantity'];
                             $weight += $product['weight'] * $item['quantity'];
                         }
-                    }
+
                 }
-                //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;  always signature required for NOA
                 if(empty($o['customer_note']))
                 {
                     $delivery_instructions =  "Please leave in a safe place out of the weather";
@@ -1053,7 +976,7 @@ class Woocommerce{
                     //if (php_sapi_name() == 'cli')
                     if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
                     {
-                        Email::sendNoaImportError($message);
+                        //Email::sendNoaImportError($message);
                     }
                     else
                     {
@@ -1073,8 +996,8 @@ class Woocommerce{
                     $orders[] = $order;
                 }
             }//endforeach order
-            //echo "<pre>",print_r($orders),"</pre>";die();
-            $this->noaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            echo "<pre>",print_r($orders),"</pre>";die();
+            $this->oneplateoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
 
             return $orders;
         }//end if count orders
