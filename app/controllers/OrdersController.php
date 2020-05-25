@@ -400,10 +400,10 @@ class OrdersController extends Controller
        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
     }
 
-    public function importNoaOrders()
+    public function importOnePlateOrders()
     {
-       $response = $this->woocommerce->getNoaOrders();
-       $feedback = "<h2><i class='far fa-check-circle'></i>Noa Sleep Orders Imported</h2>";
+       $response = $this->woocommerce->getOnePlateOrders();
+       $feedback = "<h2><i class='far fa-check-circle'></i>One Plate Orders Imported</h2>";
        $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
        if($response['error_count'] > 0)
        {
