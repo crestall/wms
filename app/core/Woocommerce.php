@@ -16,7 +16,7 @@ class Woocommerce{
     private $bboitems;
     private $ttoitems;
     private $nuchevoitems;
-    private $noaoitems;
+    private $oneplateoitems;
     private $woocommerce;
     private $return_array = array(
         'import_count'          => 0,
@@ -565,7 +565,7 @@ class Woocommerce{
             //check for errors first
             $item_error = false;
             $error_string = "";
-            foreach($this->noaoitems[$o['client_order_id']] as $item)
+            foreach($this->oneplateoitems[$o['client_order_id']] as $item)
             {
                 if($item['item_error'])
                 {
@@ -632,7 +632,7 @@ class Woocommerce{
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
-            $this->output .= print_r($this->noaoitems[$o['client_order_id']], true).PHP_EOL;
+            $this->output .= print_r($this->oneplateoitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
             $this->output .= "Updating woocommerce status to completed fo order id ".$o['client_order_id'].PHP_EOL;
             try{
