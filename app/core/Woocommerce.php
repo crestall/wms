@@ -848,7 +848,6 @@ class Woocommerce{
             $orders_items = array();
             foreach($collected_orders as $o)
             {
-                if(in_array($o['line_items']))
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
