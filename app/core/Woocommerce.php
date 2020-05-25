@@ -393,11 +393,11 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        echo "<pre>",print_r($collected_orders),"</pre><hr/><hr/>";//die();
+        //echo "<pre>",print_r($collected_orders),"</pre><hr/><hr/>";//die();
         if($orders = $this->procOnePlateOrders($collected_orders))
         {
             //echo "<pre>",print_r($orders),"</pre>";die();
-            $this->addNoaOrders($orders);
+            $this->addOnePlateOrders($orders);
         }
         Logger::logOrderImports('order_imports/noa', $this->output); //die();
         //if (php_sapi_name() !='cli')
@@ -558,7 +558,7 @@ class Woocommerce{
         }
     }
 
-    private function addNoaOrders($orders)
+    private function addOnePlateOrders($orders)
     {
         foreach($orders as $o)
         {
@@ -1004,9 +1004,9 @@ class Woocommerce{
                     $orders[] = $order;
                 }
             }//endforeach order
-            echo "<pre>",print_r($orders),"</pre>";die();
+            echo "<pre>",print_r($orders),"</pre>";//die();
             $this->oneplateoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
-
+            echo "<pre>",print_r($this->oneplateoitems),"</pre>";die();
             return $orders;
         }//end if count orders
         else
