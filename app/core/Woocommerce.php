@@ -830,6 +830,9 @@ class Woocommerce{
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
         //echo "<pre>",print_r($the_orders),"</pre>";die();
+        $shipping_ids = array(
+            8168
+        );
 		if(count($the_orders) == 0)
 			return false;
         $orders = array();
@@ -845,6 +848,7 @@ class Woocommerce{
             $orders_items = array();
             foreach($collected_orders as $o)
             {
+                if(in_array($o['line_items']))
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
@@ -928,26 +932,28 @@ class Woocommerce{
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {
-
-                        $product = $this->controller->item->getItemBySku($item['sku']);
-                        if(!$product)
-                        {
-                            $items_errors = true;
-                            $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
-                        }
-                        else
-                        {
-                            $n_name = $product['name'];
-                            $item_id = $product['id'];
-                            $items[] = array(
-                                'qty'           =>  $item['quantity'],
-                                'id'            =>  $item_id,
-                                'whole_pallet'  => false
-                            );
-                            $qty += $item['quantity'];
-                            $weight += $product['weight'] * $item['quantity'];
-                        }
-
+                    if(in_array($item['product_id'], $shipping_ids))
+                    {
+                        continue;
+                    }
+                    $product = $this->controller->item->getItemBySku($item['sku']);
+                    if(!$product)
+                    {
+                        $items_errors = true;
+                        $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                    }
+                    else
+                    {
+                        $n_name = $product['name'];
+                        $item_id = $product['id'];
+                        $items[] = array(
+                            'qty'           =>  $item['quantity'],
+                            'id'            =>  $item_id,
+                            'whole_pallet'  => false
+                        );
+                        $qty += $item['quantity'];
+                        $weight += $product['weight'] * $item['quantity'];
+                    }
                 }
                 if(empty($o['customer_note']))
                 {
@@ -987,7 +993,7 @@ class Woocommerce{
                         echo "<hr/>";
                     }
                 }
-                else
+                elseif(count($items))
                 {
                     $order['quantity'] = $qty;
                     //$order['weight'] = Config::get('BBBOX_WEIGHTS')[$qty];
