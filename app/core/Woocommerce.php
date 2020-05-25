@@ -393,7 +393,7 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        echo "<pre>",print_r($collected_orders),"</pre>";//die();
         if($orders = $this->procOnePlateOrders($collected_orders))
         {
             //echo "<pre>",print_r($orders),"</pre>";die();
