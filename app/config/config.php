@@ -147,10 +147,10 @@ return array(
     'NUWOOCONSUMERSECRET'   => 'cs_c41cd37db3ca0696419e7dd2d5a77a4e8536eaca',
 
     /*************************************************************************
-    * NOASLEEP WOO COMMERCE API constants
+    * ONEPLATE WOO COMMERCE API constants
     **************************************************************************/
-    'NSWOOCONSUMERRKEY'     => 'ck_6bc920d2f7f0e19e52132cd5590f0d0abebd7a7a',
-    'NSWOOCONSUMERSECRET'   => 'cs_1f06eb7816ca9c703b7234881fe4d8b43cbcc134',
+    'ONEPLATEWOOCONSUMERRKEY'     => 'ck_b9acaf372d2729a8e445916a79012b98f671b7e6',
+    'ONEPLATEWOOCONSUMERSECRET'   => 'cs_8c99813f34fe2931a2b20dcb0a8d54df00b540d1',
 
     /*************************************************************************
     * TTAUST WOO COMMERCE API constants

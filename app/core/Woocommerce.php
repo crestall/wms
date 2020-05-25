@@ -342,15 +342,15 @@ class Woocommerce{
         }
     }
 
-    public function getNoaOrders()
+    public function getOnePlateOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "NOA SLEEP ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "ONE PLATE ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $this->woocommerce = new Client(
-            'https://www.noahome.com/au-en',
-            Config::get('NSWOOCONSUMERRKEY'),
-            Config::get('NSWOOCONSUMERSECRET'),
+            'https://www.oneplate.co',
+            Config::get('ONEPLATEWOOCONSUMERRKEY'),
+            Config::get('ONEPLATEWOOCONSUMERSECRET'),
             [
                 'wp_api' => true,
                 'version' => 'wc/v2',
