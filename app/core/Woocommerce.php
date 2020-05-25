@@ -964,7 +964,7 @@ class Woocommerce{
                     $message = "<p>There was a problem with some items</p>";
                     $message .= "<ul>".$mm."</ul>";
                     $message .= "<p>Orders with these items will not be processed at the moment</p>";
-                    $message .= "<p>BB Order ID: {$order['client_order_id']}</p>";
+                    $message .= "<p>One Plate Order ID: {$order['client_order_id']}</p>";
                     $message .= "<p>Customer: {$order['ship_to']}</p>";
                     $message .= "<p>Address: {$ad['address']}</p>";
                     $message .= "<p>{$ad['address_2']}</p>";
@@ -982,6 +982,9 @@ class Woocommerce{
                     {
                         $this->return_array['error_string'] .= $message;
                         ++$this->return_array['error_count'];
+                        echo "<hr/>";
+                        echo $message;
+                        echo "<hr/>";
                     }
                 }
                 else
