@@ -136,9 +136,8 @@ class OrdersController extends Controller
             'page_title'        =>  "Import Orders From External Sites",
             'bb_clientid'       =>  $this->client->getClientId("THE BIG BOTTLE CO"),
             'nuchev_clientid'   =>  $this->client->getClientId("NUCHEV"),
-            'noa_clientid'      =>  $this->client->getClientId("Noa Sleep"),
-            'ttau_clientid'     =>  $this->client->getClientId("Two T Australia"),
-            'ndc_clientid'      =>  $this->client->getClientId("Natural Distilling Co")
+            'oneplate_clientid' =>  $this->client->getClientId("One Plate"),
+            'ttau_clientid'     =>  $this->client->getClientId("Two T Australia")
         ]);
     }
 
