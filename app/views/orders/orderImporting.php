@@ -164,7 +164,7 @@
         <div class="row">
             <div class="col-md-3">&nbsp;</div>
             <div class="col-md-4">
-                <p><button class="btn btn-primary" id="noa_full_import" data-function="importOnePlateOrders">Run It</button></p>
+                <p><button class="btn btn-primary" id="oneplate_full_import" data-function="importOnePlateOrders">Run It</button></p>
             </div>
         </div>
     </div>
