@@ -399,7 +399,7 @@ class Woocommerce{
             //echo "<pre>",print_r($orders),"</pre>";die();
             $this->addOnePlateOrders($orders);
         }
-        Logger::logOrderImports('order_imports/noa', $this->output); //die();
+        Logger::logOrderImports('order_imports/oneplate', $this->output); //die();
         //if (php_sapi_name() !='cli')
         if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
         {
@@ -578,7 +578,7 @@ class Woocommerce{
                 $message = "<p>There was a problem with some items</p>";
                 $message .= $error_string;
                 $message .= "<p>Orders with these items will not be processed at the moment</p>";
-                $message .= "<p>NOA Order ID: {$o['client_order_id']}</p>";
+                $message .= "<p>Oneplate Order ID: {$o['client_order_id']}</p>";
                 $message .= "<p>Customer: {$o['ship_to']}</p>";
                 $message .= "<p>Address: {$o['address']}</p>";
                 $message .= "<p>{$o['address_2']}</p>";
@@ -609,7 +609,7 @@ class Woocommerce{
             //insert the order
             $vals = array(
                 'client_order_id'       => $o['client_order_id'],
-                'client_id'             => 59,
+                'client_id'             => 82,
                 'deliver_to'            => $o['ship_to'],
                 'company_name'          => $o['company_name'],
                 'date_ordered'          => $o['date_ordered'],
@@ -628,7 +628,7 @@ class Woocommerce{
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['eparcel_express'] = 1;
-            $itp = array($this->noaoitems[$o['client_order_id']]);
+            $itp = array($this->oneplateoitems[$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
@@ -1004,9 +1004,9 @@ class Woocommerce{
                     $orders[] = $order;
                 }
             }//endforeach order
-            echo "<pre>",print_r($orders),"</pre>";//die();
+            //echo "<pre>",print_r($orders),"</pre>";//die();
             $this->oneplateoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
-            echo "<pre>",print_r($this->oneplateoitems),"</pre>";die();
+            //echo "<pre>",print_r($this->oneplateoitems),"</pre>";die();
             return $orders;
         }//end if count orders
         else
