@@ -596,11 +596,11 @@
         {
             $content .= "<p>Your order number: {$od['customer_order_id']}</p><p></p>";
         }
-        if($courier_name == "Hunters Small" || $courier_name == "Hunters Bulk" || $courier_name == "Hunters Pallet")
+        if($courier_name == "Direct Freight")
         {
             $content .= "
                     <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                <p>Please visit <a href='https://www.hunterexpress.com.au'>www.hunterexpress.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Quick Track' form at the top right of the webpage.</p>
+                <p>Please visit <a href='https://www.directfreight.com.au'>www.directfreight.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Track and Trace' form at the top left of the webpage.</p>
             ";
         }
         elseif($courier_name == "eParcel" || $courier_name == "eParcel Express" || $courier_name == "Bayswater Eparcel")

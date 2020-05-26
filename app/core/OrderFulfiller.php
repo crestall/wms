@@ -366,45 +366,6 @@
         $this->recordOutput("order_fulfillment/sydneycomet");
     }
 
-    public function fulfillOurTruckOrder()
-    {
-        $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "FULFILLING 3PLTruck ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
-        $this->output .= "=========================================================================================================".PHP_EOL;
-        $db = Database::openConnection();
-        //echo "<pre>",print_r($this->controller->request->data),"</pre>";die();
-        $od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
-        //save to truck table
-        $t_vals = array(
-            'client_id'     =>  $od['client_id'],
-            'order_id'      =>  $this->controller->request->data['order_ids'],
-            'charge'        =>  $this->controller->request->data['truck_charge'],
-            'date'          =>  time(),
-            'entered_by'    =>  Session::getUserId(),
-            'address'       =>  $od['address'],
-            'address_2'     =>  $od['address_2'],
-            'suburb'        =>  $od['suburb'],
-            'state'         =>  $od['state'],
-            'postcode'      =>  $od['postcode'],
-            'country'       =>  $od['country']
-        );
-        $db->insertQuery('truck_usage', $t_vals);
-        $o_values = array(
-            'status_id'			=>	$this->controller->order->fulfilled_id,
-            'date_fulfilled'	=>	time(),
-            'consignment_id'    =>  $this->controller->request->data['consignment_id'],
-            'total_cost'        =>  $this->controller->request->data['truck_charge']
-        );
-        $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
-        //order is now fulfilled, reduce stock
-        $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
-        $this->output .= "Reducing Stock and recording movement fo order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
-        $this->removeStock($items, $this->controller->request->data['order_ids']);
-        $this->recordOutput('order_fulfillment/3pl_truck');
-        Session::set('showfeedback', true);
-        $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by our truck</p>";
-    }
-
     public function fulfillFSGTruckOrder()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
@@ -499,24 +460,9 @@
                     $od = $this->controller->order->getOrderDetail($id);
                     if( !empty($od['tracking_email']) )
                     {
-                        if($od['client_id'] == 69)
-                        {
-                            //Email::notifyTeamTimbuktu($id);
-                        }
-                        elseif($od['client_id'] == 73)
-                        {
-                            Email::sendNDCTracking($id);
-                        }
-                        else
-                        {
-                            Email::sendTrackingEmail($id);
-                        }
+                        Email::sendTrackingEmail($id);
                         $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
                         $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
-                    }
-                    if($od['client_id'] == 52) //figure8
-                    {
-                        $this->notifyFigure8($od);
                     }
                     //order is now fulfilled, reduce stock
                     $items = $this->controller->order->getItemsForOrder($id);
