@@ -222,6 +222,11 @@
                 $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
                 Email::sendNoaConfirmEmail($od['id']);
             }
+            elseif($od['client_id'] == 82)
+            {
+                $this->output .= "Sending One Plate confirmation".PHP_EOL;
+                Email::sendOnePlateTrackingEmail($od['id']);
+            }
             else
             {
                  $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
