@@ -381,9 +381,9 @@ class Woocommerce{
             $this->output .= "-------------------------------".PHP_EOL;
             $this->output .= "Full output".PHP_EOL;
             $this->output .=  print_r($e, true) .PHP_EOL;
-            if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+            if ($_SERVER['HTTP_USER_AGENT'] == 'FSGAGENT')
             {
-                Email::sendCronError($e, "NOA");
+                Email::sendCronError($e, "One Plate");
                 return;
             }
             else
@@ -401,7 +401,7 @@ class Woocommerce{
         }
         Logger::logOrderImports('order_imports/oneplate', $this->output); //die();
         //if (php_sapi_name() !='cli')
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
         {
             return $this->return_array;
         }
@@ -588,14 +588,14 @@ class Woocommerce{
                 $message .= "<p>{$o['country']}</p>";
                 $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
                 //if (php_sapi_name() !='cli')
-                if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+                if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
                 }
                 else
                 {
-                    Email::sendNoaImportError($message);
+                    Email::sendOnePlateImportError($message);
 
                 }
                 continue;
@@ -634,7 +634,7 @@ class Woocommerce{
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($this->oneplateoitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
-            $this->output .= "Updating woocommerce status to completed fo order id ".$o['client_order_id'].PHP_EOL;
+            $this->output .= "Updating woocommerce status to completed for order id ".$o['client_order_id'].PHP_EOL;
             try{
                 $this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));
             }
@@ -979,17 +979,14 @@ class Woocommerce{
                     $message .= "<p>{$ad['country']}</p>";
                     $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
                     //if (php_sapi_name() == 'cli')
-                    if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+                    if ($_SERVER['HTTP_USER_AGENT'] == 'FSGAGENT')
                     {
-                        //Email::sendNoaImportError($message);
+                        Email::sendOnePlateImportError($message);
                     }
                     else
                     {
                         $this->return_array['error_string'] .= $message;
                         ++$this->return_array['error_count'];
-                        echo "<hr/>";
-                        echo $message;
-                        echo "<hr/>";
                     }
                 }
                 elseif(count($items))

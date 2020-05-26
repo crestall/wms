@@ -170,25 +170,22 @@
         }
     }
 
-    public static function sendBBImportError($message)
+    public static function sendOnePlateImportError($message)
     {
         $mail = new PHPMailer();
 
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bbimporterror.html");
+        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."oneplateimporterror.html");
         $replace_array = array("{CONTENT}");
 		$replace_with_array = array($message);
 		$body = str_replace($replace_array, $replace_with_array, $body);
 
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-		$mail->AddAddress('teambbc@thebigbottleco.com', 'Team BBC');
-        //$mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
+		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
 
-		$mail->AddBCC('customersupport@3plplus.com.au');
+        //$mail->AddAdress('Joshua Lanzarini','joshua@oneplate.co');
 
-        $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
-
-		$mail->Subject = "Order with item error for Big Bottle";
+		$mail->Subject = "Order with item error for One Plate";
 
         $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
 
@@ -232,101 +229,6 @@
         }
     }
 
-    public static function sendTeamTimbuktuImportError($message)
-    {
-        $mail = new PHPMailer();
-
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."teamtimbuktuimporterror.html");
-        $replace_array = array("{CONTENT}");
-		$replace_with_array = array($message);
-		$body = str_replace($replace_array, $replace_with_array, $body);
-
-        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-
-		//$mail->AddAddress('hello@teamtimbuktu.com', 'Rhianna Knight');
-        $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
-
-		//$mail->AddBCC('customersupport@3plplus.com.au');
-
-        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
-
-		$mail->Subject = "Order with item error for Team Timbuktu";
-
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
-
-		$mail->MsgHTML($body);
-
-        if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-            throw new Exception("Email couldn't be sent ");
-        }
-    }
-
-    public static function sendNDCImportError($message)
-    {
-        $mail = new PHPMailer();
-
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."naturaldistillingcoimporterror.html");
-        $replace_array = array("{CONTENT}");
-		$replace_with_array = array($message);
-		$body = str_replace($replace_array, $replace_with_array, $body);
-
-        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-
-		//$mail->AddAddress('hello@teamtimbuktu.com', 'Rhianna Knight');
-        $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
-
-		//$mail->AddBCC('customersupport@3plplus.com.au');
-
-        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
-
-		$mail->Subject = "Order with item error for Natural Distilling Company";
-
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
-
-		$mail->MsgHTML($body);
-
-        if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-            throw new Exception("Email couldn't be sent ");
-        }
-    }
-
-    public static function sendFigure8ImportError($message, $subject = "Order Importing Error")
-    {
-        $mail = new PHPMailer();
-
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."figure8importerror.html");
-        $replace_array = array("{CONTENT}");
-		$replace_with_array = array($message);
-		$body = str_replace($replace_array, $replace_with_array, $body);
-
-        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-
-		$mail->AddAddress('ttaylor@figure8services.com.au', 'Troy Taylor');
-        $mail->AddAddress('mtarulli@figure8services.com.au', 'Mark Tarulli');
-        $mail->AddAddress('vmarsh@figure8services.com.au ', 'Victoria Marsh');
-        //$mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
-        //$mail->AddAddress('fred.scherzer@3plplus.com.au', 'Fred Scherzer');
-
-		$mail->AddBCC('customersupport@3plplus.com.au');
-        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
-
-		$mail->Subject = $subject;
-
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
-
-		$mail->MsgHTML($body);
-
-        if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-            throw new Exception("Email couldn't be sent ");
-        }
-    }
-
     public static function sendNuchevImportError($message)
     {
         $mail = new PHPMailer();
@@ -358,39 +260,6 @@
         }
     }
 
-    public static function sendNoaImportError($message)
-    {
-        $mail = new PHPMailer();
-
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."noaimporterror.html");
-        $replace_array = array("{CONTENT}");
-		$replace_with_array = array($message);
-		$body = str_replace($replace_array, $replace_with_array, $body);
-
-        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-
-		$mail->AddAddress('jc@noahome.com', 'Jean-Claude Renaud');
-        $mail->AddAddress('jeremykopek@noahome.com', 'Jeremy');
-        $mail->AddAddress('brendasaccomando@noahome.com', 'Brenda');
-        $mail->AddAddress('janikakopek@noahome.com', 'Janika');
-
-        $mail->AddAddress('customersupport@3plplus.com.au');
-
-        $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
-
-		$mail->Subject = "Order with item error for Noa Sleep";
-
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
-
-		$mail->MsgHTML($body);
-
-        if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-            throw new Exception("Email couldn't be sent ");
-        }
-    }
-
     public static function sendCronError($e, $client)
     {
         $mail = new PHPMailer();
@@ -402,9 +271,9 @@
 
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-		$mail->AddAddress('customersupport@3plplus.com.au');
+		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
 
-        $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
 
 		$mail->Subject = "Cron Import Error";
 
