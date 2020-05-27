@@ -465,8 +465,17 @@
                     $od = $this->controller->order->getOrderDetail($id);
                     if( !empty($od['tracking_email']) )
                     {
-                        Email::sendTrackingEmail($id);
-                        $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                        if($od['client_id'] == 82)
+                        {
+                            $this->output .= "Sending One Plate confirmation".PHP_EOL;
+                            Email::sendOnePlateTrackingEmail($od['id']);
+                        }
+                        else
+                        {
+                            Email::sendTrackingEmail($id);
+                            $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+
+                        }
                         $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
                     }
                     //order is now fulfilled, reduce stock
