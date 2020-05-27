@@ -35,6 +35,13 @@
                     $('form#form-login').slideToggle('slow');
                     $('form#form-forgot-password').slideToggle('slow');
                 });
+
+                $('form#form-forgot-password').submit(function(e){
+                    if($(this).valid())
+                    {
+                        $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Generating password reset link</h2></div>' });
+                    }
+                });
             });
         </script>
 		<?php Database::closeConnection(); ?>
