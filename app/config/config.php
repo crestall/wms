@@ -56,11 +56,17 @@ return array(
      * Configuration for Email
      *
      */
-    "EMAIL_FROM"        => "no-reply@3plplus.com.au",
-    "EMAIL_FROM_NAME"   => "FSG Warehouse Management System",
-    "EMAIL_REPLY_TO"    => "no-reply@3plplus.com.au",
+    "EMAIL_FROM"        => "FSGWMS@fsg.com.au",
+    "EMAIL_FROM_NAME"   => "Film Shot Graphics Warehouse Management System",
+    "EMAIL_REPLY_TO"    => "FSGWMS@fsg.com.au",
+    "EMAIL_PWD"         => "noreply865!",
+    "EMAIL_UNAME"       => "FSGWMS@fsg.com.au",
+    "EMAIl_HOST"        => "smtp.office365.com",
+    "EMAIL_PORT"        => 587,
 
     "EMAIL_PASSWORD_RESET_URL" => PUBLIC_ROOT . "login/resetPassword",
+
+
 
     /**
      * Configuration for: Hashing strength
