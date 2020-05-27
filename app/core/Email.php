@@ -674,90 +674,107 @@
         $db = Database::openConnection();
 
 		$mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
 
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."oneplatetracking.html");
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."oneplatetracking.html");
 
-        $od = $db->queryRow("SELECT * FROM orders WHERE id = $order_id");
-        $client_details = $db->queryByID('clients', $od['client_id']);
-        $client_name = $client_details['client_name'];
+            $od = $db->queryRow("SELECT * FROM orders WHERE id = $order_id");
+            $client_details = $db->queryByID('clients', $od['client_id']);
+            $client_name = $client_details['client_name'];
 
-        $courier_name = $db->queryValue('couriers', array('id' => $od['courier_id']), 'name');
-        $content = "";
-        if( !empty($od['customer_order_id']) )
-        {
-            $content .= "<p>Your order number: {$od['customer_order_id']}</p><p></p>";
-        }
-        if($courier_name == "Direct Freight")
-        {
-            $content .= "
-                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                <p>Please visit <a href='https://www.directfreight.com.au'>www.directfreight.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Track and Trace' form at the top left of the webpage.</p>
-            ";
-        }
-        elseif($courier_name == "eParcel" || $courier_name == "eParcel Express" || $courier_name == "Bayswater Eparcel")
-        {
-            $content .= "
-                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order.</p>
-            ";
-        }
-        elseif($courier_name == "DHL")
-        {
-            $content .= "
-                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                    <p>Click the following link <a href='https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}'>https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}</a> to track your order.</p>
-            ";
-        }
-        else
-        {
-            $courier_name = $od['courier_name'];
-            if(preg_match("/hunter(s)?/i", $courier_name, $matches))
+            $courier_name = $db->queryValue('couriers', array('id' => $od['courier_id']), 'name');
+            $content = "";
+            if( !empty($od['customer_order_id']) )
             {
-                    $content .= "
-                            <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                            <p>Please visit <a href='https://www.hunterexpress.com.au'>www.hunterexpress.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Quick Track' form at the top right of the webpage.</p>
-                    ";
+                $content .= "<p>Your order number: {$od['customer_order_id']}</p><p></p>";
             }
-            elseif(preg_match("/eparcel( express)?/i", $courier_name, $matches))
+            if($courier_name == "Direct Freight")
             {
-                    $content .= "
-                            <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                            <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order.</p>
-                    ";
+                $content .= "
+                        <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                    <p>Please visit <a href='https://www.directfreight.com.au'>www.directfreight.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Track and Trace' form at the top left of the webpage.</p>
+                ";
+            }
+            elseif($courier_name == "eParcel" || $courier_name == "eParcel Express" || $courier_name == "Bayswater Eparcel")
+            {
+                $content .= "
+                        <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                    <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order.</p>
+                ";
+            }
+            elseif($courier_name == "DHL")
+            {
+                $content .= "
+                        <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                        <p>Click the following link <a href='https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}'>https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}</a> to track your order.</p>
+                ";
             }
             else
             {
-                    $content .= "
-                            <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                            <p>Your order has been shipped with $courier_name</p><p>To check the status of your order, please contact them and quote {$od['consignment_id']}.</p>
-                    ";
+                $courier_name = $od['courier_name'];
+                if(preg_match("/hunter(s)?/i", $courier_name, $matches))
+                {
+                        $content .= "
+                                <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                                <p>Please visit <a href='https://www.hunterexpress.com.au'>www.hunterexpress.com.au</a> and enter {$od['consignment_id']} as the consignment number in the 'Quick Track' form at the top right of the webpage.</p>
+                        ";
+                }
+                elseif(preg_match("/eparcel( express)?/i", $courier_name, $matches))
+                {
+                        $content .= "
+                                <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                                <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order.</p>
+                        ";
+                }
+                else
+                {
+                        $content .= "
+                                <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
+                                <p>Your order has been shipped with $courier_name</p><p>To check the status of your order, please contact them and quote {$od['consignment_id']}.</p>
+                        ";
+                }
             }
-        }
-		$replace_array = array("{NAME}", "{CLIENT}", "{CONTENT}");
-		$replace_with_array = array($od['ship_to'], $client_name, $content);
-		$body = str_replace($replace_array, $replace_with_array, $body);
-        $mail->AddEmbeddedImage(IMAGES."op_email_foot.png", "emailfoot", "op_email_foot.png");
-		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-		$mail->Subject = "Your Order With One Plate Has Been Dispatched";
-		$mail->MsgHTML($body);
+    		$replace_array = array("{NAME}", "{CLIENT}", "{CONTENT}");
+    		$replace_with_array = array($od['ship_to'], $client_name, $content);
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->AddEmbeddedImage(IMAGES."op_email_foot.png", "emailfoot", "op_email_foot.png");
+    		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+    		$mail->Subject = "Your Order With One Plate Has Been Dispatched";
+    		$mail->MsgHTML($body);
 
-		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
-        //$mail->AddAddress("mark.solly@3plplus.com.au", "Mark Solly");
-        $mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
+    		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
+            //$mail->AddAddress("mark.solly@3plplus.com.au", "Mark Solly");
+            $mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
 
-        if($client_details['id'] == 55)
-        {
-                $mail->AddBCC($client_details['deliveries_email']);
+            if($client_details['id'] == 55)
+            {
+                    $mail->AddBCC($client_details['deliveries_email']);
+            }
+    		if(!$mail->Send())
+    		{
+    			die($mail->ErrorInfo);
+    		}
+    		else
+    		{
+    		    $db->updateDatabaseField('orders', 'customer_emailed', 1, $order_id);
+    			return true;
+    		}
+
         }
-		if(!$mail->Send())
-		{
-			die($mail->ErrorInfo);
-		}
-		else
-		{
-		    $db->updateDatabaseField('orders', 'customer_emailed', 1, $order_id);
-			return true;
-		}
+        catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+
 	}
 
     public static function sendNDCTracking($order_id)
