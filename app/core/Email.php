@@ -119,6 +119,13 @@
         $mail = new PHPMailer();
         $mail->IsSMTP();
         try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."passwordreset.html");
             $replace_array = array("{LINK}", "{NAME}");
     		$replace_with_array = array(Config::get('EMAIL_PASSWORD_RESET_URL') . "?id=" . urlencode(Encryption::encryptId($user_id)) . "&token=" . urlencode($password_token), $name);
