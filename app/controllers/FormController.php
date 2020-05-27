@@ -4659,11 +4659,16 @@ class FormController extends Controller {
                 $time_elapsed = time() - $last_time;
                 if ($count >= 5 && $time_elapsed < $block_time)
                 {
-                    Form::setError('general', "You exceeded number of possible attempts, please try again later after " .date("i", $block_time - $time_elapsed) . " minutes");
+                    Form::setError('toomanytimes', "You exceeded number of possible attempts, please try again later after " .date("i", $block_time - $time_elapsed) . " minutes");
+                    Session::set('value_array', $_POST);
+                    Session::set('error_array', Form::getErrorArray());
                     return $this->redirector->login();
                 }
                 $newPasswordToken = $this->login->generateForgottenPasswordToken($user["id"], $forgottenPassword);
-                Email::sendPasswordReset($user['id'], $user['name'], $email, $newPasswordToken);
+                if(!Email::sendPasswordReset($user['id'], $user['name'], $email, $newPasswordToken))
+                {
+                    die('mail error');
+                }
             }
             Session::set('feedback', "<p>An email has been sent with a reset password link. This link will remain valid for 24 hours</p>");
         }
