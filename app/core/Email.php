@@ -118,6 +118,7 @@
      {
         $mail = new PHPMailer();
         $mail->IsSMTP();
+        echo "<p>".Config::get('EMAIL_PWD')."</p>";
         try{
             $mail->Host = "smtp.office365.com";
             $mail->Port = Config::get('EMAIL_PORT');
