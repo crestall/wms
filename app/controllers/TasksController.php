@@ -191,6 +191,18 @@ class TasksController extends Controller
         }
     }
 
+    public function onePlateTask()
+    {
+        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->woocommerce->getOnePlateOrders();
+        }
+    }
+
     public function teamTimbuktuTask()
     {
         if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
