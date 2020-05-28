@@ -3,8 +3,12 @@
 Navigation Bar
 ******/
 .navbar-default{
-    background-color: #224f77;
-    border-color: #224f77;
+    background-color: #03093f;
+    border-color: #03093f;
+}
+
+.nav-second-level{
+    background-color: #030a47;
 }
 
 .nav > li > a{

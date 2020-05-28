@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>3PL Plus Warehouse Management System:</title>
+    <title>FSG Warehouse Management System:</title>
 
     <!-- Icons -->
-        <link rel="shortcut icon" href="/images/icons/favicon.ico?v=5" type="image/x-icon">
-        <link rel="icon" href="/images/icons/favicon.ico?v=5" type="image/x-icon">
+        <link rel="shortcut icon" href="/images/icons/favicon.jpg?v=4" type="image/x-icon">
+        <link rel="icon" href="/images/icons/favicon.jpg?v=4" type="image/x-icon">
     <!-- END Icons -->
 
 

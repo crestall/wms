@@ -470,7 +470,7 @@ class FormController extends Controller {
                         'signature_req' => 0,
                         'errors'        => 0,
                         'error_string'  => '',
-                        'weight'        => 0.41
+                        'weight'        => 0.46
                     );
                     */
                     $request = array(
@@ -4627,7 +4627,7 @@ class FormController extends Controller {
 
     public function procForgotPassword()
     {
-        //echo "<pre>",print_r($this->request),"</pre>";
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
         $email      = $this->request->data('email');
         $userIp     = $this->request->clientIp();
         $userAgent  = $this->request->userAgent();
@@ -4650,6 +4650,7 @@ class FormController extends Controller {
         {
             if($db->fieldValueTaken('users', $email, 'email'))
             {
+                //die('email found');
                 //only do stuf if the email exists in the system
                 $user     = $db->queryRow("SELECT * FROM users WHERE email = :email", array('email' => $email));
                 $forgottenPassword = $db->queryRow("SELECT * FROM forgotten_passwords WHERE user_id = ".$user['id']);

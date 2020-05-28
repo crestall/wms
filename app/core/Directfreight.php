@@ -44,56 +44,9 @@
             'Content-Type: application/json',
             'Authorisation: '. $this->API_KEY ,
             'AccountNumber: '.$this->ACCOUNT_NO
-        );/*
-        require_once '/opt/cpanel/ea-php56/root/usr/share/pear/HTTP/Request2.php';
-        //die($data_string);
-        $request = new HTTP_Request2();
-        $request->setUrl('https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/');
-        $request->setMethod(HTTP_Request2::METHOD_POST);
-        $request->setConfig(array(
-            'follow_redirects' => TRUE
-        ));
-        $request->setHeader(array(
-            'Authorisation' => '5D74557B-84A4-46CB-87FD-4C93CF69530C',
-            'AccountNumber' => '34269',
-            'Content-Type' => 'application/json'
-        ));
-        $request->setBody('{"SuburbFrom":"Rowville","PostcodeFrom":"3178","SuburbTo":"WEST RYDE","PostcodeTo":"2114","ConsignmentLineItems":[{"SenderLineReference":"MdX0zWU7","RateType":"ITEM","Items":1,"Width":22,"Height":2,"Length":28,"KGS":1}]}');
-        try {
-            $response = $request->send();
-            if ($response->getStatus() == 200) {
-                echo 'Response: '.$response->getBody();
-            }
-            else {
-                echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-                $response->getReasonPhrase();
-            }
-        }
-        catch(HTTP_Request2_Exception $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
-        die('Request');
-          */
-        //echo "<pre>",print_r($headers),"</pre>";die();
+        );
         $ch = curl_init();
-        /*
-        curl_setopt_array($ch, array(
-            CURLOPT_URL => "https://webservices.directfreight.com.au/Dispatch/api/GetConsignmentPrice/",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS =>"{\"SuburbFrom\":\"Rowville\",\"PostcodeFrom\":\"3178\",\"SuburbTo\":\"WEST RYDE\",\"PostcodeTo\":\"2114\",\"ConsignmentLineItems\":[{\"SenderLineReference\":\"MdX0zWU7\",\"RateType\":\"ITEM\",\"Items\":1,\"Width\":22,\"Height\":2,\"Length\":28,\"KGS\":1,'\"Cubic\":0}]}",
-            CURLOPT_HTTPHEADER => array(
-                "Authorisation: 5D74557B-84A4-46CB-87FD-4C93CF69530C",
-                "AccountNumber: 34269",
-                "Content-Type: application/json"
-            ),
-            CURLOPT_VERBOSE => true
-        ));*/
+        /* */
         $verbose = fopen('php://temp', 'w+');
         curl_setopt($ch, CURLOPT_STDERR, $verbose);
         //curl_setopt_array ( $ch, $this->curl_options );
@@ -113,14 +66,10 @@
         if ($result === FALSE) {
             printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
                    htmlspecialchars(curl_error($ch)));
-
-
             rewind($verbose);
             $verboseLog = stream_get_contents($verbose);
-
-            //echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
-
-            //die();
+            echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
+            die();
         }
         $err = curl_error($ch);
         curl_close($ch);
@@ -187,12 +136,12 @@
         return json_decode($a_data[0], true);
     }
 
-    public function getQuote($data_array, $client = "3PL Plus")
+    public function getQuote($data_array, $client = "Filmshot Graphics")
     {
-        $threepl_address = Config::get("THREEPL_ADDRESS");
+        $fsg_address = Config::get("FSG_ADDRESS");
         $request = array(
-            'SuburbFrom'            => $threepl_address['suburb'],
-            'PostcodeFrom'          => $threepl_address['postcode'],
+            'SuburbFrom'            => $fsg_address['suburb'],
+            'PostcodeFrom'          => $fsg_address['postcode'],
             'SuburbTo'              => $data_array['ReceiverDetails']['Suburb'],
             'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
@@ -200,10 +149,10 @@
         //echo "<pre>",print_r($request),"</pre>";//die();
         echo json_encode($request);
         $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
-        //echo "<pre>",print_r($response),"</pre>";die();
-        list($a_headers,$a_data) = $this->getResponse($response);
-        //echo "<pre>",print_r($a_data),"</pre>";
-        json_decode($a_date[0], true); die();
+        echo "<pre>",print_r(json_decode($response, true)),"</pre>";die();
+        //list($a_headers,$a_data) = $this->getResponse($response);
+        //echo "<pre>ADATA",print_r($a_data),"</pre>";die();
+        //json_decode($a_data[0], true); die();
         return json_decode($a_data[0], true);
         //return $request;
     }

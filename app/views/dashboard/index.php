@@ -12,7 +12,7 @@ $c = 1;
     <?php //echo $user_role;?>
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">3PL Plus Warehouse Management System</h1>
+            <h1 class="page-header">Film Shot Graphics Warehouse Management System</h1>
         </div>
     </div>
     <?php if($user_role == "admin" || $user_role == "warehouse"):?>

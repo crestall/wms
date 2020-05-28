@@ -25,7 +25,6 @@ class Handler{
      * @return void
      */
     public static function register(){
-
         // turn off all error reporting as well,
         // because we will take care of it
         error_reporting(0);
