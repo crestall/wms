@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=6.1.6",
         "phpmailer/phpmailer": "~5.2",
         "verot/class.upload.php": "*",
         "mpdf/mpdf": "^8.0.2",
