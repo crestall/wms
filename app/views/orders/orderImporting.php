@@ -8,9 +8,6 @@
             <p><a class="btn btn-primary" href="#nuchev">Nuchev</a></p>
         </div>
         <div class="col-md-2">
-            <p><a class="btn btn-primary" href="#nuchev_samples">Nuchev Samples</a> </p>
-        </div>
-        <div class="col-md-2">
             <p><a class="btn btn-primary" href="#oneplate">One Plate</a></p>
         </div>
         <div class="col-md-2">
@@ -165,26 +162,6 @@
             <div class="col-md-3">&nbsp;</div>
             <div class="col-md-4">
                 <p><button class="btn btn-primary" id="oneplate_full_import" data-function="importOnePlateOrders">Run It</button></p>
-            </div>
-        </div>
-    </div>
-    <div class="bs-callout bs-callout-primary bs-callout-more">
-        <a name="nuchev_samples"></a>
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Nuchev Samples</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">&nbsp;</div>
-            <div class="col-md-4">
-                <h3>Collect Sample Requests</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">&nbsp;</div>
-            <div class="col-md-4">
-                <p><button class="btn btn-primary" id="nuchev_samples">Collect Sample Requests</button></p>
             </div>
         </div>
     </div>
