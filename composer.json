@@ -9,7 +9,7 @@
     ],
     "require":{
         "php":">=7.0",
-        "phpmailer/phpmailer":"~6.0",
+        "phpmailer/phpmailer":"~6.1.6",
         "verot/class.upload.php":"*",
         "mpdf/mpdf":"^8.0.2",
         "onokumus/metismenu":"dev-master",
