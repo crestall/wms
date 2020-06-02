@@ -90,8 +90,7 @@
                                                 .removeClass()
                                                 .addClass("feedbackbox")
                                                 .html("<h2><i class='far fa-check-circle'></i>Encryption Results</h2><p>"+$('input#string').val()+" : "+d.encryptedvalue+"</p>")
-                                                .slideDown()
-                                            });
+                                                .slideDown();
                                         }
                                     }
                                 }) ;
