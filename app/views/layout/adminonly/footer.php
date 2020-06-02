@@ -58,11 +58,10 @@
                 },
                 'encrypt-some-shit':{
                     init: function(){
-                        console.log('encrypting shit');
                         $('form#string-encrypter').submit(function(){
-                            console.log('click');
                             if($(this).valid())
                             {
+                                console.log('valid');
                                 $.ajax({
                                     url: "/ajaxfunctions/encryptSomeShit",
                                     data: { string: $('input#string').val()},
