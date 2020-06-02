@@ -70,9 +70,10 @@ class ajaxfunctionsController extends Controller
                 $post_data[$field] = $value;
             }
         }
+        $encrypted_value = Encryption::encrypt($string);
         $data = array(
             'error'             =>  false,
-            'encryptedvalue'    =>  $string,
+            'encryptedvalue'    =>  $encrypted_value,
             'error_string'      =>  ''
         );
         $this->view->renderJson($data);
