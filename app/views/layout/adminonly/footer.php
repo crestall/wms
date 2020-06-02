@@ -62,12 +62,12 @@
                             if($(this).valid())
                             {
                                 $.ajax({
-                                    console.log('ajax');
                                     url: "/ajaxfunctions/encryptSomeShit",
                                     data: { string: $('input#string').val()},
                                     method: "post",
                                     dataType: "json",
                                     beforeSend: function(){
+                                        console.log('ajax');
                                         $("div#feedback_holder")
                                             .slideDown()
                                             .html("<p></p><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Generating Encryption String</p>");
