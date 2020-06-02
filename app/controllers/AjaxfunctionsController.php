@@ -62,9 +62,17 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request->),"</pre>"; die();
         $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
         $data = array(
             'error'             =>  false,
-            'encryptedvalue'    =>  '456',
+            'encryptedvalue'    =>  $string,
             'error_string'      =>  ''
         );
         $this->view->renderJson($data);
