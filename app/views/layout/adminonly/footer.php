@@ -58,6 +58,7 @@
                 },
                 'encrypt-some-shit':{
                     init: function(){
+                        console.log('encrypting shit');
                         $('form#string-encrypter').submit(function(){
                             console.log('click');
                             if($(this).valid())
