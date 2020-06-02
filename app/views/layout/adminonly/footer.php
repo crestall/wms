@@ -65,7 +65,7 @@
                                     url: "/ajaxfunctions/encryptSomeShit",
                                     data: { string: $('input#string').val()},
                                     method: "post",
-                                    dataType: "json",
+                                    //dataType: "json",
                                     beforeSend: function(){
                                         console.log('ajax');
                                         $("div#feedback_holder")
