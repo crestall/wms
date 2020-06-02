@@ -60,17 +60,13 @@ class ajaxfunctionsController extends Controller
 
     public function encryptSomeShit()
     {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->),"</pre>"; die();
         $post_data = array();
         $data = array(
             'error'             =>  false,
             'encryptedvalue'    =>  '456',
             'error_string'      =>  ''
         );
-        foreach($this->request->data['ids'] as $array)
-        {
-            //echo "<pre>",print_r($array),"</pre>";
-        }
         $this->view->renderJson($data);
     }
 
