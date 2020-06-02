@@ -18,9 +18,8 @@
                 </div>
             </form>
             <div class="row">
-                <div id="encrpted_string_holder"></div>
+                <div id="feedback_holder" style="display:none"></div>
             </div>
         </div>
     </div>
 </div>
-<div id="feedback_holder"></div>
