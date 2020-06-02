@@ -64,7 +64,7 @@ class ajaxfunctionsController extends Controller
         $post_data = array();
         $data = array(
             'error'             =>  false,
-            'encryptedvalue'    =>  '',
+            'encryptedvalue'    =>  '456',
             'error_string'      =>  ''
         );
         foreach($this->request->data['ids'] as $array)
