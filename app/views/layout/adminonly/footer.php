@@ -93,12 +93,9 @@
                                                 .slideDown();
                                         }
                                     }
-                                }) ;
+                                });
                             }
-                            else
-                            {
-                                return false;
-                            }
+                            return false;
                         });
                     }
                 }
