@@ -70,8 +70,8 @@ class ajaxfunctionsController extends Controller
                 $post_data[$field] = $value;
             }
         }
-        die('string'.$string);
         $encrypted_value = Encryption::encrypt($string);
+        die('encrypted: '.$encrypted_value)
         $data = array(
             'error'             =>  false,
             'encryptedvalue'    =>  $encrypted_value,
