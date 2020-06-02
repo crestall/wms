@@ -82,6 +82,15 @@ class adminonlyController extends Controller
         ]);
     }
 
+    public function encryptSomeShit()
+    {
+        //encrypts passwords for storing in the config file
+        Config::setJsConfig('curPage', "encrypt-some-shit");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/encryptsomeshit.php', [
+            'page_title'    =>  "Encrypt Some Shit"
+        ]);
+    }
+
     public function sendTrackingEmails()
     {
         $db = Database::openConnection();
