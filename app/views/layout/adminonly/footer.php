@@ -61,8 +61,8 @@
                         $('form#string-encrypter').submit(function(){
                             if($(this).valid())
                             {
-                                console.log('valid');
                                 $.ajax({
+                                    console.log('ajax');
                                     url: "/ajaxfunctions/encryptSomeShit",
                                     data: { string: $('input#string').val()},
                                     method: "post",
