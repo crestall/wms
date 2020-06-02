@@ -61,7 +61,38 @@
                         $('form#string-encrypter').submit(function(){
                             if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                                $.ajax({
+                                    url: "/ajaxfunctions/encryptSomeShit",
+                                    data: { string: $('input#string').val()},
+                                    method: "post",
+                                    dataType: "json",
+                                    beforeSend: function(){
+                                        $("div#feedback_holder")
+                                            .slideDown()
+                                            .html("<p></p><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Generating Encryption String</p>");
+                                    },
+                                    success: function(d){
+                                        if(d.error)
+                                        {
+                                            $("div#feedback_holder")
+                                                .hide()
+                                                .removeClass()
+                                                .addClass("errorbox")
+                                                .slideDown()
+                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2><p>"+d.error_string+"</p>");
+                                        }
+                                        else
+                                        {
+                                            $("div#feedback_holder")
+                                                .hide()
+                                                .removeClass()
+                                                .addClass("feedbackbox")
+                                                .html("<h2><i class='far fa-check-circle'></i>Encryption Results</h2><p>"+$('input#string').val()+" : "+d.encryptedvalue+"</p>")
+                                                .slideDown()
+                                            });
+                                        }
+                                    }
+                                }) ;
                             }
                             else
                             {
