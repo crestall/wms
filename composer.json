@@ -3,7 +3,7 @@
     "authors":[
         {
             "name":"Mark Solly",
-            "email":"mark@fsg.com.au",
+            "email":"mark.solly@fsg.com.au",
             "role":"Developer"
         }
     ],
@@ -22,14 +22,14 @@
     "autoload":{
         "psr-4":{
             "":[
-                "app/core/",
-                "app/models/",
-                "app/utility/",
-                "app/packaging/",
                 "app/controllers/",
+                "app/core/",
                 "app/core/components/",
                 "app/core/eparcel_accounts/",
-                "app/core/hunters_accounts/"
+                "app/core/hunters_accounts/",
+                "app/models/",
+                "app/packaging/",
+                "app/utility/"
             ]
         }
     }
