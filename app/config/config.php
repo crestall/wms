@@ -42,15 +42,15 @@ return array(
     "COOKIE_PATH"           => '/',
     "COOKIE_SECURE"         => true,
     "COOKIE_HTTP"           => true,
-    "COOKIE_SECRET_KEY"     => "fg&70-GF^!a{f64r5@g38l]#kQ4B+21%",
+    "COOKIE_SECRET_KEY"     => COOKIE_SECRET_KEY,
 
     /**
      * Configuration for: Encryption Keys
      *
      */
-    "ENCRYPTION_KEY"    => "3¥‹a0ef@!$251Êìcef08%&",
-    "HMAC_SALT"         => "a8C7n7^Ed0%8Qfd9K4m6d$86Dab",
-    "HASH_KEY"          => "z5F9Mp7Lf2cH",
+    "ENCRYPTION_KEY"    => ENCRYPTION_KEY,
+    "HMAC_SALT"         => HMAC_SALT,
+    "HASH_KEY"          => HASH_KEY,
 
     /**
      * Configuration for Email
@@ -59,7 +59,7 @@ return array(
     "EMAIL_FROM"        => "FSGWMS@fsg.com.au",
     "EMAIL_FROM_NAME"   => "Film Shot Graphics Warehouse Management System",
     "EMAIL_REPLY_TO"    => "FSGWMS@fsg.com.au",
-    "EMAIL_PWD"         => "4fRxWB3ca9D74hZ",
+    "EMAIL_PWD"         => "q`3=Rca5M-<S@J5c",
     "EMAIL_UNAME"       => "FSGWMS@fsg.com.au",
     "EMAIl_HOST"        => "smtp.office365.com",
     "EMAIL_PORT"        => 587,
@@ -550,8 +550,7 @@ return array(
             'super_admin_only'  => true,
             'eparcel-shipment-deleter'  => true,
             'dispatched-orders-updater' => false,
-            'client-bay-fixer'  => true,
-            'encrypt-some-shit' => true
+            'client-bay-fixer'  => true
         ),
     ),
     'WAREHOUSE_PAGES' => array(
