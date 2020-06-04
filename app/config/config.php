@@ -551,7 +551,8 @@ return array(
             'eparcel-shipment-deleter'  => true,
             'dispatched-orders-updater' => false,
             'client-bay-fixer'  => true,
-            'encrypt-some-shit' => true
+            'encrypt-some-shit' => false,
+            'update-configuration'  => true
         ),
     ),
     'WAREHOUSE_PAGES' => array(
