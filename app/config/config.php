@@ -550,7 +550,8 @@ return array(
             'super_admin_only'  => true,
             'eparcel-shipment-deleter'  => true,
             'dispatched-orders-updater' => false,
-            'client-bay-fixer'  => true
+            'client-bay-fixer'  => true,
+            'encrypt-some-shit' => true
         ),
     ),
     'WAREHOUSE_PAGES' => array(
