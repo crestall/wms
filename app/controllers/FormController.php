@@ -131,7 +131,33 @@ class FormController extends Controller {
 
     public function procEncryptSomeShit()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>";die();
+        //echo "<pre>",print_r($this->request->data),"</pre>";die();
+        $db = Database::openConnection();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($string))
+        {
+            Form::setError('string', 'A string to encrypt is required is required');
+        }
+
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+           Session::set('feedback', "The encryption is complete and should show below");
+        }
+
+        return $this->redirector->to(PUBLIC_ROOT."/admin-only/encrypt-some-shit"; 
     }
 
      public function procMoveAllClientStock()
