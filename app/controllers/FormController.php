@@ -154,10 +154,11 @@ class FormController extends Controller {
         }
         else
         {
-           Session::set('feedback', "The encryption is complete and should show below");
+            $encrypted_value = Encryption::encrypt($string);
+            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Encryption is complete</h2><p>The results are</p><ul><li>$string : $encrypted_value</ul>");
         }
 
-        return $this->redirector->to(PUBLIC_ROOT."/admin-only/encrypt-some-shit"); 
+        return $this->redirector->to(PUBLIC_ROOT."/admin-only/encrypt-some-shit");
     }
 
      public function procMoveAllClientStock()
