@@ -77,6 +77,7 @@ class FormController extends Controller {
             'procCourierEdit',
             'procEditServiceJob',
             'procEditInstall',
+            'procEncryptSomeShit',
             'procForgotPassword',
             'procGoodsIn',
             'procGoodsOut',
@@ -126,6 +127,11 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procEncryptSomeShit()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>";die();
     }
 
      public function procMoveAllClientStock()

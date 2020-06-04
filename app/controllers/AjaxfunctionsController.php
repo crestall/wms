@@ -20,7 +20,6 @@ class ajaxfunctionsController extends Controller
             'deactivateUser',
             'deleteClientLocation',
             'deletePackage',
-            'encryptSomeShit',
             'fulfillOrder',
             'getABox',
             'getAddress',
