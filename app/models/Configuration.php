@@ -10,7 +10,7 @@ class Configuration extends Model{
         $vals = array(
             'name'          => $data['name'],
             'value'         => $data['value'],
-            'date_added'    => time();
+            'date_added'    => time()
         );
         return $db->insertQuery($this->table, $vals);
     }
@@ -21,7 +21,7 @@ class Configuration extends Model{
         $vals = array(
             'name'          => $data['name'],
             'value'         => $data['value'],
-            'date_modified' => time();
+            'date_modified' => time()
         );
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return true;
