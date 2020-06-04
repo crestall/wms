@@ -157,7 +157,7 @@ class FormController extends Controller {
            Session::set('feedback', "The encryption is complete and should show below");
         }
 
-        return $this->redirector->to(PUBLIC_ROOT."/admin-only/encrypt-some-shit"; 
+        return $this->redirector->to(PUBLIC_ROOT."/admin-only/encrypt-some-shit"); 
     }
 
      public function procMoveAllClientStock()
