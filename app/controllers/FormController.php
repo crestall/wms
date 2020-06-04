@@ -156,7 +156,7 @@ class FormController extends Controller {
         {
             $encrypted_value = Encryption::encryptStringBase64($string);
             $unenc_value = Encryption::decryptStringBase64($encrypted_value);
-            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Encryption is complete</h2><p>The results are</p><ul><li>$string : $encrypted_value</li><li>$unenc_value</li></ul>");
+            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Encryption is complete</h2><p>The results are</p><ul><li>$string : $encrypted_value</li></ul>");
         }
 
         return $this->redirector->to(PUBLIC_ROOT."/admin-only/encrypt-some-shit");
