@@ -193,6 +193,24 @@ class Encryption{
         return base64_encode(self::encrypt($plain));
     }
 
+    /**
+     * decrypt a string supplied in base64 format
+     *
+     * $access public
+     * @static static method
+     * @param string $encryptstring
+     * @return string
+     * @throws Exception if encryption function does not exist or $encryptstring is empty
+     */
+    public static function decryptStringBase64($encryptstring)
+    {
+        if(empty($encryptstring))
+        {
+            throw new Exception("the string to decrypt can't be empty");
+        }
+        return self::decrypt(base64_decode($encryptstring)); 
+    }
+
 
     /**
      * Decrypted a string.
