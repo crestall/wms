@@ -2,7 +2,7 @@
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div class="row">
         <div class="col-md-12">
-            <form method="post" action="" id="string-encrypter">
+            <form method="post" action="/form/procEncryptSomeShit" id="string-encrypter">
                 <div class="row form-group">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>String to Encrypt</label>
                     <div class="col-md-4">
