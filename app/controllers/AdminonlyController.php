@@ -91,6 +91,15 @@ class adminonlyController extends Controller
         ]);
     }
 
+    public function updateConfiguration()
+    {
+        //add sensitive config data - passwords and keys data
+        Config::setJsConfig('curPage', "update-configuration");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/updateConfiguration.php', [
+            'page_title'    =>  "Configuration Update"
+        ]);
+    }
+
     public function sendTrackingEmails()
     {
         $db = Database::openConnection();
