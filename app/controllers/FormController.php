@@ -154,7 +154,7 @@ class FormController extends Controller {
         }
         else
         {
-            $encrypted_value = Encryption::encryptStringBase64($string));
+            $encrypted_value = Encryption::encryptStringBase64($string);
             Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Encryption is complete</h2><p>The results are</p><ul><li>$string : $encrypted_value</ul>");
         }
 
