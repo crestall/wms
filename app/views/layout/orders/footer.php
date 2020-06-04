@@ -1932,7 +1932,7 @@
                 },
                 'order-importing': {
                     init:function(){
-                        $("button#bb_full_import, button#noa_full_import, button#nuchev_full_import, button#ttau_full_import, button#ndc_full_import").click(function(e){
+                        $("button#bb_full_import, button#oneplate_full_import, button#nuchev_full_import, button#ttau_full_import, button#ndc_full_import").click(function(e){
                             var action = $(this).data('function');
                             swal({
                                 title: "Really run a full import?",
@@ -1948,7 +1948,7 @@
                             });
                         });
 
-                        $('form#bb_single_import, form#nuchev_single_import, form#noa_single_import, form#tt_single_import').submit(function(e){
+                        $('form#bb_single_import, form#nuchev_single_import, form#oneplate_single_import, form#tt_single_import').submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Importing Order...</h1></div>' });

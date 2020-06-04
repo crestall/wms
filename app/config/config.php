@@ -42,15 +42,15 @@ return array(
     "COOKIE_PATH"           => '/',
     "COOKIE_SECURE"         => true,
     "COOKIE_HTTP"           => true,
-    "COOKIE_SECRET_KEY"     => "fg&70-GF^!a{f64r5@g38l]#kQ4B+21%",
+    "COOKIE_SECRET_KEY"     => COOKIE_SECRET_KEY,
 
     /**
      * Configuration for: Encryption Keys
      *
      */
-    "ENCRYPTION_KEY"    => "3¥‹a0ef@!$251Êìcef08%&",
-    "HMAC_SALT"         => "a8C7n7^Ed0%8Qfd9K4m6d$86Dab",
-    "HASH_KEY"          => "z5F9Mp7Lf2cH",
+    "ENCRYPTION_KEY"    => ENCRYPTION_KEY,
+    "HMAC_SALT"         => HMAC_SALT,
+    "HASH_KEY"          => HASH_KEY,
 
     /**
      * Configuration for Email
@@ -59,12 +59,14 @@ return array(
     "EMAIL_FROM"        => "FSGWMS@fsg.com.au",
     "EMAIL_FROM_NAME"   => "Film Shot Graphics Warehouse Management System",
     "EMAIL_REPLY_TO"    => "FSGWMS@fsg.com.au",
-    "EMAIL_PWD"         => "noreply865!",
+    "EMAIL_PWD"         => "",
     "EMAIL_UNAME"       => "FSGWMS@fsg.com.au",
     "EMAIl_HOST"        => "smtp.office365.com",
     "EMAIL_PORT"        => 587,
 
     "EMAIL_PASSWORD_RESET_URL" => PUBLIC_ROOT . "login/resetPassword",
+
+
 
     /**
      * Configuration for: Hashing strength
@@ -151,10 +153,10 @@ return array(
     'NUWOOCONSUMERSECRET'   => 'cs_c41cd37db3ca0696419e7dd2d5a77a4e8536eaca',
 
     /*************************************************************************
-    * NOASLEEP WOO COMMERCE API constants
+    * ONEPLATE WOO COMMERCE API constants
     **************************************************************************/
-    'NSWOOCONSUMERRKEY'     => 'ck_6bc920d2f7f0e19e52132cd5590f0d0abebd7a7a',
-    'NSWOOCONSUMERSECRET'   => 'cs_1f06eb7816ca9c703b7234881fe4d8b43cbcc134',
+    'ONEPLATEWOOCONSUMERRKEY'     => 'ck_b9acaf372d2729a8e445916a79012b98f671b7e6',
+    'ONEPLATEWOOCONSUMERSECRET'   => 'cs_8c99813f34fe2931a2b20dcb0a8d54df00b540d1',
 
     /*************************************************************************
     * TTAUST WOO COMMERCE API constants

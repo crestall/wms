@@ -229,7 +229,7 @@ class Packaging{
                     $array['width'] = $i['width'];
                     $array['height'] = $i['height'];
                     $array['depth'] = $i['depth'];
-                    $array['weight'] = $i['weight'];
+                    $array['weight'] = $i['weight'] * $i['qty'];
                     $array['item_reference'] = $i['item_id'];
                     $array['type_code'] = 'ITEM';
                     $array['pieces'] = $i['qty'];

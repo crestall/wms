@@ -20,6 +20,7 @@ class ajaxfunctionsController extends Controller
             'deactivateUser',
             'deleteClientLocation',
             'deletePackage',
+            'encryptSomeShit',
             'fulfillOrder',
             'getABox',
             'getAddress',
@@ -55,6 +56,28 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function encryptSomeShit()
+    {
+        //echo "<pre>",print_r($this->request->),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $encrypted_value = Encryption::encrypt($string);
+        die($encrypted_value);
+        $data = array(
+            'error'             =>  false,
+            'encryptedvalue'    =>  $encrypted_value,
+            'error_string'      =>  ''
+        );
+        $this->view->renderJson($data);
     }
 
     public function bulkMoveStock()
