@@ -1,6 +1,7 @@
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div class="row">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <div class="col-md-12">
             <form method="post" action="/form/procEncryptSomeShit" id="string-encrypter">
                 <div class="row form-group">
