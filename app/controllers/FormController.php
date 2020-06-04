@@ -144,7 +144,7 @@ class FormController extends Controller {
         }
         if(!$this->dataSubbed($string))
         {
-            Form::setError('string', 'A string to encrypt is required is required');
+            Form::setError('string', 'A string to encrypt is required');
         }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */

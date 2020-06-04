@@ -179,6 +179,20 @@ class Encryption{
 
         return $hmac . $ciphertext;
     }
+    /**
+     * Encrypt a string and return base64 coding for emcryted string
+     *
+     * $access public
+     * @static static method
+     * @param string $plain
+     * @return string
+     * @throws Exception if encryption function does not exist
+     */
+    public static function encryptStringBase64($plain)
+    {
+        return base64_encode(self::encrypt($plain));
+    }
+
 
     /**
      * Decrypted a string.
