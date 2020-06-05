@@ -40,7 +40,7 @@
             <h2>Current Configuration</h2>
         </div>
     </div>
-        <?php if(count($configuraion)):?>
+        <?php if(count($configuration)):?>
         <div class="row">
             <?php foreach($configuration as $c):?>
                 <form class="edit-config" action="/form/procConfigEdit" method="post">
@@ -71,7 +71,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="errorbox">
-                    <h2><i class="fas fa-exclamation-triangle"></i> No Couriers Listed</h2>
+                    <h2><i class="fas fa-exclamation-triangle"></i> No Configuration Values Listed</h2>
                     <p>You will need to add some first</p>
                 </div>
             </div>
