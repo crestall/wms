@@ -4001,6 +4001,47 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."site-settings/couriers");
     }
 
+    public function procConfigAdd()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name', 'A name is required');
+        }
+        if( !$this->dataSubbed($value) )
+        {
+            Form::setError('value', 'A value is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            $post_data['value'] = Encryption::encryptStringBase64($value);
+            if($config_id = $this->configuration->addConfiguration($post_data))
+            {
+                Session::set('feedback', "That data has been added to the system");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."admin-only/update-configuration");
+    }
+
     public function procSolarTeamAdd()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
