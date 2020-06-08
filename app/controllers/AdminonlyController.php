@@ -95,10 +95,10 @@ class adminonlyController extends Controller
     {
         //add sensitive config data - passwords and keys data
         Config::setJsConfig('curPage', "update-configuration");
-        $configuration = $this->configuration->getConfigurations();
+        $configuration_names = $this->configuration->getConfigurationNames();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/updateConfiguration.php', [
-            'page_title'    => "Configuration Update",
-            'configuration' => $configuration
+            'page_title'            => "Configuration Update",
+            'configuration_names'   => $configuration_names
         ]);
     }
 
