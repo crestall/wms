@@ -22,8 +22,8 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Value</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control required" name="value" id="value" value="<?php echo Form::value('value');?>" />
-                    <?php echo Form::displayError('value');?>
+                    <input type="text" class="form-control required" name="rawvalue" id="rawvalue" value="<?php echo Form::value('rawvalue');?>" />
+                    <?php echo Form::displayError('rawvalue');?>
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
@@ -53,7 +53,7 @@
                         <div class="col-md-3">
                             <label class="col-form-label">Value</label>
                             <input type="text" class="form-control" name="rawvalue_<?php echo $c['id'];?>" id="rawvalue_<?php echo $c['id'];?>" value="<?php echo Encryption::decryptStringBase64($c['value']);?>;?>" />
-                            <?php echo Form::displayError("value{$c['id']}");?>
+                            <?php echo Form::displayError("rawvalue{$c['id']}");?>
                         </div>
                         <div class="col-md-1">
                             <label class="col-form-label">&nbsp;</label>
