@@ -69,6 +69,20 @@
                             }
                         });
                     }
+                },
+                'update-configuration':{
+                    init: function(){
+                        $('form#add-config-value').submit(function(){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding/Updating Value</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        })
+                    }
                 }
             }
             //run the script for the current page
