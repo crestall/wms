@@ -50,8 +50,10 @@ $r = 1;
                     </thead>
                     <tbody>
                         <?php foreach($configuration_names as $c):?>
-                            <td class="number"><?php echo $r;?></td>
-                            <td><?php echo $c['name'];?></td>
+                            <tr>
+                                <td class="number"><?php echo $r;?></td>
+                                <td><?php echo $c['name'];?></td>
+                            </tr>
                         <?php ++$r; endforeach;?>
                     </tbody>
                 </table>
