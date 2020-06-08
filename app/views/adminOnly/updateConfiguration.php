@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-md-3">
                             <label class="col-form-label">Value</label>
-                            <input type="text" class="form-control" name="value_<?php echo $c['id'];?>" id="value_<?php echo $c['id'];?>" value="<?php echo Encryption::decryptStringBase64($c['value']);?>;?>" />
+                            <input type="text" class="form-control" name="rawvalue_<?php echo $c['id'];?>" id="rawvalue_<?php echo $c['id'];?>" value="<?php echo Encryption::decryptStringBase64($c['value']);?>;?>" />
                             <?php echo Form::displayError("value{$c['id']}");?>
                         </div>
                         <div class="col-md-1">

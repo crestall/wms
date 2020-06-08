@@ -4029,7 +4029,7 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            $post_data['value'] = Encryption::encryptStringBase64($value);
+            $post_data['value'] = Encryption::encryptStringBase64($rawvalue);
             if($config_id = $this->configuration->addConfiguration($post_data))
             {
                 Session::set('feedback', "That data has been added to the system");
