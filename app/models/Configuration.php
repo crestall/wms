@@ -52,7 +52,7 @@ class Configuration extends Model{
         return $db->queryData($q);
     }
 
-    public function getConfigurationNamess()
+    public function getConfigurationNames()
     {
         $db = Database::openConnection();
         $q = "SELECT name FROM {$this->table} ORDER BY name";
