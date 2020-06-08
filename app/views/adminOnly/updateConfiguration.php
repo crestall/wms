@@ -1,5 +1,5 @@
 <?php
-
+$r = 1;
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -40,32 +40,22 @@
             <h2>Current Configuration</h2>
         </div>
     </div>
-        <?php if(count($configuration)):?>
+        <?php if(count($configuration_names)):?>
         <div class="row">
-            <?php foreach($configuration as $c):?>
-                <form class="edit-config" action="/form/procConfigEdit" method="post">
-                    <div class="form-group row">
-                        <div class="col-md-3">
-                            <label class="col-form-label">Name</label>
-                            <input type="text" class="form-control required" name="name_<?php echo $c['id'];?>" id="name_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
-                            <?php echo Form::displayError("name_{$c['id']}");?>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="col-form-label">Value</label>
-                            <input type="text" class="form-control" name="rawvalue_<?php echo $c['id'];?>" id="rawvalue_<?php echo $c['id'];?>" value="<?php echo Encryption::decryptStringBase64($c['value']);?>" />
-                            <?php echo Form::displayError("rawvalue{$c['id']}");?>
-                        </div>
-                        <div class="col-md-1">
-                            <label class="col-form-label">&nbsp;</label>
-                            <div class="input-group">
-                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                                <input type="hidden" name="line_id" value="<?php echo $c['id'];?>" />
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            <?php endforeach;?>
+            <div class="col-lg-12">
+                <table width="100%" class="table-striped table-hover" id="configuration_list" style="width:100%">
+                    <thead>
+                        <th></th>
+                        <th>Name</th>
+                    </thead>
+                    <tbody>
+                        <?php foreach($configuration_names as $c):?>
+                            <td class="number"><?php echo $r;?></td>
+                            <td><?php echo $c['name'];?></td>
+                        <?php ++$r; endforeach;?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     <?php else:?>
         <div class="row">
