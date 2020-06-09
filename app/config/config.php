@@ -45,11 +45,9 @@ return array(
 
     /**
      * Configuration for: Encryption Keys
-     *
+     *  Now Stored in database 
      */
-    "ENCRYPTION_KEY"    => ENCRYPTION_KEY,
-    "HMAC_SALT"         => HMAC_SALT,
-    "HASH_KEY"          => HASH_KEY,
+
 
     /**
      * Configuration for Email
