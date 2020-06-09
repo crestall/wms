@@ -13,7 +13,7 @@
  class Eparcel{
 
     protected $controller;
-    protected $API_KEY = Config::get('EPARCEL_API_KEY') ;
+    protected $API_KEY = "MMM" ;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
 
