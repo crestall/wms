@@ -102,8 +102,9 @@ class Config{
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
-                return null;
+
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
+                return null;
                 return self::$config[$source][$key];
             }
         }
