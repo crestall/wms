@@ -12,8 +12,8 @@
  */
  class Eparcel{
 
-    protected $controller;
-    protected $API_KEY ;
+    public $controller;
+    public $API_KEY ;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
 
@@ -30,7 +30,7 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
-        $this->API_KEY    = "MMMMMM";
+        $this->API_KEY    = Config::get('EPARCEL_API_KEY');
 
         $this->API_PWD    = Config::get('EPARCEL_API_PWD');
 
