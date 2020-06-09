@@ -47,12 +47,14 @@ $r = 1;
                     <thead>
                         <th></th>
                         <th>Name</th>
+                        <th></th>
                     </thead>
                     <tbody>
                         <?php foreach($configuration_names as $c):?>
                             <tr>
                                 <td class="number"><?php echo $r;?></td>
                                 <td><?php echo $c['name'];?></td>
+                                <td><button class="button delete-button delete" id="delete_<?php echo $c['id'];?>">DELETE</button></td>
                             </tr>
                         <?php ++$r; endforeach;?>
                     </tbody>
