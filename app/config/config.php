@@ -74,22 +74,6 @@ return array(
     "PAGINATION_DEFAULT_LIMIT" => 10,
 
     /*************************************************************************
-    * Hunters API constants
-    **************************************************************************/
-    /* */
-    'HUNTERS_TEST_CUSTOMER_CODE'    => '3PLVIC',
-    'HUNTERS_TEST_UNAME'            => '3PLVIC',
-    'HUNTERS_TEST_PWD'              => '3plplus',
-    'HUNTERS_TEST_HOST'             => 'api.hunterexpress.com.au/live/',
-
-    //Live
-    'HUNTERS_3KGCUSTOMER_CODE'      => '3PL3KG',
-    'HUNTERS_PLUCUSTOMER_CODE'      => '3PLPLU',
-    'HUNTERS_PALLETSCUSTOMER_CODE'  => '3PLPAL',
-    'HUNTERS_UNAME'                 => '3PL3KG',
-    'HUNTERS_PWD'                   => 'plplus',
-    'HUNTERS_HOST'                  => 'api.hunterexpress.com.au/live/',
-    /*************************************************************************
     * XERO API constants
     **************************************************************************/
     'BBXEROCONSUMERKEY'     => 'OUWBI1XCHJU9RHOJXTIBYFHNGHMV1R',
