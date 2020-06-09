@@ -44,14 +44,6 @@ return array(
     "COOKIE_HTTP"           => true,
 
     /**
-     * Configuration for: Encryption Keys
-     *
-     */
-    "ENCRYPTION_KEY"    => ENCRYPTION_KEY,
-    "HMAC_SALT"         => HMAC_SALT,
-    "HASH_KEY"          => HASH_KEY,
-
-    /**
      * Configuration for Email
      *
      */
