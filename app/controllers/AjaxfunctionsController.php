@@ -19,6 +19,7 @@ class ajaxfunctionsController extends Controller
             'calcOriginPick',
             'deactivateUser',
             'deleteClientLocation',
+            'deleteConfiguration',
             'deletePackage',
             'fulfillOrder',
             'getABox',
@@ -218,112 +219,6 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $this->location->reactivateLocation($this->request->data['locationid']);
-    }
-
-    public function calcOriginPick()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; //die();
-        foreach($this->request->query as $field => $value)
-        {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
-        }
-        $rails = $joins = $ground_clips = $rail_joiners = $tile_feet = $tin_feet = $z_bolts = $clips = 0;
-        $bank_count = count($this->request->query['banks']);
-        foreach($this->request->query['banks'] as $bank)
-        {
-            $rc = ceil($bank['qty'] / 2);
-            $rj = floor($bank['qty'] / 4) * 2;
-            $rails += $rc;
-            $joins += $bank['qty'] - 1;
-            $ground_clips += 2 * $bank['qty'];
-            $rail_joiners += $rj;
-            $clips += 4 * $bank['qty'];
-        }
-        if($this->request->query['roof_type'] == "tin")
-        {
-            $tin_feet = 4 * $rails + 2;
-        }
-        elseif($this->request->query['roof_type'] == "tile")
-        {
-            $tile_feet = $z_bolts = 4 * $rails + 2;
-        }
-        ++$rails;
-        ++$rail_joiners;
-        $end_clamps = 4 * $bank_count + 4;
-        $interclamps = 2 * $joins + 4;
-        $earth_lugs = 2 * $bank_count + 2;
-
-        $rails = array(
-            'id'    => 11650,
-            'qty'   => $rails
-        );
-        $end_clamps = array(
-            'id'    => 11651,
-            'qty'   => $end_clamps
-        );
-        $interclamps = array(
-            'id'    => 11655,
-            'qty'   => $interclamps
-        );
-        $earth_lugs = array(
-            'id'    => 11654,
-            'qty'   => $earth_lugs
-        );
-        $ground_clips = array(
-            'id'    => 11653,
-            'qty'   => $ground_clips
-        );
-        $rail_joiners = array(
-            'id'    => 11659,
-            'qty'   => $rail_joiners
-        );
-        $tin_feet = array(
-            'id'    => 11660,
-            'qty'   => $tin_feet
-        );
-        $tile_feet = array(
-            'id'    => 11661,
-            'qty'   => $tile_feet
-        );
-        $z_bolts = array(
-            'id'    => 11838,
-            'qty'   => $z_bolts
-        );
-        $clips = array(
-            'id'    => 12377,
-            'qty'   => $clips
-        );
-
-        $parts = array(
-            'rails'         => $rails,
-            'end_clamps'    => $end_clamps,
-            'inter_clamps'   => $interclamps,
-            'earth_lugs'    => $earth_lugs,
-            'ground_clips'  => $ground_clips,
-            'rail_joiners'  => $rail_joiners,
-            'tin_feet'      => $tin_feet,
-            'tile_feet'     => $tile_feet,
-            'panel_clips'   => $clips
-        );
-
-        /*echo "<pre>",print_r($rails),"</pre>";
-
-        echo "<p>Rails: $rails</p>";;
-        echo "<p>End Clamps: $end_clamps</p>";
-        echo "<p>Inter Clamps: $interclamps</p>";
-        echo "<p>Earth Lugs: $earth_lugs</p>";
-        echo "<p>Ground Clips: $ground_clips</p>";
-        echo "<p>Rail Joiners: $rail_joiners</p>";
-        echo "<p>Tin Feet: $tin_feet</p>";
-        echo "<p>Tile Feet: $tile_feet</p>";
-        */
-        $this->view->render(Config::get('VIEWS_PATH') . 'forms/origin_order_parts.php', [
-            'parts' => $parts
-        ]);
     }
 
     public function getScannedItem()
