@@ -47,7 +47,9 @@ return array(
      * Configuration for: Encryption Keys
      *
      */
-    "ENCRYPTION_KEY"    => ENCRYPTION_KEY, 
+    "ENCRYPTION_KEY"    => ENCRYPTION_KEY,
+    "HMAC_SALT"         => HMAC_SALT,
+    "HASH_KEY"          => HASH_KEY,
 
     /**
      * Configuration for Email
