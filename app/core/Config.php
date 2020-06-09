@@ -85,7 +85,7 @@ class Config{
 
             self::$config[$source] = require $config_file . "";
         }
-
+        echo "<pre>",print_r(self::$config),"</pre>";die();
         if(empty($key))
         {
             return self::$config[$source];
