@@ -4028,15 +4028,19 @@ class FormController extends Controller {
         }
         else
         {
-            //all good, add details
+            //all good, add/edit details
+            $db = Database::openConnection();
             $post_data['value'] = Encryption::encryptStringBase64($rawvalue);
-            if($config_id = $this->configuration->addConfiguration($post_data))
+            if($updater = $db->queryValue('configuration', array('name' => $name)))
             {
-                Session::set('feedback', "That data has been added to the system");
+                $post_data['id'] = $updater;
+                $this->configuration->editConfiguration($post_data);
+                Session::set('feedback', "That data has been updated to the system");
             }
             else
             {
-                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+                $this->configuration->addConfiguration($post_data) ;
+                Session::set('feedback', "That data has been added to the system");
             }
         }
         return $this->redirector->to(PUBLIC_ROOT."admin-only/update-configuration");
