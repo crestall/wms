@@ -5,8 +5,8 @@ $r = 1;
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-    <?php echo Form::displayError('general');die('OK here');?>
-    <?php echo Config::get('HASH_KEY'); ?>
+    <?php echo Form::displayError('general');?>
+    <?php echo Config::get('HASH_KEY'); die('OK here');?>
     <div class="row">
         <form id="add-config-value"  method="post" action="/form/procConfigAdd">
             <div class="row">
