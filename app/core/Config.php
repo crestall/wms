@@ -63,6 +63,7 @@ class Config{
      * @param mixed  $value
      */
     public static function setJsConfig($key, $value){
+        die('setting js '.$key.$value);
         self::_set($key, $value, self::$prefix['js']);
     }
 
