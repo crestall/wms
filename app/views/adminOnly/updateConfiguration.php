@@ -1,11 +1,12 @@
 <?php
 $r = 1;
-echo Config::get('COOKIE_SECRET_KEY');
+
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
     <?php echo Form::displayError('general');?>
+    <?php echo Config::get('COOKIE_SECRET_KEY'); ?>
     <div class="row">
         <form id="add-config-value"  method="post" action="/form/procConfigAdd">
             <div class="row">
