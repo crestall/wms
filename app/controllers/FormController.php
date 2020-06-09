@@ -531,7 +531,7 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
                     }
-                    $aResponse = $this->BigBottleEparcel->ValidateSuburb($request['suburb'], $request['state'], str_pad($request['postcode'],4,'0',STR_PAD_LEFT));
+                    $aResponse = $this->Eparcel->ValidateSuburb($request['suburb'], $request['state'], str_pad($request['postcode'],4,'0',STR_PAD_LEFT));
 
                     //echo "<pre>",print_r($aResponse),"</pre>";
                     if(isset($aResponse['errors']))
@@ -689,7 +689,7 @@ class FormController extends Controller {
                         $request['errors'] = 1;
                         $request['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
                     }
-                    $aResponse = $this->BigBottleEparcel->ValidateSuburb($request['suburb'], $request['state'], str_pad($request['postcode'],4,'0',STR_PAD_LEFT));
+                    $aResponse = $this->Eparcel->ValidateSuburb($request['suburb'], $request['state'], str_pad($request['postcode'],4,'0',STR_PAD_LEFT));
 
                     //echo "<pre>",print_r($aResponse),"</pre>";
                     if(isset($aResponse['errors']))
