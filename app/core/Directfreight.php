@@ -146,10 +146,7 @@
             'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
-        //echo "<pre>",print_r($request),"</pre>";//die();
-        echo json_encode($request);
         $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
-        echo "<pre>",print_r(json_decode($response, true)),"</pre>";die();
         //list($a_headers,$a_data) = $this->getResponse($response);
         //echo "<pre>ADATA",print_r($a_data),"</pre>";die();
         //json_decode($a_data[0], true); die();
