@@ -283,7 +283,7 @@ var shippingQuote = {
             .load('/ajaxfunctions/getShippingQuotes',{order_id: order_id, address_string: address_string},
 				function(responseText, textStatus, XMLHttpRequest){
 				if(textStatus == 'error') {
-					$(this).html('<div class=\'errorbox\'><h2>There has been an error</h2><p>Please check the address details for issues</p><p>'+responseText+'</div>');
+					$(this).html('<div class=\'errorbox\'><h2>There has been an error</h2><p>Please check the address details for issues</p><p></div>');
 				}
                 else
                 {

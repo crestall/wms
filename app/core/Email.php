@@ -629,13 +629,6 @@
                 <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order.</p>
             ";
         }
-        elseif($courier_name == "DHL")
-        {
-            $content .= "
-                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                    <p>Click the following link <a href='https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}'>https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}</a> to track your order.</p>
-            ";
-        }
         else
         {
             $courier_name = $od['courier_name'];
@@ -729,13 +722,6 @@
                     <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order.</p>
                 ";
             }
-            elseif($courier_name == "DHL")
-            {
-                $content .= "
-                        <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                        <p>Click the following link <a href='https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}'>https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}</a> to track your order.</p>
-                ";
-            }
             else
             {
                 $courier_name = $od['courier_name'];
@@ -826,13 +812,6 @@
             $content .= "
                     <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
                 <p>Click the following link <a href='https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}'>https://auspost.com.au/parcels-mail/track.html#/track?id={$od['consignment_id']}</a> to track your order.</p>
-            ";
-        }
-        elseif($courier_name == "DHL")
-        {
-            $content .= "
-                    <p>Your tracking number is <strong>{$od['consignment_id']}</strong>.</p><p></p>
-                    <p>Click the following link <a href='https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}'>https://dhlecommerce.asia/track/Track?ref={$od['consignment_id']}</a> to track your order.</p>
             ";
         }
         else
