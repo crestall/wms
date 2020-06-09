@@ -9,7 +9,6 @@
  */
 
 class Config{
-
     /**
      * Array of configurations
      *
@@ -26,6 +25,11 @@ class Config{
         'default'   => 'config',
         'js'        => 'javascript'
     ];
+
+    public static function tester()
+    {
+        return "test";
+    }
 
     /**
      * Get default configuration value(s)
