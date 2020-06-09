@@ -738,7 +738,7 @@ class ajaxfunctionsController extends Controller
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
         echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
         $express_response = $this->{$eParcelClass}->GetQuote($eeparcel_shipments);
-        echo "<pre>",print_r(json_encode($express_response)),"</pre>"; die();
+        echo "<pre>",print_r(json_encode($express_response)),"</pre>"; //die();
         if(isset($eparcel_response['errors']))
         {
             $eparcel_charge = "";
