@@ -6,7 +6,7 @@ $r = 1;
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
     <?php echo Form::displayError('general');?>
-    <?php echo "Something here ".Config::get('EPARCEL_ACCOUNT_NUMBER');?>
+    <?php echo "Something here ".Config::get('EPARCEL_ACCOUNT_NO');?>
     <div class="row">
         <form id="add-config-value"  method="post" action="/form/procConfigAdd">
             <div class="row">
