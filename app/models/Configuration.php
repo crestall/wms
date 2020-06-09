@@ -64,5 +64,12 @@ class Configuration extends Model{
         $db = Database::openConnection();
         return $db->queryValue($this->table, array('name' => $name));
     }
+
+    public function deleteConfiguration($id)
+    {
+        $db = Database::openConnection();
+        $db->deleteQuery($this->table, $id);
+        return true;
+    }
 }
 ?>

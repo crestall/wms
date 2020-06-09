@@ -597,6 +597,13 @@ class ajaxfunctionsController extends Controller
         Session::set('feedback', 'That location has had its allocation removed');
     }
 
+    public function deleteConfiguration()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $this->clientslocation->deleteConfiguration($this->request->data['id']);
+        Session::set('feedback', 'That configuration value has been deleted');
+    }
+
     public function getABox()
     {
         $post_data = array();
