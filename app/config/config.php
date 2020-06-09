@@ -42,7 +42,6 @@ return array(
     "COOKIE_PATH"           => '/',
     "COOKIE_SECURE"         => true,
     "COOKIE_HTTP"           => true,
-    "COOKIE_SECRET_KEY"     => COOKIE_SECRET_KEY,
 
     /**
      * Configuration for: Encryption Keys
