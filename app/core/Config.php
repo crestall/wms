@@ -75,7 +75,6 @@ class Config{
      * @throws Exception if configuration file doesn't exist
      */
     private static function _get($key, $source){
-        die("so far so good");
         if (!isset(self::$config[$source])) {
 
             $config_file = APP . 'config/' . $source . '.php';
@@ -98,6 +97,7 @@ class Config{
         else
         {
             //should be in database table
+            die('looking in database');
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
