@@ -10,7 +10,7 @@ $r = 1;
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Add New Configuration Value</h3>
-                    <p class="inst">If the value already exists, it will be updated to the new value</p>
+                    <p class="inst">If the name already exists, it will be updated to the new value</p>
                 </div>
             </div>
             <div class="form-group row">
