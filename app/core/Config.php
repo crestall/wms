@@ -93,10 +93,12 @@ class Config{
 
         if(empty($key))
         {
+            die("will return them all because $key is empty");
             return self::$config[$source];
         }
         else if(isset(self::$config[$source][$key]))
         {
+            die("will return already set config for $key : ".$config[$source][$key]);
             return self::$config[$source][$key];
         }
         else
@@ -105,10 +107,11 @@ class Config{
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
+                die("found $key in database");
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
             }
         }
-
+        die("didn't find $key in database");
         return null;
     }
 
