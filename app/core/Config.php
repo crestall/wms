@@ -98,11 +98,11 @@ class Config{
         else
         {
             //should be in database table
-            $db = Database::openConnection();
-            if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
-            {
-                self::$config[$source][$key] = Encryption::decryptStringBase64($sv); 
-            }
+            //$db = Database::openConnection();
+            //if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
+            //{
+                //self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
+            //}
         }
 
         return null;
