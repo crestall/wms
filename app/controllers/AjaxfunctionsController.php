@@ -495,7 +495,7 @@ class ajaxfunctionsController extends Controller
     public function deleteConfiguration()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
-        $this->clientslocation->deleteConfiguration($this->request->data['id']);
+        $this->configuration->deleteConfiguration($this->request->data['id']);
         Session::set('feedback', 'That configuration value has been deleted');
     }
 
