@@ -33,7 +33,7 @@ return array(
      * COOKIE_PATH: The path where the cookie is valid for. If set to '/', the cookie will be available within the entire COOKIE_DOMAIN.
      * COOKIE_SECURE: If the cookie will be transferred through secured connection(SSL). It's highly recommended to set it to true if you have secured connection
      * COOKIE_HTTP: If set to true, Cookies that can't be accessed by JS - Highly recommended!
-     * COOKIE_SECRET_KEY: A random value to make the cookie more secure.
+     * COOKIE_SECRET_KEY: A random value to make the cookie more secure. Now Stored in database
      *
      */
     "COOKIE_EXPIRY"         => 1209600,
