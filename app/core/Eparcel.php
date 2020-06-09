@@ -31,8 +31,10 @@
     {
         $this->controller = $controller;
         $this->API_KEY    = Config::get('EPARCEL_API_KEY');
+        echo "<p>API KEY ".$this->API_KEY;
         $this->API_PWD    = Config::get('EPARCEL_API_PWD');
         $this->ACCOUNT_NO = Config::get('EPARCEL_ACCOUNT_NO');
+        die();
     }
 
     protected function createSocket()
