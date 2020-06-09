@@ -16,6 +16,7 @@
     public $API_KEY ;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
+    $vtester;
 
     const    API_SCHEME   = 'https://';
     const    API_HOST     = 'digitalapi.auspost.com.au';
@@ -33,9 +34,9 @@
         $this->API_KEY    = Config::get('EPARCEL_API_KEY');
 
         $this->API_PWD    = Config::get('EPARCEL_API_PWD');
-
+        $this->vtester = Config::tester();
         $this->ACCOUNT_NO = Config::get('EPARCEL_ACCOUNT_NO');
-        echo "<p>Tester : ".Config::tester()."</p>";
+        echo "<p>Tester : ".$this->vtester."</p>";
         echo "<p>API KEY ".$this->API_KEY." should be here</p>";
         echo "<p>API PWD ".Config::get('EPARCEL_API_PWD')." should be here</p>";
         die();
