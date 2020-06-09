@@ -1,5 +1,6 @@
 <?php
 $r = 1;
+echo Config::get('COOKIE_SECRET_KEY');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
