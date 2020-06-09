@@ -13,7 +13,7 @@
  class Eparcel{
 
     public $controller;
-    public $API_KEY ;
+    protected $API_KEY;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
     public $vtester;
@@ -30,17 +30,15 @@
 
     public function __construct(Controller $controller)
     {
-        $this->controller = $controller;
-        //$this->API_KEY    = Config::get('EPARCEL_API_KEY');
-
-        $this->API_PWD    = Config::get('EPARCEL_API_PWD');
-        $this->vtester = Config::tester();
-        $api_key = Config::get('EPARCEL_API_KEY');
-        $this->API_KEY    = $api_key;
-        $this->ACCOUNT_NO = Config::get('EPARCEL_ACCOUNT_NO');
+        $this->controller   = $controller;
+        $this->API_KEY      = Config::get('EPARCEL_API_KEY');
+        $this->API_PWD      = Config::get('EPARCEL_API_PWD');
+        $this->vtester      = Config::tester();
+        $this->ACCOUNT_NO   = Config::get('EPARCEL_ACCOUNT_NO');
         echo "<p>Tester : ".$this->vtester."</p>";
         echo "<p>API KEY ".$this->API_KEY." should be here</p>";
-        echo "<p>API PWD ".Config::get('EPARCEL_API_PWD')." should be here</p>";
+        echo "<p>API PWD *".Config::get('EPARCEL_API_PWD')." should be here</p>";
+        echo "<p>ACCOUNT NUMBER ".$this->ACCOUNT_NO." should be here</p>";
         die();
     }
 
