@@ -58,7 +58,6 @@ return array(
     "EMAIL_PASSWORD_RESET_URL" => PUBLIC_ROOT . "login/resetPassword",
 
 
-
     /**
      * Configuration for: Hashing strength
      *
@@ -88,9 +87,9 @@ return array(
     'ACCOUNT_NO'    =>  '0007018074',
     */
     //FSG
-    'API_KEY'       =>  'e5e25c00-c317-4929-950d-1d2631281f4f',
-    'API_PWD'       =>  'xe5f23caf4c7edf3f5bf',
-    'ACCOUNT_NO'    =>  '0007378183',
+    'EPARCEL_API_KEY'       =>  'e5e25c00-c317-4929-950d-1d2631281f4f',
+    'EPARCEL_API_PWD'       =>  'xe5f23caf4c7edf3f5bf',
+    'EPARCEL_ACCOUNT_NO'    =>  '0007378183',
 
     /*************************************************************************
     * DHL API constants

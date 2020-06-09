@@ -131,7 +131,7 @@ class Encryption{
             $i[] = substr($chars, $n, 1);
         }
 
-        $key_hash = hash('sha256', HASH_KEY));
+        $key_hash = hash('sha256', HASH_KEY);
         $key_hash = (strlen($key_hash) < strlen($chars) ? hash('sha512', HASH_KEY) : $key_hash);
 
         for ($n = 0; $n < strlen($chars); $n++) {

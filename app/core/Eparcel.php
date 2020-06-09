@@ -30,9 +30,9 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
-        $this->API_KEY    = Config::get('API_KEY');
-        $this->API_PWD    = Config::get('API_PWD');
-        $this->ACCOUNT_NO = Config::get('ACCOUNT_NO');
+        $this->API_KEY    = Config::get('EPARCEL_API_KEY');
+        $this->API_PWD    = Config::get('EPARCEL_API_PWD');
+        $this->ACCOUNT_NO = Config::get('EPARCEL_ACCOUNT_NO');
     }
 
     protected function createSocket()
