@@ -129,13 +129,6 @@ class Controller {
             'Nuchev',
             'TTAU'
          ]);
-
-         $this->loadHuntersLocations([
-            '3KG',
-            'PLU',
-            'PAL',
-            'Test'
-         ]);
      }
 
     /**
