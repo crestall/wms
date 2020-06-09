@@ -55,7 +55,7 @@ class Configuration extends Model{
     public function getConfigurationNames()
     {
         $db = Database::openConnection();
-        $q = "SELECT name FROM {$this->table} ORDER BY name";
+        $q = "SELECT id, name FROM {$this->table} ORDER BY name";
         return $db->queryData($q);
     }
 
