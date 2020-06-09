@@ -63,7 +63,7 @@ class Config{
      * @param mixed  $value
      */
     public static function setJsConfig($key, $value){
-        die('setting js '.$key.$value);
+        //die('setting js '.$key.$value);
         self::_set($key, $value, self::$prefix['js']);
     }
 
@@ -97,7 +97,7 @@ class Config{
         }
         else
         {
-            //should be in database table 
+            //should be in database table
             echo 'looking in database for '.$key.$source; return null;
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
