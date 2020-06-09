@@ -204,7 +204,7 @@ class Encryption{
      */
     public static function decryptStringBase64($encryptstring)
     {
-        die($encryptstring);
+        //die($encryptstring);
         if(empty($encryptstring))
         {
             throw new Exception("the string to decrypt can't be empty");
@@ -232,7 +232,7 @@ class Encryption{
             !function_exists('openssl_decrypt')){
             throw new Exception("Encryption function don't exists");
         }
-
+        die($ciphertext);
         // generate key used for authentication using ENCRYPTION_KEY & HMAC_SALT
         $key = mb_substr(hash(self::HASH_FUNCTION, Config::get('ENCRYPTION_KEY') . Config::get('HMAC_SALT')), 0, 32, '8bit');
 
