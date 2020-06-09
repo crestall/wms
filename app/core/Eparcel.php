@@ -16,7 +16,7 @@
     public $API_KEY ;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
-    $vtester;
+    public $vtester;
 
     const    API_SCHEME   = 'https://';
     const    API_HOST     = 'digitalapi.auspost.com.au';
