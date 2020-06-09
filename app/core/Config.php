@@ -87,10 +87,23 @@ class Config{
             self::$config[$source] = require $config_file . "";
         }
 
-        if(empty($key)){
+        if(empty($key))
+        {
             return self::$config[$source];
-        } else if(isset(self::$config[$source][$key])){
+        }
+        else if(isset(self::$config[$source][$key]))
+        {
             return self::$config[$source][$key];
+        }
+        else
+        {
+            //should be in database table
+            $db = Database::openConnection();
+            if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
+            {
+                self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
+                return self::$config[$source][$key];
+            }
         }
 
         return null;
