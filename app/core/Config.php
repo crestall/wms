@@ -98,7 +98,7 @@ class Config{
         else
         {
             //should be in database table
-            echo 'looking in database for '.$key.$source; return null;
+            //echo 'looking in database for '.$key.$source; return null;
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
