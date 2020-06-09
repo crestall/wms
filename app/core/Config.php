@@ -100,9 +100,9 @@ class Config{
             //should be in database table
             echo 'looking in database for '.$key.$source;
             $db = Database::openConnection();
-            return null;
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
+                return null;
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
                 return self::$config[$source][$key];
             }
