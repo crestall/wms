@@ -86,7 +86,7 @@ class Config{
 
             self::$config[$source] = require $config_file . "";
         }
-        echo "<pre>",print_r(self::$config),"</pre>";die();
+        //echo "<pre>",print_r(self::$config),"</pre>";die();
         if(empty($key))
         {
             return self::$config[$source];
@@ -98,7 +98,7 @@ class Config{
         else
         {
             //should be in database table
-            die('looking in database for '.$key.$source);
+            //die('looking in database for '.$key.$source);
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
