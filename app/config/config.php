@@ -88,7 +88,6 @@ return array(
     */
     //FSG
     'EPARCEL_API_KEY'       =>  'e5e25c00-c317-4929-950d-1d2631281f4f',
-    'EPARCEL_API_PWD'       =>  'xe5f23caf4c7edf3f5bf',
 
     /*************************************************************************
     * DHL API constants
