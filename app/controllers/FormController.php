@@ -36,7 +36,8 @@ class FormController extends Controller {
 
         $this->loadEparcelLocations([
             'Freedom',
-            'Nuchev'
+            'Nuchev',
+            'TTAU'
         ]);
 
     }
