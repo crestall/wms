@@ -35,16 +35,8 @@ class FormController extends Controller {
 
 
         $this->loadEparcelLocations([
-            'BigBottle',
             'Freedom',
             'Nuchev'
-        ]);
-
-        $this->loadHuntersLocations([
-            '3KG',
-            'PLU',
-            'PAL',
-            'Test'
         ]);
 
     }
