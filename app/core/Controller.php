@@ -125,7 +125,6 @@ class Controller {
          ]);
 
          $this->loadEparcelLocations([
-            'BigBottle',
             'Freedom',
             'Nuchev',
             'TTAU'
