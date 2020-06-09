@@ -54,7 +54,7 @@ $r = 1;
                             <tr>
                                 <td class="number"><?php echo $r;?></td>
                                 <td><?php echo $c['name'];?></td>
-                                <td><button class="btn btn-danger delete" id="delete_<?php echo $c['id'];?>">REMOVE</button></td>
+                                <td><button class="btn btn-danger delete" data-configurationid="<?php echo $c['id'];?>">REMOVE</button></td>
                             </tr>
                         <?php ++$r; endforeach;?>
                     </tbody>
