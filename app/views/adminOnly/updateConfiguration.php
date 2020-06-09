@@ -37,7 +37,7 @@ $r = 1;
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <h2>Current Configuration</h2>
+            <h2>Current Configuration Values Stored</h2>
         </div>
     </div>
         <?php if(count($configuration_names)):?>
