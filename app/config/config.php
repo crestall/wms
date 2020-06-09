@@ -74,23 +74,6 @@ return array(
     "PAGINATION_DEFAULT_LIMIT" => 10,
 
     /*************************************************************************
-    * DHL API constants
-    **************************************************************************/
-    /*//Testbed
-    'DHL_PASSWORD' => 'MjAzMDI5MTU',
-    'DHL_USER_ID' => 'LTIwOTY3NTQwNTI=',
-    'DHL_CUSTOMERPREFIX' => 'AUASY',
-    'DHL_SOLDTO' => '501004',
-    'DHL_PICKUP' => '501004',
-    */
-    //Live
-    'DHL_PASSWORD'          => 'MjAzMDI5MTU',
-    'DHL_USER_ID'           => 'OTYzODA0OTI=',
-    'DHL_CUSTOMERPREFIX'    => 'AUASY',
-    'DHL_SOLDTO'            => '501040',
-    'DHL_PICKUP'            => '501040',
-
-    /*************************************************************************
     * Hunters API constants
     **************************************************************************/
     /* */
