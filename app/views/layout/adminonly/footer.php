@@ -81,7 +81,25 @@
                             {
                                 return false;
                             }
-                        })
+                        });
+                        $('button.delete').click(function(e){
+                            e.preventDefault();
+                            var $but = $(e.target);
+                            swal({
+                                title: "Really delete this value?",
+                                text: "This cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willDelete) {
+                                if (willDelete) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deleting configuration value...</h1></div>' });
+                                    $.post('/ajaxfunctions/deleteConfiguration', {id: $but.data('configurationid')}, function(d){
+                                        window.location.reload();
+                                    })
+                                }
+                            });
+                        });
                     }
                 }
             }
