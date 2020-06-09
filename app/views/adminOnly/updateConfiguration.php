@@ -3,8 +3,8 @@ $r = 1;
 
 ?>
 <div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");die('OK here'); ?>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
+    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");die('OK here');?>
     <?php echo Form::displayError('general');?>
     <?php echo Config::get('HASH_KEY'); ?>
     <div class="row">
