@@ -63,7 +63,6 @@ class Config{
      * @param mixed  $value
      */
     public static function setJsConfig($key, $value){
-        //die('setting js '.$key.$value);
         self::_set($key, $value, self::$prefix['js']);
     }
 
@@ -76,6 +75,7 @@ class Config{
      * @throws Exception if configuration file doesn't exist
      */
     private static function _get($key, $source){
+
         if (!isset(self::$config[$source])) {
 
             $config_file = APP . 'config/' . $source . '.php';
@@ -86,7 +86,7 @@ class Config{
 
             self::$config[$source] = require $config_file . "";
         }
-        //echo "<pre>",print_r(self::$config),"</pre>";die();
+
         if(empty($key))
         {
             return self::$config[$source];
@@ -98,14 +98,10 @@ class Config{
         else
         {
             //should be in database table
-            echo 'looking in database for '.$key.$source;
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
-                //echo $sv; return;
-                self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
-                return null;
-                return self::$config[$source][$key];
+                self::$config[$source][$key] = Encryption::decryptStringBase64($sv); 
             }
         }
 

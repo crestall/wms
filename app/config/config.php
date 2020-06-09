@@ -45,9 +45,9 @@ return array(
 
     /**
      * Configuration for: Encryption Keys
-     *  Now Stored in database 
+     *
      */
-
+    "ENCRYPTION_KEY"    => ENCRYPTION_KEY, 
 
     /**
      * Configuration for Email

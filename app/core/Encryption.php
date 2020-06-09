@@ -204,7 +204,6 @@ class Encryption{
      */
     public static function decryptStringBase64($encryptstring)
     {
-        //die($encryptstring);
         if(empty($encryptstring))
         {
             throw new Exception("the string to decrypt can't be empty");
@@ -235,7 +234,7 @@ class Encryption{
 
         // generate key used for authentication using ENCRYPTION_KEY & HMAC_SALT
         $key = mb_substr(hash(self::HASH_FUNCTION, Config::get('ENCRYPTION_KEY') . Config::get('HMAC_SALT')), 0, 32, '8bit');
-        die($key);
+
         // split cipher into: hmac, cipher & iv
         $macSize    = 64;
         $hmac 	    = mb_substr($ciphertext, 0, $macSize, '8bit');
