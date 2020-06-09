@@ -30,11 +30,13 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
-        $this->$API_KEY    = Config::get('EPARCEL_API_KEY');
-        echo "<p>API KEY ".$this->$API_KEY." should be here</p>";
+        $this->API_KEY    = Config::get('EPARCEL_API_KEY');
+
         $this->API_PWD    = Config::get('EPARCEL_API_PWD');
-        echo "<p>API PWD ".$this->API_PWD." should be here</p>";
+
         $this->ACCOUNT_NO = Config::get('EPARCEL_ACCOUNT_NO');
+        echo "<p>API KEY ".$this->API_KEY." should be here</p>";
+        echo "<p>API PWD ".$this->API_PWD." should be here</p>";
         die();
     }
 
