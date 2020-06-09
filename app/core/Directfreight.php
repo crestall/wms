@@ -147,7 +147,7 @@
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
         $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
-        //list($a_headers,$a_data) = $this->getResponse($response);
+        list($a_headers,$a_data) = $this->getResponse($response);
         //echo "<pre>ADATA",print_r($a_data),"</pre>";die();
         //json_decode($a_data[0], true); die();
         return json_decode($a_data[0], true);
