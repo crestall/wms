@@ -204,11 +204,12 @@ class Encryption{
      */
     public static function decryptStringBase64($encryptstring)
     {
+        die($encryptstring);
         if(empty($encryptstring))
         {
             throw new Exception("the string to decrypt can't be empty");
         }
-        return self::decrypt(base64_decode($encryptstring)); 
+        return self::decrypt(base64_decode($encryptstring));
     }
 
 
