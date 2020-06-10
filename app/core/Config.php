@@ -93,12 +93,12 @@ class Config{
 
         if(empty($key))
         {
-            die("will return them all because $key is empty");
+            //die("will return them all because $key is empty");
             return self::$config[$source];
         }
         else if(isset(self::$config[$source][$key]))
         {
-            die("will return already set config for $key : ".$config[$source][$key]);
+            //die("will return already set config for $key : ".$config[$source][$key]);
             return self::$config[$source][$key];
         }
         else
@@ -107,14 +107,14 @@ class Config{
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
-                echo "<p>found $key in database</p>";
+                //echo "<p>found $key in database</p>";
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
-                echo "<p> set it to: ".self::$config[$source][$key]."</p>";
+                //echo "<p> set it to: ".self::$config[$source][$key]."</p>";
                 return self::$config[$source][$key] ;
                 //die();
             }
         }
-        die("didn't find $key in database");
+        //die("didn't find $key in database");
         return null;
     }
 
