@@ -110,7 +110,7 @@ class Config{
                 echo "<p>found $key in database</p>";
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
                 echo "<p> set it to: ".self::$config[$source][$key]."</p>";
-                return self::$config[$source][$key]
+                return self::$config[$source][$key] ;
                 //die();
             }
         }
