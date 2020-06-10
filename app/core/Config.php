@@ -107,8 +107,10 @@ class Config{
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
-                die("found $key in database");
+                echo "<p>found $key in database</p>";
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
+                echo "<p> set ir to: ".Encryption::decryptStringBase64($sv)."</p>";
+                die();
             }
         }
         die("didn't find $key in database");
