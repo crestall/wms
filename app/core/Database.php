@@ -206,6 +206,7 @@ class Database {
 		{
 			$id = false;
 		}
+        echo "<p>Databse returning $id</p>";
 		return $id;
 
     }
