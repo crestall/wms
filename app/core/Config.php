@@ -109,8 +109,8 @@ class Config{
             {
                 echo "<p>found $key in database</p>";
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
-                echo "<p> set ir to: ".Encryption::decryptStringBase64($sv)."</p>";
-                die();
+                echo "<p> set it to: ".Encryption::decryptStringBase64($sv)."</p>";
+                //die();
             }
         }
         die("didn't find $key in database");
