@@ -74,24 +74,6 @@ return array(
     "PAGINATION_DEFAULT_LIMIT" => 10,
 
     /*************************************************************************
-    * XERO API constants
-    **************************************************************************/
-    'BBXEROCONSUMERKEY'     => 'OUWBI1XCHJU9RHOJXTIBYFHNGHMV1R',
-    'BBXEROCONSUMERSECRET'  => 'NBFMLJLWPHWIRAUJL0CDCYL5KA2VE4',
-
-    /*************************************************************************
-    * BIG BOTTLE WOO COMMERCE API constants
-    **************************************************************************/
-    'BBWOOCONSUMERRKEY'     => 'ck_99e22a0fb0e0c80de41df7352f7b4fb4903bbed8',
-    'BBWOOCONSUMERSECRET'   => 'cs_c682973552f96637cd2d09d7a820343bdb7f2585',
-
-    /*************************************************************************
-    * NUCHEV WOO COMMERCE API constants
-    **************************************************************************/
-    'NUWOOCONSUMERRKEY'     => 'ck_4c48da8898e8135f6e360f028b91ce7f68a408de',
-    'NUWOOCONSUMERSECRET'   => 'cs_c41cd37db3ca0696419e7dd2d5a77a4e8536eaca',
-
-    /*************************************************************************
     * ONEPLATE WOO COMMERCE API constants
     **************************************************************************/
     'ONEPLATEWOOCONSUMERRKEY'     => 'ck_b9acaf372d2729a8e445916a79012b98f671b7e6',
