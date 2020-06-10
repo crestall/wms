@@ -16,13 +16,12 @@
     protected $API_KEY;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
-    public $vtester;
 
     const    API_SCHEME   = 'https://';
     const    API_HOST     = 'digitalapi.auspost.com.au';
     const    API_PORT     = 443;                            // ssl port
-    //const    API_BASE_URL = '/test/shipping/v1/';        // for production use, remove '/test'
-    const    API_BASE_URL = '/shipping/v1/';        // for production use, remove '/test'
+    //const    API_BASE_URL = '/test/shipping/v1/';         // for production use, remove '/test'
+    const    API_BASE_URL = '/shipping/v1/';                // for production use, remove '/test'
     const   HEADER_EOL = "\r\n";
 
     private $fSock;         // socket handle
@@ -33,13 +32,7 @@
         $this->controller   = $controller;
         $this->API_KEY      = Config::get('EPARCEL_API_KEY');
         $this->API_PWD      = Config::get('EPARCEL_API_PWD');
-        $this->vtester      = Config::tester();
         $this->ACCOUNT_NO   = Config::get('EPARCEL_ACCOUNT_NO');
-        echo "<p>Tester : ".$this->vtester."</p>";
-        echo "<p>API KEY ".$this->API_KEY." should be here</p>";
-        //echo "<p>API PWD * ".Config::get('EPARCEL_API_PWD')." should be here</p>";
-        echo "<p>ACCOUNT NUMBER ".$this->ACCOUNT_NO." should be here</p>";
-        die();
     }
 
     protected function createSocket()
