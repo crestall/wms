@@ -108,6 +108,10 @@ class Config{
                 echo "<p>Found $key - should return ".self::$config[$source][$key]."<p>";
                 return self::$config[$source][$key] ;
             }
+            else
+            {
+                echo "<p>Could not fine value for $key</p>";
+            }
         }
         return null;
     }
