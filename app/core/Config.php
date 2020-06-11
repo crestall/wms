@@ -81,7 +81,7 @@ class Config{
     private static function _get($key, $source){
 
         if (!isset(self::$config[$source])) {
-
+            echo "<p>Loading the config file into memory</p>";
             $config_file = APP . 'config/' . $source . '.php';
 
             if (!file_exists($config_file)) {
@@ -93,10 +93,12 @@ class Config{
 
         if(empty($key))
         {
+            echo "<p>Empty $key</p>";
             return self::$config[$source];
         }
         else if(isset(self::$config[$source][$key]))
         {
+            echo "<p>$key already set</p>";
             return self::$config[$source][$key];
         }
         else
