@@ -206,7 +206,8 @@ class Database {
 		{
 			$id = false;
 		}
-        echo "<p>Databse returning $id</p>";
+        echo "<p>SELECT `$field` FROM $table $where</p>";
+        echo "<pre>",print_r($params),"</pre>";
 		return $id;
 
     }
