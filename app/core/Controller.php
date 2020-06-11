@@ -148,21 +148,6 @@ class Controller {
     }
 
     /**
-     * Load the eParcel api location classes
-     *
-     * @param array $locations
-     */
-    public function loadHuntersLocations(array $locations)
-    {
-        foreach($locations as $location)
-        {
-            $class = "Hunters".$location;
-            $this->{$class} = new $class($this);
-            $this->{$class}->init();
-        }
-    }
-
-    /**
      * load the components by setting the component's name to a controller's property.
      *
      * @param array $components
