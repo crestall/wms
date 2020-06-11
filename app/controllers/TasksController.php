@@ -19,16 +19,9 @@ class TasksController extends Controller
     public function initialize(){
 
          $this->loadEparcelLocations([
-            'BigBottle',
             'Freedom',
-            'Nuchev'
-        ]);
-
-        $this->loadHuntersLocations([
-            '3KG',
-            'PLU',
-            'PAL',
-            'Test'
+            'Nuchev',
+            'TTAU'
         ]);
 
         $this->loadComponents([
@@ -36,9 +29,21 @@ class TasksController extends Controller
         ]);
     }
 
+    public function testTask()
+    {
+        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            Email::sendNewUserEmail('Mark Solly', 'mark@solly.com.au');
+        }
+    }
+
     public function sendClientReports()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
         {
             return $this->error(403);
         }
@@ -179,18 +184,6 @@ class TasksController extends Controller
         }
     }
 
-    public function bigBottleTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->woocommerce->getBBOrders();
-        }
-    }
-
     public function onePlateTask()
     {
         if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
@@ -203,87 +196,15 @@ class TasksController extends Controller
         }
     }
 
-    public function teamTimbuktuTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->shopify->getTeamTimbuktuOrders();
-        }
-    }
-
-    public function ndcTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->squarespace->getNatutralDistillingOrders();
-        }
-    }
-
     public function nuchevTask()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
         {
             return $this->error(403);
         }
         else
         {
             $this->woocommerce->getNuchevOrders();
-        }
-    }
-
-    public function noaTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->woocommerce->getNoaOrders();
-        }
-    }
-
-    public function ttTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->woocommerce->getTTOrders();
-        }
-    }
-
-    public function figureEightTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->emailordersparser->getFigure8Orders();
-        }
-    }
-
-    public function nuchevSampleTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->emailordersparser->getNuchevSamples();
         }
     }
 
