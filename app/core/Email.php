@@ -497,22 +497,39 @@
     public static function sendNewUserEmail($name, $email)
     {
         $mail = new PHPMailer();
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."new_user.html");
-        $replace_array = array("{NAME}");
-		$replace_with_array = array($name);
-        $body = str_replace($replace_array, $replace_with_array, $body);
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
-		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-		$mail->Subject = "Access Instructions For FSG WMS";
-		$mail->MsgHTML($body);
-        $mail->addAttachment(Config::get('EMAIL_ATTACHMENTS_PATH')."WMS Instructions.docx", 'wms_instructions.docx');
-        $mail->AddAddress($email, $name);
-        $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-        if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-            //throw new Exception("Email couldn't be sent ");
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."new_user.html");
+            $replace_array = array("{NAME}");
+		    $replace_with_array = array($name);
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->Subject = "Access Instructions For FSG WMS";
+    		$mail->AddAddress($email, $name);
+            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent to ". $name);
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
         }
+        //die('email');
+        return true;
     }
 
  }
