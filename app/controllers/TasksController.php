@@ -31,7 +31,7 @@ class TasksController extends Controller
 
     public function testTask()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
