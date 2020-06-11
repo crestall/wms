@@ -3472,7 +3472,7 @@ class FormController extends Controller {
         {
             if( $client_id == 0 )
             {
-                Form::setError('client_id', 'Please select a clieny');
+                Form::setError('client_id', 'Please select a client');
             }
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
