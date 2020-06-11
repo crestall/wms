@@ -49,7 +49,7 @@ return array(
      */
     "EMAIL_FROM"        => "FSGWMS@fsg.com.au",
     "EMAIL_FROM_NAME"   => "Film Shot Graphics Warehouse Management System",
-    "EMAIL_REPLY_TO"    => "FSGWMS@fsg.com.au", 
+    "EMAIL_REPLY_TO"    => "FSGWMS@fsg.com.au",
     "EMAIl_HOST"        => "smtp.office365.com",
     "EMAIL_PORT"        => 587,
 
@@ -410,7 +410,8 @@ return array(
             'user-roles'                =>  true,
             //'pickfaces'                 => true,
             'couriers'                  => true,
-            'edit-user-profile'     => false
+            'edit-user-profile'         => false,
+            'add-user'                  => false
 		),
         'financials'    =>  array(
             //'hunters-check' => true,
