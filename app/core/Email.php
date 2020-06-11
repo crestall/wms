@@ -512,6 +512,7 @@
 		    $replace_with_array = array($name);
     		$body = str_replace($replace_array, $replace_with_array, $body);
             $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
+            $mail->addAttachment(Config::get('EMAIL_ATTACHMENTS_PATH')."WMS Instructions.docx", 'wms_instructions.docx');
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
             $mail->Subject = "Access Instructions For FSG WMS";
     		$mail->AddAddress($email, $name);
