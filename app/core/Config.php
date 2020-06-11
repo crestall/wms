@@ -81,7 +81,7 @@ class Config{
     private static function _get($key, $source){
 
         if (!isset(self::$config[$source])) {
-            echo "<p>Loading the config file into memory</p>";
+            //echo "<p>Loading the config file into memory</p>";
             $config_file = APP . 'config/' . $source . '.php';
 
             if (!file_exists($config_file)) {
@@ -93,12 +93,12 @@ class Config{
 
         if(empty($key))
         {
-            echo "<p>Empty $key</p>";
+            //echo "<p>Empty $key</p>";
             return self::$config[$source];
         }
         else if(isset(self::$config[$source][$key]))
         {
-            echo "<p>$key already set</p>";
+            //echo "<p>$key already set</p>";
             return self::$config[$source][$key];
         }
         else
@@ -107,12 +107,12 @@ class Config{
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
-                echo "<p>Found $key - should return ".self::$config[$source][$key]."<p>";
+                //echo "<p>Found $key - should return ".self::$config[$source][$key]."<p>";
                 return self::$config[$source][$key] ;
             }
             else
             {
-                echo "<p>Could not fine value for $key</p>";
+                //echo "<p>Could not fine value for $key</p>";
             }
         }
         return null;
