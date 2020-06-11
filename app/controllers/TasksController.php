@@ -43,7 +43,7 @@ class TasksController extends Controller
 
     public function sendClientReports()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
@@ -186,7 +186,7 @@ class TasksController extends Controller
 
     public function onePlateTask()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
@@ -198,7 +198,7 @@ class TasksController extends Controller
 
     public function nuchevTask()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
