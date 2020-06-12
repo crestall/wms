@@ -205,7 +205,7 @@ class TasksController extends Controller
         else
         {
             $db = Database::openConnection();
-            $current_secret = Enryption::decryptStringBase64($db->queryValue('configuration', array('name' => 'COOKIE_SECRET_KEY'), 'value'));
+            $current_secret = Encryption::decryptStringBase64($db->queryValue('configuration', array('name' => 'COOKIE_SECRET_KEY'), 'value'));
             echo $current_secret;
         }
     }
