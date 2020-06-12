@@ -208,7 +208,7 @@ class TasksController extends Controller
             $current_secret = Encryption::decryptStringBase64($db->queryValue('configuration', array('name' => 'COOKIE_SECRET_KEY'), 'value'));
             $new_secret = Encryption::getRandomToken();
             //echo "new : ".$new_secret;
-            $db->updateDatabaseField('configuration', 'value', Encryption::encryptStringBase64($new_secret), 'COOKIE_SECRET_KEY', "name");
+            $db->updateDatabaseFields('configuration', array('value' => Encryption::encryptStringBase64($new_secret), 'date_modified' => time()), 'COOKIE_SECRET_KEY', "name");
         }
     }
 
