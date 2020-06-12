@@ -262,17 +262,24 @@ class Encryption{
      * @param  number $length - default value = 32
      * @return string
      */
-    public static function getRandomToken($length=32)
+    public static function getRandomToken($length = 32)
     {
-        $token = "";
-        $codeAlphabet  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $codeAlphabet .= "abcdefghijklmnopqrstuvwxyz";
-        $codeAlphabet .= "0123456789";
-        $codeAlphabet .= "!@#$%^&*()?/><";
-        for($i=0;$i<$length;$i++){
-            $token .= $codeAlphabet[self::crypto_rand_secure(0,strlen($codeAlphabet))];
+        if(!isset($length) || intval($length) <= 8 )
+        {
+          $length = 32;
         }
-        return $token;
+        if (function_exists('random_bytes'))
+        {
+            return bin2hex(random_bytes($length));
+        }
+        if (function_exists('mcrypt_create_iv'))
+        {
+            return bin2hex(mcrypt_create_iv($length, MCRYPT_DEV_URANDOM));
+        }
+        if (function_exists('openssl_random_pseudo_bytes'))
+        {
+            return bin2hex(openssl_random_pseudo_bytes($length));
+        }
     }
 
     /**
