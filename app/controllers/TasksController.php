@@ -196,6 +196,20 @@ class TasksController extends Controller
         }
     }
 
+    public function sessionSecretTask()
+    {
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $db = Database::openConnection();
+            $current_secret = Enryption::decryptStringBase64($db->queryValue('configuration', array('name' => 'COOKIE_SECRET_KEY'), 'value'));
+            echo $current_secret;
+        }
+    }
+
     public function nuchevTask()
     {
         if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
