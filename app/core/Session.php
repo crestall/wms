@@ -313,7 +313,7 @@ class Session{
 
         if($max_time + $stored_time <= time() || empty($csrf_token)){
             //$token = md5(uniqid(rand(), true));  not so secure
-            $token = Encrption::getRandomToken(16);
+            $token = Encryption::getRandomToken(16);
             $_SESSION["csrf_token"] = $token;
             $_SESSION["csrf_token_time"] = time();
         }
