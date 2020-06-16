@@ -56,6 +56,7 @@ $c = 1;
                                             </div>
                                         </div>
                                     </div>
+                                    <?php ++$c;?>
                                 <?php endforeach;?>
                             </div>
                         </div>
