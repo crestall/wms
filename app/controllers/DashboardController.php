@@ -26,7 +26,7 @@ class DashboardController extends Controller
         if($user_role == "admin" ||  $user_role == "warehouse")
         {
             $orders = $this->order->getCurrentOrders();
-            $store_orders = $this->order->getCurrentStoreOrders();
+            //$store_orders = $this->order->getCurrentStoreOrders();
         }
         /*
         elseif($user_role == 'solar admin')
