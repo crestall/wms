@@ -22,6 +22,11 @@ class FreedomMYOB extends MYOB
         $this->TAG = "Coventry Press";
     }
 
+    public function getDecryptedData($data)
+    {
+        return $this->decryptData($data);
+    }
+
     protected function encryptData($data)
     {
         $ivlen = openssl_cipher_iv_length($this->CYPHER);
