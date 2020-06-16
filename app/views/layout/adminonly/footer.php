@@ -10,6 +10,12 @@
 
                     }
                 },
+                'api-tester' :{
+                    init: function()
+                    {
+                        
+                    }
+                },
                 'add-sales-rep':{
                     init: function()
                     {
