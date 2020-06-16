@@ -129,6 +129,10 @@ class Controller {
             'Nuchev',
             'TTAU'
          ]);
+
+         $this->loadMYOBInstances([
+            'Freedom'
+         ]);
      }
 
     /**
@@ -142,6 +146,22 @@ class Controller {
         foreach($locations as $location)
         {
             $class = $location . "Eparcel";
+            $this->{$class} = new $class($this);
+            $this->{$class}->init();
+        }
+    }
+
+    /**
+     * Load the MYOB api instance classes
+     *
+     * @param array $locations
+     */
+    public function loadMYOBInstances(array $locations)
+    {
+        $this->MYOB = new MYOB($this);
+        foreach($locations as $location)
+        {
+            $class = $location . "MYOB";
             $this->{$class} = new $class($this);
             $this->{$class}->init();
         }
