@@ -38,7 +38,7 @@ $c = 1;
                             <div class="row">
                                 <?php foreach($orders as $o):
                                     $s = ($o['order_count'] > 1)? "s" : ""; ?>
-                                    <div class="col-lg-3">
+                                    <div class="col-m-3">
                                         <div class="panel panel-<?php echo $panel_classes[$c % count($panel_classes)];?>">
                                             <div class="panel-heading order-panel">
                                                 <h3 class="text-center"><?php echo $o['client_name'];?></h3>
