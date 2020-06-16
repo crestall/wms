@@ -81,10 +81,10 @@ $c = 1;
                     <div class="panel-body">
                         <div class="collapse in" id="client_activity">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-md-6">
                                     <div id="error_activity_chart"></div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-md-6">
                                     <div id="order_activity_chart"></div>
                                 </div>
                             </div>
