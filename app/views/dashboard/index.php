@@ -56,9 +56,6 @@ $c = 1;
                                             </div>
                                         </div>
                                     </div>
-                                    <?php if($c % 4 == 0):?>
-                                        </div><div class="row">
-                                    <?php endif;++$c;?>
                                 <?php endforeach;?>
                             </div>
                         </div>
