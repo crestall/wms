@@ -17,7 +17,7 @@
 
     protected $CYPHER;
     protected $KEY;
-    protected $TAG
+    protected $TAG;
 
 
     public function __construct($controller, $url = "", $username = "", $password = "")
