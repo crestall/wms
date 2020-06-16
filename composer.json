@@ -27,7 +27,7 @@
                 "app/core/components/",
                 "app/core/eparcel_accounts/",
                 "app/core/financial_apis/",
-                "app/core/financial_apis/MYOB_accounts/"
+                "app/core/financial_apis/MYOB_accounts/",
                 "app/models/",
                 "app/packaging/",
                 "app/utility/"
