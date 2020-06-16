@@ -1,6 +1,6 @@
 <?php
 $encryptedData = $freedomMYOB->callTask('getMYOBOrders',array());
-$invoices =  json_decode($freedomMYOB->decryptData($encryptedData),true);
+$invoices =  json_decode($freedomMYOB->getDecryptedData($encryptedData),true);
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
