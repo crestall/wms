@@ -428,7 +428,8 @@ return array(
             'dispatched-orders-updater' => false,
             'client-bay-fixer'  => true,
             'encrypt-some-shit' => false,
-            'update-configuration'  => true
+            'update-configuration'  => true,
+            'api-tester'    => true
         ),
     ),
     'WAREHOUSE_PAGES' => array(
