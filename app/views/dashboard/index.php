@@ -21,7 +21,7 @@ $c = 1;
         <?php //echo "<pre>",print_r($orders),"</pre>";die();?>
         <div class="row">
             <!-- unfulfilled orders -->
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
@@ -66,61 +66,7 @@ $c = 1;
                 </div>
             </div>
             <!-- unfulfilled orders -->
-            <!-- store orders -->
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-10 text-center">
-                                <h2>Latest Unfulfilled Store Order Counts </h2>
-                            </div>
-                            <div class="col-xs-2 text-right">
-                                 <a id="toggle_storeorders" data-toggle="collapse" href="#new_storeorders"><span class="fa arrow huge"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="collapse in" id="new_storeorders">
-                            <div class="row">
-                               <?php foreach($store_orders as $so):
-                                    $s = ($so['order_count'] > 1)? "s" : ""; ?>
-                                    <div class="col-lg-6">
-                                        <div class="panel panel-<?php echo $panel_classes[$c % count($panel_classes)];?>">
-                                            <div class="panel-heading order-panel">
-                                                <h3 class="text-center"><?php echo $so['client_name'];?></h3>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <div class="row">
-                                                    <div class="col-xs-8">
-                                                        <div><span class="huge"><?php echo $so['order_count'];?></span> Store Order<?php echo $s;?></div>
-                                                        <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-storeorders/client=<?php echo $so['client_id'];?>">Manage Store Orders</a></div>
-                                                    </div>
-                                                    <div class="col-xs-4">
-                                                        <i class="fas fa-truck fa-3x"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php if($c % 2 == 0):?>
-                                        </div><div class="row">
-                                    <?php endif;++$c;?>
-                                <?php endforeach;?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- store orders -->
         </div><!-- end 1st row -->
-        <div class="row"><!-- second row>
-            <div class="col-lg-6">
-                <?php //include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_solar_installs.php");?>
-            </div>
-            <div class="col-lg-6">
-                <?php //include(Config::get('VIEWS_PATH')."layout/page-includes/dashboard_service_jobs.php");?>
-            </div>
-        </div> <!-- end 2nd row -->
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
