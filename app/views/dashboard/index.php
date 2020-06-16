@@ -56,7 +56,7 @@ $c = 1;
                                             </div>
                                         </div>
                                     </div>
-                                    <?php if($c % 2 == 0):?>
+                                    <?php if($c % 3 == 0):?>
                                         </div><div class="row">
                                     <?php endif;++$c;?>
                                 <?php endforeach;?>
