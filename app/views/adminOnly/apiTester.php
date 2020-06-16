@@ -1,5 +1,5 @@
 <?php
-$encryptedData = $freedomMYOB->call('getMYOBOrders',array());
+$encryptedData = $freedomMYOB->callTask('getMYOBOrders',array());
 $invoices =  json_decode(decryptData($encryptedData),true);
 ?>
 <div id="page-wrapper">
