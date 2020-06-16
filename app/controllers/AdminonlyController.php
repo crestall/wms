@@ -102,6 +102,15 @@ class adminonlyController extends Controller
         ]);
     }
 
+    public function apiTester()
+    {
+        //add sensitive config data - passwords and keys data
+        Config::setJsConfig('curPage', "api-tester");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/apiTester.php.php', [
+            'page_title'            => "Test the APIs"
+        ]);
+    }
+
     public function sendTrackingEmails()
     {
         $db = Database::openConnection();
