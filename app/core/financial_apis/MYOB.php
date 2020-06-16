@@ -34,7 +34,7 @@
         $params['task'] = $task;
         //$params = http_build_query($params);
 
-        $c = curl_init($this->urlToController);
+        $c = curl_init($this->URL);
         curl_setopt ($c, CURLOPT_POSTFIELDS, $params);
         //echo  $this->username . ":" . $this->password;
         // setup the authentication
