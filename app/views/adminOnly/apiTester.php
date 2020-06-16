@@ -6,7 +6,7 @@ $r = 1;
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
     <div class="row">
         <div class="col-lg-12">
-            <h1>The Freedom MYOB API</h1>
+            <h2>The Freedom MYOB API</h2>
         </div>
     </div>
 </div>
