@@ -199,7 +199,7 @@ class FormController extends Controller {
                     //check for differences
                     if($stored_data['name'] != $reece_department_name)
                     {
-                        echo "<p>Will need to change {$stored_data['name']} to $reece_department_name - refer $line</p>"
+                        echo "<p>Will need to change {$stored_data['name']} to $reece_department_name - refer $line</p>";
                     }
                 }
                 else
@@ -207,6 +207,7 @@ class FormController extends Controller {
                     echo "<p>Will need to insert new department {$row[4]} from row: $line</p>";
                 }
                 ++$line;
+                echo "<hr/>";
             }
 
             die();
