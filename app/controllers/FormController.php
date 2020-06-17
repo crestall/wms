@@ -141,7 +141,7 @@ class FormController extends Controller {
             {
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                echo "<pre>",print_r($csv_array),"</pre>"; //die();
+                //echo "<pre>",print_r($csv_array),"</pre>"; //die();
             }
             else
             {
