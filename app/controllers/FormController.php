@@ -213,7 +213,7 @@ class FormController extends Controller {
                         $department_array['reece_id']   = $reece_department_id;
                         $department_array['name']       = $reece_department_name;
                     }
-                    prnt_r($department_array);
+                    print_r($department_array);
                     //echo "<p>{$row[8]}<br/>$reece_department_id</p>";
                 }
                 if(!$this->dataSubbed($row[9]))
