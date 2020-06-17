@@ -142,7 +142,7 @@ class FormController extends Controller {
             {
                 $tmp_name = $_FILES['reece_csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                echo "<pre>",print_r($csv_array),"</pre>"; die();
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
             }
             else
             {
@@ -178,58 +178,35 @@ class FormController extends Controller {
             $skip_first = isset($header_row);
             $line = 1;
             $departments = array();
+            $feedback_string = "<ul>";
             foreach($csv_array as $row)
             {
                 $reece_department_id = 0;
-                $department_array = array();
-                $data_errors = false;
                 if($skip_first)
                 {
                     $skip_first = false;
                     ++$line;
                     continue;
                 }
-                if(!$this->dataSubbed($row[8]))
+                //get Department ID
+                $array = explode(" ",$row[4], 2);
+                $reece_department_id =(int)$array[0];
+                $reece_department_name = $array[1];
+                $stored_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id)
+                if(count($stored_data))
                 {
-                    $data_errors = true;
-                    $data_error_string .= "<li>A Department Name is required on line: $line</li>";
+                    echo "<pre>",print_r($stored_data),"</pre>";
                 }
                 else
                 {
-                    //Get the Department Name and ID
-                    $array = explode(" ",$row[8], 2);
-                    $reece_department_id =(int)$array[0];
-                    $reece_department_name = $array[1];
-                    if($reece_department_id === 0)
-                    {
-                        $data_errors = true;
-                        $data_error_string .= "<li>A Department ID could not be determined from the name: $line</li>";
-                    }
-                    else
-                    {
-                        $department_array['reece_id']   = $reece_department_id;
-                        $department_array['name']       = $reece_department_name;
-                    }
+                    echo "<p>Will insert new department {$row[4]}</p>";
                 }
-                if(!$this->dataSubbed($row[9]))
-                {
-                    $data_errors = true;
-                    $data_error_string .= "<li>A Department Address is required on line: $line</li>";
-                }
-                else
-                {
-
-                    $department_array['stored_address'] = $row[9];
-                }
-                $department_array['phone'] = $row[6];
-                $department_array['fax'] = $row[7];
-                if($data_errors)
-                {
-                    $import_departments = false;
-                }
-                ++$line;
-                $departments[] = $department_array;
             }
+
+            die();
+
+
+
             if($import_departments)
             {
                 $this->reecedepartment->addUpdateDepartments($departments);
