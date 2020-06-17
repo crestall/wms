@@ -179,6 +179,7 @@ class FormController extends Controller {
             $line = 1;
             $data_error_string = "<ul>";
             $import_departments = true;
+            $departments = array();
             foreach($csv_array as $row)
             {
                 $reece_department_id = 0;
@@ -197,10 +198,8 @@ class FormController extends Controller {
                 }
                 else
                 {
-                    //Get the Department ID
+                    //Get the Department Name and ID
                     $array = explode(" ",$row[8], 2);
-                    //print_r($array);
-                    //continue;
                     $reece_department_id =(int)$array[0];
                     $reece_department_name = $array[1];
                     if($reece_department_id === 0)
@@ -213,22 +212,30 @@ class FormController extends Controller {
                         $department_array['reece_id']   = $reece_department_id;
                         $department_array['name']       = $reece_department_name;
                     }
-                    print_r($department_array);
-                    //echo "<p>{$row[8]}<br/>$reece_department_id</p>";
                 }
                 if(!$this->dataSubbed($row[9]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Department Address is required on line: $line</li>";
                 }
+                else
+                {
+                    //explode the address
+                    //list($steet_address, $suburb, $state, $postcode) = explode();
+                    $split = explode(" ",$row[9]);
+                    $country = array_pop($split);
+                    $department_array['country'] = $country;
+                }
                 if($data_errors)
                 {
                     $import_departments = false;
                 }
                 ++$line;
+                $departments[] = $department_array;
             }
             if($import_departments)
             {
+                echo "<pre>",print_r($departments),"</pre>";
                 die('will import departments');
                 //Do
             }
