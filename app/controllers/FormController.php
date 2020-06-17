@@ -198,11 +198,7 @@ class FormController extends Controller {
                     $data_errors = true;
                     $data_error_string .= "<li>A Department Address is required on line: $line</li>";
                 }
-                if(!$data_errors)
-                {
-                    die('no data errors');
-                }
-                else
+                if($data_errors)
                 {
                     $import_departments = false;
                 }
@@ -211,6 +207,7 @@ class FormController extends Controller {
             if($import_departments)
             {
                 die('will import departments');
+                //Do
             }
             else
             {
