@@ -30,7 +30,7 @@ class Reecedepartment extends Model{
             if($updator = $db->queryIdByFieldNumber($this->table, 'reece_id', $d['reece_id']))
             {
                 //update the table
-                $db->updateDatabaseFields($this->table, $d, $updator)
+                $db->updateDatabaseFields($this->table, $d, $updator);
             }
             else
             {
