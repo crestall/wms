@@ -3,8 +3,13 @@
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
     <div class="row">
+        <div class="col-md-12">
+            <h2>Import Current Reece Departments</h2>
+        </div>
+    </div>
+    <div class="row">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="reece-department-upload" method="post" action="/form/procReeceDepartmentUpload" enctype="multipart/form-data">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Current Data Spreadsheet</label>
