@@ -38,6 +38,11 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <h2>Check New Reece Data For Department Changes</h2>
         </div>
     </div>
