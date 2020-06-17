@@ -19,7 +19,7 @@ class adminonlyController extends Controller
         Config::setJsConfig('curPage', "reece-data-tidy");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/reeceDataTidy.php', [
             'page_title'    =>  "Check and Clean Reece Data"
-        ])
+        ]);
     }
 
     public function clientBayFixer()
