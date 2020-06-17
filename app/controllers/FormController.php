@@ -173,252 +173,51 @@ class FormController extends Controller {
             [9] Full address
             [10] Full Address Repeat
             */
-            die('all good');
-            $imported_order_count = 0;
-            $imported_orders = array();
+            //die('all good');
+            $imported_dept_count = 0;
             $skip_first = isset($header_row);
             $line = 1;
-            $data_error_string = $item_error_string = "<ul>";
-            $import_orders = true;
+            $data_error_string = "<ul>";
+            $import_departments = true;
             foreach($csv_array as $row)
             {
                 $data_errors = false;
                 if($skip_first)
                 {
                     $skip_first = false;
+                    ++$line;
                     continue;
-                }
-                if(!empty($row[11]))
-                {
-                    if(!$this->emailValid($row[11]))
-                    {
-                        $data_errors = true;
-                        $data_error_string .= "<li>Invalid tracking email on line: $line</li>";
-                    }
-                }
-                if(!$this->dataSubbed($row[3]))
-                {
-                    $data_errors = true;
-                    $data_error_string .= "<li>A Ship To Name is required on line: $line</li>";
-                }
-                if(!$this->dataSubbed($row[4]))
-                {
-                    $data_errors = true;
-                    $data_error_string .= "<li>A Ship To Address is required on line: $line</li>";
-                }
-                if(!$this->dataSubbed($row[6]))
-                {
-                    $data_errors = true;
-                    $data_error_string .= "<li>A Ship To Suburb/City is required on line: $line</li>";
-                }
-                if(!$this->dataSubbed($row[7]))
-                {
-                    $data_errors = true;
-                    $data_error_string .= "<li>A Ship To State is required on line: $line</li>";
                 }
                 if(!$this->dataSubbed($row[8]))
                 {
                     $data_errors = true;
-                    $data_error_string .= "<li>A Ship To Postcode is required on line: $line</li>";
+                    $data_error_string .= "<li>A Department Name is required on line: $line</li>";
                 }
                 if(!$this->dataSubbed($row[9]))
                 {
                     $data_errors = true;
-                    $data_error_string .= "<li>A Ship To Country is required on line: $line</li>";
-                }
-                elseif(strlen($row[9]) > 2)
-                {
-                    $data_errors = true;
-                    $data_error_string .= "<li>Please use the two letter ISO code for countries on line: $line</li>";
+                    $data_error_string .= "<li>A Department Address is required on line: $line</li>";
                 }
                 if(!$data_errors)
                 {
-                    $order = array(
-                        'error_string'          => '',
-                        'items'                 => array(),
-                        'ref2'                  => '',
-                        'client_order_id'       => $row[0],
-                        'customer_order_id'     => $row[1],
-                        'errors'                => 0,
-                        'tracking_email'        => $row[11],
-                        'ship_to'               => $row[3],
-                        'company_name'          => $row[2],
-                        'date_ordered'          => time(),
-                        'status_id'             => $this->controller->order->ordered_id,
-                        'eparcel_express'       => 0,
-                        'signature_req'         => 0,
-                        'contact_phone'         => $row[10],
-                        'import_error'          => false,
-                        'import_error_string'   => '',
-                        'weight'                => 0,
-                        'instructions'          => $row[13],
-                        '3pl_comments'          => $row[15]
-                    );
-                    //the items
-                    $items = array();
-                    $item_error = false;
-                    $i = 16;
-                    do
-                    {
-                        $sku = $row[$i];
-                        ++$i;
-                        $qty = $row[$i];
-                        ++$i;
-                        $whole_pallet = false;
-                        if(Session::getUserClientId() != 72)   //SELECTRONIC think everything is a whole pallet
-                            $whole_pallet = ($row[$i] == 1);
-                        $item = $this->item->getItemBySku($sku);
-                        if(empty($item))
-                        {
-                            $item_error = true;
-                            $import_orders = false;
-                            $data_error_string .= "<li>$sku could not be matched to any items in cell $i on row $line</li>";
-                        }
-                        else
-                        {
-                            $items[] = array(
-                                'qty'           =>  $qty,
-                                'id'            =>  $item['id'],
-                                'whole_pallet'  => $whole_pallet
-                            );
-                        }
-                        ++$i;
-                    }
-                    while(!empty($row[$i]));
-                    //$orders_items = array();
-                    if(!$item_error)
-                    {
-                        $order['items'] = $items;
-                        $orders_items[$imported_order_count] = $items;
-                        //validate address
-                        $ad = array(
-                            'address'   => $row[4],
-                            'address_2' => $row[5],
-                            'suburb'    => $row[6],
-                            'state'     => $row[7],
-                            'postcode'  => $row[8],
-                            'country'   => $row[9]
-                        );
-                        if($ad['country'] == "AU")
-                        {
-                            if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40 || strlen($order['company_name'])  > 40)
-                            {
-                                $order['errors'] = 1;
-                                $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
-                            }
-                            $aResponse = $this->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
-                            //echo "<pre>",print_r($aResponse),"</pre>";
-                            if(isset($aResponse['errors']))
-                            {
-                                $order['errors'] = 1;
-                                foreach($aResponse['errors'] as $e)
-                                {
-                                    $order['error_string'] .= "<p>{$e['message']}</p>";
-                                }
-                            }
-                            elseif($aResponse['found'] === false)
-                            {
-                                $order['errors'] = 1;
-                                $order['error_string'] .= "<p>Postcode does not match suburb or state</p>";
-                            }
-                        }
-                        else
-                        {
-                            if( strlen( $ad['address'] ) > 50 || strlen( $ad['address_2'] ) > 50 )
-                            {
-                                $order['errors'] = 1;
-                                $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
-                            }
-                            if( strlen($order['ship_to']) > 30 || strlen($order['company_name']) > 30 )
-                            {
-                                $order['errors'] = 1;
-                                $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
-                            }
-                        }
-                        if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $ad['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $ad['address'])))
-                        {
-                            $order['errors'] = 1;
-                            $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
-                        }
-                        $order = array_merge($order, $ad);
-                        $imported_orders[$imported_order_count] = $order;
-                        ++$imported_order_count;
-                    }
-                    else
-                    {
-                        $import_orders = false;
-                    }
+                    die('no data errors');
                 }
                 else
                 {
-                    $import_orders = false;
+                    $import_departments = false;
                 }
                 ++$line;
             }
-            if($import_orders)
+            if($import_departments)
             {
-                $all_items = $this->allocations->createOrderItemsArray($orders_items);
-                //echo "<pre>",print_r($orders_items),"</pre>";die();
-                $item_error = false;
-                $error_string = "";
-                foreach($all_items as $oind => $order_items)
-                {
-                    foreach($order_items as $item)
-                    {
-                        if($item['item_error'])
-                        {
-                            $import_orders = false;
-                            $data_error_string .= "<li>".$item['item_error_string']." for order {$imported_orders[$oind]['client_order_id']}</li>";
-                        }
-                    }
-                }
-                $data_error_string .= "</ul>";
-
-                if($import_orders)
-                {
-                    Session::set('feedback', "<h2><i class='far fa-check-circle'></i>$imported_order_count Orders Have Been Successfully Imported</h2>");
-                    foreach($imported_orders as $oind => $o)
-                    {
-                        $vals = array(
-                            'client_order_id'       => $o['client_order_id'],
-                            'customer_order_id'     => $o['customer_order_id'],
-                            'client_id'             => Session::getUserClientId(),
-                            'deliver_to'            => $o['ship_to'],
-                            'company_name'          => $o['company_name'],
-                            'date_ordered'          => $o['date_ordered'],
-                            'tracking_email'        => $o['tracking_email'],
-                            'weight'                => $o['weight'],
-                            'delivery_instructions' => $o['instructions'],
-                            '3pl_comments'          => $o['3pl_comments'],
-                            'errors'                => $o['errors'],
-                            'error_string'          => $o['error_string'],
-                            'address'               => $o['address'],
-                            'address2'              => $o['address_2'],
-                            'state'                 => $o['state'],
-                            'suburb'                => $o['suburb'],
-                            'postcode'              => $o['postcode'],
-                            'country'               => $o['country'],
-                            'contact_phone'         => $o['contact_phone']
-                        );
-                        if($o['signature_req'] == 1) $vals['signature_req'] = 1;
-                        if($o['eparcel_express'] == 1) $vals['eparcel_express'] = 1;
-                        //echo "<pre>",print_r($all_items),"</pre>";die();
-                        $itp = array($all_items[$oind]);
-                        $order_number = $this->controller->order->addOrder($vals, $itp);
-                        $_SESSION['feedback'] .= "<p>$order_number has been created</p>";
-                    }
-                }
-                else
-                {
-                    Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Imported</h2><p>Reasons are listed below</p>$data_error_string");
-                }
+                die('will import departments')
             }
             else
             {
-                Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Imported</h2><p>Reasons are listed below</p>$data_error_string");
+                Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Departments Could Not Be Imported</h2><p>Reasons are listed below</p>$data_error_string");
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/bulk-upload-orders");
+        return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
     }
 
     public function procEncryptSomeShit()
