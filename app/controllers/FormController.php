@@ -363,8 +363,8 @@ class FormController extends Controller {
                 }
                 else
                 {
-
-                    $department_array['stored_address'] = $row[9];
+                    //clean and trim the department
+                    $department_array['stored_address'] = Utility::deepTrim($row[9]);
                 }
                 $department_array['phone'] = $row[6];
                 $department_array['fax'] = $row[7];

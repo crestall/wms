@@ -347,4 +347,9 @@ class Utility{
             return $data;
         }
     }
+
+    public static function deepTrim($string)
+    {
+        return trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $string)));    
+    }
  }
