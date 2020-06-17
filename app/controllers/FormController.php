@@ -200,7 +200,7 @@ class FormController extends Controller {
                     //Get the Department ID
                     $array = explode($row[8], " ", 2);
                     $reece_department_id =(int)$array[0];
-                    $reece_department_name) = $array[1];
+                    $reece_department_name = $array[1];
                     if($reece_department_id === 0)
                     {
                         $data_errors = true;
