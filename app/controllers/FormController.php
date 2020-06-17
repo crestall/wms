@@ -196,7 +196,7 @@ class FormController extends Controller {
                 $stored_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id);
                 if($stored_data)
                 {
-                    echo "Already Stored<pre>",print_r($stored_data),"</pre>";
+                    //echo "Already Stored<pre>",print_r($stored_data),"</pre>";
                     //check for differences
                     //Department Name
                     if($stored_data['name'] != $reece_department_name)
