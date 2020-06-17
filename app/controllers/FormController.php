@@ -199,8 +199,9 @@ class FormController extends Controller {
                 }
                 else
                 {
-                    echo "<p>Will insert new department {$row[4]}</p>";
+                    echo "<p>Will need to insert new department {$row[4]} form row: $line</p>";
                 }
+                ++$line;
             }
 
             die();
