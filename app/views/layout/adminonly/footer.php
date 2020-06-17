@@ -25,6 +25,12 @@
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and storing data...</h2></div>' });
                             }
                         });
+                        $('form#reece-supplied-data-upload-department').submit(function(){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and checking the data...</h2></div>' });
+                            }
+                        });
                     }
                 },
                 'add-sales-rep':{
