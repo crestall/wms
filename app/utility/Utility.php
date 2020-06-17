@@ -350,6 +350,28 @@ class Utility{
 
     public static function deepTrim($string)
     {
-        return trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $string)));    
+        return trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $string)));
+    }
+
+    public static function streetAbbreviations($string)
+    {
+        $str = strtolower($string);
+        $list = array(
+            'ave'  => 'avenue',
+            'blvd' => 'boulevard',
+            'cir'  => 'circle',
+            'ct'   => 'court',
+            'dv'    => 'drive',
+            'expy' => 'expressway',
+            'fwy'  => 'freeway',
+            'hwy'   => 'highway',
+            'ln'   => 'lane',
+            'pky'  => 'parkway',
+            'rd'   => 'road',
+            'sq'   => 'square',
+            'st'   => 'street',
+            'tpke' => 'turnpike',
+        );
+        return ucwords(str_ireplace(array_values($list), array_keys($list), $str));
     }
  }

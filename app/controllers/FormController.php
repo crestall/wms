@@ -214,7 +214,7 @@ class FormController extends Controller {
                         {
                             $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
                         }
-                        $address = $row[5]." ".$row[6]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." New Zealand";
+                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." New Zealand";
                     }
                     else
                     {
@@ -226,7 +226,7 @@ class FormController extends Controller {
                         {
                             $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
                         }
-                        $address = $row[5]." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
+                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
                     }
                     if($stored_data['phone'] != $phone)
                     {
@@ -236,7 +236,7 @@ class FormController extends Controller {
                     {
                         echo "<p>Will need to change FAX {$stored_data['fax']} to $fax - refer row:$line</p>";
                     }
-                    if(trim($stored_data['stored_address']) != trim($address))
+                    if(trim(strtolower($stored_data['stored_address'])) != trim(strtolower($address)))
                     {
                         echo "<p>Will need to change ADDRESS {$stored_data['stored_address']} to $address - refer row:$line</p>";
                     }
