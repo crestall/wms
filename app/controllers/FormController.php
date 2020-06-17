@@ -181,6 +181,7 @@ class FormController extends Controller {
             $import_departments = true;
             foreach($csv_array as $row)
             {
+                $reece_department_id = 0;
                 $data_errors = false;
                 if($skip_first)
                 {
@@ -192,6 +193,11 @@ class FormController extends Controller {
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Department Name is required on line: $line</li>";
+                }
+                else
+                {
+                    //Get the Department ID
+                    echo "<p>{$row[8]}</p>";
                 }
                 if(!$this->dataSubbed($row[9]))
                 {
