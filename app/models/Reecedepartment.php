@@ -9,6 +9,7 @@
     FUNCTIONS
 
     addDepartment($data)
+    addUpdateDepartments(array $departments)
 
   */
 
@@ -41,6 +42,11 @@ class Reecedepartment extends Model{
         return true;
     }
 
+    public function getDepartmentByReeceId($reece_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryRow("SELECT * FROM {$this->table} WHERE reece_id = :reece_id", array('reece_id' => $reece_id)); 
+    }
 
 }
 ?>

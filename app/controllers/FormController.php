@@ -161,26 +161,22 @@ class FormController extends Controller {
         }
         else
         {
-            die();
             /*
-            [0] Contact Name
-            [1] First Name
-            [2] Last Name
-            [3] Job Title
-            [4] Contact Email
-            [5] Mobile
-            [6] Phone
-            [7] Fax
-            [8] Department name - includes Reece Department ID
-            [9] Full address
-            [10] Full Address Repeat
+            [0] Employee ID
+            [1] Employee Name
+            [2] Job Title
+            [3] Email
+            [4] Department Name - includes Reece Department ID
+            [5] Street Address
+            [6] Suburb/City
+            [7] State - includes NZ (did'nt know it was an Australian State!)
+            [8] Postcode
+            [9] Mobile number - needs to be formatted
+            [10] telephone  - needs to be formatted
+            [11] fax - needs to be formatted
             */
-            //die('all good');
-            $imported_dept_count = 0;
             $skip_first = isset($header_row);
             $line = 1;
-            $data_error_string = "<ul>";
-            $import_departments = true;
             $departments = array();
             foreach($csv_array as $row)
             {
