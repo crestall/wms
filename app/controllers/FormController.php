@@ -196,7 +196,7 @@ class FormController extends Controller {
                 }
                 else
                 {
-                    $reece_department_id =  strtok($row[8], " ");
+                    $reece_department_id =  (int)strtok($row[8], " ");
                     //Get the Department ID
                     echo "<p>{$row[8]}<br/>$reece_department_id</p>";
                 }
