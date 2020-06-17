@@ -210,7 +210,7 @@ class FormController extends Controller {
             }
             if($import_departments)
             {
-                die('will import departments')
+                die('will import departments');
             }
             else
             {
