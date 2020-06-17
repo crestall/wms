@@ -5,7 +5,7 @@
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
     <div class="row">
         <div class="col-md-12">
-            <h2>Import Current Reece Departments</h2>
+            <h2>Import Currently Stored Reece Departments</h2>
         </div>
     </div>
     <div class="row">
@@ -35,5 +35,10 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Check New Reece Data For Department Changes</h2>
+        </div>
     </div>
 </div>
