@@ -235,7 +235,7 @@ class FormController extends Controller {
                     $city = array_pop($split);
                     $department_array['city'] = $city;
                     $street_address = array_pop($split);
-                    $department_array['street_address'] = $steet_address;
+                    $department_array['street_address'] = $street_address;
                 }
                 if($data_errors)
                 {
