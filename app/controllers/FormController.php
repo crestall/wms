@@ -175,7 +175,7 @@ class FormController extends Controller {
             [10] telephone  - needs to be formatted
             [11] fax - needs to be formatted
             */
-            $skip_first = isset($header_row);
+            $skip_first = isset($reece_header_row);
             $line = 1;
             $departments = array();
             $feedback_string = "<ul>";
