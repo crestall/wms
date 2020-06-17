@@ -196,9 +196,15 @@ class FormController extends Controller {
                 }
                 else
                 {
-                    $reece_department_id =  (int)strtok($row[8], " ");
                     //Get the Department ID
-                    echo "<p>{$row[8]}<br/>$reece_department_id</p>";
+                    $reece_department_id =  (int)strtok($row[8], " ");
+                    if($reece_department_id === 0)
+                    {
+                        $data_errors = true;
+                        $data_error_string .= "<li>A Department ID could not be determined from the name: $line</li>";
+                    }
+
+                    //echo "<p>{$row[8]}<br/>$reece_department_id</p>";
                 }
                 if(!$this->dataSubbed($row[9]))
                 {
