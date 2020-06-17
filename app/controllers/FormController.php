@@ -196,8 +196,9 @@ class FormController extends Controller {
                 }
                 else
                 {
+                    $reece_department_id =  strtok($row[8], " ");
                     //Get the Department ID
-                    echo "<p>{$row[8]}</p>";
+                    echo "<p>{$row[8]}<br/>$reece_department_id</p>";
                 }
                 if(!$this->dataSubbed($row[9]))
                 {
