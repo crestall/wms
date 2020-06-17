@@ -188,6 +188,8 @@ class FormController extends Controller {
                     ++$line;
                     continue;
                 }
+                //None Required Fields
+                $phone = $fax = "";
                 //get Department ID
                 $array = explode(" ",$row[4], 2);
                 $reece_department_id =(int)$array[0];
@@ -217,7 +219,7 @@ class FormController extends Controller {
                             $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
                         }
                     }
-                    echo "<p>Phone formatted; {$row[10]} becaom $phone</p>";
+                    echo "<p>Phone formatted; {$row[10]} became $phone</p>";
 
                 }
                 else
