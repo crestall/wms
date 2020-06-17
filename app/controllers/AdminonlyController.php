@@ -14,6 +14,14 @@ class adminonlyController extends Controller
         parent::beforeAction();
     }
 
+    public function reeceDataTidy()
+    {
+        Config::setJsConfig('curPage', "reece-data-tidy");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/reeceDataTidy.php', [
+            'page_title'    =>  "Check and Clean Reece Data"
+        ])
+    }
+
     public function clientBayFixer()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
