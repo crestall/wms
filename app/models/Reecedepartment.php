@@ -22,6 +22,25 @@ class Reecedepartment extends Model{
         return true;
     }
 
+    public function addUpdateDepartments(array $departments)
+    {
+        $db = Database::openConnection();
+        foreach($departments as $d)
+        {
+            if($updator = $db->queryIdByFieldNumber($this->table, 'reece_id', $d['reece_id']))
+            {
+                //update the table
+                $db->updateDatabaseFields($this->table, $d, $updator)
+            }
+            else
+            {
+                //enter new value
+                $db->insertQuery($this->table, $d);
+            }
+        }
+        return true;
+    }
+
 
 }
 ?>
