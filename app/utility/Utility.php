@@ -361,7 +361,7 @@ class Utility{
             'blvd' => 'boulevard',
             'cir'  => 'circle',
             'ct'   => 'court',
-            'dr'    => 'drive'
+            'dr'    => 'drive',
             'expy' => 'expressway',
             'fwy'  => 'freeway',
             'hwy'   => 'highway',
