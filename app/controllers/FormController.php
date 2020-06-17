@@ -202,7 +202,7 @@ class FormController extends Controller {
                     //Department Name
                     if($stored_data['name'] != $reece_department_name)
                     {
-                        echo "<p>Will need to change {$stored_data['name']} to $reece_department_name - refer row:$line</p>";
+                        echo "<p>Will need to change NAME {$stored_data['name']} to $reece_department_name - refer row:$line</p>";
                     }
                     //Phone
                     if($row[7] == "NZ")
@@ -219,7 +219,10 @@ class FormController extends Controller {
                             $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
                         }
                     }
-                    echo "<p>Phone formatted; {$row[10]} became $phone</p>";
+                    if($stored_data['phone'] != $phone)
+                    {
+                        echo "<p>Will need to change PHONE {$stored_data['phone']} to $phone - refer row:$line</p>";
+                    }
 
                 }
                 else
