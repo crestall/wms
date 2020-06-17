@@ -192,7 +192,7 @@ class FormController extends Controller {
                 $array = explode(" ",$row[4], 2);
                 $reece_department_id =(int)$array[0];
                 $reece_department_name = $array[1];
-                $stored_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id)
+                $stored_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id);
                 if(count($stored_data))
                 {
                     echo "<pre>",print_r($stored_data),"</pre>";
