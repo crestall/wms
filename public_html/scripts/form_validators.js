@@ -757,13 +757,13 @@ $(document).ready(function() {
     ///////////////////////////////////////////////////////////////////////////////
     $("#reece-supplied-data-upload-department").validate({
     	rules:{
-    		csv_file:{
+    		reece_csv_file:{
     			extension: "csv",
                 required: true
     		},
     	},
 		messages:{
-			csv_file:{
+			reece_csv_file:{
 				extension: "Only upload csv files here"
 			}
 		}
