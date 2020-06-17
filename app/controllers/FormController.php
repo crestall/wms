@@ -182,6 +182,7 @@ class FormController extends Controller {
             foreach($csv_array as $row)
             {
                 $reece_department_id = 0;
+                $department_array = array();
                 $data_errors = false;
                 if($skip_first)
                 {
@@ -197,13 +198,19 @@ class FormController extends Controller {
                 else
                 {
                     //Get the Department ID
-                    $reece_department_id =  (int)strtok($row[8], " ");
+                    list($reece_department_id, $reece_department_name) =  explode($row[8], " ", 2);
+                    (int)$reece_department_id;
                     if($reece_department_id === 0)
                     {
                         $data_errors = true;
                         $data_error_string .= "<li>A Department ID could not be determined from the name: $line</li>";
                     }
-
+                    else
+                    {
+                        $department_array['reece_id']   = $reece_department_id;
+                        $department_array['name']       = $reece_department_name;
+                    }
+                    prnt_r($departmet_array);
                     //echo "<p>{$row[8]}<br/>$reece_department_id</p>";
                 }
                 if(!$this->dataSubbed($row[9]))
