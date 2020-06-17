@@ -204,12 +204,16 @@ class FormController extends Controller {
                     {
                         echo "<p>Will need to change NAME {$stored_data['name']} to $reece_department_name - refer row:$line</p>";
                     }
-                    //Phone
+                    //Phone and fax
                     if($row[7] == "NZ")
                     {
                         if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[10],  $matches ) )
                         {
                             $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+                        }
+                        if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[11],  $matches ) )
+                        {
+                            $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
                         }
                     }
                     else
@@ -218,10 +222,18 @@ class FormController extends Controller {
                         {
                             $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
                         }
+                        if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $row[11],  $matches ) )
+                        {
+                            $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+                        }
                     }
                     if($stored_data['phone'] != $phone)
                     {
                         echo "<p>Will need to change PHONE {$stored_data['phone']} to $phone - refer row:$line</p>";
+                    }
+                    if($stored_data['fax'] != $fax)
+                    {
+                        echo "<p>Will need to change FAX {$stored_data['fax']} to $fax - refer row:$line</p>";
                     }
 
                 }
