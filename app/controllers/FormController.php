@@ -235,7 +235,7 @@ class FormController extends Controller {
             if($import_departments)
             {
                 $this->reecedepartment->addUpdateDepartments($departments);
-                Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Encryption is complete</h2><p>All Values have been inserted");
+                Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Department Import is Complete</h2><p>All Values have been inserted");
             }
             else
             {
