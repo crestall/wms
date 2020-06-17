@@ -141,7 +141,7 @@ class FormController extends Controller {
             {
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                echo "<pre>",print_r($csv_array),"</pre>"; die();
+                echo "<pre>",print_r($csv_array),"</pre>"; //die();
             }
             else
             {
@@ -161,7 +161,17 @@ class FormController extends Controller {
         else
         {
             /*
-
+            [0] Contact Name
+            [1] First Name
+            [2] Last Name
+            [3] Job Title
+            [4] Contact Email
+            [5] Mobile
+            [6] Phone
+            [7] Fax
+            [8] Department name - includes Reece Department ID
+            [9] Full address
+            [10] Full Address Repeat
             */
             die('all good');
             $imported_order_count = 0;
