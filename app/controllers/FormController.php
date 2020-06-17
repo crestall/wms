@@ -197,10 +197,28 @@ class FormController extends Controller {
                 {
                     echo "Already Stored<pre>",print_r($stored_data),"</pre>";
                     //check for differences
+                    //Department Name
                     if($stored_data['name'] != $reece_department_name)
                     {
-                        echo "<p>Will need to change {$stored_data['name']} to $reece_department_name - refer $line</p>";
+                        echo "<p>Will need to change {$stored_data['name']} to $reece_department_name - refer row:$line</p>";
                     }
+                    //Phone
+                    if($row[7] == "NZ")
+                    {
+                        if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[10],  $matches ) )
+                        {
+                            $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+                        }
+                    }
+                    else
+                    {
+                        if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $row[10],  $matches ) )
+                        {
+                            $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+                        }
+                    }
+                    echo "<p>Phone formatted; {$row[10]} becaom $phone</p>";
+
                 }
                 else
                 {
