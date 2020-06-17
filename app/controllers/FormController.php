@@ -223,6 +223,8 @@ class FormController extends Controller {
 
                     $department_array['stored_address'] = $row[9];
                 }
+                $department_array['phone'] = $row[6];
+                $department_array['fax'] = $row[7];
                 if($data_errors)
                 {
                     $import_departments = false;
