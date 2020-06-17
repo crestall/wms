@@ -198,7 +198,7 @@ class FormController extends Controller {
                 else
                 {
                     //Get the Department ID
-                    $array = explode($row[8], " ", 2);
+                    $array = explode(" ",$row[8], 2);
                     print_r($array);
                     continue;
                     $reece_department_id =(int)$array[0];
