@@ -220,22 +220,8 @@ class FormController extends Controller {
                 }
                 else
                 {
-                    //explode the address
-                    //list($steet_address, $suburb, $state, $postcode) = explode();
-                    $split = explode(" ",$row[9]);
-                    $country = array_pop($split);
-                    $department_array['country'] = $country;
-                    $postcode = array_pop($split);
-                    $department_array['postcode'] = $postcode;
-                    if($country == "AU")
-                    {
-                        $state = array_pop($split);
-                        $department_array['state'] = $state;
-                    }
-                    $city = array_pop($split);
-                    $department_array['city'] = $city;
-                    $street_address = array_pop($split);
-                    $department_array['street_address'] = $street_address;
+
+                    $department_array['stored_address'] = $row[9];
                 }
                 if($data_errors)
                 {
