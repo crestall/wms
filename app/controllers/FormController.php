@@ -236,7 +236,7 @@ class FormController extends Controller {
                     {
                         echo "<p>Will need to change FAX {$stored_data['fax']} to $fax - refer row:$line</p>";
                     }
-                    if($stored_data['stored_address'] != $address)
+                    if(trim($stored_data['stored_address']) != trim($address))
                     {
                         echo "<p>Will need to change ADDRESS {$stored_data['stored_address']} to $address - refer row:$line</p>";
                     }
