@@ -96,6 +96,7 @@ class FormController extends Controller {
             'procProfileUpdate',
             'procQualityControl',
             'procRecordPickup',
+            'procReeceDepartmentCheck',
             'procReeceDepartmentUpload',
             'procRegisterNewStock',
             'procRepAdd',
@@ -121,6 +122,129 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procReeceDepartmentCheck()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($_FILES['reece_csv_file']["size"] > 0)
+        {
+            if ($_FILES['reece_csv_file']['error']  === UPLOAD_ERR_OK)
+            {
+                $tmp_name = $_FILES['reece_csv_file']['tmp_name'];
+                $csv_array = array_map('str_getcsv', file($tmp_name));
+                echo "<pre>",print_r($csv_array),"</pre>"; die();
+            }
+            else
+            {
+            	$error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+                Form::setError('reece_csv_file', $error_message);
+            }
+        }
+        else
+        {
+            Form::setError('reece_csv_file', 'please select a file to upload');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            die();
+            /*
+            [0] Contact Name
+            [1] First Name
+            [2] Last Name
+            [3] Job Title
+            [4] Contact Email
+            [5] Mobile
+            [6] Phone
+            [7] Fax
+            [8] Department name - includes Reece Department ID
+            [9] Full address
+            [10] Full Address Repeat
+            */
+            //die('all good');
+            $imported_dept_count = 0;
+            $skip_first = isset($header_row);
+            $line = 1;
+            $data_error_string = "<ul>";
+            $import_departments = true;
+            $departments = array();
+            foreach($csv_array as $row)
+            {
+                $reece_department_id = 0;
+                $department_array = array();
+                $data_errors = false;
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    ++$line;
+                    continue;
+                }
+                if(!$this->dataSubbed($row[8]))
+                {
+                    $data_errors = true;
+                    $data_error_string .= "<li>A Department Name is required on line: $line</li>";
+                }
+                else
+                {
+                    //Get the Department Name and ID
+                    $array = explode(" ",$row[8], 2);
+                    $reece_department_id =(int)$array[0];
+                    $reece_department_name = $array[1];
+                    if($reece_department_id === 0)
+                    {
+                        $data_errors = true;
+                        $data_error_string .= "<li>A Department ID could not be determined from the name: $line</li>";
+                    }
+                    else
+                    {
+                        $department_array['reece_id']   = $reece_department_id;
+                        $department_array['name']       = $reece_department_name;
+                    }
+                }
+                if(!$this->dataSubbed($row[9]))
+                {
+                    $data_errors = true;
+                    $data_error_string .= "<li>A Department Address is required on line: $line</li>";
+                }
+                else
+                {
+
+                    $department_array['stored_address'] = $row[9];
+                }
+                $department_array['phone'] = $row[6];
+                $department_array['fax'] = $row[7];
+                if($data_errors)
+                {
+                    $import_departments = false;
+                }
+                ++$line;
+                $departments[] = $department_array;
+            }
+            if($import_departments)
+            {
+                $this->reecedepartment->addUpdateDepartments($departments);
+                Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Department Import is Complete</h2><p>All Values have been inserted");
+            }
+            else
+            {
+                Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Departments Could Not Be Imported</h2><p>Reasons are listed below</p>$data_error_string");
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
     }
 
     public function procReeceDepartmentUpload()
