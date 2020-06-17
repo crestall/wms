@@ -225,6 +225,17 @@ class FormController extends Controller {
                     $split = explode(" ",$row[9]);
                     $country = array_pop($split);
                     $department_array['country'] = $country;
+                    $postcode = array_pop($split);
+                    $department_array['postcode'] = $postcode;
+                    if($country == "AU")
+                    {
+                        $state = array_pop($split);
+                        $department_array['state'] = $state;
+                    }
+                    $city = array_pop($split);
+                    $department_array['city'] = $city;
+                    $street_address = array_pop($split);
+                    $department_array['street_address'] = $steet_address;
                 }
                 if($data_errors)
                 {
