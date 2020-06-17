@@ -188,8 +188,7 @@ class FormController extends Controller {
                     ++$line;
                     continue;
                 }
-                //None Required Fields
-                $phone = $fax = "";
+                $phone = $fax = $address = "";
                 //get Department ID
                 $array = explode(" ",$row[4], 2);
                 $reece_department_id =(int)$array[0];
