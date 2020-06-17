@@ -214,7 +214,7 @@ class FormController extends Controller {
                         {
                             $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
                         }
-                        $address = $row[5]." ".$row[6]." ".$rows[8]." New Zealand";
+                        $address = $row[5]." ".$row[6]." ".$row[8]." New Zealand";
                     }
                     else
                     {
@@ -226,7 +226,7 @@ class FormController extends Controller {
                         {
                             $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
                         }
-                        $address = $row[5]." ".$row[6]." ".$row[7]." ".$rows[8]." Australia";
+                        $address = $row[5]." ".$row[6]." ".$row[7]." ".$row[8]." Australia";
                     }
                     if($stored_data['phone'] != $phone)
                     {
