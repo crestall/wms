@@ -41,4 +41,31 @@
             <h2>Check New Reece Data For Department Changes</h2>
         </div>
     </div>
+    <div class="row">
+        <form id="reece-supplied-data-upload-department" method="post" action="/form/procReeceDepartmentCheck" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reece Supplied Data</label>
+                <div class="col-md-4">
+                    <input type="file" name="reece_csv_file" id="reece_csv_file" />
+                    <?php echo Form::displayError('reece_csv_file');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-check">
+                    <label class="form-check-label col-md-3" for="reece_header_row">My CSV has a header row</label>
+                    <div class="col-md-4 checkbox checkbox-default">
+                        <input class="form-check-input styled" type="checkbox" id="reece_header_row" name="reece_header_row" checked />
+                        <label for="reece_header_row"></label>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">&nbsp;</label>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Check It</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
