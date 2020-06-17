@@ -195,7 +195,7 @@ class FormController extends Controller {
                 $stored_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id);
                 if(count($stored_data))
                 {
-                    echo "<pre>",print_r($stored_data),"</pre>";
+                    echo "Already Stored<pre>",print_r($stored_data),"</pre>";
                 }
                 else
                 {
