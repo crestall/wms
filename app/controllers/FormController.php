@@ -298,9 +298,9 @@ class FormController extends Controller {
                 ++$line;
                 $rows[] = $fb_row;
             }
-            echo "<pre>",print_r($rows),"</pre>";
-            die();
-
+            $expire=time()+60;
+            setcookie("fileDownload", "true", $expire, "/");
+            $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "reece)departments_feedback_csv".date("Ymd")]);
         }
         return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
     }
