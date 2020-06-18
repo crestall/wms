@@ -29,7 +29,7 @@
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and checking the data...</h2></div>' });
-                                e.preventDefault(); // avoid to execute the actual submit of the form.
+                                /*e.preventDefault(); // avoid to execute the actual submit of the form.
                                 var form = $(this)[0];
                                 var url = $(this).attr('action');
                                 $.ajax({
@@ -44,7 +44,7 @@
                                            //alert(data); // show response from the php script.
                                            $.unblockUI();
                                        }
-                                });
+                                });*/
                             }
                         });
                     }
