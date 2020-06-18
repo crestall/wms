@@ -35,7 +35,8 @@
                                 $.ajax({
                                        type: "POST",
                                        url: url,
-                                       data: form.serialize(), // serializes the form's elements.
+                                       data: new FormData($(this)) ,
+                                       enctype: 'multipart/form-data',
                                        success: function(d)
                                        {
                                            //alert(data); // show response from the php script.
