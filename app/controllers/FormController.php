@@ -179,6 +179,22 @@ class FormController extends Controller {
             $line = 1;
             $departments = array();
             $feedback_string = "<ul>";
+            //Set up csv file
+            $cols = array(
+                "Current Reece Id",
+                "Current Department Name",
+                "Current Department Address",
+                "Current Phone",
+                "Current Fax",
+                "",
+                "New Reece Id",
+                "New Department Name",
+                "New Department Address",
+                "New Phone",
+                "New Fax",
+            );
+
+            $rows = array();
             foreach($csv_array as $row)
             {
                 $reece_department_id = 0;
@@ -196,14 +212,19 @@ class FormController extends Controller {
                 $stored_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id);
                 if($stored_data)
                 {
-                    //echo "Already Stored<pre>",print_r($stored_data),"</pre>";
-                    //check for differences
+                    //Department is already stored - check for data update
+                    $fb_row = array(
+                        $reece_department_id,
+                        $stored_data['name'],
+                        $stored_data['stored_address'],
+                        $stored_data['phone'],
+                        $stored_data['fax'],
+                        "",
+                        $stored_data['reece_id']
+                    );
                     //Department Name
-                    if($stored_data['name'] != $reece_department_name)
-                    {
-                        echo "<p>Will need to change NAME {$stored_data['name']} to $reece_department_name - refer row:$line</p>";
-                    }
-                    //Phone and fax
+                    $fb_row[] = ($stored_data['name'] != $reece_department_name)? $reece_department_name : "";
+                    //Phone, Address and Fax
                     if($row[7] == "NZ")
                     {
                         if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[10],  $matches ) )
@@ -228,40 +249,58 @@ class FormController extends Controller {
                         }
                         $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
                     }
-                    if($stored_data['phone'] != $phone)
-                    {
-                        echo "<p>Will need to change PHONE {$stored_data['phone']} to $phone - refer row:$line</p>";
-                    }
-                    if($stored_data['fax'] != $fax)
-                    {
-                        echo "<p>Will need to change FAX {$stored_data['fax']} to $fax - refer row:$line</p>";
-                    }
-                    if(trim(strtolower($stored_data['stored_address'])) != trim(strtolower($address)))
-                    {
-                        echo "<p>Will need to change ADDRESS {$stored_data['stored_address']} to $address - refer row:$line</p>";
-                    }
+                    $fb_row[] = (trim(strtolower($stored_data['stored_address'])) != trim(strtolower($address)))? $address : "";
+                    $fb_row[] = ($stored_data['phone'] != $phone)? $phone : "";
+                    $fb_row[] = ($stored_data['fax'] != $fax) ? $fax : "";
                 }
                 else
                 {
-                    echo "<p>Will need to insert new department {$row[4]} from row: $line</p>";
+                    //Need to add new department
+                    if($row[7] == "NZ")
+                    {
+                        if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[10],  $matches ) )
+                        {
+                            $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+                        }
+                        if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[11],  $matches ) )
+                        {
+                            $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+                        }
+                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." New Zealand";
+                    }
+                    else
+                    {
+                        if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $row[10],  $matches ) )
+                        {
+                            $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+                        }
+                        if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $row[11],  $matches ) )
+                        {
+                            $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+                        }
+                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
+                    }
+                    $fb_row = array(
+                        "This is",
+                        "new",
+                        "-",
+                        "Will",
+                        "need to",
+                        "be added",
+                        "",
+                        $reece_department_id,
+                        $reece_department_name,
+                        $address,
+                        $phone,
+                        $fax
+                    )
                 }
                 ++$line;
-                echo "<hr/>";
+                $rows[] = $fb_row;
             }
-
+            echo "<pre>",print_r($rows),"</pre>";
             die();
 
-
-
-            if($import_departments)
-            {
-                $this->reecedepartment->addUpdateDepartments($departments);
-                Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Department Import is Complete</h2><p>All Values have been inserted");
-            }
-            else
-            {
-                Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Departments Could Not Be Imported</h2><p>Reasons are listed below</p>$data_error_string");
-            }
         }
         return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
     }
