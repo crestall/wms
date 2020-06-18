@@ -220,7 +220,7 @@ class FormController extends Controller {
                         $stored_data['phone'],
                         $stored_data['fax'],
                         "",
-                        $stored_data['reece_id']
+                        ""
                     );
                     //Department Name
                     $fb_row[] = ($stored_data['name'] != $reece_department_name)? $reece_department_name : "";
