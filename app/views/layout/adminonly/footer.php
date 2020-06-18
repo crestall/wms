@@ -35,8 +35,10 @@
                                 $.ajax({
                                        type: "POST",
                                        url: url,
-                                       data: new FormData(form) ,
-                                       enctype: 'multipart/form-data',
+                                       data: new FormData(form),
+                                       processData: false,
+                                       contentType: false,
+                                       //enctype: 'multipart/form-data',
                                        success: function(d)
                                        {
                                            //alert(data); // show response from the php script.
