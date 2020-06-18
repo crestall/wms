@@ -293,7 +293,7 @@ class FormController extends Controller {
                         $address,
                         $phone,
                         $fax
-                    )
+                    );
                 }
                 ++$line;
                 $rows[] = $fb_row;
