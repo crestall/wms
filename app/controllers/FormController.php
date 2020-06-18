@@ -302,7 +302,7 @@ class FormController extends Controller {
             setcookie("fileDownload", "true", $expire, "/");
             $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "reece)departments_feedback_csv".date("Ymd")]);
         }
-        return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
+        //return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
     }
 
     public function procReeceDepartmentUpload()
