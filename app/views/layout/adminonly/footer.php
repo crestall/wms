@@ -25,11 +25,23 @@
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and storing data...</h2></div>' });
                             }
                         });
-                        $('form#reece-supplied-data-upload-department').submit(function(){
+                        $('form#reece-supplied-data-upload-department').submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and checking the data...</h2></div>' });
-                                return false;
+                                e.preventDefault(); // avoid to execute the actual submit of the form.
+                                var form = $(this);
+                                var url = form.attr('action');
+                                $.ajax({
+                                       type: "POST",
+                                       url: url,
+                                       data: form.serialize(), // serializes the form's elements.
+                                       success: function(d)
+                                       {
+                                           //alert(data); // show response from the php script.
+                                           $.unblockUI();
+                                       }
+                                });
                             }
                         });
                     }
