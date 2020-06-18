@@ -30,12 +30,12 @@
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and checking the data...</h2></div>' });
                                 e.preventDefault(); // avoid to execute the actual submit of the form.
-                                var form = $(this);
+                                var form = $(this)[0];
                                 var url = form.attr('action');
                                 $.ajax({
                                        type: "POST",
                                        url: url,
-                                       data: new FormData($(this)) ,
+                                       data: new FormData(form) ,
                                        enctype: 'multipart/form-data',
                                        success: function(d)
                                        {
