@@ -282,11 +282,10 @@ class FormController extends Controller {
                     }
                     $fb_row = array(
                         "This is",
-                        "new",
-                        "-",
-                        "Will",
-                        "need to",
-                        "be added",
+                        "new -",
+                        "Will need",
+                        "to be",
+                        "added",  
                         "",
                         $reece_department_id,
                         $reece_department_name,
@@ -300,7 +299,7 @@ class FormController extends Controller {
             }
             $expire=time()+60;
             setcookie("fileDownload", "true", $expire, "/");
-            $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "reece)departments_feedback_csv".date("Ymd")]);
+            $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "reece_departments_feedback_csv".date("Ymd")]);
         }
         //return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
     }
