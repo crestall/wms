@@ -94,8 +94,8 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Current Data Spreadsheet</label>
                 <div class="col-md-4">
-                    <input type="file" name="csv_file" id="csv_file" />
-                    <?php echo Form::displayError('csv_file');?>
+                    <input type="file" name="csv_user_file" id="csv_user_file" />
+                    <?php echo Form::displayError('csv_user_file');?>
                 </div>
             </div>
             <div class="form-group row">
