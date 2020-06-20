@@ -19,7 +19,7 @@
                 'reece-data-tidy' :{
                     init: function()
                     {
-                        $('form#reece-department-upload').submit(function(){
+                        $('form#reece-department-upload, form#reece-user-upload').submit(function(){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and storing data...</h2></div>' });
