@@ -128,6 +128,7 @@ class FormController extends Controller {
     public function procReeceUserUpload()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $db = Database::openConnection();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -180,12 +181,12 @@ class FormController extends Controller {
             $skip_first = isset($header_row);
             $line = 1;
             $data_error_string = "<ul>";
-            $import_departments = true;
-            $departments = array();
+            $import_users = true;
+            $users = array();
             foreach($csv_array as $row)
             {
                 $reece_department_id = 0;
-                $department_array = array();
+                $user_array = array();
                 $data_errors = false;
                 if($skip_first)
                 {
@@ -211,8 +212,15 @@ class FormController extends Controller {
                     }
                     else
                     {
-                        $department_array['reece_id']   = $reece_department_id;
-                        $department_array['name']       = $reece_department_name;
+                        if(!$stored_department_data = $reecedepartment->getDepartmentByReeceId($reece_department_id))
+                        {
+                            $data_errors = true;
+                            $data_error_string .= "<li>A Department could not be found based on $reece_department_name on line: $line</li>";
+                        }
+                        else
+                        {
+                            $user_array['department_id'] = $stored_department_data['id'];
+                        }
                     }
                 }
                 if(!$this->dataSubbed($row[9]))
@@ -223,21 +231,23 @@ class FormController extends Controller {
                 else
                 {
                     //clean and trim the department
-                    $department_array['stored_address'] = Utility::deepTrim($row[9]);
+                    $user_array['stored_address'] = Utility::deepTrim($row[9]);
                 }
-                $department_array['phone'] = $row[6];
-                $department_array['fax'] = $row[7];
+                $user_array['fax'] = $row[5];
+                $user_array['phone'] = $row[6];
+                $user_array['fax'] = $row[7];
                 if($data_errors)
                 {
-                    $import_departments = false;
+                    $import_users = false;
                 }
                 ++$line;
-                $departments[] = $department_array;
+                $users[] = $user_array;
             }
-            if($import_departments)
+            if($import_users)
             {
-                $this->reecedepartment->addUpdateDepartments($departments);
-                Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Department Import is Complete</h2><p>All Values have been inserted");
+                //$this->reecedepartment->addUpdateDepartments($departments);
+                //Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Department Import is Complete</h2><p>All Values have been inserted");
+                echo "<pre>",print_r($users),"</pre";die();
             }
             else
             {
