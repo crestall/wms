@@ -137,23 +137,23 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if($_FILES['csv_file']["size"] > 0)
+        if($_FILES['csv_user_file']["size"] > 0)
         {
-            if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
+            if ($_FILES['csv_user_file']['error']  === UPLOAD_ERR_OK)
             {
-                $tmp_name = $_FILES['csv_file']['tmp_name'];
+                $tmp_name = $_FILES['csv_user_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
                 echo "<pre>",print_r($csv_array),"</pre>"; die();
             }
             else
             {
             	$error_message = $this->file_upload_error_message($_FILES[$field]['error']);
-                Form::setError('csv_file', $error_message);
+                Form::setError('csv_user_file', $error_message);
             }
         }
         else
         {
-            Form::setError('csv_file', 'please select a file to upload');
+            Form::setError('csv_user_file', 'please select a file to upload');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
