@@ -204,7 +204,7 @@ class FormController extends Controller {
                     //Get the Department Name and ID
                     $array = explode(" ",$row[8], 2);
 
-                    if(count($array) < 2))
+                    if(count($array) < 2)
                     {
                         $data_errors = true;
                         $data_error_string .= "<li>A Department ID could not be determined from the name, {$row[8]}: $line</li>";
