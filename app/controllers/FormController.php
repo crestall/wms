@@ -221,7 +221,7 @@ class FormController extends Controller {
                         }
                         else
                         {
-                            if(!$stored_department_data = $reecedepartment->getDepartmentByReeceId($reece_department_id))
+                            if(!$stored_department_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id))
                             {
                                 $data_errors = true;
                                 $data_error_string .= "<li>A Department could not be found based on $reece_department_name on line: $line</li>";
