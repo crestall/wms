@@ -755,6 +755,20 @@ $(document).ready(function() {
 		}
 	});
     ///////////////////////////////////////////////////////////////////////////////
+    $("#reece-user-upload").validate({
+    	rules:{
+    		csv_user_file:{
+    			extension: "csv",
+                required: true
+    		},
+    	},
+		messages:{
+			csv_user_file:{
+				extension: "Only upload csv files here"
+			}
+		}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("#reece-supplied-data-upload-department").validate({
     	rules:{
     		reece_csv_file:{
