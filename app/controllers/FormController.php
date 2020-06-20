@@ -203,6 +203,7 @@ class FormController extends Controller {
                 {
                     //Get the Department Name and ID
                     $array = explode(" ",$row[8], 2);
+                    echo "<pre>",print_r($array),"</pre>";die();
                     if(count($array < 2))
                     {
                         $data_errors = true;
