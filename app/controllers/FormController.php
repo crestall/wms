@@ -178,7 +178,7 @@ class FormController extends Controller {
             */
             //die('all good');
             $imported_dept_count = 0;
-            $skip_first = isset($header_row);
+            $skip_first = isset($user_header_row);
             $line = 1;
             $data_error_string = "<ul>";
             $import_users = true;
