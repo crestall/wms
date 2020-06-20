@@ -206,7 +206,7 @@ class FormController extends Controller {
                     if(count($array < 2))
                     {
                         $data_errors = true;
-                        $data_error_string .= "<li>A Department ID could not be determined from the name: $line</li>";
+                        $data_error_string .= "<li>A Department ID could not be determined from the name, {$row[8]}: $line</li>";
                     }
                     else
                     {
