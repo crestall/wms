@@ -290,9 +290,14 @@ class FormController extends Controller {
                     //clean and trim the department
                     $user_array['email'] = Utility::deepTrim($row[4]);
                 }
-                $user_array['mobile_number'] = $row[5];
-                $user_array['phone'] = $row[6];
-                $user_array['fax'] = $row[7];
+                //Tidy up the phone formatting
+                $country = strtolower(array_pop((explode(' ', $string))));
+                //$user_array['mobile_number'] = $row[5];
+                //$user_array['phone'] = $row[6];
+                //$user_array['fax'] = $row[7];
+                $user_array['mobile_number']    = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[5]), "+"));
+                $user_array['phone']            = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[6]), "+"));
+                $user_array['fax']              = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[7]), "+"));
                 if($data_errors)
                 {
                     $import_users = false;
