@@ -207,7 +207,7 @@ class FormController extends Controller {
                     {
                         $data_errors = true;
                         $data_error_string .= "<li>A Reece Department ID could not be determined from the name, {$row[8]}: $line</li>";
-                        echo "<pre>",print_r($array),"</pre>";echo count($array);die();
+                        echo "<ul>$data_error_string</ul><pre>",print_r($array),"</pre>";echo count($array);die();
                     }
                     else
                     {
