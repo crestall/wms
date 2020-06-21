@@ -291,7 +291,8 @@ class FormController extends Controller {
                     $user_array['email'] = Utility::deepTrim($row[4]);
                 }
                 //Tidy up the phone formatting
-                $country = strtolower(array_pop((explode(' ', $row[9]))));
+                $address_array = explode(' ', $row[9]);
+                $country = strtolower(array_pop($address_array));
                 //$user_array['mobile_number'] = $row[5];
                 //$user_array['phone'] = $row[6];
                 //$user_array['fax'] = $row[7];
