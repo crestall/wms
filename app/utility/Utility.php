@@ -353,6 +353,58 @@ class Utility{
         return trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $string)));
     }
 
+    public static function formatMobileString($string, $nz = false)
+    {
+        if($nz)
+        {
+            if(  preg_match( '/^(\d{2})(\d{2,4})(\d{3})(\d{3})/', $string,  $matches ) )
+            {
+                return = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if(  preg_match( '/^(\d{2})(\d{3)(\d{3})(\d{3})/', $string,  $matches ) )
+            {
+                return = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    public static function formatPhoneString($string, $nz = false)
+    {
+        if($nz)
+        {
+            if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $string,  $matches ) )
+            {
+                return = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $string,  $matches ) )
+            {
+                return = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
     public static function streetAbbreviations($string)
     {
         $str = strtolower($string);
