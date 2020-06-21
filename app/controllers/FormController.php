@@ -414,29 +414,16 @@ class FormController extends Controller {
                     );
                     //Department Name
                     $fb_row[] = ($stored_data['name'] != $reece_department_name)? $reece_department_name : "";
-                    //Phone, Address and Fax
+                    //Phone and Fax
+                    $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
+                    $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
+                    //Address
                     if($row[7] == "NZ")
                     {
-                        if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[10],  $matches ) )
-                        {
-                            $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
-                        }
-                        if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[11],  $matches ) )
-                        {
-                            $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
-                        }
                         $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." New Zealand";
                     }
                     else
                     {
-                        if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $row[10],  $matches ) )
-                        {
-                            $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
-                        }
-                        if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $row[11],  $matches ) )
-                        {
-                            $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
-                        }
                         $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
                     }
                     $fb_row[] = (trim(strtolower($stored_data['stored_address'])) != trim(strtolower($address)))? $address : "";
@@ -446,28 +433,14 @@ class FormController extends Controller {
                 else
                 {
                     //Need to add new department
+                    $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
+                    $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
                     if($row[7] == "NZ")
                     {
-                        if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[10],  $matches ) )
-                        {
-                            $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
-                        }
-                        if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $row[11],  $matches ) )
-                        {
-                            $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
-                        }
                         $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." New Zealand";
                     }
                     else
                     {
-                        if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $row[10],  $matches ) )
-                        {
-                            $phone = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
-                        }
-                        if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $row[11],  $matches ) )
-                        {
-                            $fax = "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
-                        }
                         $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
                     }
                     $fb_row = array(
