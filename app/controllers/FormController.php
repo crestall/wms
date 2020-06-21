@@ -203,11 +203,10 @@ class FormController extends Controller {
                 {
                     //Get the Department Name and ID
                     $array = explode(" ",$row[8], 2);
-
                     if(count($array) < 2)
                     {
                         $data_errors = true;
-                        $data_error_string .= "<li>A Department ID could not be determined from the name, {$row[8]}: $line</li>";
+                        $data_error_string .= "<li>A Reece Department ID could not be determined from the name, {$row[8]}: $line</li>";
                         echo "<pre>",print_r($array),"</pre>";echo count($array);die();
                     }
                     else
@@ -217,14 +216,14 @@ class FormController extends Controller {
                         if($reece_department_id === 0)
                         {
                             $data_errors = true;
-                            $data_error_string .= "<li>A Department ID could not be determined from the name: $line</li>";
+                            $data_error_string .= "<li>A Reece Department ID could not be determined from the name: $line</li>";
                         }
                         else
                         {
                             if(!$stored_department_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id))
                             {
                                 $data_errors = true;
-                                $data_error_string .= "<li>A Department could not be found based on $reece_department_name on line: $line</li>";
+                                $data_error_string .= "<li>An FSG Department Id could not be found based on $reece_department_name on line: $line</li>";
                             }
                             else
                             {
