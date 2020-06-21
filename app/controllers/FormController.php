@@ -232,17 +232,62 @@ class FormController extends Controller {
                         }
                     }
                 }
-                if(!$this->dataSubbed($row[9]))
+                if(!$this->dataSubbed($row[0]))
                 {
                     $data_errors = true;
-                    $data_error_string .= "<li>A Department Address is required on line: $line</li>";
+                    $data_error_string .= "<li>A Users Full name is required on line: $line</li>";
                 }
                 else
                 {
                     //clean and trim the department
-                    $user_array['stored_address'] = Utility::deepTrim($row[9]);
+                    $user_array['full_name'] = Utility::deepTrim($row[0]);
                 }
-                $user_array['fax'] = $row[5];
+                if(!$this->dataSubbed($row[1]))
+                {
+                    $data_errors = true;
+                    $data_error_string .= "<li>A Users First Name is required on line: $line</li>";
+                }
+                else
+                {
+                    //clean and trim the department
+                    $user_array['first_name'] = Utility::deepTrim($row[1]);
+                }
+                if(!$this->dataSubbed($row[2]))
+                {
+                    $data_errors = true;
+                    $data_error_string .= "<li>A Users Last name is required on line: $line</li>";
+                }
+                else
+                {
+                    //clean and trim the department
+                    $user_array['last_name'] = Utility::deepTrim($row[2]);
+                }
+                if(!$this->dataSubbed($row[3]))
+                {
+                    $data_errors = true;
+                    $data_error_string .= "<li>A Users Job title is required on line: $line</li>";
+                }
+                else
+                {
+                    //clean and trim the department
+                    $user_array['job_title'] = Utility::deepTrim($row[3]);
+                }
+                if(!$this->dataSubbed($row[4]))
+                {
+                    $data_errors = true;
+                    $data_error_string .= "<li>A Users email is required on line: $line</li>";
+                }
+                elseif(!$this->emailValid($row[4]))
+                {
+                    $data_errors = true;
+                    $data_error_string .= "<li>An invalid email ws found on line: $line</li>";
+                }
+                else
+                {
+                    //clean and trim the department
+                    $user_array['email'] = Utility::deepTrim($row[4]);
+                }
+                $user_array['mobile_number'] = $row[5];
                 $user_array['phone'] = $row[6];
                 $user_array['fax'] = $row[7];
                 if($data_errors)
@@ -260,7 +305,7 @@ class FormController extends Controller {
             }
             else
             {
-                Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Departments Could Not Be Imported</h2><p>Reasons are listed below</p>$data_error_string");
+                Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Users Could Not Be Imported</h2><p>Reasons are listed below</p>$data_error_string");
             }
         }
         return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
