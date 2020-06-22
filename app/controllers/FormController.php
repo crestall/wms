@@ -219,10 +219,10 @@ class FormController extends Controller {
                 $phone = $fax = $mobile = $address = "";
                 //get any stored user data
                 $stored_data = $this->reeceuser->getUserByEmail(trim($row[3])) ;
-                echo "Stored Data<pre>",print_r($stored_data),"</pre>";
-                continue;
                 if($stored_data)
                 {
+                    echo "Stored Data<pre>",print_r($stored_data),"</pre>";
+                    continue;
                     //Department is already stored - check for data update
                     $fb_row = array(
                         $reece_department_id,
@@ -254,6 +254,7 @@ class FormController extends Controller {
                 else
                 {
                     //Need to add new department
+                    echo "<p>Need to add {$row[1]} to the system</p>";
                     $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
                     $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
                     if($row[7] == "NZ")
