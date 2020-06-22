@@ -144,7 +144,7 @@ class FormController extends Controller {
             {
                 $tmp_name = $_FILES['reece_user_csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
-                echo "<pre>",print_r($csv_array),"</pre>"; die();
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
             }
             else
             {
@@ -177,23 +177,33 @@ class FormController extends Controller {
             [10] telephone  - needs to be formatted
             [11] fax - needs to be formatted
             */
-            $skip_first = isset($reece_header_row);
+            $skip_first = isset($reece_user_header_row);
             $line = 1;
-            $departments = array();
+            $users = array();
             $feedback_string = "<ul>";
             //Set up csv file
             $cols = array(
-                "Current Reece Id",
+                "Current Full Nmae",
+                "Current First Name",
+                "Current Last Name",
                 "Current Department Name",
-                "Current Department Address",
-                "Current Phone",
-                "Current Fax",
+                "Current Reece Dpartment Id",
+                "Current Email",
+                "Current Job Title",
+                "Current Mobile Number",
+                "Current Phone Number",
+                "Current Fax Number",
                 "",
-                "New Reece Id",
+                "New Full Nmae",
+                "New First Name",
+                "New Last Name",
                 "New Department Name",
-                "New Department Address",
-                "New Phone",
-                "New Fax",
+                "New Reece Dpartment Id",
+                "New Email",
+                "New Job Title",
+                "New Mobile Number",
+                "New Phone Number",
+                "New Fax Number",
             );
 
             $rows = array();
@@ -206,12 +216,10 @@ class FormController extends Controller {
                     ++$line;
                     continue;
                 }
-                $phone = $fax = $address = "";
-                //get Department ID
-                $array = explode(" ",$row[4], 2);
-                $reece_department_id =(int)$array[0];
-                $reece_department_name = $array[1];
-                $stored_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id);
+                $phone = $fax = $mobile = $address = "";
+                //get any stored user data
+                $stored_data = $this->reeceuser->getUserByEmail(trim($row[3])) ;
+                echo "Stored Data<pre>",print_r($stored_data),"</pre>";
                 if($stored_data)
                 {
                     //Department is already stored - check for data update
@@ -272,9 +280,10 @@ class FormController extends Controller {
                 ++$line;
                 $rows[] = $fb_row;
             }
-            $expire=time()+60;
-            setcookie("fileDownload", "true", $expire, "/");
-            $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "reece_departments_feedback_csv".date("Ymd")]);
+            echo "Rows<pre>",print_r($rows),"</pre>";
+            //$expire=time()+60;
+            //setcookie("fileDownload", "true", $expire, "/");
+            //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "reece_departments_feedback_csv".date("Ymd")]);
         }
         //return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
     }
