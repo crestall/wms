@@ -293,7 +293,7 @@ class FormController extends Controller {
                 //Tidy up the phone formatting
                 $address_array = explode(' ', $row[9]);
                 $country = strtolower(array_pop($address_array));
-                echo "<p>$country</p>";
+                //echo "<p>$country</p>";
                 //$user_array['mobile_number'] = $row[5];
                 //$user_array['phone'] = $row[6];
                 //$user_array['fax'] = $row[7];
