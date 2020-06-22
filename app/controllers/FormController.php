@@ -187,7 +187,7 @@ class FormController extends Controller {
                 "Current First Name",
                 "Current Last Name",
                 "Current Department Name",
-                "Current Reece Dpartment Id",
+                "Current Reece Department Id",
                 "Current Email",
                 "Current Job Title",
                 "Current Mobile Number",
@@ -217,37 +217,50 @@ class FormController extends Controller {
                     continue;
                 }
                 $phone = $fax = $mobile = $address = "";
+                //get Reece Department ID
+                $array = explode(" ",$row[4], 2);
+                $reece_department_id =(int)$array[0];
+                $reece_department_name = $array[1];
                 //get any stored user data
                 $stored_data = $this->reeceuser->getUserByEmail(trim($row[3])) ;
                 if($stored_data)
                 {
-                    echo "Stored Data<pre>",print_r($stored_data),"</pre>";
-                    continue;
-                    //Department is already stored - check for data update
+                    //User is already stored - check for data update
+                    $department_details = $this->reecedepartment->getDepartmentById($stored_data['department_id']);
+                    $name = trim($row[1]);
+                    $email = strtolower(trim($row[3]));
+                    $job_title = strtolower(trim($row[2]));
+                    list($firstname, $lastname) = explode(" ", $name, 2);
                     $fb_row = array(
-                        $reece_department_id,
-                        $stored_data['name'],
-                        $stored_data['stored_address'],
+                        $stored_data['full_name'],
+                        $stored_data['first_name'],
+                        $stored_data['last_name'],
+                        $department_details['name'],
+                        $department_details['reece_id'],
+                        strtolower($stored_data['email']),
+                        $stored_data['job_title'],
+                        $stored_data['mobile_number'],
                         $stored_data['phone'],
                         $stored_data['fax'],
-                        "",
                         ""
                     );
-                    //Department Name
-                    $fb_row[] = ($stored_data['name'] != $reece_department_name)? $reece_department_name : "";
-                    //Phone and Fax
+                    //Name Details
+                    $fb_row[] = ($stored_data['full_name'] != $name)? $name : "";
+                    $fb_row[] = ($stored_data['first_name'] != $firstname)? $firstname : "";
+                    $fb_row[] = ($stored_data['last_name'] != $lastname)? $lastname : "";
+                    //Department Details
+                    $fb_row[] = ($department_details['name'] != $reece_department_name)? $reece_department_name : "";
+                    $fb_row[] = ($department_details['reece_id'] != $reece_department_id)? $reece_department_id : "";
+                    //Email
+                    $fb_row[] = (strtolower($stored_data['email']) != $email))? $email : "";
+                    //Job Title
+                    $fb_row[] = (strtolower($stored_data['job_title']) != $job_title))? trim($row[2] : "";
+                    //Phone. Mobile and Fax
+                    $mobile = Utility::formatMobileString($row[9], $row[7] == "NZ")
                     $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
                     $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
-                    //Address
-                    if($row[7] == "NZ")
-                    {
-                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." New Zealand";
-                    }
-                    else
-                    {
-                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
-                    }
                     $fb_row[] = (trim(strtolower($stored_data['stored_address'])) != trim(strtolower($address)))? $address : "";
+                    $fb_row[] = ($stored_data['mobile_number'] != $mobile)? $mobile : "";
                     $fb_row[] = ($stored_data['phone'] != $phone)? $phone : "";
                     $fb_row[] = ($stored_data['fax'] != $fax) ? $fax : "";
                 }

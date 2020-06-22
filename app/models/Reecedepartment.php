@@ -48,5 +48,11 @@ class Reecedepartment extends Model{
         return $db->queryRow("SELECT * FROM {$this->table} WHERE reece_id = :reece_id", array('reece_id' => $reece_id));
     }
 
+    public function getDepartmentById($id)
+    {
+        $db = Database::openConnection();
+        return $db->queryByID($this->table, $id);
+    }
+
 }
 ?>
