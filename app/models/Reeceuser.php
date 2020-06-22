@@ -16,7 +16,7 @@
   */
 
 class Reeceuser extends Model{
-    public $table = "reece_departments";
+    public $table = "reece_users";
 
     public function addUser($data)
     {
