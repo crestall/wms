@@ -300,6 +300,10 @@ class FormController extends Controller {
                 $user_array['mobile_number']    = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[5]), "+"), $country == "zealand");
                 $user_array['phone']            = Utility::formatPhoneString(ltrim(str_replace(' ', '', $row[6]), "+"), $country == "zealand");
                 $user_array['fax']              = Utility::formatPhoneString(ltrim(str_replace(' ', '', $row[7]), "+"), $country == "zealand");
+
+                $user_array['mobile_number']    = ($user_array['mobile_number'])? $user_array['mobile_number']: "";
+                $user_array['phone']            = ($user_array['phone'])? $user_array['phone']: "";
+                $user_array['fax']              = ($user_array['fax'])? $user_array['fax']: ""; 
                 if($data_errors)
                 {
                     $import_users = false;
@@ -309,7 +313,7 @@ class FormController extends Controller {
             }
             if($import_users)
             {
-                $this->reeceuser->addUpdateUsers($users);  
+                $this->reeceuser->addUpdateUsers($users);
                 Session::set('feedback', "<h2><i class='far fa-check-circle'></i>User Import is Complete</h2><p>All Values have been inserted");
                 //echo "<pre>",print_r($users),"</pre";die();
             }
