@@ -11,7 +11,7 @@
     addUser($data)
     addUpdateUsers(array $departments)
     getUserByEmail($email)
-    getUserById($id) 
+    getUserById($id)
 
   */
 
@@ -53,7 +53,7 @@ class Reeceuser extends Model{
     public function getUserById($id)
     {
         $db = Database::openConnection();
-        return $db->queryByID({$this->table}, $id);
+        return $db->queryByID($this->table, $id);
     }
 
 }
