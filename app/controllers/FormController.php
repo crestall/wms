@@ -293,12 +293,13 @@ class FormController extends Controller {
                 //Tidy up the phone formatting
                 $address_array = explode(' ', $row[9]);
                 $country = strtolower(array_pop($address_array));
+                echo "<p>$country</p>";
                 //$user_array['mobile_number'] = $row[5];
                 //$user_array['phone'] = $row[6];
                 //$user_array['fax'] = $row[7];
-                $user_array['mobile_number']    = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[5]), "+"), $country =="zealand");
-                $user_array['phone']            = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[6]), "+"), $country =="zealand");
-                $user_array['fax']              = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[7]), "+"), $country =="zealand");
+                $user_array['mobile_number']    = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[5]), "+"), $country == "zealand");
+                $user_array['phone']            = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[6]), "+"), $country == "zealand");
+                $user_array['fax']              = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[7]), "+"), $country == "zealand");
                 if($data_errors)
                 {
                     $import_users = false;
