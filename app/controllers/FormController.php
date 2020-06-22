@@ -296,10 +296,10 @@ class FormController extends Controller {
                 ++$line;
                 $rows[] = $fb_row;
             }
-            echo "Rows<pre>",print_r($rows),"</pre>";
-            //$expire=time()+60;
-            //setcookie("fileDownload", "true", $expire, "/");
-            //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "reece_departments_feedback_csv".date("Ymd")]);
+            //echo "Rows<pre>",print_r($rows),"</pre>";
+            $expire=time()+60;
+            setcookie("fileDownload", "true", $expire, "/");
+            $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "reece_users_feedback_csv".date("Ymd")]);
         }
         //return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
     }
