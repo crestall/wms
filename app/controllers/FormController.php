@@ -220,6 +220,7 @@ class FormController extends Controller {
                 //get any stored user data
                 $stored_data = $this->reeceuser->getUserByEmail(trim($row[3])) ;
                 echo "Stored Data<pre>",print_r($stored_data),"</pre>";
+                continue;
                 if($stored_data)
                 {
                     //Department is already stored - check for data update
@@ -270,7 +271,7 @@ class FormController extends Controller {
                         "to be",
                         "added",
                         "",
-                        
+
                     );
                 }
                 ++$line;
