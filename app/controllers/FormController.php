@@ -298,8 +298,8 @@ class FormController extends Controller {
                 //$user_array['phone'] = $row[6];
                 //$user_array['fax'] = $row[7];
                 $user_array['mobile_number']    = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[5]), "+"), $country == "zealand");
-                $user_array['phone']            = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[6]), "+"), $country == "zealand");
-                $user_array['fax']              = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[7]), "+"), $country == "zealand");
+                $user_array['phone']            = Utility::formatPhoneString(ltrim(str_replace(' ', '', $row[6]), "+"), $country == "zealand");
+                $user_array['fax']              = Utility::formatPhoneString(ltrim(str_replace(' ', '', $row[7]), "+"), $country == "zealand");
                 if($data_errors)
                 {
                     $import_users = false;
