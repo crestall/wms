@@ -259,7 +259,6 @@ class FormController extends Controller {
                     $mobile = Utility::formatMobileString($row[9], $row[7] == "NZ");
                     $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
                     $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
-                    $fb_row[] = (trim(strtolower($stored_data['stored_address'])) != trim(strtolower($address)))? $address : "";
                     $fb_row[] = ($stored_data['mobile_number'] != $mobile)? $mobile : "";
                     $fb_row[] = ($stored_data['phone'] != $phone)? $phone : "";
                     $fb_row[] = ($stored_data['fax'] != $fax) ? $fax : "";
