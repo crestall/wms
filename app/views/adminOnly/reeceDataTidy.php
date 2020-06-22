@@ -137,9 +137,9 @@
             </div>
             <div class="form-group row">
                 <div class="form-check">
-                    <label class="form-check-label col-md-3" for="reece_header_row">My CSV has a header row</label>
+                    <label class="form-check-label col-md-3" for="reece_user_header_row">My CSV has a header row</label>
                     <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="reece_header_row" name="reece_header_row" checked />
+                        <input class="form-check-input styled" type="checkbox" id="reece_user_header_row" name="reece_user_header_row" checked />
                         <label for="reece_user_header_row"></label>
                     </div>
                 </div>
