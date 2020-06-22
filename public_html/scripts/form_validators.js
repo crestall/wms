@@ -783,6 +783,20 @@ $(document).ready(function() {
 		}
 	});
     ///////////////////////////////////////////////////////////////////////////////
+    $("#reece-supplied-data-upload-user").validate({
+    	rules:{
+    		reece_user_csv_file:{
+    			extension: "csv",
+                required: true
+    		},
+    	},
+		messages:{
+			reece_csv_file:{
+				extension: "Only upload csv files here"
+			}
+		}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("#order-edit").validate({
     	rules:{
     		'invoice[]':{
