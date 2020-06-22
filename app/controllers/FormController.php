@@ -252,11 +252,11 @@ class FormController extends Controller {
                     $fb_row[] = ($department_details['name'] != $reece_department_name)? $reece_department_name : "";
                     $fb_row[] = ($department_details['reece_id'] != $reece_department_id)? $reece_department_id : "";
                     //Email
-                    $fb_row[] = (strtolower($stored_data['email']) != $email))? $email : "";
+                    $fb_row[] = (strtolower($stored_data['email']) != $email)? $email : "";
                     //Job Title
-                    $fb_row[] = (strtolower($stored_data['job_title']) != $job_title))? trim($row[2] : "";
+                    $fb_row[] = (strtolower($stored_data['job_title']) != $job_title)? trim($row[2]) : "";
                     //Phone. Mobile and Fax
-                    $mobile = Utility::formatMobileString($row[9], $row[7] == "NZ")
+                    $mobile = Utility::formatMobileString($row[9], $row[7] == "NZ");
                     $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
                     $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
                     $fb_row[] = (trim(strtolower($stored_data['stored_address'])) != trim(strtolower($address)))? $address : "";
