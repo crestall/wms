@@ -394,7 +394,7 @@ class Utility{
         }
         else
         {
-            die($string)
+            die($string);
             if(  preg_match( '/^(\d{2})(\d{1})(\d{4})(\d{4})$/', $string,  $matches ) )
             {
                 return "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
