@@ -268,7 +268,7 @@ class FormController extends Controller {
                 else
                 {
                     //Need to add new department
-                    echo "<p>Need to add {$row[1]} to the system</p>";
+                    echo "<p>Need to add {$row[1]} to the system at line $line</p>";
                     $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
                     $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
                     if($row[7] == "NZ")
