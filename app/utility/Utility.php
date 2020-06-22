@@ -369,7 +369,7 @@ class Utility{
         }
         else
         {
-            if(  preg_match( '/^(\d{2})(\d{3)(\d{3})(\d{3})/', $string,  $matches ) )
+            if(  preg_match( '/^(\d{2})(\d{3})(\d{3})(\d{3})/', $string,  $matches ) )
             {
                 return "+".$matches[1] . ' ' .$matches[2] . ' ' . $matches[3] . ' '. $matches[4];
             }
