@@ -225,7 +225,7 @@ class FormController extends Controller {
                 array_splice( $words, -1 );
                 $name = implode(" ",$words);
                 $email = strtolower(trim($row[3]));
-                $job_title = trim($row[2]);
+                $job_title = strtolower(trim($row[2]));
                 list($firstname, $lastname) = explode(" ", $name, 2);
                 $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
                 $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
@@ -287,7 +287,7 @@ class FormController extends Controller {
                         $reece_department_name,
                         $reece_department_id,
                         $email,
-                        $job_title,
+                        ucwords($job_title),
                         $mobile,
                         $phone,
                         $fax
