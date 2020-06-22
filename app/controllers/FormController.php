@@ -98,6 +98,7 @@ class FormController extends Controller {
             'procRecordPickup',
             'procReeceDepartmentCheck',
             'procReeceDepartmentUpload',
+            'procReeceUserCheck',
             'procReeceUserUpload',
             'procRegisterNewStock',
             'procRepAdd',
@@ -123,6 +124,159 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procReeceUserCheck()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($_FILES['reece_csv_file']["size"] > 0)
+        {
+            if ($_FILES['reece_csv_file']['error']  === UPLOAD_ERR_OK)
+            {
+                $tmp_name = $_FILES['reece_csv_file']['tmp_name'];
+                $csv_array = array_map('str_getcsv', file($tmp_name));
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
+            }
+            else
+            {
+            	$error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+                Form::setError('reece_csv_file', $error_message);
+            }
+        }
+        else
+        {
+            Form::setError('reece_csv_file', 'please select a file to upload');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            /*
+            [0] Employee ID
+            [1] Employee Name
+            [2] Job Title
+            [3] Email
+            [4] Department Name - includes Reece Department ID
+            [5] Street Address
+            [6] Suburb/City
+            [7] State - includes NZ (did'nt know it was an Australian State!)
+            [8] Postcode
+            [9] Mobile number - needs to be formatted
+            [10] telephone  - needs to be formatted
+            [11] fax - needs to be formatted
+            */
+            $skip_first = isset($reece_header_row);
+            $line = 1;
+            $departments = array();
+            $feedback_string = "<ul>";
+            //Set up csv file
+            $cols = array(
+                "Current Reece Id",
+                "Current Department Name",
+                "Current Department Address",
+                "Current Phone",
+                "Current Fax",
+                "",
+                "New Reece Id",
+                "New Department Name",
+                "New Department Address",
+                "New Phone",
+                "New Fax",
+            );
+
+            $rows = array();
+            foreach($csv_array as $row)
+            {
+                $reece_department_id = 0;
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    ++$line;
+                    continue;
+                }
+                $phone = $fax = $address = "";
+                //get Department ID
+                $array = explode(" ",$row[4], 2);
+                $reece_department_id =(int)$array[0];
+                $reece_department_name = $array[1];
+                $stored_data = $this->reecedepartment->getDepartmentByReeceId($reece_department_id);
+                if($stored_data)
+                {
+                    //Department is already stored - check for data update
+                    $fb_row = array(
+                        $reece_department_id,
+                        $stored_data['name'],
+                        $stored_data['stored_address'],
+                        $stored_data['phone'],
+                        $stored_data['fax'],
+                        "",
+                        ""
+                    );
+                    //Department Name
+                    $fb_row[] = ($stored_data['name'] != $reece_department_name)? $reece_department_name : "";
+                    //Phone and Fax
+                    $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
+                    $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
+                    //Address
+                    if($row[7] == "NZ")
+                    {
+                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." New Zealand";
+                    }
+                    else
+                    {
+                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
+                    }
+                    $fb_row[] = (trim(strtolower($stored_data['stored_address'])) != trim(strtolower($address)))? $address : "";
+                    $fb_row[] = ($stored_data['phone'] != $phone)? $phone : "";
+                    $fb_row[] = ($stored_data['fax'] != $fax) ? $fax : "";
+                }
+                else
+                {
+                    //Need to add new department
+                    $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
+                    $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
+                    if($row[7] == "NZ")
+                    {
+                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." New Zealand";
+                    }
+                    else
+                    {
+                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
+                    }
+                    $fb_row = array(
+                        "This is",
+                        "new -",
+                        "Will need",
+                        "to be",
+                        "added",
+                        "",
+                        $reece_department_id,
+                        $reece_department_name,
+                        $address,
+                        $phone,
+                        $fax
+                    );
+                }
+                ++$line;
+                $rows[] = $fb_row;
+            }
+            $expire=time()+60;
+            setcookie("fileDownload", "true", $expire, "/");
+            $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "reece_departments_feedback_csv".date("Ymd")]);
+        }
+        //return $this->redirector->to(PUBLIC_ROOT."admin-only/reece-data-tidy");
     }
 
     public function procReeceUserUpload()
@@ -303,7 +457,7 @@ class FormController extends Controller {
 
                 $user_array['mobile_number']    = ($user_array['mobile_number'])? $user_array['mobile_number']: "";
                 $user_array['phone']            = ($user_array['phone'])? $user_array['phone']: "";
-                $user_array['fax']              = ($user_array['fax'])? $user_array['fax']: ""; 
+                $user_array['fax']              = ($user_array['fax'])? $user_array['fax']: "";
                 if($data_errors)
                 {
                     $import_users = false;
