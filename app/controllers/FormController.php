@@ -198,7 +198,7 @@ class FormController extends Controller {
                 "New First Name",
                 "New Last Name",
                 "New Department Name",
-                "New Reece Dpartment Id",
+                "New Reece Department Id",
                 "New Email",
                 "New Job Title",
                 "New Mobile Number",
@@ -221,18 +221,21 @@ class FormController extends Controller {
                 $array = explode(" ",$row[4], 2);
                 $reece_department_id =(int)$array[0];
                 $reece_department_name = $array[1];
+                $words = explode( " ", trim($row[1]) );
+                array_splice( $words, -1 );
+                $name = implode(" ",$words);
+                $email = strtolower(trim($row[3]));
+                $job_title = trim($row[2]);
+                list($firstname, $lastname) = explode(" ", $name, 2);
+                $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
+                $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
+                $mobile = Utility::formatMobileString($row[9], $row[7] == "NZ");
                 //get any stored user data
                 $stored_data = $this->reeceuser->getUserByEmail(trim($row[3])) ;
                 if($stored_data)
                 {
                     //User is already stored - check for data update
                     $department_details = $this->reecedepartment->getDepartmentById($stored_data['department_id']);
-                    $words = explode( " ", trim($row[1]) );
-                    array_splice( $words, -1 );
-                    $name = implode(" ",$words);
-                    $email = strtolower(trim($row[3]));
-                    $job_title = strtolower(trim($row[2]));
-                    list($firstname, $lastname) = explode(" ", $name, 2);
                     $fb_row = array(
                         $stored_data['full_name'],
                         $stored_data['first_name'],
@@ -258,35 +261,36 @@ class FormController extends Controller {
                     //Job Title
                     $fb_row[] = (strtolower($stored_data['job_title']) != $job_title)? trim($row[2]) : "";
                     //Phone. Mobile and Fax
-                    $mobile = Utility::formatMobileString($row[9], $row[7] == "NZ");
-                    $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
-                    $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
                     $fb_row[] = ($stored_data['mobile_number'] != $mobile)? $mobile : "";
                     $fb_row[] = ($stored_data['phone'] != $phone)? $phone : "";
                     $fb_row[] = ($stored_data['fax'] != $fax) ? $fax : "";
                 }
                 else
                 {
-                    //Need to add new department
-                    echo "<p>Need to add {$row[1]} to the system at line $line</p>";
-                    $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
-                    $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
-                    if($row[7] == "NZ")
-                    {
-                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." New Zealand";
-                    }
-                    else
-                    {
-                        $address = Utility::streetAbbreviations($row[5])." ".$row[6]." ".$row[7]." ".str_pad($row[8], 4, '0', STR_PAD_LEFT)." Australia";
-                    }
+                    //Need to add new user
+                    //echo "<p>Need to add {$row[1]} to the system at line $line</p>";
                     $fb_row = array(
-                        "This is",
-                        "new -",
-                        "Will need",
-                        "to be",
+                        "This",
+                        "is",
+                        "new",
+                        "-",
+                        "It",
+                        "Will",
+                        "need",
+                        "to",
+                        "be",
                         "added",
                         "",
-
+                        $name,
+                        $firstname,
+                        $lastname,
+                        $reece_department_name,
+                        $reece_department_id,
+                        $email,
+                        $job_title,
+                        $mobile,
+                        $phone,
+                        $fax
                     );
                 }
                 ++$line;
