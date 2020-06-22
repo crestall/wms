@@ -227,7 +227,9 @@ class FormController extends Controller {
                 {
                     //User is already stored - check for data update
                     $department_details = $this->reecedepartment->getDepartmentById($stored_data['department_id']);
-                    $name = trim($row[1]);
+                    $words = explode( " ", trim($row[1]) );
+                    array_splice( $words, -1 );
+                    $name = implode(" ",$words);
                     $email = strtolower(trim($row[3]));
                     $job_title = strtolower(trim($row[2]));
                     list($firstname, $lastname) = explode(" ", $name, 2);
