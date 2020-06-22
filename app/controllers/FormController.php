@@ -270,11 +270,7 @@ class FormController extends Controller {
                         "to be",
                         "added",
                         "",
-                        $reece_department_id,
-                        $reece_department_name,
-                        $address,
-                        $phone,
-                        $fax
+                        
                     );
                 }
                 ++$line;
