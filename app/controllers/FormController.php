@@ -309,7 +309,7 @@ class FormController extends Controller {
             }
             if($import_users)
             {
-                $this->reecedepartment->addUpdateUsers($users);
+                $this->reeceuser->addUpdateUsers($users);
                 Session::set('feedback', "<h2><i class='far fa-check-circle'></i>User Import is Complete</h2><p>All Values have been inserted");
                 //echo "<pre>",print_r($users),"</pre";die();
             }
