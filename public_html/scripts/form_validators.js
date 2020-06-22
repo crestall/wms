@@ -791,7 +791,7 @@ $(document).ready(function() {
     		},
     	},
 		messages:{
-			reece_csv_file:{
+			reece_user_csv_file:{
 				extension: "Only upload csv files here"
 			}
 		}
