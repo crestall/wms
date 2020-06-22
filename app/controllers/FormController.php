@@ -309,9 +309,9 @@ class FormController extends Controller {
             }
             if($import_users)
             {
-                //$this->reecedepartment->addUpdateDepartments($departments);
-                //Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Department Import is Complete</h2><p>All Values have been inserted");
-                echo "<pre>",print_r($users),"</pre";die();
+                $this->reecedepartment->addUpdateUsers($users);
+                Session::set('feedback', "<h2><i class='far fa-check-circle'></i>User Import is Complete</h2><p>All Values have been inserted");
+                //echo "<pre>",print_r($users),"</pre";die();
             }
             else
             {
