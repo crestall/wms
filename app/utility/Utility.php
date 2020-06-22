@@ -381,6 +381,7 @@ class Utility{
 
     public static function formatPhoneString($string, $nz = false)
     {
+        var_dump($nz);
         if($nz)
         {
             if(  preg_match( '/^(\d{2})(\d{1})(\d{3})(\d{4})$/', $string,  $matches ) )
