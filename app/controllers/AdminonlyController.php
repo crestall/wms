@@ -14,6 +14,14 @@ class adminonlyController extends Controller
         parent::beforeAction();
     }
 
+    public function reeceDataTidy()
+    {
+        Config::setJsConfig('curPage', "reece-data-tidy");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/reeceDataTidy.php', [
+            'page_title'    =>  "Check and Clean Reece Data"
+        ]);
+    }
+
     public function clientBayFixer()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
@@ -88,6 +96,27 @@ class adminonlyController extends Controller
         Config::setJsConfig('curPage', "encrypt-some-shit");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/encryptsomeshit.php', [
             'page_title'    =>  "Encrypt Some Shit"
+        ]);
+    }
+
+    public function updateConfiguration()
+    {
+        //add sensitive config data - passwords and keys data
+        Config::setJsConfig('curPage', "update-configuration");
+        $configuration_names = $this->configuration->getConfigurationNames();
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/updateConfiguration.php', [
+            'page_title'            => "Configuration Update",
+            'configuration_names'   => $configuration_names
+        ]);
+    }
+
+    public function apiTester()
+    {
+        //add sensitive config data - passwords and keys data
+        Config::setJsConfig('curPage', "api-tester");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/apiTester.php', [
+            'page_title'            => "Test the APIs",
+            'freedomMYOB'           => $this->FreedomMYOB
         ]);
     }
 

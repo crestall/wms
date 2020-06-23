@@ -19,16 +19,9 @@ class TasksController extends Controller
     public function initialize(){
 
          $this->loadEparcelLocations([
-            'BigBottle',
             'Freedom',
-            'Nuchev'
-        ]);
-
-        $this->loadHuntersLocations([
-            '3KG',
-            'PLU',
-            'PAL',
-            'Test'
+            'Nuchev',
+            'TTAU'
         ]);
 
         $this->loadComponents([
@@ -36,9 +29,21 @@ class TasksController extends Controller
         ]);
     }
 
+    public function testTask()
+    {
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            Email::sendNewUserEmail('Mark Solly', 'mark@solly.com.au');
+        }
+    }
+
     public function sendClientReports()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
@@ -179,21 +184,9 @@ class TasksController extends Controller
         }
     }
 
-    public function bigBottleTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->woocommerce->getBBOrders();
-        }
-    }
-
     public function onePlateTask()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
@@ -203,87 +196,31 @@ class TasksController extends Controller
         }
     }
 
-    public function teamTimbuktuTask()
+    public function sessionSecretTask()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
         else
         {
-            $this->shopify->getTeamTimbuktuOrders();
-        }
-    }
-
-    public function ndcTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->squarespace->getNatutralDistillingOrders();
+            $db = Database::openConnection();
+            $current_secret = Encryption::decryptStringBase64($db->queryValue('configuration', array('name' => 'COOKIE_SECRET_KEY'), 'value'));
+            $new_secret = Encryption::getRandomToken();
+            //echo "new : ".$new_secret;
+            $db->updateDatabaseFields('configuration', array('value' => Encryption::encryptStringBase64($new_secret), 'date_modified' => time()), 'COOKIE_SECRET_KEY', "name");
         }
     }
 
     public function nuchevTask()
     {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
         else
         {
             $this->woocommerce->getNuchevOrders();
-        }
-    }
-
-    public function noaTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->woocommerce->getNoaOrders();
-        }
-    }
-
-    public function ttTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->woocommerce->getTTOrders();
-        }
-    }
-
-    public function figureEightTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->emailordersparser->getFigure8Orders();
-        }
-    }
-
-    public function nuchevSampleTask()
-    {
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->emailordersparser->getNuchevSamples();
         }
     }
 

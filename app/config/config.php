@@ -33,7 +33,7 @@ return array(
      * COOKIE_PATH: The path where the cookie is valid for. If set to '/', the cookie will be available within the entire COOKIE_DOMAIN.
      * COOKIE_SECURE: If the cookie will be transferred through secured connection(SSL). It's highly recommended to set it to true if you have secured connection
      * COOKIE_HTTP: If set to true, Cookies that can't be accessed by JS - Highly recommended!
-     * COOKIE_SECRET_KEY: A random value to make the cookie more secure.
+     * COOKIE_SECRET_KEY: A random value to make the cookie more secure. Now Stored in database
      *
      */
     "COOKIE_EXPIRY"         => 1209600,
@@ -42,15 +42,6 @@ return array(
     "COOKIE_PATH"           => '/',
     "COOKIE_SECURE"         => true,
     "COOKIE_HTTP"           => true,
-    "COOKIE_SECRET_KEY"     => COOKIE_SECRET_KEY,
-
-    /**
-     * Configuration for: Encryption Keys
-     *
-     */
-    "ENCRYPTION_KEY"    => ENCRYPTION_KEY,
-    "HMAC_SALT"         => HMAC_SALT,
-    "HASH_KEY"          => HASH_KEY,
 
     /**
      * Configuration for Email
@@ -59,13 +50,10 @@ return array(
     "EMAIL_FROM"        => "FSGWMS@fsg.com.au",
     "EMAIL_FROM_NAME"   => "Film Shot Graphics Warehouse Management System",
     "EMAIL_REPLY_TO"    => "FSGWMS@fsg.com.au",
-    "EMAIL_PWD"         => "",
-    "EMAIL_UNAME"       => "FSGWMS@fsg.com.au",
     "EMAIl_HOST"        => "smtp.office365.com",
     "EMAIL_PORT"        => 587,
 
     "EMAIL_PASSWORD_RESET_URL" => PUBLIC_ROOT . "login/resetPassword",
-
 
 
     /**
@@ -84,122 +72,9 @@ return array(
     "PAGINATION_DEFAULT_LIMIT" => 10,
 
     /*************************************************************************
-    * eParcel API constants
-    *************************************************************************
-    //Testbed
-    'API_KEY'       =>  '37515c42-aa3e-441a-bf24-8d20e125a483',
-    'API_PWD'       =>  'xac75c284b8d81524a4d',
-    'ACCOUNT_NO'    =>  '1000579543',
-
-    //3PL
-    'API_KEY'       =>  'dbcc9679-996a-49f9-8156-2aab3708485c',
-    'API_PWD'       =>  '0404Jaffa',
-    'ACCOUNT_NO'    =>  '0007018074',
-    */
-    //FSG
-    'API_KEY'       =>  'e5e25c00-c317-4929-950d-1d2631281f4f',
-    'API_PWD'       =>  'xe5f23caf4c7edf3f5bf',
-    'ACCOUNT_NO'    =>  '0007378183',
-
-    /*************************************************************************
-    * DHL API constants
-    **************************************************************************/
-    /*//Testbed
-    'DHL_PASSWORD' => 'MjAzMDI5MTU',
-    'DHL_USER_ID' => 'LTIwOTY3NTQwNTI=',
-    'DHL_CUSTOMERPREFIX' => 'AUASY',
-    'DHL_SOLDTO' => '501004',
-    'DHL_PICKUP' => '501004',
-    */
-    //Live
-    'DHL_PASSWORD'          => 'MjAzMDI5MTU',
-    'DHL_USER_ID'           => 'OTYzODA0OTI=',
-    'DHL_CUSTOMERPREFIX'    => 'AUASY',
-    'DHL_SOLDTO'            => '501040',
-    'DHL_PICKUP'            => '501040',
-
-    /*************************************************************************
-    * Hunters API constants
-    **************************************************************************/
-    /* */
-    'HUNTERS_TEST_CUSTOMER_CODE'    => '3PLVIC',
-    'HUNTERS_TEST_UNAME'            => '3PLVIC',
-    'HUNTERS_TEST_PWD'              => '3plplus',
-    'HUNTERS_TEST_HOST'             => 'api.hunterexpress.com.au/live/',
-
-    //Live
-    'HUNTERS_3KGCUSTOMER_CODE'      => '3PL3KG',
-    'HUNTERS_PLUCUSTOMER_CODE'      => '3PLPLU',
-    'HUNTERS_PALLETSCUSTOMER_CODE'  => '3PLPAL',
-    'HUNTERS_UNAME'                 => '3PL3KG',
-    'HUNTERS_PWD'                   => 'plplus',
-    'HUNTERS_HOST'                  => 'api.hunterexpress.com.au/live/',
-    /*************************************************************************
-    * XERO API constants
-    **************************************************************************/
-    'BBXEROCONSUMERKEY'     => 'OUWBI1XCHJU9RHOJXTIBYFHNGHMV1R',
-    'BBXEROCONSUMERSECRET'  => 'NBFMLJLWPHWIRAUJL0CDCYL5KA2VE4',
-
-    /*************************************************************************
-    * BIG BOTTLE WOO COMMERCE API constants
-    **************************************************************************/
-    'BBWOOCONSUMERRKEY'     => 'ck_99e22a0fb0e0c80de41df7352f7b4fb4903bbed8',
-    'BBWOOCONSUMERSECRET'   => 'cs_c682973552f96637cd2d09d7a820343bdb7f2585',
-
-    /*************************************************************************
-    * NUCHEV WOO COMMERCE API constants
-    **************************************************************************/
-    'NUWOOCONSUMERRKEY'     => 'ck_4c48da8898e8135f6e360f028b91ce7f68a408de',
-    'NUWOOCONSUMERSECRET'   => 'cs_c41cd37db3ca0696419e7dd2d5a77a4e8536eaca',
-
-    /*************************************************************************
-    * ONEPLATE WOO COMMERCE API constants
-    **************************************************************************/
-    'ONEPLATEWOOCONSUMERRKEY'     => 'ck_b9acaf372d2729a8e445916a79012b98f671b7e6',
-    'ONEPLATEWOOCONSUMERSECRET'   => 'cs_8c99813f34fe2931a2b20dcb0a8d54df00b540d1',
-
-    /*************************************************************************
-    * TTAUST WOO COMMERCE API constants
-    **************************************************************************/
-    'TTWOOCONSUMERRKEY'     => 'ck_c35deeeb03f80f698a77ebf8567b889664d3959c',
-    'TTWOOCONSUMERSECRET'   => 'cs_de63e0f9fe17d8adc4d7b3b03ec3b054106d9d8b',
-
-    /*************************************************************************
-    * TEAMTIMBUKTU SHOPIFY API constants
-    **************************************************************************/
-    'TEAMTIMBUKTUAPIKEY'    => '69243c9b8c3d769b13f3f6a13f686086',
-    'TEAMTIMBUKTUAPIPASS'   => 'b05f99ea0bacf86cb826579bd2c63495',
-
-    /*************************************************************************
-    * TradeGecko API constants
-    **************************************************************************/
-    'TRADEGECKO_BEARER' => 'd775545a80bb2cdbfe573a960f840e67c29c91b4b82ad10e1e0b756f72e7a06c',
-
-    /*************************************************************************
-    * Hunters Fuel Surcharge
-    **************************************************************************/
-    'HUNTERS_FUEL_SURCHARGE' => 1.15,
-
-    /*************************************************************************
-    * Vic Local Courier Charge
-    **************************************************************************/
-    'VIC_LOCAL_CHARGE' => 72.00,
-
-    /*************************************************************************
-    * Comet White Glove Courier Charge
-    **************************************************************************/
-    'COMET_VIC_CHARGE' => 72.00,
-
-    /*************************************************************************
     * Max Shipping Price Allowed Without Checking
     **************************************************************************/
     'MAX_SHIPPING_CHARGE' => 80,
-
-    /*************************************************************************
-    * Direct Freight API Constants
-    **************************************************************************/
-    'DIRECT_FREIGHT_API_KEY'    => 'F5B293A6-0118-457C-AD81-24D870A8BB75',
-    'DIRECT_FREIGHT_ACC_NUMBER' => '34495',
 
     /*************************************************************************
     * 3PL Address
@@ -535,7 +410,8 @@ return array(
             'user-roles'                =>  true,
             //'pickfaces'                 => true,
             'couriers'                  => true,
-            'edit-user-profile'     => false
+            'edit-user-profile'         => false,
+            'add-user'                  => false
 		),
         'financials'    =>  array(
             //'hunters-check' => true,
@@ -550,7 +426,11 @@ return array(
             'super_admin_only'  => true,
             'eparcel-shipment-deleter'  => true,
             'dispatched-orders-updater' => false,
-            'client-bay-fixer'  => true
+            'client-bay-fixer'  => true,
+            'encrypt-some-shit' => false,
+            'update-configuration'  => true,
+            'api-tester'    => true,
+            'reece-data-tidy'   => true
         ),
     ),
     'WAREHOUSE_PAGES' => array(

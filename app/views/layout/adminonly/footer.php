@@ -10,6 +10,45 @@
 
                     }
                 },
+                'api-tester' :{
+                    init: function()
+                    {
+
+                    }
+                },
+                'reece-data-tidy' :{
+                    init: function()
+                    {
+                        $('form#reece-department-upload, form#reece-user-upload').submit(function(){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and storing data...</h2></div>' });
+                            }
+                        });
+                        $('form#reece-supplied-data-upload-department').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and checking the data...</h2></div>' });
+                                /*e.preventDefault(); // avoid to execute the actual submit of the form.
+                                var form = $(this)[0];
+                                var url = $(this).attr('action');
+                                $.ajax({
+                                       type: "POST",
+                                       url: url,
+                                       data: new FormData(form),
+                                       processData: false,
+                                       contentType: false,
+                                       //enctype: 'multipart/form-data',
+                                       success: function(d)
+                                       {
+                                           //alert(data); // show response from the php script.
+                                           $.unblockUI();
+                                       }
+                                });*/
+                            }
+                        });
+                    }
+                },
                 'add-sales-rep':{
                     init: function()
                     {
@@ -61,45 +100,48 @@
                         $('form#string-encrypter').submit(function(){
                             if($(this).valid())
                             {
-                                $.ajax({
-                                    url: "/ajaxfunctions/encryptSomeShit",
-                                    data: { string: $('input#string').val()},
-                                    method: "post",
-                                    //dataType: "json",
-                                    beforeSend: function(){
-                                        console.log('ajax');
-                                        $("div#feedback_holder")
-                                            .slideDown()
-                                            .html("<p></p><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Generating Encryption String</p>");
-                                    },
-                                    success: function(d){
-                                        if(d.error)
-                                        {
-                                            $("div#feedback_holder")
-                                                .hide()
-                                                .removeClass()
-                                                .addClass("errorbox")
-                                                .slideDown()
-                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2><p>"+d.error_string+"</p>");
-                                        }
-                                        else
-                                        {
-                                            $("div#feedback_holder")
-                                                .hide()
-                                                .removeClass()
-                                                .addClass("feedbackbox")
-                                                .html("<h2><i class='far fa-check-circle'></i>Encryption Results</h2><p>"+$('input#string').val()+" : "+d.encryptedvalue+"</p>")
-                                                .slideDown();
-                                        }
-                                    }
-                                });
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Generating Encryption String...</h2></div>' });
                             }
-                            return false;
+                            else
+                            {
+                                return false;
+                            }
+                        });
+                    }
+                },
+                'update-configuration':{
+                    init: function(){
+                        $('form#add-config-value').submit(function(){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding/Updating Value</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
+                        $('button.delete').click(function(e){
+                            e.preventDefault();
+                            var $but = $(e.target);
+                            swal({
+                                title: "Really delete this value?",
+                                text: "This cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willDelete) {
+                                if (willDelete) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deleting configuration value...</h1></div>' });
+                                    $.post('/ajaxfunctions/deleteConfiguration', {id: $but.data('configurationid')}, function(d){
+                                        window.location.reload();
+                                    })
+                                }
+                            });
                         });
                     }
                 }
             }
-
             //run the script for the current page
             actions[config.curPage].init();
         </script>

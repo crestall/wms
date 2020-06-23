@@ -12,16 +12,16 @@
  */
  class Eparcel{
 
-    protected $controller;
-    protected $API_KEY ;
+    public $controller;
+    protected $API_KEY;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
 
     const    API_SCHEME   = 'https://';
     const    API_HOST     = 'digitalapi.auspost.com.au';
     const    API_PORT     = 443;                            // ssl port
-    //const    API_BASE_URL = '/test/shipping/v1/';        // for production use, remove '/test'
-    const    API_BASE_URL = '/shipping/v1/';        // for production use, remove '/test'
+    //const    API_BASE_URL = '/test/shipping/v1/';         // for production use, remove '/test'
+    const    API_BASE_URL = '/shipping/v1/';                // for production use, remove '/test'
     const   HEADER_EOL = "\r\n";
 
     private $fSock;         // socket handle
@@ -29,10 +29,10 @@
 
     public function __construct(Controller $controller)
     {
-        $this->controller = $controller;
-        $this->API_KEY    = Config::get('API_KEY');
-        $this->API_PWD    = Config::get('API_PWD');
-        $this->ACCOUNT_NO = Config::get('ACCOUNT_NO');
+        $this->controller   = $controller;
+        $this->API_KEY      = Config::get('EPARCEL_API_KEY');
+        $this->API_PWD      = Config::get('EPARCEL_API_PWD');
+        $this->ACCOUNT_NO   = Config::get('EPARCEL_ACCOUNT_NO');
     }
 
     protected function createSocket()

@@ -741,6 +741,62 @@ $(document).ready(function() {
 		}
 	});
     ///////////////////////////////////////////////////////////////////////////////
+    $("#reece-department-upload").validate({
+    	rules:{
+    		csv_file:{
+    			extension: "csv",
+                required: true
+    		},
+    	},
+		messages:{
+			csv_file:{
+				extension: "Only upload csv files here"
+			}
+		}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
+    $("#reece-user-upload").validate({
+    	rules:{
+    		csv_user_file:{
+    			extension: "csv",
+                required: true
+    		},
+    	},
+		messages:{
+			csv_user_file:{
+				extension: "Only upload csv files here"
+			}
+		}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
+    $("#reece-supplied-data-upload-department").validate({
+    	rules:{
+    		reece_csv_file:{
+    			extension: "csv",
+                required: true
+    		},
+    	},
+		messages:{
+			reece_csv_file:{
+				extension: "Only upload csv files here"
+			}
+		}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
+    $("#reece-supplied-data-upload-user").validate({
+    	rules:{
+    		reece_user_csv_file:{
+    			extension: "csv",
+                required: true
+    		},
+    	},
+		messages:{
+			reece_user_csv_file:{
+				extension: "Only upload csv files here"
+			}
+		}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("#order-edit").validate({
     	rules:{
     		'invoice[]':{

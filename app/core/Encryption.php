@@ -131,8 +131,8 @@ class Encryption{
             $i[] = substr($chars, $n, 1);
         }
 
-        $key_hash = hash('sha256', Config::get('HASH_KEY'));
-        $key_hash = (strlen($key_hash) < strlen($chars) ? hash('sha512', Config::get('HASH_KEY')) : $key_hash);
+        $key_hash = hash('sha256', HASH_KEY);
+        $key_hash = (strlen($key_hash) < strlen($chars) ? hash('sha512', HASH_KEY) : $key_hash);
 
         for ($n = 0; $n < strlen($chars); $n++) {
             $p[] =  substr($key_hash, $n, 1);
@@ -168,7 +168,7 @@ class Encryption{
         $iv      = openssl_random_pseudo_bytes($iv_size);
 
         // generate key for authentication using ENCRYPTION_KEY & HMAC_SALT
-        $key = mb_substr(hash(self::HASH_FUNCTION, Config::get('ENCRYPTION_KEY') . Config::get('HMAC_SALT')), 0, 32, '8bit');
+        $key = mb_substr(hash(self::HASH_FUNCTION, ENCRYPTION_KEY . HMAC_SALT), 0, 32, '8bit');
 
         // append initialization vector
         $encrypted_string = openssl_encrypt($plain, self::CIPHER, $key, OPENSSL_RAW_DATA, $iv);
@@ -179,6 +179,38 @@ class Encryption{
 
         return $hmac . $ciphertext;
     }
+    /**
+     * Encrypt a string and return base64 coding for emcryted string
+     *
+     * $access public
+     * @static static method
+     * @param string $plain
+     * @return string
+     * @throws Exception if encryption function does not exist
+     */
+    public static function encryptStringBase64($plain)
+    {
+        return base64_encode(self::encrypt($plain));
+    }
+
+    /**
+     * decrypt a string supplied in base64 format
+     *
+     * $access public
+     * @static static method
+     * @param string $encryptstring
+     * @return string
+     * @throws Exception if encryption function does not exist or $encryptstring is empty
+     */
+    public static function decryptStringBase64($encryptstring)
+    {
+        if(empty($encryptstring))
+        {
+            throw new Exception("the string to decrypt can't be empty");
+        }
+        return self::decrypt(base64_decode($encryptstring));
+    }
+
 
     /**
      * Decrypted a string.
@@ -201,7 +233,7 @@ class Encryption{
         }
 
         // generate key used for authentication using ENCRYPTION_KEY & HMAC_SALT
-        $key = mb_substr(hash(self::HASH_FUNCTION, Config::get('ENCRYPTION_KEY') . Config::get('HMAC_SALT')), 0, 32, '8bit');
+        $key = mb_substr(hash(self::HASH_FUNCTION, ENCRYPTION_KEY . HMAC_SALT), 0, 32, '8bit');
 
         // split cipher into: hmac, cipher & iv
         $macSize    = 64;
@@ -220,6 +252,34 @@ class Encryption{
         $cipher  = mb_substr($iv_cipher, $iv_size, null, '8bit');
 
         return openssl_decrypt($cipher, self::CIPHER, $key, OPENSSL_RAW_DATA, $iv);
+    }
+
+    /**
+     * Get a Random Token.
+     *
+     * @access public
+     * @static static method
+     * @param  number $length - default value = 32
+     * @return string
+     */
+    public static function getRandomToken($length = 32)
+    {
+        if(!isset($length) || intval($length) <= 8 )
+        {
+          $length = 32;
+        }
+        if (function_exists('random_bytes'))
+        {
+            return bin2hex(random_bytes($length));
+        }
+        if (function_exists('mcrypt_create_iv'))
+        {
+            return bin2hex(mcrypt_create_iv($length, MCRYPT_DEV_URANDOM));
+        }
+        if (function_exists('openssl_random_pseudo_bytes'))
+        {
+            return bin2hex(openssl_random_pseudo_bytes($length));
+        }
     }
 
     /**

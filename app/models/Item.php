@@ -866,6 +866,7 @@ class Item extends Model{
             $item_values['active'] = 0;
             $item_values['sku'] = $sku."-deactivated";
         }
+        
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;

@@ -125,17 +125,13 @@ class Controller {
          ]);
 
          $this->loadEparcelLocations([
-            'BigBottle',
             'Freedom',
             'Nuchev',
             'TTAU'
          ]);
 
-         $this->loadHuntersLocations([
-            '3KG',
-            'PLU',
-            'PAL',
-            'Test'
+         $this->loadMYOBInstances([
+            'Freedom'
          ]);
      }
 
@@ -156,15 +152,16 @@ class Controller {
     }
 
     /**
-     * Load the eParcel api location classes
+     * Load the MYOB api instance classes
      *
      * @param array $locations
      */
-    public function loadHuntersLocations(array $locations)
+    public function loadMYOBInstances(array $locations)
     {
+        $this->MYOB = new MYOB($this);
         foreach($locations as $location)
         {
-            $class = "Hunters".$location;
+            $class = $location . "MYOB";
             $this->{$class} = new $class($this);
             $this->{$class}->init();
         }

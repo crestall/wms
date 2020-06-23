@@ -9,7 +9,6 @@
  */
 
 class Config{
-
     /**
      * Array of configurations
      *
@@ -26,6 +25,11 @@ class Config{
         'default'   => 'config',
         'js'        => 'javascript'
     ];
+
+    public static function tester()
+    {
+        return "test";
+    }
 
     /**
      * Get default configuration value(s)
@@ -77,7 +81,6 @@ class Config{
     private static function _get($key, $source){
 
         if (!isset(self::$config[$source])) {
-
             $config_file = APP . 'config/' . $source . '.php';
 
             if (!file_exists($config_file)) {
@@ -87,12 +90,23 @@ class Config{
             self::$config[$source] = require $config_file . "";
         }
 
-        if(empty($key)){
+        if(empty($key))
+        {
             return self::$config[$source];
-        } else if(isset(self::$config[$source][$key])){
+        }
+        else if(isset(self::$config[$source][$key]))
+        {
             return self::$config[$source][$key];
         }
-
+        else
+        {
+            $db = Database::openConnection();
+            if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
+            {
+                self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
+                return self::$config[$source][$key] ;
+            }
+        }
         return null;
     }
 

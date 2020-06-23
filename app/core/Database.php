@@ -206,20 +206,44 @@ class Database {
 		{
 			$id = false;
 		}
-		return $id;
+        return $id;
 
     }
 
 	/**********************************************
-	*	returns the value of a field (gets the id by default)
+	*	returns the first id of the rows where the field matches the given string
 	*
 	* @$table: 	string - name of table
-	* @$cond: 	array  - field=>value
+	* @$field: 	string - name of field to match against
+    * @$value:  string - the value to match against
 	* returns id if row exists, false if not
 	***********************************************/
 	public function queryIdByFieldString($table, $field, $value)
     {
-		$row = $this->queryRow("SELECT id FROM $table WHERE $field LIKE :value", array('value' => $value));
+		$row = $this->queryRow("SELECT id FROM $table WHERE $field LIKE :value LIMIT 1", array('value' => $value));
+		if(count($row))
+		{
+			$id = $row['id'];
+		}
+		else
+		{
+			$id = false;
+		}
+		return $id;
+
+    }
+
+    /**********************************************
+	*	returns the first id of the rows where the field matches the given number
+	*
+	* @$table: 	string - name of table
+	* @$field: 	string - name of field to match against
+    * @$value:  number - the value to match against
+	* returns id if row exists, false if not
+	***********************************************/
+	public function queryIdByFieldNumber($table, $field, $value)
+    {
+		$row = $this->queryRow("SELECT id FROM $table WHERE $field = :value LIMIT 1", array('value' => $value));
 		if(count($row))
 		{
 			$id = $row['id'];

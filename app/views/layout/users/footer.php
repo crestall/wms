@@ -39,21 +39,18 @@
                             }
                             $(this).valid();
                         });
-                        $('select#role_id').change(function(e){
-                            if($(this).val() == $('#solar_role_id').val())
+                        $('select#role_id, select#client_id, select#solar_team_id').change(function(e){
+                            $(this).valid();
+                        });
+                        $('form#add_user').submit(function(){
+                            if($(this).valid())
                             {
-                                $('#solar_holder').slideDown();
-                                $('#solar_team_id').rules('add', 'notNone');
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding user and sending email...</h2></div>' });
                             }
                             else
                             {
-                                $('#solar_holder').slideUp();
-                                $('#solar_team_id').rules('remove');
+                                return false;
                             }
-                            $(this).valid();
-                        });
-                        $('select#role_id, select#client_id, select#solar_team_id').change(function(e){
-                            $(this).valid();
                         });
                     }
                 },
