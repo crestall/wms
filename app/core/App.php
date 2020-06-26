@@ -194,18 +194,28 @@ class App {
      * @param string $method
      * @return boolean
      */
-    private static function isMethodValid($controller, $method){
+    private static function isMethodValid($controller, $method)
+    {
 
-        if(!empty($method)){
+        if(!empty($method))
+        {
             if (!preg_match('/\A[a-z]+\z/i', $method) ||
                 !method_exists($controller, $method)  ||
-                strtolower($method) === "index" ){
+                strtolower($method) === "index" )
+            {
                 return false;
-            }else { return true; }
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return true;
+        }
 
-        }else { return true; }
-
-    }
+    }}
 
     /**
      * detect if arguments are valid(number and alphanumeric)
