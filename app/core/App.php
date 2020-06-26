@@ -215,7 +215,7 @@ class App {
             return true;
         }
 
-    }}
+    }
 
     /**
      * detect if arguments are valid(number and alphanumeric)
