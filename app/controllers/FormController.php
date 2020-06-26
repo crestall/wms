@@ -33,6 +33,9 @@ class FormController extends Controller {
              ]);
         }
 
+        $this->loadMYOBInstances([
+            'Freedom'
+        ]);
 
         $this->loadEparcelLocations([
             'Freedom',
