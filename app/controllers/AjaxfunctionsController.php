@@ -735,7 +735,7 @@ class ajaxfunctionsController extends Controller
         //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
         $df_r = $this->directfreight->getQuote($df_details);
         $df_response = json_decode($df_r,true);
-        echo "<pre>",var_dump($df_response),"</pre>"; die();
+        //echo "<pre>",var_dump($df_response),"</pre>"; die();
 
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
         //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
