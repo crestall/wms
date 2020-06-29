@@ -731,9 +731,9 @@ class ajaxfunctionsController extends Controller
         $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
         /*  */ 
         $df_details = $this->directfreight->getDetails($od, $items);
-        echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
+        //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
         $df_response = $this->directfreight->getQuote($df_details);
-        //echo "<pre>",print_r($df_response),"</pre>"; //die();
+        echo "<pre>",print_r($df_response),"</pre>"; //die();
 
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
         //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
@@ -756,7 +756,7 @@ class ajaxfunctionsController extends Controller
                 }
             /*********** charge FREEDOM more *******************/
         }
-        if($df_response['ResponseCode'] == 300)
+        if(3=3)
         {
             $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE);
             /*********** charge FREEDOM more *******************/
