@@ -16,7 +16,7 @@ class FormController extends Controller {
      */
     public function initialize(){
         $action = $this->request->param('action');
-        die('action '.$action);
+        //die('action '.$action);
         if($action == "procLogin" || $action == "procForgotPassword" || $action == "procUpdatePassword")
         {
              $this->loadComponents([
