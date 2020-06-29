@@ -24,7 +24,7 @@ define('SITE_LIVE', false);
 * Some useful constants
 **************************************************************************/
     //Direct Freight Fuel Surcharge
-    define('DF_FUEL_SURCHARGE', 1.133)
+    define('DF_FUEL_SURCHARGE', 1.133);
 /*************************************************************************
 * Database Configuration
 **************************************************************************/
