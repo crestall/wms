@@ -718,6 +718,7 @@ class ajaxfunctionsController extends Controller
     public function getShippingQuotes()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $df_charge = 0;
         $od = $this->order->getOrderDetail($this->request->data['order_id']);
         $client_details = $this->client->getClientInfo($od['client_id']);
         $eParcelClass = "Eparcel";
@@ -756,7 +757,6 @@ class ajaxfunctionsController extends Controller
                 }
             /*********** charge FREEDOM more *******************/
         }
-        
 
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/shipping_quotes.php', [
             'od'                        =>  $od,
