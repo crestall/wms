@@ -96,6 +96,7 @@ class Config{
         }
         else if(isset(self::$config[$source][$key]))
         {
+            //echo"<p>Already set $key :".self::$config[$source][$key]."</p>";
             return self::$config[$source][$key];
         }
         else
@@ -103,7 +104,9 @@ class Config{
             $db = Database::openConnection();
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
+                //echo"<p>$sv</p>";
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
+                //echo"<p>$key :".self::$config[$source][$key]."</p>";
                 return self::$config[$source][$key] ;
             }
         }

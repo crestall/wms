@@ -32,6 +32,7 @@
         $this->controller = $controller;
         $this->API_KEY    = Config::get('DIRECT_FREIGHT_API_KEY');
         $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
+        //$this->ACCOUNT_NO = 22;
     }
 
     protected function sendPostRequest($action, $data = array())
@@ -59,6 +60,7 @@
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 0);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 
         $result = curl_exec($ch);

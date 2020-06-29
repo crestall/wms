@@ -718,6 +718,7 @@ class ajaxfunctionsController extends Controller
     public function getShippingQuotes()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $df_charge = 0;
         $od = $this->order->getOrderDetail($this->request->data['order_id']);
         $client_details = $this->client->getClientInfo($od['client_id']);
         $eParcelClass = "Eparcel";
@@ -729,16 +730,17 @@ class ajaxfunctionsController extends Controller
         $eparcel_express_details    = $this->{$eParcelClass}->getShipmentDetails($od, $items, true);
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
         $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
-        /*  */ 
+        /*  */
         $df_details = $this->directfreight->getDetails($od, $items);
-        echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
-        $df_response = $this->directfreight->getQuote($df_details);
-        echo "<pre>",print_r($df_response),"</pre>"; //die();
+        //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
+        $df_r = $this->directfreight->getQuote($df_details);
+        $df_response = json_decode($df_r,true);
+        //echo "<pre>",var_dump($df_response),"</pre>"; die();
 
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
-        echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
+        //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
         $express_response = $this->{$eParcelClass}->GetQuote($eeparcel_shipments);
-        echo "<pre>",print_r(json_encode($express_response)),"</pre>"; //die();
+        //echo "<pre>",print_r(json_encode($express_response)),"</pre>"; //die();
         if(isset($eparcel_response['errors']))
         {
             $eparcel_charge = "";
@@ -756,6 +758,20 @@ class ajaxfunctionsController extends Controller
                 }
             /*********** charge FREEDOM more *******************/
         }
+        if($df_response['ResponseCode'] == 300)
+        {
+            $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2);
+            /*********** charge FREEDOM more *******************/
+                if($od['client_id'] == 7)
+                {
+                    $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                }
+            /*********** charge FREEDOM more *******************/
+        }
+        else
+        {
+            $df_charge = "<div class='errorbox'><p>".$df_response['ResponseMessage']."</p></div>";
+        }
 
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/shipping_quotes.php', [
             'od'                        =>  $od,
@@ -766,7 +782,8 @@ class ajaxfunctionsController extends Controller
             'client_name'               =>  $this->client->getClientName($od['client_id']),
             'ship_to'                   =>  $od['ship_to'],
             'address_string'            =>  $this->request->data['address_string'],
-            'eparcel_details'           =>  $eparcel_details
+            'eparcel_details'           =>  $eparcel_details,
+            'df_charge'                 =>  $df_charge
         ]);
     }
 

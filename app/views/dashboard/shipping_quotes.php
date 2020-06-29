@@ -27,6 +27,12 @@
             <?php echo $eparcel_express_charge;?>
         </div>
     </div>
+    <div class="row">
+        <label class="col-md-8 col-form-label">Direct Freight</label>
+        <div class="col-md-4">
+            <?php echo $df_charge;?>
+        </div>
+    </div>
     <div id="3pltruck_holder"></div>
     <hr/>
     <div class="row">
