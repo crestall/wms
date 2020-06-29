@@ -96,6 +96,7 @@ class Config{
         }
         else if(isset(self::$config[$source][$key]))
         {
+            echo"<p>Already set $key :".self::$config[$source][$key]."</p>";
             return self::$config[$source][$key];
         }
         else
