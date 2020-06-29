@@ -31,8 +31,8 @@
         $this->controller = $controller;
         $this->controller = $controller;
         $this->API_KEY    = Config::get('DIRECT_FREIGHT_API_KEY');
-        //$this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
-        $this->ACCOUNT_NO = 22;
+        $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
+        //$this->ACCOUNT_NO = 22;
     }
 
     protected function sendPostRequest($action, $data = array())
