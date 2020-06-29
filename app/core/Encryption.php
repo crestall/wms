@@ -243,7 +243,7 @@ class Encryption{
         // generate original hmac & compare it with the one in $ciphertext
         $originalHmac = hash_hmac('sha256', $iv_cipher, $key);
         if(!self::hashEquals($hmac, $originalHmac)){
-            echo "<p>Gonna return a falsey</p>";
+            //echo "<p>Gonna return a falsey</p>";
             return false;
         }
 
