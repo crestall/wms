@@ -756,7 +756,7 @@ class ajaxfunctionsController extends Controller
                 }
             /*********** charge FREEDOM more *******************/
         }
-        if(3=3)
+        if(3==3)
         {
             $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE);
             /*********** charge FREEDOM more *******************/
