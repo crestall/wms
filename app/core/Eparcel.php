@@ -99,8 +99,8 @@
         $data_string = json_encode($a_data);
         //echo $data_string; //die();
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
-        //echo $url;
-        //echo $this->ACCOUNT_NO;
+        echo $url;
+        echo $this->ACCOUNT_NO;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
@@ -118,7 +118,7 @@
             'account-number: '.$this->ACCOUNT_NO)
         );
         $result = curl_exec($ch);
-        //echo "<pre>",print_r($result),"</pre>"; die();
+        echo "<pre>",print_r($result),"</pre>"; die();
         $err = curl_error($ch);
         curl_close($ch);
         if ($err)
