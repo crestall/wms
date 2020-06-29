@@ -29,8 +29,8 @@ define('SITE_LIVE', false);
 * Database Configuration
 **************************************************************************/
 define('DB_HOST', "localhost");
-define('DB_NAME', "fsg_wms_dev");
-define('DB_USER', "dev_website");
-define('DB_PASS', "Cra233%d");
+define('DB_NAME', "fsg_wms");
+define('DB_USER', "website");
+define('DB_PASS', "66ihu#9J");
 define('DB_CHARSET', "utf8");
 ?>
