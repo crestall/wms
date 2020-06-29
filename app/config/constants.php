@@ -8,6 +8,7 @@
     define('IMAGES',   DOC_ROOT . "/images/");
     define('STYLES',   DOC_ROOT . "/styles/");
     define('UPLOADS',  DOC_ROOT. "/client_uploads/");
+    define('HOME_PAGE_LINK', "https://dev.fsg.com.au/");
     
     /*********************************************************************
     * Encrption Keys
