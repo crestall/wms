@@ -104,6 +104,7 @@ class Config{
             if($sv = $db->queryValue('configuration', array('name' => $key), 'value'))
             {
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
+                echo"<p>$key :".$config[$source][$key]."</p>";
                 return self::$config[$source][$key] ;
             }
         }
