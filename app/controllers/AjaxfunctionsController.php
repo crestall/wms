@@ -760,11 +760,11 @@ class ajaxfunctionsController extends Controller
         }
         if($df_response['ResponseCode'] == 300)
         {
-            $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE);
+            $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2);
             /*********** charge FREEDOM more *******************/
                 if($od['client_id'] == 7)
                 {
-                    $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE);
+                    $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
                 }
             /*********** charge FREEDOM more *******************/
         }
