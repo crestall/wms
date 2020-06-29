@@ -100,7 +100,7 @@
         //echo $data_string; //die();
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
         echo $url;
-        echo $this->ACCOUNT_NO;
+        echo "<p>Account ".$this->ACCOUNT_NO."</p>";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
