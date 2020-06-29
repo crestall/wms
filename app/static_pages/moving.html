@@ -43,19 +43,21 @@
                 background-size: 3px 3px;
                 z-index: 2;
             }
-            h1 {
+            .overlay div {
                 text-align: left;
                 color: #fff;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
+                position: relative;
                 margin: auto;
                 z-index: 3;
                 max-width: 400px;
                 width: 100%;
                 height: 50px;
+            }
+            .overlay div h1{
+
+            }
+            .overlay div h2{
+
             }
         </style>
 
@@ -66,9 +68,12 @@
         <video src="/images/backgrounds/videos/video.mp4" loop muted autoplay>
         </video>
         <div class="overlay">
-        <h1>The Warehouse Management System is on the move!</h1>
-        <p>Please update your bookmarks to http://wms.fsg.com.au</p>
-        <p>Check back soon to see if we have arrived yet!</p>
+            <div>
+                <h1>The Warehouse Management System is on the move!</h1>
+                <p>Please update your bookmarks to http://wms.fsg.com.au</p>
+                <h2>Check back soon to see if we have arrived yet!</h2>
+            </div>
+
         </div>
 
     </div>
