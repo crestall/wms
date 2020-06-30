@@ -3,4 +3,3 @@
 # Merging strategies to favour current branches version of files
 app/config/constants.php merge=ours
 app/static_pages/* merge=ours
-
