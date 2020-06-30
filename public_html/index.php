@@ -1,4 +1,6 @@
 <?php
+/* Maintenece */
+
 /* Only deliver over https */
 if(!((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443))
 {
@@ -10,6 +12,12 @@ require  '../vendor/autoload.php';
 
 /* load the contants */
 require '../app/config/constants.php';
+/* Maintenance */
+if(MAINTENANCE)
+{
+    include(APP.'static_pages/moving.html');
+    exit();
+}
 /*
 --------------------------------------------------------------------------
  Register Error & Exception handlers
