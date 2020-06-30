@@ -5397,7 +5397,7 @@ class FormController extends Controller {
         }
         elseif( !$this->user->isUserActive($email) )
         {
-            Form::setError('general', 'Sorry, your account has been deactivated');
+            Form::setError('general', 'Sorry, either your email address is not registered in our system, or your account has been deactivated');
         }
         elseif(!$this->login->isLoginAttemptAllowed($email))
         {
