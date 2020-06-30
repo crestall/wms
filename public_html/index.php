@@ -15,7 +15,7 @@ require '../app/config/constants.php';
 /* Maintenance */
 if(MAINTENANCE)
 {
-    include(APP.'static_pages/moving.html');
+    include(APP.'static_pages/maintenance.html');
     exit();
 }
 /*
