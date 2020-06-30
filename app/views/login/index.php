@@ -9,6 +9,7 @@
                     <?php $display_form = Session::getAndDestroy('display-form'); ?>
                         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
                         <?php echo Form::displayError('toomanytimes');?>
+                        <?php echo Form::displayError('general');?> 
                         <form action="/form/procLogin" id="form-login" method="post"
                             <?php if(!empty($display_form)){ echo "class='display-none'"; } ?> >
                             <fieldset>
