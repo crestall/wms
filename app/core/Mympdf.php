@@ -79,7 +79,7 @@ class Mympdf extends mPDF {
                     $this->AddPageByArray(array(
     					'orientation' => $array['orientation']
                     ));
-
+                    //$pagesInFile = $this->SetSourceFile($new_file);
                     $pagesInFile = $this->SetSourceFile($array['file']);
                     for ($i = 1; $i <= $pagesInFile; $i++)
                     {
