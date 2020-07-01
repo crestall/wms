@@ -8,7 +8,7 @@
     define('IMAGES',   DOC_ROOT . "/images/");
     define('STYLES',   DOC_ROOT . "/styles/");
     define('UPLOADS',  DOC_ROOT. "/client_uploads/");
-    
+
     /*********************************************************************
     * Encrption Keys
     **********************************************************************/
@@ -33,8 +33,8 @@ define('MAINTENANCE', false);
 * Database Configuration
 **************************************************************************/
 define('DB_HOST', "localhost");
-define('DB_NAME', "fsg_wms");
-define('DB_USER', "website");
-define('DB_PASS', "66ihu#9J");
+define('DB_NAME', "fsg_wms_dev");
+define('DB_USER', "dev_website");
+define('DB_PASS', "Cra233%d");
 define('DB_CHARSET', "utf8");
 ?>
