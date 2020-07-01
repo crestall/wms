@@ -2,7 +2,7 @@
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div class="row">
         <div class="col-lg-4">
-            <?if($all):?>
+            <?php if($all):?>
                 <p><a href="/orders/order-summaries" class="btn btn-primary">Show Recent Summaries</a>
             <?php else:?>
                 <p><a href="/orders/order-summaries/all=true" class="btn btn-primary">Show All Summaries</a><br/>
