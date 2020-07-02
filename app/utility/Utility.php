@@ -52,7 +52,7 @@ class Utility{
             {
                 $item = (string)$item;
             }
-            if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && in_array_r($needle, $item, $strict)))
+            if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && self::in_array_r($needle, $item, $strict)))
             {
                 return $index;
             }
