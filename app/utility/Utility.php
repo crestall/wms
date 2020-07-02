@@ -35,6 +35,32 @@ class Utility{
     }
 
     /**
+     * Recursive in_array function
+     *
+     * in_array function for  through multidimansional arrays
+     * @param mixed $needle
+     * @param array $haystack
+     * @param boolean strict
+     * @returns boolean in needle is found in haystack
+     */
+
+    public static function in_array_r($needle, $haystack, $strict = false)
+    {
+        foreach ($haystack as $index => $item)
+        {
+            if( ! $strict && is_string( $needle ) && ( is_float( $item ) || is_int( $item ) ) )
+            {
+                $item = (string)$item;
+            }
+            if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && self::in_array_r($needle, $item, $strict)))
+            {
+                return $index;
+            }
+        }
+        return false;
+    }
+
+    /**
      * returns a string by separating array elements with commas
      *
      * @param  array $arr

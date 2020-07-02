@@ -76,10 +76,13 @@ class Mympdf extends mPDF {
                     /*$this->AddPage();*/
                     $new_file = "new_file_".$c.".pdf";
                     //shell_exec( "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=".$new_file." ".$array['file']);
+                    //new method because OzHosting don't know how to do the above
+                    //$converter = new GhostscriptConverter($command, $filesystem);
+                    //$converter->convert($array['file'], '1.4');
                     $this->AddPageByArray(array(
     					'orientation' => $array['orientation']
                     ));
-
+                    //$pagesInFile = $this->SetSourceFile($new_file);
                     $pagesInFile = $this->SetSourceFile($array['file']);
                     for ($i = 1; $i <= $pagesInFile; $i++)
                     {

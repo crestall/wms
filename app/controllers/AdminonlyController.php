@@ -112,7 +112,16 @@ class adminonlyController extends Controller
 
     public function apiTester()
     {
-        //add sensitive config data - passwords and keys data
+        //up the memory for this
+        ini_set('memory_limit', '2048M');
+        //$freedomMYOB = $this->freedomMYOB;
+        $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
+        $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
+        //echo "<pre>",print_r($invoices),"</pre>"; //die();
+        echo "<hr/>";
+        $this->FreedomMYOB->processOrders($invoices);
+        //echo "<pre>",print_r($orders),"</pre>";
+        die();
         Config::setJsConfig('curPage', "api-tester");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/apiTester.php', [
             'page_title'            => "Test the APIs",
