@@ -298,7 +298,7 @@ class FreedomMYOB extends MYOB
                 'country'               => $o['country']
             );
             $itp = array($totoitems[$o['client_order_id']]);
-            //$order_number = $this->controller->order->addOrder($vals, $itp);
+            $order_number = $this->controller->order->addOrder($vals, $itp);
             $feedback['import_message'] .="<p>$order_number created</p>";
             //save the invoices
             foreach($o['invoices'] as $base64_pdf)
