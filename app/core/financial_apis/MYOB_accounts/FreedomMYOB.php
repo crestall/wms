@@ -215,7 +215,7 @@ class FreedomMYOB extends MYOB
                 }
             }//endforeach order
             //echo "<pre>",print_r($orders),"</pre>";//die();
-            $totoitems = $this->allocations->createOrderItemsArray($orders_items);
+            $totoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
 
             return array_merge($orders,$totoitems);
         }//end if count orders
