@@ -118,6 +118,28 @@ class adminonlyController extends Controller
         $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
         $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
         echo "<pre>",print_r($invoices),"</pre>"; die();
+        $orders = array();
+        $errors = array();
+        foreach($invoices as $inv)
+        {
+            str_replace("\r\n", "\n");
+            list($name, $line1, $line2) = explode("\n", $inv['ShipToAddress']);
+            echo "<p>Name: $name</p>";
+            echo "<p>Line1: $line1</p>";
+            echo "<p>Line2: $line2</p>";
+            continue();
+            $ad = array()
+            $order = array(
+                'client_id'             => 7,    //get this from DB in future
+                'freedom_customer_id'   => $inv['Customer_UID'],
+                'deliver_to'            => $inv['Customer_Name'],
+                'tracking_email'        => $inv['Customer_Email'],
+                'client_order_id'       => $inv['Invoice_Number'],
+                'date_ordered'          => strtotime($inv['Date']),
+
+            );
+        }
+        die();
         Config::setJsConfig('curPage', "api-tester");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/apiTester.php', [
             'page_title'            => "Test the APIs",
