@@ -298,8 +298,35 @@ class FreedomMYOB extends MYOB
                 'country'               => $o['country']
             );
             $itp = array($totoitems[$o['client_order_id']]);
-            $order_number = $this->controller->order->addOrder($vals, $itp);
+            //$order_number = $this->controller->order->addOrder($vals, $itp);
             $feedback['import_message'] .="<p>$order_number created</p>";
+            //save the invoices
+            foreach($o['invoices'] as $base64_pdf)
+            {
+                //Get File content
+                $pdf_base64_handler = fopen($base64_pdf,'r');
+                $pdf_content = fread ($pdf_base64_handler,filesize($base64_pdf));
+                fclose ($pdf_base64_handler);
+                //Decode pdf content
+                $pdf_decoded = base64_decode ($pdf_content);
+                //Write data back to pdf file
+                $upcount = 1;
+                $filename = $o['client_order_id'];
+                $name = $o['client_order_id'].".pdf";
+                $upload_dir = "/client_uploads/7/unprinted/";
+                if ( ! is_dir(DOC_ROOT.$upload_dir))
+                            mkdir(DOC_ROOT.$upload_dir);
+    			while(file_exists(DOC_ROOT.$upload_dir.$name))
+                {
+                    $name = $filename."_".$upcount.".pdf";
+                    ++$upcount;
+                }
+                $pdf = fopen (DOC_ROOT.$upload_dir.$name,'w');
+                fwrite ($pdf,$pdf_decoded);
+                //close output file
+                fclose ($pdf);
+                //echo 'Done';
+            }
         }
         echo "<pre>",print_r($feedback),"</pre>";
     }
