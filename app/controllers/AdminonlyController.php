@@ -127,8 +127,8 @@ class adminonlyController extends Controller
             echo "<p>Name: $name</p>";
             echo "<p>Line1: $line1</p>";
             echo "<p>Line2: $line2</p>";
-            continue();
-            $ad = array()
+            continue;
+            $ad = array();;
             $order = array(
                 'client_id'             => 7,    //get this from DB in future
                 'freedom_customer_id'   => $inv['Customer_UID'],
