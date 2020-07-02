@@ -114,9 +114,9 @@ class adminonlyController extends Controller
     {
         //up the memory for this
         ini_set('memory_limit', '2048M');
-        $freedomMYOB = $this->freedomMYOB;
-        $encryptedData = $freedomMYOB->callTask('getMYOBOrders',array());
-        $invoices =  json_decode($freedomMYOB->getDecryptedData($encryptedData),true);
+        //$freedomMYOB = $this->freedomMYOB;
+        $encryptedData = $this->freedomMYOB->callTask('getMYOBOrders',array());
+        $invoices =  json_decode($this->freedomMYOB->getDecryptedData($encryptedData),true);
         echo "<pre>",print_r($invoices),"</pre>"; die();
         Config::setJsConfig('curPage', "api-tester");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/apiTester.php', [
