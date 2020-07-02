@@ -166,7 +166,7 @@ class adminonlyController extends Controller
                     //$aResponse = $this->Eparcel->ValidateSuburb($order['suburb'], $order['state'], str_pad($order['postcode'],4,'0',STR_PAD_LEFT));
                     //$aResponse = $this->Eparcel->ValidateSuburb($suburb, $state, str_pad($postcode,4,'0',STR_PAD_LEFT));
                     //echo "<pre>",print_r($aResponse),"</pre>";
-                    /*if(isset($aResponse['errors']))
+                    /**/if(isset($aResponse['errors']))
                     {
                         $order['errors'] = 1;
                         foreach($aResponse['errors'] as $e)
@@ -178,11 +178,11 @@ class adminonlyController extends Controller
                     {
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>Postcode does not match suburb or state</p>";
-                    }*/
+                    }
                 }
                 else
                 {
-                    if( strlen( $order['address'] ) > 50 || strlen( $order['address_2'] ) > 50 )
+                    /*if( strlen( $order['address'] ) > 50 || strlen( $order['address_2'] ) > 50 )
                     {
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
@@ -191,7 +191,7 @@ class adminonlyController extends Controller
                     {
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
-                    }
+                    }*/
                 }
                 if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $order['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $order['address'])))
                 {
