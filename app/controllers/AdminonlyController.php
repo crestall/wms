@@ -129,6 +129,16 @@ class adminonlyController extends Controller
                 echo "<p>Line1: $line1</p>";
                 echo "<p>Line2: $line2</p>";
                 echo "<p>Line3: $line3</p>";
+
+                if(empty($line3))
+                {
+                    echo "<p>2 line address</p>";
+                }
+                else
+                {
+                    echo "<p>3 line address</p>";
+                }
+                echo "<hr/>";
             }catch(Exception $e){
                 echo "<p>Problem with ".$inv['ShipToAddress']."</p>";
             };
