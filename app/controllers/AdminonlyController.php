@@ -163,8 +163,8 @@ class adminonlyController extends Controller
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
                     }
-                    $aResponse = $this->Eparcel->ValidateSuburb($order['suburb'], $order['state'], str_pad($order['postcode'],4,'0',STR_PAD_LEFT));
-
+                    //$aResponse = $this->Eparcel->ValidateSuburb($order['suburb'], $order['state'], str_pad($order['postcode'],4,'0',STR_PAD_LEFT));
+                    $aResponse = $this->Eparcel->ValidateSuburb($suburb, $state, str_pad($postcode,4,'0',STR_PAD_LEFT));
                     echo "<pre>",print_r($aResponse),"</pre>";
                     if(isset($aResponse['errors']))
                     {
