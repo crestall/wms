@@ -198,7 +198,8 @@ class FreedomMYOB extends MYOB
                         $orders[$ind]['weight'] += $weight;
                         $orders[$ind]['items'] = array_merge($orders[$ind]['items'], $items);
                         $orders[$ind]['invoices'][] = $o['InvoicePDF'];
-                        $orders_items[$o['Invoice_Number']] = $items;
+                        //$orders_items[$o['Invoice_Number']] = $items;
+                        $orders_items[$orders[$ind]['client_order_id']] = array_merge($orders_items[$orders[$ind]['client_order_id']], $items);
                     }
                     else
                     {
@@ -214,18 +215,18 @@ class FreedomMYOB extends MYOB
                 }
             }//endforeach order
             //echo "<pre>",print_r($orders),"</pre>";//die();
-            //$this->ttoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            $totoitems = $this->allocations->createOrderItemsArray($orders_items);
 
-            return $orders;
+            return array_merge($orders,$totoitems);
         }//end if count orders
         else
         {
-            $this->output .= "=========================================================================================================".PHP_EOL;
-            $this->output .= "No New Orders";
-            $this->output .= "=========================================================================================================".PHP_EOL;
+            die('No Orders');
         }
         return false;
     }
+
+
 
     protected function encryptData($data)
     {
