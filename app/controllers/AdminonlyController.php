@@ -114,7 +114,7 @@ class adminonlyController extends Controller
     {
         //up the memory for this
         ini_set('memory_limit', '2048M');
-        $freedomMYOB = $this->freedomMYOB
+        $freedomMYOB = $this->freedomMYOB;
         $encryptedData = $freedomMYOB->callTask('getMYOBOrders',array());
         $invoices =  json_decode($freedomMYOB->getDecryptedData($encryptedData),true);
         echo "<pre>",print_r($invoices),"</pre>"; die();
