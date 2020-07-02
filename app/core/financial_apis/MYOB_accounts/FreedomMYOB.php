@@ -63,7 +63,8 @@ class FreedomMYOB extends MYOB
                     'eparcel_express'       => 0,
                     'signature_req'         => 0,
                     'import_error'          => false,
-                    'import_error_string'   => ''
+                    'import_error_string'   => '',
+                    'invoices'              => array()
                 );
                 //if(strtolower($o['shipping_lines'][0]['method_title']) == "express shipping") $order['eparcel_express'] = 1;
                 if( !filter_var($o['Customer_Email'], FILTER_VALIDATE_EMAIL) )
@@ -192,6 +193,7 @@ class FreedomMYOB extends MYOB
                     $order['quantity'] = $qty;
                     $order['weight'] = $weight;
                     $order['items'] = $items;
+                    $order['invoices'][] = $o['InvoicePDF']
                     $orders_items[$o['Invoice_Number']] = $items;
                     $order = array_merge($order, $ad);
                     $orders[] = $order;
