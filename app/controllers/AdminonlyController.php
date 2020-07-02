@@ -117,7 +117,7 @@ class adminonlyController extends Controller
         //$freedomMYOB = $this->freedomMYOB;
         $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
         $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
-        //echo "<pre>",print_r($invoices),"</pre>"; die();
+        echo "<pre>",print_r($invoices),"</pre>"; //die();
         $orders = array();
         $errors = array();
         foreach($invoices as $inv)
@@ -130,7 +130,8 @@ class adminonlyController extends Controller
                 'tracking_email'        => $inv['Customer_Email'],
                 'client_order_id'       => $inv['Invoice_Number'],
                 'date_ordered'          => strtotime($inv['Date']),
-
+                'error'                 => 0,
+                'error_string'          => ''
             );
             $address = $inv['ShipToAddress']."<br />";
             try{
@@ -154,13 +155,57 @@ class adminonlyController extends Controller
                 $order['suburb'] = $suburb;
                 $order['state'] = $state;
                 $order['postcode'] = $postcode;
+                $order['country'] = "AU";
+                if($order['country'] == "AU")
+                {
+                    if(strlen($order['address']) > 40 || strlen($order['address_2']) > 40 )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
+                    }
+                    $aResponse = $this->Eparcel->ValidateSuburb($order['suburb'], $order['state'], str_pad($order['postcode'],4,'0',STR_PAD_LEFT));
 
+                    //echo "<pre>",print_r($aResponse),"</pre>";
+                    if(isset($aResponse['errors']))
+                    {
+                        $order['errors'] = 1;
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $order['error_string'] .= "<p>{$e['message']}</p>";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Postcode does not match suburb or state</p>";
+                    }
+                }
+                else
+                {
+                    if( strlen( $order['address'] ) > 50 || strlen( $order['address_2'] ) > 50 )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
+                    }
+                    if( strlen($order['deliver_to']) > 30  )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
+                    }
+                }
+                if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $order['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $order['address'])))
+                {
+                    $order['errors'] = 1;
+                    $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
+                }
             }catch(Exception $e){
                 echo "<p>Problem with ".$inv['ShipToAddress']."</p>";
             };
+            //the order items
+
 
             echo "<pre>",print_r($order),"</pre>";;
-            echo "<hr/>"; 
+            echo "<hr/>";
         }
         die();
         Config::setJsConfig('curPage', "api-tester");
