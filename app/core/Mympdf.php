@@ -8,9 +8,6 @@
 * @author     Mark Solly <mark.solly@3plplus.com.au>
 */
 use Mpdf\Mpdf;
- use Symfony\Component\Filesystem\Filesystem,
-    Xthiago\PDFVersionConverter\Converter\GhostscriptConverterCommand,
-    Xthiago\PDFVersionConverter\Converter\GhostscriptConverter;
 class Mympdf extends mPDF {
 
     function mergePDFFiles(Array $filenames, $outFile)
@@ -82,8 +79,8 @@ class Mympdf extends mPDF {
                     $new_file = "new_file_".$c.".pdf";
                     //shell_exec( "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=".$new_file." ".$array['file']);
                     //new method because OzHosting don't know how to do the above
-                    $converter = new GhostscriptConverter($command, $filesystem);
-                    $converter->convert($array['file'], '1.4');
+                    //$converter = new GhostscriptConverter($command, $filesystem);
+                    //$converter->convert($array['file'], '1.4');
                     $this->AddPageByArray(array(
     					'orientation' => $array['orientation']
                     ));
