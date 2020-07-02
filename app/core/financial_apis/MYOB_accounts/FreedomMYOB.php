@@ -64,7 +64,8 @@ class FreedomMYOB extends MYOB
                     'signature_req'         => 0,
                     'import_error'          => false,
                     'import_error_string'   => '',
-                    'invoices'              => array()
+                    'invoices'              => array(),
+                    'customer_id'           => $o['Customer_UID']
                 );
                 //if(strtolower($o['shipping_lines'][0]['method_title']) == "express shipping") $order['eparcel_express'] = 1;
                 if( !filter_var($o['Customer_Email'], FILTER_VALIDATE_EMAIL) )
@@ -190,13 +191,26 @@ class FreedomMYOB extends MYOB
                 }
                 else
                 {
-                    $order['quantity'] = $qty;
-                    $order['weight'] = $weight;
-                    $order['items'] = $items;
-                    $order['invoices'][] = $o['InvoicePDF'];
-                    $orders_items[$o['Invoice_Number']] = $items;
-                    $order = array_merge($order, $ad);
-                    $orders[] = $order;
+                    //merge orders
+                    if($ind = Utility::in_array_r($o['Customer_UID'], $orders))
+                    {
+                        $orders[$ind]['quantity'] += $qty;
+                        $orders[$ind]['weight'] += $weight;
+                        $orders[$ind]['items'] = array_merge($orders[$ind]['items'], $items);
+                        $orders[$ind]['invoices'][] = $o['InvoicePDF'];
+                        $orders_items[$o['Invoice_Number']] = $items;
+                    }
+                    else
+                    {
+                        $order['quantity'] = $qty;
+                        $order['weight'] = $weight;
+                        $order['items'] = $items;
+                        $order['invoices'][] = $o['InvoicePDF'];
+                        $orders_items[$o['Invoice_Number']] = $items;
+                        $order = array_merge($order, $ad);
+                        $orders[] = $order;
+                    }
+
                 }
             }//endforeach order
             //echo "<pre>",print_r($orders),"</pre>";//die();
