@@ -122,28 +122,6 @@ class adminonlyController extends Controller
         $errors = array();
         foreach($invoices as $inv)
         {
-            $address = $inv['ShipToAddress']."<br />";
-            try{
-                list($name, $line1, $line2, $line3) = explode("<br />", $address);
-                echo "<p>Name: $name</p>";
-                echo "<p>Line1: $line1</p>";
-                echo "<p>Line2: $line2</p>";
-                echo "<p>Line3: $line3</p>";
-
-                if(empty($line3))
-                {
-                    echo "<p>2 line address</p>";
-                }
-                else
-                {
-                    echo "<p>3 line address</p>";
-                }
-                echo "<hr/>";
-            }catch(Exception $e){
-                echo "<p>Problem with ".$inv['ShipToAddress']."</p>";
-            };
-
-            continue;
             $ad = array();;
             $order = array(
                 'client_id'             => 7,    //get this from DB in future
@@ -154,6 +132,35 @@ class adminonlyController extends Controller
                 'date_ordered'          => strtotime($inv['Date']),
 
             );
+            $address = $inv['ShipToAddress']."<br />";
+            try{
+                list($name, $line1, $line2, $line3) = explode("<br />", $address);
+                //echo "<p>Name: $name</p>";
+                //echo "<p>Line1: $line1</p>";
+                //echo "<p>Line2: $line2</p>";
+                //echo "<p>Line3: $line3</p>";
+                $order['address'] = $line1;
+                if(empty($line3))
+                {
+                    //echo "<p>2 line address</p>";
+                    list($suburb, $state, $postcode) = explode("  ", $line2);
+                }
+                else
+                {
+                    //echo "<p>3 line address</p>";
+                    $order['address_2'] = $line2;
+                    list($suburb, $state, $postcode) = explode("  ", $line3);
+                }
+                $order['suburb'] = $suburb;
+                $order['state'] = $state;
+                $order['postcode'] = $postcode;
+
+            }catch(Exception $e){
+                echo "<p>Problem with ".$inv['ShipToAddress']."</p>";
+            };
+
+            echo "<pre>",print_r($order),"</pre>";;
+            echo "<hr/>"; 
         }
         die();
         Config::setJsConfig('curPage', "api-tester");
