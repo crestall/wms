@@ -161,7 +161,7 @@ class FreedomMYOB extends MYOB
                 }
                 $delivery_instructions =  "Please leave in a safe place out of the weather";
                 $order['instructions'] = $delivery_instructions;
-                echo "<pre>",print_r($order),"</pre>";//die();
+                //echo "<pre>",print_r($order),"</pre>";//die();
                 if($items_errors)
                 {
                     $message = "<p>There was a problem with some items</p>";
