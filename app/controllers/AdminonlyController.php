@@ -117,7 +117,7 @@ class adminonlyController extends Controller
         //$freedomMYOB = $this->freedomMYOB;
         $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
         $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
-        echo "<pre>",print_r($invoices),"</pre>"; //die();
+        //echo "<pre>",print_r($invoices),"</pre>"; //die();
         echo "<hr/>";
         $orders = $this->FreedomMYOB->processOrders($invoices);
         echo "<pre>",print_r($orders),"</pre>";
