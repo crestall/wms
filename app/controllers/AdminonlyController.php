@@ -122,7 +122,9 @@ class adminonlyController extends Controller
         $errors = array();
         foreach($invoices as $inv)
         {
-            $ad = array();;
+            $items = array();
+            $items_errors = false;
+            $mm = "<ul>";
             $order = array(
                 'client_id'             => 7,    //get this from DB in future
                 'freedom_customer_id'   => $inv['Customer_UID'],
@@ -131,7 +133,8 @@ class adminonlyController extends Controller
                 'client_order_id'       => $inv['Invoice_Number'],
                 'date_ordered'          => strtotime($inv['Date']),
                 'errors'                => 0,
-                'error_string'          => ''
+                'error_string'          => '',
+                'items'                 => array()
             );
             $address = $inv['ShipToAddress']."<br />";
             try{
@@ -196,7 +199,32 @@ class adminonlyController extends Controller
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 //the order items
-
+                foreach($inv['ItemsPurchased'] as $item)
+                {
+                    $product = $this->item->getItemBySku($item['ProductCode']);
+                    if(!$product)
+                    {
+                        $items_errors = true;
+                        $mm .= "<li>Could not find {$item['Title']} in WMS based on {$item['ProductCode']}</li>";
+                    }
+                    else
+                    {
+                        $n_name = $product['name'];
+                        $item_id = $product['id'];
+                        $items[] = array(
+                            'qty'           =>  $item['Qty'],
+                            'id'            =>  $item_id,
+                            'whole_pallet'  => false
+                        );
+                        $qty += $item['Qty'];
+                        $weight += $product['weight'] * $item['Qty'];
+                    }
+                    $order['items'][] = $items;
+                }
+                if($items_errors)
+                {
+                    echo $mm."</ul>";
+                }
             }catch(Exception $e){
                 //echo "<p>Problem with ".$inv['ShipToAddress']."</p>";
                 $order['errors'] = 1;
