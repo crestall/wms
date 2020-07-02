@@ -61,8 +61,6 @@ class Mympdf extends mPDF {
         $c = 1;
         if ($filenames)
         {
-            $command = new GhostscriptConverterCommand();
-            $filesystem = new Filesystem();
             $filesTotal = sizeof($filenames);
             //$fileNumber = 1;
             //$this->SetImportUse();
