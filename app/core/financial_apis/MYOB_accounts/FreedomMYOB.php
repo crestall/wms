@@ -10,6 +10,15 @@ class FreedomMYOB extends MYOB
 {
     private $client_id = 7;
 
+    private $return_array = array(
+        'import_count'          => 0,
+        'import_error'          => false,
+        'error'                 => false,
+        'error_count'           => 0,
+        'error_string'          => '',
+        'import_error_string'   => ''
+    );
+
     public function init()
     {
         //Client Specific Credentials
@@ -25,6 +34,180 @@ class FreedomMYOB extends MYOB
     public function getDecryptedData($data)
     {
         return $this->decryptData($data);
+    }
+
+    public function processOrders($collected_orders)
+    {
+        $orders = array();
+        if(count($collected_orders))
+        {
+            $allocations = array();
+            $orders_items = array();
+            foreach($collected_orders as $o)
+            {
+                $items_errors = false;
+                $weight = 0;
+                $mm = "";
+                $items = array();
+                //$o = trimArray($o);
+                $order = array(
+                    'error_string'          => '',
+                    'items'                 => array(),
+                    'ref2'                  => '',
+                    'client_order_id'       => $o['Invoice_Number'],
+                    'errors'                => 0,
+                    'tracking_email'        => $o['Customer_Email'],
+                    'ship_to'               => $o['Customer_Name'],
+                    'date_ordered'          => strtotime( $o['Date'] ),
+                    'status_id'             => $this->controller->order->ordered_id,
+                    'eparcel_express'       => 0,
+                    'signature_req'         => 0,
+                    'import_error'          => false,
+                    'import_error_string'   => ''
+                );
+                //if(strtolower($o['shipping_lines'][0]['method_title']) == "express shipping") $order['eparcel_express'] = 1;
+                if( !filter_var($o['Customer_Email'], FILTER_VALIDATE_EMAIL) )
+                {
+                    $order['errors'] = 1;
+                    $order['error_string'] = "<p>The customer email is not valid</p>";
+                }
+                //validate address
+                list($name, $line1, $line2, $line3) = explode("<br />", $address);
+                $address = $line1;
+                if(empty($line3))
+                {
+                    //echo "<p>2 line address</p>";
+                    $address_2 = "";
+                    list($suburb, $state, $postcode) = explode("  ", $line2);
+                }
+                else
+                {
+                    //echo "<p>3 line address</p>";
+                    $address_2 = $line2;
+                    list($suburb, $state, $postcode) = explode("  ", $line3);
+                }
+                $ad = array(
+                    'address'   => $address,
+                    'address_2' => $address_2,
+                    'suburb'    => $suburb,
+                    'state'     => $state,
+                    'postcode'  => $postcode,
+                    'country'   => "AU"
+                );
+                if($ad['country'] == "AU")
+                {
+                    if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
+                    }
+                    $aResponse = $this->controller->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
+                    //echo "<pre>",print_r($aResponse),"</pre>";
+                    if(isset($aResponse['errors']))
+                    {
+                        $order['errors'] = 1;
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $order['error_string'] .= "<p>{$e['message']}</p>";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Postcode does not match suburb or state</p>";
+                    }
+                }
+                else
+                {
+                    if( strlen( $ad['address'] ) > 50 || strlen( $ad['address_2'] ) > 50 )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
+                    }
+                    if( strlen($order['ship_to']) > 30  )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
+                    }
+                }
+                if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $ad['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $ad['address'])))
+                {
+                    $order['errors'] = 1;
+                    $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
+                }
+                $qty = 0;
+                foreach($o['ItemsPurchased'] as $item)
+                {
+                    $product = $this->controller->item->getItemBySku($item['ProductCode']);
+                    if(!$product)
+                    {
+                        $items_errors = true;
+                        $mm .= "<li>Could not find {$item['Title']} in WMS based on {$item['ProductCode']}</li>";
+                    }
+                    else
+                    {
+                        $n_name = $product['name'];
+                        $item_id = $product['id'];
+                        $items[] = array(
+                            'qty'           =>  $item['Qty'],
+                            'id'            =>  $item_id,
+                            'whole_pallet'  => false
+                        );
+                        $qty += $item['Qty'];
+                        $weight += $product['weight'] * $item['Qty'];
+                    }
+                }
+                $delivery_instructions =  "Please leave in a safe place out of the weather";
+                $order['instructions'] = $delivery_instructions;
+                echo "<pre>",print_r($order),"</pre>";//die();
+                if($items_errors)
+                {
+                    $message = "<p>There was a problem with some items</p>";
+                    $message .= "<ul>".$mm."</ul>";
+                    $message .= "<p>Orders with these items will not be processed at the moment</p>";
+                    $message .= "<p>Client Order ID: {$order['client_order_id']}</p>";
+                    $message .= "<p>Customer: {$order['ship_to']}</p>";
+                    $message .= "<p>Address: {$ad['address']}</p>";
+                    $message .= "<p>{$ad['address_2']}</p>";
+                    $message .= "<p>{$ad['suburb']}</p>";
+                    $message .= "<p>{$ad['state']}</p>";
+                    $message .= "<p>{$ad['postcode']}</p>";
+                    $message .= "<p>{$ad['country']}</p>";
+                    $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
+                    //Send an email regarding the error
+                    if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+                    {
+                        //Email::sendTTImportError($message);
+                    }
+                    else
+                    {
+                        $this->return_array['error_string'] .= $message;
+                        ++$this->return_array['error_count'];
+                    }
+                    //echo $message;
+                }
+                else
+                {
+                    $order['quantity'] = $qty;
+                    $order['weight'] = $weight;
+                    $order['items'] = $items;
+                    $orders_items[$o['Invoice_Number']] = $items;
+                    $order = array_merge($order, $ad);
+                    $orders[] = $order;
+                }
+            }//endforeach order
+            //echo "<pre>",print_r($orders),"</pre>";//die();
+            //$this->ttoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+
+            return $orders;
+        }//end if count orders
+        else
+        {
+            $this->output .= "=========================================================================================================".PHP_EOL;
+            $this->output .= "No New Orders";
+            $this->output .= "=========================================================================================================".PHP_EOL;
+        }
+        return false;
     }
 
     protected function encryptData($data)
