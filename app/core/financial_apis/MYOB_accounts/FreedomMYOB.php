@@ -72,7 +72,8 @@ class FreedomMYOB extends MYOB
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
                 //validate address
-                list($name, $line1, $line2, $line3) = explode("<br />", $address);
+                $atc = $o['ShipToAddress']."<br />";
+                list($name, $line1, $line2, $line3) = explode("<br />", $atc);
                 $address = $line1;
                 if(empty($line3))
                 {
