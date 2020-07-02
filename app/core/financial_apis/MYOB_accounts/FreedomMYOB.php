@@ -65,7 +65,9 @@ class FreedomMYOB extends MYOB
                     'import_error'          => false,
                     'import_error_string'   => '',
                     'invoices'              => array(),
-                    'customer_id'           => $o['Customer_UID']
+                    'customer_id'           => $o['Customer_UID'],
+                    'invoice_UIDs'          => array(),
+                    'company_file_ids'      => array(),
                 );
                 //if(strtolower($o['shipping_lines'][0]['method_title']) == "express shipping") $order['eparcel_express'] = 1;
                 if( !filter_var($o['Customer_Email'], FILTER_VALIDATE_EMAIL) )
@@ -198,7 +200,10 @@ class FreedomMYOB extends MYOB
                         $orders[$ind]['weight'] += $weight;
                         $orders[$ind]['items'] = array_merge($orders[$ind]['items'], $items);
                         $orders[$ind]['invoices'][] = $o['InvoicePDF'];
+                        $orders[$ind]['invoice_UIDs'][] = $o['invoiceUID'];
+                        $orders[$ind]['company_file_ids'][] = $o['Company_File_Id'];
                         //$orders_items[$o['Invoice_Number']] = $items;
+
                         $orders_items[$orders[$ind]['client_order_id']] = array_merge($orders_items[$orders[$ind]['client_order_id']], $items);
                     }
                     else
@@ -207,6 +212,8 @@ class FreedomMYOB extends MYOB
                         $order['weight'] = $weight;
                         $order['items'] = $items;
                         $order['invoices'][] = $o['InvoicePDF'];
+                        $order['invoice_UIDs'][] = $o['invoice_UID'];
+                        $order['company_file_ids'][] = $o['Company_File_Id'];
                         $orders_items[$o['Invoice_Number']] = $items;
                         $order = array_merge($order, $ad);
                         $orders[] = $order;
@@ -324,6 +331,13 @@ class FreedomMYOB extends MYOB
                 fclose ($pdf);
                 //echo 'Done';
             }
+            //send back to MYOB
+            foreach($o['invoice_UIDs'] as $key => $invoice_UID)
+            {
+                //$this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $invoice['company_file_ids'][$key]));
+                echo "<p>will call markInvoiceSent with $invoice_UID and ".$invoice['company_file_ids'][$key]."</p>";
+            }
+
         }
         echo "<pre>",print_r($feedback),"</pre>";
     }
