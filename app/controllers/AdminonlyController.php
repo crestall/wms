@@ -117,7 +117,7 @@ class adminonlyController extends Controller
         //$freedomMYOB = $this->freedomMYOB;
         $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
         $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
-        echo "<pre>",print_r($invoices),"</pre>"; //die();
+        //echo "<pre>",print_r($invoices),"</pre>"; //die();
         $orders = array();
         $errors = array();
         foreach($invoices as $inv)
@@ -130,7 +130,7 @@ class adminonlyController extends Controller
                 'tracking_email'        => $inv['Customer_Email'],
                 'client_order_id'       => $inv['Invoice_Number'],
                 'date_ordered'          => strtotime($inv['Date']),
-                'error'                 => 0,
+                'errors'                => 0,
                 'error_string'          => ''
             );
             $address = $inv['ShipToAddress']."<br />";
@@ -165,7 +165,7 @@ class adminonlyController extends Controller
                     }
                     $aResponse = $this->Eparcel->ValidateSuburb($order['suburb'], $order['state'], str_pad($order['postcode'],4,'0',STR_PAD_LEFT));
 
-                    //echo "<pre>",print_r($aResponse),"</pre>";
+                    echo "<pre>",print_r($aResponse),"</pre>";
                     if(isset($aResponse['errors']))
                     {
                         $order['errors'] = 1;
