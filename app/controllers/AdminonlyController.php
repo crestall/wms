@@ -112,6 +112,8 @@ class adminonlyController extends Controller
 
     public function apiTester()
     {
+        //up the memory for this
+        ini_set('memory_limit', '2048M');
         //add sensitive config data - passwords and keys data
         Config::setJsConfig('curPage', "api-tester");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/apiTester.php', [
