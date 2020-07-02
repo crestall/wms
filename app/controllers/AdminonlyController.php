@@ -143,7 +143,8 @@ class adminonlyController extends Controller
                 $order['address'] = $line1;
                 if(empty($line3))
                 {
-                    echo "<p>2 line address</p>";
+                    //echo "<p>2 line address</p>";
+                    $order['address_2'] = "";
                     list($suburb, $state, $postcode) = explode("  ", $line2);
                 }
                 else
