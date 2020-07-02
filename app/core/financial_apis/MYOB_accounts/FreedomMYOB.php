@@ -303,12 +303,9 @@ class FreedomMYOB extends MYOB
             //save the invoices
             foreach($o['invoices'] as $base64_pdf)
             {
-                //Get File content
-                $pdf_base64_handler = fopen($base64_pdf,'r');
-                $pdf_content = fread ($pdf_base64_handler,filesize($base64_pdf));
-                fclose ($pdf_base64_handler);
+
                 //Decode pdf content
-                $pdf_decoded = base64_decode ($pdf_content);
+                $pdf_decoded = base64_decode ($base64_pdf);
                 //Write data back to pdf file
                 $upcount = 1;
                 $filename = $o['client_order_id'];
