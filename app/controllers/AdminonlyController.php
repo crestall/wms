@@ -122,9 +122,9 @@ class adminonlyController extends Controller
         $errors = array();
         foreach($invoices as $inv)
         {
-            $address =str_replace("\r\n", "\n", $inv['ShipToAddress']);
+            //$address =str_replace("\r\n", "\n", $inv['ShipToAddress']);
             try{
-                list($name, $line1, $line2) = explode("\n", $address);
+                list($name, $line1, $line2) = explode("<br />", $inv['ShipToAddress']));
                 echo "<p>Name: $name</p>";
                 echo "<p>Line1: $line1</p>";
                 echo "<p>Line2: $line2</p>";
