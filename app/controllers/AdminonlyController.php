@@ -125,12 +125,13 @@ class adminonlyController extends Controller
             $address =str_replace("\r\n", "\n", $inv['ShipToAddress']);
             try{
                 list($name, $line1, $line2) = explode("\n", $address);
+                echo "<p>Name: $name</p>";
+                echo "<p>Line1: $line1</p>";
+                echo "<p>Line2: $line2</p>";
             }catch(Exception $e){
                 echo "<p>Problem with ".$inv['ShipToAddress']."</p>";
             };
-            echo "<p>Name: $name</p>";
-            echo "<p>Line1: $line1</p>";
-            echo "<p>Line2: $line2</p>";
+
             continue;
             $ad = array();;
             $order = array(
