@@ -120,7 +120,7 @@ class adminonlyController extends Controller
         echo "<pre>",print_r($invoices),"</pre>"; //die();
         echo "<hr/>";
         $orders = $this->FreedomMYOB->processOrders($invoices);
-        echo "<pre>",print_r($invoices),"</pre>";
+        echo "<pre>",print_r($orders),"</pre>";
         die();
         Config::setJsConfig('curPage', "api-tester");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/apiTester.php', [
