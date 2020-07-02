@@ -124,7 +124,7 @@ class adminonlyController extends Controller
         {
             //$address =str_replace("\r\n", "\n", $inv['ShipToAddress']);
             try{
-                list($name, $line1, $line2) = explode("<br />", $inv['ShipToAddress']));
+                list($name, $line1, $line2) = explode("<br />", $inv['ShipToAddress']);
                 echo "<p>Name: $name</p>";
                 echo "<p>Line1: $line1</p>";
                 echo "<p>Line2: $line2</p>";
