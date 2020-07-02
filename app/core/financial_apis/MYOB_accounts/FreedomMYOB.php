@@ -193,7 +193,7 @@ class FreedomMYOB extends MYOB
                     $order['quantity'] = $qty;
                     $order['weight'] = $weight;
                     $order['items'] = $items;
-                    $order['invoices'][] = $o['InvoicePDF']
+                    $order['invoices'][] = $o['InvoicePDF'];
                     $orders_items[$o['Invoice_Number']] = $items;
                     $order = array_merge($order, $ad);
                     $orders[] = $order;
