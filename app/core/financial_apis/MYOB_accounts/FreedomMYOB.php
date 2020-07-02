@@ -226,6 +226,83 @@ class FreedomMYOB extends MYOB
         return false;
     }
 
+    private function addOrders($orders, $totoitems)
+    {
+        $feedback = array(
+            'error_string'          => '',
+            'import_error_string'   => '',
+            'import_message'        => ''
+        );
+        foreach($orders as $o)
+        {
+            //check for errors first
+            $item_error = false;
+            $error_string = "";
+            foreach($totoitems[$o['client_order_id']] as $item)
+            {
+                if($item['item_error'])
+                {
+                    $item_error = true;
+                    $error_string .= $item['item_error_string'];
+                }
+            }
+            if($item_error)
+            {
+                $message = "<p>There was a problem with some items</p>";
+                $message .= $error_string;
+                $message .= "<p>Orders with these items will not be processed at the moment</p>";
+                $message .= "<p>Oneplate Order ID: {$o['client_order_id']}</p>";
+                $message .= "<p>Customer: {$o['ship_to']}</p>";
+                $message .= "<p>Address: {$o['address']}</p>";
+                $message .= "<p>{$o['address_2']}</p>";
+                $message .= "<p>{$o['suburb']}</p>";
+                $message .= "<p>{$o['state']}</p>";
+                $message .= "<p>{$o['postcode']}</p>";
+                $message .= "<p>{$o['country']}</p>";
+                $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
+                //if (php_sapi_name() !='cli')
+                if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+                {
+                    //++$this->return_array['error_count'];
+                    $feedback['error_string'] .= $message;
+                }
+                else
+                {
+                    //Email::sendOnePlateImportError($message);
+
+                }
+                continue;
+            }
+            if($o['import_error'])
+            {
+                $feedback['import_error_string'] = $o['import_error_string'];
+                continue;
+            }
+            //insert the order
+            $vals = array(
+                'client_order_id'       => $o['client_order_id'],
+                'client_id'             => 7,
+                'deliver_to'            => $o['ship_to'],
+                'date_ordered'          => $o['date_ordered'],
+                'tracking_email'        => $o['tracking_email'],
+                'weight'                => $o['weight'],
+                'delivery_instructions' => $o['instructions'],
+                'errors'                => $o['errors'],
+                'error_string'          => $o['error_string'],
+                'address'               => $o['address'],
+                'address2'              => $o['address_2'],
+                'state'                 => $o['state'],
+                'suburb'                => $o['suburb'],
+                'postcode'              => $o['postcode'],
+                'country'               => $o['country']
+            );
+            $itp = array($totoitems[$o['client_order_id']]);
+            $order_number = $this->controller->order->addOrder($vals, $itp);
+            $feedback['import_message'] .="<p>$order_number created</p>";
+        }
+        echo "<pre>",print_r($feedback),"</pre>";
+    }
+
 
 
     protected function encryptData($data)
