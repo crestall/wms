@@ -202,6 +202,7 @@ class FreedomMYOB extends MYOB
                         $orders[$ind]['invoices'][] = $o['InvoicePDF'];
                         $orders[$ind]['invoice_UIDs'][] = $o['Invoice_UID'];
                         $orders[$ind]['company_file_ids'][] = $o['Company_File_Id'];
+                        $order[$ind]['client_order_id'] .= ", ".$o['Invoice_Number'];
                         //$orders_items[$o['Invoice_Number']] = $items;
 
                         $orders_items[$orders[$ind]['client_order_id']] = array_merge($orders_items[$orders[$ind]['client_order_id']], $items);
