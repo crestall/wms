@@ -247,7 +247,7 @@ class FreedomMYOB extends MYOB
             //check for errors first
             $item_error = false;
             $error_string = "";
-            foreach($totoitems[$o['client_order_id']] as $item)
+            foreach($totoitems[$o['invoice_UIDs'][0]] as $item)
             {
                 if($item['item_error'])
                 {
