@@ -1932,7 +1932,7 @@
                 },
                 'order-importing': {
                     init:function(){
-                        $("button#bb_full_import, button#oneplate_full_import, button#nuchev_full_import, button#ttau_full_import, button#ndc_full_import").click(function(e){
+                        $("button#oneplate_full_import, button#nuchev_full_import, button#freedom_full_import").click(function(e){
                             var action = $(this).data('function');
                             swal({
                                 title: "Really run a full import?",
@@ -1948,7 +1948,7 @@
                             });
                         });
 
-                        $('form#bb_single_import, form#nuchev_single_import, form#oneplate_single_import, form#tt_single_import').submit(function(e){
+                        $('form#nuchev_single_import, form#oneplate_single_import').submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Importing Order...</h1></div>' });
@@ -1957,36 +1957,6 @@
                             {
                                 return false;
                             }
-                        });
-
-                        $('button#figure8_import').click(function(e){
-                            swal({
-                                title: "Really run a this import?",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            }).then( function(willImport) {
-                                if (willImport) {
-                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Getting Emails...</h1></div>' });
-                                    var url = "/orders/importFEightOrders";
-                                    window.location.href = url;
-                                }
-                            });
-                        });
-
-                        $('button#nuchev_samples').click(function(e){
-                            swal({
-                                title: "Really run a this import?",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            }).then( function(willImport) {
-                                if (willImport) {
-                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Getting Emails...</h1></div>' });
-                                    var url = "/orders/importNuchevSamples";
-                                    window.location.href = url;
-                                }
-                            });
                         });
                     }
                 }
