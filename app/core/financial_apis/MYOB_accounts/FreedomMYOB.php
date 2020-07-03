@@ -205,7 +205,7 @@ class FreedomMYOB extends MYOB
                         $orders[$ind]['client_order_id'] .= ", ".$o['Invoice_Number'];
                         //$orders_items[$o['Invoice_Number']] = $items;
 
-                        $orders_items[$orders[$ind]['client_order_id']] = array_merge($orders_items[$orders[$ind]['client_order_id']], $items);
+                        $orders_items[$orders[$ind]['invoice_UIDs'][0]] = array_merge($orders_items[$orders[$ind]['invoice_UIDs'][0]], $items);
                     }
                     else
                     {
@@ -215,7 +215,7 @@ class FreedomMYOB extends MYOB
                         $order['invoices'][] = $o['InvoicePDF'];
                         $order['invoice_UIDs'][] = $o['Invoice_UID'];
                         $order['company_file_ids'][] = $o['Company_File_Id'];
-                        $orders_items[$o['Invoice_Number']] = $items;
+                        $orders_items[$o['Invoice_UID']] = $items;
                         $order = array_merge($order, $ad);
                         $orders[] = $order;
                     }
