@@ -429,7 +429,6 @@ return array(
             'client-bay-fixer'  => true,
             'encrypt-some-shit' => false,
             'update-configuration'  => true,
-            'api-tester'    => true,
             'reece-data-tidy'   => true
         ),
     ),
