@@ -304,33 +304,40 @@ class FreedomMYOB extends MYOB
                 'postcode'              => $o['postcode'],
                 'country'               => $o['country']
             );
+
+            //save the invoices
+            $pdfs = array();
+            foreach($o['invoices'] as $base64_pdf)
+            {
+                $tmp_name = "/tmp/".Utility::generateRandString(5).".pdf";
+                $this_pdf = fopen ($tmp_name,'w');
+                fwrite ($this_pdf,base64_decode($base64_pdf));
+                fclose ($this_pdf);
+                //array_push($pdfs,'../tmp/test'.$rowp['id'].'.pdf');
+                $pdfs[] = array(
+                	'file'		    =>	$tmp_name,
+                    'orientation'	=>	'P'
+                );
+            }
+            $upcount = 1;
+            $filename = "invoice";
+            $name = "invoice.pdf";
+            $upload_dir = "/client_uploads/7/";
+            if ( ! is_dir(DOC_ROOT.$upload_dir))
+                        mkdir(DOC_ROOT.$upload_dir);
+			while(file_exists(DOC_ROOT.$upload_dir.$name))
+            {
+                $name = $filename."_".$upcount.".pdf";
+                ++$upcount;
+            }
+            $pdf = new Mympdf();
+            $pdf->mergePDFFilesToServer($pdfs, $name, DOC_ROOT.$upload_dir);
+            $uploaded_file = $name;
+            $vals['uploaded_file'] = $uploaded_file;
+            //create the order
             $itp = array($totoitems[$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $feedback['import_message'] .="<p>$order_number created</p>";
-            //save the invoices
-            foreach($o['invoices'] as $base64_pdf)
-            {
-
-                //Decode pdf content
-                $pdf_decoded = base64_decode ($base64_pdf);
-                //Write data back to pdf file
-                $upcount = 1;
-                $filename = $o['client_order_id'];
-                $name = $o['client_order_id'].".pdf";
-                $upload_dir = "/client_uploads/7/unprinted/";
-                if ( ! is_dir(DOC_ROOT.$upload_dir))
-                            mkdir(DOC_ROOT.$upload_dir);
-    			while(file_exists(DOC_ROOT.$upload_dir.$name))
-                {
-                    $name = $filename."_".$upcount.".pdf";
-                    ++$upcount;
-                }
-                $pdf = fopen (DOC_ROOT.$upload_dir.$name,'w');
-                fwrite ($pdf,$pdf_decoded);
-                //close output file
-                fclose ($pdf);
-                //echo 'Done';
-            }
             //send back to MYOB
             foreach($o['invoice_UIDs'] as $key => $invoice_UID)
             {
