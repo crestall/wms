@@ -334,8 +334,8 @@ class FreedomMYOB extends MYOB
             //send back to MYOB
             foreach($o['invoice_UIDs'] as $key => $invoice_UID)
             {
-                $this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
-                //echo "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
+                //$this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
+                echo "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
             }
 
         }
