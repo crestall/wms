@@ -219,7 +219,9 @@ class FreedomMYOB extends MYOB
                         $order = array_merge($order, $ad);
                         $orders[] = $order;
                     }
-
+                    echo "<p>What the fuck!</p>";
+                    echo "Items purchased by {$o['Customer_Name']}<pre>",print_r($o['ItemsPurchased']),"</pre>";
+                    echo "<hr/>";
                 }
             }//endforeach order
             //echo "<pre>",print_r($orders),"</pre>";//die();
