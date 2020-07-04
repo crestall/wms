@@ -256,8 +256,7 @@ class Order extends Model{
             //echo "The Items<pre>",print_r($the_items),"</pre>";
             foreach($the_items as $item):
                 //echo "The Item<pre>",print_r($item),"</pre>"; //die();
-                //$item_id = $item['item_id'];
-                //$item_id = 12;
+                $item_id = $item['item_id'];
                 //echo "<p>{$data['deliver_to']} $order_id</p>Item<pre>",print_r($item),"</pre>";
                 /* */
                 foreach($item['locations'] as $il)
