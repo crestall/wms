@@ -48,7 +48,6 @@ class FreedomMYOB extends MYOB
             $orders_items = array();
             foreach($collected_orders as $o)
             {
-                echo "Count ".count($collected_orders);die();
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
@@ -85,13 +84,13 @@ class FreedomMYOB extends MYOB
                 $address = $line1;
                 if(empty($line3))
                 {
-                    //echo "<p>2 line address</p>";
+                    echo "<p>2 line address</p>";
                     $address_2 = "";
                     list($suburb, $state, $postcode) = explode("  ", $line2);
                 }
                 else
                 {
-                    //echo "<p>3 line address</p>";
+                    echo "<p>3 line address</p>";
                     $address_2 = $line2;
                     list($suburb, $state, $postcode) = explode("  ", $line3);
                 }
@@ -103,6 +102,7 @@ class FreedomMYOB extends MYOB
                     'postcode'  => $postcode,
                     'country'   => "AU"
                 );
+                echo "Count ".count($collected_orders);die(); 
                 if($ad['country'] == "AU")
                 {
                     if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40)
