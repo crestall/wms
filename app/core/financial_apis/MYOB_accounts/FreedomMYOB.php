@@ -141,27 +141,36 @@ class FreedomMYOB extends MYOB
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 $qty = 0;
-                foreach($o['ItemsPurchased'] as $item)
+                if(empty($o['ItemsPurchased']) || count($o['ItemsPurchased']))
                 {
-                    $product = $this->controller->item->getItemBySku($item['ProductCode']);
-                    if(!$product)
+                    $items_errors = true;
+                    $mm .= "<li>There are no items in {$o['Invoice_Number']} for {$o['Customer_Name']}</li>";
+                }
+                else
+                {
+                    foreach($o['ItemsPurchased'] as $item)
                     {
-                        $items_errors = true;
-                        $mm .= "<li>Could not find {$item['Title']} in WMS based on {$item['ProductCode']}</li>";
-                    }
-                    else
-                    {
-                        $n_name = $product['name'];
-                        $item_id = $product['id'];
-                        $items[] = array(
-                            'qty'           =>  $item['Qty'],
-                            'id'            =>  $item_id,
-                            'whole_pallet'  => false
-                        );
-                        $qty += $item['Qty'];
-                        $weight += $product['weight'] * $item['Qty'];
+                        $product = $this->controller->item->getItemBySku($item['ProductCode']);
+                        if(!$product)
+                        {
+                            $items_errors = true;
+                            $mm .= "<li>Could not find {$item['Title']} in WMS based on {$item['ProductCode']}</li>";
+                        }
+                        else
+                        {
+                            $n_name = $product['name'];
+                            $item_id = $product['id'];
+                            $items[] = array(
+                                'qty'           =>  $item['Qty'],
+                                'id'            =>  $item_id,
+                                'whole_pallet'  => false
+                            );
+                            $qty += $item['Qty'];
+                            $weight += $product['weight'] * $item['Qty'];
+                        }
                     }
                 }
+
                 $delivery_instructions =  "Please leave in a safe place out of the weather";
                 $order['instructions'] = $delivery_instructions;
                 //echo "<pre>",print_r($order),"</pre>";//die();
@@ -219,9 +228,6 @@ class FreedomMYOB extends MYOB
                         $order = array_merge($order, $ad);
                         $orders[] = $order;
                     }
-                    echo "<p>What the fuck!</p>";
-                    echo "Items purchased by {$o['Customer_Name']}<pre>",print_r($o['ItemsPurchased']),"</pre>";
-                    echo "<hr/>";
                 }
             }//endforeach order
             //echo "<pre>",print_r($orders),"</pre>";//die();

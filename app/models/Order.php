@@ -253,13 +253,13 @@ class Order extends Model{
                 $the_items[] = $items;
             else
                 $the_items = $items;
-            echo "The Items<pre>",print_r($the_items),"</pre>";
+            //echo "The Items<pre>",print_r($the_items),"</pre>";
             foreach($the_items as $item):
                 //echo "The Item<pre>",print_r($item),"</pre>"; //die();
                 //$item_id = $item['item_id'];
                 //$item_id = 12;
-                echo "<p>{$data['deliver_to']} $order_id</p>Item<pre>",print_r($item),"</pre>";
-                /*
+                //echo "<p>{$data['deliver_to']} $order_id</p>Item<pre>",print_r($item),"</pre>";
+                /* */
                 foreach($item['locations'] as $il)
                 {
                     $vals = array(
@@ -276,7 +276,7 @@ class Order extends Model{
                     $db->query("UPDATE orders SET pick_notices = IFNULL(CONCAT(pick_notices, '{$item['order_error_string']}'), '{$item['order_error_string']}') WHERE id = $order_id");
                     //echo "UPDATE orders SET 3pl_comments = IFNULL(CONCAT(3pl_comments, '{$item['order_error_string']}'), '{$item['order_error_string']}') WHERE id = $order_id"; die();
                 }
-                */
+
             endforeach;
         }
         //die();
