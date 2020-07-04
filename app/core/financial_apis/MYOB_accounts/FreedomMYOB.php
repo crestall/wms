@@ -16,7 +16,8 @@ class FreedomMYOB extends MYOB
         'error'                 => false,
         'error_count'           => 0,
         'error_string'          => '',
-        'import_error_string'   => ''
+        'import_error_string'   => '',
+        'import_message'        => ''
     );
 
     public function init()
