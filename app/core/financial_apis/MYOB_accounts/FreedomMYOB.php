@@ -145,7 +145,7 @@ class FreedomMYOB extends MYOB
                 }
                 $qty = 0;
                 echo "<pre>",var_dump($o['ItemsPurchased']),"</pre>";
-                if(empty($o['ItemsPurchased']) || count($o['ItemsPurchased']))
+                if(empty($o['ItemsPurchased']) || count($o['ItemsPurchased']) == 0)
                 {
                     echo "<p>No items</p>";
                     $items_errors = true;
