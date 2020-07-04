@@ -336,7 +336,7 @@ class FreedomMYOB extends MYOB
             $uploaded_file = $name;
             $vals['uploaded_file'] = $uploaded_file;
             //create the order
-            $itp = array($totoitems[$o['client_order_id']]);
+            $itp = array($totoitems[$o['invoice_UIDs'][0]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $feedback['import_message'] .="<p>$order_number created</p>";
             //send back to MYOB
