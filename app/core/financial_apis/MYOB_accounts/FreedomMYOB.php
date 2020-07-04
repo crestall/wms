@@ -144,6 +144,7 @@ class FreedomMYOB extends MYOB
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 $qty = 0;
+                echo "<pre>",var_dump($o['ItemsPurchased']),"</pre>";
                 if(empty($o['ItemsPurchased']) || count($o['ItemsPurchased']))
                 {
                     echo "<p>No items</p>";
@@ -175,7 +176,7 @@ class FreedomMYOB extends MYOB
                         }
                     }
                 }
-                echo "Count ".count($collected_orders);die(); 
+                echo "Count ".count($collected_orders);die();
                 $delivery_instructions =  "Please leave in a safe place out of the weather";
                 $order['instructions'] = $delivery_instructions;
                 //echo "<pre>",print_r($order),"</pre>";//die();
