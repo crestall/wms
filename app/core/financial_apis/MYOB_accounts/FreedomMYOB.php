@@ -84,13 +84,13 @@ class FreedomMYOB extends MYOB
                 $address = $line1;
                 if(empty($line3))
                 {
-                    echo "<p>2 line address</p>";
+                    //echo "<p>2 line address</p>";
                     $address_2 = "";
                     list($suburb, $state, $postcode) = explode("  ", $line2);
                 }
                 else
                 {
-                    echo "<p>3 line address</p>";
+                    //echo "<p>3 line address</p>";
                     $address_2 = $line2;
                     list($suburb, $state, $postcode) = explode("  ", $line3);
                 }
@@ -232,11 +232,7 @@ class FreedomMYOB extends MYOB
                     }
                 }
             }//endforeach order
-            //echo "<pre>",print_r($orders),"</pre>";//die();
-
             $totoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
-
-            //return array_merge($orders,$totoitems);
             $this->addOrders($orders, $totoitems);
         }//end if count orders
         else
@@ -248,11 +244,11 @@ class FreedomMYOB extends MYOB
 
     private function addOrders($orders, $totoitems)
     {
-        $feedback = array(
+        /*$feedback = array(
             'error_string'          => '',
             'import_error_string'   => '',
             'import_message'        => ''
-        );
+        );*/
         foreach($orders as $o)
         {
             //check for errors first
@@ -268,18 +264,18 @@ class FreedomMYOB extends MYOB
             }
             if($item_error)
             {
+                /*
                 $message = "<p>There was a problem with some items</p>";
                 $message .= $error_string;
                 $message .= "<p>Orders with these items will not be processed at the moment</p>";
-                $message .= "<p>Oneplate Order ID: {$o['client_order_id']}</p>";
+                $message .= "<p>Freedom Order ID: {$o['client_order_id']}</p>";
                 $message .= "<p>Customer: {$o['ship_to']}</p>";
                 $message .= "<p>Address: {$o['address']}</p>";
                 $message .= "<p>{$o['address_2']}</p>";
                 $message .= "<p>{$o['suburb']}</p>";
                 $message .= "<p>{$o['state']}</p>";
                 $message .= "<p>{$o['postcode']}</p>";
-                $message .= "<p>{$o['country']}</p>";
-                $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
+                $message .= "<p>{$o['country']}</p>";$message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
                 //if (php_sapi_name() !='cli')
                 if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
                 {
@@ -291,11 +287,12 @@ class FreedomMYOB extends MYOB
                     //Email::sendOnePlateImportError($message);
 
                 }
+                */
                 continue;
             }
             if($o['import_error'])
             {
-                $feedback['import_error_string'] = $o['import_error_string'];
+                $this->return_array['import_error_string'] = $o['import_error_string'];
                 continue;
             }
             //insert the order
@@ -350,7 +347,7 @@ class FreedomMYOB extends MYOB
             $itp = array($totoitems[$o['invoice_UIDs'][0]]);
             //echo "<pre>",print_r($itp),"</pre>";
             $order_number = $this->controller->order->addOrder($vals, $itp);
-            $feedback['import_message'] .="<p>$order_number created</p>";
+            $this->return_array['import_message'] .="<p>$order_number created</p>";
             //send back to MYOB
             foreach($o['invoice_UIDs'] as $key => $invoice_UID)
             {
@@ -359,7 +356,7 @@ class FreedomMYOB extends MYOB
             }
 
         }
-        echo "<pre>",print_r($feedback),"</pre>";
+        echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
 
