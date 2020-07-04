@@ -253,10 +253,11 @@ class Order extends Model{
                 $the_items[] = $items;
             else
                 $the_items = $items;
-            //echo "<pre>",print_r($the_items),"</pre>"; continue;
+            echo $data['customer_order_id']."<pre>",print_r($the_items),"</pre>";
             foreach($the_items as $item):
                 //echo "The Item<pre>",print_r($item),"</pre>"; //die();
-                $item_id = $item['item_id'];
+                //$item_id = $item['item_id'];
+                $item_id = 12;
                 //echo "<pre>",print_r($item),"</pre>";
                 foreach($item['locations'] as $il)
                 {
