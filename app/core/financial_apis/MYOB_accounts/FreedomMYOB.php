@@ -102,7 +102,6 @@ class FreedomMYOB extends MYOB
                     'postcode'  => $postcode,
                     'country'   => "AU"
                 );
-                echo "Count ".count($collected_orders);die(); 
                 if($ad['country'] == "AU")
                 {
                     if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40)
@@ -147,11 +146,13 @@ class FreedomMYOB extends MYOB
                 $qty = 0;
                 if(empty($o['ItemsPurchased']) || count($o['ItemsPurchased']))
                 {
+                    echo "<p>No items</p>";
                     $items_errors = true;
                     $mm .= "<li>There are no items in {$o['Invoice_Number']} for {$o['Customer_Name']}</li>";
                 }
                 else
                 {
+                    echo "<p>Items</p>";
                     foreach($o['ItemsPurchased'] as $item)
                     {
                         $product = $this->controller->item->getItemBySku($item['ProductCode']);
@@ -174,7 +175,7 @@ class FreedomMYOB extends MYOB
                         }
                     }
                 }
-
+                echo "Count ".count($collected_orders);die(); 
                 $delivery_instructions =  "Please leave in a safe place out of the weather";
                 $order['instructions'] = $delivery_instructions;
                 //echo "<pre>",print_r($order),"</pre>";//die();
