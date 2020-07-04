@@ -38,6 +38,7 @@ class FreedomMYOB extends MYOB
 
     public function processOrders($collected_orders)
     {
+        echo "<pre>",print_r($collected_orders),"</pre>"; //die();
         $orders = array();
         if(count($collected_orders))
         {
