@@ -222,6 +222,7 @@ class FreedomMYOB extends MYOB
             }//endforeach order
             $totoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
             $this->addOrders($orders, $totoitems);
+            return $this->return_array;
         }//end if count orders
         else
         {
@@ -344,6 +345,7 @@ class FreedomMYOB extends MYOB
             <p>They have all been marked as 'Sent' in MYOB</p>
         ";
         //echo "<pre>",print_r($this->return_array),"</pre>";
+        Email::sendFreedomMYOBSummary($summary);
         return $this->return_array;
     }
 
