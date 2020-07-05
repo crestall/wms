@@ -259,11 +259,7 @@ class FreedomMYOB extends MYOB
                 $message .= $error_string;
                 $message .= "<p>This has meant all invoices for {$o['ship_to']} have not been imported into the WMS</p>";
                 ++$this->return_array['error_count'];
-                $this->return_array['error_string'] .= $message;
-                $message = "<p>There was a problem with invoice number {$o['client_order_id']} for {$o['ship_to']}</p>";
-                $message .= "<ul>".$mm."</ul>";
-                $message .= "<p>This invoice could not be imported into the WMS.</p>";
-                $message .= "<p>Other invoices for {$o['ship_to']} that did not throw such an error have been imported</p>";
+                $this->return_array['error_string'] .= $message; 
                 //Send an email regarding the error
                 Email::sendFreedomMYOBError($message);
                 continue;
