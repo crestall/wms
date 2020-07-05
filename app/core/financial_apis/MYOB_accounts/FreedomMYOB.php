@@ -237,7 +237,7 @@ class FreedomMYOB extends MYOB
             'import_error_string'   => '',
             'import_message'        => ''
         );*/
-        $invoices_processed = 0;
+        $processed_invoices = array();
         $wms_orders_created = 0;
         foreach($orders as $o)
         {
@@ -259,7 +259,7 @@ class FreedomMYOB extends MYOB
                 $message .= $error_string;
                 $message .= "<p>This has meant all invoices for {$o['ship_to']} have not been imported into the WMS</p>";
                 ++$this->return_array['error_count'];
-                $this->return_array['error_string'] .= $message; 
+                $this->return_array['error_string'] .= $message;
                 //Send an email regarding the error
                 Email::sendFreedomMYOBError($message);
                 continue;
@@ -332,11 +332,19 @@ class FreedomMYOB extends MYOB
                 //$this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
                 echo "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
                 ++$this->return_array['invoices_processed'];
+                $processed_invoices[] = $o['client_order_id']
             }
 
         }
-        echo "<pre>",print_r($this->return_array),"</pre>";
-
+        //Send email about what happened
+        $s = (count($processed_invoices[]) > 1)? "s have" : " has";
+        $wmsos = (count($this->return_array['orders_created']) == 1)? " has": "s have";
+        $pi_string = implode(", ", $processed_invoices);
+        $summary = "
+            <p>The following invoice{$s} been imported into the WMS and {$this->return_array['orders_created']} order{$wmsos} been created</p>
+        ";
+        //echo "<pre>",print_r($this->return_array),"</pre>";
+        return $this->return_array;
     }
 
 

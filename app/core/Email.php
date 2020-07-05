@@ -494,6 +494,43 @@
 
 	}
 
+    public static function sendFreedomMYOBSummary($message)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."freedom_myob_import_summary.html");
+            $replace_array = array("{MESSAGE}", "{TIME}");
+		    $replace_with_array = array($message, date("D the jS of M at g:i a"));
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->Subject = "Freedom MYOB Import Summary";
+    		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent to ". $name);
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
+    }
+
     public static function sendFreedomMYOBError($message)
     {
         $mail = new PHPMailer();
