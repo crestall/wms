@@ -224,6 +224,18 @@ class TasksController extends Controller
         }
     }
 
+    public function freedomTask()
+    {
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->FreedomMYOB->collectOrders();
+        }
+    }
+
     public function isAuthorized(){
         
         return true;

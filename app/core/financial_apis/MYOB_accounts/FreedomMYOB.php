@@ -11,12 +11,14 @@ class FreedomMYOB extends MYOB
     private $client_id = 7;
 
     private $return_array = array(
-        'import_count'          => 0,
+        'orders_created'        => 0,
+        'invoices_processed'    => 0,
         'import_error'          => false,
         'error'                 => false,
         'error_count'           => 0,
         'error_string'          => '',
-        'import_error_string'   => ''
+        'import_error_string'   => '',
+        'import_message'        => ''
     );
 
     public function init()
@@ -38,9 +40,12 @@ class FreedomMYOB extends MYOB
 
     public function processOrders($collected_orders)
     {
+        //echo "<pre>",print_r($collected_orders),"</pre>"; //die();
+        //echo count($collected_orders);die();
         $orders = array();
         if(count($collected_orders))
         {
+            //echo "Count ".count($collected_orders);die();
             $allocations = array();
             $orders_items = array();
             foreach($collected_orders as $o)
@@ -141,25 +146,33 @@ class FreedomMYOB extends MYOB
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 $qty = 0;
-                foreach($o['ItemsPurchased'] as $item)
+                if(empty($o['ItemsPurchased']) || count($o['ItemsPurchased']) == 0)
                 {
-                    $product = $this->controller->item->getItemBySku($item['ProductCode']);
-                    if(!$product)
+                    $items_errors = true;
+                    $mm .= "<li>There are no items in {$o['Invoice_Number']} for {$o['Customer_Name']}</li>";
+                }
+                else
+                {
+                    foreach($o['ItemsPurchased'] as $item)
                     {
-                        $items_errors = true;
-                        $mm .= "<li>Could not find {$item['Title']} in WMS based on {$item['ProductCode']}</li>";
-                    }
-                    else
-                    {
-                        $n_name = $product['name'];
-                        $item_id = $product['id'];
-                        $items[] = array(
-                            'qty'           =>  $item['Qty'],
-                            'id'            =>  $item_id,
-                            'whole_pallet'  => false
-                        );
-                        $qty += $item['Qty'];
-                        $weight += $product['weight'] * $item['Qty'];
+                        $product = $this->controller->item->getItemBySku($item['ProductCode']);
+                        if(!$product)
+                        {
+                            $items_errors = true;
+                            $mm .= "<li>Could not find {$item['Title']} in WMS based on {$item['ProductCode']}</li>";
+                        }
+                        else
+                        {
+                            $n_name = $product['name'];
+                            $item_id = $product['id'];
+                            $items[] = array(
+                                'qty'           =>  $item['Qty'],
+                                'id'            =>  $item_id,
+                                'whole_pallet'  => false
+                            );
+                            $qty += $item['Qty'];
+                            $weight += $product['weight'] * $item['Qty'];
+                        }
                     }
                 }
                 $delivery_instructions =  "Please leave in a safe place out of the weather";
@@ -167,28 +180,14 @@ class FreedomMYOB extends MYOB
                 //echo "<pre>",print_r($order),"</pre>";//die();
                 if($items_errors)
                 {
-                    $message = "<p>There was a problem with some items</p>";
+                    $message = "<p>There was a problem with invoice number {$order['client_order_id']} for {$order['ship_to']}</p>";
                     $message .= "<ul>".$mm."</ul>";
-                    $message .= "<p>Orders with these items will not be processed at the moment</p>";
-                    $message .= "<p>Client Order ID: {$order['client_order_id']}</p>";
-                    $message .= "<p>Customer: {$order['ship_to']}</p>";
-                    $message .= "<p>Address: {$ad['address']}</p>";
-                    $message .= "<p>{$ad['address_2']}</p>";
-                    $message .= "<p>{$ad['suburb']}</p>";
-                    $message .= "<p>{$ad['state']}</p>";
-                    $message .= "<p>{$ad['postcode']}</p>";
-                    $message .= "<p>{$ad['country']}</p>";
-                    $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
+                    $message .= "<p>This invoice could not be imported into the WMS.</p>";
+                    $message .= "<p>Other invoices for {$order['ship_to']} that did not throw such an error have been imported</p>";
                     //Send an email regarding the error
-                    if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
-                    {
-                        //Email::sendTTImportError($message);
-                    }
-                    else
-                    {
-                        $this->return_array['error_string'] .= $message;
-                        ++$this->return_array['error_count'];
-                    }
+                    Email::sendFreedomMYOBError($message);
+                    $this->return_array['error_string'] .= $message;
+                    ++$this->return_array['error_count'];
                     //echo $message;
                 }
                 else
@@ -202,9 +201,10 @@ class FreedomMYOB extends MYOB
                         $orders[$ind]['invoices'][] = $o['InvoicePDF'];
                         $orders[$ind]['invoice_UIDs'][] = $o['Invoice_UID'];
                         $orders[$ind]['company_file_ids'][] = $o['Company_File_Id'];
+                        $orders[$ind]['client_order_id'] .= ", ".$o['Invoice_Number'];
                         //$orders_items[$o['Invoice_Number']] = $items;
 
-                        $orders_items[$orders[$ind]['client_order_id']] = array_merge($orders_items[$orders[$ind]['client_order_id']], $items);
+                        $orders_items[$orders[$ind]['invoice_UIDs'][0]] = array_merge($orders_items[$orders[$ind]['invoice_UIDs'][0]], $items);
                     }
                     else
                     {
@@ -214,18 +214,15 @@ class FreedomMYOB extends MYOB
                         $order['invoices'][] = $o['InvoicePDF'];
                         $order['invoice_UIDs'][] = $o['Invoice_UID'];
                         $order['company_file_ids'][] = $o['Company_File_Id'];
-                        $orders_items[$o['Invoice_Number']] = $items;
+                        $orders_items[$o['Invoice_UID']] = $items;
                         $order = array_merge($order, $ad);
                         $orders[] = $order;
                     }
-
                 }
             }//endforeach order
-            //echo "<pre>",print_r($orders),"</pre>";//die();
             $totoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
-
-            //return array_merge($orders,$totoitems);
             $this->addOrders($orders, $totoitems);
+            return $this->return_array;
         }//end if count orders
         else
         {
@@ -236,17 +233,19 @@ class FreedomMYOB extends MYOB
 
     private function addOrders($orders, $totoitems)
     {
-        $feedback = array(
+        /*$feedback = array(
             'error_string'          => '',
             'import_error_string'   => '',
             'import_message'        => ''
-        );
+        );*/
+        $processed_invoices = array();
+        $wms_orders_created = 0;
         foreach($orders as $o)
         {
             //check for errors first
             $item_error = false;
             $error_string = "";
-            foreach($totoitems[$o['client_order_id']] as $item)
+            foreach($totoitems[$o['invoice_UIDs'][0]] as $item)
             {
                 if($item['item_error'])
                 {
@@ -256,34 +255,20 @@ class FreedomMYOB extends MYOB
             }
             if($item_error)
             {
-                $message = "<p>There was a problem with some items</p>";
+                /**/
+                $message = "<p>There has been a problem with some items in invoice number(s) {$o['client_order_id']} for {$o['ship_to']}</p>";
                 $message .= $error_string;
-                $message .= "<p>Orders with these items will not be processed at the moment</p>";
-                $message .= "<p>Oneplate Order ID: {$o['client_order_id']}</p>";
-                $message .= "<p>Customer: {$o['ship_to']}</p>";
-                $message .= "<p>Address: {$o['address']}</p>";
-                $message .= "<p>{$o['address_2']}</p>";
-                $message .= "<p>{$o['suburb']}</p>";
-                $message .= "<p>{$o['state']}</p>";
-                $message .= "<p>{$o['postcode']}</p>";
-                $message .= "<p>{$o['country']}</p>";
-                $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                //if (php_sapi_name() !='cli')
-                if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
-                {
-                    //++$this->return_array['error_count'];
-                    $feedback['error_string'] .= $message;
-                }
-                else
-                {
-                    //Email::sendOnePlateImportError($message);
-
-                }
+                $message .= "<p>This has meant all invoices for {$o['ship_to']} have not been imported into the WMS</p>";
+                ++$this->return_array['error_count'];
+                $this->return_array['error_string'] .= $message;
+                //Send an email regarding the error
+                Email::sendFreedomMYOBError($message);
                 continue;
             }
             if($o['import_error'])
             {
-                $feedback['import_error_string'] = $o['import_error_string'];
+                $this->return_array['import_error_string'] .= $o['import_error_string'];
+                Email::sendFreedomMYOBError($o['import_error_string']);
                 continue;
             }
             //insert the order
@@ -304,42 +289,64 @@ class FreedomMYOB extends MYOB
                 'postcode'              => $o['postcode'],
                 'country'               => $o['country']
             );
-            $itp = array($totoitems[$o['client_order_id']]);
-            $order_number = $this->controller->order->addOrder($vals, $itp);
-            $feedback['import_message'] .="<p>$order_number created</p>";
+
             //save the invoices
+            $pdfs = array();
             foreach($o['invoices'] as $base64_pdf)
             {
-
-                //Decode pdf content
-                $pdf_decoded = base64_decode ($base64_pdf);
-                //Write data back to pdf file
-                $upcount = 1;
-                $filename = $o['client_order_id'];
-                $name = $o['client_order_id'].".pdf";
-                $upload_dir = "/client_uploads/7/unprinted/";
-                if ( ! is_dir(DOC_ROOT.$upload_dir))
-                            mkdir(DOC_ROOT.$upload_dir);
-    			while(file_exists(DOC_ROOT.$upload_dir.$name))
-                {
-                    $name = $filename."_".$upcount.".pdf";
-                    ++$upcount;
-                }
-                $pdf = fopen (DOC_ROOT.$upload_dir.$name,'w');
-                fwrite ($pdf,$pdf_decoded);
-                //close output file
-                fclose ($pdf);
-                //echo 'Done';
+                $tmp_name = "/tmp/".Utility::generateRandString(5).".pdf";
+                $this_pdf = fopen ($tmp_name,'w');
+                fwrite ($this_pdf,base64_decode($base64_pdf));
+                fclose ($this_pdf);
+                //array_push($pdfs,'../tmp/test'.$rowp['id'].'.pdf');
+                $pdfs[] = array(
+                	'file'		    =>	$tmp_name,
+                    'orientation'	=>	'P'
+                );
             }
+            $upcount = 1;
+            $filename = "invoice";
+            $name = "invoice.pdf";
+            $upload_dir = "/client_uploads/7/";
+            if ( ! is_dir(DOC_ROOT.$upload_dir))
+                        mkdir(DOC_ROOT.$upload_dir);
+			while(file_exists(DOC_ROOT.$upload_dir.$name))
+            {
+                $name = $filename."_".$upcount.".pdf";
+                ++$upcount;
+            }
+            $pdf = new Mympdf();
+            $pdf->mergePDFFilesToServer($pdfs, $name, DOC_ROOT.$upload_dir);
+            $uploaded_file = $name;
+            $vals['uploaded_file'] = $uploaded_file;
+            //create the order
+            $itp = array($totoitems[$o['invoice_UIDs'][0]]);
+            //echo "<pre>",print_r($itp),"</pre>";
+            $order_number = $this->controller->order->addOrder($vals, $itp);
+            ++$wms_orders_created;
+            ++$this->return_array['orders_created'];
+            $this->return_array['import_message'] .="<p>$order_number created</p>";
             //send back to MYOB
             foreach($o['invoice_UIDs'] as $key => $invoice_UID)
             {
-                $this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
-                //echo "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
+                //$this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
+                echo "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
+                ++$this->return_array['invoices_processed'];
             }
-
+            $processed_invoices[] = $o['client_order_id'];
         }
-        echo "<pre>",print_r($feedback),"</pre>";
+        //Send email about what happened
+        $s = (count($processed_invoices) > 1)? "s have" : " has";
+        $wmsos = ($wms_orders_created == 1)? " has": "s have";
+        $pi_string = implode("<br/>", $processed_invoices);
+        $summary = "
+            <p>The following invoice{$s} been imported into the WMS and {$this->return_array['orders_created']} order{$wmsos} been created</p>
+            <p>$pi_string</p>
+            <p>They have all been marked as 'Sent' in MYOB</p>
+        ";
+        //echo "<pre>",print_r($this->return_array),"</pre>";
+        Email::sendFreedomMYOBSummary($summary);
+        return $this->return_array;
     }
 
 

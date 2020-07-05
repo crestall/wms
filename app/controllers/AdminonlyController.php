@@ -118,8 +118,8 @@ class adminonlyController extends Controller
         $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
         $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
         //echo "<pre>",print_r($invoices),"</pre>"; //die();
-        echo "<hr/>";
-        $this->FreedomMYOB->processOrders($invoices);
+        //echo "<hr/>";
+        //$this->FreedomMYOB->processOrders($invoices);
         //echo "<pre>",print_r($orders),"</pre>";
         die();
         Config::setJsConfig('curPage', "api-tester");

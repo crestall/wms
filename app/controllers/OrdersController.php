@@ -415,6 +415,19 @@ class OrdersController extends Controller
        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
     }
 
+    public function importFreedomOrders()
+    {
+        //up the memory for this
+        ini_set('memory_limit', '2048M');
+        $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
+        $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
+        //echo "<pre>",print_r($invoices),"</pre>"; //die();
+        echo "<hr/>";
+        $result = $this->FreedomMYOB->processOrders($invoices);
+        echo "<pre>",print_r($result),"</pre>";
+        die();
+    }
+
     public function orderDispatching()
     {
         //render the page
