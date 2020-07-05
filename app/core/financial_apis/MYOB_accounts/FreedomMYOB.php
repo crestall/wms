@@ -82,19 +82,38 @@ class FreedomMYOB extends MYOB
                 }
                 //validate address
                 $atc = $o['ShipToAddress']."<br />";
-                list($name, $line1, $line2, $line3) = explode("<br />", $atc);
+                try{
+                   list($name, $line1, $line2, $line3) = explode("<br />", $atc);
+                }
+                catch(exception $e){
+                   echo $e->getMessage();
+                   echo "<p>Problem with $atc</p>";
+                }
                 $address = $line1;
                 if(empty($line3))
                 {
                     //echo "<p>2 line address</p>";
                     $address_2 = "";
-                    list($suburb, $state, $postcode) = explode("  ", $line2);
+                    try{
+                        list($suburb, $state, $postcode) = explode("  ", $line2);
+                    }
+                    catch(exception $e){
+                        echo $e->getMessage();
+                        echo "<p>Problem with $line2</p>";
+                    }
                 }
                 else
                 {
                     //echo "<p>3 line address</p>";
                     $address_2 = $line2;
                     list($suburb, $state, $postcode) = explode("  ", $line3);
+                    try{
+                        list($suburb, $state, $postcode) = explode("  ", $line3);
+                    }
+                    catch(exception $e){
+                        echo $e->getMessage();
+                        echo "<p>Problem with $line3</p>";
+                    }
                 }
                 $ad = array(
                     'address'   => $address,
@@ -329,8 +348,8 @@ class FreedomMYOB extends MYOB
             //send back to MYOB
             foreach($o['invoice_UIDs'] as $key => $invoice_UID)
             {
-                //$this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
-                echo "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
+                $this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
+                //echo "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
                 ++$this->return_array['invoices_processed'];
             }
             $processed_invoices[] = $o['client_order_id'];
