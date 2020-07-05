@@ -265,7 +265,7 @@ class FreedomMYOB extends MYOB
                 $message .= $error_string;
                 $message .= "<p>This has meant all invoices for {$o['ship_to']} have not been imported into the WMS</p>";
                 ++$this->return_array['error_count'];
-                $feedback['error_string'] .= $message;
+                $this->return_array['error_string'] .= $message;
                 continue;
             }
             if($o['import_error'])
