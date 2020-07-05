@@ -322,8 +322,7 @@ class FreedomMYOB extends MYOB
             $itp = array($totoitems[$o['invoice_UIDs'][0]]);
             //echo "<pre>",print_r($itp),"</pre>";
             $order_number = $this->controller->order->addOrder($vals, $itp);
-            //++$wms_orders_created;
-
+            ++$wms_orders_created;
             ++$this->return_array['orders_created'];
             $this->return_array['import_message'] .="<p>$order_number created</p>";
             //send back to MYOB
@@ -338,7 +337,7 @@ class FreedomMYOB extends MYOB
         }
         //Send email about what happened
         $s = (count($processed_invoices) > 1)? "s have" : " has";
-        $wmsos = (count($this->return_array['orders_created']) == 1)? " has": "s have";
+        $wmsos = (count($wms_orders_created) == 1)? " has": "s have";
         $pi_string = implode(", ", $processed_invoices);
         $summary = "
             <p>The following invoice{$s} been imported into the WMS and {$this->return_array['orders_created']} order{$wmsos} been created</p>
