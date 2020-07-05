@@ -508,7 +508,7 @@
             $mail->Password = Config::get('EMAIL_PWD');
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."freedom_myob_import_error.html");
-            $replace_array = array("{MESSGAE}");
+            $replace_array = array("{MESSAGE}");
 		    $replace_with_array = array($message);
     		$body = str_replace($replace_array, $replace_with_array, $body);
             $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
