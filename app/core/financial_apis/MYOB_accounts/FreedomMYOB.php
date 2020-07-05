@@ -180,18 +180,10 @@ class FreedomMYOB extends MYOB
                 //echo "<pre>",print_r($order),"</pre>";//die();
                 if($items_errors)
                 {
-                    $message = "<p>There was a problem with some items</p>";
+                    $message = "<p>There was a problem with invoice number {$order['client_order_id']} for {$order['ship_to']}</p>";
                     $message .= "<ul>".$mm."</ul>";
-                    $message .= "<p>Orders with these items will not be processed at the moment</p>";
-                    $message .= "<p>Client Order ID: {$order['client_order_id']}</p>";
-                    $message .= "<p>Customer: {$order['ship_to']}</p>";
-                    $message .= "<p>Address: {$ad['address']}</p>";
-                    $message .= "<p>{$ad['address_2']}</p>";
-                    $message .= "<p>{$ad['suburb']}</p>";
-                    $message .= "<p>{$ad['state']}</p>";
-                    $message .= "<p>{$ad['postcode']}</p>";
-                    $message .= "<p>{$ad['country']}</p>";
-                    $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
+                    $message .= "<p>This invoice could not be imported into the WMS.</p>";
+                    $message .= "<p>Other invoices for {$order['ship_to']} that did not throw such an error have been imported</p>";
                     //Send an email regarding the error
                     if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
                     {
@@ -268,30 +260,12 @@ class FreedomMYOB extends MYOB
             }
             if($item_error)
             {
-                /*
-                $message = "<p>There was a problem with some items</p>";
+                /**/
+                $message = "<p>There has been a problem with some items in invoice number {$o['client_order_id']} for {$o['ship_to']}</p>";
                 $message .= $error_string;
-                $message .= "<p>Orders with these items will not be processed at the moment</p>";
-                $message .= "<p>Freedom Order ID: {$o['client_order_id']}</p>";
-                $message .= "<p>Customer: {$o['ship_to']}</p>";
-                $message .= "<p>Address: {$o['address']}</p>";
-                $message .= "<p>{$o['address_2']}</p>";
-                $message .= "<p>{$o['suburb']}</p>";
-                $message .= "<p>{$o['state']}</p>";
-                $message .= "<p>{$o['postcode']}</p>";
-                $message .= "<p>{$o['country']}</p>";$message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                //if (php_sapi_name() !='cli')
-                if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
-                {
-                    //++$this->return_array['error_count'];
-                    $feedback['error_string'] .= $message;
-                }
-                else
-                {
-                    //Email::sendOnePlateImportError($message);
-
-                }
-                */
+                $message .= "<p>This has meant all invoices for {$o['ship_to']} have not been imported into the WMS</p>";
+                ++$this->return_array['error_count'];
+                $feedback['error_string'] .= $message;
                 continue;
             }
             if($o['import_error'])
