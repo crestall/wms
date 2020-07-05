@@ -337,7 +337,7 @@ class FreedomMYOB extends MYOB
 
         }
         //Send email about what happened
-        $s = (count($processed_invoices[]) > 1)? "s have" : " has";
+        $s = (count($processed_invoices) > 1)? "s have" : " has";
         $wmsos = (count($this->return_array['orders_created']) == 1)? " has": "s have";
         $pi_string = implode(", ", $processed_invoices);
         $summary = "
