@@ -341,6 +341,7 @@ class FreedomMYOB extends MYOB
         $pi_string = implode(", ", $processed_invoices);
         $summary = "
             <p>The following invoice{$s} been imported into the WMS and {$this->return_array['orders_created']} order{$wmsos} been created</p>
+            <p>They have all been marked as 'Sent' in MYOB</p>
         ";
         //echo "<pre>",print_r($this->return_array),"</pre>";
         return $this->return_array;
