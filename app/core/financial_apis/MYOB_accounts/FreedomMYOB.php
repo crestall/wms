@@ -106,7 +106,6 @@ class FreedomMYOB extends MYOB
                 {
                     //echo "<p>3 line address</p>";
                     $address_2 = $line2;
-                    list($suburb, $state, $postcode) = explode("  ", $line3);
                     try{
                         list($suburb, $state, $postcode) = explode("  ", $line3);
                     }
