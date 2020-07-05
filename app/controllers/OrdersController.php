@@ -423,8 +423,8 @@ class OrdersController extends Controller
         $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
         //echo "<pre>",print_r($invoices),"</pre>"; //die();
         echo "<hr/>";
-        $orders = $this->FreedomMYOB->processOrders($invoices);
-        echo "<pre>",print_r($orders),"</pre>";
+        $result = $this->FreedomMYOB->processOrders($invoices);
+        echo "<pre>",print_r($result),"</pre>";
         die();
     }
 

@@ -339,9 +339,10 @@ class FreedomMYOB extends MYOB
         //Send email about what happened
         $s = (count($processed_invoices) > 1)? "s have" : " has";
         $wmsos = ($wms_orders_created == 1)? " has": "s have";
-        $pi_string = implode(", ", $processed_invoices);
+        $pi_string = implode("<br/>", $processed_invoices);
         $summary = "
             <p>The following invoice{$s} been imported into the WMS and {$this->return_array['orders_created']} order{$wmsos} been created</p>
+            <p>$pi_string</p>
             <p>They have all been marked as 'Sent' in MYOB</p>
         ";
         //echo "<pre>",print_r($this->return_array),"</pre>";

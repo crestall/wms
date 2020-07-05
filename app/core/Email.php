@@ -509,7 +509,7 @@
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."freedom_myob_import_summary.html");
             $replace_array = array("{MESSAGE}", "{TIME}");
-		    $replace_with_array = array($message, date("D the jS of M at g:i a"));
+		    $replace_with_array = array($message, date("D \t\h\e jS \of M \a\t g:i a"));
     		$body = str_replace($replace_array, $replace_with_array, $body);
             $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
