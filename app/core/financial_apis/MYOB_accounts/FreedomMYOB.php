@@ -11,7 +11,8 @@ class FreedomMYOB extends MYOB
     private $client_id = 7;
 
     private $return_array = array(
-        'import_count'          => 0,
+        'orders_created'        => 0,
+        'invoices_processed'    => 0,
         'import_error'          => false,
         'error'                 => false,
         'error_count'           => 0,
@@ -250,6 +251,8 @@ class FreedomMYOB extends MYOB
             'import_error_string'   => '',
             'import_message'        => ''
         );*/
+        $invoices_processed = 0;
+        $wms_orders_created = 0;
         foreach($orders as $o)
         {
             //check for errors first
@@ -293,7 +296,7 @@ class FreedomMYOB extends MYOB
             }
             if($o['import_error'])
             {
-                $this->return_array['import_error_string'] = $o['import_error_string'];
+                $this->return_array['import_error_string'] .= $o['import_error_string'];
                 continue;
             }
             //insert the order
@@ -348,16 +351,21 @@ class FreedomMYOB extends MYOB
             $itp = array($totoitems[$o['invoice_UIDs'][0]]);
             //echo "<pre>",print_r($itp),"</pre>";
             $order_number = $this->controller->order->addOrder($vals, $itp);
+            //++$wms_orders_created;
+
+            ++$this->return_array['orders_created'];
             $this->return_array['import_message'] .="<p>$order_number created</p>";
             //send back to MYOB
             foreach($o['invoice_UIDs'] as $key => $invoice_UID)
             {
                 //$this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
                 echo "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
+                ++$this->return_array['invoices_processed'];
             }
 
         }
         echo "<pre>",print_r($this->return_array),"</pre>";
+
     }
 
 
