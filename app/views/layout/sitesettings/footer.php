@@ -182,10 +182,15 @@
                 },
                 'manage-users':{
                     init: function(){
-                        dataTable.init($('table#user_list_table'), {
-                            "order": [],
-                            fixedHeader: true
-                        } );
+                            var tables = $('.user_list_table').DataTable({
+                            "dom": '<"top"i>rt<"bottom">p<"clear">'
+                        });
+
+
+                        $('#mySearch').on( 'keyup click', function () {
+                            tables.tables().search($(this).val()).draw();
+
+                        });
                         actions.common.userActivation();
                     }
                 },
