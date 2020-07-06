@@ -25,25 +25,29 @@
                     $name = ucwords($ur['name']);?>
                     <thead>
                         <tr>
-                            <th colspan=4>
+                            <th colspan=5>
                                 <h2><?php echo $name;?> Users</h2>
                             </th>
                         </tr>
                         <tr>
+                            <th></th>
                             <th>User</th>
                             <th>Client Name</th>
                             <th>Email</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                        </tr>
-                    </tbody>
+                    <?php $i = 1;
+                    foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
+                        <tbody>
+                            <tr>
+                                <td><?php echo $i;?></td>
+                                <td><img src="/images/profile_pictures/<?php echo $user['profile_picture'];?>" alt="profile image" class="img-thumbnail" /> <?php echo $user['name'];?></td>
+                                <td><?php echo $this->controller->client->getClientName($user['client_id']);?></td>
+                                <td><?php echo $user['email'];?></td>
+                            </tr>
+                        </tbody>
+                    <?php ++$i; endforeach;?>
                 <?php endforeach;?>
             </table>
         </div>
