@@ -17,28 +17,18 @@
         </div>
     </div>
     <div class="row" id="table_holder" style="display:none">
-        <?php foreach($user_roles as $ur):
-            if(!$this->controller->user->canManageRole($ur['id']))
-                continue;
-            $name = ucwords($ur['name']);?>
-            <div class="row">
-                <div class="col-lg-12">
-                    <table id="user_list_table" class="table-striped table-hover" width="100%">
-                        <tr>
-                            <td>
-                                <h2><?php echo $name;?> Users</h2>
-                            </td>
-                        </tr>
-                    </table>
-
-                </div>
-            </div>
-        <?php endforeach;?>
-    </div>
-    <div class="row" id="table_holder" style="display:none">
         <div class="col-lg-12">
-            <table id="client_list_table" class="table-striped table-hover" width="100%">
-
+            <table id="user_list_table" class="table-striped table-hover" width="100%">
+            <?php foreach($user_roles as $ur):
+                if(!$this->controller->user->canManageRole($ur['id']))
+                    continue;
+                $name = ucwords($ur['name']);?>
+                <tr>
+                    <td>
+                        <?php echo $name;?> Users
+                    </td>
+                </tr>
+            <?php endforeach;?>
             </table>
         </div>
     </div>
