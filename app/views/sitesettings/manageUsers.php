@@ -19,16 +19,25 @@
     <div class="row" id="table_holder" style="display:none">
         <div class="col-lg-12">
             <table id="user_list_table" class="table-striped table-hover" width="100%">
-            <?php foreach($user_roles as $ur):
-                if(!$this->controller->user->canManageRole($ur['id']))
-                    continue;
-                $name = ucwords($ur['name']);?>
-                <tr>
-                    <td>
-                        <?php echo $name;?> Users
-                    </td>
-                </tr>
-            <?php endforeach;?>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>User</th>
+                        <th>Client Name</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <?php foreach($user_roles as $ur):
+                    if(!$this->controller->user->canManageRole($ur['id']))
+                        continue;
+                    $name = ucwords($ur['name']);?>
+                    <tr>
+                        <td colspan="5">
+                            <?php echo $name;?> Users
+                        </td>
+                    </tr>
+                <?php endforeach;?>
             </table>
         </div>
     </div>
