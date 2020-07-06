@@ -353,6 +353,7 @@ class FreedomMYOB extends MYOB
             }
             $processed_invoices[] = $o['client_order_id'];
         }
+        //die();
         //Send email about what happened
         $s = (count($processed_invoices) > 1)? "s have" : " has";
         $wmsos = ($wms_orders_created == 1)? " has": "s have";

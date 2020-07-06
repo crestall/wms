@@ -478,6 +478,11 @@
                         }
                         $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
                     }
+                    if($od['client_id'] == 7)
+                    {
+                        //FREEDOM
+                        //$this->controller->FreedomMYOB->callTask('addCommentFromWMS',array('Company_UID'=>'theCompanyId','invoiceUID'=>'0001','comment'=>'test'
+                    }
                     //order is now fulfilled, reduce stock
                     $items = $this->controller->order->getItemsForOrder($id);
                     $this->output .= "Reducing Stock and recording movement fo order id: $id".PHP_EOL;
