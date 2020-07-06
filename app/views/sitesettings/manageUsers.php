@@ -43,7 +43,14 @@
                                 <td data-label="User"><img src="/images/profile_pictures/<?php echo $user['profile_picture'];?>" alt="profile image" class="img-thumbnail" style="width:75px" /> <?php echo $user['name'];?></td>
                                 <td data-label="Client Name"><?php echo $this->controller->client->getClientName($user['client_id']);?></td>
                                 <td data-label="Email"><?php echo $user['email'];?></td>
-                                <td></td>
+                                <td>
+                                    <?php if($user['active'] > 0):?>
+                                        <p><a class="btn btn-danger deactivate" data-userid="<?php echo $user['id'];?>">Deactivate User</a> </p>
+                                    <?php else:?>
+                                        <p><a class="btn btn-success reactivate" data-userid="<?php echo $user['id'];?>">Reactivate User</a> </p>
+                                    <?php endif;?>
+                                    <p><a class="btn btn-primary" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a></p>
+                                </td>
                             </tr>
                         <?php endforeach;?>
                     </tbody>
