@@ -38,20 +38,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
+                        <?php $i = 1;
+                        foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
+                            <tr>
+                                <td><?php echo $i;?></td>
+                                <td><img src="/images/profile_pictures/<?php echo $user['profile_picture'];?>" alt="profile image" class="img-thumbnail" /> <?php echo $user['name'];?></td>
+                                <td><?php echo $this->controller->client->getClientName($user['client_id']);?></td>
+                                <td><?php echo $user['email'];?></td>
+                                <td></td>
+                            </tr>
+                        <?php ++$i; endforeach;?>
                     </tbody>
                 <?php endforeach;?>
             </table>
