@@ -34,7 +34,7 @@
                     	<tr>
                             <td><?php echo $i;?></td>
                             <td data-label="Client Name"><img src="/images/client_logos/tn_<?php echo $c['logo'];?>" alt="client logo" class="img-thumbnail" /> <?php echo $c['client_name'];?></td>
-                            <td data-label="Contact Name"><?php echo $c['contact_name'];?>></td>
+                            <td data-label="Contact Name"><?php echo $c['contact_name'];?></td>
                             <td data-label="Contact Email"><?php echo $c['billing_email'];?></td>
                             <td></td>
                         </tr>
