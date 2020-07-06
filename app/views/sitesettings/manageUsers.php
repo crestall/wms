@@ -33,12 +33,9 @@
                             continue;
                         $name = ucwords($ur['name']);?>
                         <tr>
-                            <td>
+                            <th colspan=4>
                                 <?php echo $name;?> Users
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            </th>
                         </tr>
                     <?php endforeach;?>
                 </tbody>
