@@ -19,35 +19,32 @@
     <div class="row" id="table_holder" style="display:none">
         <div class="col-lg-12">
             <table id="user_list_table" class="table-striped table-hover" width="100%">
-                <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Client Name</th>
-                        <th>Email</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                    <?php foreach($user_roles as $ur):
-                        if(!$this->controller->user->canManageRole($ur['id']))
-                            continue;
-                        $name = ucwords($ur['name']);?>
-                        <thead>
-                            <tr>
-                                <th colspan=4>
-                                    <?php echo $name;?> Users
-                                </th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                            </tr>
-                        </tbody>
-                    <?php endforeach;?>
+                <?php foreach($user_roles as $ur):
+                    if(!$this->controller->user->canManageRole($ur['id']))
+                        continue;
+                    $name = ucwords($ur['name']);?>
+                    <thead>
+                        <tr>
+                            <th colspan=4>
+                                <?php echo $name;?> Users
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>User</th>
+                            <th>Client Name</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                        </tr>
+                    </tbody>
+                <?php endforeach;?>
             </table>
         </div>
     </div>
