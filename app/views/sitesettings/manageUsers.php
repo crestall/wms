@@ -25,12 +25,11 @@
                     $name = ucwords($ur['name']);?>
                     <thead>
                         <tr>
-                            <th colspan=5>
+                            <th colspan=4>
                                 <h2><?php echo $name;?> Users</h2>
                             </th>
                         </tr>
                         <tr>
-                            <th></th>
                             <th>User</th>
                             <th>Client Name</th>
                             <th>Email</th>
@@ -41,13 +40,12 @@
                         <?php $i = 1;
                         foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
                             <tr>
-                                <td><?php echo $i;?></td>
-                                <td><img src="/images/profile_pictures/<?php echo $user['profile_picture'];?>" alt="profile image" class="img-thumbnail" style="width:75px" /> <?php echo $user['name'];?></td>
-                                <td><?php echo $this->controller->client->getClientName($user['client_id']);?></td>
-                                <td><?php echo $user['email'];?></td>
+                                <td data-label="User"><img src="/images/profile_pictures/<?php echo $user['profile_picture'];?>" alt="profile image" class="img-thumbnail" style="width:75px" /> <?php echo $user['name'];?></td>
+                                <td data-label="Client Name"><?php echo $this->controller->client->getClientName($user['client_id']);?></td>
+                                <td data-label="Email"><?php echo $user['email'];?></td>
                                 <td></td>
                             </tr>
-                        <?php ++$i; endforeach;?>
+                        <?php endforeach;?>
                     </tbody>
                 <?php endforeach;?>
             </table>
