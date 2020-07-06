@@ -31,11 +31,14 @@
                         if(!$this->controller->user->canManageRole($ur['id']))
                             continue;
                         $name = ucwords($ur['name']);?>
-                        <tr>
-                            <th colspan=4>
-                                <?php echo $name;?> Users
-                            </th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th colspan=4>
+                                    <?php echo $name;?> Users
+                                </th>
+                            </tr>
+                        </thead>
+
                         <tbody>
                             <tr>
                                 <td>1</td>
