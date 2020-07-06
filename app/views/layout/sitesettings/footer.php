@@ -183,6 +183,7 @@
                 'manage-users':{
                     init: function(){
                         dataTable.init($('table#user_list_table'), {
+                            "order": [],
                             fixedHeader: true
                         } );
                         actions.common.userActivation();
