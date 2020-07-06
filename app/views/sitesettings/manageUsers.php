@@ -26,7 +26,7 @@
                     <thead>
                         <tr>
                             <th colspan=4>
-                                <?php echo $name;?> Users
+                                <h2><?php echo $name;?> Users</h2>
                             </th>
                         </tr>
                         <tr>
