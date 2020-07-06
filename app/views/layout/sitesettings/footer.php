@@ -182,16 +182,10 @@
                 },
                 'manage-users':{
                     init: function(){
-                        /*
-                        $('a.toggle_roles').click(function(e){
-                            $(this).toggleClass('hiding');
-                        });
-                        */
-                        $('a.toggle_roles').each(function(i,e){
-                            $(this).click(function(e){
-                                $(this).toggleClass('hiding');
-                            })
-                        });
+                        dataTable.init($('table#user_list_table'), {
+                            "order": [],
+                            fixedHeader: true
+                        } );
                         actions.common.userActivation();
                     }
                 },
