@@ -26,8 +26,6 @@
                         <th>Email</th>
                         <th></th>
                     </tr>
-                </thead>
-                <tbody>
                     <?php foreach($user_roles as $ur):
                         if(!$this->controller->user->canManageRole($ur['id']))
                             continue;
@@ -37,8 +35,16 @@
                                 <?php echo $name;?> Users
                             </th>
                         </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                            </tr>
+                        </tbody>
                     <?php endforeach;?>
-                </tbody>
             </table>
         </div>
     </div>
