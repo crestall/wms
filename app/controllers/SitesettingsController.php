@@ -42,8 +42,8 @@ class sitesettingsController extends Controller
 
     public function manageUsers()
     {
-        $client_users = $this->user->getAllUsers('client');
-        $admin_users = $this->user->getAllUsers('admin');
+        //$client_users = $this->user->getAllUsers('client');
+        //$admin_users = $this->user->getAllUsers('admin');
         $user_roles = $this->user->getUserRoles();
         $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : -1;
         //render the page
