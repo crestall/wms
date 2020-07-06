@@ -14,9 +14,7 @@
         <!-- Menu JavaScript -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.8/metisMenu.min.js"></script>
         <!-- DataTables JavaScript -->
-        <script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-        <script src="//cdn.datatables.net/1.10.18/js/dataTables.bootstrap.min.js"></script>
-        <script src="//cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/fh-3.1.7/datatables.min.js"></script>
         <!-- Block UI JavaScript -->
         <script src="/scripts/jquery.blockUI.js"></script>
         <!-- Print Area Javascript -->
