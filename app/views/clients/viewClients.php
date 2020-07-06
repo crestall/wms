@@ -19,7 +19,7 @@
         </div>
         <div class="row" id="table_holder" style="display:none">
             <div class="col-lg-12">
-                <table id="location_report_table" class="table-striped table-hover" width="100%">
+                <table id="client_list_table" class="table-striped table-hover" width="100%">
                     <thead>
                     	<tr>
                             <th></th>

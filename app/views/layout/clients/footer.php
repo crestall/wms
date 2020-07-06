@@ -62,7 +62,10 @@
                 'view-clients': {
                     init: function()
                     {
-
+                        dataTable.init($('table#client_list_table'), {
+                            "order": [],
+                            fixedHeader: true
+                        } );
                     }
                 }
             }
