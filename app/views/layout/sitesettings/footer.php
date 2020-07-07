@@ -182,9 +182,9 @@
                 },
                 'manage-users':{
                     init: function(){
-                            var tables = $('.user_list_table').DataTable({
+                        var tables = dataTable.init($('table.user_list_table'), {
                             "dom": '<"top"i>rt<"bottom">p<"clear">'
-                        });
+                        } );
 
 
                         $('#mySearch').on( 'keyup click', function () {
