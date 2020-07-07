@@ -244,7 +244,8 @@ class Database {
 	public function queryIdByFieldNumber($table, $field, $value)
     {
 		$row = $this->queryRow("SELECT id FROM $table WHERE $field = :value LIMIT 1", array('value' => $value));
-		if(count($row))
+		//if(count($row))
+        if($row)
 		{
 			$id = $row['id'];
 		}

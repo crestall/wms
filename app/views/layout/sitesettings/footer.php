@@ -182,10 +182,16 @@
                 },
                 'manage-users':{
                     init: function(){
-                        dataTable.init($('table#user_list_table'), {
-                            "order": [],
-                            fixedHeader: true
+                        var tbls = dataTable.init($('table.user_list_table'), {
+                            "dom": '<"top"i>rt<"bottom">p<"clear">',
+                            "pageLength": 10
                         } );
+
+
+                        $('#mySearch').on( 'keyup click', function () {
+                            tbls.tables().search($(this).val()).draw();
+
+                        });
                         actions.common.userActivation();
                     }
                 },

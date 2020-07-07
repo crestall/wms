@@ -136,7 +136,7 @@ var dataTable = {
         };
 
         $.extend( opts, options );
-        el.DataTable( opts );
+        return el.DataTable( opts );
     }
 }
 /************
