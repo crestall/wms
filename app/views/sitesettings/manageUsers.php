@@ -17,11 +17,9 @@
         </div>
     </div>
     <div class="row" id="table_holder" style="display:none">
-        <div class="col-lg-12 row">
-            <p>
+        <div class="col-lg-12 row form-group">
                 <label for="mySearch">Search Tables</label>
-                <input type="text" placeholder="Search..." id="mySearch">
-            </p>
+                <input type="search" placeholder="Search..." id="mySearch">
         </div>
         <div class="col-lg-12 row">
             <?php foreach($user_roles as $ur):
