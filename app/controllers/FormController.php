@@ -740,19 +740,27 @@ class FormController extends Controller {
                 else
                 {
                     //Get the Department Name and ID
-                    $array = explode(" ",$row[8], 2);
-                    $reece_department_id =(int)$array[0];
-                    $reece_department_name = $array[1];
-                    if($reece_department_id === 0)
+                    try{
+                        $array = explode(" ",$row[8], 2);
+                        $reece_department_id =(int)$array[0];
+                        $reece_department_name = $array[1];
+                        if($reece_department_id === 0)
+                        {
+                            $data_errors = true;
+                            $data_error_string .= "<li>A Department ID could not be determined from the name: $line</li>";
+                        }
+                        else
+                        {
+                            $department_array['reece_id']   = $reece_department_id;
+                            $department_array['name']       = $reece_department_name;
+                        }
+                    }
+                    catch(exception $e)
                     {
                         $data_errors = true;
-                        $data_error_string .= "<li>A Department ID could not be determined from the name: $line</li>";
+                        $data_error_string .= "<li>Could not explode: $line</li>";
                     }
-                    else
-                    {
-                        $department_array['reece_id']   = $reece_department_id;
-                        $department_array['name']       = $reece_department_name;
-                    }
+
                 }
                 if(!$this->dataSubbed($row[9]))
                 {
