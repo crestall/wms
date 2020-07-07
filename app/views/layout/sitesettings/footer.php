@@ -183,7 +183,8 @@
                 'manage-users':{
                     init: function(){
                         var tbls = dataTable.init($('table.user_list_table'), {
-                            "dom": '<"top"i>rt<"bottom">p<"clear">'
+                            "dom": '<"top"i>rt<"bottom">p<"clear">',
+                            "pageLength": 10
                         } );
 
 
