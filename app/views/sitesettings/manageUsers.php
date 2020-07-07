@@ -18,7 +18,7 @@
     </div>
     <div class="row" id="table_holder" style="display:none">
         <div class="col-lg-12 row dataTables_filter form-group">
-            Search: <input type="search" placeholder="" id="mySearch" class="form-control input-md">
+            Search Users <input type="search" placeholder="" id="mySearch" class="form-control input-md">
         </div>
         <div class="col-lg-12 row">
             <?php foreach($user_roles as $ur):
