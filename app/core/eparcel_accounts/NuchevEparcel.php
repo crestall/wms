@@ -23,7 +23,7 @@ class NuchevEparcel extends Eparcel
 
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
-            'name'      =>  'OLI6 Baby Products (via FSG printing and 3PL)',
+            'name'      =>  'OLI6 Baby Products (via FSG 3PL)',
             'lines'		=>	array($from_address['address']),
             'suburb'	=>	$from_address['suburb'],
             'postcode'	=>	$from_address['postcode'],
