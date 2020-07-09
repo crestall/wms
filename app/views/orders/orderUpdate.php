@@ -289,7 +289,7 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
                             <div class="form-group row">
-                                <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Package Count<</span>/label>
+                                <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Package Count</span>/label>
                                 <div class="col-md-1">
                                     <input type="text" class="form-control required number" name="count" id="count" value="<?php echo $p_count;?>" />
                                 </div>
