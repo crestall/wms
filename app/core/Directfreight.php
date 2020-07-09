@@ -15,7 +15,7 @@
     protected $API_HOST;
     protected $CUSTOMER_CODE;
     protected $curl_options;
-    protected $sandbox = false;
+    protected $test = true;
     protected $API_KEY ;
     protected $ACCOUNT_NO;
 
@@ -29,9 +29,12 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
-        $this->controller = $controller;
-        $this->API_KEY    = Config::get('DIRECT_FREIGHT_API_KEY');
-        $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
+
+
+            $this->API_KEY    = Config::get('DIRECT_FREIGHT_PRICING_KEY');
+            $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
+
+
         //$this->ACCOUNT_NO = 22;
     }
 
@@ -148,20 +151,13 @@
             'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
-        //echo "<pre>",print_r($request),"</pre>";//die();
-        //echo json_encode($request);
         $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
-        //echo "<pre>",print_r(json_decode($response, true)),"</pre>";die();
-        //list($a_headers,$a_data) = $this->getResponse($response);
-        //echo "<pre>ADATA",print_r($a_data),"</pre>";die();
-        //json_decode($a_data[0], true); die();
-        //return json_decode($a_data[0], true);
         return $response;
     }
 
-    public function bookJob($data_array, $client = "3PL Plus")
+    public function createConsignments($data_array, $client = "FSG Printing and 3PL")
     {
-        $threepl_address = Config::get("THREEPL_ADDRESS");
+
 
         if(date('H', time()) > 14)
         {
