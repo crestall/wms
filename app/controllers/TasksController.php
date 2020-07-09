@@ -226,7 +226,7 @@ class TasksController extends Controller
 
     public function freedomTask()
     {
-        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
