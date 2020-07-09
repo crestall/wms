@@ -242,13 +242,14 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
                     </div>
                     <div class="row">
                         <div class="col-md-12">
+                            <a name="package"></a>
                             <?php if(isset($_SESSION['packagefeedback'])) :?>
                                <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('packagefeedback');?></div>
                             <?php endif; ?>
                             <?php if(isset($_SESSION['packageerrorfeedback'])) :?>
                                <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('packageerrorfeedback');?></div>
                             <?php endif; ?>
-                            <a name="package"></a>
+
                             <p class="text-info">fields marked <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> are required</p>
                         </div>
                     </div>
