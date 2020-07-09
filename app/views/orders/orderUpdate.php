@@ -294,11 +294,11 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
                                     <input type="text" class="form-control required number" name="count" id="count" value="<?php echo $p_count;?>" />
                                 </div>
                                 <div class="form-check">
+                                    <label class="form-check-label col-md-2" for="pallet">Pallet(s)</label>
                                     <div class="col-md-1 checkbox checkbox-default">
                                         <input class="form-check-input styled" type="checkbox" id="pallet" name="pallet" <?php if(!empty(Form::value('pallet'))) echo 'checked';?> />
                                         <label for="pallet"></label>
                                     </div>
-                                    <label class="form-check-label col-md-2" for="pallet">Is Pallet</label>
                                 </div>
                                 <label class="col-md-2 col-form-label">&nbsp;</label>
                                 <div class="col-md-4">
