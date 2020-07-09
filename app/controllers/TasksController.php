@@ -232,7 +232,11 @@ class TasksController extends Controller
         }
         else
         {
-            $this->FreedomMYOB->collectOrders();
+           //up the memory for this
+            ini_set('memory_limit', '2048M');
+            $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
+            $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
+            $this->FreedomMYOB->processOrders($invoices);
         }
     }
 
