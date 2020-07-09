@@ -328,6 +328,7 @@
                     init: function(){
                         actions.common.init();
                         $('input#pallet').click(function(e){
+                            console.log('click');
                             $('span#label_text').text = ($(this).prop('checked'))? "Pallet Count" :"Package Count";
                         });
                         $('a.delete-package')
