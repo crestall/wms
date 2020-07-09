@@ -16,6 +16,7 @@
     protected $API_KEY;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
+    protected $from_address_array;
 
     const    API_SCHEME   = 'https://';
     const    API_HOST     = 'digitalapi.auspost.com.au';
@@ -33,6 +34,16 @@
         $this->API_KEY      = Config::get('EPARCEL_API_KEY');
         $this->API_PWD      = Config::get('EPARCEL_API_PWD');
         $this->ACCOUNT_NO   = Config::get('EPARCEL_ACCOUNT_NO');
+
+        $from_address = Config::get("FSG_ADDRESS");
+        $this->from_address_array = array(
+            'name'      =>  'FSG Print and 3PL',
+            'lines'		=>	array($from_address['address']),
+            'suburb'	=>	$from_address['suburb'],
+            'postcode'	=>	$from_address['postcode'],
+            'state'		=>	$from_address['state'],
+            'country'	=>  $from_address['country']
+        );
     }
 
     protected function createSocket()
@@ -357,6 +368,7 @@
         if(!empty($od['contact_phone'])) $shipment['to']['phone'] = $od['contact_phone'];
         $shipment['to']['lines'][] = $od['address'];
         if(!empty($od['address_2'])) $shipment['to']['lines'][] = $od['address_2'];
+        /*
         $fsg_address = Config::get("FSG_ADDRESS");
         $shipment['from'] = array(
             'name'      =>  'Murphy Bros Printing Pty Ltd',
@@ -366,6 +378,8 @@
             'state'		=>	$fsg_address['state'],
             'country'	=>  $fsg_address['country']
         );
+        */
+        $shipment['from'] = $this->from_address_array;
         $packages = $this->controller->order->getPackagesForOrder($order_id);
         $weight = 0;
         $array = array();
@@ -429,130 +443,7 @@
         return $shipment;
     }
 
-     /*
-    public function getShipmentDetails($od, $cd = false, $cld = false, $picked = true, $use_express = false)
-    {
-        else
-        {
-            $weight = 0;
-            $array = array();
-            if($ad['country'] == "AU")
-            {
-               	$array['authority_to_leave'] = ($od['signature_req'] == 0);
-            }
-            else
-            {
-                $array['commercial_value'] = false;
-                $array['classification_type'] = 'GIFT';
-            }
-            foreach($items as $i)
-            {
-                if($i['hunters_goods_type'] == 20)
-                {
-                    $do_satchels = true;
-                    $description = (empty($i['description']))? $i['name']: $i['description'];
-                    $description = mb_strimwidth( $description , 0 , 40 ); //auspost will not allow this to be more than 40 characters
-                    $val = ($i['price'] == 0)? 1.00 : $i['price'];
-                    $weight += $i['weight'];
-                    if( !empty($i['satchel_large']) )  $large_satchels += $i['satchel_large'];
-                    if( !empty($i['satchel_small']) )  $small_satchels += $i['satchel_small'];
-                    continue;
-                }
-                else
-                {
-                    $array['product_id'] = getEparcelChargeCode($ad, $i['weight'], $express);
-                    $array['width'] = $i['width'];
-                    $array['height'] = $i['height'];
-                    $array['length'] = $i['depth'];
-                    $array['weight'] = $i['weight'];
-
-                }
-                $description = (empty($i['description']))? $i['name']: $i['description'];
-                $description = mb_strimwidth( $description , 0 , 40 ); //auspost will not allow this to be more than 40 characters
-                if($ad['country'] != "AU")
-                {
-                    $val = ($i['price'] == 0)? 1.00 : $i['price'];
-                    $array['item_contents'][] = array(
-                        'description'	=>  $description,
-                        'quantity'		=>	$i['qty'],
-                        'value'			=>	$val,
-                        //'value'			=>	$i['price'] * $i['qty'],
-                        //'weight'		=>	$weight,
-                    );
-
-                }
-                $array['item_reference'] = $i['item_id'];
-                $shipment['items'][] = $array;
-            }
-
-        }
-        if($do_satchels)
-        {
-            $array = array();
-            if($ad['country'] == "AU")
-            {
-               	$array['authority_to_leave'] = ($od['signature_req'] == 0);
-            }
-            else
-            {
-                $array['commercial_value'] = false;
-                $array['classification_type'] = 'GIFT';
-            }
-            $whole_small = ceil($small_satchels);
-
-            if($whole_small > 1)
-            {
-                $large_satchels += floor($whole_small / 2);
-                $whole_small = $whole_small % 2;
-            }
-            $whole_large = ceil($large_satchels);
-            $large_space = round($whole_large - $large_stachels, 1, PHP_ROUND_HALF_DOWN);
-            if($large_space >= 0.5)
-            {
-                --$whole_small;
-                $small_stachels = $whole_small > 0;
-            }
-            if($large_satchels)
-            {
-                $array['product_id'] = getEparcelChargeCode($ad, $weight, $express);
-                $array['width'] = 43;
-                $array['height'] = 32;
-                $array['length'] = 14;
-                $array['weight'] = $weight;
-                if($ad['country'] != "AU")
-                {
-                    $array['item_contents'][] = array(
-                		'description'	=>  $description,
-                		'quantity'		=>  1,
-                		'value'			=>	$val
-                	);
-                }
-
-                $shipment['items'][] = $array;
-            }
-            if($small_satchels)
-            {
-                $array['product_id'] = getEparcelChargeCode($ad, $weight, $express);
-                $array['width'] = 23;
-                $array['height'] = 34;
-                $array['length'] = 8;
-                $array['weight'] = $weight;
-                if($ad['country'] != "AU")
-                {
-                    $array['item_contents'][] = array(
-                		'description'	=>  $description,
-                		'quantity'		=>  1,
-                		'value'			=>	$val
-                	);
-                }
-                $shipment['items'][] = $array;
-            }
-
-        }
-        return $shipment;
-    }
-
-
+    /*
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
         if($expresspost)
