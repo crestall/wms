@@ -146,13 +146,6 @@
         return array($a_hdrs,$a_data);
     }
 
-    public function getTracking($consignment_id)
-    {
-        $response = $this->sendGetRequest('/booking/get-job-statuses?customerCode='.$this->CUSTOMER_CODE.'&trackingNumber='.$consignment_id);
-        list($a_headers,$a_data) = $this->getResponse($response);
-        return json_decode($a_data[0], true);
-    }
-
     public function getQuote($data_array, $client = "Filmshot Graphics")
     {
         $fsg_address = Config::get("FSG_ADDRESS");
@@ -163,7 +156,7 @@
             'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
-        $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
+        $response = $this->sendPostRequest('GetConsignmentPrice/', $request, "PRICING");
         return $response;
     }
 
