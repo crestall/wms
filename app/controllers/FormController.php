@@ -3794,7 +3794,7 @@ class FormController extends Controller {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
-        elseif( (filter_var($width, FILTER_VALIDATE_FLOAT) === false || $width <= 0) || (filter_var($height, FILTER_VALIDATE_FLOAT) === false && $height <= 0) || (filter_var($depth, FILTER_VALIDATE_FLOAT) === false && $depth <= 0) || (filter_var($weight, FILTER_VALIDATE_FLOAT) === false && $weight <= 0) || (filter_var($count, FILTER_VALIDATE_INT) === false && $count <= 0) )
+        elseif( (filter_var($width, FILTER_VALIDATE_FLOAT) === false || $width <= 0) || (filter_var($height, FILTER_VALIDATE_FLOAT) === false || $height <= 0) || (filter_var($depth, FILTER_VALIDATE_FLOAT) === false || $depth <= 0) || (filter_var($weight, FILTER_VALIDATE_FLOAT) === false || $weight <= 0) || (filter_var($count, FILTER_VALIDATE_INT) === false || $count <= 0) )
         {
             Session::set('packageerrorfeedback', 'All values must have a positive number<br/>Package has NOT been added');
             Session::set('value_array', $_POST);
