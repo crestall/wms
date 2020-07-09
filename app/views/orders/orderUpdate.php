@@ -7,6 +7,7 @@ $truck_charge = (empty(Form::value('truck_charge')))? $order['total_cost']:Form:
 $courier_name = (empty(Form::value('courier_name')))? $order['courier_name']:Form::value('courier_name');
 $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form::value('local_charge');
 $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:Form::value('direct_charge');
+$p_count = empty(Form::value('count')))? 1:Form::value('count');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -288,13 +289,16 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
                             <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Number</label>
+                                <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Number</label>
+                                <div class="col-md-1">
+                                    <input type="text" class="form-control required number" name="count" id="count" value="<?php echo $p_count;?>" />
+                                </div>
                                 <div class="form-check">
                                     <div class="col-md-1 checkbox checkbox-default">
                                         <input class="form-check-input styled" type="checkbox" id="pallet" name="pallet" <?php if(!empty(Form::value('pallet'))) echo 'checked';?> />
                                         <label for="pallet"></label>
                                     </div>
-                                    <label class="form-check-label col-md-3" for="pallet">Is Pallet</label>
+                                    <label class="form-check-label col-md-2" for="pallet">Is Pallet</label>
                                 </div>
                                 <label class="col-md-2 col-form-label">&nbsp;</label>
                                 <div class="col-md-4">
