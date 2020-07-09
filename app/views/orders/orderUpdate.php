@@ -331,6 +331,9 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
                                 <label class="col-md-4 col-form-label">Weight</label>
                                 <div class="col-md-2"><?php echo $p['weight'];?> kg</div>
                             </div>
+                            <div class='row'>
+                                <p>Total of <?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallets":"Packages";?></p>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-3x text-danger"></i></a>
