@@ -237,7 +237,7 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Add a Package</h4>
+                            <h4>Add Package(s) or Pallets(s)</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -289,12 +289,12 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
                             <div class="form-group row">
-                                <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Number</label>
+                                <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Package Count</label>
                                 <div class="col-md-1">
                                     <input type="text" class="form-control required number" name="count" id="count" value="<?php echo $p_count;?>" />
                                 </div>
                                 <div class="form-check">
-                                    <label class="form-check-label col-md-1" for="pallet">Pallet(s)</label>
+                                    <label class="form-check-label col-md-1" for="pallet">Pallet(s)?</label>
                                     <div class="col-md-1 checkbox checkbox-default">
                                         <input class="form-check-input styled" type="checkbox" id="pallet" name="pallet" <?php if(!empty(Form::value('pallet'))) echo 'checked';?> />
                                         <label for="pallet"></label>
