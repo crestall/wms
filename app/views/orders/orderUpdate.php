@@ -332,7 +332,8 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
                                 <div class="col-md-2"><?php echo $p['weight'];?> kg</div>
                             </div>
                             <div class='row'>
-                                <p>Total of <?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallets":"Packages";?></p>
+                                <?php $s = ($p['count'] == 1)? "":"s";?>
+                                <p>Total of <?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></p>
                             </div>
                         </div>
                         <div class="col-md-3">
