@@ -327,6 +327,10 @@
                 'order-update' : {
                     init: function(){
                         actions.common.init();
+                        $('input#pallet').click(function(e){
+                            var text = ($(this).prop('checked'))? "Pallet Count" :"Package Count";
+                            $('span#label_text').text(text)
+                        });
                         $('a.delete-package')
                             .css('cursor', 'pointer')
                             .click(function(e){

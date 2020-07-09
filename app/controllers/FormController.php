@@ -3788,13 +3788,13 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if(!$this->dataSubbed($width) || !$this->dataSubbed($height) || !$this->dataSubbed($depth) || !$this->dataSubbed($weight))
+        if(!$this->dataSubbed($width) || !$this->dataSubbed($height) || !$this->dataSubbed($depth) || !$this->dataSubbed($weight) || !$this->dataSubbed($count))
         {
             Session::set('packageerrorfeedback', 'All fields must have a value<br/>Package has NOT been added');
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
-        elseif( (filter_var($width, FILTER_VALIDATE_FLOAT) === false && $width <= 0) || (filter_var($height, FILTER_VALIDATE_FLOAT) === false && $height <= 0) || (filter_var($depth, FILTER_VALIDATE_FLOAT) === false && $depth <= 0) || (filter_var($weight, FILTER_VALIDATE_FLOAT) === false && $weight <= 0) )
+        elseif( (filter_var($width, FILTER_VALIDATE_FLOAT) === false || $width <= 0) || (filter_var($height, FILTER_VALIDATE_FLOAT) === false || $height <= 0) || (filter_var($depth, FILTER_VALIDATE_FLOAT) === false || $depth <= 0) || (filter_var($weight, FILTER_VALIDATE_FLOAT) === false || $weight <= 0) || (filter_var($count, FILTER_VALIDATE_INT) === false || $count <= 0) )
         {
             Session::set('packageerrorfeedback', 'All values must have a positive number<br/>Package has NOT been added');
             Session::set('value_array', $_POST);

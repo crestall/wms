@@ -15,8 +15,10 @@
     protected $API_HOST;
     protected $CUSTOMER_CODE;
     protected $curl_options;
-    protected $sandbox = false;
-    protected $API_KEY ;
+    protected $test = true;
+    protected $PRICING_KEY;
+    protected $CONSIGNMENT_KEY;
+    protected $GENERAL_KEY;
     protected $ACCOUNT_NO;
 
 
@@ -29,21 +31,34 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
-        $this->controller = $controller;
-        $this->API_KEY    = Config::get('DIRECT_FREIGHT_API_KEY');
-        $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
+
+        if($this->test)
+        {
+            $this->CONSIGNMENT_KEY = "DAB85BAB-F8F5-4B93-9290-C7EEA012B176";
+            $this->PRICING_KEY = "977998B6-48FB-4AB0-8D4D-AEB641906C0E";
+            $this->GENERAL_KEY = "26D189FD-FDAF-4C79-95F2-5042A3CD9097";
+            $this->ACCOUNT_NO = "21483";
+        }
+        else
+        {
+            $this->CONSIGNMENT_KEY = Config::get('DIRECT_FREIGHT_CONSIGNMENT_KEY');
+            $this->PRICING_KEY = Config::get('DIRECT_FREIGHT_PRICING_KEY');
+            $this->GENERAL_KEY = Config::get('DIRECT_FREIGHT_GENERAL_KEY');
+            $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
+        }
         //$this->ACCOUNT_NO = 22;
     }
 
-    protected function sendPostRequest($action, $data = array())
+    protected function sendPostRequest($action, $data = array(), $area = "PRICING")
     {
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         //die($url);
         $data_string = json_encode($data);
         //die($data_string);
+        $key = $this->{$area."_KEY"};
         $headers = array(
             'Content-Type: application/json',
-            'Authorisation: '. $this->API_KEY ,
+            'Authorisation: '. $key ,
             'AccountNumber: '.$this->ACCOUNT_NO
         );
         $ch = curl_init();
@@ -131,13 +146,6 @@
         return array($a_hdrs,$a_data);
     }
 
-    public function getTracking($consignment_id)
-    {
-        $response = $this->sendGetRequest('/booking/get-job-statuses?customerCode='.$this->CUSTOMER_CODE.'&trackingNumber='.$consignment_id);
-        list($a_headers,$a_data) = $this->getResponse($response);
-        return json_decode($a_data[0], true);
-    }
-
     public function getQuote($data_array, $client = "Filmshot Graphics")
     {
         $fsg_address = Config::get("FSG_ADDRESS");
@@ -148,20 +156,13 @@
             'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
-        //echo "<pre>",print_r($request),"</pre>";//die();
-        //echo json_encode($request);
-        $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
-        //echo "<pre>",print_r(json_decode($response, true)),"</pre>";die();
-        //list($a_headers,$a_data) = $this->getResponse($response);
-        //echo "<pre>ADATA",print_r($a_data),"</pre>";die();
-        //json_decode($a_data[0], true); die();
-        //return json_decode($a_data[0], true);
+        $response = $this->sendPostRequest('GetConsignmentPrice/', $request, "PRICING");
         return $response;
     }
 
-    public function bookJob($data_array, $client = "3PL Plus")
+    public function createConsignments($data_array, $client = "FSG Printing and 3PL")
     {
-        $threepl_address = Config::get("THREEPL_ADDRESS");
+
 
         if(date('H', time()) > 14)
         {

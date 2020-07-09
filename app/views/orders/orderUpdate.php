@@ -7,6 +7,7 @@ $truck_charge = (empty(Form::value('truck_charge')))? $order['total_cost']:Form:
 $courier_name = (empty(Form::value('courier_name')))? $order['courier_name']:Form::value('courier_name');
 $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form::value('local_charge');
 $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:Form::value('direct_charge');
+$p_count = (empty(Form::value('count')))? 1:Form::value('count');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -236,18 +237,19 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Add a Package</h4>
+                            <h4>Add Package(s) or Pallets(s)</h4>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
+                            <a name="package"></a>
                             <?php if(isset($_SESSION['packagefeedback'])) :?>
                                <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('packagefeedback');?></div>
                             <?php endif; ?>
                             <?php if(isset($_SESSION['packageerrorfeedback'])) :?>
                                <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('packageerrorfeedback');?></div>
                             <?php endif; ?>
-                            <a name="package"></a>
+
                             <p class="text-info">fields marked <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> are required</p>
                         </div>
                     </div>
@@ -288,15 +290,18 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
                             <div class="form-group row">
-                                <label class="col-md-2 col-form-label">&nbsp;</label>
+                                <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Package Count</span></label>
+                                <div class="col-md-1">
+                                    <input type="text" class="form-control required number" name="count" id="count" value="<?php echo $p_count;?>" />
+                                </div>
                                 <div class="form-check">
+                                    <label class="form-check-label col-md-1" for="pallet">Pallet(s)?</label>
                                     <div class="col-md-1 checkbox checkbox-default">
                                         <input class="form-check-input styled" type="checkbox" id="pallet" name="pallet" <?php if(!empty(Form::value('pallet'))) echo 'checked';?> />
                                         <label for="pallet"></label>
                                     </div>
-                                    <label class="form-check-label col-md-3" for="pallet">Pallet</label>
                                 </div>
-                                <label class="col-md-2 col-form-label">&nbsp;</label>
+                                <label class="col-md-3 col-form-label">&nbsp;</label>
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary">Add Package</button>
                                 </div>
@@ -325,6 +330,10 @@ $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:For
                                 <div class="col-md-2"><?php echo $p['height'];?> cm</div>
                                 <label class="col-md-4 col-form-label">Weight</label>
                                 <div class="col-md-2"><?php echo $p['weight'];?> kg</div>
+                            </div>
+                            <div class='row'>
+                                <?php $s = ($p['count'] == 1)? "":"s";?>
+                                <p>Total of <?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></p>
                             </div>
                         </div>
                         <div class="col-md-3">
