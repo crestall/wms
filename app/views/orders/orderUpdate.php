@@ -7,7 +7,7 @@ $truck_charge = (empty(Form::value('truck_charge')))? $order['total_cost']:Form:
 $courier_name = (empty(Form::value('courier_name')))? $order['courier_name']:Form::value('courier_name');
 $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form::value('local_charge');
 $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:Form::value('direct_charge');
-$p_count = empty(Form::value('count')))? 1:Form::value('count');
+$p_count = (empty(Form::value('count')))? 1:Form::value('count');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
