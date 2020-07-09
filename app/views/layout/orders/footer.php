@@ -328,8 +328,8 @@
                     init: function(){
                         actions.common.init();
                         $('input#pallet').click(function(e){
-                            console.log('click');
-                            $('span#label_text').text = ($(this).prop('checked'))? "Pallet Count" :"Package Count";
+                            var text = ($(this).prop('checked'))? "Pallet Count" :"Package Count";
+                            $('span#label_text').text(text)
                         });
                         $('a.delete-package')
                             .css('cursor', 'pointer')
