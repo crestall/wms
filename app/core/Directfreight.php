@@ -251,31 +251,9 @@
             'IsAuthorityToLeave'    => $od['signature_req'] == 0,
             'DeliveryInstructions'  => $delivery_instructions
         );
-        $ci = $this->controller->client->getClientInfo($od['client_id']);
         $packages = $this->controller->order->getPackagesForOrder($od['id']);
         $parcels = Packaging::getPackingForOrder($od,$items,$packages);
-        $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "Please leave in a safe place out of the weather";
-        if($od['signature_req'] == 1)
-            $delivery_intsructions = (!empty($od['instructions']))? $od['instructions'] : "";
-        $details = array(
-            'ConsignmentId'         => $od['id'],
-            'IsDangerousGoods'      => false
-        );
-        $rd = array(
-            'ConsignmentId'         => $od['id'],
-            'IsDangerousGoods'      => false,
-            'ReceiverName'          => $od['ship_to'],
-            'AddressLine1'          => $od['address'],
-            'AddressLine2'          => $od['address_2'],
-            'Suburb'                => $od['suburb'],
-            'State'                 => $od['state'],
-            'Postcode'              => $od['postcode'],
-            'ReceiverContactMobile' => $od['contact_phone'],
-            'ReceiverContactEmail'  => $od['tracking_email'],
-            'IsAuthorityToLeave'    => $od['signature_req'] == 0,
-            'DeliveryInstructions'  => $delivery_instructions
-        );
-        $details['ReceiverDetails'] = $rd;
+        
         foreach($parcels as $p)
         {
             $array = array();
