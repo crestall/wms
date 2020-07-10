@@ -179,7 +179,7 @@
         );
         $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "Please leave in a safe place out of the weather";
         if($od['signature_req'] == 1)
-            $delivery_intsructions = (!empty($od['instructions']))? $od['instructions'] : "";
+            $delivery_intsructions = "";
 
         $details['ReceiverDetails'] = array(
             'ReceiverName'          => $od['ship_to'],
