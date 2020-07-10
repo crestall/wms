@@ -209,8 +209,9 @@
             $details['ConsignmentLineItems'][] = $array;
         }
         $consignment_list = array(
-            'ConsignmentList'   => $details
+            'ConsignmentList'   => array()
         );
+        $consignment_list['ConsignmentList'][] = $details;
         return $consignment_list;
     }
 
