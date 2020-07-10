@@ -54,7 +54,7 @@
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         //die($url);
         $data_string = json_encode($data);
-        die($data_string);
+        //die($data_string);
         $key = $this->{$area."_KEY"};
         $headers = array(
             'Content-Type: application/json',
@@ -173,11 +173,9 @@
     {
         $ci = $this->controller->client->getClientInfo($od['client_id']);
         $details = array(
-            'ConsignmentList'   => array(
-                'ConsignmentId'     => $od['id'],
-                'CustomerReference' => $ci['products_description'],
-                'IsDangerousGoods'  => false
-            )
+            'ConsignmentId'     => $od['id'],
+            'CustomerReference' => $ci['products_description'],
+            'IsDangerousGoods'  => false
         );
         $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "Please leave in a safe place out of the weather";
         if($od['signature_req'] == 1)
@@ -210,7 +208,10 @@
             $array['KGS'] = ceil($p['weight']);
             $details['ConsignmentLineItems'][] = $array;
         }
-        return $details;
+        $consignment_list = array(
+            'ConsignmentList'   => $details
+        );
+        return $consignment_list;
     }
 
  }
