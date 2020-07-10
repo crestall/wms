@@ -85,7 +85,6 @@ class Controller {
         $this->courierselector     =  new CourierSelector($this);
         $this->orderfulfiller      =  new OrderFulfiller($this);
         $this->emailordersparser   =  new EmailOrdersParser($this);
-        $this->directfreight       =  new Directfreight($this);
     }
 
     /**
