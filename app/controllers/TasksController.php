@@ -24,6 +24,10 @@ class TasksController extends Controller
             'TTAU'
         ]);
 
+        $this->loadMYOBInstances([
+            'Freedom'
+        ]);
+
         $this->loadComponents([
             'Security'
         ]);
