@@ -188,11 +188,6 @@
     private function assignDirectFreight($order_id)
     {
         //die('Assigning Direct Freight');
-        $oi_ids = array();
-    	foreach($this->items as $i)
-    	{
-            $oi_ids[$i['line_id']] = $i['item_id'];
-    	}
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
         //echo "<pre>",print_r($df_details),"</pre>"; die();
         $response = $this->controller->directfreight->createConsignment($df_details);
