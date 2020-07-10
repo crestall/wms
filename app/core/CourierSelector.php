@@ -172,97 +172,6 @@
         }
     }
 
-    private function assignHunters($order_id, $courier_id, $plu = false, $pal = false, $ip = 0)
-    {
-        $db = Database::openConnection();
-        if(HUNTERS_TEST)
-        //if(Config::get("HUNTERS_TEST"))
-        {
-            $huntersClass = "HuntersTest";
-        }
-        elseif( $plu || $courier_id == $this->controller->courier->huntersPluId )
-        {
-            $huntersClass = "HuntersPLU";
-        }
-        elseif( $pal || $courier_id == $this->controller->courier->huntersPalId )
-        {
-            $huntersClass = "HuntersPAL";
-        }
-        else
-        {
-            $huntersClass = "Hunters3KG";
-        }
-        $h_details = $this->controller->{$huntersClass}->getDetails($this->order_details, $this->items);
-        if($ip == 0)
-        {
-            $quote_result = $this->controller->{$huntersClass}->getQuote($h_details);
-            if(!empty($quote_result) && !isset($quote_result['errorCode']))
-            {
-                if( $quote_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE') > Config::get('MAX_SHIPPING_CHARGE') )
-                {
-            	    Session::set('showerrorfeedback', true);
-            	    $_SESSION['errorfeedback'] .= "<h3>Please check the value for {$this->order_details['order_number']}</h3>";
-                    $_SESSION['errorfeedback'] .= "<h4>The quoted Hunters charge is $".number_format($quote_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE'), 2)."</h4>";
-                    return;
-                }
-            }
-        }
-        $result = $this->controller->{$huntersClass}->bookJob($h_details);
-        if( empty($result) )
-        {
-            Session::set('showerrorfeedback', true);
-            $_SESSION['errorfeedback'] .= "<p>There was an error submitting {$this->order_details['order_number']} to Hunters</p>";
-            $_SESSION['errorfeedback'] .= "<p>The API did not return a result</p>";
-        }
-        elseif( isset($result['errorCode']) )
-        {
-            Session::set('showerrorfeedback', true);
-            $_SESSION['errorfeedback'] .= "<p>There was an error submitting {$this->order_details['order_number']} to Hunters</p>";
-            $_SESSION['errorfeedback'] .= "<p>Error Code: {$result['errorCode']}</p>";
-            $_SESSION['errorfeedback'] .= "<p>Error Message: {$result['errorMessage']}</p>";
-        }
-        else
-        {
-            Session::set('showfeedback', true);
-            $hunters_label = $result['shippingLabel'];
-            $hunters_tracking = $result['trackingNumber'];
-            $hunters_charge = round($result['fee'] * 1.1 * Config::get('HUNTERS_FUEL_SURCHARGE') * 1.35, 2) ;
-            /*********** charge FREEDOM more *******************/
-                if($this->order_details['client_id'] == 7)
-                {
-                    $hunters_charge = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.4, 2);
-                }
-            /*********** charge FREEDOM more *******************/
-            //add heavy goods surcharge
-            if($this->client_details['heavy_goods'] > 0)
-                $hunters_charge += 30;
-            $o_values['charge_code'] = strtoupper($huntersClass);
-            $o_values['hunters_label'] = $hunters_label;
-            $o_values['consignment_id'] = $hunters_tracking;
-            $o_values['total_cost'] = $hunters_charge;
-            $o_values['courier_id'] = $courier_id; //get from database
-            $o_values['labels'] = count( $h_details['goods'] );
-            $o_values['hunters_job_number'] = $result['jobNumber'];
-            if($this->addBubblewrap())
-                $o_values['bubble_wrap'] = 1;
-            $db->updateDatabaseFields('orders', $o_values, $order_id);
-            $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully submitted to $huntersClass</p>";
-        }
-    }
-
-    private function assign3PLTruck($order_id)
-    {
-        $db = Database::openConnection();
-        Session::set('showfeedback', true);
-        $order_values = array(
-            'courier_id'    => $this->controller->courier->threePlTruckId
-        );
-        if($this->addBubblewrap())
-            $order_values['bubble_wrap'] = 1;
-        $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the 3PL Truck</p>";
-    }
-
     private function assignFSG($order_id)
     {
         $db = Database::openConnection();
@@ -290,21 +199,25 @@
         $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to $courier_name</p>";
     }
 
-    private function assignBayswaterEparcel($order_id)
-    {
-        $db = Database::openConnection();
-        Session::set('showfeedback', true);
-        $order_values = array(
-            'courier_id'    => $this->controller->courier->bayswaterEparcelId
-        );
-        if($this->addBubblewrap())
-            $order_values['bubble_wrap'] = 1;
-        $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to Baywater Eparcel</p>";
-    }
-
     private function assignDirectFreight($order_id)
     {
+        //die('Assigning Direct Freight');
+        $oi_ids = array();
+    	foreach($this->items as $i)
+    	{
+            $oi_ids[$i['line_id']] = $i['item_id'];
+    	}
+        $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
+        echo "<pre>",print_r($df_details),"</pre>"; die();
+
+
+
+
+
+
+
+
+
         $db = Database::openConnection();
         Session::set('showfeedback', true);
         $order_values = array(
