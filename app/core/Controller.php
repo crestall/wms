@@ -51,6 +51,8 @@ class Controller {
 
     public $Eparcel;
 
+    public $MYOB;
+
     public $woocommerce;
 
     public $directfreight;
