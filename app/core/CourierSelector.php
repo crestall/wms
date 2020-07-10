@@ -32,7 +32,7 @@
 
     public function assignCourier($order_id, $courier_id, $courier_name = "", $ip = 0)
     {
-        die('dcourier_id '.$courier_id);
+        //die('dcourier_id '.$courier_id);
         $this->order_details = $this->controller->order->getOrderDetail($order_id);
         $this->client_details = $this->controller->client->getClientInfo($this->order_details['client_id']);
         $this->items =  $this->controller->order->getItemsForOrder($order_id);
@@ -305,6 +305,7 @@
 
     private function assignDirectFreight($order_id)
     {
+        die('Assigning Direct Freight');
         $db = Database::openConnection();
         Session::set('showfeedback', true);
         $order_values = array(
