@@ -31,7 +31,7 @@ class Packaging{
                 $array['depth'] = $p['depth'];
                 $array['weight'] = $p['weight'];
                 $array['type_code'] = $rate_type;
-                $array['pieces'] = 1;
+                $array['pieces'] = $p['count'];
                 $return[] = $array;
             }
         }

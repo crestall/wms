@@ -44,26 +44,12 @@
             $this->assignEparcel($order_id, $courier_id, false, $ip);
         elseif($courier_id == $this->controller->courier->eParcelExpressId)
             $this->assignEparcel($order_id, $courier_id, true, $ip);
-        elseif($courier_id == $this->controller->courier->huntersId)
-            $this->assignHunters($order_id, $courier_id, false, false, $ip);
-        elseif($courier_id == $this->controller->courier->huntersPluId)
-            $this->assignHunters($order_id, $courier_id, true, false, $ip);
-        elseif($courier_id == $this->controller->courier->huntersPalId)
-            $this->assignHunters($order_id, $courier_id, false, true, 1);
         elseif($courier_id == $this->controller->courier->fsgId)
             $this->assignFSG($order_id);
-        elseif($courier_id == $this->controller->courier->vicLocalId)
-            $this->assignVicLocal($order_id);
         elseif($courier_id == $this->controller->courier->localId)
             $this->assignLocal($order_id, $courier_name);
         elseif($courier_id == $this->controller->courier->directFreightId)
             $this->assignDirectFreight($order_id);
-        elseif($courier_id == $this->controller->courier->cometLocalId)
-            $this->assignCometLocal($order_id);
-        elseif($courier_id == $this->controller->courier->sydneyCometId)
-            $this->assignSydneyComet($order_id);
-        elseif($courier_id == $this->controller->courier->bayswaterEparcelId)
-            $this->assignBayswaterEparcel($order_id);
         elseif($courier_id == 0)
             $this->assignBest($order_id);
     }
@@ -202,14 +188,10 @@
     private function assignDirectFreight($order_id)
     {
         //die('Assigning Direct Freight');
-        $oi_ids = array();
-    	foreach($this->items as $i)
-    	{
-            $oi_ids[$i['line_id']] = $i['item_id'];
-    	}
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
-        echo "<pre>",print_r($df_details),"</pre>"; die();
-
+        //echo "<pre>",print_r($df_details),"</pre>"; die();
+        $response = $this->controller->directfreight->createConsignment($df_details);
+        echo "<pre>",print_r($response),"</pre>"; die();
 
 
 

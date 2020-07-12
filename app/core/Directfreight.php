@@ -54,7 +54,7 @@
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         //die($url);
         $data_string = json_encode($data);
-        //die($data_string);
+        die($data_string);
         $key = $this->{$area."_KEY"};
         $headers = array(
             'Content-Type: application/json',
@@ -160,88 +160,28 @@
         return $response;
     }
 
-    public function createConsignments($data_array, $client = "FSG Printing and 3PL")
+    public function createConsignment($details)
     {
-
-
-        if(date('H', time()) > 14)
-        {
-            $new_date = strtotime( date("Y-m-d", time()).' +1 Weekday' );
-            $earliest = date("Y-m-d 10:00", $new_date);
-            $latest = date("Y-m-d 16:00", $new_date);
-        }
-        else
-        {
-            $h = date('H', time()) + 1;
-            $earliest = date("Y-m-d $h:00", time());
-            $latest = date("Y-m-d 16:00", time());
-        }
-
-
-        $request = array(
-            'customerCode'      =>  $this->CUSTOMER_CODE,
-            'reference1'        =>  $data_array['reference1'],
-            'primaryService'    =>  $data_array['primaryService'],
-            'connoteFormat'     =>  'Thermal',
-            'stops'             =>  array(
-                array(
-                    "name"          =>  "3PL Plus",
-                    "suburbName"    =>  $threepl_address['suburb'],
-                    "addressLine1"  =>  $threepl_address['address'],
-                    "addressLine2"  =>  "",
-                    "postCode"      =>  $threepl_address['postcode'],
-                    "state"         =>  $threepl_address['state'],
-                    "instructions"  =>  "",
-                    "contact"       =>  array(
-                        "name"  =>  "3plplus",
-                        "phone" =>  "03 8512 1444"
-                    ),
-                    "timeWindow" =>  array(
-                        "earliest"  => $earliest,
-                        "latest"    => $latest
-                    )
-                ),
-                $data_array['to_address']
-            ),
-            'goods'     =>  $data_array['goods']
-        );
-
-
-        //echo "<pre>",print_r($request),"</pre>";die();
-        //echo json_encode($request);
-        /*
-        $ds = date("Ymd");
-    	//echo "$root/dhl_errors/error_".$ds.".txt";
-    	if(!$handle = fopen("$root/logs/hunterslog_".$ds.".txt", 'a')) die('fopen error');
-    	fwrite($handle, "\r\n\r\n------------- --- ----------------");
-    	fwrite($handle, "\r\n\r\n Date/Time: ".date("d/m/Y, g:i:s a"));
-        fwrite($handle, "\r\n".json_encode($request));
-    	fwrite($handle, "\r\n".var_export($response, true));
-    	fclose($handle);
-        */
-        $response = $this->sendPostRequest('/booking/book-job', $request);
-        list($a_headers,$a_data) = $this->getResponse($response);
-        return json_decode($a_data[0], true);
-        //return $request;
+        $response = $this->sendPostRequest('GetConsignmentPrice/', $details, "CONSIGNMENT");
+        //echo $response; die();
+        //list($a_headers,$a_data) = $this->getResponse($response);
+        //return json_decode($a_data[0], true);
+        return $response;
     }
 
     public function getDetails($od, $items)
     {
         $ci = $this->controller->client->getClientInfo($od['client_id']);
-        $packages = $this->controller->order->getPackagesForOrder($od['id']);
-        $parcels = Packaging::getPackingForOrder($od,$items,$packages);
+        $details = array(
+            'ConsignmentId'     => $od['id'],
+            'CustomerReference' => $ci['products_description'],
+            'IsDangerousGoods'  => false
+        );
         $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "Please leave in a safe place out of the weather";
         if($od['signature_req'] == 1)
-            $delivery_intsructions = (!empty($od['instructions']))? $od['instructions'] : "";
+            $delivery_intsructions = "";
 
-
-        $details = array(
-            'ConsignmentId'         => $od['id'],
-            'IsDangerousGoods'      => false
-        );
-        $rd = array(
-            'ConsignmentId'         => $od['id'],
-            'IsDangerousGoods'      => false,
+        $details['ReceiverDetails'] = array(
             'ReceiverName'          => $od['ship_to'],
             'AddressLine1'          => $od['address'],
             'AddressLine2'          => $od['address_2'],
@@ -253,8 +193,9 @@
             'IsAuthorityToLeave'    => $od['signature_req'] == 0,
             'DeliveryInstructions'  => $delivery_instructions
         );
+        $packages = $this->controller->order->getPackagesForOrder($od['id']);
+        $parcels = Packaging::getPackingForOrder($od,$items,$packages);
 
-        $details['ReceiverDetails'] = $rd;
         foreach($parcels as $p)
         {
             $array = array();
@@ -267,7 +208,11 @@
             $array['KGS'] = ceil($p['weight']);
             $details['ConsignmentLineItems'][] = $array;
         }
-        return $details;
+        $consignment_list = array(
+            'ConsignmentList'   => array()
+        );
+        $consignment_list['ConsignmentList'][] = $details;
+        return $consignment_list;
     }
 
  }

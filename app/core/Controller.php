@@ -52,6 +52,7 @@ class Controller {
     public $Eparcel;
 
     public $MYOB;
+    public $FreedomMYOB;
 
     public $woocommerce;
 
