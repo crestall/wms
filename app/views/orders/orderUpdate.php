@@ -465,7 +465,7 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control required" name="direct_consignment_id" id="direct_consignment_id" value="<?php echo Form::value('direct_consignment_id');?>" />
+                                    <input type="text" class="form-control required" name="direct_consignment_id" id="direct_consignment_id" value="<?php echo $direct_conid;?>" />
                                     <?php echo Form::displayError('direct_consignment_id');?>
                                 </div>
                             </div>
