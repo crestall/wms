@@ -7,6 +7,7 @@ $truck_charge = (empty(Form::value('truck_charge')))? $order['total_cost']:Form:
 $courier_name = (empty(Form::value('courier_name')))? $order['courier_name']:Form::value('courier_name');
 $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form::value('local_charge');
 $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:Form::value('direct_charge');
+$direct_conid = (empty(Form::value('direct_consignment_id')))? $order['consignment_id']:Form::value('direct_consignment_id');
 $p_count = (empty(Form::value('count')))? 1:Form::value('count');
 ?>
 <div id="page-wrapper">
@@ -491,31 +492,6 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
                                 <div class="col-md-4">
                                     <input type="text" class="form-control required" name="courier_name" id="courier_name" value="<?php echo $courier_name;?>" />
                                     <?php echo Form::displayError('courier_name');?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control required" name="consignment_id" id="consignment_id" value="<?php echo Form::value('consignment_id');?>" />
-                                    <?php echo Form::displayError('consignment_id');?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Charge Amount</label>
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">$</span>
-                                        <input type="text" class="form-control number" name="local_charge" id="local_charge" value="<?php echo $local_charge;?>" />
-                                    </div>
-                                    <?php echo Form::displayError('local_charge');?>
-                                </div>
-                            </div>
-                        </form>
-                    <?php elseif($order['courier_id'] == $this->controller->courier->bayswaterEparcelId):?>
-                        <form id="bayswater_eparcel">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>Bayswater Eparcel</h4>
                                 </div>
                             </div>
                             <div class="form-group row">
