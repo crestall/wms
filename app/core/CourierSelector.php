@@ -191,7 +191,7 @@
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
         //echo "<pre>",print_r($df_details),"</pre>"; die();
         $response = $this->controller->directfreight->createConsignment($df_details);
-        echo "<pre>",print_r($response),"</pre>"; die();
+        //echo "<pre>",print_r($response),"</pre>"; die();
 
 
 

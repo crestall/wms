@@ -168,7 +168,7 @@
     public function createConsignment($details)
     {
         $response = $this->sendPostRequest('CreateConsignment/', $details, "CONSIGNMENT");
-        echo $response; die();
+        //echo $response; die();
         //list($a_headers,$a_data) = $this->getResponse($response);
         //return json_decode($a_data[0], true);
         return $response;
