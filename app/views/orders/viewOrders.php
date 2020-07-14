@@ -252,7 +252,7 @@
             					    <p><select name="courier" class="selectpicker courier" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                     <p><button class="ship_quote btn btn-primary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
                                     <p><button class="btn btn-warning adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
-                                    <?php if( Session::getUserRole() == "admin" && $co['courier_id'] > 0): ?>
+                                    <?php if( $co['courier_id'] > 0): ?>
                                         <p><a class="btn btn-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
                                     <?php endif;?>
                                     <p><a class="btn btn-info" href="/orders/add-serials/order=<?php echo $co['id'];?>">Add Serial Numbers</a></p>
