@@ -191,7 +191,7 @@
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
         //echo "<pre>",print_r($df_details),"</pre>"; die();
         $response = $this->controller->directfreight->createConsignment($df_details);
-        echo "<pre>",print_r($response),"</pre>"; die();
+        //echo "<pre>",print_r($response),"</pre>"; die();
         if($response['ResponseCode'] != 300)
         {
             Session::set('showerrorfeedback', true);
@@ -207,11 +207,11 @@
                 'label_url'     => $response['LabelURL']
             );
             $order_values['consignment_id'] = $response['ConsignmentList'][0]['Connote'];
-            $order_values['total_cost'] = round($response['ConsignmentList'][0]['total_charge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2); //35% markup, GST, fuel
+            $order_values['total_cost'] = round($response['ConsignmentList'][0]['TotalCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2); //35% markup, GST, fuel
             /*********** charge FREEDOM more *******************/
                 if($this->order_details['client_id'] == 7)
                 {
-                    $order_values['total_cost'] = round($response['ConsignmentList'][0]['total_charge'] * 1.40 * 1.1 * DF_FUEL_SURCHARGE, 2); //40% markup, GST, fuel
+                    $order_values['total_cost'] = round($response['ConsignmentList'][0]['TotalCharge'] * 1.40 * 1.1 * DF_FUEL_SURCHARGE, 2); //40% markup, GST, fuel
                 }
             /*********** end charge FREEDOM more *******************/
             if($this->addBubblewrap())
