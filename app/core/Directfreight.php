@@ -55,53 +55,40 @@
     protected function sendPostRequest($action, $data = array(), $area = "PRICING")
     {
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
-        //die($url);
-        $data_string = json_encode($data);
-        //die($data_string);
         $key = $this->{$area."_KEY"};
-        $headers = array(
+        $data_string = json_encode($data);
+
+        require_once '/usr/share/pear/HTTP/Request2.php';
+        //echo "got the file";
+        $request = new HTTP_Request2();
+        $request->setUrl($url);
+        $request->setMethod(HTTP_Request2::METHOD_POST);
+        $request->setConfig(array(
+            'follow_redirects' => TRUE
+        ));
+        $request->setHeader(array(
             'Content-Type: application/json',
             'Authorisation: '. $key ,
             'AccountNumber: '.$this->ACCOUNT_NO,
             'SiteId: '.$this->SITE_ID
-        );
-        $ch = curl_init();
-        /* */
-        $verbose = fopen('php://temp', 'w+');
-        curl_setopt($ch, CURLOPT_STDERR, $verbose);
-        //curl_setopt_array ( $ch, $this->curl_options );
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch,  CURLOPT_MAXREDIRS, 10);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 0);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_ENCODING, "");
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-
-
-        $result = curl_exec($ch);
-
-        if ($result === FALSE) {
-            printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
-                   htmlspecialchars(curl_error($ch)));
-            rewind($verbose);
-            $verboseLog = stream_get_contents($verbose);
-            echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
-            die();
-        }
-        $err = curl_error($ch);
-        curl_close($ch);
-        if ($err)
+        ));
+        $request->setBody($data_string);
+        try
         {
-            die('Could not write to Direct Freight API '.$err);
+            $response = $request->send();
+            if ($response->getStatus() == 200)
+            {
+                echo 'ok call :'.$response->getBody();
+            }
+            else
+            {
+                echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+                $response->getReasonPhrase();
+            }
         }
-        else
+        catch(HTTP_Request2_Exception $e)
         {
-            return $result;
+            echo 'Error: ' . $e->getMessage();
         }
     }
 
@@ -168,10 +155,8 @@
     public function createConsignment($details)
     {
         $response = $this->sendPostRequest('GetConsignmentPrice/', $details, "CONSIGNMENT");
-        //echo $response; die();
-        //list($a_headers,$a_data) = $this->getResponse($response);
-        //return json_decode($a_data[0], true);
         return $response;
+
     }
 
     public function getDetails($od, $items)
