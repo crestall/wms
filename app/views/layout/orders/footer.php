@@ -1002,66 +1002,6 @@
                             }
                         });
 
-                        $('a.viclocal-label-print').click(function(e){
-                            e.preventDefault();
-                            var ids = [];
-                            $('input.select').each(function(i,e){
-                                var order_id = $(this).data('orderid');
-                                if( $(this).prop('checked') && $('select#courier_'+order_id).val() == config.vicLocalId )
-                                {
-                                    ids.push(order_id);
-                                }
-                            });
-                            if(ids.length)
-                            {
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printVicLocalLabels");
-                                form.setAttribute("target", "formresult");
-                                $.each( ids, function( index, value ) {
-                                    var hiddenField = document.createElement("input");
-                                    hiddenField.setAttribute("type", "hidden");
-                                    hiddenField.setAttribute("name", "orders[]");
-                                    hiddenField.setAttribute("value", value);
-                                    form.appendChild(hiddenField);
-                                });
-                                document.body.appendChild(form);
-                                window.open('','formresult');
-                                form.submit();
-                            }
-
-                        });
-
-                        $('a.cometlocal-label-print').click(function(e){
-                            e.preventDefault();
-                            var ids = [];
-                            $('input.select').each(function(i,e){
-                                var order_id = $(this).data('orderid');
-                                if( $(this).prop('checked') && ( $('select#courier_'+order_id).val() == config.cometLocalId || $('select#courier_'+order_id).val() == config.sydneyCometId ) )
-                                {
-                                    ids.push(order_id);
-                                }
-                            });
-                            if(ids.length)
-                            {
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printCometLocalLabels");
-                                form.setAttribute("target", "formresult");
-                                $.each( ids, function( index, value ) {
-                                    var hiddenField = document.createElement("input");
-                                    hiddenField.setAttribute("type", "hidden");
-                                    hiddenField.setAttribute("name", "orders[]");
-                                    hiddenField.setAttribute("value", value);
-                                    form.appendChild(hiddenField);
-                                });
-                                document.body.appendChild(form);
-                                window.open('','formresult');
-                                form.submit();
-                            }
-
-                        });
-
                         $('a.export-csv').click(function(e){
                             e.preventDefault();
                             if($('input.select:checked').length)
@@ -1079,27 +1019,6 @@
                                     csrf_token: config.csrfToken
                                 }
                                 var url = "/downloads/orderExportCSV";
-                                fileDownload.download(url, data);
-                            }
-                        });
-
-                        $('a.comet-csv').click(function(e){
-                            e.preventDefault();
-                            if($('input.select:checked').length)
-                            {
-                                var ids = [];
-                                $('input.select').each(function(i,e){
-                                    if($(this).prop('checked'))
-                                    {
-                                        ids.push($(this).data('orderid'));
-                                    }
-                                });
-                                var data = {
-                                    client_id: $('#client_selector').val(),
-                                    order_ids: ids,
-                                    csrf_token: config.csrfToken
-                                }
-                                var url = "/downloads/cometCSV";
                                 fileDownload.download(url, data);
                             }
                         });
