@@ -47,7 +47,7 @@ class Client extends Model{
     public function getEparcelClients()
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT client_name, id, eparcel_location FROM clients WHERE api_key IS NOT NULL");
+        return $db->queryData("SELECT client_name, id, eparcel_location FROM clients WHERE api_key IS NOT NULL AND `active` = 1");
     }
 
     public function addClient($data)
