@@ -36,7 +36,7 @@
                 <p><a class="btn btn-primary select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
             </div>
             <div class="col-lg-3 text-center">
-                <p><a class="btn btn-outline eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
+                <p><a class="btn btn-outline-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
                 <p><a class="btn btn-outline-info directfreight-label-print"><i class="fas fa-tags"></i> Print Direct Freight Labels For Selected</a></p>
             </div>
             <?php if($fulfilled == 0):?>
