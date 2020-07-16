@@ -16,77 +16,19 @@ else:
     $image = "/images/profile_pictures/default.png";
 endif;
 ?>
-
-		<!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-            </div>
-            <!-- /.navbar-header -->
-			<?php //echo "<pre>",print_r($icons),"</pre>";?>
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        Hello,<strong> <?php echo Session::getUsersName(); ?></strong> <img class="img-user" src="<?php echo $image;?>" />  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="/user/profile"><i class="fa fa-user fa-fw"></i> Profile</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="/login/logOut"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-			
-            <!-- /.navbar-top-links -->
-
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-						<li id="logo" class="text-center">
-                            <img src="/images/backgrounds/FSG_logo.png" />
-                        </li>
-                        <li id="dashboard">
-                            <a href="/dashboard"><i class="fa fas fa-home fa-fw"></i> Home</a>
-                        </li>
-                        <?php if(count($pages)):?>
-                            <?php foreach($pages as $section => $spages):
-                                if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
-                                {
-                                    if(Session::getUserRole() != "super admin")
-                                        continue;
-                                }
-                                $Section = ucwords(str_replace("-", " ", $section));?>
-                                <li id="<?php echo $section;?>" class="collapse">
-                                    <a href="#" aria-expanded="false"><i class="fa <?php echo $icons[$section];?> fa-fw"></i> <?php echo $Section;?><span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level collapse" aria-expanded="false">
-                                        <?php
-                                        $mpages =  array_keys($spages);
-                                        asort($mpages);
-                                        foreach($mpages as $p):
-                                            //if($pages[$p] && Permission::check($user_role, $section, Utility::toCamelCase($p), array(), false)):
-                                            if($p == 'super_admin_only')
-                                                continue;
-                                            if($spages[$p]):?>
-                                                <li><a href="<?php echo "/$section/$p";?>"><?php echo ucwords(str_replace("-", " ", $p));?></a></li>
-                                            <?php endif;?>
-                                        <?php endforeach;?>
-                                    </ul>
-                                </li>
-                            <?php endforeach;?>
-                        <?php endif;?>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Features</a>
+            <a class="nav-item nav-link" href="#">Pricing</a>
+            <a class="nav-item nav-link disabled" href="#">Disabled</a>
+        </div>
+    </div>
+</nav>
+<!-- End Navigation -->
