@@ -8,7 +8,7 @@ $panel_classes = array(
 );
 $c = 1;
 ?>
-<div id="page-wrapper">
+<div class="container">
     <?php //echo $user_role;?>
     <div class="row">
         <div class="col-lg-12">
