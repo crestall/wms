@@ -8,13 +8,13 @@ $panel_classes = array(
 );
 $c = 1;
 ?>
+<div class="page-header row">
+    <div class="col-lg-12">
+        <h1>Film Shot Graphics Warehouse Management System</h1>
+    </div>
+</div>
 <div class="container">
     <?php //echo $user_role;?>
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Film Shot Graphics Warehouse Management System</h1>
-        </div>
-    </div>
     <?php if($user_role == "admin" || $user_role == "warehouse"):?>
         <input type="hidden" id="admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
         <input type="hidden" id="admin_to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
