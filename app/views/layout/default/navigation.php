@@ -17,7 +17,7 @@ else:
 endif;
 ?>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color: #03093f;">
+<nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color: transparent;">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -40,3 +40,9 @@ endif;
     </div>
 </nav>
 <!-- End Navigation -->
+<!-- Common Page Header -->
+<div id="page_header" class="row">
+    <div class="col-lg-12">
+        <h1>Film Shot Graphics Warehouse Management System</h1>
+    </div>
+</div>

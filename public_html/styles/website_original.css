@@ -1,14 +1,63 @@
+
 /*****
-Page Header
+Navigation Bar
 ******/
-div#page_header{
-    text-align: center;
-    color: #fbfbfb;
-    padding-top: 60px;
-    background: url(/images/backgrounds/FSG-background-HD.jpg) no-repeat right;
+.navbar-default{
+    background-color: #03093f;
+    border-color: #03093f;
 }
 
-/****
+.nav-second-level{
+    background-color: #030a47;
+}
+
+.nav > li > a{
+    color: #f2f2f2;
+}
+
+.nav > li > a.active,
+.nav > li > a.active i{
+    color:#555;
+    background-color: #fefefe;
+}
+
+.nav > li > a:hover,
+.nav > li.active > a{
+    color: #555;
+    background-color: #fefefe;
+}
+
+.nav .open > a{
+    color:#555;
+}
+
+.nav .img-user{
+    background-color: #fff;
+    width: 55px;
+    height: auto;
+    border: 3px solid #fff;
+    border-radius: 5px;
+}
+
+@media(min-width:768px)
+{
+    .sidebar ul li#logo {
+        margin-bottom: 25px;
+        border: none;
+        margin-top: -30px;
+    }
+}
+/*
+@media(max-width:767px)
+{
+    .sidebar ul li#logo {
+        margin-bottom: 10px;
+        border: none;
+        margin-top: 10px;
+    }
+}
+
+****
 Form Feedback
 ******/
 div.errorbox{

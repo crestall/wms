@@ -8,11 +8,6 @@ $panel_classes = array(
 );
 $c = 1;
 ?>
-<div class="page-header row">
-    <div class="col-lg-12">
-        <h1>Film Shot Graphics Warehouse Management System</h1>
-    </div>
-</div>
 <div class="container">
     <?php //echo $user_role;?>
     <?php if($user_role == "admin" || $user_role == "warehouse"):?>
