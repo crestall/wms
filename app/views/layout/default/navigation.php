@@ -20,8 +20,8 @@ endif;
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color: transparent; height:80px;">
     <a class="navbar-brand" href="#">
     <a href="/" class="navbar-brand" rel="home" itemprop="url">
-        <img width="131" height="39" src="/images/FSG-logo-131x39px.png" class="custom-logo" alt="FSG" itemprop="logo" />
-        <img width="131" height="39" src="/images/FSG-logo-131x39px-wh.png" class="custom-logo-transparent" alt="FSG logo" itemprop="logo" style="display:none;" /></a>
+        <img width="131" height="39" src="/images/FSG-logo-131x39px.png" class="custom-logo" alt="FSG" itemprop="logo" style="display:none;" />
+        <img width="131" height="39" src="/images/FSG-logo-131x39px-wh.png" class="custom-logo-transparent" alt="FSG logo" itemprop="logo" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,7 @@ endif;
                     }
                     $Section = ucwords(str_replace("-", " ", $section));?>
                     <li id="<?php echo $section;?>" class="nav-item">
-                        <a href="<?php echo "/$section/";?>"><i class="fa <?php echo $icons[$section];?> fa-fw"></i> <?php echo $Section;?></a>
+                        <a href="<?php echo "/$section/";?>" class="nav-link"><i class="fa <?php echo $icons[$section];?> fa-fw"></i> <?php echo $Section;?></a>
                     </li>
                 <?php endforeach;?>
             <?php endif;?>

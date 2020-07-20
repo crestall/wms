@@ -1,9 +1,21 @@
 /*****
-Bootstrap Overrides
+Startup and Standard
 ******/
+@font-face {
+  font-family: 'fontawesome';
+  src: url('fonts/fontawesome-webfont.woff') format('woff'),
+       url('fonts/fontawesome-webfont.ttf') format('truetype'),
+       url('fonts/fontawesome-webfont.eot'); /* IE9 Compat Modes */ ;
+}
+
 body{
     background-color: #f8f8f9;
+    font-size: 16px;
 }
+/*****
+Bootstrap Overrides
+******/
+
 
 /*****
 Navigation
