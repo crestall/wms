@@ -44,14 +44,14 @@ nav.fixed-top.scrolled .active>.nav-link {
     color:#000;
 }
     /**Responsive**/
-    @media (min-width: 992px)
+    @media(min-width: 992px)
     {
-        .navbar-expand .navbar-nav{
+        .navbar-expand-lg .navbar-nav{
             background-color: transparent;
             padding-left: 0;
         }
-
     }
+
 
 
 /*****
