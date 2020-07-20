@@ -37,7 +37,7 @@ endif;
                     }
                     $Section = ucwords(str_replace("-", " ", $section));?>
                     <li id="<?php echo $section;?>" class="nav-item">
-                        <a href="<?php echo "/$section/";?>"<?php echo $Section;?></a>
+                        <a href="<?php echo "/$section/";?>" class="nav-link"><?php echo $Section;?></a>
                     </li>
                 <?php endforeach;?>
             <?php endif;?>
