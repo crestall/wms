@@ -6,6 +6,18 @@ body{
 }
 
 /*****
+Navigation
+*****/
+.navbar-fixed-top.scrolled {
+    background-color: #fff !important;
+    transition: background-color 600ms linear;
+}
+
+.navbar-fixed-top.scrolled .nav-link {
+    color:#555;
+}
+
+/*****
 Page Header
 ******/
 div#page_header{
