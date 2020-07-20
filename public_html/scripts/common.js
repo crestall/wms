@@ -3,9 +3,18 @@
 ************/
  $(function () {
     $(window).scroll(function () {
-        console.log('scrolling');
-	    var $nav = $("nav.fixed-top");
+        var $nav = $("nav.fixed-top");
 	    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+        if( $(this).scrollTop() > $nav.height() )
+        {
+            $('img.custom-logo-transparent').show();
+            $('img.custom-logo').hide();
+        }
+        else
+        {
+            $('img.custom-logo-transparent').hide();
+            $('img.custom-logo').show();
+        }
 	});
 });
 
