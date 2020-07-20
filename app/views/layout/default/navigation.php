@@ -19,7 +19,7 @@ endif;
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color: transparent; height:80px;">
     <a class="navbar-brand" href="#">
-    <a href="https://www.fsg.com.au/" class="navbar-brand" rel="home" itemprop="url">
+    <a href="https://wms.fsg.com.au/" class="navbar-brand" rel="home" itemprop="url">
         <img width="131" height="39" src="/images/FSG-logo-131x39px.png" class="custom-logo" alt="FSG" itemprop="logo" />
         <img width="131" height="39" src="/images/FSG-logo-131x39px-wh.png" class="custom-logo-transparent" alt="FSG logo" itemprop="logo" /></a>
     </a>
@@ -28,33 +28,22 @@ endif;
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+            <?php if(count($pages)):?>
+                <?php foreach($pages as $section => $spages):
+                    if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
+                    {
+                        if(Session::getUserRole() != "super admin")
+                            continue;
+                    }
+                    $Section = ucwords(str_replace("-", " ", $section));?>
+                    <li id="<?php echo $section;?>" class="nav-item">
+                        <a href="<?php echo "/$section/";?>"><i class="fa <?php echo $icons[$section];?> fa-fw"></i> <?php echo $Section;?></a>
+                    </li>
+                <?php endforeach;?>
+            <?php endif;?>
         </ul>
 
-        <?php if(count($pages)):?>
-            <?php foreach($pages as $section => $spages):
-                if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
-                {
-                    if(Session::getUserRole() != "super admin")
-                        continue;
-                }
-                $Section = ucwords(str_replace("-", " ", $section));?>
-                <li id="<?php echo $section;?>" class="nav-item">
-                    <a href="<?php echo "/$section/";?>"><i class="fa <?php echo $icons[$section];?> fa-fw"></i> <?php echo $Section;?></a>
-                </li>
-            <?php endforeach;?>
-        <?php endif;?>
+
     </div>
 </nav>
 <!-- End Navigation -->
