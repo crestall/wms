@@ -41,6 +41,20 @@ endif;
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li>
         </ul>
+
+        <?php if(count($pages)):?>
+            <?php foreach($pages as $section => $spages):
+                if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
+                {
+                    if(Session::getUserRole() != "super admin")
+                        continue;
+                }
+                $Section = ucwords(str_replace("-", " ", $section));?>
+                <li id="<?php echo $section;?>" class="nav-item">
+                    <a href="<?php echo "/$section/";?>"><i class="fa <?php echo $icons[$section];?> fa-fw"></i> <?php echo $Section;?></a>
+                </li>
+            <?php endforeach;?>
+        <?php endif;?>
     </div>
 </nav>
 <!-- End Navigation -->
