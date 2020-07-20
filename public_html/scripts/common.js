@@ -13,8 +13,8 @@ var scroller = {
     checkDisplay: function(){
         console.log('check display');
         var $nav = $("nav.fixed-top");
-	    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-        if( $(this).scrollTop() > $nav.height() )
+	    $nav.toggleClass('scrolled', $(window).scrollTop() > $nav.height());
+        if( $(window).scrollTop() > $nav.height() )
         {
             $('img.custom-logo-transparent').show();
             $('img.custom-logo').hide();
