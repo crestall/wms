@@ -15,6 +15,11 @@ class OrdersController extends Controller
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
     }
 
+    public function index()
+    {
+        die('index');
+    }
+
     public function addSerials()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
