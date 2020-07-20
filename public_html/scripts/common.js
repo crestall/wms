@@ -2,7 +2,14 @@
 * Navigation Scripting
 ************/
  $(function () {
+    scroller.checkDisplay();
     $(window).scroll(function () {
+        scroller.checkDisplay();
+	});
+});
+
+var scroller = {
+    checkDisplay: function(){
         var $nav = $("nav.fixed-top");
 	    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
         if( $(this).scrollTop() > $nav.height() )
@@ -15,8 +22,8 @@
             $('img.custom-logo-transparent').hide();
             $('img.custom-logo').show();
         }
-	});
-});
+    }
+}
 
 /************
 * File Uploading
