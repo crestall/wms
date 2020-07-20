@@ -4,25 +4,25 @@
  $(function () {
     scroller.checkDisplay();
     $(window).scroll(function () {
-        console.log('scrolling');
+        //console.log('scrolling');
         scroller.checkDisplay();
 	});
 });
 
 var scroller = {
     checkDisplay: function(){
-        console.log('check display');
+        //console.log('check display');
         var $nav = $("nav.fixed-top");
 	    $nav.toggleClass('scrolled', $(window).scrollTop() > $nav.height());
         if( $(window).scrollTop() > $nav.height() )
         {
-            $('img.custom-logo-transparent').show();
-            $('img.custom-logo').hide();
+            $('img.custom-logo-transparent').hide();
+            $('img.custom-logo').show();
         }
         else
         {
-            $('img.custom-logo-transparent').hide();
-            $('img.custom-logo').show();
+            $('img.custom-logo-transparent').show();
+            $('img.custom-logo').hide();
         }
     }
 }
