@@ -20,6 +20,12 @@ Bootstrap Overrides
 /*****
 Navigation
 *****/
+.navbar-nav{
+    margin-top: 5px;
+    background-color: #a1a1a1;
+    padding-left: 10px;
+}
+
 nav.fixed-top.scrolled {
     background-color: #fff !important;
     box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.06);
@@ -37,7 +43,15 @@ nav.fixed-top.scrolled a.nav-link:hover {
 nav.fixed-top.scrolled .active>.nav-link {
     color:#000;
 }
+    /**Responsive**/
+    @media (min-width: 992px)
+    {
+        .navbar-expand .navbar-nav{
+            background-color: transparent;
+            padding-left: 0;
+        }
 
+    }
 
 
 /*****
