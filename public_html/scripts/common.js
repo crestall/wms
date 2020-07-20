@@ -4,7 +4,7 @@
  $(function () {
     $(window).scroll(function () {
         console.log('scrolling');
-	    var $nav = $(".navbar-fixed-top");
+	    var $nav = $("nav.fixed-top");
 	    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
 	});
 });
