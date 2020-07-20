@@ -18,7 +18,11 @@ endif;
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color: transparent; height:80px;">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">
+    <a href="https://www.fsg.com.au/" class="navbar-brand" rel="home" itemprop="url">
+        <img width="131" height="39" src="/images/FSG-logo-131x39px.png" class="custom-logo" alt="FSG" itemprop="logo" />
+        <img width="131" height="39" src="/images/FSG-logo-131x39px-wh.png" class="custom-logo-transparent" alt="FSG logo" itemprop="logo" /></a>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
