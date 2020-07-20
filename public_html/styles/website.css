@@ -10,7 +10,8 @@ Navigation
 *****/
 nav.fixed-top.scrolled {
     background-color: #fff !important;
-    transition: background-color 600ms linear;
+    box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.06);
+    transition:all 600ms linear;
 }
 
 nav.fixed-top.scrolled .nav-link {
