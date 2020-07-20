@@ -4,12 +4,14 @@
  $(function () {
     scroller.checkDisplay();
     $(window).scroll(function () {
+        console.log('scrolling');
         scroller.checkDisplay();
 	});
 });
 
 var scroller = {
     checkDisplay: function(){
+        console.log('check display');
         var $nav = $("nav.fixed-top");
 	    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
         if( $(this).scrollTop() > $nav.height() )
