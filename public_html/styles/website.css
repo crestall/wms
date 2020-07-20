@@ -8,7 +8,7 @@ body{
 /*****
 Navigation
 *****/
-.navbar-fixed-top.scrolled {
+nav.fixed-top.scrolled {
     background-color: #fff !important;
     transition: background-color 600ms linear;
 }
