@@ -12,6 +12,11 @@ body{
     background-color: #f8f8f9;
     font-size: 16px;
 }
+
+a:hover{
+    text-decoration: none;
+}
+
 /*****
 Bootstrap Overrides
 ******/
@@ -23,7 +28,7 @@ ul.user-info{
     list-style: none;
 }
 
-ul.user-info li a{
+ul.user-info li a.dropdown-toggle{
     padding: 15px;
     min-height: 50px;
     text-align: right;
