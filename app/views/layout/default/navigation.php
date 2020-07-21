@@ -27,7 +27,7 @@ endif;
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <div class="navbar-nav">
             <?php if(count($pages)):?>
                 <?php foreach($pages as $section => $spages):
                     if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
@@ -36,12 +36,10 @@ endif;
                             continue;
                     }
                     $Section = ucwords(str_replace("-", " ", $section));?>
-                    <li id="<?php echo $section;?>" class="nav-item">
-                        <a href="<?php echo "/$section/";?>" class="nav-link"><?php echo $Section;?></a>
-                    </li>
+                    <a href="<?php echo "/$section/";?>" class="nav-link"><?php echo $Section;?></a> 
                 <?php endforeach;?>
             <?php endif;?>
-        </ul>
+        </div>
 
 
     </div>
