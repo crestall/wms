@@ -42,7 +42,7 @@ endif;
             <?php endif;?>
         </ul>
     </div>
-    <ul class="user-info">
+    <ul class="navbar user-info">
         <li class="nav-item dropdown">
             <a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hello,<strong> <?php echo Session::getUsersName(); ?></strong> <img class="img-user" src="<?php echo $image;?>" />
