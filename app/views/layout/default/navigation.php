@@ -36,7 +36,7 @@ endif;
                             continue;
                     }
                     $Section = ucwords(str_replace("-", " ", $section));?>
-                    <a href="<?php echo "/$section/";?>" class="nav-link"><?php echo $Section;?></a> 
+                    <a href="<?php echo "/$section/";?>" class="nav-link"><?php echo $Section;?></a>
                 <?php endforeach;?>
             <?php endif;?>
         </div>
@@ -51,3 +51,4 @@ endif;
         <h1>Film Shot Graphics Warehouse Management System</h1>
     </div>
 </div>
+<!-- End Common Page Header -->
