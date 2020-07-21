@@ -19,8 +19,8 @@ endif;
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: transparent; height:80px;">
     <a href="/" class="navbar-brand" rel="home" itemprop="url">
-        <img width="131" height="39" src="/images/FSG-logo-131x39px.png" class="custom-logo" alt="FSG" itemprop="logo" style="display:none;" />
-        <img width="131" height="39" src="/images/FSG-logo-131x39px-wh.png" class="custom-logo-transparent" alt="FSG logo" itemprop="logo" />
+        <img width="131" height="39" src="/images/FSG-logo-131x39px.png" class="custom-logo" alt="FSG" style="display:none;" title="WMS Home" />
+        <img width="131" height="39" src="/images/FSG-logo-131x39px-wh.png" class="custom-logo-transparent" alt="FSG logo" title="WMS Home" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
