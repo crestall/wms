@@ -43,7 +43,7 @@ endif;
             <?php endif;?>
         </ul>
     </div>
-    <ul class="navbar-nav ml-md-auto">
+    <ul class="ml-md-auto">
         <li class="nav-item dropdown">
             <a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hello,<strong> <?php echo Session::getUsersName(); ?></strong> <img class="img-user" src="<?php echo $image;?>" />
