@@ -48,8 +48,8 @@ endif;
                     Hello,<strong> <?php echo Session::getUsersName(); ?></strong> <img class="img-user" src="<?php echo $image;?>" />
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a href="/user/profile"><i class="fa fa-user fa-fw"></i> Profile</a>
-                    <a href="/login/logOut"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <a href="/user/profile" class="dropdown-item"><i class="fa fa-user fa-fw"></i> Profile</a>
+                    <a href="/login/logOut" class="dropdown-item"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </div>
             </li>
         </ul>
