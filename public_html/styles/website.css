@@ -23,6 +23,12 @@ ul.user-info{
     list-style: none;
 }
 
+ul.user-info li a{
+    padding: 15px;
+    min-height: 50px;
+    text-align: right;
+}
+
 ul.user-info img.img-user{
     background-color: #fff;
     width: 55px;
