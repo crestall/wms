@@ -27,7 +27,7 @@ Navigation
 }
 
 .navbar-nav li{
-    width:100px;
+    width:10%;
 }
 
 nav.fixed-top.scrolled {
@@ -53,6 +53,7 @@ nav.fixed-top.scrolled .active>.nav-link {
         .navbar-expand-lg .navbar-nav{
             background-color: transparent;
             padding-left: 0;
+            width:90%;
         }
     }
 
