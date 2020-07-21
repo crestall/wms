@@ -234,9 +234,9 @@ class FormController extends Controller {
                 $email = strtolower(trim($row[3]));
                 $job_title = strtolower(trim($row[2]));
                 list($firstname, $lastname) = explode(" ", $name, 2);
-                $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
-                $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
-                $mobile = Utility::formatMobileString($row[9], $row[7] == "NZ");
+                $phone = (empty($row[10]))? "removed": Utility::formatPhoneString($row[10], $row[7] == "NZ");
+                $fax = (empty($row[11]))? "removed": Utility::formatPhoneString($row[11], $row[7] == "NZ");
+                $mobile = (empty($row[9]))? "removed": Utility::formatMobileString($row[9], $row[7] == "NZ");
                 //get any stored user data
                 $stored_data = $this->reeceuser->getUserByEmail(trim($row[3])) ;
                 if($stored_data)
