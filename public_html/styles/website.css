@@ -26,6 +26,10 @@ Navigation
     padding-left: 10px;
 }
 
+.navbar-nav li{
+    width:100px;
+}
+
 nav.fixed-top.scrolled {
     background-color: #fff !important;
     box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.06);
