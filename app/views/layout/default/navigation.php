@@ -18,7 +18,6 @@ endif;
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: transparent; height:80px;">
-    <a class="navbar-brand" href="#">
     <a href="/" class="navbar-brand" rel="home" itemprop="url">
         <img width="131" height="39" src="/images/FSG-logo-131x39px.png" class="custom-logo" alt="FSG" itemprop="logo" style="display:none;" />
         <img width="131" height="39" src="/images/FSG-logo-131x39px-wh.png" class="custom-logo-transparent" alt="FSG logo" itemprop="logo" />
