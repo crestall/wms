@@ -45,7 +45,7 @@ endif;
     <ul class="navbar user-info">
         <li class="nav-item dropdown">
             <a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Hello,<strong> <?php echo Session::getUsersName(); ?></strong> <img class="img-user" src="<?php echo $image;?>" />
+                Hello,<strong> <?php echo Session::getUsersName(); ?></strong><br/><img class="img-user" src="<?php echo $image;?>" />
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a href="/user/profile" class="dropdown-item"><i class="fa fa-user fa-fw"></i> Profile</a>
