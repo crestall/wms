@@ -23,6 +23,14 @@ ul.user-info{
     list-style: none;
 }
 
+ul.user-info img.img-user{
+    background-color: #fff;
+    width: 55px;
+    height: auto;
+    border: 3px solid #fff;
+    border-radius: 5px;
+}
+
 /*****
 Navigation
 *****/
