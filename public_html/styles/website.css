@@ -85,8 +85,6 @@ nav.fixed-top.scrolled .active>.nav-link {
     {
         .navbar-expand-lg .navbar-nav{
             background-color: transparent;
-            padding-left: 0;
-            width:90%;
         }
     }
 
