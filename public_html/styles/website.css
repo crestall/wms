@@ -16,6 +16,12 @@ body{
 Bootstrap Overrides
 ******/
 
+/*****
+User Info
+*****/
+ul.user-info{
+    list-style: none;
+}
 
 /*****
 Navigation
