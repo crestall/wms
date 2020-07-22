@@ -13,10 +13,10 @@ $('button#navbar_toggler').click(function(e){
     if($('div#navbarNav').hasClass('show'))
     {
         $('ul.user-info').addClass('navbar');
+        var h = $('div#navbarNav ul.navbar-nav').height()
     }
     else
-    {
-        var h = $('div#navbarNav ul.navbar-nav').height();
+    {;
         $('ul.user-info').removeClass('navbar').css({
             float: 'right',
             marginTop: -h
