@@ -2164,29 +2164,27 @@ class FormController extends Controller {
         else
         {
             /*
-            [0] => Client Order Number
-            [1] => Customer Order Number
-            [2] => Company
-            [3] => Addressee
-            [4] => Shipping Address Line 1
-            [5] => Shipping Address Line 2
-            [6] => Shipping City
-            [7] => Shipping State
-            [8] => Shipping Zip/Postcode
-            [9] => Shipping Country
-            [10] => Shipping Address Phone
-            [11] => Tracking Email
-            [11] => Customer Email gone for now - where? dunno
-            [12] => ATL
-            [13] => Instructions
-            [14] => Use Express Post
-            [15] => Client Spot
-            [16] => Product Name_1
-            [17] => Qty_1
-            [18] => Whole Pallet 1
-            [19] => Product Name_2
-            [20] => Qty_2
-            [21] => Whole Pallet 2
+            [0] => Order_Number
+            [1] => Shipment_Address_Company
+            [2] => Shipment_Address_Name
+            [3] => Shipment_Address1
+            [4] => Shipment_Address2
+            [5] => Shipment_Address_City
+            [6] => Shipment_Address_State
+            [7] => Shipment_AddressZIP_Code
+            [8] => Shipment_Address_Country_Code
+            [9] => Shipment_Address_Phone
+            [10] => tracking_email
+            [11] => ATL
+            [12] => Delivery Instructions
+            [13] => Express_Post
+            [14] => Client Entry
+            [15] => Item_1_sku
+            [16] => Item_1_qty
+            [17] => Item_1_whole_pallet
+            [18] => item_2_sku
+            [19] => item_2_qty
+            [20] => Item_2_whole_pallet
             etc...
             */
             $imported_order_count = 0;
@@ -2203,76 +2201,76 @@ class FormController extends Controller {
                     $skip_first = false;
                     continue;
                 }
-                if(!empty($row[11]))
+                if(!empty($row[10]))
                 {
-                    if(!$this->emailValid($row[11]))
+                    if(!$this->emailValid($row[10]))
                     {
                         $data_errors = true;
                         $data_error_string .= "<li>Invalid tracking email on line: $line</li>";
                     }
                 }
-                if(!$this->dataSubbed($row[3]))
+                if(!$this->dataSubbed($row[2]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Name is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[4]))
+                if(!$this->dataSubbed($row[3]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Address is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[6]))
+                if(!$this->dataSubbed($row[5]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Suburb/City is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[7]))
+                if(!$this->dataSubbed($row[6]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To State is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[8]))
+                if(!$this->dataSubbed($row[7]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Postcode is required on line: $line</li>";
                 }
-                if(!$this->dataSubbed($row[9]))
+                if(!$this->dataSubbed($row[8]))
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>A Ship To Country is required on line: $line</li>";
                 }
-                elseif(strlen($row[9]) > 2)
+                elseif(strlen($row[8]) > 2)
                 {
                     $data_errors = true;
                     $data_error_string .= "<li>Please use the two letter ISO code for countries on line: $line</li>";
                 }
                 if(!$data_errors)
                 {
+                    $sig = ($row[11] == 1)? 0 : 1;
                     $order = array(
                         'error_string'          => '',
                         'items'                 => array(),
                         'ref2'                  => '',
                         'client_order_id'       => $row[0],
-                        'customer_order_id'     => $row[1],
                         'errors'                => 0,
-                        'tracking_email'        => $row[11],
-                        'ship_to'               => $row[3],
-                        'company_name'          => $row[2],
+                        'tracking_email'        => $row[10],
+                        'ship_to'               => $row[2],
+                        'company_name'          => $row[1],
                         'date_ordered'          => time(),
                         'status_id'             => $this->controller->order->ordered_id,
                         'eparcel_express'       => 0,
-                        'signature_req'         => 0,
-                        'contact_phone'         => $row[10],
+                        'signature_req'         => $sig,
+                        'contact_phone'         => $row[9],
                         'import_error'          => false,
                         'import_error_string'   => '',
                         'weight'                => 0,
-                        'instructions'          => $row[13],
-                        '3pl_comments'          => $row[15]
+                        'instructions'          => $row[12],
+                        '3pl_comments'          => $row[14]
                     );
                     //the items
                     $items = array();
                     $item_error = false;
-                    $i = 16;
+                    $i = 15;
                     do
                     {
                         $sku = $row[$i];
@@ -2307,12 +2305,12 @@ class FormController extends Controller {
                         $orders_items[$imported_order_count] = $items;
                         //validate address
                         $ad = array(
-                            'address'   => $row[4],
-                            'address_2' => $row[5],
-                            'suburb'    => $row[6],
-                            'state'     => $row[7],
-                            'postcode'  => $row[8],
-                            'country'   => $row[9]
+                            'address'   => $row[3],
+                            'address_2' => $row[4],
+                            'suburb'    => $row[5],
+                            'state'     => $row[6],
+                            'postcode'  => $row[7],
+                            'country'   => $row[8]
                         );
                         if($ad['country'] == "AU")
                         {
@@ -2396,7 +2394,7 @@ class FormController extends Controller {
                     {
                         $vals = array(
                             'client_order_id'       => $o['client_order_id'],
-                            'customer_order_id'     => $o['customer_order_id'],
+                            //'customer_order_id'     => $o['customer_order_id'],
                             'client_id'             => Session::getUserClientId(),
                             'deliver_to'            => $o['ship_to'],
                             'company_name'          => $o['company_name'],
@@ -3788,13 +3786,13 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if(!$this->dataSubbed($width) || !$this->dataSubbed($height) || !$this->dataSubbed($depth) || !$this->dataSubbed($weight))
+        if(!$this->dataSubbed($width) || !$this->dataSubbed($height) || !$this->dataSubbed($depth) || !$this->dataSubbed($weight) || !$this->dataSubbed($count))
         {
             Session::set('packageerrorfeedback', 'All fields must have a value<br/>Package has NOT been added');
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
-        elseif( (filter_var($width, FILTER_VALIDATE_FLOAT) === false && $width <= 0) || (filter_var($height, FILTER_VALIDATE_FLOAT) === false && $height <= 0) || (filter_var($depth, FILTER_VALIDATE_FLOAT) === false && $depth <= 0) || (filter_var($weight, FILTER_VALIDATE_FLOAT) === false && $weight <= 0) )
+        elseif( (filter_var($width, FILTER_VALIDATE_FLOAT) === false || $width <= 0) || (filter_var($height, FILTER_VALIDATE_FLOAT) === false || $height <= 0) || (filter_var($depth, FILTER_VALIDATE_FLOAT) === false || $depth <= 0) || (filter_var($weight, FILTER_VALIDATE_FLOAT) === false || $weight <= 0) || (filter_var($count, FILTER_VALIDATE_INT) === false || $count <= 0) )
         {
             Session::set('packageerrorfeedback', 'All values must have a positive number<br/>Package has NOT been added');
             Session::set('value_array', $_POST);
