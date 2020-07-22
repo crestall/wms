@@ -10,10 +10,13 @@
 });
 
 $('button#navbar_toggler').click(function(e){
+    var h = $('div#navbarNav ul.navbar-nav').height();
     if($('div#navbarNav').hasClass('show'))
     {
-        $('ul.user-info').addClass('navbar');
-        var h = $('div#navbarNav ul.navbar-nav').height()
+        $('ul.user-info').addClass('navbar').css({
+            float: '',
+            marginTop: 0
+        });
     }
     else
     {;
