@@ -14,7 +14,7 @@ $('button#navbar_toggler').click(function(e){
     if($('div#navbarNav').hasClass('show'))
     {
         $('ul.user-info').addClass('navbar').css({
-            float: '',
+            marginLeft: 0,
             marginTop: 0
         });
         $('div#navbarNav ul.navbar-nav').css({
@@ -24,7 +24,7 @@ $('button#navbar_toggler').click(function(e){
     else
     {;
         $('ul.user-info').removeClass('navbar').css({
-            float: 'right',
+            marginLeft: '170px',
             marginTop: '-470px'
         });
         $('div#navbarNav ul.navbar-nav').css({
