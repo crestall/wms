@@ -348,6 +348,7 @@ class Controller {
     ********************************************************************/
     public function displayIndex($child)
     {
+        $app = new App();
         if(!$child || empty($child) || !$app::isControllerValid($child))
         {
             return (new ErrorsController())->error(404)->send();
