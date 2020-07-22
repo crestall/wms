@@ -9,8 +9,14 @@ Startup and Standard
 }
 
 body{
-    background-color: #f8f8f9;
+    background-color: #fefefe;
     font-size: 16px;
+}
+
+#page-wrapper {
+    padding: 0 10px;
+    min-height: 568px;
+    background-color: #f8f8f9;
 }
 
 a:hover{
