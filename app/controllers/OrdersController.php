@@ -1022,9 +1022,9 @@ class OrdersController extends Controller
         //only for admin
         Permission::allow('admin', $resource, "*");
         Permission::allow('super admin', $resource, "*");
-        Permission::allow('md admin', $resource, "*");
         //warhouse users
         Permission::allow('warehouse', $resource, array(
+            "index",
             "orderDispatching",
             "orderPacking",
             "orderPicking",
@@ -1039,6 +1039,7 @@ class OrdersController extends Controller
         ));
         //only for clients
         $allowed_resources = array(
+            "index",
             "addOrder",
             "addOrderTest",
             "bookPickup",
@@ -1047,15 +1048,6 @@ class OrdersController extends Controller
             "orderTracking",
             "orderDetail",
         );
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            "addSolarOrder",
-            "addOriginOrder",
-            "addServiceJob",
-            "addOriginServiceJob",
-            "addTLJServiceJob",
-            "addTLJOrder"
-        ));
         Permission::allow('client', $resource, $allowed_resources);
         return Permission::check($role, $resource, $action);
     }

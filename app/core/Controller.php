@@ -343,5 +343,16 @@ class Controller {
         }
     }
 
+    /*******************************************************************
+    ** Display the index page for the chilkd classes
+    ********************************************************************/
+    public function displayIndex($child)
+    {
+        if(!$child || empty($child) || !$app::isControllerValid($child))
+        {
+            return (new ErrorsController())->error(404)->send();
+        }
+    }
+
     //abstract function createOrderItemsArray(array $items, $order_id = 0);
 }

@@ -163,7 +163,7 @@ class App {
      * @param  string $controller
      * @return boolean
      */
-    private static function isControllerValid($controller)
+    public static function isControllerValid($controller)
     {
         if(!empty($controller))
         {
