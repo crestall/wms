@@ -20,6 +20,15 @@ body{
     background-color: #f8f8f9;
 }
 
+footer{
+    position: relative;
+    text-align: center;
+    padding: 35px 0px;
+    background: #222222;
+    font-weight: 500;
+    color: #bbbbbb;
+}
+
 a:hover{
     text-decoration: none;
 }

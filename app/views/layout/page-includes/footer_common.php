@@ -1,5 +1,3 @@
 <footer class="panel-footer clearfix" id="the_footer">
-    <div class="pull-left">
-        <?php echo date('Y');?> &copy; All rights reserved
-    </div>
+    <?php echo date('Y');?> &copy; All rights reserved
 </footer>
