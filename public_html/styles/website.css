@@ -37,6 +37,11 @@ ul.user-info li.white a.dropdown-toggle
     color: #f2f2f2;
 }
 
+ul.user-info li.dropdown
+{
+    text-align: center;
+}
+
 ul.user-info li.white a.dropdown-toggle
 {
     color: #121212;
@@ -44,7 +49,7 @@ ul.user-info li.white a.dropdown-toggle
 
 ul.user-info img.img-user{
     background-color: #fff;
-    width: 55px;
+    width: 40px;
     height: auto;
     border: 3px solid #fff;
     border-radius: 5px;
