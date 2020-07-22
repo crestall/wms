@@ -352,7 +352,7 @@ class Controller {
         {
             return (new ErrorsController())->error(404)->send();
         }
-        die('displayIndex');
+        die('displayIndex :'.$child);
     }
 
     //abstract function createOrderItemsArray(array $items, $order_id = 0);
