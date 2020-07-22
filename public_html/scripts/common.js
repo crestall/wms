@@ -17,7 +17,7 @@ $('button#navbar_toggler').click(function(e){
     else
     {
         $('ul.user-info').removeClass('navbar');
-        $(this).next('ul.navbar-nav').css('width','100px');
+        $('div#navbarNav ul.navbar-nav').css('width','100px');
     }
 });
 
