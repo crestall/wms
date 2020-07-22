@@ -353,7 +353,11 @@ class Controller {
         {
             return (new ErrorsController())->error(404)->send();
         }
-        die('displayIndex :'.$child);
+        //render the page
+        Config::setJsConfig('curPage', "default-icon");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/index/", Config::get('VIEWS_PATH') . 'index/controllerIndex.php', [
+            'page_title'    =>  $page_title
+        ]);
     }
 
     //abstract function createOrderItemsArray(array $items, $order_id = 0);
