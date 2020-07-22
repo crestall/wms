@@ -58,7 +58,6 @@ ul.user-info img.img-user{
     height: auto;
     border: 3px solid #fff;
     border-radius: 5px;
-    margin-top:25px;
 }
 
 /*****
@@ -91,15 +90,6 @@ nav.fixed-top.scrolled a.nav-link:hover {
 nav.fixed-top.scrolled .active>.nav-link {
     color:#000;
 }
-    /**Responsive**/
-    @media(min-width: 992px)
-    {
-        .navbar-expand-lg .navbar-nav{
-            background-color: transparent;
-        }
-    }
-
-
 
 /*****
 Page Header
@@ -480,4 +470,17 @@ bootsrap adjustments
     }
 }
 
+/********
+Responsive adjustments
+*******  */
+@media(min-width: 992px)
+{
+    .navbar-expand-lg .navbar-nav{
+        background-color: transparent;
+    }
+
+    ul.user-info img.img-user{
+        margin-top:25px;
+    }
+}
 
