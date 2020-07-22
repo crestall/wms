@@ -15,6 +15,11 @@ class ClientsController extends Controller
         //set javascript to allocate active class to menu items
     }
 
+    public function index()
+    {
+        parent::displayIndex(get_class());
+    }
+
     public function viewClients()
     {
         $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
