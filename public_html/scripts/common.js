@@ -25,7 +25,7 @@ $('button#navbar_toggler').click(function(e){
     {;
         $('ul.user-info').removeClass('navbar').css({
             marginLeft: '170px',
-            marginTop: '-840px'
+            marginTop: '-815px'
         });
         $('div#navbarNav ul.navbar-nav').css({
             width :'200px'
