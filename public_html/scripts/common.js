@@ -9,6 +9,17 @@
 	});
 });
 
+$('button#navbar_toggler').click(function(e){
+    if($('div#navbarNav').hasClass('show'))
+    {
+        $('ul.user-info').removeClass('navbar');
+    }
+    else
+    {
+        $('ul.user-info').addClass('navbar');
+    }
+});
+
 var scroller = {
     checkDisplay: function(){
         //console.log('check display');
