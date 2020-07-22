@@ -24,6 +24,10 @@ class TasksController extends Controller
             'TTAU'
         ]);
 
+        $this->loadMYOBInstances([
+            'Freedom'
+        ]);
+
         $this->loadComponents([
             'Security'
         ]);
@@ -214,7 +218,7 @@ class TasksController extends Controller
 
     public function nuchevTask()
     {
-        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
@@ -226,13 +230,17 @@ class TasksController extends Controller
 
     public function freedomTask()
     {
-        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
         else
         {
-            $this->FreedomMYOB->collectOrders();
+           //up the memory for this
+            ini_set('memory_limit', '2048M');
+            $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
+            $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
+            $this->FreedomMYOB->processOrders($invoices);
         }
     }
 

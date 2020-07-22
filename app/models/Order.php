@@ -683,6 +683,7 @@ class Order extends Model{
             'height'    =>  $data['height'],
             'depth'     =>  $data['depth'],
             'weight'    =>  $data['weight'],
+            'count'     =>  $data['count'],
             'pallet'    =>  0
         );
         if(isset($data['pallet']))

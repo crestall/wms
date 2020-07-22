@@ -244,7 +244,11 @@ class FreedomMYOB extends MYOB
         }//end if count orders
         else
         {
-            die('No Orders');
+            $summary = "
+                <p>No new invoices in the system</p>
+                <p>No WMS orders have been created</p>
+            ";
+            Email::sendFreedomMYOBSummary($summary);
         }
         return false;
     }

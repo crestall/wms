@@ -15,8 +15,10 @@
     protected $API_HOST;
     protected $CUSTOMER_CODE;
     protected $curl_options;
-    protected $sandbox = false;
-    protected $API_KEY ;
+    protected $test = true;
+    protected $PRICING_KEY;
+    protected $CONSIGNMENT_KEY;
+    protected $GENERAL_KEY;
     protected $ACCOUNT_NO;
 
 
@@ -29,21 +31,34 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
-        $this->controller = $controller;
-        $this->API_KEY    = Config::get('DIRECT_FREIGHT_API_KEY');
-        $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
+
+        if($this->test)
+        {
+            $this->CONSIGNMENT_KEY = "DAB85BAB-F8F5-4B93-9290-C7EEA012B176";
+            $this->PRICING_KEY = "977998B6-48FB-4AB0-8D4D-AEB641906C0E";
+            $this->GENERAL_KEY = "26D189FD-FDAF-4C79-95F2-5042A3CD9097";
+            $this->ACCOUNT_NO = "21483";
+        }
+        else
+        {
+            $this->CONSIGNMENT_KEY = Config::get('DIRECT_FREIGHT_CONSIGNMENT_KEY');
+            $this->PRICING_KEY = Config::get('DIRECT_FREIGHT_PRICING_KEY');
+            $this->GENERAL_KEY = Config::get('DIRECT_FREIGHT_GENERAL_KEY');
+            $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
+        }
         //$this->ACCOUNT_NO = 22;
     }
 
-    protected function sendPostRequest($action, $data = array())
+    protected function sendPostRequest($action, $data = array(), $area = "PRICING")
     {
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         //die($url);
         $data_string = json_encode($data);
-        //die($data_string);
+        die($data_string);
+        $key = $this->{$area."_KEY"};
         $headers = array(
             'Content-Type: application/json',
-            'Authorisation: '. $this->API_KEY ,
+            'Authorisation: '. $key ,
             'AccountNumber: '.$this->ACCOUNT_NO
         );
         $ch = curl_init();
@@ -131,13 +146,6 @@
         return array($a_hdrs,$a_data);
     }
 
-    public function getTracking($consignment_id)
-    {
-        $response = $this->sendGetRequest('/booking/get-job-statuses?customerCode='.$this->CUSTOMER_CODE.'&trackingNumber='.$consignment_id);
-        list($a_headers,$a_data) = $this->getResponse($response);
-        return json_decode($a_data[0], true);
-    }
-
     public function getQuote($data_array, $client = "Filmshot Graphics")
     {
         $fsg_address = Config::get("FSG_ADDRESS");
@@ -148,99 +156,32 @@
             'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
             'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
         );
-        //echo "<pre>",print_r($request),"</pre>";//die();
-        //echo json_encode($request);
-        $response = $this->sendPostRequest('GetConsignmentPrice/', $request);
-        //echo "<pre>",print_r(json_decode($response, true)),"</pre>";die();
-        //list($a_headers,$a_data) = $this->getResponse($response);
-        //echo "<pre>ADATA",print_r($a_data),"</pre>";die();
-        //json_decode($a_data[0], true); die();
-        //return json_decode($a_data[0], true);
+        $response = $this->sendPostRequest('GetConsignmentPrice/', $request, "PRICING");
         return $response;
     }
 
-    public function bookJob($data_array, $client = "3PL Plus")
+    public function createConsignment($details)
     {
-        $threepl_address = Config::get("THREEPL_ADDRESS");
-
-        if(date('H', time()) > 14)
-        {
-            $new_date = strtotime( date("Y-m-d", time()).' +1 Weekday' );
-            $earliest = date("Y-m-d 10:00", $new_date);
-            $latest = date("Y-m-d 16:00", $new_date);
-        }
-        else
-        {
-            $h = date('H', time()) + 1;
-            $earliest = date("Y-m-d $h:00", time());
-            $latest = date("Y-m-d 16:00", time());
-        }
-
-
-        $request = array(
-            'customerCode'      =>  $this->CUSTOMER_CODE,
-            'reference1'        =>  $data_array['reference1'],
-            'primaryService'    =>  $data_array['primaryService'],
-            'connoteFormat'     =>  'Thermal',
-            'stops'             =>  array(
-                array(
-                    "name"          =>  "3PL Plus",
-                    "suburbName"    =>  $threepl_address['suburb'],
-                    "addressLine1"  =>  $threepl_address['address'],
-                    "addressLine2"  =>  "",
-                    "postCode"      =>  $threepl_address['postcode'],
-                    "state"         =>  $threepl_address['state'],
-                    "instructions"  =>  "",
-                    "contact"       =>  array(
-                        "name"  =>  "3plplus",
-                        "phone" =>  "03 8512 1444"
-                    ),
-                    "timeWindow" =>  array(
-                        "earliest"  => $earliest,
-                        "latest"    => $latest
-                    )
-                ),
-                $data_array['to_address']
-            ),
-            'goods'     =>  $data_array['goods']
-        );
-
-
-        //echo "<pre>",print_r($request),"</pre>";die();
-        //echo json_encode($request);
-        /*
-        $ds = date("Ymd");
-    	//echo "$root/dhl_errors/error_".$ds.".txt";
-    	if(!$handle = fopen("$root/logs/hunterslog_".$ds.".txt", 'a')) die('fopen error');
-    	fwrite($handle, "\r\n\r\n------------- --- ----------------");
-    	fwrite($handle, "\r\n\r\n Date/Time: ".date("d/m/Y, g:i:s a"));
-        fwrite($handle, "\r\n".json_encode($request));
-    	fwrite($handle, "\r\n".var_export($response, true));
-    	fclose($handle);
-        */
-        $response = $this->sendPostRequest('/booking/book-job', $request);
-        list($a_headers,$a_data) = $this->getResponse($response);
-        return json_decode($a_data[0], true);
-        //return $request;
+        $response = $this->sendPostRequest('GetConsignmentPrice/', $details, "CONSIGNMENT");
+        //echo $response; die();
+        //list($a_headers,$a_data) = $this->getResponse($response);
+        //return json_decode($a_data[0], true);
+        return $response;
     }
 
     public function getDetails($od, $items)
     {
         $ci = $this->controller->client->getClientInfo($od['client_id']);
-        $packages = $this->controller->order->getPackagesForOrder($od['id']);
-        $parcels = Packaging::getPackingForOrder($od,$items,$packages);
+        $details = array(
+            'ConsignmentId'     => $od['id'],
+            'CustomerReference' => $ci['products_description'],
+            'IsDangerousGoods'  => false
+        );
         $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "Please leave in a safe place out of the weather";
         if($od['signature_req'] == 1)
-            $delivery_intsructions = (!empty($od['instructions']))? $od['instructions'] : "";
+            $delivery_intsructions = "";
 
-
-        $details = array(
-            'ConsignmentId'         => $od['id'],
-            'IsDangerousGoods'      => false
-        );
-        $rd = array(
-            'ConsignmentId'         => $od['id'],
-            'IsDangerousGoods'      => false,
+        $details['ReceiverDetails'] = array(
             'ReceiverName'          => $od['ship_to'],
             'AddressLine1'          => $od['address'],
             'AddressLine2'          => $od['address_2'],
@@ -252,8 +193,9 @@
             'IsAuthorityToLeave'    => $od['signature_req'] == 0,
             'DeliveryInstructions'  => $delivery_instructions
         );
+        $packages = $this->controller->order->getPackagesForOrder($od['id']);
+        $parcels = Packaging::getPackingForOrder($od,$items,$packages);
 
-        $details['ReceiverDetails'] = $rd;
         foreach($parcels as $p)
         {
             $array = array();
@@ -266,7 +208,11 @@
             $array['KGS'] = ceil($p['weight']);
             $details['ConsignmentLineItems'][] = $array;
         }
-        return $details;
+        $consignment_list = array(
+            'ConsignmentList'   => array()
+        );
+        $consignment_list['ConsignmentList'][] = $details;
+        return $consignment_list;
     }
 
  }
