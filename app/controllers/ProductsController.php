@@ -14,6 +14,11 @@ class productsController extends Controller
         parent::beforeAction();
     }
 
+    public function index()
+    {
+        parent::displayIndex(get_class());
+    }
+
     public function addProduct()
     {
         Config::setJsConfig('curPage', "add-product");
@@ -169,16 +174,10 @@ class productsController extends Controller
 
         //warehouse users
         Permission::allow('warehouse', $resource, array(
+            "index",
             "addProduct",
             "viewProducts",
             "editProduct"
-        ));
-
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            "addProduct",
-            "editProduct",
-            "viewProducts"
         ));
 
         return Permission::check($role, $resource, $action);
