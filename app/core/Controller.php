@@ -351,6 +351,7 @@ class Controller {
         $app = new App();
         if(!$child || empty($child) || !$app::isControllerValid($child))
         {
+            die('no products');
             return (new ErrorsController())->error(404)->send();
         }
         //render the page
