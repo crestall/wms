@@ -8,7 +8,7 @@ if(Session::getIsLoggedIn()):
         return;
     $user_role = str_replace(" ","_", $user_role);
     //echo strtoupper($user_role."_PAGES");
-    $pages = Config::get(strtoupper($user_role."_PAGES"));
+    $pages = Config::getPages(strtoupper($user_role."_PAGES"));
     $user_info = $this->controller->user->getProfileInfo(Session::getUserId());
     $image = $user_info['image'];
 else:
