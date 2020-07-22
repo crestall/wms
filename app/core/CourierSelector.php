@@ -188,18 +188,6 @@
     private function assignDirectFreight($order_id)
     {
         //die('Assigning Direct Freight');
-        $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
-        //echo "<pre>",print_r($df_details),"</pre>"; die();
-        $response = $this->controller->directfreight->createConsignment($df_details);
-        echo "<pre>",print_r($response),"</pre>"; die();
-
-
-
-
-
-
-
-
         $db = Database::openConnection();
         Session::set('showfeedback', true);
         $order_values = array(
