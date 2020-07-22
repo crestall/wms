@@ -17,7 +17,7 @@ class OrdersController extends Controller
 
     public function index()
     {
-        parent::displayIndex('orders')
+        parent::displayIndex('orders');
     }
 
     public function addSerials()
