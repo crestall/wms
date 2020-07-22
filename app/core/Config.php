@@ -23,7 +23,8 @@ class Config{
      */
     private static $prefix = [
         'default'   => 'config',
-        'js'        => 'javascript'
+        'js'        => 'javascript',
+        'pages'     => 'pages_config'
     ];
 
     public static function tester()
@@ -39,6 +40,16 @@ class Config{
      */
     public static function get($key){
         return self::_get($key, self::$prefix['default']);
+    }
+
+    /**
+     * Get page(s)
+     *
+     * @param $key string
+     * @return string|array|null
+     */
+    public static function getPages($key){
+        return self::_get($key, self::$prefix['pages']);
     }
 
     /**
