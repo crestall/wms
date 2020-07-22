@@ -31,9 +31,7 @@ ul.user-info{
 ul.user-info li a.dropdown-toggle,
 ul.user-info li.white a.dropdown-toggle
 {
-    padding: 15px;
     min-height: 50px;
-    text-align: right;
     color: #f2f2f2;
 }
 
@@ -53,6 +51,7 @@ ul.user-info img.img-user{
     height: auto;
     border: 3px solid #fff;
     border-radius: 5px;
+    margin-top: 25px;
 }
 
 /*****
