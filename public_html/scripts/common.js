@@ -16,9 +16,10 @@ $('button#navbar_toggler').click(function(e){
     }
     else
     {
+        var h = $('div#navbarNav ul.navbar-nav').height();
         $('ul.user-info').removeClass('navbar').css({
             float: 'right',
-            marginTop: function(){return $('div#navbarNav ul.navbar-nav').height()}
+            marginTop: -h
         });
         $('div#navbarNav ul.navbar-nav').css({
             width :'200px'
