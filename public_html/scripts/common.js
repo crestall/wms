@@ -13,7 +13,7 @@ $('button#navbar_toggler').click(function(e){
     if($('div#navbarNav').hasClass('show'))
     {
         $('ul.user-info').addClass('navbar');
-        $(this).css(width:100px);
+        $(this).css('width','100px');
     }
     else
     {
