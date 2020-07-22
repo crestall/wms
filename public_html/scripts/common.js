@@ -12,11 +12,11 @@
 $('button#navbar_toggler').click(function(e){
     if($('div#navbarNav').hasClass('show'))
     {
-        $('ul.user-info').removeClass('navbar');
+        $('ul.user-info').addClass('navbar');
     }
     else
     {
-        $('ul.user-info').addClass('navbar');
+        $('ul.user-info').removeClass('navbar');
     }
 });
 
