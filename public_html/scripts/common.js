@@ -16,8 +16,13 @@ $('button#navbar_toggler').click(function(e){
     }
     else
     {
-        $('ul.user-info').removeClass('navbar');
-        $('div#navbarNav ul.navbar-nav').css('width','100px');
+        $('ul.user-info').removeClass('navbar').css({
+            float: right,
+            marginTop: function(){return $('div#navbarNav ul.navbar-nav').height()}
+        });
+        $('div#navbarNav ul.navbar-nav').css({
+            width :'200px'
+        });
     }
 });
 
