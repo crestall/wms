@@ -17,12 +17,15 @@ $('button#navbar_toggler').click(function(e){
             float: '',
             marginTop: 0
         });
+        $('div#navbarNav ul.navbar-nav').css({
+            width :'auto'
+        });
     }
     else
     {;
         $('ul.user-info').removeClass('navbar').css({
             float: 'right',
-            marginTop: -h
+            marginTop: '-470px'
         });
         $('div#navbarNav ul.navbar-nav').css({
             width :'200px'
