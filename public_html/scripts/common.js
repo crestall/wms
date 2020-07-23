@@ -688,52 +688,7 @@ function fixPageWrapperHeight()
     }
 }
 
-//Loads the correct sidebar on window load,
-//collapses the sidebar on window resize.
 
-$(function() {
-    $('#side-menu').metisMenu().on('shown.metisMenu', function(e){
-        fixPageWrapperHeight();
-    }).on('hidden.metisMenu', function(e){
-        fixPageWrapperHeight();
-    });
-
-    $(window).bind("load resize", function() {
-
-        var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
-        if (width < 768) {
-            $('div.navbar-collapse').addClass('collapse');
-            topOffset = 100; // 2-row-menu
-        } else {
-            $('div.navbar-collapse').removeClass('collapse');
-        }
-        fixPageWrapperHeight();
-    });
-
-    var url = window.location;
-
-    var foundpage = false
-    for(var cat in config.allPages)
-    {
-        //console.log("1 doing: "+cat);
-        for(var page in config.allPages[cat])
-        {
-            //console.log("2 doing: "+page);
-            if(config.curPage == page)
-            {
-                //console.log("found: "+page);
-                $("li#"+cat+" > a").addClass("active");
-                foundpage = true;
-                break;
-            }
-        }
-        if(foundpage)
-            break;
-    }
-
-    
-
-});
 
 /*
  * Helpers
