@@ -319,8 +319,18 @@ return array(
 		),
         'downloads' => array(
             'super_admin_only'  => true,
-            'print-location-barcodes'   => true,
-            'useful-barcodes'   => true
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-lock-alt"></i>'
+            ),
+            'print-location-barcodes'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-print"></i>'
+            ),
+            'useful-barcodes'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-barcode-alt"></i>'
+            )
         ),
         'admin-only'    => array(
             'super_admin_only'  => true,
