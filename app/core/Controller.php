@@ -353,6 +353,9 @@ class Controller {
         {
             return (new ErrorsController())->error(404)->send();
         }
+        $names = Utility::splitCamelCase($child);
+        var_dump($names);
+        die();
         $page_name = str_replace('Controller', '',$child);
         //render the page
         Config::setJsConfig('curPage', "default-icon");
