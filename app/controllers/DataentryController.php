@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class DataentryController extends Controller
+class DataEntryController extends Controller
 {
     public function beforeAction()
     {
