@@ -261,7 +261,7 @@ return array(
                 'icon'      => '<i class="fad fa-truck-pickup"></i>'
             )
 		),
-        'data-entry'    =>  array(
+        'dataentry'    =>  array(
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-indent"></i>'
