@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class reportsController extends Controller
+class ReportsController extends Controller
 {
     public function beforeAction()
     {
@@ -24,6 +24,11 @@ class reportsController extends Controller
         ]);
     }
     */
+
+    public function index()
+    {
+        parent::displayIndex(get_class());
+    }
 
     public function stockAtDate()
     {
