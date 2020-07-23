@@ -58,6 +58,7 @@ div.index-card{
     background-color: #4382c1;
     margin-bottom: 2%;
     height: 98% !important;
+    word-wrap: normal; /*WTF would Boostrap break the word!*/
 }
 
 div.index-card:hover
