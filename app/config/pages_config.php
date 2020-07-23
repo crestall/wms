@@ -262,9 +262,18 @@ return array(
             )
 		),
         'data-entry'    =>  array(
-            'container-unloading'      => true,
-            'error-data'                =>  true,
-            'incoming-shipments'        =>  true
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-indent"></i>'
+            ),
+            'container-unloading'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fal fa-container-storage"></i>'
+            ),
+            'incoming-shipments'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-shipping-timed"></i>'
+            )
         ),
 		'site-settings'		=> array(
 			'order-status'				=> 	true,
