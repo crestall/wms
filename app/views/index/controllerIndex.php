@@ -6,11 +6,12 @@ $sections = $pages[strtolower($page_name)];
     <div class="container">
         <div class="row">
             <?php foreach($sections as $section_name => $details):
-                if(!$details['display']) continue; ?>
+                if(!$details['display']) continue;
+                $SectionName = ucwords(str_replace("-", " ", $section_name));?>
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                     <div class="card text-white bg-info h-100">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $details['icon']." ".$section_name;?></h5>
+                            <h5 class="card-title"><?php echo $details['icon']." ".$SectionName;?></h5>
                         </div>
                     </div>
                 </div>
