@@ -196,27 +196,70 @@ return array(
             )
         ),
 		'reports'			=> array(
-			'stock-movement-report'	=>	true,
-			'dispatch-report'			=>	true,
-			'inventory-report'			=>	true,
-            'location-report'           =>  true,
-            'client-space-usage-report'   =>  true,
-            'goods-out-report'          =>  true,
-            'goods-out-summary'         =>  true,
-            'goods-in-report'          =>  true,
-            'goods-in-summary'         =>  true,
-            'stock-at-date'             =>  true,
-            'unloaded-containers-report'       =>  true,
-            'truck-run-sheet'       =>  true,
-            '3pl-dispatch-report'   =>  false,
-            '3pl-stock-movement-report' =>  false,
-            'empty-bay-report'      => true,
-            'pickups-report'    => true,
-            'solar-returns-report'    => true,
-            'solar-consumables-reorder' => true,
-            'swatches-report'       => true,
-            'order-serial-numbers-report'   => true,
-            '3pl-order-serials-report'  => false
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-chart-bar"></i>'
+            ),
+			'stock-movement-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-person-dolly"></i>'
+            ),
+			'dispatch-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+            ),
+			'inventory-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+            ),
+            'location-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+            ),
+            'client-space-usage-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+            ),
+            'goods-out-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+            ),
+            'goods-out-summary'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+            ),
+            'goods-in-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+            ),
+            'goods-in-summary'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+            ),
+            'stock-at-date'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-calendar-alt"></i>'
+            ),
+            'unloaded-containers-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-container-storage"></i>'
+            ),
+            '3pl-dispatch-report'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            '3pl-stock-movement-report'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'empty-bay-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-warehouse-alt"></i>'
+            ),
+            'pickups-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-truck-pickup"></i>'
+            )
 		),
         'data-entry'    =>  array(
             'container-unloading'      => true,
