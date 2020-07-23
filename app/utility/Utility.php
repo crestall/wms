@@ -458,4 +458,15 @@ class Utility{
         );
         return ucwords(str_ireplace(array_values($list), array_keys($list), $str));
     }
+
+    public static function splitCamelCase($input)
+    {
+        return preg_split(
+            '/(^[^A-Z]+|[A-Z][^A-Z]+)/',
+            $input,
+            -1, /* no limit for replacement count */
+            PREG_SPLIT_NO_EMPTY /*don't return empty elements*/
+                | PREG_SPLIT_DELIM_CAPTURE /*don't strip anything from output array*/
+        );
+    }
  }
