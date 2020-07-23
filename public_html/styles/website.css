@@ -56,6 +56,7 @@ The Section Cards
 ******/
 div.index-card{
     background-color: #4382c1;
+    margin-bottom: 5px;
 }
 
 div.index-card:hover
