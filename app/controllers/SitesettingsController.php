@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class SiteS<p style="text-align: center"></p>ettingsController extends Controller
+class SiteSettingsController extends Controller
 {
     public function beforeAction()
     {
