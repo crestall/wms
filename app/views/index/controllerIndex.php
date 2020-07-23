@@ -6,4 +6,4 @@
 </div>
 
 
-<?php echo "<pre>",print_r($pages),"</pre>";?>
+<?php echo "<pre>",print_r($sections),"</pre>";?>
