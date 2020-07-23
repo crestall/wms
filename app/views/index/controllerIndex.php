@@ -1,6 +1,7 @@
 <?php
 $con_index = strtolower(str_replace(" ", "-", $page_name));
 $sections = $pages[$con_index];
+$page_title = $sections['default-icon']['icon']." ".$page_title;
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -21,6 +22,3 @@ $sections = $pages[$con_index];
 
     </div>
 </div>
-
-
-<?php //echo "<pre>",print_r($sections),"</pre>";?>

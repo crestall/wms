@@ -351,12 +351,10 @@ class Controller {
         $app = new App();
         $names = Utility::splitCamelCase($child);
         array_pop($names);
-        //var_dump($names);die();
         if(!$child || empty($child) || !$app::isControllerValid($child))
         {
             return (new ErrorsController())->error(404)->send();
         }
-        //$page_name = str_replace('Controller', '',$child);
         $page_name = implode(" ",$names);
         //render the page
         Config::setJsConfig('curPage', "default-icon");
