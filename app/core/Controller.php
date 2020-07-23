@@ -344,7 +344,7 @@ class Controller {
     }
 
     /*******************************************************************
-    ** Display the index page for the chilkd classes
+    ** Display the index page for the child classes
     ********************************************************************/
     public function displayIndex($child)
     {
