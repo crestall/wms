@@ -116,13 +116,34 @@ return array(
             ),
 		),
 		'products'	=> array(
-			'view-products'			=> true,
-			'add-product'			=> true,
-			'edit-product'			=> false,
-			//'bulk-product-upload'	=>	true,
-            'pack-items-edit'       =>  true,
-            'collections-edit'      =>  true,
-            'product-search'        =>  true,
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-dolly"></i>'
+            ),
+			'view-products'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-box-open"></i>'
+            ),
+			'add-product'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-hand-holding-box"></i>'
+            ),
+			'edit-product'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'pack-items-edit'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-edit"></i>'
+            ),
+            'collections-edit'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-edit"></i>'
+            ),
+            'product-search'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-telescope"></i>'
+            ),
 		),
         'inventory'   =>  array(
             'view-inventory'		=>	true,
