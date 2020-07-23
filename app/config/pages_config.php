@@ -146,18 +146,54 @@ return array(
             ),
 		),
         'inventory'   =>  array(
-            'view-inventory'		=>	true,
-            'pack-items-manage'     =>  true,
-            'scan-to-inventory'     =>  true,
-            'product-movement'      =>  false,
-            'goods-out'             =>  true,
-            'goods-in'               =>  true,
-            'add-subtract-stock'    =>  false,
-            'quality-control'       =>  false,
-            'transfer-location' => true,
-            'solar-returns' => true,
-            'move-bulk-items'   => true,
-            'move-all-client-stock' => true
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-warehouse-alt"></i>'
+            ),
+            'view-inventory'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-inventory"></i>'
+            ),
+            'pack-items-manage'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-box-check"></i>'
+            ),
+            'scan-to-inventory'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-scanner"></i>'
+            ),
+            'product-movement'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'goods-out'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-forklift"></i>'
+            ),
+            'goods-in'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-forklift fa-flip-vertical"></i>'
+            ),
+            'add-subtract-stock'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'quality-control'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'transfer-location'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-dolly-flatbed"></i>'
+            ),
+            'move-bulk-items'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-dolly-flatbed-alt"></i>'
+            ),
+            'move-all-client-stock'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-conveyor-belt"></i>'
+            )
         ),
 		'reports'			=> array(
 			'stock-movement-report'	=>	true,
