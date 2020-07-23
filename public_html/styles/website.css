@@ -47,6 +47,8 @@ h2.page-header{
     letter-spacing: 3.5px;
     font-weight: 800;
     text-transform: uppercase;
+    text-align: center;
+    margin-top: 25px;
 }
 
 /*****
