@@ -359,7 +359,6 @@ class Controller {
         }
         //$page_name = str_replace('Controller', '',$child);
         $page_name = implode(" ",$names);
-        die($page_name);
         //render the page
         Config::setJsConfig('curPage', "default-icon");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/index/", Config::get('VIEWS_PATH') . 'index/controllerIndex.php', [
