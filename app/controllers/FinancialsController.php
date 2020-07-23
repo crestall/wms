@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class financialsController extends Controller
+class FinancialsController extends Controller
 {
     public function beforeAction()
     {
@@ -27,6 +27,11 @@ class financialsController extends Controller
             $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         }
 
+    }
+
+    public function index()
+    {
+        parent::displayIndex(get_class());
     }
 
     public function huntersCheck()
