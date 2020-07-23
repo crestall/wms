@@ -52,8 +52,18 @@ h2.page-header{
 }
 
 /*****
-Bootstrap Overrides
+The Section Cards
 ******/
+div.index-card:hover
+{
+    background-color:#fff;
+    border-color: #4382c1;
+}
+
+a.index-link{
+    color:#fff;
+}
+
 
 /*****
 User Info
