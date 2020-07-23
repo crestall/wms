@@ -507,7 +507,10 @@ return array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-calendar-alt"></i>'
             ),
-            'returns-report'             =>  true,
+            'returns-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal"></i>'
+            ),
             'stock-movement-report'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-person-dolly"></i>'
