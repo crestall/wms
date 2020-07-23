@@ -276,20 +276,47 @@ return array(
             )
         ),
 		'site-settings'		=> array(
-			'order-status'				=> 	true,
-			'stock-movement-reasons'	=> 	true,
-            'locations'                 =>  true,
-            'staff'                     =>  true,
-            'manage-users'	            =>	true,
-            'packing-types'             =>  true,
-            'user-roles'                =>  true,
-            'couriers'                  => true,
-            'edit-user-profile'         => false,
-            'add-user'                  => false
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-cog"></i>'
+            ),
+			'order-status'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-tasks"></i>'
+            ),
+			'stock-movement-reasons'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-dolly-flatbed"></i>'
+            ),
+            'locations'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fal fa-warehouse-alt"></i>'
+            ),
+            'manage-users'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-users"></i>'
+            ),
+            'packing-types'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-mail-bulk"></i>'
+            ),
+            'user-roles'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-users-cog"></i>'
+            ),
+            'couriers'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-truck-loading"></i>'
+            ),
+            'edit-user-profile'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'add-user'    => array(
+                'display'   => false,
+                'icon'      => ''
+            )
 		),
-        'financials'    =>  array(
-            'directfreight-check'   => true
-        ),
         'downloads' => array(
             'super_admin_only'  => true,
             'print-location-barcodes'   => true,
@@ -298,8 +325,6 @@ return array(
         'admin-only'    => array(
             'super_admin_only'  => true,
             'eparcel-shipment-deleter'  => true,
-            'dispatched-orders-updater' => false,
-            'client-bay-fixer'  => true,
             'encrypt-some-shit' => false,
             'update-configuration'  => true,
             'reece-data-tidy'   => true
