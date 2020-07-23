@@ -7,11 +7,16 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class sitesettingsController extends Controller
+class SitesettingsController extends Controller
 {
     public function beforeAction()
     {
         parent::beforeAction();
+    }
+
+    public function index()
+    {
+        parent::displayIndex(get_class());
     }
 
     public function locations()
