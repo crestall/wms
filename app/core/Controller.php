@@ -357,7 +357,8 @@ class Controller {
         {
             return (new ErrorsController())->error(404)->send();
         }
-        $page_name = str_replace('Controller', '',$child);
+        //$page_name = str_replace('Controller', '',$child);
+        $page_name = implode(" ",$names);
         die($page_name);
         //render the page
         Config::setJsConfig('curPage', "default-icon");
