@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class AdminonlyController extends Controller
+class AdminOnlyController extends Controller
 {
     public function beforeAction()
     {
