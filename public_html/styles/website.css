@@ -68,6 +68,10 @@ a.index-link{
     color:#fff;
 }
 
+a.index-link:hover{
+    color:#4382c1;
+}
+
 
 /*****
 User Info
