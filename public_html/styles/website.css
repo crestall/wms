@@ -68,6 +68,11 @@ div.index-card:hover
 
 a.index-link{
     color:#fff;
+    font-family: "Roboto Condensed";
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 20px
 }
 
 a.index-link:hover{
