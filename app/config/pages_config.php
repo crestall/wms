@@ -499,6 +499,10 @@ return array(
             )
 		),
         'reports'           =>  array(
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-chart-bar"></i>'
+            ),
             'dispatch-report'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
