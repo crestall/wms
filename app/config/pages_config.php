@@ -358,31 +358,99 @@ return array(
     ),
     'WAREHOUSE_PAGES' => array(
         'orders'      => array(
-            'order-picking'     =>  true,
-            'order-packing'     =>  true,
-            'order-dispatching'         =>  true,
-            'view-orders'               =>  true,
-            'order-search'              =>  true,
-            'order-search-results'      =>  false,
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-truck"></i>'
+            ),
+            'order-picking' =>  array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-hand-holding-box"></i>'
+            ),
+            'order-packing' =>  array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-box-open"></i>'
+            ),
+            'order-dispatching' =>  array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-mail-bulk"></i>'
+            ),
+            'view-orders' =>  array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-th-list"></i>'
+            ),
+            'order-search' =>  array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-search"></i>'
+            ),
+            'order-search-results' =>  array(
+                'display'   => false,
+                'icon'      => ''
+            ),
         ),
         'products'    =>  array(
-            'view-products'			=> true,
-            'add-product'           =>  true,
-            'edit-product'			=> false,
-             'product-search'        =>  true,
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-dolly"></i>'
+            ),
+            'view-products'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-box-open"></i>'
+            ),
+            'add-product'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-hand-holding-box"></i>'
+            ),
+            'edit-product'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'product-search'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-telescope"></i>'
+            ),
 
         ),
         'inventory'     =>  array(
-            'view-inventory'		=>	true,
-            'product-to-location'   =>  true,
-            'scan-to-inventory'     =>  true,
-            //'client-locations'      =>  true,
-            'product-movement'      =>  false,
-            'goods-out'             =>  true,
-            'goods-in'               =>  true,
-            'add-subtract-stock'    =>  false,
-            'quality-control'       =>  false,
-            'pack-items-manage'     =>  true,
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-warehouse-alt"></i>'
+            ),
+            'view-inventory'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-inventory"></i>'
+            ),
+            'product-to-location'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-dolly-flatbed"></i>'
+            ),
+            'scan-to-inventory'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-scanner"></i>'
+            ),
+            'product-movement'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'goods-out'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-forklift"></i>'
+            ),
+            'goods-in'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-forklift fa-flip-horizontal"></i>'
+            ),
+            'add-subtract-stock'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'quality-control'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'pack-items-manage'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-box-check"></i>'
+            ),
         )
     ),
     'CLIENT_PAGES' => array(
