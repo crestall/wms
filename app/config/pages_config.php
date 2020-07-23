@@ -98,9 +98,22 @@ return array(
             )
         ),
 		'clients'	=> array(
-			'view-clients'	=> true,
-			'add-client'	=> true,
-			'edit-client'	=> false,
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-user-tie"></i>'
+            ),
+			'view-clients'  => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-users"></i>'
+            ),
+			'add-client'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-user-plus"></i>'
+            ),
+			'edit-client'   => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-user-edit"></i>'
+            ),
 		),
 		'products'	=> array(
 			'view-products'			=> true,
