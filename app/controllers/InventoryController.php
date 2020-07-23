@@ -7,11 +7,16 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class inventoryController extends Controller
+class InventoryController extends Controller
 {
     public function beforeAction()
     {
         parent::beforeAction();
+    }
+
+    public function index()
+    {
+        parent::displayIndex(get_class());
     }
 
     public function moveAllClientStock(){
