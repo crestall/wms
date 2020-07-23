@@ -456,18 +456,12 @@ class ReportsController extends Controller
 
         //warehouse users
         Permission::allow('warehouse', $resource, array(
-
-        ));
-
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            "jobsReport",
-            "solarReturnsReport",
-            "solarConsumablesReorder"
+            'index'
         ));
 
         //client users
         Permission::allow('client', $resource, array(
+            'index',
             "dispatchReport",
             "returnsReport",
             "stockMovementReport",
