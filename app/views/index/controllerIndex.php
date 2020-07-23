@@ -9,7 +9,7 @@ $sections = $pages[strtolower($page_name)];
                 if(!$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));?>
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                    <div class="card text-white h-100 index-card" style="background-color: #4382c1">
+                    <div class="card text-white h-100 index-card">
                         <div class="card-body">
                             <a class="index-link" href="<?php echo "$section_name";?>"><h5 class="card-title"><?php echo $details['icon']." ".$SectionName;?></h5></a>
                         </div>

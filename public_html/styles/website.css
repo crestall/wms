@@ -54,6 +54,10 @@ h2.page-header{
 /*****
 The Section Cards
 ******/
+div.index-card{
+    background-color: #4382c1;
+}
+
 div.index-card:hover
 {
     background-color:#fff;
