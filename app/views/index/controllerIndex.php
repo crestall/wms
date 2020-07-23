@@ -22,4 +22,4 @@ $sections = $pages[strtolower($page_name)];
 </div>
 
 
-<?php echo "<pre>",print_r($sections),"</pre>";?>
+<?php //echo "<pre>",print_r($sections),"</pre>";?>
