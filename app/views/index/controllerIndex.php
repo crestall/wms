@@ -1,6 +1,6 @@
 <?php
 $con_index = strtolower(str_replace(" ", "-", $page_name));
-$sections = $pages[$con_index);
+$sections = $pages[$con_index];
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
