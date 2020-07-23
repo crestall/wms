@@ -441,6 +441,7 @@ class InventoryController extends Controller
 
         //warehouse users
         Permission::allow('warehouse', $resource, array(
+            'index',
             "viewInventory",
             "addSubtractStock",
             "moveStock",
@@ -453,14 +454,10 @@ class InventoryController extends Controller
 
         //client users
         Permission::allow('client', $resource, array(
+            'index',
             "clientInventory",
             'expectedShipments',
             'registerNewStock'
-        ));
-      
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            "viewInventory"
         ));
 
         return Permission::check($role, $resource, $action);
