@@ -455,27 +455,75 @@ return array(
     ),
     'CLIENT_PAGES' => array(
         'orders'			=>	array(
-			'client-orders'		=>	true,
-			'order-detail'	    =>	false,
-			'order-tracking'	=>	false,
-            'add-order'         =>  true,
-            'bulk-upload-orders'     =>  true,
-            //'book-pickup'       => true,
-            //'add-origin-order'  => true
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-truck"></i>'
+            ),
+			'client-orders' =>  array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-th-list"></i>'
+            ),
+			'order-detail'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+			'order-tracking'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'add-order' =>  array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-shipping-fast"></i>'
+            ),
+            'bulk-upload-orders' =>  array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-upload"></i>'
+            )
 		),
 		'inventory'			=>	array(
-			'client-inventory'	=>	true,
-            'expected-shipments'    =>  true,
-            'register-new-stock'    => true
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-warehouse-alt"></i>'
+            ),
+			'client-inventory'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-inventory"></i>'
+            ),
+            'expected-shipments'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-shipping-timed"></i>'
+            ),
+            'register-new-stock'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-clipboard-check"></i>'
+            )
 		),
         'reports'           =>  array(
-            'dispatch-report'   =>  true,
-            'stock-at-date'             =>  true ,
+            'dispatch-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+            ),
+            'stock-at-date'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-calendar-alt"></i>'
+            ),
             'returns-report'             =>  true,
-            'stock-movement-report'     =>  true,
-            'stock-movement-summary'    =>  true,
-            'client-dispatch-report'    =>  false,
-            'client-stock-movement-report'  =>  false
+            'stock-movement-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-person-dolly"></i>'
+            ),
+            'stock-movement-summary'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-person-dolly"></i>'
+            ),
+            'client-dispatch-report'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'client-stock-movement-report'    => array(
+                'display'   => false,
+                'icon'      => ''
+            )
         )
     )
 )
