@@ -40,6 +40,11 @@ class DownloadsController extends Controller {
         }
     }
 
+    public function index()
+    {
+        parent::displayIndex(get_class());
+    }
+
     public function downloadFile()
     {
         $file_name = (isset($this->request->params['args']['file']))? $this->request->params['args']['file']: "";
