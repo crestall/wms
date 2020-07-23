@@ -172,7 +172,7 @@ return array(
             ),
             'goods-in'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-forklift fa-flip-vertical"></i>'
+                'icon'      => '<i class="fad fa-forklift fa-flip-horizontal"></i>'
             ),
             'add-subtract-stock'    => array(
                 'display'   => false,
