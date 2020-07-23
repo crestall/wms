@@ -321,7 +321,7 @@ return array(
             'super_admin_only'  => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-lock-alt"></i>'
+                'icon'      => '<i class="fad fa-download"></i>'
             ),
             'print-location-barcodes'    => array(
                 'display'   => true,
@@ -334,10 +334,26 @@ return array(
         ),
         'admin-only'    => array(
             'super_admin_only'  => true,
-            'eparcel-shipment-deleter'  => true,
-            'encrypt-some-shit' => false,
-            'update-configuration'  => true,
-            'reece-data-tidy'   => true
+            'default-icon'  => array(
+                'display'   => false,
+                'icon'      => '<i class="fad fa-lock-alt"></i>'
+            ),
+            'eparcel-shipment-deleter'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-trash-alt"></i>'
+            ),
+            'encrypt-some-shit'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
+            'update-configuration'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-check-double"></i>'
+            ),
+            'reece-data-tidy'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fad fa-calendar-check"></i>'
+            )
         ),
     ),
     'WAREHOUSE_PAGES' => array(
