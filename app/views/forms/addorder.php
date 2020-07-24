@@ -108,7 +108,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <ul id="fileList"></ul>
                     <?php echo Form::displayError('invoice');?>
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="col-md-3">&nbsp;</div>
                     <div class="col-md-4">
                         <span class="inst">(if required) - use ctrl click to select multiple files</span>
