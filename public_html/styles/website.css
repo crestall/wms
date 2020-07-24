@@ -478,6 +478,13 @@ bootsrap adjustments
         left: initial;
     }
 
+/******
+bootstrap select adjustments
+*******/
+.bootstrap-select{
+    border: 1px solid red;
+}
+
 /********
 Responsive adjustments
 *******  */
