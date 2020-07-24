@@ -103,7 +103,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             </div>
             <div class="form-group form-row">
                 <label class="col-md-3 col-form-label">Upload PDF Attachment</label>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" />
                     <ul id="fileList"></ul>
                     <?php echo Form::displayError('invoice');?>
