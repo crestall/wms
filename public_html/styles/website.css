@@ -19,11 +19,11 @@ body{
 #page-wrapper {
     padding: 5px 10px;
     min-height: 568px;
-    background-color: #fff;
+    background-color: #f8f8f9;
 }
 
 .container{
-    background-color: #f8f8f9
+    background-color: #fff
 }
 
 footer{
