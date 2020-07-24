@@ -24,7 +24,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <h3>Order Details</h3>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group row">
         <label for="exampleFormControlSelect1">Example select</label>
         <select class="form-control" id="exampleFormControlSelect1">
             <option>1</option>
