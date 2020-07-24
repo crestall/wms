@@ -71,6 +71,11 @@ div.index-card:hover
     border-color: #4382c1;
 }
 
+div.index-card:hover a.index-link
+{
+    color:#4382c1;
+}
+
 a.index-link{
     color:#fff;
     font-family: "Roboto Condensed";
