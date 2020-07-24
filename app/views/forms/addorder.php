@@ -113,10 +113,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             <div class="form-group row">
                 <div class="form-check">
                     <label class="form-check-label col-md-3" for="express_post">Use Express Post</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="express_post" name="express_post" <?php if(!empty(Form::value('express_post'))) echo 'checked';?> />
-                        <label for="express_post"></label>
-                    </div>
+                    <input class="form-check-input col-md-4" type="checkbox" id="express_post" name="express_post" <?php if(!empty(Form::value('express_post'))) echo 'checked';?> />
                 </div>
             </div>
             <div class="form-group row">
