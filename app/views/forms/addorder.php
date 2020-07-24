@@ -24,26 +24,13 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <h3>Order Details</h3>
                 </div>
             </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3" for="exampleFormControlSelect1">Example select</label>
-                            <div class="col-lg-4">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                                <?php echo Form::displayError('client_id');?>
-                            </div>
-                        </div>
             <?php if($user_role == "client"):?>
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo Session::get("client_id");?>" />
             <?php else:?>
                 <div class="form-group row">
                     <label class="col-lg-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                     <div class="col-lg-4">
-                        <select id="client_id" name="client_id" class="form-control clientselector"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                        <select id="client_id" name="client_id" class="form-control clientselector" required><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                         <?php echo Form::displayError('client_id');?>
                     </div>
                 </div>
