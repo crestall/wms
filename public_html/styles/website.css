@@ -59,7 +59,6 @@ h2.page-header{
 The Section Cards
 ******/
 a.index-link{
-    color:#fff;
     font-family: "Roboto Condensed";
     font-style: normal;
     font-weight: 500;
@@ -68,6 +67,7 @@ a.index-link{
 }
 
 div.index-card{
+    color:#fff;
     background-color: #4382c1;
     margin-bottom: 2%;
     height: 98% !important;
@@ -82,6 +82,7 @@ a.index-link:hover div.index-card
 {
     background-color:#fff;
     border-color: #4382c1;
+    color: #4382c1;
 }
 
 /*****
