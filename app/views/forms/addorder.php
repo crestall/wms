@@ -105,9 +105,11 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 <label class="col-md-3 col-form-label">Upload PDF Attachment</label>
                 <div class="col-md-4">
                     <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" />
-                    <span class="inst">(if required) - use ctrl click to select multiple files</span>
                     <ul id="fileList"></ul>
                     <?php echo Form::displayError('invoice');?>
+                </div>
+                <div class="col-md-4">
+                    <span class="inst">(if required) - use ctrl click to select multiple files</span>
                 </div>
             </div>
 
