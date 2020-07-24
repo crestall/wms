@@ -110,6 +110,19 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php echo Form::displayError('invoice');?>
                 </div>
             </div>
+
+
+            <div class="form-check row">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Default checkbox
+                </label>
+            </div>
+
+
+
+
+
             <div class="form-group row">
                 <div class="form-check">
                     <label class="form-check-label col-md-3" for="express_post">Use Express Post</label>
