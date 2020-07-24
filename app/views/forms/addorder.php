@@ -24,6 +24,16 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <h3>Order Details</h3>
                 </div>
             </div>
+            <div class="form-group">
+        <label for="exampleFormControlSelect1">Example select</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
             <?php if($user_role == "client"):?>
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo Session::get("client_id");?>" />
             <?php else:?>
