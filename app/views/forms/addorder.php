@@ -101,21 +101,21 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php echo Form::displayError('items');?>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group form-row">
                 <label class="col-md-3 col-form-label">Upload PDF Attachment</label>
                 <div class="col-md-4">
                     <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" />
                     <ul id="fileList"></ul>
                     <?php echo Form::displayError('invoice');?>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">&nbsp;</div>
-                    <div class="col-md-4">
-                        <span class="inst">(if required) - use ctrl click to select multiple files</span>
-                    </div>
+
+            </div>
+            <div class="form-row">
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-4">
+                    <span class="inst">(if required) - use ctrl click to select multiple files</span>
                 </div>
             </div>
-
             <div class="custom-control custom-checkbox custom-control-right">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                 <label class="custom-control-label col-md-3" for="customCheck1">Check this custom checkbox</label>
