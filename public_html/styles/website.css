@@ -480,11 +480,11 @@ bootsrap adjustments
 
 /******
 bootstrap select adjustments
-*******/
-.bootstrap-select{
+******
+.btn dropdown-toggle btn-default{
     border: 1px solid red;
 }
-
+*/
 /********
 Responsive adjustments
 *******  */
