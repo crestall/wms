@@ -58,19 +58,6 @@ h2.page-header{
 /*****
 The Section Cards
 ******/
-div.index-card{
-    background-color: #4382c1;
-    margin-bottom: 2%;
-    height: 98% !important;
-    word-wrap: normal; /*WTF would Boostrap break the word!*/
-}
-
-div.index-card:hover
-{
-    background-color:#fff;
-    border-color: #4382c1;
-}
-
 a.index-link{
     color:#fff;
     font-family: "Roboto Condensed";
@@ -80,14 +67,20 @@ a.index-link{
     font-size: 25px
 }
 
-div.index-card:hover a.index-link
+div.index-card{
+    background-color: #4382c1;
+    margin-bottom: 2%;
+    height: 98% !important;
+    word-wrap: normal; /*WTF would Boostrap break the word!*/
+}
+
+a.index-link:hover div.index-card
 {
+    background-color:#fff;
+    border-color: #4382c1;
     color:#4382c1;
 }
 
-a.index-link:hover{
-    color:#4382c1;
-}
 
 
 /*****
