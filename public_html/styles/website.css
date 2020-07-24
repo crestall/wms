@@ -216,14 +216,6 @@ p.inst, span.inst{
     line-height:normal;
 }
 
-label.form-check-label{
-    margin-top: 10px;
-}
-
-div.checkbox > label.form-check-label{
-    margin-top: 0;
-}
-
 .delete-image-holder,
 .add-image-holder{
     max-width: 50px;
@@ -423,12 +415,12 @@ Responsive Tables
 }
 /********
 Select Styles
-*******  */
+*******
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn)
 {
     width:150px;
     margin: 0 0 5px 5px;
-}
+}*/
 /********
 current orders flip angle
 *******  */
@@ -439,57 +431,7 @@ a#toggle_orders .fa.arrow:before {
 a#toggle_orders.hiding .fa.arrow:before {
     content: "\f107";
 }
-/********
-current solar orders flip angle
-*******  */
-a#toggle_solarorders .fa.arrow:before {
-    content: "\f106";
-}
 
-a#toggle_solarorders.hiding .fa.arrow:before {
-    content: "\f107";
-}
-/********
-current pickups flip angle
-*******  */
-a#toggle_pickups .fa.arrow:before {
-    content: "\f106";
-}
-
-a#toggle_pickups.hiding .fa.arrow:before {
-    content: "\f107";
-}
-
-a#toggle_storeorders .fa.arrow:before {
-    content: "\f106";
-}
-
-a#toggle_storeorders.hiding .fa.arrow:before {
-    content: "\f107";
-}
-/********
-manage users flip angle
-*******  */
-a.toggle_roles .fa.arrow:before {
-    content: "\f106";
-}
-
-a.toggle_roles.hiding .fa.arrow:before {
-    content: "\f107";
-}
-
-/********
-solar admin flip angle
-*******  */
-a#toggle_solarinstalls .fa.arrow:before,
-a#toggle_solarservice .fa.arrow:before {
-    content: "\f106";
-}
-
-a#toggle_solarinstalls.hiding .fa.arrow:before,
-a#toggle_solarservice.hiding .fa.arrow:before {
-    content: "\f107";
-}
 
 /********
 user profile image
@@ -516,12 +458,19 @@ highlighting sections
 /********
 bootsrap adjustments
 *******  */
-@media(max-width:767px){
-    .row {
+
+    /** Checkboxes  */
+    div.custom-control-right {
+        padding-right: 24px;
+        padding-left: 0;
+        margin-left: 16px;
         margin-right: 0;
-        margin-left: 0;
     }
-}
+    div.custom-control-right .custom-control-label::before,
+    div.custom-control-right .custom-control-label::after{
+        right: -1.5rem;
+        left: initial;
+    }
 
 /********
 Responsive adjustments
