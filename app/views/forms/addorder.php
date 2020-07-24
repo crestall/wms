@@ -34,6 +34,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             <option>4</option>
             <option>5</option>
         </select>
+        <?php echo Form::displayError('client_id');?> 
         </div>
     </div>
             <?php if($user_role == "client"):?>
