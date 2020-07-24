@@ -43,7 +43,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 <div class="form-group row">
                     <label class="col-lg-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                     <div class="col-lg-4">
-                        <select id="client_id" name="client_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                        <select id="client_id" name="client_id" class="form-control clientselector"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                         <?php echo Form::displayError('client_id');?>
                     </div>
                 </div>
