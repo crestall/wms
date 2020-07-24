@@ -356,8 +356,9 @@ class Controller {
             return (new ErrorsController())->error(404)->send();
         }
         $page_name = implode(" ",$names);
+        $curPage = strtolower(str_replace(" ", "-", $page_name));
         //render the page
-        Config::setJsConfig('curPage', "default-icon");
+        Config::setJsConfig('curPage', $curPage);
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/index/", Config::get('VIEWS_PATH') . 'index/controllerIndex.php', [
             'page_title'    => $page_name." Pages",
             'page_name'     => $page_name
