@@ -11,11 +11,13 @@ $page_title = $sections['default-icon']['icon']." ".$page_title;
                 if(!$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));?>
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                    <div class="card text-white h-100 index-card">
-                        <div class="card-body">
-                            <a class="index-link" href="<?php echo "$section_name";?>"><?php echo $details['icon']." ".$SectionName;?></a>
+                    <a class="index-link" href="<?php echo "$section_name";?>">
+                        <div class="card text-white h-100 index-card">
+                            <div class="card-body">
+                                <?php echo $details['icon']." ".$SectionName;?>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             <?php endforeach;?>
         </div>
