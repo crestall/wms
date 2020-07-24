@@ -7,6 +7,25 @@
         //console.log('scrolling');
         scroller.checkDisplay();
 	});
+    //add the active class to the menu item
+    var foundpage = false
+    for(var cat in config.allPages)
+    {
+        //console.log("1 doing: "+cat);
+        for(var page in config.allPages[cat])
+        {
+            //console.log("2 doing: "+page);
+            if(config.curPage == page)
+            {
+                //console.log("found: "+page);
+                $("li#"+cat+" > a").addClass("active");
+                foundpage = true;
+                break;
+            }
+        }
+        if(foundpage)
+            break;
+    }
 });
 
 $('button#navbar_toggler').click(function(e){
@@ -671,24 +690,6 @@ var ajax = {
         }
     }
 };
-
-// Sets the min-height of #page-wrapper to window size or sidebar height
-function fixPageWrapperHeight()
-{
-    var topOffset = 50;
-    var height = ( (window.innerHeight > 0) ? window.innerHeight : window.screen.height ) - topOffset;
-    var fheight = $('footer#the_footer').height();
-    height = height - fheight;
-    var mheight = $('ul#side-menu').height();
-    height = Math.max(height, mheight);
-    //console.log("height: "+height);
-    if (height < 1) height = 1;
-    if (height > topOffset) {
-        $("#page-wrapper").css("min-height", (height) + "px");
-    }
-}
-
-
 
 /*
  * Helpers
