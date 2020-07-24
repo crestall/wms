@@ -28,8 +28,8 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo Session::get("client_id");?>" />
             <?php else:?>
                 <div class="form-group row">
-                    <label class="col-lg-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
-                    <div class="col-lg-4">
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
+                    <div class="col-md-4">
                         <select id="client_id" name="client_id" class="form-control clientselector" required><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                         <?php echo Form::displayError('client_id');?>
                     </div>
@@ -102,13 +102,13 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 </div>
             </div>
             <div class="form-group form-row">
-                <label class="col-md-3 col-form-label">Upload PDF Attachment</label>
-                <div class="col-md-3">
+                <label class="col-lg-3 col-form-label">Upload PDF Attachment</label>
+                <div class="col-lg-3">
                     <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" />
                     <ul id="fileList"></ul>
                     <?php echo Form::displayError('invoice');?>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <span class="inst">(if required) - use ctrl click to select multiple files</span>
                 </div>
             </div>
