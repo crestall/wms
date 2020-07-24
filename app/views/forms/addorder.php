@@ -111,26 +111,6 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 </div>
             </div>
 
-
-            <div class="form-check">
-                <label class="form-check-label" for="defaultCheck1">
-                    Default checkbox
-                </label>
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            </div>
-
-
-
-            <div class="form-group form-check form-row">
-                <div class="col-lg-4">
-                   column1
-                </div>
-                <div class="col-lg-4">
-                    column2
-                </div>
-            </div>
-
-
             <div class="custom-control custom-checkbox custom-control-right">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                 <label class="custom-control-label col-md-3" for="customCheck1">Check this custom checkbox</label>
@@ -141,11 +121,9 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
 
 
 
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="express_post">Use Express Post</label>
-                    <input class="form-check-input col-md-4" type="checkbox" id="express_post" name="express_post" <?php if(!empty(Form::value('express_post'))) echo 'checked';?> />
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="express_post" name="express_post" <?php if(!empty(Form::value('express_post'))) echo 'checked';?> />
+                <label class="custom-control-label col-md-3" for="express_post">Use Express Post</label>
             </div>
             <div class="form-group row">
                 <div class="form-check">
