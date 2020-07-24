@@ -133,7 +133,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
 
             <div class="custom-control custom-checkbox custom-control-right">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                <label class="custom-control-label col-md-3" for="customCheck1">Check this custom checkbox</label>
             </div>
 
 
