@@ -16,7 +16,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
 <?php //echo "<pre>",var_dump(Form::value('items')),"</pre>";?>
-<div class="row">
+
     <div class="col-lg-12">
         <form id="add_order" method="post" action="/form/procOrderAdd"  enctype="multipart/form-data" autocomplete="off">
             <div class="row">
@@ -131,6 +131,12 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             </div>
 
 
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+            </div>
+
+
 
 
 
@@ -230,4 +236,3 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
         </form>
     </div>
 
-</div>
