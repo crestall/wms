@@ -26,6 +26,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             </div>
             <div class="form-group row">
         <label class="col-lg-3" for="exampleFormControlSelect1">Example select</label>
+        <div class="col-lg-4">
         <select class="form-control" id="exampleFormControlSelect1">
             <option>1</option>
             <option>2</option>
@@ -33,6 +34,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             <option>4</option>
             <option>5</option>
         </select>
+        </div>
     </div>
             <?php if($user_role == "client"):?>
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo Session::get("client_id");?>" />
