@@ -75,7 +75,7 @@ div.index-card{
 }
 
 a.index-link:hover{
-    color:#4382c1;
+    color:#4382c1 !important;
 }
 
 a.index-link:hover div.index-card
