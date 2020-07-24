@@ -121,7 +121,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
 
 
 
-            <div class="form-group form-check form-row">
+            <div class="form-group form-check row">
                 <div class="col-lg-4">
                     &nbsp;<input type="checkbox" class="form-check-input" id="exampleCheck1">
                 </div>
