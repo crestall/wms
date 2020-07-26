@@ -17,6 +17,8 @@ class OrdersController extends Controller
 
     public function index()
     {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'orders-index');
         parent::displayIndex(get_class());
     }
 
