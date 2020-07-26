@@ -149,6 +149,7 @@ return array(
             ),
 		),
         'inventory'   =>  array(
+            'inventory-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-warehouse-alt"></i>'
