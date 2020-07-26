@@ -27,6 +27,8 @@ class ReportsController extends Controller
 
     public function index()
     {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'reports-index');
         parent::displayIndex(get_class());
     }
 
