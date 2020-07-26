@@ -282,6 +282,7 @@ return array(
             )
         ),
 		'site-settings'		=> array(
+            'site-settings-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-cog"></i>'
