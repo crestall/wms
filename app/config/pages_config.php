@@ -36,6 +36,7 @@ $icons = array(
 return array(
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
+            'orders-index'  => true,
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-truck"></i>'
