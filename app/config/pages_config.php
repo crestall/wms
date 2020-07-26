@@ -262,6 +262,7 @@ return array(
             )
 		),
         'data-entry'    =>  array(
+            'data-entry-index'  => array(),
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-indent"></i>'
