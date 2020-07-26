@@ -99,6 +99,7 @@ return array(
             )
         ),
 		'clients'	=> array(
+            'clients-index' => true,
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-user-tie"></i>'
