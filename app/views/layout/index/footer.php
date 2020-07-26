@@ -5,15 +5,12 @@
         <script>
             //the actions for each page
             var actions = {
-                "default-icon":{
-                    init: function(){
+                init: function(){
 
-                    }
                 }
             }
             console.log('current page: '+config.curPage);
-            //run the script for the current page
-            actions[config.curPage].init();
+            actions.init();
         </script>
         <?php Database::closeConnection(); ?>
     </body>
