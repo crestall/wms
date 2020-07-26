@@ -117,7 +117,7 @@ class Config{
             {
                 //echo"<p>$sv</p>";
                 self::$config[$source][$key] = Encryption::decryptStringBase64($sv);
-                //echo"<p>$key :".self::$config[$source][$key]."</p>";
+                echo"<p>$key :".self::$config[$source][$key]."</p>";
                 return self::$config[$source][$key] ;
             }
         }
