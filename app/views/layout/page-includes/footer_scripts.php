@@ -50,9 +50,7 @@
         if(Session::getIsLoggedIn()):
             $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
             $user_role = str_replace(" ","_", $user_role);
-            echo strtoupper($user_role."_PAGES");
             $pages = Config::getPages(strtoupper($user_role."_PAGES"));
-            echo "<pre>",print_r($pages),"</pre>";
             Config::setJsConfig('allPages', $pages);
         else:
             Config::setJsConfig('allPages', '');
