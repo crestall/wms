@@ -16,6 +16,8 @@ class ProductsController extends Controller
 
     public function index()
     {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'products-index');
         parent::displayIndex(get_class());
     }
 
