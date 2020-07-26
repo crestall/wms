@@ -118,7 +118,8 @@ return array(
             ),
 		),
 		'products'	=> array(
-            'default-icon'  => array(
+            'products-index'    => true,
+            'default-icon'      => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-dolly"></i>'
             ),
@@ -126,7 +127,7 @@ return array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-box-open"></i>'
             ),
-			'add-product'    => array(
+			'add-product'      => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-hand-holding-box"></i>'
             ),
