@@ -16,6 +16,8 @@ class SiteSettingsController extends Controller
 
     public function index()
     {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'site-settings-index');
         parent::displayIndex(get_class());
     }
 
