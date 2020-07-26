@@ -16,6 +16,8 @@ class DataEntryController extends Controller
 
     public function index()
     {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'data-entry-index');
         parent::displayIndex(get_class());
     }
 
