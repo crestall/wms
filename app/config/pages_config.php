@@ -199,7 +199,8 @@ return array(
                 'icon'      => '<i class="fad fa-conveyor-belt"></i>'
             )
         ),
-		'reports'			=> array(
+		'reports'   => array(
+            'reports-index' => true,
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-chart-bar"></i>'
