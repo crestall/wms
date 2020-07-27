@@ -30,7 +30,7 @@
                             //itemsUpdater.updateValidation();
                         });
                     },
-                    'select-all': function(){ 
+                    'select-all': function(){
                         $('#select_all').click(function(e){
                             var checked = this.checked;
                              $('.select').each(function(e){
@@ -663,8 +663,10 @@
                         $('select#client_id').change(function(e){
                             if($(this).val() != "0")
                                 $('div#item_selector').show();
+                                $('button#submitter').prop("disabled", false);
                             else
                                 $('div#item_selector').hide();
+                                $('button#submitter').prop("disabled", true);
                         });
                         actions.common['add-item']();
                         actions['item-searcher'].init();
