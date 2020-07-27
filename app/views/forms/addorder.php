@@ -36,7 +36,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 </div>
             <?php endif;?>
 
-            <div id="item_selector" class="p-3 mb-2 rounded-top mid-grey">
+            <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey">
                 <div class="row mb-0">
                     <div class="col-md-4">
                         <h4>Line Items</h4>
@@ -48,7 +48,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                         <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
                     </div>
                 </div>
-                <div id="items_holder" class="row light-grey">
+                <div id="items_holder" class="row p-3 light-grey">
                     <?php if(is_array(Form::value('items'))):?>
                     <?php else:?>
                         <div class="row item_holder">
