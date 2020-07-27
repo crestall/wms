@@ -325,6 +325,7 @@ return array(
             )
 		),
         'downloads' => array(
+            'downloads-index'   => true,
             'super_admin_only'  => true,
             'default-icon'  => array(
                 'display'   => false,
