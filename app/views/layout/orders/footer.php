@@ -24,12 +24,7 @@
                             html += "</div>"; //col-sm-1
                             html += "<div class='col-sm-4'>";
                             html += "<p><input type='text' class='form-control item-searcher' name=items["+item_count+"][name]' placeholder='Item Name' /></p>";
-                            html += "</div>"; //col-sm-4
-                            html += "<div class='col-sm-4 qty-holder'>";
-                            //html += "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' disabled />";
-                            html += "</div>"; //col-sm-4
-                            html += "<div class='col-sm-3 qty-location'></div>";
-                            html += "<input type='hidden' name='items["+item_count+"][id]' class='item_id' />"
+                            html += "</div>"; //col-sm-lass='item_id' />"
                             html += "</div>"; //row
                             $('div#items_holder').append(html).find('input.item-searcher').focus();
 
@@ -38,7 +33,12 @@
                             //itemsUpdater.updateValidation();
                         });
                     },
-                    'select-all': function(){
+                    'select-all': function(){                                                         4
+                            html += "<div class='col-sm-4 qty-holder'>";
+                            //html += "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' disabled />";
+                            html += "</div>"; //col-sm-4
+                            html += "<div class='col-sm-3 qty-location'></div>";
+                            html += "<input type='hidden' name='items["+item_count+"][id]' c
                         $('#select_all').click(function(e){
                             var checked = this.checked;
                              $('.select').each(function(e){
@@ -609,7 +609,7 @@
                             {
                                 qty_html = "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' />";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
-                                inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
+                                //inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
                             }
                             $holder.find('div.qty-holder').html(qty_html).find('input').focus();
                             $holder.find('input.item_id').val(ui.item.item_id);
