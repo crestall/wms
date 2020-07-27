@@ -712,6 +712,7 @@
                             }
                         });
                         actions.common['add-item']();
+                        actions.common['remove-all-items']();
                         actions['item-searcher'].init();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
