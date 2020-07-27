@@ -19,10 +19,16 @@
                             var item_count = $(":input.item-searcher").length;
                             //console.log('items: '+item_count);
                             var html = "<div class='row item_holder'>"
-                            html += "<div class='col-sm-4'>";
+                            html += "<div class='col-md-1 delete-image-holder'>";
+                            html += "<a class='delete' title='remove this item' style='display:none;'><i class='fad fa-times-square text-danger'></i><span class="inst">Remove</span></a>";
+                            html += "</div>";
+                            html += "<div class='col-md-6'>";
                             html += "<p><input type='text' class='form-control item-searcher' name=items["+item_count+"][name]' placeholder='Item Name' /></p>";
-                            html += "</div>"; //col-sm-lass='item_id' />"
-                            html += "</div>"; //row
+                            html += "</div>";
+                            html += "<div class='col-md-2 qty-holder'>";
+                            html += "</div";
+                            html += "<div class='col-md-3 qty-location'></div>";
+                            html += "</div>";
                             $('div#items_holder').append(html).find('input.item-searcher').focus();
 
                             actions['item-searcher'].init();
