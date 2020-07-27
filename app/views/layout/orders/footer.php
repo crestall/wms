@@ -20,7 +20,7 @@
                             //console.log('items: '+item_count);
                             var html = "<div class='row item_holder'>"
                             html += "<div class='col-md-1 delete-image-holder'>";
-                            html += "<a class='delete' title='remove this item' style='display:none;'><i class='fad fa-times-square text-danger'></i><span class="inst">Remove</span></a>";
+                            html += "<a class='delete' title='remove this item' style='display:none;'><i class='fad fa-times-square text-danger'></i><span class='inst'>Remove</span></a>";
                             html += "</div>";
                             html += "<div class='col-md-6'>";
                             html += "<p><input type='text' class='form-control item-searcher' name=items["+item_count+"][name]' placeholder='Item Name' /></p>";
