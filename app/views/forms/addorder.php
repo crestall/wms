@@ -36,15 +36,20 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 </div>
             <?php endif;?>
 
-            <div id="item_selector" class="p-3 mb-2 rounded-top row mid-grey">
-                <div class="col-md-4">
-                    <h4>Line Items</h4>
+            <div id="item_selector" class="p-3 mb-2 rounded-top mid-grey">
+                <div class="row mb-0">
+                    <div class="col-md-4">
+                        <h4>Line Items</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <a id="add-item" style="cursor:pointer" title="Add Another Item"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                    </div>
+                    <div class="col-md-4">
+                        <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <a id="add-item" style="cursor:pointer" title="Add Another Item"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
-                </div>
-                <div class="col-md-4">
-                    <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
+                <div class="row light-grey">
+
                 </div>
             </div>
 
