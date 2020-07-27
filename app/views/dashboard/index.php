@@ -73,7 +73,7 @@ $c = 1;
                                 <?php foreach($orders as $o):
                                     $s = ($o['order_count'] > 1)? "s" : ""; ?>
                                     <div class="col-lg-3 col-md-4">
-                                        <div class="panel panel-<?php echo $panel_classes[$c % count($panel_classes)];?>">
+                                        <div class="panel panel-<?php echo $card_classes[$c % count($card_classes)];?>">
                                             <div class="panel-heading order-panel">
                                                 <h3 class="text-center"><?php echo $o['client_name'];?></h3>
                                             </div>
@@ -81,7 +81,7 @@ $c = 1;
                                                 <div class="row">
                                                     <div class="col-xs-8">
                                                         <div><span class="huge"><?php echo $o['order_count'];?></span> New Order<?php echo $s;?></div>
-                                                        <div><a class="btn btn-<?php echo $panel_classes[$c % count($panel_classes)];?>" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a></div>
+                                                        <div><a class="btn btn-<?php echo $card_classes[$c % count($card_classes)];?>" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a></div>
                                                     </div>
                                                     <div class="col-xs-4">
                                                         <i class="fas fa-truck fa-3x"></i>
