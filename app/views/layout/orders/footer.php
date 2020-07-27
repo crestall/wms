@@ -30,7 +30,7 @@
                             //itemsUpdater.updateValidation();
                         });
                     },
-                    'select-all': function(){                                                         4
+                    'select-all': function(){                                                         
                             html += "<div class='col-sm-4 qty-holder'>";
                             //html += "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' disabled />";
                             html += "</div>"; //col-sm-4
