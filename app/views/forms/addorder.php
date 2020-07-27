@@ -48,7 +48,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                         <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
                     </div>
                 </div>
-                <div class="row light-grey">
+                <div id="items_holder" class="row light-grey">
 
                 </div>
             </div>
