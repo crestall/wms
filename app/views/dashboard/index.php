@@ -10,11 +10,26 @@ $c = 1;
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container">
+        <?php if($user_role == "admin" || $user_role == "warehouse"):?>
+            <input type="hidden" id="admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
+            <input type="hidden" id="admin_to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
+            <?php if(count($orders)):?>
+                <div class="col-md-12 text-center">
+                    <h2>Latest Unfulfilled Order Counts</h2>
+                </div>
+            <?php else:?>
+
+            <?php endif;?>
+        <?php endif;?>
+
+
+
+
     <?php //echo $user_role;?>
     <?php if($user_role == "admin" || $user_role == "warehouse"):?>
-        <input type="hidden" id="admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
-        <input type="hidden" id="admin_to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
+
         <?php //echo "<pre>",print_r($orders),"</pre>";die();?>
+
         <div class="row">
             <!-- unfulfilled orders -->
             <div class="col-md-12">
