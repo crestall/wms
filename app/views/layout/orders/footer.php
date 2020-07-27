@@ -30,7 +30,7 @@
                             //itemsUpdater.updateValidation();
                         });
                     },
-                    'select-all': function(){                                                         
+                    'select-all': function(){
                             html += "<div class='col-sm-4 qty-holder'>";
                             //html += "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' disabled />";
                             html += "</div>"; //col-sm-4
@@ -611,6 +611,7 @@
                             $holder.find('div.qty-holder').html(qty_html).find('input').focus();
                             $holder.find('input.item_id').val(ui.item.item_id);
                             $holder.find('div.qty-location').html(inst);
+                            $holder.find('div.delete-image-holder a').fadeIn();
                             itemsUpdater.itemDelete();
                             itemsUpdater.updateValidation();
                             $holder.find('input.item_qty').focus();
