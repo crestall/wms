@@ -30,12 +30,7 @@
                             //itemsUpdater.updateValidation();
                         });
                     },
-                    'select-all': function(){
-                            html += "<div class='col-sm-4 qty-holder'>";
-                            //html += "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' disabled />";
-                            html += "</div>"; //col-sm-4
-                            html += "<div class='col-sm-3 qty-location'></div>";
-                            html += "<input type='hidden' name='items["+item_count+"][id]' c
+                    'select-all': function(){ 
                         $('#select_all').click(function(e){
                             var checked = this.checked;
                              $('.select').each(function(e){
