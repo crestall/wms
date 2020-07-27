@@ -642,7 +642,7 @@
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
                                 //inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
                             }
-                            $holder.find('div.qty-holder').html(qty_html).find('input').focus();
+                            $holder.find('div.qty-holder').html("<p>Hello</p>").find('input').focus();
                             $holder.find('input.item_id').val(ui.item.item_id);
                             $holder.find('div.qty-location').html(inst);
                             $holder.find('div.delete-image-holder a').fadeIn();
