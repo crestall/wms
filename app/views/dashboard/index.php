@@ -29,11 +29,10 @@ $c = 1;
                             	<i class="fas fa-truck fa-3x fa-flip-horizontal"></i>&nbsp;<?php echo $o['order_count'];?> New Order<?php echo $s;?>
                             </div>
                             <div class="card-footer text-right">
-                                <a class="btn btn-outline-<?php echo $card_classes[$c % count($card_classes)];?>" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
-                            	<a class="btn btn-outline-warning">Manage Orders</a>
+                                <a class="btn btn-lg btn-outline-<?php echo $card_classes[$c % count($card_classes)];?>" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
                             </div>
                         </div>
-                    <?php endforeach;?>
+                    <?php ++$c; endforeach;?>
                 </div>
             <?php else:?>
                 <div class="col-md-12">
