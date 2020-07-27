@@ -138,16 +138,8 @@ nav.fixed-top.scrolled {
     transition:all 600ms linear;
 }
 
-nav.fixed-top.scrolled a.nav-link {
-    color:#333;
-}
-
 nav.fixed-top.scrolled a.nav-link:hover {
     color:#4382c1;
-}
-
-nav.fixed-top.scrolled .active>.nav-link {
-    color:#000;
 }
 
 /*****
