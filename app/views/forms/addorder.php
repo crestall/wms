@@ -41,10 +41,10 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <h4>Line Items</h4>
                 </div>
                 <div class="col-md-4">
-                    <h4>Add another<a id="remove-all-items"><i class="fad fa-plus-square"></i></a></h4>
+                    <a id="add-item" style="cursor:pointer" title="Add Another Item"><h4>Add another <i class="fad fa-plus-square"></i></a></h4>
                 </div>
                 <div class="col-md-4">
-                    <h4>Remove all<a id="remove-all-items"><i class="fad fa-times-square"></i></a></h4>
+                    <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4>Remove all <i class="fad fa-times-square"></i></a></h4>
                 </div>
             </div>
 
