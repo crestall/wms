@@ -1,6 +1,7 @@
 <?php
-$panel_classes = array(
+$card_classes = array(
     'primary',
+    'secondary',
     'info',
     'success',
     'warning',
@@ -17,8 +18,30 @@ $c = 1;
                 <div class="col-md-12 text-center">
                     <h2>Latest Unfulfilled Order Counts</h2>
                 </div>
+                <div class="card-deck">
+                    <?php foreach($orders as $o):
+                        $s = ($o['order_count'] > 1)? "s" : ""; ?>
+                        <div class="card bg-<?php echo $card_classes[$c % count($card_classes)];?>">
+                            <div class="card-header">
+                                <h4><?php echo $o['client_name'];?></h4>
+                            </div>
+                            <div class="card-body">
+                            	<i class="fas fa-truck fa-3x fa-flip-horizontal"></i>&nbsp;<?php echo $o['order_count'];?> New Order<?php echo $s;?>
+                            </div>
+                            <div class="card-footer text-right">
+                                <a class="btn btn-outline-<?php echo $card_classes[$c % count($card_classes)];?>" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
+                            	<a class="btn btn-outline-warning">Manage Orders</a>
+                            </div>
+                        </div>
+                    <?php endforeach;?>
+                </div>
             <?php else:?>
-
+                <div class="col-md-12">
+                    <div class="errorbox">
+                        <h2><i class="fas fa-exclamation-triangle"></i> No Orders Listed</h2>
+                        <p>There are no unfulfilled orders listed in the system</p>
+                    </div>
+                </div>
             <?php endif;?>
         <?php endif;?>
 
