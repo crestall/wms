@@ -45,7 +45,8 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
 
             <div id="item_selector" class="card bg-light mb-3">
                 <div class="card-header">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Line Items</label>
+                    Line Items
+                </div>
                     <div class="col-md-9" id="items_holder">
                         <?php if(is_array(Form::value('items'))):?>
                             <?php foreach(Form::value('items') as $i => $item):
