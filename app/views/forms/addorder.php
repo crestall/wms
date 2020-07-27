@@ -35,9 +35,9 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     </div>
                 </div>
             <?php endif;?>
-            <div id="item_selector" class="card col-12">
+            <div id="item_selector" class="card bg-light mb-3">
                 <div class="card-header">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Line Items</label>    
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Line Items</label>
                 </div>
             </div>
             <div class="form-group form-row">
