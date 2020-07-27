@@ -52,11 +52,6 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php if(is_array(Form::value('items'))):?>
                     <?php else:?>
                         <div class="row item_holder">
-                            <div class="col-sm-1 add-image-holder">
-                                <a class="add" style="cursor:pointer" title="Add Another Item">
-                                    <i class="fas fa-plus-circle fa-2x text-success"></i>
-                                </a>
-                            </div>
                             <div class="col-sm-6">
                                 <p><input type="text" class="form-control item-searcher" name="items[0][name]" placeholder="Item Name" /></p>
                             </div>
