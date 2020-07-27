@@ -55,7 +55,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                         <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
                     </div>
                 </div>
-                <div id="items_holder" class="row p-3 light-grey">
+                <div id="items_holder" class="p-3 light-grey">
                     <?php if(is_array(Form::value('items'))):?>
                     <?php else:?>
                         <div class="row item_holder">
