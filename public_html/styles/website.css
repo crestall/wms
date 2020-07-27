@@ -67,6 +67,7 @@ website colours
 
 .light-grey{
     background-color: #f8f9fa;
+    border: 1px solid rgba(0,0,0,.125);
 }
 
 /*****
