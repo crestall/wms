@@ -35,7 +35,7 @@
                                     html += "<p><input type='text' class='form-control item-searcher' name='items["+item_count+"][name]' placeholder='Item Name' /></p>";
                                     html += "</div>";
                                     html += "<div class='col-md-2 qty-holder'>";
-                                    html += "</div";
+                                    html += "</div>";
                                     html += "<div class='col-md-3 qty-location'></div>";
                                     html += "<input type='hidden' name='items["+item_count+"][id]' class='item_id'  />";
                                     html += "</div>";
@@ -60,7 +60,7 @@
                             html += "<p><input type='text' class='form-control item-searcher' name=items["+item_count+"][name]' placeholder='Item Name' /></p>";
                             html += "</div>";
                             html += "<div class='col-md-2 qty-holder'>";
-                            html += "</div";
+                            html += "</div>";
                             html += "<div class='col-md-3 qty-location'></div>";
                             html += "<input type='hidden' name='items["+item_count+"][id]' class='item_id'  />";
                             html += "</div>";
