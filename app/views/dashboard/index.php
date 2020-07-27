@@ -8,7 +8,8 @@ $panel_classes = array(
 );
 $c = 1;
 ?>
-<div class="container">
+<div id="page-wrapper">
+    <div id="page_container" class="container">
     <?php //echo $user_role;?>
     <?php if($user_role == "admin" || $user_role == "warehouse"):?>
         <input type="hidden" id="admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
@@ -196,4 +197,5 @@ $c = 1;
             </div>
         </div>
     <?php endif;?>
+    </DIV>
 </div>
