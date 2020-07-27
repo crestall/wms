@@ -662,11 +662,15 @@
                         actions.common.init();
                         $('select#client_id').change(function(e){
                             if($(this).val() != "0")
+                            {
                                 $('div#item_selector').show();
                                 $('button#submitter').prop("disabled", false);
+                            }
                             else
+                            {
                                 $('div#item_selector').hide();
                                 $('button#submitter').prop("disabled", true);
+                            }
                         });
                         actions.common['add-item']();
                         actions['item-searcher'].init();
