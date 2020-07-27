@@ -646,7 +646,7 @@
                             }
                             $holder.find('div.qty-holder').html(qty_html).find('input').focus();
                             $holder.find('input.item_id').val(ui.item.item_id);
-                            $holder.find('div.qty-location').html("<p>Hello</p>");
+                            $holder.find('div.qty-location').html(inst);
                             $holder.find('div.delete-image-holder a').fadeIn();
                             itemsUpdater.itemDelete();
                             itemsUpdater.updateValidation();
