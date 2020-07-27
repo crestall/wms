@@ -341,6 +341,7 @@ return array(
             )
         ),
         'admin-only'    => array(
+            'admin-only-index'  => true,
             'super_admin_only'  => true,
             'default-icon'  => array(
                 'display'   => false,
