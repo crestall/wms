@@ -95,7 +95,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                                         <i class="fas fa-plus-circle fa-2x text-success"></i>
                                     </a>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <p><input type="text" class="form-control item-searcher" name="items[0][name]" placeholder="Item Name" /></p>
                                 </div>
                                 <div class="col-sm-4 qty-holder">
