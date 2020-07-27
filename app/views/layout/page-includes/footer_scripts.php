@@ -58,20 +58,8 @@
         //Assign courier ids to javascript
         Config::setJsConfig('eParcelId', $this->controller->courier->eParcelId);
         Config::setJsConfig('eParcelExpressId', $this->controller->courier->eParcelExpressId);
-        Config::setJsConfig('huntersId', $this->controller->courier->huntersId);
-        Config::setJsConfig('huntersPluId', $this->controller->courier->huntersPluId);
-        Config::setJsConfig('huntersPalId', $this->controller->courier->huntersPalId);
-        Config::setJsConfig('threePlTruckId', $this->controller->courier->threePlTruckId);
         Config::setJsConfig('localId', $this->controller->courier->localId);
-        Config::setJsConfig('vicLocalId', $this->controller->courier->vicLocalId);
         Config::setJsConfig('directFreightId', $this->controller->courier->directFreightId);
-        Config::setJsConfig('cometLocalId', $this->controller->courier->cometLocalId);
-        Config::setJsConfig('sydneyCometId', $this->controller->courier->sydneyCometId);
-        //assign solar ids to javascript
-        Config::setJsConfig('TLJSolarId', $this->controller->solarordertype->TLJSolarId);
-        Config::setJsConfig('OriginId', $this->controller->solarordertype->OriginId);
-        Config::setJsConfig('SolargainId', $this->controller->solarordertype->SolargainId);
-        Config::setJsConfig('BeyondId', $this->controller->solarordertype->BeyondId);
         ?>
         <!-- Assign all configuration variables -->
         <script>config = <?php echo json_encode(Config::getJsConfig()); ?>;</script>
