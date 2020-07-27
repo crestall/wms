@@ -60,7 +60,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php else:?>
                         <div class="row item_holder">
                             <div class='col-md-1 delete-image-holder'>
-                                <a class='delete' title='remove this item' style="display:none;><i class='fad fa-times-square text-danger'"></i></a>
+                                <a class='delete' title='remove this item' style="display:none;"><i class='fad fa-times-square text-danger'></i></a>
                             </div>
                             <div class="col-md-6">
                                 <p><input type="text" class="form-control item-searcher" name="items[0][name]" placeholder="Item Name" /></p>
