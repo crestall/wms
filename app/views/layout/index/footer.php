@@ -9,7 +9,7 @@
 
                 }
             }
-            console.log('current page: '+config.curPage);
+            //console.log('current page: '+config.curPage);
             actions.init();
         </script>
         <?php Database::closeConnection(); ?>
