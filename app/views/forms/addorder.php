@@ -36,7 +36,17 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 </div>
             <?php endif;?>
 
-
+            <div id="item_selector" class="p-3 mb-2 bg-secondary text-white row">
+                <div class="col-md-4">
+                    <h4>Line Items</h4>
+                </div>
+                <div class="col-md-4">
+                    Add another<a id="remove-all-items"><i class="fad fa-plus-square"></i></a>
+                </div>
+                <div class="col-md-4">
+                    Remove all<a id="remove-all-items"><i class="fad fa-times-square"></i></a>
+                </div>
+            </div>
 
 
 
