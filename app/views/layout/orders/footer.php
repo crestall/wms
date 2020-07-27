@@ -19,9 +19,6 @@
                             var item_count = $(":input.item-searcher").length;
                             //console.log('items: '+item_count);
                             var html = "<div class='row item_holder'>"
-                            html += "<div class='col-sm-1 delete-image-holder'>";
-                            html += "<a class='delete' title='remove this item'><i class='fas fa-times-circle fa-2x text-danger'></i></a>";
-                            html += "</div>"; //col-sm-1
                             html += "<div class='col-sm-4'>";
                             html += "<p><input type='text' class='form-control item-searcher' name=items["+item_count+"][name]' placeholder='Item Name' /></p>";
                             html += "</div>"; //col-sm-lass='item_id' />"

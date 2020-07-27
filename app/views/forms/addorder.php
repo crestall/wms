@@ -59,6 +59,9 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php if(is_array(Form::value('items'))):?>
                     <?php else:?>
                         <div class="row item_holder">
+                            <div class='col-md-1 delete-image-holder'>
+                                <a class='delete' title='remove this item'><i class='fad fa-times-square text-danger' style="display:none;"></i></a>
+                            </div>
                             <div class="col-md-6">
                                 <p><input type="text" class="form-control item-searcher" name="items[0][name]" placeholder="Item Name" /></p>
                             </div>
