@@ -116,14 +116,19 @@ Home page cards
 
 .homepagecard .card-header,
 .homepagecard .card-body {
-    color: #030c57;
+    color: #052f95;
+}
+
+.homepagecard .card-header{
+    background-color: rgba(3,12,87,0.08);
+    border-bottom: 1px solid rgba(3,12,87,.35);
 }
 
 @media screen and (min-width: 576px) {
     .homepagecard {
-            flex: 48% !important;
-            max-width: 48% !important;
-        }
+        flex: 48% !important;
+        max-width: 48% !important;
+    }
 
     .homepagedeck {
         flex-wrap: wrap;
