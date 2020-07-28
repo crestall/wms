@@ -114,6 +114,11 @@ Home page cards
     border: thin solid #031760;
 }
 
+.homepagecard .card-header,
+.homepagecard .card-body {
+    color: #031760;
+}
+
 @media screen and (min-width: 576px) {
     .homepagecard {
             flex: 48% !important;
