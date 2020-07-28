@@ -101,6 +101,46 @@ a.index-link:hover div.index-card
 }
 
 /*****
+Home page cards
+******/
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.card{
+    margin: 5px 1%;
+}
+
+@media screen and (min-width: 576px) {
+    .card {
+            flex: 48% !important;
+            max-width: 48% !important;
+        }
+
+        .card-deck {
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+}
+
+@media screen and (min-width: 768px) {
+    .card {
+        flex: 25% !important;
+        max-width: 25% !important;
+        }
+
+}
+
+@media screen and (min-width: 960px) {
+    .card {
+        flex: 25% !important;
+        max-width: 23% !important;
+    }
+}
+
+/*****
 User Info
 *****/
 ul.user-info{
