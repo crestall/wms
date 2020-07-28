@@ -46,61 +46,11 @@ $c = 1;
                     </div>
                 </div>
             <?php endif;?>
+            <div class="col-md-12 text-center">
+                <h2>Client Activity Last 3 Months</h2>
+            </div>
         <?php endif;?>
 
-
-
-
-    <?php //echo $user_role;?>
-    <?php if($user_role == "admin" || $user_role == "warehouse"):?>
-
-        <?php //echo "<pre>",print_r($orders),"</pre>";die();?>
-
-        <div class="row">
-            <!-- unfulfilled orders -->
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-10 text-center">
-                                <h2>Latest Unfulfilled Order Counts</h2>
-                            </div>
-                            <div class="col-xs-2 text-right">
-                                 <a id="toggle_orders" data-toggle="collapse" href="#new_orders"><span class="fa arrow huge"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="collapse in" id="new_orders">
-                            <div class="row">
-                                <?php foreach($orders as $o):
-                                    $s = ($o['order_count'] > 1)? "s" : ""; ?>
-                                    <div class="col-lg-3 col-md-4">
-                                        <div class="panel panel-<?php echo $card_classes[$c % count($card_classes)];?>">
-                                            <div class="panel-heading order-panel">
-                                                <h3 class="text-center"><?php echo $o['client_name'];?></h3>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <div class="row">
-                                                    <div class="col-xs-8">
-                                                        <div><span class="huge"><?php echo $o['order_count'];?></span> New Order<?php echo $s;?></div>
-                                                        <div><a class="btn btn-<?php echo $card_classes[$c % count($card_classes)];?>" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a></div>
-                                                    </div>
-                                                    <div class="col-xs-4">
-                                                        <i class="fas fa-truck fa-3x"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php ++$c;?>
-                                <?php endforeach;?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- unfulfilled orders -->
         </div><!-- end 1st row -->
         <div class="row">
             <div class="col-md-12">
