@@ -49,144 +49,27 @@ $c = 1;
             <div class="col-md-12 text-center">
                 <h2>Client Activity Last 3 Months</h2>
             </div>
-        <?php endif;?>
-
-        </div><!-- end 1st row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-10 text-center">
-                                <h2>Client Activity Last 3 Months</h2>
-                            </div>
-                            <div class="col-xs-2 text-right">
-                                 <a id="toggle_orders" data-toggle="collapse" href="#client_activity"><span class="fa arrow huge"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="collapse in" id="client_activity">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div id="error_activity_chart"></div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div id="order_activity_chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <?php elseif($user_role == "client"):?>
+            <div class="col-md-12 text-center">
+                <h2>Client User</h2>
             </div>
-        </div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">
-            <div class="col-lg-12">
-                    <h2>This is down low</h2>
-            </div>
-        </div>
-    <?php elseif($user_role == "client"):?>
-        <input type="hidden" id="client_id" value="<?php echo $client_id; ?>" />
-        <input type="hidden" id="from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
-        <input type="hidden" id="to_value" value="<?php echo strtotime('last saturday', strtotime('tomorrow'));?>" />
-        <div class="bs-callout bs-callout-primary row bs-callout-more">
+        <?php else:?>
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Quick Links</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <p><a class="btn btn-primary btn-lg" href="/orders/add-order"><i class="fa fas fa-truck fa-fw"></i> Add an Order</a></p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <p><a class="btn btn-primary btn-lg" href="/orders/client-orders"><i class="fa fas fa-truck fa-fw"></i> View Orders</a></p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <p><a class="btn btn-success btn-lg" href="/inventory/client-inventory"><i class="fa fas fa-tasks fa-fw"></i> View Inventory</a></p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <p><a class="btn btn-info btn-lg" href="/reports/dispatch-report"><i class="fa fas fa-chart-bar fa-fw"></i> Dispatch Report</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div id="orders_chart"></div>
-            </div>
-            <div class="col-lg-6">
-                <div id="products_chart"></div>
-            </div>
-        </div>
-    <?php else:?>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="errorbox">
-                    <div class="row">
-                        <div class="col-lg-2" style="font-size:96px">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="col-lg-6">
-                            <h2>User Classification Error</h2>
-                            <p>Sorry, there has been an error determining your access priviledges</p>
-                            <p><a href="/login/logout">Please click here to login again</a></p>
+                    <div class="errorbox">
+                        <div class="row">
+                            <div class="col-lg-2" style="font-size:96px">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="col-lg-6">
+                                <h2>User Classification Error</h2>
+                                <p>Sorry, there has been an error determining your access priviledges</p>
+                                <p><a href="/login/logout">Please click here to login again</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <?php endif;?>
-    </DIV>
+        <?php endif;?>
+    </div>
 </div>
