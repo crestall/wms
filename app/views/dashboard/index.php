@@ -23,10 +23,10 @@ $c = 1;
                             $s = ($o['order_count'] > 1)? "s" : ""; ?>
                             <!--div class="col-sm-6 col-md-4 col-lg-3 mb-3"-->
                                 <div class="card homepagecard"">
-                                    <div class="card-header text-<?php echo $card_classes[$c % count($card_classes)];?>">
+                                    <div class="card-header">
                                         <h4><?php echo $o['client_name'];?></h4>
                                     </div>
-                                    <div class="card-body text-<?php echo $card_classes[$c % count($card_classes)];?> ">
+                                    <div class="card-body">
                                     	<i class="fas fa-truck fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
                                     </div>
                                     <div class="card-footer text-right">
