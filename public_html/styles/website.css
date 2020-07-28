@@ -110,7 +110,7 @@ Home page cards
 }
 
 .card{
-    margin: 5px 1%;
+    margin: 5px 1% !important;
 }
 
 @media screen and (min-width: 576px) {
@@ -127,8 +127,8 @@ Home page cards
 
 @media screen and (min-width: 768px) {
     .card {
-        flex: 25% !important;
-        max-width: 25% !important;
+        flex: 33% !important;
+        max-width: 31% !important;
         }
 
 }
