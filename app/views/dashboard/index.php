@@ -22,10 +22,10 @@ $c = 1;
                     <?php foreach($orders as $o):
                         $s = ($o['order_count'] > 1)? "s" : ""; ?>
                         <div class="card border-<?php echo $card_classes[$c % count($card_classes)];?>">
-                            <div class="card-header">
+                            <div class="card-header text-<?php echo $card_classes[$c % count($card_classes)];?>">
                                 <h4><?php echo $o['client_name'];?></h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body text-<?php echo $card_classes[$c % count($card_classes)];?>">
                             	<i class="fas fa-truck fa-3x fa-flip-horizontal"></i>&nbsp;<?php echo $o['order_count'];?> New Order<?php echo $s;?>
                             </div>
                             <div class="card-footer text-right">
