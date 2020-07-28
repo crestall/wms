@@ -470,25 +470,6 @@ Responsive Tables
     }
 
 }
-/********
-Select Styles
-*******
-.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn)
-{
-    width:150px;
-    margin: 0 0 5px 5px;
-}*/
-/********
-current orders flip angle
-*******  */
-a#toggle_orders .fa.arrow:before {
-    content: "\f106";
-}
-
-a#toggle_orders.hiding .fa.arrow:before {
-    content: "\f107";
-}
-
 
 /********
 user profile image
@@ -515,7 +496,6 @@ highlighting sections
 /********
 bootsrap adjustments
 *******  */
-
     /** Checkboxes  */
     div.custom-control-right {
         padding-right: 24px;
@@ -529,13 +509,39 @@ bootsrap adjustments
         left: initial;
     }
 
-/******
-bootstrap select adjustments
-******
-.btn dropdown-toggle btn-default{
-    border: 1px solid red;
-}
-*/
+    /** FSG button type - outline only */
+    .btn-outline-fsg {
+        color: #030c57;
+        border-color: #030c57;
+    }
+
+    .btn-outline-fsg:hover {
+        color: #fff;
+        background-color: #030c57;
+        border-color: #030c57;
+    }
+
+    .btn-outline-fsg:focus, .btn-outline-fsg.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-fsg.disabled, .btn-outline-fsg:disabled {
+        color: #030c57;
+        background-color: transparent;
+    }
+
+    .btn-outline-fsg:not(:disabled):not(.disabled):active, .btn-outline-fsg:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-fsg.dropdown-toggle {
+        color: #fff;
+        background-color: #030c57;
+        border-color: #030c57;
+    }
+
+    .btn-outline-fsg:not(:disabled):not(.disabled):active:focus, .btn-outline-fsg:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-fsg.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
 /********
 Responsive adjustments
 *******  */
