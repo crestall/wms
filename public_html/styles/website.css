@@ -103,30 +103,30 @@ a.index-link:hover div.index-card
 /*****
 Home page cards
 ******/
-.card-deck {
+.homepagedeck {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
 }
 
-.card{
+.homepagecard{
     margin: 5px 1% !important;
 }
 
 @media screen and (min-width: 576px) {
-    .card {
+    .homepagecard {
             flex: 48% !important;
             max-width: 48% !important;
         }
 
-        .card-deck {
-            flex-wrap: wrap;
-            flex-direction: row;
-        }
+    .homepagedeck {
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
 }
 
 @media screen and (min-width: 768px) {
-    .card {
+    .homepagecard {
         flex: 33% !important;
         max-width: 31% !important;
         }
@@ -134,7 +134,7 @@ Home page cards
 }
 
 @media screen and (min-width: 960px) {
-    .card {
+    .homepagecard {
         flex: 25% !important;
         max-width: 23% !important;
     }
