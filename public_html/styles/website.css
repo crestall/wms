@@ -111,12 +111,12 @@ Home page cards
 
 .homepagecard{
     margin: 5px 1% !important;
-    border: thin solid #031760;
+    border: thin solid #0229a8;
 }
 
 .homepagecard .card-header,
 .homepagecard .card-body {
-    color: #031760;
+    color: #0229a8;
 }
 
 @media screen and (min-width: 576px) {
