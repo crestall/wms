@@ -18,7 +18,6 @@ $c = 1;
                 <div class="col-md-12 text-center">
                     <h2>Latest Unfulfilled Order Counts</h2>
                 </div>
-                <div class="row">
                     <div class="card-deck">
                         <?php foreach($orders as $o):
                             $s = ($o['order_count'] > 1)? "s" : ""; ?>
@@ -38,7 +37,6 @@ $c = 1;
 
                         <?php ++$c; endforeach;?>
                     </div>
-                </div>
 
             <?php else:?>
                 <div class="col-md-12">
