@@ -25,8 +25,8 @@ $c = 1;
                             <div class="card-header text-<?php echo $card_classes[$c % count($card_classes)];?>">
                                 <h4><?php echo $o['client_name'];?></h4>
                             </div>
-                            <div class="card-body text-<?php echo $card_classes[$c % count($card_classes)];?>">
-                            	<i class="fas fa-truck fa-3x fa-flip-horizontal"></i>&nbsp;<?php echo $o['order_count'];?> New Order<?php echo $s;?>
+                            <div class="card-body text-<?php echo $card_classes[$c % count($card_classes)];?> ">
+                            	<i class="fas fa-truck fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
                             </div>
                             <div class="card-footer text-right">
                                 <a class="btn btn-lg btn-outline-<?php echo $card_classes[$c % count($card_classes)];?>" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
