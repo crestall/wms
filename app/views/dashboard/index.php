@@ -18,11 +18,11 @@ $c = 1;
                 <div class="col-md-12 text-center">
                     <h2>Latest Unfulfilled Order Counts</h2>
                 </div>
-                    <div class="card-group">
+                    <div class="card-deck">
                         <?php foreach($orders as $o):
                             $s = ($o['order_count'] > 1)? "s" : ""; ?>
                             <!--div class="col-sm-6 col-md-4 col-lg-3 mb-3"-->
-                                <div class="card border-<?php echo $card_classes[$c % count($card_classes)];?> m-3">
+                                <div class="card border-<?php echo $card_classes[$c % count($card_classes)];?>">
                                     <div class="card-header text-<?php echo $card_classes[$c % count($card_classes)];?>">
                                         <h4><?php echo $o['client_name'];?></h4>
                                     </div>
