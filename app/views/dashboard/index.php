@@ -21,7 +21,7 @@ $c = 1;
                 <div class="card-deck">
                     <?php foreach($orders as $o):
                         $s = ($o['order_count'] > 1)? "s" : ""; ?>
-                        <div class="card border-<?php echo $card_classes[$c % count($card_classes)];?>">
+                        <div class="card border-<?php echo $card_classes[$c % count($card_classes)];?>"  style="max-width: 20rem;">
                             <div class="card-header text-<?php echo $card_classes[$c % count($card_classes)];?>">
                                 <h4><?php echo $o['client_name'];?></h4>
                             </div>
