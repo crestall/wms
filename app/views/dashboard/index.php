@@ -18,22 +18,28 @@ $c = 1;
                 <div class="col-md-12 text-center">
                     <h2>Latest Unfulfilled Order Counts</h2>
                 </div>
-                <div class="card-deck">
-                    <?php foreach($orders as $o):
-                        $s = ($o['order_count'] > 1)? "s" : ""; ?>
-                        <div class="card border-<?php echo $card_classes[$c % count($card_classes)];?>"  style="min-width: 50%;">
-                            <div class="card-header text-<?php echo $card_classes[$c % count($card_classes)];?>">
-                                <h4><?php echo $o['client_name'];?></h4>
+                <div class="row">
+                    <div class="card-deck">
+                        <?php foreach($orders as $o):
+                            $s = ($o['order_count'] > 1)? "s" : ""; ?>
+                            <div class="col-md-6">
+                                <div class="card border-<?php echo $card_classes[$c % count($card_classes)];?>">
+                                    <div class="card-header text-<?php echo $card_classes[$c % count($card_classes)];?>">
+                                        <h4><?php echo $o['client_name'];?></h4>
+                                    </div>
+                                    <div class="card-body text-<?php echo $card_classes[$c % count($card_classes)];?> ">
+                                    	<i class="fas fa-truck fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
+                                    </div>
+                                    <div class="card-footer text-right">
+                                        <a class="btn btn-lg btn-outline-<?php echo $card_classes[$c % count($card_classes)];?>" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body text-<?php echo $card_classes[$c % count($card_classes)];?> ">
-                            	<i class="fas fa-truck fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
-                            </div>
-                            <div class="card-footer text-right">
-                                <a class="btn btn-lg btn-outline-<?php echo $card_classes[$c % count($card_classes)];?>" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
-                            </div>
-                        </div>
-                    <?php ++$c; endforeach;?>
+
+                        <?php ++$c; endforeach;?>
+                    </div>
                 </div>
+
             <?php else:?>
                 <div class="col-md-12">
                     <div class="errorbox">
