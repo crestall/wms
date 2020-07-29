@@ -70,7 +70,33 @@ var scroller = {
             $('img.custom-logo-transparent').show();
             $('img.custom-logo').hide();
         }
+    },
+    cardsInView: function(){
+        var viewportTop = $(window).scrollTop();
+        var viewportBottom = viewportTop + $(window).height();
+        var $cardContainer = $("div.homepagedeck");
+        var top = Math.round( $cardContainer.offset().top );
+        var bottom = top + $cardContainer.height();
+        if( (top < viewportBottom) && (bottom > viewportTop) )
+        {
+            $cardContainer.addClass('in-view');
+        }
+        else
+        {
+            $cardContainer.removeClass('in-view');
+        }
     }
+}
+
+/************
+Homepage card fadeins
+*************/
+function(){
+    scroller.cardsInView();
+    $(window).scroll(function () {
+        //console.log('scrolling');
+        scroller.cardsInView();
+	});
 }
 
 /************
