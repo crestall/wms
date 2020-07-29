@@ -78,18 +78,9 @@ var scroller = {
         var $cardContainer = $("div.homepagedeck");
         var top = Math.round( $cardContainer.offset().top );
         var bottom = top + $cardContainer.height();
-        if( (top < viewportBottom) && (bottom > viewportTop) )
-        {
-            $cardContainer.find('div.homepagecard').each(function(){
-                $(this).addClass('in-view');
-            });
-        }
-        else
-        {
-            $cardContainer.find('div.homepagecard').each(function(){
-                $(this).removeClass('in-view');
-            })
-        }
+        $cardContainer.find('div.homepagecard').each(function(){
+            $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
+        });
     }
 }
 
