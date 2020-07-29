@@ -68,7 +68,7 @@
                                 			},
                                 			height: 450,
                                 			series: {
-                                				0:{type: "bars", targetAxisIndex:0} ,
+                                				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                                 1:{type: "line", targetAxisIndex:0}
                                 			},
                                             title: "Weekly Orders: Totals/Averages Last Three Months",
