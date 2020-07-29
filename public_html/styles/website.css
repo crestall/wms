@@ -123,7 +123,7 @@ Home page cards
     position:relative;
     top:0;
     left:0;
-    transition:all 600ms linear;
+    transition:position 600ms linear, opacity 1000ms linear;
 }
 
 .homepagecard .card-header,
