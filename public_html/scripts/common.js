@@ -97,7 +97,7 @@ Homepage card fadeins
         //console.log('scrolling');
         scroller.cardsInView();
 	});
-}
+});
 
 /************
 * File Uploading
