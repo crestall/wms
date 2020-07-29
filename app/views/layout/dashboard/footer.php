@@ -159,6 +159,11 @@
                                         chart.draw(data[current], options[current]);
                                     }
                                     drawChart();
+                                    button.onclick = function() {
+                                        current = 1 - current;
+                                        drawChart();
+                                    }
+
                                     //redraw chart when window resize is completed
                                     $(window).on('resizeEnd', function() {
                                         drawChart();
