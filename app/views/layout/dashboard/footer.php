@@ -31,6 +31,11 @@
                             		if(num_orders > 0)
                             		{
                                 		var options = {
+                                		    animation:{
+                                		        "startup":true,
+                                                duration: 1000,
+                                                easing: 'out',
+                                            },
                                 			hAxis: {
                                 				title: 'Week Beginning',
                                 				showTextEvery: 1,
