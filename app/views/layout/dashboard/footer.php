@@ -57,7 +57,6 @@
                                 {
                                     //var jData =  $.parseJSON(jsonData);
                             		data[1] = google.visualization.arrayToDataTable(jsonData);
-
                                 }
                             });
 
