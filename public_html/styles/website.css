@@ -114,8 +114,8 @@ Home page cards
     border: thin solid #030c57;
     opacity: 0.1;
     position:absolute;
-    top:0;
-    left:-1000;
+    top:-1000px;
+    left:-1000px;
 }
 
 .homepagecard.in-view{
