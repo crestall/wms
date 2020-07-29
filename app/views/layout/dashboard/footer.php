@@ -31,6 +31,9 @@
 
                         function drawAdminCharts()
                         {
+                            var data = [];
+                            var options = [];
+                            var num_orders = 0;
                             $.ajax({
                     			url: "/ajaxfunctions/getAdminWeeklyClientActivity",
                     			dataType:"json",
@@ -39,160 +42,125 @@
                                 success: function(jsonData)
                                 {
                                     //var jData =  $.parseJSON(jsonData);
-                            		var data = google.visualization.arrayToDataTable(jsonData);
-                                    var num_orders = jsonData.length - 1;
-                            		if(num_orders > 0)
-                            		{
-                                		var options = {
-                                		    animation:{
-                                		        "startup":true,
-                                                duration: 1000,
-                                                easing: 'out',
-                                            },
-                                			hAxis: {
-                                				title: 'Week Beginning',
-                                				showTextEvery: 1,
-                                				slantedText:true,
-                                				slantedTextAngle:-45
-                                			},
-                                			vAxes: {
-                                				0: {
-                                					title: 'Order Count',
-                                					viewWindow: {
-                                						min: 0
-                                					}
-                                				}
-                                			},
-                                			legend: {
-                                				position: 'top'
-                                			},
-                                			height: 450,
-                                			series: {
-                                				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
-                                                1:{type: "line", targetAxisIndex:0}
-                                			},
-                                            title: "Weekly Orders: Totals/Averages Last Three Months",
-                                            titleTextStyle: {
-                            					fontSize: 20,
-                            					color: '##5F5F5E;',
-                            					bold: false,
-                            					italic: false,
-                            					marginBottom: 20
-                                            },
-                                		};
+                            		data[0] = google.visualization.arrayToDataTable(jsonData);
+                                    num_orders = jsonData.length - 1;
 
-                                		var chart = new google.visualization.LineChart(document.getElementById('error_activity_chart'));
-                                        var button = document.getElementById('chart_button_1');
-
-                                        function drawChart(){
-                                            // Disabling the button while the chart is drawing.
-                                            button.disabled = true;
-                                            google.visualization.events.addListener(chart, 'ready',
-                                                    function() {
-                                                        button.disabled = false;
-                                                    });
-
-                                            chart.draw(data, options);
-                                        }
-                                        drawChart();
-                                        //redraw chart when window resize is completed
-                                        $(window).on('resizeEnd', function() {
-                                            drawChart();
-                                        });
-                                    }
-                                    else
-                                    {
-                                        $('div#error_activity_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
-                                    }
                                 }
                             });
 
                             $.ajax({
-                    			url: "/ajaxfunctions/getClientActivity",
+                    			url: "/ajaxfunctions/getAdminDailyClientActivity",
                     			dataType:"json",
                     			data: params,
                     			type: 'post',
                                 success: function(jsonData)
                                 {
-                                    var data = google.visualization.arrayToDataTable(jsonData);
-                                    var options = {
-                                        title :'Daily Orders by Client',
-                                        titleTextStyle: {
-                                            fontSize: 21,
-                                            bold: false,
-                                            fontColor: "#333"
-                                        },
-                                        hAxis: {
-                                            title: 'Day',
-                                            gridlines: {
-                                                count: 10
-                                            }
-                                        },
-                                        vAxis: {
-                                            title: 'Total Orders',
-                                            viewWindow: {
-                                                min: 0
-                                            }
-                                        },
-                                        legend: {
-                                            position: 'top',
-                                            maxLines: 3
-                                        },
-                                        height: 450,
-                                        isStacked: true
-                                    };
+                                    //var jData =  $.parseJSON(jsonData);
+                            		data[1] = google.visualization.arrayToDataTable(jsonData);
 
-                                    var chart = new google.visualization.ColumnChart(document.getElementById('order_activity_chart'));
-                                    chart.draw(data, options);
-
-                                    var columns = [];
-                                    var series = {};
-                                    for (var i = 0; i < data.getNumberOfColumns(); i++) {
-                                        columns.push(i);
-                                        if (i > 0) {
-                                            series[i - 1] = {};
-                                        }
-                                    }
-
-                                    options.series = series;
-
-                                    google.visualization.events.addListener(chart, 'select', function () {
-                                        var sel = chart.getSelection();
-                                        // if selection length is 0, we deselected an element
-                                        if (sel.length > 0) {
-                                            // if row is undefined, we clicked on the legend
-                                            if (sel[0].row === null) {
-                                                var col = sel[0].column;
-                                                if (columns[col] == col) {
-                                                    // hide the data series
-                                                    columns[col] = {
-                                                        label: data.getColumnLabel(col),
-                                                        type: data.getColumnType(col),
-                                                        calc: function () {
-                                                            return null;
-                                                        }
-                                                    };
-
-                                                    // grey out the legend entry
-                                                    series[col - 1].color = '#CCCCCC';
-                                                }
-                                                else {
-                                                    // show the data series
-                                                    columns[col] = col;
-                                                    series[col - 1].color = null;
-                                                }
-                                                var view = new google.visualization.DataView(data);
-                                                view.setColumns(columns);
-                                                chart.draw(view, options);
-                                            }
-                                        }
-                                    });
                                 }
                             });
+
+                            if(num_orders > 0)
+                            {
+                                options[0] = {
+                        		    animation:{
+                        		        duration: 1000,
+                                        easing: 'out',
+                                    },
+                        			hAxis: {
+                        				title: 'Week Beginning',
+                        				showTextEvery: 1,
+                        				slantedText:true,
+                        				slantedTextAngle:-45
+                        			},
+                        			vAxes: {
+                        				0: {
+                        					title: 'Order Count',
+                        					viewWindow: {
+                        						min: 0
+                        					}
+                        				}
+                        			},
+                        			legend: {
+                        				position: 'top'
+                        			},
+                        			height: 450,
+                        			series: {
+                        				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
+                                        1:{type: "line", targetAxisIndex:0}
+                        			},
+                                    title: "Weekly Orders: Totals/Averages Last Three Months",
+                                    titleTextStyle: {
+                    					fontSize: 20,
+                    					color: '##5F5F5E;',
+                    					bold: false,
+                    					italic: false,
+                    					marginBottom: 20
+                                    },
+                        		};
+
+                                options[1] = {
+                        		    animation:{
+                        		        duration: 1000,
+                                        easing: 'out',
+                                    },
+                        			hAxis: {
+                        				title: 'Day',
+                        				slantedText:true,
+                        				slantedTextAngle:-45
+                        			},
+                        			vAxes: {
+                        				0: {
+                        					title: 'Order Count',
+                        					viewWindow: {
+                        						min: 0
+                        					}
+                        				}
+                        			},
+                        			legend: {
+                        				position: 'top'
+                        			},
+                        			height: 450,
+                        			series: {
+                        				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
+                                        1:{type: "line", targetAxisIndex:0}
+                        			},
+                                    title: "Weekly Orders: Totals/Averages Last Three Months",
+                                    titleTextStyle: {
+                    					fontSize: 20,
+                    					color: '##5F5F5E;',
+                    					bold: false,
+                    					italic: false,
+                    					marginBottom: 20
+                                    },
+                        		};
+
+                                var chart = new google.visualization.LineChart(document.getElementById('error_activity_chart'));
+                                var button = document.getElementById('chart_button_1');
+                                var current = 0;
+
+                                function drawChart(){
+                                    // Disabling the button while the chart is drawing.
+                                    button.disabled = true;
+                                    google.visualization.events.addListener(chart, 'ready',
+                                            function() {
+                                                button.disabled = false;
+                                            });
+
+                                    chart.draw(data[current], options[current]);
+                                }
+                                drawChart();
+                                //redraw chart when window resize is completed
+                                $(window).on('resizeEnd', function() {
+                                    drawChart();
+                                });
+                            }
+                            else
+                            {
+                                $('div#error_activity_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
+                            }
                         }
-                        $('a#toggle_orders, a#client_activity, a#toggle_inventory, a#toggle_pickups, a#toggle_storeorders, a#toggle_solarorders, a#toggle_solarinstalls, a#toggle_solarservice').click(function(e){
-                            $(this).toggleClass('hiding');
-                        });
 
                     }
                 },
