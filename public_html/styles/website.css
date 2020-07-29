@@ -112,7 +112,7 @@ Home page cards
 .homepagecard{
     margin: 5px 1% !important;
     border: thin solid #030c57;
-    opacity: 0.1 !important;
+    opacity: 0.1;
 }
 
 .homepagecard.in-view{
