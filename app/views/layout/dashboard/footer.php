@@ -32,7 +32,7 @@
                         function drawAdminCharts()
                         {
                             $.ajax({
-                    			url: "/ajaxfunctions/getAdminClientActivity",
+                    			url: "/ajaxfunctions/getAdminWeeklyClientActivity",
                     			dataType:"json",
                     			data: params,
                     			type: 'post',
