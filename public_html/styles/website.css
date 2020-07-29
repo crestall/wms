@@ -113,10 +113,14 @@ Home page cards
     margin: 5px 1% !important;
     border: thin solid #030c57;
     opacity: 0.1;
+    position:absolute;
+    top:0;
+    left:-1000;
 }
 
 .homepagecard.in-view{
     opacity: 1;
+    position:relative;
     transition:opacity 600ms linear;
 }
 
