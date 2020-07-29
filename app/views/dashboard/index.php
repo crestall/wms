@@ -58,7 +58,7 @@ $c = 1;
                     <div class="card-header">
                         <h4>Create An Order</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                     	<a class="btn btn-lg btn-outline-fsg" href="/orders/add-order"><i class="fad fa-truck fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Go!</span></a>
                     </div>
                 </div>
