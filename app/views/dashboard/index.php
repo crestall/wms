@@ -21,7 +21,7 @@ $c = 1;
                     <div class="card-deck homepagedeck">
                         <?php foreach($orders as $o):
                             $s = ($o['order_count'] > 1)? "s" : ""; ?>
-                            <div class="card homepagecard"">
+                            <div class="card homepagecard">
                                 <div class="card-header">
                                     <h4><?php echo $o['client_name'];?></h4>
                                 </div>
@@ -46,6 +46,7 @@ $c = 1;
             <div class="col-md-12 text-center">
                 <h2>Client Activity Last 3 Months</h2>
             </div>
+            <div id="error_activity_chart"></div>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
