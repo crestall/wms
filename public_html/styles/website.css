@@ -121,6 +121,8 @@ Home page cards
 .homepagecard.in-view{
     opacity: 1;
     position:relative;
+    top:0;
+    left:0;
     transition:opacity 600ms linear;
 }
 
