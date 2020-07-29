@@ -16,6 +16,19 @@
                             to: $('#admin_to_value').val()
                         }
 
+                        /************
+                        Google chart redraw on window size change
+                        ************/
+                        //create trigger to resizeEnd event
+                        $(window).resize(function() {
+                            if(this.resizeTO) clearTimeout(this.resizeTO);
+                            this.resizeTO = setTimeout(function() {
+                                $(this).trigger('resizeEnd');
+                            }, 500);
+                        });
+
+
+
                         function drawAdminCharts()
                         {
                             $.ajax({
@@ -70,6 +83,11 @@
 
                                 		var chart = new google.visualization.LineChart(document.getElementById('error_activity_chart'));
                                 		chart.draw(data, options);
+
+                                        //redraw graph when window resize is completed
+                                        $(window).on('resizeEnd', function() {
+                                            chart.draw(data, options);
+                                        });
                                     }
                                     else
                                     {
