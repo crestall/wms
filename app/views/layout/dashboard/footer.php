@@ -148,10 +148,12 @@
                                     function drawChart(){
                                         // Disabling the button while the chart is drawing.
                                         button.disabled = true;
+                                        button.style.display = "none";
                                         google.visualization.events.addListener(chart, 'ready',
                                                 function() {
                                                     button.disabled = false;
                                                     button.textContent = 'Switch to ' + (current ? 'Weekly' : 'Daily');
+                                                    button.style.display = "block";
                                                 });
 
                                         chart.draw(data[current], options[current]);
