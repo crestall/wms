@@ -58,7 +58,7 @@
                             		data[1] = google.visualization.arrayToDataTable(jsonData);
                                 }
                             });
-
+                            console.log('num_orders: '+num_orders);
                             if(num_orders > 0)
                             {
                                 options[0] = {
