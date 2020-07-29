@@ -890,8 +890,8 @@ class Order extends Model{
         //die($q);
         return ($db->queryData($q));
     }
-    /*
-    public function getOrderTrends($from, $to, $client_id)
+
+    public function getDailyOrderTrends($from, $to, $client_id = 0)
     {
         //$from += 24*60*60;
         //$to += 24*60*60;
@@ -900,42 +900,71 @@ class Order extends Model{
         $db = Database::openConnection();
         $query1 = "
             SELECT
-                count(*) as total_orders, UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 ))) + 6*24*60*60 AS friday
+                date(a.date_index) AS day,
+                a.total_orders,
+                ROUND(AVG(b.total_orders), 1) AS order_average
             FROM
-                orders
-            WHERE
-                date_fulfilled >= $from AND date_fulfilled <= $to
+            (
+                SELECT
+                    count(*) as total_orders,
+                    o.date_fulfilled,
+                    DATE(FROM_UNIXTIME(o.date_fulfilled)) AS 'date_index'
+                FROM
+                    orders o
+                WHERE
+                    o.date_fulfilled >= $from AND o.date_fulfilled <= $to
         ";
 
 
         if($client_id > 0)
-            $query1 .= " AND client_id = ".$client_id;
+            $query1 .= " AND o.client_id = ".$client_id;
         $query1 .= "  GROUP BY
-                UNIX_TIMESTAMP(FROM_DAYS(TO_DAYS(DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d')) - MOD( TO_DAYS( DATE_FORMAT(FROM_UNIXTIME(date_fulfilled), '%Y-%m-%d') ) -7, 7 )))";
+                DAY(DATE(FROM_UNIXTIME(o.date_fulfilled))), WEEK(DATE(FROM_UNIXTIME(o.date_fulfilled))), YEAR(DATE(FROM_UNIXTIME(o.date_fulfilled)))
+            )a JOIN
+            (
+                SELECT
+                    count(*) as total_orders,
+                    o.date_fulfilled
+                FROM
+                    orders o
+                WHERE
+                    o.date_fulfilled >= (($from) - (90*24*60*60)) AND (o.date_fulfilled <= $to)";
+
+                if($client_id > 0)
+                    $query1 .= " AND o.client_id = ".$client_id;
+            $query1 .= "    GROUP BY
+                    DAY(DATE(FROM_UNIXTIME(o.date_fulfilled))), WEEK(DATE(FROM_UNIXTIME(o.date_fulfilled))), YEAR(DATE(FROM_UNIXTIME(o.date_fulfilled)))
+
+            ) b ON b.date_fulfilled <= a.date_fulfilled
+            GROUP BY
+                a.date_fulfilled
+                ";
         //echo $query1; die();
 
         $orders = $db->queryData($query1);
 
         $return_array = array(
             array(
-                'Week Ending',
-                'Total Orders'
+                'Week Beginning',
+                'Total Orders Per Week',
+                '3 Month Weekly Average'
             )
         );
 
         foreach($orders as $o)
         {
             $row_array = array();
-            $row_array[0] = date("d/m/y", $o['friday']);
-            $row_array[1] = $o['total_orders'];
-
+            $row_array[0] = $o['week_start'];
+            $row_array[1] = (int)$o['total_orders'];
+            $row_array[2] = (float)$o['order_average'];
             $return_array[] = $row_array;
         }
-
+        //print_r($return_array);
         return $return_array;
     }
-    */
-    public function getOrderTrends($from, $to, $client_id = 0)
+
+
+    public function getWeeklyOrderTrends($from, $to, $client_id = 0)
     {
         //$from += 24*60*60;
         //$to += 24*60*60;
