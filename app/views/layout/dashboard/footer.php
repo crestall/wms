@@ -87,11 +87,9 @@
                                         function drawChart(){
                                             // Disabling the button while the chart is drawing.
                                             button.disabled = true;
-                                            button.hide();
                                             google.visualization.events.addListener(chart, 'ready',
                                                     function() {
                                                         button.disabled = false;
-                                                        button.show();
                                                     });
 
                                             chart.draw(data, options);
