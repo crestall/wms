@@ -59,6 +59,7 @@
                                 }
                             });
                             console.log('num_orders: '+num_orders);
+                            console.log('data: '+data);
                             if(num_orders > 0)
                             {
                                 options[0] = {
