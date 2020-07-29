@@ -991,7 +991,8 @@ class Order extends Model{
             array(
                 'Week Beginning',
                 'Total Orders Per Week',
-                '3 Month Weekly Average'
+                '3 Month Weekly Average',
+                array( 'role' => 'style' )
             )
         );
 
@@ -1001,6 +1002,7 @@ class Order extends Model{
             $row_array[0] = $o['week_start'];
             $row_array[1] = (int)$o['total_orders'];
             $row_array[2] = (float)$o['order_average'];
+            $row_array[3] = "color: #052f95";
             $return_array[] = $row_array;
         }
         //print_r($return_array);
