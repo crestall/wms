@@ -45,13 +45,13 @@ $c = 1;
             <div class="col-md-12 text-center">
                 <h2>Client Activity Last 3 Months</h2>
             </div>
-            <div id="error_activity_chart"></div>
+            <div id="order_activity_chart"></div>
             <div class="col-md-12 text-right">
                 <button class="btn btn-sm btn-outline-fsg" id="chart_button_1"></button>
             </div>
         <?php elseif($user_role == "client"):?>
             <div class="col-md-12 text-center">
-                <h2>Client User</h2>
+                <h2>Quick Links</h2>
             </div>
             <div class="card-deck homepagedeck">
                 <div class="card homepagecard">
@@ -87,6 +87,11 @@ $c = 1;
                     </div>
                 </div>
             </div>
+            <div id="client_activity_chart"></div>
+            <div class="col-md-12 text-right">
+                <button class="btn btn-sm btn-outline-fsg" id="chart_button_2"></button>
+            </div>
+            <div id="product_activity_chart"></div>
         <?php else:?>
             <div class="row">
                 <div class="col-lg-12">

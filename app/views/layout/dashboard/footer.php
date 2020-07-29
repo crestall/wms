@@ -8,7 +8,6 @@
                 common: {
                     init: function(){
                         $('div#order_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
-                        $('div#error_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                         google.charts.load('current', {'packages':['corechart']});
                         google.charts.setOnLoadCallback(drawAdminCharts);
                         var params = {
@@ -26,8 +25,6 @@
                                 $(this).trigger('resizeEnd');
                             }, 500);
                         });
-
-
 
                         function drawAdminCharts()
                         {
@@ -47,7 +44,6 @@
                                     nextAjaxCall();
                                 }
                             });
-
                             function nextAjaxCall(){
                                 $.ajax({
                         			url: "/ajaxfunctions/getAdminDailyClientActivity",
@@ -62,7 +58,6 @@
                                     }
                                 });
                             }
-
                             function ajaxDone(){
                                 console.log('num_orders: '+num_orders);
                                 console.log('data: '+data);
@@ -104,7 +99,6 @@
                         					marginBottom: 20
                                         },
                             		};
-
                                     options[1] = {
                             		    animation:{
                             		        duration: 1000,
@@ -140,11 +134,9 @@
                         					marginBottom: 20
                                         },
                             		};
-
                                     var chart = new google.visualization.LineChart(document.getElementById('error_activity_chart'));
                                     var button = document.getElementById('chart_button_1');
                                     var current = 0;
-
                                     function drawChart(){
                                         // Disabling the button while the chart is drawing.
                                         button.disabled = true;
@@ -163,7 +155,6 @@
                                         current = 1 - current;
                                         drawChart();
                                     }
-
                                     //redraw chart when window resize is completed
                                     $(window).on('resizeEnd', function() {
                                         drawChart();
@@ -171,22 +162,15 @@
                                 }
                                 else
                                 {
-                                    $('div#error_activity_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
+                                    $('div#order_activity_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
                                 }
                             }
-
                         }
-
                     }
                 },
                 admin: {
                     init: function(){
-                        actions.common.init();
-                        var maxHeight = 0;
-                        $("div.order-panel").each(function(){
-                            if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
-                        });
-                        $("div.order-panel").height(maxHeight);
+
                     }
                 },
                 client: {
