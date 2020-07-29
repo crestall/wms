@@ -80,11 +80,15 @@ var scroller = {
         var bottom = top + $cardContainer.height();
         if( (top < viewportBottom) && (bottom > viewportTop) )
         {
-            $cardContainer.addClass('in-view');
+            $cardContainer.find('div.homepagecard').each(function(){
+                $(this).addClass('in-view');
+            });
         }
         else
         {
-            $cardContainer.removeClass('in-view');
+            $cardContainer.find('div.homepagecard').each(function(){
+                $(this).removeClass('in-view');
+            })
         }
     }
 }
