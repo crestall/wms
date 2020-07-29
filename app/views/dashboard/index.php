@@ -70,6 +70,14 @@ $c = 1;
                     	<a class="btn btn-lg btn-outline-fsg" href="/orders/client-orders"><i class="fad fa-th-list fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Look!</span></a>
                     </div>
                 </div>
+                <div class="card homepagecard">
+                    <div class="card-header">
+                        <h4>View Inventory</h4>
+                    </div>
+                    <div class="card-body text-center">
+                    	<a class="btn btn-lg btn-outline-fsg" href="/inventory/client-inventory"><i class="fad fa-inventory fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Check!</span></a>
+                    </div>
+                </div>
             </div>
         <?php else:?>
             <div class="row">
