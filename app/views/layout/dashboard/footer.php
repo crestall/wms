@@ -153,7 +153,7 @@
                                                 function() {
                                                     button.disabled = false;
                                                     button.textContent = 'Switch to ' + (current ? 'Weekly' : 'Daily');
-                                                    button.style.display = "block";
+                                                    button.style.display = "inline";
                                                 });
 
                                         chart.draw(data[current], options[current]);
