@@ -119,7 +119,7 @@ Home page cards
 .homepagecard.in-view{
     opacity: 1;
     transform: scale(1.0);
-    transition:transform 800ms linear, opacity 1500ms linear;
+    transition:transform 800ms ease-out, opacity 1500ms;
 }
 
 .homepagecard .card-header,
