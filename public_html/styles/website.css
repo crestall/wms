@@ -115,6 +115,11 @@ Home page cards
     opacity: 0.1;
 }
 
+.homepagecard.in-view{
+    opacity: 1;
+    transition:opacity 600ms linear;
+}
+
 .homepagecard .card-header,
 .homepagecard .card-body {
     color: #052f95;
