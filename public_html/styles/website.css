@@ -124,7 +124,7 @@ Home page cards
 
 .homepagecard:nth-child(even){
     position:absolute;
-    top:-1000px;
+    top:-10000px;
     left:10000px;
 }
 
