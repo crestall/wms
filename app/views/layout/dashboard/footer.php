@@ -170,7 +170,7 @@
                 },
                 admin: {
                     init: function(){
-
+                        actions.common.init();
                     }
                 },
                 client: {
