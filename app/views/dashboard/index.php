@@ -62,14 +62,12 @@ $c = 1;
                     	<a class="btn btn-lg btn-outline-fsg" href="/orders/add-order"><i class="fad fa-shipping-fast fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Go!</span></a>
                     </div>
                 </div>
-            </div>
-            <div class="card-deck homepagedeck">
                 <div class="card homepagecard">
                     <div class="card-header">
                         <h4>View Orders</h4>
                     </div>
                     <div class="card-body text-center">
-                    	<a class="btn btn-lg btn-outline-fsg" href="/orders/client-orders"><i class="fad fa-th-list fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Go!</span></a>
+                    	<a class="btn btn-lg btn-outline-fsg" href="/orders/client-orders"><i class="fad fa-th-list fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Look!</span></a>
                     </div>
                 </div>
             </div>
