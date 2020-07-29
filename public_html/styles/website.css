@@ -113,9 +113,19 @@ Home page cards
     margin: 5px 1% !important;
     border: thin solid #030c57;
     opacity: 0.1;
+
+}
+
+.homepagecard:nth-child(odd){
     position:absolute;
     top:-1000px;
     left:-1000px;
+}
+
+.homepagecard:nth-child(even){
+    position:absolute;
+    top:-1000px;
+    left:10000px;
 }
 
 .homepagecard.in-view{
