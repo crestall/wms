@@ -91,7 +91,7 @@ var scroller = {
 /************
 Homepage card fadeins
 *************/
-function(){
+ $(function () {
     scroller.cardsInView();
     $(window).scroll(function () {
         //console.log('scrolling');
