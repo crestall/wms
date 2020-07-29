@@ -47,7 +47,10 @@ $c = 1;
                 <h2>Client Activity Last 3 Months</h2>
             </div>
             <div id="error_activity_chart"></div>
-            <button class="btn btn-sm btn-outline-fsg" id="chart_button_1"></button>
+            <div class="col-md-12 text-right">
+                <button class="btn btn-sm btn-outline-fsg" id="chart_button_1"></button> 
+            </div>
+
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
