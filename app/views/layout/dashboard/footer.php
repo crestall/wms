@@ -151,7 +151,7 @@
                                         google.visualization.events.addListener(chart, 'ready',
                                                 function() {
                                                     button.disabled = false;
-                                                    button.value = 'Switch to ' + (current ? 'Weekly' : 'Daily');
+                                                    button.textContent = 'Switch to ' + (current ? 'Weekly' : 'Daily');
                                                 });
 
                                         chart.draw(data[current], options[current]);
