@@ -44,7 +44,6 @@
                                     //var jData =  $.parseJSON(jsonData);
                             		data[0] = google.visualization.arrayToDataTable(jsonData);
                                     num_orders = jsonData.length - 1;
-
                                 }
                             });
 
