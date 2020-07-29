@@ -72,6 +72,7 @@ var scroller = {
         }
     },
     cardsInView: function(){
+        console.log('cards in view');
         var viewportTop = $(window).scrollTop();
         var viewportBottom = viewportTop + $(window).height();
         var $cardContainer = $("div.homepagedeck");
