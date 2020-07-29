@@ -86,11 +86,8 @@
                                         function drawChart(){
                                             chart.draw(data, options);
                                         }
-
                                         drawChart();
-
-
-                                        //redraw graph when window resize is completed
+                                        //redraw chart when window resize is completed
                                         $(window).on('resizeEnd', function() {
                                             drawChart();
                                         });
