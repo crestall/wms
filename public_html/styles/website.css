@@ -113,13 +113,13 @@ Home page cards
     margin: 5px 1% !important;
     border: thin solid #030c57;
     opacity: 0.1;
-    transform: scale(0.1);
+    transform: scale(0.5);
 }
 
 .homepagecard.in-view{
     opacity: 1;
     transform: scale(1.0);
-    transition:all 800ms linear;
+    transition:transform 800ms linear, opacity 1500ms linear;
 }
 
 .homepagecard .card-header,
