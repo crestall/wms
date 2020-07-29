@@ -82,11 +82,17 @@
                                 		};
 
                                 		var chart = new google.visualization.LineChart(document.getElementById('error_activity_chart'));
-                                		chart.draw(data, options);
+
+                                        function drawChart(){
+                                            chart.draw(data, options);
+                                        }
+
+                                        drawChart();
+
 
                                         //redraw graph when window resize is completed
                                         $(window).on('resizeEnd', function() {
-                                            chart.draw(data, options);
+                                            drawChart();
                                         });
                                     }
                                     else
