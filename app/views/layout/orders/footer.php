@@ -600,13 +600,12 @@
                         {
                             var item_count = ($(":input.item-searcher").length) - 1;
                             var $holder = $(event.target).closest('div.item_holder');
-                            var qty_html;
-                            var inst;
+                            var qty_html = "";
+                            var inst = "";
                             if(ui.item.palletized > 0)
                             {
                                 var pallet_vals = ui.item.select_values.split(',');
                                 var line_item_vals = ui.item.max_values.split(',');
-                                qty_html = "<div class='col-sm-4'><input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' /></div>";
                                 qty_html += "<div class='col-sm-8'><select class='form-control selectpicker pallet_qty' name='items["+item_count+"][pallet_qty]'><option value='0'>Whole Pallet Qty</option>";
                                 pallet_vals.forEach(function(pallet_val) {
                                     //console.log(pallet_val);
@@ -636,7 +635,6 @@
                                 });
                                 inst += "<strong>"+count+"</strong> pallets with "+li+" items</p>";
                                 inst += "<p class='inst'>Select whole pallet amounts from the dropdown selector <br/>";
-                                inst += "<strong>OR</strong><br/>If you require us to break a pallet, enter an amount in the 'Qty' text field</p>";
                             }
                             else
                             {
