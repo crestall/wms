@@ -606,12 +606,12 @@
                             {
                                 var pallet_vals = ui.item.select_values.split(',');
                                 var line_item_vals = ui.item.max_values.split(',');
-                                qty_html += "<div class='col-sm-8'><select class='form-control selectpicker pallet_qty' name='items["+item_count+"][pallet_qty]'><option value='0'>Whole Pallet Qty</option>";
+                                qty_html += "<select class='form-control selectpicker pallet_qty' name='items["+item_count+"][pallet_qty]'><option value='0'>Whole Pallet Qty</option>";
                                 pallet_vals.forEach(function(pallet_val) {
                                     //console.log(pallet_val);
                                     qty_html += "<option>"+pallet_val+"</option>";
                                 });
-                                qty_html += "</select></div>";
+                                qty_html += "</select>";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>";
                                 inst += "<p class='inst'>There are<br/>";
                                 var li = 0;
