@@ -369,7 +369,7 @@ return array(
         'orders'      => array(
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-truck fa-3x"></i>'
+                'icon'      => '<i class="fad fa-truck fa-2x"></i>'
             ),
             'order-picking' =>  array(
                 'display'   => true,
@@ -399,7 +399,7 @@ return array(
         'products'    =>  array(
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-dolly fa-3x"></i>'
+                'icon'      => '<i class="fad fa-dolly fa-2x"></i>'
             ),
             'view-products'    => array(
                 'display'   => true,
@@ -422,7 +422,7 @@ return array(
         'inventory'     =>  array(
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
+                'icon'      => '<i class="fad fa-warehouse-alt fa-2x"></i>'
             ),
             'view-inventory'    => array(
                 'display'   => true,
@@ -467,7 +467,7 @@ return array(
             'orders-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-truck fa-3x"></i>'
+                'icon'      => '<i class="fad fa-truck fa-2x"></i>'
             ),
 			'client-orders' =>  array(
                 'display'   => true,
@@ -494,7 +494,7 @@ return array(
             'inventory-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
+                'icon'      => '<i class="fad fa-warehouse-alt fa-2x"></i>'
             ),
 			'client-inventory'    => array(
                 'display'   => true,
@@ -513,7 +513,7 @@ return array(
             'reports-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-chart-bar fa-3x"></i>'
+                'icon'      => '<i class="fad fa-chart-bar fa-2x"></i>'
             ),
             'dispatch-report'    => array(
                 'display'   => true,
