@@ -59,8 +59,8 @@
                                 });
                             }
                             function ajaxDone(){
-                                console.log('num_orders: '+num_orders);
-                                console.log('data: '+data);
+                                //console.log('num_orders: '+num_orders);
+                                //console.log('data: '+data);
                                 if(num_orders > 0)
                                 {
                                     options[0] = {
@@ -134,7 +134,7 @@
                         					marginBottom: 20
                                         },
                             		};
-                                    var chart = new google.visualization.LineChart(document.getElementById('error_activity_chart'));
+                                    var chart = new google.visualization.LineChart(document.getElementById('order_activity_chart'));
                                     var button = document.getElementById('chart_button_1');
                                     var current = 0;
                                     function drawChart(){
