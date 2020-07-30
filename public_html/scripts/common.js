@@ -293,6 +293,7 @@ var itemsUpdater = {
                 }
             });
         }
+        /* 
         $('select.pallet_qty').each(function(i,e){
             $(this).off('change');
             $(this).change(function(e){
@@ -301,7 +302,7 @@ var itemsUpdater = {
                 $holder.find('input.item_qty').valid();
             });
         });
-        /*
+
         $('input.item_qty').each(function(i,e){
             $(this).off('change');
             $(this).change(function(e){
