@@ -326,25 +326,6 @@
                                     $('div#order_activity_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
                                 }
                             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    		
                             $.ajax({
                     			url: "/ajaxfunctions/getTopProducts",
                     			dataType:"json",
@@ -384,9 +365,15 @@
                             					marginBottom: 20
                                             },
                                 		};
-
                                 		var chart2 = new google.visualization.ColumnChart(document.getElementById('products_chart'));
-                                		chart2.draw(data2, options2);
+                                        function drawChart(){
+                                            chart2.draw(data2, options2);
+                                        }
+                                        drawChart();
+                                        //redraw chart when window resize is completed
+                                        $(window).on('resizeEnd', function() {
+                                            drawChart();
+                                        });
                                     }
                                     else
                                     {
