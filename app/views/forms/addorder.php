@@ -43,7 +43,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
 
 
 
-            <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey" style="display:none">
+            <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey" style="display:<?php echo $idsp;?>">
                 <div class="row mb-0">
                     <div class="col-md-4">
                         <h4>Line Items</h4>
