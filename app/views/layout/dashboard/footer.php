@@ -7,14 +7,6 @@
             var actions = {
                 common: {
                     init: function(){
-                        $('div#order_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
-                        google.charts.load('current', {'packages':['corechart']});
-                        google.charts.setOnLoadCallback(drawAdminCharts);
-                        var params = {
-                            from: $('#admin_from_value').val(),
-                            to: $('#admin_to_value').val()
-                        }
-
                         /************
                         Google chart redraw on window size change
                         ************/
@@ -25,7 +17,18 @@
                                 $(this).trigger('resizeEnd');
                             }, 500);
                         });
-
+                    }
+                },
+                admin: {
+                    init: function(){
+                        actions.common.init();
+                        $('div#order_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
+                        google.charts.load('current', {'packages':['corechart']});
+                        google.charts.setOnLoadCallback(drawAdminCharts);
+                        var params = {
+                            from: $('#admin_from_value').val(),
+                            to: $('#admin_to_value').val()
+                        }
                         function drawAdminCharts()
                         {
                             var data = [];
@@ -166,11 +169,6 @@
                                 }
                             }
                         }
-                    }
-                },
-                admin: {
-                    init: function(){
-                        actions.common.init();
                     }
                 },
                 client: {
