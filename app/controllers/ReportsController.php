@@ -280,7 +280,7 @@ class ReportsController extends Controller
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $exc = array($this->stockmovementlabels->getLabelId('Internal Stock Movement'));
         $movements = $this->itemmovement->getItemMovementsSummaryArray($client_id, $from, $to, $exc);
-        Config::setJsConfig('curPage', "client-stock-movement-summary");
+        Config::setJsConfig('curPage', "stock-movement-summary");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientStockMovementSummary.php',[
             'page_title'        =>  ucwords(strtolower($client_name)).' Stock Movement Summary',
             'from'              =>  $from,

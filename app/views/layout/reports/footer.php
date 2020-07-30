@@ -35,7 +35,7 @@
                         });
                     }
                 },
-                'client-stock-movement-summary': {
+                'stock-movement-summary': {
                     init: function()
                     {
                         dataTable.init($('table#client_stock_movement_summary_table'), {
