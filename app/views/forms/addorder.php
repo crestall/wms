@@ -35,14 +35,6 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     </div>
                 </div>
             <?php endif;?>
-
-
-
-
-
-
-
-
             <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey" style="display:<?php echo $idisp;?>">
                 <div class="row mb-0">
                     <div class="col-md-4">
@@ -74,26 +66,6 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php endif;?>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="form-group form-row">
                 <label class="col-md-3 col-form-label">Upload PDF Attachment</label>
                 <div class="col-md-4">
@@ -181,7 +153,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary" id="submitter" disabled>Add Order</button>
+                    <button type="submit" class="btn btn-outline-fsg" id="submitter" disabled>Add Order</button>
                 </div>
             </div>
         </form>
