@@ -102,7 +102,7 @@ return array(
             'clients-index' => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-user-tie fa-3x"></i>'
+                'icon'      => '<i class="fad fa-user-tie fa-2x"></i>'
             ),
 			'view-clients'  => array(
                 'display'   => true,
