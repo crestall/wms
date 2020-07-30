@@ -605,7 +605,6 @@
                             if(ui.item.palletized > 0)
                             {
                                 var pallet_vals = ui.item.select_values.split(',');
-                                var line_item_vals = ui.item.max_values.split(',');
                                 qty_html += "<select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items["+item_count+"][qty]'><option value='0'>Quantity</option>";
                                 pallet_vals.forEach(function(pallet_val) {
                                     //console.log(pallet_val);
@@ -613,27 +612,6 @@
                                 });
                                 qty_html += "</select>";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>";
-                                inst += "<p class='inst'>There are<br/>";
-                                var li = 0;
-                                var count = 1;
-                                line_item_vals.forEach(function(max){
-                                    if(max == li)
-                                    {
-                                        ++count;
-                                    }
-                                    else if(li == 0)
-                                    {
-                                        //first pass
-                                        //++count;
-                                    }
-                                    else
-                                    {
-                                        inst += "<strong>"+count+"</strong> pallets with "+li+" items,<br/>";
-                                        count = 1;
-                                    }
-                                    li = max;
-                                });
-                                inst += "<strong>"+count+"</strong> pallets with "+li+" items</p>";
                                 inst += "<p class='inst'>Select whole pallet amounts from the dropdown selector <br/>";
                             }
                             else
