@@ -177,6 +177,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $order_number = $this->getOrderNumber();
+        $ref_2 = $order_number."-".$data['size'];
         $ref_1 = $db->queryValue('clients', array('id' => $data['client_id']), 'ref_1');
         if(isset($data['signature_req']))
         {
@@ -201,7 +202,7 @@ class Order extends Model{
             'date_ordered'  => time(),
             'status_id'     => $this->ordered_id,
             'ref_1'         => $ref_1,
-            'ref_2'         => $order_number,
+            'ref_2'         => $ref_2,
             'instructions'  => $instructions,
             'address'       => $data['address'],
             'suburb'        => $data['suburb'],
