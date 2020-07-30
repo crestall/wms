@@ -638,7 +638,7 @@
                             }
                             else
                             {
-                                qty_html = "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' />";
+                                qty_html = "<input type='text' class='form-control number item_qty' data-rule-max='"+ui.item.total_available+"' name='items["+item_count+"][qty]' placeholder='Qty' />";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
                                 //inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
                             }
