@@ -75,12 +75,15 @@ var scroller = {
         //console.log('cards in view');
         var viewportTop = $(window).scrollTop();
         var viewportBottom = viewportTop + $(window).height();
-        var $cardContainer = $("div.homepagedeck");
-        var top = Math.round( $cardContainer.offset().top );
-        var bottom = top + $cardContainer.height();
-        $cardContainer.find('div.homepagecard').each(function(){
-            $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
-        });
+        if($("div.homepagedeck").length)
+        {
+            var $cardContainer = $("div.homepagedeck");
+            var top = Math.round( $cardContainer.offset().top );
+            var bottom = top + $cardContainer.height();
+            $cardContainer.find('div.homepagecard').each(function(){
+                $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
+            });
+        }
     }
 }
 
