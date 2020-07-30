@@ -4708,7 +4708,7 @@ class FormController extends Controller {
             $error = false;
             foreach($this->request->data['items'] as $itid => $details)
             {
-				if( !isset($details['qty']) )
+				if( !isset($details['qty']) || $details['qty'] == 0 )
 				{
                     $error = true;
                     Form::setError('items', 'Please ensure all items have a quantity');
