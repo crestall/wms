@@ -4616,7 +4616,7 @@ class FormController extends Controller {
 
     public function procOrderAdd()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         /*Session::set('value_array', $_POST);
         Session::set('error_array', Form::getErrorArray());
         return $this->redirector->to(PUBLIC_ROOT."orders/add-order");*/
@@ -4708,7 +4708,7 @@ class FormController extends Controller {
             $error = false;
             foreach($this->request->data['items'] as $itid => $details)
             {
-				if(!isset($details['qty']))
+				if( !isset($details['qty']) )
 				{
                     $error = true;
                     Form::setError('items', 'Please ensure all items have a quantity');
@@ -4726,21 +4726,7 @@ class FormController extends Controller {
 						'qty'   => $details['qty'],
 						'id'    => $details['id']
 					);
-					if(!empty($details['pallet_qty']))
-					{
-						$array['qty'] = $details['pallet_qty'];
-						$array['whole_pallet'] = true;
-					}
-					else
-					{
-						$array['qty'] = $details['qty'];
-						$array['whole_pallet'] = false;
-					}
-					if(empty($array['qty']))
-					{
-						$error = true;
-						Form::setError('items', 'Please ensure all items have a quantity');
-					}
+                    $array['whole_pallet'] = isset($details['whole_pallet']);
 					$orders_items[] = $array ;					
 				}
 
