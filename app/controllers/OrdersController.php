@@ -454,7 +454,7 @@ class OrdersController extends Controller
         $client = $this->client->getClientInfo(Session::getUserClientId());
         $orders = $this->order->getOrdersForClient(Session::getUserClientId(), $from, $to);
         //render the page
-        Config::setJsConfig('curPage', "clients-orders");
+        Config::setJsConfig('curPage', "client-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/clientOrders.php', [
             'page_title'    =>  "Orders For ".$client['client_name'],
             'client'        =>  $client,
