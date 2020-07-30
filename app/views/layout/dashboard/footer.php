@@ -171,7 +171,7 @@
                 admin: {
                     init: function(){
                         actions.common.init();
-                        actions.commom.loadAdminCharts();
+                        actions.common.loadAdminCharts();
                     }
                 },
                 client: {
