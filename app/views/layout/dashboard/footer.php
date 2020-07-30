@@ -17,11 +17,8 @@
                                 $(this).trigger('resizeEnd');
                             }, 500);
                         });
-                    }
-                },
-                admin: {
-                    init: function(){
-                        actions.common.init();
+                    },
+                    loadAdminCharts: function(){
                         $('div#order_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                         google.charts.load('current', {'packages':['corechart']});
                         google.charts.setOnLoadCallback(drawAdminCharts);
@@ -171,6 +168,12 @@
                         }
                     }
                 },
+                admin: {
+                    init: function(){
+                        actions.common.init();
+                        actions.commom.loadAdminCharts();
+                    }
+                },
                 client: {
                     init: function(){
                         $('div#products_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
@@ -294,11 +297,6 @@
                 warehouse: {
                     init: function(){
                         actions.common.init();
-                        var maxHeight = 0;
-                        $("div.inventory-panel").each(function(){
-                            if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
-                        });
-                        $("div.inventory-panel").height(maxHeight);
                     }
                 },
                 'dashboard':{
