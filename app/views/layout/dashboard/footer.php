@@ -357,6 +357,9 @@
                                 					}
                                 				}
                                 			},
+                                            series: {
+                                				0:{type: "bars", targetAxisIndex:0, color: "052f95"}
+                                			},
                                 			legend: {
                                 				position: 'top'
                                 			},
