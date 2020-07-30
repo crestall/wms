@@ -230,7 +230,7 @@
                         });
                     }
                 },
-                'bulk-upload-orders': {
+                'add-bulk-orders': {
                     init:function(){
                         $('select#client_id').change(function(e){
                             $(this).valid();

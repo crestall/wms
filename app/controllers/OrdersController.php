@@ -812,7 +812,7 @@ class OrdersController extends Controller
     public function addBulkOrders()
     {
         //render the page
-        Config::setJsConfig('curPage', "bulk-upload-orders");
+        Config::setJsConfig('curPage', "add-bulk-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addBulkOrders.php', [
             'page_title'    =>  "Import/Bulk Upload Orders"
         ]);
