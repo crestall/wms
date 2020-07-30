@@ -285,15 +285,10 @@ var itemsUpdater = {
         if($(".pallet_qty").length)
         {
             $.validator.addClassRules('pallet_qty',{
-                notNone: function(el){
-                    var $holder = $(el).closest('div.item_holder');
-                    var val = $holder.find('input.item_qty').val();
-                    //console.log('item_qty val: '+ val);
-                    return ( val === 0 || val === "" );
-                }
+                notNone: true
             });
         }
-        /* 
+        /*
         $('select.pallet_qty').each(function(i,e){
             $(this).off('change');
             $(this).change(function(e){
