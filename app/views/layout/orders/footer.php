@@ -647,7 +647,7 @@
                             $holder.find('div.qty-location').html(inst);
                             $holder.find('div.delete-image-holder a').fadeIn();
                             itemsUpdater.itemDelete();
-                            //itemsUpdater.updateValidation();
+                            itemsUpdater.updateValidation();
                             $holder.find('input.item_qty').focus();
                             $('.selectpicker').selectpicker();
                             //actions['item-searcher-test'].init();
