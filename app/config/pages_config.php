@@ -464,6 +464,7 @@ return array(
     ),
     'CLIENT_PAGES' => array(
         'orders'			=>	array(
+            'orders-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-truck"></i>'
@@ -490,6 +491,7 @@ return array(
             )
 		),
 		'inventory'			=>	array(
+            'inventory-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-warehouse-alt"></i>'
@@ -508,6 +510,7 @@ return array(
             )
 		),
         'reports'           =>  array(
+            'reports-index'   => true, 
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-chart-bar"></i>'
