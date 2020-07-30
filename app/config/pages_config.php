@@ -39,7 +39,7 @@ return array(
             'orders-index'  => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-truck fa-3x"></i>'
+                'icon'      => '<i class="fad fa-truck fa-2x"></i>'
             ),
             'add-order' =>  array(
                 'display'   => true,
