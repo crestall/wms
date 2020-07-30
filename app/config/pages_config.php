@@ -43,7 +43,7 @@ return array(
             ),
             'add-order' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-shipping-fast"></i>'
+                'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
             ),
             'add-bulk-orders' =>  array(
                 'display'   => true,
