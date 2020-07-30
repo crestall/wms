@@ -11,13 +11,13 @@
     var foundpage = false
     for(var cat in config.allPages)
     {
-        console.log("1 doing: "+cat);
+        //console.log("1 doing: "+cat);
         for(var page in config.allPages[cat])
         {
-            console.log("2 doing: "+page);
+            //console.log("2 doing: "+page);
             if(config.curPage == page)
             {
-                console.log("found: "+page);
+                //console.log("found: "+page);
                 $("li#"+cat+" > a").addClass("active");
                 foundpage = true;
                 break;
