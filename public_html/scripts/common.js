@@ -270,23 +270,29 @@ var itemsUpdater = {
         $( "input.item_qty, select.pallet_qty" ).each(function(i,e){
             $(this).rules( "remove");
         });
-        $.validator.addClassRules('item_qty',{
-            required: function(el){
-                var $holder = $(el).closest('div.item_holder');
-                var val = $holder.find('select.pallet_qty').val();
-                //console.log('pallet_qty val: '+ val);
-                return (val === 0 || val === undefined );
-            },
-            digits: true
-        });
-        $.validator.addClassRules('pallet_qty',{
-            notNone: function(el){
-                var $holder = $(el).closest('div.item_holder');
-                var val = $holder.find('input.item_qty').val();
-                //console.log('item_qty val: '+ val);
-                return ( val === 0 || val === "" );
-            }
-        });
+        if($(".item_qty").length)
+        {
+            $.validator.addClassRules('item_qty',{
+                required: function(el){
+                    var $holder = $(el).closest('div.item_holder');
+                    var val = $holder.find('select.pallet_qty').val();
+                    //console.log('pallet_qty val: '+ val);
+                    return (val === 0 || val === undefined );
+                },
+                digits: true
+            });
+        }
+        if($(".pallet_qty").length)
+        {
+            $.validator.addClassRules('pallet_qty',{
+                notNone: function(el){
+                    var $holder = $(el).closest('div.item_holder');
+                    var val = $holder.find('input.item_qty').val();
+                    //console.log('item_qty val: '+ val);
+                    return ( val === 0 || val === "" );
+                }
+            });
+        }
         $('select.pallet_qty').each(function(i,e){
             $(this).off('change');
             $(this).change(function(e){
