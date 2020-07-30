@@ -50,6 +50,9 @@ $c = 1;
                 <button class="btn btn-sm btn-outline-fsg" id="chart_button_1"></button>
             </div>
         <?php elseif($user_role == "client"):?>
+            <input type="hidden" id="client_id" value="<?php echo $client_id; ?>" />
+            <input type="hidden" id="from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
+            <input type="hidden" id="to_value" value="<?php echo strtotime('last saturday', strtotime('tomorrow'));?>" />
             <div class="col-md-12 text-center">
                 <h2>Quick Links</h2>
             </div>
