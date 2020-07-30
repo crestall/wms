@@ -153,7 +153,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-outline-fsg" id="submitter" disabled>Add Order</button>
+                    <button type="submit" class="btn btn-outline-secondary" id="submitter" disabled>Add Order</button>
                 </div>
             </div>
         </form>
