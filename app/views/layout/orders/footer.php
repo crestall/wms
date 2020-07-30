@@ -1882,7 +1882,7 @@
                         });
                     }
                 },
-                'import-orders' : {
+                'bulk-upload-orders' : {
                     init: function(){
                         $('form#bulk_order_import').submit(function(e){
                             if($(this).valid())
