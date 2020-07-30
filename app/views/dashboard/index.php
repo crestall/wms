@@ -87,11 +87,11 @@ $c = 1;
                     </div>
                 </div>
             </div>
-            <div id="client_activity_chart"></div>
+            <div id="orders_chart"></div>
             <div class="col-md-12 text-right">
                 <button class="btn btn-sm btn-outline-fsg" id="chart_button_2"></button>
             </div>
-            <div id="product_activity_chart"></div>
+            <div id="products_chart"></div>
         <?php else:?>
             <div class="row">
                 <div class="col-lg-12">
