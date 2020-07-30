@@ -606,7 +606,7 @@
                             {
                                 var pallet_vals = ui.item.select_values.split(',');
                                 var line_item_vals = ui.item.max_values.split(',');
-                                qty_html += "<select class='form-control selectpicker pallet_qty' name='items["+item_count+"][pallet_qty]'><option value='0'>Quantity</option>";
+                                qty_html += "<select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items["+item_count+"][pallet_qty]'><option value='0'>Quantity</option>";
                                 pallet_vals.forEach(function(pallet_val) {
                                     //console.log(pallet_val);
                                     qty_html += "<option>"+pallet_val+"</option>";
