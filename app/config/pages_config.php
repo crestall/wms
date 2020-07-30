@@ -121,7 +121,7 @@ return array(
             'products-index'    => true,
             'default-icon'      => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-dolly fa-3x"></i>'
+                'icon'      => '<i class="fad fa-dolly fa-2x"></i>'
             ),
 			'view-products'    => array(
                 'display'   => true,
@@ -152,7 +152,7 @@ return array(
             'inventory-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
+                'icon'      => '<i class="fad fa-warehouse-alt fa-2x"></i>'
             ),
             'view-inventory'    => array(
                 'display'   => true,
@@ -203,7 +203,7 @@ return array(
             'reports-index' => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-chart-bar fa-3x"></i>'
+                'icon'      => '<i class="fad fa-chart-bar fa-2x"></i>'
             ),
 			'stock-movement-report'    => array(
                 'display'   => true,
@@ -270,7 +270,7 @@ return array(
             'data-entry-index'  => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-indent fa-3x"></i>'
+                'icon'      => '<i class="fad fa-indent fa-2x"></i>'
             ),
             'container-unloading'    => array(
                 'display'   => true,
@@ -285,7 +285,7 @@ return array(
             'site-settings-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-cog fa-3x"></i>'
+                'icon'      => '<i class="fad fa-cog fa-2x"></i>'
             ),
 			'order-status'    => array(
                 'display'   => true,
@@ -329,7 +329,7 @@ return array(
             'super_admin_only'  => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-download fa-3x"></i>'
+                'icon'      => '<i class="fad fa-download fa-2x"></i>'
             ),
             'print-location-barcodes'    => array(
                 'display'   => true,
@@ -345,7 +345,7 @@ return array(
             'super_admin_only'  => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-lock-alt fa-3x"></i>'
+                'icon'      => '<i class="fad fa-lock-alt fa-2x"></i>'
             ),
             'eparcel-shipment-deleter'    => array(
                 'display'   => true,
