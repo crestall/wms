@@ -94,7 +94,7 @@
                         }
                     }
                 },
-                'register-newstock': {
+                'register-new-stock': {
                     init: function(){
                         $('form#register_new_stock').submit(function(e){
                             if($(this).valid())
