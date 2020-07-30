@@ -177,7 +177,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $order_number = $this->getOrderNumber();
-        $ref_2 = $order_number
+        $ref_2 = $order_number;
         $ref_1 = $db->queryValue('clients', array('id' => $data['client_id']), 'ref_1');
         if(isset($data['signature_req']))
         {
