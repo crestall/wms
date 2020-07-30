@@ -39,7 +39,7 @@ return array(
             'orders-index'  => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-truck"></i>'
+                'icon'      => '<i class="fad fa-truck fa-3x"></i>'
             ),
             'add-order' =>  array(
                 'display'   => true,
@@ -47,7 +47,7 @@ return array(
             ),
             'add-bulk-orders' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fal fa-boxes"></i>'
+                'icon'      => '<i class="fal fa-boxes fa-3x"></i>'
             ),
             'order-update' =>  array(
                 'display'   => false,
@@ -55,7 +55,7 @@ return array(
             ),
 			'order-summaries' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-list-ul"></i>'
+                'icon'      => '<i class="fad fa-list-ul fa-3x"></i>'
             ),
             'edit-address' =>  array(
                 'display'   => false,
@@ -71,7 +71,7 @@ return array(
             ),
             'order-search' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-search"></i>'
+                'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
             ),
             'order-search-results' =>  array(
                 'display'   => false,
@@ -83,7 +83,7 @@ return array(
             ),
             'view-orders' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-th-list"></i>'
+                'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
             ),
             'address-update' =>  array(
                 'display'   => false,
@@ -95,41 +95,41 @@ return array(
             ),
             'order-importing' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-import"></i>'
+                'icon'      => '<i class="fad fa-file-import fa-3x"></i>'
             )
         ),
 		'clients'	=> array(
             'clients-index' => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-user-tie"></i>'
+                'icon'      => '<i class="fad fa-user-tie fa-3x"></i>'
             ),
 			'view-clients'  => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-users"></i>'
+                'icon'      => '<i class="fad fa-users fa-3x"></i>'
             ),
 			'add-client'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-user-plus"></i>'
+                'icon'      => '<i class="fad fa-user-plus fa-3x"></i>'
             ),
 			'edit-client'   => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-user-edit"></i>'
+                'icon'      => '<i class="fad fa-user-edit fa-3x"></i>'
             ),
 		),
 		'products'	=> array(
             'products-index'    => true,
             'default-icon'      => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-dolly"></i>'
+                'icon'      => '<i class="fad fa-dolly fa-3x"></i>'
             ),
 			'view-products'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-box-open"></i>'
+                'icon'      => '<i class="fad fa-box-open fa-3x"></i>'
             ),
 			'add-product'      => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-hand-holding-box"></i>'
+                'icon'      => '<i class="fad fa-hand-holding-box fa-3x"></i>'
             ),
 			'edit-product'    => array(
                 'display'   => false,
@@ -137,34 +137,34 @@ return array(
             ),
             'pack-items-edit'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-edit"></i>'
+                'icon'      => '<i class="fad fa-edit fa-3x"></i>'
             ),
             'collections-edit'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-edit"></i>'
+                'icon'      => '<i class="fad fa-edit fa-3x"></i>'
             ),
             'product-search'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-telescope"></i>'
+                'icon'      => '<i class="fad fa-telescope fa-3x"></i>'
             ),
 		),
         'inventory'   =>  array(
             'inventory-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-warehouse-alt"></i>'
+                'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
             ),
             'view-inventory'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-inventory"></i>'
+                'icon'      => '<i class="fad fa-inventory fa-3x"></i>'
             ),
             'pack-items-manage'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-box-check"></i>'
+                'icon'      => '<i class="fad fa-box-check fa-3x"></i>'
             ),
             'scan-to-inventory'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-scanner"></i>'
+                'icon'      => '<i class="fad fa-scanner fa-3x"></i>'
             ),
             'product-movement'    => array(
                 'display'   => false,
@@ -172,11 +172,11 @@ return array(
             ),
             'goods-out'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-forklift"></i>'
+                'icon'      => '<i class="fad fa-forklift fa-3x"></i>'
             ),
             'goods-in'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-forklift fa-flip-horizontal"></i>'
+                'icon'      => '<i class="fad fa-forklift fa-flip-horizontal fa-3x"></i>'
             ),
             'add-subtract-stock'    => array(
                 'display'   => false,
@@ -188,66 +188,66 @@ return array(
             ),
             'transfer-location'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-dolly-flatbed"></i>'
+                'icon'      => '<i class="fad fa-dolly-flatbed fa-3x"></i>'
             ),
             'move-bulk-items'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-dolly-flatbed-alt"></i>'
+                'icon'      => '<i class="fad fa-dolly-flatbed-alt fa-3x"></i>'
             ),
             'move-all-client-stock'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-conveyor-belt"></i>'
+                'icon'      => '<i class="fad fa-conveyor-belt fa-3x"></i>'
             )
         ),
 		'reports'   => array(
             'reports-index' => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-chart-bar"></i>'
+                'icon'      => '<i class="fad fa-chart-bar fa-3x"></i>'
             ),
 			'stock-movement-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-person-dolly"></i>'
+                'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
             ),
 			'dispatch-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
 			'inventory-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
             'location-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
             'client-space-usage-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
             'goods-out-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
             'goods-out-summary'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
             'goods-in-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
             'goods-in-summary'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
             'stock-at-date'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-calendar-alt"></i>'
+                'icon'      => '<i class="fad fa-calendar-alt fa-3x"></i>'
             ),
             'unloaded-containers-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-container-storage"></i>'
+                'icon'      => '<i class="fad fa-container-storage fa-3x"></i>'
             ),
             '3pl-dispatch-report'    => array(
                 'display'   => false,
@@ -259,61 +259,61 @@ return array(
             ),
             'empty-bay-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-warehouse-alt"></i>'
+                'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
             ),
             'pickups-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-truck-pickup"></i>'
+                'icon'      => '<i class="fad fa-truck-pickup fa-3x"></i>'
             )
 		),
         'data-entry'    =>  array(
             'data-entry-index'  => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-indent"></i>'
+                'icon'      => '<i class="fad fa-indent fa-3x"></i>'
             ),
             'container-unloading'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fal fa-container-storage"></i>'
+                'icon'      => '<i class="fal fa-container-storage fa-3x"></i>'
             ),
             'incoming-shipments'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-shipping-timed"></i>'
+                'icon'      => '<i class="fad fa-shipping-timed fa-3x"></i>'
             )
         ),
 		'site-settings'		=> array(
             'site-settings-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-cog"></i>'
+                'icon'      => '<i class="fad fa-cog fa-3x"></i>'
             ),
 			'order-status'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-tasks"></i>'
+                'icon'      => '<i class="fad fa-tasks fa-3x"></i>'
             ),
 			'stock-movement-reasons'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-dolly-flatbed"></i>'
+                'icon'      => '<i class="fad fa-dolly-flatbed fa-3x"></i>'
             ),
             'locations'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fal fa-warehouse-alt"></i>'
+                'icon'      => '<i class="fal fa-warehouse-alt fa-3x"></i>'
             ),
             'manage-users'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-users"></i>'
+                'icon'      => '<i class="fad fa-users fa-3x"></i>'
             ),
             'packing-types'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-mail-bulk"></i>'
+                'icon'      => '<i class="fad fa-mail-bulk fa-3x"></i>'
             ),
             'user-roles'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-users-cog"></i>'
+                'icon'      => '<i class="fad fa-users-cog fa-3x"></i>'
             ),
             'couriers'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-truck-loading"></i>'
+                'icon'      => '<i class="fad fa-truck-loading fa-3x"></i>'
             ),
             'edit-user-profile'    => array(
                 'display'   => false,
@@ -329,15 +329,15 @@ return array(
             'super_admin_only'  => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-download"></i>'
+                'icon'      => '<i class="fad fa-download fa-3x"></i>'
             ),
             'print-location-barcodes'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-print"></i>'
+                'icon'      => '<i class="fad fa-print fa-3x"></i>'
             ),
             'useful-barcodes'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-barcode-alt"></i>'
+                'icon'      => '<i class="fad fa-barcode-alt fa-3x"></i>'
             )
         ),
         'admin-only'    => array(
@@ -345,11 +345,11 @@ return array(
             'super_admin_only'  => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-lock-alt"></i>'
+                'icon'      => '<i class="fad fa-lock-alt fa-3x"></i>'
             ),
             'eparcel-shipment-deleter'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-trash-alt"></i>'
+                'icon'      => '<i class="fad fa-trash-alt fa-3x"></i>'
             ),
             'encrypt-some-shit'    => array(
                 'display'   => false,
@@ -357,11 +357,11 @@ return array(
             ),
             'update-configuration'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-check-double"></i>'
+                'icon'      => '<i class="fad fa-check-double fa-3x"></i>'
             ),
             'reece-data-tidy'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-calendar-check"></i>'
+                'icon'      => '<i class="fad fa-calendar-check fa-3x"></i>'
             )
         ),
     ),
@@ -369,27 +369,27 @@ return array(
         'orders'      => array(
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-truck"></i>'
+                'icon'      => '<i class="fad fa-truck fa-3x"></i>'
             ),
             'order-picking' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-hand-holding-box"></i>'
+                'icon'      => '<i class="fad fa-hand-holding-box fa-3x"></i>'
             ),
             'order-packing' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-box-open"></i>'
+                'icon'      => '<i class="fad fa-box-open fa-3x"></i>'
             ),
             'order-dispatching' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-mail-bulk"></i>'
+                'icon'      => '<i class="fad fa-mail-bulk fa-3x"></i>'
             ),
             'view-orders' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-th-list"></i>'
+                'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
             ),
             'order-search' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-search"></i>'
+                'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
             ),
             'order-search-results' =>  array(
                 'display'   => false,
@@ -399,15 +399,15 @@ return array(
         'products'    =>  array(
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-dolly"></i>'
+                'icon'      => '<i class="fad fa-dolly fa-3x"></i>'
             ),
             'view-products'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-box-open"></i>'
+                'icon'      => '<i class="fad fa-box-open fa-3x"></i>'
             ),
             'add-product'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-hand-holding-box"></i>'
+                'icon'      => '<i class="fad fa-hand-holding-box fa-3x"></i>'
             ),
             'edit-product'    => array(
                 'display'   => false,
@@ -415,26 +415,26 @@ return array(
             ),
             'product-search'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-telescope"></i>'
+                'icon'      => '<i class="fad fa-telescope fa-3x"></i>'
             ),
 
         ),
         'inventory'     =>  array(
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-warehouse-alt"></i>'
+                'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
             ),
             'view-inventory'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-inventory"></i>'
+                'icon'      => '<i class="fad fa-inventory fa-3x"></i>'
             ),
             'product-to-location'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-dolly-flatbed"></i>'
+                'icon'      => '<i class="fad fa-dolly-flatbed fa-3x"></i>'
             ),
             'scan-to-inventory'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-scanner"></i>'
+                'icon'      => '<i class="fad fa-scanner fa-3x"></i>'
             ),
             'product-movement'    => array(
                 'display'   => false,
@@ -442,11 +442,11 @@ return array(
             ),
             'goods-out'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-forklift"></i>'
+                'icon'      => '<i class="fad fa-forklift fa-3x"></i>'
             ),
             'goods-in'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-forklift fa-flip-horizontal"></i>'
+                'icon'      => '<i class="fad fa-forklift fa-flip-horizontal fa-3x"></i>'
             ),
             'add-subtract-stock'    => array(
                 'display'   => false,
@@ -458,7 +458,7 @@ return array(
             ),
             'pack-items-manage'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-box-check"></i>'
+                'icon'      => '<i class="fad fa-box-check fa-3x"></i>'
             ),
         )
     ),
@@ -467,11 +467,11 @@ return array(
             'orders-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-truck"></i>'
+                'icon'      => '<i class="fad fa-truck fa-3x"></i>'
             ),
 			'client-orders' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-th-list"></i>'
+                'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
             ),
 			'order-detail'    => array(
                 'display'   => false,
@@ -483,57 +483,57 @@ return array(
             ),
             'add-order' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-shipping-fast"></i>'
+                'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
             ),
             'bulk-upload-orders' =>  array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-upload"></i>'
+                'icon'      => '<i class="fad fa-upload fa-3x"></i>'
             )
 		),
 		'inventory'			=>	array(
             'inventory-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-warehouse-alt"></i>'
+                'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
             ),
 			'client-inventory'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-inventory"></i>'
+                'icon'      => '<i class="fad fa-inventory fa-3x"></i>'
             ),
             'expected-shipments'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-shipping-timed"></i>'
+                'icon'      => '<i class="fad fa-shipping-timed fa-3x"></i>'
             ),
             'register-new-stock'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-clipboard-check"></i>'
+                'icon'      => '<i class="fad fa-clipboard-check fa-3x"></i>'
             )
 		),
         'reports'           =>  array(
-            'reports-index'   => true, 
+            'reports-index'   => true,
             'default-icon'  => array(
                 'display'   => false,
-                'icon'      => '<i class="fad fa-chart-bar"></i>'
+                'icon'      => '<i class="fad fa-chart-bar fa-3x"></i>'
             ),
             'dispatch-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet"></i>'
+                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
             'stock-at-date'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-calendar-alt"></i>'
+                'icon'      => '<i class="fad fa-calendar-alt fa-3x"></i>'
             ),
             'returns-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal"></i>'
+                'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
             ),
             'stock-movement-report'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-person-dolly"></i>'
+                'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
             ),
             'stock-movement-summary'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-person-dolly"></i>'
+                'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
             ),
             'client-dispatch-report'    => array(
                 'display'   => false,
