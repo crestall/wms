@@ -338,6 +338,11 @@
                             		if(num_products > 0)
                             		{
                                 		var options2 = {
+                                		    animation:{
+                                		        "startup": true,
+                                		        duration: 1000,
+                                                easing: 'out',
+                                            },
                                 			hAxis: {
                                 				title: 'Product',
                                 				showTextEvery: 1,
