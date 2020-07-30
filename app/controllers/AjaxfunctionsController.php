@@ -951,9 +951,15 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson(array("data" => $tableHTML));
     }
 
-    public function getOrderTrends()
+    public function getWeeklyOrderTrends()
     {
-        $data = $this->order->getOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        $data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        $this->view->renderJson($data);
+    }
+
+    public function getDailyOrderTrends()
+    {
+        $data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 
