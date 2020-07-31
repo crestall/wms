@@ -108,7 +108,7 @@ class Item extends Model{
             $return_string .= "<option";
             if($selected !== false && $selected == $i['available'])
         	{
-        		$return_string .= "selected='selected' ";
+        		$return_string .= " selected='selected' ";
                 $selected = false;
         	}
             $return_string .= ">{$i['available']}</option>";
