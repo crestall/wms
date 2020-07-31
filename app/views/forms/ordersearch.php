@@ -25,7 +25,7 @@ $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
             <div class="form-group row">
                 <label class="col-md-3">Client</label>
                 <div class="col-md-4">
-                    <select id="client_id" name="client_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                    <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                     <?php echo Form::displayError('client_id');?>
                 </div>
             </div>
@@ -33,7 +33,7 @@ $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         <div class="row form-group">
             <label class="col-md-3">Filter By Courier</label>
             <div class="col-md-4">
-                <select id="courier_id" name="courier_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->courier->getSelectCouriers($courier_id, false, false);?></select>
+                <select id="courier_id" name="courier_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->courier->getSelectCouriers($courier_id, false, false);?></select>
             </div>
         </div>
         <div class="row form-group">
@@ -44,7 +44,7 @@ $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
             <div class="col-md-2">
                 <div class="input-group">
                     <input type="text" class="form-control" name="date_from" id="date_from" value="<?php echo $date_from;?>" />
-                    <span class="input-group-addon"><i class="fad fa-calendar-alt fa-2x"></i></span>
+                    <span class="input-group-addon">&nbsp;<i class="fad fa-calendar-alt fa-2x"></i></span>
                 </div>
             </div>
             <div class="col-md-1">
@@ -53,7 +53,7 @@ $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
             <div class="col-md-2">
                 <div class="input-group">
                     <input type="text" class="form-control" name="date_to" id="date_to" value="<?php echo $date_to;?>" />
-                    <span class="input-group-addon"><i class="fad fa-calendar-alt"></i></span>
+                    <span class="input-group-addon">&nbsp;<i class="fad fa-calendar-alt fa-2x"></i></span>
                 </div>
             </div>
         </div>
