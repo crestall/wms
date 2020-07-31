@@ -49,7 +49,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 </div>
                 <div id="items_holder" class="p-3 light-grey">
                     <?php if(is_array(Form::value('items'))):
-                        //echo "<pre>",print_r(Form::value('items')),"</pre>"
+                        echo "<pre>",print_r(Form::value('items')),"</pre>";die();
                         foreach(Form::value('items') as $ind => $ita):?>
                             <div class="row item_holder">
                                 <div class='col-md-1 delete-image-holder'>
