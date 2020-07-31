@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="form-group row custom-control custom-checkbox custom-control-right">
-                    <input class="custom-control-input" type="checkbox" id="header_row" name="header_row" checked;?> />
+                    <input class="custom-control-input" type="checkbox" id="header_row" name="header_row" checked />
                     <label class="custom-control-label col-md-3" for="header_row">My CSV has a header row</label>
                 </div>
 
