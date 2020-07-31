@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-lg-4">
                 <?php if($all):?>
-                    <p><a href="/orders/order-summaries" class="btn btn-primary">Show Recent Summaries</a>
+                    <p><a href="/orders/order-summaries" class="btn btn-secondary">Show Recent Summaries</a>
                 <?php else:?>
-                    <p><a href="/orders/order-summaries/all=true" class="btn btn-primary">Show All Summaries</a><br/>
+                    <p><a href="/orders/order-summaries/all=true" class="btn btn-secondary">Show All Summaries</a><br/>
                     <span class="inst">(this could take a while to load)</span> </p>
                 <?php endif;?>
             </div>
