@@ -260,7 +260,7 @@ var itemsUpdater = {
             $(this).attr('name', 'items['+i+'][name]');
             //console.log( 'has class: '+$(this).closest('div.item_holder').find('.qty-holder').hasClass('col-sm-4') );
             $(this).closest('div.item_holder').find('input.item_qty').attr('name', 'items['+i+'][qty]');
-            $(this).closest('div.item_holder').find('select.pallet_qty').attr('name', 'items['+i+'][pallet_qty]');
+            $(this).closest('div.item_holder').find('select.pallet_qty').attr('name', 'items['+i+'][qty]');
             $(this).closest('div.item_holder').find('input.item_id').attr('name', 'items['+i+'][id]');
             //adjust the validation
             itemsUpdater.updateValidation();
