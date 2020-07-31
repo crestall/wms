@@ -7,12 +7,15 @@ $postcode = Form::value('postcode');
 $country = Form::value('country');
 $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
 $idisp = "none";
+$form_disabled = empty(Form::value('submitted'));
 if(!empty(Form::value('items')))
     $idisp = "block";
 if($user_role == "client")
+{
     $idisp = "block";
+    $form_disabled = false;
+}
 $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') : 0;
-$form_disabled = empty(Form::value('submitted'));
 
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
