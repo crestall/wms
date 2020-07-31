@@ -39,6 +39,7 @@
   getPreferredPickLocationId($item_id)
   getSelectCollectionItems($selected = false)
   getSelectPackitems($selected = false)
+  getSelectLocationAvailableCounts($item_id)
   getStockOnHand($item_id)
   getStockUnderQC($item_id)
   isCollection($item_id)
@@ -70,6 +71,49 @@ class Item extends Model{
     public function __construct()
     {
         $this->getPackagingTypes();
+    }
+
+    public function getSelectLocationAvailableCounts($item_id, $selected = false)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                (a.location_count - IFNULL(b.allocated, 0)) AS available
+            FROM
+            (
+                SELECT
+                    (il.qty - il.qc_count) AS location_count, il.item_id, il.location_id
+                FROM
+                    items_locations il JOIN locations l ON il.location_id = l.id join items i on il.item_id = i.id
+                WHERE
+                    il.item_id = $item_id
+            ) a
+            LEFT JOIN
+            (
+                SELECT
+                	COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                	orders_items oi JOIN orders o ON oi.order_id = o.id
+                WHERE
+                	o.status_id != 4
+                GROUP BY
+                	oi.location_id, oi.item_id
+            ) b
+            ON a.item_id = b.item_id AND a.location_id = b.location_id
+        ";
+        $return_string = "";
+        $items = $db->queryData($q);
+        foreach($items as $i)
+        {
+            $return_string .= "<option";
+            if($selected && $selected == $i['available'])
+        	{
+        		$return_string .= "selected='selected' ";
+                $selected = false;
+        	}
+            $return_string .= ">{$i['available']}</option>";
+        }
+        return $return_string;
     }
 
     public function getSolarConsumablesReordering()
