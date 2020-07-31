@@ -44,7 +44,7 @@ $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
             <div class="col-md-2">
                 <div class="input-group">
                     <input type="text" class="form-control" name="date_from" id="date_from" value="<?php echo $date_from;?>" />
-                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                    <span class="input-group-addon"><i class="fad fa-calendar-alt"></i></span>
                 </div>
             </div>
             <div class="col-md-1">
@@ -53,7 +53,7 @@ $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
             <div class="col-md-2">
                 <div class="input-group">
                     <input type="text" class="form-control" name="date_to" id="date_to" value="<?php echo $date_to;?>" />
-                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                    <span class="input-group-addon"><i class="fad fa-calendar-alt"></i></span>
                 </div>
             </div>
         </div>
