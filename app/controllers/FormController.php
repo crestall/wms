@@ -4616,7 +4616,7 @@ class FormController extends Controller {
 
     public function procOrderAdd()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         /*Session::set('value_array', $_POST);
         Session::set('error_array', Form::getErrorArray());
         return $this->redirector->to(PUBLIC_ROOT."orders/add-order");*/
