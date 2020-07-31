@@ -26,28 +26,14 @@
                     <input class="custom-control-input" type="checkbox" id="header_row" name="header_row" checked />
                     <label class="custom-control-label col-md-3" for="header_row">My CSV has a header row</label>
                 </div>
-
-
-
+                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">&nbsp;</label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-outline-secondary">Upload It</button>
+                    </div>
+                </div>
             </form>
         </div>
-    </div>
-</div>
-<div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-    <div class="row">
-        <form id="bulk-order-csv-upload" method="post" action="/form/procBulkOrderAdd" enctype="multipart/form-data">
-
-
-
-            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">&nbsp;</label>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Upload It</button>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
