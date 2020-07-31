@@ -12,6 +12,8 @@ if(!empty(Form::value('items')))
 if($user_role == "client")
     $idisp = "block";
 $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') : 0;
+$form_disabled = !empty(Form::value('submitted'));
+
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
@@ -175,10 +177,11 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
             <input type="hidden" name="selected_items" id="selected_items" />
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+            <input type="hidden" name="submitted" value="1" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-outline-secondary" id="submitter" disabled>Add This Order</button>
+                    <button type="submit" class="btn btn-outline-secondary" id="submitter" <?php if($form_disabled) echo "disabled";?>>Add This Order</button>
                 </div>
             </div>
         </form>
