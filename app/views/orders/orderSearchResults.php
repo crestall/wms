@@ -50,7 +50,6 @@
                                 <th>Status</th>
                                 <th>Courier</th>
                                 <th>Consignment Number</th>
-                                <th>eParcel Manifest</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,7 +92,6 @@
                                     <td><?php echo $this->controller->order->getStatusName($o['status_id']);?></td>
                                     <td><?php echo $courier;?></td>
                                     <td><?php echo $o['consignment_id'];?></td>
-                                    <td><?php echo $o['manifest_id'];?></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
