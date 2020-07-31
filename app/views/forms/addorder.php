@@ -49,7 +49,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 </div>
                 <div id="items_holder" class="p-3 light-grey">
                     <?php if(is_array(Form::value('items'))):
-                        echo "<pre>",print_r(Form::value('items')),"</pre>";die();
+                        echo "<pre>",print_r(Form::value('items')),"</pre>";//die();
                         foreach(Form::value('items') as $ind => $ita):?>
                             <div class="row item_holder">
                                 <div class='col-md-1 delete-image-holder'>
@@ -66,7 +66,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                                             <?php echo $this->controller->item->getSelectLocationAvailableCounts($ita['id'], $ita['qty']);?>
                                         </select>
                                     <?php else:?>
-                                        <input type='text' class='form-control number item_qty' name='items[<?php echo $ind;?>][qty]' placeholder='Qty' value='<?php echo $ita['qty'];?>' />
+                                        <input type='text' class='form-control number item_qty' name='items[<?php echo $ind;?>][qty]' placeholder='Qty' value="<?php echo $ita['qty'];?>" />
                                     <?php endif;?>
                                 </div>
                                 <div class="col-md-3 qty-location"></div>
