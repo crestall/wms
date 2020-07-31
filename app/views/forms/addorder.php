@@ -165,7 +165,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 col-form-label">3PLPLUS Instructions</label>
+                <label class="col-md-3 col-form-label">FSG Instructions</label>
                 <div class="col-md-4">
                     <textarea class="form-control" name="3pl_comments" id="3pl_comments"><?php echo Form::value('3pl_comments');?></textarea>
                     <span class="inst">Instructions for the pickers and packers</span>

@@ -106,7 +106,7 @@ class Item extends Model{
         foreach($items as $i)
         {
             $return_string .= "<option";
-            if($selected && $selected == $i['available'])
+            if($selected !== false && $selected == $i['available'])
         	{
         		$return_string .= "selected='selected' ";
                 $selected = false;
