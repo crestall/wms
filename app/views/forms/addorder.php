@@ -51,7 +51,7 @@ $form_disabled = empty(Form::value('submitted'));
                 </div>
                 <div id="items_holder" class="p-3 light-grey">
                     <?php if(is_array(Form::value('items'))):
-                        echo "<pre>",print_r(Form::value('items')),"</pre>";//die();
+                        echo "<pre>",print_r(Form::value('items')),"</pre>";die();
                         echo Form::displayError('items');
                         foreach(Form::value('items') as $ind => $ita):?>
                             <div class="row item_holder">
