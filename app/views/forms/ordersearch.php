@@ -9,7 +9,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
 
 $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
 ?>
-<div class="row">
+<div class="col-lg-12">
     <form id="order_search" method="get" action="/orders/order-search-results">
         <div class="form-group row">
             <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Search Term</label>
