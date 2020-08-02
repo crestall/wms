@@ -313,7 +313,7 @@ ul#fileList {
 */
 /*****
 Standard Tables
-******/
+******
 table{
     margin:10px auto;
     border-bottom:solid 2px #106ea4;
@@ -352,7 +352,6 @@ td.available{
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    /* vertical-align: middle; */
     background: url(/styles/images/ui_images/ui-bg_diagonals-thick_0b3e6f_18_40x40.png);
 }
 
@@ -425,7 +424,7 @@ tr.express{
 
 /*****
 Responsive Tables
-******/
+******
  @media
     only screen and (max-width: 760px),
     (min-device-width: 768px) and (max-device-width: 1023px) {
@@ -449,7 +448,7 @@ Responsive Tables
     }
 
     table:not(.ui-datepicker-calendar) tr:not(.full_width) td {
-        /* Behave  like a "row" */
+        /* Behave  like a "row" *
         border: none;
         padding-right: 0;
         border-bottom:dotted 1px #106ea4;
@@ -462,9 +461,9 @@ Responsive Tables
     }
 
     table:not(.ui-datepicker-calendar) tr:not(.full_width) td:before {
-        /* Now like a table header    */
+        /* Now like a table header    *
         position: absolute;
-        /* Top/left values mimic padding */
+        /* Top/left values mimic padding *
         top: 6px;
         left: 6px;
         width: 45%;
@@ -481,7 +480,7 @@ Responsive Tables
         width: 100%;
         position: relative;
         z-index: 1;
-        */
+        *
     }
 
     td.number{
