@@ -907,11 +907,20 @@
                             });
                         });
 
-                        /**/
+                        dataTable.init($('table#client_orders_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [2,4,7] }
+                            ],
+                            "order": [],
+                            fixedHeader: true,
+                            "scrollX": true
+                        } );
+
+                        /*
                         $('table#client_orders_table').filterTable({
                             inputSelector: '#table_searcher'
                         });
-
+                        */
                         //$('table#client_orders_table').stickyTableHeaders();
 
                         $('a.select-courier').click(function(e){
@@ -1019,65 +1028,6 @@
                             }
                         });
 
-                        $('a.viclocal-label-print').click(function(e){
-                            e.preventDefault();
-                            var ids = [];
-                            $('input.select').each(function(i,e){
-                                var order_id = $(this).data('orderid');
-                                if( $(this).prop('checked') && $('select#courier_'+order_id).val() == config.vicLocalId )
-                                {
-                                    ids.push(order_id);
-                                }
-                            });
-                            if(ids.length)
-                            {
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printVicLocalLabels");
-                                form.setAttribute("target", "formresult");
-                                $.each( ids, function( index, value ) {
-                                    var hiddenField = document.createElement("input");
-                                    hiddenField.setAttribute("type", "hidden");
-                                    hiddenField.setAttribute("name", "orders[]");
-                                    hiddenField.setAttribute("value", value);
-                                    form.appendChild(hiddenField);
-                                });
-                                document.body.appendChild(form);
-                                window.open('','formresult');
-                                form.submit();
-                            }
-
-                        });
-
-                        $('a.cometlocal-label-print').click(function(e){
-                            e.preventDefault();
-                            var ids = [];
-                            $('input.select').each(function(i,e){
-                                var order_id = $(this).data('orderid');
-                                if( $(this).prop('checked') && ( $('select#courier_'+order_id).val() == config.cometLocalId || $('select#courier_'+order_id).val() == config.sydneyCometId ) )
-                                {
-                                    ids.push(order_id);
-                                }
-                            });
-                            if(ids.length)
-                            {
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printCometLocalLabels");
-                                form.setAttribute("target", "formresult");
-                                $.each( ids, function( index, value ) {
-                                    var hiddenField = document.createElement("input");
-                                    hiddenField.setAttribute("type", "hidden");
-                                    hiddenField.setAttribute("name", "orders[]");
-                                    hiddenField.setAttribute("value", value);
-                                    form.appendChild(hiddenField);
-                                });
-                                document.body.appendChild(form);
-                                window.open('','formresult');
-                                form.submit();
-                            }
-
-                        });
 
                         $('a.export-csv').click(function(e){
                             e.preventDefault();
@@ -1096,27 +1046,6 @@
                                     csrf_token: config.csrfToken
                                 }
                                 var url = "/downloads/orderExportCSV";
-                                fileDownload.download(url, data);
-                            }
-                        });
-
-                        $('a.comet-csv').click(function(e){
-                            e.preventDefault();
-                            if($('input.select:checked').length)
-                            {
-                                var ids = [];
-                                $('input.select').each(function(i,e){
-                                    if($(this).prop('checked'))
-                                    {
-                                        ids.push($(this).data('orderid'));
-                                    }
-                                });
-                                var data = {
-                                    client_id: $('#client_selector').val(),
-                                    order_ids: ids,
-                                    csrf_token: config.csrfToken
-                                }
-                                var url = "/downloads/cometCSV";
                                 fileDownload.download(url, data);
                             }
                         });
@@ -1272,144 +1201,6 @@
                                         document.close();
                                     }
                                 });
-                            });
-                        });
-
-                        $('a.viclocal-fulfill').click(function(e){
-                            e.preventDefault();
-                            swal({
-                                title: "Fulfill These Orders?",
-                                text: "This will close each order and adjust stock\n\nIt cannot be undone",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true
-                            }).then( function(willFulfill) {
-                                if (willFulfill) {
-                                    var ids = [];
-                                    $('input.select').each(function(i,e){
-                                        var order_id = $(this).data('orderid');
-                                        console.log('order_id: '+ order_id);
-                                        if( $(this).prop('checked') && $('select#courier_'+order_id).val() == config.vicLocalId )
-                                        {
-                                            ids.push(order_id);
-                                        }
-                                    });
-                                    $.ajax({
-                                        url: '/ajaxfunctions/fulfill-order',
-                                        method: 'post',
-                                        data: {
-                                            order_ids: ids,
-                                            courier_id: config.vicLocalId
-                                        },
-                                        dataType: 'json',
-                                        beforeSend: function(){
-                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
-                                        },
-                                        success: function(d){
-                                            if(d.error)
-                                            {
-                                                $.unblockUI();
-                                                alert('error');
-                                            }
-                                            else
-                                            {
-                                                location.reload();
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-                        });
-
-                        $('a.cometlocal-fulfill').click(function(e){
-                            e.preventDefault();
-                            swal({
-                                title: "Fulfill These Orders?",
-                                text: "This will close each order and adjust stock\n\nIt cannot be undone",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true
-                            }).then( function(willFulfill) {
-                                if (willFulfill) {
-                                    var ids = [];
-                                    $('input.select').each(function(i,e){
-                                        var order_id = $(this).data('orderid');
-                                        console.log('order_id: '+ order_id);
-                                        if( $(this).prop('checked') && $('select#courier_'+order_id).val() == config.cometLocalId )
-                                        {
-                                            ids.push(order_id);
-                                        }
-                                    });
-                                    $.ajax({
-                                        url: '/ajaxfunctions/fulfill-order',
-                                        method: 'post',
-                                        data: {
-                                            order_ids: ids,
-                                            courier_id: config.cometLocalId
-                                        },
-                                        dataType: 'json',
-                                        beforeSend: function(){
-                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
-                                        },
-                                        success: function(d){
-                                            if(d.error)
-                                            {
-                                                $.unblockUI();
-                                                alert('error');
-                                            }
-                                            else
-                                            {
-                                                location.reload();
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-                        });
-
-                        $('a.cometsydney-fulfill').click(function(e){
-                            e.preventDefault();
-                            swal({
-                                title: "Fulfill These Orders?",
-                                text: "This will close each order and adjust stock\n\nIt cannot be undone",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true
-                            }).then( function(willFulfill) {
-                                if (willFulfill) {
-                                    var ids = [];
-                                    $('input.select').each(function(i,e){
-                                        var order_id = $(this).data('orderid');
-                                        console.log('order_id: '+ order_id);
-                                        if( $(this).prop('checked') && $('select#courier_'+order_id).val() == config.sydneyCometId )
-                                        {
-                                            ids.push(order_id);
-                                        }
-                                    });
-                                    $.ajax({
-                                        url: '/ajaxfunctions/fulfill-order',
-                                        method: 'post',
-                                        data: {
-                                            order_ids: ids,
-                                            courier_id: config.sydneyCometId
-                                        },
-                                        dataType: 'json',
-                                        beforeSend: function(){
-                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
-                                        },
-                                        success: function(d){
-                                            if(d.error)
-                                            {
-                                                $.unblockUI();
-                                                alert('error');
-                                            }
-                                            else
-                                            {
-                                                location.reload();
-                                            }
-                                        }
-                                    });
-                                }
                             });
                         });
 
