@@ -143,7 +143,7 @@
                             </div>
                         </th>
                         <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
+        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
                         <?php elseif($user_role == "warehouse"):?>
                             <th>Courier</th>
                         <?php endif;?>
