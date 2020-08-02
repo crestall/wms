@@ -270,8 +270,8 @@
                             </td>
         				</tr>
                         <?php if($errors):?>
-                            <tr class="full_width">
-                                <tr class="table-warning" colspan="14">
+                            <tr class="table-warning">
+                                <td colspan="14">
                                     <?php echo $co['error_string'];?>
                                     <p><a class="btn btn-primary" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                 </td>
