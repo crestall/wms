@@ -122,7 +122,7 @@
     <div class="table-responsive-md">
             <table class="table table-striped table-bordered table-hover table-sm" id="client_orders_table">
                 <thead>
-        	    	<tr>
+        	    	<tr class="table-secondary">
                         <th></th>
         	        	<th>Order No</th>
                         <th>Client Order<br/>Number</th>
