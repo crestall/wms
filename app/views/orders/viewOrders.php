@@ -119,7 +119,7 @@
         </div>
     </div>
     <?php if(count($orders)):?>
-    <div class="table-responsive-md">
+    <div class="table-responsive-lg">
             <table class="table table-striped table-bordered table-hover table-sm" id="client_orders_table">
                 <thead>
         	    	<tr class="table-secondary">
