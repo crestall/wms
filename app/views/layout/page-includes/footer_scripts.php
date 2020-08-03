@@ -13,10 +13,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
         <!-- Menu JavaScript -->
         <!--script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.8/metisMenu.min.js"></script-->
-        <!-- DataTables JavaScript>
-        <script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-        <script src="//cdn.datatables.net/1.10.18/js/dataTables.bootstrap.min.js"></script>
-        <script src="//cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script-->
         <!-- DataTables JavaScript -->
         <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
         <script src="//cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
@@ -27,6 +23,7 @@
         <script src="/scripts/jquery.PrintArea.js"></script> 
         <!-- Live Filter JavaScript -->
         <!--script src="/scripts/jquery.liveFilter.js"></script-->
+        <!-- Filter Tables JavaScript -->
         <script src="/scripts/jquery.filtertable.min.js"></script>
         <!-- File download JavaScript -->
         <script src="/scripts/jquery.filedownload.js"></script>
