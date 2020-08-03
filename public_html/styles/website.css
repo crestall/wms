@@ -470,7 +470,7 @@ Responsive Tables
     table:not(.ui-datepicker-calendar) tr:not(.full_width) td:before {
         /* Now like a table header    */
         position: absolute;
-        /* Top/left values mimic padding * /
+        /* Top/left values mimic padding */
         top: 6px;
         left: 6px;
         width: 45%;
@@ -479,7 +479,7 @@ Responsive Tables
         text-align: left;
         content: attr(data-label);
         border-right:thin solid #106ea4;
-        /* */
+        /*
         display: inline-block;
         font-weight: bold;
         line-height: 1.5;
@@ -487,7 +487,7 @@ Responsive Tables
         width: 100%;
         position: relative;
         z-index: 1;
-
+         */
     }
 
     td.number{
