@@ -85,6 +85,12 @@
                 </select>
             </div>
         </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label>Search</label>
+                <input type="text" class="form-control" id="table_searcher" />
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
