@@ -304,6 +304,13 @@ ul#fileList {
     font-style: italic;
 }
 
+table.table th,
+table.table td {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
 /*
 .btn-default{
     color: #fff;
