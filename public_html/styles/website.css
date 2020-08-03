@@ -303,7 +303,7 @@ ul#fileList {
     font-size: 14px;
     font-style: italic;
 }
-
+/*
 table.table th,
 table.table td {
     -webkit-box-sizing: content-box;
@@ -311,7 +311,7 @@ table.table td {
     box-sizing: content-box;
 }
 
-/*
+
 .btn-default{
     color: #fff;
     background-color: #aeaeae;
