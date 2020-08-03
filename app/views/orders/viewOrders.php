@@ -18,7 +18,7 @@
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
         <div class="row">
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
+                <p><a class="btn btn-outline-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-secondary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
@@ -33,7 +33,7 @@
                 <p><a class="btn btn-warning print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-dark add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
+                <p><a class="btn btn-light add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-secondary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
