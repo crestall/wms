@@ -491,15 +491,10 @@
         else
         {
             //if( $weight > 22 || !in_array($ad['country'], $pti8_countries) )
-            if( $weight > 22 )
-            {
-                return 'ECM8';
-                //return 'AIR8';
-            }
-            else
-            {
-                return 'PTI7';
-            }
+            //return 'AIR8';
+            //return 'PTI7'; //signature
+            //return 'PTI8'; //no signature
+            return 'ECM8';
         }
     }
 
