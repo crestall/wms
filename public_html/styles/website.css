@@ -429,6 +429,14 @@ tr.express{
     background:url(/styles/images/ui_images/ui-bg_gloss-wave_35_f6a828_500x100.png);
 }
 
+/****
+Table Live Filter
+*****/
+.filter-table .quick { margin-left: 0.5em; font-size: 0.8em; text-decoration: none; }
+.fitler-table .quick:hover { text-decoration: underline; }
+td.alt { background-color: #ffc; background-color: rgba(255, 255, 0, 0.2); }
+
+
 /*****
 Responsive Tables
 ******/
