@@ -906,16 +906,19 @@
                             	    $(this).val(c).change();
                             });
                         });
-
+                        /*
                         dataTable.init($('table#client_orders_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [0,3,5,7,8,9,10,11,12,13] }
+                            ],
                             "order": []
                         } );
+                        */
 
-                        /*
                         $('table#client_orders_table').filterTable({
                             inputSelector: '#table_searcher'
                         });
-                        */
+
                         //$('table#client_orders_table').stickyTableHeaders();
 
                         $('a.select-courier').click(function(e){
