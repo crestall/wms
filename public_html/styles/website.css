@@ -471,7 +471,7 @@ Responsive Tables
         /* Now like a table header    */
         position: absolute;
         /* Top/left values mimic padding */
-        top: 6px;
+        top: 5%;
         left: 6px;
         width: 45%;
         white-space: nowrap;
@@ -479,6 +479,7 @@ Responsive Tables
         text-align: left;
         content: attr(data-label);
         border-right:thin solid #106ea4;
+        height: 90%;
         /*
         display: inline-block;
         font-weight: bold;
