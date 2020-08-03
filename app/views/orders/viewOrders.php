@@ -16,29 +16,29 @@
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        <div class="row">
-            <div class="text-right col-xl-3 col-l-4 col-m-6">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4">
+            <div class="col">
                 <p><a class="btn btn-outline-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
-            <div class="text-right col-lg-3 col-xl-3 col-l-4 col-m-6">
+            <div class="col">
                 <p><a class="btn btn-outline-secondary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
             </div>
-            <div class="text-right col-lg-3 col-xl-3 col-l-4 col-m-6">
+            <div class="col">
                 <p><a class="btn btn-outline-primary select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
             </div>
-            <div class="text-right col-lg-3 col-xl-3 col-l-4 col-m-6">
+            <div class="col">
                 <p><a class="btn btn-outline-success eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
             </div>
-            <div class="text-right col-lg-3 col-xl-3 col-l-4 col-m-6">
+            <div class="col">
                 <p><a class="btn btn-outline-warning print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
             </div>
-            <div class="text-right col-xl-3 col-l-4 col-m-6">
+            <div class="col">
                 <p><a class="btn btn-outline-dark add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
             </div>
-            <div class="text-right col-xl-3 col-l-4 col-m-6">
+            <div class="col">
                 <p><a class="btn btn-outline-secondary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
             </div>
-            <div class="text-right col-xl-3 col-l-4 col-m-6">
+            <div class="col">
                 <p><a class="btn btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
             </div>
         </div>
