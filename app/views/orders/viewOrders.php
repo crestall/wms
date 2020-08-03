@@ -100,7 +100,7 @@
     <div class="table-responsive-xl">
             <table class="table-striped table-hover" id="client_orders_table" width="100%">
                 <thead>
-        	    	<tr class="table-secondary">
+        	    	<tr>
                         <th></th>
         	        	<th>Order No</th>
                         <th>Client Order<br/>Number</th>
