@@ -18,17 +18,7 @@
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
         <div class="row">
             <div class="col-lg-3 text-center">
-                <?php if($fulfilled == 0):?>
-                    <p><button class="btn btn-info" id="show_fulfilled">Show Only Fulfilled Orders</button></p>
-                <?php else:?>
-                    <p><button class="btn btn-primary" id="show_unfulfilled">Show Only Unfulfilled Orders</button></p>
-                <?php endif;?>
-            </div>
-            <div class="col-lg-3 text-center">
                 <p><a class="btn btn-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
-            </div>
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-warning comet-csv"><i class="fas fa-file-csv"></i> Generate Comet CSV for Selected</a></p>
             </div>
         </div>
         <div class="row">
@@ -38,15 +28,10 @@
             </div>
             <div class="col-lg-3 text-center">
                 <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
-                <p><a class="btn btn-default viclocal-label-print"><i class="fas fa-tags"></i> Print Vic Local Labels For Selected</a> </p>
-                <p><a class="btn btn-default cometlocal-label-print"><i class="fas fa-tags"></i> Print Comet Local Labels For Selected</a> </p> 
             </div>
             <?php if($fulfilled == 0):?>
                 <div class="col-lg-3 text-center">
                     <p><a class="btn btn-primary eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
-                    <p><a class="btn btn-default viclocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Vic Local Orders</a> </p>
-                    <p><a class="btn btn-default cometlocal-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Comet Local Orders</a> </p>
-                    <p><a class="btn btn-default cometsydney-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Sydney Comet Orders</a> </p>
                 </div>
             <?php endif;?>
             <div class="col-lg-3 text-center">
@@ -55,7 +40,6 @@
                 <?php endif;?>
                 <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
                 <p><a class="btn btn-primary add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
-                <p><a class="btn btn-warning auspost-csv"><i class="fas fa-download"></i> Download eParcel CSV For Selected</a> </p>
             </div>
         </div>
     <?php elseif($user_role == "warehouse"):?>
@@ -66,7 +50,6 @@
             </div>
             <div class="col-lg-3 text-center">
                 <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
-                <p><a class="btn btn-secondary viclocal-label-print"><i class="fas fa-tags"></i> Print Vic Local Labels For Selected</a> </p>
             </div>
         </div>
     <?php endif;?>
@@ -100,12 +83,6 @@
                     }
                     ?>
                 </select>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label>Search</label>
-                <input type="text" class="form-control" id="table_searcher" />
             </div>
         </div>
     </div>
