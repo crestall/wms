@@ -98,7 +98,7 @@
     </div>
     <?php if(count($orders)):?>
     <div class="table-responsive-xl">
-            <table class="table table-striped table-bordered table-hover table-sm w-auto" id="client_orders_table" width="100%">
+            <table class="table-striped table-hover" id="client_orders_table" width="100%">
                 <thead>
         	    	<tr class="table-secondary">
                         <th></th>
