@@ -143,7 +143,7 @@
                             </div>
                         </th>
                         <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
+        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary" data-width="fit"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
                         <?php elseif($user_role == "warehouse"):?>
                             <th>Courier</th>
                         <?php endif;?>
@@ -249,7 +249,7 @@
                             </td>
                             <?php if($user_role == "admin" || $user_role == "super admin"):?>
             					<td data-label="Courier" nowrap>
-            					    <p><select name="courier" class="selectpicker courier" data-style="btn-outline-secondary" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
+            					    <p><select name="courier" class="selectpicker courier" data-style="btn-outline-secondary" data-width="fit" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                     <p><button class="ship_quote btn btn-primary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
                                     <p><button class="btn btn-warning adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
                                     <?php if( Session::getUserRole() == "admin" && $co['courier_id'] > 0): ?>
