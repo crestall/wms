@@ -12,7 +12,7 @@
   asort($states);
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container">
+    <div id="page_container" class="container-fluid">
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
