@@ -69,7 +69,7 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By State</label>
-                <select id="state_selector" class="form-control selectpicker">
+                <select id="state_selector" class="form-control selectpicker" data-style="btn-outline-secondary">
                     <option value="0">All States</option>
                     <?php
                     foreach($states as $s)
