@@ -54,19 +54,19 @@
         </div>
     <?php endif;?>
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By Client</label>
                 <select id="client_selector" class="form-control selectpicker"><option value="0">All Clients</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By Courier</label>
                 <select id="courier_selector" class="form-control selectpicker"><option value="-1">All Couriers</option><?php echo $this->controller->courier->getSelectCouriers($courier_id, true, false);?></select>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By State</label>
                 <select id="state_selector" class="form-control selectpicker">
@@ -85,7 +85,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Search</label>
                 <input type="text" class="form-control" id="table_searcher" />
