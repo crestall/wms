@@ -12,11 +12,11 @@
   asort($states);
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container">
+    <div id="page_container" class="container-fluid">
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
             <div class="col">
                 <p><a class="btn btn-outline-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
