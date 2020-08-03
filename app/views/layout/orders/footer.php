@@ -937,7 +937,7 @@
                                             }
                                             else
                                             {
-                                                //location.reload();
+                                                location.reload();
                                             }
                                         }
                                     });
