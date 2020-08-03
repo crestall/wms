@@ -10,7 +10,7 @@ $card_classes = array(
 $c = 1;
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container">
+    <div id="page_container" class="container-xl">
         <?php if($user_role == "admin" || $user_role == "warehouse"):?>
             <input type="hidden" id="admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
             <input type="hidden" id="admin_to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
