@@ -20,25 +20,25 @@
             <div class="text-right col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
-            <div class="text-center col-lg-3 col-md-4 col-sm-6">
+            <div class="text-right col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-secondary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
             </div>
-            <div class="text-center col-lg-3 col-md-4 col-sm-6">
+            <div class="text-right col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-primary select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
             </div>
-            <div class="text-center col-lg-3 col-md-4 col-sm-6">
+            <div class="text-right col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-success eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
             </div>
-            <div class="text-center col-lg-3 col-md-4 col-sm-6">
+            <div class="text-right col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-warning print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
             </div>
-            <div class="text-center col-lg-3 col-md-4 col-sm-6">
+            <div class="text-right col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-dark add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
             </div>
-            <div class="text-center col-lg-3 col-md-4 col-sm-6">
+            <div class="text-right col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-secondary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
             </div>
-            <div class="text-center col-lg-3 col-md-4 col-sm-6">
+            <div class="text-right col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
             </div>
         </div>
