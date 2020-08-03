@@ -21,25 +21,25 @@
                 <p><a class="btn btn-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-primary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
+                <p><a class="btn btn-secondary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-primary select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-primary eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
+                <p><a class="btn btn-success eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
+                <p><a class="btn btn-warning print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-primary add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
+                <p><a class="btn btn-dark add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
+            </div>
+            <div class="text-center col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-secondary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
-            </div>
-            <div class="text-center col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
             </div>
         </div>
     <?php elseif($user_role == "warehouse"):?>
