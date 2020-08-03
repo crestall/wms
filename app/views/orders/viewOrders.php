@@ -98,6 +98,7 @@
     </div>
     <?php if(count($orders)):?>
     <div class="row">
+        <div class="col-lg-12">
             <table class="table table-striped table-hover" id="client_orders_table" width="100%">
                 <thead>
         	    	<tr>
@@ -268,6 +269,7 @@
         			<?php endforeach;?>
                 </tbody>
             </table>
+        </div>
     </div>
 <?php else:?>
     <div class="row">
