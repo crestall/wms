@@ -18,7 +18,7 @@
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
         <div class="row" >
             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
-                <a class="btn btn-block btn-outline-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a>
+                <a class="btn btn-sm btn-block btn-outline-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
                 <p><a class="btn btn-block btn-outline-secondary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
