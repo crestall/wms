@@ -17,7 +17,7 @@
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
         <div class="row">
-            <div class="text-center col-lg-3 col-md-4 col-sm-6">
+            <div class="text-right col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
