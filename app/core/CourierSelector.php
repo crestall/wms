@@ -125,6 +125,12 @@
                     $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.4 * 1.1, 2);
                 }
             /*********** end charge FREEDOM more *******************/
+            /*********** special deals for OnePlate *******************/
+                if($this->order_details['client_id'] == 82)
+                {
+                    $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1, 2);
+                }
+            /*********** special deals for OnePlate *******************/
             $order_values['charge_code'] = $sResponse['shipments'][0]['items'][0]['product_id'];
             /***************************** special deals for Big Bottle *****************************/
                 if($this->order_details['client_id'] == 6)

@@ -757,10 +757,23 @@ class ajaxfunctionsController extends Controller
                     $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.4 * 1.1, 2);
                 }
             /*********** charge FREEDOM more *******************/
+            /*********** special deals for OnePlate *******************/
+                if($od['client_id'] == 82)
+                {
+                    $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1, 2);
+                    $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1, 2);
+                }
+            /*********** special deals for OnePlate *******************/
         }
         if($df_response['ResponseCode'] == 300)
         {
             $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2);
+            /*********** special deals for OnePlate *******************/
+                if($od['client_id'] == 82)
+                {
+                    $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                }
+            /*********** special deals for OnePlate *******************/
             /*********** charge FREEDOM more *******************/
                 if($od['client_id'] == 7)
                 {
