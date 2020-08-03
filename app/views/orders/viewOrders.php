@@ -33,7 +33,7 @@
                 <p><a class="btn btn-outline-warning print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-outline-light add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
+                <p><a class="btn btn-outline-dark add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
             </div>
             <div class="text-center col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-outline-secondary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
