@@ -2,7 +2,7 @@
 
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-fluid">
+    <div id="page_container" class="container-xl">
         <div class="row">
             <div class="col-lg-12">
                 <div class="error_page internal_error text-center">
