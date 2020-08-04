@@ -6,7 +6,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
-        <div class="col-lg-12">
+        <div id="bulk_upload_form"class="col-lg-12">
             <form id="bulk-order-csv-upload" method="post" action="/form/procBulkOrderAdd" enctype="multipart/form-data">
                 <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
