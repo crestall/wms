@@ -278,7 +278,7 @@ div.not_found{
 }
 
 div.internal_error{
-    background: url(/images/backgrounds/500_bg.png) center center no-repeat;
+    background: url(/images/backgrounds/error-bg.jpg) center center no-repeat;
 }
 
 /*****
