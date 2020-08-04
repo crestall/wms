@@ -52,18 +52,12 @@ if(!$error)
             </div>
         <?php else:?>
             <div class="row">
-                <div class="col-md-4">
-                    <?php if($store_order):?>
-                        <p><a class="btn btn-primary" href="/orders/view-storeorders/client=<?php echo $order['client_id'];?>">View Store Orders For Client</a> </p>
-                    <?php else:?>
-                        <p><a class="btn btn-primary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a></p>
-                    <?php endif;?>
+                <div class="col">
+                    <p><a class="btn btn-outline-secondary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a></p>
                 </div>
-                <?php if($user_role == "admin" || $user_role == "super admin"):?>
-                    <div class="col-md-4">
-                        <p><a class="btn btn-primary" href="/orders/order-detail/order=<?php echo $order_id;?>">View and Print Details</a></p>
-                    </div>
-                <?php endif;?>
+                <div class="col">
+                    <p><a class="btn btn-outline-secondary" href="/orders/order-detail/order=<?php echo $order_id;?>">View and Print Details</a></p>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
