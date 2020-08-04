@@ -60,12 +60,12 @@ if(!$error)
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col">
                     <h2>Updating Order Number <?php echo $order['order_number'];?></h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col">
                     <h3>Order For <?php echo $client_name;?></h3>
                 </div>
             </div>
@@ -80,7 +80,7 @@ if(!$error)
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col">
                     <h3>Delivery Details</h3>
                 </div>
             </div>
