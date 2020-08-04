@@ -58,7 +58,7 @@ if(!$error)
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col m-3">
                     <h2>Updating Address For Order Number <?php echo $order['order_number'];?></h2>
                 </div>
             </div>
