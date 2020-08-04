@@ -285,7 +285,7 @@ div.internal_error{
 Form adjustments
 *****/
 div#bulk_upload_form{
-    min-height: 600px;
+    min-height: 500px;
 }
 
 input.number,
