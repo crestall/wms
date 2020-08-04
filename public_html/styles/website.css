@@ -26,6 +26,7 @@ div#page_container{
     background-color: #fdfdfd;
     box-shadow: -5px 0 5px -5px rgba(50, 50, 50, 0.3), 5px 0 5px -5px rgba(50, 50, 50, 0.3);
     padding-bottom: 20px;
+    overflow-x: auto;
 }
 
 
