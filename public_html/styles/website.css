@@ -591,6 +591,19 @@ bootsrap adjustments
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
     }
 
+    .container-xxl{
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    @media(min-width: 1500px)
+    {
+        max-width:1500px;
+    }
+
 /********
 Responsive adjustments
 *******  */
