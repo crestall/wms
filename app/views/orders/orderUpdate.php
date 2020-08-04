@@ -79,6 +79,27 @@ if(!$error)
                     <?php endif; ?>
                 </div>
             </div>
+            <div class="card">
+                
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="row">
                 <div class="col">
                     <h3>Delivery Details</h3>
