@@ -21,8 +21,8 @@ if(!$error)
                 <div class="col">
                     <div class="errorbox">
                         <div class="row">
-                            <div class="col-3" style="font-size:96px">
-                                <i class="fas fa-exclamation-triangle"></i>
+                            <div class="col-3">
+                                <i class="fas fa-exclamation-triangle fa-2x"></i>
                             </div>
                             <div class="col-9">
                                 <h2>No Order ID Supplied</h2>
