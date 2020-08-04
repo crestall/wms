@@ -601,7 +601,9 @@ bootsrap adjustments
 
     @media(min-width: 1500px)
     {
-        max-width:1500px;
+        .container-xxl{
+            max-width:1440px;
+        }
     }
 
 /********
