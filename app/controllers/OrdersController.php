@@ -681,7 +681,6 @@ class OrdersController extends Controller
             $packages = array();
             $client_name = "";
             $truck_id = $local_id = -5;
-            $store_order = false;
             $address_string = "";
             $eb = "";
         }
@@ -702,7 +701,6 @@ class OrdersController extends Controller
             $address_string .= " ".$order['state'];
             $address_string .= " ".$order['postcode'];
             $address_string .= " ".$order['country'];
-            $store_order = $order['store_order'] > 0;
             $eb = $this->user->getUserName( $order['entered_by'] );
             if(empty($eb))
             {
@@ -722,7 +720,6 @@ class OrdersController extends Controller
             'truck_id'          =>  $truck_id,
             'local_id'          =>  $local_id,
             'address_string'    =>  $address_string,
-            'store_order'       =>  $store_order,
             'entered_by'        =>  $eb
         ]);
     }
