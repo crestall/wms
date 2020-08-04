@@ -22,7 +22,7 @@ if(!$error)
                     <div class="errorbox">
                         <div class="row">
                             <div class="col-3">
-                                <i class="fad fa-exclamation-triangle fa-10x"></i>
+                                <i class="fad fa-exclamation-triangle fa-8x"></i>
                             </div>
                             <div class="col-9">
                                 <h2>No Order ID Supplied</h2>
