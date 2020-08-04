@@ -1,6 +1,5 @@
 <?php
-if($table == "orders")
-{
+
     $ship_to    = (empty(Form::value('ship_to')))?  $order['ship_to']      : Form::value('ship_to');
     $company    = (empty(Form::value('company')))?  $order['company_name'] : Form::value('company');
     $address    = empty(Form::value('address'))?    $order['address']      : Form::value('address');
@@ -23,28 +22,6 @@ if($table == "orders")
             <h2>Updating Address For Order Number '.$order['order_number'].'</h2>
         </div>
     ';
-}
-elseif($table =="swatches")
-{
-    $ship_to    = (empty(Form::value('ship_to')))?  $order['name']         : Form::value('ship_to');
-    $address    = empty(Form::value('address'))?    $order['address']      : Form::value('address');
-    $address2   = empty(Form::value('address2'))?   $order['address_2']    : Form::value('address2');
-    $suburb     = empty(Form::value('suburb'))?     $order['suburb']       : Form::value('suburb');
-    $state      = empty(Form::value('state'))?      $order['state']        : Form::value('state');
-    $postcode   = empty(Form::value('postcode'))?   $order['postcode']     : Form::value('postcode');
-    $country    = empty(Form::value('country'))?    $order['country']      : Form::value('country');
-    $link = "/orders/manage-swatches";
-    $buttons = '
-            <div class="col-lg-4">
-                <a class="btn btn-primary" href="/orders/manage-swatches">View All Swatches</a>
-            </div>
-        ';
-    $head = '
-        <div class="col-lg-12">
-            <h2>Updating Address For Swatch Request</h2>
-        </div>
-    ';
-}
 
 ?>
 <div id="page-wrapper">
