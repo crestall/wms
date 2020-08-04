@@ -283,14 +283,11 @@ div.internal_error{
 
 /*****
 Form adjustments
-*****
-input.form-control,
-select.form-control,
-.bootstrap-select > .dropdown-toggle,
-.form-group .bootstrap-select.btn-group {
-    max-width:450px;
+*****/
+div#bulk_upload_form{
+    min-height: 600px;
 }
-*/
+
 input.number,
 input.digits{
     text-align: right;
@@ -317,21 +314,6 @@ ul#fileList {
     font-size: 14px;
     font-style: italic;
 }
-/*
-table.table th,
-table.table td {
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-}
-
-
-.btn-default{
-    color: #fff;
-    background-color: #aeaeae;
-    border-color: #222;
-}
-*/
 /*****
 Standard Tables
 ******/
