@@ -267,6 +267,15 @@ div.broken_page{
     width: 100%;
 }
 
+div.error_page{
+    min-height:666px;
+    width: 100%;
+}
+
+div.not_found{
+    background: url(/images/backgrounds/404_background.png) center center no-repeat;
+}
+
 /*****
 Form adjustments
 *****
