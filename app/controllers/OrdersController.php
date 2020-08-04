@@ -471,21 +471,12 @@ class OrdersController extends Controller
             $error = false;
             $order_id = $this->request->params['args']['order'];
             $order = $this->order->getOrderDetail($order_id);
-            $table = "orders";
-        }
-        elseif(isset($this->request->params['args']['swatch']))
-        {
-            $error = false;
-            $order_id = $this->request->params['args']['swatch'];
-            $order = $this->swatch->getSwatchDetail($order_id);
-            $table = "swatches";
         }
         else
         {
             $error = true;
             $order_id = 0;
             $order = array();
-            $table = "";
         }
         //render the page
         Config::setJsConfig('curPage', "address-update");
@@ -494,7 +485,6 @@ class OrdersController extends Controller
             'order_id'      =>  $order_id,
             'order'         =>  $order,
             'error'         =>  $error,
-            'table'         =>  $table
         ]);
     }
 
