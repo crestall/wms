@@ -78,17 +78,14 @@
                         <?php echo Form::displayError('ship_to');?>
                     </div>
                 </div>
-                <?php if($table == "orders"):?>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Company</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="company" id="company" value="<?php echo $company;?>" />
-                        </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Company</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="company" id="company" value="<?php echo $company;?>" />
                     </div>
-                <?php endif;?>
+                </div>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
-                <input type="hidden" name="order_id" value="<?php echo $order['id'];?>" />
-                <input type="hidden" name="table" value="<?php echo $table;?>" />
+                <input type="hidden" name="order_id" value="<?php echo $order['id'];?>" /> 
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
