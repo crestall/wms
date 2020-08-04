@@ -917,7 +917,8 @@
 
                         $('table#client_orders_table').filterTable({
                             inputSelector: '#table_searcher',
-                            minRows: 2
+                            minRows: 2,
+                            ignoreColumns: [3,6,7,8,9,10,11,12,13]
                         });
 
                         //$('table#client_orders_table').stickyTableHeaders();
