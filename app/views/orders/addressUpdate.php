@@ -51,10 +51,10 @@ if(!$error)
         <?php else:?>
             <div class="row">
                 <div class="col">
-                    <a class="btn btn-primary" href="/orders/order-update/order='.$order_id.'">Return to Order</a>
+                    <a class="btn btn-primary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
                 </div>
                 <div class="col">
-                    <a class="btn btn-primary" href="/orders/view-orders/client='.$order['client_id'].'">View Orders For Client</a>
+                    <a class="btn btn-primary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
                 </div>
             </div>
             <div class="row">
