@@ -276,6 +276,10 @@ div.not_found{
     background: url(/images/backgrounds/404_bg1.png) center center no-repeat;
 }
 
+div.internal_error{
+    background: url(/images/backgrounds/500_bg.png) center center no-repeat;
+}
+
 /*****
 Form adjustments
 *****
