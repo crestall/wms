@@ -682,6 +682,7 @@ class OrdersController extends Controller
             $client_name = "";
             $truck_id = $local_id = -5;
             $store_order = false;
+            $address_string = "";
             $eb = "";
         }
         else
