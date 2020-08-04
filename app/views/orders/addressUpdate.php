@@ -24,8 +24,8 @@ if(!$error)
                             </div>
                             <div class="col-lg-6">
                                 <h2>No ID Supplied</h2>
-                                <p>No order/request was supplied to update</p>
-                                <p><a href="/orders/view-orders">Please click here to view all orders/requests to choose from</a></p>
+                                <p>No order was supplied to update</p>
+                                <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
                             </div>
                         </div>
                     </div>
@@ -40,9 +40,9 @@ if(!$error)
                                 <i class="fas fa-exclamation-triangle"></i>
                             </div>
                             <div class="col-lg-6">
-                                <h2>No Order/Request Found</h2>
+                                <h2>No Order Found</h2>
                                 <p>No order was found with that ID</p>
-                                <p><a href="/orders/view-orders">Please click here to view all orders/requests to choose from</a></p>
+                                <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,6 @@ if(!$error)
             </div>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
             <?php echo Form::displayError('general');?>
-            <div class="row">
                 <form id="address-update" method="post" action="/form/procAddressUpdate">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Deliver To</label>
@@ -89,7 +88,6 @@ if(!$error)
                         </div>
                     </div>
                 </form>
-            </div>
         <?php endif;?>
     </div>
 </div>
