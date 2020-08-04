@@ -66,7 +66,7 @@ if(!$error)
             <?php echo Form::displayError('general');?>
                 <form id="address-update" method="post" action="/form/procAddressUpdate">
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Deliver To</label>
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
                             <?php echo Form::displayError('ship_to');?>
