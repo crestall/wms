@@ -4,6 +4,22 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col">Nuchev</div>
+            <div class="col">One Plate</div>
+            <div class="col">Freedom</div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
         <div class="row">
             <div class="col-md-2">
                 <p><a class="btn btn-primary" href="#nuchev">Nuchev</a></p>
