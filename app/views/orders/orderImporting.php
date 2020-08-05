@@ -4,7 +4,7 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row">
+        <!--div class="row">
             <div class="col">
                 <p><a class="btn btn-primary" href="#nuchev">Nuchev</a></p>
             </div>
@@ -14,7 +14,7 @@
             <div class="col">
                 <p><a class="btn btn-primary" href="#freedom">Freedom</a></p>
             </div>
-        </div>
+        </div-->
         <div class="row">
             <div class="col">
                 <?php if(isset($_SESSION['feedback'])) :?>
