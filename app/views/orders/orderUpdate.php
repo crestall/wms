@@ -129,6 +129,14 @@ if(!$error)
                         <div class="card-header">
                             Order Details
                         </div>
+                        <div class="card-body">
+
+                        </div>
+                        <div class="card-footer text-right">
+                            <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
+                                <a class="btn btn-primary" href="/orders/order-edit/order=<?php echo $order_id;?>">Update Order Details</a>
+                            <?php endif;?>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
