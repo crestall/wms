@@ -139,17 +139,21 @@ if(!$error)
                                     <label class="col-4">Company</label>
                                     <div class="col-8"><?php echo $order['company_name'];?></div>
                                 </div>
-
+                                <div class="row">
+                                    <label class="col-4">Contact Phone</label>
+                                    <div class="col-8"><?php echo $order['contact_phone'];?></div>
+                                </div>
 
                             
                             </div>
                             <div class="col-5">
                                 <div class="row">
-                                    <label class="col-4">Company</label>
-                                    <div class="col-8"><?php echo $order['company_name'];?></div>
+                                    <label class="col-4">Client Order Number</label>
+                                    <div class="col-8"><?php echo $order['client_order_id'];?></div>
                                 </div>
                             </div>
                         </div>
+
 
 
 
