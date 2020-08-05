@@ -81,7 +81,7 @@ if(!$error)
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6 mb-3">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-header">
                             Delivery Details
                         </div>
@@ -125,7 +125,7 @@ if(!$error)
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-header">
                             Order Details
                         </div>
