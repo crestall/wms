@@ -5,13 +5,13 @@
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col">
                 <p><a class="btn btn-primary" href="#nuchev">Nuchev</a></p>
             </div>
-            <div class="col-md-2">
+            <div class="col">
                 <p><a class="btn btn-primary" href="#oneplate">One Plate</a></p>
             </div>
-            <div class="col-md-2">
+            <div class="col">
                 <p><a class="btn btn-primary" href="#freedom">Freedom</a></p>
             </div>
         </div>
@@ -28,21 +28,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card">
                     <div class="card-header">
                         Nuchev Orders
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card">
                     <div class="card-header">
                         One Plate Orders
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card">
                     <div class="card-header">
                         Freedom Orders
