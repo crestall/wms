@@ -22,6 +22,19 @@ class OrdersController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function orderImporting()
+    {
+
+        //render the page
+        Config::setJsConfig('curPage', "order-importing");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderImporting.php', [
+            'page_title'        =>  "Import Orders From External Sites",
+            'pht'               =>  ": Import Orders From Other Sites",
+            'nuchev_clientid'   =>  $this->client->getClientId("NUCHEV"),
+            'oneplate_clientid' =>  $this->client->getClientId("One Plate")
+        ]);
+    }
+
     public function addSerials()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
