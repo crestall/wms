@@ -130,8 +130,43 @@ if(!$error)
                             Order Details
                         </div>
                         <div class="card-body">
+                            <div class="col-7">
+                                <div class="row">
+                                    <label class="col-4">Deliver To</label>
+                                    <div class="col-8"><?php echo $order['ship_to'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-4">Company</label>
+                                    <div class="col-8"><?php echo $order['company_name'];?></div>
+                                </div>
 
+
+                            <dt>Company</dt>
+                            <dd><?php echo $order['company_name'];?></dd>
+                            <dt>Contact Phone</dt>
+                            <dd><?php echo $order['contact_phone'];?></dd>
+                            <dt>Tracking Email</dt>
+                            <dd><?php echo $order['tracking_email'];?></dd>
+                            <dt>Delivery Instructions</dt>
+                            <dd><?php echo $order['instructions'];?></dd>
+                            <dt>Use Express</dt>
+                            <dd><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></dd>
+                            <dt>Signature Required</dt>
+                            <dd><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></dd>
+                            </div>
+                            <div class="col-5">
+                                <div class="row">
+                                    <label class="col-4">Company</label>
+                                    <div class="col-8"><?php echo $order['company_name'];?></div>
+                                </div>
+                            </div>
                         </div>
+
+
+
+
+                            
+
                         <div class="card-footer text-right">
                             <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
                                 <a class="btn btn-outline-secondary" href="/orders/order-edit/order=<?php echo $order_id;?>">Update Order Details</a>
@@ -187,20 +222,7 @@ if(!$error)
                 <div class="row">
                     <div class="col-md-7">
                         <dl class="dl-horizontal order-details">
-                            <dt>Deliver To</dt>
-                            <dd><?php echo $order['ship_to'];?></dd>
-                            <dt>Company</dt>
-                            <dd><?php echo $order['company_name'];?></dd>
-                            <dt>Contact Phone</dt>
-                            <dd><?php echo $order['contact_phone'];?></dd>
-                            <dt>Tracking Email</dt>
-                            <dd><?php echo $order['tracking_email'];?></dd>
-                            <dt>Delivery Instructions</dt>
-                            <dd><?php echo $order['instructions'];?></dd>
-                            <dt>Use Express</dt>
-                            <dd><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></dd>
-                            <dt>Signature Required</dt>
-                            <dd><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></dd>
+
                         </dl>
                     </div>
                     <div class="col-md-5">
