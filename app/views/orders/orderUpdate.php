@@ -87,25 +87,33 @@ if(!$error)
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <label class="col-3">Deliver To:</label>
-                                <div class="col-9">Name</div>
+                                <label class="col-4">Deliver To:</label>
+                                <div class="col-8">Name</div>
                             </div>
                             <div class="row">
-                                <label class="col-3">Address:</label>
-                                <div class="col-9">Line 1</div>
+                                <label class="col-4">Address:</label>
+                                <div class="col-8">Line 1</div>
                             </div>
                             <div class="row">
-                                <label class="col-3">&nbsp;</label>
-                                <div class="col-9">Line 2</div>
+                                <label class="col-4">&nbsp;</label>
+                                <div class="col-8">Line 2</div>
                             </div>
-                            <label class="col-2">&nbsp;</label>
-                            <div class="col-10">Suburb</div>
-                            <label class="col-2">&nbsp;</label>
-                            <div class="col-10">State</div>
-                            <label class="col-2">&nbsp;</label>
-                            <div class="col-10">Country</div>
-                            <label class="col-2">&nbsp;</label>
-                            <div class="col-10">Postcode</div>
+                            <div class="row">
+                                <label class="col-4">&nbsp;</label>
+                                <div class="col-8">Suburb</div>
+                            </div>
+                            <div class="row">
+                                <label class="col-4">&nbsp;</label>
+                                <div class="col-8">State</div>
+                            </div>
+                            <div class="row">
+                                <label class="col-4">&nbsp;</label>
+                                <div class="col-8">Country</div>
+                            </div>
+                            <div class="row">
+                                <label class="col-4">&nbsp;</label>
+                                <div class="col-8">Postcode</div>
+                            </div>
                         </div>
                     </div>
                 </div>
