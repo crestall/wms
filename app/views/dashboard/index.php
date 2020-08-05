@@ -1,4 +1,5 @@
 <?php
+$page_title = ": Home Page";
 $card_classes = array(
     'primary',
     'secondary',
