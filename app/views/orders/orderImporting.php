@@ -1,13 +1,19 @@
 <?php
 
 ?>
-
-    <div class="container-xl">
+<div id="page-wrapper">
+    <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row row-cols-1 row-cols-md-2">
-            <div class="col">Nuchev</div>
-            <div class="col">One Plate</div>
-            <div class="col">Freedom</div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                Nuchev
+            </div>
+            <div class="col-sm-12 col-md-6">
+                One Plate
+            </div>
+            <div class="col-sm-12 col-md-6">
+                Freedom
+            </div>
         </div>
 
 
@@ -156,3 +162,4 @@
             </div>
         </div>
     </div>
+</div>
