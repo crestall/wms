@@ -33,7 +33,7 @@
                     <a name="nuchev"></a>
                     <h4 class="card-header">Nuchev Orders</h4>
                     <div class="card-body">
-                        <div class="form-group row">
+                        <div class="form-group row full_import">
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
                                 <button class="btn btn-outline-secondary" id="nuchev_full_import" data-function="importNuchevOrders">Run It</button>
@@ -65,7 +65,7 @@
                     <a name="oneplate"></a>
                     <h4 class="card-header">One Plate Orders</h4>
                     <div class="card-body">
-                        <div class="form-group row">
+                        <div class="form-group row full_import">
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
                                 <p><button class="btn btn-outline-secondary" id="oneplate_full_import" data-function="importOnePlateOrders">Run It</button></p>
