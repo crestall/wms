@@ -34,6 +34,7 @@
                     <h4 class="card-header">Nuchev Orders</h4>
                     <div class="card-body">
                         <h5 class="card-title">Run Full Import</h5>
+                        <p><button class="btn btn-outline-secondary" id="nuchev_full_import" data-function="importNuchevOrders">Run It</button></p>
                         <h5 class="card-title">Import single Order</h5>
                         <form id="nuchev_single_import" action="/orders/importNuchevOrder" method="post">
                             <div class="form-group row">
