@@ -37,8 +37,8 @@
                         <h5 class="card-title">Import single Order</h5>
                         <form id="nuchev_single_import" action="/orders/importNuchevOrder" method="post">
                             <div class="form-group row">
-                                <label class="col-md-5">WooCommerce Order ID</label>
-                                <div class="col-md-7">
+                                <label class="col-5">WooCommerce Order ID</label>
+                                <div class="col-7">
                                     <input type="text" class="form-control required" name="nuchevwoocommerce_id" id="nuchevwoocommerce_id" value="<?php echo Form::value('nuchevwoocommerce_id');?>" />
                                     <?php echo Form::displayError('nuchevwoocommerce_id');?>
                                 </div>
@@ -46,9 +46,9 @@
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="client_id" value="<?php echo $nuchev_clientid; ?>" />
                             <div class="form-group row">
-                                <label class="col-md-3">&nbsp;</label>
-                                <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary">Import It</button>
+                                <label class="col-5">&nbsp;</label>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-outline-secondary">Import It</button>
                                 </div>
                             </div>
                         </form>
