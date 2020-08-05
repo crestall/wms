@@ -188,7 +188,14 @@ if(!$error)
                             Order Items
                         </div>
                         <div class="card-body">
-
+                            <?php foreach($order_items as $oi):?>
+                                <div class="row">
+                                    <label class="col-9"><?php echo $oi['name'];?></label>
+                                    <div class="col-3"><?php echo $oi['qty'];?></div>
+                                </div>
+                                <dt></dt>
+                                <dd></dd>
+                            <?php endforeach;?>
                         </div>
                         <div class="card-footer text-right">
                             <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
@@ -220,74 +227,8 @@ if(!$error)
             </div>
 
 
+            
 
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Order Details</h3>
-                </div>
-            </div>
-            <div class="bs-callout bs-callout-primary row bs-callout-more">
-                <div class="row">
-                    <div class="col-md-7">
-                        <dl class="dl-horizontal order-details">
-
-                        </dl>
-                    </div>
-                    <div class="col-md-5">
-                        <dl class="dl-horizontal order-details">
-                            <dt>Client Order Number</dt>
-                            <dd><?php echo $order['client_order_id'];?></dd>
-                            <dt>Client Invoice</dt>
-                            <dd><?php echo $order['uploaded_file'];?></dd>
-                            <dt>3PL Instructions</dt>
-                            <dd><?php echo $order['3pl_comments'];?></dd>
-                            <dt>Entered By</dt>
-                            <dd><?php echo $entered_by;?></dd>
-                        </dl>
-                    </div>
-                </div>
-                <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
-                    <div class='row'>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <a class="btn btn-primary" href="/orders/order-edit/order=<?php echo $order_id;?>">Update These Details</a>
-                        </div>
-                    </div>
-                <?php endif;?>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Order Items</h3>
-                </div>
-            </div>
-            <div class="bs-callout bs-callout-primary bs-callout-more">
-                <div class="row">
-                    <div class="col-md-10">
-                        <dl class="dl-horizontal order-items">
-                            <?php foreach($order_items as $oi):?>
-                                <dt><?php echo $oi['name'];?></dt>
-                                <dd><?php echo $oi['qty'];?></dd>
-                            <?php endforeach;?>
-                        </dl>
-                    </div>
-                </div>
-                <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
-                    <div class='row'>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <p><a class="btn btn-primary" href="/orders/add-serials/order=<?php echo $order_id;?>">Add Serial Numbers</a> </p>
-                        </div>
-                    </div>
-                <?php endif;?>
-                <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
-                    <div class='row'>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <p><a class="btn btn-primary" href="/orders/items-update/order=<?php echo $order_id;?>">Update Order Items</a></p>
-                        </div>
-                    </div>
-                <?php endif;?>
-            </div>
             <?php if($order['courier_id'] > 0):?>
                 <?php if(count($packages)):?>
                     <div class="row">
