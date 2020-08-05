@@ -143,7 +143,22 @@ if(!$error)
                                     <label class="col-4">Contact Phone</label>
                                     <div class="col-8"><?php echo $order['contact_phone'];?></div>
                                 </div>
-
+                                <div class="row">
+                                    <label class="col-4">Tracking Email</label>
+                                    <div class="col-8"><?php echo $order['tracking_email'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-4">Delivery Instructions</label>
+                                    <div class="col-8"><?php echo $order['instructions'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-4">Use Express</label>
+                                    <div class="col-8"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-4">Signature Required</label>
+                                    <div class="col-8"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
+                                </div>
 
 
                                 <div class="row">
@@ -153,7 +168,10 @@ if(!$error)
                         </div>
 
 
-    
+
+
+
+                            
 
                         <div class="card-footer text-right">
                             <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
