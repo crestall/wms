@@ -94,8 +94,10 @@ if(!$error)
                                 <label class="col-3">Address:</label>
                                 <div class="col-9">Line 1</div>
                             </div>
-                            <label class="col-2">&nbsp;</label>
-                            <div class="col-10">Line 2</div>
+                            <div class="row">
+                                <label class="col-3">&nbsp;</label>
+                                <div class="col-9">Line 2</div>
+                            </div>
                             <label class="col-2">&nbsp;</label>
                             <div class="col-10">Suburb</div>
                             <label class="col-2">&nbsp;</label>
