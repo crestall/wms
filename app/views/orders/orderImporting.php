@@ -37,8 +37,8 @@
                         <h5 class="card-title">Import single Order</h5>
                         <form id="nuchev_single_import" action="/orders/importNuchevOrder" method="post">
                             <div class="form-group row">
-                                <label class="col-md-3">WooCommerce Order ID</label>
-                                <div class="col-md-4">
+                                <label class="col-md-5">WooCommerce Order ID</label>
+                                <div class="col-md-7">
                                     <input type="text" class="form-control required" name="nuchevwoocommerce_id" id="nuchevwoocommerce_id" value="<?php echo Form::value('nuchevwoocommerce_id');?>" />
                                     <?php echo Form::displayError('nuchevwoocommerce_id');?>
                                 </div>
