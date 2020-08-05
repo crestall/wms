@@ -130,7 +130,10 @@ if(!$error)
                             Order Details
                         </div>
                         <div class="card-body">
-
+                            <div class="row">
+                                    <label class="col-4">Client Order Number</label>
+                                    <div class="col-8"><?php echo $order['client_order_id'];?></div>
+                                </div>
                                 <div class="row">
                                     <label class="col-4">Deliver To</label>
                                     <div class="col-8"><?php echo $order['ship_to'];?></div>
@@ -159,20 +162,19 @@ if(!$error)
                                     <label class="col-4">Signature Required</label>
                                     <div class="col-8"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
                                 </div>
-
-
                                 <div class="row">
-                                    <label class="col-4">Client Order Number</label>
-                                    <div class="col-8"><?php echo $order['client_order_id'];?></div>
+                                    <label class="col-4">Client Invoice</label>
+                                    <div class="col-8"><?php echo $order['uploaded_file'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-4">Picking Instructions</label>
+                                    <div class="col-8"><?php echo $order['3pl_comments'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-4">Entered By</label>
+                                    <div class="col-8"><?php echo $entered_by;?></div>
                                 </div>
                         </div>
-
-
-
-
-
-                            
-
                         <div class="card-footer text-right">
                             <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
                                 <a class="btn btn-outline-secondary" href="/orders/order-edit/order=<?php echo $order_id;?>">Update Order Details</a>
