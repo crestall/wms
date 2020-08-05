@@ -29,7 +29,7 @@ class DashboardController extends Controller
         }
         Config::setJsConfig('curPage', "dashboard");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dashboard/", Config::get('VIEWS_PATH') . 'dashboard/index.php',[
-            'pht'                   =>  ": Home Page"
+            'pht'                   =>  ": Home Page",
             'client_id'             =>  $client_id,
             'orders'                =>  $orders,
             'clients'               =>  $clients,
