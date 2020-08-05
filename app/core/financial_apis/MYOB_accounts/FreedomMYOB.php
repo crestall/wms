@@ -81,6 +81,7 @@ class FreedomMYOB extends MYOB
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
                 //validate address
+                /* Old Fucked Up style
                 $atc = $o['ShipToAddress']."<br />";
                 try{
                    list($name, $line1, $line2, $line3) = explode("<br />", $atc);
@@ -114,6 +115,7 @@ class FreedomMYOB extends MYOB
                         echo "<p>Problem with $line3</p>";
                     }
                 }
+
                 $ad = array(
                     'address'   => $address,
                     'address_2' => $address_2,
@@ -121,6 +123,16 @@ class FreedomMYOB extends MYOB
                     'state'     => $state,
                     'postcode'  => $postcode,
                     'country'   => "AU"
+                );
+                */
+                //New Better Method
+                $country = empty($o['Structured_Address']['Country'])? "AU": $o['Structured_Address']['Country'];
+                $ad = array(
+                    'address'   => str_replace("<br />",",",nl2br($o['Structured_Address']['Street'])),
+                    'suburb'    => $o['Structured_Address']['City'],
+                    'state'     => $o['Structured_Address']['State'],
+                    'postcode'  => $o['Structured_Address']['PostCode'],
+                    'country'   => $country
                 );
                 if($ad['country'] == "AU")
                 {
