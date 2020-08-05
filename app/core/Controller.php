@@ -360,6 +360,7 @@ class Controller {
         //render the page
         //Config::setJsConfig('curPage', $curPage);
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/index/", Config::get('VIEWS_PATH') . 'index/controllerIndex.php', [
+            'pht'           => ": ".$page_name,
             'page_title'    => $page_name." Pages",
             'page_name'     => $page_name
         ]);
