@@ -34,7 +34,12 @@
                     <h4 class="card-header">Nuchev Orders</h4>
                     <div class="card-body">
                         <h5 class="card-title">Run Full Import</h5>
-                        <label class="col-5">&nbsp;</label><div class="col-7"><button class="btn btn-outline-secondary" id="nuchev_full_import" data-function="importNuchevOrders">Run It</button></div>
+                        <div class="form-group row">
+                            <label class="col-5">&nbsp;</label>
+                            <div class="col-7">
+                                <button class="btn btn-outline-secondary" id="nuchev_full_import" data-function="importNuchevOrders">Run It</button>
+                            </div>
+                        </div>
                         <h5 class="card-title">Import single Order</h5>
                         <form id="nuchev_single_import" action="/orders/importNuchevOrder" method="post">
                             <div class="form-group row">
