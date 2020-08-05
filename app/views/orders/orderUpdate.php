@@ -141,18 +141,7 @@ if(!$error)
                                 </div>
 
 
-                            <dt>Company</dt>
-                            <dd><?php echo $order['company_name'];?></dd>
-                            <dt>Contact Phone</dt>
-                            <dd><?php echo $order['contact_phone'];?></dd>
-                            <dt>Tracking Email</dt>
-                            <dd><?php echo $order['tracking_email'];?></dd>
-                            <dt>Delivery Instructions</dt>
-                            <dd><?php echo $order['instructions'];?></dd>
-                            <dt>Use Express</dt>
-                            <dd><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></dd>
-                            <dt>Signature Required</dt>
-                            <dd><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></dd>
+                            
                             </div>
                             <div class="col-5">
                                 <div class="row">
@@ -165,7 +154,7 @@ if(!$error)
 
 
 
-                            
+
 
                         <div class="card-footer text-right">
                             <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
