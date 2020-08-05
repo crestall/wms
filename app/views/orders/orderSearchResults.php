@@ -2,21 +2,19 @@
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php echo $form;?>
-        <div class="form-group row">
-            <label class="col-md-3 col-form-label">&nbsp;</label>
-            <div class="col-md-4">
-                <p>
-                    <a href="/orders/order-search" class="btn btn-primary">Reset Form</a>
-                </p>
+        <div class="row">
+            <label class="col">&nbsp;</label>
+            <div class="col m-3">
+                <a href="/orders/order-search" class="btn btn-primary">Reset Form</a>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col">
                 <h2>Search Results</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col">
                 <?php if($count > 0):?>
                     <div class="feedbackbox">
                         <h2>Found <?php echo $count;?> order<?php echo $s;?></h2>
