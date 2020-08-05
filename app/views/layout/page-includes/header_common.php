@@ -1,6 +1,6 @@
 <?php
-if(!isset($page_title))
-    $page_title = "";
+if(!isset($pht))
+    $pht = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@ if(!isset($page_title))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>FSG Warehouse Management System<?php echo $page_title;?></title>
+    <title>FSG Warehouse Management System<?php echo $pht;?></title>
 
     <!-- Icons -->
         <link rel="shortcut icon" href="/images/icons/favicon.jpg?v=4" type="image/x-icon">
