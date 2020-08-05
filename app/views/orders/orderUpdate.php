@@ -115,6 +115,9 @@ if(!$error)
                                 <div class="col-8">Postcode</div>
                             </div>
                         </div>
+                        <div class="card-footer text-right">
+                            <a class="btn btn-outline-secondary" href="/orders/address-update/order=<?php echo $order_id;?>">Update Address Details</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
