@@ -68,7 +68,7 @@
                         <div class="form-group row full_import">
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
-                                <p><button class="btn btn-outline-secondary" id="oneplate_full_import" data-function="importOnePlateOrders">Run It</button></p>
+                                <button class="btn btn-outline-secondary" id="oneplate_full_import" data-function="importOnePlateOrders">Run It</button>
                             </div>
                         </div>
                         <h5 class="card-title">Import single Order</h5>
