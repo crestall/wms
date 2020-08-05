@@ -86,8 +86,11 @@ if(!$error)
                             Delivery Details
                         </div>
                         <div class="card-body">
-                            <label class="col-2">Deliver To:</label>
-                            <div class="col-10">Name</div>
+                            <div class="row">
+                                <label class="col-3">Deliver To:</label>
+                                <div class="col-9">Name</div>
+                            </div>
+
                             <label class="col-2">Address:</label>
                             <div class="col-10">Line 1</div>
                             <label class="col-2">&nbsp;</label>
