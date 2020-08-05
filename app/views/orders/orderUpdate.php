@@ -134,22 +134,36 @@ if(!$error)
                         </div>
                         <div class="card-footer text-right">
                             <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
-                                <a class="btn btn-primary" href="/orders/order-edit/order=<?php echo $order_id;?>">Update Order Details</a>
+                                <a class="btn btn-outline-secondary" href="/orders/order-edit/order=<?php echo $order_id;?>">Update Order Details</a>
                             <?php endif;?>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-header">
                             Order Items
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                        <div class="card-footer text-right">
+                            <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
+                                <a class="btn btn-outline-secondary" href="/orders/items-update/order=<?php echo $order_id;?>">Update Order Items</a>
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-header">
                             Add Packages/Pallets
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                        <div class="card-footer text-right">
+                            
                         </div>
                     </div>
                 </div>
