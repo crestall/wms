@@ -30,21 +30,21 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="card">
-                    <div class="car-header">
+                    <div class="card-header">
                         Nuchev Orders
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="card">
-                    <div class="car-header">
+                    <div class="card-header">
                         One Plate Orders
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="card">
-                    <div class="car-header">
+                    <div class="card-header">
                         Freedom Orders
                     </div>
                 </div>
