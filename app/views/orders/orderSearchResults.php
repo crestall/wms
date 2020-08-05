@@ -33,7 +33,7 @@
             $c = 0;?>
             <div class="row">
                 <div class="col-md-12">
-                    <table id="search_results_table">
+                    <table id="search_results_table" class="table-striped table-hover">
                         <thead>
                             <tr>
                                 <th></th>
