@@ -5,28 +5,6 @@
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
-            <div class="col-sm-12 col-md-6">
-                Nuchev
-            </div>
-            <div class="col-sm-12 col-md-6">
-                One Plate
-            </div>
-            <div class="col-sm-12 col-md-6">
-                Freedom
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-        <div class="row">
             <div class="col-md-2">
                 <p><a class="btn btn-primary" href="#nuchev">Nuchev</a></p>
             </div>
@@ -38,7 +16,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col">
                 <?php if(isset($_SESSION['feedback'])) :?>
                     <?php if(isset($_SESSION['bberror']) && $_SESSION['bberror']):?>
                         <div class='errorbox'><?php Session::destroy('bberror');?>
@@ -49,6 +27,40 @@
                 <?php endif; ?>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="card">
+                    <div class="car-header">
+                        Nuchev Orders
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="card">
+                    <div class="car-header">
+                        One Plate Orders
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="card">
+                    <div class="car-header">
+                        Freedom Orders
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
         <div class="bs-callout bs-callout-primary bs-callout-more">
             <a name="nuchev"></a>
             <div class="row">
