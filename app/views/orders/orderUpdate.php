@@ -85,6 +85,22 @@ if(!$error)
                         <div class="card-header">
                             Delivery Details
                         </div>
+                        <div class="card-body">
+                            <label class="col-2">Deliver To:</label>
+                            <div class="col-10">Name</div>
+                            <label class="col-2">Address:</label>
+                            <div class="col-10">Line 1</div>
+                            <label class="col-2">&nbsp;</label>
+                            <div class="col-10">Line 2</div>
+                            <label class="col-2">&nbsp;</label>
+                            <div class="col-10">Suburb</div>
+                            <label class="col-2">&nbsp;</label>
+                            <div class="col-10">State</div>
+                            <label class="col-2">&nbsp;</label>
+                            <div class="col-10">Country</div>
+                            <label class="col-2">&nbsp;</label>
+                            <div class="col-10">Postcode</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
@@ -116,32 +132,6 @@ if(!$error)
                     </div>
                 </div>
             </div>
-
-
-
-
-            <div class="row">
-                <div class="col-sm-12 col-md-6 mb-3">
-
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             <div class="row">
