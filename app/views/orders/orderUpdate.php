@@ -88,35 +88,39 @@ if(!$error)
                         <div class="card-body">
                             <div class="row">
                                 <label class="col-4">Deliver To:</label>
-                                <div class="col-8">Name</div>
+                                <div class="col-8"><?php echo $order['ship_to'];?></div>
                             </div>
                             <div class="row">
                                 <label class="col-4">Address:</label>
-                                <div class="col-8">Line 1</div>
+                                <div class="col-8"><?php echo $order['address'];?></div>
+                            </div>
+                            <?php if(!empty($order['address_2'])):?>
+                                <div class="row">
+                                    <label class="col-4">&nbsp;</label>
+                                    <div class="col-8"><?php echo $order['address_2'];?></div>
+                                </div>
+                            <?php endif;?>
+                            <div class="row">
+                                <label class="col-4">&nbsp;</label>
+                                <div class="col-8"><?php echo $order['suburb'];?></div>
                             </div>
                             <div class="row">
                                 <label class="col-4">&nbsp;</label>
-                                <div class="col-8">Line 2</div>
+                                <div class="col-8"><?php echo $order['state'];?></div>
                             </div>
                             <div class="row">
                                 <label class="col-4">&nbsp;</label>
-                                <div class="col-8">Suburb</div>
+                                <div class="col-8"><?php echo $order['country'];?></div>
                             </div>
                             <div class="row">
                                 <label class="col-4">&nbsp;</label>
-                                <div class="col-8">State</div>
-                            </div>
-                            <div class="row">
-                                <label class="col-4">&nbsp;</label>
-                                <div class="col-8">Country</div>
-                            </div>
-                            <div class="row">
-                                <label class="col-4">&nbsp;</label>
-                                <div class="col-8">Postcode</div>
+                                <div class="col-8"><?php echo $order['postcode'];?></div>
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <a class="btn btn-outline-secondary" href="/orders/address-update/order=<?php echo $order_id;?>">Update Address Details</a>
+                            <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
+                                <a class="btn btn-outline-secondary" href="/orders/address-update/order=<?php echo $order_id;?>">Update Address Details</a>
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>
@@ -151,43 +155,7 @@ if(!$error)
             </div>
 
 
-            <div class="row">
-                <div class="col">
-                    <h3>Delivery Details</h3>
-                </div>
-            </div>
-            <div class="bs-callout bs-callout-primary bs-callout-more">
-                <div class="row ">
-                    <div class="col-md-8">
-                        <dl class="dl-horizontal order-details">
-                            <dt>Deliver To</dt>
-                            <dd><?php echo $order['ship_to'];?></dd>
-                            <dt>Address</dt>
-                            <dd><?php echo $order['address'];?></dd>
-                            <?php if(!empty($order['address_2'])):?>
-                                <dt>&nbsp;</dt>
-                                <dd><?php echo $order['address_2'];?></dd>
-                            <?php endif;?>
-                            <dt>&nbsp;</dt>
-                            <dd><?php echo $order['suburb'];?></dd>
-                            <dt>&nbsp;</dt>
-                            <dd><?php echo $order['state'];?></dd>
-                            <dt>&nbsp;</dt>
-                            <dd><?php echo $order['postcode'];?></dd>
-                            <dt>&nbsp;</dt>
-                            <dd><?php echo $order['country'];?></dd>
-                        </dl>
-                    </div>
-                </div>
-                <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
-                    <div class='row'>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <a class="btn btn-primary" href="/orders/address-update/order=<?php echo $order_id;?>">Update Address Details</a>
-                        </div>
-                    </div>
-                <?php endif;?>
-            </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <h3>Order Details</h3>
