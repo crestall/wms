@@ -87,34 +87,34 @@ if(!$error)
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <label class="col-4">Deliver To:</label>
-                                <div class="col-8"><?php echo $order['ship_to'];?></div>
+                                <label class="col-5">Deliver To:</label>
+                                <div class="col-7"><?php echo $order['ship_to'];?></div>
                             </div>
                             <div class="row">
-                                <label class="col-4">Address:</label>
-                                <div class="col-8"><?php echo $order['address'];?></div>
+                                <label class="col-5">Address:</label>
+                                <div class="col-7"><?php echo $order['address'];?></div>
                             </div>
                             <?php if(!empty($order['address_2'])):?>
                                 <div class="row">
-                                    <label class="col-4">&nbsp;</label>
-                                    <div class="col-8"><?php echo $order['address_2'];?></div>
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $order['address_2'];?></div>
                                 </div>
                             <?php endif;?>
                             <div class="row">
-                                <label class="col-4">&nbsp;</label>
-                                <div class="col-8"><?php echo $order['suburb'];?></div>
+                                <label class="col-5">&nbsp;</label>
+                                <div class="col-7"><?php echo $order['suburb'];?></div>
                             </div>
                             <div class="row">
-                                <label class="col-4">&nbsp;</label>
-                                <div class="col-8"><?php echo $order['state'];?></div>
+                                <label class="col-5">&nbsp;</label>
+                                <div class="col-7"><?php echo $order['state'];?></div>
                             </div>
                             <div class="row">
-                                <label class="col-4">&nbsp;</label>
-                                <div class="col-8"><?php echo $order['country'];?></div>
+                                <label class="col-5">&nbsp;</label>
+                                <div class="col-7"><?php echo $order['country'];?></div>
                             </div>
                             <div class="row">
-                                <label class="col-4">&nbsp;</label>
-                                <div class="col-8"><?php echo $order['postcode'];?></div>
+                                <label class="col-5">&nbsp;</label>
+                                <div class="col-7"><?php echo $order['postcode'];?></div>
                             </div>
                         </div>
                         <div class="card-footer text-right">
@@ -131,48 +131,48 @@ if(!$error)
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                    <label class="col-4">Client Order Number</label>
-                                    <div class="col-8"><?php echo $order['client_order_id'];?></div>
+                                    <label class="col-5">Client Order Number</label>
+                                    <div class="col-7"><?php echo $order['client_order_id'];?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Deliver To</label>
-                                    <div class="col-8"><?php echo $order['ship_to'];?></div>
+                                    <label class="col-5">Deliver To</label>
+                                    <div class="col-7"><?php echo $order['ship_to'];?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Company</label>
-                                    <div class="col-8"><?php echo $order['company_name'];?></div>
+                                    <label class="col-5">Company</label>
+                                    <div class="col-7"><?php echo $order['company_name'];?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Contact Phone</label>
-                                    <div class="col-8"><?php echo $order['contact_phone'];?></div>
+                                    <label class="col-5">Contact Phone</label>
+                                    <div class="col-7"><?php echo $order['contact_phone'];?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Tracking Email</label>
-                                    <div class="col-8"><?php echo $order['tracking_email'];?></div>
+                                    <label class="col-5">Tracking Email</label>
+                                    <div class="col-7"><?php echo $order['tracking_email'];?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Delivery Instructions</label>
-                                    <div class="col-8"><?php echo $order['instructions'];?></div>
+                                    <label class="col-5">Delivery Instructions</label>
+                                    <div class="col-7"><?php echo $order['instructions'];?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Use Express</label>
-                                    <div class="col-8"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
+                                    <label class="col-5">Use Express</label>
+                                    <div class="col-7"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Signature Required</label>
-                                    <div class="col-8"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
+                                    <label class="col-5">Signature Required</label>
+                                    <div class="col-7"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Client Invoice</label>
-                                    <div class="col-8"><?php echo $order['uploaded_file'];?></div>
+                                    <label class="col-5">Client Invoice</label>
+                                    <div class="col-7"><?php echo $order['uploaded_file'];?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Picking Instructions</label>
-                                    <div class="col-8"><?php echo $order['3pl_comments'];?></div>
+                                    <label class="col-5">Picking Instructions</label>
+                                    <div class="col-7"><?php echo $order['3pl_comments'];?></div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-4">Entered By</label>
-                                    <div class="col-8"><?php echo $entered_by;?></div>
+                                    <label class="col-5">Entered By</label>
+                                    <div class="col-7"><?php echo $entered_by;?></div>
                                 </div>
                         </div>
                         <div class="card-footer text-right">
