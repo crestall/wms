@@ -130,7 +130,7 @@ if(!$error)
                             Order Details
                         </div>
                         <div class="card-body">
-                            <div class="col-7">
+
                                 <div class="row">
                                     <label class="col-4">Deliver To</label>
                                     <div class="col-8"><?php echo $order['ship_to'];?></div>
@@ -144,21 +144,16 @@ if(!$error)
                                     <div class="col-8"><?php echo $order['contact_phone'];?></div>
                                 </div>
 
-                            
-                            </div>
-                            <div class="col-5">
+
+
                                 <div class="row">
                                     <label class="col-4">Client Order Number</label>
                                     <div class="col-8"><?php echo $order['client_order_id'];?></div>
                                 </div>
-                            </div>
                         </div>
 
 
-
-
-
-
+    
 
                         <div class="card-footer text-right">
                             <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
