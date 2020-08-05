@@ -94,87 +94,16 @@
             </div>
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card">
-                    <div class="card-header">
-                        Freedom Orders
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="bs-callout bs-callout-primary bs-callout-more">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>One Plate Orders</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">&nbsp;</div>
-                <div class="col-md-4">
-                    <h3>Import single Order</h3>
-                </div>
-            </div>
-            <div class="row">
-                <form id="oneplate_single_import" action="/orders/importOneplateOrder" method="post">
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">WooCommerce Order ID</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control required" name="oneplatewoocommerce_id" id="oneplatewoocommerce_id" value="<?php echo Form::value('oneplatewoocommerce_id');?>" />
-                            <?php echo Form::displayError('oneplatewoocommerce_id');?>
+                    <a name="freedom"></a>
+                    <h4 class="card-header">Freedom Orders</h4>
+                    <div class="card-body">
+                        <div class="form-group row full_import">
+                            <label class="col-5"><h5 class="card-title">Run Full Import From MYOB</h5></label>
+                            <div class="col-7">
+                                <button class="btn btn-outline-secondary" id="freedom_full_import" data-function="importFreedomOrders">Run It</button>
+                            </div>
                         </div>
                     </div>
-                    <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                    <input type="hidden" name="client_id" value="<?php echo $oneplate_clientid; ?>" />
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">&nbsp;</label>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary">Import It</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <hr/>
-            <div class="row">
-                <div class="col-md-3">&nbsp;</div>
-                <div class="col-md-4">
-                    <h3>Run Full Import</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">&nbsp;</div>
-                <div class="col-md-4">
-                    <p><button class="btn btn-primary" id="oneplate_full_import" data-function="importOnePlateOrders">Run It</button></p>
-                </div>
-            </div>
-        </div>
-        <div class="bs-callout bs-callout-primary bs-callout-more">
-            <a name="freedom"></a>
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Freedom Orders</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">&nbsp;</div>
-                <div class="col-md-4">
-                    <h3>Run Full Import From MYOB</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">&nbsp;</div>
-                <div class="col-md-4">
-                    <p><button class="btn btn-primary" id="freedom_full_import" data-function="importFreedomOrders">Run It</button></p>
                 </div>
             </div>
         </div>
