@@ -79,17 +79,17 @@
                                 $dd = (empty($o['date_fulfilled']))? "" : date('d-m-Y', $o['date_fulfilled']);?>
                                 <tr>
                                     <td class="number"><?php echo $c;?></td>
-                                    <td class="number"><a href="<?php echo $link;?>"><?php echo str_pad($o['order_number'],8,'0',STR_PAD_LEFT);?></a></td>
-                                    <td class="number"><?php echo $o['client_order_id'];?></td>
-                                    <td nowrap><?php echo $client_name;?></td>
-                                    <td nowrap><?php echo $o['ship_to']."<br/>".$address;?></td>
-                                    <td><?php echo $num_items;?></td>
-                                    <td><?php echo $items;?></td>
-                                    <td class="nowrap"><?php echo date('d-m-Y', $o['date_ordered']);?></td>
-                                    <td class='nowrap'><?php echo $dd;?></td>
-                                    <td><?php echo $this->controller->order->getStatusName($o['status_id']);?></td>
-                                    <td><?php echo $courier;?></td>
-                                    <td><?php echo $o['consignment_id'];?></td>
+                                    <td class="number" data-label="Order No"><a href="<?php echo $link;?>"><?php echo str_pad($o['order_number'],8,'0',STR_PAD_LEFT);?></a></td>
+                                    <td class="number" data-label="Client Order No"><?php echo $o['client_order_id'];?></td>
+                                    <td nowrap data-label="Client Name"><?php echo $client_name;?></td>
+                                    <td nowrap data-label="Ship To"><?php echo $o['ship_to']."<br/>".$address;?></td>
+                                    <td data-label="Item Count"><?php echo $num_items;?></td>
+                                    <td data-label="Items"><?php echo $items;?></td>
+                                    <td data-label="Date Ordered" class="nowrap"><?php echo date('d-m-Y', $o['date_ordered']);?></td>
+                                    <td data-label="Date Dispatched" class='nowrap'><?php echo $dd;?></td>
+                                    <td data-label="Status"><?php echo $this->controller->order->getStatusName($o['status_id']);?></td>
+                                    <td data-label="Courier"><?php echo $courier;?></td>
+                                    <td data-label="Consignment Number"><?php echo $o['consignment_id'];?></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
