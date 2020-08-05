@@ -173,6 +173,13 @@ div.full_import{
 }
 
 /*****
+Order Update
+******/
+div.order-card label{
+    font-weight: bold;
+}
+
+/*****
 User Info
 *****/
 ul.user-info{
