@@ -126,17 +126,17 @@ class FreedomMYOB extends MYOB
                 );
                 */
                 //New Better Method
-                $country = empty($o['Structured_Address']['Country'])? "AU": $o['Structured_Address']['Country'];
+                //$country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
                 $ad = array(
                     'address'   => str_replace("<br />",",",nl2br($o['Structured_Address']['Street'])),
                     'suburb'    => $o['Structured_Address']['City'],
                     'state'     => $o['Structured_Address']['State'],
                     'postcode'  => $o['Structured_Address']['PostCode'],
-                    'country'   => $country
+                    'country'   => "AU"
                 );
                 if($ad['country'] == "AU")
                 {
-                    if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40)
+                    if(strlen($ad['address']) > 40)
                     {
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
@@ -159,7 +159,7 @@ class FreedomMYOB extends MYOB
                 }
                 else
                 {
-                    if( strlen( $ad['address'] ) > 50 || strlen( $ad['address_2'] ) > 50 )
+                    if( strlen( $ad['address'] ) > 50 )
                     {
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
@@ -317,7 +317,6 @@ class FreedomMYOB extends MYOB
                 'errors'                => $o['errors'],
                 'error_string'          => $o['error_string'],
                 'address'               => $o['address'],
-                'address2'              => $o['address_2'],
                 'state'                 => $o['state'],
                 'suburb'                => $o['suburb'],
                 'postcode'              => $o['postcode'],
