@@ -1,7 +1,7 @@
 <?php
 
 ?>
-<div id="page-wrapper">
+
     <div class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row row-cols-1 row-cols-md-2">
@@ -156,4 +156,3 @@
             </div>
         </div>
     </div>
-</div>
