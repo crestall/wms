@@ -35,10 +35,7 @@
                         Nuchev Orders
                     </div>
                     <div class="card-body">
-                        <div class="col-md-3">&nbsp;</div>
-                        <div class="col-md-4">
-                            <h3>Import single Order</h3>
-                        </div>
+                        <h5 class="card-title">Import single Order</h5>
                     </div>
                 </div>
             </div>
