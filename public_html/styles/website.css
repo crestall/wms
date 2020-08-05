@@ -164,6 +164,13 @@ Home page cards
         max-width: 23% !important;
     }
 }
+/*****
+Order Importing
+******/
+div.full_import{
+    border-bottom: thin solid rgba(0,0,0,0.125);
+    padding-bottom: 1rem;
+}
 
 /*****
 User Info
