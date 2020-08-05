@@ -33,9 +33,8 @@
                     <a name="nuchev"></a>
                     <h4 class="card-header">Nuchev Orders</h4>
                     <div class="card-body">
-                        <h5 class="card-title">Run Full Import</h5>
                         <div class="form-group row">
-                            <label class="col-5">&nbsp;</label>
+                            <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
                                 <button class="btn btn-outline-secondary" id="nuchev_full_import" data-function="importNuchevOrders">Run It</button>
                             </div>
