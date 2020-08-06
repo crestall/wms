@@ -225,10 +225,10 @@ if(!$error)
                                     <div class="row border-bottom mb-3">
                                         <div class="col-9">
                                             <div class="row">
-                                                <label class="col-md-3 col-sm-9">Width</label>
-                                                <div class="col-md-3 col-sm-3"><?php echo $p['width'];?> cm</div>
-                                                <label class="col-md-3 col-sm-9">Depth</label>
-                                                <div class="col-md-3 col-sm-3"><?php echo $p['depth'];?> cm</div>
+                                                <label class="col-md-4 col-sm-9">Width</label>
+                                                <div class="col-md-2 col-sm-3"><?php echo $p['width'];?> cm</div>
+                                                <label class="col-md-4 col-sm-9">Depth</label>
+                                                <div class="col-md-2 col-sm-3"><?php echo $p['depth'];?> cm</div>
                                             </div>
                                             <div class="row">
                                                 <label class="col-md-3 col-sm-9">Height</label>
