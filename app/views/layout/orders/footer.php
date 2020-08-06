@@ -389,7 +389,7 @@
                                     show: true,
                                     hide: true,
                                     autoOpen: false,
-                                    height: 520,
+                                    height: "auto",
                                     width: "auto",
                                     create: function( event, ui ) {
                                         // Set maxWidth
