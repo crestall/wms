@@ -266,7 +266,7 @@ if(!$error)
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-6">
-                                        <button class="ship_quote btn btn-outline-secondary quote_button" data-orderid="<?php echo $order_id;?>" data-destination="<?php echo $address_string;?>">Get Shipping Prices</button>
+                                        <button class="ship_quote btn btn-outline-info quote_button" data-orderid="<?php echo $order_id;?>" data-destination="<?php echo $address_string;?>">Get Shipping Prices</button>
                                     </div>
                                     <div class="col-6 text-right">
                                         <button id="update_courier" class="btn btn-outline-secondary">Update Courier</button>
