@@ -38,9 +38,9 @@
                 <div class="col-md-2">
                     <input type="text" class="form-control required number" name="count" id="count" value="1" />
                 </div>
-                <div class="custom-control custom-checkbox">
+                <div class="custom-control custom-checkbox mr-sm-2">
                     <input class="custom-control-input" type="checkbox" id="pallet" name="pallet" />
-                    <label class="custom-control-label col-md-3" for="pallet">Pallet(s)?</label>
+                    <label class="custom-control-label" for="pallet">Pallet(s)?</label>
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
