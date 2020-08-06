@@ -6,7 +6,9 @@
                 <div class="col-md-2">
                     <div class="input-group">
                         <input type="text" class="form-control required number" name="width" id="width" />
-                        <span class="input-group-append">cm</span>
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
                     </div>
                 </div>
                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Depth</label>
