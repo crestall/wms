@@ -3573,9 +3573,18 @@ class FormController extends Controller {
         }
         else
         {
+            $package = if(isset($pallet))? "pallet" : "package";
             if($id = $this->order->addPackage($post_data))
             {
-                Session::set('packagefeedback', "That package has been added. It should be showing below");
+                if($count > 1)
+                {
+                    Session::set('packagefeedback', "Those ".$package."s have been added. They should be showing below");
+
+                }
+                else
+                {
+                    Session::set('packagefeedback', "That $package has been added. It should be showing below");
+                }
             }
             else
             {
