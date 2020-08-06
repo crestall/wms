@@ -152,9 +152,9 @@
         $request = array(
             'SuburbFrom'            => $fsg_address['suburb'],
             'PostcodeFrom'          => $fsg_address['postcode'],
-            'SuburbTo'              => $data_array['ReceiverDetails']['Suburb'],
-            'PostcodeTo'            => $data_array['ReceiverDetails']['Postcode'],
-            'ConsignmentLineItems'  => $data_array['ConsignmentLineItems']
+            'SuburbTo'              => $data_array['ConsignmentList'][0]['ReceiverDetails']['Suburb'],
+            'PostcodeTo'            => $data_array['ConsignmentList'][0]['ReceiverDetails']['Postcode'],
+            'ConsignmentLineItems'  => $data_array['ConsignmentList'][0]['ConsignmentLineItems']
         );
         $response = $this->sendPostRequest('GetConsignmentPrice/', $request, "PRICING");
         return $response;
