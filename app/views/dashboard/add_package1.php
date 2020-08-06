@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Count</span></label>
+                <label class="col-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Count</span></label>
                 <div class="col">
                     <input type="text" class="form-control required number" name="count" id="count" value="1" />
                 </div>
