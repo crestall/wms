@@ -2,8 +2,8 @@
     <div class="row" id="feedback_holder" style="display:none"></div>
         <form id="order-add-package" method="post" action="/form/procAddPackage">
             <div class="form-group row">
-                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
-                <div class="col-md-2">
+                <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
+                <div class="col">
                     <div class="input-group">
                         <input type="text" class="form-control required number" name="width" id="width" />
                         <div class="input-group-append">
@@ -11,8 +11,8 @@
                         </div>
                     </div>
                 </div>
-                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Depth</label>
-                <div class="col-md-2">
+                <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Depth</label>
+                <div class="col">
                     <div class="input-group">
                         <input type="text" class="form-control required number" name="depth" id="depth" />
                         <span class="input-group-append">cm</span>
