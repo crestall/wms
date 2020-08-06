@@ -267,19 +267,14 @@ if(!$error)
 
                             <form id="order-courier-update" method="post" action="/form/procOrderCourierUpdate">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier</label>
-                                    <div class="col-md-4">
+                                    <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier</label>
+                                    <div class="col">
                                         <select id="courier_id" name="courier_id" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">-- Select One --</option><?php echo $this->controller->courier->getSelectCouriers(Form::value('courier_id'), false, true);?></select>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="form-check">
-                                        <label class="form-check-label col-md-3" for="ignore_pc">Ignore Price Check</label>
-                                        <div class="col-md-4 checkbox checkbox-default">
-                                            <input class="form-check-input styled" type="checkbox" id="ignore_pc" name="ignore_pc" />
-                                            <label for="ignore_pc"></label>
-                                        </div>
-                                    </div>
+                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <input class="custom-control-input" type="checkbox" id="ignore_pc" name="ignore_pc" />
+                                    <label class="custom-control-label col" for="ignore_pc">Ignore Price Check</label>
                                 </div>
                                 <div id="local-details" style="display:<?php echo $local_display;?>">
                                     <input type="hidden" name="local_display" id="local_display" value="1" <?php if(empty(Form::value('local_display'))) echo "disabled";?> />
