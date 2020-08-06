@@ -223,12 +223,12 @@ if(!$error)
                                         <h6 class="card-subtitle mb-3"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h6>
                                     </div>
                                     <div class="row border-bottom mb-3">
-                                        <div class="col-9">
+                                        <div class="col-10">
                                             <div class="row">
-                                                <label class="col-md-4 col-sm-9">Width</label>
-                                                <div class="col-md-2 col-sm-3"><?php echo $p['width'];?> cm</div>
-                                                <label class="col-md-4 col-sm-9">Depth</label>
-                                                <div class="col-md-2 col-sm-3"><?php echo $p['depth'];?> cm</div>
+                                                <label class="col-md-3 col-sm-9">Width</label>
+                                                <div class="col-md-3 col-sm-3"><?php echo $p['width'];?> cm</div>
+                                                <label class="col-md-3 col-sm-9">Depth</label>
+                                                <div class="col-md-3 col-sm-3"><?php echo $p['depth'];?> cm</div>
                                             </div>
                                             <div class="row">
                                                 <label class="col-md-3 col-sm-9">Height</label>
@@ -237,7 +237,7 @@ if(!$error)
                                                 <div class="col-md-3 col-sm-3"><?php echo $p['weight'];?> kg</div>
                                             </div>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-2">
                                             <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-2x text-danger"></i></a>
                                         </div>
                                     </div>
