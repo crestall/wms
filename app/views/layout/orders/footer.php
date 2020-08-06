@@ -403,7 +403,8 @@
                                             $('#order-add-package').dialog('close');
                                         });
 
-                                    }
+                                    },
+                                    position: { my: "center", at: "center", of: window }
                             });
                             $("#order-add-package").dialog('open');
                         });
