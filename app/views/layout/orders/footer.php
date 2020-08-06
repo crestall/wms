@@ -384,7 +384,7 @@
                                     });
                             });
                             $("#order-add-package").dialog({
-                                    draggable: false,
+                                    draggable: true,
                                     modal: true,
                                     show: true,
                                     hide: true,
