@@ -215,7 +215,9 @@ if(!$error)
                             <?php endif;?>
                         </div>
                         <div class="card-footer text-right">
-                            
+                            <?php if($order['courier_id'] == 0):?>
+                                <button id="add_package" class="btn btn-outline-secondary">Add Package</button>
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>
