@@ -193,8 +193,6 @@ if(!$error)
                                     <label class="col-9"><?php echo $oi['name'];?></label>
                                     <div class="col-3"><?php echo $oi['qty'];?></div>
                                 </div>
-                                <dt></dt>
-                                <dd></dd>
                             <?php endforeach;?>
                         </div>
                         <div class="card-footer text-right">
@@ -207,10 +205,14 @@ if(!$error)
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card h-100 order-card">
                         <div class="card-header">
-                            Add Packages/Pallets
+                            Packages and Pallets
                         </div>
                         <div class="card-body">
+                            <?php if(count($packages)):?>
 
+                            <?php else;?>
+                                <h6 class="card-subtitle">No Packages or Pallets Listed</h6>
+                            <?php endif;?>
                         </div>
                         <div class="card-footer text-right">
                             
@@ -227,7 +229,7 @@ if(!$error)
             </div>
 
 
-            
+
 
             <?php if($order['courier_id'] > 0):?>
                 <?php if(count($packages)):?>
