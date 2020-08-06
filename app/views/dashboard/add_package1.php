@@ -15,7 +15,9 @@
                 <div class="col">
                     <div class="input-group">
                         <input type="text" class="form-control required number" name="depth" id="depth" />
-                        <span class="input-group-append">cm</span>
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -24,14 +26,18 @@
                 <div class="col-md-2">
                     <div class="input-group">
                         <input type="text" class="form-control required number" name="height" id="height" />
-                        <span class="input-group-append">cm</span>
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
                     </div>
                 </div>
                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
                 <div class="col-md-2">
                     <div class="input-group">
                         <input type="text" class="form-control required number" name="weight" id="weight" />
-                        <span class="input-group-append">Kg</span>
+                        <div class="input-group-append">
+                            <span class="input-group-text">Kg</span>
+                        </div>
                     </div>
                 </div>
             </div>
