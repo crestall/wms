@@ -208,6 +208,13 @@ if(!$error)
                             Packages and Pallets
                         </div>
                         <div class="card-body">
+                            <a name="package"></a>
+                            <?php if(isset($_SESSION['packagefeedback'])) :?>
+                               <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('packagefeedback');?></div>
+                            <?php endif; ?>
+                            <?php if(isset($_SESSION['packageerrorfeedback'])) :?>
+                               <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('packageerrorfeedback');?></div>
+                            <?php endif; ?>
                             <?php if(count($packages)):?>
                                 <?php $pc = 1;
                                 foreach($packages as $p):
@@ -259,99 +266,14 @@ if(!$error)
 
 
 
-            <?php if($order['courier_id'] > 0):?>
-                <?php if(count($packages)):?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>Packages in this Order</h3>
-                        </div>
-                    </div>
-                    <div class="bs-callout bs-callout-primary bs-callout-more">
-                        <?php $pc = 1; foreach($packages as $p):?>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <div class="row">
-                                        <label class="col-md-4 col-form-label">Width</label>
-                                        <div class="col-md-2"><?php echo $p['width'];?> cm</div>
-                                        <label class="col-md-4 col-form-label">Depth</label>
-                                        <div class="col-md-2"><?php echo $p['depth'];?> cm</div>
-                                    </div>
-                                    <div class='row'>
-                                        <label class="col-md-4 col-form-label">Height</label>
-                                        <div class="col-md-2"><?php echo $p['height'];?> cm</div>
-                                        <label class="col-md-4 col-form-label">Weight</label>
-                                        <div class="col-md-2"><?php echo $p['weight'];?> kg</div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php ++$pc; endforeach;?>
-                    </div>
 
-                <?php endif;?>
-            <?php endif;?>
             <?php if($order['courier_id'] == 0):?>
                 <div class="row">
                     <div class="col-md-12">
                         <h3>Order Updating</h3>
                     </div>
                 </div>
-                <div class="bs-callout bs-callout-primary row bs-callout-more">
-                    <div class="col-md-10">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4>Add Package(s) or Pallets(s)</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a name="package"></a>
-                                <?php if(isset($_SESSION['packagefeedback'])) :?>
-                                   <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('packagefeedback');?></div>
-                                <?php endif; ?>
-                                <?php if(isset($_SESSION['packageerrorfeedback'])) :?>
-                                   <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('packageerrorfeedback');?></div>
-                                <?php endif; ?>
-
-                                <p class="text-info">fields marked <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> are required</p>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                        </div>
-                    </div>
-                </div>
-                <?php if(count($packages)):?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Packages in this Order</h4>
-                        </div>
-                    </div>
-                    <?php $pc = 1; foreach($packages as $p):?>
-                        <div class="row alert alert-info">
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <label class="col-md-4 col-form-label">Width</label>
-                                    <div class="col-md-2"><?php echo $p['width'];?> cm</div>
-                                    <label class="col-md-4 col-form-label">Depth</label>
-                                    <div class="col-md-2"><?php echo $p['depth'];?> cm</div>
-                                </div>
-                                <div class='row'>
-                                    <label class="col-md-4 col-form-label">Height</label>
-                                    <div class="col-md-2"><?php echo $p['height'];?> cm</div>
-                                    <label class="col-md-4 col-form-label">Weight</label>
-                                    <div class="col-md-2"><?php echo $p['weight'];?> kg</div>
-                                </div>
-                                <div class='row'>
-                                    <?php $s = ($p['count'] == 1)? "":"s";?>
-                                    <p>Total of <?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-3x text-danger"></i></a>
-                            </div>
-                        </div>
-                    <?php ++$pc; endforeach;?>
-                <?php endif;?>
+                
                 <?php if( $user_role == "admin" || $user_role == "super admin" ):?>
                     <div class="row">
                         <div class="col-md-12">
