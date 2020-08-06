@@ -210,7 +210,7 @@ if(!$error)
                         <div class="card-body">
                             <?php if(count($packages)):?>
 
-                            <?php else;?>
+                            <?php else:?>
                                 <h6 class="card-subtitle">No Packages or Pallets Listed</h6>
                             <?php endif;?>
                         </div>
