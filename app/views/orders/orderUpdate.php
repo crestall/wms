@@ -202,13 +202,13 @@ if(!$error)
                         </div>
                     </div>
                 </div>
+                <a name="package"></a>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card h-100 order-card">
                         <div class="card-header">
                             Packages and Pallets
                         </div>
                         <div class="card-body">
-                            <a name="package"></a>
                             <?php if(isset($_SESSION['packagefeedback'])) :?>
                                <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('packagefeedback');?></div>
                             <?php endif; ?>
@@ -273,7 +273,7 @@ if(!$error)
                         <h3>Order Updating</h3>
                     </div>
                 </div>
-                
+
                 <?php if( $user_role == "admin" || $user_role == "super admin" ):?>
                     <div class="row">
                         <div class="col-md-12">
