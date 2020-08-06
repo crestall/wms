@@ -360,7 +360,6 @@
                 'order-update' : {
                     init: function(){
                         actions.common.init();
-
                         $('button#add_package').click(function(e){
                             //make the package form window
                             var id = $(this).data('orderid')
@@ -375,7 +374,7 @@
                                     $('form#order-add-package').submit(function(e){
                                         if($(this).valid())
                                         {
-                                            
+
                                         }
                                         else
                                         {
@@ -408,19 +407,6 @@
                             });
                             $("#order-add-package").dialog('open');
                         });
-
-
-
-
-
-
-
-
-
-                        $('input#pallet').click(function(e){
-                            var text = ($(this).prop('checked'))? "Pallet Count" :"Package Count";
-                            $('span#label_text').text(text)
-                        });
                         $('a.delete-package')
                             .css('cursor', 'pointer')
                             .click(function(e){
@@ -436,17 +422,14 @@
                                 }
                         });
 
-                        $('form#order-courier-update').submit(function(e){
-                            if($(this).valid())
+                        $('button#update_courier').click(function(e){
+                            if($('form#order-courier-update').valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Courier...</h2></div>' });
-                            }
-                            else
-                            {
-                                return false;
+                                $('form#order-courier-update').submit();
                             }
                         });
-
+                         
                         $('select#courier_id').change(function(e){
                             if($(this).val() == $("#local_id").val())
                             {
