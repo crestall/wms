@@ -790,18 +790,18 @@ class ajaxfunctionsController extends Controller
     public function addPackageForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
-        $order_id = implode(",", $this->request->data['order_id']) ;
-        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_package1.php', [
-            'order_id' =>  $order_id
+        $order_ids = implode(",", $this->request->data['order_ids']) ;
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_package.php', [
+            'order_id' =>  $order_ids
         ]);
     }
 
     public function addOrderPackageForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
-        $order_ids = implode(",", $this->request->data['order_ids']) ;
-        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_package.php', [
-            'order_ids' =>  $order_ids
+        $order_id = $this->request->data['order_id'] ;
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_package.php1', [
+            'order_id' =>  $order_id
         ]);
     }
 
