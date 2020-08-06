@@ -34,11 +34,11 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Package Count</span></label>
-                <div class="col-md-1">
+                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Count</span></label>
+                <div class="col-md-2">
                     <input type="text" class="form-control required number" name="count" id="count" value="1" />
                 </div>
-                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <div class="form-group row custom-control custom-checkbox">
                     <input class="custom-control-input" type="checkbox" id="pallet" name="pallet" />
                     <label class="custom-control-label col-md-3" for="pallet">Pallet(s)?</label>
                 </div>
