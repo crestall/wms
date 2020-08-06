@@ -1,6 +1,5 @@
 <div class="page-wrapper">
     <div class="row" id="feedback_holder" style="display:none"></div>
-    <div class="row">
         <form id="order-add-package" method="post" action="/form/procAddPackage">
             <div class="form-group row">
                 <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
@@ -54,5 +53,4 @@
                 </div>
             </div>
         </form>
-    </div>
 </div>
