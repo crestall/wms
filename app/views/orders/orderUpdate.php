@@ -225,20 +225,20 @@ if(!$error)
                                     <div class="row border-bottom mb-3">
                                         <div class="col-9">
                                             <div class="row">
-                                                <label class="col-md-3 col-sm-8">Width</label>
-                                                <div class="col-md-3 col-sm-4"><?php echo $p['width'];?> cm</div>
-                                                <label class="col-md-3 col-sm-8">Depth</label>
-                                                <div class="col-md-3 col-sm-4"><?php echo $p['depth'];?> cm</div>
+                                                <label class="col-md-3 col-sm-8 col-xs-8">Width</label>
+                                                <div class="col-md-3 col-sm-4 col-xs-4"><?php echo $p['width'];?> cm</div>
+                                                <label class="col-md-3 col-sm-8 col-xs-8">Depth</label>
+                                                <div class="col-md-3 col-sm-4 col-xs-4"><?php echo $p['depth'];?> cm</div>
                                             </div>
                                             <div class="row">
-                                                <label class="col-md-3 col-sm-8">Height</label>
-                                                <div class="col-md-3 col-sm-4"><?php echo $p['height'];?> cm</div>
-                                                <label class="col-md-3 col-sm-8">Weight</label>
+                                                <label class="col-md-3 col-sm-8 col-xs-8">Height</label>
+                                                <div class="col-md-3 col-sm-4 col-xs-4"><?php echo $p['height'];?> cm</div>
+                                                <label class="col-md-3 col-sm-8 col-xs-8">Weight</label>
                                                 <div class="col-md-3 col-sm-4"><?php echo $p['weight'];?> kg</div>
                                             </div>
                                         </div>
                                         <div class="col-3">
-                                            <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-3x text-danger"></i></a>
+                                            <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-2x text-danger"></i></a>
                                         </div>
                                     </div>
                                 <?php ++$pc;
