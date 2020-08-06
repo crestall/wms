@@ -261,46 +261,32 @@ if(!$error)
                                 Update Courier
                             </div>
                             <div class="card-body">
-
-
-
-
-                            <form id="order-courier-update" method="post" action="/form/procOrderCourierUpdate">
-                                <div class="form-group row">
-                                    <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier</label>
-                                    <div class="col">
-                                        <select id="courier_id" name="courier_id" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">-- Select One --</option><?php echo $this->controller->courier->getSelectCouriers(Form::value('courier_id'), false, true);?></select>
-                                    </div>
-                                </div>
-                                <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                    <input class="custom-control-input" type="checkbox" id="ignore_pc" name="ignore_pc" />
-                                    <label class="custom-control-label col-md-6" for="ignore_pc">Ignore Price Check</label>
-                                </div>
-                                <div id="local-details" style="display:<?php echo $local_display;?>">
-                                    <input type="hidden" name="local_display" id="local_display" value="1" <?php if(empty(Form::value('local_display'))) echo "disabled";?> />
+                                <form id="order-courier-update" method="post" action="/form/procOrderCourierUpdate">
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier Name</label>
-                                        <div class="col-md-4">
-                                            <input type="text" class="form-control required" name="courier_name" id="courier_name" value="<?php echo Form::value('courier_name');?>" />
-                                            <?php echo Form::displayError('courier_name');?>
+                                        <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier</label>
+                                        <div class="col">
+                                            <select id="courier_id" name="courier_id" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">-- Select One --</option><?php echo $this->controller->courier->getSelectCouriers(Form::value('courier_id'), false, true);?></select>
                                         </div>
                                     </div>
-                                </div>
-                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                                <input type="hidden" name="truck_id" id="truck_id" value="<?php echo $truck_id;?>" />
-                                <input type="hidden" name="local_id" id="local_id" value="<?php echo $local_id;?>" />
-                                <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
-                        </form>
-
-
-
-
-
-
-
-
-
-
+                                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                        <input class="custom-control-input" type="checkbox" id="ignore_pc" name="ignore_pc" />
+                                        <label class="custom-control-label col-md-6" for="ignore_pc">Ignore Price Check</label>
+                                    </div>
+                                    <div id="local-details" style="display:<?php echo $local_display;?>">
+                                        <input type="hidden" name="local_display" id="local_display" value="1" <?php if(empty(Form::value('local_display'))) echo "disabled";?> />
+                                        <div class="form-group row">
+                                            <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier Name</label>
+                                            <div class="col">
+                                                <input type="text" class="form-control required" name="courier_name" id="courier_name" value="<?php echo Form::value('courier_name');?>" />
+                                                <?php echo Form::displayError('courier_name');?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                                    <input type="hidden" name="truck_id" id="truck_id" value="<?php echo $truck_id;?>" />
+                                    <input type="hidden" name="local_id" id="local_id" value="<?php echo $local_id;?>" />
+                                    <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
+                                </form>
                             </div>
                             <div class="card-footer">
                                 <div class="row">
@@ -324,7 +310,7 @@ if(!$error)
 
 
             <?php if($order['courier_id'] == 0):?>
-                
+
             <?php else:?>
                 <?php include(Config::get('VIEWS_PATH')."forms/addmisc.php");?>
                 <div class="row">
