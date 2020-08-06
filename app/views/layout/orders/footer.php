@@ -390,7 +390,11 @@
                                     hide: true,
                                     autoOpen: false,
                                     height: 520,
-                                    width: 620,
+                                    width: "auto",
+                                    create: function( event, ui ) {
+                                        // Set maxWidth
+                                        $(this).css("maxWidth", "660px");
+                                    },
                                     close: function(){
                                         $("#order-add-package").remove();
                                     },
