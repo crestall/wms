@@ -209,7 +209,33 @@ if(!$error)
                         </div>
                         <div class="card-body">
                             <?php if(count($packages)):?>
-
+                                <?php $pc = 1;
+                                foreach($packages as $p):
+                                    $s = ($p['count'] == 1)? "":"s";?>
+                                    <div class="row">
+                                        <h6 class="card-subtitle text-muted"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <div class="row">
+                                                <label class="col-md-3 col-sm-8">Width</label>
+                                                <div class="col-md-3 col-sm-4"><?php echo $p['width'];?> cm</div>
+                                                <label class="col-md-3 col-sm-8">Depth</label>
+                                                <div class="col-md-3 col-sm-4"><?php echo $p['depth'];?> cm</div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-md-3 col-sm-8">Height</label>
+                                                <div class="col-md-3 col-sm-4"><?php echo $p['height'];?> cm</div>
+                                                <label class="col-md-3 col-sm-8">Weight</label>
+                                                <div class="col-md-3 col-sm-4"><?php echo $p['weight'];?> kg</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-3x text-danger"></i></a>
+                                        </div>
+                                    </div>
+                                <?php ++$pc;
+                                endforeach;?>
                             <?php else:?>
                                 <h6 class="card-subtitle">No Packages or Pallets Listed</h6>
                             <?php endif;?>
