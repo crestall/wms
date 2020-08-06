@@ -375,7 +375,7 @@
                                     $('form#orders-add-package').submit(function(e){
                                         if($(this).valid())
                                         {
-
+                                            e.preventDefault();
                                         }
                                         else
                                         {
