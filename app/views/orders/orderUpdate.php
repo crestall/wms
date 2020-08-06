@@ -213,9 +213,9 @@ if(!$error)
                                 foreach($packages as $p):
                                     $s = ($p['count'] == 1)? "":"s";?>
                                     <div class="row">
-                                        <h6 class="card-subtitle text-muted"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h6>
+                                        <h6 class="card-subtitle mb-3"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h6>
                                     </div>
-                                    <div class="row">
+                                    <div class="row border-bottom mb-3">
                                         <div class="col-9">
                                             <div class="row">
                                                 <label class="col-md-3 col-sm-8">Width</label>
