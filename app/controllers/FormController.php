@@ -3573,7 +3573,7 @@ class FormController extends Controller {
         }
         else
         {
-            $package = if(isset($pallet))? "pallet" : "package";
+            $package = (isset($pallet))? "pallet" : "package";
             if($id = $this->order->addPackage($post_data))
             {
                 if($count > 1)
