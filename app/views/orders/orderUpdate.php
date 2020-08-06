@@ -216,7 +216,7 @@ if(!$error)
                         </div>
                         <div class="card-footer text-right">
                             <?php if($order['courier_id'] == 0):?>
-                                <button id="add_package" class="btn btn-outline-secondary">Add Package</button>
+                                <button id="add_package" class="btn btn-outline-secondary" data-orderid="<?php echo $order_id;?>">Add Package/Pallet</button>
                             <?php endif;?>
                         </div>
                     </div>
@@ -290,59 +290,7 @@ if(!$error)
                             </div>
                         </div>
                         <div class="row">
-                            <form id="order-add-package" method="post" action="/form/procAddPackage">
-                                <div class="form-group row">
-                                    <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control required number" name="width" id="width" value="<?php echo Form::value('width');?>" />
-                                            <span class="input-group-addon">cm</span>
-                                        </div>
-                                    </div>
-                                    <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Depth</label>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control required number" name="depth" id="depth" value="<?php echo Form::value('depth');?>" />
-                                            <span class="input-group-addon">cm</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Height</label>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control required number" name="height" id="height" value="<?php echo Form::value('height');?>" />
-                                            <span class="input-group-addon">cm</span>
-                                        </div>
-                                    </div>
-                                    <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control required number" name="weight" id="weight" value="<?php echo Form::value('weight');?>" />
-                                            <span class="input-group-addon">Kg</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                                <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
-                                <div class="form-group row">
-                                    <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Package Count</span></label>
-                                    <div class="col-md-1">
-                                        <input type="text" class="form-control required number" name="count" id="count" value="<?php echo $p_count;?>" />
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label col-md-1" for="pallet">Pallet(s)?</label>
-                                        <div class="col-md-1 checkbox checkbox-default">
-                                            <input class="form-check-input styled" type="checkbox" id="pallet" name="pallet" <?php if(!empty(Form::value('pallet'))) echo 'checked';?> />
-                                            <label for="pallet"></label>
-                                        </div>
-                                    </div>
-                                    <label class="col-md-3 col-form-label">&nbsp;</label>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-primary">Add Package</button>
-                                    </div>
-                                </div>
-                            </form>
+
                         </div>
                     </div>
                 </div>

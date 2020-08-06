@@ -360,6 +360,58 @@
                 'order-update' : {
                     init: function(){
                         actions.common.init();
+
+                        $('button#add_package').click(function(e){
+                            //make the package form window
+                            var id = $(this).data('orderid')
+                            $('<div id="order-add-package" title="Add Packages or Pallets">').appendTo($('body'));
+                            $("#order-add-package")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addOrderPackageForm',{order_id: id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                    }
+                                    $('form#orders-add-package').submit(function(e){
+                                        if($(this).valid())
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            e.preventDefault();
+                                        }
+                                    });
+                            });
+                            $("#order-add-package").dialog({
+                                    draggable: false,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: 520,
+                                    width: 620,
+                                    close: function(){
+                                        $("#order-add-package").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#order-add-package').dialog('close');
+                                        });
+
+                                    }
+                            });
+                            $("#order-add-package").dialog('open');
+                        });
+
+
+
+
+
+
+
+
+
                         $('input#pallet').click(function(e){
                             var text = ($(this).prop('checked'))? "Pallet Count" :"Package Count";
                             $('span#label_text').text(text)
@@ -424,11 +476,7 @@
                             form.submit();
                         });
 
-                        $('button#truck_charge_calc').click(function(e) {
-                            e.preventDefault();
-                    		var dest = $(this).data("destination");
-                            truckCost.getCharge();
-                        });
+
 
                         $('button#order_fulfill').click(function(e){
                             var courier_id = $(this).data('courierid');
