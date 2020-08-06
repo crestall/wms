@@ -46,7 +46,7 @@
                 <div class="col-md-3 col-sm-4">
                     <input type="text" class="form-control required number" name="count" id="count" value="1" />
                 </div>
-                <div class="custom-control custom-checkbox mr-sm-2">
+                <div class="custom-control custom-checkbox col-sm-2">
                     <input class="custom-control-input" type="checkbox" id="pallet" name="pallet" />
                     <label class="custom-control-label" for="pallet">Pallet(s)?</label>
                 </div>
@@ -54,7 +54,7 @@
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
             <div class="form-group row">
-                <label class="col-3 col-sm-6">&nbsp;</label>
+                <label class="col-3">&nbsp;</label>
                 <div class="col-4">
                     <button type="submit" class="btn btn-outline-secondary">Add Package</button>
                 </div>
