@@ -22,8 +22,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Height</label>
-                <div class="col-md-2">
+                <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Height</label>
+                <div class="col">
                     <div class="input-group">
                         <input type="text" class="form-control required number" name="height" id="height" />
                         <div class="input-group-append">
@@ -31,8 +31,8 @@
                         </div>
                     </div>
                 </div>
-                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
-                <div class="col-md-2">
+                <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
+                <div class="col">
                     <div class="input-group">
                         <input type="text" class="form-control required number" name="weight" id="weight" />
                         <div class="input-group-append">
@@ -42,8 +42,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Count</span></label>
-                <div class="col-md-2">
+                <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Count</span></label>
+                <div class="col">
                     <input type="text" class="form-control required number" name="count" id="count" value="1" />
                 </div>
                 <div class="custom-control custom-checkbox mr-sm-2">
