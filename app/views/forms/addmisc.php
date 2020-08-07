@@ -1,6 +1,28 @@
 <?php
-$shrink_wrap = (empty(Form::value('shrink_wrap')))? $order['shrink_wrap']:Form::value('shrink_wrap');
-$bubble_wrap = (empty(Form::value('bubble_wrap')))? $order['bubble_wrap']:Form::value('bubble_wrap');
+if(null !== Form::value('shrink_wrap'))
+{
+    $shrink_check = "checked";
+}
+elseif(!empty($order['shrink_wrap']))
+{
+    $shrink_check = "checked";
+}
+else
+{
+    $shrink_check = "";
+}
+if(null !== Form::value('bubble_wrap'))
+{
+    $bubble_check = "checked";
+}
+elseif(!empty($order['bubble_wrap']))
+{
+    $bubble_check = "checked";
+}
+else
+{
+    $bubble_check = "";
+}
 $pallets = (empty(Form::value('pallets')))? $order['pallets']:Form::value('pallets');
 $satchels = (empty(Form::value('satchels')))? $order['satchels']:Form::value('satchels');
 $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('charge');
@@ -18,11 +40,11 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
 <div class="row">
     <form id="add_miscellaneous" method="post" action="/form/procAddMiscToOrder">
         <div class="form-group row custom-control custom-checkbox custom-control-right">
-            <input class="custom-control-input col" type="checkbox" id="shrink_wrap" name="shrink_wrap" <?php if(!empty(Form::value('shrink_wrap'))) echo 'checked';?> />
+            <input class="custom-control-input col" type="checkbox" id="shrink_wrap" name="shrink_wrap" <?php echo $shrink_check;?> />
             <label class="custom-control-label col" for="shrink_wrap">Shrink Wrap</label>
         </div>
         <div class="form-group row custom-control custom-checkbox custom-control-right">
-            <input class="custom-control-input col" type="checkbox" id="bubble_wrap" name="bubble_wrap" <?php if(!empty(Form::value('bubble_wrap'))) echo 'checked';?> />
+            <input class="custom-control-input col" type="checkbox" id="bubble_wrap" name="bubble_wrap" <?php echo $bubble_check;?> />
             <label class="custom-control-label col" for="bubble_wrap">Bubble Wrap</label>
         </div>
         <div class="form-group row">
