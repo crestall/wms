@@ -179,6 +179,10 @@ div.order-card label{
     font-weight: bold;
 }
 
+div.order-card div.card-footer{
+    background-color: rgba(108,117,125,0.25);
+}
+
 /*****
 User Info
 *****/
