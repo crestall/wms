@@ -126,7 +126,7 @@ if(!$error)
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card border-secondary h-100 order-card">
-                        <div class="card-header">
+                        <div class="card-header bg-secondary text-white">
                             Order Details
                         </div>
                         <div class="card-body">
@@ -184,7 +184,7 @@ if(!$error)
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card border-secondary h-100 order-card">
-                        <div class="card-header">
+                        <div class="card-header bg-secondary text-white">
                             Order Items
                         </div>
                         <div class="card-body">
@@ -205,7 +205,7 @@ if(!$error)
                 <a name="package"></a>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card border-secondary h-100 order-card">
-                        <div class="card-header">
+                        <div class="card-header bg-secondary text-white">
                             Packages and Pallets
                         </div>
                         <div class="card-body">
@@ -262,7 +262,7 @@ if(!$error)
                 <?php if($order['courier_id'] == 0):    //Courier Selection?>
                     <div class="col-sm-12 col-md-6 mb-3">
                         <div class="card border-secondary h-100 order-card">
-                            <div class="card-header">
+                            <div class="card-header bg-secondary text-white">
                                 Update Courier
                             </div>
                             <div class="card-body">
@@ -309,20 +309,20 @@ if(!$error)
                     <a name="misc"></a>
                     <div class="col-sm-12 col-md-6 mb-3">
                         <div class="card border-secondary h-100 order-card">
-                            <div class="card-header">
+                            <div class="card-header bg-secondary text-white">
                                 Add Miscellaneous Items
                             </div>
                             <div class="card-body">
                                 <?php include(Config::get('VIEWS_PATH')."forms/addmisc.php");?>
                             </div>
-                            <div class="card-footer text-right bg-secondary">
+                            <div class="card-footer text-right">
                                 <button id="add_misc" class="btn btn-outline-secondary">Add/Update These</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6 mb-3">
                         <div class="card border-secondary h-100 order-card">
-                            <div class="card-header">
+                            <div class="card-header bg-secondary text-white">
                                 Order Fulfillment
                             </div>
                             <div class="card-body">
@@ -469,38 +469,6 @@ if(!$error)
                     </div>
                 <?php endif;?>
             </div>
-
-
-
-
-
-            <?php if($order['courier_id'] == 0):?>
-
-            <?php else:?>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Order Fulfillment</h3>
-                    </div>
-                </div>
-                <?php if($order['status_id'] == $this->controller->order->fulfilled_id):?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>This order has already been fulfilled</h2>
-                            <p>Fulfilled on <?php echo date("d/m/Y", $order['date_fulfilled']);?></p>
-                            <p>Dispatched using <?php echo $this->controller->courier->getCourierNameForOrder($order['courier_id'], $order_id);?></p>
-                        </div>
-                    </div>
-                <?php elseif( $user_role == "admin" || $user_role == "super admin" ):?>
-
-                    <div class="row">
-                        <label class="col-md-3 col-form-label">&nbsp;</label>
-                        <div class="col-md-4">
-                            <p><button class="btn-md btn-danger btn" id="order_fulfill" data-orderid="<?php echo $order_id;?>" data-courierid="<?php echo $order['courier_id'];?>">Fulfill Order</button></p>
-                        </div>
-                    </div>
-                <?php endif;?>
-            <?php endif;?>
         <?php endif;?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/courierids.php");?>
     </div>
