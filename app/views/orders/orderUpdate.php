@@ -3,7 +3,7 @@ $truck_display = (empty(Form::value('truck_display')))? 'none' : "block";
 $local_display = (empty(Form::value('local_display')))? 'none' : "block";
 $truck_pallets = (empty(Form::value('truck_pallets')))? 1:Form::value('truck_pallets');
 $pallets = (empty(Form::value('pallets')))? 1:Form::value('pallets');
-$p_count = (empty(Form::value('count')))? 1:Form::value('count'); 
+$p_count = (empty(Form::value('count')))? 1:Form::value('count');
 if(!$error)
 {
     $truck_charge = (empty(Form::value('truck_charge')))? $order['total_cost']:Form::value('truck_charge');
@@ -311,7 +311,7 @@ if(!$error)
                                 <?php include(Config::get('VIEWS_PATH')."forms/addmisc.php");?>
                             </div>
                             <div class="card-footer text-right">
-                                <button id="add_misc" class="btn btn-outline-secondary">Add These</button>
+                                <button id="add_misc" class="btn btn-outline-secondary">Add/Update These</button>
                             </div>
                         </div>
                     </div>
@@ -321,11 +321,19 @@ if(!$error)
                                 Order Fulfillment
                             </div>
                             <div class="card-body">
+                                <?php if($order['status_id'] == $this->controller->order->fulfilled_id):?>
+                                    <h6 class="card-subtitle">This order has already been fulfilled</h6>
+                                    <p>Fulfilled on <?php echo date("d/m/Y", $order['date_fulfilled']);?></p>
+                                    <p>Dispatched using <?php echo $this->controller->courier->getCourierNameForOrder($order['courier_id'], $order_id);?></p>
+                                    </div><!--End Card Body-->
+                                    <div class="card-footer"></div>
+                                <?php else:?>
+                                    </div><!--End Card Body-->
+                                    <div class="card-footer text-right">
+                                        <button class="btn-outline-danger btn" id="order_fulfill" data-orderid="<?php echo $order_id;?>" data-courierid="<?php echo $order['courier_id'];?>">Fulfill Order</button>
+                                    </div>
+                                <?php endif;?>
 
-                            </div>
-                            <div class="card-footer">
-
-                            </div>
                         </div>
                     </div>
                 <?php endif;?>
