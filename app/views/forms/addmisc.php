@@ -1,5 +1,5 @@
 <?php
-if(null !== Form::value('shrink_wrap'))
+if(!empty(Form::value('shrink_wrap')))
 {
     $shrink_check = "checked";
     die("form value ".Form::value('shrink_wrap'));
