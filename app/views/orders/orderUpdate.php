@@ -226,16 +226,16 @@ if(!$error)
                                         <div class="row border-bottom mb-3">
                                             <div class="col-10">
                                                 <div class="row">
-                                                    <label class="col-lg-3 col-md-7 col-sm-9">Width</label>
-                                                    <div class="col-lg-3 col-md-5 col-sm-3"><?php echo $p['width'];?> cm</div>
-                                                    <label class="col-lg-3 col-md-7 col-sm-9">Depth</label>
-                                                    <div class="col-lg-3 col-md-5 col-sm-3"><?php echo $p['depth'];?> cm</div>
+                                                    <label class="col-lg-3 col-md-7 col-sm-9 col-9">Width</label>
+                                                    <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['width'];?> cm</div>
+                                                    <label class="col-lg-3 col-md-7 col-sm-9 col-9">Depth</label>
+                                                    <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['depth'];?> cm</div>
                                                 </div>
                                                 <div class="row">
-                                                    <label class="col-lg-3 col-md-7 col-sm-9">Height</label>
-                                                    <div class="col-lg-3 col-md-5 col-sm-3"><?php echo $p['height'];?> cm</div>
-                                                    <label class="col-lg-3 col-md-7 col-sm-9">Weight</label>
-                                                    <div class="col-lg-3 col-md-5 col-sm-3"><?php echo $p['weight'];?> kg</div>
+                                                    <label class="col-lg-3 col-md-7 col-sm-9 col-9">Height</label>
+                                                    <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['height'];?> cm</div>
+                                                    <label class="col-lg-3 col-md-7 col-sm-9 col-9">Weight</label>
+                                                    <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['weight'];?> kg</div>
                                                 </div>
                                             </div>
                                             <div class="col-2">
