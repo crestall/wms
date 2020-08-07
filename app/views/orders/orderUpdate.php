@@ -81,7 +81,7 @@ if(!$error)
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6 mb-3">
-                    <div class="card h-100 order-card">
+                    <div class="card h-100 border-secondary order-card">
                         <div class="card-header">
                             Delivery Details
                         </div>
@@ -125,7 +125,7 @@ if(!$error)
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
-                    <div class="card h-100 order-card">
+                    <div class="card border-secondary h-100 order-card">
                         <div class="card-header">
                             Order Details
                         </div>
@@ -183,7 +183,7 @@ if(!$error)
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-3">
-                    <div class="card h-100 order-card">
+                    <div class="card border-secondary h-100 order-card">
                         <div class="card-header">
                             Order Items
                         </div>
@@ -204,7 +204,7 @@ if(!$error)
                 </div>
                 <a name="package"></a>
                 <div class="col-sm-12 col-md-6 mb-3">
-                    <div class="card h-100 order-card">
+                    <div class="card border-secondary h-100 order-card">
                         <div class="card-header">
                             Packages and Pallets
                         </div>
@@ -261,7 +261,7 @@ if(!$error)
                 </div>
                 <?php if($order['courier_id'] == 0):    //Courier Selection?>
                     <div class="col-sm-12 col-md-6 mb-3">
-                        <div class="card h-100 order-card">
+                        <div class="card border-secondary h-100 order-card">
                             <div class="card-header">
                                 Update Courier
                             </div>
@@ -308,7 +308,7 @@ if(!$error)
                 <?php else:                             //Order Fulfillment?>
                     <a name="misc"></a>
                     <div class="col-sm-12 col-md-6 mb-3">
-                        <div class="card h-100 order-card">
+                        <div class="card border-secondary h-100 order-card">
                             <div class="card-header">
                                 Add Miscellaneous Items
                             </div>
@@ -321,7 +321,7 @@ if(!$error)
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6 mb-3">
-                        <div class="card h-100 order-card">
+                        <div class="card border-secondary h-100 order-card">
                             <div class="card-header">
                                 Order Fulfillment
                             </div>
@@ -341,27 +341,34 @@ if(!$error)
                                             </div>
                                         <?php elseif($order['courier_id'] == $this->controller->courier->fsgId):?>
                                             <form id="our_truck">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <h4>FSG Deliveries</h4>
-                                                    </div>
-                                                </div>
+                                                <h6 class="card-subtitle">FSG Delivery</h6>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
-                                                    <div class="col-md-4">
+                                                    <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
+                                                    <div class="col">
                                                         <input type="text" class="form-control required" name="consignment_id" id="consignment_id" value="<?php echo Form::value('consignment_id');?>" />
                                                         <?php echo Form::displayError('consignment_id');?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label">Pallets</label>
-                                                    <div class="col-md-4">
+                                                    <label class="col">Pallets</label>
+                                                    <div class="col">
                                                         <input type="text" class="form-control required digits" data-rule-min="1" name="truck_pallets" id="truck_pallets" value="<?php echo $truck_pallets;?>" />
                                                         <?php echo Form::displayError('pallets');?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-
+                                                    <div class="form-group row">
+                                                        <label class="col">Charge Amount</label>
+                                                        <div class="col">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">$</span>
+                                                                </div>
+                                                                <input type="text" class="form-control number" name="truck_charge" id="truck_charge" value="<?php echo $truck_charge;?>" />
+                                                            </div>
+                                                            <?php echo Form::displayError('truck_charge');?>
+                                                        </div>
+                                                    </div>
                                                     <label class="col-md-3 col-form-label">Charge Amount</label>
                                                     <div class="col-md-4">
                                                         <div class="input-group">
@@ -374,23 +381,21 @@ if(!$error)
                                             </form>
                                         <?php elseif($order['courier_id'] == $this->controller->courier->directFreightId):?>
                                             <form id="direct_freight">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <h4>Direct Freight</h4>
-                                                    </div>
-                                                </div>
+                                                <h6 class="card-subtitle">Direct Freight</h6>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
-                                                    <div class="col-md-4">
+                                                    <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
+                                                    <div class="col">
                                                         <input type="text" class="form-control required" name="direct_consignment_id" id="direct_consignment_id" value="<?php echo Form::value('direct_consignment_id');?>" />
                                                         <?php echo Form::displayError('direct_consignment_id');?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label">Charge Amount</label>
-                                                    <div class="col-md-4">
+                                                    <label class="col">Charge Amount</label>
+                                                    <div class="col">
                                                         <div class="input-group">
-                                                            <span class="input-group-addon">$</span>
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">$</span>
+                                                            </div>
                                                             <input type="text" class="form-control number" name="direct_charge" id="direct_charge" value="<?php echo $direct_charge;?>" />
                                                         </div>
                                                         <?php echo Form::displayError('direct_charge');?>
