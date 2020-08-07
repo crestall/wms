@@ -238,7 +238,9 @@ if(!$error)
                                             </div>
                                         </div>
                                         <div class="col-2">
-                                            <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-2x text-danger"></i></a>
+                                            <?php if($order['courier_id'] == 0):?>
+                                                <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-2x text-danger"></i></a>
+                                            <?php endif;?>
                                         </div>
                                     </div>
                                 <?php ++$pc;
