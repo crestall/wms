@@ -429,7 +429,15 @@
                                 $('form#order-courier-update').submit();
                             }
                         });
-                         
+
+                        $('button#add_misc').click(function(e){
+                            if($('form#add_miscellaneous').valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Miscellaneous Items...</h2></div>' });
+                                $('form#add_miscellaneous').submit();
+                            }
+                        });
+
                         $('select#courier_id').change(function(e){
                             if($(this).val() == $("#local_id").val())
                             {
