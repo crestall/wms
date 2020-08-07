@@ -301,7 +301,32 @@ if(!$error)
                         </div>
                     </div>
                 <?php else:                             //Order Fulfillment?>
+                    <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="card h-100 order-card">
+                            <div class="card-header">
+                                Add Miscellaneous Items
+                            </div>
+                            <div class="card-body">
 
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="card h-100 order-card">
+                            <div class="card-header">
+                                Order Fulfillment
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                        </div>
+                    </div>
                 <?php endif;?>
             </div>
 
