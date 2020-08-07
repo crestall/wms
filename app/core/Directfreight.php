@@ -54,7 +54,7 @@
         $url = directfreight::API_SCHEME . directfreight::API_BASE_URL . $action;
         //die($url);
         $data_string = json_encode($data);
-        //die($data_string);
+        die($data_string);
         $key = $this->{$area."_KEY"};
         $headers = array(
             'Content-Type: application/json',
@@ -162,7 +162,7 @@
 
     public function createConsignment($details)
     {
-        echo "<pre>",print_r($details),"</pre>";die();
+        //echo "<pre>",print_r($details),"</pre>";die();
         $response = $this->sendPostRequest('CreateConsignment/', $details, "CONSIGNMENT");
         //echo $response; die();
         //list($a_headers,$a_data) = $this->getResponse($response);
