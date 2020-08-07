@@ -330,7 +330,7 @@ if(!$error)
                                     <h5 class="card-subtitle mb-3">This order has already been fulfilled</h5>
                                     <div class="ml-4">
                                         <p>Fulfilled on <?php echo date("d/m/Y", $order['date_fulfilled']);?></p>
-                                        <p>Dispatched using <?php echo $this->controller->courier->getCourierNameForOrder($order['courier_id'], $order_id);?></p>
+                                        <p>Dispatched using <span class="font-weight-bold"><?php echo $this->controller->courier->getCourierNameForOrder($order['courier_id'], $order_id);?></span></p>
                                     </div>
                                     </div><!--End Card Body-->
                                     <div class="card-footer"></div>
