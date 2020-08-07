@@ -19,7 +19,7 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
     <form id="add_to_stock" method="post" action="/form/procAddMiscToOrder">
         <div class="form-group row custom-control custom-checkbox custom-control-right">
             <input class="custom-control-input" type="checkbox" id="shrink_wrap" name="shrink_wrap" <?php if(!empty(Form::value('shrink_wrap'))) echo 'checked';?> />
-            <label class="custom-control-label col-md-3" for="shrink_wrap">Shrink Wrap</label>
+            <label class="custom-control-label col" for="shrink_wrap">Shrink Wrap</label>
         </div>
         <div class="form-group row">
             <div class="form-check">
@@ -31,8 +31,8 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 col-form-label">Pallets</label>
-            <div class="col-md-4">
+            <label class="col">Pallets</label>
+            <div class="col">
                 <input type="text" class="form-control number" name="pallets" id="pallets" value="<?php echo $pallets;?>" />
                 <?php echo Form::displayError('pallets');?>
             </div>
