@@ -315,7 +315,7 @@ if(!$error)
                             <div class="card-body">
                                 <?php include(Config::get('VIEWS_PATH')."forms/addmisc.php");?>
                             </div>
-                            <div class="card-footer text-right">
+                            <div class="card-footer text-right bg-secondary">
                                 <button id="add_misc" class="btn btn-outline-secondary">Add/Update These</button>
                             </div>
                         </div>
