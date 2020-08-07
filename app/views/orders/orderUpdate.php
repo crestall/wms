@@ -310,7 +310,7 @@ if(!$error)
 
                             </div>
                             <div class="card-footer">
-
+                                <?php include(Config::get('VIEWS_PATH')."forms/addmisc.php");?>
                             </div>
                         </div>
                     </div>
@@ -337,7 +337,7 @@ if(!$error)
             <?php if($order['courier_id'] == 0):?>
 
             <?php else:?>
-                <?php include(Config::get('VIEWS_PATH')."forms/addmisc.php");?>
+
                 <div class="row">
                     <div class="col-md-12">
                         <h3>Order Fulfillment</h3>
