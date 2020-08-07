@@ -11,7 +11,7 @@ else
 {
     $shrink_check = "";
 }
-if(null !== Form::value('bubble_wrap'))
+if(!empty(Form::value('bubble_wrap')))
 {
     $bubble_check = "checked";
 }
