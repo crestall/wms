@@ -34,9 +34,9 @@
 
         if($this->test)
         {
-            $this->CONSIGNMENT_KEY = "DAB85BAB-F8F5-4B93-9290-C7EEA012B176";
+            $this->CONSIGNMENT_KEY = "1A13554A-81D9-46B8-BDAD-B490E34B2B09";
             $this->PRICING_KEY = "977998B6-48FB-4AB0-8D4D-AEB641906C0E";
-            $this->GENERAL_KEY = "26D189FD-FDAF-4C79-95F2-5042A3CD9097";
+            $this->GENERAL_KEY = "BA4992DA-8C23-406C-9C8E-5B19B1EAAD73";
             $this->ACCOUNT_NO = "21483";
         }
         else
