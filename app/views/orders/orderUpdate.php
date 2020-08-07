@@ -361,6 +361,7 @@ if(!$error)
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
+
                                                     <label class="col-md-3 col-form-label">Charge Amount</label>
                                                     <div class="col-md-4">
                                                         <div class="input-group">
@@ -398,30 +399,28 @@ if(!$error)
                                             </form>
                                         <?php elseif($order['courier_id'] == $this->controller->courier->localId):?>
                                             <form id="local_courier">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <h4>Local Courier</h4>
-                                                    </div>
-                                                </div>
+                                                <h6 class="card-subtitle">Local Courier</h6>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier Name</label>
-                                                    <div class="col-md-4">
+                                                    <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier Name</label>
+                                                    <div class="col">
                                                         <input type="text" class="form-control required" name="courier_name" id="courier_name" value="<?php echo $courier_name;?>" />
                                                         <?php echo Form::displayError('courier_name');?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
-                                                    <div class="col-md-4">
+                                                    <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
+                                                    <div class="col">
                                                         <input type="text" class="form-control required" name="consignment_id" id="consignment_id" value="<?php echo Form::value('consignment_id');?>" />
                                                         <?php echo Form::displayError('consignment_id');?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label">Charge Amount</label>
-                                                    <div class="col-md-4">
+                                                    <label class="col">Charge Amount</label>
+                                                    <div class="col">
                                                         <div class="input-group">
-                                                            <span class="input-group-addon">$</span>
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">$</span>
+                                                            </div>
                                                             <input type="text" class="form-control number" name="local_charge" id="local_charge" value="<?php echo $local_charge;?>" />
                                                         </div>
                                                         <?php echo Form::displayError('local_charge');?>
