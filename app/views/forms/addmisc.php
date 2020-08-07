@@ -17,19 +17,9 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
 </div>
 <div class="row">
     <form id="add_to_stock" method="post" action="/form/procAddMiscToOrder">
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Add Miscellaneous Items To Order</h3>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="form-check">
-                <label class="form-check-label col-md-3" for="shrink_wrap">Shrink Wrap</label>
-                <div class="col-md-4 checkbox checkbox-default">
-                    <input class="form-check-input styled" type="checkbox" id="shrink_wrap" name="shrink_wrap" <?php if(!empty($shrink_wrap)) echo 'checked';?> />
-                    <label for="shrink_wrap"></label>
-                </div>
-            </div>
+        <div class="form-group row custom-control custom-checkbox custom-control-right">
+            <input class="custom-control-input" type="checkbox" id="shrink_wrap" name="shrink_wrap" <?php if(!empty(Form::value('shrink_wrap'))) echo 'checked';?> />
+            <label class="custom-control-label col-md-3" for="shrink_wrap">Shrink Wrap</label>
         </div>
         <div class="form-group row">
             <div class="form-check">
