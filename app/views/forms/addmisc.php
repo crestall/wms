@@ -16,7 +16,7 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
     </div>
 </div>
 <div class="row">
-    <form id="add_to_stock" method="post" action="/form/procAddMiscToOrder">
+    <form id="add_miscellaneous" method="post" action="/form/procAddMiscToOrder">
         <div class="form-group row custom-control custom-checkbox custom-control-right">
             <input class="custom-control-input col" type="checkbox" id="shrink_wrap" name="shrink_wrap" <?php if(!empty(Form::value('shrink_wrap'))) echo 'checked';?> />
             <label class="custom-control-label col" for="shrink_wrap">Shrink Wrap</label>
@@ -53,11 +53,5 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
         </div>
         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
         <input type="hidden" name="order_id" value="<?php echo $order_id; ?>" />
-        <div class="form-group row">
-            <label class="col-md-3 col-form-label">&nbsp;</label>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-primary">Add Miscellaneous Items</button>
-            </div>
-        </div>
     </form>
 </div>
