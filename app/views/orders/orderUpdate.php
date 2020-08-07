@@ -307,10 +307,10 @@ if(!$error)
                                 Add Miscellaneous Items
                             </div>
                             <div class="card-body">
-
-                            </div>
-                            <div class="card-footer">
                                 <?php include(Config::get('VIEWS_PATH')."forms/addmisc.php");?>
+                            </div>
+                            <div class="card-footer text-right">
+                                <button id="add_misc" class="btn btn-outline-secondary">Add These</button>
                             </div>
                         </div>
                     </div>
