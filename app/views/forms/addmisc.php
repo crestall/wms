@@ -2,10 +2,12 @@
 if(null !== Form::value('shrink_wrap'))
 {
     $shrink_check = "checked";
+    die("form value ".Form::value('shrink_wrap'));
 }
 elseif(!empty($order['shrink_wrap']))
 {
     $shrink_check = "checked";
+    die("order value ".$order['shrink_wrap']);
 }
 else
 {
