@@ -43,10 +43,10 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
             <label class="col">Charge Amount</label>
             <div class="col">
                 <div class="input-group">
-                    <input type="text" class="form-control number" name="charge" id="charge" value="<?php echo $charge;?>" />
-                    <div class="input-group-preppend">
+                    <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
+                    <input type="text" class="form-control number" name="charge" id="charge" value="<?php echo $charge;?>" />
                 </div>
                 <?php echo Form::displayError('charge');?>
             </div>
