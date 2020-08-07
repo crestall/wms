@@ -219,30 +219,33 @@ if(!$error)
                                 <?php $pc = 1;
                                 foreach($packages as $p):
                                     $s = ($p['count'] == 1)? "":"s";?>
-                                    <div class="row">
-                                        <h6 class="card-subtitle mb-3"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h6>
-                                    </div>
-                                    <div class="row border-bottom mb-3">
-                                        <div class="col-10">
-                                            <div class="row">
-                                                <label class="col-md-3 col-sm-9">Width</label>
-                                                <div class="col-md-3 col-sm-3"><?php echo $p['width'];?> cm</div>
-                                                <label class="col-md-3 col-sm-9">Depth</label>
-                                                <div class="col-md-3 col-sm-3"><?php echo $p['depth'];?> cm</div>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <h6 class="card-subtitle mb-3"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h6>
+                                        </div>
+                                        <div class="row border-bottom mb-3">
+                                            <div class="col-10">
+                                                <div class="row">
+                                                    <label class="col-md-3 col-sm-9">Width</label>
+                                                    <div class="col-md-3 col-sm-3"><?php echo $p['width'];?> cm</div>
+                                                    <label class="col-md-3 col-sm-9">Depth</label>
+                                                    <div class="col-md-3 col-sm-3"><?php echo $p['depth'];?> cm</div>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="col-md-3 col-sm-9">Height</label>
+                                                    <div class="col-md-3 col-sm-3"><?php echo $p['height'];?> cm</div>
+                                                    <label class="col-md-3 col-sm-9">Weight</label>
+                                                    <div class="col-md-3 col-sm-3"><?php echo $p['weight'];?> kg</div>
+                                                </div>
                                             </div>
-                                            <div class="row">
-                                                <label class="col-md-3 col-sm-9">Height</label>
-                                                <div class="col-md-3 col-sm-3"><?php echo $p['height'];?> cm</div>
-                                                <label class="col-md-3 col-sm-9">Weight</label>
-                                                <div class="col-md-3 col-sm-3"><?php echo $p['weight'];?> kg</div>
+                                            <div class="col-2">
+                                                <?php if($order['courier_id'] == 0):?>
+                                                    <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-2x text-danger"></i></a>
+                                                <?php endif;?>
                                             </div>
                                         </div>
-                                        <div class="col-2">
-                                            <?php if($order['courier_id'] == 0):?>
-                                                <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-2x text-danger"></i></a>
-                                            <?php endif;?>
-                                        </div>
                                     </div>
+
                                 <?php ++$pc;
                                 endforeach;?>
                             <?php else:?>
