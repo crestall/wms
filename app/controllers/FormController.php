@@ -2732,7 +2732,7 @@ class FormController extends Controller {
             $vals['bubble_wrap'] = 1;
         //echo "<pre>",print_r($vals),"</pre>"; die();
         $this->order->updateOrderValues($vals, $order_id);
-        Session::set('miscfeedback',"<h2><i class='far fa-check-circle'></i>Order Has Been Updated</h2>");
+        Session::set('miscfeedback',"Order Has Been Updated");
         return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order=$order_id#misc");
     }
 
