@@ -82,7 +82,7 @@ if(!$error)
             <div class="row">
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card h-100 border-secondary order-card">
-                        <div class="card-header">
+                        <div class="card-header bg-secondary">
                             Delivery Details
                         </div>
                         <div class="card-body">
