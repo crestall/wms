@@ -327,7 +327,7 @@ if(!$error)
                             </div>
                             <div class="card-body">
                                 <?php if($order['status_id'] == $this->controller->order->fulfilled_id):?>
-                                    <h6 class="card-subtitle">This order has already been fulfilled</h6>
+                                    <h5 class="card-subtitle mb-3">This order has already been fulfilled</h5>
                                     <p>Fulfilled on <?php echo date("d/m/Y", $order['date_fulfilled']);?></p>
                                     <p>Dispatched using <?php echo $this->controller->courier->getCourierNameForOrder($order['courier_id'], $order_id);?></p>
                                     </div><!--End Card Body-->
