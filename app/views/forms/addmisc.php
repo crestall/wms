@@ -18,17 +18,12 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
 <div class="row">
     <form id="add_to_stock" method="post" action="/form/procAddMiscToOrder">
         <div class="form-group row custom-control custom-checkbox custom-control-right">
-            <input class="custom-control-input" type="checkbox" id="shrink_wrap" name="shrink_wrap" <?php if(!empty(Form::value('shrink_wrap'))) echo 'checked';?> />
+            <input class="custom-control-input col" type="checkbox" id="shrink_wrap" name="shrink_wrap" <?php if(!empty(Form::value('shrink_wrap'))) echo 'checked';?> />
             <label class="custom-control-label col" for="shrink_wrap">Shrink Wrap</label>
         </div>
-        <div class="form-group row">
-            <div class="form-check">
-                <label class="form-check-label col-md-3" for="bubble_wrap">Bubble Wrap</label>
-                <div class="col-md-4 checkbox checkbox-default">
-                    <input class="form-check-input styled" type="checkbox" id="bubble_wrap" name="bubble_wrap" <?php if(!empty($bubble_wrap)) echo 'checked';?> />
-                    <label for="bubble_wrap"></label>
-                </div>
-            </div>
+        <div class="form-group row custom-control custom-checkbox custom-control-right">
+            <input class="custom-control-input col" type="checkbox" id="bubble_wrap" name="bubble_wrap" <?php if(!empty(Form::value('bubble_wrap'))) echo 'checked';?> />
+            <label class="custom-control-label col" for="bubble_wrap">Bubble Wrap</label>
         </div>
         <div class="form-group row">
             <label class="col">Pallets</label>
@@ -38,8 +33,8 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 col-form-label">Satchels</label>
-            <div class="col-md-4">
+            <label class="col">Satchels</label>
+            <div class="col">
                 <input type="text" class="form-control number" name="satchels" id="satchels" value="<?php echo $satchels;?>" />
                 <?php echo Form::displayError('satchels');?>
             </div>
