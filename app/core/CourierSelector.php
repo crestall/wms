@@ -126,19 +126,6 @@
                 }
             /*********** end charge FREEDOM more *******************/
             $order_values['charge_code'] = $sResponse['shipments'][0]['items'][0]['product_id'];
-            /***************************** special deals for Big Bottle *****************************/
-                if($this->order_details['client_id'] == 6)
-                {
-                    if( !($this->order_details['country'] == "AU" || $this->order_details['country'] == "NZ") )
-                    {
-                        $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.2, 2);
-                    }
-                    if($this->order_details['country'] == "AU" && !$express)
-                    {
-                        $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.4, 2);
-                    }
-                }
-            /***************************** end special deals for Big Bottle *****************************/
             $order_values['labels'] = count($eparcel_details['items']);
             $order_values['courier_id'] = $courier_id;
             foreach($sResponse['shipments'][0]['items'] as $item_array)
@@ -191,10 +178,19 @@
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
         //echo "<pre>",print_r($df_details),"</pre>"; die();
         $response = $this->controller->directfreight->createConsignment($df_details);
-        echo "<pre>",print_r($response),"</pre>"; die();
+        //echo "<pre>",print_r($response),"</pre>"; die();
 
-
-
+        if($response['ResponseCode'] != 300)
+        {
+            Session::set('showerrorfeedback', true);
+    	    $_SESSION['errorfeedback'] .= "<h3>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
+    		$_SESSION['errorfeedback'] .= "<h4>".$response['ResponseMessage']."</p>";
+            return false;
+        }
+        else
+        {
+            echo "<pre>",print_r($response),"</pre>"; die();
+        }
 
 
 
@@ -209,45 +205,6 @@
             $order_values['bubble_wrap'] = 1;
         $db->updateDatabaseFields('orders', $order_values, $order_id);
         $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Direct Freight</p>";
-    }
-
-    private function assignCometLocal($order_id)
-    {
-        $db = Database::openConnection();
-        Session::set('showfeedback', true);
-        $order_values = array(
-            'courier_id'    => $this->controller->courier->cometLocalId
-        );
-        if($this->addBubblewrap())
-            $order_values['bubble_wrap'] = 1;
-        $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Comet Local</p>";
-    }
-
-    private function assignSydneyComet($order_id)
-    {
-        $db = Database::openConnection();
-        Session::set('showfeedback', true);
-        $order_values = array(
-            'courier_id'    => $this->controller->courier->sydneyCometId
-        );
-        if($this->addBubblewrap())
-            $order_values['bubble_wrap'] = 1;
-        $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Sydney Comet Courier</p>";
-    }
-
-    private function assignVicLocal($order_id)
-    {
-        $db = Database::openConnection();
-        Session::set('showfeedback', true);
-        $order_values = array(
-            'courier_id'    => $this->controller->courier->vicLocalId
-        );
-        if($this->addBubblewrap())
-            $order_values['bubble_wrap'] = 1;
-        $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Vic Local Courier</p>";
     }
 
     private function addBubblewrap()
