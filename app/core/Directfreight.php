@@ -185,15 +185,15 @@
         $details['ReceiverDetails'] = array(
             'ReceiverName'          => $od['ship_to'],
             'AddressLine1'          => $od['address'],
-            'AddressLine2'          => $od['address_2'],
             'Suburb'                => $od['suburb'],
             'State'                 => $od['state'],
             'Postcode'              => $od['postcode'],
-            'ReceiverContactMobile' => $od['contact_phone'],
-            'ReceiverContactEmail'  => $od['tracking_email'],
             'IsAuthorityToLeave'    => $od['signature_req'] == 0,
             'DeliveryInstructions'  => $delivery_instructions
         );
+        if(!empty($od['address_2'])) $details['ReceiverDetails']['AddressLine1'] = $od['address_2'];
+        if(!empty($od['contact_phone'])) $details['ReceiverDetails']['ReceiverContactMobile'] = $od['contact_phone'];
+        if(!empty($od['tracking_email'])) $details['ReceiverDetails']['ReceiverContactEmail'] = $od['tracking_email'];
         $packages = $this->controller->order->getPackagesForOrder($od['id']);
         $parcels = Packaging::getPackingForOrder($od,$items,$packages);
 
