@@ -175,7 +175,7 @@
         $ci = $this->controller->client->getClientInfo($od['client_id']);
         $details = array(
             'ConsignmentId'     => $od['id'],
-            'CustomerReference' => $ci['products_description'],
+            'CustomerReference' => $ci['client_name'],
             'IsDangerousGoods'  => false
         );
         $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "Please leave in a safe place out of the weather";
@@ -200,7 +200,7 @@
         foreach($parcels as $p)
         {
             $array = array();
-            $array['SenderLineReference'] = $p['item_reference'];
+            $array['SenderLineReference'] = $od['order_number'];
             $array['RateType'] = $p['type_code'];
             $array['Items'] = $p['pieces'];
             $array['Width'] = ceil($p['width']);
