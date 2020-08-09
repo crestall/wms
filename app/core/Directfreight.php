@@ -163,7 +163,7 @@
     public function createConsignment($details)
     {
         //echo "<pre>",print_r($details),"</pre>";die();
-        $response = $this->sendPostRequest('CreateConsignment/', $details, "CONSIGNMENT");
+        $response = $this->sendPostRequest('GetConsignmentPrice/', $details, "CONSIGNMENT");
         //echo $response; die();
         //list($a_headers,$a_data) = $this->getResponse($response);
         //return json_decode($a_data[0], true);
