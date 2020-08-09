@@ -191,9 +191,9 @@
             'IsAuthorityToLeave'    => $od['signature_req'] == 0,
             'DeliveryInstructions'  => $delivery_instructions
         );
-        if(!empty($od['address_2'])) $details['ReceiverDetails']['AddressLine1'] = $od['address_2'];
-        if(!empty($od['contact_phone'])) $details['ReceiverDetails']['ReceiverContactMobile'] = $od['contact_phone'];
-        if(!empty($od['tracking_email'])) $details['ReceiverDetails']['ReceiverContactEmail'] = $od['tracking_email'];
+        $details['ReceiverDetails']['AddressLine2'] = (!empty($od['address_2']))? $od['address_2'] : "";
+        $details['ReceiverDetails']['ReceiverContactMobile'] = (!empty($od['contact_phone']))? $od['contact_phone']: "";
+        $details['ReceiverDetails']['ReceiverContactEmail'] = (!empty($od['tracking_email']))? $od['tracking_email'] : "";
         $packages = $this->controller->order->getPackagesForOrder($od['id']);
         $parcels = Packaging::getPackingForOrder($od,$items,$packages);
 
