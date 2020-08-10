@@ -166,7 +166,7 @@
         $response = $this->sendPostRequest('GetConsignmentPrice/', $details, "CONSIGNMENT");
         //echo $response; die();
         //list($a_headers,$a_data) = $this->getResponse($response);
-        return json_decode($response);
+        return json_decode($response, true);
         //return $response;
     }
 
