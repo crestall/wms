@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="errorbox">
-                        <h2>No Order ID Supplied</h2>
+                        <h2><i class="fad fa-times-circle"></i> No Order ID Supplied</h2>
                         <p>No order id was supplied, so an order could not be found</p>
                         <p>Please <a href="/orders/client-orders">click here</a> to go back to the list of orders to select one to track.</p>
                     </div>
@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="errorbox">
-                        <h2>No Order Found</h2>
+                        <h2><i class="fad fa-times-circle"></i> No Order Found</h2>
                         <p>No order was found with the supplied ID</p>
                         <p>Please <a href="/orders/client-orders">click here</a> to go back to the list of orders to select one to track.</p>
                     </div>
