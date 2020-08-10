@@ -135,10 +135,10 @@
                     'status_id'			=>	$this->controller->order->fulfilled_id,
                     'date_fulfilled'	=>	time()
                 );
-                $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
+                $db->updateDatabaseFields('orders', $o_values, $id);
                 //order is now fulfilled, reduce stock
                 $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
-                $this->output .= "Reducing Stock and recording movement for order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
+                $this->output .= "Reducing Stock and recording movement for order id: ".$id.PHP_EOL;
                 $this->removeStock($items, $this->controller->request->data['order_ids']);
 
                 if( !empty($od['tracking_email']) )
