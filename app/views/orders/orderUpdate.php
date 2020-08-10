@@ -395,7 +395,7 @@ if(!$error)
                                                     <label class="col">&nbsp;</label>
                                                     <div class="col">
                                                         <!--p><a class="btn btn-outline-secondary direct-freight-label" data-orderid="<?php echo $order_id;?>">Print Direct Freight Label</a></p-->
-                                                        <p><a href="<?php echo $order['label_url'];?>" class="btn btn-outline-secondary" target="_blank">Print Direct Freight Label</a></p>
+                                                        <p><a href="<?php echo $order['label_url'];?>" class="btn btn-outline-secondary" target="_blank">Download Direct Freight Label</a></p>
                                                     </div>
                                                 </div>
                                             </div>
