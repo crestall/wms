@@ -1284,6 +1284,56 @@
                             });
                         });
 
+                        $('a.directfreight-fulfill').click(function(e){
+                            e.preventDefault();
+                            swal({
+                                title: "Fulfill These Orders?",
+                                text: "This will close each order and adjust stock\n\nIt cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then( function(willFulfill) {
+                                var ids = [];
+                                $('input.select').each(function(i,e){
+                                    var order_id = $(this).data('orderid');
+                                    console.log('order_id: '+ order_id);
+                                    if($(this).prop('checked') &&  $('select#courier_'+order_id).val() == config.directFreightId )
+                                    {
+                                        ids.push(order_id);
+                                    }
+                                });
+                                $.ajax({
+                                    url: '/ajaxfunctions/fulfill-order',
+                                    method: 'post',
+                                    data: {
+                                        order_ids: ids,
+                                        courier_id: config.directFreightId
+                                    },
+                                    dataType: 'json',
+                                    beforeSend: function(){
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
+                                    },
+                                    success: function(d){
+                                        if(d.error)
+                                        {
+                                            $.unblockUI();
+                                            alert('error');
+                                        }
+                                        else
+                                        {
+                                            location.reload();
+                                        }
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown){
+                                        $.unblockUI();
+                                        document.open();
+                                        document.write(jqXHR.responseText);
+                                        document.close();
+                                    }
+                                });
+                            });
+                        });
+
                         $('a.add-package').click(function(e){
                             e.preventDefault();
                             if($('input.select:checked').length)
