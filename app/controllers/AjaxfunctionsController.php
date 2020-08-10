@@ -446,10 +446,10 @@ class ajaxfunctionsController extends Controller
             'error_string'  => '',
             'feedback'      => ''
         );
-        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Couriers Have Been Assigned</h2>");
-        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Assigned</h2><p>Reasons are listed below</p>");
-        Session::set('showfeedback', false);
-        Session::set('showerrorfeedback', false);
+        Session::set('courierfeedback',"<h2><i class='far fa-check-circle'></i>Couriers Have Been Assigned</h2>");
+        Session::set('couriererrorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Assigned</h2><p>Reasons are listed below</p>");
+        Session::set('showcourierfeedback', false);
+        Session::set('showcouriererrorfeedback', false);
         //foreach($this->request->data['order_ids'] as $order_id => $courier_id)
         foreach($this->request->data['order_ids'] as $details)
         {
@@ -460,13 +460,13 @@ class ajaxfunctionsController extends Controller
             /************************   DO NOT UPDATE IF COURIER ALREADY CHOSEN!!!  *******************************/
             $this->courierselector->assignCourier($order_id, $courier_id, "", $details['ip']);
         }
-        if(Session::getAndDestroy('showfeedback') == false)
+        if(Session::getAndDestroy('showcourierfeedback') == false)
         {
-            Session::destroy('feedback');
+            Session::destroy('courierfeedback');
         }
-        if(Session::getAndDestroy('showerrorfeedback') == false)
+        if(Session::getAndDestroy('showcouriererrorfeedback') == false)
         {
-            Session::destroy('errorfeedback');
+            Session::destroy('couriererrorfeedback');
         }
         $this->view->renderJson($data);
     }
