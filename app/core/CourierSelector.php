@@ -182,9 +182,9 @@
 
         if($response['ResponseCode'] != 300)
         {
-            Session::set('showerrorfeedback', true);
-    	    $_SESSION['errorfeedback'] .= "<h3>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
-    		$_SESSION['errorfeedback'] .= "<h4>".$response['ResponseMessage']."</p>";
+            Session::set('showcouriererrorfeedback', true);
+    	    $_SESSION['couriererrorfeedback'] .= "<h3>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
+    		$_SESSION['couriererrorfeedback'] .= "<h4>".$response['ResponseMessage']."</p>";
             return false;
         }
         else
