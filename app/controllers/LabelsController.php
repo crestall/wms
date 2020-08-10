@@ -17,6 +17,11 @@ class LabelsController extends Controller
         $this->Security->config("validateForm", false);
     }
 
+    public function directfreightLabels()
+    {
+        echo "<pre>",print_r($this->request),"</pre>";die();
+    }
+
     public function eparcelLabels()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
