@@ -20,6 +20,7 @@ class LabelsController extends Controller
     public function directfreightLabels()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
+        $single_order = (count($this->request->data['orders']) == 1);
         $connotes = array();
         foreach($this->request->data['orders'] as $id)
         {
@@ -202,7 +203,8 @@ class LabelsController extends Controller
             'request_ids'   => $request_ids,
             'client_id'     => $od['client_id'],
             'order_id'      => $order_id,
-            'order_ids'     => $eparcel_clients[$od['client_id']]["order_ids"]
+            'order_ids'     => $eparcel_clients[$od['client_id']]["order_ids"],
+            'single_order'  => $single_order
         ]);
     }
 
