@@ -63,13 +63,14 @@ class LabelsController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "directfreight-labels");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'labels/directfreightLabels.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'labels/directFreightLabels.php', [
             'page_title'    => "Generating Direct Freight Labels For {$client['client_name']}",
             'error'         => $error,
             'error_message' => $error_message,
             'good_orders'   => $good_orders,
             'bad_orders'    => $bad_orders,
-            'url'           => $url
+            'url'           => $url,
+            'single_order'  => $single_order
         ]);
     }
 
@@ -203,8 +204,7 @@ class LabelsController extends Controller
             'request_ids'   => $request_ids,
             'client_id'     => $od['client_id'],
             'order_id'      => $order_id,
-            'order_ids'     => $eparcel_clients[$od['client_id']]["order_ids"],
-            'single_order'  => $single_order
+            'order_ids'     => $eparcel_clients[$od['client_id']]["order_ids"]
         ]);
     }
 
