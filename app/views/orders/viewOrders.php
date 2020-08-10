@@ -107,6 +107,14 @@
                <div class='errorbox'><?php echo Session::getAndDestroy('errorfeedback');?></div>
             <?php endif; ?>
         </div>
+        <div class="col-lg-12">
+            <?php if(isset($_SESSION['courierfeedback'])) :?>
+               <div class='feedbackbox'><?php echo Session::getAndDestroy('courierfeedback');?></div>
+            <?php endif; ?>
+            <?php if(isset($_SESSION['couriererrorfeedback'])) :?>
+               <div class='errorbox'><?php echo Session::getAndDestroy('couriererrorfeedback');?></div>
+            <?php endif; ?>
+        </div>
     </div>
     <?php if(count($orders)):?>
     <div class="row">
