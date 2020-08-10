@@ -259,8 +259,8 @@ if(!$error)
                         </div>
                     </div>
                 </div>
+                <a name="courier"></a>
                 <?php if($order['courier_id'] == 0):    //Courier Selection?>
-                    <a name="courier"></a>
                     <div class="col-sm-12 col-md-6 mb-3">
                         <div class="card border-secondary h-100 order-card">
                             <div class="card-header bg-secondary text-white">
