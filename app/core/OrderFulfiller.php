@@ -65,89 +65,6 @@
         $this->recordOutput("order_fulfillment/eparcel");
     }
 
-    public function fulfillBayswaterEparcelOrder()
-    {
-        $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "FULFILLING BAYSWATER EPARCEL ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
-        $this->output .= "=========================================================================================================".PHP_EOL;
-        $od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
-
-        $db = Database::openConnection();
-
-        $o_values = array(
-            'status_id'			=>	$this->controller->order->fulfilled_id,
-            'date_fulfilled'	=>	time(),
-            'consignment_id'    =>  $this->controller->request->data['consignment_id'],
-            'total_cost'        =>  $this->controller->request->data['local_charge']
-        );
-        $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
-        //order is now fulfilled, reduce stock
-        $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
-        $this->output .= "Reducing Stock and recording movement fo order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
-        $this->removeStock($items, $this->controller->request->data['order_ids']);
-
-        if( !empty($od['tracking_email']) )
-        {
-            $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-            //$mailer->sendTrackingEmail($id);
-            Email::sendTrackingEmail($od['id']);
-        }
-
-        $this->recordOutput('order_fulfillment/baywatereparcel');
-        Session::set('showfeedback', true);
-        $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Bayswter Eparcel</p>";
-
-    }
-
-    public function fulfillHuntersOrders(Array $order_ids)
-    {
-        $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "FULFILLING HUNTERS ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
-        $this->output .= "=========================================================================================================".PHP_EOL;
-
-        $db = Database::openConnection();
-
-        foreach($order_ids as $id)
-        {
-            $od = $this->controller->order->getOrderDetail($id);
-            if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
-            {
-                $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
-                $this->output .= "Doing Order Number: ".$od['order_number']." Using ".$this->controller->courier->getCourierName($od['courier_id']).PHP_EOL;
-                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time()), $id);
-                //order is now fulfilled, reduce stock
-                $items = $this->controller->order->getItemsForOrder($id);
-                $this->output .= "Reducing Stock and recording movement fo order id: $id".PHP_EOL;
-                $this->removeStock($items, $id);
-                if( !empty($od['tracking_email']) )
-                {
-                    if($od['client_id'] == 59)
-                    {
-                        $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
-                        Email::sendNoaConfirmEmail($id);
-                    }
-                    else
-                    {
-                        $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-                        Email::sendTrackingEmail($id);
-                    }
-                }
-                if($od['client_id'] == 52) //figure8
-                {
-                    $this->notifyFigure8($od);
-                }
-                Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>{$od['order_number']} has been successfully fulfilled</p>";
-            }
-            else
-            {
-                Session::set('showerrorfeedback', true);
-        	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
-            }
-
-        }
-        $this->recordOutput("order_fulfillment/hunters");
-    }
 
     public function fulfillLocalOrder()
     {
@@ -172,22 +89,25 @@
 
         if( !empty($od['tracking_email']) )
         {
-            if($od['client_id'] == 59)
+            if(SITE_LIVE) //only send emails if we are live and not testing
             {
-                $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
-                Email::sendNoaConfirmEmail($od['id']);
+                if($od['client_id'] == 59)
+                {
+                    $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
+                    Email::sendNoaConfirmEmail($od['id']);
+                }
+                elseif($od['client_id'] == 82)
+                {
+                    $this->output .= "Sending One Plate confirmation".PHP_EOL;
+                    Email::sendOnePlateTrackingEmail($od['id']);
+                }
+                else
+                {
+                     $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                    //$mailer->sendTrackingEmail($id);
+                    Email::sendTrackingEmail($od['id']);
+                }
             }
-            else
-            {
-                 $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-                //$mailer->sendTrackingEmail($id);
-                Email::sendTrackingEmail($od['id']);
-            }
-
-        }
-        if($od['client_id'] == 52) //figure8
-        {
-            $this->notifyFigure8($od);
         }
         $this->recordOutput('order_fulfillment/local');
         Session::set('showfeedback', true);
@@ -200,14 +120,41 @@
         $this->output .= "FULFILLING DIRECT FREIGHT ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $db = Database::openConnection();
-        //echo "<pre>",print_r($this->controller->request->data),"</pre>";die();
-        $od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
+        echo "<pre>",print_r($this->controller->request->data),"</pre>";die();
+        //$od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
+        $order_ids = $this->controller->request->data['order_ids'];
+
+        foreach($order_ids as $id)
+        {
+            $od = $this->controller->order->getOrderDetail($id);
+            if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
+            {
+                Session::set('showfeedback', true);
+                if(!array_key_exists($od['client_id'], $eparcel_clients))
+        		{
+                    $eparcel_clients[$od['client_id']]['request'] = array(
+        	            'order_reference'	=>	Utility::generateRandString(),
+                    	'payment_method'	=>	'CHARGE_TO_ACCOUNT',
+                    	'shipments'			=>	array()
+        			);
+        		}
+                $eparcel_clients[$od['client_id']]['request']['shipments'][] = array('shipment_id'	=>	$od['eparcel_shipment_id']);
+                $eparcel_clients[$od['client_id']]['order_ids'][] = $id;
+                $eparcel_clients[$od['client_id']]['order_details'][] = $od;
+            }
+            else
+            {
+                Session::set('showerrorfeedback', true);
+        	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
+            }
+        }
+
+
+
 
         $o_values = array(
             'status_id'			=>	$this->controller->order->fulfilled_id,
-            'date_fulfilled'	=>	time(),
-            'consignment_id'    =>  $this->controller->request->data['consignment_id'],
-            'total_cost'        =>  $this->controller->request->data['local_charge']
+            'date_fulfilled'	=>	time()
         );
         $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
         //order is now fulfilled, reduce stock
@@ -217,158 +164,29 @@
 
         if( !empty($od['tracking_email']) )
         {
-            if($od['client_id'] == 59)
+            if(SITE_LIVE) //only send emails if we are live and not testing
             {
-                $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
-                Email::sendNoaConfirmEmail($od['id']);
+                if($od['client_id'] == 59)
+                {
+                    $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
+                    Email::sendNoaConfirmEmail($od['id']);
+                }
+                elseif($od['client_id'] == 82)
+                {
+                    $this->output .= "Sending One Plate confirmation".PHP_EOL;
+                    Email::sendOnePlateTrackingEmail($od['id']);
+                }
+                else
+                {
+                     $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                    //$mailer->sendTrackingEmail($id);
+                    Email::sendTrackingEmail($od['id']);
+                }
             }
-            elseif($od['client_id'] == 82)
-            {
-                $this->output .= "Sending One Plate confirmation".PHP_EOL;
-                Email::sendOnePlateTrackingEmail($od['id']);
-            }
-            else
-            {
-                 $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-                //$mailer->sendTrackingEmail($id);
-                Email::sendTrackingEmail($od['id']);
-            }
-
-        }
-        if($od['client_id'] == 52) //figure8
-        {
-            $this->notifyFigure8($od);
         }
         $this->recordOutput('order_fulfillment/direct');
         Session::set('showfeedback', true);
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Direct Freight</p>";
-    }
-
-    public function fulfillVicLocalOrder($order_ids)
-    {
-        $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "FULFILLING VIC LOCAL ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
-        $this->output .= "=========================================================================================================".PHP_EOL;
-        $db = Database::openConnection();
-        $emails_to_send = array();
-        foreach($order_ids as $id)
-        {
-            $od = $this->controller->order->getOrderDetail($id);
-            if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
-            {
-                $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
-                $this->output .= "Doing Order Number: ".$od['order_number']." Using ".$this->controller->courier->getCourierName($od['courier_id']).PHP_EOL;
-                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time(), 'total_cost' => Config::get('VIC_LOCAL_CHARGE')), $id);
-                //order is now fulfilled, reduce stock
-                $items = $this->controller->order->getItemsForOrder($id);
-                $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
-                $this->removeStock($items, $id);
-                if($od['client_id'] == 59)
-                {
-                    $emails_to_send[] = $od['client_order_id'];
-                }
-                Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>{$od['order_number']} has been successfully fulfilled</p>";
-            }
-            else
-            {
-                Session::set('showerrorfeedback', true);
-        	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
-            }
-        }
-        if( count($emails_to_send) )
-        {
-            $this->output .= "Sending Noa Sleep confirmations".PHP_EOL;
-            Email::sendNoaLocalConfirmEmail($emails_to_send);
-        }
-        $this->recordOutput("order_fulfillment/viclocal");
-    }
-
-    public function fulfillCometOrder($order_ids)
-    {
-        $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "FULFILLING COMET ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
-        $this->output .= "=========================================================================================================".PHP_EOL;
-        $db = Database::openConnection();
-        $emails_to_send = array();
-        foreach($order_ids as $id)
-        {
-            $od = $this->controller->order->getOrderDetail($id);
-            if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
-            {
-                $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
-                $this->output .= "Doing Order Number: ".$od['order_number']." Using ".$this->controller->courier->getCourierName($od['courier_id']).PHP_EOL;
-                //calculate the charge
-                $charge = 72.52;
-                //$items = $this->controller->order->getItemsForOrderNoLocations($id);
-                $items = $this->controller->order->getItemsForOrder($id);
-                foreach($items as $item)
-                {
-                    if( 12564 <= $item['id'] && $item['id'] <= 12581 )
-                    {
-                        $charge = 102.60;
-                    }
-                }
-                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time(), 'total_cost' => $charge), $id);
-                //order is now fulfilled, reduce stock
-
-                $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
-                $this->removeStock($items, $id);
-                if($od['client_id'] == 59)
-                {
-                    $emails_to_send[] = $od['client_order_id'];
-                }
-                Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>{$od['order_number']} has been successfully fulfilled</p>";
-            }
-            else
-            {
-                Session::set('showerrorfeedback', true);
-        	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
-            }
-        }
-        if( count($emails_to_send) )
-        {
-            $this->output .= "Sending Noa Sleep confirmations".PHP_EOL;
-            Email::sendNoaCometConfirmEmail($emails_to_send);
-        }
-        $this->recordOutput("order_fulfillment/cometlocal");
-    }
-
-    public function fulfillSydneyCometOrder($order_ids)
-    {
-        $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "FULFILLING SYDNEY COMET ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
-        $this->output .= "=========================================================================================================".PHP_EOL;
-        $db = Database::openConnection();
-        $emails_to_send = array();
-        foreach($order_ids as $id)
-        {
-            $od = $this->controller->order->getOrderDetail($id);
-            if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
-            {
-                $this->output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
-                $this->output .= "Doing Order Number: ".$od['order_number']." Using ".$this->controller->courier->getCourierName($od['courier_id']).PHP_EOL;
-                $db->updateDatabaseFields('orders', array('status_id' => $this->controller->order->fulfilled_id, 'date_fulfilled' => time()), $id);
-                //order is now fulfilled, reduce stock
-                $items = $this->controller->order->getItemsForOrder($id);
-                $this->output .= "Reducing Stock and recording movement for order id: $id".PHP_EOL;
-                $this->removeStock($items, $id);
-                if($od['client_id'] == 59)
-                {
-                    $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
-                    Email::sendNoaSydneyConfirmEmail($od['id']);
-                }
-                Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>{$od['order_number']} has been successfully fulfilled</p>";
-            }
-            else
-            {
-                Session::set('showerrorfeedback', true);
-        	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
-            }
-        }
-        $this->recordOutput("order_fulfillment/sydneycomet");
     }
 
     public function fulfillFSGTruckOrder()
@@ -465,18 +283,21 @@
                     $od = $this->controller->order->getOrderDetail($id);
                     if( !empty($od['tracking_email']) )
                     {
-                        if($od['client_id'] == 82)
+                        if(SITE_LIVE) //only send emails if we are live and not testing
                         {
-                            $this->output .= "Sending One Plate confirmation".PHP_EOL;
-                            Email::sendOnePlateTrackingEmail($od['id']);
-                        }
-                        else
-                        {
-                            Email::sendTrackingEmail($id);
-                            $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                             if($od['client_id'] == 82)
+                            {
+                                $this->output .= "Sending One Plate confirmation".PHP_EOL;
+                                Email::sendOnePlateTrackingEmail($od['id']);
+                            }
+                            else
+                            {
+                                Email::sendTrackingEmail($id);
+                                $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
 
+                            }
+                            $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
                         }
-                        $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
                     }
                     if($od['client_id'] == 7)
                     {
@@ -565,23 +386,4 @@
     {
         Logger::logOrderFulfillment($file, $this->output);
     }
-
-    private function notifyFigure8($od, $url = "http://autom8.figure8services.com.au/engage/jobPartsConsignmentStore.php")
-    {
-        $db = Database::openConnection();
-        $courier = $db->queryValue('couriers', array('id' => $od['courier_id']), 'name');
-        if($courier == "Local")
-        {
-            $courier = $od['courier_name'];
-        }
-        $data = array(
-            'partsOrderedGroupid'   => $od['customer_order_id'],
-            'courier_name'          => $courier,
-            'consignment_id'        => $od['consignment_id']
-        );
-        $this->output .= "Notifying Figure 8".PHP_EOL;
-        $this->output .= print_r($data, true).PHP_EOL;
-        Curl::sendPostRequest($url, $data, 'form');
-    }
-
 }
