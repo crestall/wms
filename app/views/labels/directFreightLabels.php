@@ -21,7 +21,7 @@
                 </div>
             </div>
         <?php else:?>
-            <?php if count($bad_orders):?>
+            <?php if(count($bad_orders)):?>
             <div class="row">
                 <div class="errorbox">
                     <div class="col-12">
