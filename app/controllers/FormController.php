@@ -2769,7 +2769,7 @@ class FormController extends Controller {
         {
             $ip = (isset($ignore_pc))? 1 : 0;
             $courier_name = !$this->dataSubbed($courier_name)? "":$courier_name;
-            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Courier has been assigned</h2>");
+            Session::set('courierfeedback',"<h2><i class='far fa-check-circle'></i>Courier has been assigned</h2>");
             $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, $ip);
         }
         if(Session::getAndDestroy('showcouriererrorfeedback') == false)
