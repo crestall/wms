@@ -77,7 +77,7 @@ return array(
                 'display'   => false,
                 'icon'      => ''
             ),
-            'order-details' =>  array(
+            'order-detail' =>  array(
                 'display'   => false,
                 'icon'      => ''
             ),
