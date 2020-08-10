@@ -21,25 +21,25 @@
                 <p><a class="btn btn-sm btn-block btn-outline-info export-csv" style="white-space: normal;"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-secondary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
+                <p><a class="btn btn-sm btn-block btn-outline-secondary slip-print" style="white-space: normal;"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-primary select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
+                <p><a class="btn btn-sm btn-block btn-outline-primary select-courier" style="white-space: normal;"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-success eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
+                <p><a class="btn btn-sm btn-block btn-outline-success eparcel-fulfill" style="white-space: normal;"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-warning print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
+                <p><a class="btn btn-sm btn-block btn-outline-warning print-invoices" style="white-space: normal;"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-dark add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
+                <p><a class="btn btn-sm btn-block btn-outline-dark add-package" style="white-space: normal;"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-sm btn-block btn-outline-secondary eparcel-label-print" style="white-space: normal;"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
+                <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order" style="white-space: normal;"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
             </div>
         </div>
     <?php elseif($user_role == "warehouse"):?>
@@ -54,19 +54,19 @@
         </div>
     <?php endif;?>
     <div class="row">
-        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By Client</label>
                 <select id="client_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">All Clients</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
             </div>
         </div>
-        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By Courier</label>
                 <select id="courier_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="-1">All Couriers</option><?php echo $this->controller->courier->getSelectCouriers($courier_id, true, false);?></select>
             </div>
         </div>
-        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By State</label>
                 <select id="state_selector" class="form-control selectpicker" data-style="btn-outline-secondary">
@@ -85,7 +85,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Search</label>
                 <input type="text" class="form-control" id="table_searcher" />
