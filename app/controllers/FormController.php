@@ -2763,13 +2763,13 @@ class FormController extends Controller {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
             Session::set('showcouriererrorfeedback', true);
-            Session::set('couriererrorfeedback', "<h2><i class='far fa-times-circle'></i>Errors found in the form</h2><p>Please correct where shown and resubmit</p>");
+            Session::set('couriererrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
         }
         else
         {
             $ip = (isset($ignore_pc))? 1 : 0;
             $courier_name = !$this->dataSubbed($courier_name)? "":$courier_name;
-            Session::set('courierfeedback',"<h2><i class='far fa-check-circle'></i>Courier has been assigned</h2>");
+            Session::set('courierfeedback',"<h3><i class='far fa-check-circle'></i>Courier has been assigned</h3>");
             $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, $ip);
         }
         if(Session::getAndDestroy('showcouriererrorfeedback') == false)
