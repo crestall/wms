@@ -16,7 +16,7 @@
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        <div class="row" >
+        <div class="row view-orders-buttons" >
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-sm btn-block btn-outline-info export-csv" style="white-space: normal; min-height: 55px"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
