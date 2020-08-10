@@ -137,9 +137,9 @@
                 );
                 $db->updateDatabaseFields('orders', $o_values, $id);
                 //order is now fulfilled, reduce stock
-                $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
+                $items = $this->controller->order->getItemsForOrder($id);
                 $this->output .= "Reducing Stock and recording movement for order id: ".$id.PHP_EOL;
-                $this->removeStock($items, $this->controller->request->data['order_ids']);
+                $this->removeStock($items, $id);
 
                 if( !empty($od['tracking_email']) )
                 {
