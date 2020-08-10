@@ -200,10 +200,12 @@
                 }
                 else
                 {
-                    echo "<pre>",print_r($response),"</pre>"; die();
+                    //echo "<pre>",print_r($response),"</pre>"; die();
+                    //All good, set the courier
+                    Session::set('showcourierfeedback', true);
+                    return true;
                 }
             }
-
         }
 
 
