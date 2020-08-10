@@ -164,6 +164,15 @@ Home page cards
         max-width: 23% !important;
     }
 }
+
+/*****
+View Orders
+*****/
+div.view-orders-buttons div a{
+    white-space: normal;
+    min-height: 55px
+}
+
 /*****
 Order Importing
 ******/
