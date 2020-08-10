@@ -2,11 +2,11 @@
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div class="row">
         <div class="col-lg-3">
-            <p><a href="/orders/view-orders/client=<?php echo $client_id;?>" class="btn btn-primary">View Orders For Client</a></p>
+            <p><a href="/orders/view-orders/client=<?php echo $client_id;?>" class="btn btn-outline-secondary">View Orders For Client</a></p>
         </div>
         <?php if($order_id > 0):?>
             <div class="col-lg-3">
-                <p><a href="/orders/order-update/order=<?php echo $order_id;?>" class="btn btn-primary">View This Order</a></p>
+                <p><a href="/orders/order-update/order=<?php echo $order_id;?>" class="btn btn-outline-secondary">View This Order</a></p>
             </div>
         <?php endif;?>
     </div>
@@ -27,8 +27,8 @@
                     while ($response['labels'][0]['status'] == "PENDING")
                     {
                         $response = $this->controller->{$eParcelClass}->GetLabel($request_id);
-                        echo "<hr/>";
-                        echo "<p>".$response['labels'][0]['status']."</p>";
+                        //echo "<hr/>";
+                        //echo "<p>".$response['labels'][0]['status']."</p>";
                         //echo "<p>".$request_id."</p>";
                     }
                     ?>
