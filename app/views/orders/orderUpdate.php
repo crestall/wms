@@ -390,9 +390,11 @@ if(!$error)
                                             </form>
                                         <?php elseif($order['courier_id'] == $this->controller->courier->directFreightId):?>
                                             <h5 class="card-subtitle">Direct Freight</h5>
-                                            <label class="col">&nbsp;</label>
-                                            <div class="col">
-                                                <p><a class="btn btn-outline-secondary direct-freight-label" data-orderid="<?php echo $order_id;?>">Print Direct Freight Label</a></p>
+                                            <div class="form-group row">
+                                                <label class="col">&nbsp;</label>
+                                                <div class="col">
+                                                    <p><a class="btn btn-outline-secondary direct-freight-label" data-orderid="<?php echo $order_id;?>">Print Direct Freight Label</a></p>
+                                                </div>
                                             </div>
                                         <?php elseif($order['courier_id'] == $this->controller->courier->localId):?>
                                             <form id="local_courier">
