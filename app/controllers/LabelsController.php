@@ -28,6 +28,7 @@ class LabelsController extends Controller
             $client = $this->client->getClientInfo($od['client_id']);
             $connote = $od['consignment_id'];
             $connotes[] = array('Connote' => $connote);
+            $order_id = $id;
         }
         $result = $this->directfreight->getLabels($connotes);
         //echo  "<pre>",print_r($result),"</pre>";die();
@@ -36,6 +37,7 @@ class LabelsController extends Controller
         $bad_orders = array();
         $url = false;
         $error_message = "";
+        $client_id = $client['id'];
         if($result['ResponseCode'] == 300)
         {
             $url = $result['LabelURL'];
@@ -70,7 +72,10 @@ class LabelsController extends Controller
             'good_orders'   => $good_orders,
             'bad_orders'    => $bad_orders,
             'url'           => $url,
-            'single_order'  => $single_order
+            'single_order'  => $single_order,
+            'client_id'     => $client_id,
+            'order_id'      => $order_id
+
         ]);
     }
 
