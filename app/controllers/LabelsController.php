@@ -28,7 +28,9 @@ class LabelsController extends Controller
             $connote = $od['consignment_id'];
             $connotes[] = array('Connote' => $connote);
         }
-        echo  "<pre>",print_r($connotes),"</pre>";die();
+        //echo  "<pre>",print_r($connotes),"</pre>";die();
+        $result = $this->Directfreight->getLabels($connotes);
+        echo  "<pre>",print_r($result),"</pre>";die();
     }
 
     public function eparcelLabels()
