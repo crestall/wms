@@ -2739,6 +2739,8 @@ class FormController extends Controller {
     public function procOrderCourierUpdate()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        Session::set('showcouriererrorfeedback', false);
+        Session::set('showcourierfeedback', false);
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -2760,7 +2762,8 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            Session::set('errorfeedback', "<h2><i class='far fa-times-circle'></i>Errors found in the form</h2><p>Please correct where shown and resubmit</p>");
+            Session::set('showcouriererrorfeedback', true);
+            Session::set('couriererrorfeedback', "<h2><i class='far fa-times-circle'></i>Errors found in the form</h2><p>Please correct where shown and resubmit</p>");
         }
         else
         {
@@ -2771,11 +2774,15 @@ class FormController extends Controller {
             Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Courier has been assigned</h2>");
             $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, $ip);
         }
-        if(Session::getAndDestroy('showerrorfeedback') == false)
+        if(Session::getAndDestroy('showcouriererrorfeedback') == false)
         {
-            Session::destroy('errorfeedback');
+            Session::destroy('couriererrorfeedback');
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order=$order_id");
+        if(Session::getAndDestroy('showcourierfeedback') == false)
+        {
+            Session::destroy('courierfeedback');
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order={$order_id}#courier");
     }
 
     public function procStockMovement()
