@@ -1091,7 +1091,7 @@
                                     $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Generating Labels...</h1></div>' });
                                     var form = document.createElement('form');
                                     form.setAttribute("method", "post");
-                                    form.setAttribute("action", "/labels/direcfreight-labels");
+                                    form.setAttribute("action", "/labels/directfreight-labels");
                                     //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
                                     //form.setAttribute("target", "formresult");
                                     $.each( ids, function( index, value ) {
