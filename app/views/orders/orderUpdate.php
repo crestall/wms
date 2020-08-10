@@ -221,7 +221,7 @@ if(!$error)
                                     $s = ($p['count'] == 1)? "":"s";?>
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <h6 class="card-subtitle mb-3"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h6>
+                                            <h5 class="card-subtitle mb-3"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h5>
                                         </div>
                                         <div class="row border-bottom mb-3">
                                             <div class="col-10">
@@ -390,10 +390,12 @@ if(!$error)
                                             </form>
                                         <?php elseif($order['courier_id'] == $this->controller->courier->directFreightId):?>
                                             <h5 class="card-title">Direct Freight</h5>
-                                            <div class="form-group row">
-                                                <label class="col">&nbsp;</label>
-                                                <div class="col">
-                                                    <p><a class="btn btn-outline-secondary direct-freight-label" data-orderid="<?php echo $order_id;?>">Print Direct Freight Label</a></p>
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <label class="col">&nbsp;</label>
+                                                    <div class="col">
+                                                        <p><a class="btn btn-outline-secondary direct-freight-label" data-orderid="<?php echo $order_id;?>">Print Direct Freight Label</a></p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php elseif($order['courier_id'] == $this->controller->courier->localId):?>
