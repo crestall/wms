@@ -28,9 +28,48 @@ class LabelsController extends Controller
             $connote = $od['consignment_id'];
             $connotes[] = array('Connote' => $connote);
         }
-        //echo  "<pre>",print_r($connotes),"</pre>";die();
         $result = $this->directfreight->getLabels($connotes);
-        echo  "<pre>",print_r($result),"</pre>";die();
+        //echo  "<pre>",print_r($result),"</pre>";die();
+        $error = false;
+        $good_orders = array();
+        $bad_orders = array();
+        $url = false;
+        $error_message = "";
+        if($result['ResponseCode'] == 300)
+        {
+            $url = $result['LabelURL'];
+            foreach($result['ConnoteList'] as $connote)
+            {
+                $od = $this->order->getOrderByConId($connote['Connote']);
+                if($connote['ResponseCode'] == 200)
+                {
+                    $this->order->updateStatus($this->order->packed_id, $od['id']);
+                    $good_orders[] = $od['order_number'];
+                }
+                else
+                {
+                    $bad_orders[] = array(
+                        'order_number'      => $od['order_number'],
+                        'response_message'  => $connote['ResponseMessage']
+                    );
+                }
+            }
+        }
+        else
+        {
+            $error = true;
+            $error_message = $result['ResponseMessage'];
+        }
+        //render the page
+        Config::setJsConfig('curPage', "directfreight-labels");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'labels/directfreightLabels.php', [
+            'page_title'    => "Generating Direct Freight Labels For {$client['client_name']}",
+            'error'         => $error,
+            'error_message' => $error_message,
+            'good_orders'   => $good_orders,
+            'bad_orders'    => $bad_orders,
+            'url'           => $url
+        ]);
     }
 
     public function eparcelLabels()
