@@ -189,38 +189,45 @@
         }
         else
         {
-            foreach($response['ConsignmentList'] as $consignment)
+            $consignment = $response['ConsignmentList'][0];
+            if($consignment['ResponseCode'] != 200)
             {
-                if($consignment['ResponseCode'] != 200)
+                Session::set('showcouriererrorfeedback', true);
+        	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
+        		$_SESSION['couriererrorfeedback'] .= "<h4>".$consignment['ResponseMessage']."</h4>";
+                return false;
+            }
+            else
+            {
+                //echo "<pre>",print_r($response),"</pre>"; die();
+                //All good, set the courier
+                $order_values['consignment_id'] = $consignment['Connote'];
+                $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2); //GST and 35% markup and fuel surcharge
+                /*********** charge FREEDOM more *******************/
+                    if($this->order_details['client_id'] == 7)
+                    {
+                        $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    }
+                /*********** end charge FREEDOM more *******************/
+                $order_values['courier_id'] = $courier_id;
+                $order_values['label_url'] = $response['LabelURL'];
+                if($this->addBubblewrap())
+                    $order_values['bubble_wrap'] = 1;
+                if($db->updateDatabaseFields('orders', $order_values, $order_id))
                 {
-                    Session::set('showcouriererrorfeedback', true);
-            	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
-            		$_SESSION['couriererrorfeedback'] .= "<h4>".$consignment['ResponseMessage']."</h4>";
-                    return false;
-                }
-                else
-                {
-                    //echo "<pre>",print_r($response),"</pre>"; die();
-                    //All good, set the courier
+                    $_SESSION['courierfeedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully submitted to Direct Freight</p>";
                     Session::set('showcourierfeedback', true);
                     return true;
                 }
+                else
+                {
+                    Session::set('showcouriererrorfeedback', true);
+            	    $_SESSION['couriererrorfeedback'] = "<h3>Sorry a database error has occurred</h3>";
+            		$_SESSION['couriererrorfeedback'] .= "<h4>Please try again in a moment</h4>";
+                    return false;
+                }
             }
         }
-
-
-
-
-
-        $db = Database::openConnection();
-        Session::set('showfeedback', true);
-        $order_values = array(
-            'courier_id'    => $this->controller->courier->directFreightId
-        );
-        if($this->addBubblewrap())
-            $order_values['bubble_wrap'] = 1;
-        $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Direct Freight</p>";
     }
 
     private function addBubblewrap()
