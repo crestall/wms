@@ -176,7 +176,7 @@
             "ConnoteList"   => $connotes
         );
         $response = $this->sendPostRequest('GetLabel/', $ConnoteList, "GENERAL");
-        echo $response; die();
+        return json_decode($response, true);
     }
 
     public function getDetails($od, $items)
