@@ -120,28 +120,52 @@
         $this->output .= "FULFILLING DIRECT FREIGHT ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $db = Database::openConnection();
-        echo "<pre>",print_r($this->controller->request->data),"</pre>";//die();
+        //echo "<pre>",print_r($this->controller->request->data),"</pre>";//die();
         //$od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
         //$order_ids = $this->controller->request->data['order_ids'];
         $order_ids = ( is_array($order_ids) )? $order_ids: (array)$order_ids;
-        echo "<pre>",var_dump($order_ids),"</pre>";die();
+        //echo "<pre>",var_dump($order_ids),"</pre>";die();
         foreach($order_ids as $id)
         {
             $od = $this->controller->order->getOrderDetail($id);
             if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
             {
                 Session::set('showfeedback', true);
-                if(!array_key_exists($od['client_id'], $eparcel_clients))
-        		{
-                    $eparcel_clients[$od['client_id']]['request'] = array(
-        	            'order_reference'	=>	Utility::generateRandString(),
-                    	'payment_method'	=>	'CHARGE_TO_ACCOUNT',
-                    	'shipments'			=>	array()
-        			);
-        		}
-                $eparcel_clients[$od['client_id']]['request']['shipments'][] = array('shipment_id'	=>	$od['eparcel_shipment_id']);
-                $eparcel_clients[$od['client_id']]['order_ids'][] = $id;
-                $eparcel_clients[$od['client_id']]['order_details'][] = $od;
+                $o_values = array(
+                    'status_id'			=>	$this->controller->order->fulfilled_id,
+                    'date_fulfilled'	=>	time()
+                );
+                $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
+                //order is now fulfilled, reduce stock
+                $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
+                $this->output .= "Reducing Stock and recording movement for order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
+                $this->removeStock($items, $this->controller->request->data['order_ids']);
+
+                if( !empty($od['tracking_email']) )
+                {
+                    if(SITE_LIVE) //only send emails if we are live and not testing
+                    {
+                        if($od['client_id'] == 59)
+                        {
+                            $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
+                            Email::sendNoaConfirmEmail($od['id']);
+                        }
+                        elseif($od['client_id'] == 82)
+                        {
+                            $this->output .= "Sending One Plate confirmation".PHP_EOL;
+                            Email::sendOnePlateTrackingEmail($od['id']);
+                        }
+                        else
+                        {
+                             $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                            //$mailer->sendTrackingEmail($id);
+                            Email::sendTrackingEmail($od['id']);
+                        }
+                    }
+                }
+                $this->recordOutput('order_fulfillment/direct');
+                Session::set('showfeedback', true);
+                $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Direct Freight</p>";
             }
             else
             {
@@ -149,45 +173,6 @@
         	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
             }
         }
-
-
-
-
-        $o_values = array(
-            'status_id'			=>	$this->controller->order->fulfilled_id,
-            'date_fulfilled'	=>	time()
-        );
-        $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
-        //order is now fulfilled, reduce stock
-        $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
-        $this->output .= "Reducing Stock and recording movement for order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
-        $this->removeStock($items, $this->controller->request->data['order_ids']);
-
-        if( !empty($od['tracking_email']) )
-        {
-            if(SITE_LIVE) //only send emails if we are live and not testing
-            {
-                if($od['client_id'] == 59)
-                {
-                    $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
-                    Email::sendNoaConfirmEmail($od['id']);
-                }
-                elseif($od['client_id'] == 82)
-                {
-                    $this->output .= "Sending One Plate confirmation".PHP_EOL;
-                    Email::sendOnePlateTrackingEmail($od['id']);
-                }
-                else
-                {
-                     $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-                    //$mailer->sendTrackingEmail($id);
-                    Email::sendTrackingEmail($od['id']);
-                }
-            }
-        }
-        $this->recordOutput('order_fulfillment/direct');
-        Session::set('showfeedback', true);
-        $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Direct Freight</p>";
     }
 
     public function fulfillFSGTruckOrder()
