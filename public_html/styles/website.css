@@ -170,8 +170,13 @@ View Orders
 *****/
 div.view-orders-buttons div a{
     white-space: normal;
-    min-height: 55px
 }
+    /*only for bigger sizes*/
+    @media screen and (min-width: 768px){
+        div.view-orders-buttons div a{
+            min-height: 55px
+        }
+    }
 
 /*****
 Order Importing
