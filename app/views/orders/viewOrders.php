@@ -18,7 +18,7 @@
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
         <div class="row" >
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
+                <p><a class="btn btn-sm btn-block btn-outline-info export-csv" style="white-space: normal;"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-sm btn-block btn-outline-secondary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
@@ -36,7 +36,7 @@
                 <p><a class="btn btn-sm btn-block btn-outline-dark add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-secondary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
+                <p><a class="btn btn-sm btn-block btn-outline-secondary eparcel-label-print" style="white-space: normal;"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
