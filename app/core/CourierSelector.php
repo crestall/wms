@@ -209,7 +209,7 @@
                         $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
                     }
                 /*********** end charge FREEDOM more *******************/
-                $order_values['courier_id'] = $courier_id;
+                $order_values['courier_id'] = $this->controller->courier->directFreightId;
                 $order_values['label_url'] = $response['LabelURL'];
                 if($this->addBubblewrap())
                     $order_values['bubble_wrap'] = 1;
