@@ -260,12 +260,19 @@ if(!$error)
                     </div>
                 </div>
                 <?php if($order['courier_id'] == 0):    //Courier Selection?>
+                    <a name="courier"></a>
                     <div class="col-sm-12 col-md-6 mb-3">
                         <div class="card border-secondary h-100 order-card">
                             <div class="card-header bg-secondary text-white">
                                 Update Courier
                             </div>
                             <div class="card-body">
+                                <?php if(isset($_SESSION['courierfeedback'])) :?>
+                                   <div class='feedbackbox'><?php echo Session::getAndDestroy('courierfeedback');?></div>
+                                <?php endif; ?>
+                                <?php if(isset($_SESSION['couriererrorfeedback'])) :?>
+                                   <div class='errorbox'><?php echo Session::getAndDestroy('couriererrorfeedback');?></div>
+                                <?php endif; ?>
                                 <form id="order-courier-update" method="post" action="/form/procOrderCourierUpdate">
                                     <div class="form-group row">
                                         <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier</label>
