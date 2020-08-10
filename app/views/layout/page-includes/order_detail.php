@@ -1,8 +1,7 @@
-<div class="row">
+
     <div class="col-xs-12">
         <h2>Details For Order Number: <?php echo $order['order_number'];?></h2>
     </div>
-</div>
 <div class="row ">
     <div class="col-xs-6">
         <div class="bs-callout bs-callout-primary bs-callout-more">
