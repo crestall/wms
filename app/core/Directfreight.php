@@ -170,6 +170,16 @@
         //return $response;
     }
 
+    public function getLabels($connotes)
+    {
+        $ConnoteList = array(
+            "ConnoteList"   => $connotes
+        );
+        echo "<pre>",print_r($details),"</pre>";die();
+        $response = $this->sendPostRequest('GetLabel/', $ConnoteList, "GENERAL");
+        echo $response; die();
+    }
+
     public function getDetails($od, $items)
     {
         $ci = $this->controller->client->getClientInfo($od['client_id']);
