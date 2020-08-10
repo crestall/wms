@@ -175,7 +175,6 @@
         $ConnoteList = array(
             "ConnoteList"   => $connotes
         );
-        echo "<pre>",print_r($details),"</pre>";die();
         $response = $this->sendPostRequest('GetLabel/', $ConnoteList, "GENERAL");
         echo $response; die();
     }
