@@ -26,7 +26,7 @@ class LabelsController extends Controller
             $od = $this->order->getOrderDetail($id);
             $client = $this->client->getClientInfo($od['client_id']);
             $connote = $od['consignment_id'];
-            $connotes[] array('Connote' => $connote);
+            $connotes[] = array('Connote' => $connote);
         }
         echo  "<pre>",print_r($connotes),"</pre>";die();
     }
