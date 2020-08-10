@@ -40,7 +40,7 @@
                         <h3><i class="far fa-check-circle"></i>The following orders labels have been generated</h3>
                     </div>
                     <div class="col-md-6">
-                        <?php echo implode(", ", $godd_orders);?>
+                        <?php echo implode(", ", $good_orders);?>
                     </div>
                     <div class="col-md-6">
                         <a class="btn tn-outline-secondary" href="<?php echo $url;?>">Click to Download Them</a>
