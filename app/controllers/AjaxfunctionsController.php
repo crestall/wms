@@ -388,10 +388,6 @@ class ajaxfunctionsController extends Controller
             {
                 $this->orderfulfiller->fulfillEparcelOrders($order_ids);
             }
-            elseif($this->request->data['courier_id'] == $this->courier->huntersId || $this->request->data['courier_id'] == $this->courier->huntersPluId || $this->request->data['courier_id'] == $this->courier->huntersPalId)
-            {
-                $this->orderfulfiller->fulfillHuntersOrders($order_ids);
-            }
             elseif($this->request->data['courier_id'] == $this->courier->fsgId)
             {
                 $this->orderfulfiller->fulfillFSGTruckOrder();
@@ -400,25 +396,9 @@ class ajaxfunctionsController extends Controller
             {
                 $this->orderfulfiller->fulfillLocalOrder();
             }
-            elseif($this->request->data['courier_id'] == $this->courier->vicLocalId)
-            {
-                $this->orderfulfiller->fulfillVicLocalOrder($order_ids);
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->cometLocalId)
-            {
-                $this->orderfulfiller->fulfillCometOrder($order_ids);
-            }
             elseif($this->request->data['courier_id'] == $this->courier->directFreightId)
             {
                 $this->orderfulfiller->fulfillDirectFreightOrder($order_ids);
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->sydneyCometId)
-            {
-                $this->orderfulfiller->fulfillSydneyCometOrder($order_ids);
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->bayswaterEparcelId)
-            {
-                $this->orderfulfiller->fulfillBayswaterEparcelOrder();
             }
             else
             {

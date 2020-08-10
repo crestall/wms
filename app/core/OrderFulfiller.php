@@ -114,16 +114,17 @@
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by {$od['courier_name']}</p>";
     }
 
-    public function fulfillDirectFreightOrder()
+    public function fulfillDirectFreightOrder($order_ids)
     {
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "FULFILLING DIRECT FREIGHT ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $db = Database::openConnection();
-        echo "<pre>",print_r($this->controller->request->data),"</pre>";die();
+        echo "<pre>",print_r($this->controller->request->data),"</pre>";//die();
         //$od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
-        $order_ids = $this->controller->request->data['order_ids'];
-
+        //$order_ids = $this->controller->request->data['order_ids'];
+        $order_ids = ( is_array($order_ids) )? $order_ids: (array)$order_ids;
+        echo "<pre>",var_dump($order_ids),"</pre>";die();
         foreach($order_ids as $id)
         {
             $od = $this->controller->order->getOrderDetail($id);
