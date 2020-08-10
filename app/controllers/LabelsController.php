@@ -29,7 +29,7 @@ class LabelsController extends Controller
             $connotes[] = array('Connote' => $connote);
         }
         //echo  "<pre>",print_r($connotes),"</pre>";die();
-        $result = $this->Directfreight->getLabels($connotes);
+        $result = $this->directfreight->getLabels($connotes);
         echo  "<pre>",print_r($result),"</pre>";die();
     }
 
