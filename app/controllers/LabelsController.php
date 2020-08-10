@@ -19,7 +19,16 @@ class LabelsController extends Controller
 
     public function directfreightLabels()
     {
-        echo "<pre>",print_r($this->request),"</pre>";die();
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $connotes = array();
+        foreach($this->request->data['orders'] as $id)
+        {
+            $od = $this->order->getOrderDetail($id);
+            $client = $this->client->getClientInfo($od['client_id']);
+            $connote = $od['consignment_id'];
+            $connotes[] array('Connote' => $connote);
+        }
+        echo  "<pre>",print_r($connotes),"</pre>";die();
     }
 
     public function eparcelLabels()
