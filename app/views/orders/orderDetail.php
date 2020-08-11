@@ -38,8 +38,11 @@
                                 Delivery Details
                             </div>
                             <div class="card-body">
-                                        <label class="col-5">Client Order Number</label>
-                                        <div class="col-7"><?php echo $order['client_order_id'];?></div>
+                                <div class="row">
+                                    <label class="col-5">Client Order Number</label>
+                                    <div class="col-7"><?php echo $order['client_order_id'];?></div>
+                                </div>
+
                                         <label class="col-5">Deliver To</label>
                                         <div class="col-7"><?php echo $order['ship_to'];?></div>
                                         <label class="col-5">Company</label>
