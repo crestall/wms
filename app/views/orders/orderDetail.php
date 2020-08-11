@@ -73,7 +73,7 @@
                             <label class="col-5">Date Fulfilled</label>
                             <div class="col-7"><?php if($order['date_fulfilled'] > 0)echo date('d-m-Y', $order['date_fulfilled']);?></div>
                             <label class="col-5">Courier Service</label>
-                            <div class="col-7"><?php echo $ocourier;?></div>
+                            <div class="col-7"><?php echo $courier;?></div>
                             <label class="col-5">Use Express</label>
                             <div class="col-7"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
                             <label class="col-5">Signature Required</label>
