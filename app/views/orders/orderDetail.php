@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                    <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
                         <div class="card border-secondary h-100 order-card">
                             <div class="card-header bg-secondary text-white">
                                 Delivery Details
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                    <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
                         <div class="card border-secondary h-100 order-card">
                             <div class="card-header bg-secondary text-white">
                                 Order Status
