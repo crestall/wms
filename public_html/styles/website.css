@@ -205,7 +205,7 @@ div.order-card div.card-footer button.btn-outline-secondary{
 Order Detail
 ********/
 div.order-items div:last-child{
-    border-bottom: none;
+    border-bottom: none !important;
 }
 
 /*****
