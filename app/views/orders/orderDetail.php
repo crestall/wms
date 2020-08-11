@@ -56,7 +56,7 @@
                                     <label class="col-5">&nbsp;</label>
                                     <div class="col-7"><?php echo $order['postcode'];?></div>
                                     <label class="col-5">&nbsp;</label>
-                                    <div class="col-7"><?php echo $order[' country'];?></div>
+                                    <div class="col-7"><?php echo $order['country'];?></div>
                         </div>
                     </div>
                 </div>
