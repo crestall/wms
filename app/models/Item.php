@@ -181,6 +181,7 @@ class Item extends Model{
             $rows[$i['item_id']]['locations'][$i['location_id']]['onhand'] = $i['qty'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['allocated'] = $i['allocated'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['qc_count'] = $i['qc_count'];
+            $rows[$i['item_id']]['locations'][$i['location_id']]['oversize'] = $i['oversize'];
         }
         return $rows;
     }
