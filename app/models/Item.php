@@ -199,13 +199,13 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "  SELECT
-                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.solar_type_id
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.solar_type_id, a.oversize
                 FROM
                 (
                     SELECT
-                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.solar_type_id
+                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.solar_type_id, cb.oversize
                     FROM
-                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
+                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id LEFT JOIN clients_bays cb ON cb.location_id = il.location_id AND cb.date_removed = 0 AND cb.client_id = i.client_id
                     WHERE
                         i.client_id = $client_id AND i.active = $active
                 ) a";
