@@ -85,20 +85,34 @@
                                 Order Status
                             </div>
                             <div class="card-body">
-                                <label class="col-5">Order Status</label>
-                                <div class="col-7"><?php echo $order_status;?></div>
-                                <label class="col-5">Date Ordered</label>
-                                <div class="col-7"><?php echo date('d-m-Y', $order['date_ordered']);?></div>
-                                <label class="col-5">Date Fulfilled</label>
-                                <div class="col-7"><?php if($order['date_fulfilled'] > 0)echo date('d-m-Y', $order['date_fulfilled']);?></div>
-                                <label class="col-5">Courier Service</label>
-                                <div class="col-7"><?php echo $courier;?></div>
-                                <label class="col-5">Use Express</label>
-                                <div class="col-7"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
-                                <label class="col-5">Signature Required</label>
-                                <div class="col-7"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
-                                <label class="col-5">Consignment ID</label>
-                                <div class="col-7"><?php if($order['date_fulfilled'] > 0)echo $order['consignment_id'];?></div>
+                                <div class="row">
+                                    <label class="col-5">Order Status</label>
+                                    <div class="col-7"><?php echo $order_status;?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">Date Ordered</label>
+                                    <div class="col-7"><?php echo date('d-m-Y', $order['date_ordered']);?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">Date Fulfilled</label>
+                                    <div class="col-7"><?php if($order['date_fulfilled'] > 0)echo date('d-m-Y', $order['date_fulfilled']);?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">Courier Service</label>
+                                    <div class="col-7"><?php echo $courier;?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">Use Express</label>
+                                    <div class="col-7"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">Signature Required</label>
+                                    <div class="col-7"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">Consignment ID</label>
+                                    <div class="col-7"><?php if($order['date_fulfilled'] > 0)echo $order['consignment_id'];?></div>
+                                </div>
                             </div>
                         </div>
                     </div>
