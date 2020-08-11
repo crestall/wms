@@ -201,6 +201,13 @@ div.order-card div.card-footer button.btn-outline-secondary{
     background-color: rgba(108,115,125,0.2);
 }
 
+/*******
+Order Detail
+********/
+div.order-items div:last-child{
+    border-bottom: none;
+}
+
 /*****
 User Info
 *****/

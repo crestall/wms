@@ -121,9 +121,9 @@
                             <div class="card-header bg-secondary text-white">
                                 Order Items
                             </div>
-                            <div class="card-body">
+                            <div class="card-body order-items">
                                 <?php foreach($products as $p):?>
-                                    <div class="border-bottom border-secondary dorder-dashed mb-3">
+                                    <div class="border-bottom border-secondary mb-3">
                                         <div class="row">
                                             <label class="col-5">Name</label>
                                             <div class="col-7"><?php echo $p['name'];?></div>
