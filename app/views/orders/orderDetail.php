@@ -42,27 +42,40 @@
                                     <label class="col-5">Client Order Number</label>
                                     <div class="col-7"><?php echo $order['client_order_id'];?></div>
                                 </div>
-
-                                        <label class="col-5">Deliver To</label>
-                                        <div class="col-7"><?php echo $order['ship_to'];?></div>
-                                        <label class="col-5">Company</label>
-                                        <div class="col-7"><?php echo $order['company_name'];?></div>
-                                        <label class="col-5">Address</label>
-                                        <div class="col-7"><?php echo $order['address'];?></div>
-                                    <?php if(!empty($order['address_2'])):?>
-
-                                            <label class="col-5">&nbsp;</label>
-                                            <div class="col-7"><?php echo $order['address_2'];?></div>
-
-                                    <?php endif;?>
+                                <div class="row">
+                                    <label class="col-5">Deliver To</label>
+                                    <div class="col-7"><?php echo $order['ship_to'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">Company</label>
+                                    <div class="col-7"><?php echo $order['company_name'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">Address</label>
+                                    <div class="col-7"><?php echo $order['address'];?></div>
+                                </div>
+                                <?php if(!empty($order['address_2'])):?>
+                                    <div class="row">
                                         <label class="col-5">&nbsp;</label>
-                                        <div class="col-7"><?php echo $order['suburb'];?></div>
-                                        <label class="col-5">&nbsp;</label>
-                                        <div class="col-7"><?php echo $order['state'];?></div>
-                                        <label class="col-5">&nbsp;</label>
-                                        <div class="col-7"><?php echo $order['postcode'];?></div>
-                                        <label class="col-5">&nbsp;</label>
-                                        <div class="col-7"><?php echo $order['country'];?></div>
+                                        <div class="col-7"><?php echo $order['address_2'];?></div>
+                                    </div>
+                                <?php endif;?>
+                                <div class="row">
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $order['suburb'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $order['state'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $order['postcode'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $order['country'];?></div>
+                                </div>
                             </div>
                         </div>
                     </div>
