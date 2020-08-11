@@ -1,3 +1,65 @@
+<div class="col-sm-12 col-md-6 mb-3">
+    <div class="card border-secondary h-100 order-card">
+        <div class="card-header bg-secondary text-white">
+            Order Details
+        </div>
+        <div class="card-body">
+            <div class="row">
+                    <label class="col-5">Client Order Number</label>
+                    <div class="col-7"><?php echo $order['client_order_id'];?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Deliver To</label>
+                    <div class="col-7"><?php echo $order['ship_to'];?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Company</label>
+                    <div class="col-7"><?php echo $order['company_name'];?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Contact Phone</label>
+                    <div class="col-7"><?php echo $order['contact_phone'];?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Tracking Email</label>
+                    <div class="col-7"><?php echo $order['tracking_email'];?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Delivery Instructions</label>
+                    <div class="col-7"><?php echo $order['instructions'];?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Use Express</label>
+                    <div class="col-7"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Signature Required</label>
+                    <div class="col-7"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Client Invoice</label>
+                    <div class="col-7"><?php echo $order['uploaded_file'];?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Picking Instructions</label>
+                    <div class="col-7"><?php echo $order['3pl_comments'];?></div>
+                </div>
+                <div class="row">
+                    <label class="col-5">Entered By</label>
+                    <div class="col-7"><?php echo $entered_by;?></div>
+                </div>
+        </div>
+        <div class="card-footer text-right">
+            <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin")):?>
+                <a class="btn btn-outline-secondary" href="/orders/order-edit/order=<?php echo $order_id;?>">Update Order Details</a>
+            <?php endif;?>
+        </div>
+    </div>
+</div>
+
+
+
+
 
     <div class="col-sm-12">
         <h2>Details For Order Number: <?php echo $order['order_number'];?></h2>
