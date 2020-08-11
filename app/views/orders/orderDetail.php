@@ -25,7 +25,7 @@
                 </div>
             </div>
         <?php else:?>
-            <div id="print_this">
+            <div id="print_this" class="container-fluid">
                 <div class="col-sm-12">
                     <h2>Details For Order Number: <?php echo $order['order_number'];?></h2>
                 </div>
