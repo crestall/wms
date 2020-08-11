@@ -571,8 +571,8 @@ highlighting sections
 bootsrap adjustments
 *******  */
     /** Dashed Border **/
-    .border-dashed{
-        border-style: dashed !important;
+    .border-bottom-dashed{
+        border-bottom-style: dashed !important;
     }
     /** Checkboxes  */
     div.custom-control-right {
