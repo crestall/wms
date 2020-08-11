@@ -123,7 +123,7 @@
                             </div>
                             <div class="card-body">
                                 <?php foreach($products as $p):?>
-                                    <div class="border-bottom border-secondary mb-3">
+                                    <div class="border-bottom border-secondary dorder-dashed mb-3">
                                         <div class="row">
                                             <label class="col-5">Name</label>
                                             <div class="col-7"><?php echo $p['name'];?></div>
