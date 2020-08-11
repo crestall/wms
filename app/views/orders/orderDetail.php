@@ -123,17 +123,19 @@
                             </div>
                             <div class="card-body">
                                 <?php foreach($products as $p):?>
-                                    <div class="row">
-                                        <label class="col-5">Name</label>
-                                        <div class="col-7"><?php echo $p['name'];?></div>
-                                    </div>
-                                    <div class="row">
-                                        <label class="col-5">SKU</label>
-                                        <div class="col-7"><?php echo $p['sku'];?></div>
-                                    </div>
-                                    <div class="row">
-                                        <label class="col-5">QTY</label>
-                                        <div class="col-7"><?php echo $p['qty'];?></div>
+                                    <div class="border-bottom border-secondary mb-3">
+                                        <div class="row">
+                                            <label class="col-5">Name</label>
+                                            <div class="col-7"><?php echo $p['name'];?></div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-5">SKU</label>
+                                            <div class="col-7"><?php echo $p['sku'];?></div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-5">QTY</label>
+                                            <div class="col-7"><?php echo $p['qty'];?></div>
+                                        </div>
                                     </div>
                                 <?php endforeach;?>
                             </div>
@@ -143,7 +145,7 @@
             </div>
             <div class="row">
                 <div class="col text-right">
-                    <button class="btn btn-outline-primary" id="print">Print These Details</button>
+                    <button class="btn btn-outline-secondary" id="print">Print These Details</button>
                 </div>
             </div>
         <?php endif;?>
