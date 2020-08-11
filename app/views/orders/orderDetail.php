@@ -26,56 +26,60 @@
             </div>
         <?php else:?>
             <div id="print_this">
+                <div class="col-sm-12">
+                    <h2>Details For Order Number: <?php echo $order['order_number'];?></h2>
+                </div>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card border-secondary h-100 order-card">
                         <div class="card-header bg-secondary text-white">
-                            Order Details
+                            Delivery Details
                         </div>
                         <div class="card-body">
-                            <div class="row">
                                     <label class="col-5">Client Order Number</label>
                                     <div class="col-7"><?php echo $order['client_order_id'];?></div>
-                                </div>
-                                <div class="row">
                                     <label class="col-5">Deliver To</label>
                                     <div class="col-7"><?php echo $order['ship_to'];?></div>
-                                </div>
-                                <div class="row">
                                     <label class="col-5">Company</label>
                                     <div class="col-7"><?php echo $order['company_name'];?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Contact Phone</label>
-                                    <div class="col-7"><?php echo $order['contact_phone'];?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Tracking Email</label>
-                                    <div class="col-7"><?php echo $order['tracking_email'];?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Delivery Instructions</label>
-                                    <div class="col-7"><?php echo $order['instructions'];?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Use Express</label>
-                                    <div class="col-7"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Signature Required</label>
-                                    <div class="col-7"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Client Invoice</label>
-                                    <div class="col-7"><?php echo $order['uploaded_file'];?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Picking Instructions</label>
-                                    <div class="col-7"><?php echo $order['3pl_comments'];?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Entered By</label>
-                                    <div class="col-7"><?php echo $entered_by;?></div>
-                                </div>
+                                    <label class="col-5">Address</label>
+                                    <div class="col-7"><?php echo $order['address'];?></div>
+                                <?php if(!empty($order['address_2'])):?>
+
+                                        <label class="col-5">&nbsp;</label>
+                                        <div class="col-7"><?php echo $order['address_2'];?></div>
+
+                                <?php endif;?>
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $order['suburb'];?></div>
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $order['state'];?></div>
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $order['postcode'];?></div>
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $order[' country'];?></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <div class="card border-secondary h-100 order-card">
+                        <div class="card-header bg-secondary text-white">
+                            Order Status
+                        </div>
+                        <div class="card-body">
+                            <label class="col-5">Order Status</label>
+                            <div class="col-7"><?php echo $order_status;?></div>
+                            <label class="col-5">Date Ordered</label>
+                            <div class="col-7"><?php echo date('d-m-Y', $order['date_ordered']);?></div>
+                            <label class="col-5">Date Fulfilled</label>
+                            <div class="col-7"><?php if($order['date_fulfilled'] > 0)echo date('d-m-Y', $order['date_fulfilled']);?></div>
+                            <label class="col-5">Courier Service</label>
+                            <div class="col-7"><?php echo $ocourier;?></div>
+                            <label class="col-5">Use Express</label>
+                            <div class="col-7"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
+                            <label class="col-5">Signature Required</label>
+                            <div class="col-7"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
+                            <label class="col-5">Consignment ID</label>
+                            <div class="col-7"><?php if($order['date_fulfilled'] > 0)echo $order['consignment_id'];?></div>
                         </div>
                     </div>
                 </div>
