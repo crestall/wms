@@ -134,7 +134,7 @@
                                     <div class="row">
                                         <label class="col-5">QTY</label>
                                         <div class="col-7"><?php echo $p['qty'];?></div>
-                                    </div>>
+                                    </div>
                                 <?php endforeach;?>
                             </div>
                         </div>
