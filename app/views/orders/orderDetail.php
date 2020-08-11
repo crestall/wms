@@ -116,34 +116,34 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>SKU</th>
-                                    <th>Qty Ordered</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
+                        <div class="card border-secondary h-100 order-card">
+                            <div class="card-header bg-secondary text-white">
+                                Order Items
+                            </div>
+                            <div class="card-body">
                                 <?php foreach($products as $p):?>
-                                    <tr>
-                                        <td><?php echo $p['name'];?></td>
-                                        <td><?php echo $p['sku'];?></td>
-                                        <td><?php echo $p['qty'];?></td>
-                                    </tr>
+                                    <div class="row">
+                                        <label class="col-5">Name</label>
+                                        <div class="col-7"><?php echo $p['name'];?></div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-5">SKU</label>
+                                        <div class="col-7"><?php echo $p['sku'];?></div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-5">QTY</label>
+                                        <div class="col-7"><?php echo $p['qty'];?></div>
+                                    </div>>
                                 <?php endforeach;?>
-                            </tbody>
-                        </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <p class="text-right"><button class="btn btn-primary" id="print">Print These Details</button></p>
+                <div class="col text-right">
+                    <button class="btn btn-outline-primary" id="print">Print These Details</button>
                 </div>
             </div>
         <?php endif;?>
