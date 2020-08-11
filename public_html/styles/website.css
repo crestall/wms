@@ -563,6 +563,10 @@ highlighting sections
 /********
 bootsrap adjustments
 *******  */
+    /** Dashed Border **/
+    .border-dashed{
+        border-style: dashed;
+    }
     /** Checkboxes  */
     div.custom-control-right {
         padding-right: 24px;
