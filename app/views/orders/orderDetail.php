@@ -6,7 +6,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if($order_id == 0):?>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col">
                     <div class="errorbox">
                         <h2><i class="fad fa-times-circle"></i> No Order ID Supplied</h2>
                         <p>No order id was supplied, so an order could not be found</p>
@@ -16,7 +16,7 @@
             </div>
         <?php elseif(empty($order)):?>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col">
                     <div class="errorbox">
                         <h2><i class="fad fa-times-circle"></i> No Order Found</h2>
                         <p>No order was found with the supplied ID</p>
@@ -27,12 +27,12 @@
         <?php else:?>
             <div id="print_this" class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col">
                         <h2>Details For Order Number: <?php echo $order['order_number'];?></h2>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 mb-3">
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                         <div class="card border-secondary h-100 order-card">
                             <div class="card-header bg-secondary text-white">
                                 Delivery Details
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6 mb-3">
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                         <div class="card border-secondary h-100 order-card">
                             <div class="card-header bg-secondary text-white">
                                 Order Status
