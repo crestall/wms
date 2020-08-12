@@ -72,6 +72,7 @@ $si_string = rtrim($si_string, ",");
                                 <?php endforeach;?>
                             <?php else:?>
                                 <?php foreach($order_items as $i => $item):
+                                    echo "<pre",print_r($item),"</pre>";
                                     $qty = !(( ($item['qty'] == $item['location_qty']) && $item['palletized'] > 0))? $item['qty']: "";
                                     $pallet_qty = ( ($item['qty'] == $item['location_qty']) && $item['palletized'] > 0)? $item['qty']: "";?>
                                     <div class="row item_holder">
