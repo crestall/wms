@@ -105,7 +105,7 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                         <div class="form-group row">
                             <label class="col-md-3">FSG Instructions</label>
                             <div class="col-md-4">
-                                <textarea class="form-control" name="3pl_comments" id="3pl_comments"><?php echo $comments;?></textarea>
+                                <textarea class="form-control" name="tpl_comments" id="tpl_comments"><?php echo $comments;?></textarea>
                                 <span class="inst">Instructions for the pickers and packers</span>
                             </div>
                         </div>
