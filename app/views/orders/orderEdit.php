@@ -76,26 +76,12 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                             <label class="custom-control-label col-md-3" for="signature_req">Signature Required</label><br/>
                             <span class="inst">Leaving unchecked will give an 'Authority to Leave'</span>
                         </div>
-                        <div class="form-group row">
-                            <div class="form-check">
-                                <label class="form-check-label col-md-3" for="express_post">Use Express Post</label>
-                                <div class="col-md-4 checkbox checkbox-default">
-                                    <input class="form-check-input styled" type="checkbox" id="express_post" name="express_post" <?php if($express_post) echo "checked";?> />
-                                    <label for="express_post"></label>
-                                </div>
-                            </div>
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="express_post" name="express_post" <?php if($express_post) echo "checked";?> />
+                            <label class="custom-control-label col-md-3" for="express_post">Use Express Post</label>
                         </div>
                         <div class="form-group row">
-                            <div class="form-check">
-                                <label class="form-check-label col-md-3" for="store_order">Store Order</label>
-                                <div class="col-md-4 checkbox checkbox-default">
-                                    <input class="form-check-input styled" type="checkbox" id="store_order" name="store_order" <?php if($store_order) echo "checked";?> />
-                                    <label for="store_order"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Tracking Email</label>
+                            <label class="col-md-3">Tracking Email</label>
                             <div class="col-md-4">
                                 <input type="text" class="form-control email" name="tracking_email" id="tracking_email" value="<?php echo $tracking_email;?>" />
                                 <span class="inst">Required if you wish to receive tracking notifications</span>
@@ -103,23 +89,23 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Phone</label>
+                            <label class="col-md-3">Phone</label>
                             <div class="col-md-4">
                                 <input type="text" class="form-control" name="contact_phone" id="contact_phone" value="<?php echo $contact_phone;?>" />
                                 <?php echo Form::displayError('contact_phone');?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Delivery Instructions</label>
+                            <label class="col-md-3">Delivery Instructions</label>
                             <div class="col-md-4">
                                 <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Leave in a safe place out of the weather"><?php echo $instructions;?></textarea>
                                 <span class="inst">Appears on shipping label. Defaults to 'Leave in a safe place out of the weather' for orders with an Authority To Leave</span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">3PLPLUS Instructions</label>
+                            <label class="col-md-3">FSG Instructions</label>
                             <div class="col-md-4">
-                                <textarea class="form-control" name="tpl_comments" id="tpl_comments"><?php echo $comments;?></textarea>
+                                <textarea class="form-control" name="3pl_comments" id="3pl_comments"><?php echo $comments;?></textarea>
                                 <span class="inst">Instructions for the pickers and packers</span>
                             </div>
                         </div>
@@ -129,12 +115,11 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">&nbsp;</label>
                             <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary">Edit Order</button>
+                                <button type="submit" class="btn btn-outline-fsg">Save Changes</button>
                             </div>
                         </div>
                     </form>
                 </div>
-
             </div>
         <?php endif;?>
     </div>

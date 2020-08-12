@@ -110,10 +110,6 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 <label class="custom-control-label col-md-3" for="express_post">Use Express Post</label>
             </div>
             <div class="form-group row custom-control custom-checkbox custom-control-right">
-                <input class="custom-control-input" type="checkbox" id="b2b" name="b2b" <?php if(!empty(Form::value('b2b'))) echo 'checked';?> />
-                <label class="custom-control-label col-md-3" for="b2b">Bulk Store Order</label>
-            </div>
-            <div class="form-group row custom-control custom-checkbox custom-control-right">
                 <input class="custom-control-input" type="checkbox" id="signature_req" name="signature_req" <?php if(!empty(Form::value('signature_req'))) echo 'checked';?> />
                 <label class="custom-control-label col-md-3" for="signature_req">Signature Required</label><br/>
                 <span class="inst">Leaving unchecked will give an 'Authority to Leave'</span>
