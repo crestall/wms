@@ -1113,14 +1113,14 @@ class Item extends Model{
                     FROM
                         items_locations il JOIN locations l ON il.location_id = l.id
                     WHERE
-                        il.item_id = $item_id AND il.qty = {$item['per_pallet']}
+                        il.item_id = $item_id
                 ) a
                 LEFT JOIN
                 (
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        $items_table oi JOIN $order_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4 AND o.id != $order_id
                     GROUP BY
