@@ -10,46 +10,16 @@ $si_string = rtrim($si_string, ",");
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if($error):?>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="errorbox">
-                        <div class="row">
-                            <div class="col-lg-2" style="font-size:96px">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <div class="col-lg-6">
-                                <h2>No Order ID Supplied</h2>
-                                <p>No order was supplied to update</p>
-                                <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_id.php");?>
         <?php elseif(!$order || !count($order)):?>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="errorbox">
-                        <div class="row">
-                            <div class="col-lg-2" style="font-size:96px">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <div class="col-lg-6">
-                                <h2>No Order Found</h2>
-                                <p>No order was found with that ID</p>
-                                <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_found.php");?>
         <?php else:?>
             <div class="row">
-                <div class="col-lg-4">
-                    <a class="btn btn-primary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
+                <div class="col">
+                    <a class="btn btn-outline-secondary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
                 </div>
-                <div class="col-lg-4">
-                    <a class="btn btn-primary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
+                <div class="col text-right">
+                    <a class="btn btn-outline-secondary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
                 </div>
             </div>
             <div class="row">
