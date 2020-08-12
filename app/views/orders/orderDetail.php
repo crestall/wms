@@ -5,7 +5,7 @@
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if($order_id == 0):?>
-            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_id.php.php");?>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_id.php");?>
         <?php elseif(empty($order)):?>
             <div class="row">
                 <div class="col-md-12">
