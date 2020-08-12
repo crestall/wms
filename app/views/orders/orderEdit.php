@@ -31,7 +31,7 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                 </div>
             </div>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-            <div class="row">
+
                 <div class="col-12">
                     <form id="order-edit" enctype="multipart/form-data" action="/form/procOrderEdit" method="post">
                         <div class="form-group row">
@@ -120,7 +120,7 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                         </div>
                     </form>
                 </div>
-            </div>
+            
         <?php endif;?>
     </div>
 </div>
