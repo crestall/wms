@@ -72,7 +72,7 @@ $si_string = rtrim($si_string, ",");
                                 <?php endforeach;?>
                             <?php else:?>
                                 <?php foreach($order_items as $i => $item):
-                                    echo "<pre",print_r($item),"</pre>";
+                                    //echo "<pre",print_r($item),"</pre>";
                                     $qty = !(( ($item['qty'] == $item['location_qty']) && $item['palletized'] > 0))? $item['qty']: "";
                                     $pallet_qty = ( ($item['qty'] == $item['location_qty']) && $item['palletized'] > 0)? $item['qty']: "";?>
                                     <div class="row item_holder">
@@ -85,8 +85,8 @@ $si_string = rtrim($si_string, ",");
                                         <div class="col-md-2 qty-holder">
                                             <?php if($this->controller->item->isPalletItem($item['id'])):
                                                 $select_values = $this->controller->item->getPalletCountSelect($item['id'], $order_id);
-                                                var_dump($select_values);
-                                                echo $pallet_qty?>
+                                                //var_dump($select_values);
+                                                //echo $pallet_qty?>
                                                 <select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items[<?php echo $i;?>][qty]'><option value='0'>Quantity</option>
                                                 <?php foreach($select_values as $sv):
                                                     if($sv['available'] == 0) continue;;?>
