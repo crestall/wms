@@ -18,11 +18,11 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
         <?php else:?>
             <?php //echo "<pre>",print_r($order),"</pre>";?>
             <div class="row">
-                <div class="col-lg-4">
-                    <a class="btn btn-primary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
+                <div class="col">
+                    <a class="btn btn-outline-secondary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
                 </div>
-                <div class="col-lg-4">
-                    <a class="btn btn-primary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
+                <div class="col text-right">
+                    <a class="btn btn-outline-secondary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
                 </div>
             </div>
             <div class="row">
