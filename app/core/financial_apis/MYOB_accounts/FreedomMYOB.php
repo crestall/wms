@@ -176,6 +176,10 @@ class FreedomMYOB extends MYOB
                         $product = $this->controller->item->getItemBySku($item['ProductCode']);
                         if(!$product)
                         {
+                            $product = $this->controller->item->getItemByBarcode($item['ProductCode']);
+                        }
+                        if(!$product)
+                        {
                             $items_errors = true;
                             $mm .= "<li>Could not find {$item['Title']} in WMS based on {$item['ProductCode']}</li>";
                         }
