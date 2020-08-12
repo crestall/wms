@@ -61,7 +61,7 @@ $si_string = rtrim($si_string, ",");
         <?php echo Form::displayError('general');?>
         <div class="row">
             <form id="items-update" method="post" action="/form/procItemsUpdate">
-                <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey" style="display:<?php echo $idisp;?>">
+                <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey">
                 <div class="row mb-0">
                     <div class="col-md-4">
                         <h4>Line Items</h4>
