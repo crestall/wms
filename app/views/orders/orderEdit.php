@@ -44,7 +44,7 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                                     <span class="inst"><a href='/client_uploads/<?php echo $order['client_id']."/".$order['uploaded_file'];?>' target='_blank'>View Current File</a> </span>
                                     <br/>
                                     <div class="checkbox checkbox-default">
-                                        <input class="form-check-input styled" type="checkbox" id="delete_file" name="delete_file" />
+                                        <input class="form-check-input" type="checkbox" id="delete_file" name="delete_file" />
                                         <label for="delete_file"><span class="inst">Delete Current File</span></label>
                                     </div>
                                 <?php endif;?>
