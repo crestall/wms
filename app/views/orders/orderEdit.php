@@ -26,7 +26,7 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-12 m-3">
                     <h2>Updating Details For Order Number <?php echo $order['order_number'];?></h2>
                 </div>
             </div>
