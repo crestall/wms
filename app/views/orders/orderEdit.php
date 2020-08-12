@@ -13,13 +13,13 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if($error):?>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col">
                     <div class="errorbox">
                         <div class="row">
-                            <div class="col-lg-2" style="font-size:96px">
-                                <i class="fas fa-exclamation-triangle"></i>
+                            <div class="col-4 text-right">
+                                <i class="fad fa-exclamation-triangle fa-6x"></i>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-8">
                                 <h2>No Order ID Supplied</h2>
                                 <p>No order was supplied to update</p>
                                 <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
@@ -30,13 +30,13 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
             </div>
         <?php elseif(!$order || !count($order)):?>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-12">
                     <div class="errorbox">
                         <div class="row">
-                            <div class="col-lg-2" style="font-size:96px">
-                                <i class="fas fa-exclamation-triangle"></i>
+                            <div class="col-4 text-right">
+                                <i class="fad fa-exclamation-triangle fa-6x"></i>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-8">
                                 <h2>No Order Found</h2>
                                 <p>No order was found with that ID</p>
                                 <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
