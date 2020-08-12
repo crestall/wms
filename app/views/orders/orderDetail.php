@@ -7,22 +7,7 @@
         <?php if($order_id == 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_id.php");?>
         <?php elseif(empty($order)):?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="errorbox">
-                        <div class="row">
-                            <div class="col-4 text-right">
-                                <i class="fad fa-exclamation-triangle fa-6x"></i>
-                            </div>
-                            <div class="col-8">
-                                <h2>No Order Found</h2>
-                                <p>No order was found with that ID</p>
-                                <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_found.php");?> 
         <?php else:?>
             <div class="row">
                 <div class="col">
