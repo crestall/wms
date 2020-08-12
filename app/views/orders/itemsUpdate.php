@@ -84,7 +84,7 @@ $si_string = rtrim($si_string, ",");
                                         </div>
                                         <div class="col-md-2 qty-holder">
                                             <?php if($this->controller->item->isPalletItem($item['id'])):
-                                                $select_values = $this->controller->item->getPalletCountSelect($item['id']);
+                                                $select_values = $this->controller->item->getPalletCountSelect($item['id'], $order_id);
                                                 var_dump($select_values);
                                                 echo $pallet_qty?>
                                                 <select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items[<?php echo $i;?>][qty]'><option value='0'>Quantity</option>
