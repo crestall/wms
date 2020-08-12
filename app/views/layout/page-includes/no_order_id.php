@@ -1,6 +1,6 @@
-<div class="row">
-    <div class="errorbox">
-        <div class="row">
+<div class="container-fluid">
+    <div class="row">
+        <div class="errorbox">
             <div class="col-4 text-right">
                 <i class="fad fa-exclamation-triangle fa-6x"></i>
             </div>
