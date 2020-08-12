@@ -28,6 +28,14 @@
             <div id="print_this" class="container-fluid">
                 <div class="row">
                     <div class="col">
+                        <a class="btn btn-outline-secondary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-secondary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <h2>Details For Order Number: <?php echo $order['order_number'];?></h2>
                     </div>
                 </div>
@@ -145,7 +153,7 @@
             </div>
             <div class="row">
                 <div class="col text-right">
-                    <button class="btn btn-outline-secondary" id="print">Print These Details</button>
+                    <button class="btn btn-outline-fsg" id="print">Print These Details</button>
                 </div>
             </div>
         <?php endif;?>
