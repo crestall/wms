@@ -30,8 +30,8 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                     <h2>Updating Details For Order Number <?php echo $order['order_number'];?></h2>
                 </div>
             </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
             <div class="row">
-                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
                 <form id="order-edit" enctype="multipart/form-data" action="/form/procOrderEdit" method="post">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><?php if(empty($order['uploaded_file'])) echo "Upload"; else echo "Replace";?> PDF Attachment</label>
