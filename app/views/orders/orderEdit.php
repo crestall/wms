@@ -35,8 +35,8 @@ $comments = empty(Form::value('tpl_comments'))? $comments : Form::value('tpl_com
                 <div class="col-12">
                     <form id="order-edit" enctype="multipart/form-data" action="/form/procOrderEdit" method="post">
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label"><?php if(empty($order['uploaded_file'])) echo "Upload"; else echo "Replace";?> PDF Attachment</label>
-                            <div class="col-md-4">
+                            <label class="col-md-3"><?php if(empty($order['uploaded_file'])) echo "Upload"; else echo "Replace";?> PDF Attachment</label>
+                            <div class="col-md-8">
                                 <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" />
                                 <span class="inst">(if required) - use ctrl click to select multiple files</span>
                                 <?php if(!empty($order['uploaded_file'])):?>
