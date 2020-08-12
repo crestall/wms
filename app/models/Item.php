@@ -156,7 +156,7 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "
-            SELECT DISTINCT ( a.available - IFNULL(b.qty, 0)) ) AS available
+            SELECT DISTINCT ( a.available - IFNULL(b.qty, 0) ) AS available
             FROM
             (
                 SELECT (il.qty - il.qc_count) AS available, il.location_id
