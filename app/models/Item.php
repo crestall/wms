@@ -142,7 +142,7 @@ class Item extends Model{
         return $id;
     }
 
-    public function getPalletCountSelect($item_id)
+    public function getPalletCountSelect($item_id, $order_id = 0)
     {
         $db = Database::openConnection();
         if($this->isSolarItem($item_id))
@@ -168,20 +168,13 @@ class Item extends Model{
                 SELECT oi.qty, oi.location_id
                 FROM $items_table oi JOIN $orders_table o ON oi.order_id = o.id
                 WHERE o.status_id != 4
-            ) b
+        ";
+        if($order_id > 0)
+        {
+            $q .= " AND o.id != $order_id";
+        }
+        $q .="    ) b
             ON a.location_id = b.location_id
-            LEFT JOIN
-            (
-                SELECT
-                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
-                FROM
-                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
-                WHERE
-                    o.status_id != 4
-                GROUP BY
-                    oi.location_id, oi.item_id
-            ) c
-            ON a.location_id = c.location_id
             ORDER BY available DESC
         ";
         return ($db->queryData($q));
