@@ -9,7 +9,6 @@
                     <h2>No Order ID Supplied</h2>
                     <p>No order was supplied to update</p>
                     <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
-                    <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
                 </div>
             </div>
         </div>
