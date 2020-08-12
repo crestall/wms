@@ -23,7 +23,7 @@ $si_string = rtrim($si_string, ",");
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-12 mb-3 mt-3">
                     <h2>Updating Items For Order Number <?php echo $order['order_number'];?></h2>
                 </div>
             </div>
@@ -107,7 +107,7 @@ $si_string = rtrim($si_string, ",");
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">&nbsp;</label>
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary">Update Items</button>
+                            <button type="submit" class="btn btn-outline-fsg">Update Items</button>
                         </div>
                     </div>
                 </form>
