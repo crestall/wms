@@ -83,8 +83,9 @@ $si_string = rtrim($si_string, ",");
                                         </div>
                                         <div class="col-md-2 qty-holder">
                                             <?php if($this->controller->item->isPalletItem($item['id'])):
-                                                $select_values = $this->controller->item->getPalletCountSelect($item['id']);?>
-                                                <select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items[<?php echo $i;?>]][qty]'><option value='0'>Quantity</option>
+                                                $select_values = $this->controller->item->getPalletCountSelect($item['id']);
+                                                var_dump($select_values);?>
+                                                <select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items[<?php echo $i;?>][qty]'><option value='0'>Quantity</option>
                                                 <?php foreach($select_values as $sv):
                                                     if($sv['available'] == 0) continue;;?>
                                                     <option <?php if($sv['available'] == $pallet_qty) echo "selected";?>><?php echo $sv['available'];?></option>
