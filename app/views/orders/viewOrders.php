@@ -133,13 +133,13 @@
         				<!--th>Status</th-->
         				<th>Slip<br/>Printed</th>
                         <th>Package<br/>Entered</th>
-                        <th>
+                        <!--th>
                             Ignore Price Check
                             <div class="checkbox checkbox-default">
                                 <input id="select_all_np" class="styled" type="checkbox">
                                 <label for="select_all_np"><em><small>(all)</small></em></label>
                             </div>
-                        </th>
+                        </th-->
                         <?php if($user_role == "admin" || $user_role == "super admin"):?>
         				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary" data-width="fit"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
                         <?php elseif($user_role == "warehouse"):?>
@@ -239,12 +239,12 @@
         					<!--td data-label="Status"><?php echo $order_status;?></td-->
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
                             <td data-label="Package Entered"><?php echo $pe;?></td>
-                            <td data-label="Ignore Price Restriction" class="chkbox">
+                            <!--td data-label="Ignore Price Restriction" class="chkbox">
                                 <div class="checkbox checkbox-default">
                                     <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select_np styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
                                     <label for="ignoreprice_<?php echo $co['id'];?>"></label>
                                 </div>
-                            </td>
+                            </td-->
                             <?php if($user_role == "admin" || $user_role == "super admin"):?>
             					<td data-label="Courier" nowrap>
             					    <p><select name="courier" class="selectpicker courier" data-style="btn-outline-secondary btn-sm" data-width="fit" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
