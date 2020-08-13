@@ -647,6 +647,7 @@
                 'items-update' : {
                     init: function(){
                         actions.common['add-item']();
+                        actions.common['remove-all-items']();
                         itemsUpdater.itemDelete();
                         actions['item-searcher'].init();
                         $("form#items-update").submit(function(e){
