@@ -13,24 +13,57 @@
                             shippingQuote.getQuotes($(this).data('orderid'), $(this).data('destination'));
                         });
                     },
+                    'remove-all-items': function(){
+                        $('a#remove-all-items').click(function(e){
+                            e.preventDefault();
+                            swal({
+                                title: "Really remove all items?",
+                                text: "This cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willRemove) {
+                                if (willRemove) {
+                                   $('div#items_holder div.item_holder').remove();
+                                   var item_count = $(":input.item-searcher").length;
+                                    //console.log('items: '+item_count);
+                                    var html = "<div class='row item_holder'>"
+                                    html += "<div class='col-md-1 delete-image-holder'>";
+                                    html += "<a class='delete' title='remove this item' style='display:none;'><i class='fad fa-times-square text-danger'></i><span class='inst'>Remove</span></a>";
+                                    html += "</div>";
+                                    html += "<div class='col-md-6'>";
+                                    html += "<p><input type='text' class='form-control item-searcher' name='items["+item_count+"][name]' placeholder='Item Name' /></p>";
+                                    html += "</div>";
+                                    html += "<div class='col-md-2 qty-holder'>";
+                                    html += "</div>";
+                                    html += "<div class='col-md-3 qty-location'></div>";
+                                    html += "<input type='hidden' name='items["+item_count+"][id]' class='item_id'  />";
+                                    html += "</div>";
+                                    $('div#items_holder').append(html).find('input.item-searcher').focus();
+
+                                    actions['item-searcher'].init();
+                                    itemsUpdater.itemDelete();
+                                }
+                            });
+                        });
+                    },
                     'add-item': function(){
-                        $("a.add").click(function(e){
+                        $("a.add-item").click(function(e){
                             e.preventDefault;
                             var item_count = $(":input.item-searcher").length;
                             //console.log('items: '+item_count);
                             var html = "<div class='row item_holder'>"
-                            html += "<div class='col-sm-1 delete-image-holder'>";
-                            html += "<a class='delete' title='remove this item'><i class='fas fa-times-circle fa-2x text-danger'></i></a>";
-                            html += "</div>"; //col-sm-1
-                            html += "<div class='col-sm-4'>";
+                            html += "<div class='col-md-1 delete-image-holder'>";
+                            html += "<a class='delete' title='remove this item' style='display:none;'><i class='fad fa-times-square text-danger'></i><span class='inst'>Remove</span></a>";
+                            html += "</div>";
+                            html += "<div class='col-md-6'>";
                             html += "<p><input type='text' class='form-control item-searcher' name=items["+item_count+"][name]' placeholder='Item Name' /></p>";
-                            html += "</div>"; //col-sm-4
-                            html += "<div class='col-sm-4 qty-holder'>";
-                            //html += "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' disabled />";
-                            html += "</div>"; //col-sm-4
-                            html += "<div class='col-sm-3 qty-location'></div>";
-                            html += "<input type='hidden' name='items["+item_count+"][id]' class='item_id' />"
-                            html += "</div>"; //row
+                            html += "</div>";
+                            html += "<div class='col-md-2 qty-holder'>";
+                            html += "</div>";
+                            html += "<div class='col-md-3 qty-location'></div>";
+                            html += "<input type='hidden' name='items["+item_count+"][id]' class='item_id'  />";
+                            html += "</div>";
                             $('div#items_holder').append(html).find('input.item-searcher').focus();
 
                             actions['item-searcher'].init();
@@ -567,55 +600,32 @@
                         {
                             var item_count = ($(":input.item-searcher").length) - 1;
                             var $holder = $(event.target).closest('div.item_holder');
-                            var qty_html;
-                            var inst;
+                            var qty_html = "<input type='hidden' name='items["+item_count+"][whole_pallet]' value='1' />";
+                            var inst = "";
                             if(ui.item.palletized > 0)
                             {
                                 var pallet_vals = ui.item.select_values.split(',');
-                                var line_item_vals = ui.item.max_values.split(',');
-                                qty_html = "<div class='col-sm-4'><input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' /></div>";
-                                qty_html += "<div class='col-sm-8'><select class='form-control selectpicker pallet_qty' name='items["+item_count+"][pallet_qty]'><option value='0'>Whole Pallet Qty</option>";
+                                qty_html += "<select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items["+item_count+"][qty]'><option value='0'>Quantity</option>";
                                 pallet_vals.forEach(function(pallet_val) {
                                     //console.log(pallet_val);
                                     qty_html += "<option>"+pallet_val+"</option>";
                                 });
-                                qty_html += "</select></div>";
+                                qty_html += "</select>";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>";
-                                inst += "<p class='inst'>There are<br/>";
-                                var li = 0;
-                                var count = 1;
-                                line_item_vals.forEach(function(max){
-                                    if(max == li)
-                                    {
-                                        ++count;
-                                    }
-                                    else if(li == 0)
-                                    {
-                                        //first pass
-                                        //++count;
-                                    }
-                                    else
-                                    {
-                                        inst += "<strong>"+count+"</strong> pallets with "+li+" items,<br/>";
-                                        count = 1;
-                                    }
-                                    li = max;
-                                });
-                                inst += "<strong>"+count+"</strong> pallets with "+li+" items</p>";
                                 inst += "<p class='inst'>Select whole pallet amounts from the dropdown selector <br/>";
-                                inst += "<strong>OR</strong><br/>If you require us to break a pallet, enter an amount in the 'Qty' text field</p>";
                             }
                             else
                             {
-                                qty_html = "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' />";
+                                qty_html = "<input type='text' class='form-control number item_qty' data-rule-max='"+ui.item.total_available+"' name='items["+item_count+"][qty]' placeholder='Qty' />";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
-                                inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
+                                //inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
                             }
                             $holder.find('div.qty-holder').html(qty_html).find('input').focus();
                             $holder.find('input.item_id').val(ui.item.item_id);
                             $holder.find('div.qty-location').html(inst);
+                            $holder.find('div.delete-image-holder a').fadeIn();
                             itemsUpdater.itemDelete();
-                            itemsUpdater.updateValidation();
+                            //itemsUpdater.updateValidation();
                             $holder.find('input.item_qty').focus();
                             $('.selectpicker').selectpicker();
                             //actions['item-searcher-test'].init();
@@ -637,6 +647,7 @@
                 'items-update' : {
                     init: function(){
                         actions.common['add-item']();
+                        actions.common['remove-all-items']();
                         itemsUpdater.itemDelete();
                         actions['item-searcher'].init();
                         $("form#items-update").submit(function(e){
@@ -686,6 +697,7 @@
                         });
                     }
                 },
+                
                 'view-storeorders' : {
                     init: function(){
                         actions.common.init();
@@ -945,27 +957,6 @@
                             }
                         });
 
-                        $('a.auspost-csv').click(function(e){
-                            e.preventDefault();
-                            if($('input.select:checked').length)
-                            {
-                                var ids = [];
-                                $('input.select').each(function(i,e){
-                                    if($(this).prop('checked'))
-                                    {
-                                        ids.push($(this).data('orderid'));
-                                    }
-                                });
-                                var data = {
-                                    client_id: $('#client_selector').val(),
-                                    order_ids: ids,
-                                    csrf_token: config.csrfToken
-                                }
-                                var url = "/downloads/orderAuspostExportCSV";
-                                fileDownload.download(url, data);
-                            }
-                        });
-
                         $('a.eparcel-label-print').click(function(e){
                             e.preventDefault();
 
@@ -1002,66 +993,6 @@
                             }
                         });
 
-                        $('a.viclocal-label-print').click(function(e){
-                            e.preventDefault();
-                            var ids = [];
-                            $('input.select').each(function(i,e){
-                                var order_id = $(this).data('orderid');
-                                if( $(this).prop('checked') && $('select#courier_'+order_id).val() == config.vicLocalId )
-                                {
-                                    ids.push(order_id);
-                                }
-                            });
-                            if(ids.length)
-                            {
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printVicLocalLabels");
-                                form.setAttribute("target", "formresult");
-                                $.each( ids, function( index, value ) {
-                                    var hiddenField = document.createElement("input");
-                                    hiddenField.setAttribute("type", "hidden");
-                                    hiddenField.setAttribute("name", "orders[]");
-                                    hiddenField.setAttribute("value", value);
-                                    form.appendChild(hiddenField);
-                                });
-                                document.body.appendChild(form);
-                                window.open('','formresult');
-                                form.submit();
-                            }
-
-                        });
-
-                        $('a.cometlocal-label-print').click(function(e){
-                            e.preventDefault();
-                            var ids = [];
-                            $('input.select').each(function(i,e){
-                                var order_id = $(this).data('orderid');
-                                if( $(this).prop('checked') && ( $('select#courier_'+order_id).val() == config.cometLocalId || $('select#courier_'+order_id).val() == config.sydneyCometId ) )
-                                {
-                                    ids.push(order_id);
-                                }
-                            });
-                            if(ids.length)
-                            {
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printCometLocalLabels");
-                                form.setAttribute("target", "formresult");
-                                $.each( ids, function( index, value ) {
-                                    var hiddenField = document.createElement("input");
-                                    hiddenField.setAttribute("type", "hidden");
-                                    hiddenField.setAttribute("name", "orders[]");
-                                    hiddenField.setAttribute("value", value);
-                                    form.appendChild(hiddenField);
-                                });
-                                document.body.appendChild(form);
-                                window.open('','formresult');
-                                form.submit();
-                            }
-
-                        });
-
                         $('a.export-csv').click(function(e){
                             e.preventDefault();
                             if($('input.select:checked').length)
@@ -1079,27 +1010,6 @@
                                     csrf_token: config.csrfToken
                                 }
                                 var url = "/downloads/orderExportCSV";
-                                fileDownload.download(url, data);
-                            }
-                        });
-
-                        $('a.comet-csv').click(function(e){
-                            e.preventDefault();
-                            if($('input.select:checked').length)
-                            {
-                                var ids = [];
-                                $('input.select').each(function(i,e){
-                                    if($(this).prop('checked'))
-                                    {
-                                        ids.push($(this).data('orderid'));
-                                    }
-                                });
-                                var data = {
-                                    client_id: $('#client_selector').val(),
-                                    order_ids: ids,
-                                    csrf_token: config.csrfToken
-                                }
-                                var url = "/downloads/cometCSV";
                                 fileDownload.download(url, data);
                             }
                         });
@@ -1255,144 +1165,6 @@
                                         document.close();
                                     }
                                 });
-                            });
-                        });
-
-                        $('a.viclocal-fulfill').click(function(e){
-                            e.preventDefault();
-                            swal({
-                                title: "Fulfill These Orders?",
-                                text: "This will close each order and adjust stock\n\nIt cannot be undone",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true
-                            }).then( function(willFulfill) {
-                                if (willFulfill) {
-                                    var ids = [];
-                                    $('input.select').each(function(i,e){
-                                        var order_id = $(this).data('orderid');
-                                        console.log('order_id: '+ order_id);
-                                        if( $(this).prop('checked') && $('select#courier_'+order_id).val() == config.vicLocalId )
-                                        {
-                                            ids.push(order_id);
-                                        }
-                                    });
-                                    $.ajax({
-                                        url: '/ajaxfunctions/fulfill-order',
-                                        method: 'post',
-                                        data: {
-                                            order_ids: ids,
-                                            courier_id: config.vicLocalId
-                                        },
-                                        dataType: 'json',
-                                        beforeSend: function(){
-                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
-                                        },
-                                        success: function(d){
-                                            if(d.error)
-                                            {
-                                                $.unblockUI();
-                                                alert('error');
-                                            }
-                                            else
-                                            {
-                                                location.reload();
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-                        });
-
-                        $('a.cometlocal-fulfill').click(function(e){
-                            e.preventDefault();
-                            swal({
-                                title: "Fulfill These Orders?",
-                                text: "This will close each order and adjust stock\n\nIt cannot be undone",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true
-                            }).then( function(willFulfill) {
-                                if (willFulfill) {
-                                    var ids = [];
-                                    $('input.select').each(function(i,e){
-                                        var order_id = $(this).data('orderid');
-                                        console.log('order_id: '+ order_id);
-                                        if( $(this).prop('checked') && $('select#courier_'+order_id).val() == config.cometLocalId )
-                                        {
-                                            ids.push(order_id);
-                                        }
-                                    });
-                                    $.ajax({
-                                        url: '/ajaxfunctions/fulfill-order',
-                                        method: 'post',
-                                        data: {
-                                            order_ids: ids,
-                                            courier_id: config.cometLocalId
-                                        },
-                                        dataType: 'json',
-                                        beforeSend: function(){
-                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
-                                        },
-                                        success: function(d){
-                                            if(d.error)
-                                            {
-                                                $.unblockUI();
-                                                alert('error');
-                                            }
-                                            else
-                                            {
-                                                location.reload();
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-                        });
-
-                        $('a.cometsydney-fulfill').click(function(e){
-                            e.preventDefault();
-                            swal({
-                                title: "Fulfill These Orders?",
-                                text: "This will close each order and adjust stock\n\nIt cannot be undone",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true
-                            }).then( function(willFulfill) {
-                                if (willFulfill) {
-                                    var ids = [];
-                                    $('input.select').each(function(i,e){
-                                        var order_id = $(this).data('orderid');
-                                        console.log('order_id: '+ order_id);
-                                        if( $(this).prop('checked') && $('select#courier_'+order_id).val() == config.sydneyCometId )
-                                        {
-                                            ids.push(order_id);
-                                        }
-                                    });
-                                    $.ajax({
-                                        url: '/ajaxfunctions/fulfill-order',
-                                        method: 'post',
-                                        data: {
-                                            order_ids: ids,
-                                            courier_id: config.sydneyCometId
-                                        },
-                                        dataType: 'json',
-                                        beforeSend: function(){
-                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
-                                        },
-                                        success: function(d){
-                                            if(d.error)
-                                            {
-                                                $.unblockUI();
-                                                alert('error');
-                                            }
-                                            else
-                                            {
-                                                location.reload();
-                                            }
-                                        }
-                                    });
-                                }
                             });
                         });
 
