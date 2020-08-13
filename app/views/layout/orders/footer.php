@@ -697,7 +697,6 @@
                         });
                     }
                 },
-                
                 'view-storeorders' : {
                     init: function(){
                         actions.common.init();
