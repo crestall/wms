@@ -699,9 +699,6 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
                             }
                         });
-                        $.validator.addClassRules("item-group", {
-                            wholePallets : true
-                        });
                     }
                 },
                 'address-update':{
