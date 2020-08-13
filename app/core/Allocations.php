@@ -87,7 +87,7 @@ class Allocations{
                             if(isset($details['whole_pallet']) && $details['whole_pallet'])
                             {
                                 //items that use whole bays but have inconsistent numbers
-                                $locations = $this->controller->item->getAvailableLocationsForItem($id, false, $order_id);
+                                $locations = $this->controller->item->getAvailableLocationsForItem($id, true, $order_id);
                                 //echo "Pallet Locations for $id<pre>",print_r($locations),"</pre>";//die();
                                 foreach($locations as $l)
                                 {
