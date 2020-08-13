@@ -83,8 +83,8 @@ class Allocations{
                         {
                             $allocations[$id] += $pick_count;
                             //if(isset($this->request->data['pallet_'.$id]))
-                            //if( $item['palletized'] > 0 )
-                            if(isset($details['whole_pallet']) && $details['whole_pallet'])
+                            if( $item['palletized'] > 0 )
+                            //if(isset($details['whole_pallet']) && $details['whole_pallet'])
                             {
                                 //items that use whole bays but have inconsistent numbers
                                 $locations = $this->controller->item->getAvailableLocationsForItem($id, true, $order_id);
