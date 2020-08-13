@@ -678,6 +678,7 @@
                     {
                         //$('select#client_id').val(0);
                         actions.common.init();
+                        actions.common['remove-all-items']();
                         $('select#client_id').change(function(e){
                             if($(this).val() != "0")
                                 $('div#item_selector').show();
