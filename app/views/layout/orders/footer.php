@@ -14,7 +14,7 @@
                         });
                     },
                     'add-item': function(){
-                        $("a.add").click(function(e){
+                        $("a.add-item").click(function(e){
                             console.log('click');
                             e.preventDefault;
                             var item_count = $(":input.item-searcher").length;
