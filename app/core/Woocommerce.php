@@ -165,6 +165,82 @@ class Woocommerce{
         return $this->return_array;
     }
 
+    
+    public function getOneplateOrder($wcorder_id = false)
+    {
+        if(!$wcorder_id)
+        {
+            return false;
+        }
+        $return_array = array(
+            'error'                 =>  false,
+            'response_string'       =>  '',
+            'import_error'          =>  false,
+            'import_error_string'   =>  ''
+        );
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "IMPORTING SINGLE ONEPLATE ORDER ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $this->woocommerce = new Client(
+            'https://www.oneplate.co',
+            Config::get('ONEPLATEWOOCONSUMERRKEY'),
+            Config::get('ONEPLATEWOOCONSUMERSECRET'),
+            [
+                'wp_api' => true,
+                'version' => 'wc/v2',
+                'query_string_auth' => true
+            ]
+        );
+        $collected_orders = array();
+        try {
+            $page = 1;
+            $next_page = $this->woocommerce->get('orders/'.$wcorder_id);
+            $collected_orders = $next_page;
+            /*
+            while(count($next_page))
+            {
+                ++$page;
+                $next_page = $this->woocommerce->get('orders', array('status' => 'processing', 'orderby' => 'date', 'per_page' => 100, 'page' => $page));
+                $collected_orders = array_merge($collected_orders, $next_page);
+            }
+            */
+            //$collected_orders = $this->woocommerce->get('orders', array('status' => 'processing', 'orderby' => 'date', 'per_page' => 100));
+        } catch (HttpClientException $e) {
+            $this->output .= "There has been an error".PHP_EOL;
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output = "-------------------------------".PHP_EOL;
+            $this->output .=  print_r($e->getRequest(), true) .PHP_EOL;
+            $this->output = "-------------------------------".PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            $this->output .= "-------------------------------".PHP_EOL;
+            $this->output .= "Full output".PHP_EOL;
+            $this->output .=  print_r($e, true) .PHP_EOL;
+            if ($_SERVER['HTTP_USER_AGENT'] == 'FSGAGENT')
+            {
+                Email::sendCronError($e, "One Plate");
+                return;
+            }
+            else
+            {
+                $this->return_array['import_error'] = true;
+                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                return $this->return_array;
+            }
+        }
+        //echo "<pre>",print_r($collected_orders),"</pre><hr/><hr/>";//die();
+        if($orders = $this->procOnePlateOrders($collected_orders))
+        {
+            //echo "<pre>",print_r($orders),"</pre>";die();
+            $this->addOnePlateOrders($orders);
+        }
+        Logger::logOrderImports('order_imports/oneplate', $this->output); //die();
+        //if (php_sapi_name() !='cli')
+        if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+        {
+            return $this->return_array;
+        }
+    }
+
     public function getNuchevOrder($wcorder_id = false)
     {
         if(!$wcorder_id)
