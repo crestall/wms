@@ -68,10 +68,10 @@ $si_string = rtrim($si_string, ",");
                                 <h4>Line Items</h4>
                             </div>
                             <div class="col-md-4">
-                                <a class="add-item" style="cursor:pointer" title="Add Another Item"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                                <a class="add-item" style="cursor:pointer" title="Add Another Item"><h4><i class="fas fa-plus-square text-success"></i> Add another</a></h4>
                             </div>
                             <div class="col-md-4">
-                                <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
+                                <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fas fa-times-square text-danger"></i> Remove all</a></h4>
                             </div>
                         </div>
                         <div id="items_holder" class="p-3 light-grey">
