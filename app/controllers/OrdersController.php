@@ -402,9 +402,9 @@ class OrdersController extends Controller
 
     public function importOneplateOrder()
     {
-        echo "<pre>",print_r($_POST),"</pre>";die();
+        //echo "<pre>",print_r($_POST),"</pre>";die();
         $bberror = false;
-        if(!$response = $this->woocommerce->getNuchevOrder($this->request->data['nuchevwoocommerce_id']))
+        if(!$response = $this->woocommerce->getOneplateOrder($this->request->data['oneplatewoocommerce_id']))
         {
             $bberror = true;
             $feedback = "<h2><i class='far fa-times-circle'></i>No Order ID Supplied";
