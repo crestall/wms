@@ -1069,7 +1069,7 @@ class Item extends Model{
                     FROM
                         items_locations il JOIN locations l ON il.location_id = l.id
                     WHERE
-                        il.item_id = $item_id AND il.qty = {$item['per_pallet']}
+                        il.item_id = $item_id
                 ) a
                 LEFT JOIN
                 (
