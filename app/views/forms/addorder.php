@@ -35,70 +35,60 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     </div>
                 </div>
             <?php endif;?>
-            <div id="item_selector" class="form-group row" style="display:<?php echo $idisp;?>">
-                <div class="bs-callout bs-callout-primary bs-callout-more col-md-11">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Line Items</label>
-                    <div class="col-md-9" id="items_holder">
-                        <?php if(is_array(Form::value('items'))):?>
-                            <?php foreach(Form::value('items') as $i => $item):
-                                $qty = (isset($item['qty']))? $item['qty']: "";
-                                $pallet_qty = (isset($item['pallet_qty']))? $item['pallet_qty']: "";?>
-                                <div class="row item_holder">
-                                    <?php if($i == 0):?>
-                                        <div class="col-sm-1 add-image-holder">
-                                            <a class="add" style="cursor:pointer" title="Add Another Item">
-                                                <i class="fas fa-plus-circle fa-2x text-success"></i>
-                                            </a>
-                                        </div>
-                                    <?php else:?>
-                                        <div class="col-sm-1 delete-image-holder">
-                                            <a class="delete" style="cursor:pointer" title="Remove This Item">
-                                                <i class="fas fa-times-circle fa-2x text-danger"></i>
-                                            </a>
-                                        </div>
-                                    <?php endif;?>
-                                    <div class="col-sm-4">
-                                        <p><input type="text" class="form-control item-searcher" name="items[<?php echo $i;?>][name]" placeholder="Item Name" value="<?php echo $item['name'];?>" /></p>
-                                    </div>
-                                    <div class="col-sm-4 qty-holder">
-                                    <?php if($this->controller->item->isPalletItem($item['id'])):
-                                        $select_values = $this->controller->item->getPalletCountSelect($item['id']);
-                                        //var_dump($select_values);?>
-                                        <div class='col-sm-4'><input type='text' class='form-control number item_qty' name='items[<?php echo $i;?>][qty]' placeholder='Qty' value="<?php echo $qty;?>" /></div>
-                                        <div class='col-sm-8'><select class='form-control selectpicker pallet_qty' name='items[<?php echo $i;?>][pallet_qty]'><option value='0'>Whole Pallet Qty</option>
-                                        <?php foreach($select_values as $sv):
-                                            if($sv['available'] == 0) continue;;?>
-                                            <option <?php if($sv['available'] == $pallet_qty) echo "selected";?>><?php echo $sv['available'];?></option>
-                                        <?php endforeach;?>
-                                        </select>
-                                        </div>
-                                    <?php else:?>
-                                        <input type='text' class='form-control number item_qty' name='items[<?php echo $i;?>][qty]' placeholder='Qty' value="<?php echo $qty;?>"  />
-                                    <?php endif;?>
-                                    </div>
-                                    <div class="col-sm-5 qty-location"></div>
-                                    <input type="hidden" name="items[<?php echo $i;?>][id]" class="item_id" value="<?php echo $item['id'];?>" />
-                                </div>
-                            <?php endforeach;?>
-                        <?php else:?>
-                            <div class="row item_holder">
-                                <div class="col-sm-1 add-image-holder">
-                                    <a class="add" style="cursor:pointer" title="Add Another Item">
-                                        <i class="fas fa-plus-circle fa-2x text-success"></i>
-                                    </a>
-                                </div>
-                                <div class="col-sm-4">
-                                    <p><input type="text" class="form-control item-searcher" name="items[0][name]" placeholder="Item Name" /></p>
-                                </div>
-                                <div class="col-sm-4 qty-holder">
-
-                                </div>
-                                <div class="col-sm-3 qty-location"></div>
-                                <input type="hidden" name="items[0][id]" class="item_id"  />
-                            </div>
-                        <?php endif;?>
+            <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey" style="display:<?php echo $idisp;?>">
+                <div class="row mb-0">
+                    <div class="col-md-4">
+                        <h4>Line Items</h4>
                     </div>
-                    <?php echo Form::displayError('items');?>
+                    <div class="col-md-4">
+                        <a class="add-item" style="cursor:pointer" title="Add Another Item"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                    </div>
+                    <div class="col-md-4">
+                        <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
+                    </div>
+                </div>
+                <div id="items_holder" class="p-3 light-grey">
+                    <?php if(Form::$num_errors > 0 && is_array(Form::value('items'))):
+                        //echo "<pre>",print_r(Form::value('items')),"</pre>";die();
+                        echo Form::displayError('items');
+                        foreach(Form::value('items') as $ind => $ita):?>
+                            <div class="row item_holder">
+                                <div class='col-md-1 delete-image-holder'>
+                                    <a class='delete' title='remove this item'><i class='fad fa-times-square text-danger'></i><span class="inst">Remove</span></a>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><input type="text" class="form-control item-searcher" name="items[<?php echo $ind;?>][name]" placeholder="Item Name" value="<?php echo $ita['name'];?>" /></p>
+                                </div>
+                                <div class="col-md-2 qty-holder">
+                                    <?php if(isset($ita['whole_pallet']) && $ita['whole_pallet']):?>
+                                        <input type='hidden' name='items[<?php echo $ind;?>][whole_pallet]' value='1' />
+                                        <select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items[<?php echo $ind;?>][qty]'>
+                                            <option value='0'>Quantity</option>
+                                            <?php echo $this->controller->item->getSelectLocationAvailableCounts($ita['id'], $ita['qty']);?>
+                                        </select>
+                                    <?php else:?>
+                                        <input type='text' class='form-control number item_qty' name='items[<?php echo $ind;?>][qty]' placeholder='Qty' value="<?php echo $ita['qty'];?>" />
+                                    <?php endif;?>
+                                </div>
+                                <div class="col-md-3 qty-location"></div>
+                                <input type="hidden" name="items[<?php echo $ind;?>][id]" class="item_id" value="<?php echo $ita['id'];?>"  />
+                            </div>
+                        <?php endforeach;?>
+                    <?php else:?>
+                        <div class="row item_holder">
+                            <div class='col-md-1 delete-image-holder'>
+                                <a class='delete' title='remove this item' style="display:none;"><i class='fad fa-times-square text-danger'></i><span class="inst">Remove</span></a>
+                            </div>
+                            <div class="col-md-6">
+                                <p><input type="text" class="form-control item-searcher" name="items[0][name]" placeholder="Item Name" /></p>
+                            </div>
+                            <div class="col-md-2 qty-holder">
+
+                            </div>
+                            <div class="col-md-3 qty-location"></div>
+                            <input type="hidden" name="items[0][id]" class="item_id"  />
+                        </div>
+                    <?php endif;?>
                 </div>
             </div>
             <div class="form-group row">
