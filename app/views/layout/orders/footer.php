@@ -15,6 +15,7 @@
                     },
                     'add-item': function(){
                         $("a.add").click(function(e){
+                            console.log('click');
                             e.preventDefault;
                             var item_count = $(":input.item-searcher").length;
                             //console.log('items: '+item_count);
