@@ -38,8 +38,8 @@
         <script src="https://unpkg.com/sticky-table-headers"></script>
         <!-- WMS JavaScript -->
         <script src="/scripts/common.js?t=<?php echo time();?>"></script>
-
-
+        <!-- FontAwesome Pro Kit -->
+        <script src="https://kit.fontawesome.com/f8feb6c33e.js" crossorigin="anonymous"></script>
 
         <!-- Assign CSRF Token to JS variable -->
         <?php Config::setJsConfig('csrfToken', Session::generateCsrfToken()); ?>
