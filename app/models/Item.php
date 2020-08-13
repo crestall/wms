@@ -174,6 +174,7 @@ class Item extends Model{
             $rows[$i['item_id']]['locations'][$i['location_id']]['onhand'] = $i['qty'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['allocated'] = $i['allocated'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['qc_count'] = $i['qc_count'];
+            $rows[$i['item_id']]['locations'][$i['location_id']]['oversize'] = $i['oversize'];
         }
         return $rows;
     }
@@ -192,13 +193,13 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "  SELECT
-                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.solar_type_id
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.oversize
                 FROM
                 (
                     SELECT
-                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.solar_type_id
+                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, cb.oversize
                     FROM
-                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
+                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id LEFT JOIN clients_bays cb ON cb.location_id = l.id AND cb.date_removed = 0
                     WHERE
                         i.client_id = $client_id AND i.active = $active
                 ) a";
