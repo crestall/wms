@@ -98,7 +98,7 @@ class Item extends Model{
         return $id;
     }
 
-    public function getPalletCountSelect($item_id)
+    public function getPalletCountSelect($item_id, $order_id = 0)
     {
         $db = Database::openConnection();
         if($this->isSolarItem($item_id))
@@ -112,7 +112,7 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "
-            SELECT DISTINCT ( a.available - IFNULL(b.qty, 0) - IFNULL(c.allocated, 0) ) AS available
+            SELECT DISTINCT ( a.available - IFNULL(b.qty, 0) ) AS available
             FROM
             (
                 SELECT (il.qty - il.qc_count) AS available, il.location_id
@@ -124,20 +124,13 @@ class Item extends Model{
                 SELECT oi.qty, oi.location_id
                 FROM $items_table oi JOIN $orders_table o ON oi.order_id = o.id
                 WHERE o.status_id != 4
-            ) b
+        ";
+        if($order_id > 0)
+        {
+            $q .= " AND o.id != $order_id";
+        }
+        $q .="    ) b
             ON a.location_id = b.location_id
-            LEFT JOIN
-            (
-                SELECT
-                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
-                FROM
-                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
-                WHERE
-                    o.status_id != 4
-                GROUP BY
-                    oi.location_id, oi.item_id
-            ) c
-            ON a.location_id = c.location_id
             ORDER BY available DESC
         ";
         return ($db->queryData($q));
@@ -181,7 +174,6 @@ class Item extends Model{
             $rows[$i['item_id']]['locations'][$i['location_id']]['onhand'] = $i['qty'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['allocated'] = $i['allocated'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['qc_count'] = $i['qc_count'];
-            $rows[$i['item_id']]['locations'][$i['location_id']]['oversize'] = $i['oversize'];
         }
         return $rows;
     }
@@ -200,13 +192,13 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "  SELECT
-                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.solar_type_id, a.oversize
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.solar_type_id
                 FROM
                 (
                     SELECT
-                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.solar_type_id, cb.oversize
+                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.solar_type_id
                     FROM
-                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id LEFT JOIN clients_bays cb ON cb.location_id = il.location_id AND cb.date_removed = 0 AND cb.client_id = i.client_id
+                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
                     WHERE
                         i.client_id = $client_id AND i.active = $active
                 ) a";
@@ -1077,14 +1069,14 @@ class Item extends Model{
                     FROM
                         items_locations il JOIN locations l ON il.location_id = l.id
                     WHERE
-                        il.item_id = $item_id AND il.qty = {$item['per_pallet']}
+                        il.item_id = $item_id
                 ) a
                 LEFT JOIN
                 (
                     SELECT
                         COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
-                        $items_table oi JOIN $order_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                        $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
                         o.status_id != 4 AND o.id != $order_id
                     GROUP BY
