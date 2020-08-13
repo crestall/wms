@@ -566,53 +566,30 @@
                         {
                             var item_count = ($(":input.item-searcher").length) - 1;
                             var $holder = $(event.target).closest('div.item_holder');
-                            var qty_html;
-                            var inst;
+                            var qty_html = "<input type='hidden' name='items["+item_count+"][whole_pallet]' value='1' />";
+                            var inst = "";
                             if(ui.item.palletized > 0)
                             {
                                 var pallet_vals = ui.item.select_values.split(',');
-                                var line_item_vals = ui.item.max_values.split(',');
-                                qty_html = "<div class='col-sm-4'><input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' /></div>";
-                                qty_html += "<div class='col-sm-8'><select class='form-control selectpicker pallet_qty' name='items["+item_count+"][pallet_qty]'><option value='0'>Whole Pallet Qty</option>";
+                                qty_html += "<select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items["+item_count+"][qty]'><option value='0'>Quantity</option>";
                                 pallet_vals.forEach(function(pallet_val) {
                                     //console.log(pallet_val);
                                     qty_html += "<option>"+pallet_val+"</option>";
                                 });
-                                qty_html += "</select></div>";
+                                qty_html += "</select>";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available</p>";
-                                inst += "<p class='inst'>There are<br/>";
-                                var li = 0;
-                                var count = 1;
-                                line_item_vals.forEach(function(max){
-                                    if(max == li)
-                                    {
-                                        ++count;
-                                    }
-                                    else if(li == 0)
-                                    {
-                                        //first pass
-                                        //++count;
-                                    }
-                                    else
-                                    {
-                                        inst += "<strong>"+count+"</strong> pallets with "+li+" items,<br/>";
-                                        count = 1;
-                                    }
-                                    li = max;
-                                });
-                                inst += "<strong>"+count+"</strong> pallets with "+li+" items</p>";
                                 inst += "<p class='inst'>Select whole pallet amounts from the dropdown selector <br/>";
-                                inst += "<strong>OR</strong><br/>If you require us to break a pallet, enter an amount in the 'Qty' text field</p>";
                             }
                             else
                             {
-                                qty_html = "<input type='text' class='form-control number item_qty' name='items["+item_count+"][qty]' placeholder='Qty' />";
+                                qty_html = "<input type='text' class='form-control number item_qty' data-rule-max='"+ui.item.total_available+"' name='items["+item_count+"][qty]' placeholder='Qty' />";
                                 inst = "<p class='inst'>There are currently <strong>"+ui.item.total_available+"</strong> of these available";
-                                inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
+                                //inst += "<br/>Maximum allowed line item values are <strong>"+ui.item.max_values+"</strong></p>";
                             }
                             $holder.find('div.qty-holder').html(qty_html).find('input').focus();
                             $holder.find('input.item_id').val(ui.item.item_id);
                             $holder.find('div.qty-location').html(inst);
+                            $holder.find('div.delete-image-holder a').fadeIn();
                             itemsUpdater.itemDelete();
                             itemsUpdater.updateValidation();
                             $holder.find('input.item_qty').focus();
