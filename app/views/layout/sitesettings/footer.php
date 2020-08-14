@@ -77,7 +77,6 @@
                                 }
                             });
                         });
-
                         $("a.reactivate").off('click').click(function(e){
                             var $but = $(this);
                             var thislocationid = $but.data('locationid');
