@@ -32,7 +32,7 @@ $country = Form::value('country');
                         </div>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="has_reps" name="has_reps" <?php if($client['has_reps'] > 0) echo "checked";?> />
+                        <input class="custom-control-input" type="checkbox" id="has_reps" name="has_reps" />
                         <label class="custom-control-label col-md-3" for="has_reps">Manage Sales Reps</label>
                     </div>
                     <div class="form-group row">
