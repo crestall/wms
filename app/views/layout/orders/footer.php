@@ -976,11 +976,11 @@
                     				if( $(this).prop('checked') && courier_id >= 0)
                     				{
                     					//ids.push($(this).data('orderid'));
-                                        var ip = ( $('#ignoreprice_'+thisid).prop('checked') )? 1: 0;
+                                        //var ip = ( $('#ignoreprice_'+thisid).prop('checked') )? 1: 0;
                                         var ent = {
                                             order_id: thisid,
                                             courier_id: courier_id,
-                                            ip: ip
+                                            ip: 1                   //removed this check
                                         }
                     					//ids[thisid][courier_id] = ip;
                                         ids.push(ent);
