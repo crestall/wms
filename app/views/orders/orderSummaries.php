@@ -14,7 +14,7 @@ $newer_from = $from + $seven_days;
                 <a href="/orders/order-summaries/from=<?php echo $newer_from;?>" class="btn btn-outline-secondary">Show Newer Summaries</a>
             </div>
             <div class="col-4">
-                <a href="/orders/order-summaries/from=<?php echo $newer_from;?>" class="btn btn-outline-secondary">Show Most Recent</a>
+                <a href="/orders/order-summaries" class="btn btn-outline-secondary">Show Most Recent</a>
             </div>
         </div>
         <?php if(count($summaries)):?>
