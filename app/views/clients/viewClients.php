@@ -38,7 +38,7 @@
                                 <td data-label="Contact Name"><?php echo $c['contact_name'];?></td>
                                 <td data-label="Contact Email"><?php echo $c['billing_email'];?></td>
                                 <td>
-                                    <p><a class="btn btn-ouline-secondary" href="/clients/edit-client/client=<?php echo $c['id'];?>" >Edit Details</a></p>
+                                    <p><a class="btn btn-outline-secondary" href="/clients/edit-client/client=<?php echo $c['id'];?>" >Edit Details</a></p>
                                 </td>
                             </tr>
                         <?php ++$i; endforeach;?>
