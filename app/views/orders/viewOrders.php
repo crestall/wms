@@ -237,12 +237,12 @@
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
         					<!--td data-label="Items" class="number"><?php //echo $item_count;?></td-->
                             <td data-label="Items">
-                                <div class="item_list">
+                                <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                     <?php foreach($ifo as $i):?>
                                         <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
                                     <?php endforeach;?>
                                 </div>
-                                <div class="item_total">
+                                <div class="item_total text-right">
                                     Total Items: <?php echo $item_count;?>
                                 </div>
                             </td>
