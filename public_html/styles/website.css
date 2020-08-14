@@ -171,6 +171,11 @@ View Orders
 div.view-orders-buttons div a{
     white-space: normal;
 }
+
+table.client_orders_table div.item_list{
+    font-size: smaller;
+}
+
     /*only for bigger sizes*/
     @media screen and (min-width: 768px){
         div.view-orders-buttons div a{
