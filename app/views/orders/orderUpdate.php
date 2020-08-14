@@ -250,10 +250,10 @@ if(!$error)
                                             <select id="courier_id" name="courier_id" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">-- Select One --</option><?php echo $this->controller->courier->getSelectCouriers(Form::value('courier_id'), false, true);?></select>
                                         </div>
                                     </div>
-                                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <!--div class="form-group row custom-control custom-checkbox custom-control-right">
                                         <input class="custom-control-input" type="checkbox" id="ignore_pc" name="ignore_pc" />
                                         <label class="custom-control-label col-md-6" for="ignore_pc">Ignore Price Check</label>
-                                    </div>
+                                    </div-->
                                     <div id="local-details" style="display:<?php echo $local_display;?>">
                                         <input type="hidden" name="local_display" id="local_display" value="1" <?php if(empty(Form::value('local_display'))) echo "disabled";?> />
                                         <div class="form-group row">
