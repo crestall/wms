@@ -173,7 +173,7 @@ div.view-orders-buttons div a{
 }
 
 table.client_orders_table div.item_list{
-    font-size: smaller;
+    font-size: 10px;
 }
 
     /*only for bigger sizes*/
