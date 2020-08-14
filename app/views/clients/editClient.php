@@ -139,22 +139,19 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                             <input type="file" name="client_logo" id="client_logo" />
                             <?php echo Form::displayError('client_logo');?>
                         </div>
-                        <?php if( !is_null($client['logo']) && !empty($client['logo']) ) :?>
-                            </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Current Logo</label>
-                                    <div class="col-md-4">
-                                        <img src="/images/client_logos/tn_<?php echo $client['logo'];?>" />
-                                    </div>
-                                </div>
-                                <div class="form-check form-group row">
-                                    <label class="col-md-3 col-form-label" for="delete_logo">Delete Current Logo</label>
-                                    <div class="col-md-6 checkbox checkbox-default">
-                                        <input class="form-check-input styled" type="checkbox" id="delete_logo" name="delete_logo" />
-                                        <label for="delete_logo"></label>
-                                    </div>
-                        <?php endif;?>
                     </div>
+                    <?php if( !is_null($client['logo']) && !empty($client['logo']) ) :?>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Current Logo</label>
+                            <div class="col-md-4">
+                                <img src="/images/client_logos/tn_<?php echo $client['logo'];?>" />
+                            </div>
+                        </div>
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="delete_logo" name="delete_logo" />
+                            <label class="custom-control-label col-md-3" for="delete_logo">Delete Current Logo</label>
+                        </div>
+                    <?php endif;?>
                     <h3>Address</h3>
                     <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                     <input type="hidden" name="client_id" value="<?php echo $client['id'];?>" />
