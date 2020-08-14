@@ -172,8 +172,8 @@ div.view-orders-buttons div a{
     white-space: normal;
 }
 
-table.client_orders_table div.item_list{
-    font-size: 10px;
+table#client_orders_table div.item_list{
+    font-size: smaller;
 }
 
     /*only for bigger sizes*/
