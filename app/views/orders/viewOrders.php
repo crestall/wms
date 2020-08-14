@@ -175,7 +175,8 @@
                         $link = ( $co['store_order'] == 1 )? "/orders/big-bottle-store-orders/order={$co['xero_invoiceno']}":"/orders/order-update/order={$co['id']}";
                         $comments = !empty($co['3pl_comments']);
                         $pick_notice = !empty($co['pick_notices']);
-                        $item_count = $this->controller->order->getItemCountForOrder($co['id']);
+                        //$item_count = $this->controller->order->getItemCountForOrder($co['id']);
+                        $ifo = $this->controller->order->getItemsForOrder($co['id']);
                         $client_name = $this->controller->client->getClientName($co['client_id']);
                         $items = $this->controller->order->getItemsForOrder($co['id']);
         				$fulfill = true;
@@ -234,7 +235,14 @@
         					<td data-label="Client Name"><?php echo $client_name;?></td>
         	                <td class="filterable" data-label="Ship To"><?php echo $ship_to;?></td>
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
-        					<td data-label="Items" class="number"><?php echo $item_count;?></td>
+        					<!--td data-label="Items" class="number"><?php echo $item_count;?></td-->
+                            <td data-label="Items">
+                                <div class="item_list">
+                                    <?php foreach($ifo as $i):?>
+                                        <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                    <?php endforeach;?>
+                                </div>
+                            </td>
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
         					<!--td data-label="Status"><?php echo $order_status;?></td-->
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
