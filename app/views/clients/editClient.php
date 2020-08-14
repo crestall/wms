@@ -11,7 +11,7 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
             <div class="col-lg-12">
-                <p><a href="/clients/view-clients/" class="btn btn-primary">Return to Client List</a></p>
+                <p><a href="/clients/view-clients/" class="btn btn-outline-fsg">Return to Client List</a></p>
             </div>
             <div class=col-lg-12>
                 <h2>Editing <?php echo $client['client_name'];?></h2>
