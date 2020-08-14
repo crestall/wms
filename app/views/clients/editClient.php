@@ -52,8 +52,8 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col">In/Out Charge per Pallet</label>
-                        <div class="col">
+                        <label class="col-md-3">In/Out Charge per Pallet</label>
+                        <div class="col -md-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
