@@ -553,12 +553,11 @@ class Order extends Model{
         return $db->countData('orders', array('eparcel_order_id' => $summary_id));
     }
 
-    public function getEparcelSummaries($all = false)
+    public function getEparcelSummaries($from)
     {
         $db = Database::openConnection();
-        $seven_ago = strtotime("7 days ago");
-        $dates = ($all)? "" : "AND create_date >= $seven_ago";
-        $q = "SELECT * FROM eparcel_orders WHERE order_summary IS NOT NULL $dates ORDER BY create_date DESC";
+        $to = $from + 7*24*60*60;
+        $q = "SELECT * FROM eparcel_orders WHERE order_summary IS NOT NULL AND create_date >= $from AND create_date <= $to ORDER BY create_date DESC";
         return $db->queryData($q);
     }
 
