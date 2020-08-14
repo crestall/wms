@@ -159,7 +159,7 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">&nbsp;</label>
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-outline-secondary">Edit Client</button>
+                            <button type="submit" class="btn btn-outline-secondary">Save Changes</button>
                         </div>
                     </div>
                 </form>
