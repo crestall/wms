@@ -8,13 +8,13 @@ $newer_from = $from + $seven_days;
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
             <div class="col-4">
-                <p><a href="/orders/order-summaries/from=<?php echo $older_from;?>" class="btn btn-outline-secondary">Show Older Summaries</a>
+                <a href="/orders/order-summaries/from=<?php echo $older_from;?>" class="btn btn-outline-secondary">Show Older Summaries</a>
             </div>
             <div class="col-4">
-                <p><a href="/orders/order-summaries/from=<?php echo $newer_from;?>" class="btn btn-outline-secondary">Show Newer Summaries</a></p>
+                <a href="/orders/order-summaries/from=<?php echo $newer_from;?>" class="btn btn-outline-secondary">Show Newer Summaries</a>
             </div>
             <div class="col-4">
-                p><a href="/orders/order-summaries/from=<?php echo $newer_from;?>" class="btn btn-outline-secondary">Show Most Recent</a></p>
+                <a href="/orders/order-summaries/from=<?php echo $newer_from;?>" class="btn btn-outline-secondary">Show Most Recent</a>
             </div>
         </div>
         <?php if(count($summaries)):?>
