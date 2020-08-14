@@ -18,8 +18,8 @@
                     <img class='loading' src='/images/preloader.gif' alt='loading...' />
                 </div>
             </div>
-            <div class="row" id="table_holder" style="display:none">
-                <div class="col-lg-12">
+
+                <div class="col-lg-12" id="table_holder" style="display:none">
                     <table id="client_list_table" class="table-striped table-hover">
                         <thead>
                         	<tr>
@@ -45,7 +45,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
         <?php else:?>
             <div class="row">
                 <div class="col-lg-12">
