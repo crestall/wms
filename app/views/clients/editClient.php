@@ -90,6 +90,10 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                             <?php echo Form::displayError('billing_email');?>
                         </div>
                     </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="ufa" name="ufa" />
+                        <label class="custom-control-label col-md-3" for="ufa">Use Billing Details for all</label>
+                    </div>
                     <div class="form-group row">
                         <div class="form-check">
                             <label class="form-check-label col-md-3" for="ufa">Use Billing Details for all</label>
