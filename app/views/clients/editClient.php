@@ -95,15 +95,6 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                         <label class="custom-control-label col-md-3" for="ufa">Use Billing Details for all</label>
                     </div>
                     <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="ufa">Use Billing Details for all</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="ufa" name="ufa" />
-                                <label for="ufa"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-md-3 col-form-label">Sales Contact Name</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="sales_contact" id="sales_contact" value="<?php echo $client['sales_contact'];?>" />

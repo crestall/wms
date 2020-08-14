@@ -93,7 +93,7 @@
                                     $.post('/ajaxfunctions/reactivateLocation', data, function(d){
                                         $but.closest('p').html("<a class='btn btn-danger deactivate' data-locationid='"+thislocationid+"'>Deactivate Location</a>");
                                         $.unblockUI();
-                                        actions.common.userActivation();
+                                        actions.common.locationActivation();
                                     });
                                 }
                             });
