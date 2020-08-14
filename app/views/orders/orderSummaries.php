@@ -6,7 +6,7 @@ $newer_from = $from + $seven_days;
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-4">
                 <a href="/orders/order-summaries/from=<?php echo $older_from;?>" class="btn btn-outline-secondary">Show Older Summaries</a>
             </div>
