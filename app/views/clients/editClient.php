@@ -10,10 +10,10 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col">
                 <p><a href="/clients/view-clients/" class="btn btn-outline-fsg">Return to Client List</a></p>
             </div>
-            <div class=col-lg-12>
+            <div class=col>
                 <h2>Editing <?php echo $client['client_name'];?></h2>
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
                 <?php echo Form::displayError('general');?>
