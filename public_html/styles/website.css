@@ -176,6 +176,11 @@ table#client_orders_table div.item_list{
     font-size: smaller;
 }
 
+table#client_orders_table div.item_list span.iname{
+    font-weight: bold;
+    margin-right: 2px;
+}
+
     /*only for bigger sizes*/
     @media screen and (min-width: 768px){
         div.view-orders-buttons div a{
