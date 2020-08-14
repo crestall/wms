@@ -83,7 +83,7 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                     </div>
                     <!--p><label class="col-md-3 col-form-label">Phone:</label><div class="col-md-4"><input type="text" class="form-control required" name="phone" id="phone" value="<?php echo Form::value('phone');?>" /></p-->
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">
+                        <label class="col-md-3">
                         <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Billing Email</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control required email" name="billing_email" id="billing_email" value="<?php echo $client['billing_email'];?>" />
@@ -95,46 +95,46 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                         <label class="custom-control-label col-md-3" for="ufa">Use Billing Details for all</label>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Sales Contact Name</label>
+                        <label class="col-md-3">Sales Contact Name</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="sales_contact" id="sales_contact" value="<?php echo $client['sales_contact'];?>" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Sales Reports Email</label>
+                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Sales Reports Email</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control required email" name="sales_email" id="sales_email" value="<?php echo $client['sales_email'];?>" />
                             <?php echo Form::displayError('sales_email');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Inventory Contact Name</label>
+                        <label class="col-md-3">Inventory Contact Name</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="inventory_contact" id="inventory_contact" value="<?php echo $client['inventory_contact'];?>" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Inventory Reports Email</label>
+                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Inventory Reports Email</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control required email" name="inventory_email" id="inventory_email" value="<?php echo $client['inventory_email'];?>" />
                             <?php echo Form::displayError('inventory_email');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Deliveries Contact Name</label>
+                        <label class="col-md-3">Deliveries Contact Name</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="deliveries_contact" id="deliveries_contact" value="<?php echo $client['deliveries_contact'];?>" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Deliveries Email</label>
+                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Deliveries Email</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control required email" name="deliveries_email" id="deliveries_email" value="<?php echo $client['deliveries_email'];?>" />
                             <?php echo Form::displayError('deliveries_email');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Logo</label>
+                        <label class="col-md-3">Logo</label>
                         <div class="col-md-4">
                             <input type="file" name="client_logo" id="client_logo" />
                             <?php echo Form::displayError('client_logo');?>
