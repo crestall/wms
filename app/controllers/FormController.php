@@ -2655,10 +2655,10 @@ class FormController extends Controller {
         }
         else
         {
-            $ip = (isset($ignore_pc))? 1 : 0;
+            //$ip = (isset($ignore_pc))? 1 : 0;    deprecated functionality
             $courier_name = !$this->dataSubbed($courier_name)? "":$courier_name;
             Session::set('courierfeedback',"<h3><i class='far fa-check-circle'></i>Courier has been assigned</h3>");
-            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, $ip);
+            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1);
         }
         if(Session::getAndDestroy('showcouriererrorfeedback') == false)
         {
