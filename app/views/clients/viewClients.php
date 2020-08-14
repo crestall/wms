@@ -1,5 +1,5 @@
 <?php
-    $link_text = (!$active)? "<a href='/clients/view-clients' class='btn btn-primary'>View Active Clients</a>" : "<a href='/clients/view-clients/active=0' class='btn btn-warning'>View Inactive Clients</a>";
+    $link_text = (!$active)? "<a href='/clients/view-clients' class='btn btn-outline-fsg'>View Active Clients</a>" : "<a href='/clients/view-clients/active=0' class='btn btn-outline-fsg'>View Inactive Clients</a>";
     $i = 1;
 ?>
 <div id="page-wrapper">
@@ -20,7 +20,7 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-lg-12">
-                    <table id="client_list_table" class="table-striped table-hover" width="100%">
+                    <table id="client_list_table" class="table-striped table-hover">
                         <thead>
                         	<tr>
                                 <th></th>
@@ -38,7 +38,7 @@
                                 <td data-label="Contact Name"><?php echo $c['contact_name'];?></td>
                                 <td data-label="Contact Email"><?php echo $c['billing_email'];?></td>
                                 <td>
-                                    <p><a class="btn btn-primary" href="/clients/edit-client/client=<?php echo $c['id'];?>" >Edit Details</a></p>
+                                    <p><a class="btn btn-ouline-secondary" href="/clients/edit-client/client=<?php echo $c['id'];?>" >Edit Details</a></p>
                                 </td>
                             </tr>
                         <?php ++$i; endforeach;?>
