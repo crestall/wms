@@ -185,6 +185,10 @@ table#client_orders_table div.item_list span.icount{
     margin-right: 2px;
 }
 
+table#client_orders_table div.item_list span.ilocation{
+    white-space: nowrap;
+}
+
     /*only for bigger sizes*/
     @media screen and (min-width: 768px){
         div.view-orders-buttons div a{
