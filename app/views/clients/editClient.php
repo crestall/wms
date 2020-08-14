@@ -20,48 +20,33 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                 <form id="client_edit" method="post" enctype="multipart/form-data" action="/form/procClientEdit">
                     <h3>Client Details</h3>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Client Name</label>
+                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Client Name</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control required" name="client_name" id="client_name" value="<?php echo $client['client_name'];?>" />
                             <?php echo Form::displayError('client_name');?>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="active">Active</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="active" name="active" <?php if($client['active'] > 0) echo "checked";?> />
-                                <label for="active"></label>
-                            </div>
-                        </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="active" name="active" <?php if($client['active'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="active">Active</label>
+                    </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="has_reps" name="has_reps" <?php if($client['has_reps'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="has_reps">Manage Sales Reps</label>
+                    </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="use_bubblewrap" name="use_bubblewrap" <?php if($client['use_bubblewrap'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="use_bubblewrap">Add Bubblewrap To Packing</label>
                     </div>
                     <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="has_reps">Manage Sales Reps</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="has_reps" name="has_reps" <?php if($client['has_reps'] > 0) echo "checked";?> />
-                                <label for="has_reps"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="use_bubblewrap">Add Bubblewrap To Packing</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="use_bubblewrap" name="use_bubblewrap" <?php if($client['use_bubblewrap'] > 0) echo "checked";?> />
-                                <label for="use_bubblewrap"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Courier Reference</label>
+                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Courier Reference</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control required" id="ref_1" name="ref_1" value="<?php echo$client['ref_1'];?>" />
                             <?php echo Form::displayError('ref_1');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Products Description</label>
+                        <label class="col-md-3">Products Description</label>
                         <div class="col-md-4">
                             <input type="text" placeholder="Used by courier for labels" class="form-control" name="products_description" id="products_description" value="<?php echo$client['products_description'];?>" />
                         </div>
