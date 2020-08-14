@@ -331,14 +331,15 @@ class OrdersController extends Controller
 
     public function orderSummaries()
     {
-        $summaries = $this->order->getEparcelSummaries(isset($this->request->params['args']['all']));
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from']: strtotime("7 days ago");
+        $summaries = $this->order->getEparcelSummaries($from);
         //render the page
         Config::setJsConfig('curPage', "order-summaries");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderSummaries.php', [
             'page_title'    =>  "eParcel Order Summaries",
             'pht'           =>  ": eParcel Order Summaries",
             'summaries'     =>  $summaries,
-            'all'           =>  isset($this->request->params['args']['all'])
+            'from'          =>  $from
         ]);
     }
 
