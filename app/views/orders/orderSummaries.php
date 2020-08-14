@@ -1,14 +1,20 @@
+<?php
+$seven_days = 7*24*60*60;
+$older_from = $from - $seven_days;
+$newer_from = $from + $seven_days;
+?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
-            <div class="col-lg-4">
-                <?php if($all):?>
-                    <p><a href="/orders/order-summaries" class="btn btn-secondary">Show Recent Summaries</a>
-                <?php else:?>
-                    <p><a href="/orders/order-summaries/all=true" class="btn btn-secondary">Show All Summaries</a><br/>
-                    <span class="inst">(this could take a while to load)</span> </p>
-                <?php endif;?>
+            <div class="col-4">
+                <p><a href="/orders/order-summaries/from=<?php echo $older_from;?>" class="btn btn-outline-secondary">Show Older Summaries</a>
+            </div>
+            <div class="col-4">
+                <p><a href="/orders/order-summaries/from=<?php echo $newer_from;?>" class="btn btn-outline-secondary">Show Newer Summaries</a></p>
+            </div>
+            <div class="col-4">
+                p><a href="/orders/order-summaries/from=<?php echo $newer_from;?>" class="btn btn-outline-secondary">Show Most Recent</a></p>
             </div>
         </div>
         <?php if(count($summaries)):?>
