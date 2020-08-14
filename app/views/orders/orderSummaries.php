@@ -7,13 +7,13 @@ $newer_from = $from + $seven_days;
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row mb-3">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <a href="/orders/order-summaries/from=<?php echo $older_from;?>" class="btn btn-outline-secondary">Show Older Summaries</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <a href="/orders/order-summaries/from=<?php echo $newer_from;?>" class="btn btn-outline-secondary">Show Newer Summaries</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <a href="/orders/order-summaries" class="btn btn-outline-secondary">Show Most Recent</a>
             </div>
         </div>
