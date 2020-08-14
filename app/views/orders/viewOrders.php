@@ -235,7 +235,7 @@
         					<td data-label="Client Name"><?php echo $client_name;?></td>
         	                <td class="filterable" data-label="Ship To"><?php echo $ship_to;?></td>
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
-        					<!--td data-label="Items" class="number"><?php echo $item_count;?></td-->
+        					<!--td data-label="Items" class="number"><?php //echo $item_count;?></td-->
                             <td data-label="Items">
                                 <div class="item_list">
                                     <?php foreach($ifo as $i):?>
