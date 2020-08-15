@@ -587,7 +587,15 @@ highlighting sections
 
 /********
 bootsrap adjustments
-*******  */
+********/
+    /** Breadcrumbs **/
+    .breadcrumb-item + .breadcrumb-item::before{
+        content: "|";
+    }
+
+    .breadcrumb-item:first-child + .breadcrumb-item::before{
+            content: ">";
+        }
     /** Dashed Border **/
     .border-bottom-dashed{
         border-bottom-style: dashed !important;
