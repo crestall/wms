@@ -1,5 +1,4 @@
 <?php
-
 ?>
 <div class="mr-auto">
     <nav aria-label="breadcrumb">
