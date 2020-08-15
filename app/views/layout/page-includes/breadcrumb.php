@@ -3,7 +3,7 @@
 ?>
 <div class="mr-auto">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb blue-grey lighten-4">
+        <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="black-text" href="/">Home</a></li>
             <li class="breadcrumb-item"><a class="black-text" href="/orders">Orders</a></li>
             <li class="breadcrumb-item"><a class="black-text" href="#">No arrows for these</a></li>
