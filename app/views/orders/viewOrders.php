@@ -15,7 +15,6 @@
     <div id="page_container" class="container-xxl">
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/breadcrumb.php");?>
     <?php if($user_role == "admin" || $user_role == "super admin"):?>
         <div class="row view-orders-buttons" >
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
