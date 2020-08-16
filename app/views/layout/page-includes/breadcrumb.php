@@ -21,7 +21,7 @@ if(count($pages))
             echo "<p>Will do breadcrumbs for $section</p>";
             $Section = ucwords(str_replace("-", " ", $section));
             $bcs[] = array(
-                'icon'      => $spages['default-icon']['icon'],
+                'icon'      => '',
                 'p_name'    => $Section,
                 'link'      => "/$section"
             );
