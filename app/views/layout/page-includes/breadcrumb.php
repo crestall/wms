@@ -46,7 +46,7 @@ if(count($pages))
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <?php foreach($bcs as $bc):?>
-                <li class="breadcrumb-item"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li>></li>
+                <li class="breadcrumb-item"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li></li>
             <?php endforeach;?>
         </ol>
     </nav>
