@@ -1,5 +1,5 @@
 <?php
-echo "<pre>",print_r($pages),"</pre>";
+//echo "<pre>",print_r($pages),"</pre>";
 $this_page = Config::get('curPage');
 echo "this page is $this_page";
 if(count($pages))
@@ -21,13 +21,25 @@ if(count($pages))
             echo "<p>Will do breadcrumbs for $section</p>";
             $Section = ucwords(str_replace("-", " ", $section));
             $bcs[] = array(
-                'icon'  => $spages['default-icon']['icon'],
-                'p_name'    =>  $section,
-                'link'      =>
+                'icon'      => $spages['default-icon']['icon'],
+                'p_name'    => $Section,
+                'link'      => "/$section"
             );
+            foreach($pages[$this_page] as $pname => $details)
+            {
+                if(!is_array($details) || !$details['display'])
+                    continue;
+                $p_name = ucwords(str_replace("-", " ", $pname));
+                $bcs[] = array(
+                    'icon'      =>  '',
+                    'p_name'    =>  $p_name,
+                    'link'      =>  "/$section/$pname"
+                );
+            }
             break;
         }
     }
+    echo "<pre>",print_r($bcs),"</pre>";
 }
 ?>
 <div class="mr-auto">
