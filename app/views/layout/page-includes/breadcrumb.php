@@ -6,7 +6,7 @@ if(count($pages))
 {
     $bcs = array(
         array(
-            'icon'      => '<i class="fad fa-home"></i>'
+            'icon'      => '<i class="fad fa-home"></i>',
             'p_name'    => '',
             'link'      => '/'
         )
