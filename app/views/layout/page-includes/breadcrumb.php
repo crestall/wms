@@ -1,7 +1,7 @@
 <?php
 //echo "<pre>",print_r($pages),"</pre>";
-$this_page = Config::get('curPage');
-echo "this page is $this_page";
+//$this_page = Config::get('curPage');
+//echo "this page is $this_page";
 if(count($pages))
 {
     $bcs = array(
@@ -39,7 +39,7 @@ if(count($pages))
             break;
         }
     }
-    echo "<pre>",print_r($bcs),"</pre>";
+    //echo "<pre>",print_r($bcs),"</pre>";
 }
 ?>
 <div class="mr-auto">
