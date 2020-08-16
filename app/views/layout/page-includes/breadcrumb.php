@@ -1,4 +1,5 @@
 <?php
+echo "<pre>",print_r($pages),"</pre>";
 ?>
 <div class="mr-auto">
     <nav aria-label="breadcrumb">
