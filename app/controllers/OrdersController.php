@@ -27,6 +27,7 @@ class OrdersController extends Controller
 
         //render the page
         Config::setJsConfig('curPage', "order-importing");
+        Config::set('curPage', "order-importing");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderImporting.php', [
             'page_title'        =>  "Import Orders From External Sites",
             'pht'               =>  ": Import Orders From Other Sites",
