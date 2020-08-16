@@ -1,5 +1,5 @@
 <?php
-//echo "<pre>",print_r($pages),"</pre>";
+echo "<pre>",print_r($pages),"</pre>";
 $this_page = Config::get('curPage');
 echo "this page is $this_page";
 if(count($pages))
