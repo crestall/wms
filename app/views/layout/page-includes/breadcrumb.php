@@ -17,7 +17,14 @@ if(count($pages))
             continue;
         if(in_array($this_page, $spages))
         {
+            //if($spage == $)
             echo "<p>Will do breadcrumbs for $section</p>";
+            $Section = ucwords(str_replace("-", " ", $section));
+            $bcs[] = array(
+                'icon'  => $spages['default-icon']['icon'],
+                'p_name'    =>  $section,
+                'link'      =>
+            );
             break;
         }
     }
