@@ -36,33 +36,6 @@ class OrdersController extends Controller
         ]);
     }
 
-    public function addSerials()
-    {
-        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
-        $order_id = $order_number = 0;
-        $od = $items = array();
-        if(!empty($this->request->params['args']))
-        {
-            if(isset($this->request->params['args']['order']))
-            {
-                $order_id = $this->request->params['args']['order'];
-                $od = $this->order->getOrderDetail($order_id);
-                $items = $this->order->getItemsForOrderNoLocations($order_id);
-                $order_number = $od['order_number'];
-            }
-        }
-
-        //render the page
-        Config::setJsConfig('curPage', "add-serials");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addSerials.php', [
-            'page_title'    =>  'Add Serial Numbers to Order',
-            'order_id'      =>  $order_id,
-            'order_number'  =>  $order_number,
-            'od'            =>  $od,
-            'items'         =>  $items
-        ]);
-    }
-
     public function importNuchevOrder()
     {
         //echo "<pre>",print_r($_POST),"</pre>";die();
@@ -159,6 +132,7 @@ class OrdersController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "order-dispatching");
+         Config::set('curPage', "order-dispatching");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderDispatching.php', [
             'page_title'    =>  "Order Dispatching"
         ]);
@@ -175,6 +149,7 @@ class OrdersController extends Controller
         $orders = $this->order->getOrdersForClient(Session::getUserClientId(), $from, $to);
         //render the page
         Config::setJsConfig('curPage', "client-orders");
+        Config::set('curPage', "client-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/clientOrders.php', [
             'pht'           =>  ": Orders-".$client['client_name'],
             'page_title'    =>  "Orders For ".$client['client_name'],
@@ -201,6 +176,7 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "address-update");
+        Config::set('curPage', "address-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addressUpdate.php', [
             'pht'           =>  ": Update Address",
             'page_title'    =>  "Update Address",
@@ -215,6 +191,7 @@ class OrdersController extends Controller
         $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         //render the page
         Config::setJsConfig('curPage', "add-order");
+        Config::set('curPage', "add-order");
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addorder.php");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addOrder.php', [
             'page_title'    =>  "Add Order",
@@ -248,6 +225,7 @@ class OrdersController extends Controller
         //echo "<pre>",print_r($order_items),"</pre>";
         //render the page
         Config::setJsConfig('curPage', "items-update");
+        Config::set('curPage', "items-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/itemsUpdate.php', [
             'pht'           =>  ": Update Items For Order",
             'page_title'    =>  "Update Items for Order",
@@ -262,6 +240,7 @@ class OrdersController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "order-packing");
+        Config::set('curPage', "order-packing");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderPacking.php', [
             'page_title'    =>  "Order Packing"
         ]);
@@ -271,6 +250,7 @@ class OrdersController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "order-picking");
+        Config::set('curPage', "order-picking");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderPicking.php', [
             'page_title'    =>  "Order Picking"
         ]);
@@ -287,6 +267,7 @@ class OrdersController extends Controller
         ]);
         //render the page
         Config::setJsConfig('curPage', "order-search");
+        Config::set('curPage', "order-search");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderSearch.php', [
             'page_title'    =>  "Order Search",
             'pht'           =>  ": Order Search",
@@ -319,6 +300,7 @@ class OrdersController extends Controller
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/ordersearch.php",$args);
         //render the page
         Config::setJsConfig('curPage', "order-search-results");
+        Config::set('curPage', "order-search-results");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderSearchResults.php', [
             'page_title'    =>  "Search Results",
             'pht'           =>  ": Oder Search Results",
@@ -336,6 +318,7 @@ class OrdersController extends Controller
         $summaries = $this->order->getEparcelSummaries($from);
         //render the page
         Config::setJsConfig('curPage', "order-summaries");
+        Config::set('curPage', "order-summaries");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderSummaries.php', [
             'page_title'    =>  "eParcel Order Summaries",
             'pht'           =>  ": eParcel Order Summaries",
@@ -380,6 +363,7 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "order-edit");
+        Config::set('curPage', "order-edit");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderEdit.php', [
             'page_title'        =>  "Edit an Order",
             'pht'               =>  ": Edit Order",
@@ -489,6 +473,7 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "order-tracking");
+        Config::set('curPage', "order-tracking");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderTracking.php', [
             'page_title'    =>  "Order Tracking",
             'pht'           =>  ": Order Tracking",
@@ -519,6 +504,7 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "order-detail");
+        Config::set('curPage', "order-detail");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderDetail.php', [
             'page_title'    =>  "Order Detail",
             'pht'           =>  ": Order Detail",
@@ -534,6 +520,7 @@ class OrdersController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "add-bulk-orders");
+        Config::set('curPage', "add-bulk-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addBulkOrders.php', [
             'page_title'    =>  "Import/Bulk Upload Orders",
             'pht'           =>  ": Bulk Import Orders",
@@ -545,6 +532,7 @@ class OrdersController extends Controller
         //For Clients
         //render the page
         Config::setJsConfig('curPage', "bulk-upload-orders");
+        Config::set('curPage', "bulk-upload-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/importOrders.php', [
             'page_title'    =>  "Import/Bulk Upload Orders",
             'pht'           =>  ": Upload Orders",
@@ -586,6 +574,7 @@ class OrdersController extends Controller
         $orders = $this->order->getAllOrders($client_id, $courier_id, $fulfilled, 0, $state);
         //render the page
         Config::setJsConfig('curPage', "view-orders");
+        Config::set('curPage', "view-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/viewOrders.php', [
             'page_title'    =>  $page_title,
             'pht'           =>  ": View Orders",
@@ -634,6 +623,7 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "pickup-update");
+        Config::set('curPage', "pickup-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/pickupUpdate.php', [
             'page_title'        =>  "Update a Pickup",
             'pickup_id'         =>  $pickup_id,
