@@ -438,6 +438,7 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "order-update");
+        Config::set('curPage', "order-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderUpdate.php', [
             'page_title'        =>  "Update an Order",
             'pht'            =>  ": Update Order",
