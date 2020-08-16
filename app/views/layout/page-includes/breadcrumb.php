@@ -25,7 +25,7 @@ if(count($pages))
                 'p_name'    => $Section,
                 'link'      => "/$section"
             );
-            foreach($pages[$this_page] as $pname => $details)
+            foreach($pages[$section] as $pname => $details)
             {
                 if(!is_array($details) || !$details['display'])
                     continue;
