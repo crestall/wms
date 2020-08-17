@@ -24,6 +24,7 @@ class ProductsController extends Controller
     public function addProduct()
     {
         Config::setJsConfig('curPage', "add-product");
+        Config::set('curPage', "add-product");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/addProduct.php',[
             'page_title'    =>  'Add Product'
         ]);
@@ -57,6 +58,7 @@ class ProductsController extends Controller
 
         //render the page
         Config::setJsConfig('curPage', "pack-items-edit");
+        Config::set('curPage', "pack-items-edit");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/packItemsEdit.php',
         [
             'page_title'  =>  "Edit Pack Items",
@@ -96,6 +98,7 @@ class ProductsController extends Controller
 
         //render the page
         Config::setJsConfig('curPage', "collections-edit");
+        Config::set('curPage', "collections-edit");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/collectionsEdit.php',
         [
             'page_title'  =>  "Collection Update",
@@ -114,6 +117,7 @@ class ProductsController extends Controller
         $packing_types = $this->item->getPackingTypesForItem($product_id);
         //render the page
         Config::setJsConfig('curPage', "edit-product");
+        Config::set('curPage', "edit-product");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/editProduct.php',
         [
             'product'       =>  $product_info,
@@ -143,22 +147,11 @@ class ProductsController extends Controller
             }
         }
         Config::setJsConfig('curPage', "view-products");
+        Config::set('curPage', "view-products");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/viewProducts.php',[
             'page_title'    =>  'View Products',
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
-            'products'      =>  $products,
-            'active'        =>  $active
-        ]);
-    }
-
-    public function viewSolarProducts()
-    {
-        $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
-        $products = $this->item->getItemsForClient($this->client->solar_client_id, $active);
-        Config::setJsConfig('curPage', "view-products");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/viewSolarProducts.php',[
-            'page_title'    =>  'View Solar Products',
             'products'      =>  $products,
             'active'        =>  $active
         ]);
