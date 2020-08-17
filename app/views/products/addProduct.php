@@ -1,7 +1,7 @@
 <?php
 $per_pallet_display = (empty(Form::value('palletized')))? "none" : "block";
-//die('form val: '.print_r((array)Form::value('package_type')));
-$client_id = (Session::getUserRole() == "solar admin")? $this->controller->solarordertype->TLJSolarId : Form::value('client_id');
+
+$client_id = Form::value('client_id');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -33,7 +33,7 @@ $client_id = (Session::getUserRole() == "solar admin")? $this->controller->solar
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                         <div class="col-md-4">
-                            <select id="client_id" name="client_id" class="form-control selectpicker" <?php if(Session::getUserRole() == "solar admin") echo "disabled";?>><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                            <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                             <?php echo Form::displayError('client_id');?>
                         </div>
                     </div>
@@ -41,12 +41,6 @@ $client_id = (Session::getUserRole() == "solar admin")? $this->controller->solar
                         <label class="col-md-3 col-form-label" id="type_label">Supplier</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="supplier" id="supplier" value="<?php echo Form::value('supplier');?>" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Solar Supplier</label>
-                        <div class="col-md-4">
-                            <select id="solar_type_id" name="solar_type_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes(Form::value('solar_type_id'));?></select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -63,12 +57,6 @@ $client_id = (Session::getUserRole() == "solar admin")? $this->controller->solar
                             <?php echo Form::displayError('barcode');?>
                         </div>
                     </div>
-                    <!--div class="form-group row">
-                        <label class="col-md-3 col-form-label">Barcode Type</label>
-                        <div class="col-md-4">
-                            <select id="barcode_type" name="barcode_type" class="form-control selectpicker"><?php echo $this->controller->barcodetype->getSelectBarcodeType(Form::value('barcode_type'));?></select>
-                        </div>
-                    </div-->
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Box Barcode</label>
                         <div class="col-md-4">
