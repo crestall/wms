@@ -2,6 +2,7 @@
 //echo "<pre>",print_r($pages),"</pre>";
 $this_page = Config::get('curPage');
 //echo "this page is $this_page";
+$bcs = array();
 if(count($pages))
 {
 
@@ -11,12 +12,10 @@ if(count($pages))
             continue;
         if(in_array($this_page, $spages))
         {
-            $bcs = array(
-                array(
-                    'icon'      => '<i class="fad fa-home"></i>',
-                    'p_name'    => '',
-                    'link'      => '/'
-                )
+            $bcs[] = array(
+                'icon'      => '<i class="fad fa-home"></i>',
+                'p_name'    => '',
+                'link'      => '/'
             );
             //if($spage == $)
             //echo "<p>Will do breadcrumbs for $section</p>";
