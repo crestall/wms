@@ -70,11 +70,13 @@ $client_id = Form::value('client_id');
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Weight</label>
+                        <label class="col-md-3">Weight</label>
                         <div class="col-md-4">
                             <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">KG</span>
+                                </div>
                                 <input type="text" class="form-control number" name="weight" id="weight" value="<?php echo Form::value('weight');?>" />
-                                <span class="input-group-addon">Kg</span>
                             </div>
                             <?php echo Form::displayError('weight');?>
                         </div>
