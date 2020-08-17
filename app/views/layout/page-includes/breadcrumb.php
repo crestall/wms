@@ -18,7 +18,7 @@ if(count($pages))
         if(in_array($this_page, $spages))
         {
             //if($spage == $)
-            echo "<p>Will do breadcrumbs for $section</p>";
+            //echo "<p>Will do breadcrumbs for $section</p>";
             $Section = ucwords(str_replace("-", " ", $section));
             $bcs[] = array(
                 'icon'      => '',
@@ -29,6 +29,7 @@ if(count($pages))
             {
                 if(!is_array($details) || !$details['display'])
                     continue;
+                echo "<pre>$pname",print_r($details),"</pre>";
                 $p_name = ucwords(str_replace("-", " ", $pname));
                 $bcs[] = array(
                     'icon'      =>  '',
