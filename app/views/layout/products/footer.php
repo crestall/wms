@@ -83,20 +83,10 @@
 
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [1,2,3,4,8,9] }
+                                { "orderable": false, "targets": [6,7] }
                             ]
                         } );
 
-                        dataTable.init($('table#view_solar_items_table'), {
-                            "columnDefs": [
-                                { "orderable": false, "targets": [4, 5] }
-                            ],
-                            "drawCallback": function( settings ) {
-                                $('button.update_product').click(function(e){
-                                    actions.update.click(this);
-                                });
-                            }
-                        } );
                         $('button.update_product').click(function(e) {
                             actions.update.click(this);
                         });
