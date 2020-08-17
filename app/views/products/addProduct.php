@@ -139,13 +139,6 @@ $client_id = Form::value('client_id');
                         <input class="custom-control-input" type="checkbox" id="palletized" name="palletized" <?php if(!empty(Form::value('palletized'))) echo "palletized";?> />
                         <label class="custom-control-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Package Type(s)</label>
-                        <div class="col-md-4">
-                            <select id="package_type" name="package_type[]" class="form-control selectpicker" multiple><?php echo $this->controller->packingtype->getSelectPackingTypesMultiple((array)Form::value('package_type'));?></select>
-                            <span class="inst">Select all relevent types</span>
-                        </div>
-                    </div>
                     <div id="type_holder"></div>
                     <div class="row">
                         <div class="col-lg-12">
@@ -153,27 +146,25 @@ $client_id = Form::value('client_id');
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Preferred Pick Location</label>
-                        <div class="col-md-4">
-                            <select id="preferred_pick_location_id" name="preferred_pick_location_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations(Form::value('preferred_pick_location_id'));?></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Low Stock Trigger</label>
+                        <label class="col-md-3">Low Stock Trigger</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control number" name="trigger_point" id="trigger_point" value="<?php echo Form::value('trigger_point');?>" />
-                                <span class="input-group-addon"><em>for warehouse</em></span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><em>for warehouse</em></span>
+                                </div>
                             </div>
                             <?php echo Form::displayError('trigger_point');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Low Stock Warning</label>
+                        <label class="col-md-3">Low Stock Warning</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control number" name="low_stock_warning" id="low_stock_warning" value="<?php echo Form::value('low_stock_warning');?>" />
-                                <span class="input-group-addon"><em>for client</em></span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><em>for client</em></span>
+                                </div>
                             </div>
                             <?php echo Form::displayError('low_stock_warning');?>
                         </div>
@@ -182,12 +173,11 @@ $client_id = Form::value('client_id');
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">&nbsp;</label>
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary">Add Product</button>
+                            <button type="submit" class="btn btn-outline-secondary">Add Product</button>
                         </div>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
