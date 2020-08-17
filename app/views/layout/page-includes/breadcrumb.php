@@ -51,7 +51,7 @@ if(count($pages))
 ?>
 <?php if(count($bcs)):?>
     <div class="mr-auto">
-        <nav aria-label="breadcrumb" class="fixed-top">
+        <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <?php foreach($bcs as $bc):
                     if($bc['active']):?>
