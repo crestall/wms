@@ -1,20 +1,20 @@
 <?php
 //echo "<pre>",print_r($pages),"</pre>";
 $this_page = Config::get('curPage');
-echo "this page is $this_page";
+//echo "this page is $this_page";
 $bcs = array();
 if(count($pages))
 {
 
     foreach($pages as $section => $spages)
     {
-        echo "<pre>",print_r($spages),"</pre>";
+        //echo "<pre>",print_r($spages),"</pre>";
         if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
             continue;
         //if(in_array($this_page, $spages))
         if(array_key_exists($this_page, $spages))
         {
-            echo "$this_page is in the above";
+            //echo "$this_page is in the above";
             $bcs[] = array(
                 'icon'      => '<i class="fad fa-home"></i>',
                 'p_name'    => '',
@@ -22,7 +22,7 @@ if(count($pages))
                 'active'    => false
             );
             //if($spage == $)
-            echo "<p>Will do breadcrumbs for $section</p>";
+            //echo "<p>Will do breadcrumbs for $section</p>";
             $Section = ucwords(str_replace("-", " ", $section));
             $bcs[] = array(
                 'icon'      => '',
