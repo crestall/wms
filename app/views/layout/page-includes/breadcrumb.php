@@ -52,7 +52,7 @@ if(count($pages))
             <ol class="breadcrumb">
                 <?php foreach($bcs as $bc):
                     if($bc['active']):?>
-                        <li class="breadcrumb-item active" aria-current="page"><?php echo $bc['icon'].$bc['p_name'];?>></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo $bc['icon'].$bc['p_name'];?></li>
                     <?php else:?>
                         <li class="breadcrumb-item"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li>
                     <?php endif;?>
