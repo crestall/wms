@@ -1,6 +1,4 @@
 <?php
-$per_pallet_display = (empty(Form::value('palletized')))? "none" : "block";
-
 $client_id = Form::value('client_id');
 ?>
 <div id="page-wrapper">
@@ -118,67 +116,28 @@ $client_id = Form::value('client_id');
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Price</label>
+                        <label class="col-md-3">Price</label>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <span class="input-group-addon">$</span>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
                                 <input type="text" class="form-control" name="price" id="price" value="<?php echo Form::value('price');?>" />
                             </div>
+                            <?php echo Form::displayError('price');?>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="requires_bubblewrap">Requires Bubblewrap</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="requires_bubblewrap" name="requires_bubblewrap" <?php if(!empty(Form::value('requires_bubblewrap'))) echo "checked";?> />
-                                <label for="requires_bubblewrap"></label>
-                            </div>
-                        </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="requires_bubblewrap" name="requires_bubblewrap" <?php if(!empty(Form::value('requires_bubblewrap'))) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="requires_bubblewrap">Requires Bubblewrap</label>
                     </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="pack_item">Pack Item</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="pack_item" name="pack_item" <?php if(!empty(Form::value('pack_item'))) echo "checked";?> />
-                                <label for="pack_item"></label>
-                            </div>
-                        </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="collection" name="collection" <?php if(!empty(Form::value('collection'))) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="collection">Collection</label>
                     </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="collection">Collection</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="collection" name="collection" <?php if(!empty(Form::value('collection'))) echo "checked";?> />
-                                <label for="collection"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="double_bay">Double Bay Item</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="double_bay" name="double_bay" <?php if(!empty(Form::value('double_bay'))) echo "checked";?> />
-                                <label for="double_bay"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="palletized" name="palletized" <?php if(!empty(Form::value('palletized'))) echo "checked";?> />
-                                <label for="palletized"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="per_pallet_holder" style="display: <?php echo $per_pallet_display;?>">
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Number per pallet</label>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control required" name="per_pallet" id="per_pallet" value="<?php echo Form::value('per_pallet');?>" />
-                                <?php echo Form::displayError('per_pallet');?>
-                            </div>
-                        </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="palletized" name="palletized" <?php if(!empty(Form::value('palletized'))) echo "palletized";?> />
+                        <label class="custom-control-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Package Type(s)</label>
