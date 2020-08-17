@@ -43,12 +43,14 @@ if(count($pages))
     //echo "<pre>",print_r($bcs),"</pre>";
 }
 ?>
-<div class="mr-auto">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <?php foreach($bcs as $bc):?>
-                <li class="breadcrumb-item"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li></li>
-            <?php endforeach;?>
-        </ol>
-    </nav>
-</div>
+<?php if count($bcs):?>
+    <div class="mr-auto">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <?php foreach($bcs as $bc):?>
+                    <li class="breadcrumb-item"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li></li>
+                <?php endforeach;?>
+            </ol>
+        </nav>
+    </div>
+<?php endif;?>
