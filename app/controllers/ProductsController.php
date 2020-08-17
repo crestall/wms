@@ -128,10 +128,6 @@ class ProductsController extends Controller
 
     public function viewProducts()
     {
-        if(Session::getUserRole() == "solar admin")
-        {
-            return $this->viewSolarProducts();
-        }
         $client_id = 0;
         $active = 1;
         $client_name = "";
