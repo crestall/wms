@@ -4,19 +4,20 @@ $this_page = Config::get('curPage');
 //echo "this page is $this_page";
 if(count($pages))
 {
-    $bcs = array(
-        array(
-            'icon'      => '<i class="fad fa-home"></i>',
-            'p_name'    => '',
-            'link'      => '/'
-        )
-    );
+
     foreach($pages as $section => $spages)
     {
         if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
             continue;
         if(in_array($this_page, $spages))
         {
+            $bcs = array(
+                array(
+                    'icon'      => '<i class="fad fa-home"></i>',
+                    'p_name'    => '',
+                    'link'      => '/'
+                )
+            );
             //if($spage == $)
             //echo "<p>Will do breadcrumbs for $section</p>";
             $Section = ucwords(str_replace("-", " ", $section));
