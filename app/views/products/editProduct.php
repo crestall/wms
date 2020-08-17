@@ -18,11 +18,11 @@ $client_id = $product['client_id'];
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
         <div class="row">
-            <div class="col-lg-3">
-                <a class="btn btn-primary" href="/inventory/view-inventory/client=<?php echo $client_id;?>">Return to Client Inventory</a>
+            <div class="col-6">
+                <a class="btn btn-outline-fsg" href="/inventory/view-inventory/client=<?php echo $client_id;?>">Return to Client Inventory</a>
             </div>
-            <div class="col-lg-3">
-                <a class="btn btn-primary" href="/products/view-products/client=<?php echo $client_id;?>">Return to Client Products</a>
+            <div class="col-6 text-right">
+                <a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>">Return to Client Products</a>
             </div>
         </div>
         <div class="row">
