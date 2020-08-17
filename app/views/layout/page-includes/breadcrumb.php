@@ -43,7 +43,7 @@ if(count($pages))
             break;
         }
     }
-    echo "<pre>",print_r($bcs),"</pre>";
+    //echo "<pre>",print_r($bcs),"</pre>";
 }
 ?>
 <?php if(count($bcs)):?>
