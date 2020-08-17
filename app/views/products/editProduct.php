@@ -17,7 +17,7 @@ $client_id = $product['client_id'];
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-6">
                 <a class="btn btn-outline-fsg" href="/inventory/view-inventory/client=<?php echo $client_id;?>">Return to Client Inventory</a>
             </div>
