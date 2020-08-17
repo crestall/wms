@@ -15,7 +15,8 @@ if(count($pages))
             $bcs[] = array(
                 'icon'      => '<i class="fad fa-home"></i>',
                 'p_name'    => '',
-                'link'      => '/'
+                'link'      => '/',
+                'active'    => false
             );
             //if($spage == $)
             //echo "<p>Will do breadcrumbs for $section</p>";
@@ -23,7 +24,8 @@ if(count($pages))
             $bcs[] = array(
                 'icon'      => '',
                 'p_name'    => $Section,
-                'link'      => "/$section"
+                'link'      => "/$section",
+                'active'    => false
             );
             foreach($pages[$section] as $pname => $details)
             {
@@ -50,7 +52,7 @@ if(count($pages))
             <ol class="breadcrumb">
                 <?php foreach($bcs as $bc):
                     $active = ($bc['active'])? "active" : "";?>
-                    <li class="breadcrumb-item"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li></li>
+                    <li class="breadcrumb-item <?php echo $active;?>"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li></li>
                 <?php endforeach;?>
             </ol>
         </nav>
