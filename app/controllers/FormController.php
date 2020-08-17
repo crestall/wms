@@ -2885,30 +2885,6 @@ class FormController extends Controller {
             $post_data['weight'] = 0;
         }
         $package_types = array();
-        if(isset($this->request->data['package_type']) && count($this->request->data['package_type']))
-        {
-            foreach($this->request->data['package_type'] as $key => $type_id)
-            {
-                $package = array(
-                    'id'        =>  $type_id,
-                    'multiple'  =>  false,
-                    'number'    =>  1
-                );
-                if($this->packingtype->isMultiple($type_id))
-                {
-                    if( (filter_var(${'number_in_' . $type_id}, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false) )
-                    {
-                        Form::setError('package_type', 'Only whole positive numbers');
-                    }
-                    else
-                    {
-                        $package['multiple'] = true;
-                        $package['number'] = 1 / ${'number_in_' . $type_id};
-                    }
-                }
-                $package_types[] = $package;
-            }
-        }
         $palletizedd = (isset($palletized))? 1:0;
         if($palletizedd > 0)
         {
@@ -2936,7 +2912,7 @@ class FormController extends Controller {
             'add_product_id'    =>  $product_id
         );
         $this->location->addToLocation($post_data);
-        $this->item->addPackingTypesForItem($package_types, $product_id);
+        //$this->item->addPackingTypesForItem($package_types, $product_id);
         Session::set('feedback', "{$name}'s details have been added to the system and $qty have been imported");
         return $this->redirector->to(PUBLIC_ROOT."inventory/scan-to-inventory/client=$client_id");
     }
@@ -5111,11 +5087,6 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if(Session::getUserRole() == "solar admin")
-        {
-            $client_id = $this->client->solar_client_id;
-            $post_data['client_id'] = $client_id;
-        }
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name', 'A product name is required');
@@ -5217,58 +5188,8 @@ class FormController extends Controller {
         {
             $post_data['trigger_point'] = 0;
         }
-
-/*
-        if($hunters_goods_type == "20")
-        {
-            $satchel_error = true;
-            if($this->dataSubbed($small_satchel))
-            {
-                $satchel_error = false;
-                if( (filter_var($small_satchel, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false) )
-    			{
-                	Form::setError('small_satchel', 'Only whole positive numbers');
-    			}
-            }
-            if($this->dataSubbed($large_satchel))
-            {
-                $satchel_error = false;
-                if( (filter_var($large_satchel, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false) )
-    			{
-                	Form::setError('large_satchel', 'Only whole positive numbers');
-    			}
-            }
-            if($satchel_error)
-            {
-                Form::setError('large_satchel', 'A value is required for at least one satchel size');
-            }
-        }
-*/
         $package_types = array();
-        if(isset($this->request->data['package_type']) && count($this->request->data['package_type']))
-        {
-            foreach($this->request->data['package_type'] as $key => $type_id)
-            {
-                $package = array(
-                    'id'        =>  $type_id,
-                    'multiple'  =>  false,
-                    'number'    =>  1
-                );
-                if($this->packingtype->isMultiple($type_id))
-                {
-                    if( (filter_var(${'number_in_' . $type_id}, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false) )
-                    {
-                        Form::setError('package_type', 'Only whole positive numbers');
-                    }
-                    else
-                    {
-                        $package['multiple'] = true;
-                        $package['number'] = 1 / ${'number_in_' . $type_id};
-                    }
-                }
-                $package_types[] = $package;
-            }
-        }
+
         if(!$this->dataSubbed($client_id) || $client_id == "0")
         {
         	Form::setError('client_id', 'A client must be selected');
@@ -5281,17 +5202,6 @@ class FormController extends Controller {
             }
         }
         $palletizedd = (isset($palletized))? 1:0;
-        if($palletizedd > 0)
-        {
-            if(!$this->dataSubbed($per_pallet))
-            {
-                Form::setError('per_pallet', 'A number is required for palletized goods');
-            }
-            elseif(filter_var($per_pallet, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
-            {
-                Form::setError('per_pallet', 'Only enter positive whole numbers for amount per pallet');
-            }
-        }
         $post_data['palletized'] = $palletizedd;
         //image uploads
         $field = "image";
@@ -5327,15 +5237,13 @@ class FormController extends Controller {
             if($product_id = $this->item->addItem($post_data))
             {
                 Session::set('feedback', "{$name}'s details have been added to the system");
-                $this->item->addPackingTypesForItem($package_types, $product_id);
+                //$this->item->addPackingTypesForItem($package_types, $product_id);
                 return $this->redirector->to(PUBLIC_ROOT."products/edit-product/product=".$product_id);
             }
             else
             {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
-
-
         }
         return $this->redirector->to(PUBLIC_ROOT."products/add-product");
     }

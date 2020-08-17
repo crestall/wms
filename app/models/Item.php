@@ -799,7 +799,6 @@ class Item extends Model{
             'trigger_point'	                =>	$trigger_point,
             'last_activity'		            =>	time(),
             'client_id'			            =>	$client_id,
-            'preferred_pick_location_id'    =>  $preferred_pick_location_id,
             'palletized'                    =>  $palletized
         );
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
