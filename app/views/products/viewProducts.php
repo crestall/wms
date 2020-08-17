@@ -1,5 +1,5 @@
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
@@ -43,18 +43,11 @@
                                     <th>Dimensions</th>
                                     <th>Weight</th>
                                     <th>Pallet Item</th>
-                                    <th>Double Bay</th>
                                     <th>Requires Bubblewrap</th>
-                                    <th>Preferred Pick location</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($products as $p):
-                                    $ppl = $this->controller->location->getLocationName($p['preferred_pick_location_id']);
-                                    //$ppl = ($p['preferred_pick_location_id'] > 0)? $p['preferred_pick_location_id'] : "no";
-                                    //echo "<pre>",print_r($p),"</pre>";
-                                    ?>
+                                <?php foreach($products as $p):?>
                                     <tr>
                                         <td data-label="Name"><a href="/products/edit-product/product=<?php echo $p['id'];?>"><?php echo $p['name'];?></a></td>
                                         <td data-label="SKU"><?php echo $p['sku'];?></td>
@@ -63,10 +56,7 @@
                                         <td data-label="Dimensions"><?php echo $p['width']."X".$p['depth']."X".$p['height'];?></td>
                                         <td data-label="Weight" class="number"><?php echo $p['weight'];?> kg</td>
                                         <td data-label="Pallet Item" class='text-center'><?php if($p['palletized'] > 0) echo "Yes"; else echo "No";?></td>
-                                        <td data-label="Double Bay" class='text-center'><?php if($p['double_bay'] > 0) echo "Yes"; else echo "No";?></td>
                                         <td data-label="Requires Bubblewrap" class='text-center'><?php if($p['requires_bubblewrap'] > 0) echo "Yes"; else echo "No";?></td>
-                                        <td data-label="Preferred pick Location"><?php echo $ppl;?></td>
-                                        <td></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>
