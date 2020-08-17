@@ -28,6 +28,7 @@ class ClientsController extends Controller
 
         $clients = $this->client->getAllClients($active);
         Config::setJsConfig('curPage', "view-clients");
+        Config::set('curPage', "view-clients");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/clients/", Config::get('VIEWS_PATH') . 'clients/viewClients.php',
             [
                 'active'        =>  $active,
@@ -40,6 +41,7 @@ class ClientsController extends Controller
     {
         $this->view->assign('page_title', "Add Client");
         Config::setJsConfig('curPage', "add-client");
+        Config::set('curPage', "add-client");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/clients/", Config::get('VIEWS_PATH') . 'clients/addClient.php',
             [
                 'page_title'    =>  "Add Client"
@@ -54,6 +56,7 @@ class ClientsController extends Controller
         $client_info = $this->client->getClientInfo($client_id);
         //render the page
         Config::setJsConfig('curPage', "edit-client");
+        Config::set('curPage', "edit-client");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/clients/", Config::get('VIEWS_PATH') . 'clients/editClient.php',
             [
                 'client'        =>  $client_info,
