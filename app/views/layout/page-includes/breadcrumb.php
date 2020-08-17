@@ -34,7 +34,8 @@ if(count($pages))
                 $bcs[] = array(
                     'icon'      =>  '',
                     'p_name'    =>  $p_name,
-                    'link'      =>  "/$section/$pname"
+                    'link'      =>  "/$section/$pname",
+                    'active'    =>  ($p_name == $this_page)
                 );
             }
             break;
@@ -47,7 +48,8 @@ if(count($pages))
     <div class="mr-auto">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <?php foreach($bcs as $bc):?>
+                <?php foreach($bcs as $bc):
+                    $active = ($bc['active'])? "active" : "";?>
                     <li class="breadcrumb-item"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li></li>
                 <?php endforeach;?>
             </ol>
