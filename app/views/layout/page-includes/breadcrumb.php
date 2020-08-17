@@ -1,7 +1,7 @@
 <?php
 //echo "<pre>",print_r($pages),"</pre>";
 $this_page = Config::get('curPage');
-echo "this page is $this_page";
+//echo "this page is $this_page";
 $bcs = array();
 if(count($pages))
 {
