@@ -74,21 +74,10 @@ $client_id = $product['client_id'];
                             <input type="text" class="form-control" name="supplier" id="supplier" value="<?php echo $supplier;?>" />
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Solar Supplier</label>
-                        <div class="col-md-4">
-                            <select id="solar_type_id" name="solar_type_id" class="form-control selectpicker" <?php if($product['client_id'] != 67) echo "disabled"?>><option value="0">--Select One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes($product['solar_type_id']);?></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="active">Active</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="active" name="active" <?php if($product['active'] > 0) echo "checked";?> />
-                                <label for="active"></label>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="active" name="active" <?php if($product['active'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="active">Active</label>
+                    </div> 
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> SKU</label>
                         <div class="col-md-4">
