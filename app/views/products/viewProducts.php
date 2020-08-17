@@ -25,9 +25,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <?php if($active == 1):?>
-                            <p class="text-right"><a class="btn btn-warning" href="/products/view-products/client=<?php echo $client_id;?>/active=0">View Inactive Products</a></p>
+                            <p class="text-right"><a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>/active=0">View Inactive Products</a></p>
                         <?php else:?>
-                            <p class="text-right"><a class="btn btn-primary" href="/products/view-products/client=<?php echo $client_id;?>">View Active Products</a></p>
+                            <p class="text-right"><a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>">View Active Products</a></p>
                         <?php endif;?>
                     </div>
                 </div>
@@ -70,9 +70,9 @@
                             <h2><i class='far fa-times-circle'></i>No Products Listed</h2>
                             <p>There does not appear to be any <?php if($active == 1) echo "active"; else echo "inactive";?> products listed for <?php echo $client_name;?></p>
                             <?php if($active == 1):?>
-                                <p><a class="btn btn-warning" href="/products/view-products/client=<?php echo $client_id;?>/active=0">View Inactive Products</a></p>
+                                <p><a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>/active=0">View Inactive Products</a></p>
                             <?php else:?>
-                                <p><a class="btn btn-primary" href="/products/view-products/client=<?php echo $client_id;?>">View Active Products</a></p>
+                                <p><a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>">View Active Products</a></p>
                             <?php endif;?>
                         </div>
                     </div>
