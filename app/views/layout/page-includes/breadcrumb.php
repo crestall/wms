@@ -29,7 +29,7 @@ if(count($pages))
             {
                 if(!is_array($details) || !$details['display'])
                     continue;
-                echo "<pre>$pname",print_r($details),"</pre>";
+                //echo "<pre>$pname",print_r($details),"</pre>";
                 $p_name = ucwords(str_replace("-", " ", $pname));
                 $bcs[] = array(
                     'icon'      =>  '',
