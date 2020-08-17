@@ -37,7 +37,7 @@ if(count($pages))
                     'icon'      =>  '',
                     'p_name'    =>  $p_name,
                     'link'      =>  "/$section/$pname",
-                    'active'    =>  ($p_name == $this_page)
+                    'active'    =>  ($pname == $this_page)
                 );
             }
             break;
