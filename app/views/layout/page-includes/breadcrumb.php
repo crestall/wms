@@ -8,6 +8,7 @@ if(count($pages))
 
     foreach($pages as $section => $spages)
     {
+        echo "<pre>",print_r($spages),"</pre>";
         if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
             continue;
         if(in_array($this_page, $spages))
