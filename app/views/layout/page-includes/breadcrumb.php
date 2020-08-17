@@ -13,6 +13,7 @@ if(count($pages))
             continue;
         if(in_array($this_page, $spages))
         {
+            echo "$this_page is in the above";
             $bcs[] = array(
                 'icon'      => '<i class="fad fa-home"></i>',
                 'p_name'    => '',
