@@ -11,7 +11,8 @@ if(count($pages))
         echo "<pre>",print_r($spages),"</pre>";
         if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
             continue;
-        if(in_array($this_page, $spages))
+        //if(in_array($this_page, $spages))
+        if(array_key_exists($this_page, $spages))
         {
             echo "$this_page is in the above";
             $bcs[] = array(
