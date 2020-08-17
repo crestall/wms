@@ -51,8 +51,11 @@ if(count($pages))
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <?php foreach($bcs as $bc):
-                    $active = ($bc['active'])? "active" : "";?>
-                    <li class="breadcrumb-item <?php echo $active;?>"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li></li>
+                    if($bc['active']):?>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo $bc['icon'].$bc['p_name'];?>></li>
+                    <?php else:?>
+                        <li class="breadcrumb-item"><a href="<?php echo $bc['link'];?>"><?php echo $bc['icon'].$bc['p_name'];?></a></li>
+                    <?php endif;?>
                 <?php endforeach;?>
             </ol>
         </nav>
