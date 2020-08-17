@@ -3836,6 +3836,11 @@ class FormController extends Controller {
                 Form::setError($field, 'Only upload images here');
             }
         }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
+        }
         if($this->dataSubbed($new_password))
         {
             if(!$this->dataSubbed($conf_new_password))
@@ -4832,6 +4837,11 @@ class FormController extends Controller {
                 Form::setError($field, 'Only upload images here');
             }
         }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
+        }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -4929,6 +4939,11 @@ class FormController extends Controller {
             {
                 Form::setError($field, 'Only upload images here');
             }
+        }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -5223,6 +5238,11 @@ class FormController extends Controller {
                 Form::setError($field, 'Only upload images here');
             }
         }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
+        }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -5452,6 +5472,11 @@ class FormController extends Controller {
             {
                 Form::setError($field, 'Only upload images here');
             }
+        }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
         }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
