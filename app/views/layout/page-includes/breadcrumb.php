@@ -43,7 +43,7 @@ if(count($pages))
     //echo "<pre>",print_r($bcs),"</pre>";
 }
 ?>
-<?php if count($bcs):?>
+<?php if(count($bcs)):?>
     <div class="mr-auto">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
