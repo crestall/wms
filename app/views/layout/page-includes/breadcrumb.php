@@ -1,7 +1,7 @@
 <?php
 //echo "<pre>",print_r($pages),"</pre>";
 $this_page = Config::get('curPage');
-//echo "this page is $this_page";
+echo "this page is $this_page";
 $bcs = array();
 if(count($pages))
 {
@@ -19,7 +19,7 @@ if(count($pages))
                 'active'    => false
             );
             //if($spage == $)
-            //echo "<p>Will do breadcrumbs for $section</p>";
+            echo "<p>Will do breadcrumbs for $section</p>";
             $Section = ucwords(str_replace("-", " ", $section));
             $bcs[] = array(
                 'icon'      => '',
