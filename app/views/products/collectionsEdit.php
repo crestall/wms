@@ -45,10 +45,7 @@
                                     <div class="col-md-4">
                                         <h4>Items in this Collection</h4>
                                     </div>
-                                    <div class="col-md-4">
-                                        <a class="add-item" style="cursor:pointer" title="Add Another Item"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 text-right">
                                         <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
                                     </div>
                                 </div>
