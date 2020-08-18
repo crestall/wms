@@ -25,8 +25,8 @@
                     </div>
                         <form id="add_to_stock" method="post" action="/form/procAddToStock">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
-                                <div class="col-md-8">
+                                <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
+                                <div class="col-7">
                                     <input type="text" class="form-control required number" name="qty_add" id="qty_add" value="<?php echo Form::value('qty_add');?>" />
                                     <?php echo Form::displayError('qty_add');?>
                                 </div>
@@ -41,8 +41,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
-                                <div class="col-md-8">
+                                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
+                                <div class="col-7">
                                     <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option>
                                         <?php echo $this->controller->location->getSelectLocations(Form::value('add_to_location'), $product_id);?>
                                     </select>
@@ -57,8 +57,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
-                                <div class="col-md-8">
+                                <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
+                                <div class="col-7">
                                     <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
                                     <?php echo Form::displayError('reason_id');?>
                                 </div>
