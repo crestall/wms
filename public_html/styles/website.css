@@ -363,11 +363,6 @@ p.inst, span.inst{
     line-height:normal;
 }
 
-.delete-image-holder,
-.add-image-holder{
-    max-width: 50px;
-}
-
 ul#fileList {
     list-style: none;
     margin-left: 0;
