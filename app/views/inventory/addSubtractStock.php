@@ -15,7 +15,9 @@
                     <div class="card-header bg-secondary text-white">
                         Current Locations
                     </div>
-                    <?php echo $location_string;?>
+                    <div class="card_body">
+                        <?php echo $location_string;?>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-9 col-md-9 col-lg-9 col-xl-4 mb-3">
@@ -23,6 +25,7 @@
                     <div class="card-header bg-secondary text-white">
                         Add To Stock
                     </div>
+                    <div class="card_body">
                         <form id="add_to_stock" method="post" action="/form/procAddToStock">
                             <div class="form-group row">
                                 <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
@@ -67,13 +70,11 @@
                             <input type="hidden" name="add_product_id" value="<?php echo $product_id; ?>" />
                             <input type="hidden" name="client_id" value="<?php echo $product_info['client_id']; ?>" />
                             <input type="hidden" name="add_product_name" value="<?php echo $product_info['name']; ?>" />
-                            <div class="form-group row">
-                                <label class="col-md-5 col-form-label">&nbsp;</label>
-                                <div class="col-md-7">
-                                    <button type="submit" class="btn btn-primary">Add To Stock</button>
-                                </div>
-                            </div>
                         </form>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button id="add_stock_submitter" class="btn btn-outline-secondary">Add to Stock</button>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-9 col-md-9 col-lg-9 col-xl-4 ml-auto mb-3">
@@ -81,7 +82,9 @@
                     <div class="card-header bg-secondary text-white">
                         Subtract From Stock
                     </div>
-                    The subtract from stock form goes in this box
+                    <div class="card_body">
+                        The subtract from stock form goes in this box
+                    </div>
                 </div>
             </div>
         </div>
