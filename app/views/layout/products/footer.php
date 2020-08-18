@@ -80,6 +80,7 @@
                             appendage += "</div>";
 
                             $('div#the_items').prepend(appendage);
+                            $('div#the_items .item_holder').first().find($('input')).focus();
                             if($('#selected_items').val() == '')
                             {
                                 $('#selected_items').val(ui.item.item_id);
