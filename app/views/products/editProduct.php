@@ -173,7 +173,7 @@ $client_id = $product['client_id'];
                         <label class="custom-control-label col-md-3" for="collection">Collection</label>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="palletized" name="palletized" <?php if(!empty($product['palletized'] > 0) echo "palletized";?> />
+                        <input class="custom-control-input" type="checkbox" id="palletized" name="palletized" <?php if($product['palletized'] > 0) echo "palletized";?> />
                         <label class="custom-control-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
                     </div>
                     <div class="row">
