@@ -72,14 +72,14 @@
                             var appendage = "<div class='row item_holder mb-3'>";
                             appendage += "<label class='col-md-7'>"+ui.item.value+"</label>";
                             appendage += "<div class='col-md-1'>";
-                            appendage += "<input type='text' class='form-control required number' name='items["+ui.item.item_id+"][qty]' data-itemid='"+ui.item.item_id+" />";
+                            appendage += "<input type='text' class='form-control required number' name='items["+ui.item.item_id+"][qty]' data-itemid='"+ui.item.item_id+"' />";
                             appendage += "</div>";
                             appendage += "<div class='col-md-2 delete-image-holder'>";
                             appendage += "<a class='delete' data-itemid="+ui.item.item_id+" title='remove this item'><i class='fad fa-times-square text-danger'></i> <span class='inst'>Remove</span></a>";
                             appendage += "</div> ";
                             appendage += "</div>";
 
-                            $('div#the_items').append(appendage);
+                            $('div#the_items').prepend(appendage);
                             if($('#selected_items').val() == '')
                             {
                                 $('#selected_items').val(ui.item.item_id);
