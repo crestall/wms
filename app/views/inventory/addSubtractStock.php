@@ -40,7 +40,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/location_selector.php");?>
+                            <div class="form-group row">
+                                <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
+                                <div class="col-md-7">
+                                    <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option>
+                                        <?php echo $this->controller->location->getSelectLocations(Form::value('add_to_location'), $item_id);?>
+                                    </select>
+                                    <?php echo Form::displayError('add_to_location');?>
+                                </div>
+                            </div>
+                            <div class="form-group row form-check">
+                                <label class="<?php if(isset($label_class)) echo $label_class; else echo "col-md-3";?> col-form-label" for="to_receiving">Add To Receiving</label>
+                                <div class="<?php if(isset($div_class)) echo $div_class; else echo "col-md-4";?> checkbox checkbox-default">
+                                    <input class="form-check-input styled" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
+                                    <label for="to_receiving"></label>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
                                 <div class="col-md-7">
