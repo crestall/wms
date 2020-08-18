@@ -72,14 +72,13 @@
                                         <td data-label="Available" class="number"><?php echo $available;?></td>
                                         <td data-label="Locations" class="text-nowrap"><?php echo $ls;?></td>
                                         <td>
-                                            <p><a class="btn btn-primary" href="/inventory/add-subtract-stock/product=<?php echo $item_id;?>">Add/Subtract Stock</a></p>
-                                            <p><a class="btn btn-primary" href="/inventory/move-stock/product=<?php echo $item_id;?>">Move Stock</a></p>
-                                            <p><a class="btn btn-primary" href="/inventory/quality-control/product=<?php echo $item_id;?>">Quality Control</a>  </p>
+                                            <p><a class="btn btn-outline-secondary" href="/inventory/add-subtract-stock/product=<?php echo $item_id;?>">Add/Subtract Stock</a></p>
+                                            <p><a class="btn btn-outline-secondary" href="/inventory/move-stock/product=<?php echo $item_id;?>">Move Stock</a></p>
+                                            <p><a class="btn btn-outline-secondary" href="/inventory/quality-control/product=<?php echo $item_id;?>">Quality Control</a>  </p>
                                         </td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>
-
                         </table>
                     </div>
                 <?php else:?>
