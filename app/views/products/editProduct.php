@@ -182,27 +182,25 @@ $client_id = $product['client_id'];
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Preferred Pick Location</label>
-                        <div class="col-md-4">
-                            <select id="preferred_pick_location_id" name="preferred_pick_location_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations($product['preferred_pick_location_id'], $product['id']);?></select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Low Stock Trigger</label>
+                        <label class="col-md-3">Low Stock Trigger</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control number" name="trigger_point" id="trigger_point" value="<?php echo $product['trigger_point'];?>" />
-                                <span class="input-group-addon"><em>for warehouse</em></span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><em>for warehouse</em></span>
+                                </div>
                             </div>
                             <?php echo Form::displayError('trigger_point');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Low Stock Warning</label>
+                        <label class="col-md-3">Low Stock Warning</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control number" name="low_stock_warning" id="low_stock_warning" value="<?php echo $product['low_stock_warning'];?>" />
-                                <span class="input-group-addon"><em>for client</em></span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><em>for client</em></span>
+                                </div>
                             </div>
                             <?php echo Form::displayError('low_stock_warning');?>
                         </div>
@@ -214,9 +212,6 @@ $client_id = $product['client_id'];
                     <input type="hidden" name="current_sku" id="current_sku" value="<?php echo $product['sku']; ?>" />
                     <input type="hidden" name="item_id" value="<?php echo $product['id'];?>" />
                     <input type="hidden" name="client_id" value="<?php echo $product['client_id'];?>" />
-                    <?php foreach($packing_types as $type_id => $number):?>
-                        <input type="hidden" id="pt_count_<?php echo $type_id;?>" value="<?php echo round(1 / $number);?>" />
-                    <?php endforeach;?>
                     <!-- Hidden Inputs -->
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">&nbsp;</label>
