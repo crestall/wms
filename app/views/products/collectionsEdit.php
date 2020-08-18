@@ -12,7 +12,7 @@
         <?php if($item_id > 0):?>
             <?php if(!$this->controller->item->isCollection($item_id)):?>
                 <div class="row">
-                    <div class="col-lg12">
+                    <div class="col-12">
                         <div class="errorbox">
                             <h2>Not a Collection</h2>
                             <p>Sorry this is not listed as a collection</p>
