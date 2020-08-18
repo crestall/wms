@@ -135,10 +135,6 @@ return array(
                 'display'   => false,
                 'icon'      => ''
             ),
-            'pack-items-edit'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-edit fa-3x"></i>'
-            ),
             'collections-edit'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-edit fa-3x"></i>'
