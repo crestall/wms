@@ -3,13 +3,9 @@
         <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <div class="col-lg-2">&nbsp;</div>
-                    <label class="col-lg-2">Select a Product</label>
-                    <div class="col-lg-4">
-                        <p><select id="product_selector" class="form-control selectpicker" data-live-search="true"><option value="0">Select</option><?php echo $this->controller->item->getSelectCollectionItems($item_id);?></select></p>
-                    </div>
+            <label class="col-md-3">Select a Product</label>
+                <div class="col-md-4">
+                    <select id="product_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">Select</option><?php echo $this->controller->item->getSelectCollectionItems($item_id);?></select>
                 </div>
             </div>
         </div>
