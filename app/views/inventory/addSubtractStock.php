@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="col-sm-3 col-md-4 col-lg-4 mb-3">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
                         Current Locations
@@ -18,7 +18,7 @@
                     The locations list will go in this box
                 </div>
             </div>
-            <div class="col-sm-9 col-md-4 col-lg-4">
+            <div class="col-sm-9 col-md-4 col-lg-4 mb-3">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
                         Add To Stock
@@ -26,7 +26,7 @@
                     The add to stock form goes in this box
                 </div>
             </div>
-            <div class="col-sm-9 col-md-4 col-lg-4 ml-auto">
+            <div class="col-sm-9 col-md-4 col-lg-4 ml-auto mb-3">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
                         Subtract From Stock
