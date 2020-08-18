@@ -840,7 +840,6 @@ class Item extends Model{
             'low_stock_warning'	            =>	$low_stock_warning,
             'trigger_point'	                =>	$trigger_point,
             'last_activity'		            =>	time(),
-            'preferred_pick_location_id'    =>  $preferred_pick_location_id,
             'palletized'                    =>  $palletized,
             'price'                         =>  0.00,
             'solar_type_id'                 =>  0,
