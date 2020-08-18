@@ -26,7 +26,7 @@
                     The add to stock form goes in this box
                 </div>
             </div>
-            <div class="col-sm-9 col-md-4 col-lg-4">
+            <div class="col-sm-9 col-md-4 col-lg-4 float-sm-right">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
                         Subtract From Stock
