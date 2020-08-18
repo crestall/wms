@@ -70,12 +70,19 @@ class Location extends Model{
     public function isOversize($id)
     {
         $db = Database::openConnection();
+        /*
         $q = "
             SELECT * FROM clients_bays WHERE location_id = $id AND oversize = 1 AND date_removed = 0
         ";
         //die($q);
         $res = $db->queryRow($q);
         //echo "<pre>",print_r($res),"</pre>"; die();
+        return ( !empty($res) );
+        */
+        $q = "
+            SELECT * FROM {$this->table} WHERE id = $id AND oversize = 1
+        ";
+        $res = $db->queryRow($q);
         return ( !empty($res) );
     }
 
