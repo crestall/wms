@@ -58,7 +58,7 @@
                                                 <div class='col-md-1 delete-image-holder'>
                                                     <a class='delete' data-itemid="<?php echo $i['linked_item_id'];?>" title='remove this item'><i class='fad fa-times-square text-danger'></i><span class="inst">Remove</span></a>
                                                 </div>
-                                                <label class="col-md-5"><?php echo $i['name']." (".$i['sku'].")";?></label>
+                                                <label class="col-md-7"><?php echo $i['name']." (".$i['sku'].")";?></label>
                                                 <div class="col-md-2">
                                                     <input type="text" class="form-control required number" name="items[<?php echo $i['linked_item_id'];?>][qty]"  value="<?php echo $i['number'];?>" />
                                                 </div>
