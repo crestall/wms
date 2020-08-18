@@ -154,10 +154,6 @@ return array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-inventory fa-3x"></i>'
             ),
-            'pack-items-manage'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-box-check fa-3x"></i>'
-            ),
             'scan-to-inventory'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-scanner fa-3x"></i>'
