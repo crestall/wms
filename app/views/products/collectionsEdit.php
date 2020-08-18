@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey">
-                                <div class="row mb-0">
+                                <div class="row mb-3">
                                     <div class="col-md-4">
                                         <h4>Items in this Collection</h4>
                                     </div>
@@ -54,12 +54,12 @@
                                 </div>
                                 <div id="the_items">
                                     <?php foreach($items as $i):?>
-                                            <div class='row item_holder'>
-                                                <div class='col-md-1 delete-image-holder'>
-                                                    <a class='delete' data-itemid="<?php echo $i['linked_item_id'];?>" title='remove this item'><i class='fad fa-times-square text-danger'></i><span class="inst">Remove</span></a>
+                                            <div class='row item_holder mb-3'>
+                                                <div class='col-md-2 delete-image-holder'>
+                                                    <a class='delete' data-itemid="<?php echo $i['linked_item_id'];?>" title='remove this item'><i class='fad fa-times-square text-danger'></i> <span class="inst">Remove</span></a>
                                                 </div>
                                                 <label class="col-md-7"><?php echo $i['name']." (".$i['sku'].")";?></label>
-                                                <div class="col-md-2">
+                                                <div class="col-md-1">
                                                     <input type="text" class="form-control required number" name="items[<?php echo $i['linked_item_id'];?>][qty]"  value="<?php echo $i['number'];?>" />
                                                 </div>
                                             </div>
