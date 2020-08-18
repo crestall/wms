@@ -197,9 +197,9 @@ class Item extends Model{
                 FROM
                 (
                     SELECT
-                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, cb.oversize
+                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, l.oversize
                     FROM
-                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id LEFT JOIN clients_bays cb ON cb.location_id = l.id AND cb.date_removed = 0
+                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
                     WHERE
                         i.client_id = $client_id AND i.active = $active
                 ) a";
