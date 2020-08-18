@@ -1,5 +1,5 @@
 <div id="page-wrapper">
-    <div id="page_container" class="container-xxl">
+    <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
             <div class="col">
@@ -26,7 +26,7 @@
                     The add to stock form goes in this box
                 </div>
             </div>
-            <div class="col-sm-9 col-md-4 col-lg-4 offset-sm-3">
+            <div class="col-sm-9 col-md-4 col-lg-4">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
                         Subtract From Stock
