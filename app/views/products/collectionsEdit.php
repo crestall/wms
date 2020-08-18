@@ -4,9 +4,8 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
             <label class="col-md-3">Select a Product</label>
-                <div class="col-md-4">
-                    <select id="product_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">Select</option><?php echo $this->controller->item->getSelectCollectionItems($item_id);?></select>
-                </div>
+            <div class="col-md-4">
+                <select id="product_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">Select</option><?php echo $this->controller->item->getSelectCollectionItems($item_id);?></select>
             </div>
         </div>
         <?php if($item_id > 0):?>
