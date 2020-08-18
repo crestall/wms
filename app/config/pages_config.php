@@ -138,11 +138,11 @@ return array(
             'collections-edit'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-edit fa-3x"></i>'
-            ),
+            ),/*
             'product-search'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-telescope fa-3x"></i>'
-            ),
+            ),*/
 		),
         'inventory'   =>  array(
             'inventory-index'   => true,
