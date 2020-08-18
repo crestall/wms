@@ -24,12 +24,6 @@
                 <div class="row">
                     <div class="col">
                         <form id="collection_edit" action="/form/procCollectionEdit" method="post">
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Add Item</label>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" name="item_searcher" id="item_searcher" />
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-7">
                                     <h3>Listed Items</h3>
@@ -38,6 +32,12 @@
                             <div class="row">
                                 <div class="col-md-7">
                                     <p>A total of <?php echo count($items);?> items listed</p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Add Item</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="item_searcher" id="item_searcher" />
                                 </div>
                             </div>
                             <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey">
