@@ -8,8 +8,30 @@
             <p><a class="btn btn-outline-fsg" href="/inventory/move-stock/product=<?php echo $product_id;?>">Move Stock for This Item</a></p>
         </div>
     </div>
-    <?php echo $addform;?>
-    <?php if($onhand > 0):?>
-        <?php echo $subtractform;?>
-    <?php endif;?>
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="card h-100 border-secondary">
+                <div class="card-header bg-secondary text-white">
+                    Current Locations
+                </div>
+                The locations list will go in this box
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-4 col-lg-4 offset-sm-3">
+            <div class="card h-100 border-secondary">
+                <div class="card-header bg-secondary text-white">
+                    Add To Stock
+                </div>
+                The add to stock form goes in this box
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-4 col-lg-4 offset-sm-3">
+            <div class="card h-100 border-secondary">
+                <div class="card-header bg-secondary text-white">
+                    Subtract From Stock
+                </div>
+                The subtract from stock form goes in this box
+            </div>
+        </div>
+    </div>
 </div>
