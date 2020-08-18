@@ -77,7 +77,7 @@ $client_id = $product['client_id'];
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="active" name="active" <?php if($product['active'] > 0) echo "checked";?> />
                         <label class="custom-control-label col-md-3" for="active">Active</label>
-                    </div> 
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> SKU</label>
                         <div class="col-md-4">
@@ -92,12 +92,6 @@ $client_id = $product['client_id'];
                             <?php echo Form::displayError('barcode');?>
                         </div>
                     </div>
-                    <!--div class="form-group row">
-                        <label class="col-md-3 col-form-label">Barcode Type</label>
-                        <div class="col-md-4">
-                            <select id="barcode_type" name="barcode_type" class="form-control selectpicker"><?php echo $this->controller->barcodetype->getSelectBarcodeType(Form::value('barcode_type'));?></select>
-                        </div>
-                    </div-->
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Box Barcode</label>
                         <div class="col-md-4">
@@ -111,49 +105,63 @@ $client_id = $product['client_id'];
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Weight</label>
+                        <label class="col-md-3">Weight</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control number" name="weight" id="weight" value="<?php echo $weight;?>" />
-                                <span class="input-group-addon">Kg</span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Kg</span>
+                                </div>
                             </div>
                             <?php echo Form::displayError('weight');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Width</label>
+                        <label class="col-md-3">Width</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control number" name="width" id="width" value="<?php echo $width;?>" />
-                                <span class="input-group-addon">cm</span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
                             </div>
+                            <?php echo Form::displayError('width');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Depth</label>
+                        <label class="col-md-3">Depth</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control number" name="depth" id="depth" value="<?php echo $depth;?>" />
-                                <span class="input-group-addon">cm</span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
                             </div>
+                            <?php echo Form::displayError('depth');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Height</label>
+                        <label class="col-md-3">Height</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control number" name="height" id="height" value="<?php echo $height;?>" />
-                                <span class="input-group-addon">cm</span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
                             </div>
+                            <?php echo Form::displayError('height');?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Price</label>
+                        <label class="col-md-3">Price</label>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <span class="input-group-addon">$</span>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
                                 <input type="text" class="form-control" name="price" id="price" value="<?php echo $price;?>" />
                             </div>
+                            <?php echo Form::displayError('price');?>
                         </div>
                     </div>
                     <div class="form-group row">
