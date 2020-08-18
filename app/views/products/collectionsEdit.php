@@ -40,7 +40,18 @@
                                     <p>A total of <?php echo count($items);?> items listed</p>
                                 </div>
                             </div>
-                            <div class="bs-callout bs-callout-primary bs-callout-more">
+                            <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey">
+                                <div class="row mb-0">
+                                    <div class="col-md-4">
+                                        <h4>Items in this Collection</h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="add-item" style="cursor:pointer" title="Add Another Item"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
+                                    </div>
+                                </div>
                                 <div id="the_items">
                                     <?php foreach($items as $i):?>
                                         <div class="form-group row">
