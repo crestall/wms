@@ -56,14 +56,11 @@
                                     <?php foreach($items as $i):?>
                                             <div class='row item_holder'>
                                                 <div class='col-md-1 delete-image-holder'>
-                                                    <a class='delete' title='remove this item'><i class='fad fa-times-square text-danger'></i><span class="inst">Remove</span></a>
+                                                    <a class='delete' data-itemid="<?php echo $i['linked_item_id'];?>" title='remove this item'><i class='fad fa-times-square text-danger'></i><span class="inst">Remove</span></a>
                                                 </div>
-                                                <label class="col-md-5 col-form-label"><?php echo $i['name']." (".$i['sku'].")";?></label>
+                                                <label class="col-md-5"><?php echo $i['name']." (".$i['sku'].")";?></label>
                                                 <div class="col-md-2">
                                                     <input type="text" class="form-control required number" name="items[<?php echo $i['linked_item_id'];?>][qty]"  value="<?php echo $i['number'];?>" />
-                                                </div>
-                                                <div class='col-md-1 delete-image-holder'>
-                                                    <a class="delete" data-itemid="<?php echo $i['linked_item_id'];?>" title="remove this item"><i class="fas fa-backspace fa-2x text-danger"></i></a>
                                                 </div>
                                             </div>
                                     <?php endforeach;?>
