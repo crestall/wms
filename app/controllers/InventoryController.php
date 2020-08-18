@@ -269,7 +269,7 @@ class InventoryController extends Controller
             {
                 $location_string .= " - Oversize Location";
             }
-            $location_string .= "\n";
+            $location_string .= "<br/>";
         }
         $rows = (count($item_locations) > 5)? count($item_locations) + 2 : 7;
         $form_array = array(
@@ -278,8 +278,7 @@ class InventoryController extends Controller
             'location_string'   =>  $location_string,
             'rows'              =>  $rows
         );
-        $location_string = rtrim($location_string, "\n");
-        $addform = $this->view->render( Config::get('VIEWS_PATH') . "forms/addstock.php", $form_array);
+        $location_string = rtrim($location_string, "<br/>");
         $subtractform = $this->view->render( Config::get('VIEWS_PATH') . "forms/subtractstock.php",$form_array);
 
         //render the page
@@ -289,7 +288,7 @@ class InventoryController extends Controller
         [
             'product_id'        =>  $product_id,
             'page_title'        =>  "Add or Subtract ".$product_info['name']." (".$product_info['sku'].") from Inventory",
-            'addform'           =>  $addform,
+            'location_string'   =>  $location_string,
             'subtractform'      =>  $subtractform,
             'onhand'            =>  $this->item->getStockOnHand($product_id),
             'product_info'      =>  $product_info
