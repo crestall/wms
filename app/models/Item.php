@@ -160,7 +160,6 @@ class Item extends Model{
                     'name'      => $i['name'],
                     'sku'       => $i['sku'],
                     'barcode'   => $i['barcode'],
-                    'pack_item' => $i['pack_item'],
                     'onhand'    => 0,
                     'allocated' => 0,
                     'qc_count'  => 0,
