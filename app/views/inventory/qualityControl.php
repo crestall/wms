@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button id="qc_submitter" class="btn btn-outline-secondary">Update QC Stock</button>
+                        <button id="qc_submitter" class="btn btn-outline-secondary">Update Quality Control Stock</button>
                     </div>
                 </div>
             </div>
