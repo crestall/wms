@@ -27,7 +27,9 @@
                         Move Stock
                     </div>
                     <div class="card-body">
-                        put the form here
+                        <div class="container-fluid">
+                            
+                        </div>
                     </div>
                     <div class="card-footer">
 
