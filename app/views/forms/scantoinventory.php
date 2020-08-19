@@ -16,16 +16,22 @@
                     <input type="text" class="form-control number required" name="qty" id="qty" value="" />
                 </div>
             </div>
-            <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option>
-                                            <?php echo $this->controller->location->getSelectLocations($add_to_location, $item_id);?>
-                                        </select>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Qty To Add</label>
+                <div class="col-md-4">
+                    <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option>
+                        <?php echo $this->controller->location->getSelectLocations($add_to_location, $item_id);?>
+                    </select>
+                </div>
+            </div>
+
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>" />
             <input type="hidden" name="client_id" value="<?php echo $item['client_id']; ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Add Them</button>
+                    <button type="submit" class="btn btn-outline-secondary">Add Them</button>
                 </div>
             </div>
         </form>
