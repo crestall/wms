@@ -223,7 +223,7 @@ class InventoryController extends Controller
             {
                 $location_string .= ", Allocated(".$il['allocated'].")";
             }
-            $location_string .= "<br/";
+            $location_string .= "<br/>";
         }
         $location_string = rtrim($location_string, "<br/>");
         //render the page
