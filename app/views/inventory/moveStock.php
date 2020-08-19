@@ -11,6 +11,16 @@
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mb-3">
+                <div class="card h-100 border-secondary">
+                    <div class="card-header bg-secondary text-white">
+                        Current Locations
+                    </div>
+                    <div class="card-body">
+                        <?php echo $location_string;?>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-7">
                 <form id="move_stock" method="post" action="/form/procStockMovement">
                     <div class="form-group row">
@@ -78,10 +88,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="col-md-5">
-                <label>Current Locations</label>
-                <textarea class="form-control disabled" rows="<?php echo $rows;?>" disabled><?php echo $location_string;?></textarea>
             </div>
         </div>
     </div>
