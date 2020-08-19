@@ -31,7 +31,7 @@
                             <form id="move_stock" method="post" action="/form/procStockMovement">
                                 <div class="form-group row">
                                     <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Number To Move</label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-7">
                                         <input type="text" class="form-control required number" name="qty_move" id="qty_move" value="<?php echo Form::value('qty_move');?>" />
                                         <?php echo Form::displayError('qty_move');?>
                                     </div>
@@ -42,14 +42,14 @@
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Move From Location</label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-7">
                                         <select id="move_from_location" name="move_from_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectItemInLocations($product_id, Form::value('move_from_location'));?></select>
                                         <?php echo Form::displayError('move_from_location');?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Move To Location</label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-7">
                                         <select id="move_to_location" name="move_to_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations(Form::value('move_to_location'), $product_id);?></select>
                                         <?php echo Form::displayError('move_to_location');?>
                                     </div>
