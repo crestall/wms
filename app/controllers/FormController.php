@@ -2705,13 +2705,6 @@ class FormController extends Controller {
                 Form::setError('qty_move', 'You cannot move more quality control stock than there is available');
             }
         }
-        elseif(isset($allocated_stock))
-        {
-            if($l_details['allocated'] < $qty_move)
-            {
-                Form::setError('qty_move', 'You cannot move more allocated stock than there is');
-            }
-        }
         else
         {
             if( ($l_details['qty'] - $l_details['qc_count'] - $l_details['allocated']) < $qty_move )
@@ -2730,27 +2723,6 @@ class FormController extends Controller {
             $this->item->moveStock($post_data, $this->stockmovementlabels->getLabelId('Internal Stock Movement'));
             $this->clientsbays->stockRemoved($client_id, $move_from_location, $move_product_id);
             $this->clientsbays->stockAdded($client_id, $move_to_location);
-            if($double_bay == 1)
-            {
-                //deal with double bays
-                if($this->location->isEmptyOfItem($move_from_location, $move_product_id) )
-                {
-                    //die('remove double bay');
-                    $move_from_location_name = $this->location->getLocationName($move_from_location);
-                    $next_location_name = substr($move_from_location_name, 0, -1)."b";
-                    $next_location_id = $this->location->getLocationId($next_location_name);
-                    $this->clientslocation->deleteAllocationByClientLocation($client_id, $next_location_id);
-                }
-                //die('not removing double bay');
-                $move_to_location_name = $this->location->getLocationName($move_to_location);
-                $next_location_name = substr($move_to_location_name, 0, -1)."b";
-                $next_location_id = $this->location->getLocationId($next_location_name);
-                $this->clientslocation->addLocation(array(
-                    'location'   => $next_location_id,
-                    'client_id'  => $client_id,
-                    'notes'      => "Double Bay Item"
-                ));
-            }
             Session::set('feedback', $move_product_name.' has had its stock adjusted');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/move-stock/product=$move_product_id");
