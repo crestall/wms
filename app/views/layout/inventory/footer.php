@@ -158,10 +158,12 @@
                 },
                 'move-stock': {
                     init: function(){
-                        $('form#move_stock').submit(function(e){
-                            if($(this).valid())
+                        $('button#move_stock_submitter').click(function(e){
+                            e.preventDefault();
+                            if($('form#move_stock').valid())
                             {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Moving Stock...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Moving Stock...</h2></div>' });
+                                $('form#move_stock').submit();
                             }
                         });
                         $('select#move_to_location, select#move_from_location').change(function(e){
