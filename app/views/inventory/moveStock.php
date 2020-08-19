@@ -2,11 +2,11 @@
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
-            <div class="col-lg-3">
-                <p><a class="btn btn-primary" href="/inventory/view-inventory/client=<?php echo $product_info['client_id'];?>">Return to Clients Inventory</a></p>
+            <div class="col">
+                <p><a class="btn btn-outline-fsg" href="/inventory/view-inventory/client=<?php echo $product_info['client_id'];?>">Client Inventory</a></p>
             </div>
-            <div class="col-lg-3">
-                <p><a class="btn btn-primary" href="/inventory/add-subtract-stock/product=<?php echo $product_id;?>">Add/Subtract Stock for This Item</a></p>
+            <div class="col text-right">
+                <p><a class="btn btn-outline-fsg" href="/inventory/add-subtract-stock/product=<?php echo $product_id;?>">Add/Subtract Stock for This Item</a></p>
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
