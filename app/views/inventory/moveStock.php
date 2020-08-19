@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mb-3">
+            <div class="col-sm-4 col-md-8 col-lg-8 col-xl-8 mb-3">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
                         Move Stock
