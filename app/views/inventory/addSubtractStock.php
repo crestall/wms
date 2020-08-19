@@ -3,7 +3,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
             <div class="col">
-                <p><a class="btn btn-outline-fsg" href="/inventory/view-inventory/client=<?php echo $product_info['client_id'];?>">Clieny Inventory</a></p>
+                <p><a class="btn btn-outline-fsg" href="/inventory/view-inventory/client=<?php echo $product_info['client_id'];?>">Client Inventory</a></p>
             </div>
             <div class="col text-right">
                 <p><a class="btn btn-outline-fsg" href="/inventory/move-stock/product=<?php echo $product_id;?>">Move Stock</a></p>
@@ -84,7 +84,45 @@
                         Subtract From Stock
                     </div>
                     <div class="card-body">
-                        The subtract from stock form goes in this box
+                        <form id="subtract_from_stock" method="post" action="/form/procSubtractFromStock">
+                            <div class="form-group row">
+                                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
+                                <div class="col-7">
+                                    <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" value="<?php echo Form::value('qty_subtract');?>" />
+                                    <?php echo Form::displayError('qty_subtract');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="form-check">
+                                    <label class="form-check-label col-md-3" for="qc_stock">Quality Control Stock</label>
+                                    <div class="col-md-4 checkbox checkbox-default">
+                                        <input class="form-check-input styled" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
+                                        <label for="qc_stock"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
+                                <div class="col-7">
+                                    <select id="subtract_from_location" name="subtract_from_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectItemInLocations($product_id, Form::value('subtract_from_location'));?></select>
+                                    <?php echo Form::displayError('subtract_from_location');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
+                                <div class="col-7">
+                                    <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
+                                    <?php echo Form::displayError('reason_id');?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <input type="hidden" name="subtract_product_id" value="<?php echo $product_id; ?>" />
+                            <input type="hidden" name="client_id" value="<?php echo $product_info['client_id']; ?>" />
+                            <input type="hidden" name="subtract_product_name" value="<?php echo $product_info['name']; ?>" />
+                        </form>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button id="subtract_stock_submitter" class="btn btn-outline-secondary">Subtract from Stock</button>
                     </div>
                 </div>
             </div>
