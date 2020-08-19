@@ -34,7 +34,7 @@
                     <button class="btn btn-primary btn-sm" id="get_item">Locate Item</button>
                 </div>
             </div>
-            <div id="item_details"></div>
+            <div id="item_details" class="container-fluid"></div>
         <?php endif;?>
     </div>
 </div>
