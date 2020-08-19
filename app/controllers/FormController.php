@@ -3341,6 +3341,10 @@ class FormController extends Controller {
                 {
                     Form::setError('qty_subtract', 'You cannot remove more stock than is unallocated');
                 }
+                if($qty_subtract > ($location['qty'] - $location['qc_count']))
+                {
+                    Form::setError('qty_subtract', 'You cannot remove more stock than there is');
+                }
             }
         }
         if($reason_id == "0")
