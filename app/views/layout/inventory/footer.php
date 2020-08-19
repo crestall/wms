@@ -107,12 +107,15 @@
                 'add-subtract-stock' : {
                     init: function(){
                         actions.common['add-to-receiving']();
-                        $('form#add_to_stock').submit(function(e){
-                            if($(this).valid())
+                        $('button#add_stock_submitter').click(function(e){
+                            e.preventDefault();
+                            if($('form#add_to_stock'))
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                                $('form#add_to_stock').submit();
                             }
                         });
+
 
                         $('form#subtract_from_stock').submit(function(e){
                             if($(this).valid())
