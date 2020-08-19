@@ -85,7 +85,7 @@
                     </div>
                     <div class="card-body">
                         <?php //if(isset($_SESSION['subtractfeedback'])) :?>
-                            <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('subtractfeedback');?></div>
+                            <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('subtractitemfeedback');?></div>
                         <?php //endif; ?>
                         <?php if(isset($_SESSION['subtracterrorfeedback'])) :?>
                             <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('subtracterrorfeedback');?></div>
