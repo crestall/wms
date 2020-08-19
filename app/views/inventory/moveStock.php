@@ -37,6 +37,10 @@
                                         <?php echo Form::displayError('qty_move');?>
                                     </div>
                                 </div>
+                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <input class="custom-control-input" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
+                                    <label class="custom-control-label col-5" for="qc_stock">Move Quality Control Stock</label>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Move From Location</label>
                                     <div class="col-4">
