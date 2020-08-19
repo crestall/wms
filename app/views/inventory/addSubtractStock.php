@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
                                     <input class="custom-control-input" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
-                                    <label class="custom-control-label col-sm-7 col-xl-10" for="qc_stock">Under Quality Control</label>
+                                    <label class="custom-control-label col-sm-8 col-xl-10" for="qc_stock">Under Quality Control</label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
                                     <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
-                                    <label class="custom-control-label col-sm-7 col-xl-10" for="to_receiving">Add To Receiving</label>
+                                    <label class="custom-control-label col-sm-8 col-xl-10" for="to_receiving">Add To Receiving</label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
