@@ -3358,6 +3358,8 @@ class FormController extends Controller {
             $this->location->subtractFromLocation($post_data);
             $this->clientsbays->stockRemoved($client_id, $subtract_from_location, $subtract_product_id, isset($remove_oversize));
             Session::set('subtractfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
+
+            Session::set('addfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$subtract_product_id);
     }
