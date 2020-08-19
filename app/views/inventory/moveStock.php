@@ -28,7 +28,7 @@
                     </div>
                     <div class="card-body">
                         <div class="container-fluid">
-                            
+                            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>    
                         </div>
                     </div>
                     <div class="card-footer">
