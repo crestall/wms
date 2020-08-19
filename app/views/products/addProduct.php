@@ -146,6 +146,13 @@ $client_id = Form::value('client_id');
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Preferred Pick Location</label>
+                        <div class="col-md-4">
+                            <select id="preferred_pick_location_id" name="preferred_pick_location_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option>
+                            <?php echo $this->controller->location->getSelectLocations(Form::value('preferred_pick_location_id'));?></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-md-3">Low Stock Trigger</label>
                         <div class="col-md-4">
                             <div class="input-group">
