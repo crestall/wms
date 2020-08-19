@@ -41,7 +41,7 @@
                             <div class="form-group row">
                                 <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
                                 <div class="col-7">
-                                    <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option>
+                                    <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option>
                                         <?php echo $this->controller->location->getSelectLocations(Form::value('add_to_location'), $product_id);?>
                                     </select>
                                     <?php echo Form::displayError('add_to_location');?>
@@ -54,7 +54,7 @@
                             <div class="form-group row">
                                 <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
                                 <div class="col-7">
-                                    <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
+                                    <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
                                     <?php echo Form::displayError('reason_id');?>
                                 </div>
                             </div>
