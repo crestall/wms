@@ -84,9 +84,9 @@
                         Subtract From Stock
                     </div>
                     <div class="card-body">
-                        <?php //if(isset($_SESSION['subtractfeedback'])) :?>
+                        <?php if(isset($_SESSION['subtractitemfeedback'])) :?>
                             <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('subtractitemfeedback');?></div>
-                        <?php //endif; ?>
+                        <?php endif; ?>
                         <?php if(isset($_SESSION['subtracterrorfeedback'])) :?>
                             <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('subtracterrorfeedback');?></div>
                         <?php endif; ?>
