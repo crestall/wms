@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-4 mb-3">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mb-3">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
                         Current Locations
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-4 mb-3">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-4 mb-3">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
                         Add To Stock
@@ -78,7 +78,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-4 ml-auto mb-3">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-4 ml-auto mb-3">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
                         Subtract From Stock
