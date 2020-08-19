@@ -3,7 +3,6 @@
 <?php if(!empty($item)):
     $item_id = $item['id'];
     $add_to_location = (empty(Form::value('add_to_location')))? $item['preferred_pick_location_id'] : Form::value('add_to_location');?>
-    <div class="row">
         <form id="add_to_stock" method="post" action="/form/procScanToInventory">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Name</label>
@@ -30,7 +29,6 @@
                 </div>
             </div>
         </form>
-    </div>
 <?php else:?>
     <div class="row">
         <div class="col-lg-12">
