@@ -147,12 +147,16 @@
                                 $('#subtract_from_location').rules('remove');
                             }
                         });
-
-                        $('form#quality_control').submit(function(e){
-                            if($(this).valid())
+                        $('button#qc_submitter').click(function(e){
+                            e.preventDefault();
+                            if($('form#quality_control').valid())
                             {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating QC Status...</h2></div>' });
+                                $('form#quality_control').submit();
                             }
+                        });
+                        $('select#add_to_location, select#subtract_from_location').change(function(e){
+                            $(this).valid();
                         });
                     }
                 },
