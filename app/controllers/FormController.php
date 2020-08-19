@@ -3363,7 +3363,7 @@ class FormController extends Controller {
             $this->clientsbays->stockRemoved($client_id, $subtract_from_location, $subtract_product_id, isset($remove_oversize));
             Session::set('subtractitemfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
         }
-        return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$subtract_product_id);
+        return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$subtract_product_id."#subtract");
     }
 
     public function procAddToStock()
@@ -3418,7 +3418,7 @@ class FormController extends Controller {
             $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier, isset($oversize));
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
         }
-        return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id);
+        return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id."#add");
     }
 
     public function procAddPackage()
