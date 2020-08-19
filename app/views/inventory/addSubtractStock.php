@@ -84,10 +84,10 @@
                         Subtract From Stock
                     </div>
                     <div class="card-body">
-                        <?php if(isset($_SESSION['addfeedback'])) :?>
+                        <?php if(isset($_SESSION['subtractfeedback'])) :?>
                             <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('subtractfeedback');?></div>
                         <?php endif; ?>
-                        <?php if(isset($_SESSION['adderrorfeedback'])) :?>
+                        <?php if(isset($_SESSION['subtracterrorfeedback'])) :?>
                             <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('subtracterrorfeedback');?></div>
                         <?php endif; ?>
                         <p class="text-info">fields marked <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> are required</p>
