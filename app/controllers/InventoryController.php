@@ -223,7 +223,7 @@ class InventoryController extends Controller
             {
                 $location_string .= ", Allocated(".$il['allocated'].")";
             }
-            $location_string .= "<br/>";
+            $location_string .= "<br/";
         }
         $location_string = rtrim($location_string, "<br/>");
         //render the page
@@ -234,7 +234,8 @@ class InventoryController extends Controller
             'product_id'        =>  $product_id,
             'page_title'        =>  "Manage Quality Control For ".$product_info['name'],
             'product_info'      =>  $product_info,
-            'location_string'   =>  $location_string
+            'location_string'   =>  $location_string,
+            'show_remove'       =>  count($qc_locations) > 0
         ]);
 
     }
