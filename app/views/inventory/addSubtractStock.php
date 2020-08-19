@@ -87,8 +87,8 @@
                         <?php if(isset($_SESSION['subtractitemfeedback'])) :?>
                             <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('subtractitemfeedback');?></div>
                         <?php endif; ?>
-                        <?php if(isset($_SESSION['subtracterrorfeedback'])) :?>
-                            <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('subtracterrorfeedback');?></div>
+                        <?php if(isset($_SESSION['subtractitemerrorfeedback'])) :?>
+                            <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('subtractitemerrorfeedback');?></div>
                         <?php endif; ?>
                         <p class="text-info">fields marked <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> are required</p>
                         <div class="container-fluid">
