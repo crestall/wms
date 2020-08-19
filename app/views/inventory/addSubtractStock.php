@@ -25,7 +25,7 @@
                     <div class="card-header bg-secondary text-white">
                         Add To Stock
                     </div>
-                    <div class="card-body"> 
+                    <div class="card-body">
                         <?php if(isset($_SESSION['addfeedback'])) :?>
                            <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('addfeedback');?></div>
                         <?php endif; ?>
@@ -42,8 +42,8 @@
                                 </div>
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                <input class="custom-control-input" type="checkbox" id="under_qc" name="under_qc" <?php if(!empty(Form::value('under_qc'))) echo 'checked';?> />
-                                <label class="custom-control-label col-10" for="under_qc">Under Quality Control</label>
+                                <input class="custom-control-input" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
+                                <label class="custom-control-label col-10" for="qc_stock">Under Quality Control</label>
                             </div>
                             <div class="form-group row">
                                 <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
