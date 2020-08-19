@@ -2700,6 +2700,7 @@ class FormController extends Controller {
         //echo "<pre>",print_r($l_details),"</pre>"; //die();
         if(isset($qc_stock))
         {
+            $post_data['sub_qc_stock'] = "On";
             if($l_details['qc_count'] < $qty_move)
             {
                 Form::setError('qty_move', 'You cannot move more quality control stock than there is available');
