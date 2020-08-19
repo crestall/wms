@@ -18,7 +18,7 @@
                 </div>
             </div>
             <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option>
-                                            <?php echo $this->controller->location->getSelectLocations(Form::value('add_to_location'), $item_id);?>
+                                            <?php echo $this->controller->location->getSelectLocations($add_to_location, $item_id);?>
                                         </select>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>" />
