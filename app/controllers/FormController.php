@@ -3328,7 +3328,7 @@ class FormController extends Controller {
         if($check)
         {
             $location = $this->item->getLocationForItem($subtract_product_id, $subtract_from_location);
-            if(isset($qc_stock))
+            if(isset($sub_qc_stock))
             {
                 if($qty_subtract > $location['qc_count'])
                 {
