@@ -84,37 +84,46 @@
                         Subtract From Stock
                     </div>
                     <div class="card-body">
-                        <form id="subtract_from_stock" method="post" action="/form/procSubtractFromStock">
-                            <div class="form-group row">
-                                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
-                                <div class="col-7">
-                                    <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" value="<?php echo Form::value('qty_subtract');?>" />
-                                    <?php echo Form::displayError('qty_subtract');?>
+                        <?php if(isset($_SESSION['addfeedback'])) :?>
+                            <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('subtractfeedback');?></div>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['adderrorfeedback'])) :?>
+                            <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('subtracterrorfeedback');?></div>
+                        <?php endif; ?>
+                        <p class="text-info">fields marked <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> are required</p>
+                        <div class="container-fluid">
+                            <form id="subtract_from_stock" method="post" action="/form/procSubtractFromStock">
+                                <div class="form-group row">
+                                    <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
+                                    <div class="col-7">
+                                        <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" value="<?php echo Form::value('qty_subtract');?>" />
+                                        <?php echo Form::displayError('qty_subtract');?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                <input class="custom-control-input" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
-                                <label class="custom-control-label col-sm-8 col-xl-10" for="qc_stock">Quality Control Stock</label>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
-                                <div class="col-7">
-                                    <select id="subtract_from_location" name="subtract_from_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectItemInLocations($product_id, Form::value('subtract_from_location'));?></select>
-                                    <?php echo Form::displayError('subtract_from_location');?>
+                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <input class="custom-control-input" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
+                                    <label class="custom-control-label col-sm-8 col-xl-10" for="qc_stock">Quality Control Stock</label>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
-                                <div class="col-7">
-                                    <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
-                                    <?php echo Form::displayError('reason_id');?>
+                                <div class="form-group row">
+                                    <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
+                                    <div class="col-7">
+                                        <select id="subtract_from_location" name="subtract_from_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectItemInLocations($product_id, Form::value('subtract_from_location'));?></select>
+                                        <?php echo Form::displayError('subtract_from_location');?>
+                                    </div>
                                 </div>
-                            </div>
-                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                            <input type="hidden" name="subtract_product_id" value="<?php echo $product_id; ?>" />
-                            <input type="hidden" name="client_id" value="<?php echo $product_info['client_id']; ?>" />
-                            <input type="hidden" name="subtract_product_name" value="<?php echo $product_info['name']; ?>" />
-                        </form>
+                                <div class="form-group row">
+                                    <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
+                                    <div class="col-7">
+                                        <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
+                                        <?php echo Form::displayError('reason_id');?>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                                <input type="hidden" name="subtract_product_id" value="<?php echo $product_id; ?>" />
+                                <input type="hidden" name="client_id" value="<?php echo $product_info['client_id']; ?>" />
+                                <input type="hidden" name="subtract_product_name" value="<?php echo $product_info['name']; ?>" />
+                            </form>
+                        </div>
                     </div>
                     <div class="card-footer text-right">
                         <button id="subtract_stock_submitter" class="btn btn-outline-secondary">Subtract from Stock</button>
