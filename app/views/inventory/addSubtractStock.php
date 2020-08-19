@@ -25,7 +25,14 @@
                     <div class="card-header bg-secondary text-white">
                         Add To Stock
                     </div>
-                    <div class="card-body">
+                    <div class="card-body"> 
+                        <?php if(isset($_SESSION['addfeedback'])) :?>
+                           <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('addfeedback');?></div>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['adderrorfeedback'])) :?>
+                           <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('adderrorfeedback');?></div>
+                        <?php endif; ?>
+                        <p class="text-info">fields marked <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> are required</p>
                         <form id="add_to_stock" method="post" action="/form/procAddToStock">
                             <div class="form-group row">
                                 <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
