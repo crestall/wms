@@ -68,17 +68,11 @@
                                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                 <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" />
                                 <input type="hidden" name="product_name" value="<?php echo $product_info['name']; ?>" />
-                                <div class="form-group row">
-                                    <label class="col-md-5 col-form-label">&nbsp;</label>
-                                    <div class="col-md-7">
-                                        <button type="submit" class="btn btn-primary">Update Quality Control Stock</button>
-                                    </div>
-                                </div>
                             </form>
-                        </div> 
+                        </div>
                     </div>
-                    <div class="card-footer">
-
+                    <div class="card-footer text-right">
+                        <button id="qc_submitter" class="btn btn-outline-secondary">Update QC Stock</button>
                     </div>
                 </div>
             </div>
