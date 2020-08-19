@@ -3351,15 +3351,13 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            Session::set('subtracterrorfeedback', 'Errors were found in the form. Please correct where shown and resubmit');
+            Session::set('subtractitemerrorfeedback', 'Errors were found in the form. Please correct where shown and resubmit');
         }
         else
         {
             $this->location->subtractFromLocation($post_data);
             $this->clientsbays->stockRemoved($client_id, $subtract_from_location, $subtract_product_id, isset($remove_oversize));
             Session::set('subtractitemfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
-
-            Session::set('addfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$subtract_product_id);
     }
