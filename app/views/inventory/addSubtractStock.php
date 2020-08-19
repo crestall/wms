@@ -33,43 +33,45 @@
                            <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('adderrorfeedback');?></div>
                         <?php endif; ?>
                         <p class="text-info">fields marked <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> are required</p>
-                        <form id="add_to_stock" method="post" action="/form/procAddToStock">
-                            <div class="form-group row">
-                                <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
-                                <div class="col-7">
-                                    <input type="text" class="form-control required number" name="qty_add" id="qty_add" value="<?php echo Form::value('qty_add');?>" />
-                                    <?php echo Form::displayError('qty_add');?>
+                        <div class="container-fluid">
+                            <form id="add_to_stock" method="post" action="/form/procAddToStock">
+                                <div class="form-group row">
+                                    <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
+                                    <div class="col-7">
+                                        <input type="text" class="form-control required number" name="qty_add" id="qty_add" value="<?php echo Form::value('qty_add');?>" />
+                                        <?php echo Form::displayError('qty_add');?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                <input class="custom-control-input" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
-                                <label class="custom-control-label col-10" for="qc_stock">Under Quality Control</label>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
-                                <div class="col-7">
-                                    <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option>
-                                        <?php echo $this->controller->location->getSelectLocations(Form::value('add_to_location'), $product_id);?>
-                                    </select>
-                                    <?php echo Form::displayError('add_to_location');?>
+                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <input class="custom-control-input" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
+                                    <label class="custom-control-label col-sm-7 col-xl-10" for="qc_stock">Under Quality Control</label>
                                 </div>
-                            </div>
-                            <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
-                                <label class="custom-control-label col-10" for="to_receiving">Add To Receiving</label>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
-                                <div class="col-7">
-                                    <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
-                                    <?php echo Form::displayError('reason_id');?>
+                                <div class="form-group row">
+                                    <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
+                                    <div class="col-7">
+                                        <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option>
+                                            <?php echo $this->controller->location->getSelectLocations(Form::value('add_to_location'), $product_id);?>
+                                        </select>
+                                        <?php echo Form::displayError('add_to_location');?>
+                                    </div>
                                 </div>
-                            </div>
-                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                            <input type="hidden" name="add_product_id" value="<?php echo $product_id; ?>" />
-                            <input type="hidden" name="client_id" value="<?php echo $product_info['client_id']; ?>" />
-                            <input type="hidden" name="add_product_name" value="<?php echo $product_info['name']; ?>" />
-                        </form>
+                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
+                                    <label class="custom-control-label col-sm-7 col-xl-10" for="to_receiving">Add To Receiving</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
+                                    <div class="col-7">
+                                        <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
+                                        <?php echo Form::displayError('reason_id');?>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                                <input type="hidden" name="add_product_id" value="<?php echo $product_id; ?>" />
+                                <input type="hidden" name="client_id" value="<?php echo $product_info['client_id']; ?>" />
+                                <input type="hidden" name="add_product_name" value="<?php echo $product_info['name']; ?>" />
+                            </form>
+                        </div>
                     </div>
                     <div class="card-footer text-right">
                         <button id="add_stock_submitter" class="btn btn-outline-secondary">Add to Stock</button>
