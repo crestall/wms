@@ -17,7 +17,9 @@
                     <input type="text" class="form-control number required" name="qty" id="qty" value="" />
                 </div>
             </div>
-            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/location_selector.php");?>
+            <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option>
+                                            <?php echo $this->controller->location->getSelectLocations(Form::value('add_to_location'), $product_id);?>
+                                        </select>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>" />
             <input type="hidden" name="client_id" value="<?php echo $item['client_id']; ?>" />
