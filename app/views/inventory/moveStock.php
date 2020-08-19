@@ -21,6 +21,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mb-3">
+                <div class="card h-100 border-secondary">
+                    <div class="card-header bg-secondary text-white">
+                        Move Stock
+                    </div>
+                    <div class="card-body">
+                        put the form here
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
             <div class="col-md-7">
                 <form id="move_stock" method="post" action="/form/procStockMovement">
                     <div class="form-group row">
