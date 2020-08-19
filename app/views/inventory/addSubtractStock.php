@@ -20,6 +20,7 @@
                     </div>
                 </div>
             </div>
+            <a name="add"></a>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-4 mb-3">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
@@ -78,6 +79,7 @@
                     </div>
                 </div>
             </div>
+            <a name="subtract"></a>
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-4 ml-auto mb-3">
                 <div class="card h-100 border-secondary">
                     <div class="card-header bg-secondary text-white">
