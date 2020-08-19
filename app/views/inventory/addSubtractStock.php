@@ -27,18 +27,18 @@
                     </div>
                     <div class="card-body">
                         <form id="add_to_stock" method="post" action="/form/procAddToStock">
-                            <div class="row">
+                            <div class="form-group row">
                                 <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
                                 <div class="col-7">
                                     <input type="text" class="form-control required number" name="qty_add" id="qty_add" value="<?php echo Form::value('qty_add');?>" />
                                     <?php echo Form::displayError('qty_add');?>
                                 </div>
                             </div>
-                            <div class="row custom-control custom-checkbox custom-control-right">
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="under_qc" name="under_qc" <?php if(!empty(Form::value('under_qc'))) echo 'checked';?> />
                                 <label class="custom-control-label col-7" for="under_qc">Under Quality Control</label>
                             </div>
-                            <div class="row">
+                            <div class="form-group row">
                                 <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
                                 <div class="col-7">
                                     <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option>
@@ -47,7 +47,7 @@
                                     <?php echo Form::displayError('add_to_location');?>
                                 </div>
                             </div>
-                            <div class="row custom-control custom-checkbox custom-control-right">
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
                                 <label class="custom-control-label col-7" for="to_receiving">Add To Receiving</label>
                             </div>
