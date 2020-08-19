@@ -174,6 +174,10 @@ return array(
                 'display'   => false,
                 'icon'      => ''
             ),
+            'move-stock'    => array(
+                'display'   => false,
+                'icon'      => ''
+            ),
             'quality-control'    => array(
                 'display'   => false,
                 'icon'      => ''
