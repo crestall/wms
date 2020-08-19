@@ -9,7 +9,6 @@
                 <p><a class="btn btn-outline-fsg" href="/inventory/add-subtract-stock/product=<?php echo $product_id;?>">Add/Subtract Stock</a></p>
             </div>
         </div>
-        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <div class="row">
             <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mb-3">
                 <div class="card h-100 border-secondary">
