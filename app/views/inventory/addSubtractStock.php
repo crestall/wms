@@ -15,7 +15,7 @@
                     <div class="card-header bg-secondary text-white">
                         Current Locations
                     </div>
-                    <div class="card_body">
+                    <div class="card-body">
                         <?php echo $location_string;?>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="card-header bg-secondary text-white">
                         Add To Stock
                     </div>
-                    <div class="card_body">
+                    <div class="card-body">
                         <form id="add_to_stock" method="post" action="/form/procAddToStock">
                             <div class="row">
                                 <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
@@ -74,7 +74,7 @@
                     <div class="card-header bg-secondary text-white">
                         Subtract From Stock
                     </div>
-                    <div class="card_body">
+                    <div class="card-body">
                         The subtract from stock form goes in this box
                     </div>
                 </div>
