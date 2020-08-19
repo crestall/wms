@@ -31,27 +31,27 @@
                             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
                             <form id="move_stock" method="post" action="/form/procStockMovement">
                                 <div class="form-group row">
-                                    <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Number To Move</label>
-                                    <div class="col-4">
+                                    <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Number To Move</label>
+                                    <div class="col-md-4">
                                         <input type="text" class="form-control required number" name="qty_move" id="qty_move" value="<?php echo Form::value('qty_move');?>" />
                                         <?php echo Form::displayError('qty_move');?>
                                     </div>
                                 </div>
                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
                                     <input class="custom-control-input" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
-                                    <label class="custom-control-label col-5" for="qc_stock">Move Quality Control Stock</label>
+                                    <label class="custom-control-label col-md-5" for="qc_stock">Move Quality Control Stock</label>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Move From Location</label>
-                                    <div class="col-4">
+                                    <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Move From Location</label>
+                                    <div class="col-md-4">
                                         <select id="move_from_location" name="move_from_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectItemInLocations($product_id, Form::value('move_from_location'));?></select>
                                         <?php echo Form::displayError('move_from_location');?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Move To Location</label>
+                                    <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Move To Location</label>
                                     <div class="col-md-4">
-                                        <select id="move_to_location" name="move_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations(Form::value('move_to_location'), $product_id);?></select>
+                                        <select id="move_to_location" name="move_to_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations(Form::value('move_to_location'), $product_id);?></select>
                                         <?php echo Form::displayError('move_to_location');?>
                                     </div>
                                 </div>
