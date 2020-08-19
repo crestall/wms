@@ -70,9 +70,5 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-5">
-                <label>Current Locations</label>
-                <textarea class="form-control disabled" rows="<?php echo $rows;?>" disabled><?php echo $location_string;?></textarea>
-            </div>
         </div>
 </div>
