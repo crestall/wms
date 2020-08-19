@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
-                                <label class="custom-control-label col-md-3" for="to_receiving">Add To Receiving</label>
+                                <label class="custom-control-label col-7" for="to_receiving">Add To Receiving</label>
                             </div>
                             <div class="form-group row">
                                 <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
