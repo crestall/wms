@@ -111,8 +111,16 @@
                             e.preventDefault();
                             if($('form#add_to_stock').valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Stock...</h2></div>' });
                                 $('form#add_to_stock').submit();
+                            }
+                        });
+                        $('button#subtract_stock_submitter').click(function(e){
+                            e.preventDefault();
+                            if($('form#subtract_from_stock').valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Removing Stock...</h2></div>' });
+                                $('form#subtract_from_stock').submit();
                             }
                         });
 
