@@ -123,14 +123,6 @@
                                 $('form#subtract_from_stock').submit();
                             }
                         });
-
-
-                        $('form#subtract_from_stock').submit(function(e){
-                            if($(this).valid())
-                            {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
-                            }
-                        });
                     }
                 },
                 'quality-control' : {
