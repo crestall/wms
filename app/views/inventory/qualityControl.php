@@ -27,6 +27,21 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 mb-3">
+                <div class="card h-100 border-secondary">
+                    <div class="card-header bg-secondary text-white">
+                        Move Stock
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
             <div class="col-md-7">
                 <form id="quality_control" method="post" action="/form/procQualityControl">
                     <div class="form-group row">
