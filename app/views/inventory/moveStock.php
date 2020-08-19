@@ -31,7 +31,7 @@
                             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
                             <form id="move_stock" method="post" action="/form/procStockMovement">
                                 <div class="form-group row">
-                                <label class="col-7"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Number To Move</label>
+                                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Number To Move</label>
                                 <div class="col-4">
                                     <input type="text" class="form-control required number" name="qty_move" id="qty_move" value="<?php echo Form::value('qty_move');?>" />
                                     <?php echo Form::displayError('qty_move');?>
