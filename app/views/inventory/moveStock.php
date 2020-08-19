@@ -6,7 +6,7 @@
                 <p><a class="btn btn-outline-fsg" href="/inventory/view-inventory/client=<?php echo $product_info['client_id'];?>">Client Inventory</a></p>
             </div>
             <div class="col text-right">
-                <p><a class="btn btn-outline-fsg" href="/inventory/add-subtract-stock/product=<?php echo $product_id;?>">Add/Subtract Stock for This Item</a></p>
+                <p><a class="btn btn-outline-fsg" href="/inventory/add-subtract-stock/product=<?php echo $product_id;?>">Add/Subtract Stock</a></p>
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
