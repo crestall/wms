@@ -101,8 +101,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                    <input class="custom-control-input" type="checkbox" id="qc_stock" name="qc_stock" <?php if(!empty(Form::value('qc_stock'))) echo 'checked';?> />
-                                    <label class="custom-control-label col-sm-8 col-xl-10" for="qc_stock">Quality Control Stock</label>
+                                    <input class="custom-control-input" type="checkbox" id="sub_qc_stock" name="sub_qc_stock" <?php if(!empty(Form::value('sub_qc_stock'))) echo 'checked';?> />
+                                    <label class="custom-control-label col-sm-8 col-xl-10" for="sub_qc_stock">Quality Control Stock</label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
