@@ -183,9 +183,9 @@ class InventoryController extends Controller
             {
                 $location_string .= ", Allocated(".$il['allocated'].")";
             }
-            $location_string .= "\n";
+            $location_string .= "<br/>";
         }
-        $rows = (count($item_locations) > 5)? count($item_locations) + 2 : 7;
+        $location_string = rtrim($location_string, "<br/>");
         //render the page
         Config::setJsConfig('curPage', "move-stock");
         Config::set('curPage', "move-stock");
@@ -194,9 +194,7 @@ class InventoryController extends Controller
             'product_id'        =>  $product_id,
             'page_title'        =>  "Move Stock For ".$product_info['name']." (".$product_info['sku'].")",
             'product_info'      =>  $product_info,
-            'location_string'   =>  $location_string,
-            'show_remove'       =>  count($qc_locations) > 0,
-            'rows'              =>  $rows
+            'location_string'   =>  $location_string
         ]);
 
     }
@@ -271,16 +269,12 @@ class InventoryController extends Controller
             }
             $location_string .= "<br/>";
         }
-        $rows = (count($item_locations) > 5)? count($item_locations) + 2 : 7;
         $form_array = array(
             'product_id'        =>  $product_id,
             'product_info'      =>  $product_info,
-            'location_string'   =>  $location_string,
-            'rows'              =>  $rows
+            'location_string'   =>  $location_string
         );
         $location_string = rtrim($location_string, "<br/>");
-        $subtractform = $this->view->render( Config::get('VIEWS_PATH') . "forms/subtractstock.php",$form_array);
-
         //render the page
         Config::setJsConfig('curPage', "add-subtract-stock");
         Config::set('curPage', "add-subtract-stock");
@@ -289,7 +283,6 @@ class InventoryController extends Controller
             'product_id'        =>  $product_id,
             'page_title'        =>  "Add or Subtract ".$product_info['name']." (".$product_info['sku'].") from Inventory",
             'location_string'   =>  $location_string,
-            'subtractform'      =>  $subtractform,
             'onhand'            =>  $this->item->getStockOnHand($product_id),
             'product_info'      =>  $product_info
         ]);
