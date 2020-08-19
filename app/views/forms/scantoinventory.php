@@ -91,7 +91,7 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label">Preferred Pick Location</label>
             <div class="col-md-4">
-                <select id="preferred_pick_location_id" name="preferred_pick_location_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations();?></select>
+                <select id="preferred_pick_location_id" name="preferred_pick_location_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations();?></select>
             </div>
         </div>
         <div class="form-group row">
@@ -103,7 +103,7 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Add To Location</label>
             <div class="col-md-4">
-                <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations();?></select>
+                <select id="add_to_location" name="add_to_location" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations();?></select>
             </div>
         </div>
         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
