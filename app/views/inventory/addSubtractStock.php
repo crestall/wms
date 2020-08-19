@@ -52,12 +52,9 @@
                                     <?php echo Form::displayError('add_to_location');?>
                                 </div>
                             </div>
-                            <div class="form-group row form-check">
-                                <label class="col-md-5" for="to_receiving">Add To Receiving</label>
-                                <div class="col-md-7" checkbox checkbox-default>
-                                    <input class="form-check-input styled" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
-                                    <label for="to_receiving"></label>
-                                </div>
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
+                                <label class="custom-control-label col-md-3" for="to_receiving">Add To Receiving</label>
                             </div>
                             <div class="form-group row">
                                 <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
