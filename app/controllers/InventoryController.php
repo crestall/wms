@@ -223,9 +223,9 @@ class InventoryController extends Controller
             {
                 $location_string .= ", Allocated(".$il['allocated'].")";
             }
-            $location_string .= "\n";
+            $location_string .= "<br/>";
         }
-        $rows = (count($item_locations) > 5)? count($item_locations) + 2 : 7;
+        $location_string = rtrim($location_string, "<br/>");
         //render the page
         Config::setJsConfig('curPage', "quality-control");
         Config::set('curPage', "quality-control");
@@ -234,9 +234,7 @@ class InventoryController extends Controller
             'product_id'        =>  $product_id,
             'page_title'        =>  "Manage Quality Control For ".$product_info['name'],
             'product_info'      =>  $product_info,
-            'location_string'   =>  $location_string,
-            'show_remove'       =>  count($qc_locations) > 0,
-            'rows'              =>  $rows
+            'location_string'   =>  $location_string
         ]);
 
     }
