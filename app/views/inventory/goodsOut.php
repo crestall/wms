@@ -11,8 +11,7 @@
             </div>
             <?php if($client_id > 0):?>
                 <div class="form-group row">
-                    <label class="col-form-label col-md-3">&nbsp;</label>
-                    <div class="col-md-9">
+                    <div class="col-md-9 offset-md-3">
                         <h2>Goods Out For <?php echo $client_name;?></h2>
                     </div>
                 </div>
