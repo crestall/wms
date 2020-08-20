@@ -281,12 +281,14 @@ class ajaxfunctionsController extends Controller
             }
         }
         $items = $this->order->getItemsForOrderByConId($con_id, $client_id);
+        $order = $this->order->getOrderByConId($con_id);
         if(!count($items))
         {
             $data['error'] = true;
         }
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/orders_items.php', [
-            'items' =>  $items
+            'items' =>  $items,
+            'order' =>  $order
         ]);
         $data['html'] = $html;
         $this->view->renderJson($data);
