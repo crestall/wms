@@ -1,7 +1,7 @@
 <div id="page-wrapper">
-    <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <div class="row">
+    <div id="page_container" class="container-xl">
+        <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <form id="goodsin" method="post" action="/form/procGoodsIn">
             <div class="form-group row">
                 <label class="col-form-label col-md-3">Select a Client</label>
