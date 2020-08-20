@@ -69,12 +69,7 @@
                                             <?php echo $ls;?>
                                         </td>
                                         <td>
-                                            <?php if($details['pack_item'] > 0):?>
-                                                <p><a class="btn btn-primary" href="/inventory/pack-items-manage/product=<?php echo $item_id;?>">Manage Pack Item</a></p>
-                                            <?php else: ?>
-                                                <p><a class="btn btn-primary" href="/inventory/add-subtract-stock/product=<?php echo $item_id;?>">Add/Subtract Stock</a></p>
-                                            <?php endif;?>
-
+                                            <p><a class="btn btn-primary" href="/inventory/add-subtract-stock/product=<?php echo $item_id;?>">Add/Subtract Stock</a></p>
                                             <p><a class="btn btn-primary" href="/inventory/move-stock/product=<?php echo $item_id;?>">Move Stock</a></p>
                                             <p><a class="btn btn-primary" href="/inventory/quality-control/product=<?php echo $item_id;?>">Quality Control</a>  </p>
                                         </td>
