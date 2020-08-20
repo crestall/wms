@@ -97,7 +97,7 @@ class InventoryController extends Controller
             }
         }
         Config::setJsConfig('curPage', "goods-in");
-        onfig::set('curPage', "goods-in");
+        Config::set('curPage', "goods-in");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/goodsIn.php',[
             'page_title'    =>  'Goods In',
             'client_id'     =>  $client_id,
