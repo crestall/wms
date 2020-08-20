@@ -63,7 +63,7 @@
                                     <td data-label="Items">
                                         <?php //echo $co['items'];?>
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
-                                            <?php foreach($co['items'] as $i):?>
+                                            <?php foreach($co['csv_items'] as $i):?>
                                                 <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span></p>
                                             <?php endforeach;?>
                                         </div>
