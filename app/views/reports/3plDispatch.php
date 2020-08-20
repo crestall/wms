@@ -38,7 +38,6 @@
                                     <th>Client Order Number</th>
                                     <th>Shipped To</th>
                                     <th>Items</th>
-                                    <th>Charge Code</th>
                                     <th>Total Charge</th>
                                     <th>Weight</th>
                                     <th>Courier</th>
@@ -63,7 +62,6 @@
                                     <td data-label="Client Order ID" class="number"><?php echo $co['client_order_number'];?></td>
                                     <td data-label="Shipped To" class="nowrap shipped_to"><?php echo $co['shipped_to'];?></td>
                                     <td data-label="Items" class="nowrap items"><?php echo $co['items'];?></td>
-                                    <td data-label="Charge Code"><?php echo $co['charge_code'];?></td>
                                     <td data-label="Total Charge"><?php echo $co['charge'];?></td>
                                     <td data-label="Weight"><?php echo $co['weight'];?></td>
                                     <td data-label="Courier" ><?php echo $co['courier'];?></td>
