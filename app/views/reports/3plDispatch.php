@@ -52,6 +52,11 @@
                                 if(!empty($co['uploaded_file']))
                                 {
                                     $invoice = "<a href='/client_uploads/{$co['client_id']}/{$co['uploaded_file']}' target='_blank'>Print Invoice</a>";
+                                }
+                                $weight = 0;
+                                foreach($co['parcels'] as $parc)
+                                {
+                                    $weight += $parc['weight'];
                                 }?>
                             	<tr>
                                     <td data-label="Date Ordered" class="number" ><?php echo $co['date_ordered'];?></td>
@@ -72,7 +77,7 @@
                                         </div>
                                     </td>
                                     <td data-label="Total Charge"><?php echo $co['charge'];?></td>
-                                    <td data-label="Weight"><?php echo $co['weight'];?></td>
+                                    <td data-label="Weight"><?php echo $weight;?></td>
                                     <td data-label="Courier" ><?php echo $co['courier'];?></td>
                                     <td data-label="Con Note"><?php echo $co['consignment_id'];?></td>
                                     <td data-label="Cartons" class="number"><?php echo $co['cartons'];?></td>
