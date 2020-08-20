@@ -189,11 +189,11 @@ return array(
             'move-bulk-items'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-dolly-flatbed-alt fa-3x"></i>'
-            ),*/
+            ),
             'move-all-client-stock'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-conveyor-belt fa-3x"></i>'
-            )
+            )*/
         ),
 		'reports'   => array(
             'reports-index' => true,
