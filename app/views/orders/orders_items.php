@@ -1,10 +1,18 @@
 <?php if(count($items)):?>
     <div class="form-group row">
         <div class="col-md-9 offset-md-3">
-            <h2>Items In This Order - <?php echo $order['order_number'];?></h2> 
+            <h2>Items Returned For Order Number <?php echo $order['order_number'];?></h2>
         </div>
     </div>
     <?php foreach($items as $i):?>
+        <div class="form-group-row">
+            <div class="col-md-8">
+                <?php echo "{$i['name']}";?>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control number" name="item_returns[<?php echo $i['item_id'];?>][qty]" number data-rule-max="<?php echo $i['qty'];?>" value="<?php echo $i['qty'];?>" />
+            </div>
+        </div>
         <div class="form-group row">
             <div class="form-check">
                 <label class="form-check-label col-md-3" for="return_items_<?php echo $i['id'];?>"><?php echo "{$i['name']} ({$i['qty']})";?></label>
