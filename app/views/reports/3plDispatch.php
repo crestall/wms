@@ -11,7 +11,7 @@
         <?php if($client_id > 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
             <?php if(count($client_orders)):?>
-                <?php //echo "<pre>",print_r($client_orders),"</pre>"; die();?>
+                <?php echo "<pre>",print_r($client_orders),"</pre>"; die();?>
                 <div id="waiting" class="row">
                     <div class="col-lg-12 text-center">
                         <h2>Drawing Table..</h2>
