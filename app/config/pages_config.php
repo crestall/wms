@@ -181,11 +181,11 @@ return array(
             'quality-control'    => array(
                 'display'   => false,
                 'icon'      => ''
-            ),
+            ),/*
             'transfer-location'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-dolly-flatbed fa-3x"></i>'
-            ),
+            ),*/
             'move-bulk-items'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-dolly-flatbed-alt fa-3x"></i>'
