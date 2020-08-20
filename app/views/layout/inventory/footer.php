@@ -413,7 +413,10 @@
                                     //$('#available').focus();
                                     actions.common['add-to-receiving']();
                                     $('.selectpicker').selectpicker('refresh');
-
+                                    $('select#preferred_pick_location_id').change(function(e){
+                                        var val = this.value
+                                        $('select#add_to_location').val(this.value).prop('selected', true);
+                                    });
                                     $('#add_to_stock').validate({
                                         rules:{
                                             qty:{
@@ -460,26 +463,6 @@
                                 				remote: 'This barcode is already in use. Barcodes must be unique'
                                 			}
                                         }
-                                    });
-                                    $('#palletized').click(function(e){
-                                        $("#per_pallet_holder").slideToggle('slow');
-                                    });
-
-                                    $('#package_type').change(function(e){
-                                        var html = "";
-                                        $("option:selected", this).each(function(){
-                                            if($(this).data('multiples') == 1)
-                                            {
-                                                var count = ($( "#pt_count_"+$(this).val() ).val())? $( "#pt_count_"+$(this).val() ).val(): "" ;
-                                                html += "<div class='form-group row'>";
-                                                html += "<label class='col-md-3 col-form-label'><sup><small><i class='fas fa-asterisk text-danger'></i></small></sup> Number in "+$(this).text()+"</label>";
-                                                html += "<div class='col-md-4'>";
-                                                html += "<input type='text' class='form-control required number' name='number_in_"+$(this).val()+"' id='number_in_"+$(this).val()+"' value='"+count+"' />";
-                                                html += "</div>";
-                                                html += "</div>";
-                                            }
-                                        });
-                                        $("#type_holder").html(html);
                                     });
                                 });
                             }
