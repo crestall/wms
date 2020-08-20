@@ -186,8 +186,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,2,5,10,11,12] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
