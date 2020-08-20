@@ -43,7 +43,6 @@
                                     <th>Courier</th>
                                     <th>Con Note</th>
                                     <th>Cartons</th>
-                                    <th>Extras<br/><button class="btn btn-success btn-sm" id="extras_update">Update Extras</button></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -68,20 +67,6 @@
                                     <td data-label="Con Note"><?php echo $co['consignment_id'];?></td>
                                     <td data-label="Cartons" class="number"><?php echo $co['cartons'];?></td>
                                     <!--td data-label="Comments"><textarea class="form-control 3pl_comments" data-orderid="<?php echo $co['id'];?>"><?php echo $co['comments'];?></textarea></td-->
-                                    <td data-label="Extras Update" class="extras">
-                                        <div class="checkbox checkbox-default">
-                                            <input class="styled" type="checkbox" id="bubblewrap_<?php echo $co['id'];?>" name="bubblewrap_<?php echo $co['id'];?>" <?php if($co['bubble_wrap']) echo "checked"; ?> />
-                                            <label for="bubblewrap_<?php echo $co['id'];?>">Bubble Wrap</label>
-                                        </div>
-                                        <div class="checkbox checkbox-default">
-                                            <input class="styled" type="checkbox" id="shrinkwrap_<?php echo $co['id'];?>" name="shrinkwrap_<?php echo $co['id'];?>" <?php if($co['shrink_wrap']) echo "checked"; ?> />
-                                            <label for="shrinkwrap_<?php echo $co['id'];?>">Shrink Wrap</label>
-                                        </div>
-                                        <div class="pallets">
-                                            <input type="text" class="number form-control" name="pallets_<?php echo $co['id'];?>" id="pallets_<?php echo $co['id'];?>" value="<?php echo $co['pallets'];?>" />
-                                            <label class="col-form-label">Pallets</label>
-                                        </div>
-                                    </td>
                                     <td><?php echo $invoice; ?></td>
                                 </tr>
                             <?php endforeach;?>
