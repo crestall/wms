@@ -2560,7 +2560,7 @@ class FormController extends Controller {
                 $location_id = $this->location->getLocationId('Returns') ;
                 foreach($this->request->data['item_returns'] as $item_id => $details)
                 {
-                    if(isset($details['id']))
+                    if(($details['qty']) > 0)
                     {
                         $this->orderreturn->recordData(array(
                             'reason'    =>  'Return To Sender',
