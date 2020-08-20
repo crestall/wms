@@ -5,7 +5,7 @@
         </div>
     </div>
     <?php foreach($items as $i):?>
-        <div class="form-group-row">
+        <div class="form-group row">
             <div class="col-md-8">
                 <?php echo "{$i['name']}";?>
             </div>
