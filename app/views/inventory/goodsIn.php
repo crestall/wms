@@ -46,7 +46,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
-                        <button type="submit" id="submit_button" class="btn btn-primary">Submit Form</button>
+                        <button type="submit" id="submit_button" class="btn btn-outline-secondary">Record Movement</button>
                     </div>
                 </div>
             <?php endif;?>
