@@ -56,7 +56,9 @@ $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
             <div class="col-md-2">
                 <div class="input-group">
                     <input type="text" class="form-control" name="date_to" id="date_to" value="<?php echo $date_to;?>" />
-                    <span class="input-group-addon">&nbsp;<i class="fad fa-calendar-alt fa-2x"></i></span>
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                    </div>
                 </div>
             </div>
         </div>
