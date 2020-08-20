@@ -11,7 +11,7 @@
         <?php if($client_id > 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
             <?php if(count($client_orders)):?>
-                <?php echo "<pre>",print_r($client_orders),"</pre>"; die();?>
+                <?php //echo "<pre>",print_r($client_orders),"</pre>"; die();?>
                 <div id="waiting" class="row">
                     <div class="col-lg-12 text-center">
                         <h2>Drawing Table..</h2>
@@ -60,7 +60,17 @@
                                 	<td data-label="WMS Order Number"  class="number"><a href="/orders/order-update/order=<?php echo $co['id'];?>"><?php echo str_pad($co['order_number'],8,'0',STR_PAD_LEFT);?></a></td>
                                     <td data-label="Client Order ID" class="number"><?php echo $co['client_order_number'];?></td>
                                     <td data-label="Shipped To" class="nowrap shipped_to"><?php echo $co['shipped_to'];?></td>
-                                    <td data-label="Items" class="nowrap items"><?php echo $co['items'];?></td>
+                                    <td data-label="Items">
+                                        <?php //echo $co['items'];?>
+                                        <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                            <?php foreach($co['items'] as $i):?>
+                                                <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span></p>
+                                            <?php endforeach;?>
+                                        </div>
+                                        <div class="item_total text-right">
+                                            Total Items: <?php echo $co['total_items'];?>
+                                        </div>
+                                    </td>
                                     <td data-label="Total Charge"><?php echo $co['charge'];?></td>
                                     <td data-label="Weight"><?php echo $co['weight'];?></td>
                                     <td data-label="Courier" ><?php echo $co['courier'];?></td>
