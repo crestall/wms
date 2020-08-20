@@ -350,7 +350,7 @@ var datePicker = {
         }
         $( "#date_to" ).datepicker(to_opts);
         $('i.fa-calendar-alt').css('cursor', 'pointer').click(function(e){
-            $(this).closest('span').prev('input.form-control').focus();
+            $(this).closest('div.input-group-append').prev('input.form-control').focus();
         });
     },
     fromDate: function(){
