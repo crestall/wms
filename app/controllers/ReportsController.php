@@ -206,7 +206,7 @@ class ReportsController extends Controller
         }
         Config::setJsConfig('curPage', "3pl-stock-movement-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plStockMovement.php',[
-            'page_title'        =>  '3PL Stock Movement Report',
+            'page_title'        =>  'FSG Stock Movement Report',
             'from'              =>  $from,
             'to'                =>  $to,
             'date_filter'       =>  "",
