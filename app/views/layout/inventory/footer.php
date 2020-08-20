@@ -415,7 +415,7 @@
                                     $('.selectpicker').selectpicker('refresh');
                                     $('select#preferred_pick_location_id').change(function(e){
                                         var val = this.value
-                                        $('select#add_to_location').val(this.value).prop('selected', true);
+                                        $('select#add_to_location').selectpicker('val', this.value);
                                     });
                                     $('#add_to_stock').validate({
                                         rules:{
