@@ -6,10 +6,10 @@
     </div>
     <?php foreach($items as $i):?>
         <div class="form-group row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <?php echo "{$i['name']}";?>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <input type="text" class="form-control number" name="item_returns[<?php echo $i['item_id'];?>][qty]" number data-rule-max="<?php echo $i['qty'];?>" value="<?php echo $i['qty'];?>" />
             </div>
         </div>
