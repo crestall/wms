@@ -1,4 +1,9 @@
 <?php if(count($items)):?>
+    <div class="form-group row">
+        <div class="col-md-9 offset-md-3">
+            <h2>Items In This Order</h2> 
+        </div>
+    </div>
     <?php foreach($items as $i):?>
         <div class="form-group row">
             <div class="form-check">
