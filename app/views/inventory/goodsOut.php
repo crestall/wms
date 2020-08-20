@@ -26,12 +26,6 @@
                     <label class="col-form-label col-md-3">Carton Count</label>
                     <div class="col-md-4">
                         <input type="text" class="form-control counter number" name="carton_count" id="carton_count" placeholder="One of these is required" value="<?php echo Form::value('carton_count');?>" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-md-3">Satchel Count</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control counter number" name="satchel_count" id="satchel_count" placeholder="One of these is required" value="<?php echo Form::value('satchel_count');?>" />
                         <?php echo Form::displayError('counter');?>
                     </div>
                 </div>
@@ -39,7 +33,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
-                        <button type="submit" id="submit_button" class="btn btn-primary">Submit Form</button>
+                        <button type="submit" id="submit_button" class="btn btn-outline-secondary">Record Movement</button>
                     </div>
                 </div>
             <?php endif;?>
