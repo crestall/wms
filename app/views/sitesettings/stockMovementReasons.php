@@ -66,9 +66,9 @@ $role = Session::getUserRole();
                                             <input type="hidden" name="current_name_<?php echo $r['id'];?>" id="current_name_<?php echo $r['id'];?>" value="<?php echo $r['name'];?>" />
                                         </td>
                                         <td data-label="Active">
-                                            <div class="checkbox checkbox-default">
-                                                <input class="form-check-input styled" type="checkbox" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo "checked";?> />
-                                                <label for="active_<?php echo $r['id'];?>"></label>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo "checked";?> />
+                                                <label class="custom-control-label" for="active_<?php echo $r['id'];?>"></label>
                                             </div>
                                         </td>
                                         <?php if($role === "super admin"):?>
