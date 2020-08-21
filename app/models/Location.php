@@ -86,7 +86,7 @@ class Location extends Model{
         return ( !empty($res) );
     }
 
-    public function getLocationUsage()
+    public function getLocationUsage($active = 1)
     {
         $db = Database::openConnection();
         $query = "
@@ -96,6 +96,7 @@ class Location extends Model{
             JOIN items i ON i.id = il.item_id
             JOIN clients c ON i.client_id = c.id
             LEFT JOIN clients_bays cb ON cb.location_id = il.location_id AND cb.date_removed = 0 AND cb.client_id = c.id
+            WHERE l.active = $active
             ORDER BY l.location
         ";
 
