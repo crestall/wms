@@ -66,10 +66,6 @@ $role = Session::getUserRole();
                                             <input type="hidden" name="current_name_<?php echo $r['id'];?>" id="current_name_<?php echo $r['id'];?>" value="<?php echo $r['name'];?>" />
                                         </td>
                                         <td data-label="Active">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo "checked";?> />
-                                                <label class="custom-control-label" for="active_<?php echo $r['id'];?>"></label>
-                                            </div>
                                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                                 <input class="custom-control-input" type="checkbox" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo 'checked';?> />
                                                 <label class="custom-control-label col-md-3" for="active_<?php echo $r['id'];?>"></label>
@@ -84,9 +80,7 @@ $role = Session::getUserRole();
                                             </td>
                                         <?php endif;?>
                                         <td>
-                                            <p>
-                                                <a class="btn btn-outline-secondary update" data-locationid="<?php echo $r['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $r['id'];?>"></span>
-                                            </p>
+                                            <a class="btn btn-outline-secondary update" data-locationid="<?php echo $r['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $r['id'];?>"></span>
                                         </td>
                                     </tr>
                                 <?php endforeach;?>
