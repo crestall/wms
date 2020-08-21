@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p class="text-right">
-                            <button id="csv_download" class="btn btn-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
+                            <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
                         </p>
                     </div>
                 </div>
