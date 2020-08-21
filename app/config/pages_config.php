@@ -256,10 +256,6 @@ return array(
             'empty-bay-report'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
-            ),
-            'pickups-report'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-truck-pickup fa-3x"></i>'
             )
 		),
         'data-entry'    =>  array(
