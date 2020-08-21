@@ -114,7 +114,7 @@ class ReportsController extends Controller
         Config::setJsConfig('curPage', "3pl-dispatch-report");
         Config::set('curPage', "3pl-dispatch-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plDispatch.php',[
-            'page_title'    =>  '3PL Dispatch Report',
+            'page_title'    =>  'FSG Dispatch Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
@@ -142,7 +142,7 @@ class ReportsController extends Controller
         Config::setJsConfig('curPage', "3pl-order-serials-report");
         Config::set('curPage', "3pl-order-serials-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plUndispatchedSerials.php',[
-            'page_title'    =>  '3PL Undispatched With Invoices Report',
+            'page_title'    =>  'FSG Undispatched With Invoices Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
@@ -259,7 +259,7 @@ class ReportsController extends Controller
         Config::setJsConfig('curPage', "3pl-stock-movement-summary");
         Config::set('curPage', "3pl-stock-movement-summary");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plStockMovementSummary.php',[
-            'page_title'        =>  '3PL Stock Movement Summary'
+            'page_title'        =>  'FSG Stock Movement Summary'
         ]);
     }
 
