@@ -268,6 +268,10 @@
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Reason...</h2></div>' });
                             }
+                            else
+                            {
+                                return false;
+                            }
                         });
                     }
                 }
