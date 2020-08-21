@@ -595,7 +595,7 @@ class Location extends Model{
           SELECT id, location
           FROM locations
           WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations) AND tray = 0 AND active = 1
-          ORDER BY location + 0
+          ORDER BY location
         ";
         return $db->queryData($q);
     }
