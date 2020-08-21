@@ -35,7 +35,7 @@
                                 <td data-label="Date" class="number" ><?php echo $gi['date'];?></td>
                                 <td data-label="Client"><?php echo $gi['client_name'];?></td>
                             	<td data-label="Pallets" class="number"><?php echo $gi['pallets'];?></td>
-                                <td data-label="Satchels" class="number"><?php echo $gi['satchels'];?></td>
+                                <td data-label="Cartons" class="number"><?php echo $gi['cartons'];?></td>
                                 <td data-label="Entered By"><?php echo $gi['entered_by'];?></td>
                             </tr>
                         <?php endforeach;?>
