@@ -72,10 +72,10 @@ $role = Session::getUserRole();
                                             </div>
                                         </td>
                                         <?php if($role === "super admin"):?>
-                                            <td data-label="Trays">
-                                                <div class="checkbox checkbox-default">
-                                                    <input class="form-check-input styled" type="checkbox" id="locked_<?php echo $r['id'];?>" name="locked_<?php echo $r['id'];?>" <?php if($r['locked'] > 0) echo "checked";?> />
-                                                    <label for="locked_<?php echo $r['id'];?>"></label>
+                                            <td data-label="Locked">
+                                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                                    <input class="custom-control-input" type="checkbox" id="locked_<?php echo $r['id'];?>" name="locked_<?php echo $r['id'];?>" <?php if($r['locked'] > 0) echo 'checked';?> />
+                                                    <label class="custom-control-label col-md-3" for="locked_<?php echo $r['id'];?>"></label>
                                                 </div>
                                             </td>
                                         <?php endif;?>
