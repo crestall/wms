@@ -48,6 +48,7 @@ class ReportsController extends Controller
         $stock = $this->itemmovement->getStockAtDateArray($client_id, $date);
 
         Config::setJsConfig('curPage', "stock-at-date");
+        Config::set('curPage', "stock-at-date");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/stockAtDate.php',[
             'page_title'            =>  'Stock At Date: '.date("d/m/Y", $date),
             'stock'                 =>  $stock,
@@ -63,6 +64,7 @@ class ReportsController extends Controller
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $bays = $this->clientsbays->getBayUsage($from, $to);
         Config::setJsConfig('curPage', "client-bay-usage");
+        Config::set('curPage', "client-bay-usage");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage.php',[
             'page_title'    => 'Client Spaces Usage Report',
             'from'          =>  $from,
@@ -77,6 +79,7 @@ class ReportsController extends Controller
     {
         $locations = $this->location->getEmptyLocations();
         Config::setJsConfig('curPage', "empty-bay-report");
+        Config::set('curPage', "empty-bay-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/emptyBays.php',[
             'page_title'    => 'Empty Bay Report',
             'locations'     => $locations
@@ -87,6 +90,7 @@ class ReportsController extends Controller
     {
         $locations = $this->location->getLocationUsage();
         Config::setJsConfig('curPage', "location-report");
+        Config::set('curPage', "location-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/locationReport.php',[
             'page_title'    => 'Location Report',
             'locations'     => $locations
@@ -108,6 +112,7 @@ class ReportsController extends Controller
             $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         }
         Config::setJsConfig('curPage', "3pl-dispatch-report");
+        Config::set('curPage', "3pl-dispatch-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plDispatch.php',[
             'page_title'    =>  '3PL Dispatch Report',
             'client_id'     =>  $client_id,
@@ -135,6 +140,7 @@ class ReportsController extends Controller
             $orders = $this->order->getUndispatchedOrdersWithSerialsArray($from, $to, $client_id);
         }
         Config::setJsConfig('curPage', "3pl-order-serials-report");
+        Config::set('curPage', "3pl-order-serials-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plUndispatchedSerials.php',[
             'page_title'    =>  '3PL Undispatched With Invoices Report',
             'client_id'     =>  $client_id,
@@ -157,6 +163,7 @@ class ReportsController extends Controller
         $pickups = $this->recordedpickup->getPickups($from, $to, $client_id);
 
         Config::setJsConfig('curPage', "pickups-report");
+        Config::set('curPage', "pickups-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/pickups.php',[
             'page_title'    =>  'Pickups Report',
             'client_id'     =>  $client_id,
@@ -205,6 +212,7 @@ class ReportsController extends Controller
             $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to);
         }
         Config::setJsConfig('curPage', "3pl-stock-movement-report");
+        Config::set('curPage', "3pl-stock-movement-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plStockMovement.php',[
             'page_title'        =>  'FSG Stock Movement Report',
             'from'              =>  $from,
@@ -233,30 +241,12 @@ class ReportsController extends Controller
             }
         }
         Config::setJsConfig('curPage', "inventory-report");
+        Config::set('curPage', "inventory-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/inventoryReport.php',[
             'page_title'    =>  'Current Inventory',
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
             'products'      =>  $products
-        ]);
-    }
-
-    public function swatchesReport()
-    {
-        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 59;   //Only NOA has swatches
-        $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('Monday last week');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('Friday last week');
-        $swatches = $this->swatch->getSentSwatches($client_id, $from, $to);
-        Config::setJsConfig('curPage', "swatches-report");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/swatchesReport.php',[
-            'page_title'    =>  'Dispatched Swatches',
-            'from'          =>  $from,
-            'to'            =>  $to,
-            'date_filter'   =>  "",
-            'client_id'     =>  $client_id,
-            'client_name'   =>  $client_name,
-            'swatches'      =>  $swatches
         ]);
     }
 
@@ -267,6 +257,7 @@ class ReportsController extends Controller
             return $this->clientStockMovementSummary();
         }
         Config::setJsConfig('curPage', "3pl-stock-movement-summary");
+        Config::set('curPage', "3pl-stock-movement-summary");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plStockMovementSummary.php',[
             'page_title'        =>  '3PL Stock Movement Summary'
         ]);
@@ -281,6 +272,7 @@ class ReportsController extends Controller
         $exc = array($this->stockmovementlabels->getLabelId('Internal Stock Movement'));
         $movements = $this->itemmovement->getItemMovementsSummaryArray($client_id, $from, $to, $exc);
         Config::setJsConfig('curPage', "stock-movement-summary");
+        Config::set('curPage', "stock-movement-summary");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientStockMovementSummary.php',[
             'page_title'        =>  ucwords(strtolower($client_name)).' Stock Movement Summary',
             'from'              =>  $from,
@@ -301,6 +293,7 @@ class ReportsController extends Controller
         $exc = array($this->stockmovementlabels->getLabelId('Internal Stock Movement'));
         $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to, $exc);
         Config::setJsConfig('curPage', "client-stock-movement-report");
+        Config::set('curPage', "client-stock-movement-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientStockMovement.php',[
             'page_title'        =>  ucwords(strtolower($client_name)).' Stock Movement Report',
             'from'              =>  $from,
@@ -320,6 +313,7 @@ class ReportsController extends Controller
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $returns = $this->orderreturn->getReturnedOrdersArray($from, $to, $client_id);
         Config::setJsConfig('curPage', "returns-report");
+        Config::set('curPage', "returns-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/returnsReport.php',[
             'page_title'        =>  'Returns Report',
             'from'              =>  $from,
@@ -336,6 +330,7 @@ class ReportsController extends Controller
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $goods = $this->inwardsgoods->getInwardsGoodsArray($from, $to);
         Config::setJsConfig('curPage', "goods-in-report");
+        Config::set('curPage', "goods-in-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/goodsinReport.php',[
             'page_title'    =>  'Goods In Report',
             'from'          =>  $from,
@@ -351,6 +346,7 @@ class ReportsController extends Controller
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $goods = $this->outwardsgoods->getOutwardsGoodsArray($from, $to);
         Config::setJsConfig('curPage', "goods-out-report");
+        Config::set('curPage', "goods-out-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/goodsoutReport.php',[
             'page_title'    =>  'Goods Out Report',
             'from'          =>  $from,
@@ -360,27 +356,13 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function truckRunSheet()
-    {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
-        $runs = $this->truckusage->getRunSheetArray($from, $to);
-        Config::setJsConfig('curPage', "truck-run-sheet");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/truckRunSheet.php',[
-            'page_title'    =>  'Truck Run Sheet',
-            'from'          =>  $from,
-            'to'            =>  $to,
-            'runs'          =>  $runs,
-            'date_filter'   =>  'Dispatched'
-        ]);
-    }
-
     public function goodsInSummary()
     {
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $summary = $this->inwardsgoods->getSummaryArray($from, $to);
         Config::setJsConfig('curPage', "goods-in-summary");
+        Config::set('curPage', "goods-in-summary");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/goodsInSummary.php',[
             'page_title'    =>  'Goods In Summary',
             'from'          =>  $from,
@@ -396,6 +378,7 @@ class ReportsController extends Controller
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $summary = $this->outwardsgoods->getSummaryArray($from, $to);
         Config::setJsConfig('curPage', "goods-out-summary");
+        Config::set('curPage', "goods-out-summary");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/goodsOutSummary.php',[
             'page_title'    =>  'Goods Out Summary',
             'from'          =>  $from,
@@ -405,17 +388,13 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function solarReturnsReport()
-    {
-        return $this->redirector->comingSoon();
-    }
-
     public function unloadedContainersReport()
     {
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to);
         Config::setJsConfig('curPage', "unloaded-containers-report");
+        Config::set('curPage', "unloaded-containers-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/unloadedContainers.php',[
             'page_title'            =>  'Unloaded Containers Report',
             'from'                  =>  $from,
@@ -434,6 +413,7 @@ class ReportsController extends Controller
         $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         $hidden = Config::get("HIDE_CHARGE_CLIENTS");
         Config::setJsConfig('curPage', "client-dispatch-report");
+        Config::set('curPage', "client-dispatch-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDispatch.php',[
             'page_title'        =>  'Client Dispatch Report',
             'from'              =>  $from,
