@@ -29,7 +29,7 @@ $role = Session::getUserRole();
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Add Reason</button>
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">Add Reason</button>
                 </div>
             </div>
         </form>
