@@ -596,7 +596,7 @@
                         });
                     }
                 },
-                'client-bay-usage' :{
+                'client-bay-usage-report' :{
                     init: function(){
                         datePicker.betweenDates(true);
                         $('button#change_dates').click(function(e){

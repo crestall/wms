@@ -58,7 +58,7 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function clientSpaceUsageReport()
+    public function clientBayUsageReport()
     {
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();

@@ -217,7 +217,7 @@ return array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
-            'client-space-usage-report'    => array(
+            'client-bay-usage-report'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
             ),
