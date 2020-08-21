@@ -614,8 +614,7 @@
                 'empty-bay-report': {
                     init: function(){
                         dataTable.init($('table#emptybay_table'), {
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
