@@ -23,7 +23,7 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-lg-12">
-                    <table id="emptybay_table" class="table-striped table-hover" width="100%">
+                    <table id="emptybay_table" class="table-striped table-hover">
                         <thead>
                         	<tr>
                                 <th>Location</th>
