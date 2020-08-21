@@ -66,7 +66,7 @@ class ReportsController extends Controller
         Config::setJsConfig('curPage', "client-bay-usage");
         Config::set('curPage', "client-bay-usage");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage.php',[
-            'page_title'    => 'Client Spaces Usage Report',
+            'page_title'    => 'Client Bay Usage Report',
             'from'          =>  $from,
             'to'            =>  $to,
             'date_filter'   =>  "",
