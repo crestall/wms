@@ -261,8 +261,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,2,5,6,7] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -370,8 +369,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,2,5,6] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -400,8 +398,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,4,5] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -429,8 +426,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -457,8 +453,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -525,8 +520,7 @@
                     init: function(){
                         datePicker.betweenDates(true);
                         dataTable.init($('table#goods_in_summary'), {
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
@@ -550,8 +544,7 @@
                     init: function(){
                         datePicker.betweenDates(true);
                         dataTable.init($('table#goods_out_summary'), {
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
