@@ -70,6 +70,10 @@ $role = Session::getUserRole();
                                                 <input type="checkbox" class="custom-control-input" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo "checked";?> />
                                                 <label class="custom-control-label" for="active_<?php echo $r['id'];?>"></label>
                                             </div>
+                                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                                <input class="custom-control-input" type="checkbox" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo 'checked';?> />
+                                                <label class="custom-control-label col-md-3" for="active_<?php echo $r['id'];?>"></label>
+                                            </div>
                                         </td>
                                         <?php if($role === "super admin"):?>
                                             <td data-label="Locked">
