@@ -11,7 +11,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <button id="csv_download" class="btn btn-ouline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
+                    <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
                 </div>
             </div>
             <div class="row" id="table_holder" style="display:none">
