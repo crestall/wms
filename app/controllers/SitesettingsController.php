@@ -27,23 +27,12 @@ class SiteSettingsController extends Controller
         $locations = $this->location->getAllLocations($active);
         //render the page
         Config::setJsConfig('curPage', "locations");
+        Config::set('curPage', "locations");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/locations.php',
         [
             'page_title'    =>  'Manage Locations',
             'locations'     =>  $locations,
             'active'        =>  $active
-        ]);
-    }
-
-    public function pickfaces()
-    {
-        $pickfaces = $this->pickface->getAllPickfaces();
-        //render the page
-        Config::setJsConfig('curPage', "pickfaces");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/pickfaces.php',
-        [
-            'page_title'    =>  'Manage Pickfaces',
-            'pickfaces'     =>  $pickfaces
         ]);
     }
 
@@ -55,6 +44,7 @@ class SiteSettingsController extends Controller
         $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : -1;
         //render the page
         Config::setJsConfig('curPage', "manage-users");
+        Config::set('curPage', "manage-users");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/manageUsers.php',
         [
             'page_title'    =>  'Manage Users',
@@ -67,6 +57,7 @@ class SiteSettingsController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "order-status");
+        Config::set('curPage', "order-status");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'sitesettings/orderStatus.php',
         [
             'page_title'    =>  'Manage Order Status Labels'
@@ -77,6 +68,7 @@ class SiteSettingsController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "staff");
+        Config::set('curPage', "staff");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'sitesettings/staff.php',
         [
             'page_title'    =>  'Manage Staff Records'
@@ -88,6 +80,7 @@ class SiteSettingsController extends Controller
         //render the page
         $reasons = $this->stockmovementlabels->getMovementLabels();
         Config::setJsConfig('curPage', "stock-movement-reasons");
+        Config::set('curPage', "stock-movement-reasons");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/stockMovementReasons.php',
         [
             'page_title'    =>  'Manage Stock Movement Reasons',
@@ -99,6 +92,7 @@ class SiteSettingsController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "packing-types");
+        Config::set('curPage', "packing-types");
         $packings = $this->packingtype->getPackingTypes();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/packingTypes.php',[
             'page_title'    =>  'Manage Packing Types',
@@ -111,31 +105,10 @@ class SiteSettingsController extends Controller
         $couriers = $this->courier->getCouriers();
         //render the page
         Config::setJsConfig('curPage', "couriers");
+        Config::set('curPage', "couriers");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/couriers.php',[
             'page_title'    =>  'Manage Couriers',
             'couriers'      =>  $couriers
-        ]);
-    }
-
-    public function solarOrderTypes()
-    {
-        $types = $this->solarordertype->getTypes();
-        //render the page
-        Config::setJsConfig('curPage', "solar-order-types");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/solarOrderTypes.php',[
-            'page_title'  =>  'Manage Solar Order Types',
-            'types'      =>  $types
-        ]);
-    }
-
-    public function storeChains()
-    {
-        $chains = $this->storechain->getChains();
-        //render the page
-        Config::setJsConfig('curPage', "store-chains");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/storeChains.php',[
-            'page_title'    =>  'Manage Store Chains',
-            'chains'      =>  $chains
         ]);
     }
 
@@ -144,6 +117,7 @@ class SiteSettingsController extends Controller
         $roles = $this->user->getUserRoles();
         //render the page
         Config::setJsConfig('curPage', "user-roles");
+        Config::set('curPage', "user-roles");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/userRoles.php',[
             'page_title'  =>  'Manage User Roles',
             'roles'       =>  $roles
@@ -157,16 +131,12 @@ class SiteSettingsController extends Controller
         // only for super admins
         Permission::allow('super admin', $resource, ['*']);
         // all other admins
-        Permission::allow(['admin', 'md admin'], $resource, [
-            'addSalesRep',
-            'editSalesRep',
+        Permission::allow(['admin'], $resource, [
             'locations',
             'manageUsers',
             'orderStatus',
-            'packingType',
             'staff',
-            'stockMovementReasons',
-            'storeChains'
+            'stockMovementReasons'
         ]);
 
         //echo "<pre>",print_r(Permission::$perms),"</pre>"; die();
