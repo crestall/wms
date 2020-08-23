@@ -279,9 +279,9 @@
                         });
                     },
                     'update':{
-                        click: function(el){ 
+                        click: function(el){
                             var id = $(el).data('reasonid');
-                            conole.log('click - reason id: '+id);
+                            console.log('click - reason id: '+id);
                             return;
                             var data = {
                                 'id': id,
