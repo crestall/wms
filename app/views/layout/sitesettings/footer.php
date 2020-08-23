@@ -281,8 +281,8 @@
                     'update':{
                         click: function(el){
                             var id = $(el).data('reasonid');
-                            console.log('click - reason id: '+id);
-                            return;
+                            //console.log('click - reason id: '+id);
+                            //return;
                             var data = {
                                 'id': id,
                                 'reason': $('#name_'+id).val(),
