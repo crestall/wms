@@ -62,8 +62,8 @@ class Stockmovementlabels extends Model{
             'locked'    => 0,
             'active'    => 0
        );
-       if(isset($data['locked']) & $data['locked']) $vals['locked'] = 1;
-       if(isset($data['active']) & $data['active']) $vals['active'] = 1;
+       if(isset($data['locked']) && $data['locked']) $vals['locked'] = 1;
+       if(isset($data['active']) && $data['active']) $vals['active'] = 1;
 
        $db->updateDatabaseFields($this->table, $vals, $data['id']);
     }
