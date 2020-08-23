@@ -726,7 +726,7 @@ class ajaxfunctionsController extends Controller
         }
         if(!$data['error'])
         {
-            $this->location->updateLocation($post_data);
+            $this->stockmovementlabels->updateLabel($post_data);
         }
         $this->view->renderJson($data);
     }
