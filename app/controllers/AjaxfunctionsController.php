@@ -52,6 +52,7 @@ class ajaxfunctionsController extends Controller
             'updateFreightCharge',
             'updateLocation',
             'updateOrderComments',
+            'updateStockMovementReason',
             'updateWarningLevel'
         ];
         $this->Security->config("validateForm", false);
@@ -689,6 +690,39 @@ class ajaxfunctionsController extends Controller
         {
             $data['error'] = true;
             $data['feedback'] = "This name is already in use.\nLocation names need to be unique";
+        }
+        if(!$data['error'])
+        {
+            $this->location->updateLocation($post_data);
+        }
+        $this->view->renderJson($data);
+    }
+
+    public function updateStockMovementReason()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($reason))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "The reason is required";
+        }
+        elseif($this->stockmovementlabels->getLabelId($reason) && $reason != $current_reason)
+        {
+            $data['error'] = true;
+            $data['feedback'] = "This reason is already in use.\nReasons need to be unique";
         }
         if(!$data['error'])
         {

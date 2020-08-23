@@ -285,14 +285,14 @@
                             return;
                             var data = {
                                 'id': id,
-                                'location': $('#location_'+id).val(),
-                                'current_location': $('#current_location_'+id).val(),
-                                'multisku': $('#multisku_'+id).prop('checked'),
-                                'tray': $('#trays_'+id).prop('checked')
+                                'reason': $('#name_'+id).val(),
+                                'current_reason': $('#current_name_'+id).val(),
+                                'active': $('#active_'+id).prop('checked'),
+                                'locked': $('#locked_'+id).prop('checked')
                             };
                             //console.log(data);
-                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Location...</h2></div>' });
-                            $.post('/ajaxfunctions/updateLocation', data, function(d){
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Reason...</h2></div>' });
+                            $.post('/ajaxfunctions/updateStockMovementReason', data, function(d){
                                 $.unblockUI();
                                 if(d.error)
                                 {

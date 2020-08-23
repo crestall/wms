@@ -49,8 +49,22 @@ class Stockmovementlabels extends Model{
     {
         $db = Database::openConnection();
         $db->insertQuery($this->table, array(
-            'name'  => $label
+            'name'      => $label,
+            'locked'    => 0,
+            'active'    => 0
         ));
+    }
+
+    public function updateLabel($data)
+    {
+       $db = Database::openConnection();
+       $vals = array(
+        "name"  => $data['reason']
+       );
+       if(isset($data['locked']) & $data['locked'] > 0) $vals['locked'] = 1;
+       if(isset($data['active']) & $data['active'] > 0) $vals['active'] = 1;
+
+       $db->updateDatabaseFields($this->table, $vals, $data['id']);
     }
 }
 ?>
