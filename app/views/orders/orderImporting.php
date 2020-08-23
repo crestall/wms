@@ -11,9 +11,11 @@
             <div class="col">
                 <p><a class="btn btn-primary" href="#oneplate">One Plate</a></p>
             </div>
-            <div class="col">
-                <p><a class="btn btn-primary" href="#freedom">Freedom</a></p>
-            </div>
+            <?php if($user_role == "super admin"):?>
+                <div class="col-md-2">
+                    <p><a class="btn btn-primary" href="#freedom">Freedom</a></p>
+                </div>
+            <?php endif;?>
         </div-->
         <div class="row">
             <div class="col">
@@ -92,20 +94,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 mb-3">
-                <div class="card">
-                    <a name="freedom"></a>
-                    <h4 class="card-header">Freedom Orders</h4>
-                    <div class="card-body">
-                        <div class="form-group row full_import">
-                            <label class="col-5"><h5 class="card-title">Run Full Import From MYOB</h5></label>
-                            <div class="col-7">
-                                <button class="btn btn-outline-secondary" id="freedom_full_import" data-function="importFreedomOrders">Run It</button>
+            <?php if($user_role == "super admin"):?>
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <div class="card">
+                        <a name="freedom"></a>
+                        <h4 class="card-header">Freedom Orders</h4>
+                        <div class="card-body">
+                            <div class="form-group row full_import">
+                                <label class="col-5"><h5 class="card-title">Run Full Import From MYOB</h5></label>
+                                <div class="col-7">
+                                    <button class="btn btn-outline-secondary" id="freedom_full_import" data-function="importFreedomOrders">Run It</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php endif;?>
         </div>
     </div>
 </div>

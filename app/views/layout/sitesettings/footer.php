@@ -279,10 +279,10 @@
                         });
                     },
                     'update':{
-                        click: function(el){
-                            console.log('click');
+                        click: function(el){ 
+                            var id = $(el).data('reasonid');
+                            conole.log('click - reason id: '+id);
                             return;
-                            var id = $(el).data('locationid');
                             var data = {
                                 'id': id,
                                 'location': $('#location_'+id).val(),
