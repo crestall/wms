@@ -340,6 +340,8 @@ class InventoryController extends Controller
 
     public function clientInventory()
     {
+        //up the memory for this
+        ini_set('memory_limit', '2048M');
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
         $products = $this->item->getItemsForClient($client_id);
