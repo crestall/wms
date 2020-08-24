@@ -362,7 +362,7 @@ return array(
             'default-icon'  => array(
                 'display'   => false,
                 'icon'      => '<i class="fad fa-truck fa-2x"></i>'
-            ),
+            ),/*
             'order-picking' =>  array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-hand-holding-box fa-3x"></i>'
@@ -374,7 +374,7 @@ return array(
             'order-dispatching' =>  array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-mail-bulk fa-3x"></i>'
-            ),
+            ),*/
             'view-orders' =>  array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
