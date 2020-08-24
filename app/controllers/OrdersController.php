@@ -465,7 +465,7 @@ class OrdersController extends Controller
         Config::setJsConfig('curPage', "order-tracking");
         Config::set('curPage', "order-tracking");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderTracking.php', [
-            'page_title'    =>  "Order Tracking",
+            'page_title'    =>  "Order Tracking for ".$order['order_number'],
             'pht'           =>  ": Order Tracking",
             'order_id'      =>  $order_id,
             'order'         =>  $order,
