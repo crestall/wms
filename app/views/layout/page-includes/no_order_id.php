@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col">
         <div class="errorbox">
+            <?php echo "user role: ".Session::getUserRole();?>
             <div class="row">
                 <div class="col-4 text-right">
                     <i class="fad fa-exclamation-triangle fa-6x"></i>
