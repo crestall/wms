@@ -1,5 +1,5 @@
 <?php
-$entered_by = $this->user->getUserName( $order['entered_by'] );
+$entered_by = $this->controller->user->getUserName( $order['entered_by'] );
 if(empty($entered_by))
 {
     $entered_by = "Automatically Imported";
