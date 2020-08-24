@@ -404,11 +404,11 @@ return array(
             'edit-product'    => array(
                 'display'   => false,
                 'icon'      => ''
-            ),
+            ),/*
             'product-search'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-telescope fa-3x"></i>'
-            ),
+            ),*/
 
         ),
         'inventory'     =>  array(
@@ -447,11 +447,7 @@ return array(
             'quality-control'    => array(
                 'display'   => false,
                 'icon'      => ''
-            ),
-            'pack-items-manage'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-box-check fa-3x"></i>'
-            ),
+            )
         )
     ),
     'CLIENT_PAGES' => array(
