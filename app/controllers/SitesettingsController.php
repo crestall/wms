@@ -132,6 +132,7 @@ class SiteSettingsController extends Controller
         Permission::allow('super admin', $resource, ['*']);
         // all other admins
         Permission::allow(['admin'], $resource, [
+            'index',
             'locations',
             'manageUsers',
             'orderStatus',
