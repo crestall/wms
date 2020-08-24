@@ -24,7 +24,7 @@
             </div>
         </div>
     <?php else:?>
-        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/order_detail.php");?>
+        <?php //include(Config::get('VIEWS_PATH')."layout/page-includes/order_detail.php");?>
         <div class="row">
             <div class="col-lg-12">
                 <h2>Tracking Details</h2>
