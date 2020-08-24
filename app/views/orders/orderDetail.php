@@ -9,14 +9,16 @@
         <?php elseif(empty($order)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_found.php");?> 
         <?php else:?>
-            <div class="row">
-                <div class="col">
-                    <a class="btn btn-outline-secondary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
+            <?php if($user_role != "client"):?>
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-outline-secondary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-secondary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
+                    </div>
                 </div>
-                <div class="col">
-                    <a class="btn btn-outline-secondary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
-                </div>
-            </div>
+            <?php endif;?>
             <div id="print_this" class="container-fluid">
                 <div class="row">
                     <div class="col">
