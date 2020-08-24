@@ -47,7 +47,6 @@
                                 <th>Delivery To</th>
                                 <th>Address</th>
                                 <th>Items</th>
-                                <th>Total Items</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -63,17 +62,9 @@
                                     'country'   =>  $o['country']
                                 );
                                 $address = Utility::formatAddressWeb($ad);
-                                $products = $this->controller->order->getItemsForOrder($o['id']);
+                                $ifo = $this->controller->order->getItemsForOrder($o['id']);
                                 //$products = array();
-                                $num_items = 0;
-                                $items = "";
-                                foreach($products as $p)
-                                {
-                                    $items .= $p['name']." - ".$p['qty']."<br/>";
-                                    $num_items += $p['qty'];
-                                }
-                                $items = rtrim($items, "<br/>");
-
+                                $item_count = $this->controller->order->getItemCountForOrder($o['id']);
                                 ?>
                                 <tr>
                                     <td data-label="Date Ordered" class="number"><?php echo date("d/m/Y", $o['date_ordered']);?></td>
@@ -82,8 +73,17 @@
                                     <td data-label="Your Order Id" class="number"><?php echo $o['client_order_id'];?></td>
                                     <td data-label="Delivery To"><?php echo $o['ship_to'];;?></td>
                                     <td data-label="Delivery Address"><?php echo $address;?></td>
-                                    <td data-label="Items" class="nowrap"><?php echo $items;?></td>
-                                    <td data-label="Total Items"><?php echo $num_items;?></td>
+                                    <!--td data-label="Items" class="nowrap"><?php echo $items;?></td-->
+                                    <td data-label="Items">
+                                        <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                            <?php foreach($ifo as $i):?>
+                                                <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                            <?php endforeach;?>
+                                        </div>
+                                        <div class="item_total text-right">
+                                            Total Items: <?php echo $item_count;?>
+                                        </div>
+                                    </td>
                                     <td class="nowrap">
                                         <?php if($o['courier_id'] != 4):?>
                                             <p><a class="btn btn-primary btn-sm" href="/orders/order-tracking/order=<?php echo $o['id'];?>">Track Order</a></p>
