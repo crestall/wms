@@ -23,43 +23,41 @@
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <div class="row">
-            <form id="add_location" method="post" action="/form/procAddLocation">
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control required" name="location" id="location" value="<?php echo Form::value('location');?>" />
-                        <span class="inst">Location names need to be unique</span>
-                        <?php echo Form::displayError('location');?>
+        <form id="add_location" method="post" action="/form/procAddLocation">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="location" id="location" value="<?php echo Form::value('location');?>" />
+                    <span class="inst">Location names need to be unique</span>
+                    <?php echo Form::displayError('location');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-check">
+                    <label class="form-check-label col-md-3" for="multisku">Multiple SKUs</label>
+                    <div class="col-md-4 checkbox checkbox-default">
+                        <input class="form-check-input styled" type="checkbox" id="multisku" name="multisku" />
+                        <label for="multisku"></label>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="form-check">
-                        <label class="form-check-label col-md-3" for="multisku">Multiple SKUs</label>
-                        <div class="col-md-4 checkbox checkbox-default">
-                            <input class="form-check-input styled" type="checkbox" id="multisku" name="multisku" />
-                            <label for="multisku"></label>
-                        </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-check">
+                    <label class="form-check-label col-md-3" for="trays">Tray Location</label>
+                    <div class="col-md-4 checkbox checkbox-default">
+                        <input class="form-check-input styled" type="checkbox" id="trays" name="trays" />
+                        <label for="trays"></label>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="form-check">
-                        <label class="form-check-label col-md-3" for="trays">Tray Location</label>
-                        <div class="col-md-4 checkbox checkbox-default">
-                            <input class="form-check-input styled" type="checkbox" id="trays" name="trays" />
-                            <label for="trays"></label>
-                        </div>
-                    </div>
+            </div>
+            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">&nbsp;</label>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-outline-secondary">Add Location</button>
                 </div>
-                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">&nbsp;</label>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary">Add Location</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
         <div id="waiting" class="row">
             <div class="col-lg-12 text-center">
                 <h2>Drawing Table..</h2>
