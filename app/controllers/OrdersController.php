@@ -457,7 +457,7 @@ class OrdersController extends Controller
                 {
                     $eparcel = $this->client->getEparcelClass($order['client_id']);
                     $tracking = $this->$eparcel->GetTracking($order['consignment_id']);
-                    echo "eParcel<pre>",print_r($tracking),"</pre>";die();
+                    //echo "eParcel<pre>",print_r($tracking),"</pre>";die();
                 }
             }
         }
