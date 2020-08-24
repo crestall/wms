@@ -1747,7 +1747,7 @@
                     init: function(){
                         dataTable.init($('table#client_orders_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [0,1,5,6,8] }
+                                { "orderable": false, "targets": [0,1,5,6,7] }
                             ],
                             "order": []
                         } );
