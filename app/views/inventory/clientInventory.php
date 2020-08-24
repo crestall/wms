@@ -51,7 +51,7 @@
                             <tr>
                                 <td data-label="Name"><?php echo $image.$p['name'];?></td>
                                 <td data-label="SKU"><?php echo $p['sku'];?></td>
-                                <td data-label="Detals"><?php echo $details;?></td>
+                                <td data-label="Details"><?php echo $details;?></td>
                                 <td data-label="On Hand" class="number"><?php echo $onhand;?></td>
                                 <td data-label="Allocated" class='number'><?php echo $allocated;?></td>
                                 <td data-label="Under Quality Control" class="number"><?php echo $underqc;?></td>
