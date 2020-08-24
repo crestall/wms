@@ -1743,7 +1743,7 @@
                         });
                     }
                 },
-                'clients-orders' : {
+                'client-orders' : {
                     init: function(){
                         dataTable.init($('table#client_orders_table'), {
                             "columnDefs": [
