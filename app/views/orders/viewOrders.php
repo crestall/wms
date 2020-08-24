@@ -46,9 +46,8 @@
             <p><a class="btn btn-sm btn-block btn-outline-success directfreight-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Direct Freight Orders</a></p>
         </div>
         <?php if($user_role == "admin" || $user_role == "super admin"):?>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                    <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
-                </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
             </div>
         <?php endif;?>
     </div>
