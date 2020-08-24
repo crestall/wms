@@ -59,10 +59,9 @@ class Stockmovementlabels extends Model{
        $db = Database::openConnection();
        $vals = array(
             "name"  => $data['reason'],
-            'locked'    => $data['locked'],
             'active'    => $data['active']
        );
-
+       if(isset($data['locked'])) $vals['locked'] = $data['locked'];
        $db->updateDatabaseFields($this->table, $vals, $data['id']);
     }
 }

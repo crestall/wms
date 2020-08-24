@@ -715,7 +715,11 @@ class ajaxfunctionsController extends Controller
             }
         }
         $post_data['active'] = ($active == 'true')? 1 : 0;
-        $post_data['locked'] = ($locked == 'true')? 1 : 0;
+        if(isset($locked))
+        {
+            $post_data['locked'] = ($locked == 'true')? 1 : 0;
+        }
+
         if(!$this->dataSubbed($reason))
         {
             $data['error'] = true;
