@@ -15,50 +15,43 @@
     <div id="page_container" class="container-xxl">
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        <div class="row view-orders-buttons" >
+    <div class="row view-orders-buttons" >
+        <?php if($user_role == "admin" || $user_role == "super admin"):?>
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-sm btn-block btn-outline-fsg export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-fsg slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-fsg print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-fsg add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-fsg select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-fsg eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-fsg directfreight-label-print"><i class="fas fa-tags"></i> Print Direct Freight Labels For Selected</a></p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-success eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-success directfreight-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Direct Freight Orders</a></p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
-            </div>
+        <?php endif;?>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
         </div>
-    <?php elseif($user_role == "warehouse"):?>
-        <div class="row">
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-primary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
-                <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
-            </div>
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
-            </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
         </div>
-    <?php endif;?>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg directfreight-label-print"><i class="fas fa-tags"></i> Print Direct Freight Labels For Selected</a></p>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-success eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-success directfreight-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Direct Freight Orders</a></p>
+        </div>
+        <?php if($user_role == "admin" || $user_role == "super admin"):?>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                    <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
+                </div>
+            </div>
+        <?php endif;?>
+    </div>
     <div class="row">
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
@@ -256,13 +249,13 @@
                                     <label for="ignoreprice_<?php echo $co['id'];?>"></label>
                                 </div>
                             </td-->
-                            <?php if($user_role == "admin" || $user_role == "super admin"):?>
+                            <?php if($user_role == "warehouse" || $user_role == "admin" || $user_role == "super admin"):?>
             					<td data-label="Courier" nowrap>
             					    <p><select name="courier" class="selectpicker courier" data-style="btn-outline-secondary btn-sm" data-width="fit" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                     <p><button class="ship_quote btn-sm btn btn-outline-primary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
                                     <p><button class="btn btn-sm btn-outline-warning adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
                                     <?php if( Session::getUserRole() == "admin" && $co['courier_id'] > 0): ?>
-                                        <p><a class="btn btn-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
+                                        <p><a class="btn btn-outline-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
                                     <?php endif;?>
                                 </td>
                             <?php elseif($user_role == "warehouse"):?>
