@@ -32,23 +32,13 @@
                     <?php echo Form::displayError('location');?>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="multisku">Multiple SKUs</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="multisku" name="multisku" />
-                        <label for="multisku"></label>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="multisku" name="multisku" <?php if(!empty(Form::value('multisku'))) echo 'checked';?> />
+                <label class="custom-control-label col-md-3" for="multisku">Multiple SKUs</label>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="trays">Tray Location</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="trays" name="trays" />
-                        <label for="trays"></label>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="trays" name="trays" <?php if(!empty(Form::value('trays'))) echo 'checked';?> />
+                <label class="custom-control-label col-md-3" for="trays">Tray Location</label>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
