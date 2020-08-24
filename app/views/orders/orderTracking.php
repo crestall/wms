@@ -1,5 +1,9 @@
 <?php
-
+$entered_by = $this->user->getUserName( $order['entered_by'] );
+if(empty($entered_by))
+{
+    $entered_by = "Automatically Imported";
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
