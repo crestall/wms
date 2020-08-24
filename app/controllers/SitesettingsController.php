@@ -88,18 +88,6 @@ class SiteSettingsController extends Controller
         ]);
     }
 
-    public function packingTypes()
-    {
-        //render the page
-        Config::setJsConfig('curPage', "packing-types");
-        Config::set('curPage', "packing-types");
-        $packings = $this->packingtype->getPackingTypes();
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/packingTypes.php',[
-            'page_title'    =>  'Manage Packing Types',
-            'packings'      =>  $packings
-        ]);
-    }
-
     public function couriers()
     {
         $couriers = $this->courier->getCouriers();
