@@ -457,17 +457,7 @@ class OrdersController extends Controller
                 {
                     $eparcel = $this->client->getEparcelClass($order['client_id']);
                     $tracking = $this->$eparcel->GetTracking($order['consignment_id']);
-                    //echo "eParcel<pre>",print_r($tracking),"</pre>";die();
-                }
-                elseif($courier == "Hunters")
-                {
-                    $tracking = $this->Hunters3KG->GetTracking($order['consignment_id']);
-                    //echo "Hunters<pre>",print_r($tracking),"</pre>";die();
-                }
-                elseif($courier == "HuntersPLU")
-                {
-                    $tracking = $this->HuntersPLU->GetTracking($order['consignment_id']);
-                    //echo "HuntersPLU<pre>",print_r($tracking),"</pre>";die();
+                    echo "eParcel<pre>",print_r($tracking),"</pre>";die();
                 }
             }
         }
