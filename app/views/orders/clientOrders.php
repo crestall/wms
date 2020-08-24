@@ -73,7 +73,7 @@
                                     <td data-label="Your Order Id" class="number"><?php echo $o['client_order_id'];?></td>
                                     <td data-label="Delivery To"><?php echo $o['ship_to'];;?></td>
                                     <td data-label="Delivery Address"><?php echo $address;?></td>
-                                    <!--td data-label="Items" class="nowrap"><?php echo $items;?></td-->
+                                    <!--td data-label="Items" class="nowrap"><?php //echo $items;?></td-->
                                     <td data-label="Items">
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                             <?php foreach($ifo as $i):?>
