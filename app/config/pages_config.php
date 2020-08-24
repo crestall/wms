@@ -294,11 +294,11 @@ return array(
             'manage-users'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-users fa-3x"></i>'
-            ),
+            ),/*
             'packing-types'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-mail-bulk fa-3x"></i>'
-            ),
+            ),*/
             'user-roles'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-users-cog fa-3x"></i>'
