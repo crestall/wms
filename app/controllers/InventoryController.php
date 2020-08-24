@@ -344,7 +344,8 @@ class InventoryController extends Controller
         ini_set('memory_limit', '2048M');
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $products = $this->item->getItemsForClient($client_id);
+        //$products = $this->item->getItemsForClient($client_id);
+        $products = $this->item->getClientInventoryArray($client_id);
         Config::setJsConfig('curPage', "client-inventory");
         Config::set('curPage', "client-inventory");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/clientInventory.php',[

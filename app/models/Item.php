@@ -934,28 +934,9 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $allocated = 0;
-        if($this->isSolarItem($item_id))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
+        $orders_table = "orders";
+        $items_table = "orders_items";
 
-            $asjq = $db->queryRow("
-                SELECT
-                	oi.item_id, i.name, sum(oi.qty) AS allocated
-                FROM
-                	solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
-                WHERE
-                	o.status_id != $fulfilled_id AND oi.item_id = $item_id
-                GROUP BY
-                	oi.item_id
-            ");
-            $allocated += (empty($asjq['allocated']))? 0 : $asjq['allocated'];
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         $asq = $db->queryRow("
             SELECT
             	oi.item_id, i.name, sum(oi.qty) AS allocated
