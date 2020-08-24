@@ -79,28 +79,28 @@
                                             <input type="hidden" name="current_location_<?php echo $l['id'];?>" id="current_location_<?php echo $l['id'];?>" value="<?php echo $l['location'];?>" />
                                         </td>
                                         <td data-label="Multi SKU">
-                                            <div class="checkbox checkbox-default">
-                                                <input class="form-check-input styled" type="checkbox" id="multisku_<?php echo $l['id'];?>" name="multisku_<?php echo $l['id'];?>" <?php if($l['multi_sku'] > 0) echo "checked";?> />
-                                                <label for="multisku_<?php echo $l['id'];?>"></label>
+                                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                                <input class="custom-control-input" type="checkbox" id="multisku_<?php echo $l['id'];?>" name="multisku_<?php echo $l['id'];?>" <?php if($l['multi_sku'] > 0) echo 'checked';?> />
+                                                <label class="custom-control-label col-md-3" for="multisku_<?php echo $l['id'];?>"></label>
                                             </div>
                                         </td>
                                         <td data-label="Trays">
-                                            <div class="checkbox checkbox-default">
-                                                <input class="form-check-input styled" type="checkbox" id="trays_<?php echo $l['id'];?>" name="trays_<?php echo $l['id'];?>" <?php if($l['tray'] > 0) echo "checked";?> />
-                                                <label for="trays_<?php echo $l['id'];?>"></label>
+                                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                                <input class="custom-control-input" type="checkbox" id="trays_<?php echo $l['id'];?>" name="trays_<?php echo $l['id'];?>" <?php if($l['tray'] > 0) echo "checked";?> />
+                                                <label class="custom-control-label col-md-3" for="trays_<?php echo $l['id'];?>"></label>
                                             </div>
                                         </td>
                                         <td>
                                             <p>
-                                                <a class="btn btn-primary update" data-locationid="<?php echo $l['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $l['id'];?>"></span>
+                                                <a class="btn btn-outline-secondary update" data-locationid="<?php echo $l['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $l['id'];?>"></span>
                                             </p>
                                             <?php if($active == 1):?>
                                                 <p>
-                                                    <a class="btn btn-danger deactivate" data-locationid="<?php echo $l['id'];?>">Deactivate Location</a>
+                                                    <a class="btn btn-outline-danger deactivate" data-locationid="<?php echo $l['id'];?>">Deactivate Location</a>
                                                 </p>
                                             <?php else:?>
                                                 <p>
-                                                    <a class="btn btn-warning reactivate" data-locationid="<?php echo $l['id'];?>">Reactivate Location</a>
+                                                    <a class="btn btn-outline-warning reactivate" data-locationid="<?php echo $l['id'];?>">Reactivate Location</a>
                                                 </p>
                                             <?php endif;?>
                                         </td>
