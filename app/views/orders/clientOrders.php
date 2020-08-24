@@ -42,7 +42,7 @@
                             <tr>
                                 <th>Date Ordered</th>
                                 <th>Date Fulfilled</th>
-                                <th>3PL Order Number</th>
+                                <th>FSG Order Number</th>
                                 <th>Your Order ID</th>
                                 <th>Delivery To</th>
                                 <th>Address</th>
