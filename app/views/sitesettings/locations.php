@@ -1,11 +1,11 @@
 <?php
     if($active == 0)
     {
-            $link_text = "<a href='/site-settings/locations' class='btn btn-primary'>View Active Locations</a>";
+            $link_text = "<a href='/site-settings/locations' class='btn btn-outline-secondary'>View Active Locations</a>";
     }
     else
     {
-            $link_text = "<a href='/site-settings/locations/active=0' class='btn btn-warning'>View Inactive Locations</a>";
+            $link_text = "<a href='/site-settings/locations/active=0' class='btn btn-outline-secondary'>View Inactive Locations</a>";
     }
     $i = 1;
 ?>
