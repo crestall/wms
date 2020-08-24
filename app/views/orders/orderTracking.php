@@ -50,37 +50,36 @@ if(empty($entered_by))
                     </div>
                     <div class="card-body">
                         <div class="row">
-                                <label class="col-5">Client Order Number</label>
-                                <div class="col-7"><?php echo $order['client_order_id'];?></div>
-                            </div>
-                            <div class="row">
-                                <label class="col-5">Deliver To</label>
-                                <div class="col-7"><?php echo $order['ship_to'];?></div>
-                            </div>
-                            <div class="row">
-                                <label class="col-5">Company</label>
-                                <div class="col-7"><?php echo $order['company_name'];?></div>
-                            </div>
-                            <div class="row">
-                                <label class="col-5">Contact Phone</label>
-                                <div class="col-7"><?php echo $order['contact_phone'];?></div>
-                            </div>
-                            <div class="row">
-                                <label class="col-5">Tracking Email</label>
-                                <div class="col-7"><?php echo $order['tracking_email'];?></div>
-                            </div>
-                            <div class="row">
-                                <label class="col-5">Delivery Instructions</label>
-                                <div class="col-7"><?php echo $order['instructions'];?></div>
-                            </div>
-                            <div class="row">
-                                <label class="col-5">Use Express</label>
-                                <div class="col-7"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
-                            </div>
-                            <div class="row">
-                                <label class="col-5">Signature Required</label>
-                                <div class="col-7"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
-                            </div>
+                            <label class="col-5">Client Order Number</label>
+                            <div class="col-7"><?php echo $order['client_order_id'];?></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-5">Deliver To</label>
+                            <div class="col-7"><?php echo $order['ship_to'];?></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-5">Company</label>
+                            <div class="col-7"><?php echo $order['company_name'];?></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-5">Contact Phone</label>
+                            <div class="col-7"><?php echo $order['contact_phone'];?></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-5">Tracking Email</label>
+                            <div class="col-7"><?php echo $order['tracking_email'];?></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-5">Delivery Instructions</label>
+                            <div class="col-7"><?php echo $order['instructions'];?></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-5">Use Express</label>
+                            <div class="col-7"><?php if($order['eparcel_express'] > 0) echo "Yes"; else echo "No";?></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-5">Signature Required</label>
+                            <div class="col-7"><?php if($order['signature_req'] > 0) echo "Yes"; else echo "No";?></div>
                         </div>
                     </div>
                     <div class="card-footer">
