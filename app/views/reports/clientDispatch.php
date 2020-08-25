@@ -30,7 +30,6 @@
                                 <th>Client Order Number</th>
                                 <th>Shipped To</th>
                                 <th>Items</th>
-                                <th>Total Items</th>
                                 <th>Courier</th>
                                 <th>Con Note</th>
                                 <?php if( !in_array($client_id, $hidden) ):?>
@@ -47,8 +46,17 @@
                             	<td data-label="WMS Order Number"  class="number"><?php echo str_pad($co['order_number'],8,'0',STR_PAD_LEFT);?></td>
                                 <td data-label="Your Order Number" class="number"><?php echo $co['client_order_number'];?></td>
                                 <td data-label="Shipped To" class="nowrap shipped_to"><?php echo $co['shipped_to'];?></td>
-                                <td data-label="Items" class="nowrap"><?php echo $co['items'];?></td>
-                                <td data-label="Total Items" class="number"><?php echo $co['total_items'];?></td>
+                                <td data-label="Items">
+                                    <?php //echo $co['items'];?>
+                                    <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                        <?php foreach($co['csv_items'] as $i):?>
+                                            <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span></p>
+                                        <?php endforeach;?>
+                                    </div>
+                                    <div class="item_total text-right">
+                                        Total Items: <?php echo $co['total_items'];?>
+                                    </div>
+                                </td>
                                 <td data-label="Courier" ><?php echo $co['courier'];?></td>
                                 <td ><?php echo $co['consignment_id'];?></td>
                                 <?php if( !in_array($client_id, $hidden) ):?>
