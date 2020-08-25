@@ -41,7 +41,7 @@ class SiteSettingsController extends Controller
         //$client_users = $this->user->getAllUsers('client');
         //$admin_users = $this->user->getAllUsers('admin');
         $user_roles = $this->user->getUserRoles();
-        $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : -1;
+        $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
         //render the page
         Config::setJsConfig('curPage', "manage-users");
         Config::set('curPage', "manage-users");
