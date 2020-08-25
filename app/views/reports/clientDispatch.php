@@ -55,7 +55,7 @@
                                     </div>
                                 </td>
                                 <td data-label="Courier" ><?php echo $co['courier'];?></td>
-                                <td ><?php echo $co['consignment_id'];?></td>
+                                <td data-label="Con Note" ><?php echo $co['consignment_id'];?></td>
                             </tr>
                         <?php endforeach;?>
                         </tbody>
