@@ -15,7 +15,7 @@
                 if(!$this->controller->user->canManageRole($ur['id']))
                     continue;
                 $name = ucwords($ur['name']);?>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 mb-3">
+                <div class="col-md-12 col-lg-6 mb-3">
                     <div class="card h-100 border-secondary order-card">
                         <div class="card-header bg-secondary text-white">
                             <?php echo $name;?> Users
