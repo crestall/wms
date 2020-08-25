@@ -15,13 +15,20 @@
                 if(!$this->controller->user->canManageRole($ur['id']))
                     continue;
                 $name = ucwords($ur['name']);
-                $class_name = strtolower($ur['name']."_users");?>
+                $class_name = strtolower($ur['name']."_user");
+                $id_name = strtolower($ur['name']."_user_search");?>
                 <div class="col-md-12 col-lg-6 mb-3">
                     <div class="card h-100 border-secondary order-card">
                         <div class="card-header bg-secondary text-white">
                             <?php echo $name;?> Users
                         </div>
                         <div class="card-body">
+                            <div class="row">
+                                <label class="col-3">Filter</label>
+                                <div class="col-9">
+                                    <input class="form-control" type="text" id="<?php echo $id_name;?>" placeholder="Filter By Name" />
+                                </div>
+                            </div>
                             <?php foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
                                 <div class="row border-bottom border-secondary border-bottom-dashed mb-3 <?php echo $class_name;?>">
                                     <div class="col-8">
