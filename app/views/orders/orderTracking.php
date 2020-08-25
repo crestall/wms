@@ -102,7 +102,7 @@ if(empty($entered_by))
                                     <?php if($tracking['ResponseCode'] != 300):?>
                                         <div class="row">
                                             <div class="col errorbox">
-                                                <h5 class="card-subtitle">There Has Been An Error</h5>
+                                                <h5 class="card-subtitle mb-3">There Has Been An Error</h5>
                                                 <div class="ml-4"><?php echo $tracking['ResponseMessage'];?></div>
                                             </div>
                                         </div>
