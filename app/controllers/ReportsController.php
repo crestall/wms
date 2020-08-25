@@ -428,14 +428,11 @@ class ReportsController extends Controller
 
     public function isAuthorized(){
         $role = Session::getUserRole();
-        
+
         $action = $this->request->param('action');
         $resource = "reports";
-        // super admins
-        Permission::allow('super admin', $resource, ['*']);
-
-        // admins
-        Permission::allow('admin', $resource, ['*']);
+        // all admins
+        Permission::allow(['super admin', 'admin'], $resource, ['*']);
 
         //warehouse users
         Permission::allow('warehouse', $resource, array(
