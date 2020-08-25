@@ -170,6 +170,18 @@
         //return $response;
     }
 
+    public function trackConsignment($con_id)
+    {
+        $conNoteList = array(
+            "ConnoteList"   => array(
+                "Connote"   => $con_id
+            )
+        );
+
+        $response = $this->sendPostRequest('TrackConsignment/', $conNoteList, "GENERAL");
+        echo $response; die();
+    }
+
     public function getLabels($connotes)
     {
         $ConnoteList = array(
