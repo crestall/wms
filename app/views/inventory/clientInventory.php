@@ -32,10 +32,10 @@
                     </thead>
                     <tbody>
                         <?php foreach($products as $p):
-                            $onhand = $this->controller->item->getStockOnHand($p['id']);
-                            $allocated = $this->controller->item->getAllocatedStock($p['id'], $this->controller->order->fulfilled_id);
-                            $underqc = $this->controller->item->getStockUnderQC($p['id']);
-                            $available = $onhand - $allocated - $underqc;
+                            //$onhand = $this->controller->item->getStockOnHand($p['id']);
+                            //$allocated = $this->controller->item->getAllocatedStock($p['id'], $this->controller->order->fulfilled_id);
+                            //$underqc = $this->controller->item->getStockUnderQC($p['id']);
+                            $available = $p['onhand'] - $p['allocated'] - $p['qc_count'];
                             $image = (!empty($p['image']))? "<img src='/images/products/tn_{$p['image']}' alt='product_image' class='thumbnail' /><br/>":"";
                             $full_bays = $this->controller->item->getBayUsage($p['id']);
                             $trays = $this->controller->item->getTrayUsage($p['id']);
@@ -52,9 +52,9 @@
                                 <td data-label="Name"><?php echo $image.$p['name'];?></td>
                                 <td data-label="SKU"><?php echo $p['sku'];?></td>
                                 <td data-label="Details"><?php echo $details;?></td>
-                                <td data-label="On Hand" class="number"><?php echo $onhand;?></td>
-                                <td data-label="Allocated" class='number'><?php echo $allocated;?></td>
-                                <td data-label="Under Quality Control" class="number"><?php echo $underqc;?></td>
+                                <td data-label="On Hand" class="number"><?php echo $p['onhand'];?></td>
+                                <td data-label="Allocated" class='number'><?php echo $p['allocated'];?></td>
+                                <td data-label="Under Quality Control" class="number"><?php echo $p['qc_count'];?></td>
                                 <td data-label="Available" class="available number"><?php echo $available;?></td>
                                 <td data-label="Total Bay Usage" class="text-nowrap"><?php echo $location_string;?></td>
                                 <td>
