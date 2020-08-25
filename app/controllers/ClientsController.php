@@ -65,12 +65,9 @@ class ClientsController extends Controller
     }
 
     public function isAuthorized(){
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        if( isset($role) && ($role === "admin"  || $role === "super admin") )
-        {
-            return true;
-        }
-        return false;
+        //only for admin
+        Permission::allow('admin', 'orders', "*");
+        Permission::allow('super admin', 'orders', "*");
     }
 }
 ?>
