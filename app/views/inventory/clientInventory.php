@@ -31,14 +31,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($products as $p):
+                        <?php foreach($products as $itemid => $p):
                             //$onhand = $this->controller->item->getStockOnHand($p['id']);
                             //$allocated = $this->controller->item->getAllocatedStock($p['id'], $this->controller->order->fulfilled_id);
                             //$underqc = $this->controller->item->getStockUnderQC($p['id']);
                             $available = $p['onhand'] - $p['allocated'] - $p['qc_count'];
                             $image = (!empty($p['image']))? "<img src='/images/products/tn_{$p['image']}' alt='product_image' class='thumbnail' /><br/>":"";
-                            $full_bays = $this->controller->item->getBayUsage($p['id']);
-                            $trays = $this->controller->item->getTrayUsage($p['id']);
+                            $full_bays = $this->controller->item->getBayUsage($itemid);
+                            $trays = $this->controller->item->getTrayUsage($itemid);
                             $location_string = ($full_bays > 0)? $full_bays." Full Pallet Bays<br/>" : "";
                             $location_string .= ($trays > 0)? $trays." Tray Spaces (9 per pallet bay)" : "";
                             $location_string = rtrim($location_string, "<br/>");
