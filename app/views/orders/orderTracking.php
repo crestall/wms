@@ -93,6 +93,7 @@ if(empty($entered_by))
                                         <div class="col">
                                             <div class="feedbackbox">
                                                 <h5 class="card-subtitle">Direct Freight Tracking Goes Here</h5>
+                                                <?php echo "<pre>",print_r($tracking),"</pre>";?>
                                             </div>
                                         </div>
                                     </div>

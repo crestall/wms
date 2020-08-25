@@ -459,6 +459,10 @@ class OrdersController extends Controller
                     $tracking = $this->$eparcel->GetTracking($order['consignment_id']);
                     //echo "eParcel<pre>",print_r($tracking),"</pre>";die();
                 }
+                elseif($courier == "Direct Freight")
+                {
+                    $tracking = $this->directfreight->trackConsignment($order['consignment_id']);
+                }
             }
         }
         //render the page

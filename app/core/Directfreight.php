@@ -179,7 +179,8 @@
         );
 
         $response = $this->sendPostRequest('TrackConsignment/', $conNoteList, "GENERAL");
-        echo $response; die();
+        //echo $response; die();
+        return json_decode($response,true);
     }
 
     public function getLabels($connotes)
