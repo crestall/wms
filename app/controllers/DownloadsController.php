@@ -1150,25 +1150,15 @@ class DownloadsController extends Controller {
 
     public function isAuthorized(){
 
-        $action = $this->request->param('action');
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        $resource = "downloads";
-
         $role = Session::getUserRole();
-        if( isset($role) && ($role === "admin"  || $role === "super admin") )
-        {
-            return true;
-        }
+        $action = $this->request->param('action');
+        $resource = "downloads";
+        //admin users
+        Permission::allow(['super admin', 'admin'], $resource, ['*']);
 
         //warehouse users
         Permission::allow('warehouse', $resource, array(
 
-        ));
-
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            'solarInventoryCSV',
-            'solarConsumablesReorderCSV'
         ));
 
         //client users
