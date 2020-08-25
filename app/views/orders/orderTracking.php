@@ -66,10 +66,10 @@ if(empty($entered_by))
                         <div class="card-body">
                             <?php if(!is_null($order['consignment_id'])):?>
                                 <?php if($courier == "eParcel" || $courier == "eParcel Express"):?>
-                                    <h5 class="card-subtitle">eParcel (AusPost) Tracking</h5>
+                                    <h5 class="card-subtitle mb-3">eParcel (AusPost) Tracking</h5>
                                     <div class="row">
-                                        <label class="col-4">Tracking Number</label>
-                                        <div class="col-8"><?php echo $order['consignment_id'];?></div>
+                                        <label class="col-5">Tracking Number</label>
+                                        <div class="col-7"><?php echo $order['consignment_id'];?></div>
                                     </div>
                                     <?php if(isset($tracking['tracking_results'][0]['errors'])):?>
                                         <div class="row">
@@ -115,7 +115,7 @@ if(empty($entered_by))
                                         </div>
                                     <?php else:?>
                                         <div class="row border-bottom border-secondary mb-3">
-                                            <label class="col-5">Excpected Delivery</label>
+                                            <label class="col-5">Expected Delivery</label>
                                             <div class="col-7"><?php echo date("D F j, Y", strtotime($tracking['TrackingResults'][0]['EtaDate']));?></div>
                                         </div>
                                         <?php foreach($tracking['TrackingResults'][0]['ConsignmentTrackingDetails'] as $event):?>
