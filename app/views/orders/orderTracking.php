@@ -103,7 +103,7 @@ if(empty($entered_by))
                                         <div class="row">
                                             <div class="col errorbox">
                                                 <h5 class="card-subtitle">There Has Been An Error</h5>
-                                                <div class="ml-4"><?php echo $tracking['ResonseMessage'];?></div>
+                                                <div class="ml-4"><?php echo $tracking['ResponseMessage'];?></div>
                                             </div>
                                         </div>
                                     <?php else:?>
