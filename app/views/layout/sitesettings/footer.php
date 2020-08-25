@@ -259,7 +259,7 @@
                             "drawCallback": function( settings ) {
                                 $('a.update').click(function(e){
                                     e.preventDefault();
-                                    //actions.update.click(this);
+                                    actions['stock-movement-reasons'].update.click(this);
                                 });
                             }
                         } );
