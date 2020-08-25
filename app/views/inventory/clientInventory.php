@@ -58,10 +58,10 @@
                                 <td data-label="Available" class="available number"><?php echo $available;?></td>
                                 <td data-label="Total Bay Usage" class="text-nowrap"><?php echo $location_string;?></td>
                                 <td>
-                                    <p><input type="text" class="form-control number" id="lowstock_<?php echo $p['id'];?>" name="lowstock_<?php echo $p['id'];?>" value="<?php echo $p['low_stock_warning'];?>" /></p>
-                					<p><button class="btn btn-primary btn-sm update_product" data-productid="<?php echo $p['id'];?>">Update</button> </p>
-                                    <div class="errorbox" style="display:none;" id="error_<?php echo$p['id'];?>">Only input whole, positive numbers please</div>
-                                	<div class="feedbackbox" style="display:none;" id="feedback_<?php echo$p['id'];?>">Product warning level updated</div>
+                                    <p><input type="text" class="form-control number" id="lowstock_<?php echo $itemid;?>" name="lowstock_<?php echo $itemid;?>" value="<?php echo $p['low_stock_warning'];?>" /></p>
+                					<p><button class="btn btn-primary btn-sm update_product" data-productid="<?php echo $itemid;?>">Update</button> </p>
+                                    <div class="errorbox" style="display:none;" id="error_<?php echo $itemid;?>">Only input whole, positive numbers please</div>
+                                	<div class="feedbackbox" style="display:none;" id="feedback_<?php echo $itemid;?>">Product warning level updated</div>
                                 </td>
                             </tr>
                         <?php endforeach;?>
