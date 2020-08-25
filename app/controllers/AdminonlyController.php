@@ -162,10 +162,10 @@ class AdminOnlyController extends Controller
 
     public function isAuthorized(){
         $role = Session::getUserRole();
-        if( $role === "super admin" )
-        {
-            return true;
-        }
+        $action = $this->request->param('action');
+        $resource = "admin only";
+        //admin users
+        Permission::allow(['super admin'], $resource, ['*']);
         return false;
     }
 }
