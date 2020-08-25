@@ -427,8 +427,8 @@ class ReportsController extends Controller
     }
 
     public function isAuthorized(){
-        //$role = Session::getUserRole();
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+        $role = Session::getUserRole();
+        //$role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         if( isset($role) && ($role === "admin"  || $role === "super admin") )
         {
             return true;
