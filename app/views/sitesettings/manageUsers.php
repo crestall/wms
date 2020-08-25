@@ -28,7 +28,7 @@
                                         <div class="col-9">
 
                                         </div>
-                                        <div class="col-3 mb-3">
+                                        <div class="col-3 mb-3 text-right">
                                             <?php if($user['active'] > 0):?>
                                                 <a class="btn btn-sm btn-outline-danger deactivate mb-3" data-userid="<?php echo $user['id'];?>">Deactivate User</a>
                                             <?php else:?>
