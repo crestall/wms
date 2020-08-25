@@ -66,8 +66,8 @@ class ClientsController extends Controller
 
     public function isAuthorized(){
         //only for admin
-        Permission::allow('admin', 'orders', "*");
-        Permission::allow('super admin', 'orders', "*");
+        Permission::allow(['super admin', 'admin'], "orders", ['*']);
+        return Permission::check($role, $resource, $action);
     }
 }
 ?>
