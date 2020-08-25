@@ -99,6 +99,16 @@ if(empty($entered_by))
                                         <label class="col-4">Tracking Number</label>
                                         <div class="col-8"><?php echo $order['consignment_id'];?></div>
                                     </div>
+                                    <?php if($tracking['ResponseCode'] != 300):?>
+                                        <div class="row">
+                                            <div class="col errorbox">
+                                                <h5 class="card-subtitle">There Has Been An Error</h5>
+                                                <div class="ml-4"><?php echo $tracking['ResonseMessage'];?></div>
+                                            </div>
+                                        </div>
+                                    <?php else:?>
+
+                                    <?php endif;?>
                                     <div class="row">
                                         <div class="col">
                                             <div class="feedbackbox">
