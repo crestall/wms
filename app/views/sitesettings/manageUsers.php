@@ -21,7 +21,24 @@
                             <?php echo $name;?> Users
                         </div>
                         <div class="card-body">
+                            <?php $i = 1;
+                            foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
+                                <div class="container-fluid">
+                                    <div class="row border-bottom-dashed mb-3">
+                                        <div class="col-10">
 
+                                        </div>
+                                        <div class="col-2">
+                                            <?php if($user['active'] > 0):?>
+                                                <p><a class="btn btn-outline-danger deactivate" data-userid="<?php echo $user['id'];?>">Deactivate User</a> </p>
+                                            <?php else:?>
+                                                <p><a class="btn btn-outlinesuccess reactivate" data-userid="<?php echo $user['id'];?>">Reactivate User</a> </p>
+                                            <?php endif;?>
+                                            <p><a class="btn btn-outline-secondary" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach;?>
                         </div>
                         <div class="card-footer">
 
