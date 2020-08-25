@@ -114,14 +114,11 @@ class ProductsController extends Controller
     }
 
     public function isAuthorized(){
-        //$role = Session::getUserRole();
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        if( isset($role) && ($role === "admin"  || $role === "super admin") )
-        {
-            return true;
-        }
+        $role = Session::getUserRole();
         $action = $this->request->param('action');
         $resource = "products";
+        //admin users
+        Permission::allow(['super admin', 'admin'], $resource, ['*']);
 
         //warehouse users
         Permission::allow('warehouse', $resource, array(
@@ -132,7 +129,6 @@ class ProductsController extends Controller
         ));
 
         return Permission::check($role, $resource, $action);
-        return false;
     }
 }
 ?>
