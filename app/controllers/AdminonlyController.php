@@ -164,9 +164,9 @@ class AdminOnlyController extends Controller
         $role = Session::getUserRole();
         $action = $this->request->param('action');
         $resource = "adminonly";
-        //admin users
-        Permission::allow(['super admin'], $resource, ['*']);
-        return false;
+        // only for super admins
+        Permission::allow('super admin', $resource, ['*']);
+        return Permission::check($role, $resource, $action);
     }
 }
 ?>
