@@ -13,7 +13,7 @@ $resource = strtolower(str_replace(" ", "", $page_name));
                 if(!$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));
                 $action = Utility::toCamelCase($SectionName);
-                //if(Permission::check($role, $resource, $action)):?>
+                if(Permission::check($role, $resource, $action)):?>
                     <div class="card homepagecard">
                         <div class="card-header">
                             <h4><?php echo $SectionName;?></h4>
@@ -22,7 +22,7 @@ $resource = strtolower(str_replace(" ", "", $page_name));
                         	<a class="btn btn-lg btn-outline-fsg" href="/<?php echo $con_index."/".$section_name;?>"><?php echo $details['icon'];?></a>
                         </div>
                     </div>
-                <?php //endif;?>
+                <?php endif;?>
             <?php endforeach;?>
         </div>
     </div>
