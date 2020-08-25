@@ -13,8 +13,6 @@ $resource = strtolower(str_replace(" ", "", $page_name));
                 if(!$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));
                 $action = Utility::toCamelCase($SectionName);
-                echo "<pre>",print_r(Permission::$perms),"</pre>";
-                echo "<p>$action - </p>";
                 if(Permission::check($role, $resource, $action)):?>
                     <div class="card homepagecard">
                         <div class="card-header">
