@@ -23,24 +23,24 @@
                         <div class="card-body">
                             <?php $i = 1;
                             foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
-                                <div class="container-fluid">
-                                    <div class="row border-bottom border-secondary border-bottom-dashed mb-3">
-                                        <div class="col-8">
-                                            <div class="row">
-                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Name</label>
-                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $user['name'];?></div>
-                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Client Name</label>
-                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $this->controller->client->getClientName($user['client_id']);?></div>
-                                            </div>
+                                <div class="row border-bottom border-secondary border-bottom-dashed mb-3">
+                                    <div class="col-8">
+                                        <div class="row">
+                                            <label class="col-3">Name</label>
+                                            <div class="col-9"><?php echo $user['name'];?></div>
                                         </div>
-                                        <div class="col-4 mb-3 text-right">
-                                            <?php if($user['active'] > 0):?>
-                                                <a class="btn btn-sm btn-outline-danger deactivate mb-3" data-userid="<?php echo $user['id'];?>">Deactivate User</a>
-                                            <?php else:?>
-                                                <a class="btn btn-sm btn-outline-success reactivate mb-3" data-userid="<?php echo $user['id'];?>">Reactivate User</a>
-                                            <?php endif;?>
-                                            <a class="btn btn-sm btn-outline-secondary" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a>
+                                        <div class="row">
+                                            <label class="col-3">Client Name</label>
+                                            <div class="col-9"><?php echo $this->controller->client->getClientName($user['client_id']);?></div>
                                         </div>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <?php if($user['active'] > 0):?>
+                                            <a class="btn btn-sm btn-outline-danger deactivate mb-3" data-userid="<?php echo $user['id'];?>">Deactivate User</a>
+                                        <?php else:?>
+                                            <a class="btn btn-sm btn-outline-success reactivate mb-3" data-userid="<?php echo $user['id'];?>">Reactivate User</a>
+                                        <?php endif;?>
+                                        <a class="btn btn-sm btn-outline-secondary mb-3" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a>
                                     </div>
                                 </div>
                             <?php endforeach;?>
