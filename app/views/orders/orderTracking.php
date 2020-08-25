@@ -113,6 +113,21 @@ if(empty($entered_by))
                                                 <div class="ml-4"><?php echo $tracking['TrackingResults'][0]['ResponseMessage'];?></div>
                                             </div>
                                         </div>
+                                    <?php else:?>
+                                        <div class="row border-bottom border-secondary mb-3">
+                                            <label class="col-5">Excpected Delivery</label>
+                                            <div class="col-7"><?php echo date("D F j, Y", strtotime($tracking['TrackingResults'][0]['EtaDate']));?></div>
+                                        </div>
+                                        <?php foreach($tracking['TrackingResults'][0]['ConsignmentTrackingDetails'] as $event):?>
+                                            <div class="row border-bottom border-secondary border-bottom-dashed mb-3">
+                                                <label class="col-5">Date</label>
+                                                <div class="col-7"><?php echo date("D F j, Y, g:i a", strtotime($event['Date']));?></div>
+                                                <label class="col-5">Location</label>
+                                                <div class="col-7"><?php if(isset($event['Location'])) echo $event['Location'];?></div>
+                                                <label class="col-5">Status</label>
+                                                <div class="col-7"><?php echo $event['Status'];?></div>
+                                            </div>
+                                        <?php endforeach;?>
                                     <?php endif;?>
                                     <div class="row">
                                         <div class="col">
