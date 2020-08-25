@@ -452,7 +452,7 @@ class ReportsController extends Controller
         ));
 
         return Permission::check($role, $resource, $action);
-        return false;
+        //return false;
     }
 }
 ?>
