@@ -350,14 +350,6 @@ if(!$error)
                                                             <?php echo Form::displayError('truck_charge');?>
                                                         </div>
                                                     </div>
-                                                    <label class="col-md-3 col-form-label">Charge Amount</label>
-                                                    <div class="col-md-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">$</span>
-                                                            <input type="text" class="form-control required number" data-rule-min="0" name="truck_charge" id="truck_charge" value="<?php echo $truck_charge;?>" />
-                                                        </div>
-                                                        <?php echo Form::displayError('truck_charge');?>
-                                                    </div>
                                                 </div>
                                             </form>
                                         <?php elseif($order['courier_id'] == $this->controller->courier->directFreightId):?>
