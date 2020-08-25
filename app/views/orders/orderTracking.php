@@ -94,10 +94,10 @@ if(empty($entered_by))
                                         <?php endforeach;?>
                                     <?php endif;?>
                                 <?php elseif($courier == "Direct Freight"):?>
-                                    <h5 class="card-subtitle">Direct Freight Tracking</h5>
+                                    <h5 class="card-subtitle mb-3">Direct Freight Tracking</h5>
                                     <div class="row">
-                                        <label class="col-4">Tracking Number</label>
-                                        <div class="col-8"><?php echo $order['consignment_id'];?></div>
+                                        <label class="col-5">Tracking Number</label>
+                                        <div class="col-7"><?php echo $order['consignment_id'];?></div>
                                     </div>
                                     <?php if($tracking['ResponseCode'] != 300):?>
                                         <div class="row">
@@ -129,13 +129,6 @@ if(empty($entered_by))
                                             </div>
                                         <?php endforeach;?>
                                     <?php endif;?>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="feedbackbox">
-                                                <?php echo "<pre>",print_r($tracking),"</pre>";?>
-                                            </div>
-                                        </div>
-                                    </div>
                                 <?php else:?>
                                     <div class="row">
                                         <div class="col">
