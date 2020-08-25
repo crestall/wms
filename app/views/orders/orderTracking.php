@@ -106,8 +106,13 @@ if(empty($entered_by))
                                                 <div class="ml-4"><?php echo $tracking['ResponseMessage'];?></div>
                                             </div>
                                         </div>
-                                    <?php else:?>
-
+                                    <?php elseif($tracking['TrackingResults'][0]['ResponseCode'] != 300):?>
+                                        <div class="row">
+                                            <div class="col errorbox">
+                                                <h5 class="card-subtitle mb-3">There Has Been An Error</h5>
+                                                <div class="ml-4"><?php echo $tracking['TrackingResults'][0]['ResponseMessage'];?></div>
+                                            </div>
+                                        </div>
                                     <?php endif;?>
                                     <div class="row">
                                         <div class="col">
