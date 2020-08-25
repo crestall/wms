@@ -30,11 +30,11 @@
                                         </div>
                                         <div class="col-2">
                                             <?php if($user['active'] > 0):?>
-                                                <p><a class="btn btn-outline-danger deactivate" data-userid="<?php echo $user['id'];?>">Deactivate User</a> </p>
+                                                <a class="btn btn-outline-danger deactivate" data-userid="<?php echo $user['id'];?>">Deactivate User</a>
                                             <?php else:?>
-                                                <p><a class="btn btn-outlinesuccess reactivate" data-userid="<?php echo $user['id'];?>">Reactivate User</a> </p>
+                                                <a class="btn btn-outlinesuccess reactivate" data-userid="<?php echo $user['id'];?>">Reactivate User</a>
                                             <?php endif;?>
-                                            <p><a class="btn btn-outline-secondary" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a></p>
+                                            <a class="btn btn-outline-secondary" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a>
                                         </div>
                                     </div>
                                 </div>
