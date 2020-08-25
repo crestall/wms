@@ -15,7 +15,7 @@
     protected $API_HOST;
     protected $CUSTOMER_CODE;
     protected $curl_options;
-    protected $test = true;
+    protected $test = false;
     protected $PRICING_KEY;
     protected $CONSIGNMENT_KEY;
     protected $GENERAL_KEY;
