@@ -176,7 +176,7 @@
             "ConnoteList"   => array()
         );
         $conNoteList['ConnoteList'][] = array(
-            'Connote'   => 18259
+            'Connote'   => $con_id
         );
         //return json_encode($conNoteList);
         $response = $this->sendPostRequest('TrackConsignment/', $conNoteList, "PRICING");
