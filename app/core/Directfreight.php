@@ -173,9 +173,10 @@
     public function trackConsignment($con_id)
     {
         $conNoteList = array(
-            "ConnoteList"   => array(
-                "Connote"   => $con_id
-            )
+            "ConnoteList"   => array()
+        );
+        $conNoteList['ConnoteList'][] = array(
+            'Connote'   => $con_id
         );
         return json_encode($conNoteList);
         $response = $this->sendPostRequest('TrackConsignment/', $conNoteList, "PRICING");
