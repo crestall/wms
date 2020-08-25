@@ -42,7 +42,7 @@
                                 <td data-label="Date Fulfilled" class="number" ><?php echo $co['date_fulfilled'];?></td>
                             	<td data-label="WMS Order Number"  class="number"><?php echo str_pad($co['order_number'],8,'0',STR_PAD_LEFT);?></td>
                                 <td data-label="Your Order Number" class="number"><?php echo $co['client_order_number'];?></td>
-                                <td data-label="Shipped To" class="nowrap shipped_to"><?php echo $co['shipped_to'];?></td>
+                                <td data-label="Shipped To" class="nowrap"><?php echo $co['shipped_to'];?></td>
                                 <td data-label="Items">
                                     <?php //echo $co['items'];?>
                                     <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
