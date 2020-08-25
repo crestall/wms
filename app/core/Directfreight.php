@@ -179,7 +179,7 @@
             'Connote'   => $con_id
         );
         //return json_encode($conNoteList);
-        $response = $this->sendPostRequest('TrackConsignment/', $conNoteList, "PRICING");
+        $response = $this->sendPostRequest('TrackConsignment/', $conNoteList, "GENERAL");
         //echo $response; die();
         return json_decode($response,true);
     }
