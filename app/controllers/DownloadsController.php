@@ -565,7 +565,7 @@ class DownloadsController extends Controller {
                 ${$field} = $value;
             }
         }
-        $hidden = Config::get("HIDE_CHARGE_CLIENTS");
+        //$hidden = Config::get("HIDE_CHARGE_CLIENTS");
         $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         $cols = array(
             "Date Ordered",
@@ -580,10 +580,6 @@ class DownloadsController extends Controller {
             "Charge Code",
             "Consignment ID"
         );
-        if( !in_array($client_id, $hidden) )
-        {
-            $cols[] = "Estimated Freight Charge";
-        }
         $rows = array();
         foreach($orders as $o)
         {
@@ -600,10 +596,6 @@ class DownloadsController extends Controller {
                 $o['charge_code'],
                 $o['consignment_id']
             );
-            if( !in_array($client_id, $hidden) )
-            {
-                $row[] = $o['charge'];
-            }
             $rows[] = $row;
         }
         $expire=time()+60;
