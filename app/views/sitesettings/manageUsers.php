@@ -24,15 +24,15 @@
                             <?php $i = 1;
                             foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
                                 <div class="container-fluid">
-                                    <div class="row border-bottom-dashed mb-3">
-                                        <div class="col-10">
+                                    <div class="row border-bottom border-secondary border-bottom-dashed mb-3">
+                                        <div class="col-9">
 
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-3 mb-3">
                                             <?php if($user['active'] > 0):?>
-                                                <a class="btn btn-sm btn-outline-danger deactivate" data-userid="<?php echo $user['id'];?>">Deactivate User</a>
+                                                <a class="btn btn-sm btn-outline-danger deactivate mb-3" data-userid="<?php echo $user['id'];?>">Deactivate User</a>
                                             <?php else:?>
-                                                <a class="btn btn-sm btn-outline-success reactivate" data-userid="<?php echo $user['id'];?>">Reactivate User</a>
+                                                <a class="btn btn-sm btn-outline-success reactivate mb-3" data-userid="<?php echo $user['id'];?>">Reactivate User</a>
                                             <?php endif;?>
                                             <a class="btn btn-sm btn-outline-secondary" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a>
                                         </div>
