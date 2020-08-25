@@ -163,7 +163,7 @@ class Item extends Model{
                     'weight'    => $i['weight'],
                     'depth'     => $i['depth'],
                     'width'     => $i['width'],
-                    'height'    => $i['height']
+                    'height'    => $i['height'],
                     'onhand'    => 0,
                     'allocated' => 0,
                     'qc_count'  => 0,
