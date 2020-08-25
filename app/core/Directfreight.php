@@ -15,7 +15,7 @@
     protected $API_HOST;
     protected $CUSTOMER_CODE;
     protected $curl_options;
-    protected $test = true;
+    protected $test = false;
     protected $PRICING_KEY;
     protected $CONSIGNMENT_KEY;
     protected $GENERAL_KEY;
@@ -179,7 +179,7 @@
             'Connote'   => $con_id
         );
         //return json_encode($conNoteList);
-        $response = $this->sendPostRequest('TrackConsignment/', $conNoteList, "PRICING");
+        $response = $this->sendPostRequest('TrackConsignment/', $conNoteList, "GENERAL");
         //echo $response; die();
         return json_decode($response,true);
     }
