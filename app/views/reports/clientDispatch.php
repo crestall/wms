@@ -32,9 +32,6 @@
                                 <th>Items</th>
                                 <th>Courier</th>
                                 <th>Con Note</th>
-                                <?php if( !in_array($client_id, $hidden) ):?>
-                                    <th>Estimated Freight Charge</th>
-                                <?php endif;?>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,9 +56,6 @@
                                 </td>
                                 <td data-label="Courier" ><?php echo $co['courier'];?></td>
                                 <td ><?php echo $co['consignment_id'];?></td>
-                                <?php if( !in_array($client_id, $hidden) ):?>
-                                    <td data-label="Estimated Freight Charge" class="number"><?php echo $co['charge'];?></td>
-                                <?php endif;?>
                             </tr>
                         <?php endforeach;?>
                         </tbody>
