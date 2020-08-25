@@ -267,11 +267,11 @@ return array(
             'container-unloading'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fal fa-container-storage fa-3x"></i>'
-            ),
+            ),/*
             'incoming-shipments'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-shipping-timed fa-3x"></i>'
-            )
+            )*/
         ),
 		'site-settings'		=> array(
             'site-settings-index'   => true,
