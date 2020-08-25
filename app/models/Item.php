@@ -157,17 +157,18 @@ class Item extends Model{
             if(!isset($rows[$i['item_id']]))
             {
                 $rows[$i['item_id']] = array(
-                    'name'      => $i['name'],
-                    'sku'       => $i['sku'],
-                    'barcode'   => $i['barcode'],
-                    'weight'    => $i['weight'],
-                    'depth'     => $i['depth'],
-                    'width'     => $i['width'],
-                    'height'    => $i['height'],
-                    'onhand'    => 0,
-                    'allocated' => 0,
-                    'qc_count'  => 0,
-                    'locations' => array()
+                    'name'              => $i['name'],
+                    'sku'               => $i['sku'],
+                    'barcode'           => $i['barcode'],
+                    'weight'            => $i['weight'],
+                    'depth'             => $i['depth'],
+                    'width'             => $i['width'],
+                    'height'            => $i['height'],
+                    'low_stock_warning' => $i['low_stock_warning'],
+                    'onhand'            => 0,
+                    'allocated'         => 0,
+                    'qc_count'          => 0,
+                    'locations'         => array()
                 );
             }
             $rows[$i['item_id']]['onhand'] += $i['qty'];
