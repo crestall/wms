@@ -28,7 +28,7 @@
                                 <th>Under Quality Control</th>
                                 <th>Available</th>
                                 <th>Total Bay Usage</th>
-                                <th></th>
+                                <th>Warning Level</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,7 +60,7 @@
                                     <td data-label="Total Bay Usage" class="text-nowrap"><?php echo $location_string;?></td>
                                     <td>
                                         <p><input type="text" class="form-control number" id="lowstock_<?php echo $itemid;?>" name="lowstock_<?php echo $itemid;?>" value="<?php echo $p['low_stock_warning'];?>" /></p>
-                    					<p><button class="btn btn-primary btn-sm update_product" data-productid="<?php echo $itemid;?>">Update</button> </p>
+                    					<p><button class="btn btn-outline-secondary btn-sm update_product" data-productid="<?php echo $itemid;?>">Update</button> </p>
                                         <div class="errorbox" style="display:none;" id="error_<?php echo $itemid;?>">Only input whole, positive numbers please</div>
                                     	<div class="feedbackbox" style="display:none;" id="feedback_<?php echo $itemid;?>">Product warning level updated</div>
                                     </td>
