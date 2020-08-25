@@ -20,7 +20,7 @@
                     init: function()
                     {
                         dataTable.init($('table#client_stock_movement_summary_table'), {
-                            fixedHeader: true
+                            
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
