@@ -25,7 +25,7 @@
                         <thead>
                         	<tr>
                                 <th>Date</th>
-                                <th>Order Number/Reference</th>
+                                <th>Order Number<br/>Reference</th>
                                 <th>Your Order Number</th>
                                 <th>Delivery To</th>
                                 <th>SKU</th>
