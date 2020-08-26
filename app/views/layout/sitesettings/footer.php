@@ -183,10 +183,10 @@
                     init: function(){
                         $('input.user_search').on('keyup',function(e){
                             var search_type = this.id.replace("_search","");
-                            console.log('search_type: '+search_type);
-                            var search = $(this).val().toLowerCase();
+                            //console.log('search_type: '+search_type);
+                            var search_term = $(this).val().toLowerCase();
                             $("div."+search_type).each(function() {
-                                if ($(this).html().toLowerCase().indexOf(search) != -1) {
+                                if ($(this).html().toLowerCase().indexOf(search_term) != -1) {
                                     $(this).show();
                                 }
                                 else {
