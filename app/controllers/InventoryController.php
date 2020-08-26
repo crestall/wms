@@ -183,6 +183,10 @@ class InventoryController extends Controller
             {
                 $location_string .= ", Allocated(".$il['allocated'].")";
             }
+            if($il['oversize'] > 0)
+            {
+                $location_string .= " - Oversize";
+            }
             $location_string .= "<br/>";
         }
         $location_string = rtrim($location_string, "<br/>");
@@ -384,7 +388,7 @@ class InventoryController extends Controller
             'registerNewStock'
         ));
 
-        return Permission::check($role, $resource, $action); 
+        return Permission::check($role, $resource, $action);
     }
 }
 ?>
