@@ -23,7 +23,7 @@
                             }).then( function(willDeactivate) {
                                 if (willDeactivate) {
                                     $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deactivating User...</h1></div>' });
-                                    //console.log(data);
+                                    console.log(data);
                                     $.post('/ajaxfunctions/deactivateUser', data, function(d){
                                         $but.closest('p').html("<a class='btn btn-success reactivate' data-userid='"+thisuserid+"'>Reactivate User</a>");
                                         $.unblockUI();
