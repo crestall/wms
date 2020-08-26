@@ -946,7 +946,7 @@ class Order extends Model{
             array(
                 'Date',
                 'Total Orders Per Day',
-                '3 Month Weekly Average'
+                '3 Month Daily Average'
             )
         );
 
