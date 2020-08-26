@@ -20,7 +20,7 @@
                     init: function()
                     {
                         dataTable.init($('table#client_stock_movement_summary_table'), {
-                            
+
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -150,8 +150,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [6] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
