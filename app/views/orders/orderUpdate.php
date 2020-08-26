@@ -353,7 +353,7 @@ if(!$error)
                                         <?php elseif($order['courier_id'] == $this->controller->courier->directFreightId):?>
                                             <h5 class="card-title">Direct Freight</h5>
                                             <div class="container-fluid">
-                                                <div class="row">
+                                                <div class="row mb-4">
                                                     Already assigned to Freight with Consignment ID <?php echo $order['consignment_id'];?>
                                                 </div>
                                                 <div class="row">
