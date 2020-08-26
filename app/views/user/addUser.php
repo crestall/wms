@@ -3,10 +3,10 @@ $display = (!empty(Form::value('role_id')) && Form::value('role_id') == $client_
 $sdisplay = (!empty(Form::value('client_id')) && Form::value('client_id') == 67)? "block" : "none";
 ?>
 <div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-    <?php echo Form::displayError('general');?>
-    <div class="row">
+    <div id="page_container" class="container-xl">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php echo Form::displayError('general');?>
         <form id="add_user" method="post" action="/form/procUserAdd">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
@@ -75,7 +75,7 @@ $sdisplay = (!empty(Form::value('client_id')) && Form::value('client_id') == 67)
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Add User</button>
+                    <button type="submit" class="btn btn-outline-secondary">Add User</button>
                 </div>
             </div>
         </form>
