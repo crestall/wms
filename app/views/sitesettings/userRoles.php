@@ -33,7 +33,7 @@
             </div>
         </div>
         <?php if(count($roles)):?>
-            <div class="row" id="sortable">
+            <div id="sortable">
                 <?php foreach($roles as $r):?>
                     <form class="edit-userrole" action="/form/procUserRoleEdit" method="post">
                         <div class="form-group row">
