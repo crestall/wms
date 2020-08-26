@@ -46,7 +46,7 @@
                                 if (willReactivate) {
                                     $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reactivating User...</h1></div>' });
                                     $.post('/ajaxfunctions/reactivateUser', data, function(d){
-                                        $but.closest('p').html("<a class='btn btn-danger deactivate' data-userid='"+thisuserid+"'>Deactivate User</a>");
+                                        $but.closest('p').html("<a class='btn btn-sm btn-outline-danger deactivate' data-userid='"+thisuserid+"'>Deactivate User</a>");
                                         $.unblockUI();
                                         actions.common.userActivation();
                                     });
