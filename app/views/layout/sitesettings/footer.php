@@ -229,7 +229,8 @@
                                 'location': $('#location_'+id).val(),
                                 'current_location': $('#current_location_'+id).val(),
                                 'multisku': $('#multisku_'+id).prop('checked'),
-                                'tray': $('#trays_'+id).prop('checked')
+                                'tray': $('#trays_'+id).prop('checked'),
+                                'oversize': $('#oversize_'+id).prop('checked')
                             };
                             //console.log(data);
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Location...</h2></div>' });
