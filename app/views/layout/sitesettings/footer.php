@@ -184,7 +184,7 @@
                         $('input.user_search').on('keyup',function(e){
                             var search_type = this.id.replace("_search","");
                             console.log('search_type: '+search_type);
-                            var search = $(this).val.toLowerCase();
+                            var search = $(this).val().toLowerCase();
                             $("div."+search_type).each(function() {
                                 if ($(this).html().toLowerCase().indexOf(search) != -1) {
                                     $(this).show();
