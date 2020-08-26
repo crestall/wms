@@ -60,7 +60,7 @@
                                 <label class="custom-control-label" for="active_<?php echo $c['id'];?>"></label>
                             </div>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <label class="col-form-label">&nbsp;</label>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="line_id" value="<?php echo $c['id'];?>" />
