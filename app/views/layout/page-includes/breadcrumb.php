@@ -11,9 +11,8 @@ if(count($pages))
             continue;
         $SectionName = ucwords(str_replace("-", " ", $section));
         $action = Utility::toCamelCase($SectionName);
-        echo "<p>Role: $role, Section: $section, Action: $action</p>";
-        if(Permission::check($role, $section, $action))
-        {
+        //if(Permission::check($role, $section, $action))
+        //{
             if(array_key_exists($this_page, $spages))
             {
                 //echo "$this_page is in the above";
@@ -36,18 +35,24 @@ if(count($pages))
                 {
                     if(!is_array($details) || !$details['display'])
                         continue;
-                    //echo "<pre>$pname",print_r($details),"</pre>";
+
                     $p_name = ucwords(str_replace("-", " ", $pname));
-                    $bcs[] = array(
-                        'icon'      =>  '',
-                        'p_name'    =>  $p_name,
-                        'link'      =>  "/$section/$pname",
-                        'active'    =>  ($pname == $this_page)
-                    );
+                    $action = Utility::toCamelCase($p_name);
+                    echo "<p>Role: $role, Section: $section, Action: $action</p>";
+                    if(Permission::check($role, $section, $action))
+                    {
+                        $bcs[] = array(
+                            'icon'      =>  '',
+                            'p_name'    =>  $p_name,
+                            'link'      =>  "/$section/$pname",
+                            'active'    =>  ($pname == $this_page)
+                        );
+                    }
+
                 }
                 break;
             }
-        }
+        //}
 
     }
     //echo "<pre>",print_r($bcs),"</pre>";
