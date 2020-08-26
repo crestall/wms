@@ -181,15 +181,9 @@
                 },
                 'manage-users':{
                     init: function(){
-                        var tbls = dataTable.init($('table.user_list_table'), {
-                            "dom": '<"top"i>rt<"bottom">p<"clear">',
-                            "pageLength": 10
-                        } );
-
-
-                        $('#mySearch').on( 'keyup click', function () {
-                            tbls.tables().search($(this).val()).draw();
-
+                        $('input.user_search').on('keyup',function(e){
+                            var user_type = this.id;
+                            console.log('user_type: '+user_type);
                         });
                         actions.common.userActivation();
                     }
