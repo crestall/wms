@@ -37,25 +37,24 @@
                 <?php foreach($roles as $r):?>
                     <form class="edit-userrole" action="/form/procUserRoleEdit" method="post">
                         <div class="form-group row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="col-form-label">Name</label>
                                 <input type="text" class="form-control required userrolename" name="name_<?php echo $r['id'];?>" id="name_<?php echo $r['id'];?>" value="<?php echo ucwords($r['name']);?>" />
                                 <input type="hidden" name="currentname_<?php echo $r['id'];?>" value="<?php echo $r['name'];?>"/>
                                 <?php echo Form::displayError("name_{$r['id']}");?>
                             </div>
-                            <div class="col-md-1">
-                                <label class="col-form-label">Active</label>
-                                <div class="checkbox checkbox-default">
-                                    <input class="form-check-input styled" type="checkbox" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo "checked";?> />
-                                    <label for="active_<?php echo $r['id'];?>"></label>
+                            <div class="col-md-2">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="active_<?php echo $r['id'];?>" name="active_<?php echo $r['id'];?>" <?php if($r['active'] > 0) echo "checked";?> />
+                                    <label class="custom-control-label" for="active_<?php echo $r['id'];?>">Active</label>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <label class="col-form-label">&nbsp;</label>
                                 <div class="input-group">
                                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                     <input type="hidden" name="line_id" value="<?php echo $r['id'];?>" />
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-outline-secondary">Update</button>
                                 </div>
                             </div>
                         </div>
