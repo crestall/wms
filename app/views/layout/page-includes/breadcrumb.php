@@ -11,6 +11,7 @@ if(count($pages))
             continue;
         $SectionName = ucwords(str_replace("-", " ", $section));
         $action = Utility::toCamelCase($SectionName);
+        echo "<p>Role: $role, Section: $section, Action: $action</p>";
         if(Permission::check($role, $section, $action))
         {
             if(array_key_exists($this_page, $spages))
