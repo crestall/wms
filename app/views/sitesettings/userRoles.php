@@ -54,12 +54,9 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <label class="col-form-label">&nbsp;</label>
-                                <div class="input-group">
-                                    <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                                    <input type="hidden" name="line_id" value="<?php echo $r['id'];?>" />
-                                    <button type="submit" class="btn btn-outline-secondary">Update</button>
-                                </div>
+                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                                <input type="hidden" name="line_id" value="<?php echo $r['id'];?>" />
+                                <button type="submit" class="btn btn-outline-secondary">Update</button>
                             </div>
                         </div>
                     </form>
