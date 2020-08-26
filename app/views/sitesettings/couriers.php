@@ -30,7 +30,7 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Add Courier</button>
+                    <button type="submit" class="btn btn-outline-secondary">Add Courier</button>
                 </div>
             </div>
         </form>
@@ -60,11 +60,11 @@
                                 <label class="custom-control-label" for="active_<?php echo $c['id'];?>"></label>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <label class="col-form-label">&nbsp;</label>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="line_id" value="<?php echo $c['id'];?>" />
-                            <button type="submit" class="btn btn-outline-secondary">Update</button>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
                         </div>
                     </div>
                 </form>
