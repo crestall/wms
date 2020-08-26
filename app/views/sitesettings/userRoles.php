@@ -38,8 +38,8 @@
                     <form class="edit-userrole" action="/form/procUserRoleEdit" method="post">
                         <div class="form-group row">
                             <div class="col-md-4">
-                                <label class="col-form-label">Name</label>
-                                <input type="text" class="form-control required userrolename" name="name_<?php echo $r['id'];?>" id="name_<?php echo $r['id'];?>" value="<?php echo ucwords($r['name']);?>" />
+                                <label class="col-4">Name</label>
+                                <input type="text" class="form-control required userrolename col-8" name="name_<?php echo $r['id'];?>" id="name_<?php echo $r['id'];?>" value="<?php echo ucwords($r['name']);?>" />
                                 <input type="hidden" name="currentname_<?php echo $r['id'];?>" value="<?php echo $r['name'];?>"/>
                                 <?php echo Form::displayError("name_{$r['id']}");?>
                             </div>
