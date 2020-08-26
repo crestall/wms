@@ -354,6 +354,9 @@ if(!$error)
                                             <h5 class="card-title">Direct Freight</h5>
                                             <div class="container-fluid">
                                                 <div class="row">
+                                                    Already assigned to Freight with Consignment ID <?php echo $order['consignment_id'];?>
+                                                </div>
+                                                <div class="row">
                                                     <label class="col">&nbsp;</label>
                                                     <div class="col">
                                                         <!--p><a class="btn btn-outline-secondary direct-freight-label" data-orderid="<?php echo $order_id;?>">Print Direct Freight Label</a></p-->
