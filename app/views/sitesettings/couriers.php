@@ -40,39 +40,37 @@
             </div>
         </div>
         <?php if(count($couriers)):?>
-            <div class="row">
-                <?php foreach($couriers as $c):?>
-                    <form class="edit-courier" action="/form/procCourierEdit" method="post">
-                        <div class="form-group row">
-                            <div class="col-md-3">
-                                <label class="col-form-label">Name</label>
-                                <input type="text" class="form-control required" name="name_<?php echo $c['id'];?>" id="name_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
-                                <?php echo Form::displayError("name_{$c['id']}");?>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="col-form-label">Table Name</label>
-                                <input type="text" class="form-control" name="table_name_<?php echo $c['id'];?>" id="table_name_<?php echo $c['id'];?>" value="<?php echo $c['table_name'];?>" />
-                                <?php echo Form::displayError("table_name_{$c['id']}");?>
-                            </div>
-                            <div class="col-md-1">
-                                <label class="col-form-label">Active</label>
-                                <div class="checkbox checkbox-default">
-                                    <input class="form-check-input styled" type="checkbox" id="active_<?php echo $c['id'];?>" name="active_<?php echo $c['id'];?>" <?php if($c['active'] > 0) echo "checked";?> />
-                                    <label for="active_<?php echo $c['id'];?>"></label>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <label class="col-form-label">&nbsp;</label>
-                                <div class="input-group">
-                                    <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                                    <input type="hidden" name="line_id" value="<?php echo $c['id'];?>" />
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </div>
+            <?php foreach($couriers as $c):?>
+                <form class="edit-courier" action="/form/procCourierEdit" method="post">
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <label class="col-form-label">Name</label>
+                            <input type="text" class="form-control required" name="name_<?php echo $c['id'];?>" id="name_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
+                            <?php echo Form::displayError("name_{$c['id']}");?>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="col-form-label">Table Name</label>
+                            <input type="text" class="form-control" name="table_name_<?php echo $c['id'];?>" id="table_name_<?php echo $c['id'];?>" value="<?php echo $c['table_name'];?>" />
+                            <?php echo Form::displayError("table_name_{$c['id']}");?>
+                        </div>
+                        <div class="col-md-1">
+                            <label class="col-form-label">Active</label>
+                            <div class="checkbox checkbox-default">
+                                <input class="form-check-input styled" type="checkbox" id="active_<?php echo $c['id'];?>" name="active_<?php echo $c['id'];?>" <?php if($c['active'] > 0) echo "checked";?> />
+                                <label for="active_<?php echo $c['id'];?>"></label>
                             </div>
                         </div>
-                    </form>
-                <?php endforeach;?>
-            </div>
+                        <div class="col-md-1">
+                            <label class="col-form-label">&nbsp;</label>
+                            <div class="input-group">
+                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                                <input type="hidden" name="line_id" value="<?php echo $c['id'];?>" />
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            <?php endforeach;?>
         <?php else:?>
             <div class="row">
                 <div class="col-lg-12">
