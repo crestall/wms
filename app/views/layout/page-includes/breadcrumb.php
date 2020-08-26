@@ -38,8 +38,9 @@ if(count($pages))
 
                     $p_name = ucwords(str_replace("-", " ", $pname));
                     $action = Utility::toCamelCase($p_name);
-                    echo "<p>Role: $role, Section: $section, Action: $action</p>";
-                    if(Permission::check($role, $section, $action))
+                    $sectionname = str_replace("-", "", $section_name);
+                    echo "<p>Role: $role, Section: $sectionname, Action: $action</p>";
+                    if(Permission::check($role, $sectionname, $action))
                     {
                         $bcs[] = array(
                             'icon'      =>  '',
