@@ -9,7 +9,7 @@ if(count($pages))
     {
         if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
             continue;
-        $SectionName = ucwords(str_replace("-", " ", $section_name));
+        $SectionName = ucwords(str_replace("-", " ", $section));
         $action = Utility::toCamelCase($SectionName);
         if(Permission::check($role, $section, $action))
         {
