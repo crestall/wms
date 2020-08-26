@@ -54,10 +54,9 @@
                             <?php echo Form::displayError("table_name_{$c['id']}");?>
                         </div>
                         <div class="col-md-1">
-                            <label class="col-form-label">Active</label>
-                            <div class="checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="active_<?php echo $c['id'];?>" name="active_<?php echo $c['id'];?>" <?php if($c['active'] > 0) echo "checked";?> />
-                                <label for="active_<?php echo $c['id'];?>"></label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="active_<?php echo $c['id'];?>" name="active_<?php echo $c['id'];?>" <?php if($c['active'] > 0) echo "checked";?> />
+                                <label class="custom-control-label" for="active_<?php echo $c['id'];?>">Active</label>
                             </div>
                         </div>
                         <div class="col-md-1">
