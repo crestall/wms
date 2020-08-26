@@ -11,50 +11,40 @@ if(count($pages))
             continue;
         $SectionName = ucwords(str_replace("-", " ", $section));
         $action = Utility::toCamelCase($SectionName);
-        //if(Permission::check($role, $section, $action))
-        //{
-            if(array_key_exists($this_page, $spages))
+        if(array_key_exists($this_page, $spages))
+        {
+            $bcs[] = array(
+                'icon'      => '<i class="fad fa-home"></i>',
+                'p_name'    => '',
+                'link'      => '/',
+                'active'    => false
+            );
+            $Section = ucwords(str_replace("-", " ", $section));
+            $bcs[] = array(
+                'icon'      => '',
+                'p_name'    => $Section,
+                'link'      => "/$section",
+                'active'    => false
+            );
+            foreach($pages[$section] as $pname => $details)
             {
-                //echo "$this_page is in the above";
-                $bcs[] = array(
-                    'icon'      => '<i class="fad fa-home"></i>',
-                    'p_name'    => '',
-                    'link'      => '/',
-                    'active'    => false
-                );
-                //if($spage == $)
-                //echo "<p>Will do breadcrumbs for $section</p>";
-                $Section = ucwords(str_replace("-", " ", $section));
-                $bcs[] = array(
-                    'icon'      => '',
-                    'p_name'    => $Section,
-                    'link'      => "/$section",
-                    'active'    => false
-                );
-                foreach($pages[$section] as $pname => $details)
+                if(!is_array($details) || !$details['display'])
+                    continue;
+                $p_name = ucwords(str_replace("-", " ", $pname));
+                $action = Utility::toCamelCase($p_name);
+                $sectionname = str_replace("-", "", $section);
+                if(Permission::check($role, $sectionname, $action))
                 {
-                    if(!is_array($details) || !$details['display'])
-                        continue;
-
-                    $p_name = ucwords(str_replace("-", " ", $pname));
-                    $action = Utility::toCamelCase($p_name);
-                    $sectionname = str_replace("-", "", $section);
-                    echo "<p>Role: $role, Section: $sectionname, Action: $action</p>";
-                    if(Permission::check($role, $sectionname, $action))
-                    {
-                        $bcs[] = array(
-                            'icon'      =>  '',
-                            'p_name'    =>  $p_name,
-                            'link'      =>  "/$section/$pname",
-                            'active'    =>  ($pname == $this_page)
-                        );
-                    }
-
+                    $bcs[] = array(
+                        'icon'      =>  '',
+                        'p_name'    =>  $p_name,
+                        'link'      =>  "/$section/$pname",
+                        'active'    =>  ($pname == $this_page)
+                    );
                 }
-                break;
             }
-        //}
-
+            break;
+        }
     }
     //echo "<pre>",print_r($bcs),"</pre>";
 }
