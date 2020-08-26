@@ -26,7 +26,7 @@
                             <div class="row border-bottom border-secondary mb-3">
                                 <label class="col-3">Filter</label>
                                 <div class="col-9 mb-3">
-                                    <input class="form-control" type="text" id="<?php echo $id_name;?>" placeholder="Filter By Name" />
+                                    <input class="form-control form-control-sm" type="text" id="<?php echo $id_name;?>" placeholder="Filter By Name" />
                                 </div>
                             </div>
                             <?php foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
