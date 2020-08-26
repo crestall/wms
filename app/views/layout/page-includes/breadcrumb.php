@@ -38,7 +38,7 @@ if(count($pages))
 
                     $p_name = ucwords(str_replace("-", " ", $pname));
                     $action = Utility::toCamelCase($p_name);
-                    $sectionname = str_replace("-", "", $section_name);
+                    $sectionname = str_replace("-", "", $section);
                     echo "<p>Role: $role, Section: $sectionname, Action: $action</p>";
                     if(Permission::check($role, $sectionname, $action))
                     {
