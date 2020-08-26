@@ -185,7 +185,7 @@ class InventoryController extends Controller
             }
             if($il['oversize'] > 0)
             {
-                $location_string .= " - Oversize";
+                $location_string .= " - Oversize Location";
             }
             $location_string .= "<br/>";
         }
