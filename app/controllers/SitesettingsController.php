@@ -122,9 +122,6 @@ class SiteSettingsController extends Controller
         Permission::allow(['admin'], $resource, [
             'index',
             'locations',
-            'manageUsers',
-            'orderStatus',
-            'staff',
             'stockMovementReasons'
         ]);
 
