@@ -182,8 +182,8 @@
                 'manage-users':{
                     init: function(){
                         $('input.user_search').on('keyup',function(e){
-                            var user_type = this.id;
-                            console.log('user_type: '+user_type);
+                            var search_type = this.id.replace("_search","");
+                            console.log('search_type: '+search_type);
                         });
                         actions.common.userActivation();
                     }
