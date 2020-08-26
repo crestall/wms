@@ -54,6 +54,10 @@
                                         {
                                             $ls .= " Under Quality Control (".$l['qc_count'].")";
                                         }
+                                        if($l['oversize'] > 0)
+                                        {
+                                            $ls .= " - Oversize";
+                                        }
                                         $ls .= "<br/>";
                                     }
                                     $ls = rtrim($ls, "<br/>");
