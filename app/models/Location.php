@@ -681,6 +681,8 @@ class Location extends Model{
             $vals['multi_sku'] = 1;
         if(isset($data['trays']))
             $vals['tray'] = 1;
+        if(isset($data['oversize']))
+            $vals['oversize'] = 1;
         $db->insertQuery('locations', $vals);
         return true;
     }
