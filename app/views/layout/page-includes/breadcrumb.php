@@ -1,50 +1,53 @@
 <?php
-//echo "<pre>",print_r($pages),"</pre>";
 $this_page = Config::get('curPage');
-//echo "this page is $this_page";
+$role = Session::getUserRole();
 $bcs = array();
 if(count($pages))
 {
 
     foreach($pages as $section => $spages)
     {
-        //echo "<pre>",print_r($spages),"</pre>";
         if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
             continue;
-        //if(in_array($this_page, $spages))
-        if(array_key_exists($this_page, $spages))
+        $SectionName = ucwords(str_replace("-", " ", $section_name));
+        $action = Utility::toCamelCase($SectionName);
+        if(Permission::check($role, $section, $action))
         {
-            //echo "$this_page is in the above";
-            $bcs[] = array(
-                'icon'      => '<i class="fad fa-home"></i>',
-                'p_name'    => '',
-                'link'      => '/',
-                'active'    => false
-            );
-            //if($spage == $)
-            //echo "<p>Will do breadcrumbs for $section</p>";
-            $Section = ucwords(str_replace("-", " ", $section));
-            $bcs[] = array(
-                'icon'      => '',
-                'p_name'    => $Section,
-                'link'      => "/$section",
-                'active'    => false
-            );
-            foreach($pages[$section] as $pname => $details)
+            if(array_key_exists($this_page, $spages))
             {
-                if(!is_array($details) || !$details['display'])
-                    continue;
-                //echo "<pre>$pname",print_r($details),"</pre>";
-                $p_name = ucwords(str_replace("-", " ", $pname));
+                //echo "$this_page is in the above";
                 $bcs[] = array(
-                    'icon'      =>  '',
-                    'p_name'    =>  $p_name,
-                    'link'      =>  "/$section/$pname",
-                    'active'    =>  ($pname == $this_page)
+                    'icon'      => '<i class="fad fa-home"></i>',
+                    'p_name'    => '',
+                    'link'      => '/',
+                    'active'    => false
                 );
+                //if($spage == $)
+                //echo "<p>Will do breadcrumbs for $section</p>";
+                $Section = ucwords(str_replace("-", " ", $section));
+                $bcs[] = array(
+                    'icon'      => '',
+                    'p_name'    => $Section,
+                    'link'      => "/$section",
+                    'active'    => false
+                );
+                foreach($pages[$section] as $pname => $details)
+                {
+                    if(!is_array($details) || !$details['display'])
+                        continue;
+                    //echo "<pre>$pname",print_r($details),"</pre>";
+                    $p_name = ucwords(str_replace("-", " ", $pname));
+                    $bcs[] = array(
+                        'icon'      =>  '',
+                        'p_name'    =>  $p_name,
+                        'link'      =>  "/$section/$pname",
+                        'active'    =>  ($pname == $this_page)
+                    );
+                }
+                break;
             }
-            break;
         }
+
     }
     //echo "<pre>",print_r($bcs),"</pre>";
 }
