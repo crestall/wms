@@ -40,6 +40,10 @@
                 <input class="custom-control-input" type="checkbox" id="trays" name="trays" <?php if(!empty(Form::value('trays'))) echo 'checked';?> />
                 <label class="custom-control-label col-md-3" for="trays">Tray Location</label>
             </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="oversize" name="oversize" <?php if(!empty(Form::value('oversize'))) echo 'checked';?> />
+                <label class="custom-control-label col-md-3" for="oversize">Oversize Location</label>
+            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
