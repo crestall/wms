@@ -43,9 +43,9 @@
                                     <div class="col-4 text-right">
                                         <p>
                                         <?php if($user['active'] > 0):?>
-                                            <a class="btn btn-sm btn-outline-danger deactivate mb-3" data-userid="<?php echo $user['id'];?>">Deactivate User</a>
+                                            <a class="btn btn-sm btn-outline-danger deactivate" data-userid="<?php echo $user['id'];?>">Deactivate User</a>
                                         <?php else:?>
-                                            <a class="btn btn-sm btn-outline-success reactivate mb-3" data-userid="<?php echo $user['id'];?>">Reactivate User</a>
+                                            <a class="btn btn-sm btn-outline-success reactivate data-userid="<?php echo $user['id'];?>">Reactivate User</a>
                                         <?php endif;?>
                                         </p>
                                         <a class="btn btn-sm btn-outline-secondary mb-3" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a>
