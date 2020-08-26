@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <div class="row border-bottom border-secondary mb-3">
                                 <div class="col-9 mb-3 ml-sm-4">
-                                    <input class="form-control form-control-sm" type="text" id="<?php echo $id_name;?>" placeholder="Filter By Name" />
+                                    <input class="form-control form-control-sm user_search" type="text" id="<?php echo $id_name;?>" placeholder="Filter By Name" />
                                 </div>
                             </div>
                             <?php foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
