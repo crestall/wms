@@ -41,7 +41,7 @@
         </div>
         <?php if(count($couriers)):?>
             <?php foreach($couriers as $c):?>
-                <form class="edit-courier" action="/form/procCourierEdit" method="post">
+                <form class="edit-courier border-bottom border-secondary border-bottom-dashed mb-3" action="/form/procCourierEdit" method="post">
                     <div class="form-group row">
                         <div class="col-md-3">
                             <label class="col-form-label">Name</label>
