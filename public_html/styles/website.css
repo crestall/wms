@@ -259,6 +259,17 @@ ul.user-info img.img-user{
 }
 
 /*****
+User Roles
+*****/
+form.edit-userrole{
+    border: thin solid rgb(234, 234, 234);
+    padding: 10px;
+    margin: 5px;
+    cursor: move;
+    width: 80%;
+}
+
+/*****
 Navigation
 *****/
 .navbar-nav{
