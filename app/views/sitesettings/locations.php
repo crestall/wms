@@ -71,6 +71,7 @@
                                     <th>Edit</th>
                                     <th>Multi SKU</th>
                                     <th>Trays</th>
+                                    <th>Oversize</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -92,6 +93,12 @@
                                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                                 <input class="custom-control-input" type="checkbox" id="trays_<?php echo $l['id'];?>" name="trays_<?php echo $l['id'];?>" <?php if($l['tray'] > 0) echo "checked";?> />
                                                 <label class="custom-control-label col-md-3" for="trays_<?php echo $l['id'];?>"></label>
+                                            </div>
+                                        </td>
+                                        <td data-label="Oversize">
+                                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                                <input class="custom-control-input" type="checkbox" id="oversize_<?php echo $l['id'];?>" name="oversize_<?php echo $l['id'];?>" <?php if($l['oversize'] > 0) echo "checked";?> />
+                                                <label class="custom-control-label col-md-3" for="oversize_<?php echo $l['id'];?>"></label>
                                             </div>
                                         </td>
                                         <td>
