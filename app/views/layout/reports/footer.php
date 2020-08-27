@@ -589,19 +589,8 @@
                 },
                 'client-bay-usage-report' :{
                     init: function(){
-                        datePicker.betweenDates(true);
-                        $('button#change_dates').click(function(e){
-                            e.preventDefault();
-                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
-                            var from = $('#date_from_value').val();
-                            var to = $('#date_to_value').val();
-                            window.location.href = "/reports/client-space-usage-report/from="+from+"/to="+to;
-                        });
-
                         $('button#csv_download').click(function(e) {
                             var data = {
-                                from: $('#date_from_value').val(),
-                                to:   $('#date_to_value').val(),
                                 csrf_token: config.csrfToken
                             }
                             var url = "/downloads/clientBayUsageCSV";
