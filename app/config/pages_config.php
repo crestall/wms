@@ -96,6 +96,10 @@ return array(
             'order-importing' =>  array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-file-import fa-3x"></i>'
+            ),
+            'book-direct-freight-collection'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fal fa-truck"></i>'
             )
         ),
 		'clients'	=> array(
