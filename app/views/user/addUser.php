@@ -25,7 +25,7 @@ $sdisplay = (!empty(Form::value('client_id')) && Form::value('client_id') == 67)
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Role</label>
                 <div class="col-md-4">
-                    <select id="role_id" name="role_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->user->getSelectUserRoles(Form::value('role_id'));?></select>
+                    <select id="role_id" name="role_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->user->getSelectUserRoles(Form::value('role_id'));?></select>
                     <?php echo Form::displayError('role_id');?>
                 </div>
             </div>
@@ -33,38 +33,15 @@ $sdisplay = (!empty(Form::value('client_id')) && Form::value('client_id') == 67)
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                     <div class="col-md-4">
-                        <select id="client_id" name="client_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients(Form::value('client_id'));?></select>
+                        <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients(Form::value('client_id'));?></select>
                         <?php echo Form::displayError('client_id');?>
                     </div>
                 </div>
             </div>
-            <div id="solar_holder" style="display: <?php echo $sdisplay;?>">
-                <div class="form-group row">
-                    <div class="form-check">
-                        <label class="form-check-label col-md-3" for="express_post">Solar Team Leader</label>
-                        <div class="col-md-4 checkbox checkbox-default">
-                            <input class="form-check-input styled" type="checkbox" id="solar_team_leader" name="solar_team_leader" <?php if(!empty(Form::value('solar_team_leader'))) echo 'checked';?> />
-                            <label for="solar_team_leader"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Solar Team</label>
-                    <div class="col-md-4">
-                        <select id="solar_team_id" name="solar_team_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->solarteam->getSelectTeam(Form::value('solar_team_id'));?></select>
-                        <?php echo Form::displayError('solar_team_id');?>
-                    </div>
-                </div>
-            </div>
             <?php if(Session::getUserRole() == "super admin"):?>
-                <div class="form-group row">
-                    <div class="form-check">
-                        <label class="form-check-label col-md-3" for="test_user">Test User</label>
-                        <div class="col-md-4 checkbox checkbox-default">
-                            <input class="form-check-input styled" type="checkbox" id="test_user" name="test_user" <?php if(!empty(Form::value('test_user'))) echo "checked";?> />
-                            <label for="test_user"></label>
-                        </div>
-                    </div>
+                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                    <input class="custom-control-input" type="checkbox" id="test_user" name="test_user" <?php if(!empty(Form::value('test_user'))) echo 'checked';?> />
+                    <label class="custom-control-label col-md-3" for="test_user">Test User</label>
                 </div>
             <?php endif;?>
             <!-- Hidden Inputs -->
