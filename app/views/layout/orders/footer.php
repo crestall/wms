@@ -301,9 +301,9 @@
                         }
                     }
                 },
-                'book-direct-freigh-collection':{
+                'book-direct-freight-collection':{
                     init: function(){
-                        
+
                     }
                 },
                 'order-edit': {
