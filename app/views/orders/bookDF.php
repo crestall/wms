@@ -81,6 +81,20 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group row ml-4">
+                <label class="col-md-3">
+                    Total Weight
+                </label>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control number" name="weight" id="weight" value="<?php echo Form::value('weight');?>" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">Kg</span>
+                        </div>
+                    </div>
+                    <?php echo Form::displayError('weight');?>
+                </div>
+            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <div class="col-md-4 offset-md-6">
