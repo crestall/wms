@@ -6,7 +6,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <form id="df_collection" method="post" action="/form/procDFColection">
             <div class="form-group row">
-                <div class="col-12 m-4 mb-0">
+                <div class="col-12 mb-2">
                     <p class="inst">At least one of cartons or pallets must be filled in.</p>
                     <p class="inst">Use whole numbers only.</p>
                     <p class="inst">Only enter the largest dimension across <span class="font-weight-bold">all</span> cartons or pallets.</p>
@@ -52,9 +52,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
             <div class="form-group row">
                 <div class="col-12">
@@ -62,34 +60,38 @@
                 </div>
             </div>
             <div class="form-group row ml-4">
-                <label class="col-md-1 col-sm-2 mb-3">Count</label>
-                <div class="col-md-2 col-sm-4 mb-3">
-                    <input type="text" class="form-control number count digits" name="pallet_count" id="pallet_count" value="<?php echo Form::value('pallet_count');?>" />
-                </div>
-                <label class="col-md-1 col-sm-2 mb-3">Width</label>
-                <div class="col-md-2 col-sm-4 mb-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control number digits" name="pallet_width" id="pallet_width" value="<?php echo Form::value('pallet_width');?>" />
-                        <div class="input-group-append">
-                            <span class="input-group-text">cm</span>
+                <div class="col-9">
+                    <div class="form-group row">
+                        <label class="col-md-2 mb-3">Count</label>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" class="form-control number count digits" name="pallet_count" id="pallet_count" value="<?php echo Form::value('pallet_count');?>" />
                         </div>
-                    </div>
-                </div>
-                <label class="col-md-1 col-sm-2 mb-3">Length</label>
-                <div class="col-md-2 col-sm-4 mb-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control number digits" name="pallet_length" id="pallet_length" value="<?php echo Form::value('pallet_length');?>" />
-                        <div class="input-group-append">
-                            <span class="input-group-text">cm</span>
+                        <label class="col-md-2 mb-3">Width</label>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control number digits" name="pallet_width" id="pallet_width" value="<?php echo Form::value('pallet_width');?>" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <label class="col-md-1 col-sm-2 mb-3">Height</label>
-                <div class="col-md-2 col-sm-4 mb-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control number digits" name="pallet_height" id="pallet_height" value="<?php echo Form::value('pallet_length');?>" />
-                        <div class="input-group-append">
-                            <span class="input-group-text">cm</span>
+                        <label class="col-md-2 mb-3">Length</label>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control number digits" name="pallet_length" id="pallet_length" value="<?php echo Form::value('pallet_length');?>" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-md-2 mb-3">Height</label>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control number digits" name="pallet_height" id="pallet_height" value="<?php echo Form::value('pallet_length');?>" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
