@@ -60,18 +60,13 @@ class ReportsController extends Controller
 
     public function clientBayUsageReport()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
-        $bays = $this->clientsbays->getBayUsage($from, $to);
+        $usage = $this->location->getAllClientsBayUsage();
         Config::setJsConfig('curPage', "client-bay-usage-report");
         Config::set('curPage', "client-bay-usage-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage.php',[
             'page_title'    => 'Client Bay Usage Report',
-            'from'          =>  $from,
-            'to'            =>  $to,
-            'date_filter'   =>  "",
-            'bays'          => $bays['data'],
-            'fridays'       => $bays['fridays']
+            'pht'           => 'Client Bay Usage',
+            'usage'         => $usage
         ]);
     }
 
