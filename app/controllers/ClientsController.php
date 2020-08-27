@@ -67,7 +67,7 @@ class ClientsController extends Controller
     public function isAuthorized(){
         $role = Session::getUserRole();
         $action = $this->request->param('action');
-        $resource = "orders";
+        $resource = "clients";
         //only for admin
         Permission::allow(['super admin', 'admin'], $resource, ['*']);
         return Permission::check($role, $resource, $action);
