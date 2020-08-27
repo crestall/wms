@@ -56,16 +56,19 @@ class Location extends Model{
                 (COUNT(*) - IFNULL(SUM(a.oversize), 0) - IFNULL(SUM(a.tray), 0)) AS location_count,
                 SUM(a.oversize) AS oversize_count,
                 SUM(a.tray) AS pickface_count,
-                a.client_id
+                a.client_id,
+                a.client_name
             FROM
             (
-                SELECT il.location_id, l.oversize, l.tray, i.client_id
-                FROM items_locations il JOIN items i ON il.item_id = i.id JOIN locations l ON il.location_id = l.id
-                WHERE l.active = 1
+                SELECT il.location_id, l.oversize, l.tray, i.client_id, c.client_name
+                FROM items_locations il JOIN items i ON il.item_id = i.id JOIN locations l ON il.location_id = l.id JOIN clients c ON i.client_id = c.id
+                WHERE l.active = 1 AND c.active = 1
                 GROUP BY il.location_id
             ) a
             GROUP BY
                 a.client_id
+            ORDER BY
+                a.client_name
         ";
         return ($db->queryData($q));
     }
