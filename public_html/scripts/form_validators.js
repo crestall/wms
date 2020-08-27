@@ -212,6 +212,13 @@ $(document).ready(function() {
     });
     ////////////////////////////////////////////////////////////
     $('form#df_collection').validate({
+        rules:{
+            carton_width:{
+                required: function(e){
+                    return $("#carton_count").val().length > 0;
+                }
+            }
+        }
 
     });
     ////////////////////////////////////////////////////////////
