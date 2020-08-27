@@ -6,6 +6,11 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <form id="df_collection" method="post" action="/form/procDFColection">
             <div class="form-group row">
+                <div class="col-12 m-4 inst">
+                    At least one of cartons or pallets must be filled in. Use whole numbers only and enter the largest dimension.
+                </div>
+            </div>
+            <div class="form-group row">
                 <div class="col-12">
                     <h5>Cartons</h5>
                 </div>
@@ -13,7 +18,7 @@
             <div class="form-group row ml-4">
                 <label class="col-md-1 col-sm-2 mb-3">Count</label>
                 <div class="col-md-2 col-sm-4 mb-3">
-                    <input type="text" class="form-control number count digits" name="carton_count" id="carton_count" value="<?php echo Form::value('carton_count');?>" placeholder="At least one of these" />
+                    <input type="text" class="form-control number count digits" name="carton_count" id="carton_count" value="<?php echo Form::value('carton_count');?>" />
                 </div>
                 <label class="col-md-1 col-sm-2 mb-3">Width</label>
                 <div class="col-md-2 col-sm-4 mb-3">
