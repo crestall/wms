@@ -22,6 +22,17 @@ class OrdersController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function bookDirectFreightCollection()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "book-direct-freight-collection");
+        Config::set('curPage', "book-direct-freight-collection");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/bookDF.php', [
+            'page_title'        =>  "Book Direct Freight Collection",
+            'pht'               =>  ": Book DF Collections"
+        ]);
+    }
+
     public function orderImporting()
     {
 
