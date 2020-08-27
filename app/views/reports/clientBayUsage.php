@@ -28,6 +28,7 @@
                                     <td data-label="Oversize Bays"><?php echo $cu['oversize_count'];?></td>
                                     <td data-label="Pick Faces"><?php echo $cu['pickface_count'];?></td>
                                 </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
