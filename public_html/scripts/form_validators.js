@@ -218,6 +218,15 @@ $(document).ready(function() {
                     return $("#carton_count").val().length > 0;
                 }
             },
+            carton_length:{
+                required: function(e){
+                    return $("#carton_count").val().length > 0;
+                }
+            },carton_height:{
+                required: function(e){
+                    return $("#carton_count").val().length > 0;
+                }
+            },
             pallet_count:{
                 require_from_group: [1, ".count"]
             },
