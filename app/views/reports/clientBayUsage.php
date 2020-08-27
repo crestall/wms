@@ -2,8 +2,11 @@
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if(count($usage)):?>
-            <div class="row mb-3 text-right">
-                <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
+            <div class="row mb-3">
+                <div class="col-12 text-right">
+                    <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
+                </div>
+
             </div>
             <div class="row">
                 <div class="col-lg-12">
