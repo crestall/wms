@@ -23,6 +23,7 @@
   getAvailableStock($item_id, $fulfilled_id)
   getBayUsage($item_id)
   getClientInventory($client_id, $active = 1)
+  getAllClientsBayUsage()
   getItemByBarcode($barcode)
   getItemById($item_id)
   getItemBySku($sku)
@@ -70,6 +71,28 @@ class Item extends Model{
     public function __construct()
     {
         $this->getPackagingTypes();
+    }
+
+    public function getAllClientsBayUsage()
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                (COUNT(*) - IFNULL(SUM(a.oversize), 0) - IFNULL(SUM(a.tray), 0)) AS location_count,
+                SUM(a.oversize) AS oversize_count,
+                SUM(a.tray) AS pickface_count,
+                a.client_id
+            FROM
+            (
+                SELECT il.location_id, l.oversize, l.tray, i.client_id
+                FROM items_locations il JOIN items i ON il.item_id = i.id JOIN locations l ON il.location_id = l.id
+                WHERE l.active = 1
+                GROUP BY il.location_id
+            ) a
+            GROUP BY
+                a.client_id
+        ";
+        return ($db->queryData($q));
     }
 
     public function getSolarConsumablesReordering()
