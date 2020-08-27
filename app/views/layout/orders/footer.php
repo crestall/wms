@@ -303,7 +303,16 @@
                 },
                 'book-direct-freight-collection':{
                     init: function(){
-
+                        $('form#df_collection').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Booking Pickup...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
                     }
                 },
                 'order-edit': {
