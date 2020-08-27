@@ -1,8 +1,8 @@
 <?php
-$carton_count = (!empty(Form::value('carton_count')))? Form::value('carton_count') : 0;
-$carton_width = (!empty(Form::value('carton_width')))? Form::value('carton_width') : 0;
-$carton_length = (!empty(Form::value('carton_length')))? Form::value('carton_length') : 0;
-$carton_height = (!empty(Form::value('carton_height')))? Form::value('carton_height') : 0;
+$carton_count = (!empty(Form::value('carton_count')))? Form::value('carton_count') : "";
+$carton_width = (!empty(Form::value('carton_width')))? Form::value('carton_width') : "";
+$carton_length = (!empty(Form::value('carton_length')))? Form::value('carton_length') : "";
+$carton_height = (!empty(Form::value('carton_height')))? Form::value('carton_height') : "";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
