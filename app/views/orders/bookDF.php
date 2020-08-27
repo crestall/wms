@@ -6,8 +6,10 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <form id="df_collection" method="post" action="/form/procDFColection">
             <div class="form-group row">
-                <div class="col-12 m-4 inst">
-                    At least one of cartons or pallets must be filled in. Use whole numbers only and enter the largest dimension.
+                <div class="col-12 m-4">
+                    <p class="inst">At least one of cartons or pallets must be filled in.</p>
+                    <p class="inst">Use whole numbers only.</p>
+                    <p class="inst">Only enter the largest dimension across <span class="font-weight-bold">all</span> cartons or pallets.</p>
                 </div>
             </div>
             <div class="form-group row">
