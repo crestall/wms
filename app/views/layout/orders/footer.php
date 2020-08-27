@@ -301,46 +301,9 @@
                         }
                     }
                 },
-                'manage-swatches': {
+                'book-direct-freigh-collection':{
                     init: function(){
-                        actions.common['select-all']();
-                        actions.common['cancel-orders'](false, true);
-                        $('a.label-print').click(function(e){
-                            //console.log('click');
-                            e.preventDefault();
-                            var ids = [];
-                            $('input.select').each(function(i,e){
-                                var order_id = $(this).data('orderid');
-                                if( $(this).prop('checked'))
-                                {
-                                    ids.push(order_id);
-                                }
-                            });
-                            console.log(ids);
-                            if(ids.length)
-                            {
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printSwatchLabels");
-                                //form.setAttribute("action", "/form/printSwatchLabels");
-                                form.setAttribute("target", "formresult");
-                                $.each( ids, function( index, value ) {
-                                    var hiddenField = document.createElement("input");
-                                    hiddenField.setAttribute("type", "hidden");
-                                    hiddenField.setAttribute("name", "orders[]");
-                                    hiddenField.setAttribute("value", value);
-                                    form.appendChild(hiddenField);
-                                    var hiddenField2 = document.createElement("input");
-                                    hiddenField2.setAttribute("type", "hidden");
-                                    hiddenField2.setAttribute("name", "csrf_token");
-                                    hiddenField2.setAttribute("value", config.csrfToken );
-                                    form.appendChild(hiddenField2);
-                                });
-                                document.body.appendChild(form);
-                                window.open('','formresult');
-                                form.submit();
-                            }
-                        });
+                        
                     }
                 },
                 'order-edit': {
