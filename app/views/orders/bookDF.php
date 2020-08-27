@@ -4,7 +4,7 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <form id="df_collection" method="post" action="/form/procDFColection">
+        <form id="df_collection" method="post" action="/form/procDFCollection">
             <div class="form-group row">
                 <div class="col-12 mb-2">
                     <p class="inst">At least one of cartons or pallets must be filled in.</p>
