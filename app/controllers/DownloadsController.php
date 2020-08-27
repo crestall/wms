@@ -1063,43 +1063,22 @@ class DownloadsController extends Controller {
                 ${$field} = $value;
             }
         }
-        $bays = $this->clientsbays->getBayUsage($from, $to);
+        $usage = $this->location->getAllClientsBayUsage();
         $cols = array(
-            'Client'
+            "Client",
+            "Standard Bays",
+            "Oversize Bays",
+            "Pick Faces"
         );
-        foreach($bays['fridays'] as $f)
-        {
-            $cols[] = $f['string'];
-            $cols[] = "";
-            $cols[] = "";
-        }
         $rows = array();
-        $c = 0;
-        $row = array();
-        foreach($bays['fridays'] as $f)
-        {
-            if($c == 0)
-                $row[] = "";
-            $row[] = "Standard Bays";
-            $row[] =  "Oversize Bays";
-            $row[] =  "Pickfaces";
-            ++$c;
-        }
-        $rows[] = $row;
-        foreach($bays['data'] as $client_name => $carray)
+        foreach($usage as $cu)
         {
             $row = array(
-                $client_name
+                $cu['client_name'],
+                $cu['location_count'],
+                $cu['oversize_count'],
+                $cu['pickface_count']
             );
-            foreach($bays['fridays'] as $f)
-            {
-                $usage = (isset($carray[$f['string']]['standard']))? round($carray[$f['string']]['standard']) : 0;
-                $row[] = $usage;
-                $usage = (isset($carray[$f['string']]['oversize']))? round($carray[$f['string']]['oversize']) : 0;
-                $row[] = $usage;
-                $usage = (isset($carray[$f['string']]['pickfaces']))? round($carray[$f['string']]['pickfaces']) : 0;
-                $row[] = $usage;
-            }
             $rows[] = $row;
         }
         $expire=time()+60;
