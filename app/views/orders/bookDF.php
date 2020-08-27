@@ -43,6 +43,44 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <h5>Pallets</h5>
+                </div>
+            </div>
+            <div class="form-group row ml-4">
+                <label class="col-md-1 col-sm-2 mb-3">Count</label>
+                <div class="col-md-2 col-sm-4 mb-3">
+                    <input type="text" class="form-control number" name="pallet_count" id="pallet_count" value="<?php echo Form::value('pallet_count');?>" />
+                </div>
+                <label class="col-md-1 col-sm-2 mb-3">Width</label>
+                <div class="col-md-2 col-sm-4 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control number" name="pallet_width" id="pallet_width" value="<?php echo Form::value('pallet_width');?>" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+                </div>
+                <label class="col-md-1 col-sm-2 mb-3">Length</label>
+                <div class="col-md-2 col-sm-4 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control number" name="pallet_length" id="pallet_length" value="<?php echo Form::value('pallet_length');?>" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+                </div>
+                <label class="col-md-1 col-sm-2 mb-3">Height</label>
+                <div class="col-md-2 col-sm-4 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control number" name="pallet_height" id="pallet_height" value="<?php echo Form::value('pallet_length');?>" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </div>
