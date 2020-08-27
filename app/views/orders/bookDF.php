@@ -80,6 +80,13 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">&nbsp;</label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-outline-secondary">Book Collection</button>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
