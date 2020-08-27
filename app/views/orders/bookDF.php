@@ -13,12 +13,12 @@
             <div class="form-group row ml-4">
                 <label class="col-md-1 col-sm-2 mb-3">Count</label>
                 <div class="col-md-2 col-sm-4 mb-3">
-                    <input type="text" class="form-control number count" name="carton_count" id="carton_count" value="<?php echo Form::value('carton_count');?>" />
+                    <input type="text" class="form-control number count digits" name="carton_count" id="carton_count" value="<?php echo Form::value('carton_count');?>" />
                 </div>
                 <label class="col-md-1 col-sm-2 mb-3">Width</label>
                 <div class="col-md-2 col-sm-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" name="carton_width" id="carton_width" value="<?php echo Form::value('carton_width');?>" />
+                        <input type="text" class="form-control number digits" name="carton_width" id="carton_width" value="<?php echo Form::value('carton_width');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
@@ -27,7 +27,7 @@
                 <label class="col-md-1 col-sm-2 mb-3">Length</label>
                 <div class="col-md-2 col-sm-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" name="carton_length" id="carton_length" value="<?php echo Form::value('carton_length');?>" />
+                        <input type="text" class="form-control number digits" name="carton_length" id="carton_length" value="<?php echo Form::value('carton_length');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
@@ -36,7 +36,7 @@
                 <label class="col-md-1 col-sm-2 mb-3">Height</label>
                 <div class="col-md-2 col-sm-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" name="carton_height" id="carton_height" value="<?php echo Form::value('carton_length');?>" />
+                        <input type="text" class="form-control number digits" name="carton_height" id="carton_height" value="<?php echo Form::value('carton_length');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
@@ -51,12 +51,12 @@
             <div class="form-group row ml-4">
                 <label class="col-md-1 col-sm-2 mb-3">Count</label>
                 <div class="col-md-2 col-sm-4 mb-3">
-                    <input type="text" class="form-control number count" name="pallet_count" id="pallet_count" value="<?php echo Form::value('pallet_count');?>" />
+                    <input type="text" class="form-control number count digits" name="pallet_count" id="pallet_count" value="<?php echo Form::value('pallet_count');?>" />
                 </div>
                 <label class="col-md-1 col-sm-2 mb-3">Width</label>
                 <div class="col-md-2 col-sm-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" name="pallet_width" id="pallet_width" value="<?php echo Form::value('pallet_width');?>" />
+                        <input type="text" class="form-control number digits" name="pallet_width" id="pallet_width" value="<?php echo Form::value('pallet_width');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
@@ -65,7 +65,7 @@
                 <label class="col-md-1 col-sm-2 mb-3">Length</label>
                 <div class="col-md-2 col-sm-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" name="pallet_length" id="pallet_length" value="<?php echo Form::value('pallet_length');?>" />
+                        <input type="text" class="form-control number digits" name="pallet_length" id="pallet_length" value="<?php echo Form::value('pallet_length');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
@@ -74,7 +74,7 @@
                 <label class="col-md-1 col-sm-2 mb-3">Height</label>
                 <div class="col-md-2 col-sm-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" name="pallet_height" id="pallet_height" value="<?php echo Form::value('pallet_length');?>" />
+                        <input type="text" class="form-control number digits" name="pallet_height" id="pallet_height" value="<?php echo Form::value('pallet_length');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
@@ -87,7 +87,7 @@
                 </label>
                 <div class="col-md-4">
                     <div class="input-group">
-                        <input type="text" class="form-control number digits" name="weight" id="weight" value="<?php echo Form::value('weight');?>" />
+                        <input type="text" class="form-control required number digits" name="weight" id="weight" value="<?php echo Form::value('weight');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">Kg</span>
                         </div>
