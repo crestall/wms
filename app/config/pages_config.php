@@ -99,7 +99,7 @@ return array(
             ),
             'book-direct-freight-collection'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fal fa-truck"></i>'
+                'icon'      => '<i class="fal fa-truck fa-2x"></i>'
             )
         ),
 		'clients'	=> array(
