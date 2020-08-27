@@ -14,8 +14,8 @@ $carton_height = (!empty(Form::value('carton_height')))? Form::value('carton_hei
                 </div>
             </div>
             <div class="form-group row ml-4">
-                <label class="col-md-1 col-sm-4 mb-3">Count</label>
-                <div class="col-md-1 col-sm-2 mb-3">
+                <label class="col-md-1 col-sm-2 mb-3">Count</label>
+                <div class="col-md-2 col-sm-4 mb-3">
                     <input type="text" class="form-control number" name="carton_count" id="carton_count" value="<?php echo $carton_count;?>" />
                 </div>
                 <label class="col-md-1 col-sm-2 mb-3">Width</label>
