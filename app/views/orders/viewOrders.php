@@ -252,7 +252,7 @@
             					<td data-label="Courier" nowrap>
             					    <p><select name="courier" class="selectpicker courier" data-style="btn-outline-secondary btn-sm" data-width="fit" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                     <p><button class="ship_quote btn-sm btn btn-outline-secondary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
-                                    <p><button class="btn btn-sm btn-outline-orimary adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
+                                    <p><button class="btn btn-sm btn-outline-primary adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
                                     <?php if( Session::getUserRole() == "admin" && $co['courier_id'] > 0): ?>
                                         <p><a class="btn btn-outline-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
                                     <?php endif;?>
