@@ -15,11 +15,11 @@ $carton_height = (!empty(Form::value('carton_height')))? Form::value('carton_hei
             </div>
             <div class="form-group row ml-4">
                 <label class="col-md-1 col-sm-2 mb-3">Count</label>
-                <div class="col-md-1 col-sm-2 mb-3">
+                <div class="col-md-2 col-sm-2 mb-3">
                     <input type="text" class="form-control number" name="carton_count" id="carton_count" value="<?php echo $carton_count;?>" />
                 </div>
-                <label class="col-md-1 col-sm-2 mb-3">Width</label>
-                <div class="col-md-2 col-sm-4 mb-3">
+                <label class="col-md-1 col-sm-1 mb-3">Width</label>
+                <div class="col-md-2 col-sm-5 mb-3">
                     <div class="input-group">
                         <input type="text" class="form-control number" name="carton_width" id="carton_width" value="<?php echo $carton_width;?>" />
                         <div class="input-group-append">
@@ -27,8 +27,8 @@ $carton_height = (!empty(Form::value('carton_height')))? Form::value('carton_hei
                         </div>
                     </div>
                 </div>
-                <label class="col-md-1 col-sm-2 mb-3">Length</label>
-                <div class="col-md-2 col-sm-4 mb-3">
+                <label class="col-md-1 col-sm-1 mb-3">Length</label>
+                <div class="col-md-2 col-sm-5 mb-3">
                     <div class="input-group">
                         <input type="text" class="form-control number" name="carton_length" id="carton_length" value="<?php echo $carton_length;?>" />
                         <div class="input-group-append">
@@ -36,8 +36,8 @@ $carton_height = (!empty(Form::value('carton_height')))? Form::value('carton_hei
                         </div>
                     </div>
                 </div>
-                <label class="col-md-1 col-sm-2 mb-3">Height</label>
-                <div class="col-md-2 col-sm-4 mb-3">
+                <label class="col-md-1 col-sm-1 mb-3">Height</label>
+                <div class="col-md-2 col-sm-5 mb-3">
                     <div class="input-group">
                         <input type="text" class="form-control number" name="carton_height" id="carton_height" value="<?php echo $carton_height;?>" />
                         <div class="input-group-append">
