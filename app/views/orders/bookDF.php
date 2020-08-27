@@ -13,12 +13,12 @@
             <div class="form-group row ml-4">
                 <label class="col-md-1 col-sm-2 mb-3">Count</label>
                 <div class="col-md-2 col-sm-4 mb-3">
-                    <input type="text" class="form-control number count digits" name="carton_count" id="carton_count" value="<?php echo Form::value('carton_count');?>" />
+                    <input type="text" class="form-control number count digits" name="carton_count" id="carton_count" value="<?php echo Form::value('carton_count');?>" placeholder="At least one of these" />
                 </div>
                 <label class="col-md-1 col-sm-2 mb-3">Width</label>
                 <div class="col-md-2 col-sm-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number digits" name="carton_width" id="carton_width" value="<?php echo Form::value('carton_width');?>" placeholder="Whole numbers only" />
+                        <input type="text" class="form-control number digits" name="carton_width" id="carton_width" value="<?php echo Form::value('carton_width');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
