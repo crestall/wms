@@ -217,6 +217,12 @@ $(document).ready(function() {
                 required: function(e){
                     return $("#carton_count").val().length > 0;
                 }
+            },
+            pallet_count:{
+                require_from_group: [1, ".count"]
+            },
+            carton_count:{
+                require_from_group: [1, ".count"]
             }
         }
 

@@ -13,7 +13,7 @@
             <div class="form-group row ml-4">
                 <label class="col-md-1 col-sm-2 mb-3">Count</label>
                 <div class="col-md-2 col-sm-4 mb-3">
-                    <input type="text" class="form-control number" name="carton_count" id="carton_count" value="<?php echo Form::value('carton_count');?>" />
+                    <input type="text" class="form-control number count" name="carton_count" id="carton_count" value="<?php echo Form::value('carton_count');?>" />
                 </div>
                 <label class="col-md-1 col-sm-2 mb-3">Width</label>
                 <div class="col-md-2 col-sm-4 mb-3">
@@ -51,7 +51,7 @@
             <div class="form-group row ml-4">
                 <label class="col-md-1 col-sm-2 mb-3">Count</label>
                 <div class="col-md-2 col-sm-4 mb-3">
-                    <input type="text" class="form-control number" name="pallet_count" id="pallet_count" value="<?php echo Form::value('pallet_count');?>" />
+                    <input type="text" class="form-control number count" name="pallet_count" id="pallet_count" value="<?php echo Form::value('pallet_count');?>" />
                 </div>
                 <label class="col-md-1 col-sm-2 mb-3">Width</label>
                 <div class="col-md-2 col-sm-4 mb-3">
@@ -83,7 +83,7 @@
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
-                <div class="col-md-4 offset-md-4">
+                <div class="col-md-4 offset-md-6">
                     <button type="submit" class="btn btn-outline-secondary">Book Collection</button>
                 </div>
             </div>
