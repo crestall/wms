@@ -138,7 +138,7 @@ class FormController extends Controller {
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
-        $request = array();
+        $response = array();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -263,9 +263,11 @@ class FormController extends Controller {
                 'LargestPalletsWidth'       => $pallet_width,
                 'LargestPalletsHeight'      => $pallet_height
             );
+            //send the booking
+            $response = $this->directfreight->bookCollection($request);
         }
         echo "<pre>Errors",print_r(Form::getErrorArray()),"</pre>";
-        echo "<pre>Request",print_r($request),"</pre>";
+        echo "<pre>Response",print_r($response),"</pre>";
         die();
     }
 

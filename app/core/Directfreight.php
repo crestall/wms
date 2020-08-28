@@ -184,6 +184,13 @@
         return json_decode($response,true);
     }
 
+    public function bookCollection($request)
+    {
+        $response = $this->sendPostRequest('BookPickup/', $conNoteList, "GENERAL");
+        //echo $response; die();
+        return json_decode($response,true);
+    }
+
     public function getLabels($connotes)
     {
         $ConnoteList = array(
