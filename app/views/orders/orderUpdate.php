@@ -402,7 +402,6 @@ if(!$error)
                                         <button class="btn-outline-danger btn" id="order_fulfill" data-orderid="<?php echo $order_id;?>" data-courierid="<?php echo $order['courier_id'];?>">Fulfill Order</button>
                                     </div>
                                 <?php endif;?>
-
                         </div>
                     </div>
                 <?php endif;?>

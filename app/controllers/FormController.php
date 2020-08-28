@@ -372,9 +372,9 @@ class FormController extends Controller {
                 $email = strtolower(trim($row[3]));
                 $job_title = strtolower(trim($row[2]));
                 list($firstname, $lastname) = explode(" ", $name, 2);
-                $phone = Utility::formatPhoneString($row[10], $row[7] == "NZ");
-                $fax = Utility::formatPhoneString($row[11], $row[7] == "NZ");
-                $mobile = Utility::formatMobileString($row[9], $row[7] == "NZ");
+                $phone = (empty($row[10]))? "removed": Utility::formatPhoneString($row[10], $row[7] == "NZ");
+                $fax = (empty($row[11]))? "removed": Utility::formatPhoneString($row[11], $row[7] == "NZ");
+                $mobile = (empty($row[9]))? "removed": Utility::formatMobileString($row[9], $row[7] == "NZ");
                 //get any stored user data
                 $stored_data = $this->reeceuser->getUserByEmail(trim($row[3])) ;
                 if($stored_data)
@@ -614,20 +614,20 @@ class FormController extends Controller {
                     //clean and trim the department
                     $user_array['email'] = Utility::deepTrim($row[4]);
                 }
-                //Tidy up the phone formatting
+                //Tidy up the phone formatting - no tidying required for importing
                 $address_array = explode(' ', $row[9]);
                 $country = strtolower(array_pop($address_array));
                 //echo "<p>$country</p>";
-                //$user_array['mobile_number'] = $row[5];
-                //$user_array['phone'] = $row[6];
-                //$user_array['fax'] = $row[7];
-                $user_array['mobile_number']    = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[5]), "+"), $country == "zealand");
-                $user_array['phone']            = Utility::formatPhoneString(ltrim(str_replace(' ', '', $row[6]), "+"), $country == "zealand");
-                $user_array['fax']              = Utility::formatPhoneString(ltrim(str_replace(' ', '', $row[7]), "+"), $country == "zealand");
+                $user_array['mobile_number'] = $row[5];
+                $user_array['phone'] = $row[6];
+                $user_array['fax'] = $row[7];
+                //$user_array['mobile_number']    = Utility::formatMobileString(ltrim(str_replace(' ', '', $row[5]), "+"), $country == "zealand");
+                //$user_array['phone']            = Utility::formatPhoneString(ltrim(str_replace(' ', '', $row[6]), "+"), $country == "zealand");
+                //$user_array['fax']              = Utility::formatPhoneString(ltrim(str_replace(' ', '', $row[7]), "+"), $country == "zealand");
 
-                $user_array['mobile_number']    = ($user_array['mobile_number'])? $user_array['mobile_number']: "";
-                $user_array['phone']            = ($user_array['phone'])? $user_array['phone']: "";
-                $user_array['fax']              = ($user_array['fax'])? $user_array['fax']: "";
+                //$user_array['mobile_number']    = ($user_array['mobile_number'])? $user_array['mobile_number']: "";
+                //$user_array['phone']            = ($user_array['phone'])? $user_array['phone']: "";
+                //$user_array['fax']              = ($user_array['fax'])? $user_array['fax']: "";
                 if($data_errors)
                 {
                     $import_users = false;
