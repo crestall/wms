@@ -138,6 +138,7 @@ class FormController extends Controller {
     {
         echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
+        $request = array();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -187,6 +188,8 @@ class FormController extends Controller {
             {
                 $carton_count = 0;
                 $carton_width = 0;
+                $carton_length = 0;
+                $carton_height = 0;
             }
             if($this->dataSubbed($pallet_count))
             {
@@ -194,7 +197,46 @@ class FormController extends Controller {
                 {
                     Form::setError('pallet_count', "Only positive whole numbers can be used for quantities");
                 }
+                if(!$this->dataSubbed($pallet_width))
+                {
+                    Form::setError('pallet_width', "A pallet width is required if pallets are submitted");
+                }
+                elseif( filter_var( $pallet_width, FILTER_VALIDATE_INT ) === false || $pallet_width <= 0 )
+                {
+                    Form::setError('pallet_width', "Only positive whole numbers can be used for sizes");
+                }
+                if(!$this->dataSubbed($pallet_length))
+                {
+                    Form::setError('pallet_length', "A pallet length is required if pallets are submitted");
+                }
+                elseif( filter_var( $pallet_length, FILTER_VALIDATE_INT ) === false || $pallet_length <= 0 )
+                {
+                    Form::setError('pallet_length', "Only positive whole numbers can be used for sizes");
+                }
+                if(!$this->dataSubbed($pallet_height))
+                {
+                    Form::setError('pallet_height', "A pallet height is required if pallets are submitted");
+                }
+                elseif( filter_var( $pallet_height, FILTER_VALIDATE_INT ) === false || $pallet_height <= 0 )
+                {
+                    Form::setError('pallet_height', "Only positive whole numbers can be used for sizes");
+                }
             }
+            else
+            {
+                $pallet_count = 0;
+                $pallet_width = 0;
+                $pallet_length = 0;
+                $pallet_height = 0;
+            }
+        }
+        if(!$this->dataSubbed($weight))
+        {
+            Form::setError('weight', "A weight is required");
+        }
+        elseif( filter_var( $weight, FILTER_VALIDATE_INT ) === false || $weight <= 0 )
+        {
+            Form::setError('weight', "Only positive whole numbers can be used for sizes");
         }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
@@ -204,8 +246,26 @@ class FormController extends Controller {
         }
         else
         {
-
+            $cubic = ($carton_width * $carton_length * $carton_height)/1000000 + ($pallet_width * $pallet_length * $pallet_height * $pallet_count)/1000000;
+            //create the API request
+            $request = array(
+                'AuthorisedContactName'     => 'Mike Bond',
+                'AuthorisedContactPhone'    => 0386777418,
+                'CloseTime'                 => '5:00pm',
+                'EstimatedTotalKgs'         => $weight,
+                'EstimatedTotalCubic'       => $cubic,
+                'EstimatedTotalCartons'     => $carton_count,
+                'LargestCartonsLength'      => $carton_length,
+                'LargestCartonsWidth'       => $carton_width,
+                'LargestCartonsHeight'      => $carton_height,
+                'EstimatedTotalPallets'     => $pallet_count,
+                'LargestPalletsLength'      => $pallet_length,
+                'LargestPalletsWidth'       => $pallet_width,
+                'LargestPalletsHeight'      => $pallet_height
+            );
         }
+        echo "<pre>Errors",print_r(Form::getErrorArray()),"</pre>";
+        echo "<pre>Request",print_r($request),"</pre>";
 
     }
 

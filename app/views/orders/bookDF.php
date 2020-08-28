@@ -92,6 +92,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php echo Form::displayError('pallet_length');?>
                         <label class="col-md-2 mb-3">Height</label>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
@@ -101,6 +102,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php echo Form::displayError('pallet_height');?>
                     </div>
                 </div>
             </div>
