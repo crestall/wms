@@ -27,6 +27,7 @@ div#page_container{
     padding-bottom: 20px;
     overflow-x: auto;
     min-height: 665px;
+    padding-top: 1rem;
 }
 
 
@@ -107,12 +108,17 @@ a.index-link:hover div.index-card
 }
 
 /*****
-Home page cards
+Home page
 ******/
+div#order_activity_chart{
+    margin:1rem 0;
+}
+
 .homepagedeck {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    margin: 1rem 0;
 }
 
 .homepagecard{
