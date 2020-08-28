@@ -5,14 +5,11 @@
     <div id="page_container" class="container">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <p><a href="/downloads/downloadFile/file=instructions.docx" class="btn btn-outline-secondary">Instructions</a> <span class="inst">Download instructions on how to upload orders</span></p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <p><a href="/downloads/downloadFile/file=template.csv" class="btn btn-outline-secondary">Template</a> <span class='inst'>Download a template to modify with your own data</span></p>
-            </div>
-            <div class="col-md-4">
-
             </div>
         </div>
         <div class="row">
