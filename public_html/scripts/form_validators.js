@@ -211,6 +211,32 @@ $(document).ready(function() {
 
     });
     ////////////////////////////////////////////////////////////
+    $('form#df_collection').validate({
+        rules:{
+            carton_width:{
+                required: function(e){
+                    return $("#carton_count").val().length > 0;
+                }
+            },
+            carton_length:{
+                required: function(e){
+                    return $("#carton_count").val().length > 0;
+                }
+            },carton_height:{
+                required: function(e){
+                    return $("#carton_count").val().length > 0;
+                }
+            },
+            pallet_count:{
+                require_from_group: [1, ".count"]
+            },
+            carton_count:{
+                require_from_group: [1, ".count"]
+            }
+        }
+
+    });
+    ////////////////////////////////////////////////////////////
     $('form#address-update').validate({
 
     });
@@ -230,8 +256,17 @@ $(document).ready(function() {
         rules:{
             client_id:{
                 notNone: true
-            }
-        }
+            },
+            csv_file:{
+    			extension: "csv",
+                required: true
+    		}
+        },
+		messages:{
+			csv_file:{
+				extension: "Only upload csv files here"
+			}
+		}
     });
     ///////////////////////////////////////////////////////////////////////////////
     $("#book-pickup").validate({

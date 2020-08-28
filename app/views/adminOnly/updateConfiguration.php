@@ -3,11 +3,11 @@ $r = 1;
 
 ?>
 <div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-    <?php echo Form::displayError('general');?>
-    <?php //echo "Something here ".Config::get('EMAIL_PWD');?>
-    <div class="row">
+    <div id="page_container" class="container-xl">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php echo Form::displayError('general');?>
+        <?php //echo "Something here ".Config::get('EMAIL_PWD');?>
         <form id="add-config-value"  method="post" action="/form/procConfigAdd">
             <div class="row">
                 <div class="col-lg-12">
@@ -37,41 +37,41 @@ $r = 1;
                 </div>
             </div>
         </form>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h2>Current Configuration Values Stored</h2>
-        </div>
-    </div>
-        <?php if(count($configuration_names)):?>
         <div class="row">
             <div class="col-lg-12">
-                <table width="100%" class="table-striped table-hover" id="configuration_list" style="width:100%">
-                    <thead>
-                        <th></th>
-                        <th>Name</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                        <?php foreach($configuration_names as $c):?>
-                            <tr>
-                                <td class="number"><?php echo $r;?></td>
-                                <td><?php echo $c['name'];?></td>
-                                <td><button class="btn btn-danger delete" data-configurationid="<?php echo $c['id'];?>">REMOVE</button></td>
-                            </tr>
-                        <?php ++$r; endforeach;?>
-                    </tbody>
-                </table>
+                <h2>Current Configuration Values Stored</h2>
             </div>
         </div>
-    <?php else:?>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="errorbox">
-                    <h2><i class="fas fa-exclamation-triangle"></i> No Configuration Values Listed</h2>
-                    <p>You will need to add some first</p>
+            <?php if(count($configuration_names)):?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table width="100%" class="table-striped table-hover" id="configuration_list" style="width:100%">
+                        <thead>
+                            <th></th>
+                            <th>Name</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <?php foreach($configuration_names as $c):?>
+                                <tr>
+                                    <td class="number"><?php echo $r;?></td>
+                                    <td><?php echo $c['name'];?></td>
+                                    <td><button class="btn btn-danger delete" data-configurationid="<?php echo $c['id'];?>">REMOVE</button></td>
+                                </tr>
+                            <?php ++$r; endforeach;?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
-    <?php endif;?>
+        <?php else:?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="errorbox">
+                        <h2><i class="fas fa-exclamation-triangle"></i> No Configuration Values Listed</h2>
+                        <p>You will need to add some first</p>
+                    </div>
+                </div>
+            </div>
+        <?php endif;?>
+    </div>
 </div>

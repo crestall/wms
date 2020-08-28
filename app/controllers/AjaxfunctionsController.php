@@ -52,6 +52,7 @@ class ajaxfunctionsController extends Controller
             'updateFreightCharge',
             'updateLocation',
             'updateOrderComments',
+            'updateStockMovementReason',
             'updateWarningLevel'
         ];
         $this->Security->config("validateForm", false);
@@ -281,12 +282,14 @@ class ajaxfunctionsController extends Controller
             }
         }
         $items = $this->order->getItemsForOrderByConId($con_id, $client_id);
+        $order = $this->order->getOrderByConId($con_id);
         if(!count($items))
         {
             $data['error'] = true;
         }
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/orders_items.php', [
-            'items' =>  $items
+            'items' =>  $items,
+            'order' =>  $order
         ]);
         $data['html'] = $html;
         $this->view->renderJson($data);
@@ -388,10 +391,6 @@ class ajaxfunctionsController extends Controller
             {
                 $this->orderfulfiller->fulfillEparcelOrders($order_ids);
             }
-            elseif($this->request->data['courier_id'] == $this->courier->huntersId || $this->request->data['courier_id'] == $this->courier->huntersPluId || $this->request->data['courier_id'] == $this->courier->huntersPalId)
-            {
-                $this->orderfulfiller->fulfillHuntersOrders($order_ids);
-            }
             elseif($this->request->data['courier_id'] == $this->courier->fsgId)
             {
                 $this->orderfulfiller->fulfillFSGTruckOrder();
@@ -400,25 +399,9 @@ class ajaxfunctionsController extends Controller
             {
                 $this->orderfulfiller->fulfillLocalOrder();
             }
-            elseif($this->request->data['courier_id'] == $this->courier->vicLocalId)
-            {
-                $this->orderfulfiller->fulfillVicLocalOrder($order_ids);
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->cometLocalId)
-            {
-                $this->orderfulfiller->fulfillCometOrder($order_ids);
-            }
             elseif($this->request->data['courier_id'] == $this->courier->directFreightId)
             {
                 $this->orderfulfiller->fulfillDirectFreightOrder($order_ids);
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->sydneyCometId)
-            {
-                $this->orderfulfiller->fulfillSydneyCometOrder($order_ids);
-            }
-            elseif($this->request->data['courier_id'] == $this->courier->bayswaterEparcelId)
-            {
-                $this->orderfulfiller->fulfillBayswaterEparcelOrder();
             }
             else
             {
@@ -446,10 +429,10 @@ class ajaxfunctionsController extends Controller
             'error_string'  => '',
             'feedback'      => ''
         );
-        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Couriers Have Been Assigned</h2>");
-        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Assigned</h2><p>Reasons are listed below</p>");
-        Session::set('showfeedback', false);
-        Session::set('showerrorfeedback', false);
+        Session::set('courierfeedback',"<h2><i class='far fa-check-circle'></i>Couriers Have Been Assigned</h2>");
+        Session::set('couriererrorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Assigned</h2><p>Reasons are listed below</p>");
+        Session::set('showcourierfeedback', false);
+        Session::set('showcouriererrorfeedback', false);
         //foreach($this->request->data['order_ids'] as $order_id => $courier_id)
         foreach($this->request->data['order_ids'] as $details)
         {
@@ -460,13 +443,13 @@ class ajaxfunctionsController extends Controller
             /************************   DO NOT UPDATE IF COURIER ALREADY CHOSEN!!!  *******************************/
             $this->courierselector->assignCourier($order_id, $courier_id, "", $details['ip']);
         }
-        if(Session::getAndDestroy('showfeedback') == false)
+        if(Session::getAndDestroy('showcourierfeedback') == false)
         {
-            Session::destroy('feedback');
+            Session::destroy('courierfeedback');
         }
-        if(Session::getAndDestroy('showerrorfeedback') == false)
+        if(Session::getAndDestroy('showcouriererrorfeedback') == false)
         {
-            Session::destroy('errorfeedback');
+            Session::destroy('couriererrorfeedback');
         }
         $this->view->renderJson($data);
     }
@@ -715,6 +698,45 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function updateStockMovementReason()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $post_data['active'] = ($active == 'true')? 1 : 0;
+        if(isset($locked))
+        {
+            $post_data['locked'] = ($locked == 'true')? 1 : 0;
+        }
+
+        if(!$this->dataSubbed($reason))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "The reason is required";
+        }
+        elseif($this->stockmovementlabels->getLabelId($reason) && $reason != $current_reason)
+        {
+            $data['error'] = true;
+            $data['feedback'] = "This reason is already in use.\nReasons need to be unique";
+        }
+        if(!$data['error'])
+        {
+            $this->stockmovementlabels->updateLabel($post_data);
+        }
+        $this->view->renderJson($data);
+    }
+
     public function getShippingQuotes()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
@@ -805,7 +827,16 @@ class ajaxfunctionsController extends Controller
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
         $order_ids = implode(",", $this->request->data['order_ids']) ;
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_package.php', [
-            'order_ids' =>  $order_ids
+            'order_id' =>  $order_ids
+        ]);
+    }
+
+    public function addOrderPackageForm()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $order_id = $this->request->data['order_id'] ;
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_package1.php', [
+            'order_id' =>  $order_id
         ]);
     }
 
@@ -964,9 +995,15 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson(array("data" => $tableHTML));
     }
 
-    public function getOrderTrends()
+    public function getWeeklyOrderTrends()
     {
-        $data = $this->order->getOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        $data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        $this->view->renderJson($data);
+    }
+
+    public function getDailyOrderTrends()
+    {
+        $data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 
@@ -976,9 +1013,15 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
-    public function getAdminClientActivity()
+    public function getAdminWeeklyClientActivity()
     {
-        $data = $this->order->getOrderTrends($this->request->data['from'], $this->request->data['to']);
+        $data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to']);
+        $this->view->renderJson($data);
+    }
+
+    public function getAdminDailyClientActivity()
+    {
+        $data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to']);
         $this->view->renderJson($data);
     }
 

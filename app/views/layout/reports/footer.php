@@ -16,30 +16,11 @@
 
                     }
                 },
-                'solar-consumables-reorder':{
-                    init: function()
-                    {
-                        dataTable.init($('table#consumables_reorder_table'), {
-                            "columnDefs": [
-                                { "orderable": false, "targets": [0] }
-                            ],
-                            "order": [],
-                            fixedHeader: true
-                        } );
-                        $('button#csv_download').click(function(e) {
-                            var data = {
-                                csrf_token: config.csrfToken
-                            }
-                            var url = "/downloads/solarConsumablesReorderCSV";
-                            fileDownload.download(url, data);
-                        });
-                    }
-                },
-                'client-stock-movement-summary': {
+                'stock-movement-summary': {
                     init: function()
                     {
                         dataTable.init($('table#client_stock_movement_summary_table'), {
-                            fixedHeader: true
+
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -82,8 +63,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,3,8] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -113,8 +93,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,3,8] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -171,8 +150,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [6] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
@@ -206,8 +184,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,2,5,10,11,12] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -282,8 +259,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,2,5,6,7] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -391,8 +367,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,2,5,6] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -421,8 +396,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,4,5] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -450,8 +424,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -478,8 +451,7 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -531,8 +503,7 @@
                 'location-report' : {
                     init: function(){
                         dataTable.init($('table#location_report_table'), {
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
@@ -547,8 +518,7 @@
                     init: function(){
                         datePicker.betweenDates(true);
                         dataTable.init($('table#goods_in_summary'), {
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
@@ -572,8 +542,7 @@
                     init: function(){
                         datePicker.betweenDates(true);
                         dataTable.init($('table#goods_out_summary'), {
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
@@ -618,21 +587,10 @@
                         });
                     }
                 },
-                'client-bay-usage' :{
+                'client-bay-usage-report' :{
                     init: function(){
-                        datePicker.betweenDates(true);
-                        $('button#change_dates').click(function(e){
-                            e.preventDefault();
-                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
-                            var from = $('#date_from_value').val();
-                            var to = $('#date_to_value').val();
-                            window.location.href = "/reports/client-space-usage-report/from="+from+"/to="+to;
-                        });
-
                         $('button#csv_download').click(function(e) {
                             var data = {
-                                from: $('#date_from_value').val(),
-                                to:   $('#date_to_value').val(),
                                 csrf_token: config.csrfToken
                             }
                             var url = "/downloads/clientBayUsageCSV";
@@ -643,8 +601,7 @@
                 'empty-bay-report': {
                     init: function(){
                         dataTable.init($('table#emptybay_table'), {
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
@@ -684,8 +641,7 @@
                             }
                         });
                         dataTable.init($('table#sad_table'), {
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {

@@ -75,6 +75,7 @@ class FormController extends Controller {
             'procContainerUnload',
             'procCourierAdd',
             'procCourierEdit',
+            'procDFCollection',
             'procEditServiceJob',
             'procEditInstall',
             'procEncryptSomeShit',
@@ -131,6 +132,143 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procDFCollection()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        $response = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if( !($this->dataSubbed($carton_count) || $this->dataSubbed($pallet_count)))
+        {
+            Form::setError('counter', "At least one of these cartons or pallets is required");
+        }
+        else
+        {
+            if($this->dataSubbed($carton_count))
+            {
+                if( filter_var( $carton_count, FILTER_VALIDATE_INT ) === false || $carton_count <= 0)
+                {
+                    Form::setError('carton_count', "Only positive whole numbers can be used for quantities");
+                }
+                if(!$this->dataSubbed($carton_width))
+                {
+                    Form::setError('carton_width', "A carton width is required if cartons are submitted");
+                }
+                elseif( filter_var( $carton_width, FILTER_VALIDATE_INT ) === false || $carton_width <= 0 )
+                {
+                    Form::setError('carton_width', "Only positive whole numbers can be used for sizes");
+                }
+                if(!$this->dataSubbed($carton_length))
+                {
+                    Form::setError('carton_length', "A carton length is required if cartons are submitted");
+                }
+                elseif( filter_var( $carton_length, FILTER_VALIDATE_INT ) === false || $carton_length <= 0 )
+                {
+                    Form::setError('carton_length', "Only positive whole numbers can be used for sizes");
+                }
+                if(!$this->dataSubbed($carton_height))
+                {
+                    Form::setError('carton_height', "A carton height is required if cartons are submitted");
+                }
+                elseif( filter_var( $carton_height, FILTER_VALIDATE_INT ) === false || $carton_height <= 0 )
+                {
+                    Form::setError('carton_height', "Only positive whole numbers can be used for sizes");
+                }
+            }
+            else
+            {
+                $carton_count = 0;
+                $carton_width = 0;
+                $carton_length = 0;
+                $carton_height = 0;
+            }
+            if($this->dataSubbed($pallet_count))
+            {
+                if( filter_var( $pallet_count, FILTER_VALIDATE_INT ) === false || $pallet_count <= 0)
+                {
+                    Form::setError('pallet_count', "Only positive whole numbers can be used for quantities");
+                }
+                if(!$this->dataSubbed($pallet_width))
+                {
+                    Form::setError('pallet_width', "A pallet width is required if pallets are submitted");
+                }
+                elseif( filter_var( $pallet_width, FILTER_VALIDATE_INT ) === false || $pallet_width <= 0 )
+                {
+                    Form::setError('pallet_width', "Only positive whole numbers can be used for sizes");
+                }
+                if(!$this->dataSubbed($pallet_length))
+                {
+                    Form::setError('pallet_length', "A pallet length is required if pallets are submitted");
+                }
+                elseif( filter_var( $pallet_length, FILTER_VALIDATE_INT ) === false || $pallet_length <= 0 )
+                {
+                    Form::setError('pallet_length', "Only positive whole numbers can be used for sizes");
+                }
+                if(!$this->dataSubbed($pallet_height))
+                {
+                    Form::setError('pallet_height', "A pallet height is required if pallets are submitted");
+                }
+                elseif( filter_var( $pallet_height, FILTER_VALIDATE_INT ) === false || $pallet_height <= 0 )
+                {
+                    Form::setError('pallet_height', "Only positive whole numbers can be used for sizes");
+                }
+            }
+            else
+            {
+                $pallet_count = 0;
+                $pallet_width = 0;
+                $pallet_length = 0;
+                $pallet_height = 0;
+            }
+        }
+        if(!$this->dataSubbed($weight))
+        {
+            Form::setError('weight', "A weight is required");
+        }
+        elseif( filter_var( $weight, FILTER_VALIDATE_INT ) === false || $weight <= 0 )
+        {
+            Form::setError('weight', "Only positive whole numbers can be used for sizes");
+        }
+
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $cubic = round(($carton_width * $carton_length * $carton_height)/1000000 + ($pallet_width * $pallet_length * $pallet_height * $pallet_count)/1000000, 3);
+            //create the API request
+            $request = array(
+                'AuthorisedContactName'     => 'Mike Bond',
+                'AuthorisedContactPhone'    => '0386777418',
+                'CloseTime'                 => '4:00pm',
+                'EstimatedTotalKgs'         => $weight,
+                'EstimatedTotalCubic'       => $cubic,
+                'EstimatedTotalCartons'     => $carton_count,
+                'LargestCartonsLength'      => $carton_length,
+                'LargestCartonsWidth'       => $carton_width,
+                'LargestCartonsHeight'      => $carton_height,
+                'EstimatedTotalPallets'     => $pallet_count,
+                'LargestPalletsLength'      => $pallet_length,
+                'LargestPalletsWidth'       => $pallet_width,
+                'LargestPalletsHeight'      => $pallet_height
+            );
+            //send the booking
+            $response = $this->directfreight->bookCollection($request);
+        }
+        echo "<pre>Errors",print_r(Form::getErrorArray()),"</pre>";
+        echo "<pre>Response",print_r($response),"</pre>";
+        die();
     }
 
     public function procReeceUserCheck()
@@ -1446,121 +1584,6 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-service-details/id=".$job_id);
     }
 
-    public function procAddServiceJob()
-    {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
-        $post_data = array();
-        foreach($this->request->data as $field => $value)
-        {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
-        }
-        if($job_type == "0")
-        {
-            Form::setError('job_type', "A job type must be chosen");
-        }
-        if($team_id == "0")
-        {
-            Form::setError('team_id', "A team must be chosen");
-        }
-        if(!$this->dataSubbed($work_order))
-        {
-            Form::setError('work_order', 'A work order number is required');
-        }
-        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
-        if(!isset($this->request->data['items']))
-        {
-            Form::setError('items', 'At least one item must be selected');
-        }
-        else
-        {
-            $orders_items = array();
-            $error = false;
-            foreach($this->request->data['items'] as $itid => $details)
-            {
-                if(!isset($details['qty']))
-                {
-                    $error = true;
-                    Form::setError('items', 'Please ensure all items have a quantity');
-                    break;
-                }
-                if(!isset($details['id']))
-                {
-                    $error = true;
-                    Form::setError('items', 'There has been an error recognising an item');
-                    break;
-                }
-                if(!$error)
-                {
-                    $array = array(
-                        'qty'   => $details['qty'],
-                        'id'    => $details['id']
-                    );
-                    if(!empty($details['pallet_qty']))
-                    {
-                        $array['qty'] = $details['pallet_qty'];
-                        $array['whole_pallet'] = true;
-                    }
-                    else
-                    {
-                        $array['qty'] = $details['qty'];
-                        $array['whole_pallet'] = false;
-                    }
-                    if(empty($array['qty']))
-                    {
-                        $error = true;
-                        Form::setError('items', 'Please ensure all items have a quantity');
-                    }
-                    $orders_items[] = $array ;
-                }
-
-            }
-            //echo "<pre>",print_r($orders_items),"</pre>"; die();
-            if(count($orders_items) == 0)
-            {
-                Form::setError('items', 'At least one item must be selected');
-            }
-            elseif(!$error)
-            {
-                $the_items = array(
-                    0 => $orders_items
-                );
-                $oitems = $this->allocations->createOrderItemsArray($the_items, 0, false);
-                foreach($oitems[0] as $item)//there is only one order
-                {
-                    if($item['import_error'])
-                    {
-                        Form::setError('items', $item['import_error_string']);
-                    }
-                }
-            }
-            /*
-            else
-            {
-                Form::setError('items', 'Please check your items');
-            }
-            */
-        }
-        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
-        {
-            Session::set('value_array', $_POST);
-            Session::set('error_array', Form::getErrorArray());
-        }
-        else
-        {
-            //all good, add details
-            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $job_id = $this->solarservicejob->addJob($post_data, $oitems);
-            Session::set('feedback', "That job has been created and entered in the system");
-        }
-        //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-service-job");
-    }
-
     public function procSolarReturn()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
@@ -1677,235 +1700,6 @@ class FormController extends Controller {
             Session::set('error_array', Form::getErrorArray());
         }
         return $this->redirector->to(PUBLIC_ROOT."orders/order-csv-update");
-    }
-
-    public function procOriginOrderAdd()
-    {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
-        $post_data = array();
-        foreach($this->request->data as $field => $value)
-        {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
-        }
-        $items = array();
-        $items[] = array(
-            'id'    => $panel_id,
-            'qty'   => $panel_qty
-        );
-        $items[] = array(
-            'id'    => $inverter_id,
-            'qty'   => $inverter_qty
-        );
-        /*
-        foreach($this->request->data['items'] as $i)
-        {
-            $items[] = array(
-                'id'    => $i['id'],
-                'qty'   => $i['qty']
-            );
-        }
-        */
-        $items = array_merge($items, $this->request->data['consumables']);
-        if( isset($this->request->data['items'][0]['qty']) )
-        {
-            $items = array_merge($items, $this->request->data['items']);
-        }
-        //echo "<pre>",print_r($items),"</pre>"; //die();
-        $orders_items = array();
-        foreach($items as $item)
-        {
-            if($item['qty'] == 0)
-            {
-                continue;
-            }
-            $array = array(
-                'qty'           => $item['qty'],
-                'id'            => $item['id'],
-                'whole_pallet'  => false
-            );
-            $orders_items[] = $array;
-        }
-        $the_items = array(
-            0 => $orders_items
-        );
-        //echo "<pre>",print_r($the_items),"</pre>"; die();
-        $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
-        foreach($oitems[0] as $item)//there is only one order
-        {
-            if($item['import_error'])
-            {
-                Form::setError('items', $item['import_error_string']);
-            }
-        }
-        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
-        {
-            Session::set('value_array', $_POST);
-            Session::set('error_array', Form::getErrorArray());
-        }
-        else
-        {
-            //echo "<pre>",print_r($oitems),"</pre>"; die();
-            //all good, add details
-            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $order_id = $this->solarorder->addOrder($post_data, $oitems);
-            Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
-        }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-origin-install");
-    }
-
-    public function procAddTljOrder()
-    {
-        //echo "POST<pre>",print_r($this->request->data),"</pre>"; die();
-        $post_data = array();
-        foreach($this->request->data as $field => $value)
-        {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
-        }
-        $items = array();
-        $items[] = array(
-            'id'    => $panel_id,
-            'qty'   => $panel_qty
-        );
-        $items[] = array(
-            'id'    => $inverter_id,
-            'qty'   => $inverter_qty
-        );
-        /* */
-        foreach($this->request->data['items'] as $i)
-        {
-            if(empty($i['id']))
-                continue;
-            $items[] = array(
-                'id'    => $i['id'],
-                'qty'   => $i['qty']
-            );
-        }
-
-        //echo "Items<pre>",print_r($items),"</pre>"; die();
-        $orders_items = array();
-        foreach($items as $item)
-        {
-            if($item['qty'] == 0)
-            {
-                continue;
-            }
-            $array = array(
-                'qty'           => $item['qty'],
-                'id'            => $item['id'],
-                'whole_pallet'  => false
-            );
-            $orders_items[] = $array;
-        }
-        $the_items = array(
-            0 => $orders_items
-        );
-        //echo "The items<pre>",print_r($the_items),"</pre>"; //die();
-        $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
-        foreach($oitems[0] as $item)//there is only one order
-        {
-            if($item['import_error'])
-            {
-                Form::setError('items', $item['import_error_string']);
-            }
-        }
-        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
-        {
-            Session::set('value_array', $_POST);
-            Session::set('error_array', Form::getErrorArray());
-        }
-        else
-        {
-            //echo "oitems<pre>",print_r($oitems),"</pre>"; die();
-            //all good, add details
-            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $order_id = $this->solarorder->addOrder($post_data, $oitems);
-            Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
-        }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-tlj-install");
-    }
-
-    public function procAddSolargainOrder()
-    {
-        //echo "POST<pre>",print_r($this->request->data),"</pre>"; die();
-        $post_data = array();
-        foreach($this->request->data as $field => $value)
-        {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
-        }
-        $post_data['panel_qty'] = 0;
-        $items = array();
-        if(!isset($this->request->data['items']) || empty($this->request->data['items'][0]['name']))
-        {
-            Form::setError('items', 'At least one item must be selected');
-        }
-        else
-        {
-            foreach($this->request->data['items'] as $i)
-            {
-                $items[] = array(
-                    'id'    => $i['id'],
-                    'qty'   => $i['qty']
-                );
-                //echo "Items<pre>",print_r($items),"</pre>"; die();
-                $orders_items = array();
-                foreach($items as $item)
-                {
-                    if($item['qty'] == 0)
-                    {
-                        continue;
-                    }
-                    $array = array(
-                        'qty'           => $item['qty'],
-                        'id'            => $item['id'],
-                        'whole_pallet'  => false
-                    );
-                    $orders_items[] = $array;
-                }
-                $the_items = array(
-                    0 => $orders_items
-                );
-                //echo "The items<pre>",print_r($the_items),"</pre>"; //die();
-                $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
-                foreach($oitems[0] as $item)//there is only one order
-                {
-                    if($item['import_error'])
-                    {
-                        Form::setError('items', $item['import_error_string']);
-                    }
-                }
-            }
-        }
-
-
-        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
-        {
-            Session::set('value_array', $_POST);
-            Session::set('error_array', Form::getErrorArray());
-        }
-        else
-        {
-            //echo "oitems<pre>",print_r($oitems),"</pre>"; die();
-            //all good, add details
-            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $order_id = $this->solarorder->addOrder($post_data, $oitems);
-            Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
-        }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solargain-install");
     }
 
     public function procRegisterNewStock()
@@ -2595,6 +2389,7 @@ class FormController extends Controller {
                 '3pl_comments'      => NULL,
                 'uploaded_file'     => NULL,
                 'eparcel_express'   => 0,
+                'signature_req'     => 0,
                 'store_order'       => 0,
                 'client_order_id'   => NULL
             );
@@ -2612,6 +2407,8 @@ class FormController extends Controller {
                 $vals['3pl_comments'] = $tpl_comments;
             if(isset($express_post))
                 $vals['eparcel_express'] = 1;
+            if(isset($signature_req))
+                $vals['signature_req'] = 1;
             if(isset($store_order))
                 $vals['store_order'] = 1;
             if(isset($uploaded_file) || isset($delete_file))
@@ -2819,12 +2616,10 @@ class FormController extends Controller {
         {
             $pallet_count = ($this->dataSubbed($pallet_count))? $pallet_count: 0;
             $carton_count = ($this->dataSubbed($carton_count))? $carton_count: 0;
-            $satchel_count = ($this->dataSubbed($satchel_count))? $satchel_count: 0;
             $this->outwardsgoods->recordData(array(
                 'client_id'     =>  $client_id,
                 'pallets'       =>  $pallet_count,
                 'cartons'       =>  $carton_count,
-                'satchels'      =>  $satchel_count,
                 'date'          =>  time(),
                 'entered_by'    =>  Session::getUserId()
             ));
@@ -2873,7 +2668,7 @@ class FormController extends Controller {
                 $location_id = $this->location->getLocationId('Returns') ;
                 foreach($this->request->data['item_returns'] as $item_id => $details)
                 {
-                    if(isset($details['id']))
+                    if(($details['qty']) > 0)
                     {
                         $this->orderreturn->recordData(array(
                             'reason'    =>  'Return To Sender',
@@ -2931,13 +2726,15 @@ class FormController extends Controller {
             $vals['bubble_wrap'] = 1;
         //echo "<pre>",print_r($vals),"</pre>"; die();
         $this->order->updateOrderValues($vals, $order_id);
-        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Order Has Been Updated</h2>");
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order=$order_id");
+        Session::set('miscfeedback',"Order Has Been Updated");
+        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order=$order_id#misc");
     }
 
     public function procOrderCourierUpdate()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        Session::set('showcouriererrorfeedback', false);
+        Session::set('showcourierfeedback', false);
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -2959,22 +2756,26 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            Session::set('errorfeedback', "<h2><i class='far fa-times-circle'></i>Errors found in the form</h2><p>Please correct where shown and resubmit</p>");
+            Session::set('showcouriererrorfeedback', true);
+            Session::set('couriererrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
         }
         else
         {
-            $ip = (isset($ignore_pc))? 1 : 0;
-            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>This Order Could Not Be Assigned</h2><p>Reasons are listed below</p>");
-            Session::set('showerrorfeedback', false);
+            //$ip = (isset($ignore_pc))? 1 : 0;    deprecated functionality
             $courier_name = !$this->dataSubbed($courier_name)? "":$courier_name;
-            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Courier has been assigned</h2>");
-            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, $ip);
+            Session::set('courierfeedback',"<h3><i class='far fa-check-circle'></i>Courier has been assigned</h3>");
+            Session::set('couriererrorfeedback', "");
+            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1);
         }
-        if(Session::getAndDestroy('showerrorfeedback') == false)
+        if(Session::getAndDestroy('showcouriererrorfeedback') == false)
         {
-            Session::destroy('errorfeedback');
+            Session::destroy('couriererrorfeedback');
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order=$order_id");
+        if(Session::getAndDestroy('showcourierfeedback') == false)
+        {
+            Session::destroy('courierfeedback');
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order={$order_id}#courier");
     }
 
     public function procStockMovement()
@@ -3005,16 +2806,10 @@ class FormController extends Controller {
         //echo "<pre>",print_r($l_details),"</pre>"; //die();
         if(isset($qc_stock))
         {
+            $post_data['sub_qc_stock'] = "On";
             if($l_details['qc_count'] < $qty_move)
             {
                 Form::setError('qty_move', 'You cannot move more quality control stock than there is available');
-            }
-        }
-        elseif(isset($allocated_stock))
-        {
-            if($l_details['allocated'] < $qty_move)
-            {
-                Form::setError('qty_move', 'You cannot move more allocated stock than there is');
             }
         }
         else
@@ -3035,27 +2830,6 @@ class FormController extends Controller {
             $this->item->moveStock($post_data, $this->stockmovementlabels->getLabelId('Internal Stock Movement'));
             $this->clientsbays->stockRemoved($client_id, $move_from_location, $move_product_id);
             $this->clientsbays->stockAdded($client_id, $move_to_location);
-            if($double_bay == 1)
-            {
-                //deal with double bays
-                if($this->location->isEmptyOfItem($move_from_location, $move_product_id) )
-                {
-                    //die('remove double bay');
-                    $move_from_location_name = $this->location->getLocationName($move_from_location);
-                    $next_location_name = substr($move_from_location_name, 0, -1)."b";
-                    $next_location_id = $this->location->getLocationId($next_location_name);
-                    $this->clientslocation->deleteAllocationByClientLocation($client_id, $next_location_id);
-                }
-                //die('not removing double bay');
-                $move_to_location_name = $this->location->getLocationName($move_to_location);
-                $next_location_name = substr($move_to_location_name, 0, -1)."b";
-                $next_location_id = $this->location->getLocationId($next_location_name);
-                $this->clientslocation->addLocation(array(
-                    'location'   => $next_location_id,
-                    'client_id'  => $client_id,
-                    'notes'      => "Double Bay Item"
-                ));
-            }
             Session::set('feedback', $move_product_name.' has had its stock adjusted');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/move-stock/product=$move_product_id");
@@ -3190,42 +2964,7 @@ class FormController extends Controller {
             $post_data['weight'] = 0;
         }
         $package_types = array();
-        if(isset($this->request->data['package_type']) && count($this->request->data['package_type']))
-        {
-            foreach($this->request->data['package_type'] as $key => $type_id)
-            {
-                $package = array(
-                    'id'        =>  $type_id,
-                    'multiple'  =>  false,
-                    'number'    =>  1
-                );
-                if($this->packingtype->isMultiple($type_id))
-                {
-                    if( (filter_var(${'number_in_' . $type_id}, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false) )
-                    {
-                        Form::setError('package_type', 'Only whole positive numbers');
-                    }
-                    else
-                    {
-                        $package['multiple'] = true;
-                        $package['number'] = 1 / ${'number_in_' . $type_id};
-                    }
-                }
-                $package_types[] = $package;
-            }
-        }
         $palletizedd = (isset($palletized))? 1:0;
-        if($palletizedd > 0)
-        {
-            if(!$this->dataSubbed($per_pallet))
-            {
-                Form::setError('per_pallet', 'A number is required for palletized goods');
-            }
-            elseif(filter_var($per_pallet, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
-            {
-                Form::setError('per_pallet', 'Only enter positive whole numbers for amount per pallet');
-            }
-        }
         $post_data['palletized'] = $palletizedd;
         $post_data['width'] = 0;
         $post_data['depth'] = 0;
@@ -3241,7 +2980,7 @@ class FormController extends Controller {
             'add_product_id'    =>  $product_id
         );
         $this->location->addToLocation($post_data);
-        $this->item->addPackingTypesForItem($package_types, $product_id);
+        //$this->item->addPackingTypesForItem($package_types, $product_id);
         Session::set('feedback', "{$name}'s details have been added to the system and $qty have been imported");
         return $this->redirector->to(PUBLIC_ROOT."inventory/scan-to-inventory/client=$client_id");
     }
@@ -3657,7 +3396,7 @@ class FormController extends Controller {
         if($check)
         {
             $location = $this->item->getLocationForItem($subtract_product_id, $subtract_from_location);
-            if(isset($qc_stock))
+            if(isset($sub_qc_stock))
             {
                 if($qty_subtract > $location['qc_count'])
                 {
@@ -3670,6 +3409,10 @@ class FormController extends Controller {
                 {
                     Form::setError('qty_subtract', 'You cannot remove more stock than is unallocated');
                 }
+                if($qty_subtract > ($location['qty'] - $location['qc_count']))
+                {
+                    Form::setError('qty_subtract', 'You cannot remove more stock than there is');
+                }
             }
         }
         if($reason_id == "0")
@@ -3680,15 +3423,15 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            Session::set('subtracterrorfeedback', 'Errors were found in the form. Please correct where shown and resubmit');
+            Session::set('subtractitemerrorfeedback', 'Errors were found in the form. Please correct where shown and resubmit');
         }
         else
         {
             $this->location->subtractFromLocation($post_data);
             $this->clientsbays->stockRemoved($client_id, $subtract_from_location, $subtract_product_id, isset($remove_oversize));
-            Session::set('subtractfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
+            Session::set('subtractitemfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
         }
-        return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$subtract_product_id);
+        return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$subtract_product_id."#subtract");
     }
 
     public function procAddToStock()
@@ -3743,7 +3486,7 @@ class FormController extends Controller {
             $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier, isset($oversize));
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
         }
-        return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id);
+        return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id."#add");
     }
 
     public function procAddPackage()
@@ -3772,9 +3515,18 @@ class FormController extends Controller {
         }
         else
         {
+            $package = (isset($pallet))? "pallet" : "package";
             if($id = $this->order->addPackage($post_data))
             {
-                Session::set('packagefeedback', "That package has been added. It should be showing below");
+                if($count > 1)
+                {
+                    Session::set('packagefeedback', "Those ".$package."s have been added. They should be showing below");
+
+                }
+                else
+                {
+                    Session::set('packagefeedback', "That $package has been added. It should be showing below");
+                }
             }
             else
             {
@@ -4053,28 +3805,11 @@ class FormController extends Controller {
         }
         else
         {
-            if($table == "orders")
-            {
-                $this->order->updateOrderAddress($post_data);
-                $this->order->removeError($order_id);
-            }
-            else
-            {
-                $this->swatch->updateSwatchAddress($post_data);
-                $this->swatch->removeError($order_id);
-            }
-
+            $this->order->updateOrderAddress($post_data);
+            $this->order->removeError($order_id);
             Session::set('feedback', "That address has been updated");
         }
-        if($table == "orders")
-        {
-            return $this->redirector->to(PUBLIC_ROOT."orders/address-update/order=".$order_id);
-        }
-        else
-        {
-           return $this->redirector->to(PUBLIC_ROOT."orders/address-update/swatch=".$order_id);
-        }
-
+        return $this->redirector->to(PUBLIC_ROOT."orders/address-update/order=".$order_id);
     }
 
     public function procUserAdd()
@@ -4172,6 +3907,11 @@ class FormController extends Controller {
             {
                 Form::setError($field, 'Only upload images here');
             }
+        }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
         }
         if($this->dataSubbed($new_password))
         {
@@ -4907,7 +4647,7 @@ class FormController extends Controller {
             $error = false;
             foreach($this->request->data['items'] as $itid => $details)
             {
-				if(!isset($details['qty']))
+				if( !isset($details['qty']) || $details['qty'] == 0 )
 				{
                     $error = true;
                     Form::setError('items', 'Please ensure all items have a quantity');
@@ -4925,21 +4665,7 @@ class FormController extends Controller {
 						'qty'   => $details['qty'],
 						'id'    => $details['id']
 					);
-					if(!empty($details['pallet_qty']))
-					{
-						$array['qty'] = $details['pallet_qty'];
-						$array['whole_pallet'] = true;
-					}
-					else
-					{
-						$array['qty'] = $details['qty'];
-						$array['whole_pallet'] = false;
-					}
-					if(empty($array['qty']))
-					{
-						$error = true;
-						Form::setError('items', 'Please ensure all items have a quantity');
-					}
+                    $array['whole_pallet'] = isset($details['whole_pallet']);
 					$orders_items[] = $array ;					
 				}
 
@@ -5183,6 +4909,11 @@ class FormController extends Controller {
                 Form::setError($field, 'Only upload images here');
             }
         }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
+        }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -5280,6 +5011,11 @@ class FormController extends Controller {
             {
                 Form::setError($field, 'Only upload images here');
             }
+        }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -5438,11 +5174,6 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if(Session::getUserRole() == "solar admin")
-        {
-            $client_id = $this->client->solar_client_id;
-            $post_data['client_id'] = $client_id;
-        }
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name', 'A product name is required');
@@ -5544,58 +5275,8 @@ class FormController extends Controller {
         {
             $post_data['trigger_point'] = 0;
         }
-
-/*
-        if($hunters_goods_type == "20")
-        {
-            $satchel_error = true;
-            if($this->dataSubbed($small_satchel))
-            {
-                $satchel_error = false;
-                if( (filter_var($small_satchel, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false) )
-    			{
-                	Form::setError('small_satchel', 'Only whole positive numbers');
-    			}
-            }
-            if($this->dataSubbed($large_satchel))
-            {
-                $satchel_error = false;
-                if( (filter_var($large_satchel, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false) )
-    			{
-                	Form::setError('large_satchel', 'Only whole positive numbers');
-    			}
-            }
-            if($satchel_error)
-            {
-                Form::setError('large_satchel', 'A value is required for at least one satchel size');
-            }
-        }
-*/
         $package_types = array();
-        if(isset($this->request->data['package_type']) && count($this->request->data['package_type']))
-        {
-            foreach($this->request->data['package_type'] as $key => $type_id)
-            {
-                $package = array(
-                    'id'        =>  $type_id,
-                    'multiple'  =>  false,
-                    'number'    =>  1
-                );
-                if($this->packingtype->isMultiple($type_id))
-                {
-                    if( (filter_var(${'number_in_' . $type_id}, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false) )
-                    {
-                        Form::setError('package_type', 'Only whole positive numbers');
-                    }
-                    else
-                    {
-                        $package['multiple'] = true;
-                        $package['number'] = 1 / ${'number_in_' . $type_id};
-                    }
-                }
-                $package_types[] = $package;
-            }
-        }
+
         if(!$this->dataSubbed($client_id) || $client_id == "0")
         {
         	Form::setError('client_id', 'A client must be selected');
@@ -5608,17 +5289,6 @@ class FormController extends Controller {
             }
         }
         $palletizedd = (isset($palletized))? 1:0;
-        if($palletizedd > 0)
-        {
-            if(!$this->dataSubbed($per_pallet))
-            {
-                Form::setError('per_pallet', 'A number is required for palletized goods');
-            }
-            elseif(filter_var($per_pallet, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
-            {
-                Form::setError('per_pallet', 'Only enter positive whole numbers for amount per pallet');
-            }
-        }
         $post_data['palletized'] = $palletizedd;
         //image uploads
         $field = "image";
@@ -5640,6 +5310,11 @@ class FormController extends Controller {
                 Form::setError($field, 'Only upload images here');
             }
         }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
+        }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -5654,15 +5329,13 @@ class FormController extends Controller {
             if($product_id = $this->item->addItem($post_data))
             {
                 Session::set('feedback', "{$name}'s details have been added to the system");
-                $this->item->addPackingTypesForItem($package_types, $product_id);
+                //$this->item->addPackingTypesForItem($package_types, $product_id);
                 return $this->redirector->to(PUBLIC_ROOT."products/edit-product/product=".$product_id);
             }
             else
             {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
-
-
         }
         return $this->redirector->to(PUBLIC_ROOT."products/add-product");
     }
@@ -5871,6 +5544,11 @@ class FormController extends Controller {
             {
                 Form::setError($field, 'Only upload images here');
             }
+        }
+        elseif($_FILES[$field]['error']  !== UPLOAD_ERR_NO_FILE)
+        {
+            $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+            Form::setError($field, $error_message);
         }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */

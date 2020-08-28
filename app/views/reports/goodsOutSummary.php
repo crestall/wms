@@ -1,4 +1,5 @@
 <div id="page-wrapper">
+    <div id="page_container" class="container-xl">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
     <?php if(count($summary)):?>
@@ -12,7 +13,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <p class="text-right">
-                    <button id="csv_download" class="btn btn-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
+                    <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
                 </p>
             </div>
         </div>
@@ -24,7 +25,6 @@
                             <th>Client</th>
                             <th>Total Pallets</th>
                             <th>Total Cartons</th>
-                            <th>Total Satchels</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +33,6 @@
                             <td data-label="Client"><?php echo $s['client_name'];?></td>
                             <td data-label="Total Pallets" class="number nowrap"><?php echo $s['pallets'];?></td>
                             <td data-label="Total Cartons" class="number nowrap"><?php echo $s['cartons'];?></td>
-                            <td data-label="Total Satchels" class="number nowrap"><?php echo $s['satchels'];?></td>
                         </tr>
                     <?php endforeach;?>
                     </tbody>
@@ -52,4 +51,5 @@
             </div>
         </div>
     <?php endif;?>
+    </div>
 </div>

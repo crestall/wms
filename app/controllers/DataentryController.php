@@ -7,11 +7,18 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class dataentryController extends Controller
+class DataEntryController extends Controller
 {
     public function beforeAction()
     {
         parent::beforeAction();
+    }
+
+    public function index()
+    {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'data-entry-index');
+        parent::displayIndex(get_class());
     }
 
     public function containerUnloading()

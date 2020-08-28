@@ -1,25 +1,25 @@
 <?php
-    $link_text = (!$active)? "<a href='/clients/view-clients' class='btn btn-primary'>View Active Clients</a>" : "<a href='/clients/view-clients/active=0' class='btn btn-warning'>View Inactive Clients</a>";
+    $link_text = (!$active)? "<a href='/clients/view-clients' class='btn btn-outline-fsg'>View Active Clients</a>" : "<a href='/clients/view-clients/active=0' class='btn btn-outline-fsg'>View Inactive Clients</a>";
     $i = 1;
 ?>
 <div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <div class="row">
-        <div class="col-lg-12">
-            <p class="text-right"><?php echo $link_text;?></p>
-        </div>
-    </div>
-    <?php if(count($clients)):?>
-        <div id="waiting" class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Drawing Table..</h2>
-                <p>May take a few moments</p>
-                <img class='loading' src='/images/preloader.gif' alt='loading...' />
+    <div id="page_container" class="container-xl">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div class="row">
+            <div class="col">
+                <p class="text-right"><?php echo $link_text;?></p>
             </div>
         </div>
-        <div class="row" id="table_holder" style="display:none">
-            <div class="col-lg-12">
-                <table id="client_list_table" class="table-striped table-hover" width="100%">
+        <?php if(count($clients)):?>
+            <div id="waiting" class="col">
+                <div class="col-lg-12 text-center">
+                    <h2>Drawing Table..</h2>
+                    <p>May take a few moments</p>
+                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                </div>
+            </div>
+            <div class="col" id="table_holder" style="display:none">
+                <table id="client_list_table" class="table-striped table-hover">
                     <thead>
                     	<tr>
                             <th></th>
@@ -37,21 +37,21 @@
                             <td data-label="Contact Name"><?php echo $c['contact_name'];?></td>
                             <td data-label="Contact Email"><?php echo $c['billing_email'];?></td>
                             <td>
-                                <p><a class="btn btn-primary" href="/clients/edit-client/client=<?php echo $c['id'];?>" >Edit Details</a></p>
+                                <p><a class="btn btn-outline-secondary" href="/clients/edit-client/client=<?php echo $c['id'];?>" >Edit Details</a></p>
                             </td>
                         </tr>
                     <?php ++$i; endforeach;?>
                     </tbody>
                 </table>
             </div>
-        </div>
-    <?php else:?>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="errorbox">
-                    <h2>No Locations in use</h2>
+        <?php else:?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="errorbox">
+                        <h2>No Clients Listed</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-    <?php endif;?>
+        <?php endif;?>
+    </div>
 </div>

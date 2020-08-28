@@ -230,7 +230,7 @@
                         });
                     }
                 },
-                'bulk-upload-orders': {
+                'add-bulk-orders': {
                     init:function(){
                         $('select#client_id').change(function(e){
                             $(this).valid();
@@ -301,44 +301,16 @@
                         }
                     }
                 },
-                'manage-swatches': {
+                'book-direct-freight-collection':{
                     init: function(){
-                        actions.common['select-all']();
-                        actions.common['cancel-orders'](false, true);
-                        $('a.label-print').click(function(e){
-                            //console.log('click');
-                            e.preventDefault();
-                            var ids = [];
-                            $('input.select').each(function(i,e){
-                                var order_id = $(this).data('orderid');
-                                if( $(this).prop('checked'))
-                                {
-                                    ids.push(order_id);
-                                }
-                            });
-                            console.log(ids);
-                            if(ids.length)
+                        $('form#df_collection').submit(function(e){
+                            if($(this).valid())
                             {
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printSwatchLabels");
-                                //form.setAttribute("action", "/form/printSwatchLabels");
-                                form.setAttribute("target", "formresult");
-                                $.each( ids, function( index, value ) {
-                                    var hiddenField = document.createElement("input");
-                                    hiddenField.setAttribute("type", "hidden");
-                                    hiddenField.setAttribute("name", "orders[]");
-                                    hiddenField.setAttribute("value", value);
-                                    form.appendChild(hiddenField);
-                                    var hiddenField2 = document.createElement("input");
-                                    hiddenField2.setAttribute("type", "hidden");
-                                    hiddenField2.setAttribute("name", "csrf_token");
-                                    hiddenField2.setAttribute("value", config.csrfToken );
-                                    form.appendChild(hiddenField2);
-                                });
-                                document.body.appendChild(form);
-                                window.open('','formresult');
-                                form.submit();
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Booking Pickup...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
                             }
                         });
                     }
@@ -360,9 +332,52 @@
                 'order-update' : {
                     init: function(){
                         actions.common.init();
-                        $('input#pallet').click(function(e){
-                            var text = ($(this).prop('checked'))? "Pallet Count" :"Package Count";
-                            $('span#label_text').text(text)
+                        $('button#add_package').click(function(e){
+                            //make the package form window
+                            var id = $(this).data('orderid')
+                            $('<div id="order-add-package" title="Add Packages or Pallets">').appendTo($('body'));
+                            $("#order-add-package")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addOrderPackageForm',{order_id: id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                    }
+                                    $('form#order-add-package').submit(function(e){
+                                        if($(this).valid())
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            e.preventDefault();
+                                        }
+                                    });
+                            });
+                            $("#order-add-package").dialog({
+                                    draggable: true,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: "auto",
+                                    width: "auto",
+                                    create: function( event, ui ) {
+                                        // Set maxWidth
+                                        $(this).css("maxWidth", "660px");
+                                    },
+                                    close: function(){
+                                        $("#order-add-package").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#order-add-package').dialog('close');
+                                        });
+
+                                    },
+                                    position: { my: "center", at: "center", of: window }
+                            });
+                            $("#order-add-package").dialog('open');
                         });
                         $('a.delete-package')
                             .css('cursor', 'pointer')
@@ -379,14 +394,19 @@
                                 }
                         });
 
-                        $('form#order-courier-update').submit(function(e){
-                            if($(this).valid())
+                        $('button#update_courier').click(function(e){
+                            if($('form#order-courier-update').valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Courier...</h2></div>' });
+                                $('form#order-courier-update').submit();
                             }
-                            else
+                        });
+
+                        $('button#add_misc').click(function(e){
+                            if($('form#add_miscellaneous').valid())
                             {
-                                return false;
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Miscellaneous Items...</h2></div>' });
+                                $('form#add_miscellaneous').submit();
                             }
                         });
 
@@ -424,11 +444,7 @@
                             form.submit();
                         });
 
-                        $('button#truck_charge_calc').click(function(e) {
-                            e.preventDefault();
-                    		var dest = $(this).data("destination");
-                            truckCost.getCharge();
-                        });
+
 
                         $('button#order_fulfill').click(function(e){
                             var courier_id = $(this).data('courierid');
@@ -656,9 +672,6 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
                             }
                         });
-                        $.validator.addClassRules("item-group", {
-                            wholePallets : true
-                        });
                     }
                 },
                 'address-update':{
@@ -681,11 +694,18 @@
                         actions.common['remove-all-items']();
                         $('select#client_id').change(function(e){
                             if($(this).val() != "0")
+                            {
                                 $('div#item_selector').show();
+                                $('button#submitter').prop("disabled", false);
+                            }
                             else
+                            {
                                 $('div#item_selector').hide();
+                                $('button#submitter').prop("disabled", true);
+                            }
                         });
                         actions.common['add-item']();
+                        actions.common['remove-all-items']();
                         actions['item-searcher'].init();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
@@ -901,10 +921,19 @@
                             	    $(this).val(c).change();
                             });
                         });
+                        /*
+                        dataTable.init($('table#client_orders_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [0,3,5,7,8,9,10,11,12,13] }
+                            ],
+                            "order": []
+                        } );
+                        */
 
-                        /**/
                         $('table#client_orders_table').filterTable({
-                            inputSelector: '#table_searcher'
+                            inputSelector: '#table_searcher',
+                            minRows: 2,
+                            ignoreColumns: [3,7,8,9,10,11,12]
                         });
 
                         //$('table#client_orders_table').stickyTableHeaders();
@@ -921,11 +950,11 @@
                     				if( $(this).prop('checked') && courier_id >= 0)
                     				{
                     					//ids.push($(this).data('orderid'));
-                                        var ip = ( $('#ignoreprice_'+thisid).prop('checked') )? 1: 0;
+                                        //var ip = ( $('#ignoreprice_'+thisid).prop('checked') )? 1: 0;
                                         var ent = {
                                             order_id: thisid,
                                             courier_id: courier_id,
-                                            ip: ip
+                                            ip: 1                   //removed this check
                                         }
                     					//ids[thisid][courier_id] = ip;
                                         ids.push(ent);
@@ -992,28 +1021,40 @@
                                 }
                             }
                         });
-
-                        $('a.export-csv').click(function(e){
+                        $('a.directfreight-label-print').click(function(e){
                             e.preventDefault();
                             if($('input.select:checked').length)
                             {
                                 var ids = [];
                                 $('input.select').each(function(i,e){
-                                    if($(this).prop('checked'))
+                                    var order_id = $(this).data('orderid');
+                                    console.log('order_id: '+ order_id);
+                                    if($(this).prop('checked') &&  $('select#courier_'+order_id).val() == config.directFreightId )
                                     {
-                                        ids.push($(this).data('orderid'));
+                                        ids.push(order_id);
                                     }
                                 });
-                                var data = {
-                                    client_id: $('#client_selector').val(),
-                                    order_ids: ids,
-                                    csrf_token: config.csrfToken
+                                if(ids.length)
+                                {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Generating Labels...</h1></div>' });
+                                    var form = document.createElement('form');
+                                    form.setAttribute("method", "post");
+                                    form.setAttribute("action", "/labels/directfreight-labels");
+                                    //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
+                                    //form.setAttribute("target", "formresult");
+                                    $.each( ids, function( index, value ) {
+                                        var hiddenField = document.createElement("input");
+                                        hiddenField.setAttribute("type", "hidden");
+                                        hiddenField.setAttribute("name", "orders[]");
+                                        hiddenField.setAttribute("value", value);
+                                        form.appendChild(hiddenField);
+                                    });
+                                    document.body.appendChild(form);
+                                    //window.open('','formresult');
+                                    form.submit();
                                 }
-                                var url = "/downloads/orderExportCSV";
-                                fileDownload.download(url, data);
                             }
                         });
-
                         $('a.slip-print').click(function(e){
                             e.preventDefault();
                             //console.log('click');
@@ -1167,7 +1208,55 @@
                                 });
                             });
                         });
-
+                        $('a.directfreight-fulfill').click(function(e){
+                            e.preventDefault();
+                            swal({
+                                title: "Fulfill These Orders?",
+                                text: "This will close each order and adjust stock\n\nIt cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then( function(willFulfill) {
+                                var ids = [];
+                                $('input.select').each(function(i,e){
+                                    var order_id = $(this).data('orderid');
+                                    console.log('order_id: '+ order_id);
+                                    if($(this).prop('checked') &&  $('select#courier_'+order_id).val() == config.directFreightId )
+                                    {
+                                        ids.push(order_id);
+                                    }
+                                });
+                                $.ajax({
+                                    url: '/ajaxfunctions/fulfill-order',
+                                    method: 'post',
+                                    data: {
+                                        order_ids: ids,
+                                        courier_id: config.directFreightId
+                                    },
+                                    dataType: 'json',
+                                    beforeSend: function(){
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
+                                    },
+                                    success: function(d){
+                                        if(d.error)
+                                        {
+                                            $.unblockUI();
+                                            alert('error');
+                                        }
+                                        else
+                                        {
+                                            location.reload();
+                                        }
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown){
+                                        $.unblockUI();
+                                        document.open();
+                                        document.write(jqXHR.responseText);
+                                        document.close();
+                                    }
+                                });
+                            });
+                        });
                         $('a.add-package').click(function(e){
                             e.preventDefault();
                             if($('input.select:checked').length)
@@ -1580,14 +1669,13 @@
                         });
                     }
                 },
-                'clients-orders' : {
+                'client-orders' : {
                     init: function(){
                         dataTable.init($('table#client_orders_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [0,1,5,6,8] }
+                                { "orderable": false, "targets": [0,1,5,6,7] }
                             ],
-                            "order": [],
-                            fixedHeader: true
+                            "order": []
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -1613,7 +1701,7 @@
                         });
                     }
                 },
-                'import-orders' : {
+                'bulk-upload-orders' : {
                     init: function(){
                         $('form#bulk_order_import').submit(function(e){
                             if($(this).valid())

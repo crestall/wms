@@ -12,270 +12,215 @@ $client_id = $product['client_id'];
 
 ?>
 <div id="page-wrapper">
-    <?php //echo "<pre>",print_r($packing_types),"</pre>"; ?>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-    <?php echo Form::displayError('general');?>
-    <div class="row">
-        <div class="col-lg-3">
-            <a class="btn btn-primary" href="/inventory/view-inventory/client=<?php echo $client_id;?>">Return to Client Inventory</a>
+    <div id="page_container" class="container-xl">
+        <?php //echo "<pre>",print_r($packing_types),"</pre>"; ?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php echo Form::displayError('general');?>
+        <div class="row mb-3">
+            <div class="col-6">
+                <a class="btn btn-outline-fsg" href="/inventory/view-inventory/client=<?php echo $client_id;?>">Return to Client Inventory</a>
+            </div>
+            <div class="col-6 text-right">
+                <a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>">Return to Client Products</a>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <a class="btn btn-primary" href="/products/view-products/client=<?php echo $client_id;?>">Return to Client Products</a>
-        </div>
-    </div>
-    <div class="row">
-        <form id="edit_product"  method="post" enctype="multipart/form-data" action="/form/procProductEdit">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3>Details</h3>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control required" name="name" id="name" value="<?php echo $product['name'];?>" />
-                    <?php echo Form::displayError('name');?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Image</label>
-                <div class="col-md-4">
-                    <input type="file" name="image" id="image" />
-                    <?php echo Form::displayError('image');?>
-                </div>
-            </div>
-            <?php if( !is_null($product['image']) && !empty($product['image']) ) :?>
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">Current Image</label>
-                    <div class="col-md-4">
+        <div class="row">
+            <div class="col-lg-12">
+                <form id="edit_product"  method="post" enctype="multipart/form-data" action="/form/procProductEdit">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Details</h3>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
                         <div class="col-md-4">
-                            <img src="/images/products/tn_<?php echo $product['image'];?>" class="thumbnail" />
-                        </div>
-                        <div class="col-md-6 checkbox checkbox-default">
-                            <input class="form-check-input styled" type="checkbox" id="delete_image" name="delete_image" />
-                            <label for="delete_image"><small><em>delete image</em></small></label>
+                            <input type="text" class="form-control required" name="name" id="name" value="<?php echo $product['name'];?>" />
+                            <?php echo Form::displayError('name');?>
                         </div>
                     </div>
-                </div>
-            <?php endif;?>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
-                <div class="col-md-4">
-                    <select id="client_id" name="client_id" class="form-control selectpicker disabled" disabled><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($product['client_id']);?></select>
-                    <?php echo Form::displayError('client_id');?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label" id="type_label">Supplier</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" name="supplier" id="supplier" value="<?php echo $supplier;?>" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Solar Supplier</label>
-                <div class="col-md-4">
-                    <select id="solar_type_id" name="solar_type_id" class="form-control selectpicker" <?php if($product['client_id'] != 67) echo "disabled"?>><option value="0">--Select One--</option><?php echo $this->controller->solarordertype->getSelectSolarOrderTypes($product['solar_type_id']);?></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="active">Active</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="active" name="active" <?php if($product['active'] > 0) echo "checked";?> />
-                        <label for="active"></label>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Image</label>
+                        <div class="col-md-4">
+                            <input type="file" name="image" id="image" />
+                            <?php echo Form::displayError('image');?>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> SKU</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control required" name="sku" id="sku" value="<?php echo $product['sku']?>" />
-                    <?php echo Form::displayError('sku');?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Barcode</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" name="barcode" id="barcode" value="<?php echo $product['barcode'];?>" />
-                    <?php echo Form::displayError('barcode');?>
-                </div>
-            </div>
-            <!--div class="form-group row">
-                <label class="col-md-3 col-form-label">Barcode Type</label>
-                <div class="col-md-4">
-                    <select id="barcode_type" name="barcode_type" class="form-control selectpicker"><?php echo $this->controller->barcodetype->getSelectBarcodeType(Form::value('barcode_type'));?></select>
-                </div>
-            </div-->
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Box Barcode</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" name="box_barcode" id="box_barcode" value="<?php echo $product['box_barcode'];?>" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Number in Box</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control number" name="per_box" id="per_box" value="<?php echo $per_box;?>" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Weight</label>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <input type="text" class="form-control number" name="weight" id="weight" value="<?php echo $weight;?>" />
-                        <span class="input-group-addon">Kg</span>
+                    <?php if( !is_null($product['image']) && !empty($product['image']) ) :?>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Current Image</label>
+                            <div class="col-md-4">
+                                <div class="col-md-4">
+                                    <img src="/images/products/tn_<?php echo $product['image'];?>" class="thumbnail" />
+                                </div>
+                                <div class="col-md-6 checkbox checkbox-default">
+                                    <input class="form-check-input styled" type="checkbox" id="delete_image" name="delete_image" />
+                                    <label for="delete_image"><small><em>delete image</em></small></label>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif;?>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
+                        <div class="col-md-4">
+                            <select id="client_id" name="client_id" class="form-control selectpicker disabled" disabled><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($product['client_id']);?></select>
+                            <?php echo Form::displayError('client_id');?>
+                        </div>
                     </div>
-                    <?php echo Form::displayError('weight');?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Width</label>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <input type="text" class="form-control number" name="width" id="width" value="<?php echo $width;?>" />
-                        <span class="input-group-addon">cm</span>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" id="type_label">Supplier</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="supplier" id="supplier" value="<?php echo $supplier;?>" />
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Depth</label>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <input type="text" class="form-control number" name="depth" id="depth" value="<?php echo $depth;?>" />
-                        <span class="input-group-addon">cm</span>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="active" name="active" <?php if($product['active'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="active">Active</label>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Height</label>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <input type="text" class="form-control number" name="height" id="height" value="<?php echo $height;?>" />
-                        <span class="input-group-addon">cm</span>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> SKU</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control required" name="sku" id="sku" value="<?php echo $product['sku']?>" />
+                            <?php echo Form::displayError('sku');?>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Price</label>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="text" class="form-control" name="price" id="price" value="<?php echo $price;?>" />
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Barcode</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="barcode" id="barcode" value="<?php echo $product['barcode'];?>" />
+                            <?php echo Form::displayError('barcode');?>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="requires_bubblewrap">Requires Bubblewrap</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="requires_bubblewrap" name="requires_bubblewrap" <?php if($product['requires_bubblewrap'] > 0) echo "checked";?> />
-                        <label for="requires_bubblewrap"></label>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Box Barcode</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="box_barcode" id="box_barcode" value="<?php echo $product['box_barcode'];?>" />
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="pack_item">Pack Item</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="pack_item" name="pack_item" <?php if($product['pack_item'] > 0) echo "checked";?> />
-                        <label for="pack_item"></label>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Number in Box</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control number" name="per_box" id="per_box" value="<?php echo $per_box;?>" />
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="collection">Collection</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="collection" name="collection" <?php if($product['collection'] > 0) echo "checked";?> />
-                        <label for="collection"></label>
+                    <div class="form-group row">
+                        <label class="col-md-3">Weight</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control number" name="weight" id="weight" value="<?php echo $weight;?>" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Kg</span>
+                                </div>
+                            </div>
+                            <?php echo Form::displayError('weight');?>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="double_bay">Double Bay Item</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="double_bay" name="double_bay" <?php if($product['double_bay'] > 0) echo "checked";?> />
-                        <label for="double_bay"></label>
+                    <div class="form-group row">
+                        <label class="col-md-3">Width</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control number" name="width" id="width" value="<?php echo $width;?>" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
+                            <?php echo Form::displayError('width');?>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="palletized" name="palletized" <?php if($product['palletized'] > 0) echo "checked";?> />
-                        <label for="palletized"></label>
+                    <div class="form-group row">
+                        <label class="col-md-3">Depth</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control number" name="depth" id="depth" value="<?php echo $depth;?>" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
+                            <?php echo Form::displayError('depth');?>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div id="per_pallet_holder" style="display: <?php echo $per_pallet_display;?>">
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">Number per pallet</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control required" name="per_pallet" id="per_pallet" value="<?php echo $product['per_pallet'];?>" />
-                        <?php echo Form::displayError('per_pallet');?>
+                    <div class="form-group row">
+                        <label class="col-md-3">Height</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control number" name="height" id="height" value="<?php echo $height;?>" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
+                            <?php echo Form::displayError('height');?>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Package Type(s)</label>
-                <div class="col-md-4">
-                    <select id="package_type" name="package_type[]" class="form-control selectpicker" multiple><?php echo $this->controller->packingtype->getSelectPackingTypesMultiple(array_keys($packing_types));?></select>
-                    <span class="inst">Select all relevent types</span>
-                    <?php echo Form::displayError('package_type');?>
-                </div>
-            </div>
-            <div id="type_holder"></div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3>Inventory</h3>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Preferred Pick Location</label>
-                <div class="col-md-4">
-                    <select id="preferred_pick_location_id" name="preferred_pick_location_id" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectLocations($product['preferred_pick_location_id'], $product['id']);?></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Low Stock Trigger</label>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <input type="text" class="form-control number" name="trigger_point" id="trigger_point" value="<?php echo $product['trigger_point'];?>" />
-                        <span class="input-group-addon"><em>for warehouse</em></span>
+                    <div class="form-group row">
+                        <label class="col-md-3">Price</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control" name="price" id="price" value="<?php echo $price;?>" />
+                            </div>
+                            <?php echo Form::displayError('price');?>
+                        </div>
                     </div>
-                    <?php echo Form::displayError('trigger_point');?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">Low Stock Warning</label>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <input type="text" class="form-control number" name="low_stock_warning" id="low_stock_warning" value="<?php echo $product['low_stock_warning'];?>" />
-                        <span class="input-group-addon"><em>for client</em></span>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="requires_bubblewrap" name="requires_bubblewrap" <?php if($product['requires_bubblewrap'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="requires_bubblewrap">Requires Bubblewrap</label>
                     </div>
-                    <?php echo Form::displayError('low_stock_warning');?>
-                </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="collection" name="collection" <?php if($product['collection'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="collection">Collection</label>
+                    </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="palletized" name="palletized" <?php if($product['palletized'] > 0) echo "palletized";?> />
+                        <label class="custom-control-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Inventory</h3>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3">Low Stock Trigger</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control number" name="trigger_point" id="trigger_point" value="<?php echo $product['trigger_point'];?>" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><em>for warehouse</em></span>
+                                </div>
+                            </div>
+                            <?php echo Form::displayError('trigger_point');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3">Low Stock Warning</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control number" name="low_stock_warning" id="low_stock_warning" value="<?php echo $product['low_stock_warning'];?>" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><em>for client</em></span>
+                                </div>
+                            </div>
+                            <?php echo Form::displayError('low_stock_warning');?>
+                        </div>
+                    </div>
+                    <!-- Hidden Inputs -->
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                    <input type="hidden" name="current_barcode" id="current_barcode" value="<?php echo $product['barcode']; ?>" />
+                    <input type="hidden" name="current_box_barcode" id="current_box_barcode" value="<?php echo $product['box_barcode']; ?>" />
+                    <input type="hidden" name="current_sku" id="current_sku" value="<?php echo $product['sku']; ?>" />
+                    <input type="hidden" name="item_id" value="<?php echo $product['id'];?>" />
+                    <input type="hidden" name="client_id" value="<?php echo $product['client_id'];?>" />
+                    <!-- Hidden Inputs -->
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">&nbsp;</label>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">Update Product</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <!-- Hidden Inputs -->
-            <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <input type="hidden" name="current_barcode" id="current_barcode" value="<?php echo $product['barcode']; ?>" />
-            <input type="hidden" name="current_box_barcode" id="current_box_barcode" value="<?php echo $product['box_barcode']; ?>" />
-            <input type="hidden" name="current_sku" id="current_sku" value="<?php echo $product['sku']; ?>" />
-            <input type="hidden" name="item_id" value="<?php echo $product['id'];?>" />
-            <input type="hidden" name="client_id" value="<?php echo $product['client_id'];?>" />
-            <?php foreach($packing_types as $type_id => $number):?>
-                <input type="hidden" id="pt_count_<?php echo $type_id;?>" value="<?php echo round(1 / $number);?>" />
-            <?php endforeach;?>
-            <!-- Hidden Inputs -->
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label">&nbsp;</label>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Update Product</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

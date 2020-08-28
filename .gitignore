@@ -4,7 +4,7 @@ public_html/client_uploads/
 public_html/*.pdf
 public_html/zz_*
 app/logs/
-app/config/*
+app/config/constants.php
 public_html/images/
 public_html/data/
 STORE/

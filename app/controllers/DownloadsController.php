@@ -40,6 +40,13 @@ class DownloadsController extends Controller {
         }
     }
 
+    public function index()
+    {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'downloads-index');
+        parent::displayIndex(get_class());
+    }
+
     public function downloadFile()
     {
         $file_name = (isset($this->request->params['args']['file']))? $this->request->params['args']['file']: "";
@@ -161,6 +168,11 @@ class DownloadsController extends Controller {
         $extra_cols = 0;
         foreach($orders as $o)
         {
+            $weight = 0;
+            foreach($o['parcels'] as $parc)
+            {
+                $weight += $parc['weight'];
+            }
             $row = array(
                 $o['date_ordered'],
                 $o['entered_by'],
@@ -171,7 +183,7 @@ class DownloadsController extends Controller {
                 $o['country'],
                 $o['charge_code'],
                 $o['charge'],
-                $o['weight'],
+                $weight,
                 $o['shrink_wrap'],
                 $o['bubble_wrap'],
                 $o['pallets'],
@@ -553,7 +565,7 @@ class DownloadsController extends Controller {
                 ${$field} = $value;
             }
         }
-        $hidden = Config::get("HIDE_CHARGE_CLIENTS");
+        //$hidden = Config::get("HIDE_CHARGE_CLIENTS");
         $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         $cols = array(
             "Date Ordered",
@@ -568,10 +580,6 @@ class DownloadsController extends Controller {
             "Charge Code",
             "Consignment ID"
         );
-        if( !in_array($client_id, $hidden) )
-        {
-            $cols[] = "Estimated Freight Charge";
-        }
         $rows = array();
         foreach($orders as $o)
         {
@@ -588,10 +596,6 @@ class DownloadsController extends Controller {
                 $o['charge_code'],
                 $o['consignment_id']
             );
-            if( !in_array($client_id, $hidden) )
-            {
-                $row[] = $o['charge'];
-            }
             $rows[] = $row;
         }
         $expire=time()+60;
@@ -1059,43 +1063,22 @@ class DownloadsController extends Controller {
                 ${$field} = $value;
             }
         }
-        $bays = $this->clientsbays->getBayUsage($from, $to);
+        $usage = $this->location->getAllClientsBayUsage();
         $cols = array(
-            'Client'
+            "Client",
+            "Standard Bays",
+            "Oversize Bays",
+            "Pick Faces"
         );
-        foreach($bays['fridays'] as $f)
-        {
-            $cols[] = $f['string'];
-            $cols[] = "";
-            $cols[] = "";
-        }
         $rows = array();
-        $c = 0;
-        $row = array();
-        foreach($bays['fridays'] as $f)
-        {
-            if($c == 0)
-                $row[] = "";
-            $row[] = "Standard Bays";
-            $row[] =  "Oversize Bays";
-            $row[] =  "Pickfaces";
-            ++$c;
-        }
-        $rows[] = $row;
-        foreach($bays['data'] as $client_name => $carray)
+        foreach($usage as $cu)
         {
             $row = array(
-                $client_name
+                $cu['client_name'],
+                $cu['location_count'],
+                $cu['oversize_count'],
+                $cu['pickface_count']
             );
-            foreach($bays['fridays'] as $f)
-            {
-                $usage = (isset($carray[$f['string']]['standard']))? round($carray[$f['string']]['standard']) : 0;
-                $row[] = $usage;
-                $usage = (isset($carray[$f['string']]['oversize']))? round($carray[$f['string']]['oversize']) : 0;
-                $row[] = $usage;
-                $usage = (isset($carray[$f['string']]['pickfaces']))? round($carray[$f['string']]['pickfaces']) : 0;
-                $row[] = $usage;
-            }
             $rows[] = $row;
         }
         $expire=time()+60;
@@ -1146,25 +1129,15 @@ class DownloadsController extends Controller {
 
     public function isAuthorized(){
 
-        $action = $this->request->param('action');
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        $resource = "downloads";
-
         $role = Session::getUserRole();
-        if( isset($role) && ($role === "admin"  || $role === "super admin") )
-        {
-            return true;
-        }
+        $action = $this->request->param('action');
+        $resource = "downloads";
+        //admin users
+        Permission::allow(['super admin', 'admin'], $resource, ['*']);
 
         //warehouse users
         Permission::allow('warehouse', $resource, array(
 
-        ));
-
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            'solarInventoryCSV',
-            'solarConsumablesReorderCSV'
         ));
 
         //client users

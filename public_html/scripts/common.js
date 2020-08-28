@@ -1,4 +1,104 @@
 /************
+* Navigation Scripting
+************/
+ $(function () {
+    scroller.checkDisplay();
+    $(window).scroll(function () {
+        //console.log('scrolling');
+        scroller.checkDisplay();
+	});
+    //add the active class to the menu item
+    var foundpage = false
+    for(var cat in config.allPages)
+    {
+        //console.log("1 doing: "+cat);
+        for(var page in config.allPages[cat])
+        {
+            //console.log("2 doing: "+page);
+            if(config.curPage == page)
+            {
+                //console.log("found: "+page);
+                $("li#"+cat+" > a").addClass("active");
+                foundpage = true;
+                break;
+            }
+        }
+        if(foundpage)
+            break;
+    }
+});
+
+$('button#navbar_toggler').click(function(e){
+    var h = $('div#navbarNav ul.navbar-nav').height();
+    if($('div#navbarNav').hasClass('show'))
+    {
+        $('ul.user-info').addClass('navbar').css({
+            marginLeft: 0,
+            marginTop: 0
+        });
+        $('div#navbarNav ul.navbar-nav').css({
+            width :'auto'
+        });
+    }
+    else
+    {;
+        $('ul.user-info').removeClass('navbar').css({
+            marginLeft: '170px',
+            marginTop: '-815px'
+        });
+        $('div#navbarNav ul.navbar-nav').css({
+            width :'200px'
+        });
+    }
+});
+
+var scroller = {
+    checkDisplay: function(){
+        //console.log('check display');
+        var $nav = $("nav.fixed-top");
+        $nav.toggleClass('scrolled', $(window).scrollTop() > $nav.height());
+        $('ul.user-info li').toggleClass('white', $(window).scrollTop() > $nav.height());
+	    $nav.toggleClass('navbar-light', $(window).scrollTop() > $nav.height());
+        $nav.toggleClass('navbar-dark', $(window).scrollTop() < $nav.height());
+        if( $(window).scrollTop() > $nav.height() )
+        {
+            $('img.custom-logo-transparent').hide();
+            $('img.custom-logo').show();
+        }
+        else
+        {
+            $('img.custom-logo-transparent').show();
+            $('img.custom-logo').hide();
+        }
+    },
+    cardsInView: function(){
+        //console.log('cards in view');
+        var viewportTop = $(window).scrollTop();
+        var viewportBottom = viewportTop + $(window).height();
+        if($("div.homepagedeck").length)
+        {
+            var $cardContainer = $("div.homepagedeck");
+            var top = Math.round( $cardContainer.offset().top );
+            var bottom = top + $cardContainer.height();
+            $cardContainer.find('div.homepagecard').each(function(){
+                $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
+            });
+        }
+    }
+}
+
+/************
+Homepage card fadeins
+*************/
+ $(function () {
+    scroller.cardsInView();
+    $(window).scroll(function () {
+        //console.log('scrolling');
+        scroller.cardsInView();
+	});
+});
+
+/************
 * File Uploading
 ************/
 var fileUpload = {
@@ -170,23 +270,25 @@ var itemsUpdater = {
         $( "input.item_qty, select.pallet_qty" ).each(function(i,e){
             $(this).rules( "remove");
         });
-        $.validator.addClassRules('item_qty',{
-            required: function(el){
-                var $holder = $(el).closest('div.item_holder');
-                var val = $holder.find('select.pallet_qty').val();
-                //console.log('pallet_qty val: '+ val);
-                return (val === 0 || val === undefined );
-            },
-            digits: true
-        });
-        $.validator.addClassRules('pallet_qty',{
-            notNone: function(el){
-                var $holder = $(el).closest('div.item_holder');
-                var val = $holder.find('input.item_qty').val();
-                //console.log('item_qty val: '+ val);
-                return ( val === 0 || val === "" );
-            }
-        });
+        if($(".item_qty").length)
+        {
+            $.validator.addClassRules('item_qty',{
+                required: function(el){
+                    var $holder = $(el).closest('div.item_holder');
+                    var val = $holder.find('select.pallet_qty').val();
+                    //console.log('pallet_qty val: '+ val);
+                    return (val === 0 || val === undefined );
+                },
+                digits: true
+            });
+        }
+        if($(".pallet_qty").length)
+        {
+            $.validator.addClassRules('pallet_qty',{
+                notNone: true
+            });
+        }
+        /*
         $('select.pallet_qty').each(function(i,e){
             $(this).off('change');
             $(this).change(function(e){
@@ -195,7 +297,7 @@ var itemsUpdater = {
                 $holder.find('input.item_qty').valid();
             });
         });
-        /*
+
         $('input.item_qty').each(function(i,e){
             $(this).off('change');
             $(this).change(function(e){
@@ -248,7 +350,7 @@ var datePicker = {
         }
         $( "#date_to" ).datepicker(to_opts);
         $('i.fa-calendar-alt').css('cursor', 'pointer').click(function(e){
-            $(this).closest('span').prev('input.form-control').focus();
+            $(this).closest('div.input-group-append').prev('input.form-control').focus();
         });
     },
     fromDate: function(){
@@ -311,224 +413,7 @@ var shippingQuote = {
 		$("#quote_pop").dialog('open');
     }
 }
-/************
-* 3PL Truck cost
-************/
-var truckCost = {
-    getCharge: function()
-    {
-        //make the cost window
-        $('<div id="cost_pop" title="3PL Truck Cost">').appendTo($('body'));
 
-        /*  */
-        $("#cost_pop")
-            .html("<div id='response_holder'><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Calculating Cost...</p></div>");
-
-		$("#cost_pop").dialog({
-				draggable: false,
-				modal: true,
-				show: true,
-				hide: true,
-				autoOpen: false,
-				height: 520,
-				width: 620,
-                close: function(){
-                    $("#cost_pop").remove();
-                },
-                open: function(){
-                    //$('div#content').html("<pre>"+dest+"</pre>");
-                    $('.ui-widget-overlay').bind('click',function(){
-                        $('#cost_pop').dialog('close');
-                    });
-                    if (typeof google === 'object' && typeof google.maps === 'object')
-                    {
-                        getDistanceTime();
-                    }
-                    else
-                    {
-                        //var gmapsInitialize = getDistanceTime.bind(dest);
-                        var js_file = document.createElement('script');
-                        js_file.type = 'text/javascript';
-                        js_file.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCbqMfmlyYjiqai-zHR83BVr4ykC-RqtoU&callback=getDistanceTime";
-                        document.getElementsByTagName('head')[0].appendChild(js_file);
-                    }
-                }
-		});
-		$("#cost_pop").dialog('open');
-    },
-    getQuote: function(){
-        if (typeof google === 'object' && typeof google.maps === 'object')
-        {
-            getQuoteHTML();
-        }
-        else
-        {
-            //var gmapsInitialize = getDistanceTime.bind(dest);
-            var js_file = document.createElement('script');
-            js_file.type = 'text/javascript';
-            js_file.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCbqMfmlyYjiqai-zHR83BVr4ykC-RqtoU&callback=getQuoteHTML";
-            document.getElementsByTagName('head')[0].appendChild(js_file);
-        }
-    }
-}
-function getQuoteHTML()
-{
-    var service = new google.maps.DistanceMatrixService;
-    service.getDistanceMatrix(
-    {
-        origins: ['5 Mosrael Place Rowville 3178 VIC AU'],
-        destinations: [$('input#destination').val()],
-        travelMode: 'DRIVING'
-    }, qcallback);
-
-    function qcallback(response, status)
-    {
-        console.log('detination: '+$('input#destination').val());
-        var html = "";
-        if (status !== 'OK')
-        {
-            $('div#response_holder').addClass('errorbox').html('<h2>There has been an error</h2><p>The error was: '+status+'</p>');
-            html += "<div class='row'>";
-            html += "<label class='col-md-4 col-form-label'>3PL Truck Cost</label>";
-            html += "<div class='col-md-8'>";
-            html += "<div class='errorbox'><h2>There has been an error</h2><p>The error was:"+status+"</p></div>";
-            html += "</div>";
-            html += "</div>";
-        }
-        else
-        {
-            var origins = response.originAddresses;
-            var destinations = response.destinationAddresses;
-            var hrates = {
-                1: 28.75,
-                2: 31.95,
-                3: 35.90
-            };
-            var drates = {
-                1: 1.96,
-                2: 2.31,
-                3: 2.45
-            };
-            for (var i = 0; i < origins.length; i++)
-            {
-                var results = response.rows[i].elements;
-                for (var j = 0; j < results.length; j++)
-                {
-                    var element = results[j];
-                    var distance = 2 * element.distance.value / 1000;
-                    var duration = 2 * element.duration.value;
-                    duration += (30 * 60); //2X15 minute load/unload
-                    duration = Math.ceil(duration / (15 * 60)) * 15 * 60;
-                    if(duration < 60 * 60)
-                        duration = 60 * 60;
-                    var charge1, charge2, charge3;
-                    if(distance > 100)
-                    {
-                        charge1 = Math.ceil(distance/2) * 1.96;
-                        charge2 = Math.ceil(distance/2) * 2.31;
-                        charge3 = Math.ceil(distance/2) * 2.45;
-                    }
-                    else
-                    {
-                        charge1 = duration/(60*60) * 28.75;
-                        charge2 = duration/(60*60) * 31.95;
-                        charge3 = duration/(60*60) * 35.90;
-                    }
-                    html += "<div class='row'>";
-                    html += "<label class='col-md-8 col-form-label'>3PL Truck 1 Pallet</label>";
-                    html += "<div class='col-md-4'>$"+(charge1 * 1.1).toFixed(2)+"</div></div>";
-                    html += "<div class='row'>";
-                    html += "<label class='col-md-8 col-form-label'>3PL Truck 2 Pallets</label>";
-                    html += "<div class='col-md-4'>$"+(charge2 * 1.1).toFixed(2)+"</div></div>";
-                    html += "<div class='row'>";
-                    html += "<label class='col-md-8 col-form-label'>3PL Truck 3 Pallets</label>";
-                    html += "<div class='col-md-4'>$"+(charge3 * 1.1).toFixed(2)+"</div></div>";
-                }
-            }
-        }
-        console.log('html: '+ html);
-        $("div#3pltruck_holder").html(html);
-    }
-
-}
-function getDistanceTime()
-{
-    var service = new google.maps.DistanceMatrixService;
-    var origin = ($('#origin').val())? $('#origin').val():'5 Mosrael Place Rowville 3178 VIC AU';
-    service.getDistanceMatrix(
-    {
-        origins: [origin],
-        destinations: [$('button#truck_charge_calc').data("destination")],
-        travelMode: 'DRIVING'
-    }, callback);
-
-    function callback(response, status) {
-        if (status !== 'OK')
-        {
-            $('div#response_holder').addClass('errorbox').html('<h2>There has been an error</h2><p>The error was: '+status+'</p>');
-        }
-        else if($("#pallet_count").val() > 3)
-        {
-            $('div#response_holder').addClass('errorbox').html('<h2>There has been an error</h2><p>The max number of pallets for our truck is 3</p>');
-        }
-        else
-        {
-            var origins = response.originAddresses;
-            var destinations = response.destinationAddresses;
-            var html = "";
-            var hrates = {
-                1: 28.75,
-                2: 31.95,
-                3: 35.90
-            };
-            var drates = {
-                1: 1.96,
-                2: 2.31,
-                3: 2.45
-            };
-            var pallet_count = $("#truck_pallets").val();
-            for (var i = 0; i < origins.length; i++)
-            {
-                var results = response.rows[i].elements;
-                for (var j = 0; j < results.length; j++)
-                {
-                    var element = results[j];
-                    var distance = 2 * element.distance.value / 1000;
-                    var duration = 2 * element.duration.value;
-                    duration += (30 * 60); //2X15 minute load/unload
-                    duration = Math.ceil(duration / (15 * 60)) * 15 * 60;
-                    if(duration < 60 * 60)
-                        duration = 60 * 60;
-                    var from = origins[i];
-                    var to = destinations[j];
-                    var hours = Math.floor(duration / (60*60))
-                    var hours = (hours < 10)? '0'+ hours : hours;
-                    var minutes = ((duration/60) % 60 < 10)? '0'+(duration/60) % 60 : (duration/60) % 60 ;
-                    var charge;
-                    if(distance > 100)
-                    {
-                        charge = Math.ceil(distance/2) * drates[pallet_count];
-                    }
-                    else
-                    {
-                        charge = duration/(60*60) * hrates[pallet_count];
-                    }
-                    html += "<div class='row'><label class='col-md-3 col-form-label'>From</label>";
-                    html += "<div class='col-md-8'>"+from+"</div></div>";
-                    html += "<div class='row'><label class='col-md-3 col-form-label'>To</label>";
-                    html += "<div class='col-md-8'>"+to+"</div></div>";
-                    html += "<div class='row'><label class='col-md-3 col-form-label'>Distance</label>";
-                    html += "<div class='col-md-8'>"+distance+" km</div></div>";
-                    html += "<div class='row'><label class='col-md-3 col-form-label'>Time</label>";
-                    html += "<div class='col-md-8'>"+hours+":"+minutes+" (hours:minutes)</div></div>";
-                    html += "<div class='row'><label class='col-md-3 col-form-label'>Charge</label>";
-                    html += "<div class='col-md-8'>$"+(charge * 1.1).toFixed(2)+" (GST inc)</div></div>";
-                }
-            }
-            $('div#response_holder').html(html);
-        }
-    }
-}
 /************
 * Some Autocompleters
 ************/
@@ -832,69 +717,6 @@ var ajax = {
         }
     }
 };
-
-// Sets the min-height of #page-wrapper to window size or sidebar height
-function fixPageWrapperHeight()
-{
-    var topOffset = 50;
-    var height = ( (window.innerHeight > 0) ? window.innerHeight : window.screen.height ) - topOffset;
-    var fheight = $('footer#the_footer').height();
-    height = height - fheight;
-    var mheight = $('ul#side-menu').height();
-    height = Math.max(height, mheight);
-    //console.log("height: "+height);
-    if (height < 1) height = 1;
-    if (height > topOffset) {
-        $("#page-wrapper").css("min-height", (height) + "px");
-    }
-}
-
-//Loads the correct sidebar on window load,
-//collapses the sidebar on window resize.
-
-$(function() {
-    $('#side-menu').metisMenu().on('shown.metisMenu', function(e){
-        fixPageWrapperHeight();
-    }).on('hidden.metisMenu', function(e){
-        fixPageWrapperHeight();
-    });
-
-    $(window).bind("load resize", function() {
-
-        var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
-        if (width < 768) {
-            $('div.navbar-collapse').addClass('collapse');
-            topOffset = 100; // 2-row-menu
-        } else {
-            $('div.navbar-collapse').removeClass('collapse');
-        }
-        fixPageWrapperHeight();
-    });
-
-    var url = window.location;
-
-    var foundpage = false
-    for(var cat in config.allPages)
-    {
-        //console.log("1 doing: "+cat);
-        for(var page in config.allPages[cat])
-        {
-            //console.log("2 doing: "+page);
-            if(config.curPage == page)
-            {
-                //console.log("found: "+page);
-                $("li#"+cat+" > a").addClass("active");
-                foundpage = true;
-                break;
-            }
-        }
-        if(foundpage)
-            break;
-    }
-
-    
-
-});
 
 /*
  * Helpers

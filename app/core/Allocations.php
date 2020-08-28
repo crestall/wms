@@ -33,7 +33,7 @@ class Allocations{
             foreach($order_items as $details)
             {
                 $i_id = $details['id'];
-                //echo "<pre>",print_r($details),"</pre>"; //die();
+                echo "<pre>",print_r($details),"</pre>"; //die();
                 //$pick_count = $left = (int)$details['qty'];
                 $item = $this->controller->item->getItemById($i_id);
                 //echo "<pre>",print_r($item),"</pre>"; die();
