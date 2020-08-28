@@ -186,7 +186,7 @@
 
     public function bookCollection($request)
     {
-        $response = $this->sendPostRequest('BookPickup/', $conNoteList, "GENERAL");
+        $response = $this->sendPostRequest('BookPickup/', $request, "GENERAL");
         //echo $response; die();
         return json_decode($response,true);
     }
