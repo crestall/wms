@@ -251,7 +251,7 @@ class FormController extends Controller {
             $request = array(
                 'AuthorisedContactName'     => 'Mike Bond',
                 'AuthorisedContactPhone'    => '0386777418',
-                'CloseTime'                 => '5:00pm',
+                'CloseTime'                 => '4:00pm',
                 'EstimatedTotalKgs'         => $weight,
                 'EstimatedTotalCubic'       => $cubic,
                 'EstimatedTotalCartons'     => $carton_count,
