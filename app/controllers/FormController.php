@@ -136,7 +136,7 @@ class FormController extends Controller {
 
     public function procDFCollection()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         $request = array();
         foreach($this->request->data as $field => $value)
