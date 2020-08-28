@@ -250,7 +250,7 @@ class FormController extends Controller {
             //create the API request
             $request = array(
                 'AuthorisedContactName'     => 'Mike Bond',
-                'AuthorisedContactPhone'    => 0386777418,
+                'AuthorisedContactPhone'    => '0386777418',
                 'CloseTime'                 => '5:00pm',
                 'EstimatedTotalKgs'         => $weight,
                 'EstimatedTotalCubic'       => $cubic,
