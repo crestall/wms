@@ -309,6 +309,7 @@ if(!$error)
                                         <div class="ml-4">
                                             <p>Fulfilled on <?php echo date("d/m/Y", $order['date_fulfilled']);?></p>
                                             <p>Dispatched using <span class="font-weight-bold"><?php echo $this->controller->courier->getCourierNameForOrder($order['courier_id'], $order_id);?></span></p>
+                                            <p>You may be able to track its delivery status. <a href="/orders/order-tracking/order=<?php echo $order['id'];?>" class="btn btn-sm btn-outline-fsg">View Tracking</a></p>
                                         </div>
                                     </div>
                                     </div><!--End Card Body-->
@@ -354,7 +355,7 @@ if(!$error)
                                             <h5 class="card-title">Direct Freight</h5>
                                             <div class="container-fluid">
                                                 <div class="row mb-4">
-                                                    Already assigned to Freight with Consignment ID <?php echo $order['consignment_id'];?>
+                                                    Already assigned to Direct Freight with Consignment ID <?php echo $order['consignment_id'];?>
                                                 </div>
                                                 <div class="row">
                                                     <label class="col">&nbsp;</label>

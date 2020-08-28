@@ -145,7 +145,8 @@ class OrdersController extends Controller
         Config::setJsConfig('curPage', "order-dispatching");
          Config::set('curPage', "order-dispatching");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderDispatching.php', [
-            'page_title'    =>  "Order Dispatching"
+            'page_title'    =>  "Order Dispatching",
+            'pht'           =>  ": Order Dispatching"
         ]);
     }
 
@@ -253,7 +254,8 @@ class OrdersController extends Controller
         Config::setJsConfig('curPage', "order-packing");
         Config::set('curPage', "order-packing");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderPacking.php', [
-            'page_title'    =>  "Order Packing"
+            'page_title'    =>  "Order Packing",
+            'pht'           =>  ": Order Packing"
         ]);
     }
 
@@ -263,7 +265,8 @@ class OrdersController extends Controller
         Config::setJsConfig('curPage', "order-picking");
         Config::set('curPage', "order-picking");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderPicking.php', [
-            'page_title'    =>  "Order Picking"
+            'page_title'    =>  "Order Picking",
+            'pht'           =>  ": Order Picking"
         ]);
     }
 
