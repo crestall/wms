@@ -77,7 +77,6 @@ if(empty($entered_by))
                                                 <div class="errorbox">
                                                     <h2>There was an error collecting the tracking data</h2>
                                                     <p><?php echo $tracking['tracking_results'][0]['errors'][0]['code'].": ".$tracking['tracking_results'][0]['errors'][0]['message'];?></p>
-                                                    <p>Please <a href="/orders/client-orders">click here</a> to go back to the list of orders.</p>
                                                 </div>
                                             </div>
                                         </div>
