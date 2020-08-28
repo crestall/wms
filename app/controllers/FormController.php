@@ -75,6 +75,7 @@ class FormController extends Controller {
             'procContainerUnload',
             'procCourierAdd',
             'procCourierEdit',
+            'procDFCollection',
             'procEditServiceJob',
             'procEditInstall',
             'procEncryptSomeShit',
@@ -145,6 +146,65 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if( !($this->dataSubbed($carton_count) || $this->dataSubbed($pallet_count)))
+        {
+            Form::setError('counter', "At least one of these cartons or pallets is required");
+        }
+        else
+        {
+            if($this->dataSubbed($carton_count))
+            {
+                if( filter_var( $carton_count, FILTER_VALIDATE_INT ) === false || $carton_count <= 0)
+                {
+                    Form::setError('carton_count', "Only positive whole numbers can be used for quantities");
+                }
+                if(!$this->dataSubbed($carton_width))
+                {
+                    Form::setError('carton_width', "A carton width is required if cartons are submitted");
+                }
+                elseif( filter_var( $carton_width, FILTER_VALIDATE_INT ) === false || $carton_width <= 0 )
+                {
+                    Form::setError('carton_width', "Only positive whole numbers can be used for sizes");
+                }
+                if(!$this->dataSubbed($carton_length))
+                {
+                    Form::setError('carton_length', "A carton length is required if cartons are submitted");
+                }
+                elseif( filter_var( $carton_length, FILTER_VALIDATE_INT ) === false || $carton_length <= 0 )
+                {
+                    Form::setError('carton_length', "Only positive whole numbers can be used for sizes");
+                }
+                if(!$this->dataSubbed($carton_height))
+                {
+                    Form::setError('carton_height', "A carton height is required if cartons are submitted");
+                }
+                elseif( filter_var( $carton_height, FILTER_VALIDATE_INT ) === false || $carton_height <= 0 )
+                {
+                    Form::setError('carton_height', "Only positive whole numbers can be used for sizes");
+                }
+            }
+            else
+            {
+                $carton_count = 0;
+                $carton_width = 0;
+            }
+            if($this->dataSubbed($pallet_count))
+            {
+                if( filter_var( $pallet_count, FILTER_VALIDATE_INT ) === false || $pallet_count <= 0)
+                {
+                    Form::setError('pallet_count', "Only positive whole numbers can be used for quantities");
+                }
+            }
+        }
+
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+
     }
 
     public function procReeceUserCheck()

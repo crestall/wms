@@ -4,6 +4,8 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php echo Form::displayError('general');?>
         <form id="df_collection" method="post" action="/form/procDFCollection">
             <div class="form-group row">
                 <div class="col-12 mb-2">
@@ -24,6 +26,7 @@
                         <div class="col-md-4 mb-3">
                             <input type="text" class="form-control number count digits" name="carton_count" id="carton_count" value="<?php echo Form::value('carton_count');?>" />
                         </div>
+                        <?php echo Form::displayError('carton_count');?>
                         <label class="col-md-2 mb-3">Width</label>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
@@ -33,6 +36,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php echo Form::displayError('carton_width');?>
                         <label class="col-md-2 mb-3">Length</label>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
@@ -42,6 +46,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php echo Form::displayError('carton_length');?>
                         <label class="col-md-2 mb-3">Height</label>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
@@ -51,6 +56,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php echo Form::displayError('carton_height');?>
                     </div>
                 </div>
             </div>
@@ -66,6 +72,7 @@
                         <div class="col-md-4 mb-3">
                             <input type="text" class="form-control number count digits" name="pallet_count" id="pallet_count" value="<?php echo Form::value('pallet_count');?>" />
                         </div>
+                        <?php echo Form::displayError('pallet_count');?>
                         <label class="col-md-2 mb-3">Width</label>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
@@ -75,6 +82,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php echo Form::displayError('pallet_width');?>
                         <label class="col-md-2 mb-3">Length</label>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
