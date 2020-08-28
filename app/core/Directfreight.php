@@ -20,6 +20,7 @@
     protected $CONSIGNMENT_KEY;
     protected $GENERAL_KEY;
     protected $ACCOUNT_NO;
+    protected $SITE_ID;
 
 
     const   API_SCHEME   = 'https://';
@@ -38,6 +39,7 @@
             $this->PRICING_KEY = "977998B6-48FB-4AB0-8D4D-AEB641906C0E";
             $this->GENERAL_KEY = "BA4992DA-8C23-406C-9C8E-5B19B1EAAD73";
             $this->ACCOUNT_NO = "21483";
+            $this->SITE_ID = "1548";
         }
         else
         {
@@ -45,6 +47,7 @@
             $this->PRICING_KEY = Config::get('DIRECT_FREIGHT_PRICING_KEY');
             $this->GENERAL_KEY = Config::get('DIRECT_FREIGHT_GENERAL_KEY');
             $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
+            $this->SITE_ID = 0;
         }
         //$this->ACCOUNT_NO = 22;
     }
@@ -59,7 +62,8 @@
         $headers = array(
             'Content-Type: application/json',
             'Authorisation: '. $key ,
-            'AccountNumber: '.$this->ACCOUNT_NO
+            'AccountNumber: '.$this->ACCOUNT_NO,
+            'SiteId: '.$this->SITE_ID
         );
         $ch = curl_init();
         /* */
