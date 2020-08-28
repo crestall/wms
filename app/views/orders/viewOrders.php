@@ -12,74 +12,62 @@
   asort($states);
 ?>
 <div id="page-wrapper">
+    <div id="page_container" class="container-xxl">
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        <div class="row">
-            <div class="col-lg-3 text-center">
-                <?php if($fulfilled == 0):?>
-                    <p><button class="btn btn-info" id="show_fulfilled">Show Only Fulfilled Orders</button></p>
-                <?php else:?>
-                    <p><button class="btn btn-primary" id="show_unfulfilled">Show Only Unfulfilled Orders</button></p>
-                <?php endif;?>
+    <div class="row view-orders-buttons" >
+        <?php if($user_role == "admin" || $user_role == "super admin"):?>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-fsg export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
             </div>
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-info export-csv"><i class="fas fa-file-csv"></i> Export Selected To CSV</a></p>
-            </div>
-            <div class="col-lg-3 text-center">
-
-            </div>
+        <?php endif;?>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
         </div>
-        <div class="row">
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-primary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
-                <p><a class="btn btn-primary select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
-            </div>
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-outline-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
-                <p><a class="btn btn-outline-info directfreight-label-print"><i class="fas fa-tags"></i> Print Direct Freight Labels For Selected</a></p>
-            </div>
-            <?php if($fulfilled == 0):?>
-                <div class="col-lg-3 text-center">
-                    <p><a class="btn btn-primary eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
-                </div>
-            <?php endif;?>
-            <div class="col-lg-3 text-center">
-                <?php if($fulfilled == 0):?>
-                    <p><a class="btn btn-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
-                <?php endif;?>
-                <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
-                <p><a class="btn btn-primary add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
-            </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
         </div>
-    <?php elseif($user_role == "warehouse"):?>
-        <div class="row">
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-primary slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
-                <p><a class="btn btn-primary print-invoices"><i class="fas fa-file-invoice"></i> Print Invoices For Selected</a> </p>
-            </div>
-            <div class="col-lg-3 text-center">
-                <p><a class="btn btn-primary eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
-            </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
         </div>
-    <?php endif;?>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-fsg directfreight-label-print"><i class="fas fa-tags"></i> Print Direct Freight Labels For Selected</a></p>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-success eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Orders</a></p>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <p><a class="btn btn-sm btn-block btn-outline-success directfreight-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Direct Freight Orders</a></p>
+        </div>
+        <?php if($user_role == "admin" || $user_role == "super admin"):?>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
+            </div>
+        <?php endif;?>
+    </div>
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By Client</label>
-                <select id="client_selector" class="form-control selectpicker"><option value="0">All Clients</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                <select id="client_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">All Clients</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By Courier</label>
-                <select id="courier_selector" class="form-control selectpicker"><option value="-1">All Couriers</option><?php echo $this->controller->courier->getSelectCouriers($courier_id, true, false);?></select>
+                <select id="courier_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="-1">All Couriers</option><?php echo $this->controller->courier->getSelectCouriers($courier_id, true, false);?></select>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Filter By State</label>
-                <select id="state_selector" class="form-control selectpicker">
+                <select id="state_selector" class="form-control selectpicker" data-style="btn-outline-secondary">
                     <option value="0">All States</option>
                     <?php
                     foreach($states as $s)
@@ -95,7 +83,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Search</label>
                 <input type="text" class="form-control" id="table_searcher" />
@@ -111,11 +99,19 @@
                <div class='errorbox'><?php echo Session::getAndDestroy('errorfeedback');?></div>
             <?php endif; ?>
         </div>
+        <div class="col-lg-12">
+            <?php if(isset($_SESSION['courierfeedback'])) :?>
+               <div class='feedbackbox'><?php echo Session::getAndDestroy('courierfeedback');?></div>
+            <?php endif; ?>
+            <?php if(isset($_SESSION['couriererrorfeedback'])) :?>
+               <div class='errorbox'><?php echo Session::getAndDestroy('couriererrorfeedback');?></div>
+            <?php endif; ?>
+        </div>
     </div>
     <?php if(count($orders)):?>
     <div class="row">
-        <div class="col-lg-12">
-            <table width="100%" class="table-striped table-hover" id="client_orders_table" style="width:100%">
+        <div class="col-xl-12">
+            <table class="table-striped table-hover" id="client_orders_table">
                 <thead>
         	    	<tr>
                         <th></th>
@@ -129,15 +125,15 @@
         				<!--th>Status</th-->
         				<th>Slip<br/>Printed</th>
                         <th>Package<br/>Entered</th>
-                        <th>
+                        <!--th>
                             Ignore Price Check
                             <div class="checkbox checkbox-default">
                                 <input id="select_all_np" class="styled" type="checkbox">
                                 <label for="select_all_np"><em><small>(all)</small></em></label>
                             </div>
-                        </th>
+                        </th-->
                         <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
+        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary" data-width="fit"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
                         <?php elseif($user_role == "warehouse"):?>
                             <th>Courier</th>
                         <?php endif;?>
@@ -172,6 +168,7 @@
                         $comments = !empty($co['3pl_comments']);
                         $pick_notice = !empty($co['pick_notices']);
                         $item_count = $this->controller->order->getItemCountForOrder($co['id']);
+                        $ifo = $this->controller->order->getItemsForOrder($co['id']);
                         $client_name = $this->controller->client->getClientName($co['client_id']);
                         $items = $this->controller->order->getItemsForOrder($co['id']);
         				$fulfill = true;
@@ -230,26 +227,35 @@
         					<td data-label="Client Name"><?php echo $client_name;?></td>
         	                <td class="filterable" data-label="Ship To"><?php echo $ship_to;?></td>
         					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
-        					<td data-label="Items" class="number"><?php echo $item_count;?></td>
+        					<!--td data-label="Items" class="number"><?php //echo $item_count;?></td-->
+                            <td data-label="Items">
+                                <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                    <?php foreach($ifo as $i):?>
+                                        <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                    <?php endforeach;?>
+                                </div>
+                                <div class="item_total text-right">
+                                    Total Items: <?php echo $item_count;?>
+                                </div>
+                            </td>
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
         					<!--td data-label="Status"><?php echo $order_status;?></td-->
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
                             <td data-label="Package Entered"><?php echo $pe;?></td>
-                            <td data-label="Ignore Price Restriction" class="chkbox">
+                            <!--td data-label="Ignore Price Restriction" class="chkbox">
                                 <div class="checkbox checkbox-default">
                                     <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select_np styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
                                     <label for="ignoreprice_<?php echo $co['id'];?>"></label>
                                 </div>
-                            </td>
-                            <?php if($user_role == "admin" || $user_role == "super admin"):?>
+                            </td-->
+                            <?php if($user_role == "warehouse" || $user_role == "admin" || $user_role == "super admin"):?>
             					<td data-label="Courier" nowrap>
-            					    <p><select name="courier" class="selectpicker courier" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
-                                    <p><button class="ship_quote btn btn-primary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
-                                    <p><button class="btn btn-warning adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
-                                    <?php if( $co['courier_id'] > 0): ?>
-                                        <p><a class="btn btn-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
+            					    <p><select name="courier" class="selectpicker courier" data-style="btn-outline-secondary btn-sm" data-width="fit" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
+                                    <p><button class="ship_quote btn-sm btn btn-outline-secondary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
+                                    <p><button class="btn btn-sm btn-outline-primary adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
+                                    <?php if( Session::getUserRole() == "admin" && $co['courier_id'] > 0): ?>
+                                        <p><a class="btn btn-outline-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
                                     <?php endif;?>
-                                    <p><a class="btn btn-info" href="/orders/add-serials/order=<?php echo $co['id'];?>">Add Serial Numbers</a></p>
                                 </td>
                             <?php elseif($user_role == "warehouse"):?>
                                 <td>
@@ -265,20 +271,20 @@
                             </td>
         				</tr>
                         <?php if($errors):?>
-                            <tr class="full_width">
-                                <td colspan="14" class="error">
+                            <tr class="table-warning">
+                                <td colspan="14">
                                     <?php echo $co['error_string'];?>
-                                    <p><a class="btn btn-primary" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
+                                    <p><a class="btn btn-outline-fsg" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                 </td>
                             </tr>
                         <?php endif;?>
                         <?php if($comments):?>
-                            <tr class="order_comments full_width">
+                            <tr class="table-info">
                                 <td colspan="14"><?php echo $co['3pl_comments'];?></td>
                             </tr>
                         <?php endif;?>
                         <?php if($pick_notice):?>
-                            <tr class="pick_notice full_width">
+                            <tr class="table-info">
                                 <td colspan="14"><?php echo $co['pick_notices'];?></td>
                             </tr>
                         <?php endif;?>
@@ -298,4 +304,5 @@
     </div>
 <?php endif;?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/courierids.php");?>
+</div>
 </div>

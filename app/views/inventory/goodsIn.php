@@ -1,18 +1,17 @@
 <div id="page-wrapper">
-    <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <div class="row">
+    <div id="page_container" class="container-xl">
+        <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <form id="goodsin" method="post" action="/form/procGoodsIn">
             <div class="form-group row">
                 <label class="col-form-label col-md-3">Select a Client</label>
                 <div class="col-md-4">
-                    <p><select id="client_selector" name="client_id" class="form-control selectpicker"><option value="0">Select</option><?php echo $this->controller->client->getSelectClients($client_id);?></select></p>
+                    <p><select id="client_selector" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">Select</option><?php echo $this->controller->client->getSelectClients($client_id);?></select></p>
                 </div>
             </div>
             <?php if($client_id > 0):?>
                 <div class="form-group row">
-                    <label class="col-form-label col-md-3">&nbsp;</label>
-                    <div class="col-md-9">
+                    <div class="col-md-9 offset-md-3">
                         <h2>Goods In For <?php echo $client_name;?></h2>
                     </div>
                 </div>
@@ -47,7 +46,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">&nbsp;</label>
                     <div class="col-md-4">
-                        <button type="submit" id="submit_button" class="btn btn-primary">Submit Form</button>
+                        <button type="submit" id="submit_button" class="btn btn-outline-secondary">Record Movement</button>
                     </div>
                 </div>
             <?php endif;?>

@@ -11,6 +11,7 @@
 
   addToLocation
   checkLocation($location)
+  getAllClientsBayUsage()
   getAllLocations()
   getItemLocationId
   getItemStockInLocation
@@ -47,6 +48,31 @@ class Location extends Model{
         $this->bayswater_receiving_id = $this->getLocationId('bayswater receiving');
     }
 
+    public function getAllClientsBayUsage()
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                (COUNT(*) - IFNULL(SUM(a.oversize), 0) - IFNULL(SUM(a.tray), 0)) AS location_count,
+                SUM(a.oversize) AS oversize_count,
+                SUM(a.tray) AS pickface_count,
+                a.client_id,
+                a.client_name
+            FROM
+            (
+                SELECT il.location_id, l.oversize, l.tray, i.client_id, c.client_name
+                FROM items_locations il JOIN items i ON il.item_id = i.id JOIN locations l ON il.location_id = l.id JOIN clients c ON i.client_id = c.id
+                WHERE l.active = 1 AND c.active = 1
+                GROUP BY il.location_id
+            ) a
+            GROUP BY
+                a.client_id
+            ORDER BY
+                a.client_name
+        ";
+        return ($db->queryData($q));
+    }
+
     public function deactivateLocation($id)
     {
         $db = Database::openConnection();
@@ -70,6 +96,7 @@ class Location extends Model{
     public function isOversize($id)
     {
         $db = Database::openConnection();
+        /*
         $q = "
             SELECT * FROM clients_bays WHERE location_id = $id AND oversize = 1 AND date_removed = 0
         ";
@@ -77,18 +104,24 @@ class Location extends Model{
         $res = $db->queryRow($q);
         //echo "<pre>",print_r($res),"</pre>"; die();
         return ( !empty($res) );
+        */
+        $q = "
+            SELECT * FROM {$this->table} WHERE id = $id AND oversize = 1
+        ";
+        $res = $db->queryRow($q);
+        return ( !empty($res) );
     }
 
-    public function getLocationUsage()
+    public function getLocationUsage($active = 1)
     {
         $db = Database::openConnection();
         $query = "
-            SELECT l.id, l.location, cb.oversize, il.qty, i.name, i.sku, c.client_name
+            SELECT l.id, l.location, l.oversize, il.qty, i.name, i.sku, c.client_name
             FROM locations l
             JOIN items_locations il ON l.id = il.location_id
             JOIN items i ON i.id = il.item_id
             JOIN clients c ON i.client_id = c.id
-            LEFT JOIN clients_bays cb ON cb.location_id = il.location_id AND cb.date_removed = 0 AND cb.client_id = c.id
+            WHERE l.active = $active
             ORDER BY l.location
         ";
 
@@ -150,7 +183,7 @@ class Location extends Model{
         $updater = $db->queryValue('items_locations', array('item_id' => $data['subtract_product_id'], 'location_id' => $data['subtract_from_location']));
         //die('updatr :'.$updater);
         //return;
-        if(isset($data['qc_stock']))
+        if(isset($data['sub_qc_stock']))
         {
             $db->query("UPDATE items_locations SET qty = qty - {$data['qty_subtract']}, qc_count = qc_count - {$data['qty_subtract']} WHERE id = $updater");
         }
@@ -587,8 +620,8 @@ class Location extends Model{
         $q = "
           SELECT id, location
           FROM locations
-          WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations) AND tray = 0
-          ORDER BY location + 0
+          WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations) AND tray = 0 AND active = 1
+          ORDER BY location
         ";
         return $db->queryData($q);
     }
@@ -674,6 +707,8 @@ class Location extends Model{
             $vals['multi_sku'] = 1;
         if(isset($data['trays']))
             $vals['tray'] = 1;
+        if(isset($data['oversize']))
+            $vals['oversize'] = 1;
         $db->insertQuery('locations', $vals);
         return true;
     }
@@ -684,12 +719,15 @@ class Location extends Model{
         $vals = array(
             'location'  =>  $data['location'],
             'multi_sku' =>  0,
-            'tray'      =>  0
+            'tray'      =>  0,
+            'oversize'  =>  0
         );
         if($data['multisku'] == "true")
             $vals['multi_sku'] = 1;
         if($data['tray'] == "true")
             $vals['tray'] = 1;
+        if($data['oversize'] == "true")
+            $vals['oversize'] = 1;
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return true;
     }

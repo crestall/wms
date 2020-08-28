@@ -2,15 +2,15 @@
 $name = (empty(Form::value('name')))? $info['name'] : Form::value('name');
 ?>
 <div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <div class="row">
-        <div class="col-lg-12">
-            <h2>Update your profile</h2>
+    <div id="page_container" class="container-xl">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Update your profile</h2>
+            </div>
         </div>
-    </div>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-    <?php echo Form::displayError('general');?>
-    <div class="row">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php echo Form::displayError('general');?>
         <form id="profile_update" method="post" enctype="multipart/form-data" action="/form/procProfileUpdate">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
@@ -67,7 +67,7 @@ $name = (empty(Form::value('name')))? $info['name'] : Form::value('name');
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                    <button type="submit" class="btn btn-outline-secondary">Update Profile</button>
                 </div>
             </div>
         </form>

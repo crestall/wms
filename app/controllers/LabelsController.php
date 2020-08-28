@@ -17,6 +17,68 @@ class LabelsController extends Controller
         $this->Security->config("validateForm", false);
     }
 
+    public function directfreightLabels()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $single_order = (count($this->request->data['orders']) == 1);
+        $connotes = array();
+        foreach($this->request->data['orders'] as $id)
+        {
+            $od = $this->order->getOrderDetail($id);
+            $client = $this->client->getClientInfo($od['client_id']);
+            $connote = $od['consignment_id'];
+            $connotes[] = array('Connote' => $connote);
+            $order_id = $id;
+        }
+        $result = $this->directfreight->getLabels($connotes);
+        //echo  "<pre>",print_r($result),"</pre>";die();
+        $error = false;
+        $good_orders = array();
+        $bad_orders = array();
+        $url = false;
+        $error_message = "";
+        $client_id = $client['id'];
+        if($result['ResponseCode'] == 300)
+        {
+            $url = $result['LabelURL'];
+            foreach($result['ConnoteList'] as $connote)
+            {
+                $od = $this->order->getOrderByConId($connote['Connote']);
+                if($connote['ResponseCode'] == 200)
+                {
+                    $this->order->updateStatus($this->order->packed_id, $od['id']);
+                    $good_orders[] = $od['order_number'];
+                }
+                else
+                {
+                    $bad_orders[] = array(
+                        'order_number'      => $od['order_number'],
+                        'response_message'  => $connote['ResponseMessage']
+                    );
+                }
+            }
+        }
+        else
+        {
+            $error = true;
+            $error_message = $result['ResponseMessage'];
+        }
+        //render the page
+        Config::setJsConfig('curPage', "directfreight-labels");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'labels/directFreightLabels.php', [
+            'page_title'    => "Generating Direct Freight Labels For {$client['client_name']}",
+            'error'         => $error,
+            'error_message' => $error_message,
+            'good_orders'   => $good_orders,
+            'bad_orders'    => $bad_orders,
+            'url'           => $url,
+            'single_order'  => $single_order,
+            'client_id'     => $client_id,
+            'order_id'      => $order_id
+
+        ]);
+    }
+
     public function eparcelLabels()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();

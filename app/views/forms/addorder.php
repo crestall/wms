@@ -7,16 +7,21 @@ $postcode = Form::value('postcode');
 $country = Form::value('country');
 $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
 $idisp = "none";
+$form_disabled = empty(Form::value('submitted'));
 if(!empty(Form::value('items')))
     $idisp = "block";
 if($user_role == "client")
+{
     $idisp = "block";
+    $form_disabled = false;
+}
 $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') : 0;
+
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
 <?php echo Form::displayError('general');?>
 <?php //echo "<pre>",var_dump(Form::value('items')),"</pre>";?>
-<div class="row">
+
     <div class="col-lg-12">
         <form id="add_order" method="post" action="/form/procOrderAdd"  enctype="multipart/form-data" autocomplete="off">
             <div class="row">
@@ -28,9 +33,9 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo Session::get("client_id");?>" />
             <?php else:?>
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                     <div class="col-md-4">
-                        <select id="client_id" name="client_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                        <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                         <?php echo Form::displayError('client_id');?>
                     </div>
                 </div>
@@ -91,42 +96,23 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php endif;?>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group form-row">
                 <label class="col-md-3 col-form-label">Upload PDF Attachment</label>
                 <div class="col-md-4">
-                    <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" />
+                    <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" /> <br/>
                     <span class="inst">(if required) - use ctrl click to select multiple files</span>
                     <ul id="fileList"></ul>
                     <?php echo Form::displayError('invoice');?>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="express_post">Use Express Post</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="express_post" name="express_post" <?php if(!empty(Form::value('express_post'))) echo 'checked';?> />
-                        <label for="express_post"></label>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="express_post" name="express_post" <?php if(!empty(Form::value('express_post'))) echo 'checked';?> />
+                <label class="custom-control-label col-md-3" for="express_post">Use Express Post</label>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="b2b">Bulk Store Order</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="b2b" name="b2b" <?php if(!empty(Form::value('b2b'))) echo 'checked';?> />
-                        <label for="b2b"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="signature_req">Signature Required</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="signature_req" name="signature_req" />
-                        <label for="signature_req"></label>
-                        <span class="inst">Leaving unchecked will give an 'Authority to Leave'</span>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="signature_req" name="signature_req" <?php if(!empty(Form::value('signature_req'))) echo 'checked';?> />
+                <label class="custom-control-label col-md-3" for="signature_req">Signature Required</label><br/>
+                <span class="inst">Leaving unchecked will give an 'Authority to Leave'</span>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Client Order Number</label>
@@ -181,7 +167,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 col-form-label">3PLPLUS Instructions</label>
+                <label class="col-md-3 col-form-label">FSG Instructions</label>
                 <div class="col-md-4">
                     <textarea class="form-control" name="3pl_comments" id="3pl_comments"><?php echo Form::value('3pl_comments');?></textarea>
                     <span class="inst">Instructions for the pickers and packers</span>
@@ -190,13 +176,13 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
             <input type="hidden" name="selected_items" id="selected_items" />
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+            <input type="hidden" name="submitted" value="1" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Add Order</button>
+                    <button type="submit" class="btn btn-outline-secondary" id="submitter" <?php if($form_disabled) echo "disabled";?>>Add This Order</button>
                 </div>
             </div>
         </form>
     </div>
 
-</div>

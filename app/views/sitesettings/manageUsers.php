@@ -2,62 +2,62 @@
 
 ?>
 <div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <div class="row">
-        <div class="col-lg-4"><p><a href="/user/add-user" class="btn btn-primary">Add New User</a></p></div>
-        <div class="col-lg-4"><p><a href="/site-settings/manage-users/active=1" class="btn btn-success">View Only Active Users</a></p></div>
-        <div class="col-lg-4"><p><a href="/site-settings/manage-users/active=0" class="btn btn-danger">View Only Inactive Users</a></p></div>
-        <div class="col-lg-4"></div>
-    </div>
-    <div id="waiting" class="row">
-        <div class="col-lg-12 text-center">
-            <h2>Drawing Table..</h2>
-            <p>May take a few moments</p>
-            <img class='loading' src='/images/preloader.gif' alt='loading...' />
+    <div id="page_container" class="container-xl">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div class="row">
+            <div class="col-lg-3 col-md-6"><p><a href="/user/add-user" class="btn btn-outline-fsg">Add New User</a></p></div>
+            <div class="col-lg-3 col-md-6"><p><a href="/site-settings/manage-users/" class="btn btn-outline-success">View Only Active Users</a></p></div>
+            <div class="col-lg-3 col-md-6"><p><a href="/site-settings/manage-users/active=0" class="btn btn-outline-danger">View Only Inactive Users</a></p></div>
+            <div class="col-lg-3 col-md-6"><p><a href="/site-settings/manage-users/active=-1" class="btn btn-outline-warning">View All Users</a></p></div>
         </div>
-    </div>
-    <div class="row" id="table_holder" style="display:none">
-        <div class="col-lg-12 row dataTables_filter form-group">
-            Search Users <input type="search" placeholder="" id="mySearch" class="form-control input-md">
-        </div>
-        <div class="col-lg-12 row">
+        <div class="row">
             <?php foreach($user_roles as $ur):
                 if(!$this->controller->user->canManageRole($ur['id']))
                     continue;
-                $name = ucwords($ur['name']);?>
-                <table class="user_list_table table-striped table-hover" width="100%">
-                    <thead>
-                        <tr>
-                            <th colspan=4>
-                                <h2><?php echo $name;?> Users</h2>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>User</th>
-                            <th>Client Name</th>
-                            <th>Email</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1;
-                        foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
-                            <tr>
-                                <td data-label="User"><img src="/images/profile_pictures/<?php echo $user['profile_picture'];?>" alt="profile image" class="img-thumbnail" style="width:75px" /> <?php echo $user['name'];?></td>
-                                <td data-label="Client Name"><?php echo $this->controller->client->getClientName($user['client_id']);?></td>
-                                <td data-label="Email"><?php echo $user['email'];?></td>
-                                <td>
-                                    <?php if($user['active'] > 0):?>
-                                        <p><a class="btn btn-danger deactivate" data-userid="<?php echo $user['id'];?>">Deactivate User</a> </p>
-                                    <?php else:?>
-                                        <p><a class="btn btn-success reactivate" data-userid="<?php echo $user['id'];?>">Reactivate User</a> </p>
-                                    <?php endif;?>
-                                    <p><a class="btn btn-primary" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a></p>
-                                </td>
-                            </tr>
-                        <?php endforeach;?>
-                    </tbody>
-                </table>
+                $name = ucwords($ur['name']);
+                $class_name = strtolower($ur['name']."_user");
+                $id_name = strtolower($ur['name']."_user_search");?>
+                <div class="col-md-12 col-lg-6 mb-3">
+                    <div class="card h-100 border-secondary order-card">
+                        <div class="card-header bg-secondary text-white">
+                            <?php echo $name;?> Users
+                        </div>
+                        <div class="card-body">
+                            <div class="row border-bottom border-secondary mb-3">
+                                <div class="col-9 mb-3 ml-sm-4">
+                                    <input class="form-control form-control-sm user_search" type="text" id="<?php echo $id_name;?>" placeholder="Filter By Name" />
+                                </div>
+                            </div>
+                            <?php foreach($this->controller->user->getAllUsersByRoleID($ur['id'], $active) as $user):?>
+                                <div class="row border-bottom border-secondary border-bottom-dashed mb-3 <?php echo $class_name;?>">
+                                    <div class="col-8">
+                                        <div class="row">
+                                            <label class="col-3">Name</label>
+                                            <div class="col-9"><?php echo $user['name'];?></div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-3">Client Name</label>
+                                            <div class="col-9"><?php echo $this->controller->client->getClientName($user['client_id']);?></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <p>
+                                        <?php if($user['active'] > 0):?>
+                                            <a class="btn btn-sm btn-outline-danger deactivate" data-userid="<?php echo $user['id'];?>">Deactivate User</a>
+                                        <?php else:?>
+                                            <a class="btn btn-sm btn-outline-success reactivate" data-userid="<?php echo $user['id'];?>">Reactivate User</a>
+                                        <?php endif;?>
+                                        </p>
+                                        <a class="btn btn-sm btn-outline-secondary mb-3" href="/user/edit-user-profile/user=<?php echo $user['id'];?>">Edit Profile</a>
+                                    </div>
+                                </div>
+                            <?php endforeach;?>
+                        </div>
+                        <div class="card-footer">
+
+                        </div>
+                    </div>
+                </div>
             <?php endforeach;?>
         </div>
     </div>

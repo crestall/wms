@@ -343,5 +343,28 @@ class Controller {
         }
     }
 
+    /*******************************************************************
+    ** Display the index page for the child classes
+    ********************************************************************/
+    public function displayIndex($child)
+    {
+        $app = new App();
+        $names = Utility::splitCamelCase($child);
+        array_pop($names);
+        if(!$child || empty($child) || !$app::isControllerValid($child))
+        {
+            return (new ErrorsController())->error(404)->send();
+        }
+        $page_name = implode(" ",$names);
+        $curPage = strtolower(str_replace(" ", "-", $page_name));
+        //render the page
+        //Config::setJsConfig('curPage', $curPage);
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/index/", Config::get('VIEWS_PATH') . 'index/controllerIndex.php', [
+            'pht'           => ": ".$page_name,
+            'page_title'    => $page_name." Pages",
+            'page_name'     => $page_name
+        ]);
+    }
+
     //abstract function createOrderItemsArray(array $items, $order_id = 0);
 }

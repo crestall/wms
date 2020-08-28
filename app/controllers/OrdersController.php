@@ -15,115 +15,21 @@ class OrdersController extends Controller
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
     }
 
-    public function addSerials()
+    public function index()
     {
-        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
-        $order_id = $order_number = 0;
-        $od = $items = array();
-        if(!empty($this->request->params['args']))
-        {
-            if(isset($this->request->params['args']['order']))
-            {
-                $order_id = $this->request->params['args']['order'];
-                $od = $this->order->getOrderDetail($order_id);
-                $items = $this->order->getItemsForOrderNoLocations($order_id);
-                $order_number = $od['order_number'];
-            }
-        }
-
-        //render the page
-        Config::setJsConfig('curPage', "add-serials");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addSerials.php', [
-            'page_title'    =>  'Add Serial Numbers to Order',
-            'order_id'      =>  $order_id,
-            'order_number'  =>  $order_number,
-            'od'            =>  $od,
-            'items'         =>  $items
-        ]);
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'orders-index');
+        parent::displayIndex(get_class());
     }
 
-    public function manageSwatches()
+    public function bookDirectFreightCollection()
     {
-        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
-        $client_id = 59;
-        $client_name = "NOA Sleep";
-        $state = "";
-        $posted = 0;
-        $ff = "Not Posted";
-        if(!empty($this->request->params['args']))
-        {
-            if(isset($this->request->params['args']['client']))
-            {
-                $client_id = $this->request->params['args']['client'];
-                $client_name = $this->client->getClientName($client_id);
-            }
-            if(isset($this->request->params['args']['posted']))
-            {
-                $posted = $this->request->params['args']['fulfilled'];
-                $ff = "Posted";
-            }
-            if(isset($this->request->params['args']['state']))
-            {
-                $state = $this->request->params['args']['state'];
-            }
-        }
-        $page_title = "$ff Swatches For $client_name";
-        $swatches = $this->swatch->getAllSwatches($client_id, $posted, $state);
         //render the page
-        Config::setJsConfig('curPage', "manage-swatches");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/manageSwatches.php', [
-            'page_title'    =>  $page_title,
-            'client_name'   =>  $client_name,
-            'client_id'     =>  $client_id,
-            'swatches'      =>  $swatches,
-            'posted'        =>  $posted,
-            'state'         =>  $state
-        ]);
-
-
-
-    }
-
-    public function recordPickup()
-    {
-        $client_id = 0;
-        $client_name = "";
-        $page_title = "Record a Pickup";
-        if(!empty($this->request->params['args']))
-        {
-            if(isset($this->request->params['args']['client']))
-            {
-                $client_id = $this->request->params['args']['client'];
-                $client_name = $this->client->getClientName($client_id);
-                $page_title .= " for $client_name";
-            }
-        }
-        Config::setJsConfig('curPage', "record-pickup");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/recordPickup.php',[
-            'page_title'    =>  $page_title,
-            'client_id'     =>  $client_id,
-            'client_name'   =>  $client_name
-        ]);
-    }
-
-    public function bookPickup()
-    {
-        $client = $this->client->getClientInfo(Session::getUserClientId());
-        //render the page
-        Config::setJsConfig('curPage', "book-pickup");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/bookPickup.php', [
-            'page_title'    =>  "Book A Pickup",
-            'client'        => $client
-        ]);
-    }
-
-    public function orderCSVUpdate()
-    {
-
-        //render the page
-        Config::setJsConfig('curPage', "order-csv-update");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/csvUpload.php', [
-            'page_title'    =>  "CSV Update"
+        Config::setJsConfig('curPage', "book-direct-freight-collection");
+        Config::set('curPage', "book-direct-freight-collection");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/bookDF.php', [
+            'page_title'        =>  "Book Direct Freight Collection",
+            'pht'               =>  ": Book DF Collections"
         ]);
     }
 
@@ -132,208 +38,13 @@ class OrdersController extends Controller
 
         //render the page
         Config::setJsConfig('curPage', "order-importing");
+        Config::set('curPage', "order-importing");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderImporting.php', [
             'page_title'        =>  "Import Orders From External Sites",
-            'bb_clientid'       =>  $this->client->getClientId("THE BIG BOTTLE CO"),
+            'pht'               =>  ": Import Orders From Other Sites",
             'nuchev_clientid'   =>  $this->client->getClientId("NUCHEV"),
-            'oneplate_clientid' =>  $this->client->getClientId("One Plate"),
-            'ttau_clientid'     =>  $this->client->getClientId("Two T Australia")
+            'oneplate_clientid' =>  $this->client->getClientId("One Plate")
         ]);
-    }
-
-    public function importBBOrder()
-    {
-        //echo "<pre>",print_r($_POST),"</pre>";die();
-        $bberror = false;
-        if(!$response = $this->woocommerce->getBBOrder($this->request->data['bbwoocommerce_id']))
-        {
-            $bberror = true;
-            $feedback = "<h2><i class='far fa-times-circle'></i>No Order ID Supplied</h2>";
-            $feedback .= "</p>The order ID was not passed to the form processor correctly</p>";
-        }
-        else
-        {
-            if($response['error'])
-            {
-                $bberror = true;
-                $feedback = "<h2><i class='far fa-times-circle'></i>No Order Found With The Supplied ID</h2>";
-                $feedback .= "<p>The order you want could not be found</p>";
-                $feedback .= "<p>Please recheck the ID and try again</p>";
-                Session::set('value_array', $_POST);
-                Session::set('error_array', Form::getErrorArray());
-            }
-            elseif($response['error_count'] > 0)
-            {
-                $feedback = "<h2><i class='far fa-times-circle'></i>This Order Could Not Be Imported</h2>";
-                $feedback .= "<p>The error response is listed below</p>";
-                $feedback .= $response['error_string'];
-                Session::set('value_array', $_POST);
-                Session::set('error_array', Form::getErrorArray());
-            }
-            elseif($response['import_error'])
-            {
-                $bberror = true;
-                $feedback = "<h2><i class='far fa-times-circle'></i>This Order Could Not Be Imported</h2>";
-                $feedback .= "<p>The error response is listed below</p>";
-                $feedback .= "<p>".$response['import_error_string']."</p>";
-                Session::set('value_array', $_POST);
-                Session::set('error_array', Form::getErrorArray());
-            }
-            else
-            {
-                $feedback = "<h2><i class='far fa-check-circle'></i>That Order Has Been Imported</h2>";
-                $feedback .= "<p>Please check the order list for any duplicates</p>";
-            }
-        }
-        Session::set('feedback', $feedback);
-        Session::set('bberror', $bberror);
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
-    }
-
-    public function importNoaOrder()
-    {
-        //echo "<pre>",print_r($_POST),"</pre>";die();
-        $bberror = false;
-        if(!$response = $this->woocommerce->getNoaOrder($this->request->data['noawoocommerce_id']))
-        {
-            $bberror = true;
-            $feedback = "<h2><i class='far fa-times-circle'></i>No Order ID Supplied</h2>";
-            $feedback .= "</p>The order ID was not passed to the form processor correctly</p>";
-        }
-        else
-        {
-            if($response['error'])
-            {
-                $bberror = true;
-                $feedback = "<h2><i class='far fa-times-circle'></i>No Order Found With The Supplied ID</h2>";
-                $feedback .= "<p>The order you want could not be found</p>";
-                $feedback .= "<p>Please recheck the ID and try again</p>";
-                Session::set('value_array', $_POST);
-                Session::set('error_array', Form::getErrorArray());
-            }
-            elseif($response['error_count'] > 0)
-            {
-                $feedback = "<h2><i class='far fa-times-circle'></i>This Order Could Not Be Imported</h2>";
-                $feedback .= "<p>The error response is listed below</p>";
-                $feedback .= $response['error_string'];
-                Session::set('value_array', $_POST);
-                Session::set('error_array', Form::getErrorArray());
-            }
-            elseif($response['import_error'])
-            {
-                $bberror = true;
-                $feedback = "<h2><i class='far fa-times-circle'></i>This Order Could Not Be Imported</h2>";
-                $feedback .= "<p>The error response is listed below</p>";
-                $feedback .= "<p>".$response['import_error_string']."</p>";
-                Session::set('value_array', $_POST);
-                Session::set('error_array', Form::getErrorArray());
-            }
-            else
-            {
-                $feedback = "<h2><i class='far fa-check-circle'></i>That Order Has Been Imported</h2>";
-                $feedback .= "<p>Please check the order list for any duplicates</p>";
-            }
-        }
-        Session::set('feedback', $feedback);
-        Session::set('bberror', $bberror);
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
-    }
-
-    public function importFEightOrders()
-    {
-        //$response = $this->woocommerce->getBBOrders();
-       $response = $this->emailordersparser->getFigure8Orders();
-       $feedback = "<h2><i class='far fa-check-circle'></i>Figure 8 Orders Imported</h2>";
-       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
-       /* */
-       if($response['error_count'] > 0)
-       {
-           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
-           $feedback .= "<p>The error response is listed below</p>";
-           $feedback .= $response['error_string'];
-       }
-
-       Session::set('feedback', $feedback);
-       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
-    }
-
-    public function importNuchevSamples()
-    {
-        //$response = $this->woocommerce->getBBOrders();
-       $response = $this->emailordersparser->getNuchevSamples();
-       $feedback = "<h2><i class='far fa-check-circle'></i>Nuchev Samples Imported</h2>";
-       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
-       /* */
-       if($response['error_count'] > 0)
-       {
-           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
-           $feedback .= "<p>The error response is listed below</p>";
-           $feedback .= $response['error_string'];
-       }
-
-       Session::set('feedback', $feedback);
-       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
-    }
-
-    public function importBBOrders()
-    {
-       $response = $this->woocommerce->getBBOrders();
-       $feedback = "<h2><i class='far fa-check-circle'></i>Big Bottle Orders Imported</h2>";
-       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
-       if($response['error_count'] > 0)
-       {
-           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
-           $feedback .= "<p>The error response is listed below</p>";
-           $feedback .= $response['error_string'];
-       }
-       Session::set('feedback', $feedback);
-       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
-    }
-
-    public function importTeamTimbuktuOrders()
-    {
-        $response = $this->shopify->getTeamTimbuktuOrders();
-        echo "Response<pre>",print_r($response),"</pre>";
-       $feedback = "<h2><i class='far fa-check-circle'></i>Team Timbuktu Orders Imported</h2>";
-       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
-       if($response['error_count'] > 0)
-       {
-           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
-           $feedback .= "<p>The error response is listed below</p>";
-           $feedback .= $response['error_string'];
-       }
-       Session::set('feedback', $feedback);
-       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
-    }
-
-    public function importTTAUOrders()
-    {
-       $response = $this->woocommerce->getTTOrders();
-       $feedback = "<h2><i class='far fa-check-circle'></i>TT Aust Orders Imported</h2>";
-       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
-       if($response['error_count'] > 0)
-       {
-           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
-           $feedback .= "<p>The error response is listed below</p>";
-           $feedback .= $response['error_string'];
-       }
-       Session::set('feedback', $feedback);
-       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
-    }
-
-    public function importNaturalDistillingOrders()
-    {
-       $response = $this->squarespace->getNatutralDistillingOrders();
-       $feedback = "<h2><i class='far fa-check-circle'></i>Natural Distilling Co Orders Imported</h2>";
-       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
-       if($response['error_count'] > 0)
-       {
-           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
-           $feedback .= "<p>The error response is listed below</p>";
-           $feedback .= $response['error_string'];
-       }
-       Session::set('feedback', $feedback);
-       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
     }
 
     public function importNuchevOrder()
@@ -482,8 +193,10 @@ class OrdersController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "order-dispatching");
+         Config::set('curPage', "order-dispatching");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderDispatching.php', [
-            'page_title'    =>  "Order Dispatching"
+            'page_title'    =>  "Order Dispatching",
+            'pht'           =>  ": Order Dispatching"
         ]);
     }
 
@@ -497,8 +210,10 @@ class OrdersController extends Controller
         $client = $this->client->getClientInfo(Session::getUserClientId());
         $orders = $this->order->getOrdersForClient(Session::getUserClientId(), $from, $to);
         //render the page
-        Config::setJsConfig('curPage', "clients-orders");
+        Config::setJsConfig('curPage', "client-orders");
+        Config::set('curPage', "client-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/clientOrders.php', [
+            'pht'           =>  ": Orders-".$client['client_name'],
             'page_title'    =>  "Orders For ".$client['client_name'],
             'client'        =>  $client,
             'orders'        =>  $orders,
@@ -514,30 +229,22 @@ class OrdersController extends Controller
             $error = false;
             $order_id = $this->request->params['args']['order'];
             $order = $this->order->getOrderDetail($order_id);
-            $table = "orders";
-        }
-        elseif(isset($this->request->params['args']['swatch']))
-        {
-            $error = false;
-            $order_id = $this->request->params['args']['swatch'];
-            $order = $this->swatch->getSwatchDetail($order_id);
-            $table = "swatches";
         }
         else
         {
             $error = true;
             $order_id = 0;
             $order = array();
-            $table = "";
         }
         //render the page
         Config::setJsConfig('curPage', "address-update");
+        Config::set('curPage', "address-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addressUpdate.php', [
+            'pht'           =>  ": Update Address",
             'page_title'    =>  "Update Address",
             'order_id'      =>  $order_id,
             'order'         =>  $order,
             'error'         =>  $error,
-            'table'         =>  $table
         ]);
     }
 
@@ -546,9 +253,11 @@ class OrdersController extends Controller
         $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         //render the page
         Config::setJsConfig('curPage', "add-order");
+        Config::set('curPage', "add-order");
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/addorder.php");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addOrder.php', [
             'page_title'    =>  "Add Order",
+            'pht'           =>  ": Add an Order",
             'form'          =>  $form
         ]);
     }
@@ -578,7 +287,9 @@ class OrdersController extends Controller
         //echo "<pre>",print_r($order_items),"</pre>";
         //render the page
         Config::setJsConfig('curPage', "items-update");
+        Config::set('curPage', "items-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/itemsUpdate.php', [
+            'pht'           =>  ": Update Items For Order",
             'page_title'    =>  "Update Items for Order",
             'order_id'      =>  $order_id,
             'order'         =>  $order,
@@ -591,8 +302,10 @@ class OrdersController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "order-packing");
+        Config::set('curPage', "order-packing");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderPacking.php', [
-            'page_title'    =>  "Order Packing"
+            'page_title'    =>  "Order Packing",
+            'pht'           =>  ": Order Packing"
         ]);
     }
 
@@ -600,8 +313,10 @@ class OrdersController extends Controller
     {
         //render the page
         Config::setJsConfig('curPage', "order-picking");
+        Config::set('curPage', "order-picking");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderPicking.php', [
-            'page_title'    =>  "Order Picking"
+            'page_title'    =>  "Order Picking",
+            'pht'           =>  ": Order Picking"
         ]);
     }
 
@@ -616,8 +331,10 @@ class OrdersController extends Controller
         ]);
         //render the page
         Config::setJsConfig('curPage', "order-search");
+        Config::set('curPage', "order-search");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderSearch.php', [
             'page_title'    =>  "Order Search",
+            'pht'           =>  ": Order Search",
             'form'          =>  $form
         ]);
     }
@@ -647,8 +364,10 @@ class OrdersController extends Controller
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/ordersearch.php",$args);
         //render the page
         Config::setJsConfig('curPage', "order-search-results");
+        Config::set('curPage', "order-search-results");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderSearchResults.php', [
             'page_title'    =>  "Search Results",
+            'pht'           =>  ": Oder Search Results",
             'form'          =>  $form,
             'count'         =>  $count,
             's'             =>  $s,
@@ -659,13 +378,16 @@ class OrdersController extends Controller
 
     public function orderSummaries()
     {
-        $summaries = $this->order->getEparcelSummaries(isset($this->request->params['args']['all']));
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from']: strtotime("7 days ago");
+        $summaries = $this->order->getEparcelSummaries($from);
         //render the page
         Config::setJsConfig('curPage', "order-summaries");
+        Config::set('curPage', "order-summaries");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderSummaries.php', [
             'page_title'    =>  "eParcel Order Summaries",
+            'pht'           =>  ": eParcel Order Summaries",
             'summaries'     =>  $summaries,
-            'all'           =>  isset($this->request->params['args']['all'])
+            'from'          =>  $from
         ]);
     }
 
@@ -705,8 +427,10 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "order-edit");
+        Config::set('curPage', "order-edit");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderEdit.php', [
             'page_title'        =>  "Edit an Order",
+            'pht'               =>  ": Edit Order",
             'order_id'          =>  $order_id,
             'order'             =>  $order,
             'error'             =>  $error,
@@ -734,7 +458,7 @@ class OrdersController extends Controller
             $packages = array();
             $client_name = "";
             $truck_id = $local_id = -5;
-            $store_order = false;
+            $address_string = "";
             $eb = "";
         }
         else
@@ -754,7 +478,6 @@ class OrdersController extends Controller
             $address_string .= " ".$order['state'];
             $address_string .= " ".$order['postcode'];
             $address_string .= " ".$order['country'];
-            $store_order = $order['store_order'] > 0;
             $eb = $this->user->getUserName( $order['entered_by'] );
             if(empty($eb))
             {
@@ -763,8 +486,10 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "order-update");
+        Config::set('curPage', "order-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderUpdate.php', [
             'page_title'        =>  "Update an Order",
+            'pht'            =>  ": Update Order",
             'order_id'          =>  $order_id,
             'order'             =>  $order,
             'error'             =>  $error,
@@ -774,7 +499,6 @@ class OrdersController extends Controller
             'truck_id'          =>  $truck_id,
             'local_id'          =>  $local_id,
             'address_string'    =>  $address_string,
-            'store_order'       =>  $store_order,
             'entered_by'        =>  $eb
         ]);
     }
@@ -799,22 +523,18 @@ class OrdersController extends Controller
                     $tracking = $this->$eparcel->GetTracking($order['consignment_id']);
                     //echo "eParcel<pre>",print_r($tracking),"</pre>";die();
                 }
-                elseif($courier == "Hunters")
+                elseif($courier == "Direct Freight")
                 {
-                    $tracking = $this->Hunters3KG->GetTracking($order['consignment_id']);
-                    //echo "Hunters<pre>",print_r($tracking),"</pre>";die();
-                }
-                elseif($courier == "HuntersPLU")
-                {
-                    $tracking = $this->HuntersPLU->GetTracking($order['consignment_id']);
-                    //echo "HuntersPLU<pre>",print_r($tracking),"</pre>";die();
+                    $tracking = $this->directfreight->trackConsignment($order['consignment_id']);
                 }
             }
         }
         //render the page
         Config::setJsConfig('curPage', "order-tracking");
+        Config::set('curPage', "order-tracking");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderTracking.php', [
-            'page_title'    =>  "Order Tracking",
+            'page_title'    =>  "Tracking and Details for ".$order['order_number'],
+            'pht'           =>  ": Order Tracking",
             'order_id'      =>  $order_id,
             'order'         =>  $order,
             'courier'       =>  $courier,
@@ -842,8 +562,10 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "order-detail");
+        Config::set('curPage', "order-detail");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderDetail.php', [
             'page_title'    =>  "Order Detail",
+            'pht'           =>  ": Order Detail",
             'order_id'      =>  $order_id,
             'order'         =>  $order,
             'courier'       =>  $courier,
@@ -855,9 +577,11 @@ class OrdersController extends Controller
     public function addBulkOrders()
     {
         //render the page
-        Config::setJsConfig('curPage', "bulk-upload-orders");
+        Config::setJsConfig('curPage', "add-bulk-orders");
+        Config::set('curPage', "add-bulk-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/addBulkOrders.php', [
-            'page_title'    =>  "Import/Bulk Upload Orders"
+            'page_title'    =>  "Import/Bulk Upload Orders",
+            'pht'           =>  ": Bulk Import Orders",
         ]);
     }
 
@@ -865,9 +589,11 @@ class OrdersController extends Controller
     {
         //For Clients
         //render the page
-        Config::setJsConfig('curPage', "import-orders");
+        Config::setJsConfig('curPage', "bulk-upload-orders");
+        Config::set('curPage', "bulk-upload-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/importOrders.php', [
-            'page_title'    =>  "Import/Bulk Upload Orders"
+            'page_title'    =>  "Import/Bulk Upload Orders",
+            'pht'           =>  ": Upload Orders",
         ]);
     }
 
@@ -906,82 +632,16 @@ class OrdersController extends Controller
         $orders = $this->order->getAllOrders($client_id, $courier_id, $fulfilled, 0, $state);
         //render the page
         Config::setJsConfig('curPage', "view-orders");
+        Config::set('curPage', "view-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/viewOrders.php', [
             'page_title'    =>  $page_title,
+            'pht'           =>  ": View Orders",
             'client_name'   =>  $client_name,
             'client_id'     =>  $client_id,
             'courier_id'    =>  $courier_id,
             'orders'        =>  $orders,
             'fulfilled'     =>  $fulfilled,
             'state'         =>  $state
-        ]);
-    }
-
-    public function viewSolarorders()
-    {
-        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
-        $order_type = "All Types";
-        $type_id = 0;
-        $ff = "Unfulfilled";
-        $fulfilled = 0;
-        if(!empty($this->request->params['args']))
-        {
-            if(isset($this->request->params['args']['type']))
-            {
-                $type_id = $this->request->params['args']['type'];
-                $order_type = $this->solarordertype->getSolarOrderType($type_id);
-            }
-            if(isset($this->request->params['args']['fulfilled']))
-            {
-                $fulfilled = $this->request->params['args']['fulfilled'];
-                $ff = "Fulfilled";
-            }
-        }
-        $page_title = "$ff Orders For $order_type";
-
-        $orders = $this->solarorder->getSolarAllOrders($type_id, $fulfilled);
-        //render the page
-        Config::setJsConfig('curPage', "view-solarorders");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/viewSolarOrders.php', [
-            'page_title'    =>  $page_title,
-            'order_type'    =>  $order_type,
-            'type_id'       =>  $type_id,
-            'orders'        =>  $orders,
-            'fulfilled'     =>  $fulfilled
-        ]);
-    }
-
-    public function viewStoreorders()
-    {
-        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
-        $client_name = "All Clients";
-        $client_id = 0;
-        $fulfilled = 0;
-        $ff = "Unfulfilled";
-        if(!empty($this->request->params['args']))
-        {
-            if(isset($this->request->params['args']['client']))
-            {
-                $client_id = $this->request->params['args']['client'];
-                $client_name = $this->client->getClientName($client_id);
-            }
-            if(isset($this->request->params['args']['fulfilled']))
-            {
-                $fulfilled = $this->request->params['args']['fulfilled'];
-                $ff = "Fulfilled";
-            }
-        }
-        $page_title = "$ff Store Orders For $client_name";
-        //$orders = $this->order->getUnfulfilledOrders($client_id, -1, 1);
-        $orders = $this->order->getAllOrders($client_id, -1, $fulfilled, 1);
-        //render the page
-        Config::setJsConfig('curPage', "view-storeorders");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/viewStoreOrders.php', [
-            'page_title'    =>  $page_title,
-            'client_name'   =>  $client_name,
-            'client_id'     =>  $client_id,
-            'fulfilled'     => $fulfilled,
-            'orders'        =>  $orders
         ]);
     }
 
@@ -1021,6 +681,7 @@ class OrdersController extends Controller
         }
         //render the page
         Config::setJsConfig('curPage', "pickup-update");
+        Config::set('curPage', "pickup-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/pickupUpdate.php', [
             'page_title'        =>  "Update a Pickup",
             'pickup_id'         =>  $pickup_id,
@@ -1034,30 +695,6 @@ class OrdersController extends Controller
         ]);
     }
 
-    public function viewPickups()
-    {
-        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
-        $client_name = "All Clients";
-        $client_id = 0;
-        if(!empty($this->request->params['args']))
-        {
-            if(isset($this->request->params['args']['client']))
-            {
-                $client_id = $this->request->params['args']['client'];
-                $client_name = $this->client->getClientName($client_id);
-            }
-        }
-        $pickups = $this->pickup->getPickups($client_id);
-        //render the page
-        Config::setJsConfig('curPage', "view-pickups");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/viewPickups.php', [
-            'page_title'    =>  "View Pickups",
-            'client_name'   =>  $client_name,
-            'client_id'     =>  $client_id,
-            'pickups'       =>  $pickups
-        ]);
-    }
-
     public function isAuthorized(){
         $action = $this->request->param('action');
         //$role = Session::getUserRole();
@@ -1067,9 +704,9 @@ class OrdersController extends Controller
         //only for admin
         Permission::allow('admin', $resource, "*");
         Permission::allow('super admin', $resource, "*");
-        Permission::allow('md admin', $resource, "*");
         //warhouse users
         Permission::allow('warehouse', $resource, array(
+            "index",
             "orderDispatching",
             "orderPacking",
             "orderPicking",
@@ -1084,6 +721,7 @@ class OrdersController extends Controller
         ));
         //only for clients
         $allowed_resources = array(
+            "index",
             "addOrder",
             "addOrderTest",
             "bookPickup",
@@ -1092,15 +730,6 @@ class OrdersController extends Controller
             "orderTracking",
             "orderDetail",
         );
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            "addSolarOrder",
-            "addOriginOrder",
-            "addServiceJob",
-            "addOriginServiceJob",
-            "addTLJServiceJob",
-            "addTLJOrder"
-        ));
         Permission::allow('client', $resource, $allowed_resources);
         return Permission::check($role, $resource, $action);
     }

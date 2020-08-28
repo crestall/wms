@@ -94,7 +94,7 @@
                         }
                     }
                 },
-                'register-newstock': {
+                'register-new-stock': {
                     init: function(){
                         $('form#register_new_stock').submit(function(e){
                             if($(this).valid())
@@ -107,17 +107,20 @@
                 'add-subtract-stock' : {
                     init: function(){
                         actions.common['add-to-receiving']();
-                        $('form#add_to_stock').submit(function(e){
-                            if($(this).valid())
+                        $('button#add_stock_submitter').click(function(e){
+                            e.preventDefault();
+                            if($('form#add_to_stock').valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Stock...</h2></div>' });
+                                $('form#add_to_stock').submit();
                             }
                         });
-
-                        $('form#subtract_from_stock').submit(function(e){
-                            if($(this).valid())
+                        $('button#subtract_stock_submitter').click(function(e){
+                            e.preventDefault();
+                            if($('form#subtract_from_stock').valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Removing Stock...</h2></div>' });
+                                $('form#subtract_from_stock').submit();
                             }
                         });
                     }
@@ -144,21 +147,27 @@
                                 $('#subtract_from_location').rules('remove');
                             }
                         });
-
-                        $('form#quality_control').submit(function(e){
-                            if($(this).valid())
+                        $('button#qc_submitter').click(function(e){
+                            e.preventDefault();
+                            if($('form#quality_control').valid())
                             {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating QC Status...</h2></div>' });
+                                $('form#quality_control').submit();
                             }
+                        });
+                        $('select#add_to_location, select#subtract_from_location').change(function(e){
+                            $(this).valid();
                         });
                     }
                 },
                 'move-stock': {
                     init: function(){
-                        $('form#move_stock').submit(function(e){
-                            if($(this).valid())
+                        $('button#move_stock_submitter').click(function(e){
+                            e.preventDefault();
+                            if($('form#move_stock').valid())
                             {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Moving Stock...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Moving Stock...</h2></div>' });
+                                $('form#move_stock').submit();
                             }
                         });
                         $('select#move_to_location, select#move_from_location').change(function(e){
@@ -404,7 +413,10 @@
                                     //$('#available').focus();
                                     actions.common['add-to-receiving']();
                                     $('.selectpicker').selectpicker('refresh');
-
+                                    $('select#preferred_pick_location_id').change(function(e){
+                                        var val = this.value
+                                        $('select#add_to_location').selectpicker('val', this.value);
+                                    });
                                     $('#add_to_stock').validate({
                                         rules:{
                                             qty:{
@@ -451,26 +463,6 @@
                                 				remote: 'This barcode is already in use. Barcodes must be unique'
                                 			}
                                         }
-                                    });
-                                    $('#palletized').click(function(e){
-                                        $("#per_pallet_holder").slideToggle('slow');
-                                    });
-
-                                    $('#package_type').change(function(e){
-                                        var html = "";
-                                        $("option:selected", this).each(function(){
-                                            if($(this).data('multiples') == 1)
-                                            {
-                                                var count = ($( "#pt_count_"+$(this).val() ).val())? $( "#pt_count_"+$(this).val() ).val(): "" ;
-                                                html += "<div class='form-group row'>";
-                                                html += "<label class='col-md-3 col-form-label'><sup><small><i class='fas fa-asterisk text-danger'></i></small></sup> Number in "+$(this).text()+"</label>";
-                                                html += "<div class='col-md-4'>";
-                                                html += "<input type='text' class='form-control required number' name='number_in_"+$(this).val()+"' id='number_in_"+$(this).val()+"' value='"+count+"' />";
-                                                html += "</div>";
-                                                html += "</div>";
-                                            }
-                                        });
-                                        $("#type_holder").html(html);
                                     });
                                 });
                             }
@@ -613,7 +605,8 @@
                                 else
                                 {
                                     //var ep = new RegExp("RJM\d{7}|HKM\d{7}|S2U\d{7}|F24\d{7}|F25\d{7}|XTS\d{7}", "i");
-                                    var ep = /RJM\d{7}|HKM\d{7}|S2U\d{7}|F24\d{7}|F25\d{7}|XTS\d{7}|LH\d{9}AU|CH\d{9}AU/i;
+                                    //var ep = /RJM\d{7}|HKM\d{7}|S2U\d{7}|F24\d{7}|F25\d{7}|XTS\d{7}|LH\d{9}AU|CH\d{9}AU/i;
+                                    var ep = /ZQD\d{7}|HKM\d{7}|S2U\d{7}|F24\d{7}|F25\d{7}|XTS\d{7}|LH\d{9}AU|CH\d{9}AU/i;
                                     //ep.lastIndex = 0;
                                     var conida = ep.exec(barcode);
                                     if(!conida)

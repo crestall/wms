@@ -7,71 +7,40 @@ foreach($order_items as $oi)
 $si_string = rtrim($si_string, ",");
 ?>
 <div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php if($error):?>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="errorbox">
-                    <div class="row">
-                        <div class="col-lg-2" style="font-size:96px">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="col-lg-6">
-                            <h2>No Order ID Supplied</h2>
-                            <p>No order was supplied to update</p>
-                            <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
-                        </div>
-                    </div>
+    <div id="page_container" class="container-xl">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <?php if($error):?>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_id.php");?>
+        <?php elseif(!$order || !count($order)):?>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_found.php");?>
+        <?php else:?>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-outline-secondary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
+                </div>
+                <div class="col text-right">
+                    <a class="btn btn-outline-secondary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
                 </div>
             </div>
-        </div>
-    <?php elseif(!$order || !count($order)):?>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="errorbox">
-                    <div class="row">
-                        <div class="col-lg-2" style="font-size:96px">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="col-lg-6">
-                            <h2>No Order Found</h2>
-                            <p>No order was found with that ID</p>
-                            <p><a href="/orders/view-orders">Please click here to view all orders to choose from</a></p>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-12 mb-3 mt-3">
+                    <h2>Updating Items For Order Number <?php echo $order['order_number'];?></h2>
                 </div>
             </div>
-        </div>
-    <?php else:?>
-        <div class="row">
-            <div class="col-lg-4">
-                <a class="btn btn-primary" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
-            </div>
-            <div class="col-lg-4">
-                <a class="btn btn-primary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>Updating Items For Order Number <?php echo $order['order_number'];?></h2>
-            </div>
-        </div>
-        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <?php echo Form::displayError('general');?>
-        <div class="row">
-            <form id="items-update" method="post" action="/form/procItemsUpdate">
-
-
-<div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey">
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+            <?php echo Form::displayError('general');?>
+            <div class="col-12">
+                <form id="items-update" method="post" action="/form/procItemsUpdate">
+                    <div id="item_selector" class="p-3 pb-0 mb-2 rounded-top mid-grey">
                         <div class="row mb-0">
                             <div class="col-md-4">
                                 <h4>Line Items</h4>
                             </div>
                             <div class="col-md-4">
-                                <a class="add-item" style="cursor:pointer" title="Add Another Item"><h4><i class="fas fa-plus-square text-success"></i> Add another</a></h4>
+                                <a class="add-item" style="cursor:pointer" title="Add Another Item"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
                             </div>
                             <div class="col-md-4">
-                                <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fas fa-times-square text-danger"></i> Remove all</a></h4>
+                                <a id="remove-all-items" style="cursor:pointer" title="Remove All Items"><h4><i class="fad fa-times-square text-danger"></i> Remove all</a></h4>
                             </div>
                         </div>
                         <div id="items_holder" class="p-3 light-grey">
@@ -135,22 +104,17 @@ $si_string = rtrim($si_string, ",");
                             <?php endif;?>
                         </div>
                     </div>
-
-
-
-
-
-
-                <input type="hidden" name="order_id" value="<?php echo $order['id'];?>" />
-                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                <input type="hidden" name="client_id" id="client_id" value="<?php echo $order['client_id'];?>" />
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">&nbsp;</label>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary">Update Items</button>
+                    <input type="hidden" name="order_id" value="<?php echo $order['id'];?>" />
+                    <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                    <input type="hidden" name="client_id" id="client_id" value="<?php echo $order['client_id'];?>" />
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">&nbsp;</label>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-outline-fsg">Update Items</button>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
-    <?php endif;?>
+                </form>
+            </div>
+        <?php endif;?>
+    </div>
 </div>

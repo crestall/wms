@@ -15,7 +15,7 @@
     protected $API_HOST;
     protected $CUSTOMER_CODE;
     protected $curl_options;
-    protected $test = true;
+    protected $test = false;
     protected $PRICING_KEY;
     protected $CONSIGNMENT_KEY;
     protected $GENERAL_KEY;
@@ -35,9 +35,9 @@
 
         if($this->test)
         {
-            $this->CONSIGNMENT_KEY = "DAB85BAB-F8F5-4B93-9290-C7EEA012B176";
+            $this->CONSIGNMENT_KEY = "1A13554A-81D9-46B8-BDAD-B490E34B2B09";
             $this->PRICING_KEY = "977998B6-48FB-4AB0-8D4D-AEB641906C0E";
-            $this->GENERAL_KEY = "26D189FD-FDAF-4C79-95F2-5042A3CD9097";
+            $this->GENERAL_KEY = "BA4992DA-8C23-406C-9C8E-5B19B1EAAD73";
             $this->ACCOUNT_NO = "21483";
             $this->SITE_ID = "1548";
         }
@@ -47,7 +47,7 @@
             $this->PRICING_KEY = Config::get('DIRECT_FREIGHT_PRICING_KEY');
             $this->GENERAL_KEY = Config::get('DIRECT_FREIGHT_GENERAL_KEY');
             $this->ACCOUNT_NO = Config::get('DIRECT_FREIGHT_ACC_NUMBER');
-            $this->SITE_ID = Config::get('DIRECT_FREIGHT_SITE_ID');
+            $this->SITE_ID = 0;
         }
         //$this->ACCOUNT_NO = 22;
     }
@@ -167,10 +167,41 @@
 
     public function createConsignment($details)
     {
+        //echo "<pre>",print_r($details),"</pre>";die();
         $response = $this->sendPostRequest('CreateConsignment/', $details, "CONSIGNMENT");
         //echo $response; die();
         //list($a_headers,$a_data) = $this->getResponse($response);
-        //return json_decode($a_data[0], true);
+        return json_decode($response,true);
+        //return $response;
+    }
+
+    public function trackConsignment($con_id)
+    {
+        $conNoteList = array(
+            "ConnoteList"   => array()
+        );
+        $conNoteList['ConnoteList'][] = array(
+            'Connote'   => $con_id
+        );
+        //return json_encode($conNoteList);
+        $response = $this->sendPostRequest('TrackConsignment/', $conNoteList, "PRICING");
+        //echo $response; die();
+        return json_decode($response,true);
+    }
+
+    public function bookCollection($request)
+    {
+        $response = $this->sendPostRequest('BookPickup/', $request, "GENERAL");
+        //echo $response; die();
+        return json_decode($response,true);
+    }
+
+    public function getLabels($connotes)
+    {
+        $ConnoteList = array(
+            "ConnoteList"   => $connotes
+        );
+        $response = $this->sendPostRequest('GetLabel/', $ConnoteList, "GENERAL");
         return json_decode($response, true);
     }
 
@@ -179,7 +210,7 @@
         $ci = $this->controller->client->getClientInfo($od['client_id']);
         $details = array(
             'ConsignmentId'     => $od['id'],
-            'CustomerReference' => $ci['products_description'],
+            'CustomerReference' => $ci['client_name'],
             'IsDangerousGoods'  => false
         );
         $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "Please leave in a safe place out of the weather";
@@ -189,22 +220,22 @@
         $details['ReceiverDetails'] = array(
             'ReceiverName'          => $od['ship_to'],
             'AddressLine1'          => $od['address'],
-            'AddressLine2'          => $od['address_2'],
             'Suburb'                => $od['suburb'],
             'State'                 => $od['state'],
             'Postcode'              => $od['postcode'],
-            'ReceiverContactMobile' => $od['contact_phone'],
-            'ReceiverContactEmail'  => $od['tracking_email'],
             'IsAuthorityToLeave'    => $od['signature_req'] == 0,
             'DeliveryInstructions'  => $delivery_instructions
         );
+        $details['ReceiverDetails']['AddressLine2'] = (!empty($od['address_2']))? $od['address_2'] : "";
+        $details['ReceiverDetails']['ReceiverContactMobile'] = (!empty($od['contact_phone']))? $od['contact_phone']: "";
+        $details['ReceiverDetails']['ReceiverContactEmail'] = (!empty($od['tracking_email']))? $od['tracking_email'] : "";
         $packages = $this->controller->order->getPackagesForOrder($od['id']);
         $parcels = Packaging::getPackingForOrder($od,$items,$packages);
 
         foreach($parcels as $p)
         {
             $array = array();
-            $array['SenderLineReference'] = $p['item_reference'];
+            $array['SenderLineReference'] = $od['order_number'];
             $array['RateType'] = $p['type_code'];
             $array['Items'] = $p['pieces'];
             $array['Width'] = ceil($p['width']);

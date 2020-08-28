@@ -23,6 +23,7 @@
   getAvailableStock($item_id, $fulfilled_id)
   getBayUsage($item_id)
   getClientInventory($client_id, $active = 1)
+  getAllClientsBayUsage()
   getItemByBarcode($barcode)
   getItemById($item_id)
   getItemBySku($sku)
@@ -157,14 +158,18 @@ class Item extends Model{
             if(!isset($rows[$i['item_id']]))
             {
                 $rows[$i['item_id']] = array(
-                    'name'      => $i['name'],
-                    'sku'       => $i['sku'],
-                    'barcode'   => $i['barcode'],
-                    'pack_item' => $i['pack_item'],
-                    'onhand'    => 0,
-                    'allocated' => 0,
-                    'qc_count'  => 0,
-                    'locations' => array()
+                    'name'              => $i['name'],
+                    'sku'               => $i['sku'],
+                    'barcode'           => $i['barcode'],
+                    'weight'            => $i['weight'],
+                    'depth'             => $i['depth'],
+                    'width'             => $i['width'],
+                    'height'            => $i['height'],
+                    'low_stock_warning' => $i['low_stock_warning'],
+                    'onhand'            => 0,
+                    'allocated'         => 0,
+                    'qc_count'          => 0,
+                    'locations'         => array()
                 );
             }
             $rows[$i['item_id']]['onhand'] += $i['qty'];
@@ -174,6 +179,7 @@ class Item extends Model{
             $rows[$i['item_id']]['locations'][$i['location_id']]['onhand'] = $i['qty'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['allocated'] = $i['allocated'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['qc_count'] = $i['qc_count'];
+            $rows[$i['item_id']]['locations'][$i['location_id']]['oversize'] = $i['oversize'];
         }
         return $rows;
     }
@@ -192,11 +198,11 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "  SELECT
-                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.solar_type_id
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize
                 FROM
                 (
                     SELECT
-                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.solar_type_id
+                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.width, i.depth, i.height, i.weight, i.low_stock_warning, l.oversize
                     FROM
                         items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
                     WHERE
@@ -840,7 +846,6 @@ class Item extends Model{
             'low_stock_warning'	            =>	$low_stock_warning,
             'trigger_point'	                =>	$trigger_point,
             'last_activity'		            =>	time(),
-            'preferred_pick_location_id'    =>  $preferred_pick_location_id,
             'palletized'                    =>  $palletized,
             'price'                         =>  0.00,
             'solar_type_id'                 =>  0,
@@ -935,28 +940,9 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $allocated = 0;
-        if($this->isSolarItem($item_id))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
+        $orders_table = "orders";
+        $items_table = "orders_items";
 
-            $asjq = $db->queryRow("
-                SELECT
-                	oi.item_id, i.name, sum(oi.qty) AS allocated
-                FROM
-                	solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
-                WHERE
-                	o.status_id != $fulfilled_id AND oi.item_id = $item_id
-                GROUP BY
-                	oi.item_id
-            ");
-            $allocated += (empty($asjq['allocated']))? 0 : $asjq['allocated'];
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         $asq = $db->queryRow("
             SELECT
             	oi.item_id, i.name, sum(oi.qty) AS allocated

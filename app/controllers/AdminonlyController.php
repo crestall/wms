@@ -7,11 +7,18 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class adminonlyController extends Controller
+class AdminOnlyController extends Controller
 {
     public function beforeAction()
     {
         parent::beforeAction();
+    }
+
+    public function index()
+    {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'admin-only-index');
+        parent::displayIndex(get_class());
     }
 
     public function reeceDataTidy()
@@ -155,11 +162,11 @@ class adminonlyController extends Controller
 
     public function isAuthorized(){
         $role = Session::getUserRole();
-        if( $role === "super admin" )
-        {
-            return true;
-        }
-        return false;
+        $action = $this->request->param('action');
+        $resource = "adminonly";
+        // only for super admins
+        Permission::allow('super admin', $resource, ['*']);
+        return Permission::check($role, $resource, $action);
     }
 }
 ?>

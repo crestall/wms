@@ -95,9 +95,9 @@
             {
                 if( $eparcel_response['shipments'][0]['shipment_summary']['total_cost'] > Config::get('MAX_SHIPPING_CHARGE') )
                 {
-            	    Session::set('showerrorfeedback', true);
-            	    $_SESSION['errorfeedback'] .= "<h3>Please check the value for {$this->order_details['order_number']}</h3>";
-                    $_SESSION['errorfeedback'] .= "<h4>The quoted eParcel charge is $".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2)."</h4>";
+            	    Session::set('showcouriererrorfeedback', true);
+            	    $_SESSION['couriererrorfeedback'] .= "<h3>Please check the value for {$this->order_details['order_number']}</h3>";
+                    $_SESSION['couriererrorfeedback'] .= "<h4>The quoted eParcel charge is $".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2)."</h4>";
                     return;
                 }
             }
@@ -106,16 +106,16 @@
         //echo "<pre>",print_r($sResponse),"</pre>"; die();
         if(isset($sResponse['errors']))
     	{
-    	    Session::set('showerrorfeedback', true);
-    	    $_SESSION['errorfeedback'] .= "<h3>{$this->order_details['order_number']} had some errors when submitting to eParcel</h3>";
+    	    Session::set('showcouriererrorfeedback', true);
+    	    $_SESSION['couriererrorfeedback'] .= "<h3>{$this->order_details['order_number']} had some errors when submitting to eParcel</h3>";
     		foreach($sResponse['errors'] as $e)
     		{
-    			$_SESSION['errorfeedback'] .= "<h3>Error Code: ".$e['code']."</h3><h4>".$e['name']."</h4><p>".$e['message']."</p>";
+    			$_SESSION['couriererrorfeedback'] .= "<h3>Error Code: ".$e['code']."</h3><h4>".$e['name']."</h4><p>".$e['message']."</p>";
     		}
     	}
         else
         {
-            Session::set('showfeedback', true);
+            Session::set('showcourierfeedback', true);
             $order_values['eparcel_shipment_id'] = $sResponse['shipments'][0]['shipment_id'];;
             $order_values['consignment_id'] = $sResponse['shipments'][0]['items'][0]['tracking_details']['consignment_id'];
             $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.35 * 1.1, 2); //GST already include 35% markup add 10% for fuel
@@ -126,19 +126,6 @@
                 }
             /*********** end charge FREEDOM more *******************/
             $order_values['charge_code'] = $sResponse['shipments'][0]['items'][0]['product_id'];
-            /***************************** special deals for Big Bottle *****************************/
-                if($this->order_details['client_id'] == 6)
-                {
-                    if( !($this->order_details['country'] == "AU" || $this->order_details['country'] == "NZ") )
-                    {
-                        $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.2, 2);
-                    }
-                    if($this->order_details['country'] == "AU" && !$express)
-                    {
-                        $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.4, 2);
-                    }
-                }
-            /***************************** end special deals for Big Bottle *****************************/
             $order_values['labels'] = count($eparcel_details['items']);
             $order_values['courier_id'] = $courier_id;
             foreach($sResponse['shipments'][0]['items'] as $item_array)
@@ -154,27 +141,27 @@
             if($this->addBubblewrap())
                 $order_values['bubble_wrap'] = 1;
             $db->updateDatabaseFields('orders', $order_values, $order_id);
-            $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully submitted to eParcel</p>";
+            $_SESSION['courierfeedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully submitted to eParcel</p>";
         }
     }
 
     private function assignFSG($order_id)
     {
         $db = Database::openConnection();
-        Session::set('showfeedback', true);
+        Session::set('showcourierfeedback', true);
         $order_values = array(
             'courier_id'    => $this->controller->courier->fsgId
         );
         if($this->addBubblewrap())
             $order_values['bubble_wrap'] = 1;
         $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to FSG Deliveries</p>";
+        $_SESSION['courierfeedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to FSG Deliveries</p>";
     }
 
     private function assignLocal($order_id, $courier_name)
     {
         $db = Database::openConnection();
-        Session::set('showfeedback', true);
+        Session::set('showcourierfeedback', true);
         $order_values = array(
             'courier_id'    => $this->controller->courier->localId,
             'courier_name'  => $courier_name
@@ -182,82 +169,66 @@
         if($this->addBubblewrap())
             $order_values['bubble_wrap'] = 1;
         $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to $courier_name</p>";
+        $_SESSION['courierfeedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to $courier_name</p>";
     }
 
     private function assignDirectFreight($order_id)
     {
         //die('Assigning Direct Freight');
+        $db = Database::openConnection();
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
         //echo "<pre>",print_r($df_details),"</pre>"; die();
         $response = $this->controller->directfreight->createConsignment($df_details);
         //echo "<pre>",print_r($response),"</pre>"; die();
+
         if($response['ResponseCode'] != 300)
         {
-            Session::set('showerrorfeedback', true);
-    	    $_SESSION['errorfeedback'] .= "<h3>{$this->order_details['order_number']} had some errors when submitting to Direct Freight</h3>";
-            $_SESSION['errorfeedback'] .= "<p>".$response['Responsemessage']."</p>";
+            Session::set('showcouriererrorfeedback', true);
+    	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
+    		$_SESSION['couriererrorfeedback'] .= "<h4>".$response['ResponseMessage']."</p>";
+            return false;
         }
         else
         {
-            $db = Database::openConnection();
-            Session::set('showfeedback', true);
-            $order_values = array(
-                'courier_id'    => $this->controller->courier->directFreightId,
-                'label_url'     => $response['LabelURL']
-            );
-            $order_values['consignment_id'] = $response['ConsignmentList'][0]['Connote'];
-            $order_values['total_cost'] = round($response['ConsignmentList'][0]['TotalCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2); //35% markup, GST, fuel
-            /*********** charge FREEDOM more *******************/
-                if($this->order_details['client_id'] == 7)
+            $consignment = $response['ConsignmentList'][0];
+            if($consignment['ResponseCode'] != 200)
+            {
+                Session::set('showcouriererrorfeedback', true);
+        	    $_SESSION['couriererrorfeedback'] .= "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
+        		$_SESSION['couriererrorfeedback'] .= "<h4>".$consignment['ResponseMessage']."</h4>";
+                return false;
+            }
+            else
+            {
+                //echo "<pre>",print_r($response),"</pre>"; die();
+                //All good, set the courier
+                $order_values['consignment_id'] = $consignment['Connote'];
+                $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2); //GST and 35% markup and fuel surcharge
+                /*********** charge FREEDOM more *******************/
+                    if($this->order_details['client_id'] == 7)
+                    {
+                        $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    }
+                /*********** end charge FREEDOM more *******************/
+                $order_values['courier_id'] = $this->controller->courier->directFreightId;
+                $order_values['label_url'] = $response['LabelURL'];
+                if($this->addBubblewrap())
+                    $order_values['bubble_wrap'] = 1;
+                if($db->updateDatabaseFields('orders', $order_values, $order_id))
                 {
-                    $order_values['total_cost'] = round($response['ConsignmentList'][0]['TotalCharge'] * 1.40 * 1.1 * DF_FUEL_SURCHARGE, 2); //40% markup, GST, fuel
+                    $_SESSION['courierfeedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully submitted to Direct Freight</p>";
+                    Session::set('showcourierfeedback', true);
+                    return true;
                 }
-            /*********** end charge FREEDOM more *******************/
-            if($this->addBubblewrap())
-                $order_values['bubble_wrap'] = 1;
-            $db->updateDatabaseFields('orders', $order_values, $order_id);
-            $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Direct Freight</p>";
+                else
+                {
+                    Session::set('showcouriererrorfeedback', true);
+            	    $_SESSION['couriererrorfeedback'] = "<h3>Sorry a database error has occurred</h3>";
+            		$_SESSION['couriererrorfeedback'] .= "<h4>Please try again in a moment</h4>";
+                    return false;
+                }
+            }
         }
-    }
-
-    private function assignCometLocal($order_id)
-    {
-        $db = Database::openConnection();
-        Session::set('showfeedback', true);
-        $order_values = array(
-            'courier_id'    => $this->controller->courier->cometLocalId
-        );
-        if($this->addBubblewrap())
-            $order_values['bubble_wrap'] = 1;
-        $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Comet Local</p>";
-    }
-
-    private function assignSydneyComet($order_id)
-    {
-        $db = Database::openConnection();
-        Session::set('showfeedback', true);
-        $order_values = array(
-            'courier_id'    => $this->controller->courier->sydneyCometId
-        );
-        if($this->addBubblewrap())
-            $order_values['bubble_wrap'] = 1;
-        $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Sydney Comet Courier</p>";
-    }
-
-    private function assignVicLocal($order_id)
-    {
-        $db = Database::openConnection();
-        Session::set('showfeedback', true);
-        $order_values = array(
-            'courier_id'    => $this->controller->courier->vicLocalId
-        );
-        if($this->addBubblewrap())
-            $order_values['bubble_wrap'] = 1;
-        $db->updateDatabaseFields('orders', $order_values, $order_id);
-        $_SESSION['feedback'] .= "<p>Order number: {$this->order_details['order_number']} has been successfully assigned to the Vic Local Courier</p>";
     }
 
     private function addBubblewrap()

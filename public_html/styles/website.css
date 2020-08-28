@@ -1,63 +1,316 @@
+/*****
+Startup and Standard
+******/
+@font-face {
+  font-family: 'fontawesome';
+  src: url('fonts/fontawesome-webfont.woff') format('woff'),
+       url('fonts/fontawesome-webfont.ttf') format('truetype'),
+       url('fonts/fontawesome-webfont.eot'); /* IE9 Compat Modes */ ;
+}
+
+body{
+    background-color: #fefefe;
+    font-size: 16px;
+    overflow-x: hidden;
+    font-family: "Roboto";
+    font-style: normal;
+}
+
+#page-wrapper {
+    padding: 5px 10px;
+    background-color: #f8f8f9;
+}
+
+div#page_container{
+    background-color: #fdfdfd;
+    box-shadow: -5px 0 5px -5px rgba(50, 50, 50, 0.3), 5px 0 5px -5px rgba(50, 50, 50, 0.3);
+    padding-bottom: 20px;
+    overflow-x: auto;
+    min-height: 665px;
+    padding-top: 1rem;
+}
+
+
+footer{
+    position: relative;
+    text-align: center;
+    padding: 35px 0px;
+    background: #222222;
+    font-weight: 500;
+    color: #bbbbbb;
+    font-size: 14px;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    font-family: "Roboto Condensed";
+    font-style: normal;
+}
+
+h2.page-header{
+    font-size: 40px;
+    letter-spacing: 3.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 25px;
+}
+
+h2.page-header i{
+    vertical-align: middle;
+}
+
+/********
+website colours
+********/
+.mid-grey{
+    background-color: rgba(0,0,0,.03);
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.light-grey{
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,0,0,.125);
+}
 
 /*****
-Navigation Bar
+The Section Cards
 ******/
-.navbar-default{
-    background-color: #03093f;
-    border-color: #03093f;
+a.index-link{
+    font-family: "Roboto Condensed";
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 25px
 }
 
-.nav-second-level{
-    background-color: #030a47;
+div.index-card{
+    color:#fff;
+    background-color: #4382c1;
+    margin-bottom: 2%;
+    height: 98% !important;
+    word-wrap: normal; /*WTF would Boostrap break the word!*/
 }
 
-.nav > li > a{
+a.index-link:hover{
+    color:#4382c1 !important;
+}
+
+a.index-link:hover div.index-card
+{
+    background-color:#fff;
+    border-color: #4382c1;
+    color: #4382c1;
+}
+
+/*****
+Home page
+******/
+div#order_activity_chart{
+    margin:1rem 0;
+}
+
+.homepagedeck {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.homepagecard{
+    margin: 5px 1% !important;
+    border: thin solid #030c57;
+    opacity: 0.1;
+    transform: scale(0.9);
+}
+
+.homepagecard.in-view{
+    opacity: 1;
+    transform: scale(1.0);
+    transition:transform 800ms ease-out, opacity 1500ms;
+}
+
+.homepagecard .card-header,
+.homepagecard .card-body {
+    color: #052f95;
+}
+
+.homepagecard .card-header{
+    background-color: rgba(3,12,87,0.08);
+    border-bottom: 1px solid rgba(3,12,87,.35);
+}
+
+@media screen and (min-width: 576px) {
+    .homepagecard {
+        flex: 48% !important;
+        max-width: 48% !important;
+    }
+
+    .homepagedeck {
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .homepagecard {
+        flex: 33% !important;
+        max-width: 31% !important;
+        }
+
+}
+
+@media screen and (min-width: 960px) {
+    .homepagecard {
+        flex: 25% !important;
+        max-width: 23% !important;
+    }
+}
+
+/*****
+View Orders
+*****/
+div.view-orders-buttons div a{
+    white-space: normal;
+}
+
+table#client_orders_table div.item_list{
+    font-size: smaller;
+}
+
+table#client_orders_table div.item_list span.iname{
+    font-weight: bold;
+    margin-right: 2px;
+}
+
+table#client_orders_table div.item_list span.icount{
+    margin-right: 2px;
+}
+
+table#client_orders_table div.item_list span.ilocation{
+    white-space: nowrap;
+}
+
+    /*only for bigger sizes*/
+    @media screen and (min-width: 768px){
+        div.view-orders-buttons div a{
+            min-height: 55px
+        }
+    }
+
+/*****
+Order Importing
+******/
+div.full_import{
+    border-bottom: thin solid rgba(0,0,0,0.125);
+    padding-bottom: 1rem;
+}
+
+/*****
+Order Update
+******/
+div.order-card label{
+    font-weight: bold;
+}
+
+div.order-card div.card-footer{
+    background-color: rgba(108,117,125,0.4);
+}
+
+div.order-card div.card-footer button.btn-outline-secondary{
+    background-color: rgba(108,115,125,0.2);
+}
+
+/*******
+Order Detail
+********/
+div.order-items div:last-child{
+    border-bottom: none !important;
+}
+
+/*****
+User Info
+*****/
+ul.user-info{
+    list-style: none;
+}
+
+ul.user-info li a.dropdown-toggle,
+ul.user-info li.white a.dropdown-toggle
+{
+    min-height: 50px;
     color: #f2f2f2;
 }
 
-.nav > li > a.active,
-.nav > li > a.active i{
-    color:#555;
-    background-color: #fefefe;
+ul.user-info li.dropdown
+{
+    text-align: center;
 }
 
-.nav > li > a:hover,
-.nav > li.active > a{
-    color: #555;
-    background-color: #fefefe;
+ul.user-info li.white a.dropdown-toggle
+{
+    color: #121212;
 }
 
-.nav .open > a{
-    color:#555;
-}
-
-.nav .img-user{
+ul.user-info img.img-user{
     background-color: #fff;
-    width: 55px;
+    width: 40px;
     height: auto;
     border: 3px solid #fff;
     border-radius: 5px;
 }
 
-@media(min-width:768px)
-{
-    .sidebar ul li#logo {
-        margin-bottom: 25px;
-        border: none;
-        margin-top: -30px;
-    }
-}
-/*
-@media(max-width:767px)
-{
-    .sidebar ul li#logo {
-        margin-bottom: 10px;
-        border: none;
-        margin-top: 10px;
-    }
+/*****
+User Roles
+*****/
+form.edit-userrole{
+    border: thin solid rgb(234, 234, 234);
+    padding: 10px;
+    margin: 5px;
+    cursor: move;
+    width: 80%;
 }
 
-****
+/*****
+Navigation
+*****/
+.navbar-nav{
+    margin-top: 5px;
+    background-color: #a1a1a1;
+    padding-left: 10px;
+}
+
+.navbar-nav li{
+
+}
+
+nav.fixed-top.scrolled {
+    background-color: #fff !important;
+    box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.3);
+    transition:all 600ms linear;
+}
+
+nav.fixed-top.scrolled a.nav-link:hover {
+    color:#4382c1;
+}
+
+/*****
+Page Header
+******/
+div#page_header{
+    text-align: center;
+    color: #fbfbfb;
+    padding-top: 80px;
+    background: url(/images/backgrounds/FSG-background-HD-2.jpg) no-repeat right;
+    box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.3);
+    transition:all 600ms linear;
+}
+
+/****
 Form Feedback
 ******/
 div.errorbox{
@@ -93,16 +346,26 @@ div.broken_page{
     width: 100%;
 }
 
+div.error_page{
+    min-height:666px;
+    width: 100%;
+}
+
+div.not_found{
+    background: url(/images/backgrounds/404_bg1.png) center center no-repeat;
+}
+
+div.internal_error{
+    background: url(/images/backgrounds/error-bg.jpg) center center no-repeat;
+}
+
 /*****
 Form adjustments
-*****
-input.form-control,
-select.form-control,
-.bootstrap-select > .dropdown-toggle,
-.form-group .bootstrap-select.btn-group {
-    max-width:450px;
+*****/
+div#bulk_upload_form{
+    min-height: 500px;
 }
-*/
+
 input.number,
 input.digits{
     text-align: right;
@@ -117,19 +380,6 @@ p.inst, span.inst{
     line-height:normal;
 }
 
-label.form-check-label{
-    margin-top: 10px;
-}
-
-div.checkbox > label.form-check-label{
-    margin-top: 0;
-}
-
-.delete-image-holder,
-.add-image-holder{
-    max-width: 50px;
-}
-
 ul#fileList {
     list-style: none;
     margin-left: 0;
@@ -137,14 +387,6 @@ ul#fileList {
     font-size: 14px;
     font-style: italic;
 }
-
-/*
-.btn-default{
-    color: #fff;
-    background-color: #aeaeae;
-    border-color: #222;
-}
-*/
 /*****
 Standard Tables
 ******/
@@ -160,6 +402,7 @@ td{
     border-left:thin dotted #106ea4;
     border-right:thin dotted #106ea4;
     border-bottom:solid 1px #106ea4;
+    box-sizing: content-box;
 }
 
 table.pickslip td{
@@ -174,6 +417,7 @@ th{
     text-align:center;
     font-size:14px;
     background-color: #fff;
+    padding: 1rem;
 }
 
 td.number{
@@ -185,7 +429,6 @@ td.available{
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    /* vertical-align: middle; */
     background: url(/styles/images/ui_images/ui-bg_diagonals-thick_0b3e6f_18_40x40.png);
 }
 
@@ -256,6 +499,14 @@ tr.express{
     background:url(/styles/images/ui_images/ui-bg_gloss-wave_35_f6a828_500x100.png);
 }
 
+/****
+Table Live Filter
+*****/
+.filter-table .quick { margin-left: 0.5em; font-size: 0.8em; text-decoration: none; }
+.fitler-table .quick:hover { text-decoration: underline; }
+td.alt { background-color: #ffc; background-color: rgba(255, 255, 0, 0.2); }
+
+
 /*****
 Responsive Tables
 ******/
@@ -298,7 +549,7 @@ Responsive Tables
         /* Now like a table header    */
         position: absolute;
         /* Top/left values mimic padding */
-        top: 6px;
+        top: 5%;
         left: 6px;
         width: 45%;
         white-space: nowrap;
@@ -306,6 +557,7 @@ Responsive Tables
         text-align: left;
         content: attr(data-label);
         border-right:thin solid #106ea4;
+        height: 90%;
         /*
         display: inline-block;
         font-weight: bold;
@@ -314,82 +566,13 @@ Responsive Tables
         width: 100%;
         position: relative;
         z-index: 1;
-        */
+         */
     }
 
     td.number{
         max-width: none;
     }
 
-}
-/********
-Select Styles
-*******  */
-.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn)
-{
-    width:150px;
-    margin: 0 0 5px 5px;
-}
-/********
-current orders flip angle
-*******  */
-a#toggle_orders .fa.arrow:before {
-    content: "\f106";
-}
-
-a#toggle_orders.hiding .fa.arrow:before {
-    content: "\f107";
-}
-/********
-current solar orders flip angle
-*******  */
-a#toggle_solarorders .fa.arrow:before {
-    content: "\f106";
-}
-
-a#toggle_solarorders.hiding .fa.arrow:before {
-    content: "\f107";
-}
-/********
-current pickups flip angle
-*******  */
-a#toggle_pickups .fa.arrow:before {
-    content: "\f106";
-}
-
-a#toggle_pickups.hiding .fa.arrow:before {
-    content: "\f107";
-}
-
-a#toggle_storeorders .fa.arrow:before {
-    content: "\f106";
-}
-
-a#toggle_storeorders.hiding .fa.arrow:before {
-    content: "\f107";
-}
-/********
-manage users flip angle
-*******  */
-a.toggle_roles .fa.arrow:before {
-    content: "\f106";
-}
-
-a.toggle_roles.hiding .fa.arrow:before {
-    content: "\f107";
-}
-
-/********
-solar admin flip angle
-*******  */
-a#toggle_solarinstalls .fa.arrow:before,
-a#toggle_solarservice .fa.arrow:before {
-    content: "\f106";
-}
-
-a#toggle_solarinstalls.hiding .fa.arrow:before,
-a#toggle_solarservice.hiding .fa.arrow:before {
-    content: "\f107";
 }
 
 /********
@@ -416,12 +599,91 @@ highlighting sections
 
 /********
 bootsrap adjustments
-*******  */
-@media(max-width:767px){
-    .row {
+********/
+    /** Breadcrumbs **/
+    .breadcrumb-item + .breadcrumb-item::before{
+        content: "|";
+    }
+
+    .breadcrumb-item:first-child + .breadcrumb-item::before{
+            content: ">";
+        }
+    /** Dashed Border **/
+    .border-bottom-dashed{
+        border-bottom-style: dashed !important;
+    }
+    /** Checkboxes  */
+    div.custom-control-right {
+        padding-right: 24px;
+        padding-left: 0;
+        margin-left: 16px;
         margin-right: 0;
-        margin-left: 0;
+    }
+    div.custom-control-right .custom-control-label::before,
+    div.custom-control-right .custom-control-label::after{
+        right: -1.5rem;
+        left: initial;
+    }
+
+    /** FSG button type - outline only */
+    .btn-outline-fsg {
+        color: #030c57;
+        border-color: #030c57;
+    }
+
+    .btn-outline-fsg:hover {
+        color: #fff !important;
+        background-color: #030c57;
+        border-color: #030c57;
+    }
+
+    .btn-outline-fsg:focus, .btn-outline-fsg.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-fsg.disabled, .btn-outline-fsg:disabled {
+        color: #030c57;
+        background-color: transparent;
+    }
+
+    .btn-outline-fsg:not(:disabled):not(.disabled):active, .btn-outline-fsg:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-fsg.dropdown-toggle {
+        color: #fff;
+        background-color: #030c57;
+        border-color: #030c57;
+    }
+
+    .btn-outline-fsg:not(:disabled):not(.disabled):active:focus, .btn-outline-fsg:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-fsg.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .container-xxl{
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    @media(min-width: 1500px)
+    {
+        .container-xxl{
+            max-width:1440px;
+        }
+    }
+
+/********
+Responsive adjustments
+*******  */
+@media(min-width: 992px)
+{
+    .navbar-expand-lg .navbar-nav{
+        background-color: transparent;
+    }
+
+    ul.user-info img.img-user{
+        margin-top:25px;
     }
 }
-
 

@@ -7,57 +7,26 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class productsController extends Controller
+class ProductsController extends Controller
 {
     public function beforeAction()
     {
         parent::beforeAction();
     }
 
+    public function index()
+    {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'products-index');
+        parent::displayIndex(get_class());
+    }
+
     public function addProduct()
     {
         Config::setJsConfig('curPage', "add-product");
+        Config::set('curPage', "add-product");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/addProduct.php',[
             'page_title'    =>  'Add Product'
-        ]);
-    }
-
-    public function packItemsEdit()
-    {
-        $client_id = 0;
-        $item_id = 0;
-        $client_name = "";
-        $items = array();
-        $sis = 0;
-        if(!empty($this->request->params['args']))
-        {
-            if(isset($this->request->params['args']['product']))
-            {
-                $item_id = $this->request->params['args']['product'];
-                $item_details = $this->item->getItemById($item_id);
-                $items = $this->item->getPackItemDetails($item_id);
-                if(count($items))
-                {
-                    $sis = '';
-                    foreach($items as $i):
-                        $sis .= $i['linked_item_id'].",";
-                    endforeach;
-                    $sis = rtrim($sis, ",");
-                }
-                $client_id = $item_details['client_id'];
-            }
-        }
-
-        //render the page
-        Config::setJsConfig('curPage', "pack-items-edit");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/packItemsEdit.php',
-        [
-            'page_title'  =>  "Edit Pack Items",
-            'items'       =>  $items,
-            'item_id'     =>  $item_id,
-            'sis'         =>  $sis,
-            'client_id'   =>  $client_id,
-            'item_details'
         ]);
     }
 
@@ -89,6 +58,7 @@ class productsController extends Controller
 
         //render the page
         Config::setJsConfig('curPage', "collections-edit");
+        Config::set('curPage', "collections-edit");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/collectionsEdit.php',
         [
             'page_title'  =>  "Collection Update",
@@ -107,6 +77,7 @@ class productsController extends Controller
         $packing_types = $this->item->getPackingTypesForItem($product_id);
         //render the page
         Config::setJsConfig('curPage', "edit-product");
+        Config::set('curPage', "edit-product");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/editProduct.php',
         [
             'product'       =>  $product_info,
@@ -117,10 +88,6 @@ class productsController extends Controller
 
     public function viewProducts()
     {
-        if(Session::getUserRole() == "solar admin")
-        {
-            return $this->viewSolarProducts();
-        }
         $client_id = 0;
         $active = 1;
         $client_name = "";
@@ -136,6 +103,7 @@ class productsController extends Controller
             }
         }
         Config::setJsConfig('curPage', "view-products");
+        Config::set('curPage', "view-products");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/viewProducts.php',[
             'page_title'    =>  'View Products',
             'client_id'     =>  $client_id,
@@ -145,44 +113,22 @@ class productsController extends Controller
         ]);
     }
 
-    public function viewSolarProducts()
-    {
-        $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
-        $products = $this->item->getItemsForClient($this->client->solar_client_id, $active);
-        Config::setJsConfig('curPage', "view-products");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/viewSolarProducts.php',[
-            'page_title'    =>  'View Solar Products',
-            'products'      =>  $products,
-            'active'        =>  $active
-        ]);
-    }
-
     public function isAuthorized(){
-        //$role = Session::getUserRole();
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        if( isset($role) && ($role === "admin"  || $role === "super admin") )
-        {
-            return true;
-        }
+        $role = Session::getUserRole();
         $action = $this->request->param('action');
         $resource = "products";
+        //admin users
+        Permission::allow(['super admin', 'admin'], $resource, ['*']);
 
         //warehouse users
         Permission::allow('warehouse', $resource, array(
+            "index",
             "addProduct",
             "viewProducts",
             "editProduct"
         ));
 
-        //solar admin users
-        Permission::allow('solar admin', $resource, array(
-            "addProduct",
-            "editProduct",
-            "viewProducts"
-        ));
-
         return Permission::check($role, $resource, $action);
-        return false;
     }
 }
 ?>
