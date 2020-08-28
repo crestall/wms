@@ -239,7 +239,7 @@ var dataTable = {
         return el.DataTable( opts );
     }
 }
-/************
+/***********
 * Items Updater
 ************/
 var itemsUpdater = {

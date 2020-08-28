@@ -96,7 +96,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
                     <?php endif;?>
                 </div>
             </div>
-            <div class="form-group form-row">
+            <div class="form-group row">
                 <label class="col-md-3 col-form-label">Upload PDF Attachment</label>
                 <div class="col-md-4">
                     <input type="file" name="invoice[]" id="invoice" multiple="multiple" onChange="fileUpload.makeFileList();" /> <br/>

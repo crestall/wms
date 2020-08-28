@@ -165,7 +165,6 @@ class Woocommerce{
         return $this->return_array;
     }
 
-    
     public function getOneplateOrder($wcorder_id = false)
     {
         if(!$wcorder_id)

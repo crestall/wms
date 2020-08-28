@@ -1269,13 +1269,6 @@ class FormController extends Controller {
         {
             if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
             {
-                /*
-                if($this->item->getAvailableStock($swatch_id, 4) <= 0)
-                {
-                    $_SESSION['errorfeedback'] = "<h2><i class='far fa-times-circle'></i>Swatches cannot be uploaded</h2><p>There are not enough swatches left</p>";
-                    return $this->redirector->to(PUBLIC_ROOT."orders/manage-swatches");
-                }
-                */
                 $tmp_name = $_FILES['csv_file']['tmp_name'];
                 $csv_array = array_map('str_getcsv', file($tmp_name));
                 //echo "<pre>",print_r($csv_array),"</pre>"; die();
@@ -1289,43 +1282,22 @@ class FormController extends Controller {
                         $skip_first = false;
                         continue;
                     }
-
-                    /*
                     $request = array(
-                        'deliver_to'    => trim($r[3]),
-                        'client_id'     => $client_id,
-                        'tracking_email'=> trim($r[2]),
-                        'company_name'  => trim($r[4]),
-                        'address'       => trim($r[6]),
-                        'address_2'     => trim($r[7]),
-                        'suburb'        => trim($r[8]),
-                        'state'         => trim($r[9]),
-                        'postcode'      => trim($r[10]),
-                        'contact_phone' => trim($r[5]),
-                        'date'          => time(),
-                        'country'       => 'AU',
-                        'signature_req' => 0,
-                        'errors'        => 0,
-                        'error_string'  => '',
-                        'weight'        => 0.46
-                    );
-                    */
-                    $request = array(
-                        'deliver_to'    => trim($r[3]),
+                        'deliver_to'    => ucwords( trim($r[0]) ),
                         'client_id'     => $client_id,
                         'tracking_email'=> "",
-                        //'company_name'  => trim($r[4]),
-                        'address'       => trim($r[4]),
-                        'address_2'     => trim($r[5]),
-                        'suburb'        => trim($r[6]),
-                        'state'         => trim($r[7]),
-                        'postcode'      => trim($r[8]),
-                        'contact_phone' => trim($r[11]),
+                        'company_name'  => "",
+                        'address'       => trim($r[1]),
+                        'address_2'     => trim($r[2]),
+                        'suburb'        => trim($r[3]),
+                        'state'         => trim($r[4]),
+                        'postcode'      => trim($r[5]),
+                        //'contact_phone' => trim($r[11]),
                         'date'          => time(),
                         'country'       => 'AU',
                         'errors'        => 0,
                         'error_string'  => '',
-                        'weight'        => 1.87
+                        'weight'        => 3.7
                     );
 
                     $orders_items = array();
@@ -1381,7 +1353,7 @@ class FormController extends Controller {
                     $locations = array();
                     $locations[] = $location;
                     $request['items'][] = array(
-                        'item_id'  => 13301,
+                        'item_id'  => 13565,
                         'locations' => $locations
                     );
                     $requests[] = $request;

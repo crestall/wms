@@ -382,18 +382,6 @@
         $shipment['from'] = $this->from_address_array;
         $packages = $this->controller->order->getPackagesForOrder($order_id);
         $weight = 0;
-        $array = array();
-        if($ad['country'] == "AU")
-        {
-           	$array['authority_to_leave'] = ($od['signature_req'] == 0);
-        }
-        else
-        {
-            $array['commercial_value'] = false;
-            $array['classification_type'] = 'GIFT';
-            if($ad['country'] == "CA")
-                $array['classification_type'] = 'SAMPLE';
-        }
         $val = 0;
         foreach($items as $i)
         {
@@ -405,39 +393,55 @@
         $parcels = Packaging::getPackingForOrder($od,$items,$packages, $val);
         foreach($parcels as $p)
         {
-            $array['item_reference'] = $p['item_reference'];
-            $array['product_id'] = $this->getEparcelChargeCode($ad, $p['weight'], $express);
-            $array['width'] = $p['width'];
-            $array['height'] = $p['height'];
-            $array['length'] = $p['depth'];
-            $array['weight'] = $p['weight'];
-            $array['item_contents'] = array();
-            if($ad['country'] != "AU")
+            $c = 1;
+            while($c <= $p['pieces'])
             {
-                $pval = round( $val/count($parcels) , 2);
-                if(empty($this->controller->client->getProductsDescription($od['client_id'])))
+                $array = array();
+                if($ad['country'] == "AU")
                 {
-                    if(empty($items[0]['description']))
-                    {
-                        $description = $items[0]['name'];
-                    }
-                    else
-                    {
-                        $description = $items[0]['description'];
-                    }
+                   	$array['authority_to_leave'] = ($od['signature_req'] == 0);
                 }
                 else
                 {
-                    $description = $this->controller->client->getProductsDescription($od['client_id']);
+                    $array['commercial_value'] = false;
+                    $array['classification_type'] = 'GIFT';
+                    if($ad['country'] == "CA")
+                        $array['classification_type'] = 'SAMPLE';
                 }
-                $array['item_contents'][] = array(
-                    'description'   =>  $description,
-                    'value'         =>  $pval,
-                    'quantity'      =>  1
-                );
+                $array['item_reference'] = $p['item_reference'];
+                $array['product_id'] = $this->getEparcelChargeCode($ad, $p['weight'], $express);
+                $array['width'] = $p['width'];
+                $array['height'] = $p['height'];
+                $array['length'] = $p['depth'];
+                $array['weight'] = $p['weight'];
+                $array['item_contents'] = array();
+                if($ad['country'] != "AU")
+                {
+                    $pval = round( $val/count($parcels) , 2);
+                    if(empty($this->controller->client->getProductsDescription($od['client_id'])))
+                    {
+                        if(empty($items[0]['description']))
+                        {
+                            $description = $items[0]['name'];
+                        }
+                        else
+                        {
+                            $description = $items[0]['description'];
+                        }
+                    }
+                    else
+                    {
+                        $description = $this->controller->client->getProductsDescription($od['client_id']);
+                    }
+                    $array['item_contents'][] = array(
+                        'description'   =>  $description,
+                        'value'         =>  $pval,
+                        'quantity'      =>  1
+                    );
+                }
+                $shipment['items'][] = $array;
+                ++$c;
             }
-            $shipment['items'][] = $array;
-
         }
 
         return $shipment;
