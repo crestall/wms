@@ -246,7 +246,7 @@ class FormController extends Controller {
         }
         else
         {
-            $cubic = ($carton_width * $carton_length * $carton_height)/1000000 + ($pallet_width * $pallet_length * $pallet_height * $pallet_count)/1000000;
+            $cubic = round(($carton_width * $carton_length * $carton_height)/1000000 + ($pallet_width * $pallet_length * $pallet_height * $pallet_count)/1000000, 3);
             //create the API request
             $request = array(
                 'AuthorisedContactName'     => 'Mike Bond',
@@ -266,7 +266,7 @@ class FormController extends Controller {
         }
         echo "<pre>Errors",print_r(Form::getErrorArray()),"</pre>";
         echo "<pre>Request",print_r($request),"</pre>";
-
+        die();
     }
 
     public function procReeceUserCheck()
