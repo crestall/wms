@@ -15,7 +15,7 @@ else:
     $pages = array();
     $image = "/images/profile_pictures/default.png";
 endif;
-print_r($pages):die();
+//print_r($pages);die();
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: transparent; height:80px;">
