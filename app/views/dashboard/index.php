@@ -96,6 +96,12 @@ $c = 1;
                 <button class="btn btn-sm btn-outline-fsg" id="chart_button_2"></button>
             </div>
             <div id="products_chart" class="pb-3"></div>
+        <?php elseif($user_role == "production"):?>
+            <div class="row">
+                <div class="col">
+                    <h2>The Production Home Will Appear Here</h2>
+                </div>
+            </div>
         <?php else:?>
             <div class="row">
                 <div class="col-lg-12">
