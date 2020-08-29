@@ -1,7 +1,7 @@
 <?php
 $icons = Config::get("MENU_ICONS");
 if(Session::getIsLoggedIn()):
-    //echo "<pre>",print_r($_SESSION),"</pre>";
+    echo "<pre>",print_r($_SESSION),"</pre>";
     $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
     if(empty($user_role))
         //return $this->controller->redirector->login();
@@ -15,7 +15,7 @@ else:
     $pages = array();
     $image = "/images/profile_pictures/default.png";
 endif;
-//print_r($pages);die();
+print_r($pages);die();
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: transparent; height:80px;">
