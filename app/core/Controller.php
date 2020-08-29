@@ -367,6 +367,4 @@ class Controller {
             'page_name'     => $page_name
         ]);
     }
-
-    //abstract function createOrderItemsArray(array $items, $order_id = 0);
 }
