@@ -34,8 +34,8 @@ $icons = array(
     'solar-jobs'        =>  'fas fa-tools'
 );
 return array(
-    "PRODUCTION_PAGES"  > array(
-    
+    "PRODUCTION_PAGES"  => array(
+
     ),
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
