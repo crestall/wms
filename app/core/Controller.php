@@ -351,7 +351,9 @@ class Controller {
         $app = new App();
         $names = Utility::splitCamelCase($child);
         array_pop($names);
-        if(!$child || empty($child) || !$app::isControllerValid($child))
+        //fix the child name
+        $new_child = (ucwords(strtolower(implode("",$names))))."Controller";
+        if(!$new_child || empty($new_child) || !$app::isControllerValid($new_child))
         {
             return (new ErrorsController())->error(404)->send();
         }
