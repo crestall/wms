@@ -33,10 +33,19 @@ $icons = array(
     'scheduling'        =>  'far fa-calendar-alt',
     'solar-jobs'        =>  'fas fa-tools'
 );
-return array(
-    "PRODUCTION_PAGES"  => array(
+$padmin = array(
 
-    ),
+);
+
+$prod = array(
+
+);
+
+$prod_admin = array_merge($prod, $padmin);
+
+return array(
+    "PRODUCTION_ADMIN_PAGES"    => $prod_admin,
+    "PRODUCTION_PAGES"  => $prod,
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'orders-index'  => true,
