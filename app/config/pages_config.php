@@ -37,7 +37,7 @@ $padmin = array(
     'jobs'  => array(
         'add-job'   => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-tasks"></i>'
+            'icon'      => '<i class="fad fa-tasks fa-2x"></i>'
         ),
     )
 );
