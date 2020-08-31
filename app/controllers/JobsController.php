@@ -29,6 +29,10 @@ class JobsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "add-job");
         Config::set('curPage', "add-job");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/addJob.php', [
+            'page_title'    =>  "Add Job for Production",
+            'pht'           =>  ": Add Production Job"
+        ]);
     }
 
     public function viewJobs()
@@ -36,6 +40,10 @@ class JobsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
+            'page_title'    =>  "View Production Jobs",
+            'pht'           =>  ": Production Jobs"
+        ]);
     }
 
     public function isAuthorized()
