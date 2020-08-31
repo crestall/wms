@@ -38,7 +38,13 @@ $padmin = array(
 );
 
 $prod = array(
-
+    'jobs'  => array(
+        'jobs-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-pencil-paintbrush"></i>'
+        )
+    )
 );
 
 $prod_admin = array_merge($prod, $padmin);
