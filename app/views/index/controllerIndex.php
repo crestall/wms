@@ -1,6 +1,6 @@
 <?php
 $con_index = strtolower(str_replace(" ", "-", $page_name));
-$sections = $pages[$con_index];
+$sections = ksort($pages[$con_index]);
 $page_title = $sections['default-icon']['icon']." ".$page_title;
 $role = Session::getUserRole();
 $resource = strtolower(str_replace(" ", "", $page_name));
