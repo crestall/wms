@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Labels controller
+ * Jobs controller
  *
 
- Handles generation and printing of labels
+ Manages Production Jobs
 
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class LabelsController extends Controller
+class JobsController extends Controller
 {
     public function beforeAction()
     {
