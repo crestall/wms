@@ -24,6 +24,20 @@ class JobsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function addJob()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "add-job");
+        Config::set('curPage', "add-job");
+    }
+
+    public function viewJobs()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "view-jobs");
+        Config::set('curPage', "view-jobs");
+    }
+
     public function isAuthorized()
     {
         $action = $this->request->param('action');
@@ -35,7 +49,8 @@ class JobsController extends Controller
         Permission::allow('production admin', $resource, "*");
         //production users
         Permission::allow('production', $resource, array(
-            "index"
+            "index",
+            "viewJobs"
         ));
 
         return Permission::check($role, $resource, $action);
