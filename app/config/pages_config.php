@@ -51,7 +51,7 @@ $prod = array(
         ),
         'view-jobs' => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-tablet"></i>'
+            'icon'      => '<i class="fad fa-tablet fa-2x"></i>'
         ),
     )
 );
