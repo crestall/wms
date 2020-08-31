@@ -28,7 +28,7 @@ endif;
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <?php if(count($pages)):?>
+            <?php if(isset($pages) && !empty($pages) && count($pages)):?>
                 <?php foreach($pages as $section => $spages):
                     if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
                     {
