@@ -265,10 +265,9 @@ class FormController extends Controller {
             );
             //send the booking
             $response = $this->directfreight->bookCollection($request);
+            Session::set('dfresponse', $response);
         }
-        echo "<pre>Errors",print_r(Form::getErrorArray()),"</pre>";
-        echo "<pre>Response",print_r($response),"</pre>";
-        die();
+        return $this->redirector->to(PUBLIC_ROOT."orders/book-direct-freight-collection");   
     }
 
     public function procReeceUserCheck()
