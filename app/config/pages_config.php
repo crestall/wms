@@ -52,6 +52,8 @@ $prod = array(
     )
 );
 
+$padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
+
 $prod_admin = array_merge($prod, $padmin);
 
 return array(
