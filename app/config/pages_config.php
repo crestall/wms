@@ -34,7 +34,12 @@ $icons = array(
     'solar-jobs'        =>  'fas fa-tools'
 );
 $padmin = array(
-
+    'jobs'  => array(
+        'add-job'   => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-tasks"></i>'
+        ),
+    )
 );
 
 $prod = array(
