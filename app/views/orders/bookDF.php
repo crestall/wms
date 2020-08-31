@@ -6,6 +6,42 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
+        <?php if(isset($_SESSION['dfresponse'])) :
+            $response = Session::getAndDestroy('dfresponse');
+            if($response['ResponseCode'] != 200):?>
+                <div class="row">
+                    <div class="col">
+                        <div class="errorbox">
+                            <div class="row">
+                            <div class="col-4 text-right">
+                                <i class="fad fa-exclamation-triangle fa-6x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h2>There Has Been An Error Booking The Pickup</h2>
+                                <p><?php echo $response['ResponseMessage'];?></p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            <?php else:?>
+                <div class="row">
+                    <div class="col">
+                        <div class="feedbackbox">
+                            <div class="row">
+                            <div class="col-4 text-right">
+                                <i class="fad fa-check-circle fa-6x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h2>The Pickup Has been Booked</h2>
+                                <p><label>Booking Reference:</label><?php echo $response['BookingReferenceNumber'];?></p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif;?>
+        <?php endif;?>
         <form id="df_collection" method="post" action="/form/procDFCollection">
             <div class="form-group row">
                 <div class="col-12 mb-2">
