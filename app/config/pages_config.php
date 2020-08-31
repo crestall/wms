@@ -48,7 +48,11 @@ $prod = array(
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-pencil-paintbrush"></i>'
-        )
+        ),
+        'view-jobs' => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-tablet"></i>'
+        ),
     )
 );
 
