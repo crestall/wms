@@ -121,7 +121,7 @@ class Location extends Model{
             JOIN items_locations il ON l.id = il.location_id
             JOIN items i ON i.id = il.item_id
             JOIN clients c ON i.client_id = c.id
-            WHERE l.active = $active
+            WHERE l.active = $active AND c.active = 1
             ORDER BY l.location
         ";
 

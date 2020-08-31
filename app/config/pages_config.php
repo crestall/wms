@@ -37,7 +37,7 @@ $padmin = array(
     'jobs'  => array(
         'add-job'   => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-tasks fa-2x"></i>'
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
         ),
     )
 );
@@ -47,11 +47,11 @@ $prod = array(
         'jobs-index'    => true,
         'default-icon'  => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-pencil-paintbrush"></i>'
+            'icon'      => '<i class="fad fa-tasks"></i>'
         ),
         'view-jobs' => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-tablet fa-2x"></i>'
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         ),
     )
 );

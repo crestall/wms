@@ -40,7 +40,8 @@
         <!-- WMS JavaScript -->
         <script src="/scripts/common.js?t=<?php echo time();?>"></script>
         <!-- FontAwesome Pro Kit -->
-        <script src="https://kit.fontawesome.com/f8feb6c33e.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/cc79da085a.js" crossorigin="anonymous"></script>
+        <!--script defer src="https://pro.fontawesome.com/releases/v5.14.0/js/all.js" integrity="sha384-8nFttujfhbCh3CZJ34J+BtLPrg9cGflbku3ZQUTUewA7mqA8TG5Uip4fzQRbERs0" crossorigin="anonymous"></script>
         <!-- Assign CSRF Token to JS variable -->
         <?php Config::setJsConfig('csrfToken', Session::generateCsrfToken()); ?>
         <!-- Assign pages for menu highlighting -->
