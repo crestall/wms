@@ -33,10 +33,36 @@ $icons = array(
     'scheduling'        =>  'far fa-calendar-alt',
     'solar-jobs'        =>  'fas fa-tools'
 );
-return array(
-    "PRODUCTION_PAGES"  => array(
+$padmin = array(
+    'jobs'  => array(
+        'add-job'   => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-tasks fa-2x"></i>'
+        ),
+    )
+);
 
-    ),
+$prod = array(
+    'jobs'  => array(
+        'jobs-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-pencil-paintbrush"></i>'
+        ),
+        'view-jobs' => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-tablet fa-2x"></i>'
+        ),
+    )
+);
+
+$padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
+
+$prod_admin = array_merge($prod, $padmin);
+
+return array(
+    "PRODUCTION_ADMIN_PAGES"    => $prod_admin,
+    "PRODUCTION_PAGES"  => $prod,
     "ADMIN_PAGES"   =>  array(
         'orders' => array(
             'orders-index'  => true,
