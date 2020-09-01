@@ -99,11 +99,13 @@ $prod = array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         )
+    )
 );
 
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['suppliers'] = array_merge($padmin['suppliers'], $prod['suppliers']);
+$padmin['sales-reps'] = array_merge($padmin['sales-reps'], $prod['sales-reps']);
 
 $prod_admin = array_merge($prod, $padmin);
 
