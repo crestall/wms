@@ -21,7 +21,7 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-outline-secondary">Add Job Status</button>
+                    <button type="submit" class="btn btn-outline-secondary">Add Status</button>
                 </div>
             </div>
         </form>
