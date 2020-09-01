@@ -34,7 +34,16 @@ class ProductionSettingsController extends Controller
         ]);
     }
 
-
+    public function salesReps()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "sales-reps");
+        Config::set('curPage', "sales-reps");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/salesReps.php', [
+            'page_title'    =>  "Production Sales Representatives",
+            'pht'           =>  ": Production Sales Reps"
+        ]);
+    }
 
     public function isAuthorized()
     {

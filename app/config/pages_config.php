@@ -13,26 +13,6 @@
      * )
      * @author     Mark Solly <mark.solly@3plplus.com.au>
     */
-$icons = array(
-    'orders'            =>  'fas fa-truck',
-    'ordering'          =>  'fas fa-cash-register',
-    'clients'	        =>	'fas fa-user-tie',
-    'products'	        =>	'fas fa-dolly',
-    'inventory'	        =>	'fas fa-tasks',
-    'reports'	        =>	'far fa-chart-bar',
-    'site-settings'	    =>	'fas fa-cog',
-    'staff'		        =>	'fas fa-users',
-    'stock-movement'    =>  'fas fa-dolly',
-    'data-entry'        =>  'fas fa-indent',
-    'sales-reps'		=>	'fas fa-users',
-    'solar-teams'		=>	'fas fa-users',
-    'stores'            =>  'fas fa-store-alt',
-    'downloads'         =>  'fas fa-download',
-    'financials'        =>  'fas fa-file-invoice-dollar',
-    'admin-only'        =>  'fas fa-lock',
-    'scheduling'        =>  'far fa-calendar-alt',
-    'solar-jobs'        =>  'fas fa-tools'
-);
 $padmin = array(
     'jobs'  => array(
         'add-job'   => array(
@@ -61,6 +41,10 @@ $padmin = array(
         'job-status'    => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-file-alt fa-2x"></i>'
+        ),
+        'sales-reps'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-user-chart fa-2x"></i>'
         ),
     )
 );
