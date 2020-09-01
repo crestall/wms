@@ -10,7 +10,7 @@ class Jobstatus extends Model{
         $status = $db->queryData("SELECT id, name FROM {$this->table} WHERE active=$active ORDER BY name");
         foreach($status as $s)
         {
-            $label = $s['name'];
+            $label = ucwords($s['name']);
             $value = $s['id'];
             if($selected)
             {
@@ -24,7 +24,7 @@ class Jobstatus extends Model{
     public function getStatusName($id)
     {
         $db = Database::openConnection();
-        return $db->queryValue($this->table, array('id' =>  $id), 'name');
+        return ucwords($db->queryValue($this->table, array('id' =>  $id), 'name'));
     }
 
     public function getStatusId($name)
