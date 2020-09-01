@@ -54,6 +54,7 @@ class SalesRepsController extends Controller
             $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
         }
         $reps = $this->salesrep->getAllReps($active);
+        $role = Session::getUserRole();
         //render the page
         Config::setJsConfig('curPage', "view-reps");
         Config::set('curPage', "view-reps");
@@ -61,6 +62,7 @@ class SalesRepsController extends Controller
         [
             'page_title'    =>  'Manage Sales Reps',
             'reps'          =>  $reps,
+            'role'          =>  $role,
             'active'        =>  $active
         ]);
     }
