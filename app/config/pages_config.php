@@ -45,6 +45,12 @@ $padmin = array(
             'display'       => true,
             'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
         ),
+    ),
+    'suppliers' => array(
+        'add-supplier'  => array(
+            'display'       => true,
+            'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+        ),
     )
 );
 
@@ -69,6 +75,17 @@ $prod = array(
         'view-customers'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
+        )
+    ),
+    'suppliers' => array(
+        'suppliers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-people-arrows"></i>'
+        ),
+        'view-suppliers'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         )
     )
 );
