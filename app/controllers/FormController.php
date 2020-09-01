@@ -154,7 +154,7 @@ class FormController extends Controller {
         {
             Form::setError('name_'.$id, 'A status name is required');
         }
-        elseif($this->jobstatus->getStatusId($name) && strtolower($name) != $current_name )
+        elseif($this->jobstatus->getStatusId($name) && strtolower($name) != $currentname )
         {
             Form::setError('name_'.$id, 'This status is already in use. Status names need to be unique');
         }
