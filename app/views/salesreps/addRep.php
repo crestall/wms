@@ -7,10 +7,10 @@ $postcode = Form::value('postcode');
 $country = Form::value('country');
 ?>
 <div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-    <?php echo Form::displayError('general');?>
-    <div class="row">
+    <div id="page_container" class="container-xl">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php echo Form::displayError('general');?>
         <form id="add-sales-rep" method="post" action="/form/procRepAdd">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
@@ -33,18 +33,18 @@ $country = Form::value('country');
                     <?php echo Form::displayError('phone');?>
                 </div>
             </div>
-            <div class="form-group row">
+            <!--div class="form-group row">
                 <label class="col-md-3 col-form-label">Tax File Number</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="tfn" id="tfn" value="<?php echo Form::value('tfn');?>" />
+                    <input type="text" class="form-control" name="tfn" id="tfn" value="<?php //echo Form::value('tfn');?>" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">ABN</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="abn" id="abn" value="<?php echo Form::value('abn');?>" />
+                    <input type="text" class="form-control" name="abn" id="abn" value="<?php //echo Form::value('abn');?>" />
                 </div>
-            </div>
+            </div-->
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Comments</label>
                 <div class="col-md-4">
@@ -56,7 +56,7 @@ $country = Form::value('country');
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Add Rep</button>
+                    <button type="submit" class="btn btn-outline-secondary">Add Rep</button>
                 </div>
             </div>
         </form>
