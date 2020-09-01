@@ -586,6 +586,8 @@ class OrdersController extends Controller
 
     public function bulkUploadOrders()
     {
+        //up the memory for this
+        ini_set('memory_limit', '2048M');
         //For Clients
         //render the page
         Config::setJsConfig('curPage', "bulk-upload-orders");

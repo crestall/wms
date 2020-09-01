@@ -19,22 +19,17 @@
 class Salesrep extends Model{
     public $table = "sales_reps";
 
-    public function getSelectSalesReps($selected = false, $client_id = 0)
+    public function getSelectSalesReps($selected = false)
     {
         $db = Database::openConnection();
 
         $check = "";
         $ret_string = "";
-        $q = "SELECT id, name FROM {$this->table} WHERE active = 1";
-        if($client_id > 0)
-        {
-            $q .= " AND client_id = $client_id";
-        }
-        $q .= " ORDER BY name";
+        $q = "SELECT id, name FROM {$this->table} WHERE active = 1 ORDER BY name";
         $reps = $db->queryData($q);
         foreach($reps as $r)
         {
-            $label = $r['name'];
+            $label = ucwords($r['name']);
             $value = $r['id'];
             if($selected)
             {
@@ -61,8 +56,7 @@ class Salesrep extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'client_id'     =>  $data['client_id'],
-            'name'          =>  $data['name'],
+            'name'          =>  strtolower($data['name']),
             'email'         =>  $data['email'],
             'phone'         =>  $data['phone']
         );
@@ -83,8 +77,7 @@ class Salesrep extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'client_id'     =>  $data['client_id'],
-            'name'          =>  $data['name'],
+            'name'          =>  strtolower($data['name']),
             'email'         =>  $data['email'],
             'phone'         =>  $data['phone'],
             'tfn'           =>  null,

@@ -10,22 +10,12 @@
 
                     }
                 },
-                'add-job':{
+                'add-supplier':{
                     init: function(){
 
                     }
                 },
-                'view-jobs':{
-                    init: function(){
-
-                    }
-                },
-                'add-customer':{
-                    init: function(){
-
-                    }
-                },
-                'view-customers':{
+                'view-suppliers':{
                     init: function(){
 
                     }

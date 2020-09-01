@@ -107,6 +107,21 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#add-job-status").validate({
+    	rules:{
+    		name: {
+				remote: {
+                    url: '/ajaxfunctions/checkJobStatusNames'
+                }
+			}
+    	},
+		messages:{
+			name: {
+				remote: 'This name is already in use.<br/>Status names must be unique'
+			}
+		}
+    });
+    ///////////////////////////////////////////////////////////////////////////////
 	$("#register_new_stock").validate({
     	rules:{
     		sku: {

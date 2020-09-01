@@ -7,41 +7,38 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class salesrepsController extends Controller
+class SalesRepsController extends Controller
 {
     public function beforeAction()
     {
         parent::beforeAction();
     }
 
-    public function shipToReps()
+    public function index()
     {
-        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
-        //render the page
-        Config::setJsConfig('curPage', "shipto-reps");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/shipToRep.php',
-        [
-            'page_title'    => 'Ship Consignment To Sales Rep',
-            'client_id'     => $client_id
-        ]);
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'sales-reps-index');
+        parent::displayIndex(get_class());
     }
 
-    public function addSalesRep()
+    public function addRep()
     {
         //render the page
-        Config::setJsConfig('curPage', "add-sales-rep");
+        Config::setJsConfig('curPage', "add-rep");
+        Config::set('curPage', "add-rep");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/addRep.php',
         [
             'page_title'    =>  'Add New Sales Rep'
         ]);
     }
 
-    public function editSalesRep()
+    public function editRep()
     {
         $rep_id = $this->request->params['args']['rep'];
         $rep_info = $this->salesrep->getRepById($rep_id);
         //render the page
-        Config::setJsConfig('curPage', "edit-sales-rep");
+        Config::setJsConfig('curPage', "edit-rep");
+        Config::set('curPage', "edit-rep");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/editRep.php',
         [
             'page_title'    =>  'Edit Sales Rep details',
@@ -57,24 +54,34 @@ class salesrepsController extends Controller
             $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
         }
         $reps = $this->salesrep->getAllReps($active);
+        $role = Session::getUserRole();
         //render the page
         Config::setJsConfig('curPage', "view-reps");
+        Config::set('curPage', "view-reps");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/viewReps.php',
         [
             'page_title'    =>  'Manage Sales Reps',
             'reps'          =>  $reps,
+            'role'          =>  $role,
             'active'        =>  $active
         ]);
     }
 
     public function isAuthorized(){
+        $action = $this->request->param('action');
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        if( isset($role) && ($role === "admin"  || $role === "super admin") )
-        {
-            return true;
-        }
-        return false;
+        $resource = "salesreps";
+
+        //only for admin
+        Permission::allow('production admin', $resource, "*");
+        //production users
+        Permission::allow('production', $resource, array(
+            "index",
+            "viewReps"
+        ));
+
+        return Permission::check($role, $resource, $action);
     }
 }
 ?>

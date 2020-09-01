@@ -10,16 +10,6 @@
 
                     }
                 },
-                'add-job':{
-                    init: function(){
-
-                    }
-                },
-                'view-jobs':{
-                    init: function(){
-
-                    }
-                },
                 'add-customer':{
                     init: function(){
 

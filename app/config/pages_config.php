@@ -13,32 +13,45 @@
      * )
      * @author     Mark Solly <mark.solly@3plplus.com.au>
     */
-$icons = array(
-    'orders'            =>  'fas fa-truck',
-    'ordering'          =>  'fas fa-cash-register',
-    'clients'	        =>	'fas fa-user-tie',
-    'products'	        =>	'fas fa-dolly',
-    'inventory'	        =>	'fas fa-tasks',
-    'reports'	        =>	'far fa-chart-bar',
-    'site-settings'	    =>	'fas fa-cog',
-    'staff'		        =>	'fas fa-users',
-    'stock-movement'    =>  'fas fa-dolly',
-    'data-entry'        =>  'fas fa-indent',
-    'sales-reps'		=>	'fas fa-users',
-    'solar-teams'		=>	'fas fa-users',
-    'stores'            =>  'fas fa-store-alt',
-    'downloads'         =>  'fas fa-download',
-    'financials'        =>  'fas fa-file-invoice-dollar',
-    'admin-only'        =>  'fas fa-lock',
-    'scheduling'        =>  'far fa-calendar-alt',
-    'solar-jobs'        =>  'fas fa-tools'
-);
 $padmin = array(
     'jobs'  => array(
         'add-job'   => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
         ),
+    ),
+    'customers' => array(
+        'add-customer'  => array(
+            'display'       => true,
+            'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+        ),
+    ),
+    'suppliers' => array(
+        'add-supplier'  => array(
+            'display'       => true,
+            'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+        ),
+    ),
+    'production-settings'   => array(
+        'production-settings-index' => true,
+        'default-icon'              => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-cog"></i>'
+        ),/* */
+        'job-status'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-file-alt fa-2x"></i>'
+        ),
+    ),
+    'sales-reps'    => array(
+        'add-rep'   => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+        ),
+        'edit-rep'  => array(
+            'display'   => false,
+            'icon'      => ''
+        )
     )
 );
 
@@ -53,10 +66,46 @@ $prod = array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         ),
+    ),
+    'customers' => array(
+        'customers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-user-tie"></i>'
+        ),
+        'view-customers'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
+        )
+    ),
+    'suppliers' => array(
+        'suppliers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-people-arrows"></i>'
+        ),
+        'view-suppliers'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
+        ),
+    ),
+    'sales-reps'    => array(
+        'sales-reps-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-user-chart"></i>'
+        ),
+        'view-reps' => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
+        )
     )
 );
 
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
+$padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
+$padmin['suppliers'] = array_merge($padmin['suppliers'], $prod['suppliers']);
+$padmin['sales-reps'] = array_merge($padmin['sales-reps'], $prod['sales-reps']);
 
 $prod_admin = array_merge($prod, $padmin);
 

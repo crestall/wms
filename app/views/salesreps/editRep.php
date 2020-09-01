@@ -18,13 +18,6 @@ $country = empty(Form::value('country'))? $rep['country'] : Form::value('country
     <div class="row">
         <form id="edit-sales-rep" method="post" action="/form/procRepEdit">
             <div class="form-group row">
-                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
-                <div class="col-md-4">
-                    <select id="client_id" name="client_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectSalesRepClients($rep['client_id']);?></select>
-                    <?php echo Form::displayError('client_id');?>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="name" id="name" value="<?php echo $rep['name'];?>" />
@@ -54,31 +47,30 @@ $country = empty(Form::value('country'))? $rep['country'] : Form::value('country
                     <?php echo Form::displayError('phone');?>
                 </div>
             </div>
-            <div class="form-group row">
+            <!--div class="form-group row">
                 <label class="col-md-3 col-form-label">Tax File Number</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="tfn" id="tfn" value="<?php echo $rep['tfn'];?>" />
+                    <input type="text" class="form-control" name="tfn" id="tfn" value="<?php //echo $rep['tfn'];?>" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">ABN</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="abn" id="abn" value="<?php echo $rep['abn'];?>" />
+                    <input type="text" class="form-control" name="abn" id="abn" value="<?php //echo $rep['abn'];?>" />
                 </div>
-            </div>
+            </div-->
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Comments</label>
                 <div class="col-md-4">
                     <textarea class="form-control" name="comments" id="comments"><?php echo $rep['comments'];?></textarea>
                 </div>
             </div>
-            <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
+            <?php //include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="rep_id" value="<?php echo $rep['id']; ?>" />
             <div class="form-group row">
-                <label class="col-md-3 col-form-label">&nbsp;</label>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Edit Rep</button>
+                <div class="col-md-4 offset-md-3">
+                    <button type="submit" class="btn btn-outline-secondary">Edit Rep</button>
                 </div>
             </div>
         </form>
