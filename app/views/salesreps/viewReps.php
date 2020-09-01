@@ -38,19 +38,16 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Client</th>
                         <th>Comments</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($reps as $rep):
-                        $client_name = $this->controller->client->getClientName($rep['client_id']);;?>
+                    <?php foreach($reps as $rep):?>
                         <tr>
                             <td data-label="Name"><?php echo $rep['name'];?></td>
                             <td data-label="Phone" class="number"><?php echo $rep['phone'];?></td>
                             <td data-label="Email"><?php echo $rep['email'];?></td>
-                            <td data-label="Client"><?php echo $client_name;?></td>
                             <td data-label="Comments"><?php echo nl2br($rep['comments']);?></td>
                             <td><a href="/sales-reps/edit-sales-rep/rep=<?php echo $rep['id'];?>">Edit Details</a></td>
                         </tr>
