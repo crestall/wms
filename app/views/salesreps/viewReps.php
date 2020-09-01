@@ -3,7 +3,7 @@
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
-        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");echo $role;?>
         <div class="row">
             <div class="col-lg-12">
                 <?php if($active == 1):?>
@@ -42,7 +42,9 @@
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Comments</th>
-                            <th></th>
+                            <?php if($role == "production admin"):?>
+                                <th></th>
+                            <?php endif;?>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,7 +54,9 @@
                                 <td data-label="Phone" class="number"><?php echo $rep['phone'];?></td>
                                 <td data-label="Email"><?php echo $rep['email'];?></td>
                                 <td data-label="Comments"><?php echo nl2br($rep['comments']);?></td>
-                                <td><a href="/sales-reps/edit-sales-rep/rep=<?php echo $rep['id'];?>">Edit Details</a></td>
+                                <?php if($role == "production admin"):?>
+                                    <td><a href="/sales-reps/edit-sales-rep/rep=<?php echo $rep['id'];?>">Edit Details</a></td>
+                                <?php endif;?>
                             </tr>
                         <?php endforeach;?>
                     </tbody>
