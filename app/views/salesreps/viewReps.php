@@ -28,7 +28,7 @@
                 <div class="col-6">
                     <div class="form-group row">
                         <label class="col-3">Search</label>
-                        <div class="col-6">
+                        <div class="col-9">
                             <input type="text" class="form-control" id="table_searcher" />
                         </div>
                     </div>
