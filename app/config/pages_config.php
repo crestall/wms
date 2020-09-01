@@ -60,7 +60,7 @@ $padmin = array(
         ),/* */
         'job-status'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-alt"></i>'
+            'icon'      => '<i class="fad fa-file-alt fa-2x"></i>'
         ),
     )
 );
