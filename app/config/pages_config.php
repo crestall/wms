@@ -57,7 +57,7 @@ $prod = array(
         ),
         'view-jobs' => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4" style="color:white"></i></span></div>'
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         ),
     ),
     'customers' => array(
@@ -68,7 +68,7 @@ $prod = array(
         ),
         'view-customers'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4" style="color:white"></i></span></div>'
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         )
     )
 );
