@@ -15,7 +15,7 @@
                     <input type="text" class="form-control required" name="name" id="name" value="<?php echo Form::value('name');?>" />
                     <?php echo Form::displayError('name');?>
                 </div>
-                <span class="inst">Names <span class="font-italic font-weight-bold">must</span> be unique</span>
+                <span class="inst">Names <span class="font-weight-bold">must</span> be unique</span>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
