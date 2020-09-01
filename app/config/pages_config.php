@@ -90,7 +90,7 @@ $prod = array(
         ),
     ),
     'sales-reps'    => array(
-        'sales-rep-index'   => true,
+        'sales-reps-index'   => true,
         'default-icon'      => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-user-chart"></i>'
