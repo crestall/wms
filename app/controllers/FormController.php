@@ -4507,7 +4507,7 @@ class FormController extends Controller {
 
     public function procRepAdd()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -4516,10 +4516,6 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
-        }
-        if($client_id == "0")
-        {
-            Form::setError('client_id', "A client must be chosen");
         }
         if( !$this->dataSubbed($name) )
         {
