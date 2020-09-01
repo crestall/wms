@@ -42,6 +42,7 @@ $padmin = array(
     ),
     'customers' => array(
         'add-customer'  => true,
+        'display'       => true,
         'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
     )
 );
