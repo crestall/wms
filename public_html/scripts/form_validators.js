@@ -117,7 +117,7 @@ $(document).ready(function() {
     	},
 		messages:{
 			name: {
-				remote: 'This name is already in use. Status names must be unique'
+				remote: 'This name is already in use.<br/>Status names must be unique'
 			}
 		}
     });
