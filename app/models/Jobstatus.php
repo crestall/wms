@@ -37,7 +37,7 @@ class Jobstatus extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'      =>  $data['name']
+            'name'      =>  strtolower($data['name'])
         );
         return $db->insertQuery($this->table, $vals);
     }
@@ -46,7 +46,7 @@ class Jobstatus extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'      =>  $data['name']
+            'name'      =>  strtolower($data['name'])
         );
         $vals['active'] = (isset($data['active']))? 1:0;
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
