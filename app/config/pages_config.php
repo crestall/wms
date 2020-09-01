@@ -92,6 +92,7 @@ $prod = array(
 
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
+$padmin['suppliers'] = array_merge($padmin['suppliers'], $prod['suppliers']);
 
 $prod_admin = array_merge($prod, $padmin);
 
