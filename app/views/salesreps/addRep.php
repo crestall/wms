@@ -54,8 +54,7 @@ $country = Form::value('country');
             <?php //include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
-                <label class="col-md-3 col-form-label">&nbsp;</label>
-                <div class="col-md-4">
+                <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-outline-secondary">Add Rep</button>
                 </div>
             </div>
