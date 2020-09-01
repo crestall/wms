@@ -111,7 +111,7 @@ $(document).ready(function() {
     	rules:{
     		name: {
 				remote: {
-                    url: '/ajaxfunctions/checkJobStatus'
+                    url: '/ajaxfunctions/checkJobStatusNames'
                 }
 			}
     	},
