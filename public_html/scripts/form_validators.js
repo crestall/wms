@@ -116,7 +116,7 @@ $(document).ready(function() {
 			}
     	},
 		messages:{
-			sku: {
+			name: {
 				remote: 'This name is already in use. Status names must be unique'
 			}
 		}
