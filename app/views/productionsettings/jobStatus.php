@@ -2,7 +2,7 @@
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php echo Form::displayError('general');?>
-        <form id="add-courier"  method="post" enctype="multipart/form-data" action="/form/procJobStatusAdd">
+        <form id="add-job-status"  method="post" enctype="multipart/form-data" action="/form/procJobStatusAdd">
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Add Job Status</h3>
