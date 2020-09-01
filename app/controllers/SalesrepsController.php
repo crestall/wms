@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@3plplus.com.au>
  */
 
-class salesrepsController extends Controller
+class SalesrepsController extends Controller
 {
     public function beforeAction()
     {
