@@ -32,7 +32,7 @@ class ProductionSettingsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/jobStatus.php', [
             'page_title'    =>  "Production Job Status",
             'pht'           =>  ": Production Job Status",
-            'status'        =>  $status;
+            'status'        =>  $status
         ]);
     }
 
