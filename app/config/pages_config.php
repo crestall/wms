@@ -39,6 +39,10 @@ $padmin = array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
         ),
+    ),
+    'customers' => array(
+        'add-customer'  => true,
+        'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
     )
 );
 
@@ -53,10 +57,22 @@ $prod = array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4" style="color:white"></i></span></div>'
         ),
+    ),
+    'customers' => array(
+        'customers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-user-tie"></i>'
+        ),
+        'view-customers'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4" style="color:white"></i></span></div>'
+        )
     )
 );
 
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
+$padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 
 $prod_admin = array_merge($prod, $padmin);
 

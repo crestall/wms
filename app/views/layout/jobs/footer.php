@@ -19,6 +19,16 @@
                     init: function(){
 
                     }
+                },
+                'add-customer':{
+                    init: function(){
+
+                    }
+                },
+                'view-customers':{
+                    init: function(){
+
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);
