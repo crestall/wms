@@ -50,13 +50,13 @@ $country = empty(Form::value('country'))? $rep['country'] : Form::value('country
             <!--div class="form-group row">
                 <label class="col-md-3 col-form-label">Tax File Number</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="tfn" id="tfn" value="<?php echo //$rep['tfn'];?>" />
+                    <input type="text" class="form-control" name="tfn" id="tfn" value="<?php //echo $rep['tfn'];?>" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">ABN</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="abn" id="abn" value="<?php echo //$rep['abn'];?>" />
+                    <input type="text" class="form-control" name="abn" id="abn" value="<?php //echo $rep['abn'];?>" />
                 </div>
             </div-->
             <div class="form-group row">
