@@ -13,13 +13,6 @@ $country = Form::value('country');
     <div class="row">
         <form id="add-sales-rep" method="post" action="/form/procRepAdd">
             <div class="form-group row">
-                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
-                <div class="col-md-4">
-                    <select id="client_id" name="client_id" class="form-control selectpicker"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectSalesRepClients(Form::value('client_id'));?></select>
-                    <?php echo Form::displayError('client_id');?>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="name" id="name" value="<?php echo Form::value('name');?>" />
@@ -58,7 +51,7 @@ $country = Form::value('country');
                     <textarea class="form-control" name="comments" id="comments"><?php echo Form::value('comments');?></textarea>
                 </div>
             </div>
-            <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
+            <?php //include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>

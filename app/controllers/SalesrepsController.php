@@ -21,7 +21,7 @@ class SalesRepsController extends Controller
         parent::displayIndex(get_class());
     }
 
-    public function addSalesRep()
+    public function addRep()
     {
         //render the page
         Config::setJsConfig('curPage', "add-sales-rep");
