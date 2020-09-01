@@ -42,10 +42,16 @@ $padmin = array(
             'display'   => true,
             'icon'      => '<i class="fad fa-file-alt fa-2x"></i>'
         ),
-        'sales-reps'    => array(
+    ),
+    'sales-reps'    => array(
+        'add-rep'   => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-user-chart fa-2x"></i>'
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
         ),
+        'edit-rep'  => array(
+            'display'   => false,
+            'icon'      => ''
+        )
     )
 );
 
@@ -81,8 +87,18 @@ $prod = array(
         'view-suppliers'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
+        ),
+    ),
+    'sales-reps'    => array(
+        'sales-rep-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-user-chart"></i>'
+        ),
+        'view-reps' => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         )
-    )
 );
 
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
