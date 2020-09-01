@@ -83,6 +83,7 @@ class FormController extends Controller {
             'procGoodsIn',
             'procGoodsOut',
             'procItemsUpdate',
+            'procJobStatusAdd',
             'procLogin',
             'procMakePacks',
             'procMoveAllClientStock',
@@ -132,6 +133,47 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procJobStatusAdd()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        $response = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name', 'A status name is required');
+        }
+        elseif($this->jobstatus->getStatusId($name) )
+        {
+            Form::setError('name', 'This status is already in use. Status names need to be unique');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //add the status
+            if($this->jobstatus->addStatus($post_data))
+            {
+                Session::set('feedback', "That status has been added");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."production-settings/job-status");
     }
 
     public function procDFCollection()
@@ -267,7 +309,7 @@ class FormController extends Controller {
             $response = $this->directfreight->bookCollection($request);
             Session::set('dfresponse', $response);
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/book-direct-freight-collection");   
+        return $this->redirector->to(PUBLIC_ROOT."orders/book-direct-freight-collection");
     }
 
     public function procReeceUserCheck()
