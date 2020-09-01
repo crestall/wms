@@ -25,7 +25,7 @@
         </div>
         <?php if(count($reps)):?>
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6 col-sm-9">
                     <div class="form-group row">
                         <label class="col-3">Search</label>
                         <div class="col-9">
