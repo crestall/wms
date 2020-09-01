@@ -29,7 +29,7 @@ class CustomersController extends Controller
         //render the page
         Config::setJsConfig('curPage', "add-customer");
         Config::set('curPage', "add-customer");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/addCustomer.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/customers/", Config::get('VIEWS_PATH') . 'customers/addCustomer.php', [
             'page_title'    =>  "Add Customer for Production",
             'pht'           =>  ": Add Production Customer"
         ]);
@@ -40,7 +40,7 @@ class CustomersController extends Controller
         //render the page
         Config::setJsConfig('curPage', "view-customers");
         Config::set('curPage', "view-customers");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewCustomers.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/customers/", Config::get('VIEWS_PATH') . 'customers/viewCustomers.php', [
             'page_title'    =>  "View Production Customers",
             'pht'           =>  ": Production Customers"
         ]);

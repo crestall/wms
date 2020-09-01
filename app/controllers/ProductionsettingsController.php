@@ -28,7 +28,7 @@ class ProductionSettingsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "job-status");
         Config::set('curPage', "job-status");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/jobStatus.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/jobStatus.php', [
             'page_title'    =>  "Production Job Status",
             'pht'           =>  ": Production Job Status"
         ]);
@@ -39,7 +39,7 @@ class ProductionSettingsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "sales-reps");
         Config::set('curPage', "sales-reps");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/salesReps.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/salesReps.php', [
             'page_title'    =>  "Production Sales Representatives",
             'pht'           =>  ": Production Sales Reps"
         ]);

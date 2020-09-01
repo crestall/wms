@@ -29,7 +29,7 @@ class SuppliersController extends Controller
         //render the page
         Config::setJsConfig('curPage', "add-supplier");
         Config::set('curPage', "add-supplier");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/addSupplier.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/suppliers/", Config::get('VIEWS_PATH') . 'suppliers/addSupplier.php', [
             'page_title'    =>  "Add Supplier for Production",
             'pht'           =>  ": Add Supplier Customer"
         ]);
@@ -40,7 +40,7 @@ class SuppliersController extends Controller
         //render the page
         Config::setJsConfig('curPage', "view-suppliers");
         Config::set('curPage', "view-suppliers");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewSuppliers.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/suppliers/", Config::get('VIEWS_PATH') . 'suppliers/viewSuppliers.php', [
             'page_title'    =>  "View Production Suppliers",
             'pht'           =>  ": Production Suppliers"
         ]);
