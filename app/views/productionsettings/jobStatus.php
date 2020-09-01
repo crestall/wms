@@ -31,7 +31,6 @@
             </div>
         </div>
         <?php if(count($status)):?>
-            <?php echo "<pre>",print_r($status),"</pre>";?>
             <?php foreach($status as $s):?>
                 <form class="edit-job-status border-bottom border-secondary border-bottom-dashed mb-3" action="/form/procJobStatusEdit" method="post">
                     <div class="form-group row">

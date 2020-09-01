@@ -22,6 +22,16 @@
                                 return false;
                             }
                         });
+                        $("form.edit-job-status").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Job Status...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
                     }
                 },
                 'sales-reps':{
