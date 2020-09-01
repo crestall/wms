@@ -24,21 +24,21 @@ class SalesRepsController extends Controller
     public function addRep()
     {
         //render the page
-        Config::setJsConfig('curPage', "add-sales-rep");
-        Config::set('curPage', "add-sales-rep");
+        Config::setJsConfig('curPage', "add-rep");
+        Config::set('curPage', "add-rep");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/addRep.php',
         [
             'page_title'    =>  'Add New Sales Rep'
         ]);
     }
 
-    public function editSalesRep()
+    public function editRep()
     {
         $rep_id = $this->request->params['args']['rep'];
         $rep_info = $this->salesrep->getRepById($rep_id);
         //render the page
-        Config::setJsConfig('curPage', "edit-sales-rep");
-        Config::set('curPage', "edit-sales-rep");
+        Config::setJsConfig('curPage', "edit-rep");
+        Config::set('curPage', "edit-rep");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/editRep.php',
         [
             'page_title'    =>  'Edit Sales Rep details',
