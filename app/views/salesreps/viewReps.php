@@ -3,7 +3,7 @@
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
-        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");echo $role;?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
             <div class="col-lg-12">
                 <?php if($active == 1):?>
@@ -52,7 +52,7 @@
                             <tr>
                                 <td data-label="Name"><?php echo $rep['name'];?></td>
                                 <td data-label="Phone" class="number"><?php echo $rep['phone'];?></td>
-                                <td data-label="Email"><?php echo $rep['email'];?></td>
+                                <td data-label="Email"><a href="mailto:<?php echo $rep['email'];?>"><?php echo $rep['email'];?></a></td>
                                 <td data-label="Comments"><?php echo nl2br($rep['comments']);?></td>
                                 <?php if($role == "production admin"):?>
                                     <td><a href="/sales-reps/edit-sales-rep/rep=<?php echo $rep['id'];?>">Edit Details</a></td>
