@@ -55,7 +55,7 @@
                                 <td data-label="Email"><a href="mailto:<?php echo $rep['email'];?>"><?php echo $rep['email'];?></a></td>
                                 <td data-label="Comments"><?php echo nl2br($rep['comments']);?></td>
                                 <?php if($role == "production admin"):?>
-                                    <td><a href="/sales-reps/edit-sales-rep/rep=<?php echo $rep['id'];?>">Edit Details</a></td>
+                                    <td><a href="/sales-reps/edit-rep/rep=<?php echo $rep['id'];?>">Edit Details</a></td>
                                 <?php endif;?>
                             </tr>
                         <?php endforeach;?>
