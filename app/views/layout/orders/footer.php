@@ -1310,7 +1310,16 @@
                                             $('.ui-widget-overlay').bind('click',function(){
                                                 $('#quote_pop').dialog('close');
                                             });
-
+                                            $('form#orders-add-package').submit(function(e){
+                                                if($(this).valid())
+                                                {
+                                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Packages...</h2></div>' });
+                                                }
+                                                else
+                                                {
+                                                    return false;
+                                                }
+                                            })
                                         }
                                 });
                                 $("#package_pop").dialog('open');
