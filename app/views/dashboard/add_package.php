@@ -1,5 +1,5 @@
-<div class="page-wrapper">
-    <div class="row">
+<div id="page-wrapper">
+    <div id="page_container" class="container-md">
         <form id="orders-add-package" method="post" action="/form/procAddPackages">
             <div class="form-group row">
                 <label class="col-md-3 col-sm-6"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
@@ -54,7 +54,7 @@
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="order_ids" value="<?php echo $order_ids;?>" />
             <div class="form-group row">
-                <div class="col-md-4 offset-md-3"> 
+                <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-primary">Add Package</button>
                 </div>
             </div>
