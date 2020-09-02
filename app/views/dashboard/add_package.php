@@ -56,11 +56,11 @@
                 <input type="hidden" name="order_ids[]" value="<?php echo $oid;?>" />
             <?php endforeach;?>
             <input type="hidden" name="client_id" value="<?php echo $client_id;?>" />
-            <div class="form-group row">
+            <!--div class="form-group row">
                 <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-outline-secondary">Add Package</button>
                 </div>
-            </div>
+            </div-->
         </form>
     </div>
 </div>
