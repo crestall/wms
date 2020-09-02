@@ -1271,6 +1271,7 @@
                                     }
                                 });
                                 var client_id = $('select#client_selector').val();
+                                var dialog, form;
                                 //make the package form window
                                 $('<div id="package_pop" title="Add Package For Selected Orders">').appendTo($('body'));
                                 $("#package_pop")
@@ -1291,7 +1292,7 @@
                                             }
                                         });
                                 });
-                                $("#package_pop").dialog({
+                                dialog = $("#package_pop").dialog({
                                         draggable: true,
                                         modal: true,
                                         show: true,
@@ -1310,20 +1311,13 @@
                                             $('.ui-widget-overlay').bind('click',function(){
                                                 $('#quote_pop').dialog('close');
                                             });
-                                            $('form#orders-add-package').submit(function(e){
-                                                console.log('submitted');
-                                                if($(this).valid())
-                                                {
-                                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Packages...</h2></div>' });
-                                                }
-                                                else
-                                                {
-                                                    return false;
-                                                }
-                                            })
                                         }
                                 });
                                 $("#package_pop").dialog('open');
+
+                                form = dialog.find( "form#orders-add-package" ).on( "submit", function( e ) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Packages...</h2></div>' });
+                                });
                             }
                         });
                     }
