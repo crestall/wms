@@ -5,7 +5,7 @@
                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
                 <div class="col-md-8">
                     <div class="input-group">
-                        <input type="text" class="form-control required number" name="width" id="width" value="<?php echo Form::value('width');?>" />
+                        <input type="text" class="form-control required number digits" name="width" id="width" value="<?php echo Form::value('width');?>" />
                         <span class="input-group-addon">cm</span>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Depth</label>
                 <div class="col-md-8">
                     <div class="input-group">
-                        <input type="text" class="form-control required number" name="depth" id="depth" value="<?php echo Form::value('depth');?>" />
+                        <input type="text" class="form-control required number digits" name="depth" id="depth" value="<?php echo Form::value('depth');?>" />
                         <span class="input-group-addon">cm</span>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Height</label>
                 <div class="col-md-8">
                     <div class="input-group">
-                        <input type="text" class="form-control required number" name="height" id="height" value="<?php echo Form::value('height');?>" />
+                        <input type="text" class="form-control required number digits" name="height" id="height" value="<?php echo Form::value('height');?>" />
                         <span class="input-group-addon">cm</span>
                     </div>
                 </div>
