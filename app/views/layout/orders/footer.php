@@ -1300,6 +1300,12 @@
                                         autoOpen: false,
                                         height: "auto",
                                         width: "auto",
+                                        buttons:{
+                                            'Add Package': function(){
+                                                $('form#orders-add-package').submit();
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Packages...</h2></div>' });
+                                            }
+                                        },
                                         create: function( event, ui ) {
                                             // Set maxWidth
                                             $(this).css("maxWidth", "660px");
