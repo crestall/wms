@@ -18,14 +18,9 @@
                     <?php echo Form::displayError('csv_file');?>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="header_row">My CSV has a header row</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="header_row" name="header_row" checked />
-                        <label for="header_row"></label>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="header_row" name="header_row" checked />
+                <label class="custom-control-label col-md-3" for="header_row">My CSV has a header row</label>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
@@ -53,14 +48,9 @@
                     <?php echo Form::displayError('reece_csv_file');?>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="reece_header_row">My CSV has a header row</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="reece_header_row" name="reece_header_row" checked />
-                        <label for="reece_header_row"></label>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="reece_header_row" name="reece_header_row" checked />
+                <label class="custom-control-label col-md-3" for="reece_header_row">My CSV has a header row</label>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
@@ -94,14 +84,9 @@
                     <?php echo Form::displayError('csv_user_file');?>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="user_header_row">My CSV has a header row</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="user_header_row" name="user_header_row" checked />
-                        <label for="user_header_row"></label>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="user_header_row" name="user_header_row" checked />
+                <label class="custom-control-label col-md-3" for="user_header_row">My CSV has a header row</label>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
@@ -129,14 +114,9 @@
                     <?php echo Form::displayError('reece_user_csv_file');?>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="reece_user_header_row">My CSV has a header row</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="reece_user_header_row" name="reece_user_header_row" checked />
-                        <label for="reece_user_header_row"></label>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="reece_user_header_row" name="reece_user_header_row" checked />
+                <label class="custom-control-label col-md-3" for="reece_user_header_row">My CSV has a header row</label>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
