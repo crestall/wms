@@ -4673,7 +4673,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."sales-reps/edit-sales-rep/rep=$rep_id");
+        return $this->redirector->to(PUBLIC_ROOT."sales-reps/edit-rep/rep=$rep_id");
     }
 
     public function procOrderAdd()
