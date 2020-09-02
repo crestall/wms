@@ -24,14 +24,9 @@ $country = empty(Form::value('country'))? $rep['country'] : Form::value('country
                     <?php echo Form::displayError('name');?>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="active">Active</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="active" name="active" <?php if($rep['active'] > 0) echo "checked";?> />
-                        <label for="active"></label>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="active" name="active" <?php if($rep['active'] > 0) echo "checked";?> />
+                <label class="custom-control-label col-md-3" for="active">Active</label>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Email</label>
