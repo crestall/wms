@@ -1291,13 +1291,17 @@
                                         });
                                 });
                                 $("#package_pop").dialog({
-                                        draggable: false,
+                                        draggable: true,
                                         modal: true,
                                         show: true,
                                         hide: true,
                                         autoOpen: false,
-                                        height: 520,
-                                        width: 620,
+                                        height: "auto",
+                                        width: "auto",
+                                        create: function( event, ui ) {
+                                            // Set maxWidth
+                                            $(this).css("maxWidth", "660px");
+                                        },
                                         close: function(){
                                             $("#package_pop").remove();
                                         },
