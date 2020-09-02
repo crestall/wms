@@ -59,6 +59,7 @@ class FormController extends Controller {
             'procAddLocation',
             'procAddMiscToOrder',
             'procAddPackage',
+            'procAddPackages',
             'procAddressUpdate',
             'procAddServiceJob',
             'procAddSerials',
@@ -84,6 +85,7 @@ class FormController extends Controller {
             'procGoodsOut',
             'procItemsUpdate',
             'procJobStatusAdd',
+            'procJobStatusEdit',
             'procLogin',
             'procMakePacks',
             'procMoveAllClientStock',
@@ -133,6 +135,51 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procAddPackages()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($width) || !$this->dataSubbed($height) || !$this->dataSubbed($depth) || !$this->dataSubbed($weight) || !$this->dataSubbed($count))
+        {
+            Session::set('errorfeedback', 'All fields must have a value<br/>Package has NOT been added');
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        elseif( (filter_var($width, FILTER_VALIDATE_FLOAT) === false || $width <= 0) || (filter_var($height, FILTER_VALIDATE_FLOAT) === false || $height <= 0) || (filter_var($depth, FILTER_VALIDATE_FLOAT) === false || $depth <= 0) || (filter_var($weight, FILTER_VALIDATE_FLOAT) === false || $weight <= 0) || (filter_var($count, FILTER_VALIDATE_INT) === false || $count <= 0) )
+        {
+            Session::set('errorfeedback', 'All values must have a positive number<br/>Package has NOT been added');
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $package = (isset($pallet))? "pallet" : "package";
+            foreach($this->request->data['order_ids'] as $oid)
+            {
+                $post_data['order_id'] = $oid;
+                $this->order->addPackage($post_data);
+            }
+            if($count > 1)
+            {
+                Session::set('feedback', "Those ".$package."s have been successfully added.");
+
+            }
+            else
+            {
+                Session::set('feedback', "That $package has been successfully added.");
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/view-orders/client=".$client_id);
     }
 
     public function procJobStatusEdit()
