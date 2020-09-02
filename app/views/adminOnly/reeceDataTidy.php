@@ -2,13 +2,13 @@
 
 ?>
 <div id="page-wrapper">
-    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Import Currently Stored Reece Departments</h2>
+    <div id="page_container" class="container-xl">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Import Currently Stored Reece Departments</h2>
+            </div>
         </div>
-    </div>
-    <div class="row">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="reece-department-upload" method="post" action="/form/procReeceDepartmentUpload" enctype="multipart/form-data">
             <div class="form-group row">
@@ -31,22 +31,20 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Upload It</button>
+                    <button type="submit" class="btn btn-outline-secondary">Upload It</button>
                 </div>
             </div>
         </form>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <hr/>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Check New Reece Data For Department Changes</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Check New Reece Data For Department Changes</h2>
+            </div>
         </div>
-    </div>
-    <div class="row">
         <form id="reece-supplied-data-upload-department" method="post" action="/form/procReeceDepartmentCheck" enctype="multipart/form-data">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reece Supplied Data</label>
@@ -68,27 +66,25 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Check It</button>
+                    <button type="submit" class="btn btn-outline-secondary">Check It</button>
                 </div>
             </div>
         </form>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <hr/>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <hr/>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Import Currently Stored Reece Users</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Import Currently Stored Reece Users</h2>
+            </div>
         </div>
-    </div>
-    <div class="row">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="reece-user-upload" method="post" action="/form/procReeceUserUpload" enctype="multipart/form-data">
             <div class="form-group row">
@@ -111,22 +107,20 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Upload It</button>
+                    <button type="submit" class="btn btn-outline-secondary">Upload It</button>
                 </div>
             </div>
         </form>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <hr/>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Check New Reece Data For User Changes</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Check New Reece Data For User Changes</h2>
+            </div>
         </div>
-    </div>
-    <div class="row">
         <form id="reece-supplied-data-upload-user" method="post" action="/form/procReeceUserCheck" enctype="multipart/form-data">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reece Supplied Data</label>
@@ -148,7 +142,7 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Check It</button>
+                    <button type="submit" class="btn btn-outline-secondary">Check It</button>
                 </div>
             </div>
         </form>
