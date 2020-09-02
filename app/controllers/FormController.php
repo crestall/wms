@@ -164,24 +164,22 @@ class FormController extends Controller {
         else
         {
             $package = (isset($pallet))? "pallet" : "package";
-            if($id = $this->order->addPackage($post_data))
+            foreach($this->request->data['order_ids'] as $oid)
             {
-                if($count > 1)
-                {
-                    Session::set('feedback', "Those ".$package."s have been added. They should be showing below");
+                $post_data['order_id'] = $oid;
+                $this->order->addPackage($post_data);
+            }
+            if($count > 1)
+            {
+                Session::set('feedback', "Those ".$package."s have been successfully added.");
 
-                }
-                else
-                {
-                    Session::set('feedback', "That $package has been added. It should be showing below");
-                }
             }
             else
             {
-                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+                Session::set('feedback', "That $package has been successfully added.");
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order=".$order_id."#package");
+        return $this->redirector->to(PUBLIC_ROOT."orders/view-orders/client=".$client_id);
     }
 
     public function procJobStatusEdit()
