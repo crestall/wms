@@ -52,7 +52,9 @@
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <input type="hidden" name="order_ids" value="<?php echo $order_ids;?>" />
+            <?php foreach($order_ids as $oid):?>
+                <input type="hidden" name="order_ids[]" value="<?php echo $oid;?>" />
+            <?php endforeach;?>
             <input type="hidden" name="client_id" value="<?php echo $client_id;?>" />
             <div class="form-group row">
                 <div class="col-md-4 offset-md-3">
