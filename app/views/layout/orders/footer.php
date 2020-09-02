@@ -1316,7 +1316,7 @@
                                 $("#package_pop").dialog('open');
 
                                 form = dialog.find( "form" ).on( "submit", function( e ) {
-                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Packages...</h2></div>' });
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Packages...</h2></div>', baseZ: 2000 });
                                 });
                             }
                         });
