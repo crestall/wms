@@ -2,56 +2,59 @@
     <div class="row">
         <form id="orders-add-package" method="post" action="/form/procAddPackages">
             <div class="form-group row">
-                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
-                <div class="col-md-8">
+                <label class="col-md-3 col-sm-6"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
+                <div class="col-md-3 col-sm-6">
                     <div class="input-group">
-                        <input type="text" class="form-control required number digits" name="width" id="width" value="<?php echo Form::value('width');?>" />
-                        <span class="input-group-addon">cm</span>
+                        <input type="text" class="form-control required number" name="width" id="width" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+                </div>
+                <label class="col-md-3 col-sm-6"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Depth</label>
+                <div class="col-md-3 col-sm-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control required number" name="depth" id="depth" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Depth</label>
-                <div class="col-md-8">
+                <label class="col-md-3 col-sm-6"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Height</label>
+                <div class="col-md-3 col-sm-6">
                     <div class="input-group">
-                        <input type="text" class="form-control required number digits" name="depth" id="depth" value="<?php echo Form::value('depth');?>" />
-                        <span class="input-group-addon">cm</span>
+                        <input type="text" class="form-control required number" name="height" id="height" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+                </div>
+                <label class="col-md-3 col-sm-6"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
+                <div class="col-md-3 col-sm-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control required number" name="weight" id="weight" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">Kg</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Height</label>
-                <div class="col-md-8">
-                    <div class="input-group">
-                        <input type="text" class="form-control required number digits" name="height" id="height" value="<?php echo Form::value('height');?>" />
-                        <span class="input-group-addon">cm</span>
-                    </div>
+                <label class="col-md-3 col-sm-6"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <span id='label_text'>Count</span></label>
+                <div class="col-md-3 col-sm-4">
+                    <input type="text" class="form-control required number" name="count" id="count" value="1" />
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
-                <div class="col-md-8">
-                    <div class="input-group">
-                        <input type="text" class="form-control required number" name="weight" id="weight" value="<?php echo Form::value('weight');?>" />
-                        <span class="input-group-addon">Kg</span>
-                    </div>
+                <div class="custom-control custom-checkbox col-sm-2">
+                    <input class="custom-control-input" type="checkbox" id="pallet" name="pallet" />
+                    <label class="custom-control-label" for="pallet">Pallet(s)?</label>
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="order_ids" value="<?php echo $order_ids;?>" />
             <div class="form-group row">
-                <label class="col-md-4 col-form-label">&nbsp;</label>
-                <div class="form-check">
-                    <div class="col-md-1 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="pallet" name="pallet" <?php if(!empty(Form::value('pallet'))) echo 'checked';?> />
-                        <label for="pallet"></label>
-                    </div>
-                    <label class="form-check-label col-md-7" for="pallet">Pallet</label>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-4 col-form-label">&nbsp;</label>
-                <div class="col-md-8">
+                <div class="col-md-4 offset-md-3"> 
                     <button type="submit" class="btn btn-primary">Add Package</button>
                 </div>
             </div>
