@@ -4640,10 +4640,6 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if($client_id == "0")
-        {
-            Form::setError('client_id', "A client must be chosen");
-        }
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name', 'A name is required');
