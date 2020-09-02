@@ -1264,17 +1264,18 @@
                                 var ids = [];
                                 $('input.select').each(function(i,e){
                                     var order_id = $(this).data('orderid');
-                                    console.log('order_id: '+ order_id);
+                                    //console.log('order_id: '+ order_id);
                                     if($(this).prop('checked') && ( $('select#courier_'+order_id).val() == -1) )
                                     {
                                         ids.push(order_id);
                                     }
                                 });
+                                var client_id = $('select#client_selector').val();
                                 //make the package form window
                                 $('<div id="package_pop" title="Add Package For Selected Orders">').appendTo($('body'));
                                 $("#package_pop")
                                     .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
-                                    .load('/ajaxfunctions/addPackageForm',{order_ids: ids},
+                                    .load('/ajaxfunctions/addPackageForm',{order_ids: ids, client_id: client_id},
                                         function(responseText, textStatus, XMLHttpRequest){
                                         if(textStatus == 'error') {
                                             $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
