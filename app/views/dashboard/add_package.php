@@ -1,5 +1,5 @@
 <div id="page-wrapper">
-    <div id="page_container" class="container-md">
+    <div id="page_container" class="container-md" style="min-height: 0; height: 260px;">
         <form id="orders-add-package" method="post" action="/form/procAddPackages">
             <div class="form-group row">
                 <label class="col-md-3 col-sm-6"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
