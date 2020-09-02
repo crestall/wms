@@ -59,6 +59,7 @@ class FormController extends Controller {
             'procAddLocation',
             'procAddMiscToOrder',
             'procAddPackage',
+            'procAddPackages',
             'procAddressUpdate',
             'procAddServiceJob',
             'procAddSerials',
@@ -84,6 +85,7 @@ class FormController extends Controller {
             'procGoodsOut',
             'procItemsUpdate',
             'procJobStatusAdd',
+            'procJobStatusEdit',
             'procLogin',
             'procMakePacks',
             'procMoveAllClientStock',
@@ -133,6 +135,11 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procAddPackages()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
     }
 
     public function procJobStatusEdit()
