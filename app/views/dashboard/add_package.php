@@ -38,7 +38,7 @@
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <input type="hidden" name="order_id" value="<?php echo $order_ids;?>" />
+            <input type="hidden" name="order_ids" value="<?php echo $order_ids;?>" />
             <div class="form-group row">
                 <label class="col-md-4 col-form-label">&nbsp;</label>
                 <div class="form-check">
