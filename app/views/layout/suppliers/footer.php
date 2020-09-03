@@ -14,6 +14,23 @@
                 'add-supplier':{
                     init: function(){
                         actions.common.init();
+                        $('form#add_production_supplier').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Supplier...</h2></div>' });
+                            }
+                        });
+                    }
+                },
+                'edit-supplier':{
+                    init: function(){
+                        actions.common.init();
+                        $('form#edit_production_supplier').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
+                            }
+                        });
                     }
                 },
                 'view-suppliers':{
