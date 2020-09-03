@@ -10,6 +10,18 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Contact</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="contact" id="contact" value="<?php echo Form::value('contact');?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Email</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required email" name="email" id="email" value="<?php echo Form::value('email');?>" />
+                </div>
+            </div>
+            <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-outline-secondary">Add This Supplier</button>
