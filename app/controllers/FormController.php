@@ -162,7 +162,7 @@ class FormController extends Controller {
         {
             Form::setError('email', 'A contact email is required');
         }
-        elseif(!$this->emailValid($tracking_email))
+        elseif(!$this->emailValid($email))
         {
             Form::setError('email', 'The email is not valid');
         }
