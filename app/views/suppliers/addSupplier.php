@@ -21,6 +21,7 @@
                     <input type="text" class="form-control required email" name="email" id="email" value="<?php echo Form::value('email');?>" />
                 </div>
             </div>
+            <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
             <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="col-md-4 offset-md-3">
