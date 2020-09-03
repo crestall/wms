@@ -1,5 +1,5 @@
 <?php
-    $link_text = (!$active)? "<a href='/clients/view-clients' class='btn btn-outline-fsg'>View Active Clients</a>" : "<a href='/clients/view-clients/active=0' class='btn btn-outline-fsg'>View Inactive Clients</a>";
+    $link_text = (!$active)? "<a href='/suppliers/view-suppliers' class='btn btn-outline-fsg'>View Active Suppliers</a>" : "<a href='/suppliers/view-suppliers/active=0' class='btn btn-outline-fsg'>View Inactive Suppliers</a>";
     $i = 1;
 ?>
 <div id="page-wrapper">
