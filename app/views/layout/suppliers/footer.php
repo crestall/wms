@@ -35,7 +35,9 @@
                 },
                 'view-suppliers':{
                     init: function(){
-
+                        dataTable.init($('table#supplier_list_table'), {
+                            "order": []
+                        } );
                     }
                 }
             }
