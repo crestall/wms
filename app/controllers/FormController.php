@@ -175,7 +175,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($post_data),"</pre>"; die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
             $this->productionsupplier->editSupplier($post_data);
             Session::set('feedback', "That supplier's details have been updated");
         }
