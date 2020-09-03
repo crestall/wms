@@ -52,12 +52,17 @@ class SuppliersController extends Controller
 
     public function viewSuppliers()
     {
+        $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
+
+        $suppliers = $this->productionsupplier->getAllSuppliers($active);
         //render the page
         Config::setJsConfig('curPage', "view-suppliers");
         Config::set('curPage', "view-suppliers");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/suppliers/", Config::get('VIEWS_PATH') . 'suppliers/viewSuppliers.php', [
             'page_title'    =>  "View Production Suppliers",
-            'pht'           =>  ": Production Suppliers"
+            'pht'           =>  ": Production Suppliers",
+            'active'        =>  $active,
+            'suppliers'     =>  $suppliers
         ]);
     }
 
