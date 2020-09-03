@@ -49,7 +49,7 @@ $country    = empty(Form::value('country'))?    $supplier['country']      : Form
             <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
             <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                <input type="hidden" name"supplier_id" value="<?php echo $supplier_id;?>" />
+                <input type="hidden" name="supplier_id" value="<?php echo $supplier_id;?>" />
                 <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-outline-secondary">Update Details</button>
                 </div>
