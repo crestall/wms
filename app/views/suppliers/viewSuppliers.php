@@ -25,12 +25,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($suppliers as $s):?>
+                    <?php foreach($suppliers as $s):
+                        $address_string = "";
+                        if(!empty($s['address'])) $address_string .= "<br/>".$s['address'];
+                        if(!empty($s['address_2'])) $address_string .= "<br/>".$s['address_2'];
+                        if(!empty($s['suburb'])) $address_string .= "<br/>".$s['suburb'];
+                        if(!empty($s['state'])) $address_string .= "<br/>".$s['state'];
+                        if(!empty($s['country'])) $address_string .= "<br/>".$s['country'];
+                        if(!empty($s['postcode'])) $address_string .= "<br/>".$s['postcode'];
+                        ?>
                     	<tr>
                             <td><?php echo $i;?></td>
                             <td data-label="Supplier Name"><?php echo $s['name'];?></td>
                             <td data-label="Contact Details"></td>
-                            <td data-label="Address Details"></td>
+                            <td data-label="Address Details"><?php echo $address_string;?></td>
                             <?php if($role == "production admin"):?>
                                 <td>
                                     <p><a class="btn btn-outline-secondary" href="/suppliers/edit-supplier/supplier=<?php echo $s['id'];?>" >Edit Details</a></p>
