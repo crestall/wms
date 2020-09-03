@@ -56,7 +56,7 @@ class Productionsupplier extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'          =>  strtolower($data['name']),
+            'name'          =>  $data['name'],
             'email'         =>  $data['email'],
             'contact'       =>  $data['contact']
         );
