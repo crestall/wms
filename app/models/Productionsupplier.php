@@ -60,6 +60,7 @@ class Productionsupplier extends Model{
             'email'         =>  $data['email'],
             'contact'       =>  $data['contact']
         );
+        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
@@ -77,6 +78,7 @@ class Productionsupplier extends Model{
             'name'          =>  strtolower($data['name']),
             'email'         =>  $data['email'],
             'contact'       =>  $data['contact'],
+            'phone'         =>  null,
             'address'       =>  null,
             'address_2'     =>  null,
             'suburb'        =>  null,
@@ -85,6 +87,7 @@ class Productionsupplier extends Model{
             'country'       =>  'AU'
         );
         $vals['active'] = isset($data['active'])? 1 : 0;
+        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];

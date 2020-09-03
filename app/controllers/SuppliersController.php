@@ -24,6 +24,21 @@ class SuppliersController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function editSupplier()
+    {
+        $supplier_id = $this->request->params['args']['supplier'];
+        $supplier_info = $this->productionsupplier->getSupplierById($supplier_id);
+        //render the page
+        Config::setJsConfig('curPage', "edit-supplier");
+        Config::set('curPage', "edit-supplier");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/suppliers/", Config::get('VIEWS_PATH') . 'suppliers/editSupplier.php', [
+            'page_title'    =>  "Update Supplier for Production",
+            'pht'           =>  ": Update Supplier Customer",
+            'supplier_id'   =>  $supplier_id,
+            'supplier'      =>  $supplier_info
+        ]);
+    }
+
     public function addSupplier()
     {
         //render the page

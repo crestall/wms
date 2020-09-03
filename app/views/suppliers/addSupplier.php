@@ -26,6 +26,12 @@ $country = Form::value('country');
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-md-3">Phone</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="phone" id="phone" value="<?php echo Form::value('phone');?>" />
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Email</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control required email" name="email" id="email" value="<?php echo Form::value('email');?>" />

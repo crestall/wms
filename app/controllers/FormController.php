@@ -78,6 +78,7 @@ class FormController extends Controller {
             'procCourierAdd',
             'procCourierEdit',
             'procDFCollection',
+            'procEditProductionSupplier',
             'procEditServiceJob',
             'procEditInstall',
             'procEncryptSomeShit',
@@ -138,6 +139,49 @@ class FormController extends Controller {
         $this->Security->requirePost($actions);
     }
 
+    public function procEditProductionSupplier()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($name))
+        {
+            Form::setError('name', 'The suppliers name is required');
+        }
+        if(!$this->dataSubbed($contact))
+        {
+            Form::setError('contact', 'A contact name is required');
+        }
+        if(!$this->dataSubbed($email))
+        {
+            Form::setError('email', 'A contact email is required');
+        }
+        elseif(!$this->emailValid($email))
+        {
+            Form::setError('email', 'The email is not valid');
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $this->productionsupplier->editSupplier($post_data);
+            Session::set('feedback', "That supplier's details have been updated");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."suppliers/edit-supplier/supplier=$supplier_id");
+    }
+
     public function procAddProductionSupplier()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
@@ -175,8 +219,8 @@ class FormController extends Controller {
         else
         {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $this->productionsupplier->addSupplier($post_data);
-            Session::set('feedback', "That supplier has been added to the system");
+            $id = $this->productionsupplier->addSupplier($post_data);
+            Session::set('feedback', "That supplier has been added to the system.<br/>The details can be editted <a href='/suppliers/edit-supplier/supplier=".$id."'>HERE</a>");
         }
         return $this->redirector->to(PUBLIC_ROOT."suppliers/add-supplier");
     }
