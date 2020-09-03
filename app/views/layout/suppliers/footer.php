@@ -7,12 +7,13 @@
             var actions = {
                 common: {
                     init: function(){
-
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                     }
                 },
                 'add-supplier':{
                     init: function(){
-
+                        actions.common.init();
                     }
                 },
                 'view-suppliers':{
