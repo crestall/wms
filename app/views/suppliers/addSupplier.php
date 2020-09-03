@@ -8,6 +8,8 @@
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="name" id="name" value="<?php echo Form::value('name');?>" />
                 </div>
+            </div>
+            <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-outline-secondary">Add This Supplier</button>
