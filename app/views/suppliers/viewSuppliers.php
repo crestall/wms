@@ -28,7 +28,7 @@
                     <tbody>
                     <?php foreach($suppliers as $s):
                         $address_string = "";
-                        if(!empty($s['address'])) $address_string .= "<br/>".$s['address'];
+                        if(!empty($s['address'])) $address_string .= $s['address'];
                         if(!empty($s['address_2'])) $address_string .= "<br/>".$s['address_2'];
                         if(!empty($s['suburb'])) $address_string .= "<br/>".$s['suburb'];
                         if(!empty($s['state'])) $address_string .= "<br/>".$s['state'];
