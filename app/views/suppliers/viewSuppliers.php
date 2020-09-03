@@ -10,8 +10,7 @@
                 <p class="text-right"><?php echo $link_text;?></p>
             </div>
         </div>
-        <?php if(count($suppliers)):
-            echo "<pre>",print_r($suppliers),"</pre>";?>
+        <?php if(count($suppliers)):?>
             <div class="col" id="table_holder" style="display:none">
                 <table id="supplier_list_table" class="table-striped table-hover">
                     <thead>
