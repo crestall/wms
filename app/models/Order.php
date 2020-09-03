@@ -109,7 +109,8 @@ class Order extends Model{
         $db = Database::openConnection();
         $q = "SELECT SUM(count) AS packages FROM orders_packages WHERE order_id = $id";
         $res = $db->queryRow($q);
-        return $res['packages'];
+        $pc = (empty($res['packages']))? 0 : $res['packages'];
+        return $pc;
     }
 
     public function isVicMetro($id)
