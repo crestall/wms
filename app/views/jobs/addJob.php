@@ -18,7 +18,7 @@
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Customer Details</h3>
-                <div class="form-group row">
+                <div class="form-group row mb-3">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
@@ -27,16 +27,16 @@
                     </div>
                 </div>
                 <div class="form-group row ">
-                    <label class="col-md-1">Contact</label>
-                    <div class="col-md-3">
+                    <label class="col-lg-1">Contact</label>
+                    <div class="col-lg-3">
                         <input type="text" class="form-control" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
                     </div>
-                    <label class="col-md-1">Email</label>
-                    <div class="col-md-3">
+                    <label class="col-lg-1">Email</label>
+                    <div class="col-lg-3">
                         <input type="text" class="form-control" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
                     </div>
-                    <label class="col-md-1">Phone</label>
-                    <div class="col-md-3">
+                    <label class="col-lg-1">Phone</label>
+                    <div class="col-lg-3">
                         <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
                     </div>
                 </div>
