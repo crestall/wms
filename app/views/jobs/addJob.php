@@ -24,8 +24,8 @@
                     <?php echo Form::displayError('customer_name');?>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="border border-secondary p-3 rounded">
+            <div class="form-group row border border-secondary p-3 rounded">
+
                     <label class="col-md-1">Contact</label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
@@ -38,7 +38,7 @@
                     <div class="col-md-3">
                         <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
                     </div>
-                </div>
+                
             </div>
         </form>
     </div>
