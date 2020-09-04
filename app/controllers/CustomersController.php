@@ -35,6 +35,21 @@ class CustomersController extends Controller
         ]);
     }
 
+    public function editCustomer()
+    {
+        $customer_id = $this->request->params['args']['customer'];
+        $customer_info = $this->productioncustomer->getCustomerById($customer_id);
+        //render the page
+        Config::setJsConfig('curPage', "edit-customer");
+        Config::set('curPage', "edit-customer");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/customers/", Config::get('VIEWS_PATH') . 'customers/editCustomer.php', [
+            'page_title'    =>  "Update Customer for Production",
+            'pht'           =>  ": Update Production Customer",
+            'customer_id'   =>  $customer_id,
+            'customer'      =>  $customer_info
+        ]);
+    }
+
     public function viewCustomers()
     {
         //render the page
