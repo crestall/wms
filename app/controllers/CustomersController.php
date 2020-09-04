@@ -52,12 +52,14 @@ class CustomersController extends Controller
 
     public function viewCustomers()
     {
+        $customers = $this->productioncustomer->getAllCustomers();
         //render the page
         Config::setJsConfig('curPage', "view-customers");
         Config::set('curPage', "view-customers");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/customers/", Config::get('VIEWS_PATH') . 'customers/viewCustomers.php', [
             'page_title'    =>  "View Production Customers",
-            'pht'           =>  ": Production Customers"
+            'pht'           =>  ": Production Customers",
+            'customers'     =>  $customers
         ]);
     }
 
