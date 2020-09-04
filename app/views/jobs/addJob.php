@@ -27,16 +27,16 @@
                     </div>
                 </div>
                 <div class="form-group row ">
-                    <label class="col-lg-1">Contact</label>
-                    <div class="col-lg-3">
+                    <label class="col-lg-1 col-md-2">Contact</label>
+                    <div class="col-lg-3 col-md-4">
                         <input type="text" class="form-control" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
                     </div>
-                    <label class="col-lg-1">Email</label>
-                    <div class="col-lg-3">
+                    <label class="col-lg-1 col-md-2">Email</label>
+                    <div class="col-lg-3 col-md-4">
                         <input type="text" class="form-control" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
                     </div>
-                    <label class="col-lg-1">Phone</label>
-                    <div class="col-lg-3">
+                    <label class="col-lg-1 col-md-2">Phone</label>
+                    <div class="col-lg-3 col-md-4">
                         <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
                     </div>
                 </div>
