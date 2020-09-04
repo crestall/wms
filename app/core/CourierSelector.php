@@ -287,15 +287,9 @@
                 $min = min(array_filter(array($df,$ep)));
                 $courier_id = array_search($min, $cs);
 
-                echo "<p>Will assign $order_id to $courier_id for $min</p>";
+                //echo "<p>Will assign $order_id to $courier_id for $min</p>";
+                $this->assignCourier($order_id, $courier_id);
             }
-            else
-            {
-                echo "<p>Could not assign $order_id</p>";
-            }
-
-
-            //$this->assignCourier($order_id, $courier_id);
         }
     }
 
