@@ -263,14 +263,15 @@
 
             $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
             $dfresponse = $this->controller->directfreight->getQuote($df_details);
+            $df_response = json_decode($dfresponse,true);
 
             if(!isset($sResponse['errors']))
                 $ep = ($sResponse['shipments'][0]['shipment_summary']['total_cost'] > 0)? round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.1,2) : "";
             else
                 $ep = "";
 
-            if($dfresponse['ResponseCode'] == 300)
-                $df = round($dfresponse['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);
+            if($df_response['ResponseCode'] == 300)
+                $df = round($df_response['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);
             else
                 $df = "";
 
