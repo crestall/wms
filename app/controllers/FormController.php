@@ -152,6 +152,33 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if(!$this->dataSubbed($name))
+        {
+            Form::setError('name', 'The customer name is required');
+        }
+        if($this->dataSubbed($email))
+        {
+            if(!$this->emailValid($email))
+            {
+                Form::setError('email', 'The email is not valid');
+            }
+        }
+        if(isset($address) || isset($suburb) || isset($state) || isset($postcode) || isset($country))
+        {
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            echo "<pre>",print_r($post_data),"</pre>"; die();
+            $id = $this->productionsupplier->addSupplier($post_data);
+            Session::set('feedback', "That customer has been added to the system.<br/>The details can be editted <a href='/customers/edit-customer/customer=".$id."'>HERE</a>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."customers/add-customer");
     }
 
     public function procEditProductionSupplier()
