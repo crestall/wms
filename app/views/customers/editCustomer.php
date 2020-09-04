@@ -23,9 +23,9 @@ $country    = empty(Form::value('country'))?    $customer['country']      : Form
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Contact</label>
+                <label class="col-md-3">Contact</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control required" name="contact" id="contact" value="<?php echo $contact;?>" />
+                    <input type="text" class="form-control" name="contact" id="contact" value="<?php echo $contact;?>" />
                 </div>
             </div>
             <div class="form-group row">
@@ -37,7 +37,7 @@ $country    = empty(Form::value('country'))?    $customer['country']      : Form
             <div class="form-group row">
                 <label class="col-md-3">Email</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control required email" name="email" id="email" value="<?php echo $email;?>" />
+                    <input type="text" class="form-control email" name="email" id="email" value="<?php echo $email;?>" />
                     <?php echo Form::displayError('email');?>
                 </div>
             </div>
