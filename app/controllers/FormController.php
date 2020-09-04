@@ -174,9 +174,8 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($post_data),"</pre>"; die();
-            $id = $this->productionsupplier->addSupplier($post_data);
-            Session::set('feedback', "That customer has been added to the system.<br/>The details can be editted <a href='/customers/edit-customer/customer=".$id."'>HERE</a>");
+            $id = $this->productioncustomer->addCustomer($post_data);
+            Session::set('feedback', "That customer has been added to the system.<br/>The details can be edited <a href='/customers/edit-customer/customer=".$id."'>HERE</a>");
         }
         return $this->redirector->to(PUBLIC_ROOT."customers/add-customer");
     }
