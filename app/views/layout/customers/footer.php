@@ -7,15 +7,27 @@
             var actions = {
                 common: {
                     init: function(){
-
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                     }
                 },
                 'add-customer':{
                     init: function(){
-
+                        actions.common.init();
+                        $('form#add_production_customer').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Customer...</h2></div>' });
+                            }
+                        });
                     }
                 },
                 'view-customers':{
+                    init: function(){
+
+                    }
+                },
+                'edit-customer':{
                     init: function(){
 
                     }
