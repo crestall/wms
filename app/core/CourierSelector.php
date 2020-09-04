@@ -274,7 +274,7 @@
                 $df = round($df_response['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);
             else
                 $df = "";
-            if(isset($df) && isset($ep))
+            if(!empty($df) && !empty($ep))
             {
                 $cs = array(
                     $this->controller->courier->eParcelId           =>  $ep,
