@@ -274,19 +274,26 @@
                 $df = round($df_response['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);
             else
                 $df = "";
+            if(isset($df) && isset($ep))
+            {
+                $cs = array(
+                    $this->controller->courier->eParcelId           =>  $ep,
+                    $this->controller->courier->directFreightId     =>  $df,
+                    //$this->controller->courier->huntersPluId =>  $hplu,
+                    //$this->controller->courier->huntersPalId =>  $hpal
+                );
 
-            $cs = array(
-                $this->controller->courier->eParcelId           =>  $ep,
-                $this->controller->courier->directFreightId     =>  $df,
-                //$this->controller->courier->huntersPluId =>  $hplu,
-                //$this->controller->courier->huntersPalId =>  $hpal
-            );
+                //$min = min(array_filter(array($h3kg,$ep, $hplu, $hpal)));
+                $min = min(array_filter(array($df,$ep)));
+                $courier_id = array_search($min, $cs);
 
-            //$min = min(array_filter(array($h3kg,$ep, $hplu, $hpal)));
-            $min = min(array_filter(array($df,$ep)));
-            $courier_id = array_search($min, $cs);
+                echo "<p>Will assign $order_id to $courier_id for $min</p>";
+            }
+            else
+            {
+                echo "<p>Could not assign $order_id</p>";
+            }
 
-            echo "<p>Will assign $order_id to $courier_id for $min</p>";
 
             //$this->assignCourier($order_id, $courier_id);
         }
