@@ -37,10 +37,8 @@
                     <label class="col-md-1">Phone</label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
-                    </div
+                    </div>
                 </div>
-                >
-            </div>
         </form>
     </div>
 </div>
