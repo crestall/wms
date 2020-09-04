@@ -39,6 +39,7 @@
                         <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
                     </div>
                 </div>
+            </div>
         </form>
     </div>
 </div>
