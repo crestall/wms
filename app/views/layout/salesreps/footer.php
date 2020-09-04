@@ -10,11 +10,11 @@
 
                     }
                 },
-                'add-sales-rep':{
+                'add-rep':{
                     init: function()
                     {
-                        autoCompleter.addressAutoComplete($('#address'));
-                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        //autoCompleter.addressAutoComplete($('#address'));
+                        //autoCompleter.suburbAutoComplete($('#suburb'));
                         $('form#add-sales-rep').submit(function(){
                             if($(this).valid())
                             {
@@ -23,11 +23,11 @@
                         });
                     }
                 },
-                'edit-sales-rep':{
+                'edit-rep':{
                     init: function()
                     {
-                        autoCompleter.addressAutoComplete($('#address'));
-                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        //autoCompleter.addressAutoComplete($('#address'));
+                        //autoCompleter.suburbAutoComplete($('#suburb'));
                         $('form#edit-sales-rep').submit(function(){
                             if($(this).valid())
                             {

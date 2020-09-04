@@ -124,7 +124,7 @@
         				<th>Date<br/>Ordered</th>
         				<!--th>Status</th-->
         				<th>Slip<br/>Printed</th>
-                        <th>Package<br/>Entered</th>
+                        <th>Packages<br/>Entered</th>
                         <!--th>
                             Ignore Price Check
                             <div class="checkbox checkbox-default">
@@ -214,7 +214,8 @@
                         $address_string .= " ".$co['state'];
                         $address_string .= " ".$co['postcode'];
                         $address_string .= " ".$co['country'];
-                        $pe = ($this->controller->order->hasAssociatedPackage($co['id']))? "Yes":"No";
+                        //$pe = ($this->controller->order->hasAssociatedPackage($co['id']))? "Yes":"No";
+                        $package_count = $this->controller->order->countAssociatedPackage($co['id']);
                         /*
                         */
                         ?>
@@ -241,7 +242,7 @@
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
         					<!--td data-label="Status"><?php echo $order_status;?></td-->
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
-                            <td data-label="Package Entered"><?php echo $pe;?></td>
+                            <td data-label="Package Entered" class="number"><?php echo $package_count;?></td>
                             <!--td data-label="Ignore Price Restriction" class="chkbox">
                                 <div class="checkbox checkbox-default">
                                     <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select_np styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />

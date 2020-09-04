@@ -104,6 +104,15 @@ class Order extends Model{
         return $db->queryValue('orders_packages', array('order_id' => $id));
     }
 
+    public function countAssociatedPackage($id)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT SUM(count) AS packages FROM orders_packages WHERE order_id = $id";
+        $res = $db->queryRow($q);
+        $pc = (empty($res['packages']))? 0 : $res['packages'];
+        return $pc;
+    }
+
     public function isVicMetro($id)
     {
         $od = $this->getOrderDetail($id);

@@ -7,15 +7,15 @@ $postcode = empty(Form::value('postcode'))? $rep['postcode'] : Form::value('post
 $country = empty(Form::value('country'))? $rep['country'] : Form::value('country');
 ?>
 <div id="page-wrapper">
+    <div id="page_container" class="container-xl">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div class="row">
         <div class="col-md-12">
-            <p><a class="btn btn-primary" href="/sales-reps/view-reps">View List of Reps</a></p>
+            <p><a class="btn btn-outline-fsg" href="/sales-reps/view-reps">View List of Reps</a></p>
         </div>
     </div>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
     <?php echo Form::displayError('general');?>
-    <div class="row">
         <form id="edit-sales-rep" method="post" action="/form/procRepEdit">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
@@ -24,14 +24,9 @@ $country = empty(Form::value('country'))? $rep['country'] : Form::value('country
                     <?php echo Form::displayError('name');?>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="form-check">
-                    <label class="form-check-label col-md-3" for="active">Active</label>
-                    <div class="col-md-4 checkbox checkbox-default">
-                        <input class="form-check-input styled" type="checkbox" id="active" name="active" <?php if($rep['active'] > 0) echo "checked";?> />
-                        <label for="active"></label>
-                    </div>
-                </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="active" name="active" <?php if($rep['active'] > 0) echo "checked";?> />
+                <label class="custom-control-label col-md-3" for="active">Active</label>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Email</label>

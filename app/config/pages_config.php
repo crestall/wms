@@ -31,6 +31,10 @@ $padmin = array(
             'display'       => true,
             'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
         ),
+        'edit-supplier'  => array(
+            'display'   => false,
+            'icon'      => ''
+        )
     ),
     'production-settings'   => array(
         'production-settings-index' => true,
