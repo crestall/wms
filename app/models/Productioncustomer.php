@@ -75,7 +75,7 @@ class Productioncustomer extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'          =>  strtolower($data['name']),
+            'name'          =>  $data['name'],
             'email'         =>  null,
             'contact'       =>  null,
             'phone'         =>  null,
