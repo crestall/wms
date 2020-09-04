@@ -24,7 +24,9 @@
                 },
                 'view-customers':{
                     init: function(){
-
+                        dataTable.init($('table#customer_list_table'), {
+                            "order": []
+                        } );
                     }
                 },
                 'edit-customer':{
