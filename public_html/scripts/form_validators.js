@@ -80,6 +80,12 @@ $(document).ready(function() {
     $.validator.setDefaults({
         //errorElement: "p",
         errorElement: "em",
+        invalidHandler: function(form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+                validator.errorList[0].element.focus();
+            }
+        },
         highlight: function ( element, errorClass, validClass ) {
         	$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
         },
