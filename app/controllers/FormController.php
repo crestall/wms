@@ -179,7 +179,7 @@ class FormController extends Controller {
             $this->productioncustomer->editCustomer($post_data);
             Session::set('feedback', "That customers's details have been updated");
         }
-        return $this->redirector->to(PUBLIC_ROOT."suppliers/edit-customer/customer=$customer_id");
+        return $this->redirector->to(PUBLIC_ROOT."customers/edit-customer/customer=$customer_id");
     }
 
     public function procAddProductionCustomer()
