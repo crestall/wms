@@ -163,7 +163,7 @@ class FormController extends Controller {
                 Form::setError('email', 'The email is not valid');
             }
         }
-        if(isset($address) || isset($suburb) || isset($state) || isset($postcode) || isset($country))
+        if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
         {
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         }
