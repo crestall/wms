@@ -16,16 +16,17 @@
                     <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
-                    <input type="hidden" name="customer_id" id="customer_id" value="0" />
-                    <?php echo Form::displayError('customer_name');?>
+            <div class="border border-secondary p-3 m-3 rounded">
+                <h3>Customer Details</h3>
+                <div class="form-group row">
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                        <input type="hidden" name="customer_id" id="customer_id" value="0" />
+                        <?php echo Form::displayError('customer_name');?>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row border border-secondary p-3 m-3 rounded">
-
+                <div class="form-group row ">
                     <label class="col-md-1">Contact</label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
@@ -38,8 +39,9 @@
                     <div class="col-md-3">
                         <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
                     </div>
-
+                </div>
             </div>
+
         </form>
     </div>
 </div>
