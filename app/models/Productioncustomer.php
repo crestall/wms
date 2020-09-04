@@ -95,7 +95,7 @@ class Productioncustomer extends Model{
         if(!empty($data['state'])) $vals['state'] = $data['state'];
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
-        $id = $db->updateDatabaseFields($this->table, $vals, $data['supplier_id']);
+        $id = $db->updateDatabaseFields($this->table, $vals, $data['customer_id']);
         return $id;
     }
 }
