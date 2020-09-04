@@ -40,6 +40,14 @@
                         <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-outline-fsg" data-toggle="collapse" data-target="#customer_address" aria-expanded="false" aria-controls="customer_address">Show Address</button>
+                    </div>
+                </div>
+                <div id="customer_address" class="collapse">
+                    <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
+                </div>
             </div>
 
         </form>
