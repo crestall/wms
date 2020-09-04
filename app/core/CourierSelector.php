@@ -261,53 +261,33 @@
             $eparcel_shipments['shipments'][0]  = $eparcel_details;
             $sResponse = $this->controller->Eparcel->GetQuote($eparcel_shipments);
 
-            /*
-            $h_details = $this->controller->Hunters3KG->getDetails($this->order_details, $this->items);
-            $h3kg_result = $this->controller->Hunters3KG->getQuote($h_details);
-            $hplu_result = $this->controller->HuntersPLU->getQuote($h_details);
-            //$hpal_result = $this->controller->HuntersPAL->getQuote($h_details);*/
-             /*
-            if( empty($h3kg_result) || isset($h3kg_result['errorCode']))
-                $h3kg = "";
-            else
-                $h3kg = ($h3kg_result[0]['fee']*1.1 > 0)? $h3kg_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE') : "";
-            if( empty($hplu_result) || isset($hplu_result['errorCode']))
-                $hplu = "";
-            else
-                $hplu = ($hplu_result[0]['fee']*1.1 > 0)? $hplu_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE') : "";
+            $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
+            $dfresponse = $this->controller->directfreight->getQuote($df_details);
 
-            if( empty($hpal_result) || isset($hpal_result['errorCode']))
-                $hpal = "";
-            else
-                $hpal = ($hpal_result[0]['fee']*1.1 > 0)? $hpal_result[0]['fee']*1.1*Config::get('HUNTERS_FUEL_SURCHARGE') : "";
-            */
             if(!isset($sResponse['errors']))
-                $ep = ($sResponse['shipments'][0]['shipment_summary']['total_cost'] > 0)? $sResponse['shipments'][0]['shipment_summary']['total_cost'] : "";
+                $ep = ($sResponse['shipments'][0]['shipment_summary']['total_cost'] > 0)? round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.1,2) : "";
             else
                 $ep = "";
 
+            if($dfresponse['ResponseCode'] == 300)
+                $df = round($dfresponse['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);
+            else
+                $df = "";
+
             $cs = array(
-                $this->controller->courier->eParcelId    =>  $ep,
-                //$this->controller->courier->huntersId    =>  $h3kg,
+                $this->controller->courier->eParcelId           =>  $ep,
+                $this->controller->courier->directFreightId     =>  $df,
                 //$this->controller->courier->huntersPluId =>  $hplu,
                 //$this->controller->courier->huntersPalId =>  $hpal
             );
 
-            if($this->order_details['client_id'] == 59)
-            {
-                //no eparcel for NOA
-               // $min = min(array_filter(array($h3kg, $hplu, $hpal)));
-                $min = min(array_filter(array($h3kg, $hplu)));
-                $courier_id = array_search($min, $cs);
-            }
-            else
-            {
-                //$min = min(array_filter(array($h3kg,$ep, $hplu, $hpal)));
-                $min = min(array_filter(array($h3kg,$ep, $hplu)));
-                $courier_id = array_search($min, $cs);
-            }
+            //$min = min(array_filter(array($h3kg,$ep, $hplu, $hpal)));
+            $min = min(array_filter(array($df,$ep)));
+            $courier_id = array_search($min, $cs);
 
-            $this->assignCourier($order_id, $courier_id);
+            echo "<p>Will assign $order_id to $courier_id</p>";
+
+            //$this->assignCourier($order_id, $courier_id);
         }
     }
 
