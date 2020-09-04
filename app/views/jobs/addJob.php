@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="border-border-secondary p-3 rounded">
+                <div class="border border-secondary p-3 rounded">
                     <label class="col-md-1">Contact</label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
