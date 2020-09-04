@@ -164,7 +164,10 @@ class FormController extends Controller {
                 Form::setError('email', 'The email is not valid');
             }
         }
-        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
+        {
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
@@ -173,10 +176,10 @@ class FormController extends Controller {
         else
         {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $this->productionsupplier->editSupplier($post_data);
-            Session::set('feedback', "That supplier's details have been updated");
+            $this->productioncustomer->editCustomer($post_data);
+            Session::set('feedback', "That customers's details have been updated");
         }
-        return $this->redirector->to(PUBLIC_ROOT."suppliers/edit-supplier/supplier=$supplier_id");
+        return $this->redirector->to(PUBLIC_ROOT."suppliers/edit-customer/customer=$customer_id");
     }
 
     public function procAddProductionCustomer()
