@@ -38,7 +38,7 @@
                             <td><?php echo $i;?></td>
                             <td data-label="Supplier Name"><?php echo $s['name'];?></td>
                             <td data-label="Contact Details"></td>
-                            <td data-label="Address Details"><?php echo $address_string;?></td>
+                            <td data-label="Address Details" class="text-right"><?php echo $address_string;?></td>
                             <?php if($role == "production admin"):?>
                                 <td>
                                     <p><a class="btn btn-outline-secondary" href="/suppliers/edit-supplier/supplier=<?php echo $s['id'];?>" >Edit Details</a></p>
