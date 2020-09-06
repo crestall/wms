@@ -216,6 +216,12 @@
                         $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
                     }
                 /*********** end charge FREEDOM more *******************/
+                /*********** special deals for OnePlate *******************/
+                if($this->order_details['client_id'] == 82)
+                {
+                    $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2); 
+                }
+                /*********** special deals for OnePlate *******************/
                 $order_values['courier_id'] = $this->controller->courier->directFreightId;
                 $order_values['label_url'] = $response['LabelURL'];
                 if($this->addBubblewrap())
