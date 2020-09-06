@@ -14,7 +14,7 @@
                     init: function(){
                         $('a#customer_address_toggle').click(function(e){
                             e.preventDefault();
-                             $(this).toggleText('Show Address Details', 'Hide Address Details');
+                             $(this).text('Show Address Details', 'Hide Address Details');
                         })
                     }
                 },
