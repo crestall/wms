@@ -12,7 +12,8 @@
                 },
                 'add-job':{
                     init: function(){
-                        $('a#customer_address_toggle').toggle(function(e){
+                        $('a#customer_address_toggle').toggle(
+                            function(){
                                 $(this).text('Show Address Details');
                             },
                             function(){
