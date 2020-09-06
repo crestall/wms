@@ -49,7 +49,7 @@ $country = Form::value('country');
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col text-right">
                         <a  id="customer_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#customer_address" role="button" aria-expanded="false" aria-controls="customer_address"> </a>
                     </div>
                 </div>
