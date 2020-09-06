@@ -50,10 +50,10 @@ $country = Form::value('country');
                 </div>
                 <div class="row">
                     <div class="col">
-                        <a class="btn btn-outline-fsg" data-toggle="collapse" href="#customer_address" role="button" aria-expanded="false" aria-controls="customer_address">Show Address</a>
+                        <a  id="customer_address_toggle" class="btn btn-outline-fsg" data-toggle="collapse" href="#customer_address" role="button" aria-expanded="false" aria-controls="customer_address">Show Address</a>
                     </div>
                 </div>
-                <div id="customer_address" class="collapse">
+                <div id="customer_address" class="collapse mt-3">
                     <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
                 </div>
             </div>
