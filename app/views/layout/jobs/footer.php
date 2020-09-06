@@ -12,13 +12,7 @@
                 },
                 'add-job':{
                     init: function(){
-                        $('a#customer_address_toggle').toggle(
-                            function(){
-                                $(this).text('Show Address Details');
-                            },
-                            function(){
-                                $(this).text('Hide Address Details');
-                        });
+                        
                     }
                 },
                 'view-jobs':{
