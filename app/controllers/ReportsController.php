@@ -70,6 +70,22 @@ class ReportsController extends Controller
         ]);
     }
 
+    public function clientBaysUsageReport()
+    {
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        $client_name = $this->client->getClientName($client_id);
+        $bays = $this->location->getClientsBaysUsage($client_id);
+        Config::setJsConfig('curPage', "client-bays-usage-report");
+        Config::set('curPage', "client-bays-usage-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBaysUsage.php',[
+            'page_title'    => ucwords(strtolower($client_name)).' Bays In Use',
+            'pht'           => 'Bays Used',
+            'bays'          => $bays,
+            'client_id'     => $client_id,
+            'client_name'   => $client_name
+        ]);
+    }
+
     public function emptyBayReport()
     {
         $locations = $this->location->getEmptyLocations();
