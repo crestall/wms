@@ -103,8 +103,8 @@ class Productioncustomer extends Model{
     {
         $db = Database::openConnection();
         $return_array = array();
-        echo "The request<pre>",print_r($data),"</pre>";die();
-        $q = $data["customer"];
+        //echo "The request<pre>",print_r($data),"</pre>";die();
+        $q = $data;
         $query = "
             SELECT
                 *
