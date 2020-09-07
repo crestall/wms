@@ -12,7 +12,13 @@
                 },
                 'add-job':{
                     init: function(){
-                        $('input#customer_name').autoCompleter.productionJobCustomerAutoComplete($(this), selectCallback, changeCallback);
+                        $("input#customer_name").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.productionJobCustomerAutoComplete($(this), selectCallback, changeCallback);
+                        });
                         function selectCallback(event, ui)
                         {
                             $('input#customer_contact').val(ui.item.contact);
