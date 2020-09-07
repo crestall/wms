@@ -12,7 +12,7 @@
                 },
                 'add-job':{
                     init: function(){
-                        autoCompleter.addressAutoComplete($('#customer_address', 'customer_'));
+                        autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
                         $("input#customer_name").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
                             {
