@@ -40,6 +40,12 @@
                                 return false;
                             }
                         }
+                        $("form#add_production_job").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding the Job...</h2></div>' });
+                            }
+                        });
                     }
                 },
                 'view-jobs':{
