@@ -33,8 +33,10 @@
                         {
                             if (!ui.item)
                 	        {
-                                $(event.target).val("");
                                 $('input#customer_id').val(0);
+                                $('input.customer').each(function(element, index){
+                                    $(this).val("");
+                                })
                                 return false;
                             }
                         }
