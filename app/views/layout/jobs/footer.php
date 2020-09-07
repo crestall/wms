@@ -61,7 +61,7 @@
                                 $('#date_entered_value').val(s);
                             }
                         });
-                        $('i#date-entered_calendar').css('cursor', 'pointer').click(function(e){
+                        $('i#date_entered_calendar').css('cursor', 'pointer').click(function(e){
                             console.log('click');
                             $('input#date_entered').focus();
                         });
