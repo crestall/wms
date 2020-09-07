@@ -27,7 +27,7 @@ $country = Form::value('country');
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
                 <div class="col-md-4">
-                    <textarea name="description" id="description" class="form-control" rows="3"><?php echo Form::value('description');?></textarea>
+                    <textarea name="description" id="description" class="form-control required" rows="3"><?php echo Form::value('description');?></textarea>
                 </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
