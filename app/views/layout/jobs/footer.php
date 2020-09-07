@@ -22,6 +22,8 @@
                         function selectCallback(event, ui)
                         {
                             $('input#customer_contact').val(ui.item.contact);
+                            $('input#customer_email').val(ui.item.email);
+                            $('input#customer_phone').val(ui.item.phone);
                             return false;
                         }
                         function changeCallback(event, ui)
