@@ -29,7 +29,7 @@ $country = Form::value('country');
                 <div class="form-group row mb-3">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control customer" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                        <input type="text" class="form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
                         <input type="hidden" name="customer_id" id="customer_id" value="0" />
                         <?php echo Form::displayError('customer_name');?>
                     </div>
