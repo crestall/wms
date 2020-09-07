@@ -6,6 +6,7 @@ $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
+$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_date_value');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -38,6 +39,18 @@ $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value
                         </div>
                     </div>
                     <input type="hidden" name="date_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text" class="required form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                            <div class="input-group-append">
+                                <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="date_value" id="date_entered_value" value="<?php echo $date_due;?>" />
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
