@@ -346,6 +346,10 @@ return array(
             'empty-bay-report'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
+            ),
+            'client-bays-usage-report'    => array(
+                'display'   => true,
+                'icon'      => '<i class="fal fa-inventory fa-3x"></i>'
             )
 		),
         'data-entry'    =>  array(
