@@ -62,6 +62,7 @@
                             }
                         });
                         $('i.fa-calendar-alt').css('cursor', 'pointer').click(function(e){
+                            console.log('click');
                             $('input#date_entered').focus();
                         });
                     }
