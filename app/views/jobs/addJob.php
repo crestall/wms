@@ -33,7 +33,7 @@ $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value
                         <div class="input-group">
                             <input type="text" class="required form-control" name="date_entered" id="date_entered" value="<?php echo date('d/m/Y', $date_entered);?>" />
                             <div class="input-group-append">
-                                <span class="input-group-text"><i id="date_entered_calendar" class="fad fa-calendar-alt"></i></span>
+                                <span id="date_entered_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
                         </div>
                     </div>
