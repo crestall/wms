@@ -27,6 +27,10 @@
                             $('input#customer_phone').val(ui.item.phone);
                             $('input#customer_id').val(ui.item.customer_id);
                             $('input#customer_address').val(ui.item.address);
+                            $('input#customer_address2').val(ui.item.address_2);
+                            $('input#customer_suburb').val(ui.item.suburb);
+                            $('input#customer_state').val(ui.item.state);
+                            $('input#customer_country').val(ui.item.country);
                             return false;
                         }
                         function changeCallback(event, ui)
