@@ -29,7 +29,7 @@ $country = Form::value('country');
                 <div class="form-group row mb-3">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                        <input type="text" class="form-control customer" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
                         <input type="hidden" name="customer_id" id="customer_id" value="0" />
                         <?php echo Form::displayError('customer_name');?>
                     </div>
@@ -37,15 +37,15 @@ $country = Form::value('country');
                 <div class="form-group row ">
                     <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
+                        <input type="text" class="form-control customer" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
                     </div>
                     <label class="col-lg-1 col-md-2">Email</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
+                        <input type="text" class="form-control customer" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
                     </div>
                     <label class="col-lg-1 col-md-2">Phone</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
+                        <input type="text" class="form-control customer" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
                     </div>
                 </div>
                 <div class="row">
@@ -57,7 +57,7 @@ $country = Form::value('country');
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Address Line 1</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="customer_address" id="customer_address" value="<?php echo Form::value('customer_address');?>" />
+                            <input type="text" class="form-control customer" name="customer_address" id="customer_address" value="<?php echo Form::value('customer_address');?>" />
                             <?php echo Form::displayError('customer_address');?>
                         </div>
                         <div class="col-md-3 checkbox checkbox-default">
@@ -68,20 +68,20 @@ $country = Form::value('country');
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Address Line 2</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="customer_address2" id="customer_address2" value="<?php echo Form::value('customer_address2');?>" />
+                            <input type="text" class="form-control customer" name="customer_address2" id="customer_address2" value="<?php echo Form::value('customer_address2');?>" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Suburb/Town</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="customer_suburb" id="customer_suburb" value="<?php echo Form::value('customer_suburb');?>" />
+                            <input type="text" class="form-control customer" name="customer_suburb" id="customer_suburb" value="<?php echo Form::value('customer_suburb');?>" />
                             <?php echo Form::displayError('customer_suburb');?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">State</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="customer_state" id="customer_state" value="<?php echo Form::value('customer_state');?>" />
+                            <input type="text" class="form-control customer" name="customer_state" id="customer_state" value="<?php echo Form::value('customer_state');?>" />
                             <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
                             <?php echo Form::displayError('customer_state');?>
                         </div>
@@ -89,14 +89,14 @@ $country = Form::value('country');
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Postcode</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="customer_postcode" id="customer_postcode" value="<?php echo Form::value('customer_postcode');?>" />
+                            <input type="text" class="form-control customer" name="customer_postcode" id="customer_postcode" value="<?php echo Form::value('customer_postcode');?>" />
                             <?php echo Form::displayError('customer_postcode');?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Country</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="customer_country" id="customer_country" value="<?php echo Form::value('customer_country');?>" />
+                            <input type="text" class="form-control customer" name="customer_country" id="customer_country" value="<?php echo Form::value('customer_country');?>" />
                             <span class="inst">use the 2 letter ISO code</span>
                             <?php echo Form::displayError('customer_country');?>
                         </div>
