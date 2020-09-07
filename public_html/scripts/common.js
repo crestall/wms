@@ -552,11 +552,13 @@ var autoCompleter = {
     addressAutoComplete: function(element, prefix)
     {
         console.log('element is '+element);
+        console.log('prefix is '+prefix);
         if(prefix === undefined) {
             prefix = "";
         }
         element.autocomplete({
             source: function(req, response){
+                console.log('term: '+req.term);
                 var data = {
                     streetAddress: req.term,
                     formatCase: true,
