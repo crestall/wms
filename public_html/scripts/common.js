@@ -551,7 +551,7 @@ var autoCompleter = {
     },
     addressAutoComplete: function(element, prefix)
     {
-        console.log(element);
+        console.log('element is '+element);
         if(prefix === undefined) {
             prefix = "";
         }
