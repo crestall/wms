@@ -25,6 +25,7 @@
                             $('input#customer_email').val(ui.item.email);
                             $('input#customer_phone').val(ui.item.phone);
                             $('input#customer_id').val(ui.item.customer_id);
+                            $('input#customer_address').val(ui.item.address);
                             return false;
                         }
                         function changeCallback(event, ui)
@@ -32,6 +33,7 @@
                             if (!ui.item)
                 	        {
                                 $(event.target).val("");
+                                $('input#customer_id').val(0);
                                 return false;
                             }
                         }
