@@ -916,6 +916,13 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function getJobCustomer()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";
+        $data = $this->item->getAutocompleteItems($this->request->query, $this->order->fulfilled_id);
+        $this->view->renderJson($data);
+    }
+
     public function getSolarItems()
     {
         //echo "<pre>",print_r($this->request),"</pre>";

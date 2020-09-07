@@ -12,20 +12,26 @@
                 },
                 'add-job':{
                     init: function(){
-                        
+                        autoCompleter.productionJobCustomerAutoComplete($(this), selectCallback, changeCallback);
+                        function selectCallback(event, ui)
+                        {
+                            return false;
+                        }
+                        function selectCallback(event, ui)
+                        {
+                            $('input#customer_contact').val(ui.item.contact);
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                        }
                     }
                 },
                 'view-jobs':{
-                    init: function(){
-
-                    }
-                },
-                'add-customer':{
-                    init: function(){
-
-                    }
-                },
-                'view-customers':{
                     init: function(){
 
                     }

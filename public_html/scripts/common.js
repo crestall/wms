@@ -529,6 +529,26 @@ var autoCompleter = {
             minLength: 2
         });
     },
+    productionJobCustomerAutoComplete: function(element, selectCallback, changeCallback)
+    {
+        element.autocomplete({
+            source: function(req, response){
+                var url;
+                url = "/ajaxfunctions/getJobCustomer/?customer="+req.term;
+                //console.log(url);
+            	$.getJSON(url, function(data){
+            		response(data);
+            	});
+            },
+            select: function(event, ui) {
+                selectCallback(event, ui);
+            },
+            change: function (event, ui) {
+                changeCallback(event, ui);
+            },
+            minLength: 2
+        });
+    },
     addressAutoComplete: function(element, prefix)
     {
         if(prefix === undefined) {
