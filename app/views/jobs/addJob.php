@@ -11,23 +11,26 @@ $country = Form::value('country');
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="add_production_job" method="post" action="/form/procAddProductionJob">
-            <div class="form-group row">
-                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo Form::value('job_id');?>" />
-                    <?php echo Form::displayError('job_id');?>
+            <div class="border border-secondary p-3 m-3 rounded bg-light">
+                <h3>Job Details</h3>
+                <div class="form-group row">
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo Form::value('job_id');?>" />
+                        <?php echo Form::displayError('job_id');?>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3">Related Job Id</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
+                <div class="form-group row">
+                    <label class="col-md-3">Related Job Id</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
-                <div class="col-md-4">
-                    <textarea name="description" id="description" class="form-control required" rows="3"><?php echo Form::value('description');?></textarea>
+                <div class="form-group row">
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
+                    <div class="col-md-4">
+                        <textarea name="description" id="description" class="form-control required" rows="3"><?php echo Form::value('description');?></textarea>
+                    </div>
                 </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
