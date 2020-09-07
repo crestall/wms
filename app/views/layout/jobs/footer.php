@@ -51,6 +51,19 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding the Job...</h2></div>' });
                             }
                         });
+                        $( "#date_entered" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                $('#date_entered_value').val(s);
+                            }
+                        });
+                        $('i.fa-calendar-alt').css('cursor', 'pointer').click(function(e){
+                            $("#date_entered").focus();
+                        });
                     }
                 },
                 'view-jobs':{

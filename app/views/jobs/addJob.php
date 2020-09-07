@@ -29,9 +29,9 @@ $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value
                 </div>
                 <div class="row form-group">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Entered</label>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="input-group">
-                            <input type="text" class="required form-control" name="date" id="date" value="<?php echo date('d/m/Y', $date_entered);?>" />
+                            <input type="text" class="required form-control" name="date_entered" id="date_entered" value="<?php echo date('d/m/Y', $date_entered);?>" />
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
