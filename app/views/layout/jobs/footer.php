@@ -12,14 +12,11 @@
                 },
                 'add-job':{
                     init: function(){
-                        autoCompleter.productionJobCustomerAutoComplete($(this), selectCallback, changeCallback);
-                        function selectCallback(event, ui)
-                        {
-                            return false;
-                        }
+                        $('input#customer_name').autoCompleter.productionJobCustomerAutoComplete($(this), selectCallback, changeCallback);
                         function selectCallback(event, ui)
                         {
                             $('input#customer_contact').val(ui.item.contact);
+                            return false;
                         }
                         function changeCallback(event, ui)
                         {
