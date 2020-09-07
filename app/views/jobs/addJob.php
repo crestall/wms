@@ -111,6 +111,18 @@ $country = Form::value('country');
                         </div>
                     </div>
                 </div>
+                <div class="border border-secondary p-3 m-3 rounded bg-light">
+                    <h3>Supplier Details</h3>
+                </div>
+                <div class="border border-secondary p-3 m-3 rounded bg-light">
+                    <h3>Additional Details</h3>
+                    <div class="form-group row">
+                    <label class="col-md-3">Notes/Comments</label>
+                    <div class="col-md-4">
+                        <textarea name="notes" id="notes" class="form-control" rows="4"><?php echo Form::value('notes');?></textarea>
+                    </div>
+                </div>
+                </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
