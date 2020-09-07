@@ -919,7 +919,7 @@ class ajaxfunctionsController extends Controller
     public function getJobCustomer()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->item->getAutocompleteItems($this->request->query);
+        $data = $this->productioncustomer->getAutocompleteCustomer($this->request->query);
         $this->view->renderJson($data);
     }
 
