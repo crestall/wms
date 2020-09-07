@@ -5,6 +5,7 @@ $suburb = Form::value('suburb');
 $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
+$date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -25,6 +26,16 @@ $country = Form::value('country');
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
                     </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Entered</label>
+                    <div class="col-md-2">
+                        <div class="input-group">
+                            <input type="text" class="required form-control" name="date" id="date" value="<?php echo date('d/m/Y', $date_entered);?>" />
+                            <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="date_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
