@@ -31,6 +31,7 @@
                             $('input#customer_suburb').val(ui.item.suburb);
                             $('input#customer_state').val(ui.item.state);
                             $('input#customer_country').val(ui.item.country);
+                            $('input#customer_postcode').val(ui.item.postcode);
                             return false;
                         }
                         function changeCallback(event, ui)
