@@ -24,7 +24,7 @@
                             $('input#customer_contact').val(ui.item.contact);
                             $('input#customer_email').val(ui.item.email);
                             $('input#customer_phone').val(ui.item.phone);
-                            $('input#customer_phone').val(ui.item.customer_id);
+                            $('input#customer_id').val(ui.item.customer_id);
                             return false;
                         }
                         function changeCallback(event, ui)
