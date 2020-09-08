@@ -32,6 +32,9 @@
                                 return false;
                             }
                         });
+                        $('input.default_checkbox').click(function() {
+                            $('input.default_checkbox').not(this).prop("checked", false);
+                        });
                     }
                 },
                 'sales-reps':{

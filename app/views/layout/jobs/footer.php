@@ -93,9 +93,6 @@
                         $('select#status').change(function(e){
                             $(this).valid();
                         });
-                        $('input.default_checkbox').click(function() {
-                            $('input.default_checkbox').not(this).prop("checked", false);
-                        });
                     }
                 },
                 'view-jobs':{
