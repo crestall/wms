@@ -77,6 +77,19 @@
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_due').focus();
                         });
+                        $( "#date_ed" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                $('#date_ed_value').val(s);
+                            }
+                        });
+                        $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_ed').focus();
+                        });
                     }
                 },
                 'view-jobs':{
