@@ -548,6 +548,9 @@
                                 window.location.href = url;
                             }
                         });
+                        dataTable.init($('table#client_bayusage_table'), {
+                            "order": []
+                        } );
                     }
                 },
                 'empty-bay-report': {
