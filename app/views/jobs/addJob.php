@@ -74,9 +74,15 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                 <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
                     <div class="col-md-4">
-                        <textarea name="description" id="description" class="form-control required" rows="3"><?php echo Form::value('description');?></textarea>
+                        <textarea name="description" id="description" class="form-control required" rows="4"><?php echo Form::value('description');?></textarea>
                     </div>
                 </div>
+                <div class="form-group row">
+                        <label class="col-md-3">Notes/Comments</label>
+                        <div class="col-md-4">
+                            <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo Form::value('notes');?></textarea>
+                        </div>
+                    </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Customer Details</h3>
@@ -249,12 +255,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
             </div>
                 <div class="border border-secondary p-3 m-3 rounded bg-light">
                     <h3>Additional Details</h3>
-                    <div class="form-group row">
-                        <label class="col-md-3">Notes/Comments</label>
-                        <div class="col-md-4">
-                            <textarea name="notes" id="notes" class="form-control" rows="4"><?php echo Form::value('notes');?></textarea>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
