@@ -7,7 +7,7 @@ $postcode = Form::value('postcode');
 $country = Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
 $date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_date_value');
-$date_ed = Form::value('date_ed_value');
+$date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value('date_ed_value'));
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -145,13 +145,13 @@ $date_ed = Form::value('date_ed_value');
                     <label class="col-md-3 col-form-label">Expected Delivery Date</label>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="text" class="required form-control" name="date_ed" id="date_ed" value="<?php echo date('d/m/Y', $date_ed);?>" />
+                            <input type="text" class="required form-control" name="date_ed" id="date_ed" value="<?php echo $date_ed;?>" />
                             <div class="input-group-append">
                                 <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="date_value" id="date_ed_value" value="<?php echo $date_ed;?>" />
+                    <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo Form::value('date_ed_value');?>" />
                 </div>
             </div>
                 <div class="border border-secondary p-3 m-3 rounded bg-light">
