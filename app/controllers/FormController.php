@@ -398,6 +398,11 @@ class FormController extends Controller {
         else
         {
             //all good, add details
+            // set the default?
+            if(isset($default))
+            {
+                $this->jobstatus->makeDefault($id)
+            }
             if($this->jobstatus->editStatus($post_data))
             {
                 Session::set('feedback', "Those details have been updated");
