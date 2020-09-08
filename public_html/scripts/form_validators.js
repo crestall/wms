@@ -113,7 +113,19 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $('form#add_production_job').validate();
+    $('form#add_production_job').validate({
+         rules:{
+    		status:{
+    			notNone: true
+    		}
+    	},
+		messages:{
+			status:{
+				notNone: "A status must be chosen"
+			},
+
+		}
+    });
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_supplier').validate();
     ///////////////////////////////////////////////////////////////////////////////
