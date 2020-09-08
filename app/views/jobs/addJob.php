@@ -30,7 +30,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3">Status</label>
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Status</label>
                     <div class="col-md-4">
                         <select id="status" class="form-control selectpicker" name="status" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->jobstatus->getSelectJobStatus(Form::value('status'));?></select>
                     </div>
