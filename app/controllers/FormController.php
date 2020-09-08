@@ -60,6 +60,7 @@ class FormController extends Controller {
             'procAddMiscToOrder',
             'procAddPackage',
             'procAddPackages',
+            'procAddProductionCustomer',
             'procAddProductionSupplier',
             'procAddressUpdate',
             'procAddServiceJob',
@@ -78,6 +79,7 @@ class FormController extends Controller {
             'procCourierAdd',
             'procCourierEdit',
             'procDFCollection',
+            'procEditProductionCustomer',
             'procEditProductionSupplier',
             'procEditServiceJob',
             'procEditInstall',
@@ -137,6 +139,101 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procAddProductionJob()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+    }
+
+    public function procEditProductionCustomer()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($name))
+        {
+            Form::setError('name', 'The customers name is required');
+        }
+        if($this->dataSubbed($email))
+        {
+            if(!$this->emailValid($email))
+            {
+                Form::setError('email', 'The email is not valid');
+            }
+        }
+        if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
+        {
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $this->productioncustomer->editCustomer($post_data);
+            Session::set('feedback', "That customers's details have been updated");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."customers/edit-customer/customer=$customer_id");
+    }
+
+    public function procAddProductionCustomer()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($name))
+        {
+            Form::setError('name', 'The customer name is required');
+        }
+        if($this->dataSubbed($email))
+        {
+            if(!$this->emailValid($email))
+            {
+                Form::setError('email', 'The email is not valid');
+            }
+        }
+        if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
+        {
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $id = $this->productioncustomer->addCustomer($post_data);
+            Session::set('feedback', "That customer has been added to the system.<br/>The details can be edited <a href='/customers/edit-customer/customer=".$id."'>HERE</a>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."customers/add-customer");
     }
 
     public function procEditProductionSupplier()

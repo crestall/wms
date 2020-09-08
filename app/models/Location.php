@@ -13,6 +13,7 @@
   checkLocation($location)
   getAllClientsBayUsage()
   getAllLocations()
+  getClientsBaysUsage($client_id = 0)
   getItemLocationId
   getItemStockInLocation
   getLocationId
@@ -69,6 +70,19 @@ class Location extends Model{
                 a.client_id
             ORDER BY
                 a.client_name
+        ";
+        return ($db->queryData($q));
+    }
+
+    public function getClientsBaysUsage($client_id = 0)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT il.location_id, l.oversize, l.tray, i.client_id, c.client_name, l.location
+            FROM items_locations il JOIN items i ON il.item_id = i.id JOIN locations l ON il.location_id = l.id JOIN clients c ON i.client_id = c.id
+            WHERE l.active = 1 AND c.active = 1 AND client_id = $client_id
+            GROUP BY il.location_id
+            ORDER BY l.location
         ";
         return ($db->queryData($q));
     }

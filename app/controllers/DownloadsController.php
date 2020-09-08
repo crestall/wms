@@ -47,6 +47,38 @@ class DownloadsController extends Controller {
         parent::displayIndex(get_class());
     }
 
+    public function clientBaysUsageCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $bays = $this->location->getClientsBaysUsage($client_id);
+        $client_name = strtolower(str_replace(" ", "_",$this->client->getClientName($client_id)));
+        $cols = array(
+            "Location Name",
+            "Oversize",
+            "Pick Face"
+        );
+        $rows = array();
+        foreach($bays as $b)
+        {
+
+            $row = array(
+                $b['location'],
+                $b['oversize'],
+                $b['tray']
+            );
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => $client_name."_bay_usage"]);
+    }
+
     public function downloadFile()
     {
         $file_name = (isset($this->request->params['args']['file']))? $this->request->params['args']['file']: "";

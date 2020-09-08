@@ -583,6 +583,18 @@ img.profile-thumb{
 }
 
 /********
+Add Job Buttons
+*******  */
+#customer_address_toggle[aria-expanded="false"]:before{
+    content: "Show Address Details";
+}
+
+#customer_address_toggle[aria-expanded="true"]:before{
+    content: "Hide Address Details";
+}
+
+
+/********
 highlighting sections
 *******  */
 .highlight{
