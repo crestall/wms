@@ -18,9 +18,9 @@
                             {
                                 $(this).autocomplete( "destroy" );
                             }
-                            autoCompleter.productionJobCustomerAutoComplete($(this), selectCallback, changeCallback);
+                            autoCompleter.productionJobCustomerAutoComplete($(this), selectCustomerCallback, changeCustomerCallback);
                         });
-                        function selectCallback(event, ui)
+                        function selectCustomerCallback(event, ui)
                         {
                             $('input#customer_contact').val(ui.item.contact);
                             $('input#customer_email').val(ui.item.email);
@@ -34,12 +34,45 @@
                             $('input#customer_postcode').val(ui.item.postcode);
                             return false;
                         }
-                        function changeCallback(event, ui)
+                        function changeCustomerCallback(event, ui)
                         {
                             if (!ui.item)
                 	        {
                                 $('input#customer_id').val(0);
                                 $('input.customer').each(function(element, index){
+                                    $(this).val("");
+                                })
+                                return false;
+                            }
+                        }
+                        autoCompleter.addressAutoComplete($('#supplier_address'), 'supplier_');
+                        $("input#supplier_name").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.productionJobSupplierAutoComplete($(this), selectSupplierCallback, changeSupplierCallback);
+                        });
+                        function selectSupplierCallback(event, ui)
+                        {
+                            $('input#supplier_contact').val(ui.item.contact);
+                            $('input#supplier_email').val(ui.item.email);
+                            $('input#supplier_phone').val(ui.item.phone);
+                            $('input#supplier_id').val(ui.item.customer_id);
+                            $('input#supplier_address').val(ui.item.address);
+                            $('input#supplier_address2').val(ui.item.address_2);
+                            $('input#supplier_suburb').val(ui.item.suburb);
+                            $('input#supplier_state').val(ui.item.state);
+                            $('input#supplier_country').val(ui.item.country);
+                            $('input#supplier_postcode').val(ui.item.postcode);
+                            return false;
+                        }
+                        function changeSupplierCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $('input#supplier_id').val(0);
+                                $('input.supplier').each(function(element, index){
                                     $(this).val("");
                                 })
                                 return false;
