@@ -255,8 +255,8 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
-                <div class="col-md-4 offset-md-3">
-                    <button type="submit" class="btn btn-outline-secondary" id="submitter">Add This Job</button>
+                <div class="col-md-4 offset-md-8">
+                    <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter">Add This Job</button>
                 </div>
             </div>
         </form>
