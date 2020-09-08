@@ -7,7 +7,8 @@ class Jobstatus extends Model{
         $db = Database::openConnection();
         $check = "";
         $ret_string = "";
-        $status = $db->queryData("SELECT id, name FROM {$this->table} WHERE active=$active ORDER BY name");
+        //$status = $db->queryData("SELECT id, name FROM {$this->table} WHERE active=$active ORDER BY name");
+        $status = $db->queryData("SELECT js.id, js.name, ds.status_id AS `default` FROM `job_status` js LEFT JOIN default_production_job_status ds ON ds.status_id = js.id WHERE active=$active ORDER BY name");
         foreach($status as $s)
         {
             $label = ucwords($s['name']);
@@ -15,6 +16,14 @@ class Jobstatus extends Model{
             if($selected)
             {
                 $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            elseif(!(empty($s['default'])))
+            {
+                $check = "selected='selected'";
+            }
+            else
+            {
+                $check = "";
             }
             $ret_string .= "<option $check value='$value'>$label</option>";
         }
