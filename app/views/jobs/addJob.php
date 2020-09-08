@@ -147,7 +147,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                         <div class="input-group">
                             <input type="text" class="required form-control" name="date_ed" id="date_ed" value="<?php echo $date_ed;?>" />
                             <div class="input-group-append">
-                                <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
                         </div>
                     </div>
