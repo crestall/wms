@@ -92,5 +92,12 @@ class Jobstatus extends Model{
         }
         return $valid;
     }
+
+    public function makeDefault($id = 0)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField('default_production_job_status', 'status_id', $id, 1);
+        return true;
+    }
 }
 ?>
