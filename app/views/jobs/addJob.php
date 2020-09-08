@@ -97,8 +97,8 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                             <?php echo Form::displayError('customer_address');?>
                         </div>
                         <div class="col-md-3 checkbox checkbox-default">
-                            <input class="form-check-input styled" type="checkbox" id="ignore_address_error" name="ignore_address_error" />
-                            <label for="ignore_address_error">No need for a number</label>
+                            <input class="form-check-input styled" type="checkbox" id="ignore_customer_address_error" name="ignore_customer_address_error" />
+                            <label for="ignore_customer_address_error">No need for a number</label>
                         </div>
                     </div>
                     <div class="form-group row">
