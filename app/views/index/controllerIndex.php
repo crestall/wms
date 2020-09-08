@@ -16,10 +16,10 @@ $resource = strtolower(str_replace(" ", "", $page_name));
                 $action = Utility::toCamelCase($SectionName);
                 if(Permission::check($role, $resource, $action)):?>
                     <div class="card homepagecard">
-                        <div class="card-header d-flex h-100">
+                        <div class="card-header">
                             <h4><?php echo $SectionName;?></h4>
                         </div>
-                        <div class="card-body text-center flex-column h-100">
+                        <div class="card-body text-center">
                         	<a class="btn btn-lg btn-outline-fsg" href="/<?php echo $con_index."/".$section_name;?>"><?php echo $details['icon'];?></a>
                         </div>
                     </div>
