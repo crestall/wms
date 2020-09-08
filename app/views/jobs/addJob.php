@@ -253,11 +253,6 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     </div>
                 </div>
             </div>
-                <div class="border border-secondary p-3 m-3 rounded bg-light">
-                    <h3>Additional Details</h3>
-
-                </div>
-            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <div class="col-md-4 offset-md-3">
