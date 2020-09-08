@@ -49,7 +49,7 @@
                         <div class="col-md-1">
                             <label class="col-form-label" for="default_<?php echo $s['id'];?>">Default</label>
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="default_<?php echo $s['id'];?>" name="default_<?php echo $s['id'];?>" <?php if(!empty($s['default'])) echo "checked";?> class="custom-control-input">
+                                <input type="radio" id="default_<?php echo $s['id'];?>" name="default" <?php if(!empty($s['default'])) echo "checked";?> class="custom-control-input">
                                 <label class="custom-control-label" for="default_<?php echo $s['id'];?>"></label>
                             </div>
                         </div>
