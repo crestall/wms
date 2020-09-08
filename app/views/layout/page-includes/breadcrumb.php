@@ -26,6 +26,7 @@ if(count($pages))
                 'link'      => "/$section",
                 'active'    => false
             );
+            ksort($pages[$section]);
             foreach($pages[$section] as $pname => $details)
             {
                 if(!is_array($details) || !$details['display'])
