@@ -65,7 +65,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                 <div class="form-group row mb-3">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                        <input type="text" class="required form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
                         <input type="hidden" name="customer_id" id="customer_id" value="0" />
                         <?php echo Form::displayError('customer_name');?>
                     </div>
@@ -145,7 +145,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     <label class="col-md-3 col-form-label">Expected Delivery Date</label>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="text" class="required form-control" name="date_ed" id="date_ed" value="<?php echo $date_ed;?>" />
+                            <input type="text" class="form-control" name="date_ed" id="date_ed" value="<?php echo $date_ed;?>" />
                             <div class="input-group-append">
                                 <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
