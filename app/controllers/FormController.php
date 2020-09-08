@@ -401,7 +401,7 @@ class FormController extends Controller {
             // set the default?
             if(isset($default))
             {
-                $this->jobstatus->makeDefault($id)
+                $this->jobstatus->makeDefault($id);
             }
             if($this->jobstatus->editStatus($post_data))
             {
