@@ -154,6 +154,10 @@ div#order_activity_chart{
         flex-wrap: wrap;
         flex-direction: row;
     }
+
+    .homepagecard .card-header{
+        height:80px;
+    }
 }
 
 @media screen and (min-width: 768px) {
