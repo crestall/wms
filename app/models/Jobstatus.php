@@ -65,7 +65,8 @@ class Jobstatus extends Model{
     public function getStatus($active = -1)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM {$this->table}";
+        //$q = "SELECT * FROM {$this->table}";
+        $q = "SELECT js.*, ds.status_id AS `default` FROM `job_status` js LEFT JOIN default_production_job_status ds ON ds.status_id = js.id";
         if($active >= 0)
         {
             $q .= " WHERE active = $active";
