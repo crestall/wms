@@ -90,7 +90,7 @@
                         $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_ed').focus();
                         });
-                        $('selector#status').change(function(e){
+                        $('select#status').change(function(e){
                             $(this).valid();
                         });
                     }
