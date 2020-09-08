@@ -47,6 +47,13 @@
                             </div>
                         </div>
                         <div class="col-md-1">
+                            <label class="col-form-label" for="default_<?php echo $s['id'];?>">Default</label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" id="default_<?php echo $s['id'];?>" name="default_<?php echo $s['id'];?>" <?php if(!empty($s['default'])) echo "checked";?> class="default_checkbox custom-control-input">
+                                <label class="custom-control-label" for="default_<?php echo $s['id'];?>"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
                             <label class="col-form-label">&nbsp;</label>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="line_id" value="<?php echo $s['id'];?>" />

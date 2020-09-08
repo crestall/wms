@@ -398,6 +398,11 @@ class FormController extends Controller {
         else
         {
             //all good, add details
+            // set the default?
+            if(isset($default))
+            {
+                $this->jobstatus->makeDefault($id);
+            }
             if($this->jobstatus->editStatus($post_data))
             {
                 Session::set('feedback', "Those details have been updated");
@@ -568,7 +573,7 @@ class FormController extends Controller {
             $request = array(
                 'AuthorisedContactName'     => 'Mike Bond',
                 'AuthorisedContactPhone'    => '0386777418',
-                'CloseTime'                 => '4:00pm',
+                'CloseTime'                 => '3:00pm',
                 'EstimatedTotalKgs'         => $weight,
                 'EstimatedTotalCubic'       => $cubic,
                 'EstimatedTotalCartons'     => $carton_count,

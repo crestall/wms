@@ -7,7 +7,8 @@ class Jobstatus extends Model{
         $db = Database::openConnection();
         $check = "";
         $ret_string = "";
-        $status = $db->queryData("SELECT id, name FROM {$this->table} WHERE active=$active ORDER BY name");
+        //$status = $db->queryData("SELECT id, name FROM {$this->table} WHERE active=$active ORDER BY name");
+        $status = $db->queryData("SELECT js.id, js.name, ds.status_id AS `default` FROM `job_status` js LEFT JOIN default_production_job_status ds ON ds.status_id = js.id WHERE active=$active ORDER BY name");
         foreach($status as $s)
         {
             $label = ucwords($s['name']);
@@ -15,6 +16,14 @@ class Jobstatus extends Model{
             if($selected)
             {
                 $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            elseif(!(empty($s['default'])))
+            {
+                $check = "selected='selected'";
+            }
+            else
+            {
+                $check = "";
             }
             $ret_string .= "<option $check value='$value'>$label</option>";
         }
@@ -56,7 +65,8 @@ class Jobstatus extends Model{
     public function getStatus($active = -1)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM {$this->table}";
+        //$q = "SELECT * FROM {$this->table}";
+        $q = "SELECT js.*, ds.status_id AS `default` FROM `job_status` js LEFT JOIN default_production_job_status ds ON ds.status_id = js.id";
         if($active >= 0)
         {
             $q .= " WHERE active = $active";
@@ -81,6 +91,13 @@ class Jobstatus extends Model{
         	}
         }
         return $valid;
+    }
+
+    public function makeDefault($id = 0)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField('default_production_job_status', 'status_id', $id, 1);
+        return true;
     }
 }
 ?>
