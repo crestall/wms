@@ -16,7 +16,7 @@ $resource = strtolower(str_replace(" ", "", $page_name));
                 $action = Utility::toCamelCase($SectionName);
                 if(Permission::check($role, $resource, $action)):?>
                     <div class="card homepagecard">
-                        <div class="card-header d-flex h-100">
+                        <div class="card-header d-flex">
                             <h4><?php echo $SectionName;?></h4>
                         </div>
                         <div class="card-body text-center">
