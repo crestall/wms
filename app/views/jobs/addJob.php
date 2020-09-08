@@ -101,7 +101,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     </div>
                     <label class="col-lg-1 col-md-2">Email</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control customer" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
+                        <input type="text" class="form-control customer email" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
                     </div>
                     <label class="col-lg-1 col-md-2">Phone</label>
                     <div class="col-lg-3 col-md-4">
@@ -180,7 +180,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                 <div class="form-group row mb-3">
                     <label class="col-md-3">Supplier Name</label>
                     <div class="col-md-4">
-                        <input type="text" class="required form-control" name="supplier_name" id="supplier_name" value="<?php echo Form::value('supplier_name');?>" />
+                        <input type="text" class="form-control" name="supplier_name" id="supplier_name" value="<?php echo Form::value('supplier_name');?>" />
                         <input type="hidden" name="supplier_id" id="supplier_id" value="0" />
                     </div>
                 </div>
@@ -191,7 +191,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     </div>
                     <label class="col-lg-1 col-md-2">Email</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control supplier" name="supplier_email" id="supplier_email" value="<?php echo Form::value('supplier_email');?>" />
+                        <input type="text" class="form-control supplier email" name="supplier_email" id="supplier_email" value="<?php echo Form::value('supplier_email');?>" />
                     </div>
                     <label class="col-lg-1 col-md-2">Phone</label>
                     <div class="col-lg-3 col-md-4">
