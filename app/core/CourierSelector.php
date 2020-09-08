@@ -219,7 +219,7 @@
                 /*********** special deals for OnePlate *******************/
                 if($this->order_details['client_id'] == 82)
                 {
-                    $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2); 
                 }
                 /*********** special deals for OnePlate *******************/
                 $order_values['courier_id'] = $this->controller->courier->directFreightId;
