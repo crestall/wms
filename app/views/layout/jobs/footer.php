@@ -91,7 +91,7 @@
                             $('input#date_ed').focus();
                         });
                         $('selector#status').change(function(e){
-                            $(this).validate();
+                            $(this).valid();
                         });
                     }
                 },
