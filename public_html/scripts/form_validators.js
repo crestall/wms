@@ -115,12 +115,12 @@ $(document).ready(function() {
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_job').validate({
          rules:{
-    		status:{
+    		status_id:{
     			notNone: true
     		}
     	},
 		messages:{
-			status:{
+			status_id:{
 				notNone: "A status must be chosen"
 			},
 

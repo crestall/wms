@@ -32,7 +32,13 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                 <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Status</label>
                     <div class="col-md-4">
-                        <select id="status" class="form-control selectpicker" name="status" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->jobstatus->getSelectJobStatus(Form::value('status'));?></select>
+                        <select id="status_id" class="form-control selectpicker" name="status_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->jobstatus->getSelectJobStatus(Form::value('status_id'));?></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3">Sales Rep</label>
+                    <div class="col-md-4">
+                        <select id="status" class="form-control selectpicker" name="status" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -60,11 +66,23 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     <input type="hidden" name="date_value" id="date_entered_value" value="<?php echo $date_due;?>" />
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
+                    <label class="col-md-3">Designer</label>
                     <div class="col-md-4">
-                        <textarea name="description" id="description" class="form-control required" rows="3"><?php echo Form::value('description');?></textarea>
+                        <input type="text" class="form-control" name="designer" id="designer" value="<?php echo Form::value('designer');?>" />
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
+                    <div class="col-md-4">
+                        <textarea name="description" id="description" class="form-control required" rows="4"><?php echo Form::value('description');?></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                        <label class="col-md-3">Notes/Comments</label>
+                        <div class="col-md-4">
+                            <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo Form::value('notes');?></textarea>
+                        </div>
+                    </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Customer Details</h3>
@@ -83,7 +101,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     </div>
                     <label class="col-lg-1 col-md-2">Email</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control customer" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
+                        <input type="text" class="form-control customer email" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
                     </div>
                     <label class="col-lg-1 col-md-2">Phone</label>
                     <div class="col-lg-3 col-md-4">
@@ -162,7 +180,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                 <div class="form-group row mb-3">
                     <label class="col-md-3">Supplier Name</label>
                     <div class="col-md-4">
-                        <input type="text" class="required form-control" name="supplier_name" id="supplier_name" value="<?php echo Form::value('supplier_name');?>" />
+                        <input type="text" class="form-control" name="supplier_name" id="supplier_name" value="<?php echo Form::value('supplier_name');?>" />
                         <input type="hidden" name="supplier_id" id="supplier_id" value="0" />
                     </div>
                 </div>
@@ -173,7 +191,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     </div>
                     <label class="col-lg-1 col-md-2">Email</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control supplier" name="supplier_email" id="supplier_email" value="<?php echo Form::value('supplier_email');?>" />
+                        <input type="text" class="form-control supplier email" name="supplier_email" id="supplier_email" value="<?php echo Form::value('supplier_email');?>" />
                     </div>
                     <label class="col-lg-1 col-md-2">Phone</label>
                     <div class="col-lg-3 col-md-4">
@@ -235,20 +253,10 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     </div>
                 </div>
             </div>
-                <div class="border border-secondary p-3 m-3 rounded bg-light">
-                    <h3>Additional Details</h3>
-                    <div class="form-group row">
-                        <label class="col-md-3">Notes/Comments</label>
-                        <div class="col-md-4">
-                            <textarea name="notes" id="notes" class="form-control" rows="4"><?php echo Form::value('notes');?></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
-                <div class="col-md-4 offset-md-3">
-                    <button type="submit" class="btn btn-outline-secondary" id="submitter">Add This Job</button>
+                <div class="col-md-4 offset-6 offset-md-8">
+                    <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter">Add This Job</button>
                 </div>
             </div>
         </form>

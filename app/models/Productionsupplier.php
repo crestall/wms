@@ -97,5 +97,43 @@ class Productionsupplier extends Model{
         $id = $db->updateDatabaseFields($this->table, $vals, $data['supplier_id']);
         return $id;
     }
+
+    public function getAutocompleteSupplier($data)
+    {
+        $db = Database::openConnection();
+        $return_array = array();
+        //echo "The request<pre>",print_r($data),"</pre>";die();
+        $q = $data;
+        $query = "
+            SELECT
+                *
+            FROM
+                {$this->table}
+            WHERE
+                name LIKE :term
+        ";
+        $array = array(
+            'term'  => '%'.$q.'%'
+        );
+        $rows = $db->queryData($query, $array);
+        foreach($rows as $row)
+        {
+            $row_array                  = array();
+            $row_array['value']         = ucwords($row['name']);
+            $row_array['contact']       = $row['contact'];
+            $row_array['email']         = $row['email'];
+            $row_array['phone']         = $row['phone'];
+            $row_array['address']       = $row['address'];
+            $row_array['address_2']     = $row['address_2'];
+            $row_array['suburb']        = $row['suburb'];
+            $row_array['state']         = $row['state'];
+            $row_array['postcode']      = $row['postcode'];
+            $row_array['country']       = $row['country'];
+            $row_array['customer_id']   = $row['id'];
+
+            array_push($return_array,$row_array);
+        }
+        return $return_array;
+    }
 }
 ?>
