@@ -66,6 +66,12 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     <input type="hidden" name="date_value" id="date_entered_value" value="<?php echo $date_due;?>" />
                 </div>
                 <div class="form-group row">
+                    <label class="col-md-3">Designer</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="designer" id="designer" value="<?php echo Form::value('designer');?>" />
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
                     <div class="col-md-4">
                         <textarea name="description" id="description" class="form-control required" rows="3"><?php echo Form::value('description');?></textarea>
