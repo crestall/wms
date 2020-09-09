@@ -154,6 +154,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        //Required Fields
         if(!$this->dataSubbed($job_id))
         {
             Form::setError('job_id', 'The job id is required');
@@ -177,6 +178,14 @@ class FormController extends Controller {
         if(!$this->dataSubbed($designer))
         {
             Form::setError('customer_name', 'A Customer Name is required');
+        }
+        //Might be required, or need to fulfill requirements
+        if($this->dataSubbed($customer_email))
+        {
+            if(!$this->emailValid($customer_email))
+            {
+                Form::setError('customer_email', 'The email is not valid');
+            }
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
