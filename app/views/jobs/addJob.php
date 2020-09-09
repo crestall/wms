@@ -11,12 +11,12 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
 if(Session::getAndDestroy('show_customer_address'))
 {
     $customer_collapse = "";
-    $customer_aria_expanded = true;
+    $customer_aria_expanded = "true";
 }
 else
 {
     $customer_collapse = "collapse";
-    $customer_aria_expanded = false;
+    $customer_aria_expanded = "false";
 }
 $supplier_collapse = (Session::getAndDestroy('show_supplier_address'))? "" :"collapse";
 ?>
