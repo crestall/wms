@@ -202,7 +202,7 @@ class FormController extends Controller {
                 Session::set('show_customer_address', true);
                 Form::setError('customer_address', 'An address is required');
             }
-            elseif( !$ignore_customer_address_error )
+            elseif( !isset($ignore_customer_address_error) )
             {
                 if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $customer_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $customer_address)) )
                 {
