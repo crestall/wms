@@ -50,6 +50,10 @@ $padmin = array(
             'display'   => true,
             'icon'      => '<i class="fad fa-file-alt fa-2x"></i>'
         ),
+        'job-csv-import'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-file-csv" data-fa-transform="shrin-4 right-3></i><i class="fad fa-file-import"></i></span></div>'
+        )
     ),
     'sales-reps'    => array(
         'add-rep'   => array(
