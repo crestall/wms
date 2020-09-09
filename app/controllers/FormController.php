@@ -194,6 +194,7 @@ class FormController extends Controller {
                 Form::setError('supplier_email', 'The email is not valid');
             }
         }
+        //customer address checking
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
         {
             //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
@@ -254,6 +255,70 @@ class FormController extends Controller {
                 {
                     Session::set('show_customer_address', true);
                     Form::setError('customer_postcode', $error_string);
+                }
+            }
+        }
+        //supplier address checking
+        if(!empty($supplier_address) || !empty($supplier_suburb) || !empty($supplier_state) || !empty($supplier_postcode) || !empty($supplier_country))
+        {
+            //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+            if( !$this->dataSubbed($supplier_address) )
+            {
+                Session::set('show_supplier_address', true);
+                Form::setError('supplier_address', 'An address is required');
+            }
+            elseif( !isset($ignore_supplier_address_error) )
+            {
+                if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $supplier_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $supplier_address)) )
+                {
+                    Session::set('show_supplier_address', true);
+                    Form::setError('supplier_address', 'The address must include both letters and numbers');
+                }
+            }
+            if(!$this->dataSubbed($supplier_postcode))
+            {
+                Session::set('show_supplier_address', true);
+                Form::setError('supplier_postcode', "A postcode is required");
+            }
+            if(!$this->dataSubbed($supplier_country))
+            {
+                Session::set('show_supplier_address', true);
+                Form::setError('supplier_country', "A country is required");
+            }
+            elseif(strlen($supplier_country) > 2)
+            {
+                Session::set('show_supplier_address', true);
+                Form::setError('supplier_country', "Please use the two letter ISO code");
+            }
+            elseif($customer_country == "AU")
+            {
+                if(!$this->dataSubbed($customer_suburb))
+        		{
+        		    Session::set('show_supplier_address', true);
+        			Form::setError('supplier_suburb', "A delivery suburb is required for Australian addresses");
+        		}
+        		if(!$this->dataSubbed($supplier_state))
+        		{
+        		    Session::set('show_supplier_address', true);
+        			Form::setError('supplier_state', "A delivery state is required for Australian addresses");
+        		}
+                $aResponse = $this->Eparcel->ValidateSuburb($supplier_suburb, $supplier_state, str_pad($supplier_postcode,4,'0',STR_PAD_LEFT));
+                $error_string = "";
+                if(isset($aResponse['errors']))
+                {
+                    foreach($aResponse['errors'] as $e)
+                    {
+                        $error_string .= $e['message']." ";
+                    }
+                }
+                elseif($aResponse['found'] === false)
+                {
+                    $error_string .= "Postcode does not match suburb or state";
+                }
+                if(strlen($error_string))
+                {
+                    Session::set('show_supplier_address', true);
+                    Form::setError('supplier_postcode', $error_string);
                 }
             }
         }
