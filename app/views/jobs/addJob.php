@@ -6,8 +6,28 @@ $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
-$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_date_value');
+$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
 $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value('date_ed_value'));
+if(Session::getAndDestroy('show_customer_address'))
+{
+    $customer_collapse = "collapse show";
+    $customer_aria_expanded = "true";
+}
+else
+{
+    $customer_collapse = "collapse";
+    $customer_aria_expanded = "false";
+}
+if(Session::getAndDestroy('show_supplier_address'))
+{
+    $supplier_collapse = "collapse show";
+    $supplier_aria_expanded = "true";
+}
+else
+{
+    $supplier_collapse = "collapse";
+    $supplier_aria_expanded = "false";
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -33,12 +53,13 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Status</label>
                     <div class="col-md-4">
                         <select id="status_id" class="form-control selectpicker" name="status_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->jobstatus->getSelectJobStatus(Form::value('status_id'));?></select>
+                        <?php echo Form::displayError('status_id');?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3">Sales Rep</label>
                     <div class="col-md-4">
-                        <select id="status" class="form-control selectpicker" name="status" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
+                        <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -49,9 +70,10 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                             <div class="input-group-append">
                                 <span id="date_entered_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
+                            <?php echo Form::displayError('date_entered');?>
                         </div>
                     </div>
-                    <input type="hidden" name="date_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
+                    <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                 </div>
                 <div class="row form-group">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
@@ -61,9 +83,10 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                             <div class="input-group-append">
                                 <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
+                            <?php echo Form::displayError('date_due');?>
                         </div>
                     </div>
-                    <input type="hidden" name="date_value" id="date_entered_value" value="<?php echo $date_due;?>" />
+                    <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3">Designer</label>
@@ -75,6 +98,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
                     <div class="col-md-4">
                         <textarea name="description" id="description" class="form-control required" rows="4"><?php echo Form::value('description');?></textarea>
+                        <?php echo Form::displayError('description');?>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -102,6 +126,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     <label class="col-lg-1 col-md-2">Email</label>
                     <div class="col-lg-3 col-md-4">
                         <input type="text" class="form-control customer email" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
+                        <?php echo Form::displayError('customer_email');?>
                     </div>
                     <label class="col-lg-1 col-md-2">Phone</label>
                     <div class="col-lg-3 col-md-4">
@@ -110,10 +135,10 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                 </div>
                 <div class="row">
                     <div class="col text-right">
-                        <a  id="customer_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#customer_address_holder" role="button" aria-expanded="false" aria-controls="customer_address_holder"> </a>
+                        <a  id="customer_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#customer_address_holder" role="button" aria-expanded="<?php echo $customer_aria_expanded;?>" aria-controls="customer_address_holder"> </a>
                     </div>
                 </div>
-                <div id="customer_address_holder" class="collapse mt-3">
+                <div id="customer_address_holder" class="<?php echo $customer_collapse;?> mt-3">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Address Line 1</label>
                         <div class="col-md-4">
@@ -192,6 +217,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     <label class="col-lg-1 col-md-2">Email</label>
                     <div class="col-lg-3 col-md-4">
                         <input type="text" class="form-control supplier email" name="supplier_email" id="supplier_email" value="<?php echo Form::value('supplier_email');?>" />
+                        <?php echo Form::displayError('supplier_email');?>
                     </div>
                     <label class="col-lg-1 col-md-2">Phone</label>
                     <div class="col-lg-3 col-md-4">
@@ -200,10 +226,10 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                 </div>
                 <div class="row">
                     <div class="col text-right">
-                        <a  id="supplier_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#supplier_address_holder" role="button" aria-expanded="false" aria-controls="supplier_address_holder"> </a>
+                        <a  id="supplier_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#supplier_address_holder" role="button" aria-expanded="<?php echo $supplier_aria_expanded;?>" aria-controls="supplier_address_holder"> </a>
                     </div>
                 </div>
-                <div id="supplier_address_holder" class="collapse mt-3">
+                <div id="supplier_address_holder" class="<?php echo $supplier_collapse;?> mt-3">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Address Line 1</label>
                         <div class="col-md-4">

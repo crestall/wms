@@ -61,6 +61,7 @@ class FormController extends Controller {
             'procAddPackage',
             'procAddPackages',
             'procAddProductionCustomer',
+            'procAddProductionJob',
             'procAddProductionSupplier',
             'procAddressUpdate',
             'procAddServiceJob',
@@ -143,7 +144,7 @@ class FormController extends Controller {
 
     public function procAddProductionJob()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -153,6 +154,241 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        //Required Fields
+        if(!$this->dataSubbed($job_id))
+        {
+            Form::setError('job_id', 'The job id is required');
+        }
+        if($status_id == 0)
+        {
+            Form::setError('status_id', 'Please choose a status');
+        }
+        if(!$this->dataSubbed($date_entered_value))
+        {
+            Form::setError('date_entered', 'Please supply the date the job was entered');
+        }
+        if(!$this->dataSubbed($date_due_value))
+        {
+            Form::setError('date_due', 'Please supply the date due');
+        }
+        if(!$this->dataSubbed($description))
+        {
+            Form::setError('description', 'A job description is required');
+        }
+        if(!$this->dataSubbed($customer_name))
+        {
+            Form::setError('customer_name', 'A Customer Name is required');
+        }
+        //Might be required, or need to fulfill requirements
+        if($this->dataSubbed($customer_email))
+        {
+            if(!$this->emailValid($customer_email))
+            {
+                Form::setError('customer_email', 'The email is not valid');
+            }
+        }
+        if($this->dataSubbed($supplier_email))
+        {
+            if(!$this->emailValid($supplier_email))
+            {
+                Form::setError('supplier_email', 'The email is not valid');
+            }
+        }
+        //customer address checking
+        if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
+        {
+            //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+            if( !$this->dataSubbed($customer_address) )
+            {
+                Session::set('show_customer_address', true);
+                Form::setError('customer_address', 'An address is required');
+            }
+            elseif( !isset($ignore_customer_address_error) )
+            {
+                if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $customer_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $customer_address)) )
+                {
+                    Session::set('show_customer_address', true);
+                    Form::setError('customer_address', 'The address must include both letters and numbers');
+                }
+            }
+            if(!$this->dataSubbed($customer_postcode))
+            {
+                Session::set('show_customer_address', true);
+                Form::setError('customer_postcode', "A postcode is required");
+            }
+            if(!$this->dataSubbed($customer_country))
+            {
+                Session::set('show_customer_address', true);
+                Form::setError('customer_country', "A country is required");
+            }
+            elseif(strlen($customer_country) > 2)
+            {
+                Session::set('show_customer_address', true);
+                Form::setError('customer_country', "Please use the two letter ISO code");
+            }
+            elseif($customer_country == "AU")
+            {
+                if(!$this->dataSubbed($customer_suburb))
+        		{
+        		    Session::set('show_customer_address', true);
+        			Form::setError('customer_suburb', "A delivery suburb is required for Australian addresses");
+        		}
+        		if(!$this->dataSubbed($customer_state))
+        		{
+        		    Session::set('show_customer_address', true);
+        			Form::setError('customer_state', "A delivery state is required for Australian addresses");
+        		}
+                $aResponse = $this->Eparcel->ValidateSuburb($customer_suburb, $customer_state, str_pad($customer_postcode,4,'0',STR_PAD_LEFT));
+                $error_string = "";
+                if(isset($aResponse['errors']))
+                {
+                    foreach($aResponse['errors'] as $e)
+                    {
+                        $error_string .= $e['message']." ";
+                    }
+                }
+                elseif($aResponse['found'] === false)
+                {
+                    $error_string .= "Postcode does not match suburb or state";
+                }
+                if(strlen($error_string))
+                {
+                    Session::set('show_customer_address', true);
+                    Form::setError('customer_postcode', $error_string);
+                }
+            }
+        }
+        //supplier address checking
+        if(!empty($supplier_address) || !empty($supplier_suburb) || !empty($supplier_state) || !empty($supplier_postcode) || !empty($supplier_country))
+        {
+            //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+            if( !$this->dataSubbed($supplier_address) )
+            {
+                Session::set('show_supplier_address', true);
+                Form::setError('supplier_address', 'An address is required');
+            }
+            elseif( !isset($ignore_supplier_address_error) )
+            {
+                if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $supplier_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $supplier_address)) )
+                {
+                    Session::set('show_supplier_address', true);
+                    Form::setError('supplier_address', 'The address must include both letters and numbers');
+                }
+            }
+            if(!$this->dataSubbed($supplier_postcode))
+            {
+                Session::set('show_supplier_address', true);
+                Form::setError('supplier_postcode', "A postcode is required");
+            }
+            if(!$this->dataSubbed($supplier_country))
+            {
+                Session::set('show_supplier_address', true);
+                Form::setError('supplier_country', "A country is required");
+            }
+            elseif(strlen($supplier_country) > 2)
+            {
+                Session::set('show_supplier_address', true);
+                Form::setError('supplier_country', "Please use the two letter ISO code");
+            }
+            elseif($customer_country == "AU")
+            {
+                if(!$this->dataSubbed($customer_suburb))
+        		{
+        		    Session::set('show_supplier_address', true);
+        			Form::setError('supplier_suburb', "A delivery suburb is required for Australian addresses");
+        		}
+        		if(!$this->dataSubbed($supplier_state))
+        		{
+        		    Session::set('show_supplier_address', true);
+        			Form::setError('supplier_state', "A delivery state is required for Australian addresses");
+        		}
+                $aResponse = $this->Eparcel->ValidateSuburb($supplier_suburb, $supplier_state, str_pad($supplier_postcode,4,'0',STR_PAD_LEFT));
+                $error_string = "";
+                if(isset($aResponse['errors']))
+                {
+                    foreach($aResponse['errors'] as $e)
+                    {
+                        $error_string .= $e['message']." ";
+                    }
+                }
+                elseif($aResponse['found'] === false)
+                {
+                    $error_string .= "Postcode does not match suburb or state";
+                }
+                if(strlen($error_string))
+                {
+                    Session::set('show_supplier_address', true);
+                    Form::setError('supplier_postcode', $error_string);
+                }
+            }
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            echo "<pre>",print_r($post_data),"</pre>"; //die();
+            //customer details
+            $customer_data = array(
+                'name'  => $customer_name
+            );
+            if($this->dataSubbed($customer_phone)) $customer_data['phone'] = $customer_phone;
+            if($this->dataSubbed($customer_contact)) $customer_data['contact'] = $customer_contact;
+            if($this->dataSubbed($customer_email)) $customer_data['email'] = $customer_email;
+            if($this->dataSubbed($customer_address)) $customer_data['address'] = $customer_address;
+            if($this->dataSubbed($customer_address2)) $customer_data['address2'] = $customer_address2;
+            if($this->dataSubbed($customer_suburb)) $customer_data['suburb'] = $customer_suburb;
+            if($this->dataSubbed($customer_state)) $customer_data['state'] = $customer_state;
+            if($this->dataSubbed($customer_postcode)) $customer_data['postcode'] = $customer_postcode;
+            if($this->dataSubbed($customer_country)) $customer_data['country'] = $customer_country;
+            //Need to add the customer?
+            if($customer_id == 0)
+            {
+                $customer_id = $this->productioncustomer->addCustomer($customer_data);
+                //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
+            }
+            else
+            {
+                $customer_data['customer_id'] = $customer_id;
+                $this->productioncustomer->editCustomer($customer_data);
+                //echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
+            }
+            //supplier details
+            $supplier_data = array();
+            if($this->dataSubbed($supplier_name))
+            {
+                $supplier_data['name'] = $supplier_name;
+                if($this->dataSubbed($supplier_phone)) $supplier_data['phone'] = $supplier_phone;
+                if($this->dataSubbed($supplier_contact)) $supplier_data['contact'] = $supplier_contact;
+                if($this->dataSubbed($supplier_email)) $supplier_data['email'] = $supplier_email;
+                if($this->dataSubbed($supplier_address)) $supplier_data['address'] = $supplier_address;
+                if($this->dataSubbed($supplier_address2)) $supplier_data['address2'] = $supplier_address2;
+                if($this->dataSubbed($supplier_suburb)) $supplier_data['suburb'] = $supplier_suburb;
+                if($this->dataSubbed($supplier_state)) $supplier_data['state'] = $supplier_state;
+                if($this->dataSubbed($supplier_postcode)) $supplier_data['postcode'] = $supplier_postcode;
+                if($this->dataSubbed($supplier_country)) $supplier_data['country'] = $supplier_country;
+            }
+            if(count($supplier_data))
+            {
+                if($supplier_id == 0)
+                {
+                    //add new supplier
+                    $supplier_id = $this->productionsupplier->addSupplier($supplier_data);
+                    //echo "Will add supplier data<pre>",print_r($supplier_data),"</pre>";
+                }
+                else
+                {
+                    $supplier_data['supplier_id'] = $supplier_id;
+                    $this->productionsupplier->editSupplier($supplier_data);
+                    //echo "Will edit supplier data<pre>",print_r($supplier_data),"</pre>";
+                }
+            }
+            $id = $this->productionjob->addJob($post_data);
+            Session::set('feedback', "That job has been added to the system.<br/>The details can be edited <a href='/jobs/edit-job/job=".$id."'>HERE</a>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/add-job");
     }
 
     public function procEditProductionCustomer()
