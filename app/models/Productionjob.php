@@ -16,7 +16,7 @@
 
     */
 
-class Productionsupplier extends Model{
+class Productionjob extends Model{
     public $table = "production_jobs";
 
     public function getAllJobs($status_id = 0)
