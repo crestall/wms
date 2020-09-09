@@ -175,16 +175,23 @@ class FormController extends Controller {
         {
             Form::setError('description', 'A job description is required');
         }
-        if(!$this->dataSubbed($designer))
+        if(!$this->dataSubbed($customer_name))
         {
             Form::setError('customer_name', 'A Customer Name is required');
         }
         //Might be required, or need to fulfill requirements
-        if(!$this->dataSubbed($customer_email))
+        if($this->dataSubbed($customer_email))
         {
             if(!$this->emailValid($customer_email))
             {
                 Form::setError('customer_email', 'The email is not valid');
+            }
+        }
+        if(!$this->dataSubbed($supplier_email))
+        {
+            if(!$this->emailValid($supplier_email))
+            {
+                Form::setError('supplier_email', 'The email is not valid');
             }
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
