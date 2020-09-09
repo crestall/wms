@@ -158,7 +158,7 @@ class FormController extends Controller {
         {
             Form::setError('job_id', 'The job id is required');
         }
-        if($status_id != 0)
+        if($status_id == 0)
         {
             Form::setError('status_id', 'Please choose a status');
         }

@@ -52,7 +52,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="date_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
+                    <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                 </div>
                 <div class="row form-group">
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
