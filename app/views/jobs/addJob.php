@@ -6,7 +6,7 @@ $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
-$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_date_value');
+$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
 $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value('date_ed_value'));
 ?>
 <div id="page-wrapper">
@@ -63,9 +63,10 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                             <div class="input-group-append">
                                 <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
+                            <?php echo Form::displayError('date_due');?>
                         </div>
                     </div>
-                    <input type="hidden" name="date_value" id="date_entered_value" value="<?php echo $date_due;?>" />
+                    <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3">Designer</label>

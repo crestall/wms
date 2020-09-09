@@ -162,9 +162,13 @@ class FormController extends Controller {
         {
             Form::setError('status_id', 'Please choose a status');
         }
-        if(!$this->dataSubbed($designer))
+        if(!$this->dataSubbed($date_entered_value))
         {
             Form::setError('date_entered', 'Please supply the date the job was entered');
+        }
+        if(!$this->dataSubbed($designer))
+        {
+            Form::setError('date_due', 'Please supply the date due');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
