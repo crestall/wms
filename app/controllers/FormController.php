@@ -158,9 +158,9 @@ class FormController extends Controller {
         {
             Form::setError('job_id', 'The job id is required');
         }
-        if(!$this->dataSubbed($job_id))
+        if($status_id != 0)
         {
-            Form::setError('job_id', 'The job id is required');
+            Form::setError('status_id', 'Please choose a status');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
