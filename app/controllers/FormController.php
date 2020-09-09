@@ -357,16 +357,19 @@ class FormController extends Controller {
             }
             //supplier details
             $supplier_data = array();
-            if($this->dataSubbed($supplier_name)) $supplier_data['name'] = $supplier_name;
-            if($this->dataSubbed($supplier_phone)) $supplier_data['phone'] = $supplier_phone;
-            if($this->dataSubbed($supplier_contact)) $supplier_data['contact'] = $supplier_contact;
-            if($this->dataSubbed($supplier_email)) $supplier_data['email'] = $supplier_email;
-            if($this->dataSubbed($supplier_address)) $supplier_data['address'] = $supplier_address;
-            if($this->dataSubbed($supplier_address2)) $supplier_data['address2'] = $supplier_address2;
-            if($this->dataSubbed($supplier_suburb)) $supplier_data['suburb'] = $supplier_suburb;
-            if($this->dataSubbed($supplier_state)) $supplier_data['state'] = $supplier_state;
-            if($this->dataSubbed($supplier_postcode)) $supplier_data['postcode'] = $supplier_postcode;
-            if($this->dataSubbed($supplier_country)) $supplier_data['country'] = $supplier_country;
+            if($this->dataSubbed($supplier_name))
+            {
+                $supplier_data['name'] = $supplier_name;
+                if($this->dataSubbed($supplier_phone)) $supplier_data['phone'] = $supplier_phone;
+                if($this->dataSubbed($supplier_contact)) $supplier_data['contact'] = $supplier_contact;
+                if($this->dataSubbed($supplier_email)) $supplier_data['email'] = $supplier_email;
+                if($this->dataSubbed($supplier_address)) $supplier_data['address'] = $supplier_address;
+                if($this->dataSubbed($supplier_address2)) $supplier_data['address2'] = $supplier_address2;
+                if($this->dataSubbed($supplier_suburb)) $supplier_data['suburb'] = $supplier_suburb;
+                if($this->dataSubbed($supplier_state)) $supplier_data['state'] = $supplier_state;
+                if($this->dataSubbed($supplier_postcode)) $supplier_data['postcode'] = $supplier_postcode;
+                if($this->dataSubbed($supplier_country)) $supplier_data['country'] = $supplier_country;
+            }
             if(count($supplier_data))
             {
                 if($supplier_id == 0)

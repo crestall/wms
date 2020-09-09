@@ -56,10 +56,10 @@ class Productionsupplier extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'          =>  $data['name'],
-            'email'         =>  $data['email'],
-            'contact'       =>  $data['contact']
+            'name'          =>  $data['name']
         );
+        if(!empty($data['email'])) $vals['email'] = $data['email'];
+        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
         if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
@@ -76,17 +76,19 @@ class Productionsupplier extends Model{
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  strtolower($data['name']),
-            'email'         =>  $data['email'],
-            'contact'       =>  $data['contact'],
+            'email'         =>  null,
+            'contact'       =>  null,
             'phone'         =>  null,
             'address'       =>  null,
             'address_2'     =>  null,
             'suburb'        =>  null,
             'state'         =>  null,
             'postcode'      =>  null,
-            'country'       =>  'AU'
+            'country'       =>  null
         );
         $vals['active'] = isset($data['active'])? 1 : 0;
+        if(!empty($data['email'])) $vals['email'] = $data['email'];
+        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
         if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
