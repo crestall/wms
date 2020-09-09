@@ -329,7 +329,27 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($post_data),"</pre>"; die();
+            echo "<pre>",print_r($post_data),"</pre>"; //die();
+            //customer details
+            $customer_data = array(
+                'name'  => $customer_name
+            );
+            if($this->dataSubbed($customer_phone)) $customer_data['phone'] = $customer_phone;
+            if($this->dataSubbed($customer_contact)) $customer_data['contact'] = $customer_contact;
+            if($this->dataSubbed($customer_email)) $customer_data['email'] = $customer_email;
+            if($this->dataSubbed($customer_address)) $customer_data['address'] = $customer_address;
+            if($this->dataSubbed($customer_address2)) $customer_data['address2'] = $customer_address2;
+            if($this->dataSubbed($customer_suburb)) $customer_data['suburb'] = $customer_suburb;
+            if($this->dataSubbed($customer_state)) $customer_data['state'] = $customer_state;
+            if($this->dataSubbed($customer_postcode)) $customer_data['postcode'] = $customer_postcode;
+            if($this->dataSubbed($customer_country)) $customer_data['country'] = $customer_country;
+            //Need to add the customer?
+            if($customer_id == 0)
+            {
+                //$this->productioncustomer->addCustomer($custamer_data);
+                echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
+            }
+            die();
             //$this->productioncustomer->editCustomer($post_data);
             //Session::set('feedback', "That customers's details have been updated");
         }
