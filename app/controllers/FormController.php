@@ -61,6 +61,7 @@ class FormController extends Controller {
             'procAddPackage',
             'procAddPackages',
             'procAddProductionCustomer',
+            'procAddProductionJob',
             'procAddProductionSupplier',
             'procAddressUpdate',
             'procAddServiceJob',
@@ -143,7 +144,7 @@ class FormController extends Controller {
 
     public function procAddProductionJob()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -153,6 +154,22 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if(!$this->dataSubbed($designer))
+        {
+            Form::setError('job_id', 'The job id is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            echo "<pre>",print_r($post_data),"</pre>"; die();
+            //$this->productioncustomer->editCustomer($post_data);
+            //Session::set('feedback', "That customers's details have been updated");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/add-job");
     }
 
     public function procEditProductionCustomer()
