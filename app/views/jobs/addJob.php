@@ -59,7 +59,7 @@ else
                 <div class="form-group row">
                     <label class="col-md-3">Sales Rep</label>
                     <div class="col-md-4">
-                        <select id="status" class="form-control selectpicker" name="status" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
+                        <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
                     </div>
                 </div>
                 <div class="row form-group">
