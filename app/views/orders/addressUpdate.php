@@ -64,7 +64,7 @@ if(!$error)
             </div>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
             <?php echo Form::displayError('general');?>
-                <form id="address-update" method="post" action="/form/procAddressUpdate">
+                <form id="address-update" autocomplete="off" method="post" action="/form/procAddressUpdate">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
                         <div class="col-md-4">
