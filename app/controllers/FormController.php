@@ -346,14 +346,14 @@ class FormController extends Controller {
             //Need to add the customer?
             if($customer_id == 0)
             {
-                $customer_id = $this->productioncustomer->addCustomer($custamer_data);
-                //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
+                //$customer_id = $this->productioncustomer->addCustomer($customer_data);
+                echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
             }
             else
             {
                 $customer_data['customer_id'] = $customer_id;
-                $this->productioncustomer->editCustomer($customer_data);
-                //echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
+                //$this->productioncustomer->editCustomer($customer_data);
+                echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
             }
             //supplier details
             $supplier_data = array();
@@ -375,15 +375,19 @@ class FormController extends Controller {
                 if($supplier_id == 0)
                 {
                     //add new supplier
-                    $supplier_id = $this->productionsupplier->addSupplier($supplier_data);
-                    //echo "Will add supplier data<pre>",print_r($supplier_data),"</pre>";
+                    //$supplier_id = $this->productionsupplier->addSupplier($supplier_data);
+                    echo "Will add supplier data<pre>",print_r($supplier_data),"</pre>";
                 }
                 else
                 {
                     $supplier_data['supplier_id'] = $supplier_id;
-                    $this->productionsupplier->editSupplier($supplier_data);
-                    //echo "Will edit supplier data<pre>",print_r($supplier_data),"</pre>";
+                    //$this->productionsupplier->editSupplier($supplier_data);
+                    echo "Will edit supplier data<pre>",print_r($supplier_data),"</pre>";
                 }
+            }
+            else
+            {
+                echo "<p>no supplier data supplied</p>";
             }
 
             die();
