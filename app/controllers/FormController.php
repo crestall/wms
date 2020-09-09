@@ -180,7 +180,7 @@ class FormController extends Controller {
             Form::setError('customer_name', 'A Customer Name is required');
         }
         //Might be required, or need to fulfill requirements
-        if($this->dataSubbed($customer_email))
+        if(!$this->dataSubbed($customer_email))
         {
             if(!$this->emailValid($customer_email))
             {
