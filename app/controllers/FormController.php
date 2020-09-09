@@ -346,11 +346,48 @@ class FormController extends Controller {
             //Need to add the customer?
             if($customer_id == 0)
             {
-                //$this->productioncustomer->addCustomer($custamer_data);
+                //$customer_id = $this->productioncustomer->addCustomer($custamer_data);
                 echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
             }
+            else
+            {
+                $customer_data['customer_id'] = $customer_id;
+                //$this->productioncustomer->editCustomer($customer_data);
+                echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
+            }
+            //supplier details
+            $supplier_data = array();
+            if($this->dataSubbed($supplier_name)) $supplier_data['name'] = $supplier_name;
+            if($this->dataSubbed($supplier_phone)) $supplier_data['phone'] = $supplier_phone;
+            if($this->dataSubbed($supplier_contact)) $supplier_data['contact'] = $supplier_contact;
+            if($this->dataSubbed($supplier_email)) $supplier_data['email'] = $supplier_email;
+            if($this->dataSubbed($supplier_address)) $supplier_data['address'] = $supplier_address;
+            if($this->dataSubbed($supplier_address2)) $supplier_data['address2'] = $supplier_address2;
+            if($this->dataSubbed($supplier_suburb)) $supplier_data['suburb'] = $supplier_suburb;
+            if($this->dataSubbed($supplier_state)) $supplier_data['state'] = $supplier_state;
+            if($this->dataSubbed($supplier_postcode)) $supplier_data['postcode'] = $supplier_postcode;
+            if($this->dataSubbed($supplier_country)) $supplier_data['country'] = $supplier_country;
+            if(count($supplier_data))
+            {
+                if($supplier_id == 0)
+                {
+                    //ad new supplier
+                    //$supplier_id = $this->productionsupplier->addSupplier($supplier_data);
+                    echo "Will add supplier data<pre>",print_r($supplier_data),"</pre>";
+                }
+                else
+                {
+                    $supplier_data['supplier_id'] = $supplier_id;
+                    //$this->productionsupplier->editSupplier($supplier_data)
+                    echo "Will edit supplier data<pre>",print_r($supplier_data),"</pre>";
+                }
+            }
+            else
+            {
+                echo "<p>No Supplier data supplied</p>";
+            }
+
             die();
-            //$this->productioncustomer->editCustomer($post_data);
             //Session::set('feedback', "That customers's details have been updated");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/add-job");
