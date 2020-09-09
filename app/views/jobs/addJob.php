@@ -9,6 +9,7 @@ $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value
 $date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
 $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value('date_ed_value'));
 $customer_collapse = (Session::getAndDestroy('show_customer_address'))? "" :"collapse";
+$supplier_collapse = (Session::getAndDestroy('show_supplier_address'))? "" :"collapse";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -210,7 +211,7 @@ $customer_collapse = (Session::getAndDestroy('show_customer_address'))? "" :"col
                         <a  id="supplier_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#supplier_address_holder" role="button" aria-expanded="false" aria-controls="supplier_address_holder"> </a>
                     </div>
                 </div>
-                <div id="supplier_address_holder" class="collapse mt-3">
+                <div id="supplier_address_holder" class="<?php echo $supplier_collapse;?> mt-3">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Address Line 1</label>
                         <div class="col-md-4">
