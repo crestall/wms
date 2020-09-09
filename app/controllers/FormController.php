@@ -162,6 +162,10 @@ class FormController extends Controller {
         {
             Form::setError('status_id', 'Please choose a status');
         }
+        if(!$this->dataSubbed($designer))
+        {
+            Form::setError('date_entered', 'Please supply the date the job was entered');
+        }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);

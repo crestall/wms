@@ -50,6 +50,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                             <div class="input-group-append">
                                 <span id="date_entered_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
+                            <?php echo Form::displayError('date_entered');?>
                         </div>
                     </div>
                     <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
