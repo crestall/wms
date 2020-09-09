@@ -28,6 +28,12 @@ class Reeceuser extends Model{
     public function addUpdateUsers(array $users)
     {
         $db = Database::openConnection();
+        $db->query("TRUNCATE TABLE {$this->table}");
+        foreach($users as $u)
+        {
+            $db->insertQuery($this->table, $u);
+        }
+        /*
         foreach($users as $u)
         {
             if($updator = $db->queryIdByFieldNumber($this->table, 'email', $u['email']))
@@ -41,6 +47,7 @@ class Reeceuser extends Model{
                 $db->insertQuery($this->table, $u);
             }
         }
+        */
         return true;
     }
 
