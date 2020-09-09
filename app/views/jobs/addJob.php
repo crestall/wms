@@ -8,7 +8,7 @@ $country = Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
 $date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
 $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value('date_ed_value'));
-$customer_collapse = (Session::getAndDestroy('show_customer_address'))? "collapse" :"";
+$customer_collapse = (Session::getAndDestroy('show_customer_address'))? "" :"collapse";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
