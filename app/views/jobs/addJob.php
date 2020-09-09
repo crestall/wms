@@ -18,7 +18,16 @@ else
     $customer_collapse = "collapse";
     $customer_aria_expanded = "false";
 }
-$supplier_collapse = (Session::getAndDestroy('show_supplier_address'))? "" :"collapse";
+if(Session::getAndDestroy('show_supplier_address'))
+{
+    $supplier_collapse = "collapse show";
+    $supplier_aria_expanded = "true";
+}
+else
+{
+    $supplier_collapse = "collapse";
+    $supplier_aria_expanded = "false";
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -217,7 +226,7 @@ $supplier_collapse = (Session::getAndDestroy('show_supplier_address'))? "" :"col
                 </div>
                 <div class="row">
                     <div class="col text-right">
-                        <a  id="supplier_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#supplier_address_holder" role="button" aria-expanded="false" aria-controls="supplier_address_holder"> </a>
+                        <a  id="supplier_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#supplier_address_holder" role="button" aria-expanded="<?php echo $supplier_aria_expanded;?>" aria-controls="supplier_address_holder"> </a>
                     </div>
                 </div>
                 <div id="supplier_address_holder" class="<?php echo $supplier_collapse;?> mt-3">
