@@ -187,7 +187,7 @@ class FormController extends Controller {
                 Form::setError('customer_email', 'The email is not valid');
             }
         }
-        if(!$this->dataSubbed($supplier_email))
+        if($this->dataSubbed($supplier_email))
         {
             if(!$this->emailValid($supplier_email))
             {
