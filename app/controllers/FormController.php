@@ -154,7 +154,11 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if(!$this->dataSubbed($designer))
+        if(!$this->dataSubbed($job_id))
+        {
+            Form::setError('job_id', 'The job id is required');
+        }
+        if(!$this->dataSubbed($job_id))
         {
             Form::setError('job_id', 'The job id is required');
         }
