@@ -170,9 +170,13 @@ class FormController extends Controller {
         {
             Form::setError('date_due', 'Please supply the date due');
         }
-        if(!$this->dataSubbed($designer))
+        if(!$this->dataSubbed($description))
         {
             Form::setError('description', 'A job description is required');
+        }
+        if(!$this->dataSubbed($designer))
+        {
+            Form::setError('customer_name', 'A Customer Name is required');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
