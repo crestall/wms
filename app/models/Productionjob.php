@@ -44,8 +44,8 @@ class Productionsupplier extends Model{
             'job_id'        => $data['job_id'],
             'customer_id'   => $data['customer_id'],
             'description'   => $data['description'],
-            'created_date'  => $data['created_date'],
-            'due_date'      => $data['due_date'],
+            'created_date'  => $data['date_entered_value'],
+            'due_date'      => $data['date_due_value'],
             'status_id'     => $data['status_id'],
             'date'          => time()
         );
