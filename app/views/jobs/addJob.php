@@ -78,6 +78,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
                     <div class="col-md-4">
                         <textarea name="description" id="description" class="form-control required" rows="4"><?php echo Form::value('description');?></textarea>
+                        <?php echo Form::displayError('description');?>
                     </div>
                 </div>
                 <div class="form-group row">
