@@ -37,12 +37,14 @@ class JobsController extends Controller
 
     public function viewJobs()
     {
+        $jobs = $this->productionjob->getAllJobs();
         //render the page
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
             'page_title'    =>  "View Production Jobs",
-            'pht'           =>  ": Production Jobs"
+            'pht'           =>  ": Production Jobs",
+            'jobs'          =>  $jobs
         ]);
     }
 
