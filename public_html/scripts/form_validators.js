@@ -311,6 +311,20 @@ $(document).ready(function() {
 			}
 		}
     });
+    ////////////////////////////////////////////////////////////
+    $('form#bulk_production_add').validate({
+        rules:{
+            csv_file:{
+    			extension: "csv",
+                required: true
+    		}
+        },
+		messages:{
+			csv_file:{
+				extension: "Only upload csv files here"
+			}
+		}
+    });
     ///////////////////////////////////////////////////////////////////////////////
     $("#book-pickup").validate({
         rules:{
