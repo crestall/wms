@@ -756,7 +756,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."production-settings/job-status");
+        return $this->redirector->to(PUBLIC_ROOT."production-settings/edit-job-status");
     }
 
     public function procJobStatusAdd()
@@ -797,7 +797,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."production-settings/job-status");
+        return $this->redirector->to(PUBLIC_ROOT."production-settings/edit-job-status");
     }
 
     public function procDFCollection()
