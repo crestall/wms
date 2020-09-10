@@ -31,15 +31,17 @@ class Productionjob extends Model{
         return $db->queryData($q);
     }
 
-    public function getAllJobsOrdered()
+    public function getJobsForDisplay()
     {
         $db = Database::openConnection();
         $q = "
             SELECT
-                pj.*, pc.name
+                pj.*, pc.name, sr.name AS salesrep_name, ps.name AS supplier_name
             FROM
                 `production_jobs` pj JOIN
-                `production_customers` pc ON pj.customer_id = pc.id
+                `production_customers` pc ON pj.customer_id = pc.id JOIN
+                `sales_reps` sr ON pj.salesrep_id = sr.id JOIN
+                production_suppliers ps ON pj.supplier_id = ps.id
             ORDER BY
                 pj.status_id = 9, pj.due_date DESC
         ";
