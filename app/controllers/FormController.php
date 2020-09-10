@@ -222,7 +222,7 @@ class FormController extends Controller {
                 if(empty($rep_id))
                 {
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                    echo "<p>Need to add {$row[16]} as a sales rep</p>";
+                    echo "<p>Need to add {$row[6]} as a sales rep</p>";
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
                 }
                 $created_date = str_replace('/', '-', trim($row[4]));
