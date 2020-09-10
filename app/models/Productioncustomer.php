@@ -55,8 +55,8 @@ class Productioncustomer extends Model{
     public function geCustomerIdByName($name)
     {
         $db = Database::openConnection();
-        $q = "SELECT id FROM {$this->table} WHERE `name` LIKE '%:val%' LIMIT 1";
-        $array = array('val' => $name);
+        $q = "SELECT id FROM {$this->table} WHERE `name` LIKE :val LIMIT 1";
+        $array = array('val' => '%'.$name.'%');
         $row = $db->queryRow($q, $array);
         return $row['id'];
     }
