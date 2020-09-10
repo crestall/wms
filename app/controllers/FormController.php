@@ -250,12 +250,15 @@ class FormController extends Controller {
                     $customer_id = $this->productioncustomer->addCustomer($customer_data);
                 }
                 $job['customer_id'] = $customer_id;
-
-
-                //echo "<p>Will do the sales rep - ".trim($row[6])." - on line $line</p>";
-
-                //echo "<p>Will do the suuplier - ".trim($row[8])." - on line $line</p>";
-
+                $supplier_id = $this->productionsupplier->getSupplierIdByName(trim($row[8]));
+                if(empty($supplier_id))
+                {
+                    $supplier_data = array(
+                        'name'  => trim($row[8])
+                    );
+                    $supplier_id = $this->productionsupplier->addSupplier($supplier_data);
+                }
+                $job['supplier_id'] = $supplier_id;
                 $jobs[] = $job;
                 ++$line;
             }
