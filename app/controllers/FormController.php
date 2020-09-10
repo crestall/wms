@@ -73,6 +73,7 @@ class FormController extends Controller {
             'procBookPickup',
             'procBreakPacks',
             'procBulkOrderAdd',
+            'procBulkProductionJobAdd',
             'procClientAdd',
             'procClientDailyReports',
             'procClientEdit',
@@ -140,6 +141,48 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procBulkProductionJobAdd()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($_FILES['csv_file']["size"] > 0)
+        {
+            if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
+            {
+                $tmp_name = $_FILES['csv_file']['tmp_name'];
+                $csv_array = array_map('str_getcsv', file($tmp_name));
+                //echo "<pre>",print_r($csv_array),"</pre>"; //die();
+            }
+            else
+            {
+            	$error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+                Form::setError('csv_file', $error_message);
+            }
+        }
+        else
+        {
+            Form::setError('csv_file', 'please select a file to upload');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            //Session::set('value_array', $_POST);
+            //Session::set('error_array', Form::getErrorArray());
+            echo "<pre>",print_r(Form::getErrorArray()),"</pre>";
+        }
+        else
+        {
+            echo "<pre>",print_r($csv_array),"</pre>";
+        }
     }
 
     public function procAddProductionJob()
