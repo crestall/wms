@@ -224,7 +224,7 @@ class FormController extends Controller {
                     'notes'             => trim($row[10]),
                     'ed_date'           => strtotime($etd)
                 );
-                echo "<p>Will do the customer - ".trim($row[2])." - on line $line</p>";
+                //echo "<p>Will do the customer - ".trim($row[2])." - on line $line</p>";
 
                 $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[2]));
 
