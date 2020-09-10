@@ -224,18 +224,15 @@ class FormController extends Controller {
                     'notes'             => trim($row[10]),
                     'ed_date'           => strtotime($etd)
                 );
-                //echo "<p>Will do the customer - ".trim($row[2])." - on line $line</p>";
-
                 $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[2]));
-
                 if(empty($customer_id))
                 {
-                    echo "<p>Will enter ".trim(trim($row[2]))." into the system</p>";
+                    $customer_data = array(
+                        'name'  => trim($row[2])
+                    );
+                    $customer_id = $this->productioncustomer->addCustomer($customer_data);
                 }
-                else
-                {
-                    echo "<p>$customer_id is the customerid</p>";
-                }
+                $job['customer_id'] = $customer_id;
 
 
                 //echo "<p>Will do the sales rep - ".trim($row[6])." - on line $line</p>";
