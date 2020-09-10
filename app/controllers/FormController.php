@@ -215,7 +215,7 @@ class FormController extends Controller {
 
                 $jobs[] = $job;
             }
-            echo "<pre>",print_r($jobs),"</pre>";"
+            echo "<pre>",print_r($jobs),"</pre>;"
         }
     }
 
