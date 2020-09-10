@@ -213,6 +213,7 @@ class FormController extends Controller {
                 }
                 $created_date = str_replace('/', '-', trim($row[4]));
                 $due_date = str_replace('/', '-', trim($row[5]));
+                $etd = str_replace('/', '-', trim($row[9]));
                 $job = array(
                     'job_id'            => trim($row[0]),
                     'previous_job_id'   => trim($row[1]),
@@ -220,10 +221,17 @@ class FormController extends Controller {
                     'created_date'      => strtotime($created_date),
                     'due_date'          => strtotime($due_date),
                     'designer'          => trim($row[7]),
-                    'notes'             => trim($row[10])
+                    'notes'             => trim($row[10]),
+                    'ed_date'           => strtotime($etd)
                 );
+                echo "<p>Will do the customer - ".trim($row[2])." - on line $line</p>";
+
+                echo "<p>Will do the sales rep - ".trim($row[6])." - on line $line</p>";
+
+                echo "<p>Will do the suuplier - ".trim($row[8])." - on line $line</p>";
 
                 $jobs[] = $job;
+                ++$line;
             }
             echo "<pre>",print_r($jobs),"</pre>";
         }
@@ -253,10 +261,6 @@ class FormController extends Controller {
         if(!$this->dataSubbed($date_entered_value))
         {
             Form::setError('date_entered', 'Please supply the date the job was entered');
-        }
-        if(!$this->dataSubbed($date_due_value))
-        {
-            Form::setError('date_due', 'Please supply the date due');
         }
         if(!$this->dataSubbed($description))
         {

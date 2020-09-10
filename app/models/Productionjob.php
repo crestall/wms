@@ -46,6 +46,7 @@ class Productionjob extends Model{
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
             'due_date'      => $data['date_due_value'],
+            'ed_date'       => $data['date_ed_value'],
             'status_id'     => $data['status_id'],
             'date'          => time()
         );
