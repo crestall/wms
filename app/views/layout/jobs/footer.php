@@ -130,9 +130,7 @@
                 },
                 'view-jobs':{
                     init: function(){
-                        dataTable.init($('table#production_jobs_table'), {
-                            "ordering": false
-                        } );
+                        dataTable.init($('table#production_jobs_table'), {});
                     }
                 }
             }
