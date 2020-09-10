@@ -181,7 +181,41 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($csv_array),"</pre>";
+            //echo "<pre>",print_r($csv_array),"</pre>";
+            /*
+            [0] => ?Job ID
+            [1] => Previous
+            [2] => Customer
+            [3] => Description
+            [4] => Entered
+            [5] => Due date
+            [6] => Sales Rep
+            [7] => Designer
+            [8] => Finisher / Supplier
+            [9] => E.T.D.
+            [10] => Notes & Comments
+            [11] => Status
+            [12] => Date
+            */
+            $imported_job_count = 0;
+            $skip_first = isset($header_row);
+            $line = 1;
+            $data_error_string = "<ul>";
+            $import_jobs = true;
+            $jobs = array();
+            foreach($csv_array as $row)
+            {
+                $job = array(
+                    'job_id'            => trim($row[0]),
+                    'previous_job_id'   => trim($row[1]),
+                    'description'       => trim($row[3]),
+                    'created_date'      => strtotime(trim($row[4])),
+                    'due_date'          => strtotime(trim($row[5])),
+                );
+
+                $jobs[] = $job;
+            }
+            echo "<pre>",print_r($jobs),"</pre>";"
         }
     }
 
