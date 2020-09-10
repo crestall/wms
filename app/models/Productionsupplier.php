@@ -52,7 +52,7 @@ class Productionsupplier extends Model{
         return $db->queryById($this->table, $id);
     }
 
-    public function geSupplierIdByName($name)
+    public function getSupplierIdByName($name)
     {
         $db = Database::openConnection();
         $q = "SELECT id FROM {$this->table} WHERE `name` LIKE :val LIMIT 1";
