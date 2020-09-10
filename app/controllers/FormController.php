@@ -211,12 +211,14 @@ class FormController extends Controller {
                     ++$line;
                     continue;
                 }
+                $created_date = str_replace('/', '-', trim($row[4]));
+                $due_date = str_replace('/', '-', trim($row[5]));
                 $job = array(
                     'job_id'            => trim($row[0]),
                     'previous_job_id'   => trim($row[1]),
                     'description'       => trim($row[3]),
-                    'created_date'      => strtotime(trim($row[4])),
-                    'due_date'          => strtotime(trim($row[5])),
+                    'created_date'      => strtotime($created_date),
+                    'due_date'          => strtotime($due_date),
                 );
 
                 $jobs[] = $job;
