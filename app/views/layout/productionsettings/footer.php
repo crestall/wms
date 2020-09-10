@@ -37,7 +37,7 @@
                         });
                     }
                 },
-                'sales-reps':{
+                'job-csv-import':{
                     init: function(){
 
                     }
