@@ -265,7 +265,12 @@ class FormController extends Controller {
                 $jobs[] = $job;
                 ++$line;
             }
-            echo "<pre>",print_r($jobs),"</pre>";
+            //echo "<pre>",print_r($jobs),"</pre>";
+            foreach($jobs as $j)
+            {
+                $id= $this->productionjob->addJob($j);
+                echo "<p>Job with id $id has been added</p>";
+            }
         }
     }
 
