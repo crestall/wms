@@ -39,7 +39,12 @@
                 },
                 'job-csv-import':{
                     init: function(){
-
+                        $('form#bulk-order-csv-upload').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Uploading and Processing Jobs...</h2></div>' });
+                            }
+                        });
                     }
                 }
             }
