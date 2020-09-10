@@ -49,7 +49,7 @@ $padmin = array(
         'job-status'    => array(
             'display'   => true,
             //'icon'      => '<i class="fal fa-list-alt fa-2x"></i>',
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-list-alt"></i><i class="fad fa-pencil-alt" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-list-alt" data-fa-transform="grow-2"></i><i class="fad fa-pencil-alt" data-fa-transform="shrink-4 up-5 right-6"></i></span></div>'
         ),
         'job-csv-import'    => array(
             'display'   => true,
