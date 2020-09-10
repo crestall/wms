@@ -218,6 +218,13 @@ class FormController extends Controller {
                     echo "<p>Need to add {$row[11]} as a status</p>";
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
                 }
+                $rep_id = $this->salesrep->geRepIdByName(trim($row[6]));
+                if(empty($rep_id))
+                {
+                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    echo "<p>Need to add {$row[16]} as a sales rep</p>";
+                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                }
                 $created_date = str_replace('/', '-', trim($row[4]));
                 $due_date = str_replace('/', '-', trim($row[5]));
                 $etd = str_replace('/', '-', trim($row[9]));
@@ -230,7 +237,9 @@ class FormController extends Controller {
                     'designer'          => trim($row[7]),
                     'notes'             => trim($row[10]),
                     'ed_date'           => strtotime($etd),
-                    'status_id'         => $status_id
+                    'status_id'         => $status_id,
+                    'salesrep_id'       => $rep_id,
+                    'date'              => time()
                 );
                 $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[2]));
                 if(empty($customer_id))
