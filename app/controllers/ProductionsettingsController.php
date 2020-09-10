@@ -23,7 +23,7 @@ class ProductionSettingsController extends Controller
         parent::displayIndex(get_class());
     }
 
-    public function jobStatus()
+    public function editJobStatus()
     {
         $status = $this->jobstatus->getStatus();
         //render the page
