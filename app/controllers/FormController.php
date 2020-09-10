@@ -219,6 +219,8 @@ class FormController extends Controller {
                     'description'       => trim($row[3]),
                     'created_date'      => strtotime($created_date),
                     'due_date'          => strtotime($due_date),
+                    'designer'          => trim($row[7]),
+                    'notes'             => trim($row[10])
                 );
 
                 $jobs[] = $job;
