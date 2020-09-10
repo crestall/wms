@@ -31,6 +31,21 @@ class Productionjob extends Model{
         return $db->queryData($q);
     }
 
+    public function getAllJobsOrdered()
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                pj.*, pc.name
+            FROM
+                `production_jobs` pj JOIN
+                `production_customers` pc ON pj.customer_id = pc.id
+            ORDER BY
+                pj.status_id = 9, pj.due_date DESC
+        ";
+        return $db->queryData($q);
+    }
+
     public function getJobById($id = 0)
     {
         $db = Database::openConnection();
