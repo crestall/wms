@@ -205,6 +205,12 @@ class FormController extends Controller {
             $jobs = array();
             foreach($csv_array as $row)
             {
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    ++$line;
+                    continue;
+                }
                 $job = array(
                     'job_id'            => trim($row[0]),
                     'previous_job_id'   => trim($row[1]),
