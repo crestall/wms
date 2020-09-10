@@ -27,8 +27,8 @@ class ProductionSettingsController extends Controller
     {
         $status = $this->jobstatus->getStatus();
         //render the page
-        Config::setJsConfig('curPage', "job-status");
-        Config::set('curPage', "job-status");
+        Config::setJsConfig('curPage', "edit-job-status");
+        Config::set('curPage', "edit-job-status");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/jobStatus.php', [
             'page_title'    =>  "Production Job Status",
             'pht'           =>  ": Production Job Status",
