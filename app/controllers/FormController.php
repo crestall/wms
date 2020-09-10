@@ -228,7 +228,15 @@ class FormController extends Controller {
 
                 $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[2]));
 
-                echo "<p>$customer_id is the customerid</p>";
+                if(empty($customer_id))
+                {
+                    echo "<p>Will enter ".trim(trim($row[2]))." into the system</p>";
+                }
+                else
+                {
+                    echo "<p>$customer_id is the customerid</p>";
+                }
+
 
                 //echo "<p>Will do the sales rep - ".trim($row[6])." - on line $line</p>";
 
