@@ -211,6 +211,7 @@ class FormController extends Controller {
                     ++$line;
                     continue;
                 }
+                $status_id = $this->jobstatus->getStatusId(trim($row[11]));
                 $created_date = str_replace('/', '-', trim($row[4]));
                 $due_date = str_replace('/', '-', trim($row[5]));
                 $etd = str_replace('/', '-', trim($row[9]));
@@ -222,7 +223,8 @@ class FormController extends Controller {
                     'due_date'          => strtotime($due_date),
                     'designer'          => trim($row[7]),
                     'notes'             => trim($row[10]),
-                    'ed_date'           => strtotime($etd)
+                    'ed_date'           => strtotime($etd),
+                    'status_id'         => $status_id
                 );
                 $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[2]));
                 if(empty($customer_id))
