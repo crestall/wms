@@ -6,7 +6,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
-        <form id="bulk_production_add" autocomplete="off" method="post" action="/form/procBulkProductionJobAdd">
+        <form id="bulk_production_add" autocomplete="off" method="post" action="/form/procBulkProductionJobAdd" enctype="multipart/form-data">
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> CSV File</label>
                 <div class="col-md-4">
