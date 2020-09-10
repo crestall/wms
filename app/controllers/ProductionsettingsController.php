@@ -23,6 +23,17 @@ class ProductionSettingsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function jobCsvImport()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "job-csv-import");
+        Config::set('curPage', "job-csv-import");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/jobImport.php', [
+            'page_title'    =>  "Import Production Jobs",
+            'pht'           =>  ": Import Production Jobs"
+        ]);
+    }
+
     public function editJobStatus()
     {
         $status = $this->jobstatus->getStatus();
