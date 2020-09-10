@@ -37,7 +37,7 @@ class JobsController extends Controller
 
     public function viewJobs()
     {
-        $jobs = $this->productionjob->getAllJobs();
+        $jobs = $this->productionjob->getAllJobsOrdered();
         //render the page
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
