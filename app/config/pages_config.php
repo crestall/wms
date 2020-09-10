@@ -52,7 +52,7 @@ $padmin = array(
         ),
         'job-csv-import'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-file-import"></i><i class="fal fa-file-csv" data-fa-transform="shrink-4 left-3></i></span></div>'
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-file-import"></i><i class="fal fa-file-csv" data-fa-transform="shrink-4 left-3"></i></span></div>'
         )
     ),
     'sales-reps'    => array(
