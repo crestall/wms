@@ -212,6 +212,12 @@ class FormController extends Controller {
                     continue;
                 }
                 $status_id = $this->jobstatus->getStatusId(trim($row[11]));
+                if(!$status_id)
+                {
+                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    echo "<p>Need to add {$row[11]} as a status</p>";
+                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                }
                 $created_date = str_replace('/', '-', trim($row[4]));
                 $due_date = str_replace('/', '-', trim($row[5]));
                 $etd = str_replace('/', '-', trim($row[9]));
