@@ -229,17 +229,17 @@ class FormController extends Controller {
                 $due_date = str_replace('/', '-', trim($row[5]));
                 $etd = str_replace('/', '-', trim($row[9]));
                 $job = array(
-                    'job_id'            => trim($row[0]),
-                    'previous_job_id'   => trim($row[1]),
-                    'description'       => trim($row[3]),
-                    'created_date'      => strtotime($created_date),
-                    'due_date'          => strtotime($due_date),
-                    'designer'          => trim($row[7]),
-                    'notes'             => trim($row[10]),
-                    'ed_date'           => strtotime($etd),
-                    'status_id'         => $status_id,
-                    'salesrep_id'       => $rep_id,
-                    'date'              => time()
+                    'job_id'                => trim($row[0]),
+                    'previous_job_id'       => trim($row[1]),
+                    'description'           => trim($row[3]),
+                    'date_entered_value'    => strtotime($created_date),
+                    'date_due_value'        => strtotime($due_date),
+                    'designer'              => trim($row[7]),
+                    'notes'                 => trim($row[10]),
+                    'date_ed_value'         => strtotime($etd),
+                    'status_id'             => $status_id,
+                    'salesrep_id'           => $rep_id,
+                    'date'                  => time()
                 );
                 $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[2]));
                 if(empty($customer_id))
