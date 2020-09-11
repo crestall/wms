@@ -31,7 +31,7 @@ class Productionjob extends Model{
         return $db->queryData($q);
     }
 
-    public function getJobsForDisplay()
+    public function getJobsForDisplay($completed = false, $cancelled = false)
     {
         $db = Database::openConnection();
         $q = "
@@ -43,8 +43,26 @@ class Productionjob extends Model{
                 `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
                 `production_suppliers` ps ON pj.supplier_id = ps.id LEFT JOIN
                 job_status js ON pj.status_id = js.id
+        ";
+        if($completed)
+        {
+            $q .= " WHERE pj.status_id = 9";
+        }
+        else
+        {
+            $q .= " WHERE pj.status_id != 9";
+        }
+        if($cancelled)
+        {
+            $q .= " AND pj.status_id = 11";
+        }
+        else
+        {
+            $q .= " AND pj.status_id != 11";
+        }
+        $q .= "
             ORDER BY
-                pj.status_id = 9, pj.due_date DESC
+                pj.due_date DESC
         ";
         return $db->queryData($q);
     }
