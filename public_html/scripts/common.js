@@ -1,4 +1,11 @@
 /************
+* Bootstrap Tooltips
+************/
+//add them to all anchors that have data-toggle prop and disable clicking
+$('[data-toggle="tooltip"]').tooltip().click(function(e){
+    e.preventDefault();
+});
+/************
 * Navigation Scripting
 ************/
  $(function () {
