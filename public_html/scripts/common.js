@@ -17,8 +17,6 @@ $('[data-toggle="propover"]').popover({
     content: function(){
         return ($this).next('.popper-content').html();
     }
-}).click(function(e){
-    e.preventDefault();
 });
 /************
 * Navigation Scripting
