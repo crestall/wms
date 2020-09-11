@@ -64,7 +64,7 @@ function getCustomerPopOver($job)
                                     <td data-label="Client">
                                         <a href="#" data-toggle="popover"><?php echo $job['customer_name'];?></a>
                                         <div class="popper-content hide">
-                                            <?php getCustomerPopOver($job);?>
+                                            <?php echo getCustomerPopOver($job);?>
                                         </div>
                                     </td>
                                     <td data-label="Description"><?php echo $job['description'];?></td>
