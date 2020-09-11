@@ -12,7 +12,7 @@
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-md-4 mb-md-3"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
                 <div class="col-md-4 mb-md-3"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Incompleted Jobs</a></div>
-                <div class="col-md-4 mb-md-3"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Cancelled Jobs</a></div>
+                <div class="col-md-4 mb-md-3"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
                 <div class="col-12">
                     <table class="table-striped table-hover" id="production_jobs_table">
                         <thead>
