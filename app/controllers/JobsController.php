@@ -37,7 +37,9 @@ class JobsController extends Controller
 
     public function viewJobs()
     {
-        $jobs = $this->productionjob->getJobsForDisplay();
+        $completed = (isset($this->request->params['args']['completed']))? true : false;
+        $cancelled = (isset($this->request->params['args']['cancelled']))? true : false;
+        $jobs = $this->productionjob->getJobsForDisplay($completed, $cancelled);
         //render the page
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
