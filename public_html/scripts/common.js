@@ -12,7 +12,7 @@ $('[data-toggle="tooltip"]').tooltip().click(function(e){
 $('[data-toggle="propover"]').popover({
     container: 'body',
     placement: 'auto',
-    trigger: 'hover click',
+    trigger: 'hover',
     html: true,
     content: function(){
         return ($this).next('.popper-content').html();
