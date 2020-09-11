@@ -15,7 +15,9 @@ $('[data-toggle="popover"]').popover({
     trigger: 'click',
     html: true,
     content: function(){
-        return $(this).next('.popper-content').html();
+        var content =  $(this).next('.popper-content').html();
+        console.log(content);
+        return content;
     }
 });
 /************
