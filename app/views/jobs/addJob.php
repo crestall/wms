@@ -79,11 +79,10 @@ else
                     <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="text" class="required form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                            <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
                             <div class="input-group-append">
                                 <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
-                            <?php echo Form::displayError('date_due');?>
                         </div>
                     </div>
                     <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
