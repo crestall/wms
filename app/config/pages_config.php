@@ -50,11 +50,11 @@ $padmin = array(
             'display'   => true,
             //'icon'      => '<i class="fal fa-list-alt fa-2x"></i>',
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-list-alt" data-fa-transform="grow-2"></i><i class="fad fa-pencil-alt" data-fa-transform="shrink-4 up-5 right-8"></i></span></div>'
-        ) ,/**/
+        ) ,/*
         'job-csv-import'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-file-import"></i><i class="fal fa-file-csv" data-fa-transform="shrink-5 left-6 up-2"></i></span></div>'
-        )
+        ) */
     ),
     'sales-reps'    => array(
         'add-rep'   => array(
