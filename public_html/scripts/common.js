@@ -6,6 +6,21 @@ $('[data-toggle="tooltip"]').tooltip().click(function(e){
     e.preventDefault();
 });
 /************
+* Bootstrap Popovers
+************/
+//add them to all anchors that have data-toggle prop and disable clicking
+$('[data-toggle="propover"]').popover({
+    container: 'body',
+    placement: 'auto',
+    trigger: 'hover click',
+    html: true,
+    content: function(){
+        return ($this).next('.popper-content').html();
+    }
+}).click(function(e){
+    e.preventDefault();
+});
+/************
 * Navigation Scripting
 ************/
  $(function () {
