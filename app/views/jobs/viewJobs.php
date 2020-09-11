@@ -27,7 +27,20 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <?php foreach($jobs as $job):?>
+                                <tr>
+                                    <td data-label="Job Number" class="number"><?php echo $job['job_id'];?></td>
+                                    <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
+                                    <td data-label="Client"><?php echo $job['name'];?></td>
+                                    <td data-label="Description"><?php echo $job['decription'];?></td>
+                                    <td data-label="Notes"><?php echo $job['notes'];?></td>
+                                    <td data-label="Status"><?php echo ucwords($job['status']);?></td>
+                                    <td data-label="Sales Rep"><?php echo ucwords($job['salesrep_name']);?></td>
+                                    <td data-label="Supplier"><?php echo ucwords($job['supplier_name']);?></td>
+                                    <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
+                                    <td data-label="Due Date"><?php echo date("d/m/Y", $job['due_date']);?></td>
+                                </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
