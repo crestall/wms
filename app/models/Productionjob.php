@@ -36,12 +36,13 @@ class Productionjob extends Model{
         $db = Database::openConnection();
         $q = "
             SELECT
-                pj.*, pc.name, sr.name AS salesrep_name, ps.name AS supplier_name
+                pj.*, pc.name, sr.name AS salesrep_name, ps.name AS supplier_name, js.name AS `status`
             FROM
                 `production_jobs` pj JOIN
                 `production_customers` pc ON pj.customer_id = pc.id JOIN
                 `sales_reps` sr ON pj.salesrep_id = sr.id JOIN
-                production_suppliers ps ON pj.supplier_id = ps.id
+                `production_suppliers` ps ON pj.supplier_id = ps.id JOIN
+                job_status js ON pj.status_id = js.id
             ORDER BY
                 pj.status_id = 9, pj.due_date DESC
         ";
