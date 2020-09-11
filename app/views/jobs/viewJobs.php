@@ -34,7 +34,7 @@
                                 <tr>
                                     <td data-label="Job Number" class="number"><?php echo $job['job_id'];?></td>
                                     <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
-                                    <td data-label="Client"><?php echo $job['customer_name'];?></td>
+                                    <td data-label="Client"><a href="#" data-toggle="tooltip" data-placement="top" title="Default tooltip"><?php echo $job['customer_name'];?></a></td>
                                     <td data-label="Description"><?php echo $job['description'];?></td>
                                     <td data-label="Notes"><?php echo $job['notes'];?></td>
                                     <td data-label="Status"><?php echo ucwords($job['status']);?></td>
