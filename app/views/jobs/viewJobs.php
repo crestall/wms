@@ -97,7 +97,6 @@ function getCustomerPopOver($job)
                                     <td data-label="Status"><?php echo ucwords($job['status']);?></td>
                                     <td data-label="Sales Rep"><?php echo ucwords($job['salesrep_name']);?></td>
                                     <td data-label="Supplier">
-                                        <?php echo ucwords($job['supplier_name']);?>
                                         <span style="font-size: larger">
                                             <?php if($user_role == "production_admin"):?>
                                                 <a href="/customers/edit-supplier/supplier=<?php echo $job['supplier_id'];?>"><?php echo ucwords($job['supplier_name']);;?></a>
