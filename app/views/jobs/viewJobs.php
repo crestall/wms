@@ -58,17 +58,19 @@ function getCustomerPopOver($job)
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             <?php foreach($jobs as $job):?>
                                 <tr>
                                     <td data-label="Job Number" class="number"><?php echo $job['job_id'];?></td>
                                     <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                                     <td data-label="Client">
-                                        <?php if($user_role == "production_admin"):?>
-                                            <a href="/customers/edit-customer/customer=<?php echo $job['customer_id'];?>"><?php echo $job['customer_name'];?></a>
-                                        <?php else:?>
-                                            <?php echo $job['customer_name'];?>
-                                        <?php endif;?>
+                                        <span style="font-size: larger">
+                                            <?php if($user_role == "production_admin"):?>
+                                                <a href="/customers/edit-customer/customer=<?php echo $job['customer_id'];?>"><?php echo $job['customer_name'];?></a>
+                                            <?php else:?>
+                                                <?php echo $job['customer_name'];?>
+                                            <?php endif;?>
+                                        </span>
                                         <div class="contact_details mb-3 ">
                                             <div class='row'>
                                                 <label class='col-4 font-weight-bold'>Contact</label>
