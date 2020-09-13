@@ -37,9 +37,9 @@ class Productionjob extends Model{
         $q = "
             SELECT
                 pj.*,
-                pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
-                sr.name AS salesrep_name,
-                ps.name AS supplier_name, ps.contact AS supplier_contact, ps.email AS supplier_email, ps.phone AS supplier_phone,
+                pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
+                sr.is as salesrep_id, sr.name AS salesrep_name,
+                ps.id as supplier_id, ps.name AS supplier_name, ps.contact AS supplier_contact, ps.email AS supplier_email, ps.phone AS supplier_phone,
                 js.name AS `status`
             FROM
                 `production_jobs` pj LEFT JOIN
