@@ -75,7 +75,7 @@ function getCustomerPopOver($job)
                                                     <?php echo $job['customer_contact'];?>
                                                 </div>
                                             </div>
-                                            <div class='row'>
+                                            <div class='row mb-2'>
                                                 <label class='col-4'>Email</label>
                                                 <div class='col-8'>
                                                     <?php echo $job['customer_email'];?>
