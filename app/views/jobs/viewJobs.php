@@ -69,20 +69,20 @@ function getCustomerPopOver($job)
                                             <?php echo $job['customer_name'];?>
                                         <?php endif;?>
                                         <div class="contact_details mb-3 ">
-                                            <div class='row mb-2'>
+                                            <div class='row'>
                                                 <label class='col-4 font-weight-bold'>Contact</label>
                                                 <div class='col-8'>
                                                     <?php echo $job['customer_contact'];?>
                                                 </div>
                                             </div>
-                                            <div class='row mb-2'>
-                                                <label class='col-4'>Email</label>
+                                            <div class='row'>
+                                                <label class='col-4 font-weight-bold'>Email</label>
                                                 <div class='col-8'>
                                                     <?php echo $job['customer_email'];?>
                                                 </div>
                                             </div>
                                             <div class='row'>
-                                                <label class='col-4'>Phone</label>
+                                                <label class='col-4 font-weight-bold'>Phone</label>
                                                 <div class='col-8'>
                                                     <?php echo $job['customer_phone'];?>
                                                 </div>
