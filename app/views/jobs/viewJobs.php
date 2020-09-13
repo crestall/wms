@@ -37,7 +37,7 @@ function getCustomerPopOver($job)
                 </div>
             </div>
             <div class="row mt-4" id="table_holder" style="display:none">
-                <?php echo "User Role $user_role";?>
+                <?php //echo "User Role $user_role";?>
                 <div class="col-md-4 mb-md-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
                 <div class="col-md-4 mb-md-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Incompleted Jobs</a></div>
                 <div class="col-md-4 mb-md-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
@@ -63,7 +63,7 @@ function getCustomerPopOver($job)
                                     <td data-label="Job Number" class="number"><?php echo $job['job_id'];?></td>
                                     <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                                     <td data-label="Client">
-                                        <?php if($user_role == "production admin"):?>
+                                        <?php if($user_role == "production_admin"):?>
                                             <a href="/customers/edit-customer/customer=<?php echo $job['customer_id'];?>"><?php echo $job['customer_name'];?></a>
                                         <?php else:?>
                                             <?php echo $job['customer_name'];?>
