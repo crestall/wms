@@ -86,11 +86,11 @@ class Productionjob extends Model{
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
             'due_date'      => $data['date_due_value'],
-            'ed_date'       => $data['date_ed_value'],
             'status_id'     => $data['status_id'],
             'date'          => time()
         );
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
+        if(!empty($data['date_ed_value'])) $vals['date_ed_value'] = $data['date_ed_value'];
         if(!empty($data['supplier_id'])) $vals['supplier_id'] = $data['supplier_id'];
         if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
         if(!empty($data['designer'])) $vals['designer'] = $data['designer'];
