@@ -1,3 +1,30 @@
+<?php
+function getCustomerPopOver($job)
+{
+    return "
+        <div class='container'>
+            <div class='row'>
+                <label class='col-4'>Contact</label>
+                <div class='col-8'>
+                    ".$job['customer_contact']."
+                </div>
+            </div>
+            <div class='row'>
+                <label class='col-4'>Email</label>
+                <div class='col-8'>
+                    ".$job['customer_email']."
+                </div>
+            </div>
+            <div class='row'>
+                <label class='col-4'>Phone</label>
+                <div class='col-8'>
+                    ".$job['customer_phone']."
+                </div>
+            </div>
+        </div>
+    ";
+}
+?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -10,6 +37,7 @@
                 </div>
             </div>
             <div class="row mt-4" id="table_holder" style="display:none">
+                <?php //echo "User Role $user_role";?>
                 <div class="col-md-4 mb-md-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
                 <div class="col-md-4 mb-md-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Incompleted Jobs</a></div>
                 <div class="col-md-4 mb-md-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
@@ -30,16 +58,73 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <?php foreach($jobs as $job):?>
                                 <tr>
                                     <td data-label="Job Number" class="number"><?php echo $job['job_id'];?></td>
                                     <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
-                                    <td data-label="Client"><?php echo $job['name'];?></td>
+                                    <td data-label="Client">
+                                        <span style="font-size: larger">
+                                            <?php if($user_role == "production_admin"):?>
+                                                <a href="/customers/edit-customer/customer=<?php echo $job['customer_id'];?>"><?php echo $job['customer_name'];?></a>
+                                            <?php else:?>
+                                                <?php echo $job['customer_name'];?>
+                                            <?php endif;?>
+                                        </span>
+                                        <div class="contact_details">
+                                            <div class='row'>
+                                                <label class='col-4 font-weight-bold'>Contact</label>
+                                                <div class='col-8'>
+                                                    <?php echo $job['customer_contact'];?>
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <label class='col-4 font-weight-bold'>Email</label>
+                                                <div class='col-8'>
+                                                    <?php echo $job['customer_email'];?>
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <label class='col-4 font-weight-bold'>Phone</label>
+                                                <div class='col-8'>
+                                                    <?php echo $job['customer_phone'];?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td data-label="Description"><?php echo $job['description'];?></td>
                                     <td data-label="Notes"><?php echo $job['notes'];?></td>
                                     <td data-label="Status"><?php echo ucwords($job['status']);?></td>
                                     <td data-label="Sales Rep"><?php echo ucwords($job['salesrep_name']);?></td>
-                                    <td data-label="Supplier"><?php echo ucwords($job['supplier_name']);?></td>
+                                    <td data-label="Supplier">
+                                        <span style="font-size: larger">
+                                            <?php if($user_role == "production_admin"):?>
+                                                <a href="/customers/edit-supplier/supplier=<?php echo $job['supplier_id'];?>"><?php echo ucwords($job['supplier_name']);;?></a>
+                                            <?php else:?>
+                                                <?php echo ucwords($job['supplier_name']);?>
+                                            <?php endif;?>
+                                        </span>
+                                        <div class="contact_details">
+                                            <div class='row'>
+                                                <label class='col-4 font-weight-bold'>Contact</label>
+                                                <div class='col-8'>
+                                                    <?php echo $job['supplier_contact'];?>
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <label class='col-4 font-weight-bold'>Email</label>
+                                                <div class='col-8'>
+                                                    <?php echo $job['supplier_email'];?>
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <label class='col-4 font-weight-bold'>Phone</label>
+                                                <div class='col-8'>
+                                                    <?php echo $job['supplier_phone'];?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
                                     <td data-label="Due Date"><?php echo date("d/m/Y", $job['due_date']);?></td>
                                 </tr>

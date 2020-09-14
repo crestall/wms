@@ -10,7 +10,7 @@
 
                     }
                 },
-                'job-status':{
+                'edit-job-status':{
                     init: function(){
                         $("form#add-job-status").submit(function(e){
                             if($(this).valid())
@@ -34,6 +34,9 @@
                         });
                         $('input.default_checkbox').click(function() {
                             $('input.default_checkbox').not(this).prop("checked", false);
+                        });
+                        $('.colour-picker').colorpicker({
+                            format: 'rgba'
                         });
                     }
                 },

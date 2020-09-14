@@ -252,9 +252,6 @@ class Controller {
     /**
      * show error page
      *
-     * call error action method and set response status code
-     * This will work as well for ajax call, see how ajax calls are handled in main.js
-     *
      * @param int|string $code
      *
      */

@@ -397,7 +397,7 @@ Standard Tables
 table{
     margin:10px auto;
     border-bottom:solid 2px #106ea4;
-    font-size:12px;
+    font-size:0.75rem;
 }
 
 td{
@@ -711,3 +711,15 @@ Responsive adjustments
     }
 }
 
+/********
+Colorpicker adjustments
+*******  */
+.colorpicker-input-addon i {
+    height: 24px;
+    width: 24px;
+}
+
+.colorpicker-input-addon:before {
+    width: 24px;
+    height: 24px;
+}

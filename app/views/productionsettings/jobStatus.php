@@ -17,6 +17,17 @@
                 </div>
                 <span class="inst">Names <span class="font-weight-bold">must</span> be unique</span>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3">Colour</label>
+                <div class="col-md-4">
+                    <div class="colour-picker input-group">
+                        <input type="text" class="form-control" name="colour" id="colour" value="<?php echo Form::value('colour');?>" >
+                        <div class="input-group-append">
+                            <span class="input-group-text colorpicker-input-addon"><i></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
@@ -38,6 +49,15 @@
                             <label class="col-form-label">Name</label>
                             <input type="text" class="form-control required" name="name_<?php echo $s['id'];?>" id="name_<?php echo $s['id'];?>" value="<?php echo ucwords($s['name']);?>" />
                             <?php echo Form::displayError("name_{$s['id']}");?>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="col-form-label">Colour</label>
+                            <div class="colour-picker input-group">
+                                <input type="text" class="form-control" name="colour" id="colour" value="<?php echo $s['colour'];?>" >
+                                <div class="input-group-append">
+                                    <span class="input-group-text colorpicker-input-addon"><i></i></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-1">
                             <label class="col-form-label" for="active_<?php echo $s['id'];?>">Active</label>
