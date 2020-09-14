@@ -49,6 +49,7 @@ class Jobstatus extends Model{
             'name'      =>  strtolower($data['name'])
         );
         if(!empty($data['colour'])) $vals['colour'] = $data['colour'];
+        if(!empty($data['text_colour'])) $vals['text_colour'] = $data['text_colour'];
         return $db->insertQuery($this->table, $vals);
     }
 
@@ -61,6 +62,7 @@ class Jobstatus extends Model{
         );
         $vals['active'] = (isset($data['active']))? 1:0;
         if(!empty($data['colour'])) $vals['colour'] = $data['colour'];
+        if(!empty($data['text_colour'])) $vals['text_colour'] = $data['text_colour'];
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return true;
     }
