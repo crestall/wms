@@ -35,7 +35,9 @@
                         $('input.default_checkbox').click(function() {
                             $('input.default_checkbox').not(this).prop("checked", false);
                         });
-                        $('.colour-picker').colorpicker();
+                        $('.colour-picker').colorpicker({
+                            format: 'rgba'
+                        });
                     }
                 },
                 'job-csv-import':{
