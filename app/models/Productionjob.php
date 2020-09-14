@@ -40,7 +40,7 @@ class Productionjob extends Model{
                 pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
                 sr.id as salesrep_id, sr.name AS salesrep_name,
                 ps.id as supplier_id, ps.name AS supplier_name, ps.contact AS supplier_contact, ps.email AS supplier_email, ps.phone AS supplier_phone,
-                js.name AS `status`, js.colour AS status_colour
+                js.name AS `status`, js.colour AS status_colour, js.text-colour AS status_text_colour
             FROM
                 `production_jobs` pj LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
