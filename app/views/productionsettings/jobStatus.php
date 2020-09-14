@@ -67,7 +67,7 @@
                         <div class="col-md-2">
                             <label class="col-form-label">Colour</label>
                             <div class="colour-picker input-group">
-                                <input type="text" class="form-control" name="colour" id="colour" value="<?php echo $s['colour'];?>" style='font-size: 0.7rem;' >
+                                <input type="text" class="form-control" name="colour" id="colour" value="<?php echo $s['colour'];?>" >
                                 <div class="input-group-append">
                                     <span class="input-group-text colorpicker-input-addon"><i></i></span>
                                 </div>
