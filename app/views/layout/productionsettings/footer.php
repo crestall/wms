@@ -35,6 +35,10 @@
                         $('input.default_checkbox').click(function() {
                             $('input.default_checkbox').not(this).prop("checked", false);
                         });
+                        $('.color-picker').spectrum({
+                            type: "component",
+                            showInput: "true"
+                        });
                     }
                 },
                 'job-csv-import':{
