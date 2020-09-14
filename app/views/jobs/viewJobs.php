@@ -94,7 +94,11 @@ function getCustomerPopOver($job)
                                     </td>
                                     <td data-label="Description"><?php echo $job['description'];?></td>
                                     <td data-label="Notes"><?php echo $job['notes'];?></td>
-                                    <td data-label="Status"><?php echo ucwords($job['status']);?></td>
+                                    <td data-label="Status"
+                                    <?php if(!empty($job['status_colour'])):?>
+                                        style="background-color:<?php echo $job['status_colour'];?>"
+                                    <?php endif;?>
+                                    ><?php echo ucwords($job['status']);?></td>
                                     <td data-label="Sales Rep"><?php echo ucwords($job['salesrep_name']);?></td>
                                     <td data-label="Supplier">
                                         <span style="font-size: larger">
