@@ -35,10 +35,7 @@
                         $('input.default_checkbox').click(function() {
                             $('input.default_checkbox').not(this).prop("checked", false);
                         });
-                        $('.colour-picker').spectrum({
-                            type: "component",
-                            showInput: "true"
-                        });
+                        $('.colour-picker').colorpicker();
                     }
                 },
                 'job-csv-import':{
