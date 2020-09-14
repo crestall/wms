@@ -56,6 +56,16 @@
                                     }
                                 }
                             ]
+                        })
+                        .on('colorpickerChange colorpickerCreate', function (e) {
+                            if (e.color.isDark())
+                            {
+                                $(this).closest('form').find('input.text_colour').val("rgb(239,239,239)");
+                            }
+                            else
+                            {
+                                $(this).closest('form').find('input.text_colour').val("rgb(33,37,41)");
+                            }
                         });
                     }
                 },
