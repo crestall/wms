@@ -7,7 +7,7 @@ $postcode = Form::value('postcode');
 $country = Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
 $date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
-$date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value('date_ed_value'));
+$date_ed = (empty(Form::value('date_ed_value')))? 0 : date('d/m/Y', Form::value('date_ed_value'));
 if(Session::getAndDestroy('show_customer_address'))
 {
     $customer_collapse = "collapse show";
