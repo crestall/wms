@@ -50,6 +50,15 @@
                             <input type="text" class="form-control required" name="name_<?php echo $s['id'];?>" id="name_<?php echo $s['id'];?>" value="<?php echo ucwords($s['name']);?>" />
                             <?php echo Form::displayError("name_{$s['id']}");?>
                         </div>
+                        <div class="col-md-3">
+                            <label class="col-form-label">Colour</label>
+                            <div class="colour-picker input-group">
+                                <input type="text" class="form-control" name="colour" id="colour" value="<?php echo $s['colour'];?>" >
+                                <div class="input-group-append">
+                                    <span class="input-group-text colorpicker-input-addon"><i></i></span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-1">
                             <label class="col-form-label" for="active_<?php echo $s['id'];?>">Active</label>
                             <div class="custom-control custom-checkbox">
@@ -62,15 +71,6 @@
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" id="default_<?php echo $s['id'];?>" name="default_<?php echo $s['id'];?>" <?php if(!empty($s['default'])) echo "checked";?> class="default_checkbox custom-control-input">
                                 <label class="custom-control-label" for="default_<?php echo $s['id'];?>"></label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="col-form-label">Colour</label>
-                            <div class="colour-picker input-group">
-                                <input type="text" class="form-control" name="colour" id="colour" value="<?php echo $s['colour'];?>" >
-                                <div class="input-group-append">
-                                    <span class="input-group-text colorpicker-input-addon"><i></i></span>
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-1">
