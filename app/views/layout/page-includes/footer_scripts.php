@@ -41,8 +41,8 @@
         <script src="/scripts/common.js?t=<?php echo time();?>"></script>
         <!-- FontAwesome Pro Kit -->
         <script src="https://kit.fontawesome.com/cc79da085a.js" crossorigin="anonymous"></script>
-        <!-- Spectrum Colour Picker >
-        <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.js"></script>
+        <!-- Bootstrap Colour Picker -->
+        <script src="/scripts/bootstrap-colorpicker.min.js"></script>
         <!-- Assign CSRF Token to JS variable -->
         <?php Config::setJsConfig('csrfToken', Session::generateCsrfToken()); ?>
         <!-- Assign pages for menu highlighting -->
