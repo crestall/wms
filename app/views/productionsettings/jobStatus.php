@@ -20,7 +20,12 @@
             <div class="form-group row">
                 <label class="col-md-3">Colour</label>
                 <div class="col-md-4">
-                    <input class="colour-picker" name="colour" id="colour" value="<?php echo Form::value('colour');?>" >
+                    <div class="input-group">
+                        <input class="colour-picker" name="colour" id="colour" value="<?php echo Form::value('colour');?>" >
+                        <div class="input-group-append">
+                            <span class="input-group-text colorpicker-input-addon"><i></i></span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
