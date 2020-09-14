@@ -48,6 +48,7 @@ class Jobstatus extends Model{
         $vals = array(
             'name'      =>  strtolower($data['name'])
         );
+        if(!empty($data['colour'])) $vals['colour'] = $data['colour'];
         return $db->insertQuery($this->table, $vals);
     }
 
@@ -55,9 +56,11 @@ class Jobstatus extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'      =>  strtolower($data['name'])
+            'name'      => strtolower($data['name']),
+            'colour'    => null
         );
         $vals['active'] = (isset($data['active']))? 1:0;
+        if(!empty($data['colour'])) $vals['colour'] = $data['colour'];
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return true;
     }
