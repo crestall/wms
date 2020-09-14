@@ -64,7 +64,7 @@
                                 <label class="custom-control-label" for="default_<?php echo $s['id'];?>"></label>
                             </div>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-3">
                             <label class="col-form-label">Colour</label>
                             <div class="colour-picker input-group">
                                 <input type="text" class="form-control" name="colour" id="colour" value="<?php echo $s['colour'];?>" >
