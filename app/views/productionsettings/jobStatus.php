@@ -17,6 +17,12 @@
                 </div>
                 <span class="inst">Names <span class="font-weight-bold">must</span> be unique</span>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3">Colour</label>
+                <div class="col-md-4">
+                    <input class="colour-picker" name="colour" id="colour" value="<?php echo Form::value('colour');?>" >
+                </div>
+            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
