@@ -718,3 +718,8 @@ Colorpicker adjustments
     height: 24px;
     width: 24px;
 }
+
+.colorpicker-input-addon:before {
+    width: 24px;
+    height: 24px;
+}
