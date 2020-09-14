@@ -65,6 +65,15 @@
                             </div>
                         </div>
                         <div class="col-md-1">
+                            <label class="col-form-label">Colour</label>
+                            <div class="colour-picker input-group">
+                                <input type="text" class="form-control" name="colour" id="colour" value="<?php echo $s['colour'];?>" >
+                                <div class="input-group-append">
+                                    <span class="input-group-text colorpicker-input-addon"><i></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
                             <label class="col-form-label">&nbsp;</label>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="line_id" value="<?php echo $s['id'];?>" />
