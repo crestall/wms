@@ -65,7 +65,7 @@ class JobsController extends Controller
             return (new ErrorsController())->error(404)->send();
         }
         $customer_info = $this->productioncustomer->getCustomerById($job_info['customer_id']);
-        $supplier_info = ($job_info['supplier_id'] > 0)? $this->productionsupplier->etSupplierById($job_info['supplier_id']) : array();
+        $supplier_info = ($job_info['supplier_id'] > 0)? $this->productionsupplier->getSupplierById($job_info['supplier_id']) : array();
         //render the page
         Config::setJsConfig('curPage', "update-job");
         Config::set('curPage', "update-job");
