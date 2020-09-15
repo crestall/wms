@@ -93,7 +93,7 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
                                     <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo $notes;?></textarea>
                                 </div>
                             </div>
-
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         </form>
                     </div>
                     <div class="card-footer text-right">
