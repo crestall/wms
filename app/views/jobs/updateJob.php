@@ -58,18 +58,18 @@ $date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value
                             </div>
                             <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
-                        <div class="col-md-8">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
-                                <div class="input-group-append">
-                                    <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                        <div class="row form-group">
+                            <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                                    <div class="input-group-append">
+                                        <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                    </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                         </div>
-                        <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                     </div>
                     <div class="card-footer text-right">
 
