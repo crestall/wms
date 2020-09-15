@@ -50,6 +50,34 @@ class JobsController extends Controller
         ]);
     }
 
+    public function updateJob()
+    {
+        if(!isset($this->request->params['args']['job']))
+        {
+            //no job id to update
+            return (new ErrorsController())->error(400)->send();
+        }
+        $job_id = $this->request->params['args']['job'];
+        $job_info = $this->productionjob->getJobById($job_id);
+        if(empty($job_info))
+        {
+            //no job data found
+            return (new ErrorsController())->error(404)->send();
+        }
+        $customer_info = $this->productioncustomer->getCustomerById($job_info['customer_id']);
+        $supplier_info = ($job_info['supplier_id'] > 0)? $this->productionsupplier->etSupplierById($job_info['supplier_id']) : array();
+        //render the page
+        Config::setJsConfig('curPage', "view-jobs");
+        Config::set('curPage', "view-jobs");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/EditJob.php', [
+            'page_title'    =>  "Update Production Job Details",
+            'pht'           =>  ": Update Production Job",
+            'job'           =>  $job_info,
+            'customer'      =>  $customer_info,
+            'supplier'      =>  $supplier_info
+        ]);
+    }
+
     public function isAuthorized()
     {
         $action = $this->request->param('action');
