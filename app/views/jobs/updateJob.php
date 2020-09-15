@@ -97,7 +97,7 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
                         </form>
                     </div>
                     <div class="card-footer text-right">
-                        <button id="job_details_update_submitter" class="btn btn-outline-secondary"Save Changes</button>
+                        <button id="job_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
                     </div>
                 </div>
             </div>
