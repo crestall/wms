@@ -61,7 +61,10 @@ function getCustomerPopOver($job)
 
                             <?php foreach($jobs as $job):?>
                                 <tr>
-                                    <td data-label="Job Number" class="number"><?php echo $job['job_id'];?></td>
+                                    <td data-label="Job Number" class="number">
+                                        <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><<?php echo $job['job_id'];?>/a><br>
+                                        <span class="inst">Click to update details</span>
+                                    </td>
                                     <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                                     <td data-label="Client">
                                         <span style="font-size: larger">
