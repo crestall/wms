@@ -62,7 +62,7 @@ class Jobstatus extends Model{
         );
         $vals['active'] = (isset($data['active']))? 1:0;
         if(!empty($data['colour'])) $vals['colour'] = $data['colour'];
-        if(!empty($data['text_colour'])) $vals['text_colour'] = $data['text_colour'];
+        if(!empty($data['text'])) $vals['text_colour'] = $data['text'];
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return true;
     }
