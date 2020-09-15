@@ -1,5 +1,6 @@
 <?php
 $job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
+$previous_job_id = (!empty(Form::value('previous_job_id')))? Form::value('previous_job_id'):$job['previous_job_id'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -14,10 +15,15 @@ $job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
                         Job Details
                     </div>
                     <div class="card-body">
-                        <div class="form-gropu row">
-                            <label class="col-md-4">Job Number</label>
+                        <div class="form-group row">
+                            <label class="col-md-4">Job Id</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo $job_id;?>" />
+                                <input type="text" class="form-control required number" name="job_id" id="job_id" value="<?php echo $job_id;?>" />
+                            </div>
+                        </div>
+                        <div class="form-group row">Related Job Id</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control number" name="previous_job_id" id="previous_job_id" value="<?php echo $previous_job_id;?>" />
                             </div>
                         </div>
                     </div>
