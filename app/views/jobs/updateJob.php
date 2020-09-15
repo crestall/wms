@@ -16,6 +16,7 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
         <?php //echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
         <?php //echo "SUPPLIER<pre>",print_r($supplier),"</pre>";?>
         <div class="row">
+            <a name="jobdetails"></a>
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card h-100 border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
@@ -100,6 +101,7 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
