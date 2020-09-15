@@ -22,6 +22,12 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
                         Job Details
                     </div>
                     <div class="card-body">
+                        <?php if(isset($_SESSION['jobdetailsfeedback'])) :?>
+                           <div class='feedbackbox'><?php echo Session::getAndDestroy('jobdetailsfeedback');?></div>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['jobdetailserrorfeedback'])) :?>
+                           <div class='errorbox'><?php echo Session::getAndDestroy('jobdetailserrorfeedback');?></div>
+                        <?php endif; ?>
                         <form id="job_details_update" method="post" action="/form/procJobDetailsUpdate">
                             <div class="form-group row">
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
