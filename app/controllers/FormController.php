@@ -146,7 +146,7 @@ class FormController extends Controller {
 
     public function procJobDetailsUpdate()
     {
-        echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -156,7 +156,35 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        if(!$this->dataSubbed($job_id))
+        {
+            Form::setError('job_id', 'The job id is required');
+        }
+        if($status_id == 0)
+        {
+            Form::setError('status_id', 'Please choose a status');
+        }
+        if(!$this->dataSubbed($date_entered_value))
+        {
+            Form::setError('date_entered', 'Please supply the date the job was entered');
+        }
+        if(!$this->dataSubbed($description))
+        {
+            Form::setError('description', 'A job description is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            Session::set('jobdetailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
+        }
+        else
+        {
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            Session::set('jobdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job Details Have Been Updated</h3>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#jobdetails");
     }
 
     public function procBulkProductionJobAdd()
