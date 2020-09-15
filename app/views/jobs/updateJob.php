@@ -15,8 +15,8 @@ $job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
                     </div>
                     <div class="card-body">
                         <div class="form-gropu row">
-                            <label class="col-md-3">Job Number</label>
-                            <div class="col-md-9">
+                            <label class="col-md-4">Job Number</label>
+                            <div class="col-md-8">
                                 <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo $job_id;?>" />
                             </div>
                         </div>
