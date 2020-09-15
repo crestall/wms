@@ -105,7 +105,7 @@ else
                         <div class="col-md-4">
                             <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo Form::value('notes');?></textarea>
                         </div>
-                    </div>
+                </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Customer Details</h3>
