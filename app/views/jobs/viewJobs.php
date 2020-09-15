@@ -1,29 +1,5 @@
 <?php
-function getCustomerPopOver($job)
-{
-    return "
-        <div class='container'>
-            <div class='row'>
-                <label class='col-4'>Contact</label>
-                <div class='col-8'>
-                    ".$job['customer_contact']."
-                </div>
-            </div>
-            <div class='row'>
-                <label class='col-4'>Email</label>
-                <div class='col-8'>
-                    ".$job['customer_email']."
-                </div>
-            </div>
-            <div class='row'>
-                <label class='col-4'>Phone</label>
-                <div class='col-8'>
-                    ".$job['customer_phone']."
-                </div>
-            </div>
-        </div>
-    ";
-}
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">

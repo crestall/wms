@@ -67,9 +67,9 @@ class JobsController extends Controller
         $customer_info = $this->productioncustomer->getCustomerById($job_info['customer_id']);
         $supplier_info = ($job_info['supplier_id'] > 0)? $this->productionsupplier->etSupplierById($job_info['supplier_id']) : array();
         //render the page
-        Config::setJsConfig('curPage', "view-jobs");
-        Config::set('curPage', "view-jobs");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/EditJob.php', [
+        Config::setJsConfig('curPage', "update-job");
+        Config::set('curPage', "update-job");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/updateJob.php', [
             'page_title'    =>  "Update Production Job Details",
             'pht'           =>  ": Update Production Job",
             'job'           =>  $job_info,
