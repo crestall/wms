@@ -144,7 +144,10 @@
                         actions.common.doDates();
                         $('button#job_details_update_submitter').click(function(e){
                             $('form#job_details_update').submit();
-                        })
+                        });
+                        $('form#job_details_update').submit(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
+                        });
                     }
                 }
             }
