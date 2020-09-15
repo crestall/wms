@@ -4,6 +4,7 @@ $previous_job_id = (!empty(Form::value('previous_job_id')))? Form::value('previo
 $status_id = (!empty(Form::value('status_id')))? Form::value('status_id'):$job['status_id'];
 $salesrep_id = (!empty(Form::value('salesrep_id')))? Form::value('salesrep_id'):$job['salesrep_id'];
 $date_entered = (!empty(Form::value('date_entered_value')))? Form::value('date_entered_value'): $job['created_date'];
+$date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value'): $job['due_date'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -57,6 +58,18 @@ $date_entered = (!empty(Form::value('date_entered_value')))? Form::value('date_e
                             </div>
                             <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                         </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                                <div class="input-group-append">
+                                    <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                     </div>
                     <div class="card-footer text-right">
 
