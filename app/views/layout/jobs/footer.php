@@ -146,7 +146,10 @@
                             $('form#job_details_update').submit();
                         });
                         $('form#job_details_update').submit(function(e){
-                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
+                            }
                         });
                     }
                 }
