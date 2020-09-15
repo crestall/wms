@@ -8,6 +8,47 @@
                 common: {
                     init: function(){
 
+                    },
+                    doDates: function(){
+                        $( "#date_entered" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                $('#date_entered_value').val(s);
+                            }
+                        });
+                        $('#date_entered_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_entered').focus();
+                        });
+                        $( "#date_due" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                $('#date_due_value').val(s);
+                            }
+                        });
+                        $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_due').focus();
+                        });
+                        $( "#date_ed" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                $('#date_ed_value').val(s);
+                            }
+                        });
+                        $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_ed').focus();
+                        });
                     }
                 },
                 'add-job':{
@@ -84,45 +125,7 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding the Job...</h2></div>' });
                             }
                         });
-                        $( "#date_entered" ).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "dd/mm/yy",
-                            onSelect: function(selectedDate) {
-                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                s = d.valueOf()/1000;
-                                $('#date_entered_value').val(s);
-                            }
-                        });
-                        $('#date_entered_calendar').css('cursor', 'pointer').click(function(e){
-                            $('input#date_entered').focus();
-                        });
-                        $( "#date_due" ).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "dd/mm/yy",
-                            onSelect: function(selectedDate) {
-                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                s = d.valueOf()/1000;
-                                $('#date_due_value').val(s);
-                            }
-                        });
-                        $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
-                            $('input#date_due').focus();
-                        });
-                        $( "#date_ed" ).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "dd/mm/yy",
-                            onSelect: function(selectedDate) {
-                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                s = d.valueOf()/1000;
-                                $('#date_ed_value').val(s);
-                            }
-                        });
-                        $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
-                            $('input#date_ed').focus();
-                        });
+                        actions.common.doDates();
                         $('select#status').change(function(e){
                             $(this).valid();
                         });
@@ -138,7 +141,7 @@
                 },
                 'update-job':{
                     init: function(){
-
+                        actions.common.doDates();
                     }
                 }
             }
