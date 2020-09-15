@@ -3,6 +3,7 @@ $job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
 $previous_job_id = (!empty(Form::value('previous_job_id')))? Form::value('previous_job_id'):$job['previous_job_id'];
 $status_id = (!empty(Form::value('status_id')))? Form::value('status_id'):$job['status_id'];
 $salesrep_id = (!empty(Form::value('salesrep_id')))? Form::value('salesrep_id'):$job['salesrep_id'];
+$date_entered = (!empty(Form::value('date_entered_value')))? Form::value('date_entered_value'): $job['created_date'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -42,6 +43,19 @@ $salesrep_id = (!empty(Form::value('salesrep_id')))? Form::value('salesrep_id'):
                             <div class="col-md-8">
                                 <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
                             </div>
+                        </div>
+                        <div class="row form-group">
+                            <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Entered</label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="text" class="required form-control" name="date_entered" id="date_entered" value="<?php echo date('d/m/Y', $date_entered);?>" />
+                                    <div class="input-group-append">
+                                        <span id="date_entered_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                    </div>
+                                    <?php echo Form::displayError('date_entered');?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                         </div>
                     </div>
                     <div class="card-footer text-right">
