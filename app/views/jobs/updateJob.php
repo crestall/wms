@@ -22,79 +22,82 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
                         Job Details
                     </div>
                     <div class="card-body">
-                        <div class="form-group row">
-                            <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control required number" name="job_id" id="job_id" value="<?php echo $job_id;?>" />
-                                <?php echo Form::displayError('job_id');?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">Related Job Id</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control number" name="previous_job_id" id="previous_job_id" value="<?php echo $previous_job_id;?>" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Status</label>
-                            <div class="col-md-8">
-                                <select id="status_id" class="form-control selectpicker" name="status_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->jobstatus->getSelectJobStatus(Form::value('status_id'));?></select>
-                                <?php echo Form::displayError('status_id');?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">Sales Rep</label>
-                            <div class="col-md-8">
-                                <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Entered</label>
-                            <div class="col-md-8">
-                                <div class="input-group">
-                                    <input type="text" class="required form-control" name="date_entered" id="date_entered" value="<?php echo date('d/m/Y', $date_entered);?>" />
-                                    <div class="input-group-append">
-                                        <span id="date_entered_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
-                                    </div>
-                                    <?php echo Form::displayError('date_entered');?>
+                        <form id="job_details_update" method="post" action="/form/procJobDetailsUpdate">
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control required number" name="job_id" id="job_id" value="<?php echo $job_id;?>" />
+                                    <?php echo Form::displayError('job_id');?>
                                 </div>
                             </div>
-                            <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
-                        </div>
-                        <div class="row form-group">
-                            <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
-                            <div class="col-md-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
-                                    <div class="input-group-append">
-                                        <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
-                                    </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Related Job Id</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control number" name="previous_job_id" id="previous_job_id" value="<?php echo $previous_job_id;?>" />
                                 </div>
                             </div>
-                            <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">Designer</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" name="designer" id="designer" value="<?php echo $designer;?>" />
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Status</label>
+                                <div class="col-md-8">
+                                    <select id="status_id" class="form-control selectpicker" name="status_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->jobstatus->getSelectJobStatus(Form::value('status_id'));?></select>
+                                    <?php echo Form::displayError('status_id');?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
-                            <div class="col-md-8">
-                                <textarea name="description" id="description" class="form-control required" rows="4"><?php echo $description;?></textarea>
-                                <?php echo Form::displayError('description');?>
+                            <div class="form-group row">
+                                <label class="col-md-4">Sales Rep</label>
+                                <div class="col-md-8">
+                                    <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">Notes/Comments</label>
-                            <div class="col-md-8">
-                                <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo $notes;?></textarea>
+                            <div class="row form-group">
+                                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Entered</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" class="required form-control" name="date_entered" id="date_entered" value="<?php echo date('d/m/Y', $date_entered);?>" />
+                                        <div class="input-group-append">
+                                            <span id="date_entered_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                        </div>
+                                        <?php echo Form::displayError('date_entered');?>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                             </div>
-                        </div>
+                            <div class="row form-group">
+                                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                                        <div class="input-group-append">
+                                            <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Designer</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="designer" id="designer" value="<?php echo $designer;?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
+                                <div class="col-md-8">
+                                    <textarea name="description" id="description" class="form-control required" rows="4"><?php echo $description;?></textarea>
+                                    <?php echo Form::displayError('description');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Notes/Comments</label>
+                                <div class="col-md-8">
+                                    <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo $notes;?></textarea>
+                                </div>
+                            </div>
+
+                        </form>
                     </div>
                     <div class="card-footer text-right">
-
+                        <button id="job_details_update_submitter" class="btn btn-outline-secondary"Save Changes</button>
                     </div>
                 </div>
             </div>
