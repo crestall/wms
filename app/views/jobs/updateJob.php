@@ -5,6 +5,9 @@ $status_id = (!empty(Form::value('status_id')))? Form::value('status_id'):$job['
 $salesrep_id = (!empty(Form::value('salesrep_id')))? Form::value('salesrep_id'):$job['salesrep_id'];
 $date_entered = (!empty(Form::value('date_entered_value')))? Form::value('date_entered_value'): $job['created_date'];
 $date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value'): $job['due_date'];
+$designer = (!empty(Form::value('designer')))? Form::value('designer'):$job['designer'];
+$description = (!empty(Form::value('description')))? Form::value('description'):$job['description'];
+$notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -69,6 +72,25 @@ $date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value
                                 </div>
                             </div>
                             <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4">Designer</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="designer" id="designer" value="<?php echo $designer;?>" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
+                            <div class="col-md-8">
+                                <textarea name="description" id="description" class="form-control required" rows="4"><?php echo $description;?></textarea>
+                                <?php echo Form::displayError('description');?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4">Notes/Comments</label>
+                            <div class="col-md-8">
+                                <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo $notes;?></textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer text-right">
