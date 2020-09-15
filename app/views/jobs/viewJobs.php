@@ -106,7 +106,7 @@ function getCustomerPopOver($job)
                                     <td data-label="Supplier">
                                         <span style="font-size: larger">
                                             <?php if($user_role == "production_admin"):?>
-                                                <a href="/customers/edit-supplier/supplier=<?php echo $job['supplier_id'];?>"><?php echo ucwords($job['supplier_name']);;?></a>
+                                                <a href="/suppliers/edit-supplier/supplier=<?php echo $job['supplier_id'];?>"><?php echo ucwords($job['supplier_name']);;?></a>
                                             <?php else:?>
                                                 <?php echo ucwords($job['supplier_name']);?>
                                             <?php endif;?>
