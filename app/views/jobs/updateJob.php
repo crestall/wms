@@ -21,7 +21,8 @@ $previous_job_id = (!empty(Form::value('previous_job_id')))? Form::value('previo
                                 <input type="text" class="form-control required number" name="job_id" id="job_id" value="<?php echo $job_id;?>" />
                             </div>
                         </div>
-                        <div class="form-group row">Related Job Id</label>
+                        <div class="form-group row">
+                            <label class="col-md-4">Related Job Id</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control number" name="previous_job_id" id="previous_job_id" value="<?php echo $previous_job_id;?>" />
                             </div>
