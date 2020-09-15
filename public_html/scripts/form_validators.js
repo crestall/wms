@@ -113,7 +113,7 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $('form#add_production_job').validate({
+    $('form#add_production_job, form#job_details_update').validate({
          rules:{
     		status_id:{
     			notNone: true
