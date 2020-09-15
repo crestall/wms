@@ -1,5 +1,5 @@
 <?php
-
+$job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -14,7 +14,12 @@
                         Job Details
                     </div>
                     <div class="card-body">
-
+                        <div class="form-gropu row">
+                            <label class="col-md-3">Job Number</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo $job_id;?>" />
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer text-right">
 
