@@ -142,6 +142,9 @@
                 'update-job':{
                     init: function(){
                         actions.common.doDates();
+                        $('button#job_details_update_submitter').click(function(e){
+                            $('form#job_details_update').submit();
+                        })
                     }
                 }
             }
