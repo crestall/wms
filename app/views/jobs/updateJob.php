@@ -10,6 +10,8 @@ $description = (!empty(Form::value('description')))? Form::value('description'):
 $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
 $customer_name = (!empty(Form::value('customer_name')))? Form::value('customer_name'):$customer['name'];
 $customer_contact = (!empty(Form::value('customer_contact')))? Form::value('customer_contact'):$customer['contact'];
+$customer_email = (!empty(Form::value('customer_email')))? Form::value('customer_email'):$customer['email'];
+$customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer_phone'):$customer['phone'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -134,14 +136,14 @@ $customer_contact = (!empty(Form::value('customer_contact')))? Form::value('cust
                         <div class="form-group row ">
                             <label class="col-md-4">Email</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control customer email" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
+                                <input type="text" class="form-control customer email" name="customer_email" id="customer_email" value="<?php echo $customer_email;?>" />
                                 <?php echo Form::displayError('customer_email');?>
                             </div>
                         </div>
                         <div class="form-group row ">
                             <label class="col-md-4">Phone</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control customer" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
+                                <input type="text" class="form-control customer" name="customer_phone" id="customer_phone" value="<?php echo $customer_phone;?>" />
                             </div>
                         </div>
                     </div>
