@@ -73,7 +73,7 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
                                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php (if(!empty($date_due)))echo date('d/m/Y', $date_due);?>" />
                                         <div class="input-group-append">
                                             <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
