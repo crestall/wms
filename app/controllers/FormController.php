@@ -170,6 +170,61 @@ class FormController extends Controller {
                 Form::setError('customer_email', 'The email is not valid');
             }
         }
+        if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
+        {
+            //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+            if( !$this->dataSubbed($customer_address) )
+            {
+                Form::setError('customer_address', 'An address is required');
+            }
+            elseif( !isset($ignore_customer_address_error) )
+            {
+                if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $customer_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $customer_address)) )
+                {
+                    Form::setError('customer_address', 'The address must include both letters and numbers');
+                }
+            }
+            if(!$this->dataSubbed($customer_postcode))
+            {
+                Form::setError('customer_postcode', "A postcode is required");
+            }
+            if(!$this->dataSubbed($customer_country))
+            {
+                Form::setError('customer_country', "A country is required");
+            }
+            elseif(strlen($customer_country) > 2)
+            {
+                Form::setError('customer_country', "Please use the two letter ISO code");
+            }
+            elseif($customer_country == "AU")
+            {
+                if(!$this->dataSubbed($customer_suburb))
+        		{
+        		    Form::setError('customer_suburb', "A delivery suburb is required for Australian addresses");
+        		}
+        		if(!$this->dataSubbed($customer_state))
+        		{
+        		    Form::setError('customer_state', "A delivery state is required for Australian addresses");
+        		}
+                $aResponse = $this->Eparcel->ValidateSuburb($customer_suburb, $customer_state, str_pad($customer_postcode,4,'0',STR_PAD_LEFT));
+                $error_string = "";
+                if(isset($aResponse['errors']))
+                {
+                    foreach($aResponse['errors'] as $e)
+                    {
+                        $error_string .= $e['message']." ";
+                    }
+                }
+                elseif($aResponse['found'] === false)
+                {
+                    $error_string .= "Postcode does not match suburb or state";
+                }
+                if(strlen($error_string))
+                {
+                    Form::setError('customer_postcode', $error_string);
+                }
+            }
+        }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
