@@ -119,7 +119,7 @@ $customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer
                         Customer Details
                     </div>
                     <div class="card-body">
-                        <form id="customer_details_update" method="post" action="/form/jobCustomerUpdate">
+                        <form id="customer_details_update" method="post" action="/form/procJobCustomerUpdate">
                             <div class="form-group row">
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
                                 <div class="col-md-8">
