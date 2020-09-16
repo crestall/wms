@@ -182,6 +182,7 @@ class FormController extends Controller {
             $this->productionjob->updateJobDetails($post_data);
             Session::set('jobcustomerdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Customer Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#jobdetails");
     }
 
     public function procJobDetailsUpdate()
