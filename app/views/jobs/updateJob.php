@@ -157,7 +157,7 @@ $customer_address = (!empty(Form::value('customer_address')))? Form::value('cust
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Address Line 1</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_address" id="customer_address" value="<?php echo Form$customer_address;?>" /><br>
+                                    <input type="text" class="form-control customer" name="customer_address" id="customer_address" value="<?php echo $customer_address;?>" /><br>
                                     <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
                                         <input class="form-check-input styled" type="checkbox" id="ignore_customer_address_error" name="ignore_customer_address_error" />
                                         <label for="ignore_customer_address_error"><span class="inst">No need for a number</span></label>
