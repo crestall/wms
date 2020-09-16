@@ -9,6 +9,7 @@ $designer = (!empty(Form::value('designer')))? Form::value('designer'):$job['des
 $description = (!empty(Form::value('description')))? Form::value('description'):$job['description'];
 $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
 $customer_name = (!empty(Form::value('customer_name')))? Form::value('customer_name'):$customer['name'];
+$customer_contact = (!empty(Form::value('customer_contact')))? Form::value('customer_contact'):$customer['contact'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -127,7 +128,7 @@ $customer_name = (!empty(Form::value('customer_name')))? Form::value('customer_n
                         <div class="form-group row ">
                             <label class="col-md-4">Contact</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control customer" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
+                                <input type="text" class="form-control customer" name="customer_contact" id="customer_contact" value="<?php echo $customer_contact;?>" />
                             </div>
                         </div>
                         <div class="form-group row ">
