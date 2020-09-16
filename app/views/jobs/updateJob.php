@@ -13,6 +13,7 @@ $customer_contact = (!empty(Form::value('customer_contact')))? Form::value('cust
 $customer_email = (!empty(Form::value('customer_email')))? Form::value('customer_email'):$customer['email'];
 $customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer_phone'):$customer['phone'];
 $customer_address = (!empty(Form::value('customer_address')))? Form::value('customer_address'):$customer['address'];
+$customer_address2 = (!empty(Form::value('customer_address2')))? Form::value('customer_address2'):$customer['address_2'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -169,7 +170,7 @@ $customer_address = (!empty(Form::value('customer_address')))? Form::value('cust
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Address Line 2</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_address2" id="customer_address2" value="<?php echo Form::value('customer_address2');?>" />
+                                    <input type="text" class="form-control customer" name="customer_address2" id="customer_address2" value="<?php echo $customer_address2;?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
