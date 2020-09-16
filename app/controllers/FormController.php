@@ -6235,17 +6235,6 @@ class FormController extends Controller {
             }
         }
         $palletizedd = (isset($palletized))? 1:0;
-        if($palletizedd > 0)
-        {
-            if(!$this->dataSubbed($per_pallet))
-            {
-                Form::setError('per_pallet', 'A number is required for palletized goods');
-            }
-            elseif(filter_var($per_pallet, FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
-            {
-                Form::setError('per_pallet', 'Only enter positive whole numbers for amount per pallet');
-            }
-        }
         $post_data['palletized'] = $palletizedd;
         //image uploads
         $field = "image";

@@ -115,7 +115,33 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
                         Customer Details
                     </div>
                     <div class="card-body">
-
+                        <div class="form-group row">
+                            <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
+                            <div class="col-md-8">
+                                <input type="text" class="required form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
+                                <input type="hidden" name="customer_id" id="customer_id" value="0" />
+                                <?php echo Form::displayError('customer_name');?>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-md-4">Contact</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control customer" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-md-4">Email</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control customer email" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
+                                <?php echo Form::displayError('customer_email');?>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-md-4">Phone</label>
+                            <div class=col-md-8">
+                                <input type="text" class="form-control customer" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer text-right">
 
