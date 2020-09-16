@@ -24,6 +24,8 @@
                             $('input#date_entered').focus();
                         });
                         $( "#date_due" ).datepicker({
+                            showButtonPanel: true,
+                            closeText: 'Clear',
                             changeMonth: true,
                             changeYear: true,
                             dateFormat: "dd/mm/yy",
