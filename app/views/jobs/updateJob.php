@@ -224,8 +224,8 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                     </div>
                     <div class="card-body">
                         <div class="row form-group">
-                            <label class="col-md-3 col-form-label">Expected Delivery Date</label>
-                            <div class="col-md-3">
+                            <label class="col-md-4 col-form-label">Expected Delivery Date</label>
+                            <div class="col-md-8">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="date_ed" id="date_ed" value="<?php echo $date_ed;?>" />
                                     <div class="input-group-append">
@@ -235,25 +235,29 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                             </div>
                             <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo Form::value('date_ed_value');?>" />
                         </div>
-                        <div class="form-group row mb-3">
-                            <label class="col-md-3">Supplier Name</label>
-                            <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-md-4">Supplier Name</label>
+                            <div class="col-md-8">
                                 <input type="text" class="form-control" name="supplier_name" id="supplier_name" value="<?php echo Form::value('supplier_name');?>" />
                                 <input type="hidden" name="supplier_id" id="supplier_id" value="0" />
                             </div>
                         </div>
                         <div class="form-group row ">
-                            <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
-                            <div class="col-lg-3 col-md-4">
+                            <label class="col-md-4">Contact</label>
+                            <div class=col-md-8">
                                 <input type="text" class="form-control supplier" name="supplier_contact" id="supplier_contact" value="<?php echo Form::value('supplier_contact');?>" />
                             </div>
-                            <label class="col-lg-1 col-md-2">Email</label>
-                            <div class="col-lg-3 col-md-4">
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-md-4">Email</label>
+                            <div class="col-md-8">
                                 <input type="text" class="form-control supplier email" name="supplier_email" id="supplier_email" value="<?php echo Form::value('supplier_email');?>" />
                                 <?php echo Form::displayError('supplier_email');?>
                             </div>
-                            <label class="col-lg-1 col-md-2">Phone</label>
-                            <div class="col-lg-3 col-md-4">
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-md-4">Phone</label>
+                            <div class="col-md-8">
                                 <input type="text" class="form-control supplier" name="supplier_phone" id="supplier_phone" value="<?php echo Form::value('supplier_phone');?>" />
                             </div>
                         </div>
