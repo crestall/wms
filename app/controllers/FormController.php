@@ -181,7 +181,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            echo "<pre>",print_r($post_data),"</pre>"; die();
             $this->productionjob->updateJobDetails($post_data);
             Session::set('jobdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
