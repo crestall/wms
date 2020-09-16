@@ -14,6 +14,10 @@ $customer_email = (!empty(Form::value('customer_email')))? Form::value('customer
 $customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer_phone'):$customer['phone'];
 $customer_address = (!empty(Form::value('customer_address')))? Form::value('customer_address'):$customer['address'];
 $customer_address2 = (!empty(Form::value('customer_address2')))? Form::value('customer_address2'):$customer['address_2'];
+$customer_suburb = (!empty(Form::value('customer_suburb')))? Form::value('customer_suburb'):$customer['suburb'];
+$customer_state = (!empty(Form::value('customer_state')))? Form::value('customer_state'):$customer['state'];
+$customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('customer_postcode'):$customer['postcode'];
+$customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -176,14 +180,14 @@ $customer_address2 = (!empty(Form::value('customer_address2')))? Form::value('cu
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Suburb/Town</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_suburb" id="customer_suburb" value="<?php echo Form::value('customer_suburb');?>" />
+                                    <input type="text" class="form-control customer" name="customer_suburb" id="customer_suburb" value="<?php echo $customer_suburb;?>" />
                                     <?php echo Form::displayError('customer_suburb');?>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">State</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_state" id="customer_state" value="<?php echo Form::value('customer_state');?>" />
+                                    <input type="text" class="form-control customer" name="customer_state" id="customer_state" value="<?php echo $customer_state;?>" />
                                     <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
                                     <?php echo Form::displayError('customer_state');?>
                                 </div>
@@ -191,14 +195,14 @@ $customer_address2 = (!empty(Form::value('customer_address2')))? Form::value('cu
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Postcode</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_postcode" id="customer_postcode" value="<?php echo Form::value('customer_postcode');?>" />
+                                    <input type="text" class="form-control customer" name="customer_postcode" id="customer_postcode" value="<?php echo $customer_postcode;?>" />
                                     <?php echo Form::displayError('customer_postcode');?>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Country</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_country" id="customer_country" value="<?php echo Form::value('customer_country');?>" />
+                                    <input type="text" class="form-control customer" name="customer_country" id="customer_country" value="<?php $customer_country;?>" />
                                     <span class="inst">use the 2 letter ISO code</span>
                                     <?php echo Form::displayError('customer_country');?>
                                 </div>
