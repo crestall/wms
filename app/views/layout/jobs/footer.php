@@ -33,6 +33,10 @@
                                 var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
                                 s = d.valueOf()/1000;
                                 $('#date_due_value').val(s);
+                            },
+                            onClose: function(dateText, inst){
+                                $('#date_due').val('');
+                                $('#date_due_value').val('');
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
