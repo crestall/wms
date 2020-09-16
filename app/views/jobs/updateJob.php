@@ -244,7 +244,7 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                         </div>
                         <div class="form-group row ">
                             <label class="col-md-4">Contact</label>
-                            <div class=col-md-8">
+                            <div class="col-md-8">
                                 <input type="text" class="form-control supplier" name="supplier_contact" id="supplier_contact" value="<?php echo Form::value('supplier_contact');?>" />
                             </div>
                         </div>
