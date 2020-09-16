@@ -99,6 +99,24 @@ class Productionjob extends Model{
         return $id;
     }
 
+    public function updateJobDetails($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'job_id'        => $data['job_id'],
+            'description'   => $data['description'],
+            'created_date'  => $data['date_entered_value'],
+            'due_date'      => $data['date_due_value'],
+            'status_id'     => $data['status_id']
+        );
+        if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
+        if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
+        if(!empty($data['designer'])) $vals['designer'] = $data['designer'];
+        if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
+        $id = $db->updateDatabaseFields($this->table, $vals, $data['id']);
+        return $id;
+    }
+
     public function editJob($data)
     {
         $db = Database::openConnection();
