@@ -202,6 +202,7 @@ $customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
