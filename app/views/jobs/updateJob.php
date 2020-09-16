@@ -148,11 +148,11 @@ $customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label">Address Line 1</label>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <input type="text" class="form-control customer" name="customer_address" id="customer_address" value="<?php echo Form::value('customer_address');?>" />
                                 <?php echo Form::displayError('customer_address');?>
                             </div>
-                            <div class="col-md-1 checkbox checkbox-default">
+                            <div class="col-md-2 checkbox checkbox-default">
                                 <input class="form-check-input styled" type="checkbox" id="ignore_customer_address_error" name="ignore_customer_address_error" />
                                 <label for="ignore_customer_address_error">No need for a number</label>
                             </div>
