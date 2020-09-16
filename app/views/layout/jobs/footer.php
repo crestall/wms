@@ -24,16 +24,11 @@
                             $('input#date_entered').focus();
                         });
                         $( "#date_due" ).datepicker({
-                            showButtonPanel: true,
-                            closeText: 'Clear',
+                            //showButtonPanel: true,
+                            //closeText: 'Clear',
                             changeMonth: true,
                             changeYear: true,
                             dateFormat: "dd/mm/yy",
-                            onSelect: function(selectedDate) {
-                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                s = d.valueOf()/1000;
-                                $('#date_due_value').val(s);
-                            },
                             onClose: function(selectedDate){
                                 console.log('selecteddate: '+ selectedDate);
                                 if(selectedDate == "")
