@@ -38,6 +38,7 @@
                                 if(selectedDate == "")
                                 {
                                     $('#date_due_value').val('');
+                                    $('#date_due').val('');
                                 }
                                 else
                                 {
