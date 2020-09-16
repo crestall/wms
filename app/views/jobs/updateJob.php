@@ -146,6 +146,53 @@ $customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer
                                 <input type="text" class="form-control customer" name="customer_phone" id="customer_phone" value="<?php echo $customer_phone;?>" />
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Address Line 1</label>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control customer" name="customer_address" id="customer_address" value="<?php echo Form::value('customer_address');?>" />
+                                <?php echo Form::displayError('customer_address');?>
+                            </div>
+                            <div class="col-md-1 checkbox checkbox-default">
+                                <input class="form-check-input styled" type="checkbox" id="ignore_customer_address_error" name="ignore_customer_address_error" />
+                                <label for="ignore_customer_address_error">No need for a number</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Address Line 2</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control customer" name="customer_address2" id="customer_address2" value="<?php echo Form::value('customer_address2');?>" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Suburb/Town</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control customer" name="customer_suburb" id="customer_suburb" value="<?php echo Form::value('customer_suburb');?>" />
+                                <?php echo Form::displayError('customer_suburb');?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">State</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control customer" name="customer_state" id="customer_state" value="<?php echo Form::value('customer_state');?>" />
+                                <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                <?php echo Form::displayError('customer_state');?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Postcode</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control customer" name="customer_postcode" id="customer_postcode" value="<?php echo Form::value('customer_postcode');?>" />
+                                <?php echo Form::displayError('customer_postcode');?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Country</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control customer" name="customer_country" id="customer_country" value="<?php echo Form::value('customer_country');?>" />
+                                <span class="inst">use the 2 letter ISO code</span>
+                                <?php echo Form::displayError('customer_country');?>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer text-right">
 
