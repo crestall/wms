@@ -18,6 +18,7 @@ $customer_suburb = (!empty(Form::value('customer_suburb')))? Form::value('custom
 $customer_state = (!empty(Form::value('customer_state')))? Form::value('customer_state'):$customer['state'];
 $customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('customer_postcode'):$customer['postcode'];
 $customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
+$date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value('date_ed_value'));
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -222,7 +223,40 @@ $customer_country = (!empty(Form::value('customer_country')))? Form::value('cust
                         Supplier Details
                     </div>
                     <div class="card-body">
-
+                        <div class="row form-group">
+                            <label class="col-md-3 col-form-label">Expected Delivery Date</label>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="date_ed" id="date_ed" value="<?php echo $date_ed;?>" />
+                                    <div class="input-group-append">
+                                        <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo Form::value('date_ed_value');?>" />
+                        </div>
+                        <div class="form-group row mb-3">
+                            <label class="col-md-3">Supplier Name</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="supplier_name" id="supplier_name" value="<?php echo Form::value('supplier_name');?>" />
+                                <input type="hidden" name="supplier_id" id="supplier_id" value="0" />
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
+                            <div class="col-lg-3 col-md-4">
+                                <input type="text" class="form-control supplier" name="supplier_contact" id="supplier_contact" value="<?php echo Form::value('supplier_contact');?>" />
+                            </div>
+                            <label class="col-lg-1 col-md-2">Email</label>
+                            <div class="col-lg-3 col-md-4">
+                                <input type="text" class="form-control supplier email" name="supplier_email" id="supplier_email" value="<?php echo Form::value('supplier_email');?>" />
+                                <?php echo Form::displayError('supplier_email');?>
+                            </div>
+                            <label class="col-lg-1 col-md-2">Phone</label>
+                            <div class="col-lg-3 col-md-4">
+                                <input type="text" class="form-control supplier" name="supplier_phone" id="supplier_phone" value="<?php echo Form::value('supplier_phone');?>" />
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer text-right">
 
