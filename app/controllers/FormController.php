@@ -147,7 +147,7 @@ class FormController extends Controller {
 
     public function procJobCustomerUpdate()
     {
-        echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -157,8 +157,31 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
-
+        //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        if(!$this->dataSubbed($customer_name))
+        {
+            Form::setError('customer_name', 'A Customer Name is required');
+        }
+        //Might be required, or need to fulfill requirements
+        if($this->dataSubbed($customer_email))
+        {
+            if(!$this->emailValid($customer_email))
+            {
+                Form::setError('customer_email', 'The email is not valid');
+            }
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            Session::set('jobcustomerdetailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
+        }
+        else
+        {
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $this->productionjob->updateJobDetails($post_data);
+            Session::set('jobcustomerdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Customer Details Have Been Updated</h3><p>The changes should be showing below</p>");
+        }
     }
 
     public function procJobDetailsUpdate()
@@ -519,7 +542,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($post_data),"</pre>"; //die();
+            //echo "<pre>",print_r($post_data),"</pre>"; //die();
             //customer details
             $customer_data = array(
                 'name'  => $customer_name
