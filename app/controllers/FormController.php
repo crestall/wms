@@ -235,6 +235,30 @@ class FormController extends Controller {
         {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
             //$this->productionjob->updateJobDetails($post_data);
+            $customer_data = array(
+                'name'  => $customer_name
+            );
+            if($this->dataSubbed($customer_phone)) $customer_data['phone'] = $customer_phone;
+            if($this->dataSubbed($customer_contact)) $customer_data['contact'] = $customer_contact;
+            if($this->dataSubbed($customer_email)) $customer_data['email'] = $customer_email;
+            if($this->dataSubbed($customer_address)) $customer_data['address'] = $customer_address;
+            if($this->dataSubbed($customer_address2)) $customer_data['address2'] = $customer_address2;
+            if($this->dataSubbed($customer_suburb)) $customer_data['suburb'] = $customer_suburb;
+            if($this->dataSubbed($customer_state)) $customer_data['state'] = $customer_state;
+            if($this->dataSubbed($customer_postcode)) $customer_data['postcode'] = $customer_postcode;
+            if($this->dataSubbed($customer_country)) $customer_data['country'] = $customer_country;
+            //Need to add the customer?
+            if($customer_id == 0)
+            {
+                $customer_id = $this->productioncustomer->addCustomer($customer_data);
+                //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
+            }
+            else
+            {
+                $customer_data['customer_id'] = $customer_id;
+                $this->productioncustomer->editCustomer($customer_data);
+                //echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
+            }
             Session::set('jobcustomerdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Customer Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#jobdetails");
