@@ -30,7 +30,7 @@
                             changeYear: true,
                             dateFormat: "dd/mm/yy",
                             onClose: function(selectedDate){
-                                console.log('selecteddate: '+ selectedDate);
+                                //console.log('selecteddate: '+ selectedDate);
                                 if(selectedDate == "")
                                 {
                                     $('#date_due_value').val('');
@@ -42,7 +42,6 @@
                                     s = d.valueOf()/1000;
                                     $('#date_due_value').val(s);
                                 }
-
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
@@ -52,10 +51,19 @@
                             changeMonth: true,
                             changeYear: true,
                             dateFormat: "dd/mm/yy",
-                            onSelect: function(selectedDate) {
-                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                s = d.valueOf()/1000;
-                                $('#date_ed_value').val(s);
+                            onClose: function(selectedDate){
+                                //console.log('selecteddate: '+ selectedDate);
+                                if(selectedDate == "")
+                                {
+                                    $('#date_ed_value').val('');
+                                    $('#date_ded').val('');
+                                }
+                                else
+                                {
+                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                    s = d.valueOf()/1000;
+                                    $('#date_ed_value').val(s);
+                                }
                             }
                         });
                         $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
