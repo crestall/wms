@@ -35,7 +35,7 @@
                                 $('#date_due_value').val(s);
                             },
                             onClose: function(selectedDate){
-                                console.log('selecteddate: '+SelectedDate);
+                                console.log('selecteddate: '+ selectedDate);
                                 if(selectedDate == "")
                                 {
                                     $('#date_due_value').val('');
