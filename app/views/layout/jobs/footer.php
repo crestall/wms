@@ -69,10 +69,8 @@
                         $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_ed').focus();
                         });
-                    }
-                },
-                'add-job':{
-                    init: function(){
+                    },
+                    autoComplete: function(){
                         autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
                         $("input#customer_name").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
@@ -139,13 +137,18 @@
                                 return false;
                             }
                         }
+                    }
+                },
+                'add-job':{
+                    init: function(){
+                        actions.common.autoComplete();
+                        actions.common.doDates();
                         $("form#add_production_job").submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding the Job...</h2></div>' });
                             }
                         });
-                        actions.common.doDates();
                         $('select#status').change(function(e){
                             $(this).valid();
                         });
@@ -162,6 +165,7 @@
                 'update-job':{
                     init: function(){
                         actions.common.doDates();
+                        actions.common.autoComplete();
                         $('button#job_details_update_submitter').click(function(e){
                             $('form#job_details_update').submit();
                         });
@@ -173,6 +177,9 @@
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
                             }
+                        });
+                        $('select#status').change(function(e){
+                            $(this).valid();
                         });
                     }
                 }
