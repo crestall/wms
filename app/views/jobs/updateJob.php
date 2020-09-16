@@ -119,6 +119,12 @@ $customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer
                         Customer Details
                     </div>
                     <div class="card-body">
+                        <?php if(isset($_SESSION['jobcustomerdetailsfeedback'])) :?>
+                            <div class='feedbackbox'><?php echo Session::getAndDestroy('jobcustomerdetailsfeedback');?></div>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['jobcustomerdetailserrorfeedback'])) :?>
+                            <div class='errorbox'><?php echo Session::getAndDestroy('jobcustomerdetailserrorfeedback');?></div>
+                        <?php endif; ?>
                         <form id="customer_details_update" method="post" action="/form/procJobCustomerUpdate">
                             <div class="form-group row">
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
