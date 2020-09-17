@@ -97,9 +97,41 @@ $c = 1;
             </div>
             <div id="products_chart" class="pb-3"></div>
         <?php elseif($user_role == "production" || $user_role == "production_admin"):?>
-            <div class="row">
-                <div class="col">
-                    <h2>The Production Home Will Appear Here</h2>
+            <div class="col-md-12 text-center">
+                <h2>Quick Links</h2>
+            </div>
+            <div class="card-deck homepagedeck">
+                <div class="card homepagecard">
+                    <div class="card-header">
+                        <h4>Add A New Job</h4>
+                    </div>
+                    <div class="card-body text-center">
+                    	<a class="btn btn-lg btn-outline-fsg" href="/orders/add-order"><div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>&nbsp;<span style="font-size:larger">Add</span></a>
+                    </div>
+                </div>
+                <div class="card homepagecard">
+                    <div class="card-header">
+                        <h4>View Orders</h4>
+                    </div>
+                    <div class="card-body text-center">
+                    	<a class="btn btn-lg btn-outline-fsg" href="/orders/client-orders"><i class="fad fa-th-list fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Look!</span></a>
+                    </div>
+                </div>
+                <div class="card homepagecard">
+                    <div class="card-header">
+                        <h4>View Inventory</h4>
+                    </div>
+                    <div class="card-body text-center">
+                    	<a class="btn btn-lg btn-outline-fsg" href="/inventory/client-inventory"><i class="fad fa-inventory fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Check!</span></a>
+                    </div>
+                </div>
+                <div class="card homepagecard">
+                    <div class="card-header">
+                        <h4>Dispatch Reports</h4>
+                    </div>
+                    <div class="card-body text-center">
+                    	<a class="btn btn-lg btn-outline-fsg" href="/reports/dispatch-report"><i class="fad fa-file-spreadsheet fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Read!</span></a>
+                    </div>
                 </div>
             </div>
         <?php else:?>
