@@ -106,7 +106,7 @@ $c = 1;
                         <h4>Add A New Job</h4>
                     </div>
                     <div class="card-body text-center">
-                    	<a class="btn btn-lg btn-outline-fsg" href="/orders/add-order"><div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>&nbsp;<span style="font-size:larger">Add</span></a>
+                    	<a class="btn btn-lg btn-outline-fsg" href="/orders/add-order"><span class="fa-layers fa-fw fa-3x"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span>&nbsp;<span style="font-size:larger">Add</span></a>
                     </div>
                 </div>
                 <div class="card homepagecard">
