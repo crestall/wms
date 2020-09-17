@@ -130,6 +130,7 @@ $supplier_country = (!empty(Form::value('supplier_country')))? Form::value('supp
                     </div>
                 </div>
             </div>
+            <a name="customerdetails"></a>
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card h-100 border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
@@ -227,6 +228,7 @@ $supplier_country = (!empty(Form::value('supplier_country')))? Form::value('supp
                     </div>
                 </div>
             </div>
+            <a name="supplierdetails"></a> 
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card h-100 border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
