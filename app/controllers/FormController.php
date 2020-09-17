@@ -159,11 +159,6 @@ class FormController extends Controller {
             }
         }
         //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
-        if(!$this->dataSubbed($supplier_name))
-        {
-            Form::setError('supplier_name', 'A supplier Name is required');
-        }
-        //Might be required, or need to fulfill requirements
         if($this->dataSubbed($supplier_email))
         {
             if(!$this->emailValid($supplier_email))
