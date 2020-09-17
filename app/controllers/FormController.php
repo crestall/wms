@@ -159,6 +159,7 @@ class FormController extends Controller {
             }
         }
         //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        $date_ed_value = (isset($date_ed_value))? $date_ed_value: 0;
         if($this->dataSubbed($supplier_email))
         {
             if(!$this->emailValid($supplier_email))
@@ -257,7 +258,7 @@ class FormController extends Controller {
                     //echo "Will edit supplier data<pre>",print_r($supplier_data),"</pre>";
                 }
                 $this->productionjob->updateJobSupplierId($id, $supplier_id);
-                $this->productionjob->updateExpectedDeliveryDate($id, $date_ed_value); 
+                $this->productionjob->updateExpectedDeliveryDate($id, $date_ed_value);
                 Session::set('jobsupplierdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Supplier Details Have Been Updated</h3><p>The changes should be showing below</p>");
             }
             else
