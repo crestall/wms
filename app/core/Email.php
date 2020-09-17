@@ -141,7 +141,7 @@
 
     		$mail->Subject = "Reset your password for FSG WMS system";
 
-            $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
     		$mail->MsgHTML($body);
             if(!$mail->Send())
@@ -175,37 +175,6 @@
         //$mail->AddAdress('Joshua Lanzarini','joshua@oneplate.co');
 
 		$mail->Subject = "Order with item error for One Plate";
-
-        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
-
-		$mail->MsgHTML($body);
-
-        if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-            throw new Exception("Email couldn't be sent ");
-        }
-    }
-
-    public static function sendTTImportError($message)
-    {
-        $mail = new PHPMailer();
-
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."ttimporterror.html");
-        $replace_array = array("{CONTENT}");
-		$replace_with_array = array($message);
-		$body = str_replace($replace_array, $replace_with_array, $body);
-
-        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-
-		//$mail->AddAddress('chris.wilson@3plplus.com.au', 'Chris Wilson');
-        $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
-
-		//$mail->AddBCC('customersupport@3plplus.com.au');
-
-        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
-
-		$mail->Subject = "Order with item error for TT Australia";
 
         $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
