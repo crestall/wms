@@ -170,6 +170,7 @@ class FormController extends Controller {
         if(!empty($supplier_address) || !empty($supplier_suburb) || !empty($supplier_state) || !empty($supplier_postcode) || !empty($supplier_country))
         {
             //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+            $supplier_country = strtoupper($supplier_country);
             if( !$this->dataSubbed($supplier_address) )
             {
                 Form::setError('supplier_address', 'An address is required');
@@ -299,6 +300,7 @@ class FormController extends Controller {
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
         {
             //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+            $customer_country = strtupper($customer_country);
             if( !$this->dataSubbed($customer_address) )
             {
                 Form::setError('customer_address', 'An address is required');
