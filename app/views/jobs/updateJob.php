@@ -18,17 +18,34 @@ $customer_suburb = (!empty(Form::value('customer_suburb')))? Form::value('custom
 $customer_state = (!empty(Form::value('customer_state')))? Form::value('customer_state'):$customer['state'];
 $customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('customer_postcode'):$customer['postcode'];
 $customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
-$date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['due_date'];
-$supplier_name = ucwords((!empty(Form::value('supplier_name')))? Form::value('supplier_name'):$supplier['name']);
-$supplier_contact = (!empty(Form::value('supplier_contact')))? Form::value('supplier_contact'):$supplier['contact'];
-$supplier_email = (!empty(Form::value('supplier_email')))? Form::value('supplier_email'):$supplier['email'];
-$supplier_phone = (!empty(Form::value('supplier_phone')))? Form::value('supplier_phone'):$supplier['phone'];
-$supplier_address = (!empty(Form::value('supplier_address')))? Form::value('supplier_address'):$supplier['address'];
-$supplier_address2 = (!empty(Form::value('supplier_address2')))? Form::value('supplier_address2'):$supplier['address_2'];
-$supplier_suburb = (!empty(Form::value('supplier_suburb')))? Form::value('supplier_suburb'):$supplier['suburb'];
-$supplier_state = (!empty(Form::value('supplier_state')))? Form::value('supplier_state'):$supplier['state'];
-$supplier_postcode = (!empty(Form::value('supplier_postcode')))? Form::value('supplier_postcode'):$supplier['postcode'];
-$supplier_country = (!empty(Form::value('supplier_country')))? Form::value('supplier_country'):$supplier['country'];
+$date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['ed_date'];
+if(count($supplier))
+{
+    $supplier_name = ucwords((!empty(Form::value('supplier_name')))? Form::value('supplier_name'):$supplier['name']);
+    $supplier_contact = (!empty(Form::value('supplier_contact')))? Form::value('supplier_contact'):$supplier['contact'];
+    $supplier_email = (!empty(Form::value('supplier_email')))? Form::value('supplier_email'):$supplier['email'];
+    $supplier_phone = (!empty(Form::value('supplier_phone')))? Form::value('supplier_phone'):$supplier['phone'];
+    $supplier_address = (!empty(Form::value('supplier_address')))? Form::value('supplier_address'):$supplier['address'];
+    $supplier_address2 = (!empty(Form::value('supplier_address2')))? Form::value('supplier_address2'):$supplier['address_2'];
+    $supplier_suburb = (!empty(Form::value('supplier_suburb')))? Form::value('supplier_suburb'):$supplier['suburb'];
+    $supplier_state = (!empty(Form::value('supplier_state')))? Form::value('supplier_state'):$supplier['state'];
+    $supplier_postcode = (!empty(Form::value('supplier_postcode')))? Form::value('supplier_postcode'):$supplier['postcode'];
+    $supplier_country = (!empty(Form::value('supplier_country')))? Form::value('supplier_country'):$supplier['country'];
+}
+else
+{
+    $supplier_name = Form::value('supplier_name');
+    $supplier_contact = Form::value('supplier_contact');
+    $supplier_email = Form::value('supplier_email');
+    $supplier_phone = Form::value('supplier_phone');
+    $supplier_address = Form::value('supplier_address');
+    $supplier_address2 =  Form::value('supplier_address2');
+    $supplier_suburb = Form::value('supplier_suburb');
+    $supplier_state = Form::value('supplier_state');
+    $supplier_postcode = Form::value('supplier_postcode');
+    $supplier_country = Form::value('supplier_country');
+}
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
