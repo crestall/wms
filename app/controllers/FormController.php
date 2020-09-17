@@ -262,7 +262,7 @@ class FormController extends Controller {
             else
             {
                 $this->productionjob->removeSupplier($id);
-                $this->productionjob->updateExpectedDeliveryDate($id, '');
+                $this->productionjob->updateExpectedDeliveryDate($id, 0);
                 Session::set('jobsupplierdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Supplier Has Been Removed From This Job</h3>");
             }
         }
