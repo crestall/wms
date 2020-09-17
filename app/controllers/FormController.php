@@ -94,6 +94,7 @@ class FormController extends Controller {
             'procJobDetailsUpdate',
             'procJobStatusAdd',
             'procJobStatusEdit',
+            'procJobSupplierUpdate',
             'procLogin',
             'procMakePacks',
             'procMoveAllClientStock',
@@ -143,6 +144,21 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procJobSupplierUpdate()
+    {
+        echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
     }
 
     public function procJobCustomerUpdate()
