@@ -1,25 +1,11 @@
 /************
-* Bootstrap Tooltips
+Bootstrap  responsive culumns are still inside a row div that is on top of the page
 ************/
-//add them to all anchors that have data-toggle prop and disable clicking
-$('[data-toggle="tooltip"]').tooltip().click(function(e){
-    e.preventDefault();
-});
-/************
-* Bootstrap Popovers
-************/
-//add them to all anchors that have data-toggle prop and disable clicking
-$('[data-toggle="popover"]').popover({
-    container: 'body',
-    placement: 'auto',
-    trigger: 'click',
-    html: true,
-    content: function(){
-        var content =  $(this).next('.popper-content').html();
-        //console.log(content);
-        return content;
-    }
-});
+if(window.location.hash != ''){
+   $('html, body').animate({
+        scrollTop: $(window.location.hash).offset().top
+    }, 2000);
+}
 /************
 * Navigation Scripting
 ************/
