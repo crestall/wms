@@ -144,6 +144,22 @@ $c = 1;
                         	<a class="btn btn-lg btn-outline-fsg" href="/customers/view-customers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-tie"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
                         </div>
                     </div>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>View Suppliers</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/suppliers/view-suppliers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        </div>
+                    </div>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>View Sales Reps</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/suppliers/view-suppliers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-chart"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        </div>
+                    </div>
                 <?php endif;?>
             </div>
         <?php else:?>
