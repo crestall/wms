@@ -40,7 +40,7 @@ class Productionjob extends Model{
                 pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
                 sr.id as salesrep_id, sr.name AS salesrep_name,
                 ps.id as supplier_id, ps.name AS supplier_name, ps.contact AS supplier_contact, ps.email AS supplier_email, ps.phone AS supplier_phone,
-                js.name AS `status`
+                js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour
             FROM
                 `production_jobs` pj LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
@@ -85,17 +85,36 @@ class Productionjob extends Model{
             'customer_id'   => $data['customer_id'],
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
-            'due_date'      => $data['date_due_value'],
-            'ed_date'       => $data['date_ed_value'],
             'status_id'     => $data['status_id'],
             'date'          => time()
         );
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
+        if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
+        if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
         if(!empty($data['supplier_id'])) $vals['supplier_id'] = $data['supplier_id'];
         if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
         if(!empty($data['designer'])) $vals['designer'] = $data['designer'];
         if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
         $id = $db->insertQuery($this->table, $vals);
+        return $id;
+    }
+
+    public function updateJobDetails($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'job_id'        => $data['job_id'],
+            'description'   => $data['description'],
+            'created_date'  => $data['date_entered_value'],
+            'due_date'      => null,
+            'status_id'     => $data['status_id']
+        );
+        if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
+        if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
+        if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
+        if(!empty($data['designer'])) $vals['designer'] = $data['designer'];
+        if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
+        $id = $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return $id;
     }
 
@@ -135,5 +154,39 @@ class Productionjob extends Model{
         return true;
     }
 
+    public function updateJobSupplierId($job_id, $supplier_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'supplier_id', $supplier_id, $job_id);
+        return true;
+    }
+
+    public function updateJobCustomerId($job_id, $customer_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'customer_id', $customer_id, $job_id);
+        return true;
+    }
+
+    public function updateExpectedDeliveryDate($job_id, $edd)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'ed_date', $edd, $job_id);
+        return true;
+    }
+
+    public function updateDueDate($job_id, $due_date)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'due_date', $due_date, $job_id);
+        return true;
+    }
+
+    public function removeSupplier($job_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'supplier_id', 0, $job_id);
+        return true;
+    }
 }
 ?>

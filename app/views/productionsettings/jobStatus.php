@@ -29,6 +29,7 @@
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+            <input type="hidden" name="text_colour" class="text_colour" value="rgb(33,37,41)">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
@@ -76,6 +77,7 @@
                         <div class="col-md-1">
                             <label class="col-form-label">&nbsp;</label>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <input type="hidden" name="text_colour" class="text_colour" value="<?php echo $s['text_colour'];?>">
                             <input type="hidden" name="line_id" value="<?php echo $s['id'];?>" />
                             <input type="hidden" name="currentname_<?php echo $s['id'];?>" value="<?php echo $s['name'];?>" />
                             <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>

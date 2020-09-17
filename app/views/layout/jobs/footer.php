@@ -8,10 +8,69 @@
                 common: {
                     init: function(){
 
-                    }
-                },
-                'add-job':{
-                    init: function(){
+                    },
+                    doDates: function(){
+                        $( "#date_entered" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                $('#date_entered_value').val(s);
+                            }
+                        });
+                        $('#date_entered_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_entered').focus();
+                        });
+                        $( "#date_due" ).datepicker({
+                            //showButtonPanel: true,
+                            //closeText: 'Clear',
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onClose: function(selectedDate){
+                                //console.log('selecteddate: '+ selectedDate);
+                                if(selectedDate == "")
+                                {
+                                    $('#date_due_value').val('');
+                                    $('#date_due').val('');
+                                }
+                                else
+                                {
+                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                    s = d.valueOf()/1000;
+                                    $('#date_due_value').val(s);
+                                }
+                            }
+                        });
+                        $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_due').focus();
+                        });
+                        $( "#date_ed" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onClose: function(selectedDate){
+                                //console.log('selecteddate: '+ selectedDate);
+                                if(selectedDate == "")
+                                {
+                                    $('#date_ed_value').val('');
+                                    $('#date_ded').val('');
+                                }
+                                else
+                                {
+                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                    s = d.valueOf()/1000;
+                                    $('#date_ed_value').val(s);
+                                }
+                            }
+                        });
+                        $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_ed').focus();
+                        });
+                    },
+                    autoComplete: function(){
                         autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
                         $("input#customer_name").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
@@ -78,50 +137,17 @@
                                 return false;
                             }
                         }
+                    }
+                },
+                'add-job':{
+                    init: function(){
+                        actions.common.autoComplete();
+                        actions.common.doDates();
                         $("form#add_production_job").submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding the Job...</h2></div>' });
                             }
-                        });
-                        $( "#date_entered" ).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "dd/mm/yy",
-                            onSelect: function(selectedDate) {
-                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                s = d.valueOf()/1000;
-                                $('#date_entered_value').val(s);
-                            }
-                        });
-                        $('#date_entered_calendar').css('cursor', 'pointer').click(function(e){
-                            $('input#date_entered').focus();
-                        });
-                        $( "#date_due" ).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "dd/mm/yy",
-                            onSelect: function(selectedDate) {
-                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                s = d.valueOf()/1000;
-                                $('#date_due_value').val(s);
-                            }
-                        });
-                        $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
-                            $('input#date_due').focus();
-                        });
-                        $( "#date_ed" ).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "dd/mm/yy",
-                            onSelect: function(selectedDate) {
-                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                s = d.valueOf()/1000;
-                                $('#date_ed_value').val(s);
-                            }
-                        });
-                        $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
-                            $('input#date_ed').focus();
                         });
                         $('select#status').change(function(e){
                             $(this).valid();
@@ -133,6 +159,30 @@
                         dataTable.init($('table#production_jobs_table'), {
                             /* No ordering applied by DataTables during initialisation */
                             "order": []
+                        });
+                    }
+                },
+                'update-job':{
+                    init: function(){
+                        actions.common.doDates();
+                        actions.common.autoComplete();
+                        $('button#job_details_update_submitter').click(function(e){
+                            $('form#job_details_update').submit();
+                        });
+                        $('button#customer_details_update_submitter').click(function(e){
+                            $('form#customer_details_update').submit();
+                        });
+                        $('button#supplier_details_update_submitter').click(function(e){
+                            $('form#supplier_details_update').submit();
+                        });
+                        $('form#job_details_update, form#customer_details_update, form#supplier_details_update').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
+                            }
+                        });
+                        $('select#status').change(function(e){
+                            $(this).valid();
                         });
                     }
                 }

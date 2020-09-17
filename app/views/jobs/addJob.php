@@ -39,14 +39,14 @@ else
                 <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo Form::value('job_id');?>" />
+                        <input type="text" class="form-control required number" name="job_id" id="job_id" value="<?php echo Form::value('job_id');?>" />
                         <?php echo Form::displayError('job_id');?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3">Related Job Id</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
+                        <input type="text" class="form-control number" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -105,7 +105,7 @@ else
                         <div class="col-md-4">
                             <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo Form::value('notes');?></textarea>
                         </div>
-                    </div>
+                </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Customer Details</h3>

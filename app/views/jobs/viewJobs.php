@@ -1,29 +1,5 @@
 <?php
-function getCustomerPopOver($job)
-{
-    return "
-        <div class='container'>
-            <div class='row'>
-                <label class='col-4'>Contact</label>
-                <div class='col-8'>
-                    ".$job['customer_contact']."
-                </div>
-            </div>
-            <div class='row'>
-                <label class='col-4'>Email</label>
-                <div class='col-8'>
-                    ".$job['customer_email']."
-                </div>
-            </div>
-            <div class='row'>
-                <label class='col-4'>Phone</label>
-                <div class='col-8'>
-                    ".$job['customer_phone']."
-                </div>
-            </div>
-        </div>
-    ";
-}
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -61,7 +37,10 @@ function getCustomerPopOver($job)
 
                             <?php foreach($jobs as $job):?>
                                 <tr>
-                                    <td data-label="Job Number" class="number"><?php echo $job['job_id'];?></td>
+                                    <td data-label="Job Number" class="number">
+                                        <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a><br>
+                                        <span class="inst">Click to update details</span>
+                                    </td>
                                     <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                                     <td data-label="Client">
                                         <span style="font-size: larger">
@@ -94,12 +73,16 @@ function getCustomerPopOver($job)
                                     </td>
                                     <td data-label="Description"><?php echo $job['description'];?></td>
                                     <td data-label="Notes"><?php echo $job['notes'];?></td>
-                                    <td data-label="Status"><?php echo ucwords($job['status']);?></td>
+                                    <td data-label="Status"
+                                    <?php if(!empty($job['status_colour'])):?>
+                                        style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
+                                    <?php endif;?>
+                                    ><?php echo ucwords($job['status']);?></td>
                                     <td data-label="Sales Rep"><?php echo ucwords($job['salesrep_name']);?></td>
                                     <td data-label="Supplier">
                                         <span style="font-size: larger">
                                             <?php if($user_role == "production_admin"):?>
-                                                <a href="/customers/edit-supplier/supplier=<?php echo $job['supplier_id'];?>"><?php echo ucwords($job['supplier_name']);;?></a>
+                                                <a href="/suppliers/edit-supplier/supplier=<?php echo $job['supplier_id'];?>"><?php echo ucwords($job['supplier_name']);;?></a>
                                             <?php else:?>
                                                 <?php echo ucwords($job['supplier_name']);?>
                                             <?php endif;?>

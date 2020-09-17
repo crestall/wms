@@ -40,7 +40,7 @@
             $mail->AddAttachment($f);
         }
 
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
         if(SITE_LIVE)
         //if(Config::get("SITE_LIVE"))
@@ -108,7 +108,7 @@
 
 		$mail->Subject = "Pickup Request From ".$client_name;
 
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
 		$mail->MsgHTML($body);
 
@@ -176,7 +176,7 @@
 
 		$mail->Subject = "Order with item error for One Plate";
 
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
 		$mail->MsgHTML($body);
 
@@ -207,7 +207,7 @@
 
 		$mail->Subject = "Order with item error for TT Australia";
 
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
 		$mail->MsgHTML($body);
 
@@ -238,7 +238,7 @@
 
 		$mail->Subject = "Order with item error for Nuchev";
 
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
 		$mail->MsgHTML($body);
 
@@ -266,7 +266,7 @@
 
 		$mail->Subject = "Cron Import Error";
 
-       $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+       $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
 		$mail->MsgHTML($body);
 
@@ -288,7 +288,7 @@
 		$body = str_replace($replace_array, $replace_with_array, $body);
 
 		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 		$mail->Subject = "FSG WMS: Low Stock Warning";
 		$mail->MsgHTML($body);
 
@@ -369,7 +369,7 @@
 		$replace_array = array("{NAME}", "{CLIENT}", "{CONTENT}");
 		$replace_with_array = array($od['ship_to'], $client_name, $content);
 		$body = str_replace($replace_array, $replace_with_array, $body);
-        $mail->AddEmbeddedImage(IMAGES."email_logo.png", "emailfoot", "email_logo.png");
+        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 		$mail->Subject = "Your Order With $client_name Has Been Dispatched";
 		$mail->MsgHTML($body);

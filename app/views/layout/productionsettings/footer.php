@@ -36,7 +36,36 @@
                             $('input.default_checkbox').not(this).prop("checked", false);
                         });
                         $('.colour-picker').colorpicker({
-                            format: 'rgba'
+                            format: 'rgba',
+                            extensions: [
+                                {
+                                    name: 'swatches', // extension name to load
+                                    options: { // extension options
+                                        colors: {
+                                            'black': '#000000',
+                                            'gray': '#888888',
+                                            'white': '#ffffff',
+                                            'red': 'red',
+                                            'default': '#777777',
+                                            'primary': '#337ab7',
+                                            'success': '#5cb85c',
+                                            'info': '#5bc0de',
+                                            'warning': '#f0ad4e',
+                                            'danger': '#d9534f'
+                                        }
+                                    }
+                                }
+                            ]
+                        })
+                        .on('colorpickerChange colorpickerCreate', function (e) {
+                            if (e.color.isDark())
+                            {
+                                $(this).closest('form').find('input.text_colour').val("rgb(239,239,239)");
+                            }
+                            else
+                            {
+                                $(this).closest('form').find('input.text_colour').val("rgb(33,37,41)");
+                            }
                         });
                     }
                 },
