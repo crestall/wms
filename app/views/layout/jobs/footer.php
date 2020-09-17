@@ -185,6 +185,11 @@
                             $(this).valid();
                         });
                     }
+                },
+                'job-search':{
+                    init: function(){
+
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);

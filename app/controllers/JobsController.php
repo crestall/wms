@@ -35,6 +35,17 @@ class JobsController extends Controller
         ]);
     }
 
+    public function jobSearch()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "job-search");
+        Config::set('curPage', "job-search");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/jobSearch.php', [
+            'page_title'    =>  "Search production Jobs",
+            'pht'           =>  ": Production Job Search"
+        ]);
+    }
+
     public function viewJobs()
     {
         $completed = (isset($this->request->params['args']['completed']))? true : false;
