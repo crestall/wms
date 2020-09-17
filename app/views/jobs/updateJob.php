@@ -229,7 +229,7 @@ else
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Country</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_country" id="customer_country" value="<?php $customer_country;?>" />
+                                    <input type="text" class="form-control customer" name="customer_country" id="customer_country" value="<?php echo $customer_country;?>" />
                                     <span class="inst">use the 2 letter ISO code</span>
                                     <?php echo Form::displayError('customer_country');?>
                                 </div>
