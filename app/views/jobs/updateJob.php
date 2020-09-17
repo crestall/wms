@@ -228,13 +228,13 @@ $supplier_country = (!empty(Form::value('supplier_country')))? Form::value('supp
                     </div>
                 </div>
             </div>
-            <a id="supplierdetails"></a>
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card h-100 border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
                         Supplier Details
                     </div>
                     <div class="card-body">
+                        <a id="supplierdetails"></a>
                         <?php if(isset($_SESSION['jobsupplierdetailsfeedback'])) :?>
                             <div class='feedbackbox'><?php echo Session::getAndDestroy('jobsupplierdetailsfeedback');?></div>
                         <?php endif; ?>
