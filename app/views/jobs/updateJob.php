@@ -272,7 +272,7 @@ else
                                 <label class="col-md-4">Supplier Name</label>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" name="supplier_name" id="supplier_name" value="<?php echo $supplier_name;?>" />
-                                    <input type="hidden" name="supplier_id" id="supplier_id" value="<?php echo $supplier['id'];?>" />
+                                    <input type="hidden" name="supplier_id" id="supplier_id" value="<?php echo $job['supplier_id'];?>" />
                                 </div>
                             </div>
                             <div class="form-group row ">
