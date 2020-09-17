@@ -181,5 +181,12 @@ class Productionjob extends Model{
         $db->updateDatabaseField($this->table, 'due_date', $due_date, $job_id);
         return true;
     }
+
+    public function removeSupplier($job_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'supplier_id', 0, $job_id);
+        return true;
+    }
 }
 ?>
