@@ -159,7 +159,7 @@ class FormController extends Controller {
             }
         }
         //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
-        $date_ed_value = (isset($date_ed_value))? $date_ed_value: 0;
+        $date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
         if($this->dataSubbed($supplier_email))
         {
             if(!$this->emailValid($supplier_email))
