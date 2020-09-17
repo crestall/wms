@@ -19,6 +19,7 @@ $customer_state = (!empty(Form::value('customer_state')))? Form::value('customer
 $customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('customer_postcode'):$customer['postcode'];
 $customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
 $date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['due_date'];
+$supplier_name = (!empty(Form::value('supplier_name')))? Form::value('supplier_name'):$supplier['name'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -245,8 +246,8 @@ $date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') 
                             <div class="form-group row">
                                 <label class="col-md-4">Supplier Name</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="supplier_name" id="supplier_name" value="<?php echo Form::value('supplier_name');?>" />
-                                    <input type="hidden" name="supplier_id" id="supplier_id" value="0" />
+                                    <input type="text" class="form-control" name="supplier_name" id="supplier_name" value="<?php echo $supplier_name;?>" />
+                                    <input type="hidden" name="supplier_id" id="supplier_id" value="<?php echo $supplier['id'];?>" />
                                 </div>
                             </div>
                             <div class="form-group row ">
