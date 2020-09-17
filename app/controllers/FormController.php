@@ -269,7 +269,7 @@ class FormController extends Controller {
                 Session::set('jobsupplierdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Supplier Has Been Removed From This Job</h3>");
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#jobdetails");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#supplierdetails");
     }
 
     public function procJobCustomerUpdate()
