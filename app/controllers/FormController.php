@@ -257,6 +257,7 @@ class FormController extends Controller {
                     //echo "Will edit supplier data<pre>",print_r($supplier_data),"</pre>";
                 }
                 $this->productionjob->updateJobSupplierId($id, $supplier_id);
+                $this->productionjob->updateExpectedDeliveryDate($id, $date_ed_value); 
                 Session::set('jobsupplierdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Supplier Details Have Been Updated</h3><p>The changes should be showing below</p>");
             }
             else
