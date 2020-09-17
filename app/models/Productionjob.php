@@ -154,5 +154,19 @@ class Productionjob extends Model{
         return true;
     }
 
+    public function updateJobSupplierId($job_id, $supplier_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'supplier_id', $supplier_id, $job_id);
+        return true;
+    }
+
+    public function updateJobCustomerId($job_id, $customer_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'customer_id', $customer_id, $job_id);
+        return true;
+    }
+
 }
 ?>
