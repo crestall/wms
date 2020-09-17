@@ -119,18 +119,18 @@ $c = 1;
                 </div>
                 <div class="card homepagecard">
                     <div class="card-header">
-                        <h4>View Inventory</h4>
+                        <h4>Add A New Supplier</h4>
                     </div>
                     <div class="card-body text-center">
-                    	<a class="btn btn-lg btn-outline-fsg" href="/inventory/client-inventory"><i class="fad fa-inventory fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Check!</span></a>
+                    	<a class="btn btn-lg btn-outline-fsg" href="/suppliers/add-supplier"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-people-arrows"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span>&nbsp;<span style="font-size:larger">Add!</span></a>
                     </div>
                 </div>
                 <div class="card homepagecard">
                     <div class="card-header">
-                        <h4>Dispatch Reports</h4>
+                        <h4>View Jobs</h4>
                     </div>
                     <div class="card-body text-center">
-                    	<a class="btn btn-lg btn-outline-fsg" href="/reports/dispatch-report"><i class="fad fa-file-spreadsheet fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Read!</span></a>
+                    	<a class="btn btn-lg btn-outline-fsg" href="/jobs/view-jobs"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
                     </div>
                 </div>
             </div>
