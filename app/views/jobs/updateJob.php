@@ -37,8 +37,7 @@ $supplier_country = (!empty(Form::value('supplier_country')))? Form::value('supp
         <?php //echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
         <?php //echo "SUPPLIER<pre>",print_r($supplier),"</pre>";?>
         <div class="row">
-            <a id="jobdetails"></a>
-            <div class="col-sm-12 col-md-6 mb-3">
+            <div class="col-sm-12 col-md-6 mb-3" id="jobdetails">
                 <div class="card h-100 border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
                         Job Details
@@ -130,9 +129,8 @@ $supplier_country = (!empty(Form::value('supplier_country')))? Form::value('supp
                     </div>
                 </div>
             </div>
-            <a id="customerdetails"></a>
             <div class="col-sm-12 col-md-6 mb-3">
-                <div class="card h-100 border-secondary order-card">
+                <div class="card h-100 border-secondary order-card" id="customerdetails">
                     <div class="card-header bg-secondary text-white">
                         Customer Details
                     </div>
