@@ -18,7 +18,7 @@ $customer_suburb = (!empty(Form::value('customer_suburb')))? Form::value('custom
 $customer_state = (!empty(Form::value('customer_state')))? Form::value('customer_state'):$customer['state'];
 $customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('customer_postcode'):$customer['postcode'];
 $customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
-$date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value('date_ed_value'));
+$date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['due_date'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -234,13 +234,13 @@ $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value
                                 <label class="col-md-4 col-form-label">Expected Delivery Date</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="date_ed" id="date_ed" value="<?php echo $date_ed;?>" />
+                                        <input type="text" class="form-control" name="date_ed" id="date_ed" value="<?php if(!empty($date_ed)) echo date('d/m/Y', $date_ed);?>" />
                                         <div class="input-group-append">
                                             <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo Form::value('date_ed_value');?>" />
+                                <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo $date_ed;?>" />
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4">Supplier Name</label>
