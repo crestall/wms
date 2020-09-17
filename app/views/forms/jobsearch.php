@@ -20,14 +20,14 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
         <div class="form-group row">
             <label class="col-md-3">Filter By Customer</label>
             <div class="col-md-4">
-                <select id="customer_id" name="customer_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->productioncustomer->getSelectCustomers($client_id);?></select>
+                <select id="customer_id" name="customer_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->productioncustomer->getSelectCustomers($customer_id);?></select>
                 <?php echo Form::displayError('client_id');?>
             </div>
         </div>
         <div class="row form-group">
             <label class="col-md-3">Filter By Supplier</label>
             <div class="col-md-4">
-                <select id="supplier_id" name="supplier_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->courier->getSelectCouriers($courier_id, false, false);?></select>
+                <select id="supplier_id" name="supplier_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->courier->getSelectCouriers($supplier_id, false, false);?></select>
             </div>
         </div>
         <div class="row form-group">
