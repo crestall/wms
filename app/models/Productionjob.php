@@ -89,7 +89,7 @@ class Productionjob extends Model{
             'date'          => time()
         );
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
-        if(!empty($data['date_ed_value'])) $vals['date_ed_value'] = $data['date_ed_value'];
+        if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
         if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
         if(!empty($data['supplier_id'])) $vals['supplier_id'] = $data['supplier_id'];
         if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
@@ -168,5 +168,18 @@ class Productionjob extends Model{
         return true;
     }
 
+    public function updateExpectedDeliveryDate($job_id, $edd)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'ed_date', $edd, $job_id);
+        return true;
+    }
+
+    public function updateDueDate($job_id, $due_date)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'due_date', $due_date, $job_id);
+        return true;
+    }
 }
 ?>
