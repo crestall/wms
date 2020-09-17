@@ -20,6 +20,9 @@ $customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('cu
 $customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
 $date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['due_date'];
 $supplier_name = (!empty(Form::value('supplier_name')))? Form::value('supplier_name'):$supplier['name'];
+$supplier_contact = (!empty(Form::value('supplier_contact')))? Form::value('supplier_contact'):$supplier['contact'];
+$supplier_email = (!empty(Form::value('supplier_email')))? Form::value('supplier_email'):$supplier['email'];
+$supplier_phone = (!empty(Form::value('supplier_phone')))? Form::value('supplier_phone'):$supplier['phone'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -253,20 +256,20 @@ $supplier_name = (!empty(Form::value('supplier_name')))? Form::value('supplier_n
                             <div class="form-group row ">
                                 <label class="col-md-4">Contact</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_contact" id="supplier_contact" value="<?php echo Form::value('supplier_contact');?>" />
+                                    <input type="text" class="form-control supplier" name="supplier_contact" id="supplier_contact" value="<?php echo $supplier_contact;?>" />
                                 </div>
                             </div>
                             <div class="form-group row ">
                                 <label class="col-md-4">Email</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier email" name="supplier_email" id="supplier_email" value="<?php echo Form::value('supplier_email');?>" />
+                                    <input type="text" class="form-control supplier email" name="supplier_email" id="supplier_email" value="<?php echo $supplier_email;?>" />
                                     <?php echo Form::displayError('supplier_email');?>
                                 </div>
                             </div>
                             <div class="form-group row ">
                                 <label class="col-md-4">Phone</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_phone" id="supplier_phone" value="<?php echo Form::value('supplier_phone');?>" />
+                                    <input type="text" class="form-control supplier" name="supplier_phone" id="supplier_phone" value="<?php echo $supplier_phone;?>" />
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
