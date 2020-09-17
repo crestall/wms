@@ -37,12 +37,20 @@ class JobsController extends Controller
 
     public function jobSearch()
     {
+        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",[
+            'term'              =>  "",
+            'customer_id'       =>  0,
+            'supplier_id'       =>  0,
+            'date_from_value'   =>  0,
+            'date_to_value'     =>  0
+        ]);
         //render the page
         Config::setJsConfig('curPage', "job-search");
         Config::set('curPage', "job-search");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/jobSearch.php', [
             'page_title'    =>  "Search production Jobs",
-            'pht'           =>  ": Production Job Search"
+            'pht'           =>  ": Production Job Search",
+            'form'          =>  $form
         ]);
     }
 
