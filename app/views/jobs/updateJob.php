@@ -23,6 +23,12 @@ $supplier_name = (!empty(Form::value('supplier_name')))? Form::value('supplier_n
 $supplier_contact = (!empty(Form::value('supplier_contact')))? Form::value('supplier_contact'):$supplier['contact'];
 $supplier_email = (!empty(Form::value('supplier_email')))? Form::value('supplier_email'):$supplier['email'];
 $supplier_phone = (!empty(Form::value('supplier_phone')))? Form::value('supplier_phone'):$supplier['phone'];
+$supplier_address = (!empty(Form::value('supplier_address')))? Form::value('supplier_address'):$supplier['address'];
+$supplier_address2 = (!empty(Form::value('supplier_address2')))? Form::value('supplier_address2'):$supplier['address_2'];
+$supplier_suburb = (!empty(Form::value('supplier_suburb')))? Form::value('supplier_suburb'):$supplier['suburb'];
+$supplier_state = (!empty(Form::value('supplier_state')))? Form::value('supplier_state'):$supplier['state'];
+$supplier_postcode = (!empty(Form::value('supplier_postcode')))? Form::value('supplier_postcode'):$supplier['postcode'];
+$supplier_country = (!empty(Form::value('supplier_country')))? Form::value('supplier_country'):$supplier['country'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -270,6 +276,54 @@ $supplier_phone = (!empty(Form::value('supplier_phone')))? Form::value('supplier
                                 <label class="col-md-4">Phone</label>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control supplier" name="supplier_phone" id="supplier_phone" value="<?php echo $supplier_phone;?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Address Line 1</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control supplier" name="supplier_address" id="supplier_address" value="<?php echo $supplier_address;?>" /><br>
+                                    <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
+                                        <input class="form-check-input styled" type="checkbox" id="ignore_supplier_address_error" name="ignore_supplier_address_error" />
+                                        <label for="ignore_supplier_address_error"><span class="inst">No need for a number</span></label>
+                                    </div>
+                                    <?php echo Form::displayError('supplier_address');?>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Address Line 2</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control supplier" name="supplier_address2" id="supplier_address2" value="<?php echo $supplier_address2;?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Suburb/Town</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control supplier" name="supplier_suburb" id="supplier_suburb" value="<?php echo $supplier_suburb;?>" />
+                                    <?php echo Form::displayError('supplier_suburb');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">State</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control supplier" name="supplier_state" id="supplier_state" value="<?php echo $supplier_state;?>" />
+                                    <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                    <?php echo Form::displayError('supplier_state');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Postcode</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control supplier" name="supplier_postcode" id="supplier_postcode" value="<?php echo $supplier_postcode;?>" />
+                                    <?php echo Form::displayError('supplier_postcode');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Country</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control supplier" name="supplier_country" id="supplier_country" value="<?php $supplier_country;?>" />
+                                    <span class="inst">use the 2 letter ISO code</span>
+                                    <?php echo Form::displayError('supplier_country');?>
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
