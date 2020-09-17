@@ -2,9 +2,10 @@
 Bootstrap  responsive culumns are still inside a row div that is on top of the page
 ************/
 if(window.location.hash != ''){
+    var $nav = $("nav.fixed-top");
    $('html, body').animate({
-        scrollTop: $(window.location.hash).offset().top
-    }, 500);
+        scrollTop: $(window.location.hash).offset().top + $nav.height()
+    }, 800);
 }
 /************
 * Navigation Scripting
