@@ -34,7 +34,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <?php foreach($jobs as $job):?>
                                 <tr>
                                     <td data-label="Job Number" class="number">
@@ -115,7 +114,6 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         <?php else:?>
                 <div class="row">
