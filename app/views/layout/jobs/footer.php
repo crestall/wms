@@ -190,6 +190,11 @@
                     init: function(){
 
                     }
+                },
+                'job-search-results':{
+                    init: function(){
+
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);

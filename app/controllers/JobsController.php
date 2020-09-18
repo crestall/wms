@@ -72,13 +72,13 @@ class JobsController extends Controller
             'date_from_value'   =>  $date_from_value,
             'date_to_value'     =>  $date_to_value
         );
-        $jobs = $this->order->getSearchResults($args);
+        $jobs = $this->productionjob->getSearchResults($args);
         $count = count($jobs);
         $s = ($count == 1)? "": "s";
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",$args);
         //render the page
-        Config::setJsConfig('curPage', "order-search-results");
-        Config::set('curPage', "order-search-results");
+        Config::setJsConfig('curPage', "job-search-results");
+        Config::set('curPage', "job-search-results");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/jobSearchResults.php', [
             'page_title'    =>  "Search Results",
             'pht'           =>  ": Job Search Results",
