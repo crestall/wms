@@ -236,9 +236,11 @@ class Productionjob extends Model{
         }
 
         $date_to_value = ($date_to_value == 0)? $date_to_value = time(): $date_to_value;
+        $query .= " AND (pj.created_date < :to)";
+        $array['to'] = $date_to_value;
         if($date_from_value > 0)
         {
-            $query .= " AND (o.date_ordered > :from)";
+            $query .= " AND (pj.created_date > :from)";
             $array['from'] = $date_from_value;
         }
         if($customer_id > 0)
