@@ -241,8 +241,8 @@ class Productionjob extends Model{
             $query .= " AND (pj.supplier_id = :supplier_id)";
             $array['supplier_id'] = $suppler_id;
         }
-        print_r($array);
-        die($query);
+        //print_r($array);
+        //die($query);
         return $orders = $db->queryData($query, $array);
     }
 }
