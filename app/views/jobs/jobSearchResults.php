@@ -17,7 +17,7 @@
             <div class="col">
                 <?php if($count > 0):?>
                     <div class="feedbackbox">
-                        <h2>Found <?php echo $count;?> jobs<?php echo $s;?></h2>
+                        <h2>Found <?php echo $count;?> job<?php echo $s;?></h2>
                         <p>They are listed below</p>
                     </div>
                 <?php else:?>
