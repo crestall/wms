@@ -190,10 +190,7 @@
                     init: function(){
                         datePicker.betweenDates();
                         $('form#job_order_search').submit(function(e){
-                            if($(this).valid())
-                            {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Searching For Jobs...</h2></div>' });
-                            }
+                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Searching For Jobs...</h2></div>' });
                         });
                     }
                 },

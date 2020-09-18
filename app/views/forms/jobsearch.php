@@ -13,7 +13,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
         <div class="form-group row">
             <label class="col-md-2 col-sm-4">Search Term</label>
             <div class="col-md-6 col-sm-8">
-                <input type="text" class="form-control required" name="term" id="term" value="<?php echo $term;?>" />
+                <input type="text" class="form-control" name="term" id="term" value="<?php echo $term;?>" />
                 <span class="inst">Leave blank to get all orders based on filters below</span>
                 <?php echo Form::displayError('term');?>
             </div>
