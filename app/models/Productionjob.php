@@ -221,12 +221,12 @@ class Productionjob extends Model{
                         pc.name LIKE :term6 OR
                         pc.contact LIKE :term7 OR
                         pc.email LIKE :term8 OR
-                        pc.phone LIKE :term9
-                        pc.address LIKE :term10
-                        pc.address_2 LIKE :term11
-                        pc.suburb LIKE :term12
-                        pc.state LIKE :term13
-                        pc.postcode LIKE :term14
+                        pc.phone LIKE :term9 OR
+                        pc.address LIKE :term10 OR
+                        pc.address_2 LIKE :term11 OR
+                        pc.suburb LIKE :term12 OR
+                        pc.state LIKE :term13 OR
+                        pc.postcode LIKE :term14 OR
                         pc.country LIKE :term15
                         )";
             for($i = 1; $i <= 15; ++$i)
