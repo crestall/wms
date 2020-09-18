@@ -5,7 +5,7 @@
         <div class="row">
             <label class="col">&nbsp;</label>
             <div class="col m-3 offset-6">
-                <a href="/orders/order-search" class="btn btn-primary">Reset Form</a>
+                <a href="/jobs/job-search" class="btn btn-primary">Reset Form</a>
             </div>
         </div>
         <div class="row">
