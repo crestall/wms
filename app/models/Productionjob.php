@@ -228,7 +228,7 @@ class Productionjob extends Model{
                         pc.state LIKE :term13 OR
                         pc.postcode LIKE :term14 OR
                         pc.country LIKE :term15
-                        )";
+                        ) AND";
             for($i = 1; $i <= 15; ++$i)
             {
                 $array['term'.$i] = $term;
@@ -236,7 +236,7 @@ class Productionjob extends Model{
         }
 
         $date_to_value = ($date_to_value == 0)? $date_to_value = time(): $date_to_value;
-        $query .= " AND (pj.created_date < :to)";
+        $query .= "(pj.created_date < :to)";
         $array['to'] = $date_to_value;
         if($date_from_value > 0)
         {
