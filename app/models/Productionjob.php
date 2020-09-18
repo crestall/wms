@@ -224,7 +224,7 @@ class Productionjob extends Model{
                         pc.phone LIKE :term9)";
             for($i = 1; $i <= 9; ++$i)
             {
-                $arra['term'.$i] = $term;
+                $array['term'.$i] = $term;
             }
         }
 
