@@ -227,9 +227,19 @@ class Productionjob extends Model{
                         pc.suburb LIKE :term12 OR
                         pc.state LIKE :term13 OR
                         pc.postcode LIKE :term14 OR
-                        pc.country LIKE :term15
+                        pc.country LIKE :term15 OR
+                        ps.name LIKE :term16 OR
+                        ps.contact LIKE :term17 OR
+                        ps.email LIKE :term18 OR
+                        ps.phone LIKE :term19 OR
+                        ps.address LIKE :term20 OR
+                        ps.address_2 LIKE :term21 OR
+                        ps.suburb LIKE :term22 OR
+                        ps.state LIKE :term23 OR
+                        ps.postcode LIKE :term24 OR
+                        ps.country LIKE :term25
                         ) AND";
-            for($i = 1; $i <= 15; ++$i)
+            for($i = 1; $i <= 25; ++$i)
             {
                 $array['term'.$i] = "%".$term."%";
             }
