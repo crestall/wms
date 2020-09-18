@@ -231,7 +231,7 @@ class Productionjob extends Model{
                         ) AND";
             for($i = 1; $i <= 15; ++$i)
             {
-                $array['term'.$i] = $term;
+                $array['term'.$i] = "%".$term."%";
             }
         }
 
