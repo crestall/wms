@@ -18,7 +18,7 @@
                 <?php if($count > 0):?>
                     <div class="feedbackbox">
                         <h2>Found <?php echo $count;?> job<?php echo $s;?></h2>
-                        <p>They are listed below</p>
+                        <p><?php if($count == 1) echo "It is"; else echo "They are"?> listed below</p>
                     </div>
                 <?php else:?>
                     <div class="errorbox">
