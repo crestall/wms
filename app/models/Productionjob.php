@@ -268,6 +268,11 @@ class Productionjob extends Model{
             $query .= " AND (pj.salesrep_id = :salesrep_id)";
             $array['salesrep_id'] = $salesrep_id;
         }
+        if($status_id > 0)
+        {
+            $query .= " AND (pj.status_id = :status_id)";
+            $array['status_id'] = $status_id;
+        }
         //print_r($array);
         //die($query);
         return $jobs = $db->queryData($query, $array);

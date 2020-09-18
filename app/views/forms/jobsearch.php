@@ -38,6 +38,12 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
             </div>
         </div>
         <div class="row form-group">
+            <label class="col-md-3">Filter By Status</label>
+            <div class="col-md-4">
+                <select id="status_id" name="status_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($status_id);?></select>
+            </div>
+        </div>
+        <div class="row form-group">
             <label class="col-md-3">Filter By Date Entered</label>
             <div class="col-md-1">
                 <label>From</label>

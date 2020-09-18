@@ -64,6 +64,7 @@ class JobsController extends Controller
         $customer_id = $this->request->query['customer_id'];
         $supplier_id = $this->request->query['supplier_id'];
         $salesrep_id = $this->request->query['salesrep_id'];
+        $status_id = $this->request->query['status_id'];
         $date_from_value = $this->request->query['date_from_value'];
         $date_to_value = $this->request->query['date_to_value'];
         //echo "<pre>",print_r($this->request),"</pre>"; die();
@@ -72,6 +73,7 @@ class JobsController extends Controller
             'customer_id'       =>  $customer_id,
             'supplier_id'       =>  $supplier_id,
             'salesrep_id'       =>  $salesrep_id,
+            'status_id'         =>  $status_id
             'date_from_value'   =>  $date_from_value,
             'date_to_value'     =>  $date_to_value
         );
