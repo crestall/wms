@@ -11,8 +11,8 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
 <div class="col-12">
     <form id="job_order_search" method="get" action="/jobs/job-search-results">
         <div class="form-group row">
-            <label class="col-md-2 col-sm-3">Search Term</label>
-            <div class="col-md-6 col-sm-4">
+            <label class="col-md-2 col-sm-4">Search Term</label>
+            <div class="col-md-6 col-sm-8">
                 <input type="text" class="form-control required" name="term" id="term" value="<?php echo $term;?>" />
                 <span class="inst">Leave blank to get all orders based on filters below</span>
                 <?php echo Form::displayError('term');?>
