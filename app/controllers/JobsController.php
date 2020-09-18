@@ -71,7 +71,7 @@ class JobsController extends Controller
             'term'              =>  $this->request->query['term'],
             'customer_id'       =>  $customer_id,
             'supplier_id'       =>  $supplier_id,
-            'salerep_id'        =>  $salesrep_id
+            'salerep_id'        =>  $salesrep_id,
             'date_from_value'   =>  $date_from_value,
             'date_to_value'     =>  $date_to_value
         );
