@@ -213,16 +213,19 @@ class Productionjob extends Model{
         $array = array();
         if(!empty($term))
         {
-            $query .= "(pj.designer LIKE :term OR
-                        pj.notes LIKE :term OR
-                        pj.job_id LIKE :term OR
-                        pj.previous_job_id LIKE :term OR
-                        pj.description LIKE :term OR
-                        pc.name LIKE :term OR
-                        pc.contact LIKE :term OR
-                        pc.email LIKE :term OR
-                        pc.phone LIKE :term)";
-            $array['term'] = $term;
+            $query .= "(pj.designer LIKE :term1 OR
+                        pj.notes LIKE :term2 OR
+                        pj.job_id LIKE :term3 OR
+                        pj.previous_job_id LIKE :term4 OR
+                        pj.description LIKE :term5 OR
+                        pc.name LIKE :term6 OR
+                        pc.contact LIKE :term7 OR
+                        pc.email LIKE :term8 OR
+                        pc.phone LIKE :term9)";
+            for($i = 1; $i <= 9; ++$i)
+            {
+                $arra['term'.$i] = $term;
+            }
         }
 
         $date_to_value = ($date_to_value == 0)? $date_to_value = time(): $date_to_value;
@@ -241,8 +244,8 @@ class Productionjob extends Model{
             $query .= " AND (pj.supplier_id = :supplier_id)";
             $array['supplier_id'] = $suppler_id;
         }
-        //print_r($array);
-        //die($query);
+        print_r($array);
+        die($query);
         return $orders = $db->queryData($query, $array);
     }
 }
