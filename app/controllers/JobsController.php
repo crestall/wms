@@ -41,6 +41,7 @@ class JobsController extends Controller
             'term'              =>  "",
             'customer_id'       =>  0,
             'supplier_id'       =>  0,
+            'salesrep_id'       =>  0,
             'date_from_value'   =>  0,
             'date_to_value'     =>  0
         ]);
@@ -62,6 +63,7 @@ class JobsController extends Controller
         }
         $customer_id = $this->request->query['customer_id'];
         $supplier_id = $this->request->query['supplier_id'];
+        $salesrep_id = $this->request->query['salesrep_id'];
         $date_from_value = $this->request->query['date_from_value'];
         $date_to_value = $this->request->query['date_to_value'];
         //echo "<pre>",print_r($this->request),"</pre>"; die();
@@ -69,6 +71,7 @@ class JobsController extends Controller
             'term'              =>  $this->request->query['term'],
             'customer_id'       =>  $customer_id,
             'supplier_id'       =>  $supplier_id,
+            'salerep_id'        =>  $salesrep_id
             'date_from_value'   =>  $date_from_value,
             'date_to_value'     =>  $date_to_value
         );
