@@ -244,5 +244,6 @@ class Productionjob extends Model{
         print_r($array);
         die($query);
         return $orders = $db->queryData($query, $array);
+    }
 }
 ?>
