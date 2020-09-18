@@ -188,12 +188,12 @@
                 },
                 'job-search':{
                     init: function(){
-
+                        datePicker.bewteenDates();
                     }
                 },
                 'job-search-results':{
                     init: function(){
-
+                        datePicker.bewteenDates();
                     }
                 }
             }
