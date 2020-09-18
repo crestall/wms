@@ -261,7 +261,12 @@ class Productionjob extends Model{
         if($supplier_id > 0)
         {
             $query .= " AND (pj.supplier_id = :supplier_id)";
-            $array['supplier_id'] = $suppler_id;
+            $array['supplier_id'] = $supplier_id;
+        }
+        if($salesrep_id > 0)
+        {
+            $query .= " AND (pj.salesrep_id = :salesrep_id)";
+            $array['salesrep_id'] = $salesrep_id;
         }
         //print_r($array);
         //die($query);
