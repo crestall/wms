@@ -73,7 +73,7 @@ class JobsController extends Controller
             'customer_id'       =>  $customer_id,
             'supplier_id'       =>  $supplier_id,
             'salesrep_id'       =>  $salesrep_id,
-            'status_id'         =>  $status_id
+            'status_id'         =>  $status_id,
             'date_from_value'   =>  $date_from_value,
             'date_to_value'     =>  $date_to_value
         );
