@@ -19,25 +19,21 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-2">Filter By Customer</label>
-            <div class="col-md-4">
+            <label class="col-md-2 col-lg-1">Filter By Customer</label>
+            <div class="col-md-4 col-lg-2">
                 <select id="customer_id" name="customer_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->productioncustomer->getSelectCustomers($customer_id);?></select>
                 <?php echo Form::displayError('client_id');?>
             </div>
-            <label class="col-md-2">Filter By Supplier</label>
-            <div class="col-md-4">
+            <label class="col-md-2 col-lg-1">Filter By Supplier</label>
+            <div class="col-md-4 col-lg-2">
                 <select id="supplier_id" name="supplier_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->productionsupplier->getSelectSuppliers($supplier_id);?></select>
             </div>
-        </div>
-        <div class="row form-group">
-            <label class="col-md-3">Filter By Sales Rep</label>
-            <div class="col-md-4">
+            <label class="col-md-2 col-lg-1">Filter By Sales Rep</label>
+            <div class="col-md-4 col-lg-2">
                 <select id="salesrep_id" name="salesrep_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->salesrep->getSelectSalesReps($salesrep_id);?></select>
             </div>
-        </div>
-        <div class="row form-group">
-            <label class="col-md-3">Filter By Status</label>
-            <div class="col-md-4">
+            <label class="col-md-2 col-lg-1">Filter By Status</label>
+            <div class="col-md-4 col-lg-2">
                 <select id="status_id" name="status_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($status_id, 1, true);?></select>
             </div>
         </div>
