@@ -6,8 +6,11 @@
             //the actions for each page
             var actions = {
                 common: {
-                    init: function(){
-
+                    jobsTable: function(){
+                        dataTable.init($('table#production_jobs_table'), {
+                            /* No ordering applied by DataTables during initialisation */
+                            "order": []
+                        });
                     },
                     doDates: function(){
                         $( "#date_entered" ).datepicker({
@@ -156,10 +159,7 @@
                 },
                 'view-jobs':{
                     init: function(){
-                        dataTable.init($('table#production_jobs_table'), {
-                            /* No ordering applied by DataTables during initialisation */
-                            "order": []
-                        });
+                        actions.common.jobsTable();
                     }
                 },
                 'update-job':{
@@ -197,6 +197,7 @@
                 'job-search-results':{
                     init: function(){
                         actions['job-search'].init();
+                        actions.common.jobsTable(); 
                     }
                 }
             }
