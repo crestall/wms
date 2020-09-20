@@ -58,7 +58,7 @@ class JobsController extends Controller
 
     public function jobSearchResults()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
         if(!$this->Security->CsrfToken())
         {
             return $this->error(400);
