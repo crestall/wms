@@ -58,6 +58,7 @@ class JobsController extends Controller
 
     public function jobSearchResults()
     {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
         if(!$this->Security->CsrfToken())
         {
             return $this->error(400);
@@ -68,7 +69,6 @@ class JobsController extends Controller
         $status_id = $this->request->query['status_id'];
         $date_from_value = $this->request->query['date_from_value'];
         $date_to_value = $this->request->query['date_to_value'];
-        echo "<pre>",print_r($this->request),"</pre>"; die();
         $args = array(
             'term'              =>  $this->request->query['term'],
             'customer_id'       =>  $customer_id,
