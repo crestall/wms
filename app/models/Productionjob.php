@@ -193,7 +193,7 @@ class Productionjob extends Model{
     {
         extract($args);
         $db = Database::openConnection();
-        echo "<pre>CUSTOMER IDS",print_r($customer_ids),"</pre>";die();
+        //echo "<pre>CUSTOMER IDS",print_r($customer_ids),"</pre>";die();
         $query = "
             SELECT
                 pj.*,
