@@ -63,7 +63,7 @@ class JobsController extends Controller
         {
             return $this->error(400);
         }
-        $customer_id = $this->request->query['customer_id'];
+        $customer_ids = $this->request->query['customer_ids'];
         $supplier_id = $this->request->query['supplier_id'];
         $salesrep_id = $this->request->query['salesrep_id'];
         $status_id = $this->request->query['status_id'];
@@ -71,7 +71,7 @@ class JobsController extends Controller
         $date_to_value = $this->request->query['date_to_value'];
         $args = array(
             'term'              =>  $this->request->query['term'],
-            'customer_id'       =>  $customer_id,
+            'customer_ids'       =>  $customer_ids,
             'supplier_id'       =>  $supplier_id,
             'salesrep_id'       =>  $salesrep_id,
             'status_id'         =>  $status_id,
