@@ -253,10 +253,11 @@ class Productionjob extends Model{
             $query .= " AND (pj.created_date > :from)";
             $array['from'] = $date_from_value;
         }
-        if($customer_id > 0)
+        if(count($customer_ids))
         {
-            $query .= " AND (pj.customer_id = :customer_id)";
-            $array['customer_id'] = $customer_id;
+            $c_ids = implode(',',$customer_ids);
+            $query .= " AND (pj.customer_id IN( $c_ids)";
+            //$array['customer_id'] = $customer_id;
         }
         if($supplier_id > 0)
         {
