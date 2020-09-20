@@ -35,6 +35,67 @@ class JobsController extends Controller
         ]);
     }
 
+    public function jobSearch()
+    {
+        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",[
+            'term'              =>  "",
+            'customer_id'       =>  0,
+            'supplier_id'       =>  0,
+            'salesrep_id'       =>  0,
+            'status_id'         =>  0,
+            'date_from_value'   =>  0,
+            'date_to_value'     =>  0
+        ]);
+        //render the page
+        Config::setJsConfig('curPage', "job-search");
+        Config::set('curPage', "job-search");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/jobSearch.php', [
+            'page_title'    =>  "Search production Jobs",
+            'pht'           =>  ": Production Job Search",
+            'form'          =>  $form
+        ]);
+    }
+
+    public function jobSearchResults()
+    {
+        if(!$this->Security->CsrfToken())
+        {
+            return $this->error(400);
+        }
+        $customer_id = $this->request->query['customer_id'];
+        $supplier_id = $this->request->query['supplier_id'];
+        $salesrep_id = $this->request->query['salesrep_id'];
+        $status_id = $this->request->query['status_id'];
+        $date_from_value = $this->request->query['date_from_value'];
+        $date_to_value = $this->request->query['date_to_value'];
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $args = array(
+            'term'              =>  $this->request->query['term'],
+            'customer_id'       =>  $customer_id,
+            'supplier_id'       =>  $supplier_id,
+            'salesrep_id'       =>  $salesrep_id,
+            'status_id'         =>  $status_id,
+            'date_from_value'   =>  $date_from_value,
+            'date_to_value'     =>  $date_to_value
+        );
+        $jobs = $this->productionjob->getSearchResults($args);
+        $count = count($jobs);
+        $s = ($count == 1)? "": "s";
+        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",$args);
+        //render the page
+        Config::setJsConfig('curPage', "job-search-results");
+        Config::set('curPage', "job-search-results");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/jobSearchResults.php', [
+            'page_title'    =>  "Search Results",
+            'pht'           =>  ": Job Search Results",
+            'form'          =>  $form,
+            'count'         =>  $count,
+            's'             =>  $s,
+            'term'          =>  $this->request->query['term'],
+            'jobs'          =>  $jobs
+        ]);
+    }
+
     public function viewJobs()
     {
         $completed = (isset($this->request->params['args']['completed']))? true : false;

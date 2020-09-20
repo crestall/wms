@@ -358,8 +358,8 @@ var datePicker = {
             to_opts['maxDate'] = 0;
         }
         $( "#date_to" ).datepicker(to_opts);
-        $('i.fa-calendar-alt').css('cursor', 'pointer').click(function(e){
-            $(this).closest('div.input-group-append').prev('input.form-control').focus();
+        $('span.input-group-text').css('cursor', 'pointer').click(function(e) {
+            $(this).closest('div.input-group').find('input.form-control').focus();
         });
     },
     fromDate: function(){

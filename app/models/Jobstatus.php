@@ -2,7 +2,7 @@
 class Jobstatus extends Model{
     public $table = "job_status";
 
-    public function getSelectJobStatus($selected = false, $active = 1)
+    public function getSelectJobStatus($selected = false, $active = 1, $selectAll = false)
     {
         $db = Database::openConnection();
         $check = "";
@@ -17,7 +17,7 @@ class Jobstatus extends Model{
             {
                 $check = ($value == $selected)? "selected='selected'" : "";
             }
-            elseif(!(empty($s['default'])))
+            elseif(!(empty($s['default'])) && !$selectAll)
             {
                 $check = "selected='selected'";
             }

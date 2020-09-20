@@ -188,5 +188,94 @@ class Productionjob extends Model{
         $db->updateDatabaseField($this->table, 'supplier_id', 0, $job_id);
         return true;
     }
+
+    public function getSearchResults($args)
+    {
+        extract($args);
+        $db = Database::openConnection();
+
+        $query = "
+            SELECT
+                pj.*,
+                pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
+                sr.id as salesrep_id, sr.name AS salesrep_name,
+                ps.id as supplier_id, ps.name AS supplier_name, ps.contact AS supplier_contact, ps.email AS supplier_email, ps.phone AS supplier_phone,
+                js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour
+            FROM
+                `production_jobs` pj LEFT JOIN
+                `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
+                `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
+                `production_suppliers` ps ON pj.supplier_id = ps.id LEFT JOIN
+                job_status js ON pj.status_id = js.id
+            WHERE
+
+        ";
+        $array = array();
+        if(!empty($term))
+        {
+            $query .= "(pj.designer LIKE :term1 OR
+                        pj.notes LIKE :term2 OR
+                        pj.job_id LIKE :term3 OR
+                        pj.previous_job_id LIKE :term4 OR
+                        pj.description LIKE :term5 OR
+                        pc.name LIKE :term6 OR
+                        pc.contact LIKE :term7 OR
+                        pc.email LIKE :term8 OR
+                        pc.phone LIKE :term9 OR
+                        pc.address LIKE :term10 OR
+                        pc.address_2 LIKE :term11 OR
+                        pc.suburb LIKE :term12 OR
+                        pc.state LIKE :term13 OR
+                        pc.postcode LIKE :term14 OR
+                        pc.country LIKE :term15 OR
+                        ps.name LIKE :term16 OR
+                        ps.contact LIKE :term17 OR
+                        ps.email LIKE :term18 OR
+                        ps.phone LIKE :term19 OR
+                        ps.address LIKE :term20 OR
+                        ps.address_2 LIKE :term21 OR
+                        ps.suburb LIKE :term22 OR
+                        ps.state LIKE :term23 OR
+                        ps.postcode LIKE :term24 OR
+                        ps.country LIKE :term25
+                        ) AND";
+            for($i = 1; $i <= 25; ++$i)
+            {
+                $array['term'.$i] = "%".$term."%";
+            }
+        }
+
+        $date_to_value = ($date_to_value == 0)? $date_to_value = time(): $date_to_value;
+        $query .= "(pj.created_date < :to)";
+        $array['to'] = $date_to_value;
+        if($date_from_value > 0)
+        {
+            $query .= " AND (pj.created_date > :from)";
+            $array['from'] = $date_from_value;
+        }
+        if($customer_id > 0)
+        {
+            $query .= " AND (pj.customer_id = :customer_id)";
+            $array['customer_id'] = $customer_id;
+        }
+        if($supplier_id > 0)
+        {
+            $query .= " AND (pj.supplier_id = :supplier_id)";
+            $array['supplier_id'] = $supplier_id;
+        }
+        if($salesrep_id > 0)
+        {
+            $query .= " AND (pj.salesrep_id = :salesrep_id)";
+            $array['salesrep_id'] = $salesrep_id;
+        }
+        if($status_id > 0)
+        {
+            $query .= " AND (pj.status_id = :status_id)";
+            $array['status_id'] = $status_id;
+        }
+        //print_r($array);
+        //die($query);
+        return $jobs = $db->queryData($query, $array);
+    }
 }
 ?>

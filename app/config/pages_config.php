@@ -83,6 +83,14 @@ $prod = array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         ),
+        'job-search' => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
+        ),
+        'job-search-results'    => array(
+            'display'   => false,
+            'icon'      => ''
+        )
     ),
     'customers' => array(
         'customers-index'   => true,

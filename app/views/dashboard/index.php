@@ -97,10 +97,70 @@ $c = 1;
             </div>
             <div id="products_chart" class="pb-3"></div>
         <?php elseif($user_role == "production" || $user_role == "production_admin"):?>
-            <div class="row">
-                <div class="col">
-                    <h2>The Production Home Will Appear Here</h2>
+            <div class="col-md-12 text-center">
+                <h2>Quick Links</h2>
+            </div>
+            <div class="card-deck homepagedeck">
+                <?php if($user_role == "production_admin"):?>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>Add A New Job</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/jobs/add-job"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span>&nbsp;<span style="font-size:larger">Add!</span></a>
+                        </div>
+                    </div>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>Add A New Customer</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/customers/add-customer"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span>&nbsp;<span style="font-size:larger">Add!</span></a>
+                        </div>
+                    </div>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>Add A New Supplier</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/suppliers/add-supplier"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-people-arrows"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span>&nbsp;<span style="font-size:larger">Add!</span></a>
+                        </div>
+                    </div>
+                <?php endif;?>
+                <div class="card homepagecard">
+                    <div class="card-header">
+                        <h4>View Jobs</h4>
+                    </div>
+                    <div class="card-body text-center">
+                    	<a class="btn btn-lg btn-outline-fsg" href="/jobs/view-jobs"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                    </div>
                 </div>
+                <?php if($user_role == "production"):?>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>View Customers</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/customers/view-customers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-tie"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        </div>
+                    </div>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>View Suppliers</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/suppliers/view-suppliers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        </div>
+                    </div>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>View Sales Reps</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/suppliers/view-suppliers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-chart"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        </div>
+                    </div>
+                <?php endif;?>
             </div>
         <?php else:?>
             <div class="row">
