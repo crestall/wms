@@ -63,7 +63,7 @@ class JobsController extends Controller
         {
             return $this->error(400);
         }
-        $customer_ids = $this->request->query['customer_ids'];
+        $customer_ids = isset($this->request->query['customer_ids']) $this->request->query['customer_ids']: array();
         $supplier_id = $this->request->query['supplier_id'];
         $salesrep_id = $this->request->query['salesrep_id'];
         $status_id = $this->request->query['status_id'];
