@@ -21,7 +21,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
         <div class="form-group row">
             <label class="col-md-2 col-xl-1 mb-3">Filter By Customer</label>
             <div class="col-md-4 col-xl-2 mb-3">
-                <select id="customer_id" name="customer_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-action-box="true" multiple title="Filter by any of the following..."><option value="0">--Select One--</option><?php echo $this->controller->productioncustomer->getSelectCustomers($customer_id);?></select>
+                <select id="customer_id" name="customer_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productioncustomer->getSelectCustomers($customer_id);?></select>
                 <?php echo Form::displayError('client_id');?>
             </div>
             <label class="col-md-2 col-xl-1 mb-3">Filter By Supplier</label>
