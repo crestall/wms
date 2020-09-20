@@ -88,7 +88,7 @@
                     </div>
                 </td>
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
-                <td data-label="Due Date"><?php echo date("d/m/Y", $job['due_date']);?></td>
+                <td data-label="Due Date"><?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?></td>
             </tr>
         <?php endforeach;?>
     </tbody>
