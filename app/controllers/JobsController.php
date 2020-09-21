@@ -40,7 +40,7 @@ class JobsController extends Controller
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",[
             'term'              =>  "",
             'customer_ids'       =>  array(),
-            'supplier_id'       =>  0,
+            'supplier_ids'       =>  array(),
             'salesrep_id'       =>  0,
             'status_id'         =>  0,
             'date_from_value'   =>  0,
@@ -64,7 +64,7 @@ class JobsController extends Controller
             return $this->error(400);
         }
         $customer_ids = isset($this->request->query['customer_ids'])? $this->request->query['customer_ids']: array();
-        $supplier_id = $this->request->query['supplier_id'];
+        $supplier_ids = isset($this->request->query['supplier_ids'])? $this->request->query['supplier_ids']: array();
         $salesrep_id = $this->request->query['salesrep_id'];
         $status_id = $this->request->query['status_id'];
         $date_from_value = $this->request->query['date_from_value'];
@@ -72,7 +72,7 @@ class JobsController extends Controller
         $args = array(
             'term'              =>  $this->request->query['term'],
             'customer_ids'       =>  $customer_ids,
-            'supplier_id'       =>  $supplier_id,
+            'supplier_ids'       =>  $supplier_ids,
             'salesrep_id'       =>  $salesrep_id,
             'status_id'         =>  $status_id,
             'date_from_value'   =>  $date_from_value,
