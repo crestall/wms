@@ -37,11 +37,22 @@ class ProductionSettingsController extends Controller
     public function customersCsvImport()
     {
         //render the page
-        Config::setJsConfig('curPage', "job-csv-import");
-        Config::set('curPage', "job-csv-import");
+        Config::setJsConfig('curPage', "customers-csv-import");
+        Config::set('curPage', "customers-csv-import");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/customersImport.php', [
             'page_title'    =>  "Import Production Customers",
             'pht'           =>  ": Import Production Customers"
+        ]);
+    }
+
+    public function suppliersCsvImport()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "suppliers-csv-import");
+        Config::set('curPage', "suppliers-csv-import");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/suppliersImport.php', [
+            'page_title'    =>  "Import Production Suppliers",
+            'pht'           =>  ": Import Production Suppliers"
         ]);
     }
 

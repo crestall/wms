@@ -88,6 +88,16 @@
                             }
                         });
                     }
+                },
+                'supplier-csv-import':{
+                    init: function(){
+                        $('form#bulk_supplier_add').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Uploading and Processing Suppliers...</h2></div>' });
+                            }
+                        });
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);
