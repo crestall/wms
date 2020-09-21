@@ -38,10 +38,8 @@
                 </div>
             </div>
             <div class="row mt-4" id="table_holder" style="display:none">
-                <div class="row">
-                    <div class="col-12">
-                        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/production_jobs_table.php");?>
-                    </div>
+                <div class="col-12">
+                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/production_jobs_table.php");?>
                 </div>
             </div>
         <?php endif;?>
