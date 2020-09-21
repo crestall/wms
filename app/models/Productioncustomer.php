@@ -51,7 +51,7 @@ class Productioncustomer extends Model{
         {
             $label = ucwords($r['name']);
             $value = $r['id'];
-            $ret_string .= "<option value='$value'"
+            $ret_string .= "<option value='$value'";
             if(in_array($value, $selected))
             {
                 $ret_string .= " selected";
