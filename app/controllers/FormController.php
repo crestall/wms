@@ -200,7 +200,7 @@ class FormController extends Controller {
             [10] => Mobile
             [11] => Email
             */
-            $imported_customer_count = 0;
+            $added_customer_count = $updated_customer_count = 0;
             $skip_first = isset($header_row);
             $line = 1;
             $data_error_string = "<ul>";
@@ -229,86 +229,30 @@ class FormController extends Controller {
                 );
                 $customer_details['country'] = (!empty($row[8]))? trim($row[8]) : "AU";
 
-                echo "<pre>",print_r($customer_details),"</pre>";
-
-
-
+                //echo "<pre>",print_r($customer_details),"</pre>";
                 if(!empty($customer_id))
                 {
-                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                    echo "<p>Doing $name with id $customer_id</p>";
-                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    $customer_details['customer_id'] = $customer_id;
+                    //$this->productioncustomer->editCustomer($customer_details);
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    //echo "<p>Updated {$name}'s details</p>";
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    ++$updated_customer_count;
                 }
                 else
                 {
-                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                    echo "<p>Will add $name/p>";
-                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    //$customer_id = $this->productioncustomer->addCustomer($customer_details);
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    //echo "<p>Added $name/p>";
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    ++$added_customer_count;
                 }
-
-
-                /*
-                $status_id = $this->jobstatus->getStatusId(trim($row[11]));
-                if(!$status_id)
-                {
-                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                    echo "<p>Need to add {$row[11]} as a status</p>";
-                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                }
-                $rep_id = $this->salesrep->geRepIdByName(trim($row[6]));
-                if(empty($rep_id))
-                {
-                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                    echo "<p>Need to add {$row[6]} as a sales rep</p>";
-                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                }
-                $created_date = str_replace('/', '-', trim($row[4]));
-                $due_date = str_replace('/', '-', trim($row[5]));
-                $etd = str_replace('/', '-', trim($row[9]));
-                $job = array(
-                    'job_id'                => trim($row[0]),
-                    'previous_job_id'       => trim($row[1]),
-                    'description'           => trim($row[3]),
-                    'date_entered_value'    => strtotime($created_date),
-                    'date_due_value'        => strtotime($due_date),
-                    'designer'              => trim($row[7]),
-                    'notes'                 => trim($row[10]),
-                    'date_ed_value'         => strtotime($etd),
-                    'status_id'             => $status_id,
-                    'salesrep_id'           => $rep_id,
-                    'date'                  => time()
-                );
-                $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[2]));
-                if(empty($customer_id))
-                {
-                    $customer_data = array(
-                        'name'  => trim($row[2])
-                    );
-                    $customer_id = $this->productioncustomer->addCustomer($customer_data);
-                }
-                $job['customer_id'] = $customer_id;
-                if(!empty(trim($row[8])))
-                {
-                    $supplier_id = $this->productionsupplier->getSupplierIdByName(trim($row[8]));
-                    if(empty($supplier_id))
-                    {
-                        $supplier_data = array(
-                            'name'  => trim($row[8])
-                        );
-                        $supplier_id = $this->productionsupplier->addSupplier($supplier_data);
-                    }
-                    $job['supplier_id'] = $supplier_id;
-                }
-                $jobs[] = $job;
-                ++$line;
-                */
             }
-            //echo "<pre>",print_r($jobs),"</pre>";
-            //foreach($jobs as $j)
-            //{
-                //$id= $this->productionjob->addJob($j);
-                //echo "<p>Job with id $id has been added</p>";
-            //}
+
+            echo "<p>----------------------------------------------------------------------------------------------------</p>";
+            echo "<p>Added $added_customer_count</p>";
+            echo "<p>Updated $updated_customer_count</p>";
+            echo "<p>----------------------------------------------------------------------------------------------------</p>";
         }
     }
 
