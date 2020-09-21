@@ -68,8 +68,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
         <input type="hidden" id="date_to_value" name="date_to_value" value="<?php echo $date_to_value;?>" />
         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
         <div class="form-group row">
-            <label class="col-md-3">&nbsp;</label>
-            <div class="col-md-4">
+            <div class="col-md-4 offset-md-8">
                 <button type="submit" class="btn btn-outline-fsg">Submit Search</button>
             </div>
         </div>
