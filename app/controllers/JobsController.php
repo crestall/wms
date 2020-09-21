@@ -41,7 +41,7 @@ class JobsController extends Controller
             'term'              =>  "",
             'customer_ids'       =>  array(),
             'supplier_ids'       =>  array(),
-            'salesrep_id'       =>  0,
+            'salesrep_ids'       =>  array(),
             'status_id'         =>  0,
             'date_from_value'   =>  0,
             'date_to_value'     =>  0
@@ -65,7 +65,7 @@ class JobsController extends Controller
         }
         $customer_ids = isset($this->request->query['customer_ids'])? $this->request->query['customer_ids']: array();
         $supplier_ids = isset($this->request->query['supplier_ids'])? $this->request->query['supplier_ids']: array();
-        $salesrep_id = $this->request->query['salesrep_id'];
+        $salesrep_ids = isset($this->request->query['salesrepids_ids'])? $this->request->query['salesrepids_ids']: array();
         $status_id = $this->request->query['status_id'];
         $date_from_value = $this->request->query['date_from_value'];
         $date_to_value = $this->request->query['date_to_value'];
@@ -73,7 +73,7 @@ class JobsController extends Controller
             'term'              =>  $this->request->query['term'],
             'customer_ids'       =>  $customer_ids,
             'supplier_ids'       =>  $supplier_ids,
-            'salesrep_id'       =>  $salesrep_id,
+            'salesrep_ids'       =>  $salesrep_ids,
             'status_id'         =>  $status_id,
             'date_from_value'   =>  $date_from_value,
             'date_to_value'     =>  $date_to_value
