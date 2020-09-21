@@ -2,7 +2,7 @@
 $term       = (empty(Form::value('term')))? $term : Form::value('term');
 $customer_ids  = (empty(Form::value('customer_ids')))? $customer_ids : Form::value('customer_ids');
 $supplier_ids  = (empty(Form::value('supplier_ids')))? $supplier_ids : Form::value('supplier_ids');
-$salesrep_id  = (empty(Form::value('salesrep_id')))? $salesrep_id : Form::value('salesrep_id');
+$salesrep_ids  = (empty(Form::value('salesrep_ids')))? $salesrep_ids : Form::value('salesrep_ids');
 $date_from_value  = (empty(Form::value('date_from_value')))? $date_from_value : Form::value('date_from_value');
 $date_from = ($date_from_value > 0)? date("d/m/Y", $date_from_value) : "";
 $date_to_value  = (empty(Form::value('date_to_value')))? $date_to_value : Form::value('date_to_value');
@@ -30,7 +30,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
             </div>
             <label class="col-md-2 col-xl-1 mb-3">Filter By Sales Rep</label>
             <div class="col-md-4 col-xl-2 mb-3">
-                <select id="salesrep_id" name="salesrep_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->salesrep->getSelectSalesReps($salesrep_id);?></select>
+                <select id="salesrep_id" name="salesrep_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->salesrep->getMultiSelectSalesReps($salesrep_ids);?></select>
             </div>
             <label class="col-md-2 col-xl-1 mb-3">Filter By Status</label>
             <div class="col-md-4 col-xl-2 mb-3">
