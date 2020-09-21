@@ -187,26 +187,25 @@ class FormController extends Controller {
         {
             echo "<pre>",print_r($csv_array),"</pre>";die();
             /*
-            [0] => ?Job ID
-            [1] => Previous
-            [2] => Customer
-            [3] => Description
-            [4] => Entered
-            [5] => Due date
-            [6] => Sales Rep
-            [7] => Designer
-            [8] => Finisher / Supplier
-            [9] => E.T.D.
-            [10] => Notes & Comments
-            [11] => Status
-            [12] => Date
+            [0] => Name
+            [1] => Code
+            [2] => Address 1
+            [3] => Address 2
+            [4] => Main Address 3
+            [5] => Suburb
+            [6] => State
+            [7] => Postcode
+            [8] => Country
+            [9] => Telephone
+            [10] => Mobile
+            [11] => Email
             */
-            $imported_job_count = 0;
+            $imported_customer_count = 0;
             $skip_first = isset($header_row);
             $line = 1;
             $data_error_string = "<ul>";
-            $import_jobs = true;
-            $jobs = array();
+            $import_customers = true;
+            $customers = array();
             foreach($csv_array as $row)
             {
                 if($skip_first)
@@ -215,6 +214,15 @@ class FormController extends Controller {
                     ++$line;
                     continue;
                 }
+                $name = trim($row[0]);
+                $customer_id = $this->productioncustomer->geCustomerIdByName($name);
+
+                echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                echo "<p>Doing $name with id $customer_id</p>";
+                echo "<p>----------------------------------------------------------------------------------------------------</p>";
+
+
+                /*
                 $status_id = $this->jobstatus->getStatusId(trim($row[11]));
                 if(!$status_id)
                 {
@@ -268,13 +276,14 @@ class FormController extends Controller {
                 }
                 $jobs[] = $job;
                 ++$line;
+                */
             }
             //echo "<pre>",print_r($jobs),"</pre>";
-            foreach($jobs as $j)
-            {
-                $id= $this->productionjob->addJob($j);
-                echo "<p>Job with id $id has been added</p>";
-            }
+            //foreach($jobs as $j)
+            //{
+                //$id= $this->productionjob->addJob($j);
+                //echo "<p>Job with id $id has been added</p>";
+            //}
         }
     }
 
