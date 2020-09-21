@@ -73,6 +73,7 @@ class FormController extends Controller {
             'procBookPickup',
             'procBreakPacks',
             'procBulkOrderAdd',
+            'procBulkProductionCustomerAdd',
             'procBulkProductionJobAdd',
             'procClientAdd',
             'procClientDailyReports',
@@ -144,6 +145,137 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procBulkProductionCustomerAdd()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($_FILES['csv_file']["size"] > 0)
+        {
+            if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
+            {
+                $tmp_name = $_FILES['csv_file']['tmp_name'];
+                $csv_array = array_map('str_getcsv', file($tmp_name));
+                //echo "<pre>",print_r($csv_array),"</pre>"; //die();
+            }
+            else
+            {
+            	$error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+                Form::setError('csv_file', $error_message);
+            }
+        }
+        else
+        {
+            Form::setError('csv_file', 'please select a file to upload');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            //Session::set('value_array', $_POST);
+            //Session::set('error_array', Form::getErrorArray());
+            echo "<pre>",print_r(Form::getErrorArray()),"</pre>";
+        }
+        else
+        {
+            echo "<pre>",print_r($csv_array),"</pre>";die();
+            /*
+            [0] => ?Job ID
+            [1] => Previous
+            [2] => Customer
+            [3] => Description
+            [4] => Entered
+            [5] => Due date
+            [6] => Sales Rep
+            [7] => Designer
+            [8] => Finisher / Supplier
+            [9] => E.T.D.
+            [10] => Notes & Comments
+            [11] => Status
+            [12] => Date
+            */
+            $imported_job_count = 0;
+            $skip_first = isset($header_row);
+            $line = 1;
+            $data_error_string = "<ul>";
+            $import_jobs = true;
+            $jobs = array();
+            foreach($csv_array as $row)
+            {
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    ++$line;
+                    continue;
+                }
+                $status_id = $this->jobstatus->getStatusId(trim($row[11]));
+                if(!$status_id)
+                {
+                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    echo "<p>Need to add {$row[11]} as a status</p>";
+                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                }
+                $rep_id = $this->salesrep->geRepIdByName(trim($row[6]));
+                if(empty($rep_id))
+                {
+                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    echo "<p>Need to add {$row[6]} as a sales rep</p>";
+                    echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                }
+                $created_date = str_replace('/', '-', trim($row[4]));
+                $due_date = str_replace('/', '-', trim($row[5]));
+                $etd = str_replace('/', '-', trim($row[9]));
+                $job = array(
+                    'job_id'                => trim($row[0]),
+                    'previous_job_id'       => trim($row[1]),
+                    'description'           => trim($row[3]),
+                    'date_entered_value'    => strtotime($created_date),
+                    'date_due_value'        => strtotime($due_date),
+                    'designer'              => trim($row[7]),
+                    'notes'                 => trim($row[10]),
+                    'date_ed_value'         => strtotime($etd),
+                    'status_id'             => $status_id,
+                    'salesrep_id'           => $rep_id,
+                    'date'                  => time()
+                );
+                $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[2]));
+                if(empty($customer_id))
+                {
+                    $customer_data = array(
+                        'name'  => trim($row[2])
+                    );
+                    $customer_id = $this->productioncustomer->addCustomer($customer_data);
+                }
+                $job['customer_id'] = $customer_id;
+                if(!empty(trim($row[8])))
+                {
+                    $supplier_id = $this->productionsupplier->getSupplierIdByName(trim($row[8]));
+                    if(empty($supplier_id))
+                    {
+                        $supplier_data = array(
+                            'name'  => trim($row[8])
+                        );
+                        $supplier_id = $this->productionsupplier->addSupplier($supplier_data);
+                    }
+                    $job['supplier_id'] = $supplier_id;
+                }
+                $jobs[] = $job;
+                ++$line;
+            }
+            //echo "<pre>",print_r($jobs),"</pre>";
+            foreach($jobs as $j)
+            {
+                $id= $this->productionjob->addJob($j);
+                echo "<p>Job with id $id has been added</p>";
+            }
+        }
     }
 
     public function procJobSupplierUpdate()
