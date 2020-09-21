@@ -26,7 +26,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
             </div>
             <label class="col-md-2 col-xl-1 mb-3">Filter By Supplier</label>
             <div class="col-md-4 col-xl-2 mb-3">
-                <select id="supplier_id" name="supplier_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productionsupplier->getMultiSelectSuppliers($supplier_ids);?></select>
+                <select id="supplier_id" name="supplier_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productionsupplier->getMultiSelectSuppliers($supplier_ids);?></select>
             </div>
             <label class="col-md-2 col-xl-1 mb-3">Filter By Sales Rep</label>
             <div class="col-md-4 col-xl-2 mb-3">
