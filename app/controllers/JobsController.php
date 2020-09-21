@@ -39,7 +39,7 @@ class JobsController extends Controller
     {
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",[
             'term'              =>  "",
-            'customer_id'       =>  0,
+            'customer_ids'       =>  array(),
             'supplier_id'       =>  0,
             'salesrep_id'       =>  0,
             'status_id'         =>  0,
