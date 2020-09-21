@@ -3,8 +3,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php echo $form;?>
         <div class="row">
-            <label class="col">&nbsp;</label>
-            <div class="col m-3 offset-6">
+            <div class="col m-3 offset-9">
                 <a href="/jobs/job-search" class="btn btn-primary">Reset Form</a>
             </div>
         </div>
