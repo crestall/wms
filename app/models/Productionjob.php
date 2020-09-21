@@ -256,7 +256,7 @@ class Productionjob extends Model{
         if(count($customer_ids))
         {
             $c_ids = implode(',',$customer_ids);
-            $query .= " AND (pj.customer_id IN( $c_ids)";
+            $query .= " AND (pj.customer_id IN( $c_ids))";
             //$array['customer_id'] = $customer_id;
         }
         if($supplier_id > 0)
@@ -274,8 +274,8 @@ class Productionjob extends Model{
             $query .= " AND (pj.status_id = :status_id)";
             $array['status_id'] = $status_id;
         }
-        print_r($array);
-        die($query);
+        //print_r($array);
+        //die($query);
         return $jobs = $db->queryData($query, $array);
     }
 }
