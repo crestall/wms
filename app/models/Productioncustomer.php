@@ -40,6 +40,27 @@ class Productioncustomer extends Model{
         return $ret_string;
     }
 
+    public function getMultiSelectCustomers($selected = array())
+    {
+        $db = Database::openConnection();
+
+        $ret_string = "";
+        $q = "SELECT id, name FROM {$this->table} ORDER BY name";
+        $reps = $db->queryData($q);
+        foreach($reps as $r)
+        {
+            $label = ucwords($r['name']);
+            $value = $r['id'];
+            $ret_string .= "<option value='$value'";
+            if(in_array($value, $selected))
+            {
+                $ret_string .= " selected";
+            }
+            $ret_string .= ">$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function getAllCustomers()
     {
         $db = Database::openConnection();

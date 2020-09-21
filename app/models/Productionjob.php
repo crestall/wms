@@ -193,7 +193,7 @@ class Productionjob extends Model{
     {
         extract($args);
         $db = Database::openConnection();
-
+        //echo "<pre>CUSTOMER IDS",print_r($customer_ids),"</pre>";die();
         $query = "
             SELECT
                 pj.*,
@@ -253,25 +253,25 @@ class Productionjob extends Model{
             $query .= " AND (pj.created_date > :from)";
             $array['from'] = $date_from_value;
         }
-        if($customer_id > 0)
+        if(count($customer_ids))
         {
-            $query .= " AND (pj.customer_id = :customer_id)";
-            $array['customer_id'] = $customer_id;
+            $c_ids = implode(',',$customer_ids);
+            $query .= " AND (pj.customer_id IN( $c_ids))";
         }
-        if($supplier_id > 0)
+        if(count($supplier_ids))
         {
-            $query .= " AND (pj.supplier_id = :supplier_id)";
-            $array['supplier_id'] = $supplier_id;
+            $s_ids = implode(',',$supplier_ids);
+            $query .= " AND (pj.supplier_id IN( $s_ids))";
         }
-        if($salesrep_id > 0)
+        if(count($salesrep_ids))
         {
-            $query .= " AND (pj.salesrep_id = :salesrep_id)";
-            $array['salesrep_id'] = $salesrep_id;
+            $sr_ids = implode(',',$salesrep_ids);
+            $query .= " AND (pj.salesrep_id IN( $sr_ids))";
         }
-        if($status_id > 0)
+        if(count($status_ids))
         {
-            $query .= " AND (pj.status_id = :status_id)";
-            $array['status_id'] = $status_id;
+            $st_ids = implode(',',$status_ids);
+            $query .= " AND (pj.status_id IN( $st_ids))";
         }
         //print_r($array);
         //die($query);

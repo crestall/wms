@@ -30,6 +30,32 @@ class Jobstatus extends Model{
         return $ret_string;
     }
 
+    public function getMultiSelectJobStatus($selected = array(), $active = 1, $selectAll = false)
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        //$status = $db->queryData("SELECT id, name FROM {$this->table} WHERE active=$active ORDER BY name");
+        $status = $db->queryData("SELECT js.id, js.name, ds.status_id AS `default` FROM `job_status` js LEFT JOIN default_production_job_status ds ON ds.status_id = js.id WHERE active=$active ORDER BY name");
+        foreach($status as $s)
+        {
+            $label = ucwords($s['name']);
+            $value = $s['id'];
+            $ret_string .= "<option value='$value'";
+            if(in_array($value, $selected))
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+                $ret_string .= " selected";
+            }
+            elseif(!(empty($s['default'])) && !$selectAll)
+            {
+                $ret_string .= " selected";
+            }
+            $ret_string .= ">$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function getStatusName($id)
     {
         $db = Database::openConnection();

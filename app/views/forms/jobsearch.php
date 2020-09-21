@@ -1,8 +1,9 @@
 <?php
 $term       = (empty(Form::value('term')))? $term : Form::value('term');
-$customer_id  = (empty(Form::value('customer_id')))? $customer_id : Form::value('customer_id');
-$supplier_id  = (empty(Form::value('supplier_id')))? $supplier_id : Form::value('supplier_id');
-$salesrep_id  = (empty(Form::value('salesrep_id')))? $salesrep_id : Form::value('salesrep_id');
+$customer_ids  = (empty(Form::value('customer_ids')))? $customer_ids : Form::value('customer_ids');
+$supplier_ids  = (empty(Form::value('supplier_ids')))? $supplier_ids : Form::value('supplier_ids');
+$salesrep_ids  = (empty(Form::value('salesrep_ids')))? $salesrep_ids : Form::value('salesrep_ids');
+$status_ids  = (empty(Form::value('status_ids')))? $status_ids : Form::value('status_ids');
 $date_from_value  = (empty(Form::value('date_from_value')))? $date_from_value : Form::value('date_from_value');
 $date_from = ($date_from_value > 0)? date("d/m/Y", $date_from_value) : "";
 $date_to_value  = (empty(Form::value('date_to_value')))? $date_to_value : Form::value('date_to_value');
@@ -21,20 +22,20 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
         <div class="form-group row">
             <label class="col-md-2 col-xl-1 mb-3">Filter By Customer</label>
             <div class="col-md-4 col-xl-2 mb-3">
-                <select id="customer_id" name="customer_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" multiple><option value="0">--Select One--</option><?php echo $this->controller->productioncustomer->getSelectCustomers($customer_id);?></select>
+                <select id="customer_id" name="customer_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productioncustomer->getMultiSelectCustomers($customer_ids);?></select>
                 <?php echo Form::displayError('client_id');?>
             </div>
             <label class="col-md-2 col-xl-1 mb-3">Filter By Supplier</label>
             <div class="col-md-4 col-xl-2 mb-3">
-                <select id="supplier_id" name="supplier_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->productionsupplier->getSelectSuppliers($supplier_id);?></select>
+                <select id="supplier_id" name="supplier_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productionsupplier->getMultiSelectSuppliers($supplier_ids);?></select>
             </div>
             <label class="col-md-2 col-xl-1 mb-3">Filter By Sales Rep</label>
             <div class="col-md-4 col-xl-2 mb-3">
-                <select id="salesrep_id" name="salesrep_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->salesrep->getSelectSalesReps($salesrep_id);?></select>
+                <select id="salesrep_id" name="salesrep_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->salesrep->getMultiSelectSalesReps($salesrep_ids);?></select>
             </div>
             <label class="col-md-2 col-xl-1 mb-3">Filter By Status</label>
             <div class="col-md-4 col-xl-2 mb-3">
-                <select id="status_id" name="status_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($status_id, 1, true);?></select>
+                <select id="status_id" name="status_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->jobstatus->getMultiSelectJobStatus($status_ids, 1, true);?></select>
             </div>
         </div>
         <div class="row form-group">
