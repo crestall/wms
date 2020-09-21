@@ -20,21 +20,21 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-2 col-xl-1 mb-3">Filter By Customer</label>
-            <div class="col-md-4 col-xl-2 mb-3">
+            <label class="col-md-2 mb-3">Filter By Customer</label>
+            <div class="col-md-4 mb-3">
                 <select id="customer_id" name="customer_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productioncustomer->getMultiSelectCustomers($customer_ids);?></select>
                 <?php echo Form::displayError('client_id');?>
             </div>
-            <label class="col-md-2 col-xl-1 mb-3">Filter By Supplier</label>
-            <div class="col-md-4 col-xl-2 mb-3">
+            <label class="col-md-2 mb-3">Filter By Supplier</label>
+            <div class="col-md-4 mb-3">
                 <select id="supplier_id" name="supplier_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productionsupplier->getMultiSelectSuppliers($supplier_ids);?></select>
             </div>
-            <label class="col-md-2 col-xl-1 mb-3">Filter By Sales Rep</label>
-            <div class="col-md-4 col-xl-2 mb-3">
+            <label class="col-md-2 mb-3">Filter By Sales Rep</label>
+            <div class="col-md-4 mb-3">
                 <select id="salesrep_id" name="salesrep_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->salesrep->getMultiSelectSalesReps($salesrep_ids);?></select>
             </div>
-            <label class="col-md-2 col-xl-1 mb-3">Filter By Status</label>
-            <div class="col-md-4 col-xl-2 mb-3">
+            <label class="col-md-2 mb-3">Filter By Status</label>
+            <div class="col-md-4 mb-3">
                 <select id="status_id" name="status_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->jobstatus->getMultiSelectJobStatus($status_ids, 1, true);?></select>
             </div>
         </div>
@@ -68,8 +68,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
         <input type="hidden" id="date_to_value" name="date_to_value" value="<?php echo $date_to_value;?>" />
         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
         <div class="form-group row">
-            <label class="col-md-3">&nbsp;</label>
-            <div class="col-md-4">
+            <div class="col-md-4 offset-md-8">
                 <button type="submit" class="btn btn-outline-fsg">Submit Search</button>
             </div>
         </div>

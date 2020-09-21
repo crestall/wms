@@ -3,8 +3,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php echo $form;?>
         <div class="row">
-            <label class="col">&nbsp;</label>
-            <div class="col m-3 offset-6">
+            <div class="col offset-md-8">
                 <a href="/jobs/job-search" class="btn btn-primary">Reset Form</a>
             </div>
         </div>
@@ -39,10 +38,8 @@
                 </div>
             </div>
             <div class="row mt-4" id="table_holder" style="display:none">
-                <div class="row">
-                    <div class="col-12">
-                        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/production_jobs_table.php");?>
-                    </div>
+                <div class="col-12">
+                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/production_jobs_table.php");?>
                 </div>
             </div>
         <?php endif;?>
