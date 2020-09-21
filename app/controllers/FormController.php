@@ -215,7 +215,24 @@ class FormController extends Controller {
                     continue;
                 }
                 $name = trim($row[0]);
+                $phone = (empty(trim($row[10])))? (empty(trim($row[9])))? "" : trim($row[9]) : trim($row[10]);
                 $customer_id = $this->productioncustomer->geCustomerIdByName($name);
+                $customer_details = array(
+                    'name'  => $name,
+                    'phone' => $phone,
+                    'email' => trim($row[11]),
+                    'address'   => trim($row[2]),
+                    'address2'  => trim($row[3]),
+                    'suburb'    => trim($row[5]),
+                    'state'     => trim($row[6]),
+                    'postcode'  => trim($row[7])
+                );
+                $customer_details['country'] = (!empty($row[8]))? trim($row[8]) : "AU";
+
+                echo "<pre>",print_r($customer_details),"</pre>";
+
+
+
                 if(!empty($customer_id))
                 {
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
