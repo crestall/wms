@@ -50,6 +50,10 @@ $padmin = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-cog"></i>'
         ),/* */
+        'customers-csv-import'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-file-import"></i><i class="fal fa-file-csv" data-fa-transform="shrink-5 left-6 up-2"></i></span></div>'
+        ),
         'edit-job-status'    => array(
             'display'   => true,
             //'icon'      => '<i class="fal fa-list-alt fa-2x"></i>',
