@@ -273,11 +273,6 @@ class Productionjob extends Model{
             $st_ids = implode(',',$status_ids);
             $query .= " AND (pj.status_id IN( $st_ids))";
         }
-        if($status_id > 0)
-        {
-            $query .= " AND (pj.status_id = :status_id)";
-            $array['status_id'] = $status_id;
-        }
         //print_r($array);
         //die($query);
         return $jobs = $db->queryData($query, $array);
