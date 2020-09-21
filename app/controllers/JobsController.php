@@ -65,7 +65,7 @@ class JobsController extends Controller
         }
         $customer_ids = isset($this->request->query['customer_ids'])? $this->request->query['customer_ids']: array();
         $supplier_ids = isset($this->request->query['supplier_ids'])? $this->request->query['supplier_ids']: array();
-        $salesrep_ids = isset($this->request->query['salesrepids_ids'])? $this->request->query['salesrepids_ids']: array();
+        $salesrep_ids = isset($this->request->query['salesrep_ids'])? $this->request->query['salesrep_ids']: array();
         $status_id = $this->request->query['status_id'];
         $date_from_value = $this->request->query['date_from_value'];
         $date_to_value = $this->request->query['date_to_value'];
