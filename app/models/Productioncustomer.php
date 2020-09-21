@@ -44,7 +44,6 @@ class Productioncustomer extends Model{
     {
         $db = Database::openConnection();
 
-        $check = "";
         $ret_string = "";
         $q = "SELECT id, name FROM {$this->table} ORDER BY name";
         $reps = $db->queryData($q);
@@ -52,11 +51,12 @@ class Productioncustomer extends Model{
         {
             $label = ucwords($r['name']);
             $value = $r['id'];
+            $ret_string .= "<option value='$value'"
             if(in_array($value, $selected))
             {
-                $check = ($value == $selected)? "selected='selected'" : "";
+                $ret_string .= " selected";
             }
-            $ret_string .= "<option $check value='$value'>$label</option>";
+            $ret_string .= ">$label</option>";
         }
         return $ret_string;
     }
