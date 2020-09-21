@@ -263,10 +263,10 @@ class Productionjob extends Model{
             $s_ids = implode(',',$supplier_ids);
             $query .= " AND (pj.supplier_id IN( $s_ids))";
         }
-        if($salesrep_id > 0)
+        if(count($salesrep_ids_ids))
         {
-            $query .= " AND (pj.salesrep_id = :salesrep_id)";
-            $array['salesrep_id'] = $salesrep_id;
+            $sr_ids = implode(',',$alesrep_ids);
+            $query .= " AND (pj.salesrep_id IN( $sr_ids))";
         }
         if($status_id > 0)
         {
