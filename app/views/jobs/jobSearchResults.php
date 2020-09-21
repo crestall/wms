@@ -31,9 +31,18 @@
         </div>
         <?php if($count > 0):
             $c = 0;?>
-            <div class="row">
-                <div class="col-12">
-                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/production_jobs_table.php");?>
+            <div id="waiting" class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Drawing Table..</h2>
+                    <p>May take a few moments</p>
+                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                </div>
+            </div>
+            <div class="row mt-4" id="table_holder" style="display:none">
+                <div class="row">
+                    <div class="col-12">
+                        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/production_jobs_table.php");?>
+                    </div>
                 </div>
             </div>
         <?php endif;?>
