@@ -3,6 +3,7 @@ $term       = (empty(Form::value('term')))? $term : Form::value('term');
 $customer_ids  = (empty(Form::value('customer_ids')))? $customer_ids : Form::value('customer_ids');
 $supplier_ids  = (empty(Form::value('supplier_ids')))? $supplier_ids : Form::value('supplier_ids');
 $salesrep_ids  = (empty(Form::value('salesrep_ids')))? $salesrep_ids : Form::value('salesrep_ids');
+$status_ids  = (empty(Form::value('status_ids')))? $status_ids : Form::value('status_ids');
 $date_from_value  = (empty(Form::value('date_from_value')))? $date_from_value : Form::value('date_from_value');
 $date_from = ($date_from_value > 0)? date("d/m/Y", $date_from_value) : "";
 $date_to_value  = (empty(Form::value('date_to_value')))? $date_to_value : Form::value('date_to_value');
@@ -34,7 +35,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
             </div>
             <label class="col-md-2 col-xl-1 mb-3">Filter By Status</label>
             <div class="col-md-4 col-xl-2 mb-3">
-                <select id="status_id" name="status_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($status_id, 1, true);?></select>
+                <select id="status_id" name="status_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->jobstatus->getMultiSelectJobStatus($status_ids, 1, true);?></select>
             </div>
         </div>
         <div class="row form-group">
