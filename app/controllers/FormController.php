@@ -231,7 +231,7 @@ class FormController extends Controller {
                     'postcode'  => trim($row[6]),
                     'website'   => trim($row[11])
                 );
-                $supplier_details['country'] = (!empty($row[7]))? trim($row[77]) : "AU";
+                $supplier_details['country'] = (!empty($row[7]))? trim($row[7]) : "AU";
 
                 if(!empty($supplier_id))
                 {
