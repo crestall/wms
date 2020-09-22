@@ -37,6 +37,8 @@
                         $contact_string .= ucwords($s['contact'] );
                         if(!empty($s['phone'])) $contact_string .= "<br/>".$s['phone'];
                         $contact_string .= "<br/><a href='mailto:".$s['email']."'>".$s['email']."</a>";
+                        if(!empty($s['website'])) $contact_string .= "<br/>".$s['website'];
+                        $contact_string .= "<br/><a href='".$s['website']."' target='_blank'>".$s['website']."</a>";
                         ?>
                     	<tr>
                             <td><?php echo $i;?></td>
