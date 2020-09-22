@@ -97,6 +97,7 @@ class Productionsupplier extends Model{
         if(!empty($data['state'])) $vals['state'] = $data['state'];
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
+        if(!empty($data['website'])) $vals['website'] = $data['website'];
         $id = $db->insertQuery($this->table, $vals);
         return $id;
     }
@@ -114,7 +115,8 @@ class Productionsupplier extends Model{
             'suburb'        =>  null,
             'state'         =>  null,
             'postcode'      =>  null,
-            'country'       =>  null
+            'country'       =>  null,
+            'website'       =>  null
         );
         $vals['active'] = isset($data['active'])? 1 : 0;
         if(!empty($data['email'])) $vals['email'] = $data['email'];
@@ -126,6 +128,7 @@ class Productionsupplier extends Model{
         if(!empty($data['state'])) $vals['state'] = $data['state'];
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
+        if(!empty($data['website'])) $vals['website'] = $data['website'];
         $id = $db->updateDatabaseFields($this->table, $vals, $data['supplier_id']);
         return $id;
     }

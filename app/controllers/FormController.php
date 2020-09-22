@@ -188,25 +188,26 @@ class FormController extends Controller {
         {
             echo "<pre>",print_r($csv_array),"</pre>";die();
             /*
-            [0] => Name
-            [1] => Code
-            [2] => Address 1
-            [3] => Address 2
-            [4] => Main Address 3
-            [5] => Suburb
-            [6] => State
-            [7] => Postcode
-            [8] => Country
-            [9] => Telephone
-            [10] => Mobile
-            [11] => Email
+            [0] => ?Name
+            [1] => Address 1
+            [2] => Address 2
+            [3] => Address 3
+            [4] => Postcode
+            [5] => Main State
+            [6] => Main Postcode
+            [7] => Counttry
+            [8] => Telephone
+            [9] => Mobile
+            [10] => Email
+            [11] => Web Site
+            [12] => Salesperson
             */
-            $added_customer_count = $updated_customer_count = 0;
+            $added_supplier_count = $updated_supplier_count = 0;
             $skip_first = isset($header_row);
             $line = 1;
             $data_error_string = "<ul>";
-            $import_customers = true;
-            $customers = array();
+            $import_suppliers = true;
+            $suppliers = array();
             foreach($csv_array as $row)
             {
                 if($skip_first)
@@ -216,43 +217,44 @@ class FormController extends Controller {
                     continue;
                 }
                 $name = trim($row[0]);
-                $phone = (empty(trim($row[10])))? (empty(trim($row[9])))? "" : trim($row[9]) : trim($row[10]);
-                $customer_id = $this->productioncustomer->geCustomerIdByName($name);
-                $customer_details = array(
-                    'name'  => $name,
-                    'phone' => $phone,
-                    'email' => trim($row[11]),
-                    'address'   => trim($row[2]),
-                    'address2'  => trim($row[3]),
-                    'suburb'    => trim($row[5]),
-                    'state'     => trim($row[6]),
-                    'postcode'  => trim($row[7])
+                $phone = (empty(trim($row[9])))? (empty(trim($row[8])))? "" : trim($row[8]) : trim($row[9]);
+                $supplier_id = $this->productionsupplier->getSupplierIdByName($name);
+                $supplier_details = array(
+                    'name'      => $name,
+                    'phone'     => $phone,
+                    'contact'   => trim($row[12]),
+                    'email'     => trim($row[10]),
+                    'address'   => trim($row[1]),
+                    'address2'  => trim($row[2]),
+                    'suburb'    => trim($row[4]),
+                    'state'     => trim($row[5]),
+                    'postcode'  => trim($row[6]),
+                    'website'   => trim($row[11])
                 );
-                $customer_details['country'] = (!empty($row[8]))? trim($row[8]) : "AU";
+                $supplier_details['country'] = (!empty($row[7]))? trim($row[77]) : "AU";
 
-                //echo "<pre>",print_r($customer_details),"</pre>";
-                if(!empty($customer_id))
+                if(!empty($supplier_id))
                 {
-                    $customer_details['customer_id'] = $customer_id;
-                    $this->productioncustomer->editCustomer($customer_details);
+                    $supplier_details['supplier_id'] = $supplier_id;
+                    //$this->productioncustomer->editCustomer($customer_details);
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
                     //echo "<p>Updated {$name}'s details</p>";
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                    ++$updated_customer_count;
+                    ++$updated_supplier_count;
                 }
                 else
                 {
-                    $customer_id = $this->productioncustomer->addCustomer($customer_details);
+                    //$customer_id = $this->productioncustomer->addCustomer($customer_details);
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
                     //echo "<p>Added $name/p>";
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                    ++$added_customer_count;
+                    ++$added_supplier_count;
                 }
             }
 
             echo "<p>----------------------------------------------------------------------------------------------------</p>";
-            echo "<p>Added $added_customer_count</p>";
-            echo "<p>Updated $updated_customer_count</p>";
+            echo "<p>Added $added_supplier_count</p>";
+            echo "<p>Updated $updated_supplier_count</p>";
             echo "<p>----------------------------------------------------------------------------------------------------</p>";
         }
     }
