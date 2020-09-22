@@ -32,13 +32,19 @@ $country = Form::value('country');
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Email</label>
+                <label class="col-md-3">Email</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control required email" name="email" id="email" value="<?php echo Form::value('email');?>" />
+                    <input type="text" class="form-control email" name="email" id="email" value="<?php echo Form::value('email');?>" />
                     <?php echo Form::displayError('email');?>
                 </div>
             </div>
-            <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+            <div class="form-group row">
+                <label class="col-md-3">Website</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="website" id="website" value="<?php echo Form::value('website');?>" />
+                </div>
+            </div>
+            <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
             <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="col-md-4 offset-md-3">

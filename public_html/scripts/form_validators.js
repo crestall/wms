@@ -312,7 +312,7 @@ $(document).ready(function() {
 		}
     });
     ////////////////////////////////////////////////////////////
-    $('form#bulk_production_add').validate({
+    $('form#bulk_production_add, form#bulk_customer_add, form#bulk_supplier_add').validate({
         rules:{
             csv_file:{
     			extension: "csv",

@@ -73,7 +73,9 @@ class FormController extends Controller {
             'procBookPickup',
             'procBreakPacks',
             'procBulkOrderAdd',
+            'procBulkProductionCustomerAdd',
             'procBulkProductionJobAdd',
+            'procBulkProductionSupplierAdd',
             'procClientAdd',
             'procClientDailyReports',
             'procClientEdit',
@@ -144,6 +146,226 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procBulkProductionSupplierAdd()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($_FILES['csv_file']["size"] > 0)
+        {
+            if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
+            {
+                $tmp_name = $_FILES['csv_file']['tmp_name'];
+                $csv_array = array_map('str_getcsv', file($tmp_name));
+                //echo "<pre>",print_r($csv_array),"</pre>"; //die();
+            }
+            else
+            {
+            	$error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+                Form::setError('csv_file', $error_message);
+            }
+        }
+        else
+        {
+            Form::setError('csv_file', 'please select a file to upload');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            //Session::set('value_array', $_POST);
+            //Session::set('error_array', Form::getErrorArray());
+            echo "<pre>",print_r(Form::getErrorArray()),"</pre>";
+        }
+        else
+        {
+            //echo "<pre>",print_r($csv_array),"</pre>";die();
+            /*
+            [0] => ?Name
+            [1] => Address 1
+            [2] => Address 2
+            [3] => Address 3
+            [4] => Postcode
+            [5] => Main State
+            [6] => Main Postcode
+            [7] => Counttry
+            [8] => Telephone
+            [9] => Mobile
+            [10] => Email
+            [11] => Web Site
+            [12] => Salesperson
+            */
+            $added_supplier_count = $updated_supplier_count = 0;
+            $skip_first = isset($header_row);
+            $line = 1;
+            $data_error_string = "<ul>";
+            $import_suppliers = true;
+            $suppliers = array();
+            foreach($csv_array as $row)
+            {
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    ++$line;
+                    continue;
+                }
+                $name = trim($row[0]);
+                $phone = (empty(trim($row[9])))? (empty(trim($row[8])))? "" : trim($row[8]) : trim($row[9]);
+                $supplier_id = $this->productionsupplier->getSupplierIdByName($name);
+                $supplier_details = array(
+                    'name'      => $name,
+                    'phone'     => $phone,
+                    'contact'   => trim($row[12]),
+                    'email'     => trim($row[10]),
+                    'address'   => trim($row[1]),
+                    'address2'  => trim($row[2]),
+                    'suburb'    => trim($row[4]),
+                    'state'     => trim($row[5]),
+                    'postcode'  => trim($row[6]),
+                    'website'   => trim($row[11])
+                );
+                $supplier_details['country'] = (!empty($row[7]))? trim($row[7]) : "AU";
+
+                if(!empty($supplier_id))
+                {
+                    $supplier_details['supplier_id'] = $supplier_id;
+                    $this->productionsupplier->editSupplier($supplier_details);
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    //echo "<p>Updated {$name}'s details</p>";
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    ++$updated_supplier_count;
+                }
+                else
+                {
+                    $customer_id = $this->productionsupplier->addSupplier($supplier_details);
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    //echo "<p>Added $name/p>";
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    ++$added_supplier_count;
+                }
+            }
+
+            echo "<p>----------------------------------------------------------------------------------------------------</p>";
+            echo "<p>Added $added_supplier_count</p>";
+            echo "<p>Updated $updated_supplier_count</p>";
+            echo "<p>----------------------------------------------------------------------------------------------------</p>";
+        }
+    }
+
+    public function procBulkProductionCustomerAdd()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($_FILES['csv_file']["size"] > 0)
+        {
+            if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
+            {
+                $tmp_name = $_FILES['csv_file']['tmp_name'];
+                $csv_array = array_map('str_getcsv', file($tmp_name));
+                //echo "<pre>",print_r($csv_array),"</pre>"; //die();
+            }
+            else
+            {
+            	$error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+                Form::setError('csv_file', $error_message);
+            }
+        }
+        else
+        {
+            Form::setError('csv_file', 'please select a file to upload');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            //Session::set('value_array', $_POST);
+            //Session::set('error_array', Form::getErrorArray());
+            echo "<pre>",print_r(Form::getErrorArray()),"</pre>";
+        }
+        else
+        {
+            //echo "<pre>",print_r($csv_array),"</pre>";//die();
+            /*
+            [0] => Name
+            [1] => Code
+            [2] => Address 1
+            [3] => Address 2
+            [4] => Main Address 3
+            [5] => Suburb
+            [6] => State
+            [7] => Postcode
+            [8] => Country
+            [9] => Telephone
+            [10] => Mobile
+            [11] => Email
+            */
+            $added_customer_count = $updated_customer_count = 0;
+            $skip_first = isset($header_row);
+            $line = 1;
+            $data_error_string = "<ul>";
+            $import_customers = true;
+            $customers = array();
+            foreach($csv_array as $row)
+            {
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    ++$line;
+                    continue;
+                }
+                $name = trim($row[0]);
+                $phone = (empty(trim($row[10])))? (empty(trim($row[9])))? "" : trim($row[9]) : trim($row[10]);
+                $customer_id = $this->productioncustomer->geCustomerIdByName($name);
+                $customer_details = array(
+                    'name'  => $name,
+                    'phone' => $phone,
+                    'email' => trim($row[11]),
+                    'address'   => trim($row[2]),
+                    'address2'  => trim($row[3]),
+                    'suburb'    => trim($row[5]),
+                    'state'     => trim($row[6]),
+                    'postcode'  => trim($row[7])
+                );
+                $customer_details['country'] = (!empty($row[8]))? trim($row[8]) : "AU";
+
+                //echo "<pre>",print_r($customer_details),"</pre>";
+                if(!empty($customer_id))
+                {
+                    $customer_details['customer_id'] = $customer_id;
+                    $this->productioncustomer->editCustomer($customer_details);
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    //echo "<p>Updated {$name}'s details</p>";
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    ++$updated_customer_count;
+                }
+                else
+                {
+                    $customer_id = $this->productioncustomer->addCustomer($customer_details);
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    //echo "<p>Added $name/p>";
+                    //echo "<p>----------------------------------------------------------------------------------------------------</p>";
+                    ++$added_customer_count;
+                }
+            }
+
+            echo "<p>----------------------------------------------------------------------------------------------------</p>";
+            echo "<p>Added $added_customer_count</p>";
+            echo "<p>Updated $updated_customer_count</p>";
+            echo "<p>----------------------------------------------------------------------------------------------------</p>";
+        }
     }
 
     public function procJobSupplierUpdate()
@@ -914,15 +1136,17 @@ class FormController extends Controller {
         {
             Form::setError('contact', 'A contact name is required');
         }
-        if(!$this->dataSubbed($email))
+        if($this->dataSubbed($email))
         {
-            Form::setError('email', 'A contact email is required');
+            if(!$this->emailValid($email))
+            {
+                Form::setError('email', 'The email is not valid');
+            }
         }
-        elseif(!$this->emailValid($email))
+        if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
         {
-            Form::setError('email', 'The email is not valid');
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         }
-        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
@@ -957,15 +1181,17 @@ class FormController extends Controller {
         {
             Form::setError('contact', 'A contact name is required');
         }
-        if(!$this->dataSubbed($email))
+        if($this->dataSubbed($email))
         {
-            Form::setError('email', 'A contact email is required');
+            if(!$this->emailValid($email))
+            {
+                Form::setError('email', 'The email is not valid');
+            }
         }
-        elseif(!$this->emailValid($email))
+        if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
         {
-            Form::setError('email', 'The email is not valid');
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         }
-        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);

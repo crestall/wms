@@ -28,9 +28,31 @@ class ProductionSettingsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "job-csv-import");
         Config::set('curPage', "job-csv-import");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/jobImport.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/jobsImport.php', [
             'page_title'    =>  "Import Production Jobs",
             'pht'           =>  ": Import Production Jobs"
+        ]);
+    }
+
+    public function customersCsvImport()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "customers-csv-import");
+        Config::set('curPage', "customers-csv-import");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/customersImport.php', [
+            'page_title'    =>  "Import Production Customers",
+            'pht'           =>  ": Import Production Customers"
+        ]);
+    }
+
+    public function suppliersCsvImport()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "suppliers-csv-import");
+        Config::set('curPage', "suppliers-csv-import");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/suppliersImport.php', [
+            'page_title'    =>  "Import Production Suppliers",
+            'pht'           =>  ": Import Production Suppliers"
         ]);
     }
 
