@@ -1181,7 +1181,7 @@ class FormController extends Controller {
         {
             Form::setError('contact', 'A contact name is required');
         }
-        if(!$this->dataSubbed($email))
+        if($this->dataSubbed($email))
         {
             if(!$this->emailValid($email))
             {
