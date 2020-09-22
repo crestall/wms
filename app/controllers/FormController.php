@@ -244,7 +244,7 @@ class FormController extends Controller {
                 }
                 else
                 {
-                    $customer_id = $this->productionupplier->addSupplier($supplier_details);
+                    $customer_id = $this->productionsupplier->addSupplier($supplier_details);
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
                     //echo "<p>Added $name/p>";
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
