@@ -9,6 +9,7 @@ $suburb     = empty(Form::value('suburb'))?     $supplier['suburb']       : Form
 $state      = empty(Form::value('state'))?      $supplier['state']        : Form::value('state');
 $postcode   = empty(Form::value('postcode'))?   $supplier['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $supplier['country']      : Form::value('country');
+$website    = empty(Form::value('website'))?    $supplier['website']      : Form::value('website');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -44,6 +45,12 @@ $country    = empty(Form::value('country'))?    $supplier['country']      : Form
                 <div class="col-md-4">
                     <input type="text" class="form-control required email" name="email" id="email" value="<?php echo $email;?>" />
                     <?php echo Form::displayError('email');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Website</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="website" id="website" value="<?php echo $website;?>" />
                 </div>
             </div>
             <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
