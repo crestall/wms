@@ -53,7 +53,7 @@ $website    = empty(Form::value('website'))?    $supplier['website']      : Form
                     <input type="text" class="form-control" name="website" id="website" value="<?php echo $website;?>" />
                 </div>
             </div>
-            <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+            <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
             <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <input type="hidden" name="supplier_id" value="<?php echo $supplier_id;?>" />
