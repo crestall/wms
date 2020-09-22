@@ -1136,15 +1136,17 @@ class FormController extends Controller {
         {
             Form::setError('contact', 'A contact name is required');
         }
-        if(!$this->dataSubbed($email))
+        if($this->dataSubbed($email))
         {
-            Form::setError('email', 'A contact email is required');
+            if(!$this->emailValid($email))
+            {
+                Form::setError('email', 'The email is not valid');
+            }
         }
-        elseif(!$this->emailValid($email))
+        if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
         {
-            Form::setError('email', 'The email is not valid');
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         }
-        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
