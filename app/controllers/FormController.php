@@ -236,7 +236,7 @@ class FormController extends Controller {
                 if(!empty($supplier_id))
                 {
                     $supplier_details['supplier_id'] = $supplier_id;
-                    //$this->productioncustomer->editCustomer($customer_details);
+                    $this->productionsupplier->editSupplier($supplier_details);
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
                     //echo "<p>Updated {$name}'s details</p>";
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
@@ -244,7 +244,7 @@ class FormController extends Controller {
                 }
                 else
                 {
-                    //$customer_id = $this->productioncustomer->addCustomer($customer_details);
+                    $customer_id = $this->productionupplier->addSupplier($supplier_details);
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
                     //echo "<p>Added $name/p>";
                     //echo "<p>----------------------------------------------------------------------------------------------------</p>";
