@@ -63,6 +63,7 @@ class Allocations{
                         //echo "Allocations<pre>",print_r($allocations),"</pre>";//continue;
                         $pick_count = $left = $ci['number'] * $details['qty'];
                         $item_name = $ci['name'];
+                        $item_sku = $ci['sku'];
                         $id = $ci['id'];
 
                         $f_locations = array();
@@ -76,7 +77,7 @@ class Allocations{
                         if( $total_available < $pick_count)
                         {
                             $item_error = true;
-                            $item_error_string .= "<li>There are insufficient quantities of $item_name to be able to create/update this order</li>";
+                            $item_error_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to create/update this order</li>";
                             //die("$total_available - There are insufficient quantities of $item_name to be able to create/update this order");
                         }
                         else
