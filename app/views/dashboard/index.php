@@ -154,10 +154,10 @@ $c = 1;
                     </div>
                     <div class="card homepagecard">
                         <div class="card-header">
-                            <h4>View Sales Reps</h4>
+                            <h4>View FSG Contacts</h4>
                         </div>
                         <div class="card-body text-center">
-                        	<a class="btn btn-lg btn-outline-fsg" href="/suppliers/view-suppliers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-chart"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        	<a class="btn btn-lg btn-outline-fsg" href="/fsg-contacts/view-contacts"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-chart"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
                         </div>
                     </div>
                 <?php endif;?>
