@@ -84,7 +84,7 @@ class FormController extends Controller {
             'procCourierEdit',
             'procDFCollection',
             'procEditProductionCustomer',
-            'procEditProductionSupplier',
+            'procEditProductionFinisher',
             'procEditServiceJob',
             'procEditInstall',
             'procEncryptSomeShit',
