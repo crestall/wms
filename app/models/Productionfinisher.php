@@ -1,0 +1,175 @@
+<?php
+
+/**
+    * Prodution Finisher Class
+    *
+
+    * @author     Mark Solly <mark.solly@fsg.com.au>
+
+        FUNCTIONS
+
+        addFinisher($data)
+        editFinisher($data)
+        getAllFinishers($active = 1)
+        getFinisherById($id = 0)
+        getSelectFinishers($selected = false)
+
+    */
+
+class Productionfinisher extends Model{
+    public $table = "production_finishers";
+
+    public function getSelectFinishers($selected = false)
+    {
+        $db = Database::openConnection();
+
+        $check = "";
+        $ret_string = "";
+        $q = "SELECT id, name FROM {$this->table} WHERE active = 1 ORDER BY name";
+        $reps = $db->queryData($q);
+        foreach($reps as $r)
+        {
+            $label = ucwords($r['name']);
+            $value = $r['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+    }
+
+    public function getMultiSelectFinishers($selected = array())
+    {
+        $db = Database::openConnection();
+
+        $ret_string = "";
+        $q = "SELECT id, name FROM {$this->table} WHERE active = 1 ORDER BY name";
+        $reps = $db->queryData($q);
+        foreach($reps as $r)
+        {
+            $label = ucwords($r['name']);
+            $value = $r['id'];
+            $ret_string .= "<option value='$value'";
+            if(in_array($value, $selected))
+            {
+                $ret_string .= " selected";
+            }
+            $ret_string .= ">$label</option>";
+        }
+        return $ret_string;
+    }
+
+    public function getAllFinishers($active = 1)
+    {
+        $db = Database::openConnection();
+        return $db->queryData("SELECT * FROM {$this->table} WHERE active = $active ORDER BY name");
+    }
+
+    public function getFinisherById($id = 0)
+    {
+        $db = Database::openConnection();
+        return $db->queryById($this->table, $id);
+    }
+
+    public function getFinisherIdByName($name)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT id FROM {$this->table} WHERE `name` LIKE :val LIMIT 1";
+        $array = array('val' => '%'.$name.'%');
+        $row = $db->queryRow($q, $array);
+        return $row['id'];
+    }
+
+    public function addFinisher($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'name'          =>  $data['name']
+        );
+        if(!empty($data['email'])) $vals['email'] = $data['email'];
+        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
+        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
+        if(!empty($data['address'])) $vals['address'] = $data['address'];
+        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
+        if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
+        if(!empty($data['state'])) $vals['state'] = $data['state'];
+        if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
+        if(!empty($data['country'])) $vals['country'] = $data['country'];
+        if(!empty($data['website'])) $vals['website'] = $data['website'];
+        $id = $db->insertQuery($this->table, $vals);
+        return $id;
+    }
+
+    public function editFinisher($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'name'          =>  strtolower($data['name']),
+            'email'         =>  null,
+            'contact'       =>  null,
+            'phone'         =>  null,
+            'address'       =>  null,
+            'address_2'     =>  null,
+            'suburb'        =>  null,
+            'state'         =>  null,
+            'postcode'      =>  null,
+            'country'       =>  null,
+            'website'       =>  null
+        );
+        $vals['active'] = isset($data['active'])? 1 : 0;
+        if(!empty($data['email'])) $vals['email'] = $data['email'];
+        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
+        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
+        if(!empty($data['address'])) $vals['address'] = $data['address'];
+        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
+        if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
+        if(!empty($data['state'])) $vals['state'] = $data['state'];
+        if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
+        if(!empty($data['country'])) $vals['country'] = $data['country'];
+        if(!empty($data['website'])) $vals['website'] = $data['website'];
+        $id = $db->updateDatabaseFields($this->table, $vals, $data['supplier_id']);
+        return $id;
+    }
+
+    public function getAutocompleteFinisher($data)
+    {
+        $db = Database::openConnection();
+        $return_array = array();
+        //echo "The request<pre>",print_r($data),"</pre>";die();
+        $q = $data;
+        $query = "
+            SELECT
+                *
+            FROM
+                {$this->table}
+            WHERE
+                name LIKE :term
+        ";
+        $array = array(
+            'term'  => '%'.$q.'%'
+        );
+        $rows = $db->queryData($query, $array);
+        foreach($rows as $row)
+        {
+            $row_array                  = array();
+            $row_array['value']         = ucwords($row['name']);
+            $row_array['contact']       = $row['contact'];
+            $row_array['email']         = $row['email'];
+            $row_array['website']       = $row['website'];
+            $row_array['phone']         = $row['phone'];
+            $row_array['address']       = $row['address'];
+            $row_array['address_2']     = $row['address_2'];
+            $row_array['suburb']        = $row['suburb'];
+            $row_array['state']         = $row['state'];
+            $row_array['postcode']      = $row['postcode'];
+            $row_array['country']       = $row['country'];
+            $row_array['finisher_id']   = $row['id'];
+
+            array_push($return_array,$row_array);
+        }
+        return $return_array;
+    }
+}
+?>

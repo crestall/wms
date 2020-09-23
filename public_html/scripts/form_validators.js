@@ -127,11 +127,11 @@ $(document).ready(function() {
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
-    $('form#add_production_supplier').validate();
+    $('form#add_production_finisher').validate();
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_customer').validate();
     ///////////////////////////////////////////////////////////////////////////////
-    $('form#edit_production_supplier, form#supplier_details_update').validate();
+    $('form#edit_production_finisher, form#finisher_details_update').validate();
     ///////////////////////////////////////////////////////////////////////////////
     $('form#edit_production_customer, form#customer_details_update').validate();
     ///////////////////////////////////////////////////////////////////////////////
@@ -312,7 +312,7 @@ $(document).ready(function() {
 		}
     });
     ////////////////////////////////////////////////////////////
-    $('form#bulk_production_add, form#bulk_customer_add, form#bulk_supplier_add').validate({
+    $('form#bulk_production_add, form#bulk_customer_add, form#bulk_finisher_add').validate({
         rules:{
             csv_file:{
     			extension: "csv",
