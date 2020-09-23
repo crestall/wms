@@ -72,7 +72,8 @@
                             cursor: "move",
                             update: function(event, ui){
                                 var data = $(this).sortable('serialize');
-                                console.log('data: '+data);
+                                //console.log('data: '+data);
+                                $.post('/ajaxfunctions/update-jobstatus-order', data);
                             }
                         });
                     }
