@@ -42,7 +42,7 @@
         <!-- FontAwesome Pro Kit -->
         <script src="https://kit.fontawesome.com/cc79da085a.js" crossorigin="anonymous"></script>
         <!-- Bootstrap Colour Picker -->
-        <script src="/scripts/bootstrap-colorpicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/js/bootstrap-colorpicker.min.js" integrity="sha512-INXxqXxcP6zawSei7i47Xmu+6ZIBRbsYN1LHAy5H1gzl1XIfTbI/OLjUcvBnDD8F3ZSVB6mf8asEPTMxz4VNjw==" crossorigin="anonymous"></script>
         <!-- Assign CSRF Token to JS variable -->
         <?php Config::setJsConfig('csrfToken', Session::generateCsrfToken()); ?>
         <!-- Assign pages for menu highlighting -->

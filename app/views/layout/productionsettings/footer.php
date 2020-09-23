@@ -67,6 +67,15 @@
                                 $(this).closest('form').find('input.text_colour').val("rgb(33,37,41)");
                             }
                         });
+                        $( "#sortable" ).sortable({
+                            axis: "y",
+                            cursor: "move",
+                            update: function(event, ui){
+                                var data = $(this).sortable('serialize');
+                                //console.log('data: '+data);
+                                $.post('/ajaxfunctions/update-jobstatus-order', data);
+                            }
+                        });
                     }
                 },
                 'job-csv-import':{
