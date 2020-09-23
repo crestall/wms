@@ -868,8 +868,8 @@ class ajaxfunctionsController extends Controller
 
     public function updateJobstatusOrder()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
-        //$this->order->cancelOrders($this->request->data['orderids']);
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->jobstatus->updateHeirarchy($this->request->data['status']);
     }
 
     public function cancelSolarorders()
