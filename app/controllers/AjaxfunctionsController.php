@@ -866,7 +866,7 @@ class ajaxfunctionsController extends Controller
         $this->order->cancelOrders($this->request->data['orderids']);
     }
 
-    public function updatJobstatusOrder()
+    public function updateJobstatusOrder()
     {
         echo "<pre>",print_r($this->request),"</pre>"; die();
         //$this->order->cancelOrders($this->request->data['orderids']);
