@@ -130,5 +130,16 @@ class Jobstatus extends Model{
         $db->updateDatabaseField('default_production_job_status', 'status_id', $id, 1);
         return true;
     }
+
+    public function updateHeirarchy($statoos)
+    {
+        $db = Database::openConnection();
+        foreach($statoos as $rank => $sid)
+        {
+            ++$rank;
+            $db->updateDatabaseField($this->table, 'ranking', $rank, $id);
+        }
+        return true;
+    }
 }
 ?>
