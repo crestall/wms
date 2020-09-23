@@ -136,7 +136,6 @@ $prod = array(
 
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
-$padmin['suppliers'] = array_merge($padmin['suppliers'], $prod['suppliers']);
 $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
 $padmin['fsg-contacts'] = array_merge($padmin['fsg-contacts'], $prod['fsg-contacts']);
 
