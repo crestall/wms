@@ -68,7 +68,8 @@
                             }
                         });
                         $( "#sortable" ).sortable({
-                            axis: "y"
+                            axis: "y",
+                            cursor: "move"
                         });
                     }
                 },
