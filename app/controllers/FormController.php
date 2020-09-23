@@ -1116,7 +1116,7 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."customers/add-customer");
     }
 
-    public function procEditProductionSupplier()
+    public function procEditProductionFinisher()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
@@ -1130,7 +1130,7 @@ class FormController extends Controller {
         }
         if(!$this->dataSubbed($name))
         {
-            Form::setError('name', 'The suppliers name is required');
+            Form::setError('name', 'The Finisher\'s name is required');
         }
         if(!$this->dataSubbed($contact))
         {
@@ -1155,10 +1155,10 @@ class FormController extends Controller {
         else
         {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $this->productionsupplier->editSupplier($post_data);
-            Session::set('feedback', "That supplier's details have been updated");
+            $this->productionsfinisher->editFinisher($post_data);
+            Session::set('feedback', "That Finisher's details have been updated");
         }
-        return $this->redirector->to(PUBLIC_ROOT."suppliers/edit-supplier/supplier=$supplier_id");
+        return $this->redirector->to(PUBLIC_ROOT."finishers/edit-edit/finisher=$finisher_id");
     }
 
     public function procAddProductionSupplier()
