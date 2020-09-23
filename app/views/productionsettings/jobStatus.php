@@ -45,7 +45,7 @@
         <?php if(count($status)):?>
             <div id="sortable">
                 <?php foreach($status as $s):?>
-                    <form class="edit-job-status mb-3 p-3 border rounded" action="/form/procJobStatusEdit" method="post">
+                    <form class="edit-job-status mb-3 p-3 border rounded" action="/form/procJobStatusEdit" method="post" id="status_<?php echo $s['id'];?>">
                         <div class="form-group row">
                             <div class="col-md-3">
                                 <label class="col-form-label">Name</label>
