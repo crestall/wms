@@ -11,7 +11,7 @@ $country = empty(Form::value('country'))? $rep['country'] : Form::value('country
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div class="row">
         <div class="col-md-12">
-            <p><a class="btn btn-outline-fsg" href="/sales-reps/view-reps">View List of Reps</a></p>
+            <p><a class="btn btn-outline-fsg" href="/fsg-contacts/view-contacts">View List of Contacts</a></p>
         </div>
     </div>
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
@@ -65,7 +65,7 @@ $country = empty(Form::value('country'))? $rep['country'] : Form::value('country
             <input type="hidden" name="rep_id" value="<?php echo $rep['id']; ?>" />
             <div class="form-group row">
                 <div class="col-md-4 offset-md-3">
-                    <button type="submit" class="btn btn-outline-secondary">Edit Rep</button>
+                    <button type="submit" class="btn btn-outline-secondary">Edit Contact</button>
                 </div>
             </div>
         </form>

@@ -7,7 +7,7 @@
             <th>Description</th>
             <th>Notes</th>
             <th>Status</th>
-            <th>Sales Rep</th>
+            <th>FSG Contact</th>
             <th>Supplier</th>
             <th>Date Entered</th>
             <th>Due Date</th>
@@ -57,7 +57,7 @@
                     style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
                 <?php endif;?>
                 ><?php echo ucwords($job['status']);?></td>
-                <td data-label="Sales Rep"><?php echo ucwords($job['salesrep_name']);?></td>
+                <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
                 <td data-label="Supplier">
                     <span style="font-size: larger">
                         <?php if($user_role == "production_admin"):?>

@@ -67,12 +67,12 @@ $padmin = array(
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-file-import"></i><i class="fal fa-file-csv" data-fa-transform="shrink-5 left-6 up-2"></i></span></div>'
         ) */
     ),
-    'sales-reps'    => array(
-        'add-rep'   => array(
+    'fsg-contacts'    => array(
+        'add-contact'   => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
         ),
-        'edit-rep'  => array(
+        'edit-contact'  => array(
             'display'   => false,
             'icon'      => ''
         )
@@ -121,13 +121,13 @@ $prod = array(
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         ),
     ),
-    'sales-reps'    => array(
-        'sales-reps-index'   => true,
+    'fsg-contacts'    => array(
+        'fsg-contacts-index'   => true,
         'default-icon'      => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-user-chart"></i>'
         ),
-        'view-reps' => array(
+        'view-contacts' => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         )
@@ -137,7 +137,7 @@ $prod = array(
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['suppliers'] = array_merge($padmin['suppliers'], $prod['suppliers']);
-$padmin['sales-reps'] = array_merge($padmin['sales-reps'], $prod['sales-reps']);
+$padmin['fsg-contacts'] = array_merge($padmin['fsg-contacts'], $prod['fsg-contacts']);
 
 $prod_admin = array_merge($prod, $padmin);
 
