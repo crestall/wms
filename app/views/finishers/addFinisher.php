@@ -48,7 +48,7 @@ $country = Form::value('country');
             <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="col-md-4 offset-md-3">
-                    <button type="submit" class="btn btn-outline-secondary">Add This Supplier</button>
+                    <button type="submit" class="btn btn-outline-secondary">Add This Finisher</button>
                 </div>
             </div>
         </form>
