@@ -11,7 +11,7 @@
      *              (
      *       )
      * )
-     * @author     Mark Solly <mark.solly@3plplus.com.au>
+     * @author     Mark Solly <mark.solly@fsg.com.au>
     */
 $padmin = array(
     'jobs'  => array(
@@ -30,16 +30,6 @@ $padmin = array(
             'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
         ),
         'edit-customer'  => array(
-            'display'   => false,
-            'icon'      => ''
-        )
-    ),
-    'suppliers' => array(
-        'add-supplier'  => array(
-            'display'       => true,
-            'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
-        ),
-        'edit-supplier'  => array(
             'display'   => false,
             'icon'      => ''
         )
@@ -119,17 +109,6 @@ $prod = array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         )
-    ),
-    'suppliers' => array(
-        'suppliers-index'   => true,
-        'default-icon'      => array(
-            'display'   => false,
-            'icon'      => '<i class="fad fa-people-arrows"></i>'
-        ),
-        'view-suppliers'    => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
-        ),
     ),
     'finishers' => array(
         'finishers-index'   => true,
