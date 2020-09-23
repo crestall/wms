@@ -151,7 +151,9 @@ class JobsController extends Controller
         //production users
         Permission::allow('production', $resource, array(
             "index",
-            "viewJobs"
+            "viewJobs",
+            "jobSearch",
+            "jobSearchResults"
         ));
 
         return Permission::check($role, $resource, $action);
