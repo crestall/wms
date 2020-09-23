@@ -44,6 +44,16 @@ $padmin = array(
             'icon'      => ''
         )
     ),
+    'finishers' => array(
+        'add-finisher'  => array(
+            'display'       => true,
+            'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+        ),
+        'edit-finisher'  => array(
+            'display'   => false,
+            'icon'      => ''
+        )
+    ),
     'production-settings'   => array(
         'production-settings-index' => true,
         'default-icon'              => array(
@@ -121,6 +131,17 @@ $prod = array(
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
         ),
     ),
+    'finishers' => array(
+        'finishers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-people-arrows"></i>'
+        ),
+        'view-finishers'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
+        ),
+    ),
     'fsg-contacts'    => array(
         'fsg-contacts-index'   => true,
         'default-icon'      => array(
@@ -137,6 +158,7 @@ $prod = array(
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['suppliers'] = array_merge($padmin['suppliers'], $prod['suppliers']);
+$padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
 $padmin['fsg-contacts'] = array_merge($padmin['fsg-contacts'], $prod['fsg-contacts']);
 
 $prod_admin = array_merge($prod, $padmin);
