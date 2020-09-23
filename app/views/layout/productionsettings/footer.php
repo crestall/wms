@@ -71,7 +71,7 @@
                             axis: "y",
                             cursor: "move",
                             update: function(event, ui){
-                                var data = $(this).sortable('serialize');
+                                var data = $(this).sortable('toArray');
                                 console.log('data: '+data);
                             }
                         });
