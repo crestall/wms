@@ -71,7 +71,7 @@ class FsgContactsController extends Controller
         $action = $this->request->param('action');
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        $resource = "salesreps";
+        $resource = "fsgcontacts";
 
         //only for admin
         Permission::allow('production admin', $resource, "*");
