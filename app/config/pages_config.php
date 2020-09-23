@@ -67,12 +67,12 @@ $padmin = array(
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-file-import"></i><i class="fal fa-file-csv" data-fa-transform="shrink-5 left-6 up-2"></i></span></div>'
         ) */
     ),
-    'sales-reps'    => array(
-        'add-rep'   => array(
+    'fsg-contacts'    => array(
+        'add-contact'   => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
         ),
-        'edit-rep'  => array(
+        'edit-contact'  => array(
             'display'   => false,
             'icon'      => ''
         )
