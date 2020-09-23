@@ -32,7 +32,7 @@ class FinishersController extends Controller
         Config::setJsConfig('curPage', "edit-finisher");
         Config::set('curPage', "edit-finisher");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/finishers/", Config::get('VIEWS_PATH') . 'finishers/editFinisher.php', [
-            'page_title'    =>  "Update Finsiher for Production",
+            'page_title'    =>  "Update Finisher for Production",
             'pht'           =>  ": Update Finisher Customer",
             'finisher_id'   =>  $finisher_id,
             'finisher'      =>  $finisher_info
