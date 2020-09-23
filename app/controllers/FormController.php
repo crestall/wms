@@ -1158,7 +1158,7 @@ class FormController extends Controller {
             $this->productionfinisher->editFinisher($post_data);
             Session::set('feedback', "That Finisher's details have been updated");
         }
-        return $this->redirector->to(PUBLIC_ROOT."finishers/edit-edit/finisher=$finisher_id");
+        return $this->redirector->to(PUBLIC_ROOT."finishers/edit-finisher/finisher=$finisher_id");
     }
 
     public function procAddProductionSupplier()
