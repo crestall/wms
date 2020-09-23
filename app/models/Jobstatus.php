@@ -102,7 +102,7 @@ class Jobstatus extends Model{
         {
             $q .= " WHERE active = $active";
         }
-        $q .= " ORDER BY name";
+        $q .= " ORDER BY js.ranking ASC";
         return $db->queryData($q);
     }
 
