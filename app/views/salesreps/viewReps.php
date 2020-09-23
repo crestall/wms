@@ -55,7 +55,7 @@
                                 <td data-label="Email"><a href="mailto:<?php echo $rep['email'];?>"><?php echo $rep['email'];?></a></td>
                                 <td data-label="Comments"><?php echo nl2br($rep['comments']);?></td>
                                 <?php if($role == "production admin"):?>
-                                    <td><a href="/fsg-contacts/edit-contacts/rep=<?php echo $rep['id'];?>">Edit Details</a></td>
+                                    <td><a href="/fsg-contacts/edit-contact/rep=<?php echo $rep['id'];?>">Edit Details</a></td>
                                 <?php endif;?>
                             </tr>
                         <?php endforeach;?>
@@ -69,7 +69,7 @@
                     <div class="errorbox">
                         <h2><i class="fas fa-exclamation-triangle"></i> No Reps Listed</h2>
                         <p>There are no <?php if($active == 1) echo "active"; else echo "inactive";?> sales reps listed in the system at this time</p>
-                        <p><a href="/sales-reps/add-sales-rep">Click here to add one</a></p>
+                        <p><a href="/fsg-contacts/add-contact">Click here to add one</a></p>
                     </div>
                 </div>
             </div>
