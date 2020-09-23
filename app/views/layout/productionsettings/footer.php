@@ -67,7 +67,9 @@
                                 $(this).closest('form').find('input.text_colour').val("rgb(33,37,41)");
                             }
                         });
-                        $( "#sortable" ).sortable();
+                        $( "#sortable" ).sortable({
+                            axis: "y"
+                        });
                     }
                 },
                 'job-csv-import':{
