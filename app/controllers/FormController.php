@@ -1155,7 +1155,7 @@ class FormController extends Controller {
         else
         {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $this->productionsfinisher->editFinisher($post_data);
+            $this->productionfinisher->editFinisher($post_data);
             Session::set('feedback', "That Finisher's details have been updated");
         }
         return $this->redirector->to(PUBLIC_ROOT."finishers/edit-edit/finisher=$finisher_id");
