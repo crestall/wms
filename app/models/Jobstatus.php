@@ -137,7 +137,7 @@ class Jobstatus extends Model{
         foreach($statoos as $rank => $sid)
         {
             ++$rank;
-            $db->updateDatabaseField($this->table, 'ranking', $rank, $id);
+            $db->updateDatabaseField($this->table, 'ranking', $rank, $sid);
         }
         return true;
     }
