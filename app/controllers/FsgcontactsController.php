@@ -17,7 +17,7 @@ class FsgContactsController extends Controller
     public function index()
     {
         //set the page name for menu display
-        Config::setJsConfig('curPage', 'sales-reps-index');
+        Config::setJsConfig('curPage', 'fsg-contacts-index');
         parent::displayIndex(get_class());
     }
 
