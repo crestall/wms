@@ -24,11 +24,11 @@ class FsgContactsController extends Controller
     public function addContact()
     {
         //render the page
-        Config::setJsConfig('curPage', "add-rep");
-        Config::set('curPage', "add-rep");
+        Config::setJsConfig('curPage', "add-contact");
+        Config::set('curPage', "add-contact");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/addRep.php',
         [
-            'page_title'    =>  'Add New Sales Rep'
+            'page_title'    =>  'Add New FSG Contact'
         ]);
     }
 
@@ -37,11 +37,11 @@ class FsgContactsController extends Controller
         $rep_id = $this->request->params['args']['rep'];
         $rep_info = $this->salesrep->getRepById($rep_id);
         //render the page
-        Config::setJsConfig('curPage', "edit-rep");
-        Config::set('curPage', "edit-rep");
+        Config::setJsConfig('curPage', "edit-contact");
+        Config::set('curPage', "edit-contact");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/editRep.php',
         [
-            'page_title'    =>  'Edit Sales Rep details',
+            'page_title'    =>  'Edit FSG Contact details',
             'rep'           =>  $rep_info
         ]);
     }
@@ -56,11 +56,11 @@ class FsgContactsController extends Controller
         $reps = $this->salesrep->getAllReps($active);
         $role = Session::getUserRole();
         //render the page
-        Config::setJsConfig('curPage', "view-reps");
-        Config::set('curPage', "view-reps");
+        Config::setJsConfig('curPage', "view-contacts");
+        Config::set('curPage', "view-contacts");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/salesreps/", Config::get('VIEWS_PATH') . 'salesreps/viewReps.php',
         [
-            'page_title'    =>  'Manage Sales Reps',
+            'page_title'    =>  'Manage FSG Contacts',
             'reps'          =>  $reps,
             'role'          =>  $role,
             'active'        =>  $active
