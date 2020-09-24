@@ -121,7 +121,7 @@
                             $('input#finisher_contact').val(ui.item.contact);
                             $('input#finisher_email').val(ui.item.email);
                             $('input#finisher_phone').val(ui.item.phone);
-                            $('input#finisher_id').val(ui.item.customer_id);
+                            $('input#finisher_id').val(ui.item.finisher_id);
                             $('input#finisher_address').val(ui.item.address);
                             $('input#finisher_address2').val(ui.item.address_2);
                             $('input#finisher_suburb').val(ui.item.suburb);
@@ -155,7 +155,7 @@
                             $('input#finisher2_contact').val(ui.item.contact);
                             $('input#finisher2_email').val(ui.item.email);
                             $('input#finisher2_phone').val(ui.item.phone);
-                            $('input#finisher2_id').val(ui.item.customer_id);
+                            $('input#finisher2_id').val(ui.item.finisher_id);
                             $('input#finisher2_address').val(ui.item.address);
                             $('input#finisher2_address2').val(ui.item.address_2);
                             $('input#finisher2_suburb').val(ui.item.suburb);
