@@ -130,7 +130,8 @@ class Controller {
          $this->loadEparcelLocations([
             'Freedom',
             'Nuchev',
-            'TTAU'
+            'TTAU',
+            'Oneplate'
          ]);
 
          $this->loadMYOBInstances([
