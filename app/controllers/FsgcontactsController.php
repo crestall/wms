@@ -34,7 +34,7 @@ class FsgContactsController extends Controller
 
     public function editContact()
     {
-        $rep_id = $this->request->params['args']['rep'];
+        $rep_id = $this->request->params['args']['contact'];
         $rep_info = $this->salesrep->getRepById($rep_id);
         //render the page
         Config::setJsConfig('curPage', "edit-contact");
