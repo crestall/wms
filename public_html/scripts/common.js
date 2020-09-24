@@ -437,8 +437,11 @@ var autoCompleter = {
             minLength: 2
         });
     },
-    suburbAutoComplete: function(element)
+    suburbAutoComplete: function(element, prefix)
     {
+        if(prefix === undefined) {
+            prefix = "";
+        }
         element.autocomplete({
             source: function(req, response){
             	var url = "/ajaxfunctions/getSuburbs?term="+req.term;
@@ -448,10 +451,10 @@ var autoCompleter = {
             	});
             },
             select: function(event, ui) {
-                $("#state").val(ui.item.state);
-                $("#suburb").val(ui.item.suburb);
-                $("#postcode").val(ui.item.postcode);
-                $("#country").val('AU');
+                $('#'+prefix+'state').val(ui.item.state);
+                $('#'+prefix+'suburb').val(ui.item.suburb);
+                $('#'+prefix+'postcode').val(ui.item.postcode);
+                $('#'+prefix+'country').val('AU');
             },
             change: function (event, ui) {
                 return false;
@@ -475,46 +478,6 @@ var autoCompleter = {
                 {
                    url = "/ajaxfunctions/getAllItems/?item="+req.term+"&clientid="+$('#client_id').val()+"&checkavailable="+check_available;
                 }
-                //console.log(url);
-            	$.getJSON(url, function(data){
-            		response(data);
-            	});
-            },
-            select: function(event, ui) {
-                selectCallback(event, ui);
-            },
-            change: function (event, ui) {
-                changeCallback(event, ui);
-            },
-            minLength: 2
-        });
-    },
-    solarItemAutoComplete: function(element, selectCallback, changeCallback)
-    {
-        element.autocomplete({
-            source: function(req, response)
-            {
-                var url;
-                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&type_id="+$('#type_id').val()+"&clientid="+$('#client_id').val();
-                $.getJSON(url, function(data){
-            		response(data);
-            	});
-            },
-            select: function(event, ui) {
-                selectCallback(event, ui);
-            },
-            change: function (event, ui) {
-                changeCallback(event, ui);
-            },
-            minLength: 2
-        });
-    },
-    solarAllItemsAutoComplete: function(element, selectCallback, changeCallback)
-    {
-        element.autocomplete({
-            source: function(req, response){
-                var url;
-                url = "/ajaxfunctions/getAllSolarItems/?item="+req.term+"&solar_type_id="+$('#order_type_id').val();
                 //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);
