@@ -10,7 +10,7 @@ $country = Form::value('country');
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <form id="add_production_supplier" method="post" action="/form/procAddProductionSupplier">
+        <form id="add_production_finisher" method="post" action="/form/procAddProductionFinisher">
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
                 <div class="col-md-4">
@@ -48,7 +48,7 @@ $country = Form::value('country');
             <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="col-md-4 offset-md-3">
-                    <button type="submit" class="btn btn-outline-secondary">Add This Supplier</button>
+                    <button type="submit" class="btn btn-outline-secondary">Add This Finisher</button>
                 </div>
             </div>
         </form>

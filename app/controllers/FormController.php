@@ -61,8 +61,8 @@ class FormController extends Controller {
             'procAddPackage',
             'procAddPackages',
             'procAddProductionCustomer',
+            'procAddProductionFinisher',
             'procAddProductionJob',
-            'procAddProductionSupplier',
             'procAddressUpdate',
             'procAddServiceJob',
             'procAddSerials',
@@ -84,7 +84,7 @@ class FormController extends Controller {
             'procCourierEdit',
             'procDFCollection',
             'procEditProductionCustomer',
-            'procEditProductionSupplier',
+            'procEditProductionFinisher',
             'procEditServiceJob',
             'procEditInstall',
             'procEncryptSomeShit',
@@ -1116,7 +1116,7 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."customers/add-customer");
     }
 
-    public function procEditProductionSupplier()
+    public function procEditProductionFinisher()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
@@ -1130,7 +1130,7 @@ class FormController extends Controller {
         }
         if(!$this->dataSubbed($name))
         {
-            Form::setError('name', 'The suppliers name is required');
+            Form::setError('name', 'The Finisher\'s name is required');
         }
         if(!$this->dataSubbed($contact))
         {
@@ -1155,13 +1155,13 @@ class FormController extends Controller {
         else
         {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $this->productionsupplier->editSupplier($post_data);
-            Session::set('feedback', "That supplier's details have been updated");
+            $this->productionfinisher->editFinisher($post_data);
+            Session::set('feedback', "That Finisher's details have been updated");
         }
-        return $this->redirector->to(PUBLIC_ROOT."suppliers/edit-supplier/supplier=$supplier_id");
+        return $this->redirector->to(PUBLIC_ROOT."finishers/edit-finisher/finisher=$finisher_id");
     }
 
-    public function procAddProductionSupplier()
+    public function procAddProductionFinisher()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
@@ -1175,7 +1175,7 @@ class FormController extends Controller {
         }
         if(!$this->dataSubbed($name))
         {
-            Form::setError('name', 'The suppliers name is required');
+            Form::setError('name', 'The Finishers name is required');
         }
         if(!$this->dataSubbed($contact))
         {
@@ -1200,10 +1200,10 @@ class FormController extends Controller {
         else
         {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $id = $this->productionsupplier->addSupplier($post_data);
-            Session::set('feedback', "That supplier has been added to the system.<br/>The details can be editted <a href='/suppliers/edit-supplier/supplier=".$id."'>HERE</a>");
+            $id = $this->productionfinisher->addFinisher($post_data);
+            Session::set('feedback', "That Finisher has been added to the system.<br/>The details can be edited <a href='/finishers/edit-finisher/finisher=".$id."'>HERE</a>");
         }
-        return $this->redirector->to(PUBLIC_ROOT."suppliers/add-supplier");
+        return $this->redirector->to(PUBLIC_ROOT."finishers/add-finisher");
     }
 
     public function procAddPackages()

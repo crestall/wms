@@ -8,7 +8,7 @@
             <th>Notes</th>
             <th>Status</th>
             <th>FSG Contact</th>
-            <th>Supplier</th>
+            <th>Finisher</th>
             <th>Date Entered</th>
             <th>Due Date</th>
         </tr>
@@ -17,8 +17,12 @@
         <?php foreach($jobs as $job):?>
             <tr>
                 <td data-label="Job Number" class="number">
-                    <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a><br>
-                    <span class="inst">Click to update details</span>
+                    <?php if($user_role == "production_admin"):?>
+                        <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a><br>
+                        <span class="inst">Click to update details</span>
+                    <?php else:?>
+                        <?php echo $job['job_id'];?>
+                    <?php endif;?>
                 </td>
                 <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                 <td data-label="Client">
@@ -58,31 +62,31 @@
                 <?php endif;?>
                 ><?php echo ucwords($job['status']);?></td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
-                <td data-label="Supplier">
+                <td data-label="Finisher">
                     <span style="font-size: larger">
                         <?php if($user_role == "production_admin"):?>
-                            <a href="/suppliers/edit-supplier/supplier=<?php echo $job['supplier_id'];?>"><?php echo ucwords($job['supplier_name']);;?></a>
+                            <a href="/finishers/edit-finisher/finisher=<?php echo $job['finisher_id'];?>"><?php echo ucwords($job['finisher_name']);;?></a>
                         <?php else:?>
-                            <?php echo ucwords($job['supplier_name']);?>
+                            <?php echo ucwords($job['finisher_name']);?>
                         <?php endif;?>
                     </span>
                     <div class="contact_details">
                         <div class='row'>
                             <label class='col-4 font-weight-bold'>Contact</label>
                             <div class='col-8'>
-                                <?php echo $job['supplier_contact'];?>
+                                <?php echo $job['finisher_contact'];?>
                             </div>
                         </div>
                         <div class='row'>
                             <label class='col-4 font-weight-bold'>Email</label>
                             <div class='col-8'>
-                                <?php echo $job['supplier_email'];?>
+                                <?php echo $job['finisher_email'];?>
                             </div>
                         </div>
                         <div class='row'>
                             <label class='col-4 font-weight-bold'>Phone</label>
                             <div class='col-8'>
-                                <?php echo $job['supplier_phone'];?>
+                                <?php echo $job['finisher_phone'];?>
                             </div>
                         </div>
                     </div>

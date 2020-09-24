@@ -11,21 +11,21 @@
                         autoCompleter.suburbAutoComplete($('#suburb'));
                     }
                 },
-                'add-supplier':{
+                'add-finisher':{
                     init: function(){
                         actions.common.init();
-                        $('form#add_production_supplier').submit(function(e){
+                        $('form#add_production_finisher').submit(function(e){
                             if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Supplier...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Finisher...</h2></div>' });
                             }
                         });
                     }
                 },
-                'edit-supplier':{
+                'edit-finisher':{
                     init: function(){
                         actions.common.init();
-                        $('form#edit_production_supplier').submit(function(e){
+                        $('form#edit_production_finisher').submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
@@ -33,9 +33,9 @@
                         });
                     }
                 },
-                'view-suppliers':{
+                'view-finishers':{
                     init: function(){
-                        dataTable.init($('table#supplier_list_table'), {
+                        dataTable.init($('table#finisher_list_table'), {
                             "order": []
                         } );
                     }

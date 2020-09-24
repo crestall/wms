@@ -1,21 +1,21 @@
 <?php
-$name       = empty(Form::value('name'))?       $supplier['name']         : Form::value('name');
-$contact    = empty(Form::value('contact'))?    $supplier['contact']      : Form::value('contact');
-$email      = empty(Form::value('email'))?      $supplier['email']        : Form::value('email');
-$phone      = empty(Form::value('phone'))?      $supplier['phone']        : Form::value('phone');
-$address    = empty(Form::value('address'))?    $supplier['address']      : Form::value('address');
-$address2   = empty(Form::value('address2'))?   $supplier['address_2']    : Form::value('address2');
-$suburb     = empty(Form::value('suburb'))?     $supplier['suburb']       : Form::value('suburb');
-$state      = empty(Form::value('state'))?      $supplier['state']        : Form::value('state');
-$postcode   = empty(Form::value('postcode'))?   $supplier['postcode']     : Form::value('postcode');
-$country    = empty(Form::value('country'))?    $supplier['country']      : Form::value('country');
-$website    = empty(Form::value('website'))?    $supplier['website']      : Form::value('website');
+$name       = empty(Form::value('name'))?       $finisher['name']         : Form::value('name');
+$contact    = empty(Form::value('contact'))?    $finisher['contact']      : Form::value('contact');
+$email      = empty(Form::value('email'))?      $finisher['email']        : Form::value('email');
+$phone      = empty(Form::value('phone'))?      $finisher['phone']        : Form::value('phone');
+$address    = empty(Form::value('address'))?    $finisher['address']      : Form::value('address');
+$address2   = empty(Form::value('address2'))?   $finisher['address_2']    : Form::value('address2');
+$suburb     = empty(Form::value('suburb'))?     $finisher['suburb']       : Form::value('suburb');
+$state      = empty(Form::value('state'))?      $finisher['state']        : Form::value('state');
+$postcode   = empty(Form::value('postcode'))?   $finisher['postcode']     : Form::value('postcode');
+$country    = empty(Form::value('country'))?    $finisher['country']      : Form::value('country');
+$website    = empty(Form::value('website'))?    $finisher['website']      : Form::value('website');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <form id="edit_production_supplier" method="post" action="/form/procEditProductionSupplier">
+        <form id="edit_production_finisher" method="post" action="/form/procEditProductionFinisher">
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
                 <div class="col-md-4">
@@ -24,7 +24,7 @@ $website    = empty(Form::value('website'))?    $supplier['website']      : Form
                 </div>
             </div>
             <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="active" name="active" <?php if($supplier['active'] > 0) echo "checked";?> />
+                        <input class="custom-control-input" type="checkbox" id="active" name="active" <?php if($finisher['active'] > 0) echo "checked";?> />
                         <label class="custom-control-label col-md-3" for="active">Active</label>
                     </div>
             <div class="form-group row">
@@ -56,7 +56,7 @@ $website    = empty(Form::value('website'))?    $supplier['website']      : Form
             <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
             <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                <input type="hidden" name="supplier_id" value="<?php echo $supplier_id;?>" />
+                <input type="hidden" name="finisher_id" value="<?php echo $finisher_id;?>" />
                 <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-outline-secondary">Update Details</button>
                 </div>
