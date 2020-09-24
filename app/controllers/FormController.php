@@ -1030,7 +1030,7 @@ class FormController extends Controller {
                 }
             }
             $id = $this->productionjob->addJob($post_data);
-            Session::set('feedback', "That job has been added to the system.<br/>The details can be edited <a href='/jobs/edit-job/job=".$id."'>HERE</a>");
+            Session::set('feedback', "That job has been added to the system.<br/>The details can be edited <a href='/jobs/update-job/job=".$id."'>HERE</a>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/add-job");
     }
