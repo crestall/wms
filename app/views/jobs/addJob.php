@@ -18,15 +18,15 @@ else
     $customer_collapse = "collapse";
     $customer_aria_expanded = "false";
 }
-if(Session::getAndDestroy('show_supplier_address'))
+if(Session::getAndDestroy('show_finisher_address'))
 {
-    $supplier_collapse = "collapse show";
-    $supplier_aria_expanded = "true";
+    $finisher_collapse = "collapse show";
+    $finisher_aria_expanded = "true";
 }
 else
 {
-    $supplier_collapse = "collapse";
-    $supplier_aria_expanded = "false";
+    $finisher_collapse = "collapse";
+    $finisher_aria_expanded = "false";
 }
 ?>
 <div id="page-wrapper">
@@ -188,7 +188,7 @@ else
                 </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
-                <h3>Supplier Details</h3>
+                <h3>Finisher Details</h3>
                 <div class="row form-group">
                     <label class="col-md-3 col-form-label">Expected Delivery Date</label>
                     <div class="col-md-3">
@@ -202,78 +202,78 @@ else
                     <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo Form::value('date_ed_value');?>" />
                 </div>
                 <div class="form-group row mb-3">
-                    <label class="col-md-3">Supplier Name</label>
+                    <label class="col-md-3">Finisher Name</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="supplier_name" id="supplier_name" value="<?php echo Form::value('supplier_name');?>" />
-                        <input type="hidden" name="supplier_id" id="supplier_id" value="0" />
+                        <input type="text" class="form-control" name="finisher_name" id="finisher_name" value="<?php echo Form::value('finisher_name');?>" />
+                        <input type="hidden" name="finisher_id" id="finisher_id" value="0" />
                     </div>
                 </div>
                 <div class="form-group row ">
                     <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control supplier" name="supplier_contact" id="supplier_contact" value="<?php echo Form::value('supplier_contact');?>" />
+                        <input type="text" class="form-control finisher" name="finisher_contact" id="finisher_contact" value="<?php echo Form::value('finisher_contact');?>" />
                     </div>
                     <label class="col-lg-1 col-md-2">Email</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control supplier email" name="supplier_email" id="supplier_email" value="<?php echo Form::value('supplier_email');?>" />
-                        <?php echo Form::displayError('supplier_email');?>
+                        <input type="text" class="form-control finisher email" name="finisher_email" id="finisher_email" value="<?php echo Form::value('finisher_email');?>" />
+                        <?php echo Form::displayError('finisher_email');?>
                     </div>
                     <label class="col-lg-1 col-md-2">Phone</label>
                     <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control supplier" name="supplier_phone" id="supplier_phone" value="<?php echo Form::value('supplier_phone');?>" />
+                        <input type="text" class="form-control finisher" name="finisher_phone" id="finisher_phone" value="<?php echo Form::value('finisher_phone');?>" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col text-right">
-                        <a  id="supplier_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#supplier_address_holder" role="button" aria-expanded="<?php echo $supplier_aria_expanded;?>" aria-controls="supplier_address_holder"> </a>
+                        <a  id="finisher_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#finisher_address_holder" role="button" aria-expanded="<?php echo $finisher_aria_expanded;?>" aria-controls="finisher_address_holder"> </a>
                     </div>
                 </div>
-                <div id="supplier_address_holder" class="<?php echo $supplier_collapse;?> mt-3">
+                <div id="finisher_address_holder" class="<?php echo $finisher_collapse;?> mt-3">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Address Line 1</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control supplier" name="supplier_address" id="supplier_address" value="<?php echo Form::value('supplier_address');?>" />
-                            <?php echo Form::displayError('supplier_address');?>
+                            <input type="text" class="form-control finisher" name="finisher_address" id="finisher_address" value="<?php echo Form::value('finisher_address');?>" />
+                            <?php echo Form::displayError('finisher_address');?>
                         </div>
                         <div class="col-md-3 checkbox checkbox-default">
-                            <input class="form-check-input styled" type="checkbox" id="ignore_supplier_address_error" name="ignore_supplier_address_error" />
-                            <label for="ignore_supplier_address_error">No need for a number</label>
+                            <input class="form-check-input styled" type="checkbox" id="ignore_finisher_address_error" name="ignore_finisher_address_error" />
+                            <label for="ignore_finisher_address_error">No need for a number</label>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Address Line 2</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control supplier" name="supplier_address2" id="supplier_address2" value="<?php echo Form::value('supplier_address2');?>" />
+                            <input type="text" class="form-control finisher" name="finisher_address2" id="finisher_address2" value="<?php echo Form::value('finisher_address2');?>" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Suburb/Town</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control supplier" name="supplier_suburb" id="supplier_suburb" value="<?php echo Form::value('supplier_suburb');?>" />
-                            <?php echo Form::displayError('supplier_suburb');?>
+                            <input type="text" class="form-control finisher" name="finisher_suburb" id="finisher_suburb" value="<?php echo Form::value('finisher_suburb');?>" />
+                            <?php echo Form::displayError('finisher_suburb');?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">State</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control supplier" name="supplier_state" id="supplier_state" value="<?php echo Form::value('supplier_state');?>" />
+                            <input type="text" class="form-control finisher" name="finisher_state" id="finisher_state" value="<?php echo Form::value('finisher_state');?>" />
                             <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
-                            <?php echo Form::displayError('supplier_state');?>
+                            <?php echo Form::displayError('finisher_state');?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Postcode</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control supplier" name="supplier_postcode" id="supplier_postcode" value="<?php echo Form::value('supplier_postcode');?>" />
-                            <?php echo Form::displayError('supplier_postcode');?>
+                            <input type="text" class="form-control finisher" name="finisher_postcode" id="finisher_postcode" value="<?php echo Form::value('finisher_postcode');?>" />
+                            <?php echo Form::displayError('finisher_postcode');?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Country</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control supplier" name="supplier_country" id="supplier_country" value="<?php echo Form::value('supplier_country');?>" />
+                            <input type="text" class="form-control finisher" name="finisher_country" id="finisher_country" value="<?php echo Form::value('finisher_country');?>" />
                             <span class="inst">use the 2 letter ISO code</span>
-                            <?php echo Form::displayError('supplier_country');?>
+                            <?php echo Form::displayError('finisher_country');?>
                         </div>
                     </div>
                 </div>

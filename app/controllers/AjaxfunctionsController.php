@@ -929,10 +929,10 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
-    public function getJobSupplier()
+    public function getJobFinisher()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->productionsupplier->getAutocompleteSupplier($this->request->query['supplier']);
+        $data = $this->productionfinisher->getAutocompleteFinisher($this->request->query['finisher']);
         $this->view->renderJson($data);
     }
 

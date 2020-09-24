@@ -549,12 +549,12 @@ var autoCompleter = {
             minLength: 2
         });
     },
-    productionJobSupplierAutoComplete: function(element, selectCallback, changeCallback)
+    productionJobFinisherAutoComplete: function(element, selectCallback, changeCallback)
     {
         element.autocomplete({
             source: function(req, response){
                 var url;
-                url = "/ajaxfunctions/getJobSupplier/?supplier="+req.term;
+                url = "/ajaxfunctions/getJobFinisher/?finisher="+req.term;
                 //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);
