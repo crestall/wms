@@ -74,19 +74,19 @@
                         <div class='row'>
                             <label class='col-4 font-weight-bold'>Contact</label>
                             <div class='col-8'>
-                                <?php echo $job['supplier_contact'];?>
+                                <?php echo $job['finisher_contact'];?>
                             </div>
                         </div>
                         <div class='row'>
                             <label class='col-4 font-weight-bold'>Email</label>
                             <div class='col-8'>
-                                <?php echo $job['supplier_email'];?>
+                                <?php echo $job['finisher_email'];?>
                             </div>
                         </div>
                         <div class='row'>
                             <label class='col-4 font-weight-bold'>Phone</label>
                             <div class='col-8'>
-                                <?php echo $job['supplier_phone'];?>
+                                <?php echo $job['finisher_phone'];?>
                             </div>
                         </div>
                     </div>
