@@ -16,19 +16,9 @@ class TasksController extends Controller
         parent::beforeAction();
     }
 
-    public function initialize(){
-
-         $this->loadEparcelLocations([
-            'Freedom',
-            'Nuchev',
-            'TTAU',
-            'Oneplate'
-        ]);
-
-        $this->loadMYOBInstances([
-            'Freedom'
-        ]);
-
+    public function initialize()
+    {
+        //no authentication component needed
         $this->loadComponents([
             'Security'
         ]);

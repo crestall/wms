@@ -19,6 +19,7 @@ class FormController extends Controller {
         //die('action '.$action);
         if($action == "procLogin" || $action == "procForgotPassword" || $action == "procUpdatePassword")
         {
+            //no auth component need for logging in
              $this->loadComponents([
                  'Security'
              ]);
@@ -32,22 +33,6 @@ class FormController extends Controller {
                  'Security'
              ]);
         }
-
-        $this->loadMYOBInstances([
-            'Freedom'
-        ]);
-
-        $this->loadEparcelLocations([
-            'Freedom',
-            'Nuchev',
-            'TTAU',
-            'Oneplate'
-        ]);
-
-        $this->loadMYOBInstances([
-                'Freedom'
-        ]);
-
     }
 
     public function beforeAction(){
