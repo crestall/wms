@@ -141,7 +141,7 @@ $c = 1;
                             <h4>View Customers</h4>
                         </div>
                         <div class="card-body text-center">
-                        	<a class="btn btn-lg btn-outline-fsg" href="/customers/view-customers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-tie"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        	<a class="btn btn-lg btn-outline-fsg" href="/customers/view-customers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-tie"></i><i class="fal fa-binoculars" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
                         </div>
                     </div>
                     <div class="card homepagecard">
@@ -149,7 +149,7 @@ $c = 1;
                             <h4>View Finishers</h4>
                         </div>
                         <div class="card-body text-center">
-                        	<a class="btn btn-lg btn-outline-fsg" href="/finishers/view-finishers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-people-arrows"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        	<a class="btn btn-lg btn-outline-fsg" href="/finishers/view-finishers"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-people-arrows"></i><i class="fal fa-binoculars" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
                         </div>
                     </div>
                     <div class="card homepagecard">
@@ -157,7 +157,7 @@ $c = 1;
                             <h4>View FSG Contacts</h4>
                         </div>
                         <div class="card-body text-center">
-                        	<a class="btn btn-lg btn-outline-fsg" href="/fsg-contacts/view-contacts"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-chart"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        	<a class="btn btn-lg btn-outline-fsg" href="/fsg-contacts/view-contacts"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-user-chart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-4 up-1 right-4"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
                         </div>
                     </div>
                 <?php endif;?>
