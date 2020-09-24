@@ -597,11 +597,11 @@ Add Job Buttons
     content: "Hide Address Details";
 }
 
-#supplier_address_toggle[aria-expanded="false"]:before{
+#finisher_address_toggle[aria-expanded="false"]:before{
     content: "Show Address Details";
 }
 
-#supplier_address_toggle[aria-expanded="true"]:before{
+#finisher_address_toggle[aria-expanded="true"]:before{
     content: "Hide Address Details";
 }
 

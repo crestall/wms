@@ -19,31 +19,31 @@ $customer_state = (!empty(Form::value('customer_state')))? Form::value('customer
 $customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('customer_postcode'):$customer['postcode'];
 $customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
 $date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['ed_date'];
-if(count($supplier))
+if(count($finisher))
 {
-    $supplier_name = ucwords((!empty(Form::value('supplier_name')))? Form::value('supplier_name'):$supplier['name']);
-    $supplier_contact = (!empty(Form::value('supplier_contact')))? Form::value('supplier_contact'):$supplier['contact'];
-    $supplier_email = (!empty(Form::value('supplier_email')))? Form::value('supplier_email'):$supplier['email'];
-    $supplier_phone = (!empty(Form::value('supplier_phone')))? Form::value('supplier_phone'):$supplier['phone'];
-    $supplier_address = (!empty(Form::value('supplier_address')))? Form::value('supplier_address'):$supplier['address'];
-    $supplier_address2 = (!empty(Form::value('supplier_address2')))? Form::value('supplier_address2'):$supplier['address_2'];
-    $supplier_suburb = (!empty(Form::value('supplier_suburb')))? Form::value('supplier_suburb'):$supplier['suburb'];
-    $supplier_state = (!empty(Form::value('supplier_state')))? Form::value('supplier_state'):$supplier['state'];
-    $supplier_postcode = (!empty(Form::value('supplier_postcode')))? Form::value('supplier_postcode'):$supplier['postcode'];
-    $supplier_country = (!empty(Form::value('supplier_country')))? Form::value('supplier_country'):$supplier['country'];
+    $finisher_name = ucwords((!empty(Form::value('finisher_name')))? Form::value('finisher_name'):$finisher['name']);
+    $finisher_contact = (!empty(Form::value('finisher_contact')))? Form::value('finisher_contact'):$finisher['contact'];
+    $finisher_email = (!empty(Form::value('finisher_email')))? Form::value('finisher_email'):$finisher['email'];
+    $finisher_phone = (!empty(Form::value('finisher_phone')))? Form::value('finisher_phone'):$finisher['phone'];
+    $finisher_address = (!empty(Form::value('finisher_address')))? Form::value('finisher_address'):$finisher['address'];
+    $finisher_address2 = (!empty(Form::value('finisher_address2')))? Form::value('finisher_address2'):$finisher['address_2'];
+    $finisher_suburb = (!empty(Form::value('finisher_suburb')))? Form::value('finisher_suburb'):$finisher['suburb'];
+    $finisher_state = (!empty(Form::value('finisher_state')))? Form::value('finisher_state'):$finisher['state'];
+    $finisher_postcode = (!empty(Form::value('finisher_postcode')))? Form::value('finisher_postcode'):$finisher['postcode'];
+    $finisher_country = (!empty(Form::value('finisher_country')))? Form::value('finisher_country'):$finisher['country'];
 }
 else
 {
-    $supplier_name = Form::value('supplier_name');
-    $supplier_contact = Form::value('supplier_contact');
-    $supplier_email = Form::value('supplier_email');
-    $supplier_phone = Form::value('supplier_phone');
-    $supplier_address = Form::value('supplier_address');
-    $supplier_address2 =  Form::value('supplier_address2');
-    $supplier_suburb = Form::value('supplier_suburb');
-    $supplier_state = Form::value('supplier_state');
-    $supplier_postcode = Form::value('supplier_postcode');
-    $supplier_country = Form::value('supplier_country');
+    $finisher_name = Form::value('finisher_name');
+    $finisher_contact = Form::value('finisher_contact');
+    $finisher_email = Form::value('finisher_email');
+    $finisher_phone = Form::value('finisher_phone');
+    $finisher_address = Form::value('finisher_address');
+    $finisher_address2 =  Form::value('finisher_address2');
+    $finisher_suburb = Form::value('finisher_suburb');
+    $finisher_state = Form::value('finisher_state');
+    $finisher_postcode = Form::value('finisher_postcode');
+    $finisher_country = Form::value('finisher_country');
 }
 
 ?>
@@ -52,7 +52,7 @@ else
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php //echo "JOB<pre>",print_r($job),"</pre>";?>
         <?php //echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
-        <?php //echo "SUPPLIER<pre>",print_r($supplier),"</pre>";?>
+        <?php //echo "finisher<pre>",print_r($finisher),"</pre>";?>
         <div class="row">
             <div class="col-sm-12 col-md-6 mb-3" id="jobdetails">
                 <div class="card h-100 border-secondary order-card">
@@ -88,7 +88,7 @@ else
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-4">Sales Rep</label>
+                                <label class="col-md-4">FSG Contact</label>
                                 <div class="col-md-8">
                                     <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps($salesrep_id);?></select>
                                 </div>
@@ -244,18 +244,18 @@ else
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 mb-3">
-                <div class="card h-100 border-secondary order-card" id="supplierdetails">
+                <div class="card h-100 border-secondary order-card" id="finisherdetails">
                     <div class="card-header bg-secondary text-white">
-                        Supplier Details
+                        Finisher Details
                     </div>
                     <div class="card-body">
-                        <?php if(isset($_SESSION['jobsupplierdetailsfeedback'])) :?>
-                            <div class='feedbackbox'><?php echo Session::getAndDestroy('jobsupplierdetailsfeedback');?></div>
+                        <?php if(isset($_SESSION['jobfinisherdetailsfeedback'])) :?>
+                            <div class='feedbackbox'><?php echo Session::getAndDestroy('jobfinisherdetailsfeedback');?></div>
                         <?php endif; ?>
-                        <?php if(isset($_SESSION['jobsupplierdetailserrorfeedback'])) :?>
-                            <div class='errorbox'><?php echo Session::getAndDestroy('jobsupplierdetailserrorfeedback');?></div>
+                        <?php if(isset($_SESSION['jobfinisherdetailserrorfeedback'])) :?>
+                            <div class='errorbox'><?php echo Session::getAndDestroy('jobfinisherdetailserrorfeedback');?></div>
                         <?php endif; ?>
-                        <form id="supplier_details_update" method="post" action="/form/procJobSupplierUpdate">
+                        <form id="finisher_details_update" method="post" action="/form/procJobfinisherUpdate">
                             <div class="row form-group">
                                 <label class="col-md-4 col-form-label">Expected Delivery Date</label>
                                 <div class="col-md-8">
@@ -269,77 +269,77 @@ else
                                 <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo $date_ed;?>" />
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-4">Supplier Name</label>
+                                <label class="col-md-4">Finisher Name</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="supplier_name" id="supplier_name" value="<?php echo $supplier_name;?>" />
-                                    <input type="hidden" name="supplier_id" id="supplier_id" value="<?php echo $job['supplier_id'];?>" />
+                                    <input type="text" class="form-control" name="finisher_name" id="finisher_name" value="<?php echo $finisher_name;?>" />
+                                    <input type="hidden" name="finisher_id" id="finisher_id" value="<?php echo $job['finisher_id'];?>" />
                                 </div>
                             </div>
                             <div class="form-group row ">
                                 <label class="col-md-4">Contact</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_contact" id="supplier_contact" value="<?php echo $supplier_contact;?>" />
+                                    <input type="text" class="form-control finisher" name="finisher_contact" id="finisher_contact" value="<?php echo $finisher_contact;?>" />
                                 </div>
                             </div>
                             <div class="form-group row ">
                                 <label class="col-md-4">Email</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier email" name="supplier_email" id="supplier_email" value="<?php echo $supplier_email;?>" />
-                                    <?php echo Form::displayError('supplier_email');?>
+                                    <input type="text" class="form-control finisher email" name="finisher_email" id="finisher_email" value="<?php echo $finisher_email;?>" />
+                                    <?php echo Form::displayError('finisher_email');?>
                                 </div>
                             </div>
                             <div class="form-group row ">
                                 <label class="col-md-4">Phone</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_phone" id="supplier_phone" value="<?php echo $supplier_phone;?>" />
+                                    <input type="text" class="form-control finisher" name="finisher_phone" id="finisher_phone" value="<?php echo $finisher_phone;?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Address Line 1</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_address" id="supplier_address" value="<?php echo $supplier_address;?>" /><br>
+                                    <input type="text" class="form-control finisher" name="finisher_address" id="finisher_address" value="<?php echo $finisher_address;?>" /><br>
                                     <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
-                                        <input class="form-check-input styled" type="checkbox" id="ignore_supplier_address_error" name="ignore_supplier_address_error" />
-                                        <label for="ignore_supplier_address_error"><span class="inst">No need for a number</span></label>
+                                        <input class="form-check-input styled" type="checkbox" id="ignore_finisher_address_error" name="ignore_finisher_address_error" />
+                                        <label for="ignore_finisher_address_error"><span class="inst">No need for a number</span></label>
                                     </div>
-                                    <?php echo Form::displayError('supplier_address');?>
+                                    <?php echo Form::displayError('finisher_address');?>
                                 </div>
 
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Address Line 2</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_address2" id="supplier_address2" value="<?php echo $supplier_address2;?>" />
+                                    <input type="text" class="form-control finisher" name="finisher_address2" id="finisher_address2" value="<?php echo $finisher_address2;?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Suburb/Town</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_suburb" id="supplier_suburb" value="<?php echo $supplier_suburb;?>" />
-                                    <?php echo Form::displayError('supplier_suburb');?>
+                                    <input type="text" class="form-control finisher" name="finisher_suburb" id="finisher_suburb" value="<?php echo $finisher_suburb;?>" />
+                                    <?php echo Form::displayError('finisher_suburb');?>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">State</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_state" id="supplier_state" value="<?php echo $supplier_state;?>" />
+                                    <input type="text" class="form-control finisher" name="finisher_state" id="finisher_state" value="<?php echo $finisher_state;?>" />
                                     <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
-                                    <?php echo Form::displayError('supplier_state');?>
+                                    <?php echo Form::displayError('finisher_state');?>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Postcode</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_postcode" id="supplier_postcode" value="<?php echo $supplier_postcode;?>" />
-                                    <?php echo Form::displayError('supplier_postcode');?>
+                                    <input type="text" class="form-control finisher" name="finisher_postcode" id="finisher_postcode" value="<?php echo $finisher_postcode;?>" />
+                                    <?php echo Form::displayError('finisher_postcode');?>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Country</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control supplier" name="supplier_country" id="supplier_country" value="<?php $supplier_country;?>" />
+                                    <input type="text" class="form-control finisher" name="finisher_country" id="finisher_country" value="<?php $finisher_country;?>" />
                                     <span class="inst">use the 2 letter ISO code</span>
-                                    <?php echo Form::displayError('supplier_country');?>
+                                    <?php echo Form::displayError('finisher_country');?>
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
@@ -347,7 +347,7 @@ else
                         </form>
                     </div>
                     <div class="card-footer text-right">
-                        <button id="supplier_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
+                        <button id="finisher_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
                     </div>
                 </div>
             </div>

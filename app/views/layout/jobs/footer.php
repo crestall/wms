@@ -107,34 +107,34 @@
                                 return false;
                             }
                         }
-                        autoCompleter.addressAutoComplete($('#supplier_address'), 'supplier_');
-                        $("input#supplier_name").each(function(i,e){
+                        autoCompleter.addressAutoComplete($('#finisher_address'), 'finisher_');
+                        $("input#finisher_name").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
                             {
                                 $(this).autocomplete( "destroy" );
                             }
-                            autoCompleter.productionJobSupplierAutoComplete($(this), selectSupplierCallback, changeSupplierCallback);
+                            autoCompleter.productionJobFinisherAutoComplete($(this), selectFinisherCallback, changeFinisherCallback);
                         });
-                        function selectSupplierCallback(event, ui)
+                        function selectFinisherCallback(event, ui)
                         {
-                            $('input#supplier_contact').val(ui.item.contact);
-                            $('input#supplier_email').val(ui.item.email);
-                            $('input#supplier_phone').val(ui.item.phone);
-                            $('input#supplier_id').val(ui.item.customer_id);
-                            $('input#supplier_address').val(ui.item.address);
-                            $('input#supplier_address2').val(ui.item.address_2);
-                            $('input#supplier_suburb').val(ui.item.suburb);
-                            $('input#supplier_state').val(ui.item.state);
-                            $('input#supplier_country').val(ui.item.country);
-                            $('input#supplier_postcode').val(ui.item.postcode);
+                            $('input#finisher_contact').val(ui.item.contact);
+                            $('input#finisher_email').val(ui.item.email);
+                            $('input#finisher_phone').val(ui.item.phone);
+                            $('input#finisher_id').val(ui.item.customer_id);
+                            $('input#finisher_address').val(ui.item.address);
+                            $('input#finisher_address2').val(ui.item.address_2);
+                            $('input#finisher_suburb').val(ui.item.suburb);
+                            $('input#finisher_state').val(ui.item.state);
+                            $('input#finisher_country').val(ui.item.country);
+                            $('input#finisher_postcode').val(ui.item.postcode);
                             return false;
                         }
-                        function changeSupplierCallback(event, ui)
+                        function changeFinisherCallback(event, ui)
                         {
                             if (!ui.item)
                 	        {
-                                $('input#supplier_id').val(0);
-                                $('input.supplier').each(function(element, index){
+                                $('input#finisher_id').val(0);
+                                $('input.finisher').each(function(element, index){
                                     $(this).val("");
                                 })
                                 return false;
@@ -172,10 +172,10 @@
                         $('button#customer_details_update_submitter').click(function(e){
                             $('form#customer_details_update').submit();
                         });
-                        $('button#supplier_details_update_submitter').click(function(e){
-                            $('form#supplier_details_update').submit();
+                        $('button#finisher_details_update_submitter').click(function(e){
+                            $('form#finisher_details_update').submit();
                         });
-                        $('form#job_details_update, form#customer_details_update, form#supplier_details_update').submit(function(e){
+                        $('form#job_details_update, form#customer_details_update, form#finisher_details_update').submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
@@ -197,7 +197,7 @@
                 'job-search-results':{
                     init: function(){
                         actions['job-search'].init();
-                        actions.common.jobsTable(); 
+                        actions.common.jobsTable();
                     }
                 }
             }

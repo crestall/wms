@@ -831,11 +831,11 @@ class FormController extends Controller {
                 Form::setError('customer_email', 'The email is not valid');
             }
         }
-        if($this->dataSubbed($supplier_email))
+        if($this->dataSubbed($finisher_email))
         {
-            if(!$this->emailValid($supplier_email))
+            if(!$this->emailValid($finisher_email))
             {
-                Form::setError('supplier_email', 'The email is not valid');
+                Form::setError('finisher_email', 'The email is not valid');
             }
         }
         //customer address checking
@@ -902,51 +902,51 @@ class FormController extends Controller {
                 }
             }
         }
-        //supplier address checking
-        if(!empty($supplier_address) || !empty($supplier_suburb) || !empty($supplier_state) || !empty($supplier_postcode) || !empty($supplier_country))
+        //finisher address checking
+        if(!empty($finisher_address) || !empty($finisher_suburb) || !empty($finisher_state) || !empty($finisher_postcode) || !empty($finisher_country))
         {
             //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
-            if( !$this->dataSubbed($supplier_address) )
+            if( !$this->dataSubbed($finisher_address) )
             {
-                Session::set('show_supplier_address', true);
-                Form::setError('supplier_address', 'An address is required');
+                Session::set('show_finisher_address', true);
+                Form::setError('finisher_address', 'An address is required');
             }
-            elseif( !isset($ignore_supplier_address_error) )
+            elseif( !isset($ignore_finisher_address_error) )
             {
-                if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $supplier_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $supplier_address)) )
+                if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $finisher_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $finisher_address)) )
                 {
-                    Session::set('show_supplier_address', true);
-                    Form::setError('supplier_address', 'The address must include both letters and numbers');
+                    Session::set('show_finisher_address', true);
+                    Form::setError('finisher_address', 'The address must include both letters and numbers');
                 }
             }
-            if(!$this->dataSubbed($supplier_postcode))
+            if(!$this->dataSubbed($finisher_postcode))
             {
-                Session::set('show_supplier_address', true);
-                Form::setError('supplier_postcode', "A postcode is required");
+                Session::set('show_finisher_address', true);
+                Form::setError('finisher_postcode', "A postcode is required");
             }
-            if(!$this->dataSubbed($supplier_country))
+            if(!$this->dataSubbed($finisher_country))
             {
-                Session::set('show_supplier_address', true);
-                Form::setError('supplier_country', "A country is required");
+                Session::set('show_finisher_address', true);
+                Form::setError('finisher_country', "A country is required");
             }
-            elseif(strlen($supplier_country) > 2)
+            elseif(strlen($finisher_country) > 2)
             {
-                Session::set('show_supplier_address', true);
-                Form::setError('supplier_country', "Please use the two letter ISO code");
+                Session::set('show_finisher_address', true);
+                Form::setError('finisher_country', "Please use the two letter ISO code");
             }
-            elseif($customer_country == "AU")
+            elseif($finisher_country == "AU")
             {
-                if(!$this->dataSubbed($customer_suburb))
+                if(!$this->dataSubbed($finisher_suburb))
         		{
-        		    Session::set('show_supplier_address', true);
-        			Form::setError('supplier_suburb', "A delivery suburb is required for Australian addresses");
+        		    Session::set('show_finisher_address', true);
+        			Form::setError('finisher_suburb', "A delivery suburb is required for Australian addresses");
         		}
-        		if(!$this->dataSubbed($supplier_state))
+        		if(!$this->dataSubbed($finisher_state))
         		{
-        		    Session::set('show_supplier_address', true);
-        			Form::setError('supplier_state', "A delivery state is required for Australian addresses");
+        		    Session::set('show_finisher_address', true);
+        			Form::setError('finisher_state', "A delivery state is required for Australian addresses");
         		}
-                $aResponse = $this->Eparcel->ValidateSuburb($supplier_suburb, $supplier_state, str_pad($supplier_postcode,4,'0',STR_PAD_LEFT));
+                $aResponse = $this->Eparcel->ValidateSuburb($finisher_suburb, $finisher_state, str_pad($finisher_postcode,4,'0',STR_PAD_LEFT));
                 $error_string = "";
                 if(isset($aResponse['errors']))
                 {
@@ -961,8 +961,8 @@ class FormController extends Controller {
                 }
                 if(strlen($error_string))
                 {
-                    Session::set('show_supplier_address', true);
-                    Form::setError('supplier_postcode', $error_string);
+                    Session::set('show_finisher_address', true);
+                    Form::setError('finisher_postcode', $error_string);
                 }
             }
         }
@@ -992,6 +992,8 @@ class FormController extends Controller {
             {
                 $customer_id = $this->productioncustomer->addCustomer($customer_data);
                 //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
+                $customer_data['customer_id'] = $customer_id;
+                $post_data['customer_id'] = $customer_id;
             }
             else
             {
@@ -999,38 +1001,40 @@ class FormController extends Controller {
                 $this->productioncustomer->editCustomer($customer_data);
                 //echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
             }
-            //supplier details
-            $supplier_data = array();
-            if($this->dataSubbed($supplier_name))
+            //finisher details
+            $finisher_data = array();
+            if($this->dataSubbed($finisher_name))
             {
-                $supplier_data['name'] = $supplier_name;
-                if($this->dataSubbed($supplier_phone)) $supplier_data['phone'] = $supplier_phone;
-                if($this->dataSubbed($supplier_contact)) $supplier_data['contact'] = $supplier_contact;
-                if($this->dataSubbed($supplier_email)) $supplier_data['email'] = $supplier_email;
-                if($this->dataSubbed($supplier_address)) $supplier_data['address'] = $supplier_address;
-                if($this->dataSubbed($supplier_address2)) $supplier_data['address2'] = $supplier_address2;
-                if($this->dataSubbed($supplier_suburb)) $supplier_data['suburb'] = $supplier_suburb;
-                if($this->dataSubbed($supplier_state)) $supplier_data['state'] = $supplier_state;
-                if($this->dataSubbed($supplier_postcode)) $supplier_data['postcode'] = $supplier_postcode;
-                if($this->dataSubbed($supplier_country)) $supplier_data['country'] = $supplier_country;
+                $finisher_data['name'] = $finisher_name;
+                if($this->dataSubbed($finisher_phone)) $finisher_data['phone'] = $finisher_phone;
+                if($this->dataSubbed($finisher_contact)) $finisher_data['contact'] = $finisher_contact;
+                if($this->dataSubbed($finisher_email)) $finisher_data['email'] = $finisher_email;
+                if($this->dataSubbed($finisher_address)) $finisher_data['address'] = $finisher_address;
+                if($this->dataSubbed($finisher_address2)) $finisher_data['address2'] = $finisher_address2;
+                if($this->dataSubbed($finisher_suburb)) $finisher_data['suburb'] = $finisher_suburb;
+                if($this->dataSubbed($finisher_state)) $finisher_data['state'] = $finisher_state;
+                if($this->dataSubbed($finisher_postcode)) $finisher_data['postcode'] = $finisher_postcode;
+                if($this->dataSubbed($finisher_country)) $finisher_data['country'] = $finisher_country;
             }
-            if(count($supplier_data))
+            if(count($finisher_data))
             {
-                if($supplier_id == 0)
+                if($finisher_id == 0)
                 {
-                    //add new supplier
-                    $supplier_id = $this->productionsupplier->addSupplier($supplier_data);
-                    //echo "Will add supplier data<pre>",print_r($supplier_data),"</pre>";
+                    //add new finisher
+                    $finisher_id = $this->productionfinisher->addFinisher($finisher_data);
+                    $finisher_data['finisher_id'] = $finisher_id;
+                    $post_data['finisher_id'] = $finisher_id;
+                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
                 else
                 {
-                    $supplier_data['supplier_id'] = $supplier_id;
-                    $this->productionsupplier->editSupplier($supplier_data);
-                    //echo "Will edit supplier data<pre>",print_r($supplier_data),"</pre>";
+                    $finisher_data['finisher_id'] = $finisher_id;
+                    $this->productionFinisher->editFinisher($finisher_data);
+                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
             }
             $id = $this->productionjob->addJob($post_data);
-            Session::set('feedback', "That job has been added to the system.<br/>The details can be edited <a href='/jobs/edit-job/job=".$id."'>HERE</a>");
+            Session::set('feedback', "That job has been added to the system.<br/>The details can be edited <a href='/jobs/update-job/job=".$id."'>HERE</a>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/add-job");
     }
