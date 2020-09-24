@@ -993,6 +993,7 @@ class FormController extends Controller {
                 $customer_id = $this->productioncustomer->addCustomer($customer_data);
                 //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
                 $customer_data['customer_id'] = $customer_id;
+                $post_data['customer_id'] = $customer_id;
             }
             else
             {
@@ -1022,6 +1023,7 @@ class FormController extends Controller {
                     //add new finisher
                     $finisher_id = $this->productionfinisher->addFinisher($finisher_data);
                     $finisher_data['finisher_id'] = $finisher_id;
+                    $post_data['finisher_id'] = $finisher_id;
                     //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
                 else
