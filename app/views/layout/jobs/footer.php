@@ -108,6 +108,7 @@
                             }
                         }
                         autoCompleter.addressAutoComplete($('#finisher_address'), 'finisher_');
+                        autoCompleter.suburbAutoComplete($('#finisher_suburb'), 'finisher_');
                         $("input#finisher_name").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
                             {
@@ -141,6 +142,7 @@
                             }
                         }
                         autoCompleter.addressAutoComplete($('#finisher2_address'), 'finisher2_');
+                        autoCompleter.suburbAutoComplete($('#finisher2_suburb'), 'finisher2_');
                         $("input#finisher2_name").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
                             {
