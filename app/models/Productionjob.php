@@ -39,13 +39,13 @@ class Productionjob extends Model{
                 pj.*,
                 pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
                 sr.id as salesrep_id, sr.name AS salesrep_name,
-                ps.id as supplier_id, ps.name AS supplier_name, ps.contact AS supplier_contact, ps.email AS supplier_email, ps.phone AS supplier_phone,
+                pf.id as finisher_id, pf.name AS finisher_name, pf.contact AS finisher_contact, pf.email AS finisher_email, pf.phone AS finisher_phone,
                 js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking
             FROM
                 `production_jobs` pj LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
                 `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
-                `production_suppliers` ps ON pj.supplier_id = ps.id LEFT JOIN
+                `production_finishers` pf ON pj.finisher_id = pf.id LEFT JOIN
                 job_status js ON pj.status_id = js.id
         ";
         if($completed)

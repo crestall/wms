@@ -8,7 +8,7 @@
             <th>Notes</th>
             <th>Status</th>
             <th>FSG Contact</th>
-            <th>Supplier</th>
+            <th>Finisher</th>
             <th>Date Entered</th>
             <th>Due Date</th>
         </tr>
@@ -62,12 +62,12 @@
                 <?php endif;?>
                 ><?php echo ucwords($job['status']);?></td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
-                <td data-label="Supplier">
+                <td data-label="Finisher">
                     <span style="font-size: larger">
                         <?php if($user_role == "production_admin"):?>
-                            <a href="/suppliers/edit-supplier/supplier=<?php echo $job['supplier_id'];?>"><?php echo ucwords($job['supplier_name']);;?></a>
+                            <a href="/finishers/edit-finisher/finisher=<?php echo $job['finisher_id'];?>"><?php echo ucwords($job['finisher_name']);;?></a>
                         <?php else:?>
-                            <?php echo ucwords($job['supplier_name']);?>
+                            <?php echo ucwords($job['finisher_name']);?>
                         <?php endif;?>
                     </span>
                     <div class="contact_details">
