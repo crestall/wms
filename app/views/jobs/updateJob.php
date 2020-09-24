@@ -88,7 +88,7 @@ else
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-4">Sales Rep</label>
+                                <label class="col-md-4">FSG Contact</label>
                                 <div class="col-md-8">
                                     <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps($salesrep_id);?></select>
                                 </div>
