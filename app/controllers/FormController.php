@@ -40,7 +40,8 @@ class FormController extends Controller {
         $this->loadEparcelLocations([
             'Freedom',
             'Nuchev',
-            'TTAU'
+            'TTAU',
+            'Oneplate'
         ]);
 
         $this->loadMYOBInstances([
