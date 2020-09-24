@@ -91,7 +91,7 @@ class Productionjob extends Model{
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
         if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
         if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
-        if(!empty($data['supplier_id'])) $vals['supplier_id'] = $data['supplier_id'];
+        if(!empty($data['finisher_id'])) $vals['finisher_id'] = $data['finisher_id'];
         if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
         if(!empty($data['designer'])) $vals['designer'] = $data['designer'];
         if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
