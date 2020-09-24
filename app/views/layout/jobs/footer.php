@@ -140,6 +140,39 @@
                                 return false;
                             }
                         }
+                        autoCompleter.addressAutoComplete($('#finisher2_address'), 'finisher2_');
+                        $("input#finisher2_name").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.productionJobFinisherAutoComplete($(this), selectFinisherCallback, changeFinisherCallback);
+                        });
+                        function selectFinisherCallback(event, ui)
+                        {
+                            $('input#finisher2_contact').val(ui.item.contact);
+                            $('input#finisher2_email').val(ui.item.email);
+                            $('input#finisher2_phone').val(ui.item.phone);
+                            $('input#finisher2_id').val(ui.item.customer_id);
+                            $('input#finisher2_address').val(ui.item.address);
+                            $('input#finisher2_address2').val(ui.item.address_2);
+                            $('input#finisher2_suburb').val(ui.item.suburb);
+                            $('input#finisher2_state').val(ui.item.state);
+                            $('input#finisher2_country').val(ui.item.country);
+                            $('input#finisher2_postcode').val(ui.item.postcode);
+                            return false;
+                        }
+                        function changeFinisherCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $('input#finisher2_id').val(0);
+                                $('input.finisher2').each(function(element, index){
+                                    $(this).val("");
+                                })
+                                return false;
+                            }
+                        }
                     }
                 },
                 'add-job':{
