@@ -10,7 +10,7 @@
 
                     }
                 },
-                'add-rep':{
+                'add-contact':{
                     init: function()
                     {
                         //autoCompleter.addressAutoComplete($('#address'));
@@ -23,7 +23,7 @@
                         });
                     }
                 },
-                'edit-rep':{
+                'edit-contact':{
                     init: function()
                     {
                         //autoCompleter.addressAutoComplete($('#address'));
@@ -36,7 +36,7 @@
                         });
                     }
                 },
-                'view-reps':{
+                'view-contacts':{
                     init: function(){
                         //console.log('correct');
                         $('table#view_reps_table').filterTable({
