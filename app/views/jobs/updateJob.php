@@ -473,7 +473,7 @@ else
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Country</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control finisher2" name="finisher2_country" id="finisher2_country" value="<?php $finisher2_country;?>" />
+                                    <input type="text" class="form-control finisher2" name="finisher2_country" id="finisher2_country" value="<?php echo $finisher2_country;?>" />
                                     <span class="inst">use the 2 letter ISO code</span>
                                     <?php echo Form::displayError('finisher2_country');?>
                                 </div>
