@@ -148,9 +148,9 @@
                             {
                                 $(this).autocomplete( "destroy" );
                             }
-                            autoCompleter.productionJobFinisherAutoComplete($(this), selectFinisherCallback, changeFinisherCallback);
+                            autoCompleter.productionJobFinisherAutoComplete($(this), selectFinisher2Callback, changeFinisher2Callback);
                         });
-                        function selectFinisherCallback(event, ui)
+                        function selectFinisher2Callback(event, ui)
                         {
                             $('input#finisher2_contact').val(ui.item.contact);
                             $('input#finisher2_email').val(ui.item.email);
@@ -164,7 +164,7 @@
                             $('input#finisher2_postcode').val(ui.item.postcode);
                             return false;
                         }
-                        function changeFinisherCallback(event, ui)
+                        function changeFinisher2Callback(event, ui)
                         {
                             if (!ui.item)
                 	        {
