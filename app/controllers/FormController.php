@@ -844,7 +844,7 @@ class FormController extends Controller {
         //finisher two address checking
         if(!empty($finisher2_address) || !empty($finisher2_suburb) || !empty($finisher2_state) || !empty($finisher2_postcode) || !empty($finisher2_country))
         {
-            $this->validateAddress($finisher2_address, $finisher2_suburb, $finisher2_state, $finisher2_postcode, $finisher2_country, isset($ignore_finisher2_address_error), "finisher_", "show_finisher2_address");
+            $this->validateAddress($finisher2_address, $finisher2_suburb, $finisher2_state, $finisher2_postcode, $finisher2_country, isset($ignore_finisher2_address_error), "finisher2_", "show_finisher2_address");
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
