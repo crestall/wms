@@ -127,6 +127,7 @@ class JobsController extends Controller
         }
         $customer_info = $this->productioncustomer->getCustomerById($job_info['customer_id']);
         $finisher_info = ($job_info['finisher_id'] > 0)? $this->productionfinisher->getFinisherById($job_info['finisher_id']) : array();
+        $finisher2_info = ($job_info['finisher2_id'] > 0)? $this->productionfinisher->getFinisherById($job_info['finisher2_id']) : array();
         //render the page
         Config::setJsConfig('curPage', "update-job");
         Config::set('curPage', "update-job");
@@ -135,7 +136,8 @@ class JobsController extends Controller
             'pht'           =>  ": Update Production Job",
             'job'           =>  $job_info,
             'customer'      =>  $customer_info,
-            'finisher'      =>  $finisher_info
+            'finisher'      =>  $finisher_info,
+            'finisher2'     =>  $finisher2_info
         ]);
     }
 
