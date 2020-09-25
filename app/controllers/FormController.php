@@ -839,66 +839,7 @@ class FormController extends Controller {
         //finisher one address checking
         if(!empty($finisher_address) || !empty($finisher_suburb) || !empty($finisher_state) || !empty($finisher_postcode) || !empty($finisher_country))
         {
-            //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
-            if( !$this->dataSubbed($finisher_address) )
-            {
-                Session::set('show_finisher_address', true);
-                Form::setError('finisher_address', 'An address is required');
-            }
-            elseif( !isset($ignore_finisher_address_error) )
-            {
-                if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $finisher_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $finisher_address)) )
-                {
-                    Session::set('show_finisher_address', true);
-                    Form::setError('finisher_address', 'The address must include both letters and numbers');
-                }
-            }
-            if(!$this->dataSubbed($finisher_postcode))
-            {
-                Session::set('show_finisher_address', true);
-                Form::setError('finisher_postcode', "A postcode is required");
-            }
-            if(!$this->dataSubbed($finisher_country))
-            {
-                Session::set('show_finisher_address', true);
-                Form::setError('finisher_country', "A country is required");
-            }
-            elseif(strlen($finisher_country) > 2)
-            {
-                Session::set('show_finisher_address', true);
-                Form::setError('finisher_country', "Please use the two letter ISO code");
-            }
-            elseif($finisher_country == "AU")
-            {
-                if(!$this->dataSubbed($finisher_suburb))
-        		{
-        		    Session::set('show_finisher_address', true);
-        			Form::setError('finisher_suburb', "A delivery suburb is required for Australian addresses");
-        		}
-        		if(!$this->dataSubbed($finisher_state))
-        		{
-        		    Session::set('show_finisher_address', true);
-        			Form::setError('finisher_state', "A delivery state is required for Australian addresses");
-        		}
-                $aResponse = $this->Eparcel->ValidateSuburb($finisher_suburb, $finisher_state, str_pad($finisher_postcode,4,'0',STR_PAD_LEFT));
-                $error_string = "";
-                if(isset($aResponse['errors']))
-                {
-                    foreach($aResponse['errors'] as $e)
-                    {
-                        $error_string .= $e['message']." ";
-                    }
-                }
-                elseif($aResponse['found'] === false)
-                {
-                    $error_string .= "Postcode does not match suburb or state";
-                }
-                if(strlen($error_string))
-                {
-                    Session::set('show_finisher_address', true);
-                    Form::setError('finisher_postcode', $error_string);
-                }
-            }
+            $this->validateAddress($finisher_address, $finisher_suburb, $finisher_state, $finisher_postcode, $finisher_country, isset($ignore_finisher_address_error));
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
