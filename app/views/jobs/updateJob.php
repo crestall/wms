@@ -21,7 +21,7 @@ $customer_country = (!empty(Form::value('customer_country')))? Form::value('cust
 $date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['ed_date'];
 if(count($finisher))
 {
-    //echo "<pre>",print_r($finisher),"</pre>"; die();
+    echo "<pre>",print_r($finisher),"</pre>"; //die();
     $finisher_name = ucwords((!empty(Form::value('finisher_name')))? Form::value('finisher_name'):$finisher['name']);
     $finisher_contact = (!empty(Form::value('finisher_contact')))? Form::value('finisher_contact'):$finisher['contact'];
     $finisher_email = (!empty(Form::value('finisher_email')))? Form::value('finisher_email'):$finisher['email'];
@@ -32,6 +32,7 @@ if(count($finisher))
     $finisher_state = (!empty(Form::value('finisher_state')))? Form::value('finisher_state'):$finisher['state'];
     $finisher_postcode = (!empty(Form::value('finisher_postcode')))? Form::value('finisher_postcode'):$finisher['postcode'];
     $finisher_country = (!empty(Form::value('finisher_country')))? Form::value('finisher_country'):$finisher['country'];
+    echo "the country is ".$finisher_country;die();
 }
 else
 {
