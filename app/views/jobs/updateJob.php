@@ -32,7 +32,7 @@ if(count($finisher))
     $finisher_state = (!empty(Form::value('finisher_state')))? Form::value('finisher_state'):$finisher['state'];
     $finisher_postcode = (!empty(Form::value('finisher_postcode')))? Form::value('finisher_postcode'):$finisher['postcode'];
     $finisher_country = (!empty(Form::value('finisher_country')))? Form::value('finisher_country'):$finisher['country'];
-    echo "the country is ".$finisher_country;die();
+
 }
 else
 {
@@ -73,7 +73,7 @@ else
     $finisher2_postcode = Form::value('finisher2_postcode');
     $finisher2_country = Form::value('finisher2_country');
 }
-
+echo "the country is ".$finisher_country;die();
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
