@@ -21,7 +21,7 @@ $customer_country = (!empty(Form::value('customer_country')))? Form::value('cust
 $date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['ed_date'];
 if(count($finisher))
 {
-    echo "<pre>",print_r($finisher),"</pre>"; //die();
+    //echo "<pre>",print_r($finisher),"</pre>"; //die();
     $finisher_name = ucwords((!empty(Form::value('finisher_name')))? Form::value('finisher_name'):$finisher['name']);
     $finisher_contact = (!empty(Form::value('finisher_contact')))? Form::value('finisher_contact'):$finisher['contact'];
     $finisher_email = (!empty(Form::value('finisher_email')))? Form::value('finisher_email'):$finisher['email'];
@@ -73,7 +73,7 @@ else
     $finisher2_postcode = Form::value('finisher2_postcode');
     $finisher2_country = Form::value('finisher2_country');
 }
-echo "the country is ".$finisher_country;die();
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -365,7 +365,7 @@ echo "the country is ".$finisher_country;die();
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Country</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control finisher" name="finisher_country" id="finisher_country" value="<?php $finisher_country;?>" />
+                                    <input type="text" class="form-control finisher" name="finisher_country" id="finisher_country" value="<?php echo $finisher_country;?>" />
                                     <span class="inst">use the 2 letter ISO code</span>
                                     <?php echo Form::displayError('finisher_country');?>
                                 </div>
