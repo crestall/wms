@@ -778,7 +778,7 @@ class FormController extends Controller {
 
     public function procAddProductionJob()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -881,7 +881,7 @@ class FormController extends Controller {
                 $this->productioncustomer->editCustomer($customer_data);
                 //echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
             }
-            //finisher details
+            //finisher one details
             $finisher_data = array();
             if($this->dataSubbed($finisher_name))
             {
@@ -910,6 +910,38 @@ class FormController extends Controller {
                 {
                     $finisher_data['finisher_id'] = $finisher_id;
                     $this->productionFinisher->editFinisher($finisher_data);
+                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
+                }
+            }
+            //finisher two details
+            $finisher2_data = array();
+            if($this->dataSubbed($finisher2_name))
+            {
+                $finisher2_data['name'] = $finisher2_name;
+                if($this->dataSubbed($finisher2_phone)) $finisher2_data['phone'] = $finisher2_phone;
+                if($this->dataSubbed($finisher2_contact)) $finisher2_data['contact'] = $finisher2_contact;
+                if($this->dataSubbed($finisher2_email)) $finisher2_data['email'] = $finisher2_email;
+                if($this->dataSubbed($finisher2_address)) $finisher2_data['address'] = $finisher2_address;
+                if($this->dataSubbed($finisher2_address2)) $finisher2_data['address2'] = $finisher2_address2;
+                if($this->dataSubbed($finisher2_suburb)) $finisher2_data['suburb'] = $finisher2_suburb;
+                if($this->dataSubbed($finisher2_state)) $finisher2_data['state'] = $finisher2_state;
+                if($this->dataSubbed($finisher2_postcode)) $finisher2_data['postcode'] = $finisher2_postcode;
+                if($this->dataSubbed($finisher2_country)) $finisher2_data['country'] = $finisher2_country;
+            }
+            if(count($finisher2_data))
+            {
+                if($finisher2_id == 0)
+                {
+                    //add new finisher
+                    $finisher2_id = $this->productionfinisher->addFinisher($finisher2_data);
+                    $finisher2_data['finisher_id'] = $finisher2_id;
+                    $post_data['finisher2_id'] = $finisher2_id;
+                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
+                }
+                else
+                {
+                    $finisher2_data['finisher_id'] = $finisher2_id;
+                    $this->productionFinisher->editFinisher($finisher2_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
             }
