@@ -834,7 +834,7 @@ class FormController extends Controller {
         //customer address checking
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
         {
-            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error), "customer_", "show_customer_address");
+            $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, $customer_country, isset($ignore_customer_address_error), "customer_", "show_customer_address");
         }
         //finisher one address checking
         if(!empty($finisher_address) || !empty($finisher_suburb) || !empty($finisher_state) || !empty($finisher_postcode) || !empty($finisher_country))
