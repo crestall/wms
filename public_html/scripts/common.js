@@ -17,8 +17,9 @@ var time = new Date().getTime();
  */
 
 
-  refresh();
+
   var time = new Date().getTime();
+  refresh();
   $(document).bind("mousemove keypress", function(e) {
     time = new Date().getTime();
     refresh();
