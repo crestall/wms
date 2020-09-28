@@ -1,6 +1,6 @@
 /************
-Refresh Page if no activity
-*************/
+Refresh Page if no activity and show a countdown
+************
 var time = new Date().getTime();
  $(document.body).bind("mousemove keypress", function(e) {
      time = new Date().getTime();
@@ -14,6 +14,35 @@ var time = new Date().getTime();
  }
 
  setTimeout(refresh, 10000);
+ */
+
+
+  refresh();
+  var time = new Date().getTime();
+  $(document).bind("mousemove keypress", function(e) {
+    time = new Date().getTime();
+    refresh();
+  });
+
+  function refresh() {
+    var now = new Date().getTime();
+    if (now - time >= 25000)
+    {
+        window.location.reload(true);
+    }
+    else
+    {
+        var left = Math.ceil( 25 - (now -time)/1000 );
+		$('div#countdown span').html(left+" seconds");
+        setTimeout(refresh, 1000);
+    }
+
+  }
+
+
+
+
+
 /************
 * Navigation Scripting
 ************/
