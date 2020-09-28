@@ -19,6 +19,7 @@ var time = new Date().getTime();
 
 
   var time = new Date().getTime();
+  var refresh_rate = 25000; //milliseconds
   refresh();
   $(document).bind("mousemove keypress", function(e) {
     time = new Date().getTime();
@@ -27,13 +28,13 @@ var time = new Date().getTime();
 
   function refresh() {
     var now = new Date().getTime();
-    if (now - time >= 25000)
+    if (now - time >= refresh_rate)
     {
         window.location.reload(true);
     }
     else
     {
-        var left = Math.ceil( 25 - (now -time)/1000 );
+        var left = Math.ceil( (refresh_rate - (now -time))/1000 );
 		$('div#countdown span').html(left+" seconds");
         setTimeout(refresh, 1000);
     }
