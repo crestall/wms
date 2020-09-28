@@ -26,7 +26,7 @@ function refresh() {
         seconds = (seconds < 0) ? 59 : seconds;
         seconds = (seconds < 10) ? '0' + seconds : seconds;
         $('div#countdown span').html(minutes+":"+seconds);
-        if(left <= 180)
+        if(left <= 60)
         {
             $('div#countdown span').addClass("text-danger");
         }
