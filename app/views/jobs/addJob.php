@@ -28,6 +28,16 @@ else
     $finisher_collapse = "collapse";
     $finisher_aria_expanded = "false";
 }
+if(Session::getAndDestroy('show_finisher2_address'))
+{
+    $finisher2_collapse = "collapse show";
+    $finisher2_aria_expanded = "true";
+}
+else
+{
+    $finisher2_collapse = "collapse";
+    $finisher2_aria_expanded = "false";
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -188,7 +198,7 @@ else
                 </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
-                <h3>Finisher Details</h3>
+                <h3>Finisher One Details</h3>
                 <div class="row form-group">
                     <label class="col-md-3 col-form-label">Expected Delivery Date</label>
                     <div class="col-md-3">
@@ -274,6 +284,85 @@ else
                             <input type="text" class="form-control finisher" name="finisher_country" id="finisher_country" value="<?php echo Form::value('finisher_country');?>" />
                             <span class="inst">use the 2 letter ISO code</span>
                             <?php echo Form::displayError('finisher_country');?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-secondary p-3 m-3 rounded bg-light">
+                <h3>Finisher Two Details</h3>
+                <div class="form-group row mb-3">
+                    <label class="col-md-3">Finisher Name</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="finisher2_name" id="finisher2_name" value="<?php echo Form::value('finisher2_name');?>" />
+                        <input type="hidden" name="finisher2_id" id="finisher2_id" value="0" />
+                    </div>
+                </div>
+                <div class="form-group row ">
+                    <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
+                    <div class="col-lg-3 col-md-4">
+                        <input type="text" class="form-control finisher2" name="finisher2_contact" id="finisher2_contact" value="<?php echo Form::value('finisher2_contact');?>" />
+                    </div>
+                    <label class="col-lg-1 col-md-2">Email</label>
+                    <div class="col-lg-3 col-md-4">
+                        <input type="text" class="form-control finisher2 email" name="finisher2_email" id="finisher2_email" value="<?php echo Form::value('finisher2_email');?>" />
+                        <?php echo Form::displayError('finisher2_email');?>
+                    </div>
+                    <label class="col-lg-1 col-md-2">Phone</label>
+                    <div class="col-lg-3 col-md-4">
+                        <input type="text" class="form-control finisher2" name="finisher2_phone" id="finisher2_phone" value="<?php echo Form::value('finisher2_phone');?>" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">
+                        <a  id="finisher2_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#finisher2_address_holder" role="button" aria-expanded="<?php echo $finisher2_aria_expanded;?>" aria-controls="finisher2_address_holder"> </a>
+                    </div>
+                </div>
+                <div id="finisher2_address_holder" class="<?php echo $finisher2_collapse;?> mt-3">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Address Line 1</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher2" name="finisher2_address" id="finisher2_address" value="<?php echo Form::value('finisher2_address');?>" />
+                            <?php echo Form::displayError('finisher2_address');?>
+                        </div>
+                        <div class="col-md-3 checkbox checkbox-default">
+                            <input class="form-check-input styled" type="checkbox" id="ignore_finisher2_address_error" name="ignore_finisher2_address_error" />
+                            <label for="ignore_finisher2_address_error">No need for a number</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Address Line 2</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher2" name="finisher2_address2" id="finisher2_address2" value="<?php echo Form::value('finisher2_address2');?>" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Suburb/Town</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher2" name="finisher2_suburb" id="finisher2_suburb" value="<?php echo Form::value('finisher2_suburb');?>" />
+                            <?php echo Form::displayError('finisher2_suburb');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">State</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher2" name="finisher2_state" id="finisher2_state" value="<?php echo Form::value('finisher2_state');?>" />
+                            <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                            <?php echo Form::displayError('finisher2_state');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Postcode</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher2" name="finisher2_postcode" id="finisher2_postcode" value="<?php echo Form::value('finisher2_postcode');?>" />
+                            <?php echo Form::displayError('finisher2_postcode');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Country</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher2" name="finisher2_country" id="finisher2_country" value="<?php echo Form::value('finisher2_country');?>" />
+                            <span class="inst">use the 2 letter ISO code</span>
+                            <?php echo Form::displayError('finisher2_country');?>
                         </div>
                     </div>
                 </div>

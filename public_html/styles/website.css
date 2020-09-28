@@ -78,6 +78,14 @@ website colours
 }
 
 /*****
+Page Refresh Countdown
+******/
+
+div#countdown{
+    font-size: smaller;
+}
+
+/*****
 The Section Cards
 ******/
 a.index-link{
@@ -602,6 +610,14 @@ Add Job Buttons
 }
 
 #finisher_address_toggle[aria-expanded="true"]:before{
+    content: "Hide Address Details";
+}
+
+#finisher2_address_toggle[aria-expanded="false"]:before{
+    content: "Show Address Details";
+}
+
+#finisher2_address_toggle[aria-expanded="true"]:before{
     content: "Hide Address Details";
 }
 

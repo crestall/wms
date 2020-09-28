@@ -1,4 +1,43 @@
 /************
+Refresh Page if no activity and show a countdown
+*************/
+var time = new Date().getTime();
+var refresh_rate = 300000; //milliseconds
+refresh();
+$(document).bind("mousemove keypress", function(e) {
+    time = new Date().getTime();
+    refresh();
+});
+
+function refresh() {
+    var now = new Date().getTime();
+    if (now - time >= refresh_rate)
+    {
+        window.location.reload(true);
+    }
+    else
+    {
+        var left = Math.ceil( (refresh_rate - (now -time))/1000 );
+        var minutes = Math.floor(left/60);
+        var seconds = left - (minutes * 60);
+        --seconds;
+        minutes = (seconds < 0) ? --minutes : minutes;
+        minutes = (minutes < 10) ? '0' + minutes : minutes;
+        seconds = (seconds < 0) ? 59 : seconds;
+        seconds = (seconds < 10) ? '0' + seconds : seconds;
+        $('div#countdown span').html(minutes+":"+seconds);
+        if(left <= 180)
+        {
+            $('div#countdown span').addClass("text-danger");
+        }
+        else
+        {
+            $('div#countdown span').removeClass();
+        }
+        setTimeout(refresh, 1000);
+    }
+}
+/************
 * Navigation Scripting
 ************/
  $(function () {
@@ -58,6 +97,7 @@ var scroller = {
         var $nav = $("nav.fixed-top");
         $nav.toggleClass('scrolled', $(window).scrollTop() > $nav.height());
         $('ul.user-info li').toggleClass('white', $(window).scrollTop() > $nav.height());
+        $('ul.user-info div#countdown').toggleClass('text-white', $(window).scrollTop() < $nav.height());
 	    $nav.toggleClass('navbar-light', $(window).scrollTop() > $nav.height());
         $nav.toggleClass('navbar-dark', $(window).scrollTop() < $nav.height());
         if( $(window).scrollTop() > $nav.height() )
@@ -437,8 +477,11 @@ var autoCompleter = {
             minLength: 2
         });
     },
-    suburbAutoComplete: function(element)
+    suburbAutoComplete: function(element, prefix)
     {
+        if(prefix === undefined) {
+            prefix = "";
+        }
         element.autocomplete({
             source: function(req, response){
             	var url = "/ajaxfunctions/getSuburbs?term="+req.term;
@@ -448,10 +491,10 @@ var autoCompleter = {
             	});
             },
             select: function(event, ui) {
-                $("#state").val(ui.item.state);
-                $("#suburb").val(ui.item.suburb);
-                $("#postcode").val(ui.item.postcode);
-                $("#country").val('AU');
+                $('#'+prefix+'state').val(ui.item.state);
+                $('#'+prefix+'suburb').val(ui.item.suburb);
+                $('#'+prefix+'postcode').val(ui.item.postcode);
+                $('#'+prefix+'country').val('AU');
             },
             change: function (event, ui) {
                 return false;
@@ -475,46 +518,6 @@ var autoCompleter = {
                 {
                    url = "/ajaxfunctions/getAllItems/?item="+req.term+"&clientid="+$('#client_id').val()+"&checkavailable="+check_available;
                 }
-                //console.log(url);
-            	$.getJSON(url, function(data){
-            		response(data);
-            	});
-            },
-            select: function(event, ui) {
-                selectCallback(event, ui);
-            },
-            change: function (event, ui) {
-                changeCallback(event, ui);
-            },
-            minLength: 2
-        });
-    },
-    solarItemAutoComplete: function(element, selectCallback, changeCallback)
-    {
-        element.autocomplete({
-            source: function(req, response)
-            {
-                var url;
-                url = "/ajaxfunctions/getSolarItems/?item="+req.term+"&type_id="+$('#type_id').val()+"&clientid="+$('#client_id').val();
-                $.getJSON(url, function(data){
-            		response(data);
-            	});
-            },
-            select: function(event, ui) {
-                selectCallback(event, ui);
-            },
-            change: function (event, ui) {
-                changeCallback(event, ui);
-            },
-            minLength: 2
-        });
-    },
-    solarAllItemsAutoComplete: function(element, selectCallback, changeCallback)
-    {
-        element.autocomplete({
-            source: function(req, response){
-                var url;
-                url = "/ajaxfunctions/getAllSolarItems/?item="+req.term+"&solar_type_id="+$('#order_type_id').val();
                 //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);
