@@ -40,13 +40,14 @@ var time = new Date().getTime();
         var seconds = left - (minutes * 60);
         --seconds;
         minutes = (seconds < 0) ? --minutes : minutes;
+        minutes = (minutes < 10) ? '0' + minutes : minutes;
         seconds = (seconds < 0) ? 59 : seconds;
         seconds = (seconds < 10) ? '0' + seconds : seconds;
 
 
 
 
-		$('div#countdown span').html(minutes+" : "+seconds);
+		$('div#countdown span').html(minutes+":"+seconds);
         setTimeout(refresh, 1000);
     }
 
