@@ -68,6 +68,7 @@
             preg_match("/locked bag/i", $od['address'], $matches) ||
             preg_match("/cmb /i", $od['address'], $matches) ||
             $od['postcode'] == 3351 ||
+            strtolower($od['country']) != "au" ||
             $od['client_id'] == 6           //Only eparcel for big bottle
         )
             return true;
@@ -181,6 +182,13 @@
     private function assignDirectFreight($order_id)
     {
         //die('Assigning Direct Freight');
+        if($this->chooseEparcel())
+        {
+            Session::set('showcouriererrorfeedback', true);
+    	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
+    		$_SESSION['couriererrorfeedback'] .= "<p>This address can only be serviced by Australia Post</p>";
+            return false;
+        }
         $db = Database::openConnection();
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
         //echo "<pre>",print_r($df_details),"</pre>"; die();
@@ -191,7 +199,7 @@
         {
             Session::set('showcouriererrorfeedback', true);
     	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
-    		$_SESSION['couriererrorfeedback'] .= "<h4>".$response['ResponseMessage']."</p>";
+    		$_SESSION['couriererrorfeedback'] .= "<p>".$response['ResponseMessage']."</p>";
             return false;
         }
         else
