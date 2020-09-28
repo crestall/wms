@@ -28,7 +28,11 @@ function refresh() {
         $('div#countdown span').html(minutes+":"+seconds);
         if(left <= 180)
         {
-            $('div#countdown span').addClass("text-danger")
+            $('div#countdown span').addClass("text-danger");
+        }
+        else
+        {
+            $('div#countdown span').removeClass();
         }
         setTimeout(refresh, 1000);
     }
