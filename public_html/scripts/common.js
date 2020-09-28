@@ -19,7 +19,7 @@ var time = new Date().getTime();
 
 
   var time = new Date().getTime();
-  var refresh_rate = 25000; //milliseconds
+  var refresh_rate = 300000; //milliseconds
   refresh();
   $(document).bind("mousemove keypress", function(e) {
     time = new Date().getTime();
