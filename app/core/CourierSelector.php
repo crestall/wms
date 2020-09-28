@@ -186,7 +186,7 @@
         {
             Session::set('showcouriererrorfeedback', true);
     	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
-    		$_SESSION['couriererrorfeedback'] .= "<p>".$response['ResponseMessage']."</p>";
+    		$_SESSION['couriererrorfeedback'] .= "<p>This address can only be serviced by Australia Post</p>";
             return false;
         }
         $db = Database::openConnection();
@@ -199,7 +199,7 @@
         {
             Session::set('showcouriererrorfeedback', true);
     	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
-    		$_SESSION['couriererrorfeedback'] .= "<p>This address can only be serviced by Australia Post</p>";
+    		$_SESSION['couriererrorfeedback'] .= "<p>".$response['ResponseMessage']."</p>";
             return false;
         }
         else
