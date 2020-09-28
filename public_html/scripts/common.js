@@ -1,32 +1,15 @@
 /************
 Refresh Page if no activity and show a countdown
-************
+*************/
 var time = new Date().getTime();
- $(document.body).bind("mousemove keypress", function(e) {
-     time = new Date().getTime();
- });
-
- function refresh() {
-     if(new Date().getTime() - time >= 60000)
-         window.location.reload(true);
-     else
-         setTimeout(refresh, 10000);
- }
-
- setTimeout(refresh, 10000);
- */
-
-
-
-  var time = new Date().getTime();
-  var refresh_rate = 300000; //milliseconds
-  refresh();
-  $(document).bind("mousemove keypress", function(e) {
+var refresh_rate = 300000; //milliseconds
+refresh();
+$(document).bind("mousemove keypress", function(e) {
     time = new Date().getTime();
     refresh();
-  });
+});
 
-  function refresh() {
+function refresh() {
     var now = new Date().getTime();
     if (now - time >= refresh_rate)
     {
@@ -35,7 +18,6 @@ var time = new Date().getTime();
     else
     {
         var left = Math.ceil( (refresh_rate - (now -time))/1000 );
-
         var minutes = Math.floor(left/60);
         var seconds = left - (minutes * 60);
         --seconds;
@@ -43,20 +25,14 @@ var time = new Date().getTime();
         minutes = (minutes < 10) ? '0' + minutes : minutes;
         seconds = (seconds < 0) ? 59 : seconds;
         seconds = (seconds < 10) ? '0' + seconds : seconds;
-
-
-
-
-		$('div#countdown span').html(minutes+":"+seconds);
+        $('div#countdown span').html(minutes+":"+seconds);
+        if(left <= 180)
+        {
+            $('div#countdown span').addClass("text-danger")
+        }
         setTimeout(refresh, 1000);
     }
-
-  }
-
-
-
-
-
+}
 /************
 * Navigation Scripting
 ************/
