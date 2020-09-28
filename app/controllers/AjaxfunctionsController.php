@@ -753,11 +753,8 @@ class ajaxfunctionsController extends Controller
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
         $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
         /*  */
-        $df_details = $this->directfreight->getDetails($od, $items);
-        //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
-        $df_r = $this->directfreight->getQuote($df_details);
-        $df_response = json_decode($df_r,true);
-        //echo "<pre>",var_dump($df_response),"</pre>"; die();
+
+
 
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
         //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
@@ -787,27 +784,38 @@ class ajaxfunctionsController extends Controller
                 }
             /*********** special deals for OnePlate *******************/
         }
-        if($df_response['ResponseCode'] == 300)
+        if($this->courierselector->chooseEparcel($od))
         {
-            $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2);
-            /*********** special deals for OnePlate *******************/
-                if($od['client_id'] == 82)
-                {
-                    $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2);
-                }
-            /*********** special deals for OnePlate *******************/
-            /*********** charge FREEDOM more *******************/
-                if($od['client_id'] == 7)
-                {
-                    $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
-                }
-            /*********** charge FREEDOM more *******************/
+            $df_charge = "<div class='errorbox'><p>This address can only be serviced by Australia Post</p></div>";
         }
         else
         {
-            $df_charge = "<div class='errorbox'><p>".$df_response['ResponseMessage']."</p></div>";
+            $df_details = $this->directfreight->getDetails($od, $items);
+            //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
+            $df_r = $this->directfreight->getQuote($df_details);
+            $df_response = json_decode($df_r,true);
+            //echo "<pre>",var_dump($df_response),"</pre>"; die();
+            if($df_response['ResponseCode'] == 300)
+            {
+                $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                /*********** special deals for OnePlate *******************/
+                    if($od['client_id'] == 82)
+                    {
+                        $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    }
+                /*********** special deals for OnePlate *******************/
+                /*********** charge FREEDOM more *******************/
+                    if($od['client_id'] == 7)
+                    {
+                        $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    }
+                /*********** charge FREEDOM more *******************/
+            }
+            else
+            {
+                $df_charge = "<div class='errorbox'><p>".$df_response['ResponseMessage']."</p></div>";
+            }
         }
-
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/shipping_quotes.php', [
             'od'                        =>  $od,
             'express'                   =>  $od['eparcel_express'] == 1,
