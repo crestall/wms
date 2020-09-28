@@ -78,6 +78,14 @@ website colours
 }
 
 /*****
+Page Refresh Countdown
+******/
+
+div#countdown{
+    font-size: smaller;
+}
+
+/*****
 The Section Cards
 ******/
 a.index-link{
