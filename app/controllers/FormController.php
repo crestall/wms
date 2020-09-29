@@ -70,6 +70,7 @@ class FormController extends Controller {
             'procCourierEdit',
             'procDFCollection',
             'procDriverAdd',
+            'procDriverEdit',
             'procEditProductionCustomer',
             'procEditProductionFinisher',
             'procEditServiceJob',
@@ -133,6 +134,45 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procDriverEdit()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $id = $this->request->data['line_id'];
+        $post_data = array('id' => $id);
+        foreach($this->request->data as $field => $value)
+        {
+            $field = strtok($field, "_");
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name_'.$id, 'A name is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            if($this->courier->editCourier($post_data))
+            {
+                Session::set('feedback', "Those details have been updated");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."site-settings/couriers");
     }
 
     public function procDriverAdd()
