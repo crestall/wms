@@ -589,7 +589,7 @@ $(document).ready(function() {
         },
         messages:{
             name:{
-                remote: 'Driver names must be unique'
+                remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
             }
         }
     });
