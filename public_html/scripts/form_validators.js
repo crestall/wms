@@ -594,21 +594,23 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
-    $('form.edit_driver').validate({
-        rules:{
-            name:{
-                remote: {
-                    url: '/ajaxfunctions/checkDriverNames'
-                },
-                required: true
+    $('form.edit_driver').each(function(){
+        $(this).validate({
+            rules:{
+                name:{
+                    remote: {
+                        url: '/ajaxfunctions/checkDriverNames'
+                    },
+                    required: true
+                }
+            },
+            messages:{
+                name:{
+                    remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
+                }
             }
-        },
-        messages:{
-            name:{
-                remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
-            }
-        }
-    });
+        });
+    })
     ////////////////////////////////////////////////////////////
     $('#add_origin_order').validate({
         rules:{
