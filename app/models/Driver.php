@@ -10,7 +10,7 @@ class Driver extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'      =>  $data['name']
+            'name'      =>  ucwords($data['name'])
         );
         if(isset($data['phone']))
         {
@@ -23,7 +23,7 @@ class Driver extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'      =>  $data['name']
+            'name'      =>  ucwords($data['name'])
         );
         $vals['active'] = (isset($data['active']))? 1:0;
         $vals['phone'] = (isset($data['phone']))? $data['phone']:NULL;
