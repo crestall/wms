@@ -69,6 +69,7 @@ class FormController extends Controller {
             'procCourierAdd',
             'procCourierEdit',
             'procDFCollection',
+            'procDriverAdd',
             'procEditProductionCustomer',
             'procEditProductionFinisher',
             'procEditServiceJob',
@@ -132,6 +133,42 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procDriverAdd()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name', 'A name is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, add details
+            if($driver_id = $this->driver->addDriver($post_data))
+            {
+                Session::set('feedback', "That Driver has been added to the system");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."site-settings/drivers");
     }
 
     public function procBulkProductionSupplierAdd()
