@@ -138,7 +138,7 @@ class FormController extends Controller {
 
     public function procDriverEdit()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $id = $this->request->data['line_id'];
         $post_data = array('id' => $id);
         foreach($this->request->data as $field => $value)
@@ -163,7 +163,7 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            if($this->courier->editCourier($post_data))
+            if($this->driver->editDriver($post_data))
             {
                 Session::set('feedback', "Those details have been updated");
             }
@@ -172,7 +172,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."site-settings/couriers");
+        return $this->redirector->to(PUBLIC_ROOT."site-settings/drivers");
     }
 
     public function procDriverAdd()
