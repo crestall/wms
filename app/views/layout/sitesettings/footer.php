@@ -130,7 +130,7 @@
                 },
                 'drivers':{
                     init: function(){
-                        $('form#add-driver, form.edit-driver').submit(function(){
+                        $('form#add_driver, form.edit_driver').submit(function(){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
