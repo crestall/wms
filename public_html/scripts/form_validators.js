@@ -599,17 +599,13 @@ $(document).ready(function() {
         $('.driver_name').each(function(){
             $(this).rules('add',{
                 rules:{
-                    name:{
-                        remote: {
-                            url: '/ajaxfunctions/checkDriverNames'
-                        },
-                        required: true
-                    }
+                    remote: {
+                        url: '/ajaxfunctions/checkDriverNames'
+                    },
+                    required: true
                 },
                 messages:{
-                    name:{
-                        remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
-                    }
+                    remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
                 }
             })
         })
