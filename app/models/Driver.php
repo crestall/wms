@@ -76,7 +76,7 @@ class Driver extends Model{
         return $db->queryValue($this->table, array('name' => $name));
     }
 
-    public function checkDriverName($name, $current_name = "")
+    public function checkDriverNames($name, $current_name = "")
     {
         $db = Database::openConnection();
         $name = strtoupper($name);
