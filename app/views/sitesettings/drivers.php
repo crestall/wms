@@ -6,7 +6,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
-        <form id="add-driver"  method="post" enctype="multipart/form-data" action="/form/procDriverAdd">
+        <form id="add_driver"  method="post" enctype="multipart/form-data" action="/form/procDriverAdd">
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Add New Driver</h3>
@@ -41,7 +41,7 @@
         </div>
         <?php if(count($drivers)):?>
             <?php foreach($drivers as $d):?>
-                <form class="edit-driver border-bottom border-secondary border-bottom-dashed mb-3" action="/form/procDriverEdit" method="post">
+                <form class="edit_driver border-bottom border-secondary border-bottom-dashed mb-3" action="/form/procDriverEdit" method="post">
                     <div class="form-group row">
                         <div class="col-md-3">
                             <label class="col-form-label">Name</label>
