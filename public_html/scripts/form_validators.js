@@ -578,7 +578,23 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
-    $('form.edit_driver, form#add_driver').validate({
+    $('form#add_driver').validate({
+        rules:{
+            name:{
+                remote: {
+                    url: '/ajaxfunctions/checkDriverNames'
+                },
+                required: true
+            }
+        },
+        messages:{
+            name:{
+                remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
+    $('form.edit_driver').validate({
         rules:{
             name:{
                 remote: {
