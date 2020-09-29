@@ -138,7 +138,7 @@ class FormController extends Controller {
 
     public function procDriverEdit()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $id = $this->request->data['line_id'];
         $post_data = array('id' => $id);
         foreach($this->request->data as $field => $value)
