@@ -435,7 +435,7 @@ return array(
             ),
             'drivers'   => array(
                 'display'   => true,
-                'icon'      => '<span class="fa-layers fa-fw fa-3x align-middle"><i class="fal fa-user"></i><i class="fad fa-steering-wheel"></i></span>'
+                'icon'      => '<span class="fa-layers fa-fw fa-3x align-middle"><i class="fal fa-user"></i><i class="fad fa-steering-wheel" data-fa-transform="shrink-6 down-4"></i></span>'
             )
 		),
         'downloads' => array(
