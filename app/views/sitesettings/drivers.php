@@ -6,7 +6,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
-        <form id="add-courier"  method="post" enctype="multipart/form-data" action="/form/procDriverAdd">
+        <form id="add-driver"  method="post" enctype="multipart/form-data" action="/form/procDriverAdd">
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Add New Driver</h3>
