@@ -578,6 +578,22 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
+    $('form.edit_driver, form#add_driver').validate({
+        rules:{
+            name:{
+                remote: {
+                    url: '/ajaxfunctions/checkDriverNames'
+                },
+                required: true
+            }
+        },
+        messages:{
+            name:{
+                remote: 'Driver names must be unique'
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
     $('#add_origin_order').validate({
         rules:{
             roof_type:{
