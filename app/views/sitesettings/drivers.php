@@ -39,7 +39,7 @@
             </div>
         </div>
         <?php if(count($drivers)):?>
-            <?php foreach($driver as $d):?>
+            <?php foreach($drivers as $d):?>
                 <form class="edit-driver border-bottom border-secondary border-bottom-dashed mb-3" action="/form/procDriverEdit" method="post">
                     <div class="form-group row">
                         <div class="col-md-3">
