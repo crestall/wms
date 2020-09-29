@@ -596,7 +596,7 @@ $(document).ready(function() {
     ////////////////////////////////////////////////////////////
     $('form.edit_driver').each(function(){
         $(this).validate({});
-        $('driver_name').each(function(){
+        $('.driver_name').each(function(){
             $(this).rules('add',{
                 rules:{
                     name:{
