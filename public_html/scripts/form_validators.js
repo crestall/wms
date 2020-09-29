@@ -594,18 +594,16 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
-    $('form.edit_driver').each(function(){
-        $(this).validate({});
-        $('.driver_name').each(function(){
-            $(this).rules('add',{
-                remote: {
-                    url: '/ajaxfunctions/checkDriverNames'
-                },
-                required: true,
-                messages:{
-                    remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
-                }
-            })
+    $('form.edit_driver').validate({});
+    $('.driver_name').each(function(){
+        $(this).rules('add',{
+            remote: {
+                url: '/ajaxfunctions/checkDriverNames'
+            },
+            required: true,
+            messages:{
+                remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
+            }
         })
     })
     ////////////////////////////////////////////////////////////
