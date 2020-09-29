@@ -16,6 +16,7 @@
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="name" id="name" value="<?php echo Form::value('name');?>" />
+                    <span class="inst">Driver names need to be unique</span>
                     <?php echo Form::displayError('name');?>
                 </div>
             </div>
