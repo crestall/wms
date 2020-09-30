@@ -375,4 +375,19 @@ class Controller {
             'page_name'     => $page_name
         ]);
     }
+
+    /*******************************************************************
+    ** Common Functions To Different Children
+    ********************************************************************/
+    public function drivers()
+    {
+        $drivers = $this->driver->getDrivers();
+        //render the page
+        Config::setJsConfig('curPage', "drivers");
+        Config::set('curPage', "drivers");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/drivers.php',[
+            'page_title'   =>  'Manage Drivers',
+            'drivers'      =>  $drivers
+        ]);
+    }
 }
