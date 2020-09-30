@@ -10,6 +10,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Add New Driver</h3>
+                    <?php echo $child;?>
                 </div>
             </div>
             <div class="form-group row">
