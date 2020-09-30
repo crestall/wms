@@ -599,7 +599,7 @@ $(document).ready(function() {
     });
     $('input.driver_name').each(function(e,i){
         var $form = $(this).find('form.edit_driver');
-        console.table($form);
+        console.table($this);
         $(this).rules('add',{
             remote: {
                 url: '/ajaxfunctions/checkDriverNames',
