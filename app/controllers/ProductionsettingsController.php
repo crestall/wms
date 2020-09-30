@@ -25,7 +25,7 @@ class ProductionSettingsController extends Controller
 
     public function drivers()
     {
-        parent::drivers('production');
+        parent::manageDrivers('production');
     }
 
     public function jobCsvImport()
