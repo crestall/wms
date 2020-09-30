@@ -181,7 +181,7 @@ class FormController extends Controller {
 
     public function procDriverAdd()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -216,7 +216,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."site-settings/drivers");
+        return $this->redirector->to(PUBLIC_ROOT.$return_url);
     }
 
     public function procBulkProductionSupplierAdd()
