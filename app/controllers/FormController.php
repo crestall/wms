@@ -155,7 +155,7 @@ class FormController extends Controller {
         {
             Form::setError('name_'.$id, 'A name is required');
         }
-        elseif($this->driver->getDriverId($name) && strtolower($name) != $current_name )
+        elseif($this->driver->getDriverId($name) && strtolower($name) != strtolower($current_name) )
         {
             Form::setError('name_'.$id, 'This name is already in the system<br>Names must be unique');
         }
