@@ -598,13 +598,12 @@ $(document).ready(function() {
         $(this).validate();
     });
     $('input.driver_name').each(function(e,i){
-        console.table($(this));
+        var $form = $(this).find('form.edit_driver');
         $(this).rules('add',{
             remote: {
                 url: '/ajaxfunctions/checkDriverNames',
                 data: { 'current_name': function()
                         {
-                            var $form = $(this).find('form.edit_driver');
                             var current_value = $form.find("input[name='current_name']").val()
                             return current_value;
                         }
