@@ -603,7 +603,7 @@ $(document).ready(function() {
                 required: true,
                 remote: {
                     url: '/ajaxfunctions/checkDriverNames',
-                    data: { 'current_name': function() { return $('input#current_name_'+line_id).val();}
+                    data: { current_name: function() { return $('input#current_name_'+line_id).val();}
                 },
                 messages:{
                     remote: '<p>This name is already in the system.<br>Driver names must be unique</p>',
