@@ -601,6 +601,8 @@ $(document).ready(function() {
         var this_form = $(this).form;
         //console.table($(this));
         console.log(i + ':' + $(e).prop('id'));
+        var line_id = $(e).prop('id').split('_').pop();
+        console.log('line_id :'+line_id);
         $(this).rules('add',{
             remote: {
                 url: '/ajaxfunctions/checkDriverNames',
