@@ -23,6 +23,11 @@ class ProductionSettingsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function drivers()
+    {
+        parent::drivers('production');
+    }
+
     public function jobCsvImport()
     {
         //render the page
