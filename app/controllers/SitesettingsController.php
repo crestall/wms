@@ -100,6 +100,11 @@ class SiteSettingsController extends Controller
         ]);
     }
 
+    public function drivers()
+    {
+        parent::manageDrivers('site');
+    }
+
     public function userRoles()
     {
         $roles = $this->user->getUserRoles();
