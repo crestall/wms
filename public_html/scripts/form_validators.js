@@ -598,25 +598,16 @@ $(document).ready(function() {
         $(this).validate();
     });
     $('input.driver_name').each(function(i,e){
-        var this_form = $(this).form;
-        //console.table($(this));
-        console.log(i + ':' + $(e).prop('id'));
         var line_id = $(e).prop('id').split('_').pop();
-        console.log('line_id :'+line_id);
         $(this).rules('add',{
-            remote: {
-                url: '/ajaxfunctions/checkDriverNames',
-                data: { 'current_name': function()
-                        {
-                            //console.log('in the rules add');
-                            var current_value = $(this_form).find("input.current_driver_name").val()
-                            return current_value;
-                        }
+                remote: {
+                    url: '/ajaxfunctions/checkDriverNames',
+                    data: { 'current_name': function() { return $('input#current_name_'+line_id).val();}
+                },
+                required: true,
+                messages:{
+                    remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
                 }
-            },
-            required: true,
-            messages:{
-                remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
             }
         })
     })
