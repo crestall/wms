@@ -1005,7 +1005,7 @@ class ajaxfunctionsController extends Controller
 
     public function checkDriverNames()
     {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
+        echo "<pre>",print_r($this->request),"</pre>";die();
         $request = trim($this->request->query['name']);
         $current_name = isset($this->request->query['current_name'])? trim($this->request->query['current_name']) : "";
         $this->view->renderBoolean($this->driver->checkDriverNames($request, $current_name));
