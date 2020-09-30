@@ -66,6 +66,7 @@
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="line_id" value="<?php echo $d['id'];?>" />
                             <input type="hidden" class="current_driver_name" name="current_name" id="current_name_<?php echo $d['id'];?>" value="<?php echo $d['name'];?>" />
+                            <input type="hidden" name="return_url" value="<?php echo $child;?>-settings/drivers" >
                             <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
                         </div>
                     </div>
