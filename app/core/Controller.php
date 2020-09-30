@@ -379,7 +379,7 @@ class Controller {
     /*******************************************************************
     ** Common Functions To Different Children
     ********************************************************************/
-    public function drivers($child)
+    public function manageDrivers($child)
     {
         $drivers = $this->driver->getDrivers();
         //render the page
