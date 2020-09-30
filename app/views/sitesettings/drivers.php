@@ -28,7 +28,7 @@
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <input type="hidden" name="return_url" value="/<?php echo $child;?>-settings/drivers" >
+            <input type="hidden" name="return_url" value="<?php echo $child;?>-settings/drivers" >
             <div class="form-group row">
                 <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-outline-secondary">Add Driver</button>
