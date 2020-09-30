@@ -606,7 +606,8 @@ $(document).ready(function() {
                 },
                 required: true,
                 messages:{
-                    remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
+                    remote: '<p>This name is already in the system.<br>Driver names must be unique</p>',
+                    required: 'A name is required'
                 }
             }
         })
