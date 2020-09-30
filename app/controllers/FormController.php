@@ -138,7 +138,7 @@ class FormController extends Controller {
 
     public function procDriverEdit()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $id = $this->request->data['line_id'];
         $post_data = array('id' => $id);
         foreach($this->request->data as $field => $value)
@@ -154,6 +154,10 @@ class FormController extends Controller {
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name_'.$id, 'A name is required');
+        }
+        elseif($this->driver->getDriverId($name) && strtolower($name) != $current_name )
+        {
+            Form::setError('name_'.$id, 'This name is already in the system<br>Names must be unique');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -190,6 +194,10 @@ class FormController extends Controller {
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name', 'A name is required');
+        }
+        elseif( $this->driver->getDriverId($name) )
+        {
+            Form::setError('name', 'This name is already in the system<br>Names must be unique');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
