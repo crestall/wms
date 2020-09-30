@@ -604,7 +604,7 @@ $(document).ready(function() {
                 data: { 'current_name': function()
                         {
                             var $form = $(this).closest('form.edit_driver');
-                            console.log('form id: '+$form.id);
+                            console.log('form id: '+ $form.prop('id'));
                             var current_value = $form.find("input[name='current_name']").val()
                             return current_value;
                         }
