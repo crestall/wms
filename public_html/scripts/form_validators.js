@@ -594,8 +594,10 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
-    $('form.edit_driver').validate({});
-    $('.driver_name').each(function(e,i){
+    $('form.edit_driver').each(function(e,i){
+        $(this).validate();
+    });
+    $('input.driver_name').each(function(e,i){
         $(this).rules('add',{
             remote: {
                 url: '/ajaxfunctions/checkDriverNames'
