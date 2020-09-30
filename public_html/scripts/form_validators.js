@@ -603,7 +603,7 @@ $(document).ready(function() {
                 url: '/ajaxfunctions/checkDriverNames',
                 data: { 'current_name': function()
                         {
-                            console.log('this: '+ $this);
+                            console.log('this: '+ $(this));
                             var $form = $(this).closest('form.edit_driver');
                             console.log('form id: '+ $form.prop('id'));
                             var current_value = $form.find("input[name='current_name']").val()
