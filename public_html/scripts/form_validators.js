@@ -603,7 +603,9 @@ $(document).ready(function() {
                 url: '/ajaxfunctions/checkDriverNames',
                 data: { 'current_name': function()
                         {
-                            return $("input[name='current_name']").val();
+                            var $form = $(this).closest('form.edit_driver');
+                            var current_value = $form.find("input[name='current_name']").val()
+                            return current_value;
                         }
                 }
             },
