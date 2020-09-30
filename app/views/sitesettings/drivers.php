@@ -45,18 +45,18 @@
                     <div class="form-group row">
                         <div class="col-md-3">
                             <label class="col-form-label">Name</label>
-                            <input type="text" class="form-control required driver_name" name="name_<?php echo $d['id'];?>" id="name_<?php echo $d['id'];?>" value="<?php echo $d['name'];?>" />
+                            <input type="text" class="form-control required driver_name" name="name" id="name_<?php echo $d['id'];?>" value="<?php echo $d['name'];?>" />
                             <?php echo Form::displayError("name_{$d['id']}");?>
                         </div>
                         <div class="col-md-3">
                             <label class="col-form-label">Phone</label>
-                            <input type="text" class="form-control" name="phone_<?php echo $d['id'];?>" id="phone_<?php echo $d['id'];?>" value="<?php echo $d['phone'];?>" />
+                            <input type="text" class="form-control" name="phone" id="phone_<?php echo $d['id'];?>" value="<?php echo $d['phone'];?>" />
                             <?php echo Form::displayError("phone{$d['id']}");?>
                         </div>
                         <div class="col-md-1">
                             <label class="col-form-label" for="active_<?php echo $d['id'];?>">Active</label>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="active_<?php echo $d['id'];?>" name="active_<?php echo $d['id'];?>" <?php if($d['active'] > 0) echo "checked";?> />
+                                <input type="checkbox" class="custom-control-input" id="active_<?php echo $d['id'];?>" name="active" <?php if($d['active'] > 0) echo "checked";?> />
                                 <label class="custom-control-label" for="active_<?php echo $d['id'];?>"></label>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             <label class="col-form-label">&nbsp;</label>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="line_id" value="<?php echo $d['id'];?>" />
-                            <input type="hidden" class="current_driver_name" name="currentname_<?php echo $d['id'];?>" value="<?php echo $d['name'];?>" />
+                            <input type="hidden" class="current_driver_name" name="current_name" value="<?php echo $d['name'];?>" />
                             <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
                         </div>
                     </div>
