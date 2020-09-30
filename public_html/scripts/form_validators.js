@@ -600,7 +600,12 @@ $(document).ready(function() {
     $('input.driver_name').each(function(e,i){
         $(this).rules('add',{
             remote: {
-                url: '/ajaxfunctions/checkDriverNames'
+                url: '/ajaxfunctions/checkDriverNames',
+                data: { 'current_name': function()
+                        {
+                            return $("input[name='current_name']").val();
+                        }
+                }
             },
             required: true,
             messages:{
