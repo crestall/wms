@@ -176,7 +176,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."site-settings/drivers");
+        return $this->redirector->to(PUBLIC_ROOT.$return_url);
     }
 
     public function procDriverAdd()
