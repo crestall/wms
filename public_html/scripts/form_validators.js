@@ -599,12 +599,13 @@ $(document).ready(function() {
     });
     $('input.driver_name').each(function(e,i){
         var this_form = $(this).form;
-        console.table(this_form);
+        console.table($(this));
         $(this).rules('add',{
             remote: {
                 url: '/ajaxfunctions/checkDriverNames',
                 data: { 'current_name': function()
                         {
+                            console.log('in the rules add');
                             var current_value = $(this_form).find("input[name='current_name']").val()
                             return current_value;
                         }
