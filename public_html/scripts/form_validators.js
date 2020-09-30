@@ -598,7 +598,7 @@ $(document).ready(function() {
         $(this).validate();
     });
     $('input.driver_name').each(function(e,i){
-        var $form = $(this).find('form.edit_driver');
+        var $form = $(this).form;
         console.log($(this).form);
         $(this).rules('add',{
             remote: {
