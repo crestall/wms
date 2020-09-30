@@ -379,7 +379,7 @@ class Controller {
     /*******************************************************************
     ** Common Functions To Different Children
     ********************************************************************/
-    public function drivers()
+    public function drivers($child)
     {
         $drivers = $this->driver->getDrivers();
         //render the page
@@ -387,7 +387,8 @@ class Controller {
         Config::set('curPage', "drivers");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/drivers.php',[
             'page_title'   =>  'Manage Drivers',
-            'drivers'      =>  $drivers
+            'drivers'      =>  $drivers,
+            'child'        =>  $child
         ]);
     }
 }
