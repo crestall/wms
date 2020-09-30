@@ -143,7 +143,7 @@ class FormController extends Controller {
         $post_data = array('id' => $id);
         foreach($this->request->data as $field => $value)
         {
-            $field = strtok($field, "_");
+            //$field = strtok($field, "_");
             if(!is_array($value))
             {
                 ${$field} = $value;
