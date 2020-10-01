@@ -215,7 +215,7 @@
                         $('button.driver-runsheet').click(function(e){
                             var rs_count = $('input.select:checked').length
                             swal({
-                                title: "Add "+rc_count+" orders to the driver runsheet?",
+                                title: "Add "+rs_count+" orders to the driver runsheet?",
                                 text: "This will add the selected orders to the driver's runsheet\n\nor create a new runsheet if one doe not exist",
                                 icon: "warning",
                                 buttons: true,
