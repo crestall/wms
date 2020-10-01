@@ -211,6 +211,57 @@
                     init: function(){
                         actions.common.jobsTable();
                         actions.common.selectAll();
+                        //add to driver runsheet
+                        $('button.driver_runsheet').click(function(e){
+                            var rs_count = $('input.select:checked').length
+                            swal({
+                                title: "Add "+rc_count+" orders to the driver runsheet?",
+                                text: "This will add the selected orders to the driver's runsheet\n\nor create a new runsheet if one doe not exist",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then( function(willFulfill) {
+                                /*var ids = [];
+                                $('input.select').each(function(i,e){
+                                    var order_id = $(this).data('orderid');
+                                    console.log('order_id: '+ order_id);
+                                    if($(this).prop('checked') && ( $('select#courier_'+order_id).val() == config.eParcelId || $('select#courier_'+order_id).val() == config.eParcelExpressId ))
+                                    {
+                                        ids.push(order_id);
+                                    }
+                                });
+                                $.ajax({
+                                    url: '/ajaxfunctions/fulfill-order',
+                                    method: 'post',
+                                    data: {
+                                        order_ids: ids,
+                                        courier_id: config.eParcelId
+                                    },
+                                    dataType: 'json',
+                                    beforeSend: function(){
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
+                                    },
+                                    success: function(d){
+                                        if(d.error)
+                                        {
+                                            $.unblockUI();
+                                            alert('error');
+                                        }
+                                        else
+                                        {
+                                            location.reload();
+                                        }
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown){
+                                        $.unblockUI();
+                                        document.open();
+                                        document.write(jqXHR.responseText);
+                                        document.close();
+                                    }
+                                });*/
+                            });
+                        });
+                        //end add to driver runsheet
                     }
                 },
                 'update-job':{
