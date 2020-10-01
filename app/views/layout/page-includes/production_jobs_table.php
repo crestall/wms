@@ -16,7 +16,7 @@
                     <label for="select_all"><em><small>(all)</small></em></label>
                 </div>
             </th>
-            <th nowrap>Driver<br /><select id="driver_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers();?></select>&nbsp;<em><small>(all)</small></em></th>
+            <th>Runsheet Day</th>
             <th>Date Entered</th>
             <th>Due Date</th>
         </tr>
