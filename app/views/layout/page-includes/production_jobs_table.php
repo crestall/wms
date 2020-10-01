@@ -16,6 +16,7 @@
                     <label for="select_all"><em><small>(all)</small></em></label>
                 </div>
             </th>
+            <th nowrap>Courier<br /><select id="driver_all" class="selectpicker" data-style="btn-outline-secondary" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers();?></select>&nbsp;<em><small>(all)</small></em></th>
             <th>Date Entered</th>
             <th>Due Date</th>
         </tr>
@@ -103,6 +104,12 @@
                         <input type="checkbox" class="select styled" data-jobid='<?php echo $job['id'];?>' name="select_<?php echo $job['id'];?>" id="select_<?php echo $job['id'];?>" />
                         <label for="select_<?php echo $job['id'];?>"></label>
                     </div>
+                </td>
+                <td data-label="Driver" nowrap>
+	                <p><select name="driver" class="selectpicker driver" data-style="btn-outline-secondary btn-sm" data-width="fit" id="driver_<?php echo $job['id'];?>" <?php if($co['courier_id'] > 0 ) echo "disabled";?>><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers($job['driver_id']);?></select></p>
+                    <?php if( $job['driver_id'] > 0): ?>
+                        <p><a class="btn btn-outline-danger remove_driver" data-jobid="<?php echo $job['id'];?>">Remove From Driver's Runsheet</a></p>
+                    <?php endif;?>
                 </td>
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
                 <td data-label="Due Date"><?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?></td>
