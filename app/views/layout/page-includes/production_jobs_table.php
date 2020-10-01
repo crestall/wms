@@ -106,7 +106,7 @@
                     </div>
                 </td>
                 <td data-label="Driver" nowrap>
-	                <p><select name="driver" class="selectpicker driver" data-style="btn-outline-secondary btn-sm" data-width="fit" id="driver_<?php echo $job['id'];?>" <?php if($co['courier_id'] > 0 ) echo "disabled";?>><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers($job['driver_id']);?></select></p>
+	                <p><select name="driver" class="selectpicker driver" data-style="btn-outline-secondary btn-sm" data-width="fit" id="driver_<?php echo $job['id'];?>" <?php if($job['driver_id'] > 0 ) echo "disabled";?>><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers($job['driver_id']);?></select></p>
                     <?php if( $job['driver_id'] > 0): ?>
                         <p><a class="btn btn-outline-danger remove_driver" data-jobid="<?php echo $job['id'];?>">Remove From Driver's Runsheet</a></p>
                     <?php endif;?>
