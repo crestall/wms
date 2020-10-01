@@ -12,6 +12,14 @@
                             "order": []
                         });
                     },
+                    selectAll: function(){
+                        $('#select_all').click(function(e){
+                            var checked = this.checked;
+                             $('.select').each(function(e){
+                                this.checked =  checked;
+                             })
+                        });
+                    },
                     doDates: function(){
                         $( "#date_entered" ).datepicker({
                             changeMonth: true,
@@ -195,6 +203,7 @@
                 'view-jobs':{
                     init: function(){
                         actions.common.jobsTable();
+                        actions.common.selecAll();
                     }
                 },
                 'update-job':{
@@ -233,6 +242,7 @@
                     init: function(){
                         actions['job-search'].init();
                         actions.common.jobsTable();
+                        actions.common.selecAll();
                     }
                 }
             }
