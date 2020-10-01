@@ -17,7 +17,7 @@
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Incompleted Jobs</a></div>
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3"><a class="btn btn-sm btn-block btn-outline-fsg driver-runsheet"><i class="fas fa-truck"></i> Add Selected to Chosen Driver's Runsheet</a></div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3"><a class="btn btn-sm btn-block btn-outline-primary text-white driver-runsheet"><i class="fas fa-truck"></i> Add Selected to Chosen Driver's Runsheet</a></div>
                 <div class="col-12">
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/production_jobs_table.php");?>
                 </div>
