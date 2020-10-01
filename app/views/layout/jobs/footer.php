@@ -19,13 +19,6 @@
                                 this.checked =  checked;
                              })
                         });
-                        $('select#driver_all').change(function(e){
-                           	var c = $(this).val();
-                            $("select.driver").each(function(i,e){
-                                if(!$(this).prop('disabled'))
-                            	    $(this).val(c).change();
-                            });
-                        });
                     },
                     doDates: function(){
                         $( "#date_entered" ).datepicker({
