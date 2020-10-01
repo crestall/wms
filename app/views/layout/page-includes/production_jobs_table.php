@@ -9,6 +9,13 @@
             <th>Status</th>
             <th>FSG Contact</th>
             <th>Finisher</th>
+            <th nowrap>
+                Select
+                <div class="checkbox checkbox-default">
+                    <input id="select_all" class="styled" type="checkbox">
+                    <label for="select_all"><em><small>(all)</small></em></label>
+                </div>
+            </th>
             <th>Date Entered</th>
             <th>Due Date</th>
         </tr>
@@ -89,6 +96,12 @@
                                 <?php echo $job['finisher_phone'];?>
                             </div>
                         </div>
+                    </div>
+                </td>
+                <td data-label="Select" class="chkbox">
+                    <div class="checkbox checkbox-default">
+                        <input type="checkbox" class="select styled" data-jobid='<?php echo $job['id'];?>' name="select_<?php echo $job['id'];?>" id="select_<?php echo $job['id'];?>" />
+                        <label for="select_<?php echo $job['id'];?>"></label>
                     </div>
                 </td>
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
