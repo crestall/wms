@@ -41,14 +41,14 @@ class Productionjob extends Model{
                 sr.id as salesrep_id, sr.name AS salesrep_name,
                 pf.id as finisher_id, pf.name AS finisher_name, pf.contact AS finisher_contact, pf.email AS finisher_email, pf.phone AS finisher_phone,
                 js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking,
-                rs.id AS runsheet_id, rs.driver_id
+                IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed
             FROM
                 `production_jobs` pj LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
                 `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
                 `production_finishers` pf ON pj.finisher_id = pf.id LEFT JOIN
                 job_status js ON pj.status_id = js.id LEFT JOIN
-                (SELECT runsheets.id, runsheets.driver_id, runsheet_tasks.job_id FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
+                (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.job_id FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
         ";
         if($completed)
         {

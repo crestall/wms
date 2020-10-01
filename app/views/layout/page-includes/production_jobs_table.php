@@ -23,7 +23,7 @@
     </thead>
     <tbody>
         <?php foreach($jobs as $job):?>
-            <tr>
+            <tr id="tr_<?php echo $job['id'];?>">
                 <td data-label="Job Number" class="number">
                     <?php if($user_role == "production_admin"):?>
                         <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a><br>
@@ -105,10 +105,21 @@
                         <label for="select_<?php echo $job['id'];?>"></label>
                     </div>
                 </td>
-                <td data-label="Driver" nowrap>
-	                <p><select name="driver" class="selectpicker driver" data-style="btn-outline-secondary btn-sm" data-width="fit" id="driver_<?php echo $job['id'];?>" <?php if($job['driver_id'] > 0 ) echo "disabled";?>><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers($job['driver_id']);?></select></p>
-                    <?php if( $job['driver_id'] > 0): ?>
-                        <p><a class="btn btn-outline-danger remove_driver" data-jobid="<?php echo $job['id'];?>">Remove From Driver's Runsheet</a></p>
+                <td data-label="Runsheet Day">
+                    <?php if($job['printed'] > 0):?>
+                        <p>This Job is already on a printed runsheet</p>
+                    <?php else:
+                        if($job['runsheet_id'] > 0):
+                            $date = $job['runsheet_day'];
+                        else:
+                            $date = time();
+                        endif;?>
+                        <div class="input-group">
+                            <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $job['id'];?>" value="<?php echo $date;?>" />
+                            <div class="input-group-append">
+                                <span id="runsheet_daydate_calendar_<?php echo $job['id'];?>" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
                     <?php endif;?>
                 </td>
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>

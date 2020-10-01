@@ -34,6 +34,22 @@
                         $('#date_entered_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_entered').focus();
                         });
+                        $( ".runsheet_day" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                var $tr = $(this).closest('tr');
+                                var job_id = $tr.prop('id');
+                                console.log('Job ID: '+job_id);
+                                //$('#date_entered_value').val(s);
+                            }
+                        });
+                        $('#date_entered_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_entered').focus();
+                        });
                         $( "#date_due" ).datepicker({
                             //showButtonPanel: true,
                             //closeText: 'Clear',
