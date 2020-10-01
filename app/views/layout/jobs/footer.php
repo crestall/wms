@@ -203,7 +203,7 @@
                 'view-jobs':{
                     init: function(){
                         actions.common.jobsTable();
-                        actions.common.selecAll();
+                        actions.common.selectAll();
                     }
                 },
                 'update-job':{
@@ -242,7 +242,7 @@
                     init: function(){
                         actions['job-search'].init();
                         actions.common.jobsTable();
-                        actions.common.selecAll();
+                        actions.common.selectAll();
                     }
                 }
             }
