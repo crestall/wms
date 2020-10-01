@@ -220,6 +220,7 @@
                     init: function(){
                         actions.common.jobsTable();
                         actions.common.selectAll();
+                        actions.common.doDates();
                         //add to driver runsheet
                         $('button#runsheet').click(function(e){
                             var rs_count = $('input.select:checked').length
