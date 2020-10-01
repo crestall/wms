@@ -212,7 +212,7 @@
                         actions.common.jobsTable();
                         actions.common.selectAll();
                         //add to driver runsheet
-                        $('button.runsheet').click(function(e){
+                        $('button#runsheet').click(function(e){
                             var rs_count = $('input.select:checked').length
                             swal({
                                 title: "Add "+rs_count+" orders to the driver runsheet?",
