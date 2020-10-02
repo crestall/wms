@@ -256,14 +256,14 @@
                                             //console.log('job_id: '+ job_id);
                                             if($(this).prop('checked') )
                                             {
-                                                if(runsheet_days.daydate_value)
+                                                if(runsheet_days[daydate_value])
                                                 {
-                                                    runsheet_days.daydate_value.push(job_id);
+                                                    runsheet_days[daydate_value].push(job_id);
                                                 }
                                                 else
                                                 {
-                                                    runsheet_days.daydate_value = [];
-                                                    runsheet_days.daydate_value.push(job_id);
+                                                    runsheet_days[daydate_value] = [];
+                                                    runsheet_days[daydate_value].push(job_id);
                                                 }
                                             }
                                         });
