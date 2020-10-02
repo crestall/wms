@@ -249,7 +249,7 @@
                                 }).then( function(addToSheet) {
                                     if(addToSheet)
                                     {
-                                        var runsheet_days = {};
+                                        var runsheet_days = [];
                                         $('input.select').each(function(i,e){
                                             var job_id = $(this).data('jobid');
                                             var daydate_value = $('input#runsheet_daydate_value_'+job_id);
@@ -258,16 +258,16 @@
                                             {
                                                 if(runsheet_days[daydate_value])
                                                 {
-                                                    runsheet_days[daydate_value][] = job_id;
+                                                    runsheet_days[daydate_value].push(job_id);
                                                 }
                                                 else
                                                 {
                                                     runsheet_days[daydate_value] = [];
-                                                    runsheet_days[daydate_value][] = job_id;
+                                                    runsheet_days[daydate_value].push(job_id);
                                                 }
                                             }
                                         });
-                                        console.log('RUNSHEET_DAYS: '+JSON.stringify(runsheet_days));
+                                        console.table(runsheet_days);
                                     }
                                     /*
                                     $.ajax({
