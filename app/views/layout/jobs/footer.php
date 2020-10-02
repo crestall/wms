@@ -269,7 +269,7 @@
 
                                             }
                                         });
-                                        console.log(runsheet_days);
+                                        //console.log(runsheet_days);
                                         /* */
                                         $.ajax({
                                             url: '/ajaxfunctions/do-runsheets',
