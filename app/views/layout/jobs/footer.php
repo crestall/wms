@@ -43,7 +43,7 @@
                                 s = d.valueOf()/1000;
                                 var $tr = $(this).closest('tr');
                                 var job_id = $tr.prop('id');
-                                console.log('input: input#runsheet_daydate_value_'+job_id;
+                                console.log('input: input#runsheet_daydate_value_'+job_id);
                                 console.log('s: '+s);
                                 $('input#runsheet_daydate_value_'+job_id).val(s);
                             }
