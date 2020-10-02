@@ -112,7 +112,7 @@
                         if($job['runsheet_id'] > 0):
                             $date = $job['runsheet_day'];
                         else:
-                            $date = time();
+                            $date = strtotime("today");;
                         endif;?>
                         <div class="input-group">
                             <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $job['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
