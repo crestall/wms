@@ -271,7 +271,7 @@
                                         });
                                         console.log(runsheet_days);
                                         $.ajax({
-                                            url: '/ajaxfunctions/do-jobsheets',
+                                            url: '/ajaxfunctions/do-runsheets',
                                             method: 'post',
                                             data: {
                                                 runsheets: runsheet_days
