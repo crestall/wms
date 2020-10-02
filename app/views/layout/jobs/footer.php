@@ -51,8 +51,8 @@
                             var $tr = $(this).closest('tr');
                             var ar = $tr.prop('id').split("_");
                             var job_id = ar[1];
-                            console.log('Job ID: '+job_id);
-                            $('input#date_entered').focus();
+                            //console.log('Job ID: '+job_id);
+                            $('input#runsheet_daydate_'+job_id).focus();
                         });
                         $( "#date_due" ).datepicker({
                             //showButtonPanel: true,
