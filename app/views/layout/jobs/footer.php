@@ -257,7 +257,7 @@
                                             //console.log('job_id: '+ job_id);
                                             if($(this).prop('checked') )
                                             {
-                                                runsheet_days[daydate_value].push(job_id);
+                                                //runsheet_days[daydate_value].push(job_id);
                                             }
                                         });
                                         console.log(runsheet_days);
