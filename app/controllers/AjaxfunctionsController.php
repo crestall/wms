@@ -988,6 +988,11 @@ class ajaxfunctionsController extends Controller
         $this->view->renderBoolean($this->item->checkSkus($request, $current_sku));
     }
 
+    public function doRunsheets()
+    {
+        echo "<pre>",print_r($this->request),"</pre>";die();
+    }
+
     public function checkLocations()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
