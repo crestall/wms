@@ -134,18 +134,6 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
-    public function getSolarInstalls()
-    {
-        $data = $this->solarorder->getInstalls($this->request->data['from'], $this->request->data['to']);
-        $this->view->renderJson($data);
-    }
-
-    public function getSolarServiceJobs()
-    {
-        $data = $this->solarorder->getServiceJobs($this->request->data['from'], $this->request->data['to']);
-        $this->view->renderJson($data);
-    }
-
     public function updateAllocation()
     {
         $post_data = array();
@@ -303,68 +291,6 @@ class ajaxfunctionsController extends Controller
         {
             $this->order->updateOrderValue('3pl_comments', $comment, $order_id);
         }
-    }
-
-    public function fulfillSolarorder()
-    {
-       //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $data = array(
-            'error'         => false,
-            'not_logged'    => false,
-            'error_string'  => '',
-            'feedback'      => ''
-        );
-
-        $order_ids = ( is_array($this->request->data['order_ids']) )? $this->request->data['order_ids']: (array)$this->request->data['order_ids'];
-        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Have Been Fulfilled</h2>");
-        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Fulfilled</h2><p>Reasons are listed below</p>");
-        Session::set('showfeedback', false);
-        Session::set('showerrorfeedback', false);
-
-        $this->orderfulfiller->fulfillSolarOrder($order_ids);
-
-        if(Session::getAndDestroy('showfeedback') == false)
-        {
-            Session::destroy('feedback');
-        }
-        if(Session::getAndDestroy('showerrorfeedback') == false)
-        {
-            Session::destroy('errorfeedback');
-        }
-
-
-        $this->view->renderJson($data);
-    }
-
-    public function fulfillSolarservice()
-    {
-       //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $data = array(
-            'error'         => false,
-            'not_logged'    => false,
-            'error_string'  => '',
-            'feedback'      => ''
-        );
-
-        $order_ids = ( is_array($this->request->data['order_ids']) )? $this->request->data['order_ids']: (array)$this->request->data['order_ids'];
-        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Have Been Fulfilled</h2>");
-        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Fulfilled</h2><p>Reasons are listed below</p>");
-        Session::set('showfeedback', false);
-        Session::set('showerrorfeedback', false);
-
-        $this->orderfulfiller->fulfillSolarService($order_ids);
-
-        if(Session::getAndDestroy('showfeedback') == false)
-        {
-            Session::destroy('feedback');
-        }
-        if(Session::getAndDestroy('showerrorfeedback') == false)
-        {
-            Session::destroy('errorfeedback');
-        }
-
-
-        $this->view->renderJson($data);
     }
 
     public function fulfillOrder()
@@ -881,24 +807,6 @@ class ajaxfunctionsController extends Controller
         $this->jobstatus->updateHeirarchy($this->request->data['status']);
     }
 
-    public function cancelSolarorders()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $this->solarorder->cancelOrders($this->request->data['orderids']);
-    }
-
-    public function cancelSwatchrequests()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $this->swatch->cancelRequests($this->request->data['orderids']);
-    }
-
-    public function cancelServiceorders()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $this->solarservicejob->cancelJobs($this->request->data['orderids']);
-    }
-
     public function cancelPickup()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
@@ -942,20 +850,6 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>";
         $data = $this->productionfinisher->getAutocompleteFinisher($this->request->query['finisher']);
-        $this->view->renderJson($data);
-    }
-
-    public function getSolarItems()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->item->getAutocompleteSolarItems($this->request->query, $this->order->fulfilled_id, $this->request->query['type_id']);
-        $this->view->renderJson($data);
-    }
-
-    public function getAllSolarItems()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->item->getAutocompleteAllSolarItems($this->request->query, $this->order->fulfilled_id);
         $this->view->renderJson($data);
     }
 
