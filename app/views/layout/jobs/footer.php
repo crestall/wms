@@ -253,7 +253,7 @@
                                         console.log('job_id: '+ job_id);
                                         if($(this).prop('checked') )
                                         {
-                                            ids.push(order_id);
+                                            ids.push(job_id);
                                         }
                                     });
                                     console.log('IDS: '+ids);
