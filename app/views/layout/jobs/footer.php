@@ -262,8 +262,8 @@
                                                 }
                                                 else
                                                 {
-                                                    runsheet_days[daydate_value] = [];
-                                                    runsheet_days[daydate_value].push(job_id);
+                                                    runsheet_days[daydate_value] = [job_id];
+                                                    //runsheet_days[daydate_value].push(job_id);
                                                 }
                                             }
                                         });
