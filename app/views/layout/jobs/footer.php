@@ -47,7 +47,11 @@
                                 //$('#date_entered_value').val(s);
                             }
                         });
-                        $('#date_entered_calendar').css('cursor', 'pointer').click(function(e){
+                        $('.runsheet_calendar').css('cursor', 'pointer').click(function(e){
+                            var $tr = $(this).closest('tr');
+                            var ar = $tr.prop('id').split("_");
+                            var job_id = ar[1];
+                            console.log('Job ID: '+job_id);
                             $('input#date_entered').focus();
                         });
                         $( "#date_due" ).datepicker({
