@@ -115,7 +115,8 @@
                             $date = time();
                         endif;?>
                         <div class="input-group">
-                            <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $job['id'];?>" value="<?php echo $date;?>" />
+                            <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $job['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
+                            <input type="hidden" name="runsheet_daydate_value_<?php echo $job['id'];?>" id="runsheet_daydate_value_<?php echo $job['id'];?>" value="<?php echo $date;?>" />
                             <div class="input-group-append">
                                 <span id="runsheet_daydate_calendar_<?php echo $job['id'];?>" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
