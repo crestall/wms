@@ -247,16 +247,19 @@
                                     buttons: true,
                                     dangerMode: true
                                 }).then( function(addToSheet) {
-                                    var ids = [];
-                                    $('input.select').each(function(i,e){
-                                        var job_id = $(this).data('jobid');
-                                        //console.log('job_id: '+ job_id);
-                                        if($(this).prop('checked') )
-                                        {
-                                            ids.push(job_id);
-                                        }
-                                    });
-                                    console.log('IDS: '+ids);
+                                    if(addToSheet)
+                                    {
+                                        var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            var job_id = $(this).data('jobid');
+                                            //console.log('job_id: '+ job_id);
+                                            if($(this).prop('checked') )
+                                            {
+                                                ids.push(job_id);
+                                            }
+                                        });
+                                        console.log('IDS: '+ids);
+                                    }
                                     /*
                                     $.ajax({
                                         url: '/ajaxfunctions/fulfill-order',
