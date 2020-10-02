@@ -249,16 +249,25 @@
                                 }).then( function(addToSheet) {
                                     if(addToSheet)
                                     {
-                                        var ids = [];
+                                        var runsheet_days = {};
                                         $('input.select').each(function(i,e){
                                             var job_id = $(this).data('jobid');
+                                            var daydate_value = $('input#runsheet_daydate_value_'+job_id);
                                             //console.log('job_id: '+ job_id);
                                             if($(this).prop('checked') )
                                             {
-                                                ids.push(job_id);
+                                                if(runsheet_days.daydate_value)
+                                                {
+                                                    runsheet_days.daydate_value.push(job_id);
+                                                }
+                                                else
+                                                {
+                                                    runsheet_days.daydate_value = [];
+                                                    runsheet_days.daydate_value.push(job_id);
+                                                }
                                             }
                                         });
-                                        console.log('IDS: '+ids);
+                                        console.log('RUNSHEET_DAYS: '+runsheet_days);
                                     }
                                     /*
                                     $.ajax({
