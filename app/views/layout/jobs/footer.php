@@ -235,7 +235,7 @@
                                     title: "No Jobs Selected",
                                     text: "Please select at least one job to add to the runsheet",
                                     icon: "error"
-                                };
+                                });
                             }
                             else
                             {
