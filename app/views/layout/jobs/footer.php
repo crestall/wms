@@ -246,16 +246,18 @@
                                     icon: "warning",
                                     buttons: true,
                                     dangerMode: true
-                                }).then( function(willFulfill) {
-                                    /*var ids = [];
+                                }).then( function(addToSheet) {
+                                    var ids = [];
                                     $('input.select').each(function(i,e){
-                                        var order_id = $(this).data('orderid');
-                                        console.log('order_id: '+ order_id);
-                                        if($(this).prop('checked') && ( $('select#courier_'+order_id).val() == config.eParcelId || $('select#courier_'+order_id).val() == config.eParcelExpressId ))
+                                        var job_id = $(this).data('jobid');
+                                        console.log('job_id: '+ job_id);
+                                        if($(this).prop('checked') )
                                         {
                                             ids.push(order_id);
                                         }
                                     });
+                                    console.log('IDS: '+ids);
+                                    /*
                                     $.ajax({
                                         url: '/ajaxfunctions/fulfill-order',
                                         method: 'post',
