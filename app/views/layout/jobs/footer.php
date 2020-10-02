@@ -253,7 +253,7 @@
                                         $('input.select').each(function(i,e){
                                             var job_id = $(this).data('jobid');
                                             var daydate_value = $('input#runsheet_daydate_value_'+job_id).val();
-                                            runsheet_days.push(daydate_value);
+                                            runsheet_days[daydate_value] = [];
                                             //console.log('job_id: '+ job_id);
                                             if($(this).prop('checked') )
                                             {
