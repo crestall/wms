@@ -250,7 +250,7 @@
                                     var ids = [];
                                     $('input.select').each(function(i,e){
                                         var job_id = $(this).data('jobid');
-                                        console.log('job_id: '+ job_id);
+                                        //console.log('job_id: '+ job_id);
                                         if($(this).prop('checked') )
                                         {
                                             ids.push(job_id);
