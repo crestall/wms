@@ -267,7 +267,7 @@
                                                 }
                                             }
                                         });
-                                        console.log('RUNSHEET_DAYS: '+runsheet_days);
+                                        console.log('RUNSHEET_DAYS: '+JSON.stringify(runsheet_days));
                                     }
                                     /*
                                     $.ajax({
