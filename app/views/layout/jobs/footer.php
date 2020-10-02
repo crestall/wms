@@ -42,9 +42,10 @@
                                 var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
                                 s = d.valueOf()/1000;
                                 var $tr = $(this).closest('tr');
-                                var job_id = $tr.prop('id');
-                                console.log('input: input#runsheet_daydate_value_'+job_id);
-                                console.log('s: '+s);
+                                var ar = $tr.prop('id').split("_");
+                                var job_id = ar[1];
+                                //console.log('input: input#runsheet_daydate_value_'+job_id);
+                                //console.log('s: '+s);
                                 $('input#runsheet_daydate_value_'+job_id).val(s);
                             }
                         });
@@ -52,7 +53,7 @@
                             var $tr = $(this).closest('tr');
                             var ar = $tr.prop('id').split("_");
                             var job_id = ar[1];
-                            console.log('Job ID: '+job_id);
+                            //console.log('Job ID: '+job_id);
                             $('input#runsheet_daydate_'+job_id).focus();
                         });
                         $( "#date_due" ).datepicker({
