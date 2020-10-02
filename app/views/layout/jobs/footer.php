@@ -270,37 +270,35 @@
                                             }
                                         });
                                         console.log(runsheet_days);
-                                    }
-                                    /*
-                                    $.ajax({
-                                        url: '/ajaxfunctions/fulfill-order',
-                                        method: 'post',
-                                        data: {
-                                            order_ids: ids,
-                                            courier_id: config.eParcelId
-                                        },
-                                        dataType: 'json',
-                                        beforeSend: function(){
-                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
-                                        },
-                                        success: function(d){
-                                            if(d.error)
-                                            {
+                                        $.ajax({
+                                            url: '/ajaxfunctions/do-jobsheets',
+                                            method: 'post',
+                                            data: {
+                                                runsheets: runsheet_days
+                                            },
+                                            dataType: 'json',
+                                            beforeSend: function(){
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $.unblockUI();
+                                                    alert('error');
+                                                }
+                                                else
+                                                {
+                                                    //location.reload();
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown){
                                                 $.unblockUI();
-                                                alert('error');
+                                                document.open();
+                                                document.write(jqXHR.responseText);
+                                                document.close();
                                             }
-                                            else
-                                            {
-                                                location.reload();
-                                            }
-                                        },
-                                        error: function(jqXHR, textStatus, errorThrown){
-                                            $.unblockUI();
-                                            document.open();
-                                            document.write(jqXHR.responseText);
-                                            document.close();
-                                        }
-                                    });*/
+                                        });
+                                    }/**/
                                 });
                             }
 
