@@ -21,6 +21,7 @@ class ajaxfunctionsController extends Controller
             'deleteClientLocation',
             'deleteConfiguration',
             'deletePackage',
+            'doRunsheets',
             'fulfillOrder',
             'getABox',
             'getAddress',
