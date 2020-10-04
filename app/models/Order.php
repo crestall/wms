@@ -10,6 +10,7 @@
 
     addOrder($data, $oitems)
     addPackage($data)
+    addressMatch($order_id, $match_id)
     cancelOrders($ids)
     countItemForOrder($item_id, $order_id)
     courierAssigned($order_id)
@@ -85,6 +86,12 @@ class Order extends Model{
         $this->packed_id    = $this->getStatusId('packed');
         $this->fulfilled_id = $this->getStatusId('fulfilled');
         $this->getStatusses();
+    }
+
+    public function addressMatch($address_array, $match_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, $address_array);
     }
 
     public function removeCourier($order_id)
