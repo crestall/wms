@@ -948,7 +948,27 @@
                                     if( $(this).prop('checked') )
                                     {
                                         ids.push(order_id);
-                                        console.log(ids);
+                                        //console.log(ids);
+                                    }
+                                });
+                                $.ajax({
+                                    url: '/ajaxfunctions/consolidateOrders',
+                                    method: 'post',
+                                    data: { order_ids: ids },
+                                    dataType: 'json',
+                                    beforeSend: function(){
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Consolidating Orders...</h2></div>' });
+                                    },
+                                    success: function(d){
+                                        if(d.error)
+                                        {
+                                            $.unblockUI();
+                                            alert('error');
+                                        }
+                                        else
+                                        {
+                                            //location.reload();
+                                        }
                                     }
                                 });
                             }
