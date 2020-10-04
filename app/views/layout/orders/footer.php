@@ -944,6 +944,7 @@
                             {
                                 var ids = [];
                                 $('input.select').each(function(i,e){
+                                    var order_id = $(this).data('orderid');
                                     if( $(this).prop('checked') )
                                     {
                                         ids.push(order_id);
