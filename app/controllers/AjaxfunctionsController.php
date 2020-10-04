@@ -70,8 +70,24 @@ class ajaxfunctionsController extends Controller
             'feedback'  =>  ''
         );
         //get first order details
-        $first_order = $this->order->getOrderDetail($this->request->data['order_ids'][0]);
-        echo "<pre>",print_r($first_order),"</pre>"; die(); 
+        $fo = $this->order->getOrderDetail($this->request->data['order_ids'][0]);
+        $address_array = array(
+            'address'   => $fo['address'],
+            'suburb'    => $fo['suburb'],
+            'state'     => $fo['state'],
+            'postcode'  => $fo['postcode'],
+            'country'   => $fo['country']
+        );
+        for( $i = 1; ++$i; $i < count($this->request->data['order_ids']))
+        {
+            if(!$this->order->addressMatch($address_array, $fo['id']))
+            {
+                $data['error'] = true;
+                $data['feedback'] = "<p>Not all orders appear to be going to the same address</p>";
+            }
+        }
+        echo "<pre>",print_r($data),"</pre>"; die();
+        echo "<pre>",print_r($fo),"</pre>"; die();
     }
 
     public function encryptSomeShit()
