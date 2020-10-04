@@ -943,11 +943,13 @@
                             if($('input.select:checked').length > 1)
                             {
                                 var ids = [];
-                                if( $(this).prop('checked') )
-                                {
-                                    ids.push(order_id);
-                                    console.log(ids);
-                                }
+                                $('input.select').each(function(i,e){
+                                    if( $(this).prop('checked') )
+                                    {
+                                        ids.push(order_id);
+                                        console.log(ids);
+                                    }
+                                });
                             }
                             else
                             {
