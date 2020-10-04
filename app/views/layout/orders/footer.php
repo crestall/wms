@@ -938,6 +938,22 @@
 
                         //$('table#client_orders_table').stickyTableHeaders();
 
+                        $('a.consolidate-orders').click(function(e){
+                            e.preventDefault();
+                            if($('input.select:checked').length > 1)
+                            {
+
+                            }
+                            else
+                            {
+                                swal({
+                                    title: "No Orders Selected",
+                                    text: "Please select at least two orders to consolidate",
+                                    icon: "error"
+                                });
+                            }
+                        });
+
                         $('a.select-courier').click(function(e){
                             e.preventDefault();
                             if($('input.select:checked').length)
