@@ -947,7 +947,7 @@
                             else
                             {
                                 swal({
-                                    title: "No Orders Selected",
+                                    title: "More Orders Needed",
                                     text: "Please select at least two orders to consolidate",
                                     icon: "error"
                                 });
