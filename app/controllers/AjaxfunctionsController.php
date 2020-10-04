@@ -17,6 +17,7 @@ class ajaxfunctionsController extends Controller
             'adjustAllocationForm',
             'bulkMoveStock',
             'calcOriginPick',
+            'consolidateOrders',
             'deactivateUser',
             'deleteClientLocation',
             'deleteConfiguration',
@@ -58,6 +59,11 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function consolidateOrders()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
     }
 
     public function encryptSomeShit()
