@@ -78,7 +78,7 @@ class ajaxfunctionsController extends Controller
             'postcode'  => $fo['postcode'],
             'country'   => $fo['country']
         );
-        for( $i = 1; $i < count($this->request->data['order_ids']; ++$i))
+        for( $i = 1; $i < count($this->request->data['order_ids']); ++$i)
         {
             if(!$this->order->addressMatch($address_array, $this->request->data['order_ids'][$i]))
             {
