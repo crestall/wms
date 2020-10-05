@@ -80,7 +80,7 @@ class ajaxfunctionsController extends Controller
         );
         for( $i = 1; ++$i; $i < count($this->request->data['order_ids']))
         {
-            if(!$this->order->addressMatch($address_array, $fo['id']))
+            if(!$this->order->addressMatch($address_array, $this->request->data['order_ids'][$i]))
             {
                 $data['error'] = true;
                 $data['feedback'] = "<p>Not all orders appear to be going to the same address</p>";
