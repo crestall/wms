@@ -100,9 +100,20 @@ class ajaxfunctionsController extends Controller
         if(!$error)
         {
             //echo "<pre>",print_r($update_ids),"</pre>"; die();
+            $local_courier_id = $this->courier->getLocalId();
+            $courier_name = "consolidated with {$fo['order_number']}";
             foreach($update_ids as $old_id)
             {
+                //consolidate the order items
                 $this->order->consolidateOrders($old_id, $fo['id']);
+                //update order values
+                $new_order_values = array(
+                    'courier_id'        => $local_courier_id,
+                    'courier_name'      => $courier_name,
+                    'date_fulfilled'    => time(),
+                    'status_id'         => $this->order->fulfilled_id
+                );
+                $this->order->updateOrderValues($new_order_values, $old_id);
             }
             Session::set('showfeedback', true);
         }
