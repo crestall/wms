@@ -83,6 +83,7 @@ class ajaxfunctionsController extends Controller
             'country'   => $fo['country']
         );
         $error = false;
+        $client_order_id = $fo['client_order_id'];
         $update_ids = array();
         for( $i = 1; $i < count($this->request->data['order_ids']); ++$i)
         {
@@ -133,8 +134,28 @@ class ajaxfunctionsController extends Controller
                         'orientation'	=>	'P'
                     );
                 }
+                //store new client order ids
+                $client_order_id .= (empty($client_order_id))? $this_order['client_order_id'] : ",".$this_order['client_order_id'];
             }
+            echo "<p>$client_order_id</p>";
             echo "PDFS<pre>",print_r($pdfs),"</pre>"; die();
+            /*if(count($pdfs))
+            {
+                $upcount = 1;
+                $filename = "invoice";
+                $name = "invoice.pdf";
+                $upload_dir = "/client_uploads/".$fo['client_id']."/";
+                if ( ! is_dir(DOC_ROOT.$upload_dir))
+                            mkdir(DOC_ROOT.$upload_dir);
+    			while(file_exists(DOC_ROOT.$upload_dir.$name))
+                {
+                    $name = $filename."_".$upcount.".pdf";
+                    ++$upcount;
+                }
+                $pdf = new Mympdf();
+                $pdf->mergePDFFilesToServer($pdfs, $name, DOC_ROOT.$upload_dir);
+                $uploaded_file = $name;
+            }*/
             Session::set('showfeedback', true);
         }
         //echo "<pre>",print_r($data),"</pre>"; //die();
