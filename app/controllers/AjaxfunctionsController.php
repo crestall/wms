@@ -85,8 +85,12 @@ class ajaxfunctionsController extends Controller
                 $data['error'] = true;
                 $data['feedback'] = "<p>Not all orders appear to be going to the same address</p>";
             }
+            else
+            {
+                echo "<pre>",print_r($address_array),"</pre>";
+            }
         }
-        echo "<pre>",print_r($data),"</pre>"; die();
+        echo "<pre>",print_r($data),"</pre>"; //die();
         echo "<pre>",print_r($fo),"</pre>"; die();
     }
 
