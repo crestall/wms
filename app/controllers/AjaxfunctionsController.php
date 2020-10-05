@@ -63,12 +63,16 @@ class ajaxfunctionsController extends Controller
 
     public function consolidateOrders()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
         $post_data = array();
         $data = array(
             'error'     =>  false,
             'feedback'  =>  ''
         );
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Have Been Consolidated</h2>");
+        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Consolidated</h2>");
+        Session::set('showfeedback', false);
+        Session::set('showerrorfeedback', false);
         //get first order details
         $fo = $this->order->getOrderDetail($this->request->data['order_ids'][0]);
         $address_array = array(
@@ -82,16 +86,25 @@ class ajaxfunctionsController extends Controller
         {
             if(!$cid = $this->order->addressMatch($address_array, $this->request->data['order_ids'][$i]))
             {
-                $data['error'] = true;
-                $data['feedback'] = "<p>Not all orders appear to be going to the same address</p>";
+                Session::set('showerrorfeedback', true);
+                $session['errorfeedback'] .= "<p>Not all orders appear to be going to the same address</p>";
             }
             else
             {
-                echo "<p>Will consolidate $cid into {$fo['id']}</p>";
+                //echo "<p>Will consolidate $cid into {$fo['id']}</p>";
             }
         }
-        echo "<pre>",print_r($data),"</pre>"; //die();
-        echo "<pre>",print_r($fo),"</pre>"; die();
+        //echo "<pre>",print_r($data),"</pre>"; //die();
+        //echo "<pre>",print_r($fo),"</pre>"; die();
+        if(Session::getAndDestroy('showfeedback') == false)
+        {
+            Session::destroy('feedback');
+        }
+        if(Session::getAndDestroy('showerrorfeedback') == false)
+        {
+            Session::destroy('errorfeedback');
+        }
+        $this->view->renderJson($data);
     }
 
     public function encryptSomeShit()
