@@ -88,7 +88,7 @@ class ajaxfunctionsController extends Controller
             if(!$cid = $this->order->addressMatch($address_array, $this->request->data['order_ids'][$i]))
             {
                 Session::set('showerrorfeedback', true);
-                $session['errorfeedback'] .= "<p>Not all orders appear to be going to the same address</p>";
+                $_SESSION['errorfeedback'] .= "<p>Not all orders appear to be going to the same address</p>";
                 $error = true;
             }
         }
