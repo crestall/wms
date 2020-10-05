@@ -99,7 +99,11 @@ class ajaxfunctionsController extends Controller
         }
         if(!$error)
         {
-            echo "<pre>",print_r($update_ids),"</pre>"; die();
+            //echo "<pre>",print_r($update_ids),"</pre>"; die();
+            foreach($update_ids as $old_id)
+            {
+                $this->order->consolidateOrders($old_id, $fo['id']);
+            }
             Session::set('showfeedback', true);
         }
         //echo "<pre>",print_r($data),"</pre>"; //die();
