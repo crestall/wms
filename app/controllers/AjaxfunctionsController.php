@@ -102,8 +102,19 @@ class ajaxfunctionsController extends Controller
             //echo "<pre>",print_r($update_ids),"</pre>"; die();
             $local_courier_id = $this->courier->getLocalId();
             $courier_name = "consolidated with {$fo['order_number']}";
+            $pdfs = array();
+            if(!empty($fo['uploaded_file']))
+            {
+                $pdfs[] = array(
+                	'file'		    =>	UPLOADS.$fo['client_id']."/".$fo['uploaded_file'],
+                    'orientation'	=>	'P'
+                );
+            }
+
             foreach($update_ids as $old_id)
             {
+                //get the consoldating order details
+                $this_order = $this->order->getOrderDetail($old_id);
                 //consolidate the order items
                 $this->order->consolidateOrders($old_id, $fo['id']);
                 //update order values
@@ -114,7 +125,16 @@ class ajaxfunctionsController extends Controller
                     'status_id'         => $this->order->fulfilled_id
                 );
                 $this->order->updateOrderValues($new_order_values, $old_id);
+                //deal with the invoices
+                if(!empty($this_order['uploaded_file']))
+                {
+                    $pdfs[] = array(
+                    	'file'		    =>	UPLOADS.$this_order['client_id']."/".$this_order['uploaded_file'],
+                        'orientation'	=>	'P'
+                    );
+                }
             }
+            echo "PDFS<pre>",print_r($pdfs),"</pre>"; die();
             Session::set('showfeedback', true);
         }
         //echo "<pre>",print_r($data),"</pre>"; //die();
