@@ -83,17 +83,23 @@ class ajaxfunctionsController extends Controller
             'country'   => $fo['country']
         );
         $error = false;
+        $update_ids = array();
         for( $i = 1; $i < count($this->request->data['order_ids']); ++$i)
         {
-            if(!$cid = $this->order->addressMatch($address_array, $this->request->data['order_ids'][$i]))
+            if(!$this->order->addressMatch($address_array, $this->request->data['order_ids'][$i]))
             {
                 Session::set('showerrorfeedback', true);
                 $_SESSION['errorfeedback'] .= "<p>Not all orders appear to be going to the same address</p>";
                 $error = true;
             }
+            else
+            {
+                $update_ids[] = $this->request->data['order_ids'][$i];
+            }
         }
         if(!$error)
         {
+            echo "<pre>",print_r($update_ids),"</pre>"; die();
             Session::set('showfeedback', true);
         }
         //echo "<pre>",print_r($data),"</pre>"; //die();
