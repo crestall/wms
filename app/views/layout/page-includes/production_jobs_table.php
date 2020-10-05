@@ -9,13 +9,21 @@
             <th>Status</th>
             <th>FSG Contact</th>
             <th>Finisher</th>
+            <th nowrap>
+                Select
+                <div class="checkbox checkbox-default">
+                    <input id="select_all" class="styled" type="checkbox">
+                    <label for="select_all"><em><small>(all)</small></em></label>
+                </div>
+            </th>
+            <th>Runsheet Day</th>
             <th>Date Entered</th>
             <th>Due Date</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach($jobs as $job):?>
-            <tr>
+            <tr id="tr_<?php echo $job['id'];?>">
                 <td data-label="Job Number" class="number">
                     <?php if($user_role == "production_admin"):?>
                         <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a><br>
@@ -90,6 +98,30 @@
                             </div>
                         </div>
                     </div>
+                </td>
+                <td data-label="Select" class="chkbox">
+                    <div class="checkbox checkbox-default">
+                        <input type="checkbox" class="select styled" data-jobid='<?php echo $job['id'];?>' name="select_<?php echo $job['id'];?>" id="select_<?php echo $job['id'];?>" />
+                        <label for="select_<?php echo $job['id'];?>"></label>
+                    </div>
+                </td>
+                <td data-label="Runsheet Day">
+                    <?php if($job['printed'] > 0):?>
+                        <p>This Job is already on a printed runsheet</p>
+                    <?php else:
+                        if($job['runsheet_id'] > 0):
+                            $date = $job['runsheet_day'];
+                        else:
+                            $date = strtotime("today");;
+                        endif;?>
+                        <div class="input-group">
+                            <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $job['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
+                            <input type="hidden" name="runsheet_daydate_value_<?php echo $job['id'];?>" id="runsheet_daydate_value_<?php echo $job['id'];?>" value="<?php echo $date;?>" />
+                            <div class="input-group-append">
+                                <span id="runsheet_daydate_calendar_<?php echo $job['id'];?>" class="input-group-text runsheet_calendar"><i class="fad fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                    <?php endif;?>
                 </td>
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
                 <td data-label="Due Date"><?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?></td>

@@ -114,37 +114,23 @@
                         });
                     }
                 },
-                'store-chains':{
-                    init: function(){
-                        $('form#add-storechain, form.edit-storechain').submit(function(){
-                            if($(this).valid())
-                            {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        });
-                    }
-                },
-                'solar-order-types':{
-                    init: function(){
-                        $('form#add-solartype, form.edit-solartype').submit(function(){
-                            if($(this).valid())
-                            {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        });
-                    }
-                },
                 'couriers':{
                     init: function(){
                         $('form#add-courier, form.edit-courier').submit(function(){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
+                    }
+                },
+                'drivers':{
+                    init: function(){
+                        $('form#add_driver, form.edit_driver').submit(function(){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });

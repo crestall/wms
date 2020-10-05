@@ -12,6 +12,14 @@
                             "order": []
                         });
                     },
+                    selectAll: function(){
+                        $('#select_all').click(function(e){
+                            var checked = this.checked;
+                             $('.select').each(function(e){
+                                this.checked =  checked;
+                             })
+                        });
+                    },
                     doDates: function(){
                         $( "#date_entered" ).datepicker({
                             changeMonth: true,
@@ -25,6 +33,28 @@
                         });
                         $('#date_entered_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_entered').focus();
+                        });
+                        $( ".runsheet_day" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                var $tr = $(this).closest('tr');
+                                var ar = $tr.prop('id').split("_");
+                                var job_id = ar[1];
+                                //console.log('input: input#runsheet_daydate_value_'+job_id);
+                                //console.log('s: '+s);
+                                $('input#runsheet_daydate_value_'+job_id).val(s);
+                            }
+                        });
+                        $('.runsheet_calendar').css('cursor', 'pointer').click(function(e){
+                            var $tr = $(this).closest('tr');
+                            var ar = $tr.prop('id').split("_");
+                            var job_id = ar[1];
+                            //console.log('Job ID: '+job_id);
+                            $('input#runsheet_daydate_'+job_id).focus();
                         });
                         $( "#date_due" ).datepicker({
                             //showButtonPanel: true,
@@ -195,6 +225,87 @@
                 'view-jobs':{
                     init: function(){
                         actions.common.jobsTable();
+                        actions.common.selectAll();
+                        actions.common.doDates();
+                        //add to driver runsheet
+                        $('button#runsheet').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Jobs Selected",
+                                    text: "Please select at least one job to add to the runsheet",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                var rs_count = $('input.select:checked').length
+                                swal({
+                                    title: "Add "+rs_count+" orders to the driver runsheet?",
+                                    text: "This will add the selected orders to the driver's runsheet\n\nor create a new runsheet if one doe not exist",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(addToSheet) {
+                                    if(addToSheet)
+                                    {
+                                        var runsheet_days = [];
+                                        $('input.select').each(function(i,e){
+                                            var job_id = $(this).data('jobid');
+                                            var daydate_value = $('input#runsheet_daydate_value_'+job_id).val();
+                                            //runsheet_days[daydate_value] = [];
+                                            //console.log('job_id: '+ job_id);
+                                            if($(this).prop('checked') )
+                                            {
+                                                if(runsheet_days[daydate_value+'_timestamp'])
+                                                {
+                                                    runsheet_days[daydate_value+'_timestamp'].push(job_id);
+                                                }
+                                                else
+                                                {
+                                                    runsheet_days[daydate_value+'_timestamp'] = [];
+                                                    runsheet_days[daydate_value+'_timestamp'].push(job_id);
+                                                }
+
+                                            }
+                                        });
+                                        //console.log(runsheet_days);
+                                        /**/
+                                        $.ajax({
+                                            url: '/ajaxfunctions/do-runsheets',
+                                            method: 'post',
+                                            data: {
+                                                runsheets: runsheet_days
+                                            },
+                                            dataType: 'json',
+                                            beforeSend: function(){
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $.unblockUI();
+                                                    alert('error');
+                                                }
+                                                else
+                                                {
+                                                    //location.reload();
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown){
+                                                $.unblockUI();
+                                                document.open();
+                                                document.write(jqXHR.responseText);
+                                                document.close();
+                                            }
+                                        });
+
+                                    }
+                                });
+                            }
+
+                        });
+                        //end add to driver runsheet
                     }
                 },
                 'update-job':{
@@ -233,6 +344,7 @@
                     init: function(){
                         actions['job-search'].init();
                         actions.common.jobsTable();
+                        actions.common.selectAll();
                     }
                 }
             }

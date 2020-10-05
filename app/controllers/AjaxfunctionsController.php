@@ -17,10 +17,12 @@ class ajaxfunctionsController extends Controller
             'adjustAllocationForm',
             'bulkMoveStock',
             'calcOriginPick',
+            'consolidateOrders',
             'deactivateUser',
             'deleteClientLocation',
             'deleteConfiguration',
             'deletePackage',
+            'doRunsheets',
             'fulfillOrder',
             'getABox',
             'getAddress',
@@ -57,6 +59,122 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function consolidateOrders()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Have Been Consolidated</h2>");
+        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Consolidated</h2>");
+        Session::set('showfeedback', false);
+        Session::set('showerrorfeedback', false);
+        //get first order details
+        $fo = $this->order->getOrderDetail($this->request->data['order_ids'][0]);
+        $address_array = array(
+            'address'   => $fo['address'],
+            'suburb'    => $fo['suburb'],
+            'state'     => $fo['state'],
+            'postcode'  => $fo['postcode'],
+            'country'   => $fo['country']
+        );
+        $error = false;
+        $client_order_id = $fo['client_order_id'];
+        $update_ids = array();
+        for( $i = 1; $i < count($this->request->data['order_ids']); ++$i)
+        {
+            if(!$this->order->addressMatch($address_array, $this->request->data['order_ids'][$i]))
+            {
+                Session::set('showerrorfeedback', true);
+                $_SESSION['errorfeedback'] .= "<p>Not all orders appear to be going to the same address</p>";
+                $error = true;
+            }
+            else
+            {
+                $update_ids[] = $this->request->data['order_ids'][$i];
+            }
+        }
+        if(!$error)
+        {
+            //echo "<pre>",print_r($update_ids),"</pre>"; die();
+            $local_courier_id = $this->courier->getLocalId();
+            $courier_name = "consolidated with {$fo['order_number']}";
+            $pdfs = array();
+            if(!empty($fo['uploaded_file']))
+            {
+                $pdfs[] = array(
+                	'file'		    =>	UPLOADS.$fo['client_id']."/".$fo['uploaded_file'],
+                    'orientation'	=>	'P'
+                );
+            }
+
+            foreach($update_ids as $old_id)
+            {
+                //get the consoldating order details
+                $this_order = $this->order->getOrderDetail($old_id);
+                //consolidate the order items
+                $this->order->consolidateOrders($old_id, $fo['id']);
+                //update order values
+                $new_order_values = array(
+                    'courier_id'        => $local_courier_id,
+                    'courier_name'      => $courier_name,
+                    'date_fulfilled'    => time(),
+                    'status_id'         => $this->order->fulfilled_id
+                );
+                $this->order->updateOrderValues($new_order_values, $old_id);
+                //deal with the invoices
+                if(!empty($this_order['uploaded_file']))
+                {
+                    $pdfs[] = array(
+                    	'file'		    =>	UPLOADS.$this_order['client_id']."/".$this_order['uploaded_file'],
+                        'orientation'	=>	'P'
+                    );
+                }
+                //store new client order ids
+                $client_order_id .= (empty($client_order_id))? $this_order['client_order_id'] : ",".$this_order['client_order_id'];
+            }
+            //echo "<p>$client_order_id</p>";
+            //echo "PDFS<pre>",print_r($pdfs),"</pre>"; die();
+            if(count($pdfs))
+            {
+                $upcount = 1;
+                $filename = "invoice";
+                $name = "invoice.pdf";
+                $upload_dir = "/client_uploads/".$fo['client_id']."/";
+                if ( ! is_dir(DOC_ROOT.$upload_dir))
+                            mkdir(DOC_ROOT.$upload_dir);
+    			while(file_exists(DOC_ROOT.$upload_dir.$name))
+                {
+                    $name = $filename."_".$upcount.".pdf";
+                    ++$upcount;
+                }
+                $pdf = new Mympdf();
+                $pdf->mergePDFFilesToServer($pdfs, $name, DOC_ROOT.$upload_dir);
+                $uploaded_file = $name;
+            }
+            $new_vals = array(
+                'client_order_id'   => $client_order_id
+            );
+            if(isset($uploaded_file))
+                $new_vals['uploaded_file'] = $uploaded_file;
+            $this->order->updateOrderValues($new_vals, $fo['id']);
+            Session::set('showfeedback', true);
+        }
+        //echo "<pre>",print_r($data),"</pre>"; //die();
+        //echo "<pre>",print_r($fo),"</pre>"; die();
+        if(Session::getAndDestroy('showfeedback') == false)
+        {
+            Session::destroy('feedback');
+        }
+        if(Session::getAndDestroy('showerrorfeedback') == false)
+        {
+            Session::destroy('errorfeedback');
+        }
+        $this->view->renderJson($data);
     }
 
     public function encryptSomeShit()
@@ -130,18 +248,6 @@ class ajaxfunctionsController extends Controller
         );
         $this->order->removeCourier($order_id);
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Courier has been removed</h2>");
-        $this->view->renderJson($data);
-    }
-
-    public function getSolarInstalls()
-    {
-        $data = $this->solarorder->getInstalls($this->request->data['from'], $this->request->data['to']);
-        $this->view->renderJson($data);
-    }
-
-    public function getSolarServiceJobs()
-    {
-        $data = $this->solarorder->getServiceJobs($this->request->data['from'], $this->request->data['to']);
         $this->view->renderJson($data);
     }
 
@@ -302,68 +408,6 @@ class ajaxfunctionsController extends Controller
         {
             $this->order->updateOrderValue('3pl_comments', $comment, $order_id);
         }
-    }
-
-    public function fulfillSolarorder()
-    {
-       //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $data = array(
-            'error'         => false,
-            'not_logged'    => false,
-            'error_string'  => '',
-            'feedback'      => ''
-        );
-
-        $order_ids = ( is_array($this->request->data['order_ids']) )? $this->request->data['order_ids']: (array)$this->request->data['order_ids'];
-        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Have Been Fulfilled</h2>");
-        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Fulfilled</h2><p>Reasons are listed below</p>");
-        Session::set('showfeedback', false);
-        Session::set('showerrorfeedback', false);
-
-        $this->orderfulfiller->fulfillSolarOrder($order_ids);
-
-        if(Session::getAndDestroy('showfeedback') == false)
-        {
-            Session::destroy('feedback');
-        }
-        if(Session::getAndDestroy('showerrorfeedback') == false)
-        {
-            Session::destroy('errorfeedback');
-        }
-
-
-        $this->view->renderJson($data);
-    }
-
-    public function fulfillSolarservice()
-    {
-       //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $data = array(
-            'error'         => false,
-            'not_logged'    => false,
-            'error_string'  => '',
-            'feedback'      => ''
-        );
-
-        $order_ids = ( is_array($this->request->data['order_ids']) )? $this->request->data['order_ids']: (array)$this->request->data['order_ids'];
-        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Orders Have Been Fulfilled</h2>");
-        Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>These Orders Could Not Be Fulfilled</h2><p>Reasons are listed below</p>");
-        Session::set('showfeedback', false);
-        Session::set('showerrorfeedback', false);
-
-        $this->orderfulfiller->fulfillSolarService($order_ids);
-
-        if(Session::getAndDestroy('showfeedback') == false)
-        {
-            Session::destroy('feedback');
-        }
-        if(Session::getAndDestroy('showerrorfeedback') == false)
-        {
-            Session::destroy('errorfeedback');
-        }
-
-
-        $this->view->renderJson($data);
     }
 
     public function fulfillOrder()
@@ -880,24 +924,6 @@ class ajaxfunctionsController extends Controller
         $this->jobstatus->updateHeirarchy($this->request->data['status']);
     }
 
-    public function cancelSolarorders()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $this->solarorder->cancelOrders($this->request->data['orderids']);
-    }
-
-    public function cancelSwatchrequests()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $this->swatch->cancelRequests($this->request->data['orderids']);
-    }
-
-    public function cancelServiceorders()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $this->solarservicejob->cancelJobs($this->request->data['orderids']);
-    }
-
     public function cancelPickup()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
@@ -944,20 +970,6 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
-    public function getSolarItems()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->item->getAutocompleteSolarItems($this->request->query, $this->order->fulfilled_id, $this->request->query['type_id']);
-        $this->view->renderJson($data);
-    }
-
-    public function getAllSolarItems()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->item->getAutocompleteAllSolarItems($this->request->query, $this->order->fulfilled_id);
-        $this->view->renderJson($data);
-    }
-
     public function getAllItems()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
@@ -988,6 +1000,11 @@ class ajaxfunctionsController extends Controller
         $this->view->renderBoolean($this->item->checkSkus($request, $current_sku));
     }
 
+    public function doRunsheets()
+    {
+        echo "<pre>",print_r($this->request),"</pre>";//die();
+    }
+
     public function checkLocations()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
@@ -1001,6 +1018,14 @@ class ajaxfunctionsController extends Controller
         $request = trim($this->request->query['name']);
         $current_name = isset($this->request->query['current_name'])? trim($this->request->query['current_name']) : "";
         $this->view->renderBoolean($this->user->checkRoleNames($request, $current_name));
+    }
+
+    public function checkDriverNames()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $request = trim($this->request->query['name']);
+        $current_name = isset($this->request->query['current_name'])? trim($this->request->query['current_name']) : "";
+        $this->view->renderBoolean($this->driver->checkDriverNames($request, $current_name));
     }
 
     public function checkJobStatusNames()

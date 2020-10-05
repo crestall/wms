@@ -10,9 +10,11 @@
 
     addOrder($data, $oitems)
     addPackage($data)
+    addressMatch($order_id, $match_id)
     cancelOrders($ids)
     countItemForOrder($item_id, $order_id)
     courierAssigned($order_id)
+    consolidateOrders($id, $intoid)
     deletePackage($id)
     getAllOrders($client_id, $courier_id = -1, $fulfulled = 0, $store_order = -1)
     getAllOrdersByStatus($status_id)
@@ -85,6 +87,32 @@ class Order extends Model{
         $this->packed_id    = $this->getStatusId('packed');
         $this->fulfilled_id = $this->getStatusId('fulfilled');
         $this->getStatusses();
+    }
+
+    public function consolidateOrders($old_id, $new_id)
+    {
+        $db = Database::openConnection();
+        $array = array(
+            'new_id'    => $new_id,
+            'old_id'    => $old_id
+        );
+        //update orders_items table
+        $q = "UPDATE orders_items SET order_id = :new_id WHERE order_id = :old_id";
+        $db->queryData($q, $array);
+        //update orders_packages table
+        $q = "UPDATE orders_packages SET order_id = :new_id WHERE order_id = :old_id";
+        $db->queryData($q, $array);
+        //update order_item_serials table
+        $q = "UPDATE order_item_serials SET order_id = :new_id WHERE order_id = :old_id";
+        $db->queryData($q, $array);
+
+    }
+
+    public function addressMatch($address_array, $match_id)
+    {
+        $db = Database::openConnection();
+        $address_array['id'] = $match_id;
+        return $db->countData($this->table, $address_array);
     }
 
     public function removeCourier($order_id)

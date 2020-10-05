@@ -938,6 +938,50 @@
 
                         //$('table#client_orders_table').stickyTableHeaders();
 
+                        $('a.consolidate-orders').click(function(e){
+                            e.preventDefault();
+                            if($('input.select:checked').length > 1)
+                            {
+                                var ids = [];
+                                $('input.select').each(function(i,e){
+                                    var order_id = $(this).data('orderid');
+                                    if( $(this).prop('checked') )
+                                    {
+                                        ids.push(order_id);
+                                        //console.log(ids);
+                                    }
+                                });
+                                $.ajax({
+                                    url: '/ajaxfunctions/consolidateOrders',
+                                    method: 'post',
+                                    data: { order_ids: ids },
+                                    dataType: 'json',
+                                    beforeSend: function(){
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Consolidating Orders...</h2></div>' });
+                                    },
+                                    success: function(d){
+                                        if(d.error)
+                                        {
+                                            $.unblockUI();
+                                            alert('error');
+                                        }
+                                        else
+                                        {
+                                            location.reload();
+                                        }
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                swal({
+                                    title: "More Orders Needed",
+                                    text: "Please select at least two orders to consolidate",
+                                    icon: "error"
+                                });
+                            }
+                        });
+
                         $('a.select-courier').click(function(e){
                             e.preventDefault();
                             if($('input.select:checked').length)

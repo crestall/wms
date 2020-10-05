@@ -578,6 +578,41 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
+    $('form#add_driver').validate({
+        rules:{
+            name:{
+                remote: {
+                    url: '/ajaxfunctions/checkDriverNames'
+                },
+                required: true
+            }
+        },
+        messages:{
+            name:{
+                remote: '<p>This name is already in the system.<br>Driver names must be unique</p>'
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
+    $('form.edit_driver').each(function(i,e){
+        $(this).validate();
+    });
+    $('input.driver_name').each(function(i,e){
+        var line_id = $(e).prop('id').split('_').pop();
+        $(this).rules('add',{
+                required: true,
+                remote: {
+                    url: '/ajaxfunctions/checkDriverNames',
+                    data: { current_name: function() { return $('input#current_name_'+line_id).val();}
+                },
+                messages:{
+                    remote: '<p>This name is already in the system.<br>Driver names must be unique</p>',
+                    required: 'A name is required'
+                }
+            }
+        })
+    })
+    ////////////////////////////////////////////////////////////
     $('#add_origin_order').validate({
         rules:{
             roof_type:{
