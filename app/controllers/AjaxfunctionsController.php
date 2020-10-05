@@ -63,7 +63,7 @@ class ajaxfunctionsController extends Controller
 
     public function consolidateOrders()
     {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        echo "<pre>",print_r($this->request),"</pre>"; //die();
         $post_data = array();
         $data = array(
             'error'     =>  false,
