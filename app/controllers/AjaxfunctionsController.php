@@ -82,17 +82,19 @@ class ajaxfunctionsController extends Controller
             'postcode'  => $fo['postcode'],
             'country'   => $fo['country']
         );
+        $error = false;
         for( $i = 1; $i < count($this->request->data['order_ids']); ++$i)
         {
             if(!$cid = $this->order->addressMatch($address_array, $this->request->data['order_ids'][$i]))
             {
                 Session::set('showerrorfeedback', true);
                 $session['errorfeedback'] .= "<p>Not all orders appear to be going to the same address</p>";
+                $error = true;
             }
-            else
-            {
-                //echo "<p>Will consolidate $cid into {$fo['id']}</p>";
-            }
+        }
+        if(!$error)
+        {
+            Session::set('showfeedback', true);
         }
         //echo "<pre>",print_r($data),"</pre>"; //die();
         //echo "<pre>",print_r($fo),"</pre>"; die();
