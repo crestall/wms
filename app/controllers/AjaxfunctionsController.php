@@ -137,9 +137,9 @@ class ajaxfunctionsController extends Controller
                 //store new client order ids
                 $client_order_id .= (empty($client_order_id))? $this_order['client_order_id'] : ",".$this_order['client_order_id'];
             }
-            echo "<p>$client_order_id</p>";
-            echo "PDFS<pre>",print_r($pdfs),"</pre>"; die();
-            /*if(count($pdfs))
+            //echo "<p>$client_order_id</p>";
+            //echo "PDFS<pre>",print_r($pdfs),"</pre>"; die();
+            if(count($pdfs))
             {
                 $upcount = 1;
                 $filename = "invoice";
@@ -155,7 +155,13 @@ class ajaxfunctionsController extends Controller
                 $pdf = new Mympdf();
                 $pdf->mergePDFFilesToServer($pdfs, $name, DOC_ROOT.$upload_dir);
                 $uploaded_file = $name;
-            }*/
+            }
+            $new_vals = array(
+                'client_order_id'   => $client_order_id
+            );
+            if(isset($uploaded_file))
+                $new_vals['uploaded_file'] = $uploaded_file;
+            $this->order->updateOrderValues($new_vals, $fo['id']);
             Session::set('showfeedback', true);
         }
         //echo "<pre>",print_r($data),"</pre>"; //die();
