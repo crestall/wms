@@ -91,7 +91,8 @@ class Order extends Model{
     public function addressMatch($address_array, $match_id)
     {
         $db = Database::openConnection();
-        return $db->queryValue($this->table, $address_array);
+        $address_array['id'] = $match_id;
+        return $db->countData($this->table, $address_array);
     }
 
     public function removeCourier($order_id)
