@@ -105,6 +105,7 @@ class Order extends Model{
         //update order_item_serials table
         $q = "UPDATE order_item_serials SET order_id = :new_id WHERE order_id = :old_id";
         $db->queryData($q, $array);
+
     }
 
     public function addressMatch($address_array, $match_id)
