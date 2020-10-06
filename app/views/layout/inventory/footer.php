@@ -54,46 +54,6 @@
 
                     }
                 },
-                'solar-returns':{
-                    init: function(){
-                        $('#order_type_id').change(function(e){
-                            if($(this).val() > 0)
-                            {
-                                $("div#item_holder").slideDown();
-                                $("#form_submitter").removeAttr('disabled');
-                            }
-                        });
-                        $("form#solar_return").submit(function(e){
-                            if($(this).valid())
-                            {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Return...</h2></div>' });
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        });
-                        $("input.item-searcher").each(function(i,e){
-                            if($(this).data('ui-autocomplete') != undefined)
-                            {
-                                $(this).autocomplete( "destroy" );
-                            }
-                            autoCompleter.solarAllItemsAutoComplete($(this), selectCallback, changeCallback);
-                        });
-                        function selectCallback(event, ui)
-                        {
-                            $("#item_id").val(ui.item.item_id);
-                        }
-                        function changeCallback(event, ui)
-                        {
-                            if (!ui.item)
-                	        {
-                                $(event.target).val("");
-                                return false;
-                            }
-                        }
-                    }
-                },
                 'register-new-stock': {
                     init: function(){
                         $('form#register_new_stock').submit(function(e){
@@ -329,23 +289,6 @@
                                 { "orderable": false, "targets": [1,2] }
                             ]
                         } );
-                    }
-                },
-                'view-solar-inventory': {
-                    init: function()
-                    {
-                        dataTable.init($('table#solar-inventory-table'), {
-                            "columnDefs": [
-                                { "orderable": false, "targets": [2,3] }
-                            ]
-                         } );
-                         $('button#csv_download').click(function(e) {
-                            var data = {
-                                csrf_token: config.csrfToken
-                            }
-                            var url = "/downloads/solarInventoryCSV";
-                            fileDownload.download(url, data);
-                        });
                     }
                 },
                 "pack-items-manage" : {
@@ -717,16 +660,14 @@
                 },
                 'transfer-location': {
                     init: function(){
-                        $('select#move_from_location').change(function(e){
-                            var loc_id = $(this).val();
-                            var url = "/ajax-functions/get-items-in-location";
-                            var data = {loc_id:loc_id};
-                            $('div#move_to_holder')
-                                .slideDown()
-                                .html("<div class='row'><div class='col-md-12'><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Finding Items...</p></div></div>")
-                                .load(url, data, function(d){
-
-                                });
+                        $('form#transfer_location').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Transferring Items...</h2></div>' });
+                            }
+                        });
+                        $('select#move_to_location, select#move_from_location').change(function(e){
+                            $(this).valid();
                         });
                     }
                 }
