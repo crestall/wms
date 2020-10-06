@@ -257,6 +257,7 @@
                                             //console.log('job_id: '+ job_id);
                                             if($(this).prop('checked') )
                                             {
+                                                /*
                                                 if(runsheet_days[daydate_value+'_timestamp'])
                                                 {
                                                     runsheet_days[daydate_value+'_timestamp'].push(job_id);
@@ -266,7 +267,12 @@
                                                     runsheet_days[daydate_value+'_timestamp'] = [];
                                                     runsheet_days[daydate_value+'_timestamp'].push(job_id);
                                                 }
-
+                                                */
+                                                var ent = {
+                                                    'timestamp' : day_date_value,
+                                                    'job_id'    : job_id
+                                                }
+                                                runsheet_days.push(ent);
                                             }
                                         });
                                         console.log(runsheet_days);
