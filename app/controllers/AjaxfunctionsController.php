@@ -1002,7 +1002,17 @@ class ajaxfunctionsController extends Controller
 
     public function doRunsheets()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        //echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        $runsheets = array();
+        foreach($this->request->data['runsheets'] as $rs)
+        {
+            if(!isset($runsheets[$rs['timestamp']]))
+            {
+                $runsheets[$rs['timestamp']] = array();
+            }
+            $runsheets[$rs['timestamp']][] = $rs['job_id'];
+        }
+        echo "<pre>",print_r($runsheets),"</pre>";die();
     }
 
     public function checkLocations()
