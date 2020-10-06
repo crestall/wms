@@ -126,6 +126,7 @@ class FormController extends Controller {
             'procStoreChainEdit',
             'procSubtractFromStock',
             'procSwatchCsvUpload',
+            'procTransferLocation',
             'procTruckUsage',
             'procUpdatePassword',
             'procUserAdd',
@@ -134,6 +135,20 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procTransferLocation()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        echo "<pre>",print_r($post_data),"</pre>"; die();
     }
 
     public function procDriverEdit()
