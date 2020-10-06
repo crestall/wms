@@ -148,6 +148,10 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if( ($move_to_location == $move_from_location) && ($move_from_location != 0) )
+        {
+            Form::setError('move_from_location', 'Please selct two <strong>different</strong> locations');
+        }
         if(!isset($move_from_location) || $move_from_location == 0)
         {
             Form::setError('move_from_location', 'Please select a location to move from');
