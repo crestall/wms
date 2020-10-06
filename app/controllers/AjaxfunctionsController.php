@@ -467,7 +467,7 @@ class ajaxfunctionsController extends Controller
 
     public function selectCourier()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $data = array(
             'error'         => false,
             'error_string'  => '',
