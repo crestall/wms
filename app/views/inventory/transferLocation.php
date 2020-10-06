@@ -13,16 +13,18 @@
                             <?php echo Form::displayError('move_from_location');?>
                         </div>
                     </div>
-                    <div id="move_to_holder" styel="display:none">
-                        <div id="content_holder">
-
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Move To</label>
+                        <div class="col-md-4">
+                            <select id="move_to_location" name="move_to_location" class="form-control selectpicker" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectMultiSKULocations(Form::value('move_to_location'));?></select>
+                            <span class="inst">Only Multi-SKU locations will appear</span>
+                            <?php echo Form::displayError('move_to_location');?>
                         </div>
                     </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">&nbsp;</label>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary" id="form_submitter" disabled>Transfer</button>
+                        <div class="col-md-4 offset-md-3">
+                            <button type="submit" class="btn btn-primary" id="form_submitter">Transfer</button>
                         </div>
                     </div>
                 </form>
