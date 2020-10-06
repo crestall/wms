@@ -16,6 +16,7 @@
   getClientsBaysUsage($client_id = 0)
   getItemLocationId
   getItemStockInLocation
+  getItemsInLocation
   getLocationId
   getLocationName
   getLocationUsage()
@@ -55,9 +56,36 @@ class Location extends Model{
     public function moveAllItemsInLocation($from_id, $to_id)
     {
         $db = Database::openConnection();
-        $q = "UPDATE `items_locations` SET location_id = $to_id WHERE location_id = $from_id";
-        $db->queryData($q);
+        //get the items in the from location
+        $items = $this->getItemsInLocation($from_id);
+        //move them to the new location
+        foreach($items as $i)
+        {
+            if($updater = $db->queryValue('items_locations', array('item_id' => $i['item_id'], 'location_id' => $to_id)))
+            {
+                $db->query("UPDATE items_locations SET qty = qty + ".$i['qty']." WHERE id = $updater");
+            }
+            else
+            {
+                $vals = array(
+                    'item_id'       =>  $i['item_id'],
+                    'location_id'   =>  $to_id,
+                    'qty'           =>  $i['qty']
+                );
+                $db->insertQuery('items_locations', $vals);
+            }
+
+        }
+        //delete them from the old location
+        $db->deleteQuery('items_location', $from_id, 'location_id');
         return true;
+    }
+
+    public function getItemsInLocation($location_id)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM `items_locations` WHERE location_id = $location_id";
+        return ($db->queryData($q));
     }
 
     public function getAllClientsBayUsage()
