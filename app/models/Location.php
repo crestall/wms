@@ -54,6 +54,7 @@ class Location extends Model{
 
     public function moveAllItemsInLocation($from_id, $to_id)
     {
+        $db = Database::openConnection();
         $q = "UPDATE `items_locations` SET location_id = $to_id WHERE location_id = $from_id";
         $db->queryData($q);
         return true;
