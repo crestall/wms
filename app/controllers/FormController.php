@@ -167,7 +167,7 @@ class FormController extends Controller {
         }
         else
         {
-
+            $this->location->moveAllItemsInLocation($move_from_location, $move_to_location);
             Session::set('feedback', "All items have been moved to the new Location");
         }
         return $this->redirector->to(PUBLIC_ROOT."/inventory/transfer-location");
