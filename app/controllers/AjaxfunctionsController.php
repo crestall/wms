@@ -1002,7 +1002,7 @@ class ajaxfunctionsController extends Controller
 
     public function doRunsheets()
     {
-        echo "<pre>",print_r($this->request),"</pre>";//die();
+        echo "<pre>",print_r($this->request->data),"</pre>";//die();
     }
 
     public function checkLocations()
