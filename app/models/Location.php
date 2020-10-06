@@ -16,6 +16,7 @@
   getClientsBaysUsage($client_id = 0)
   getItemLocationId
   getItemStockInLocation
+  getItemsInLocation
   getLocationId
   getLocationName
   getLocationUsage()
@@ -26,11 +27,14 @@
   getSelectEmptyLocations
   getSelectItemInLocations
   getSelectLocations
+  getSelectMultiSKULocations($selected = false)
   getSelectNonEmptyLocations
+  getSelectNonEmptyUnallocatedLocations($selected = false)
   getSelectQCItemInLocations($item_id, $selected = false)
   isEmptyLocation
   isEmptyOfItem($id, $item_id)
   isOversize($id)
+  moveAllItemsInLocation
   subtractFromLocation
   updateLocation
 
@@ -47,6 +51,41 @@ class Location extends Model{
     {
         $this->receiving_id = $this->getLocationId('receiving');
         $this->bayswater_receiving_id = $this->getLocationId('bayswater receiving');
+    }
+
+    public function moveAllItemsInLocation($from_id, $to_id)
+    {
+        $db = Database::openConnection();
+        //get the items in the from location
+        $items = $this->getItemsInLocation($from_id);
+        //move them to the new location
+        foreach($items as $i)
+        {
+            if($updater = $db->queryValue('items_locations', array('item_id' => $i['item_id'], 'location_id' => $to_id)))
+            {
+                $db->query("UPDATE items_locations SET qty = qty + ".$i['qty']." WHERE id = $updater");
+            }
+            else
+            {
+                $vals = array(
+                    'item_id'       =>  $i['item_id'],
+                    'location_id'   =>  $to_id,
+                    'qty'           =>  $i['qty']
+                );
+                $db->insertQuery('items_locations', $vals);
+            }
+
+        }
+        //delete them from the old location
+        $db->deleteQuery('items_locations', $from_id, 'location_id');
+        return true;
+    }
+
+    public function getItemsInLocation($location_id)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM `items_locations` WHERE location_id = $location_id";
+        return ($db->queryData($q));
     }
 
     public function getAllClientsBayUsage()
@@ -307,6 +346,34 @@ class Location extends Model{
 
     }
 
+    public function getSelectMultiSKULocations($selected = false)
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $q = "
+            SELECT
+                id, location
+            FROM
+                locations
+            WHERE
+                active = 1 AND  multi_sku = 1
+            ORDER BY location";
+        $locations = $db->queryData($q);
+        foreach($locations as $l)
+        {
+            $label = $l['location'];
+            $value = $l['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+
+    }
+
     public function getSelectLocations($selected = false, $item_id = false)
     {
         $db = Database::openConnection();
@@ -406,80 +473,6 @@ class Location extends Model{
 
     }
 
-
-    /*
-    public function getSelectDBLocations($selected = false, $item_id = false)
-    {
-        $db = Database::openConnection();
-        $check = "";
-        $ret_string = "";
-        $array = array();
-
-        $q = "
-            SELECT
-                l1.id, l1.location
-            FROM
-                (
-                    SELECT id, location
-                    FROM locations
-                    WHERE
-                    (
-                        CASE WHEN multi_sku = 0
-                        THEN id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)
-                        ELSE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0)
-                        END
-                    )
-                    AND
-                    (
-                        SUBSTRING(location, -1) = 'a'
-                    )
-        ";
-        if( $item_id )
-        {
-            $q .= " OR
-                    (
-                         id IN (SELECT location_id FROM items_locations WHERE item_id = :item_id)
-                    )";
-            $array['item_id'] = $item_id;
-        }
-        $q .= " ) l1
-                LEFT JOIN
-                (
-                    SELECT id, location
-                    FROM locations
-                    WHERE
-                    (
-                        CASE WHEN multi_sku = 0
-                        THEN id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)
-                        ELSE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0)
-                        END
-                    )
-                    AND
-                    (
-                        SUBSTRING(location, -1) = 'b'
-                    )
-                ) l2
-                ON l2.location = CONCAT(SUBSTRING(l1.location,1,LENGTH(l1.location) - 1), 'b')
-            WHERE
-                l2.id IS NOT NULL
-            ORDER BY
-                l1.location
-        ";
-        //echo $q;die();
-        $locations = $db->queryData($q, $array);
-        foreach($locations as $l)
-        {
-            $label = $l['location'];
-            $value = $l['id'];
-            if($selected)
-			{
-				$check = ($value == $selected)? "selected='selected'" : "";
-			}
-			$ret_string .= "<option $check value='$value'>$label</option>";
-        }
-        return $ret_string;
-    }
-    */
     public function getSelectClientLocations($selected = false)
     {
         $db = Database::openConnection();

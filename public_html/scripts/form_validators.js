@@ -703,6 +703,25 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
+    $('form#transfer_location').validate({
+        rules:{
+            move_from_location:{
+                notNone:true
+            },
+            move_to_location:{
+                notNone:true
+            }
+        },
+        messages:{
+            move_from_location:{
+                notNone: "Please select a location"
+            },
+            move_to_location:{
+                notNone: "Please select a location"
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
     $('form#form-forgot-password').validate({
 
     });

@@ -52,7 +52,8 @@ class InventoryController extends Controller
         Config::setJsConfig('curPage', "transfer-location");
         Config::set('curPage', "transfer-location");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/transferLocation.php',[
-            'page_title'    =>  'Transfer a Location',
+            'page_title'    =>  'Transfer All Items In A Location',
+            'pht'           =>  ": Move Whole Location",
         ]);
     }
 
