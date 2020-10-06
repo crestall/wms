@@ -269,7 +269,7 @@
                                                 }
                                                 */
                                                 var ent = {
-                                                    'timestamp' : day_date_value,
+                                                    'timestamp' : daydate_value,
                                                     'job_id'    : job_id
                                                 }
                                                 runsheet_days.push(ent);
