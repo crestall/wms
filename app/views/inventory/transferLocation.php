@@ -24,7 +24,7 @@
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
                         <div class="col-md-4 offset-md-3">
-                            <button type="submit" class="btn btn-outlin-secondary" id="form_submitter">Transfer</button>
+                            <button type="submit" class="btn btn-outline-secondary" id="form_submitter">Transfer</button>
                         </div>
                     </div>
                 </form>
