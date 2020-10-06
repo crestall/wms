@@ -77,7 +77,7 @@ class Location extends Model{
 
         }
         //delete them from the old location
-        $db->deleteQuery('items_location', $from_id, 'location_id');
+        $db->deleteQuery('items_locations', $from_id, 'location_id');
         return true;
     }
 
