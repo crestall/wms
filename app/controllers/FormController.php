@@ -139,7 +139,7 @@ class FormController extends Controller {
 
     public function procTransferLocation()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -148,7 +148,25 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>"; die();
+        if(!isset($move_from_location) || $move_from_location == 0)
+        {
+            Form::setError('move_from_location', 'Please select a location to move from');
+        }
+        if(!isset($move_to_location) || $move_to_location == 0)
+        {
+            Form::setError('move_to_location', 'Please select a location to move to');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+
+            Session::set('feedback', "All items have been moved to the new Location");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."/inventory/transfer-location");
     }
 
     public function procDriverEdit()
