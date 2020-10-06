@@ -26,6 +26,7 @@
   getSelectEmptyLocations
   getSelectItemInLocations
   getSelectLocations
+  getSelectMultiSKULocations($selected = false)
   getSelectNonEmptyLocations
   getSelectNonEmptyUnallocatedLocations($selected = false)
   getSelectQCItemInLocations($item_id, $selected = false)
