@@ -279,7 +279,7 @@
                                             },
                                             dataType: 'json',
                                             beforeSend: function(){
-                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Creating/Editing Runsheet...</h1></div>' });
                                             },
                                             success: function(d){
                                                 if(d.error)
