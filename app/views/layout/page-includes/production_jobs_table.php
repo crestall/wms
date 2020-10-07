@@ -110,7 +110,7 @@
                         <p>This Job is already on a printed runsheet</p>
                     <?php else:
                         if($job['runsheet_id'] > 0):?>
-                            <p>This Job is on the runsheet for <?php echo date('d/m/Y',$job['runsheet_day']);?></p>
+                            <p>This Job is on the runsheet for <?php echo date('l jS \of F',$job['runsheet_day']);?></p>
                         <?php else:
                             $date = strtotime("today");?>
                             <div class="input-group">
