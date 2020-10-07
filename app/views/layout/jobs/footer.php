@@ -278,7 +278,7 @@
                                         //console.log(runsheet_days);
                                         /**/
                                         $.ajax({
-                                            url: '/ajaxfunctions/do-runsheets',
+                                            url: '/ajaxfunctions/add-job-runsheets',
                                             method: 'post',
                                             data: {
                                                 runsheets: runsheet_days

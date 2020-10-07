@@ -1000,7 +1000,7 @@ class ajaxfunctionsController extends Controller
         $this->view->renderBoolean($this->item->checkSkus($request, $current_sku));
     }
 
-    public function doRunsheets()
+    public function addJobRunsheets()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>";//die();
         $runsheets = array();
@@ -1008,12 +1008,13 @@ class ajaxfunctionsController extends Controller
         {
             if(!isset($runsheets[$rs['timestamp']]))
             {
-                $runsheets[$rs['timestamp']] = array();
+                $runsheets[$rs['timestamp']]['driver_id'] = 0
+                $runsheets[$rs['timestamp']]['jobs'] = array();
             }
-            $runsheets[$rs['timestamp']][] = $rs['job_id'];
+            $runsheets[$rs['timestamp']]['jobs'][] = $rs['job_id'];
         }
         ksort($runsheets, SORT_NUMERIC);
-        //echo "<pre>",print_r($runsheets),"</pre>";die();
+        echo "<pre>",print_r($runsheets),"</pre>";die();
     }
 
     public function checkLocations()
