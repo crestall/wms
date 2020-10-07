@@ -1014,7 +1014,9 @@ class ajaxfunctionsController extends Controller
             $runsheets[$rs['timestamp']]['jobs'][] = $rs['job_id'];
         }
         ksort($runsheets, SORT_NUMERIC);
-        echo "<pre>",print_r($runsheets),"</pre>";die();
+        //echo "<pre>",print_r($runsheets),"</pre>";die();
+        $this->runsheet->addRunsheet($runsheets);
+        Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Those Runsheet(s) have been created/updated</h2>");
     }
 
     public function checkLocations()
