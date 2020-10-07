@@ -311,12 +311,38 @@
                                 }).then( function(removeFromSheet) {
                                     if(removeFromSheet)
                                     {
-                                        console.log('job id: '+job_id);
-                                        console.log('runsheet id: '+runsheet_id);
-                                    }
-                                    else
-                                    {
-                                        console.log('Clicked Cancel');
+                                        //console.log('job id: '+job_id);
+                                        //console.log('runsheet id: '+runsheet_id);
+                                        $.ajax({
+                                            url: '/ajaxfunctions/remove-from-runsheet',
+                                            method: 'post',
+                                            data: {
+                                                job_id: job_id,
+                                                runsheet_id: runsheet_id
+                                            },
+                                            dataType: 'json',
+                                            beforeSend: function(){
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing From Runsheet...</h1></div>' });
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $.unblockUI();
+                                                    alert('error');
+                                                }
+                                                else
+                                                {
+                                                    //location.reload(true);
+                                                    window.location.href = "http://stackoverflow.com";
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown){
+                                                $.unblockUI();
+                                                document.open();
+                                                document.write(jqXHR.responseText);
+                                                document.close();
+                                            }
+                                        });
                                     }
                                 });
                         })
