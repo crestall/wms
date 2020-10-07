@@ -75,14 +75,41 @@ class Runsheet extends Model{
     public function addRunsheet($data)
     {
         $db = Database::openConnection();
-        $vals = array(
-            'runsheet_day'  =>  $data['runsheet_day'],
-            'created_date'  =>  time(),
-            'updated_date'  =>  time()
-        );
-        if(!empty($data['driver_id'])) $vals['driver_id'] = $data['driver_id'];
-        $id = $db->insertQuery($this->table, $vals);
-        return $id;
+        foreach($data as $runsheet_day => $details)
+        {
+            if(!$runsheet_id = $db->queryIdByFieldNumber($this->table, 'runsheet_day', $runsheet_day))
+            {
+                $vals = array(
+                    'runsheet_day'  =>  $runsheet_day,
+                    'created_date'  =>  time(),
+                    'updated_date'  =>  time()
+                );
+                $runsheet_id = $db->insertQuery($this->table, $vals);
+            }
+            // now add the jobs/orders
+            $tvals = array(
+                'runsheet_id'   => $runsheet_id
+            );
+            if($details['driver_id'] > 0)
+                $tvals['driver_id'] = $details['driver_id'];
+            if(isset($details['jobs']))
+            {
+                foreach($details['jobs'] as $job_id)
+                {
+                    $tvals['job_id'] = $job_id;
+                    $task_id = $db->insertQuery($this->tasks_table, $tvals);
+                }
+            }
+            if(isset($details['orders']))
+            {
+                foreach($details['orders'] as $order_id)
+                {
+                    $tvals['order__id'] = $order_id;
+                    $task_id = $db->insertQuery($this->tasks_table, $tvals);
+                }
+            }
+        }
+        return true;
     }
 
     public function updateRunsheet($data)
