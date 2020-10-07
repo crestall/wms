@@ -295,7 +295,8 @@
                                                 }
                                                 else
                                                 {
-                                                    location.reload();
+                                                    //location.reload(true);
+                                                    window.location.href = "http://stackoverflow.com";
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown){
