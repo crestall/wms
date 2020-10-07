@@ -18,19 +18,28 @@
 
 class Runsheet extends Model{
     public $table = "runsheets";
+    public $tasks_table = "runsheet_tasks";
 
-    public function getAllRunsheets($printed = false, $completed = false)
+    public function getAllRunsheets($completed = false)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM {$this->table}";
+        $q = "SELECT * FROM {$this->table} rs LEFT JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id";
         if($completed)
         {
-            $q .= " WHERE completed = 1";
+            $q .= " WHERE rs.completed = 1";
         }
         else
         {
-            $q .= " WHERE completed = 0";
+            $q .= " WHERE rs.completed = 0";
         }
+        $q .= " ORDER BY rs.runsheet_day DESC";
+        return $db->queryData($q);
+    }
+
+    public function getTasksForRunsheet($runsheet_id = 0, $printed = false)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM {$this->tasks_table} WHERE runsheet_id = $runsheet_id";
         if($printed)
         {
             $q .= " AND printed = 1";
@@ -45,21 +54,21 @@ class Runsheet extends Model{
     public function getRunsheetById($id = 0)
     {
         $db = Database::openConnection();
-        return $db->queryById($this->table, $id);
+        $q = "SELECT * FROM {$this->table} rs LEFT JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id WHERE rs.`id` = $id";
+        return $db->queryData($q);
     }
 
     public function getRunsheetForDay($day = 0)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM {$this->table} WHERE `day` = $day LIMIT 1";
-        $row = $db->queryRow($q);
-        return $row;
+        $q = "SELECT * FROM {$this->table} rs LEFT JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id WHERE rs.`day` = $day";
+        return $db->queryData($q);
     }
 
     public function getRunsheetsForDriver($driver_id = 0)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM {$this->table} WHERE `driver_id` = $driver_id";
+        $q = "SELECT * FROM {$this->table} rs LEFT JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id WHERE rs.`driver_id` = $driver_id";
         return $db->queryData($q);
     }
 
