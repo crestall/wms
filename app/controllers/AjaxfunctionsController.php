@@ -930,6 +930,11 @@ class ajaxfunctionsController extends Controller
         $this->pickup->cancelPickup($this->request->data['pickupid']);
     }
 
+    public function removeFromRunsheet()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
+    }
+
     public function updateFreightCharge()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
