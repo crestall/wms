@@ -110,7 +110,8 @@
                         <p>This Job is already on a printed runsheet</p>
                     <?php else:
                         if($job['runsheet_id'] > 0):?>
-                            <p>This Job is on the runsheet for <?php echo date('l jS \of F',$job['runsheet_day']);?></p>
+                            <p>This Job is on the runsheet for <strong><?php echo date('l jS \of F',$job['runsheet_day']);?></strong></p>
+                            <p><button class="btn btn-outline-danger remove-from-runsheet" data-jobid="<?php echo $job['id'];?>" data-runsheetid="<?php echo $job['runsheet_id'];?>">Remove It</button></p>
                         <?php else:
                             $date = strtotime("today");?>
                             <div class="input-group">
