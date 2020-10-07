@@ -1013,7 +1013,7 @@ class ajaxfunctionsController extends Controller
             $runsheets[$rs['timestamp']][] = $rs['job_id'];
         }
         ksort($runsheets, SORT_NUMERIC);
-        echo "<pre>",print_r($runsheets),"</pre>";die();
+        //echo "<pre>",print_r($runsheets),"</pre>";die();
     }
 
     public function checkLocations()
