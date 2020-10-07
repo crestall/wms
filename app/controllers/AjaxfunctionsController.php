@@ -1008,7 +1008,7 @@ class ajaxfunctionsController extends Controller
         {
             if(!isset($runsheets[$rs['timestamp']]))
             {
-                $runsheets[$rs['timestamp']]['driver_id'] = 0
+                $runsheets[$rs['timestamp']]['driver_id'] = 0;
                 $runsheets[$rs['timestamp']]['jobs'] = array();
             }
             $runsheets[$rs['timestamp']]['jobs'][] = $rs['job_id'];
