@@ -299,6 +299,27 @@
                             }
 
                         });
+                        $('button.remove-from-runsheet').click(function(e){
+                            swal({
+                                    title: "Really remove this job from the runsheet?",
+                                    text: "This cannot be undone",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(removeFromSheet) {
+                                    if(removeFromSheet)
+                                    {
+                                        var job_id = $(this).data('jobid');
+                                        var runsheet_id = $(this).data('runsheetid');
+                                        console.log('job id: '+job_id);
+                                        console.log('runsheet id: '+runsheet_id);
+                                    }
+                                    else
+                                    {
+                                        console.log('Clicked Cancel');
+                                    }
+                                });
+                        })
                         //end add to driver runsheet
                     }
                 },
