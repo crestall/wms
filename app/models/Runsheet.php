@@ -109,6 +109,12 @@ class Runsheet extends Model{
     public function removeJob($job_id, $runsheet_id)
     {
        $db = Database::openConnection();
+       //record runsheet update
+       $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
        $query = "DELETE FROM {$this->tasks_table} WHERE runsheet_id = :runsheet_id AND job_id = :job_id";
        $params = array(
             'runsheet_id'   => $runsheet_id,
@@ -120,6 +126,12 @@ class Runsheet extends Model{
     public function removeOrder($order_id, $runsheet_id)
     {
        $db = Database::openConnection();
+       //record runsheet update
+       $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
        $query = "DELETE FROM {$this->tasks_table} WHERE runsheet_id = :runsheet_id AND order_id = :order_id";
        $params = array(
             'runsheet_id'   => $runsheet_id,
