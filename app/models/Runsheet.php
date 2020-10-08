@@ -138,9 +138,17 @@ class Runsheet extends Model{
                 $vals = array(
                     'runsheet_day'  =>  $runsheet_day,
                     'created_date'  =>  time(),
-                    'updated_date'  =>  time()
+                    'updated_date'  =>  time(),
+                    'created_by'    =>  Session::getUserId()
                 );
                 $runsheet_id = $db->insertQuery($this->table, $vals);
+            }
+            else
+            {
+                $new_vals = array(
+                    'updated_date'  =>  time(),
+                    'updated_by'    =>  Session::getUserId()
+                );
             }
             // now add the jobs/orders
             $tvals = array(
