@@ -15,6 +15,7 @@ class ajaxfunctionsController extends Controller
         parent::beforeAction();
         $actions = [
             'adjustAllocationForm',
+            'addJobRunsheets',
             'bulkMoveStock',
             'calcOriginPick',
             'consolidateOrders',
@@ -1021,6 +1022,10 @@ class ajaxfunctionsController extends Controller
 
     public function addJobRunsheets()
     {
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
         //echo "<pre>",print_r($this->request->data),"</pre>";//die();
         $runsheets = array();
         foreach($this->request->data['runsheets'] as $rs)
@@ -1036,6 +1041,7 @@ class ajaxfunctionsController extends Controller
         //echo "<pre>",print_r($runsheets),"</pre>";die();
         $this->runsheet->addRunsheet($runsheets);
         Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Those Runsheet(s) have been created/updated</h2>");
+        $this->view->renderJson($data);
     }
 
     public function checkLocations()
