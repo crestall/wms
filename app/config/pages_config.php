@@ -126,6 +126,17 @@ $prod = array(
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
         ),
     ),
+    'runsheets' => array(
+        'runsheets-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-list-ol"></i>'
+        ),
+        'view-runsheets'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+        )
+    ),
     'fsg-contacts'    => array(
         'fsg-contacts-index'   => true,
         'default-icon'      => array(
@@ -304,7 +315,7 @@ return array(
             'transfer-location'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-dolly-flatbed fa-3x"></i>'
-            ),/* 
+            ),/*
             'move-bulk-items'    => array(
                 'display'   => true,
                 'icon'      => '<i class="fad fa-dolly-flatbed-alt fa-3x"></i>'
