@@ -1,6 +1,9 @@
 <table class="table-striped table-hover" id="runsheets_table">
     <thead>
         <tr>
+            <td colspan="7"><span class="inst">Click on  the runsheet day to edit and print the runsheet</span> </td>
+        </tr>
+        <tr>
             <th>Runsheet Day</th>
             <th>Created</th>
             <th>Last Updated</th>
@@ -14,9 +17,6 @@
                 </div>
             </th>
             <th></th>
-        </tr>
-        <tr>
-            <td colspan="7"><span class="inst">Click on  the runsheet day to edit and print the runsheet</span> </td>
         </tr>
     </thead>
     <tbody>
