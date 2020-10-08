@@ -5,7 +5,7 @@ $db = Database::openConnection();
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if(count($runsheets)):?>
-            <?php echo "<pre>",print_r($runsheets),"</pre>";?>
+            <?php //echo "<pre>",print_r($runsheets),"</pre>";?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Drawing Table..</h2>
@@ -15,10 +15,9 @@ $db = Database::openConnection();
             </div>
             <div class="row mt-4" id="table_holder" style="display:none">
                 <?php //echo "User Role $user_role";?>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Incompleted Jobs</a></div>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-primary p-3" id="runsheet"><i class="fas fa-truck"></i> Add Selected to Chosen Day's Runsheet</button></div>
+                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="#">A Type of Runsheet</a></div>
+                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="#">A Type of Runsheet</a></div>
+                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="#">A Type of Runsheet</a></div>
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
                        <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>
