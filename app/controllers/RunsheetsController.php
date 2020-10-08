@@ -87,7 +87,7 @@ class RunsheetsController extends Controller
 
     public function viewRunsheets()
     {
-        $rs = $this->runsheets->getRunsheetsForDisplay();
+        $rs = $this->runsheet->getRunsheetsForDisplay();
         //render the page
         Config::setJsConfig('curPage', "view-runsheets");
         Config::set('curPage', "view-runsheets");
