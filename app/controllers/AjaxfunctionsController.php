@@ -937,7 +937,8 @@ class ajaxfunctionsController extends Controller
             'error'     =>  false,
             'feedback'  =>  ''
         );
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        echo "<pre>",print_r($this->request),"</pre>"; die();
+        //$job_id =
         if($this->runsheet->removeJob($job_id, $runsheet_id))
         {
             Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Those charges have been updated</h2>");
