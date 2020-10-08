@@ -87,14 +87,52 @@ class RunsheetsController extends Controller
 
     public function viewRunsheets()
     {
-        $rs = $this->runsheet->getRunsheetsForDisplay();
+        $rss = $this->runsheet->getRunsheetsForDisplay();
+        $runsheets = array();
+        foreach($rss as $rs)
+        {
+            if(!isset($runsheets[$rs['runsheet_day']]))
+            {
+                $runsheets[$rs['runsheet_day']] =array();
+            }
+            if(!isset($runsheets[$rs['runsheet_day']]['jobs']))
+            {
+                $runsheets[$rs['runsheet_day']]['jobs'] =array();
+            }
+            if(!isset($runsheets[$rs['runsheet_day']]['orders']))
+            {
+                $runsheets[$rs['runsheet_day']]['orders'] =array();
+            }
+            $runsheets[$rs['runsheet_day']]['created_date'] = $rs['created_date'];
+            $runsheets[$rs['runsheet_day']]['updated_date'] = $rs['updated_date'];
+            $runsheets[$rs['runsheet_day']]['created_by'] = $rs['created_by'];
+            $runsheets[$rs['runsheet_day']]['updated_by'] = $rs['updated_by'];
+            if($rs['job_id'] > 0)
+            {
+                $runsheets[$rs['runsheet_day']]['jobs'][] = array(
+                    'job_id'    => $rs['job_id'],
+                    'driver_id' => $rs['driver_id'],
+                    'printed'   => $rs['printed'],
+                    'completed' => $rs['completed']
+                );
+            }
+            if($rs['order_id'] > 0)
+            {
+                $runsheets[$rs['runsheet_day']]['orders'][] = array(
+                    'order_id'  => $rs['order_id'],
+                    'driver_id' => $rs['driver_id'],
+                    'printed'   => $rs['printed'],
+                    'completed' => $rs['completed']
+                );
+            }
+        }
         //render the page
         Config::setJsConfig('curPage', "view-runsheets");
         Config::set('curPage', "view-runsheets");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/viewRunsheets.php', [
             'page_title'    =>  "View Runsheets",
             'pht'           =>  ": Runsheets",
-            'runsheets'     =>  $rs
+            'runsheets'     =>  $runsheets
         ]);
     }
 
