@@ -91,7 +91,7 @@ class Runsheet extends Model{
             'runsheet_id'   => $runsheet_id,
             'order_id'      => $order_id
        );
-       return $db->query($query, $params)
+       return $db->query($query, $params);
     }
 
     public function addRunsheet($data)
