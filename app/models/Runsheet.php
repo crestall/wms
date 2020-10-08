@@ -20,6 +20,39 @@ class Runsheet extends Model{
     public $table = "runsheets";
     public $tasks_table = "runsheet_tasks";
 
+    public function getRunsheetsForDisplay($completed = false, $printed = false)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                *
+            FROM
+                {$this->table} rs
+                JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id
+        ";
+        if($completed)
+        {
+            $q .= " WHERE rst.completed = 1";
+        }
+        else
+        {
+            $q .= " WHERE rst.completed = 0";
+        }
+        if($printed)
+        {
+            $q .= " AND rst.printed = 1";
+        }
+        else
+        {
+            $q .= " AND rst.printed = 0";
+        }
+        $q .= "
+            ORDER BY
+                rs.runsheet_day DESC
+        ";
+        return $db->queryData($q);
+    }
+
     public function getAllRunsheets($completed = false)
     {
         $db = Database::openConnection();
