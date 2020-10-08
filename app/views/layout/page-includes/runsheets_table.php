@@ -1,3 +1,4 @@
+<span class="inst">Click on  the runsheet day to edit and print the runsheet</span> 
 <table class="table-striped table-hover" id="runsheets_table">
     <thead>
         <tr>
