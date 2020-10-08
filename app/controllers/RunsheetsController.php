@@ -107,6 +107,7 @@ class RunsheetsController extends Controller
             $runsheets[$rs['runsheet_day']]['updated_date'] = $rs['updated_date'];
             $runsheets[$rs['runsheet_day']]['created_by'] = $rs['created_by'];
             $runsheets[$rs['runsheet_day']]['updated_by'] = $rs['updated_by'];
+            $runsheets[$rs['runsheet_day']]['runsheet_id'] = $rs['runsheet_id'];
             if($rs['job_id'] > 0)
             {
                 $runsheets[$rs['runsheet_day']]['jobs'][] = array(

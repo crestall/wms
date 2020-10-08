@@ -7,7 +7,10 @@
             var actions = {
                 'view-runsheets':{
                     init: function(){
-
+                        dataTable.init($('table#runsheets_table'), {
+                            /* No ordering applied by DataTables during initialisation */
+                            "order": []
+                        });
                     }
                 }
             }
