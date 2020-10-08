@@ -80,7 +80,7 @@ class Runsheet extends Model{
             'runsheet_id'   => $runsheet_id,
             'job_id'        => $job_id
        );
-       return $db->query($query, $params)
+       return $db->query($query, $params);
     }
 
     public function removeOrder($order_id, $runsheet_id)
