@@ -87,13 +87,14 @@ class RunsheetsController extends Controller
 
     public function viewRunsheets()
     {
-
+        $rs = $this->runsheets->getRunsheetsForDisplay();
         //render the page
         Config::setJsConfig('curPage', "view-runsheets");
         Config::set('curPage', "view-runsheets");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/viewRunsheets.php', [
             'page_title'    =>  "View Runsheets",
-            'pht'           =>  ": Runsheets"
+            'pht'           =>  ": Runsheets",
+            'runsheets'     =>  $rs
         ]);
     }
 
