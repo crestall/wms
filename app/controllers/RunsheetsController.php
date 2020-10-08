@@ -132,16 +132,16 @@ class RunsheetsController extends Controller
         $action = $this->request->param('action');
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        $resource = "jobs";
+        $resource = "runsheets";
 
         //only for admin
         Permission::allow('production admin', $resource, "*");
         //production users
         Permission::allow('production', $resource, array(
             "index",
-            "viewJobs",
-            "jobSearch",
-            "jobSearchResults"
+            "viewRunsheets",
+            "runsheetSearch",
+            "runsheetSearchResults"
         ));
 
         return Permission::check($role, $resource, $action);
