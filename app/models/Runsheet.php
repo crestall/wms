@@ -13,6 +13,7 @@
         getAllRunsheets($printed = false, $completed = false)
         getRunsheetById($id = 0)
         getRunsheetForDay($day = 0)
+        getRunsheetsForDisplay($completed = false, $printed = false)
         getRunsheetsForDriver($driver_id = 0)
     */
 
