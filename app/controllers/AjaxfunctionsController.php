@@ -940,7 +940,7 @@ class ajaxfunctionsController extends Controller
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         if($this->runsheet->removeJob($this->request->data['job_id'], $this->request->data['runsheet_id']))
         {
-            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Those charges have been updated</h2>");
+            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>That job has been removed from the runsheet</h2><p>It can now be added to another</p>");
         }
         else
         {
