@@ -314,7 +314,7 @@
                                         //console.log('job id: '+job_id);
                                         //console.log('runsheet id: '+runsheet_id);
                                         $.ajax({
-                                            url: '/ajaxfunctions/remove-from-runsheet',
+                                            url: '/ajaxfunctions/remove-job-from-runsheet',
                                             method: 'post',
                                             data: {
                                                 job_id: job_id,

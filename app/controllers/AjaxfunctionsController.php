@@ -49,6 +49,7 @@ class ajaxfunctionsController extends Controller
             'reactivateUser',
             'recordDispatch',
             'removeCourier',
+            'removeJobFromRunsheet',
             'selectCourier',
             'updateAllocation',
             'updateFreightCharge',
@@ -930,9 +931,22 @@ class ajaxfunctionsController extends Controller
         $this->pickup->cancelPickup($this->request->data['pickupid']);
     }
 
-    public function removeFromRunsheet()
+    public function removeJobFromRunsheet()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        if($this->runsheet->removeJob($job_id, $runsheet_id))
+        {
+            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Those charges have been updated</h2>");
+        }
+        else
+        {
+            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>There has been a database error</h2><p>The job has not been removed</p>");
+        }
+        $this->view->renderJson($data);
     }
 
     public function updateFreightCharge()
