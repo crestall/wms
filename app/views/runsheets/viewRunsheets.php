@@ -27,9 +27,6 @@ $db = Database::openConnection();
                     <?php endif; ?>
                 </div>
                 <div class="col-12">
-                    <span class="inst">Click on  the runsheet day to edit and print the runsheet</span>
-                </div>
-                <div class="col-12">
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/runsheets_table.php");?>
                 </div>
             </div>
