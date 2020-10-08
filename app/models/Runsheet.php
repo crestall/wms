@@ -149,6 +149,7 @@ class Runsheet extends Model{
                     'updated_date'  =>  time(),
                     'updated_by'    =>  Session::getUserId()
                 );
+                $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
             }
             // now add the jobs/orders
             $tvals = array(
