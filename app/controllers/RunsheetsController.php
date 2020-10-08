@@ -24,17 +24,6 @@ class RunsheetsController extends Controller
         parent::displayIndex(get_class());
     }
 
-    public function addJob()
-    {
-        //render the page
-        Config::setJsConfig('curPage', "add-job");
-        Config::set('curPage', "add-job");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/addJob.php', [
-            'page_title'    =>  "Add Job for Production",
-            'pht'           =>  ": Add Production Job"
-        ]);
-    }
-
     public function jobSearch()
     {
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",[
@@ -96,18 +85,15 @@ class RunsheetsController extends Controller
         ]);
     }
 
-    public function viewJobs()
+    public function viewRunsheets()
     {
-        $completed = (isset($this->request->params['args']['completed']))? true : false;
-        $cancelled = (isset($this->request->params['args']['cancelled']))? true : false;
-        $jobs = $this->productionjob->getJobsForDisplay($completed, $cancelled);
+
         //render the page
-        Config::setJsConfig('curPage', "view-jobs");
-        Config::set('curPage', "view-jobs");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
-            'page_title'    =>  "View Production Jobs",
-            'pht'           =>  ": Production Jobs",
-            'jobs'          =>  $jobs
+        Config::setJsConfig('curPage', "view-runsheets");
+        Config::set('curPage', "view-runsheets");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/viewRunsheets.php', [
+            'page_title'    =>  "View Runsheets",
+            'pht'           =>  ": Runsheets"
         ]);
     }
 
