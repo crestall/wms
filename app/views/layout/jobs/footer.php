@@ -241,8 +241,8 @@
                             {
                                 var rs_count = $('input.select:checked').length
                                 swal({
-                                    title: "Add "+rs_count+" orders to the driver runsheet?",
-                                    text: "This will add the selected orders to the driver's runsheet\n\nor create a new runsheet if one doe not exist",
+                                    title: "Add "+rs_count+" orders to the runsheet?",
+                                    text: "This will add the selected orders to the day's runsheet\n\nor create a new runsheet if one doe not exist",
                                     icon: "warning",
                                     buttons: true,
                                     dangerMode: true
@@ -253,33 +253,26 @@
                                         $('input.select').each(function(i,e){
                                             var job_id = $(this).data('jobid');
                                             var daydate_value = $('input#runsheet_daydate_value_'+job_id).val();
-                                            //runsheet_days[daydate_value] = [];
-                                            //console.log('job_id: '+ job_id);
                                             if($(this).prop('checked') )
                                             {
-                                                if(runsheet_days[daydate_value+'_timestamp'])
-                                                {
-                                                    runsheet_days[daydate_value+'_timestamp'].push(job_id);
+                                                var ent = {
+                                                    'timestamp' : daydate_value,
+                                                    'job_id'    : job_id
                                                 }
-                                                else
-                                                {
-                                                    runsheet_days[daydate_value+'_timestamp'] = [];
-                                                    runsheet_days[daydate_value+'_timestamp'].push(job_id);
-                                                }
-
+                                                runsheet_days.push(ent);
                                             }
                                         });
                                         //console.log(runsheet_days);
                                         /**/
                                         $.ajax({
-                                            url: '/ajaxfunctions/do-runsheets',
+                                            url: '/ajaxfunctions/add-job-runsheets',
                                             method: 'post',
                                             data: {
                                                 runsheets: runsheet_days
                                             },
                                             dataType: 'json',
                                             beforeSend: function(){
-                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Creating/Editing Runsheet...</h1></div>' });
                                             },
                                             success: function(d){
                                                 if(d.error)
@@ -289,7 +282,8 @@
                                                 }
                                                 else
                                                 {
-                                                    //location.reload();
+                                                    location.reload(true);
+                                                    //window.location.href = "http://stackoverflow.com";
                                                 }
                                             },
                                             error: function(jqXHR, textStatus, errorThrown){
@@ -305,6 +299,53 @@
                             }
 
                         });
+                        $('button.remove-from-runsheet').click(function(e){
+                            var job_id = $(this).data('jobid');
+                            var runsheet_id = $(this).data('runsheetid');
+                            swal({
+                                    title: "Really remove this job from the runsheet?",
+                                    text: "This cannot be undone",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(removeFromSheet) {
+                                    if(removeFromSheet)
+                                    {
+                                        //console.log('job id: '+job_id);
+                                        //console.log('runsheet id: '+runsheet_id);
+                                        $.ajax({
+                                            url: '/ajaxfunctions/remove-job-from-runsheet',
+                                            method: 'post',
+                                            data: {
+                                                job_id: job_id,
+                                                runsheet_id: runsheet_id
+                                            },
+                                            dataType: 'json',
+                                            beforeSend: function(){
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing From Runsheet...</h1></div>' });
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $.unblockUI();
+                                                    alert('error');
+                                                }
+                                                else
+                                                {
+                                                    location.reload(true);
+                                                    //window.location.href = "http://stackoverflow.com";
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown){
+                                                $.unblockUI();
+                                                document.open();
+                                                document.write(jqXHR.responseText);
+                                                document.close();
+                                            }
+                                        });
+                                    }
+                                });
+                        })
                         //end add to driver runsheet
                     }
                 },

@@ -15,6 +15,7 @@ class ajaxfunctionsController extends Controller
         parent::beforeAction();
         $actions = [
             'adjustAllocationForm',
+            'addJobRunsheets',
             'bulkMoveStock',
             'calcOriginPick',
             'consolidateOrders',
@@ -49,6 +50,7 @@ class ajaxfunctionsController extends Controller
             'reactivateUser',
             'recordDispatch',
             'removeCourier',
+            'removeJobFromRunsheet',
             'selectCourier',
             'updateAllocation',
             'updateFreightCharge',
@@ -467,7 +469,7 @@ class ajaxfunctionsController extends Controller
 
     public function selectCourier()
     {
-        //echo "<pre>",print_r($this->request->data['order_ids']),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $data = array(
             'error'         => false,
             'error_string'  => '',
@@ -930,6 +932,24 @@ class ajaxfunctionsController extends Controller
         $this->pickup->cancelPickup($this->request->data['pickupid']);
     }
 
+    public function removeJobFromRunsheet()
+    {
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        if($this->runsheet->removeJob($this->request->data['job_id'], $this->request->data['runsheet_id']))
+        {
+            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>That job has been removed from the runsheet</h2><p>It can now be added to another</p>");
+        }
+        else
+        {
+            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>There has been a database error</h2><p>The job has not been removed</p>");
+        }
+        $this->view->renderJson($data);
+    }
+
     public function updateFreightCharge()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
@@ -1000,9 +1020,28 @@ class ajaxfunctionsController extends Controller
         $this->view->renderBoolean($this->item->checkSkus($request, $current_sku));
     }
 
-    public function doRunsheets()
+    public function addJobRunsheets()
     {
-        echo "<pre>",print_r($this->request),"</pre>";//die();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        //echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        $runsheets = array();
+        foreach($this->request->data['runsheets'] as $rs)
+        {
+            if(!isset($runsheets[$rs['timestamp']]))
+            {
+                $runsheets[$rs['timestamp']]['driver_id'] = 0;
+                $runsheets[$rs['timestamp']]['jobs'] = array();
+            }
+            $runsheets[$rs['timestamp']]['jobs'][] = $rs['job_id'];
+        }
+        ksort($runsheets, SORT_NUMERIC);
+        //echo "<pre>",print_r($runsheets),"</pre>";die();
+        $this->runsheet->addRunsheet($runsheets);
+        Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Those Runsheet(s) have been created/updated</h2>");
+        $this->view->renderJson($data);
     }
 
     public function checkLocations()
