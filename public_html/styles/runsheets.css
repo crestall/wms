@@ -28,6 +28,10 @@ div.landscape {
     border-collapse: collapse;
 }
 
+table{
+    font-size:0.8rem;
+}
+
 th, td {
     padding: 15px;
 }
