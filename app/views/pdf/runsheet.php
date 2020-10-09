@@ -1,5 +1,9 @@
 <div id="runsheet_body">
     <div class="landscape">
+        <div id="page_top">
+            <img width="130" src="/images/FSG_logo_white@130px.png" alt="FSG Logo">
+            <h4>RunSheet</h4>
+        </div>
         <table>
             <thead>
                 <tr>
