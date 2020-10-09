@@ -87,12 +87,24 @@ class RunsheetsController extends Controller
 
     public function printRunsheet()
     {
+        if(!isset($this->request->params['args']['runsheet']))
+        {
+            $runsheet_id = 0;
+            $runsheet = array();
+        }
+        else
+        {
+            $runsheet_id = $this->request->params['args']['runsheet']);
+            $runsheet = $this->runsheet->getRunsheetById($runsheet_id)
+        }
         //render the page
         Config::setJsConfig('curPage', "print-runsheet");
         Config::set('curPage', "print-runsheet");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/printRunsheet.php', [
             'page_title'    =>  "Edit and Print Runsheet",
-            'pht'           =>  ": Print Runsheet"
+            'pht'           =>  ": Print Runsheet",
+            'runsheet_id'   =>  $runsheet_id,
+            'runsheet'      =>  $runsheet
         ]);
     }
 
