@@ -3,7 +3,7 @@
         <table width="100%">
             <thead>
                 <tr>
-                    <th>Job Id/Order Number</th>
+                    <th style="width: 16mm">Job Id/Order Number</th>
                     <th>Customer - Client</th>
                     <th>Description</th>
                     <th>Address</th>
