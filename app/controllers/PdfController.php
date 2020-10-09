@@ -15,48 +15,6 @@ class pdfController extends Controller
         $this->Security->config("validateForm", false);
     }
 
-    public function printSolarLabels()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf([
-            'mode'          => 'utf-8',
-            'format'        => 'A4-L',
-            'margin_left'   => 5,
-            'margin_right'  => 5,
-            'margin_top'    => 5,
-            'margin_bottom' => 5
-        ]);
-        $order_ids  = $this->request->data['orders'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/solarlabels.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
-        //$pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printServiceLabels()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf([
-            'mode'          => 'utf-8',
-            'format'        => 'A4-L',
-            'margin_left'   => 5,
-            'margin_right'  => 5,
-            'margin_top'    => 5,
-            'margin_bottom' => 5
-        ]);
-        $order_ids  = $this->request->data['orders'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/servicelabels.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
-        //$pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
     public function printVicLocalLabels()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
@@ -75,41 +33,6 @@ class pdfController extends Controller
         //$stylesheet = file_get_contents(STYLES."local_sticker.css");
         //$pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printSwatchLabels()
-    {
-        $config = array(
-            'paper-size' =>'A4',
-            'metric'    =>'mm',
-            'marginLeft'=>3,
-            'marginTop' =>9,
-            'NX'        =>2,
-            'NY'        =>8,
-            'SpaceX'    =>2,
-            'SpaceY'    =>0,
-            'width'     =>99,
-            'height'    =>33,
-            'font-size' =>10
-        );
-        $pdf = new AddressLabels($config);
-        $pdf->AddPage();
-        $order_ids  = $this->request->data['orders'];
-        foreach($order_ids as $id)
-        {
-            $this->swatch->dispatchSwatch($id);
-            $od = $this->controller->swatch->getSwatchDetail($id);
-            //echo "<pre>",print_r($od),"</pre>";//die();
-            $address_string = ucwords($od['name'])."\n";
-            $address_string .= ucwords($od['address'])."\n";
-            if(!empty($od['address_2']))
-                $address_string .= ucwords($od['address_2'])."\n";
-            $address_string .= strtoupper($od['suburb'])."\n";
-            $address_string .= strtoupper($od['state'])."\n";
-            $address_string .= $od['postcode'];
-            $pdf->Add_Label($address_string);
-        }
         $pdf->Output();
     }
 
@@ -168,36 +91,6 @@ class pdfController extends Controller
         ]);
         $stylesheet = file_get_contents(STYLES."pickslip.css");
         $pdf->SetWatermarkText('REPLACEMENT');
-        $pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printSolarPickslips()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
-        $pdf->SetDisplayMode('fullpage');
-        $order_ids  = $this->request->data['items'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/solarpickslip.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        $stylesheet = file_get_contents(STYLES."pickslip.css");
-        $pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printServicePickslips()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
-        $pdf->SetDisplayMode('fullpage');
-        $order_ids  = $this->request->data['items'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/servicepickslip.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        $stylesheet = file_get_contents(STYLES."pickslip.css");
         $pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
