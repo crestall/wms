@@ -1,7 +1,7 @@
 <div id="runsheet_body">
     <div class="landscape">
         <div id="page_top">
-            <img width="130" src="https://dev.fsg.com.au/images/FSG_logo_white@130px.png" alt="FSG Logo">
+            <img width="130" src="https://wms.fsg.com.au/images/FSG_logo_white@130px.png" alt="FSG Logo">
             <h4>RunSheet</h4>
         </div>
         <table>
