@@ -1,9 +1,6 @@
 <table class="table-striped table-hover" id="runsheets_table">
     <thead>
         <tr>
-            <td colspan="7"><span class="inst">Click on  the runsheet day to edit and print the runsheet</span> </td>
-        </tr>
-        <tr>
             <th>Runsheet Day</th>
             <th>Created</th>
             <th>Last Updated</th>
@@ -51,7 +48,9 @@
                         <label for="select_<?php echo $rs['runsheet_id'];?>"></label>
                     </div>
                 </td>
-                <td></td>
+                <td>
+                    <a href="/runsheets/print-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>" class="btn btn-outline-fsg">Preview and Print</a>
+                </td>
             </tr>
         <?php endforeach;?>
     </tbody>

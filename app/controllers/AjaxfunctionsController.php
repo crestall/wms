@@ -137,7 +137,7 @@ class ajaxfunctionsController extends Controller
                     );
                 }
                 //store new client order ids
-                $client_order_id .= (empty($client_order_id))? $this_order['client_order_id'] : ",".$this_order['client_order_id'];
+                $client_order_id .= (empty($client_order_id))? $this_order['client_order_id'] : ", ".$this_order['client_order_id'];
             }
             //echo "<p>$client_order_id</p>";
             //echo "PDFS<pre>",print_r($pdfs),"</pre>"; die();
