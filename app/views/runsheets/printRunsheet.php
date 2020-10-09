@@ -9,6 +9,7 @@
         <?php elseif(empty($runsheet)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_runsheet_found.php");?>
         <?php else:?>
+            <p><button class="btn runsheet">Print</button></p>
             <?php echo "<pre>",print_r($runsheet),"</pre>";?>
         <?php endif;?>
     </div>
