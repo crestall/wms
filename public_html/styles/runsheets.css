@@ -31,3 +31,7 @@ div.landscape {
 th, td {
     padding: 15px;
 }
+
+th{
+    text-transform: uppercase;
+}
