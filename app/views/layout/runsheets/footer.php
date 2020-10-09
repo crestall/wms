@@ -12,6 +12,11 @@
                             "order": []
                         });
                     }
+                },
+                'print-runsheet':{
+                    init: function(){
+                        
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);

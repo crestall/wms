@@ -24,7 +24,7 @@ class RunsheetsController extends Controller
         parent::displayIndex(get_class());
     }
 
-    public function jobSearch()
+    public function runsheetSearch()
     {
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",[
             'term'              =>  "",
@@ -45,7 +45,7 @@ class RunsheetsController extends Controller
         ]);
     }
 
-    public function jobSearchResults()
+    public function runsheetSearchResults()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         if(!$this->Security->CsrfToken())
@@ -82,6 +82,17 @@ class RunsheetsController extends Controller
             's'             =>  $s,
             'term'          =>  $this->request->query['term'],
             'jobs'          =>  $jobs
+        ]);
+    }
+
+    public function printRunsheet()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "print-runsheet");
+        Config::set('curPage', "print-runsheet");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/printRunsheet.php', [
+            'page_title'    =>  "Edit and Print Runsheet",
+            'pht'           =>  ": Print Runsheet"
         ]);
     }
 
@@ -132,7 +143,7 @@ class RunsheetsController extends Controller
         Config::set('curPage', "view-runsheets");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/viewRunsheets.php', [
             'page_title'    =>  "View Runsheets",
-            'pht'           =>  ": Runsheets",
+            'pht'           =>  ": View Runsheets",
             'runsheets'     =>  $runsheets
         ]);
     }
