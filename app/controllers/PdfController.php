@@ -88,7 +88,7 @@ class pdfController extends Controller
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/runsheet.php', [
 
         ]);
-        $stylesheet = file_get_contents(STYLES."runsheet.css");
+        $stylesheet = file_get_contents(STYLES."runsheets.css");
         $pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
