@@ -94,7 +94,7 @@ class RunsheetsController extends Controller
         }
         else
         {
-            $runsheet_id = $this->request->params['args']['runsheet']);
+            $runsheet_id = $this->request->params['args']['runsheet'];
             $runsheet = $this->runsheet->getRunsheetById($runsheet_id)
         }
         //render the page
