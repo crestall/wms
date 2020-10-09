@@ -120,7 +120,7 @@ $barcode_html = "<p style='text-align: center'><barcode code='$ids_barcode' type
 
 $html = "
 <div class='pickslip'>
-<h1>3PL Picking Slip Summary</h1>
+<h1>FSG Picking Slip Summary</h1>
 <p>Date : ".date("d/m/Y")."</p>
 $barcode_html
 <table class='pickslip'>
