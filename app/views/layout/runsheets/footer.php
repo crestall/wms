@@ -15,7 +15,15 @@
                 },
                 'print-runsheet':{
                     init: function(){
-                        
+                        $('button.runsheet').click(function(e){
+                            var form = document.createElement('form');
+                            form.setAttribute("method", "post");
+                            form.setAttribute("action", "/pdf/printRunsheet");
+                            form.setAttribute("target", "formresult");
+                            document.body.appendChild(form);
+                            window.open('','formresult');
+                            form.submit();
+                        });
                     }
                 }
             }
