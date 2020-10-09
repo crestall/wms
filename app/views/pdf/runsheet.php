@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th style="width: 16mm">Job Id/Order Number</th>
-                    <th>Customer - Client</th>
+                    <th style="width: 38mm">Customer - Client</th>
                     <th>Description</th>
                     <th>Address</th>
                     <th>Units</th>
