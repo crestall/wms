@@ -15,11 +15,13 @@ div#page_top{
 
 #page_top img{
     margin-top: 24px;
+    margin-left: 15mm;
     float: left;
 }
 
 #page_top h4{
     color: #fff;
+    margin-right: 15mm;
     float: right;
 }
 
