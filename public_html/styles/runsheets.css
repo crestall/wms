@@ -1,4 +1,8 @@
 @charset "utf-8";
+.clear{
+    clear: both;
+}
+
 #runsheet_body {
     margin: 0;
     background: #CCCCCC;
@@ -7,6 +11,16 @@
 div#page_top{
     background: url(/images/backgrounds/FSG-background-HD-2.jpg) center no-repeat;
     height:100px;
+}
+
+#page_top img{
+    margin-top: 24px;
+    float: left;
+}
+
+#page_top h4{
+    color: #fff;
+    float: right;
 }
 
 img {
