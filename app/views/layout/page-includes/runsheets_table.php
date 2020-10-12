@@ -6,13 +6,13 @@
             <th>Last Updated</th>
             <th>Jobs</th>
             <th>Orders</th>
-            <th nowrap>
+            <!--th nowrap>
                 Select
                 <div class="checkbox checkbox-default">
                     <input id="select_all" class="styled" type="checkbox">
                     <label for="select_all"><em><small>(all)</small></em></label>
                 </div>
-            </th>
+            </th-->
             <th></th>
         </tr>
     </thead>
@@ -42,12 +42,12 @@
                 </td>
                 <td data-label="Jobs"></td>
                 <td data-label="Orders"></td>
-                <td data-label="Select" class="chkbox">
+                <!--td data-label="Select" class="chkbox">
                     <div class="checkbox checkbox-default">
                         <input type="checkbox" class="select styled" data-runsheetid='<?php echo $rs['runsheet_id'];?>' id="select_<?php echo $rs['runsheet_id'];?>" />
                         <label for="select_<?php echo $rs['runsheet_id'];?>"></label>
                     </div>
-                </td>
+                </td-->
                 <td>
                     <a href="/runsheets/print-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>" class="btn btn-outline-fsg">Update and Print</a>
                 </td>
