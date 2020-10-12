@@ -36,23 +36,23 @@ div.landscape {
     height: 190mm;
 }
 
-#runsheet_body table,
-#runsheet_body table th,
-#runsheet_body table td{
+#page_body table,
+#page_body table th,
+#page_body table td{
     border: 1px solid black;
     border-collapse: collapse;
 }
 
-#runsheet_body table{
+#page_body table{
     font-size: 0.7rem;
 }
 
-#runsheet_body th,
-#runsheet_body td {
+#page_body th,
+#page_body td {
     padding: 15px;
 }
 
-#runsheet_body th{
+#page_body th{
     text-transform: uppercase;
 }
 
