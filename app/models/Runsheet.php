@@ -208,14 +208,16 @@ class Runsheet extends Model{
             SELECT
                 rs.*,
                 rst.*,
+                d.name AS driver_name,
                 pj.job_id, pj.description,
                 pc.name AS customer_name, pc.address AS job_address, pc.address_2 AS job_address2, pc.suburb AS job_suburb, pc.postcode AS job_postcode,
                 o.order_number, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
                 c.client_name
             FROM
-                runsheets rs
-                JOIN runsheet_tasks rst ON rs.id = rst.runsheet_id
+                {$this->table} rs
+                JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id
                 LEFT JOIN production_jobs pj ON rst.job_id = pj.id
+                LEFT JOIN drivers d ON d.id = rst.driver_id
                 LEFT JOIN `production_customers` pc ON pj.customer_id = pc.id
                 LEFT JOIN orders o ON rst.order_id = o.id
                 LEFT JOIN clients c ON o.client_id = c.id
