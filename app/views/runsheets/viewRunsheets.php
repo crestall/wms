@@ -5,7 +5,7 @@ $db = Database::openConnection();
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if(count($runsheets)):?>
-            <?php //echo "<pre>",print_r($runsheets),"</pre>";?>
+            <?php echo "<pre>",print_r($runsheets),"</pre>";?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Drawing Table..</h2>
