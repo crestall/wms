@@ -135,7 +135,7 @@ class RunsheetsController extends Controller
             {
                 $runsheets[$rs['runsheet_day']]['jobs'][] = array(
                     'job_id'        => $rs['job_id'],
-                    'driver_name'   => $rs['driver_named'],
+                    'driver_name'   => $rs['driver_name'],
                     'customer'      => $rs['customer_name'],
                     'suburb'        => $rs['job_suburb'],
                     'printed'       => $rs['printed'],
@@ -146,7 +146,7 @@ class RunsheetsController extends Controller
             {
                 $runsheets[$rs['runsheet_day']]['orders'][] = array(
                     'order_id'      => $rs['order_id'],
-                    'driver_name'   => $rs['driver_named'],
+                    'driver_name'   => $rs['driver_name'],
                     'customer'      => $rs['order_customer'],
                     'suburb'        => $rs['order_suburb'],
                     'client'        => $rs['client_name'],
