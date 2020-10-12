@@ -15,6 +15,16 @@
                 <div class="col-12">
                     <h2>Runsheet Details for <?php echo date('D jS M', $runsheet[0]['runsheet_day'] );?></h2>
                 </div>
+                <div class="col-12">
+                    <form id="print_runsheet" method="post" action="/pdf/printRunsheet" target="_blank">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Driver</label>
+                            <div class="col-md-4">
+                                <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( Form::value('driver_id') );?></select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         <?php endif;?>
     </div>
