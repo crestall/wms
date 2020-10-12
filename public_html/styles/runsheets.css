@@ -59,3 +59,9 @@ img {
 #page_labels{
     margin-bottom: 5mm;
 }
+
+#page_foot{
+    text-align: center;
+    font-style: italic;
+    font-size: 0.5em;
+}
