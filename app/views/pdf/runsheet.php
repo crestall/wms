@@ -9,6 +9,22 @@
                 </tr>
             </table>
         </div>
+        <div id="page_labels">
+            <table>
+                <tr>
+                    <td>
+                        Driver:
+                    </td>
+                    <td style="border-bottom: 1px dashed black; width: 75mm"></td>
+                </tr>
+                <tr>
+                    <td>
+                        Date:
+                    </td>
+                    <td style="border-bottom: 1px dashed black; width: 75mm"></td>
+                </tr>
+            </table>
+        </div>
         <div id="page_body">
             <table>
                 <thead>
