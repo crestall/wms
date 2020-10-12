@@ -16,12 +16,15 @@ div#page_top{
 #page_top img{
     margin-top: 24px;
     margin-left: 15mm;
+    width: 130px;
     float: left;
 }
 
 #page_top h4{
     color: #fff;
     margin-right: 15mm;
+    width: 250px;
+    text-transform: uppercase;
     float: right;
 }
 
