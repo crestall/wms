@@ -1,3 +1,7 @@
+<?php
+$driver = (isset($driver))? $driver:"";
+$table_body = (isset($table_body))? $table_body:"";
+?>
 <div id="runsheet_body">
     <div class="landscape">
         <div id="page_top">
