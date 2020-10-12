@@ -10,18 +10,18 @@
             </table>
         </div>
         <div id="page_labels">
-            <table>
+            <table align="right">
                 <tr>
-                    <td>
+                    <td style="text-align: right">
                         Driver:
                     </td>
-                    <td style="border-bottom: 1px dashed black; width: 75mm"></td>
+                    <td style="border-bottom: 1px dotted black; width: 75mm"></td>
                 </tr>
                 <tr>
-                    <td>
+                    <td style="text-align: right">>
                         Date:
                     </td>
-                    <td style="border-bottom: 1px dashed black; width: 75mm"></td>
+                    <td style="border-bottom: 1px dotted black; width: 75mm"></td>
                 </tr>
             </table>
         </div>
