@@ -53,5 +53,9 @@ img {
 }
 
 #page_labels td {
-    padding: 3mm;
+    padding: 2mm;
+}
+
+#page_labels{
+    margin-bottom: 5mm;
 }
