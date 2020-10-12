@@ -18,7 +18,7 @@
                     <td style="border-bottom: 1px dotted black; width: 75mm"></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right">>
+                    <td style="text-align: right">
                         Date:
                     </td>
                     <td style="border-bottom: 1px dotted black; width: 75mm"></td>
