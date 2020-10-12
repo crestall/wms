@@ -13,7 +13,7 @@
             <?php echo "<pre>",print_r($runsheet),"</pre>";?>
             <div class="row">
                 <div class="col-12">
-                    <h2>Runsheet Details for <?php <?php echo date('D jS M', $runsheet[0]['runsheet_day'] );?></h2>
+                    <h2>Runsheet Details for <?php echo date('D jS M', $runsheet[0]['runsheet_day'] );?></h2>
                 </div>
             </div>
         <?php endif;?>
