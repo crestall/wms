@@ -13,19 +13,16 @@ div#page_top{
     height:100px;
 }
 
-#page_top img{
+div#page_top table{
+    border: none;
     margin-top: 24px;
     margin-left: 15mm;
-    width: 130px;
-    float: left;
 }
 
-#page_top h4{
+
+#page_top  table h4{
     color: #fff;
-    margin-right: 15mm;
-    width: 250px;
     text-transform: uppercase;
-    float: right;
 }
 
 img {
