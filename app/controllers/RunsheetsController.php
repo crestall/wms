@@ -95,7 +95,7 @@ class RunsheetsController extends Controller
         else
         {
             $runsheet_id = $this->request->params['args']['runsheet'];
-            $runsheet = $this->runsheet->getRunsheetById($runsheet_id);
+            $runsheet = $this->runsheet->getRunsheetDetailsById($runsheet_id);
         }
         //render the page
         Config::setJsConfig('curPage', "print-runsheet");
