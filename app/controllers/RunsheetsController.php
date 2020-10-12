@@ -101,7 +101,7 @@ class RunsheetsController extends Controller
         Config::setJsConfig('curPage', "print-runsheet");
         Config::set('curPage', "print-runsheet");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/printRunsheet.php', [
-            'page_title'    =>  "Edit and Print Runsheet",
+            'page_title'    =>  "Update and Print Runsheet",
             'pht'           =>  ": Print Runsheet",
             'runsheet_id'   =>  $runsheet_id,
             'runsheet'      =>  $runsheet
