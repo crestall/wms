@@ -58,7 +58,7 @@
                     </div>
                 </td-->
                 <td>
-                    <a href="/runsheets/print-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>" class="btn btn-outline-fsg">Update and Print</a>
+                    <a href="/runsheets/print-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>" class="btn btn-sm btn-outline-fsg">Update and Print</a>
                 </td>
             </tr>
         <?php endforeach;?>
