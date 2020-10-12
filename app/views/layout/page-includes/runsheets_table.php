@@ -19,11 +19,11 @@
     <tbody>
         <?php foreach($runsheets as $timestamp => $rs):
             $cb = $db->queryValue('users', array('id' => $rs['created_by']), 'name');
-            $cs = date('d/M/Y', $rs['created_date'] )."<br>by ".$cb;
+            $cs = date('d/m/Y', $rs['created_date'] )."<br>by ".$cb;
             if($rs['updated_date'] != $rs['created_date'])
             {
                 $ub = $db->queryValue('users', array('id' => $rs['updated_by']), 'name');
-                $lu = date('d/M/Y', $rs['updated_date'])."<br>by ".$ub;
+                $lu = date('d/m/Y', $rs['updated_date'])."<br>by ".$ub;
             }
             else
             {
