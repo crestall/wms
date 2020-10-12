@@ -5,7 +5,11 @@
 
 #runsheet_body {
     margin: 0;
-    background: #fff;
+    padding: 0;
+    border: none;
+    background: none;
+    width: 276mm;
+    height: 190mm;
 }
 
 div#page_top{
@@ -19,23 +23,6 @@ div#page_top{
 img {
     vertical-align: middle;
     border-style: none;
-}
-
-div.portrait, div.landscape {
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: none;
-}
-
-div.portrait {
-    width: 190mm;
-    height: 276mm;
-}
-
-div.landscape {
-    width: 276mm;
-    height: 190mm;
 }
 
 #page_body table,
