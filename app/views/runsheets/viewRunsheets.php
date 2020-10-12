@@ -15,9 +15,9 @@ $db = Database::openConnection();
             </div>
             <div class="row mt-4" id="table_holder" style="display:none">
                 <?php //echo "User Role $user_role";?>
+                <!--div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="#">A Type of Runsheet</a></div>
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="#">A Type of Runsheet</a></div>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="#">A Type of Runsheet</a></div>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="#">A Type of Runsheet</a></div>
+                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="#">A Type of Runsheet</a></div-->
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
                        <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>
