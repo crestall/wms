@@ -79,6 +79,14 @@ class Runsheet extends Model{
         return $db->queryData($q);
     }
 
+    public function getRunsheetDetailsById($id = 0)
+    {
+        $db = Database::openConnection();
+        $q = $this->getRunsheetQuery();
+        $q .= " WHERE rs.`id` = $id";
+        return $db->queryData($q);
+    }
+
     public function getRunsheetById($id = 0)
     {
         $db = Database::openConnection();
