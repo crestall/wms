@@ -206,7 +206,7 @@ class Runsheet extends Model{
     {
         return "
             SELECT
-                rs.*,
+                rs.runsheet_day, rs.created_date, rs.updated_date, rs.created_by, rs.updated_by,
                 rst.*,
                 d.name AS driver_name,
                 pj.job_id, pj.description,
