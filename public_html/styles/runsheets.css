@@ -5,7 +5,7 @@
 
 #runsheet_body {
     margin: 0;
-    background: #CCCCCC;
+    background: #222;
 }
 
 div#page_top{
@@ -23,7 +23,7 @@ div#page_top table td{
     border: none;
 }
 
-#page_top table td h4{
+div#page_top table td h4{
     color: #fff;
     text-transform: uppercase;
 }
