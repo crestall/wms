@@ -134,19 +134,24 @@ class RunsheetsController extends Controller
             if($rs['job_id'] > 0)
             {
                 $runsheets[$rs['runsheet_day']]['jobs'][] = array(
-                    'job_id'    => $rs['job_id'],
-                    'driver_id' => $rs['driver_id'],
-                    'printed'   => $rs['printed'],
-                    'completed' => $rs['completed']
+                    'job_id'        => $rs['job_id'],
+                    'driver_name'   => $rs['driver_named'],
+                    'customer'      => $rs['customer_name'],
+                    'suburb'        => $rs['job_suburb'],
+                    'printed'       => $rs['printed'],
+                    'completed'     => $rs['completed']
                 );
             }
             if($rs['order_id'] > 0)
             {
                 $runsheets[$rs['runsheet_day']]['orders'][] = array(
-                    'order_id'  => $rs['order_id'],
-                    'driver_id' => $rs['driver_id'],
-                    'printed'   => $rs['printed'],
-                    'completed' => $rs['completed']
+                    'order_id'      => $rs['order_id'],
+                    'driver_name'   => $rs['driver_named'],
+                    'customer'      => $rs['order_customer'],
+                    'suburb'        => $rs['order_suburb'],
+                    'client'        => $rs['client_name'],
+                    'printed'       => $rs['printed'],
+                    'completed'     => $rs['completed']
                 );
             }
         }
