@@ -43,7 +43,10 @@
                 <td data-label="Jobs">
                     <?php foreach($rs['jobs'] as $job):?>
                         <div class="runsheet_job_list border-bottom border-secondary border-bottom-dashed mb-3 ">
-                            <span class="font-weight-bold"><?php echo $job['customer'];?></span>
+                            <p>
+                                <span class="font-weight-bold"><?php echo $job['job_id'];?></span> - <?php echo $job['customer'];?><br>
+                                <?php if(!empty($job['driver_name'])) echo $job['driver_name']." - "; echo $job['suburb']?>
+                            </p>
                         </div>
                     <?php endforeach;?>
                 </td>
