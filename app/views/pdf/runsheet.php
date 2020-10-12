@@ -5,7 +5,7 @@
                 <tr>
                     <td><img width="130" src="https://wms.fsg.com.au/images/FSG_logo_white@130px.png" alt="FSG Logo"> </td>
                     <td></td>
-                    <td><h4>RunSheet</h4></td>
+                    <td style="text-transform: uppaercase; color: #fff;">RunSheet</td>
                 </tr>
             </table>
         </div>
@@ -14,8 +14,8 @@
                 <tr>
                     <th style="width: 16mm">Job Id/Order Number</th>
                     <th style="width: 38mm">Customer - Client</th>
-                    <th style="width: 74mm">Description</th>
-                    <th style="width: 41mm">Address</th>
+                    <th style="width: 41mm">Description</th>
+                    <th style="width: 474mm">Address</th>
                     <th style="width: 12mm">Units</th>
                     <th style="width: 27mm">FSG Contact</th>
                     <th style="width: 27mm">Received By</th>
