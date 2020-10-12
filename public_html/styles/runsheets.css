@@ -10,6 +10,7 @@
 
 div#page_top{
     background: url(/images/backgrounds/FSG-background-HD-2.jpg) center no-repeat;
+    padding-top: 10mm;
     height:100px;
     margin-bottom: 5mm;
 }
@@ -44,7 +45,7 @@ div.landscape {
 }
 
 #page_body table{
-    
+
 }
 
 #page_body th,
