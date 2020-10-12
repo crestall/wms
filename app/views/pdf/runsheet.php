@@ -4,8 +4,8 @@
             <table>
                 <tr>
                     <td><img width="130" src="https://wms.fsg.com.au/images/FSG_logo_white@130px.png" alt="FSG Logo"> </td>
-                    <td style="width: 20cm"></td>
-                    <td style="text-transform: uppercase; color: #fff;">RunSheet</td>
+                    <td style="width: 18cm"></td>
+                    <td style="text-transform: uppercase; color: #fff;">Driver RunSheet</td>
                 </tr>
             </table>
         </div>
