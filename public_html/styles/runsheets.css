@@ -44,7 +44,7 @@ div.landscape {
 }
 
 #runsheet_body table{
-    font-size:0.7rem;
+    font-size: 0.7rem;
 }
 
 #runsheet_body th,
@@ -64,9 +64,4 @@ div#page_top table{
 
 div#page_top table td{
     border: none;
-}
-
-div#page_top table td h4{
-    color: #fff;
-    text-transform: uppercase;
 }
