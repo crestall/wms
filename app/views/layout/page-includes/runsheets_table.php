@@ -40,7 +40,13 @@
                 <td data-label="Last Update">
                     <?php echo $lu;?>
                 </td>
-                <td data-label="Jobs"></td>
+                <td data-label="Jobs">
+                    <?php foreach($rs['jobs'] as $job):?>
+                        <div class="runsheet_job_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                            <span class="font-weight-bold"><?php echo $job['customer'];?></span>
+                        </div>
+                    <?php endforeach;?>
+                </td>
                 <td data-label="Orders"></td>
                 <!--td data-label="Select" class="chkbox">
                     <div class="checkbox checkbox-default">
