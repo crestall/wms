@@ -5,27 +5,12 @@
 
 #runsheet_body {
     margin: 0;
-    background: #222;
+    background: #ddd;
 }
 
 div#page_top{
     background: url(/images/backgrounds/FSG-background-HD-2.jpg) center no-repeat;
     height:100px;
-}
-
-div#page_top table{
-    border: none;
-    margin-top: 10mm;
-    margin-left: 15mm;
-}
-
-div#page_top table td{
-    border: none;
-}
-
-div#page_top table td h4{
-    color: #fff;
-    text-transform: uppercase;
 }
 
 img {
@@ -67,5 +52,20 @@ div.landscape {
 }
 
 #runsheet_body th{
+    text-transform: uppercase;
+}
+
+div#page_top table{
+    border: none;
+    margin-top: 10mm;
+    margin-left: 15mm;
+}
+
+div#page_top table td{
+    border: none;
+}
+
+div#page_top table td h4{
+    color: #fff;
     text-transform: uppercase;
 }
