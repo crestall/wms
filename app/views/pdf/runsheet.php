@@ -113,5 +113,8 @@
                 </tbody>
             </table>
         </div>
+        <div id="page_foot">
+            Please return this run sheet and signed delivery dockets to FSG
+        </div>
     </div>
 </div>
