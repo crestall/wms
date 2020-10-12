@@ -15,13 +15,13 @@
                     <td style="text-align: right">
                         Driver:
                     </td>
-                    <td style="border-bottom: 1px dotted black; width: 75mm"></td>
+                    <td style="border-bottom: 1px dotted black; width: 75mm; text-align: center"><?php echo $driver;?></td>
                 </tr>
                 <tr>
                     <td style="text-align: right">
                         Date:
                     </td>
-                    <td style="border-bottom: 1px dotted black; width: 75mm"></td>
+                    <td style="border-bottom: 1px dotted black; width: 75mm; text-align: center"><?php echo date("d/M/Y");?></td>
                 </tr>
             </table>
         </div>
@@ -40,76 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php echo $table_body;?>
                 </tbody>
             </table>
         </div>
