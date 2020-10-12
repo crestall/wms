@@ -51,3 +51,7 @@ img {
 #page_top table td{
     border: none;
 }
+
+#page_labels td {
+    padding: 3mm;
+}
