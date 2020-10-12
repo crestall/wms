@@ -11,6 +11,7 @@
 div#page_top{
     background: url(/images/backgrounds/FSG-background-HD-2.jpg) center no-repeat;
     padding-top: 10mm;
+    padding-left: 5mm;
     height:100px;
     margin-bottom: 5mm;
 }
@@ -59,8 +60,6 @@ div.landscape {
 
 #page_top table{
     border: none;
-    margin-top: 10mm;
-    margin-left: 5mm;
 }
 
 #page_top table td{
