@@ -18,21 +18,21 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                 <div class="col-12">
                     <form id="print_runsheet" method="post" action="/pdf/printRunsheet" target="_blank">
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Driver</label>
-                            <div class="col-md-4">
+                            <label class="col-md-2 col-form-label">Driver</label>
+                            <div class="col-md-5">
                                 <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( $driver_id );?></select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Units</label>
-                            <div class="col-md-4">
+                            <label class="col-md-2 col-form-label">Units</label>
+                            <div class="col-md-5">
                                 <input type="text" class="form-control number" name="units" id="units" value="<?php echo $units;?>" />
                                 <?php echo Form::displayError('units');?>
                             </div>
                         </div>
                         <?php if(count($runsheet['jobs'])):?>
                             <div class="form-group row">
-                                <div class="col-md-4 offset-md-3">
+                                <div class="col-md-5 offset-md-2">
                                     <div class="card h-100 border-secondary job-card">
                                         <div class="card-header bg-secondary text-white">
                                             Jobs To Be Included
@@ -56,7 +56,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                         <?php endif;
                         if(count($runsheet['orders'])):?>
                             <div class="form-group row">
-                                <div class="col-md-4 offset-md-3">
+                                <div class="col-md-5 offset-md-2">
                                     <div class="card h-100 border-secondary job-card">
                                         <div class="card-header bg-secondary text-white">
                                             Orders To Be Included
@@ -80,7 +80,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                         <?php endif;?>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <div class="form-group row">
-                            <div class="col-md-4 offset-md-3">
+                            <div class="col-md-5 offset-md-2">
                                 <button type="submit" class="btn btn-outline-secondary" id="submitter">Print Runsheet</button><br>
                                 <span class="inst">Please save a copy if you wish to re-print this particular sheet.</span>
                             </div>
