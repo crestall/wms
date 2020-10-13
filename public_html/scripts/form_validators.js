@@ -117,16 +117,7 @@ $(document).ready(function() {
         rules: {
             task:
             {
-                required: function (element) {
-                    var boxes = $('.task');
-                    if (boxes.filter(':checked').length == 0) {
-                        console.log('will return true');
-                        return true;
-                    }
-                    console.log('will return false');
-                    return false;
-                },
-                minlength: 1
+                required: true
             }
         },
         messages: {
