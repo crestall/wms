@@ -30,9 +30,10 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                 <?php echo Form::displayError('units');?>
                             </div>
                         </div>
-                        <?php if(count($runsheet['jobs'])):?>
-                            <div class="form-group row">
-                                <div class="col-md-5 offset-md-2">
+                        <div class="form-group row">
+                            <div class="col-md-2">&nbsp;</div>
+                            <?php if(count($runsheet['jobs'])):?>
+                                <div class="col-md-5">
                                     <div class="card h-100 border-secondary job-card">
                                         <div class="card-header bg-secondary text-white">
                                             Jobs To Be Included
@@ -52,10 +53,8 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endif;
-                        if(count($runsheet['orders'])):?>
-                            <div class="form-group row">
+                            <?php endif;
+                            if(count($runsheet['orders'])):?>
                                 <div class="col-md-5 offset-md-2">
                                     <div class="card h-100 border-secondary job-card">
                                         <div class="card-header bg-secondary text-white">
@@ -76,8 +75,8 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         <?php endif;?>
+                        </div>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <div class="form-group row">
                             <div class="col-md-5 offset-md-2">
