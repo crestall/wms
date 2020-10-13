@@ -115,14 +115,20 @@ $(document).ready(function() {
     ///////////////////////////////////////////////////////////////////////////////
     $("#print_runsheet").validate({
         rules: {
-            "tasks[]":
+            task:
             {
-                required: true,
+                required: function (element) {
+                    var boxes = $('.task');
+                    if (boxes.filter(':checked').length == 0) {
+                        return true;
+                    }
+                    return false;
+                },
                 minlength: 1
             }
         },
         messages: {
-            "tasks[]": "Please select at least one task to add to the runsheet."
+            task: "Please select at least one task to add to the runsheet."
         }
 	});
     ///////////////////////////////////////////////////////////////////////////////
