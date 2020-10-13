@@ -113,7 +113,8 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $("#print_runsheet").validate({
+    $("form#print_runsheet").validate({
+        console.log('gonna validate this');
         rules: {
             task:
             {
