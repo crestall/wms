@@ -117,11 +117,17 @@ $(document).ready(function() {
         rules: {
             task: {
                required: true
+            },
+            driver_id: {
+                notNone: true
             }
         },
         messages: {
             task: {
                 required: "Please select at least one task to add to the runsheet."
+            },
+            driver_id:{
+                notNone: "Choose a driver"
             }
         }
 	});
