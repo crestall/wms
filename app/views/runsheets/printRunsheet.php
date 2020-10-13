@@ -30,28 +30,54 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                 <?php echo Form::displayError('units');?>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-md-4 offset-md-3">
-                                <div class="card h-100 border-secondary job-card">
-                                    <div class="card-header bg-secondary text-white">
-                                        Jobs To Be Printed
-                                    </div>
-                                    <div class="card-body">
-                                        <?php foreach($runsheet['jobs'] as $task):?>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="task_<?php echo $task['task_id'];?>" name="task_<?php echo $task['task_id'];?>" checked />
-                                                        <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['job_customer'];?></label>
+                        <?php if(count($runsheet['jobs'])):?>
+                            <div class="form-group row">
+                                <div class="col-md-4 offset-md-3">
+                                    <div class="card h-100 border-secondary job-card">
+                                        <div class="card-header bg-secondary text-white">
+                                            Jobs To Be Included
+                                        </div>
+                                        <div class="card-body">
+                                            <?php foreach($runsheet['jobs'] as $task):?>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="task_<?php echo $task['task_id'];?>" name="task_<?php echo $task['task_id'];?>" checked />
+                                                            <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['job_customer'];?></label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        <?php endforeach;?>
+                                            <?php endforeach;?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php endif;
+                        if(count($runsheet['orders'])):?>
+                            <div class="form-group row">
+                                <div class="col-md-4 offset-md-3">
+                                    <div class="card h-100 border-secondary job-card">
+                                        <div class="card-header bg-secondary text-white">
+                                            Jobs To Be Included
+                                        </div>
+                                        <div class="card-body">
+                                            <?php foreach($runsheet['jobs'] as $task):?>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="task_<?php echo $task['task_id'];?>" name="task_<?php echo $task['task_id'];?>" checked />
+                                                            <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['job_customer'];?></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach;?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif;?>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <div class="form-group row">
                             <div class="col-md-4 offset-md-3">
