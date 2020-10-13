@@ -115,13 +115,14 @@ $(document).ready(function() {
     ///////////////////////////////////////////////////////////////////////////////
     $("form#print_runsheet").validate({
         rules: {
-            task:
-            {
-                required: true
+            task: {
+               required: true
             }
         },
         messages: {
-            task: "Please select at least one task to add to the runsheet."
+            task: {
+                required: "Please select at least one task to add to the runsheet."
+            }
         }
 	});
     ///////////////////////////////////////////////////////////////////////////////
