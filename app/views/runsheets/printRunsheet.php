@@ -10,7 +10,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
         <?php elseif(empty($runsheet)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_runsheet_found.php");?>
         <?php else:?>
-            <?php echo "<pre>",print_r($runsheet),"</pre>"; //die();?>
+            <?php echo "<pre>",print_r($runsheet),"</pre>"; die();?>
             <div class="row">
                 <div class="col-12">
                     <h2>Runsheet Details for <?php echo date('D jS M', $runsheet['runsheet_day'] );?></h2>
@@ -43,7 +43,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                                     <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="task_<?php echo $task['task_id'];?>" name="task_<?php echo $task['task_id'];?>" checked />
-                                                        <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['customer_name'];?></label>
+                                                        <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['job_customer'];?></label>
                                                     </div>
                                                 </div>
                                             </div>
