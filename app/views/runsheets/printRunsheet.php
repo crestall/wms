@@ -23,6 +23,13 @@
                                 <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( Form::value('driver_id') );?></select>
                             </div>
                         </div>
+                        <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                        <input type="hidden" name="submitted" value="1" />
+                        <div class="form-group row">
+                            <div class="col-md-4 offset-md-3">
+                                <button type="submit" class="btn btn-outline-secondary" id="submitter" <?php if($form_disabled) echo "disabled";?>>Add This Order</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
