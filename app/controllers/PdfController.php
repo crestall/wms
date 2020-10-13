@@ -94,7 +94,11 @@ class pdfController extends Controller
 
     public function printRunsheet()
     {
-        echo "<pre>",print_r($this->request),"</pre>";die();
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        // set up the data for the pdf
+        if(empty($this->request['data']))
+            return $this->error(400);
+
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'L']);
         $pdf->SetDisplayMode('fullpage');
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/runsheet.php', [
