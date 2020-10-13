@@ -23,6 +23,13 @@
                                 <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( Form::value('driver_id') );?></select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Units</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control number" name="units" id="units" value="<?php echo Form::value('units');?>" />
+                                <?php echo Form::displayError('units');?>
+                            </div>
+                        </div>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <div class="form-group row">
                             <div class="col-md-4 offset-md-3">
