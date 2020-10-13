@@ -31,7 +31,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-md-2"><input type="text" name="task" id="task" style="display:none;"></div>
+                            <div class="col-md-2"><input type="text" name="task" id="task"></div>
                             <?php if(count($runsheet['jobs'])):?>
                                 <div class="col-md-5">
                                     <div class="card h-100 border-secondary job-card">
