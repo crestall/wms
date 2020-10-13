@@ -114,14 +114,7 @@ $(document).ready(function() {
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
     $("#print_runsheet").validate({
-        rules:{
-            jobs:{
-                require_from_group: [1, ".task"]
-            },
-            orders:{
-                require_from_group: [1, ".task"]
-            }
-    	}
+
 	});
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_job, form#job_details_update').validate({
