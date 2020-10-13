@@ -9,8 +9,7 @@
         <?php elseif(empty($runsheet)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_runsheet_found.php");?>
         <?php else:?>
-            <p><button class="btn runsheet">Print</button></p>
-            <?php echo "<pre>",print_r($runsheet),"</pre>";?>
+            <?php echo "<pre>",print_r($runsheet),"</pre>"; die();?>
             <div class="row">
                 <div class="col-12">
                     <h2>Runsheet Details for <?php echo date('D jS M', $runsheet[0]['runsheet_day'] );?></h2>

@@ -212,7 +212,7 @@ class Runsheet extends Model{
                 pj.job_id, pj.description,
                 pc.name AS customer_name, pc.address AS job_address, pc.address_2 AS job_address2, pc.suburb AS job_suburb, pc.postcode AS job_postcode,
                 o.ship_to AS order_customer, o.order_number, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
-                c.client_name
+                c.client_name AS order_client_name
             FROM
                 {$this->table} rs
                 JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id

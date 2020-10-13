@@ -87,15 +87,47 @@ class RunsheetsController extends Controller
 
     public function printRunsheet()
     {
+        $runsheet = array();
         if(!isset($this->request->params['args']['runsheet']))
         {
             $runsheet_id = 0;
-            $runsheet = array();
+            $tasks = array();
         }
         else
         {
             $runsheet_id = $this->request->params['args']['runsheet'];
-            $runsheet = $this->runsheet->getRunsheetDetailsById($runsheet_id);
+            $tasks = $this->runsheet->getRunsheetDetailsById($runsheet_id);
+        }
+        foreach($tasks as $task)
+        {
+            $runsheet['runsheet_day'] = $task['runsheet_day'];
+            $runsheet['driver_id'] = $task['driver_id'];
+            $runsheet['units'] = $task['units'];
+            if(!isset($runsheet['jobs']))
+            {
+                $runsheet['jobs'] =array();
+            }
+            if(!isset($runsheet['orders']))
+            {
+                $runsheet['orders'] =array();
+            }
+            if(!empty($task['id']))
+            {
+                $runsheet['jobs'][] = array(
+                    'job_id'        => $task['job_id'],
+                    'job_customer'  => $task['customer_name'],
+                    'job_suburb'    => $task['job_suburb']
+                );
+            }
+            if(!empty($task['order_number']))
+            {
+                $runsheet['orders'][] = array(
+                    'order_number'      => $task['order_number'],
+                    'order_customer'    => $task['order_customer'],
+                    'order_suburb'      => $task['order_suburb'],
+                    'order_client'      => $task['order_client_name']
+                );
+            }
         }
         //render the page
         Config::setJsConfig('curPage', "print-runsheet");
