@@ -114,6 +114,7 @@ class RunsheetsController extends Controller
             if(!empty($task['id']))
             {
                 $runsheet['jobs'][] = array(
+                    'task_id'       => $task['id'],
                     'job_id'        => $task['job_id'],
                     'job_customer'  => $task['customer_name'],
                     'job_suburb'    => $task['job_suburb']
@@ -122,6 +123,7 @@ class RunsheetsController extends Controller
             if(!empty($task['order_number']))
             {
                 $runsheet['orders'][] = array(
+                    'task_id'       => $task['id'],
                     'order_number'      => $task['order_number'],
                     'order_customer'    => $task['order_customer'],
                     'order_suburb'      => $task['order_suburb'],
