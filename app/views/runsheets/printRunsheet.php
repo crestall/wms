@@ -43,7 +43,7 @@
                                                     <label class="col-form-label" for="task_<?php echo $task['id'];?>"></label>
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="task_<?php echo $task['id'];?>" name="task_<?php echo $task['id'];?>" checked />
-                                                        <label class="custom-control-label" for="task_<?php echo $task['id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $tasks['customer_name'];?></label>
+                                                        <label class="custom-control-label" for="task_<?php echo $task['id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['customer_name'];?></label>
                                                     </div>
                                                 </div>
                                             </div>
