@@ -30,6 +30,18 @@
                                 <?php echo Form::displayError('units');?>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-md-4 offset-md-3">
+                                <div class="card h-100 border-secondary job-card">
+                                    <div class="card-header bg-secondary text-white">
+                                        Jobs To Be Printed
+                                    </div>
+                                    <div class="card-body">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <div class="form-group row">
                             <div class="col-md-4 offset-md-3">
