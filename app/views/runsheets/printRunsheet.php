@@ -10,7 +10,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
         <?php elseif(empty($runsheet)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_runsheet_found.php");?>
         <?php else:?>
-            <?php echo "<pre>",print_r($runsheet),"</pre>"; //die();?>
+            <?php //echo "<pre>",print_r($runsheet),"</pre>"; //die();?>
             <div class="row">
                 <div class="col-12">
                     <h2>Runsheet Details for <?php echo date('D jS M', $runsheet['runsheet_day'] );?></h2>
@@ -59,16 +59,16 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                 <div class="col-md-4 offset-md-3">
                                     <div class="card h-100 border-secondary job-card">
                                         <div class="card-header bg-secondary text-white">
-                                            Jobs To Be Included
+                                            Orders To Be Included
                                         </div>
                                         <div class="card-body">
-                                            <?php foreach($runsheet['jobs'] as $task):?>
+                                            <?php foreach($runsheet['orders'] as $task):?>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" id="task_<?php echo $task['task_id'];?>" name="task_<?php echo $task['task_id'];?>" checked />
-                                                            <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['job_customer'];?></label>
+                                                            <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['order_number'];?></span> - <?php echo $task['order_customer']."(".$task['order_client_name'].")";?></label>
                                                         </div>
                                                     </div>
                                                 </div>
