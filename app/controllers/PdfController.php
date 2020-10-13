@@ -18,10 +18,10 @@ class pdfController extends Controller
             'printRunsheet'
         );
         $this->Security->requirePost($post_actions);
-        if(in_array($action, $post_actions))
-        {
+        //if(in_array($action, $post_actions))
+        //{
             $this->Security->config("form", [ 'fields' => ['csrf_token']]);
-        }
+        //}
     }
 
     public function printVicLocalLabels()
