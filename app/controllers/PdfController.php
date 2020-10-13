@@ -12,7 +12,16 @@ class pdfController extends Controller
     public function beforeAction()
     {
         parent::beforeAction();
+        $action = $this->request->param('action');
         $this->Security->config("validateForm", false);
+        $post_actions = array(
+            'printRunsheet'
+        );
+        $this->Security->requirePost($post_actions);
+        if(in_array($action, $post_actions))
+        {
+            $this->Security->config("form", [ 'fields' => ['csrf_token']]);
+        }
     }
 
     public function printVicLocalLabels()
