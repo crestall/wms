@@ -116,7 +116,13 @@ $(document).ready(function() {
     $("form#print_runsheet").validate({
         rules: {
             task: {
-               required: true
+               required: function (element) {
+                    var boxes = $('.task');
+                    if (boxes.filter(':checked').length == 0) {
+                        return true;
+                    }
+                    return false;
+                }
             },
             driver_id: {
                 notNone: true
