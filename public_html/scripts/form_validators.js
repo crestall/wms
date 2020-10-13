@@ -114,7 +114,16 @@ $(document).ready(function() {
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
     $("#print_runsheet").validate({
-
+        rules: {
+            "tasks[]":
+            {
+                required: true,
+                minlength: 1
+            }
+        },
+        messages: {
+            "tasks[]": "Please select at least one task to add to the runsheet."
+        }
 	});
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_job, form#job_details_update').validate({
