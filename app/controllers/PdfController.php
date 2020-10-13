@@ -96,7 +96,7 @@ class pdfController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
         // set up the data for the pdf
-        if(empty($this->request['data']))
+        if(empty($this->request->data))
             return $this->error(400);
 
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'L']);
