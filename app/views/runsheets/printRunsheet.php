@@ -81,7 +81,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <div class="form-group row">
                             <div class="col-md-4 offset-md-3">
-                                <button type="submit" class="btn btn-outline-secondary" id="submitter">Print Runsheet</button>
+                                <button type="submit" class="btn btn-outline-secondary" id="submitter">Print Runsheet</button><br>
                                 <span class="inst">Please save a copy if you wish to re-print this particular sheet.</span>
                             </div>
                         </div>
