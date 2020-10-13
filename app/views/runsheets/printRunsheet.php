@@ -39,7 +39,7 @@
                                     <div class="card-body">
                                         <?php foreach($runsheet as $task):?>
                                             <div class="row">
-                                                <div class="col-md-1">
+                                                <div class="col-md-12">
                                                     <label class="col-form-label" for="task_<?php echo $task['id'];?>"></label>
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="task_<?php echo $task['id'];?>" name="task_<?php echo $task['id'];?>" checked />
