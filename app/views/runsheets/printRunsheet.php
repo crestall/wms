@@ -1,5 +1,6 @@
 <?php
-
+$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
+$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -9,23 +10,23 @@
         <?php elseif(empty($runsheet)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_runsheet_found.php");?>
         <?php else:?>
-            <?php echo "<pre>",print_r($runsheet),"</pre>"; die();?>
+            <?php echo "<pre>",print_r($runsheet),"</pre>"; //die();?>
             <div class="row">
                 <div class="col-12">
-                    <h2>Runsheet Details for <?php echo date('D jS M', $runsheet[0]['runsheet_day'] );?></h2>
+                    <h2>Runsheet Details for <?php echo date('D jS M', $runsheet['runsheet_day'] );?></h2>
                 </div>
                 <div class="col-12">
                     <form id="print_runsheet" method="post" action="/pdf/printRunsheet" target="_blank">
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Driver</label>
                             <div class="col-md-4">
-                                <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( Form::value('driver_id') );?></select>
+                                <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( $driver_id );?></select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Units</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control number" name="units" id="units" value="<?php echo Form::value('units');?>" />
+                                <input type="text" class="form-control number" name="units" id="units" value="<?php echo $units;?>" />
                                 <?php echo Form::displayError('units');?>
                             </div>
                         </div>
@@ -36,13 +37,13 @@
                                         Jobs To Be Printed
                                     </div>
                                     <div class="card-body">
-                                        <?php foreach($runsheet as $task):?>
+                                        <?php foreach($runsheet['jobs'] as $task):?>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <label class="col-form-label" for="task_<?php echo $task['id'];?>"></label>
+                                                    <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="task_<?php echo $task['id'];?>" name="task_<?php echo $task['id'];?>" checked />
-                                                        <label class="custom-control-label" for="task_<?php echo $task['id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['customer_name'];?></label>
+                                                        <input type="checkbox" class="custom-control-input" id="task_<?php echo $task['task_id'];?>" name="task_<?php echo $task['task_id'];?>" checked />
+                                                        <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['customer_name'];?></label>
                                                     </div>
                                                 </div>
                                             </div>
