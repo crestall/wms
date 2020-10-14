@@ -94,7 +94,7 @@ class pdfController extends Controller
 
     public function printRunsheet()
     {
-        echo "<pre>",print_r($this->request),"</pre>";die();
+        echo "<pre>",print_r($this->request),"</pre>";//die();
         // set up the data for the pdf
         $data = array();
         if(empty($this->request->data))
@@ -111,7 +111,7 @@ class pdfController extends Controller
                 {
                     $job = $this->productionjob->getJobById($job_id);
                     $units = $details['units'];
-                    //echo "<pre>",print_r($job),"</pre>"; continue;
+                    echo "<pre>",print_r($job),"</pre>"; continue;
                     $address_string = $job['job_address'];
                     if(!empty($job['job_address2']))
                         $address_string .= "<br>".$job['job_address2'];
@@ -138,7 +138,7 @@ class pdfController extends Controller
                 }
             }
         }
-        //die();
+        die();
 
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'L']);
         $pdf->SetDisplayMode('fullpage');

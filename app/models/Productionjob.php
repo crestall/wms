@@ -81,10 +81,12 @@ class Productionjob extends Model{
             SELECT
                 pj.*,
                 pc.name AS customer_name, pc.address AS job_address, pc.address_2 AS job_address2, pc.suburb AS job_suburb, pc.postcode AS job_postcode,
+                pf.name AS finisher_name, pf.address AS finisher_address, pf.address_2 AS finisher_address2, pf.suburb AS finisher_suburb, pf.postcode AS finisher_postcode,
                 sr.id as salesrep_id, sr.name AS salesrep_name
             FROM
                 `production_jobs` pj LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
+                `production_finishers` pf ON pj.finisher_id = pf.id LEFT JOIN
                 `sales_reps` sr ON pj.salesrep_id = sr.id
             WHERE
                 pj.id = $id
