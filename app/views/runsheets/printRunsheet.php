@@ -45,7 +45,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                                         <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>]" checked />
-                                                            <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_id'];?></span> - <?php echo $task['job_customer'];?></label>
+                                                            <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_number'];?></span> - <?php echo $task['job_customer'];?></label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -66,7 +66,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                                     <div class="col-md-12">
                                                         <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[orders][<?php echo $task['task_id'];?>]" checked />
+                                                            <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[orders][<?php echo $task['order_id'];?>]" checked />
                                                             <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['order_number'];?></span> - <?php echo $task['order_customer']."(".$task['order_client_name'].")";?></label>
                                                         </div>
                                                     </div>
