@@ -106,10 +106,27 @@ class pdfController extends Controller
             foreach($post_data['tasks']['jobs'] as $job_id => $on)
             {
                 $job = $this->productionjob->getJobById($job_id);
-                echo "<pre>",print_r($job),"</pre>";
+                $address_string = $job['job_address'];
+                if(!empty($job['job_address2']))
+                    $address_string .= "<br>".$job['job_address2'];
+                $address_string .= "<br>".$job['job_suburb'];
+                $address_string .= "<br>".$job['job_postcode'];
+                //echo "<pre>",print_r($job),"</pre>";
+                $table_body .= "
+                  <tr>
+                    <td>{$job['job_id']}</td>
+                    <td>{$job['customer_name']}</td>
+                    <td>{$job['description']}</td>
+                    <td>$address_string</td>
+                    <td>{$post_data['units']}</td>
+                    <td>".ucwords($job['salesrep_name'])."</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                ";
             }
         }
-        die();
+        //die();
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'L']);
         $pdf->SetDisplayMode('fullpage');
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/runsheet.php', [
