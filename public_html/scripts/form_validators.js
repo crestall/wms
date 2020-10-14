@@ -114,7 +114,9 @@ $(document).ready(function() {
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
     $("form#print_runsheet").validate({
-        ignore: $('#task'),
+        ignore: {
+            task: true
+        },
         rules: {
             task: {
                required: function (element) {
