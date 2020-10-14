@@ -1,5 +1,5 @@
 <?php
-$table_body = (isset($table_body))? $table_body:"";
+
 ?>
 <div id="runsheet_body">
     <div class="landscape">
