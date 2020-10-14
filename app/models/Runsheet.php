@@ -191,14 +191,26 @@ class Runsheet extends Model{
         return true;
     }
 
-    public function updateRunsheet($data)
+    public function runsheetPrinted($data = array())
     {
-        $db = Database::openConnection();
-        $vals = array(
-            'driver_id'     => $data['driver_id'],
-            'updated_date'  => time()
-        );
-        $db->updateDatabaseFields($this->table, $vals, $data['runsheet_id']);
+        if(count($data))
+        {
+            $db = Database::openConnection();
+            $vals = array(
+                'updated_date'  => time(),
+                'updated_by'    => Session::getUserId()
+            );
+            $task_vals = array(
+                'printed'   => 1,
+            );
+            if(isset($data['driver_id']))
+                $task_vals['driver_id'] = $data['driver_id'];
+            if(isset($data['units']))
+                $task_vals['units'] = $data['units'];
+            $db->updateDatabaseFields($this->table, $vals, $data['runsheet_id']);
+            $db->updateDatabaseFields($this->tasks_table, $task_vals, $data['task_id']);
+        }
+
         return true;
     }
 
