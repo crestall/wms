@@ -80,7 +80,7 @@ class Productionjob extends Model{
         $q = "
             SELECT
                 pj.*,
-                pc.name AS customer_name, pc.address AS job_address, pc.address_2 AS job_address2, pc.suburb AS job_suburb, pc.postcode AS job_postcode,,
+                pc.name AS customer_name, pc.address AS job_address, pc.address_2 AS job_address2, pc.suburb AS job_suburb, pc.postcode AS job_postcode,
                 sr.id as salesrep_id, sr.name AS salesrep_name
             FROM
                 `production_jobs` pj LEFT JOIN
