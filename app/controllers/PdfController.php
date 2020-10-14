@@ -96,9 +96,11 @@ class pdfController extends Controller
     {
         echo "<pre>",print_r($this->request),"</pre>";die();
         // set up the data for the pdf
+        $data = array();
         if(empty($this->request->data))
             return $this->error(400);
         $post_data = $this->request->data;
+        $data['runsheet_id'] = $post_data['runsheet_id'];
         $driver = ($post_data['driver_id'] > 0)? $this->driver->getDriverName($post_data['driver_id']) : "";
         $table_body = "";
         if(count($post_data['tasks']['jobs']))
