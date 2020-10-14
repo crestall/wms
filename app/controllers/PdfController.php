@@ -129,8 +129,13 @@ class pdfController extends Controller
                         <td></td>
                       </tr>
                     ";
+                    $this->runsheet->runsheetPrinted(array(
+                        'driver_id'     => $post_data['driver_id'],
+                        'units'         => $units,
+                        'runsheet_id'   => $post_data['runsheet_id'],
+                        'task_id'       =>
+                    ));
                 }
-
             }
         }
         //die();
