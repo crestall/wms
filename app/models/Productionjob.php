@@ -89,7 +89,7 @@ class Productionjob extends Model{
             WHERE
                 pj.id = $id
         ";
-        return $db->queryData($q);
+        return $db->queryRow($q);
     }
 
     public function addJob($data)
