@@ -76,7 +76,20 @@ class Productionjob extends Model{
     public function getJobById($id = 0)
     {
         $db = Database::openConnection();
-        return $db->queryById($this->table, $id);
+        //return $db->queryById($this->table, $id);
+        $q = "
+            SELECT
+                pj.*,
+                pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
+                sr.id as salesrep_id, sr.name AS salesrep_name
+            FROM
+                `production_jobs` pj LEFT JOIN
+                `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
+                `sales_reps` sr ON pj.salesrep_id = sr.id
+            WHERE
+                pj.id = $id
+        ";
+        return $db->queryData($q); 
     }
 
     public function addJob($data)
