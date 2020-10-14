@@ -17,7 +17,13 @@
                     init: function(){
                         $('.task').click(function(e){
                             $('#task').validate();
-                        })
+                        });
+                        $("form#print_runsheet").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Creating Runsheet...</h2></div>' });
+                            }
+                        });
                     }
                 }
             }
