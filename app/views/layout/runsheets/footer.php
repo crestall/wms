@@ -22,6 +22,9 @@
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Creating Runsheet...</h2></div>' });
+                                setTimeout(function () {
+                                    window.location.reload(1);
+                                }, 3000);
                             }
                         });
                     }
