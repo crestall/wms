@@ -24,13 +24,6 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label">Units</label>
-                            <div class="col-md-5">
-                                <input type="text" class="form-control number" name="units" id="units" value="<?php echo $units;?>" />
-                                <?php echo Form::displayError('units');?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <div class="col-md-2"><input type="hidden" name="task" id="task"></div>
                             <?php if(count($runsheet['jobs'])):?>
                                 <div class="col-md-5">
@@ -50,8 +43,8 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="offset-md-2 col-md-2">Units</label>
-                                                    <div class="col-md-2">
+                                                    <label class="offset-2 col-3">Units</label>
+                                                    <div class="col-3">
                                                         <input type="text" class="form-control number">
                                                     </div>
                                                 </div>
