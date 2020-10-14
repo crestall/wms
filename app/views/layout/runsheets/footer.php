@@ -15,7 +15,9 @@
                 },
                 'print-runsheet':{
                     init: function(){
-                        
+                        $('.task').click(function(e){
+                            $('#task').validate();
+                        })
                     }
                 }
             }
