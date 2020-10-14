@@ -126,17 +126,11 @@ $(document).ready(function() {
                     }
                     return false;
                 }
-            },
-            driver_id: {
-                notNone: true
             }
         },
         messages: {
             task: {
-                required: "Please select at least one task to add to the runsheet."
-            },
-            driver_id:{
-                notNone: "Choose a driver"
+                required: "Please select at least one job or order to add to the runsheet."
             }
         }
 	});
