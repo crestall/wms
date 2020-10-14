@@ -94,7 +94,7 @@ class pdfController extends Controller
 
     public function printRunsheet()
     {
-        echo "<pre>",print_r($this->request),"</pre>";die();
+        //echo "<pre>",print_r($this->request),"</pre>";die();
         // set up the data for the pdf
         if(empty($this->request->data))
             return $this->error(400);
@@ -103,27 +103,32 @@ class pdfController extends Controller
         $table_body = "";
         if(count($post_data['tasks']['jobs']))
         {
-            foreach($post_data['tasks']['jobs'] as $job_id => $on)
+            foreach($post_data['tasks']['jobs'] as $job_id => $details)
             {
-                $job = $this->productionjob->getJobById($job_id);
-                //echo "<pre>",print_r($job),"</pre>"; continue;
-                $address_string = $job['job_address'];
-                if(!empty($job['job_address2']))
-                    $address_string .= "<br>".$job['job_address2'];
-                $address_string .= "<br>".$job['job_suburb'];
-                $address_string .= "<br>".$job['job_postcode'];
-                $table_body .= "
-                  <tr>
-                    <td>{$job['job_id']}</td>
-                    <td>{$job['customer_name']}</td>
-                    <td>{$job['description']}</td>
-                    <td>$address_string</td>
-                    <td>{$post_data['units']}</td>
-                    <td>".ucwords($job['salesrep_name'])."</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                ";
+                if(isset($details['include']))
+                {
+                    $job = $this->productionjob->getJobById($job_id);
+                    $units = $details['units'];
+                    //echo "<pre>",print_r($job),"</pre>"; continue;
+                    $address_string = $job['job_address'];
+                    if(!empty($job['job_address2']))
+                        $address_string .= "<br>".$job['job_address2'];
+                    $address_string .= "<br>".$job['job_suburb'];
+                    $address_string .= "<br>".$job['job_postcode'];
+                    $table_body .= "
+                      <tr>
+                        <td>{$job['job_id']}</td>
+                        <td>{$job['customer_name']}</td>
+                        <td>{$job['description']}</td>
+                        <td>$address_string</td>
+                        <td>$units</td>
+                        <td>".ucwords($job['salesrep_name'])."</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    ";
+                }
+
             }
         }
         //die();
