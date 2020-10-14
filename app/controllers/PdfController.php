@@ -121,7 +121,7 @@ class pdfController extends Controller
                         <td>{$job['customer_name']}</td>
                         <td>{$job['description']}</td>
                         <td>$address_string</td>
-                        <td>$units</td>
+                        <td align='right'>$units</td>
                         <td>".ucwords($job['salesrep_name'])."</td>
                         <td></td>
                         <td></td>
