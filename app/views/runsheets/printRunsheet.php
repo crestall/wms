@@ -50,8 +50,8 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="offset-md-2 col-md-3">Units</label>
-                                                    <div class="col-md-4">
+                                                    <label class="offset-md-2 col-md-2">Units</label>
+                                                    <div class="col-md-3">
                                                         <input type="text" class="form-control number">
                                                     </div>
                                                 </div>
