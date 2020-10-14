@@ -100,10 +100,12 @@ class pdfController extends Controller
             return $this->error(400);
         $post_data = $this->request->data;
         $driver = ($post_data['driver_id'] > 0)? $this->driver->getDriverName($post_data['driver_id']) : "";
+        $table_body = "";
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'L']);
         $pdf->SetDisplayMode('fullpage');
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/runsheet.php', [
-            'driver'    => $driver
+            'driver'        => $driver,
+            'table_body'    => $table_body
         ]);
         $stylesheet = file_get_contents(STYLES."runsheets.css");
         $pdf->WriteHTML($stylesheet,1);
