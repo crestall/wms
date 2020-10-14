@@ -115,6 +115,7 @@ class RunsheetsController extends Controller
             {
                 $runsheet['jobs'][] = array(
                     'task_id'       => $task['id'],
+                    'job_number'    => $task['job_number'],
                     'job_id'        => $task['job_id'],
                     'job_customer'  => $task['customer_name'],
                     'job_suburb'    => $task['job_suburb']
