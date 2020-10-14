@@ -107,7 +107,7 @@ class pdfController extends Controller
             {
                 $job = $this->productionjob->getJobById($job_id);
                 //echo "<pre>",print_r($job),"</pre>"; continue;
-                $address_string = $job['job_address'];
+                $address_string = "";
                 if(!empty($job['job_address2']))
                     $address_string .= "<br>".$job['job_address2'];
                 $address_string .= "<br>".$job['job_suburb'];
