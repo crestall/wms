@@ -16,7 +16,7 @@
                 'print-runsheet':{
                     init: function(){
                         $('.task').click(function(e){
-                            $('#task').validate();
+                            $('#task').valid();
                         });
                         $("form#print_runsheet").submit(function(e){
                             if($(this).valid())
