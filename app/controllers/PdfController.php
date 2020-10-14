@@ -103,11 +103,13 @@ class pdfController extends Controller
         $table_body = "";
         if(count($post_data['tasks']['jobs']))
         {
-            foreach($post_data['tasks']['jobs'] as $task_id => $on)
+            foreach($post_data['tasks']['jobs'] as $job_id => $on)
             {
-
+                $job = $this->productionjob->getJobById($job_id);
+                echo "<pre>",print_r($job),"</pre>";
             }
         }
+        die();
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'L']);
         $pdf->SetDisplayMode('fullpage');
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/runsheet.php', [
