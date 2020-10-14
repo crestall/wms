@@ -94,7 +94,7 @@ class pdfController extends Controller
 
     public function printRunsheet()
     {
-        echo "<pre>",print_r($this->request),"</pre>";die();
+        //echo "<pre>",print_r($this->request),"</pre>";die();
         // set up the data for the pdf
         $data = array();
         if(empty($this->request->data))
