@@ -49,7 +49,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                                         <input type="text" class="form-control number" name="tasks[jobs][<?php echo $task['job_id'];?>][units]">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="task_ids[]" value="<?php echo $task['task_id'];?>">
+                                                <input type="hidden" name="tasks[jobs][<?php echo $task['job_id'];?>][task_id]" value="<?php echo $task['task_id'];?>">
                                             <?php endforeach;?>
                                         </div>
                                     </div>
