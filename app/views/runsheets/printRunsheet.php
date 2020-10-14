@@ -44,9 +44,14 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="offset-2 col-3">Units</label>
-                                                    <div class="col-3">
+                                                    <label class="offset-1 col-2">Units</label>
+                                                    <div class="col-4">
                                                         <input type="text" class="form-control number" name="tasks[jobs][<?php echo $task['job_id'];?>][units]">
+                                                    </div>
+                                                    <label class="col-form-label" for="finisher_<?php echo $task['task_id'];?>"></label>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input finisher" id="finisher_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>][finisher]" />
+                                                        <label class="custom-control-label" for="finisher_<?php echo $task['task_id'];?>"><span class="font-weight-bold">Send To Finisher</label>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="tasks[jobs][<?php echo $task['job_id'];?>][task_id]" value="<?php echo $task['task_id'];?>">
