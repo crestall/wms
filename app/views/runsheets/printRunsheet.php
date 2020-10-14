@@ -41,14 +41,16 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                         <div class="card-body">
                                             <?php foreach($runsheet['jobs'] as $task):?>
                                                 <div class="row">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-9">
                                                         <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>]" checked />
                                                             <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_number'];?></span> - <?php echo $task['job_customer'];?></label>
                                                         </div>
-                                                        <label>Parcels</label>
-                                                        <input type="text" class="form-control number">
+                                                        <label class="col-md-2">Parcels</label>
+                                                        <div class="col-md-1">
+                                                            <input type="text" class="form-control number">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             <?php endforeach;?>
