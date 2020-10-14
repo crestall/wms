@@ -1,6 +1,7 @@
 <?php
 $driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
 $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -48,6 +49,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                                         <input type="text" class="form-control number" name="tasks[jobs][<?php echo $task['job_id'];?>][units]">
                                                     </div>
                                                 </div>
+                                                <input type="hidden" name="task_ids[]" value="<?php echo $task['task_id'];?>">
                                             <?php endforeach;?>
                                         </div>
                                     </div>
