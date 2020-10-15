@@ -68,13 +68,19 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                         </div>
                                         <div class="card-body">
                                             <?php foreach($runsheet['orders'] as $task):?>
-                                                <div class="row">
-                                                    <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <div class="col-12">
                                                         <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[orders][<?php echo $task['order_id'];?>]" checked />
                                                             <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['order_number'];?></span> - <?php echo $task['order_customer']."(".$task['order_client'].")";?></label>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group row'>
+                                                    <label class="col-3 text-right">Units</label>
+                                                    <div class="col-4">
+                                                        <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]">
                                                     </div>
                                                 </div>
                                             <?php endforeach;?>
