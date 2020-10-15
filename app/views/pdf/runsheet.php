@@ -33,7 +33,7 @@
                 <thead>
                     <tr>
                         <th style="width: 16mm">Job Id/Order Number</th>
-                        <th style="width: 38mm">Customer - Client</th>
+                        <th style="width: 38mm">Customer/ Client/ Finisher</th>
                         <th style="width: 41mm">Description</th>
                         <th style="width: 74mm">Address</th>
                         <th style="width: 12mm">Units</th>
