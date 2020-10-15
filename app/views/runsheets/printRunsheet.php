@@ -1,6 +1,4 @@
 <?php
-//$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
-//$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
 
 ?>
 <div id="page-wrapper">
@@ -11,7 +9,10 @@
         <?php elseif(empty($runsheet)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_runsheet_found.php");?>
         <?php else:?>
-            <?php //echo "<pre>",print_r($runsheet),"</pre>"; die();?>
+            <?php
+            $driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
+            $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
+            ?>
             <div class="row">
                 <div class="col-12">
                     <h2>Runsheet Details for <?php echo date('D jS M', $runsheet['runsheet_day'] );?></h2>
