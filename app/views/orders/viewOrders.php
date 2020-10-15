@@ -140,7 +140,7 @@
                         <?php elseif($user_role == "warehouse"):?>
                             <th>Courier</th>
                         <?php endif;?>
-                        <th></th>
+                        <th>Runsheet Day</th>
                         <th nowrap>
                             Select
                             <div class="checkbox checkbox-default">
