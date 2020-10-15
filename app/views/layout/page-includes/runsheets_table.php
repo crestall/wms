@@ -55,7 +55,7 @@
                     <?php foreach($rs['orders'] as $order):?>
                         <div class="runsheet_order_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                             <p>
-                                <span class="font-weight-bold"><?php echo $order['order_id'];?></span> - <?php echo $order['customer'];?><br>
+                                <span class="font-weight-bold"><?php echo $order['order_number'];?></span> - <?php echo $order['customer'];?><br>
                                 <?php if(!empty($order['driver_name'])) echo $order['driver_name']." - "; echo $order['suburb']?>
                             </p>
                         </div>
