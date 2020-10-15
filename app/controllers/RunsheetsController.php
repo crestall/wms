@@ -112,7 +112,7 @@ class RunsheetsController extends Controller
             {
                 $runsheet['orders'] =array();
             }
-            if(!empty($task['id']))
+            if(!empty($task['job_id']))
             {
                 $runsheet['jobs'][] = array(
                     'task_id'       => $task['id'],
@@ -127,6 +127,7 @@ class RunsheetsController extends Controller
                 $runsheet['orders'][] = array(
                     'task_id'           => $task['id'],
                     'order_number'      => $task['order_number'],
+                    'order_id'          => $task['order_id'],
                     'order_customer'    => $task['order_customer'],
                     'order_suburb'      => $task['order_suburb'],
                     'order_client'      => $task['order_client_name']
