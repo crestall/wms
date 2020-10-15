@@ -51,7 +51,16 @@
                         </div>
                     <?php endforeach;?>
                 </td>
-                <td data-label="Orders"></td>
+                <td data-label="Orders">
+                    <?php foreach($rs['orders'] as $order):?>
+                        <div class="runsheet_order_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                            <p>
+                                <span class="font-weight-bold"><?php echo $order['order_id'];?></span> - <?php echo $order['customer'];?><br>
+                                <?php if(!empty($order['driver_name'])) echo $order['driver_name']." - "; echo $order['suburb']?>
+                            </p>
+                        </div>
+                    <?php endforeach;?>
+                </td>
                 <!--td data-label="Select" class="chkbox">
                     <div class="checkbox checkbox-default">
                         <input type="checkbox" class="select styled" data-runsheetid='<?php echo $rs['runsheet_id'];?>' id="select_<?php echo $rs['runsheet_id'];?>" />
