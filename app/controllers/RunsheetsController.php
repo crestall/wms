@@ -185,7 +185,7 @@ class RunsheetsController extends Controller
                     'driver_name'   => $rs['driver_name'],
                     'customer'      => $rs['order_customer'],
                     'suburb'        => $rs['order_suburb'],
-                    'client'        => $rs['client_name'],
+                    'client'        => $rs['order_client_name'],
                     'printed'       => $rs['printed'],
                     'completed'     => $rs['completed']
                 );
