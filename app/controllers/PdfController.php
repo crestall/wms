@@ -94,7 +94,7 @@ class pdfController extends Controller
 
     public function printRunsheet()
     {
-        echo "<pre>",print_r($this->request),"</pre>";//die();
+        //echo "<pre>",print_r($this->request),"</pre>";//die();
         // set up the data for the pdf
         $data = array();
         if(empty($this->request->data))
@@ -111,7 +111,7 @@ class pdfController extends Controller
                 {
                     $job = $this->productionjob->getJobById($job_id);
                     $units = $details['units'];
-                    echo "<pre>",print_r($job),"</pre>"; continue;
+                    //echo "<pre>",print_r($job),"</pre>"; continue;
                     $address_string = "";
                     if(isset($details['finisher']))
                     {
@@ -167,12 +167,17 @@ class pdfController extends Controller
                     if(!empty($order['suburb']))      $address_string .= "<br>".$order['suburb'];
                     if(!empty($order['postcode']))    $address_string .= "<br>".$order['postcode'];
                     $items = $this->order->getItemsForOrderNoLocations($order_id);
-                    echo "<pre>",print_r($items),"</pre>"; continue;
+                    //echo "<pre>",print_r($items),"</pre>"; continue;
+                    $description = "";
+                    foreach($items as $item)
+                    {
+                        $description .= "<p>{$item['qty']} of {$item['name']}</p>";
+                    }
                     $table_body .= "
                         <tr>
                             <td>{$order['order_number']}</td>
                             <td>$send_to</td>
-                            <td>{$job['description']}</td>
+                            <td>$description</td>
                             <td>$address_string</td>
                             <td>$units</td>
                             <td>Mike Bond</td>
@@ -189,7 +194,7 @@ class pdfController extends Controller
                 }
             }
         }
-        die();
+        //die();
 
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'L']);
         $pdf->SetDisplayMode('fullpage');
