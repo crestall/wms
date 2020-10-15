@@ -1020,6 +1020,30 @@ class ajaxfunctionsController extends Controller
         $this->view->renderBoolean($this->item->checkSkus($request, $current_sku));
     }
 
+    public function addOrderRunsheets()
+    {
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        $runsheets = array();
+        foreach($this->request->data['runsheets'] as $rs)
+        {
+            if(!isset($runsheets[$rs['timestamp']]))
+            {
+                $runsheets[$rs['timestamp']]['driver_id'] = 0;
+                $runsheets[$rs['timestamp']]['jobs'] = array();
+            }
+            $runsheets[$rs['timestamp']]['jobs'][] = $rs['job_id'];
+        }
+        ksort($runsheets, SORT_NUMERIC);
+        echo "<pre>",print_r($runsheets),"</pre>";die();
+        $this->runsheet->addRunsheet($runsheets);
+        Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Those Runsheet(s) have been created/updated</h2>");
+        $this->view->renderJson($data);
+    }
+
     public function addJobRunsheets()
     {
         $data = array(
