@@ -111,7 +111,7 @@ class pdfController extends Controller
                 {
                     $job = $this->productionjob->getJobById($job_id);
                     $units = $details['units'];
-                    //echo "<pre>",print_r($job),"</pre>"; continue;
+                    echo "<pre>",print_r($job),"</pre>"; continue;
                     $address_string = "";
                     if(isset($details['finisher']))
                     {
@@ -151,7 +151,7 @@ class pdfController extends Controller
                 }
             }
         }
-        //die();
+        die();
 
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'L']);
         $pdf->SetDisplayMode('fullpage');
