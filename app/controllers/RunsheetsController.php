@@ -98,6 +98,7 @@ class RunsheetsController extends Controller
             $runsheet_id = $this->request->params['args']['runsheet'];
             $tasks = $this->runsheet->getRunsheetDetailsById($runsheet_id);
         }
+        echo "TASK<pre>",print_r($tasks),"</pre>";
         foreach($tasks as $task)
         {
             $runsheet['runsheet_day'] = $task['runsheet_day'];
