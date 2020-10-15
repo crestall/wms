@@ -191,7 +191,7 @@ class Runsheet extends Model{
             {
                 foreach($details['orders'] as $order_id)
                 {
-                    $tvals['order__id'] = $order_id;
+                    $tvals['order_id'] = $order_id;
                     $task_id = $db->insertQuery($this->tasks_table, $tvals);
                 }
             }
