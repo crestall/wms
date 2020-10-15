@@ -223,7 +223,7 @@
                         /*
                         */
                         ?>
-        	        	<tr <?php echo $row_class;?> >
+        	        	<tr id="tr_<?php echo $co['id'];?>" <?php echo $row_class;?> >
                             <td class="number" data-label="Count"><?php echo $c;?></td>
         	            	<td class="filterable number" data-label="Order Number">
                                 <a href="<?php echo $link;?>"><?php echo str_pad($co['order_number'],8,'0',STR_PAD_LEFT);?></a> 
