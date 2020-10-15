@@ -1392,8 +1392,7 @@
                             //console.log('Job ID: '+job_id);
                             $('input#runsheet_daydate_'+job_id).focus();
                         });
-                    }
-                    //add to driver runsheet
+                        //add to driver runsheet
                         $('button#runsheet').click(function(e){
                             if(!$('input.select:checked').length)
                             {
@@ -1464,6 +1463,8 @@
                                 });
                             }
                         });
+                    }
+
                 },
                 'order-search':{
                     init: function(){
