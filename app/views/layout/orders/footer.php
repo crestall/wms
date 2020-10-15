@@ -1370,6 +1370,28 @@
                                 });
                             }
                         });
+                        $( ".runsheet_day" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                var $tr = $(this).closest('tr');
+                                var ar = $tr.prop('id').split("_");
+                                var job_id = ar[1];
+                                //console.log('input: input#runsheet_daydate_value_'+job_id);
+                                //console.log('s: '+s);
+                                $('input#runsheet_daydate_value_'+job_id).val(s);
+                            }
+                        });
+                        $('.runsheet_calendar').css('cursor', 'pointer').click(function(e){
+                            var $tr = $(this).closest('tr');
+                            var ar = $tr.prop('id').split("_");
+                            var job_id = ar[1];
+                            //console.log('Job ID: '+job_id);
+                            $('input#runsheet_daydate_'+job_id).focus();
+                        });
                     }
                 },
                 'order-search':{
