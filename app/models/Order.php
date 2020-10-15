@@ -885,7 +885,16 @@ class Order extends Model{
         {
             $status_clause = "WHERE status_id != $status_id";
         }
-        $q = "SELECT * FROM {$this->table} $status_clause";
+        //$q = "SELECT * FROM {$this->table} $status_clause";
+        $q = "
+            SELECT
+                o.*,
+                IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day
+            FROM
+                orders o LEFT JOIN
+                (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.order_id, runsheets.runsheet_day FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN orders ON runsheet_tasks.order_id = orders.id) rs ON rs.order_id = o.id
+            $status_clause
+        ";
         if($client_id > 0)
         {
             $q .= " AND client_id = $client_id";
