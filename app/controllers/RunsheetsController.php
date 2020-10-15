@@ -182,7 +182,7 @@ class RunsheetsController extends Controller
             {
                 $runsheets[$rs['runsheet_day']]['orders'][] = array(
                     'order_id'      => $rs['order_id'],
-                    'order_number'  => $rs['order_number']
+                    'order_number'  => $rs['order_number'],
                     'driver_name'   => $rs['driver_name'],
                     'customer'      => $rs['order_customer'],
                     'suburb'        => $rs['order_suburb'],
