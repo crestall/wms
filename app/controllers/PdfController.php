@@ -94,7 +94,7 @@ class pdfController extends Controller
 
     public function printRunsheet()
     {
-        echo "<pre>",print_r($this->request),"</pre>";die();
+        echo "<pre>",print_r($this->request),"</pre>";//die();
         // set up the data for the pdf
         $data = array();
         if(empty($this->request->data))
@@ -147,6 +147,55 @@ class pdfController extends Controller
                         'units'         => $units,
                         'runsheet_id'   => $post_data['runsheet_id'],
                         'task_id'       => $details['task_id']
+                    ));
+                }
+            }
+        }
+        if(count($post_data['tasks']['orders']))
+        {
+            foreach($post_data['tasks']['orders'] as $order_id => $details)
+            {
+                if(isset($details['include']))
+                {
+                    $job = $this->productionjob->getJobById($job_id);
+                    $order = $this->order->getOrderDetail($order_id);
+                    $units = $details['units'];
+                    echo "<pre>",print_r($order),"</pre>"; continue;
+                    $address_string = "";
+                    if(isset($details['finisher']))
+                    {
+                            $send_to = $job['finisher_name'];
+                            if(!empty($job['finisher_address']))     $address_string .= $job['finisher_address'];
+                            if(!empty($job['finisher_address2']))    $address_string .= "<br>".$job['finisher_address2'];
+                            if(!empty($job['finisher_suburb']))      $address_string .= "<br>".$job['finisher_suburb'];
+                            if(!empty($job['finisher_postcode']))    $address_string .= "<br>".$job['finisher_postcode'];
+                    }
+                    else
+                    {
+                            $send_to = $job['customer_name'];
+                            if(!empty($job['job_address']))     $address_string .= $job['job_address'];
+                            if(!empty($job['job_address2']))    $address_string .= "<br>".$job['job_address2'];
+                            if(!empty($job['job_suburb']))      $address_string .= "<br>".$job['job_suburb'];
+                            if(!empty($job['job_postcode']))    $address_string .= "<br>".$job['job_postcode'];
+                    }
+
+                    $table_body .= "
+                        <tr>
+                            <td>{$job['job_id']}</td>
+                            <td>$send_to</td>
+                            <td>{$job['description']}</td>
+                            <td>$address_string</td>
+                            <td>$units</td>
+                            <td>".ucwords($job['salesrep_name'])."</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    ";
+                    $this->runsheet->runsheetPrinted(array(
+                            'driver_id'     => $post_data['driver_id'],
+                            'units'         => $units,
+                            'runsheet_id'   => $post_data['runsheet_id'],
+                            'task_id'       => $details['task_id']
                     ));
                 }
             }
