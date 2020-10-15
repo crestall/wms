@@ -80,7 +80,7 @@ $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['unit
                                                 <div class='form-group row'>
                                                     <label class="col-3 text-right">Units</label>
                                                     <div class="col-4">
-                                                        <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]">
+                                                        <input type="text" class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][units]">
                                                     </div>
                                                 </div>
                                             <?php endforeach;?>
