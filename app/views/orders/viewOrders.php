@@ -136,11 +136,12 @@
                             </div>
                         </th-->
                         <?php if($user_role == "admin" || $user_role == "super admin"):?>
-        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary" data-width="fit"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
+        				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
                         <?php elseif($user_role == "warehouse"):?>
                             <th>Courier</th>
                         <?php endif;?>
                         <th>Runsheet Day</th>
+                        <th></th>
                         <th nowrap>
                             Select
                             <div class="checkbox checkbox-default">
@@ -266,6 +267,25 @@
                                     <p><select name="courier" class="selectpicker courier" id="courier_<?php echo $co['id'];?>" disabled><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                 </td>
                             <?php endif;?>
+                            <td data-label="Runsheet Day">
+                                <?php if($co['printed'] > 0):?>
+                                    <p>This Order is already on a printed runsheet</p>
+                                <?php else:
+                                    if($co['runsheet_id'] > 0):?>
+                                        <p>This Order is on the runsheet for <strong><?php echo date('l jS \of F',$co['runsheet_day']);?></strong></p>
+                                        <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-orderid="<?php echo $co['id'];?>" data-runsheetid="<?php echo $co['runsheet_id'];?>">Remove It</button></p>
+                                    <?php else:
+                                        $date = strtotime("today");?>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $co['id'];?>" id="runsheet_daydate_<?php echo $co['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
+                                            <input type="hidden" name="runsheet_daydate_value_<?php echo $co['id'];?>" id="runsheet_daydate_value_<?php echo $co['id'];?>" value="<?php echo $date;?>" />
+                                            <div class="input-group-append">
+                                                <span id="runsheet_daydate_calendar_<?php echo $co['id'];?>" class="input-group-text runsheet_calendar"><i class="fad fa-calendar-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    <?php endif;?>
+                                <?php endif;?>
+                            </td>
                             <td><?php echo $invoice; ?><br/><?php echo $ps; ?></td>
         					<td data-label="Select" class="chkbox">
                                 <div class="checkbox checkbox-default">
