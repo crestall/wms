@@ -157,36 +157,25 @@ class pdfController extends Controller
             {
                 if(isset($details['include']))
                 {
-                    $job = $this->productionjob->getJobById($job_id);
                     $order = $this->order->getOrderDetail($order_id);
                     $units = $details['units'];
-                    echo "<pre>",print_r($order),"</pre>"; continue;
+                    //echo "<pre>",print_r($order),"</pre>"; continue;
                     $address_string = "";
-                    if(isset($details['finisher']))
-                    {
-                            $send_to = $job['finisher_name'];
-                            if(!empty($job['finisher_address']))     $address_string .= $job['finisher_address'];
-                            if(!empty($job['finisher_address2']))    $address_string .= "<br>".$job['finisher_address2'];
-                            if(!empty($job['finisher_suburb']))      $address_string .= "<br>".$job['finisher_suburb'];
-                            if(!empty($job['finisher_postcode']))    $address_string .= "<br>".$job['finisher_postcode'];
-                    }
-                    else
-                    {
-                            $send_to = $job['customer_name'];
-                            if(!empty($job['job_address']))     $address_string .= $job['job_address'];
-                            if(!empty($job['job_address2']))    $address_string .= "<br>".$job['job_address2'];
-                            if(!empty($job['job_suburb']))      $address_string .= "<br>".$job['job_suburb'];
-                            if(!empty($job['job_postcode']))    $address_string .= "<br>".$job['job_postcode'];
-                    }
-
+                    $send_to = $order['ship_to'];
+                    if(!empty($order['address']))     $address_string .= $order['address'];
+                    if(!empty($order['address2']))    $address_string .= "<br>".$order['address2'];
+                    if(!empty($order['suburb']))      $address_string .= "<br>".$order['suburb'];
+                    if(!empty($order['postcode']))    $address_string .= "<br>".$order['postcode'];
+                    $items = $this->order->getItemsForOrderNoLocations($order_id);
+                    echo "<pre>",print_r($items),"</pre>"; continue;
                     $table_body .= "
                         <tr>
-                            <td>{$job['job_id']}</td>
+                            <td>{$order['order_number']}</td>
                             <td>$send_to</td>
                             <td>{$job['description']}</td>
                             <td>$address_string</td>
                             <td>$units</td>
-                            <td>".ucwords($job['salesrep_name'])."</td>
+                            <td>Mike Bond</td>
                             <td></td>
                             <td></td>
                         </tr>
