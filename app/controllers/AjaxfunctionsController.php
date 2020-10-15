@@ -1026,7 +1026,7 @@ class ajaxfunctionsController extends Controller
             'error'     =>  false,
             'feedback'  =>  ''
         );
-        echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        //echo "<pre>",print_r($this->request->data),"</pre>";//die();
         $runsheets = array();
         foreach($this->request->data['runsheets'] as $rs)
         {
