@@ -2529,18 +2529,18 @@ class FormController extends Controller {
                         'deliver_to'    => ucwords( trim($r[0]) ),
                         'client_id'     => $client_id,
                         'tracking_email'=> "",
-                        'company_name'  => "",
-                        'address'       => trim($r[1]),
-                        'address_2'     => trim($r[2]),
-                        'suburb'        => trim($r[3]),
-                        'state'         => trim($r[4]),
-                        'postcode'      => trim($r[5]),
-                        //'contact_phone' => trim($r[11]),
+                        'company_name'  => trim($r[1]),
+                        'address'       => trim($r[2]),
+                        'address_2'     => trim($r[3]),
+                        'suburb'        => trim($r[4]),
+                        'state'         => trim($r[5]),
+                        'postcode'      => trim($r[6]),
+                        'contact_phone' => trim($r[7]),
                         'date'          => time(),
                         'country'       => 'AU',
                         'errors'        => 0,
                         'error_string'  => '',
-                        'weight'        => 3.7
+                        'weight'        => 14
                     );
 
                     $orders_items = array();
@@ -2596,7 +2596,7 @@ class FormController extends Controller {
                     $locations = array();
                     $locations[] = $location;
                     $request['items'][] = array(
-                        'item_id'  => 13565,
+                        'item_id'   => 13790,
                         'locations' => $locations
                     );
                     $requests[] = $request;
