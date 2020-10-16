@@ -1370,7 +1370,101 @@
                                 });
                             }
                         });
+                        $( ".runsheet_day" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onSelect: function(selectedDate) {
+                                var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                s = d.valueOf()/1000;
+                                var $tr = $(this).closest('tr');
+                                var ar = $tr.prop('id').split("_");
+                                var job_id = ar[1];
+                                //console.log('input: input#runsheet_daydate_value_'+job_id);
+                                //console.log('s: '+s);
+                                $('input#runsheet_daydate_value_'+job_id).val(s);
+                            }
+                        });
+                        $('.runsheet_calendar').css('cursor', 'pointer').click(function(e){
+                            var $tr = $(this).closest('tr');
+                            var ar = $tr.prop('id').split("_");
+                            var job_id = ar[1];
+                            //console.log('Job ID: '+job_id);
+                            $('input#runsheet_daydate_'+job_id).focus();
+                        });
+                        //add to driver runsheet
+                        $('button#runsheet').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Jobs Selected",
+                                    text: "Please select at least one job to add to the runsheet",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                var rs_count = $('input.select:checked').length
+                                swal({
+                                    title: "Add "+rs_count+" orders to the runsheet?",
+                                    text: "This will add the selected orders to the day's runsheet\n\nor create a new runsheet if one doe not exist",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(addToSheet) {
+                                    if(addToSheet)
+                                    {
+                                        var runsheet_days = [];
+                                        $('input.select').each(function(i,e){
+                                            var order_id = $(this).data('orderid');
+                                            var daydate_value = $('input#runsheet_daydate_value_'+order_id).val();
+                                            if($(this).prop('checked') )
+                                            {
+                                                var ent = {
+                                                    'timestamp' : daydate_value,
+                                                    'order_id'    : order_id
+                                                }
+                                                runsheet_days.push(ent);
+                                            }
+                                        });
+                                        //console.log(runsheet_days);
+                                        /**/
+                                        $.ajax({
+                                            url: '/ajaxfunctions/add-order-runsheets',
+                                            method: 'post',
+                                            data: {
+                                                runsheets: runsheet_days
+                                            },
+                                            dataType: 'json',
+                                            beforeSend: function(){
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Creating/Editing Runsheet...</h1></div>' });
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $.unblockUI();
+                                                    alert('error');
+                                                }
+                                                else
+                                                {
+                                                    location.reload(true);
+                                                    //window.location.href = "http://stackoverflow.com";
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown){
+                                                $.unblockUI();
+                                                document.open();
+                                                document.write(jqXHR.responseText);
+                                                document.close();
+                                            }
+                                        });
+
+                                    }
+                                });
+                            }
+                        });
                     }
+
                 },
                 'order-search':{
                     init: function(){

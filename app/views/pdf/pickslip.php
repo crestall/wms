@@ -36,7 +36,7 @@ foreach($orders_ids as $id):
                 <td><barcode type='ean13' code='<?php echo $od['order_number'];?>' /></td>
             </tr>
             <tr>
-                <td>Date : <?php echo date("d/m/Y");?></td>
+                <td>Printed : <?php echo date("h:i a d/m/Y");?></td>
                 <td>Date Ordered: <?php echo date("d/m/Y", $od['date_ordered']);?></td>
             </tr>
         </table>
@@ -120,8 +120,8 @@ $barcode_html = "<p style='text-align: center'><barcode code='$ids_barcode' type
 
 $html = "
 <div class='pickslip'>
-<h1>3PL Picking Slip Summary</h1>
-<p>Date : ".date("d/m/Y")."</p>
+<h1>FSG Picking Slip Summary</h1>
+<p>Printed : ".date("h:i a d/m/Y")."</p>
 $barcode_html
 <table class='pickslip'>
     <tr>

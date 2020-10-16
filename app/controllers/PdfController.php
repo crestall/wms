@@ -12,49 +12,19 @@ class pdfController extends Controller
     public function beforeAction()
     {
         parent::beforeAction();
-        $this->Security->config("validateForm", false);
-    }
-
-    public function printSolarLabels()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf([
-            'mode'          => 'utf-8',
-            'format'        => 'A4-L',
-            'margin_left'   => 5,
-            'margin_right'  => 5,
-            'margin_top'    => 5,
-            'margin_bottom' => 5
-        ]);
-        $order_ids  = $this->request->data['orders'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/solarlabels.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
-        //$pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printServiceLabels()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf([
-            'mode'          => 'utf-8',
-            'format'        => 'A4-L',
-            'margin_left'   => 5,
-            'margin_right'  => 5,
-            'margin_top'    => 5,
-            'margin_bottom' => 5
-        ]);
-        $order_ids  = $this->request->data['orders'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/servicelabels.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
-        //$pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
+        $action = $this->request->param('action');
+        $post_actions = array(
+            'printRunsheet'
+        );
+        $this->Security->requirePost($post_actions);
+        if(in_array($action, $post_actions))
+        {
+            $this->Security->config("form", [ 'fields' => ['csrf_token']]);
+        }
+        else
+        {
+           $this->Security->config("validateForm", false);
+        }
     }
 
     public function printVicLocalLabels()
@@ -75,41 +45,6 @@ class pdfController extends Controller
         //$stylesheet = file_get_contents(STYLES."local_sticker.css");
         //$pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printSwatchLabels()
-    {
-        $config = array(
-            'paper-size' =>'A4',
-            'metric'    =>'mm',
-            'marginLeft'=>3,
-            'marginTop' =>9,
-            'NX'        =>2,
-            'NY'        =>8,
-            'SpaceX'    =>2,
-            'SpaceY'    =>0,
-            'width'     =>99,
-            'height'    =>33,
-            'font-size' =>10
-        );
-        $pdf = new AddressLabels($config);
-        $pdf->AddPage();
-        $order_ids  = $this->request->data['orders'];
-        foreach($order_ids as $id)
-        {
-            $this->swatch->dispatchSwatch($id);
-            $od = $this->controller->swatch->getSwatchDetail($id);
-            //echo "<pre>",print_r($od),"</pre>";//die();
-            $address_string = ucwords($od['name'])."\n";
-            $address_string .= ucwords($od['address'])."\n";
-            if(!empty($od['address_2']))
-                $address_string .= ucwords($od['address_2'])."\n";
-            $address_string .= strtoupper($od['suburb'])."\n";
-            $address_string .= strtoupper($od['state'])."\n";
-            $address_string .= $od['postcode'];
-            $pdf->Add_Label($address_string);
-        }
         $pdf->Output();
     }
 
@@ -157,6 +92,122 @@ class pdfController extends Controller
         }
     }
 
+    public function printRunsheet()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";//die();
+        // set up the data for the pdf
+        $data = array();
+        if(empty($this->request->data))
+            return $this->error(400);
+        $post_data = $this->request->data;
+        $data['runsheet_id'] = $post_data['runsheet_id'];
+        $driver = ($post_data['driver_id'] > 0)? $this->driver->getDriverName($post_data['driver_id']) : "";
+        $table_body = "";
+        if(isset($post_data['tasks']['jobs']))
+        {
+            foreach($post_data['tasks']['jobs'] as $job_id => $details)
+            {
+                if(isset($details['include']))
+                {
+                    $job = $this->productionjob->getJobById($job_id);
+                    $units = $details['units'];
+                    //echo "<pre>",print_r($job),"</pre>"; continue;
+                    $address_string = "";
+                    if(isset($details['finisher']))
+                    {
+                        $send_to = $job['finisher_name'];
+                        if(!empty($job['finisher_address']))     $address_string .= $job['finisher_address'];
+                        if(!empty($job['finisher_address2']))    $address_string .= "<br>".$job['finisher_address2'];
+                        if(!empty($job['finisher_suburb']))      $address_string .= "<br>".$job['finisher_suburb'];
+                        if(!empty($job['finisher_postcode']))    $address_string .= "<br>".$job['finisher_postcode'];
+                    }
+                    else
+                    {
+                        $send_to = $job['customer_name'];
+                        if(!empty($job['job_address']))     $address_string .= $job['job_address'];
+                        if(!empty($job['job_address2']))    $address_string .= "<br>".$job['job_address2'];
+                        if(!empty($job['job_suburb']))      $address_string .= "<br>".$job['job_suburb'];
+                        if(!empty($job['job_postcode']))    $address_string .= "<br>".$job['job_postcode'];
+                    }
+
+                    $table_body .= "
+                      <tr>
+                        <td>{$job['job_id']}</td>
+                        <td>$send_to</td>
+                        <td>{$job['description']}</td>
+                        <td>$address_string</td>
+                        <td>$units</td>
+                        <td>".ucwords($job['salesrep_name'])."</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    ";
+                    $this->runsheet->runsheetPrinted(array(
+                        'driver_id'     => $post_data['driver_id'],
+                        'units'         => $units,
+                        'runsheet_id'   => $post_data['runsheet_id'],
+                        'task_id'       => $details['task_id']
+                    ));
+                }
+            }
+        }
+        if(isset($post_data['tasks']['orders']))
+        {
+            foreach($post_data['tasks']['orders'] as $order_id => $details)
+            {
+                if(isset($details['include']))
+                {
+                    $order = $this->order->getOrderDetail($order_id);
+                    $units = $details['units'];
+                    //echo "<pre>",print_r($order),"</pre>"; continue;
+                    $address_string = "";
+                    $send_to = $order['ship_to'];
+                    if(!empty($order['address']))     $address_string .= $order['address'];
+                    if(!empty($order['address2']))    $address_string .= "<br>".$order['address2'];
+                    if(!empty($order['suburb']))      $address_string .= "<br>".$order['suburb'];
+                    if(!empty($order['postcode']))    $address_string .= "<br>".$order['postcode'];
+                    $items = $this->order->getItemsForOrderNoLocations($order_id);
+                    //echo "<pre>",print_r($items),"</pre>"; continue;
+                    $description = "";
+                    foreach($items as $item)
+                    {
+                        $description .= "<p>{$item['qty']} of {$item['name']}</p>";
+                    }
+                    $table_body .= "
+                        <tr>
+                            <td>{$order['order_number']}</td>
+                            <td>$send_to</td>
+                            <td>$description</td>
+                            <td>$address_string</td>
+                            <td>$units</td>
+                            <td>Mike Bond</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    ";
+                    $this->runsheet->runsheetPrinted(array(
+                            'driver_id'     => $post_data['driver_id'],
+                            'units'         => $units,
+                            'runsheet_id'   => $post_data['runsheet_id'],
+                            'task_id'       => $details['task_id']
+                    ));
+                }
+            }
+        }
+        //die();
+
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'L']);
+        $pdf->SetDisplayMode('fullpage');
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/runsheet.php', [
+            'driver'        => $driver,
+            'table_body'    => $table_body
+        ]);
+        $stylesheet = file_get_contents(STYLES."runsheets.css");
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
     public function printPickslips()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
@@ -168,36 +219,6 @@ class pdfController extends Controller
         ]);
         $stylesheet = file_get_contents(STYLES."pickslip.css");
         $pdf->SetWatermarkText('REPLACEMENT');
-        $pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printSolarPickslips()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
-        $pdf->SetDisplayMode('fullpage');
-        $order_ids  = $this->request->data['items'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/solarpickslip.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        $stylesheet = file_get_contents(STYLES."pickslip.css");
-        $pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printServicePickslips()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
-        $pdf->SetDisplayMode('fullpage');
-        $order_ids  = $this->request->data['items'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/servicepickslip.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        $stylesheet = file_get_contents(STYLES."pickslip.css");
         $pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
         $pdf->Output();

@@ -137,7 +137,7 @@ class ajaxfunctionsController extends Controller
                     );
                 }
                 //store new client order ids
-                $client_order_id .= (empty($client_order_id))? $this_order['client_order_id'] : ",".$this_order['client_order_id'];
+                $client_order_id .= (empty($client_order_id))? $this_order['client_order_id'] : ", ".$this_order['client_order_id'];
             }
             //echo "<p>$client_order_id</p>";
             //echo "PDFS<pre>",print_r($pdfs),"</pre>"; die();
@@ -1018,6 +1018,30 @@ class ajaxfunctionsController extends Controller
         $request = trim($this->request->query['sku']);
         $current_sku = isset($this->request->query['current_sku'])? trim($this->request->query['current_sku']) : "";
         $this->view->renderBoolean($this->item->checkSkus($request, $current_sku));
+    }
+
+    public function addOrderRunsheets()
+    {
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        //echo "<pre>",print_r($this->request->data),"</pre>";//die();
+        $runsheets = array();
+        foreach($this->request->data['runsheets'] as $rs)
+        {
+            if(!isset($runsheets[$rs['timestamp']]))
+            {
+                $runsheets[$rs['timestamp']]['driver_id'] = 0;
+                $runsheets[$rs['timestamp']]['orders'] = array();
+            }
+            $runsheets[$rs['timestamp']]['orders'][] = $rs['order_id'];
+        }
+        ksort($runsheets, SORT_NUMERIC);
+        //echo "<pre>",print_r($runsheets),"</pre>";die();
+        $this->runsheet->addRunsheet($runsheets);
+        Session::set('feedback', "<h2><i class='far fa-check-circle'></i>Those Runsheet(s) have been created/updated</h2>");
+        $this->view->renderJson($data);
     }
 
     public function addJobRunsheets()

@@ -113,6 +113,28 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#print_runsheet").validate({
+        ignore: {
+            task: true
+        },
+        rules: {
+            task: {
+               required: function (element) {
+                    var boxes = $('.task');
+                    if (boxes.filter(':checked').length == 0) {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        },
+        messages: {
+            task: {
+                required: "Please select at least one job or order to add to the runsheet."
+            }
+        }
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_job, form#job_details_update').validate({
          rules:{
     		status_id:{
