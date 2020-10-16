@@ -103,7 +103,7 @@ class pdfController extends Controller
         $data['runsheet_id'] = $post_data['runsheet_id'];
         $driver = ($post_data['driver_id'] > 0)? $this->driver->getDriverName($post_data['driver_id']) : "";
         $table_body = "";
-        if(count($post_data['tasks']['jobs']))
+        if(isset($post_data['tasks']['jobs']))
         {
             foreach($post_data['tasks']['jobs'] as $job_id => $details)
             {
@@ -151,7 +151,7 @@ class pdfController extends Controller
                 }
             }
         }
-        if(count($post_data['tasks']['orders']))
+        if(isset($post_data['tasks']['orders']))
         {
             foreach($post_data['tasks']['orders'] as $order_id => $details)
             {
