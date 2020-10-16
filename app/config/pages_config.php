@@ -582,101 +582,102 @@ $warehouse = array(
         )
     )
 );
-
+$client = array(
+    'orders'			=>	array(
+        'orders-index'   => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-truck fa-2x"></i>'
+        ),
+        'client-orders' =>  array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
+        ),
+        'order-detail'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'order-tracking'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'add-order' =>  array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+        ),
+        'bulk-upload-orders' =>  array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-upload fa-3x"></i>'
+        )
+    ),
+    'inventory'			=>	array(
+        'inventory-index'   => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-warehouse-alt fa-2x"></i>'
+        ),
+        'client-inventory'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-inventory fa-3x"></i>'
+        ),
+        'expected-shipments'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-shipping-timed fa-3x"></i>'
+        ),
+        'register-new-stock'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-clipboard-check fa-3x"></i>'
+        )
+    ),
+    'reports'           =>  array(
+        'reports-index'   => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-chart-bar fa-2x"></i>'
+        ),
+        'dispatch-report'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+        ),
+        'stock-at-date'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-calendar-alt fa-3x"></i>'
+        ),
+        'returns-report'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
+        ),
+        'stock-movement-report'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
+        ),
+        'stock-movement-summary'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
+        ),
+        'client-dispatch-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'client-stock-movement-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        )
+    )
+);
+//merge and tidy page arrays
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
 $padmin['fsg-contacts'] = array_merge($padmin['fsg-contacts'], $prod['fsg-contacts']);
 
 $prod_admin = array_merge($prod, $padmin);
-
+//return the pages
 return array(
     "PRODUCTION_ADMIN_PAGES"    => $prod_admin,
     "PRODUCTION_PAGES"          => $prod,
     "ADMIN_PAGES"               => $admin ,
     'WAREHOUSE_PAGES'           => $warehouse,
-    'CLIENT_PAGES' => array(
-        'orders'			=>	array(
-            'orders-index'   => true,
-            'default-icon'  => array(
-                'display'   => false,
-                'icon'      => '<i class="fad fa-truck fa-2x"></i>'
-            ),
-			'client-orders' =>  array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
-            ),
-			'order-detail'    => array(
-                'display'   => false,
-                'icon'      => ''
-            ),
-			'order-tracking'    => array(
-                'display'   => false,
-                'icon'      => ''
-            ),
-            'add-order' =>  array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
-            ),
-            'bulk-upload-orders' =>  array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-upload fa-3x"></i>'
-            )
-		),
-		'inventory'			=>	array(
-            'inventory-index'   => true,
-            'default-icon'  => array(
-                'display'   => false,
-                'icon'      => '<i class="fad fa-warehouse-alt fa-2x"></i>'
-            ),
-			'client-inventory'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-inventory fa-3x"></i>'
-            ),
-            'expected-shipments'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-shipping-timed fa-3x"></i>'
-            ),
-            'register-new-stock'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-clipboard-check fa-3x"></i>'
-            )
-		),
-        'reports'           =>  array(
-            'reports-index'   => true,
-            'default-icon'  => array(
-                'display'   => false,
-                'icon'      => '<i class="fad fa-chart-bar fa-2x"></i>'
-            ),
-            'dispatch-report'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
-            ),
-            'stock-at-date'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-calendar-alt fa-3x"></i>'
-            ),
-            'returns-report'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
-            ),
-            'stock-movement-report'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
-            ),
-            'stock-movement-summary'    => array(
-                'display'   => true,
-                'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
-            ),
-            'client-dispatch-report'    => array(
-                'display'   => false,
-                'icon'      => ''
-            ),
-            'client-stock-movement-report'    => array(
-                'display'   => false,
-                'icon'      => ''
-            )
-        )
-    )
+    'CLIENT_PAGES'              => $client
 )
 ?>
