@@ -242,7 +242,7 @@ class RunsheetsController extends Controller
         $resource = "runsheets";
 
         //only for admin
-        Permission::allow('production admin', $resource, "*");
+        Permission::allow(['admin', 'super admin', 'production admin'], $resource, "*");
         //production users
         Permission::allow('production', $resource, array(
             "index",
