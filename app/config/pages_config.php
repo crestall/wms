@@ -672,7 +672,7 @@ $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
 $padmin['fsg-contacts'] = array_merge($padmin['fsg-contacts'], $prod['fsg-contacts']);
 
-$admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets'])
+$admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 
 $prod_admin = array_merge($prod, $padmin);
 //return the pages
