@@ -60,7 +60,7 @@ $padmin = array(
         ),
         'finalise-runsheets'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-check" data-fa-transform="up-2 right-4 grow-2" style="color:black"></i><i class="fal fa-check" data-fa-transform="up-1 right-4" style="color:#66ff33"></i></span></div>'
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-check" data-fa-transform="grow-2" style="color:black"></i><i class="fal fa-check"  style="color:#66ff33"></i></span></div>'
         )
     ),
     'production-settings'   => array(
