@@ -204,6 +204,17 @@ class RunsheetsController extends Controller
         ]);
     }
 
+    public function finaliseRunsheets()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "finalise-runsheets");
+        Config::set('curPage', "finalise-runsheets");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/finaliseRunsheets.php', [
+            'page_title'    =>  "Finalise Runsheets",
+            'pht'           =>  ": Finalise Runsheets"
+        ]);
+    }
+
     public function updateJob()
     {
         if(!isset($this->request->params['args']['job']))
