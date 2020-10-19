@@ -5,7 +5,7 @@ $db = Database::openConnection();
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if(count($runsheets)):?>
-            <?php echo "<pre>",print_r($runsheets),"/<pre>"; die();?>
+            <?php echo "<pre>",print_r($runsheets),"/<pre>"; //die();?>
             <div class="row">
                 <table class="table-striped table-hover" id="finalise_runsheets_table">
                     <thead>
