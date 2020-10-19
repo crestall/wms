@@ -1,5 +1,8 @@
 <?php
-$db = Database::openConnection();
+function getDriverTasks($driver)
+{
+
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
