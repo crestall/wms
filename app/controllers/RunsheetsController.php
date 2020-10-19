@@ -208,7 +208,7 @@ class RunsheetsController extends Controller
     {
         $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
         $runsheets = array();
-        echo "<pre>",print_r($rss),"</pre>";die();
+        //echo "<pre>",print_r($rss),"</pre>";die();
         $di = 0;
         foreach($rss as $rs)
         {
@@ -229,13 +229,13 @@ class RunsheetsController extends Controller
                 );
                 if(!empty($rs['job_id']))
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = array(
-                        'task_id'       => $rs['task_id'],
+                        'task_id'       => $rs['id'],
                         'job_number'    => $rs['job_number'],
                         'order_number'  => 0
                     );
                 if(!empty($rs['order_number']))
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = array(
-                        'task_id'       => $rs['task_id'],
+                        'task_id'       => $rs['id'],
                         'job_number'    => 0,
                         'order_number'  => $rs['order_number']
                     );
@@ -246,13 +246,13 @@ class RunsheetsController extends Controller
                 //echo "<p>Id {$rs['driver_id']} found. It is $tdi</p>";
                 if(!empty($rs['job_id']))
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = array(
-                        'task_id'       => $rs['task_id'],
+                        'task_id'       => $rs['id'],
                         'job_number'    => $rs['job_number'],
                         'order_number'  => 0
                     );
                 if(!empty($rs['order_number']))
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = array(
-                        'task_id'       => $rs['task_id'],
+                        'task_id'       => $rs['id'],
                         'job_number'    => 0,
                         'order_number'  => $rs['order_number']
                     );
