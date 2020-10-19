@@ -206,12 +206,14 @@ class RunsheetsController extends Controller
 
     public function finaliseRunsheets()
     {
+        $runsheets = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
         //render the page
         Config::setJsConfig('curPage', "finalise-runsheets");
         Config::set('curPage', "finalise-runsheets");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/finaliseRunsheets.php', [
             'page_title'    =>  "Finalise Runsheets",
-            'pht'           =>  ": Finalise Runsheets"
+            'pht'           =>  ": Finalise Runsheets",
+            'runsheets'     =>  $runsheets
         ]);
     }
 
