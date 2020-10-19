@@ -12,7 +12,7 @@ function getDriverTasks($driver)
     $html .= "</ol></td>";
     $html .= "<td>
                 <p><button class='btn btn-sm btn-outline-danger remove-tasks'>Remove Selected Tasks</button></p>
-                <p><button class='btn btn-sm btn-outline-warning complete-tasks'>Complete Selected Tasks</button></p> 
+                <p><button class='btn btn-sm btn-outline-fsg complete-tasks'>Complete Selected Tasks</button></p>
             </td>";
     return $html;
 }
@@ -23,7 +23,7 @@ function getDriverTasks($driver)
         <?php if(count($runsheets)):?>
             <?php echo "<pre>",print_r($runsheets),"</pre>"; //die();?>
             <div class="row">
-                <table class="table-striped table-hover" id="finalise_runsheets_table">
+                <table class="table-striped table-hover" id="finalise_runsheets_table" width="80%">
                     <thead>
                         <tr>
                             <th>Runsheet Day</th>
