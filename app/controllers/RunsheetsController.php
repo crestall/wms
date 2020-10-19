@@ -208,8 +208,8 @@ class RunsheetsController extends Controller
     {
         $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
         $runsheets = array();
-        echo "<pre>",print_r($rss),"/<pre>";
-            $di = 0;
+        //echo "<pre>",print_r($rss),"/<pre>";
+        $di = 0;
         foreach($rss as $rs)
         {
             if(!isset($runsheets[$rs['runsheet_day']]))
@@ -221,7 +221,7 @@ class RunsheetsController extends Controller
                 $runsheets[$rs['runsheet_day']]['drivers'] = array();
             if(($tdi = array_search($rs['driver_id'], array_column($runsheets[$rs['runsheet_day']]['drivers'], 'id'))) === false)
             {
-                echo "<p>No id for {$rs['driver_id']} found. Will add it with index $di</p>";
+                //echo "<p>No id for {$rs['driver_id']} found. Will add it with index $di</p>";
                 $runsheets[$rs['runsheet_day']]['drivers'][$di] = array(
                     'id'    => $rs['driver_id'],
                     'name'  => $rs['driver_name'],
@@ -235,14 +235,14 @@ class RunsheetsController extends Controller
             }
             else
             {
-                echo "<p>Id {$rs['driver_id']} found. It is $tdi</p>";
+                //echo "<p>Id {$rs['driver_id']} found. It is $tdi</p>";
                 if(!empty($rs['job_id']))
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $rs['job_number'];
                 if(!empty($rs['order_number']))
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $rs['order_number'];
             }
         }
-        echo "<pre>",print_r($runsheets),"/<pre>";die();
+        //echo "<pre>",print_r($runsheets),"/<pre>";die();
         //render the page
         Config::setJsConfig('curPage', "finalise-runsheets");
         Config::set('curPage', "finalise-runsheets");
