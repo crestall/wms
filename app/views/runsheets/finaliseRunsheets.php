@@ -7,8 +7,8 @@ function getDriverTasks($driver)
     foreach($driver['tasks'] as $task)
     {
         $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number'];
-        $html .- "<div class='border-bottom border-secondary border-bottom-dashed mb-3'>";
-        $html .= "$task_number";
+        $html .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3'>";
+        $html .= $task_number;
         $html .= "</div>";
     }
     $html .= "</td>";
