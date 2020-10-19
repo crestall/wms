@@ -1,7 +1,17 @@
 <?php
 function getDriverTasks($driver)
 {
-
+    $driver_name = ucwords($driver['name']);
+    $html = "<td>$driver_name</td>";
+    $html .= "<td><ol>";
+    foreach($driver['tasks'] as $task)
+    {
+        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number']
+        $html .= "<li>$task_number</li>";
+    }
+    $html .= "</ol></td>";
+    $html .= "<td>Actions</td>";
+    return $html;
 }
 ?>
 <div id="page-wrapper">
@@ -24,15 +34,11 @@ function getDriverTasks($driver)
                             $rows = count($rs['drivers']);?>
                             <tr>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
-                                <td><?php echo ucwords($rs['drivers'][0]['name']);?></td>
-                                <td>Arrange the tasks here</td>
-                                <td>Actions</td>
+                                <?php echo getDriverTasks($rs['drivers'][0]);?>
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr>
-                                    <td><?php echo ucwords($rs['drivers'][$i]['name']);?></td>
-                                    <td>Arrange the tasks here</td>
-                                    <td>Actions</td>
+                                    <?php echo getDriverTasks($rs['drivers'][$i]);?>
                                 </tr>
                             <?php endfor;?>
                         <?php endforeach;?>
