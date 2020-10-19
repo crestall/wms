@@ -12,7 +12,7 @@ function getDriverTasks($driver)
     $html .= "</ol></td>";
     $html .= "<td>
                 <p><button class='btn btn-sm btn-outline-danger remove-tasks'>Remove Selected Tasks</button></p>
-                <p><button class='btn btn-sm btn-outline-fsg complete-tasks'>Complete Selected Tasks</button></p> 
+                <p><button class='btn btn-sm btn-outline-warning complete-tasks'>Complete Selected Tasks</button></p> 
             </td>";
     return $html;
 }
