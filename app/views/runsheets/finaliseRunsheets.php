@@ -3,13 +3,15 @@ function getDriverTasks($driver)
 {
     $driver_name = ucwords($driver['name']);
     $html = "<td>$driver_name</td>";
-    $html .= "<td><ol>";
+    $html .= "<td>";
     foreach($driver['tasks'] as $task)
     {
         $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number'];
-        $html .= "<li>$task_number</li>";
+        $html .- "<div class='border-bottom border-secondary border-bottom-dashed mb-3'>";
+        $html .= "$task_number";
+        $html .= "</div>";
     }
-    $html .= "</ol></td>";
+    $html .= "</td>";
     $html .= "<td>
                 <p><button class='btn btn-sm btn-outline-danger remove-tasks'>Remove Selected Tasks</button></p>
                 <p><button class='btn btn-sm btn-outline-fsg complete-tasks'>Complete Selected Tasks</button></p>
