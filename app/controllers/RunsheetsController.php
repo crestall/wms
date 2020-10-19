@@ -223,17 +223,17 @@ class RunsheetsController extends Controller
                     'tasks' => array()
                 );
                 if(!empty($rs['job_id']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$di] = $rs['job_number'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $rs['job_number'];
                 if(!empty($rs['order_number']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$di] = $rs['order_number'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $rs['order_number'];
                 ++$di;
             }
             else
             {
                 if(!empty($rs['job_id']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi] = $rs['job_number'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $rs['job_number'];
                 if(!empty($rs['order_number']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi] = $rs['order_number'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $rs['order_number'];
             }
         }
 
