@@ -6,7 +6,7 @@ function getDriverTasks($driver)
     $html .= "<td><ol>";
     foreach($driver['tasks'] as $task)
     {
-        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number']
+        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number'];
         $html .= "<li>$task_number</li>";
     }
     $html .= "</ol></td>";
