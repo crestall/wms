@@ -226,7 +226,9 @@ class RunsheetsController extends Controller
                 $runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']]['jobs'][] = $rs['job_number'];
             if(!empty($rs['order_number']))
                 $runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']]['orders'][] = $rs['order_number'];
+            ksort($runsheets[$rs['runsheet_day']]['drivers']);
         }
+
         //render the page
         Config::setJsConfig('curPage', "finalise-runsheets");
         Config::set('curPage', "finalise-runsheets");
