@@ -215,7 +215,7 @@ class RunsheetsController extends Controller
                 $runsheets[$rs['runsheet_day']] = array();
             if(!isset($runsheets[$rs['runsheet_day']]['drivers']))
                 $runsheets[$rs['runsheet_day']]['drivers'] = array();
-            if(($tdi = array_search($rs['driver_id'], array_column($runsheets[$rs['runsheet_day']]['drivers']), 'id')) === false)
+            if(($tdi = array_search($rs['driver_id'], array_column($runsheets[$rs['runsheet_day']]['drivers'], 'id'))) === false)
             {
                 $runsheets[$rs['runsheet_day']]['drivers'][$di] = array(
                     'id'    => $rs['driver_id'],
