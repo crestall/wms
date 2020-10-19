@@ -217,6 +217,7 @@ class RunsheetsController extends Controller
                 $runsheets[$rs['runsheet_day']]['drivers'] = array();
             if(($tdi = array_search($rs['driver_id'], array_column($runsheets[$rs['runsheet_day']]['drivers'], 'id'))) === false)
             {
+                echo "<p>No id for {$rs['driver_id']} found</p>";
                 $runsheets[$rs['runsheet_day']]['drivers'][$di] = array(
                     'id'    => $rs['driver_id'],
                     'name'  => $rs['driver_name'],
@@ -230,13 +231,14 @@ class RunsheetsController extends Controller
             }
             else
             {
+                echo "<p>Id {$rs['driver_id']} found. It is $tdi</p>";
                 if(!empty($rs['job_id']))
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $rs['job_number'];
                 if(!empty($rs['order_number']))
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $rs['order_number'];
             }
         }
-
+        echo "<pre>",print_r($runsheets),"/<pre>";die();
         //render the page
         Config::setJsConfig('curPage', "finalise-runsheets");
         Config::set('curPage', "finalise-runsheets");
