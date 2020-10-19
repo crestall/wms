@@ -209,16 +209,19 @@ class RunsheetsController extends Controller
         $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
         $runsheets = array();
         echo "<pre>",print_r($rss),"/<pre>";
+            $di = 0;
         foreach($rss as $rs)
         {
-            $di = 0;
             if(!isset($runsheets[$rs['runsheet_day']]))
+            {
                 $runsheets[$rs['runsheet_day']] = array();
+                $di = 0;
+            }
             if(!isset($runsheets[$rs['runsheet_day']]['drivers']))
                 $runsheets[$rs['runsheet_day']]['drivers'] = array();
             if(($tdi = array_search($rs['driver_id'], array_column($runsheets[$rs['runsheet_day']]['drivers'], 'id'))) === false)
             {
-                echo "<p>No id for {$rs['driver_id']} found</p>";
+                echo "<p>No id for {$rs['driver_id']} found. Will add it with index $di</p>";
                 $runsheets[$rs['runsheet_day']]['drivers'][$di] = array(
                     'id'    => $rs['driver_id'],
                     'name'  => $rs['driver_name'],
