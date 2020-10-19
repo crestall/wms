@@ -208,10 +208,10 @@ class RunsheetsController extends Controller
     {
         $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
         $runsheets = array();
-            $di = 0;
+
         foreach($rss as $rs)
         {
-
+            $di = 0;
             if(!isset($runsheets[$rs['runsheet_day']]))
                 $runsheets[$rs['runsheet_day']] = array();
             if(!isset($runsheets[$rs['runsheet_day']]['drivers']))
