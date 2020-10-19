@@ -208,7 +208,7 @@ class RunsheetsController extends Controller
     {
         $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
         $runsheets = array();
-        echo "<pre>",print_r($rss),"</pre>";die();
+        //echo "<pre>",print_r($rss),"</pre>";die();
         $di = 0;
         foreach($rss as $rs)
         {
