@@ -206,7 +206,27 @@ class RunsheetsController extends Controller
 
     public function finaliseRunsheets()
     {
-        $runsheets = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
+        $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
+        $runsheets = array();
+        foreach($rss as $rs)
+        {
+            if(!isset($runsheets[$rs['runsheet_day']]))
+                $runsheets[$rs['runsheet_day']] = array();
+            if(!isset($runsheets[$rs['runsheet_day']]['drivers']))
+                $runsheets[$rs['runsheet_day']]['drivers'] = array();
+            if(!isset($runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']]))
+                $runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']] = array(
+                    'name'  => empty($rs['driver_name'])? "" : $rs['driver_name']
+                );
+            if(!isset($runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']]['jobs']))
+                $runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']]['jobs'] = array();
+            if(!isset($runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']]['orders']))
+                $runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']]['orders'] = array();
+            if(!empty($rs['job_id']))
+                $runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']]['jobs'][] = $rs['job_number'];
+            if(!empty($rs['order_number']))
+                $runsheets[$rs['runsheet_day']]['drivers'][$rs['driver_id']]['orders'][] = $rs['order_number'];
+        }
         //render the page
         Config::setJsConfig('curPage', "finalise-runsheets");
         Config::set('curPage', "finalise-runsheets");
