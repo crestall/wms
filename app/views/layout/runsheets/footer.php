@@ -36,7 +36,7 @@
                             var tids = $(this).data('taskids');
                             //var task_ids = tids.split(',');
                             console.log('Runsheet ID: '+runsheet_id);
-                            console.log('Task IDs: '+tids);
+                            console.log('first Task ID: '+tids[0]);
                         })
                     }
                 }
