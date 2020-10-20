@@ -34,11 +34,17 @@
                         $('button.remove-tasks').click(function(e){
                             var runsheet_id = $(this).data('runsheetid');
                             var tids = $(this).data('taskids');
+                            var task_ids = [];
                             //var task_ids = tids.split(',');
-                            console.log('Runsheet ID: '+runsheet_id);
+                            //console.log('Runsheet ID: '+runsheet_id);
                             $.each(tids, function(i, v){
-                                console.log('will check task with id of '+ v)
+                                //console.log('will check task with id of '+ v)
+                                if($('checkbox#select_'+v).prop('checked'))
+                                {
+                                    task_ids.push(v);
+                                }
                             })
+                            console.log('ids to deal with: '+task_ids);
                         })
                     }
                 }
