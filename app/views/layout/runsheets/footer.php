@@ -35,16 +35,25 @@
                             var runsheet_id = $(this).data('runsheetid');
                             var tids = $(this).data('taskids');
                             var task_ids = [];
-                            //var task_ids = tids.split(',');
-                            //console.log('Runsheet ID: '+runsheet_id);
                             $.each(tids, function(i, v){
-                                console.log('input#select_'+v)
                                 if($('input#select_'+v).prop('checked'))
                                 {
                                     task_ids.push(v);
                                 }
                             })
-                            console.log('ids to deal with: '+task_ids);
+                            //console.log('ids to deal with: '+task_ids);
+                            if(!task_ids.length)
+                            {
+                                swal({
+                                    title: "No Tasks Selected",
+                                    text: "No tasks hav been selected to delete",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                console.log('ids to deal with: '+task_ids);
+                            }
                         })
                     }
                 }
