@@ -133,6 +133,22 @@ class Runsheet extends Model{
        return $db->query($query, $params);
     }
 
+    public function removeTasks($task_ids, $runsheet_id)
+    {
+       $db = Database::openConnection();
+       //record runsheet update
+       $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
+        foreach($task_ids as $task_id)
+        {
+            $db->deleteQuery($this->tasks_table, $task_id);
+        }
+        return true;
+    }
+
     public function removeOrder($order_id, $runsheet_id)
     {
        $db = Database::openConnection();

@@ -30,7 +30,17 @@ function getDriverTasks($driver, $runsheet_id)
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if(count($runsheets)):?>
-            <?php echo "<pre>",print_r($runsheets),"</pre>"; //die();?>
+            <?php //echo "<pre>",print_r($runsheets),"</pre>"; //die();?>
+            <div class="row">
+                <div class="col-12">
+                    <?php if(isset($_SESSION['feedback'])) :?>
+                       <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>
+                    <?php endif; ?>
+                    <?php if(isset($_SESSION['errorfeedback'])) :?>
+                       <div class='errorbox'><?php echo Session::getAndDestroy('errorfeedback');?></div>
+                    <?php endif; ?>
+                </div>
+            </div>
             <div class="row">
                 <table class="table-striped table-hover" id="finalise_runsheets_table" width="80%">
                     <thead>

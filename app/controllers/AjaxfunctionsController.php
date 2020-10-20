@@ -975,13 +975,13 @@ class ajaxfunctionsController extends Controller
             'feedback'  =>  ''
         );
         echo "<pre>",print_r($this->request),"</pre>"; die();
-        if($this->runsheet->removeTask($this->request->data['order_id'], $this->request->data['runsheet_id']))
+        if($this->runsheet->removeTasks($this->request->data['task_ids'], $this->request->data['runsheet_id']))
         {
-            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>That order has been removed from the runsheet</h2><p>It can now be added to another</p>");
+            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>The select task(s) been removed from the runsheet</h2><p>It/They can now be added to another</p>");
         }
         else
         {
-            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>There has been a database error</h2><p>The job has not been removed</p>");
+            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>There has been a database error</h2><p>The tasks has not been removed</p>");
         }
         $this->view->renderJson($data);
     }
