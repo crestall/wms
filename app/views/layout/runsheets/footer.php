@@ -36,7 +36,7 @@
                             var tids = $(this).data('taskids');
                             //var task_ids = tids.split(',');
                             console.log('Runsheet ID: '+runsheet_id);
-                            tids.each(function(i){
+                            $.each(tids, function(i, v){
                                 console.log('will check task with id of '+tids[i])
                             })
                         })
