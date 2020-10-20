@@ -34,9 +34,9 @@
                         $('button.remove-tasks').click(function(e){
                             var runsheet_id = $(this).data('runsheetid');
                             var tids = $(this).data('taskids');
-                            var task_ids = tids.split(',');
+                            //var task_ids = tids.split(',');
                             console.log('Runsheet ID: '+runsheet_id);
-                            console.log('Task IDs: '+task_ids);
+                            console.log('Task IDs: '+tids);
                         })
                     }
                 }
