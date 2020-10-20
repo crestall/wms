@@ -53,7 +53,7 @@
                             else
                             {
                                 swal({
-                                    title: "Really remove this job from the runsheet?",
+                                    title: "Really remove this task from the runsheet?",
                                     text: "This cannot be undone",
                                     icon: "warning",
                                     buttons: true,
