@@ -46,7 +46,7 @@ function getDriverTasks($driver, $runsheet_id)
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr>
-                                    <?php echo getDriverTasks($rs['drivers'][$i]);?>
+                                    <?php echo getDriverTasks($rs['drivers'][$i], $rs['runsheet_id']);?>
                                 </tr>
                             <?php endfor;?>
                         <?php endforeach;?>
