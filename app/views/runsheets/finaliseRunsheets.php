@@ -1,5 +1,5 @@
 <?php
-function getDriverTasks($driver)
+function getDriverTasks($driver, $runsheet_id)
 {
     $driver_name = ucwords($driver['name']);
     $html = "<td>$driver_name</td>";
@@ -16,8 +16,8 @@ function getDriverTasks($driver)
     }
     $html .= "</td>";
     $html .= "<td>
-                <p><button class='btn btn-sm btn-outline-danger remove-tasks'>Remove Selected Tasks</button></p>
-                <p><button class='btn btn-sm btn-outline-fsg complete-tasks'>Complete Selected Tasks</button></p>
+                <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id'>Remove Selected Tasks</button></p>
+                <p><button class='btn btn-sm btn-outline-fsg complete-tasks' data-runsheetid='$runsheet_id'>Complete Selected Tasks</button></p>
             </td>";
     return $html;
 }
@@ -42,7 +42,7 @@ function getDriverTasks($driver)
                             $rows = count($rs['drivers']);?>
                             <tr>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
-                                <?php echo getDriverTasks($rs['drivers'][0]);?>
+                                <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id']);?>
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr>
