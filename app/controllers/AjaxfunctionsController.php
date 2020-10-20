@@ -974,7 +974,7 @@ class ajaxfunctionsController extends Controller
             'error'     =>  false,
             'feedback'  =>  ''
         );
-        echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
         if($this->runsheet->removeTasks($this->request->data['task_ids'], $this->request->data['runsheet_id']))
         {
             Session::set('feedback', "<h2><i class='far fa-check-circle'></i>The select task(s) been removed from the runsheet</h2><p>It/They can now be added to another</p>");
