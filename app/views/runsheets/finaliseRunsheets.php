@@ -2,6 +2,7 @@
 function getDriverTasks($driver, $runsheet_id)
 {
     $driver_name = ucwords($driver['name']);
+    $task_ids = array();
     $html = "<td>$driver_name</td>";
     $html .= "<td>";
     foreach($driver['tasks'] as $task)
@@ -13,10 +14,12 @@ function getDriverTasks($driver, $runsheet_id)
                         <label for='select_{$task['task_id']}'>$task_number</label>
                     </div>";
         $html .= "</div>";
+        $task_ids[] = $task['task_id'];
     }
+    $tid_string = implode(",", $task_ids);
     $html .= "</td>";
     $html .= "<td>
-                <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id'>Remove Selected Tasks</button></p>
+                <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id' data-taskids='$tid_string'>Remove Selected Tasks</button></p>
                 <p><button class='btn btn-sm btn-outline-fsg complete-tasks' data-runsheetid='$runsheet_id'>Complete Selected Tasks</button></p>
             </td>";
     return $html;
