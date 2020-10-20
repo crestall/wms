@@ -31,7 +31,10 @@
                 },
                 'finalise-runsheets':{
                     init:function(){
-
+                        $('button.remove-tasks').click(function(e){
+                            var runsheet_id = $(this).data('runsheetid');
+                            console.log('Runsheet ID: '+runsheet_id);
+                        })
                     }
                 }
             }
