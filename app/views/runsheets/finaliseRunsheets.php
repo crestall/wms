@@ -16,10 +16,11 @@ function getDriverTasks($driver, $runsheet_id)
         $html .= "</div>";
         $task_ids[] = $task['task_id'];
     }
-    $tid_string = implode(",", $task_ids);
+    //$tid_string = implode(",", $task_ids);
+    $tids = htmlspecialchars(json_encode($task_ids), ENT_QUOTES, 'UTF-8')
     $html .= "</td>";
     $html .= "<td>
-                <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id' data-taskids='$tid_string'>Remove Selected Tasks</button></p>
+                <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Selected Tasks</button></p>
                 <p><button class='btn btn-sm btn-outline-fsg complete-tasks' data-runsheetid='$runsheet_id'>Complete Selected Tasks</button></p>
             </td>";
     return $html;
