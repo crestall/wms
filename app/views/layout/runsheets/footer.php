@@ -38,8 +38,8 @@
                             //var task_ids = tids.split(',');
                             //console.log('Runsheet ID: '+runsheet_id);
                             $.each(tids, function(i, v){
-                                //console.log('will check task with id of '+ v)
-                                if($('checkbox#select_'+v).prop('checked'))
+                                console.log('input#select_'+v)
+                                if($('input#select_'+v).prop('checked'))
                                 {
                                     task_ids.push(v);
                                 }
