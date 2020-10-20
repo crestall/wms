@@ -46,15 +46,55 @@
                             {
                                 swal({
                                     title: "No Tasks Selected",
-                                    text: "No tasks hav been selected to delete",
+                                    text: "No tasks have been selected to delete",
                                     icon: "error"
                                 });
                             }
                             else
                             {
-                                console.log('ids to deal with: '+task_ids);
+                                swal({
+                                    title: "Really remove this job from the runsheet?",
+                                    text: "This cannot be undone",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(removeTask) {
+                                    if(removeTask)
+                                    {
+                                        $.ajax({
+                                            url: '/ajaxfunctions/remove-tasks-from-runsheet',
+                                            method: 'post',
+                                            data: {
+                                                task_ids: task_ids,
+                                                runsheet_id: runsheet_id
+                                            },
+                                            dataType: 'json',
+                                            beforeSend: function(){
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing From Runsheet...</h1></div>' });
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $.unblockUI();
+                                                    alert('error');
+                                                }
+                                                else
+                                                {
+                                                    location.reload(true);
+                                                    //window.location.href = "http://stackoverflow.com";
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown){
+                                                $.unblockUI();
+                                                document.open();
+                                                document.write(jqXHR.responseText);
+                                                document.close();
+                                            }
+                                        });
+                                    }
+                                });
                             }
-                        })
+                        });
                     }
                 }
             }
