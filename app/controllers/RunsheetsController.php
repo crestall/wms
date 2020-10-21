@@ -24,6 +24,18 @@ class RunsheetsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function runsheetReport()
+    {
+
+        //render the page
+        Config::setJsConfig('curPage', "runsheet-report");
+        Config::set('curPage', "runsheet-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/completeRunsheets.php', [
+            'page_title'    =>  "Completed Runsheets",
+            'pht'           =>  ": Completed Runsheets"
+        ]);
+    }
+
     public function runsheetSearch()
     {
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",[
@@ -74,7 +86,7 @@ class RunsheetsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "job-search-results");
         Config::set('curPage', "job-search-results");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/jobSearchResults.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'jobs/jobSearchResults.php', [
             'page_title'    =>  "Search Results",
             'pht'           =>  ": Job Search Results",
             'form'          =>  $form,
