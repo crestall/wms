@@ -77,7 +77,7 @@ class Allocations{
                         if( $total_available < $pick_count)
                         {
                             $item_error = true;
-                            $item_error_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to create/update this order</li>";
+                            $item_error_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to create/update this order. $pick_count required, but only $total_available are available</li>";
                             //die("$total_available - There are insufficient quantities of $item_name to be able to create/update this order");
                         }
                         else
