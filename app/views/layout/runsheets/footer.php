@@ -31,6 +31,20 @@
                 },
                 'finalise-runsheets':{
                     init:function(){
+                        $('button.complete-tasks').click(function(e){
+                            var runsheet_id = $(this).data('runsheetid');
+                            var tids = $(this).data('taskids');
+                            var task_ids = [];
+                            $.each(tids, function(i, v){
+                                if($('input#select_'+v).prop('checked'))
+                                {
+                                    task_ids.push(v);
+                                }
+                            })
+                            console.log('ids to deal with: '+task_ids);
+                        });
+
+
                         $('button.remove-tasks').click(function(e){
                             var runsheet_id = $(this).data('runsheetid');
                             var tids = $(this).data('taskids');

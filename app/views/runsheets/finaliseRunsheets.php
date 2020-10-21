@@ -21,7 +21,7 @@ function getDriverTasks($driver, $runsheet_id)
     $html .= "</td>";
     $html .= "<td>
                 <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Selected Tasks</button></p>
-                <p><button class='btn btn-sm btn-outline-fsg complete-tasks' data-runsheetid='$runsheet_id'>Complete Selected Tasks</button></p>
+                <p><button class='btn btn-sm btn-outline-fsg complete-tasks' data-runsheetid='$runsheet_id' data-taskids='$tids'>Complete Selected Tasks</button></p>
             </td>";
     return $html;
 }
