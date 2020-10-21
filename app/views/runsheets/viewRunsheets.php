@@ -1,5 +1,5 @@
 <?php
-$db = Database::openConnection();
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
