@@ -52,7 +52,47 @@
                             }
                             else
                             {
-
+                                swal({
+                                    title: "Really complete task(s)?",
+                                    text: "This cannot be undone",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(completeTask) {
+                                    if(completeTask)
+                                    {
+                                        $.ajax({
+                                            url: '/ajaxfunctions/complete-runsheet-tasks',
+                                            method: 'post',
+                                            data: {
+                                                task_ids: task_ids,
+                                                runsheet_id: runsheet_id
+                                            },
+                                            dataType: 'json',
+                                            beforeSend: function(){
+                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing From Runsheet...</h1></div>' });
+                                            },
+                                            success: function(d){
+                                                if(d.error)
+                                                {
+                                                    $.unblockUI();
+                                                    alert('error');
+                                                }
+                                                else
+                                                {
+                                                    location.reload(true);
+                                                    //window.location.href = "http://stackoverflow.com";
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown){
+                                                $.unblockUI();
+                                                document.open();
+                                                document.write(jqXHR.responseText);
+                                                document.close();
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         });
 
