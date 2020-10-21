@@ -5,6 +5,11 @@
         <script>
             //the actions for each page
             var actions = {
+                'runsheet-report':{
+                    init: function(){
+
+                    }
+                },
                 'view-runsheets':{
                     init: function(){
                         dataTable.init($('table#runsheets_table'), {
