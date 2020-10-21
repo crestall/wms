@@ -42,6 +42,18 @@
                                 }
                             })
                             console.log('ids to deal with: '+task_ids);
+                            if(!task_ids.length)
+                            {
+                                swal({
+                                    title: "No Tasks Selected",
+                                    text: "No tasks have been selected to complete",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+
+                            }
                         });
 
 
