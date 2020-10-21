@@ -4,6 +4,44 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        
+        <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+            <div class="form-group">
+                <label>Filter By Driver</label>
+                <select id="driver_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">All Drivers</option><?php echo $this->controller->driver->getSelectDrivers($driver_id);?></select>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+            <div class="form-group">
+                <label>Filter By Courier</label>
+                <select id="courier_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="-1">All Couriers</option><?php echo $this->controller->courier->getSelectCouriers($courier_id, true, false);?></select>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+            <div class="form-group">
+                <label>Filter By State</label>
+                <select id="state_selector" class="form-control selectpicker" data-style="btn-outline-secondary">
+                    <option value="0">All States</option>
+                    <?php
+                    foreach($states as $s)
+                    {
+                        echo "<option";
+                        if($s == $state)
+                        {
+                            echo " selected";
+                        }
+                        echo ">$s</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+            <div class="form-group">
+                <label>Search</label>
+                <input type="text" class="form-control" id="table_searcher" />
+            </div>
+        </div>
+    </div>
     </div>
 </div>
