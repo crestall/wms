@@ -968,6 +968,42 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function removeTasksFromRunsheet()
+    {
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        if($this->runsheet->removeTasks($this->request->data['task_ids'], $this->request->data['runsheet_id']))
+        {
+            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>The select task(s) have been removed from the runsheet</h2><p>It/They can now be added to another</p>");
+        }
+        else
+        {
+            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>There has been a database error</h2><p>The tasks has not been removed</p>");
+        }
+        $this->view->renderJson($data);
+    }
+
+    public function completeRunsheetTasks()
+    {
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        if($this->runsheet->completeTasks($this->request->data['task_ids'], $this->request->data['runsheet_id']))
+        {
+            Session::set('feedback', "<h2><i class='far fa-check-circle'></i>The select task(s) have been marked as complete</h2>");
+        }
+        else
+        {
+            Session::set('errorfeedback',"<h2><i class='far fa-times-circle'></i>There has been a database error</h2><p>The tasks has not been completed</p>");
+        }
+        $this->view->renderJson($data);
+    }
+
     public function updateFreightCharge()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();

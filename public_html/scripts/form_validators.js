@@ -118,6 +118,9 @@ $(document).ready(function() {
             task: true
         },
         rules: {
+            driver_id:{
+                notNone: true
+            },
             task: {
                required: function (element) {
                     var boxes = $('.task');
@@ -131,6 +134,9 @@ $(document).ready(function() {
         messages: {
             task: {
                 required: "Please select at least one job or order to add to the runsheet."
+            },
+            driver_id:{
+                notNone: "A driver is required"
             }
         }
 	});

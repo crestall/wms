@@ -15,6 +15,8 @@ class Database {
 	//private $password = Config::get('DB_PASS');
 	private $pdo = NULL;
 	private $stmt;
+    private $output;
+
     private static $database = null;
 
 	private $options = array(
@@ -302,7 +304,13 @@ class Database {
 			'id'	=>	$id
 		);
 		//print_r($params); die();
-		$this->query("UPDATE `$table` SET `$field` = :field WHERE `$idfield` = :id", $params);
+        $this->query("UPDATE `$table` SET `$field` = :field WHERE `$idfield` = :id", $params);
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "UPDATEDATABASEFIELD ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $this->output .= "UPDATE `$table` SET `$field` = :field WHERE `$idfield` = :id".PHP_EOL;
+        $this->output .= print_r($params, true).PHP_EOL;
+        $this->recordOutput('database_logs/log');
 		return $this->stmt->rowCount();
    }
 
@@ -334,6 +342,12 @@ class Database {
 		  $q .= " WHERE `$idfield` = :id";
 		  $params['id'] = $id;
 		  $this->query($q, $params);
+          $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "UPDATEDATABASEFIELDS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $this->output .= $q.PHP_EOL;
+        $this->output .= print_r($params, true).PHP_EOL;
+        $this->recordOutput('database_logs/log');
 		  return $this->stmt->rowCount();
    }
 
@@ -466,5 +480,16 @@ class Database {
     public function countRows()
     {
         return $this->stmt->rowCount();
+    }
+
+    /**
+     * Logs Database Activity to help track errors
+     *
+     * @access private
+     *
+     */
+    private function recordOutput($file)
+    {
+        Logger::logDatabaseActivity($file, $this->output);
     }
 }

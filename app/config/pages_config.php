@@ -57,6 +57,10 @@ $padmin = array(
         'print-runsheet'    => array(
             'display'   => false,
             'icon'      => ""
+        ),
+        'finalise-runsheets'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-check" data-fa-transform="right-2 shrink-2" style="color:#66ff33"></i></span></div>'
         )
     ),
     'production-settings'   => array(

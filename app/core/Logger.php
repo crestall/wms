@@ -61,4 +61,11 @@ class Logger{
         $logfile = APP . "logs/".$file;
         file_put_contents($logfile, $content, FILE_APPEND);
     }
+    // for the database error tracking
+    public static function logDatabaseActivity($file, $content)
+    {
+        $file .= date('Ymd').'.txt';
+        $logfile = APP . "logs/".$file;
+        file_put_contents($logfile, $content, FILE_APPEND);
+    }
  }

@@ -132,9 +132,12 @@
             {
                 Session::set('showfeedback', true);
                 $o_values = array(
-                    'status_id'			=>	$this->controller->order->fulfilled_id,
+                    //'status_id'			=>	$this->controller->order->fulfilled_id,
+                    'status_id'			=>	4,
                     'date_fulfilled'	=>	time()
                 );
+                $this->output .= "Updating Orders for order ID: $id".PHP_EOL;
+                $this->output .= print_r($o_values, true).PHP_EOL;
                 $db->updateDatabaseFields('orders', $o_values, $id);
                 //order is now fulfilled, reduce stock
                 $items = $this->controller->order->getItemsForOrder($id);

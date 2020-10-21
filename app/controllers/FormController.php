@@ -2332,159 +2332,6 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."orders/add-serials/order=".$this->request->data['order_id']);
     }
 
-    public function procEditInstall()
-    {
-        //echo "<pre>",print_r($this->request->data),"</pre>";die();
-        $post_data = array();
-        foreach($this->request->data as $field => $value)
-        {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
-        }
-        $post_data['install_date'] = $post_data['date'];
-        unset($post_data['date']);
-        if($team_id == 0)
-        {
-            Form::setError('team_id', 'Please select a team');
-        }
-        if(!$this->dataSubbed($work_order))
-        {
-            Form::setError('work_order', 'A work order number is required');
-        }
-        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
-        {
-            Session::set('value_array', $_POST);
-            Session::set('error_array', Form::getErrorArray());
-        }
-        else
-        {
-            //all good, add details
-            //echo "<pre>Good",print_r($post_data),"</pre>"; die();
-            $vals = array(
-                "team_id"       => $team_id,
-                'work_order'    => $work_order,
-                'customer_name' => NULL,
-                'install_date'  => $date_value,
-                'address'       => $address,
-                'address_2'     => NULL,
-                'suburb'        => $suburb,
-                'state'         => $state,
-                'country'       => 'AU',
-                'client_id'     => $client_id,
-                'type_id'       => $type_id
-            );
-            if($this->dataSubbed($customer_name))
-                $vals['customer_name'] = $customer_name;
-            if($this->dataSubbed($address2))
-                $vals['address_2'] = $address2;
-            Session::set('feedback', "Those details have been updated");
-            $this->solarorder->updateOrderValues($vals, $order_id);
-        }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/update-details/id=".$order_id);
-    }
-
-    public function procAddSolarInstall()
-    {
-        //echo "<pre>",print_r($this->request->data),"</pre>";//die();
-        $post_data = array();
-        foreach($this->request->data as $field => $value)
-        {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
-        }
-        $items = array();
-        if($panel_id > 0)
-        {
-            $items[] = array(
-                'id'    => $panel_id,
-                'qty'   => $panel_qty
-            );
-        }
-        if($inverter_id > 0)
-        {
-            $items[] = array(
-                'id'    => $inverter_id,
-                'qty'   => $inverter_qty
-            );
-        }
-        if(isset($this->request->data['consumables']))
-            $items = array_merge($items, $this->request->data['consumables']);
-        if( isset($this->request->data['items'][0]['qty']) )
-        {
-            $items = array_merge($items, $this->request->data['items']);
-        }
-        //echo "<pre>",print_r($items),"</pre>"; die();
-        $orders_items = array();
-        foreach($items as $item)
-        {
-            if($item['qty'] == 0)
-            {
-                continue;
-            }
-            $array = array(
-                'qty'           => $item['qty'],
-                'id'            => $item['id'],
-                'whole_pallet'  => false
-            );
-            $orders_items[] = $array;
-        }
-        $the_items = array(
-            0 => $orders_items
-        );
-        $oitems = $this->allocations->createSolarOrderItemsArray($the_items, 0, false);
-        foreach($oitems[0] as $item)//there is only one order
-        {
-            if($item['import_error'])
-            {
-                Form::setError('items', $item['import_error_string']);
-            }
-        }
-        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
-        {
-            Session::set('value_array', $_POST);
-            Session::set('error_array', Form::getErrorArray());
-        }
-        else
-        {
-            //echo "<pre>",print_r($oitems),"</pre>"; die();
-            //all good, add details
-            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $order_id = $this->solarorder->addOrder($post_data, $oitems);
-            Session::set('feedback', "An order with id: <strong>$order_id</strong> has been created");
-        }
-        return $this->redirector->to(PUBLIC_ROOT."solar-jobs/add-solar-install");
-    }
-
-    public function printSwatchLabels()
-    {
-        //echo "<pre>",print_r($this->request->data),"</pre>";die();
-        $labels = new AddressLabels;
-        $config['layout'] = "name<br />address_1<br />address_2<br />suburb<br />state<br />postcode";
-        //$config['format'] = 'html';
-        $labels->initialize($config);
-        $addresses = array();
-        foreach($this->request->data['orders'] as $id)
-        {
-            $od = $this->swatch->getSwatchDetail($id);
-            $addresses[] = array(
-                "name"      => ucwords($od['name']),
-                "address_1" => ucwords($od['address']),
-                "address_2" => ucwords($od['address_2']),
-                "suburb"    => strtoupper($od['suburb']),
-                "state"     => strtoupper($od['state']),
-                "postcode"  => $od['postcode']
-            );
-        }
-        $labels->output($addresses);
-    }
-
     public function procBulkOrderAdd()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
@@ -2529,18 +2376,18 @@ class FormController extends Controller {
                         'deliver_to'    => ucwords( trim($r[0]) ),
                         'client_id'     => $client_id,
                         'tracking_email'=> "",
-                        'company_name'  => "",
-                        'address'       => trim($r[1]),
-                        'address_2'     => trim($r[2]),
-                        'suburb'        => trim($r[3]),
-                        'state'         => trim($r[4]),
-                        'postcode'      => trim($r[5]),
-                        //'contact_phone' => trim($r[11]),
+                        'company_name'  => trim($r[1]),
+                        'address'       => trim($r[2]),
+                        'address_2'     => trim($r[3]),
+                        'suburb'        => trim($r[4]),
+                        'state'         => trim($r[5]),
+                        'postcode'      => trim($r[6]),
+                        'contact_phone' => trim($r[7]),
                         'date'          => time(),
                         'country'       => 'AU',
                         'errors'        => 0,
                         'error_string'  => '',
-                        'weight'        => 3.7
+                        'weight'        => 14
                     );
 
                     $orders_items = array();
@@ -2596,7 +2443,7 @@ class FormController extends Controller {
                     $locations = array();
                     $locations[] = $location;
                     $request['items'][] = array(
-                        'item_id'  => 13565,
+                        'item_id'   => 13790,
                         'locations' => $locations
                     );
                     $requests[] = $request;
