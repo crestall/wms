@@ -1,5 +1,5 @@
 <?php
-
+$date_filter = "Completed";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
