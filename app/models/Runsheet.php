@@ -33,7 +33,7 @@ class Runsheet extends Model{
         );
         $args = array_merge($defaults, $args);
         extract($args);
-        echo "<pre>",print_r($args),"</pre>";//die();
+        //echo "<pre>",print_r($args),"</pre>";//die();
         $q = $this->getRunsheetQuery();
         $q .= "
             WHERE (rst.completed = 1 AND rs.updated_date >= $from AND rs.updated_date <= $to)
@@ -45,7 +45,9 @@ class Runsheet extends Model{
             $q .= " AND( pj.customer_id = $customer_id )";
         if($driver_id > 0)
             $q .= " AND( rst.driver_id = $driver_id)";
-        echo $q; die();
+        $q .= " ORDER BY rs.runsheet_day DESC";
+        //echo $q; die();
+        return $db->queryData($q);
     }
 
     public function getRunsheetsForDisplay($completed = false, $printed = false)
