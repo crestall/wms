@@ -21,10 +21,9 @@ class Runsheet extends Model{
     public $table = "runsheets";
     public $tasks_table = "runsheet_tasks";
 
-    public function getCompletedRunsheets()
+    public function getCompletedRunsheets($args)
     {
         $db = Database::openConnection();
-        $args = func_get_args();
         $defaults = array(
             'from'          => strtotime('monday this week'),
             'to'            => time(),
