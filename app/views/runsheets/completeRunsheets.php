@@ -31,5 +31,17 @@ $date_filter = "Completed";
                 </div>
             </div>
         </div>
+        <?php if(count($runsheets)):?>
+            <?php echo "<pre>",print_r($runsheets),"</pre>";?>
+        <?php else:?>
+            <div class="row">
+                <div class="col-12">
+                    <div class="errorbox">
+                        <h2><i class="fas fa-exclamation-triangle"></i> No Completed Runsheets Listed</h2>
+                        <p>Either there are no completed runsheets or you need to remove some filters</p>
+                    </div>
+                </div>
+            </div>
+        <?php endif;?>
     </div>
 </div>
