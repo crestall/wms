@@ -4,8 +4,8 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
         <div class="row">
-            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
                     <label>Filter By Driver</label>
