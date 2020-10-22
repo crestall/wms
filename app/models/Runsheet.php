@@ -42,7 +42,7 @@ class Runsheet extends Model{
         if($client_id > 0)
             $q .= " AND( o.client_id = $client_id )";
         if($customer_id > 0)
-            $q .= " AND( rst.customer_id = $customer_id )";
+            $q .= " AND( pj.customer_id = $customer_id )";
         if($driver_id > 0)
             $q .= " AND( rst.driver_id = $driver_id)";
         echo $q; die();
