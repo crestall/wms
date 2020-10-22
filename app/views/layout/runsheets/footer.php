@@ -12,7 +12,7 @@
                         if($('#date_from_value').val())
                             url += "/from="+$('#date_from_value').val();
                         if($('#date_to_value').val())
-                            url += "/from="+$('#date_to_value').val();
+                            url += "/to="+$('#date_to_value').val();
                         if($('#client_id').val() > 0)
                             url += "/client="+$('#client_id').val();
                         if($('#customer_id').val() > 0)
