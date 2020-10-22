@@ -48,7 +48,8 @@ class RunsheetsController extends Controller
             'client_id'     =>  $client_id,
             'customer_id'   =>  $customer_id,
             'from'          =>  $from,
-            'to'            =>  $to
+            'to'            =>  $to,
+            'runsheets'     =>  $runsheets
         ]);
     }
 
