@@ -9,19 +9,19 @@ $date_filter = "Completed";
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
                     <label>Filter By Driver</label>
-                    <select id="driver_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">All Drivers</option><?php echo $this->controller->driver->getSelectDrivers($driver_id);?></select>
+                    <select id="driver_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">All Drivers</option><?php echo $this->controller->driver->getSelectDrivers($driver_id);?></select>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
                     <label>Filter By Client</label>
-                    <select id="client_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">All Clients</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                    <select id="client_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">All Clients</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
                     <label>Filter By Customer</label>
-                    <select id="customer_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">All Customers</option><?php echo $this->controller->productioncustomer->getSelectCustomers($customer_id);?></select>
+                    <select id="customer_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">All Customers</option><?php echo $this->controller->productioncustomer->getSelectCustomers($customer_id);?></select>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
