@@ -6,9 +6,9 @@
             //the actions for each page
             var actions = {
                 'common':{
-                    generateURL: function(base)
+                    generateURL: function(url)
                     {
-                        var url = base;
+                        //var url = base;
                         if($('#date_from_value').val())
                             url += "/from="+$('#date_from_value').val();
                         if($('#date_to_value').val())
