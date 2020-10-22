@@ -34,7 +34,7 @@ class Runsheet extends Model{
         );
         $args = array_merge($args, $defaults);
         extract($args);
-        //echo "<pre>",print_r($args),"</pre>";die();
+        echo "<pre>",print_r($args),"</pre>";//die();
         $q = $this->getRunsheetQuery();
         $q .= "
             WHERE (rst.completed = 1 AND rs.updated_date >= $from AND rs.updated_date <= $to)
