@@ -31,6 +31,7 @@ class RunsheetsController extends Controller
         $customer_id = (isset($this->request->params['args']['customer']))? $this->request->params['args']['customer'] : 0;
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $runsheets = $this->runsheet->getCompletedRunsheets();
         //render the page
         Config::setJsConfig('curPage', "runsheet-report");
         Config::set('curPage', "runsheet-report");
