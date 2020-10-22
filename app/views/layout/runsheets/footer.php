@@ -5,17 +5,35 @@
         <script>
             //the actions for each page
             var actions = {
+                'common':{
+                    generateURL: function(base)
+                    {
+                        var url = base;
+                        if($('#date_from_value').val())
+                            url += "/from="+$('#date_from_value').val();
+                        if($('#date_to_value').val())
+                            url += "/from="+$('#date_to_value').val();
+                        if($('#client_id').val() > 0)
+                            url += "/client="+$('#client_id').val();
+                        if($('#customer_id').val() > 0)
+                            url += "/customer="+$('#customer_id').val();
+                        if($('#driver_id').val() > 0)
+                            url += "/driver="+$('#driver_id').val();
+                        window.location.href = url;
+                    }
+                },
                 'runsheet-report':{
                     init: function(){
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
-                            var from = $('#date_from_value').val();
-                            var to = $('#date_to_value').val();
-                            window.location.href = "/runsheets/runsheet-report/from="+from+"/to="+to;
+                            actions['common']['generateURL']('runsheets/runsheet-report');
                         });
-
+                        $('select#client_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
+                            actions['common']['generateURL']('runsheets/runsheet-report');
+                        });
                     }
                 },
                 'view-runsheets':{
