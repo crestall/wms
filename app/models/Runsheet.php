@@ -40,6 +40,12 @@ class Runsheet extends Model{
             WHERE (rst.completed = 1 AND rs.updated_date >= $from AND rs.updated_date <= $to)
         ";
 
+        if($client_id > 0)
+            $q .= " AND( o.client_id = $client_id)";
+        if($customer_id > 0)
+            $q .= " AND( rst.customer_id = $customer_id)";
+        if($driver_id > 0)
+            $q .= " AND( rst.driver_id = $driver_id)";
         echo $q; die();
     }
 
