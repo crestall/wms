@@ -31,7 +31,7 @@ class Runsheet extends Model{
             'customer_id'   => 0,
             'driver_id'     => 0,
         );
-        $args = array_merge($args, $defaults);
+        $args = array_merge($defaults, $args);
         extract($args);
         echo "<pre>",print_r($args),"</pre>";//die();
         $q = $this->getRunsheetQuery();
