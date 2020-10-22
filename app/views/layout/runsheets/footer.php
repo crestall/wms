@@ -13,11 +13,11 @@
                             url += "/from="+$('#date_from_value').val();
                         if($('#date_to_value').val())
                             url += "/to="+$('#date_to_value').val();
-                        if($('#client_id').val() > 0)
+                        if($('#client_selector').val() > 0)
                             url += "/client="+$('#client_id').val();
-                        if($('#customer_id').val() > 0)
+                        if($('#customer_selector').val() > 0)
                             url += "/customer="+$('#customer_id').val();
-                        if($('#driver_id').val() > 0)
+                        if($('#driver_selector').val() > 0)
                             url += "/driver="+$('#driver_id').val();
                         window.location.href = url;
                     }
