@@ -14,11 +14,11 @@
                         if($('#date_to_value').val())
                             url += "/to="+$('#date_to_value').val();
                         if($('#client_selector').val() > 0)
-                            url += "/client="+$('#client_id').val();
+                            url += "/client="+$('#client_selector').val();
                         if($('#customer_selector').val() > 0)
-                            url += "/customer="+$('#customer_id').val();
+                            url += "/customer="+$('#customer_selector').val();
                         if($('#driver_selector').val() > 0)
-                            url += "/driver="+$('#driver_id').val();
+                            url += "/driver="+$('#driver_selector').val();
                         window.location.href = url;
                     }
                 },
