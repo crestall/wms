@@ -37,7 +37,7 @@ class Runsheet extends Model{
         //echo "<pre>",print_r($args),"</pre>";die();
         $q = $this->getRunsheetQuery();
         $q .= "
-            WHERE rst.complete = 1
+            WHERE (rst.completed = 1 AND rs.updated_date >= $from AND rs.updated_date <= $to)
         ";
 
         echo $q; die();
