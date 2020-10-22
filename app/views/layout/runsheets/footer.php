@@ -7,6 +7,14 @@
             var actions = {
                 'runsheet-report':{
                     init: function(){
+                        datePicker.betweenDates();
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            window.location.href = "/runsheets/runsheet-report/from="+from+"/to="+to;
+                        });
 
                     }
                 },
