@@ -27,7 +27,7 @@ $date_filter = "Completed";
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
                     <label style="width:100%">&nbsp;</label>
-                    <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
+                    <button id="csv_download" class="btn btn-outline-success" style="width:100%"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
                 </div>
             </div>
         </div>
