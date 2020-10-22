@@ -27,13 +27,17 @@ class RunsheetsController extends Controller
     public function runsheetReport()
     {
         $driver_id = 0;
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         //render the page
         Config::setJsConfig('curPage', "runsheet-report");
         Config::set('curPage', "runsheet-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/completeRunsheets.php', [
             'page_title'    =>  "Completed Runsheets",
             'pht'           =>  ": Completed Runsheets",
-            'driver_id'     =>  $driver_id
+            'driver_id'     =>  $driver_id,
+            'from'          =>  $from,
+            'to'            =>  $to
         ]);
     }
 
