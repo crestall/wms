@@ -34,7 +34,13 @@ class Runsheet extends Model{
         );
         $args = array_merge($args, $defaults);
         extract($args);
-        echo "<pre>",print_r($args),"</pre>";die();
+        //echo "<pre>",print_r($args),"</pre>";die();
+        $q = $this->getRunsheetQuery();
+        $q .= "
+            WHERE rst.complete = 1
+        ";
+
+        echo $q; die();
     }
 
     public function getRunsheetsForDisplay($completed = false, $printed = false)
