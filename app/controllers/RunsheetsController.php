@@ -26,7 +26,8 @@ class RunsheetsController extends Controller
 
     public function runsheetReport()
     {
-        $driver_id = 0;
+        $driver_id = (isset($this->request->params['args']['driver']))? $this->request->params['args']['driver'] : 0;
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         //render the page
@@ -36,6 +37,7 @@ class RunsheetsController extends Controller
             'page_title'    =>  "Completed Runsheets",
             'pht'           =>  ": Completed Runsheets",
             'driver_id'     =>  $driver_id,
+            'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to
         ]);
