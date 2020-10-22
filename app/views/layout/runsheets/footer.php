@@ -28,15 +28,15 @@
                         $('button#change_dates').click(function(e){
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
-                            actions['common']['generateURL']('runsheets/runsheet-report');
+                            actions['common']['generateURL']('/runsheets/runsheet-report');
                         });
                         $('select#client_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
-                            actions['common']['generateURL']('runsheets/runsheet-report');
+                            actions['common']['generateURL']('/runsheets/runsheet-report');
                         });
                         $('select#driver_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
-                            actions['common']['generateURL']('runsheets/runsheet-report');
+                            actions['common']['generateURL']('/runsheets/runsheet-report');
                         });
                     }
                 },
