@@ -61,7 +61,7 @@ $date_filter = "Completed";
                             $rows = count($rs['drivers']);?>
                             <tr>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
-
+                                <td rowspan="<?php echo $rows;?>"><?php echo date('d/m/Y', $rs['updated_date'] );?></td>
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr></tr>
