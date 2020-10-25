@@ -290,7 +290,8 @@ class RunsheetsController extends Controller
                 'job_number'    => 0,
                 'client'        => '',
                 'customer'      => '',
-                'units'         => $rs['units']
+                'units'         => $rs['units'],
+                'address'       => array()
             );
             if(!isset($runsheets[$rs['runsheet_day']]))
             {
