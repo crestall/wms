@@ -301,35 +301,53 @@ class RunsheetsController extends Controller
                     'name'  => $rs['driver_name'],
                     'tasks' => array()
                 );
+                $task_array = array(
+                    'task_id'       => $rs['id'],
+                    'order_number'  => 0,
+                    'job_number'    => 0,
+                    'client'        => '',
+                    'customer'      => '',
+                    'units'         => $rs['units']
+                );
                 if(!empty($rs['job_id']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = array(
-                        'task_id'       => $rs['id'],
-                        'job_number'    => $rs['job_number'],
-                        'order_number'  => 0
-                    );
+                {
+                    $task_array['job_number'] = $rs['job_number'];
+                    $task_array['customer'] = $rs['customer_name'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
+                }
                 if(!empty($rs['order_number']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = array(
-                        'task_id'       => $rs['id'],
-                        'job_number'    => 0,
-                        'order_number'  => $rs['order_number']
-                    );
+                {
+                    $task_array['order_number'] = $rs['order_number'];
+                    $task_array['customer'] = $rs['order_customer'];
+                    $task_array['client'] = $rs['order_client_name'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
+                }
                 ++$di;
             }
             else
             {
                 //echo "<p>Id {$rs['driver_id']} found. It is $tdi</p>";
+                $task_array = array(
+                    'task_id'       => $rs['id'],
+                    'order_number'  => 0,
+                    'job_number'    => 0,
+                    'client'        => '',
+                    'customer'      => '',
+                    'units'         => $rs['units']
+                );
                 if(!empty($rs['job_id']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = array(
-                        'task_id'       => $rs['id'],
-                        'job_number'    => $rs['job_number'],
-                        'order_number'  => 0
-                    );
+                {
+                    $task_array['job_number'] = $rs['job_number'];
+                    $task_array['customer'] = $rs['customer_name'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
+                }
                 if(!empty($rs['order_number']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = array(
-                        'task_id'       => $rs['id'],
-                        'job_number'    => 0,
-                        'order_number'  => $rs['order_number']
-                    );
+                {
+                    $task_array['order_number'] = $rs['order_number'];
+                    $task_array['customer'] = $rs['order_customer'];
+                    $task_array['client'] = $rs['order_client_name'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
+                }
             }
         }
         return $runsheets;
