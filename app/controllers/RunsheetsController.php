@@ -284,6 +284,14 @@ class RunsheetsController extends Controller
         $di = 0;
         foreach($rss as $rs)
         {
+            $task_array = array(
+                'task_id'       => $rs['id'],
+                'order_number'  => 0,
+                'job_number'    => 0,
+                'client'        => '',
+                'customer'      => '',
+                'units'         => $rs['units']
+            );
             if(!isset($runsheets[$rs['runsheet_day']]))
             {
                 $runsheets[$rs['runsheet_day']] = array(
@@ -300,14 +308,6 @@ class RunsheetsController extends Controller
                     'id'    => $rs['driver_id'],
                     'name'  => $rs['driver_name'],
                     'tasks' => array()
-                );
-                $task_array = array(
-                    'task_id'       => $rs['id'],
-                    'order_number'  => 0,
-                    'job_number'    => 0,
-                    'client'        => '',
-                    'customer'      => '',
-                    'units'         => $rs['units']
                 );
                 if(!empty($rs['job_id']))
                 {
@@ -327,14 +327,6 @@ class RunsheetsController extends Controller
             else
             {
                 //echo "<p>Id {$rs['driver_id']} found. It is $tdi</p>";
-                $task_array = array(
-                    'task_id'       => $rs['id'],
-                    'order_number'  => 0,
-                    'job_number'    => 0,
-                    'client'        => '',
-                    'customer'      => '',
-                    'units'         => $rs['units']
-                );
                 if(!empty($rs['job_id']))
                 {
                     $task_array['job_number'] = $rs['job_number'];
