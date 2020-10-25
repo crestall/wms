@@ -233,7 +233,51 @@ class RunsheetsController extends Controller
 
     public function finaliseRunsheets()
     {
-        $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
+        $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLETED PRINTED
+        $runsheets = $this->generateRunsheetDriverArray($rss);
+        //echo "<pre>",print_r($runsheets),"</pre>";die();
+        //render the page
+        Config::setJsConfig('curPage', "finalise-runsheets");
+        Config::set('curPage', "finalise-runsheets");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/finaliseRunsheets.php', [
+            'page_title'    =>  "Finalise Runsheets",
+            'pht'           =>  ": Finalise Runsheets",
+            'runsheets'     =>  $runsheets
+        ]);
+    }
+
+    public function updateJob()
+    {
+        if(!isset($this->request->params['args']['job']))
+        {
+            //no job id to update
+            return (new ErrorsController())->error(400)->send();
+        }
+        $job_id = $this->request->params['args']['job'];
+        $job_info = $this->productionjob->getJobById($job_id);
+        if(empty($job_info))
+        {
+            //no job data found
+            return (new ErrorsController())->error(404)->send();
+        }
+        $customer_info = $this->productioncustomer->getCustomerById($job_info['customer_id']);
+        $finisher_info = ($job_info['finisher_id'] > 0)? $this->productionfinisher->getFinisherById($job_info['finisher_id']) : array();
+        $finisher2_info = ($job_info['finisher2_id'] > 0)? $this->productionfinisher->getFinisherById($job_info['finisher2_id']) : array();
+        //render the page
+        Config::setJsConfig('curPage', "update-job");
+        Config::set('curPage', "update-job");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/updateJob.php', [
+            'page_title'    =>  "Update Production Job Details",
+            'pht'           =>  ": Update Production Job",
+            'job'           =>  $job_info,
+            'customer'      =>  $customer_info,
+            'finisher'      =>  $finisher_info,
+            'finisher2'     =>  $finisher2_info
+        ]);
+    }
+
+    private function generateRunsheetDriverArray($rss)
+    {
         $runsheets = array();
         //echo "<pre>",print_r($rss),"</pre>";die();
         $di = 0;
@@ -287,45 +331,7 @@ class RunsheetsController extends Controller
                     );
             }
         }
-        //echo "<pre>",print_r($runsheets),"</pre>";die();
-        //render the page
-        Config::setJsConfig('curPage', "finalise-runsheets");
-        Config::set('curPage', "finalise-runsheets");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/finaliseRunsheets.php', [
-            'page_title'    =>  "Finalise Runsheets",
-            'pht'           =>  ": Finalise Runsheets",
-            'runsheets'     =>  $runsheets
-        ]);
-    }
-
-    public function updateJob()
-    {
-        if(!isset($this->request->params['args']['job']))
-        {
-            //no job id to update
-            return (new ErrorsController())->error(400)->send();
-        }
-        $job_id = $this->request->params['args']['job'];
-        $job_info = $this->productionjob->getJobById($job_id);
-        if(empty($job_info))
-        {
-            //no job data found
-            return (new ErrorsController())->error(404)->send();
-        }
-        $customer_info = $this->productioncustomer->getCustomerById($job_info['customer_id']);
-        $finisher_info = ($job_info['finisher_id'] > 0)? $this->productionfinisher->getFinisherById($job_info['finisher_id']) : array();
-        $finisher2_info = ($job_info['finisher2_id'] > 0)? $this->productionfinisher->getFinisherById($job_info['finisher2_id']) : array();
-        //render the page
-        Config::setJsConfig('curPage', "update-job");
-        Config::set('curPage', "update-job");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/updateJob.php', [
-            'page_title'    =>  "Update Production Job Details",
-            'pht'           =>  ": Update Production Job",
-            'job'           =>  $job_info,
-            'customer'      =>  $customer_info,
-            'finisher'      =>  $finisher_info,
-            'finisher2'     =>  $finisher2_info
-        ]);
+        return $runsheets;
     }
 
     public function isAuthorized()
