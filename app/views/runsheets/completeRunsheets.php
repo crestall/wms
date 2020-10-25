@@ -33,14 +33,7 @@ $date_filter = "Completed";
         </div>
         <?php if(count($runsheets)):?>
             <?php //echo "<pre>",print_r($runsheets),"</pre>";?>
-            <div id="waiting" class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Drawing Table..</h2>
-                    <p>May take a few moments</p>
-                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
-                </div>
-            </div>
-            <div class="row mt-4" id="table_holder" style="display:none">
+            <div class="row">
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
                        <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>
@@ -49,9 +42,21 @@ $date_filter = "Completed";
                        <div class='errorbox'><?php echo Session::getAndDestroy('errorfeedback');?></div>
                     <?php endif; ?>
                 </div>
-                <div class="col-12">
-                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/runsheets_table.php");?>
-                </div>
+            </div>
+            <div class="row">
+                <table class="table-striped table-hover" id="complete_runsheets_table" width="80%">
+                    <thead>
+                        <tr>
+                            <th>Runsheet Day</th>
+                            <th>Completed Date</th>
+                            <th>Driver</th>
+                            <th>Job/Order Number</th>
+                            <th>Client</th>
+                            <th>Units</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         <?php else:?>
             <div class="row">
