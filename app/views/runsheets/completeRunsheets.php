@@ -32,7 +32,7 @@ $date_filter = "Completed";
             </div>
         </div>
         <?php if(count($runsheets)):?>
-            <?php //echo "<pre>",print_r($runsheets),"</pre>"; die();?>
+            <?php echo "<pre>",print_r($runsheets),"</pre>"; die();?>
             <div class="row">
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
