@@ -32,7 +32,7 @@ $date_filter = "Completed";
             </div>
         </div>
         <?php if(count($runsheets)):?>
-            <?php echo "<pre>",print_r($runsheets),"</pre>"; die();?>
+            <?php //echo "<pre>",print_r($runsheets),"</pre>"; die();?>
             <div class="row">
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
@@ -61,10 +61,10 @@ $date_filter = "Completed";
                             $rows = count($rs['drivers']);?>
                             <tr>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
-                                <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id']);?>
+
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
-
+                                <tr></tr>
                             <?php endfor;?>
                         <?php endforeach;?>
                     </tbody>
