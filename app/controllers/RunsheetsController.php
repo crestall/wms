@@ -38,7 +38,8 @@ class RunsheetsController extends Controller
             'from'          =>  $from,
             'to'            =>  $to
         );
-        $runsheets = $this->runsheet->getCompletedRunsheets($rs_array);
+        $rss = $this->runsheet->getCompletedRunsheets($rs_array);
+        $runsheets = $this->generateRunsheetDriverArray($rss);
         $page_array = array(
             'page_title'    =>  "Completed Runsheets",
             'pht'           =>  ": Completed Runsheets",
