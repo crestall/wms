@@ -31,26 +31,24 @@ class RunsheetsController extends Controller
         $customer_id = (isset($this->request->params['args']['customer']))? $this->request->params['args']['customer'] : 0;
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
-        $runsheets = $this->runsheet->getCompletedRunsheets(array(
+        $rs_array = array(
             'driver_id'     =>  $driver_id,
             'client_id'     =>  $client_id,
             'customer_id'   =>  $customer_id,
             'from'          =>  $from,
             'to'            =>  $to
-        ));
+        );
+        $runsheets = $this->runsheet->getCompletedRunsheets($rs_array);
+        $page_array = array(
+            'page_title'    =>  "Completed Runsheets",
+            'pht'           =>  ": Completed Runsheets",
+            'runsheets'     =>  $runsheets
+        );
+        $page_array = array_merge($page_array, $rs_array);
         //render the page
         Config::setJsConfig('curPage', "runsheet-report");
         Config::set('curPage', "runsheet-report");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/completeRunsheets.php', [
-            'page_title'    =>  "Completed Runsheets",
-            'pht'           =>  ": Completed Runsheets",
-            'driver_id'     =>  $driver_id,
-            'client_id'     =>  $client_id,
-            'customer_id'   =>  $customer_id,
-            'from'          =>  $from,
-            'to'            =>  $to,
-            'runsheets'     =>  $runsheets
-        ]);
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/completeRunsheets.php', $page_array);
     }
 
     public function runsheetSearch()
