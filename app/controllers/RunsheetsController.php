@@ -296,7 +296,9 @@ class RunsheetsController extends Controller
             if(!isset($runsheets[$rs['runsheet_day']]))
             {
                 $runsheets[$rs['runsheet_day']] = array(
-                    'runsheet_id'   => $rs['runsheet_id']
+                    'runsheet_id'   => $rs['runsheet_id'],
+                    'created_date'  => $rs['created_date'],
+                    'updated_date'  => $rs['updated_date']
                 );
                 $di = 0;
             }
