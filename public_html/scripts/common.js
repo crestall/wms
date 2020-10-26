@@ -502,6 +502,32 @@ var autoCompleter = {
             minLength: 2
         });
     },
+    suburbAutoCompleteSelect: function(element, prefix)
+    {
+        if(prefix === undefined) {
+            prefix = "";
+        }
+        element.autocomplete({
+            source: function(req, response){
+            	var url = "/ajaxfunctions/getSuburbs?term="+req.term;
+                //console.log(url);
+            	$.getJSON(url, function(data){
+            		response(data);
+            	});
+            },
+            select: function(event, ui) {
+                //$('#'+prefix+'state').val(ui.item.state);
+                $("#"+prefix+"state[value='"+ui.item.state+"']").attr("selected", true);
+                $('#'+prefix+'suburb').val(ui.item.suburb);
+                $('#'+prefix+'postcode').val(ui.item.postcode);
+                $('#'+prefix+'country').val('AU');
+            },
+            change: function (event, ui) {
+                return false;
+            },
+            minLength: 2
+        });
+    },
     itemAutoComplete: function(element, selectCallback, changeCallback, check_available)
     {
         if(check_available === undefined) {
