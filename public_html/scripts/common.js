@@ -516,7 +516,7 @@ var autoCompleter = {
             	});
             },
             select: function(event, ui) {
-                $('#'+prefix+'state').val(ui.item.state).change().valid();
+                $('#'+prefix+'state').val(ui.item.state).change();
                 console.log('state '+ui.item.state);
                 //$("#"+prefix+"state[value='"+ui.item.state+"']").attr("selected", true);
                 $('#'+prefix+'suburb').val(ui.item.suburb);
