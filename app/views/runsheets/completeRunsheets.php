@@ -105,6 +105,12 @@ function getDriverTable($driver)
                                                                 <div class="col-7"><?php echo $task['client'];?></div>
                                                             </div>
                                                         <?php endif;?>
+                                                        <?php if(!empty($task['units'])):?>
+                                                            <div class="row">
+                                                                <label class="col-5">Units:</label>
+                                                                <div class="col-7"><?php echo $task['units'];?></div>
+                                                            </div>
+                                                        <?php endif;?>
                                                         <div class="row">
                                                             <label class="col-5">Deliver To:</label>
                                                             <div class="col-7"><?php echo $task['customer'];?></div>
