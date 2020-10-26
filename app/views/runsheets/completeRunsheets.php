@@ -100,21 +100,21 @@ function getDriverTable($driver)
                                                         </div>
                                                         <div class="row">
                                                             <label class="col-5">Address:</label>
-                                                            <div class="col-7"><?php echo $task['address'];?></div>
+                                                            <div class="col-7"><?php echo $task['address']['address'];?></div>
                                                         </div>
                                                         <?php if(!empty($task['address2'])):?>
                                                             <div class="row">
                                                                 <label class="col-5">&nbsp;</label>
-                                                                <div class="col-7"><?php echo $task['address2'];?></div>
+                                                                <div class="col-7"><?php echo $task['address']['address2'];?></div>
                                                             </div>
                                                         <?php endif;?>
                                                         <div class="row">
                                                             <label class="col-5">&nbsp;</label>
-                                                            <div class="col-7"><?php echo $task['suburb'];?></div>
+                                                            <div class="col-7"><?php echo $task['address']['suburb'];?></div>
                                                         </div>
                                                         <div class="row">
                                                             <label class="col-5">&nbsp;</label>
-                                                            <div class="col-7"><?php echo $task['postcode'];?></div>
+                                                            <div class="col-7"><?php echo $task['address']['postcode'];?></div>
                                                         </div>
                                                     </div>
                                                 <?php endforeach;?>
