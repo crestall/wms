@@ -7,7 +7,6 @@ function getDriverTable($driver)
     $html = "<table>";
     $html .= "<tr>";
     $html .= "<td rowspan='$drows'>$driver_name</td>";
-    $first = true;
     foreach($driver['tasks'] as $task)
     {
         $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number'];
@@ -16,12 +15,9 @@ function getDriverTable($driver)
         $html .= "<td>{$task['units']}</td>";
         $address = Utility::formatAddressWeb($task['address']);
         $html .= "<td>$address</td>";
-        if($first)
-        {
-            $html .= "</tr><tr>";
-            $first = false;
-        }
+        $html .= "</tr><tr>";
     }
+    rtrim($html, "<tr>");
     $html .= "</tr></table>";
     return $html;
 }
