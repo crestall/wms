@@ -12,7 +12,7 @@ function getDriverTable($driver)
                     <td>Job/Order Number</td>
                     <td>Client</td>
                     <td>Units</td>
-                    <td>Address</td>
+                    <td>Deliver To</td>
                 </tr>
             </thead>
     ";
@@ -25,7 +25,7 @@ function getDriverTable($driver)
         $html .= "<td>$task_number</td>";
         $html .= "<td>{$task['client']}</td>";
         $html .= "<td>{$task['units']}</td>";
-        $address = Utility::formatAddressWeb($task['address']);
+        $address = $task['customer']."<br>".Utility::formatAddressWeb($task['address']);
         $html .= "<td>$address</td>";
         $html .= "</tr><tr>";
     }
