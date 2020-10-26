@@ -92,8 +92,13 @@ function getDriverTable($driver)
                                                 <?php echo ucwords($driver['name']);?>
                                             </div>
                                             <div class="card-body">
-                                                <?php foreach($driver['tasks'] as $task):?>
+                                                <?php foreach($driver['tasks'] as $task):
+                                                    $task_number = ($task['job_number'] > 0)? $task['job_number'] : $task['order_number'];?>
                                                     <div class="border-bottom border-secondary border-bottom-dashed mb-3">
+                                                        <div class="row">
+                                                            <label class="col-5">Job/Order Number:</label>
+                                                            <div class="col-7"><?php echo $task_number;?></div>
+                                                        </div>
                                                         <div class="row">
                                                             <label class="col-5">Deliver To:</label>
                                                             <div class="col-7"><?php echo $task['customer'];?></div>
