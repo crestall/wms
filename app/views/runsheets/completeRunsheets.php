@@ -92,7 +92,32 @@ function getDriverTable($driver)
                                                 <?php echo ucwords($driver['name']);?>
                                             </div>
                                             <div class="card-body">
-                                                Job detals go here
+                                                <?php foreach($driver['tasks'] as $task):?>
+                                                    <div class="border-bottom border-secondary border-bottom-dashed mb-3">
+                                                        <div class="row">
+                                                            <label class="col-5">Deliver To:</label>
+                                                            <div class="col-7"><?php echo $task['customer'];?></div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <label class="col-5">Address:</label>
+                                                            <div class="col-7"><?php echo $task['address'];?></div>
+                                                        </div>
+                                                        <?php if(!empty($task['address2'])):?>
+                                                            <div class="row">
+                                                                <label class="col-5">&nbsp;</label>
+                                                                <div class="col-7"><?php echo $task['address2'];?></div>
+                                                            </div>
+                                                        <?php endif;?>
+                                                        <div class="row">
+                                                            <label class="col-5">&nbsp;</label>
+                                                            <div class="col-7"><?php echo $task['suburb'];?></div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <label class="col-5">&nbsp;</label>
+                                                            <div class="col-7"><?php echo $task['postcode'];?></div>
+                                                        </div>
+                                                    </div>
+                                                <?php endforeach;?>
                                             </div>
                                         </div>
                                     </div>
