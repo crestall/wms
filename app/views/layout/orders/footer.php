@@ -232,7 +232,7 @@
                 },
                 'get-quotes': {
                     init: function(){
-                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        autoCompleter.suburbAutoCompleteSelect($('#suburb'));
                     }
                 },
                 'add-bulk-orders': {
