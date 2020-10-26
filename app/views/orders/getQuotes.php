@@ -41,6 +41,48 @@ $postcode = Form::value('postcode');
                     <?php echo Form::displayError('postcode');?>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-md-2 mb-3">Width</label>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control number digits" name="carton_width" id="carton_width" value="<?php echo Form::value('carton_width');?>" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+                </div>
+                <?php echo Form::displayError('carton_width');?>
+                <label class="col-md-2 mb-3">Length</label>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control number digits" name="carton_length" id="carton_length" value="<?php echo Form::value('carton_length');?>" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+                </div>
+                <?php echo Form::displayError('carton_length');?>
+                <label class="col-md-2 mb-3">Height</label>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control number digits" name="carton_height" id="carton_height" value="<?php echo Form::value('carton_length');?>" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+                </div>
+                <?php echo Form::displayError('carton_height');?>
+                <label class="col-md-2 mb-3">Weight</label>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control number digits" name="carton_weight" id="carton_weight" value="<?php echo Form::value('carton_weight');?>" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">kg</span>
+                        </div>
+                    </div>
+                </div>
+                <?php echo Form::displayError('carton_weight');?>
+            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <div class="col-md-4 offset-md-6">
