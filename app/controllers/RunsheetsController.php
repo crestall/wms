@@ -291,7 +291,10 @@ class RunsheetsController extends Controller
                 'client'        => '',
                 'customer'      => '',
                 'units'         => $rs['units'],
-                'address'       => array()
+                'address'       => array(
+                    'state'     => 'VIC',
+                    'country'   => 'AU'
+                )
             );
             if(!isset($runsheets[$rs['runsheet_day']]))
             {
