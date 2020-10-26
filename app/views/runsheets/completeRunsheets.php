@@ -88,7 +88,7 @@ function getDriverTable($driver)
                                 <?php foreach($rs['drivers'] as $driver):?>
                                     <div class="col-12 mb-3">
                                         <div class="card h-100 border-secondary driver-card">
-                                            <div class="card-header">
+                                            <div class="card-header font-weight-bold">
                                                 <?php echo ucwords($driver['name']);?>
                                             </div>
                                             <div class="card-body">
