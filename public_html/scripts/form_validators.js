@@ -151,7 +151,6 @@ $(document).ready(function() {
 			status_id:{
 				notNone: "A status must be chosen"
 			},
-
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
@@ -164,7 +163,8 @@ $(document).ready(function() {
 		messages:{
 			state:{
 				notNone: "A state must be chosen"
-			},
+			}
+        }
     });
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_finisher').validate();
