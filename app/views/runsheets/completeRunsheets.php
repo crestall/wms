@@ -1,5 +1,30 @@
 <?php
 $date_filter = "Completed";
+function getDriverTable($driver)
+{
+    $driver_name = ucwords($driver['name']);
+    $drows = count($driver['tasks']);
+    $html = "<table>";
+    $html .= "<tr>";
+    $html .= "<td rowspan='$drows'>$driver_name</td>";
+    $first = true;
+    foreach($driver['tasks'] as $task)
+    {
+        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number'];
+        $html .= "<td>$task_number</td>";
+        $html .= "<td>{$task['client']}</td>";
+        $html .= "<td>{$task['units']}</td>";
+        $address = Utility::formatAddressWeb($task['address']);
+        $html .= "<td>$address</td>";
+        if($first)
+        {
+            $html .= "</tr><tr>";
+            $first = false;
+        }
+    }
+    $html .= "</tr></table>";
+    return $html;
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -62,10 +87,15 @@ $date_filter = "Completed";
                             <tr>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('d/m/Y', $rs['updated_date'] );?></td>
+                                <td colspan="5">
+                                    <?php echo getDriverTable($rs['drivers'][0]);?>
+                                </td>
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr>
-                                    <td></td>
+                                    <td colspan="5">
+                                        <?php echo getDriverTable($rs['drivers'][$i]);?>
+                                    </td>
                                 </tr>
                             <?php endfor;?>
                         <?php endforeach;?>
