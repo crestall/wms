@@ -109,7 +109,6 @@ function getDriverTable($driver)
                                                         </div>
                                                         <?php if(!empty($task['address2'])):?>
                                                             <div class="row">
-                                                                <label class="col-5">&nbsp;</label>
                                                                 <div class="col-7 offset-5"><?php echo $task['address']['address2'];?></div>
                                                             </div>
                                                         <?php endif;?>
@@ -117,8 +116,7 @@ function getDriverTable($driver)
                                                             <div class="col-7 offset-5"><?php echo $task['address']['suburb'];?></div>
                                                         </div>
                                                         <div class="row">
-                                                            <label class="col-5">&nbsp;</label>
-                                                            <div class="col-7"><?php echo $task['address']['postcode'];?></div>
+                                                            <div class="col-7 offset-5"><?php echo $task['address']['postcode'];?></div>
                                                         </div>
                                                     </div>
                                                 <?php endforeach;?>
