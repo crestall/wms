@@ -5,6 +5,18 @@ function getDriverTable($driver)
     $driver_name = ucwords($driver['name']);
     $drows = count($driver['tasks']);
     $html = "<table>";
+    $html .= "
+            <thead>
+                <tr>
+                    <td>Driver</td>
+                    <td>Job/Order Number</td>
+                    <td>Client</td>
+                    <td>Units</td>
+                    <td>Address</td>
+                </tr>
+            </thead>
+    ";
+    $html .= "<tbody>";
     $html .= "<tr>";
     $html .= "<td rowspan='$drows'>$driver_name</td>";
     foreach($driver['tasks'] as $task)
@@ -18,7 +30,7 @@ function getDriverTable($driver)
         $html .= "</tr><tr>";
     }
     rtrim($html, "<tr>");
-    $html .= "</tr></table>";
+    $html .= "</tbody></tr></table>";
     return $html;
 }
 ?>
@@ -70,11 +82,7 @@ function getDriverTable($driver)
                         <tr>
                             <th>Runsheet Day</th>
                             <th>Completed Date</th>
-                            <th>Driver</th>
-                            <th>Job/Order Number</th>
-                            <th>Client</th>
-                            <th>Units</th>
-                            <th>Address</th>
+                            <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,13 +91,13 @@ function getDriverTable($driver)
                             <tr>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('d/m/Y', $rs['updated_date'] );?></td>
-                                <td colspan="5">
+                                <td>
                                     <?php echo getDriverTable($rs['drivers'][0]);?>
                                 </td>
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr>
-                                    <td colspan="5">
+                                    <td>
                                         <?php echo getDriverTable($rs['drivers'][$i]);?>
                                     </td>
                                 </tr>
