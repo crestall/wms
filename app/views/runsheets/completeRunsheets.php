@@ -4,7 +4,7 @@ function getDriverTable($driver)
 {
     $driver_name = ucwords($driver['name']);
     $drows = count($driver['tasks']);
-    $html = "<table>";
+    $html = "<table width='100%'>";
     $html .= "
             <thead>
                 <tr>
