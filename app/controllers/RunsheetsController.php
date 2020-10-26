@@ -316,7 +316,7 @@ class RunsheetsController extends Controller
                 {
                     $task_array['job_number'] = $rs['job_number'];
                     $task_array['customer'] = $rs['customer_name'];
-                    $task_array['address']['address1'] = $rs['job_address'];
+                    $task_array['address']['address'] = $rs['job_address'];
                     $task_array['address']['address2'] = $rs['job_address2'];
                     $task_array['address']['suburb'] = $rs['job_suburb'];
                     $task_array['address']['postcode'] = $rs['job_postcode'];
@@ -327,7 +327,7 @@ class RunsheetsController extends Controller
                     $task_array['order_number'] = $rs['order_number'];
                     $task_array['customer'] = $rs['order_customer'];
                     $task_array['client'] = $rs['order_client_name'];
-                    $task_array['address']['address1'] = $rs['order_address'];
+                    $task_array['address']['address'] = $rs['order_address'];
                     $task_array['address']['address2'] = $rs['order_address2'];
                     $task_array['address']['suburb'] = $rs['order_suburb'];
                     $task_array['address']['postcode'] = $rs['order_postcode'];
@@ -342,7 +342,7 @@ class RunsheetsController extends Controller
                 {
                     $task_array['job_number'] = $rs['job_number'];
                     $task_array['customer'] = $rs['customer_name'];
-                    $task_array['address']['address1'] = $rs['job_address'];
+                    $task_array['address']['address'] = $rs['job_address'];
                     $task_array['address']['address2'] = $rs['job_address2'];
                     $task_array['address']['suburb'] = $rs['job_suburb'];
                     $task_array['address']['postcode'] = $rs['job_postcode'];
@@ -353,7 +353,7 @@ class RunsheetsController extends Controller
                     $task_array['order_number'] = $rs['order_number'];
                     $task_array['customer'] = $rs['order_customer'];
                     $task_array['client'] = $rs['order_client_name'];
-                    $task_array['address']['address1'] = $rs['order_address'];
+                    $task_array['address']['address'] = $rs['order_address'];
                     $task_array['address']['address2'] = $rs['order_address2'];
                     $task_array['address']['suburb'] = $rs['order_suburb'];
                     $task_array['address']['postcode'] = $rs['order_postcode'];
