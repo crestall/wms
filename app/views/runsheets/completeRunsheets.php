@@ -77,34 +77,30 @@ function getDriverTable($driver)
                 </div>
             </div>
             <div class="row">
-                <table class="table-striped table-hover" id="complete_runsheets_table" width="80%">
-                    <thead>
-                        <tr>
-                            <th>Runsheet Day</th>
-                            <th>Completed Date</th>
-                            <th>Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($runsheets as $timestamp => $rs):
-                            $rows = count($rs['drivers']);?>
-                            <tr>
-                                <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
-                                <td rowspan="<?php echo $rows;?>"><?php echo date('d/m/Y', $rs['updated_date'] );?></td>
-                                <td>
-                                    <?php echo getDriverTable($rs['drivers'][0]);?>
-                                </td>
-                            </tr>
-                            <?php for($i = 1; $i < $rows; ++$i):?>
-                                <tr>
-                                    <td>
-                                        <?php echo getDriverTable($rs['drivers'][$i]);?>
-                                    </td>
-                                </tr>
-                            <?php endfor;?>
-                        <?php endforeach;?>
-                    </tbody>
-                </table>
+                <?php foreach($runsheets as $timestamp => $rs):?>
+                    <div class="col-sm-12 col-lg-6 col-xl-4 mb-3">
+                        <div class="card h-100 border-secondary order-card">
+                            <div class="card-header bg-secondary text-white">
+                                <?php echo date('D jS M', $timestamp );?><br>
+                                Completed on <?php echo date('d/m/Y', $rs['updated_date'] );?>
+                            </div>
+                            <div class="card-body">
+                                <?php foreach($rs['drivers'] as $driver):?>
+                                    <div class="col-sm-12 col-xl-6 mb-3">
+                                        <div class="card h-100 border-secondary order-card">
+                                            <div class="card-header bg-secondary text-white">
+                                                <?php echo ucwords($driver['name']);?>
+                                            </div>
+                                            <div class="card-body">
+                                                Job detals go here
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach;?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach;?>
             </div>
         <?php else:?>
             <div class="row">
