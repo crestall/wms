@@ -99,6 +99,12 @@ function getDriverTable($driver)
                                                             <label class="col-5">Job/Order Number:</label>
                                                             <div class="col-7"><?php echo $task_number;?></div>
                                                         </div>
+                                                        <?php if(!empty($task['client'])):?>
+                                                            <div class="row">
+                                                                <label class="col-5">Client:</label>
+                                                                <div class="col-7"><?php echo $task['client'];?></div>
+                                                            </div>
+                                                        <?php endif;?>
                                                         <div class="row">
                                                             <label class="col-5">Deliver To:</label>
                                                             <div class="col-7"><?php echo $task['customer'];?></div>
