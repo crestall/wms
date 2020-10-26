@@ -172,6 +172,10 @@ $admin = array(
             'display'   => true,
             'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
         ),
+        'get-quotes'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fal fa-file-invoice-dollar"></i>'
+        ),
         'add-bulk-orders' =>  array(
             'display'   => true,
             'icon'      => '<i class="fal fa-boxes fa-3x"></i>'
