@@ -78,7 +78,7 @@ function getDriverTable($driver)
             </div>
             <div class="row">
                 <?php foreach($runsheets as $timestamp => $rs):?>
-                    <div class="col-sm-12 col-lg-6 col-xl-4 mb-3">
+                    <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="card h-100 border-secondary runsheet-card">
                             <div class="card-header bg-secondary text-white">
                                 Runsheet for <?php echo date('D jS M', $timestamp );?><br>
