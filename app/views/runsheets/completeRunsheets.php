@@ -32,7 +32,7 @@ $date_filter = "Completed";
             </div>
         </div>
         <?php if(count($runsheets)):?>
-            <?php //echo "<pre>",print_r($runsheets),"</pre>"; die();?>
+            <?php echo "<pre>",print_r($runsheets),"</pre>"; //die();?>
             <div class="row">
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
@@ -64,7 +64,9 @@ $date_filter = "Completed";
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('d/m/Y', $rs['updated_date'] );?></td>
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
-                                <tr></tr>
+                                <tr>
+                                    <td></td>
+                                </tr>
                             <?php endfor;?>
                         <?php endforeach;?>
                     </tbody>
