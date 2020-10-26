@@ -174,7 +174,7 @@ $admin = array(
         ),
         'get-quotes'    => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-file-invoice-dollar"></i>'
+            'icon'      => '<i class="fal fa-file-invoice-dollar fa-3x"></i>'
         ),
         'add-bulk-orders' =>  array(
             'display'   => true,
