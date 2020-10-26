@@ -155,6 +155,18 @@ $(document).ready(function() {
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
+    $('form#get_quotes').validate({
+         rules:{
+    		state:{
+    			notNone: true
+    		}
+    	},
+		messages:{
+			state:{
+				notNone: "A state must be chosen"
+			},
+    });
+    ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_finisher').validate();
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_customer').validate();
