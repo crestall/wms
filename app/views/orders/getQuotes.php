@@ -13,7 +13,7 @@
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <div class="col-md-4 offset-md-6">
-                    <button type="submit" class="btn btn-outline-secondary">Book Collection</button>
+                    <button type="submit" class="btn btn-outline-secondary">Get Prices</button>
                 </div>
             </div>
         </form>

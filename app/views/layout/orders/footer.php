@@ -13,11 +13,6 @@
                             shippingQuote.getQuotes($(this).data('orderid'), $(this).data('destination'));
                         });
                     },
-                    'get-quotes': {
-                        init: function(){
-                            
-                        }
-                    },
                     'remove-all-items': function(){
                         $('a#remove-all-items').click(function(e){
                             e.preventDefault();
@@ -233,6 +228,11 @@
                             });
                             $("#allocation_pop").dialog('open');
                         });
+                    }
+                },
+                'get-quotes': {
+                    init: function(){
+
                     }
                 },
                 'add-bulk-orders': {
