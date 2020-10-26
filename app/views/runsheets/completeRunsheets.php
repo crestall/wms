@@ -79,7 +79,7 @@ function getDriverTable($driver)
             <div class="row">
                 <?php foreach($runsheets as $timestamp => $rs):?>
                     <div class="col-sm-12 col-lg-6 col-xl-4 mb-3">
-                        <div class="card h-100 border-secondary order-card">
+                        <div class="card h-100 border-secondary runsheet-card">
                             <div class="card-header bg-secondary text-white">
                                 <?php echo date('D jS M', $timestamp );?><br>
                                 Completed on <?php echo date('d/m/Y', $rs['updated_date'] );?>
@@ -87,8 +87,8 @@ function getDriverTable($driver)
                             <div class="card-body">
                                 <?php foreach($rs['drivers'] as $driver):?>
                                     <div class="col-12 mb-3">
-                                        <div class="card h-100 border-secondary order-card">
-                                            <div class="card-header bg-secondary text-white">
+                                        <div class="card h-100 border-secondary driver-card">
+                                            <div class="card-header text-white">
                                                 <?php echo ucwords($driver['name']);?>
                                             </div>
                                             <div class="card-body">
