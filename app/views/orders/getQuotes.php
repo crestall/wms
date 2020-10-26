@@ -1,5 +1,7 @@
 <?php
 $suburb = Form::value('suburb');
+$state = Form::value('state');
+$postcode = Form::value('postcode');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -24,6 +26,13 @@ $suburb = Form::value('suburb');
                     <input type="text" class="form-control" name="state" id="state" value="<?php echo $state;?>" />
                     <span class="inst">use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
                     <?php echo Form::displayError('state');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="postcode" id="postcode" value="<?php echo $postcode;?>" />
+                    <?php echo Form::displayError('postcode');?>
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
