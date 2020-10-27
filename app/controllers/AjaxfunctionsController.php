@@ -91,22 +91,20 @@ class ajaxfunctionsController extends Controller
         );
         $eparcel_shipments['shipments'][0]  = $shipment;
         $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
-        echo "<pre>",print_r($eparcel_response),"</pre>"; die();
+        //echo "<pre>",print_r($eparcel_response),"</pre>"; die();
         /*
         if($ad['country'] == "AU")
         {
             if($expresspost) return '3J85';
             return '3D85';
         }
+        */
 
-        $eparcel_details = $this->{$eParcelClass}->getShipmentDetails($od, $items);
-
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
-            'items'     =>  $items,
-            'order_id'  =>  $order['id']
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
+            'eparcel_response'     =>  $eparcel_response
         ]);
         $data['html'] = $html;
-        */
+
         $this->view->renderJson($data);
     }
 
