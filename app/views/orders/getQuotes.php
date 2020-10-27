@@ -44,7 +44,7 @@ $postcode = Form::value('postcode');
                         <a id="remove-all-packages" style="cursor:pointer" title="Leave Only One"><h4><i class="fad fa-times-square text-danger"></i> Leave only one</a></h4>
                     </div>
                 </div>
-                <div id="packages_holder" class="p-3 light-grey">
+                <div id="packages_holder">
                     <div class="p-3 light-grey mb-3">
                         <div class="form-group row">
                             <label class="col-md-1 mb-3">Width</label>
