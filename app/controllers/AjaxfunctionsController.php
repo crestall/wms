@@ -47,6 +47,7 @@ class ajaxfunctionsController extends Controller
             'checkBarcodes',
             'checkBoxBarcodes',
             'checkLocations',
+            'procGetQuotes',
             'reactivateUser',
             'recordDispatch',
             'removeCourier',
@@ -61,6 +62,11 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function procGetQuotes()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
     }
 
     public function consolidateOrders()
