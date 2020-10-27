@@ -267,7 +267,7 @@
                                                 .hide()
                                                 .removeClass()
                                                 .addClass("feedbackbox")
-                                                .html(d.html)
+                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error with how the form was filled in</h2><p>Please see below"+d.html)
                                                 .slideDown();
                                         }
                                     },
