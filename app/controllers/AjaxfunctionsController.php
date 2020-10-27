@@ -80,7 +80,7 @@ class ajaxfunctionsController extends Controller
                 $post_data[$field] = $value;
             }
         }
-        $data['html'] = "<pre>",print_r($post_data),"</pre>";
+        $data['html'] = "<pre>".print_r($post_data)."</pre>";
 
         $shipment = array(
             'from'						=>	array(
