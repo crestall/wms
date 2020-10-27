@@ -45,50 +45,7 @@ $postcode = Form::value('postcode');
                     </div>
                 </div>
                 <div id="packages_holder">
-                    <div class="p-3 light-grey mb-3">
-                        <div class="form-group row">
-                            <label class="col-md-1 mb-3">Width</label>
-                            <div class="col-md-3 mb-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[0][width]" value="" />
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">cm</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <label class="col-md-1 mb-3">Length</label>
-                            <div class="col-md-3 mb-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[0][length]" value="" />
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">cm</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <label class="col-md-1 mb-3">Height</label>
-                            <div class="col-md-3 mb-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[0][height]" value="" />
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">cm</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
-                            <div class="col-md-3 mb-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control required number" data-rule-positiveNumber="true" name="item[0][weight]" value="<?php echo Form::value('carton_weight');?>" />
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">kg</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Count</label>
-                            <div class="col-md-3 mb-3">
-                                <input type="text" class="form-control required digits" data-rule-positiveNumber="true" name="item[0][count]" value="1" />
-                            </div>
-                        </div>
-                    </div>
+                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
