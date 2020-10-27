@@ -108,7 +108,7 @@ $(document).ready(function() {
             }
             else if ( element.parent().hasClass('input-group')){
                 console.log('input group found');
-                console.log(element.next( "input-group-append" ));
+                console.log(element.next( "input-group-append" ).attr('class'));
                 error.insertAfter( element.next( "input-group-append" ) );
             }
             else {
