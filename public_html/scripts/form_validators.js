@@ -106,7 +106,7 @@ $(document).ready(function() {
             else if( element.prop( "type" ) === "select-one" ) {
                 error.insertAfter( element.closest( "div.bootstrap-select" ) );
             }
-            else if ( element.parent().hasClass(input-group)){
+            else if ( element.parent().hasClass('input-group')){
                 error.insertAfter( element.next( "input-group-append" ) );
             }
             else {
