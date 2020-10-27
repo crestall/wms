@@ -252,7 +252,24 @@
                                         .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Contacting Couriers...</p>");
                                     },
                                     success: function(d){
-
+                                        if(d.error)
+                                        {
+                                            $("div#feedback_holder")
+                                                .hide()
+                                                .removeClass()
+                                                .addClass("errorbox")
+                                                .slideDown()
+                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
+                                        }
+                                        else
+                                        {
+                                            $("div#feedback_holder")
+                                                .hide()
+                                                .removeClass()
+                                                .addClass("feedbackbox")
+                                                .html(d.html)
+                                                .slideDown();
+                                        }
                                     },
                                     error: function(xhr, e){
                                         console.log('xhr: ' + JSON.stringify(xhr, null, 4));
