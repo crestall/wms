@@ -30,7 +30,7 @@ $(document).ready(function() {
 
     $.validator.addMethod('positiveNumber', function (value, element) {
         	return (this.optional(element) || Number(value) > 0 );
-    }, 'Enter a positive whole number.');
+    }, 'Enter a positive number.');
 
     $.validator.addMethod('positiveNumber0', function (value, element) {
         	return (this.optional(element) || Number(value) >= 0 );
