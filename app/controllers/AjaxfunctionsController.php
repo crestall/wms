@@ -66,7 +66,20 @@ class ajaxfunctionsController extends Controller
 
     public function procGetQuotes()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request),"</pre>"; /die();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        /*
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
+            'items'     =>  $items,
+            'order_id'  =>  $order['id']
+        ]);
+        $data['html'] = $html;
+        */
+        $this->view->renderJson($data);
     }
 
     public function consolidateOrders()
@@ -238,7 +251,7 @@ class ajaxfunctionsController extends Controller
             $data['error'] = true;
             $data['feedback'] = 'No items found for that order number';
         }
-        
+
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
             'items'     =>  $items,
             'order_id'  =>  $order['id']
