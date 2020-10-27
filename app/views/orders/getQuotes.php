@@ -50,7 +50,7 @@ $postcode = Form::value('postcode');
                             <label class="col-md-1 mb-3">Width</label>
                             <div class="col-md-3 mb-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[0][width]" value="<?php echo Form::value('carton_width');?>" />
+                                    <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[0][width]" value="" />
                                     <div class="input-group-append">
                                         <span class="input-group-text">cm</span>
                                     </div>
@@ -59,7 +59,7 @@ $postcode = Form::value('postcode');
                             <label class="col-md-1 mb-3">Length</label>
                             <div class="col-md-3 mb-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[0][length]" value="<?php echo Form::value('carton_length');?>" />
+                                    <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[0][length]" value="" />
                                     <div class="input-group-append">
                                         <span class="input-group-text">cm</span>
                                     </div>
@@ -68,7 +68,7 @@ $postcode = Form::value('postcode');
                             <label class="col-md-1 mb-3">Height</label>
                             <div class="col-md-3 mb-3">
                                 <div class="input-group">
-                                    <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[0][carton_height]" value="<?php echo Form::value('carton_length');?>" />
+                                    <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[0][height]" value="" />
                                     <div class="input-group-append">
                                         <span class="input-group-text">cm</span>
                                     </div>
