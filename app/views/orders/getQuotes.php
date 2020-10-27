@@ -73,6 +73,16 @@ $postcode = Form::value('postcode');
                     </div>
                 </div>
                 <?php echo Form::displayError('carton_weight');?>
+                <label class="col-md-2 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Count</label>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control required digits" data-rule-positiveNumber="true" name="item[][count]" id="carton_count" value="1" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">kg</span>
+                        </div>
+                    </div>
+                </div>
+                <?php echo Form::displayError('carton_weight');?>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
