@@ -72,9 +72,6 @@ class ajaxfunctionsController extends Controller
             'feedback'  =>  '',
             'html'      =>  ''
         );
-        $eParcelClass = "Eparcel";
-        if(!is_null($client_details['eparcel_location']))
-            $eParcelClass = $client_details['eparcel_location']."Eparcel";
 
         $shipment = array(
             'from'						=>	array(
@@ -93,7 +90,7 @@ class ajaxfunctionsController extends Controller
             )
         );
         $eparcel_shipments['shipments'][0]  = $shipment;
-        $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
+        $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
         echo "<pre>",print_r($eparcel_response),"</pre>"; die();
         /*
         if($ad['country'] == "AU")
