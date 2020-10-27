@@ -66,14 +66,21 @@ class ajaxfunctionsController extends Controller
 
     public function procGetQuotes()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $data = array(
             'error'     =>  false,
             'feedback'  =>  '',
             'html'      =>  ''
         );
-
-
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $data['html'] = "<pre>",print_r($post_data),"</pre>";
 
         $shipment = array(
             'from'						=>	array(
@@ -105,7 +112,7 @@ class ajaxfunctionsController extends Controller
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
             'eparcel_response'     =>  $eparcel_response
         ]);
-        $data['html'] = $html;
+        $data['html'] .= $html;
 
         $this->view->renderJson($data);
     }
