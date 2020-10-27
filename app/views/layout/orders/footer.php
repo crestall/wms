@@ -237,8 +237,8 @@
                             $(this).valid();
                         });
                         $('form#get_quotes').submit(function(e){
-                            if($(this).valid())
-                            {
+                            //if($(this).valid())
+                            //{
                                 //$.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Contacted Couriers and Getting Prices...</h2></div>' });
                                 e.preventDefault();
                                 var data = $(this).serialize();
@@ -276,7 +276,7 @@
                                         console.log('error: ' + e);
                                     }
                                 });
-                            }
+                            //}
                         });
                     }
                 },
