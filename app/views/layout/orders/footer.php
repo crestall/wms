@@ -259,7 +259,7 @@
                                                 .removeClass()
                                                 .addClass("errorbox")
                                                 .slideDown()
-                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
+                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error with how the form was filled in</h2><p>Please see below"+d.feedback);
                                         }
                                         else
                                         {
@@ -267,7 +267,7 @@
                                                 .hide()
                                                 .removeClass()
                                                 .addClass("feedbackbox")
-                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error with how the form was filled in</h2><p>Please see below"+d.html)
+                                                .html(d.html)
                                                 .slideDown();
                                         }
                                     },
