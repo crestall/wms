@@ -109,7 +109,7 @@ $(document).ready(function() {
             else if ( element.parent().hasClass('input-group')){
                 console.log('input group found');
                 console.log(element.next('div').attr('class'));
-                error.insertAfter( element.next( "input-group-append" ) );
+                error.insertAfter( element.next( "div.input-group-append" ) );
             }
             else {
         		error.insertAfter( element );
