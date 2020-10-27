@@ -6,7 +6,7 @@ $postcode = Form::value('postcode');
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div id="response" style="display:none;"></div>
+        <div id="feedback_holder" style="display:none;"></div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
         <form id="get_quotes" method="post" action="/form/procGetQuotes">
