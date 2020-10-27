@@ -1,7 +1,9 @@
-<div class="row mb-2">
-    <p class="inst">These prices are GST and Fuel Levee Inclusive.</p>
-    <p class="inst">No margin has been added.</p>
-    <p class="inst font-weight-bold">Please do not make these prices available to the customer/client.</p>
+<div class="row mb-3">
+    <div class="col-12">
+        <p class="inst">These prices are GST and Fuel Levee Inclusive.</p>
+        <p class="inst">No margin has been added.</p>
+        <p class="inst font-weight-bold">Please do not make these prices available to the customer/client.</p>
+    </div>
 </div>
 <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
