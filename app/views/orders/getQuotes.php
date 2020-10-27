@@ -36,7 +36,7 @@ $postcode = Form::value('postcode');
                 <label class="col-md-2 mb-3">Width</label>
                 <div class="col-md-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" data-rule-positiveNumber="true" name="carton_width" id="carton_width" value="<?php echo Form::value('carton_width');?>" />
+                        <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[][width]" id="carton_width" value="<?php echo Form::value('carton_width');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
@@ -46,7 +46,7 @@ $postcode = Form::value('postcode');
                 <label class="col-md-2 mb-3">Length</label>
                 <div class="col-md-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" data-rule-positiveNumber="true" name="carton_length" id="carton_length" value="<?php echo Form::value('carton_length');?>" />
+                        <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[][length]" id="carton_length" value="<?php echo Form::value('carton_length');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
@@ -56,7 +56,7 @@ $postcode = Form::value('postcode');
                 <label class="col-md-2 mb-3">Height</label>
                 <div class="col-md-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" data-rule-positiveNumber="true" name="carton_height" id="carton_height" value="<?php echo Form::value('carton_length');?>" />
+                        <input type="text" class="form-control number" data-rule-positiveNumber="true" name="item[][carton_height]" id="carton_height" value="<?php echo Form::value('carton_length');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
@@ -66,7 +66,7 @@ $postcode = Form::value('postcode');
                 <label class="col-md-2 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
                 <div class="col-md-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control required number" data-rule-positiveNumber="true" name="carton_weight" id="carton_weight" value="<?php echo Form::value('carton_weight');?>" />
+                        <input type="text" class="form-control required number" data-rule-positiveNumber="true" name="item[][weight]" id="carton_weight" value="<?php echo Form::value('carton_weight');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">kg</span>
                         </div>
