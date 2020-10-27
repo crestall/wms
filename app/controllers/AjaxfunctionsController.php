@@ -69,7 +69,7 @@ class ajaxfunctionsController extends Controller
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $data = array(
             'error'     =>  false,
-            'feedback'  =>  '',
+            'feedback'  =>  '<ul>',
             'html'      =>  ''
         );
         foreach($this->request->data as $field => $value)
@@ -80,26 +80,52 @@ class ajaxfunctionsController extends Controller
                 $post_data[$field] = $value;
             }
         }
-        $data['html'] = "<pre>".print_r($post_data)."</pre>";
+        if(!$suburb || strlen($suburb = trim($suburb)) == 0)
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "<li>A delivery suburb is required</li>";
+        }
+        if(!$state || strlen($state = trim($state)) == 0)
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "<li>A delivery state is required</li>";
+        }
+        if(!$postcode || strlen($postcode = trim($postcode)) == 0)
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "<li>A delivery postcode is required</li>";
+        }
+        if(!$carton_weight || strlen($carton_weight = trim($carton_weight)) == 0)
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "<li>A weight is required for the item being delivered</li>";
+        }
+        if(!$data['error'])
+        {
+            $shipment = array(
+                'from'						=>	array(
+                    'suburb'    => 'BAYSWATER',
+                    'state'     => 'VIC',
+                    'postcode'  => 3153
+                ),
+                'to'						=>	array(
+                    'suburb'    => $suburb,
+                    'state'     => $state,
+                    'postcode'  => $postcode
+                ),
+                'items'						=>	array(
+                    'product_id'    => '3D85',
+                    'weight'        => $carton_weight
+                )
+            );
+            $eparcel_shipments['shipments'][0]  = $shipment;
+            $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
+            $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
+                'eparcel_response'     =>  $eparcel_response
+            ]);
+            $data['html'] .= $html;
+        }
 
-        $shipment = array(
-            'from'						=>	array(
-                'suburb'    => 'BAYSWATER',
-                'state'     => 'VIC',
-                'postcode'  => 3153
-            ),
-            'to'						=>	array(
-                'suburb'    => 'RICHMOND',
-                'state'     => 'VIC',
-                'postcode'  => 3121
-            ),
-            'items'						=>	array(
-                'product_id'    => '3D85',
-                'weight'        => 2.3
-            )
-        );
-        $eparcel_shipments['shipments'][0]  = $shipment;
-        $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
         //echo "<pre>",print_r($eparcel_response),"</pre>"; die();
         /*
         if($ad['country'] == "AU")
@@ -108,12 +134,6 @@ class ajaxfunctionsController extends Controller
             return '3D85';
         }
         */
-
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
-            'eparcel_response'     =>  $eparcel_response
-        ]);
-        $data['html'] .= $html;
-
         $this->view->renderJson($data);
     }
 
