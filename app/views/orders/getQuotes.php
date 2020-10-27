@@ -63,7 +63,7 @@ $postcode = Form::value('postcode');
                     </div>
                 </div>
                 <?php echo Form::displayError('carton_height');?>
-                <label class="col-md-2 mb-3">Weight</label>
+                <label class="col-md-2 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
                 <div class="col-md-4 mb-3">
                     <div class="input-group">
                         <input type="text" class="form-control required number" data-rule-positiveNumber="true" name="carton_weight" id="carton_weight" value="<?php echo Form::value('carton_weight');?>" />
