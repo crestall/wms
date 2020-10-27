@@ -66,7 +66,7 @@ class ajaxfunctionsController extends Controller
 
     public function procGetQuotes()
     {
-        //echo "<pre>",print_r($this->request),"</pre>"; /die();
+        echo "<pre>",print_r($this->request),"</pre>"; die();
         $data = array(
             'error'     =>  false,
             'feedback'  =>  '',
