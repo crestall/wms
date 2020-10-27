@@ -239,7 +239,7 @@
                         $('form#get_quotes').submit(function(e){
                             if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Uploading and Processing Orders...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Contacted Couriers and Getting Prices...</h2></div>' });
                             }
                         });
                     }
