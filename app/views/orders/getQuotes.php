@@ -36,7 +36,7 @@ $postcode = Form::value('postcode');
                 <label class="col-md-2 mb-3">Width</label>
                 <div class="col-md-4 mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control number" data-rule-greaterThan="0" name="carton_width" id="carton_width" value="<?php echo Form::value('carton_width');?>" />
+                        <input type="text" class="form-control number" name="carton_width" id="carton_width" value="<?php echo Form::value('carton_width');?>" />
                         <div class="input-group-append">
                             <span class="input-group-text">cm</span>
                         </div>
