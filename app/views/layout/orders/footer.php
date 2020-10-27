@@ -236,6 +236,12 @@
                         $('select#state, #postcode').change(function(e){
                             $(this).valid();
                         });
+                        $('form#get_quotes').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Uploading and Processing Orders...</h2></div>' });
+                            }
+                        });
                     }
                 },
                 'add-bulk-orders': {

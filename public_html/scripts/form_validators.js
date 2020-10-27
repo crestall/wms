@@ -107,8 +107,6 @@ $(document).ready(function() {
                 error.insertAfter( element.closest( "div.bootstrap-select" ) );
             }
             else if ( element.parent().hasClass('input-group')){
-                console.log('input group found');
-                console.log(element.next('div').attr('class'));
                 error.insertAfter( element.next( "div.input-group-append" ) );
             }
             else {
