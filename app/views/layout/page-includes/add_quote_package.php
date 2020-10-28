@@ -43,5 +43,12 @@ $i = (isset($i))? $i : 0;
         <div class="col-md-3 mb-3">
             <input type="text" class="form-control required digits" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][count]" value="1" />
         </div>
+        <div class="col-md-4 mb-3">
+            <div class="custom-control custom-checkbox col-sm-2">
+                <input class="custom-control-input" type="checkbox" id="name="items[<?php echo $i;?>][pallet]" name="name="items[<?php echo $i;?>][pallet]" />
+                <label class="custom-control-label" for="name="items[<?php echo $i;?>][pallet]">Pallet(s)?</label>
+            </div>
+        </div>
+
     </div>
 </div>
