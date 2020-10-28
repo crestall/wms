@@ -1,7 +1,7 @@
 <?php
 $i = (isset($i))? $i : 0;
 ?>
-<div class="p-3 light-grey mb-3">
+<div class="p-3 light-grey mb-3 apackage">
     <div class="form-group row">
         <label class="col-md-1 mb-3">Width</label>
         <div class="col-md-3 mb-3">

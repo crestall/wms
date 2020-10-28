@@ -278,6 +278,11 @@
                                 });
                             //}
                         });
+                        $("a.add-package").click(function(e){
+                            e.preventDefault();
+                            var package_count = $("div#packages_holder div.apackage").length;
+                            console.log('packages: '+package_count);
+                        });
                     }
                 },
                 'add-bulk-orders': {
