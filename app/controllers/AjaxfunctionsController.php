@@ -82,7 +82,7 @@ class ajaxfunctionsController extends Controller
 
     public function procGetQuotes()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $data = array(
             'error'     =>  false,
             'feedback'  =>  '<ul>',
@@ -122,16 +122,20 @@ class ajaxfunctionsController extends Controller
                 $data['feedback'] .= "<li>A weight is required for all items</li>";
             }
             else
-            for($a = 1; $a <= $item['count']; ++$a)
             {
-                $this_item = array(
-                    "product_id"    => $product_id,
-                    "length"        => $item['length'],
-                    "height"        => $item['height'],
-                    "width"         => $item['width'],
-                    "weight"        => $item['weight']
-                );
-                $the_items[] = $this_item;
+                for($a = 1; $a <= $item['count']; ++$a)
+                {
+                    $pallet = isset($item['pallet'])? 1 : 0;
+                    $this_item = array(
+                        "product_id"    => $product_id,
+                        "length"        => $item['length'],
+                        "height"        => $item['height'],
+                        "width"         => $item['width'],
+                        "weight"        => $item['weight'],
+                        "pallet"        => $pallet
+                    );
+                    $the_items[] = $this_item;
+                }
             }
         }
         $data['feedback'] .= "</ul>";
