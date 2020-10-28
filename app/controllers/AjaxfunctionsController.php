@@ -82,7 +82,7 @@ class ajaxfunctionsController extends Controller
 
     public function procGetQuotes()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $data = array(
             'error'     =>  false,
             'feedback'  =>  '<ul>',
@@ -136,7 +136,7 @@ class ajaxfunctionsController extends Controller
         }
         if(!$data['error'])
         {
-            $shipment = array(
+            $eparcel_shipment = array(
                 'from'  =>	array(
                     'suburb'    => 'BAYSWATER',
                     'state'     => 'VIC',
@@ -150,7 +150,7 @@ class ajaxfunctionsController extends Controller
                 'items' =>	$the_items
             );
 
-            $eparcel_shipments['shipments'][0]  = $shipment;
+            $eparcel_shipments['shipments'][0]  = $eparcel_shipment;
             $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
                 'eparcel_response'     =>  $eparcel_response
