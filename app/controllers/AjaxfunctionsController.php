@@ -134,6 +134,7 @@ class ajaxfunctionsController extends Controller
                 $the_items[] = $this_item;
             }
         }
+        $data['feedback'] .= "</ul>";
         if(!$data['error'])
         {
             $eparcel_shipment = array(
@@ -157,15 +158,6 @@ class ajaxfunctionsController extends Controller
             ]);
             $data['html'] .= $html;
         }
-
-        //echo "<pre>",print_r($eparcel_response),"</pre>"; die();
-        /*
-        if($ad['country'] == "AU")
-        {
-            if($expresspost) return '3J85';
-            return '3D85';
-        }
-        */
         $this->view->renderJson($data);
     }
 
