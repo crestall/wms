@@ -73,7 +73,7 @@ class ajaxfunctionsController extends Controller
             'feedback'  =>  '',
             'html'      =>  ''
         );
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layoue/page-includes/add_quote_package.php', [
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_quote_package.php', [
             'i'     =>  $i
         ]);
         $this->view->renderJson($data);
