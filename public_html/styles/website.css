@@ -248,6 +248,12 @@ div.runsheet-card div.driver-card div.card-header{
     background-color: rgba(108,117,125,0.4);
 }
 
+/*****
+Shipping Cost Estimates
+******/
+div#packages_holder label{
+    font-size: 0.9rem;
+}
 
 /*******
 Order Detail
