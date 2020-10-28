@@ -16,6 +16,7 @@ class ajaxfunctionsController extends Controller
         $actions = [
             'adjustAllocationForm',
             'addJobRunsheets',
+            'addQuotePackage',
             'bulkMoveStock',
             'calcOriginPick',
             'consolidateOrders',
@@ -62,6 +63,20 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function addQuotePackage()
+    {
+        $i = $this->request->data['i'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layoue/page-includes/add_quote_package.php', [
+            'i'     =>  $i
+        ]);
+        $this->view->renderJson($data);
     }
 
     public function procGetQuotes()
