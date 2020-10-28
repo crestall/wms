@@ -111,6 +111,27 @@ class ajaxfunctionsController extends Controller
             $data['error'] = true;
             $data['feedback'] .= "<li>A delivery postcode is required</li>";
         }
+        $the_items = array();
+        foreach($this->request->data['items'] as $item)
+        {
+            if(!$item['weight'] || strlen($item['weight'] = trim($item['weight'])) == 0)
+            {
+                $data['error'] = true;
+                $data['feedback'] .= "<li>A weight is required for all items</li>";
+            }
+            else
+            for($a = 1; $a <= $item['count']; ++$a)
+            {
+                $this_item = array(
+                    "product_id"    => $product_id,
+                    "length"        => $item['length'],
+                    "height"        => $item['height'],
+                    "width"         => $item['width'],
+                    "weight"        => $item['weight']
+                );
+                $the_items[] = $this_item;
+            }
+        }
         $product_id = "3D85";
         $express_product_id = "3J85";
         if(!$data['error'])
@@ -126,22 +147,9 @@ class ajaxfunctionsController extends Controller
                     'state'     => $state,
                     'postcode'  => $postcode
                 ),
-                'items' =>	array()
+                'items' =>	$the_items
             );
-            foreach($this->request->data['items'] as $item)
-            {
-                for($a = 1; $a <= $item['count']; ++$a)
-                {
-                    $this_item = array(
-                        "product_id"    => $product_id,
-                        "length"        => $item['length'],
-                        "height"        => $item['height'],
-                        "width"         => $item['width'],
-                        "weight"        => $item['weight']
-                    );
-                    $shipment['items'][] = $this_item;
-                }
-            }
+
             $eparcel_shipments['shipments'][0]  = $shipment;
             $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
