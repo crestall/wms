@@ -112,6 +112,8 @@ class ajaxfunctionsController extends Controller
             $data['feedback'] .= "<li>A delivery postcode is required</li>";
         }
         $the_items = array();
+        $product_id = "3D85";
+        $express_product_id = "3J85";
         foreach($this->request->data['items'] as $item)
         {
             if(!$item['weight'] || strlen($item['weight'] = trim($item['weight'])) == 0)
@@ -132,8 +134,6 @@ class ajaxfunctionsController extends Controller
                 $the_items[] = $this_item;
             }
         }
-        $product_id = "3D85";
-        $express_product_id = "3J85";
         if(!$data['error'])
         {
             $shipment = array(
