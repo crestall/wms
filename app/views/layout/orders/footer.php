@@ -289,6 +289,10 @@
                                 $('div#packages_holder').append(d.html);
                             });
                         });
+                        $("a#remove-all-packages").click(function(e){
+                            e.preventDefault();
+                            $('div#packages_holder div.apackage').not(':first').remove();
+                        });
                     }
                 },
                 'add-bulk-orders': {
