@@ -285,7 +285,7 @@
                             var data = {
                                 i: package_count
                             }
-                            $.post('/ajaxfunctions/getOrderItemsForSerials', data, function(d){
+                            $.post('/ajaxfunctions/addQuotePackage', data, function(d){
                                 $('div#packages_holder').append(d.html);
                             });
                         });
