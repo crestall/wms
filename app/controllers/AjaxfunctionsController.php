@@ -82,7 +82,7 @@ class ajaxfunctionsController extends Controller
 
     public function procGetQuotes()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $data = array(
             'error'     =>  false,
             'feedback'  =>  '<ul>',
@@ -111,29 +111,27 @@ class ajaxfunctionsController extends Controller
             $data['error'] = true;
             $data['feedback'] .= "<li>A delivery postcode is required</li>";
         }
-        if(!$carton_weight || strlen($carton_weight = trim($carton_weight)) == 0)
-        {
-            $data['error'] = true;
-            $data['feedback'] .= "<li>A weight is required for the item being delivered</li>";
-        }
+        $product_id = "3D85";
+        $express_product_id = "3J85";
         if(!$data['error'])
         {
             $shipment = array(
-                'from'						=>	array(
+                'from'  =>	array(
                     'suburb'    => 'BAYSWATER',
                     'state'     => 'VIC',
                     'postcode'  => 3153
                 ),
-                'to'						=>	array(
+                'to'    =>	array(
                     'suburb'    => $suburb,
                     'state'     => $state,
                     'postcode'  => $postcode
                 ),
-                'items'						=>	array(
-                    'product_id'    => '3D85',
-                    'weight'        => $carton_weight
-                )
+                'items' =>	array()
             );
+            foreach($this->request->data['items'] as $item)
+            {
+                
+            }
             $eparcel_shipments['shipments'][0]  = $shipment;
             $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
