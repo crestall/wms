@@ -45,8 +45,8 @@ $i = (isset($i))? $i : 0;
         </div>
         <div class="col-md-4 mb-3">
             <div class="custom-control custom-checkbox col-sm-2">
-                <input class="custom-control-input" type="checkbox" id="name="items[<?php echo $i;?>][pallet]" name="name="items[<?php echo $i;?>][pallet]" />
-                <label class="custom-control-label" for="name="items[<?php echo $i;?>][pallet]">Pallet(s)?</label>
+                <input class="custom-control-input" type="checkbox" id="pallet_<?php echo $i;?>" name="items[<?php echo $i;?>][pallet]" />
+                <label class="custom-control-label" for="pallet_<?php echo $i;?>">Pallet(s)?</label>
             </div>
         </div>
 
