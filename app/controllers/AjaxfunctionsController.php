@@ -82,7 +82,7 @@ class ajaxfunctionsController extends Controller
 
     public function procGetQuotes()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $data = array(
             'error'     =>  false,
             'feedback'  =>  '<ul>',
@@ -130,7 +130,7 @@ class ajaxfunctionsController extends Controller
             );
             foreach($this->request->data['items'] as $item)
             {
-                
+
             }
             $eparcel_shipments['shipments'][0]  = $shipment;
             $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
