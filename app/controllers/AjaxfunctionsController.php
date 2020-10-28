@@ -134,6 +134,9 @@ class ajaxfunctionsController extends Controller
                 {
                     $this_item = array(
                         "product_id"    => $product_id,
+                        "length"        => $item['length'],
+                        "height"        => $item['height'],
+                        "width"         => $item['width'],
                         "weight"        => $item['weight']
                     );
                     $shipment['items'][] = $this_item;
