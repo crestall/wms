@@ -272,7 +272,7 @@
                                                 .slideDown();
                                         }
                                         $('html, body').animate({
-                                            scrollTop: $("h2.page_header").offset().top
+                                            scrollTop: $("h2#page_header").offset().top
                                         }, 1000);
                                     },
                                     error: function(xhr, e){
