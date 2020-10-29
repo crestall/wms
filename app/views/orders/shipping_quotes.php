@@ -40,7 +40,8 @@
                     <div class='errorbox'>
                         <p><?php echo $express_response['errors'][0]['message'];?></p>
                     </div>
-                <?php $express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1, 2);?>
+                <?php else:
+                    $express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1, 2);?>
                     <div class="row">
                         <label class="col-8">Quoted Price</label>
                         <div class="col-4">
