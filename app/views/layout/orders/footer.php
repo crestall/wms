@@ -259,7 +259,11 @@
                                                 .hide()
                                                 .removeClass()
                                                 .addClass("errorbox")
-                                                .slideDown()
+                                                .slideDown(function(){
+                                                    $('html, body').animate({
+                                                        scrollTop: $("#feedback_holder").offset().top
+                                                    }, 2000);
+                                                })
                                                 .html("<h2><i class='far fa-times-circle'></i>There has been an error with how the form was filled in</h2><p>Please see below"+d.feedback);
                                         }
                                         else
