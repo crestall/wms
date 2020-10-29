@@ -517,8 +517,7 @@ var autoCompleter = {
             },
             select: function(event, ui) {
                 $('#'+prefix+'state').val(ui.item.state).change();
-                console.log('state '+ui.item.state);
-                //$("#"+prefix+"state[value='"+ui.item.state+"']").attr("selected", true);
+                console.log('suburb '+ui.item.suburb);
                 $('#'+prefix+'suburb').val(ui.item.suburb);
                 $('#'+prefix+'postcode').val(ui.item.postcode).change();
                 $('#'+prefix+'country').val('AU');
