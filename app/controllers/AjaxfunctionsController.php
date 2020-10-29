@@ -111,7 +111,8 @@ class ajaxfunctionsController extends Controller
             $data['error'] = true;
             $data['feedback'] .= "<li>A delivery postcode is required</li>";
         }
-        $the_items = array();
+        $eparcel_items = array();
+        $df_items = array();
         $product_id = "3D85";
         $express_product_id = "3J85";
         foreach($this->request->data['items'] as $item)
@@ -125,17 +126,25 @@ class ajaxfunctionsController extends Controller
             {
                 for($a = 1; $a <= $item['count']; ++$a)
                 {
-                    $pallet = isset($item['pallet'])? 1 : 0;
-                    $this_item = array(
+                    $this_eparcel_item = array(
                         "product_id"    => $product_id,
                         "length"        => $item['length'],
                         "height"        => $item['height'],
                         "width"         => $item['width'],
-                        "weight"        => $item['weight'],
-                        "pallet"        => $pallet
+                        "weight"        => $item['weight']
                     );
-                    $the_items[] = $this_item;
+                    $eparcel_items[] = $this_eparcel_item;
                 }
+                $rate_type = isset($item['pallet'])? "PALLET" : "ITEM";
+                $this_df_item = array(
+                    "RateType"  => $rate_type,
+                    "Items"     => $item['count'],
+                    "Kgs"       => ceil($item['weight']),
+                    "Length"    => $item['length'],
+                    "Width"     => $item['width'],
+                    "Height"    => $item['height']
+                );
+                $df_items[] = $this_df_item;
             }
         }
         $data['feedback'] .= "</ul>";
@@ -152,9 +161,19 @@ class ajaxfunctionsController extends Controller
                     'state'     => $state,
                     'postcode'  => $postcode
                 ),
-                'items' =>	$the_items
+                'items' =>	$eparcel_items
             );
-
+            $direct_freight_shipment = array(
+                'ConsignmentList'   => array(
+                    array(
+                        'ReceiverDetails'   => array(
+                            'suburb'    => $suburb,
+                            'postcode'  => $postcode
+                        ),
+                        'ConsignmentLineItems'  => $df_items
+                    )
+                )
+            );
             $eparcel_shipments['shipments'][0]  = $eparcel_shipment;
             $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
