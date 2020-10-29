@@ -167,8 +167,8 @@ class ajaxfunctionsController extends Controller
                 'ConsignmentList'   => array(
                     array(
                         'ReceiverDetails'   => array(
-                            'suburb'    => $suburb,
-                            'postcode'  => $postcode
+                            'Suburb'    => $suburb,
+                            'Postcode'  => $postcode
                         ),
                         'ConsignmentLineItems'  => $df_items
                     )
