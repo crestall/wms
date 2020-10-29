@@ -521,6 +521,7 @@ var autoCompleter = {
                 $('#'+prefix+'suburb').val(ui.item.suburb);
                 $('#'+prefix+'postcode').val(ui.item.postcode).change();
                 $('#'+prefix+'country').val('AU');
+                return false;
             },
             change: function (event, ui) {
                 return false;
