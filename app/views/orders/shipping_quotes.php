@@ -35,3 +35,4 @@
 <?php endif;?>
 
 <?php echo "<pre>",print_r($eparcel_response),"</pre>";?>
+<?php echo "<pre>",print_r($df_response),"</pre>";?>
