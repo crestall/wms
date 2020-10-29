@@ -272,8 +272,9 @@
                                                 .slideDown();
                                         }
                                         var $nav = $("nav.fixed-top");
+                                        var scrollSpot = $("h2#page_header").offset().top - $nav.height();
                                         $('html, body').animate({
-                                            scrollTop: $("h2#page_header").offset().top + $nav.height()
+                                            scrollTop: scrollSpot
                                         }, 1000);
                                     },
                                     error: function(xhr, e){
