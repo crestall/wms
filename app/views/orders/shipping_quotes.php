@@ -58,7 +58,20 @@
                 Direct Freight Pricing
             </div>
             <div class="card-body">
-                <?php echo "<pre>",print_r($df_response),"</pre>";?>
+                <?php //echo "<pre>",print_r($df_response),"</pre>";?>
+                <?php if($df_response['ResponseCode'] == 300):
+                    $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);?>
+                    <div class="row">
+                        <label class="col-8">Quoted Price</label>
+                        <div class="col-4">
+                            <?php echo $df_charge;?>
+                        </div>
+                    </div>
+                <?php else:?>
+                    <div class='errorbox'>
+                        <p><?php echo df_response['ResponseMessage'];?></p>
+                    </div>
+                <?php endif;?>
             </div>
         </div>
     </div>
