@@ -233,6 +233,7 @@
                 'get-quotes': {
                     init: function(){
                         autoCompleter.suburbAutoCompleteSelect($('#suburb'));
+                        autoCompleter.suburbAutoCompleteSelect($('#postcode'));
                         $('select#state, #postcode').change(function(e){
                             $(this).valid();
                         });
