@@ -35,7 +35,19 @@
                 Eparcel Express Pricing
             </div>
             <div class="card-body">
-                <?php echo "<pre>",print_r($express_response),"</pre>";?>
+                <?php //echo "<pre>",print_r($express_response),"</pre>";?>
+                <?php if(isset($express_response['errors'])):?>
+                    <div class='errorbox'>
+                        <p><?php echo $express_response['errors'][0]['message'];?></p>
+                    </div>
+                <?php $express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1, 2);?>
+                    <div class="row">
+                        <label class="col-8">Quoted Price</label>
+                        <div class="col-4">
+                            <?php echo $express_charge;?>
+                        </div>
+                    </div>
+                <?php endif;?>
             </div>
         </div>
     </div>
