@@ -22,6 +22,17 @@ class OrdersController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function getQuotes()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "get-quotes");
+        Config::set('curPage', "get-quotes");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/getQuotes.php', [
+            'page_title'        =>  "Get Shipping Estimates",
+            'pht'               =>  ":Get Shipping Estimates"
+        ]);
+    }
+
     public function bookDirectFreightCollection()
     {
         //render the page
@@ -718,7 +729,8 @@ class OrdersController extends Controller
             "addressUpdate",
             "orderEdit",
             "viewDetails",
-            "viewStoreorders"
+            "viewStoreorders",
+            "getQotes"
         ));
         //only for clients
         $allowed_resources = array(

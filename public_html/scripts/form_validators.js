@@ -30,7 +30,7 @@ $(document).ready(function() {
 
     $.validator.addMethod('positiveNumber', function (value, element) {
         	return (this.optional(element) || Number(value) > 0 );
-    }, 'Enter a positive whole number.');
+    }, 'Enter a positive number.');
 
     $.validator.addMethod('positiveNumber0', function (value, element) {
         	return (this.optional(element) || Number(value) >= 0 );
@@ -105,7 +105,11 @@ $(document).ready(function() {
             }
             else if( element.prop( "type" ) === "select-one" ) {
                 error.insertAfter( element.closest( "div.bootstrap-select" ) );
-            }else {
+            }
+            else if ( element.parent().hasClass('input-group')){
+                error.insertAfter( element.next( "div.input-group-append" ) );
+            }
+            else {
         		error.insertAfter( element );
         	}
         }
@@ -151,8 +155,20 @@ $(document).ready(function() {
 			status_id:{
 				notNone: "A status must be chosen"
 			},
-
 		}
+    });
+    ///////////////////////////////////////////////////////////////////////////////
+    $('form#get_quotes').validate({
+         rules:{
+    		state:{
+    			notNone: true
+    		}
+    	},
+		messages:{
+			state:{
+				notNone: "A state must be chosen"
+			}
+        }
     });
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_finisher').validate();

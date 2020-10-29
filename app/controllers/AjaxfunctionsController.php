@@ -16,6 +16,7 @@ class ajaxfunctionsController extends Controller
         $actions = [
             'adjustAllocationForm',
             'addJobRunsheets',
+            'addQuotePackage',
             'bulkMoveStock',
             'calcOriginPick',
             'consolidateOrders',
@@ -47,6 +48,7 @@ class ajaxfunctionsController extends Controller
             'checkBarcodes',
             'checkBoxBarcodes',
             'checkLocations',
+            'procGetQuotes',
             'reactivateUser',
             'recordDispatch',
             'removeCourier',
@@ -61,6 +63,153 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function addQuotePackage()
+    {
+        $i = $this->request->data['i'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_quote_package.php', [
+            'i'     =>  $i
+        ]);
+        $data['html'] = $html;
+        $this->view->renderJson($data);
+    }
+
+    public function procGetQuotes()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '<ul>',
+            'html'      =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$suburb || strlen($suburb = trim($suburb)) == 0)
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "<li>A delivery suburb is required</li>";
+        }
+        if(!$state || strlen($state = trim($state)) == 0)
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "<li>A delivery state is required</li>";
+        }
+        if(!$postcode || strlen($postcode = trim($postcode)) == 0)
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "<li>A delivery postcode is required</li>";
+        }
+        $eparcel_items = array();
+        $express_items = array();
+        $df_items = array();
+        $product_id = "3D85";
+        $express_product_id = "3J85";
+        foreach($this->request->data['items'] as $item)
+        {
+            if(!$item['weight'] || strlen($item['weight'] = trim($item['weight'])) == 0)
+            {
+                $data['error'] = true;
+                $data['feedback'] .= "<li>A weight is required for all items</li>";
+            }
+            else
+            {
+                for($a = 1; $a <= $item['count']; ++$a)
+                {
+                    $this_eparcel_item = array(
+                        "product_id"    => $product_id,
+                        "length"        => $item['length'],
+                        "height"        => $item['height'],
+                        "width"         => $item['width'],
+                        "weight"        => $item['weight']
+                    );
+                    $this_express_item = array(
+                        "product_id"    => $express_product_id,
+                        "length"        => $item['length'],
+                        "height"        => $item['height'],
+                        "width"         => $item['width'],
+                        "weight"        => $item['weight']
+                    );
+                    $eparcel_items[] = $this_eparcel_item;
+                    $express_items[] = $this_express_item;
+                }
+                $rate_type = isset($item['pallet'])? "PALLET" : "ITEM";
+                $this_df_item = array(
+                    "RateType"  => $rate_type,
+                    "Items"     => $item['count'],
+                    "Kgs"       => ceil($item['weight']),
+                    "Length"    => $item['length'],
+                    "Width"     => $item['width'],
+                    "Height"    => $item['height']
+                );
+                $df_items[] = $this_df_item;
+            }
+        }
+        $data['feedback'] .= "</ul>";
+        if(!$data['error'])
+        {
+            $eparcel_shipment = array(
+                'from'  =>	array(
+                    'suburb'    => 'BAYSWATER',
+                    'state'     => 'VIC',
+                    'postcode'  => 3153
+                ),
+                'to'    =>	array(
+                    'suburb'    => $suburb,
+                    'state'     => $state,
+                    'postcode'  => $postcode
+                ),
+                'items' =>	$eparcel_items
+            );
+            $express_shipment = array(
+                'from'  =>	array(
+                    'suburb'    => 'BAYSWATER',
+                    'state'     => 'VIC',
+                    'postcode'  => 3153
+                ),
+                'to'    =>	array(
+                    'suburb'    => $suburb,
+                    'state'     => $state,
+                    'postcode'  => $postcode
+                ),
+                'items' =>	$express_items
+            );
+            $direct_freight_shipment = array(
+                'ConsignmentList'   => array(
+                    array(
+                        'ReceiverDetails'   => array(
+                            'Suburb'    => $suburb,
+                            'Postcode'  => $postcode
+                        ),
+                        'ConsignmentLineItems'  => $df_items
+                    )
+                )
+            );
+            $eparcel_shipments['shipments'][0]  = $eparcel_shipment;
+            $express_shipments['shipments'][0]  = $express_shipment;
+            $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
+            $express_response = $this->Eparcel->GetQuote($express_shipments);
+            $df_r = $this->directfreight->getQuote($direct_freight_shipment);
+            $df_response = json_decode($df_r,true);
+            $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
+                'eparcel_response'  => $eparcel_response,
+                'df_response'       => $df_response,
+                'express_response'  => $express_response
+            ]);
+            $data['html'] .= $html;
+        }
+        $this->view->renderJson($data);
     }
 
     public function consolidateOrders()
@@ -232,7 +381,7 @@ class ajaxfunctionsController extends Controller
             $data['error'] = true;
             $data['feedback'] = 'No items found for that order number';
         }
-        
+
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'forms/add_serials.php', [
             'items'     =>  $items,
             'order_id'  =>  $order['id']

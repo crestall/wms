@@ -5,6 +5,45 @@
         <script>
             //the actions for each page
             var actions = {
+                'common':{
+                    generateURL: function(url)
+                    {
+                        //var url = base;
+                        if($('#date_from_value').val())
+                            url += "/from="+$('#date_from_value').val();
+                        if($('#date_to_value').val())
+                            url += "/to="+$('#date_to_value').val();
+                        if($('#client_selector').val() > 0)
+                            url += "/client="+$('#client_selector').val();
+                        if($('#customer_selector').val() > 0)
+                            url += "/customer="+$('#customer_selector').val();
+                        if($('#driver_selector').val() > 0)
+                            url += "/driver="+$('#driver_selector').val();
+                        window.location.href = url;
+                    }
+                },
+                'runsheet-report':{
+                    init: function(){
+                        datePicker.betweenDates();
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
+                            actions['common']['generateURL']('/runsheets/runsheet-report');
+                        });
+                        $('select#client_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
+                            actions['common']['generateURL']('/runsheets/runsheet-report');
+                        });
+                        $('select#driver_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
+                            actions['common']['generateURL']('/runsheets/runsheet-report');
+                        });
+                        $('select#customer_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Runsheets...</h1></div>' });
+                            actions['common']['generateURL']('/runsheets/runsheet-report');
+                        });
+                    }
+                },
                 'view-runsheets':{
                     init: function(){
                         dataTable.init($('table#runsheets_table'), {

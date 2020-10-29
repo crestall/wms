@@ -21,6 +21,13 @@ class Runsheet extends Model{
     public $table = "runsheets";
     public $tasks_table = "runsheet_tasks";
 
+    public function getCompletedRunsheets($args)
+    {
+        $db = Database::openConnection();
+        $q = $this->getCompletedRunsheetsQuery($args);
+        return $db->queryData($q);
+    }
+
     public function getRunsheetsForDisplay($completed = false, $printed = false)
     {
         $db = Database::openConnection();
@@ -252,6 +259,34 @@ class Runsheet extends Model{
         }
 
         return true;
+    }
+
+    private function getCompletedRunsheetsQuery($args)
+    {
+        $defaults = array(
+            'from'          => strtotime('monday this week'),
+            'to'            => time(),
+            'client_id'     => 0,
+            'customer_id'   => 0,
+            'driver_id'     => 0,
+        );
+        $args = array_merge($defaults, $args);
+        extract($args);
+        //echo "<pre>",print_r($args),"</pre>";//die();
+        $q = $this->getRunsheetQuery();
+        $q .= "
+            WHERE (rst.completed = 1 AND rs.updated_date >= $from AND rs.updated_date <= $to)
+        ";
+
+        if($client_id > 0)
+            $q .= " AND( o.client_id = $client_id )";
+        if($customer_id > 0)
+            $q .= " AND( pj.customer_id = $customer_id )";
+        if($driver_id > 0)
+            $q .= " AND( rst.driver_id = $driver_id)";
+        $q .= " ORDER BY rs.runsheet_day DESC";
+        //echo $q; die();
+        return $q;
     }
 
     private function getRunsheetQuery()

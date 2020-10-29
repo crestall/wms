@@ -24,6 +24,34 @@ class RunsheetsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function runsheetReport()
+    {
+        $driver_id = (isset($this->request->params['args']['driver']))? $this->request->params['args']['driver'] : 0;
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        $customer_id = (isset($this->request->params['args']['customer']))? $this->request->params['args']['customer'] : 0;
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $rs_array = array(
+            'driver_id'     =>  $driver_id,
+            'client_id'     =>  $client_id,
+            'customer_id'   =>  $customer_id,
+            'from'          =>  $from,
+            'to'            =>  $to
+        );
+        $rss = $this->runsheet->getCompletedRunsheets($rs_array);
+        $runsheets = $this->generateRunsheetDriverArray($rss);
+        $page_array = array(
+            'page_title'    =>  "Completed Runsheets",
+            'pht'           =>  ": Completed Runsheets",
+            'runsheets'     =>  $runsheets
+        );
+        $page_array = array_merge($page_array, $rs_array);
+        //render the page
+        Config::setJsConfig('curPage', "runsheet-report");
+        Config::set('curPage', "runsheet-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/completeRunsheets.php', $page_array);
+    }
+
     public function runsheetSearch()
     {
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",[
@@ -74,7 +102,7 @@ class RunsheetsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "job-search-results");
         Config::set('curPage', "job-search-results");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/jobSearchResults.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'jobs/jobSearchResults.php', [
             'page_title'    =>  "Search Results",
             'pht'           =>  ": Job Search Results",
             'form'          =>  $form,
@@ -206,60 +234,8 @@ class RunsheetsController extends Controller
 
     public function finaliseRunsheets()
     {
-        $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLTED PRINTED
-        $runsheets = array();
-        //echo "<pre>",print_r($rss),"</pre>";die();
-        $di = 0;
-        foreach($rss as $rs)
-        {
-            if(!isset($runsheets[$rs['runsheet_day']]))
-            {
-                $runsheets[$rs['runsheet_day']] = array(
-                    'runsheet_id'   => $rs['runsheet_id']
-                );
-                $di = 0;
-            }
-            if(!isset($runsheets[$rs['runsheet_day']]['drivers']))
-                $runsheets[$rs['runsheet_day']]['drivers'] = array();
-            if(($tdi = array_search($rs['driver_id'], array_column($runsheets[$rs['runsheet_day']]['drivers'], 'id'))) === false)
-            {
-                //echo "<p>No id for {$rs['driver_id']} found. Will add it with index $di</p>";
-                $runsheets[$rs['runsheet_day']]['drivers'][$di] = array(
-                    'id'    => $rs['driver_id'],
-                    'name'  => $rs['driver_name'],
-                    'tasks' => array()
-                );
-                if(!empty($rs['job_id']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = array(
-                        'task_id'       => $rs['id'],
-                        'job_number'    => $rs['job_number'],
-                        'order_number'  => 0
-                    );
-                if(!empty($rs['order_number']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = array(
-                        'task_id'       => $rs['id'],
-                        'job_number'    => 0,
-                        'order_number'  => $rs['order_number']
-                    );
-                ++$di;
-            }
-            else
-            {
-                //echo "<p>Id {$rs['driver_id']} found. It is $tdi</p>";
-                if(!empty($rs['job_id']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = array(
-                        'task_id'       => $rs['id'],
-                        'job_number'    => $rs['job_number'],
-                        'order_number'  => 0
-                    );
-                if(!empty($rs['order_number']))
-                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = array(
-                        'task_id'       => $rs['id'],
-                        'job_number'    => 0,
-                        'order_number'  => $rs['order_number']
-                    );
-            }
-        }
+        $rss = $this->runsheet->getRunsheetsForDisplay(false, true);  //NOT COMPLETED PRINTED
+        $runsheets = $this->generateRunsheetDriverArray($rss);
         //echo "<pre>",print_r($runsheets),"</pre>";die();
         //render the page
         Config::setJsConfig('curPage', "finalise-runsheets");
@@ -299,6 +275,96 @@ class RunsheetsController extends Controller
             'finisher'      =>  $finisher_info,
             'finisher2'     =>  $finisher2_info
         ]);
+    }
+
+    private function generateRunsheetDriverArray($rss)
+    {
+        $runsheets = array();
+        //echo "<pre>",print_r($rss),"</pre>";die();
+        $di = 0;
+        foreach($rss as $rs)
+        {
+            $task_array = array(
+                'task_id'       => $rs['id'],
+                'order_number'  => 0,
+                'job_number'    => 0,
+                'client'        => '',
+                'customer'      => '',
+                'units'         => $rs['units'],
+                'address'       => array(
+                    'state'     => 'VIC',
+                    'country'   => 'AU'
+                )
+            );
+            if(!isset($runsheets[$rs['runsheet_day']]))
+            {
+                $runsheets[$rs['runsheet_day']] = array(
+                    'runsheet_id'   => $rs['runsheet_id'],
+                    'created_date'  => $rs['created_date'],
+                    'updated_date'  => $rs['updated_date']
+                );
+                $di = 0;
+            }
+            if(!isset($runsheets[$rs['runsheet_day']]['drivers']))
+                $runsheets[$rs['runsheet_day']]['drivers'] = array();
+            if(($tdi = array_search($rs['driver_id'], array_column($runsheets[$rs['runsheet_day']]['drivers'], 'id'))) === false)
+            {
+                //echo "<p>No id for {$rs['driver_id']} found. Will add it with index $di</p>";
+                $runsheets[$rs['runsheet_day']]['drivers'][$di] = array(
+                    'id'    => $rs['driver_id'],
+                    'name'  => $rs['driver_name'],
+                    'tasks' => array()
+                );
+                if(!empty($rs['job_id']))
+                {
+                    $task_array['job_number'] = $rs['job_number'];
+                    $task_array['customer'] = $rs['customer_name'];
+                    $task_array['address']['address'] = $rs['job_address'];
+                    $task_array['address']['address2'] = $rs['job_address2'];
+                    $task_array['address']['suburb'] = $rs['job_suburb'];
+                    $task_array['address']['postcode'] = $rs['job_postcode'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
+                }
+                if(!empty($rs['order_number']))
+                {
+                    $task_array['order_number'] = $rs['order_number'];
+                    $task_array['customer'] = $rs['order_customer'];
+                    $task_array['client'] = $rs['order_client_name'];
+                    $task_array['address']['address'] = $rs['order_address'];
+                    $task_array['address']['address2'] = $rs['order_address2'];
+                    $task_array['address']['suburb'] = $rs['order_suburb'];
+                    $task_array['address']['postcode'] = $rs['order_postcode'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
+                }
+                ++$di;
+            }
+            else
+            {
+                //echo "<p>Id {$rs['driver_id']} found. It is $tdi</p>";
+                if(!empty($rs['job_id']))
+                {
+                    $task_array['job_number'] = $rs['job_number'];
+                    $task_array['customer'] = $rs['customer_name'];
+                    $task_array['address']['address'] = $rs['job_address'];
+                    $task_array['address']['address2'] = $rs['job_address2'];
+                    $task_array['address']['suburb'] = $rs['job_suburb'];
+                    $task_array['address']['postcode'] = $rs['job_postcode'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
+                }
+                if(!empty($rs['order_number']))
+                {
+                    $task_array['order_number'] = $rs['order_number'];
+                    $task_array['customer'] = $rs['order_customer'];
+                    $task_array['client'] = $rs['order_client_name'];
+                    $task_array['address']['address'] = $rs['order_address'];
+                    $task_array['address']['address2'] = $rs['order_address2'];
+                    $task_array['address']['suburb'] = $rs['order_suburb'];
+                    $task_array['address']['postcode'] = $rs['order_postcode'];
+                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
+                }
+            }
+        }
+        return $runsheets;
     }
 
     public function isAuthorized()

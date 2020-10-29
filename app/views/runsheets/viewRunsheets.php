@@ -34,7 +34,8 @@ $db = Database::openConnection();
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="errorbox">
-                            <h2><i class="fas fa-exclamation-triangle"></i> No Runsheets Listed</h2>
+                            <h2><i class="fas fa-exclamation-triangle"></i> No Open Runsheets Listed</h2>
+                            <p></p>
                         </div>
                     </div>
                 </div>

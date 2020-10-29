@@ -61,6 +61,10 @@ $padmin = array(
         'finalise-runsheets'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-check" data-fa-transform="right-2 shrink-2" style="color:#66ff33"></i></span></div>'
+        ),
+        'runsheet-report'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-file-chart-pie" data-fa-transform="right-4 shrink-4 up-2 rotate-15"></i></span></div>'
         )
     ),
     'production-settings'   => array(
@@ -167,6 +171,10 @@ $admin = array(
         'add-order' =>  array(
             'display'   => true,
             'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+        ),
+        'get-quotes'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fal fa-file-invoice-dollar fa-3x"></i>'
         ),
         'add-bulk-orders' =>  array(
             'display'   => true,
