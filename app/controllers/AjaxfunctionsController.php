@@ -112,6 +112,7 @@ class ajaxfunctionsController extends Controller
             $data['feedback'] .= "<li>A delivery postcode is required</li>";
         }
         $eparcel_items = array();
+        $express_items = array();
         $df_items = array();
         $product_id = "3D85";
         $express_product_id = "3J85";
@@ -133,7 +134,15 @@ class ajaxfunctionsController extends Controller
                         "width"         => $item['width'],
                         "weight"        => $item['weight']
                     );
+                    $this_express_item = array(
+                        "product_id"    => $express_product_id,
+                        "length"        => $item['length'],
+                        "height"        => $item['height'],
+                        "width"         => $item['width'],
+                        "weight"        => $item['weight']
+                    );
                     $eparcel_items[] = $this_eparcel_item;
+                    $express_items[] = $this_express_item;
                 }
                 $rate_type = isset($item['pallet'])? "PALLET" : "ITEM";
                 $this_df_item = array(
@@ -163,6 +172,19 @@ class ajaxfunctionsController extends Controller
                 ),
                 'items' =>	$eparcel_items
             );
+            $express_shipment = array(
+                'from'  =>	array(
+                    'suburb'    => 'BAYSWATER',
+                    'state'     => 'VIC',
+                    'postcode'  => 3153
+                ),
+                'to'    =>	array(
+                    'suburb'    => $suburb,
+                    'state'     => $state,
+                    'postcode'  => $postcode
+                ),
+                'items' =>	$express_items
+            );
             $direct_freight_shipment = array(
                 'ConsignmentList'   => array(
                     array(
@@ -175,11 +197,14 @@ class ajaxfunctionsController extends Controller
                 )
             );
             $eparcel_shipments['shipments'][0]  = $eparcel_shipment;
+            $express_shipments['shipments'][0]  = $express_shipment;
             $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
+            $express_response = $this->Eparcel->GetQuote($express_shipments);
             $df_response = $this->directfreight->getQuote($direct_freight_shipment);
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
                 'eparcel_response'  => $eparcel_response,
-                'df_response'       => $df_response
+                'df_response'       => $df_response,
+                'express_response'  => $express_response
             ]);
             $data['html'] .= $html;
         }
