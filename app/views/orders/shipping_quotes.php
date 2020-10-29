@@ -12,12 +12,18 @@
                 Eparcel Pricing
             </div>
         </div>
+        <div class="card-body">
+            <?php echo "<pre>",print_r($eparcel_response),"</pre>";?>
+        </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
         <div class="card border-secondary h-100 order-card">
             <div class="card-header bg-secondary text-white">
                 Eparcel Express Pricing
             </div>
+        </div>
+        <div class="card-body">
+            <?php echo "<pre>",print_r($express_response),"</pre>";?>
         </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
@@ -26,6 +32,9 @@
                 Direct Freight Pricing
             </div>
         </div>
+        <div class="card-body">
+            <?php echo "<pre>",print_r($df_response),"</pre>";?>
+        </div>
     </div>
 </div>
 <?php if(isset($eparcel_response['errors'])):?>
@@ -33,7 +42,3 @@
 <?php else:?>
 
 <?php endif;?>
-
-<?php echo "<pre>",print_r($eparcel_response),"</pre>";?>
-<?php echo "<pre>",print_r($df_response),"</pre>";?>
-<?php echo "<pre>",print_r($express_response),"</pre>";?>
