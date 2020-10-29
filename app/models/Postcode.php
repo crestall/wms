@@ -28,8 +28,8 @@ class Postcode extends Model{
 
         foreach($rows as $row)
         {
-        	$row_array['value'] = $row['suburb'];
-        	$row_array['label'] = $row['suburb']."-".$row['state'];
+        	$row_array['suburb'] = $row['suburb'];
+        	$row_array['label'] = $row['suburb']."-".$row['state']." (".$row['postcode'].")";
         	$row_array['state'] = $row['state'];
             $row_array['postcode'] = $row['postcode'];
         	//$row_array['suburb'] = $row['suburb'];
