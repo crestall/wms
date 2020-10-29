@@ -28,8 +28,8 @@ class OrdersController extends Controller
         Config::setJsConfig('curPage', "get-quotes");
         Config::set('curPage', "get-quotes");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/getQuotes.php', [
-            'page_title'        =>  "Get Shipping Costs",
-            'pht'               =>  ":Get Shipping Costs"
+            'page_title'        =>  "Get Shipping Estimates",
+            'pht'               =>  ":Get Shipping Estimates"
         ]);
     }
 
