@@ -269,7 +269,11 @@
                                                 .removeClass()
                                                 .addClass("feedbackbox")
                                                 .html(d.html)
-                                                .slideDown();
+                                                .slideDown(function(){
+                                                    $('html, body').animate({
+                                                        scrollTop: $("#feedback_holder").offset().top
+                                                    }, 2000);
+                                                });
                                         }
                                     },
                                     error: function(xhr, e){
