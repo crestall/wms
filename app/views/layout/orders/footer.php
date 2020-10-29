@@ -271,8 +271,9 @@
                                                 .html(d.html)
                                                 .slideDown();
                                         }
+                                        var $nav = $("nav.fixed-top");
                                         $('html, body').animate({
-                                            scrollTop: $("h2#page_header").offset().top
+                                            scrollTop: $("h2#page_header").offset().top + $nav.height()
                                         }, 1000);
                                     },
                                     error: function(xhr, e){
