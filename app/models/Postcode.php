@@ -21,7 +21,7 @@ class Postcode extends Model{
         $q = strtoupper($term);
         if (!$q) return;
 
-        $rows = $db->queryData("SELECT `postcode`, `state`, `suburb` FROM `postcodes` WHERE (`suburb` LIKE :term)", array('term' => '%'.$q.'%'));
+        $rows = $db->queryData("SELECT `postcode`, `state`, `suburb` FROM `postcodes` WHERE (`suburb` LIKE :term1) OR (`postcode` LIKE :term2)", array('term1' => '%'.$q.'%', 'term2' => '%'.$q.'%'));
         //echo $q;
         //print_r($rows);die();
         $return_array = array();
