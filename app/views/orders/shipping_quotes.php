@@ -12,7 +12,20 @@
                 Eparcel Pricing
             </div>
             <div class="card-body">
-                <?php echo "<pre>",print_r($eparcel_response),"</pre>";?>
+                <?php //echo "<pre>",print_r($eparcel_response),"</pre>";?>
+                <?php if(isset($eparcel_response['errors'])):?>
+                    <div class='errorbox'>
+                        <p><?php echo $eparcel_response['errors'][0]['message'];?></p>
+                    </div>
+                <?php else:
+                    $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1, 2);?>
+                    <div class="row">
+                        <label class="col-8">Quoted Price</label>
+                        <div class="col-4">
+                            <?php echo $eparcel_charge;?>
+                        </div>
+                    </div>
+                <?php endif;?>
             </div>
         </div>
     </div>
