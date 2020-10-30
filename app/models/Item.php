@@ -696,7 +696,7 @@ class Item extends Model{
     public function getSelectLocationAvailableCounts($item_id, $selected = false)
     {
         $db = Database::openConnection();
-        $lresult = $db-queryRow("
+        $l_result = $db->queryRow("
             SELECT a.location, a.location_id, SUM(a.qty - IFNULL(b.allocated,0) - a.qc_count) as available,
             GROUP_CONCAT(
                 DISTINCT IF( (a.qty - IFNULL(b.allocated,0) -  a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0)  - a.qc_count), NULL ) ORDER BY (a.qty - IFNULL(b.allocated,0) - a.qc_count) DESC
