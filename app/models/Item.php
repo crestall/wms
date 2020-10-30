@@ -733,7 +733,7 @@ class Item extends Model{
         	{
         		$return_string .= "selected='selected' ";
         	}
-            $return_string .= ">{$l_result['location']}</option>";
+            $return_string .= ">$i</option>";
         }
         return $return_string;
     }
