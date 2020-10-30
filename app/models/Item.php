@@ -693,6 +693,51 @@ class Item extends Model{
         return $return_array;
     }
 
+    public function getSelectLocationAvailableCounts($item_id, $selected = false)
+    {
+        $db = Database::openConnection();
+        $l_result = $db->queryRow("
+            SELECT a.location, a.location_id, SUM(a.qty - IFNULL(b.allocated,0) - a.qc_count) as available,
+            GROUP_CONCAT(
+                DISTINCT IF( (a.qty - IFNULL(b.allocated,0) -  a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0)  - a.qc_count), NULL ) ORDER BY (a.qty - IFNULL(b.allocated,0) - a.qc_count) DESC
+            ) AS select_choices
+            FROM
+            (
+                SELECT
+                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name
+                FROM
+                    items_locations il JOIN locations l ON il.location_id = l.id join items i on il.item_id = i.id
+                WHERE
+                    i.id = $item_id
+            ) a
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    orders_items oi JOIN orders o ON oi.order_id = o.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) b
+            ON a.item_id = b.item_id AND a.location_id = b.location_id
+            ORDER BY name
+        ");
+        $choices = explode(",",$l_result['select_choices']);
+        $return_string = "";
+        foreach($choices as $i)
+        {
+            $return_string .= "<option ";
+            if($selected && $selected == $i)
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+            $return_string .= ">$i</option>";
+        }
+        return $return_string;
+    }
+
     public function getAutocompleteItems($data, $fulfilled_id)
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
