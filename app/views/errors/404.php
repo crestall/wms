@@ -11,11 +11,11 @@ $quote = $quotes[$credit];
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <div class="bubble bubble-bottom-left row">
-            <div class="error-name col-3">
+            <div class="error-name col-3 offset-1">
                 <h1>404</h1>
                 <h2>ERROR</h2>
             </div>
-            <div class="error-quote col-9">
+            <div class="error-quote col-4">
                 <?php echo $quote;?>
             </div>
         </div>
