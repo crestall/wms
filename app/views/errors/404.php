@@ -11,7 +11,7 @@ $quote = $quotes[$credit];
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <div class="bubble bubble-bottom-left row">
-            <div class="error-name col-3 mr-3">
+            <div class="error-name col-3">
                 <h1>404</h1>
                 <h2>ERROR</h2>
             </div>
