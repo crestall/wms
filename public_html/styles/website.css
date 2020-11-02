@@ -372,14 +372,11 @@ Error Pages
 ******/
 div.error_name{
     text-align: center;
-    margin-right: 5%;
-    width:25%;
     color: #996600;
 }
 
 div.error_quote{
     text-align: left;
-    width:70%;
     margin-top: 35px;
     color: #222;
     font-style: italic;
