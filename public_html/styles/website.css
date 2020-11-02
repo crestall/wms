@@ -370,23 +370,42 @@ label.error{
 /*****
 Error Pages
 ******/
-div.broken_page{
-    min-height:666px;
-    background: url(/images/backgrounds/error-bg.jpg) center center no-repeat #fff!important;
-    width: 100%;
+div.error_name{
+    text-align: center;
+    margin-right: 5%;
+    width:25%;
+    color: #996600;
 }
 
-div.error_page{
-    min-height:666px;
-    width: 100%;
+div.error_quote{
+    text-align: left;
+    width:70%;
+    margin-top: 35px;
+    color: #222;
+    font-style: italic;
 }
 
-div.not_found{
-    background: url(/images/backgrounds/404_bg1.png) center center no-repeat;
+div.bubble {
+    position: relative;
+    font-size: 18px;
+    line-height: 24px;
+    max-width: 80%;
+    background: #ffcc66;
+    border-radius: 10px;
+    padding: 24px;
 }
 
-div.internal_error{
-    background: url(/images/backgrounds/error-bg.jpg) center center no-repeat;
+.bubble-bottom-left:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 24px solid #ffcc66;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #ffcc66;
+    border-bottom: 20px solid transparent;
+    left: 32px;
+    bottom: -24px;
 }
 
 /*****
