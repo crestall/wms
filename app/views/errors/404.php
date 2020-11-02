@@ -24,7 +24,7 @@ $quote = $quotes[$credit];
             </div>
         </div>
         <div class="row error-foot">
-            <div class="col-2 offset-1 quoter">
+            <div class="col-3 quoter">
                 <?php echo $credit;?>
             </div>
         </div>
