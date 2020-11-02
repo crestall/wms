@@ -12,12 +12,12 @@ $quote = $quotes[$credit];
     <div id="page_container" class="container-xl">
         <div class="row">
             <div class="col-12">
-                <div class="bubble bubble-bottom-left">
-                    <div class="error-name float-left">
+                <div class="bubble bubble-bottom-left row">
+                    <div class="error-name col-3 mr-3">
                         <h1>404</h1>
                         <h2>ERROR</h2>
                     </div>
-                    <div class="error-quote float-right">
+                    <div class="error-quote col-9">
                         <?php echo $quote;?>
                     </div>
                 </div>
