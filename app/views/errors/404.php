@@ -1,8 +1,9 @@
 <?php
 $quotes = array(
-    'C3PO - Starwars'           => 'The hyperdrive motivator has been damaged. It is impossible to view this webpage',
-    'Jim Lovell - Apollo 13'    => 'Houston, we have a problem',
-    'Tyler Durdon - Fight Club' => 'Welcome to this page. The first rule of this page is: You do not talk about this page.'
+    'Ben Obi-Wan Kenobi - Star Wars'            => "This is not the webpage you are looking for",
+    'Dorothy - The Wizard of Oz'                => "I've got a feeling we're not in Kansas anymore.",
+    'Warden Norton - The Shawshank Redemption'  => "Lord! It's a miracle! Webpage up and vanished like a fart in the wind!",
+    'Dr. Emmet Brown - Back To The Future'      => "Webpages? Where we're going, we don't need webpages."
 );
 $credit = array_rand($quotes);
 $quote = $quotes[$credit];
@@ -13,7 +14,7 @@ $quote = $quotes[$credit];
             <div class="col-12">
                 <div class="bubble bubble-bottom-left">
                     <div class="error-name float-left">
-                        <h1>500</h1>
+                        <h1>404</h1>
                         <h2>ERROR</h2>
                     </div>
                     <div class="error-quote float-right">
