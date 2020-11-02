@@ -1,18 +1,18 @@
 <?php
-
+$quotes = array(
+    'C3PO - Starwars'           => 'The hyperdrive motivator has been damaged. It is impossible to view this webpage',
+    'Jim Lovell - Apollo 13'    => 'Houston, we have a problem',
+    'Tyler Durdon - Fight Club' => 'Welcome to this page. The first rule of this page is: You do not talk about this page.'
+);
+$credit = array_rand($input);
+$quote = $quotes[$credit];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="error_page internal_error text-center">
-                    <h1 class="page-header" style="font-size:80px;">500</h1>
-                    <h2 class="page-header">Oops, we are sorry but our system encountered an internal error</h2>
-                    <p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar) and time of the error</p>
-                    <p><a href="/dashboard" class="btn btn-info">Back to home</a></p>
-                </div>
+            <div class="col-12">
+
             </div>
-            <hr>
         </div>
     </div>
 </div>
