@@ -4,7 +4,7 @@ $quotes = array(
     'Jim Lovell - Apollo 13'    => 'Houston, we have a problem',
     'Tyler Durdon - Fight Club' => 'Welcome to this page. The first rule of this page is: You do not talk about this page.'
 );
-$credit = array_rand($input);
+$credit = array_rand($quotes);
 $quote = $quotes[$credit];
 ?>
 <div id="page-wrapper">
