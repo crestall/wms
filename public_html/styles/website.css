@@ -370,9 +370,15 @@ label.error{
 /*****
 Error Pages
 ******/
-div.error_name{
+div.error-name{
     text-align: center;
-    color: #996600;
+}
+
+div.error-name h1{
+    font-size: 1.1em;
+    color: slategray;
+    font-style: italic;
+    text-shadow: 3px 0 white;
 }
 
 div.error-quote{
@@ -391,7 +397,8 @@ div.error-quote:after{
     position: absolute;
     /* -- inside the relative position of blockquote -- */
     top: 13px;
-    color: #E8E8E8;
+    color: slategray;
+    text-shadow: 0 1px white;
     font-size: 34px;
 }
 div.error-quote:before{
