@@ -376,9 +376,12 @@ div.error_name{
 }
 
 div.error_quote{
-    text-align: left;
-    color: #222;
+    color: gray;
+    font-family: Georgia, serif;
+    font-size: 1.5em;
     font-style: italic;
+    line-height: 1.4!important;
+    text-shadow: 0 1px white;
 }
 
 div.bubble {
