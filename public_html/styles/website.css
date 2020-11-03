@@ -384,6 +384,29 @@ div.error-quote{
     text-shadow: 0 1px white;
 }
 
+/* -- create the quotation marks -- */
+div.error-quote:before,
+div.error-quote:after{
+    font-family: FontAwesome;
+    position: absolute;
+    /* -- inside the relative position of blockquote -- */
+    top: 13px;
+    color: #E8E8E8;
+    font-size: 34px;
+}
+div.error-quote:before{
+    content: "\f10d";
+    margin-right: 13px;
+    right: 100%;
+}
+div.error-quote:after{
+    content: "\f10e";
+    margin-left: 13px;
+    left: 100%;
+    top: auto;
+    bottom: 13px;
+}
+
 div.bubble {
     position: relative;
     font-size: 18px;
