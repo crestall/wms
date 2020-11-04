@@ -6,7 +6,7 @@
  * It contains the request information and provide methods to fetch request body
  *
  
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
 class Request{

@@ -6,7 +6,7 @@
  * Provides security methods for various tasks and validations.
  *
  
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
 class SecurityComponent extends Component{

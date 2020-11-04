@@ -7,7 +7,7 @@
   * It uses PHPMailer library to send emails.
   *
 
-  * @author     Mark Solly <mark.solly@3plplus.com.au>
+  * @author     Mark Solly <mark.solly@fsg.com.au>
   */
   use PHPMailer\PHPMailer\PHPMailer;
 
@@ -51,11 +51,11 @@
                 $mail->AddAddress($cd['inventory_email'], $cd['inventory_contact']);
                 $mail->AddAddress('kimberly@thebigbottleco.com', 'Kimberly Lacsa');
             }
-            $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
         }
         else
         {
-            $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
+            $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
         }
 
         $mail->Send();
@@ -97,11 +97,11 @@
 		    $mail->AddAddress($email, $name);
             //$mail->AddBCC('daniel.mackenzie@3plplus.com.au', 'Daniel Mackenzie');
             //$mail->AddBCC('fred.scherzer@3plplus.com.au', 'Fred Scherzer');
-            $mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
         }
         else
         {
-            $mail->AddAddress('mark.solly@3plplus.com.au', 'Mark Solly');
+            $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
         }
 
 
@@ -203,7 +203,7 @@
 
         $mail->AddBCC('customersupport@3plplus.com.au');
 
-        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+        //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
 
 		$mail->Subject = "Order with item error for Nuchev";
 
@@ -231,7 +231,7 @@
 
 		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
 
-        //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+        //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
 
 		$mail->Subject = "Cron Import Error";
 
@@ -264,7 +264,7 @@
         if(SITE_LIVE)
         {
             $mail->AddAddress($email, $name);
-            //$mail->AddBCC('mark.solly@3plplus.com.au', 'Mark Solly');
+            //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
         }
         else
         {
@@ -344,8 +344,8 @@
 		$mail->MsgHTML($body);
 
 		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
-        //$mail->AddAddress("mark.solly@3plplus.com.au", "Mark Solly");
-        //$mail->AddBCC("mark.solly@3plplus.com.au", "Mark Solly");
+        //$mail->AddAddress("mark.solly@fsg.com.au", "Mark Solly");
+        //$mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
 
         if($client_details['id'] == 55)
         {
@@ -437,7 +437,7 @@
     		$mail->MsgHTML($body);
 
     		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
-            //$mail->AddAddress("mark.solly@3plplus.com.au", "Mark Solly");
+            //$mail->AddAddress("mark.solly@fsg.com.au", "Mark Solly");
             $mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
 
             if($client_details['id'] == 55)

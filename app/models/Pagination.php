@@ -4,7 +4,7 @@
  * Pagination Class
  *
  
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
 class Pagination {
@@ -42,28 +42,19 @@ class Pagination {
     }
 
     /**
-     * get pagination object by executing COUNT(*) query.
+     * Creates the pagination object.
      *
      * @access public
      * @param  string  $table
-     * @param  string  $options
-     * @param  array   $values  array of data
+     * @param  array   $conditions  array of data
      * @param  integer $pageNum
-     * @param  integer $extraOffset check comment class
      * @return Pagination
      */
-    public static function pagination($table, $options, $values, $pageNum, $extraOffset = 0){
+    public static function pagination($table, $conditions, $pageNum){
 
-        $database = Database::openConnection();
-        $query  = "SELECT COUNT(*) AS count FROM {$table}  ";
-        $query .= $options;
-
-        $database->prepare($query);
-        $database->execute($values);
-        $totalCount = $database->fetchAssociative()["count"];
-        $extraOffset = ((int)$extraOffset > $totalCount)? 0: (int)$extraOffset;
-
-        return new Pagination((int)$pageNum, $totalCount - $extraOffset);
+        $db = Database::openConnection();
+        $totalCount = $db->countData($table, $conditions);
+        return new Pagination((int)$pageNum, $totalCount);
     }
 
     /**

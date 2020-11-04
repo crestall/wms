@@ -9,7 +9,7 @@
   getExpectedShipments($client_id = false)
   getShipmentItemsString($id)
 
-  * @author     Mark Solly <mark.solly@3plplus.com.au>
+  * @author     Mark Solly <mark.solly@fsg.com.au>
   */
 
 class Shipment extends Model{

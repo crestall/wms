@@ -5,7 +5,7 @@
 *
 * Extends mPDF to create and manipulate pdf files
 *
-* @author     Mark Solly <mark.solly@3plplus.com.au>
+* @author     Mark Solly <mark.solly@fsg.com.au>
 */
 use Mpdf\Mpdf;
 class Mympdf extends mPDF {

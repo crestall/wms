@@ -4,7 +4,7 @@
  * The application class.
  * Handles the request for each call to the application.
  *
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
 class App {

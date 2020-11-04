@@ -7,7 +7,7 @@
  * extends MPDF and uses original FDPF functionality
  *
 
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
  use Fpdf\Fpdf;
  class AddressLabels extends Fpdf{

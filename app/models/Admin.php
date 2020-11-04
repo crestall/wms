@@ -5,7 +5,7 @@
   * Admin Class inherits from User.
   *
   
-  * @author     Mark Solly <mark.solly@3plplus.com.au>
+  * @author     Mark Solly <mark.solly@fsg.com.au>
   */
 
 class Admin extends User{

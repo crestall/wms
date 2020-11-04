@@ -4,7 +4,7 @@
   * This file contains configuration for the application.
   * It will be used by app/core/Config.php
   *
-  * @author     Mark Solly <mark.solly@3plplus.com.au>
+  * @author     Mark Solly <mark.solly@fsg.com.au>
   */
 
 return array(

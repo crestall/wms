@@ -6,7 +6,7 @@
   * Used mainly to log failures, errors, exceptions, or any other malicious actions or attacks.
   *
   
-  * @author     Mark Solly <mark.solly@3plplus.com.au>
+  * @author     Mark Solly <mark.solly@fsg.com.au>
   */
 
 class Logger{

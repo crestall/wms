@@ -7,7 +7,7 @@
   * It captures and handles all unhandled exceptions and errors.
   *
   
-  * @author     Mark Solly <mark.solly@3plplus.com.au>
+  * @author     Mark Solly <mark.solly@fsg.com.au>
   */
 
 class Handler{
