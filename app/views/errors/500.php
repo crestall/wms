@@ -30,7 +30,7 @@ $quote = $quotes[$credit];
                 <p>Oops, we are sorry but our system encountered an internal error</p>
                 <p>This means the error is in our coding and you have not done anything wrong</p>
                 <p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar) and time of the error</p>
-                <p><a href="/dashboard" class="btn btn-info">Back to home</a></p>
+                <p><a href="/dashboard" class="btn btn-small btn-danger">Back to home</a></p>
             </div>
         </div>
     </div>
