@@ -22,22 +22,42 @@ class ErrorsController extends Controller{
     }
 
     public function NotFound(){
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "404.php",['pht' => ": Page Not Found"]);
+        Config::setJsConfig('curPage', "error-404");
+        Config::set('curPage', "error-404");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "404.php",[
+            'pht' => ": Page Not Found"
+        ]);
     }
 
     public function Unauthenticated(){
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "401.php",['pht' => ": Unauthorized"]);
+        Config::setJsConfig('curPage', "error-401");
+        Config::set('curPage', "error-401");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "401.php",[
+            'pht' => ": Unauthorized"
+        ]);
     }
 
     public function Unauthorized(){
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "403.php",['pht' => ": Forbidden"]);
+        Config::setJsConfig('curPage', "error-403");
+        Config::set('curPage', "error-403");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "403.php",[
+            'pht' => ": Forbidden"
+        ]);
     }
 
     public function BadRequest(){
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "400.php",['pht' => ": Bad Request"]);
+        Config::setJsConfig('curPage', "error-400");
+        Config::set('curPage', "error-400");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "400.php",[
+            'pht' => ": Bad Request"
+        ]);
     }
 
     public function System(){
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "500.php",['pht' => ": Internal Server Error"]);
+        Config::setJsConfig('curPage', "error-500");
+        Config::set('curPage', "error-500");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "500.php",[
+            'pht' => ": Internal Server Error"
+        ]);
     }
 }
