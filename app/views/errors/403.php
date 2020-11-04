@@ -2,7 +2,7 @@
 $quotes = array(
     'Detective David Mills - Se7en'     => "What's on the page?!",
     'Bill Lumbergh - Office Space'      => "Yeah... I'm gonna need you to go ahead and find another page.",
-    'Nathan R. Jessup - A Few Good Men' => "The page? You can’t handle the page!"
+    'Nathan R. Jessup - A Few Good Men' => "The page? You can't handle the page!"
 );
 $credit = array_rand($quotes);
 $quote = $quotes[$credit];
