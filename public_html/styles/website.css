@@ -417,6 +417,12 @@ div.error-quote:after{
     bottom: 13px;
 }
 
+div.quoter{
+    font-style: italic;
+    font-size: smaller;
+    color: darkslategray;
+}
+
 div.bubble {
     position: relative;
     font-size: 18px;
