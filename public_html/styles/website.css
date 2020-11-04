@@ -373,7 +373,6 @@ Error Pages
 div.error-name{
     text-align: center;
     color: slategray;
-    font-style: italic;
 }
 
 div.error-name h1{
@@ -382,7 +381,7 @@ div.error-name h1{
 }
 
 div.error-name h2{
-
+    font-style: italic;
 }
 
 div.error-quote{
