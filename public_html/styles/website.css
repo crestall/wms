@@ -393,12 +393,11 @@ div.error-quote{
     text-shadow: 0 1px white;
 }
 
-/* -- create the quotation marks -- */
+/* -- create the quotation marks
 div.error-quote:before,
 div.error-quote:after{
     font-family: FontAwesome;
     position: absolute;
-    /* -- inside the relative position of blockquote -- */
     top: 13px;
     color: slategray;
     text-shadow: 0 1px white;
@@ -416,7 +415,7 @@ div.error-quote:after{
     top: auto;
     bottom: 13px;
 }
-
+-- */
 div.quoter{
     font-style: italic;
     font-size: smaller;
