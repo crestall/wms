@@ -17,7 +17,7 @@ $quote = $quotes[$credit];
                         <h1>404</h1>
                         <h2>Page Not Found</h2>
                     </div>
-                    <div class="error-quote col-8">
+                    <div class="error-quote col-6 offset-1">
                         <?php echo $quote;?>
                     </div>
                 </div>
