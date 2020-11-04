@@ -377,20 +377,22 @@ div.error-name{
 
 div.error-name h1{
     font-size: 4.1em;
-    text-shadow: 3px 0 white;
+    text-shadow: 0 3px slategray;
+    color: white;
 }
 
 div.error-name h2{
     font-style: italic;
+    color: white; 
 }
 
 div.error-quote{
-    color: gray;
+    color: white;
     font-family: Georgia, serif;
     font-size: 1.5em;
     font-style: italic;
     line-height: 1.4!important;
-    text-shadow: 0 1px white;
+    text-shadow: 0 2px slategray;
 }
 
 /* -- create the quotation marks
@@ -426,7 +428,7 @@ div.bubble {
     position: relative;
     font-size: 18px;
     line-height: 24px;
-    background: #ffcc66;
+    background: #ff6600;
     border-radius: 10px;
     padding: 24px;
 }
@@ -436,9 +438,9 @@ div.bubble {
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 24px solid #ffcc66;
+    border-left: 24px solid #ff6600;
     border-right: 12px solid transparent;
-    border-top: 12px solid #ffcc66;
+    border-top: 12px solid #ff6600;
     border-bottom: 20px solid transparent;
     left: 32px;
     bottom: -24px;
