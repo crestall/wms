@@ -32,7 +32,7 @@ $quote = $quotes[$credit];
                 <p>We have probably moved it somewhere else and didn't update all the links</p>
                 <p class="text-muted">Please use the menu above find where it might have gone</p>
                 <p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar) and time of the error</p>
-                <p><a href="/dashboard" class="btn btn-sm btn-danger">Back to home</a></p>
+                <!--p><a href="/dashboard" class="btn btn-sm btn-outline-fsg">Back to home</a></p-->
             </div>
         </div>
     </div>
