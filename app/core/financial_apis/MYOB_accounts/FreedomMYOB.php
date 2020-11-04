@@ -401,7 +401,7 @@ class FreedomMYOB extends MYOB
     protected function decryptData($data)
     {
         global $cipher, $key, $tag;
-        list($iv, $encrypted) = explode("\r\n",$data);
+        list($iv, $encrypted) = explode("::::",$data);
         $iv = base64_decode($iv);
         $decrypted = openssl_decrypt($encrypted, $this->CYPHER, $this->KEY, $options=0, $iv);
         return $decrypted;

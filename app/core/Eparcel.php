@@ -51,7 +51,7 @@
         $i_timeout = 15;        // seconds
         if ( ($this->fSock = fsockopen( Eparcel::API_SCHEME . Eparcel::API_HOST, Eparcel::API_PORT, $errno, $errstr, $i_timeout) ) === false )
         {
-            return $this->controller->error(500);
+            return (new ErrorsController())->error(500);
         }
     }
 

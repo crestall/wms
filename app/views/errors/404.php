@@ -1,20 +1,40 @@
 <?php
-
+$quotes = array(
+    'Ben Obi-Wan Kenobi - Star Wars'            => "This is not the webpage you are looking for",
+    'Dorothy - The Wizard of Oz'                => "I've got a feeling we're not in Kansas anymore.",
+    'Warden Norton - The Shawshank Redemption'  => "Lord! It's a miracle! Webpage up and vanished like a fart in the wind!",
+    'Dr. Emmet Brown - Back To The Future'      => "Webpages? Where we're going, we don't need webpages.",
+    "Gandalf - The Fellowship of the Ring"      => "Always remember, Frodo, the page is trying to get back to its master. It wants to be found."
+);
+$credit = array_rand($quotes);
+$quote = $quotes[$credit];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="error_page not_found text-center">
-                    <h1 class="page-header" style="font-size:80px;">404</h1>
-                    <h2 class="page-header">That page was not found here</h2>
-                    <p>We have probably moved it somewhere else and didn't update all the links</p>
-                    <p class="text-muted">Please use the menu above find where it might have gone</p>
-                    <p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar) and time of the error</p>
-                    <p><a href="/dashboard" class="btn btn-info">Back to home</a></p>
+            <div class="bubble bubble-bottom-left col-10 offset-1">
+                <div class="row">
+                    <div class="error-name col-4">
+                        <h1>404</h1>
+                        <h2>Page Not Found</h2>
+                    </div>
+                    <div class="error-quote col-6 offset-1">
+                        <?php echo $quote;?>
+                    </div>
                 </div>
             </div>
-            <hr>
+        </div>
+        <div class="row error-foot mt-4">
+            <div class="offset-1 col-3 quoter">
+                <?php echo $credit;?>
+            </div>
+            <div class="col-8">
+                <p>That page was not found here</p>
+                <p>We have probably moved it somewhere else and didn't update all the links</p>
+                <p class="text-muted">Please use the menu above to find where it might have gone</p>
+                <p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar of your browser) and time of the error</p>
+                <!--p><a href="/dashboard" class="btn btn-sm btn-outline-fsg">Back to home</a></p-->
+            </div>
         </div>
     </div>
 </div>
