@@ -372,13 +372,17 @@ Error Pages
 ******/
 div.error-name{
     text-align: center;
+    color: slategray;
+    font-style: italic;
 }
 
 div.error-name h1{
-    font-size: 1.1em;
-    color: slategray;
-    font-style: italic;
+    font-size: 4.1em;
     text-shadow: 3px 0 white;
+}
+
+div.error-name h2{
+
 }
 
 div.error-quote{
