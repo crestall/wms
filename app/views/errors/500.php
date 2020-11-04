@@ -2,7 +2,7 @@
 $quotes = array(
     'C3PO - Starwars'           => 'The hyperdrive motivator has been damaged. It is impossible to view this webpage',
     'Jim Lovell - Apollo 13'    => 'Houston, we have a problem',
-    'Tyler Durdon - Fight Club' => 'Welcome to this page. The first rule of this page is: You do not talk about this page.'
+    'Captain - Cool Hand Luke'  => 'What we have here is... failure to communicate.'
 );
 $credit = array_rand($quotes);
 $quote = $quotes[$credit];

@@ -3,7 +3,8 @@ $quotes = array(
     'Ben Obi-Wan Kenobi - Star Wars'            => "This is not the webpage you are looking for",
     'Dorothy - The Wizard of Oz'                => "I've got a feeling we're not in Kansas anymore.",
     'Warden Norton - The Shawshank Redemption'  => "Lord! It's a miracle! Webpage up and vanished like a fart in the wind!",
-    'Dr. Emmet Brown - Back To The Future'      => "Webpages? Where we're going, we don't need webpages."
+    'Dr. Emmet Brown - Back To The Future'      => "Webpages? Where we're going, we don't need webpages.",
+    "Gandalf - The Fellowship of the Ring"      => "Always remember, Frodo, the page is trying to get back to its master. It wants to be found."
 );
 $credit = array_rand($quotes);
 $quote = $quotes[$credit];
