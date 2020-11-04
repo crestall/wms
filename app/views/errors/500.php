@@ -29,8 +29,8 @@ $quote = $quotes[$credit];
             <div class="col-8">
                 <p>Oops, we are sorry but our system encountered an internal error</p>
                 <p>This means the error is in our coding and you have not done anything wrong</p>
-                <p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar) and time of the error</p>
-                <p><a href="/dashboard" class="btn btn-sm btn-danger">Back to home</a></p>
+                <p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar of your browser) and time of the error</p>
+                <!--p><a href="/dashboard" class="btn btn-sm btn-danger">Back to home</a></p-->
             </div>
         </div>
     </div>
