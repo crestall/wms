@@ -808,20 +808,22 @@ class FormController extends Controller {
             //echo "<pre>",print_r($csv_array),"</pre>";
             /*
             [0] => ?Job ID
-            [1] => Previous
-            [2] => Customer
-            [3] => Description
-            [4] => Entered
-            [5] => Due date
-            [6] => Sales Rep
-            [7] => Designer
-            [8] => Finisher 1
-            [9] => Finisher 2
-            [10] => Finisher 3
-            [11] => Notes & Comments
-            [12] => E.T.D.
-            [13] => Status
-            [14] => Date
+            [1] => duplicate check
+            [2] => Job ID
+            [3] => Previous
+            [4] => Customer
+            [5] => Description
+            [6] => Entered
+            [7] => Due date
+            [8] => Sales Rep
+            [9] => Designer
+            [10] => Finisher 1
+            [11] => Finisher 2
+            [12] => Finisher 3
+            [13] => Notes & Comments
+            [14] => E.T.D.
+            [15] => Status
+            [16] => Date
             */
             $imported_job_count = 0;
             $skip_first = isset($header_row);
@@ -837,44 +839,38 @@ class FormController extends Controller {
                     ++$line;
                     continue;
                 }
-                $job_id = trim($row[0]);
-                $c = 1;
-                while($this->productionjob->jobNumberExists($job_id))
-                {
-                    $job_id .= "_".$c;
-                    ++$c;
-                }
-                $status_id = $this->jobstatus->getStatusId(trim($row[13]));
+                $job_id = trim($row[2]);
+                $status_id = $this->jobstatus->getStatusId(trim($row[15]));
                 if(!$status_id)
                 {
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                    echo "<p>Need to add {$row[13]} as a status</p>";
+                    echo "<p>Need to add {$row[15]} as a status</p>";
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
                 }
                 $rep_id = $this->salesrep->geRepIdByName(trim($row[6]));
                 if(empty($rep_id))
                 {
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
-                    echo "<p>Need to add {$row[6]} as a sales rep</p>";
+                    echo "<p>Need to add {$row[8]} as a sales rep</p>";
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
                 }
-                $created_date = str_replace('/', '-', trim($row[4]));
-                $due_date = str_replace('/', '-', trim($row[5]));
-                $etd = str_replace('/', '-', trim($row[12]));
+                $created_date = str_replace('/', '-', trim($row[6]));
+                $due_date = str_replace('/', '-', trim($row[7]));
+                $etd = str_replace('/', '-', trim($row[14]));
                 $job = array(
                     'job_id'                => $job_id,
-                    'previous_job_id'       => trim($row[1]),
-                    'description'           => trim($row[3]),
+                    'previous_job_id'       => trim($row[3]),
+                    'description'           => trim($row[5]),
                     'date_entered_value'    => strtotime($created_date),
                     'date_due_value'        => strtotime($due_date),
-                    'designer'              => trim($row[7]),
-                    'notes'                 => trim($row[11]),
+                    'designer'              => trim($row[9]),
+                    'notes'                 => trim($row[13]),
                     'date_ed_value'         => strtotime($etd),
                     'status_id'             => $status_id,
                     'salesrep_id'           => $rep_id,
                     'date'                  => time()
                 );
-                $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[2]));
+                $customer_id = $this->productioncustomer->geCustomerIdByName(trim($row[4]));
                 if(empty($customer_id))
                 {
                     $customer_data = array(
@@ -883,37 +879,37 @@ class FormController extends Controller {
                     $customer_id = $this->productioncustomer->addCustomer($customer_data);
                 }
                 $job['customer_id'] = $customer_id;
-                if(!empty(trim($row[8])))
+                if(!empty(trim($row[10])))
                 {
-                    $finisher_id = $this->productionfinisher->getFinisherIdByName(trim($row[8]));
+                    $finisher_id = $this->productionfinisher->getFinisherIdByName(trim($row[10]));
                     if(empty($finisher_id))
                     {
                         $finisher_data = array(
-                            'name'  => trim($row[8])
+                            'name'  => trim($row[10])
                         );
                         $finisher_id = $this->productionsupplier->addSupplier($finisher_data);
                     }
                     $job['finisher_id'] = $finisher_id;
                 }
-                if(!empty(trim($row[9])))
+                if(!empty(trim($row[11])))
                 {
-                    $finisher2_id = $this->productionfinisher->getFinisherIdByName(trim($row[9]));
+                    $finisher2_id = $this->productionfinisher->getFinisherIdByName(trim($row[11]));
                     if(empty($finisher2_id))
                     {
                         $finisher2_data = array(
-                            'name'  => trim($row[9])
+                            'name'  => trim($row[11])
                         );
                         $finisher2_id = $this->productionsupplier->addSupplier($finisher2_data);
                     }
                     $job['finisher2_id'] = $finisher2_id;
                 }
-                if(!empty(trim($row[10])))
+                if(!empty(trim($row[12])))
                 {
-                    $finisher3_id = $this->productionfinisher->getFinisherIdByName(trim($row[10]));
+                    $finisher3_id = $this->productionfinisher->getFinisherIdByName(trim($row[12]));
                     if(empty($finisher3_id))
                     {
                         $finisher3_data = array(
-                            'name'  => trim($row[10])
+                            'name'  => trim($row[12])
                         );
                         $finisher3_id = $this->productionsupplier->addSupplier($finisher3_data);
                     }
