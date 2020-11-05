@@ -837,6 +837,13 @@ class FormController extends Controller {
                     ++$line;
                     continue;
                 }
+                $job_id = trim($row[0]);
+                $c = 1;
+                while($this->productionjob->jobNumberExists($job_id))
+                {
+                    $job_id .= "_".$c;
+                    ++$c;
+                }
                 $status_id = $this->jobstatus->getStatusId(trim($row[13]));
                 if(!$status_id)
                 {
@@ -855,7 +862,7 @@ class FormController extends Controller {
                 $due_date = str_replace('/', '-', trim($row[5]));
                 $etd = str_replace('/', '-', trim($row[12]));
                 $job = array(
-                    'job_id'                => trim($row[0]),
+                    'job_id'                => $job_id,
                     'previous_job_id'       => trim($row[1]),
                     'description'           => trim($row[3]),
                     'date_entered_value'    => strtotime($created_date),
@@ -915,9 +922,10 @@ class FormController extends Controller {
                 $jobs[] = $job;
                 ++$line;
             }
-            //echo "<pre>",print_r($jobs),"</pre>";
+            echo "<pre>",print_r($jobs),"</pre>";die();
             foreach($jobs as $j)
             {
+                if($updater)
                 $id= $this->productionjob->addJob($j);
                 echo "<p>Job with id $id has been added</p>";
             }
