@@ -918,10 +918,10 @@ class FormController extends Controller {
                 $jobs[] = $job;
                 ++$line;
             }
-            echo "<pre>",print_r($jobs),"</pre>";die();
+            //echo "<pre>",print_r($jobs),"</pre>";die();
             foreach($jobs as $j)
             {
-                if($updater)
+                //if($updater)
                 $id= $this->productionjob->addJob($j);
                 echo "<p>Job with id $id has been added</p>";
             }
