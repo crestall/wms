@@ -62,7 +62,7 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         //return $db->queryById($this->table, $id);
-        $q = $this->getRunsheetQuery();
+        $q = $this->getJobQuery();
         $q .= "
             WHERE
                 pj.id = $id
@@ -202,7 +202,7 @@ class Productionjob extends Model{
         extract($args);
         $db = Database::openConnection();
         //echo "<pre>CUSTOMER IDS",print_r($customer_ids),"</pre>";die();
-        $query = $this->getRunsheetQuery();
+        $query = $this->getJobQuery();
         $query = "
             WHERE
         ";
