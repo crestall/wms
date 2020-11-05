@@ -847,7 +847,7 @@ class FormController extends Controller {
                     echo "<p>Need to add {$row[15]} as a status</p>";
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
                 }
-                $rep_id = $this->salesrep->geRepIdByName(trim($row[6]));
+                $rep_id = $this->salesrep->geRepIdByName(trim($row[8]));
                 if(empty($rep_id))
                 {
                     echo "<p>----------------------------------------------------------------------------------------------------</p>";
