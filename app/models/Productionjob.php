@@ -203,7 +203,7 @@ class Productionjob extends Model{
         $db = Database::openConnection();
         //echo "<pre>CUSTOMER IDS",print_r($customer_ids),"</pre>";die();
         $query = $this->getJobQuery();
-        $query = "
+        $query .= "
             WHERE
         ";
         $array = array();
@@ -269,8 +269,8 @@ class Productionjob extends Model{
             $st_ids = implode(',',$status_ids);
             $query .= " AND (pj.status_id IN( $st_ids))";
         }
-        print_r($array);
-        die($query);
+        //print_r($array);
+        //die($query);
         return $jobs = $db->queryData($query, $array);
     }
 
