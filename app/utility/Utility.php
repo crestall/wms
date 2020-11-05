@@ -6,7 +6,7 @@
  * Provides methods for manipulating and extracting data from arrays.
  * Also provides various helper functions
 
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 class Utility{
 

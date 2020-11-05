@@ -34,22 +34,7 @@ class Productionjob extends Model{
     public function getJobsForDisplay($completed = false, $cancelled = false)
     {
         $db = Database::openConnection();
-        $q = "
-            SELECT
-                pj.*,
-                pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
-                sr.id as salesrep_id, sr.name AS salesrep_name,
-                pf.id as finisher_id, pf.name AS finisher_name, pf.contact AS finisher_contact, pf.email AS finisher_email, pf.phone AS finisher_phone,
-                js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking,
-                IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day
-            FROM
-                `production_jobs` pj LEFT JOIN
-                `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
-                `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
-                `production_finishers` pf ON pj.finisher_id = pf.id LEFT JOIN
-                job_status js ON pj.status_id = js.id LEFT JOIN
-                (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.job_id, runsheets.runsheet_day FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
-        ";
+        $q = $this->getJobQuery();
         if($completed)
         {
             $q .= " WHERE pj.status_id = 9";
@@ -77,17 +62,8 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         //return $db->queryById($this->table, $id);
-        $q = "
-            SELECT
-                pj.*,
-                pc.name AS customer_name, pc.address AS job_address, pc.address_2 AS job_address2, pc.suburb AS job_suburb, pc.postcode AS job_postcode,
-                pf.name AS finisher_name, pf.address AS finisher_address, pf.address_2 AS finisher_address2, pf.suburb AS finisher_suburb, pf.postcode AS finisher_postcode,
-                sr.id as salesrep_id, sr.name AS salesrep_name
-            FROM
-                `production_jobs` pj LEFT JOIN
-                `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
-                `production_finishers` pf ON pj.finisher_id = pf.id LEFT JOIN
-                `sales_reps` sr ON pj.salesrep_id = sr.id
+        $q = $this->getJobQuery();
+        $q .= "
             WHERE
                 pj.id = $id
         ";
@@ -226,21 +202,9 @@ class Productionjob extends Model{
         extract($args);
         $db = Database::openConnection();
         //echo "<pre>CUSTOMER IDS",print_r($customer_ids),"</pre>";die();
-        $query = "
-            SELECT
-                pj.*,
-                pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
-                sr.id as salesrep_id, sr.name AS salesrep_name,
-                ps.id as supplier_id, ps.name AS supplier_name, ps.contact AS supplier_contact, ps.email AS supplier_email, ps.phone AS supplier_phone,
-                js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour
-            FROM
-                `production_jobs` pj LEFT JOIN
-                `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
-                `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
-                `production_suppliers` ps ON pj.supplier_id = ps.id LEFT JOIN
-                job_status js ON pj.status_id = js.id
+        $query = $this->getJobQuery();
+        $query .= "
             WHERE
-
         ";
         $array = array();
         if(!empty($term))
@@ -260,16 +224,16 @@ class Productionjob extends Model{
                         pc.state LIKE :term13 OR
                         pc.postcode LIKE :term14 OR
                         pc.country LIKE :term15 OR
-                        ps.name LIKE :term16 OR
-                        ps.contact LIKE :term17 OR
-                        ps.email LIKE :term18 OR
-                        ps.phone LIKE :term19 OR
-                        ps.address LIKE :term20 OR
-                        ps.address_2 LIKE :term21 OR
-                        ps.suburb LIKE :term22 OR
-                        ps.state LIKE :term23 OR
-                        ps.postcode LIKE :term24 OR
-                        ps.country LIKE :term25
+                        pf.name LIKE :term16 OR
+                        pf.contact LIKE :term17 OR
+                        pf.email LIKE :term18 OR
+                        pf.phone LIKE :term19 OR
+                        pf.address LIKE :term20 OR
+                        pf.address_2 LIKE :term21 OR
+                        pf.suburb LIKE :term22 OR
+                        pf.state LIKE :term23 OR
+                        pf.postcode LIKE :term24 OR
+                        pf.country LIKE :term25
                         ) AND";
             for($i = 1; $i <= 25; ++$i)
             {
@@ -308,6 +272,26 @@ class Productionjob extends Model{
         //print_r($array);
         //die($query);
         return $jobs = $db->queryData($query, $array);
+    }
+
+    private function getJobQuery()
+    {
+        return "
+            SELECT
+                pj.*,
+                pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
+                sr.id as salesrep_id, sr.name AS salesrep_name,
+                pf.id as finisher_id, pf.name AS finisher_name, pf.contact AS finisher_contact, pf.email AS finisher_email, pf.phone AS finisher_phone,
+                js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking,
+                IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day
+            FROM
+                `production_jobs` pj LEFT JOIN
+                `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
+                `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
+                `production_finishers` pf ON pj.finisher_id = pf.id LEFT JOIN
+                job_status js ON pj.status_id = js.id LEFT JOIN
+                (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.job_id, runsheets.runsheet_day FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
+        ";
     }
 }
 ?>

@@ -10,7 +10,7 @@
   * But, i find this approach is simpler and less costly at least for this application.
   *
   
-  * @author     Mark Solly <mark.solly@3plplus.com.au>
+  * @author     Mark Solly <mark.solly@fsg.com.au>
   */
 
 class Permission {

@@ -28,7 +28,7 @@ $quote = $quotes[$credit];
             </div>
             <div class="col-8">
                 <p>You do not have the required permissions to access this page</p>
-                <p class="text-muted"><em>Please contact us if you would to adjust your access priviledges</em></p>
+                <p class="text-muted"><em>Please contact us if you would like to adjust your access priviledges</em></p>
                 <!--p><a href="/dashboard" class="btn btn-sm btn-danger">Back to home</a></p-->
             </div>
         </div>

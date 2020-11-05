@@ -6,7 +6,7 @@
  * It provides reusable controller logic.
  * The extending classes can be used as part of the controller.
 
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
  class Directfreight{
     protected $controller;

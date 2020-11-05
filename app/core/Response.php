@@ -6,7 +6,7 @@
  * handles the response text, status and headers of a HTTP response.
  *
  
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
 class Response {

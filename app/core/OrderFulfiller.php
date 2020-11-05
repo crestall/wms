@@ -6,7 +6,7 @@
  * fulfills orders
  * reduces stock, contacts couriers to create an order, closes an order out
  
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
  class OrderFulfiller{
 

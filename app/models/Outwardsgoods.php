@@ -3,7 +3,7 @@
   * Outwardsgoods Class
   *
 
-  * @author     Mark Solly <mark.solly@3plplus.com.au>
+  * @author     Mark Solly <mark.solly@fsg.com.au>
 
   FUNCTIONS
 

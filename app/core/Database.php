@@ -5,7 +5,7 @@
  *
  * Manages the database connection and streamlines queries
  
- * @author     Mark Solly <mark.solly@3plplus.com.au>
+ * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
 class Database {
@@ -264,14 +264,19 @@ class Database {
 	*
 	* @$table: 	string - name of table
 	* @$cond: 	array  - field=>value
-	* returns id if row exists, false if not
+	* returns integer
 	***********************************************/
 	public function countData($table, $cond)
     {
-        $where = "WHERE ";
-		$c = 1;
-		$v = "a";
+
 		$params = array();
+        $where = "";
+        if(count($cond))
+        {
+            $where = "WHERE ";
+    		$c = 1;
+    		$v = "a";
+        }
 		foreach($cond as $sfield => $value)
 		{
 			$where .= "`$sfield` = :{$v}";

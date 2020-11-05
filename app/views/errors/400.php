@@ -1,7 +1,7 @@
 <?php
 $quotes = array(
     'Chief Brody - Jaws'                                => 'You’re gonna need a bigger computer',
-    'Ted Striker & Rumack - Flying High (Airplane!)'    => "Surely you can't be serious! I am serious. And don't call me Shirley.",
+    'Ted Striker & Rumack - Flying High (Airplane!)'    => "Surely you can't be serious!<br>I am serious. And don't call me Shirley.",
     'Tyler Durdon - Fight Club'                         => 'Welcome to this page. The first rule of this page is: You do not talk about this page.'
 );
 $credit = array_rand($quotes);
