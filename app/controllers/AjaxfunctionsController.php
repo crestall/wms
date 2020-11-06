@@ -69,7 +69,7 @@ class ajaxfunctionsController extends Controller
     public function updateJobStatus()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
-        foreach($this->request->data[jobids] as $supdate)
+        foreach($this->request->data['jobids'] as $supdate)
         {
             $this->productionjob->updateJobStatus($supdate['jobid'], $supdate['statusid']);
         }
