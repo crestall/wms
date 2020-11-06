@@ -24,7 +24,7 @@ class RunsheetsController extends Controller
         parent::displayIndex(get_class());
     }
 
-    public function runsheetReport()
+    public function completedRunsheets()
     {
         $driver_id = (isset($this->request->params['args']['driver']))? $this->request->params['args']['driver'] : 0;
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
