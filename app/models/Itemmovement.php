@@ -136,7 +136,7 @@ class Itemmovement extends Model{
 
     public function getStockAtDateArray($client_id, $date = 0)
     {
-        $date = ($date == 0)? time(): $date;
+        $date = ($date == 0)? strtotime('today'): $date;
         //echo date("l jS \of F Y h:i:s A", $date);
         $date += 24 * 60 *60; //move to end of day
         $db = Database::openConnection();

@@ -12,12 +12,19 @@
         editJob($data)
         getAllJobs($status_id = 0)
         getJobById($id = 0)
+        jobNumberExists($job_number)
         updateJobStatus($job_id, $status_id)
 
     */
 
 class Productionjob extends Model{
     public $table = "production_jobs";
+
+    public function jobNumberExists($job_number)
+    {
+        $db = Database::openConnection();
+        return $db->fieldValueTaken($this->table, $job_number, 'job_id');
+    }
 
     public function getAllJobs($status_id = 0)
     {

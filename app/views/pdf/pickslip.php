@@ -32,7 +32,7 @@ foreach($orders_ids as $id):
     <div class='pickslip'>
         <table width='100%'>
             <tr>
-                <td><h3>3PL Packing Slip</h3></td>
+                <td><h3>FSG Packing Slip</h3></td>
                 <td><barcode type='ean13' code='<?php echo $od['order_number'];?>' /></td>
             </tr>
             <tr>
