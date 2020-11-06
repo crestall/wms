@@ -267,8 +267,7 @@
                                                 ids.push(ent);
                                             }
                                         });
-                                        console.log(ids);
-                                        /**/
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Updating Status...</h1></div>' });
                                         var data = {jobids: ids};
                                         $.post('/ajaxfunctions/update-job-status', data, function(d){
                                             location.reload();
