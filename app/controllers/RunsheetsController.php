@@ -47,8 +47,8 @@ class RunsheetsController extends Controller
         );
         $page_array = array_merge($page_array, $rs_array);
         //render the page
-        Config::setJsConfig('curPage', "runsheet-report");
-        Config::set('curPage', "runsheet-report");
+        Config::setJsConfig('curPage', "completed-runsheets");
+        Config::set('curPage', "completed-runsheets");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/completeRunsheets.php', $page_array);
     }
 
