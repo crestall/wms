@@ -271,7 +271,7 @@
                                         /**/
                                         var data = {jobids: ids};
                                         $.post('/ajaxfunctions/update-job-status', data, function(d){
-                                            //location.reload();
+                                            location.reload();
                                         });
 
                                     }

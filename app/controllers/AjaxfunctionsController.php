@@ -68,8 +68,12 @@ class ajaxfunctionsController extends Controller
 
     public function updateJobStatus()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
-        //$this->jobstatus->updateHeirarchy($this->request->data['status']);
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data[jobids] as $supdate)
+        {
+            $this->productionjob->updateJobStatus($supdate['jobid'], $supdate['statusid']);
+        }
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Status have bben updated</h2>");
     }
 
     public function addQuotePackage()
