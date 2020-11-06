@@ -233,6 +233,39 @@
                         actions.common.jobsTable();
                         actions.common.selectAll();
                         actions.common.doDates();
+                        //update job status
+                        $('button#status').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Jobs Selected",
+                                    text: "Please select at least one job to update its status",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                swal({
+                                    title: "Update the status?",
+                                    text: "This can only be undone by changing it back",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(changeStatus) {
+                                    if(changeStatus)
+                                    {
+                                        var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            if($(this).prop('checked') )
+                                            {
+                                                ids.push($(this).data('jobid'));
+                                            }
+                                            console.log('ids '+ids);
+                                        }
+                                    }
+                                });
+                            }
+                        });
                         //add to driver runsheet
                         $('button#runsheet').click(function(e){
                             if(!$('input.select:checked').length)
