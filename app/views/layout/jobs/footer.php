@@ -258,10 +258,22 @@
                                         $('input.select').each(function(i,e){
                                             if($(this).prop('checked') )
                                             {
-                                                ids.push($(this).data('jobid'));
+                                                var job_id = $(this).data('jobid');
+                                                var status_id = $('select#status_'+job_id).val();
+                                                var ent = {
+                                                    jobid: job_id,
+                                                    statusid: status_id
+                                                }
+                                                ids.push(ent);
                                             }
-                                            console.log('ids '+ids);
                                         });
+                                        console.log(ids);
+                                        /*
+                                        var data = {jobids: ids};
+                                        $.post('/ajaxfunctions/update-job-status', data, function(d){
+                                            location.reload();
+                                        });
+                                        */
                                     }
                                 });
                             }
