@@ -261,7 +261,7 @@
                                                 ids.push($(this).data('jobid'));
                                             }
                                             console.log('ids '+ids);
-                                        }
+                                        });
                                     }
                                 });
                             }
