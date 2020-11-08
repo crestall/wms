@@ -7,9 +7,12 @@
             var actions = {
                 common: {
                     jobsTable: function(){
-                        dataTable.init($('table#production_jobs_table'), {
+                        var table = dataTable.init($('table#production_jobs_table'), {
                             /* No ordering applied by DataTables during initialisation */
                             "order": []
+                        });
+                        table.on( 'draw', function () {
+                            console.log( 'Redraw occurred at: '+new Date().getTime() );
                         });
                     },
                     selectAll: function(){
