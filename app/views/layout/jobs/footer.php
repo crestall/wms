@@ -148,7 +148,7 @@
                             }
                         }
                         autoCompleter.addressAutoComplete($('#address'));
-                        autoCompleter.suburbAutoComplete($('#suburb')); 
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                         autoCompleter.addressAutoComplete($('#finisher_address'), 'finisher_');
                         autoCompleter.suburbAutoComplete($('#finisher_suburb'), 'finisher_');
                         $("input#finisher_name").each(function(i,e){
@@ -229,7 +229,7 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding the Job...</h2></div>' });
                             }
                         });
-                        $('select#status').change(function(e){
+                        $('select#status, select#state, #postcode, #suburb').change(function(e){
                             $(this).valid();
                         });
                     }
