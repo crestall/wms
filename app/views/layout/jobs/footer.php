@@ -233,7 +233,8 @@
                             $(this).valid();
                         });
                         var $checkboxes = $("input.send_to_address");
-                        $checkboxes.change(function(){
+                        $checkboxes.click(function(){
+                            console.log('click');
                             $checkboxes.not(this).removeAttr('checked');
                         });
                     }
