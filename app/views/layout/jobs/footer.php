@@ -229,7 +229,7 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding the Job...</h2></div>' });
                             }
                         });
-                        $('select#status, select#state, #postcode, #suburb').change(function(e){
+                        $('select#status, select#state, #postcode, #suburb, #country').change(function(e){
                             $(this).valid();
                         });
                     }
