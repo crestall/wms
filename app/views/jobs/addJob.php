@@ -118,6 +118,10 @@ else
                 </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
+                <h3>Delivery Details</h3>
+                <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+            </div>
+            <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Customer Details</h3>
                 <div class="form-group row mb-3">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
