@@ -13,6 +13,9 @@
                         });
                         table.on( 'draw', function () {
                             console.log( 'Redraw occurred at: '+new Date().getTime() );
+                            $(".dataTables_length select").addClass("form-control selectpicker");
+                            $(".dataTables_filter input").addClass("form-control");
+                            $(".dataTables_filter").addClass("form-group")
                         });
                     },
                     selectAll: function(){
