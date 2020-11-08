@@ -107,7 +107,7 @@ class Productionjob extends Model{
             'job_id'        => $data['job_id'],
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
-            'due_date'      => null,
+            'due_date'      => 0,
             'status_id'     => $data['status_id']
         );
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
