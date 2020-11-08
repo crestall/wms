@@ -120,7 +120,7 @@ else
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Delivery Details</h3>
                 <div class="form-group row">
-                    <div class="col-md-3 checkbox checkbox-default">
+                    <div class="col-md-3 checkbox checkbox-default ml-3">
                         <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" />
                         <label for="send_to_customer">Send to Customer</label>
                     </div>
@@ -137,7 +137,6 @@ else
                         <label for="send_to_finisher3">Send to Finisher Three</label>
                     </div>
                 </div>
-
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
