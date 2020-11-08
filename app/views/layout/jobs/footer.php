@@ -147,6 +147,8 @@
                                 return false;
                             }
                         }
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb')); 
                         autoCompleter.addressAutoComplete($('#finisher_address'), 'finisher_');
                         autoCompleter.suburbAutoComplete($('#finisher_suburb'), 'finisher_');
                         $("input#finisher_name").each(function(i,e){
