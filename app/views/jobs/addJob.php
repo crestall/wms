@@ -120,19 +120,19 @@ else
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Delivery Details</h3>
                 <div class="form-group row">
-                    <div class="col-md-3 checkbox checkbox-default ml-3">
+                    <div class=" offset-1 col-5 checkbox checkbox-default ">
                         <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" />
                         <label for="send_to_customer">Send to Customer</label>
                     </div>
-                    <div class="col-md-3 checkbox checkbox-default">
+                    <div class="col-6 checkbox checkbox-default">
                         <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher" name="send_to_finisher" />
                         <label for="send_to_finisher">Send to Finisher One</label>
                     </div>
-                    <div class="col-md-3 checkbox checkbox-default">
+                    <div class="offset-1 col-5 checkbox checkbox-default">
                         <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher2" name="send_to_finisher2" />
                         <label for="send_to_finisher2">Send to Finisher Two</label>
                     </div>
-                    <div class="col-md-3 checkbox checkbox-default">
+                    <div class="col-md-6 checkbox checkbox-default">
                         <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher3" name="send_to_finisher3" />
                         <label for="send_to_finisher3">Send to Finisher Three</label>
                     </div>
