@@ -232,6 +232,10 @@
                         $('select#status, select#state, #postcode, #suburb, #country').change(function(e){
                             $(this).valid();
                         });
+                        var $checkboxes = $("input.send_to_address");
+                        $checkboxes.change(function(){
+                            $checkboxes.not(this).removeAttr('checked');
+                        });
                     }
                 },
                 'view-jobs':{
