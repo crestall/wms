@@ -17,7 +17,8 @@
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Incompleted Jobs</a></div>
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-primary p-3" id="runsheet"><i class="fas fa-truck"></i> Add Selected to Chosen Day's Runsheet</button></div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-primary" id="runsheet"><i class="fas fa-truck"></i> Add Selected to Chosen Day's Runsheet</button></div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-secondary" id="status"><i class="fal fa-file-check"></i> Update Status for Selected</button></div>
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
                        <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>

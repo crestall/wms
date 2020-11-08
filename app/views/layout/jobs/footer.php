@@ -7,9 +7,13 @@
             var actions = {
                 common: {
                     jobsTable: function(){
-                        dataTable.init($('table#production_jobs_table'), {
+                        var table = dataTable.init($('table#production_jobs_table'), {
                             /* No ordering applied by DataTables during initialisation */
                             "order": []
+                        });
+                        table.on( 'draw', function () {
+                            console.log( 'Redraw occurred at: '+new Date().getTime() );
+                            $('.selectpicker').selectpicker();
                         });
                     },
                     selectAll: function(){
@@ -18,6 +22,12 @@
                              $('.select').each(function(e){
                                 this.checked =  checked;
                              })
+                        });
+                        $('#status_all').change(function(e){
+                            var c = $(this).val();
+                            $("select.status").each(function(i,e){
+                                $(this).val(c).change();
+                            });
                         });
                     },
                     doDates: function(){
@@ -227,6 +237,50 @@
                         actions.common.jobsTable();
                         actions.common.selectAll();
                         actions.common.doDates();
+                        //update job status
+                        $('button#status').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Jobs Selected",
+                                    text: "Please select at least one job to update its status",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                swal({
+                                    title: "Update the status?",
+                                    text: "This can only be undone by changing it back",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(changeStatus) {
+                                    if(changeStatus)
+                                    {
+                                        var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            if($(this).prop('checked') )
+                                            {
+                                                var job_id = $(this).data('jobid');
+                                                var status_id = $('select#status_'+job_id).val();
+                                                var ent = {
+                                                    jobid: job_id,
+                                                    statusid: status_id
+                                                }
+                                                ids.push(ent);
+                                            }
+                                        });
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Updating Status...</h1></div>' });
+                                        var data = {jobids: ids};
+                                        $.post('/ajaxfunctions/update-job-status', data, function(d){
+                                            location.reload();
+                                        });
+
+                                    }
+                                });
+                            }
+                        });
                         //add to driver runsheet
                         $('button#runsheet').click(function(e){
                             if(!$('input.select:checked').length)

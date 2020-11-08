@@ -59,10 +59,21 @@ class ajaxfunctionsController extends Controller
             'updateLocation',
             'updateOrderComments',
             'updateStockMovementReason',
-            'updateWarningLevel'
+            'updateWarningLevel',
+            'updateJobStatus'
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function updateJobStatus()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data['jobids'] as $supdate)
+        {
+            $this->productionjob->updateJobStatus($supdate['jobid'], $supdate['statusid']);
+        }
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Status have bben updated</h2>");
     }
 
     public function addQuotePackage()
