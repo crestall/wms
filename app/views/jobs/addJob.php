@@ -38,6 +38,16 @@ else
     $finisher2_collapse = "collapse";
     $finisher2_aria_expanded = "false";
 }
+if(Session::getAndDestroy('show_finisher3_address'))
+{
+    $finisher3_collapse = "collapse show";
+    $finisher3_aria_expanded = "true";
+}
+else
+{
+    $finisher3_collapse = "collapse";
+    $finisher3_aria_expanded = "false";
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -118,28 +128,6 @@ else
                 </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
-                <h3>Delivery Details</h3>
-                <div class="form-group row">
-                    <div class=" offset-1 col-5 checkbox checkbox-default ">
-                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" checked />
-                        <label for="send_to_customer">Send to Customer</label>
-                    </div>
-                    <div class="col-6 checkbox checkbox-default">
-                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher" name="send_to_finisher" />
-                        <label for="send_to_finisher">Send to Finisher One</label>
-                    </div>
-                    <div class="offset-1 col-5 checkbox checkbox-default">
-                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher2" name="send_to_finisher2" />
-                        <label for="send_to_finisher2">Send to Finisher Two</label>
-                    </div>
-                    <div class="col-md-6 checkbox checkbox-default">
-                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher3" name="send_to_finisher3" />
-                        <label for="send_to_finisher3">Send to Finisher Three</label>
-                    </div>
-                </div>
-                <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
-            </div>
-            <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Customer Details</h3>
                 <div class="form-group row mb-3">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
@@ -218,6 +206,28 @@ else
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="border border-secondary p-3 m-3 rounded bg-light">
+                <h3>Delivery Details</h3>
+                <div class="form-group row">
+                    <div class=" offset-1 col-5 checkbox checkbox-default ">
+                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" checked />
+                        <label for="send_to_customer">Send to Customer</label>
+                    </div>
+                    <div class="col-6 checkbox checkbox-default">
+                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher" name="send_to_finisher" />
+                        <label for="send_to_finisher">Send to Finisher One</label>
+                    </div>
+                    <div class="offset-1 col-5 checkbox checkbox-default">
+                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher2" name="send_to_finisher2" />
+                        <label for="send_to_finisher2">Send to Finisher Two</label>
+                    </div>
+                    <div class="col-md-6 checkbox checkbox-default">
+                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher3" name="send_to_finisher3" />
+                        <label for="send_to_finisher3">Send to Finisher Three</label>
+                    </div>
+                </div>
+                <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Finisher One Details</h3>
@@ -385,6 +395,85 @@ else
                             <input type="text" class="form-control finisher2" name="finisher2_country" id="finisher2_country" value="<?php echo Form::value('finisher2_country');?>" />
                             <span class="inst">use the 2 letter ISO code</span>
                             <?php echo Form::displayError('finisher2_country');?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-secondary p-3 m-3 rounded bg-light">
+                <h3>Finisher Three Details</h3>
+                <div class="form-group row mb-3">
+                    <label class="col-md-3">Finisher Name</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="finisher3_name" id="finisher3_name" value="<?php echo Form::value('finisher3_name');?>" />
+                        <input type="hidden" name="finisher3_id" id="finisher3_id" value="0" />
+                    </div>
+                </div>
+                <div class="form-group row ">
+                    <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
+                    <div class="col-lg-3 col-md-4">
+                        <input type="text" class="form-control finisher3" name="finisher3_contact" id="finisher3_contact" value="<?php echo Form::value('finisher3_contact');?>" />
+                    </div>
+                    <label class="col-lg-1 col-md-2">Email</label>
+                    <div class="col-lg-3 col-md-4">
+                        <input type="text" class="form-control finisher3 email" name="finisher3_email" id="finisher3_email" value="<?php echo Form::value('finisher3_email');?>" />
+                        <?php echo Form::displayError('finisher3_email');?>
+                    </div>
+                    <label class="col-lg-1 col-md-2">Phone</label>
+                    <div class="col-lg-3 col-md-4">
+                        <input type="text" class="form-control finisher3" name="finisher3_phone" id="finisher3_phone" value="<?php echo Form::value('finisher3_phone');?>" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">
+                        <a  id="finisher3_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#finisher3_address_holder" role="button" aria-expanded="<?php echo $finisher3_aria_expanded;?>" aria-controls="finisher3_address_holder"> </a>
+                    </div>
+                </div>
+                <div id="finisher3_address_holder" class="<?php echo $finisher3_collapse;?> mt-3">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Address Line 1</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher3" name="finisher3_address" id="finisher3_address" value="<?php echo Form::value('finisher3_address');?>" />
+                            <?php echo Form::displayError('finisher3_address');?>
+                        </div>
+                        <div class="col-md-3 checkbox checkbox-default">
+                            <input class="form-check-input styled" type="checkbox" id="ignore_finisher3_address_error" name="ignore_finisher3_address_error" />
+                            <label for="ignore_finisher3_address_error">No need for a number</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Address Line 2</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher3" name="finisher3_address2" id="finisher3_address2" value="<?php echo Form::value('finisher3_address2');?>" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Suburb/Town</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher3" name="finisher3_suburb" id="finisher3_suburb" value="<?php echo Form::value('finisher3_suburb');?>" />
+                            <?php echo Form::displayError('finisher3_suburb');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">State</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher3" name="finisher3_state" id="finisher3_state" value="<?php echo Form::value('finisher3_state');?>" />
+                            <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                            <?php echo Form::displayError('finisher3_state');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Postcode</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher3" name="finisher3_postcode" id="finisher3_postcode" value="<?php echo Form::value('finisher3_postcode');?>" />
+                            <?php echo Form::displayError('finisher3_postcode');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Country</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control finisher3" name="finisher3_country" id="finisher3_country" value="<?php echo Form::value('finisher3_country');?>" />
+                            <span class="inst">use the 2 letter ISO code</span>
+                            <?php echo Form::displayError('finisher3_country');?>
                         </div>
                     </div>
                 </div>
