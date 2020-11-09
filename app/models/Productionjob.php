@@ -205,10 +205,10 @@ class Productionjob extends Model{
         return true;
     }
 
-    public function updateExpectedDeliveryDate($job_id, $edd)
+    public function updateExpectedDeliveryDate($job_id, $edd, $fn = "")
     {
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'ed_date', $edd, $job_id);
+        $db->updateDatabaseField($this->table, 'ed'.$fn.'_date', $edd, $job_id);
         return true;
     }
 
