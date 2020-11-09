@@ -1236,7 +1236,7 @@ class ajaxfunctionsController extends Controller
 
     public function checkJobIds()
     {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
+        echo "<pre>",print_r($this->request),"</pre>";die();
         $request = trim($this->request->query['job_id']);
         $current_jobid = isset($this->request->query['current_jobid'])? trim($this->request->query['current_jobid']) : "";
         $this->view->renderBoolean($this->productionjob->checkJobIds($request, $current_jobid));

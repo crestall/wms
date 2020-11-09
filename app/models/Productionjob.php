@@ -36,7 +36,7 @@ class Productionjob extends Model{
         $valid = 'true';
         foreach($rows as $row)
         {
-        	if($jobid == $row['job_id'] && $job_id != $current_jobid)
+        	if($jobid == $row['job_id'] && $jobid != $current_jobid)
         	{
         		$valid = 'false';
         	}

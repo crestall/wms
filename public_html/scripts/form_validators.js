@@ -162,7 +162,7 @@ $(document).ready(function() {
 				notNone: "A status must be chosen"
 			},
             job_id: {
-				remote: 'This SKU is already in use. SKUs must be unique'
+				remote: 'This Job Id is already in use. Job Ids must be unique'
 			}
 		}
     });
