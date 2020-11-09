@@ -26,6 +26,24 @@ class Productionjob extends Model{
         return $db->fieldValueTaken($this->table, $job_number, 'job_id');
     }
 
+    public function checkJobIds($jobid, $current_jobid)
+    {
+        $db = Database::openConnection();
+        //$sku = strtoupper($sku);
+        //$current_sku = strtoupper($current_sku);
+        $q = "SELECT job_id FROM {$this->table}";
+        $rows = $db->queryData($q);
+        $valid = 'true';
+        foreach($rows as $row)
+        {
+        	if($jobid == $row['job_id'] && $jobid != $current_jobid)
+        	{
+        		$valid = 'false';
+        	}
+        }
+        return $valid;
+    }
+
     public function getAllJobs($status_id = 0)
     {
         $db = Database::openConnection();
@@ -79,6 +97,7 @@ class Productionjob extends Model{
 
     public function addJob($data)
     {
+        //echo "<pre>",print_r($data),"</pre>"; die();
         $db = Database::openConnection();
         $vals = array(
             'job_id'        => $data['job_id'],
@@ -86,8 +105,14 @@ class Productionjob extends Model{
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
             'status_id'     => $data['status_id'],
+            'address'       => $data['address'],
+            'suburb'        => $data['suburb'],
+            'state'         => $data['state'],
+            'postcode'      => $data['postcode'],
+            'country'       => $data['country'],
             'date'          => time()
         );
+        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
         if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
         if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
@@ -202,6 +227,13 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table, 'finisher2_id', 0, $job_id);
+        return true;
+    }
+
+    public function removeFinisher3($job_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'finisher3_id', 0, $job_id);
         return true;
     }
 

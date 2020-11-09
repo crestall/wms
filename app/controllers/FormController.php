@@ -945,6 +945,10 @@ class FormController extends Controller {
         {
             Form::setError('job_id', 'The job id is required');
         }
+        elseif($this->productionjob->jobNumberExists($job_id))
+        {
+            Form::setError('sku', 'This job id is already in use');
+        }
         if($status_id == 0)
         {
             Form::setError('status_id', 'Please choose a status');
@@ -983,6 +987,13 @@ class FormController extends Controller {
                 Form::setError('finisher2_email', 'The email is not valid');
             }
         }
+        if($this->dataSubbed($finisher3_email))
+        {
+            if(!$this->emailValid($finisher3_email))
+            {
+                Form::setError('finisher3_email', 'The email is not valid');
+            }
+        }
         //customer address checking
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
         {
@@ -998,6 +1009,12 @@ class FormController extends Controller {
         {
             $this->validateAddress($finisher2_address, $finisher2_suburb, $finisher2_state, $finisher2_postcode, $finisher2_country, isset($ignore_finisher2_address_error), "finisher2_", "show_finisher2_address");
         }
+        //finisher three address checking
+        if(!empty($finisher3_address) || !empty($finisher3_suburb) || !empty($finisher3_state) || !empty($finisher3_postcode) || !empty($finisher3_country))
+        {
+            $this->validateAddress($finisher3_address, $finisher3_suburb, $finisher3_state, $finisher3_postcode, $finisher3_country, isset($ignore_finisher3_address_error), "finisher3_", "show_finisher3_address");
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
@@ -1005,7 +1022,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; //die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //customer details
             $customer_data = array(
                 'name'  => $customer_name
@@ -1094,6 +1111,38 @@ class FormController extends Controller {
                 {
                     $finisher2_data['finisher_id'] = $finisher2_id;
                     $this->productionFinisher->editFinisher($finisher2_data);
+                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
+                }
+            }
+            //finisher three details
+            $finisher3_data = array();
+            if($this->dataSubbed($finisher3_name))
+            {
+                $finisher3_data['name'] = $finisher3_name;
+                if($this->dataSubbed($finisher3_phone)) $finisher3_data['phone'] = $finisher3_phone;
+                if($this->dataSubbed($finisher3_contact)) $finisher3_data['contact'] = $finisher3_contact;
+                if($this->dataSubbed($finisher3_email)) $finisher3_data['email'] = $finisher3_email;
+                if($this->dataSubbed($finisher3_address)) $finisher3_data['address'] = $finisher3_address;
+                if($this->dataSubbed($finisher3_address2)) $finisher3_data['address2'] = $finisher3_address2;
+                if($this->dataSubbed($finisher3_suburb)) $finisher3_data['suburb'] = $finisher3_suburb;
+                if($this->dataSubbed($finisher3_state)) $finisher3_data['state'] = $finisher3_state;
+                if($this->dataSubbed($finisher3_postcode)) $finisher3_data['postcode'] = $finisher3_postcode;
+                if($this->dataSubbed($finisher3_country)) $finisher3_data['country'] = $finisher3_country;
+            }
+            if(count($finisher3_data))
+            {
+                if($finisher3_id == 0)
+                {
+                    //add new finisher
+                    $finisher3_id = $this->productionfinisher->addFinisher($finisher3_data);
+                    $finisher3_data['finisher_id'] = $finisher3_id;
+                    $post_data['finisher3_id'] = $finisher3_id;
+                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
+                }
+                else
+                {
+                    $finisher3_data['finisher_id'] = $finisher3_id;
+                    $this->productionFinisher->editFinisher($finisher3_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
             }
@@ -5778,7 +5827,7 @@ class FormController extends Controller {
 						'id'    => $details['id']
 					);
                     $array['whole_pallet'] = isset($details['whole_pallet']);
-					$orders_items[] = $array ;					
+					$orders_items[] = $array ;
 				}
 
             }
