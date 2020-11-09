@@ -134,6 +134,15 @@
                             $('input#customer_state').val(ui.item.state);
                             $('input#customer_country').val(ui.item.country);
                             $('input#customer_postcode').val(ui.item.postcode);
+                            if($('#send_to_customer').prop('checked'))
+                            {
+                                $('input#address').val(ui.item.address);
+                                $('input#address2').val(ui.item.address_2);
+                                $('input#suburb').val(ui.item.suburb);
+                                $('input#state').val(ui.item.state);
+                                $('input#country').val(ui.item.country);
+                                $('input#postcode').val(ui.item.postcode);
+                            }
                             return false;
                         }
                         function changeCustomerCallback(event, ui)
