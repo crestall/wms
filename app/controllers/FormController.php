@@ -1022,7 +1022,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //customer details
             $customer_data = array(
                 'name'  => $customer_name
@@ -1111,6 +1111,38 @@ class FormController extends Controller {
                 {
                     $finisher2_data['finisher_id'] = $finisher2_id;
                     $this->productionFinisher->editFinisher($finisher2_data);
+                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
+                }
+            }
+            //finisher three details
+            $finisher3_data = array();
+            if($this->dataSubbed($finisher3_name))
+            {
+                $finisher3_data['name'] = $finisher3_name;
+                if($this->dataSubbed($finisher3_phone)) $finisher3_data['phone'] = $finisher3_phone;
+                if($this->dataSubbed($finisher3_contact)) $finisher3_data['contact'] = $finisher3_contact;
+                if($this->dataSubbed($finisher3_email)) $finisher3_data['email'] = $finisher3_email;
+                if($this->dataSubbed($finisher3_address)) $finisher3_data['address'] = $finisher3_address;
+                if($this->dataSubbed($finisher3_address2)) $finisher3_data['address2'] = $finisher3_address2;
+                if($this->dataSubbed($finisher3_suburb)) $finisher3_data['suburb'] = $finisher3_suburb;
+                if($this->dataSubbed($finisher3_state)) $finisher3_data['state'] = $finisher3_state;
+                if($this->dataSubbed($finisher3_postcode)) $finisher3_data['postcode'] = $finisher3_postcode;
+                if($this->dataSubbed($finisher3_country)) $finisher3_data['country'] = $finisher3_country;
+            }
+            if(count($finisher3_data))
+            {
+                if($finisher3_id == 0)
+                {
+                    //add new finisher
+                    $finisher3_id = $this->productionfinisher->addFinisher($finisher3_data);
+                    $finisher3_data['finisher_id'] = $finisher3_id;
+                    $post_data['finisher3_id'] = $finisher3_id;
+                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
+                }
+                else
+                {
+                    $finisher3_data['finisher_id'] = $finisher3_id;
+                    $this->productionFinisher->editFinisher($finisher3_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
             }
