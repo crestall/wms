@@ -592,13 +592,13 @@ class FormController extends Controller {
                 }
                 $this->productionjob->updateJobfinisherId($job_id, $finisher_id, $fn);
                 $this->productionjob->updateExpectedDeliveryDate($job_id, $date_ed_value, $fn);
-                Session::set('jobfinisher{$fn}detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
+                Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
             }
             else
             {
                 $this->productionjob->removeFinisher($job_id, $fn);
                 $this->productionjob->updateExpectedDeliveryDate($job_id, 0, $fn);
-                Session::set('jobfinisher{$fn}detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher Has Been Removed From This Job</h3>");
+                Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher Has Been Removed From This Job</h3>");
             }
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#finisher{$fn}details");
