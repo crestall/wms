@@ -208,7 +208,7 @@ else
                             <div class="form-group row">
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control required" name="address" id="address" value="<?php echo $address;?>" />
+                                    <input type="text" class="form-control required" name="address" id="address" value="<?php echo $address;?>" /><br>
                                     <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
                                         <input class="form-check-input styled" type="checkbox" id="ignore_address_error" name="ignore_address_error" <?php if(!empty(Form::value('ignore_address_error'))) echo 'checked';?> />
                                         <label for="ignore_address_error"><span class="inst">No need for a number</span></label>
@@ -316,7 +316,6 @@ else
                                     </div>
                                     <?php echo Form::displayError('customer_address');?>
                                 </div>
-
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Address Line 2</label>
