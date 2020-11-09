@@ -19,6 +19,13 @@ $customer_state = (!empty(Form::value('customer_state')))? Form::value('customer
 $customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('customer_postcode'):$customer['postcode'];
 $customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
 $date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['ed_date'];
+$ship_to    = (empty(Form::value('ship_to')))?  $job['ship_to']      : Form::value('ship_to');
+$address    = empty(Form::value('address'))?    $job['address']      : Form::value('address');
+$address2   = empty(Form::value('address2'))?   $job['address_2']    : Form::value('address2');
+$suburb     = empty(Form::value('suburb'))?     $job['suburb']       : Form::value('suburb');
+$state      = empty(Form::value('state'))?      $job['state']        : Form::value('state');
+$postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::value('postcode');
+$country    = empty(Form::value('country'))?    $job['country']      : Form::value('country');
 if(count($finisher))
 {
     //echo "<pre>",print_r($finisher),"</pre>"; //die();
@@ -171,6 +178,36 @@ else
                     </div>
                     <div class="card-footer text-right">
                         <button id="job_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3">
+                <div class="card h-100 border-secondary order-card" id="deliverydetails">
+                    <div class="card-header bg-secondary text-white">
+                        Delivery Details
+                    </div>
+                    <div class="card-body">
+                        <?php if(isset($_SESSION['jobdeliverydetailsfeedback'])) :?>
+                            <div class='feedbackbox'><?php echo Session::getAndDestroy('jobdeliverydetailsfeedback');?></div>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['jobdeliverydetailserrorfeedback'])) :?>
+                            <div class='errorbox'><?php echo Session::getAndDestroy('jobdeliverydetailserrorfeedback');?></div>
+                        <?php endif; ?>
+                        <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
+                                    <?php echo Form::displayError('ship_to');?>
+                                </div>
+                            </div>
+                            <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
+                        </form>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button id="customer_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
                     </div>
                 </div>
             </div>
