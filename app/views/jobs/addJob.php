@@ -1,4 +1,5 @@
 <?php
+$ship_to = Form::value('ship_to');
 $address = Form::value('address');
 $address2 = Form::value('address2');
 $suburb = Form::value('suburb');
@@ -225,6 +226,13 @@ else
                     <div class="col-md-6 checkbox checkbox-default">
                         <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher3" name="send_to_finisher3" />
                         <label for="send_to_finisher3">Send to Finisher Three</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
+                        <?php echo Form::displayError('ship_to');?>
                     </div>
                 </div>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
