@@ -115,6 +115,7 @@
                     },
                     autoComplete: function(){
                         autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
+                        autoCompleter.suburbAutoComplete($('#customer_suburb'), 'customer_');
                         $("input#customer_name").each(function(i,e){
                             if($(this).data('ui-autocomplete') != undefined)
                             {
