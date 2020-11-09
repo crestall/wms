@@ -338,7 +338,7 @@ else
                         <div class="input-group">
                             <input type="text" class="form-control" name="date_ed2" id="date_ed2" value="<?php echo $date_ed2;?>" />
                             <div class="input-group-append">
-                                <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                <span id="date_ed2_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
                         </div>
                     </div>
@@ -429,7 +429,7 @@ else
                         <div class="input-group">
                             <input type="text" class="form-control" name="date_ed3" id="date_ed3" value="<?php echo $date_ed3;?>" />
                             <div class="input-group-append">
-                                <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                <span id="date_ed3_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                             </div>
                         </div>
                     </div>
