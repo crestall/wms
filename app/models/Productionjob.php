@@ -97,7 +97,7 @@ class Productionjob extends Model{
 
     public function addJob($data)
     {
-        echo "<pre>",print_r($data),"</pre>"; die();
+        //echo "<pre>",print_r($data),"</pre>"; die();
         $db = Database::openConnection();
         $vals = array(
             'job_id'        => $data['job_id'],
@@ -105,8 +105,14 @@ class Productionjob extends Model{
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
             'status_id'     => $data['status_id'],
+            'address'       => $data['address'],
+            'suburb'        => $data['suburb'],
+            'state'         => $data['state'],
+            'postcode'      => $data['postcode'],
+            'country'       => $data['country'],
             'date'          => time()
         );
+        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
         if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
         if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
