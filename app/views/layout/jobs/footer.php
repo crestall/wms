@@ -494,7 +494,13 @@
                         $('button#finisher_details_update_submitter').click(function(e){
                             $('form#finisher_details_update').submit();
                         });
-                        $('form#job_details_update, form#customer_details_update, form#finisher_details_update').submit(function(e){
+                        $('button#finisher2_details_update_submitter').click(function(e){
+                            $('form#finisher2_details_update').submit();
+                        });
+                        $('button#finisher3_details_update_submitter').click(function(e){
+                            $('form#finisher3_details_update').submit();
+                        });
+                        $('form#job_details_update, form#customer_details_update, form#finisher_details_update, form#finisher2_details_update, form#finisher3_details_update').submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
