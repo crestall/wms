@@ -105,6 +105,7 @@ class Productionjob extends Model{
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
             'status_id'     => $data['status_id'],
+            'ship_to'       => $data['ship_to'],
             'address'       => $data['address'],
             'suburb'        => $data['suburb'],
             'state'         => $data['state'],
