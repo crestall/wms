@@ -559,7 +559,7 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            Session::set('jobfinisher{$fn}detailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
+            Session::set('jobfinisher'.$fn.'detailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
         }
         else
         {
