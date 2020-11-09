@@ -480,10 +480,12 @@ class FormController extends Controller {
     {
         //echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
+        $fn = ($this->request->data['finisher_number'] == 1)? "" : $this->request->data['finisher_number'];
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
             {
+                $field = str_replace($fn, "", $field);
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
@@ -557,7 +559,7 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            Session::set('jobfinisherdetailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
+            Session::set('jobfinisher'.$fn.'detailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
         }
         else
         {
@@ -588,18 +590,18 @@ class FormController extends Controller {
                     $this->productionfinisher->editfinisher($finisher_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
-                $this->productionjob->updateJobfinisherId($id, $finisher_id);
-                $this->productionjob->updateExpectedDeliveryDate($id, $date_ed_value);
-                Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
+                $this->productionjob->updateJobfinisherId($job_id, $finisher_id, $fn);
+                $this->productionjob->updateExpectedDeliveryDate($job_id, $date_ed_value, $fn);
+                Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
             }
             else
             {
-                $this->productionjob->removeFinisher($id);
-                $this->productionjob->updateExpectedDeliveryDate($id, 0);
-                Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher Has Been Removed From This Job</h3>");
+                $this->productionjob->removeFinisher($job_id, $fn);
+                $this->productionjob->updateExpectedDeliveryDate($job_id, 0, $fn);
+                Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher Has Been Removed From This Job</h3>");
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#finisherdetails");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#finisher{$fn}details");
     }
 
     public function procJobCustomerUpdate()

@@ -5,10 +5,12 @@ $address2 = Form::value('address2');
 $suburb = Form::value('suburb');
 $state = Form::value('state');
 $postcode = Form::value('postcode');
-$country = Form::value('country');
+$country = (empty(Form::value('country')))? "AU" : Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
 $date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
 $date_ed = (empty(Form::value('date_ed_value')))? "" : date('d/m/Y', Form::value('date_ed_value'));
+$date_ed2 = (empty(Form::value('date_ed2_value')))? "" : date('d/m/Y', Form::value('date_ed2_value'));
+$date_ed3 = (empty(Form::value('date_ed3_value')))? "" : date('d/m/Y', Form::value('date_ed3_value'));
 if(Session::getAndDestroy('show_customer_address'))
 {
     $customer_collapse = "collapse show";
@@ -235,7 +237,7 @@ else
                         <?php echo Form::displayError('ship_to');?>
                     </div>
                 </div>
-                <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+                <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Finisher One Details</h3>
@@ -330,6 +332,18 @@ else
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Finisher Two Details</h3>
+                <div class="row form-group">
+                    <label class="col-md-3 col-form-label">Expected Delivery Date</label>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="date_ed2" id="date_ed2" value="<?php echo $date_ed2;?>" />
+                            <div class="input-group-append">
+                                <span id="date_ed2_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="date_ed2_value" id="date_ed2_value" value="<?php echo Form::value('date_ed2_value');?>" />
+                </div>
                 <div class="form-group row mb-3">
                     <label class="col-md-3">Finisher Name</label>
                     <div class="col-md-4">
@@ -409,6 +423,18 @@ else
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Finisher Three Details</h3>
+                <div class="row form-group">
+                    <label class="col-md-3 col-form-label">Expected Delivery Date</label>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="date_ed3" id="date_ed3" value="<?php echo $date_ed3;?>" />
+                            <div class="input-group-append">
+                                <span id="date_ed3_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="date_ed3_value" id="date_ed3_value" value="<?php echo Form::value('date_ed3_value');?>" />
+                </div>
                 <div class="form-group row mb-3">
                     <label class="col-md-3">Finisher Name</label>
                     <div class="col-md-4">

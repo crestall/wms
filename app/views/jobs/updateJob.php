@@ -19,6 +19,8 @@ $customer_state = (!empty(Form::value('customer_state')))? Form::value('customer
 $customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('customer_postcode'):$customer['postcode'];
 $customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
 $date_ed = (!empty(Form::value('date_ed_value')))? Form::value('date_ed_value') : $job['ed_date'];
+$date_ed2 = (!empty(Form::value('date_ed2_value')))? Form::value('date_ed2_value') : $job['ed2_date'];
+$date_ed3 = (!empty(Form::value('date_ed3_value')))? Form::value('date_ed3_value') : $job['ed3_date'];
 $ship_to    = (empty(Form::value('ship_to')))?  $job['ship_to']      : Form::value('ship_to');
 $address    = empty(Form::value('address'))?    $job['address']      : Form::value('address');
 $address2   = empty(Form::value('address2'))?   $job['address_2']    : Form::value('address2');
@@ -80,6 +82,32 @@ else
     $finisher2_postcode = Form::value('finisher2_postcode');
     $finisher2_country = Form::value('finisher2_country');
 }
+if(count($finisher3))
+{
+    $finisher3_name = ucwords((!empty(Form::value('finisher3_name')))? Form::value('finisher3_name'):$finisher3['name']);
+    $finisher3_contact = (!empty(Form::value('finisher3_contact')))? Form::value('finisher3_contact'):$finisher3['contact'];
+    $finisher3_email = (!empty(Form::value('finisher3_email')))? Form::value('finisher3_email'):$finisher3['email'];
+    $finisher3_phone = (!empty(Form::value('finisher3_phone')))? Form::value('finisher3_phone'):$finisher3['phone'];
+    $finisher3_address = (!empty(Form::value('finisher3_address')))? Form::value('finisher3_address'):$finisher3['address'];
+    $finisher3_address2 = (!empty(Form::value('finisher3_address2')))? Form::value('finisher3_address2'):$finisher3['address_2'];
+    $finisher3_suburb = (!empty(Form::value('finisher3_suburb')))? Form::value('finisher3_suburb'):$finisher3['suburb'];
+    $finisher3_state = (!empty(Form::value('finisher3_state')))? Form::value('finisher3_state'):$finisher3['state'];
+    $finisher3_postcode = (!empty(Form::value('finisher3_postcode')))? Form::value('finisher3_postcode'):$finisher3['postcode'];
+    $finisher3_country = (!empty(Form::value('finisher3_country')))? Form::value('finisher3_country'):$finisher3['country'];
+}
+else
+{
+    $finisher3_name = Form::value('finisher3_name');
+    $finisher3_contact = Form::value('finisher3_contact');
+    $finisher3_email = Form::value('finisher3_email');
+    $finisher3_phone = Form::value('finisher3_phone');
+    $finisher3_address = Form::value('finisher3_address');
+    $finisher3_address2 =  Form::value('finisher3_address2');
+    $finisher3_suburb = Form::value('finisher3_suburb');
+    $finisher3_state = Form::value('finisher3_state');
+    $finisher3_postcode = Form::value('finisher3_postcode');
+    $finisher3_country = Form::value('finisher3_country');
+}
 
 ?>
 <div id="page-wrapper">
@@ -88,7 +116,11 @@ else
         <?php //echo "JOB<pre>",print_r($job),"</pre>";?>
         <?php //echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
         <?php //echo "finisher<pre>",print_r($finisher),"</pre>";?>
+        <?php //echo "SESSION<pre>",print_r($_SESSION),"</pre>";?>
         <div class="row">
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Job Details     --------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="col-sm-12 col-md-6 mb-3" id="jobdetails">
                 <div class="card h-100 border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
@@ -181,6 +213,9 @@ else
                     </div>
                 </div>
             </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card h-100 border-secondary order-card" id="deliverydetails">
                     <div class="card-header bg-secondary text-white">
@@ -195,13 +230,59 @@ else
                         <?php endif; ?>
                         <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
-                                <div class="col-md-4">
+                                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                                <div class="col-md-8">
                                     <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
                                     <?php echo Form::displayError('ship_to');?>
                                 </div>
                             </div>
-                            <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control required" name="address" id="address" value="<?php echo $address;?>" /><br>
+                                    <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
+                                        <input class="form-check-input styled" type="checkbox" id="ignore_address_error" name="ignore_address_error" <?php if(!empty(Form::value('ignore_address_error'))) echo 'checked';?> />
+                                        <label for="ignore_address_error"><span class="inst">No need for a number</span></label>
+                                    </div>
+                                    <?php echo Form::displayError('address');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Address Line 2</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="address2" id="address2" value="<?php echo $address2;?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb/Town</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control required" name="suburb" id="suburb" value="<?php echo $suburb;?>" />
+                                    <?php echo Form::displayError('suburb');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">State</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="state" id="state" value="<?php echo $state;?>" />
+                                    <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                    <?php echo Form::displayError('state');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control required" name="postcode" id="postcode" value="<?php echo $postcode;?>" />
+                                    <?php echo Form::displayError('postcode');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Country</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control required" name="country" id="country" value="<?php echo $country;?>" />
+                                    <span class="inst">use the 2 letter ISO code</span>
+                                    <?php echo Form::displayError('country');?>
+                                </div>
+                            </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
                         </form>
@@ -211,6 +292,9 @@ else
                     </div>
                 </div>
             </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Customer Details     ---------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card h-100 border-secondary order-card" id="customerdetails">
                     <div class="card-header bg-secondary text-white">
@@ -261,7 +345,6 @@ else
                                     </div>
                                     <?php echo Form::displayError('customer_address');?>
                                 </div>
-
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Address Line 2</label>
@@ -308,6 +391,9 @@ else
                     </div>
                 </div>
             </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Finisher One Details     ------------------------------------------------------------>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card h-100 border-secondary order-card" id="finisherdetails">
                     <div class="card-header bg-secondary text-white">
@@ -369,7 +455,6 @@ else
                                     </div>
                                     <?php echo Form::displayError('finisher_address');?>
                                 </div>
-
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Address Line 2</label>
@@ -408,7 +493,8 @@ else
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                            <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="job_id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="finisher_number" value="1" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
@@ -416,6 +502,9 @@ else
                     </div>
                 </div>
             </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Finisher Two Details     ------------------------------------------------------------>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card h-100 border-secondary order-card" id="finisher2details">
                     <div class="card-header bg-secondary text-white">
@@ -433,13 +522,13 @@ else
                                 <label class="col-md-4 col-form-label">Expected Delivery Date</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="date_ed" id="date_ed" value="<?php if(!empty($date_ed)) echo date('d/m/Y', $date_ed);?>" />
+                                        <input type="text" class="form-control" name="date_ed2" id="date_ed2" value="<?php if(!empty($date_ed2)) echo date('d/m/Y', $date_ed2);?>" />
                                         <div class="input-group-append">
-                                            <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                            <span id="date_ed2_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo $date_ed;?>" />
+                                <input type="hidden" name="date_ed2_value" id="date_ed2_value" value="<?php echo $date_ed2;?>" />
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4">Finisher Name</label>
@@ -516,11 +605,124 @@ else
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                            <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="job_id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="finisher_number" value="2" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
                         <button id="finisher2_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Finisher Three Details     ---------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="col-sm-12 col-md-6 mb-3">
+                <div class="card h-100 border-secondary order-card" id="finisher3details">
+                    <div class="card-header bg-secondary text-white">
+                        Finisher Three Details
+                    </div>
+                    <div class="card-body">
+                        <?php if(isset($_SESSION['jobfinisher3detailsfeedback'])) :?>
+                            <div class='feedbackbox'><?php echo Session::getAndDestroy('jobfinisher3detailsfeedback');?></div>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['jobfinisher3detailserrorfeedback'])) :?>
+                            <div class='errorbox'><?php echo Session::getAndDestroy('jobfinisher3detailserrorfeedback');?></div>
+                        <?php endif; ?>
+                        <form id="finisher3_details_update" method="post" action="/form/procJobfinisherUpdate">
+                            <div class="row form-group">
+                                <label class="col-md-4 col-form-label">Expected Delivery Date</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="date_ed3" id="date_ed3" value="<?php if(!empty($date_ed3)) echo date('d/m/Y', $date_ed3);?>" />
+                                        <div class="input-group-append">
+                                            <span id="date_ed3_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="date_ed3_value" id="date_ed3_value" value="<?php echo $date_ed3;?>" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Finisher Name</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="finisher3_name" id="finisher3_name" value="<?php echo $finisher3_name;?>" />
+                                    <input type="hidden" name="finisher3_id" id="finisher3_id" value="<?php echo $job['finisher3_id'];?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row ">
+                                <label class="col-md-4">Contact</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control finisher3" name="finisher3_contact" id="finisher3_contact" value="<?php echo $finisher3_contact;?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row ">
+                                <label class="col-md-4">Email</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control finisher3 email" name="finisher3_email" id="finisher3_email" value="<?php echo $finisher3_email;?>" />
+                                    <?php echo Form::displayError('finisher3_email');?>
+                                </div>
+                            </div>
+                            <div class="form-group row ">
+                                <label class="col-md-4">Phone</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control finisher3" name="finisher3_phone" id="finisher3_phone" value="<?php echo $finisher3_phone;?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Address Line 1</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control finisher3" name="finisher3_address" id="finisher3_address" value="<?php echo $finisher3_address;?>" /><br>
+                                    <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
+                                        <input class="form-check-input styled" type="checkbox" id="ignore_finisher3_address_error" name="ignore_finisher3_address_error" />
+                                        <label for="ignore_finisher3_address_error"><span class="inst">No need for a number</span></label>
+                                    </div>
+                                    <?php echo Form::displayError('finisher3_address');?>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Address Line 2</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control finisher3" name="finisher3_address2" id="finisher3_address2" value="<?php echo $finisher3_address2;?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Suburb/Town</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control finisher3" name="finisher3_suburb" id="finisher3_suburb" value="<?php echo $finisher3_suburb;?>" />
+                                    <?php echo Form::displayError('finisher3_suburb');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">State</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control finisher3" name="finisher3_state" id="finisher3_state" value="<?php echo $finisher3_state;?>" />
+                                    <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                    <?php echo Form::displayError('finisher3_state');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Postcode</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control finisher3" name="finisher3_postcode" id="finisher3_postcode" value="<?php echo $finisher3_postcode;?>" />
+                                    <?php echo Form::displayError('finisher3_postcode');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Country</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control finisher3" name="finisher3_country" id="finisher3_country" value="<?php echo $finisher3_country;?>" />
+                                    <span class="inst">use the 2 letter ISO code</span>
+                                    <?php echo Form::displayError('finisher3_country');?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <input type="hidden" name="job_id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="finisher_number" value="3" >
+                        </form>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button id="finisher3_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
                     </div>
                 </div>
             </div>

@@ -116,6 +116,8 @@ class Productionjob extends Model{
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
         if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
+        if(!empty($data['date_ed2_value'])) $vals['ed2_date'] = $data['date_ed2_value'];
+        if(!empty($data['date_ed3_value'])) $vals['ed3_date'] = $data['date_ed3_value'];
         if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
         if(!empty($data['finisher_id'])) $vals['finisher_id'] = $data['finisher_id'];
         if(!empty($data['finisher2_id'])) $vals['finisher2_id'] = $data['finisher2_id'];
@@ -182,17 +184,10 @@ class Productionjob extends Model{
         return true;
     }
 
-    public function updateJobFinisherId($job_id, $finisher_id)
+    public function updateJobFinisherId($job_id, $finisher_id, $finisher_number = "")
     {
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher_id', $finisher_id, $job_id);
-        return true;
-    }
-
-    public function updateJobSecondFinisherId($job_id, $finisher_id)
-    {
-        $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher2_id', $finisher_id, $job_id);
+        $db->updateDatabaseField($this->table, 'finisher'.$finisher_number.'_id', $finisher_id, $job_id);
         return true;
     }
 
@@ -203,10 +198,10 @@ class Productionjob extends Model{
         return true;
     }
 
-    public function updateExpectedDeliveryDate($job_id, $edd)
+    public function updateExpectedDeliveryDate($job_id, $edd, $fn = "")
     {
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'ed_date', $edd, $job_id);
+        $db->updateDatabaseField($this->table, 'ed'.$fn.'_date', $edd, $job_id);
         return true;
     }
 
@@ -217,24 +212,10 @@ class Productionjob extends Model{
         return true;
     }
 
-    public function removeFinisher($job_id)
+    public function removeFinisher($job_id, $fn = "")
     {
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher_id', 0, $job_id);
-        return true;
-    }
-
-    public function removeFinisher2($job_id)
-    {
-        $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher2_id', 0, $job_id);
-        return true;
-    }
-
-    public function removeFinisher3($job_id)
-    {
-        $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher3_id', 0, $job_id);
+        $db->updateDatabaseField($this->table, 'finisher'.$fn.'_id', 0, $job_id);
         return true;
     }
 
