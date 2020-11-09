@@ -1078,7 +1078,7 @@ class FormController extends Controller {
                 else
                 {
                     $finisher_data['finisher_id'] = $finisher_id;
-                    $this->productionFinisher->editFinisher($finisher_data);
+                    $this->productionfinisher->editFinisher($finisher_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
             }
