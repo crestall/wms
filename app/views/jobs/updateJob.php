@@ -605,7 +605,8 @@ else
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="job_id" value="<?php echo $job['id'];?>" >
-                            <input type="hidden" name="finisher_id" value="<?php echo $job['finisher2_id'];?>" >
+                            <input type="hidden" id="finisher2_id" name="finisher2_id" value="<?php echo $job['finisher2_id'];?>" >
+                            <input type="hidden" name="finisher_number" value="2" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
@@ -717,7 +718,8 @@ else
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="job_id" value="<?php echo $job['id'];?>" >
-                            <input type="hidden" name="finisher_id" value="<?php echo $job['finisher3_id'];?>" >
+                            <input type="hidden" id="finisher3_id" name="finisher3_id" value="<?php echo $job['finisher3_id'];?>" >
+                            <input type="hidden" name="finisher_number" value="3" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
