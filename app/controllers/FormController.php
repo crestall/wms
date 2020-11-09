@@ -1110,7 +1110,7 @@ class FormController extends Controller {
                 else
                 {
                     $finisher2_data['finisher_id'] = $finisher2_id;
-                    $this->productionFinisher->editFinisher($finisher2_data);
+                    $this->productionfinisher->editFinisher($finisher2_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
             }
@@ -1142,7 +1142,7 @@ class FormController extends Controller {
                 else
                 {
                     $finisher3_data['finisher_id'] = $finisher3_id;
-                    $this->productionFinisher->editFinisher($finisher3_data);
+                    $this->productionfinisher->editFinisher($finisher3_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
             }
