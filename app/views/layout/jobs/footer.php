@@ -143,15 +143,6 @@
                                 $('input#country').val(ui.item.country).valid();
                                 $('input#postcode').val(ui.item.postcode).valid();
                             }
-                            else
-                            {
-                                $('input#address').val('');
-                                $('input#address2').val('');
-                                $('input#suburb').val('');
-                                $('input#state').val('');
-                                $('input#country').val('');
-                                $('input#postcode').val('');
-                            }
                             return false;
                         }
                         function changeCustomerCallback(event, ui)
