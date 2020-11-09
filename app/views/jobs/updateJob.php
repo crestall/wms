@@ -493,7 +493,7 @@ else
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="job_id" value="<?php echo $job['id'];?>" >
-                            <input type="hidden" name="finisher_id" value="<?php echo $job['finisher_id'];?>" >
+                            <input type="hidden" name="finisher_number" value="1" >
                         </form>
                     </div>
                     <div class="card-footer text-right">

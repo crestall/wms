@@ -184,10 +184,10 @@ class Productionjob extends Model{
         return true;
     }
 
-    public function updateJobFinisherId($job_id, $finisher_id)
+    public function updateJobFinisherId($job_id, $finisher_id, $finisher_number = "")
     {
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher_id', $finisher_id, $job_id);
+        $db->updateDatabaseField($this->table, 'finisher'.$finisher_number.'_id', $finisher_id, $job_id);
         return true;
     }
 
