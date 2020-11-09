@@ -440,7 +440,6 @@ else
                                     </div>
                                     <?php echo Form::displayError('finisher_address');?>
                                 </div>
-
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Address Line 2</label>
@@ -479,7 +478,8 @@ else
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                            <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="job_id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="finisher_id" value="<?php echo $finisher['id'];?>" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
@@ -587,7 +587,8 @@ else
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                            <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="job_id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="finisher_id" value="<?php echo $finisher2['id'];?>" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
@@ -695,7 +696,8 @@ else
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                            <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="job_id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="finisher_id" value="<?php echo $finisher3['id'];?>" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
