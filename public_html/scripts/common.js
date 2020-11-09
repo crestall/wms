@@ -491,10 +491,11 @@ var autoCompleter = {
             	});
             },
             select: function(event, ui) {
-                $('#'+prefix+'state').val(ui.item.state);
-                $('#'+prefix+'suburb').val(ui.item.suburb);
-                $('#'+prefix+'postcode').val(ui.item.postcode);
-                $('#'+prefix+'country').val('AU');
+                $('#'+prefix+'state').val(ui.item.state).valid();
+                $('#'+prefix+'suburb').val(ui.item.suburb).valid();
+                $('#'+prefix+'postcode').val(ui.item.postcode).valid();
+                $('#'+prefix+'country').val('AU').valid();
+                return false;
             },
             change: function (event, ui) {
                 return false;
