@@ -930,7 +930,7 @@ class FormController extends Controller {
 
     public function procAddProductionJob()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -944,6 +944,10 @@ class FormController extends Controller {
         if(!$this->dataSubbed($job_id))
         {
             Form::setError('job_id', 'The job id is required');
+        }
+        elseif($this->productionjob->jobNumberExists($job_id))
+        {
+            Form::setError('sku', 'This job id is already in use');
         }
         if($status_id == 0)
         {
@@ -983,6 +987,13 @@ class FormController extends Controller {
                 Form::setError('finisher2_email', 'The email is not valid');
             }
         }
+        if($this->dataSubbed($finisher3_email))
+        {
+            if(!$this->emailValid($finisher3_email))
+            {
+                Form::setError('finisher3_email', 'The email is not valid');
+            }
+        }
         //customer address checking
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
         {
@@ -998,6 +1009,12 @@ class FormController extends Controller {
         {
             $this->validateAddress($finisher2_address, $finisher2_suburb, $finisher2_state, $finisher2_postcode, $finisher2_country, isset($ignore_finisher2_address_error), "finisher2_", "show_finisher2_address");
         }
+        //finisher three address checking
+        if(!empty($finisher3_address) || !empty($finisher3_suburb) || !empty($finisher3_state) || !empty($finisher3_postcode) || !empty($finisher3_country))
+        {
+            $this->validateAddress($finisher3_address, $finisher3_suburb, $finisher3_state, $finisher3_postcode, $finisher3_country, isset($ignore_finisher3_address_error), "finisher3_", "show_finisher3_address");
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
@@ -1005,7 +1022,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; //die();
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; //die();
             //customer details
             $customer_data = array(
                 'name'  => $customer_name
@@ -5778,7 +5795,7 @@ class FormController extends Controller {
 						'id'    => $details['id']
 					);
                     $array['whole_pallet'] = isset($details['whole_pallet']);
-					$orders_items[] = $array ;					
+					$orders_items[] = $array ;
 				}
 
             }
