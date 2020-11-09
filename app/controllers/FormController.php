@@ -490,6 +490,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        $post_data['fn'] = $fn;
         echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
         $date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
         if($this->dataSubbed($finisher_email))
