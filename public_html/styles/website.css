@@ -693,6 +693,14 @@ Add Job Buttons
     content: "Hide Address Details";
 }
 
+#finisher3_address_toggle[aria-expanded="false"]:before{
+    content: "Show Address Details";
+}
+
+#finisher3_address_toggle[aria-expanded="true"]:before{
+    content: "Hide Address Details";
+}
+
 
 /********
 highlighting sections

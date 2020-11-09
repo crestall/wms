@@ -60,7 +60,7 @@ class Productionjob extends Model{
         }
         $q .= "
             ORDER BY
-                js.ranking ASC, pj.due_date DESC
+                js.ranking ASC, pj.due_date DESC, pj.job_id DESC
         ";
         return $db->queryData($q);
     }
@@ -102,6 +102,7 @@ class Productionjob extends Model{
 
     public function updateJobDetails($data)
     {
+        //echo "<pre>",print_r($data),"</pre>"; die();
         $db = Database::openConnection();
         $vals = array(
             'job_id'        => $data['job_id'],

@@ -134,6 +134,24 @@
                             $('input#customer_state').val(ui.item.state);
                             $('input#customer_country').val(ui.item.country);
                             $('input#customer_postcode').val(ui.item.postcode);
+                            if($('#send_to_customer').prop('checked'))
+                            {
+                                $('input#address').val(ui.item.address);
+                                $('input#address2').val(ui.item.address_2);
+                                $('input#suburb').val(ui.item.suburb);
+                                $('input#state').val(ui.item.state);
+                                $('input#country').val(ui.item.country);
+                                $('input#postcode').val(ui.item.postcode);
+                            }
+                            else
+                            {
+                                $('input#address').val('');
+                                $('input#address2').val('');
+                                $('input#suburb').val('');
+                                $('input#state').val('');
+                                $('input#country').val('');
+                                $('input#postcode').val('');
+                            }
                             return false;
                         }
                         function changeCustomerCallback(event, ui)
@@ -147,6 +165,8 @@
                                 return false;
                             }
                         }
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                         autoCompleter.addressAutoComplete($('#finisher_address'), 'finisher_');
                         autoCompleter.suburbAutoComplete($('#finisher_suburb'), 'finisher_');
                         $("input#finisher_name").each(function(i,e){
@@ -168,6 +188,24 @@
                             $('input#finisher_state').val(ui.item.state);
                             $('input#finisher_country').val(ui.item.country);
                             $('input#finisher_postcode').val(ui.item.postcode);
+                            if($('#send_to_finisher').prop('checked'))
+                            {
+                                $('input#address').val(ui.item.address);
+                                $('input#address2').val(ui.item.address_2);
+                                $('input#suburb').val(ui.item.suburb);
+                                $('input#state').val(ui.item.state);
+                                $('input#country').val(ui.item.country);
+                                $('input#postcode').val(ui.item.postcode);
+                            }
+                            else
+                            {
+                                $('input#address').val('');
+                                $('input#address2').val('');
+                                $('input#suburb').val('');
+                                $('input#state').val('');
+                                $('input#country').val('');
+                                $('input#postcode').val('');
+                            }
                             return false;
                         }
                         function changeFinisherCallback(event, ui)
@@ -202,6 +240,24 @@
                             $('input#finisher2_state').val(ui.item.state);
                             $('input#finisher2_country').val(ui.item.country);
                             $('input#finisher2_postcode').val(ui.item.postcode);
+                            if($('#send_to_finisher2').prop('checked'))
+                            {
+                                $('input#address').val(ui.item.address);
+                                $('input#address2').val(ui.item.address_2);
+                                $('input#suburb').val(ui.item.suburb);
+                                $('input#state').val(ui.item.state);
+                                $('input#country').val(ui.item.country);
+                                $('input#postcode').val(ui.item.postcode);
+                            }
+                            else
+                            {
+                                $('input#address').val('');
+                                $('input#address2').val('');
+                                $('input#suburb').val('');
+                                $('input#state').val('');
+                                $('input#country').val('');
+                                $('input#postcode').val('');
+                            }
                             return false;
                         }
                         function changeFinisher2Callback(event, ui)
@@ -210,6 +266,58 @@
                 	        {
                                 $('input#finisher2_id').val(0);
                                 $('input.finisher2').each(function(element, index){
+                                    $(this).val("");
+                                })
+                                return false;
+                            }
+                        }
+                        autoCompleter.addressAutoComplete($('#finisher3_address'), 'finisher3_');
+                        autoCompleter.suburbAutoComplete($('#finisher3_suburb'), 'finisher3_');
+                        $("input#finisher3_name").each(function(i,e){
+                            if($(this).data('ui-autocomplete') != undefined)
+                            {
+                                $(this).autocomplete( "destroy" );
+                            }
+                            autoCompleter.productionJobFinisherAutoComplete($(this), selectFinisher3Callback, changeFinisher3Callback);
+                        });
+                        function selectFinisher3Callback(event, ui)
+                        {
+                            $('input#finisher3_contact').val(ui.item.contact);
+                            $('input#finisher3_email').val(ui.item.email);
+                            $('input#finisher3_phone').val(ui.item.phone);
+                            $('input#finisher3_id').val(ui.item.finisher_id);
+                            $('input#finisher3_address').val(ui.item.address);
+                            $('input#finisher3_address2').val(ui.item.address_2);
+                            $('input#finisher3_suburb').val(ui.item.suburb);
+                            $('input#finisher3_state').val(ui.item.state);
+                            $('input#finisher3_country').val(ui.item.country);
+                            $('input#finisher3_postcode').val(ui.item.postcode);
+                            if($('#send_to_finisher3').prop('checked'))
+                            {
+                                $('input#address').val(ui.item.address);
+                                $('input#address2').val(ui.item.address_2);
+                                $('input#suburb').val(ui.item.suburb);
+                                $('input#state').val(ui.item.state);
+                                $('input#country').val(ui.item.country);
+                                $('input#postcode').val(ui.item.postcode);
+                            }
+                            else
+                            {
+                                $('input#address').val('');
+                                $('input#address2').val('');
+                                $('input#suburb').val('');
+                                $('input#state').val('');
+                                $('input#country').val('');
+                                $('input#postcode').val('');
+                            }
+                            return false;
+                        }
+                        function changeFinisher3Callback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $('input#finisher3_id').val(0);
+                                $('input.finisher3').each(function(element, index){
                                     $(this).val("");
                                 })
                                 return false;
@@ -227,8 +335,13 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding the Job...</h2></div>' });
                             }
                         });
-                        $('select#status').change(function(e){
+                        $('select#status, select#state, #postcode, #suburb, #country').change(function(e){
                             $(this).valid();
+                        });
+                        var $checkboxes = $("input.send_to_address");
+                        $checkboxes.click(function(){
+                            console.log('click');
+                            $checkboxes.not(this).prop('checked', false);
                         });
                     }
                 },
