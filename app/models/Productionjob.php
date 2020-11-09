@@ -191,13 +191,6 @@ class Productionjob extends Model{
         return true;
     }
 
-    public function updateJobSecondFinisherId($job_id, $finisher_id)
-    {
-        $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher2_id', $finisher_id, $job_id);
-        return true;
-    }
-
     public function updateJobCustomerId($job_id, $customer_id)
     {
         $db = Database::openConnection();
@@ -219,24 +212,10 @@ class Productionjob extends Model{
         return true;
     }
 
-    public function removeFinisher($job_id)
+    public function removeFinisher($job_id, $fn = "")
     {
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher_id', 0, $job_id);
-        return true;
-    }
-
-    public function removeFinisher2($job_id)
-    {
-        $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher2_id', 0, $job_id);
-        return true;
-    }
-
-    public function removeFinisher3($job_id)
-    {
-        $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'finisher3_id', 0, $job_id);
+        $db->updateDatabaseField($this->table, 'finisher'.$fn.'_id', 0, $job_id);
         return true;
     }
 
