@@ -506,7 +506,7 @@ else
                                 <label class="col-md-4 col-form-label">Expected Delivery Date</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="date_ed" id="date_ed" value="<?php if(!empty($date_ed2)) echo date('d/m/Y', $date_ed2);?>" />
+                                        <input type="text" class="form-control" name="date_ed2" id="date_ed2" value="<?php if(!empty($date_ed2)) echo date('d/m/Y', $date_ed2);?>" />
                                         <div class="input-group-append">
                                             <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
@@ -615,7 +615,7 @@ else
                                 <label class="col-md-4 col-form-label">Expected Delivery Date</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="date_ed" id="date_ed" value="<?php if(!empty($date_ed3)) echo date('d/m/Y', $date_ed3);?>" />
+                                        <input type="text" class="form-control" name="date_ed3" id="date_ed3" value="<?php if(!empty($date_ed3)) echo date('d/m/Y', $date_ed3);?>" />
                                         <div class="input-group-append">
                                             <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
