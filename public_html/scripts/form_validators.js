@@ -145,15 +145,14 @@ $(document).ready(function() {
         }
 	});
     ///////////////////////////////////////////////////////////////////////////////
-    $('form#add_production_job, form#job_details_update').validate({
+    $('form#add_production_job').validate({
          rules:{
     		status_id:{
     			notNone: true
     		},
             job_id: {
 				remote: {
-                    url: '/ajaxfunctions/checkJobIds',
-                    data: { 'current_jobid': function(){ return $("#current_jobid").val(); } }
+                    url: '/ajaxfunctions/checkJobIds'
                 }
 			}
     	},
