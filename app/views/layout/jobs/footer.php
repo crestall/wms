@@ -112,6 +112,50 @@
                         $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_ed').focus();
                         });
+                        $( "#date_ed2" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onClose: function(selectedDate){
+                                //console.log('selecteddate: '+ selectedDate);
+                                if(selectedDate == "")
+                                {
+                                    $('#date_ed2_value').val('');
+                                    $('#date_ded2').val('');
+                                }
+                                else
+                                {
+                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                    s = d.valueOf()/1000;
+                                    $('#date_ed2_value').val(s);
+                                }
+                            }
+                        });
+                        $('#date_ed3_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_ed3').focus();
+                        });
+                        $( "#date_ed3" ).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "dd/mm/yy",
+                            onClose: function(selectedDate){
+                                //console.log('selecteddate: '+ selectedDate);
+                                if(selectedDate == "")
+                                {
+                                    $('#date_ed3_value').val('');
+                                    $('#date_ded3').val('');
+                                }
+                                else
+                                {
+                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                    s = d.valueOf()/1000;
+                                    $('#date_ed3_value').val(s);
+                                }
+                            }
+                        });
+                        $('#date_ed2_calendar').css('cursor', 'pointer').click(function(e){
+                            $('input#date_ed2').focus();
+                        });
                     },
                     autoComplete: function(){
                         autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');

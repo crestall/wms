@@ -342,7 +342,7 @@ else
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo Form::value('date_ed_value');?>" />
+                    <input type="hidden" name="date_ed2_value" id="date_ed2_value" value="<?php echo Form::value('date_ed2_value');?>" />
                 </div>
                 <div class="form-group row mb-3">
                     <label class="col-md-3">Finisher Name</label>
@@ -433,7 +433,7 @@ else
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="date_ed_value" id="date_ed_value" value="<?php echo Form::value('date_ed_value');?>" />
+                    <input type="hidden" name="date_ed3_value" id="date_ed3_value" value="<?php echo Form::value('date_ed3_value');?>" />
                 </div>
                 <div class="form-group row mb-3">
                     <label class="col-md-3">Finisher Name</label>
