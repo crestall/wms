@@ -26,6 +26,24 @@ class Productionjob extends Model{
         return $db->fieldValueTaken($this->table, $job_number, 'job_id');
     }
 
+    public function checkJobIds($jobid, $current_jobid)
+    {
+        $db = Database::openConnection();
+        //$sku = strtoupper($sku);
+        //$current_sku = strtoupper($current_sku);
+        $q = "SELECT job_id FROM {$this->table}";
+        $rows = $db->queryData($q);
+        $valid = 'true';
+        foreach($rows as $row)
+        {
+        	if($jobid == $row['job_id'] && $job_id != $current_jobid)
+        	{
+        		$valid = 'false';
+        	}
+        }
+        return $valid;
+    }
+
     public function getAllJobs($status_id = 0)
     {
         $db = Database::openConnection();
@@ -202,6 +220,13 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table, 'finisher2_id', 0, $job_id);
+        return true;
+    }
+
+    public function removeFinisher3($job_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'finisher3_id', 0, $job_id);
         return true;
     }
 
