@@ -159,7 +159,8 @@ class Productionfinisher extends Model{
             FROM
                 {$this->table}
             WHERE
-                name LIKE :term
+                name LIKE :term AND active = 1
+
         ";
         $array = array(
             'term'  => '%'.$q.'%'
