@@ -81,6 +81,7 @@ class FormController extends Controller {
             'procGoodsOut',
             'procItemsUpdate',
             'procJobCustomerUpdate',
+            'procJobDeliveryUpdate',
             'procJobDetailsUpdate',
             'procJobStatusAdd',
             'procJobStatusEdit',
