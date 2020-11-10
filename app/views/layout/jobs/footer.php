@@ -353,8 +353,7 @@
                             $checkboxes.not(this).prop('checked', false).change();
                         });
                         $('input#held_in_store').change(function(e){
-                            //console.log('change event fired');
-                            if($(this).prop('checked'))
+                            if($('input#held_in_store').prop('checked'))
                             {
                                 console.log('will disable everything');
                             }
