@@ -81,6 +81,7 @@ class FormController extends Controller {
             'procGoodsOut',
             'procItemsUpdate',
             'procJobCustomerUpdate',
+            'procJobDeliveryUpdate',
             'procJobDetailsUpdate',
             'procJobStatusAdd',
             'procJobStatusEdit',
@@ -135,6 +136,34 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procJobDeliveryUpdate()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!isset($held_in_store))
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            Session::set('jobdeliverydetailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
+        }
+        else
+        {
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $this->productionjob->updateJobAddress($post_data);
+            Session::set('jobdeliverydetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Updated</h3><p>The changes should be showing below</p>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#deliverydetails");
     }
 
     public function procTransferLocation()

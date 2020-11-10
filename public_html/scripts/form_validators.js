@@ -166,6 +166,28 @@ $(document).ready(function() {
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
+    $('form#job_details_update').validate({
+         rules:{
+    		status_id:{
+    			notNone: true
+    		},
+            job_id: {
+				remote: {
+                    url: '/ajaxfunctions/checkJobIds',
+                    data: { 'current_jobid': function(){ return $("#current_jobid").val(); } }
+                }
+			}
+    	},
+		messages:{
+			status_id:{
+				notNone: "A status must be chosen"
+			},
+            job_id: {
+				remote: 'This Job Id is already in use. Job Ids must be unique'
+			}
+		}
+    });
+    ///////////////////////////////////////////////////////////////////////////////
     $('form#get_quotes').validate({
          rules:{
     		state:{

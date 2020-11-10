@@ -253,6 +253,91 @@ var barcodeScanner = {
     }
 }
 /************
+* Job Delivery Destinations
+************/
+var jobDeliveryDestinations = {
+    updateEvents: function(){
+        var $checkboxes = $("input.send_to_address");
+        $checkboxes.click(function(){
+            //console.log('click');
+            $checkboxes.not(this).prop('checked', false).change();
+        });
+        $('input#held_in_store').change(function(e){
+            if($('input#held_in_store').prop('checked'))
+            {
+                //console.log('will disable everything');
+                $("div#delivery_address_holder input").each(function(i,e){
+                    if(!(this.id == "csrf_token" || this.id == "job_id"))
+                    {
+                        $( this ).prop( "disabled", true );
+                        $( this ).val( "" );
+                    }
+                });
+            }
+            else
+            {
+                //console.log('will enable everything');
+                $("div#delivery_address_holder input").each(function(i,e){
+                    if(!(this.id == "csrf_token" || this.id == "job_id"))
+                        $( this ).prop( "disabled", false );
+                });
+            }
+        });
+        $('input#send_to_customer').change(function(e){
+            if($('input#send_to_customer').prop('checked'))
+            {
+                $('#ship_to').val($('#customer_name').val());
+                $('#address').val($('#customer_address').val());
+                $('#address2').val($('#customer_address2').val());
+                $('#suburb').val($('#customer_suburb').val());
+                $('#state').val($('#customer_state').val());
+                $('#postcode').val($('#customer_postcode').val());
+                $('#country').val($('#customer_country').val());
+                $('#ignore_address_error').prop('checked', $('#ignore_customer_address_error').prop('checked' )).change();
+            }
+        });
+        $('input#send_to_finisher').change(function(e){
+            if($('input#send_to_finisher').prop('checked'))
+            {
+                $('#ship_to').val($('#finisher_name').val());
+                $('#address').val($('#finisher_address').val());
+                $('#address2').val($('#finisher_address2').val());
+                $('#suburb').val($('#finisher_suburb').val());
+                $('#state').val($('#finisher_state').val());
+                $('#postcode').val($('#finisher_postcode').val());
+                $('#country').val($('#finisher_country').val());
+                $('#ignore_address_error').prop('checked', $('#ignore_finisher_address_error').prop('checked' )).change();
+            }
+        });
+        $('input#send_to_finisher2').change(function(e){
+            if($('input#send_to_finisher2').prop('checked'))
+            {
+                $('#ship_to').val($('#finisher2_name').val());
+                $('#address').val($('#finisher2_address').val());
+                $('#address2').val($('#finisher2_address2').val());
+                $('#suburb').val($('#finisher2_suburb').val());
+                $('#state').val($('#finisher2_state').val());
+                $('#postcode').val($('#finisher2_postcode').val());
+                $('#country').val($('#finisher2_country').val());
+                $('#ignore_address_error').prop('checked', $('#ignore_finisher2_address_error').prop('checked' )).change();
+            }
+        });
+        $('input#send_to_finisher3').change(function(e){
+            if($('input#send_to_finisher3').prop('checked'))
+            {
+                $('#ship_to').val($('#finisher3_name').val());
+                $('#address').val($('#finisher3_address').val());
+                $('#address2').val($('#finisher3_address2').val());
+                $('#suburb').val($('#finisher3_suburb').val());
+                $('#state').val($('#finisher3_state').val());
+                $('#postcode').val($('#finisher3_postcode').val());
+                $('#country').val($('#finisher3_country').val());
+                $('#ignore_address_error').prop('checked', $('#ignore_finisher3_address_error').prop('checked' )).change();
+            }
+        });
+    }
+}
+/************
 * Data Tables
 ************/
 var dataTable = {

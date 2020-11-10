@@ -138,6 +138,7 @@ else
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control required number" name="job_id" id="job_id" value="<?php echo $job_id;?>" />
+                                    <input type="hidden" name="current_jobid" id="current_jobid" value="<?php echo $job_id;?>" >
                                     <?php echo Form::displayError('job_id');?>
                                 </div>
                             </div>
@@ -229,66 +230,69 @@ else
                             <div class='errorbox'><?php echo Session::getAndDestroy('jobdeliverydetailserrorfeedback');?></div>
                         <?php endif; ?>
                         <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
-                                    <?php echo Form::displayError('ship_to');?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control required" name="address" id="address" value="<?php echo $address;?>" /><br>
-                                    <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
-                                        <input class="form-check-input styled" type="checkbox" id="ignore_address_error" name="ignore_address_error" <?php if(!empty(Form::value('ignore_address_error'))) echo 'checked';?> />
-                                        <label for="ignore_address_error"><span class="inst">No need for a number</span></label>
+                            <?php include(Config::get('VIEWS_PATH')."forms/delivery_destinations.php");?>
+                            <div id="delivery_address_holder">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
+                                        <?php echo Form::displayError('ship_to');?>
                                     </div>
-                                    <?php echo Form::displayError('address');?>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">Address Line 2</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" name="address2" id="address2" value="<?php echo $address2;?>" />
+                                <div class="form-group row">
+                                    <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control required" name="address" id="address" value="<?php echo $address;?>" /><br>
+                                        <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
+                                            <input class="form-check-input styled" type="checkbox" id="ignore_address_error" name="ignore_address_error" <?php if(!empty(Form::value('ignore_address_error'))) echo 'checked';?> />
+                                            <label for="ignore_address_error"><span class="inst">No need for a number</span></label>
+                                        </div>
+                                        <?php echo Form::displayError('address');?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb/Town</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control required" name="suburb" id="suburb" value="<?php echo $suburb;?>" />
-                                    <?php echo Form::displayError('suburb');?>
+                                <div class="form-group row">
+                                    <label class="col-md-4">Address Line 2</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="address2" id="address2" value="<?php echo $address2;?>" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">State</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" name="state" id="state" value="<?php echo $state;?>" />
-                                    <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
-                                    <?php echo Form::displayError('state');?>
+                                <div class="form-group row">
+                                    <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb/Town</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control required" name="suburb" id="suburb" value="<?php echo $suburb;?>" />
+                                        <?php echo Form::displayError('suburb');?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control required" name="postcode" id="postcode" value="<?php echo $postcode;?>" />
-                                    <?php echo Form::displayError('postcode');?>
+                                <div class="form-group row">
+                                    <label class="col-md-4">State</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="state" id="state" value="<?php echo $state;?>" />
+                                        <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                        <?php echo Form::displayError('state');?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Country</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control required" name="country" id="country" value="<?php echo $country;?>" />
-                                    <span class="inst">use the 2 letter ISO code</span>
-                                    <?php echo Form::displayError('country');?>
+                                <div class="form-group row">
+                                    <label class="col-md-4 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control required" name="postcode" id="postcode" value="<?php echo $postcode;?>" />
+                                        <?php echo Form::displayError('postcode');?>
+                                    </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Country</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control required" name="country" id="country" value="<?php echo $country;?>" />
+                                        <span class="inst">use the 2 letter ISO code</span>
+                                        <?php echo Form::displayError('country');?>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                                <input type="hidden" name="job_id" id="job_id" value="<?php echo $job['id'];?>" >
                             </div>
-                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                            <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
-                        <button id="customer_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
+                        <button id="delivery_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
                     </div>
                 </div>
             </div>

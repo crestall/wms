@@ -65,14 +65,14 @@ else
                 <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control required number" name="job_id" id="job_id" value="<?php echo Form::value('job_id');?>" />
+                        <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo Form::value('job_id');?>" />
                         <?php echo Form::displayError('job_id');?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3">Related Job Id</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control number" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
+                        <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -221,28 +221,7 @@ else
 <!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
                 <h3>Delivery Details</h3>
-                <div class="form-group row">
-                    <div class=" offset-1 col-5 checkbox checkbox-default ">
-                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" checked />
-                        <label for="send_to_customer">Send to Customer</label>
-                    </div>
-                    <div class="col-6 checkbox checkbox-default">
-                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher" name="send_to_finisher" />
-                        <label for="send_to_finisher">Send to Finisher One</label>
-                    </div>
-                    <div class="offset-1 col-5 checkbox checkbox-default">
-                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher2" name="send_to_finisher2" />
-                        <label for="send_to_finisher2">Send to Finisher Two</label>
-                    </div>
-                    <div class="col-md-6 checkbox checkbox-default">
-                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher3" name="send_to_finisher3" />
-                        <label for="send_to_finisher3">Send to Finisher Three</label>
-                    </div>
-                    <div class="offset-1 col-5 checkbox checkbox-default">
-                        <input class="form-check-input styled send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
-                        <label for="held_in_store">Held In Store</label>
-                    </div>
-                </div>
+                 <?php include(Config::get('VIEWS_PATH')."forms/delivery_destinations.php");?>
                 <div id="delivery_address_holder">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>

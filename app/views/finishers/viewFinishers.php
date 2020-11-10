@@ -1,14 +1,12 @@
 <?php
-    $link_text = (!$active)? "<a href='/finishers/view-finishers' class='btn btn-outline-fsg'>View Active Finishers</a>" : "<a href='/finishers/view-finishers/active=0' class='btn btn-outline-fsg'>View Inactive Finishers</a>";
+    //$link_text = (!$active)? "<a href='/finishers/view-finishers' class='btn btn-outline-fsg'>View Active Finishers</a>" : "<a href='/finishers/view-finishers/active=0' class='btn btn-outline-fsg'>View Inactive Finishers</a>";
     $i = 1;
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
-            <div class="col">
-                <p class="text-right"><?php echo $link_text;?></p>
-            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-danger" id="deactivate"><i class="fal fa-times-circle"></i> Delete Selected Finishers</button></div>
         </div>
         <?php if(count($finishers)):?>
             <div class="col" id="table_holder" style="display:none">
@@ -19,7 +17,14 @@
                             <th>Finisher Name</th>
                             <th>Contact Details</th>
                             <th>Address Details</th>
-                             <?php if($role == "production admin"):?>
+                            <?php if($role == "production admin"):?>
+                                <th nowrap>
+                                    Select
+                                    <div class="checkbox checkbox-default">
+                                        <input id="select_all" class="styled" type="checkbox">
+                                        <label for="select_all"><em><small>(all)</small></em></label>
+                                    </div>
+                                </th>
                                 <th></th>
                             <?php endif;?>
                         </tr>
@@ -45,6 +50,12 @@
                             <td data-label="Contact Details"><?php echo $contact_string;?></td>
                             <td data-label="Address Details" class="text-right"><?php echo $address_string;?></td>
                             <?php if($role == "production admin"):?>
+                                <td data-label="Select" class="chkbox">
+                                    <div class="checkbox checkbox-default">
+                                        <input type="checkbox" class="select styled" data-finisherid='<?php echo $s['id'];?>' name="select_<?php echo $s['id'];?>" id="select_<?php echo $s['id'];?>" />
+                                        <label for="select_<?php echo $s['id'];?>"></label>
+                                    </div>
+                                </td>
                                 <td>
                                     <p><a class="btn btn-outline-secondary" href="/finishers/edit-finisher/finisher=<?php echo $s['id'];?>" >Edit Details</a></p>
                                 </td>
