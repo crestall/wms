@@ -350,7 +350,7 @@
                         var $checkboxes = $("input.send_to_address");
                         $checkboxes.click(function(){
                             //console.log('click');
-                            $checkboxes.not(this).prop('checked', false);
+                            $checkboxes.not(this).prop('checked', false).change();
                         });
                         $('input#held_in_store').change(function(e){
                             console.log('change event fired');
