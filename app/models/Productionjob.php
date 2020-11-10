@@ -105,15 +105,15 @@ class Productionjob extends Model{
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
             'status_id'     => $data['status_id'],
-            'address'       => $data['address'],
-            'suburb'        => $data['suburb'],
-            'state'         => $data['state'],
-            'postcode'      => $data['postcode'],
-            'country'       => $data['country'],
             'date'          => time()
         );
         if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
+        if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
+        if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
+        if(!empty($data['state'])) $vals['state'] = $data['state'];
+        if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
+        if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
         if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
         if(!empty($data['date_ed2_value'])) $vals['ed2_date'] = $data['date_ed2_value'];
