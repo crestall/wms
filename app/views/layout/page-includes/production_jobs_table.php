@@ -9,7 +9,7 @@
             <!--th>Status</th-->
             <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
             <th>FSG Contact</th>
-            <th>Finisher</th>
+            <th>Finisher(s)</th>
             <th nowrap>
                 Select
                 <div class="checkbox checkbox-default">
@@ -71,34 +71,19 @@
                 <?php endif;?>
                 ><select class="selectpicker status" id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select></td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
-                <td data-label="Finisher">
-                    <span style="font-size: larger">
-                        <?php if($user_role == "production_admin"):?>
-                            <a href="/finishers/edit-finisher/finisher=<?php echo $job['finisher_id'];?>"><?php echo ucwords($job['finisher_name']);;?></a>
-                        <?php else:?>
-                            <?php echo ucwords($job['finisher_name']);?>
+                <td data-label="Finisher(s)">
+                    <?php for($f = 1; $f <= 3; $f++):
+                        $tf = ($f == 1)? "": $f;
+                        if(!(empty($job['finisher'.$tf.'_name']))):?>
+                            <span style="font-size: larger">
+                                <?php if($user_role == "production_admin"):?>
+                                    <a href="/finishers/edit-finisher/finisher=<?php echo $job['finisher'.$tf.'_id'];?>"><?php echo ucwords($job['finisher'.$tf.'_name']);?></a>
+                                <?php else:?>
+                                    <?php echo ucwords($job['finisher'.$tf.'_name']);?>
+                                <?php endif;?>
+                            </span>
                         <?php endif;?>
-                    </span>
-                    <div class="contact_details">
-                        <div class='row'>
-                            <label class='col-4 font-weight-bold'>Contact</label>
-                            <div class='col-8'>
-                                <?php echo $job['finisher_contact'];?>
-                            </div>
-                        </div>
-                        <div class='row'>
-                            <label class='col-4 font-weight-bold'>Email</label>
-                            <div class='col-8'>
-                                <?php echo $job['finisher_email'];?>
-                            </div>
-                        </div>
-                        <div class='row'>
-                            <label class='col-4 font-weight-bold'>Phone</label>
-                            <div class='col-8'>
-                                <?php echo $job['finisher_phone'];?>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endfor;?>
                 </td>
                 <td data-label="Select" class="chkbox">
                     <div class="checkbox checkbox-default">
