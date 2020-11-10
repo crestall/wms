@@ -485,11 +485,7 @@ class FormController extends Controller {
         {
             if(!is_array($value))
             {
-                //$field = str_replace($fn, "", $field);
-                $pos = strpos($field, $fn);
-                if ($pos !== false) {
-                    $field = substr_replace($field, "", $pos, strlen($fn));
-                }
+                $field = str_replace("finisher".$fn, "finisher", $field); 
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
