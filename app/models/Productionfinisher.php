@@ -19,6 +19,20 @@
 class Productionfinisher extends Model{
     public $table = "production_finishers";
 
+    public function deactivateFinisher($finisher_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'active', 0, $finisher_id);
+        return true;
+    }
+
+    public function reactivateFinisher($finisher_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'active', 1, $finisher_id);
+        return true;
+    }
+
     public function getSelectFinishers($selected = false)
     {
         $db = Database::openConnection();
@@ -145,7 +159,8 @@ class Productionfinisher extends Model{
             FROM
                 {$this->table}
             WHERE
-                name LIKE :term
+                name LIKE :term AND active = 1
+
         ";
         $array = array(
             'term'  => '%'.$q.'%'

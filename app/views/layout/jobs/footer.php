@@ -394,7 +394,6 @@
                                         $.post('/ajaxfunctions/update-job-status', data, function(d){
                                             location.reload();
                                         });
-
                                     }
                                 });
                             }

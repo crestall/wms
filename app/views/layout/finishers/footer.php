@@ -9,6 +9,14 @@
                     init: function(){
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+                    },
+                    selectAll: function(){
+                        $('#select_all').click(function(e){
+                            var checked = this.checked;
+                             $('.select').each(function(e){
+                                this.checked =  checked;
+                             })
+                        });
                     }
                 },
                 'add-finisher':{
@@ -35,9 +43,48 @@
                 },
                 'view-finishers':{
                     init: function(){
+                        actions.common.selectAll();
                         dataTable.init($('table#finisher_list_table'), {
                             "order": []
                         } );
+                        $('button#deactivate').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Finishers Selected",
+                                    text: "Please select at least one finisher to delete",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                swal({
+                                    title: "Really Delete Finisher(s)?",
+                                    text: "This cannot be undone without manually altering database values",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(deactivateFinisher) {
+                                    if(deactivateFinisher)
+                                    {
+                                        var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            if($(this).prop('checked') )
+                                            {
+                                                var finisher_id = $(this).data('finisherid');
+                                                ids.push(finisher_id);
+                                            }
+                                        });
+                                        console.log('ids: '+ids);
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deleting Finishers...</h1></div>' });
+                                        var data = {finisherids: ids};
+                                        $.post('/ajaxfunctions/delete-finishers', data, function(d){
+                                            location.reload();
+                                        });
+                                    }
+                                });
+                            }
+                        });
                     }
                 }
             }
