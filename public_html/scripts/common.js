@@ -267,7 +267,7 @@ var jobDeliveryDestinations = {
             {
                 console.log('will disable everything');
                 $("div#delivery_address_holder input").each(function(i,e){
-                    if(this.id != "csrf_token")
+                    if(!(this.id == "csrf_token" || this.id == "job_id"))
                         $( this ).prop( "disabled", true );
                 });
             }
@@ -275,7 +275,7 @@ var jobDeliveryDestinations = {
             {
                 console.log('will enable everything');
                 $("div#delivery_address_holder input").each(function(i,e){
-                    if(this.id != "csrf_token")
+                    if(!(this.id == "csrf_token" || this.id == "job_id"))
                         $( this ).prop( "disabled", false );
                 });
             }
