@@ -57,6 +57,9 @@ else
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="add_production_job" method="post" action="/form/procAddProductionJob">
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Job Details     --------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Job Details</h3>
                 <div class="form-group row">
@@ -131,6 +134,9 @@ else
                 </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Customer Details     ---------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------->
                 <h3>Customer Details</h3>
                 <div class="form-group row mb-3">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
@@ -211,6 +217,9 @@ else
                 </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------->
                 <h3>Delivery Details</h3>
                 <div class="form-group row">
                     <div class=" offset-1 col-5 checkbox checkbox-default ">
@@ -228,6 +237,10 @@ else
                     <div class="col-md-6 checkbox checkbox-default">
                         <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_finisher3" name="send_to_finisher3" />
                         <label for="send_to_finisher3">Send to Finisher Three</label>
+                    </div>
+                    <div class="col-md-6 checkbox checkbox-default">
+                        <input class="form-check-input styled send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
+                        <label for="held_in_store">Held In Store</label>
                     </div>
                 </div>
                 <div class="form-group row">
