@@ -288,7 +288,7 @@ var jobDeliveryDestinations = {
             {
                 var cname = $('#customer_name').val();
                 console.log('customer_name: '+cname);
-                $('#send_to').val(cname);
+                $('#ship_to').val(cname);
             }
         });
     }
