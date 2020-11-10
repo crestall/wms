@@ -58,7 +58,18 @@
                             }
                             else
                             {
+                                swal({
+                                    title: "Really Delete Finisher(s)?",
+                                    text: "This cannot be undone without manually altering database values",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(deactivateFinisher) {
+                                    if(deactivateFinisher)
+                                    {
 
+                                    }
+                                });
                             }
                         });
                     }
