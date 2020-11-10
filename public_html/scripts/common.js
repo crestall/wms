@@ -288,6 +288,12 @@ var jobDeliveryDestinations = {
             {
                 $('#ship_to').val($('#customer_name').val());
                 $('#address').val($('#customer_address').val());
+                $('#address2').val($('#customer_address2').val());
+                $('#suburb').val($('#customer_suburb').val());
+                $('#state').val($('#customer_state').val());
+                $('#postcode').val($('#customer_postcode').val());
+                $('#country').val($('#customer_country').val());
+                $('#ignore_address_error').prop('checked', $('#ignore_customer_address_error').prop('checked' )).change();
             }
         });
     }
