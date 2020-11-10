@@ -353,7 +353,15 @@
                             $checkboxes.not(this).prop('checked', false).change();
                         });
                         $('input#held_in_store').change(function(e){
-                            console.log('change event fired');
+                            //console.log('change event fired');
+                            if($(this).prop('checked'))
+                            {
+                                console.log('will disable everything');
+                            }
+                            else
+                            {
+                                console.log('will enable everything');
+                            }
                         });
                     }
                 },
