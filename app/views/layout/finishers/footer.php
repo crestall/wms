@@ -76,6 +76,11 @@
                                             }
                                         });
                                         console.log('ids: '+ids);
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deleting Finishers...</h1></div>' });
+                                        var data = {finisherids: ids};
+                                        $.post('/ajaxfunctions/delete-finishers', data, function(d){
+                                            location.reload();
+                                        });
                                     }
                                 });
                             }
