@@ -485,7 +485,7 @@ class FormController extends Controller {
         {
             if(!is_array($value))
             {
-                $field = str_replace("finisher".$fn, "finisher", $field); 
+                $field = str_replace("finisher".$fn, "finisher", $field);
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
@@ -1016,7 +1016,8 @@ class FormController extends Controller {
         {
             $this->validateAddress($finisher3_address, $finisher3_suburb, $finisher3_state, $finisher3_postcode, $finisher3_country, isset($ignore_finisher3_address_error), "finisher3_", "show_finisher3_address");
         }
-        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(!isset($held_in_store))
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
