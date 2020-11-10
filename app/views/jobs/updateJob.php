@@ -229,7 +229,7 @@ else
                             <div class='errorbox'><?php echo Session::getAndDestroy('jobdeliverydetailserrorfeedback');?></div>
                         <?php endif; ?>
                         <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
-                             <?php include(Config::get('VIEWS_PATH')."forms/delivery_destinations.php");?> 
+                             <?php include(Config::get('VIEWS_PATH')."forms/delivery_destinations.php");?>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
                                 <div class="col-md-8">
@@ -289,7 +289,7 @@ else
                         </form>
                     </div>
                     <div class="card-footer text-right">
-                        <button id="customer_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
+                        <button id="delivery_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
                     </div>
                 </div>
             </div>
