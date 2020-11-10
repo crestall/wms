@@ -568,6 +568,10 @@
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
                             }
+                            else
+                            {
+                                return false;
+                            }
                         });
                         $('select#status').change(function(e){
                             $(this).valid();
