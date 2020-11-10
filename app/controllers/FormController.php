@@ -140,7 +140,7 @@ class FormController extends Controller {
 
     public function procJobDeliveryUpdate()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -149,6 +149,19 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        if(!isset($held_in_store))
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            Session::set('jobdeliverydetailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
+        }
+        else
+        {
+            echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#deliverydetails");
     }
 
     public function procTransferLocation()
