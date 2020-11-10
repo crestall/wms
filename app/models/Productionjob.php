@@ -20,6 +20,28 @@
 class Productionjob extends Model{
     public $table = "production_jobs";
 
+    public function updateJobAddress($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'ship_to'   => NULL,
+            'address'   => NULL,
+            'address_2' => NULL,
+            'suburb'    => NULL,
+            'state'     => NULL,
+            'postcode'  => NULL,
+            'country'   => 'AU'
+        );
+        if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
+        if(!empty($data['address'])) $vals['address'] = $data['address'];
+        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
+        if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
+        if(!empty($data['state'])) $vals['state'] = $data['state'];
+        if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
+        if(!empty($data['country'])) $vals['country'] = $data['country'];
+        $id = $db->updateDatabaseFields($this->table, $vals, $data['job_id']);
+    }
+
     public function jobNumberExists($job_number)
     {
         $db = Database::openConnection();
