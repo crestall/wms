@@ -243,14 +243,14 @@ else
                         <label for="held_in_store">Held In Store</label>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
-                        <?php echo Form::displayError('ship_to');?>
-                    </div>
-                </div>
                 <div id="delivery_address_holder">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
+                            <?php echo Form::displayError('ship_to');?>
+                        </div>
+                    </div>
                     <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
                 </div>
             </div>
