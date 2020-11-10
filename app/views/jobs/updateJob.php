@@ -286,7 +286,7 @@ else
                                         <?php echo Form::displayError('country');?>
                                     </div>
                                 </div>
-                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                                <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                 <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
                             </div>
                         </form>
