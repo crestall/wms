@@ -9,6 +9,14 @@
                     init: function(){
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+                    },
+                    selectAll: function(){
+                        $('#select_all').click(function(e){
+                            var checked = this.checked;
+                             $('.select').each(function(e){
+                                this.checked =  checked;
+                             })
+                        });
                     }
                 },
                 'add-finisher':{
@@ -38,6 +46,7 @@
                         dataTable.init($('table#finisher_list_table'), {
                             "order": []
                         } );
+                        actions.common.selectAll();
                     }
                 }
             }
