@@ -105,7 +105,6 @@ class Productionjob extends Model{
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
             'status_id'     => $data['status_id'],
-            'ship_to'       => $data['ship_to'],
             'address'       => $data['address'],
             'suburb'        => $data['suburb'],
             'state'         => $data['state'],
@@ -113,6 +112,7 @@ class Productionjob extends Model{
             'country'       => $data['country'],
             'date'          => time()
         );
+        if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
         if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
