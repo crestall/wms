@@ -81,8 +81,8 @@ class ProductionSettingsController extends Controller
         Config::setJsConfig('curPage', "finisher-categories");
         Config::set('curPage', "finisher-categories");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/jobStatus.php', [
-            'page_title'    =>  "Production Job Status",
-            'pht'           =>  ": Production Job Status",
+            'page_title'    =>  "Production Finisher Categories",
+            'pht'           =>  ": Production Finisher Categories",
             'status'        =>  $status
         ]);
     }
