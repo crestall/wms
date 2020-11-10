@@ -267,14 +267,16 @@ var jobDeliveryDestinations = {
             {
                 console.log('will disable everything');
                 $("div#delivery_address_holder input").each(function(i,e){
-                    $( this ).prop( "disabled", true );
+                    if(this.id != "csrf_token")
+                        $( this ).prop( "disabled", true );
                 });
             }
             else
             {
                 console.log('will enable everything');
-                $("div#delivery_address_holder input").not('#csrf_token').each(function(i,e){
-                    $( this ).prop( "disabled", false );
+                $("div#delivery_address_holder input").each(function(i,e){
+                    if(this.id != "csrf_token")
+                        $( this ).prop( "disabled", false );
                 });
             }
         });
