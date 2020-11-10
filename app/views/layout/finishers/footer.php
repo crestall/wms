@@ -52,7 +52,7 @@
                             {
                                 swal({
                                     title: "No Finishers Selected",
-                                    text: "Please select at least one finisher to deactivate",
+                                    text: "Please select at least one finisher to delete",
                                     icon: "error"
                                 });
                             }
