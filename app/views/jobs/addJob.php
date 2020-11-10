@@ -250,7 +250,9 @@ else
                         <?php echo Form::displayError('ship_to');?>
                     </div>
                 </div>
-                <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
+                <div id="delivery_address_holder">
+                    <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
+                </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Finisher One Details</h3>
