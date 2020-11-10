@@ -309,6 +309,19 @@ var jobDeliveryDestinations = {
                 $('#ignore_address_error').prop('checked', $('#ignore_finisher_address_error').prop('checked' )).change();
             }
         });
+        $('input#send_to_finisher2').change(function(e){
+            if($('input#send_to_finisher2').prop('checked'))
+            {
+                $('#ship_to').val($('#finisher2_name').val());
+                $('#address').val($('#finisher2_address').val());
+                $('#address2').val($('#finisher2_address2').val());
+                $('#suburb').val($('#finisher2_suburb').val());
+                $('#state').val($('#finisher2_state').val());
+                $('#postcode').val($('#finisher2_postcode').val());
+                $('#country').val($('#finisher2_country').val());
+                $('#ignore_address_error').prop('checked', $('#ignore_finisher2_address_error').prop('checked' )).change();
+            }
+        });
     }
 }
 /************
