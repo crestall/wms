@@ -347,27 +347,7 @@
                         $('select#status, #state, #postcode, #suburb, #country').change(function(e){
                             $(this).valid();
                         });
-                        var $checkboxes = $("input.send_to_address");
-                        $checkboxes.click(function(){
-                            //console.log('click');
-                            $checkboxes.not(this).prop('checked', false).change();
-                        });
-                        $('input#held_in_store').change(function(e){
-                            if($('input#held_in_store').prop('checked'))
-                            {
-                                console.log('will disable everything');
-                                $("div#delivery_address_holder input").each(function(i,e){
-                                    $( this ).prop( "disabled", true );
-                                });
-                            }
-                            else
-                            {
-                                console.log('will enable everything');
-                                $("div#delivery_address_holder input").each(function(i,e){
-                                    $( this ).prop( "disabled", false );
-                                });
-                            }
-                        });
+                        jobDeliveryDestinations.updateEvents();
                     }
                 },
                 'view-jobs':{
@@ -545,6 +525,7 @@
                     init: function(){
                         actions.common.doDates();
                         actions.common.autoComplete();
+                        jobDeliveryDestinations.updateEvents();
                         $('button#job_details_update_submitter').click(function(e){
                             $('form#job_details_update').submit();
                         });
