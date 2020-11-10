@@ -75,13 +75,13 @@
                     <?php for($f = 1; $f <= 3; $f++):
                         $tf = ($f == 1)? "": $f;
                         if(!(empty($job['finisher'.$tf.'_name']))):?>
-                            <span style="font-size: larger">
+                            <p class="border-bottom border-secondary border-bottom-dashed mb-3">
                                 <?php if($user_role == "production_admin"):?>
                                     <a href="/finishers/edit-finisher/finisher=<?php echo $job['finisher'.$tf.'_id'];?>"><?php echo ucwords($job['finisher'.$tf.'_name']);?></a>
                                 <?php else:?>
                                     <?php echo ucwords($job['finisher'.$tf.'_name']);?>
                                 <?php endif;?>
-                            </span>
+                            </p>
                         <?php endif;?>
                     <?php endfor;?>
                 </td>
