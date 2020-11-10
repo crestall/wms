@@ -229,9 +229,9 @@ else
                         <?php if(isset($_SESSION['jobdeliverydetailserrorfeedback'])) :?>
                             <div class='errorbox'><?php echo Session::getAndDestroy('jobdeliverydetailserrorfeedback');?></div>
                         <?php endif; ?>
-                        <div id="delivery_address_holder">
-                            <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
-                                 <?php include(Config::get('VIEWS_PATH')."forms/delivery_destinations.php");?>
+                        <?php include(Config::get('VIEWS_PATH')."forms/delivery_destinations.php");?>
+                        <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
+                            <div id="delivery_address_holder">
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
                                     <div class="col-md-8">
@@ -288,9 +288,8 @@ else
                                 </div>
                                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                 <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
-                            </form>
-                        </div>
-
+                            </div>
+                        </form>
                     </div>
                     <div class="card-footer text-right">
                         <button id="delivery_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
