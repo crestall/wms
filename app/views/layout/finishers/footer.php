@@ -67,7 +67,15 @@
                                 }).then( function(deactivateFinisher) {
                                     if(deactivateFinisher)
                                     {
-
+                                        var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            if($(this).prop('checked') )
+                                            {
+                                                var finisher_id = $(this).data('finisherid');
+                                                ids.push(finisher_id);
+                                            }
+                                        });
+                                        console.log('ids: '+ids);
                                     }
                                 });
                             }
