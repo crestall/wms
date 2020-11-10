@@ -287,7 +287,7 @@ else
                                     </div>
                                 </div>
                                 <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                                <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
+                                <input type="hidden" name="job_id" id="job_id" value="<?php echo $job['id'];?>" >
                             </div>
                         </form>
                     </div>
