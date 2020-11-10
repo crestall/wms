@@ -43,10 +43,24 @@
                 },
                 'view-finishers':{
                     init: function(){
+                        actions.common.selectAll();
                         dataTable.init($('table#finisher_list_table'), {
                             "order": []
                         } );
-                        actions.common.selectAll();
+                        $('button#deactivate').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Finishers Selected",
+                                    text: "Please select at least one finisher to deactivate",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+
+                            }
+                        });
                     }
                 }
             }
