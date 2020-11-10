@@ -23,6 +23,7 @@ class ajaxfunctionsController extends Controller
             'deactivateUser',
             'deleteClientLocation',
             'deleteConfiguration',
+            'deleteFinishers',
             'deletePackage',
             'doRunsheets',
             'fulfillOrder',
@@ -64,6 +65,16 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function deleteFinishers()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data['finisherids'] as $finisher_id)
+        {
+            $this->productionfinisher->deactivateFinisher($finisher_id);
+        }
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Finisher(s) Have Been Deleted</h2>");
     }
 
     public function updateJobStatus()
