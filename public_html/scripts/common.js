@@ -286,9 +286,7 @@ var jobDeliveryDestinations = {
         $('input#send_to_customer').change(function(e){
             if($('input#send_to_customer').prop('checked'))
             {
-                var cname = $('#customer_name').val();
-                console.log('customer_name: '+cname);
-                $('#ship_to').val(cname);
+                $('#ship_to').val($('#customer_name').val());
             }
         });
     }
