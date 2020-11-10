@@ -161,7 +161,7 @@ class FormController extends Controller {
         {
             echo "<pre>",print_r($this->request->data),"</pre>"; die();
         }
-        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#deliverydetails");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#deliverydetails");
     }
 
     public function procTransferLocation()
