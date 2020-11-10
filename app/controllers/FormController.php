@@ -137,6 +137,19 @@ class FormController extends Controller {
         $this->Security->requirePost($actions);
     }
 
+    public function procJobDeliveryUpdate()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+    }
+
     public function procTransferLocation()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
