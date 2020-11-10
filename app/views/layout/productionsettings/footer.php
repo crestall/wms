@@ -10,6 +10,11 @@
 
                     }
                 },
+                'finisher-categories':{
+                    init: function(){
+                        
+                    }
+                },
                 'edit-job-status':{
                     init: function(){
                         $("form#add-job-status").submit(function(e){
