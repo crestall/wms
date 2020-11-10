@@ -42,26 +42,6 @@
                             <?php echo $job['customer_name'];?>
                         <?php endif;?>
                     </span>
-                    <div class="contact_details">
-                        <div class='row'>
-                            <label class='col-4 font-weight-bold'>Contact</label>
-                            <div class='col-8'>
-                                <?php echo $job['customer_contact'];?>
-                            </div>
-                        </div>
-                        <div class='row'>
-                            <label class='col-4 font-weight-bold'>Email</label>
-                            <div class='col-8'>
-                                <?php echo $job['customer_email'];?>
-                            </div>
-                        </div>
-                        <div class='row'>
-                            <label class='col-4 font-weight-bold'>Phone</label>
-                            <div class='col-8'>
-                                <?php echo $job['customer_phone'];?>
-                            </div>
-                        </div>
-                    </div>
                 </td>
                 <td data-label="Description"><?php echo $job['description'];?></td>
                 <td data-label="Notes"><?php echo $job['notes'];?></td>
