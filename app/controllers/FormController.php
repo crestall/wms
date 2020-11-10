@@ -159,7 +159,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($this->request->data),"</pre>"; die();
+            echo "<pre>",print_r($post_data),"</pre>"; die();
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#deliverydetails");
     }
