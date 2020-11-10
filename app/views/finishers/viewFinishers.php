@@ -1,14 +1,12 @@
 <?php
-    $link_text = (!$active)? "<a href='/finishers/view-finishers' class='btn btn-outline-fsg'>View Active Finishers</a>" : "<a href='/finishers/view-finishers/active=0' class='btn btn-outline-fsg'>View Inactive Finishers</a>";
+    //$link_text = (!$active)? "<a href='/finishers/view-finishers' class='btn btn-outline-fsg'>View Active Finishers</a>" : "<a href='/finishers/view-finishers/active=0' class='btn btn-outline-fsg'>View Inactive Finishers</a>";
     $i = 1;
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
-            <div class="col">
-                <p class="text-right"><?php echo $link_text;?></p>
-            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-danger" id="deactivate"><i class="fal fa-times-circle"></i> Delete Selected Finishers</button></div>
         </div>
         <?php if(count($finishers)):?>
             <div class="col" id="table_holder" style="display:none">
