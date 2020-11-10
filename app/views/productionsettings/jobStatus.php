@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-12">
                 <p class="inst">
-                    Stats can be dragged and dropped into the prefered order.
+                    Status can be dragged and dropped into the prefered order.
                 </p>
             </div>
         </div>
