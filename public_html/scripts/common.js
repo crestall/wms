@@ -273,7 +273,7 @@ var jobDeliveryDestinations = {
             else
             {
                 console.log('will enable everything');
-                $("div#delivery_address_holder input").each(function(i,e){
+                $("div#delivery_address_holder input").not('#csrf_token').each(function(i,e){
                     $( this ).prop( "disabled", false );
                 });
             }
