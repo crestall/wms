@@ -10,13 +10,13 @@ $state      = empty(Form::value('state'))?      $finisher['state']        : Form
 $postcode   = empty(Form::value('postcode'))?   $finisher['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $finisher['country']      : Form::value('country');
 $website    = empty(Form::value('website'))?    $finisher['website']      : Form::value('website');
-$categories = empty(Form::value('categories'))? $categories               : Form::value('categories');
+$cat_ids    = empty(Form::value('categories'))? $cat_ids                  : Form::value('categories');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <?php var_dump($categories);?>
+        <?php //var_dump($categories);?>
         <form id="edit_production_finisher" method="post" action="/form/procEditProductionFinisher">
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
