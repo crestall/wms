@@ -251,9 +251,6 @@ $(document).ready(function() {
                 data: {
                     current_name: function() {
                         return $('input#currentname_'+this_id).val();
-                    },
-                    name: function() {
-                        return $(this).val();
                     }
                 }
             },

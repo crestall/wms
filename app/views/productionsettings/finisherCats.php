@@ -36,7 +36,7 @@
                     <div class="form-group row">
                         <div class="col-md-3">
                             <label class="col-form-label">Name</label>
-                            <input type="text" class="form-control required cat_name" name="name_<?php echo $c['id'];?>" id="name_<?php echo $c['id'];?>" value="<?php echo ucwords($c['name']);?>" />
+                            <input type="text" class="form-control required cat_name" name="name" id="name_<?php echo $c['id'];?>" value="<?php echo ucwords($c['name']);?>" />
                             <?php echo Form::displayError("name_{$c['id']}");?>
                         </div>
                         <div class="col-md-1">
