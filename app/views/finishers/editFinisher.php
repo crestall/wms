@@ -10,6 +10,7 @@ $state      = empty(Form::value('state'))?      $finisher['state']        : Form
 $postcode   = empty(Form::value('postcode'))?   $finisher['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $finisher['country']      : Form::value('country');
 $website    = empty(Form::value('website'))?    $finisher['website']      : Form::value('website');
+$categories = empty(Form::value('categories'))? $categories               : Form::value('categories');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -32,6 +33,12 @@ $website    = empty(Form::value('website'))?    $finisher['website']      : Form
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="contact" id="contact" value="<?php echo $contact;?>" />
                     <?php echo Form::displayError('contact');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Category</label>
+                <div class="col-md-4">
+                    <select id="category" name="categories[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Choose all that are relevent..."><?php echo $this->controller->finishercategories->getMultiSelectFinisherCategories($categories);?></select>
                 </div>
             </div>
             <div class="form-group row">
