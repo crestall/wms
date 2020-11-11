@@ -1355,6 +1355,8 @@ class FormController extends Controller {
     public function procAddProductionFinisher()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        Session::set('value_array', $_POST);
+        return $this->redirector->to(PUBLIC_ROOT."finishers/add-finisher");
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
