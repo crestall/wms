@@ -652,19 +652,21 @@ $(document).ready(function() {
         }
 	});
     ////////////////////////////////////////////////////////////
-    $('form.edit-userrole').validate({
-        rules:{
-            name:{
-                remote: {
-                    url: '/ajaxfunctions/checkRoleNames'
+    $('form.edit-userrole').each(function(i, e){
+        $(this).validate({
+            rules:{
+                name:{
+                    remote: {
+                        url: '/ajaxfunctions/checkRoleNames'
+                    }
+                }
+            },
+            messages:{
+                name:{
+                    remote: 'User Role names must be unique'
                 }
             }
-        },
-        messages:{
-            name:{
-                remote: 'User Role names must be unique'
-            }
-        }
+        });
     });
     ////////////////////////////////////////////////////////////
     $('form#add_driver').validate({
