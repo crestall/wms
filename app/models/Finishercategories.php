@@ -81,6 +81,22 @@ class Finishercategories extends Model{
         return $db->insertQuery($this->table, $vals);
     }
 
+    public function addFinisherCategories($categories, $finisher_id)
+    {
+        $db = Database::openConnection();
+        //remove old ones first
+        $db->deleteQuery($this->linked_table, $finisher_id, 'finisher_id');
+        //add all the new ones
+        foreach($categories as $i => $category_id)
+        {
+            $db->insertQuery($this->linked_table, array(
+                'finisher_id'   => $finisher_id,
+                'category_id'   => $category_id
+            ));
+        }
+        return true;
+    }
+
     public function editCategory($data)
     {
         $db = Database::openConnection();
