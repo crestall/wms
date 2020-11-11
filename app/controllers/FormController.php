@@ -1355,9 +1355,6 @@ class FormController extends Controller {
     public function procAddProductionFinisher()
     {
         //echo "<pre>",print_r($_POST),"</pre>"; die();
-        Session::set('value_array', $_POST);
-        Session::set('error_array', Form::getErrorArray());
-        return $this->redirector->to(PUBLIC_ROOT."finishers/add-finisher");
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1366,7 +1363,15 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue; 
+                }
+            }
         }
+        echo "<pre>",print_r($post_data),"</pre>"; die();
         if(!$this->dataSubbed($name))
         {
             Form::setError('name', 'The Finishers name is required');
