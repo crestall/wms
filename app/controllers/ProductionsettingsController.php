@@ -76,14 +76,14 @@ class ProductionSettingsController extends Controller
 
     public function finisherCategories()
     {
-        $status = $this->jobstatus->getStatus();
+        $cats = $this->finishercategories->getCategories();
         //render the page
         Config::setJsConfig('curPage', "finisher-categories");
         Config::set('curPage', "finisher-categories");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/jobStatus.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/finisherCats.php', [
             'page_title'    =>  "Production Finisher Categories",
             'pht'           =>  ": Production Finisher Categories",
-            'status'        =>  $status
+            'cats'          =>  $cats
         ]);
     }
 
