@@ -124,7 +124,7 @@ class Productionfinisher extends Model{
 
     public function editFinisher($data)
     {
-        echo "editfinisher<pre>",print_r($data),"</pre>";die(); 
+        //echo "editfinisher<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  strtolower($data['name']),
@@ -151,6 +151,11 @@ class Productionfinisher extends Model{
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['website'])) $vals['website'] = $data['website'];
         $id = $db->updateDatabaseFields($this->table, $vals, $data['finisher_id']);
+        if(isset($data['categories']) && is_array($data['categories']))
+        {
+            $fcat = new Finishercategories();
+            $fcat->addFinisherCategories($data['categories'], $data['finisher_id']);
+        }
         return $id;
     }
 
