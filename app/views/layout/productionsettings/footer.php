@@ -12,7 +12,26 @@
                 },
                 'finisher-categories':{
                     init: function(){
-                        
+                        $("form#add-finisher-category").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Category...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
+                        $("form.edit-category").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Editing Category...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
                     }
                 },
                 'edit-job-status':{
