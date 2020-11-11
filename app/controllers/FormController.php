@@ -143,7 +143,7 @@ class FormController extends Controller {
 
     public function procFinisherCategoryEdit()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         $response = array();
         foreach($this->request->data as $field => $value)
