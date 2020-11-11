@@ -59,6 +59,19 @@ class Finishercategories extends Model{
         return $db->queryValue($this->table, array('name' =>  $name));
     }
 
+    public function getCategories($active = -1)
+    {
+        $db = Database::openConnection();
+        //$q = "SELECT * FROM {$this->table}";
+        $q = "SELECT * FROM {$this->table}";
+        if($active >= 0)
+        {
+            $q .= " WHERE active = $active";
+        }
+        $q .= " ORDER BY display_order ASC, name";
+        return $db->queryData($q);
+    }
+
     public function addCategory($data)
     {
         $db = Database::openConnection();
