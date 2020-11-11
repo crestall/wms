@@ -28,6 +28,7 @@ class FinishersController extends Controller
     {
         $finisher_id = $this->request->params['args']['finisher'];
         $finisher_info = $this->productionfinisher->getFinisherById($finisher_id);
+        $categories = $this->finishercategories->getCategoriesForFinisher($finisher_id);
         //render the page
         Config::setJsConfig('curPage', "edit-finisher");
         Config::set('curPage', "edit-finisher");
@@ -35,7 +36,8 @@ class FinishersController extends Controller
             'page_title'    =>  "Update Finisher for Production",
             'pht'           =>  ": Update Finisher Customer",
             'finisher_id'   =>  $finisher_id,
-            'finisher'      =>  $finisher_info
+            'finisher'      =>  $finisher_info,
+            'categories'    =>  $categories
         ]);
     }
 

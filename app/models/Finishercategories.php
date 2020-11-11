@@ -72,6 +72,22 @@ class Finishercategories extends Model{
         return $db->queryData($q);
     }
 
+    public function getCategoriesForFinisher($finisher_id)
+    {
+        $db = Database::openConnection();
+        $q = "
+                SELECT
+                    fc.*
+                FROM
+                    {$this->table} fc JOIN {$this->linked_table} ffc ON fc.id = ffc.category_id
+                WHERE
+                    ffc.finisher_id = $finisher_id
+                ORDER BY
+                    fc.name
+        ";
+        return $db->queryData($q);
+    }
+
     public function addCategory($data)
     {
         $db = Database::openConnection();
