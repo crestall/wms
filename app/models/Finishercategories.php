@@ -92,7 +92,7 @@ class Finishercategories extends Model{
         return true;
     }
 
-    public function checkCategoryNames($name, $current_name)
+    public function checkCategoryNames($shitname, $current_name, $name)
     {
         $db = Database::openConnection();
         $name = strtoupper($name);
