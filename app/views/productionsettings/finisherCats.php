@@ -32,7 +32,7 @@
         </div>
         <?php if(count($cats)):?>
             <?php foreach($cats as $c):?>
-                <form class="edit-category mb-3 p-3 border rounded" action="/form/procCategoryEdit" method="post" id="category_<?php echo $c['id'];?>">
+                <form class="edit-category mb-3 p-3 border rounded" action="/form/procFinisherCategoryEdit" method="post" id="category_<?php echo $c['id'];?>">
                     <div class="form-group row">
                         <div class="col-md-3">
                             <label class="col-form-label">Name</label>
