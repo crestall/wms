@@ -98,7 +98,7 @@ class Productionfinisher extends Model{
 
     public function addFinisher($data)
     {
-        echo "productionfinisher<pre>",print_r($data),"</pre>";die();
+        //echo "productionfinisher<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  $data['name']
@@ -114,6 +114,11 @@ class Productionfinisher extends Model{
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['website'])) $vals['website'] = $data['website'];
         $id = $db->insertQuery($this->table, $vals);
+        if(isset($data['categories']) && is_array($data['categories']))
+        {
+            $fcat = new Finishercategories();
+            $fcat->addFinisherCategories($data['categories'], $id);
+        }
         return $id;
     }
 
