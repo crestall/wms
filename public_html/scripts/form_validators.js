@@ -240,8 +240,22 @@ $(document).ready(function() {
     });
     ///////////////////////////////////////////////////////////////////////////////
     $('form.edit-category').each(function(i,e){
+        $(this).validate();
+    });
+    $('input.cat_name').each(function(i,e){
         var this_id = this.id.split('_')[1];
-        console.log('this id: '+this_id);
+        $(this).rules('add',{
+                required: true,
+                remote: {
+                    url: '/ajaxfunctions/checkFinisherCatNames',
+                    data: { current_name: function() { return $('input#currentname_'+this_id).val();}
+                },
+                messages:{
+                    remote: '<p>This name is already in the system.<br>Category names must be unique</p>',
+                    required: 'A category name is required'
+                }
+            }
+        })
     });
     ///////////////////////////////////////////////////////////////////////////////
 	$("#register_new_stock").validate({
