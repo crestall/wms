@@ -1367,11 +1367,11 @@ class FormController extends Controller {
             {
                 foreach($value as $key => $avalue)
                 {
-                    $post_data[$field][$key] = $avalue; 
+                    $post_data[$field][$key] = $avalue;
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>"; die();
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
         if(!$this->dataSubbed($name))
         {
             Form::setError('name', 'The Finishers name is required');
