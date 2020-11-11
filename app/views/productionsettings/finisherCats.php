@@ -42,7 +42,7 @@
                         <div class="col-md-1">
                             <label class="col-form-label" for="active_<?php echo $c['id'];?>">Active</label>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="active_<?php echo $c['id'];?>" name="active" <?php if($c['active'] > 0) echo "checked";?> />
+                                <input type="checkbox" class="custom-control-input" id="active_<?php echo $c['id'];?>" name="active_<?php echo $c['id'];?>" <?php if($c['active'] > 0) echo "checked";?> />
                                 <label class="custom-control-label" for="active_<?php echo $c['id'];?>"></label>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             <label class="col-form-label">&nbsp;</label>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="line_id" value="<?php echo $c['id'];?>" />
-                            <input type="hidden" name= "current_name"id="currentname_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
+                            <input type="hidden" name= "current_name_<?php echo $c['id'];?>" id="currentname_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
                             <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
                         </div>
                     </div>
