@@ -28,7 +28,7 @@
                         <div class="form-group row">
                             <div class="col-md-2"><input type="hidden" name="task" id="task"></div>
                             <?php if(count($runsheet['jobs'])):?>
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-10 mb-3">
                                     <div class="card h-100 border-secondary job-card">
                                         <div class="card-header bg-secondary text-white">
                                             Jobs To Be Included
