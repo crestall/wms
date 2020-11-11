@@ -28,7 +28,12 @@ class FinishersController extends Controller
     {
         $finisher_id = $this->request->params['args']['finisher'];
         $finisher_info = $this->productionfinisher->getFinisherById($finisher_id);
-        $categories = $this->finishercategories->getCategoriesForFinisher($finisher_id);
+        $fcats = $this->finishercategories->getCategoriesForFinisher($finisher_id);
+        $cat_ids = array();
+        foreach($fcats as $fcat)
+        {
+            $cat_ids[] = $fcat['id'];
+        }
         //render the page
         Config::setJsConfig('curPage', "edit-finisher");
         Config::set('curPage', "edit-finisher");
@@ -37,7 +42,7 @@ class FinishersController extends Controller
             'pht'           =>  ": Update Finisher Customer",
             'finisher_id'   =>  $finisher_id,
             'finisher'      =>  $finisher_info,
-            'categories'    =>  $categories
+            'cat_ids'       =>  $cat_ids
         ]);
     }
 
