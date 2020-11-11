@@ -245,22 +245,21 @@ $(document).ready(function() {
     $('input.cat_name').each(function(i,e){
         var this_id = this.id.split('_')[1];
         $(this).rules('add',{
-                required: true,
-                remote: {
-                    url: '/ajaxfunctions/checkFinisherCatNames',
-                    data: {
-                        current_name: function() {
-                            return $('input#currentname_'+this_id).val();
-                        },
-                        name: function() {
-                            return $(this).val();
-                        }
+            required: true,
+            remote: {
+                url: '/ajaxfunctions/checkFinisherCatNames',
+                data: {
+                    current_name: function() {
+                        return $('input#currentname_'+this_id).val();
+                    },
+                    name: function() {
+                        return $(this).val();
                     }
-                },
-                messages:{
-                    remote: '<p>This name is already in the system.<br>Category names must be unique</p>',
-                    required: 'A category name is required'
                 }
+            },
+            messages:{
+                remote: '<p>This name is already in the system.<br>Category names must be unique</p>',
+                required: 'A category name is required'
             }
         });
     });
