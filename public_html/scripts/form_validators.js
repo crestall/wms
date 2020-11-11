@@ -248,7 +248,7 @@ $(document).ready(function() {
                 required: true,
                 remote: {
                     url: '/ajaxfunctions/checkFinisherCatNames',
-                    data: { current_name: function() { return $('input#currentname_'+this_id).val();}
+                    data: { current_name: function() { return $('input#currentname_'+this_id).val();}, name: function() { return $(this).val();} }
                 },
                 messages:{
                     remote: '<p>This name is already in the system.<br>Category names must be unique</p>',
