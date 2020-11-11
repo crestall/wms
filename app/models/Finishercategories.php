@@ -126,7 +126,7 @@ class Finishercategories extends Model{
             'name'      => strtolower($data['name'])
         );
         $vals['active'] = (isset($data['active']))? 1:0;
-        $db->updateDatabaseFields($this->table, $vals, $data['id']);
+        $db->updateDatabaseFields($this->table, $vals, $data['line_id']);
         return true;
     }
 
