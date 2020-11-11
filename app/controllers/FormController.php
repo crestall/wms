@@ -143,9 +143,11 @@ class FormController extends Controller {
 
     public function procFinisherCategoryEdit()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         $response = array();
+        $id = $this->request->data['line_id'];
+        $post_data = array('id' => $id);
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -158,7 +160,7 @@ class FormController extends Controller {
         {
             Form::setError('name', 'A Category name is required');
         }
-        elseif($this->finishercategories->getCategoryId($name) )
+        elseif($this->finishercategories->getCategoryId($name) && strtolower($name) != $currentname )
         {
             Form::setError('name', 'This Category is already in use. Category names need to be unique');
         }
