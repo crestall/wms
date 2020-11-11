@@ -50,7 +50,7 @@
                             <label class="col-form-label">&nbsp;</label>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="line_id" value="<?php echo $c['id'];?>" />
-                            <input type="hidden" name="currentname_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
+                            <input type="hidden" id="currentname_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
                             <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
                         </div>
                     </div>
