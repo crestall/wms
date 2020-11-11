@@ -1356,6 +1356,7 @@ class FormController extends Controller {
     {
         //echo "<pre>",print_r($_POST),"</pre>"; die();
         Session::set('value_array', $_POST);
+        Session::set('error_array', Form::getErrorArray());
         return $this->redirector->to(PUBLIC_ROOT."finishers/add-finisher");
         $post_data = array();
         foreach($this->request->data as $field => $value)
