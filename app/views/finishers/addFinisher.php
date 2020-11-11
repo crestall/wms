@@ -10,8 +10,7 @@ $country = Form::value('country');
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <?php var_dump(Form::value('name'));?>
-        <?php echo "<pre>",print_r($_SESSION['value_array']),"</pre>";?>
+        <?php var_dump(Form::value('categories'));?>
         <form id="add_production_finisher" method="post" action="/form/procAddProductionFinisher">
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
