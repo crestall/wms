@@ -153,7 +153,7 @@
                         });
                         */
                         $( "#sortable" ).sortable();
-                        $('form#add-userrole, form.edit-userrole').submit(function(){
+                        $('form#add-userrole').submit(function(){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
@@ -163,6 +163,18 @@
                                 return false;
                             }
                         });
+                        $("form.edit-userrole").each(function(i,e){
+                            $(this).submit(function(e){
+                                if($(this).valid())
+                                {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Editing User Role...</h2></div>' });
+                                }
+                                else
+                                {
+                                    return false;
+                                }
+                            });
+                        })
                     }
                 },
                 'manage-users':{

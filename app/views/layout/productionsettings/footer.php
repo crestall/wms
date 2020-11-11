@@ -22,16 +22,18 @@
                                 return false;
                             }
                         });
-                        $("form.edit-category").submit(function(e){
-                            if($(this).valid())
-                            {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Editing Category...</h2></div>' });
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        });
+                        $("form.edit-category").each(function(i,e){
+                            $(this).submit(function(e){
+                                if($(this).valid())
+                                {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Editing Category...</h2></div>' });
+                                }
+                                else
+                                {
+                                    return false;
+                                }
+                            });
+                        })
                     }
                 },
                 'edit-job-status':{
