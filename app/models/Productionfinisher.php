@@ -98,6 +98,7 @@ class Productionfinisher extends Model{
 
     public function addFinisher($data)
     {
+        //echo "productionfinisher<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  $data['name']
@@ -113,11 +114,17 @@ class Productionfinisher extends Model{
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['website'])) $vals['website'] = $data['website'];
         $id = $db->insertQuery($this->table, $vals);
+        if(isset($data['categories']) && is_array($data['categories']))
+        {
+            $fcat = new Finishercategories();
+            $fcat->addFinisherCategories($data['categories'], $id);
+        }
         return $id;
     }
 
     public function editFinisher($data)
     {
+        //echo "editfinisher<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  strtolower($data['name']),
@@ -144,6 +151,16 @@ class Productionfinisher extends Model{
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['website'])) $vals['website'] = $data['website'];
         $id = $db->updateDatabaseFields($this->table, $vals, $data['finisher_id']);
+        if(isset($data['categories']) && is_array($data['categories']))
+        {
+            $fcat = new Finishercategories();
+            $fcat->addFinisherCategories($data['categories'], $data['finisher_id']);
+        }
+        else
+        {
+            $fcat = new Finishercategories();
+            $fcat->removeFinisherCategories($data['finisher_id']);
+        }
         return $id;
     }
 

@@ -10,11 +10,13 @@ $state      = empty(Form::value('state'))?      $finisher['state']        : Form
 $postcode   = empty(Form::value('postcode'))?   $finisher['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $finisher['country']      : Form::value('country');
 $website    = empty(Form::value('website'))?    $finisher['website']      : Form::value('website');
+$cat_ids    = empty(Form::value('categories'))? $cat_ids                  : Form::value('categories');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php //var_dump($categories);?>
         <form id="edit_production_finisher" method="post" action="/form/procEditProductionFinisher">
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
@@ -32,6 +34,12 @@ $website    = empty(Form::value('website'))?    $finisher['website']      : Form
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="contact" id="contact" value="<?php echo $contact;?>" />
                     <?php echo Form::displayError('contact');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Category</label>
+                <div class="col-md-4">
+                    <select id="category" name="categories[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Choose all that are relevent..."><?php echo $this->controller->finishercategories->getMultiSelectFinisherCategories($cat_ids);?></select>
                 </div>
             </div>
             <div class="form-group row">

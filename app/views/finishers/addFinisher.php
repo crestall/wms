@@ -5,11 +5,13 @@ $suburb = Form::value('suburb');
 $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
+$categories = (is_array(Form::value('categories')))? Form::value('categories') : array();
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php var_dump(Form::value('categories'));?>
         <form id="add_production_finisher" method="post" action="/form/procAddProductionFinisher">
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
@@ -23,6 +25,12 @@ $country = Form::value('country');
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="contact" id="contact" value="<?php echo Form::value('contact');?>" />
                     <?php echo Form::displayError('contact');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Category</label>
+                <div class="col-md-4">
+                    <select id="category" name="categories[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Choose all that are relevent..."><?php echo $this->controller->finishercategories->getMultiSelectFinisherCategories($categories);?></select>
                 </div>
             </div>
             <div class="form-group row">

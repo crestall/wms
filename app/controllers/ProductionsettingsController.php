@@ -74,6 +74,19 @@ class ProductionSettingsController extends Controller
         ]);
     }
 
+    public function finisherCategories()
+    {
+        $cats = $this->finishercategories->getCategories();
+        //render the page
+        Config::setJsConfig('curPage', "finisher-categories");
+        Config::set('curPage', "finisher-categories");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionsettings/", Config::get('VIEWS_PATH') . 'productionsettings/finisherCats.php', [
+            'page_title'    =>  "Production Finisher Categories",
+            'pht'           =>  ": Production Finisher Categories",
+            'cats'          =>  $cats
+        ]);
+    }
+
     public function salesReps()
     {
         //render the page

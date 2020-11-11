@@ -224,6 +224,43 @@ $(document).ready(function() {
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#add-finisher-category").validate({
+    	rules:{
+    		name: {
+				remote: {
+                    url: '/ajaxfunctions/checkFinisherCatNames'
+                }
+			}
+    	},
+		messages:{
+			name: {
+				remote: 'This name is already in use.<br>Category names must be unique'
+			}
+		}
+    });
+    ///////////////////////////////////////////////////////////////////////////////
+    $('form.edit-category').each(function(i,e){
+        $(this).validate();
+    });
+    $('input.cat_name').each(function(i,e){
+        var this_id = this.id.split('_')[1];
+        $(this).rules('add',{
+            required: true,
+            remote: {
+                url: '/ajaxfunctions/checkFinisherCatNames',
+                data: {
+                    current_name: function() {
+                        return $('input#currentname_'+this_id).val();
+                    }
+                }
+            },
+            messages:{
+                remote: '<p>This name is already in the system.<br>Category names must be unique</p>',
+                required: 'A category name is required'
+            }
+        });
+    });
+    ///////////////////////////////////////////////////////////////////////////////
 	$("#register_new_stock").validate({
     	rules:{
     		sku: {
@@ -637,19 +674,21 @@ $(document).ready(function() {
         }
 	});
     ////////////////////////////////////////////////////////////
-    $('form.edit-userrole').validate({
-        rules:{
-            name:{
-                remote: {
-                    url: '/ajaxfunctions/checkRoleNames'
+    $('form.edit-userrole').each(function(i, e){
+        $(this).validate({
+            rules:{
+                name:{
+                    remote: {
+                        url: '/ajaxfunctions/checkRoleNames'
+                    }
+                }
+            },
+            messages:{
+                name:{
+                    remote: 'User Role names must be unique'
                 }
             }
-        },
-        messages:{
-            name:{
-                remote: 'User Role names must be unique'
-            }
-        }
+        });
     });
     ////////////////////////////////////////////////////////////
     $('form#add_driver').validate({
@@ -686,96 +725,6 @@ $(document).ready(function() {
             }
         })
     })
-    ////////////////////////////////////////////////////////////
-    $('#add_origin_order').validate({
-        rules:{
-            roof_type:{
-                required:true
-            },
-            team_id:{
-                notNone:true
-            }
-        },
-        messages:{
-            roof_type:{
-                required: "Please select a roof type"
-            },
-            team_id:{
-                notNone: "Please select a team"
-            }
-        }
-    });
-    ////////////////////////////////////////////////////////////
-    $('#add-solar-install').validate({
-        rules:{
-            team_id:{
-                notNone:true
-            },
-            type_id:{
-                notNone:true
-            },
-            inverter_qty:{
-                min: 0,
-                integer: true
-            },
-            panel_qty:{
-                integer: true,
-                min: 0
-            }
-        },
-        messages:{
-            team_id:{
-                notNone: "Please select a team"
-            },
-            type_id:{
-                notNone: "Please select an install type"
-            },
-            inverter_qty:{
-                integer: "Only whole numbers greater than or equal to zero"
-            },
-            panel_qty:{
-                integer: "Only whole numbers greater than or equal to zero"
-            }
-        }
-    });
-    ////////////////////////////////////////////////////////////
-    $('#edit-solar-install').validate({
-        rules:{
-            team_id:{
-                notNone:true
-            },
-            type_id:{
-                notNone:true
-            }
-        },
-        messages:{
-            team_id:{
-                notNone: "Please select a team"
-            },
-            type_id:{
-                notNone: "Please select an install type"
-            }
-        }
-    });
-    ////////////////////////////////////////////////////////////
-    $('#add-service-job').validate({
-        rules:{
-            team_id:{
-                notNone:true
-            },
-            job_type:{
-                notNone:true
-            }
-        },
-        messages:{
-            team_id:{
-                notNone: "Please select a team"
-            },
-            job_type:{
-                notNone: "Please select the job type"
-            }
-        }
-    });
     ////////////////////////////////////////////////////////////
     $('form#transfer_location').validate({
         rules:{

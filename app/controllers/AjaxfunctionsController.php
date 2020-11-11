@@ -84,7 +84,7 @@ class ajaxfunctionsController extends Controller
         {
             $this->productionjob->updateJobStatus($supdate['jobid'], $supdate['statusid']);
         }
-        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Status have bben updated</h2>");
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Status have been updated</h2>");
     }
 
     public function addQuotePackage()
@@ -1330,6 +1330,14 @@ class ajaxfunctionsController extends Controller
         $name = trim($this->request->query['name']);
         $current_name = isset($this->request->query['current_name'])? trim($this->request->query['current_name']) : "";
         $this->view->renderBoolean($this->jobstatus->checkStatusNames($name, $current_name));
+    }
+
+    public function checkFinisherCatNames()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $name = trim($this->request->query['name']);
+        $current_name = isset($this->request->query['current_name'])? trim($this->request->query['current_name']) : "";
+        $this->view->renderBoolean($this->finishercategories->checkCategoryNames($name, $current_name));
     }
 
     public function getSuburbs()
