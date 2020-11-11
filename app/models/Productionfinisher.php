@@ -156,6 +156,11 @@ class Productionfinisher extends Model{
             $fcat = new Finishercategories();
             $fcat->addFinisherCategories($data['categories'], $data['finisher_id']);
         }
+        else
+        {
+            $fcat = new Finishercategories();
+            $fcat->removeFinisherCategories($data['finisher_id']);
+        }
         return $id;
     }
 
