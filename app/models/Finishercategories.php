@@ -101,7 +101,7 @@ class Finishercategories extends Model{
     {
         $db = Database::openConnection();
         //remove old ones first
-        $db->deleteQuery($this->linked_table, $finisher_id, 'finisher_id');
+        $this->removeFinisherCategories($finisher_id);
         //add all the new ones
         foreach($categories as $i => $category_id)
         {
@@ -111,6 +111,12 @@ class Finishercategories extends Model{
             ));
         }
         return true;
+    }
+
+    public function removeFinisherCategories($finisher_id)
+    {
+        $db = Database::openConnection();
+        $db->deleteQuery($this->linked_table, $finisher_id, 'finisher_id');
     }
 
     public function editCategory($data)
