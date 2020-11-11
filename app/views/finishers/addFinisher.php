@@ -5,6 +5,7 @@ $suburb = Form::value('suburb');
 $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
+$categories = (is_array(Form::value('categories')))? Form::value('categories') : array();
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -29,7 +30,7 @@ $country = Form::value('country');
             <div class="form-group row">
                 <label class="col-md-3">Category</label>
                 <div class="col-md-4">
-                    <select id="category" name="categories[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Choose all that are relevent..."><?php echo $this->controller->finishercategories->getMultiSelectFinisherCategories(Form::value('categories'));?></select>
+                    <select id="category" name="categories[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Choose all that are relevent..."><?php echo $this->controller->finishercategories->getMultiSelectFinisherCategories($categories);?></select>
                 </div>
             </div>
             <div class="form-group row">
