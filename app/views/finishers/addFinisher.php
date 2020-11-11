@@ -26,6 +26,12 @@ $country = Form::value('country');
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-md-3">Category</label>
+                <div class="col-md-4">
+                    <select id="category" name="categories[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Choose all that are relevent..."><?php echo $this->controller->finishercategories->getMultiSelectFinisherCategories();?></select>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-3">Phone</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="phone" id="phone" value="<?php echo Form::value('phone');?>" />
