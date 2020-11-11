@@ -11,6 +11,7 @@ $country = Form::value('country');
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php var_dump(Form::value('categories'));?>
+        <?php echo "<pre>",print_r($_SESSION['value_array']),"</pre>";?>
         <form id="add_production_finisher" method="post" action="/form/procAddProductionFinisher">
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
