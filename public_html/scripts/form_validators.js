@@ -224,6 +224,21 @@ $(document).ready(function() {
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#add-finisher-category").validate({
+    	rules:{
+    		name: {
+				remote: {
+                    url: '/ajaxfunctions/checkFinisherCatNames'
+                }
+			}
+    	},
+		messages:{
+			name: {
+				remote: 'This name is already in use.<br>Category names must be unique'
+			}
+		}
+    });
+    ///////////////////////////////////////////////////////////////////////////////
 	$("#register_new_stock").validate({
     	rules:{
     		sku: {
