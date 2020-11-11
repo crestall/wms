@@ -98,7 +98,7 @@ class Productionfinisher extends Model{
 
     public function addFinisher($data)
     {
-        echo "productionfinisher<pre>",print_r($data),"</pre>";
+        echo "productionfinisher<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  $data['name']
