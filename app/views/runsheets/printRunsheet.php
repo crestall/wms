@@ -45,8 +45,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-3 text-right">Units</label>
-                                                    <div class="col-4">
+                                                    <label class="col-2 text-right">Units</label>
+                                                    <div class="col-3">
                                                         <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]">
                                                     </div>
                                                     <label class="col-form-label" for="finisher_<?php echo $task['task_id'];?>"></label>
