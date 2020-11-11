@@ -239,6 +239,11 @@ $(document).ready(function() {
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
+    $('form.edit-category').each(function(i,e){
+        var this_id = $this.id.split('_')[1];
+        console.log('this id: '+this_id);
+    });
+    ///////////////////////////////////////////////////////////////////////////////
 	$("#register_new_stock").validate({
     	rules:{
     		sku: {
