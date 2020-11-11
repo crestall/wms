@@ -170,9 +170,9 @@ class FormController extends Controller {
         else
         {
             //add the category
-            if($this->finishercategories->addCategory($post_data))
+            if($this->finishercategories->editCategory($post_data))
             {
-                Session::set('feedback', "That Category has been added");
+                Session::set('feedback', "That Category has been updated");
             }
             else
             {
