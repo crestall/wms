@@ -249,7 +249,7 @@ while($f < $finisher_count)
                             <div class="input-group">
                                 <input type="text" class="form-control" name="date_ed<?php echo $fn;?>" id="date_ed<?php echo $fn;?>" value="<?php echo ${'date_ed'.$fn};?>" />
                                 <div class="input-group-append">
-                                    <span id="date_ed_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                    <span id="date_ed<?php echo $fn;?>_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                 </div>
                             </div>
                         </div>
