@@ -243,7 +243,7 @@ while($f < $finisher_count)
                 $fwn = ucwords($nf->format($f+1));?>
                 <div class="border border-secondary p-3 m-3 rounded bg-light">
                     <h3>Finisher <?php echo $fwn;?> Details</h3>
-                        <div class="row form-group">
+                    <div class="row form-group">
                         <label class="col-md-3 col-form-label">Expected Delivery Date</label>
                         <div class="col-md-3">
                             <div class="input-group">
@@ -254,6 +254,13 @@ while($f < $finisher_count)
                             </div>
                         </div>
                         <input type="hidden" name="date_ed<?php echo $fn;?>_value" id="date_ed<?php echo $fn;?>_value" value="<?php echo Form::value('date_ed'.$fn.'_value');?>" />
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label class="col-md-3">Finisher Name</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="finisher<?php echo $fn;?>_name" id="finisher<?php echo $fn;?>_name" value="<?php echo Form::value('finisher'.$fn.'_name');?>" />
+                            <input type="hidden" name="finisher<?php echo $fn;?>_id" id="finisher<?php echo $fn;?>_id" value="0" />
+                        </div>
                     </div>
                 </div>
                 <?php ++$f;
