@@ -2,7 +2,7 @@
 $icons = Config::get("MENU_ICONS");
 $app_type = "Warehouse";
 if(Session::getIsLoggedIn()):
-    echo "<pre>",print_r($_SESSION),"</pre>";
+    //echo "<pre>",print_r($_SESSION),"</pre>";
     $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
     if(empty($user_role))
         return;
