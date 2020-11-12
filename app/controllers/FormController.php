@@ -6441,8 +6441,20 @@ class FormController extends Controller {
 		}
         else
         {
-            echo "<pre>",print_r($this->request),"</pre>"; die();
+            //echo "<pre>",print_r($this->request),"</pre>"; die();
             // reset session
+            $session_array = array(
+                "user_id"       => $userId,
+                "role"          => $this->user->getUserRoleName($user["role_id"]),
+                "ip"            => $userIp,
+                "user_agent"    => $userAgent,
+                "users_name"    => $user['name'],
+                "client_id"     => $user['client_id'],
+                "is_admin_user" => $this->user->isAdminUser($userId),
+                "is_production_user"    => $this->user->isProductionUser(),
+                "is_warehouse_user"     => $this->user->isWarehouseUser()
+            );
+            echo "<pre>",print_r($session_array),"</pre>"; die();
             Session::reset([
                 "user_id"       => $userId,
                 "role"          => $this->user->getUserRoleName($user["role_id"]),
