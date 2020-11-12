@@ -5251,7 +5251,9 @@ class FormController extends Controller {
                 "user_agent"    => $this->request->userAgent(),
                 "users_name"    => $name,
                 "client_id"     => $client_id,
-                "is_admin_user" => $this->user->isAdminUser()
+                "is_admin_user" => $this->user->isAdminUser(),
+                "is_production_user"    => $this->user->isProductionUser(),
+                "is_warehouse_user"     => $this->user->isWarehouseUser()
             ]);
             //set the cookie to remember the user
             Cookie::reset(Session::getUserId());
