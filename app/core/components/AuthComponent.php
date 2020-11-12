@@ -203,8 +203,8 @@ class AuthComponent extends Component{
                 'users_name'    => $users_name,
                 'client_id'     => $client_id,
                 "is_admin_user" => $this->controller->user->isAdminUser(Cookie::getUserId()),
-                "is_production_user"    => $this->user->isProductionUser(),
-                "is_warehouse_user"     => $this->user->isWarehouseUser()
+                "is_production_user"    => $this->controller->user->isProductionUser(Cookie::getUserId()),
+                "is_warehouse_user"     => $this->controller->user->isWarehouseUser(Cookie::getUserId())
             ]);
 
             // reset cookie, Cookie token is usable only once

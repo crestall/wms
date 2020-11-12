@@ -230,9 +230,18 @@ else
                             <?php echo Form::displayError('ship_to');?>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Delivery Instructions</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Instructions For Driver"><?php echo Form::value('delivery_instructions');?></textarea>
+                        </div>
+                    </div>
                     <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
                 </div>
             </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Finisher One Details     ------------------------------------------------------------>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Finisher One Details</h3>
                 <div class="row form-group">

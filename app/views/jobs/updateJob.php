@@ -28,6 +28,7 @@ $suburb     = empty(Form::value('suburb'))?     $job['suburb']       : Form::val
 $state      = empty(Form::value('state'))?      $job['state']        : Form::value('state');
 $postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $job['country']      : Form::value('country');
+$delivery_instructions = empty(Form::value('delivery_instructions'))? $job['delivery_instructions'] : Form::value('delivery_instructions');
 if(count($finisher))
 {
     //echo "<pre>",print_r($finisher),"</pre>"; //die();
@@ -237,6 +238,12 @@ else
                                     <div class="col-md-8">
                                         <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
                                         <?php echo Form::displayError('ship_to');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Delivery Instructions</label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Instructions For Driver"><?php echo $delivery_instructions;?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">

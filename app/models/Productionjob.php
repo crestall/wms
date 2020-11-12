@@ -24,14 +24,16 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'ship_to'   => NULL,
-            'address'   => NULL,
-            'address_2' => NULL,
-            'suburb'    => NULL,
-            'state'     => NULL,
-            'postcode'  => NULL,
-            'country'   => 'AU'
+            'delivery_instructions' => NULL,
+            'ship_to'               => NULL,
+            'address'               => NULL,
+            'address_2'             => NULL,
+            'suburb'                => NULL,
+            'state'                 => NULL,
+            'postcode'              => NULL,
+            'country'               => 'AU'
         );
+        if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
         if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
@@ -130,6 +132,7 @@ class Productionjob extends Model{
             'date'          => time()
         );
         if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
+        if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
