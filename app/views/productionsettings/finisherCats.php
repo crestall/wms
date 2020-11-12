@@ -42,7 +42,7 @@
                         <div class="col-md-1">
                             <label class="col-form-label" for="active_<?php echo $c['id'];?>">Active</label>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="active_<?php echo $c['id'];?>" name="active_<?php echo $c['id'];?>" <?php if($c['active'] > 0) echo "checked";?> />
+                                <input type="checkbox" class="custom-control-input" id="active_<?php echo $c['id'];?>" name="active" <?php if($c['active'] > 0) echo "checked";?> />
                                 <label class="custom-control-label" for="active_<?php echo $c['id'];?>"></label>
                             </div>
                         </div>
