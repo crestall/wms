@@ -46,7 +46,7 @@
                     <div class="form-group row">
                         <div class="col-md-3">
                             <label class="col-form-label">Name</label>
-                            <input type="text" class="form-control required driver_name" name="name_<?php echo $d['id'];?>" id="name_<?php echo $d['id'];?>" value="<?php echo $d['name'];?>" />
+                            <input type="text" class="form-control required driver_name" name="name" id="name_<?php echo $d['id'];?>" value="<?php echo $d['name'];?>" />
                             <?php echo Form::displayError("name_{$d['id']}");?>
                         </div>
                         <div class="col-md-3">
