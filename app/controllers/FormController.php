@@ -81,6 +81,8 @@ class FormController extends Controller {
             'procGoodsIn',
             'procGoodsOut',
             'procItemsUpdate',
+            'procFinisherCategoryAdd',
+            'procFinisherCategoryEdit',
             'procJobCustomerUpdate',
             'procJobDeliveryUpdate',
             'procJobDetailsUpdate',
@@ -137,6 +139,50 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procFinisherCategoryEdit()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        $response = array();
+        $id = $this->request->data['line_id'];
+        $post_data = array('id' => $id);
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name', 'A Category name is required');
+        }
+        elseif($this->finishercategories->getCategoryId($name) && strtolower($name) != $currentname )
+        {
+            Form::setError('name', 'This Category is already in use. Category names need to be unique');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //edit the category
+            if($this->finishercategories->editCategory($post_data))
+            {
+                Session::set('feedback', "That Category has been updated");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."production-settings/finisher-categories");
     }
 
     public function procFinisherCategoryAdd()
@@ -658,6 +704,7 @@ class FormController extends Controller {
                 else
                 {
                     $finisher_data['finisher_id'] = $finisher_id;
+                    $finisher_data['active'] = 1;
                     $this->productionfinisher->editfinisher($finisher_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }

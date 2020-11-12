@@ -121,12 +121,13 @@ class Finishercategories extends Model{
 
     public function editCategory($data)
     {
+        //echo "in the model<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'      => strtolower($data['name'])
         );
         $vals['active'] = (isset($data['active']))? 1:0;
-        $db->updateDatabaseFields($this->table, $vals, $data['id']);
+        $db->updateDatabaseFields($this->table, $vals, $data['line_id']);
         return true;
     }
 

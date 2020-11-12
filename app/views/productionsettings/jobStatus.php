@@ -56,7 +56,7 @@
                         <div class="form-group row">
                             <div class="col-md-3">
                                 <label class="col-form-label">Name</label>
-                                <input type="text" class="form-control required" name="name_<?php echo $s['id'];?>" id="name_<?php echo $s['id'];?>" value="<?php echo ucwords($s['name']);?>" />
+                                <input type="text" class="form-control required status_name" name="name" id="name_<?php echo $s['id'];?>" value="<?php echo ucwords($s['name']);?>" />
                                 <?php echo Form::displayError("name_{$s['id']}");?>
                             </div>
                             <div class="col-md-3">
@@ -87,7 +87,7 @@
                                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                 <input type="hidden" name="text_colour" class="text_colour" value="<?php echo $s['text_colour'];?>">
                                 <input type="hidden" name="line_id" value="<?php echo $s['id'];?>" />
-                                <input type="hidden" name="currentname_<?php echo $s['id'];?>" value="<?php echo $s['name'];?>" />
+                                <input type="hidden" name="currentname_<?php echo $s['id'];?>" id="currentname_<?php echo $s['id'];?>" value="<?php echo $s['name'];?>" />
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
                             </div>
                         </div>

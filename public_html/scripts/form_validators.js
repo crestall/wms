@@ -223,6 +223,29 @@ $(document).ready(function() {
 			}
 		}
     });
+    ////////////////////////////////////////////////////////////
+    $('form.edit-job-status').each(function(i,e){
+        $(this).validate();
+    });
+    $('input.status_name').each(function(i,e){
+        var line_id = $(e).prop('id').split('_').pop();
+        //console.log('Line ID: '+line_id);
+        $(this).rules('add',{
+            required: true,
+            remote: {
+                url: '/ajaxfunctions/checkJobStatusNames',
+                data: {
+                    current_name: function() {
+                        return $('input#currentname_'+line_id).val();
+                    }
+                }
+            },
+            messages:{
+                remote: '<p>This name is already in the system.<br>Status names must be unique</p>',
+                required: 'A name is required'
+            }
+        });
+    })
     ///////////////////////////////////////////////////////////////////////////////
     $("form#add-finisher-category").validate({
     	rules:{
@@ -713,17 +736,21 @@ $(document).ready(function() {
     $('input.driver_name').each(function(i,e){
         var line_id = $(e).prop('id').split('_').pop();
         $(this).rules('add',{
-                required: true,
-                remote: {
-                    url: '/ajaxfunctions/checkDriverNames',
-                    data: { current_name: function() { return $('input#current_name_'+line_id).val();}
-                },
-                messages:{
-                    remote: '<p>This name is already in the system.<br>Driver names must be unique</p>',
-                    required: 'A name is required'
+            required: true,
+            remote: {
+                url: '/ajaxfunctions/checkDriverNames',
+                data: {
+                    current_name:
+                        function() {
+                            return $('input#current_name_'+line_id).val();
+                        }
                 }
+            },
+            messages:{
+                remote: '<p>This name is already in the system.<br>Driver names must be unique</p>',
+                required: 'A name is required'
             }
-        })
+        });
     })
     ////////////////////////////////////////////////////////////
     $('form#transfer_location').validate({
