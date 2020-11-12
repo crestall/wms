@@ -6441,7 +6441,7 @@ class FormController extends Controller {
 		}
         else
         {
-            echo "<pre>",print_r($this->request),"</pre>";
+            echo "<pre>",print_r($this->request),"</pre>"; die();
             // reset session
             Session::reset([
                 "user_id"       => $userId,
