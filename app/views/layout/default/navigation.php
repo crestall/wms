@@ -2,13 +2,12 @@
 $icons = Config::get("MENU_ICONS");
 $app_type = "Warehouse";
 if(Session::getIsLoggedIn()):
-    //echo "<pre>",print_r($_SESSION),"</pre>";
+    echo "<pre>",print_r($_SESSION),"</pre>";
     $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+    if(empty($user_role))
+        return;
     if( Session::isProductionUser() )
         $app_type = "Production";
-    if(empty($user_role))
-        //return $this->controller->redirector->login();
-        return;
     $user_role = str_replace(" ","_", $user_role);
     //echo strtoupper($user_role."_PAGES");
     $pages = Config::getPages(strtoupper($user_role."_PAGES"));
