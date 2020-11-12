@@ -100,6 +100,16 @@ class Session{
         return empty($_SESSION["is_admin_user"]) || !is_bool($_SESSION["is_admin_user"]) ? false : $_SESSION["is_admin_user"];
     }
 
+    public static function isWarehouseUser()
+    {
+        return empty($_SESSION["is_warehouse_user"]) || !is_bool($_SESSION["is_warehouse_user"]) ? false : $_SESSION["is_warehouse_user"];
+    }
+
+    public static function isProductionUser()
+    {
+        return empty($_SESSION["is_production_user"]) || !is_bool($_SESSION["is_production_user"]) ? false : $_SESSION["is_production_user"];
+    }
+
     /**
      * Get User Name.
      *
@@ -336,12 +346,14 @@ class Session{
         session_regenerate_id(true);
         $_SESSION = array();
 
-        $_SESSION["is_logged_in"]   = true;
-        $_SESSION["user_id"]        = (int)$data["user_id"];
-        $_SESSION["role"]           = $data["role"];
-        $_SESSION['users_name']     = $data['users_name'];
-        $_SESSION['client_id']      = $data['client_id'];
-        $_SESSION['is_admin_user']  = $data['is_admin_user'];
+        $_SESSION["is_logged_in"]        = true;
+        $_SESSION["user_id"]             = (int)$data["user_id"];
+        $_SESSION["role"]                = $data["role"];
+        $_SESSION['users_name']          = $data['users_name'];
+        $_SESSION['client_id']           = $data['client_id'];
+        $_SESSION['is_admin_user']       = $data['is_admin_user'];
+        $_SESSION['is_production_user']  = $data['is_production_user'];
+        $_SESSION['is_warehouse_user']   = $data['is_warehouse_user'];
 
         // save these values in the session,
         // they are needed to avoid session hijacking and fixation

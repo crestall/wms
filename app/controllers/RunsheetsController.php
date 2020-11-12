@@ -173,7 +173,7 @@ class RunsheetsController extends Controller
         ]);
     }
 
-    public function viewRunsheets()
+    public function prepareRunsheets()
     {
         $rss = $this->runsheet->getRunsheetsForDisplay();
         $runsheets = array();
@@ -223,11 +223,11 @@ class RunsheetsController extends Controller
             }
         }
         //render the page
-        Config::setJsConfig('curPage', "view-runsheets");
-        Config::set('curPage', "view-runsheets");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/viewRunsheets.php', [
-            'page_title'    =>  "View Runsheets",
-            'pht'           =>  ": View Runsheets",
+        Config::setJsConfig('curPage', "prepare-runsheets");
+        Config::set('curPage', "prepare-runsheets");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/prepareRunsheets.php', [
+            'page_title'    =>  "Prepare Runsheets",
+            'pht'           =>  ": Prepare Runsheets",
             'runsheets'     =>  $runsheets
         ]);
     }

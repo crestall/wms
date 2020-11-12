@@ -1,11 +1,13 @@
 <?php
 $icons = Config::get("MENU_ICONS");
+$app_type = "Warehouse";
 if(Session::getIsLoggedIn()):
     //echo "<pre>",print_r($_SESSION),"</pre>";
     $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
     if(empty($user_role))
-        //return $this->controller->redirector->login();
         return;
+    if( Session::isProductionUser() )
+        $app_type = "Production";
     $user_role = str_replace(" ","_", $user_role);
     //echo strtoupper($user_role."_PAGES");
     $pages = Config::getPages(strtoupper($user_role."_PAGES"));
@@ -61,6 +63,6 @@ endif;
 <!-- Common Page Header -->
 <div id="page_header" class="row">
     <div class="col-lg-12">
-        <h1>FSG Warehouse Management System</h1>
+        <h1>FSG <?php echo $app_type;?> Management System</h1>
     </div>
 </div>
