@@ -295,6 +295,7 @@ class User extends Model{
         if(empty($user_id))
             $user_id = Session::getUserId();
         $q = "SELECT ur.user_type FROM user_roles ur JOIN users u ON ur.id = u.role_id WHERE u.id = $user_id";
+        die($q);
         $res = $db->queryRow($q);
         return $res['user_type'] == 2;
     }
