@@ -56,7 +56,7 @@
                         <div class="form-group row">
                             <div class="col-md-3">
                                 <label class="col-form-label">Name</label>
-                                <input type="text" class="form-control required status_name" name="name" id="name_<?php echo $s['id'];?>" value="<?php echo ucwords($s['name']);?>" />
+                                <input type="text" class="form-control required status_name" name="name_<?php echo $s['id'];?>" id="name_<?php echo $s['id'];?>" value="<?php echo ucwords($s['name']);?>" />
                                 <?php echo Form::displayError("name_{$s['id']}");?>
                             </div>
                             <div class="col-md-3">
