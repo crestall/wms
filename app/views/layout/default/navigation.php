@@ -4,6 +4,8 @@ $app_type = "Warehouse";
 if(Session::getIsLoggedIn()):
     //echo "<pre>",print_r($_SESSION),"</pre>";
     $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+    if( Session::isProductionUser() )
+        $app_type = "Production";
     if(empty($user_role))
         //return $this->controller->redirector->login();
         return;
