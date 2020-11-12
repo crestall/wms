@@ -237,6 +237,7 @@ $(document).ready(function() {
                     current_name: function() {
                         return $('input#currentname_'+line_id).val();
                     }
+                }
             },
             messages:{
                 remote: '<p>This name is already in the system.<br>Status names must be unique</p>',
