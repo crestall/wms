@@ -739,10 +739,6 @@ $(document).ready(function() {
                     current_name:
                         function() {
                             return $('input#current_name_'+line_id).val();
-                        },
-                    name:
-                        function(){
-                            return $('input#name_'+line_id).val();
                         }
                 }
             },
