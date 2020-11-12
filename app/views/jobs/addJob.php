@@ -231,10 +231,9 @@ else
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Delivery Instruction</label>
+                        <label class="col-md-3 col-form-label">Delivery Instructions</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="delivery_intsructions" id="delivery_instructions" value="<?php echo Form::value('delivery_instructions');?>" />
-                            <?php echo Form::displayError('ship_to');?>
+                            <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Instructions For Driver"><?php echo Form::value('delivery_instructions');?></textarea> />
                         </div>
                     </div>
                     <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
