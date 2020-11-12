@@ -241,8 +241,8 @@ else
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Delivery Instructions</label>
-                                    <div class="col-md-4">
+                                    <label class="col-md-4 col-form-label">Delivery Instructions</label>
+                                    <div class="col-md-8">
                                         <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Instructions For Driver"><?php echo $delivery_instructions;?></textarea>
                                     </div>
                                 </div>
