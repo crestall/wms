@@ -229,7 +229,7 @@ $(document).ready(function() {
     });
     $('input.status_name').each(function(i,e){
         var line_id = $(e).prop('id').split('_').pop();
-        console.log('Line ID: '+line_id);
+        //console.log('Line ID: '+line_id);
         $(this).rules('add',{
             required: true,
             remote: {
