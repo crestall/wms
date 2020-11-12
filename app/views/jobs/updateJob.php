@@ -29,6 +29,7 @@ $state      = empty(Form::value('state'))?      $job['state']        : Form::val
 $postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $job['country']      : Form::value('country');
 $delivery_instructions = empty(Form::value('delivery_instructions'))? $job['delivery_instructions'] : Form::value('delivery_instructions');
+$attention = empty(Form::value('attention'))? $job['attention'] : Form::value('attention');
 if(count($finisher))
 {
     //echo "<pre>",print_r($finisher),"</pre>"; //die();
@@ -238,6 +239,12 @@ else
                                     <div class="col-md-8">
                                         <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
                                         <?php echo Form::displayError('ship_to');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Attention</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="attention" id="attention" value="<?php echo $attention;?>" />
                                     </div>
                                 </div>
                                 <div class="form-group row">

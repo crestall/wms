@@ -1,5 +1,6 @@
 <?php
 $ship_to = Form::value('ship_to');
+$attention = Form::value('attention');
 $address = Form::value('address');
 $address2 = Form::value('address2');
 $suburb = Form::value('suburb');
@@ -228,6 +229,12 @@ else
                         <div class="col-md-4">
                             <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
                             <?php echo Form::displayError('ship_to');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Attention</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="attention" id="attention" value="<?php echo $attention;?>" />
                         </div>
                     </div>
                     <div class="form-group row">
