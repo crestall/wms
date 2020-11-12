@@ -239,7 +239,7 @@ while($f < $finisher_count)
             <?php
             $f = 0;
             while($f < $finisher_count):
-                $fn = ($f > 0)? $f : "";
+                $fn = ($f > 0)? $f + 1 : "";
                 $fwn = ucwords($nf->format($f+1));?>
                 <div class="border border-secondary p-3 m-3 rounded bg-light">
                     <h3>Finisher <?php echo $fwn;?> Details</h3>
