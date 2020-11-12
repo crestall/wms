@@ -234,7 +234,7 @@ else
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Attention</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control required" name="attention" id="attention" value="<?php echo $attention;?>" />
+                            <input type="text" class="form-control" name="attention" id="attention" value="<?php echo $attention;?>" />
                         </div>
                     </div>
                     <div class="form-group row">
