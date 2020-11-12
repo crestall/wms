@@ -143,7 +143,7 @@ class FormController extends Controller {
 
     public function procFinisherCategoryEdit()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         $response = array();
         $id = $this->request->data['line_id'];
@@ -156,6 +156,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        echo "<pre>",print_r($post_data),"</pre>"; die();
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name', 'A Category name is required');
