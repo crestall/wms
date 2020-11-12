@@ -25,7 +25,7 @@ $f = 0;
 $nf = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 while($f < $finisher_count)
 {
-    $fn = ($f > 0)? $f : "";
+    $fn = ($f > 0)? $f + 1 : "";
     ${'date_ed'.$fn} = (empty(Form::value('date_ed'.$fn.'_value')))? "" : date('d/m/Y', Form::value('date_ed'.$fn.'_value'));
     if(Session::getAndDestroy('show_finisher'.$fn.'_address'))
     {
