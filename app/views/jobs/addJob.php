@@ -262,6 +262,21 @@ while($f < $finisher_count)
                             <input type="hidden" name="finisher<?php echo $fn;?>_id" id="finisher<?php echo $fn;?>_id" value="0" />
                         </div>
                     </div>
+                    <div class="form-group row ">
+                        <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
+                        <div class="col-lg-3 col-md-4">
+                            <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_contact" id="finisher<?php echo $fn;?>_contact" value="<?php echo Form::value('finisher'.$fn.'_contact');?>" />
+                        </div>
+                        <label class="col-lg-1 col-md-2">Email</label>
+                        <div class="col-lg-3 col-md-4">
+                            <input type="text" class="form-control finisher<?php echo $fn;?> email" name="finisher<?php echo $fn;?>_email" id="finisher<?php echo $fn;?>_email" value="<?php echo Form::value('finisher{$fn}_email');?>" />
+                            <?php echo Form::displayError('finisher{$fn}_email');?>
+                        </div>
+                        <label class="col-lg-1 col-md-2">Phone</label>
+                        <div class="col-lg-3 col-md-4">
+                            <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_phone" id="finisher<?php echo $fn;?>_phone" value="<?php echo Form::value('finisher{$fn}_phone');?>" />
+                        </div>
+                    </div>
                 </div>
                 <?php ++$f;
             endwhile;?>
