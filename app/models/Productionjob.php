@@ -132,6 +132,7 @@ class Productionjob extends Model{
             'date'          => time()
         );
         if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
+        if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
         if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
