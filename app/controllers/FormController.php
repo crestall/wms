@@ -703,6 +703,7 @@ class FormController extends Controller {
                 else
                 {
                     $finisher_data['finisher_id'] = $finisher_id;
+                    $finisher_data['active'] = 1;
                     $this->productionfinisher->editfinisher($finisher_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
