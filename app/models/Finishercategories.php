@@ -121,7 +121,7 @@ class Finishercategories extends Model{
 
     public function editCategory($data)
     {
-        echo "in the model<pre>",print_r($data),"</pre>";die();
+        //echo "in the model<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'      => strtolower($data['name'])
