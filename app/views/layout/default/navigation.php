@@ -1,5 +1,6 @@
 <?php
 $icons = Config::get("MENU_ICONS");
+$app_type = "Warehouse";
 if(Session::getIsLoggedIn()):
     //echo "<pre>",print_r($_SESSION),"</pre>";
     $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
@@ -61,6 +62,6 @@ endif;
 <!-- Common Page Header -->
 <div id="page_header" class="row">
     <div class="col-lg-12">
-        <h1>FSG Warehouse Management System</h1>
+        <h1>FSG <?php echo $app_type;> Management System</h1>
     </div>
 </div>
