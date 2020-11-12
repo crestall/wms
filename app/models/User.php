@@ -289,6 +289,26 @@ class User extends Model{
         return $urank <= $admin_rank;
     }
 
+    public function isProductionUser($user_id = null)
+    {
+        $db = Database::openConnection();
+        if(empty($user_id))
+            $user_id = Session::getUserId();
+        $q = "SELECT ur.user_type FROM user_roles ur JOIN users u ON ur.id = u.role_id WHERE u.id = $user_id";
+        $res = $db->queryRow($q);
+        return $res['user_type'] == 2;
+    }
+
+    public function isWarehouseUser($user_id = null)
+    {
+        $db = Database::openConnection();
+        if(empty($user_id))
+            $user_id = Session::getUserId();
+        $q = "SELECT ur.user_type FROM user_roles ur JOIN users u ON ur.id = u.role_id WHERE u.id = $user_id";
+        $res = $db->queryRow($q);
+        return $res['user_type'] == 1;
+    }
+
     public function emailTaken($email)
     {
         $db = Database::openConnection();
