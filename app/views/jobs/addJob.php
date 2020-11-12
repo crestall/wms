@@ -277,6 +277,11 @@ while($f < $finisher_count)
                             <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_phone" id="finisher<?php echo $fn;?>_phone" value="<?php echo Form::value('finisher{$fn}_phone');?>" />
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col text-right">
+                            <a  id="finisher<?php echo $fn;?>_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#finisher<?php echo $fn;?>_address_holder" role="button" aria-expanded="<?php echo ${'finisher'.$fn.'_aria_expanded'};?>" aria-controls="finisher<?php echo $fn;?>_address_holder"> </a>
+                        </div>
+                    </div>
                 </div>
                 <?php ++$f;
             endwhile;?>
