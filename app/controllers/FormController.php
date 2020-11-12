@@ -156,7 +156,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>"; die();
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name', 'A Category name is required');
@@ -172,7 +172,7 @@ class FormController extends Controller {
         }
         else
         {
-            //add the category
+            //edit the category
             if($this->finishercategories->editCategory($post_data))
             {
                 Session::set('feedback', "That Category has been updated");
