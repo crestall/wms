@@ -148,7 +148,11 @@ class Productionjob extends Model{
         if(!empty($data['date_ed3_value'])) $vals['ed3_date'] = $data['date_ed3_value'];
         if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
         if(!empty($data['finisher_id'])) $vals['finisher_id'] = $data['finisher_id'];
+        if(!empty($data['finisher_po'])) $vals['finisher_po'] = $data['finisher_po'];
         if(!empty($data['finisher2_id'])) $vals['finisher2_id'] = $data['finisher2_id'];
+        if(!empty($data['finisher2_po'])) $vals['finisher2_po'] = $data['finisher2_po'];
+        if(!empty($data['finisher3_id'])) $vals['finisher3_id'] = $data['finisher3_id'];
+        if(!empty($data['finisher3_po'])) $vals['finisher3_po'] = $data['finisher3_po'];
         if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
         if(!empty($data['designer'])) $vals['designer'] = $data['designer'];
         if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
@@ -219,6 +223,13 @@ class Productionjob extends Model{
         return true;
     }
 
+    public function updateJobFinisherPo($job_id, $po, $finisher_number = "")
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'finisher'.$finisher_number.'_po', $po, $job_id);
+        return true;
+    }
+
     public function updateJobCustomerId($job_id, $customer_id)
     {
         $db = Database::openConnection();
@@ -244,6 +255,13 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table, 'finisher'.$fn.'_id', 0, $job_id);
+        return true;
+    }
+
+    public function removeFinisherPo($job_id, $fn = "")
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'finisher'.$fn.'_po', NULL, $job_id);
         return true;
     }
 
