@@ -27,8 +27,7 @@
             <tr id="tr_<?php echo $job['id'];?>">
                 <td data-label="Job Number" class="number">
                     <?php if($user_role == "production_admin"):?>
-                        <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a><br>
-                        <span class="inst">Click to update details</span>
+                        <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a>
                     <?php else:?>
                         <?php echo $job['job_id'];?>
                     <?php endif;?>

@@ -9,10 +9,11 @@
                     jobsTable: function(){
                         var table = dataTable.init($('table#production_jobs_table'), {
                             /* No ordering applied by DataTables during initialisation */
-                            "order": []
+                            "paging":   false,
+                            "ordering": false,
                         });
                         table.on( 'draw', function () {
-                            console.log( 'Redraw occurred at: '+new Date().getTime() );
+                            //console.log( 'Redraw occurred at: '+new Date().getTime() );
                             $('.selectpicker').selectpicker();
                         });
                     },
