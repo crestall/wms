@@ -1,6 +1,6 @@
 <?php
 $job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
-$strict_dd = (empty(Form::value('job_id')) && $job['strict_dd'] == 0)? false : (!empty(Form::value('job_id')) && $job['strict_dd'] == 1)?  true : "false";
+$strict_dd = (empty(Form::value('job_id')) && $job['strict_dd'] == 0)? false : (!empty(Form::value('job_id')) && $job['strict_dd'] == 1)?  true : false;
 $previous_job_id = (!empty(Form::value('previous_job_id')))? Form::value('previous_job_id'):$job['previous_job_id'];
 $status_id = (!empty(Form::value('status_id')))? Form::value('status_id'):$job['status_id'];
 $salesrep_id = (!empty(Form::value('salesrep_id')))? Form::value('salesrep_id'):$job['salesrep_id'];
