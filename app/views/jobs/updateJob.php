@@ -475,6 +475,9 @@ while($f < $finisher_count)
                                 <input type="hidden" name="finisher_number" value="<?php echo ($f + 1);?>" >
                             </form>
                         </div>
+                        <div class="card-footer text-right">
+                            <button id="finisher<?php echo $fn;?>_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
+                        </div>
                     </div>
                 </div>
                 <?php ++$f;
