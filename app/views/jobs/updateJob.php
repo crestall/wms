@@ -379,10 +379,10 @@ while($f < $finisher_count)
                             Finisher <?php echo $fwn;?> Details
                         </div>
                         <div class="card-body">
-                            <?php if(isset($_SESSION['jobfinisher{$fn}detailsfeedback'])) :?>
+                            <?php if(isset($_SESSION['jobfinisher'.$fn.'detailsfeedback'])) :?>
                                 <div class='feedbackbox'><?php echo Session::getAndDestroy('jobfinisher{$fn}detailsfeedback');?></div>
                             <?php endif; ?>
-                            <?php if(isset($_SESSION['jobfinisher{$fn}detailserrorfeedback'])) :?>
+                            <?php if(isset($_SESSION['jobfinisher'.$fn.'detailserrorfeedback'])) :?>
                                 <div class='errorbox'><?php echo Session::getAndDestroy('jobfinisher${fn}detailserrorfeedback');?></div>
                             <?php endif; ?>
                             <form id="finisher<?php echo $fn;?>_details_update" method="post" action="/form/procJobfinisherUpdate">
