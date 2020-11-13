@@ -104,7 +104,7 @@ class Productionjob extends Model{
         }
         $q .= "
             ORDER BY
-                js.ranking ASC, pj.due_date DESC, pj.job_id DESC
+                js.ranking ASC, pj.date_entered DESC, pj.job_id DESC
         ";
         return $db->queryData($q);
     }
