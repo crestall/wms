@@ -223,6 +223,13 @@ class Productionjob extends Model{
         return true;
     }
 
+    public function updateJobFinisherPo($job_id, $po, $finisher_number = "")
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'finisher'.$finisher_number.'_po', $po, $job_id);
+        return true;
+    }
+
     public function updateJobCustomerId($job_id, $customer_id)
     {
         $db = Database::openConnection();
@@ -248,6 +255,13 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table, 'finisher'.$fn.'_id', 0, $job_id);
+        return true;
+    }
+
+    public function removeFinisherPo($job_id, $fn = "")
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'finisher'.$fn.'_po', NULL, $job_id);
         return true;
     }
 
