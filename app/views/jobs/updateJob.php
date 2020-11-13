@@ -37,6 +37,7 @@ $nf = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 while($f < $finisher_count)
 {
     $fn = ($f > 0)? $f + 1 : "";
+    ${'date_ed'.$fn} = (!empty(Form::value('date_ed{$fn}_value')))? Form::value('date_ed{$fn}_value') : $job['ed{$fn}_date'];
     if(count(${'finisher'.$fn}))
     {
         ${'finisher'.$fn.'_name'} = ucwords((!empty(Form::value('finisher{$fn}_name')))? Form::value('finisher{$fn}_name'):${'finisher'.$fn}['name']);
@@ -388,13 +389,13 @@ while($f < $finisher_count)
                                     <label class="col-md-4 col-form-label">Expected Delivery Date</label>
                                     <div class="col-md-8">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="date_ed<?php echo $fn;?>" id="date_ed<?php echo $fn;?>" value="<?php if(!empty($date_ed{$fn})) echo date('d/m/Y', $date_ed{$fn});?>" />
+                                            <input type="text" class="form-control" name="date_ed<?php echo $fn;?>" id="date_ed<?php echo $fn;?>" value="<?php if(!empty(${'date_ed'.$fn})) echo date('d/m/Y', ${'date_ed'.$fn});?>" />
                                             <div class="input-group-append">
                                                 <span id="date_ed<?php echo $fn;?>_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="date_ed<?php echo $fn;?>_value" id="date_ed<?php echo $fn;?>_value" value="<?php echo $date_ed{$fn};?>" />
+                                    <input type="hidden" name="date_ed<?php echo $fn;?>_value" id="date_ed<?php echo $fn;?>_value" value="<?php echo ${'date_ed'.$fn};?>" />
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">Finisher Name</label>
