@@ -399,33 +399,33 @@ while($f < $finisher_count)
                                 <div class="form-group row">
                                     <label class="col-md-4">Finisher Name</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" name="finisher<?php echo $fn;?>_name" id="finisher<?php echo $fn;?>_name" value="<?php echo $finisher2_name;?>" />
+                                        <input type="text" class="form-control" name="finisher<?php echo $fn;?>_name" id="finisher<?php echo $fn;?>_name" value="<?php echo ${'finisher'.$fn.'_name'};?>" />
                                         <input type="hidden" name="finisher<?php echo $fn;?>_id" id="finisher<?php echo $fn;?>_id" value="<?php echo $job['finisher'.$fn.'_id'];?>" />
                                     </div>
                                 </div>
                                 <div class="form-group row ">
                                     <label class="col-md-4">Contact</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_contact" id="finisher<?php echo $fn;?>_contact" value="<?php echo $finisher2_contact;?>" />
+                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_contact" id="finisher<?php echo $fn;?>_contact" value="<?php echo ${'finisher'.$fn.'_contact'};?>" />
                                     </div>
                                 </div>
                                 <div class="form-group row ">
                                     <label class="col-md-4">Email</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control finisher<?php echo $fn;?> email" name="finisher<?php echo $fn;?>_email" id="finisher<?php echo $fn;?>_email" value="<?php echo $finisher2_email;?>" />
+                                        <input type="text" class="form-control finisher<?php echo $fn;?> email" name="finisher<?php echo $fn;?>_email" id="finisher<?php echo $fn;?>_email" value="<?php echo ${'finisher'.$fn.'_email'};?>" />
                                         <?php echo Form::displayError('finisher{$fn}_email');?>
                                     </div>
                                 </div>
                                 <div class="form-group row ">
                                     <label class="col-md-4">Phone</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_phone" id="finisher<?php echo $fn;?>_phone" value="<?php echo $finisher2_phone;?>" />
+                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_phone" id="finisher<?php echo $fn;?>_phone" value="<?php echo ${'finisher'.$fn.'_phone'};?>" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">Address Line 1</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_address" id="finisher<?php echo $fn;?>_address" value="<?php echo $finisher2_address;?>" /><br>
+                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_address" id="finisher<?php echo $fn;?>_address" value="<?php echo ${'finisher'.$fn.'_address'};?>" /><br>
                                         <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
                                             <input class="form-check-input styled" type="checkbox" id="ignore_finisher<?php echo $fn;?>_address_error" name="ignore_finisher<?php echo $fn;?>_address_error" />
                                             <label for="ignore_finisher<?php echo $fn;?>_address_error"><span class="inst">No need for a number</span></label>
@@ -437,20 +437,20 @@ while($f < $finisher_count)
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">Address Line 2</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_address2" id="finisher<?php echo $fn;?>_address2" value="<?php echo $finisher2_address2;?>" />
+                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_address2" id="finisher<?php echo $fn;?>_address2" value="<?php echo ${'finisher'.$fn.'_address2'};?>" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">Suburb/Town</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_suburb" id="finisher<?php echo $fn;?>_suburb" value="<?php echo $finisher2_suburb;?>" />
+                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_suburb" id="finisher<?php echo $fn;?>_suburb" value="<?php echo ${'finisher'.$fn.'_suburb'};?>" />
                                         <?php echo Form::displayError('finisher{$fn}_suburb');?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">State</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_state" id="finisher<?php echo $fn;?>_state" value="<?php echo $finisher2_state;?>" />
+                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_state" id="finisher<?php echo $fn;?>_state" value="<?php echo ${'finisher'.$fn.'_state'};?>" />
                                         <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
                                         <?php echo Form::displayError('finisher{$fn}_state');?>
                                     </div>
@@ -458,14 +458,14 @@ while($f < $finisher_count)
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">Postcode</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_postcode" id="finisher<?php echo $fn;?>_postcode" value="<?php echo $finisher2_postcode;?>" />
+                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_postcode" id="finisher<?php echo $fn;?>_postcode" value="<?php echo ${'finisher'.$fn.'_postcode'};?>" />
                                         <?php echo Form::displayError('finisher{$fn}_postcode');?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">Country</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_country" id="finisher<?php echo $fn;?>_country" value="<?php echo $finisher2_country;?>" />
+                                        <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_country" id="finisher<?php echo $fn;?>_country" value="<?php echo ${'finisher'.$fn.'_country'};?>" />
                                         <span class="inst">use the 2 letter ISO code</span>
                                         <?php echo Form::displayError('finisher{$fn}_country');?>
                                     </div>
