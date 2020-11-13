@@ -133,6 +133,7 @@ class Productionjob extends Model{
             'status_id'     => $data['status_id'],
             'date'          => time()
         );
+        $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
         if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
         if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
         if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
@@ -196,6 +197,7 @@ class Productionjob extends Model{
             'country'       =>  null
         );
         $vals['active'] = isset($data['active'])? 1 : 0;
+        $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
         if(!empty($data['email'])) $vals['email'] = $data['email'];
         if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
         if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
