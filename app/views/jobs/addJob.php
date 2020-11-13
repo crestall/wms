@@ -101,6 +101,10 @@ while($f < $finisher_count)
                     </div>
                     <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                 </div>
+                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                    <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />
+                    <label class="custom-control-label col-md-3" for="strict_dd">Strict Due Date</label>
+                </div>
                 <div class="form-group row">
                     <label class="col-md-3">Designer</label>
                     <div class="col-md-4">
