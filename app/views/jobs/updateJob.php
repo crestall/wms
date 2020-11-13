@@ -37,7 +37,7 @@ $nf = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 while($f < $finisher_count)
 {
     $fn = ($f > 0)? $f + 1 : "";
-    ${'date_ed'.$fn} = (!empty(Form::value('date_ed{$fn}_value')))? Form::value('date_ed{$fn}_value') : $job['ed{$fn}_date'];
+    ${'date_ed'.$fn} = (!empty(Form::value('date_ed{$fn}_value')))? Form::value('date_ed{$fn}_value') : $job['ed'.$fn.'_date'];
     if(count(${'finisher'.$fn}))
     {
         ${'finisher'.$fn.'_name'} = ucwords((!empty(Form::value('finisher{$fn}_name')))? Form::value('finisher{$fn}_name'):${'finisher'.$fn}['name']);
