@@ -30,87 +30,41 @@ $postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::val
 $country    = empty(Form::value('country'))?    $job['country']      : Form::value('country');
 $delivery_instructions = empty(Form::value('delivery_instructions'))? $job['delivery_instructions'] : Form::value('delivery_instructions');
 $attention = empty(Form::value('attention'))? $job['attention'] : Form::value('attention');
-if(count($finisher))
+//Finisher Stuff
+$finisher_count = 3;
+$f = 0;
+$nf = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+while($f < $finisher_count)
 {
-    //echo "<pre>",print_r($finisher),"</pre>"; //die();
-    $finisher_name = ucwords((!empty(Form::value('finisher_name')))? Form::value('finisher_name'):$finisher['name']);
-    $finisher_contact = (!empty(Form::value('finisher_contact')))? Form::value('finisher_contact'):$finisher['contact'];
-    $finisher_email = (!empty(Form::value('finisher_email')))? Form::value('finisher_email'):$finisher['email'];
-    $finisher_phone = (!empty(Form::value('finisher_phone')))? Form::value('finisher_phone'):$finisher['phone'];
-    $finisher_address = (!empty(Form::value('finisher_address')))? Form::value('finisher_address'):$finisher['address'];
-    $finisher_address2 = (!empty(Form::value('finisher_address2')))? Form::value('finisher_address2'):$finisher['address_2'];
-    $finisher_suburb = (!empty(Form::value('finisher_suburb')))? Form::value('finisher_suburb'):$finisher['suburb'];
-    $finisher_state = (!empty(Form::value('finisher_state')))? Form::value('finisher_state'):$finisher['state'];
-    $finisher_postcode = (!empty(Form::value('finisher_postcode')))? Form::value('finisher_postcode'):$finisher['postcode'];
-    $finisher_country = (!empty(Form::value('finisher_country')))? Form::value('finisher_country'):$finisher['country'];
-
+    $fn = ($f > 0)? $f + 1 : "";
+    if(count(${'finisher'.$fn}))
+    {
+        ${'finisher'.$fn.'_name'} = ucwords((!empty(Form::value('finisher{$fn}_name')))? Form::value('finisher{$fn}_name'):${'finisher'.$fn}['name']);
+        ${'finisher'.$fn.'_contact'} = (!empty(Form::value('finisher{$fn}_contact')))? Form::value('finisher{$fn}_contact'):${'finisher'.$fn}['contact'];
+        ${'finisher'.$fn.'_email'} = (!empty(Form::value('finisher{$fn}_email')))? Form::value('finisher{$fn}_email'):${'finisher'.$fn}['email'];
+        ${'finisher'.$fn.'_phone'} = (!empty(Form::value('finisher{$fn}_phone')))? Form::value('finisher{$fn}_phone'):${'finisher'.$fn}['phone'];
+        ${'finisher'.$fn.'_address'} = (!empty(Form::value('finisher{$fn}_address')))? Form::value('finisher{$fn}_address'):${'finisher'.$fn}['address'];
+        ${'finisher'.$fn.'address2'} = (!empty(Form::value('finisher{$fn}_address2')))? Form::value('finisher{$fn}_address2'):${'finisher'.$fn}['address_2'];
+        ${'finisher'.$fn.'_suburb'} = (!empty(Form::value('finisher{$fn}_suburb')))? Form::value('finisher{$fn}_suburb'):${'finisher'.$fn}['suburb'];
+        ${'finisher'.$fn.'_state'} = (!empty(Form::value('finisher{$fn}_state')))? Form::value('finisher{$fn}_state'):${'finisher'.$fn}['state'];
+        ${'finisher'.$fn.'_postcode'} = (!empty(Form::value('finisher{$fn}_postcode')))? Form::value('finisher{$fn}_postcode'):${'finisher'.$fn}['postcode'];
+        ${'finisher'.$fn.'_country'} = (!empty(Form::value('finisher{$fn}_country')))? Form::value('finisher{$fn}_country'):${'finisher'.$fn}['country'];
+    }
+    else
+    {
+        ${'finisher'.$fn.'_name'} = Form::value('finisher{$fn}_name');
+        ${'finisher'.$fn.'_contact'} = Form::value('finisher{$fn}_contact');
+        ${'finisher'.$fn.'_email'} = Form::value('finisher{$fn}_email');
+        ${'finisher'.$fn.'_phone'} = Form::value('finisher{$fn}_phone');
+        ${'finisher'.$fn.'_address'} = Form::value('finisher{$fn}_address');
+        ${'finisher'.$fn.'_address2'} =  Form::value('finisher{$fn}_address2');
+        ${'finisher'.$fn.'_suburb'} = Form::value('finisher{$fn}_suburb');
+        ${'finisher'.$fn.'_state'} = Form::value('finisher{$fn}_state');
+        ${'finisher'.$fn.'_postcode'} = Form::value('finisher{$fn}_postcode');
+        ${'finisher'.$fn.'_country'} = Form::value('finisher{$fn}_country');
+    }
+    ++$f;
 }
-else
-{
-    $finisher_name = Form::value('finisher_name');
-    $finisher_contact = Form::value('finisher_contact');
-    $finisher_email = Form::value('finisher_email');
-    $finisher_phone = Form::value('finisher_phone');
-    $finisher_address = Form::value('finisher_address');
-    $finisher_address2 =  Form::value('finisher_address2');
-    $finisher_suburb = Form::value('finisher_suburb');
-    $finisher_state = Form::value('finisher_state');
-    $finisher_postcode = Form::value('finisher_postcode');
-    $finisher_country = Form::value('finisher_country');
-}
-if(count($finisher2))
-{
-    $finisher2_name = ucwords((!empty(Form::value('finisher2_name')))? Form::value('finisher2_name'):$finisher2['name']);
-    $finisher2_contact = (!empty(Form::value('finisher2_contact')))? Form::value('finisher2_contact'):$finisher2['contact'];
-    $finisher2_email = (!empty(Form::value('finisher2_email')))? Form::value('finisher2_email'):$finisher2['email'];
-    $finisher2_phone = (!empty(Form::value('finisher2_phone')))? Form::value('finisher2_phone'):$finisher2['phone'];
-    $finisher2_address = (!empty(Form::value('finisher2_address')))? Form::value('finisher2_address'):$finisher2['address'];
-    $finisher2_address2 = (!empty(Form::value('finisher2_address2')))? Form::value('finisher2_address2'):$finisher2['address_2'];
-    $finisher2_suburb = (!empty(Form::value('finisher2_suburb')))? Form::value('finisher2_suburb'):$finisher2['suburb'];
-    $finisher2_state = (!empty(Form::value('finisher2_state')))? Form::value('finisher2_state'):$finisher2['state'];
-    $finisher2_postcode = (!empty(Form::value('finisher2_postcode')))? Form::value('finisher2_postcode'):$finisher2['postcode'];
-    $finisher2_country = (!empty(Form::value('finisher2_country')))? Form::value('finisher2_country'):$finisher2['country'];
-}
-else
-{
-    $finisher2_name = Form::value('finisher2_name');
-    $finisher2_contact = Form::value('finisher2_contact');
-    $finisher2_email = Form::value('finisher2_email');
-    $finisher2_phone = Form::value('finisher2_phone');
-    $finisher2_address = Form::value('finisher2_address');
-    $finisher2_address2 =  Form::value('finisher2_address2');
-    $finisher2_suburb = Form::value('finisher2_suburb');
-    $finisher2_state = Form::value('finisher2_state');
-    $finisher2_postcode = Form::value('finisher2_postcode');
-    $finisher2_country = Form::value('finisher2_country');
-}
-if(count($finisher3))
-{
-    $finisher3_name = ucwords((!empty(Form::value('finisher3_name')))? Form::value('finisher3_name'):$finisher3['name']);
-    $finisher3_contact = (!empty(Form::value('finisher3_contact')))? Form::value('finisher3_contact'):$finisher3['contact'];
-    $finisher3_email = (!empty(Form::value('finisher3_email')))? Form::value('finisher3_email'):$finisher3['email'];
-    $finisher3_phone = (!empty(Form::value('finisher3_phone')))? Form::value('finisher3_phone'):$finisher3['phone'];
-    $finisher3_address = (!empty(Form::value('finisher3_address')))? Form::value('finisher3_address'):$finisher3['address'];
-    $finisher3_address2 = (!empty(Form::value('finisher3_address2')))? Form::value('finisher3_address2'):$finisher3['address_2'];
-    $finisher3_suburb = (!empty(Form::value('finisher3_suburb')))? Form::value('finisher3_suburb'):$finisher3['suburb'];
-    $finisher3_state = (!empty(Form::value('finisher3_state')))? Form::value('finisher3_state'):$finisher3['state'];
-    $finisher3_postcode = (!empty(Form::value('finisher3_postcode')))? Form::value('finisher3_postcode'):$finisher3['postcode'];
-    $finisher3_country = (!empty(Form::value('finisher3_country')))? Form::value('finisher3_country'):$finisher3['country'];
-}
-else
-{
-    $finisher3_name = Form::value('finisher3_name');
-    $finisher3_contact = Form::value('finisher3_contact');
-    $finisher3_email = Form::value('finisher3_email');
-    $finisher3_phone = Form::value('finisher3_phone');
-    $finisher3_address = Form::value('finisher3_address');
-    $finisher3_address2 =  Form::value('finisher3_address2');
-    $finisher3_suburb = Form::value('finisher3_suburb');
-    $finisher3_state = Form::value('finisher3_state');
-    $finisher3_postcode = Form::value('finisher3_postcode');
-    $finisher3_country = Form::value('finisher3_country');
-}
-
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
