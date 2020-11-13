@@ -388,7 +388,7 @@ while($f < $finisher_count)
                                     <label class="col-md-4 col-form-label">Expected Delivery Date</label>
                                     <div class="col-md-8">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="date_ed<?php echo $fn;?>" id="date_ed<?php echo $fn;?>" value="<?php if(!empty($date_ed{$f2})) echo date('d/m/Y', $date_ed{$f2});?>" />
+                                            <input type="text" class="form-control" name="date_ed<?php echo $fn;?>" id="date_ed<?php echo $fn;?>" value="<?php if(!empty($date_ed{$fn})) echo date('d/m/Y', $date_ed{$fn});?>" />
                                             <div class="input-group-append">
                                                 <span id="date_ed<?php echo $fn;?>_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                             </div>
