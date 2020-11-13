@@ -50,6 +50,7 @@ while($f < $finisher_count)
         ${'finisher'.$fn.'_state'} = (!empty(Form::value('finisher{$fn}_state')))? Form::value('finisher{$fn}_state'):${'finisher'.$fn}['state'];
         ${'finisher'.$fn.'_postcode'} = (!empty(Form::value('finisher{$fn}_postcode')))? Form::value('finisher{$fn}_postcode'):${'finisher'.$fn}['postcode'];
         ${'finisher'.$fn.'_country'} = (!empty(Form::value('finisher{$fn}_country')))? Form::value('finisher{$fn}_country'):${'finisher'.$fn}['country'];
+        ${'finisher'.$fn.'_po'} =(!empty(Form::value('finisher{$fn}_po')))? Form::value('finisher{$fn}_po'): $job['finisher'.$fn.'_po'];
     }
     else
     {
@@ -63,6 +64,7 @@ while($f < $finisher_count)
         ${'finisher'.$fn.'_state'} = Form::value('finisher{$fn}_state');
         ${'finisher'.$fn.'_postcode'} = Form::value('finisher{$fn}_postcode');
         ${'finisher'.$fn.'_country'} = Form::value('finisher{$fn}_country');
+        ${'finisher'.$fn.'_po'} = Form::value('finisher{$fn}_po');
     }
     ++$f;
 }
@@ -403,6 +405,12 @@ while($f < $finisher_count)
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" name="finisher<?php echo $fn;?>_name" id="finisher<?php echo $fn;?>_name" value="<?php echo ${'finisher'.$fn.'_name'};?>" />
                                         <input type="hidden" name="finisher<?php echo $fn;?>_id" id="finisher<?php echo $fn;?>_id" value="<?php echo $job['finisher'.$fn.'_id'];?>" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-3">
+                                    <label class="col-md-3">Purchase Order No.</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" name="finisher<?php echo $fn;?>_po" id="finisher<?php echo $fn;?>_po" value="<?php echo ${'finisher'.$fn.'_po'};?>" />
                                     </div>
                                 </div>
                                 <div class="form-group row ">
