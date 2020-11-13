@@ -176,7 +176,10 @@ $(document).ready(function() {
                     url: '/ajaxfunctions/checkJobIds',
                     data: { 'current_jobid': function(){ return $("#current_jobid").val(); } }
                 }
-			}
+			},
+            date_due:{
+                required: return $("#strict_dd").prop('checked');
+            }
     	},
 		messages:{
 			status_id:{
@@ -184,7 +187,10 @@ $(document).ready(function() {
 			},
             job_id: {
 				remote: 'This Job Id is already in use. Job Ids must be unique'
-			}
+			},
+            date_due:{
+                required: 'This is required for strict due date jobs'
+            }
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
