@@ -262,6 +262,12 @@ while($f < $finisher_count)
                             <input type="hidden" name="finisher<?php echo $fn;?>_id" id="finisher<?php echo $fn;?>_id" value="0" />
                         </div>
                     </div>
+                    <div class="form-group row mb-3">
+                        <label class="col-md-3">Purchase Order No.</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="finisher<?php echo $fn;?>_po" id="finisher<?php echo $fn;?>_po" value="<?php echo Form::value('finisher'.$fn.'_po');?>" />
+                        </div>
+                    </div>
                     <div class="form-group row ">
                         <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
                         <div class="col-lg-3 col-md-4">
