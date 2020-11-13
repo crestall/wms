@@ -408,8 +408,8 @@ while($f < $finisher_count)
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label class="col-md-3">Purchase Order No.</label>
-                                    <div class="col-md-4">
+                                    <label class="col-md-4">Purchase Order No.</label>
+                                    <div class="col-md-8">
                                         <input type="text" class="form-control" name="finisher<?php echo $fn;?>_po" id="finisher<?php echo $fn;?>_po" value="<?php echo ${'finisher'.$fn.'_po'};?>" />
                                     </div>
                                 </div>
