@@ -400,7 +400,7 @@ while($f < $finisher_count)
                                     <label class="col-md-4">Finisher Name</label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" name="finisher<?php echo $fn;?>_name" id="finisher<?php echo $fn;?>_name" value="<?php echo $finisher2_name;?>" />
-                                        <input type="hidden" name="finisher<?php echo $fn;?>_id" id="finisher<?php echo $fn;?>_id" value="<?php echo $job['finisher{$fn}_id'];?>" />
+                                        <input type="hidden" name="finisher<?php echo $fn;?>_id" id="finisher<?php echo $fn;?>_id" value="<?php echo $job['finisher'.$fn.'_id'];?>" />
                                     </div>
                                 </div>
                                 <div class="form-group row ">
