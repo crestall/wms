@@ -1199,6 +1199,7 @@ class FormController extends Controller {
                 else
                 {
                     $finisher_data['finisher_id'] = $finisher_id;
+                    $finisher_data['active'] = 1;
                     $this->productionfinisher->editFinisher($finisher_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
@@ -1231,6 +1232,7 @@ class FormController extends Controller {
                 else
                 {
                     $finisher2_data['finisher_id'] = $finisher2_id;
+                    $finisher2_data['active'] = 1;
                     $this->productionfinisher->editFinisher($finisher2_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
@@ -1263,6 +1265,7 @@ class FormController extends Controller {
                 else
                 {
                     $finisher3_data['finisher_id'] = $finisher3_id;
+                    $finisher3_data['active'] = 1;
                     $this->productionfinisher->editFinisher($finisher3_data);
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
