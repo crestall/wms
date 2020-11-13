@@ -44,7 +44,7 @@ while($f < $finisher_count)
         ${'finisher'.$fn.'_email'} = (!empty(Form::value('finisher{$fn}_email')))? Form::value('finisher{$fn}_email'):${'finisher'.$fn}['email'];
         ${'finisher'.$fn.'_phone'} = (!empty(Form::value('finisher{$fn}_phone')))? Form::value('finisher{$fn}_phone'):${'finisher'.$fn}['phone'];
         ${'finisher'.$fn.'_address'} = (!empty(Form::value('finisher{$fn}_address')))? Form::value('finisher{$fn}_address'):${'finisher'.$fn}['address'];
-        ${'finisher'.$fn.'address2'} = (!empty(Form::value('finisher{$fn}_address2')))? Form::value('finisher{$fn}_address2'):${'finisher'.$fn}['address_2'];
+        ${'finisher'.$fn.'_address2'} = (!empty(Form::value('finisher{$fn}_address2')))? Form::value('finisher{$fn}_address2'):${'finisher'.$fn}['address_2'];
         ${'finisher'.$fn.'_suburb'} = (!empty(Form::value('finisher{$fn}_suburb')))? Form::value('finisher{$fn}_suburb'):${'finisher'.$fn}['suburb'];
         ${'finisher'.$fn.'_state'} = (!empty(Form::value('finisher{$fn}_state')))? Form::value('finisher{$fn}_state'):${'finisher'.$fn}['state'];
         ${'finisher'.$fn.'_postcode'} = (!empty(Form::value('finisher{$fn}_postcode')))? Form::value('finisher{$fn}_postcode'):${'finisher'.$fn}['postcode'];
