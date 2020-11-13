@@ -178,7 +178,7 @@ $(document).ready(function() {
                 }
 			},
             date_due:{
-                required: {required:"#strict_dd:checked"};
+                required: return $("#strict_dd").prop('checked')
             }
     	},
 		messages:{
@@ -189,7 +189,7 @@ $(document).ready(function() {
 				remote: 'This Job Id is already in use. Job Ids must be unique'
 			},
             date_due:{
-                required: 'This is required for strict due date jobs'
+                required: 'This is required for strict due date '
             }
 		}
     });
