@@ -148,7 +148,7 @@ while($f < $finisher_count)
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd" <?php if($strict_dd) echo "checked";?>  />
-                                <label class="custom-control-label col-md-3" for="strict_dd">Strict Due Date</label>
+                                <label class="custom-control-label col-md-4" for="strict_dd">Strict Due Date</label>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4">Designer</label>
