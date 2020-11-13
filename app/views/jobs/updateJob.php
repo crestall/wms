@@ -368,12 +368,13 @@ while($f < $finisher_count)
 <!-------------------------------------------------     Finisher Details     ------------------------------------------------------------>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
             <?php
+            echo "<pre>",print_r($_SESSION),"</pre>";
             $f = 0;
             while($f < $finisher_count):
                 $fn = ($f > 0)? ($f + 1) : "";
                 $fwn = ucwords($nf->format($f+1));?>
                 <div class="col-sm-12 col-md-6 mb-3">
-                    <div class="card h-100 border-secondary order-card" id="finisher2details">
+                    <div class="card h-100 border-secondary order-card" id="finisher<?php echo $fn;?>details">
                         <div class="card-header bg-secondary text-white">
                             Finisher <?php echo $fwn;?> Details
                         </div>
