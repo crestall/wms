@@ -709,6 +709,14 @@ class FormController extends Controller {
                     //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
                 }
                 $this->productionjob->updateJobfinisherId($job_id, $finisher_id, $fn);
+                if($this->dataSubbed($finisher_po))
+                {
+                    $this->productionjob->updateJobFinisherPo($job_id, $finisher_po, $fn);
+                }
+                else
+                {
+                    $this->productionjob->removeFinisherPo($job_id, $fn);
+                }
                 $this->productionjob->updateExpectedDeliveryDate($job_id, $date_ed_value, $fn);
                 Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
             }
