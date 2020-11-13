@@ -178,7 +178,7 @@ $(document).ready(function() {
                 }
 			},
             date_due:{
-                required: return $("#strict_dd").prop('checked')
+                required:"#strict_dd:checked"
             }
     	},
 		messages:{
