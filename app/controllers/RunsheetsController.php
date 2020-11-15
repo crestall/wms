@@ -175,7 +175,7 @@ class RunsheetsController extends Controller
 
     public function prepareRunsheets()
     {
-        $rss = $this->runsheet->getRunsheetsForDisplay();
+        $rss = $this->runsheet->getRunsheetsForPreparation();
         $runsheets = array();
         foreach($rss as $rs)
         {
