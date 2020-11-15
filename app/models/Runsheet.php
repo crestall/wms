@@ -28,7 +28,12 @@ class Runsheet extends Model{
         return $db->queryData($q);
     }
 
-    public function getRunsheetsForDisplay($completed = false, $printed = false)
+    public function getRunsheetsForPreparation()
+    {
+        return $this->getRunsheetsForDisplay(false, false, 0);
+    }
+
+    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false)
     {
         $db = Database::openConnection();
         $q = $this->getRunsheetQuery();
@@ -47,6 +52,10 @@ class Runsheet extends Model{
         else
         {
             $q .= " AND rst.printed = 0";
+        }
+        if($driver_id !== false)
+        {
+            $q .= " AND rst.driver_id = $driver_id";
         }
         $q .= "
             ORDER BY
