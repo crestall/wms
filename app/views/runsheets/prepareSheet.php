@@ -15,7 +15,7 @@
             ?>
             <div class="row">
                 <div class="col-12">
-                    <h2>Update Runsheet for <?php echo date('D jS M', $runsheet['runsheet_day'] );?></h2>
+                    <h2>Runsheet for <?php echo date('D jS M', $runsheet['runsheet_day'] );?></h2>
                 </div>
                 <div class="col-12">
                     <form id="print_runsheet" method="post" action="/pdf/printRunsheet" target="_blank">

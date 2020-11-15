@@ -7,8 +7,8 @@
                 </div>
                 <div class="col-8">
                     <h2>No Runsheet Or Tasks Found</h2>
-                    <p>Either that runsheet id is invalid, or all tasks associated with it have been allocated and printed</p>
-                    <p><a href="/runsheets/view-runsheets">Please click here to view all runsheets to choose from</a></p>
+                    <p>Either that runsheet id is invalid, or all tasks associated with it have been allocated to a driver</p>
+                    <p><a href="/runsheets/prepare-runsheets">Please click here to view all runsheets to choose from</a></p>
                 </div>
             </div>
         </div>
