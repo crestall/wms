@@ -113,6 +113,66 @@ class RunsheetsController extends Controller
         ]);
     }
 
+    public function prepareRunsheet()
+    {
+        $runsheet = array();
+        if(!isset($this->request->params['args']['runsheet']))
+        {
+            $runsheet_id = 0;
+            $tasks = array();
+        }
+        else
+        {
+            $runsheet_id = $this->request->params['args']['runsheet'];
+            $tasks = $this->runsheet->getRunsheetDetailsById($runsheet_id);
+        }
+        //echo "TASK<pre>",print_r($tasks),"</pre>";
+        foreach($tasks as $task)
+        {
+            $runsheet['runsheet_day'] = $task['runsheet_day'];
+            $runsheet['driver_id'] = $task['driver_id'];
+            $runsheet['units'] = $task['units'];
+            if(!isset($runsheet['jobs']))
+            {
+                $runsheet['jobs'] =array();
+            }
+            if(!isset($runsheet['orders']))
+            {
+                $runsheet['orders'] =array();
+            }
+            if(!empty($task['job_id']))
+            {
+                $runsheet['jobs'][] = array(
+                    'task_id'       => $task['id'],
+                    'job_number'    => $task['job_number'],
+                    'job_id'        => $task['job_id'],
+                    'job_customer'  => $task['customer_name'],
+                    'job_suburb'    => $task['job_suburb']
+                );
+            }
+            if(!empty($task['order_number']))
+            {
+                $runsheet['orders'][] = array(
+                    'task_id'           => $task['id'],
+                    'order_number'      => $task['order_number'],
+                    'order_id'          => $task['order_id'],
+                    'order_customer'    => $task['order_customer'],
+                    'order_suburb'      => $task['order_suburb'],
+                    'order_client'      => $task['order_client_name']
+                );
+            }
+        }
+        //render the page
+        Config::setJsConfig('curPage', "prepare-runsheet");
+        Config::set('curPage', "prepare-runsheet");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/prepareSheet.php', [
+            'page_title'    =>  "Update and Prepare Runsheet For Printing",
+            'pht'           =>  ": Prepare Runsheet",
+            'runsheet_id'   =>  $runsheet_id,
+            'runsheet'      =>  $runsheet
+        ]);
+    }
+
     public function printRunsheet()
     {
         $runsheet = array();
