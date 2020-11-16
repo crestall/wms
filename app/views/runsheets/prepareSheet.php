@@ -40,6 +40,14 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="task_address_holder" id="task_<?php echo $task['task_id'];?>_address_holder">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="required form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][shipto]" id="task_<?php echo $task['task_id'];?>_shipto">
+                                                </div>
+                                            </div>
+                                        </div>
                                     <?php endforeach;?>
                                 </div>
                             </div>
