@@ -160,7 +160,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>"; die();
+        echo "POST DATA<pre>",print_r($post_data),"</pre>"; die();
 
     }
 
