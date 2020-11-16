@@ -112,6 +112,60 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="task_address_holder border border-secondary rounded p-3 bg-light" id="task_<?php echo $task['task_id'];?>_address_holder">
+                                            <div class="form-group row">
+                                                <label class="col-3">Units</label>
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['order_id'];?>][units]">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="required form-control" name="tasks[jobs][<?php echo $task['order_id'];?>][shipto]" id="task_<?php echo $task['task_id'];?>_shipto" value="<?php echo $task['job_shipto'];?>">
+                                                </div>
+                                                <?php echo Form::displayError('address');?>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label">Attention</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['order_id'];?>][attention]" id="task_<?php echo $task['task_id'];?>_attention" value="<?php echo $task['job_attention'];?>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label">Delivery Instructions</label>
+                                                <div class="col-md-6">
+                                                    <textarea class="form-control" name="tasks[jobs][<?php echo $task['order_id'];?>][deliver_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $task['job_delivery_instructions'];?></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control required" name="tasks[jobs][<?php echo $task['order_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $task['job_address'];?>" />
+                                                    <?php echo Form::displayError('address');?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3">Address Line 2</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['order_id'];?>][address2]" id="task_<?php echo $task['task_id'];?>_address2" value="<?php echo $task['job_address2'];?>" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control required" name="tasks[jobs][<?php echo $task['order_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $task['job_suburb'];?>" />
+                                                    <?php echo Form::displayError('suburb');?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control required" name="tasks[jobs][<?php echo $task['order_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $task['job_postcode'];?>" />
+                                                    <?php echo Form::displayError('postcode');?>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <?php endforeach;?>
                                 </div>
                             </div>
