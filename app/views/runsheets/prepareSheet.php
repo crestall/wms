@@ -40,6 +40,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label class="col-3">Units</label>
+                                            <div class="col-4">
+                                                <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]">
+                                            </div>
+                                        </div>
                                         <div class="task_address_holder" id="task_<?php echo $task['task_id'];?>_address_holder">
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
