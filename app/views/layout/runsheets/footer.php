@@ -54,6 +54,7 @@
                 },
                 'prepare-runsheet':{
                     init: function(){
+                        console.log('init'); 
                         $('checkbox.task').click(function(){
                             console.log('click');
                         })
