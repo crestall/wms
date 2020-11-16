@@ -117,81 +117,11 @@
                                 </div>
                             </div>
                         <?php endif;?>
-
-
-
-
-                        <div class="form-group row">
-                            <div class="col-md-2"><input type="hidden" name="task" id="task"></div>
-
-                                <div class="col-md-10 mb-3">
-                                    <div class="card h-100 border-secondary job-card">
-                                        <div class="card-header bg-secondary text-white">
-                                            Jobs To Be Included
-                                        </div>
-                                        <div class="card-body">
-                                            <?php foreach($runsheet['jobs'] as $task):?>
-                                                <div class="form-group row">
-                                                    <div class="col-12">
-                                                        <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>][include]" checked />
-                                                            <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_number'];?></span> - <?php echo $task['job_customer'];?></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-2 text-right">Units</label>
-                                                    <div class="col-3">
-                                                        <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]">
-                                                    </div>
-                                                    <label class="col-form-label" for="finisher_<?php echo $task['task_id'];?>"></label>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input finisher" id="finisher_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>][finisher]" />
-                                                        <label class="custom-control-label" for="finisher_<?php echo $task['task_id'];?>"><span class="font-weight-bold">Send To Finisher</label>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="tasks[jobs][<?php echo $task['job_id'];?>][task_id]" value="<?php echo $task['task_id'];?>">
-                                            <?php endforeach;?>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php if(count($runsheet['orders'])):?>
-                                <div class="col-md-5 mb-3">
-                                    <div class="card h-100 border-secondary job-card">
-                                        <div class="card-header bg-secondary text-white">
-                                            Orders To Be Included
-                                        </div>
-                                        <div class="card-body">
-                                            <?php foreach($runsheet['orders'] as $task):?>
-                                                <div class="form-group row">
-                                                    <div class="col-12">
-                                                        <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[orders][<?php echo $task['order_id'];?>][include]" checked />
-                                                            <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['order_number'];?></span> - <?php echo $task['order_customer']."(".$task['order_client'].")";?></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='form-group row'>
-                                                    <label class="col-3 text-right">Units</label>
-                                                    <div class="col-4">
-                                                        <input type="text" class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][units]">
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="tasks[orders][<?php echo $task['order_id'];?>][task_id]" value="<?php echo $task['task_id'];?>">
-                                            <?php endforeach;?>
-                                        </div>
-                                    </div>
-                                </div>
-                        <?php endif;?>
-                        </div>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" >
                         <input type="hidden" name="runsheet_id" id="runsheet_id" value="<?php echo $runsheet_id;?>" >
                         <div class="form-group row">
                             <div class="col-md-5 offset-md-2">
-                                <button type="submit" class="btn btn-outline-secondary" id="submitter">Print Runsheet</button><br>
-                                <span class="inst">Please save a copy if you wish to re-print this particular sheet.</span>
+                                <button type="submit" class="btn btn-outline-secondary" id="submitter">Print Runsheet</button>
                             </div>
                         </div>
                     </form>
