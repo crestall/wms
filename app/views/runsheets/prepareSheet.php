@@ -33,9 +33,9 @@
                                     <?php foreach($runsheet['jobs'] as $task):?>
                                         <div class="form-group row">
                                             <div class="col-12">
-                                                <label class="col-form-label" data-taskid="<?php echo $task['task_id'];?>" for="task_<?php echo $task['task_id'];?>"></label>
+                                                <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>][include]" checked />
+                                                    <input type="checkbox" class="custom-control-input task" data-taskid="<?php echo $task['task_id'];?>" id="task_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>][include]" checked />
                                                     <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_number'];?></span> - <?php echo $task['job_customer'];?></label>
                                                 </div>
                                             </div>
