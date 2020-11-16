@@ -19,7 +19,7 @@
                     <h2>Runsheet for <?php echo date('D jS M', $runsheet['runsheet_day'] );?></h2>
                 </div>
                 <div class="col-12">
-                    <form id="print_runsheet" method="post" action="" >
+                    <form id="print_runsheet" method="post" action="/form/procPrepareRunsheet" >
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Driver</label>
                             <div class="col-md-5">
