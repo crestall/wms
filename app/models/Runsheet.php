@@ -240,16 +240,6 @@ class Runsheet extends Model{
                 foreach($details['orders'] as $order_id)
                 {
                     $tvals['order_id'] = $order_id;
-                    $order_q = "
-                      SELECT
-                        address, address_2, suburb, state, postcode
-                      FROM
-                        orders
-                      WHERE
-                        id = $order_id
-                    ";
-                    $order_address = $db->queryRow($order_q);
-                    $tvals = array_merge($tvals, $order_address);
                     $task_id = $db->insertQuery($this->tasks_table, $tvals);
                 }
             }
