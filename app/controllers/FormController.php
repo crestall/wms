@@ -161,7 +161,8 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "JOBS<pre>",print_r($jobs),"</pre>";
+        echo "JOBS<pre>",print_r($tasks['jobs']),"</pre>";
+        echo "ORDERS<pre>",print_r($tasks['orders']),"</pre>";
         echo "POST DATA<pre>",print_r($post_data),"</pre>"; die();
 
     }
