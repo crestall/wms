@@ -74,6 +74,19 @@
                                                     <?php echo Form::displayError('address');?>
                                                 </div>
                                             </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-4">Address Line 2</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][address2]" id="task_<?php echo $task['task_id'];?>_address2" value="<?php echo $task['job_address2'];?>" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control required" name="tasks[jobs][<?php echo $task['job_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $task['job_suburb'];?>" />
+                                                    <?php echo Form::displayError('suburb');?>
+                                                </div>
+                                            </div>
                                         </div>
                                     <?php endforeach;?>
                                 </div>
