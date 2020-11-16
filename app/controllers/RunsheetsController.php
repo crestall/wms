@@ -143,30 +143,32 @@ class RunsheetsController extends Controller
             if(!empty($task['job_id']))
             {
                 $runsheet['jobs'][] = array(
-                    'task_id'       => $task['id'],
-                    'job_shipto'    => $task['job_shipto'],
-                    'job_attention' => $task['job_attention'],
-                    'job_number'    => $task['job_number'],
-                    'job_id'        => $task['job_id'],
-                    'job_customer'  => $task['customer_name'],
-                    'job_address'   => $task['job_address'],
-                    'job_address2'   => $task['job_address2'],
-                    'job_suburb'    => $task['job_suburb'],
-                    'job_postcode'   => $task['job_postcode'],
+                    'task_id'                   => $task['id'],
+                    'job_shipto'                => $task['job_shipto'],
+                    'job_attention'             => $task['job_attention'],
+                    'job_number'                => $task['job_number'],
+                    'job_id'                    => $task['job_id'],
+                    'job_customer'              => $task['customer_name'],
+                    'job_address'               => $task['job_address'],
+                    'job_address2'              => $task['job_address2'],
+                    'job_suburb'                => $task['job_suburb'],
+                    'job_postcode'              => $task['job_postcode'],
+                    'job_delivery_instructions' => $task['job_delivery_instructions']
                 );
             }
             if(!empty($task['order_number']))
             {
                 $runsheet['orders'][] = array(
-                    'task_id'           => $task['id'],
-                    'order_number'      => $task['order_number'],
-                    'order_id'          => $task['order_id'],
-                    'order_customer'    => $task['order_customer'],
-                    'order_address'     => $task['order_address'],
-                    'order_address2'     => $task['order_address2'],
-                    'order_suburb'      => $task['order_suburb'],
-                    'order_postcode'     => $task['order_postcode'],
-                    'order_client'      => $task['order_client_name']
+                    'task_id'                       => $task['id'],
+                    'order_number'                  => $task['order_number'],
+                    'order_id'                      => $task['order_id'],
+                    'order_customer'                => $task['order_customer'],
+                    'order_address'                 => $task['order_address'],
+                    'order_address2'                => $task['order_address2'],
+                    'order_suburb'                  => $task['order_suburb'],
+                    'order_postcode'                => $task['order_postcode'],
+                    'order_client'                  => $task['order_client_name'],
+                    'order_delivery_istructions'    => $task['order_delivery_instructions']
                 );
             }
         }
