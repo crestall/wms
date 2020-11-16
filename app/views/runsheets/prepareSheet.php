@@ -43,7 +43,24 @@
                                 </div>
                             </div>
                         <?php endif;?>
-
+                        <?php if(count($runsheet['orders'])):?>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Orders To Include</label>
+                                <div class="col-md-10 mb-3">
+                                    <?php foreach($runsheet['orders'] as $task):?>
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[orders][<?php echo $task['order_id'];?>][include]" checked />
+                                                    <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['order_number'];?></span> - <?php echo $task['order_customer']."(".$task['order_client'].")";?></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach;?>
+                                </div>
+                            </div>
+                        <?php endif;?>
 
 
 
