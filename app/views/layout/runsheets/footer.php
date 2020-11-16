@@ -58,7 +58,7 @@
                         $('.task').click(function(){
                             var taskid = $(this).data('taskid');
                             //console.log('taskid: '+taskid);
-                            $('div#task_'+taskid+'_address_holder').slideToggle('slow', 'linear');
+                            $('div#task_'+taskid+'_address_holder').toggle('blind', 500);
                         })
                     }
                 },
