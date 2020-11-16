@@ -54,9 +54,10 @@
                 },
                 'prepare-runsheet':{
                     init: function(){
-                        console.log('init');
+                        //console.log('init');
                         $('.task').click(function(){
-                            console.log('click');
+                            var taskid = $(this).data('taskid');
+                            console.log('taskid: '+taskid);
                         })
                     }
                 },
