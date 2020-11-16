@@ -250,7 +250,6 @@ class Runsheet extends Model{
                     ";
                     $order_address = $db->queryRow($order_q);
                     $tvals = array_merge($tvals, $order_address);
-                    print_r($tvals); die();
                     $task_id = $db->insertQuery($this->tasks_table, $tvals);
                 }
             }
