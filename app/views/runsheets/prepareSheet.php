@@ -170,7 +170,7 @@
                         <input type="hidden" name="runsheet_id" id="runsheet_id" value="<?php echo $runsheet_id;?>" >
                         <div class="form-group row">
                             <div class="col-md-5 offset-md-2">
-                                <button type="submit" class="btn btn-outline-secondary" id="submitter">Print Runsheet</button>
+                                <button type="submit" class="btn btn-outline-secondary" id="submitter">Save Updates</button>
                             </div>
                         </div>
                     </form>
