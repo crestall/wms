@@ -63,7 +63,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label">Delivery Instructions</label>
                                                 <div class="col-md-6">
-                                                    <textarea class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][deliver_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $task['job_delivery_instructions'];?></textarea>
+                                                    <textarea class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][delivery_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $task['job_delivery_instructions'];?></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -129,7 +129,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label">Delivery Instructions</label>
                                                 <div class="col-md-6">
-                                                    <textarea class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][deliver_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $task['order_delivery_instructions'];?></textarea>
+                                                    <textarea class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][delivery_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $task['order_delivery_instructions'];?></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
