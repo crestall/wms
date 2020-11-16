@@ -157,9 +157,11 @@ class FormController extends Controller {
                 foreach($value as $key => $avalue)
                 {
                     $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
                 }
             }
         }
+        echo "JOBS<pre>",print_r($jobs),"</pre>";
         echo "POST DATA<pre>",print_r($post_data),"</pre>"; die();
 
     }
