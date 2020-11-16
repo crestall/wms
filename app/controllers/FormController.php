@@ -144,6 +144,7 @@ class FormController extends Controller {
 
     public function procPrepareRunsheet()
     {
+        echo "_POST<pre>",print_r($_POST),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
