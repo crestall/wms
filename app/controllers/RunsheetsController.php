@@ -168,7 +168,7 @@ class RunsheetsController extends Controller
                     'order_suburb'                  => $task['order_suburb'],
                     'order_postcode'                => $task['order_postcode'],
                     'order_client'                  => $task['order_client_name'],
-                    'order_delivery_istructions'    => $task['order_delivery_instructions']
+                    'order_delivery_instructions'   => $task['order_delivery_instructions']
                 );
             }
         }
