@@ -59,6 +59,7 @@
                             var taskid = $(this).data('taskid');
                             //console.log('taskid: '+taskid);
                             $('div#task_'+taskid+'_address_holder').toggle('blind', 500);
+                            $('input#task_'+task_id+'_shipto, input#task_'+task_id+'_address, input#task_'+task_id+'_suburb, input#task_'+task_id+'_postcode').toggleClass('required');
                         })
                     }
                 },
