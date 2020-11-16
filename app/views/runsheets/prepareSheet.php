@@ -55,9 +55,15 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-md-3 col-form-label">Deliver To</label>
+                                                <label class="col-md-3 col-form-label">Attention</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][attention]" id="task_<?php echo $task['task_id'];?>_attention" value="<?php echo $task['job_attention'];?>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label">Delivery Instructions</label>
+                                                <div class="col-md-4">
+                                                    <textarea class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][deliver_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $task['job_delivery_instructions'];?></textarea>
                                                 </div>
                                             </div>
                                         </div>
