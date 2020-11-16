@@ -18,16 +18,39 @@
                     <h2>Runsheet for <?php echo date('D jS M', $runsheet['runsheet_day'] );?></h2>
                 </div>
                 <div class="col-12">
-                    <form id="print_runsheet" method="post" action="/pdf/printRunsheet" target="_blank">
+                    <form id="print_runsheet" method="post" action="" >
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Driver</label>
                             <div class="col-md-5">
                                 <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( $driver_id );?></select>
                             </div>
                         </div>
+                        <?php if(count($runsheet['jobs'])):?>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Jobs To Include</label>
+                                <div class="col-md-10 mb-3">
+                                    <?php foreach($runsheet['jobs'] as $task):?>
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input task" id="task_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>][include]" checked />
+                                                    <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_number'];?></span> - <?php echo $task['job_customer'];?></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach;?>
+                                </div>
+                            </div>
+                        <?php endif;?>
+
+
+
+
+
                         <div class="form-group row">
                             <div class="col-md-2"><input type="hidden" name="task" id="task"></div>
-                            <?php if(count($runsheet['jobs'])):?>
+
                                 <div class="col-md-10 mb-3">
                                     <div class="card h-100 border-secondary job-card">
                                         <div class="card-header bg-secondary text-white">
