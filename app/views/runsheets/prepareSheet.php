@@ -24,6 +24,7 @@
                             <label class="col-md-2 col-form-label">Driver</label>
                             <div class="col-md-5">
                                 <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( Form::value('driver_id') );?></select>
+                                <?php echo Form::displayError('driver_id');?>
                             </div>
                         </div>
                         <?php if(count($runsheet['jobs'])):?>
