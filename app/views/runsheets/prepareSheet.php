@@ -10,9 +10,9 @@
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_runsheet_found.php");?>
         <?php else:?>
             <?php
-            $driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
-            $units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
-            echo "<pre>",print_r($runsheet),"</pre>";
+            //$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
+            //$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
+            //echo "<pre>",print_r($runsheet),"</pre>";
             ?>
             <div class="row">
                 <div class="col-12">
@@ -23,7 +23,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Driver</label>
                             <div class="col-md-5">
-                                <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( $driver_id );?></select>
+                                <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( Form::value('driver_id') );?></select>
                             </div>
                         </div>
                         <?php if(count($runsheet['jobs'])):?>
@@ -44,7 +44,7 @@
                                             <div class="form-group row">
                                                 <label class="col-3">Units</label>
                                                 <div class="col-6">
-                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]" value="<?php echo Form::value("tasks['jobs']['".$task['job_id']."']['units']");?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
