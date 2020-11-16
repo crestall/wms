@@ -161,9 +161,16 @@ class FormController extends Controller {
                 }
             }
         }
+        Form::setError('driver_id', 'A Driver is required');
+        Session::set('value_array', $_POST);
+        Session::set('error_array', Form::getErrorArray());
+        return $this->redirector->to(PUBLIC_ROOT."runsheets/prepare-runsheet/runsheet=$runsheet_id");
         echo "JOBS<pre>",print_r($tasks['jobs']),"</pre>";
         echo "ORDERS<pre>",print_r($tasks['orders']),"</pre>";
         echo "POST DATA<pre>",print_r($post_data),"</pre>"; die();
+
+        $errors = false;
+
 
     }
 
