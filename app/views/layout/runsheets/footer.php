@@ -52,6 +52,13 @@
                         });
                     }
                 },
+                'prepare-runsheet':{
+                    init: function(){
+                        $('checkbox.task').click(function(){
+                            console.log('click');
+                        })
+                    }
+                },
                 'print-runsheet':{
                     init: function(){
                         $('.task').click(function(e){
