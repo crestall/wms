@@ -40,7 +40,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="task_address_holder border border-secondary rounded p-3 bg-light" id="task_<?php echo $task['task_id'];?>_address_holder">
                                             <div class="form-group row">
                                                 <label class="col-3">Units</label>
