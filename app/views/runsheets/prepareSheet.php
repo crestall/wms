@@ -83,8 +83,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php endif;
-                            if(count($runsheet['orders'])):?>
+                            <?php if(count($runsheet['orders'])):?>
                                 <div class="col-md-5 mb-3">
                                     <div class="card h-100 border-secondary job-card">
                                         <div class="card-header bg-secondary text-white">
