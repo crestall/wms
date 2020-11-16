@@ -93,7 +93,7 @@
                                                     <?php echo Form::displayError('postcode');?>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="tasks[orders][<?php echo $task['order_id'];?>][task_id]" value="<?php echo $task['task_id'];?>" >
+                                            <input type="hidden" name="tasks[jobs][<?php echo $task['job_id'];?>][task_id]" value="<?php echo $task['task_id'];?>" >
                                         </div>
                                     <?php endforeach;?>
                                 </div>
