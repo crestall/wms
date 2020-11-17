@@ -99,13 +99,15 @@ class Form
 
     private static function getValueRecursive($field)
     {
-
+        echo "Is Array<pre>",print_r($field),"</pre>";
         foreach($field as $key => $value)
         {
             if(array_key_exists($value, self::$values))
             {
+                echo "<p>Array key exists: $value</p>";
                 if( !is_array( self::$values[$value] ) )
                 {
+                    echo "<p>".htmlspecialchars(stripslashes(self::$values[$value]))."</p>";
                     return htmlspecialchars(stripslashes(self::$values[$value]));
                 }
             }
