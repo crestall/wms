@@ -102,10 +102,12 @@ class Form
 
         foreach($field as $key => $value)
         {
-            ++$key;
-            if( !is_array( self::$values[$value] ) )
+            if(array_key_exists($value, self::$values))
             {
-                return htmlspecialchars(stripslashes(self::$values[$value]));
+                if( !is_array( self::$values[$value] ) )
+                {
+                    return htmlspecialchars(stripslashes(self::$values[$value]));
+                }
             }
         }
         return "";
