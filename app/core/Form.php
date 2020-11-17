@@ -81,8 +81,8 @@ class Form
    */
    public static function value($field)
    {
-        //if( strpos($field, ",") !== false )
-            //return self::getValueRecursive(explode(',', $field));
+        if( strpos($field, ",") !== false )
+            return self::getValueRecursive(explode(',', $field));
         if(array_key_exists($field,self::$values))
         {
             if(is_array(self::$values[$field]))
@@ -97,19 +97,19 @@ class Form
         }
    }
 
-   private static function getValueRecursive($field)
-   {
+    private static function getValueRecursive($field)
+    {
 
-       //echo "This is an array<pre>",print_r($field),"</pre>"; die();
-       foreach($field as $key => $value)
-       {
-            if(array_key_exists($value,self::$values))
-                return htmlspecialchars(stripslashes(self::$values[$key]));
-            else
-                self::value($value);
-       }
-       return "";
-   }
+        foreach($field as $key => $value)
+        {
+            ++$key;
+            if( !is_array( self::$values[$value] ) )
+            {
+                return htmlspecialchars(stripslashes(self::$values[$value]));
+            }
+        }
+        return "";
+    }
 
    /**
     * error - Returns the error message attached to the given field.
