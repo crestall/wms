@@ -57,7 +57,7 @@ class Form
     * value - Returns the value attached to the given field.
     * @field: string   (field attribute name)
     * @returns string
-    */
+
    public static function value($field)
    {
       if(array_key_exists($field,self::$values))
@@ -66,12 +66,47 @@ class Form
         {
             return self::$values[$field];
         }
-         return htmlspecialchars(stripslashes(self::$values[$field]));
+        return htmlspecialchars(stripslashes(self::$values[$field]));
       }
       else
       {
          return "";
       }
+   }
+   */
+   /**
+    * value - Returns the value attached to the given field. Updated to cope with multidimension array values
+    * @field: mixed   (field attribute name)
+    * @returns string
+   */
+   public static function value($field)
+   {
+        if(is_array($field))
+            return self::getValueRecursive($field);
+        if(array_key_exists($field,self::$values))
+        {
+            if(is_array(self::$values[$field]))
+            {
+                return self::$values[$field];
+            }
+            return htmlspecialchars(stripslashes(self::$values[$field]));
+        }
+        else
+        {
+            return "";
+        }
+   }
+
+   private static function getValueRecursive($field)
+   {
+       foreach($field as $key => $value)
+       {
+            if(array_key_exists($key,self::$values))
+                return htmlspecialchars(stripslashes(self::$values[$key]));
+            else
+                self::getValueRecursive($value);
+       }
+       return "";
    }
 
    /**
