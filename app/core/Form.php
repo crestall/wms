@@ -108,6 +108,7 @@ class Form
         }
         if( isset(self::$values{$depth}) )
         {
+            echo "Gonna Check if ".$field[$max_key]." is a key in <pre>",print_r(self::$values{$depth}),"</pre>";
             if(array_key_exists($field[$max_key], self::$values{$depth}))
             {
                 echo "<p>Array key exists: {self::$values{$depth}}</p>";
