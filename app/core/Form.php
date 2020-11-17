@@ -106,6 +106,7 @@ class Form
             $depth .= "['".$value."']";
             $max_key = max($max_key, $key);
         }
+        var_dump($depth);
         var_dump(self::$values);
         if( isset(self::$values{$depth}) )
         {
