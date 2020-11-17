@@ -106,8 +106,8 @@ class Form
             $depth .= "[".$value."]";
             $max_key = max($max_key, $key);
         }
-        //foreach($field as $key => $value)
-        //{
+        if( isset(self::$values{$depth}) )
+        {
             if(array_key_exists($field[$max_key], self::$values{$depth}))
             {
                 echo "<p>Array key exists: {self::$values{$depth}}</p>";
@@ -118,7 +118,7 @@ class Form
                     return htmlspecialchars(stripslashes($ret));
                 //}
             }
-        //}
+        }
 
 
         return "";
