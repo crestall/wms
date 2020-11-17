@@ -32,7 +32,7 @@
                                 <label class="col-md-2 col-form-label">Jobs To Include</label>
                                 <div class="col-md-10 mb-3">
                                     <?php foreach($runsheet['jobs'] as $task):
-                                        echo "Form Values ".Form::value(["tasks"]['jobs'][$task['job_id']]['units']);?>
+                                        echo "Form Values ".Form::value("tasks['jobs'][{$task['job_id']}]['units']");?>
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
