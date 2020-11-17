@@ -1,6 +1,7 @@
 <?php
 function getFormValue($arraypath = "['tasks']['jobs']['454']['units']")
 {
+    echo "<p>".'values'.$arraypath."</p>";
     if(isset( Form::${'values'.$arraypath} ))
         return Form::${'values'.$arraypath};
     return "";
