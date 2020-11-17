@@ -12,7 +12,7 @@ function getFormValue($arraypath = "tasks,jobs,454,units")
         }
     }
     if(isset( $ptr ))
-        return $ptr;
+        return "WTF".$ptr;
     return "";
 }
 ?>
