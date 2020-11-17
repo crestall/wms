@@ -104,8 +104,6 @@ class Form
         {
             $depth .= "[".$value."]";
         }
-        $layer = self::$values{$depth};
-        //echo "Is Array<pre>",print_r($field),"</pre>";
         if(array_key_exists($value, self::$values{$depth}))
         {
             echo "<p>Array key exists: {self::$values{$depth}}</p>";
