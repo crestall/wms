@@ -100,7 +100,7 @@ class Form
    private static function getValueRecursive($field)
    {
 
-       echo "This is an array<pre>",print_r($field),"</pre>"; die();
+       //echo "This is an array<pre>",print_r($field),"</pre>"; die();
        foreach($field as $key => $value)
        {
             if(array_key_exists($key,self::$values))
