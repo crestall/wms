@@ -3,17 +3,19 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
 {
     $path = explode(',', $arraypath);
     $result = Form::$values;
+    //$max_ind = 0;
     //$ptr = "";
-    foreach($path as $key)
+    foreach($path as $ind => $key)
     {
         //$ptr = &$result;
         if(isset( $result[$key] ))
         {
             $ptr = $result[$key];
+            //$max_ind = max($max_ind, $ind);
         }
     }
-    if(isset( $ptr ) && strlen($ptr = trim($ptr)) == 0 )
-        return trim($ptr);
+    if( isset( $ptr ) )
+        return $ptr;
     return "";
 }
 ?>
