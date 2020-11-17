@@ -1,9 +1,18 @@
 <?php
-function getFormValue($arraypath = "['tasks']['jobs']['454']['units']")
+function getFormValue($arraypath = "tasks,jobs,454,units")
 {
-    echo "<p>".'values'.$arraypath."</p>";
-    if(isset( Form::${'values'.$arraypath} ))
-        return Form::${'values'.$arraypath};
+    $path = explode(',', $arraypath);
+    $result = Form::$values;
+    foreach($path as $key)
+    {
+        $ptr = &$result;
+        if(array_key_exists( $result[$key] ))
+        {
+            $ptr = $result[$key];
+        }
+    }
+    if(isset( $ptr ))
+        return $ptr;
     return "";
 }
 ?>
