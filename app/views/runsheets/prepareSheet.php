@@ -45,7 +45,7 @@
                                             <div class="form-group row">
                                                 <label class="col-3">Units</label>
                                                 <div class="col-6">
-                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]" value="<?php echo Form::$values["tasks['jobs']['".$task['job_id']."']['units']"];?>">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]" value="<?php if(Form::$values["tasks['jobs']['".$task['job_id']."']['units']"]) echo Form::$values["tasks['jobs']['".$task['job_id']."']['units']"];?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
