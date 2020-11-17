@@ -99,21 +99,24 @@ class Form
 
     private static function getValueRecursive($field)
     {
-        echo "Is Array<pre>",print_r($field),"</pre>";
+        $depth = "";
         foreach($field as $key => $value)
         {
-            if(array_key_exists($value, self::$values))
-            {
-                echo "<p>Array key exists: $value</p>";
-                if( !is_array( self::$values[$value] ) )
-                {
-                    echo "<p>".htmlspecialchars(stripslashes(self::$values[$value]))."</p>";
-                    return htmlspecialchars(stripslashes(self::$values[$value]));
-                }
-            }
-            unset($field[$key]);
-            return self::getValueRecursive($field);
+            $depth .= "[".$value."]";
         }
+
+        //echo "Is Array<pre>",print_r($field),"</pre>";
+        if(array_key_exists($value, self::$values.$depth))
+        {
+            echo "<p>Array key exists: {self::$values.$depth}</p>";
+            //if( !is_array( self::$values.$depth ) )
+            //{
+            $ret = self::$values.$depth;
+                echo "<p>".htmlspecialchars(stripslashes($ret))."</p>";
+                return htmlspecialchars(stripslashes($ret));
+            //}
+        }
+
         return "";
     }
 
