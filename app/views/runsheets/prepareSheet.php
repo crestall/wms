@@ -1,5 +1,10 @@
 <?php
-
+function getFormValue($arraypath = "['tasks']['jobs']['454']['units']")
+{
+    if(isset( Form::${'values'.$arraypath} ))
+        return Form::${'values'.$arraypath};
+    return "";
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -12,7 +17,7 @@
             <?php
             //$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
             //$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
-            //echo "Form Values<pre>",print_r(Form::$values),"</pre>";
+            echo "<p>Form Values For 454: ".getFormValue()."</p>";
             ?>
             <div class="row">
                 <div class="col-12">
@@ -45,7 +50,7 @@
                                             <div class="form-group row">
                                                 <label class="col-3">Units</label>
                                                 <div class="col-6">
-                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]" value="<?php if(isset(Form::$values["tasks"]['jobs'][$task['job_id']]['units'])) echo Form::$values["tasks"]['jobs'][$task['job_id']]['units'];?> ">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]" value="<?php ;?> ">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
