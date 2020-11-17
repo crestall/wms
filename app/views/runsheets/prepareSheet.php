@@ -11,8 +11,8 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
             $ptr = $result[$key];
         }
     }
-    if(isset( $ptr ))
-        return "WTF".$ptr;
+    if(isset( $ptr ) && strlen($ptr = trim($ptr)) == 0 )
+        return trim($ptr);
     return "";
 }
 ?>
