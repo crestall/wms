@@ -6,7 +6,7 @@ function getFormValue($arraypath = "tasks,jobs,454,units")
     foreach($path as $key)
     {
         $ptr = &$result;
-        if(array_key_exists( $result[$key] ))
+        if(isset( $result[$key] ))
         {
             $ptr = $result[$key];
         }
