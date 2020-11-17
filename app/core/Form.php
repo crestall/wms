@@ -103,7 +103,7 @@ class Form
         $max_key = 0;
         foreach($field as $key => $value)
         {
-            $depth .= "[".$value."]";
+            $depth .= "['".$value."']";
             $max_key = max($max_key, $key);
         }
         var_dump($depth);
