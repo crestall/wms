@@ -81,8 +81,8 @@ class Form
    */
    public static function value($field)
    {
-        if( strpos($field, ",") !== false )
-            return self::getValueRecursive(explode(',', $field));
+        //if( strpos($field, ",") !== false )
+            //return self::getValueRecursive(explode(',', $field));
         if(array_key_exists($field,self::$values))
         {
             if(is_array(self::$values[$field]))
@@ -103,10 +103,10 @@ class Form
        //echo "This is an array<pre>",print_r($field),"</pre>"; die();
        foreach($field as $key => $value)
        {
-            if(array_key_exists($key,self::$values))
+            if(array_key_exists($value,self::$values))
                 return htmlspecialchars(stripslashes(self::$values[$key]));
             else
-                self::getValueRecursive($value);
+                self::value($value);
        }
        return "";
    }
