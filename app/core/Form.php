@@ -111,6 +111,8 @@ class Form
                     return htmlspecialchars(stripslashes(self::$values[$value]));
                 }
             }
+            unset($field[$key]);
+            return self::getValueRecursive($field);
         }
         return "";
     }
