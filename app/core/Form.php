@@ -100,20 +100,26 @@ class Form
     private static function getValueRecursive($field)
     {
         $depth = "";
+        $max_key = 0;
         foreach($field as $key => $value)
         {
             $depth .= "[".$value."]";
+            $max_key = max($max_key, $key);
         }
-        if(array_key_exists($value, self::$values{$depth}))
-        {
-            echo "<p>Array key exists: {self::$values{$depth}}</p>";
-            //if( !is_array( self::$values.$depth ) )
-            //{
-            $ret = self::$values{$depth};
-                echo "<p>".htmlspecialchars(stripslashes($ret))."</p>";
-                return htmlspecialchars(stripslashes($ret));
-            //}
-        }
+        //foreach($field as $key => $value)
+        //{
+            if(array_key_exists($field[$max_key], self::$values{$depth}))
+            {
+                echo "<p>Array key exists: {self::$values{$depth}}</p>";
+                //if( !is_array( self::$values.$depth ) )
+                //{
+                $ret = self::$values{$depth};
+                    echo "<p>".htmlspecialchars(stripslashes($ret))."</p>";
+                    return htmlspecialchars(stripslashes($ret));
+                //}
+            }
+        //}
+
 
         return "";
     }
