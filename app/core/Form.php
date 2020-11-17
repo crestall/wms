@@ -57,7 +57,7 @@ class Form
     * value - Returns the value attached to the given field.
     * @field: string   (field attribute name)
     * @returns string
-
+    */
    public static function value($field)
    {
       if(array_key_exists($field,self::$values))
@@ -73,59 +73,7 @@ class Form
          return "";
       }
    }
-   */
-   /**
-    * value - Returns the value attached to the given field. Updated to cope with multidimension array values
-    * @field: mixed   (field attribute name)
-    * @returns string
-   */
-   public static function value($field)
-   {
-        if( strpos($field, ",") !== false )
-            return self::getValueRecursive(explode(',', $field));
-        if(array_key_exists($field,self::$values))
-        {
-            if(is_array(self::$values[$field]))
-            {
-                return self::$values[$field];
-            }
-            return htmlspecialchars(stripslashes(self::$values[$field]));
-        }
-        else
-        {
-            return "";
-        }
-   }
 
-    private static function getValueRecursive($field)
-    {
-        $depth = "";
-        $max_key = 0;
-        foreach($field as $key => $value)
-        {
-            $depth .= "['".$value."']";
-            $max_key = max($max_key, $key);
-        }
-        var_dump($depth);
-        var_dump(self::$values);
-        if( isset(self::$values{$depth}) )
-        {
-            echo "Gonna Check if ".$field[$max_key]." is a key in <pre>",print_r(self::$values{$depth}),"</pre>";
-            if(array_key_exists($field[$max_key], self::$values{$depth}))
-            {
-                echo "<p>Array key exists: {self::$values{$depth}}</p>";
-                //if( !is_array( self::$values.$depth ) )
-                //{
-                $ret = self::$values{$depth};
-                    echo "<p>".htmlspecialchars(stripslashes($ret))."</p>";
-                    return htmlspecialchars(stripslashes($ret));
-                //}
-            }
-        }
-
-
-        return "";
-    }
 
    /**
     * error - Returns the error message attached to the given field.
