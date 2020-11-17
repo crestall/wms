@@ -12,7 +12,7 @@
             <?php
             //$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
             //$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
-            echo "Form Values<pre>",print_r(Form::$values),"</pre>";
+            //echo "Form Values<pre>",print_r(Form::$values),"</pre>";
             ?>
             <div class="row">
                 <div class="col-12">
@@ -31,8 +31,7 @@
                             <div class="form-group row">
                                 <label class="col-md-2 col-form-label">Jobs To Include</label>
                                 <div class="col-md-10 mb-3">
-                                    <?php foreach($runsheet['jobs'] as $task):
-                                        echo "Form Values ".Form::value("tasks,jobs,{$task['job_id']},units");?>
+                                    <?php foreach($runsheet['jobs'] as $task): ?>
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
