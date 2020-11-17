@@ -3,9 +3,10 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
 {
     $path = explode(',', $arraypath);
     $result = Form::$values;
+    //$ptr = "";
     foreach($path as $key)
     {
-        $ptr = &$result;
+        //$ptr = &$result;
         if(isset( $result[$key] ))
         {
             $ptr = $result[$key];
