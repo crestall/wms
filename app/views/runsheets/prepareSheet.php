@@ -5,9 +5,9 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
     $result = Form::$values;
     //$max_ind = 0;
     //$ptr = "";
+    $ptr = &$result;
     foreach($path as $ind => $key)
     {
-        //$ptr = &$result;
         if(isset( $result[$key] ))
         {
             $ptr = $result[$key];
