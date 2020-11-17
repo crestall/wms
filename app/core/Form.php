@@ -106,7 +106,7 @@ class Form
             $depth .= "[".$value."]";
             $max_key = max($max_key, $key);
         }
-        var_dump(self::$values{$depth);
+        var_dump($depth);
         if( isset(self::$values{$depth}) )
         {
             echo "Gonna Check if ".$field[$max_key]." is a key in <pre>",print_r(self::$values{$depth}),"</pre>";
