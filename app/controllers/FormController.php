@@ -177,7 +177,35 @@ class FormController extends Controller {
                 {
                     $error = false;
                 }
-                //Form::setError('address_'.$task_id, 'Test the Error');
+                if( !$this->dataSubbed($jd['address']) )
+                {
+                    Form::setError('address_'.$task_id, 'An address is required');
+                }
+                if( !$this->dataSubbed($jd['suburb']) )
+                {
+                    Form::setError('suburb_'.$task_id, 'A suburb is required');
+                }
+                if( !$this->dataSubbed($jd['postcode']) )
+                {
+                    Form::setError('postcode_'.$task_id, 'A postcode is required');
+                }
+                $aResponse = $this->Eparcel->ValidateSuburb($jd['suburb'], 'VIC', str_pad($jd['postcode'],4,'0',STR_PAD_LEFT));
+                $error_string = "";
+                if(isset($aResponse['errors']))
+                {
+                    foreach($aResponse['errors'] as $e)
+                    {
+                        $error_string .= $e['message']." ";
+                    }
+                }
+                elseif($aResponse['found'] === false)
+                {
+                    $error_string .= "Postcode does not match suburb or state";
+                }
+                if(strlen($error_string))
+                {
+                    Form::setError('postcode_'.$task_id, $error_string);
+                }
             }
         }
         if(count($tasks['orders']))
