@@ -128,13 +128,15 @@
                                         $address2 = (!empty(Form::value('tasks,orders,'.$task['order_id'].',address2')))? Form::value('tasks,orders,'.$task['order_id'].',address2') : $task['order_address2'];
                                         $suburb = (!empty(Form::value('tasks,orders,'.$task['order_id'].',suburb')))? Form::value('tasks,orders,'.$task['order_id'].',suburb') : $task['order_suburb'];
                                         $postcode = (!empty(Form::value('tasks,orders,'.$task['order_id'].',postcode')))? Form::value('tasks,orders,'.$task['order_id'].',postcode') : $task['order_postcode'];
+                                        $head_string = "<span class='font-weight-bold'>".$task['order_number']."</span> - ".$task['order_customer']."(".$task['order_client'].")";
+                                        $head_string .= (empty($task['client_order_id']))? "" : " - ".$task['client_order_id'];
                                         ?>
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input task" data-taskid="<?php echo $task['task_id'];?>" id="task_<?php echo $task['task_id'];?>" name="tasks[orders][<?php echo $task['order_id'];?>][include]" <?php if(!empty(Form::value('tasks,orders,'.$task['order_id'].',include'))) echo "checked";?> />
-                                                    <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['order_number'];?></span> - <?php echo $task['order_customer']."(".$task['order_client'].")";?></label>
+                                                    <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><?php echo $headstring;?></label>
                                                 </div>
                                             </div>
                                         </div>
