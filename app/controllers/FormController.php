@@ -190,7 +190,7 @@ class FormController extends Controller {
         }
         if($error)
         {
-            Form::setError('no_tasks_error', 'At least one job or order needs to be selected');
+            Form::setError('general', 'At least one job or order needs to be selected');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
