@@ -295,7 +295,12 @@ class FormController extends Controller {
             //echo "JOBS<pre>",print_r($tasks['jobs']),"</pre>";
             //echo "ORDERS<pre>",print_r($tasks['orders']),"</pre>";
             //echo "POST DATA<pre>",print_r($post_data),"</pre>"; //die();
-            echo "WILL SAVE THE FOLLOWING<pre>",print_r($tts),"</pre>"; die();
+            //echo "WILL SAVE THE FOLLOWING<pre>",print_r($tts),"</pre>"; die();
+            foreach($tts as $details)
+            {
+                $this->runsheet->updateTask($details);
+            }
+            Session::set('feedback', "<h2>Those details have been updated.</h2><p><a class='btn btn-sm btn-outline-fsg' href='/pdf/print-runsheet/runsheet=".$runsheet_id."'>Print Runsheet</a></p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."runsheets/prepare-runsheet/runsheet=$runsheet_id");
     }
