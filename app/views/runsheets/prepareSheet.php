@@ -40,6 +40,7 @@
                                 <div class="col-md-10 mb-3">
                                     <?php foreach($runsheet['jobs'] as $task):
                                         $shipto = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',shipto')))? Form::value('tasks,jobs,'.$task['job_id'].',shipto') : $task['job_shipto'];
+                                        $units = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',units')))? Form::value('tasks,jobs,'.$task['job_id'].',units') : $task['job_units'];
                                         ?>
                                         <div class="form-group row">
                                             <div class="col-12">
@@ -54,7 +55,7 @@
                                             <div class="form-group row">
                                                 <label class="col-3">Units</label>
                                                 <div class="col-6">
-                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]" value="<?php echo Form::value("tasks,jobs,".$task['job_id'].",units");?>">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]" value="<?php echo $units;?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
