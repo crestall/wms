@@ -13,7 +13,7 @@
             //$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
             //$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
             //echo "<p>Form Values For 381: ".getFormValue()."</p>";
-            echo "<pre>",print_r($runsheet),"</pre>";
+            //echo "<pre>",print_r($runsheet),"</pre>";
             ?>
             <div class="row">
                 <div class="col-12">
@@ -41,6 +41,12 @@
                                     <?php foreach($runsheet['jobs'] as $task):
                                         $shipto = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',shipto')))? Form::value('tasks,jobs,'.$task['job_id'].',shipto') : $task['job_shipto'];
                                         $units = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',units')))? Form::value('tasks,jobs,'.$task['job_id'].',units') : $task['job_units'];
+                                        $attention = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',attention')))? Form::value('tasks,jobs,'.$task['job_id'].',attention') : $task['job_attention'];
+                                        $delivery_instructions = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',delivery_instructions')))? Form::value('tasks,jobs,'.$task['job_id'].',delivery_instructions') : $task['job_delivery_instructions'];
+                                        $address = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',address')))? Form::value('tasks,jobs,'.$task['job_id'].',address') : $task['job_address'];
+                                        $address2 = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',address2')))? Form::value('tasks,jobs,'.$task['job_id'].',address2') : $task['job_address2'];
+                                        $suburb = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',suburb')))? Form::value('tasks,jobs,'.$task['job_id'].',suburb') : $task['job_suburb'];
+                                        $postcode = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',postcode')))? Form::value('tasks,jobs,'.$task['job_id'].',postcode') : $task['job_postcode'];
                                         ?>
                                         <div class="form-group row">
                                             <div class="col-12">
@@ -68,39 +74,39 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label">Attention</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][attention]" id="task_<?php echo $task['task_id'];?>_attention" value="<?php echo Form::value("tasks,jobs,".$task['job_id'].",attention");?>">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][attention]" id="task_<?php echo $task['task_id'];?>_attention" value="<?php echo $attenstion?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label">Delivery Instructions</label>
                                                 <div class="col-md-6">
-                                                    <textarea class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][delivery_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $task['job_delivery_instructions'];?></textarea>
+                                                    <textarea class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][delivery_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $delivery_instructions;?></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required address_ac" name="tasks[jobs][<?php echo $task['job_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $task['job_address'];?>" />
+                                                    <input type="text" class="form-control required address_ac" name="tasks[jobs][<?php echo $task['job_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $address;?>" />
                                                     <?php echo Form::displayError('address');?>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3">Address Line 2</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][address2]" id="task_<?php echo $task['task_id'];?>_address2" value="<?php echo $task['job_address2'];?>" />
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][address2]" id="task_<?php echo $task['task_id'];?>_address2" value="<?php echo $address2;?>" />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required suburb_ac" name="tasks[jobs][<?php echo $task['job_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $task['job_suburb'];?>" />
+                                                    <input type="text" class="form-control required suburb_ac" name="tasks[jobs][<?php echo $task['job_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $suburb;?>" />
                                                     <?php echo Form::displayError('suburb');?>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required postcode_ac" name="tasks[jobs][<?php echo $task['job_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $task['job_postcode'];?>" />
+                                                    <input type="text" class="form-control required postcode_ac" name="tasks[jobs][<?php echo $task['job_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $postcode;?>" />
                                                     <?php echo Form::displayError('postcode');?>
                                                 </div>
                                             </div>
