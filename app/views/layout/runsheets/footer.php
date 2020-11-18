@@ -68,7 +68,7 @@
                             }
                         });
                         //Address Auto Completers
-                        $('input.address_ac').each(funcion(i,e){
+                        $('input.address_ac').each(function(i,e){
                             var task_id = $(this).prop('id').split("_")[1];
                             console.log('ac task id: '+task_id);
                         });
