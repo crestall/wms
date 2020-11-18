@@ -28,12 +28,12 @@ class Runsheet extends Model{
         return $db->queryData($q);
     }
 
-    public function getRunsheetsForPreparation()
+    public function getRunsheetsForPreparation($runsheet_id = false)
     {
-        return $this->getRunsheetsForDisplay(false, false, 0);
+        return $this->getRunsheetsForDisplay(false, false, 0, $runsheet_id);
     }
 
-    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false)
+    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false)
     {
         $db = Database::openConnection();
         $q = $this->getRunsheetQuery();
@@ -56,6 +56,10 @@ class Runsheet extends Model{
         if($driver_id !== false)
         {
             $q .= " AND rst.driver_id = $driver_id";
+        }
+        if($runsheet_id !== false)
+        {
+            $q .= " AND rs.id = $runsheet_id";
         }
         $q .= "
             ORDER BY
