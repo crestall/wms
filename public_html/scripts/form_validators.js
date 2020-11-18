@@ -117,28 +117,13 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $("form#print_runsheet").validate({
-        ignore: {
-            task: true
-        },
+    $("form#prepare_runsheet").validate({
         rules: {
             driver_id:{
                 notNone: true
-            },
-            task: {
-               required: function (element) {
-                    var boxes = $('.task');
-                    if (boxes.filter(':checked').length == 0) {
-                        return true;
-                    }
-                    return false;
-                }
             }
         },
         messages: {
-            task: {
-                required: "Please select at least one job or order to add to the runsheet."
-            },
             driver_id:{
                 notNone: "A driver is required"
             }
