@@ -83,6 +83,12 @@
                                 $(this).valid();
                             })
                         });
+                        $('form#prepare_runsheet').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Saving Runsheet Data...</h1></div>' });
+                            }
+                        })
                     }
                 },
                 'print-runsheet':{
