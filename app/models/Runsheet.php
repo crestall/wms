@@ -149,6 +149,23 @@ class Runsheet extends Model{
        return $db->query($query, $params);
     }
 
+    public function updateTask($details)
+    {
+       $db = Database::openConnection();
+       $runsheet_id = $details['runsheet_id'];
+       unset($details['runsheet_id']);
+       $task_id = $details['task_id'];
+       unset($details['task_id']);
+       //record runsheet update
+       $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
+        $db->updateDatabaseFields($this->tasks_table, $details, $task_id);
+        return true;
+    }
+
     public function removeTasks($task_ids, $runsheet_id)
     {
        $db = Database::openConnection();
