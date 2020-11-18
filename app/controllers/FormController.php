@@ -168,6 +168,7 @@ class FormController extends Controller {
             Form::setError('driver_id', 'A Driver is required');
         }
         $error = true;
+        $tts = array();
         if(count($tasks['jobs']))
         {
             foreach($tasks['jobs'] as $job_id => $jd)
@@ -205,6 +206,19 @@ class FormController extends Controller {
                     {
                         Form::setError('postcode_'.$task_id, $error_string);
                     }
+                    if(Form::$num_errors == 0)
+                    {
+                        $array = array(
+                            'task_id'   => $task_id,
+                            'driver_id' => $driver_id,
+                            'address'   => $jd['address'],
+                            'suburb'    => $jd['suburb'],
+                            'postcode'  => $jd['postcode']
+                        );
+                        if($this->dataSubbed($jd['address2']))
+                            $array['address_2'] = $jd['address2'];
+                        $tts[] = $array;
+                    }
                 }
             }
         }
@@ -229,9 +243,10 @@ class FormController extends Controller {
         }
         else
         {
-            echo "JOBS<pre>",print_r($tasks['jobs']),"</pre>";
-            echo "ORDERS<pre>",print_r($tasks['orders']),"</pre>";
-            echo "POST DATA<pre>",print_r($post_data),"</pre>"; die();
+            //echo "JOBS<pre>",print_r($tasks['jobs']),"</pre>";
+            //echo "ORDERS<pre>",print_r($tasks['orders']),"</pre>";
+            //echo "POST DATA<pre>",print_r($post_data),"</pre>"; die();
+            echo "WILL SAVE THE FOLLOWING<pre>",print_r($tts),"</pre>"; die();
         }
         return $this->redirector->to(PUBLIC_ROOT."runsheets/prepare-runsheet/runsheet=$runsheet_id");
     }
