@@ -15,8 +15,8 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
         }
     }
     //echo "<p>in the function: ".var_dump($ptr)."</p>";
-    if( array_key_exists( $key, $ptr ) )
-        return htmlspecialchars(stripslashes($ptr[$key]));
+    if( is_string( $ptr ) )
+        return htmlspecialchars(stripslashes($ptr));
     return "";
 }
 ?>
