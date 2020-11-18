@@ -320,6 +320,12 @@ class RunsheetsController extends Controller
         ]);
     }
 
+    public function viewRunsheets()
+    {
+        $rss = $this->runsheet->getViewRunsheets();
+        echo "<pre>",print_r($rss),"</pre>";die();
+    }
+
     public function updateJob()
     {
         if(!isset($this->request->params['args']['job']))
