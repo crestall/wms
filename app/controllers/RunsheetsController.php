@@ -124,7 +124,8 @@ class RunsheetsController extends Controller
         else
         {
             $runsheet_id = $this->request->params['args']['runsheet'];
-            $tasks = $this->runsheet->getRunsheetDetailsById($runsheet_id);
+            //$tasks = $this->runsheet->getRunsheetDetailsById($runsheet_id);
+            $tasks = $this->runsheet->getRunsheetsForPreparation($runsheet_id);
         }
         //echo "TASK<pre>",print_r($tasks),"</pre>";
         foreach($tasks as $task)
