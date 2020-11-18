@@ -67,6 +67,11 @@
                                 $(this).change();
                             }
                         });
+                        //Address Auto Completers
+                        $('input.address_ac').each(funcion(i,e){
+                            var task_id = $(this).prop('id').split("_")[1];
+                            console.log('ac task id: '+task_id);
+                        });
                     }
                 },
                 'print-runsheet':{

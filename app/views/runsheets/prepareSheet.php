@@ -76,7 +76,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required" name="tasks[jobs][<?php echo $task['job_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $task['job_address'];?>" />
+                                                    <input type="text" class="form-control required address_ac" name="tasks[jobs][<?php echo $task['job_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $task['job_address'];?>" />
                                                     <?php echo Form::displayError('address');?>
                                                 </div>
                                             </div>
@@ -143,7 +143,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required" name="tasks[orders][<?php echo $task['order_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $task['order_address'];?>" />
+                                                    <input type="text" class="form-control required address_ac" name="tasks[orders][<?php echo $task['order_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $task['order_address'];?>" />
                                                     <?php echo Form::displayError('address');?>
                                                 </div>
                                             </div>
