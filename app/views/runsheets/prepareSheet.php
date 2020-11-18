@@ -181,7 +181,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required postcode_ac" name="tasks[orders][<?php echo $task['order_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $poscode;?>" />
+                                                    <input type="text" class="form-control required postcode_ac" name="tasks[orders][<?php echo $task['order_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $postcode;?>" />
                                                     <?php echo Form::displayError('postcode');?>
                                                 </div>
                                             </div>
