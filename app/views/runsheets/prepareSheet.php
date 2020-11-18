@@ -42,8 +42,8 @@
                                             <div class="col-12">
                                                 <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input task" data-taskid="<?php echo $task['task_id'];?>" id="task_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>][include]" checked />
-                                                    <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_number'];?></span> - <?php echo $task['job_customer'];?> - <?php echo Form::value('tasks,jobs,'.$task['job_id'].',include');?></label>
+                                                    <input type="checkbox" class="custom-control-input task" data-taskid="<?php echo $task['task_id'];?>" id="task_<?php echo $task['task_id'];?>" name="tasks[jobs][<?php echo $task['job_id'];?>][include]" <?php if(!empty(Form::value('tasks,jobs,'.$task['job_id'].',include'))) echo "checked";?> />
+                                                    <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><span class="font-weight-bold"><?php echo $task['job_number'];?></span> - <?php echo $task['job_customer'];?></label>
                                                 </div>
                                             </div>
                                         </div>
