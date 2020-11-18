@@ -163,7 +163,7 @@ class FormController extends Controller {
             }
         }
         //echo "_POST<pre>",print_r($post_data),"</pre>"; die();
-        if($driver_id != 0)
+        if($driver_id == 0)
         {
             Form::setError('driver_id', 'A Driver is required');
         }
