@@ -14,8 +14,9 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
             //$max_ind = max($max_ind, $ind);
         }
     }
-    //echo "<p>in the function: ".var_dump($ptr)."</p>";
+
     if( is_string( $ptr ) )
+        echo "<p>in the function: ".$ptr."</p>";
         return htmlspecialchars(stripslashes($ptr));
     return "";
 }
