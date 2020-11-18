@@ -89,14 +89,14 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required" name="tasks[jobs][<?php echo $task['job_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $task['job_suburb'];?>" />
+                                                    <input type="text" class="form-control required suburb_ac" name="tasks[jobs][<?php echo $task['job_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $task['job_suburb'];?>" />
                                                     <?php echo Form::displayError('suburb');?>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required" name="tasks[jobs][<?php echo $task['job_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $task['job_postcode'];?>" />
+                                                    <input type="text" class="form-control required postcode_ac" name="tasks[jobs][<?php echo $task['job_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $task['job_postcode'];?>" />
                                                     <?php echo Form::displayError('postcode');?>
                                                 </div>
                                             </div>
@@ -156,14 +156,14 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required" name="tasks[orders][<?php echo $task['order_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $task['order_suburb'];?>" />
+                                                    <input type="text" class="form-control required suburb_ac" name="tasks[orders][<?php echo $task['order_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $task['order_suburb'];?>" />
                                                     <?php echo Form::displayError('suburb');?>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required" name="tasks[orders][<?php echo $task['order_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $task['order_postcode'];?>" />
+                                                    <input type="text" class="form-control required postcode_ac" name="tasks[orders][<?php echo $task['order_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $task['order_postcode'];?>" />
                                                     <?php echo Form::displayError('postcode');?>
                                                 </div>
                                             </div>
