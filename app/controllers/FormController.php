@@ -244,7 +244,7 @@ class FormController extends Controller {
                     {
                         Form::setError('postcode_'.$task_id, 'A postcode is required');
                     }
-                    $aResponse = $this->Eparcel->ValidateSuburb($jd['suburb'], 'VIC', str_pad($jd['postcode'],4,'0',STR_PAD_LEFT));
+                    $aResponse = $this->Eparcel->ValidateSuburb($od['suburb'], 'VIC', str_pad($od['postcode'],4,'0',STR_PAD_LEFT));
                     $error_string = "";
                     if(isset($aResponse['errors']))
                     {
