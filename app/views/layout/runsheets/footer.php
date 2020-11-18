@@ -73,6 +73,11 @@
                             //console.log('ac task id: '+task_id);
                             autoCompleter.addressAutoComplete($(this), 'task_'+task_id+'_');
                         });
+                        $('input.address_ac, input.suburb_ac, input.postcode_ac').each(function(i,e){
+                            $(this).change(function(e){
+                                $(this).valid();
+                            })
+                        });
                     }
                 },
                 'print-runsheet':{
