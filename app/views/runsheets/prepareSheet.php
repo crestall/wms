@@ -74,7 +74,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label">Attention</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][attention]" id="task_<?php echo $task['task_id'];?>_attention" value="<?php echo $attenstion?>">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][attention]" id="task_<?php echo $task['task_id'];?>_attention" value="<?php echo $attention?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
