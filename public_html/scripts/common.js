@@ -576,10 +576,10 @@ var autoCompleter = {
             	});
             },
             select: function(event, ui) {
-                $('#'+prefix+'state').val(ui.item.state).valid();
-                $('#'+prefix+'suburb').val(ui.item.suburb).valid();
-                $('#'+prefix+'postcode').val(ui.item.postcode).valid();
-                $('#'+prefix+'country').val('AU').valid();
+                $('#'+prefix+'state').val(ui.item.state).change();
+                $('#'+prefix+'suburb').val(ui.item.suburb).change();
+                $('#'+prefix+'postcode').val(ui.item.postcode).change();
+                $('#'+prefix+'country').val('AU').change();
                 return false;
             },
             change: function (event, ui) {
