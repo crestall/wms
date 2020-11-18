@@ -33,7 +33,12 @@ class Runsheet extends Model{
         return $this->getRunsheetsForDisplay(false, false, 0, $runsheet_id);
     }
 
-    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false)
+    public function getViewRunsheets($runsheet_id = false)
+    {
+        return $this->getRunsheetsForDisplay(false, false, false, $runsheet_id, true);
+    }
+
+    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false)
     {
         $db = Database::openConnection();
         $q = $this->getRunsheetQuery();
@@ -56,6 +61,10 @@ class Runsheet extends Model{
         if($driver_id !== false)
         {
             $q .= " AND rst.driver_id = $driver_id";
+        }
+        elseif($driver_set)
+        {
+            $q .= " AND rst.driver_id != 0";
         }
         if($runsheet_id !== false)
         {
