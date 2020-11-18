@@ -8,15 +8,15 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
     $ptr = &$result;
     foreach($path as $ind => $key)
     {
-        if(isset( $result[$key] ))
+        if(array_key_exists( $key, $ptr ))
         {
             $ptr = $result[$key];
             //$max_ind = max($max_ind, $ind);
         }
     }
     //echo "<p>in the function: ".var_dump($ptr)."</p>";
-    if( isset( $ptr ) )
-        return $ptr;
+    if( array_key_exists( $key, $ptr ) )
+        return htmlspecialchars(stripslashes($ptr[$key]));
     return "";
 }
 ?>
