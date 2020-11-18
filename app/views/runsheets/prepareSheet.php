@@ -1,6 +1,7 @@
 <?php
 function getFormValue($arraypath = "tasks,jobs,381,units")
 {
+    echo "<p>".$arraypath."</p>";
     $path = explode(',', $arraypath);
     $result = Form::$values;
     //$max_ind = 0;
