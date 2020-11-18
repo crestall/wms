@@ -69,7 +69,7 @@
                                                 <div class="col-md-6">
                                                     <input type="text" class="required form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][shipto]" id="task_<?php echo $task['task_id'];?>_shipto" value="<?php echo $shipto;?>">
                                                 </div>
-                                                <?php echo Form::displayError('address');?>
+                                                <?php echo Form::displayError('address_'.$task['task_id']);?>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label">Attention</label>
