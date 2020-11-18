@@ -55,7 +55,7 @@
                 'prepare-runsheet':{
                     init: function(){
                         //console.log('init');
-                        $('.task').click(function(){
+                        $('.task').change(function(){
                             var taskid = $(this).data('taskid');
                             //console.log('taskid: '+taskid);
                             $('div#task_'+taskid+'_address_holder').toggle('blind', 500);
@@ -64,8 +64,7 @@
                         $('.task').each(function(i,e){
                             if(!$(this).prop('checked'))
                             {
-                                $(this).click();
-                                $(this).prop('checked', 'false');
+                                $(this).change();
                             }
                         });
                     }
