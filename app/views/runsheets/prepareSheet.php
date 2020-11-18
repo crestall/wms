@@ -16,8 +16,10 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
     }
 
     if( is_string( $ptr ) )
+    {
         echo "<p>in the function: ".$ptr."</p>";
         return htmlspecialchars(stripslashes($ptr));
+    }
     return "";
 }
 ?>
