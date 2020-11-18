@@ -131,7 +131,6 @@ class RunsheetsController extends Controller
         {
             $runsheet['runsheet_day'] = $task['runsheet_day'];
             $runsheet['driver_id'] = $task['driver_id'];
-            $runsheet['units'] = $task['units'];
             if(!isset($runsheet['jobs']))
             {
                 $runsheet['jobs'] =array();
@@ -145,6 +144,7 @@ class RunsheetsController extends Controller
                 $runsheet['jobs'][] = array(
                     'task_id'                   => $task['id'],
                     'job_shipto'                => $task['job_shipto'],
+                    'job_units'                 => $task['units'],
                     'job_attention'             => $task['job_attention'],
                     'job_number'                => $task['job_number'],
                     'job_id'                    => $task['job_id'],
@@ -162,6 +162,7 @@ class RunsheetsController extends Controller
                     'task_id'                       => $task['id'],
                     'order_number'                  => $task['order_number'],
                     'order_id'                      => $task['order_id'],
+                    'order_units'                   => $task['units'],
                     'order_customer'                => $task['order_customer'],
                     'order_address'                 => $task['order_address'],
                     'order_address2'                => $task['order_address2'],
