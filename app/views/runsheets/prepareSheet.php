@@ -11,7 +11,6 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
             $ptr = $result[$key];
         }
     }
-
     if( is_string( $ptr ) )
     {
         return htmlspecialchars(stripslashes($ptr));
@@ -136,7 +135,7 @@ function getFormValue($arraypath = "tasks,jobs,381,units")
                                             <div class="form-group row">
                                                 <label class="col-3">Units</label>
                                                 <div class="col-6">
-                                                    <input type="text" class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][units]" value="<?php echo Form::value("tasks['orders']['".$task['order_id']."']['units']");?>">
+                                                    <input type="text" class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][units]" value="<?php echo getFormValue("tasks,orders,".$task['order_id'].",units");?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
