@@ -65,6 +65,7 @@
                             if(!$(this).prop('checked'))
                             {
                                 $(this).click();
+                                $(this).prop('checked', 'false');
                             }
                         });
                     }
