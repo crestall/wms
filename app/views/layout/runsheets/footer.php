@@ -60,7 +60,13 @@
                             //console.log('taskid: '+taskid);
                             $('div#task_'+taskid+'_address_holder').toggle('blind', 500);
                             $('input#task_'+taskid+'_shipto, input#task_'+taskid+'_address, input#task_'+taskid+'_suburb, input#task_'+taskid+'_postcode').toggleClass('required');
-                        })
+                        });
+                        $('.task').each(function(i,e){
+                            if(!$(this).prop('checked'))
+                            {
+                                $(this).click();
+                            }
+                        });
                     }
                 },
                 'print-runsheet':{
