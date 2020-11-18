@@ -307,7 +307,7 @@ class Runsheet extends Model{
                 d.name AS driver_name,
                 pj.job_id AS job_number,pj.delivery_instructions AS job_delivery_instructions, pj.description, pj.ship_to AS job_shipto, pj.attention AS job_attention, pj.address AS job_address, pj.address_2 AS job_address2, pj.suburb AS job_suburb, pj.postcode AS job_postcode,
                 pc.name AS customer_name,
-                o.ship_to AS order_customer, o.order_number,o.instructions AS order_delivery_instructions, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
+                o.ship_to AS order_customer,o.client_order_id, o.order_number,o.instructions AS order_delivery_instructions, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
                 c.client_name AS order_client_name
             FROM
                 {$this->table} rs
