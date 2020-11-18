@@ -86,7 +86,7 @@
                         $('form#prepare_runsheet').submit(function(e){
                             if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1 style="margin: 20px;">Saving Runsheet Data...</h1></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1 style="margin-left: 20px;margin-right: 20px;">Saving Runsheet Data...</h1></div>' });
                             }
                         })
                     }
