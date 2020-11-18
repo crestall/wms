@@ -123,7 +123,6 @@
                                     <?php foreach($runsheet['orders'] as $task):
                                         $shipto = (!empty(Form::value('tasks,orders,'.$task['order_id'].',shipto')))? Form::value('tasks,orders,'.$task['order_id'].',shipto') : $task['order_customer'];
                                         $units = (!empty(Form::value('tasks,orders,'.$task['order_id'].',units')))? Form::value('tasks,orders,'.$task['order_id'].',units') : $task['order_units'];
-                                        $attention = (!empty(Form::value('tasks,orders,'.$task['order_id'].',attention')))? Form::value('tasks,orders,'.$task['order_id'].',attention') : $task['order_attention'];
                                         $delivery_instructions = (!empty(Form::value('tasks,orders,'.$task['order_id'].',delivery_instructions')))? Form::value('tasks,orders,'.$task['order_id'].',delivery_instructions') : $task['order_delivery_instructions'];
                                         $address = (!empty(Form::value('tasks,orders,'.$task['order_id'].',address')))? Form::value('tasks,orders,'.$task['order_id'].',address') : $task['order_address'];
                                         $address2 = (!empty(Form::value('tasks,orders,'.$task['order_id'].',address2')))? Form::value('tasks,orders,'.$task['order_id'].',address2') : $task['order_address2'];
