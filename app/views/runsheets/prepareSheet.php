@@ -120,7 +120,16 @@
                             <div class="form-group row">
                                 <label class="col-md-2 col-form-label">Orders To Include</label>
                                 <div class="col-md-10 mb-3">
-                                    <?php foreach($runsheet['orders'] as $task):?>
+                                    <?php foreach($runsheet['orders'] as $task):
+                                        $shipto = (!empty(Form::value('tasks,orders,'.$task['order_id'].',shipto')))? Form::value('tasks,orders,'.$task['order_id'].',shipto') : $task['order_customer'];
+                                        $units = (!empty(Form::value('tasks,orders,'.$task['order_id'].',units')))? Form::value('tasks,orders,'.$task['order_id'].',units') : $task['order_units'];
+                                        $attention = (!empty(Form::value('tasks,orders,'.$task['order_id'].',attention')))? Form::value('tasks,orders,'.$task['order_id'].',attention') : $task['order_attention'];
+                                        $delivery_instructions = (!empty(Form::value('tasks,orders,'.$task['order_id'].',delivery_instructions')))? Form::value('tasks,orders,'.$task['order_id'].',delivery_instructions') : $task['order_delivery_instructions'];
+                                        $address = (!empty(Form::value('tasks,orders,'.$task['order_id'].',address')))? Form::value('tasks,orders,'.$task['order_id'].',address') : $task['order_address'];
+                                        $address2 = (!empty(Form::value('tasks,orders,'.$task['order_id'].',address2')))? Form::value('tasks,orders,'.$task['order_id'].',address2') : $task['order_address2'];
+                                        $suburb = (!empty(Form::value('tasks,orders,'.$task['order_id'].',suburb')))? Form::value('tasks,orders,'.$task['order_id'].',suburb') : $task['order_suburb'];
+                                        $postcode = (!empty(Form::value('tasks,orders,'.$task['order_id'].',postcode')))? Form::value('tasks,orders,'.$task['order_id'].',postcode') : $task['order_postcode'];
+                                        ?>
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
@@ -134,46 +143,46 @@
                                             <div class="form-group row">
                                                 <label class="col-3">Units</label>
                                                 <div class="col-6">
-                                                    <input type="text" class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][units]" value="<?php echo Form::value("tasks,orders,".$task['order_id'].",units");?>">
+                                                    <input type="text" class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][units]" value="<?php echo $units;?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="required form-control" name="tasks[orders][<?php echo $task['order_id'];?>][shipto]" id="task_<?php echo $task['task_id'];?>_shipto" value="<?php echo $task['order_customer'];?>">
+                                                    <input type="text" class="required form-control" name="tasks[orders][<?php echo $task['order_id'];?>][shipto]" id="task_<?php echo $task['task_id'];?>_shipto" value="<?php echo $shipto;?>">
                                                 </div>
                                                 <?php echo Form::displayError('address');?>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label">Delivery Instructions</label>
                                                 <div class="col-md-6">
-                                                    <textarea class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][delivery_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $task['order_delivery_instructions'];?></textarea>
+                                                    <textarea class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][delivery_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $tdelivery_instructions;?></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required address_ac" name="tasks[orders][<?php echo $task['order_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $task['order_address'];?>" />
+                                                    <input type="text" class="form-control required address_ac" name="tasks[orders][<?php echo $task['order_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $address;?>" />
                                                     <?php echo Form::displayError('address');?>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3">Address Line 2</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][address2]" id="task_<?php echo $task['task_id'];?>_address2" value="<?php echo $task['order_address2'];?>" />
+                                                    <input type="text" class="form-control" name="tasks[orders][<?php echo $task['order_id'];?>][address2]" id="task_<?php echo $task['task_id'];?>_address2" value="<?php echo $address2;?>" />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required suburb_ac" name="tasks[orders][<?php echo $task['order_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $task['order_suburb'];?>" />
+                                                    <input type="text" class="form-control required suburb_ac" name="tasks[orders][<?php echo $task['order_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $suburb;?>" />
                                                     <?php echo Form::displayError('suburb');?>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control required postcode_ac" name="tasks[orders][<?php echo $task['order_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $task['order_postcode'];?>" />
+                                                    <input type="text" class="form-control required postcode_ac" name="tasks[orders][<?php echo $task['order_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $poscode;?>" />
                                                     <?php echo Form::displayError('postcode');?>
                                                 </div>
                                             </div>
