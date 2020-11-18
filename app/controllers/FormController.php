@@ -163,23 +163,47 @@ class FormController extends Controller {
             }
         }
         echo "_POST<pre>",print_r($post_data),"</pre>"; die();
-
-
-
-
-
-
-        Form::setError('driver_id', 'A Driver is required');
-        Session::set('value_array', $_POST);
-        Session::set('error_array', Form::getErrorArray());
+        if($driver_id == 0)
+        {
+            Form::setError('driver_id', 'A Driver is required');
+        }
+        $error = true;
+        if(count($tasks['jobs']))
+        {
+            foreach($tasks['jobs'] as $job_id => $jd)
+            {
+                if(isset($jd['include']))
+                {
+                    $error = false;
+                }
+            }
+        }
+        if(count($tasks['orders']))
+        {
+            foreach($tasks['orders'] as $order_id => $od)
+            {
+                if(isset($od['include']))
+                {
+                    $error = false;
+                }
+            }
+        }
+        if($error)
+        {
+            Form::setError('no_tasks_error', 'At least one job or order needs to be selected');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            echo "JOBS<pre>",print_r($tasks['jobs']),"</pre>";
+            echo "ORDERS<pre>",print_r($tasks['orders']),"</pre>";
+            echo "POST DATA<pre>",print_r($post_data),"</pre>"; die();
+        }
         return $this->redirector->to(PUBLIC_ROOT."runsheets/prepare-runsheet/runsheet=$runsheet_id");
-        echo "JOBS<pre>",print_r($tasks['jobs']),"</pre>";
-        echo "ORDERS<pre>",print_r($tasks['orders']),"</pre>";
-        echo "POST DATA<pre>",print_r($post_data),"</pre>"; die();
-
-        $errors = false;
-
-
     }
 
     public function procFinisherCategoryEdit()
