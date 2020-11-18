@@ -162,6 +162,13 @@ class FormController extends Controller {
                 }
             }
         }
+        echo "_POST<pre>",print_r($post_data),"</pre>"; die();
+
+
+
+
+
+
         Form::setError('driver_id', 'A Driver is required');
         Session::set('value_array', $_POST);
         Session::set('error_array', Form::getErrorArray());
