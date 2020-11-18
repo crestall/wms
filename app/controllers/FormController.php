@@ -217,6 +217,8 @@ class FormController extends Controller {
                         );
                         if($this->dataSubbed($jd['address2']))
                             $array['address_2'] = $jd['address2'];
+                        if($this->dataSubbed($jd['units']))
+                            $array['units'] = $jd['units'];
                         $tts[] = $array;
                     }
                 }
