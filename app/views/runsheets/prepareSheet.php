@@ -1,22 +1,5 @@
 <?php
-function getFormValue($arraypath)
-{
-    $path = explode(',', $arraypath);
-    $result = Form::$values;
-    $ptr = &$result;
-    foreach($path as $ind => $key)
-    {
-        if(array_key_exists( $key, $ptr ))
-        {
-            $ptr = $result[$key];
-        }
-    }
-    if( is_string( $ptr ) )
-    {
-        return htmlspecialchars(stripslashes($ptr));
-    }
-    return "";
-}
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -62,7 +45,7 @@ function getFormValue($arraypath)
                                             <div class="form-group row">
                                                 <label class="col-3">Units</label>
                                                 <div class="col-6">
-                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]" value="<?php echo getFormValue("tasks,jobs,".$task['job_id'].",units");?>">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][units]" value="<?php echo Form::value("tasks,jobs,".$task['job_id'].",units");?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
