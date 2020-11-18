@@ -172,10 +172,12 @@ class FormController extends Controller {
         {
             foreach($tasks['jobs'] as $job_id => $jd)
             {
+                $task_id = $jd['task_id'];
                 if(isset($jd['include']))
                 {
                     $error = false;
                 }
+                Form::setError('address_'.$task_id, 'Test the Error');
             }
         }
         if(count($tasks['orders']))
