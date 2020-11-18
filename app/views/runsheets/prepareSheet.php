@@ -136,7 +136,7 @@
                                                 <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input task" data-taskid="<?php echo $task['task_id'];?>" id="task_<?php echo $task['task_id'];?>" name="tasks[orders][<?php echo $task['order_id'];?>][include]" <?php if(!empty(Form::value('tasks,orders,'.$task['order_id'].',include'))) echo "checked";?> />
-                                                    <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><?php echo $headstring;?></label>
+                                                    <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><?php echo $head_string;?></label>
                                                 </div>
                                             </div>
                                         </div>
