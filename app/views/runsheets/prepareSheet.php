@@ -1,24 +1,19 @@
 <?php
 function getFormValue($arraypath = "tasks,jobs,381,units")
 {
-    //echo "<p>".$arraypath."</p>";
     $path = explode(',', $arraypath);
     $result = Form::$values;
-    //$max_ind = 0;
-    //$ptr = "";
     $ptr = &$result;
     foreach($path as $ind => $key)
     {
         if(array_key_exists( $key, $ptr ))
         {
             $ptr = $result[$key];
-            //$max_ind = max($max_ind, $ind);
         }
     }
 
     if( is_string( $ptr ) )
     {
-        echo "<p>in the function: ".$ptr."</p>";
         return htmlspecialchars(stripslashes($ptr));
     }
     return "";
