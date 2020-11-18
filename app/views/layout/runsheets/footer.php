@@ -73,6 +73,11 @@
                             //console.log('ac task id: '+task_id);
                             autoCompleter.addressAutoComplete($(this), 'task_'+task_id+'_');
                         });
+                        $('input.suburb_ac').each(function(i,e){
+                            var task_id = $(this).prop('id').split("_")[1];
+                            //console.log('ac task id: '+task_id);
+                            autoCompleter.suburbAutoComplete($(this), 'task_'+task_id+'_');
+                        });
                         $('input.address_ac, input.suburb_ac, input.postcode_ac').each(function(i,e){
                             $(this).change(function(e){
                                 $(this).valid();
