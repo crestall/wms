@@ -177,7 +177,7 @@ class FormController extends Controller {
                 {
                     $error = false;
                 }
-                Form::setError('address_'.$task_id, 'Test the Error');
+                //Form::setError('address_'.$task_id, 'Test the Error');
             }
         }
         if(count($tasks['orders']))
