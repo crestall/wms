@@ -13,6 +13,7 @@
             //$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
             //$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
             //echo "<p>Form Values For 381: ".getFormValue()."</p>";
+            echo "<pre>",print_r($runsheet),"</pre>";
             ?>
             <div class="row">
                 <div class="col-12">
@@ -37,7 +38,9 @@
                             <div class="form-group row">
                                 <label class="col-md-2 col-form-label">Jobs To Include</label>
                                 <div class="col-md-10 mb-3">
-                                    <?php foreach($runsheet['jobs'] as $task): ?>
+                                    <?php foreach($runsheet['jobs'] as $task):
+                                        $shipto = (!empty(Form::value('tasks,jobs,'.$task['job_id'].',shipto')))? Form::value('tasks,jobs,'.$task['job_id'].',shipto') : $task['job_shipto'];
+                                        ?>
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
@@ -57,14 +60,14 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="required form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][shipto]" id="task_<?php echo $task['task_id'];?>_shipto" value="<?php echo $task['job_shipto'];?>">
+                                                    <input type="text" class="required form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][shipto]" id="task_<?php echo $task['task_id'];?>_shipto" value="<?php echo $shipto;?>">
                                                 </div>
                                                 <?php echo Form::displayError('address');?>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label">Attention</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][attention]" id="task_<?php echo $task['task_id'];?>_attention" value="<?php echo $task['job_attention'];?>">
+                                                    <input type="text" class="form-control" name="tasks[jobs][<?php echo $task['job_id'];?>][attention]" id="task_<?php echo $task['task_id'];?>_attention" value="<?php echo Form::value("tasks,jobs,".$task['job_id'].",attention");?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
