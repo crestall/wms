@@ -18,7 +18,10 @@
                 <div class="col-12">
                     <h2>Runsheet for <?php echo date('D jS M', $runsheet['runsheet_day'] );?></h2>
                 </div>
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+                <?php echo Form::displayError('general');?>
                 <div class="col-12">
+
                     <form id="print_runsheet" method="post" action="/form/procPrepareRunsheet" >
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Driver</label>
