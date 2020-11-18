@@ -161,6 +161,7 @@ class RunsheetsController extends Controller
                 $runsheet['orders'][] = array(
                     'task_id'                       => $task['id'],
                     'order_number'                  => $task['order_number'],
+                    'client_order_id'               => $task['client_order_id'],
                     'order_id'                      => $task['order_id'],
                     'order_units'                   => $task['units'],
                     'order_customer'                => $task['order_customer'],
