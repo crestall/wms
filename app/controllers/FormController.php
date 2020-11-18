@@ -292,7 +292,7 @@ class FormController extends Controller {
         {
             echo "JOBS<pre>",print_r($tasks['jobs']),"</pre>";
             echo "ORDERS<pre>",print_r($tasks['orders']),"</pre>";
-            //echo "POST DATA<pre>",print_r($post_data),"</pre>"; die();
+            echo "POST DATA<pre>",print_r($post_data),"</pre>"; //die();
             echo "WILL SAVE THE FOLLOWING<pre>",print_r($tts),"</pre>"; die();
         }
         return $this->redirector->to(PUBLIC_ROOT."runsheets/prepare-runsheet/runsheet=$runsheet_id");
