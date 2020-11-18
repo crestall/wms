@@ -99,10 +99,9 @@ class Form
 
     private static function getValueRecursive($arraypath)
     {
-        $path = explode(',', $arraypath);
         $result = self::$values;
         $ptr = &$result;
-        foreach($path as $ind => $key)
+        foreach($arraypath as $ind => $key)
         {
             if(array_key_exists( $key, $ptr ))
             {
