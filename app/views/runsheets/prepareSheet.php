@@ -26,7 +26,7 @@
                     <?php echo Form::displayError('general');?>
                 </div>
                 <div class="col-12">
-                    <form id="print_runsheet" method="post" action="/form/procPrepareRunsheet" >
+                    <form id="prepare_runsheet" method="post" action="/form/procPrepareRunsheet" >
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Driver</label>
                             <div class="col-md-5">
