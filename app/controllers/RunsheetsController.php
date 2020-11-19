@@ -418,6 +418,7 @@ class RunsheetsController extends Controller
                     $task_array['order_number'] = $rs['order_number'];
                     $task_array['customer'] = $rs['order_customer'];
                     $task_array['client'] = $rs['order_client_name'];
+                    $task_array['client_order_id'] = $rs['client_order_id'];
                     $task_array['address']['address'] = $rs['address'];
                     $task_array['address']['address2'] = $rs['address_2'];
                     $task_array['address']['suburb'] = $rs['suburb'];
