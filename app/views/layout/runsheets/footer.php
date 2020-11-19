@@ -243,7 +243,8 @@
                 },
                 'view-runsheets':{
                     init:function(){
-                        $('button.print_sheet').each(function(i,e){
+                        console.log('init');
+                        $('button.print-sheet').each(function(i,e){
                             $(this).click(function(e){
                                var runsheet_id = $(this).data('runsheetid');
                                var task_ids = $(this).data('taskids');
