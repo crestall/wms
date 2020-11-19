@@ -247,9 +247,9 @@
                         $('button.print-sheet').each(function(i,e){
                             $(this).click(function(e){
                                var runsheet_id = $(this).data('runsheetid');
-                               var task_ids = $(this).data('taskids');
+                               var driver_id = $(this).data('driverid');
                                console.log('runsheet_id: '+runsheet_id);
-                               console.log('task_ids: '+task_ids);
+                               console.log('driver_id: '+driver_id);
                             });
                         })
                     }
