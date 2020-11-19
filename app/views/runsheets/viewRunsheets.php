@@ -13,7 +13,7 @@ function getDriverTasks($driver, $runsheet_id)
         $html .= "
                 <span class='font-weight-bold'>$task_number</span><br>
                 <span class='ml-3'>{$task['shipto']}</span><br>
-                <span class='ml-3'>{$task['suburb']}</span>
+                <span class='ml-3'>{$task['address']['suburb']}</span>
         ";
         $html .= "</div>";
         $task_ids[] = $task['task_id'];
