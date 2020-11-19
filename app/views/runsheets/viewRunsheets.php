@@ -24,7 +24,7 @@ function getDriverTasks($driver, $runsheet_id)
     $tids = htmlspecialchars(json_encode($task_ids), ENT_QUOTES, 'UTF-8');
     $html .= "</td>";
     $html .= "<td>
-                <p><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='$runsheet_id' data-taskids='$tids'>Print Runsheet</button></p>
+                <p><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='$runsheet_id' data-driverid='{$driver['id']}'>Print Runsheet</button></p>
                 <p><button class='btn btn-sm btn-outline-danger remove-driver' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Driver</button></p>
                 <!-- p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Selected Tasks</button></p -->
                 <p><button class='btn btn-sm btn-outline-fsg new-driver' data-runsheetid='$runsheet_id' data-taskids='$tids'>Assign New Driver</button></p>
