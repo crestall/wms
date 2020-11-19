@@ -347,11 +347,13 @@ class Runsheet extends Model{
                 pc.name AS customer_name,
                 o.ship_to AS order_customer,o.client_order_id, o.order_number,o.instructions AS order_delivery_instructions, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
                 c.client_name AS order_client_name,
-                i.name AS item_name, i.sku
+                i.name AS item_name, i.sku,
+                sr.name AS FSG_contact
             FROM
                 {$this->table} rs
                 JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id
                 LEFT JOIN production_jobs pj ON rst.job_id = pj.id
+                LEFT JOIN sales_reps sr ON sr.id = pj.salesrep_id
                 LEFT JOIN drivers d ON d.id = rst.driver_id
                 LEFT JOIN `production_customers` pc ON pj.customer_id = pc.id
                 LEFT JOIN orders o ON rst.order_id = o.id
