@@ -227,6 +227,8 @@ class FormController extends Controller {
                             $array['units'] = $jd['units'];
                         if($this->dataSubbed($jd['attention']))
                             $array['attention'] = $jd['attention'];
+                        if($this->dataSubbed($jd['delivery_instructions']))
+                            $array['delivery_instructions'] = $jd['delivery_instructions'];
                         $tts[] = $array;
                     }
                 }
@@ -290,6 +292,8 @@ class FormController extends Controller {
                             $array['units'] = $od['units'];
                         if($this->dataSubbed($od['attention']))
                             $array['attention'] = $od['attention'];
+                        if($this->dataSubbed($od['delivery_instructions']))
+                            $array['delivery_instructions'] = $od['delivery_instructions'];
                         $tts[] = $array;
                     }
                 }
