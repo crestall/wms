@@ -368,7 +368,7 @@ class RunsheetsController extends Controller
     private function generateRunsheetDriverArray($rss)
     {
         $runsheets = array();
-        echo "<pre>",print_r($rss),"</pre>";die();
+        //echo "<pre>",print_r($rss),"</pre>";die();
         $di = 0;
         foreach($rss as $rs)
         {
