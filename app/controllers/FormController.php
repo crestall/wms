@@ -169,7 +169,7 @@ class FormController extends Controller {
         }
         $error = true;
         $tts = array();
-        if(count($tasks['jobs']))
+        if( isset($tasks['jobs']) )
         {
             foreach($tasks['jobs'] as $job_id => $jd)
             {
