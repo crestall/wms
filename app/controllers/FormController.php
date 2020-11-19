@@ -290,8 +290,6 @@ class FormController extends Controller {
                             $array['address_2'] = $od['address2'];
                         if($this->dataSubbed($od['units']))
                             $array['units'] = $od['units'];
-                        if($this->dataSubbed($od['attention']))
-                            $array['attention'] = $od['attention'];
                         if($this->dataSubbed($od['delivery_instructions']))
                             $array['delivery_instructions'] = $od['delivery_instructions'];
                         $tts[] = $array;
