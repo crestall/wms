@@ -461,8 +461,72 @@ class Utility{
         return $runsheets;
     }
 
+    public static function createPrintRunsheetArray($rss)
+    {
+        $runsheets = array();
+        foreach($rss as $rs)
+        {
+            if(!isset($runsheets[$rs['runsheet_day']]))
+            {
+                $runsheets[$rs['runsheet_day']] =array();
+            }
+            if(!isset($runsheets[$rs['runsheet_day']]['tasks']))
+            {
+                $runsheets[$rs['runsheet_day']]['tasks'] =array();
+            }
+            $runsheets[$rs['runsheet_day']]['created_date'] = $rs['created_date'];
+            $runsheets[$rs['runsheet_day']]['updated_date'] = $rs['updated_date'];
+            $runsheets[$rs['runsheet_day']]['created_by'] = $rs['created_by'];
+            $runsheets[$rs['runsheet_day']]['updated_by'] = $rs['updated_by'];
+            $runsheets[$rs['runsheet_day']]['runsheet_id'] = $rs['runsheet_id'];
+            if($rs['job_id'] > 0)
+            {
+                $runsheets[$rs['runsheet_day']]['jobs'][] = array(
+                    'task_id'                   => $rs['id'],
+                    'job_shipto'                => $rs['job_shipto'],
+                    'job_units'                 => $rs['units'],
+                    'job_attention'             => $rs['job_attention'],
+                    'job_number'                => $rs['job_number'],
+                    'job_id'                    => $rs['job_id'],
+                    'job_customer'              => $rs['customer_name'],
+                    'job_address'               => $rs['job_address'],
+                    'job_address2'              => $rs['job_address2'],
+                    'job_suburb'                => $rs['job_suburb'],
+                    'job_postcode'              => $rs['job_postcode'],
+                    'job_delivery_instructions' => $rs['job_delivery_instructions'],
+                    'driver_name'               => $rs['driver_name'],
+                    'printed'                   => $rs['printed'],
+                    'completed'                 => $rs['completed']
+                );
+            }
+            if($rs['order_id'] > 0)
+            {
+                $runsheets[$rs['runsheet_day']]['orders'][] = array(
+                    'task_id'                       => $rs['id'],
+                    'order_number'                  => $rs['order_number'],
+                    'client_order_id'               => $rs['client_order_id'],
+                    'order_id'                      => $rs['order_id'],
+                    'order_units'                   => $rs['units'],
+                    'order_customer'                => $rs['order_customer'],
+                    'order_address'                 => $rs['order_address'],
+                    'order_address2'                => $rs['order_address2'],
+                    'order_suburb'                  => $rs['order_suburb'],
+                    'order_postcode'                => $rs['order_postcode'],
+                    'order_client'                  => $rs['order_client_name'],
+                    'order_delivery_instructions'   => $rs['order_delivery_instructions'],
+                    'printed'                       => $rs['printed'],
+                    'completed'                     => $rs['completed'],
+                    'driver_name'                   => $rs['driver_name'],
+                    'customer'                      => $rs['order_customer'],
+                );
+            }
+        }
+        return $runsheets;
+    }
+
     public static function createRunsheetArray($rss)
     {
+        echo "<pre>",print_r($rss),"</pre>";die();
         $runsheets = array();
         foreach($rss as $rs)
         {
