@@ -30,7 +30,7 @@ class Runsheet extends Model{
 
     public function getRunsheetsForPreparation($runsheet_id = false)
     {
-        return $this->getRunsheetsForDisplay(false, false, 0, $runsheet_id);
+        return $this->getRunsheetsForDisplay(false, 0, 0, $runsheet_id);
     }
 
     public function getViewRunsheets($runsheet_id = false)
