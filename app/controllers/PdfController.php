@@ -14,7 +14,7 @@ class pdfController extends Controller
         parent::beforeAction();
         $action = $this->request->param('action');
         $post_actions = array(
-            
+
         );
         $this->Security->requirePost($post_actions);
         if(in_array($action, $post_actions))
@@ -29,11 +29,13 @@ class pdfController extends Controller
 
     public function printRunsheet()
     {
-        echo "<pre>",print_r($this->request),"</pre>";die();
+        //echo "<pre>",print_r($this->request),"</pre>";die();
         // set up the data for the pdf
         $data = array();
         if(empty($this->request->data))
             return $this->error(400);
+        $rss = $this->runsheet->getRunsheetForPrinting($this->request->data['runsheet_id'], $this->request->data['driver_id']);
+        echo "<pre>",print_r($rss),"</pre>";die();
         $post_data = $this->request->data;
         $data['runsheet_id'] = $post_data['runsheet_id'];
         $driver = ($post_data['driver_id'] > 0)? $this->driver->getDriverName($post_data['driver_id']) : "";
