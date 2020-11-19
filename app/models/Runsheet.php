@@ -38,23 +38,28 @@ class Runsheet extends Model{
         return $this->getRunsheetsForDisplay(false, false, false, $runsheet_id, true);
     }
 
+    public function getRunsheetForPrinting($runsheet_id, $driver_id)
+    {
+        return $this->getRunsheetsForDisplay(1, 1, $driver_id, $runsheet_id, true)
+    }
+
     public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false)
     {
         $db = Database::openConnection();
         $q = $this->getRunsheetQuery();
-        if($completed)
-        {
-            $q .= " WHERE rst.completed = 1";
-        }
-        else
+        if($completed === false)
         {
             $q .= " WHERE rst.completed = 0";
         }
-        if($printed)
+        elseif($completed === true)
+        {
+            $q .= " WHERE rst.completed = 1";
+        }
+        if($printed === true)
         {
             $q .= " AND rst.printed = 1";
         }
-        else
+        elseif($printed === false)
         {
             $q .= " AND rst.printed = 0";
         }
