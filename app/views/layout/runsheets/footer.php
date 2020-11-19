@@ -243,7 +243,14 @@
                 },
                 'view-runsheets':{
                     init:function(){
-
+                        $('button.print_sheet').each(function(i,e){
+                            $(this).click(function(e){
+                               var runsheet_id = $(this).data('runsheetid');
+                               var task_ids = $(this).data('taskids');
+                               console.log('runsheet_id: '+runsheet_id);
+                               console.log('task_ids: '+task_ids);
+                            });
+                        })
                     }
                 }
             }
