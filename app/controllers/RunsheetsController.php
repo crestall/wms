@@ -323,7 +323,8 @@ class RunsheetsController extends Controller
     public function viewRunsheets()
     {
         $rss = $this->runsheet->getViewRunsheets();
-        echo "<pre>",print_r($rss),"</pre>";die();
+        $runsheets = $this->createRunsheetArray($rss);
+        echo "<pre>",print_r($runsheets),"</pre>";die();
     }
 
     public function updateJob()
@@ -444,6 +445,55 @@ class RunsheetsController extends Controller
             }
         }
         return $runsheets;
+    }
+
+    private function createRunsheetArray($rss)
+    {
+        foreach($rss as $rs)
+        {
+            if(!isset($runsheets[$rs['runsheet_day']]))
+            {
+                $runsheets[$rs['runsheet_day']] =array();
+            }
+            if(!isset($runsheets[$rs['runsheet_day']]['jobs']))
+            {
+                $runsheets[$rs['runsheet_day']]['jobs'] =array();
+            }
+            if(!isset($runsheets[$rs['runsheet_day']]['orders']))
+            {
+                $runsheets[$rs['runsheet_day']]['orders'] =array();
+            }
+            $runsheets[$rs['runsheet_day']]['created_date'] = $rs['created_date'];
+            $runsheets[$rs['runsheet_day']]['updated_date'] = $rs['updated_date'];
+            $runsheets[$rs['runsheet_day']]['created_by'] = $rs['created_by'];
+            $runsheets[$rs['runsheet_day']]['updated_by'] = $rs['updated_by'];
+            $runsheets[$rs['runsheet_day']]['runsheet_id'] = $rs['runsheet_id'];
+            if($rs['job_id'] > 0)
+            {
+                $runsheets[$rs['runsheet_day']]['jobs'][] = array(
+                    'job_id'        => $rs['job_id'],
+                    'job_number'    => $rs['job_number'],
+                    'driver_name'   => $rs['driver_name'],
+                    'customer'      => $rs['customer_name'],
+                    'suburb'        => $rs['job_suburb'],
+                    'printed'       => $rs['printed'],
+                    'completed'     => $rs['completed']
+                );
+            }
+            if($rs['order_id'] > 0)
+            {
+                $runsheets[$rs['runsheet_day']]['orders'][] = array(
+                    'order_id'      => $rs['order_id'],
+                    'order_number'  => $rs['order_number'],
+                    'driver_name'   => $rs['driver_name'],
+                    'customer'      => $rs['order_customer'],
+                    'suburb'        => $rs['order_suburb'],
+                    'client'        => $rs['order_client_name'],
+                    'printed'       => $rs['printed'],
+                    'completed'     => $rs['completed']
+                );
+            }
+        }
     }
 
     public function isAuthorized()
