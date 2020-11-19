@@ -406,6 +406,7 @@ class RunsheetsController extends Controller
                 if(!empty($rs['job_id']))
                 {
                     $task_array['job_number'] = $rs['job_number'];
+                    $task_array['shipto'] = $rs['job_shipto'];
                     $task_array['customer'] = $rs['customer_name'];
                     $task_array['address']['address'] = $rs['address'];
                     $task_array['address']['address2'] = $rs['address_2'];
@@ -416,6 +417,7 @@ class RunsheetsController extends Controller
                 if(!empty($rs['order_number']))
                 {
                     $task_array['order_number'] = $rs['order_number'];
+                    $task_array['shipto'] = $rs['order_customer'];
                     $task_array['customer'] = $rs['order_customer'];
                     $task_array['client'] = $rs['order_client_name'];
                     $task_array['client_order_id'] = $rs['client_order_id'];
@@ -434,6 +436,7 @@ class RunsheetsController extends Controller
                 {
                     $task_array['job_number'] = $rs['job_number'];
                     $task_array['customer'] = $rs['customer_name'];
+                    $task_array['shipto'] = $rs['job_shipto'];
                     $task_array['address']['address'] = $rs['address'];
                     $task_array['address']['address2'] = $rs['address_2'];
                     $task_array['address']['suburb'] = $rs['suburb'];
@@ -443,6 +446,7 @@ class RunsheetsController extends Controller
                 if(!empty($rs['order_number']))
                 {
                     $task_array['order_number'] = $rs['order_number'];
+                    $task_array['shipto'] = $rs['order_customer'];
                     $task_array['customer'] = $rs['order_customer'];
                     $task_array['client'] = $rs['order_client_name'];
                     $task_array['address']['address'] = $rs['address'];
