@@ -346,7 +346,8 @@ class Runsheet extends Model{
                 pj.job_id AS job_number,pj.delivery_instructions AS job_delivery_instructions, pj.description, pj.ship_to AS job_shipto, pj.attention AS job_attention, pj.address AS job_address, pj.address_2 AS job_address2, pj.suburb AS job_suburb, pj.postcode AS job_postcode,
                 pc.name AS customer_name,
                 o.ship_to AS order_customer,o.client_order_id, o.order_number,o.instructions AS order_delivery_instructions, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
-                c.client_name AS order_client_name
+                c.client_name AS order_client_name,
+                i.name AS item_name, i.sku
             FROM
                 {$this->table} rs
                 JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id
@@ -355,6 +356,7 @@ class Runsheet extends Model{
                 LEFT JOIN `production_customers` pc ON pj.customer_id = pc.id
                 LEFT JOIN orders o ON rst.order_id = o.id
                 LEFT JOIN clients c ON o.client_id = c.id
+                LEFT JOIN (SELECT GROUP_CONCAT(DISTINCT items.name SEPARATOR ', ') AS name, GROUP_CONCAT(DISTINCT items.sku SEPARATOR ', ') AS sku, oi.order_id FROM items JOIN orders_items oi ON oi.item_id = items.id GROUP BY oi.order_id) i ON i.order_id = o.id
         ";
     }
 }
