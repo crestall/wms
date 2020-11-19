@@ -14,7 +14,7 @@ class pdfController extends Controller
         parent::beforeAction();
         $action = $this->request->param('action');
         $post_actions = array(
-            'printRunsheet'
+            
         );
         $this->Security->requirePost($post_actions);
         if(in_array($action, $post_actions))
