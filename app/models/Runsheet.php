@@ -74,7 +74,7 @@ class Runsheet extends Model{
         }
         if($runsheet_id !== false)
         {
-            $q .= " rs.id = $runsheet_id";
+            $q .= " rs.id = $runsheet_id ";
         }
         rtrim($q, "AND");
         $q .= "
