@@ -35,7 +35,7 @@ class Runsheet extends Model{
 
     public function getViewRunsheets($runsheet_id = false)
     {
-        return $this->getRunsheetsForDisplay(false, false, false, $runsheet_id, true);
+        return $this->getRunsheetsForDisplay(false, 0, false, $runsheet_id, true);
     }
 
     public function getRunsheetForPrinting($runsheet_id, $driver_id)
