@@ -7,7 +7,7 @@ function getDriverTasks($driver, $runsheet_id)
     $html .= "<td>";
     foreach($driver['tasks'] as $task)
     {
-        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number'];
+        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['customer']." - ".$task['job_number'] : "ORDER: ".$task['customer']." - ".$task['order_number'];
         $task_number .= (isset($task['client_order_id']) && !empty($task['client_order_id']))? " (".$task['client_order_id'].")" : "";
         $shipto = $task['shipto'];
         $shipto .= (!empty($task['attention']))? " - ATTN: ".$task['attention'] : "";
