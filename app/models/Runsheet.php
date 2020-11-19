@@ -76,7 +76,7 @@ class Runsheet extends Model{
         {
             $q .= " rs.id = $runsheet_id ";
         }
-        rtrim($q, "AND");
+        $q = rtrim($q, "AND");
         $q .= "
             ORDER BY
                 rs.runsheet_day DESC
