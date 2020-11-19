@@ -449,6 +449,7 @@ class RunsheetsController extends Controller
 
     private function createRunsheetArray($rss)
     {
+        $runsheets = array();
         foreach($rss as $rs)
         {
             if(!isset($runsheets[$rs['runsheet_day']]))
@@ -494,6 +495,7 @@ class RunsheetsController extends Controller
                 );
             }
         }
+        return $runsheets;
     }
 
     public function isAuthorized()
