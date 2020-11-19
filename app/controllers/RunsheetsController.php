@@ -323,7 +323,7 @@ class RunsheetsController extends Controller
     public function viewRunsheets()
     {
         $rss = $this->runsheet->getViewRunsheets();
-        $runsheets = $this->createRunsheetArray($rss);
+        $runsheets = $this->generateRunsheetDriverArray($rss);
         echo "<pre>",print_r($runsheets),"</pre>";die();
     }
 
