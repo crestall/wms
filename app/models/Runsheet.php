@@ -348,7 +348,7 @@ class Runsheet extends Model{
                 o.ship_to AS order_customer,o.client_order_id, o.order_number,o.instructions AS order_delivery_instructions, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
                 c.client_name AS order_client_name,
                 i.name AS item_name, i.sku,
-                sr.name AS FSG_contact
+                sr.name AS FSG_contact, sr.phone AS FSG_contact_phone
             FROM
                 {$this->table} rs
                 JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id
