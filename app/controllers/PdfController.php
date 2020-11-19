@@ -27,74 +27,9 @@ class pdfController extends Controller
         }
     }
 
-    public function printVicLocalLabels()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf([
-            'mode'          => 'utf-8',
-            'format'        => [148,105],
-            'margin_left'   => 5,
-            'margin_right'  => 5,
-            'margin_top'    => 5,
-            'margin_bottom' => 5
-        ]);
-        $order_ids  = $this->request->data['orders'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/viclocallabels.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
-        //$pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printCometLocalLabels()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf([
-            'mode'          => 'utf-8',
-            'format'        => [148,105],
-            'margin_left'   => 5,
-            'margin_right'  => 5,
-            'margin_top'    => 5,
-            'margin_bottom' => 5
-        ]);
-        $order_ids  = $this->request->data['orders'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/cometlocallabels.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
-        //$pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printHuntersLabels()
-    {
-        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => [148,105]]);
-        $order_ids  = $this->request->data['orders'];
-        foreach($order_ids as $order_id)
-        {
-            $od = $this->order->getOrderDetail($order_id);
-            $base64pdf = $od['hunters_label'];
-            file_put_contents(BASE_DIR."/_tmp/label_{$order_id}.pdf", base64_decode($base64pdf));
-            $pdfs[] = array(
-                'file'          =>  BASE_DIR."/_tmp/label_{$order_id}.pdf",
-                'orientation'   =>  "P"
-            );
-            $this->order->updateStatus($this->order->packed_id, $order_id);
-        }
-        $today = date("Ymd", time());
-        $pdf->mergePDFFiles($pdfs, "hunters_labels_".$today.".pdf");
-        foreach($pdfs as $pdf)
-        {
-            unlink($pdf['file']);
-        }
-    }
-
     public function printRunsheet()
     {
-        //echo "<pre>",print_r($this->request),"</pre>";//die();
+        echo "<pre>",print_r($this->request),"</pre>";die();
         // set up the data for the pdf
         $data = array();
         if(empty($this->request->data))
