@@ -324,7 +324,15 @@ class RunsheetsController extends Controller
     {
         $rss = $this->runsheet->getViewRunsheets();
         $runsheets = $this->generateRunsheetDriverArray($rss);
-        echo "<pre>",print_r($runsheets),"</pre>";die();
+        //echo "<pre>",print_r($runsheets),"</pre>";die();
+        //render the page
+        Config::setJsConfig('curPage', "view-runsheets");
+        Config::set('curPage', "view-runsheets");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/viewRunsheets.php', [
+            'page_title'    =>  "View Runsheets",
+            'pht'           =>  ": View Runsheets",
+            'runsheets'     =>  $runsheets
+        ]);
     }
 
     public function updateJob()
