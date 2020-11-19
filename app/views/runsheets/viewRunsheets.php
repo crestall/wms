@@ -9,14 +9,13 @@ function getDriverTasks($driver, $runsheet_id)
     {
         $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number'];
         $task_number .= (isset($task['client_order_id']) && !empty($task['client_order_id']))? " (".$task['client_order_id'].")" : "";
+        $shipto = ($task['job_number'] > 0)? $task['job_shipto'] : $task['order_customer'];
         $html .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3 pb-3 pl-3'>";
         $html .= "
-
+                <span class='font-weight-bold'>$task_number</span><br>
+                <span class='ml-3'>$shipto</span><br>
+                <span class='ml-3'>{$task['suburb']}</span>
         ";
-        $html .= "  <div class='checkbox checkbox-default'>
-                        <input type='checkbox' class='task-select runsheetid_$runsheet_id styled' data-taskid='{$task['task_id']}' id='select_{$task['task_id']}' checked />
-                        <label for='select_{$task['task_id']}'>$task_number</label>
-                    </div>";
         $html .= "</div>";
         $task_ids[] = $task['task_id'];
     }
