@@ -47,38 +47,41 @@ class Runsheet extends Model{
     {
         $db = Database::openConnection();
         $q = $this->getRunsheetQuery();
+        $q .= " WHERE";
         if($completed === false)
         {
-            $q .= " WHERE rst.completed = 0";
+            $q .= " rst.completed = 0 AND";
         }
         elseif($completed === true)
         {
-            $q .= " WHERE rst.completed = 1";
+            $q .= " rst.completed = 1 AND";
         }
         if($printed === true)
         {
-            $q .= " AND rst.printed = 1";
+            $q .= " rst.printed = 1 AND";
         }
         elseif($printed === false)
         {
-            $q .= " AND rst.printed = 0";
+            $q .= " rst.printed = 0 AND";
         }
         if($driver_id !== false)
         {
-            $q .= " AND rst.driver_id = $driver_id";
+            $q .= " rst.driver_id = $driver_id AND";
         }
         elseif($driver_set)
         {
-            $q .= " AND rst.driver_id != 0";
+            $q .= " rst.driver_id != 0 AND";
         }
         if($runsheet_id !== false)
         {
-            $q .= " AND rs.id = $runsheet_id";
+            $q .= " rs.id = $runsheet_id";
         }
+        rtrim($q, "AND");
         $q .= "
             ORDER BY
                 rs.runsheet_day DESC
         ";
+        echo $q; die();
         return $db->queryData($q);
     }
 
