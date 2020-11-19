@@ -225,7 +225,7 @@ class FormController extends Controller {
                 }
             }
         }
-        if($this->dataSubbed($tasks['orders']) && count($tasks['orders']))
+        if( isset($tasks['orders']) )
         {
             foreach($tasks['orders'] as $order_id => $od)
             {
