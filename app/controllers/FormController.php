@@ -181,6 +181,10 @@ class FormController extends Controller {
                     {
                         Form::setError('address_'.$task_id, 'An address is required');
                     }
+                    if( !$this->dataSubbed($jd['shipto']) )
+                    {
+                        Form::setError('shipto_'.$task_id, 'A delivery name is required');
+                    }
                     if( !$this->dataSubbed($jd['suburb']) )
                     {
                         Form::setError('suburb_'.$task_id, 'A suburb is required');
@@ -214,12 +218,15 @@ class FormController extends Controller {
                             'address'       => $jd['address'],
                             'suburb'        => $jd['suburb'],
                             'postcode'      => $jd['postcode'],
+                            'deliver_to'    => $jd['shipto'],
                             'runsheet_id'   => $runsheet_id
                         );
                         if($this->dataSubbed($jd['address2']))
                             $array['address_2'] = $jd['address2'];
                         if($this->dataSubbed($jd['units']))
                             $array['units'] = $jd['units'];
+                        if($this->dataSubbed($jd['attention']))
+                            $array['attention'] = $jd['attention'];
                         $tts[] = $array;
                     }
                 }
@@ -236,6 +243,10 @@ class FormController extends Controller {
                     if( !$this->dataSubbed($od['address']) )
                     {
                         Form::setError('address_'.$task_id, 'An address is required');
+                    }
+                    if( !$this->dataSubbed($od['shipto']) )
+                    {
+                        Form::setError('shipto_'.$task_id, 'A delivery name is required');
                     }
                     if( !$this->dataSubbed($od['suburb']) )
                     {
@@ -270,12 +281,15 @@ class FormController extends Controller {
                             'address'       => $od['address'],
                             'suburb'        => $od['suburb'],
                             'postcode'      => $od['postcode'],
+                            'deliver_to'    => $od['shipto'],
                             'runsheet_id'   => $runsheet_id
                         );
                         if($this->dataSubbed($od['address2']))
                             $array['address_2'] = $od['address2'];
                         if($this->dataSubbed($od['units']))
                             $array['units'] = $od['units'];
+                        if($this->dataSubbed($od['attention']))
+                            $array['attention'] = $od['attention'];
                         $tts[] = $array;
                     }
                 }
