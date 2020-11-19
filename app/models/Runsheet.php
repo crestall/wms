@@ -81,7 +81,7 @@ class Runsheet extends Model{
             ORDER BY
                 rs.runsheet_day DESC
         ";
-        echo $q; die();
+        //echo $q; die();
         return $db->queryData($q);
     }
 
