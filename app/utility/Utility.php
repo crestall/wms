@@ -466,14 +466,6 @@ class Utility{
         $runsheet = array();
         foreach($rss as $rs)
         {
-            if(!isset($runsheets[$rs['runsheet_day']]))
-            {
-                $runsheets[$rs['runsheet_day']] =array();
-            }
-            if(!isset($runsheets[$rs['runsheet_day']]['tasks']))
-            {
-                $runsheets[$rs['runsheet_day']]['tasks'] =array();
-            }
             $runsheet['runsheet_day'] = $rs['runsheet_day'];
             $runsheet['created_date'] = $rs['created_date'];
             $runsheet['updated_date'] = $rs['updated_date'];
@@ -502,7 +494,7 @@ class Utility{
 
             );
         }
-        return $runsheets;
+        return $runsheet;
     }
 
     public static function createRunsheetArray($rss)
