@@ -36,7 +36,7 @@ class pdfController extends Controller
             return $this->error(400);
         $rss = $this->runsheet->getRunsheetForPrinting($this->request->data['runsheet_id'], $this->request->data['driver_id']);
         $runsheet = Utility::createPrintRunsheetArray($rss);
-        //echo "<pre>",print_r($runsheet),"</pre>";die();
+        echo "<pre>",print_r($runsheet),"</pre>";die();
         $driver = $runsheet['driver_name'];
         $runsheet_day = $runsheet['runsheet_day'];
         $table_body = "";
@@ -80,18 +80,10 @@ class pdfController extends Controller
                     <td></td>
                   </tr>
                 ";
-
-
-
-
-                /*
-                    $this->runsheet->runsheetPrinted(array(
-                        'driver_id'     => $post_data['driver_id'],
-                        'units'         => $units,
-                        'runsheet_id'   => $post_data['runsheet_id'],
-                        'task_id'       => $details['task_id']
-                    ));
-                */
+                $this->runsheet->runsheetPrinted(array(
+                    'runsheet_id'   => $post_data['runsheet_id'],
+                    'task_id'       => $details['task_id']
+                ));
             }
         }
         //die();
