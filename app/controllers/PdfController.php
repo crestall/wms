@@ -35,7 +35,7 @@ class pdfController extends Controller
         if(empty($this->request->data))
             return $this->error(400);
         $rss = $this->runsheet->getRunsheetForPrinting($this->request->data['runsheet_id'], $this->request->data['driver_id']);
-        $runsheet = Utility::createRunsheetArray($rss);
+        $runsheet = Utility::createPrintRunsheetArray($rss);
         echo "<pre>",print_r($runsheet),"</pre>";die();
         $post_data = $this->request->data;
         $data['runsheet_id'] = $post_data['runsheet_id'];
