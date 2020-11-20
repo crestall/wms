@@ -1,25 +1,5 @@
 <?php
-function getDriverTasks($driver, $runsheet_id)
-{
-    $driver_name = ucwords($driver['name']);
-    $task_ids = array();
-    $html = "<td>$driver_name</td>";
-    $html .= "<td>";
-    foreach($driver['tasks'] as $task)
-    {
-        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number'];
-        $html .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3 pb-3 pl-3'>";
-        $html .= " ";
-        $html .= "</div>";
-        $task_ids[] = $task['task_id'];
-    }
-    //$tid_string = implode(",", $task_ids);
-    $tids = htmlspecialchars(json_encode($task_ids), ENT_QUOTES, 'UTF-8');
-    $html .= "</td>";
-    $html .= "<td>
-            </td>";
-    return $html;
-}
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -42,7 +22,6 @@ function getDriverTasks($driver, $runsheet_id)
                         <tr>
                             <th>Runsheet Day</th>
                             <th>Driver</th>
-                            <th>Tasks</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -51,11 +30,13 @@ function getDriverTasks($driver, $runsheet_id)
                             $rows = count($rs['drivers']);?>
                             <tr>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
-                                <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id']);?>
+                                <td><?php echo ucwords($rs['drivers'][0]['name']);?></td>
+                                <td><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][0]['id';?>">Finalise</a></td>
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr>
-                                    <?php echo getDriverTasks($rs['drivers'][$i], $rs['runsheet_id']);?>
+                                <td><?php echo ucwords($rs['drivers'][$i]['name']);?></td>
+                                <td><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][$i]['id';?>">Finalise</a></td>
                                 </tr>
                             <?php endfor;?>
                         <?php endforeach;?>
