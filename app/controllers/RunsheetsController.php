@@ -312,7 +312,7 @@ class RunsheetsController extends Controller
         //echo "<pre>",print_r($rss),"</pre>";die();
         //$runsheets = $this->generateRunsheetDriverArray($rss);
         $runsheets = Utility::generateRunsheetDriverArray($rss);
-        /echo "<pre>",print_r($runsheets),"</pre>";die();
+        echo "<pre>",print_r($runsheets),"</pre>";die();
         //render the page
         Config::setJsConfig('curPage', "finalise-runsheets");
         Config::set('curPage', "finalise-runsheets");
