@@ -24,7 +24,7 @@
                     <td style="text-align: right">
                         Date:
                     </td>
-                    <td style="border-bottom: 1px dotted black; width: 75mm; text-align: center"><?php echo date("jS M, Y");?></td>
+                    <td style="border-bottom: 1px dotted black; width: 75mm; text-align: center"><?php echo $runsheet_day;?></td>
                 </tr>
             </table>
         </div>
