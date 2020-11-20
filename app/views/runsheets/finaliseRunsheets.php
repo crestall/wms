@@ -35,8 +35,8 @@
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr>
-                                <td><?php echo ucwords($rs['drivers'][$i]['name']);?></td>
-                                <td><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][$i]['id'];?>">Finalise</a></td>
+                                    <td style="vertical-align: middle"><?php echo ucwords($rs['drivers'][$i]['name']);?></td>
+                                    <td style="text-align:center;"><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][$i]['id'];?>">Finalise</a></td>
                                 </tr>
                             <?php endfor;?>
                         <?php endforeach;?>
