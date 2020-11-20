@@ -463,7 +463,7 @@ class Utility{
 
     public static function createPrintRunsheetArray($rss)
     {
-        $runsheets = array();
+        $runsheet = array();
         foreach($rss as $rs)
         {
             if(!isset($runsheets[$rs['runsheet_day']]))
@@ -474,13 +474,14 @@ class Utility{
             {
                 $runsheets[$rs['runsheet_day']]['tasks'] =array();
             }
-            $runsheets[$rs['runsheet_day']]['created_date'] = $rs['created_date'];
-            $runsheets[$rs['runsheet_day']]['updated_date'] = $rs['updated_date'];
-            $runsheets[$rs['runsheet_day']]['created_by'] = $rs['created_by'];
-            $runsheets[$rs['runsheet_day']]['updated_by'] = $rs['updated_by'];
-            $runsheets[$rs['runsheet_day']]['runsheet_id'] = $rs['runsheet_id'];
-            $runsheets[$rs['runsheet_day']]['driver_name'] = $rs['driver_name'];
-            $runsheets[$rs['runsheet_day']]['tasks'][] = array(
+            $runsheet['runsheet_day'] $rs['runsheet_day'];
+            $runsheet['created_date'] = $rs['created_date'];
+            $runsheet['updated_date'] = $rs['updated_date'];
+            $runsheet['created_by'] = $rs['created_by'];
+            $runsheet['updated_by'] = $rs['updated_by'];
+            $runsheet['runsheet_id'] = $rs['runsheet_id'];
+            $runsheet['driver_name'] = $rs['driver_name'];
+            $runsheet['tasks'][] = array(
                 'task_id'                   => $rs['id'],
                 'job_id'                    => $rs['job_id'],
                 'order_id'                  => $rs['order_id'],
