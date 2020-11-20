@@ -67,7 +67,7 @@ class pdfController extends Controller
                 $address_string .= "<br>".$task['postcode'];
                 if(!empty($task['delivery_instructions']))
                     $address_string .= "<br><br>".$task['delivery_instructions'];
-                $fsg_contact = (empty($task['fsg_contact']))? "Mike<br>03 86777 418" : ucwords($task['fsg_contact']);
+                $fsg_contact = (is_null($task['fsg_contact']))? "Mike<br>03 86777 418" : ucwords($task['fsg_contact']);
 
                 $table_body .= "
                   <tr>
