@@ -43,6 +43,11 @@ class Runsheet extends Model{
         return $this->getRunsheetsForDisplay(1, 1, $driver_id, $runsheet_id, true);
     }
 
+    public function getRunsheetsForFinalising()
+    {
+        return $this->getRunsheetsForDisplay(false, true, false, false, true);
+    }
+
     public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false)
     {
         $db = Database::openConnection();
