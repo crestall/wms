@@ -323,6 +323,24 @@ class RunsheetsController extends Controller
         ]);
     }
 
+    public function finaliseRunsheet()
+    {
+        $runsheet = array();
+        if(!(isset($this->request->params['args']['runsheet']) && isset($this->request->params['args']['driver'])))
+        {
+            $runsheet_id = 0;
+            $driver_id = 0;
+            $tasks = array();
+        }
+        else
+        {
+            $runsheet_id = $this->request->params['args']['runsheet'];
+            $driver_id = $this->request->params['args']['driver'];
+            $tasks = $this->runsheet->getTasksForCompletion($runsheet_id, $driver_id);
+        }
+        echo "TASK<pre>",print_r($tasks),"</pre>";
+    }
+
     public function viewRunsheets()
     {
         $rss = $this->runsheet->getViewRunsheets();
