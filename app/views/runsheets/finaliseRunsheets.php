@@ -31,12 +31,12 @@
                             <tr>
                                 <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
                                 <td><?php echo ucwords($rs['drivers'][0]['name']);?></td>
-                                <td><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][0]['id';?>">Finalise</a></td>
+                                <td><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][0]['id'];?>">Finalise</a></td>
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr>
                                 <td><?php echo ucwords($rs['drivers'][$i]['name']);?></td>
-                                <td><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][$i]['id';?>">Finalise</a></td>
+                                <td><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][$i]['id'];?>">Finalise</a></td>
                                 </tr>
                             <?php endfor;?>
                         <?php endforeach;?>
