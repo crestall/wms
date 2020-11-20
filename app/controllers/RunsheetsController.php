@@ -317,7 +317,7 @@ class RunsheetsController extends Controller
         Config::setJsConfig('curPage', "finalise-runsheets");
         Config::set('curPage', "finalise-runsheets");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/finaliseRunsheets.php', [
-            'page_title'    =>  "Finalise Runsheets",
+            'page_title'    =>  "Runsheets Requiring Finalising",
             'pht'           =>  ": Finalise Runsheets",
             'runsheets'     =>  $runsheets
         ]);
