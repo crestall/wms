@@ -36,22 +36,47 @@ class pdfController extends Controller
             return $this->error(400);
         $rss = $this->runsheet->getRunsheetForPrinting($this->request->data['runsheet_id'], $this->request->data['driver_id']);
         $runsheet = Utility::createPrintRunsheetArray($rss);
-        echo "<pre>",print_r($runsheet),"</pre>";die();
+        //echo "<pre>",print_r($runsheet),"</pre>";die();
         $driver = $runsheet['driver_name'];
         $runsheet_day = $runsheet['runsheet_day'];
         $table_body = "";
-        if(isset($post_data['tasks']))
+        if(isset($runsheet['tasks']))
         {
-            foreach($post_data['tasks'] as $task)
+            foreach($runsheet['tasks'] as $task)
             {
+                if($task['order_id'] == 0)
+                {
+                    $delivery_id    = $task['order_number']."/".$task['client_order_id'];
+                    $customer       = $task['order_client_name'];
+                    $description    = $task['order_description'];
+                }
+                else
+                {
+                    $delivery_id    = $task['job_number'];
+                    $customer       = $task['customer_name'];
+                    $description    = $task['job_description'];
+                }
+
+                $address_string = $task['deliver_to'];
+                if(!empty($task['attention']))
+                    $address_string .= "<br>".$task['attention'];
+                $address_string .= "<br>".$task['address'];
+                if(!empty($task['address_2']))
+                    $address_string .= "<br>".$task['address_2'];
+                $address_string .= "<br>".$task['suburb'];
+                $address_string .= "<br>".$task['postcode'];
+                if(!empty($task['delivery_instructions']))
+                    $address_string .= "<br>".$task['delivery_instructions'];
+                $fsg_contact = (empty($task['fsg_contact']))? "Mike<br>03 86777 418" : ucwords($task['fsg_contact']);
+
                 $table_body .= "
                   <tr>
-                    <td>{$job['job_id']}</td>
-                    <td>$send_to</td>
-                    <td>{$job['description']}</td>
+                    <td>$delivery_id</td>
+                    <td>$customer</td>
+                    <td>$description</td>
                     <td>$address_string</td>
-                    <td>$units</td>
-                    <td>".ucwords($job['salesrep_name'])."</td>
+                    <td>{$task['units']}</td>
+                    <td>$fsg_contact</td>
                     <td></td>
                     <td></td>
                   </tr>
@@ -60,57 +85,14 @@ class pdfController extends Controller
 
 
 
-
+                /*
                     $this->runsheet->runsheetPrinted(array(
                         'driver_id'     => $post_data['driver_id'],
                         'units'         => $units,
                         'runsheet_id'   => $post_data['runsheet_id'],
                         'task_id'       => $details['task_id']
                     ));
-
-            }
-        }
-        if(isset($post_data['tasks']['orders']))
-        {
-            foreach($post_data['tasks']['orders'] as $order_id => $details)
-            {
-                if(isset($details['include']))
-                {
-                    $order = $this->order->getOrderDetail($order_id);
-                    $units = $details['units'];
-                    //echo "<pre>",print_r($order),"</pre>"; continue;
-                    $address_string = "";
-                    $send_to = $order['ship_to'];
-                    if(!empty($order['address']))     $address_string .= $order['address'];
-                    if(!empty($order['address2']))    $address_string .= "<br>".$order['address2'];
-                    if(!empty($order['suburb']))      $address_string .= "<br>".$order['suburb'];
-                    if(!empty($order['postcode']))    $address_string .= "<br>".$order['postcode'];
-                    $items = $this->order->getItemsForOrderNoLocations($order_id);
-                    //echo "<pre>",print_r($items),"</pre>"; continue;
-                    $description = "";
-                    foreach($items as $item)
-                    {
-                        $description .= "<p>{$item['qty']} of {$item['name']}</p>";
-                    }
-                    $table_body .= "
-                        <tr>
-                            <td>{$order['order_number']}</td>
-                            <td>$send_to</td>
-                            <td>$description</td>
-                            <td>$address_string</td>
-                            <td>$units</td>
-                            <td>Mike Bond</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    ";
-                    $this->runsheet->runsheetPrinted(array(
-                            'driver_id'     => $post_data['driver_id'],
-                            'units'         => $units,
-                            'runsheet_id'   => $post_data['runsheet_id'],
-                            'task_id'       => $details['task_id']
-                    ));
-                }
+                */
             }
         }
         //die();
@@ -120,7 +102,7 @@ class pdfController extends Controller
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/runsheet.php', [
             'driver'        => $driver,
             'table_body'    => $table_body,
-            'runsheet_day'  => date("jS M, Y", )
+            'runsheet_day'  => date("jS M, Y", $runsheet_day)
         ]);
         $stylesheet = file_get_contents(STYLES."runsheets.css");
         $pdf->WriteHTML($stylesheet,1);
