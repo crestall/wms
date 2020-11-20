@@ -36,7 +36,7 @@ class pdfController extends Controller
             return $this->error(400);
         $rss = $this->runsheet->getRunsheetForPrinting($this->request->data['runsheet_id'], $this->request->data['driver_id']);
         $runsheet = Utility::createPrintRunsheetArray($rss);
-        echo "<pre>",print_r($runsheet),"</pre>";die();
+        //echo "<pre>",print_r($runsheet),"</pre>";die();
         $driver = $runsheet['driver_name'];
         $runsheet_day = $runsheet['runsheet_day'];
         $table_body = "";
@@ -44,7 +44,7 @@ class pdfController extends Controller
         {
             foreach($runsheet['tasks'] as $task)
             {
-                if($task['order_id'] == 0)
+                if($task['order_id'] > 0)
                 {
                     $delivery_id    = $task['order_number']."/".$task['client_order_id'];
                     $customer       = $task['order_client_name'];
