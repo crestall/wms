@@ -9,10 +9,7 @@ function getDriverTasks($driver, $runsheet_id)
     {
         $task_number = ($task['job_number'] > 0)? "JOB: ".$task['job_number'] : "ORDER: ".$task['order_number'];
         $html .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3 pb-3 pl-3'>";
-        $html .= "  <div class='checkbox checkbox-default'>
-                        <input type='checkbox' class='task-select runsheetid_$runsheet_id styled' data-taskid='{$task['task_id']}' id='select_{$task['task_id']}' checked />
-                        <label for='select_{$task['task_id']}'>$task_number</label>
-                    </div>";
+        $html .= " ";
         $html .= "</div>";
         $task_ids[] = $task['task_id'];
     }
@@ -20,8 +17,6 @@ function getDriverTasks($driver, $runsheet_id)
     $tids = htmlspecialchars(json_encode($task_ids), ENT_QUOTES, 'UTF-8');
     $html .= "</td>";
     $html .= "<td>
-                <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Selected Tasks</button></p>
-                <p><button class='btn btn-sm btn-outline-fsg complete-tasks' data-runsheetid='$runsheet_id' data-taskids='$tids'>Complete Selected Tasks</button></p>
             </td>";
     return $html;
 }

@@ -110,6 +110,7 @@
                 'finalise-runsheets':{
                     init:function(){
                         $('button.complete-tasks').click(function(e){
+                            return;
                             var runsheet_id = $(this).data('runsheetid');
                             var tids = $(this).data('taskids');
                             var task_ids = [];
@@ -141,72 +142,6 @@
                                     {
                                         $.ajax({
                                             url: '/ajaxfunctions/complete-runsheet-tasks',
-                                            method: 'post',
-                                            data: {
-                                                task_ids: task_ids,
-                                                runsheet_id: runsheet_id
-                                            },
-                                            dataType: 'json',
-                                            beforeSend: function(){
-                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing From Runsheet...</h1></div>' });
-                                            },
-                                            success: function(d){
-                                                if(d.error)
-                                                {
-                                                    $.unblockUI();
-                                                    alert('error');
-                                                }
-                                                else
-                                                {
-                                                    location.reload(true);
-                                                    //window.location.href = "http://stackoverflow.com";
-                                                }
-                                            },
-                                            error: function(jqXHR, textStatus, errorThrown){
-                                                $.unblockUI();
-                                                document.open();
-                                                document.write(jqXHR.responseText);
-                                                document.close();
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        });
-
-
-                        $('button.remove-tasks').click(function(e){
-                            var runsheet_id = $(this).data('runsheetid');
-                            var tids = $(this).data('taskids');
-                            var task_ids = [];
-                            $.each(tids, function(i, v){
-                                if($('input#select_'+v).prop('checked'))
-                                {
-                                    task_ids.push(v);
-                                }
-                            })
-                            //console.log('ids to deal with: '+task_ids);
-                            if(!task_ids.length)
-                            {
-                                swal({
-                                    title: "No Tasks Selected",
-                                    text: "No tasks have been selected to delete",
-                                    icon: "error"
-                                });
-                            }
-                            else
-                            {
-                                swal({
-                                    title: "Really remove task(s) from the runsheet?",
-                                    text: "This cannot be undone",
-                                    icon: "warning",
-                                    buttons: true,
-                                    dangerMode: true
-                                }).then( function(removeTask) {
-                                    if(removeTask)
-                                    {
-                                        $.ajax({
-                                            url: '/ajaxfunctions/remove-tasks-from-runsheet',
                                             method: 'post',
                                             data: {
                                                 task_ids: task_ids,
