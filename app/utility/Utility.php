@@ -478,7 +478,10 @@ class Utility{
                 'job_id'                    => $rs['job_id'],
                 'order_id'                  => $rs['order_id'],
                 'job_number'                => $rs['job_number'],
+                'order_number'              => $rs['order_number'],
+                'client_order_id'           => $rs['client_order_id'],
                 'customer_name'             => $rs['customer_name'],
+                'order_client_name'         => $rs['order_client_name'],
                 'job_description'           => $rs['description'],
                 'order_description'         => $rs['item_name']."(".$rs['sku'].")",
                 'deliver_to'                => $rs['deliver_to'],
@@ -488,7 +491,6 @@ class Utility{
                 'suburb'                    => $rs['suburb'],
                 'postcode'                  => $rs['postcode'],
                 'delivery_instructions'     => $rs['delivery_instructions'],
-                'units'                     => $rs['units'],
                 'units'                     => $rs['units'],
                 'fsg_contact'               => $rs['FSG_contact']."<br>".$rs['FSG_contact_phone']
 

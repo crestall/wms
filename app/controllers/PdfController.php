@@ -37,56 +37,37 @@ class pdfController extends Controller
         $rss = $this->runsheet->getRunsheetForPrinting($this->request->data['runsheet_id'], $this->request->data['driver_id']);
         $runsheet = Utility::createPrintRunsheetArray($rss);
         echo "<pre>",print_r($runsheet),"</pre>";die();
-        $post_data = $this->request->data;
-        $data['runsheet_id'] = $post_data['runsheet_id'];
-        $driver = ($post_data['driver_id'] > 0)? $this->driver->getDriverName($post_data['driver_id']) : "";
+        $driver = $runsheet['driver_name'];
+        $runsheet_day = $runsheet['runsheet_day'];
         $table_body = "";
-        if(isset($post_data['tasks']['jobs']))
+        if(isset($post_data['tasks']))
         {
-            foreach($post_data['tasks']['jobs'] as $job_id => $details)
+            foreach($post_data['tasks'] as $task)
             {
-                if(isset($details['include']))
-                {
-                    $job = $this->productionjob->getJobById($job_id);
-                    $units = $details['units'];
-                    //echo "<pre>",print_r($job),"</pre>"; continue;
-                    $address_string = "";
-                    if(isset($details['finisher']))
-                    {
-                        $send_to = $job['finisher_name'];
-                        if(!empty($job['finisher_address']))     $address_string .= $job['finisher_address'];
-                        if(!empty($job['finisher_address2']))    $address_string .= "<br>".$job['finisher_address2'];
-                        if(!empty($job['finisher_suburb']))      $address_string .= "<br>".$job['finisher_suburb'];
-                        if(!empty($job['finisher_postcode']))    $address_string .= "<br>".$job['finisher_postcode'];
-                    }
-                    else
-                    {
-                        $send_to = $job['customer_name'];
-                        if(!empty($job['job_address']))     $address_string .= $job['job_address'];
-                        if(!empty($job['job_address2']))    $address_string .= "<br>".$job['job_address2'];
-                        if(!empty($job['job_suburb']))      $address_string .= "<br>".$job['job_suburb'];
-                        if(!empty($job['job_postcode']))    $address_string .= "<br>".$job['job_postcode'];
-                    }
+                $table_body .= "
+                  <tr>
+                    <td>{$job['job_id']}</td>
+                    <td>$send_to</td>
+                    <td>{$job['description']}</td>
+                    <td>$address_string</td>
+                    <td>$units</td>
+                    <td>".ucwords($job['salesrep_name'])."</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                ";
 
-                    $table_body .= "
-                      <tr>
-                        <td>{$job['job_id']}</td>
-                        <td>$send_to</td>
-                        <td>{$job['description']}</td>
-                        <td>$address_string</td>
-                        <td>$units</td>
-                        <td>".ucwords($job['salesrep_name'])."</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    ";
+
+
+
+
                     $this->runsheet->runsheetPrinted(array(
                         'driver_id'     => $post_data['driver_id'],
                         'units'         => $units,
                         'runsheet_id'   => $post_data['runsheet_id'],
                         'task_id'       => $details['task_id']
                     ));
-                }
+
             }
         }
         if(isset($post_data['tasks']['orders']))
@@ -138,7 +119,8 @@ class pdfController extends Controller
         $pdf->SetDisplayMode('fullpage');
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/runsheet.php', [
             'driver'        => $driver,
-            'table_body'    => $table_body
+            'table_body'    => $table_body,
+            'runsheet_day'  => date("jS M, Y", )
         ]);
         $stylesheet = file_get_contents(STYLES."runsheets.css");
         $pdf->WriteHTML($stylesheet,1);
