@@ -483,7 +483,7 @@ class Utility{
                 'customer_name'             => $rs['customer_name'],
                 'order_client_name'         => $rs['order_client_name'],
                 'job_description'           => $rs['description'],
-                'order_description'         => $rs['item_name']."(".$rs['sku'].")",
+                'order_description'         => $rs['item_name']."<br>(".$rs['sku'].")",
                 'deliver_to'                => $rs['deliver_to'],
                 'attention'                 => $rs['attention'],
                 'address'                   => $rs['address'],
