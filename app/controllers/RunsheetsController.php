@@ -308,7 +308,7 @@ class RunsheetsController extends Controller
 
     public function finaliseRunsheets()
     {
-        $rss = $this->runsheet->getRunsheetsForFinalising;
+        $rss = $this->runsheet->getRunsheetsForFinalising();
         echo "<pre>",print_r($rss),"</pre>";die();
         //$runsheets = $this->generateRunsheetDriverArray($rss);
         $runsheets = Utility::generateRunsheetDriverArray($rss);
