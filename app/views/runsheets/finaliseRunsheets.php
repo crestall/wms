@@ -31,12 +31,12 @@
                             <tr>
                                 <td rowspan="<?php echo $rows;?>" style="vertical-align: middle"><h4><?php echo date('D jS M', $timestamp );?></h4></td>
                                 <td style="vertical-align: middle"><?php echo ucwords($rs['drivers'][0]['name']);?></td>
-                                <td style="text-align:center;"><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][0]['id'];?>">Finalise</a></td>
+                                <td style="text-align:center;"><a class="btn btn-lg btn-outline-success" href="/runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][0]['id'];?>">Finalise</a></td>
                             </tr>
                             <?php for($i = 1; $i < $rows; ++$i):?>
                                 <tr>
                                     <td style="vertical-align: middle"><?php echo ucwords($rs['drivers'][$i]['name']);?></td>
-                                    <td style="text-align:center;"><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][$i]['id'];?>">Finalise</a></td>
+                                    <td style="text-align:center;"><a class="btn btn-lg btn-outline-success" href="/runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][$i]['id'];?>">Finalise</a></td>
                                 </tr>
                             <?php endfor;?>
                         <?php endforeach;?>
