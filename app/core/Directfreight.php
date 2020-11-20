@@ -241,7 +241,7 @@
             $array['Width'] = ceil($p['width']);
             $array['Height'] = ceil($p['height']);
             $array['Length'] = ceil($p['depth']);
-            $array['KGS'] = ceil($p['weight']);
+            $array['KGS'] = ceil($p['weight'] * $p['pieces']);
             $details['ConsignmentLineItems'][] = $array;
         }
         $consignment_list = array(

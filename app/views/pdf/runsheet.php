@@ -24,7 +24,7 @@
                     <td style="text-align: right">
                         Date:
                     </td>
-                    <td style="border-bottom: 1px dotted black; width: 75mm; text-align: center"><?php echo date("jS M, Y");?></td>
+                    <td style="border-bottom: 1px dotted black; width: 75mm; text-align: center"><?php echo $runsheet_day;?></td>
                 </tr>
             </table>
         </div>
@@ -35,8 +35,8 @@
                         <th style="width: 16mm">Job Id/Order Number</th>
                         <th style="width: 38mm">Customer/ Client/ Finisher</th>
                         <th style="width: 41mm">Description</th>
-                        <th style="width: 74mm">Address</th>
-                        <th style="width: 12mm">Units</th>
+                        <th style="width: 68mm">Address</th>
+                        <th style="width: 18mm">Units</th>
                         <th style="width: 27mm">FSG Contact</th>
                         <th style="width: 27mm">Received By</th>
                         <th style="width: 25mm">Time of Drop</th>

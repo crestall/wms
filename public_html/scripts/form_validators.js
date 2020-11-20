@@ -117,28 +117,13 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $("form#print_runsheet").validate({
-        ignore: {
-            task: true
-        },
+    $("form#prepare_runsheet").validate({
         rules: {
             driver_id:{
                 notNone: true
-            },
-            task: {
-               required: function (element) {
-                    var boxes = $('.task');
-                    if (boxes.filter(':checked').length == 0) {
-                        return true;
-                    }
-                    return false;
-                }
             }
         },
         messages: {
-            task: {
-                required: "Please select at least one job or order to add to the runsheet."
-            },
             driver_id:{
                 notNone: "A driver is required"
             }
@@ -176,7 +161,10 @@ $(document).ready(function() {
                     url: '/ajaxfunctions/checkJobIds',
                     data: { 'current_jobid': function(){ return $("#current_jobid").val(); } }
                 }
-			}
+			},
+            date_due:{
+                required:"#strict_dd:checked"
+            }
     	},
 		messages:{
 			status_id:{
@@ -184,7 +172,10 @@ $(document).ready(function() {
 			},
             job_id: {
 				remote: 'This Job Id is already in use. Job Ids must be unique'
-			}
+			},
+            date_due:{
+                required: 'This is required for strict due date '
+            }
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////

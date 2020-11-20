@@ -14,7 +14,7 @@ class pdfController extends Controller
         parent::beforeAction();
         $action = $this->request->param('action');
         $post_actions = array(
-            'printRunsheet'
+
         );
         $this->Security->requirePost($post_actions);
         if(in_array($action, $post_actions))
@@ -27,171 +27,64 @@ class pdfController extends Controller
         }
     }
 
-    public function printVicLocalLabels()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf([
-            'mode'          => 'utf-8',
-            'format'        => [148,105],
-            'margin_left'   => 5,
-            'margin_right'  => 5,
-            'margin_top'    => 5,
-            'margin_bottom' => 5
-        ]);
-        $order_ids  = $this->request->data['orders'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/viclocallabels.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
-        //$pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printCometLocalLabels()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
-        $pdf = new Mympdf([
-            'mode'          => 'utf-8',
-            'format'        => [148,105],
-            'margin_left'   => 5,
-            'margin_right'  => 5,
-            'margin_top'    => 5,
-            'margin_bottom' => 5
-        ]);
-        $order_ids  = $this->request->data['orders'];
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/cometlocallabels.php', [
-            'orders_ids'    =>  $order_ids
-        ]);
-        //$stylesheet = file_get_contents(STYLES."local_sticker.css");
-        //$pdf->WriteHTML($stylesheet,1);
-        $pdf->WriteHTML($html, 2);
-        $pdf->Output();
-    }
-
-    public function printHuntersLabels()
-    {
-        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => [148,105]]);
-        $order_ids  = $this->request->data['orders'];
-        foreach($order_ids as $order_id)
-        {
-            $od = $this->order->getOrderDetail($order_id);
-            $base64pdf = $od['hunters_label'];
-            file_put_contents(BASE_DIR."/_tmp/label_{$order_id}.pdf", base64_decode($base64pdf));
-            $pdfs[] = array(
-                'file'          =>  BASE_DIR."/_tmp/label_{$order_id}.pdf",
-                'orientation'   =>  "P"
-            );
-            $this->order->updateStatus($this->order->packed_id, $order_id);
-        }
-        $today = date("Ymd", time());
-        $pdf->mergePDFFiles($pdfs, "hunters_labels_".$today.".pdf");
-        foreach($pdfs as $pdf)
-        {
-            unlink($pdf['file']);
-        }
-    }
-
     public function printRunsheet()
     {
-        //echo "<pre>",print_r($this->request),"</pre>";//die();
+        //echo "<pre>",print_r($this->request),"</pre>";die();
         // set up the data for the pdf
         $data = array();
         if(empty($this->request->data))
             return $this->error(400);
-        $post_data = $this->request->data;
-        $data['runsheet_id'] = $post_data['runsheet_id'];
-        $driver = ($post_data['driver_id'] > 0)? $this->driver->getDriverName($post_data['driver_id']) : "";
+        $rss = $this->runsheet->getRunsheetForPrinting($this->request->data['runsheet_id'], $this->request->data['driver_id']);
+        $runsheet = Utility::createPrintRunsheetArray($rss);
+        //echo "<pre>",print_r($runsheet),"</pre>";die();
+        $driver = $runsheet['driver_name'];
+        $runsheet_day = $runsheet['runsheet_day'];
+        $runsheet_id = $runsheet['runsheet_id'];
         $table_body = "";
-        if(isset($post_data['tasks']['jobs']))
+        if(isset($runsheet['tasks']))
         {
-            foreach($post_data['tasks']['jobs'] as $job_id => $details)
+            foreach($runsheet['tasks'] as $task)
             {
-                if(isset($details['include']))
+                if($task['order_id'] > 0)
                 {
-                    $job = $this->productionjob->getJobById($job_id);
-                    $units = $details['units'];
-                    //echo "<pre>",print_r($job),"</pre>"; continue;
-                    $address_string = "";
-                    if(isset($details['finisher']))
-                    {
-                        $send_to = $job['finisher_name'];
-                        if(!empty($job['finisher_address']))     $address_string .= $job['finisher_address'];
-                        if(!empty($job['finisher_address2']))    $address_string .= "<br>".$job['finisher_address2'];
-                        if(!empty($job['finisher_suburb']))      $address_string .= "<br>".$job['finisher_suburb'];
-                        if(!empty($job['finisher_postcode']))    $address_string .= "<br>".$job['finisher_postcode'];
-                    }
-                    else
-                    {
-                        $send_to = $job['customer_name'];
-                        if(!empty($job['job_address']))     $address_string .= $job['job_address'];
-                        if(!empty($job['job_address2']))    $address_string .= "<br>".$job['job_address2'];
-                        if(!empty($job['job_suburb']))      $address_string .= "<br>".$job['job_suburb'];
-                        if(!empty($job['job_postcode']))    $address_string .= "<br>".$job['job_postcode'];
-                    }
+                    $delivery_id    = $task['order_number']." / ".$task['client_order_id'];
+                    $customer       = $task['order_client_name'];
+                    $description    = $task['order_description'];
+                }
+                else
+                {
+                    $delivery_id    = $task['job_number'];
+                    $customer       = $task['customer_name'];
+                    $description    = $task['job_description'];
+                }
 
-                    $table_body .= "
-                      <tr>
-                        <td>{$job['job_id']}</td>
-                        <td>$send_to</td>
-                        <td>{$job['description']}</td>
-                        <td>$address_string</td>
-                        <td>$units</td>
-                        <td>".ucwords($job['salesrep_name'])."</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    ";
-                    $this->runsheet->runsheetPrinted(array(
-                        'driver_id'     => $post_data['driver_id'],
-                        'units'         => $units,
-                        'runsheet_id'   => $post_data['runsheet_id'],
-                        'task_id'       => $details['task_id']
-                    ));
-                }
-            }
-        }
-        if(isset($post_data['tasks']['orders']))
-        {
-            foreach($post_data['tasks']['orders'] as $order_id => $details)
-            {
-                if(isset($details['include']))
-                {
-                    $order = $this->order->getOrderDetail($order_id);
-                    $units = $details['units'];
-                    //echo "<pre>",print_r($order),"</pre>"; continue;
-                    $address_string = "";
-                    $send_to = $order['ship_to'];
-                    if(!empty($order['address']))     $address_string .= $order['address'];
-                    if(!empty($order['address2']))    $address_string .= "<br>".$order['address2'];
-                    if(!empty($order['suburb']))      $address_string .= "<br>".$order['suburb'];
-                    if(!empty($order['postcode']))    $address_string .= "<br>".$order['postcode'];
-                    $items = $this->order->getItemsForOrderNoLocations($order_id);
-                    //echo "<pre>",print_r($items),"</pre>"; continue;
-                    $description = "";
-                    foreach($items as $item)
-                    {
-                        $description .= "<p>{$item['qty']} of {$item['name']}</p>";
-                    }
-                    $table_body .= "
-                        <tr>
-                            <td>{$order['order_number']}</td>
-                            <td>$send_to</td>
-                            <td>$description</td>
-                            <td>$address_string</td>
-                            <td>$units</td>
-                            <td>Mike Bond</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    ";
-                    $this->runsheet->runsheetPrinted(array(
-                            'driver_id'     => $post_data['driver_id'],
-                            'units'         => $units,
-                            'runsheet_id'   => $post_data['runsheet_id'],
-                            'task_id'       => $details['task_id']
-                    ));
-                }
+                $address_string = $task['deliver_to'];
+                if(!empty($task['attention']))
+                    $address_string .= "<br>".$task['attention'];
+                $address_string .= "<br>".$task['address'];
+                if(!empty($task['address_2']))
+                    $address_string .= "<br>".$task['address_2'];
+                $address_string .= "<br>".$task['suburb'];
+                $address_string .= "<br>".$task['postcode'];
+                if(!empty($task['delivery_instructions']))
+                    $address_string .= "<br><br>".$task['delivery_instructions'];
+
+                $table_body .= "
+                  <tr>
+                    <td>$delivery_id</td>
+                    <td>$customer</td>
+                    <td>$description</td>
+                    <td>$address_string</td>
+                    <td>{$task['units']}</td>
+                    <td>{$task['fsg_contact']}</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                ";
+                $this->runsheet->runsheetPrinted(array(
+                    'runsheet_id'   => $runsheet_id,
+                    'task_id'       => $task['task_id']
+                ));
             }
         }
         //die();
@@ -200,7 +93,8 @@ class pdfController extends Controller
         $pdf->SetDisplayMode('fullpage');
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/runsheet.php', [
             'driver'        => $driver,
-            'table_body'    => $table_body
+            'table_body'    => $table_body,
+            'runsheet_day'  => date("jS M, Y", $runsheet_day)
         ]);
         $stylesheet = file_get_contents(STYLES."runsheets.css");
         $pdf->WriteHTML($stylesheet,1);

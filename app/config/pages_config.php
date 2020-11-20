@@ -69,6 +69,10 @@ $padmin = array(
         'prepare-runsheets'     => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-pencil-alt" data-fa-transform="right-5 shrink-6 up-2"></i></span></div>'
+        ),
+        'prepare-runsheet'  => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'production-reports'    => array(

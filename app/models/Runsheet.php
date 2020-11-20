@@ -28,30 +28,60 @@ class Runsheet extends Model{
         return $db->queryData($q);
     }
 
-    public function getRunsheetsForDisplay($completed = false, $printed = false)
+    public function getRunsheetsForPreparation($runsheet_id = false)
+    {
+        return $this->getRunsheetsForDisplay(false, 0, 0, $runsheet_id);
+    }
+
+    public function getViewRunsheets($runsheet_id = false)
+    {
+        return $this->getRunsheetsForDisplay(false, 0, false, $runsheet_id, true);
+    }
+
+    public function getRunsheetForPrinting($runsheet_id, $driver_id)
+    {
+        return $this->getRunsheetsForDisplay(1, 1, $driver_id, $runsheet_id, true);
+    }
+
+    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false)
     {
         $db = Database::openConnection();
         $q = $this->getRunsheetQuery();
-        if($completed)
+        $q .= " WHERE";
+        if($completed === false)
         {
-            $q .= " WHERE rst.completed = 1";
+            $q .= " rst.completed = 0 AND";
         }
-        else
+        elseif($completed === true)
         {
-            $q .= " WHERE rst.completed = 0";
+            $q .= " rst.completed = 1 AND";
         }
-        if($printed)
+        if($printed === true)
         {
-            $q .= " AND rst.printed = 1";
+            $q .= " rst.printed = 1 AND";
         }
-        else
+        elseif($printed === false)
         {
-            $q .= " AND rst.printed = 0";
+            $q .= " rst.printed = 0 AND";
         }
+        if($driver_id !== false)
+        {
+            $q .= " rst.driver_id = $driver_id AND";
+        }
+        elseif($driver_set)
+        {
+            $q .= " rst.driver_id != 0 AND";
+        }
+        if($runsheet_id !== false)
+        {
+            $q .= " rs.id = $runsheet_id ";
+        }
+        $q = rtrim($q, "AND");
         $q .= "
             ORDER BY
                 rs.runsheet_day DESC
         ";
+        //echo $q; die();
         return $db->queryData($q);
     }
 
@@ -138,6 +168,23 @@ class Runsheet extends Model{
             'job_id'        => $job_id
        );
        return $db->query($query, $params);
+    }
+
+    public function updateTask($details)
+    {
+       $db = Database::openConnection();
+       $runsheet_id = $details['runsheet_id'];
+       unset($details['runsheet_id']);
+       $task_id = $details['task_id'];
+       unset($details['task_id']);
+       //record runsheet update
+       $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
+        $db->updateDatabaseFields($this->tasks_table, $details, $task_id);
+        return true;
     }
 
     public function removeTasks($task_ids, $runsheet_id)
@@ -296,18 +343,22 @@ class Runsheet extends Model{
                 rs.runsheet_day, rs.created_date, rs.updated_date, rs.created_by, rs.updated_by,
                 rst.*,
                 d.name AS driver_name,
-                pj.job_id AS job_number, pj.description,
-                pc.name AS customer_name, pc.address AS job_address, pc.address_2 AS job_address2, pc.suburb AS job_suburb, pc.postcode AS job_postcode,
-                o.ship_to AS order_customer, o.order_number, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
-                c.client_name AS order_client_name
+                pj.job_id AS job_number,pj.delivery_instructions AS job_delivery_instructions, pj.description, pj.ship_to AS job_shipto, pj.attention AS job_attention, pj.address AS job_address, pj.address_2 AS job_address2, pj.suburb AS job_suburb, pj.postcode AS job_postcode,
+                pc.name AS customer_name,
+                o.ship_to AS order_customer,o.client_order_id, o.order_number,o.instructions AS order_delivery_instructions, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
+                c.client_name AS order_client_name,
+                i.name AS item_name, i.sku,
+                sr.name AS FSG_contact, sr.phone AS FSG_contact_phone
             FROM
                 {$this->table} rs
                 JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id
                 LEFT JOIN production_jobs pj ON rst.job_id = pj.id
+                LEFT JOIN sales_reps sr ON sr.id = pj.salesrep_id
                 LEFT JOIN drivers d ON d.id = rst.driver_id
                 LEFT JOIN `production_customers` pc ON pj.customer_id = pc.id
                 LEFT JOIN orders o ON rst.order_id = o.id
                 LEFT JOIN clients c ON o.client_id = c.id
+                LEFT JOIN (SELECT GROUP_CONCAT(DISTINCT items.name SEPARATOR ', ') AS name, GROUP_CONCAT(DISTINCT items.sku SEPARATOR ', ') AS sku, oi.order_id FROM items JOIN orders_items oi ON oi.item_id = items.id GROUP BY oi.order_id) i ON i.order_id = o.id
         ";
     }
 }

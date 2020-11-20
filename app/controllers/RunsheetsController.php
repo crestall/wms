@@ -113,6 +113,79 @@ class RunsheetsController extends Controller
         ]);
     }
 
+    public function prepareRunsheet()
+    {
+        $runsheet = array();
+        if(!isset($this->request->params['args']['runsheet']))
+        {
+            $runsheet_id = 0;
+            $tasks = array();
+        }
+        else
+        {
+            $runsheet_id = $this->request->params['args']['runsheet'];
+            //$tasks = $this->runsheet->getRunsheetDetailsById($runsheet_id);
+            $tasks = $this->runsheet->getRunsheetsForPreparation($runsheet_id);
+        }
+        //echo "TASK<pre>",print_r($tasks),"</pre>";
+        foreach($tasks as $task)
+        {
+            $runsheet['runsheet_day'] = $task['runsheet_day'];
+            $runsheet['driver_id'] = $task['driver_id'];
+            if(!isset($runsheet['jobs']))
+            {
+                $runsheet['jobs'] =array();
+            }
+            if(!isset($runsheet['orders']))
+            {
+                $runsheet['orders'] =array();
+            }
+            if(!empty($task['job_id']))
+            {
+                $runsheet['jobs'][] = array(
+                    'task_id'                   => $task['id'],
+                    'job_shipto'                => $task['job_shipto'],
+                    'job_units'                 => $task['units'],
+                    'job_attention'             => $task['job_attention'],
+                    'job_number'                => $task['job_number'],
+                    'job_id'                    => $task['job_id'],
+                    'job_customer'              => $task['customer_name'],
+                    'job_address'               => $task['job_address'],
+                    'job_address2'              => $task['job_address2'],
+                    'job_suburb'                => $task['job_suburb'],
+                    'job_postcode'              => $task['job_postcode'],
+                    'job_delivery_instructions' => $task['job_delivery_instructions']
+                );
+            }
+            if(!empty($task['order_number']))
+            {
+                $runsheet['orders'][] = array(
+                    'task_id'                       => $task['id'],
+                    'order_number'                  => $task['order_number'],
+                    'client_order_id'               => $task['client_order_id'],
+                    'order_id'                      => $task['order_id'],
+                    'order_units'                   => $task['units'],
+                    'order_customer'                => $task['order_customer'],
+                    'order_address'                 => $task['order_address'],
+                    'order_address2'                => $task['order_address2'],
+                    'order_suburb'                  => $task['order_suburb'],
+                    'order_postcode'                => $task['order_postcode'],
+                    'order_client'                  => $task['order_client_name'],
+                    'order_delivery_instructions'   => $task['order_delivery_instructions']
+                );
+            }
+        }
+        //render the page
+        Config::setJsConfig('curPage', "prepare-runsheet");
+        Config::set('curPage', "prepare-runsheet");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/prepareSheet.php', [
+            'page_title'    =>  "Update and Prepare Runsheet For Printing",
+            'pht'           =>  ": Prepare Runsheet",
+            'runsheet_id'   =>  $runsheet_id,
+            'runsheet'      =>  $runsheet
+        ]);
+    }
+
     public function printRunsheet()
     {
         $runsheet = array();
@@ -175,7 +248,7 @@ class RunsheetsController extends Controller
 
     public function prepareRunsheets()
     {
-        $rss = $this->runsheet->getRunsheetsForDisplay();
+        $rss = $this->runsheet->getRunsheetsForPreparation();
         $runsheets = array();
         foreach($rss as $rs)
         {
@@ -243,6 +316,21 @@ class RunsheetsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/finaliseRunsheets.php', [
             'page_title'    =>  "Finalise Runsheets",
             'pht'           =>  ": Finalise Runsheets",
+            'runsheets'     =>  $runsheets
+        ]);
+    }
+
+    public function viewRunsheets()
+    {
+        $rss = $this->runsheet->getViewRunsheets();
+        $runsheets = $this->generateRunsheetDriverArray($rss);
+        //echo "<pre>",print_r($runsheets),"</pre>";die();
+        //render the page
+        Config::setJsConfig('curPage', "view-runsheets");
+        Config::set('curPage', "view-runsheets");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/viewRunsheets.php', [
+            'page_title'    =>  "View Runsheets",
+            'pht'           =>  ": View Runsheets",
             'runsheets'     =>  $runsheets
         ]);
     }
@@ -318,22 +406,27 @@ class RunsheetsController extends Controller
                 if(!empty($rs['job_id']))
                 {
                     $task_array['job_number'] = $rs['job_number'];
+                    $task_array['shipto'] = $rs['deliver_to'];
+                    $task_array['attention'] = $rs['attention'];
                     $task_array['customer'] = $rs['customer_name'];
-                    $task_array['address']['address'] = $rs['job_address'];
-                    $task_array['address']['address2'] = $rs['job_address2'];
-                    $task_array['address']['suburb'] = $rs['job_suburb'];
-                    $task_array['address']['postcode'] = $rs['job_postcode'];
+                    $task_array['address']['address'] = $rs['address'];
+                    $task_array['address']['address2'] = $rs['address_2'];
+                    $task_array['address']['suburb'] = $rs['suburb'];
+                    $task_array['address']['postcode'] = $rs['postcode'];
                     $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
                 }
                 if(!empty($rs['order_number']))
                 {
                     $task_array['order_number'] = $rs['order_number'];
+                    $task_array['shipto'] = $rs['deliver_to'];
+                    $task_array['attention'] = $rs['attention'];
                     $task_array['customer'] = $rs['order_customer'];
                     $task_array['client'] = $rs['order_client_name'];
-                    $task_array['address']['address'] = $rs['order_address'];
-                    $task_array['address']['address2'] = $rs['order_address2'];
-                    $task_array['address']['suburb'] = $rs['order_suburb'];
-                    $task_array['address']['postcode'] = $rs['order_postcode'];
+                    $task_array['client_order_id'] = $rs['client_order_id'];
+                    $task_array['address']['address'] = $rs['address'];
+                    $task_array['address']['address2'] = $rs['address_2'];
+                    $task_array['address']['suburb'] = $rs['suburb'];
+                    $task_array['address']['postcode'] = $rs['postcode'];
                     $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
                 }
                 ++$di;
@@ -345,23 +438,95 @@ class RunsheetsController extends Controller
                 {
                     $task_array['job_number'] = $rs['job_number'];
                     $task_array['customer'] = $rs['customer_name'];
-                    $task_array['address']['address'] = $rs['job_address'];
-                    $task_array['address']['address2'] = $rs['job_address2'];
-                    $task_array['address']['suburb'] = $rs['job_suburb'];
-                    $task_array['address']['postcode'] = $rs['job_postcode'];
+                    $task_array['shipto'] = $rs['deliver_to'];
+                    $task_array['attention'] = $rs['attention'];
+                    $task_array['address']['address'] = $rs['address'];
+                    $task_array['address']['address2'] = $rs['address_2'];
+                    $task_array['address']['suburb'] = $rs['suburb'];
+                    $task_array['address']['postcode'] = $rs['postcode'];
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
                 }
                 if(!empty($rs['order_number']))
                 {
                     $task_array['order_number'] = $rs['order_number'];
+                    $task_array['shipto'] = $rs['deliver_to'];
+                    $task_array['attention'] = $rs['attention'];
                     $task_array['customer'] = $rs['order_customer'];
                     $task_array['client'] = $rs['order_client_name'];
-                    $task_array['address']['address'] = $rs['order_address'];
-                    $task_array['address']['address2'] = $rs['order_address2'];
-                    $task_array['address']['suburb'] = $rs['order_suburb'];
-                    $task_array['address']['postcode'] = $rs['order_postcode'];
+                    $task_array['address']['address'] = $rs['address'];
+                    $task_array['address']['address2'] = $rs['address_2'];
+                    $task_array['address']['suburb'] = $rs['suburb'];
+                    $task_array['address']['postcode'] = $rs['postcode'];
+                    $task_array['client_order_id'] = $rs['client_order_id'];
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
                 }
+            }
+        }
+        return $runsheets;
+    }
+
+    private function createRunsheetArray($rss)
+    {
+        $runsheets = array();
+        foreach($rss as $rs)
+        {
+            if(!isset($runsheets[$rs['runsheet_day']]))
+            {
+                $runsheets[$rs['runsheet_day']] =array();
+            }
+            if(!isset($runsheets[$rs['runsheet_day']]['jobs']))
+            {
+                $runsheets[$rs['runsheet_day']]['jobs'] =array();
+            }
+            if(!isset($runsheets[$rs['runsheet_day']]['orders']))
+            {
+                $runsheets[$rs['runsheet_day']]['orders'] =array();
+            }
+            $runsheets[$rs['runsheet_day']]['created_date'] = $rs['created_date'];
+            $runsheets[$rs['runsheet_day']]['updated_date'] = $rs['updated_date'];
+            $runsheets[$rs['runsheet_day']]['created_by'] = $rs['created_by'];
+            $runsheets[$rs['runsheet_day']]['updated_by'] = $rs['updated_by'];
+            $runsheets[$rs['runsheet_day']]['runsheet_id'] = $rs['runsheet_id'];
+            if($rs['job_id'] > 0)
+            {
+                $runsheets[$rs['runsheet_day']]['jobs'][] = array(
+                    'task_id'                   => $rs['id'],
+                    'job_shipto'                => $rs['job_shipto'],
+                    'job_units'                 => $rs['units'],
+                    'job_attention'             => $rs['job_attention'],
+                    'job_number'                => $rs['job_number'],
+                    'job_id'                    => $rs['job_id'],
+                    'job_customer'              => $rs['customer_name'],
+                    'job_address'               => $rs['job_address'],
+                    'job_address2'              => $rs['job_address2'],
+                    'job_suburb'                => $rs['job_suburb'],
+                    'job_postcode'              => $rs['job_postcode'],
+                    'job_delivery_instructions' => $rs['job_delivery_instructions'],
+                    'driver_name'               => $rs['driver_name'],
+                    'printed'                   => $rs['printed'],
+                    'completed'                 => $rs['completed']
+                );
+            }
+            if($rs['order_id'] > 0)
+            {
+                $runsheets[$rs['runsheet_day']]['orders'][] = array(
+                    'task_id'                       => $rs['id'],
+                    'order_number'                  => $rs['order_number'],
+                    'client_order_id'               => $rs['client_order_id'],
+                    'order_id'                      => $rs['order_id'],
+                    'order_units'                   => $rs['units'],
+                    'order_customer'                => $rs['order_customer'],
+                    'order_address'                 => $rs['order_address'],
+                    'order_address2'                => $rs['order_address2'],
+                    'order_suburb'                  => $rs['order_suburb'],
+                    'order_postcode'                => $rs['order_postcode'],
+                    'order_client'                  => $rs['order_client_name'],
+                    'order_delivery_instructions'   => $rs['order_delivery_instructions'],
+                    'printed'                       => $rs['printed'],
+                    'completed'                     => $rs['completed'],
+                    'driver_name'                   => $rs['driver_name'],
+                    'customer'                      => $rs['order_customer'],
+                );
             }
         }
         return $runsheets;
