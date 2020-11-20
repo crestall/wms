@@ -473,6 +473,7 @@ class Utility{
             $runsheet['updated_by'] = $rs['updated_by'];
             $runsheet['runsheet_id'] = $rs['runsheet_id'];
             $runsheet['driver_name'] = $rs['driver_name'];
+            $fsg_contact = (empty($rs['FSG_contact']))? "Mike<br>03 86777 418" : ucwords($rs['FSG_contact'])."<br>".$rs['FSG_contact_phone'];
             $runsheet['tasks'][] = array(
                 'task_id'                   => $rs['id'],
                 'job_id'                    => $rs['job_id'],
@@ -492,7 +493,7 @@ class Utility{
                 'postcode'                  => $rs['postcode'],
                 'delivery_instructions'     => $rs['delivery_instructions'],
                 'units'                     => $rs['units'],
-                'fsg_contact'               => $rs['FSG_contact']."<br>".$rs['FSG_contact_phone']
+                'fsg_contact'               => $fsg_contact
 
             );
         }
