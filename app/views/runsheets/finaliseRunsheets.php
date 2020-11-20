@@ -29,7 +29,7 @@
                         <?php foreach($runsheets as $timestamp => $rs):
                             $rows = count($rs['drivers']);?>
                             <tr>
-                                <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
+                                <td rowspan="<?php echo $rows;?>" style="vertical-align: middle"><h4><?php echo date('D jS M', $timestamp );?></h4></td>
                                 <td><?php echo ucwords($rs['drivers'][0]['name']);?></td>
                                 <td><a class="btn btn-lg btn-outline-success" href="runsheets/finalise-runsheet/runsheet=<?php echo $rs['runsheet_id'];?>/driver=<?php echo $rs['drivers'][0]['id'];?>">Finalise</a></td>
                             </tr>
