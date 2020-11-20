@@ -474,7 +474,7 @@ class Utility{
             {
                 $runsheets[$rs['runsheet_day']]['tasks'] =array();
             }
-            $runsheet['runsheet_day'] $rs['runsheet_day'];
+            $runsheet['runsheet_day'] = $rs['runsheet_day'];
             $runsheet['created_date'] = $rs['created_date'];
             $runsheet['updated_date'] = $rs['updated_date'];
             $runsheet['created_by'] = $rs['created_by'];
