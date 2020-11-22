@@ -344,6 +344,8 @@ class RunsheetsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/finaliseRunsheet.php', [
             'page_title'    =>  $page_title,
             'pht'           =>  ": Finalise Runsheet",
+            'driver_id'     =>  $driver_id,
+            'runsheet_id'   =>  $runsheet_id,
             'tasks'         =>  $tasks
         ]);
     }
