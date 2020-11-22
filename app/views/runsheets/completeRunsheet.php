@@ -21,13 +21,15 @@
                 <div class="col-12">
                     <h2>Complete Tasks for Runsheet <?php echo date('D jS M', $tasks[0]['runsheet_day']);?> using <?php echo $tasks[0]['driver_name'];?></h2>
                 </div>
-                <div class="form-group row">
-                    <label class="col-md-4 col-form-label">Tasks To Be Completed</label>
-                    <div class="col-md-8 mb-3">
-                        <?php foreach($tasks as $task):?>
-
-                        <?php endforeach;?>
-                    </div>
+            </div>
+            <div class="row">
+                <label class="col-md-4 col-form-label">Tasks To Be Completed</label>
+                <div class="col-md-8 mb-3">
+                    <?php foreach($tasks as $task):?>
+                        <div class="form-group row">
+                            Do Sum Shit
+                        </div>
+                    <?php endforeach;?>
                 </div>
             </div>
         <?php endif;?>
