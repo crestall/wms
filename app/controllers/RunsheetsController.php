@@ -341,8 +341,8 @@ class RunsheetsController extends Controller
             $page_title = "Complete Tasks<br>For ".date('D jS M', $tasks[0]['runsheet_day'])."<br>for ".$tasks[0]['driver_name'];
         }
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/finaliseRunsheet.php', [
-            'page_title'    =>  $page_title,
-            'pht'           =>  ": Finalise Runsheet",
+            'page_title'    =>  "Complete Runsheet",
+            'pht'           =>  ": Complete Runsheet",
             'driver_id'     =>  $driver_id,
             'runsheet_id'   =>  $runsheet_id,
             'tasks'         =>  $tasks
