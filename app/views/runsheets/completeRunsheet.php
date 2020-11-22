@@ -6,7 +6,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if($runsheet_id == 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_runsheet_id.php");?>
-        <?php elseif($runsheet_id == 0):?>
+        <?php elseif($driver_id == 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_driver_id.php");?>
         <?php elseif(empty($tasks)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_tasks_found.php");?>
@@ -18,7 +18,7 @@
             echo "<pre>",print_r($tasks),"</pre>";//die();
             ?>
             <div class="row">
-                
+
             </div>
         <?php endif;?>
     </div>
