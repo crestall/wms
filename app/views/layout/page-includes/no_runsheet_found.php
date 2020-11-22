@@ -6,10 +6,9 @@
                     <i class="fad fa-exclamation-triangle fa-6x"></i>
                 </div>
                 <div class="col-8">
-                    <h2>No Runsheet Or Tasks Found</h2>
-                    <p>Either that runsheet id is invalid, or all tasks associated with it have been allocated to a driver</p>
-                    <p><a href="/runsheets/prepare-runsheets">Please click here to choose another runsheet to update and allocate a driver</a></p>
-                    <p><a href="/runsheets/view-runsheets">Please click here if to you need to change a task to another driver or update the address</a></p>
+                    <h2>No Tasks Found</h2>
+                    <p>Either that runsheet id is invalid, or all tasks associated with it have already been finalised</p>
+                    <p><a href="/runsheets/finalise-runsheets">Please click here to choose another runsheet and tasks</a></p>
                 </div>
             </div>
         </div>
