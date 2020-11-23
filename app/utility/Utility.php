@@ -444,6 +444,8 @@ class Utility{
                     $task_array['address']['address2'] = $rs['address_2'];
                     $task_array['address']['suburb'] = $rs['suburb'];
                     $task_array['address']['postcode'] = $rs['postcode'];
+                    $task_array['completed'] = $rs['completed'];
+                    $task_array['printed'] = $rs['printed'];
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
                 }
                 if(!empty($rs['order_number']))
@@ -458,6 +460,8 @@ class Utility{
                     $task_array['address']['suburb'] = $rs['suburb'];
                     $task_array['address']['postcode'] = $rs['postcode'];
                     $task_array['client_order_id'] = $rs['client_order_id'];
+                    $task_array['completed'] = $rs['completed'];
+                    $task_array['printed'] = $rs['printed'];
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
                 }
             }
