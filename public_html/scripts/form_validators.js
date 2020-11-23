@@ -131,7 +131,7 @@ $(document).ready(function() {
 	});
     ///////////////////////////////////////////////////////////////////////////////
     $("form#complete_runsheet_tasks").validate({
-        console.log('validator loaded');
+        //console.log('validator loaded');
         rules: {
             "tasks[]": {
                 required: true,
