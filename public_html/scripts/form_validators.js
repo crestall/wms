@@ -130,6 +130,24 @@ $(document).ready(function() {
         }
 	});
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#complete_runsheet_tasks").validate({
+        //console.log('validator loaded');
+        rules: {
+            "tasks[]": {
+                required: true,
+                minlength: 1
+            }
+        },
+        messages: {
+            "tasks[]": "Please select at least one task to complete."
+        },
+        errorPlacement: function (error, element) {
+            //error.insertBefore(element);
+            error.addClass( "text-danger" )
+            error.insertAfter(element.closest('div'));
+        },
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_job').validate({
          rules:{
     		status_id:{

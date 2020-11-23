@@ -65,6 +65,7 @@ class FormController extends Controller {
             'procClientAdd',
             'procClientDailyReports',
             'procClientEdit',
+            'procCompletRunsheetTasks',
             'procContainerUnload',
             'procCourierAdd',
             'procCourierEdit',
@@ -140,6 +141,45 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procCompletRunsheetTasks()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "_POST<pre>",print_r($post_data),"</pre>"; die();
+        if(!isset($tasks) || !count($tasks))
+        {
+            Form::setError('general', 'At least one task must be selected for complettion');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            return $this->redirector->to(PUBLIC_ROOT."runsheets/finalise-runsheet/runsheet=$runsheet_id/driver=$driver_id");
+        }
+        else
+        {
+            $this->runsheet->completeTasks($post_data);
+            Session::set('feedback', "<h2>Those Tasks Have Been Marked As Completed.</h2><p></p>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."runsheets/finalise-runsheets");
     }
 
     public function procPrepareRunsheet()

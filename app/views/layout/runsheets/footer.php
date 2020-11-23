@@ -91,73 +91,30 @@
                         })
                     }
                 },
-                'finalise-runsheets':{
+                'finalise-runsheet':{
                     init:function(){
-                        $('button.complete-tasks').click(function(e){
-                            return;
-                            var runsheet_id = $(this).data('runsheetid');
-                            var tids = $(this).data('taskids');
-                            var task_ids = [];
-                            $.each(tids, function(i, v){
-                                if($('input#select_'+v).prop('checked'))
-                                {
-                                    task_ids.push(v);
-                                }
-                            })
-                            console.log('ids to deal with: '+task_ids);
-                            if(!task_ids.length)
+                        $('.task').change(function(){
+                            var taskid = $(this).data('taskid');
+                            //console.log('taskid: '+taskid);
+                            $('div#task_'+taskid+'_dd_holder').toggle('blind', 500);
+                        });
+                        $('.task').each(function(i,e){
+                            if(!$(this).prop('checked'))
                             {
-                                swal({
-                                    title: "No Tasks Selected",
-                                    text: "No tasks have been selected to complete",
-                                    icon: "error"
-                                });
-                            }
-                            else
-                            {
-                                swal({
-                                    title: "Really complete task(s)?",
-                                    text: "This cannot be undone",
-                                    icon: "warning",
-                                    buttons: true,
-                                    dangerMode: true
-                                }).then( function(completeTask) {
-                                    if(completeTask)
-                                    {
-                                        $.ajax({
-                                            url: '/ajaxfunctions/complete-runsheet-tasks',
-                                            method: 'post',
-                                            data: {
-                                                task_ids: task_ids,
-                                                runsheet_id: runsheet_id
-                                            },
-                                            dataType: 'json',
-                                            beforeSend: function(){
-                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing From Runsheet...</h1></div>' });
-                                            },
-                                            success: function(d){
-                                                if(d.error)
-                                                {
-                                                    $.unblockUI();
-                                                    alert('error');
-                                                }
-                                                else
-                                                {
-                                                    location.reload(true);
-                                                    //window.location.href = "http://stackoverflow.com";
-                                                }
-                                            },
-                                            error: function(jqXHR, textStatus, errorThrown){
-                                                $.unblockUI();
-                                                document.open();
-                                                document.write(jqXHR.responseText);
-                                                document.close();
-                                            }
-                                        });
-                                    }
-                                });
+                                $(this).change();
                             }
                         });
+                        $('form#complete_runsheet_tasks').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Completing Selected Tasks...</h2></div>' });
+                            }
+                        })
+                    }
+                },
+                'finalise-runsheets':{
+                    init:function(){
+
                     }
                 },
                 'view-runsheets':{
