@@ -20,7 +20,7 @@
             <?php echo Form::displayError('general');?>
             <form id="complete_runsheet_tasks" method="post" action="/form/procCompletRunsheetTasks">
                 <div class="row">
-                    <label class="col-md-3 col-form-label">Tasks To Be Completed</label>
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Tasks To Be Completed</label>
                     <div class="col-md-9 mb-3">
                         <?php foreach($tasks as $task):
                             $task_id = $task['id'];
