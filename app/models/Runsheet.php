@@ -213,7 +213,7 @@ class Runsheet extends Model{
         return true;
     }
 
-    public function completeTasks($task_ids, $runsheet_id)
+    public function completeTasks($data)
     {
        $db = Database::openConnection();
        //record runsheet update
@@ -221,10 +221,17 @@ class Runsheet extends Model{
             'updated_date'  =>  time(),
             'updated_by'    =>  Session::getUserId()
         );
-        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
-        foreach($task_ids as $task_id)
+        $db->updateDatabaseFields($this->table, $new_vals, $data['runsheet_id']);
+        foreach($data['tasks'] as $task_id)
         {
-            $db->updateDatabaseField($this->tasks_table, 'completed', 1, $task_id);
+            $task_vals = array(
+                'completed' => 1
+            );
+            if(!empty($data['dd'][$task_id]['received']))
+                $task_vals['received_by'] = $data['dd'][$task_id]['received'];
+            if(!empty($data['dd'][$task_id]['tod']))
+                $task_vals['time_of_drop'] = $data['dd'][$task_id]['tod'];
+            $db->updateDatabaseFields($this->tasks_table, $task_vals, $task_id);
         }
         return true;
     }
