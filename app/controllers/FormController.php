@@ -145,7 +145,7 @@ class FormController extends Controller {
 
     public function procCompletRunsheetTasks()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -163,7 +163,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "_POST<pre>",print_r($post_data),"</pre>"; die();
+        //echo "_POST<pre>",print_r($post_data),"</pre>"; die();
         if(!isset($tasks) || !count($tasks))
         {
             Form::setError('general', 'At least one task must be selected for complettion');
