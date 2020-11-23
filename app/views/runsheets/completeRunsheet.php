@@ -24,8 +24,8 @@
             </div>
             <form id="complete_runsheet_tasks" method="post" action="/form/procCompletRunsheetTasks">
                 <div class="row">
-                    <label class="col-md-4 col-form-label">Tasks To Be Completed</label>
-                    <div class="col-md-8 mb-3">
+                    <label class="col-md-3 col-form-label">Tasks To Be Completed</label>
+                    <div class="col-md-9 mb-3">
                         <?php foreach($tasks as $task):
                             $task_id = $task['id'];
                             if($task['job_id'] > 0)
@@ -51,7 +51,7 @@
                 <input type="hidden" name="runsheet_id" id="runsheet_id" value="<?php echo $runsheet_id;?>" >
                 <input type="hidden" name="driver_id" id="driver_id" value="<?php echo $driver_id;?>" >
                 <div class="form-group row">
-                    <div class="col-md-5 offset-md-2">
+                    <div class="col-md-5 offset-md-3">
                         <button type="submit" class="btn btn-outline-secondary" id="submitter">Complete Selected Tasks</button>
                     </div>
                 </div>
