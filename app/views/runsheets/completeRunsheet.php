@@ -29,7 +29,7 @@
                         $task_id = $task['id'];
                         if($task['job_id'] > 0)
                         {
-                            $label_string = "<span class='font-weight-bold'>".$task['job_number']."</span> - ".$task['job_customer'];
+                            $label_string = "<span class='font-weight-bold'>".$task['job_number']."</span> - ".$task['job_number'];
                         }
                         else
                         {
