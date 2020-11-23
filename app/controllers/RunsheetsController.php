@@ -338,6 +338,9 @@ class RunsheetsController extends Controller
             $driver_id = $this->request->params['args']['driver'];
             $tasks = $this->runsheet->getTasksForCompletion($runsheet_id, $driver_id);
         }
+        //render the page
+        Config::setJsConfig('curPage', "finalise-runsheet");
+        Config::set('curPage', "finalise-runsheet");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/completeRunsheet.php', [
             'page_title'    =>  "Complete Runsheet",
             'pht'           =>  ": Complete Runsheet",
