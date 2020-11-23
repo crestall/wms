@@ -11,12 +11,6 @@
         <?php elseif(empty($tasks)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_tasks_found.php");?>
         <?php else:?>
-            <?php
-            //$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
-            //$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
-            //echo "<p>Form Values For 381: ".getFormValue()."</p>";
-            //echo "<pre>",print_r($tasks),"</pre>";//die();
-            ?>
             <div class="row">
                 <div class="col-12">
                     <h2>Complete Tasks for Runsheet <?php echo date('D jS M', $tasks[0]['runsheet_day']);?> using <?php echo $tasks[0]['driver_name'];?></h2>
