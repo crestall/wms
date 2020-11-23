@@ -352,10 +352,10 @@ class RunsheetsController extends Controller
 
     public function printRunsheets()
     {
-        $rss = $this->runsheet->getViewRunsheets();
+        $rss = $this->runsheet->getRunsheetsForPrinting();
         //$runsheets = $this->generateRunsheetDriverArray($rss);
         $runsheets = Utility::generateRunsheetDriverArray($rss);
-        //echo "<pre>",print_r($runsheets),"</pre>";die();
+        echo "<pre>",print_r($runsheets),"</pre>";die();
         //render the page
         Config::setJsConfig('curPage', "print-runsheets");
         Config::set('curPage', "print-runsheets");
