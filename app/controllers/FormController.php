@@ -163,7 +163,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "_POST<pre>",print_r($post_data),"</pre>"; die();
+        //echo "_POST<pre>",print_r($post_data),"</pre>"; die();
         if(!isset($tasks) || !count($tasks))
         {
             Form::setError('general', 'At least one task must be selected for complettion');
@@ -176,7 +176,7 @@ class FormController extends Controller {
         }
         else
         {
-
+            $this->runsheet->completeTasks($post_data)
             Session::set('feedback', "<h2>Those Tasks Have Been Marked As Completed.</h2><p></p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."runsheets/finalise-runsheets");
