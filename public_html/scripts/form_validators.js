@@ -132,13 +132,13 @@ $(document).ready(function() {
     ///////////////////////////////////////////////////////////////////////////////
     $("form#complete_runsheet_tasks").validate({
         rules: {
-            "tasks": {
+            "tasks[]": {
                 required: true,
                 minlength: 1
             }
         },
         messages: {
-            "tasks": "Please select at least one task to complete."
+            "tasks[]": "Please select at least one task to complete."
         }
 	});
     ///////////////////////////////////////////////////////////////////////////////
