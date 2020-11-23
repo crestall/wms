@@ -56,7 +56,7 @@ $padmin = array(
         ),
         'print-runsheets'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fad fa-print" data-fa-transform="shrink-2 up-1"></i></span></div>'
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-print" data-fa-transform="right-3 shrink-5 up-3"></i></span></div>'
         ),
         'finalise-runsheets'    => array(
             'display'   => true,
