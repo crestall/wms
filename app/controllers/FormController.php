@@ -177,9 +177,9 @@ class FormController extends Controller {
         else
         {
 
-            Session::set('feedback', "<h2>Those details have been updated.</h2><p><a class='btn btn-sm btn-outline-fsg' href='/pdf/print-runsheet/runsheet=".$runsheet_id."'>Print Runsheet</a></p>");
+            Session::set('feedback', "<h2>Those Tasks Have Been Marked As Completed.</h2><p></p>");
         }
-        return $this->redirector->to(PUBLIC_ROOT."runsheets/prepare-runsheet/runsheet=$runsheet_id");
+        return $this->redirector->to(PUBLIC_ROOT."runsheets/finalise-runsheets");
     }
 
     public function procPrepareRunsheet()
