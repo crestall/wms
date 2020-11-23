@@ -25,9 +25,24 @@
             <div class="row">
                 <label class="col-md-4 col-form-label">Tasks To Be Completed</label>
                 <div class="col-md-8 mb-3">
-                    <?php foreach($tasks as $task):?>
-                        <div class="form-group row">
-                            Do Sum Shit
+                    <?php foreach($tasks as $task):
+                        $task_id = $task['id'];
+                        if($task['job_id'] > 0)
+                        {
+                            $label_string = "<span class='font-weight-bold'>".$task['job_number']."</span> - ".$task['job_customer'];
+                        }
+                        else
+                        {
+                            $task_number = $task['order_number'];
+                            $label_string = "<span class='font-weight-bold'>".$task['order_number']."</span> - ".$task['order_customer']."(".$task['order_client'].")";
+                            $label_string .= (empty($task['client_order_id']))? "" : " - ".$task['client_order_id'];
+                        }?>
+                        <div class="col-12">
+                            <label class="col-form-label" for="task_<?php echo $task_id;?>"></label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input task" data-taskid="<?php echo $task_id;?>" id="task_<?php echo $task_id;?>" name="tasks[<?php echo $task_id;?>]" <?php if(!empty(Form::value('tasks['.$task_id.']'))) echo "checked";?> />
+                                <label class="custom-control-label" for="task_<?php echo $task['id'];?>"><span class="font-weight-bold"><?php echo $label_string;?></label>
+                            </div>
                         </div>
                     <?php endforeach;?>
                 </div>
