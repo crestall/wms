@@ -140,7 +140,11 @@ $(document).ready(function() {
         },
         messages: {
             "tasks[]": "Please select at least one task to complete."
-        }
+        },
+        errorPlacement: function (error, element) {
+            //error.insertBefore(element);
+            error.insertAfter(element.closest('div'));
+        },
 	});
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_job').validate({
