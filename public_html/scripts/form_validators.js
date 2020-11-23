@@ -143,6 +143,7 @@ $(document).ready(function() {
         },
         errorPlacement: function (error, element) {
             //error.insertBefore(element);
+            error.addClass( "text-danger" )
             error.insertAfter(element.closest('div'));
         },
 	});
