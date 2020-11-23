@@ -16,7 +16,6 @@ function getDriverTasks($driver, $runsheet_id)
                 <span class='font-weight-bold'>$task_number</span><br>
                 <span class='ml-3'>$shipto</span><br>
                 <span class='ml-3'>{$task['address']['suburb']}</span>
-                <pre>".print_r($task, true)."</pre>
         ";
         $html .= "</div>";
         $task_ids[] = $task['task_id'];
