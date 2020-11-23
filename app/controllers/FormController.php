@@ -164,6 +164,22 @@ class FormController extends Controller {
             }
         }
         echo "_POST<pre>",print_r($post_data),"</pre>"; die();
+        if(!isset($tasks) || !count($tasks))
+        {
+            Form::setError('general', 'At least one task must be selected for complettion');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            return $this->redirector->to(PUBLIC_ROOT."runsheets/finalise-runsheet/runsheet=$runsheet_id/driver=$driver_id");
+        }
+        else
+        {
+
+            Session::set('feedback', "<h2>Those details have been updated.</h2><p><a class='btn btn-sm btn-outline-fsg' href='/pdf/print-runsheet/runsheet=".$runsheet_id."'>Print Runsheet</a></p>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."runsheets/prepare-runsheet/runsheet=$runsheet_id");
     }
 
     public function procPrepareRunsheet()
