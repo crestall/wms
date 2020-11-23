@@ -16,6 +16,8 @@
                     <h2>Complete Tasks for Runsheet <?php echo date('D jS M', $tasks[0]['runsheet_day']);?> using <?php echo $tasks[0]['driver_name'];?></h2>
                 </div>
             </div>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+            <?php echo Form::displayError('general');?>
             <form id="complete_runsheet_tasks" method="post" action="/form/procCompletRunsheetTasks">
                 <div class="row">
                     <label class="col-md-3 col-form-label">Tasks To Be Completed</label>
