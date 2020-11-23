@@ -43,6 +43,11 @@ class Runsheet extends Model{
         return $this->getRunsheetsForDisplay(1, 1, $driver_id, $runsheet_id, true);
     }
 
+    public function getRunsheetsForPrinting()
+    {
+        return $this->getRunsheetsForDisplay(1, 1, false, false, true);
+    }
+
     public function getRunsheetsForFinalising()
     {
         return $this->getRunsheetsForDisplay(false, true, false, false, true);
