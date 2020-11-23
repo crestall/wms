@@ -401,16 +401,7 @@ class Utility{
                 );
                 if(!empty($rs['job_id']))
                 {
-                    $task_array['job_number'] = $rs['job_number'];
-                    $task_array['shipto'] = $rs['deliver_to'];
-                    $task_array['attention'] = $rs['attention'];
-                    $task_array['customer'] = $rs['customer_name'];
-                    $task_array['address']['address'] = $rs['address'];
-                    $task_array['address']['address2'] = $rs['address_2'];
-                    $task_array['address']['suburb'] = $rs['suburb'];
-                    $task_array['address']['postcode'] = $rs['postcode'];
-                    $task_array['completed'] = $rs['completed'];
-                    $task_array['printed'] = $rs['printed'];
+                    $task_array = self::getDriverJobTaskArray($task_array, $rs);
                     $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
                 }
                 if(!empty($rs['order_number']))
@@ -436,17 +427,8 @@ class Utility{
                 //echo "<p>Id {$rs['driver_id']} found. It is $tdi</p>";
                 if(!empty($rs['job_id']))
                 {
-                    $task_array['job_number'] = $rs['job_number'];
-                    $task_array['customer'] = $rs['customer_name'];
-                    $task_array['shipto'] = $rs['deliver_to'];
-                    $task_array['attention'] = $rs['attention'];
-                    $task_array['address']['address'] = $rs['address'];
-                    $task_array['address']['address2'] = $rs['address_2'];
-                    $task_array['address']['suburb'] = $rs['suburb'];
-                    $task_array['address']['postcode'] = $rs['postcode'];
-                    $task_array['completed'] = $rs['completed'];
-                    $task_array['printed'] = $rs['printed'];
-                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
+                    $task_array = self::getDriverJobTaskArray($task_array, $rs);
+                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
                 }
                 if(!empty($rs['order_number']))
                 {
@@ -467,6 +449,21 @@ class Utility{
             }
         }
         return $runsheets;
+    }
+
+    private static function getDriverJobTaskArray($task_array, $rs)
+    {
+        $task_array['job_number'] = $rs['job_number'];
+        $task_array['shipto'] = $rs['deliver_to'];
+        $task_array['attention'] = $rs['attention'];
+        $task_array['customer'] = $rs['customer_name'];
+        $task_array['address']['address'] = $rs['address'];
+        $task_array['address']['address2'] = $rs['address_2'];
+        $task_array['address']['suburb'] = $rs['suburb'];
+        $task_array['address']['postcode'] = $rs['postcode'];
+        $task_array['completed'] = $rs['completed'];
+        $task_array['printed'] = $rs['printed'];
+        return $task_array;
     }
 
     public static function createPrintRunsheetArray($rss)
