@@ -104,6 +104,12 @@
                                 $(this).change();
                             }
                         });
+                        $('form#complete_runsheet_tasks').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Completing Selected Tasks...</h1></div>' });
+                            }
+                        })
                     }
                 },
                 'finalise-runsheets':{
