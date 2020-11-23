@@ -117,7 +117,7 @@
 
                     }
                 },
-                'view-runsheets':{
+                'print-runsheets':{
                     init:function(){
                         console.log('init');
                         $('button.print-sheet').each(function(i,e){
