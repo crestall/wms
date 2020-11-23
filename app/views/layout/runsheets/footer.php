@@ -91,6 +91,11 @@
                         })
                     }
                 },
+                'finalise-runsheet':{
+                    init:function(){
+
+                    }
+                },
                 'finalise-runsheets':{
                     init:function(){
                         $('button.complete-tasks').click(function(e){
