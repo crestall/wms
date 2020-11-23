@@ -176,7 +176,7 @@ class FormController extends Controller {
         }
         else
         {
-            $this->runsheet->completeTasks($post_data)
+            $this->runsheet->completeTasks($post_data);
             Session::set('feedback', "<h2>Those Tasks Have Been Marked As Completed.</h2><p></p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."runsheets/finalise-runsheets");
