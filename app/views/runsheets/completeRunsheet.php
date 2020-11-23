@@ -15,7 +15,7 @@
             //$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
             //$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
             //echo "<p>Form Values For 381: ".getFormValue()."</p>";
-            echo "<pre>",print_r($tasks),"</pre>";die();
+            echo "<pre>",print_r($tasks),"</pre>";//die();
             ?>
             <div class="row">
                 <div class="col-12">
@@ -29,12 +29,11 @@
                         $task_id = $task['id'];
                         if($task['job_id'] > 0)
                         {
-                            $label_string = "<span class='font-weight-bold'>".$task['job_number']."</span> - ".$task['job_number'];
+                            $label_string = "<span class='font-weight-bold'>".$task['job_number']."</span> - ".$task['customer_name'];
                         }
                         else
                         {
-                            $task_number = $task['order_number'];
-                            $label_string = "<span class='font-weight-bold'>".$task['order_number']."</span> - ".$task['order_customer']."(".$task['order_client'].")";
+                            $label_string = "<span class='font-weight-bold'>".$task['order_number']."</span> - ".$task['order_customer']."(".$task['order_client_name'].")";
                             $label_string .= (empty($task['client_order_id']))? "" : " - ".$task['client_order_id'];
                         }?>
                         <div class="col-12">
