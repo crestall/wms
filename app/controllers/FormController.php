@@ -163,7 +163,7 @@ class FormController extends Controller {
                 }
             }
         }
-        //echo "_POST<pre>",print_r($post_data),"</pre>"; die();
+        echo "_POST<pre>",print_r($post_data),"</pre>"; die();
         if(!isset($tasks) || !count($tasks))
         {
             Form::setError('general', 'At least one task must be selected for complettion');
