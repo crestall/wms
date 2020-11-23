@@ -406,18 +406,7 @@ class Utility{
                 }
                 if(!empty($rs['order_number']))
                 {
-                    $task_array['order_number'] = $rs['order_number'];
-                    $task_array['shipto'] = $rs['deliver_to'];
-                    $task_array['attention'] = $rs['attention'];
-                    $task_array['customer'] = $rs['order_customer'];
-                    $task_array['client'] = $rs['order_client_name'];
-                    $task_array['client_order_id'] = $rs['client_order_id'];
-                    $task_array['address']['address'] = $rs['address'];
-                    $task_array['address']['address2'] = $rs['address_2'];
-                    $task_array['address']['suburb'] = $rs['suburb'];
-                    $task_array['address']['postcode'] = $rs['postcode'];
-                    $task_array['completed'] = $rs['completed'];
-                    $task_array['printed'] = $rs['printed'];
+                    $task_array = self::getDriverOrderTaskArray($task_array, $rs);
                     $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
                 }
                 ++$di;
@@ -428,22 +417,11 @@ class Utility{
                 if(!empty($rs['job_id']))
                 {
                     $task_array = self::getDriverJobTaskArray($task_array, $rs);
-                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
+                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
                 }
                 if(!empty($rs['order_number']))
                 {
-                    $task_array['order_number'] = $rs['order_number'];
-                    $task_array['shipto'] = $rs['deliver_to'];
-                    $task_array['attention'] = $rs['attention'];
-                    $task_array['customer'] = $rs['order_customer'];
-                    $task_array['client'] = $rs['order_client_name'];
-                    $task_array['address']['address'] = $rs['address'];
-                    $task_array['address']['address2'] = $rs['address_2'];
-                    $task_array['address']['suburb'] = $rs['suburb'];
-                    $task_array['address']['postcode'] = $rs['postcode'];
-                    $task_array['client_order_id'] = $rs['client_order_id'];
-                    $task_array['completed'] = $rs['completed'];
-                    $task_array['printed'] = $rs['printed'];
+                    $task_array = self::getDriverOrderTaskArray($task_array, $rs);
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
                 }
             }
@@ -461,6 +439,23 @@ class Utility{
         $task_array['address']['address2'] = $rs['address_2'];
         $task_array['address']['suburb'] = $rs['suburb'];
         $task_array['address']['postcode'] = $rs['postcode'];
+        $task_array['completed'] = $rs['completed'];
+        $task_array['printed'] = $rs['printed'];
+        return $task_array;
+    }
+
+    private static function getDriverOrderTaskArray($task_array, $rs)
+    {
+        $task_array['order_number'] = $rs['order_number'];
+        $task_array['shipto'] = $rs['deliver_to'];
+        $task_array['attention'] = $rs['attention'];
+        $task_array['customer'] = $rs['order_customer'];
+        $task_array['client'] = $rs['order_client_name'];
+        $task_array['address']['address'] = $rs['address'];
+        $task_array['address']['address2'] = $rs['address_2'];
+        $task_array['address']['suburb'] = $rs['suburb'];
+        $task_array['address']['postcode'] = $rs['postcode'];
+        $task_array['client_order_id'] = $rs['client_order_id'];
         $task_array['completed'] = $rs['completed'];
         $task_array['printed'] = $rs['printed'];
         return $task_array;
