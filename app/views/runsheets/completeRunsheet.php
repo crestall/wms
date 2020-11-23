@@ -40,6 +40,20 @@
                                     <label class="custom-control-label" for="task_<?php echo $task['id'];?>"><span class="font-weight-bold"><?php echo $label_string;?></label>
                                 </div>
                             </div>
+                            <div class="task_dd_holder border border-secondary rounded p-3 bg-light" id="task_<?php echo $task_id;?>_dd_holder">
+                                <div class="form-group row">
+                                    <label class="col-3">Received By</label>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" name="dd[<?php echo $task_id;?>][received]">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Time Of Drop</label>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" name="dd[<?php echo $task_id;?>][tod]">
+                                    </div>
+                                </div>
+                            </div>
                         <?php endforeach;?>
                     </div>
                 </div>
