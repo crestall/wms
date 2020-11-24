@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="errorbox">
-                        <h2><i class="fas fa-exclamation-triangle"></i> No Runsheets Listed For Finalising</h2>
+                        <h2><i class="fas fa-exclamation-triangle"></i> No Runsheets Listed For Printing</h2>
                     </div>
                 </div>
             </div>
