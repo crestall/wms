@@ -27,6 +27,9 @@ class RunsheetsController extends Controller
     public function viewRunsheets()
     {
         $rss = $this->runsheet->getRunsheetsForViewing();
+
+        $runsheets = Utility::generateRunsheetDriverArray($rss);
+        echo "<pre>",print_r($runsheets),"</pre>";die();
     }
 
     public function completedRunsheets()
