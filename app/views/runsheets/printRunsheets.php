@@ -15,7 +15,7 @@
             <div class="row mt-4" id="table_holder" style="display:none">
                 <div class="col-12 text-right">
                     <?php if(!$completed):?>
-                        <a class="btn btn-outline-fsg" href="/runsheets/print-runsheets">View All</a>
+                        <a class="btn btn-outline-fsg" href="/runsheets/print-runsheets">View All Sheets</a>
                     <?php else:?>
                         <a class="btn btn-outline-fsg" href="/runsheets/print-runsheets/complete=off">View Only Not Completed Sheets</a>
                     <?php endif;?>
