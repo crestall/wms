@@ -352,7 +352,7 @@ class RunsheetsController extends Controller
 
     public function printRunsheets()
     {
-        $completed = (isset($this->request->params['args']['completed']))? false : true;
+        $completed = (isset($this->request->params['args']['complete']))? false : 1;
         $rss = $this->runsheet->getRunsheetsForPrinting($completed);
         //$runsheets = $this->generateRunsheetDriverArray($rss);
         $runsheets = Utility::generateRunsheetDriverArray($rss);
