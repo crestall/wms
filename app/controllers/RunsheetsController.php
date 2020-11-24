@@ -24,6 +24,11 @@ class RunsheetsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function viewRunsheets()
+    {
+        $rss = $this->runsheet->getRunsheetsForViewing();
+    }
+
     public function completedRunsheets()
     {
         $driver_id = (isset($this->request->params['args']['driver']))? $this->request->params['args']['driver'] : 0;

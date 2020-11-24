@@ -59,6 +59,17 @@ class Runsheet extends Model{
         return $this->getRunsheetsForDisplay(false, true, $driver_id, $runsheet_id, true);
     }
 
+    public function getRunsheetsForViewing()
+    {
+        $db = Database::openConnection();
+        $q = $this->getRunsheetQuery();
+        $q .= "
+            ORDER BY
+                rst.completed ASC, rs.runsheet_day DESC
+        ";
+        die($q);
+    }
+
     public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false)
     {
         $db = Database::openConnection();
