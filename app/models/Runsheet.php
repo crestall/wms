@@ -67,7 +67,8 @@ class Runsheet extends Model{
             ORDER BY
                 rst.completed ASC, rs.runsheet_day DESC
         ";
-        die($q);
+        //die($q);
+        return $db->queryData($q);
     }
 
     public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false)
