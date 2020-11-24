@@ -350,19 +350,21 @@ class RunsheetsController extends Controller
         ]);
     }
 
-    public function viewRunsheets()
+    public function printRunsheets()
     {
-        $rss = $this->runsheet->getViewRunsheets();
+        $completed = (isset($this->request->params['args']['complete']))? false : 1;
+        $rss = $this->runsheet->getRunsheetsForPrinting($completed);
         //$runsheets = $this->generateRunsheetDriverArray($rss);
         $runsheets = Utility::generateRunsheetDriverArray($rss);
         //echo "<pre>",print_r($runsheets),"</pre>";die();
         //render the page
-        Config::setJsConfig('curPage', "view-runsheets");
-        Config::set('curPage', "view-runsheets");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/viewRunsheets.php', [
-            'page_title'    =>  "View Runsheets",
-            'pht'           =>  ": View Runsheets",
-            'runsheets'     =>  $runsheets
+        Config::setJsConfig('curPage', "print-runsheets");
+        Config::set('curPage', "print-runsheets");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/printRunsheets.php', [
+            'page_title'    =>  "Print Runsheets",
+            'pht'           =>  ": Print Runsheets",
+            'runsheets'     =>  $runsheets,
+            'completed'     =>  $completed
         ]);
     }
 

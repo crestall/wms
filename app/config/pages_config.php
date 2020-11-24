@@ -54,9 +54,9 @@ $padmin = array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
         ),
-        'print-runsheet'    => array(
-            'display'   => false,
-            'icon'      => ""
+        'print-runsheets'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-print" data-fa-transform="right-3 shrink-5 up-3"></i></span></div>'
         ),
         'finalise-runsheets'    => array(
             'display'   => true,

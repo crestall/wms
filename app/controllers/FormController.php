@@ -1343,24 +1343,24 @@ class FormController extends Controller {
             }
         }
         //customer address checking
-        if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
+        if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) )
         {
-            $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, $customer_country, isset($ignore_customer_address_error), "customer_", "show_customer_address");
+            $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, 'AU', isset($ignore_customer_address_error), "customer_", "show_customer_address");
         }
         //finisher one address checking
-        if(!empty($finisher_address) || !empty($finisher_suburb) || !empty($finisher_state) || !empty($finisher_postcode) || !empty($finisher_country))
+        if(!empty($finisher_address) || !empty($finisher_suburb) || !empty($finisher_state) || !empty($finisher_postcode)  )
         {
-            $this->validateAddress($finisher_address, $finisher_suburb, $finisher_state, $finisher_postcode, $finisher_country, isset($ignore_finisher_address_error), "finisher_", "show_finisher_address");
+            $this->validateAddress($finisher_address, $finisher_suburb, $finisher_state, $finisher_postcode, 'AU', isset($ignore_finisher_address_error), "finisher_", "show_finisher_address");
         }
         //finisher two address checking
-        if(!empty($finisher2_address) || !empty($finisher2_suburb) || !empty($finisher2_state) || !empty($finisher2_postcode) || !empty($finisher2_country))
+        if(!empty($finisher2_address) || !empty($finisher2_suburb) || !empty($finisher2_state) || !empty($finisher2_postcode) )
         {
-            $this->validateAddress($finisher2_address, $finisher2_suburb, $finisher2_state, $finisher2_postcode, $finisher2_country, isset($ignore_finisher2_address_error), "finisher2_", "show_finisher2_address");
+            $this->validateAddress($finisher2_address, $finisher2_suburb, $finisher2_state, $finisher2_postcode, 'AU', isset($ignore_finisher2_address_error), "finisher2_", "show_finisher2_address");
         }
         //finisher three address checking
-        if(!empty($finisher3_address) || !empty($finisher3_suburb) || !empty($finisher3_state) || !empty($finisher3_postcode) || !empty($finisher3_country))
+        if(!empty($finisher3_address) || !empty($finisher3_suburb) || !empty($finisher3_state) || !empty($finisher3_postcode) )
         {
-            $this->validateAddress($finisher3_address, $finisher3_suburb, $finisher3_state, $finisher3_postcode, $finisher3_country, isset($ignore_finisher3_address_error), "finisher3_", "show_finisher3_address");
+            $this->validateAddress($finisher3_address, $finisher3_suburb, $finisher3_state, $finisher3_postcode, 'AU', isset($ignore_finisher3_address_error), "finisher3_", "show_finisher3_address");
         }
         if(!isset($held_in_store))
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
