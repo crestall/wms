@@ -46,7 +46,7 @@ function getDriverTasks($driver, $runsheet_id)
         <?php foreach($runsheets as $timestamp => $rs):
             $rows = count($rs['drivers']);?>
             <tr>
-                <td data-datatable-multi-row-rowspan="<?php echo $rows;?>">
+                <td data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
                     <?php echo date('D jS M', $timestamp );?>
                     <script type="x/template" class="extra-row-content">
                         <?php for($i = 1; $i < $rows; ++$i):?>
