@@ -61,30 +61,7 @@ function getDriverTasks($driver, $runsheet_id)
                     <?php endif; ?>
                 </div>
                 <div class="col-12">
-                    <table class="table-striped table-hover" id="finalise_runsheets_table" width="80%">
-                        <thead>
-                            <tr>
-                                <th>Runsheet Day</th>
-                                <th>Driver</th>
-                                <th>Tasks</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($runsheets as $timestamp => $rs):
-                                $rows = count($rs['drivers']);?>
-                                <tr>
-                                    <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
-                                    <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id']);?>
-                                </tr>
-                                <?php for($i = 1; $i < $rows; ++$i):?>
-                                    <tr>
-                                        <?php echo getDriverTasks($rs['drivers'][$i], $rs['runsheet_id']);?>
-                                    </tr>
-                                <?php endfor;?>
-                            <?php endforeach;?>
-                        </tbody>
-                    </table>
+                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/print_runsheets_table.php");?>
                 </div>
             </div>
         <?php else:?>
