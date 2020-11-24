@@ -40,7 +40,7 @@ function getDriverTasks($driver, $runsheet_id)
             <?php //echo "<pre>",print_r($runsheets),"</pre>"; //die();?>
             <div class="row">
                 <div class="col-12 text-right">
-                    <?php if($completed):?>
+                    <?php if(!$completed):?>
                         <a class="btn btn-outline-fsg" href="/runsheets/print-runsheets">View All</a>
                     <?php else:?>
                         <a class="btn btn-outline-fsg" href="/runsheets/print-runsheets/complete=off">View Only Not Completed Sheets</a>
