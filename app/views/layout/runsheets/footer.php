@@ -119,7 +119,7 @@
                 },
                 'print-runsheets':{
                     init:function(){
-                        console.log('init');
+                        //console.log('init');
                         $('button.print-sheet').each(function(i,e){
                             $(this).click(function(e){
                                 var runsheet_id = $(this).data('runsheetid');
@@ -146,7 +146,11 @@
                                 window.open('','runsheetformresult');
                                 form.submit();
                             });
-                        })
+                        });
+                        dataTable.init($('table#finalise_runsheets_table'), {
+                            /* No ordering applied by DataTables during initialisation */
+                            "order": []
+                        });
                     }
                 }
             }
