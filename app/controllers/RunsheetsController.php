@@ -363,7 +363,8 @@ class RunsheetsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/printRunsheets.php', [
             'page_title'    =>  "Print Runsheets",
             'pht'           =>  ": Print Runsheets",
-            'runsheets'     =>  $runsheets
+            'runsheets'     =>  $runsheets,
+            'completed'     =>  $completed
         ]);
     }
 
