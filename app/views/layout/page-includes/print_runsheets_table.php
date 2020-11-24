@@ -33,7 +33,7 @@ function getDriverTasks($driver, $runsheet_id)
     return $html;
 }
 ?>
-<table class="table-striped table-hover" id="finalise_runsheets_table" width="80%">
+<table class="table-striped table-hover datatable-multi-row" id="finalise_runsheets_table" width="80%">
     <thead>
         <tr>
             <th>Runsheet Day</th>
@@ -46,14 +46,18 @@ function getDriverTasks($driver, $runsheet_id)
         <?php foreach($runsheets as $timestamp => $rs):
             $rows = count($rs['drivers']);?>
             <tr>
-                <td rowspan="<?php echo $rows;?>"><?php echo date('D jS M', $timestamp );?></td>
-                <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id']);?>
+                <td data-datatable-multi-row-rowspan="<?php echo $rows;?>">
+                    <?php echo date('D jS M', $timestamp );?>
+                    <script type="x/template" class="extra-row-content">
+                        <?php for($i = 1; $i < $rows; ++$i):?>
+                            <tr>
+                                <?php echo getDriverTasks($rs['drivers'][$i], $rs['runsheet_id']);?>
+                            </tr>
+                        <?php endfor; ?>
+                    </script>
+                </td>
+            <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id']); ?>
             </tr>
-            <?php for($i = 1; $i < $rows; ++$i):?>
-                <tr>
-                    <?php echo getDriverTasks($rs['drivers'][$i], $rs['runsheet_id']);?>
-                </tr>
-            <?php endfor;?>
         <?php endforeach;?>
     </tbody>
 </table>
