@@ -45,7 +45,7 @@ class Runsheet extends Model{
 
     public function getRunsheetsForPrinting($completed = 1)
     {
-        $c = ($completed == 1)? $completed : true
+        $c = ($completed == 1)? $completed : true;
         return $this->getRunsheetsForDisplay($completed, 1, false, false, true);
     }
 
