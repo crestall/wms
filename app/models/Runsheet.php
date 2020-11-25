@@ -129,6 +129,19 @@ class Runsheet extends Model{
         return $db->queryData($q);
     }
 
+    public function updateCompletionStatus()
+    {
+        $db = Database::openConnection();
+        $rss = $db->queryData("SELECT id FROM {$this->table}");
+        foreach($rss as $rs)
+        {
+            if($this->areAllTasksDone($rs['id']))
+            {
+                $this->setAllTasksDone($rs['id']);
+            }
+        }
+    }
+
     public function areAllTasksDone($runsheet_id)
     {
         $db = Database::openConnection();
