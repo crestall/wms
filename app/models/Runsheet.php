@@ -439,7 +439,7 @@ class Runsheet extends Model{
                 i.name AS item_name, i.sku,
                 sr.name AS FSG_contact, sr.phone AS FSG_contact_phone,
                 cu.name AS created_by
-                uu.name as updated_by
+                uu.name AS updated_by
             FROM
                 {$this->table} rs
                 JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id
