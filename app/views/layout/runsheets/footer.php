@@ -24,7 +24,7 @@
                 },
                 'view-runsheets':{
                     init: function(){
-                        consol.log("init");
+                        console.log("init");
                         dataTable.init($('table#view_runsheets_table'), {
                             /* No ordering applied by DataTables during initialisation */
                             "order": [],
