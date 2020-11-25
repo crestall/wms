@@ -1,9 +1,9 @@
 <?php
 function getDriverTasks($driver, $runsheet_id)
 {
-    $driver_name = (empty($driver['name']))? "None Selected" : ucwords($driver['name']);
+    $driver_name = (empty($driver['name']))? "Not Assigned" : ucwords($driver['name']);
     $task_ids = array();
-    $html = "<td>$driver_name</td>";
+    $html = "<td style='vertical-align:middle'>$driver_name</td>";
     $html .= "<td>";
     foreach($driver['tasks'] as $task)
     {
