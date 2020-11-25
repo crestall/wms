@@ -86,6 +86,7 @@
                                         }
                                     });
                                 } // end if the table has the proper class
+                                actions['common']['runsheetPrint']();
                             } // end fnDrawCallback()
                         });
                     }
