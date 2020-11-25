@@ -24,12 +24,22 @@ function getDriverTasks($driver, $runsheet_id)
     //$tid_string = implode(",", $task_ids);
     $tids = htmlspecialchars(json_encode($task_ids), ENT_QUOTES, 'UTF-8');
     $html .= "</td>";
-    $html .= "<td>
-                <p><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='$runsheet_id' data-driverid='{$driver['id']}'>{$print_text}</button></p>
-                <!-- p><button class='btn btn-sm btn-outline-danger remove-driver' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Driver</button></p>
-                <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Selected Tasks</button></p>
-                <p><button class='btn btn-sm btn-outline-fsg new-driver' data-runsheetid='$runsheet_id' data-taskids='$tids'>Assign New Driver</button></p -->
-            </td>";
+    if($driver['id'] == 0)
+    {
+        $html .= "<td>
+                    <a href='/runsheets/prepare-runsheet/runsheet={$rs['runsheet_id']}' class='btn btn-sm btn-outline-fsg'>Update Driver<br>and Tasks</a>
+                </td>";
+    }
+    else
+    {
+        $html .= "<td>
+                    <p><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='$runsheet_id' data-driverid='{$driver['id']}'>{$print_text}</button></p>
+                    <!-- p><button class='btn btn-sm btn-outline-danger remove-driver' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Driver</button></p>
+                    <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Selected Tasks</button></p>
+                    <p><button class='btn btn-sm btn-outline-fsg new-driver' data-runsheetid='$runsheet_id' data-taskids='$tids'>Assign New Driver</button></p -->
+                </td>";
+    }
+
     return $html;
 }
 ?>
