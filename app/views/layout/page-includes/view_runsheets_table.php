@@ -2,6 +2,8 @@
 function getDriverTasks($driver, $runsheet_id)
 {
     $driver_name = (empty($driver['name']))? "Not Assigned" : ucwords($driver['name']);
+    $all_driver_tasks_completed = true;
+    $is_printed = true;
     $task_ids = array();
     $html = "<td style='vertical-align:middle'>$driver_name</td>";
     $html .= "<td>";
@@ -21,10 +23,13 @@ function getDriverTasks($driver, $runsheet_id)
         $html .= "</div>";
         $task_ids[] = $task['task_id'];
         $print_text = ($task['printed'] == 0)? "Print Runsheeet" : "Reprint Runsheet";
-        if($task['completed'] == 1 || $task['printed'] == 0 || $driver['id'] == 0)
-            $can_be_completed = false;
+        if( $task['printed'] == 0 )
+            $is_printed = false;
+        if($task['completed'] == 0)
+            $all_driver_tasks_completed = false;
     }
     //$tid_string = implode(",", $task_ids);
+    $can_be_completed = (!$all_driver_tasks_completed && $is_printed);
     $tids = htmlspecialchars(json_encode($task_ids), ENT_QUOTES, 'UTF-8');
     $html .= "</td>";
     if($driver['id'] == 0)
