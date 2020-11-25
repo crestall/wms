@@ -65,18 +65,22 @@ class Runsheet extends Model{
         $q = $this->getRunsheetQuery();
         $q .= "
             ORDER BY
-                rst.completed ASC, rs.runsheet_day DESC, rst.driver_id DESC
+                rs.all_tasks_done ASC, rs.runsheet_day DESC, rst.driver_id DESC
         ";
         //die($q);
         return $db->queryData($q);
     }
 
-    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false)
+    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false, $all_done = false)
     {
         $db = Database::openConnection();
         $q = $this->getRunsheetQuery();
         $q .= " WHERE";
-        if($completed === false)
+        if($all_done)
+        {
+            $q .= " rs.all_tasks_done = 1 AND";
+        }
+        elseif($completed === false)
         {
             $q .= " rst.completed = 0 AND";
         }
@@ -338,8 +342,9 @@ class Runsheet extends Model{
             else
             {
                 $new_vals = array(
-                    'updated_date'  =>  time(),
-                    'updated_by'    =>  Session::getUserId()
+                    'updated_date'      =>  time(),
+                    'updated_by'        =>  Session::getUserId(),
+                    'all_tasks_done'    => 0
                 );
                 $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
             }
@@ -424,7 +429,7 @@ class Runsheet extends Model{
     {
         return "
             SELECT
-                rs.runsheet_day, rs.created_date, rs.updated_date, rs.created_by, rs.updated_by,
+                rs.runsheet_day, rs.created_date, rs.updated_date, rs.created_by, rs.updated_by, rs.all_tasks_done,
                 rst.*,
                 d.name AS driver_name,
                 pj.job_id AS job_number,pj.delivery_instructions AS job_delivery_instructions, pj.description, pj.ship_to AS job_shipto, pj.attention AS job_attention, pj.address AS job_address, pj.address_2 AS job_address2, pj.suburb AS job_suburb, pj.postcode AS job_postcode,
