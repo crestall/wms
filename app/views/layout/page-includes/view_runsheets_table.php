@@ -1,5 +1,5 @@
 <?php
-function getDriverTasks($driver, $runsheet_id)
+function getDriverTasks($driver, $runsheet_id, $can_be_completed)
 {
     $driver_name = (empty($driver['name']))? "Not Assigned" : ucwords($driver['name']);
     $task_ids = array();
@@ -34,10 +34,10 @@ function getDriverTasks($driver, $runsheet_id)
     {
         $html .= "<td>
                     <p><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='$runsheet_id' data-driverid='{$driver['id']}'>{$print_text}</button></p>
-                    <!-- p><button class='btn btn-sm btn-outline-danger remove-driver' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Driver</button></p>
-                    <p><button class='btn btn-sm btn-outline-danger remove-tasks' data-runsheetid='$runsheet_id' data-taskids='$tids'>Remove Selected Tasks</button></p>
-                    <p><button class='btn btn-sm btn-outline-fsg new-driver' data-runsheetid='$runsheet_id' data-taskids='$tids'>Assign New Driver</button></p -->
-                </td>";
+        ";
+        if($can_be_completed)
+            $html .= "<p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet={$runsheet_id}/driver={$driver_id}'>Finalise</a></p>";
+        $html .= "</td>";
     }
 
     return $html;
@@ -79,7 +79,7 @@ function getDriverTasks($driver, $runsheet_id)
                     <script type="x/template" class="extra-row-content">
                         <?php for($i = 1; $i < $rows; ++$i):?>
                             <tr>
-                                <?php echo getDriverTasks($rs['drivers'][$i], $rs['runsheet_id']);?>
+                                <?php echo getDriverTasks($rs['drivers'][$i], $rs['runsheet_id'], $rs['all_tasks_done'] == 0);?>
                             </tr>
                         <?php endfor; ?>
                     </script>
