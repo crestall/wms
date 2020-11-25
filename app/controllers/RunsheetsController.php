@@ -38,14 +38,14 @@ class RunsheetsController extends Controller
         $temp = array();
         foreach($runsheets as $key => $value)
         {
-            echo "<pre>DRIVERS",print_r($value['drivers']),"</pre>";
-            foreach($value['drivers'] as $d)
+            //echo "<pre>DRIVERS",print_r($value['drivers']),"</pre>";
+            foreach($value['drivers'] as $di => $d)
             {
-                //$temp[$value['drivers']['id'].$key] = $d['id'];
+                $temp[$value['drivers']['id'].$key] = $d['id'];
             }
         }
         ksort($temp);
-        //$runsheets = array_values($temp);
+        $runsheets = array_values($temp);
         unset($temp);
         echo "<pre>",print_r($runsheets),"</pre>";die();
     }
