@@ -24,8 +24,17 @@ class AdminOnlyController extends Controller
     public function reeceDataTidy()
     {
         Config::setJsConfig('curPage', "reece-data-tidy");
+        Config::set('curPage', "reece-data-tidy");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/reeceDataTidy.php', [
             'page_title'    =>  "Check and Clean Reece Data"
+        ]);
+    }
+
+    public function runsheetCompletionTidy()
+    {
+        Config::setJsConfig('curPage', "runsheet-completion-tidy");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/runsheetCompletion.php', [
+            'page_title'    =>  "Update Driver Runsheet completion Status"
         ]);
     }
 
