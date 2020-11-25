@@ -24,7 +24,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="col-12">
-                        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/print_runsheets_table.php");?>
+                        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/view_runsheets_table.php");?>
                     </div>
                 </div>
             </div>
