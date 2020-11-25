@@ -24,6 +24,32 @@ class RunsheetsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function viewRunsheets()
+    {
+        $rss = $this->runsheet->getRunsheetsForViewing();
+
+        $runsheets = Utility::generateRunsheetDriverArray($rss);/*
+        array_multisort(array_map(function($e){
+            array_map(function($d){
+                echo "<p>Driver ID: ".$d['id']."</p>";
+                return $d['id'];
+            }, $e['drivers']);
+        }, $runsheets), SORT_DESC, SORT_NUMERIC, $runsheets);
+        $temp = array();
+        foreach($runsheets as $key => $value)
+        {
+            //echo "<pre>DRIVERS",print_r($value['drivers']),"</pre>";
+            foreach($value['drivers'] as $di => $d)
+            {
+                $temp[$value['drivers'][$di]['id'].$key] = $d['id'];
+            }
+        }
+        ksort($temp);
+        $runsheets = array_values($temp);
+        unset($temp);*/
+        echo "<pre>",print_r($runsheets),"</pre>";die();
+    }
+
     public function completedRunsheets()
     {
         $driver_id = (isset($this->request->params['args']['driver']))? $this->request->params['args']['driver'] : 0;

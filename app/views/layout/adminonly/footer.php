@@ -16,6 +16,16 @@
 
                     }
                 },
+                'runsheet-completion-tidy':{
+                    init: function(){
+                        $('form#runsheet_completion_updater').submit(function(){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Runsheet Completion Status...</h2></div>' });
+                            }
+                        });
+                    }
+                },
                 'reece-data-tidy' :{
                     init: function()
                     {
