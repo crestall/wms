@@ -5100,8 +5100,40 @@ class FormController extends Controller {
         else
         {
             $orders_items = array();
+
+            $error = false;
             foreach($this->request->data['items'] as $itid => $details)
             {
+                if( !isset($details['qty']) || $details['qty'] == 0 )
+                {
+                    $error = true;
+                    Form::setError('items', 'Please ensure all items have a quantity');
+                    break;
+                }
+                if(!isset($details['id']))
+                {
+                    $error = true;
+                    Form::setError('items', 'There has been an error recognising an item');
+                    break;
+                }
+                if(!$error)
+                {
+                    $array = array(
+                        'qty'   => $details['qty'],
+                        'id'    => $details['id']
+                    );
+                    $array['whole_pallet'] = isset($details['whole_pallet']);
+                    $orders_items[] = $array ;
+                }
+
+            }
+
+
+
+            /*
+            foreach($this->request->data['items'] as $itid => $details)
+            {
+
                 $array = array(
                     'qty'   => $details['qty'],
                     'id'    => $details['id']
@@ -5118,6 +5150,8 @@ class FormController extends Controller {
                 }
                 $orders_items[] = $array ;
             }
+            */
+
             //echo "<pre>orders_items",print_r($orders_items),"</pre>"; //die();
             $item_array = array(
                 $order_id => $orders_items

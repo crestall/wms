@@ -47,7 +47,8 @@ $si_string = rtrim($si_string, ",");
                             <?php if(Form::$num_errors > 0 && is_array(Form::value('items'))):
                                 //echo "<pre>",print_r(Form::value('items')),"</pre>";die();
                                 echo Form::displayError('items');
-                                foreach(Form::value('items') as $ind => $ita):?>
+                                foreach(Form::value('items') as $ind => $ita):
+                                    $qty = (isset($ita['qty']))? $ita['qty'] : 0 ;?>
                                     <div class="row item_holder">
                                         <div class='col-md-1 delete-image-holder'>
                                             <a class='delete' title='remove this item'><i class='fad fa-times-square text-danger'></i><span class="inst">Remove</span></a>
@@ -60,10 +61,10 @@ $si_string = rtrim($si_string, ",");
                                                 <input type='hidden' name='items[<?php echo $ind;?>][whole_pallet]' value='1' />
                                                 <select class='form-control selectpicker pallet_qty' data-style='btn-outline-secondary' name='items[<?php echo $ind;?>][qty]'>
                                                     <option value='0'>Quantity</option>
-                                                    <?php echo $this->controller->item->getSelectLocationAvailableCounts($ita['id'], $ita['qty']);?>
+                                                    <?php echo $this->controller->item->getSelectLocationAvailableCounts($ita['id'], $qty);?>
                                                 </select>
                                             <?php else:?>
-                                                <input type='text' class='form-control number item_qty' name='items[<?php echo $ind;?>][qty]' placeholder='Qty' value="<?php echo $ita['qty'];?>" />
+                                                <input type='text' class='form-control number item_qty' name='items[<?php echo $ind;?>][qty]' placeholder='Qty' value="<?php echo $qty;?>" />
                                             <?php endif;?>
                                         </div>
                                         <div class="col-md-3 qty-location"></div>
