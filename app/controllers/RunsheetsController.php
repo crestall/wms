@@ -33,7 +33,7 @@ class RunsheetsController extends Controller
             array_map(function($d){
                 return $d['id'];
             }, $e['drivers']);
-        }, $runsheets), SORT_DESC, $runsheets);
+        }, $runsheets), SORT_DESC, SORT_NUMERIC, $runsheets);
         echo "<pre>",print_r($runsheets),"</pre>";die();
     }
 
