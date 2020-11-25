@@ -28,25 +28,7 @@ class RunsheetsController extends Controller
     {
         $rss = $this->runsheet->getRunsheetsForViewing();
 
-        $runsheets = Utility::generateRunsheetDriverArray($rss);/*
-        array_multisort(array_map(function($e){
-            array_map(function($d){
-                echo "<p>Driver ID: ".$d['id']."</p>";
-                return $d['id'];
-            }, $e['drivers']);
-        }, $runsheets), SORT_DESC, SORT_NUMERIC, $runsheets);
-        $temp = array();
-        foreach($runsheets as $key => $value)
-        {
-            //echo "<pre>DRIVERS",print_r($value['drivers']),"</pre>";
-            foreach($value['drivers'] as $di => $d)
-            {
-                $temp[$value['drivers'][$di]['id'].$key] = $d['id'];
-            }
-        }
-        ksort($temp);
-        $runsheets = array_values($temp);
-        unset($temp);*/
+        $runsheets = Utility::generateRunsheetDriverArray($rss);
         echo "<pre>",print_r($runsheets),"</pre>";die();
     }
 
@@ -378,8 +360,8 @@ class RunsheetsController extends Controller
 
     public function printRunsheets()
     {
-        $completed = (isset($this->request->params['args']['complete']))? false : 1;
-        $rss = $this->runsheet->getRunsheetsForPrinting($completed);
+        $completed = (isset($this->request->params['args']['complete']));
+        $rss = $this->runsheet->getRunsheetsForPrinting(1, false, false, false, false, $completed);
         //$runsheets = $this->generateRunsheetDriverArray($rss);
         $runsheets = Utility::generateRunsheetDriverArray($rss);
         //echo "<pre>",print_r($runsheets),"</pre>";die();
