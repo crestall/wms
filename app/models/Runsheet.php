@@ -424,7 +424,7 @@ class Runsheet extends Model{
     {
         return "
             SELECT
-                rs.runsheet_day, rs.created_date, rs.updated_date, rs.created_by, rs.updated_by,
+                rs.runsheet_day, rs.created_date, rs.updated_date, rs.created_by, rs.updated_by, rs.all_tasks_done,
                 rst.*,
                 d.name AS driver_name,
                 pj.job_id AS job_number,pj.delivery_instructions AS job_delivery_instructions, pj.description, pj.ship_to AS job_shipto, pj.attention AS job_attention, pj.address AS job_address, pj.address_2 AS job_address2, pj.suburb AS job_suburb, pj.postcode AS job_postcode,
