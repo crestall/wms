@@ -26,8 +26,8 @@
                             $(this).click(function(e){
                                 var runsheet_id = $(this).data('runsheetid');
                                 var driver_id = $(this).data('driverid');
-                                //console.log('runsheet_id: '+runsheet_id);
-                                //console.log('driver_id: '+driver_id);
+                                console.log('runsheet_id: '+runsheet_id);
+                                console.log('driver_id: '+driver_id);
                                 var form = document.createElement('form');
                                 form.setAttribute("method", "post");
                                 form.setAttribute("action", "/pdf/printRunsheet");
@@ -51,7 +51,7 @@
                 },
                 'view-runsheets':{
                     init: function(){
-                        actions.common.runsheetPrint();
+                        actions['common']['runsheetPrint']();
                         dataTable.init($('table#view_runsheets_table'), {
                             /* No ordering applied by DataTables during initialisation */
                             "order": [],
