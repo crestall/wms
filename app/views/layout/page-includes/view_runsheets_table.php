@@ -36,7 +36,7 @@ function getDriverTasks($driver, $runsheet_id, $can_be_completed)
                     <p><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='$runsheet_id' data-driverid='{$driver['id']}'>{$print_text}</button></p>
         ";
         if($can_be_completed)
-            $html .= "<p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet={$runsheet_id}/driver={$driver_id}'>Finalise</a></p>";
+            $html .= "<p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet={$runsheet_id}/driver={$driver['id']}'>Finalise</a></p>";
         $html .= "</td>";
     }
 
