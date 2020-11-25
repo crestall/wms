@@ -33,6 +33,7 @@ class AdminOnlyController extends Controller
     public function runsheetCompletionTidy()
     {
         Config::setJsConfig('curPage', "runsheet-completion-tidy");
+        Config::set('curPage', "runsheet-completion-tidy");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/runsheetCompletion.php', [
             'page_title'    =>  "Update Driver Runsheet completion Status"
         ]);
@@ -99,6 +100,8 @@ class AdminOnlyController extends Controller
 
     public function eparcelShipmentDeleter()
     {
+        Config::setJsConfig('curPage', "eparcel-shipment-deleter");
+        Config::set('curPage', "eparcel-shipment-deleter");
         $clients = $this->client->getEparcelClients();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'adminOnly/eparcelShipmentsDeleter.php',[
             'page_title'    =>  "Deleting eParcel Shipments",
@@ -119,6 +122,7 @@ class AdminOnlyController extends Controller
     {
         //add sensitive config data - passwords and keys data
         Config::setJsConfig('curPage', "update-configuration");
+        Config::set('curPage', "update-configuration");
         $configuration_names = $this->configuration->getConfigurationNames();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/updateConfiguration.php', [
             'page_title'            => "Configuration Update",
