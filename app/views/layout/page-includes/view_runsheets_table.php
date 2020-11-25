@@ -84,7 +84,7 @@ function getDriverTasks($driver, $runsheet_id, $can_be_completed)
                         <?php endfor; ?>
                     </script>
                 </td>
-            <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id']); ?>
+            <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id'], $rs['all_tasks_done'] == 0); ?>
             </tr>
         <?php endforeach;?>
     </tbody>
