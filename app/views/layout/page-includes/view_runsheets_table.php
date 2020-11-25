@@ -37,6 +37,8 @@ function getDriverTasks($driver, $runsheet_id)
     <thead>
         <tr>
             <th>Runsheet Day</th>
+            <th>Created</th>
+            <th>Last Update</th>
             <th>Driver</th>
             <th>Tasks</th>
             <th></th>
@@ -44,10 +46,26 @@ function getDriverTasks($driver, $runsheet_id)
     </thead>
     <tbody>
         <?php foreach($runsheets as $timestamp => $rs):
+            //$cb = $db->queryValue('users', array('id' => $rs['created_by']), 'name');
+            $cs = date('d/m/Y', $rs['created_date'] )."<br>by ".ucwords($rs['created_by']);
+            if($rs['updated_date'] != $rs['created_date'])
+            {
+                $lu = date('d/m/Y', $rs['updated_date'])."<br>by ".ucwords($rs['updated_by']);
+            }
+            else
+            {
+                $lu = "Never Updated";
+            }
             $rows = count($rs['drivers']);?>
             <tr>
-                <td data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
+                <td style="vertical-align: middle">
                     <h4><?php echo date('D jS M', $timestamp );?></h4>
+                </td>
+                <td style="vertical-align: middle">
+                    <?php echo $cs;?>
+                </td>
+                <td data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
+                    <?php echo $lu;?>
                     <script type="x/template" class="extra-row-content">
                         <?php for($i = 1; $i < $rows; ++$i):?>
                             <tr>
