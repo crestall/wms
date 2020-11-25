@@ -119,6 +119,7 @@ class FormController extends Controller {
             'procRegisterNewStock',
             'procRepAdd',
             'procRepEdit',
+            'procRunsheetCompletionUpdate',
             'procScanToInventory',
             'procSolarReturn',
             'procSolarTeamAdd',
@@ -141,6 +142,13 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procRunsheetCompletionUpdate()
+    {
+        $this->runsheet->updateCompletionStatus();
+        Session::set('feedback', "<h2>Runsheet Status Have Been Updated.</h2><p></p>");
+        return $this->redirector->to(PUBLIC_ROOT."admin-only/runsheet-completion-tidy");
     }
 
     public function procCompletRunsheetTasks()
