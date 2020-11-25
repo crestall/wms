@@ -129,6 +129,34 @@ class Runsheet extends Model{
         return $db->queryData($q);
     }
 
+    public function areAllTasksDone($runsheet_id)
+    {
+        $db = Database::openConnection();
+        $q ="
+          SELECT
+            count(*) AS count
+          FROM
+            {$this->tasks_table}
+          WHERE
+            completed = 0 AND runsheet_id = $runsheet_id
+        ";
+
+        $row = $db->queryRow($q);
+        return $row['count'] == 0;
+
+    }
+
+    public function setAllTasksDone($runsheet_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'all_tasks_done', 1, $runsheet_id);
+    }
+
+    public function getAllTasksDone($runsheet_id)
+    {
+
+    }
+
     public function getTasksForRunsheet($runsheet_id = 0, $printed = false)
     {
         $db = Database::openConnection();
@@ -184,18 +212,20 @@ class Runsheet extends Model{
     public function removeJob($job_id, $runsheet_id)
     {
        $db = Database::openConnection();
-       //record runsheet update
-       $new_vals = array(
-            'updated_date'  =>  time(),
-            'updated_by'    =>  Session::getUserId()
-        );
-        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
        $query = "DELETE FROM {$this->tasks_table} WHERE runsheet_id = :runsheet_id AND job_id = :job_id";
        $params = array(
             'runsheet_id'   => $runsheet_id,
             'job_id'        => $job_id
        );
-       return $db->query($query, $params);
+       $db->query($query, $params);
+       //record runsheet update
+       $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+       //check if this makes it all done
+       $new_vals['all_tasks_done'] = ($this->areAllTasksDone($runsheet_id))? 1 : 0;
+       $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
     }
 
     public function updateTask($details)
@@ -217,29 +247,25 @@ class Runsheet extends Model{
 
     public function removeTasks($task_ids, $runsheet_id)
     {
-       $db = Database::openConnection();
-       //record runsheet update
-       $new_vals = array(
-            'updated_date'  =>  time(),
-            'updated_by'    =>  Session::getUserId()
-        );
-        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
+        $db = Database::openConnection();
         foreach($task_ids as $task_id)
         {
             $db->deleteQuery($this->tasks_table, $task_id);
         }
+        //record runsheet update
+        $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+        //check if this makes it all done
+        $new_vals['all_tasks_done'] = ($this->areAllTasksDone($runsheet_id))? 1 : 0;
+        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
         return true;
     }
 
     public function completeTasks($data)
     {
-       $db = Database::openConnection();
-       //record runsheet update
-       $new_vals = array(
-            'updated_date'  =>  time(),
-            'updated_by'    =>  Session::getUserId()
-        );
-        $db->updateDatabaseFields($this->table, $new_vals, $data['runsheet_id']);
+        $db = Database::openConnection();
         foreach($data['tasks'] as $task_id)
         {
             $task_vals = array(
@@ -251,24 +277,34 @@ class Runsheet extends Model{
                 $task_vals['time_of_drop'] = $data['dd'][$task_id]['tod'];
             $db->updateDatabaseFields($this->tasks_table, $task_vals, $task_id);
         }
+        //record runsheet update
+        $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+        //check if this makes it all done
+        $new_vals['all_tasks_done'] = ($this->areAllTasksDone($data['runsheet_id']))? 1 : 0;
+        $db->updateDatabaseFields($this->table, $new_vals, $data['runsheet_id']);
         return true;
     }
 
     public function removeOrder($order_id, $runsheet_id)
     {
-       $db = Database::openConnection();
-       //record runsheet update
-       $new_vals = array(
+        $db = Database::openConnection();
+        $query = "DELETE FROM {$this->tasks_table} WHERE runsheet_id = :runsheet_id AND order_id = :order_id";
+        $params = array(
+            'runsheet_id'   => $runsheet_id,
+            'order_id'      => $order_id
+        );
+        $db->query($query, $params);
+        //record runsheet update
+        $new_vals = array(
             'updated_date'  =>  time(),
             'updated_by'    =>  Session::getUserId()
         );
+        //check if this makes it all done
+        $new_vals['all_tasks_done'] = ($this->areAllTasksDone($runsheet_id))? 1 : 0;
         $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
-       $query = "DELETE FROM {$this->tasks_table} WHERE runsheet_id = :runsheet_id AND order_id = :order_id";
-       $params = array(
-            'runsheet_id'   => $runsheet_id,
-            'order_id'      => $order_id
-       );
-       return $db->query($query, $params);
     }
 
     public function addRunsheet($data)
