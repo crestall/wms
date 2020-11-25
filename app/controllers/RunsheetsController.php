@@ -34,7 +34,7 @@ class RunsheetsController extends Controller
                 echo "<p>Driver ID: ".$d['id']."</p>";
                 return $d['id'];
             }, $e['drivers']);
-        }, $runsheets), SORT_DESC, SORT_NUMERIC, $runsheets); */
+        }, $runsheets), SORT_DESC, SORT_NUMERIC, $runsheets);
         $temp = array();
         foreach($runsheets as $key => $value)
         {
@@ -46,7 +46,7 @@ class RunsheetsController extends Controller
         }
         ksort($temp);
         $runsheets = array_values($temp);
-        unset($temp);
+        unset($temp);*/
         echo "<pre>",print_r($runsheets),"</pre>";die();
     }
 
