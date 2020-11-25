@@ -65,7 +65,7 @@ class Runsheet extends Model{
         $q = $this->getRunsheetQuery();
         $q .= "
             ORDER BY
-                rst.completed ASC, rs.runsheet_day DESC
+                rst.completed ASC, rs.runsheet_day DESC, rst.driver_id DESC
         ";
         //die($q);
         return $db->queryData($q);
