@@ -443,8 +443,8 @@ class Runsheet extends Model{
             FROM
                 {$this->table} rs
                 JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id
-                LEFT JOIN users cu ON cu.id = rs.created_by,
-                LEFT JOIN users uu ON uu.id = rs.updated_by,
+                LEFT JOIN users cu ON cu.id = rs.created_by
+                LEFT JOIN users uu ON uu.id = rs.updated_by
                 LEFT JOIN production_jobs pj ON rst.job_id = pj.id
                 LEFT JOIN sales_reps sr ON sr.id = pj.salesrep_id
                 LEFT JOIN drivers d ON d.id = rst.driver_id
