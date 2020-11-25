@@ -40,7 +40,7 @@ class RunsheetsController extends Controller
         {
             foreach($value['drivers'] as $d)
             {
-                $temp[$value['drivers'].$key] = $d['id'];
+                $temp[$value['drivers']['id'].$key] = $d['id'];
             }
         }
         ksort($temp);
