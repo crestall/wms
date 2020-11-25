@@ -21,7 +21,7 @@ function getDriverTasks($driver, $runsheet_id)
         $html .= "</div>";
         $task_ids[] = $task['task_id'];
         $print_text = ($task['printed'] == 0)? "Print Runsheeet" : "Reprint Runsheet";
-        if($task['completed'] == 1)
+        if($task['completed'] == 1 || $task['printed'] == 0 || $driver['id'] == 0)
             $can_be_completed = false;
     }
     //$tid_string = implode(",", $task_ids);
