@@ -71,12 +71,16 @@ class Runsheet extends Model{
         return $db->queryData($q);
     }
 
-    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false)
+    public function getRunsheetsForDisplay($completed = false, $printed = false, $driver_id = false, $runsheet_id = false, $driver_set = false, $all_done = false)
     {
         $db = Database::openConnection();
         $q = $this->getRunsheetQuery();
         $q .= " WHERE";
-        if($completed === false)
+        if($all_done)
+        {
+            $q .= " rs.all_tasks_done = 1 AND";
+        }
+        elseif($completed === false)
         {
             $q .= " rst.completed = 0 AND";
         }
