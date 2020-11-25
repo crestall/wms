@@ -5101,7 +5101,7 @@ class FormController extends Controller {
         {
             $orders_items = array();
 
-
+            $error = false;
             foreach($this->request->data['items'] as $itid => $details)
             {
                 if( !isset($details['qty']) || $details['qty'] == 0 )
