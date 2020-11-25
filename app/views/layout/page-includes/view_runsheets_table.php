@@ -5,7 +5,7 @@ function getDriverTasks($driver, $runsheet_id)
     $task_ids = array();
     $html = "<td style='vertical-align:middle'>$driver_name</td>";
     $html .= "<td>";
-    $can_be_completed = false;
+    $can_be_completed = true;
     foreach($driver['tasks'] as $task)
     {
         $task_number = ($task['job_number'] > 0)? "JOB: ".$task['customer']." - ".$task['job_number'] : "ORDER: ".$task['customer']." - ".$task['order_number'];
@@ -21,8 +21,8 @@ function getDriverTasks($driver, $runsheet_id)
         $html .= "</div>";
         $task_ids[] = $task['task_id'];
         $print_text = ($task['printed'] == 0)? "Print Runsheeet" : "Reprint Runsheet";
-        if($task['completed'] == 0)
-            $can_be_completed = true;
+        if($task['completed'] == 1)
+            $can_be_completed = false;
     }
     //$tid_string = implode(",", $task_ids);
     $tids = htmlspecialchars(json_encode($task_ids), ENT_QUOTES, 'UTF-8');
