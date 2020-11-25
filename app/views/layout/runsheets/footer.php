@@ -20,10 +20,38 @@
                         if($('#driver_selector').val() > 0)
                             url += "/driver="+$('#driver_selector').val();
                         window.location.href = url;
+                    },
+                    runsheetPrint: function(){
+                        $('button.print-sheet').each(function(i,e){
+                            $(this).click(function(e){
+                                var runsheet_id = $(this).data('runsheetid');
+                                var driver_id = $(this).data('driverid');
+                                //console.log('runsheet_id: '+runsheet_id);
+                                //console.log('driver_id: '+driver_id);
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/pdf/printRunsheet");
+                                form.setAttribute("target", "runsheetformresult");
+                                var hiddenField = document.createElement("input");
+                                hiddenField.setAttribute("type", "hidden");
+                                hiddenField.setAttribute("name", "runsheet_id");
+                                hiddenField.setAttribute("value", runsheet_id);
+                                form.appendChild(hiddenField);
+                                var hiddenField2 = document.createElement("input");
+                                hiddenField2.setAttribute("type", "hidden");
+                                hiddenField2.setAttribute("name", "driver_id");
+                                hiddenField2.setAttribute("value", driver_id);
+                                form.appendChild(hiddenField2);
+                                document.body.appendChild(form);
+                                window.open('','runsheetformresult');
+                                form.submit();
+                            });
+                        });
                     }
                 },
                 'view-runsheets':{
                     init: function(){
+                        actions.common.runsheetPrint();
                         dataTable.init($('table#view_runsheets_table'), {
                             /* No ordering applied by DataTables during initialisation */
                             "order": [],
@@ -155,33 +183,7 @@
                 'print-runsheets':{
                     init:function(){
                         //console.log('init');
-                        $('button.print-sheet').each(function(i,e){
-                            $(this).click(function(e){
-                                var runsheet_id = $(this).data('runsheetid');
-                                var driver_id = $(this).data('driverid');
-                                console.log('runsheet_id: '+runsheet_id);
-                                console.log('driver_id: '+driver_id);
-
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printRunsheet");
-                                //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
-                                form.setAttribute("target", "runsheetformresult");
-                                var hiddenField = document.createElement("input");
-                                hiddenField.setAttribute("type", "hidden");
-                                hiddenField.setAttribute("name", "runsheet_id");
-                                hiddenField.setAttribute("value", runsheet_id);
-                                form.appendChild(hiddenField);
-                                var hiddenField2 = document.createElement("input");
-                                hiddenField2.setAttribute("type", "hidden");
-                                hiddenField2.setAttribute("name", "driver_id");
-                                hiddenField2.setAttribute("value", driver_id);
-                                form.appendChild(hiddenField2);
-                                document.body.appendChild(form);
-                                window.open('','runsheetformresult');
-                                form.submit();
-                            });
-                        });
+                        actions.common.runsheetPrint();
                         dataTable.init($('table#finalise_runsheets_table'), {
                             /* No ordering applied by DataTables during initialisation */
                             "order": [],
