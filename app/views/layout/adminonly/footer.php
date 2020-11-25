@@ -16,6 +16,11 @@
 
                     }
                 },
+                'runsheet-completion-tidy':{
+                    init: function(){
+
+                    }
+                },
                 'reece-data-tidy' :{
                     init: function()
                     {
