@@ -27,7 +27,7 @@ function getDriverTasks($driver, $runsheet_id)
     if($driver['id'] == 0)
     {
         $html .= "<td>
-                    <a href='/runsheets/prepare-runsheet/runsheet={$rs['runsheet_id']}' class='btn btn-sm btn-outline-fsg'>Update Driver<br>and Tasks</a>
+                    <a href='/runsheets/prepare-runsheet/runsheet={$runsheet_id}' class='btn btn-sm btn-outline-fsg'>Update Driver<br>and Tasks</a>
                 </td>";
     }
     else
