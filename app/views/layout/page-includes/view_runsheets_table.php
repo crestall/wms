@@ -1,10 +1,11 @@
 <?php
-function getDriverTasks($driver, $runsheet_id, $can_be_completed)
+function getDriverTasks($driver, $runsheet_id)
 {
     $driver_name = (empty($driver['name']))? "Not Assigned" : ucwords($driver['name']);
     $task_ids = array();
     $html = "<td style='vertical-align:middle'>$driver_name</td>";
     $html .= "<td>";
+    $can_be_completed = false;
     foreach($driver['tasks'] as $task)
     {
         $task_number = ($task['job_number'] > 0)? "JOB: ".$task['customer']." - ".$task['job_number'] : "ORDER: ".$task['customer']." - ".$task['order_number'];
@@ -20,6 +21,8 @@ function getDriverTasks($driver, $runsheet_id, $can_be_completed)
         $html .= "</div>";
         $task_ids[] = $task['task_id'];
         $print_text = ($task['printed'] == 0)? "Print Runsheeet" : "Reprint Runsheet";
+        if($task['completed'] == 0)
+            $can_be_completed = true;
     }
     //$tid_string = implode(",", $task_ids);
     $tids = htmlspecialchars(json_encode($task_ids), ENT_QUOTES, 'UTF-8');
@@ -79,12 +82,12 @@ function getDriverTasks($driver, $runsheet_id, $can_be_completed)
                     <script type="x/template" class="extra-row-content">
                         <?php for($i = 1; $i < $rows; ++$i):?>
                             <tr>
-                                <?php echo getDriverTasks($rs['drivers'][$i], $rs['runsheet_id'], $rs['all_tasks_done'] == 0);?>
+                                <?php echo getDriverTasks($rs['drivers'][$i], $rs['runsheet_id']);?>
                             </tr>
                         <?php endfor; ?>
                     </script>
                 </td>
-            <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id'], $rs['all_tasks_done'] == 0); ?>
+            <?php echo getDriverTasks($rs['drivers'][0], $rs['runsheet_id']); ?>
             </tr>
         <?php endforeach;?>
     </tbody>
