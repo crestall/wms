@@ -338,8 +338,9 @@ class Runsheet extends Model{
             else
             {
                 $new_vals = array(
-                    'updated_date'  =>  time(),
-                    'updated_by'    =>  Session::getUserId()
+                    'updated_date'      =>  time(),
+                    'updated_by'        =>  Session::getUserId(),
+                    'all_tasks_done'    => 0
                 );
                 $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
             }
