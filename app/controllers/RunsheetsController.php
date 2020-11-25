@@ -31,6 +31,7 @@ class RunsheetsController extends Controller
         $runsheets = Utility::generateRunsheetDriverArray($rss);
         array_multisort(array_map(function($e){
             array_map(function($d){
+                echo "<p>Driver ID: ".$d['id']."</p>";
                 return $d['id'];
             }, $e['drivers']);
         }, $runsheets), SORT_DESC, SORT_NUMERIC, $runsheets);
