@@ -157,7 +157,10 @@ $(document).ready(function() {
 				remote: {
                     url: '/ajaxfunctions/checkJobIds'
                 }
-			}
+			},
+            priority:{
+                positiveNumber0 : true;
+            }
     	},
 		messages:{
 			status_id:{
