@@ -256,6 +256,7 @@ $admin = array(
             'icon'      => '<i class="fal fa-truck fa-3x"></i>'
         )
     ),
+    'jobs'      => array(),
     'runsheets' => array(),
     'clients'	=> array(
         'clients-index' => true,
@@ -712,7 +713,7 @@ $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
 $padmin['fsg-contacts'] = array_merge($padmin['fsg-contacts'], $prod['fsg-contacts']);
 
 $admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
-$admin['jobs'] = $prod['jobs'];
+$admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 
 $prod_admin = array_merge($prod, $padmin);
 //return the pages
