@@ -6,8 +6,13 @@
             <th>Client</th>
             <th>Description</th>
             <th>Notes</th>
-            <!--th>Status</th-->
-            <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
+
+            <?php if($user_role == "production_admin"):?>
+                <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
+            <?php else:?>
+                <th>Status</th>
+            <?php endif;?>
+
             <th>FSG Contact</th>
             <th>Finisher(s)</th>
             <th nowrap>
