@@ -429,7 +429,7 @@ class Runsheet extends Model{
     {
         return "
             SELECT
-                rs.runsheet_day, rs.created_date, rs.updated_date, rs.created_by, rs.updated_by, rs.all_tasks_done,
+                rs.runsheet_day, rs.created_date, rs.updated_date, rs.all_tasks_done,
                 rst.*,
                 d.name AS driver_name,
                 pj.job_id AS job_number,pj.delivery_instructions AS job_delivery_instructions, pj.description, pj.ship_to AS job_shipto, pj.attention AS job_attention, pj.address AS job_address, pj.address_2 AS job_address2, pj.suburb AS job_suburb, pj.postcode AS job_postcode,
@@ -437,10 +437,14 @@ class Runsheet extends Model{
                 o.ship_to AS order_customer,o.client_order_id, o.order_number,o.instructions AS order_delivery_instructions, o.address AS order_address, o.address_2 AS order_address2, o.suburb AS order_suburb, o.postcode AS order_postcode,
                 c.client_name AS order_client_name,
                 i.name AS item_name, i.sku,
-                sr.name AS FSG_contact, sr.phone AS FSG_contact_phone
+                sr.name AS FSG_contact, sr.phone AS FSG_contact_phone,
+                cu.name AS created_by,
+                uu.name AS updated_by
             FROM
                 {$this->table} rs
                 JOIN {$this->tasks_table} rst ON rs.id = rst.runsheet_id
+                LEFT JOIN users cu ON cu.id = rs.created_by
+                LEFT JOIN users uu ON uu.id = rs.updated_by
                 LEFT JOIN production_jobs pj ON rst.job_id = pj.id
                 LEFT JOIN sales_reps sr ON sr.id = pj.salesrep_id
                 LEFT JOIN drivers d ON d.id = rst.driver_id

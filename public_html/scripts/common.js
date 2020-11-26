@@ -357,7 +357,35 @@ var dataTable = {
                 "sLengthMenu": "Rows to Show _MENU_"
             },
             "lengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
-            "pageLength": 25
+            "pageLength": 25,
+            "fnDrawCallback": function() {
+                $table = $(this);
+                if ($table.closest(".datatable-multi-row").length) {
+                    // for each row in the table body...
+                    $table.find("tbody>tr").each(function() {
+                        var $tr = $(this);
+                        var extra_row = $tr.find(".extra-row-content").html();
+                        if (!$tr.next().hasClass('dt-added')) {
+                            $tr.after(extra_row);
+                            $tr.find("td").each(function() {
+                                var $td = $(this);
+                                var rowspan = parseInt($td.data("datatable-multi-row-rowspan"), 10);
+                                if (rowspan) {
+                                    $td.attr('rowspan', rowspan);
+                                }
+                            });
+                        }
+                    });
+                }
+                if ($table.closest(".datatable-printbuttons").length) {
+                    actions['common']['runsheetPrint']();
+                    $('button.print-sheet').each(function(i,e){
+                        $(this).click(function(e){
+                            location.reload();
+                        });
+                    });
+                }
+            } // end fnDrawCallback()
         };
 
         $.extend( opts, options );

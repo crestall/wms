@@ -20,6 +20,47 @@
                         if($('#driver_selector').val() > 0)
                             url += "/driver="+$('#driver_selector').val();
                         window.location.href = url;
+                    },
+                    runsheetPrint: function(){
+                        $('button.print-sheet').each(function(i,e){
+                            $(this).click(function(e){
+                                var runsheet_id = $(this).data('runsheetid');
+                                var driver_id = $(this).data('driverid');
+                                console.log('runsheet_id: '+runsheet_id);
+                                console.log('driver_id: '+driver_id);
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/pdf/printRunsheet");
+                                form.setAttribute("target", "runsheetformresult");
+                                var hiddenField = document.createElement("input");
+                                hiddenField.setAttribute("type", "hidden");
+                                hiddenField.setAttribute("name", "runsheet_id");
+                                hiddenField.setAttribute("value", runsheet_id);
+                                form.appendChild(hiddenField);
+                                var hiddenField2 = document.createElement("input");
+                                hiddenField2.setAttribute("type", "hidden");
+                                hiddenField2.setAttribute("name", "driver_id");
+                                hiddenField2.setAttribute("value", driver_id);
+                                form.appendChild(hiddenField2);
+                                document.body.appendChild(form);
+                                window.open('','runsheetformresult');
+                                form.submit();
+                            });
+                        });
+                    }
+                },
+                'view-runsheets':{
+                    init: function(){
+                        actions['common']['runsheetPrint']();
+                        $('button.print-sheet').each(function(i,e){
+                            $(this).click(function(e){
+                                location.reload();
+                            });
+                        });
+                        dataTable.init($('table#view_runsheets_table'), {
+                            /* No ordering applied by DataTables during initialisation */
+                            "order": []
+                        });
                     }
                 },
                 'completed-runsheets':{
@@ -120,63 +161,10 @@
                 'print-runsheets':{
                     init:function(){
                         //console.log('init');
-                        $('button.print-sheet').each(function(i,e){
-                            $(this).click(function(e){
-                                var runsheet_id = $(this).data('runsheetid');
-                                var driver_id = $(this).data('driverid');
-                                console.log('runsheet_id: '+runsheet_id);
-                                console.log('driver_id: '+driver_id);
-
-                                var form = document.createElement('form');
-                                form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printRunsheet");
-                                //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
-                                form.setAttribute("target", "runsheetformresult");
-                                var hiddenField = document.createElement("input");
-                                hiddenField.setAttribute("type", "hidden");
-                                hiddenField.setAttribute("name", "runsheet_id");
-                                hiddenField.setAttribute("value", runsheet_id);
-                                form.appendChild(hiddenField);
-                                var hiddenField2 = document.createElement("input");
-                                hiddenField2.setAttribute("type", "hidden");
-                                hiddenField2.setAttribute("name", "driver_id");
-                                hiddenField2.setAttribute("value", driver_id);
-                                form.appendChild(hiddenField2);
-                                document.body.appendChild(form);
-                                window.open('','runsheetformresult');
-                                form.submit();
-                            });
-                        });
+                        actions.common.runsheetPrint();
                         dataTable.init($('table#finalise_runsheets_table'), {
                             /* No ordering applied by DataTables during initialisation */
-                            "order": [],
-                            "fnDrawCallback": function() {
-                                $table = $(this);
-                                // only apply this to specific tables
-                                if ($table.closest(".datatable-multi-row").length) {
-                                    // for each row in the table body...
-                                    $table.find("tbody>tr").each(function() {
-                                        var $tr = $(this);
-                                        // get the "extra row" content from the <script> tag.
-                                        // note, this could be any DOM object in the row.
-                                        var extra_row = $tr.find(".extra-row-content").html();
-                                        // in case draw() fires multiple times,
-                                        // we only want to add new rows once.
-                                        if (!$tr.next().hasClass('dt-added')) {
-                                            $tr.after(extra_row);
-                                            $tr.find("td").each(function() {
-                                                // for each cell in the top row,
-                                                // set the "rowspan" according to the data value.
-                                                var $td = $(this);
-                                                var rowspan = parseInt($td.data("datatable-multi-row-rowspan"), 10);
-                                                if (rowspan) {
-                                                    $td.attr('rowspan', rowspan);
-                                                }
-                                            });
-                                        }
-                                    });
-                                } // end if the table has the proper class
-                            } // end fnDrawCallback()
+                            "order": []
                         });
                     }
                 }

@@ -386,7 +386,9 @@ class Utility{
                     'runsheet_id'       => $rs['runsheet_id'],
                     'created_date'      => $rs['created_date'],
                     'updated_date'      => $rs['updated_date'],
-                    'all_tasks_done'    => $rs['all_tasks_done']
+                    'all_tasks_done'    => $rs['all_tasks_done'],
+                    'created_by'        => $rs['created_by'],
+                    'updated_by'        => $rs['updated_by']
                 );
                 $di = 0;
             }
