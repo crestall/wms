@@ -384,12 +384,6 @@ var dataTable = {
                         }
                     });
                 } // end if the table has the proper class
-                actions['common']['runsheetPrint']();
-                $('button.print-sheet').each(function(i,e){
-                    $(this).click(function(e){
-                        location.reload();
-                    });
-                });
             } // end fnDrawCallback()
         };
 
