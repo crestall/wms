@@ -51,7 +51,7 @@ function getDriverTasks($driver, $runsheet_id)
     return $html;
 }
 ?>
-<table class="table-striped table-hover datatable-multi-row .datatable-printbuttons" id="view_runsheets_table" width="80%">
+<table class="table-striped table-hover datatable-multi-row datatable-printbuttons" id="view_runsheets_table" width="80%">
     <thead>
         <tr>
             <th>Runsheet Day</th>
