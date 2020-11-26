@@ -65,11 +65,11 @@ $padmin = array(
         'finalise-runsheet'    => array(
             'display'   => false,
             'icon'      => ''
-        ),
+        ),/*
         'completed-runsheets'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-file-check" data-fa-transform="right-4 shrink-4 up-2 rotate-15"></i></span></div>'
-        ),
+        ),*/
         'prepare-runsheets'     => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-pencil-alt" data-fa-transform="right-5 shrink-6 up-2"></i></span></div>'
@@ -256,6 +256,7 @@ $admin = array(
             'icon'      => '<i class="fal fa-truck fa-3x"></i>'
         )
     ),
+    'jobs'      => array(),
     'runsheets' => array(),
     'clients'	=> array(
         'clients-index' => true,
@@ -712,6 +713,7 @@ $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
 $padmin['fsg-contacts'] = array_merge($padmin['fsg-contacts'], $prod['fsg-contacts']);
 
 $admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
+$admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 
 $prod_admin = array_merge($prod, $padmin);
 //return the pages

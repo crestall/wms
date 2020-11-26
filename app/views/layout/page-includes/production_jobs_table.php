@@ -6,8 +6,13 @@
             <th>Client</th>
             <th>Description</th>
             <th>Notes</th>
-            <!--th>Status</th-->
-            <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
+
+            <?php if($user_role == "production_admin"):?>
+                <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
+            <?php else:?>
+                <th>Status</th>
+            <?php endif;?>
+
             <th>FSG Contact</th>
             <th>Finisher(s)</th>
             <th nowrap>
@@ -48,7 +53,7 @@
                 <?php if(!empty($job['status_colour'])):?>
                     style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
                 <?php endif;?>
-                ><select class="selectpicker status" id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select></td>
+                ><select class="selectpicker status" <?php if($user_role != "production_admin") echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select></td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
                 <td data-label="Finisher(s)">
                     <?php for($f = 1; $f <= 3; $f++):
