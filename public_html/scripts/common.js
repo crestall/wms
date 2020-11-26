@@ -377,7 +377,7 @@ var dataTable = {
                         }
                     });
                 }
-                if ($table.closest(".datatable-viewrunsheets").length) {
+                if ($table.closest(".datatable-printbuttons").length) {
                     actions['common']['runsheetPrint']();
                     $('button.print-sheet').each(function(i,e){
                         $(this).click(function(e){
