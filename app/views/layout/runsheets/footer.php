@@ -60,6 +60,14 @@
                         dataTable.init($('table#view_runsheets_table'), {
                             /* No ordering applied by DataTables during initialisation */
                             "order": [],
+                            "fnDrawCallback": function() {
+                                actions['common']['runsheetPrint']();
+                                $('button.print-sheet').each(function(i,e){
+                                    $(this).click(function(e){
+                                        location.reload();
+                                    });
+                                });
+                            } // end fnDrawCallback()
                         });
                     }
                 },
