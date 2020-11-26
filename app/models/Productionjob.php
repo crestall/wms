@@ -172,6 +172,7 @@ class Productionjob extends Model{
             'due_date'      => 0,
             'status_id'     => $data['status_id']
         );
+        $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
         if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
         if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
