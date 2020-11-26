@@ -101,11 +101,11 @@
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
                 <td data-label="Due Date"
                 <?php if($job['strict_dd'] > 0):?>
-                    <?php if( ($job['due_date'] - $today) < (24 * 60 * 60)):?>
+                    <?php if( ($job['due_date'] - $today) <= (24 * 60 * 60)):?>
                         style="background-color: #FF0000; color:#FFF"
-                    <?php elseif( ($job['due_date'] - $today) < (2 * 24 * 60 * 60)):?>
+                    <?php elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60)):?>
                         style="background-color: #cc3300; color:#FFF"
-                    <?php elseif( ($job['due_date'] - $today) < (5 * 24 * 60 * 60)):?>
+                    <?php elseif( ($job['due_date'] - $today) <= (5 * 24 * 60 * 60)):?>
                         style="background-color: #e6e600"
                     <?php else: ?>
                         style="background-color: #66ff66;"
