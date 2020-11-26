@@ -377,7 +377,14 @@ var dataTable = {
                         }
                     });
                 }
-
+                if ($table.closest(".datatable-viewrunsheets").length) {
+                    actions['common']['runsheetPrint']();
+                    $('button.print-sheet').each(function(i,e){
+                        $(this).click(function(e){
+                            location.reload();
+                        });
+                    });
+                }
             } // end fnDrawCallback()
         };
 
