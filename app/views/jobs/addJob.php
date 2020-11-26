@@ -66,7 +66,7 @@ while($f < $finisher_count)
                 <div class="form-group row">
                     <label class="col-md-3">Priority</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control digits" name="priority" id="priority" value="<?php echo Form::value('priority');?>" />
+                        <input type="text" class="form-control" name="priority" id="priority" value="<?php echo Form::value('priority');?>" />
                     </div>
                     <?php echo Form::displayError('priority');?>
                 </div>
