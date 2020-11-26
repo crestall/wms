@@ -152,6 +152,10 @@ class JobsController extends Controller
 
         //only for admin
         Permission::allow('production admin', $resource, "*");
+        //warehouse users
+        Permission::allow('admin', $resource, array(
+            'index'
+        ));
         //production users
         Permission::allow('production', $resource, array(
             "index",
