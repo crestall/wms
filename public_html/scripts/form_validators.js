@@ -159,7 +159,7 @@ $(document).ready(function() {
                 }
 			},
             priority:{
-                positiveNumber0 : true;
+                positiveNumber0 : true
             }
     	},
 		messages:{
