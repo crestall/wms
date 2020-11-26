@@ -33,7 +33,7 @@ $(document).ready(function() {
     }, 'Enter a positive number.');
 
     $.validator.addMethod('positiveNumber0', function (value, element) {
-        	return (this.optional(element) || Number(value) >= 0 );
+        	return (this.optional(element) || Number(value) >= 0 || parseInt(value) != value );
     }, 'Enter a positive whole number or zero.');
 
     $.validator.addMethod('wholePallets', function (value, element){
