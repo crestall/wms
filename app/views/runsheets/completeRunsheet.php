@@ -27,11 +27,13 @@
                             if($task['job_id'] > 0)
                             {
                                 $label_string = "<span class='font-weight-bold'>".$task['job_number']."</span> - ".$task['customer_name'];
+                                $is_job = true;
                             }
                             else
                             {
                                 $label_string = "<span class='font-weight-bold'>".$task['order_number']."</span> - ".$task['order_customer']."(".$task['order_client_name'].")";
                                 $label_string .= (empty($task['client_order_id']))? "" : " - ".$task['client_order_id'];
+                                $is_job = false;
                             }?>
                             <div class="col-12">
                                 <label class="col-form-label" for="task_<?php echo $task_id;?>"></label>
@@ -54,6 +56,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php if($is_job):?>
+                                <input type="hidden" name="dd[<?php echo $task_id;?>][job_id]" value="<?php echo $task['job_id'];?>" >
+                            <?php endif; ?>
                         <?php endforeach;?>
                     </div>
                 </div>

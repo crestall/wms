@@ -293,6 +293,11 @@ class Runsheet extends Model{
             if(!empty($data['dd'][$task_id]['tod']))
                 $task_vals['time_of_drop'] = $data['dd'][$task_id]['tod'];
             $db->updateDatabaseFields($this->tasks_table, $task_vals, $task_id);
+            if(isset($data['dd'][$task_id]['job_id']))
+            {
+                $pjob = new Productionjob;
+                $pjob->updateJobStatus($data['dd'][$task_id]['job_id'], 9); //9 = complete, but need to get from database
+            }
         }
         //record runsheet update
         $new_vals = array(
