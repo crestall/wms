@@ -5,6 +5,7 @@
     <thead>
         <tr>
             <th>Job Number</th>
+            <th>Priority</th>
             <th>Related Job</th>
             <th>Client</th>
             <th>Description</th>
@@ -39,6 +40,11 @@
                     <?php else:?>
                         <?php echo $job['job_id'];?>
                     <?php endif;?>
+                </td>
+                <td data-label="Priority">
+                    <?php if($job['priority'] > 0)
+                        echo $job['priority'];
+                    ?>
                 </td>
                 <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                 <td data-label="Client">
