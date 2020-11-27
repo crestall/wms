@@ -31,7 +31,7 @@
                         $("a.add-contact").click(function(e){
                             e.preventDefault();
                             var contact_count = $("div#contacts_holder div.acontact").length;
-                            console.log('packages: '+contact_count);
+                            //console.log('packages: '+contact_count);
                             var data = {
                                 i: contact_count
                             }
@@ -39,9 +39,9 @@
                                 $('div#contacts_holder').append(d.html);
                             });
                         });
-                        $("a#remove-all-packages").click(function(e){
+                        $("a#remove-all-contacts").click(function(e){
                             e.preventDefault();
-                            $('div#packages_holder div.apackage').not(':first').remove();
+                            $('div#contacts_holder div.acontact').not(':first').remove();
                         });
                     }
                 },
