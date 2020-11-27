@@ -15,7 +15,6 @@
                                     return -1;
                                 return ((str1 < str2) ? -1 : ((str1 > str2) ? 1 : 0));
                             },
-
                             "non-empty-string-desc": function (str1, str2) {
                                 if(str1 == "")
                                     return 1;
@@ -23,7 +22,7 @@
                                     return -1;
                                 return ((str1 < str2) ? 1 : ((str1 > str2) ? -1 : 0));
                             }
-                        } );
+                        });
                         var table = dataTable.init($('table#production_jobs_table'), {
                             //No pagination for this table
                             "paging":   false,
@@ -31,7 +30,14 @@
                             "order": [],
                             //but blanks on the bottom when sorting
                             columnDefs: [
-                                {type: 'non-empty-string', targets: 1} //priority is the second column
+                                {
+                                    type: 'non-empty-string',
+                                    targets: 1 //priority is the second column
+                                },
+                                {
+                                    orderable: false,
+                                    targets: "no-sort"
+                                }
                             ]
                         });
                         table.on( 'draw', function () {
