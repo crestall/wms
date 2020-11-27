@@ -1108,6 +1108,13 @@ class FormController extends Controller {
         {
             Form::setError('description', 'A job description is required');
         }
+        if($this->dataSubbed($priority))
+        {
+            if(filter_var($priority, FILTER_VALIDATE_INT) === false || $priority <= 0)
+            {
+                Form::setError('priority', 'Only positive whole numbers please');
+            }
+        }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);

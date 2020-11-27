@@ -171,7 +171,8 @@ class Productionjob extends Model{
             'description'   => $data['description'],
             'created_date'  => $data['date_entered_value'],
             'due_date'      => 0,
-            'status_id'     => $data['status_id']
+            'status_id'     => $data['status_id'],
+            'priority'      => 0
         );
         $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
@@ -179,6 +180,7 @@ class Productionjob extends Model{
         if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
         if(!empty($data['designer'])) $vals['designer'] = $data['designer'];
         if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
+        if(!empty($data['priority'])) $vals['priority'] = $data['priority'];
         $id = $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return $id;
     }
