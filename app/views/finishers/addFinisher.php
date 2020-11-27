@@ -45,6 +45,11 @@ $categories = (is_array(Form::value('categories')))? Form::value('categories') :
                     </div>
                 </div>
                 <div id="packages_holder">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <span class="inst">At least one contact name is required</span>
+                        </div>
+                    </div>
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");?>
                 </div>
             </div>
