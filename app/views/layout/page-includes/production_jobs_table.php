@@ -41,7 +41,7 @@
                         <?php echo $job['job_id'];?>
                     <?php endif;?>
                 </td>
-                <td data-label="Priority">
+                <td data-label="Priority" class="number">
                     <?php if($job['priority'] > 0)
                         echo $job['priority'];
                     ?>
