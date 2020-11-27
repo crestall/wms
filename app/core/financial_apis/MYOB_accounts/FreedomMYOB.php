@@ -75,10 +75,13 @@ class FreedomMYOB extends MYOB
                     'company_file_ids'      => array(),
                 );
                 //if(strtolower($o['shipping_lines'][0]['method_title']) == "express shipping") $order['eparcel_express'] = 1;
-                if( !filter_var($o['Customer_Email'], FILTER_VALIDATE_EMAIL) )
+                if(!empty($o['Customer_Email']))
                 {
-                    $order['errors'] = 1;
-                    $order['error_string'] = "<p>The customer email is not valid</p>";
+                    if( !filter_var($o['Customer_Email'], FILTER_VALIDATE_EMAIL) )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] = "<p>The customer email is not valid</p>";
+                    }
                 }
                 //validate address
                 /* Old Fucked Up style
