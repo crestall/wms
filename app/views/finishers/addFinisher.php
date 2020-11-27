@@ -53,7 +53,16 @@ $categories = (is_array(Form::value('categories')))? Form::value('categories') :
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");?>
                 </div>
             </div>
-            <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
+            <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
+                <div class="row mb-0">
+                    <div class="col-md-4">
+                        <h4>Address Details</h4>
+                    </div>
+                </div>
+                <div class="p-3 light-grey mb-3">
+                    <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
+                </div>
+            </div>
             <div class="form-group row">
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="col-md-4 offset-md-3">
