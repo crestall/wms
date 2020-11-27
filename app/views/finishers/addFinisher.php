@@ -44,7 +44,7 @@ $categories = (is_array(Form::value('categories')))? Form::value('categories') :
                         <a id="remove-all-contacts" style="cursor:pointer" title="Leave Only First"><h4><i class="fad fa-times-square text-danger"></i> Leave only one contact</a></h4>
                     </div>
                 </div>
-                <div id="packages_holder">
+                <div id="finishers_holder">
                     <div class="form-group row">
                         <div class="col-12">
                             <span class="inst">At least one contact name is required</span>

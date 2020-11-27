@@ -28,6 +28,21 @@
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Finisher...</h2></div>' });
                             }
                         });
+                        $("a.add-contact").click(function(e){
+                            e.preventDefault();
+                            var contact_count = $("div#contacts_holder div.acontact").length;
+                            //console.log('packages: '+package_count);
+                            var data = {
+                                i: package_count
+                            }
+                            $.post('/ajaxfunctions/addFinisherContact', data, function(d){
+                                $('div#contacts_holder').append(d.html);
+                            });
+                        });
+                        $("a#remove-all-packages").click(function(e){
+                            e.preventDefault();
+                            $('div#packages_holder div.apackage').not(':first').remove();
+                        });
                     }
                 },
                 'edit-finisher':{
