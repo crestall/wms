@@ -31,7 +31,7 @@
                         $("a.add-contact").click(function(e){
                             e.preventDefault();
                             var contact_count = $("div#contacts_holder div.acontact").length;
-                            //console.log('packages: '+package_count);
+                            console.log('packages: '+package_count);
                             var data = {
                                 i: package_count
                             }
