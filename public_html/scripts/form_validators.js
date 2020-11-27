@@ -29,11 +29,11 @@ $(document).ready(function() {
     });
 
     $.validator.addMethod('positiveNumber', function (value, element) {
-        	return (this.optional(element) || Number(value) > 0 );
+        	return (this.optional(element) || (Number(value) > 0 && value % 1 == 0) );
     }, 'Enter a positive number.');
 
     $.validator.addMethod('positiveNumber0', function (value, element) {
-        	return (this.optional(element) || Number(value) >= 0 );
+        	return (this.optional(element) || (Number(value) >= 0 && value % 1 == 0) );
     }, 'Enter a positive whole number or zero.');
 
     $.validator.addMethod('wholePallets', function (value, element){
@@ -157,7 +157,13 @@ $(document).ready(function() {
 				remote: {
                     url: '/ajaxfunctions/checkJobIds'
                 }
-			}
+			},
+            priority:{
+                positiveNumber0 : true
+            },
+            date_due:{
+                required:"#strict_dd:checked"
+            },
     	},
 		messages:{
 			status_id:{
@@ -165,7 +171,10 @@ $(document).ready(function() {
 			},
             job_id: {
 				remote: 'This Job Id is already in use. Job Ids must be unique'
-			}
+			},
+            date_due:{
+                required: 'This is required for strict due date '
+            }
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
@@ -182,6 +191,9 @@ $(document).ready(function() {
 			},
             date_due:{
                 required:"#strict_dd:checked"
+            },
+            priority:{
+                positiveNumber0 : true
             }
     	},
 		messages:{

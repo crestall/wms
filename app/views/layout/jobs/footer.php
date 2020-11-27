@@ -7,10 +7,38 @@
             var actions = {
                 common: {
                     jobsTable: function(){
+                        jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+                            "non-empty-string-asc": function (str1, str2) {
+                                if(str1 == "")
+                                    return 1;
+                                if(str2 == "")
+                                    return -1;
+                                return ((str1 < str2) ? -1 : ((str1 > str2) ? 1 : 0));
+                            },
+                            "non-empty-string-desc": function (str1, str2) {
+                                if(str1 == "")
+                                    return 1;
+                                if(str2 == "")
+                                    return -1;
+                                return ((str1 < str2) ? 1 : ((str1 > str2) ? -1 : 0));
+                            }
+                        });
                         var table = dataTable.init($('table#production_jobs_table'), {
-                            /* No ordering applied by DataTables during initialisation */
+                            //No pagination for this table
                             "paging":   false,
-                            "ordering": false,
+                            //No initial sort,
+                            "order": [],
+                            //but blanks on the bottom when sorting
+                            columnDefs: [
+                                {
+                                    type: 'non-empty-string',
+                                    targets: 1 //priority is the second column
+                                },
+                                {
+                                    orderable: false,
+                                    targets: "no-sort"
+                                }
+                            ]
                         });
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );

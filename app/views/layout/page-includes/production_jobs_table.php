@@ -4,11 +4,12 @@
 <table class="table-striped table-hover" id="production_jobs_table">
     <thead>
         <tr>
-            <th>Job Number</th>
-            <th>Related Job</th>
-            <th>Client</th>
-            <th>Description</th>
-            <th>Notes</th>
+            <th class="no-sort">Job Number</th>
+            <th>Priority</th>
+            <th class="no-sort">Related Job</th>
+            <th class="no-sort">Client</th>
+            <th class="no-sort">Description</th>
+            <th class="no-sort">Notes</th>
 
             <?php if($user_role == "production_admin"):?>
                 <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
@@ -17,8 +18,8 @@
             <?php endif;?>
 
             <th>FSG Contact</th>
-            <th>Finisher(s)</th>
-            <th nowrap>
+            <th class="no-sort">Finisher(s)</th>
+            <th nowrap class="no-sort">
                 Select
                 <div class="checkbox checkbox-default">
                     <input id="select_all" class="styled" type="checkbox">
@@ -39,6 +40,11 @@
                     <?php else:?>
                         <?php echo $job['job_id'];?>
                     <?php endif;?>
+                </td>
+                <td data-label="Priority" class="number">
+                    <?php if($job['priority'] > 0)
+                        echo $job['priority'];
+                    ?>
                 </td>
                 <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                 <td data-label="Client">
@@ -101,7 +107,9 @@
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
                 <td data-label="Due Date"
                 <?php if($job['strict_dd'] > 0):?>
-                    <?php if( ($job['due_date'] - $today) <= (24 * 60 * 60)):?>
+                    <?php if( ($job['due_date'] < $today) ):?>
+                        style="background-color: #222; color:#FFF"
+                    <?php elseif( ($job['due_date'] - $today) <= (24 * 60 * 60)):?>
                         style="background-color: #FF0000; color:#FFF"
                     <?php elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60)):?>
                         style="background-color: #cc3300; color:#FFF"

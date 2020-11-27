@@ -64,6 +64,13 @@ while($f < $finisher_count)
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-md-3">Priority</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="priority" id="priority" value="<?php echo Form::value('priority');?>" />
+                    </div>
+                    <?php echo Form::displayError('priority');?>
+                </div>
+                <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Status</label>
                     <div class="col-md-4">
                         <select id="status_id" class="form-control selectpicker" name="status_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->jobstatus->getSelectJobStatus(Form::value('status_id'));?></select>

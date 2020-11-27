@@ -26,13 +26,69 @@ class TasksController extends Controller
 
     public function testTask()
     {
-        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
         else
         {
             Email::sendNewUserEmail('Mark Solly', 'mark@solly.com.au');
+        }
+    }
+
+    public function onePlateTask()
+    {
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->woocommerce->getOnePlateOrders();
+        }
+    }
+
+    public function nuchevTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->woocommerce->getNuchevOrders();
+        }
+    }
+
+    public function freedomTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+           //up the memory for this
+            ini_set('memory_limit', '2048M');
+            $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
+            $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
+            $this->FreedomMYOB->processOrders($invoices);
+        }
+    }
+
+    public function sessionSecretTask()
+    {
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $db = Database::openConnection();
+            $current_secret = Encryption::decryptStringBase64($db->queryValue('configuration', array('name' => 'COOKIE_SECRET_KEY'), 'value'));
+            $new_secret = Encryption::getRandomToken();
+            //echo "new : ".$new_secret;
+            $db->updateDatabaseFields('configuration', array('value' => Encryption::encryptStringBase64($new_secret), 'date_modified' => time()), 'COOKIE_SECRET_KEY', "name");
         }
     }
 
@@ -176,62 +232,6 @@ class TasksController extends Controller
                 $output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
             }
             Logger::logReportsSent('sent_reports/log', $output); //die();
-        }
-    }
-
-    public function onePlateTask()
-    {
-        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->woocommerce->getOnePlateOrders();
-        }
-    }
-
-    public function sessionSecretTask()
-    {
-        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $db = Database::openConnection();
-            $current_secret = Encryption::decryptStringBase64($db->queryValue('configuration', array('name' => 'COOKIE_SECRET_KEY'), 'value'));
-            $new_secret = Encryption::getRandomToken();
-            //echo "new : ".$new_secret;
-            $db->updateDatabaseFields('configuration', array('value' => Encryption::encryptStringBase64($new_secret), 'date_modified' => time()), 'COOKIE_SECRET_KEY', "name");
-        }
-    }
-
-    public function nuchevTask()
-    {
-        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->woocommerce->getNuchevOrders();
-        }
-    }
-
-    public function freedomTask()
-    {
-        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
-        {
-            return $this->error(403);
-        }
-        else
-        {
-           //up the memory for this
-            ini_set('memory_limit', '2048M');
-            $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
-            $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
-            $this->FreedomMYOB->processOrders($invoices);
         }
     }
 
