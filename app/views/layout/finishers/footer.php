@@ -31,9 +31,9 @@
                         $("a.add-contact").click(function(e){
                             e.preventDefault();
                             var contact_count = $("div#contacts_holder div.acontact").length;
-                            console.log('packages: '+package_count);
+                            console.log('packages: '+contact_count);
                             var data = {
-                                i: package_count
+                                i: contact_count
                             }
                             $.post('/ajaxfunctions/addFinisherContact', data, function(d){
                                 $('div#contacts_holder').append(d.html);
