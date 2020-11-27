@@ -10,7 +10,8 @@
                         var table = dataTable.init($('table#production_jobs_table'), {
                             /* No ordering applied by DataTables during initialisation */
                             "paging":   false,
-                            "ordering": false,
+                            //"ordering": false,
+                            "order": []
                         });
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
