@@ -160,7 +160,10 @@ $(document).ready(function() {
 			},
             priority:{
                 positiveNumber0 : true
-            }
+            },
+            date_due:{
+                required:"#strict_dd:checked"
+            },
     	},
 		messages:{
 			status_id:{
@@ -168,7 +171,10 @@ $(document).ready(function() {
 			},
             job_id: {
 				remote: 'This Job Id is already in use. Job Ids must be unique'
-			}
+			},
+            date_due:{
+                required: 'This is required for strict due date '
+            }
 		}
     });
     ///////////////////////////////////////////////////////////////////////////////
@@ -185,6 +191,9 @@ $(document).ready(function() {
 			},
             date_due:{
                 required:"#strict_dd:checked"
+            },
+            priority:{
+                positiveNumber0 : true
             }
     	},
 		messages:{
