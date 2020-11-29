@@ -378,7 +378,7 @@ class RunsheetsController extends Controller
         Config::setJsConfig('curPage', "add-misc-task");
         Config::set('curPage', "add-misc-task");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/addMiscTask.php', [
-            'page_title'    =>  "Add Miscellaneous Task To Runsheet For $runsheet_day",
+            'page_title'    =>  "Add Miscellaneous Task To Runsheet For<br>$runsheet_day",
             'pht'           =>  ": Add Misc Task",
             'runsheet_id'   =>  $runsheet_id
         ]);
