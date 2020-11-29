@@ -11,6 +11,7 @@
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
                 <div class="col-md-4">
                     <input type="text" class="required form-control" name="ship_to" id="ship_to" value="<?php echo Form::value('ship_to');?>">
+                    <?php echo Form::displayError('ship_to');?>
                 </div>
             </div>
             <div class="form-group row">
@@ -23,6 +24,12 @@
                 <label class="col-md-3">Delivery Instructions</label>
                 <div class="col-md-4">
                     <textarea class="form-control" name="delivery_instructions" id="delivery_instructions"><?php echo Form::value('delivery_instructions');?></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Driver</label>
+                <div class="col-md-4">
+                    <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( Form::value('driver_id') );?></select>
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" >
