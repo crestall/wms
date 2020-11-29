@@ -373,7 +373,7 @@ class RunsheetsController extends Controller
             return (new ErrorsController())->error(400)->send();
         }
         $runsheet_id = $this->request->params['args']['runsheet'];
-        $runsheet_day = $this->runsheet->getRunsheetDayById($runsheet_id)
+        $runsheet_day = $this->runsheet->getRunsheetDayById($runsheet_id);
         //render the page
         Config::setJsConfig('curPage', "add-misc-task");
         Config::set('curPage', "add-misc-task");
