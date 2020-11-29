@@ -167,6 +167,11 @@
                             "order": []
                         });
                     }
+                },
+                'add-misc-task':{
+                    init:function(){
+                        ;
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);
