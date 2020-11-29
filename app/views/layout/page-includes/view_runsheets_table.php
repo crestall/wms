@@ -80,8 +80,8 @@ function getDriverTasks($driver, $runsheet_id)
                 <td data-label="Runsheet day" data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
                     <h4><?php echo date('D jS M', $timestamp );?></h4>
                 </td>
-                <td>
-                    <a class="btn btn-outline-primary" href="/runsheets/add-misc-task/runsheet=<?php echo $rs['runsheet_id'];?>">Add a Miscellaneous Task</a>
+                <td data-datatable-multi-row-rowspan="<?php echo $rows;?>">
+                    <a class="btn btn-sm btn-outline-primary" href="/runsheets/add-misc-task/runsheet=<?php echo $rs['runsheet_id'];?>">Add a Miscellaneous Task</a>
                 </td>
                 <td  data-label="Ceated" data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
                     <?php echo $cs;?>
