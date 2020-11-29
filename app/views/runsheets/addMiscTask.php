@@ -13,6 +13,18 @@
                     <input type="text" class="required form-control" name="ship_to" id="ship_to" value="<?php echo Form::value('ship_to');?>">
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3">Attention</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="attention" id="attention" value="<?php echo Form::value('attention');?>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Delivery Instructions</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" name="delivery_instructions" id="delivery_instructions"><?php echo Form::value('delivery_instructions');?></textarea>
+                </div>
+            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" >
             <input type="hidden" name="runsheet_id" id="runsheet_id" value="<?php echo $runsheet_id;?>" >
             <div class="form-group row">
