@@ -373,12 +373,12 @@ class RunsheetsController extends Controller
             return (new ErrorsController())->error(400)->send();
         }
         $runsheet_id = $this->request->params['args']['runsheet'];
-        $rs = $this->runsheet->getRunsheetById($runsheet_id)
+        $runsheet_day = $this->runsheet->getRunsheetDayById($runsheet_id)
         //render the page
         Config::setJsConfig('curPage', "add-misc-task");
         Config::set('curPage', "add-misc-task");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/addMiscTask.php', [
-            'page_title'    =>  "Add Miscellaneous Task To Runsheet For ".date('D jS M', $rs['runsheet_day'] ),
+            'page_title'    =>  "Add Miscellaneous Task To Runsheet For $runsheet_day",
             'pht'           =>  ": Add Misc Task",
             'runsheet_id'   =>  $runsheet_id
         ]);
