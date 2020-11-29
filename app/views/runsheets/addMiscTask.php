@@ -49,6 +49,19 @@
                     <label class="custom-control-label" for="ignore_address_error">No need for a number</label>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3">Address Line 2</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="address2" id="address2" value="<?php echo Form::value('address2');?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb/Town</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="suburb" id="suburb" value="<?php echo Form::value('suburb');?>" />
+                    <?php echo Form::displayError('suburb');?>
+                </div>
+            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" >
             <input type="hidden" name="runsheet_id" id="runsheet_id" value="<?php echo $runsheet_id;?>" >
             <div class="form-group row">
