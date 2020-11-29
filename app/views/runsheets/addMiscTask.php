@@ -32,6 +32,23 @@
                     <select id="driver_id" name="driver_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->driver->getSelectDrivers( Form::value('driver_id') );?></select>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3">Units</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="units" id="units" value="<?php echo Form::value('units');?>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="address" id="address" value="<?php echo Form::value('address');?>" />
+                    <?php echo Form::displayError('address');?>
+                </div>
+                <div class="custom-control custom-checkbox col-md-3">
+                    <input type="checkbox" class="custom-control-input" id="ignore_address_error" name="ignore_address_error" <?php if(!empty(Form::value('ignore_address_error'))) echo 'checked';?> />
+                    <label class="custom-control-label" for="ignore_address_error">No need for a number</label>
+                </div>
+            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" >
             <input type="hidden" name="runsheet_id" id="runsheet_id" value="<?php echo $runsheet_id;?>" >
             <div class="form-group row">
