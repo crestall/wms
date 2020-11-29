@@ -7,7 +7,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
         <form id="complete_runsheet_tasks" method="post" action="/form/procAddMiscTask">
-            <div class="form-gropu row">
+            <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
                 <div class="col-md-4">
                     <input type="text" class="required form-control" name="ship_to" id="ship_to" value="<?php echo Form::value('ship_to');?>">
