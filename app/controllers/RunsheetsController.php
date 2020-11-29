@@ -366,6 +366,26 @@ class RunsheetsController extends Controller
         ]);
     }
 
+    public function addMiscTask()
+    {
+        if(!(isset($this->request->params['args']['runsheet'])))
+        {
+             return (new ErrorsController())->error(400)->send();
+        }
+        else
+        {
+            $runsheet_id = $this->request->params['args']['runsheet'];
+        }
+        //render the page
+        Config::setJsConfig('curPage', "add-misc-task");
+        Config::set('curPage', "add-misc-task");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/runsheets/", Config::get('VIEWS_PATH') . 'runsheets/addMiscTask.php', [
+            'page_title'    =>  "Add Miscellaneous Task To Runsheet",
+            'pht'           =>  ": Add Misc Task",
+            'runsheet_id'   =>  $runsheet_id
+        ]);
+    }
+
     public function printRunsheets()
     {
         $completed = (isset($this->request->params['args']['complete']));
