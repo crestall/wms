@@ -174,6 +174,13 @@ class Runsheet extends Model{
 
     }
 
+    public function getRunsheetDayById($id)
+    {
+        $db = Database::openConnection();
+        $row = $db->queryByID($this->table, $id);
+        return date('D jS M', $row['runsheet_day'] );
+    }
+
     public function getTasksForRunsheet($runsheet_id = 0, $printed = false)
     {
         $db = Database::openConnection();
