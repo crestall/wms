@@ -12,7 +12,7 @@
             <th class="no-sort">Description</th>
             <th class="no-sort">Notes</th>
 
-            <?php if($user_role == "production_admin" || $user_role = "admin"):?>
+            <?php if($user_role = "admin"):?>
                 <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
             <?php else:?>
                 <th>Status</th>
