@@ -15,14 +15,7 @@
     */
 $padmin = array(
     'jobs'  => array(
-        'add-job'   => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
-        ),
-        'update-job'    => array(
-            'display'   => false,
-            'icon'      => ''
-        )
+
     ),
     'customers' => array(
         'customers-index'   => true,
@@ -167,6 +160,14 @@ $prod = array(
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-tasks"></i>'
+        ),
+        'add-job'   => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+        ),
+        'update-job'    => array(
+            'display'   => false,
+            'icon'      => ''
         ),
         'view-jobs' => array(
             'display'   => true,
@@ -704,6 +705,7 @@ $client = array(
         )
     )
 );
+
 //merge and tidy page arrays
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 
