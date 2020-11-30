@@ -153,39 +153,6 @@ $prod = array(
             'display'   => false,
             'icon'      => ''
         )
-    ),
-    'customers' => array(
-        'customers-index'   => true,
-        'default-icon'      => array(
-            'display'   => false,
-            'icon'      => '<i class="fad fa-user-tie"></i>'
-        ),
-        'view-customers'    => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
-        )
-    ),
-    'finishers' => array(
-        'finishers-index'   => true,
-        'default-icon'      => array(
-            'display'   => false,
-            'icon'      => '<i class="fad fa-people-arrows"></i>'
-        ),
-        'view-finishers'    => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
-        ),
-    ),
-    'fsg-contacts'    => array(
-        'fsg-contacts-index'   => true,
-        'default-icon'      => array(
-            'display'   => false,
-            'icon'      => '<i class="fad fa-user-chart"></i>'
-        ),
-        'view-contacts' => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
-        )
     )
 );
 $admin = array(
