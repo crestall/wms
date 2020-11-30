@@ -52,7 +52,7 @@
             <div class="form-group row">
                 <label class="col-md-3">Address Line 2</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="address2" id="address2" value="<?php echo Form::value('address2');?>" />
+                    <input type="text" class="form-control" name="address_2" id="address_2" value="<?php echo Form::value('address_2');?>" />
                 </div>
             </div>
             <div class="form-group row">
