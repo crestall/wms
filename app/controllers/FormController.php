@@ -251,7 +251,7 @@ class FormController extends Controller {
                 }
             }
         }
-        //echo "_POST<pre>",print_r($post_data),"</pre>"; die();
+        echo "_POST<pre>",print_r($post_data),"</pre>"; die();
         if($driver_id == 0)
         {
             Form::setError('driver_id', 'A Driver is required');
@@ -326,6 +326,69 @@ class FormController extends Controller {
         if( isset($tasks['orders']) )
         {
             foreach($tasks['orders'] as $order_id => $od)
+            {
+                $task_id = $od['task_id'];
+                if(isset($od['include']))
+                {
+                    $error = false;
+                    if( !$this->dataSubbed($od['address']) )
+                    {
+                        Form::setError('address_'.$task_id, 'An address is required');
+                    }
+                    if( !$this->dataSubbed($od['shipto']) )
+                    {
+                        Form::setError('shipto_'.$task_id, 'A delivery name is required');
+                    }
+                    if( !$this->dataSubbed($od['suburb']) )
+                    {
+                        Form::setError('suburb_'.$task_id, 'A suburb is required');
+                    }
+                    if( !$this->dataSubbed($od['postcode']) )
+                    {
+                        Form::setError('postcode_'.$task_id, 'A postcode is required');
+                    }
+                    $aResponse = $this->Eparcel->ValidateSuburb($od['suburb'], 'VIC', str_pad($od['postcode'],4,'0',STR_PAD_LEFT));
+                    $error_string = "";
+                    if(isset($aResponse['errors']))
+                    {
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $error_string .= $e['message']." ";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $error_string .= "Postcode does not match suburb or state";
+                    }
+                    if(strlen($error_string))
+                    {
+                        Form::setError('postcode_'.$task_id, $error_string);
+                    }
+                    if(Form::$num_errors == 0)
+                    {
+                        $array = array(
+                            'task_id'       => $task_id,
+                            'driver_id'     => $driver_id,
+                            'address'       => $od['address'],
+                            'suburb'        => $od['suburb'],
+                            'postcode'      => $od['postcode'],
+                            'deliver_to'    => $od['shipto'],
+                            'runsheet_id'   => $runsheet_id
+                        );
+                        if($this->dataSubbed($od['address2']))
+                            $array['address_2'] = $od['address2'];
+                        if($this->dataSubbed($od['units']))
+                            $array['units'] = $od['units'];
+                        if($this->dataSubbed($od['delivery_instructions']))
+                            $array['delivery_instructions'] = $od['delivery_instructions'];
+                        $tts[] = $array;
+                    }
+                }
+            }
+        }
+        if( isset($tasks['tasks']) )
+        {
+            foreach($tasks['tasks'] as $task_id => $td)
             {
                 $task_id = $od['task_id'];
                 if(isset($od['include']))
