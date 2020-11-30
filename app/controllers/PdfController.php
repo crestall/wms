@@ -45,7 +45,13 @@ class pdfController extends Controller
         {
             foreach($runsheet['tasks'] as $task)
             {
-                if($task['order_id'] > 0)
+                if($task['order_id'] == 0 &&  $task['job_id'] == 0)
+                {
+                    $delivery_id    = $task['order_number']." / ".$task['client_order_id'];
+                    $customer       = (empty($task['attention']))? $task['deliver_to'] : $task['attention'];
+                    $description    = "";
+                }
+                elseif($task['order_id'] > 0)
                 {
                     $delivery_id    = $task['order_number']." / ".$task['client_order_id'];
                     $customer       = $task['order_client_name'];
