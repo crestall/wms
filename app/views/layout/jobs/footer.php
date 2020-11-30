@@ -23,9 +23,10 @@
                                 return ((str1 < str2) ? 1 : ((str1 > str2) ? -1 : 0));
                             }
                         });
+                        var paging = $('input#complete').val() == 1;
                         var table = dataTable.init($('table#production_jobs_table'), {
                             //No pagination for this table
-                            "paging":   false,
+                            "paging":   paging,
                             //No initial sort,
                             "order": [],
                             //but blanks on the bottom when sorting
