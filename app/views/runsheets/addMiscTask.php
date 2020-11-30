@@ -10,8 +10,8 @@
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
                 <div class="col-md-4">
-                    <input type="text" class="required form-control" name="ship_to" id="ship_to" value="<?php echo Form::value('ship_to');?>">
-                    <?php echo Form::displayError('ship_to');?>
+                    <input type="text" class="required form-control" name="deliver_to" id="deliver_to" value="<?php echo Form::value('deliver_to');?>">
+                    <?php echo Form::displayError('deliver_to');?>
                 </div>
             </div>
             <div class="form-group row">
