@@ -386,6 +386,13 @@ class Runsheet extends Model{
         return true;
     }
 
+    public function addTaskToRunsheet($data = array())
+    {
+        $db = Database::openConnection();
+        unset($data['csrf_token']);
+        $db->insertQuery($this->tasks_table, $data);
+    }
+
     public function runsheetPrinted($data = array())
     {
         if(count($data))
