@@ -251,7 +251,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "_POST<pre>",print_r($post_data),"</pre>"; die();
+        //echo "_POST<pre>",print_r($post_data),"</pre>"; die();
         if($driver_id == 0)
         {
             Form::setError('driver_id', 'A Driver is required');
@@ -388,29 +388,29 @@ class FormController extends Controller {
         }
         if( isset($tasks['tasks']) )
         {
-            foreach($tasks['tasks'] as $task_id => $td)
+            foreach($tasks['tasks'] as $id => $td)
             {
-                $task_id = $od['task_id'];
-                if(isset($od['include']))
+                $task_id = $td['task_id'];
+                if(isset($td['include']))
                 {
                     $error = false;
-                    if( !$this->dataSubbed($od['address']) )
+                    if( !$this->dataSubbed($td['address']) )
                     {
                         Form::setError('address_'.$task_id, 'An address is required');
                     }
-                    if( !$this->dataSubbed($od['shipto']) )
+                    if( !$this->dataSubbed($td['shipto']) )
                     {
                         Form::setError('shipto_'.$task_id, 'A delivery name is required');
                     }
-                    if( !$this->dataSubbed($od['suburb']) )
+                    if( !$this->dataSubbed($td['suburb']) )
                     {
                         Form::setError('suburb_'.$task_id, 'A suburb is required');
                     }
-                    if( !$this->dataSubbed($od['postcode']) )
+                    if( !$this->dataSubbed($td['postcode']) )
                     {
                         Form::setError('postcode_'.$task_id, 'A postcode is required');
                     }
-                    $aResponse = $this->Eparcel->ValidateSuburb($od['suburb'], 'VIC', str_pad($od['postcode'],4,'0',STR_PAD_LEFT));
+                    $aResponse = $this->Eparcel->ValidateSuburb($td['suburb'], 'VIC', str_pad($td['postcode'],4,'0',STR_PAD_LEFT));
                     $error_string = "";
                     if(isset($aResponse['errors']))
                     {
@@ -432,18 +432,18 @@ class FormController extends Controller {
                         $array = array(
                             'task_id'       => $task_id,
                             'driver_id'     => $driver_id,
-                            'address'       => $od['address'],
-                            'suburb'        => $od['suburb'],
-                            'postcode'      => $od['postcode'],
-                            'deliver_to'    => $od['shipto'],
+                            'address'       => $td['address'],
+                            'suburb'        => $td['suburb'],
+                            'postcode'      => $td['postcode'],
+                            'deliver_to'    => $td['shipto'],
                             'runsheet_id'   => $runsheet_id
                         );
-                        if($this->dataSubbed($od['address2']))
-                            $array['address_2'] = $od['address2'];
-                        if($this->dataSubbed($od['units']))
-                            $array['units'] = $od['units'];
-                        if($this->dataSubbed($od['delivery_instructions']))
-                            $array['delivery_instructions'] = $od['delivery_instructions'];
+                        if($this->dataSubbed($td['address2']))
+                            $array['address_2'] = $td['address2'];
+                        if($this->dataSubbed($td['units']))
+                            $array['units'] = $td['units'];
+                        if($this->dataSubbed($td['delivery_instructions']))
+                            $array['delivery_instructions'] = $td['delivery_instructions'];
                         $tts[] = $array;
                     }
                 }
