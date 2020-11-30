@@ -199,7 +199,7 @@
                                 <div class="col-md-10 mb-3">
                                     <?php foreach($runsheet['tasks'] as $task):
                                         $shipto = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',shipto')))? Form::value('tasks,tasks,'.$task['task_id'].',shipto') : $task['shipto'];
-                                        $units = (!empty(Form::value('tasks,tasks,'.$task['tasks_id'].',units')))? Form::value('tasks,tasks,'.$task['task_id'].',units') : $task['units'];
+                                        $units = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',units')))? Form::value('tasks,tasks,'.$task['task_id'].',units') : $task['units'];
                                         $delivery_instructions = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',delivery_instructions')))? Form::value('tasks,tasks,'.$task['task_id'].',delivery_instructions') : $task['delivery_instructions'];
                                         $address = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',address')))? Form::value('tasks,tasks,'.$task['task_id'].',address') : $task['address'];
                                         $address2 = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',address2')))? Form::value('tasks,tasks,'.$task['task_id'].',address2') : $task['address2'];
