@@ -157,40 +157,62 @@ class RunsheetsController extends Controller
             {
                 $runsheet['orders'] =array();
             }
-            if(!empty($task['job_id']))
+            if(!isset($runsheet['tasks']))
             {
-                $runsheet['jobs'][] = array(
-                    'task_id'                   => $task['id'],
-                    'job_shipto'                => $task['job_shipto'],
-                    'job_units'                 => $task['units'],
-                    'job_attention'             => $task['job_attention'],
-                    'job_number'                => $task['job_number'],
-                    'job_id'                    => $task['job_id'],
-                    'job_customer'              => $task['customer_name'],
-                    'job_address'               => $task['job_address'],
-                    'job_address2'              => $task['job_address2'],
-                    'job_suburb'                => $task['job_suburb'],
-                    'job_postcode'              => $task['job_postcode'],
-                    'job_delivery_instructions' => $task['job_delivery_instructions']
+                $runsheet['tasks'] =array();
+            }
+            if( $task['job_id'] == 0 && $task['order_number'] == 0 )
+            {
+                $runsheet['tasks'][] = array(
+                    'task_id'               => $task['id'],
+                    'shipto'                => $task['deliver_to'],
+                    'units'                 => $task['units'],
+                    'attention'             => $task['attention'],
+                    'address'               => $task['address'],
+                    'address2'              => $task['address_22'],
+                    'suburb'                => $task['suburb'],
+                    'postcode'              => $task['postcode'],
+                    'delivery_instructions' => $task['delivery_instructions']
                 );
             }
-            if(!empty($task['order_number']))
+            else
             {
-                $runsheet['orders'][] = array(
-                    'task_id'                       => $task['id'],
-                    'order_number'                  => $task['order_number'],
-                    'client_order_id'               => $task['client_order_id'],
-                    'order_id'                      => $task['order_id'],
-                    'order_units'                   => $task['units'],
-                    'order_customer'                => $task['order_customer'],
-                    'order_address'                 => $task['order_address'],
-                    'order_address2'                => $task['order_address2'],
-                    'order_suburb'                  => $task['order_suburb'],
-                    'order_postcode'                => $task['order_postcode'],
-                    'order_client'                  => $task['order_client_name'],
-                    'order_delivery_instructions'   => $task['order_delivery_instructions']
-                );
+                if(!empty($task['job_id']))
+                {
+                    $runsheet['jobs'][] = array(
+                        'task_id'                   => $task['id'],
+                        'job_shipto'                => $task['job_shipto'],
+                        'job_units'                 => $task['units'],
+                        'job_attention'             => $task['job_attention'],
+                        'job_number'                => $task['job_number'],
+                        'job_id'                    => $task['job_id'],
+                        'job_customer'              => $task['customer_name'],
+                        'job_address'               => $task['job_address'],
+                        'job_address2'              => $task['job_address2'],
+                        'job_suburb'                => $task['job_suburb'],
+                        'job_postcode'              => $task['job_postcode'],
+                        'job_delivery_instructions' => $task['job_delivery_instructions']
+                    );
+                }
+                if(!empty($task['order_number']))
+                {
+                    $runsheet['orders'][] = array(
+                        'task_id'                       => $task['id'],
+                        'order_number'                  => $task['order_number'],
+                        'client_order_id'               => $task['client_order_id'],
+                        'order_id'                      => $task['order_id'],
+                        'order_units'                   => $task['units'],
+                        'order_customer'                => $task['order_customer'],
+                        'order_address'                 => $task['order_address'],
+                        'order_address2'                => $task['order_address2'],
+                        'order_suburb'                  => $task['order_suburb'],
+                        'order_postcode'                => $task['order_postcode'],
+                        'order_client'                  => $task['order_client_name'],
+                        'order_delivery_instructions'   => $task['order_delivery_instructions']
+                    );
+                }
             }
+
         }
         //render the page
         Config::setJsConfig('curPage', "prepare-runsheet");
