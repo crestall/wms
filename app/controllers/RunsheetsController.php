@@ -290,7 +290,7 @@ class RunsheetsController extends Controller
             $runsheets[$rs['runsheet_day']]['created_by'] = $rs['created_by'];
             $runsheets[$rs['runsheet_day']]['updated_by'] = $rs['updated_by'];
             $runsheets[$rs['runsheet_day']]['runsheet_id'] = $rs['runsheet_id'];
-            if( $rs['job_id'] == 0 && $rs['order_id'] > 0 )
+            if( $rs['job_id'] == 0 && $rs['order_id'] == 0 )
             {
                 $runsheets[$rs['runsheet_day']]['tasks'][] = array(
                     'driver_name'   => $rs['driver_name'],
