@@ -300,31 +300,35 @@ class RunsheetsController extends Controller
                     'completed'     => $rs['completed']
                 );
             }
-            if($rs['job_id'] > 0)
+            else
             {
-                $runsheets[$rs['runsheet_day']]['jobs'][] = array(
-                    'job_id'        => $rs['job_id'],
-                    'job_number'    => $rs['job_number'],
-                    'driver_name'   => $rs['driver_name'],
-                    'customer'      => $rs['customer_name'],
-                    'suburb'        => $rs['job_suburb'],
-                    'printed'       => $rs['printed'],
-                    'completed'     => $rs['completed']
-                );
+                if($rs['job_id'] > 0)
+                {
+                    $runsheets[$rs['runsheet_day']]['jobs'][] = array(
+                        'job_id'        => $rs['job_id'],
+                        'job_number'    => $rs['job_number'],
+                        'driver_name'   => $rs['driver_name'],
+                        'customer'      => $rs['customer_name'],
+                        'suburb'        => $rs['job_suburb'],
+                        'printed'       => $rs['printed'],
+                        'completed'     => $rs['completed']
+                    );
+                }
+                if($rs['order_id'] > 0)
+                {
+                    $runsheets[$rs['runsheet_day']]['orders'][] = array(
+                        'order_id'      => $rs['order_id'],
+                        'order_number'  => $rs['order_number'],
+                        'driver_name'   => $rs['driver_name'],
+                        'customer'      => $rs['order_customer'],
+                        'suburb'        => $rs['order_suburb'],
+                        'client'        => $rs['order_client_name'],
+                        'printed'       => $rs['printed'],
+                        'completed'     => $rs['completed']
+                    );
+                }
             }
-            if($rs['order_id'] > 0)
-            {
-                $runsheets[$rs['runsheet_day']]['orders'][] = array(
-                    'order_id'      => $rs['order_id'],
-                    'order_number'  => $rs['order_number'],
-                    'driver_name'   => $rs['driver_name'],
-                    'customer'      => $rs['order_customer'],
-                    'suburb'        => $rs['order_suburb'],
-                    'client'        => $rs['order_client_name'],
-                    'printed'       => $rs['printed'],
-                    'completed'     => $rs['completed']
-                );
-            }
+
         }
         //render the page
         Config::setJsConfig('curPage', "prepare-runsheets");
