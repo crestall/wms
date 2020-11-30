@@ -390,7 +390,16 @@ class Runsheet extends Model{
     {
         $db = Database::openConnection();
         unset($data['csrf_token']);
+        $runsheet_id = $data['runsheet_id'];
         $db->insertQuery($this->tasks_table, $data);
+        //record runsheet update
+        $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+        //check if all done needs updating
+        $new_vals['all_tasks_done'] = ($this->areAllTasksDone($runsheet_id))? 1 : 0;
+        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
     }
 
     public function runsheetPrinted($data = array())
