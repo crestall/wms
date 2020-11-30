@@ -147,7 +147,7 @@ class FormController extends Controller {
 
     public function procAddMiscTask()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -165,7 +165,22 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "_POST<pre>",print_r($post_data),"</pre>"; die();
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
+        if( !$this->dataSubbed($ship_to) )
+        {
+            Form::setError('ship_to', 'A ship to name is required');
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, 'AU', isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            echo "<pre>",print_r($post_data),"</pre>"; die();
+        }
+        return $this->redirector->to(PUBLIC_ROOT."runsheets/add-misc-task/runsheet=$runsheet_id");
     }
 
     public function procRunsheetCompletionUpdate()
