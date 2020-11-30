@@ -47,7 +47,7 @@ class pdfController extends Controller
             {
                 if($task['order_id'] == 0 &&  $task['job_id'] == 0)
                 {
-                    $delivery_id    = $task['order_number']." / ".$task['client_order_id'];
+                    $delivery_id    = "";
                     $customer       = (empty($task['attention']))? $task['deliver_to'] : $task['attention'];
                     $description    = "";
                 }
