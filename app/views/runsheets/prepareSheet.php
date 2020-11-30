@@ -13,7 +13,7 @@
             //$driver_id = (empty(Form::value('driver_id')))? $runsheet['driver_id'] : Form::value('driver_id');
             //$units = (empty(Form::value('units')))? ($runsheet['units'] > 0)?$runsheet['units']: "" : Form::value('units');
             //echo "<p>Form Values For 381: ".getFormValue()."</p>";
-            echo "<pre>",print_r($runsheet),"</pre>"; die();
+            //echo "<pre>",print_r($runsheet),"</pre>"; die();
             ?>
             <div class="row">
                 <div class="col-12">
@@ -193,7 +193,82 @@
                                 </div>
                             </div>
                         <?php endif;?>
-                        
+                        <?php if(count($runsheet['tasks'])):?>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Extra Tasks To Include</label>
+                                <div class="col-md-10 mb-3">
+                                    <?php foreach($runsheet['tasks'] as $task):
+                                        $shipto = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',shipto')))? Form::value('tasks,tasks,'.$task['task_id'].',shipto') : $task['shipto'];
+                                        $units = (!empty(Form::value('tasks,tasks,'.$task['tasks_id'].',units')))? Form::value('tasks,tasks,'.$task['task_id'].',units') : $task['units'];
+                                        $delivery_instructions = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',delivery_instructions')))? Form::value('tasks,tasks,'.$task['task_id'].',delivery_instructions') : $task['delivery_instructions'];
+                                        $address = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',address')))? Form::value('tasks,tasks,'.$task['task_id'].',address') : $task['address'];
+                                        $address2 = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',address2')))? Form::value('tasks,tasks,'.$task['task_id'].',address2') : $task['address2'];
+                                        $suburb = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',suburb')))? Form::value('tasks,tasks,'.$task['task_id'].',suburb') : $task['suburb'];
+                                        $postcode = (!empty(Form::value('tasks,tasks,'.$task['task_id'].',postcode')))? Form::value('tasks,tasks,'.$task['task_id'].',postcode') : $task['postcode'];
+                                        $head_string = "<span class='font-weight-bold'>Miscellaneous Tasks</span> - ".$task['shipto'];
+                                        ?>
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <label class="col-form-label" for="task_<?php echo $task['task_id'];?>"></label>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input task" data-taskid="<?php echo $task['task_id'];?>" id="task_<?php echo $task['task_id'];?>" name="tasks[tasks][<?php echo $task['task_id'];?>][include]" <?php if(!empty(Form::value('tasks,tasks,'.$task['task_id'].',include'))) echo "checked";?> />
+                                                    <label class="custom-control-label" for="task_<?php echo $task['task_id'];?>"><?php echo $head_string;?></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="task_address_holder border border-secondary rounded p-3 bg-light" id="task_<?php echo $task['task_id'];?>_address_holder">
+                                            <div class="form-group row">
+                                                <label class="col-3">Units</label>
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control" name="tasks[tasks][<?php echo $task['task_id'];?>][units]" value="<?php echo $units;?>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="required form-control" name="tasks[tasks][<?php echo $task['task_id'];?>][shipto]" id="task_<?php echo $task['task_id'];?>_shipto" value="<?php echo $shipto;?>">
+                                                </div>
+                                                <?php echo Form::displayError('shipto_'.$task['task_id']);?>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label">Delivery Instructions</label>
+                                                <div class="col-md-6">
+                                                    <textarea class="form-control" name="tasks[tasks][<?php echo $task['task_id'];?>][delivery_instructions]" id="task_<?php echo $task['task_id'];?>_delivery_instructions" placeholder="Instructions For Driver"><?php echo $delivery_instructions;?></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control required address_ac" name="tasks[tasks][<?php echo $task['task_id'];?>][address]" id="task_<?php echo $task['task_id'];?>_address" value="<?php echo $address;?>" />
+                                                    <?php echo Form::displayError('address_'.$task['task_id']);?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3">Address Line 2</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control" name="tasks[tasks][<?php echo $task['task_id'];?>][address2]" id="task_<?php echo $task['task_id'];?>_address2" value="<?php echo $address2;?>" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control required suburb_ac" name="tasks[tasks][<?php echo $task['task_id'];?>][suburb]" id="task_<?php echo $task['task_id'];?>_suburb" value="<?php echo $suburb;?>" />
+                                                    <?php echo Form::displayError('suburb_'.$task['task_id']);?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 "><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control required postcode_ac" name="tasks[tasks][<?php echo $task['task_id'];?>][postcode]" id="task_<?php echo $task['task_id'];?>_postcode" value="<?php echo $postcode;?>" />
+                                                    <?php echo Form::displayError('postcode_'.$task['task_id']);?>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="tasks[tasks][<?php echo $task['task_id'];?>][task_id]" value="<?php echo $task['task_id'];?>" >
+                                        </div>
+                                    <?php endforeach;?>
+                                </div>
+                            </div>
+                        <?php endif;?>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" >
                         <input type="hidden" name="runsheet_id" id="runsheet_id" value="<?php echo $runsheet_id;?>" >
                         <div class="form-group row">
