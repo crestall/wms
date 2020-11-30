@@ -178,7 +178,8 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            echo "<pre>",print_r($post_data),"</pre>"; die();
+
             Session::set('feedback', "<h2>That task has been added to the runsheet.</h2><p><a href='/runsheets/view-runsheets'>The details can be found here</a></p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."runsheets/add-misc-task/runsheet=$runsheet_id");
