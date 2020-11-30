@@ -170,7 +170,7 @@ class FormController extends Controller {
         {
             Form::setError('ship_to', 'A ship to name is required');
         }
-        $this->validateAddress($address, $suburb, $state, $postcode, 'AU', isset($ignore_address_error));
+        $this->validateAddress($address, $suburb, 'VIC', $postcode, 'AU', isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
