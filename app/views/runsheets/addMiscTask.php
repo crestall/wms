@@ -62,6 +62,13 @@
                     <?php echo Form::displayError('suburb');?>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="postcode" id="postcode" value="<?php echo Form::value('postcode');?>" />
+                    <?php echo Form::displayError('postcode');?>
+                </div>
+            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" >
             <input type="hidden" name="runsheet_id" id="runsheet_id" value="<?php echo $runsheet_id;?>" >
             <div class="form-group row">
