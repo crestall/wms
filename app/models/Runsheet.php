@@ -174,6 +174,13 @@ class Runsheet extends Model{
 
     }
 
+    public function getRunsheetDayById($id)
+    {
+        $db = Database::openConnection();
+        $row = $db->queryByID($this->table, $id);
+        return date('D jS M', $row['runsheet_day'] );
+    }
+
     public function getTasksForRunsheet($runsheet_id = 0, $printed = false)
     {
         $db = Database::openConnection();
@@ -377,6 +384,22 @@ class Runsheet extends Model{
             }
         }
         return true;
+    }
+
+    public function addTaskToRunsheet($data = array())
+    {
+        $db = Database::openConnection();
+        unset($data['csrf_token']);
+        $runsheet_id = $data['runsheet_id'];
+        $db->insertQuery($this->tasks_table, $data);
+        //record runsheet update
+        $new_vals = array(
+            'updated_date'  =>  time(),
+            'updated_by'    =>  Session::getUserId()
+        );
+        //check if all done needs updating
+        $new_vals['all_tasks_done'] = ($this->areAllTasksDone($runsheet_id))? 1 : 0;
+        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
     }
 
     public function runsheetPrinted($data = array())

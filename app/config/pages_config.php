@@ -77,6 +77,10 @@ $padmin = array(
         'prepare-runsheet'  => array(
             'display'   => false,
             'icon'      => ''
+        ),
+        'add-misc-task'  => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'production-reports'    => array(

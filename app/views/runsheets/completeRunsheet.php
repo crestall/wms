@@ -24,7 +24,12 @@
                     <div class="col-md-9 mb-3">
                         <?php foreach($tasks as $task):
                             $task_id = $task['id'];
-                            if($task['job_id'] > 0)
+                            if($task['job_id'] == 0 && $task['order_number'] == 0)
+                            {
+                                $label_string = "<span class='font-weight-bold'>Miscellaneous Task</span> - ".$task['deliver_to'];
+                                $is_job = false;
+                            }
+                            elseif($task['job_id'] > 0)
                             {
                                 $label_string = "<span class='font-weight-bold'>".$task['job_number']."</span> - ".$task['customer_name'];
                                 $is_job = true;

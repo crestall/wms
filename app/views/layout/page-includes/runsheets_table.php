@@ -7,6 +7,7 @@
             <th>Last Updated</th>
             <th>Jobs</th>
             <th>Orders</th>
+            <th>Other Tasks</th>
             <!--th nowrap>
                 Select
                 <div class="checkbox checkbox-default">
@@ -57,6 +58,16 @@
                             <p>
                                 <span class="font-weight-bold"><?php echo $order['order_number'];?></span> - <?php echo $order['customer'];?><br>
                                 <?php if(!empty($order['driver_name'])) echo $order['driver_name']." - "; echo $order['suburb']?>
+                            </p>
+                        </div>
+                    <?php endforeach;?>
+                </td>
+                <td data-label="Other Tasks">
+                    <?php foreach($rs['tasks'] as $task):?>
+                        <div class="runsheet_order_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                            <p>
+                                <span class="font-weight-bold"><?php echo $task['customer'];?></span><br>
+                                <?php if(!empty($order['driver_name'])) echo $task['driver_name']." - "; echo $task['suburb']?>
                             </p>
                         </div>
                     <?php endforeach;?>

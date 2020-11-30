@@ -5,12 +5,12 @@ function getDriverTasks($driver, $runsheet_id)
     $all_driver_tasks_completed = true;
     $is_printed = true;
     $task_ids = array();
-    $html = "<td style='vertical-align:middle'>$driver_name</td>";
-    $html .= "<td>";
+    $html = "<td data-label='Driver' style='vertical-align:middle'>$driver_name</td>";
+    $html .= "<td data-label='Tasks'>";
     foreach($driver['tasks'] as $task)
     {
         $can_be_completed = true;
-        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['customer']." - ".$task['job_number'] : "ORDER: ".$task['customer']." - ".$task['order_number'];
+        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['customer']." - ".$task['job_number'] : ($task['order_number'] > 0)? "ORDER: ".$task['customer']." - ".$task['order_number'] : "MISCELLANEOUS TASK";
         $task_number .= (isset($task['client_order_id']) && !empty($task['client_order_id']))? " (".$task['client_order_id'].")" : "";
         $shipto = $task['shipto'];
         $shipto .= (!empty($task['attention']))? " - ATTN: ".$task['attention'] : "";
@@ -75,14 +75,15 @@ function getDriverTasks($driver, $runsheet_id)
                 $lu = "Never Updated";
             }
             $rows = count($rs['drivers']);?>
-            <tr>
-                <td data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
+            <tr id="runsheet_<?php echo $rs['runsheet_id'];?>">
+                <td data-label="Runsheet day" data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
                     <h4><?php echo date('D jS M', $timestamp );?></h4>
+                    <a class="btn btn-sm btn-outline-primary" href="/runsheets/add-misc-task/runsheet=<?php echo $rs['runsheet_id'];?>">Add a Miscellaneous Task</a>
                 </td>
-                <td data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
+                <td  data-label="Ceated" data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
                     <?php echo $cs;?>
                 </td>
-                <td data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
+                <td data-label="Last Updated" data-datatable-multi-row-rowspan="<?php echo $rows;?>" style="vertical-align: middle">
                     <?php echo $lu;?>
                     <script type="x/template" class="extra-row-content">
                         <?php for($i = 1; $i < $rows; ++$i):?>

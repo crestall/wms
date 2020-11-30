@@ -44,6 +44,7 @@ class FormController extends Controller {
             'procAddClientLocation',
             'procAddLocation',
             'procAddMiscToOrder',
+            'procAddMiscTask',
             'procAddPackage',
             'procAddPackages',
             'procAddProductionCustomer',
@@ -142,6 +143,46 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procAddMiscTask()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
+        if( !$this->dataSubbed($deliver_to) )
+        {
+            Form::setError('deliver_to', 'A deliver to name is required');
+        }
+        $this->validateAddress($address, $suburb, 'VIC', $postcode, 'AU', isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            $this->runsheet->addTaskToRunsheet($post_data);
+            Session::set('feedback', "<h2>That task has been added to the runsheet.</h2><p><a href='/runsheets/view-runsheets'>The details can be found here</a></p>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."runsheets/add-misc-task/runsheet=$runsheet_id");
     }
 
     public function procRunsheetCompletionUpdate()
@@ -340,6 +381,69 @@ class FormController extends Controller {
                             $array['units'] = $od['units'];
                         if($this->dataSubbed($od['delivery_instructions']))
                             $array['delivery_instructions'] = $od['delivery_instructions'];
+                        $tts[] = $array;
+                    }
+                }
+            }
+        }
+        if( isset($tasks['tasks']) )
+        {
+            foreach($tasks['tasks'] as $id => $td)
+            {
+                $task_id = $td['task_id'];
+                if(isset($td['include']))
+                {
+                    $error = false;
+                    if( !$this->dataSubbed($td['address']) )
+                    {
+                        Form::setError('address_'.$task_id, 'An address is required');
+                    }
+                    if( !$this->dataSubbed($td['shipto']) )
+                    {
+                        Form::setError('shipto_'.$task_id, 'A delivery name is required');
+                    }
+                    if( !$this->dataSubbed($td['suburb']) )
+                    {
+                        Form::setError('suburb_'.$task_id, 'A suburb is required');
+                    }
+                    if( !$this->dataSubbed($td['postcode']) )
+                    {
+                        Form::setError('postcode_'.$task_id, 'A postcode is required');
+                    }
+                    $aResponse = $this->Eparcel->ValidateSuburb($td['suburb'], 'VIC', str_pad($td['postcode'],4,'0',STR_PAD_LEFT));
+                    $error_string = "";
+                    if(isset($aResponse['errors']))
+                    {
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $error_string .= $e['message']." ";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $error_string .= "Postcode does not match suburb or state";
+                    }
+                    if(strlen($error_string))
+                    {
+                        Form::setError('postcode_'.$task_id, $error_string);
+                    }
+                    if(Form::$num_errors == 0)
+                    {
+                        $array = array(
+                            'task_id'       => $task_id,
+                            'driver_id'     => $driver_id,
+                            'address'       => $td['address'],
+                            'suburb'        => $td['suburb'],
+                            'postcode'      => $td['postcode'],
+                            'deliver_to'    => $td['shipto'],
+                            'runsheet_id'   => $runsheet_id
+                        );
+                        if($this->dataSubbed($td['address2']))
+                            $array['address_2'] = $td['address2'];
+                        if($this->dataSubbed($td['units']))
+                            $array['units'] = $td['units'];
+                        if($this->dataSubbed($td['delivery_instructions']))
+                            $array['delivery_instructions'] = $td['delivery_instructions'];
                         $tts[] = $array;
                     }
                 }

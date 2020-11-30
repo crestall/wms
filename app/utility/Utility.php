@@ -412,6 +412,11 @@ class Utility{
                     $task_array = self::getDriverOrderTaskArray($task_array, $rs);
                     $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
                 }
+                if(($rs['order_number'] == 0) && $rs['job_id'] == 0)
+                {
+                    $task_array = self::getDriverMiscTaskArray($task_array, $rs);
+                    $runsheets[$rs['runsheet_day']]['drivers'][$di]['tasks'][] = $task_array;
+                }
                 ++$di;
             }
             else
@@ -425,6 +430,11 @@ class Utility{
                 if(!empty($rs['order_number']))
                 {
                     $task_array = self::getDriverOrderTaskArray($task_array, $rs);
+                    $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
+                }
+                if(($rs['order_number'] == 0) && $rs['job_id'] == 0)
+                {
+                    $task_array = self::getDriverMiscTaskArray($task_array, $rs);
                     $runsheets[$rs['runsheet_day']]['drivers'][$tdi]['tasks'][] = $task_array;
                 }
             }
@@ -459,6 +469,20 @@ class Utility{
         $task_array['address']['suburb'] = $rs['suburb'];
         $task_array['address']['postcode'] = $rs['postcode'];
         $task_array['client_order_id'] = $rs['client_order_id'];
+        $task_array['completed'] = $rs['completed'];
+        $task_array['printed'] = $rs['printed'];
+        return $task_array;
+    }
+
+    private static function getDriverMiscTaskArray($task_array, $rs)
+    {
+        $task_array['shipto'] = $rs['deliver_to'];
+        $task_array['attention'] = $rs['attention'];
+        $task_array['client'] = $rs['order_client_name'];
+        $task_array['address']['address'] = $rs['address'];
+        $task_array['address']['address2'] = $rs['address_2'];
+        $task_array['address']['suburb'] = $rs['suburb'];
+        $task_array['address']['postcode'] = $rs['postcode'];
         $task_array['completed'] = $rs['completed'];
         $task_array['printed'] = $rs['printed'];
         return $task_array;
