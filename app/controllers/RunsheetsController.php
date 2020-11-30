@@ -281,11 +281,25 @@ class RunsheetsController extends Controller
             {
                 $runsheets[$rs['runsheet_day']]['orders'] =array();
             }
+            if(!isset($runsheets[$rs['runsheet_day']]['tasks']))
+            {
+                $runsheets[$rs['runsheet_day']]['tasks'] =array();
+            }
             $runsheets[$rs['runsheet_day']]['created_date'] = $rs['created_date'];
             $runsheets[$rs['runsheet_day']]['updated_date'] = $rs['updated_date'];
             $runsheets[$rs['runsheet_day']]['created_by'] = $rs['created_by'];
             $runsheets[$rs['runsheet_day']]['updated_by'] = $rs['updated_by'];
             $runsheets[$rs['runsheet_day']]['runsheet_id'] = $rs['runsheet_id'];
+            if( $rs['job_id'] == 0 && $rs['order_id'] > 0 )
+            {
+                $runsheets[$rs['runsheet_day']]['tasks'][] = array(
+                    'driver_name'   => $rs['driver_name'],
+                    'customer'      => $rs['deliver_to'],
+                    'suburb'        => $rs['suburb'],
+                    'printed'       => $rs['printed'],
+                    'completed'     => $rs['completed']
+                );
+            }
             if($rs['job_id'] > 0)
             {
                 $runsheets[$rs['runsheet_day']]['jobs'][] = array(
