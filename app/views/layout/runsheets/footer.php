@@ -170,7 +170,19 @@
                 },
                 'add-misc-task':{
                     init:function(){
-                        ;
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
+                        $('input#address, input#suburb, input#postcode').each(function(i,e){
+                            $(this).change(function(e){
+                                $(this).valid();
+                            })
+                        });
+                        $('form#add_misc_task_to_runsheet').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h2 style="margin-left: 20px;margin-right: 20px;">Adding Task to Runsheets...</h2></div>' });
+                            }
+                        })
                     }
                 }
             }
