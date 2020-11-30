@@ -166,9 +166,9 @@ class FormController extends Controller {
             }
         }
         //echo "<pre>",print_r($post_data),"</pre>"; die();
-        if( !$this->dataSubbed($ship_to) )
+        if( !$this->dataSubbed($deliver_to) )
         {
-            Form::setError('ship_to', 'A ship to name is required');
+            Form::setError('deliver_to', 'A deliver to name is required');
         }
         $this->validateAddress($address, $suburb, 'VIC', $postcode, 'AU', isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
