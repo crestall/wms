@@ -107,7 +107,8 @@ class JobsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
             'page_title'    =>  "View Production Jobs",
             'pht'           =>  ": Production Jobs",
-            'jobs'          =>  $jobs
+            'jobs'          =>  $jobs,
+            'completed'     =>  $completed
         ]);
     }
 

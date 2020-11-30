@@ -2,6 +2,7 @@
 
 ?>
 <div id="page-wrapper">
+    <input type="hidden" id="complete" value="<?php echo $completed;?>" >
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if(count($jobs)):?>
