@@ -169,7 +169,7 @@ class RunsheetsController extends Controller
                     'units'                 => $task['units'],
                     'attention'             => $task['attention'],
                     'address'               => $task['address'],
-                    'address2'              => $task['address_22'],
+                    'address2'              => $task['address_2'],
                     'suburb'                => $task['suburb'],
                     'postcode'              => $task['postcode'],
                     'delivery_instructions' => $task['delivery_instructions']
