@@ -36,7 +36,7 @@
         <?php foreach($jobs as $job):?>
             <tr id="tr_<?php echo $job['id'];?>">
                 <td data-label="Job Number" class="number">
-                    <?php if($user_role == "production_admin"):?>
+                    <?php if($user_role == "production_admin" ||  $user_role == "production"):?>
                         <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a>
                     <?php else:?>
                         <?php echo $job['job_id'];?>
@@ -50,7 +50,7 @@
                 <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                 <td data-label="Client">
                     <span style="font-size: larger">
-                        <?php if($user_role == "production_admin" ||  $user_role == "production"):?>
+                        <?php if($user_role == "production_admin"):?>
                             <a href="/customers/edit-customer/customer=<?php echo $job['customer_id'];?>"><?php echo $job['customer_name'];?></a>
                         <?php else:?>
                             <?php echo $job['customer_name'];?>
