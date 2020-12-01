@@ -156,6 +156,7 @@
         		</thead>
                 <tbody>
                     <?php $c = 0; foreach($orders as $co):
+                        $add_to_runsheet = true;
                         ++$c;
 
                         if(empty($co['ship_to']))
@@ -287,8 +288,8 @@
                                 <?php if($add_to_runsheet):
                                     $date = strtotime("today");?>
                                     <div class="input-group">
-                                        <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $co['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
-                                        <input type="hidden" name="runsheet_daydate_value_<?php echo $job['id'];?>" id="runsheet_daydate_value_<?php echo $co['id'];?>" value="<?php echo $date;?>" />
+                                        <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $co['id'];?>" id="runsheet_daydate_<?php echo $co['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
+                                        <input type="hidden" name="runsheet_daydate_value_<?php echo $co['id'];?>" id="runsheet_daydate_value_<?php echo $co['id'];?>" value="<?php echo $date;?>" />
                                         <div class="input-group-append">
                                             <span id="runsheet_daydate_calendar_<?php echo $co['id'];?>" class="input-group-text runsheet_calendar"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
