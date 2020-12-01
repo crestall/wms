@@ -13,7 +13,7 @@
      * )
      * @author     Mark Solly <mark.solly@fsg.com.au>
     */
-include(APP."/config/icon.php");
+include(APP."/config/icons.php");
 $padmin = array(
     'jobs'  => array(
 
