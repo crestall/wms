@@ -22,15 +22,15 @@ $padmin = array(
         'customers-index'   => true,
         'default-icon'      => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-user-tie"></i>'
+            'icon'      => $fontastic_icons['customers']['default']
         ),
         'view-customers'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['customers']['view-customers']
         ),
         'add-customer'  => array(
             'display'       => true,
-            'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+            'icon'          => $fontastic_icons['customers']['add-customer']
         ),
         'edit-customer'  => array(
             'display'   => false,
@@ -164,7 +164,7 @@ $prod = array(
         ),
         'add-job'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+            'icon'      => $fontastic_icons['jobs']['add-job']
         ),
         'update-job'    => array(
             'display'   => false,
@@ -172,11 +172,11 @@ $prod = array(
         ),
         'view-jobs' => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['jobs']['view-jobs']
         ),/*
         'job-search' => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
+            'icon'      => $fontastic_icons['jobs']['job-search']
         ),
         'job-search-results'    => array(
             'display'   => false,
