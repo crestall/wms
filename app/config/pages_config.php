@@ -160,7 +160,7 @@ $prod = array(
         'jobs-index'    => true,
         'default-icon'  => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-tasks"></i>'
+            'icon'      => $fontastic_icons['jobs']['default']
         ),
         'add-job'   => array(
             'display'   => true,
