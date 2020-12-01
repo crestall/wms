@@ -360,7 +360,7 @@ class Productionjob extends Model{
                 pf2.id as finisher2_id, pf2.name AS finisher2_name, pf2.contact AS finisher2_contact, pf2.email AS finisher2_email, pf2.phone AS finisher2_phone,
                 pf3.id as finisher3_id, pf3.name AS finisher3_name, pf3.contact AS finisher3_contact, pf3.email AS finisher3_email, pf3.phone AS finisher3_phone,
                 js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking,
-                IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day
+                IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day, IFNULL(rs.runsheet_completed, 0) AS runsheet_completed
             FROM
                 `production_jobs` pj LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
@@ -369,7 +369,7 @@ class Productionjob extends Model{
                 `production_finishers` pf2 ON pj.finisher2_id = pf2.id LEFT JOIN
                 `production_finishers` pf3 ON pj.finisher3_id = pf3.id LEFT JOIN
                 job_status js ON pj.status_id = js.id LEFT JOIN
-                (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.job_id, runsheets.runsheet_day FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
+                (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.job_id, runsheets.runsheet_day, runsheet_tasks.completed AS runsheet_completed FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
         ";
     }
 }
