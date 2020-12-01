@@ -69,16 +69,18 @@ class FsgContactsController extends Controller
 
     public function isAuthorized(){
         $action = $this->request->param('action');
-        //$role = Session::getUserRole();
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+        $role = Session::getUserRole();
+        //$role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         $resource = "fsgcontacts";
 
         //only for admin
         Permission::allow('production admin', $resource, "*");
-        //production users
-        Permission::allow('production', $resource, array(
+        //production sales admins
+        Permission::allow('production sales admin', $resource, array(
             "index",
-            "viewContacts"
+            "viewContacts",
+            "editContact",
+            "addContact"
         ));
 
         return Permission::check($role, $resource, $action);
