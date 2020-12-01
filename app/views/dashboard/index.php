@@ -103,7 +103,7 @@ $c = 1;
                 <button class="btn btn-sm btn-outline-fsg" id="chart_button_2"></button>
             </div>
             <div id="products_chart" class="pb-3"></div>
-        <?php elseif($user_role == "production" || $user_role == "production_admin"):?>
+        <?php elseif($user_role == "production" || $user_role == "production_admin" || $user_role == "production_sales_admin" || $user_role == "production_sales"):?>
 <!----------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------     Production Users     --------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------>
@@ -115,6 +115,22 @@ $c = 1;
                 <!----------------------------------------------------------------------------------------------------------------------------------------
                 ---------------------------------------     Production Admin Users     --------------------------------------------------------------------------
                 ------------------------------------------------------------------------------------------------------------------------------------------>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>View Jobs</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/jobs/view-jobs"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        </div>
+                    </div>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>Add A New Job</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/jobs/add-job"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span>&nbsp;<span style="font-size:larger">Add!</span></a>
+                        </div>
+                    </div>
                     <div class="card homepagecard">
                         <div class="card-header">
                             <h4>Add A New Customer</h4>
@@ -132,27 +148,26 @@ $c = 1;
                         </div>
                     </div>
                 <?php endif;?>
-                <div class="card homepagecard">
-                    <div class="card-header">
-                        <h4>View Jobs</h4>
-                    </div>
-                    <div class="card-body text-center">
-                    	<a class="btn btn-lg btn-outline-fsg" href="/jobs/view-jobs"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
-                    </div>
-                </div>
-                <div class="card homepagecard">
-                    <div class="card-header">
-                        <h4>Add A New Job</h4>
-                    </div>
-                    <div class="card-body text-center">
-                    	<a class="btn btn-lg btn-outline-fsg" href="/jobs/add-job"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span>&nbsp;<span style="font-size:larger">Add!</span></a>
-                    </div>
-                </div>
                 <?php if($user_role == "production"):?>
                 <!----------------------------------------------------------------------------------------------------------------------------------------
                 ---------------------------------------     Production     --------------------------------------------------------------------------
                 ------------------------------------------------------------------------------------------------------------------------------------------>
-
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>View Jobs</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/jobs/view-jobs"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span>&nbsp;<span style="font-size:larger">Look!</span></a>
+                        </div>
+                    </div>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4>Add A New Job</h4>
+                        </div>
+                        <div class="card-body text-center">
+                        	<a class="btn btn-lg btn-outline-fsg" href="/jobs/add-job"><span class="fa-layers fa-fw fa-3x align-middle"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span>&nbsp;<span style="font-size:larger">Add!</span></a>
+                        </div>
+                    </div>
                 <?php endif;?>
                 <?php if($user_role == "production_sales_admin"):?>
                 <!----------------------------------------------------------------------------------------------------------------------------------------
