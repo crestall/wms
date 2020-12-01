@@ -72,7 +72,7 @@ $padmin = array(
         ),
         'finalise-runsheets'    => array(
             'display'   => true,
-            'icon'      =>
+            'icon'      => $fontastic_icons['runsheets']['finalise-runsheets']
         ),
         'finalise-runsheet'    => array(
             'display'   => false,
