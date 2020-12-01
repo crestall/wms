@@ -102,12 +102,11 @@ $padmin = array(
         'production-settings-index' => true,
         'default-icon'              => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-cog"></i>'
+            'icon'      => $fontastic_icons['production-settings']['default']
         ),
         'drivers'   => array(
             'display'   => true,
-            //'icon'      => '<span class="fa-layers fa-fw fa-3x align-middle"><i class="fal fa-user"></i><i class="fad fa-steering-wheel" data-fa-transform="shrink-6 down-6"></i></span>'
-            'icon'      => '<span class="fa-3x align-middle"><i class="fad fa-steering-wheel" data-fa-transform="shrink-6 down-6" data-fa-mask="fad fa-user"></i></span>'
+            'icon'      => $fontastic_icons['production-settings']['drivers']
         ),/*
         'customers-csv-import'    => array(
             'display'   => true,
@@ -119,11 +118,11 @@ $padmin = array(
         ),*/
         'edit-job-status'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-list-alt" data-fa-transform="grow-2"></i><i class="fad fa-pencil-alt" data-fa-transform="shrink-4 up-5 right-8"></i></span></div>'
+            'icon'      => $fontastic_icons['production-settings']['edit-job-status']
         ),
         'finisher-categories'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-list-ol" data-fa-transform="shrink-5 up-6"></i></span></div>'
+            'icon'      => $fontastic_icons['production-settings']['finisher-categories']
         ),/*
         'job-csv-import'    => array(
             'display'   => true,

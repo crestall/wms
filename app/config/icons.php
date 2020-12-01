@@ -24,6 +24,12 @@ $fontastic_icons = array(
         'job-search'    => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>',
         'view-jobs'     => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
     ),
+    'production-settings'   => array(
+        'default'               => '<i class="fad fa-cog"></i>',
+        'drivers'               => '<span class="fa-3x align-middle"><i class="fad fa-steering-wheel" data-fa-transform="shrink-6 down-6" data-fa-mask="fad fa-user"></i></span>',
+        'edit-job-status'       => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-list-alt" data-fa-transform="grow-2"></i><i class="fad fa-pencil-alt" data-fa-transform="shrink-4 up-5 right-8"></i></span></div>',
+        'finisher-categories'   => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-list-ol" data-fa-transform="shrink-5 up-6"></i></span></div>'
+    ),
     'runsheets' => array(
         'default'               => '<i class="fad fa-list-ol"></i>',
         'finalise-runsheets'    => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>',
