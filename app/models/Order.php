@@ -889,10 +889,10 @@ class Order extends Model{
         $q = "
             SELECT
                 o.*,
-                IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day
+                IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day, IFNULL(rs.runsheet_completed, 0) AS runsheet_completed, rs.driver_id
             FROM
                 orders o LEFT JOIN
-                (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.order_id, runsheets.runsheet_day FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN orders ON runsheet_tasks.order_id = orders.id) rs ON rs.order_id = o.id
+                (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.order_id, runsheets.runsheet_day, runsheet_tasks.driver_id, runsheet_tasks.completed AS runsheet_completed FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN orders ON runsheet_tasks.order_id = orders.id) rs ON rs.order_id = o.id
             $status_clause
         ";
         if($client_id > 0)
