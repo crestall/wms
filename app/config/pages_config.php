@@ -60,31 +60,27 @@ $padmin = array(
         'runsheets-index'   => true,
         'default-icon'      => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-list-ol"></i>'
+            'icon'      => $fontastic_icons['runsheets']['default']
         ),
         'view-runsheets'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['runsheets']['view-runsheets']
         ),
         'print-runsheets'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-print" data-fa-transform="right-3 shrink-5 up-3"></i></span></div>'
+            'icon'      => $fontastic_icons['runsheets']['print-runsheets']
         ),
         'finalise-runsheets'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>'
+            'icon'      =>
         ),
         'finalise-runsheet'    => array(
             'display'   => false,
             'icon'      => ''
-        ),/*
-        'completed-runsheets'    => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-file-check" data-fa-transform="right-4 shrink-4 up-2 rotate-15"></i></span></div>'
-        ),*/
+        ),
         'prepare-runsheets'     => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-pencil-alt" data-fa-transform="right-5 shrink-6 up-2"></i></span></div>'
+            'icon'      => $fontastic_icons['runsheets']['prepare-runsheets']
         ),
         'prepare-runsheet'  => array(
             'display'   => false,
