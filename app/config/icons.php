@@ -8,7 +8,9 @@
     */
 
 $fontastic_icons = array(
-
+    'jobs'  => array(
+        'default'   => '<i class="fad fa-tasks"></i>'
+    )
 );
 
 ?>
