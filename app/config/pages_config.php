@@ -172,7 +172,7 @@ $prod = array(
         'view-jobs' => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
-        ),
+        ),/*
         'job-search' => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
@@ -180,7 +180,7 @@ $prod = array(
         'job-search-results'    => array(
             'display'   => false,
             'icon'      => ''
-        )
+        )*/
     )
 );
 $admin = array(
