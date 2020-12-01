@@ -25,7 +25,7 @@ $fontastic_icons = array(
         'view-jobs'     => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
     ),
     'runsheets' => array(
-        'defaults'              => '<i class="fad fa-list-ol"></i>',
+        'default'               => '<i class="fad fa-list-ol"></i>',
         'finalise-runsheets'    => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>',
         'prepare-runsheets'     => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-pencil-alt" data-fa-transform="right-5 shrink-6 up-2"></i></span></div>',
         'print-runsheets'       => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-print" data-fa-transform="right-3 shrink-5 up-3"></i></span></div>',
