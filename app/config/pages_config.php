@@ -133,15 +133,15 @@ $padmin = array(
         'fsg-contacts-index'   => true,
         'default-icon'      => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-user-chart"></i>'
+            'icon'      => $fontastic_icons['fsg-contacts']['default']
         ),
         'view-contacts' => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['fsg-contacts']['view-contacts']
         ),
         'add-contact'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+            'icon'      => $fontastic_icons['fsg-contacts']['add-contact']
         ),
         'edit-contact'  => array(
             'display'   => false,
