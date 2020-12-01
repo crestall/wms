@@ -78,11 +78,6 @@ class CustomersController extends Controller
             "viewCustomers",
             "editCustomer"
         ));
-        //production users
-        Permission::allow('production', $resource, array(
-            "index",
-            "viewCustomers"
-        ));
 
         return Permission::check($role, $resource, $action);
     }
