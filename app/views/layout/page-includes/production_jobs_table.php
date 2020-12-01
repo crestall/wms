@@ -1,5 +1,6 @@
 <?php
   $today = strtotime('today');
+  echo "<p>User Role: $user_role</p>";
 ?>
 <table class="table-striped table-hover" id="production_jobs_table">
     <thead>
@@ -11,7 +12,7 @@
             <th class="no-sort">Description</th>
             <th class="no-sort">Notes</th>
 
-            <?php if($user_role == "production_admin" || $user_role = "admin"):?>
+            <?php if($user_role == "production_admin" || $user_role == "admin" || $user_role == "production"):?>
                 <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
             <?php else:?>
                 <th>Status</th>
@@ -32,10 +33,11 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($jobs as $job):?>
+        <?php foreach($jobs as $job):
+            $add_to_runsheet = true;?>
             <tr id="tr_<?php echo $job['id'];?>">
                 <td data-label="Job Number" class="number">
-                    <?php if($user_role == "production_admin"):?>
+                    <?php if($user_role == "production_admin" ||  $user_role == "production"):?>
                         <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a>
                     <?php else:?>
                         <?php echo $job['job_id'];?>
@@ -62,7 +64,7 @@
                 <?php if(!empty($job['status_colour'])):?>
                     style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
                 <?php endif;?>
-                ><select class="selectpicker status" <?php if(!($user_role == "production_admin" || $user_role == "admin")) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select></td>
+                ><select class="selectpicker status" <?php if(!($user_role == "production_admin" || $user_role == "admin" || $user_role == "production")) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select></td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
                 <td data-label="Finisher(s)">
                     <?php for($f = 1; $f <= 3; $f++):
@@ -85,23 +87,26 @@
                     </div>
                 </td>
                 <td data-label="Runsheet Day">
-                    <?php if($job['printed'] > 0):?>
-                        <p>This Job is already on a printed runsheet</p>
-                    <?php else:
-                        if($job['runsheet_id'] > 0):?>
-                            <p>This Job is on the runsheet for <strong><?php echo date('l jS \of F',$job['runsheet_day']);?></strong></p>
+                    <?php if($job['runsheet_id'] > 0):
+                        $add_to_runsheet = false;?>
+                        <p>This Job is on the runsheet for <strong><?php echo date('l jS \of F',$job['runsheet_day']);?></strong></p>
+                        <?php if($job['printed'] == 0):?>
                             <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-jobid="<?php echo $job['id'];?>" data-runsheetid="<?php echo $job['runsheet_id'];?>">Remove It</button></p>
-                        <?php else:
-                            $date = strtotime("today");?>
-                            <div class="input-group">
-                                <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $job['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
-                                <input type="hidden" name="runsheet_daydate_value_<?php echo $job['id'];?>" id="runsheet_daydate_value_<?php echo $job['id'];?>" value="<?php echo $date;?>" />
-                                <div class="input-group-append">
-                                    <span id="runsheet_daydate_calendar_<?php echo $job['id'];?>" class="input-group-text runsheet_calendar"><i class="fad fa-calendar-alt"></i></span>
-                                </div>
-                            </div>
                         <?php endif;?>
-
+                        <?php if($job['runsheet_completed'] == 1):
+                            $add_to_runsheet = true;?>
+                            <p class="text-center">The runsheet has been completed</p>
+                        <?php endif;?>
+                    <?php endif;?>
+                    <?php if($add_to_runsheet):
+                        $date = strtotime("today");?>
+                        <div class="input-group">
+                            <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $job['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
+                            <input type="hidden" name="runsheet_daydate_value_<?php echo $job['id'];?>" id="runsheet_daydate_value_<?php echo $job['id'];?>" value="<?php echo $date;?>" />
+                            <div class="input-group-append">
+                                <span id="runsheet_daydate_calendar_<?php echo $job['id'];?>" class="input-group-text runsheet_calendar"><i class="fad fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
                     <?php endif;?>
                 </td>
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>

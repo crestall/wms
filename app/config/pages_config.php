@@ -15,16 +15,18 @@
     */
 $padmin = array(
     'jobs'  => array(
-        'add-job'   => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
-        ),
-        'update-job'    => array(
-            'display'   => false,
-            'icon'      => ''
-        )
+
     ),
     'customers' => array(
+        'customers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-user-tie"></i>'
+        ),
+        'view-customers'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+        ),
         'add-customer'  => array(
             'display'       => true,
             'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
@@ -35,6 +37,15 @@ $padmin = array(
         )
     ),
     'finishers' => array(
+        'finishers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-people-arrows"></i>'
+        ),
+        'view-finishers'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+        ),
         'add-finisher'  => array(
             'display'       => true,
             'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
@@ -123,6 +134,15 @@ $padmin = array(
         ) */
     ),
     'fsg-contacts'    => array(
+        'fsg-contacts-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-user-chart"></i>'
+        ),
+        'view-contacts' => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+        ),
         'add-contact'   => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
@@ -141,6 +161,14 @@ $prod = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-tasks"></i>'
         ),
+        'add-job'   => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+        ),
+        'update-job'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
         'view-jobs' => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
@@ -152,39 +180,6 @@ $prod = array(
         'job-search-results'    => array(
             'display'   => false,
             'icon'      => ''
-        )
-    ),
-    'customers' => array(
-        'customers-index'   => true,
-        'default-icon'      => array(
-            'display'   => false,
-            'icon'      => '<i class="fad fa-user-tie"></i>'
-        ),
-        'view-customers'    => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
-        )
-    ),
-    'finishers' => array(
-        'finishers-index'   => true,
-        'default-icon'      => array(
-            'display'   => false,
-            'icon'      => '<i class="fad fa-people-arrows"></i>'
-        ),
-        'view-finishers'    => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
-        ),
-    ),
-    'fsg-contacts'    => array(
-        'fsg-contacts-index'   => true,
-        'default-icon'      => array(
-            'display'   => false,
-            'icon'      => '<i class="fad fa-user-chart"></i>'
-        ),
-        'view-contacts' => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
         )
     )
 );
@@ -710,11 +705,9 @@ $client = array(
         )
     )
 );
+
 //merge and tidy page arrays
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
-$padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
-$padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
-$padmin['fsg-contacts'] = array_merge($padmin['fsg-contacts'], $prod['fsg-contacts']);
 
 $admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);

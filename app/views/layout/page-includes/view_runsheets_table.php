@@ -9,8 +9,21 @@ function getDriverTasks($driver, $runsheet_id)
     $html .= "<td data-label='Tasks'>";
     foreach($driver['tasks'] as $task)
     {
+        //$html .= "<pre>".print_r($task, true)."</pre>";
         $can_be_completed = true;
-        $task_number = ($task['job_number'] > 0)? "JOB: ".$task['customer']." - ".$task['job_number'] : ($task['order_number'] > 0)? "ORDER: ".$task['customer']." - ".$task['order_number'] : "MISCELLANEOUS TASK";
+        //$task_number = (!empty($task['job_number']))? "JOB: ".$task['customer']." - ".$task['job_number'] : ($task['order_number'] > 0)? "ORDER: ".$task['customer']." - ".$task['order_number'] : "MISCELLANEOUS TASK";
+        if(!empty($task['job_number']))
+        {
+            $task_number = "JOB: ".$task['customer']." - ".$task['job_number'];
+        }
+        elseif($task['order_number'] > 0)
+        {
+            $task_number = "ORDER: ".$task['customer']." - ".$task['order_number'];
+        }
+        else
+        {
+            $task_number =  "MISCELLANEOUS TASK";
+        }
         $task_number .= (isset($task['client_order_id']) && !empty($task['client_order_id']))? " (".$task['client_order_id'].")" : "";
         $shipto = $task['shipto'];
         $shipto .= (!empty($task['attention']))? " - ATTN: ".$task['attention'] : "";

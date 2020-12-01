@@ -66,8 +66,8 @@ class CustomersController extends Controller
     public function isAuthorized()
     {
         $action = $this->request->param('action');
-        //$role = Session::getUserRole();
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+        $role = Session::getUserRole();
+        //$role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         $resource = "customers";
 
         //only for admin

@@ -151,19 +151,12 @@ class JobsController extends Controller
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         $resource = "jobs";
 
-        //only for admin
-        Permission::allow('production admin', $resource, "*");
+        //only for production
+        Permission::allow(['production admin', 'production'], $resource, "*");
         //warehouse users
         Permission::allow(['admin', 'super admin'], $resource, array(
             'index',
             'viewJobs'
-        ));
-        //production users
-        Permission::allow('production', $resource, array(
-            "index",
-            "viewJobs",
-            "jobSearch",
-            "jobSearchResults"
         ));
 
         return Permission::check($role, $resource, $action);
