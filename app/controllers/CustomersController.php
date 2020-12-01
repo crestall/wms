@@ -72,10 +72,11 @@ class CustomersController extends Controller
 
         //only for admin
         Permission::allow('production admin', $resource, "*");
-        //production users
-        Permission::allow('production', $resource, array(
+        //production sales admins
+        Permission::allow('production sales admin', $resource, array(
             "index",
-            "viewCustomers"
+            "viewCustomers",
+            "editCustomer"
         ));
 
         return Permission::check($role, $resource, $action);
