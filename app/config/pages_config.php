@@ -711,6 +711,8 @@ $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 $prod_admin = array_merge($prod, $padmin);
 //return the pages
 return array(
+    "PRODUCTION_SALES_ADMIN"    => array(),
+    "PRODUCTION_SALES"          +> array(),
     "PRODUCTION_ADMIN_PAGES"    => $prod_admin,
     "PRODUCTION_PAGES"          => $prod,
     "ADMIN_PAGES"               => $admin ,
