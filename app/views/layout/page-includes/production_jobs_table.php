@@ -90,10 +90,11 @@
                     <?php if($job['runsheet_id'] > 0):
                         $add_to_runsheet = false;?>
                         <p>This Job is on the runsheet for <strong><?php echo date('l jS \of F',$job['runsheet_day']);?></strong></p>
-                        <?php //if($job['printed'] == 0):?>
-                            <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-jobid="<?php echo $job['id'];?>" data-runsheetid="<?php echo $job['runsheet_id'];?>">Remove It</button></p>
                         <?php if($job['runsheet_completed'] == 0 && $job['driver_id'] > 0):?>
                             <p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet=<?php echo $job['runsheet_id'];?>/driver=<?php echo $job['driver_id'];?>'>Finalise Runsheet</a></p>
+                            <?php if($job['runsheet_completed'] == 0):?>
+                                 <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-jobid="<?php echo $job['id'];?>" data-runsheetid="<?php echo $job['runsheet_id'];?>">Remove It</button></p>
+                            <?php endif;?>
                         <?php endif;?>
                         <?php if($job['runsheet_completed'] == 1):
                             $add_to_runsheet = true;?>
