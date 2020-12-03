@@ -49,7 +49,7 @@ class TasksController extends Controller
                 }
                 else
                 {
-                    //echo "<p>Won't send an email</p>";
+                    echo "<p>Won't send an email</p>";
                 }
             }
         }
