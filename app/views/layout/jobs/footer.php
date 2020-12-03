@@ -385,6 +385,31 @@
                         actions.common.jobsTable();
                         actions.common.selectAll();
                         actions.common.doDates();
+                        $('button.print-sheet').each(function(i,e){
+                            $(this).click(function(e){
+                                var runsheet_id = $(this).data('runsheetid');
+                                var driver_id = $(this).data('driverid');
+                                console.log('runsheet_id: '+runsheet_id);
+                                console.log('driver_id: '+driver_id);
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/pdf/printRunsheet");
+                                form.setAttribute("target", "runsheetformresult");
+                                var hiddenField = document.createElement("input");
+                                hiddenField.setAttribute("type", "hidden");
+                                hiddenField.setAttribute("name", "runsheet_id");
+                                hiddenField.setAttribute("value", runsheet_id);
+                                form.appendChild(hiddenField);
+                                var hiddenField2 = document.createElement("input");
+                                hiddenField2.setAttribute("type", "hidden");
+                                hiddenField2.setAttribute("name", "driver_id");
+                                hiddenField2.setAttribute("value", driver_id);
+                                form.appendChild(hiddenField2);
+                                document.body.appendChild(form);
+                                window.open('','runsheetformresult');
+                                form.submit();
+                            });
+                        });
                         //update job status
                         $('button#status').click(function(e){
                             if(!$('input.select:checked').length)
