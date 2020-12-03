@@ -24,7 +24,7 @@ class TasksController extends Controller
         ]);
     }
 
-    public function testTask()
+    public function productionJobReminderTask()
     {
         if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
         {
