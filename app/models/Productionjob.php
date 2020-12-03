@@ -46,6 +46,15 @@ class Productionjob extends Model{
         $id = $db->updateDatabaseFields($this->table, $vals, $data['job_id']);
     }
 
+    public function getStrictDueDateJobs()
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT * FROM {$this->table} WHERE strict_dd = 1 AND status_id != 9 ORDER BY due_date ASC
+        ";
+        return $db->queryData($q);
+    }
+
     public function jobNumberExists($job_number)
     {
         $db = Database::openConnection();

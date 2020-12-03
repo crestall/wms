@@ -32,7 +32,8 @@ class TasksController extends Controller
         }
         else
         {
-            Email::sendNewUserEmail('Mark Solly', 'mark@solly.com.au');
+            //Email::sendNewUserEmail('Mark Solly', 'mark@solly.com.au');
+            
         }
     }
 
