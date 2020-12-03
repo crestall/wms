@@ -40,15 +40,16 @@ class TasksController extends Controller
             {
                 if( ($job['due_date'] < $today) )
                 {
-                    echo "<p>Will send the 'You Fucked Up email</p>";
+                    //echo "<p>Will send the 'You Fucked Up email</p>";
                 }
                 elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60))
                 {
-                    echo "<p>Will send the 2 Days To Go email</p>";
+                    //echo "<p>Will send the 2 Days To Go email</p>";
+                    Email::sendProductionJobReminder($job);
                 }
                 else
                 {
-                    echo "<p>Won't send an email</p>";
+                    //echo "<p>Won't send an email</p>";
                 }
             }
         }
