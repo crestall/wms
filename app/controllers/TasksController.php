@@ -34,7 +34,23 @@ class TasksController extends Controller
         {
             //Email::sendNewUserEmail('Mark Solly', 'mark@solly.com.au');
             $dd_jobs = $this->productionjob->getStrictDueDateJobs();
-            echo "<pre>",print_r($dd_jobs),"</pre>";
+            //echo "<pre>",print_r($dd_jobs),"</pre>";
+            $today = strtotime('today');
+            foreach($dd_jobs as $j)
+            {
+                if( ($job['due_date'] < $today) )
+                {
+                    echo "<p>Will send the 'You Fucked Up email</p>";
+                }
+                elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60))
+                {
+                    echo "<p>Will send the 2 Days To Go email</p>";
+                }
+                else
+                {
+                    echo "<p>Won't send an email</p>";
+                }
+            }
         }
     }
 
