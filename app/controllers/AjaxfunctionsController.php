@@ -1419,7 +1419,19 @@ class ajaxfunctionsController extends Controller
     }
 
     public function isAuthorized(){
-        return true;
+        $action = $this->request->param('action');
+        $role = Session::getUserRole();
+        //$role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+        $resource = "ajaxfunctions";
+
+        if($action == "updateJobStatus")
+        {
+            Permission::deny(['production sales', 'production sales admin'], $resource, $action);
+        }
+        else
+        {
+            return true;
+        }
     }
 }
 ?>
