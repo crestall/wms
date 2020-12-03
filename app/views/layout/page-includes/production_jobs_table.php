@@ -92,7 +92,7 @@
                         <p>This Job is on the runsheet for <strong><?php echo date('l jS \of F',$job['runsheet_day']);?></strong></p>
                         <?php //if($job['printed'] == 0):?>
                             <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-jobid="<?php echo $job['id'];?>" data-runsheetid="<?php echo $job['runsheet_id'];?>">Remove It</button></p>
-                        <?php if($job['runsheet_completed'] == 0):?>
+                        <?php if($job['driver_id'] > 0):?>
                             <p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet=<?php echo $job['runsheet_id'];?>/driver=<?php echo $job['driver_id'];?>'>Finalise Runsheet</a></p>
                         <?php endif;?>
                         <?php if($job['runsheet_completed'] == 1):
