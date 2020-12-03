@@ -1434,7 +1434,7 @@ class ajaxfunctionsController extends Controller
         ], $resource, "*");
         if($action == "updateJobStatus")
         {
-            Permission::deny(['production sales', 'production sales admin'], $resource, $action);
+            //Permission::deny(['production sales', 'production sales admin'], $resource, $action);
         }
         return Permission::check($role, $resource, $action);
     }
