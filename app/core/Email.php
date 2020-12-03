@@ -52,7 +52,7 @@
         $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "FSG_logo.png");
 		$mail->MsgHTML($body);
         $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-        $mail->Send();
+        return($mail->Send());
     }
 
 
