@@ -23,39 +23,61 @@
     public static function sendProductionJobReminder($job)
     {
         $mail = new PHPMailer();
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."productionreminder2D.html");
-        $replace_array = array("{NAME}", "{JOB_DETAILS}");
-        $job_details = "
-          <table>
-            <tr>
-                <td class='field'>Job Number</td>
-                <td class='value'>{$job['job_id']}<td>
-            </tr>
-            <tr>
-                <td class='field'>Job Customer</td>
-                <td class='value'>{$job['customer_name']}<td>
-            </tr>
-            <tr>
-                <td class='field'>Job Description</td>
-                <td class='value'>{$job['description']}<td>
-            </tr>
-            <tr>
-                <td class='field'>Due Date</td>
-                <td class='value'>".date("d/m/Y", $job['due_date'])."<td>
-            </tr>
-          </table>
-        ";
-		$replace_with_array = array('Andrea', $job_details);
-        $body = str_replace($replace_array, $replace_with_array, $body);
-        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-		$mail->Subject = "There Is An Urgent Job Due Soon";
-        //$mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "FSG_logo.png");
-        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
-        $mail->SMTPDebug  = 2;
-		$mail->MsgHTML($body);
-        $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-        $mail->AddAddress('mark@solly.com.au', 'Mark Solly');
-        return($mail->Send());
+        $mail->IsSMTP();
+        try{
+                $mail->Host = "smtp.office365.com";
+                $mail->Port = Config::get('EMAIL_PORT');
+                $mail->SMTPDebug  = 0;
+                $mail->SMTPSecure = "tls";
+                $mail->SMTPAuth = true;
+                $mail->Username = Config::get('EMAIL_UNAME');
+                $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."productionreminder2D.html");
+            $replace_array = array("{NAME}", "{JOB_DETAILS}");
+            $job_details = "
+              <table>
+                <tr>
+                    <td class='field'>Job Number</td>
+                    <td class='value'>{$job['job_id']}<td>
+                </tr>
+                <tr>
+                    <td class='field'>Job Customer</td>
+                    <td class='value'>{$job['customer_name']}<td>
+                </tr>
+                <tr>
+                    <td class='field'>Job Description</td>
+                    <td class='value'>{$job['description']}<td>
+                </tr>
+                <tr>
+                    <td class='field'>Due Date</td>
+                    <td class='value'>".date("d/m/Y", $job['due_date'])."<td>
+                </tr>
+              </table>
+            ";
+    		$replace_with_array = array('Andrea', $job_details);
+            $body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+    		$mail->Subject = "There Is An Urgent Job Due Soon";
+            //$mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "FSG_logo.png");
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+            $mail->SMTPDebug  = 2;
+    		$mail->MsgHTML($body);
+            $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->AddAddress('mark@solly.com.au', 'Mark Solly');
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent to ". $name);
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
     }
 
 
