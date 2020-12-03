@@ -53,6 +53,7 @@
         $mail->SMTPDebug  = 2;
 		$mail->MsgHTML($body);
         $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+        $mail->AddAddress('mark@solly.com.au', 'Mark Solly');
         return($mail->Send());
     }
 
