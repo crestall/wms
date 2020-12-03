@@ -36,6 +36,9 @@ class TasksController extends Controller
             $dd_jobs = $this->productionjob->getStrictDueDateJobs();
             //echo "<pre>",print_r($dd_jobs),"</pre>";
             $today = strtotime('today');
+            $output = "=========================================================================================================".PHP_EOL;
+            $output .= "SENDING PRODUCTION REMINDER EMAILS FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+            $output .= "=========================================================================================================".PHP_EOL;
             foreach($dd_jobs as $job)
             {
                 if( ($job['due_date'] < $today) )
@@ -46,18 +49,19 @@ class TasksController extends Controller
                 {
                     if(Email::sendProductionJobReminder($job))
                     {
-                        echo "<p>Email sent</p>";
+                        $output .= "Email sent for JOB: ".$job['job_id'].PHP_EOL;
                     }
                     else
                     {
-                        echo "<p>Email Failed</p>";
+                        $output .= "Email failed to sent for JOB: ".$job['job_id'].PHP_EOL
                     }
                 }
                 else
                 {
-                    echo "<p>Won't send an email</p>";
+                    $output .= "No email required for  for JOB: ".$job['job_id'].PHP_EOL
                 }
             }
+            Logger::logRemindersSent('sent_emails/log', $output);
         }
     }
 
