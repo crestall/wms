@@ -62,7 +62,7 @@
             $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "FSG_logo.png");
             //$mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
     		$mail->MsgHTML($body);
-            $mail->AddABCC('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
             $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
             if(!$mail->Send())
             {
