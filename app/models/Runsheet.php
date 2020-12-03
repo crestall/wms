@@ -273,6 +273,7 @@ class Runsheet extends Model{
     public function removeTasks($task_ids, $runsheet_id)
     {
         $db = Database::openConnection();
+        $task_ids = (array)$task_ids;
         foreach($task_ids as $task_id)
         {
             $db->deleteQuery($this->tasks_table, $task_id);
