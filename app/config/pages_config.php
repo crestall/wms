@@ -13,6 +13,7 @@
      * )
      * @author     Mark Solly <mark.solly@fsg.com.au>
     */
+include(APP."/config/icons.php");
 $padmin = array(
     'jobs'  => array(
 
@@ -21,15 +22,15 @@ $padmin = array(
         'customers-index'   => true,
         'default-icon'      => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-user-tie"></i>'
+            'icon'      => $fontastic_icons['customers']['default']
         ),
         'view-customers'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['customers']['view-customers']
         ),
         'add-customer'  => array(
             'display'       => true,
-            'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+            'icon'          => $fontastic_icons['customers']['add-customer']
         ),
         'edit-customer'  => array(
             'display'   => false,
@@ -40,15 +41,15 @@ $padmin = array(
         'finishers-index'   => true,
         'default-icon'      => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-people-arrows"></i>'
+            'icon'      => $fontastic_icons['finishers']['default']
         ),
         'view-finishers'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['finishers']['view-finishers']
         ),
         'add-finisher'  => array(
             'display'       => true,
-            'icon'          => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+            'icon'          => $fontastic_icons['finishers']['add-finisher']
         ),
         'edit-finisher'  => array(
             'display'   => false,
@@ -59,31 +60,27 @@ $padmin = array(
         'runsheets-index'   => true,
         'default-icon'      => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-list-ol"></i>'
+            'icon'      => $fontastic_icons['runsheets']['default']
         ),
         'view-runsheets'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['runsheets']['view-runsheets']
         ),
         'print-runsheets'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-print" data-fa-transform="right-3 shrink-5 up-3"></i></span></div>'
+            'icon'      => $fontastic_icons['runsheets']['print-runsheets']
         ),
         'finalise-runsheets'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>'
+            'icon'      => $fontastic_icons['runsheets']['finalise-runsheets']
         ),
         'finalise-runsheet'    => array(
             'display'   => false,
             'icon'      => ''
-        ),/*
-        'completed-runsheets'    => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-file-check" data-fa-transform="right-4 shrink-4 up-2 rotate-15"></i></span></div>'
-        ),*/
+        ),
         'prepare-runsheets'     => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="fal fa-pencil-alt" data-fa-transform="right-5 shrink-6 up-2"></i></span></div>'
+            'icon'      => $fontastic_icons['runsheets']['prepare-runsheets']
         ),
         'prepare-runsheet'  => array(
             'display'   => false,
@@ -105,12 +102,11 @@ $padmin = array(
         'production-settings-index' => true,
         'default-icon'              => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-cog"></i>'
+            'icon'      => $fontastic_icons['production-settings']['default']
         ),
         'drivers'   => array(
             'display'   => true,
-            //'icon'      => '<span class="fa-layers fa-fw fa-3x align-middle"><i class="fal fa-user"></i><i class="fad fa-steering-wheel" data-fa-transform="shrink-6 down-6"></i></span>'
-            'icon'      => '<span class="fa-3x align-middle"><i class="fad fa-steering-wheel" data-fa-transform="shrink-6 down-6" data-fa-mask="fad fa-user"></i></span>'
+            'icon'      => $fontastic_icons['production-settings']['drivers']
         ),/*
         'customers-csv-import'    => array(
             'display'   => true,
@@ -122,11 +118,11 @@ $padmin = array(
         ),*/
         'edit-job-status'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-list-alt" data-fa-transform="grow-2"></i><i class="fad fa-pencil-alt" data-fa-transform="shrink-4 up-5 right-8"></i></span></div>'
+            'icon'      => $fontastic_icons['production-settings']['edit-job-status']
         ),
         'finisher-categories'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-list-ol" data-fa-transform="shrink-5 up-6"></i></span></div>'
+            'icon'      => $fontastic_icons['production-settings']['finisher-categories']
         ),/*
         'job-csv-import'    => array(
             'display'   => true,
@@ -137,15 +133,15 @@ $padmin = array(
         'fsg-contacts-index'   => true,
         'default-icon'      => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-user-chart"></i>'
+            'icon'      => $fontastic_icons['fsg-contacts']['default']
         ),
         'view-contacts' => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['fsg-contacts']['view-contacts']
         ),
         'add-contact'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+            'icon'      => $fontastic_icons['fsg-contacts']['add-contact']
         ),
         'edit-contact'  => array(
             'display'   => false,
@@ -159,11 +155,11 @@ $prod = array(
         'jobs-index'    => true,
         'default-icon'  => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-tasks"></i>'
+            'icon'      => $fontastic_icons['jobs']['default']
         ),
         'add-job'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>'
+            'icon'      => $fontastic_icons['jobs']['add-job']
         ),
         'update-job'    => array(
             'display'   => false,
@@ -171,11 +167,11 @@ $prod = array(
         ),
         'view-jobs' => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['jobs']['view-jobs']
         ),/*
         'job-search' => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-tasks"></i><i class="far fa-search" data-fa-transform="shrink-4 up-1 right-4"></i></span></div>'
+            'icon'      => $fontastic_icons['jobs']['job-search']
         ),
         'job-search-results'    => array(
             'display'   => false,
@@ -715,10 +711,12 @@ $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 $prod_admin = array_merge($prod, $padmin);
 //return the pages
 return array(
-    "PRODUCTION_ADMIN_PAGES"    => $prod_admin,
-    "PRODUCTION_PAGES"          => $prod,
-    "ADMIN_PAGES"               => $admin ,
-    'WAREHOUSE_PAGES'           => $warehouse,
-    'CLIENT_PAGES'              => $client
+    "PRODUCTION_SALES_ADMIN_PAGES"    => array(),
+    "PRODUCTION_SALES_PAGES"          => array(),
+    "PRODUCTION_ADMIN_PAGES"          => $prod_admin,
+    "PRODUCTION_PAGES"                => $prod,
+    "ADMIN_PAGES"                     => $admin ,
+    'WAREHOUSE_PAGES'                 => $warehouse,
+    'CLIENT_PAGES'                    => $client
 )
 ?>

@@ -2,7 +2,7 @@
 $this_page = Config::get('curPage');
 $role = Session::getUserRole();
 $bcs = array();
-if(count($pages))
+if(isset($pages) && !empty($pages) && count($pages))
 {
 
     foreach($pages as $section => $spages)

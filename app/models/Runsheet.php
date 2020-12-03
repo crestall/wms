@@ -250,6 +250,7 @@ class Runsheet extends Model{
        //check if this makes it all done
        $new_vals['all_tasks_done'] = ($this->areAllTasksDone($runsheet_id))? 1 : 0;
        $db->updateDatabaseFields($this->table, $new_vals, $runsheet_id);
+       return true;
     }
 
     public function updateTask($details)
@@ -272,6 +273,7 @@ class Runsheet extends Model{
     public function removeTasks($task_ids, $runsheet_id)
     {
         $db = Database::openConnection();
+        $task_ids = (array)$task_ids;
         foreach($task_ids as $task_id)
         {
             $db->deleteQuery($this->tasks_table, $task_id);
