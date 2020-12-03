@@ -33,7 +33,8 @@ class TasksController extends Controller
         else
         {
             //Email::sendNewUserEmail('Mark Solly', 'mark@solly.com.au');
-            
+            $dd_jobs = $this->productionjob->getStrictDueDateJobs();
+            echo "<pre>",print_r($dd_jobs),"</pre>";
         }
     }
 
