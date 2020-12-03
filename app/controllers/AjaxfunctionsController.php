@@ -1423,14 +1423,18 @@ class ajaxfunctionsController extends Controller
         $role = Session::getUserRole();
         //$role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         $resource = "ajaxfunctions";
-
+        Permission::allow([
+            'production sales admin',
+            'production sales',
+            'production',
+            'production_admin',
+            'admin',
+            'warehouse',
+            'client'
+        ], $resource, "*");
         if($action == "updateJobStatus")
         {
             Permission::deny(['production sales', 'production sales admin'], $resource, $action);
-        }
-        else
-        {
-            return true;
         }
     }
 }
