@@ -41,11 +41,6 @@ class User extends Model{
         return $user;
     }
 
-    public function can($role, $resource, $action)
-    {
-        return Permission::check($role, $resource, $action);
-    }
-
     public function getUserByEmail($email)
     {
         $db = Database::openConnection();
