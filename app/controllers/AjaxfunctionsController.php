@@ -1427,7 +1427,7 @@ class ajaxfunctionsController extends Controller
             'production sales admin',
             'production sales',
             'production',
-            'production_admin',
+            'production admin',
             'admin',
             'warehouse',
             'client'
