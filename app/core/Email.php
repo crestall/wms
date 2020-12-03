@@ -50,6 +50,7 @@
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 		$mail->Subject = "There Is An Urgent Job Due Soon";
         $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "FSG_logo.png");
+        $mail->SMTPDebug  = 2;
 		$mail->MsgHTML($body);
         $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
         return($mail->Send());
