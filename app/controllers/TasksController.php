@@ -36,7 +36,7 @@ class TasksController extends Controller
             $dd_jobs = $this->productionjob->getStrictDueDateJobs();
             //echo "<pre>",print_r($dd_jobs),"</pre>";
             $today = strtotime('today');
-            foreach($dd_jobs as $j)
+            foreach($dd_jobs as $job)
             {
                 if( ($job['due_date'] < $today) )
                 {
