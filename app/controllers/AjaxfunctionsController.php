@@ -1436,6 +1436,7 @@ class ajaxfunctionsController extends Controller
         {
             Permission::deny(['production sales', 'production sales admin'], $resource, $action);
         }
+        return Permission::check($role, $resource, $action);
     }
 }
 ?>
