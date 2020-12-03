@@ -90,16 +90,23 @@
                     <?php if($job['runsheet_id'] > 0):
                         $add_to_runsheet = false;?>
                         <p>This Job is on the runsheet for <strong><?php echo date('l jS \of F',$job['runsheet_day']);?></strong></p>
-                        <?php if($job['runsheet_completed'] == 0 && $job['driver_id'] > 0):?>
-                            <p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet=<?php echo $job['runsheet_id'];?>/driver=<?php echo $job['driver_id'];?>'>Finalise Runsheet</a></p>
-                            <?php if($job['runsheet_completed'] == 0):?>
-                                 <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-jobid="<?php echo $job['id'];?>" data-runsheetid="<?php echo $job['runsheet_id'];?>">Remove It</button></p>
-                            <?php endif;?>
-                        <?php endif;?>
+
+
+
                         <?php if($job['runsheet_completed'] == 1):
                             $add_to_runsheet = true;?>
                             <p class="text-center">The runsheet has been completed</p>
+                        <?php else:?>
+                            <?php if($job['driver_id'] > 0):
+                                $print_text = ($job['printed'] == 0)? "Print Runsheeet" : "Reprint Runsheet";?>
+                                <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-jobid="<?php echo $job['id'];?>" data-runsheetid="<?php echo $job['runsheet_id'];?>">Remove It</button></p>
+                                <p class="text-center"><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='<?php echo $job['runsheet_id'];?>' data-driverid='<?php echo $job['driver_id'];?>'><?php echo $print_text;?></button></p>
+                                <p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet=<?php echo $job['runsheet_id'];?>/driver=<?php echo $job['driver_id'];?>'>Finalise Runsheet</a></p>
+                            <?php else:?>
+                                <p><a href='/runsheets/prepare-runsheet/runsheet=<?php echo $job['runsheet_id'];?>' class='btn btn-sm btn-outline-fsg'>Update Driver<br>and Tasks</a></p>
+                            <?php endif;?>
                         <?php endif;?>
+
                     <?php endif;?>
                     <?php if($add_to_runsheet):
                         $date = strtotime("today");?>
