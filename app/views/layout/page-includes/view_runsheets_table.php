@@ -9,7 +9,7 @@ function getDriverTasks($driver, $runsheet_id)
     $html .= "<td data-label='Tasks'>";
     foreach($driver['tasks'] as $task)
     {
-        //$html .= "<pre>".print_r($task, true)."</pre>";
+        $html .= "<pre>".print_r($task, true)."</pre>";
         $can_be_completed = true;
         //$task_number = (!empty($task['job_number']))? "JOB: ".$task['customer']." - ".$task['job_number'] : ($task['order_number'] > 0)? "ORDER: ".$task['customer']." - ".$task['order_number'] : "MISCELLANEOUS TASK";
         if(!empty($task['job_number']))
@@ -55,12 +55,12 @@ function getDriverTasks($driver, $runsheet_id)
     {
         $html .= "<td>
                     <p><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='$runsheet_id' data-driverid='{$driver['id']}'>{$print_text}</button></p>
+                    <p><button class='btn btn-outline-danger remove-from-runsheet' data-jobid='jobid' data-runsheetid='$runsheet_id'>Remove It</button></p>
         ";
         if($can_be_completed)
             $html .= "<p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet={$runsheet_id}/driver={$driver['id']}'>Finalise</a></p>";
         $html .= "</td>";
     }
-
     return $html;
 }
 ?>
