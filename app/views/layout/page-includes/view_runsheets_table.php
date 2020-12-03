@@ -60,7 +60,6 @@ function getDriverTasks($driver, $runsheet_id)
             $html .= "<p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet={$runsheet_id}/driver={$driver['id']}'>Finalise</a></p>";
         $html .= "</td>";
     }
-
     return $html;
 }
 ?>
