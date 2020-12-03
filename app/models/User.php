@@ -41,6 +41,11 @@ class User extends Model{
         return $user;
     }
 
+    public function can($userId, $resource, $action)
+    {
+        return Permission::check($role, $resource, $action);
+    }
+
     public function getUserByEmail($email)
     {
         $db = Database::openConnection();
@@ -200,12 +205,6 @@ class User extends Model{
     {
         $db = Database::openConnection();
         return $db->queryValue("user_roles", array('name' => 'client'));
-    }
-
-    public function getSolarUserRoleId()
-    {
-        $db = Database::openConnection();
-        return $db->queryValue("user_roles", array('name' => 'solar'));
     }
 
     public function getSelectUserRoles($selected = false)
