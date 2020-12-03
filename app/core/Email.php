@@ -51,7 +51,7 @@
 		$mail->Subject = "There Is An Urgent Job Due Soon";
 		$mail->MsgHTML($body);
         $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-        $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "FSG_logo.png");
+        //$mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "FSG_logo.png");
         $mail->Send();
     }
 
@@ -515,7 +515,7 @@
             $replace_array = array("{MESSAGE}", "{TIME}");
 		    $replace_with_array = array($message, date('D \t\h\e jS \o\f M \a\t g:i a'));
     		$body = str_replace($replace_array, $replace_with_array, $body);
-            //$mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
+            $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
             $mail->Subject = "Freedom MYOB Import Summary";
     		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
