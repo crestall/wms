@@ -51,6 +51,7 @@
 		$mail->Subject = "There Is An Urgent Job Due Soon";
 		$mail->MsgHTML($body);
         $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+        $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
         $mail->Send();
     }
 
