@@ -45,7 +45,14 @@ class TasksController extends Controller
                 elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60))
                 {
                     echo "<p>IMAGES is ".IMAGES."</p>";
-                    Email::sendProductionJobReminder($job);
+                    if(Email::sendProductionJobReminder($job))
+                    {
+                        echo "<p>Email sent</p>";
+                    }
+                    else
+                    {
+                        echo "<p>maile Failed</p>";
+                    }
                 }
                 else
                 {
