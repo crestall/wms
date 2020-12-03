@@ -59,12 +59,11 @@
             $body = str_replace($replace_array, $replace_with_array, $body);
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
     		$mail->Subject = "There Is An Urgent Job Due Soon";
-            //$mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "FSG_logo.png");
-            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
-            $mail->SMTPDebug  = 2;
+            $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "FSG_logo.png");
+            //$mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
     		$mail->MsgHTML($body);
+            $mail->AddABCC('mark.solly@fsg.com.au', 'Mark Solly');
             $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-            $mail->AddAddress('mark@solly.com.au', 'Mark Solly');
             if(!$mail->Send())
             {
                 Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
