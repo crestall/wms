@@ -50,7 +50,17 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         $q = "
-            SELECT * FROM {$this->table} WHERE strict_dd = 1 AND status_id != 9 ORDER BY due_date ASC
+            SELECT
+                pj.*,
+                pc.name AS customer_name
+            FROM
+                production_jobs pj LEFT JOIN
+                `production_customers` pc ON pj.customer_id = pc.id
+            WHERE
+                pj.strict_dd = 1 AND
+                pj.status_id != 9
+            ORDER BY
+                pj.due_date ASC
         ";
         return $db->queryData($q);
     }
