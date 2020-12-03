@@ -158,6 +158,11 @@ class JobsController extends Controller
             'index',
             'viewJobs'
         ));
+        //production sales users
+        Permission::allow(['production_sales_admin', 'production_sales'], $resource, array(
+            'index',
+            'viewJobs'
+        ));
 
         return Permission::check($role, $resource, $action);
     }
