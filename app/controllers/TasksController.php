@@ -53,12 +53,12 @@ class TasksController extends Controller
                     }
                     else
                     {
-                        $output .= "Email failed to sent for JOB: ".$job['job_id'].PHP_EOL
+                        $output .= "Email failed to sent for JOB: ".$job['job_id'].PHP_EOL;
                     }
                 }
                 else
                 {
-                    $output .= "No email required for  for JOB: ".$job['job_id'].PHP_EOL
+                    $output .= "No email required for  for JOB: ".$job['job_id'].PHP_EOL;
                 }
             }
             Logger::logRemindersSent('sent_emails/log', $output);
