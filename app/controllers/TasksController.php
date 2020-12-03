@@ -24,7 +24,7 @@ class TasksController extends Controller
         ]);
     }
 
-    public function testTask()
+    public function productionJobReminderTask()
     {
         if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
         {
@@ -32,7 +32,32 @@ class TasksController extends Controller
         }
         else
         {
-            Email::sendNewUserEmail('Mark Solly', 'mark@solly.com.au');
+            //Email::sendNewUserEmail('Mark Solly', 'mark@solly.com.au');
+            $dd_jobs = $this->productionjob->getStrictDueDateJobs();
+            //echo "<pre>",print_r($dd_jobs),"</pre>";
+            $today = strtotime('today');
+            foreach($dd_jobs as $job)
+            {
+                if( ($job['due_date'] < $today) )
+                {
+                    //echo "<p>Will send the 'You Fucked Up email</p>";
+                }
+                elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60))
+                {
+                    if(Email::sendProductionJobReminder($job))
+                    {
+                        echo "<p>Email sent</p>";
+                    }
+                    else
+                    {
+                        echo "<p>Email Failed</p>";
+                    }
+                }
+                else
+                {
+                    echo "<p>Won't send an email</p>";
+                }
+            }
         }
     }
 

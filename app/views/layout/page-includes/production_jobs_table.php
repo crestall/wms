@@ -1,6 +1,6 @@
 <?php
   $today = strtotime('today');
-  echo "<p>User Role: $user_role</p>";
+  //echo "<p>User Role: $user_role</p>";
 ?>
 <table class="table-striped table-hover" id="production_jobs_table">
     <thead>

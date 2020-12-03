@@ -46,6 +46,25 @@ class Productionjob extends Model{
         $id = $db->updateDatabaseFields($this->table, $vals, $data['job_id']);
     }
 
+    public function getStrictDueDateJobs()
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                pj.*,
+                pc.name AS customer_name
+            FROM
+                production_jobs pj LEFT JOIN
+                `production_customers` pc ON pj.customer_id = pc.id
+            WHERE
+                pj.strict_dd = 1 AND
+                pj.status_id != 9
+            ORDER BY
+                pj.due_date ASC
+        ";
+        return $db->queryData($q);
+    }
+
     public function jobNumberExists($job_number)
     {
         $db = Database::openConnection();
