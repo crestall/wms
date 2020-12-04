@@ -571,9 +571,15 @@
                                         });
                                     }
                                 });
-                        })
-                        //end add to driver runsheet
-                    }
+                        });
+                        $('button#filter_jobs').click(function(e){
+
+                        });
+                        $('button#unfilter_jobs').click(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Removing Filters...</h2></div>' });
+                            window.location.href = "/jobs/view-jobs";
+                        });
+                    }//init
                 },
                 'update-job':{
                     init: function(){
