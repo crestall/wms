@@ -27,11 +27,11 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                 <div class="col-md-4 mb-3">
                     <select id="status_id" name="status_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->jobstatus->getMultiSelectJobStatus($status_ids, 1, true);?></select>
                 </div>
-                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <div class="form-group row custom-control custom-checkbox custom-control-right col-md-4">
                     <input class="custom-control-input" type="checkbox" id="completed" name="completed"  />
                     <label class="custom-control-label col-md-4" for="completed">Include Completed Jobs</label>
                 </div>
-                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <div class="form-group row custom-control custom-checkbox custom-control-right col-md-4">
                     <input class="custom-control-input" type="checkbox" id="cancelled" name="cancelled"  />
                     <label class="custom-control-label col-md-4" for="completed">Include Cancelled Jobs</label>
                 </div>
