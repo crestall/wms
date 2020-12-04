@@ -98,6 +98,7 @@ class JobsController extends Controller
 
     public function viewJobs()
     {
+        echo "<pre>",print_r($this->request->params),"</pre>";die();
         $completed = (isset($this->request->params['args']['completed']))? true : false;
         $cancelled = (isset($this->request->params['args']['cancelled']))? true : false;
         $customer_ids = isset($this->request->params['customer_ids'])? $this->request->params['customer_ids']: array();
