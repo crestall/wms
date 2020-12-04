@@ -573,7 +573,8 @@
                                 });
                         });
                         $('button#filter_jobs').click(function(e){
-
+                            var customers = $('select#customer_ids').val());
+                            console.log('customers: '+customers);
                         });
                         $('button#unfilter_jobs').click(function(e){
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Removing Filters...</h2></div>' });
