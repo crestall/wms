@@ -29,11 +29,11 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                 </div>
                 <div class="form-group row custom-control custom-checkbox custom-control-right">
                     <input class="custom-control-input" type="checkbox" id="completed" name="completed"  />
-                    <label class="custom-control-label col-md-2" for="completed">Include Completed Jobs</label>
+                    <label class="custom-control-label col-md-4" for="completed">Include Completed Jobs</label>
                 </div>
                 <div class="form-group row custom-control custom-checkbox custom-control-right">
                     <input class="custom-control-input" type="checkbox" id="cancelled" name="cancelled"  />
-                    <label class="custom-control-label col-md-2" for="completed">Include Cancelled Jobs</label>
+                    <label class="custom-control-label col-md-4" for="completed">Include Cancelled Jobs</label>
                 </div>
                 <div class="col-md-2 offset-md-8 mb-3">
                     <button class="btn btn-outline-danger" id="unfilter_jobs">Remove Filters</button>
