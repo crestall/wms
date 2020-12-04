@@ -25,6 +25,12 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
             <div class="col-md-4 mb-3">
                 <select id="status_id" name="status_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->jobstatus->getMultiSelectJobStatus($status_ids, 1, true);?></select>
             </div>
+            <div class="col-md-2 offset-md-8 mb-3">
+                <button class="btn btn-outline-danger" id="unfilter_jobs">Remove Filters</button>
+            </div>
+            <div class="col-md-2 mb-3">
+                <button class="btn btn-outline-fsg" id="filter_jobs">Apply Filters</button>
+            </div>
             <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
             <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Incompleted Jobs</a></div>
             <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
