@@ -7,6 +7,28 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
     <input type="hidden" id="complete" value="<?php echo $completed;?>" >
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div class="form-group row">
+            <label class="col-md-2 mb-3">Filter By Customer</label>
+            <div class="col-md-4 mb-3">
+                <select id="customer_id" name="customer_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productioncustomer->getMultiSelectCustomers($customer_ids);?></select>
+                <?php echo Form::displayError('client_id');?>
+            </div>
+            <label class="col-md-2 mb-3">Filter By Supplier</label>
+            <div class="col-md-4 mb-3">
+                <select id="supplier_id" name="supplier_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productionsupplier->getMultiSelectSuppliers($supplier_ids);?></select>
+            </div>
+            <label class="col-md-2 mb-3">Filter By FSG Contact</label>
+            <div class="col-md-4 mb-3">
+                <select id="salesrep_id" name="salesrep_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->salesrep->getMultiSelectSalesReps($salesrep_ids);?></select>
+            </div>
+            <label class="col-md-2 mb-3">Filter By Status</label>
+            <div class="col-md-4 mb-3">
+                <select id="status_id" name="status_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->jobstatus->getMultiSelectJobStatus($status_ids, 1, true);?></select>
+            </div>
+            <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
+            <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Incompleted Jobs</a></div>
+            <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
+        </div>
         <?php if(count($jobs)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
@@ -17,9 +39,6 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
             </div>
             <div class="row mt-4" id="table_holder" style="display:none">
                 <?php //echo "<pre>",print_r($jobs),"</pre>";?>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View Only Incompleted Jobs</a></div>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
                 <?php if($can_do_runsheets):?>
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-primary" id="runsheet"><i class="fas fa-truck"></i> Add Selected to Chosen Day's Runsheet</button></div>
                 <?php endif;?>
