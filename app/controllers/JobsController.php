@@ -105,10 +105,11 @@ class JobsController extends Controller
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
-            'page_title'    =>  "View Production Jobs",
-            'pht'           =>  ": Production Jobs",
-            'jobs'          =>  $jobs,
-            'completed'     =>  $completed
+            'page_title'        =>  "View Production Jobs",
+            'pht'               =>  ": Production Jobs",
+            'can_do_runsheets'  => ($user_role == "production" || $user_role == "production_admin" || $user_role == "admin" || $user_role == "super_admin"),
+            'jobs'              =>  $jobs,
+            'completed'         =>  $completed
         ]);
     }
 
