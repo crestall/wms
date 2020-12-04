@@ -7,7 +7,8 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
     <input type="hidden" id="complete" value="<?php echo $completed;?>" >
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="form-group row">
+        <div class="border border-secondary p-3 m-3 rounded bg-light form-group row">
+            <h3>Filters</h3>
             <label class="col-md-2 mb-3">Filter By Customer</label>
             <div class="col-md-4 mb-3">
                 <select id="customer_id" name="customer_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productioncustomer->getMultiSelectCustomers($customer_ids);?></select>
