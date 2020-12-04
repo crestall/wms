@@ -120,7 +120,7 @@
                             </div>
                         <?php endif;?>
                     </td>
-                <?php endif;
+                <?php endif; ?>
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
                 <td data-label="Due Date"
                 <?php if($job['strict_dd'] > 0):?>
