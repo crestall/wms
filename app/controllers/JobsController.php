@@ -100,6 +100,10 @@ class JobsController extends Controller
     {
         $completed = (isset($this->request->params['args']['completed']))? true : false;
         $cancelled = (isset($this->request->params['args']['cancelled']))? true : false;
+        $customer_ids = isset($this->request->params['customer_ids'])? $this->request->params['customer_ids']: array();
+        $supplier_ids = isset($this->request->params['supplier_ids'])? $this->request->params['supplier_ids']: array();
+        $salesrep_ids = isset($this->request->params['salesrep_ids'])? $this->request->params['salesrep_ids']: array();
+        $status_ids = isset($this->request->params['status_ids'])? $this->request->params['status_ids']: array();
         $jobs = $this->productionjob->getJobsForDisplay($completed, $cancelled);
         //render the page
         Config::setJsConfig('curPage', "view-jobs");
@@ -108,7 +112,11 @@ class JobsController extends Controller
             'page_title'        =>  "View Production Jobs",
             'pht'               =>  ": Production Jobs",
             'jobs'              =>  $jobs,
-            'completed'         =>  $completed
+            'completed'         =>  $completed,
+            'customer_ids'      =>  $customer_ids,
+            'supplier_ids'      =>  $supplier_ids,
+            'salesrep_ids'      =>  $salesrep_ids,
+            'status_ids'        =>  $status_ids,
         ]);
     }
 
