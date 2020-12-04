@@ -1,5 +1,7 @@
 <?php
 $can_do_runsheets  = ($user_role == "production" || $user_role == "production_admin" || $user_role == "admin" || $user_role == "super_admin");
+$can_change_status = ($user_role == "production" || $user_role == "production_admin" || $user_role == "admin" || $user_role == "super_admin");
+$need_checkbox = ($can_do_runsheets || $can_change_status);
 ?>
 <div id="page-wrapper">
     <input type="hidden" id="complete" value="<?php echo $completed;?>" >
@@ -21,7 +23,7 @@ $can_do_runsheets  = ($user_role == "production" || $user_role == "production_ad
                 <?php if($can_do_runsheets):?>
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-primary" id="runsheet"><i class="fas fa-truck"></i> Add Selected to Chosen Day's Runsheet</button></div>
                 <?php endif;?>
-                <?php if($user_role == "production_admin" || $user_role == "admin" || $user_role == "production"):?>
+                <?php if($can_change_status):?>
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-secondary" id="status"><i class="fal fa-file-check"></i> Update Status for Selected</button></div>
                 <?php endif;?>
                 <div class="col-12">
