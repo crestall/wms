@@ -18,13 +18,15 @@
             <?php endif;?>
             <th>FSG Contact</th>
             <th class="no-sort">Finisher(s)</th>
-            <th nowrap class="no-sort">
-                Select
-                <div class="checkbox checkbox-default">
-                    <input id="select_all" class="styled" type="checkbox">
-                    <label for="select_all"><em><small>(all)</small></em></label>
-                </div>
-            </th>
+            <?php if($need_checkbox):?>
+                <th nowrap class="no-sort">
+                    Select
+                    <div class="checkbox checkbox-default">
+                        <input id="select_all" class="styled" type="checkbox">
+                        <label for="select_all"><em><small>(all)</small></em></label>
+                    </div>
+                </th>
+            <?php endif;?>
             <?php if($can_do_runsheets):?>
                 <th>Runsheet Day</th>
             <?php endif;?>
