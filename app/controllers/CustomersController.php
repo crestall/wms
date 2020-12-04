@@ -77,11 +77,12 @@ class CustomersController extends Controller
             'index',
             'viewCustomers'
         ]);
-        //view and edit permissions
+        //view edit and add permissions
         Permission::allow(['production sales admin', 'production sales'], $resource, array(
             "index",
             "viewCustomers",
-            "editCustomer"
+            "editCustomer",
+            "addCustomer",
         ));
         return Permission::check($role, $resource, $action);
     }
