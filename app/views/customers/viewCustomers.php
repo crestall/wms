@@ -6,7 +6,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if(count($customers)):?>
             <div class="col" id="table_holder" style="display:none">
-                <table id="customer_list_table" class="table-striped table-hover">
+                <table id="customer_list_table" class="table-striped table-hover" style="width:80%">
                     <thead>
                     	<tr>
                             <th></th>
