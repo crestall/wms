@@ -11,13 +11,11 @@
             <th class="no-sort">Client</th>
             <th class="no-sort">Description</th>
             <th class="no-sort">Notes</th>
-
-            <?php if($user_role == "production_admin" || $user_role == "admin" || $user_role == "production"):?>
+            <?php if($can_change_status):?>
                 <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
             <?php else:?>
                 <th>Status</th>
             <?php endif;?>
-
             <th>FSG Contact</th>
             <th class="no-sort">Finisher(s)</th>
             <th nowrap class="no-sort">
@@ -66,7 +64,7 @@
                 <?php if(!empty($job['status_colour'])):?>
                     style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
                 <?php endif;?>
-                ><select class="selectpicker status" <?php if(!($user_role == "production_admin" || $user_role == "admin" || $user_role == "production")) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select></td>
+                ><select class="selectpicker status" <?php if(!$can_change_status) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select></td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
                 <td data-label="Finisher(s)">
                     <?php for($f = 1; $f <= 3; $f++):
@@ -82,12 +80,14 @@
                         <?php endif;?>
                     <?php endfor;?>
                 </td>
-                <td data-label="Select" class="chkbox">
-                    <div class="checkbox checkbox-default">
-                        <input type="checkbox" class="select styled" data-jobid='<?php echo $job['id'];?>' name="select_<?php echo $job['id'];?>" id="select_<?php echo $job['id'];?>" />
-                        <label for="select_<?php echo $job['id'];?>"></label>
-                    </div>
-                </td>
+                <?php if($need_checkbox):?>
+                    <td data-label="Select" class="chkbox">
+                        <div class="checkbox checkbox-default">
+                            <input type="checkbox" class="select styled" data-jobid='<?php echo $job['id'];?>' name="select_<?php echo $job['id'];?>" id="select_<?php echo $job['id'];?>" />
+                            <label for="select_<?php echo $job['id'];?>"></label>
+                        </div>
+                    </td>
+                <?php endif;?>
                 <?php if($can_do_runsheets):?>
                     <td data-label="Runsheet Day">
                         <?php if($job['runsheet_id'] > 0):
