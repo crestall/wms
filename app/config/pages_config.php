@@ -15,19 +15,8 @@
     */
 include(APP."/config/icons.php");
 $padmin = array(
-    'jobs'  => array(
-
-    ),
+    'jobs'  => array(), //merges with production later
     'customers' => array(
-        'customers-index'   => true,
-        'default-icon'      => array(
-            'display'   => false,
-            'icon'      => $fontastic_icons['customers']['default']
-        ),
-        'view-customers'    => array(
-            'display'   => true,
-            'icon'      => $fontastic_icons['customers']['view-customers']
-        ),
         'add-customer'  => array(
             'display'       => true,
             'icon'          => $fontastic_icons['customers']['add-customer']
@@ -149,7 +138,6 @@ $padmin = array(
         )
     )
 );
-
 $prod = array(
     'jobs'  => array(
         'jobs-index'    => true,
@@ -177,7 +165,18 @@ $prod = array(
             'display'   => false,
             'icon'      => ''
         )*/
-    )
+    ),
+    'customers' => array(
+        'customers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['customers']['default']
+        ),
+        'view-customers'    => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['customers']['view-customers']
+        )
+    ),
 );
 $admin = array(
    'orders' => array(
@@ -251,7 +250,17 @@ $admin = array(
             'icon'      => '<i class="fal fa-truck fa-3x"></i>'
         )
     ),
-    'jobs'      => array(),
+    'jobs'      => array(
+        'jobs-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['jobs']['default']
+        ),
+        'view-jobs' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['jobs']['view-jobs']
+        )
+    ),
     'runsheets' => array(),
     'clients'	=> array(
         'clients-index' => true,
@@ -704,6 +713,7 @@ $client = array(
 
 //merge and tidy page arrays
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
+$padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 
 $admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
