@@ -200,6 +200,28 @@ $prod = array(
         )
     )
 );
+$prod_sales_admin = array(
+    'jobs'  => array(
+        'jobs-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['jobs']['default']
+        ),
+        'view-jobs' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['jobs']['view-jobs']
+        ),/*
+        'job-search' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['jobs']['job-search']
+        ),
+        'job-search-results'    => array(
+            'display'   => false,
+            'icon'      => ''
+        )*/
+    ),
+
+);
 $admin = array(
    'orders' => array(
         'orders-index'  => true,
@@ -743,7 +765,7 @@ $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 $prod_admin = array_merge($prod, $padmin);
 //return the pages
 return array(
-    "PRODUCTION_SALES_ADMIN_PAGES"    => array(),
+    "PRODUCTION_SALES_ADMIN_PAGES"    => $prod_sales_admin,
     "PRODUCTION_SALES_PAGES"          => array(),
     "PRODUCTION_ADMIN_PAGES"          => $prod_admin,
     "PRODUCTION_PAGES"                => $prod,
