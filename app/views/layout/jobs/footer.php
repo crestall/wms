@@ -573,7 +573,7 @@
                                 });
                         });
                         $('button#filter_jobs').click(function(e){
-                            var customers = $('select#customer_ids').val());
+                            var customers = $('select#customer_ids').val();
                             console.log('customers: '+customers);
                         });
                         $('button#unfilter_jobs').click(function(e){
