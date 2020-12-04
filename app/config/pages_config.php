@@ -177,6 +177,17 @@ $prod = array(
             'icon'      => $fontastic_icons['customers']['view-customers']
         )
     ),
+    'finishers' => array(
+        'finishers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['finishers']['default']
+        ),
+        'view-finishers'    => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['finishers']['view-finishers']
+        )
+    )
 );
 $admin = array(
    'orders' => array(
