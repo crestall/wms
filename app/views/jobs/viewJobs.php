@@ -1,5 +1,5 @@
 <?php
-
+$can_do_runsheets  = ($user_role == "production" || $user_role == "production_admin" || $user_role == "admin" || $user_role == "super_admin");
 ?>
 <div id="page-wrapper">
     <input type="hidden" id="complete" value="<?php echo $completed;?>" >
