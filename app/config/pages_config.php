@@ -187,6 +187,17 @@ $prod = array(
             'display'   => true,
             'icon'      => $fontastic_icons['finishers']['view-finishers']
         )
+    ),
+    'fsg-contacts'    => array(
+        'fsg-contacts-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['fsg-contacts']['default']
+        ),
+        'view-contacts' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['fsg-contacts']['view-contacts']
+        )
     )
 );
 $admin = array(
