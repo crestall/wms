@@ -15,6 +15,7 @@ class User extends Model{
       * @var string
       */
     public $table = "users";
+    public $roles_table = "user_roles";
 
     /**
      * returns an associative array holds the user info(image, name, id, ...etc.)

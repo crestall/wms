@@ -1418,8 +1418,21 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
-    public function isAuthorized(){
-        return true;
+    public function isAuthorized($action = null){
+        if(empty($action))
+        {
+            return true;
+        }
+        else
+        {
+            $resource = "ajaxfunctions";
+            Permission::allowAllRoles($resource, $actions = "*");
+            Permission::deny('production sales admin', $resource, array(
+                'updateJobStatus'
+            ));
+            $role = Session::getUserRole();
+            return Permission::check($role, $resource, $action);
+        }
     }
 }
 ?>
