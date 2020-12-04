@@ -27,7 +27,9 @@
                     <label for="select_all"><em><small>(all)</small></em></label>
                 </div>
             </th>
-            <th>Runsheet Day</th>
+            <?php if($can_do_runsheets):?>
+                <th>Runsheet Day</th>
+            <?php endif;?>
             <th>Date Entered</th>
             <th>Due Date</th>
         </tr>
@@ -86,37 +88,39 @@
                         <label for="select_<?php echo $job['id'];?>"></label>
                     </div>
                 </td>
-                <td data-label="Runsheet Day">
-                    <?php if($job['runsheet_id'] > 0):
-                        $add_to_runsheet = false;?>
-                        <p>This Job is on the runsheet for <strong><?php echo date('l jS \of F',$job['runsheet_day']);?></strong></p>
-                        <?php if($job['runsheet_completed'] == 1):
-                            $add_to_runsheet = true;?>
-                            <p class="text-center">The runsheet has been completed</p>
-                        <?php else:?>
-                            <?php if($job['driver_id'] > 0):
-                                $print_text = ($job['printed'] == 0)? "Print Runsheeet" : "Reprint Runsheet";?>
-                                <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-jobid="<?php echo $job['id'];?>" data-runsheetid="<?php echo $job['runsheet_id'];?>">Remove It</button></p>
-                                <p class="text-center"><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='<?php echo $job['runsheet_id'];?>' data-driverid='<?php echo $job['driver_id'];?>'><?php echo $print_text;?></button></p>
-                                <?php if($job['printed'] > 0):?>
-                                    <p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet=<?php echo $job['runsheet_id'];?>/driver=<?php echo $job['driver_id'];?>'>Finalise Runsheet</a></p>
-                                <?php endif;?>
+                <?php if($can_do_runsheets):?>
+                    <td data-label="Runsheet Day">
+                        <?php if($job['runsheet_id'] > 0):
+                            $add_to_runsheet = false;?>
+                            <p>This Job is on the runsheet for <strong><?php echo date('l jS \of F',$job['runsheet_day']);?></strong></p>
+                            <?php if($job['runsheet_completed'] == 1):
+                                $add_to_runsheet = true;?>
+                                <p class="text-center">The runsheet has been completed</p>
                             <?php else:?>
-                                <p><a href='/runsheets/prepare-runsheet/runsheet=<?php echo $job['runsheet_id'];?>' class='btn btn-sm btn-outline-fsg'>Update Driver<br>and Tasks</a></p>
+                                <?php if($job['driver_id'] > 0):
+                                    $print_text = ($job['printed'] == 0)? "Print Runsheeet" : "Reprint Runsheet";?>
+                                    <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-jobid="<?php echo $job['id'];?>" data-runsheetid="<?php echo $job['runsheet_id'];?>">Remove It</button></p>
+                                    <p class="text-center"><button class='btn btn-sm btn-outline-success print-sheet' data-runsheetid='<?php echo $job['runsheet_id'];?>' data-driverid='<?php echo $job['driver_id'];?>'><?php echo $print_text;?></button></p>
+                                    <?php if($job['printed'] > 0):?>
+                                        <p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet=<?php echo $job['runsheet_id'];?>/driver=<?php echo $job['driver_id'];?>'>Finalise Runsheet</a></p>
+                                    <?php endif;?>
+                                <?php else:?>
+                                    <p><a href='/runsheets/prepare-runsheet/runsheet=<?php echo $job['runsheet_id'];?>' class='btn btn-sm btn-outline-fsg'>Update Driver<br>and Tasks</a></p>
+                                <?php endif;?>
                             <?php endif;?>
                         <?php endif;?>
-                    <?php endif;?>
-                    <?php if($add_to_runsheet):
-                        $date = strtotime("today");?>
-                        <div class="input-group">
-                            <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $job['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
-                            <input type="hidden" name="runsheet_daydate_value_<?php echo $job['id'];?>" id="runsheet_daydate_value_<?php echo $job['id'];?>" value="<?php echo $date;?>" />
-                            <div class="input-group-append">
-                                <span id="runsheet_daydate_calendar_<?php echo $job['id'];?>" class="input-group-text runsheet_calendar"><i class="fad fa-calendar-alt"></i></span>
+                        <?php if($add_to_runsheet):
+                            $date = strtotime("today");?>
+                            <div class="input-group">
+                                <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $job['id'];?>" id="runsheet_daydate_<?php echo $job['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
+                                <input type="hidden" name="runsheet_daydate_value_<?php echo $job['id'];?>" id="runsheet_daydate_value_<?php echo $job['id'];?>" value="<?php echo $date;?>" />
+                                <div class="input-group-append">
+                                    <span id="runsheet_daydate_calendar_<?php echo $job['id'];?>" class="input-group-text runsheet_calendar"><i class="fad fa-calendar-alt"></i></span>
+                                </div>
                             </div>
-                        </div>
-                    <?php endif;?>
-                </td>
+                        <?php endif;?>
+                    </td>
+                <?php endif;
                 <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
                 <td data-label="Due Date"
                 <?php if($job['strict_dd'] > 0):?>
