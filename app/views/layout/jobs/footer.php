@@ -574,7 +574,13 @@
                         });
                         $('button#filter_jobs').click(function(e){
                             var customers = $('select#customer_id').val();
-                            console.log('customers: '+customers);
+                            //console.log('customers: '+customers);
+                            var url = "/jobs/view-jobs";
+                            if(!(!customers || 0 === customers.length))
+                            {
+                                url += "/customers="+customers;
+                            }
+                            console.log("URL: "+url);
                         });
                         $('button#unfilter_jobs').click(function(e){
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Removing Filters...</h2></div>' });
