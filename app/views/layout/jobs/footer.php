@@ -580,7 +580,9 @@
                             {
                                 url += "/customers="+customers;
                             }
-                            console.log("URL: "+url);
+                            //console.log("URL: "+url);
+                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Applying Filters...</h2></div>' });
+                            window.location.href = url;
                         });
                         $('button#unfilter_jobs').click(function(e){
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Removing Filters...</h2></div>' });
