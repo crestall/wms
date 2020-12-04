@@ -220,7 +220,25 @@ $prod_sales_admin = array(
             'icon'      => ''
         )*/
     ),
-
+    'customers' => array(
+        'customers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['customers']['default']
+        ),
+        'view-customers'    => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['customers']['view-customers']
+        ),
+        'add-customer'  => array(
+            'display'       => true,
+            'icon'          => $fontastic_icons['customers']['add-customer']
+        ),
+        'edit-customer'  => array(
+            'display'   => false,
+            'icon'      => ''
+        )
+    ),
 );
 $admin = array(
    'orders' => array(
