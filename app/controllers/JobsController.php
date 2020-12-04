@@ -101,7 +101,7 @@ class JobsController extends Controller
         //echo "<pre>",print_r($this->request->params),"</pre>";die();
         $completed = (isset($this->request->params['args']['completed']))? true : false;
         $cancelled = (isset($this->request->params['args']['cancelled']))? true : false;
-        $customer_ids = isset($this->request->params['customer_ids'])? $this->request->params['customer_ids']: array();
+        $customer_ids = isset($this->request->params['customer_ids'])? explode(',',$this->request->params['customer_ids']): array();
         $supplier_ids = isset($this->request->params['supplier_ids'])? $this->request->params['supplier_ids']: array();
         $salesrep_ids = isset($this->request->params['salesrep_ids'])? $this->request->params['salesrep_ids']: array();
         $status_ids = isset($this->request->params['status_ids'])? $this->request->params['status_ids']: array();
