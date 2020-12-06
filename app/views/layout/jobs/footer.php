@@ -575,6 +575,7 @@
                         $('button#filter_jobs').click(function(e){
                             var customers = $('select#customer_id').val();
                             var suppliers = $('select#supplier_id').val();
+                            var salesreps = $('select#salesrep_id').val();
                             //console.log('customers: '+customers);
                             var url = "/jobs/view-jobs";
                             if(!(!customers || 0 === customers.length))
@@ -584,6 +585,10 @@
                             if(!(!suppliers || 0 === suppliers.length))
                             {
                                 url += "/supplier_ids="+suppliers;
+                            }
+                            if(!(!salesreps || 0 === salesreps.length))
+                            {
+                                url += "/contacts_ids="+salereps;
                             }
                             //console.log("URL: "+url);
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Applying Filters...</h2></div>' });
