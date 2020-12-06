@@ -574,11 +574,16 @@
                         });
                         $('button#filter_jobs').click(function(e){
                             var customers = $('select#customer_id').val();
+                            var suppliers = $('select#supplier_id').val();
                             //console.log('customers: '+customers);
                             var url = "/jobs/view-jobs";
                             if(!(!customers || 0 === customers.length))
                             {
-                                url += "/customers="+customers;
+                                url += "/customer_ids="+customers;
+                            }
+                            if(!(!$suppliers || 0 === $suppliers.length))
+                            {
+                                url += "/supplier_ids="+suppliers;
                             }
                             //console.log("URL: "+url);
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Applying Filters...</h2></div>' });
