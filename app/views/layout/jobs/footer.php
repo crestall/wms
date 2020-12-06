@@ -597,6 +597,8 @@
                             }
                             if($('input#cancelled').prop('checked'))
                                 url +="/cancelled=true";
+                            if($('input#completed').prop('checked'))
+                                url +="/completed=true";
                             //console.log("URL: "+url);
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Applying Filters...</h2></div>' });
                             window.location.href = url;
