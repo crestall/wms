@@ -589,7 +589,7 @@
                             }
                             if(!(!salesreps || 0 === salesreps.length))
                             {
-                                url += "/contacts_ids="+salereps;
+                                url += "/contacts_ids="+salesreps;
                             }
                             if(!(!status || 0 === status.length))
                             {
