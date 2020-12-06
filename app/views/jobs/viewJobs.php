@@ -44,7 +44,7 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                 </div>
             </div>
         </div>
-        <?php echo "<pre>",print_r($customer_ids),"</pre>";?>
+        <?php echo "<pre>",print_r($status_ids),"</pre>";?>
         <?php if(count($jobs)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">

@@ -44,7 +44,7 @@ class Jobstatus extends Model{
             $ret_string .= "<option value='$value'";
             if(in_array($value, $selected))
             {
-                $check = ($value == $selected)? "selected='selected'" : "";
+                //$check = ($value == $selected)? "selected='selected'" : "";
                 $ret_string .= " selected";
             }
             elseif(!(empty($s['default'])) && !$selectAll)
