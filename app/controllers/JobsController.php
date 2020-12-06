@@ -102,9 +102,9 @@ class JobsController extends Controller
         $completed = (isset($this->request->params['args']['completed']))? true : false;
         $cancelled = (isset($this->request->params['args']['cancelled']))? true : false;
         $customer_ids = isset($this->request->params['args']['customer_ids'])? explode(',',$this->request->params['args']['customer_ids']): array();
-        $supplier_ids = isset($this->request->params['args']['supplier_ids'])? explode(','$this->request->params['args']['supplier_ids']): array();
-        $salesrep_ids = isset($this->request->params['args']['contacts_ids'])? explode(','$this->request->params['args']['contacts_ids']): array();
-        $status_ids = isset($this->request->params['args']['status_ids'])? explode(','$this->request->params['args']['status_ids']): array();
+        $supplier_ids = isset($this->request->params['args']['supplier_ids'])? explode(',',$this->request->params['args']['supplier_ids']): array();
+        $salesrep_ids = isset($this->request->params['args']['contacts_ids'])? explode(',',$this->request->params['args']['contacts_ids']): array();
+        $status_ids = isset($this->request->params['args']['status_ids'])? explode(',',$this->request->params['args']['status_ids']): array();
         $jobs = $this->productionjob->getJobsForDisplay($completed, $cancelled);
         //render the page
         Config::setJsConfig('curPage', "view-jobs");
