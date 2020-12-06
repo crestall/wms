@@ -114,10 +114,10 @@ class JobsController extends Controller
             'pht'               =>  ": Production Jobs",
             'jobs'              =>  $jobs,
             'completed'         =>  $completed,
-            'customer_ids'      =>  $customer_ids,
-            'supplier_ids'      =>  $supplier_ids,
-            'salesrep_ids'      =>  $salesrep_ids,
-            'status_ids'        =>  $status_ids,
+            'customer_ids'      =>  (array)$customer_ids,
+            'supplier_ids'      =>  (array)$supplier_ids,
+            'salesrep_ids'      =>  (array)$salesrep_ids,
+            'status_ids'        =>  (array)$status_ids,
         ]);
     }
 
