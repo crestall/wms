@@ -30,7 +30,7 @@ class Jobstatus extends Model{
         return $ret_string;
     }
 
-    public function getMultiSelectJobStatus($selected = array(), $active = 1, $selectAll = false)
+    public function getMultiSelectJobStatus($selected = array(), $active = 1, $selectAll = false, $exclude = array())
     {
         $db = Database::openConnection();
         $check = "";
@@ -41,17 +41,20 @@ class Jobstatus extends Model{
         {
             $label = ucwords($s['name']);
             $value = $s['id'];
-            $ret_string .= "<option value='$value'";
-            if(in_array($value, $selected))
+            if(!in_array($value, $exclude))
             {
-                //$check = ($value == $selected)? "selected='selected'" : "";
-                $ret_string .= " selected";
+                $ret_string .= "<option value='$value'";
+                if(in_array($value, $selected))
+                {
+                    //$check = ($value == $selected)? "selected='selected'" : "";
+                    $ret_string .= " selected";
+                }
+                elseif(!(empty($s['default'])) && !$selectAll)
+                {
+                    $ret_string .= " selected";
+                }
+                $ret_string .= ">$label</option>";
             }
-            elseif(!(empty($s['default'])) && !$selectAll)
-            {
-                $ret_string .= " selected";
-            }
-            $ret_string .= ">$label</option>";
         }
         return $ret_string;
     }
