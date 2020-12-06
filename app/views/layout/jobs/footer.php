@@ -581,7 +581,7 @@
                             {
                                 url += "/customer_ids="+customers;
                             }
-                            if(!(!$suppliers || 0 === $suppliers.length))
+                            if(!(!suppliers || 0 === suppliers.length))
                             {
                                 url += "/supplier_ids="+suppliers;
                             }
