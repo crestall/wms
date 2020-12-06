@@ -595,6 +595,8 @@
                             {
                                 url += "/status_ids="+status;
                             }
+                            if($('input#cancelled').prop('selected'))
+                                url +="/cancelled=true";
                             //console.log("URL: "+url);
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Applying Filters...</h2></div>' });
                             window.location.href = url;
