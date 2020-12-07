@@ -11,7 +11,7 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
         <div class="border border-secondary p-3 m-3 rounded bg-light">
             <h3>Filters</h3>
             <div class="form-group row">
-                <span class="inst">Selected Completed or Cancelled Jobs will override the status selection</span>
+                <span class="inst">Selected Completed or Cancelled Jobs will override the status filter</span>
             </div>
             <div class="form-group row">
                 <label class="col-md-2 mb-3">Filter By Customer</label>
