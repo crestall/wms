@@ -200,6 +200,60 @@ $prod = array(
         )
     )
 );
+$prod_sales = array(
+    'jobs'  => array(
+        'jobs-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['jobs']['default']
+        ),
+        'view-jobs' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['jobs']['view-jobs']
+        )
+    ),
+    'customers' => array(
+        'customers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['customers']['default']
+        ),
+        'view-customers'    => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['customers']['view-customers']
+        ),
+        'add-customer'  => array(
+            'display'       => true,
+            'icon'          => $fontastic_icons['customers']['add-customer']
+        ),
+        'edit-customer'  => array(
+            'display'   => false,
+            'icon'      => ''
+        )
+    ),
+    'finishers' => array(
+        'finishers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['finishers']['default']
+        ),
+        'view-finishers'    => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['finishers']['view-finishers']
+        )
+    ),
+    'fsg-contacts'    => array(
+        'fsg-contacts-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['fsg-contacts']['default']
+        ),
+        'view-contacts' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['fsg-contacts']['view-contacts']
+        )
+    )
+);
 $prod_sales_admin = array(
     'jobs'  => array(
         'jobs-index'    => true,
@@ -237,6 +291,17 @@ $prod_sales_admin = array(
         'edit-customer'  => array(
             'display'   => false,
             'icon'      => ''
+        )
+    ),
+    'finishers' => array(
+        'finishers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['finishers']['default']
+        ),
+        'view-finishers'    => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['finishers']['view-finishers']
         )
     ),
 );
