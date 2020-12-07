@@ -574,7 +574,7 @@
                         });
                         $('button#filter_jobs').click(function(e){
                             var customers = $('select#customer_id').val();
-                            var suppliers = $('select#supplier_id').val();
+                            var finishers = $('select#sfinisher_id').val();
                             var salesreps = $('select#salesrep_id').val();
                             var status = $('select#status_id').val();
                             //console.log('customers: '+customers);
@@ -583,9 +583,9 @@
                             {
                                 url += "/customer_ids="+customers;
                             }
-                            if(!(!suppliers || 0 === suppliers.length))
+                            if(!(!finishers || 0 === finishers.length))
                             {
-                                url += "/supplier_ids="+suppliers;
+                                url += "/finisher_ids="+finishers;
                             }
                             if(!(!salesreps || 0 === salesreps.length))
                             {
