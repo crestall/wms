@@ -154,7 +154,7 @@ class Productionjob extends Model{
             ORDER BY
                 js.ranking ASC, pj.created_date DESC, pj.job_id DESC
         ";
-        die($q);
+        //die($q);
         return $db->queryData($q);
     }
 
