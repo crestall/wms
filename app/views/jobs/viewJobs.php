@@ -19,9 +19,9 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                     <select id="customer_id" name="customer_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productioncustomer->getMultiSelectCustomers($customer_ids);?></select>
                     <?php echo Form::displayError('client_id');?>
                 </div>
-                <label class="col-md-2 mb-3">Filter By Supplier</label>
+                <label class="col-md-2 mb-3">Filter By Finisher</label>
                 <div class="col-md-4 mb-3">
-                    <select id="supplier_id" name="supplier_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productionsupplier->getMultiSelectSuppliers($supplier_ids);?></select>
+                    <select id="finisher_id" name="sfinisher_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productionsfinisher->getMultiSelectSuppliers($finisher_ids);?></select>
                 </div>
                 <label class="col-md-2 mb-3">Filter By FSG Contact</label>
                 <div class="col-md-4 mb-3">
