@@ -302,6 +302,14 @@ $prod_sales_admin = array(
         'view-finishers'    => array(
             'display'   => true,
             'icon'      => $fontastic_icons['finishers']['view-finishers']
+        ),
+        'add-finisher'  => array(
+            'display'       => true,
+            'icon'          => $fontastic_icons['finishers']['add-finisher']
+        ),
+        'edit-finisher'  => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'fsg-contacts'    => array(
