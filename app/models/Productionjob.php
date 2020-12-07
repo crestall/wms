@@ -101,30 +101,55 @@ class Productionjob extends Model{
         return $db->queryData($q);
     }
 
-    public function getJobsForDisplay($completed = false, $cancelled = false)
+    public function getJobsForDisplay($args)
     {
         $db = Database::openConnection();
         $q = $this->getJobQuery();
+        $defaults = array(
+            'completed'	    => false,
+            'cancelled'	    => false,
+            'customer_ids'	=> array(),
+            'supplier_ids'  => array(),
+            'salesrep_ids'  => array(),
+            'status_ids'    => array()
+        );
+        $args = array_merge($defaults, $args);
+        extract($args);
         if($completed)
         {
             $q .= " WHERE pj.status_id = 9";
+            $status_ids = array();
         }
-        else
-        {
-            $q .= " WHERE pj.status_id != 9";
-        }
-        if($cancelled)
+        elseif($cancelled)
         {
             $q .= " AND pj.status_id = 11";
+            $status_ids = array();
         }
-        else
+        if(count($customer_ids))
         {
-            $q .= " AND pj.status_id != 11";
+            $c_ids = implode(',',$customer_ids);
+            $q .= " AND (pj.customer_id IN( $c_ids))";
+        }
+        if(count($supplier_ids))
+        {
+            $s_ids = implode(',',$supplier_ids);
+            $q .= " AND (pj.supplier_id IN( $s_ids))";
+        }
+        if(count($salesrep_ids))
+        {
+            $sr_ids = implode(',',$salesrep_ids);
+            $q .= " AND (pj.salesrep_id IN( $sr_ids))";
+        }
+        if(count($status_ids))
+        {
+            $st_ids = implode(',',$status_ids);
+            $q .= " AND (pj.status_id IN( $st_ids))";
         }
         $q .= "
             ORDER BY
                 js.ranking ASC, pj.created_date DESC, pj.job_id DESC
         ";
+        die($q);
         return $db->queryData($q);
     }
 
