@@ -102,7 +102,7 @@ class JobsController extends Controller
         $completed = (isset($this->request->params['args']['completed']))? true : false;
         $cancelled = (isset($this->request->params['args']['cancelled']))? true : false;
         $customer_ids = isset($this->request->params['args']['customer_ids'])? explode(',',$this->request->params['args']['customer_ids']): array();
-        $supplier_ids = isset($this->request->params['args']['supplier_ids'])? explode(',',$this->request->params['args']['supplier_ids']): array();
+        $finisher_ids = isset($this->request->params['args']['finisher_ids'])? explode(',',$this->request->params['args']['finisher_ids']): array();
         $salesrep_ids = isset($this->request->params['args']['contacts_ids'])? explode(',',$this->request->params['args']['contacts_ids']): array();
         $status_ids = isset($this->request->params['args']['status_ids'])? explode(',',$this->request->params['args']['status_ids']): array();
         if($completed || $cancelled)
@@ -111,7 +111,7 @@ class JobsController extends Controller
             'completed'         =>  $completed,
             'cancelled'         =>  $cancelled,
             'customer_ids'      =>  (array)$customer_ids,
-            'supplier_ids'      =>  (array)$supplier_ids,
+            'finisher_ids'      =>  (array)$finisher_ids,
             'salesrep_ids'      =>  (array)$salesrep_ids,
             'status_ids'        =>  (array)$status_ids,
         ));
@@ -125,7 +125,7 @@ class JobsController extends Controller
             'completed'         =>  $completed,
             'cancelled'         =>  $cancelled,
             'customer_ids'      =>  (array)$customer_ids,
-            'supplier_ids'      =>  (array)$supplier_ids,
+            'finisher_ids'      =>  (array)$finisher_ids,
             'salesrep_ids'      =>  (array)$salesrep_ids,
             'status_ids'        =>  (array)$status_ids,
         ]);
