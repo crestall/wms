@@ -574,7 +574,7 @@
                         });
                         $('button#filter_jobs').click(function(e){
                             var customers = $('select#customer_id').val();
-                            var finishers = $('select#sfinisher_id').val();
+                            var finishers = $('select#finisher_id').val();
                             var salesreps = $('select#salesrep_id').val();
                             var status = $('select#status_id').val();
                             //console.log('customers: '+customers);
