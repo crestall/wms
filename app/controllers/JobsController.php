@@ -107,7 +107,14 @@ class JobsController extends Controller
         $status_ids = isset($this->request->params['args']['status_ids'])? explode(',',$this->request->params['args']['status_ids']): array();
         if($completed || $cancelled)
             $status_ids = array();
-        $jobs = $this->productionjob->getJobsForDisplay($completed, $cancelled);
+        $jobs = $this->productionjob->getJobsForDisplay(array(
+            'completed'         =>  $completed,
+            'cancelled'         =>  $cancelled,
+            'customer_ids'      =>  (array)$customer_ids,
+            'supplier_ids'      =>  (array)$supplier_ids,
+            'salesrep_ids'      =>  (array)$salesrep_ids,
+            'status_ids'        =>  (array)$status_ids,
+        ));
         //render the page
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
