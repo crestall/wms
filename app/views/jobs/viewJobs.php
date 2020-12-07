@@ -21,7 +21,7 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                 </div>
                 <label class="col-md-2 mb-3">Filter By Finisher</label>
                 <div class="col-md-4 mb-3">
-                    <select id="finisher_id" name="sfinisher_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productionsfinisher->getMultiSelectFinishers($finisher_ids);?></select>
+                    <select id="finisher_id" name="finisher_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productionfinisher->getMultiSelectFinishers($finisher_ids);?></select>
                 </div>
                 <label class="col-md-2 mb-3">Filter By FSG Contact</label>
                 <div class="col-md-4 mb-3">
