@@ -109,7 +109,7 @@ class Productionjob extends Model{
             'completed'	    => false,
             'cancelled'	    => false,
             'customer_ids'	=> array(),
-            'supplier_ids'  => array(),
+            'finisher_ids'  => array(),
             'salesrep_ids'  => array(),
             'status_ids'    => array()
         );
@@ -139,10 +139,10 @@ class Productionjob extends Model{
             $c_ids = implode(',',$customer_ids);
             $q .= " AND (pj.customer_id IN( $c_ids))";
         }
-        if(count($supplier_ids))
+        if(count($finisher_ids))
         {
-            $s_ids = implode(',',$supplier_ids);
-            $q .= " AND (pj.supplier_id IN( $s_ids))";
+            $f_ids = implode(',',$finisher_ids);
+            $q .= " AND (pj.finisher_id IN( $f_ids))";
         }
         if(count($salesrep_ids))
         {
