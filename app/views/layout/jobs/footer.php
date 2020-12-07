@@ -607,8 +607,9 @@
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Removing Filters...</h2></div>' });
                             window.location.href = "/jobs/view-jobs";
                         });
-                        $('input.status_override').click(function(e){
-                            $('input.status_override').not(this).prop('checked', false);
+                        var $checks = $('input.status_override');
+                        $checks.click(function() {
+                            $checks.not(this).prop("checked", false);
                         });
                     }//init
                 },
