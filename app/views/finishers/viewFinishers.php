@@ -5,10 +5,12 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-danger" id="deactivate"><i class="fal fa-times-circle"></i> Delete Selected Finishers</button></div>
-        </div>
         <?php if(count($finishers)):?>
+            <?php if($role == "production admin" || $role == "production sales admin"):?>
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-danger" id="deactivate"><i class="fal fa-times-circle"></i> Delete Selected Finishers</button></div>
+                </div>
+            <?php endif;?>
             <div class="row">
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
@@ -26,7 +28,7 @@
                                 <th>Finisher Name</th>
                                 <th>Contact Details</th>
                                 <th>Address Details</th>
-                                <?php if($role == "production admin"):?>
+                                <?php if($role == "production admin" || $role == "production sales admin"):?>
                                     <th nowrap>
                                         Select
                                         <div class="checkbox checkbox-default">
@@ -58,7 +60,7 @@
                                 <td data-label="Finisher Name"><?php echo $s['name'];?></td>
                                 <td data-label="Contact Details"><?php echo $contact_string;?></td>
                                 <td data-label="Address Details" class="text-right"><?php echo $address_string;?></td>
-                                <?php if($role == "production admin"):?>
+                                <?php if($role == "production admin" || $role == "production sales admin"):?>
                                     <td data-label="Select" class="chkbox">
                                         <div class="checkbox checkbox-default">
                                             <input type="checkbox" class="select styled" data-finisherid='<?php echo $s['id'];?>' name="select_<?php echo $s['id'];?>" id="select_<?php echo $s['id'];?>" />

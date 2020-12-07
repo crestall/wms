@@ -70,15 +70,20 @@ class CustomersController extends Controller
         //$role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         $resource = "customers";
 
-        //only for admin
+        //only for production admin
         Permission::allow('production admin', $resource, "*");
-        //production sales admins
-        Permission::allow('production sales admin', $resource, array(
+        //view only permissions
+        Permission::allow('production', $resource,[
+            'index',
+            'viewCustomers'
+        ]);
+        //view edit and add permissions
+        Permission::allow(['production sales admin', 'production sales'], $resource, array(
             "index",
             "viewCustomers",
-            "editCustomer"
+            "editCustomer",
+            "addCustomer",
         ));
-
         return Permission::check($role, $resource, $action);
     }
 }

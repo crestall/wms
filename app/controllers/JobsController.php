@@ -98,17 +98,36 @@ class JobsController extends Controller
 
     public function viewJobs()
     {
+        //echo "<pre>",print_r($this->request->params),"</pre>";die();
         $completed = (isset($this->request->params['args']['completed']))? true : false;
         $cancelled = (isset($this->request->params['args']['cancelled']))? true : false;
-        $jobs = $this->productionjob->getJobsForDisplay($completed, $cancelled);
+        $customer_ids = isset($this->request->params['args']['customer_ids'])? explode(',',$this->request->params['args']['customer_ids']): array();
+        $finisher_ids = isset($this->request->params['args']['finisher_ids'])? explode(',',$this->request->params['args']['finisher_ids']): array();
+        $salesrep_ids = isset($this->request->params['args']['contacts_ids'])? explode(',',$this->request->params['args']['contacts_ids']): array();
+        $status_ids = isset($this->request->params['args']['status_ids'])? explode(',',$this->request->params['args']['status_ids']): array();
+        if($completed || $cancelled)
+            $status_ids = array();
+        $jobs = $this->productionjob->getJobsForDisplay(array(
+            'completed'         =>  $completed,
+            'cancelled'         =>  $cancelled,
+            'customer_ids'      =>  (array)$customer_ids,
+            'finisher_ids'      =>  (array)$finisher_ids,
+            'salesrep_ids'      =>  (array)$salesrep_ids,
+            'status_ids'        =>  (array)$status_ids,
+        ));
         //render the page
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
-            'page_title'    =>  "View Production Jobs",
-            'pht'           =>  ": Production Jobs",
-            'jobs'          =>  $jobs,
-            'completed'     =>  $completed
+            'page_title'        =>  "View Production Jobs",
+            'pht'               =>  ": Production Jobs",
+            'jobs'              =>  $jobs,
+            'completed'         =>  $completed,
+            'cancelled'         =>  $cancelled,
+            'customer_ids'      =>  (array)$customer_ids,
+            'finisher_ids'      =>  (array)$finisher_ids,
+            'salesrep_ids'      =>  (array)$salesrep_ids,
+            'status_ids'        =>  (array)$status_ids,
         ]);
     }
 

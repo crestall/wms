@@ -82,7 +82,12 @@ class FinishersController extends Controller
 
         //only for admin
         Permission::allow('production admin', $resource, "*");
-        //production sales admins
+        //view only permissions
+        Permission::allow(['production', 'production sales'], $resource,[
+            'index',
+            'viewFinishers'
+        ]);
+        //view, edit and add permissions
         Permission::allow('production sales admin', $resource, array(
             "index",
             "viewFinishers",

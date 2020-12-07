@@ -30,6 +30,26 @@ class Permission {
     public static $perms = [];
 
     /**
+     * allowAllRoles: allow all roles access to $actions on $resource,
+     *
+     * @param  string  $resource
+     * @param  mixed   $actions
+     */
+    public static function allowAllRoles($resource, $actions = "*")
+    {
+        $db = Database::openConnection();
+        $roles = $db->queryData("SELECT `name` FROM user_roles WHERE active = 1");
+        $actions = array_map("strtolower", (array)$actions);
+        $roles = (array)$role;
+        foreach($roles as $r)
+        {
+            $role = $r['name'];
+            self::$perms[] = ['role' => $role, 'resource' => $resource, 'actions' => $actions];
+        }
+
+    }
+
+    /**
      * check if the $role has access to $action on $resource
      *
      * @param  string  $role

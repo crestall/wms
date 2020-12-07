@@ -571,9 +571,47 @@
                                         });
                                     }
                                 });
-                        })
-                        //end add to driver runsheet
-                    }
+                        });
+                        $('button#filter_jobs').click(function(e){
+                            var customers = $('select#customer_id').val();
+                            var finishers = $('select#finisher_id').val();
+                            var salesreps = $('select#salesrep_id').val();
+                            var status = $('select#status_id').val();
+                            //console.log('customers: '+customers);
+                            var url = "/jobs/view-jobs";
+                            if(!(!customers || 0 === customers.length))
+                            {
+                                url += "/customer_ids="+customers;
+                            }
+                            if(!(!finishers || 0 === finishers.length))
+                            {
+                                url += "/finisher_ids="+finishers;
+                            }
+                            if(!(!salesreps || 0 === salesreps.length))
+                            {
+                                url += "/contacts_ids="+salesreps;
+                            }
+                            if(!(!status || 0 === status.length))
+                            {
+                                url += "/status_ids="+status;
+                            }
+                            if($('input#cancelled').prop('checked'))
+                                url +="/cancelled=true";
+                            if($('input#completed').prop('checked'))
+                                url +="/completed=true";
+                            //console.log("URL: "+url);
+                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Applying Filters...</h2></div>' });
+                            window.location.href = url;
+                        });
+                        $('button#unfilter_jobs').click(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Removing Filters...</h2></div>' });
+                            window.location.href = "/jobs/view-jobs";
+                        });
+                        var $checks = $('input.status_override');
+                        $checks.click(function() {
+                            $checks.not(this).prop("checked", false);
+                        });
+                    }//init
                 },
                 'update-job':{
                     init: function(){

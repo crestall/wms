@@ -15,19 +15,8 @@
     */
 include(APP."/config/icons.php");
 $padmin = array(
-    'jobs'  => array(
-
-    ),
+    'jobs'  => array(), //merges with production later
     'customers' => array(
-        'customers-index'   => true,
-        'default-icon'      => array(
-            'display'   => false,
-            'icon'      => $fontastic_icons['customers']['default']
-        ),
-        'view-customers'    => array(
-            'display'   => true,
-            'icon'      => $fontastic_icons['customers']['view-customers']
-        ),
         'add-customer'  => array(
             'display'       => true,
             'icon'          => $fontastic_icons['customers']['add-customer']
@@ -149,7 +138,6 @@ $padmin = array(
         )
     )
 );
-
 $prod = array(
     'jobs'  => array(
         'jobs-index'    => true,
@@ -177,7 +165,80 @@ $prod = array(
             'display'   => false,
             'icon'      => ''
         )*/
+    ),
+    'customers' => array(
+        'customers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['customers']['default']
+        ),
+        'view-customers'    => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['customers']['view-customers']
+        )
+    ),
+    'finishers' => array(
+        'finishers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['finishers']['default']
+        ),
+        'view-finishers'    => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['finishers']['view-finishers']
+        )
+    ),
+    'fsg-contacts'    => array(
+        'fsg-contacts-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['fsg-contacts']['default']
+        ),
+        'view-contacts' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['fsg-contacts']['view-contacts']
+        )
     )
+);
+$prod_sales_admin = array(
+    'jobs'  => array(
+        'jobs-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['jobs']['default']
+        ),
+        'view-jobs' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['jobs']['view-jobs']
+        ),/*
+        'job-search' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['jobs']['job-search']
+        ),
+        'job-search-results'    => array(
+            'display'   => false,
+            'icon'      => ''
+        )*/
+    ),
+    'customers' => array(
+        'customers-index'   => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['customers']['default']
+        ),
+        'view-customers'    => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['customers']['view-customers']
+        ),
+        'add-customer'  => array(
+            'display'       => true,
+            'icon'          => $fontastic_icons['customers']['add-customer']
+        ),
+        'edit-customer'  => array(
+            'display'   => false,
+            'icon'      => ''
+        )
+    ),
 );
 $admin = array(
    'orders' => array(
@@ -251,7 +312,17 @@ $admin = array(
             'icon'      => '<i class="fal fa-truck fa-3x"></i>'
         )
     ),
-    'jobs'      => array(),
+    'jobs'      => array(
+        'jobs-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['jobs']['default']
+        ),
+        'view-jobs' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['jobs']['view-jobs']
+        )
+    ),
     'runsheets' => array(),
     'clients'	=> array(
         'clients-index' => true,
@@ -704,6 +775,7 @@ $client = array(
 
 //merge and tidy page arrays
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
+$padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 
 $admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
@@ -711,7 +783,7 @@ $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 $prod_admin = array_merge($prod, $padmin);
 //return the pages
 return array(
-    "PRODUCTION_SALES_ADMIN_PAGES"    => array(),
+    "PRODUCTION_SALES_ADMIN_PAGES"    => $prod_sales_admin,
     "PRODUCTION_SALES_PAGES"          => array(),
     "PRODUCTION_ADMIN_PAGES"          => $prod_admin,
     "PRODUCTION_PAGES"                => $prod,
