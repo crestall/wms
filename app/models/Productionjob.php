@@ -122,8 +122,17 @@ class Productionjob extends Model{
         }
         elseif($cancelled)
         {
-            $q .= " AND pj.status_id = 11";
+            $q .= " WHERE pj.status_id = 11";
             $status_ids = array();
+        }
+        elseif(count($status_ids))
+        {
+            $st_ids = implode(',',$status_ids);
+            $q .= " WHERE (pj.status_id IN( $st_ids))";
+        }
+        else
+        {
+            $q .= " WHERE (pj.status_id != 9 AND pj.status_id != 11)";
         }
         if(count($customer_ids))
         {
@@ -140,11 +149,7 @@ class Productionjob extends Model{
             $sr_ids = implode(',',$salesrep_ids);
             $q .= " AND (pj.salesrep_id IN( $sr_ids))";
         }
-        if(count($status_ids))
-        {
-            $st_ids = implode(',',$status_ids);
-            $q .= " AND (pj.status_id IN( $st_ids))";
-        }
+
         $q .= "
             ORDER BY
                 js.ranking ASC, pj.created_date DESC, pj.job_id DESC
