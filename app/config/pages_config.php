@@ -849,7 +849,7 @@ $prod_admin = array_merge($prod, $padmin);
 //return the pages
 return array(
     "PRODUCTION_SALES_ADMIN_PAGES"    => $prod_sales_admin,
-    "PRODUCTION_SALES_PAGES"          => array(),
+    "PRODUCTION_SALES_PAGES"          => $prod_sales,
     "PRODUCTION_ADMIN_PAGES"          => $prod_admin,
     "PRODUCTION_PAGES"                => $prod,
     "ADMIN_PAGES"                     => $admin ,
