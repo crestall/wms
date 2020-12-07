@@ -11,6 +11,9 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
         <div class="border border-secondary p-3 m-3 rounded bg-light">
             <h3>Filters</h3>
             <div class="form-group row">
+                <span class="inst">Selected Completed or Cancelled Jobs will override the status selection</span>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-2 mb-3">Filter By Customer</label>
                 <div class="col-md-4 mb-3">
                     <select id="customer_id" name="customer_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->productioncustomer->getMultiSelectCustomers($customer_ids);?></select>
