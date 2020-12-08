@@ -188,6 +188,8 @@ class FreedomMYOB extends MYOB
                 {
                     foreach($o['ItemsPurchased'] as $item)
                     {
+                        if(strtolower($item['ProductCode']) == 'misc')
+                            continue;
                         $product = $this->controller->item->getItemBySku($item['ProductCode']);
                         if(!$product)
                         {
