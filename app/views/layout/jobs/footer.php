@@ -577,8 +577,15 @@
                             var finishers = $('select#finisher_id').val();
                             var salesreps = $('select#salesrep_id').val();
                             var status = $('select#status_id').val();
-                            //console.log('customers: '+customers);
                             var url = "/jobs/view-jobs";
+                            if($('input#cancelled').val() == 1)
+                                url +="/cancelled=1";
+                            else if($('input#completed').val() == 1)
+                                url +="/completed=1";
+                            else if(!(!status || 0 === status.length))
+                            {
+                                url += "/status_ids="+status;
+                            }
                             if(!(!customers || 0 === customers.length))
                             {
                                 url += "/customer_ids="+customers;
@@ -591,21 +598,18 @@
                             {
                                 url += "/contacts_ids="+salesreps;
                             }
-                            if(!(!status || 0 === status.length))
-                            {
-                                url += "/status_ids="+status;
-                            }
-                            if($('input#cancelled').val() == 1)
-                                url +="/cancelled=1";
-                            if($('input#completed').val() == 1)
-                                url +="/completed=1";
                             //console.log("URL: "+url);
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Applying Filters...</h2></div>' });
                             window.location.href = url;
                         });
                         $('button#unfilter_jobs').click(function(e){
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Removing Filters...</h2></div>' });
-                            window.location.href = "/jobs/view-jobs";
+                            var url =  "/jobs/view-jobs";
+                            if($('input#cancelled').val() == 1)
+                                url +="/cancelled=1";
+                            else if($('input#completed').val() == 1)
+                                url +="/completed=1";
+                            window.location.href = url;
                         });
                         var $checks = $('input.status_override');
                         $checks.click(function() {
