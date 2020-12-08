@@ -39,7 +39,8 @@
                                     orderable: false,
                                     targets: "no-sort"
                                 }
-                            ]
+                            ],
+                            "dom" : '<<"row"<"col-lg-3"><"col-lg-3"l>><"row"i>tp>',
                         });
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
