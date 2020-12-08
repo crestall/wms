@@ -30,10 +30,12 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                 <div class="col-md-4 mb-3">
                     <select id="salesrep_id" name="salesrep_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->salesrep->getMultiSelectSalesReps($salesrep_ids);?></select>
                 </div>
-                <label class="col-md-2 mb-3">Filter By Status</label>
-                <div class="col-md-4 mb-3">
-                    <select id="status_id" name="status_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->jobstatus->getMultiSelectJobStatus($status_ids, 1, true, [9,11]);?></select>
-                </div>
+                <?php if(!($completed == 1 || $cancelled == 1)):?>
+                    <label class="col-md-2 mb-3">Filter By Status</label>
+                    <div class="col-md-4 mb-3">
+                        <select id="status_id" name="status_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->jobstatus->getMultiSelectJobStatus($status_ids, 1, true, [9,11]);?></select>
+                    </div>
+                <?php endif;?>
                 <div class="col-md-2 offset-md-8 mb-3">
                     <button class="btn btn-outline-danger" id="unfilter_jobs">Remove Filters</button>
                 </div>
