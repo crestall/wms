@@ -141,6 +141,21 @@ class Permission {
         }
     }
 
+    /** ********************************************************* **/
+    /** **************    Specific Permissions     ************** **/
+    /** ********************************************************* **/
+
+    public static function canDoRunsheets($user_role)
+    {
+        return ($user_role == "production" || $user_role == "production_admin" || $user_role == "admin" || $user_role == "super_admin");
+    }
+
+    public static function canChangeStatus($user_role)
+    {
+        //return ($user_role == "production" || $user_role == "production_admin" || $user_role == "admin" || $user_role == "super_admin");
+        return true;
+    }
+
     /** *********************************************** **/
     /** **************    Conditions     ************** **/
     /** *********************************************** **/

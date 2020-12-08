@@ -1,3 +1,8 @@
+<?php
+$can_do_runsheets  = false;
+$can_change_status = false;
+$need_checkbox = ($can_do_runsheets || $can_change_status);
+?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
