@@ -1,3 +1,8 @@
+<?php
+$can_do_runsheets  = Permission::canDoRunsheets($user_role);
+$can_change_status = Permission::canChangeStatus($user_role);
+$need_checkbox = ($can_do_runsheets || $can_change_status);
+?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
