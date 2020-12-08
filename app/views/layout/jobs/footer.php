@@ -46,6 +46,9 @@
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
                             $('.selectpicker').selectpicker();
                         });
+                        $('#live-filter-text').on( 'keyup', function () {
+                            table.search( this.value ).draw();
+                        } );
                     },
                     selectAll: function(){
                         $('#select_all').click(function(e){
