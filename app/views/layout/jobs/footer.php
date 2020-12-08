@@ -595,10 +595,10 @@
                             {
                                 url += "/status_ids="+status;
                             }
-                            if($('input#cancelled').prop('checked'))
-                                url +="/cancelled=true";
-                            if($('input#completed').prop('checked'))
-                                url +="/completed=true";
+                            if($('input#cancelled').val() == 1)
+                                url +="/cancelled=1";
+                            if($('input#completed').val() == 1)
+                                url +="/completed=1";
                             //console.log("URL: "+url);
                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Applying Filters...</h2></div>' });
                             window.location.href = url;
