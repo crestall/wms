@@ -6,8 +6,11 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
 ?>
 <div id="page-wrapper">
     <input type="hidden" id="complete" value="<?php echo $completed;?>" >
+    <input type="hidden" id="cancelled" value="<?php echo $cancelled;?>" >
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/completed=1">View Only Completed Jobs</a></div>
+        <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View Only Cancelled Jobs</a></div>
         <div class="border border-secondary p-3 m-3 rounded bg-light">
             <h3>Filters</h3>
             <div class="form-group row">
