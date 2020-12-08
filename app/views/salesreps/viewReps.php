@@ -1,5 +1,5 @@
 <?php
-
+$can_edit_contact  = Permission::canEditContact($user_role);
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -42,7 +42,7 @@
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Comments</th>
-                            <?php if($role == "production admin"):?>
+                            <?php if($can_edit_contact):?>
                                 <th></th>
                             <?php endif;?>
                         </tr>
@@ -54,7 +54,7 @@
                                 <td data-label="Phone" class="number"><?php echo $rep['phone'];?></td>
                                 <td data-label="Email"><a href="mailto:<?php echo $rep['email'];?>"><?php echo $rep['email'];?></a></td>
                                 <td data-label="Comments"><?php echo nl2br($rep['comments']);?></td>
-                                <?php if($role == "production admin"):?>
+                                <?php if($can_edit_contact):?>
                                     <td><a href="/fsg-contacts/edit-contact/contact=<?php echo $rep['id'];?>">Edit Details</a></td>
                                 <?php endif;?>
                             </tr>

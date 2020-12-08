@@ -150,6 +150,11 @@ class Permission {
         return ($user_role == "production" || $user_role == "production_admin" || $user_role == "admin" || $user_role == "super_admin");
     }
 
+    public static function canEditContact($user_role)
+    {
+        return ($user_role == "production_admin" || $user_role == "production_sales_admin");
+    }
+
     public static function canChangeStatus($user_role)
     {
         //return ($user_role == "production" || $user_role == "production_admin" || $user_role == "admin" || $user_role == "super_admin");
