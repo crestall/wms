@@ -270,8 +270,8 @@ class Productionjob extends Model{
         $db = Database::openConnection();
         $new_vals = array(
             'status_id'             => $status_id,
-            'status_update_time'    => time(),
-            'status_update_by'      => Session::getUserId()
+            'status_change_time'    => time(),
+            'status_change_by'      => Session::getUserId()
         );
         $db->updateDatabaseFields($this->table, $new_vals, $job_id);
         return true;
