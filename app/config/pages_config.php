@@ -156,7 +156,7 @@ $prod = array(
         'view-jobs' => array(
             'display'   => true,
             'icon'      => $fontastic_icons['jobs']['view-jobs']
-        ),/*
+        ),/**/
         'job-search' => array(
             'display'   => true,
             'icon'      => $fontastic_icons['jobs']['job-search']
@@ -164,7 +164,7 @@ $prod = array(
         'job-search-results'    => array(
             'display'   => false,
             'icon'      => ''
-        )*/
+        )
     ),
     'customers' => array(
         'customers-index'   => true,
@@ -210,6 +210,14 @@ $prod_sales = array(
         'view-jobs' => array(
             'display'   => true,
             'icon'      => $fontastic_icons['jobs']['view-jobs']
+        ),
+        'job-search' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['jobs']['job-search']
+        ),
+        'job-search-results'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'customers' => array(
@@ -264,7 +272,7 @@ $prod_sales_admin = array(
         'view-jobs' => array(
             'display'   => true,
             'icon'      => $fontastic_icons['jobs']['view-jobs']
-        ),/*
+        ),/**/
         'job-search' => array(
             'display'   => true,
             'icon'      => $fontastic_icons['jobs']['job-search']
@@ -272,7 +280,7 @@ $prod_sales_admin = array(
         'job-search-results'    => array(
             'display'   => false,
             'icon'      => ''
-        )*/
+        )
     ),
     'customers' => array(
         'customers-index'   => true,
