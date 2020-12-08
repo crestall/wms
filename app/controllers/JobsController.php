@@ -124,7 +124,7 @@ class JobsController extends Controller
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
-            'page_title'        =>  "View Production Jobs",
+            'page_title'        =>  $head,
             'pht'               =>  ": Production Jobs",
             'jobs'              =>  $jobs,
             'completed'         =>  $completed,
