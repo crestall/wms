@@ -40,7 +40,7 @@
                                     targets: "no-sort"
                                 }
                             ],
-                            "dom" : '<<"row"<"col-lg-3"><"col-lg-3"l>><"row"i>tp>',
+                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">tp>',
                         });
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
