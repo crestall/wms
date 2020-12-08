@@ -1766,7 +1766,7 @@ class FormController extends Controller {
 
     public function procAddProductionFinisher()
     {
-        //echo "<pre>",print_r($_POST),"</pre>"; die();
+        echo "<pre>",print_r($_POST),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
