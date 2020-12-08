@@ -42,7 +42,7 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                         <select id="status_id" name="status_ids[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Filter by any of the following..."><?php echo $this->controller->jobstatus->getMultiSelectJobStatus($status_ids, 1, true, [9,11]);?></select>
                     </div>
                 <?php endif;?>
-                <label class="col-md-2 mb-3">Live Filter text</label>
+                <label class="col-md-2 mb-3">Live Filter Text</label>
                 <div class="col-md-4 mb-3">
                     <input type="text" class="form-control" id="live-filter-text" >
                 </div>
