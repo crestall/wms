@@ -1,6 +1,6 @@
 <?php
-$can_do_runsheets  = Permission::canDoRunsheets($user_role);
-$can_change_status = Permission::canChangeStatus($user_role);
+$can_do_runsheets  = false;
+$can_change_status = false;
 $need_checkbox = ($can_do_runsheets || $can_change_status);
 ?>
 <div id="page-wrapper">
