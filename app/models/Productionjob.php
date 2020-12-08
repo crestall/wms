@@ -268,7 +268,12 @@ class Productionjob extends Model{
     public function updateJobStatus($job_id, $status_id)
     {
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'status_id', $status_id, $job_id);
+        $new_vals = array(
+            'status_id'             => $status_id,
+            'status_change_time'    => time(),
+            'status_change_by'      => Session::getUserId()
+        );
+        $db->updateDatabaseFields($this->table, $new_vals, $job_id);
         return true;
     }
 

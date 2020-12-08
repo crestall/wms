@@ -4,6 +4,7 @@
 <div class="card-deck homepagedeck">
     <?php
     include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/quick_links/view-jobs.php");
+    include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/quick_links/view-customers.php");
     include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/quick_links/view-finishers.php");
     ?>
 </div>

@@ -16,14 +16,12 @@ class UserController extends Controller{
     public function addUser()
     {
         $client_role_id = $this->user->getClientRoleId();
-        $solar_role_id = $this->user->getSolarUserRoleId();
         //render the page
         Config::setJsConfig('curPage', "add-user");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/users/", Config::get('VIEWS_PATH') . 'user/addUser.php',
         [
             'page_title'        =>  'Add New User',
-            'client_role_id'    =>  $client_role_id,
-            'solar_role_id'     =>  $solar_role_id
+            'client_role_id'    =>  $client_role_id
         ]);
     }
 
