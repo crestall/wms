@@ -15,7 +15,7 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
             <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View All Incompleted Jobs</a></div>
         </div>
         <div class="border border-secondary p-3 m-3 rounded bg-light">
-            <h3>Filters</h3>
+            <h3>Filter These Jobs</h3>
             <div class="form-group row">
                 <label class="col-md-2 mb-3">Filter By Customer</label>
                 <div class="col-md-4 mb-3">
