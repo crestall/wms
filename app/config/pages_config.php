@@ -329,6 +329,14 @@ $prod_sales_admin = array(
         'view-contacts' => array(
             'display'   => true,
             'icon'      => $fontastic_icons['fsg-contacts']['view-contacts']
+        ),
+        'add-contact'   => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['fsg-contacts']['add-contact']
+        ),
+        'edit-contact'  => array(
+            'display'   => false,
+            'icon'      => ''
         )
     )
 );
