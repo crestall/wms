@@ -180,6 +180,8 @@ class JobsController extends Controller
         //production sales users
         Permission::allow(['production sales admin', 'production sales'], $resource, array(
             'index',
+            'jobSearch',
+            'jobSearchResults',
             'viewJobs'
         ));
 
