@@ -110,11 +110,21 @@ class Productionfinisher extends Model{
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['website'])) $vals['website'] = $data['website'];
-        $id = $db->insertQuery($this->table, $vals);
+        //$id = $db->insertQuery($this->table, $vals);
         if(isset($data['categories']) && is_array($data['categories']))
         {
             $fcat = new Finishercategories();
             $fcat->addFinisherCategories($data['categories'], $id);
+        }
+        if(isset($data['contacts']) && is_array($data['contacts']))
+        {
+            $id = 126;
+            foreach($data['contacts'] as $contact)
+            {
+                $contact['finisher_id'] = $id;
+                $pcontact = new Productioncontact();
+                $pcontact->addContact($contact);
+            }
         }
         return $id;
     }

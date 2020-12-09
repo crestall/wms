@@ -1,7 +1,7 @@
 <?php
 
 /**
-    * Prodution Finisher Class
+    * Prodution Contact Class
     *
 
     * @author     Mark Solly <mark.solly@fsg.com.au>
@@ -13,7 +13,7 @@
 class Productioncontact extends Model{
     public $table = "production_contacts";
 
-    public function addFinisherContact($data, $id)
+    public function addContact($data)
     {
         echo "productioncontact $id <pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
