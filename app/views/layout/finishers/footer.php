@@ -37,18 +37,11 @@
                             }
                             $.post('/ajaxfunctions/addFinisherContact', data, function(d){
                                 $('div#contacts_holder').append(d.html);
-                                actions['add-finisher']['update-validation'];
                             });
                         });
                         $("a#remove-all-contacts").click(function(e){
                             e.preventDefault();
                             $('div#contacts_holder div.acontact').not(':first').remove();
-                        });
-                    },
-                    'update-validation': function(){
-                        $('.contact-name').rules( 'remove' );
-                        $.validator.addClassRules('contact-name', {
-                            atLeastOneContact: true
                         });
                     }
                 },
