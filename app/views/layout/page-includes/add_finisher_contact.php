@@ -18,7 +18,7 @@ $details['phone'] = isset($d['phone'])? $d['phone']:"";
         </div>
         <label class="col-md-2 mb-3">Email</label>
         <div class="col-md-4 mb-3">
-            <input type="text" class="form-control" name="contacts[<?php echo $i;?>][email]" value="<?php echo $details['email'];?>" />
+            <input type="text" class="form-control email" name="contacts[<?php echo $i;?>][email]" value="<?php echo $details['email'];?>" />
             <?php echo Form::displayError('contactemail_'.$i);?>
         </div>
         <label class="col-md-2 mb-3">Phone</label>
