@@ -18,6 +18,7 @@
 
 class Productionfinisher extends Model{
     public $table = "production_finishers";
+    public $contacts_table = = "production_contacts";
 
     public function deactivateFinisher($finisher_id)
     {
@@ -84,7 +85,10 @@ class Productionfinisher extends Model{
     public function getFinisherById($id = 0)
     {
         $db = Database::openConnection();
-        return $db->queryById($this->table, $id);
+        //return $db->queryById($this->table, $id);
+        $q = $this->generateQuery();
+        $q .= "WHERE pf.id = $id";
+        die($q);
     }
 
     public function getFinisherIdByName($name)
@@ -208,6 +212,21 @@ class Productionfinisher extends Model{
             array_push($return_array,$row_array);
         }
         return $return_array;
+    }
+
+    private function generateQuery()
+    {
+        return "
+            SELECT
+                pf.*,
+                GROUP_CONCAT(DISTINCT pc.name SEPARATOR ', ') AS contact_name,
+                GROUP_CONCAT(DISTINCT pc.email SEPARATOR ', ') AS contact_email,
+                GROUP_CONCAT(DISTINCT pc.phone SEPARATOR ', ') AS contact_phone,
+                GROUP_CONCAT(DISTINCT pc.role SEPARATOR ', ') AS contact_role
+            FROM
+                {$this->table} pf LEFT JOIN
+                {$this->contacts_table} pc ON pf.id = pc.finisher_id
+        ";
     }
 }
 ?>
