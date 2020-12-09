@@ -5,7 +5,7 @@ $i = (isset($i))? $i : 0;
     <div class="form-group row">
         <label class="col-md-2 mb-3">Name</label>
         <div class="col-md-4 mb-3">
-            <input type="text" class="form-control" name="contact[<?php echo $i;?>][name]" value="" />
+            <input type="text" class="form-control contact-name" name="contact[<?php echo $i;?>][name]" value="" />
         </div>
         <label class="col-md-2 mb-3">Role</label>
         <div class="col-md-4 mb-3">
