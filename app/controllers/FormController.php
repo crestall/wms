@@ -1816,8 +1816,8 @@ class FormController extends Controller {
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
-            //$id = $this->productionfinisher->addFinisher($post_data);
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $id = $this->productionfinisher->addFinisher($post_data);
             //Session::set('feedback', "That Finisher has been added to the system.<br/>The details can be edited <a href='/finishers/edit-finisher/finisher=".$id."'>HERE</a>");
         }
         return $this->redirector->to(PUBLIC_ROOT."finishers/add-finisher");
