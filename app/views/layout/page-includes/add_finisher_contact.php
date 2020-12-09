@@ -1,7 +1,7 @@
 <?php
 $i = (isset($i))? $i : 0;
 $details['name'] = isset($d['name'])? $d['name']:"";
-$details['role'] = isset($d['role'])? $d['$role']:"";
+$details['role'] = isset($d['role'])? $d['role']:"";
 $details['email'] = isset($d['email'])? $d['email']:"";
 $details['phone'] = isset($d['phone'])? $d['phone']:"";
 ?>
