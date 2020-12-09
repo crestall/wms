@@ -1779,6 +1779,7 @@ class FormController extends Controller {
             {
                 foreach($value as $key => $avalue)
                 {
+                    ${$field[$key]} = $avalue;
                     $post_data[$field][$key] = $avalue;
                 }
             }
