@@ -1803,12 +1803,12 @@ class FormController extends Controller {
                 }
             }
         }
-        /*
+        /*        */
         if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
         {
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         }
-        */
+
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             //echo "ERRORS<pre>",print_r(Form::getErrorArray()),"</pre>"; die();
