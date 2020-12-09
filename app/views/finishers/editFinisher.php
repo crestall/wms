@@ -16,7 +16,7 @@ $cat_ids    = empty(Form::value('categories'))? $cat_ids                  : Form
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <?php //var_dump($categories);?>
+        <?php echo "<pre>",print_r($finisher),"</pre>";?>
         <form id="edit_production_finisher" method="post" action="/form/procEditProductionFinisher">
             <div class="form-group row">
                 <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
