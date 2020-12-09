@@ -1766,7 +1766,7 @@ class FormController extends Controller {
 
     public function procAddProductionFinisher()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1784,13 +1784,13 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>"; die();
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
         if(!$this->dataSubbed($name))
         {
             Form::setError('name', 'The Finishers name is required');
         }
         $contact_error = true;
-        foreach($contact as $ind => $cd)
+        foreach($post_data['contact'] as $ind => $cd)
         {
             if(!$this->dataSubbed($cd['name']))
             {
