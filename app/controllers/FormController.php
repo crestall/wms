@@ -1788,10 +1788,15 @@ class FormController extends Controller {
         {
             Form::setError('name', 'The Finishers name is required');
         }
-        if(!$this->dataSubbed($contact))
+        $contact_error = true;
+        foreach($contact as $ind => $cd)
         {
-            Form::setError('contact', 'A contact name is required');
+            if(!$this->dataSubbed($cd['name']))
+            {
+                Form::setError('contactname_'.$ind, 'A contact name is required');
+            }
         }
+        /*
         if($this->dataSubbed($email))
         {
             if(!$this->emailValid($email))
@@ -1803,16 +1808,18 @@ class FormController extends Controller {
         {
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         }
+        */
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
+            echo "ERRORS<pre>",Form::getErrorArray(),"</pre>"; die();
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
-            $id = $this->productionfinisher->addFinisher($post_data);
-            Session::set('feedback', "That Finisher has been added to the system.<br/>The details can be edited <a href='/finishers/edit-finisher/finisher=".$id."'>HERE</a>");
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //$id = $this->productionfinisher->addFinisher($post_data);
+            //Session::set('feedback', "That Finisher has been added to the system.<br/>The details can be edited <a href='/finishers/edit-finisher/finisher=".$id."'>HERE</a>");
         }
         return $this->redirector->to(PUBLIC_ROOT."finishers/add-finisher");
     }
