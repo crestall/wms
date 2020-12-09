@@ -15,7 +15,7 @@ class Productioncontact extends Model{
 
     public function addContact($data)
     {
-        echo "productioncontact <pre>",print_r($data),"</pre>";die();
+        //echo "productioncontact <pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $id = $db->insertQuery($this->table, $data);
         return $id;
