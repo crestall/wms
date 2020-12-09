@@ -18,7 +18,7 @@
 
 class Productionfinisher extends Model{
     public $table = "production_finishers";
-    public $contacts_table = = "production_contacts";
+    public $contacts_table = "production_contacts";
 
     public function deactivateFinisher($finisher_id)
     {
