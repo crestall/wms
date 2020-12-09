@@ -72,6 +72,13 @@ $(document).ready(function() {
         return matches.length == 1;
     }, "Duplicate input detected.");
 
+    $.validator.addMethod('atLeastOneContact', function(value, element, params) {
+        var contacts = $('input.contact-name').filter(function() {
+            return $(this).val() != '';
+        });
+        return contacts.length > 0;
+    }, 'Please select at least one seat');
+
     //$.validator.addMethod("uniqueUserRole", $.validator.methods.remote, "User Role names need to be unique");
 
 	////////////////////////////////////////////////////////////
