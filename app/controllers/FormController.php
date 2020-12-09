@@ -1790,7 +1790,7 @@ class FormController extends Controller {
             Form::setError('name', 'The Finishers name is required');
         }
         $contact_error = true;
-        foreach($post_data['contact'] as $ind => $cd)
+        foreach($post_data['contacts'] as $ind => $cd)
         {
             if(!$this->dataSubbed($cd['name']))
             {
