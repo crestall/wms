@@ -1812,7 +1812,7 @@ class FormController extends Controller {
         */
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
-            echo "ERRORS<pre>",Form::getErrorArray(),"</pre>"; die();
+            echo "ERRORS<pre>",print_r(Form::getErrorArray()),"</pre>"; die();
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
