@@ -219,6 +219,7 @@ class Productionfinisher extends Model{
         return "
             SELECT
                 pf.*,
+                GROUP_CONCAT(DISTINCT pc.id SEPARATOR ', ') AS contact_id,
                 GROUP_CONCAT(DISTINCT pc.name SEPARATOR ', ') AS contact_name,
                 GROUP_CONCAT(DISTINCT pc.email SEPARATOR ', ') AS contact_email,
                 GROUP_CONCAT(DISTINCT pc.phone SEPARATOR ', ') AS contact_phone,
