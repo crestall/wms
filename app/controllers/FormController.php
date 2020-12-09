@@ -1789,22 +1789,21 @@ class FormController extends Controller {
         {
             Form::setError('name', 'The Finishers name is required');
         }
-        $contact_error = true;
         foreach($post_data['contacts'] as $ind => $cd)
         {
             if(!$this->dataSubbed($cd['name']))
             {
                 Form::setError('contactname_'.$ind, 'A contact name is required');
             }
-        }
-        /*
-        if($this->dataSubbed($email))
-        {
-            if(!$this->emailValid($email))
+            if($this->dataSubbed($cd['email']))
             {
-                Form::setError('email', 'The email is not valid');
+                if(!$this->emailValid($cd['email']))
+                {
+                    Form::setError('contactemail_'.$ind, 'The email is not valid');
+                }
             }
         }
+        /*
         if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
         {
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
