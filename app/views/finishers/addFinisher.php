@@ -50,8 +50,15 @@ $categories = (is_array(Form::value('categories')))? Form::value('categories') :
                             <span class="inst">At least one contact name is required</span>
                         </div>
                     </div>
-                    <?php echo "<pre>",print_r(Form::value('contacts')),"</pre>";//die(); ?>
-                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");?>
+                    <?php //echo "<pre>",print_r(Form::value('contacts')),"</pre>";//die(); ?>
+                    <?php if(!empty(Form::value('contacts'))):
+                        foreach(Form::value('contacts') as $i => $d)
+                        {
+                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
+                        }
+                    else:
+                       include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
+                    endif;?>
                 </div>
             </div>
             <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
