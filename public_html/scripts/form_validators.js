@@ -234,9 +234,6 @@ $(document).ready(function() {
     });
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_finisher').validate({
-        rules:{
-            contact: [1, ".contact-name"]
-        }
     });
     ///////////////////////////////////////////////////////////////////////////////
     $('form#add_production_customer').validate();
