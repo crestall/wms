@@ -46,8 +46,8 @@
                         });
                     },
                     'update-validation': function(){
-                        $('.group-required').rules( 'remove' );
-                        $.validator.addClassRules('group-required', {
+                        $('.contact-name').rules( 'remove' );
+                        $.validator.addClassRules('contact-name', {
                             atLeastOneContact: true
                         });
                     }
