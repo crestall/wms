@@ -89,7 +89,7 @@ class Productionfinisher extends Model{
         $q = $this->generateQuery();
         $q .= "WHERE pf.id = $id";
         //die($q);
-        return $db->queryData($q);
+        return $db->queryRow($q);
     }
 
     public function getFinisherIdByName($name)
