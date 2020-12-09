@@ -98,14 +98,11 @@ class Productionfinisher extends Model{
 
     public function addFinisher($data)
     {
-        //echo "productionfinisher<pre>",print_r($data),"</pre>";die();
+        echo "productionfinisher<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  $data['name']
         );
-        if(!empty($data['email'])) $vals['email'] = $data['email'];
-        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
-        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];

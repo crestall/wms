@@ -1803,7 +1803,6 @@ class FormController extends Controller {
                 }
             }
         }
-        /*        */
         if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
         {
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
