@@ -76,7 +76,7 @@ else
                             <span class="inst">At least one contact name is required</span>
                         </div>
                     </div>
-                    <?php //echo "<pre>", var_dump($contact_array) ,"</pre>";//die(); ?>
+                    <?php echo "<pre>", var_dump($contact_array) ,"</pre>";//die(); ?>
                     <?php
                     if(!empty($contact_array)):
                         foreach($contact_array as $i => $d)
