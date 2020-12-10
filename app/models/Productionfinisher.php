@@ -224,7 +224,7 @@ class Productionfinisher extends Model{
         return "
             SELECT
                 pf.*,
-                GROUP_CONCAT(pc.id,',',pc.name,',',IFNULL(pc.email,''),',',IFULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
+                GROUP_CONCAT(pc.id,',',pc.name,',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
             FROM
                 {$this->table} pf LEFT JOIN
                 {$this->contacts_table} pc ON pf.id = pc.finisher_id
