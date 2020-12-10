@@ -80,7 +80,7 @@ class Productionfinisher extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery();
-        $q. = " WHERE active = $active GROUP BY pf.id ORDER BY pf.name";
+        $q .= " WHERE active = $active GROUP BY pf.id ORDER BY pf.name";
         return $db->queryData($q);
     }
 
