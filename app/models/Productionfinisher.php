@@ -135,13 +135,10 @@ class Productionfinisher extends Model{
 
     public function editFinisher($data)
     {
-        echo "editfinisher<pre>",print_r($data),"</pre>";die();
+        //echo "editfinisher<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  strtolower($data['name']),
-            'email'         =>  null,
-            'contact'       =>  null,
-            'phone'         =>  null,
             'address'       =>  null,
             'address_2'     =>  null,
             'suburb'        =>  null,
@@ -151,9 +148,6 @@ class Productionfinisher extends Model{
             'website'       =>  null
         );
         $vals['active'] = isset($data['active'])? 1 : 0;
-        if(!empty($data['email'])) $vals['email'] = $data['email'];
-        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
-        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
@@ -161,7 +155,7 @@ class Productionfinisher extends Model{
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['website'])) $vals['website'] = $data['website'];
-        $id = $db->updateDatabaseFields($this->table, $vals, $data['finisher_id']);
+        $db->updateDatabaseFields($this->table, $vals, $data['finisher_id']);
         if(isset($data['categories']) && is_array($data['categories']))
         {
             $fcat = new Finishercategories();
@@ -172,7 +166,16 @@ class Productionfinisher extends Model{
             $fcat = new Finishercategories();
             $fcat->removeFinisherCategories($data['finisher_id']);
         }
-        return $id;
+        if(isset($data['contacts']) && is_array($data['contacts']))
+        {
+            foreach($data['contacts'] as $contact)
+            {
+                $contact['finisher_id'] = $data['finisher_id'];
+                $pcontact = new Productioncontact();
+                $pcontact->updateContact($contact);
+            }
+        }
+        return true;
     }
 
     public function getAutocompleteFinisher($data)
