@@ -17,7 +17,7 @@ if(!is_array($contacts))
     $ca = explode("|", $contacts);
     foreach($ca as $c)
     {
-        list($a['contact_id'], $a['contact_name'],$a['contact_email'],$a['phone'],$a['role']) = explode(',', $c);
+        list($a['contact_id'], $a['name'],$a['email'],$a['phone'],$a['role']) = explode(',', $c);
         $contact_array[] = $a;
     }
 }
