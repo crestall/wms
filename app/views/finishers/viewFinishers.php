@@ -5,7 +5,8 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <?php if(count($finishers)):?>
+        <?php if(count($finishers)):
+            echo "<pre>",print_r($finishers),"</pre>";?>
             <?php if($role == "production admin" || $role == "production sales admin"):?>
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-danger" id="deactivate"><i class="fal fa-times-circle"></i> Delete Selected Finishers</button></div>
