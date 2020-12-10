@@ -88,7 +88,7 @@ class Productionfinisher extends Model{
         //return $db->queryById($this->table, $id);
         $q = $this->generateQuery();
         $q .= "WHERE pf.id = $id";
-        //die($q);
+        die($q);
         return $db->queryRow($q);
     }
 
