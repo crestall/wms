@@ -168,11 +168,12 @@ class Productionfinisher extends Model{
         }
         if(isset($data['contacts']) && is_array($data['contacts']))
         {
+            $pcontact = new Productioncontact();
+            $pcontact->removeFinisherContacts($data['finisher_id']);
             foreach($data['contacts'] as $contact)
             {
                 $contact['finisher_id'] = $data['finisher_id'];
-                $pcontact = new Productioncontact();
-                $pcontact->updateContact($contact);
+                $pcontact->addContact($contact);
             }
         }
         return true;
