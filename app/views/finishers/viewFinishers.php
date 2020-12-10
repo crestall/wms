@@ -6,7 +6,7 @@
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if(count($finishers)):
-            echo "<pre>",print_r($finishers),"</pre>";?>
+            //echo "<pre>",print_r($finishers),"</pre>";?>
             <?php if($role == "production admin" || $role == "production sales admin"):?>
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-danger" id="deactivate"><i class="fal fa-times-circle"></i> Delete Selected Finishers</button></div>
@@ -22,7 +22,7 @@
                     <?php endif; ?>
                 </div>
                 <div class="col" id="table_holder" style="display:none">
-                    <table id="finisher_list_table" class="table-striped table-hover">
+                    <table id="finisher_list_table" class="table-striped table-hover" style="width:90%">
                         <thead>
                         	<tr>
                                 <th></th>
@@ -51,9 +51,21 @@
                             if(!empty($s['country'])) $address_string .= "<br/>".$s['country'];
                             if(!empty($s['postcode'])) $address_string .= "<br/>".$s['postcode'];
                             $contact_string = "";
-                            $contact_string .= ucwords($s['contact'] );
-                            if(!empty($s['phone'])) $contact_string .= "<br/>".$s['phone'];
-                            $contact_string .= "<br/><a href='mailto:".$s['email']."'>".$s['email']."</a>";
+                            if(!empty($s['contacts']))
+                            {
+                                $contacts = explode("|", $s['contacts']);
+                                foreach($contacts as $c)
+                                {
+                                    list($contact_id, $c_name,$c_email,$c_phone,$c_role) = explode(',', $c);
+                                    $contact_string .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3 pb-3'>";
+                                    $contact_string .= "<span class='font-weight-bold'>".ucwords($c_name)."</span>";
+                                    if(!empty($c_role)) $contact_string .= "<br>$c_role";
+                                    if(!empty($c_phone)) $contact_string .= "<br>$c_phone";
+                                    if(!empty($c_email)) $contact_string .= "<br><a href='mailto:".$c_email.">$c_email</a>";
+                                    $contact_string .= "</div>";
+                                }
+
+                            }
                             if(!empty($s['website'])) $contact_string .= "<br/><a href='http://".$s['website']."' target='_blank'>".$s['website']."</a>";
                             ?>
                         	<tr>
