@@ -62,6 +62,7 @@
                                     if(!empty($c_role)) $contact_string .= "<br>$c_role";
                                     if(!empty($c_phone)) $contact_string .= "<br>$c_phone";
                                     if(!empty($c_email)) $contact_string .= "<br><a href='mailto:".$c_email."'>$c_email</a>";
+
                                     $contact_string .= "</div>";
                                 }
 
