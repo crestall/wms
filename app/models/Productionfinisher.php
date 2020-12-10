@@ -88,7 +88,7 @@ class Productionfinisher extends Model{
         //return $db->queryById($this->table, $id);
         $q = $this->generateQuery();
         $q .= "WHERE pf.id = $id";
-        die($q);
+        //die($q);
         return $db->queryRow($q);
     }
 
@@ -224,7 +224,7 @@ class Productionfinisher extends Model{
         return "
             SELECT
                 pf.*,
-                GROUP_CONCAT(pc.id,',',pc.name,',',pc.email,',',pc.phone,',',pc.role SEPARATOR '|') AS contacts
+                GROUP_CONCAT(pc.id,',',pc.name,',',IFNULL(pc.email,''),',',IFULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
             FROM
                 {$this->table} pf LEFT JOIN
                 {$this->contacts_table} pc ON pf.id = pc.finisher_id
