@@ -11,6 +11,10 @@ $website    = empty(Form::value('website'))?    $finisher['website']      : Form
 $cat_ids    = empty(Form::value('categories'))? $cat_ids                  : Form::value('categories');
 //create the contacts array
 $contacts   = empty(Form::value('contacts'))?    $finisher['contacts']    : Form::value('contacts');
+if(!is_array($contacts))
+{
+    $contacts = explode("|", $contacts);
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
