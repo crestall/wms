@@ -42,13 +42,13 @@ class Productioncontact extends Model{
     public function removeFinisherContacts($finisher_id)
     {
         $db = Database::openConnection();
-        $db->deleteQuery($this->table, $finisher_id, 'finisher_id')
+        $db->deleteQuery($this->table, $finisher_id, 'finisher_id');
     }
 
     public function removeCustomerContacts($customer_id)
     {
         $db = Database::openConnection();
-        $db->deleteQuery($this->table, $customer_id, 'customer_id')
+        $db->deleteQuery($this->table, $customer_id, 'customer_id');
     }
 }
 ?>
