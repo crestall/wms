@@ -135,7 +135,7 @@ class Productionfinisher extends Model{
 
     public function editFinisher($data)
     {
-        echo "editfinisher<pre>",print_r($data),"</pre>";die();
+        //echo "editfinisher<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  strtolower($data['name']),
