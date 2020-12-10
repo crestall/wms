@@ -79,7 +79,9 @@ class Productionfinisher extends Model{
     public function getAllFinishers($active = 1)
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT * FROM {$this->table} WHERE active = $active ORDER BY name");
+        $q = $this->generateQuery();
+        $q. = " WHERE active = $active GROUP BY pf.id ORDER BY pf.name";
+        return $db->queryData($q);
     }
 
     public function getFinisherById($id = 0)
