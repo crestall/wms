@@ -1,6 +1,5 @@
 <?php
 $i = (isset($i))? $i : 0;
-$details['contact_id'] = isset($d['contact_id'])? $d['contact_id']:"";
 $details['name'] = isset($d['name'])? $d['name']:"";
 $details['role'] = isset($d['role'])? $d['role']:"";
 $details['email'] = isset($d['email'])? $d['email']:"";
@@ -26,6 +25,5 @@ $details['phone'] = isset($d['phone'])? $d['phone']:"";
         <div class="col-md-4 mb-3">
             <input type="text" class="form-control" name="contacts[<?php echo $i;?>][phone]" value="<?php echo $details['phone'];?>" />
         </div>
-        <input type="hidden" name="contacts[<?php echo $i;?>][contact_id]" value="<?php echo $details['contact_id'];?>" />
     </div>
 </div>
