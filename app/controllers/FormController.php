@@ -1730,20 +1730,23 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>"; die();
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
         if(!$this->dataSubbed($name))
         {
             Form::setError('name', 'The Finisher\'s name is required');
         }
-        if(!$this->dataSubbed($contact))
+        foreach($post_data['contacts'] as $ind => $cd)
         {
-            Form::setError('contact', 'A contact name is required');
-        }
-        if($this->dataSubbed($email))
-        {
-            if(!$this->emailValid($email))
+            if(!$this->dataSubbed($cd['name']))
             {
-                Form::setError('email', 'The email is not valid');
+                Form::setError('contactname_'.$ind, 'A contact name is required');
+            }
+            if($this->dataSubbed($cd['email']))
+            {
+                if(!$this->emailValid($cd['email']))
+                {
+                    Form::setError('contactemail_'.$ind, 'The email is not valid');
+                }
             }
         }
         if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
