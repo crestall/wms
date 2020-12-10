@@ -14,11 +14,14 @@ $contacts   = empty(Form::value('contacts'))?    $finisher['contacts']    : Form
 if(!is_array($contacts))
 {
     $contact_array = array();
-    $ca = explode("|", $contacts);
-    foreach($ca as $c)
+    if(!empty($contacts))
     {
-        list($a['contact_id'], $a['name'],$a['email'],$a['phone'],$a['role']) = explode(',', $c);
-        $contact_array[] = $a;
+        $ca = explode("|", $contacts);
+        foreach($ca as $c)
+        {
+            list($a['contact_id'], $a['name'],$a['email'],$a['phone'],$a['role']) = explode(',', $c);
+            $contact_array[] = $a;
+        }
     }
 }
 else
