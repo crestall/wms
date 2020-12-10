@@ -13,7 +13,17 @@ $cat_ids    = empty(Form::value('categories'))? $cat_ids                  : Form
 $contacts   = empty(Form::value('contacts'))?    $finisher['contacts']    : Form::value('contacts');
 if(!is_array($contacts))
 {
-    $contacts = explode("|", $contacts);
+    $contact_array = array();
+    $ca = explode("|", $contacts);
+    foreach($ca as $c)
+    {
+        list($a['contact_id'], $a['contact_name'],$a['contact_email'],$a['phone'],$a['role']) = explode(',', $c);
+        $contact_array[] = $a;
+    }
+}
+else
+{
+    $contact_array = $contacts;
 }
 ?>
 <div id="page-wrapper">
@@ -63,7 +73,7 @@ if(!is_array($contacts))
                             <span class="inst">At least one contact name is required</span>
                         </div>
                     </div>
-                    <?php echo "<pre>", var_dump($contacts) ,"</pre>";//die(); ?>
+                    <?php echo "<pre>", var_dump($contact_array) ,"</pre>";//die(); ?>
                     <?php if(!empty(Form::value('contacts'))):
                         foreach(Form::value('contacts') as $i => $d)
                         {
