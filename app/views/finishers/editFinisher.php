@@ -9,6 +9,8 @@ $postcode   = empty(Form::value('postcode'))?   $finisher['postcode']     : Form
 $country    = empty(Form::value('country'))?    $finisher['country']      : Form::value('country');
 $website    = empty(Form::value('website'))?    $finisher['website']      : Form::value('website');
 $cat_ids    = empty(Form::value('categories'))? $cat_ids                  : Form::value('categories');
+//create the contacts array
+$contacts   = empty(Form::value('contacts'))?    $finisher['contacts']    : Form::value('contacts');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -37,6 +39,35 @@ $cat_ids    = empty(Form::value('categories'))? $cat_ids                  : Form
                 <label class="col-md-3">Website</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="website" id="website" value="<?php echo $website;?>" />
+                </div>
+            </div>
+            <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
+                <div class="row mb-0">
+                    <div class="col-md-4">
+                        <h4>Contacts</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <a class="add-contact" style="cursor:pointer" title="Add Another Contact"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                    </div>
+                    <div class="col-md-4">
+                        <a id="remove-all-contacts" style="cursor:pointer" title="Leave Only First"><h4><i class="fad fa-times-square text-danger"></i> Leave only one contact</a></h4>
+                    </div>
+                </div>
+                <div id="contacts_holder">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <span class="inst">At least one contact name is required</span>
+                        </div>
+                    </div>
+                    <?php echo "<pre>", var_dump($contacts) ,"</pre>";//die(); ?>
+                    <?php if(!empty(Form::value('contacts'))):
+                        foreach(Form::value('contacts') as $i => $d)
+                        {
+                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
+                        }
+                    else:
+                       include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
+                    endif;?>
                 </div>
             </div>
             <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>
