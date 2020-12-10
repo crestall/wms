@@ -74,13 +74,11 @@ else
                         </div>
                     </div>
                     <?php echo "<pre>", var_dump($contact_array) ,"</pre>";//die(); ?>
-                    <?php if(!empty(Form::value('contacts'))):
-                        foreach(Form::value('contacts') as $i => $d)
+                    <?php if(!empty($contact_array)):
+                        foreach($contact_array as $i => $d)
                         {
                             include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
                         }
-                    else:
-                       include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
                     endif;?>
                 </div>
             </div>
