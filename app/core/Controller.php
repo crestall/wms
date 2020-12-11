@@ -132,7 +132,7 @@ class Controller {
 
     /**
      * loadCourierClasses method.
-     * load up individual client courier classes and also any financial instances
+     * load up individual client courier classes and also any financial instances and the FTP instances
      *
      */
      public function loadCourierClasses()
@@ -146,6 +146,10 @@ class Controller {
 
          $this->loadMYOBInstances([
             'Freedom'
+         ]);
+
+         $this->loadFTPInstances([
+            'bds'
          ]);
      }
 
