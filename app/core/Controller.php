@@ -182,6 +182,22 @@ class Controller {
     }
 
     /**
+     * Load any FTP instance classes
+     *
+     * @param array $locations
+     */
+    public function loadFTPInstances(array $locations)
+    {
+        $this->FTP = new FTP($this);
+        foreach($locations as $location)
+        {
+            $class = $location . "FTP";
+            $this->{$class} = new $class($this);
+            $this->{$class}->init();
+        }
+    }
+
+    /**
      * load the components by setting the component's name to a controller's property.
      *
      * @param array $components
