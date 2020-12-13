@@ -32,7 +32,14 @@ class TasksController extends Controller
         }
         else
         {
-
+            if($this->bdsFTP->openConnection())
+            {
+                echo 'FTP connection was a success.';
+            }
+            else
+            {
+                echo 'FTP failure';
+            }
         }
     }
 
