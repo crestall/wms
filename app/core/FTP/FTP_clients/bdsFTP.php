@@ -6,7 +6,7 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-class bdsFTP extends FTP
+class BdsFTP extends FTP
 {
     private $client_id = 86;
 
