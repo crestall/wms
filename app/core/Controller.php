@@ -139,7 +139,7 @@ class Controller {
          ]);
 
          $this->loadFTPInstances([
-            'bds'
+            'Bds'
          ]);
      }
 
