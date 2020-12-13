@@ -103,8 +103,6 @@ class Controller {
 
         $this->initialize();
 
-        $this->loadCourierClasses();
-
         $this->beforeAction();
 
         $result = $this->triggerComponents();
@@ -128,15 +126,7 @@ class Controller {
                  ],
              'Security'
          ]);
-     }
 
-    /**
-     * loadCourierClasses method.
-     * load up individual client courier classes and also any financial instances and the FTP instances
-     *
-     */
-     public function loadCourierClasses()
-     {
          $this->loadEparcelLocations([
             'Freedom',
             'Nuchev',
