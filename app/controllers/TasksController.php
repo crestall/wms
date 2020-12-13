@@ -24,6 +24,18 @@ class TasksController extends Controller
         ]);
     }
 
+    public function BDSTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+
+        }
+    }
+
     public function productionJobReminderTask()
     {
         if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
