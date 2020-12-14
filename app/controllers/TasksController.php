@@ -41,6 +41,7 @@ class TasksController extends Controller
                 echo 'FTP failure';
             }
         }
+        $this->BdsFTP->closeConnection();
     }
 
     public function productionJobReminderTask()
