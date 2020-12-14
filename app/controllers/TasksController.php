@@ -40,7 +40,10 @@ class TasksController extends Controller
                 foreach($files as $file)
                 {
                     $this->BdsFTP->collectOrders($file);
-                    $this->BdsFTP->deleteFile($file);
+                    if(!$this->BdsFTP->deleteFile($file))
+                    {
+                        echo "<p>$file did not get deleted</p>";
+                    }
                 }
             }
         }
