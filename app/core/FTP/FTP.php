@@ -73,6 +73,16 @@
     }
 
     /**
+     * delete a file from the server
+     *
+     * @returns boolean
+     */
+    public function deleteFile($file)
+    {
+        return ftp_delete($this->CON_ID, $file)
+    }
+
+    /**
     * Closes the current FTP connection
     *
     * @return boolean
