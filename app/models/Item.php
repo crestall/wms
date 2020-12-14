@@ -1273,6 +1273,12 @@ class Item extends Model{
         return $db->queryRow("SELECT * FROM ".$this->table." WHERE sku = :sku", array('sku' => $sku));
     }
 
+    public function getItemByClientProductId($cpi)
+    {
+        $db = Database::openConnection();
+        return $db->queryRow("SELECT * FROM ".$this->table." WHERE client_product-id = :cpi", array('cpi' => $cpi));
+    }
+
     public function getLowStock($item_id)
     {
        $item = $this->getItemById($item_id);
