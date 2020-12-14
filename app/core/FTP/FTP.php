@@ -33,7 +33,7 @@
     * @return boolean
     */
 
-    public function openConnection()
+    public function openConnection($dir = "")
     {
         if( !$this->CON_ID = ftp_connect($this->URL) )
         {
@@ -48,6 +48,15 @@
                 Logger::log("FTP Loggin Failed", "Could not log into ".$this->URL." using ".$this->USERNAME);
                 throw new Exception('Could not log in to  '.$this->URL);
                 return false;
+            }
+            if(!empty($dir))
+            {
+                if(!@ftp_chdir($this->CON_ID, $dir))
+                {
+                    Logger::log("FTP Director Change Failed", "Could not change to ". $dir);
+                    throw new Exception("Could not change to ". $dir);
+                    return false;
+                }
             }
             return true;
         }
