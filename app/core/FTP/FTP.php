@@ -63,6 +63,16 @@
     }
 
     /**
+     * get a list of filenames in a directory
+     *
+     * @returns array
+     */
+    public function getFileNames()
+    {
+        return ftp_nlist($this->CON_ID, ".");
+    }
+
+    /**
     * Closes the current FTP connection
     *
     * @return boolean
