@@ -73,7 +73,12 @@ class BdsFTP extends FTP
             $data_error_string = $item_error_string = "<ul>";
             $import_orders = true;
             while ($row = fgetcsv($tmp_handle)) {
-                echo "<pre>",print_r($row),"</pre>";continue;
+                //echo "<pre>",print_r($row),"</pre>";continue;
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    continue;
+                }
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
