@@ -10,6 +10,10 @@ class BdsFTP extends FTP
 {
     private $client_id = 86;
 
+    private $output;
+    private $order_items;
+    private $orders_csv = array();
+
     private $return_array = array(
         'orders_created'        => 0,
         'invoices_processed'    => 0,
@@ -29,8 +33,28 @@ class BdsFTP extends FTP
         $this->PASSWORD = 'mN**s735a';
     }
 
-    public function processOrders($file)
+    public function collectOrders($file)
     {
+        $tmp_handle = fopen('php://temp', 'r+');
+        if (ftp_fget($this->CON_ID, $tmp_handle, $file, FTP_ASCII))
+        {
+            while ($row = fgetcsv($tmp_handle))
+            {
+                $this->orders_csv[] = $row;
+            }
+            $this->processOrders($this->orders_csv) ;
+        }
+        else
+        {
+            Logger::log("FTP Could not open file", "Could not open ". $file);
+            throw new Exception("Could not open ". $file);
+        }
+        fclose($tmp_handle);
+    }
+
+    private function processOrders($file)
+    {
+        echo "<pre>",print_r($file),"</pre>"; die();
         /*
         [0] => Order_Number
         [1] => Shipment_Address_Company
@@ -205,6 +229,33 @@ class BdsFTP extends FTP
                     $import_orders = false;
                 }
                 ++$line;
+            }
+            if($import_orders)
+            {
+                $all_items = $this->allocations->createOrderItemsArray($orders_items);
+                //echo "<pre>",print_r($orders_items),"</pre>";die();
+                $item_error = false;
+                $error_string = "";
+                foreach($all_items as $oind => $order_items)
+                {
+                    foreach($order_items as $item)
+                    {
+                        if($item['item_error'])
+                        {
+                            $import_orders = false;
+                            $data_error_string .= "<li>".$item['item_error_string']." for order {$imported_orders[$oind]['client_order_id']}</li>";
+                        }
+                    }
+                }
+                $data_error_string .= "</ul>";
+                if($import_orders)
+                {
+
+                }
+                else
+                {
+
+                }
             }
             echo "<pre>",print_r($imported_orders),"</pre>";
         }

@@ -82,6 +82,16 @@
     {
         return ftp_close($this->CON_ID);
     }
+
+    /**
+    * functions used by extending classes
+    *
+    */
+
+    public function collectOrders($file){}
+    private function processOrders($orders){}
+    private function addOrders($orders){}
+
  }
 
  ?>
