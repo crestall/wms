@@ -79,7 +79,7 @@
      */
     public function deleteFile($file)
     {
-        return ftp_delete($this->CON_ID, $file)
+        return ftp_delete($this->CON_ID, $file);
     }
 
     /**
