@@ -28,5 +28,18 @@ class BdsFTP extends FTP
         $this->USERNAME = 'bdsorders';
         $this->PASSWORD = 'mN**s735a';
     }
+
+    public function processOrders($file)
+    {
+        $tmp_handle = fopen('php://temp', 'r+');
+        if (ftp_fget($this->CON_ID, $tmp_handle, $file, FTP_ASCII))
+        {
+            rewind($tmp_handle);
+            while ($row = fgetcsv($tmp_handle)) {
+                echo "<pre>",print_r($row),"</pre>";
+            }
+        }
+        fclose($tmp_handle);
+    }
 } //end class
 ?>
