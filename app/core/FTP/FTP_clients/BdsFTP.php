@@ -24,7 +24,7 @@ class BdsFTP extends FTP
     public function init()
     {
         //Client Specific Credentials
-        $this->URL = 'ftp.bahai.org.au/bdsorders';
+        $this->URL = 'ftp.bahai.org.au';
         $this->USERNAME = 'bdsorders';
         $this->PASSWORD = 'mN**s735a';
     }
