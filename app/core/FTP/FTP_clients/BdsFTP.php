@@ -201,6 +201,7 @@ class BdsFTP extends FTP
                 }
                 else
                 {
+                    echo $data_error_string."</ul>";
                     $import_orders = false;
                 }
                 ++$line;
