@@ -34,7 +34,9 @@ class TasksController extends Controller
         {
             if($this->BdsFTP->openConnection('/bdsorders'))
             {
-                echo 'FTP connection was a success.';
+                echo '<p>FTP connection was a success.</p>';
+                $files = $this->BdsFTP->getFileNames();
+                echo '<pre>',print_r($files),"</pre>";
             }
             else
             {
