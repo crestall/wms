@@ -39,7 +39,7 @@ class TasksController extends Controller
                 //echo '<pre>',print_r($files),"</pre>";
                 foreach($files as $file)
                 {
-                    $this->BdsFTP->processOrders($file);
+                    $this->BdsFTP->collectOrders($file);
                 }
             }
             else
