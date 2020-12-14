@@ -85,7 +85,7 @@
     /**
     * Closes the current FTP connection
     *
-    * @return boolean
+    * @returns boolean
     */
 
     public function closeConnection()
