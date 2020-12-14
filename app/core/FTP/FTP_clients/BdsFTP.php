@@ -40,6 +40,7 @@ class BdsFTP extends FTP
         {
             while ($row = fgetcsv($tmp_handle))
             {
+                echo "<pre>",print_r($row),"</pre>";
                 $this->orders_csv[] = $row;
             }
             $this->processOrders($this->orders_csv) ;
