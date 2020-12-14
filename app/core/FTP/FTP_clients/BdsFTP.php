@@ -41,7 +41,7 @@ class BdsFTP extends FTP
             rewind($tmp_handle);
             while ($row = fgetcsv($tmp_handle))
             {
-                echo "<pre>",print_r($row),"</pre>";
+                //echo "<pre>",print_r($row),"</pre>";
                 $this->orders_csv[] = $row;
             }
             $this->processOrders($this->orders_csv) ;
