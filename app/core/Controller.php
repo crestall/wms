@@ -102,6 +102,9 @@ class Controller {
     public function startupProcess(){
 
         $this->initialize();
+        $this->loadCourierClasses();
+        $this->loadFinancialClasses();
+        $this->loadFTPClasses();
 
         $this->beforeAction();
 
@@ -118,30 +121,38 @@ class Controller {
      *
      */
      public function initialize(){
-
-         $this->loadComponents([
+        $this->loadComponents([
              'Auth' => [
                      'authenticate' => ['User'],
                      'authorize'    => ['Controller']
                  ],
              'Security'
-         ]);
+        ]);
+     }
 
-         $this->loadEparcelLocations([
+    public function loadCourierClasses()
+    {
+        $this->loadEparcelLocations([
             'Freedom',
             'Nuchev',
             'TTAU',
             'Oneplate'
-         ]);
+        ]);
+    }
 
-         $this->loadMYOBInstances([
+    public function loadFinancialClasses()
+    {
+        $this->loadMYOBInstances([
             'Freedom'
-         ]);
+        ]);
+    }
 
-         $this->loadFTPInstances([
+    public function loadFTPClasses()
+    {
+        $this->loadFTPInstances([
             'Bds'
-         ]);
-     }
+        ]);
+    }
 
     /**
      * Load the eParcel api location classes
