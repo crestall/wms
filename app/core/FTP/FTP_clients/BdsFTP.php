@@ -119,7 +119,7 @@ class BdsFTP extends FTP
                     ++$i;
                     $client_item_id = $row[$i];
                     ++$i;
-                    $item = $this->item->getItemBySku($sku);
+                    $item = $this->controller->item->getItemBySku($sku);
                     if(empty($item))
                     {
                         $item_error = true;
@@ -157,7 +157,7 @@ class BdsFTP extends FTP
                             $order['errors'] = 1;
                             $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
                         }
-                        $aResponse = $this->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
+                        $aResponse = $this->controller->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
                         //echo "<pre>",print_r($aResponse),"</pre>";
                         if(isset($aResponse['errors']))
                         {
