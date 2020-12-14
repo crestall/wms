@@ -1276,7 +1276,7 @@ class Item extends Model{
     public function getItemByClientProductId($cpi)
     {
         $db = Database::openConnection();
-        return $db->queryRow("SELECT * FROM ".$this->table." WHERE client_product-id = :cpi", array('cpi' => $cpi));
+        return $db->queryRow("SELECT * FROM ".$this->table." WHERE client_product_id = :cpi", array('cpi' => $cpi));
     }
 
     public function getLowStock($item_id)
