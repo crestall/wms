@@ -36,7 +36,7 @@ class TasksController extends Controller
             {
                 echo '<p>FTP connection was a success.</p>';
                 $files = $this->BdsFTP->getFileNames();
-                echo '<pre>',print_r($files),"</pre>";
+                //echo '<pre>',print_r($files),"</pre>";
                 foreach($files as $file)
                 {
                     $this->BdsFTP->collectOrders($file);
