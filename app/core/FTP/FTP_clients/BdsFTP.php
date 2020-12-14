@@ -123,7 +123,7 @@ class BdsFTP extends FTP
                     $qty = $row[$i];
                     ++$i;
                     $client_item_id = $row[$i];
-                    $item = $this->controller->item->getItemBySku($sku);
+                    $item = $this->controller->item->getItemByClientProductId($sku);
                     if(empty($item))
                     {
                         $item_error = true;
