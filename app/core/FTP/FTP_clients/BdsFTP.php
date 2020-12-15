@@ -47,10 +47,11 @@ class BdsFTP extends FTP
             $this->output .= "IMPORTING BDS ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
             $this->output .= "=========================================================================================================".PHP_EOL;
             $this->return_array['total_import'] = count($this->orders_csv) - 1;
-            echo "<pre>",print_r($this->return_array),"</pre>"; die();
+            //echo "<pre>",print_r($this->return_array),"</pre>"; die();
 
             if($orders = $this->processOrders($this->orders_csv))
             {
+                echo "<pre>",print_r($this->return_array),"</pre>"; die();
                 //echo "<pre>",print_r($orders),"</pre>";die();
                 $this->addOrders($orders);
             }
@@ -244,7 +245,8 @@ class BdsFTP extends FTP
                 {
                     $message = "<p>There was a problem with some items</p>";
                     $message .= "<ul>".$mm."</ul>";
-                    $message .= "<p>Orders with these items will not be processed at the moment</p>";
+                    $message .= "<p>The order with this item that could not be processed is listed below</p>";
+                    $message .= "<p>This order has <strong>NOT</strong> been imported</p>";
                     $message .= "<p>BDS Order ID: #{$order['client_order_id']}</p>";
                     $message .= "<p>Customer: {$order['ship_to']}</p>";
                     $message .= "<p>Address: {$ad['address']}</p>";
@@ -253,9 +255,15 @@ class BdsFTP extends FTP
                     $message .= "<p>{$ad['state']}</p>";
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
-                    /* */
+                    $message .= "<p>======================</p>";
+                    /*
                     Email::sendBDSImportError($message);
                     $this->output .= "Email Sent From Process Orders With Message $message".PHP_EOL;
+                    */
+                    $this->return_array['import_error'] = true;
+                    ++$this->return_array['error_count'];
+                    $this->return_array['import_error_string'] .= $message;
+
                 }
                 elseif(count($items))
                 {
@@ -277,6 +285,8 @@ class BdsFTP extends FTP
             $this->output .= "=========================================================================================================".PHP_EOL;
             $this->output .= "No New Orders".PHP_EOL;
             $this->output .= "=========================================================================================================".PHP_EOL;
+            $this->return_array['import_error'] = true;
+            $this->return_array['import_error_string'] .= "<p>There are NO NEW ORDERS</p>";
         }
         return false;
     }
