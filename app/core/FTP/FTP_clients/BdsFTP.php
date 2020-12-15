@@ -314,7 +314,7 @@ class BdsFTP extends FTP
                 $message .= "<p>{$o['state']}</p>";
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
-                /*if (php_sapi_name() !='cli')
+                /*if (php_sapi_name() !='cli')*/
                 if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
                 {
                     ++$this->return_array['error_count'];
@@ -322,9 +322,9 @@ class BdsFTP extends FTP
                 }
                 else
                 {
-                    Email::sendOnePlateImportError($message);
+                    Email::sendBDSImportError($message);
 
-                }*/
+                }
                 continue;
             }
             if($o['import_error'])
