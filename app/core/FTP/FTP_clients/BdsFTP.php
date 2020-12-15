@@ -45,8 +45,7 @@ class BdsFTP extends FTP
             $this->output = "=========================================================================================================".PHP_EOL;
             $this->output .= "IMPORTING BDS ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
             $this->output .= "=========================================================================================================".PHP_EOL;
-            $orders = $this->processOrders($this->orders_csv) ;
-            if($orders = processOrders($this->orders_csv))
+            if($orders = $this->processOrders($this->orders_csv))
             {
                 //echo "<pre>",print_r($orders),"</pre>";die();
                 $this->addOrders($orders);
