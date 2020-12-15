@@ -275,7 +275,9 @@ class BdsFTP extends FTP
                     $orders[] = $order;
                 }
             }//end foreach orders
-            echo "<pre>",print_r($orders),"</pre>";die();
+            $this->order_items = $this->controller->allocations->createOrderItemsArray($orders_items);
+            echo "<pre>ORDER ITEMS",print_r($this->order_items),"</pre>";//die();
+            echo "<pre>ORDERS",print_r($orders),"</pre>";die();
         }
         else
         {
