@@ -117,6 +117,7 @@ class BdsFTP extends FTP
                     $skip_first = false;
                     continue;
                 }
+                $client_order_id =  (int)preg_replace('/\D/ui','',$o[0]);
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
@@ -126,7 +127,7 @@ class BdsFTP extends FTP
                     'error_string'          => '',
                     'items'                 => array(),
                     'ref2'                  => '',
-                    'client_order_id'       => $o[1],
+                    'client_order_id'       => $client_order_id,
                     'errors'                => 0,
                     'tracking_email'        => $o[10],
                     'ship_to'               => $o[2],
@@ -134,12 +135,146 @@ class BdsFTP extends FTP
                     'date_ordered'          => time(),
                     'status_id'             => $this->controller->order->ordered_id,
                     'eparcel_express'       => 0,
-                    'signature_req'         => 0,
+                    'signature_req'         => ($o[11] == 1)? 0 : 1,
                     'contact_phone'         => $o[9],
                     'import_error'          => false,
                     'import_error_string'   => ''
                 );
-            }
+                if(!empty($o[10]))
+                {
+                    if( !filter_var($o[10], FILTER_VALIDATE_EMAIL) )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] = "<p>The customer email is not valid</p>";
+                    }
+                }
+                //validate address
+                $ad = array(
+                    'address'   => $o[3],
+                    'address_2' => $o[4],
+                    'suburb'    => $o[5],
+                    'state'     => $o[6],
+                    'postcode'  => $o[7],
+                    'country'   => $o[8]
+                );
+                if($ad['country'] == "AU")
+                {
+                    if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40 || strlen($order['company_name'])  > 40)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
+                    }
+                    $aResponse = $this->controller->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
+
+                    //echo "<pre>",print_r($aResponse),"</pre>";
+                    if(isset($aResponse['errors']))
+                    {
+                        $order['errors'] = 1;
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $order['error_string'] .= "<p>{$e['message']}</p>";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Postcode does not match suburb or state</p>";
+                    }
+                }
+                else
+                {
+                    if( strlen( $ad['address'] ) > 50 || strlen( $ad['address_2'] ) > 50 )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
+                    }
+                    if( strlen($order['ship_to']) > 30 || strlen($order['company_name']) > 30 )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
+                    }
+                }
+                if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $ad['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $ad['address'])))
+                {
+                    $order['errors'] = 1;
+                    $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
+                }
+                $qty = 0;
+                $i = 15;
+                do
+                {
+                    $cpi = $row[$i];
+                    ++$i;
+                    $iqty = $row[$i];
+                    ++$i;
+                    $client_item_id = $row[$i];
+                    $item = $this->controller->item->getItemByClientProductId($cpi);
+                    if(!$item)
+                    {
+                        $items_errors = true;
+                        $mm .= "<li>Could not find $cpi in the Warehouse system</li>";
+                    }
+                    else
+                    {
+                        $n_name = $item['name'];
+                        $item_id = $item['id'];
+                        $items[] = array(
+                            'qty'               =>  $iqty,
+                            'id'                =>  $item_id,
+                            'client_item_id'    => $client_item_id
+                        );
+                        $qty += $iqty;
+                        $weight += $item['weight'] * $iqty;
+                    }
+                }
+                while(!empty($o[$i]));
+                if(empty($o[12]))
+                {
+                    $delivery_instructions =  "Please leave in a safe place out of the weather";
+                }
+                else
+                {
+                    $delivery_instructions = $o[12];
+                }
+                $order['instructions'] = $delivery_instructions;
+                if($items_errors)
+                {
+                    $message = "<p>There was a problem with some items</p>";
+                    $message .= "<ul>".$mm."</ul>";
+                    $message .= "<p>Orders with these items will not be processed at the moment</p>";
+                    $message .= "<p>One Plate Order ID: {$order['client_order_id']}</p>";
+                    $message .= "<p>Customer: {$order['ship_to']}</p>";
+                    $message .= "<p>Address: {$ad['address']}</p>";
+                    $message .= "<p>{$ad['address_2']}</p>";
+                    $message .= "<p>{$ad['suburb']}</p>";
+                    $message .= "<p>{$ad['state']}</p>";
+                    $message .= "<p>{$ad['postcode']}</p>";
+                    $message .= "<p>{$ad['country']}</p>";
+                    $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
+                    /*
+                    if ($_SERVER['HTTP_USER_AGENT'] == 'FSGAGENT')
+                    {
+                        Email::sendOnePlateImportError($message);
+                    }
+                    else
+                    {
+                        $this->return_array['error_string'] .= $message;
+                        ++$this->return_array['error_count'];
+                    }
+                    */
+                    echo $message;
+                }
+                elseif(count($items))
+                {
+                    $order['quantity'] = $qty;
+                    $order['weight'] = $weight;
+                    $order['items'] = $items;
+                    $orders_items[$client_order_id] = $items;
+                    $order = array_merge($order, $ad);
+                    $orders[] = $order;
+                }
+            }//end foreach orders
+            echo "<pre>",print_r($orders),"</pre>";die(); 
         }
         else
         {
