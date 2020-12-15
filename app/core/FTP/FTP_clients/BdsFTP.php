@@ -244,7 +244,7 @@ class BdsFTP extends FTP
                     $message = "<p>There was a problem with some items</p>";
                     $message .= "<ul>".$mm."</ul>";
                     $message .= "<p>Orders with these items will not be processed at the moment</p>";
-                    $message .= "<p>One Plate Order ID: {$order['client_order_id']}</p>";
+                    $message .= "<p>BDS Order ID: #{$order['client_order_id']}</p>";
                     $message .= "<p>Customer: {$order['ship_to']}</p>";
                     $message .= "<p>Address: {$ad['address']}</p>";
                     $message .= "<p>{$ad['address_2']}</p>";
@@ -252,7 +252,6 @@ class BdsFTP extends FTP
                     $message .= "<p>{$ad['state']}</p>";
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
-                    $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
                     /*
                     if ($_SERVER['HTTP_USER_AGENT'] == 'FSGAGENT')
                     {
