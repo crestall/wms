@@ -112,6 +112,7 @@ class BdsFTP extends FTP
             foreach($collected_orders as $o)
             {
                 //echo "<pre>",print_r($row),"</pre>";continue;
+                $i = 1;
                 if($skip_first)
                 {
                     $skip_first = false;
