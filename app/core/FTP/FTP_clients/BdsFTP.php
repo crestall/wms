@@ -249,18 +249,18 @@ class BdsFTP extends FTP
                     $message .= "<p>{$ad['state']}</p>";
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
-                    /*
+                    /* */
                     if ($_SERVER['HTTP_USER_AGENT'] == 'FSGAGENT')
                     {
-                        Email::sendOnePlateImportError($message);
+                        Email::sendBDSImportError($message);
                     }
                     else
                     {
                         $this->return_array['error_string'] .= $message;
                         ++$this->return_array['error_count'];
                     }
-                    */
-                    echo $message;
+
+                    //echo $message;
                 }
                 elseif(count($items))
                 {
