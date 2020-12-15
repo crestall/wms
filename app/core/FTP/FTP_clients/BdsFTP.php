@@ -253,6 +253,7 @@ class BdsFTP extends FTP
                     if ($_SERVER['HTTP_USER_AGENT'] == 'FSGAGENT')
                     {
                         Email::sendBDSImportError($message);
+                        $this->output .= "Email Sent From Process Orders With Message $message".PHP_EOL;
                     }
                     else
                     {
@@ -323,7 +324,7 @@ class BdsFTP extends FTP
                 else
                 {
                     Email::sendBDSImportError($message);
-
+                    $this->output .= "Email Sent From Add Orders With Message $message".PHP_EOL;
                 }
                 continue;
             }
