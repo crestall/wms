@@ -260,16 +260,14 @@
             $mail->Username = Config::get('EMAIL_UNAME');
             $mail->Password = Config::get('EMAIL_PWD');
 
-            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."oneplateimporterror.html");
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimporterror.html");
             $replace_array = array("{CONTENT}");
 		    $replace_with_array = array($message);
 		    $body = str_replace($replace_array, $replace_with_array, $body);
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-    		$mail->AddAddress($email, $name);
-
-            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+    		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
 
     		$mail->Subject = "Order with item error for BDS";
 
