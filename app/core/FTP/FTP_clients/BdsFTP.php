@@ -203,11 +203,11 @@ class BdsFTP extends FTP
                 $i = 15;
                 do
                 {
-                    $cpi = $row[$i];
+                    $cpi = $o[$i];
                     ++$i;
-                    $iqty = $row[$i];
+                    $iqty = $o[$i];
                     ++$i;
-                    $client_item_id = $row[$i];
+                    $client_item_id = $o[$i];
                     $item = $this->controller->item->getItemByClientProductId($cpi);
                     if(!$item)
                     {
@@ -274,7 +274,7 @@ class BdsFTP extends FTP
                     $orders[] = $order;
                 }
             }//end foreach orders
-            echo "<pre>",print_r($orders),"</pre>";die(); 
+            echo "<pre>",print_r($orders),"</pre>";die();
         }
         else
         {
