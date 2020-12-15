@@ -250,18 +250,8 @@ class BdsFTP extends FTP
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
                     /* */
-                    if ($_SERVER['HTTP_USER_AGENT'] == 'FSGAGENT')
-                    {
-                        Email::sendBDSImportError($message);
-                        $this->output .= "Email Sent From Process Orders With Message $message".PHP_EOL;
-                    }
-                    else
-                    {
-                        $this->return_array['error_string'] .= $message;
-                        ++$this->return_array['error_count'];
-                    }
-
-                    //echo $message;
+                    Email::sendBDSImportError($message);
+                    $this->output .= "Email Sent From Process Orders With Message $message".PHP_EOL;
                 }
                 elseif(count($items))
                 {
@@ -316,16 +306,8 @@ class BdsFTP extends FTP
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
                 /*if (php_sapi_name() !='cli')*/
-                if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
-                {
-                    ++$this->return_array['error_count'];
-                    $this->return_array['error_string'] .= $message;
-                }
-                else
-                {
-                    Email::sendBDSImportError($message);
-                    $this->output .= "Email Sent From Add Orders With Message $message".PHP_EOL;
-                }
+                Email::sendBDSImportError($message);
+                $this->output .= "Email Sent From Add Orders With Message $message".PHP_EOL;
                 continue;
             }
             if($o['import_error'])
