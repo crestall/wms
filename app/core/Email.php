@@ -249,28 +249,43 @@
      public static function sendBDSImportError($message)
     {
         $mail = new PHPMailer();
+        $mail->IsSMTP();
 
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."oneplateimporterror.html");
-        $replace_array = array("{CONTENT}");
-		$replace_with_array = array($message);
-		$body = str_replace($replace_array, $replace_with_array, $body);
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
 
-        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."oneplateimporterror.html");
+            $replace_array = array("{CONTENT}");
+		    $replace_with_array = array($message);
+		    $body = str_replace($replace_array, $replace_with_array, $body);
 
-		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-        //$mail->AddAdress('Joshua Lanzarini','joshua@oneplate.co');
+    		$mail->AddAddress($email, $name);
 
-		$mail->Subject = "Order with item error for BDS";
+            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
 
-        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+    		$mail->Subject = "Order with item error for BDS";
 
-		$mail->MsgHTML($body);
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
-        if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-            throw new Exception("Email couldn't be sent ");
+    		$mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent to ". $name);
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
         }
     }
 
