@@ -15,14 +15,12 @@ class BdsFTP extends FTP
     private $orders_csv = array();
 
     private $return_array = array(
-        'orders_created'        => 0,
-        'invoices_processed'    => 0,
+        'import_count'          => 0,
         'import_error'          => false,
         'error'                 => false,
         'error_count'           => 0,
         'error_string'          => '',
-        'import_error_string'   => '',
-        'import_message'        => ''
+        'import_error_string'   => ''
     );
 
     public function init()
@@ -50,10 +48,10 @@ class BdsFTP extends FTP
             $orders = $this->processOrders($this->orders_csv) ;
             if($orders = processOrders($this->orders_csv))
             {
-                echo "<pre>",print_r($orders),"</pre>";die();
-                //$this->addOnePlateOrders($orders);
+                //echo "<pre>",print_r($orders),"</pre>";die();
+                $this->addOrders($orders);
             }
-            Logger::logOrderImports('order_imports/oneplate', $this->output); //die();
+            Logger::logOrderImports('order_imports/bds', $this->output); //die();
         }
         else
         {
@@ -276,8 +274,9 @@ class BdsFTP extends FTP
                 }
             }//end foreach orders
             $this->order_items = $this->controller->allocations->createOrderItemsArray($orders_items);
-            echo "<pre>ORDER ITEMS",print_r($this->order_items),"</pre>";//die();
-            echo "<pre>ORDERS",print_r($orders),"</pre>";die();
+            //echo "<pre>ORDER ITEMS",print_r($this->order_items),"</pre>";//die();
+            //echo "<pre>ORDERS",print_r($orders),"</pre>";die();
+            return $orders;
         }
         else
         {
@@ -286,6 +285,84 @@ class BdsFTP extends FTP
             $this->output .= "=========================================================================================================".PHP_EOL;
         }
         return false;
+    }
+
+    private function addOrders($orders)
+    {
+        foreach($orders as $o)
+        {
+            //check for errors first
+            $item_error = false;
+            $error_string = "";
+            foreach($this->order_items[$o['client_order_id']] as $item)
+            {
+                if($item['item_error'])
+                {
+                    $item_error = true;
+                    $error_string .= $item['item_error_string'];
+                }
+            }
+            if($item_error)
+            {
+                $message = "<p>There was a problem with some items</p>";
+                $message .= $error_string;
+                $message .= "<p>Orders with these items will not be processed at the moment</p>";
+                $message .= "<p>BDS Order ID: {$o['client_order_id']}</p>";
+                $message .= "<p>Customer: {$o['ship_to']}</p>";
+                $message .= "<p>Address: {$o['address']}</p>";
+                $message .= "<p>{$o['address_2']}</p>";
+                $message .= "<p>{$o['suburb']}</p>";
+                $message .= "<p>{$o['state']}</p>";
+                $message .= "<p>{$o['postcode']}</p>";
+                $message .= "<p>{$o['country']}</p>";
+                /*if (php_sapi_name() !='cli')
+                if ($_SERVER['HTTP_USER_AGENT'] != 'FSGAGENT')
+                {
+                    ++$this->return_array['error_count'];
+                    $this->return_array['error_string'] .= $message;
+                }
+                else
+                {
+                    Email::sendOnePlateImportError($message);
+
+                }*/
+                continue;
+            }
+            if($o['import_error'])
+            {
+                $this->return_array['import_error'] = true;
+                $this->return_array['import_error_string'] = $o['import_error_string'];
+                continue;
+            }
+            //insert the order
+            $vals = array(
+                'client_order_id'       => $o['client_order_id'],
+                'client_id'             => 86,
+                'deliver_to'            => $o['ship_to'],
+                'company_name'          => $o['company_name'],
+                'date_ordered'          => $o['date_ordered'],
+                'tracking_email'        => $o['tracking_email'],
+                'weight'                => $o['weight'],
+                'delivery_instructions' => $o['instructions'],
+                'errors'                => $o['errors'],
+                'error_string'          => $o['error_string'],
+                'address'               => $o['address'],
+                'address2'              => $o['address_2'],
+                'state'                 => $o['state'],
+                'suburb'                => $o['suburb'],
+                'postcode'              => $o['postcode'],
+                'country'               => $o['country'],
+                'contact_phone'         => $o['contact_phone']
+            );
+            if($o['signature_req'] == 1) $vals['signature_req'] = 1;
+            if($o['eparcel_express'] == 1) $vals['eparcel_express'] = 1;
+            $itp = array($this->order_items[$o['client_order_id']]);
+            $order_number = $this->controller->order->addOrder($vals, $itp);
+            $this->output .= "Inserted Order: $order_number".PHP_EOL;
+            $this->output .= print_r($vals,true).PHP_EOL;
+            $this->output .= print_r($this->order_items[$o['client_order_id']], true).PHP_EOL;
+            ++$this->return_array['import_count'];
+        }
     }
 } //end class
 ?>
