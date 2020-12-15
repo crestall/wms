@@ -103,7 +103,7 @@ class BdsFTP extends FTP
         else
             $collected_orders = $the_orders;
 
-        echo "THE ORDERS<pre>",print_r($the_orders),"</pre>";die();
+        //echo "THE ORDERS<pre>",print_r($the_orders),"</pre>";die();
         $skip_first = true;
         if(count($collected_orders) > 0)
         {
@@ -117,6 +117,28 @@ class BdsFTP extends FTP
                     $skip_first = false;
                     continue;
                 }
+                $items_errors = false;
+                $weight = 0;
+                $mm = "";
+                $items = array();
+                //$o = trimArray($o);
+                $order = array(
+                    'error_string'          => '',
+                    'items'                 => array(),
+                    'ref2'                  => '',
+                    'client_order_id'       => $o[1],
+                    'errors'                => 0,
+                    'tracking_email'        => $o[10],
+                    'ship_to'               => $o[2],
+                    'company_name'          => $o[1],
+                    'date_ordered'          => time(),
+                    'status_id'             => $this->controller->order->ordered_id,
+                    'eparcel_express'       => 0,
+                    'signature_req'         => 0,
+                    'contact_phone'         => $o[9],
+                    'import_error'          => false,
+                    'import_error_string'   => ''
+                );
             }
         }
         else
