@@ -28,11 +28,12 @@ class Allocations{
             $values = array();
             $import_error_string = "";
             $item_error = false;
-            $item_error_string = "<ul>";
+            //$item_error_string = "<ul>";
             $order_error_string = "";
             foreach($order_items as $details)
             {
                 $i_id = $details['id'];
+                $item_error_string = "<ul>";
                 //echo "<pre>",print_r($details),"</pre>"; //die();
                 //$pick_count = $left = (int)$details['qty'];
                 $item = $this->controller->item->getItemById($i_id);

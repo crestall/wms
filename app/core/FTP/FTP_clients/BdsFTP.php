@@ -16,6 +16,7 @@ class BdsFTP extends FTP
 
     private $return_array = array(
         'import_count'          => 0,
+        'total_import'          => 0,
         'import_error'          => false,
         'error'                 => false,
         'error_count'           => 0,
@@ -45,6 +46,9 @@ class BdsFTP extends FTP
             $this->output = "=========================================================================================================".PHP_EOL;
             $this->output .= "IMPORTING BDS ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
             $this->output .= "=========================================================================================================".PHP_EOL;
+            $this->return_array['total_import'] = count($this->orders_csv);
+            echo "<pre>",print_r($this->return_array),"</pre>"; die();
+
             if($orders = $this->processOrders($this->orders_csv))
             {
                 //echo "<pre>",print_r($orders),"</pre>";die();
