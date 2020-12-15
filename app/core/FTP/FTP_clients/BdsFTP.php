@@ -227,6 +227,7 @@ class BdsFTP extends FTP
                         $qty += $iqty;
                         $weight += $item['weight'] * $iqty;
                     }
+                    ++$i;
                 }
                 while(!empty($o[$i]));
                 if(empty($o[12]))
