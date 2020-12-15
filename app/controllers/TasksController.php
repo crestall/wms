@@ -44,6 +44,10 @@ class TasksController extends Controller
                     {
                         echo "<p>$file did not get deleted</p>";
                     }
+                    else
+                    {
+                        echo "<p>$file successfully deleted</p>"; 
+                    }
                 }
             }
         }
