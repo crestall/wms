@@ -247,6 +247,7 @@ class BdsFTP extends FTP
                     $message .= "<ul>".$mm."</ul>";
                     $message .= "<p>The order with this item that could not be processed is listed below</p>";
                     $message .= "<p>This order has <strong>NOT</strong> been imported</p>";
+                    $message .= "<p>---------------------------------------------------</p>";
                     $message .= "<p>BDS Order ID: #{$order['client_order_id']}</p>";
                     $message .= "<p>Customer: {$order['ship_to']}</p>";
                     $message .= "<p>Address: {$ad['address']}</p>";
@@ -255,7 +256,8 @@ class BdsFTP extends FTP
                     $message .= "<p>{$ad['state']}</p>";
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
-                    $message .= "<p>======================</p>";
+                    $message .= "<p>====================================================================================</p>";
+                    $message .= "<p>====================================================================================</p>";
                     /*
                     Email::sendBDSImportError($message);
                     $this->output .= "Email Sent From Process Orders With Message $message".PHP_EOL;
