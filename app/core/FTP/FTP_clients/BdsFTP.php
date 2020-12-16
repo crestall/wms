@@ -18,7 +18,7 @@ class BdsFTP extends FTP
         'import_count'          => 0,
         'total_import'          => 0,
         'import_error'          => false,
-        'inventory_error'       => false
+        'inventory_error'       => false,
         'error'                 => false,
         'import_error_count'    => 0,
         'inventory_error_count' => 0,
