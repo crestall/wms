@@ -22,7 +22,7 @@ class BdsFTP extends FTP
         'error'                 => false,
         'import_error_count'    => 0,
         'inventory_error_count' => 0,
-        'error_string'          => '',
+        'inventory_error_string'=> '',
         'import_error_string'   => ''
     );
 
@@ -53,7 +53,7 @@ class BdsFTP extends FTP
 
             if($orders = $this->processOrders($this->orders_csv))
             {
-                echo "<pre>",print_r($this->return_array),"</pre>"; die();
+                //echo "<pre>",print_r($this->return_array),"</pre>"; die();
                 //echo "<pre>",print_r($orders),"</pre>";die();
                 $this->addOrders($orders);
             }
@@ -65,6 +65,7 @@ class BdsFTP extends FTP
             throw new Exception("Could not open ". $file);
         }
         fclose($tmp_handle);
+        return $this->return_array;
     }
 
     private function processOrders($the_orders)
@@ -312,9 +313,11 @@ class BdsFTP extends FTP
             }
             if($item_error)
             {
-                $message = "<p>There was a problem with some items</p>";
+                $message = "<p>There was a problem with some items for order {$o['client_order_id']}</p>";
                 $message .= $error_string;
-                $message .= "<p>Orders with these items will not be processed at the moment</p>";
+                $message .= "<p>This order has <strong>NOT</strong> been imported</p>";
+                $message .= "<p>Order details are listed below</p>";
+                $message .= "<p>---------------------------------------------------</p>";
                 $message .= "<p>BDS Order ID: {$o['client_order_id']}</p>";
                 $message .= "<p>Customer: {$o['ship_to']}</p>";
                 $message .= "<p>Address: {$o['address']}</p>";
@@ -323,9 +326,15 @@ class BdsFTP extends FTP
                 $message .= "<p>{$o['state']}</p>";
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
-                /*if (php_sapi_name() !='cli')*/
+                $message .= "<p>====================================================================================</p>";
+                $message .= "<p>====================================================================================</p>";
+                /*if (php_sapi_name() !='cli')
                 Email::sendBDSImportError($message);
                 $this->output .= "Email Sent From Add Orders With Message $message".PHP_EOL;
+                */
+                $this->return_array['iinventory_error'] = true;
+                ++$this->return_array['inventory_error_count'];
+                $this->return_array['inventory_error_string'] .= $message;
                 continue;
             }
             if($o['import_error'])
@@ -358,10 +367,11 @@ class BdsFTP extends FTP
             if($o['eparcel_express'] == 1) $vals['eparcel_express'] = 1;
             $itp = array($this->order_items[$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
+            ++$this->return_array['import_count'];
+            $this->return_array['import_string'] .= "<p>Imported BDS order {$o['client_order_id']}. The Warehouse order number is: $order_number</p>";
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($this->order_items[$o['client_order_id']], true).PHP_EOL;
-            ++$this->return_array['import_count'];
         }
     }
 } //end class
