@@ -265,7 +265,7 @@
             {
                 $import_errors .= "
                     <h3 class='error'>The Following Feedback Has Been Supplied Regarding Import Errors</h3>
-                    <table cellspacing='0' cellpadding='0' border='0' style='background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
                         <tr>
                             <td style='padding: 20px;'>$import_error_string</td>
                         </tr>
@@ -277,7 +277,7 @@
             {
                 $inventory_errors .= "
                     <h3 class='error'>The Following Feedback Has Been Supplied Regarding Inventory Errors</h3>
-                    <table cellspacing='0' cellpadding='0' border='0' style='background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
                         <tr>
                             <td style='padding: 20px;'>$inventory_error_string</td>
                         </tr>
@@ -286,7 +286,7 @@
             }
             $imports = "
                 <h3 class='success'>The Following Feedback Has Been Supplied Regarding Successful Imports</h3>
-                <table cellspacing='0' cellpadding='0' border='0' style='background: none repeat scroll 0 0 #ccebd6;border: 3px solid #009933;color: #009933;'>
+                <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #ccebd6;border: 3px solid #009933;color: #009933;'>
                     <tr>
                         <td style='padding: 20px;'>$import_string</td>
                     </tr>
