@@ -73,6 +73,16 @@
     }
 
     /**
+     * get the size of a file
+     *
+     * returns size of file or -1 on error - this means the file is not found or it is a directory
+     */
+    public function getFileSize($file)
+    {
+        return ftp_size($this->CON_ID, $file);
+    }
+
+    /**
      * delete a file from the server
      *
      * @returns boolean
