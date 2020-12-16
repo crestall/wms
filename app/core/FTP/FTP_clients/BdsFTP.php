@@ -23,7 +23,8 @@ class BdsFTP extends FTP
         'import_error_count'    => 0,
         'inventory_error_count' => 0,
         'inventory_error_string'=> '',
-        'import_error_string'   => ''
+        'import_error_string'   => '',
+        'import_string'         => ''
     );
 
     public function init()
