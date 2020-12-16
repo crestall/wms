@@ -246,11 +246,11 @@
         }
     }
 
-     public static function sendBDSImportError($message)
+     public static function sendBDSImportFeedback($feedback)
     {
         $mail = new PHPMailer();
         $mail->IsSMTP();
-
+        extract($feedback);
         try{
             $mail->Host = "smtp.office365.com";
             $mail->Port = Config::get('EMAIL_PORT');
@@ -261,15 +261,15 @@
             $mail->Password = Config::get('EMAIL_PWD');
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimporterror.html");
-            $replace_array = array("{CONTENT}");
-		    $replace_with_array = array($message);
+            $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{INVENTORY_ERROR_COUNT}","{IMPORT_COUNT}");
+		    $replace_with_array = array($total_import, $import_error_count, $inventory_error_count, $import_count);
 		    $body = str_replace($replace_array, $replace_with_array, $body);
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
     		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
 
-    		$mail->Subject = "Order with item error for BDS";
+    		$mail->Subject = "BDS Order Import Summary";
 
             $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 

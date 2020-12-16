@@ -333,7 +333,7 @@ class BdsFTP extends FTP
                 Email::sendBDSImportError($message);
                 $this->output .= "Email Sent From Add Orders With Message $message".PHP_EOL;
                 */
-                $this->return_array['iinventory_error'] = true;
+                $this->return_array['inventory_error'] = true;
                 ++$this->return_array['inventory_error_count'];
                 $this->return_array['inventory_error_string'] .= $message;
                 continue;
