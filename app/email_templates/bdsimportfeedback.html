@@ -7,7 +7,7 @@ body{
     font-size: 14px;
     color: #000;
 }
-div{
+div#main_body{
 	width:720px;
 	background:#FFF;
 }
@@ -93,10 +93,12 @@ span.bold{
 }
 
 div.errorbox{
-	border: 3px solid #ff3333;
+	border: 1px solid #ff3333;
+    background: none repeat scroll 0 0 #f8dbdb;
     color: #ff3333;
     margin-bottom: 10px;
     padding: 20px;
+    max-width: 100%;
 }
 
 div.feedbackbox{
@@ -105,12 +107,13 @@ div.feedbackbox{
     color: #009933;
     margin-bottom: 10px;
     padding: 20px;
+    max-width: 100%;
 }
 </style>
 
 </head>
 <body>
-	<div>
+	<div id="main_body">
     	<h2>The BDS Order Import Has Been Completed</h2>
         <div class="inset">
             <p>{TOTAL_IMPORT} total orders were collected</p>
@@ -119,11 +122,9 @@ div.feedbackbox{
             <p>Leaving {IMPORT_COUNT} orders that have been successfully added to the system</p>
         </div>
         <hr/>
-        <div class="inset">
             {IMPORT_ERRORS}
             {INVENTORY_ERRORS}
             {IMPORTS}
-        </div>
 		<p>Thankyou</p>
         <p class="italic"><span class="bold">The FSG Customer Service Team</span></p>
         <img src="cid:emailfoot" />
