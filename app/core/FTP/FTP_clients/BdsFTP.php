@@ -43,20 +43,19 @@ class BdsFTP extends FTP
             rewind($tmp_handle);
             while ($row = fgetcsv($tmp_handle))
             {
-                //echo "<pre>",print_r($row),"</pre>";
                 $this->orders_csv[] = $row;
             }
             $this->output = "=========================================================================================================".PHP_EOL;
             $this->output .= "IMPORTING BDS ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
             $this->output .= "=========================================================================================================".PHP_EOL;
             $this->return_array['total_import'] = count($this->orders_csv) - 1;
-            //echo "<pre>",print_r($this->return_array),"</pre>"; die();
 
             if($orders = $this->processOrders($this->orders_csv))
             {
-                //echo "<pre>",print_r($this->return_array),"</pre>"; die();
-                //echo "<pre>",print_r($orders),"</pre>";die();
-                $this->addOrders($orders);
+                if(!$this->addOrders($orders))
+                {
+                    die("It's All Fucked");
+                }
             }
             Logger::logOrderImports('order_imports/bds', $this->output); //die();
         }
@@ -373,6 +372,7 @@ class BdsFTP extends FTP
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($this->order_items[$o['client_order_id']], true).PHP_EOL;
+            return true;
         }
     }
 } //end class
