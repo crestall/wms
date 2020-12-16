@@ -18,8 +18,10 @@ class BdsFTP extends FTP
         'import_count'          => 0,
         'total_import'          => 0,
         'import_error'          => false,
+        'inventory_error'       => false
         'error'                 => false,
-        'error_count'           => 0,
+        'import_error_count'    => 0,
+        'inventory_error_count' => 0,
         'error_string'          => '',
         'import_error_string'   => ''
     );
@@ -263,7 +265,7 @@ class BdsFTP extends FTP
                     $this->output .= "Email Sent From Process Orders With Message $message".PHP_EOL;
                     */
                     $this->return_array['import_error'] = true;
-                    ++$this->return_array['error_count'];
+                    ++$this->return_array['import_error_count'];
                     $this->return_array['import_error_string'] .= $message;
 
                 }
