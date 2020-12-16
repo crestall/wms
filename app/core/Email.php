@@ -271,8 +271,8 @@
                 $inventory_errors .= "<h3 class='error'>The Following Feedback Has Been Supplied Regarding Import Errors</h3><div class='errorbox'>$inventory_error_string</div>";
             }
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimportfeedback.html");
-            $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{INVENTORY_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}");
-		    $replace_with_array = array($total_import, $import_error_count, $inventory_error_count, $import_count,$import_errors);
+            $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{INVENTORY_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{INVENTORY_ERRORS}");
+		    $replace_with_array = array($total_import, $import_error_count, $inventory_error_count, $import_count,$import_errors,$inventory_errors);
 		    $body = str_replace($replace_array, $replace_with_array, $body);
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
