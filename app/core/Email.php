@@ -263,7 +263,14 @@
             $import_errors = "";
             if($import_error)
             {
-                $import_errors .= "<h3 class='error'>The Following Feedback Has Been Supplied Regarding Import Errors</h3><div class='errorbox'>$import_error_string</div>";
+                $import_errors .= "
+                    <h3 class='error'>The Following Feedback Has Been Supplied Regarding Import Errors</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                        <tr>
+                            <td style='padding: 20px;'>$import_error_string</td>
+                        </tr>
+                    </table>
+                ";
             }
             $inventory_errors = "";
             if($inventory_error)
