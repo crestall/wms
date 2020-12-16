@@ -260,8 +260,8 @@ class BdsFTP extends FTP
                     $message .= "<p>{$ad['state']}</p>";
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
-                    $message .= "<p>====================================================================================</p>";
-                    $message .= "<p>====================================================================================</p>";
+                    $message .= "<p>=============================================================</p>";
+                    $message .= "<p>=============================================================</p>";
                     /*
                     Email::sendBDSImportError($message);
                     $this->output .= "Email Sent From Process Orders With Message $message".PHP_EOL;
@@ -327,8 +327,8 @@ class BdsFTP extends FTP
                 $message .= "<p>{$o['state']}</p>";
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
-                $message .= "<p>====================================================================================</p>";
-                $message .= "<p>====================================================================================</p>";
+                $message .= "<p>=============================================================</p>";
+                $message .= "<p>=============================================================</p>";
                 /*if (php_sapi_name() !='cli')
                 Email::sendBDSImportError($message);
                 $this->output .= "Email Sent From Add Orders With Message $message".PHP_EOL;
