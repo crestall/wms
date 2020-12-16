@@ -291,8 +291,6 @@
                         <td style='padding: 20px;'>$import_string</td>
                     </tr>
                 </table>
-
-                <div class='feedbackbox'>$import_string</div>
             ";
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimportfeedback.html");
             $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{INVENTORY_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{INVENTORY_ERRORS}","{IMPORTS}");
