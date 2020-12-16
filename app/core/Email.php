@@ -270,7 +270,7 @@
             {
                 $inventory_errors .= "<h3 class='error'>The Following Feedback Has Been Supplied Regarding Import Errors</h3><div class='errorbox'>$inventory_error_string</div>";
             }
-            $imports = "<h3 class='feedback'>The Following Feedback Has Been Supplied Regarding Successful Imports</h3><div class='feedbackbox'>$import_string</div>";
+            $imports = "<h3 class='success'>The Following Feedback Has Been Supplied Regarding Successful Imports</h3><div class='feedbackbox'>$import_string</div>";
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimportfeedback.html");
             $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{INVENTORY_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{INVENTORY_ERRORS}","{IMPORTS}");
 		    $replace_with_array = array($total_import, $import_error_count, $inventory_error_count, $import_count,$import_errors,$inventory_errors,$imports);
