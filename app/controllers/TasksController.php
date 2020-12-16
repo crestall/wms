@@ -35,7 +35,12 @@ class TasksController extends Controller
             if($this->BdsFTP->openConnection('/bdsorders'))
             {
                 $files = $this->BdsFTP->getFileNames();
-                $file = $files[0]; //there should be only one
+                foreach($files as $ind => $file)
+                {
+                    if($this->BdsFTP->getFileSize($file) === -1)
+                        unset($files[$ind]);
+                }
+                $file = $files[0]; //there should now be only one
                 $response = $this->BdsFTP->collectOrders($file);
                 echo "IN TASKS CONTROLLER<pre>",print_r($response),"<pre>";
                 Email::sendBDSImportFeedback($response);
