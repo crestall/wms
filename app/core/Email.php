@@ -260,7 +260,7 @@
             $mail->Username = Config::get('EMAIL_UNAME');
             $mail->Password = Config::get('EMAIL_PWD');
 
-            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimporterror.html");
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimportfeedback.html");
             $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{INVENTORY_ERROR_COUNT}","{IMPORT_COUNT}");
 		    $replace_with_array = array($total_import, $import_error_count, $inventory_error_count, $import_count);
 		    $body = str_replace($replace_array, $replace_with_array, $body);
