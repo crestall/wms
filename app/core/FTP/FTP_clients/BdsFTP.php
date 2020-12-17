@@ -45,6 +45,7 @@ class BdsFTP extends FTP
             {
                 $this->orders_csv[] = $row;
             }
+            fclose($tmp_handle);
             $this->output = "=========================================================================================================".PHP_EOL;
             $this->output .= "IMPORTING BDS ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
             $this->output .= "=========================================================================================================".PHP_EOL;
@@ -64,7 +65,6 @@ class BdsFTP extends FTP
             Logger::log("FTP Could not open file", "Could not open ". $file);
             throw new Exception("Could not open ". $file);
         }
-        fclose($tmp_handle);
         return $this->return_array;
     }
 

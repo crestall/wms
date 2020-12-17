@@ -34,17 +34,21 @@ class TasksController extends Controller
         {
             if($this->BdsFTP->openConnection('/bdsorders'))
             {
+                $responses = array();
                 $files = $this->BdsFTP->getFileNames();
-                foreach($files as $ind => $file)
+                foreach($files as $file)
                 {
                     if($this->BdsFTP->getFileSize($file) === -1)
-                        unset($files[$ind]);
+                        continue;
+                    echo "<p>Will now process - $file</p>";
+                    $responses[] = $this->BdsFTP->collectOrders($file);
                 }
-                $file = $files[0]; //there should now be only one
-                echo "<p>Will now process - $file</p>";
-                $response = $this->BdsFTP->collectOrders($file);
-                echo "IN TASKS CONTROLLER<pre>",var_dump($response),"<pre>"; //die();
-                Email::sendBDSImportFeedback($response);
+                //$file = $files[0]; //there should now be only one
+                echo "IN TASKS CONTROLLER<pre>",var_dump($responses),"<pre>"; //die();
+                foreach($responses as $response)
+                {
+                    Email::sendBDSImportFeedback($response);
+                }
                 //$this->BdsFTP->deleteFile($file);
                 $this->BdsFTP->closeConnection();
             }
