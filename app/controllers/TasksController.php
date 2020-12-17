@@ -41,7 +41,14 @@ class TasksController extends Controller
                         unset($files[$ind]);
                 }
                 $file = $files[0]; //there should now be only one
-                $response = $this->BdsFTP->collectOrders($file);
+                ob_start(
+                    function ($buffer, $file)
+                    {
+                        $buffer =  $this->BdsFTP->collectOrders($file)
+                    }
+                );
+                $response = ob_get_contents();
+                ob_end_clean();
                 echo "IN TASKS CONTROLLER<pre>",print_r($response),"<pre>";
                 Email::sendBDSImportFeedback($response);
                 //$this->BdsFTP->deleteFile($file);
