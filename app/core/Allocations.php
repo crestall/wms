@@ -12,6 +12,10 @@ class Allocations{
 
     public $controller;
 
+    private $backorder_clients = array(
+        86      //BDS
+    );
+
     public function __construct(Controller $controller){
         $this->controller = $controller;
     }
@@ -21,7 +25,7 @@ class Allocations{
         $oi_values = array();
         $allocations = array();
         $oi_index = 0;
-        //echo "<pre>",print_r($items),"</pre>"; //die();
+        echo "<pre>",print_r($items),"</pre>"; die();
         $import_error = false;
         foreach($items as $oid => $order_items)
         {
