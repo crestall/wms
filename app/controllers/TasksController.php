@@ -52,6 +52,7 @@ class TasksController extends Controller
                 }
                 //$this->BdsFTP->deleteFile($file);
                 $this->BdsFTP->closeConnection();
+                exit();
             }
         }
     }
