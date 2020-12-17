@@ -317,6 +317,7 @@
         } catch (Exception $e) {
             print_r($e->getMessage());die();
         }
+        return true;
     }
 
     public static function sendNuchevImportError($message)
