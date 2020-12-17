@@ -44,8 +44,8 @@ class TasksController extends Controller
                 echo "<p>BEFORE BUFFERRING - $file</p>";
                 ob_start();
                 //echo $file;
-                echo $this->BdsFTP->collectOrders($file);
-                $response = ob_get_clean();
+                $response = $this->BdsFTP->collectOrders($file);
+                ob_end_flush();
                 echo "IN TASKS CONTROLLER<pre>",var_dump($response),"<pre>"; die();
                 Email::sendBDSImportFeedback($response);
                 //$this->BdsFTP->deleteFile($file);
