@@ -41,17 +41,14 @@ class TasksController extends Controller
                         unset($files[$ind]);
                 }
                 $file = $files[0]; //there should now be only one
-                echo "<p>BEFORE BUFFERRING - $file</p>";
-                ob_start();
-                //echo $file;
+                echo "<p>Will now process - $file</p>";
                 $response = $this->BdsFTP->collectOrders($file);
-                ob_end_flush();
                 echo "IN TASKS CONTROLLER<pre>",var_dump($response),"<pre>"; die();
                 Email::sendBDSImportFeedback($response);
                 //$this->BdsFTP->deleteFile($file);
+                $this->BdsFTP->closeConnection();
             }
         }
-        $this->BdsFTP->closeConnection();
     }
 
     public function productionJobReminderTask()
