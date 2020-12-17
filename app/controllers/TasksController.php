@@ -42,9 +42,10 @@ class TasksController extends Controller
                         continue;
                     echo "<p>Will now process - $file</p>";
                     $responses[] = $this->BdsFTP->collectOrders($file);
+                    echo "<p>Have now processed - $file</p>";
                 }
                 //$file = $files[0]; //there should now be only one
-                echo "IN TASKS CONTROLLER<pre>",var_dump($responses),"<pre>"; //die();
+                //echo "IN TASKS CONTROLLER<pre>",var_dump($responses),"<pre>"; //die();
                 foreach($responses as $response)
                 {
                     Email::sendBDSImportFeedback($response);
