@@ -43,7 +43,7 @@ class TasksController extends Controller
                 $file = $files[0]; //there should now be only one
                 echo "<p>Will now process - $file</p>";
                 $response = $this->BdsFTP->collectOrders($file);
-                echo "IN TASKS CONTROLLER<pre>",var_dump($response),"<pre>"; die();
+                echo "IN TASKS CONTROLLER<pre>",var_dump($response),"<pre>"; //die();
                 Email::sendBDSImportFeedback($response);
                 //$this->BdsFTP->deleteFile($file);
                 $this->BdsFTP->closeConnection();
