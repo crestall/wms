@@ -25,7 +25,7 @@ class Allocations{
         $oi_values = array();
         $allocations = array();
         $oi_index = 0;
-        echo "<pre>",print_r($items),"</pre>"; die();
+        //echo "<pre>",print_r($items),"</pre>"; //die();
         $import_error = false;
         foreach($items as $oid => $order_items)
         {
@@ -38,11 +38,7 @@ class Allocations{
             {
                 $i_id = $details['id'];
                 $item_error_string = "<ul>";
-                //echo "<pre>",print_r($details),"</pre>"; //die();
-                //$pick_count = $left = (int)$details['qty'];
                 $item = $this->controller->item->getItemById($i_id);
-                //echo "<pre>",print_r($item),"</pre>"; die();
-                //$item_name = $item['name'];
                 if(filter_var($details['qty'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
                 {
                     $import_error = true;
@@ -62,7 +58,6 @@ class Allocations{
                         );
 
                     }
-
                     foreach($collection_items as $ci)
                     {
                         //echo "Allocations<pre>",print_r($allocations),"</pre>";//continue;
@@ -81,9 +76,16 @@ class Allocations{
                         }
                         if( $total_available < $pick_count)
                         {
-                            $item_error = true;
-                            $item_error_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to create/update this order. $pick_count required, but only $total_available are available</li>";
-                            //die("$total_available - There are insufficient quantities of $item_name to be able to create/update this order");
+                            if(in_array($ci['client_id'], $this->backorder_clients))
+                            {
+                                $item_error_string .= "<li><b>WILL NEED TO MOVE $pick_count OF $item_name to receiving and flag as backorder.</b></li>";
+                            }
+                            else
+                            {
+                                $item_error = true;
+                                $item_error_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to create/update this order. $pick_count required, but only $total_available are available</li>";
+                            }
+
                         }
                         else
                         {
@@ -187,8 +189,8 @@ class Allocations{
             //die();
             $oi_values[$oid] = $values;
         }//endforeach order
-        //echo "<pre>",print_r($oi_values),"</pre>";
-        //die();
+        echo "<pre>OI Values",print_r($oi_values),"</pre>";
+        die();
         //echo "Allocations<pre>",print_r($allocations),"</pre>";
         //echo "l_allocations<pre>",print_r($l_allocations),"</pre>"; die();
         return $oi_values;
