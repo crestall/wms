@@ -44,7 +44,7 @@ class TasksController extends Controller
                 ob_start(
                     function ($buffer, $file)
                     {
-                        $buffer =  $this->BdsFTP->collectOrders($file)
+                        $buffer =  $this->BdsFTP->collectOrders($file);
                     }
                 );
                 $response = ob_get_contents();
