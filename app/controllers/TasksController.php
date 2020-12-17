@@ -41,6 +41,7 @@ class TasksController extends Controller
                         unset($files[$ind]);
                 }
                 $file = $files[0]; //there should now be only one
+                echo "<p>BEFORE BUFFERRING - $file</p>";
                 ob_start(
                     function ($buffer, $file)
                     {
