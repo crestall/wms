@@ -108,7 +108,7 @@ class BdsFTP extends FTP
         else
             $collected_orders = $the_orders;
 
-        //echo "THE ORDERS<pre>",print_r($the_orders),"</pre>";die();
+        //echo "THE ORDERS<pre>",print_r($the_orders),"</pre>";//die();
         $skip_first = true;
         if(count($collected_orders) > 0)
         {
@@ -372,8 +372,8 @@ class BdsFTP extends FTP
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($this->order_items[$o['client_order_id']], true).PHP_EOL;
-            return true;
         }
+        return true;
     }
 } //end class
 ?>
