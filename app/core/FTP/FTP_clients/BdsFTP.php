@@ -22,12 +22,12 @@ class BdsFTP extends FTP
         $this->URL = 'ftp.bahai.org.au';
         $this->USERNAME = 'bdsorders';
         $this->PASSWORD = 'mN**s735a';
-        $this->resetReturn();
+        $this->resetVars();
     }
 
     public function collectOrders($file)
     {
-        $this->resetReturn();
+        $this->resetVars();
         $tmp_handle = fopen('php://temp', 'r+');
         if (ftp_fget($this->CON_ID, $tmp_handle, $file, FTP_ASCII))
         {
@@ -367,7 +367,7 @@ class BdsFTP extends FTP
         return true;
     }
 
-    private function resetReturn()
+    private function resetVars()
     {
         $this->return_array = array(
             'import_count'          => 0,
@@ -381,6 +381,8 @@ class BdsFTP extends FTP
             'import_error_string'   => '',
             'import_string'         => ''
         );
+
+        $this->orders_csv = array();
     }
 } //end class
 ?>
