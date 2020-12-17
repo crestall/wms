@@ -42,15 +42,10 @@ class TasksController extends Controller
                 }
                 $file = $files[0]; //there should now be only one
                 echo "<p>BEFORE BUFFERRING - $file</p>";
-                ob_start(
-                    function ($buffer, $file)
-                    {
-                        //$buffer =  $this->BdsFTP->collectOrders($file);
-                        echo $file;
-                    }
-                );
-                $response = ob_get_contents();
-                ob_end_clean();
+                ob_start();
+                echo $file;
+                //$buffer =  $this->BdsFTP->collectOrders($file);
+                $response = ob_get_clean();
                 echo "IN TASKS CONTROLLER<pre>",var_dump($response),"<pre>"; die();
                 Email::sendBDSImportFeedback($response);
                 //$this->BdsFTP->deleteFile($file);
