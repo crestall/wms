@@ -14,18 +14,7 @@ class BdsFTP extends FTP
     private $order_items;
     private $orders_csv = array();
 
-    private $return_array = array(
-        'import_count'          => 0,
-        'total_import'          => 0,
-        'import_error'          => false,
-        'inventory_error'       => false,
-        'error'                 => false,
-        'import_error_count'    => 0,
-        'inventory_error_count' => 0,
-        'inventory_error_string'=> '',
-        'import_error_string'   => '',
-        'import_string'         => ''
-    );
+    private $return_array = array();
 
     public function init()
     {
@@ -37,6 +26,7 @@ class BdsFTP extends FTP
 
     public function collectOrders($file)
     {
+        $this->resetReturn();
         $tmp_handle = fopen('php://temp', 'r+');
         if (ftp_fget($this->CON_ID, $tmp_handle, $file, FTP_ASCII))
         {
@@ -374,6 +364,22 @@ class BdsFTP extends FTP
             $this->output .= print_r($this->order_items[$o['client_order_id']], true).PHP_EOL;
         }
         return true;
+    }
+
+    private function resetReturn()
+    {
+        $this->return_array = array(
+            'import_count'          => 0,
+            'total_import'          => 0,
+            'import_error'          => false,
+            'inventory_error'       => false,
+            'error'                 => false,
+            'import_error_count'    => 0,
+            'inventory_error_count' => 0,
+            'inventory_error_string'=> '',
+            'import_error_string'   => '',
+            'import_string'         => ''
+        );
     }
 } //end class
 ?>
