@@ -50,7 +50,7 @@ class TasksController extends Controller
                 );
                 $response = ob_get_contents();
                 ob_end_clean();
-                echo "IN TASKS CONTROLLER<pre>",print_r($response),"<pre>";
+                echo "IN TASKS CONTROLLER<pre>",var_dump($response),"<pre>"; die();
                 Email::sendBDSImportFeedback($response);
                 //$this->BdsFTP->deleteFile($file);
             }
