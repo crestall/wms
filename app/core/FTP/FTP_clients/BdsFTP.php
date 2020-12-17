@@ -22,6 +22,7 @@ class BdsFTP extends FTP
         $this->URL = 'ftp.bahai.org.au';
         $this->USERNAME = 'bdsorders';
         $this->PASSWORD = 'mN**s735a';
+        $this->resetReturn();
     }
 
     public function collectOrders($file)
