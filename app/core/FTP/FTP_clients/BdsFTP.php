@@ -291,6 +291,7 @@ class BdsFTP extends FTP
             $item_error = false;
             $item_backorder = false;
             $error_string = "";
+            $backorder_string = "";
             foreach($this->order_items[$o['client_order_id']] as $item)
             {
                 if($item['item_error'])
@@ -301,11 +302,32 @@ class BdsFTP extends FTP
                 if($item['item_backorder'])
                 {
                     $item_backorder = true;
+                    $backorder_string .= $item['item_backorder_string'];
                 }
             }
             if($item_backorder)
             {
-
+                $message = "<p>{$o['client_order_id']} cannot be shipped at the moment</p>";
+                $message .= $backorder_string;
+                $message .= "<p>Order details are listed below</p>";
+                $message .= "<p>---------------------------------------------------</p>";
+                $message .= "<p>BDS Order ID: {$o['client_order_id']}</p>";
+                $message .= "<p>Customer: {$o['ship_to']}</p>";
+                $message .= "<p>Address: {$o['address']}</p>";
+                $message .= "<p>{$o['address_2']}</p>";
+                $message .= "<p>{$o['suburb']}</p>";
+                $message .= "<p>{$o['state']}</p>";
+                $message .= "<p>{$o['postcode']}</p>";
+                $message .= "<p>{$o['country']}</p>";
+                $message .= "<p>=============================================================</p>";
+                $message .= "<p>=============================================================</p>";
+                /*if (php_sapi_name() !='cli')
+                Email::sendBDSImportError($message);
+                $this->output .= "Email Sent From Add Orders With Message $message".PHP_EOL;
+                */
+                $this->return_array['backorder'] = true;
+                ++$this->return_array['backorder_count'];
+                $this->return_array['backorder_string'] .= $message;
             }
             if($item_error)
             {
@@ -359,6 +381,7 @@ class BdsFTP extends FTP
                 'country'               => $o['country'],
                 'contact_phone'         => $o['contact_phone']
             );
+            if($item_backorder) $vals['backorder_items'] = 1;
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['eparcel_express'] = 1;
             $itp = array($this->order_items[$o['client_order_id']]);
