@@ -248,6 +248,8 @@ class Order extends Model{
             'country'       => $data['country'],
             'entered_by'    => $eb
         );
+        if(isset($data['backorder_items']))
+            $o_values['backorder_items'] = 1;
         if(!empty($data['client_order_id']))
             $o_values['client_order_id'] = $data['client_order_id'];
         if(!empty($data['company_name']))
