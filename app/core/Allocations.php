@@ -84,7 +84,7 @@ class Allocations{
                                 $f_locations[] = array(
                                     'location_id'   =>  $this->controller->location->receiving_id,
                                     'qty'           =>  $pick_count,
-                                    'backorder'     =>  true;
+                                    'backorder'     =>  true
                                 );
                             }
                             else
