@@ -67,6 +67,7 @@ class Allocations{
                         $id = (isset($ci['linked_item_id']))? $ci['linked_item_id'] : $ci['id'];
 
                         $f_locations = array();
+                        $backorder_items = false;
 
                         if(!isset($allocations[$id])) $allocations[$id] = 0;
                         $total_available = $this->controller->item->getAvailableStock($id, $this->controller->order->fulfilled_id) - $allocations[$id];
@@ -79,6 +80,11 @@ class Allocations{
                             if(in_array($ci['client_id'], $this->backorder_clients))
                             {
                                 $item_error_string .= "<li><b>WILL NEED TO MOVE $pick_count OF $item_name - $id to backorders and flag as backorder.</b></li>";
+                                $backorder_items = true;
+                                $f_locations[] = array(
+                                    'location_id'   =>  'backorders',
+                                    'qty'           =>  $pick_count
+                                );
                             }
                             else
                             {
