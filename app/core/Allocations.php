@@ -82,8 +82,9 @@ class Allocations{
                                 $item_error_string .= "<li><b>WILL NEED TO MOVE $pick_count OF $item_name - $id to backorders and flag as backorder.</b></li>";
                                 $backorder_items = true;
                                 $f_locations[] = array(
-                                    'location_id'   =>  'backorders',
-                                    'qty'           =>  $pick_count
+                                    'location_id'   =>  $this->controller->location->receiving_id,
+                                    'qty'           =>  $pick_count,
+                                    'backorder'     =>  true;
                                 );
                             }
                             else
