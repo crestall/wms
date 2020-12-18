@@ -252,10 +252,6 @@ class BdsFTP extends FTP
                     $message .= "<p>{$ad['country']}</p>";
                     $message .= "<p>=============================================================</p>";
                     $message .= "<p>=============================================================</p>";
-                    /*
-                    Email::sendBDSImportError($message);
-                    $this->output .= "Email Sent From Process Orders With Message $message".PHP_EOL;
-                    */
                     $this->return_array['import_error'] = true;
                     ++$this->return_array['import_error_count'];
                     $this->return_array['import_error_string'] .= $message;
@@ -293,6 +289,7 @@ class BdsFTP extends FTP
         {
             //check for errors first
             $item_error = false;
+            $item_backorder = false;
             $error_string = "";
             foreach($this->order_items[$o['client_order_id']] as $item)
             {
@@ -301,6 +298,14 @@ class BdsFTP extends FTP
                     $item_error = true;
                     $error_string .= $item['item_error_string'];
                 }
+                if($item['item_backorder'])
+                {
+                    $item_backorder = true;
+                }
+            }
+            if($item_backorder)
+            {
+
             }
             if($item_error)
             {

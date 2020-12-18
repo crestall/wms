@@ -39,6 +39,7 @@ class Allocations{
             {
                 $i_id = $details['id'];
                 $item_error_string = "<ul>";
+                $item_backorder_string = "<ul>";
                 $item = $this->controller->item->getItemById($i_id);
                 if(filter_var($details['qty'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
                 {
@@ -81,6 +82,7 @@ class Allocations{
                             if(in_array($ci['client_id'], $this->backorder_clients))
                             {
                                 $item_backorder = true;
+                                $item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
                                 $f_locations[] = array(
                                     'location_id'   =>  $this->controller->location->receiving_id,
                                     'qty'           =>  $pick_count,
@@ -179,6 +181,7 @@ class Allocations{
                             'locations'             => $f_locations,
                             'item_error_string'     => $item_error_string."</ul>",
                             'item_error'            => $item_error,
+                            'item_backorder_string' => $item_backorder_string."</ul>",
                             'item_backorder'        => $item_backorder,
                             'order_error_string'    => $order_error_string,
                             'import_error'          => false,
@@ -197,8 +200,8 @@ class Allocations{
             //die();
             $oi_values[$oid] = $values;
         }//endforeach order
-        //echo "<pre>OI Values",print_r($oi_values),"</pre>";
-        //die();
+        echo "<pre>OI Values",print_r($oi_values),"</pre>";
+        die();
         //echo "Allocations<pre>",print_r($allocations),"</pre>";
         //echo "l_allocations<pre>",print_r($l_allocations),"</pre>"; die();
         return $oi_values;
