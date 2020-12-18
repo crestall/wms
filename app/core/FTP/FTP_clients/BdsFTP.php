@@ -405,6 +405,9 @@ class BdsFTP extends FTP
             'error'                 => false,
             'import_error_count'    => 0,
             'inventory_error_count' => 0,
+            'backorder'             => false,
+            'backorder_string'      => '',
+            'backorder_count'       => 0,
             'inventory_error_string'=> '',
             'import_error_string'   => '',
             'import_string'         => ''
