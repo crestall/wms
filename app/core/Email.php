@@ -293,8 +293,8 @@
                 </table>
             ";
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimportfeedback.html");
-            $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{INVENTORY_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{BACKORDERS}","{IMPORTS}");
-		    $replace_with_array = array($total_import, $import_error_count, $inventory_error_count, $import_count,$import_errors,$backorders,$imports);
+            $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{BACKORDER_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{BACKORDERS}","{IMPORTS}");
+		    $replace_with_array = array($total_import, $import_error_count, $backorder_count, $import_count,$import_errors,$backorders,$imports);
 		    $body = str_replace($replace_array, $replace_with_array, $body);
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
