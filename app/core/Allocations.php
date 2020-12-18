@@ -64,7 +64,7 @@ class Allocations{
                         $pick_count = $left = $ci['number'] * $details['qty'];
                         $item_name = $ci['name'];
                         $item_sku = $ci['sku'];
-                        $id = $ci['id'];
+                        $id = (isset($ci['linked_item_id']))? $ci['linked_item_id'] : $ci['id'];
 
                         $f_locations = array();
 
@@ -78,7 +78,7 @@ class Allocations{
                         {
                             if(in_array($ci['client_id'], $this->backorder_clients))
                             {
-                                $item_error_string .= "<li><b>WILL NEED TO MOVE $pick_count OF $item_name to receiving and flag as backorder.</b></li>";
+                                $item_error_string .= "<li><b>WILL NEED TO MOVE $pick_count OF $item_name - $id to backorders and flag as backorder.</b></li>";
                             }
                             else
                             {
