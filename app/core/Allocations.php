@@ -32,6 +32,7 @@ class Allocations{
             $values = array();
             $import_error_string = "";
             $item_error = false;
+            $item_backorder = false;
             //$item_error_string = "<ul>";
             $order_error_string = "";
             foreach($order_items as $details)
@@ -79,8 +80,7 @@ class Allocations{
                         {
                             if(in_array($ci['client_id'], $this->backorder_clients))
                             {
-                                $item_error_string .= "<li><b>WILL NEED TO MOVE $pick_count OF $item_name - $id to backorders and flag as backorder.</b></li>";
-                                $backorder_items = true;
+                                $item_backorder = true;
                                 $f_locations[] = array(
                                     'location_id'   =>  $this->controller->location->receiving_id,
                                     'qty'           =>  $pick_count,
@@ -179,6 +179,7 @@ class Allocations{
                             'locations'             => $f_locations,
                             'item_error_string'     => $item_error_string."</ul>",
                             'item_error'            => $item_error,
+                            'item_backorder'        => $item_backorder,
                             'order_error_string'    => $order_error_string,
                             'import_error'          => false,
                             'qty'                   => $pick_count
