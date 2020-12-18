@@ -272,7 +272,7 @@
                     </table>
                 ";
             }
-            $inventory_errors = "";
+            $backorders = "";
             if($backorder)
             {
                 $backorders .= "
