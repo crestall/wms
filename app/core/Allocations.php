@@ -200,8 +200,8 @@ class Allocations{
             //die();
             $oi_values[$oid] = $values;
         }//endforeach order
-        echo "<pre>OI Values",print_r($oi_values),"</pre>";
-        die();
+        //echo "<pre>OI Values",print_r($oi_values),"</pre>";
+        //die();
         //echo "Allocations<pre>",print_r($allocations),"</pre>";
         //echo "l_allocations<pre>",print_r($l_allocations),"</pre>"; die();
         return $oi_values;
