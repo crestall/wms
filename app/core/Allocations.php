@@ -84,7 +84,7 @@ class Allocations{
                                 $item_backorder = true;
                                 $item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
                                 $f_locations[] = array(
-                                    'location_id'   =>  $this->controller->location->receiving_id,
+                                    'location_id'   =>  $this->controller->location->backorders_id,
                                     'qty'           =>  $pick_count,
                                     'backorder'     =>  true
                                 );
