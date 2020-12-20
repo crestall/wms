@@ -50,7 +50,7 @@ class TasksController extends Controller
                 {
                     Email::sendBDSImportFeedback($response);
                 }
-                //$this->BdsFTP->deleteFile($file);
+                $this->BdsFTP->deleteFile($file);
                 $this->BdsFTP->closeConnection();
                 exit();
             }
