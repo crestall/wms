@@ -92,6 +92,16 @@
         return ftp_delete($this->CON_ID, $file);
     }
 
+     /**
+     * rename/move a file on the server
+     *
+     * @returns boolean
+     */
+    public function renameFile($old_name, $new_name)
+    {
+        return ftp_rename($this->CON_ID, $old_name, $new_name);
+    }
+
     /**
     * Closes the current FTP connection
     *
