@@ -25,8 +25,8 @@ else
 }
 $pallets = (empty(Form::value('pallets')))? $order['pallets']:Form::value('pallets');
 $satchels = (empty(Form::value('satchels')))? $order['satchels']:Form::value('satchels');
-$handling = (empty(Form::value('handling')))? $order['handling_charge']:Form::value('handling');
-$postage = (empty(Form::value('postage')))? $order['postage_charge']:Form::value('postage');
+$handling_charge = (empty(Form::value('handling_charge')))? $order['handling_charge']:Form::value('handling_charge');
+$postage_charge = (empty(Form::value('postage_charge')))? $order['postage_charge']:Form::value('postage_charge');
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -69,7 +69,7 @@ $postage = (empty(Form::value('postage')))? $order['postage_charge']:Form::value
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
-                    <input type="text" class="form-control number" name="handling" id="handling" value="<?php echo $handling;?>" />
+                    <input type="text" class="form-control number" name="handling_charge" id="handling_charge" value="<?php echo $handling_charge;?>" />
                 </div>
                 <?php echo Form::displayError('handling');?>
             </div>
@@ -81,7 +81,7 @@ $postage = (empty(Form::value('postage')))? $order['postage_charge']:Form::value
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
-                    <input type="text" class="form-control number" name="postage" id="postage" value="<?php echo $postage;?>" />
+                    <input type="text" class="form-control number" name="postage_charge" id="postage_charge" value="<?php echo $postage_charge;?>" />
                 </div>
                 <?php echo Form::displayError('postage');?>
             </div>
