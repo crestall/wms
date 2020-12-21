@@ -798,6 +798,39 @@ bootsrap adjustments
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
     }
 
+    /** FSG LIGHT button type - outline only */
+    .btn-outline-fsglight {
+        color: #74a3d4;
+        border-color: #74a3d4;
+    }
+
+    .btn-outline-fsglight:hover {
+        color: #fff !important;
+        background-color: #74a3d4;
+        border-color: #74a3d4;
+    }
+
+    .btn-outline-fsglight:focus, .btn-outline-fsglight.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-fsglight.disabled, .btn-outline-fsglight:disabled {
+        color: #030c57;
+        background-color: transparent;
+    }
+
+    .btn-outline-fsglight:not(:disabled):not(.disabled):active, .btn-outline-fsglight:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-fsglight.dropdown-toggle {
+        color: #fff;
+        background-color: #030c57;
+        border-color: #030c57;
+    }
+
+    .btn-outline-fsglight:not(:disabled):not(.disabled):active:focus, .btn-outline-fsglight:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-fsglight.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
     .container-xxl{
         width: 100%;
         padding-right: 15px;
