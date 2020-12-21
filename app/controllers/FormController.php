@@ -4376,12 +4376,17 @@ class FormController extends Controller {
         }
         $pallets = ($this->dataSubbed($pallets))? $pallets: 0;
         $satchels = ($this->dataSubbed($satchels))? $satchels: 0;
+        $gst = ($handling_charge + $postage_charge) * 0.1;
+        $total_cost = $handling_charge + $postage_charge + $gst;
         $vals = array(
-            'pallets'       => $pallets,
-            'satchels'      => $satchels,
-            'total_cost'    => $charge,
-            'shrink_wrap'   => 0,
-            'bubble_wrap'   => 0
+            'pallets'           => $pallets,
+            'satchels'          => $satchels,
+            'total_cost'        => $total_cost,
+            'gst'               => $gst,
+            'postage_charge'    => $postage_charge,
+            'handling_charge'   => $handling_charge,
+            'shrink_wrap'       => 0,
+            'bubble_wrap'       => 0
         );
         if(isset($shrink_wrap))
             $vals['shrink_wrap'] = 1;
