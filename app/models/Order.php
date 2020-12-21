@@ -1333,6 +1333,23 @@ class Order extends Model{
         return $db->queryData($q);
     }
 
+    public function getCurrentBackorderOrders()
+    {
+        $db = Database::openConnection();
+        $q = "  select
+                    count(*) as order_count, c.client_name, o.client_id
+                from
+                    orders o join clients c on o.client_id = c.id
+                where
+                    o.status_id != {$this->fulfilled_id} and c.active = 1 and o.backorder_items = 1
+                group by
+                    o.client_id
+                order by
+                    c.client_name";
+
+        return $db->queryData($q);
+    }
+
     public function getCurrentStoreOrders()
     {
         return $this->getCurrentOrders(1);
