@@ -19,6 +19,8 @@
      protected $order_details;
      protected $client_details;
      protected $items;
+     protected $item_count;
+     protected $handling_charge;
 
      /**
       * Constructor
@@ -36,6 +38,8 @@
         $this->order_details = $this->controller->order->getOrderDetail($order_id);
         $this->client_details = $this->controller->client->getClientInfo($this->order_details['client_id']);
         $this->items =  $this->controller->order->getItemsForOrder($order_id);
+        $this->item_count = $this->controller->order->getItemCountForOrder($order_id);
+        $this->handling_charge = $this->getHandlingCharge($this->order_details['client_id']);
         if($this->order_details['eparcel_express'] > 0 && $courier_id == $this->controller->courier->eParcelId)
         {
             $courier_id = $this->controller->courier->eParcelExpressId;
@@ -132,6 +136,15 @@
                     $order_values['total_cost'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1, 2);
                 }
             /*********** special deals for OnePlate *******************/
+            /*********** BDS Calculations *******************/
+                if($this->order_details['client_id'] == 86)
+                {
+                    $order_values['handling_charge'] = $this->handling_charge;
+                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.3 , 2);
+                    $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                    $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                }
+            /*********** end BDS Calculations *******************/
             $order_values['charge_code'] = $sResponse['shipments'][0]['items'][0]['product_id'];
             $order_values['labels'] = count($eparcel_details['items']);
             $order_values['courier_id'] = $courier_id;
@@ -227,9 +240,18 @@
                 /*********** special deals for OnePlate *******************/
                 if($this->order_details['client_id'] == 82)
                 {
-                    $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2); 
+                    $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2);
                 }
                 /*********** special deals for OnePlate *******************/
+                /*********** BDS Calculations *******************/
+                    if($this->order_details['client_id'] == 86)
+                    {
+                        $order_values['handling_charge'] = $this->handling_charge;
+                        $postage = $order_values['postage_charge'] = round($consignment['TotalCharge'] * 1.3 * DF_FUEL_SURCHARGE , 2);
+                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    }
+                /*********** end BDS Calculations *******************/
                 $order_values['courier_id'] = $this->controller->courier->directFreightId;
                 $order_values['label_url'] = $response['LabelURL'];
                 if($this->addBubblewrap())
@@ -305,6 +327,24 @@
                 $this->assignCourier($order_id, $courier_id);
             }
         }
+    }
+
+    private function getHandlingCharge($client_id)
+    {
+        //BDS
+        if($client_id = 86)
+        {
+            if($this->item_count < 10)
+                return 4;
+            if($this->item_count < 50)
+                return 5;
+            if($this->item_count <= 100)
+                return 10;
+            if($this->item_count > 100)
+                return 15;
+        }
+
+        return 0;
     }
 
 }
