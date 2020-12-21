@@ -39,7 +39,7 @@
     <div class="col-md-12 text-center">
         <h2>Current Orders With Backorders</h2>
     </div>
-    <div class="card-deck backorderdeck p-3 m-3 rounded bg-light ">
+    <div class="card-deck backorderdeck border border-secondary p-3 m-3 rounded bg-light ">
         <?php foreach($backorders as $o):
             $s = ($o['order_count'] > 1)? "s" : ""; ?>
             <div class="card backordercard">
