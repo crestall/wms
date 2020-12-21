@@ -47,7 +47,7 @@
                     <h4><?php echo $o['client_name'];?></h4>
                 </div>
                 <div class="card-body">
-                	<i class="fad fa-truck fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
+                	<i class="fad fa-truck fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> Backorder<?php echo $s;?></span>
                 </div>
                 <div class="card-footer text-right">
                     <a class="btn btn-lg btn-outline-fsg" href="/orders/view-backorders/client=<?php echo $o['client_id'];?>">Manage Backorders</a>
