@@ -4374,6 +4374,8 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
+        $handling_charge = (empty($handling_charge))? 0 : $handling_charge;
+        $postage_charge = (empty($postage_charge))? 0 : $postage_charge;
         $pallets = ($this->dataSubbed($pallets))? $pallets: 0;
         $satchels = ($this->dataSubbed($satchels))? $satchels: 0;
         $gst = ($handling_charge + $postage_charge) * 0.1;
