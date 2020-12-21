@@ -291,7 +291,7 @@ if(!$error)
                             </div>
                             <div class="card-body">
                                 <p class="inst text-danger">
-                                    All Prices Are GST Exclusive
+                                    All Charges Are GST Exclusive
                                 </p>
                                 <?php include(Config::get('VIEWS_PATH')."forms/addmisc.php");?>
                             </div>
