@@ -68,7 +68,7 @@ class BdsFTP extends FTP
             fputcsv($temp_file, array_values($row), ',', '"');
         }
         rewind($temp_file);
-        $file_name = "BDS_dispatch_".date("Ymd")."_".time();
+        $file_name = "BDS_dispatch_".date("Ymd")."_".time().".csv";
         if($this->uploadFile($file_name, $temp_file))
         {
             fclose($temp_file);
