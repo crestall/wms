@@ -430,6 +430,7 @@ class Order extends Model{
                 'courier'               => $courier,
                 'charge'                => $charge,
                 'consignment_id'        => $co['consignment_id'],
+                'csv_items'             => $csv_items
             );
             $return[] = $row;
         }
