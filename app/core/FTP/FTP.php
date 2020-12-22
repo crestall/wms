@@ -51,15 +51,42 @@
             }
             if(!empty($dir))
             {
-                if(!@ftp_chdir($this->CON_ID, $dir))
-                {
-                    Logger::log("FTP Director Change Failed", "Could not change to ". $dir);
-                    throw new Exception("Could not change to ". $dir);
-                    return false;
-                }
+                return $this->changeDir($dir);
             }
             return true;
         }
+    }
+
+     /**
+     * upload a file
+     *
+     * @returns boolean
+     */
+    public function uploadFile($fileName, $localFile)
+    {
+        if(!ftp_fput($this->CON_ID, $fileName, $localFile, FTP_ASCII))
+        {
+            Logger::log("FTP error: The file could not be written to the FTP server.");
+            throw new Exception("FTP error: The file could not be written to the FTP server.");
+            return false;
+        }
+        return true;
+    }
+
+     /**
+     * change directory
+     *
+     * @returns boolean
+     */
+    public function changeDir($dir)
+    {
+        if(!@ftp_chdir($this->CON_ID, $dir))
+        {
+            Logger::log("FTP Director Change Failed", "Could not change to ". $dir);
+            throw new Exception("Could not change to ". $dir);
+            return false;
+        }
+        return true;
     }
 
     /**

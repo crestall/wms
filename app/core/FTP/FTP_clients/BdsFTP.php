@@ -59,6 +59,28 @@ class BdsFTP extends FTP
         return $this->return_array;
     }
 
+    public function uploadCSVFile(array $csvData)
+    {
+        $temp_file = fopen('php://temp', 'r+');
+        fputcsv($temp_file, $csvData['cols'], ',', '"');
+        foreach($csvData['rows'] as $row)
+        {
+            fputcsv($out, array_values($row), ',', '"');
+        }
+        rewind($temp_file);
+        $file_name = "BDS_dispatch_".date("Ymd")."_".time();
+        if($this->uploadFile($file_name, $temp_file))
+        {
+            fclose($temp_file);
+            return true;
+        }
+        else
+        {
+            fclose($temp_file);
+            return false;
+        }
+    }
+
     private function processOrders($the_orders)
     {
         //echo "<pre>",print_r($the_orders),"</pre>"; die();

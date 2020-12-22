@@ -65,74 +65,80 @@ class TasksController extends Controller
         }
         else
         {
-            //echo "gonna do it";
-            $client_id = 86;
-            $orders = $this->order->getUnFTPedOrdersArray($client_id);
-            //echo "<pre>",print_r($orders),"</pre>"; die();
-            $cols = array(
-                "Date Ordered",
-                "Entered By",
-                "Date Dispatched",
-                "FSG Order Number",
-                "BDS Order Number",
-                "Shipped To",
-                'Total Items',
-                'Handling Charge',
-                'Postage Charge',
-                'Total Charge (GST Ex)',
-                'GST',
-                'Total Charge (GST Inc)',
-                "Courier",
-                "Consignment ID",
-                "Tracking URL",
-            );
-
-            $rows = array();
-            $extra_cols = 0;
-            foreach($orders as $o)
+            if($this->BdsFTP->openConnection('/bdsorders/processed_orders'))
             {
-                $row = array(
-                    $o['date_ordered'],
-                    $o['entered_by'],
-                    $o['date_fulfilled'],
-                    $o['order_number'],
-                    "#".$o['client_order_number'],
-                    str_replace("<br/>", ", ",$o['shipped_to']),
-                    $o['total_items'],
-                    $o['handling_charge'],
-                    $o['postage_charge'],
-                    $o['total_exgst'],
-                    $o['gst'],
-                    $o['total_gstinc'],
-                    $o['courier'],
-                    $o['consignment_id'],
-                    $o['tracking_url']
+                 //echo "gonna do it";
+                $client_id = 86;
+                $orders = $this->order->getUnFTPedOrdersArray($client_id);
+                //echo "<pre>",print_r($orders),"</pre>"; die();
+                $cols = array(
+                    "Date Ordered",
+                    "Entered By",
+                    "Date Dispatched",
+                    "FSG Order Number",
+                    "BDS Order Number",
+                    "Shipped To",
+                    'Total Items',
+                    'Handling Charge',
+                    'Postage Charge',
+                    'Total Charge (GST Ex)',
+                    'GST',
+                    'Total Charge (GST Inc)',
+                    "Courier",
+                    "Consignment ID",
+                    "Tracking URL",
                 );
-                $extra_cols = max($extra_cols, count($o['csv_items']));
-                $i = 1;
-                foreach($o['csv_items'] as $array)
+
+                $rows = array();
+                $extra_cols = 0;
+                foreach($orders as $o)
                 {
-                    $row[] = $array['name'];
-                    $row[] = $array['qty'];
-                    $row[] = $array['cpid'];
-                    $row[] = $array['sku'];
+                    $row = array(
+                        $o['date_ordered'],
+                        $o['entered_by'],
+                        $o['date_fulfilled'],
+                        $o['order_number'],
+                        "#".$o['client_order_number'],
+                        str_replace("<br/>", ", ",$o['shipped_to']),
+                        $o['total_items'],
+                        $o['handling_charge'],
+                        $o['postage_charge'],
+                        $o['total_exgst'],
+                        $o['gst'],
+                        $o['total_gstinc'],
+                        $o['courier'],
+                        $o['consignment_id'],
+                        $o['tracking_url']
+                    );
+                    $extra_cols = max($extra_cols, count($o['csv_items']));
+                    $i = 1;
+                    foreach($o['csv_items'] as $array)
+                    {
+                        $row[] = $array['name'];
+                        $row[] = $array['qty'];
+                        $row[] = $array['cpid'];
+                        $row[] = $array['sku'];
+                        ++$i;
+                    }
+                    $rows[] = $row;
+                }
+                $i = 1;
+                while($i <= $extra_cols)
+                {
+                    $cols[] = "Item $i Name";
+                    $cols[] = "Item $i Qty";
+                    $cols[] = "Item $i SKU";
+                    $cols[] = "Item $i Item ID";
                     ++$i;
                 }
-                $rows[] = $row;
+                $csvData = array(
+                    'cols'  => $cols,
+                    'rows'  => $rows
+                );
+                $this->BdsFTP->uploadCSVFile($csvData);
+                $this->BdsFTP->closeConnection();
             }
-            $i = 1;
-            while($i <= $extra_cols)
-            {
-                $cols[] = "Item $i Name";
-                $cols[] = "Item $i Qty";
-                $cols[] = "Item $i SKU";
-                $cols[] = "Item $i Item ID";
-                ++$i;
-            }
-
-
-
-            $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "bsd_dispatch_report_".date("Ymd")]);
+            //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "bsd_dispatch_report_".date("Ymd")]);
         }
     }
 
