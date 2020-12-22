@@ -125,10 +125,12 @@ class TasksController extends Controller
             {
                 $cols[] = "Item $i Name";
                 $cols[] = "Item $i Qty";
+                $cols[] = "Item $i SKU";
                 $cols[] = "Item $i Item ID";
-                $cols[] = "Item SKU";
                 ++$i;
             }
+
+
 
             $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "bsd_dispatch_report_".date("Ymd")]);
         }
