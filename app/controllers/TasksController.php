@@ -68,7 +68,7 @@ class TasksController extends Controller
             //echo "gonna do it";
             $client_id = 86;
             $orders = $this->order->getUnFTPedOrdersArray($client_id);
-            echo "<pre>",print_r($orders),"</pre>"; die();
+            //echo "<pre>",print_r($orders),"</pre>"; die();
             $cols = array(
                 "Date Ordered",
                 "Entered By",
