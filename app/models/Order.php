@@ -347,6 +347,7 @@ class Order extends Model{
     public function getUnFTPedOrdersArray($client_id)
     {
         $db = Database::openConnection();
+        $cmodel = new Courier();
         $query = "
             SELECT
                 o.*
@@ -410,6 +411,18 @@ class Order extends Model{
             {
                 $courier = $co['courier_name'];
             }
+            if($co['courier_id'] == $cmodel->directFreightId)
+            {
+                $tracking_url = "https://directfreight.com.au";
+            }
+            elseif( $co['courier_id'] == $cmodel->eParcelId || $co['courier_id'] == $cmodel->eParcelExpressId )
+            {
+                $tracking_url = "https://auspost.com.au/parcels-mail/track.html#/track?id={$co['consignment_id']}";
+            }
+            else
+            {
+                $tracking_url = "No tracking URL for this courier";
+            }
             $handling_charge = "$".number_format($co['handling_charge'], 2);
             $postage_charge = "$".number_format($co['postage_charge'], 2);
             $gstex_charge = "$".number_format( ($co['postage_charge'] + $co['handling_charge']), 2);
@@ -431,12 +444,13 @@ class Order extends Model{
                 'country'               => $co['country'],
                 'items'                 => $items,
                 'total_items'           => $num_items,
-                'courier'               => $courier,
                 'handling_charge'       => $handling_charge,
                 'postage_charge'        => $postage_charge,
                 'total_exgst'           => $gstex_charge,
                 'gst'                   => $gst,
                 'total_gstinc'          => $gstinc_charge,
+                'courier'               => $courier,
+                'tracking_url'          => $tracking_url,
                 'consignment_id'        => $co['consignment_id'],
                 'csv_items'             => $csv_items
             );
