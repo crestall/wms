@@ -429,7 +429,7 @@ class Order extends Model{
                 'items'                 => $items,
                 'total_items'           => $num_items,
                 'courier'               => $courier,
-                'handling'              => $handling,
+                'handling_charge'       => $handling_charge,
                 'charge'                => $charge,
                 'consignment_id'        => $co['consignment_id'],
                 'csv_items'             => $csv_items
