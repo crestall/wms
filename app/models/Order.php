@@ -423,11 +423,11 @@ class Order extends Model{
             {
                 $tracking_url = "No tracking URL for this courier";
             }
-            $handling_charge = "$".number_format($co['handling_charge'], 2);
-            $postage_charge = "$".number_format($co['postage_charge'], 2);
-            $gstex_charge = "$".number_format( ($co['postage_charge'] + $co['handling_charge']), 2);
-            $gst = "$".number_format($co['gst'], 2);
-            $gstinc_charge = "$".number_format($co['total_cost'], 2);
+            $handling_charge = number_format($co['handling_charge'], 2);
+            $postage_charge = number_format($co['postage_charge'], 2);
+            $gstex_charge = number_format( ($co['postage_charge'] + $co['handling_charge']), 2);
+            $gst = number_format($co['gst'], 2);
+            $gstinc_charge = number_format($co['total_cost'], 2);
             $dd = $pb = "";
             $shrink_wrap = (empty($co['shrink_wrap']))? 0 : 1;
             $bubble_wrap = (empty($co['bubble_wrap']))? 0 : 1;
