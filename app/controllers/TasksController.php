@@ -91,11 +91,6 @@ class TasksController extends Controller
             $extra_cols = 0;
             foreach($orders as $o)
             {
-                $weight = 0;
-                foreach($o['parcels'] as $parc)
-                {
-                    $weight += $parc['weight'];
-                }
                 $row = array(
                     $o['date_ordered'],
                     $o['entered_by'],
