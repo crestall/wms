@@ -383,9 +383,7 @@ class Order extends Model{
             if(!empty($co['ship_to'])) $shipped_to .= $co['ship_to']."<br/>";
             $shipped_to .= $address;
             $products = $this->getItemsCountForOrder($co['id']);
-            $order_items = $this->getItemsForOrder($co['id']);
-            //$num_items = count($products);
-            $parcels = Packaging::getPackingForOrder($co,$order_items,$packages);
+
             //$parcels = array();
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
@@ -399,11 +397,11 @@ class Order extends Model{
             {
                 $items .= $p['name']." (".$p['qty']."),<br/>";
                 $num_items += $p['qty'];
-                $pallet = ($p['palletized'] && $p['qty'] == $p['per_pallet'])? 1 : "";
                 $csv_items[] = array(
-                    'name'      =>  $p['name'],
-                    'qty'       =>  $p['qty'],
-                    'pallet'    =>  $pallet
+                    'name'  =>  $p['name'],
+                    'qty'   =>  $p['qty'],
+                    'cpid'  =>  $p['client_product_id'],
+                    'sku'   =>  $p['sku']
                 );
             }
             $items = rtrim($items, ",<br/>");
@@ -413,17 +411,6 @@ class Order extends Model{
                 $courier = $co['courier_name'];
             }
             $charge = "$".number_format($co['total_cost'], 2);
-            if( $client_id == 6 )
-            {
-                //big bottle
-                if($co['date_fulfilled'] < 1523232000) //9th April 2018
-                {
-                    if( strpos(strtolower($co['3pl_comments']), 'replacement cap') !== false ||  $co['store_order'])
-                        $charge = "$".number_format($co['total_cost'], 2);
-                    else
-                        $charge = "$".number_format( Utility::getBBCharge( $co['country'], $co['state'], $num_items, $co['eparcel_express'] == 1 ), 2 );
-                }
-            }
             $dd = $pb = "";
             $shrink_wrap = (empty($co['shrink_wrap']))? 0 : 1;
             $bubble_wrap = (empty($co['bubble_wrap']))? 0 : 1;
@@ -455,8 +442,6 @@ class Order extends Model{
                 'dispatched_by'         => $dd,
                 'store_order'           => $co['store_order'],
                 'csv_items'             => $csv_items,
-                'cartons'               => max(count($packages), $co['labels']),
-                'parcels'               => $parcels,
                 'weight'                => $co['weight'],
                 'uploaded_file'         => $co['uploaded_file'],
                 'client_id'             => $co['client_id']
