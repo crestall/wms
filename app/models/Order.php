@@ -361,7 +361,110 @@ class Order extends Model{
             'client_id' => 	$client_id,
             'status_id' =>  $this->fulfilled_id
         );
-        return $db->queryData($query, $array);
+        $orders = $db->queryData($query, $array);
+        $return = array();
+        foreach($orders as $co)
+        {
+            $ad = array(
+                'address'   =>  $co['address'],
+                'address_2' =>  $co['address_2'],
+                'suburb'    =>  $co['suburb'],
+                'state'     =>  $co['state'],
+                'postcode'  =>  $co['postcode'],
+                'country'   =>  $co['country']
+            );
+
+            $packages = $this->getPackagesForOrder($co['id']);
+
+
+            $address = Utility::formatAddressWeb($ad);
+            $shipped_to = "";
+            if(!empty($co['company_name'])) $shipped_to .= $co['company_name']."<br/>";
+            if(!empty($co['ship_to'])) $shipped_to .= $co['ship_to']."<br/>";
+            $shipped_to .= $address;
+            $products = $this->getItemsCountForOrder($co['id']);
+            $order_items = $this->getItemsForOrder($co['id']);
+            //$num_items = count($products);
+            $parcels = Packaging::getPackingForOrder($co,$order_items,$packages);
+            //$parcels = array();
+            $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
+            if(empty($eb))
+            {
+                $eb = "Automatically Imported";
+            }
+            $num_items = 0;
+            $items = "";
+            $csv_items = array();
+            foreach($products as $p)
+            {
+                $items .= $p['name']." (".$p['qty']."),<br/>";
+                $num_items += $p['qty'];
+                $pallet = ($p['palletized'] && $p['qty'] == $p['per_pallet'])? 1 : "";
+                $csv_items[] = array(
+                    'name'      =>  $p['name'],
+                    'qty'       =>  $p['qty'],
+                    'pallet'    =>  $pallet
+                );
+            }
+            $items = rtrim($items, ",<br/>");
+            $courier = $db->queryValue('couriers', array('id' => $co['courier_id']), 'name');
+            if($courier == "Local")
+            {
+                $courier = $co['courier_name'];
+            }
+            $charge = "$".number_format($co['total_cost'], 2);
+            if( $client_id == 6 )
+            {
+                //big bottle
+                if($co['date_fulfilled'] < 1523232000) //9th April 2018
+                {
+                    if( strpos(strtolower($co['3pl_comments']), 'replacement cap') !== false ||  $co['store_order'])
+                        $charge = "$".number_format($co['total_cost'], 2);
+                    else
+                        $charge = "$".number_format( Utility::getBBCharge( $co['country'], $co['state'], $num_items, $co['eparcel_express'] == 1 ), 2 );
+                }
+            }
+            $dd = $pb = "";
+            $shrink_wrap = (empty($co['shrink_wrap']))? 0 : 1;
+            $bubble_wrap = (empty($co['bubble_wrap']))? 0 : 1;
+            $has_shrink_wrap = (empty($co['shrink_wrap']))? "No" : "Yes";
+            $has_bubble_wrap = (empty($co['bubble_wrap']))? "No" : "Yes";
+            $pallets = (empty($co['pallets']))? 0 : $co['pallets'];
+            $row = array(
+                'date_ordered'          => date('d-m-Y', $co['date_ordered']),
+                'entered_by'            => $eb,
+                'date_fulfilled'        => date('d-m-Y', $co['date_fulfilled']),
+                'order_number'          => $co['order_number'],
+                'client_order_number'   => $co['client_order_id'],
+                'shipped_to'            => $shipped_to,
+                'country'               => $co['country'],
+                'items'                 => $items,
+                'total_items'           => $num_items,
+                'courier'               => $courier,
+                'charge'                => $charge,
+                'consignment_id'        => $co['consignment_id'],
+                'bubble_wrap'           => $bubble_wrap,
+                'shrink_wrap'           => $shrink_wrap,
+                'has_bubble_wrap'       => $has_bubble_wrap,
+                'has_shrink_wrap'       => $has_shrink_wrap,
+                'charge_code'           => $co['charge_code'],
+                'pallets'               => $co['pallets'],
+                'comments'              => $co['3pl_comments'],
+                'id'                    => $co['id'],
+                'packed_by'             => $pb,
+                'dispatched_by'         => $dd,
+                'store_order'           => $co['store_order'],
+                'csv_items'             => $csv_items,
+                'cartons'               => max(count($packages), $co['labels']),
+                'parcels'               => $parcels,
+                'weight'                => $co['weight'],
+                'uploaded_file'         => $co['uploaded_file'],
+                'client_id'             => $co['client_id']
+            );
+            $return[] = $row;
+        }
+        return $return;
+
     }
 
     public function getDispatchedOrdersArray($from, $to, $client_id)
