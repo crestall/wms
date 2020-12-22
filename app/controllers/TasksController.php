@@ -24,7 +24,7 @@ class TasksController extends Controller
         ]);
     }
 
-    public function BDSTask()
+    public function BDSCollectionTask()
     {
         if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
         {
@@ -54,6 +54,18 @@ class TasksController extends Controller
                 }
                 exit();
             }
+        }
+    }
+
+    public function BDSCompletionTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            echo "gonna do it";
         }
     }
 
