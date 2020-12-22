@@ -411,6 +411,7 @@ class Order extends Model{
                 $courier = $co['courier_name'];
             }
             $handling_charge = "$".number_format($co['handling_charge'], 2);
+            $postage_charge = "$".number_format($co['postage_charge'], 2);
             $charge = "$".number_format($co['total_cost'], 2);
             $dd = $pb = "";
             $shrink_wrap = (empty($co['shrink_wrap']))? 0 : 1;
@@ -430,6 +431,7 @@ class Order extends Model{
                 'total_items'           => $num_items,
                 'courier'               => $courier,
                 'handling_charge'       => $handling_charge,
+                'postage_charge'        => $postage_charge,
                 'charge'                => $charge,
                 'consignment_id'        => $co['consignment_id'],
                 'csv_items'             => $csv_items
