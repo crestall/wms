@@ -96,7 +96,7 @@ class TasksController extends Controller
                     $o['entered_by'],
                     $o['date_fulfilled'],
                     $o['order_number'],
-                    $o['client_order_number'],
+                    "#".$o['client_order_number'],
                     str_replace("<br/>", ", ",$o['shipped_to']),
                     $o['total_items'],
                     $o['handling_charge'],
