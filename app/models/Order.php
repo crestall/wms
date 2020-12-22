@@ -430,21 +430,6 @@ class Order extends Model{
                 'courier'               => $courier,
                 'charge'                => $charge,
                 'consignment_id'        => $co['consignment_id'],
-                'bubble_wrap'           => $bubble_wrap,
-                'shrink_wrap'           => $shrink_wrap,
-                'has_bubble_wrap'       => $has_bubble_wrap,
-                'has_shrink_wrap'       => $has_shrink_wrap,
-                'charge_code'           => $co['charge_code'],
-                'pallets'               => $co['pallets'],
-                'comments'              => $co['3pl_comments'],
-                'id'                    => $co['id'],
-                'packed_by'             => $pb,
-                'dispatched_by'         => $dd,
-                'store_order'           => $co['store_order'],
-                'csv_items'             => $csv_items,
-                'weight'                => $co['weight'],
-                'uploaded_file'         => $co['uploaded_file'],
-                'client_id'             => $co['client_id']
             );
             $return[] = $row;
         }
