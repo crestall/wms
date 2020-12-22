@@ -344,6 +344,26 @@ class Order extends Model{
         return $db->queryData($query, $array);
     }
 
+    public function getUnFTPedOrdersArray($client_id)
+    {
+        $db = Database::openConnection();
+        $query = "
+            SELECT
+                o.*
+            FROM
+                orders o
+            WHERE
+                client_id = :client_id AND status_id = :status_id AND ftp_uploaded = 0
+            ORDER BY
+                date_fulfilled DESC
+        ";
+        $array = array(
+            'client_id' => 	$client_id,
+            'status_id' =>  $this->fulfilled_id
+        );
+        return $db->queryData($query, $array);
+    }
+
     public function getDispatchedOrdersArray($from, $to, $client_id)
     {
         $db = Database::openConnection();

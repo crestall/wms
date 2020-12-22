@@ -65,7 +65,10 @@ class TasksController extends Controller
         }
         else
         {
-            echo "gonna do it";
+            //echo "gonna do it";
+            $client_id = 86;
+            $orders = $this->order->getUnFTPedOrdersArray($client_id)
+            echo "<pre>",print_r($orders),"</pre>";
         }
     }
 
