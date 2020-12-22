@@ -98,21 +98,15 @@ class TasksController extends Controller
                     $o['order_number'],
                     $o['client_order_number'],
                     str_replace("<br/>", ", ",$o['shipped_to']),
-                    $o['country'],
-                    $o['charge_code'],
-                    $o['charge'],
-                    $weight,
-                    $o['shrink_wrap'],
-                    $o['bubble_wrap'],
-                    $o['pallets'],
+                    $o['total_items'],
+                    $o['handling_charge'],
+                    $o['postage_charge'],
+                    $o['total_exgst'],
+                    $o['gst'],
+                    $o['total_gstinc'],
                     $o['courier'],
                     $o['consignment_id'],
-                    $o['cartons'],
-                    $o['comments'],
-                    strip_tags($o['dispatched_by']),
-                    strip_tags($o['packed_by']),
-                    $o['total_items'],
-                    $o['store_order']
+                    $o['tracking_url']
                 );
                 $extra_cols = max($extra_cols, count($o['csv_items']));
                 $i = 1;
