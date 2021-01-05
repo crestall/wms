@@ -117,7 +117,7 @@ class TasksController extends Controller
                         $row[] = $array['name'];
                         $row[] = $array['qty'];
                         $row[] = $array['cpid'];
-                        $row[] = $array['sku'];
+                        $row[] = $array['coiid'];
                         ++$i;
                     }
                     $rows[] = $row;
@@ -128,7 +128,7 @@ class TasksController extends Controller
                     $cols[] = "Item $i Name";
                     $cols[] = "Item $i Qty";
                     $cols[] = "Item $i SKU";
-                    $cols[] = "Item $i Item ID";
+                    $cols[] = "Item $i Order Item ID";
                     ++$i;
                 }
                 $csvData = array(
