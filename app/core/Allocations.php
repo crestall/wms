@@ -63,6 +63,7 @@ class Allocations{
                     foreach($collection_items as $ci)
                     {
                         //echo "Allocations<pre>",print_r($allocations),"</pre>";//continue;
+                        $client_order_item_id = (isset($details['client_item_id']))? $details['client_item_id'] : NULL;
                         $pick_count = $left = $ci['number'] * $details['qty'];
                         $item_name = $ci['name'];
                         $item_sku = $ci['sku'];
@@ -84,9 +85,10 @@ class Allocations{
                                 $item_backorder = true;
                                 $item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
                                 $f_locations[] = array(
-                                    'location_id'   =>  $this->controller->location->backorders_id,
-                                    'qty'           =>  $pick_count,
-                                    'backorder'     =>  true
+                                    'location_id'           =>  $this->controller->location->backorders_id,
+                                    'qty'                   =>  $pick_count,
+                                    'client_order_item_id'  => $client_order_item_id,
+                                    'backorder'             =>  true
                                 );
                             }
                             else
@@ -117,8 +119,9 @@ class Allocations{
                                     if($available == $left)
                                     {
                                         $f_locations[] = array(
-                                            'location_id'   =>  $l['location_id'],
-                                            'qty'           =>  $available
+                                            'location_id'           =>  $l['location_id'],
+                                            'qty'                   =>  $available,
+                                            'client_order_item_id'  => $client_order_item_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -149,8 +152,9 @@ class Allocations{
                                         if($l['preferred'] == 1 && !$store_order)
                                             $order_error_string .= "<p>$item_name picked from non preferred location</p>";
                                         $f_locations[] = array(
-                                            'location_id'   =>  $l['location_id'],
-                                            'qty'           =>  $available
+                                            'location_id'           =>  $l['location_id'],
+                                            'qty'                   =>  $available,
+                                            'client_order_item_id'  => $client_order_item_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -161,8 +165,9 @@ class Allocations{
                                     {
                                         //echo "<p>available >= pickcount</p>";
                                         $f_locations[] = array(
-                                            'location_id'   =>  $l['location_id'],
-                                            'qty'           =>  $left
+                                            'location_id'           =>  $l['location_id'],
+                                            'qty'                   =>  $left,
+                                            'client_order_item_id'  => $client_order_item_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $left;
                                         break;

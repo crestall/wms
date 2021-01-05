@@ -304,10 +304,11 @@ class Order extends Model{
                         foreach($item['locations'] as $il)
                         {
                             $vals = array(
-                                'item_id'       => $item_id,
-                                'location_id'   => $il['location_id'],
-                                'qty'           => $il['qty'],
-                                'order_id'      => $order_id
+                                'item_id'               => $item_id,
+                                'location_id'           => $il['location_id'],
+                                'qty'                   => $il['qty'],
+                                'order_id'              => $order_id,
+                                'client_order_item_id'  => $il['client_order_item_id']
                             );
                             $db->insertQuery('orders_items', $vals);
 
@@ -402,6 +403,7 @@ class Order extends Model{
                     'name'  =>  $p['name'],
                     'qty'   =>  $p['qty'],
                     'cpid'  =>  $p['client_product_id'],
+                    'coiid' =>  $p['client_order_item_id'],
                     'sku'   =>  $p['sku']
                 );
             }
@@ -945,7 +947,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $q = "
-            SELECT i.*, SUM(oi.qty) AS qty
+            SELECT i.*, SUM(oi.qty) AS qty, oi.client_order_item_id
             FROM orders_items oi JOIN items i ON oi.item_id = i.id
             WHERE oi.order_id = $order_id
             GROUP BY i.id
