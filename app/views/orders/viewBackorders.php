@@ -45,7 +45,6 @@
                                 <th>WMS Number</th>
                                 <th>Client</th>
                                 <th>Client Order Number</th>
-                                <th>Date Ordered</th>
                                 <th>Date Imported</th>
                                 <th>Ship To</th>
                                 <th>Backordered Items</th>
@@ -62,6 +61,7 @@
                                     </td>
                                     <td data-label="Client Name"><?php echo $client_name;?></td>
                                     <td class="filterable number" data-label="Client Order Number"><?php echo $bo['client_order_id'];?></td>
+                                    <td data-label="Date Imported" nowrap><?php echo date('d-m-Y', $bo['date_ordered']);?></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
