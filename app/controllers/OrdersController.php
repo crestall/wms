@@ -36,6 +36,7 @@ class OrdersController extends Controller
             }
         }
         $page_title = "Backorders For $client_name";
+        $orders = $this->order->getBackorders($client_id);
         //render the page
         Config::setJsConfig('curPage', "view-backorders");
         Config::set('curPage', "view-backorders");

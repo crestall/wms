@@ -2094,6 +2094,11 @@
                             }
                         });
                     }
+                },
+                'view-backorders': {
+                    init:function(){
+
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);
