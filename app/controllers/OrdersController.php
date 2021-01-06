@@ -40,9 +40,10 @@ class OrdersController extends Controller
         //render the page
         Config::setJsConfig('curPage', "view-backorders");
         Config::set('curPage', "view-backorders");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/getQuotes.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/viewBackorders.php', [
             'page_title'        =>  $page_title,
-            'pht'               =>  ":Backorders"
+            'pht'               =>  ":Backorders",
+            'orders'            =>  $orders
         ]);
     }
 
