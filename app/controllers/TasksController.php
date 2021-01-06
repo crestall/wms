@@ -139,8 +139,8 @@ class TasksController extends Controller
                         'rows'  => $rows
                     );
                     $this->BdsFTP->uploadCSVFile($csvData);
-                    $this->BdsFTP->closeConnection();
                 }
+                $this->BdsFTP->closeConnection();
             }
             //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "bsd_dispatch_report_".date("Ymd")]);
         }
