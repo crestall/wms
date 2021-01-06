@@ -1491,6 +1491,12 @@ class Order extends Model{
         $db->updateDatabaseField($this->table,'status_id', $status_id, $id);
     }
 
+    public function updateFTPUploaded($order_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table,'ftp_uploaded', 1 $order_id);
+    }
+
     public function updateOrderAddress($data)
     {
         $db = Database::openConnection();
