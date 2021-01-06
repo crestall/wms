@@ -18,6 +18,7 @@
     deletePackage($id)
     getAllOrders($client_id, $courier_id = -1, $fulfulled = 0, $store_order = -1)
     getAllOrdersByStatus($status_id)
+    getBackorders($client_id = 0)
     getClientActivity($from, $to, $clients = "")
     getCurrentOrders()
     getCurrentStoreOrders()
@@ -87,6 +88,18 @@ class Order extends Model{
         $this->packed_id    = $this->getStatusId('packed');
         $this->fulfilled_id = $this->getStatusId('fulfilled');
         $this->getStatusses();
+    }
+
+    public function getBackorders($client_id = 0)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM {$this->table} WHERE backorder_items = 1";
+        if($client_id > 0)
+        {
+            $q .= " AND client_id = $client_id";
+        }
+        $q .= " ORDER BY date_ordered ASC";
+        return $db->queryData($q);
     }
 
     public function consolidateOrders($old_id, $new_id)
