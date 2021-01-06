@@ -61,6 +61,7 @@
                                         <a href="/orders/order-update/order=<?php echo $bo['id'];?>"><?php echo $bo['order_number'];?></a>
                                     </td>
                                     <td data-label="Client Name"><?php echo $client_name;?></td>
+                                    <td class="filterable number" data-label="Client Order Number"><?php echo $bo['client_order_id'];?></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
