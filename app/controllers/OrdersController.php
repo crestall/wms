@@ -43,7 +43,8 @@ class OrdersController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/viewBackorders.php', [
             'page_title'        =>  $page_title,
             'pht'               =>  ":Backorders",
-            'orders'            =>  $orders
+            'orders'            =>  $orders,
+            'client_id'         =>  $client_id
         ]);
     }
 
