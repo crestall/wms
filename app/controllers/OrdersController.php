@@ -24,11 +24,32 @@ class OrdersController extends Controller
 
     public function viewBackorders()
     {
+        $client_name = "All Clients";
+        $courier_id = -1;
+        $client_id = 0;
+        $state = "";
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+            }
+            if(isset($this->request->params['args']['courier']))
+            {
+                $courier_id = $this->request->params['args']['courier'];
+            }
+            if(isset($this->request->params['args']['state']))
+            {
+                $state = $this->request->params['args']['state'];
+            }
+        }
+        $page_title = "Backorders For $client_name";
         //render the page
         Config::setJsConfig('curPage', "view-backorders");
         Config::set('curPage', "view-backorders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/getQuotes.php', [
-            'page_title'        =>  "Manage Backorders",
+            'page_title'        =>  $page_title,
             'pht'               =>  ":Backorders"
         ]);
     }
