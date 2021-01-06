@@ -48,12 +48,16 @@
                                 <th>Date Ordered</th>
                                 <th>Date Imported</th>
                                 <th>Ship To</th>
-                                <th>On Hold Items</th>
+                                <th>Backordered Items</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            <?php foreach($orders as $o):?>
+                                <tr>
+                                    
+                                </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
