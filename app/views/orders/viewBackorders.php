@@ -42,7 +42,7 @@
                     <table class="table-striped table-hover" id="back_orders_table">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>WMS Number</th>
                                 <th>Client</th>
                                 <th>Client Order Number</th>
                                 <th>Date Ordered</th>
@@ -53,11 +53,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($orders as $bo):?>
+                            <?php foreach($orders as $bo):
+                                $client_name = $this->controller->client->getClientName($bo['client_id']);
+                                ?>
                                 <tr>
                                     <td class="filterable number" data-label="Order Number">
                                         <a href="/orders/order-update/order=<?php echo $bo['id'];?>"><?php echo $bo['order_number'];?></a>
                                     </td>
+                                    <td data-label="Client Name"><?php echo $client_name;?></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
