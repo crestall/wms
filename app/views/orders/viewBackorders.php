@@ -45,7 +45,7 @@
                                 <th>WMS Number</th>
                                 <th>Client</th>
                                 <th>Client Order Number</th>
-                                <th>Date Imported</th>
+                                <th>Date Ordered</th>
                                 <th>Ship To</th>
                                 <th>Backordered Items</th>
                                 <th></th>
@@ -54,6 +54,15 @@
                         <tbody>
                             <?php foreach($orders as $bo):
                                 $client_name = $this->controller->client->getClientName($bo['client_id']);
+                                if(empty($bo['ship_to']))
+                                {
+                                    $ship_to = "";
+                                }
+                                else
+                                {
+                                    $ship_to = "<p class='font-weight-bold'>".$bo['ship_to']."</p>";
+                                }
+                				$ship_to .= $this->controller->address->getAddressStringForOrder($bo['id']);
                                 ?>
                                 <tr>
                                     <td class="filterable number" data-label="Order Number">
@@ -61,7 +70,8 @@
                                     </td>
                                     <td data-label="Client Name"><?php echo $client_name;?></td>
                                     <td class="filterable number" data-label="Client Order Number"><?php echo $bo['client_order_id'];?></td>
-                                    <td data-label="Date Imported" nowrap><?php echo date('d-m-Y', $bo['date_ordered']);?></td>
+                                    <td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $bo['date_ordered']);?></td>
+                                    <td data-label="Ship To" class="filterable"><?php echo $ship_to;?></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
