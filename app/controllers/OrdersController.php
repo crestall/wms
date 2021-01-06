@@ -25,7 +25,6 @@ class OrdersController extends Controller
     public function viewBackorders()
     {
         $client_name = "All Clients";
-        $courier_id = -1;
         $client_id = 0;
         $state = "";
         if(!empty($this->request->params['args']))
