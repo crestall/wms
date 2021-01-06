@@ -121,6 +121,7 @@ class TasksController extends Controller
                         ++$i;
                     }
                     $rows[] = $row;
+                    $this->order->updateFTPUploaded($o['id']);
                 }
                 $i = 1;
                 while($i <= $extra_cols)
