@@ -53,9 +53,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($orders as $o):?>
+                            <?php foreach($orders as $bo):?>
                                 <tr>
-                                    
+                                    <td class="filterable number" data-label="Order Number">
+                                        <a href="/orders/order-update/order=<?php echo $bo['id'];?>"><?php echo $bo['order_number'];?></a>
+                                    </td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
