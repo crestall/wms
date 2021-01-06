@@ -437,6 +437,7 @@ class Order extends Model{
             $has_bubble_wrap = (empty($co['bubble_wrap']))? "No" : "Yes";
             $pallets = (empty($co['pallets']))? 0 : $co['pallets'];
             $row = array(
+                'order_id'              => $co['id'],
                 'date_ordered'          => date('d-m-Y', $co['date_ordered']),
                 'entered_by'            => $eb,
                 'date_fulfilled'        => date('d-m-Y', $co['date_fulfilled']),
