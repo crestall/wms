@@ -35,14 +35,6 @@ class OrdersController extends Controller
                 $client_id = $this->request->params['args']['client'];
                 $client_name = $this->client->getClientName($client_id);
             }
-            if(isset($this->request->params['args']['courier']))
-            {
-                $courier_id = $this->request->params['args']['courier'];
-            }
-            if(isset($this->request->params['args']['state']))
-            {
-                $state = $this->request->params['args']['state'];
-            }
         }
         $page_title = "Backorders For $client_name";
         //render the page
