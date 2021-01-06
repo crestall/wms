@@ -38,6 +38,25 @@
     <?php if(count($orders)):?>
     <div class="row">
         <?php echo "<pre>",print_r($orders),"</pre>";?>
+        <div class="col-xl-12">
+            <table class="table-striped table-hover" id="back_orders_table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Client</th>
+                        <th>Client Order Number</th>
+                        <th>Date Ordered</th>
+                        <th>Date Imported</th>
+                        <th>Ship To</th>
+                        <th>On Hold Items</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
     </div>
 <?php else:?>
     <div class="row">
