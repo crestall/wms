@@ -22,6 +22,17 @@ class OrdersController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function viewBackorders()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "view-backorders");
+        Config::set('curPage', "view-backorders");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/getQuotes.php', [
+            'page_title'        =>  "Get Shipping Estimates",
+            'pht'               =>  ":Get Shipping Estimates"
+        ]);
+    }
+
     public function getQuotes()
     {
         //render the page
