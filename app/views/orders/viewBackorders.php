@@ -48,6 +48,13 @@
                                 <th>Date Ordered</th>
                                 <th>Ship To</th>
                                 <th>Backordered Items</th>
+                                <th nowrap>
+                                    Select
+                                    <div class="checkbox checkbox-default">
+                                        <input id="select_all" class="styled" type="checkbox">
+                                        <label for="select_all"><em><small>(all)</small></em></label>
+                                    </div>
+                                </th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -75,15 +82,22 @@
                                     <td data-label="Ship To" class="filterable"><?php echo $ship_to;?></td>
                                     <td data-label="Items">
                                         <?php foreach($boifo as $i):
-                                            $available = $this->controller->item->getAvailableStock($i['id'], $this->controller->order->fulfilled_id);?>
+                                            $available = $this->controller->item->getAvailableStock($i['id'], $this->controller->order->fulfilled_id);
+                                            $required = $i['required']; ?>
                                             <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                                 <p><span class="iname"><?php echo $i['name'];?></span><br>
-                                                <span class="icount">Required: <?php echo $i['required'];?></span></p>
+                                                <span class="icount">Required: <?php echo $required;?></span></p>
                                             </div>
                                             <div class="item_total text-right">
                                                 Total Available: <?php echo $available;?>
                                             </div>
                                         <?php endforeach;?>
+                                    </td>
+                                    <td data-label="Select" class="chkbox">
+                                        <div class="checkbox checkbox-default">
+                                            <input type="checkbox" class="select styled" data-orderid='<?php echo $bo['id'];?>' name="select_<?php echo $bo['id'];?>" id="select_<?php echo $bo['id'];?>" data-clientid="<?php echo $bo['client_id'];?>" />
+                                            <label for="select_<?php echo $bo['id'];?>"></label>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
