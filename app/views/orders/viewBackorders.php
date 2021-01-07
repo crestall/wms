@@ -74,13 +74,16 @@
                                     <td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $bo['date_ordered']);?></td>
                                     <td data-label="Ship To" class="filterable"><?php echo $ship_to;?></td>
                                     <td data-label="Items">
-                                        <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
-                                            <?php foreach($boifo as $i):
-                                                $available = $this->controller->item->getAvailableStock($i['id'], $this->controller->order->fulfilled_id);?>
-                                                <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['required'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
-                                                <p>Available: <?php echo $available;?></p>
-                                            <?php endforeach;?>
-                                        </div>
+                                        <?php foreach($boifo as $i):
+                                            $available = $this->controller->item->getAvailableStock($i['id'], $this->controller->order->fulfilled_id);?>
+                                            <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                                <p><span class="iname"><?php echo $i['name'];?></span><br>
+                                                <span class="icount">Required: <?php echo $i['required'];?></span></p>
+                                            </div>
+                                            <div class="item_total text-right">
+                                                Total Available: <?php echo $available;?>
+                                            </div>
+                                        <?php endforeach;?>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
