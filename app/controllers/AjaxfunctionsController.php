@@ -1102,7 +1102,7 @@ class ajaxfunctionsController extends Controller
 
     public function cancelOrders()
     {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $this->order->cancelOrders($this->request->data['orderids']);
     }
 
