@@ -2125,6 +2125,11 @@
                                 }
                             });
                         });
+                        $('table#back_orders_table').filterTable({
+                            inputSelector: '#table_searcher',
+                            minRows: 2,
+                            ignoreColumns: [6]
+                        });
                     }
                 }
             }
