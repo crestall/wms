@@ -4,13 +4,6 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row view-orders-buttons" >
-            <?php if($user_role == "admin" || $user_role == "super admin"):?>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                    <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Orders</a></p>
-                </div>
-            <?php endif;?>
-        </div>
         <div class="row">
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
@@ -100,10 +93,12 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p>
-                                            <a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel This Order</a> <br>
-                                            <span class="inst">This will make all items in this order available again</span>
-                                        </p>
+                                        <?php if($user_role == "admin" || $user_role == "super admin"):?>
+                                            <p>
+                                                <a class="btn btn-sm btn-block btn-outline-danger cancel-order" data-orderid="<?php echo $bo['id'];?>"><i class="fas fa-ban"></i> Cancel This Order</a>
+                                                <span class="inst">This will make all items in this order available again</span>
+                                            </p>
+                                        <?php endif;?>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
