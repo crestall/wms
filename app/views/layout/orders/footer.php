@@ -2119,7 +2119,6 @@
                                     var ids = [thisid];
                                     var data = {orderids: ids};
                                     $.post('/ajaxfunctions/cancel-orders', data, function(d){
-                                        <?php Session::set('feedback', '<h3>That order has been cancelled</h3><p>It should <em>NOT</em> be showing below</p>');?>
                                         location.reload();
                                     });
                                 }
