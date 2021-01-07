@@ -63,8 +63,7 @@
                                     $ship_to = "<p class='font-weight-bold'>".$bo['ship_to']."</p>";
                                 }
                 				$ship_to .= $this->controller->address->getAddressStringForOrder($bo['id']);
-                                $ifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
-                                $item_count = $this->controller->order->getItemCountForOrder($bo['id']);
+                                $boifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
                                 ?>
                                 <tr>
                                     <td class="filterable number" data-label="Order Number">
@@ -76,14 +75,11 @@
                                     <td data-label="Ship To" class="filterable"><?php echo $ship_to;?></td>
                                     <td data-label="Items">
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
-                                            <?php foreach($ifo as $i):
+                                            <?php foreach($boifo as $i):
                                                 $available = $this->controller->item->getAvailableStock($i['id'], $this->controller->order->fulfilled_id);?>
-                                                <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                                <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['required'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
                                                 <p>Available: <?php echo $available;?></p>
                                             <?php endforeach;?>
-                                        </div>
-                                        <div class="item_total text-right">
-                                            Total Items: <?php echo $item_count;?>
                                         </div>
                                     </td>
                                 </tr>
