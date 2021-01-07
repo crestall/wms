@@ -30,7 +30,7 @@
         </div>
         <?php if(count($orders)):?>
             <div class="row">
-                <?php echo "<pre>",print_r($orders),"</pre>";?>
+                <?php //echo "<pre>",print_r($orders),"</pre>";?>
                 <div class="col-xl-12">
                     <table class="table-striped table-hover" id="back_orders_table">
                         <thead>
@@ -64,6 +64,7 @@
                                 }
                 				$ship_to .= $this->controller->address->getAddressStringForOrder($bo['id']);
                                 $boifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
+                                $can_fulfill = true;
                                 ?>
                                 <tr>
                                     <td class="filterable number" data-label="Order Number">
@@ -76,7 +77,9 @@
                                     <td data-label="Items">
                                         <?php foreach($boifo as $i):
                                             $available = $this->controller->item->getAvailableStock($i['id'], $this->controller->order->fulfilled_id);
-                                            $required = $i['required']; ?>
+                                            $required = $i['required'];
+                                            if($available < $required)
+                                                $can_fulfill = false;?>
                                             <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                                 <p><span class="iname"><?php echo $i['name'];?></span><br>
                                                 <span class="icount">Required: <?php echo $required;?></span></p>
@@ -97,6 +100,12 @@
                                             <p>
                                                 <a class="btn btn-sm btn-block btn-outline-danger cancel-order" data-orderid="<?php echo $bo['id'];?>"><i class="fas fa-ban"></i> Cancel This Order</a>
                                                 <span class="inst">This will make all items in this order available again</span>
+                                            </p>
+                                        <?php endif;?>
+                                        <?php if($can_fulfill):?>
+                                            <p>
+                                                <a class="btn btn-sm btn-block btn-outline-success fill-backorder" data-orderid="<?php echo $bo['id'];?>"><i class="far fa-check"></i> Fill This Backorder</a>
+                                                <span class="inst">It will now appear on the list of orders for this client</span>
                                             </p>
                                         <?php endif;?>
                                     </td>
