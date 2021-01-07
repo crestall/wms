@@ -2107,6 +2107,7 @@
                         });
                         $('a.cancel-order').click(function(e){
                             e.preventDefault();
+                            var thisid = $(this).data('orderid');
                             swal({
                                 title: "Really cancel this order?",
                                 text: "This cannot be undone",
@@ -2115,8 +2116,8 @@
                                 dangerMode: true,
                             }).then( function(willCancel) {
                                 if (willCancel) {
-                                    var ids = [$(this).data('orderid')]
-                                    var data = {orderids: ids}
+                                    var ids = [thisid];
+                                    var data = {orderids: ids};
                                     $.post('/ajaxfunctions/cancel-orders', data, function(d){
                                         <?php Session::set('feedback', '<h3>That order has been cancelled</h3><p>It should <em>NOT</em> be showing below</p>');?>
                                         //location.reload();
