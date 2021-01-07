@@ -963,7 +963,7 @@ class Order extends Model{
         $location = new Location();
         return $db->queryData("
             SELECT
-                i.name, SUM(oi.qty) AS required,
+                i.*, SUM(oi.qty) AS required,
                 oi.location_id,
                 oi.item_id,
                 oi.id AS line_id,
