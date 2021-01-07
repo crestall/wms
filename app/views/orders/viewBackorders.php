@@ -41,13 +41,6 @@
                                 <th>Date Ordered</th>
                                 <th>Ship To</th>
                                 <th>Backordered Items</th>
-                                <th nowrap>
-                                    Select
-                                    <div class="checkbox checkbox-default">
-                                        <input id="select_all" class="styled" type="checkbox">
-                                        <label for="select_all"><em><small>(all)</small></em></label>
-                                    </div>
-                                </th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -88,12 +81,6 @@
                                                 Total Available: <?php echo $available;?>
                                             </div>
                                         <?php endforeach;?>
-                                    </td>
-                                    <td data-label="Select" class="chkbox">
-                                        <div class="checkbox checkbox-default">
-                                            <input type="checkbox" class="select styled" data-orderid='<?php echo $bo['id'];?>' name="select_<?php echo $bo['id'];?>" id="select_<?php echo $bo['id'];?>" data-clientid="<?php echo $bo['client_id'];?>" />
-                                            <label for="select_<?php echo $bo['id'];?>"></label>
-                                        </div>
                                     </td>
                                     <td>
                                         <?php if($user_role == "admin" || $user_role == "super admin"):?>
