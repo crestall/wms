@@ -99,6 +99,12 @@
                                             <label for="select_<?php echo $bo['id'];?>"></label>
                                         </div>
                                     </td>
+                                    <td>
+                                        <p>
+                                            <a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel This Order</a> <br>
+                                            <span class="inst">This will make all items in this order available again</span>
+                                        </p>
+                                    </td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
