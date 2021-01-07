@@ -82,14 +82,45 @@ class Allocations{
                         {
                             if(in_array($ci['client_id'], $this->backorder_clients))
                             {
-                                $item_backorder = true;
-                                $item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
-                                $f_locations[] = array(
-                                    'location_id'           =>  $this->controller->location->backorders_id,
-                                    'qty'                   =>  $pick_count,
-                                    'client_order_item_id'  => $client_order_item_id,
-                                    'backorder'             =>  true
-                                );
+                                $allocations[$id] += $total_available; // reserve available for this order
+                                //$left = $total_available;
+
+                                //only individual items can be put on backorder
+                                $locations = $this->controller->item->getAvailableLocationsForItem($id, false, $order_id);
+                                foreach($locations as $l)
+                                {
+                                    if(!isset($l_allocations[$l['location_id']][$id]))
+                                        $l_allocations[$l['location_id']][$id] = 0;
+                                    $available = $l['available'] - $l_allocations[$l['location_id']][$id];
+                                    if($available <= 0)
+                                        continue;
+                                    if($store_order && $l['preferred'] == 1 && count($locations) > 1)
+                                        continue;
+                                    if($available < $left)
+                                    {
+                                        //echo "<p>available < pickcount</p>";
+                                        if($l['preferred'] == 1 && !$store_order)
+                                            $order_error_string .= "<p>$item_name picked from non preferred location</p>";
+                                        $f_locations[] = array(
+                                            'location_id'           =>  $l['location_id'],
+                                            'qty'                   =>  $available,
+                                            'client_order_item_id'  => $client_order_item_id
+                                        );
+                                        $l_allocations[$l['location_id']][$id] += $available;
+                                        $left -= $available;
+                                    }
+                                }
+                                if($left > 0)
+                                {
+                                    $item_backorder = true;
+                                    $item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
+                                    $f_locations[] = array(
+                                        'location_id'           =>  $this->controller->location->backorders_id,
+                                        'qty'                   =>  $left,
+                                        'client_order_item_id'  =>  $client_order_item_id,
+                                        'backorder'             =>  true
+                                    );
+                                }
                             }
                             else
                             {
