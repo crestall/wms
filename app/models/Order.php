@@ -957,6 +957,31 @@ class Order extends Model{
         return $db->queryData($q);
     }
 
+    public function getBackorderItemsForOrder($order_id)
+    {
+        $db = Database::openConnection();
+        $location = new Location();
+        return $db->queryData("
+            SELECT
+                i.name, SUM(oi.qty) AS required,
+                oi.location_id,
+                oi.item_id,
+                oi.id AS line_id,
+                l.location
+            FROM
+                orders_items oi
+                JOIN items i ON oi.item_id = i.id
+                LEFT JOIN items_locations il on il.item_id = i.id
+                JOIN locations l ON oi.location_id = l.id
+            WHERE
+                oi.order_id = $order_id AND oi.location_id = {$location->backorders_id}
+            GROUP BY
+                oi.location_id, i.id
+            ORDER BY
+                i.name
+        ");
+    }
+
     public function getItemsCountForOrder($order_id, $picked = -1)
     {
         $db = Database::openConnection();
