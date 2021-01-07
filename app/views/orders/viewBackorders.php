@@ -63,7 +63,7 @@
                                     $ship_to = "<p class='font-weight-bold'>".$bo['ship_to']."</p>";
                                 }
                 				$ship_to .= $this->controller->address->getAddressStringForOrder($bo['id']);
-                                $ifo = $this->controller->order->getItemsForOrder($bo['id']);
+                                $ifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
                                 $item_count = $this->controller->order->getItemCountForOrder($bo['id']);
                                 ?>
                                 <tr>
