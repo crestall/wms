@@ -2097,6 +2097,8 @@
                 },
                 'view-backorders': {
                     init:function(){
+                        actions.common['select-all']();
+                        actions.common['cancel-orders']();
                         $('#client_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
                             var href = '/orders/view-backorders';
