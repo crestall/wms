@@ -987,6 +987,7 @@ class Item extends Model{
         $allocated = 0;
         $orders_table = "orders";
         $items_table = "orders_items";
+        $backorder_location_id = 2914; // TODO: get this info dynamically
 
         $asq = $db->queryRow("
             SELECT
@@ -994,7 +995,7 @@ class Item extends Model{
             FROM
             	$items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
             WHERE
-            	o.status_id != $fulfilled_id AND oi.item_id = $item_id AND o.cancelled = 0
+            	o.status_id != $fulfilled_id AND oi.item_id = $item_id AND oi.location_id != $backorder_location_id AND o.cancelled = 0
             GROUP BY
             	oi.item_id
         ");
