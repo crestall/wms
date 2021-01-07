@@ -2116,6 +2116,7 @@
                                 dangerMode: true,
                             }).then( function(willCancel) {
                                 if (willCancel) {
+                                    $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Cancelling order...</h1></div>' });
                                     var ids = [thisid];
                                     var data = {orderids: ids, showfeedback: true};
                                     $.post('/ajaxfunctions/cancel-orders', data, function(d){
