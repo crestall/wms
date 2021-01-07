@@ -76,8 +76,10 @@
                                     <td data-label="Ship To" class="filterable"><?php echo $ship_to;?></td>
                                     <td data-label="Items">
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
-                                            <?php foreach($ifo as $i):?>
+                                            <?php foreach($ifo as $i):
+                                                $available = $this->controller->item->getAvailableStock($item['id'], $this->controller->order->fulfilled_id);?>
                                                 <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                                <p>Available: <?php echo $available;?></p>
                                             <?php endforeach;?>
                                         </div>
                                         <div class="item_total text-right">
