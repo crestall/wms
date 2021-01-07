@@ -2117,7 +2117,7 @@
                             }).then( function(willCancel) {
                                 if (willCancel) {
                                     var ids = [thisid];
-                                    var data = {orderids: ids};
+                                    var data = {orderids: ids, showfeedback: true};
                                     $.post('/ajaxfunctions/cancel-orders', data, function(d){
                                         location.reload();
                                     });
