@@ -82,9 +82,9 @@
                                                 $can_fulfill = false;?>
                                             <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                                 <p><span class="iname"><?php echo $i['name'];?></span><br>
-                                                <span class="icount">Required: <?php echo $required;?></span></p>
+                                                <span class="icount font-weight-bold">Required: <?php echo $required;?></span></p>
                                             </div>
-                                            <div class="item_total text-right">
+                                            <div class="item_total text-right font-weight-bold">
                                                 Total Available: <?php echo $available;?>
                                             </div>
                                         <?php endforeach;?>
@@ -105,7 +105,7 @@
                                         <?php if($can_fulfill):?>
                                             <p>
                                                 <a class="btn btn-sm btn-block btn-outline-success fill-backorder" data-orderid="<?php echo $bo['id'];?>"><i class="far fa-check"></i> Fill This Backorder</a>
-                                                <span class="inst">It will now appear on the list of orders for this client</span>
+                                                <span class="inst">This will move this order from this list to the general list</span>
                                             </p>
                                         <?php endif;?>
                                     </td>
