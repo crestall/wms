@@ -2098,13 +2098,31 @@
                 'view-backorders': {
                     init:function(){
                         actions.common['select-all']();
-                        actions.common['cancel-orders']();
                         $('#client_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
                             var href = '/orders/view-backorders';
                             if($('#client_selector').val() != 0)
                                 href += "/client="+$('#client_selector').val();
                             window.location.href = href;
+                        });
+                        $('a.cancel-order').click(function(e){
+                            e.preventDefault();
+                            swal({
+                                title: "Really cancel this order?",
+                                text: "This cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willCancel) {
+                                if (willCancel) {
+                                    var ids = [$(this).data('orderid')]
+                                    var data = {orderids: ids}
+                                    $.post('/ajaxfunctions/cancel-orders', data, function(d){
+                                        <?php Session::set('feedback', '<h3>That order has been cancelled</h3><p>It should <em>NOT</em> be showing below</p>');?>
+                                        location.reload();
+                                    });
+                                }
+                            });
                         });
                     }
                 }
