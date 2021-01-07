@@ -1110,6 +1110,16 @@ class ajaxfunctionsController extends Controller
         }
     }
 
+    public function fillBackorders()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->order->cancelOrders($this->request->data['orderids']);
+        if(isset($this->request->data['showfeedback']) && $this->request->data['showfeedback'])
+        {
+            Session::set('feedback', '<h3>That order has been cancelled</h3><p>It should <em>NOT</em> be showing below</p>');
+        }
+    }
+
     public function updateJobstatusOrder()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
