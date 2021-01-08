@@ -886,7 +886,9 @@ class Order extends Model{
         $db = Database::openConnection();
         foreach($ids as $id)
         {
-            //do something
+            //get items for this order in the backorders location
+            echo "SELECT * FROM orders_items WHERE order_id = $id AND location_id = $backorder_location_id";
+            //$bois = $db->queryData("SELECT * FROM orders_items WHERE order_id = $id AND location_id = $backorder_location_id");
         }
     }
 
