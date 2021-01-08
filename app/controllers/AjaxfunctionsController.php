@@ -1116,7 +1116,7 @@ class ajaxfunctionsController extends Controller
         $this->order->fillBackorders($this->request->data['orderids']);
         if(isset($this->request->data['showfeedback']) && $this->request->data['showfeedback'])
         {
-            Session::set('feedback', '<h3>That order has been cancelled</h3><p>It should <em>NOT</em> be showing below</p>');
+            Session::set('feedback', '<h3>That Backorder has been filled</h3><p>It should <em>NOT</em> be showing below</p>');
         }
     }
 
