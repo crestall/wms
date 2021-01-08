@@ -884,11 +884,18 @@ class Order extends Model{
     public function fillBackorders($ids, $backorder_location_id)
     {
         $db = Database::openConnection();
+        $item = new Item();
         foreach($ids as $id)
         {
             //get items for this order in the backorders location
             echo "SELECT * FROM orders_items WHERE order_id = $id AND location_id = $backorder_location_id";
-            //$bois = $db->queryData("SELECT * FROM orders_items WHERE order_id = $id AND location_id = $backorder_location_id");
+            $bois = $db->queryData("SELECT * FROM orders_items WHERE order_id = $id AND location_id = $backorder_location_id");
+            foreach($bois as $boi)
+            {
+                //find location(s) for this item
+                $locations = $item->getLocationsForItem($boi['item_id']);
+                echo "<pre>",print_r($locations),"</pre>";
+            }
         }
     }
 
