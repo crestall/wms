@@ -892,11 +892,50 @@ class Order extends Model{
             $bois = $db->queryData("SELECT * FROM orders_items WHERE order_id = $id AND location_id = $backorder_location_id");
             foreach($bois as $boi)
             {
+                //The required number of items
+                $required = $boi['qty'];
                 //find location(s) for this item
                 $locations = $item->getLocationsForItem($boi['item_id']);
-                echo "<pre>",print_r($locations),"</pre>";
+                foreach($locations as $l)
+                {
+                    $available = $l['qty'] - $l['qc_count'] - $l['allocated'];
+                    if($available <= 0)
+                        continue;
+                    if($available < $required)
+                    {
+                        //insert what can fit
+                        $db->insertQuery('orders_items', array(
+                            'order_id'              =>  $id,
+                            'item_id'               =>  $boi['item_id'],
+                            'client_order_item_id'  =>  $boi['client_order_item_id'],
+                            'location_id'           =>  $l['location_id'],
+                            'qty'                   =>  $available
+                        ));
+                        $required -= $available;
+                    }
+                    else
+                    {
+                        //insert all that are required
+                        $db->insertQuery('orders_items', array(
+                            'order_id'              =>  $id,
+                            'item_id'               =>  $boi['item_id'],
+                            'client_order_item_id'  =>  $boi['client_order_item_id'],
+                            'location_id'           =>  $l['location_id'],
+                            'qty'                   =>  $required
+                        ));
+                    }
+                }
+                $db->deleteQuery('orders_items', $boi['id']);
             }
+            $this->updateOrderValue('backorder_items', 0, $id);
         }
+
+    }
+
+    public function removeBackorderStatus($order_id)
+    {
+        $db = Database::openConnection();
+
     }
 
     public function countItemForOrder($item_id, $order_id)
