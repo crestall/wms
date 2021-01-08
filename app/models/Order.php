@@ -881,7 +881,7 @@ class Order extends Model{
         }
     }
 
-    public function fillBackorders($ids)
+    public function fillBackorders($ids, $backorder_location_id)
     {
         $db = Database::openConnection();
         foreach($ids as $id)
