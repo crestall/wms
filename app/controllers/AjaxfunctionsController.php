@@ -1113,7 +1113,7 @@ class ajaxfunctionsController extends Controller
     public function fillBackorders()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $this->order->fillBackorders($this->request->data['orderids']);
+        $this->order->fillBackorders($this->request->data['orderids'], $this->location->backorders_id);
         if(isset($this->request->data['showfeedback']) && $this->request->data['showfeedback'])
         {
             Session::set('feedback', '<h3>That Backorder has been filled</h3><p>It should <em>NOT</em> be showing below</p>');
