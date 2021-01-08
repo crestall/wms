@@ -888,7 +888,6 @@ class Order extends Model{
         foreach($ids as $id)
         {
             //get items for this order in the backorders location
-            echo "SELECT * FROM orders_items WHERE order_id = $id AND location_id = $backorder_location_id";
             $bois = $db->queryData("SELECT * FROM orders_items WHERE order_id = $id AND location_id = $backorder_location_id");
             foreach($bois as $boi)
             {
