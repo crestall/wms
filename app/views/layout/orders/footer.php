@@ -2140,7 +2140,7 @@
                                     var ids = [thisid];
                                     var data = {orderids: ids, showfeedback: true};
                                     $.post('/ajaxfunctions/fill-backorders', data, function(d){
-                                        //location.reload();
+                                        location.reload();
                                     });
                                 }
                             });
