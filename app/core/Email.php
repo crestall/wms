@@ -246,6 +246,80 @@
         }
     }
 
+     public static function sendBDSImportFeedback($feedback)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        extract($feedback);
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $import_errors = "";
+            if($import_error)
+            {
+                $import_errors .= "
+                    <h3 class='error'>The Following Feedback Has Been Supplied Regarding Import Errors</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                        <tr>
+                            <td style='padding: 20px;'>$import_error_string</td>
+                        </tr>
+                    </table>
+                ";
+            }
+            $backorders = "";
+            if($backorder)
+            {
+                $backorders .= "
+                    <h3 class='error'>The Following Feedback Has Been Supplied Regarding Backorders</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                        <tr>
+                            <td style='padding: 20px;'>$backorder_string</td>
+                        </tr>
+                    </table>
+                ";
+            }
+            $imports = "
+                <h3 class='success'>The Following Feedback Has Been Supplied Regarding Successful Imports</h3>
+                <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #ccebd6;border: 3px solid #009933;color: #009933;'>
+                    <tr>
+                        <td style='padding: 20px;'>$import_string</td>
+                    </tr>
+                </table>
+            ";
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimportfeedback.html");
+            $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{BACKORDER_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{BACKORDERS}","{IMPORTS}");
+		    $replace_with_array = array($total_import, $import_error_count, $backorder_count, $import_count,$import_errors,$backorders,$imports);
+		    $body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+    		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+
+    		$mail->Subject = "BDS Order Import Summary";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+    		$mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent to ". $name);
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        return true;
+    }
+
     public static function sendNuchevImportError($message)
     {
         $mail = new PHPMailer();

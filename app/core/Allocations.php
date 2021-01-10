@@ -12,6 +12,10 @@ class Allocations{
 
     public $controller;
 
+    private $backorder_clients = array(
+        86      //BDS
+    );
+
     public function __construct(Controller $controller){
         $this->controller = $controller;
     }
@@ -28,16 +32,15 @@ class Allocations{
             $values = array();
             $import_error_string = "";
             $item_error = false;
-            $item_error_string = "<ul>";
+            $item_backorder = false;
+            //$item_error_string = "<ul>";
             $order_error_string = "";
             foreach($order_items as $details)
             {
                 $i_id = $details['id'];
-                //echo "<pre>",print_r($details),"</pre>"; //die();
-                //$pick_count = $left = (int)$details['qty'];
+                $item_error_string = "<ul>";
+                $item_backorder_string = "<ul>";
                 $item = $this->controller->item->getItemById($i_id);
-                //echo "<pre>",print_r($item),"</pre>"; die();
-                //$item_name = $item['name'];
                 if(filter_var($details['qty'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
                 {
                     $import_error = true;
@@ -57,16 +60,17 @@ class Allocations{
                         );
 
                     }
-
                     foreach($collection_items as $ci)
                     {
                         //echo "Allocations<pre>",print_r($allocations),"</pre>";//continue;
+                        $client_order_item_id = (isset($details['client_item_id']))? $details['client_item_id'] : NULL;
                         $pick_count = $left = $ci['number'] * $details['qty'];
                         $item_name = $ci['name'];
                         $item_sku = $ci['sku'];
-                        $id = $ci['id'];
+                        $id = (isset($ci['linked_item_id']))? $ci['linked_item_id'] : $ci['id'];
 
                         $f_locations = array();
+                        $backorder_items = false;
 
                         if(!isset($allocations[$id])) $allocations[$id] = 0;
                         $total_available = $this->controller->item->getAvailableStock($id, $this->controller->order->fulfilled_id) - $allocations[$id];
@@ -76,9 +80,54 @@ class Allocations{
                         }
                         if( $total_available < $pick_count)
                         {
-                            $item_error = true;
-                            $item_error_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to create/update this order. $pick_count required, but only $total_available are available</li>";
-                            //die("$total_available - There are insufficient quantities of $item_name to be able to create/update this order");
+                            if(in_array($ci['client_id'], $this->backorder_clients))
+                            {
+                                $allocations[$id] += $total_available; // reserve available for this order
+                                //$left = $total_available;
+
+                                //only individual items can be put on backorder
+                                $locations = $this->controller->item->getAvailableLocationsForItem($id, false, $order_id);
+                                foreach($locations as $l)
+                                {
+                                    if(!isset($l_allocations[$l['location_id']][$id]))
+                                        $l_allocations[$l['location_id']][$id] = 0;
+                                    $available = $l['available'] - $l_allocations[$l['location_id']][$id];
+                                    if($available <= 0)
+                                        continue;
+                                    if($store_order && $l['preferred'] == 1 && count($locations) > 1)
+                                        continue;
+                                    if($available < $left)
+                                    {
+                                        //echo "<p>available < pickcount</p>";
+                                        if($l['preferred'] == 1 && !$store_order)
+                                            $order_error_string .= "<p>$item_name picked from non preferred location</p>";
+                                        $f_locations[] = array(
+                                            'location_id'           =>  $l['location_id'],
+                                            'qty'                   =>  $available,
+                                            'client_order_item_id'  => $client_order_item_id
+                                        );
+                                        $l_allocations[$l['location_id']][$id] += $available;
+                                        $left -= $available;
+                                    }
+                                }
+                                if($left > 0)
+                                {
+                                    $item_backorder = true;
+                                    $item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
+                                    $f_locations[] = array(
+                                        'location_id'           =>  $this->controller->location->backorders_id,
+                                        'qty'                   =>  $left,
+                                        'client_order_item_id'  =>  $client_order_item_id,
+                                        'backorder'             =>  true
+                                    );
+                                }
+                            }
+                            else
+                            {
+                                $item_error = true;
+                                $item_error_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to create/update this order. $pick_count required, but only $total_available are available</li>";
+                            }
+
                         }
                         else
                         {
@@ -101,8 +150,9 @@ class Allocations{
                                     if($available == $left)
                                     {
                                         $f_locations[] = array(
-                                            'location_id'   =>  $l['location_id'],
-                                            'qty'           =>  $available
+                                            'location_id'           =>  $l['location_id'],
+                                            'qty'                   =>  $available,
+                                            'client_order_item_id'  => $client_order_item_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -133,8 +183,9 @@ class Allocations{
                                         if($l['preferred'] == 1 && !$store_order)
                                             $order_error_string .= "<p>$item_name picked from non preferred location</p>";
                                         $f_locations[] = array(
-                                            'location_id'   =>  $l['location_id'],
-                                            'qty'           =>  $available
+                                            'location_id'           =>  $l['location_id'],
+                                            'qty'                   =>  $available,
+                                            'client_order_item_id'  => $client_order_item_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -145,8 +196,9 @@ class Allocations{
                                     {
                                         //echo "<p>available >= pickcount</p>";
                                         $f_locations[] = array(
-                                            'location_id'   =>  $l['location_id'],
-                                            'qty'           =>  $left
+                                            'location_id'           =>  $l['location_id'],
+                                            'qty'                   =>  $left,
+                                            'client_order_item_id'  => $client_order_item_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $left;
                                         break;
@@ -165,6 +217,8 @@ class Allocations{
                             'locations'             => $f_locations,
                             'item_error_string'     => $item_error_string."</ul>",
                             'item_error'            => $item_error,
+                            'item_backorder_string' => $item_backorder_string."</ul>",
+                            'item_backorder'        => $item_backorder,
                             'order_error_string'    => $order_error_string,
                             'import_error'          => false,
                             'qty'                   => $pick_count
@@ -182,7 +236,7 @@ class Allocations{
             //die();
             $oi_values[$oid] = $values;
         }//endforeach order
-        //echo "<pre>",print_r($oi_values),"</pre>";
+        //echo "<pre>OI Values",print_r($oi_values),"</pre>";
         //die();
         //echo "Allocations<pre>",print_r($allocations),"</pre>";
         //echo "l_allocations<pre>",print_r($l_allocations),"</pre>"; die();

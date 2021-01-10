@@ -122,7 +122,8 @@ div#order_activity_chart{
     margin:1rem 0;
 }
 
-.homepagedeck {
+.homepagedeck,
+.backorderdeck {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -142,9 +143,18 @@ div#order_activity_chart{
     transition:transform 800ms ease-out, opacity 1500ms;
 }
 
+.backordercard{
+    margin: 5px 1% !important;
+    border: thin solid #74a3d4;
+}
+
 .homepagecard .card-header,
-.homepagecard .card-body {
+.homepagecard .card-body{
     color: #052f95;
+}
+.backordercard .card-header,
+.backordercard .card-body{
+    color: #74a3d4
 }
 
 .homepagecard .card-header{
@@ -152,24 +162,33 @@ div#order_activity_chart{
     border-bottom: 1px solid rgba(3,12,87,.35);
 }
 
+.backordercard .card-header{
+    background-color: rgba(3,12,87,0.08);
+    border-bottom: 1px solid #74a3d4;
+}
+
 @media screen and (min-width: 576px) {
-    .homepagecard {
+    .homepagecard,
+    .backordercard {
         flex: 48% !important;
         max-width: 48% !important;
     }
 
-    .homepagedeck {
+    .homepagedeck,
+    .backorderdeck {
         flex-wrap: wrap;
         flex-direction: row;
     }
 
-    .homepagecard .card-header{
+    .homepagecard .card-header,
+    .backordercard .card-header{
         height:90px;
     }
 }
 
 @media screen and (min-width: 768px) {
-    .homepagecard {
+    .homepagecard,
+    .backordercard {
         flex: 33% !important;
         max-width: 31% !important;
         }
@@ -177,7 +196,8 @@ div#order_activity_chart{
 }
 
 @media screen and (min-width: 960px) {
-    .homepagecard {
+    .homepagecard,
+    .backordercard {
         flex: 25% !important;
         max-width: 23% !important;
     }
@@ -775,6 +795,39 @@ bootsrap adjustments
 
     .btn-outline-fsg:not(:disabled):not(.disabled):active:focus, .btn-outline-fsg:not(:disabled):not(.disabled).active:focus,
     .show > .btn-outline-fsg.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    /** FSG LIGHT button type - outline only */
+    .btn-outline-fsglight {
+        color: #74a3d4;
+        border-color: #74a3d4;
+    }
+
+    .btn-outline-fsglight:hover {
+        color: #fff !important;
+        background-color: #74a3d4;
+        border-color: #74a3d4;
+    }
+
+    .btn-outline-fsglight:focus, .btn-outline-fsglight.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-fsglight.disabled, .btn-outline-fsglight:disabled {
+        color: #030c57;
+        background-color: transparent;
+    }
+
+    .btn-outline-fsglight:not(:disabled):not(.disabled):active, .btn-outline-fsglight:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-fsglight.dropdown-toggle {
+        color: #fff;
+        background-color: #030c57;
+        border-color: #030c57;
+    }
+
+    .btn-outline-fsglight:not(:disabled):not(.disabled):active:focus, .btn-outline-fsglight:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-fsglight.dropdown-toggle:focus {
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
     }
 

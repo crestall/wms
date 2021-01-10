@@ -18,6 +18,7 @@
     deletePackage($id)
     getAllOrders($client_id, $courier_id = -1, $fulfulled = 0, $store_order = -1)
     getAllOrdersByStatus($status_id)
+    getBackorders($client_id = 0)
     getClientActivity($from, $to, $clients = "")
     getCurrentOrders()
     getCurrentStoreOrders()
@@ -87,6 +88,18 @@ class Order extends Model{
         $this->packed_id    = $this->getStatusId('packed');
         $this->fulfilled_id = $this->getStatusId('fulfilled');
         $this->getStatusses();
+    }
+
+    public function getBackorders($client_id = 0)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM {$this->table} WHERE backorder_items = 1";
+        if($client_id > 0)
+        {
+            $q .= " AND client_id = $client_id";
+        }
+        $q .= " ORDER BY date_ordered ASC";
+        return $db->queryData($q);
     }
 
     public function consolidateOrders($old_id, $new_id)
@@ -248,6 +261,8 @@ class Order extends Model{
             'country'       => $data['country'],
             'entered_by'    => $eb
         );
+        if(isset($data['backorder_items']))
+            $o_values['backorder_items'] = 1;
         if(!empty($data['client_order_id']))
             $o_values['client_order_id'] = $data['client_order_id'];
         if(!empty($data['company_name']))
@@ -302,10 +317,11 @@ class Order extends Model{
                         foreach($item['locations'] as $il)
                         {
                             $vals = array(
-                                'item_id'       => $item_id,
-                                'location_id'   => $il['location_id'],
-                                'qty'           => $il['qty'],
-                                'order_id'      => $order_id
+                                'item_id'               => $item_id,
+                                'location_id'           => $il['location_id'],
+                                'qty'                   => $il['qty'],
+                                'order_id'              => $order_id,
+                                'client_order_item_id'  => $il['client_order_item_id']
                             );
                             $db->insertQuery('orders_items', $vals);
 
@@ -340,6 +356,124 @@ class Order extends Model{
             'from'      =>  $from
         );
         return $db->queryData($query, $array);
+    }
+
+    public function getUnFTPedOrdersArray($client_id)
+    {
+        $db = Database::openConnection();
+        $cmodel = new Courier();
+        $query = "
+            SELECT
+                o.*
+            FROM
+                orders o
+            WHERE
+                client_id = :client_id AND status_id = :status_id AND ftp_uploaded = 0
+            ORDER BY
+                date_fulfilled DESC
+        ";
+        $array = array(
+            'client_id' => 	$client_id,
+            'status_id' =>  $this->fulfilled_id
+        );
+        $orders = $db->queryData($query, $array);
+        $return = array();
+        foreach($orders as $co)
+        {
+            $ad = array(
+                'address'   =>  $co['address'],
+                'address_2' =>  $co['address_2'],
+                'suburb'    =>  $co['suburb'],
+                'state'     =>  $co['state'],
+                'postcode'  =>  $co['postcode'],
+                'country'   =>  $co['country']
+            );
+
+            $packages = $this->getPackagesForOrder($co['id']);
+
+
+            $address = Utility::formatAddressWeb($ad);
+            $shipped_to = "";
+            if(!empty($co['company_name'])) $shipped_to .= $co['company_name']."<br/>";
+            if(!empty($co['ship_to'])) $shipped_to .= $co['ship_to']."<br/>";
+            $shipped_to .= $address;
+            $products = $this->getItemsCountForOrder($co['id']);
+
+            //$parcels = array();
+            $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
+            if(empty($eb))
+            {
+                $eb = "Automatically Imported";
+            }
+            $num_items = 0;
+            $items = "";
+            $csv_items = array();
+            foreach($products as $p)
+            {
+                $items .= $p['name']." (".$p['qty']."),<br/>";
+                $num_items += $p['qty'];
+                $csv_items[] = array(
+                    'name'  =>  $p['name'],
+                    'qty'   =>  $p['qty'],
+                    'cpid'  =>  $p['client_product_id'],
+                    'coiid' =>  $p['client_order_item_id'],
+                    'sku'   =>  $p['sku']
+                );
+            }
+            $items = rtrim($items, ",<br/>");
+            $courier = $db->queryValue('couriers', array('id' => $co['courier_id']), 'name');
+            if($courier == "Local")
+            {
+                $courier = $co['courier_name'];
+            }
+            if($co['courier_id'] == $cmodel->directFreightId)
+            {
+                $tracking_url = "https://directfreight.com.au";
+            }
+            elseif( $co['courier_id'] == $cmodel->eParcelId || $co['courier_id'] == $cmodel->eParcelExpressId )
+            {
+                $tracking_url = "https://auspost.com.au/parcels-mail/track.html#/track?id={$co['consignment_id']}";
+            }
+            else
+            {
+                $tracking_url = "No tracking URL for this courier";
+            }
+            $handling_charge = number_format($co['handling_charge'], 2);
+            $postage_charge = number_format($co['postage_charge'], 2);
+            $gstex_charge = number_format( ($co['postage_charge'] + $co['handling_charge']), 2);
+            $gst = number_format($co['gst'], 2);
+            $gstinc_charge = number_format($co['total_cost'], 2);
+            $dd = $pb = "";
+            $shrink_wrap = (empty($co['shrink_wrap']))? 0 : 1;
+            $bubble_wrap = (empty($co['bubble_wrap']))? 0 : 1;
+            $has_shrink_wrap = (empty($co['shrink_wrap']))? "No" : "Yes";
+            $has_bubble_wrap = (empty($co['bubble_wrap']))? "No" : "Yes";
+            $pallets = (empty($co['pallets']))? 0 : $co['pallets'];
+            $row = array(
+                'order_id'              => $co['id'],
+                'date_ordered'          => date('d-m-Y', $co['date_ordered']),
+                'entered_by'            => $eb,
+                'date_fulfilled'        => date('d-m-Y', $co['date_fulfilled']),
+                'order_number'          => $co['order_number'],
+                'client_order_number'   => $co['client_order_id'],
+                'shipped_to'            => $shipped_to,
+                'country'               => $co['country'],
+                'items'                 => $items,
+                'total_items'           => $num_items,
+                'handling_charge'       => $handling_charge,
+                'postage_charge'        => $postage_charge,
+                'total_exgst'           => $gstex_charge,
+                'gst'                   => $gst,
+                'total_gstinc'          => $gstinc_charge,
+                'courier'               => $courier,
+                'tracking_url'          => $tracking_url,
+                'consignment_id'        => $co['consignment_id'],
+                'csv_items'             => $csv_items
+            );
+            $return[] = $row;
+        }
+        return $return;
+
     }
 
     public function getDispatchedOrdersArray($from, $to, $client_id)
@@ -747,6 +881,62 @@ class Order extends Model{
         }
     }
 
+    public function fillBackorders($ids, $backorder_location_id)
+    {
+        $db = Database::openConnection();
+        $item = new Item();
+        foreach($ids as $id)
+        {
+            //get items for this order in the backorders location
+            $bois = $db->queryData("SELECT * FROM orders_items WHERE order_id = $id AND location_id = $backorder_location_id");
+            foreach($bois as $boi)
+            {
+                //The required number of items
+                $required = $boi['qty'];
+                //find location(s) for this item
+                $locations = $item->getLocationsForItem($boi['item_id']);
+                foreach($locations as $l)
+                {
+                    $available = $l['qty'] - $l['qc_count'] - $l['allocated'];
+                    if($available <= 0)
+                        continue;
+                    if($available < $required)
+                    {
+                        //insert what can fit
+                        $db->insertQuery('orders_items', array(
+                            'order_id'              =>  $id,
+                            'item_id'               =>  $boi['item_id'],
+                            'client_order_item_id'  =>  $boi['client_order_item_id'],
+                            'location_id'           =>  $l['location_id'],
+                            'qty'                   =>  $available
+                        ));
+                        $required -= $available;
+                    }
+                    else
+                    {
+                        //insert all that are required
+                        $db->insertQuery('orders_items', array(
+                            'order_id'              =>  $id,
+                            'item_id'               =>  $boi['item_id'],
+                            'client_order_item_id'  =>  $boi['client_order_item_id'],
+                            'location_id'           =>  $l['location_id'],
+                            'qty'                   =>  $required
+                        ));
+                    }
+                }
+                $db->deleteQuery('orders_items', $boi['id']);
+            }
+            $this->updateOrderValue('backorder_items', 0, $id);
+        }
+
+    }
+
+    public function removeBackorderStatus($order_id)
+    {
+        $db = Database::openConnection();
+
+    }
+
     public function countItemForOrder($item_id, $order_id)
     {
         $db = Database::openConnection();
@@ -823,11 +1013,36 @@ class Order extends Model{
         return $db->queryData($q);
     }
 
+    public function getBackorderItemsForOrder($order_id)
+    {
+        $db = Database::openConnection();
+        $location = new Location();
+        return $db->queryData("
+            SELECT
+                i.*, SUM(oi.qty) AS required,
+                oi.location_id,
+                oi.item_id,
+                oi.id AS line_id,
+                l.location
+            FROM
+                orders_items oi
+                JOIN items i ON oi.item_id = i.id
+                LEFT JOIN items_locations il on il.item_id = i.id
+                JOIN locations l ON oi.location_id = l.id
+            WHERE
+                oi.order_id = $order_id AND oi.location_id = {$location->backorders_id}
+            GROUP BY
+                oi.location_id, i.id
+            ORDER BY
+                i.name
+        ");
+    }
+
     public function getItemsCountForOrder($order_id, $picked = -1)
     {
         $db = Database::openConnection();
         $q = "
-            SELECT i.*, SUM(oi.qty) AS qty
+            SELECT i.*, SUM(oi.qty) AS qty, oi.client_order_item_id
             FROM orders_items oi JOIN items i ON oi.item_id = i.id
             WHERE oi.order_id = $order_id
             GROUP BY i.id
@@ -912,6 +1127,7 @@ class Order extends Model{
             $q .= " AND state = :state";
             $array['state'] = $state;
         }
+        $q .= " AND backorder_items = 0";
         $q .= " ORDER BY errors DESC, client_id, courier_id ASC, country, consignment_id, date_ordered ASC";
         //die($q);
         return ($db->queryData($q, $array));
@@ -1321,7 +1537,24 @@ class Order extends Model{
                 from
                     orders o join clients c on o.client_id = c.id
                 where
-                    o.status_id != {$this->fulfilled_id} and c.active = 1 and o.store_order = $store_order
+                    o.status_id != {$this->fulfilled_id} and c.active = 1 and o.store_order = $store_order and o.backorder_items = 0
+                group by
+                    o.client_id
+                order by
+                    c.client_name";
+
+        return $db->queryData($q);
+    }
+
+    public function getCurrentBackorderOrders()
+    {
+        $db = Database::openConnection();
+        $q = "  select
+                    count(*) as order_count, c.client_name, o.client_id
+                from
+                    orders o join clients c on o.client_id = c.id
+                where
+                    o.status_id != {$this->fulfilled_id} and c.active = 1 and o.backorder_items = 1
                 group by
                     o.client_id
                 order by
@@ -1351,6 +1584,12 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table,'status_id', $status_id, $id);
+    }
+
+    public function updateFTPUploaded($order_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table,'ftp_uploaded', 1, $order_id);
     }
 
     public function updateOrderAddress($data)

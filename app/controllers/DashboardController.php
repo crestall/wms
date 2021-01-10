@@ -16,12 +16,14 @@ class DashboardController extends Controller
     public function index()
     {
         $orders = array();
+        $backorders = array();
         $client_id = 0;
         $clients = array();
         $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         if($user_role == "admin" ||  $user_role == "warehouse")
         {
             $orders = $this->order->getCurrentOrders();
+            $backorders = $this->order->getCurrentBackorderOrders();
         }
         elseif($user_role == 'client')
         {
@@ -33,7 +35,8 @@ class DashboardController extends Controller
             'client_id'             =>  $client_id,
             'orders'                =>  $orders,
             'clients'               =>  $clients,
-            'user_role'             =>  $user_role
+            'user_role'             =>  $user_role,
+            'backorders'            =>  $backorders
         ]);
     }
 
