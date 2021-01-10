@@ -25,7 +25,8 @@ else
 }
 $pallets = (empty(Form::value('pallets')))? $order['pallets']:Form::value('pallets');
 $satchels = (empty(Form::value('satchels')))? $order['satchels']:Form::value('satchels');
-$charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('charge');
+$handling_charge = (empty(Form::value('handling_charge')))? $order['handling_charge']:Form::value('handling_charge');
+$postage_charge = (empty(Form::value('postage_charge')))? $order['postage_charge']:Form::value('postage_charge');
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -62,15 +63,27 @@ $charge = (empty(Form::value('charge')))? $order['total_cost']:Form::value('char
             </div>
         </div>
         <div class="form-group row">
-            <label class="col">Charge Amount</label>
+            <label class="col">Handling Charge</label>
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
-                    <input type="text" class="form-control number" name="charge" id="charge" value="<?php echo $charge;?>" />
+                    <input type="text" class="form-control number" name="handling_charge" id="handling_charge" value="<?php echo $handling_charge;?>" />
                 </div>
-                <?php echo Form::displayError('charge');?>
+                <?php echo Form::displayError('handling');?>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col">Postage Charge</label>
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control number" name="postage_charge" id="postage_charge" value="<?php echo $postage_charge;?>" />
+                </div>
+                <?php echo Form::displayError('postage');?>
             </div>
         </div>
         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />

@@ -410,6 +410,10 @@ $admin = array(
         'book-direct-freight-collection'    => array(
             'display'   => true,
             'icon'      => '<i class="fal fa-truck fa-3x"></i>'
+        ),
+        'view-backorders'   => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['orders']['back-orders']
         )
     ),
     'jobs'      => array(

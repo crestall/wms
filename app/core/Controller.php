@@ -102,8 +102,9 @@ class Controller {
     public function startupProcess(){
 
         $this->initialize();
-
         $this->loadCourierClasses();
+        $this->loadFinancialClasses();
+        $this->loadFTPClasses();
 
         $this->beforeAction();
 
@@ -120,34 +121,38 @@ class Controller {
      *
      */
      public function initialize(){
-
-         $this->loadComponents([
+        $this->loadComponents([
              'Auth' => [
                      'authenticate' => ['User'],
                      'authorize'    => ['Controller']
                  ],
              'Security'
-         ]);
+        ]);
      }
 
-    /**
-     * loadCourierClasses method.
-     * load up individual client courier classes and also any financial instances
-     *
-     */
-     public function loadCourierClasses()
-     {
-         $this->loadEparcelLocations([
+    public function loadCourierClasses()
+    {
+        $this->loadEparcelLocations([
             'Freedom',
             'Nuchev',
             'TTAU',
             'Oneplate'
-         ]);
+        ]);
+    }
 
-         $this->loadMYOBInstances([
+    public function loadFinancialClasses()
+    {
+        $this->loadMYOBInstances([
             'Freedom'
-         ]);
-     }
+        ]);
+    }
+
+    public function loadFTPClasses()
+    {
+        $this->loadFTPInstances([
+            'Bds'
+        ]);
+    }
 
     /**
      * Load the eParcel api location classes
@@ -176,6 +181,22 @@ class Controller {
         foreach($locations as $location)
         {
             $class = $location . "MYOB";
+            $this->{$class} = new $class($this);
+            $this->{$class}->init();
+        }
+    }
+
+    /**
+     * Load any FTP instance classes
+     *
+     * @param array $locations
+     */
+    public function loadFTPInstances(array $locations)
+    {
+        $this->FTP = new FTP($this);
+        foreach($locations as $location)
+        {
+            $class = $location . "FTP";
             $this->{$class} = new $class($this);
             $this->{$class}->init();
         }

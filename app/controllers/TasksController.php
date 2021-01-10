@@ -24,6 +24,128 @@ class TasksController extends Controller
         ]);
     }
 
+    public function BDSCollectionTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            if($this->BdsFTP->openConnection('/bdsorders'))
+            {
+                $responses = array();
+                $files = $this->BdsFTP->getFileNames();
+                foreach($files as $file)
+                {
+                    if($this->BdsFTP->getFileSize($file) === -1)
+                        continue;
+                    echo "<p>Will now process - $file</p>";
+                    $responses[] = $this->BdsFTP->collectOrders($file);
+                    echo "<p>Have now processed - $file</p>";
+                    $this->BdsFTP->renameFile($file, 'collected_orders/'.$file);
+                }
+                $this->BdsFTP->closeConnection();
+                //$file = $files[0]; //there should now be only one
+                //echo "IN TASKS CONTROLLER<pre>",var_dump($responses),"<pre>"; //die();
+                foreach($responses as $response)
+                {
+                    Email::sendBDSImportFeedback($response);
+                }
+                exit();
+            }
+        }
+    }
+
+    public function BDSCompletionTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            if($this->BdsFTP->openConnection('/bdsorders/processed_orders'))
+            {
+                 //echo "gonna do it";
+                $client_id = 86;
+                $orders = $this->order->getUnFTPedOrdersArray($client_id);
+                //echo "<pre>",print_r($orders),"</pre>"; die();
+                if(count($orders))
+                {
+                    $cols = array(
+                        "Date Ordered",
+                        "Entered By",
+                        "Date Dispatched",
+                        "FSG Order Number",
+                        "BDS Order Number",
+                        "Shipped To",
+                        'Total Items',
+                        'Handling Charge',
+                        'Postage Charge',
+                        'Total Charge (GST Ex)',
+                        'GST',
+                        'Total Charge (GST Inc)',
+                        "Courier",
+                        "Consignment ID",
+                        "Tracking URL",
+                    );
+
+                    $rows = array();
+                    $extra_cols = 0;
+                    foreach($orders as $o)
+                    {
+                        $row = array(
+                            $o['date_ordered'],
+                            $o['entered_by'],
+                            $o['date_fulfilled'],
+                            $o['order_number'],
+                            "#".$o['client_order_number'],
+                            str_replace("<br/>", ", ",$o['shipped_to']),
+                            $o['total_items'],
+                            $o['handling_charge'],
+                            $o['postage_charge'],
+                            $o['total_exgst'],
+                            $o['gst'],
+                            $o['total_gstinc'],
+                            $o['courier'],
+                            $o['consignment_id'],
+                            $o['tracking_url']
+                        );
+                        $extra_cols = max($extra_cols, count($o['csv_items']));
+                        $i = 1;
+                        foreach($o['csv_items'] as $array)
+                        {
+                            $row[] = $array['name'];
+                            $row[] = $array['qty'];
+                            $row[] = $array['cpid'];
+                            $row[] = $array['coiid'];
+                            ++$i;
+                        }
+                        $rows[] = $row;
+                        $this->order->updateFTPUploaded($o['order_id']);
+                    }
+                    $i = 1;
+                    while($i <= $extra_cols)
+                    {
+                        $cols[] = "Item $i Name";
+                        $cols[] = "Item $i Qty";
+                        $cols[] = "Item $i SKU";
+                        $cols[] = "Item $i Order Item ID";
+                        ++$i;
+                    }
+                    $csvData = array(
+                        'cols'  => $cols,
+                        'rows'  => $rows
+                    );
+                    $this->BdsFTP->uploadCSVFile($csvData);
+                }
+                $this->BdsFTP->closeConnection();
+            }
+            //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "bsd_dispatch_report_".date("Ymd")]);
+        }
+    }
+
     public function productionJobReminderTask()
     {
         if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
