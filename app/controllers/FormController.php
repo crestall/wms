@@ -1735,15 +1735,18 @@ class FormController extends Controller {
         {
             Form::setError('name', 'The Finisher\'s name is required');
         }
-        if(!$this->dataSubbed($contact))
+        foreach($post_data['contacts'] as $ind => $cd)
         {
-            Form::setError('contact', 'A contact name is required');
-        }
-        if($this->dataSubbed($email))
-        {
-            if(!$this->emailValid($email))
+            if(!$this->dataSubbed($cd['name']))
             {
-                Form::setError('email', 'The email is not valid');
+                Form::setError('contactname_'.$ind, 'A contact name is required');
+            }
+            if($this->dataSubbed($cd['email']))
+            {
+                if(!$this->emailValid($cd['email']))
+                {
+                    Form::setError('contactemail_'.$ind, 'The email is not valid');
+                }
             }
         }
         if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
@@ -1766,7 +1769,7 @@ class FormController extends Controller {
 
     public function procAddProductionFinisher()
     {
-        //echo "<pre>",print_r($_POST),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1779,6 +1782,7 @@ class FormController extends Controller {
             {
                 foreach($value as $key => $avalue)
                 {
+                    ${$field[$key]} = $avalue;
                     $post_data[$field][$key] = $avalue;
                 }
             }
@@ -1788,29 +1792,34 @@ class FormController extends Controller {
         {
             Form::setError('name', 'The Finishers name is required');
         }
-        if(!$this->dataSubbed($contact))
+        foreach($post_data['contacts'] as $ind => $cd)
         {
-            Form::setError('contact', 'A contact name is required');
-        }
-        if($this->dataSubbed($email))
-        {
-            if(!$this->emailValid($email))
+            if(!$this->dataSubbed($cd['name']))
             {
-                Form::setError('email', 'The email is not valid');
+                Form::setError('contactname_'.$ind, 'A contact name is required');
+            }
+            if($this->dataSubbed($cd['email']))
+            {
+                if(!$this->emailValid($cd['email']))
+                {
+                    Form::setError('contactemail_'.$ind, 'The email is not valid');
+                }
             }
         }
         if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
         {
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         }
+
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
+            //echo "ERRORS<pre>",print_r(Form::getErrorArray()),"</pre>"; die();
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $id = $this->productionfinisher->addFinisher($post_data);
             Session::set('feedback', "That Finisher has been added to the system.<br/>The details can be edited <a href='/finishers/edit-finisher/finisher=".$id."'>HERE</a>");
         }

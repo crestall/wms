@@ -44,6 +44,7 @@ $categories = (is_array(Form::value('categories')))? Form::value('categories') :
                 <div class="col-md-4">
                     <input type="text" class="form-control email" name="email" id="email" value="<?php echo Form::value('email');?>" />
                     <?php echo Form::displayError('email');?>
+
                 </div>
             </div>
             <div class="form-group row">
