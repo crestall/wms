@@ -28,7 +28,9 @@
                             $("div#finisher_"+this_finisher).remove();
                             $("div#finishers_holder div.afinisher").each(function(i,e){
                                 $(this).attr("id", "finisher_"+i);
-                                $(this).find("h4.finisher_title").text("Finisher "+toWords(++i)+" Details");
+                                var new_num = toWords(++i);
+                                var uc_new_num = new_num.charAt(0).toUpperCase() + new_num.slice(1)
+                                $(this).find("h4.finisher_title").text("Finisher "+uc_new_num+"'s Details");
                             });
                         });
                     },
