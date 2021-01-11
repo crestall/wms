@@ -253,6 +253,20 @@ while($f < $finisher_count)
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     The Finishers     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="border border-secondary p-3 m-3 rounded bg-light">
+                <div class="row mb-0">
+                    <div class="col-md-4">
+                        <h4>Finisher(s) Details</h4>
+                    </div>
+                    <div class="col-md-8">
+                        <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                    </div>
+                    <div class="col-md-4">
+                        <a id="remove-all-contacts" style="cursor:pointer" title="Leave Only First"><h4><i class="fad fa-times-square text-danger"></i> Leave only one contact</a></h4>
+                    </div>
+                </div>
+            </div>
+
             <?php
             $f = 0;
             while($f < $finisher_count):
