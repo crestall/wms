@@ -6,6 +6,19 @@
             //the actions for each page
             var actions = {
                 common: {
+                    addFinisher: function(){
+                        $("a.add-finisher").click(function(e){
+                            e.preventDefault();
+                            var finisher_count = $("div#finishers_holder div.afinisher").length;
+                            //console.log('packages: '+contact_count);
+                            var data = {
+                                i: finisher_count
+                            }
+                            $.post('/ajaxfunctions/addJobFinisher', data, function(d){
+                                $('div#finishers_holder').append(d.html);
+                            });
+                        });
+                    },
                     jobsTable: function(){
                         jQuery.extend( jQuery.fn.dataTableExt.oSort, {
                             "non-empty-string-asc": function (str1, str2) {
