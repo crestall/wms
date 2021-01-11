@@ -24,7 +24,8 @@
                         $("a.remove-finisher").off('click').click(function(e){
                             e.preventDefault();
                             var this_finisher = $(this).data('finisher');
-                            console.log('finisher - '+this_finisher);
+                            //console.log('finisher - '+this_finisher);
+                            $("div#finisher_"+this_finisher).remove();
                         });
                     },
                     jobsTable: function(){
