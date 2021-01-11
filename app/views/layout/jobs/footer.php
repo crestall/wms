@@ -19,6 +19,13 @@
                             });
                         });
                     },
+                    removeFinisher: function(){
+                        $("a.remove-finisher") .click(function(e){
+                            e.preventDefault();
+                            var this_finisher = $(this).data('finisher');
+                            console.log('finisher - '+this_finisher);
+                        });
+                    },
                     jobsTable: function(){
                         jQuery.extend( jQuery.fn.dataTableExt.oSort, {
                             "non-empty-string-asc": function (str1, str2) {
