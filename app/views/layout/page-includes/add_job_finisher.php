@@ -5,7 +5,7 @@ $details['role'] = isset($d['role'])? $d['role']:"";
 $details['email'] = isset($d['email'])? $d['email']:"";
 $details['phone'] = isset($d['phone'])? $d['phone']:"";
 ?>
-<div class="p-3 light-grey mb-3 acontact">
+<div class="p-3 light-grey mb-3 afinisher">
     <div class="form-group row">
         <label class="col-md-2 mb-3">Name</label>
         <div class="col-md-4 mb-3">

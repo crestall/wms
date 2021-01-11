@@ -256,12 +256,14 @@ while($f < $finisher_count)
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <div class="row mb-0">
                     <div class="col-md-8">
-                        <h4>Finisher(s) Details</h4>
+                        <h3>Finisher(s) Details</h3>
                     </div>
                     <div class="col-md-4">
                         <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                        <input type="hidden" name="finisher_count" id="finisher_count" value="0">
                     </div>
                 </div>
+                <div id="finishers_holder"></div>
             </div>
 
             <?php
