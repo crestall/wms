@@ -21,7 +21,7 @@
                         });
                     },
                     removeFinisher: function(){
-                        $("a.remove-finisher").click(function(e){
+                        $("a.remove-finisher").off('click').click(function(e){
                             e.preventDefault();
                             var this_finisher = $(this).data('finisher');
                             console.log('finisher - '+this_finisher);
