@@ -385,6 +385,7 @@
                     init: function(){
                         actions.common.autoComplete();
                         actions.common.doDates();
+                        actions.common.addFinisher();
                         $("form#add_production_job").submit(function(e){
                             if($(this).valid())
                             {
