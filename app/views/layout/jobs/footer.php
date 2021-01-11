@@ -28,6 +28,7 @@
                             $("div#finisher_"+this_finisher).remove();
                             $("div#finishers_holder div.afinisher").each(function(i,e){
                                 $(this).attr("id", "finisher_"+i);
+                                $(this).find("h4.finisher_title").text("POO "+i);
                             });
                         });
                     },
