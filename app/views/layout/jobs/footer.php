@@ -26,6 +26,9 @@
                             var this_finisher = $(this).data('finisher');
                             //console.log('finisher - '+this_finisher);
                             $("div#finisher_"+this_finisher).remove();
+                            $("div#finishers_holder div.afinisher").each(function(i,e){
+                                $(this).attr("id", "finisher_"+i);
+                            });
                         });
                     },
                     jobsTable: function(){
