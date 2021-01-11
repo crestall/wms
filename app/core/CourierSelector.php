@@ -229,18 +229,25 @@
             {
                 //echo "<pre>",print_r($response),"</pre>"; die();
                 //All good, set the courier
+                $order_values['handling_charge'] = $this->handling_charge;
                 $order_values['consignment_id'] = $consignment['Connote'];
-                $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2); //GST and 35% markup and fuel surcharge
+                $postage = $order_values['postage_charge'] = round($consignment['TotalCharge'] * 1.35 * DF_FUEL_SURCHARGE , 2);
+                $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                 /*********** charge FREEDOM more *******************/
                     if($this->order_details['client_id'] == 7)
                     {
-                        $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                        $postage = $order_values['postage_charge'] = round($consignment['TotalCharge'] * 1.4 * DF_FUEL_SURCHARGE , 2);
+                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                     }
                 /*********** end charge FREEDOM more *******************/
                 /*********** special deals for OnePlate *******************/
                 if($this->order_details['client_id'] == 82)
                 {
-                    $order_values['total_cost'] = round($consignment['TotalCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    $postage = $order_values['postage_charge'] = round($consignment['TotalCharge'] * 1.1 * DF_FUEL_SURCHARGE , 2);
+                    $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                    $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                 }
                 /*********** special deals for OnePlate *******************/
                 /*********** BDS Calculations *******************/
