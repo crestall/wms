@@ -18,6 +18,7 @@
 
 class Productionfinisher extends Model{
     public $table = "production_finishers";
+    public $contacts_table = "production_contacts";
 
     public function deactivateFinisher($finisher_id)
     {
@@ -78,13 +79,19 @@ class Productionfinisher extends Model{
     public function getAllFinishers($active = 1)
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT * FROM {$this->table} WHERE active = $active ORDER BY name");
+        $q = $this->generateQuery();
+        $q .= " WHERE active = $active GROUP BY pf.id ORDER BY pf.name";
+        return $db->queryData($q);
     }
 
     public function getFinisherById($id = 0)
     {
         $db = Database::openConnection();
-        return $db->queryById($this->table, $id);
+        //return $db->queryById($this->table, $id);
+        $q = $this->generateQuery();
+        $q .= "WHERE pf.id = $id";
+        //die($q);
+        return $db->queryRow($q);
     }
 
     public function getFinisherIdByName($name)
@@ -98,14 +105,11 @@ class Productionfinisher extends Model{
 
     public function addFinisher($data)
     {
-        //echo "productionfinisher<pre>",print_r($data),"</pre>";die();
+        echo "productionfinisher<pre>",print_r($data),"</pre>";//die();
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  $data['name']
         );
-        if(!empty($data['email'])) $vals['email'] = $data['email'];
-        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
-        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
@@ -119,6 +123,15 @@ class Productionfinisher extends Model{
             $fcat = new Finishercategories();
             $fcat->addFinisherCategories($data['categories'], $id);
         }
+        if(isset($data['contacts']) && is_array($data['contacts']))
+        {
+            foreach($data['contacts'] as $contact)
+            {
+                $contact['finisher_id'] = $id;
+                $pcontact = new Productioncontact();
+                $pcontact->addContact($contact);
+            }
+        }
         return $id;
     }
 
@@ -128,9 +141,6 @@ class Productionfinisher extends Model{
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  strtolower($data['name']),
-            'email'         =>  null,
-            'contact'       =>  null,
-            'phone'         =>  null,
             'address'       =>  null,
             'address_2'     =>  null,
             'suburb'        =>  null,
@@ -140,9 +150,6 @@ class Productionfinisher extends Model{
             'website'       =>  null
         );
         $vals['active'] = isset($data['active'])? 1 : 0;
-        if(!empty($data['email'])) $vals['email'] = $data['email'];
-        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
-        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
@@ -150,7 +157,7 @@ class Productionfinisher extends Model{
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['website'])) $vals['website'] = $data['website'];
-        $id = $db->updateDatabaseFields($this->table, $vals, $data['finisher_id']);
+        $db->updateDatabaseFields($this->table, $vals, $data['finisher_id']);
         if(isset($data['categories']) && is_array($data['categories']))
         {
             $fcat = new Finishercategories();
@@ -161,7 +168,17 @@ class Productionfinisher extends Model{
             $fcat = new Finishercategories();
             $fcat->removeFinisherCategories($data['finisher_id']);
         }
-        return $id;
+        if(isset($data['contacts']) && is_array($data['contacts']))
+        {
+            $pcontact = new Productioncontact();
+            $pcontact->removeFinisherContacts($data['finisher_id']);
+            foreach($data['contacts'] as $contact)
+            {
+                $contact['finisher_id'] = $data['finisher_id'];
+                $pcontact->addContact($contact);
+            }
+        }
+        return true;
     }
 
     public function getAutocompleteFinisher($data)
@@ -202,6 +219,18 @@ class Productionfinisher extends Model{
             array_push($return_array,$row_array);
         }
         return $return_array;
+    }
+
+    private function generateQuery()
+    {
+        return "
+            SELECT
+                pf.*,
+                GROUP_CONCAT(pc.id,',',pc.name,',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
+            FROM
+                {$this->table} pf LEFT JOIN
+                {$this->contacts_table} pc ON pf.id = pc.finisher_id
+        ";
     }
 }
 ?>

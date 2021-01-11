@@ -17,17 +17,8 @@
                                 this.checked =  checked;
                              })
                         });
-                    }
-                },
-                'add-finisher':{
-                    init: function(){
-                        actions.common.init();
-                        $('form#add_production_finisher').submit(function(e){
-                            if($(this).valid())
-                            {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Finisher...</h2></div>' });
-                            }
-                        });
+                    },
+                    addContact: function(){
                         $("a.add-contact").click(function(e){
                             e.preventDefault();
                             var contact_count = $("div#contacts_holder div.acontact").length;
@@ -45,9 +36,22 @@
                         });
                     }
                 },
+                'add-finisher':{
+                    init: function(){
+                        actions.common.init();
+                        actions.common.addContact();
+                        $('form#add_production_finisher').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Finisher...</h2></div>' });
+                            }
+                        });
+                    }
+                },
                 'edit-finisher':{
                     init: function(){
                         actions.common.init();
+                        actions.common.addContact();
                         $('form#edit_production_finisher').submit(function(e){
                             if($(this).valid())
                             {
