@@ -22,7 +22,20 @@
                         });
                     },
                     finisherAutocomplete: function(){
-
+                        $("div#finishers_holder div.afinisher").each(function(i,e){
+                            var $this_input = $(this).find("input.finisher_name");
+                            var $this_finisher_details = $(this).find("div.this_finisher_details");
+                            if($this_input.data('ui-autocomplete') != undefined)
+                            {
+                                $this_input.autocomplete("destroy" );
+                            }
+                            autoCompleter.productionJobFinisherAutoComplete($this_input, selectFinisherCallback, changeFinisherCallback);
+                        });
+                        function selectFinisherCallback(event, ui)
+                        {
+                            $this_finisher_details.show();
+                            return false;
+                        }
                     },
                     finisherExpectedDeliveryDates: function(){
                         $("div#finishers_holder div.afinisher").each(function(i,e){
