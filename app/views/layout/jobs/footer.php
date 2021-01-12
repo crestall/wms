@@ -34,7 +34,8 @@
                         });
                         function selectFinisherCallback(event, ui)
                         {
-                            $this_finisher_details.show();
+                            //$this_finisher_details.show();
+                            console.log('name: '+ event.target.attr("name"));
                             return false;
                         }
                         function changeFinisherCallback(event, ui)
@@ -42,7 +43,7 @@
                             if (!ui.item)
                 	        {
                                 $('input#finisher_id').val(0);
-                                $this_finisher_details.hide();
+                                //$this_finisher_details.hide();
                                 $('input.finisher').each(function(element, index){
                                     $(this).val("");
                                 })
