@@ -46,6 +46,7 @@
                                 var $target = $(event.target)
                                 var $this_finisher = $target.closest("div.afinisher");
                                 $this_finisher.find("div.this_finisher_details").hide();
+                                $target.val("");
                                 $('input.finisher').each(function(element, index){
                                     $(this).val("");
                                 })
