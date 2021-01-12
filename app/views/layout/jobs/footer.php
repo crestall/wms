@@ -35,7 +35,8 @@
                         function selectFinisherCallback(event, ui)
                         {
                             //$this_finisher_details.show();
-                            console.log('name: '+ event.target.attr("name"));
+                            var target = $(event.target)
+                            console.log('name: '+ target.attr("name"));
                             return false;
                         }
                         function changeFinisherCallback(event, ui)
