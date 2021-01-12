@@ -153,8 +153,8 @@ while($f < $finisher_count)
                 </div>
                 <div class="form-group row">
                     <div class="checkbox checkbox-default ">
+                        <label class="col-md-3" for="send_to_customer">Send Job To Customer</label>
                         <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" />
-                        <label for="send_to_customer">Send Job To Customer</label>
                     </div>
                 </div>
                 <div class="form-group row ">
