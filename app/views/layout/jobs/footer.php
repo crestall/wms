@@ -31,6 +31,7 @@
                             var $this_calendar_icon = $(this).find("i.fa-calendar-alt");
                             $this_calendar_icon.css('cursor', 'pointer').click(function(e){
                                 $this_input.focus();
+                                console.log('this input is ' + $this_input);
                             });
                             if(!$this_input.hasClass("hasDatepicker"))
                             {
