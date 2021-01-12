@@ -39,7 +39,7 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="date_ed<?php echo $fn;?>_value" id="date_ed<?php echo $fn;?>_value" value="<?php echo Form::value('date_ed'.$fn.'_value');?>" />
+            <input type="hidden" name="finishers[<?php echo $i;?>][ed_date]_value">
         </div>
     </div>
 </div>
