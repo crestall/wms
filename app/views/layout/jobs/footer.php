@@ -37,6 +37,7 @@
                             var $this_finisher = $target.closest("div.afinisher");
                             $this_finisher.find("div.this_finisher_details").show();
                             actions.common.finisherExpectedDeliveryDates();
+                            jobDeliveryDestinations.updateEvents();
                             return false;
                         }
                         function changeFinisherCallback(event, ui)
