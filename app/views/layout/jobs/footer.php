@@ -105,6 +105,9 @@
                                 $(this).find("input.finisher_po").attr("name", "finishers["+i+"][purchase_order]");
                                 $(this).find("input.finisher_ed_date").attr("name", "finishers["+i+"][ed_date]");
                                 $(this).find("input.finisher_ed_date_value").attr("name", "finishers["+i+"][ed_date_value]");
+                                $(this).find("input.send_to_finisher").attr("name", "send_to_finisher_"+i);
+                                $(this).find("input.send_to_finisher").attr("id", "send_to_finisher_"+i);
+                                $(this).find("label.send_to_finisher").attr("for", "send_to_finisher_"+i);
                             });
                         });
                     },
