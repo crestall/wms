@@ -50,7 +50,9 @@
                                 var $this_finisher = $target.closest("div.afinisher");
                                 $this_finisher.find("div.this_finisher_details").hide();
                                 $target.val("");
-                                $('input.finisher').each(function(element, index){
+                                var $this_finisher_details = $this_finisher.find("div.this_finisher_hidden_details");
+                                $this_finisher_details.find("input").each(function(element, index){
+                                    console.log('input name :'+$(this.attr("name")));
                                     $(this).val("");
                                 })
                                 return false;
