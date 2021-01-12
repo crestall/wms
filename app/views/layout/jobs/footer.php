@@ -17,7 +17,7 @@
                             $.post('/ajaxfunctions/addJobFinisher', data, function(d){
                                 $('div#finishers_holder').append(d.html);
                                 actions.common.removeFinisher();
-                                finisherExpectedDeliveryDates();
+                                actions.finisherExpectedDeliveryDates();
                             });
                         });
                     },
