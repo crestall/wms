@@ -244,7 +244,10 @@ while($f < $finisher_count)
 <!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Delivery Details</h3>
-                 <?php include(Config::get('VIEWS_PATH')."forms/delivery_destinations.php");?>
+                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                    <input class="custom-control-input send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
+                    <label class="custom-control-label col-md-3" for="held_in_store">Hold Job In Store</label>
+                </div>
                 <div id="delivery_address_holder">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
