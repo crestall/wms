@@ -36,6 +36,8 @@
                                 var uc_new_num = new_num.charAt(0).toUpperCase() + new_num.slice(1)
                                 $(this).find("h4.finisher_title").text("Finisher "+uc_new_num+"'s Details");
                                 $(this).find("a.remove-finisher").data("finisher", i);
+                                $(this).find("input.finisher_name").attr("name", "finishers["+i+"][name]");
+                                $(this).find("input.finisher_po").attr("name", "finishers["+i+"][purchase_order]");
                             });
                         });
                     },
