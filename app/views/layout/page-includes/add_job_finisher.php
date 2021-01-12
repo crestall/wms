@@ -3,7 +3,7 @@ $i = (isset($i))? $i : 0;
 $this_finisher = $i + 1;
 $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 ?>
-<div id="finisher_<?php echo $i;?>" class="p-3 light-grey mb-3 afinisher">
+<div id="finisher_<?php echo $i;?>" class="p-3 mid-grey mb-3 afinisher">
     <div class="form-group row">
         <h4 class="col-md-4 finisher_title">Finisher <?php echo ucwords($f->format($this_finisher));?>'s Details</h4>
         <div class="col-md-4">
