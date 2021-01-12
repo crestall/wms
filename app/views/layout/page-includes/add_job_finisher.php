@@ -49,7 +49,7 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
     <div class="this_finisher_hidden_details">
         <input type="hidden" class="finisher_id" name="finishers[<?php echo $i;?>][finisher_id]">
         <input type="hidden" class="finisher_address" name="finishers[<?php echo $i;?>][finisher_address]">
-        <input type="hidden" class="finisher_address2" name="finishers[<?php echo $i;?>][finisher_address2]">
+        <input type="hidden" class="finisher_address_2" name="finishers[<?php echo $i;?>][finisher_address2]">
         <input type="hidden" class="finisher_suburb" name="finishers[<?php echo $i;?>][finisher_suburb]">
         <input type="hidden" class="finisher_state" name="finishers[<?php echo $i;?>][finisher_state]">
         <input type="hidden" class="finisher_postcode" name="finishers[<?php echo $i;?>][finisher_postcode]">
