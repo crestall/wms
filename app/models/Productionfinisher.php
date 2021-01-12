@@ -202,19 +202,19 @@ class Productionfinisher extends Model{
         $rows = $db->queryData($query, $array);
         foreach($rows as $row)
         {
-            $row_array                  = array();
-            $row_array['value']         = ucwords($row['name']);
-            $row_array['contact']       = $row['contact'];
-            $row_array['email']         = $row['email'];
-            $row_array['website']       = $row['website'];
-            $row_array['phone']         = $row['phone'];
-            $row_array['address']       = $row['address'];
-            $row_array['address_2']     = $row['address_2'];
-            $row_array['suburb']        = $row['suburb'];
-            $row_array['state']         = $row['state'];
-            $row_array['postcode']      = $row['postcode'];
-            $row_array['country']       = $row['country'];
-            $row_array['finisher_id']   = $row['id'];
+            $row_array                          = array();
+            $row_array['value']                 = ucwords($row['name']);
+            $row_array['finisher_contact']      = $row['contact'];
+            $row_array['finisher_email']        = $row['email'];
+            $row_array['finisher_website']      = $row['website'];
+            $row_array['finisher_phone']        = $row['phone'];
+            $row_array['finisher_address']      = $row['address'];
+            $row_array['finisher_address_2']    = $row['address_2'];
+            $row_array['finisher_suburb']       = $row['suburb'];
+            $row_array['finisher_state']        = $row['state'];
+            $row_array['finisher_postcode']     = $row['postcode'];
+            $row_array['finisher_country']      = $row['country'];
+            $row_array['finisher_id']           = $row['id'];
 
             array_push($return_array,$row_array);
         }
