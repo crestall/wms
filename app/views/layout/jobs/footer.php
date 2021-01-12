@@ -17,11 +17,44 @@
                             $.post('/ajaxfunctions/addJobFinisher', data, function(d){
                                 $('div#finishers_holder').append(d.html);
                                 actions.common.removeFinisher();
+                                finisherExpectedDeliveryDates();
                             });
                         });
                     },
                     finisherAutocomplete: function(){
 
+                    },
+                    finisherExpectedDeliveryDates: function(){
+                        $("div#finishers_holder div.afinisher").each(function(i,e){
+                            var $this_input = $(this).find("input.finisher_ed_date");
+                            var $this_value_input = $(this).find("input.finisher_ed_date_value");
+                            var $this_calendar_icon = $(this).find("i.fa-calendar-alt");
+                            if(!$this_input.hasClass("hasDatepicker"))
+                            {
+                                $this_input.datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: "dd/mm/yy",
+                                    onClose: function(selectedDate){
+                                        //console.log('selecteddate: '+ selectedDate);
+                                        if(selectedDate == "")
+                                        {
+                                            $this_value_input.val('');
+                                            $this_input.val('');
+                                        }
+                                        else
+                                        {
+                                            var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                            s = d.valueOf()/1000;
+                                            $this_value_input.val(s);
+                                        }
+                                    }
+                                });
+                                $this_calendar_icon.css('cursor', 'pointer').click(function(e){
+                                    $this_input.focus();
+                                });
+                            }
+                        });
                     },
                     removeFinisher: function(){
                         $("a.remove-finisher").off('click').click(function(e){
