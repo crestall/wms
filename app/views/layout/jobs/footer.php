@@ -36,7 +36,8 @@
                         {
                             //$this_finisher_details.show();
                             var target = $(event.target)
-                            console.log('name: '+ target.attr("name"));
+                            //console.log('name: '+ target.attr("name"));
+                            target.parent().parent().next("div.this_finisher_details").show();
                             return false;
                         }
                         function changeFinisherCallback(event, ui)
