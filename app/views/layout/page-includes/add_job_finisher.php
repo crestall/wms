@@ -22,12 +22,24 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
             <?php echo Form::displayError('finishername_'.$i);?>
         </div>
     </div>
-    <div class="this_finisher_details" style="display:none">
+    <div class="this_finisher_details">
         <div class="form-group row">
             <label class="col-md-4">Purchase Order Number</label>
             <div class="col-md-4">
                 <input type="text" class="form-control finisher_po" name="finishers[<?php echo $i;?>][purchase_order]">
             </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-md-4 col-form-label">Expected Delivery Date</label>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <input type="text" class="form-control finisher_ed_date_value" name="finishers[<?php echo $i;?>][ed_date]">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="date_ed<?php echo $fn;?>_value" id="date_ed<?php echo $fn;?>_value" value="<?php echo Form::value('date_ed'.$fn.'_value');?>" />
         </div>
     </div>
 </div>
