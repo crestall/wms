@@ -28,7 +28,7 @@
                         $("div#finishers_holder div.afinisher").each(function(i,e){
                             var $this_input = $(this).find("input.finisher_ed_date");
                             var $this_value_input = $(this).find("input.finisher_ed_date_value");
-                            var $this_calendar_icon = $(this).find("i.fa-calendar-alt");
+                            var $this_calendar_icon = $(this).find("span.calendar_icon");
                             $this_calendar_icon.css('cursor', 'pointer').click(function(e){
                                 $this_input.focus();
                                 console.log('this input is ' + $this_input);
