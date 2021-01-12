@@ -13,13 +13,21 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
     <div class="form-group row">
         <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Finisher Name</label>
         <div class="col-md-4">
-            <input type="text" class="form-control required" name="finishers[<?php echo $i;?>][name]">
+            <input type="text" class="form-control finisher_name required" name="finishers[<?php echo $i;?>][name]">
             <span class="inst">
                 Start typing a name and choose a finisher from the list<br>
                 Only finishers already in the system can be chosen here<br>
                 <a href="/finishers/add-finisher" target="_blank" title="opens in new window">Click here to add a new finisher <i class="fal fa-external-link"></i></a>
             </span>
             <?php echo Form::displayError('finishername_'.$i);?>
+        </div>
+    </div>
+    <div class="this_finisher_details" style="display:none">
+        <div class="form-group row">
+            <label class="col-md-4">Purchase Order Number</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control finisher_po" name="finishers[<?php echo $i;?>][purchase_order]">
+            </div>
         </div>
     </div>
 </div>
