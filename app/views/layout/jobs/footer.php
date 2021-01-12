@@ -36,6 +36,8 @@
                             var $target = $(event.target)
                             var $this_finisher = $target.closest("div.afinisher");
                             $this_finisher.find("div.this_finisher_details").show();
+                            var $this_finisher_details = $this_finisher.find("div.this_finisher_hidden_details");
+                            $this_finisher_details.find('input.finisher_id').val(i.item.finisher_id);
                             actions.common.finisherExpectedDeliveryDates();
                             jobDeliveryDestinations.updateEvents();
                             return false;
