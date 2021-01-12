@@ -34,7 +34,6 @@
                         });
                         function selectFinisherCallback(event, ui)
                         {
-                            //$this_finisher_details.show();
                             var $target = $(event.target)
                             var $this_finisher = $target.closest("div.afinisher");
                             $this_finisher.find("div.this_finisher_details").show();
