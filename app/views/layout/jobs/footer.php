@@ -115,6 +115,12 @@
                                 $(this).find("input.send_to_finisher").attr("name", "send_to_finisher_"+i);
                                 $(this).find("input.send_to_finisher").attr("id", "send_to_finisher_"+i);
                                 $(this).find("label.send_to_finisher").attr("for", "send_to_finisher_"+i);
+                                var $this_finisher_details = $(this).find("div.this_finisher_hidden_details");
+                                //$this_finisher_details.find('input.finisher_id').val(ui.item.finisher_id);
+                                $this_finisher_details.find("input").each(function(element, index){
+                                    var fclass = $(this).attr("class");
+                                    $(this).attr("name", "finishers["+i+"]["+fclass+"]");
+                                });
                             });
                         });
                     },
