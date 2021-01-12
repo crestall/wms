@@ -52,7 +52,7 @@
                                 $target.val("");
                                 var $this_finisher_details = $this_finisher.find("div.this_finisher_hidden_details");
                                 $this_finisher_details.find("input").each(function(element, index){
-                                    console.log('input name :'+$(this.attr("name")));
+                                    console.log('input name :'+$(this).attr("name"));
                                     $(this).val("");
                                 })
                                 return false;
