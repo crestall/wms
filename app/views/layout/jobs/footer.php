@@ -18,7 +18,6 @@
                                 $('div#finishers_holder').append(d.html);
                                 actions.common.removeFinisher();
                                 actions.common.finisherAutocomplete();
-                                actions.common.finisherExpectedDeliveryDates();
                             });
                         });
                     },
@@ -37,14 +36,16 @@
                             var $target = $(event.target)
                             var $this_finisher = $target.closest("div.afinisher");
                             $this_finisher.find("div.this_finisher_details").show();
+                            actions.common.finisherExpectedDeliveryDates();
                             return false;
                         }
                         function changeFinisherCallback(event, ui)
                         {
                             if (!ui.item)
                 	        {
-                                $('input#finisher_id').val(0);
-                                //$this_finisher_details.hide();
+                                var $target = $(event.target)
+                                var $this_finisher = $target.closest("div.afinisher");
+                                $this_finisher.find("div.this_finisher_details").hide();
                                 $('input.finisher').each(function(element, index){
                                     $(this).val("");
                                 })
