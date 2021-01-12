@@ -92,8 +92,8 @@
                         $("a.remove-finisher").off('click').click(function(e){
                             e.preventDefault();
                             var this_finisher = $(this).data('finisher');
-                            //console.log('finisher - '+this_finisher);
                             $("div#finisher_"+this_finisher).remove();
+                            //redo indexing of finishers
                             $("div#finishers_holder div.afinisher").each(function(i,e){
                                 $(this).attr("id", "finisher_"+i);
                                 var plusi = i + 1;
