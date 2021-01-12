@@ -17,6 +17,7 @@
                             $.post('/ajaxfunctions/addJobFinisher', data, function(d){
                                 $('div#finishers_holder').append(d.html);
                                 actions.common.removeFinisher();
+                                actions.common.finisherAutocomplete();
                                 actions.common.finisherExpectedDeliveryDates();
                             });
                         });
@@ -35,6 +36,18 @@
                         {
                             $this_finisher_details.show();
                             return false;
+                        }
+                        function changeFinisherCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $('input#finisher_id').val(0);
+                                $this_finisher_details.hide();
+                                $('input.finisher').each(function(element, index){
+                                    $(this).val("");
+                                })
+                                return false;
+                            }
                         }
                     },
                     finisherExpectedDeliveryDates: function(){
