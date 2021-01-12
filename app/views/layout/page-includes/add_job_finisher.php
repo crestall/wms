@@ -35,7 +35,7 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
                 <div class="input-group">
                     <input type="text" class="form-control finisher_ed_date" name="finishers[<?php echo $i;?>][ed_date]">
                     <div class="input-group-append">
-                        <span class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                        <span class="input-group-text calendar_icon"><i class="fad fa-calendar-alt"></i></span>
                     </div>
                 </div>
             </div>
