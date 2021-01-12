@@ -151,6 +151,12 @@ while($f < $finisher_count)
                         <?php echo Form::displayError('customer_name');?>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <div class="checkbox checkbox-default ">
+                        <input class="form-check-input styled send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" />
+                        <label for="send_to_customer">Send Job To Customer</label>
+                    </div>
+                </div>
                 <div class="form-group row ">
                     <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
                     <div class="col-lg-3 col-md-4">
