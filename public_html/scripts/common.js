@@ -258,11 +258,11 @@ var barcodeScanner = {
 var jobDeliveryDestinations = {
     updateEvents: function(){
         var $checkboxes = $("input.send_to_address");
-        $checkboxes.click(function(){
+        $checkboxes.off('click').click(function(){
             //console.log('click');
             $checkboxes.not(this).prop('checked', false).change();
         });
-        $('input#held_in_store').change(function(e){
+        $('input#held_in_store').off('change').change(function(e){
             if($('input#held_in_store').prop('checked'))
             {
                 //console.log('will disable everything');
@@ -283,7 +283,7 @@ var jobDeliveryDestinations = {
                 });
             }
         });
-        $('input#send_to_customer').change(function(e){
+        $('input#send_to_customer').off('change').change(function(e){
             if($('input#send_to_customer').prop('checked'))
             {
                 $('#ship_to').val($('#customer_name').val());
@@ -297,7 +297,7 @@ var jobDeliveryDestinations = {
                 $('#ignore_address_error').prop('checked', $('#ignore_customer_address_error').prop('checked' )).change();
             }
         });
-        $('input#send_to_finisher').change(function(e){
+        $('input#send_to_finisher').off('change').change(function(e){
             if($('input#send_to_finisher').prop('checked'))
             {
                 $('#ship_to').val($('#finisher_name').val());
