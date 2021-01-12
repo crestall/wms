@@ -79,7 +79,7 @@
                                         }
                                         else
                                         {
-                                            var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
+                                            var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2\/$1\/$3") );
                                             s = d.valueOf()/1000;
                                             $this_value_input.val(s);
                                         }
