@@ -22,7 +22,7 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
             <?php echo Form::displayError('finishername_'.$i);?>
         </div>
     </div>
-    <div class="this_finisher_details">
+    <div class="this_finisher_details" style="display:none;">
         <div class="form-group row">
             <label class="col-md-4">Purchase Order Number</label>
             <div class="col-md-4">
