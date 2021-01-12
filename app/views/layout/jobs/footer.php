@@ -38,6 +38,8 @@
                                 $(this).find("a.remove-finisher").data("finisher", i);
                                 $(this).find("input.finisher_name").attr("name", "finishers["+i+"][name]");
                                 $(this).find("input.finisher_po").attr("name", "finishers["+i+"][purchase_order]");
+                                $(this).find("input.finisher_ed_date").attr("name", "finishers["+i+"][ed_date]");
+                                $(this).find("input.finisher_ed_date_value").attr("name", "finishers["+i+"][ed_date_value]");
                             });
                         });
                     },
