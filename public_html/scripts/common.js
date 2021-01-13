@@ -287,13 +287,13 @@ var jobDeliveryDestinations = {
             if($('input#send_to_customer').prop('checked'))
             {
                 $('#ship_to').val($('#customer_name').val()).valid();
-                $('#attention').val($('#customer_contact').val());
-                $('#address').val($('#customer_address').val());
+                $('#attention').val($('#customer_contact').val()).valid();
+                $('#address').val($('#customer_address').val()).valid();
                 $('#address2').val($('#customer_address2').val());
-                $('#suburb').val($('#customer_suburb').val());
-                $('#state').val($('#customer_state').val());
-                $('#postcode').val($('#customer_postcode').val());
-                $('#country').val($('#customer_country').val());
+                $('#suburb').val($('#customer_suburb').val()).valid();
+                $('#state').val($('#customer_state').val()).valid();
+                $('#postcode').val($('#customer_postcode').val()).valid();
+                $('#country').val($('#customer_country').val()).valid();
                 $('#ignore_address_error').prop('checked', $('#ignore_customer_address_error').prop('checked' )).change();
             }
         });
@@ -303,29 +303,16 @@ var jobDeliveryDestinations = {
                 if($this.prop('checked'))
                 {
                     var this_finisher_ind  = $this.data("finisher");
-                    $('#ship_to').val($('input[name="finishers['+this_finisher_ind+'][name]"]').val());
+                    $('#ship_to').val($('input[name="finishers['+this_finisher_ind+'][name]"]').val()).valid();
                     //$('#attention').val($('#customer_contact').val());
-                    $('#address').val($('input[name="finishers['+this_finisher_ind+'][finisher_address]"]').val());
+                    $('#address').val($('input[name="finishers['+this_finisher_ind+'][finisher_address]"]').val()).valid();
                     $('#address2').val($('input[name="finishers['+this_finisher_ind+'][finisher_address2]"]').val());
-                    $('#suburb').val($('input[name="finishers['+this_finisher_ind+'][finisher_suburb]"]').val());
-                    $('#state').val($('input[name="finishers['+this_finisher_ind+'][finisher_state]"]').val());
-                    $('#postcode').val($('input[name="finishers['+this_finisher_ind+'][finisher_postcode]"]').val());
-                    $('#country').val($('input[name="finishers['+this_finisher_ind+'][finisher_country]"]').val());
+                    $('#suburb').val($('input[name="finishers['+this_finisher_ind+'][finisher_suburb]"]').val()).valid();
+                    $('#state').val($('input[name="finishers['+this_finisher_ind+'][finisher_state]"]').val()).valid();
+                    $('#postcode').val($('input[name="finishers['+this_finisher_ind+'][finisher_postcode]"]').val()).valid();
+                    $('#country').val($('input[name="finishers['+this_finisher_ind+'][finisher_country]"]').val()).valid();
                 }
             });
-        });
-        $('input#send_to_finisher').off('change').change(function(e){
-            if($('input#send_to_finisher').prop('checked'))
-            {
-                $('#ship_to').val($('#finisher_name').val());
-                $('#address').val($('#finisher_address').val());
-                $('#address2').val($('#finisher_address2').val());
-                $('#suburb').val($('#finisher_suburb').val());
-                $('#state').val($('#finisher_state').val());
-                $('#postcode').val($('#finisher_postcode').val());
-                $('#country').val($('#finisher_country').val());
-                $('#ignore_address_error').prop('checked', $('#ignore_finisher_address_error').prop('checked' )).change();
-            }
         });
     }
 }
