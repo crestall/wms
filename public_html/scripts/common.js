@@ -304,7 +304,7 @@ var jobDeliveryDestinations = {
                 {
                     var this_finisher_ind  = $this.data("finisher");
                     $('#ship_to').val($('input[name="finishers['+this_finisher_ind+'][name]"]').val()).valid();
-                    //$('#attention').val($('#customer_contact').val());
+                    $('#attention').val($('select[name="finishers['+this_finisher_ind+'][contact_id]"]').find('option:selected').text());
                     $('#address').val($('input[name="finishers['+this_finisher_ind+'][finisher_address]"]').val()).valid();
                     $('#address2').val($('input[name="finishers['+this_finisher_ind+'][finisher_address2]"]').val());
                     $('#suburb').val($('input[name="finishers['+this_finisher_ind+'][finisher_suburb]"]').val()).valid();
