@@ -35,6 +35,7 @@
                         {
                             var $target = $(event.target)
                             var $this_finisher = $target.closest("div.afinisher");
+                            var this_finisher_ind  = $target.data("finisher");
                             $this_finisher.find("div.this_finisher_details").show();
                             var $this_finisher_details = $this_finisher.find("div.this_finisher_hidden_details");
                             $this_finisher_details.find("input").each(function(element, index){
@@ -44,7 +45,8 @@
                             actions.common.finisherExpectedDeliveryDates();
                             jobDeliveryDestinations.updateEvents();
                             var data = {
-                                finisher_id : ui.item.finisher_id
+                                finisher_id : ui.item.finisher_id,
+                                finisher_ind : this_finisher_ind
                             }
                             $.post('/ajaxfunctions/makeFinisherContactSelect', data, function(d){
                                 $('div#contact_selector').append(d.html);
@@ -125,6 +127,7 @@
                                         $(this).find("h4.finisher_title").text("Finisher "+uc_new_num+"'s Details");
                                         $(this).find("a.remove-finisher").data("finisher", i);
                                         $(this).find("input.send_to_finisher").data("finisher", i);
+                                        $(this).find("input.finisher_name").data("finisher", i);
                                         $(this).find("input.finisher_name").attr("name", "finishers["+i+"][name]");
                                         $(this).find("input.finisher_po").attr("name", "finishers["+i+"][purchase_order]");
                                         $(this).find("input.finisher_ed_date").attr("name", "finishers["+i+"][ed_date]");
