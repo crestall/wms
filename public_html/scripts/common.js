@@ -305,6 +305,13 @@ var jobDeliveryDestinations = {
                     var this_finisher_ind  = $this.data("finisher");
                     var $address_details = $this.closest("div.this_finisher_details").next("div.this_finisher_hidden_details");
                     $('#ship_to').val($('input[name="finishers['+this_finisher_ind+'][name]"]').val());
+                    //$('#attention').val($('#customer_contact').val());
+                    $('#address').val($('input[name="finishers['+this_finisher_ind+'][finisher_address]"]').val());
+                    $('#address2').val($('input[name="finishers['+this_finisher_ind+'][finisher_address2]"]').val());
+                    $('#suburb').val($('input[name="finishers['+this_finisher_ind+'][finisher_suburb]"]').val());
+                    $('#state').val($('input[name="finishers['+this_finisher_ind+'][finisher_state]"]').val());
+                    $('#postcode').val($('input[name="finishers['+this_finisher_ind+'][finisher_postcode]"]').val());
+                    $('#country').val($('input[name="finishers['+this_finisher_ind+'][finisher_country]"]').val());
                 }
             });
         });
