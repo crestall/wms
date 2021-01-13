@@ -48,6 +48,7 @@
                             }
                             $.post('/ajaxfunctions/makeFinisherContactSelect', data, function(d){
                                 $('div#contact_selector').append(d.html);
+                                $('.selectpicker').selectpicker();
                             });
                             return false;
                         }
