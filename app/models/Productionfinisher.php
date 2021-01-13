@@ -34,6 +34,27 @@ class Productionfinisher extends Model{
         return true;
     }
 
+    public function getSelectFinisherContacts($finisher_id = 0, $selected = false)
+    {
+        $db = Database::openConnection();
+
+        $check = "";
+        $ret_string = "";
+        $q = "SELECT id, name FROM {$this->contacts_table} WHERE finisher_id = $finisher_id ORDER BY name";
+        $reps = $db->queryData($q);
+        foreach($reps as $r)
+        {
+            $label = ucwords($r['name']);
+            $value = $r['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function getSelectFinishers($selected = false)
     {
         $db = Database::openConnection();
