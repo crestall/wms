@@ -49,7 +49,7 @@
                                 finisher_ind : this_finisher_ind
                             }
                             $.post('/ajaxfunctions/makeFinisherContactSelect', data, function(d){
-                                $('div#contact_selector_'+this_finisher_ind).append(d.html);
+                                $('div#contact_selector_'+this_finisher_ind).html(d.html);
                                 $('.selectpicker').selectpicker();
                             });
                             return false;
