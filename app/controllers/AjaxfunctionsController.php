@@ -132,6 +132,21 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function makeFinisherContactSelect()
+    {
+        $finisher_id = $this->request->data['finisher_id'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/finisher_contact_selector.php', [
+            'finisher_id'     =>  $finisher_id
+        ]);
+        $data['html'] = $html;
+        $this->view->renderJson($data);
+    }
+
     public function procGetQuotes()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();

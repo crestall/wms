@@ -37,13 +37,18 @@
                             var $this_finisher = $target.closest("div.afinisher");
                             $this_finisher.find("div.this_finisher_details").show();
                             var $this_finisher_details = $this_finisher.find("div.this_finisher_hidden_details");
-                            //$this_finisher_details.find('input.finisher_id').val(ui.item.finisher_id);
                             $this_finisher_details.find("input").each(function(element, index){
                                 var fclass = $(this).attr("class");
                                 $(this).val(ui.item[fclass]);
                             });
                             actions.common.finisherExpectedDeliveryDates();
                             jobDeliveryDestinations.updateEvents();
+                            var data = {
+                                finisher_id : ui.item.finisher_id
+                            }
+                            $.post('/ajaxfunctions/makeFinisherContactSelect', data, function(d){
+                                $('div#contact_selector').append(d.html);
+                            });
                             return false;
                         }
                         function changeFinisherCallback(event, ui)
