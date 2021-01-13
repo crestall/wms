@@ -297,6 +297,17 @@ var jobDeliveryDestinations = {
                 $('#ignore_address_error').prop('checked', $('#ignore_customer_address_error').prop('checked' )).change();
             }
         });
+        $('input.send_to_finisher').each(function(i,e){
+            var $this = $(this);
+            $this.off("change").change(function(e){
+                if($this.prop('checked'))
+                {
+                    var this_finisher_ind  = $this.data("finisher");
+                    var $address_details = $this.closest("div.this_finisher_details").next("div.this_finisher_hidden_details");
+                    $('#ship_to').val($('input[name="finishers['+this_finisher_ind+'][name]"]').val());
+                }
+            });
+        });
         $('input#send_to_finisher').off('change').change(function(e){
             if($('input#send_to_finisher').prop('checked'))
             {
