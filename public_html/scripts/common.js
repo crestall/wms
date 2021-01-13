@@ -303,7 +303,6 @@ var jobDeliveryDestinations = {
                 if($this.prop('checked'))
                 {
                     var this_finisher_ind  = $this.data("finisher");
-                    var $address_details = $this.closest("div.this_finisher_details").next("div.this_finisher_hidden_details");
                     $('#ship_to').val($('input[name="finishers['+this_finisher_ind+'][name]"]').val());
                     //$('#attention').val($('#customer_contact').val());
                     $('#address').val($('input[name="finishers['+this_finisher_ind+'][finisher_address]"]').val());
