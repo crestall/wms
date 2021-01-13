@@ -49,7 +49,7 @@
                                 finisher_ind : this_finisher_ind
                             }
                             $.post('/ajaxfunctions/makeFinisherContactSelect', data, function(d){
-                                $('div#contact_selector').append(d.html);
+                                $('div#contact_selector_'+this_finisher_ind).append(d.html);
                                 $('.selectpicker').selectpicker();
                             });
                             return false;
@@ -135,6 +135,7 @@
                                         $(this).find("input.finisher_ed_date_value").attr("name", "finishers["+i+"][ed_date_value]");
                                         $(this).find("input.send_to_finisher").attr("name", "send_to_finisher_"+i);
                                         $(this).find("input.send_to_finisher").attr("id", "send_to_finisher_"+i);
+                                        $(this).find("div.contact_selector").attr("id", "contact_selector_"+i);
                                         $(this).find("label.send_to_finisher").attr("for", "send_to_finisher_"+i);
                                         var $this_finisher_details = $(this).find("div.this_finisher_hidden_details");
                                         //$this_finisher_details.find('input.finisher_id').val(ui.item.finisher_id);
