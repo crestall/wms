@@ -27,6 +27,7 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
             <input class="custom-control-input send_to_address send_to_finisher" data-finisher="<?php echo $i;?>" type="checkbox" id="send_to_finisher_<?php echo $i;?>" name="send_to_finisher_<?php echo $i;?>" />
             <label class="custom-control-label col-md-3 send_to_finisher" for="send_to_finisher_<?php echo $i;?>">Send Job To This Finisher</label>
         </div>
+        <div id="contact_selector" class="form-group row"></div>
         <div class="form-group row">
             <label class="col-md-4">Purchase Order Number</label>
             <div class="col-md-4">
