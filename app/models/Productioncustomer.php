@@ -78,8 +78,9 @@ class Productioncustomer extends Model{
             FROM
                 {$this->table} c LEFT JOIN
                 {$this->contacts_table} pc ON c.id = pc.customer_id
+            WHERE c.id = $id
         ";
-        return $db->queryById($this->table, $id);
+        return $db->queryRow($q);
     }
 
     public function geCustomerIdByName($name)
