@@ -28,9 +28,23 @@
                         if(!empty($c['country'])) $address_string .= "<br/>".$c['country'];
                         if(!empty($c['postcode'])) $address_string .= "<br/>".$c['postcode'];
                         $contact_string = "";
-                        $contact_string .= ucwords($c['contact'] );
-                        if(!empty($c['phone'])) $contact_string .= "<br/>".$c['phone'];
-                        $contact_string .= "<br/><a href='mailto:".$c['email']."'>".$c['email']."</a>";
+                        if(!empty($c['contacts']))
+                        {
+                            $contacts = explode("|", $c['contacts']);
+                            foreach($contacts as $c)
+                            {
+                                list($contact_id, $c_name,$c_email,$c_phone,$c_role) = explode(',', $c);
+                                $contact_string .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3 pb-3'>";
+                                $contact_string .= "<span class='font-weight-bold'>".ucwords($c_name)."</span>";
+                                if(!empty($c_role)) $contact_string .= "<br>$c_role";
+                                if(!empty($c_phone)) $contact_string .= "<br>$c_phone";
+                                if(!empty($c_email)) $contact_string .= "<br><a href='mailto:".$c_email."'>$c_email</a>";
+
+                                $contact_string .= "</div>";
+                            }
+
+                        }
+                        if(!empty($c['website'])) $contact_string .= "<br/><a href='http://".$c['website']."' target='_blank'>".$c['website']."</a>";
                         ?>
                     	<tr>
                             <td><?php echo $i;?></td>
