@@ -28,6 +28,15 @@
                         if(!empty($c['country'])) $address_string .= "<br/>".$c['country'];
                         if(!empty($c['postcode'])) $address_string .= "<br/>".$c['postcode'];
                         $contact_string = "";
+                        if(!(empty($c['email']) && empty($c['phone']) && empty($c['website'])))
+                        {
+                            $contact_string .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3 pb-3'>";
+                            $contact_string .= "<span class='font-weight-bold'>Company Contact</span>";
+                            if(!empty($c['email'])) $contact_string .= "<br><a href='mailto:".$c['email']."'>".$c['email']."</a>";
+                            if(!empty($c['phone'])) $contact_string .= "<br>".$c['phone'];
+                            if(!empty($c['website'])) $contact_string .= "<br/><a href='http://".$c['website']."' target='_blank'>".$c['website']."</a>";
+                            $contact_string .= "</div>";
+                        }
                         if(!empty($c['contacts']))
                         {
                             $contacts = explode("|", $c['contacts']);
@@ -42,9 +51,7 @@
 
                                 $contact_string .= "</div>";
                             }
-
                         }
-                        if(!empty($c['website'])) $contact_string .= "<br/><a href='http://".$c['website']."' target='_blank'>".$c['website']."</a>";
                         ?>
                     	<tr>
                             <td><?php echo $i;?></td>
