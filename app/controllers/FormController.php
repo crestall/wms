@@ -1397,7 +1397,7 @@ class FormController extends Controller {
 
     public function procAddProductionJob()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
