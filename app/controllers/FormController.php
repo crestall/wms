@@ -1682,6 +1682,14 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    ${$field[$key]} = $avalue;
+                    $post_data[$field][$key] = $avalue;
+                }
+            }
         }
         if(!$this->dataSubbed($name))
         {
