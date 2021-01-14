@@ -40,10 +40,10 @@ $country = Form::value('country');
                     <?php if(!empty(Form::value('contacts'))):
                         foreach(Form::value('contacts') as $i => $d)
                         {
-                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
+                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_production_contact.php");
                         }
                     else:
-                       include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
+                       include(Config::get('VIEWS_PATH')."layout/page-includes/add_production_contact.php");
                     endif;?>
                 </div>
             </div>
