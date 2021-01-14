@@ -133,9 +133,9 @@ class Productioncustomer extends Model{
             'suburb'        =>  null,
             'state'         =>  null,
             'postcode'      =>  null,
-            'country'       =>  null
+            'country'       =>  null,
+            'website'       =>  null
         );
-        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
         if(!empty($data['email'])) $vals['email'] = $data['email'];
         if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
@@ -144,8 +144,19 @@ class Productioncustomer extends Model{
         if(!empty($data['state'])) $vals['state'] = $data['state'];
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
-        $id = $db->updateDatabaseFields($this->table, $vals, $data['customer_id']);
-        return $id;
+        if(!empty($data['website'])) $vals['website'] = $data['website'];
+        $db->updateDatabaseFields($this->table, $vals, $data['customer_id']);
+        if(isset($data['contacts']) && is_array($data['contacts']))
+        {
+            $pcontact = new Productioncontact();
+            $pcontact->removeProductionContacts($data['customer_id']);
+            foreach($data['contacts'] as $contact)
+            {
+                $contact['finisher_id'] = $data['finisher_id'];
+                $pcontact->addContact($contact);
+            }
+        }
+        return true;
     }
 
     public function getAutocompleteCustomer($data)
