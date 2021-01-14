@@ -199,6 +199,18 @@ class TasksController extends Controller
         }
     }
 
+    public function PBATask()
+    {
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->woocommerce->getPBAOrders();
+        }
+    }
+
     public function nuchevTask()
     {
         if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
