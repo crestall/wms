@@ -102,7 +102,7 @@ class Productioncustomer extends Model{
         {
             foreach($data['contacts'] as $contact)
             {
-                $contact['customer__id'] = $id;
+                $contact['customer_id'] = $id;
                 $pcontact = new Productioncontact();
                 $pcontact->addContact($contact);
             }
