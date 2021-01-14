@@ -70,7 +70,7 @@ class Woocommerce{
             if (php_sapi_name() !='cli')
             //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
             {
-                Email::sendCronError($e, "Twin Towers Australia");
+                Email::sendCronError($e, "Performance Brands Australia");
                 return;
             }
             else
