@@ -18,6 +18,7 @@
 
 class Productioncustomer extends Model{
     public $table = "production_customers";
+    public $contacts_table = "production_contacts";
 
     public function getSelectCustomers($selected = false)
     {
@@ -70,6 +71,14 @@ class Productioncustomer extends Model{
     public function getCustomerById($id = 0)
     {
         $db = Database::openConnection();
+        $q = "
+            SELECT
+                c.*,
+                GROUP_CONCAT(pc.id,',',pc.name,',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
+            FROM
+                {$this->table} c LEFT JOIN
+                {$this->contacts_table} pc ON c.id = pc.customer_id
+        ";
         return $db->queryById($this->table, $id);
     }
 
