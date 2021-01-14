@@ -65,21 +65,16 @@ class Productioncustomer extends Model{
     public function getAllCustomers()
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT * FROM {$this->table} ORDER BY name");
+        $q = $this->generateQuery();
+        $q .= " GROUP BY c.id ORDER BY c.name";
+        return $db->queryData($q);
     }
 
     public function getCustomerById($id = 0)
     {
         $db = Database::openConnection();
-        $q = "
-            SELECT
-                c.*,
-                GROUP_CONCAT(pc.id,',',pc.name,',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
-            FROM
-                {$this->table} c LEFT JOIN
-                {$this->contacts_table} pc ON c.id = pc.customer_id
-            WHERE c.id = $id
-        ";
+        $q = $this->generateQuery();
+        $q .= "WHERE c.id = $id";
         return $db->queryRow($q);
     }
 
@@ -195,6 +190,18 @@ class Productioncustomer extends Model{
             array_push($return_array,$row_array);
         }
         return $return_array;
+    }
+
+    private function generateQuery()
+    {
+        return "
+            SELECT
+                c.*,
+                GROUP_CONCAT(pc.id,',',pc.name,',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
+            FROM
+                {$this->table} c LEFT JOIN
+                {$this->contacts_table} pc ON c.id = pc.customer_id
+        ";
     }
 }
 ?>
