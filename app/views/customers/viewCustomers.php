@@ -31,9 +31,9 @@
                         if(!empty($c['contacts']))
                         {
                             $contacts = explode("|", $c['contacts']);
-                            foreach($contacts as $c)
+                            foreach($contacts as $co)
                             {
-                                list($contact_id, $c_name,$c_email,$c_phone,$c_role) = explode(',', $c);
+                                list($contact_id, $c_name,$c_email,$c_phone,$c_role) = explode(',', $co);
                                 $contact_string .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3 pb-3'>";
                                 $contact_string .= "<span class='font-weight-bold'>".ucwords($c_name)."</span>";
                                 if(!empty($c_role)) $contact_string .= "<br>$c_role";
