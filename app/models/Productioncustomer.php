@@ -149,10 +149,10 @@ class Productioncustomer extends Model{
         if(isset($data['contacts']) && is_array($data['contacts']))
         {
             $pcontact = new Productioncontact();
-            $pcontact->removeProductionContacts($data['customer_id']);
+            $pcontact->removeCustomerContacts($data['customer_id']);
             foreach($data['contacts'] as $contact)
             {
-                $contact['finisher_id'] = $data['finisher_id'];
+                $contact['customer_id'] = $data['customer_id'];
                 $pcontact->addContact($contact);
             }
         }
