@@ -89,7 +89,7 @@ class Productioncustomer extends Model{
             'name'          =>  $data['name']
         );
         if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
-        if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
+        if(!empty($data['website'])) $vals['website'] = $data['website'];
         if(!empty($data['email'])) $vals['email'] = $data['email'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
@@ -98,6 +98,15 @@ class Productioncustomer extends Model{
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         $id = $db->insertQuery($this->table, $vals);
+        if(isset($data['contacts']) && is_array($data['contacts']))
+        {
+            foreach($data['contacts'] as $contact)
+            {
+                $contact['customer__id'] = $id;
+                $pcontact = new Productioncontact();
+                $pcontact->addContact($contact);
+            }
+        }
         return $id;
     }
 
