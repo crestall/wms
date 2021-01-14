@@ -16,6 +16,7 @@ class ajaxfunctionsController extends Controller
         $actions = [
             'adjustAllocationForm',
             'addJobRunsheets',
+            'addFinisherContact',
             'addQuotePackage',
             'bulkMoveStock',
             'calcOriginPick',
@@ -110,7 +111,7 @@ class ajaxfunctionsController extends Controller
             'feedback'  =>  '',
             'html'      =>  ''
         );
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_finisher_contact.php', [
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_production_contact.php', [
             'i'     =>  $i
         ]);
         $data['html'] = $html;
