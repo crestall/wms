@@ -173,6 +173,12 @@ else
                         <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_email');?>" />
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Business Website</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="customer_website" id="customer_website" value="<?php echo Form::value('customer_website');?>" />
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col text-right">
                         <a  id="customer_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#customer_address_holder" role="button" aria-expanded="<?php echo $customer_aria_expanded;?>" aria-controls="customer_address_holder"> </a>
