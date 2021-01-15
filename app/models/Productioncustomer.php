@@ -160,12 +160,8 @@ class Productioncustomer extends Model{
         $return_array = array();
         //echo "The request<pre>",print_r($data),"</pre>";die();
         $q = $data;
-        $query = "
-            SELECT
-                *
-            FROM
-                {$this->table}
-            WHERE
+        $query = $this->generateQuery();
+        $query .= "WHERE
                 name LIKE :term
         ";
         $array = array(
@@ -186,6 +182,7 @@ class Productioncustomer extends Model{
             $row_array['postcode']      = $row['postcode'];
             $row_array['country']       = $row['country'];
             $row_array['customer_id']   = $row['id'];
+            $row_array['contacts']      = $row['contacts']
 
             array_push($return_array,$row_array);
         }
