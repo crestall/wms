@@ -163,10 +163,11 @@ class Productioncustomer extends Model{
         $query = $this->generateQuery();
         $query .= "
             WHERE
-                c.name LIKE :term
+                c.name LIKE '%$q%'
             GROUP BY
                 c.id
         ";
+        echo $query;
         $array = array(
             'term'  => '%'.$q.'%'
         );
