@@ -162,7 +162,7 @@ class Productioncustomer extends Model{
         $q = $data;
         $query = $this->generateQuery();
         $query .= "WHERE
-                name LIKE :term
+                c.name LIKE :term
         ";
         $array = array(
             'term'  => '%'.$q.'%'
