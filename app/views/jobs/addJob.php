@@ -139,6 +139,26 @@ else
                     <div class="form-group row">
                         <h4 class="col-md-4">Contact Details</h4>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 mb-3">Contact Name</label>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" class="form-control required" name="customer_contact_name" id="customer_contact_name" value="<?php echo Form::value('customer_contact_name');?>" >
+                            <?php echo Form::displayError('customer_contact_name');?>
+                        </div>
+                        <label class="col-md-2 mb-3">Contact Role</label>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" class="form-control" name="customer_contact_role" id="customer_contact_role" value="<?php echo Form::value('customer_contact_role');?>" >
+                        </div>
+                        <label class="col-md-2 mb-3">Contact Email</label>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" class="form-control email" name="customer_contact_email" id="customer_contact_email" value="<?php echo Form::value('customer_contact_email');?>" >
+                            <?php echo Form::displayError('customer_contact_email');?>
+                        </div>
+                        <label class="col-md-2 mb-3">Contact Phone</label>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" class="form-control" name="customer_contact_phone" id="customer_contact_phone" value="<?php echo Form::value('customer_contact_phonel');?>" >
+                        </div>
+                    </div>
                 </div>
 
 
