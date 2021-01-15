@@ -135,6 +135,16 @@ else
                     <input class="custom-control-input send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" />
                     <label class="custom-control-label col-md-3" for="send_to_customer">Send Job To Customer</label>
                 </div>
+                <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
+                    <div class="form-group row">
+                        <h4 class="col-md-4">Contact Details</h4>
+                    </div>
+                </div>
+
+
+
+
+
                 <div class="form-group row ">
                     <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
                     <div class="col-lg-3 col-md-4">
