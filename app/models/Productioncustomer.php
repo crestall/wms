@@ -163,11 +163,10 @@ class Productioncustomer extends Model{
         $query = $this->generateQuery();
         $query .= "
             WHERE
-                c.name LIKE '%$q%'
+                c.name LIKE :term
             GROUP BY
                 c.id
         ";
-        echo $query;
         $array = array(
             'term'  => '%'.$q.'%'
         );
@@ -200,7 +199,7 @@ class Productioncustomer extends Model{
                 c.*,
                 GROUP_CONCAT(pc.id,',',IFNULL(pc.name,''),',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
             FROM
-                {$this->table} c JOIN
+                {$this->table} c LEFT JOIN
                 {$this->contacts_table} pc ON c.id = pc.customer_id
         ";
     }
