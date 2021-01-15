@@ -47,7 +47,7 @@
                                 $('input#postcode').val(ui.item.postcode).valid();
                             }
                             //contacts
-                            if(ui.item.contacts !== "null")
+                            if(ui.item.contacts)
                             {
                                 var contacts =  (ui.item.contacts).split('|');
                                 if(contacts.length > 1)
