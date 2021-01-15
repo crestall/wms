@@ -161,8 +161,11 @@ class Productioncustomer extends Model{
         //echo "The request<pre>",print_r($data),"</pre>";die();
         $q = $data;
         $query = $this->generateQuery();
-        $query .= "WHERE
+        $query .= "
+            WHERE
                 c.name LIKE :term
+            GROUP BY
+                c.id
         ";
         $array = array(
             'term'  => '%'.$q.'%'
@@ -172,7 +175,6 @@ class Productioncustomer extends Model{
         {
             $row_array                  = array();
             $row_array['value']         = ucwords($row['name']);
-            $row_array['contact']       = $row['contact'];
             $row_array['email']         = $row['email'];
             $row_array['phone']         = $row['phone'];
             $row_array['address']       = $row['address'];
@@ -182,6 +184,7 @@ class Productioncustomer extends Model{
             $row_array['postcode']      = $row['postcode'];
             $row_array['country']       = $row['country'];
             $row_array['customer_id']   = $row['id'];
+            $row_array['website']       = $row['website'];
             $row_array['contacts']      = $row['contacts'];
 
             array_push($return_array,$row_array);
@@ -194,9 +197,9 @@ class Productioncustomer extends Model{
         return "
             SELECT
                 c.*,
-                GROUP_CONCAT(pc.id,',',pc.name,',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
+                GROUP_CONCAT(pc.id,',',IFNULL(pc.name,''),',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
             FROM
-                {$this->table} c LEFT JOIN
+                {$this->table} c JOIN
                 {$this->contacts_table} pc ON c.id = pc.customer_id
         ";
     }
