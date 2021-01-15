@@ -24,7 +24,7 @@
                     customerAutoComplete: function(){
                         autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
                         autoCompleter.suburbAutoComplete($('#customer_suburb'), 'customer_');
-                        autoCompleter.productionJobCustomerAutoComplete($(this), selectCustomerCallback, changeCustomerCallback);
+                        autoCompleter.productionJobCustomerAutoComplete($('input#customer_name'), selectCustomerCallback, changeCustomerCallback);
                         function selectCustomerCallback(event, ui)
                         {
                             $('input#customer_email').val(ui.item.email);
