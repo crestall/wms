@@ -139,6 +139,7 @@ else
                     <div class="form-group row">
                         <h4 class="col-md-4">Contact Details</h4>
                     </div>
+                    <div class="form-group row" id="contact_chooser" styel="display:none"></div>
                     <div class="form-group row">
                         <label class="col-md-2 mb-3">Contact Name</label>
                         <div class="col-md-4 mb-3">
@@ -160,24 +161,16 @@ else
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-                <div class="form-group row ">
-                    <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
-                    <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control customer" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Business Email</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
                     </div>
-                    <label class="col-lg-1 col-md-2">Email</label>
-                    <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control customer email" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
-                        <?php echo Form::displayError('customer_email');?>
-                    </div>
-                    <label class="col-lg-1 col-md-2">Phone</label>
-                    <div class="col-lg-3 col-md-4">
-                        <input type="text" class="form-control customer" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Business Phone</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_email');?>" />
                     </div>
                 </div>
                 <div class="row">
