@@ -164,7 +164,7 @@ else
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label">Business Email</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
+                        <input type="text" class="form-control email" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
                     </div>
                 </div>
                 <div class="form-group row">
