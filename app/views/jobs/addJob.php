@@ -19,26 +19,6 @@ else
     $customer_collapse = "collapse";
     $customer_aria_expanded = "false";
 }
-//Finisher Stuff
-$finisher_count = 3;
-$f = 0;
-$nf = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-while($f < $finisher_count)
-{
-    $fn = ($f > 0)? $f + 1 : "";
-    ${'date_ed'.$fn} = (empty(Form::value('date_ed'.$fn.'_value')))? "" : date('d/m/Y', Form::value('date_ed'.$fn.'_value'));
-    if(Session::getAndDestroy('show_finisher'.$fn.'_address'))
-    {
-        ${'finisher'.$fn.'_collapse'} = "collapse show";
-        ${'finisher'.$fn.'_aria_expanded'} = "true";
-    }
-    else
-    {
-        ${'finisher'.$fn.'_collapse'} = "collapse";
-        ${'finisher'.$fn.'_aria_expanded'} = "false";
-    }
-    ++$f;
-}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
