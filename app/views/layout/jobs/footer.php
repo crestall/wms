@@ -65,6 +65,17 @@
                             }
                             return false;
                         }
+                        function changeCustomerCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $('input#customer_id').val(0);
+                                $('input.customer').each(function(element, index){
+                                    $(this).val("");
+                                })
+                                return false;
+                            }
+                        }
                     },
                     finisherAutocomplete: function(){
                         $("div#finishers_holder div.afinisher").each(function(i,e){
@@ -313,17 +324,6 @@
                         });
                     },
                     autoComplete: function(){
-                        function changeCustomerCallback(event, ui)
-                        {
-                            if (!ui.item)
-                	        {
-                                $('input#customer_id').val(0);
-                                $('input.customer').each(function(element, index){
-                                    $(this).val("");
-                                })
-                                return false;
-                            }
-                        }
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                     }
