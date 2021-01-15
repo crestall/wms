@@ -21,6 +21,51 @@
                             });
                         });
                     },
+                    customerAutocomplete: function(){
+                        autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
+                        autoCompleter.suburbAutoComplete($('#customer_suburb'), 'customer_');
+                        autoCompleter.productionJobCustomerAutoComplete($(this), selectCustomerCallback, changeCustomerCallback);
+                        function selectCustomerCallback(event, ui)
+                        {
+                            $('input#customer_email').val(ui.item.email);
+                            $('input#customer_phone').val(ui.item.phone);
+                            $('input#customer_id').val(ui.item.customer_id);
+                            $('input#customer_address').val(ui.item.address);
+                            $('input#customer_address2').val(ui.item.address_2);
+                            $('input#customer_suburb').val(ui.item.suburb);
+                            $('input#customer_state').val(ui.item.state);
+                            $('input#customer_country').val(ui.item.country);
+                            $('input#customer_postcode').val(ui.item.postcode);
+                            $('input#customer_website').val(ui.item.website);
+                            if($('#send_to_customer').prop('checked'))
+                            {
+                                $('input#address').val(ui.item.address).valid();
+                                $('input#address2').val(ui.item.address_2);
+                                $('input#suburb').val(ui.item.suburb).valid();
+                                $('input#state').val(ui.item.state).valid();
+                                $('input#country').val(ui.item.country).valid();
+                                $('input#postcode').val(ui.item.postcode).valid();
+                            }
+                            //contacts
+                            if(ui.item.contacts !== "null")
+                            {
+                                var contacts =  (ui.item.contacts).split('|');
+                                if(contacts.length > 1)
+                                {
+                                    console.log("Gonna create drop down with "+contacts);
+                                }
+                                else
+                                {
+                                    var contact = contacts[0].split(',');
+                                    $('input#customer_contact_name').val(contact[1]);
+                                    $('input#customer_contact_email').val(contact[2]);
+                                    $('input#customer_contact_role').val(contact[4]);
+                                    $('input#customer_contact_phone').val(contact[3]);
+                                }
+                            }
+                            return false;
+                        }
+                    },
                     finisherAutocomplete: function(){
                         $("div#finishers_holder div.afinisher").each(function(i,e){
                             var $this_input = $(this).find("input.finisher_name");
