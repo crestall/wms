@@ -331,7 +331,7 @@
                 'add-job':{
                     init: function(){
                         actions.common.autoComplete();
-                        actions.commom.customerAutoComplete();
+                        actions.common.customerAutoComplete();
                         actions.common.doDates();
                         actions.common.addFinisher();
                         jobDeliveryDestinations.updateEvents();
