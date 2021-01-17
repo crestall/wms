@@ -54,6 +54,9 @@
                                 if(contacts.length > 1)
                                 {
                                     console.log("Gonna create drop down with "+contacts);
+                                    $('input.customer_contact').each(function(i,e){
+                                        $(this).val('');
+                                    });
                                 }
                                 else
                                 {
