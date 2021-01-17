@@ -256,9 +256,9 @@ class Order extends Model{
             'instructions'  => $instructions,
             'address'       => $data['address'],
             'suburb'        => $data['suburb'],
-            'state'         => $data['state'],
+            'state'         => strtoupper($data['state']),
             'postcode'      => $data['postcode'],
-            'country'       => $data['country'],
+            'country'       => strtoupper($data['country']),
             'entered_by'    => $eb
         );
         if(isset($data['backorder_items']))

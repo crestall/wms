@@ -287,7 +287,7 @@ var jobDeliveryDestinations = {
             if($('input#send_to_customer').prop('checked'))
             {
                 $('#ship_to').val($('#customer_name').val()).valid();
-                $('#attention').val($('#customer_contact').val()).valid();
+                $('#attention').val($('#customer_contact_name').val()).valid();
                 $('#address').val($('#customer_address').val()).valid();
                 $('#address2').val($('#customer_address2').val());
                 $('#suburb').val($('#customer_suburb').val()).valid();
