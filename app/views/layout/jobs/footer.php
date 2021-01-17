@@ -39,6 +39,7 @@
                             $('input#customer_website').val(ui.item.website);
                             if($('#send_to_customer').prop('checked'))
                             {
+                                $('input#ship_to').val(ui.item.value).valid();
                                 $('input#address').val(ui.item.address).valid();
                                 $('input#address2').val(ui.item.address_2);
                                 $('input#suburb').val(ui.item.suburb).valid();
@@ -61,6 +62,10 @@
                                     $('input#customer_contact_email').val(contact[2]);
                                     $('input#customer_contact_role').val(contact[4]);
                                     $('input#customer_contact_phone').val(contact[3]);
+                                    if($('#send_to_customer').prop('checked'))
+                                    {
+                                        $('input#attention').val(contact[1]);
+                                    }
                                 }
                             }
                             return false;
