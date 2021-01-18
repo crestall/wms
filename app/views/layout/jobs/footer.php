@@ -91,8 +91,8 @@
                                 else
                                 {
                                     $('select#customer_contact_id').off('change');
-                                    $('div#contact_chooser').html('');
                                     var contact = contacts[0].split(',');
+                                    $('div#contact_chooser').html('<input type="hidden" id="customer_contact_id" name="customer_contact_id" value="'+contact[0]+'" > ');
                                     $('input#customer_contact_name').val(contact[1]).valid();
                                     $('input#customer_contact_email').val(contact[2]);
                                     $('input#customer_contact_role').val(contact[4]);
