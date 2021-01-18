@@ -57,7 +57,7 @@
                                     $('input.customer_contact').each(function(i,e){
                                         $(this).val('');
                                     });
-                                    var html = "<label class='col-md-3 col-form-label'>Business Email</label>";
+                                    var html = "<label class='col-md-3 col-form-label'>Job Contact</label>";
                                     html += "<div class='col-md-4'>";
                                     html += "<select id='select_contact' class='form-control selectpicker' name='select_contact' data-style='btn-outline-secondary'>";
                                     html += "<option value='0'>Choose a Contact</option>";
@@ -72,6 +72,9 @@
                                         if($(this).val() != 0)
                                         {
                                             $('input#customer_contact_name').val($(this).val());
+                                            $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
+                                            $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
+                                            $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
                                         }
                                         else
                                         {
