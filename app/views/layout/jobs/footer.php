@@ -83,6 +83,10 @@
                                             $('input#customer_contact_role').val('');
                                             $('input#customer_contact_phone').val('');
                                         }
+                                        if($('#send_to_customer').prop('checked'))
+                                        {
+                                            $('input#attention').val($('input#customer_contact_name').val());
+                                        }
                                     });
                                 }
                                 else
