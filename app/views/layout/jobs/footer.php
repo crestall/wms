@@ -381,7 +381,7 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding the Job...</h2></div>' });
                             }
                         });
-                        $('select#status, #state, #postcode, #suburb, #country').change(function(e){
+                        $('select#status_id, #state, #postcode, #suburb, #country, select#salesrep_id').change(function(e){
                             $(this).valid();
                         });
                     }
