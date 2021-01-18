@@ -84,7 +84,7 @@ class Woocommerce{
         /* */
         if($orders = $this->procPBAOrders($collected_orders))
         {
-            echo "<pre>The Items",print_r($this->pbaitems),"</pre>";die();
+            echo "<pre>The Items",print_r($this->pbaoitems),"</pre>";die();
             $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
