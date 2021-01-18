@@ -57,6 +57,18 @@
                                     $('input.customer_contact').each(function(i,e){
                                         $(this).val('');
                                     });
+                                    var html = "<label class='col-md-3 col-form-label'>Business Email</label>";
+                                    html += "<div class='col-md-4'>";
+                                    html += "<select id='select_contact' class='form-control selectpicker' name='select_contact' data-style='btn-outline-secondary'>";
+                                    html += "<option value='0'>Choose a Contact</option>";
+                                    contacts.each(function(i,e){
+                                        var contact = contacts[i].split(',');
+                                        html += "<option data-contactid='"+contact[0]+"' data-contactemail='"+contact[2]+"' data-contactphone='"+contact[3]+"' data-contactrole='"+contact[4]+"'>"+contact[1]+"</option>";
+                                    });
+                                    html += "</select></div>";
+                                    $('div#contact_chooser').html(html);
+                                    $('.selectpicker').selectpicker(); 
+
                                 }
                                 else
                                 {
