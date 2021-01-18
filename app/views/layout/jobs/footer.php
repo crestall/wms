@@ -62,7 +62,7 @@
                                     html += "<option value='0'>Choose a Contact</option>";
                                     $.each(contacts, function(i,v){
                                         var contact = contacts[i].split(',');
-                                        html += "<option data-contactid='"+contact[0]+"' data-contactemail='"+contact[2]+"' data-contactphone='"+contact[3]+"' data-contactrole='"+contact[4]+"'>"+contact[1]+"</option>";
+                                        html += "<option value='"+contact[0]+"' data-contactemail='"+contact[2]+"' data-contactphone='"+contact[3]+"' data-contactrole='"+contact[4]+"'>"+contact[1]+"</option>";
                                     });
                                     html += "</select></div>";
                                     $('div#contact_chooser').html(html);
@@ -70,7 +70,7 @@
                                     $('select#select_contact').change(function(e){
                                         if($(this).val() != 0)
                                         {
-                                            $('input#customer_contact_name').val($(this).val()).valid();
+                                            $('input#customer_contact_name').val($(this).find(":selected").text()).valid();
                                             $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
                                             $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
                                             $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
