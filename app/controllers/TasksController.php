@@ -199,7 +199,7 @@ class TasksController extends Controller
         }
     }
 
-    public function PBATask()
+    public function pbaTask()
     {
         if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
