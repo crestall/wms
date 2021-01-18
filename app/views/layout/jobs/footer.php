@@ -79,6 +79,9 @@
                                         else
                                         {
                                             $('input#customer_contact_name').val('');
+                                            $('input#customer_contact_email').val('');
+                                            $('input#customer_contact_role').val('');
+                                            $('input#customer_contact_phone').val('');
                                         }
                                     });
                                 }
