@@ -80,7 +80,7 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        echo "<pre>",print_r($collected_orders),"</pre>";die();
         /* */
         if($orders = $this->procPBAOrders($collected_orders))
         {
