@@ -140,7 +140,9 @@ else
                     <div class="form-group row">
                         <h4 class="col-md-4">Contact Details</h4>
                     </div>
-                    <div class="form-group row" id="contact_chooser" styel="display:none"></div>
+                    <div class="form-group row" id="contact_chooser">
+                        <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="0" >
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-2 mb-3">Contact Name</label>
                         <div class="col-md-4 mb-3">
