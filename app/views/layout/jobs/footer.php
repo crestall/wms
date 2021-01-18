@@ -58,7 +58,7 @@
                                     });
                                     var html = "<label class='col-md-3 col-form-label'>Job Contact</label>";
                                     html += "<div class='col-md-4'>";
-                                    html += "<select id='select_contact' class='form-control selectpicker' name='select_contact' data-style='btn-outline-secondary'>";
+                                    html += "<select id='customer_contact_id' class='form-control selectpicker' name='customer_contact_id' data-style='btn-outline-secondary'>";
                                     html += "<option value='0'>Choose a Contact</option>";
                                     $.each(contacts, function(i,v){
                                         var contact = contacts[i].split(',');
@@ -67,7 +67,7 @@
                                     html += "</select></div>";
                                     $('div#contact_chooser').html(html);
                                     $('.selectpicker').selectpicker();
-                                    $('select#select_contact').change(function(e){
+                                    $('select#customer_contact_id').change(function(e){
                                         if($(this).val() != 0)
                                         {
                                             $('input#customer_contact_name').val($(this).find(":selected").text()).valid();
@@ -90,7 +90,7 @@
                                 }
                                 else
                                 {
-                                    $('select#select_contact').off('change');
+                                    $('select#customer_contact_id').off('change');
                                     $('div#contact_chooser').html('');
                                     var contact = contacts[0].split(',');
                                     $('input#customer_contact_name').val(contact[1]).valid();
