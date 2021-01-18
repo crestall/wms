@@ -1406,7 +1406,16 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
         }
+
         //Required Fields
         if(!$this->dataSubbed($job_id))
         {
@@ -1419,6 +1428,10 @@ class FormController extends Controller {
         if($status_id == 0)
         {
             Form::setError('status_id', 'Please choose a status');
+        }
+        if($salesrep_id == 0)
+        {
+            Form::setError('salesrep_id', 'Please choose an FSG contact');
         }
         if(!$this->dataSubbed($date_entered_value))
         {
@@ -1438,6 +1451,13 @@ class FormController extends Controller {
             if(!$this->emailValid($customer_email))
             {
                 Form::setError('customer_email', 'The email is not valid');
+            }
+        }
+        if($this->dataSubbed($customer_contact_email))
+        {
+            if(!$this->emailValid($customer_contact_email))
+            {
+                Form::setError('customer_contact_email', 'The email is not valid');
             }
         }
         if($this->dataSubbed($finisher_email))

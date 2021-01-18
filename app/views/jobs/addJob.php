@@ -144,8 +144,7 @@ else
                     <div class="form-group row">
                         <label class="col-md-2 mb-3">Contact Name</label>
                         <div class="col-md-4 mb-3">
-                            <input type="text" class="form-control customer_contact required" name="customer_contact_name" id="customer_contact_name" value="<?php echo Form::value('customer_contact_name');?>" >
-                            <?php echo Form::displayError('customer_contact_name');?>
+                            <input type="text" class="form-control customer_contact" name="customer_contact_name" id="customer_contact_name" value="<?php echo Form::value('customer_contact_name');?>" >
                         </div>
                         <label class="col-md-2 mb-3">Contact Role</label>
                         <div class="col-md-4 mb-3">
