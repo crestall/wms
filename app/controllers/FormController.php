@@ -1481,13 +1481,13 @@ class FormController extends Controller {
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //customer details
             $customer_data = array(
                 'name'  => $customer_name
             );
             if($this->dataSubbed($customer_phone)) $customer_data['phone'] = $customer_phone;
-            if($this->dataSubbed($customer_contact)) $customer_data['contact'] = $customer_contact;
+            if($this->dataSubbed($customer_website)) $customer_data['website'] = $customer_website;
             if($this->dataSubbed($customer_email)) $customer_data['email'] = $customer_email;
             if($this->dataSubbed($customer_address)) $customer_data['address'] = $customer_address;
             if($this->dataSubbed($customer_address2)) $customer_data['address2'] = $customer_address2;
@@ -1499,6 +1499,10 @@ class FormController extends Controller {
             if($customer_id == 0)
             {
                 $customer_id = $this->productioncustomer->addCustomer($customer_data);
+                if($this->dataSubbed($customer_contact_name)) $customer_data['contacts'][0]['name'] = $customer_contact_name;
+                if($this->dataSubbed($customer_contact_role)) $customer_data['contacts'][0]['role'] = $customer_contact_role;
+                if($this->dataSubbed($customer_contact_email)) $customer_data['contacts'][0]['email'] = $customer_contact_email;
+                if($this->dataSubbed($customer_contact_phone)) $customer_data['contacts'][0]['phone'] = $customer_contact_phone;
                 //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
                 $customer_data['customer_id'] = $customer_id;
                 $post_data['customer_id'] = $customer_id;
@@ -1507,106 +1511,6 @@ class FormController extends Controller {
             {
                 $customer_data['customer_id'] = $customer_id;
                 $this->productioncustomer->editCustomer($customer_data);
-                //echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
-            }
-            //finisher one details
-            $finisher_data = array();
-            if($this->dataSubbed($finisher_name))
-            {
-                $finisher_data['name'] = $finisher_name;
-                if($this->dataSubbed($finisher_phone)) $finisher_data['phone'] = $finisher_phone;
-                if($this->dataSubbed($finisher_contact)) $finisher_data['contact'] = $finisher_contact;
-                if($this->dataSubbed($finisher_email)) $finisher_data['email'] = $finisher_email;
-                if($this->dataSubbed($finisher_address)) $finisher_data['address'] = $finisher_address;
-                if($this->dataSubbed($finisher_address2)) $finisher_data['address2'] = $finisher_address2;
-                if($this->dataSubbed($finisher_suburb)) $finisher_data['suburb'] = $finisher_suburb;
-                if($this->dataSubbed($finisher_state)) $finisher_data['state'] = $finisher_state;
-                if($this->dataSubbed($finisher_postcode)) $finisher_data['postcode'] = $finisher_postcode;
-                if($this->dataSubbed($finisher_country)) $finisher_data['country'] = $finisher_country;
-            }
-            if(count($finisher_data))
-            {
-                if($finisher_id == 0)
-                {
-                    //add new finisher
-                    $finisher_id = $this->productionfinisher->addFinisher($finisher_data);
-                    $finisher_data['finisher_id'] = $finisher_id;
-                    $post_data['finisher_id'] = $finisher_id;
-                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                else
-                {
-                    $finisher_data['finisher_id'] = $finisher_id;
-                    $finisher_data['active'] = 1;
-                    $this->productionfinisher->editFinisher($finisher_data);
-                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-            }
-            //finisher two details
-            $finisher2_data = array();
-            if($this->dataSubbed($finisher2_name))
-            {
-                $finisher2_data['name'] = $finisher2_name;
-                if($this->dataSubbed($finisher2_phone)) $finisher2_data['phone'] = $finisher2_phone;
-                if($this->dataSubbed($finisher2_contact)) $finisher2_data['contact'] = $finisher2_contact;
-                if($this->dataSubbed($finisher2_email)) $finisher2_data['email'] = $finisher2_email;
-                if($this->dataSubbed($finisher2_address)) $finisher2_data['address'] = $finisher2_address;
-                if($this->dataSubbed($finisher2_address2)) $finisher2_data['address2'] = $finisher2_address2;
-                if($this->dataSubbed($finisher2_suburb)) $finisher2_data['suburb'] = $finisher2_suburb;
-                if($this->dataSubbed($finisher2_state)) $finisher2_data['state'] = $finisher2_state;
-                if($this->dataSubbed($finisher2_postcode)) $finisher2_data['postcode'] = $finisher2_postcode;
-                if($this->dataSubbed($finisher2_country)) $finisher2_data['country'] = $finisher2_country;
-            }
-            if(count($finisher2_data))
-            {
-                if($finisher2_id == 0)
-                {
-                    //add new finisher
-                    $finisher2_id = $this->productionfinisher->addFinisher($finisher2_data);
-                    $finisher2_data['finisher_id'] = $finisher2_id;
-                    $post_data['finisher2_id'] = $finisher2_id;
-                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                else
-                {
-                    $finisher2_data['finisher_id'] = $finisher2_id;
-                    $finisher2_data['active'] = 1;
-                    $this->productionfinisher->editFinisher($finisher2_data);
-                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-            }
-            //finisher three details
-            $finisher3_data = array();
-            if($this->dataSubbed($finisher3_name))
-            {
-                $finisher3_data['name'] = $finisher3_name;
-                if($this->dataSubbed($finisher3_phone)) $finisher3_data['phone'] = $finisher3_phone;
-                if($this->dataSubbed($finisher3_contact)) $finisher3_data['contact'] = $finisher3_contact;
-                if($this->dataSubbed($finisher3_email)) $finisher3_data['email'] = $finisher3_email;
-                if($this->dataSubbed($finisher3_address)) $finisher3_data['address'] = $finisher3_address;
-                if($this->dataSubbed($finisher3_address2)) $finisher3_data['address2'] = $finisher3_address2;
-                if($this->dataSubbed($finisher3_suburb)) $finisher3_data['suburb'] = $finisher3_suburb;
-                if($this->dataSubbed($finisher3_state)) $finisher3_data['state'] = $finisher3_state;
-                if($this->dataSubbed($finisher3_postcode)) $finisher3_data['postcode'] = $finisher3_postcode;
-                if($this->dataSubbed($finisher3_country)) $finisher3_data['country'] = $finisher3_country;
-            }
-            if(count($finisher3_data))
-            {
-                if($finisher3_id == 0)
-                {
-                    //add new finisher
-                    $finisher3_id = $this->productionfinisher->addFinisher($finisher3_data);
-                    $finisher3_data['finisher_id'] = $finisher3_id;
-                    $post_data['finisher3_id'] = $finisher3_id;
-                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                else
-                {
-                    $finisher3_data['finisher_id'] = $finisher3_id;
-                    $finisher3_data['active'] = 1;
-                    $this->productionfinisher->editFinisher($finisher3_data);
-                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
             }
             $id = $this->productionjob->addJob($post_data);
             Session::set('feedback', "That job has been added to the system.<br/>The details can be edited <a href='/jobs/update-job/job=".$id."'>HERE</a>");
