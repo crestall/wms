@@ -68,7 +68,16 @@
                                     html += "</select></div>";
                                     $('div#contact_chooser').html(html);
                                     $('.selectpicker').selectpicker();
-
+                                    $('select#select_contact').change(function(e){
+                                        if($(this).val() != 0)
+                                        {
+                                            $('input#customer_contact_name').val($(this).val());
+                                        }
+                                        else
+                                        {
+                                            $('input#customer_contact_name').val('');
+                                        }
+                                    });
                                 }
                                 else
                                 {
