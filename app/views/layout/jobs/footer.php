@@ -53,7 +53,6 @@
                                 var contacts =  (ui.item.contacts).split('|');
                                 if(contacts.length > 1)
                                 {
-                                    console.log("Gonna create drop down with "+contacts);
                                     $('input.customer_contact').each(function(i,e){
                                         $(this).val('');
                                     });
@@ -91,6 +90,8 @@
                                 }
                                 else
                                 {
+                                    $('select#select_contact').off('change');
+                                    $('div#contact_chooser').html('');
                                     var contact = contacts[0].split(',');
                                     $('input#customer_contact_name').val(contact[1]);
                                     $('input#customer_contact_email').val(contact[2]);
