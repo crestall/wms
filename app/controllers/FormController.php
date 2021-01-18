@@ -1397,7 +1397,7 @@ class FormController extends Controller {
 
     public function procAddProductionJob()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1460,46 +1460,10 @@ class FormController extends Controller {
                 Form::setError('customer_contact_email', 'The email is not valid');
             }
         }
-        if($this->dataSubbed($finisher_email))
-        {
-            if(!$this->emailValid($finisher_email))
-            {
-                Form::setError('finisher_email', 'The email is not valid');
-            }
-        }
-        if($this->dataSubbed($finisher2_email))
-        {
-            if(!$this->emailValid($finisher2_email))
-            {
-                Form::setError('finisher2_email', 'The email is not valid');
-            }
-        }
-        if($this->dataSubbed($finisher3_email))
-        {
-            if(!$this->emailValid($finisher3_email))
-            {
-                Form::setError('finisher3_email', 'The email is not valid');
-            }
-        }
         //customer address checking
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) )
         {
             $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, 'AU', isset($ignore_customer_address_error), "customer_", "show_customer_address");
-        }
-        //finisher one address checking
-        if(!empty($finisher_address) || !empty($finisher_suburb) || !empty($finisher_state) || !empty($finisher_postcode)  )
-        {
-            $this->validateAddress($finisher_address, $finisher_suburb, $finisher_state, $finisher_postcode, 'AU', isset($ignore_finisher_address_error), "finisher_", "show_finisher_address");
-        }
-        //finisher two address checking
-        if(!empty($finisher2_address) || !empty($finisher2_suburb) || !empty($finisher2_state) || !empty($finisher2_postcode) )
-        {
-            $this->validateAddress($finisher2_address, $finisher2_suburb, $finisher2_state, $finisher2_postcode, 'AU', isset($ignore_finisher2_address_error), "finisher2_", "show_finisher2_address");
-        }
-        //finisher three address checking
-        if(!empty($finisher3_address) || !empty($finisher3_suburb) || !empty($finisher3_state) || !empty($finisher3_postcode) )
-        {
-            $this->validateAddress($finisher3_address, $finisher3_suburb, $finisher3_state, $finisher3_postcode, 'AU', isset($ignore_finisher3_address_error), "finisher3_", "show_finisher3_address");
         }
         if(!isset($held_in_store))
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
@@ -1517,7 +1481,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //customer details
             $customer_data = array(
                 'name'  => $customer_name
