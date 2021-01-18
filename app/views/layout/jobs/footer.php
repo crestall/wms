@@ -70,14 +70,14 @@
                                     $('select#select_contact').change(function(e){
                                         if($(this).val() != 0)
                                         {
-                                            $('input#customer_contact_name').val($(this).val());
+                                            $('input#customer_contact_name').val($(this).val()).valid();
                                             $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
                                             $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
                                             $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
                                         }
                                         else
                                         {
-                                            $('input#customer_contact_name').val('');
+                                            $('input#customer_contact_name').val('').valid();
                                             $('input#customer_contact_email').val('');
                                             $('input#customer_contact_role').val('');
                                             $('input#customer_contact_phone').val('');
@@ -93,7 +93,7 @@
                                     $('select#select_contact').off('change');
                                     $('div#contact_chooser').html('');
                                     var contact = contacts[0].split(',');
-                                    $('input#customer_contact_name').val(contact[1]);
+                                    $('input#customer_contact_name').val(contact[1]).valid();
                                     $('input#customer_contact_email').val(contact[2]);
                                     $('input#customer_contact_role').val(contact[4]);
                                     $('input#customer_contact_phone').val(contact[3]);
