@@ -1481,7 +1481,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //customer details
             $customer_data = array(
                 'name'  => $customer_name
@@ -1495,6 +1495,7 @@ class FormController extends Controller {
             if($this->dataSubbed($customer_state)) $customer_data['state'] = $customer_state;
             if($this->dataSubbed($customer_postcode)) $customer_data['postcode'] = $customer_postcode;
             if($this->dataSubbed($customer_country)) $customer_data['country'] = $customer_country;
+            if($this->dataSubbed($customer_contact_id) && $customer_contact_id > 0) $post_data['customer_contact_id'] = $customer_contact_id;
             //Need to add the customer?
             if($customer_id == 0)
             {
@@ -1506,12 +1507,16 @@ class FormController extends Controller {
                 //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
                 $customer_data['customer_id'] = $customer_id;
                 $post_data['customer_id'] = $customer_id;
+                //this new customer will only have one contact
+                $pcont = new Productioncontact();
+                $post_data['customer_contact_id'] = $pcont->getCustomerContactIDs($customer_id, true);
             }
             else
             {
                 $customer_data['customer_id'] = $customer_id;
-                $this->productioncustomer->editCustomer($customer_data);
+                //$this->productioncustomer->editCustomer($customer_data);
             }
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die(); 
             $id = $this->productionjob->addJob($post_data);
             Session::set('feedback', "That job has been added to the system.<br/>The details can be edited <a href='/jobs/update-job/job=".$id."'>HERE</a>");
         }

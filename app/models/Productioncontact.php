@@ -50,5 +50,14 @@ class Productioncontact extends Model{
         $db = Database::openConnection();
         $db->deleteQuery($this->table, $customer_id, 'customer_id');
     }
+
+    public function getCustomerContactIDs($customer_id, $first = false)
+    {
+        $db = Database::openConnection();
+        if($first)
+        {
+            return $db->queryValue($this->table, array('customer_id' => $customer_id));
+        }
+    }
 }
 ?>

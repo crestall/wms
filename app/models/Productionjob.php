@@ -194,6 +194,7 @@ class Productionjob extends Model{
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
         if(!empty($data['related_job_id'])) $vals['related_job_id'] = $data['related_job_id'];
+        if(isset($data['customer_contact_id']) && $data['customer_contact_id'] > 0) $vals['customer_contact_id'] = $data['customer_contact_id'];
         if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
         if(!empty($data['date_ed2_value'])) $vals['ed2_date'] = $data['date_ed2_value'];
         if(!empty($data['date_ed3_value'])) $vals['ed3_date'] = $data['date_ed3_value'];
