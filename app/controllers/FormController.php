@@ -1499,11 +1499,11 @@ class FormController extends Controller {
             //Need to add the customer?
             if($customer_id == 0)
             {
-                $customer_id = $this->productioncustomer->addCustomer($customer_data);
                 if($this->dataSubbed($customer_contact_name)) $customer_data['contacts'][0]['name'] = $customer_contact_name;
                 if($this->dataSubbed($customer_contact_role)) $customer_data['contacts'][0]['role'] = $customer_contact_role;
                 if($this->dataSubbed($customer_contact_email)) $customer_data['contacts'][0]['email'] = $customer_contact_email;
                 if($this->dataSubbed($customer_contact_phone)) $customer_data['contacts'][0]['phone'] = $customer_contact_phone;
+                $customer_id = $this->productioncustomer->addCustomer($customer_data);
                 //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
                 $customer_data['customer_id'] = $customer_id;
                 $post_data['customer_id'] = $customer_id;
@@ -1516,7 +1516,7 @@ class FormController extends Controller {
                 $customer_data['customer_id'] = $customer_id;
                 //$this->productioncustomer->editCustomer($customer_data);
             }
-            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die(); 
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $id = $this->productionjob->addJob($post_data);
             Session::set('feedback', "That job has been added to the system.<br/>The details can be edited <a href='/jobs/update-job/job=".$id."'>HERE</a>");
         }
