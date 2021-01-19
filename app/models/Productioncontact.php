@@ -66,5 +66,12 @@ class Productioncontact extends Model{
         $q = "SELECT * FROM {$this->table} WHERE customer_id = :customer_id";
         return $db->queryData($q, ['customer_id' => $customer_id]);
     }
+
+    public function getFinisherContacts($finisher_id)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM {$this->table} WHERE finisher_id = :finisher_id";
+        return $db->queryData($q, ['finisher_id' => $finisher_id]);
+    }
 }
 ?>
