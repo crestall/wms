@@ -19,6 +19,7 @@
 
 class Productionjob extends Model{
     public $table = "production_jobs";
+    public $finishers_table = "production_jobs_finishers";
 
     public function updateJobAddress($data)
     {
@@ -172,7 +173,7 @@ class Productionjob extends Model{
 
     public function addJob($data)
     {
-        echo "<pre>",print_r($data),"</pre>"; die();
+        //echo "<pre>",print_r($data),"</pre>"; die();
         $db = Database::openConnection();
         $vals = array(
             'job_id'        => $data['job_id'],
@@ -195,21 +196,26 @@ class Productionjob extends Model{
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
         if(!empty($data['related_job_id'])) $vals['related_job_id'] = $data['related_job_id'];
         if(isset($data['customer_contact_id']) && $data['customer_contact_id'] > 0) $vals['customer_contact_id'] = $data['customer_contact_id'];
-        if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
-        if(!empty($data['date_ed2_value'])) $vals['ed2_date'] = $data['date_ed2_value'];
-        if(!empty($data['date_ed3_value'])) $vals['ed3_date'] = $data['date_ed3_value'];
-        if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
-        if(!empty($data['finisher_id'])) $vals['finisher_id'] = $data['finisher_id'];
-        if(!empty($data['finisher_po'])) $vals['finisher_po'] = $data['finisher_po'];
-        if(!empty($data['finisher2_id'])) $vals['finisher2_id'] = $data['finisher2_id'];
-        if(!empty($data['finisher2_po'])) $vals['finisher2_po'] = $data['finisher2_po'];
-        if(!empty($data['finisher3_id'])) $vals['finisher3_id'] = $data['finisher3_id'];
-        if(!empty($data['finisher3_po'])) $vals['finisher3_po'] = $data['finisher3_po'];
         if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
         if(!empty($data['designer'])) $vals['designer'] = $data['designer'];
         if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
         if(!empty($data['priority'])) $vals['priority'] = $data['priority'];
         $id = $db->insertQuery($this->table, $vals);
+        if(isset($data['finishers']) && is_array($data['finishers']))
+        {
+            foreach($data['finishers'] as $finisher)
+            {
+                $ed_date = (empty($finisher['ed_date_value']))? 0 : $finisher['ed_date_value'];
+                $po = (empty($finisher['purchase_order']))? NULL : $finisher['purchase_order'];
+                $db->insertQuery($this->finishers_table, array(
+                    'job_id'            => $id,
+                    'finisher_id'       => $finisher['finisher_id'],
+                    'contact_id'        => $finisher['contact_id'],
+                    'purchase_order'    => $po,
+                    'ed_date'           => $ed_date
+                ));
+            }
+        }
         return $id;
     }
 
