@@ -59,5 +59,12 @@ class Productioncontact extends Model{
             return $db->queryValue($this->table, array('customer_id' => $customer_id));
         }
     }
+
+    public function getCustomerContacts($customer_id)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM {$this->table} WHERE customer_id = :customer_id";
+        return $db->queryData($q, ['customer_id' => $customer_id]);
+    }
 }
 ?>
