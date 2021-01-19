@@ -1415,7 +1415,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "FINISHERS<pre>",print_r($finishers),"</pre>"; die();
+        //echo "FINISHERS<pre>",print_r($finishers),"</pre>"; die();
         //Required Fields
         if(!$this->dataSubbed($job_id))
         {
