@@ -167,6 +167,8 @@ class Productionjob extends Model{
         $q .= "
             WHERE
                 pj.id = $id
+            GROUP BY
+                pjf.job_id
         ";
         return $db->queryRow($q);
     }
@@ -416,20 +418,20 @@ class Productionjob extends Model{
         return "
             SELECT
                 pj.*,
-                pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
+                pc.id AS customer_id, pc.name AS customer_name, pc.email AS customer_email, pc.phone AS customer_phone,
+                pcc.name AS contact_name, pcc.email AS contact_email, pcc.phone AS contact_phone, pcc.role AS contact_role,
                 sr.id as salesrep_id, sr.name AS salesrep_name,
-                pf.id as finisher_id, pf.name AS finisher_name, pf.contact AS finisher_contact, pf.email AS finisher_email, pf.phone AS finisher_phone,
-                pf2.id as finisher2_id, pf2.name AS finisher2_name, pf2.contact AS finisher2_contact, pf2.email AS finisher2_email, pf2.phone AS finisher2_phone,
-                pf3.id as finisher3_id, pf3.name AS finisher3_name, pf3.contact AS finisher3_contact, pf3.email AS finisher3_email, pf3.phone AS finisher3_phone,
+                GROUP_CONCAT( IFNULL(pf.name,''),',',IFNULL(pf.email,''),',',IFNULL(pf.phone,''),',',',',IFNULL(pfc.name,''),',',IFNULL(pfc.email,''),',',IFNULL(pfc.phone,''),',',IFNULL(pfc.role,''),',',IFNULL(pjf.purchase_order,''),',',IFNULL(pjf.ed_date,'')  SEPARATOR '|' ) AS finishers,
                 js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking,
                 IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day, IFNULL(rs.runsheet_completed, 0) AS runsheet_completed, rs.driver_id
             FROM
                 `production_jobs` pj LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
+                `production_contacts` pcc ON pj.customer_contact_id = pcc.id LEFT JOIN
+                `production_jobs_finishers` pjf ON pj.id = pjf.job_id LEFT JOIN
+                `production_finishers` pf ON pjf.finisher_id = pf.id LEFT JOIN
+                `production_contacts` pfc ON pjf.contact_id = pfc.id LEFT JOIN
                 `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
-                `production_finishers` pf ON pj.finisher_id = pf.id LEFT JOIN
-                `production_finishers` pf2 ON pj.finisher2_id = pf2.id LEFT JOIN
-                `production_finishers` pf3 ON pj.finisher3_id = pf3.id LEFT JOIN
                 job_status js ON pj.status_id = js.id LEFT JOIN
                 (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.job_id, runsheets.runsheet_day, runsheet_tasks.driver_id, runsheet_tasks.completed AS runsheet_completed FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
         ";
