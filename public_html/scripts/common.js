@@ -3,6 +3,7 @@ Refresh Page if no activity and show a countdown
 *************/
 var time = new Date().getTime();
 var refresh_rate = 300000; //milliseconds
+$('form').attr('autocomplete','off');
 refresh();
 $(document).bind("mousemove keypress", function(e) {
     time = new Date().getTime();
