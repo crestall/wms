@@ -80,11 +80,12 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
         /* */
         if($orders = $this->procPBAOrders($collected_orders))
         {
-            //echo "<pre>",print_r($this->ttoitems),"</pre>";die();
+            //echo "<pre>ORDERS",print_r($orders),"</pre>";
+            //echo "<pre>ORDERS ITEMS",print_r($this->pbaoitems),"</pre>";die();
             $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();

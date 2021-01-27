@@ -80,7 +80,8 @@ class OrdersController extends Controller
             'page_title'        =>  "Import Orders From External Sites",
             'pht'               =>  ": Import Orders From Other Sites",
             'nuchev_clientid'   =>  $this->client->getClientId("NUCHEV"),
-            'oneplate_clientid' =>  $this->client->getClientId("One Plate")
+            'oneplate_clientid' =>  $this->client->getClientId("One Plate"),
+            'pba_clientid'      =>  $this->client->getClientId("Performance Brands Australia")
         ]);
     }
 
@@ -137,6 +138,21 @@ class OrdersController extends Controller
     {
        $response = $this->woocommerce->getNuchevOrders();
        $feedback = "<h2><i class='far fa-check-circle'></i>Nuchev Orders Imported</h2>";
+       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
+       if($response['error_count'] > 0)
+       {
+           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
+           $feedback .= "<p>The error response is listed below</p>";
+           $feedback .= $response['error_string'];
+       }
+       Session::set('feedback', $feedback);
+       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
+    }
+
+    public function importPBAOrders()
+    {
+       $response = $this->woocommerce->getPBAOrders();
+       $feedback = "<h2><i class='far fa-check-circle'></i>Performance Brands WooCommerce Orders Imported</h2>";
        $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
        if($response['error_count'] > 0)
        {
