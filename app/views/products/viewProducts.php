@@ -38,6 +38,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>SKU</th>
+                                    <th>Client Product ID</th>
                                     <th>Supplier</th>
                                     <th>Barcode</th>
                                     <th>Dimensions</th>
@@ -51,6 +52,7 @@
                                     <tr>
                                         <td data-label="Name"><a href="/products/edit-product/product=<?php echo $p['id'];?>"><?php echo $p['name'];?></a></td>
                                         <td data-label="SKU"><?php echo $p['sku'];?></td>
+                                        <td data-label="Client Product ID"><?php echo $p['client_product_id'];?></td>
                                         <td data-label="Supplier"><?php echo $p['supplier'];?></td>
                                         <td data-label="Barcode" class="number"><?php echo $p['barcode'];?></td>
                                         <td data-label="Dimensions"><?php echo $p['width']."X".$p['depth']."X".$p['height'];?></td>
