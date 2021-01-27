@@ -161,6 +161,7 @@ class Item extends Model{
                     'name'              => $i['name'],
                     'sku'               => $i['sku'],
                     'barcode'           => $i['barcode'],
+                    'client_product_id' => $i['client_product_id'],
                     'weight'            => $i['weight'],
                     'depth'             => $i['depth'],
                     'width'             => $i['width'],
@@ -198,7 +199,7 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "  SELECT
-                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize
                 FROM
                 (
                     SELECT
