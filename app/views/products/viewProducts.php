@@ -53,11 +53,11 @@
                                 $image = "";
                                     if(preg_match('/https?/i', $p['image']))
                                     {
-                                        $image = "<img src='".$p['image']."' class='thumbnail'>";
+                                        $image = "<img src='".$p['image']."' class='img-thumbnail'>";
                                     }
                                     elseif(!empty($p['image']))
                                     {
-                                        $image = "<img src='/images/products/tn_".$p['image']."' class='thumbnail'>";
+                                        $image = "<img src='/images/products/tn_".$p['image']."' class='img-thumbnail'>";
                                     }?>
                                     <tr>
                                         <td data-label="Name"><a href="/products/edit-product/product=<?php echo $p['id'];?>"><?php echo $p['name'];?></a></td>
