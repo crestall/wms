@@ -80,7 +80,8 @@ class OrdersController extends Controller
             'page_title'        =>  "Import Orders From External Sites",
             'pht'               =>  ": Import Orders From Other Sites",
             'nuchev_clientid'   =>  $this->client->getClientId("NUCHEV"),
-            'oneplate_clientid' =>  $this->client->getClientId("One Plate")
+            'oneplate_clientid' =>  $this->client->getClientId("One Plate"),
+            'pba_clientid'      =>  $this->client->getClientId("Performance Brands Australia")
         ]);
     }
 
