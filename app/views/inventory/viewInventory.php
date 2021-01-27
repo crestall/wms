@@ -67,7 +67,7 @@
                                     {
                                         $image = "<br><img src='".$details['image']."' class='img-thumbnail img-fluid'>";
                                     }
-                                    elseif(!empty($p['image']))
+                                    elseif(!empty($details['image']))
                                     {
                                         $image = "<br><img src='/images/products/tn_".$details['image']."' class='img-fluid img-thumbnail'>";
                                     }
