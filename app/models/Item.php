@@ -167,6 +167,7 @@ class Item extends Model{
                     'width'             => $i['width'],
                     'height'            => $i['height'],
                     'low_stock_warning' => $i['low_stock_warning'],
+                    'image'             => $i['image'],
                     'onhand'            => 0,
                     'allocated'         => 0,
                     'qc_count'          => 0,
@@ -199,11 +200,11 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "  SELECT
-                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize, a.image
                 FROM
                 (
                     SELECT
-                        l.id AS location_id, il.qty, il.qc_count, i.client_product_id, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.width, i.depth, i.height, i.weight, i.low_stock_warning, l.oversize
+                        l.id AS location_id, il.qty, il.qc_count, i.client_product_id, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.width, i.depth, i.height, i.weight, i.low_stock_warning, l.oversize, i.image
                     FROM
                         items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
                     WHERE
