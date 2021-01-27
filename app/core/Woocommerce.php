@@ -17,6 +17,7 @@ class Woocommerce{
     private $ttoitems;
     private $nuchevoitems;
     private $oneplateoitems;
+    private $pbaoitems;
     private $woocommerce;
     private $return_array = array(
         'import_count'          => 0,
@@ -34,15 +35,15 @@ class Woocommerce{
         $this->controller = $controller;
     }
 
-    public function getTTOrders()
+    public function getPBAOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "TTAust ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "PBA ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $this->woocommerce = new Client(
-            'https://foreversharpknives.com.au',
-            Config::get('TTWOOCONSUMERRKEY'),
-            Config::get('TTWOOCONSUMERSECRET'),
+            'https://golfperformancestore.com.au',
+            Config::get('PBAWOOCONSUMERRKEY'),
+            Config::get('PBAWOOCONSUMERSECRET'),
             [
                 'wp_api' => true,
                 'version' => 'wc/v1',
@@ -66,9 +67,10 @@ class Woocommerce{
             $this->output .=  $e->getMessage() .PHP_EOL;
             //$output .=  $e->getRequest() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-            if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+            if (php_sapi_name() !='cli')
+            //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
             {
-                Email::sendCronError($e, "Twin Towers Australia");
+                Email::sendCronError($e, "Performance Brands Australia");
                 return;
             }
             else
@@ -78,16 +80,16 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        echo "<pre>",print_r($collected_orders),"</pre>";die();
         /* */
-        if($orders = $this->procTTOrders($collected_orders))
+        if($orders = $this->procPBAOrders($collected_orders))
         {
             //echo "<pre>",print_r($this->ttoitems),"</pre>";die();
-            $this->addTTOrders($orders);
+            $this->addPBAOrders($orders);
         }
-        Logger::logOrderImports('order_imports/tt_aust', $this->output); //die();
-        //if (php_sapi_name() !='cli')
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        Logger::logOrderImports('order_imports/pba', $this->output); //die();
+        if (php_sapi_name() !='cli')
+        //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
         {
             return $this->return_array;
         }
@@ -812,14 +814,14 @@ class Woocommerce{
         }
     }
 
-    private function addTTOrders($orders)
+    private function addPBAOrders($orders)
     {
         foreach($orders as $o)
         {
             //check for errors first
             $item_error = false;
             $error_string = "";
-            foreach($this->ttoitems[$o['client_order_id']] as $item)
+            foreach($this->pbaoitems[$o['client_order_id']] as $item)
             {
                 if($item['item_error'])
                 {
@@ -841,8 +843,8 @@ class Woocommerce{
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
                 $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                //if (php_sapi_name() !='cli')
-                if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+                if (php_sapi_name() !='cli')
+                //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
@@ -863,7 +865,7 @@ class Woocommerce{
             //insert the order
             $vals = array(
                 'client_order_id'       => $o['client_order_id'],
-                'client_id'             => 66,
+                'client_id'             => 87,
                 'deliver_to'            => $o['ship_to'],
                 'company_name'          => $o['company_name'],
                 'date_ordered'          => $o['date_ordered'],
@@ -882,13 +884,13 @@ class Woocommerce{
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
-            $itp = array($this->ttoitems[$o['client_order_id']]);
+            $itp = array($this->pbaoitems[$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
-            $this->output .= print_r($this->ttoitems[$o['client_order_id']], true).PHP_EOL;
+            $this->output .= print_r($this->pbaoitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
-             /*change status in woocommerce */
+             /*change status in woocommerce
             $this->output .= "Updating woocommerce status to completed fo order id ".$o['client_order_id'].PHP_EOL;
             try{
                 $this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));
@@ -898,6 +900,7 @@ class Woocommerce{
                 //$output .=  $e->getRequest() .PHP_EOL;
                 $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             }
+            */
         }
     }
 
@@ -1324,7 +1327,7 @@ class Woocommerce{
         return false;
     }
 
-    private function procTTOrders($collected_orders)
+    private function procPBAOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
         //echo "<pre>",print_r($collected_orders),"</pre>";//die();
@@ -1467,8 +1470,8 @@ class Woocommerce{
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
                     $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                    //if (php_sapi_name() == 'cli')
-                    if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+                    if (php_sapi_name() == 'cli')
+                    //if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
                     {
                         Email::sendTTImportError($message);
                     }
@@ -1491,7 +1494,7 @@ class Woocommerce{
                 }
             }//endforeach order
             //echo "<pre>",print_r($orders),"</pre>";//die();
-            $this->ttoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            $this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
 
             return $orders;
         }//end if count orders
