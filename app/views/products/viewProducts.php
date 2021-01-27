@@ -57,7 +57,7 @@
                                     }
                                     elseif(!empty($p['image']))
                                     {
-                                        $image = "<img src='/images/products/tn_".$p['image']."' class='img-thumbnail'>";
+                                        $image = "<img src='/images/products/tn_".$p['image']."' class='img-fluid img-thumbnail'>";
                                     }?>
                                     <tr>
                                         <td data-label="Name"><a href="/products/edit-product/product=<?php echo $p['id'];?>"><?php echo $p['name'];?></a></td>
