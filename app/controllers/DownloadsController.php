@@ -1020,6 +1020,7 @@ class DownloadsController extends Controller {
         $cols = array(
             "Name",
             "SKU",
+            "Client Product ID",
             "Stock On Hand At ".date("d/m/Y", $date)
         );
         $rows = array();
@@ -1028,13 +1029,14 @@ class DownloadsController extends Controller {
             $row = array(
                 $i['name'],
                 $i['sku'],
+                $i['client_product_id'],
                 $i['on_hand']
             );
             $rows[] = $row;
         }
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
-        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "stock_at_date"]);
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "stock_at_date_".date("Ymd", $date)]);
     }
 
     public function locationreportCSV()
