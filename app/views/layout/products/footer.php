@@ -48,7 +48,7 @@
 
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [6,7] }
+                                { "orderable": false, "targets": [7,8,9] }
                             ]
                         } );
 
