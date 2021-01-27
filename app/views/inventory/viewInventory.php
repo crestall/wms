@@ -62,9 +62,20 @@
                                         $ls .= "<br/>";
                                     }
                                     $ls = rtrim($ls, "<br/>");
+                                    $image = "";
+                                    if(preg_match('/https?/i', $p['image']))
+                                    {
+                                        $image = "<br><img src='".$p['image']."' class='img-thumbnail img-fluid'>";
+                                    }
+                                    elseif(!empty($p['image']))
+                                    {
+                                        $image = "<br><img src='/images/products/tn_".$p['image']."' class='img-fluid img-thumbnail'>";
+                                    }
                                     ?>
                                     <tr>
-                                        <td data-label="Name"><a href="/products/edit-product/product=<?php echo $item_id;?>"><?php echo $details['name'];?></a></td>
+                                        <td data-label="Name">
+                                            <a href="/products/edit-product/product=<?php echo $item_id;?>"><?php echo $details['name'];?></a><?php echo $image;?>
+                                        </td>
                                         <td data-label="SKU"><?php echo $details['sku'];?></td>
                                         <td data-label="Barcode" class="number"><?php echo $details['barcode'];?></td>
                                         <td data-label="Client product ID" class="number"><?php echo $details['client_product_id'];?></td>
