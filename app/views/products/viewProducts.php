@@ -45,7 +45,7 @@
                                     <th>Weight</th>
                                     <th>Pallet Item</th>
                                     <th>Requires Bubblewrap</th>
-                                    <th>Product Image</th>
+                                    <th style="width:200px">Product Image</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,7 +53,7 @@
                                 $image = "";
                                     if(preg_match('/https?/i', $p['image']))
                                     {
-                                        $image = "<img src='".$p['image']."' class='img-thumbnail'>";
+                                        $image = "<img src='".$p['image']."' class='img-thumbnail img-fluid'>";
                                     }
                                     elseif(!empty($p['image']))
                                     {
