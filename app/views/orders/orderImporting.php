@@ -97,7 +97,7 @@
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card">
                     <a name="pba"></a>
-                    <h4 class="card-header">Performance Brands woo-Commerce Orders</h4>
+                    <h4 class="card-header">Performance Brands Woo-Commerce Orders</h4>
                     <div class="card-body">
                         <div class="form-group row full_import">
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
