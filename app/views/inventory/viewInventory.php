@@ -63,13 +63,13 @@
                                     }
                                     $ls = rtrim($ls, "<br/>");
                                     $image = "";
-                                    if(preg_match('/https?/i', $p['image']))
+                                    if(preg_match('/https?/i', $details['image']))
                                     {
-                                        $image = "<br><img src='".$p['image']."' class='img-thumbnail img-fluid'>";
+                                        $image = "<br><img src='".$details['image']."' class='img-thumbnail img-fluid'>";
                                     }
                                     elseif(!empty($p['image']))
                                     {
-                                        $image = "<br><img src='/images/products/tn_".$p['image']."' class='img-fluid img-thumbnail'>";
+                                        $image = "<br><img src='/images/products/tn_".$details['image']."' class='img-fluid img-thumbnail'>";
                                     }
                                     ?>
                                     <tr>
