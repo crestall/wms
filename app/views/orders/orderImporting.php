@@ -94,6 +94,38 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-12 col-md-6 mb-3">
+                <div class="card">
+                    <a name="pba"></a>
+                    <h4 class="card-header">Performance Brands woo-Commerce Orders</h4>
+                    <div class="card-body">
+                        <div class="form-group row full_import">
+                            <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
+                            <div class="col-7">
+                                <button class="btn btn-outline-secondary" id="pbawoocomerce_full_import" data-function="importPBAOrders">Run It</button>
+                            </div>
+                        </div>
+                        <h5 class="card-title">Import single Order</h5>
+                        <form id="oneplate_single_import" action="/orders/importPbaWoocommerceOrder" method="post">
+                            <div class="form-group row">
+                                <label class="col-5">WooCommerce Order ID</label>
+                                <div class="col-7">
+                                    <input type="text" class="form-control required" name="pbawoocommerce_id" id="pbawoocommerce_id" value="<?php echo Form::value('pbawoocommerce_id');?>" />
+                                    <?php echo Form::displayError('oneplatewoocommerce_id');?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <input type="hidden" name="client_id" value="<?php echo $pba_clientid; ?>" />
+                            <div class="form-group row">
+                                <label class="col-5">&nbsp;</label>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-outline-secondary">Import It</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <?php if($user_role == "super admin"):?>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card">
