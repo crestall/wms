@@ -167,6 +167,7 @@ class Item extends Model{
                     'width'             => $i['width'],
                     'height'            => $i['height'],
                     'low_stock_warning' => $i['low_stock_warning'],
+                    'image'             => $i['image'],
                     'onhand'            => 0,
                     'allocated'         => 0,
                     'qc_count'          => 0,
