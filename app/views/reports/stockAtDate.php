@@ -34,6 +34,7 @@
                         	<tr>
                                 <th>Name</th>
                                 <th>SKU</th>
+                                <th>Client Product ID</th>
                                 <th>Stock on Hand at <?php echo date("d/m/Y", $date);?></th>
                             </tr>
                         </thead>
@@ -42,6 +43,7 @@
                         	<tr>
                                 <td data-label="Name" class="product_name"><?php echo $i['name'];?></td>
                                 <td data-label="SKU" class="sku nowrap"><?php echo $i['sku'];?></td>
+                                <td data-label="Client Product ID" class="nowrap"><?php echo $i['client_product_id'];?></td>
                                 <td data-label="Stock on Hand at <?php echo date("d/m/Y", $date);?>" class="number nowrap" ><?php echo $i['on_hand'];?></td>
                             </tr>
                         <?php endforeach;?>

@@ -3,7 +3,7 @@
 <?php if(!empty($item)):
     $item_id = $item['id'];
     $add_to_location = (empty(Form::value('add_to_location')))? $item['preferred_pick_location_id'] : Form::value('add_to_location');?>
-        <form id="add_to_stock" method="post" action="/form/procScanToInventory">
+        <form id="add_to_stock" method="post" action="/form/procScanToInventory" autocomplete="off">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Name</label>
                 <div class="col-md-4">
