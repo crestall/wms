@@ -45,6 +45,7 @@
                                     <th>Weight</th>
                                     <th>Pallet Item</th>
                                     <th>Requires Bubblewrap</th>
+                                    <th>Product Image</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,6 +60,7 @@
                                         <td data-label="Weight" class="number"><?php echo $p['weight'];?> kg</td>
                                         <td data-label="Pallet Item" class='text-center'><?php if($p['palletized'] > 0) echo "Yes"; else echo "No";?></td>
                                         <td data-label="Requires Bubblewrap" class='text-center'><?php if($p['requires_bubblewrap'] > 0) echo "Yes"; else echo "No";?></td>
+                                        <td data-label="Product Image"></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>
