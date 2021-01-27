@@ -49,7 +49,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($products as $p):?>
+                                <?php foreach($products as $p):
+                                $image = "";
+                                    if(preg_match('/https?/i', $p['image']))
+                                    {
+                                        $image = "external";
+                                    }
+                                    elseif(!empty($p['image']))
+                                    {
+                                        $image ="local: ".$p['image'];
+                                    }?>
                                     <tr>
                                         <td data-label="Name"><a href="/products/edit-product/product=<?php echo $p['id'];?>"><?php echo $p['name'];?></a></td>
                                         <td data-label="SKU"><?php echo $p['sku'];?></td>
