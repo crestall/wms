@@ -1334,6 +1334,16 @@ class Woocommerce{
         //echo "<pre>",print_r($collected_orders),"</pre>";//die();
         //echo $_SERVER['HTTP_USER_AGENT'];
         $orders = array();
+        $states = array(
+            "NSW"   => "new south wales",
+            "VIC"   => "victoria",
+            "QLD"   => "queensland",
+            "TAS"   => "tasmania",
+            "SA"    => "south australia",
+            "WA"    => "western australia",
+            "NT"    => "northern territory",
+            "ACT"   => "australian capital territory"
+        );
         if(count($collected_orders))
         {
             $allocations = array();
@@ -1369,13 +1379,22 @@ class Woocommerce{
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
                 //validate address
+                //Fix the state
+                if(array_search(strtolower($o['shipping']['state'])), $states) === false)
+                {
+                    $state = $o['shipping']['state'];
+                }
+                else
+                {
+                    $state = array_search(strtolower($o['shipping']['state']), $states);
+                }
                 $ad = array(
                     'address'   => $o['shipping']['address_1'],
                     'address_2' => $o['shipping']['address_2'],
                     'suburb'    => $o['shipping']['city'],
-                    'state'     => $o['shipping']['state'],
+                    'state'     => $state,
                     'postcode'  => $o['shipping']['postcode'],
-                    'country'   => $o['shipping']['country']
+                    'country'   => strtoupper($o['shipping']['country'])
                 );
                 if($ad['country'] == "AU")
                 {
