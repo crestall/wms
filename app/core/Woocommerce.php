@@ -46,7 +46,7 @@ class Woocommerce{
             Config::get('PBAWOOCONSUMERSECRET'),
             [
                 'wp_api' => true,
-                'version' => 'wc/v1',
+                'version' => 'wc/v3',
                 'query_string_auth' => true
             ]
         );
