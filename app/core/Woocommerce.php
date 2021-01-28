@@ -1380,7 +1380,7 @@ class Woocommerce{
                 }
                 //validate address
                 //Fix the state
-                if(array_search(strtolower($o['shipping']['state'])), $states) === false)
+                if(array_search(strtolower($o['shipping']['state']), $states) === false)
                 {
                     $state = $o['shipping']['state'];
                 }
