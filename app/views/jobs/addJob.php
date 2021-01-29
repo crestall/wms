@@ -78,9 +78,10 @@ while($f < $finisher_count)
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3">FSG Contact</label>
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> FSG Contact</label>
                     <div class="col-md-4">
                         <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
+                        <?php echo Form::displayError('salesrep_id');?>
                     </div>
                 </div>
                 <div class="row form-group">

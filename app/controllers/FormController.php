@@ -1420,6 +1420,10 @@ class FormController extends Controller {
         {
             Form::setError('status_id', 'Please choose a status');
         }
+        if($salesrep_id == 0)
+        {
+            Form::setError('salesrep_id', 'Please choose an FSG contact');
+        }
         if(!$this->dataSubbed($date_entered_value))
         {
             Form::setError('date_entered', 'Please supply the date the job was entered');
