@@ -14,11 +14,13 @@ if(preg_match('/https?/i', $product['image']))
 {
     $eximage_display = "display:inline";
     $image_display = "display:none";
+    $check = true;
 }
 else
 {
     $eximage_display = "display:none";
     $image_display = "display:inline";
+    $check = false;
 }
 ?>
 <div id="page-wrapper">
@@ -55,7 +57,7 @@ else
                         <div class="col-md-4">
                             <input type="file" name="image" id="image" class="product_image" style="<?php echo $image_display;?>" />
                             <div class="col checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="external_image" name="external_image" />
+                                <input class="form-check-input styled" type="checkbox" id="external_image" name="external_image" <?php if($check) echo "checked";?> />
                                 <label for="external_image"><small><em>Image URL</em></small></label>
                             </div>
                             <input type="text" class="product_image form-control" name="eximage" id="eximage" style="<?php echo $eximage_display;?>">
