@@ -48,7 +48,7 @@ $client_id = $product['client_id'];
                                 <input class="form-check-input styled" type="checkbox" id="external_image" name="external_image" />
                                 <label for="external_image"><small><em>Image URL</em></small></label>
                             </div>
-                            <input type="text" class="form-control" name="eximage" id="eximage" class="product_image" style="display:none";>
+                            <input type="text" class="form-control" name="eximage" id="eximage" class="hidden product_image">
                             <?php echo Form::displayError('image');?>
                         </div>
                     </div>
