@@ -103,6 +103,12 @@ else
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Client Product ID</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="client_product_id" id="client_product_id" value="<?php echo $product['client_product_id'];?>" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-md-3 col-form-label">Barcode</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="barcode" id="barcode" value="<?php echo $product['barcode'];?>" />
