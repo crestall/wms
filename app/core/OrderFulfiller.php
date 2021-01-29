@@ -89,7 +89,7 @@
 
         if( !empty($od['tracking_email']) )
         {
-            if(SITE_LIVE) //only send emails if we are live and not testing
+            if(SITE_LIVE && $od['client_id'] != 87) //only send emails if we are live and not testing  and don't send for PBA
             {
                 if($od['client_id'] == 59)
                 {
@@ -146,7 +146,7 @@
 
                 if( !empty($od['tracking_email']) )
                 {
-                    if(SITE_LIVE) //only send emails if we are live and not testing
+                    if(SITE_LIVE && $od['client_id'] != 87) //only send emails if we are live and not testing  and don't send for PBA
                     {
                         if($od['client_id'] == 59)
                         {
@@ -272,7 +272,7 @@
                     $od = $this->controller->order->getOrderDetail($id);
                     if( !empty($od['tracking_email']) )
                     {
-                        if(SITE_LIVE) //only send emails if we are live and not testing
+                        if(SITE_LIVE && $od['client_id'] != 87) //only send emails if we are live and not testing  and don't send for PBA
                         {
                              if($od['client_id'] == 82)
                             {
