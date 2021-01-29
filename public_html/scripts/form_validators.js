@@ -164,6 +164,9 @@ $(document).ready(function() {
     		status_id:{
     			notNone: true
     		},
+            salesrep_id:{
+    			notNone: true
+    		},
             job_id: {
 				remote: {
                     url: '/ajaxfunctions/checkJobIds'
@@ -179,6 +182,9 @@ $(document).ready(function() {
 		messages:{
 			status_id:{
 				notNone: "A status must be chosen"
+			},
+            salesrep_id:{
+				notNone: "An FSG Contact is required"
 			},
             job_id: {
 				remote: 'This Job Id is already in use. Job Ids must be unique'
