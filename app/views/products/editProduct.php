@@ -55,12 +55,12 @@ else
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Image</label>
                         <div class="col-md-4">
-                            <input type="file" name="image" id="image" class="product_image" style="<?php echo $image_display;?>" />
                             <div class="col checkbox checkbox-default">
                                 <input class="form-check-input styled" type="checkbox" id="external_image" name="external_image" <?php if($check) echo "checked";?> />
                                 <label for="external_image"><small><em>Image URL</em></small></label>
                             </div>
-                            <input type="text" class="product_image form-control" name="eximage" id="eximage" style="<?php echo $eximage_display;?>">
+                            <input type="file" name="image" id="image" class="product_image" style="<?php echo $image_display;?>" />
+                            <input type="text" class="product_image form-control" name="eximage" id="eximage" style="<?php echo $eximage_display;?>" value="<?php echo $product['image'];?>">
                             <?php echo Form::displayError('image');?>
                         </div>
                     </div>
