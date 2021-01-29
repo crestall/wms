@@ -10,6 +10,16 @@ $weight = ($product['weight'] > 0)? $product['weight']: "";
 $supplier = (!empty($product['supplier']))? $product['supplier']: "";
 $client_id = $product['client_id'];
 
+if(preg_match('/https?/i', $product['image']))
+{
+    $eximage_display = "display:inline";
+    $image_display = "display:none";
+}
+else
+{
+    $eximage_display = "display:none";
+    $image_display = "display:inline";
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -43,12 +53,12 @@ $client_id = $product['client_id'];
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Image</label>
                         <div class="col-md-4">
-                            <input type="file" name="image" id="image" class="product_image" />
+                            <input type="file" name="image" id="image" class="product_image" style="<?php echo $image_display;?>" />
                             <div class="col checkbox checkbox-default">
                                 <input class="form-check-input styled" type="checkbox" id="external_image" name="external_image" />
                                 <label for="external_image"><small><em>Image URL</em></small></label>
                             </div>
-                            <input type="text" class="product_image form-control" name="eximage" id="eximage" style="display:none;">
+                            <input type="text" class="product_image form-control" name="eximage" id="eximage" style="<?php echo $eximage_display;?>">
                             <?php echo Form::displayError('image');?>
                         </div>
                     </div>
