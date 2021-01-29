@@ -43,7 +43,12 @@ $client_id = $product['client_id'];
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Image</label>
                         <div class="col-md-4">
-                            <input type="file" name="image" id="image" />
+                            <input type="file" name="image" id="image" class="product_image" />
+                            <input type="text" class="form-control" name="eximage" id="eximage" class="product_image">
+                            <div class="col checkbox checkbox-default">
+                                <input class="form-check-input styled" type="checkbox" id="external_image" name="external_image" />
+                                <label for="external_image"><small><em>Image URL</em></small></label>
+                            </div>
                             <?php echo Form::displayError('image');?>
                         </div>
                     </div>
