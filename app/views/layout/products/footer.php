@@ -7,7 +7,9 @@
             var actions = {
                 common: {
                     init: function(){
-
+                        $('input#external_image').click(function(e){
+                            $('input.product_image').toggle();
+                        });
                     }
                 },
                 'edit-product': {

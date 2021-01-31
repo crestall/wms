@@ -111,7 +111,7 @@
                                 <label class="col-5">WooCommerce Order ID</label>
                                 <div class="col-7">
                                     <input type="text" class="form-control required" name="pbawoocommerce_id" id="pbawoocommerce_id" value="<?php echo Form::value('pbawoocommerce_id');?>" />
-                                    <?php echo Form::displayError('oneplatewoocommerce_id');?>
+                                    <?php echo Form::displayError('pbawoocommerce_id');?>
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />

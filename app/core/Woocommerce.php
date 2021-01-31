@@ -97,6 +97,70 @@ class Woocommerce{
 
     }
 
+    public function getPBAOrder($wcorder_id = false)
+    {
+        if(!$wcorder_id)
+        {
+            return false;
+        }
+        $return_array = array(
+            'error'                 =>  false,
+            'response_string'       =>  '',
+            'import_error'          =>  false,
+            'import_error_string'   =>  ''
+        );
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "IMPORTING SINGLE PBA ORDER ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $this->woocommerce = new Client(
+            'https://golfperformancestore.com.au',
+            Config::get('PBAWOOCONSUMERRKEY'),
+            Config::get('PBAWOOCONSUMERSECRET'),
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+                'query_string_auth' => true
+            ]
+        );
+        $collected_orders = array();
+        try {
+            $page = 1;
+            $next_page = $this->woocommerce->get('orders/'.$wcorder_id);
+            $collected_orders = $next_page;
+        } catch (HttpClientException $e) {
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            //$output .=  $e->getRequest() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if (php_sapi_name() !='cli')
+            //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+            {
+                Email::sendCronError($e, "Performance Brands Australia");
+                return;
+            }
+            else
+            {
+                $this->return_array['import_error'] = true;
+                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                return $this->return_array;
+            }
+        }
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        /* */
+        if($orders = $this->procPBAOrders($collected_orders))
+        {
+            echo "<pre>ORDERS",print_r($orders),"</pre>";
+            echo "<pre>ORDERS ITEMS",print_r($this->pbaoitems),"</pre>";die();
+            $this->addPBAOrders($orders);
+        }
+        Logger::logOrderImports('order_imports/pba', $this->output); //die();
+        if (php_sapi_name() !='cli')
+        //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        {
+            return $this->return_array;
+        }
+
+    }
+
     public function getBBOrder($wcorder_id = false)
     {
         if(!$wcorder_id)

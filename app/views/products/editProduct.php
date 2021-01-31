@@ -10,6 +10,18 @@ $weight = ($product['weight'] > 0)? $product['weight']: "";
 $supplier = (!empty($product['supplier']))? $product['supplier']: "";
 $client_id = $product['client_id'];
 
+if(preg_match('/https?/i', $product['image']))
+{
+    $eximage_display = "display:inline";
+    $image_display = "display:none";
+    $check = true;
+}
+else
+{
+    $eximage_display = "display:none";
+    $image_display = "display:inline";
+    $check = false;
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -43,7 +55,12 @@ $client_id = $product['client_id'];
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Image</label>
                         <div class="col-md-4">
-                            <input type="file" name="image" id="image" />
+                            <div class="col checkbox checkbox-default">
+                                <input class="form-check-input styled" type="checkbox" id="external_image" name="external_image" <?php if($check) echo "checked";?> />
+                                <label for="external_image"><small><em>Image URL</em></small></label>
+                            </div>
+                            <input type="file" name="image" id="image" class="product_image" style="<?php echo $image_display;?>" />
+                            <input type="text" class="product_image form-control" name="eximage" id="eximage" style="<?php echo $eximage_display;?>" value="<?php echo $product['image'];?>">
                             <?php echo Form::displayError('image');?>
                         </div>
                     </div>
@@ -83,6 +100,12 @@ $client_id = $product['client_id'];
                         <div class="col-md-4">
                             <input type="text" class="form-control required" name="sku" id="sku" value="<?php echo $product['sku']?>" />
                             <?php echo Form::displayError('sku');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Client Product ID</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="client_product_id" id="client_product_id" value="<?php echo $product['client_product_id'];?>" />
                         </div>
                     </div>
                     <div class="form-group row">
