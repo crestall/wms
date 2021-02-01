@@ -38,6 +38,9 @@
                                     <th>Client Order Number</th>
                                     <th>Shipped To</th>
                                     <th>Items</th>
+                                    <th>Handling Charge</th>
+                                    <th>Postage Charge</th>
+                                    <th>GST</th>
                                     <th>Total Charge</th>
                                     <th>Weight</th>
                                     <th>Courier</th>
@@ -76,7 +79,10 @@
                                             Total Items: <?php echo $co['total_items'];?>
                                         </div>
                                     </td>
-                                    <td data-label="Total Charge"><?php echo $co['charge'];?></td>
+                                    <td data-label="Handling Charge"><?php echo $co['handling_charge'];?></td>
+                                    <td data-label="Postage Charge"><?php echo $co['postage_charge'];?></td>
+                                    <td data-label="GST"><?php echo $co['gst'];?></td>
+                                    <td data-label="Total Charge"><?php echo $co['total_charge'];?></td>
                                     <td data-label="Weight"><?php echo $weight;?></td>
                                     <td data-label="Courier" ><?php echo $co['courier'];?></td>
                                     <td data-label="Con Note"><?php echo $co['consignment_id'];?></td>
