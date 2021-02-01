@@ -897,6 +897,9 @@ $(document).ready(function() {
     		image:{
     			accept: "image/*"
     		},
+            eximage:{
+                required: function(){ return $("#external_image").is(":checked"); }
+            }
     	},
 		messages:{
 			sku: {
@@ -910,7 +913,10 @@ $(document).ready(function() {
 			},
 			image:{
 				accept: "Only upload image files here"
-			}
+			},
+            eximage:{
+                required: "This is required"
+            }
 		}
 	});
     ///////////////////////////////////////////////////////////////////////////////
