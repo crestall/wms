@@ -931,7 +931,7 @@ class Item extends Model{
         $item_values['double_bay'] = (isset($double_bay))? 1 : 0;
         if(!empty($barcode)) $item_values['barcode'] = $barcode;
         if(!empty($box_barcode)) $item_values['barcode'] = $box_barcode;
-        echo "The request<pre>",print_r($item_values),"</pre>";die();
+        //echo "The request<pre>",print_r($item_values),"</pre>";die();
         if(isset($double_bay) && !$this->isDoubleBayItem($item_id))
         {
             //$client_id = $db->queryValue('items', array('id' => $id), 'client_id');
