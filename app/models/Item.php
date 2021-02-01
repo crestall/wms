@@ -896,9 +896,11 @@ class Item extends Model{
             'palletized'                    =>  $palletized,
             'price'                         =>  0.00,
             'solar_type_id'                 =>  0,
-            'barcode'                       =>  NULL
+            'barcode'                       =>  NULL,
+            'client_product_id'             =>  NULL
         );
-        if(!empty($supplier)) $item_values['supplier'] = $supplier; 
+        if(!empty($supplier)) $item_values['supplier'] = $supplier;
+        if(!empty($client_product_id)) $item_values['client_product_id'] = $client_product_id;
         //$item_values['active'] = (isset($active))? 1 : 0;
         //added '-deactivated' to SKU to maintain uniqueness
         if(isset($active))
