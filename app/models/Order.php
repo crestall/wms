@@ -530,18 +530,10 @@ class Order extends Model{
             {
                 $courier = $co['courier_name'];
             }
-            $charge = "$".number_format($co['total_cost'], 2);
-            if( $client_id == 6 )
-            {
-                //big bottle
-                if($co['date_fulfilled'] < 1523232000) //9th April 2018
-                {
-                    if( strpos(strtolower($co['3pl_comments']), 'replacement cap') !== false ||  $co['store_order'])
-                        $charge = "$".number_format($co['total_cost'], 2);
-                    else
-                        $charge = "$".number_format( Utility::getBBCharge( $co['country'], $co['state'], $num_items, $co['eparcel_express'] == 1 ), 2 );
-                }
-            }
+            $total_charge = "$".number_format($co['total_cost'], 2);
+            $handling_charge = "$".number_format($co['handling_charge'], 2);
+            $postage_charge = "$".number_format($co['postage_charge'], 2);
+            $gst = "$".number_format($co['gst'], 2);
             $dd = $pb = "";
             $shrink_wrap = (empty($co['shrink_wrap']))? 0 : 1;
             $bubble_wrap = (empty($co['bubble_wrap']))? 0 : 1;
@@ -567,7 +559,10 @@ class Order extends Model{
                 'items'                 => $items,
                 'total_items'           => $num_items,
                 'courier'               => $courier,
-                'charge'                => $charge,
+                'handling_charge'       => $handling_charge,
+                'postage_charge'        => $postage_charge,
+                'gst'                   => $gst
+                'total_charge'          => $total_charge,
                 'consignment_id'        => $co['consignment_id'],
                 'bubble_wrap'           => $bubble_wrap,
                 'shrink_wrap'           => $shrink_wrap,

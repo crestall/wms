@@ -346,7 +346,7 @@
     private function getHandlingCharge($client_id)
     {
         //BDS
-        if($client_id = 86)
+        if($client_id == 86)
         {
             if($this->item_count < 10)
                 return 4;
@@ -356,6 +356,15 @@
                 return 10;
             if($this->item_count > 100)
                 return 15;
+        }
+        //PBA
+        if($client_id == 87)
+        {
+            if($this->item_count == 1)
+                return 3;
+            if($this->item_count <= 5)
+                return 5;
+            return 10;
         }
 
         return 0;
