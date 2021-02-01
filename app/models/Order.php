@@ -561,7 +561,7 @@ class Order extends Model{
                 'courier'               => $courier,
                 'handling_charge'       => $handling_charge,
                 'postage_charge'        => $postage_charge,
-                'gst'                   => $gst
+                'gst'                   => $gst,
                 'total_charge'          => $total_charge,
                 'consignment_id'        => $co['consignment_id'],
                 'bubble_wrap'           => $bubble_wrap,
