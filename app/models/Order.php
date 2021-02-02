@@ -324,7 +324,18 @@ class Order extends Model{
                                 'client_order_item_id'  => $il['client_order_item_id']
                             );
                             $db->insertQuery('orders_items', $vals);
-
+                        }
+                        if(isset($item['collection_item']))
+                        {
+                            $cvals = array(
+                                'item_id'               => $item['collection_item']['item_id'],
+                                'location_id'           => $item['collection_item']['location_id'],
+                                'qty'                   => $item['collection_item']['qty'],
+                                'order_id'              => $order_id,
+                                'client_order_item_id'  => $item['collection_item']['client_order_item_id'],
+                                'is_kit'                => 1
+                            );
+                            $db->insertQuery('orders_items', $cvals);
                         }
                         if(!empty($item['order_error_string']))
                         {
@@ -389,17 +400,21 @@ class Order extends Model{
                 'country'   =>  $co['country']
             );
 
-            $packages = $this->getPackagesForOrder($co['id']);
-
-
             $address = Utility::formatAddressWeb($ad);
             $shipped_to = "";
             if(!empty($co['company_name'])) $shipped_to .= $co['company_name']."<br/>";
             if(!empty($co['ship_to'])) $shipped_to .= $co['ship_to']."<br/>";
             $shipped_to .= $address;
-            $products = $this->getItemsCountForOrder($co['id']);
 
-            //$parcels = array();
+            if($this->isKitOrder($co['id']))
+            {
+                $products = $this->getItemsCountForOrder($co['id'], -1, 1);
+            }
+            else
+            {
+                $products = $this->getItemsCountForOrder($co['id']);
+            }
+
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
             {
@@ -473,6 +488,16 @@ class Order extends Model{
             $return[] = $row;
         }
         return $return;
+
+    }
+
+    public function isKitOrder($id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue("orders_items", array(
+            'is_kit'    => 1,
+            'order_id'  => $id
+        ));
 
     }
 
@@ -964,7 +989,7 @@ class Order extends Model{
     public function getItemCountForOrder($order_id)
     {
         $db = Database::openConnection();
-        $cq = $db->queryRow("SELECT SUM(qty) AS sum FROM orders_items WHERE order_id = :order_id GROUP BY order_id", array('order_id' => $order_id));
+        $cq = $db->queryRow("SELECT SUM(qty) AS sum FROM orders_items WHERE order_id = :order_id AND is_kit = 0 GROUP BY order_id", array('order_id' => $order_id));
         return($cq['sum']);
     }
 
@@ -1033,13 +1058,13 @@ class Order extends Model{
         ");
     }
 
-    public function getItemsCountForOrder($order_id, $picked = -1)
+    public function getItemsCountForOrder($order_id, $picked = -1, $is_kit = 0)
     {
         $db = Database::openConnection();
         $q = "
             SELECT i.*, SUM(oi.qty) AS qty, oi.client_order_item_id
             FROM orders_items oi JOIN items i ON oi.item_id = i.id
-            WHERE oi.order_id = $order_id
+            WHERE oi.order_id = $order_id AND oi.is_kit = $is_kit
             GROUP BY i.id
         ";
         if($picked === 1)
