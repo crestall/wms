@@ -40,6 +40,7 @@ class Allocations{
                 $i_id = $details['id'];
                 $item_error_string = "<ul>";
                 $item_backorder_string = "<ul>";
+                $client_order_item_id = (isset($details['client_item_id']))? $details['client_item_id'] : NULL;
                 $item = $this->controller->item->getItemById($i_id);
                 if(filter_var($details['qty'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
                 {
@@ -48,9 +49,17 @@ class Allocations{
                 }
                 else
                 {
+                    $collection_item = array();
                     if($item['collection'] > 0)
                     {
                         $collection_items = $this->controller->item->getCollectionDetails($i_id);
+                        $collection_item = array(
+                            'item_id'               =>  $i_id,
+                            'location_id'           =>  0,
+                            'qty'                   =>  $details['qty'],
+                            'client_order_item_id'  =>  $client_order_item_id,
+                            'is_kit'                =>  1
+                        );
                     }
                     else
                     {
@@ -58,12 +67,10 @@ class Allocations{
                         $collection_items = array(
                             $item
                         );
-
                     }
                     foreach($collection_items as $ci)
                     {
                         //echo "Allocations<pre>",print_r($allocations),"</pre>";//continue;
-                        $client_order_item_id = (isset($details['client_item_id']))? $details['client_item_id'] : NULL;
                         $pick_count = $left = $ci['number'] * $details['qty'];
                         $item_name = $ci['name'];
                         $item_sku = $ci['sku'];
@@ -215,6 +222,7 @@ class Allocations{
                         $varray = array(
                             'item_id'               => $id,
                             'locations'             => $f_locations,
+                            'collection_item'       => $collection_item,
                             'item_error_string'     => $item_error_string."</ul>",
                             'item_error'            => $item_error,
                             'item_backorder_string' => $item_backorder_string."</ul>",
