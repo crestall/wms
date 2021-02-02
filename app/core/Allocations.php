@@ -223,8 +223,7 @@ class Allocations{
                         }
                         $varray = array(
                             'item_id'               => $id,
-                            'locations'             => $f_locations,
-                            'collection_item'       => $collection_item,
+                            'locations'             => $f_locations, 
                             'item_error_string'     => $item_error_string."</ul>",
                             'item_error'            => $item_error,
                             'item_backorder_string' => $item_backorder_string."</ul>",
@@ -245,7 +244,6 @@ class Allocations{
                         }
                         $values[] = $varray;
                     }
-
                 }
             }//endforeach items
             //die();
