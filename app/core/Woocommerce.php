@@ -46,7 +46,7 @@ class Woocommerce{
             Config::get('PBAWOOCONSUMERSECRET'),
             [
                 'wp_api' => true,
-                'version' => 'wc/v1',
+                'version' => 'wc/v3',
                 'query_string_auth' => true
             ]
         );
@@ -80,11 +80,76 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
         /* */
         if($orders = $this->procPBAOrders($collected_orders))
         {
-            echo "<pre>The Items",print_r($this->pbaoitems),"</pre>";die();
+            //echo "<pre>ORDERS",print_r($orders),"</pre>";
+            //echo "<pre>ORDERS ITEMS",print_r($this->pbaoitems),"</pre>";die();
+            $this->addPBAOrders($orders);
+        }
+        Logger::logOrderImports('order_imports/pba', $this->output); //die();
+        if (php_sapi_name() !='cli')
+        //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        {
+            return $this->return_array;
+        }
+
+    }
+
+    public function getPBAOrder($wcorder_id = false)
+    {
+        if(!$wcorder_id)
+        {
+            return false;
+        }
+        $return_array = array(
+            'error'                 =>  false,
+            'response_string'       =>  '',
+            'import_error'          =>  false,
+            'import_error_string'   =>  ''
+        );
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "IMPORTING SINGLE PBA ORDER ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+        $this->woocommerce = new Client(
+            'https://golfperformancestore.com.au',
+            Config::get('PBAWOOCONSUMERRKEY'),
+            Config::get('PBAWOOCONSUMERSECRET'),
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+                'query_string_auth' => true
+            ]
+        );
+        $collected_orders = array();
+        try {
+            $page = 1;
+            $next_page = $this->woocommerce->get('orders/'.$wcorder_id);
+            $collected_orders[] = $next_page;
+        } catch (HttpClientException $e) {
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            //$output .=  $e->getRequest() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if (php_sapi_name() !='cli')
+            //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+            {
+                Email::sendCronError($e, "Performance Brands Australia");
+                return;
+            }
+            else
+            {
+                $this->return_array['import_error'] = true;
+                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                return $this->return_array;
+            }
+        }
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        /* */
+        if($orders = $this->procPBAOrders($collected_orders))
+        {
+            echo "<pre>ORDERS",print_r($orders),"</pre>";
+            echo "<pre>ORDERS ITEMS",print_r($this->pbaoitems),"</pre>";die();
             $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
@@ -911,15 +976,15 @@ class Woocommerce{
         $shipping_ids = array(
             8168
         );
-		if(count($the_orders) == 0)
-			return false;
+        if(count($the_orders) == 0)
+            return false;
         $orders = array();
         if(!isset($the_orders[0]))
             $collected_orders[] = $the_orders;
         else
             $collected_orders = $the_orders;
-		
-		//echo "<pre>",print_r($the_orders),"</pre>";die();
+
+        //echo "<pre>",print_r($the_orders),"</pre>";die();
         if(count($collected_orders) > 0)
         {
             $allocations = array();
@@ -1333,6 +1398,16 @@ class Woocommerce{
         //echo "<pre>",print_r($collected_orders),"</pre>";//die();
         //echo $_SERVER['HTTP_USER_AGENT'];
         $orders = array();
+        $states = array(
+            "NSW"   => "new south wales",
+            "VIC"   => "victoria",
+            "QLD"   => "queensland",
+            "TAS"   => "tasmania",
+            "SA"    => "south australia",
+            "WA"    => "western australia",
+            "NT"    => "northern territory",
+            "ACT"   => "australian capital territory"
+        );
         if(count($collected_orders))
         {
             $allocations = array();
@@ -1368,13 +1443,22 @@ class Woocommerce{
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
                 //validate address
+                //Fix the state
+                if(array_search(strtolower($o['shipping']['state']), $states) === false)
+                {
+                    $state = $o['shipping']['state'];
+                }
+                else
+                {
+                    $state = array_search(strtolower($o['shipping']['state']), $states);
+                }
                 $ad = array(
                     'address'   => $o['shipping']['address_1'],
                     'address_2' => $o['shipping']['address_2'],
                     'suburb'    => $o['shipping']['city'],
-                    'state'     => $o['shipping']['state'],
+                    'state'     => $state,
                     'postcode'  => $o['shipping']['postcode'],
-                    'country'   => $o['shipping']['country']
+                    'country'   => strtoupper($o['shipping']['country'])
                 );
                 if($ad['country'] == "AU")
                 {
