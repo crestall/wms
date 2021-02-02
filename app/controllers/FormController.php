@@ -7002,8 +7002,6 @@ class FormController extends Controller {
         }
         else
         {
-
-            /* */
             //all good, update details
             if($this->item->editItem($post_data))
             {

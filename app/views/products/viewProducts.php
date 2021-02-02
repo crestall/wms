@@ -38,25 +38,38 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>SKU</th>
+                                    <th>Client Product ID</th>
                                     <th>Supplier</th>
                                     <th>Barcode</th>
                                     <th>Dimensions</th>
                                     <th>Weight</th>
                                     <th>Pallet Item</th>
                                     <th>Requires Bubblewrap</th>
+                                    <th style="width:200px">Product Image</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($products as $p):?>
+                                <?php foreach($products as $p):
+                                $image = "";
+                                    if(preg_match('/https?/i', $p['image']))
+                                    {
+                                        $image = "<img src='".$p['image']."' class='img-thumbnail img-fluid'>";
+                                    }
+                                    elseif(!empty($p['image']))
+                                    {
+                                        $image = "<img src='/images/products/tn_".$p['image']."' class='img-fluid img-thumbnail'>";
+                                    }?>
                                     <tr>
                                         <td data-label="Name"><a href="/products/edit-product/product=<?php echo $p['id'];?>"><?php echo $p['name'];?></a></td>
                                         <td data-label="SKU"><?php echo $p['sku'];?></td>
+                                        <td data-label="Client Product ID"><?php echo $p['client_product_id'];?></td>
                                         <td data-label="Supplier"><?php echo $p['supplier'];?></td>
                                         <td data-label="Barcode" class="number"><?php echo $p['barcode'];?></td>
                                         <td data-label="Dimensions"><?php echo $p['width']."X".$p['depth']."X".$p['height'];?></td>
                                         <td data-label="Weight" class="number"><?php echo $p['weight'];?> kg</td>
                                         <td data-label="Pallet Item" class='text-center'><?php if($p['palletized'] > 0) echo "Yes"; else echo "No";?></td>
                                         <td data-label="Requires Bubblewrap" class='text-center'><?php if($p['requires_bubblewrap'] > 0) echo "Yes"; else echo "No";?></td>
+                                        <td data-label="Product Image"><?php echo $image;?></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

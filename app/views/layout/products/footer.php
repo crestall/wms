@@ -7,7 +7,10 @@
             var actions = {
                 common: {
                     init: function(){
-
+                        $('input#external_image').click(function(e){
+                            $('input.product_image').toggle();
+                            $('input#eximage').valid();
+                        });
                     }
                 },
                 'edit-product': {
@@ -48,7 +51,7 @@
 
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [6,7] }
+                                { "orderable": false, "targets": [7,8,9] }
                             ]
                         } );
 

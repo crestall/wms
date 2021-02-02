@@ -161,11 +161,13 @@ class Item extends Model{
                     'name'              => $i['name'],
                     'sku'               => $i['sku'],
                     'barcode'           => $i['barcode'],
+                    'client_product_id' => $i['client_product_id'],
                     'weight'            => $i['weight'],
                     'depth'             => $i['depth'],
                     'width'             => $i['width'],
                     'height'            => $i['height'],
                     'low_stock_warning' => $i['low_stock_warning'],
+                    'image'             => $i['image'],
                     'onhand'            => 0,
                     'allocated'         => 0,
                     'qc_count'          => 0,
@@ -198,11 +200,11 @@ class Item extends Model{
             $items_table = "orders_items";
         }
         $q = "  SELECT
-                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize
+                    a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, ( IFNULL(b.allocated,0) + IFNULL(c.allocated,0) ) AS allocated, a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize, a.image
                 FROM
                 (
                     SELECT
-                        l.id AS location_id, il.qty, il.qc_count, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.width, i.depth, i.height, i.weight, i.low_stock_warning, l.oversize
+                        l.id AS location_id, il.qty, il.qc_count, i.client_product_id, i.id AS item_id, i.name, i.sku, i.barcode, l.location, i.pack_item, i.width, i.depth, i.height, i.weight, i.low_stock_warning, l.oversize, i.image
                     FROM
                         items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
                     WHERE
@@ -872,7 +874,7 @@ class Item extends Model{
 
     public function editItem($data)
     {
-        //echo "The request<pre>",print_r($data),"</pre>";die();
+        //echo "Edit Item<pre>",print_r($data),"</pre>";die();
         foreach($data as $field => $value)
         {
             if(!is_array($value))
@@ -894,9 +896,11 @@ class Item extends Model{
             'palletized'                    =>  $palletized,
             'price'                         =>  0.00,
             'solar_type_id'                 =>  0,
-            'barcode'                       =>  NULL
+            'barcode'                       =>  NULL,
+            'client_product_id'             =>  NULL
         );
-        if(!empty($supplier)) $item_values['supplier'] = $supplier; 
+        if(!empty($supplier)) $item_values['supplier'] = $supplier;
+        if(!empty($client_product_id)) $item_values['client_product_id'] = $client_product_id;
         //$item_values['active'] = (isset($active))? 1 : 0;
         //added '-deactivated' to SKU to maintain uniqueness
         if(isset($active))
@@ -914,9 +918,15 @@ class Item extends Model{
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (isset($per_pallet))? $per_pallet : 0;
-        if(isset($solar_type_id)) $item_values['solar_type_id'] = $solar_type_id;
-        if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
-        elseif(isset($delete_image)) $item_values['image'] = null;
+        if(!isset($delete_image))
+        {
+            if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
+            if(isset($external_image)) $item_values['image'] = $eximage;
+        }
+        else
+        {
+            $item_values['image'] = null;
+        }
         if(!empty($price)) $item_values['price'] = $price;
         $item_values['double_bay'] = (isset($double_bay))? 1 : 0;
         if(!empty($barcode)) $item_values['barcode'] = $barcode;

@@ -181,6 +181,9 @@ class DownloadsController extends Controller {
             "Shipped To",
             'Country',
             'Charge Code',
+            'Handling Charge',
+            'Postage Charge',
+            'GST',
             'Total Charge',
             'Weight',
             'Shrink Wrap',
@@ -214,7 +217,10 @@ class DownloadsController extends Controller {
                 str_replace("<br/>", ", ",$o['shipped_to']),
                 $o['country'],
                 $o['charge_code'],
-                $o['charge'],
+                $o['handling_charge'],
+                $o['postage_charge'],
+                $o['gst'],
+                $o['total_charge'],
                 $weight,
                 $o['shrink_wrap'],
                 $o['bubble_wrap'],
@@ -1020,6 +1026,7 @@ class DownloadsController extends Controller {
         $cols = array(
             "Name",
             "SKU",
+            "Client Product ID",
             "Stock On Hand At ".date("d/m/Y", $date)
         );
         $rows = array();
@@ -1028,13 +1035,14 @@ class DownloadsController extends Controller {
             $row = array(
                 $i['name'],
                 $i['sku'],
+                $i['client_product_id'],
                 $i['on_hand']
             );
             $rows[] = $row;
         }
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
-        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "stock_at_date"]);
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "stock_at_date_".date("Ymd", $date)]);
     }
 
     public function locationreportCSV()
