@@ -59,6 +59,7 @@ class Allocations{
                             'client_order_item_id'  =>  $client_order_item_id,
                             'is_kit'                =>  1
                         );
+                        $add_collection = true;
                     }
                     else
                     {
@@ -67,6 +68,7 @@ class Allocations{
                             $item
                         );
                         $collection_item = array();
+                        $add_collection = false;
                     }
                     foreach($collection_items as $ci)
                     {
@@ -231,6 +233,11 @@ class Allocations{
                             'import_error'          => false,
                             'qty'                   => $pick_count
                         );
+                        if($add_collection)
+                        {
+                            $varray['collection_item'] = $collection_item;
+                            $add_collection = false;
+                        }
                         if($import_error)
                         {
                             $varray['import_error'] = true;
