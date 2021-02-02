@@ -400,17 +400,21 @@ class Order extends Model{
                 'country'   =>  $co['country']
             );
 
-            $packages = $this->getPackagesForOrder($co['id']);
-
-
             $address = Utility::formatAddressWeb($ad);
             $shipped_to = "";
             if(!empty($co['company_name'])) $shipped_to .= $co['company_name']."<br/>";
             if(!empty($co['ship_to'])) $shipped_to .= $co['ship_to']."<br/>";
             $shipped_to .= $address;
-            $products = $this->getItemsCountForOrder($co['id']);
 
-            //$parcels = array();
+            if($this->isKitOrder())
+            {
+                $products = $this->getItemsCountForOrder($co['id'], -1, 1);
+            }
+            else
+            {
+                $products = $this->getItemsCountForOrder($co['id']);
+            }
+
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
             {
@@ -484,6 +488,16 @@ class Order extends Model{
             $return[] = $row;
         }
         return $return;
+
+    }
+
+    public function isKitOrder($id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue("orders_items", array(
+            'is_kit'    => 1,
+            'order_id'  => $id
+        ));
 
     }
 
