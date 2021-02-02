@@ -325,7 +325,7 @@ class Order extends Model{
                             );
                             $db->insertQuery('orders_items', $vals);
                         }
-                        if(count($item['collection_item']))
+                        if(isset($item['collection_item']))
                         {
                             $cvals = array(
                                 'item_id'               => $item['collection_item']['item_id'],
@@ -975,7 +975,7 @@ class Order extends Model{
     public function getItemCountForOrder($order_id)
     {
         $db = Database::openConnection();
-        $cq = $db->queryRow("SELECT SUM(qty) AS sum FROM orders_items WHERE order_id = :order_id GROUP BY order_id", array('order_id' => $order_id));
+        $cq = $db->queryRow("SELECT SUM(qty) AS sum FROM orders_items WHERE order_id = :order_id AND is_kit = 0 GROUP BY order_id", array('order_id' => $order_id));
         return($cq['sum']);
     }
 
