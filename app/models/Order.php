@@ -406,7 +406,7 @@ class Order extends Model{
             if(!empty($co['ship_to'])) $shipped_to .= $co['ship_to']."<br/>";
             $shipped_to .= $address;
 
-            if($this->isKitOrder())
+            if($this->isKitOrder($co['id']))
             {
                 $products = $this->getItemsCountForOrder($co['id'], -1, 1);
             }
