@@ -49,7 +49,6 @@ class Allocations{
                 }
                 else
                 {
-                    $collection_item = array();
                     if($item['collection'] > 0)
                     {
                         $collection_items = $this->controller->item->getCollectionDetails($i_id);
@@ -67,6 +66,7 @@ class Allocations{
                         $collection_items = array(
                             $item
                         );
+                        $collection_item = array();
                     }
                     foreach($collection_items as $ci)
                     {
