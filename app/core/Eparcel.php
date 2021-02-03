@@ -386,7 +386,7 @@
         $contains_dangerous_goods = false;
         foreach($items as $i)
         {
-            if($i['dangerous_good'] == 1)
+            if($i['is_dangerous_good'] == 1)
                 $contains_dangerous_goods = true;
             $ival = ($i['price'] == 0)? $i['qty'] : $i['price'] * $i['qty'];
             if($od['client_id'] == 6 && $ad['country'] != "AU")
