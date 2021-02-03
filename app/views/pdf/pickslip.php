@@ -53,7 +53,7 @@ foreach($orders_ids as $id):
             <th>SKU</th>
             <th>Location</th>
             <th>Quantity</th>
-            <th></th>
+            <th>Image</th>
             <th>Picked</th>
             <th>Checked</th>
         </tr>
@@ -94,7 +94,15 @@ foreach($orders_ids as $id):
                     )
                 );
             }
-
+            $image = "";
+            if(preg_match('/https?/i', $i['image']))
+            {
+                $image = "<img src='".$i['image']."' class='img-thumbnail img-fluid'>";
+            }
+            elseif(!empty($details['image']))
+            {
+                $image = "<img src='/images/products/tn_".$i['image']."' class='img-fluid img-thumbnail'>";
+            }
             ?>
             <tr>
                	<td><?php echo $i['name'];?></td>
