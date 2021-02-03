@@ -108,8 +108,9 @@ foreach($orders_ids as $id):
                	<td><?php echo $i['name'];?></td>
                 <td><?php echo $i['sku'];?></td>
                 <td><?php echo $location;?></td>
-                <td class='number bold'><?php echo $i['qty'];?></td><td>
-                </td><td class='centre'><span class='check_box'></span></td>
+                <td class='number bold'><?php echo $i['qty'];?></td>
+                <td><?php echo $image;?></td>
+                <td class='centre'><span class='check_box'></span></td>
                 <td class='centre'><span class='check_box'></span></td>
             </tr>
         <?php endforeach;?>
