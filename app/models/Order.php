@@ -1045,6 +1045,7 @@ class Order extends Model{
                 break;
             }
         }
+        return $contains_dangerous_goods;
     }
 
     public function getBackorderItemsForOrder($order_id)

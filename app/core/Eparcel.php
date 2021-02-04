@@ -418,6 +418,7 @@
                 $array['length'] = $p['depth'];
                 $array['weight'] = $p['weight'];
                 $array['contains_dangerous_goods'] = $contains_dangerous_goods;
+                
                 $array['item_contents'] = array();
                 if($ad['country'] != "AU")
                 {
