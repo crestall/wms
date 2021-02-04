@@ -1033,6 +1033,20 @@ class Order extends Model{
         return $db->queryData($q);
     }
 
+    public function orderHasDangerousGoods($order_id)
+    {
+        $items = $this->getItemsForOrder($order_id);
+        $contains_dangerous_goods = false;
+        foreach($items as $i)
+        {
+            if($i['is_dangerous_good'] == 1)
+            {
+                $contains_dangerous_goods = true;
+                break;
+            }
+        }
+    }
+
     public function getBackorderItemsForOrder($order_id)
     {
         $db = Database::openConnection();

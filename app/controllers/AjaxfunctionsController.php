@@ -981,16 +981,21 @@ class ajaxfunctionsController extends Controller
         $items = $this->order->getItemsForOrder($od['id']);
         $eparcel_details            = $this->{$eParcelClass}->getShipmentDetails($od, $items);
         //echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
-        $eparcel_express_details    = $this->{$eParcelClass}->getShipmentDetails($od, $items, true);
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
-        $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
-        /*  */
-
-
-
+        if($this->order->orderHasDangerousGoods($this->request->data['order_id']))
+        {
+            $express = false;
+        }
+        else
+        {
+            $eparcel_express_details    = $this->{$eParcelClass}->getShipmentDetails($od, $items, true);
+            $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
+            $express = true;
+            $express_response = $this->{$eParcelClass}->GetQuote($eeparcel_shipments);
+        }
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
         //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
-        $express_response = $this->{$eParcelClass}->GetQuote($eeparcel_shipments);
+
         //echo "<pre>",print_r(json_encode($express_response)),"</pre>"; //die();
         if(isset($eparcel_response['errors']))
         {
@@ -999,19 +1004,23 @@ class ajaxfunctionsController extends Controller
         }
         else
         {
-            $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35 * 1.1, 2);
+            $eparcel_express_charge = ($express)?
+                "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35 * 1.1, 2) :
+                "<div class='errorbox'><p>Dangerous Goods Cannot Go Express</p></div>";
             $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35 * 1.1, 2);
             /*********** charge FREEDOM more *******************/
                 if($od['client_id'] == 7)
                 {
-                    $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.4 * 1.1, 2);
+                    if($express)
+                        $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.4 * 1.1, 2);
                     $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.4 * 1.1, 2);
                 }
             /*********** charge FREEDOM more *******************/
             /*********** special deals for OnePlate *******************/
                 if($od['client_id'] == 82)
                 {
-                    $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1, 2);
+                    if($express)
+                        $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1, 2);
                     $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1, 2);
                 }
             /*********** special deals for OnePlate *******************/
