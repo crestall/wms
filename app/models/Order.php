@@ -980,6 +980,12 @@ class Order extends Model{
         return ($db->queryValue('order_status', array('name' => $status)));
     }
 
+    public function getCurrentStatus($order_id)
+    {
+        $db = Database::openConnection();
+        return ($db->queryValue('orders', array('id' => $order_id), 'status_id'));
+    }
+
     public function getStatusName($status_id)
     {
         $db = Database::openConnection();
@@ -1618,7 +1624,10 @@ class Order extends Model{
     public function updateStatus($status_id, $id)
     {
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->table,'status_id', $status_id, $id);
+        if($this->getCurrentStatus($id) != $this->fulfilled_id)
+        {
+            $db->updateDatabaseField($this->table,'status_id', $status_id, $id);
+        }
     }
 
     public function updateFTPUploaded($order_id)
