@@ -408,11 +408,11 @@ class Order extends Model{
 
             if($this->isKitOrder($co['id']))
             {
-                $products = $this->getItemsCountForOrder($co['id'], -1, 1);
+                $products = $this->getKitsandItemsForOrder($co['id'], true);
             }
             else
             {
-                $products = $this->getItemsCountForOrder($co['id']);
+                $products = $this->getKitsandItemsForOrder($co['id'], true);
             }
 
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
@@ -1077,6 +1077,45 @@ class Order extends Model{
             ORDER BY
                 i.name
         ");
+    }
+
+    public function getKitsandItemsForOrder($order_id, $is_kit)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                i.id, i.client_product_id, i.name, SUM(oi.qty) AS qty, oi.client_order_item_id, oi.is_kit
+            FROM
+                orders_items oi JOIN
+                items i ON oi.item_id = i.id
+            WHERE
+                oi.order_id = $order_id
+        ";
+        if($is_kit)
+        {
+            $q .= "
+                    AND
+                    i.id NOT IN(
+                        SELECT orders_items.item_id FROM orders_items WHERE orders_items.client_order_item_id != oi.client_order_item_id AND orders_items.is_kit != 1
+                    )
+            ";
+        }
+        else
+        {
+            $q .= "
+                AND
+                i.id IN(
+                    SELECT orders_items.item_id FROM orders_items WHERE orders_items.client_order_item_id != oi.client_order_item_id AND orders_items.is_kit != 1
+                )
+            ";
+        }
+        $q .= "
+            GROUP BY
+                i.id
+            ORDER BY
+                i.name
+        ";
+
     }
 
     public function getItemsCountForOrder($order_id, $picked = -1, $is_kit = 0)
