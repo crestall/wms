@@ -101,6 +101,11 @@
                     $this->output .= "Sending One Plate confirmation".PHP_EOL;
                     Email::sendOnePlateTrackingEmail($od['id']);
                 }
+                elseif($od['client_id'] == 86)
+                {
+                    //Do SFA
+                    $this->output .= "Not Sending confirmation for BDS".PHP_EOL;
+                }
                 else
                 {
                      $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
@@ -157,6 +162,11 @@
                         {
                             $this->output .= "Sending One Plate confirmation".PHP_EOL;
                             Email::sendOnePlateTrackingEmail($od['id']);
+                        }
+                        elseif($od['client_id'] == 86)
+                        {
+                            //Do SFA
+                            $this->output .= "Not Sending confirmation for BDS".PHP_EOL;
                         }
                         else
                         {
@@ -278,6 +288,11 @@
                             {
                                 $this->output .= "Sending One Plate confirmation".PHP_EOL;
                                 Email::sendOnePlateTrackingEmail($od['id']);
+                            }
+                            elseif($od['client_id'] == 86)
+                            {
+                                //Do SFA
+                                $this->output .= "Not Sending confirmation for BDS".PHP_EOL;
                             }
                             else
                             {

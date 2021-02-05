@@ -18,7 +18,7 @@ class Pickorder extends Model{
         //die('time: '.time());
         $vals = array(
             'barcode'   =>  $ids_barcode,
-            'order_ids' =>  serialize($summary_scan),
+            'order_ids' =>  base64_encode(serialize($summary_scan)),
             'made'      =>  time()
         );
         $db->insertQuery($this->table, $vals);
