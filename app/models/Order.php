@@ -412,7 +412,7 @@ class Order extends Model{
             }
             else
             {
-                $products = $this->getKitsandItemsForOrder($co['id'], true);
+                $products = $this->getKitsandItemsForOrder($co['id'], false);
             }
 
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
@@ -1115,7 +1115,7 @@ class Order extends Model{
             ORDER BY
                 i.name
         ";
-
+        return $db->queryData($q);
     }
 
     public function getItemsCountForOrder($order_id, $picked = -1, $is_kit = 0)
