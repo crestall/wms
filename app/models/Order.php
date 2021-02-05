@@ -1084,7 +1084,7 @@ class Order extends Model{
         $db = Database::openConnection();
         $q = "
             SELECT
-                i.id, i.client_product_id, i.name, SUM(oi.qty) AS qty, oi.client_order_item_id, oi.is_kit
+                i.*, SUM(oi.qty) AS qty, oi.client_order_item_id
             FROM
                 orders_items oi JOIN
                 items i ON oi.item_id = i.id
