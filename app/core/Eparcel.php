@@ -383,8 +383,11 @@
         $packages = $this->controller->order->getPackagesForOrder($order_id);
         $weight = 0;
         $val = 0;
+        $contains_dangerous_goods = false;
         foreach($items as $i)
         {
+            if($i['is_dangerous_good'] == 1)
+                $contains_dangerous_goods = true;
             $ival = ($i['price'] == 0)? $i['qty'] : $i['price'] * $i['qty'];
             if($od['client_id'] == 6 && $ad['country'] != "AU")
                     $ival = $i['qty'] * 1.81;
@@ -414,6 +417,8 @@
                 $array['height'] = $p['height'];
                 $array['length'] = $p['depth'];
                 $array['weight'] = $p['weight'];
+                $array['contains_dangerous_goods'] = $contains_dangerous_goods;
+                
                 $array['item_contents'] = array();
                 if($ad['country'] != "AU")
                 {

@@ -1728,18 +1728,15 @@ class FormController extends Controller {
         {
             Form::setError('name', 'The Finishers name is required');
         }
-        foreach($post_data['contacts'] as $ind => $cd)
+        if(!$this->dataSubbed($contact))
         {
-            if(!$this->dataSubbed($cd['name']))
+            Form::setError('contact', 'A contact name is required');
+        }
+        if($this->dataSubbed($email))
+        {
+            if(!$this->emailValid($email))
             {
-                Form::setError('contactname_'.$ind, 'A contact name is required');
-            }
-            if($this->dataSubbed($cd['email']))
-            {
-                if(!$this->emailValid($cd['email']))
-                {
-                    Form::setError('contactemail_'.$ind, 'The email is not valid');
-                }
+                Form::setError('email', 'The email is not valid');
             }
         }
         if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
