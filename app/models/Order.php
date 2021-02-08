@@ -387,6 +387,19 @@ class Order extends Model{
             'client_id' => 	$client_id,
             'status_id' =>  $this->fulfilled_id
         );
+        /*$query = "
+            SELECT
+                o.*
+            FROM
+                orders o
+            WHERE
+                client_id = :client_id AND id >= 83706
+            ORDER BY
+                date_fulfilled DESC
+        "; */
+        $array = array(
+            'client_id' => 	$client_id
+        );
         $orders = $db->queryData($query, $array);
         $return = array();
         foreach($orders as $co)
@@ -406,14 +419,7 @@ class Order extends Model{
             if(!empty($co['ship_to'])) $shipped_to .= $co['ship_to']."<br/>";
             $shipped_to .= $address;
 
-            if($this->isKitOrder($co['id']))
-            {
-                $products = $this->getKitsandItemsForOrder($co['id'], true);
-            }
-            else
-            {
-                $products = $this->getKitsandItemsForOrder($co['id'], false);
-            }
+            $products = $this->getItemsCountForOrder($co['id']);
 
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
@@ -423,17 +429,36 @@ class Order extends Model{
             $num_items = 0;
             $items = "";
             $csv_items = array();
+            $ignore_cpoii = array();
             foreach($products as $p)
             {
-                $items .= $p['name']." (".$p['qty']."),<br/>";
-                $num_items += $p['qty'];
-                $csv_items[] = array(
-                    'name'  =>  $p['name'],
-                    'qty'   =>  $p['qty'],
-                    'cpid'  =>  $p['client_product_id'],
-                    'coiid' =>  $p['client_order_item_id'],
-                    'sku'   =>  $p['sku']
-                );
+                if($p['is_kit'] == 1)
+                {
+                    $ignore_cpoii[] = $p['client_order_item_id'];
+                    $items .= $p['name']." (".$p['qty']."),<br/>";
+                    $num_items += $p['qty'];
+                    $csv_items[] = array(
+                        'name'  =>  $p['name'],
+                        'qty'   =>  $p['qty'],
+                        'cpid'  =>  $p['client_product_id'],
+                        'coiid' =>  $p['client_order_item_id'],
+                        'sku'   =>  $p['sku']
+                    );
+                }
+                else
+                {
+                    if(in_array($p['client_order_item_id'], $ignore_cpoii))
+                        continue;
+                    $items .= $p['name']." (".$p['qty']."),<br/>";
+                    $num_items += $p['qty'];
+                    $csv_items[] = array(
+                        'name'  =>  $p['name'],
+                        'qty'   =>  $p['qty'],
+                        'cpid'  =>  $p['client_product_id'],
+                        'coiid' =>  $p['client_order_item_id'],
+                        'sku'   =>  $p['sku']
+                    );
+                }
             }
             $items = rtrim($items, ",<br/>");
             $courier = $db->queryValue('couriers', array('id' => $co['courier_id']), 'name');
@@ -1118,20 +1143,20 @@ class Order extends Model{
         return $db->queryData($q);
     }
 
-    public function getItemsCountForOrder($order_id, $picked = -1, $is_kit = 0)
+    public function getItemsCountForOrder($order_id, $picked = -1)
     {
         $db = Database::openConnection();
         $q = "
-            SELECT i.*, SUM(oi.qty) AS qty, oi.client_order_item_id
+            SELECT i.*, SUM(oi.qty) AS qty, oi.client_order_item_id, oi.is_kit
             FROM orders_items oi JOIN items i ON oi.item_id = i.id
-            WHERE oi.order_id = $order_id AND oi.is_kit = $is_kit
+            WHERE oi.order_id = $order_id
             GROUP BY i.id
         ";
         if($picked === 1)
             $q .= " AND oi.picked = 1";
         elseif($picked === 0)
             $q .= " AND oi.picked = 0";
-        $q .= " ORDER BY i.name";
+        $q .= " ORDER BY oi.is_kit DESC, i.name";
         return $db->queryData($q);
     }
 
