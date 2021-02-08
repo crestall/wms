@@ -373,7 +373,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $cmodel = new Courier();
-       /* $query = "
+        $query = "
             SELECT
                 o.*
             FROM
@@ -386,8 +386,8 @@ class Order extends Model{
         $array = array(
             'client_id' => 	$client_id,
             'status_id' =>  $this->fulfilled_id
-        ); */
-        $query = "
+        );
+        /*$query = "
             SELECT
                 o.*
             FROM
@@ -396,7 +396,7 @@ class Order extends Model{
                 client_id = :client_id AND id >= 83706
             ORDER BY
                 date_fulfilled DESC
-        ";
+        "; */
         $array = array(
             'client_id' => 	$client_id
         );
