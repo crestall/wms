@@ -268,7 +268,8 @@ class App {
                 foreach(array_values($url) as $arg)
                 {
                     $str = explode("=", $arg);
-                    $this->args[$str[0]] = $str[1];
+                    if(count($str) > 1)
+                        $this->args[$str[0]] = $str[1];
                 }
             }
         }
