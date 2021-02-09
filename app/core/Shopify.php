@@ -31,15 +31,15 @@ class Shopify{
         $this->controller = $controller;
     }
 
-    public function getTeamTimbuktuOrders()
+    public function getPBAOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "TeamTimbuktu ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $config = array(
-            'ShopUrl'   => 'https://mister-timbuktu.myshopify.com/',
-            'ApiKey'    => Config::get('TEAMTIMBUKTUAPIKEY'),
-            'Password'  => Config::get('TEAMTIMBUKTUAPIPASS')
+            'ShopUrl'   => 'https://rukket.myshopify.com/',
+            'ApiKey'    => Config::get('PBASHOPIFYAPIKEY'),
+            'Password'  => Config::get('PBASHOPIFYAPIPASS')
         );
         $this->shopify = new PHPShopify\ShopifySDK($config);
         $collected_orders = array();
@@ -66,8 +66,8 @@ class Shopify{
             }
         }
 
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
-        /*  */
+        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        /*
         if($orders = $this->procTeamTimbuktuOrders($collected_orders))
         {
             //echo "<pre>",print_r($this->teamtimbuktuoitems),"</pre>";die();
@@ -79,7 +79,7 @@ class Shopify{
         {
             return $this->return_array;
         }
-
+        */
     }
 
     private function addTeamTibuktuOrders($orders)
