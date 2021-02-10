@@ -69,7 +69,7 @@ class Shopify{
         foreach($collected_orders as $order)
         {
             echo "<p>--------------------------------------------------</p>";
-            echo "THE ORDER<pre>",print_r($order),"</pre>";
+            echo "PRE THE ORDER<pre>",print_r($order),"</pre>";
             echo "<p>--------------------------------------------------</p>";
             $order_id = $order['id'];
             $updateInfo = array (
@@ -90,7 +90,7 @@ class Shopify{
             );
             $updated = $this->shopify->Order->get($params);
             echo "<p>--------------------------------------------------</p>";
-            echo "THE ORDER<pre>",print_r($updated),"</pre>";
+            echo "POST THE ORDER<pre>",print_r($updated),"</pre>";
             echo "<p>--------------------------------------------------</p>";
             die();
         }
