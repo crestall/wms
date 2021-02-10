@@ -87,6 +87,7 @@ class Shopify{
             echo "THE ORDER<pre>",print_r($updated),"</pre>";
             echo "<p>--------------------------------------------------</p>";
             die();
+        }
         /*
         if($orders = $this->procTeamTimbuktuOrders($collected_orders))
         {
