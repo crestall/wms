@@ -113,10 +113,16 @@ else
                     </div>
                 </div>
                 <div class="form-group row">
-                        <label class="col-md-3">Notes/Comments</label>
-                        <div class="col-md-4">
-                            <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo Form::value('notes');?></textarea>
-                        </div>
+                    <label class="col-md-3">Notes/Comments</label>
+                    <div class="col-md-4">
+                        <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo Form::value('notes');?></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3">Delivery Notes/Comments</label>
+                    <div class="col-md-4">
+                        <textarea name="delivery_notes" id="delivery_notes" class="form-control" rows="3"><?php echo Form::value('delivery_notes');?></textarea>
+                    </div>
                 </div>
             </div>
             <div class="border border-secondary p-3 m-3 rounded bg-light">

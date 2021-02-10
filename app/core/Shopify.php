@@ -31,21 +31,20 @@ class Shopify{
         $this->controller = $controller;
     }
 
-    public function getTeamTimbuktuOrders()
+    public function getPBAOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
-        $this->output .= "TeamTimbuktu ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $config = array(
-            'ShopUrl'   => 'https://mister-timbuktu.myshopify.com/',
-            'ApiKey'    => Config::get('TEAMTIMBUKTUAPIKEY'),
-            'Password'  => Config::get('TEAMTIMBUKTUAPIPASS')
+            'ShopUrl'   => 'https://rukket.myshopify.com/',
+            'ApiKey'    => Config::get('PBASHOPIFYAPIKEY'),
+            'Password'  => Config::get('PBASHOPIFYAPIPASS')
         );
         $this->shopify = new PHPShopify\ShopifySDK($config);
         $collected_orders = array();
         $params = array(
-            'status'    => 'open',
-            'fields'    => 'id,created_at,email,note,total_weight,phone,order_number,line_items,shipping_address, shipping_lines'
+            'status'    => 'open'
         );
         try {
           $collected_orders = $this->shopify->Order->get($params);
@@ -67,7 +66,35 @@ class Shopify{
         }
 
         //echo "<pre>",print_r($collected_orders),"</pre>";die();
-        /*  */
+        foreach($collected_orders as $order)
+        {
+            echo "<p>--------------------------------------------------</p>";
+            echo "PRE THE ORDER<pre>",print_r($order),"</pre>";
+            echo "<p>--------------------------------------------------</p>";
+            $order_id = $order['id'];
+            $updateInfo = array (
+                "fulfillment_status" => "fulfilled",
+            );
+            echo "<p>Will Try and update status for $order_id</p>";
+            //$this->shopify->Order($order_id)->put($updateInfo);
+
+            $this->shopify->Order($order_id)->Fulfillment->post([
+                            "location_id" => $this->shopify->Location->get()[0]['id'],
+                            "tracking_number" => "FSGTEST",
+                            "tracking_urls" => ["https:wms.fsg.com.au"],
+                            "notify_customer" => true
+            ]);
+
+            $new_params = array(
+                'ids'   => $order_id,
+            );
+            $updated = $this->shopify->Order($order_id)->get();
+            echo "<p>--------------------------------------------------</p>";
+            echo "POST THE ORDER<pre>",print_r($updated),"</pre>";
+            echo "<p>--------------------------------------------------</p>";
+            die();
+        }
+        /*
         if($orders = $this->procTeamTimbuktuOrders($collected_orders))
         {
             //echo "<pre>",print_r($this->teamtimbuktuoitems),"</pre>";die();
@@ -79,7 +106,7 @@ class Shopify{
         {
             return $this->return_array;
         }
-
+        */
     }
 
     private function addTeamTibuktuOrders($orders)
