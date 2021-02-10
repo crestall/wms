@@ -66,7 +66,27 @@ class Shopify{
             }
         }
 
-        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        foreach($collected_orders as $order)
+        {
+            echo "<p>--------------------------------------------------</p>";
+            echo "THE ORDER<pre>",print_r($order),"</pre>";
+            echo "<p>--------------------------------------------------</p>";
+            $order_id = $order['id'];
+            $updateInfo = array (
+                "fulfillment_status" => "fulfilled",
+            );
+            echo "<p>Will Try and update status</p>";
+            $this->shopify->Order($order_id)->put($updateInfo);
+            $new_params = array(
+                'ids'   => $order_id,
+                'fields'    => 'id,created_at,email,note,total_weight,phone,order_number,line_items,shipping_address, shipping_lines'
+            );
+            $updated = $this->shopify->Order->get($new_params);
+            echo "<p>--------------------------------------------------</p>";
+            echo "THE ORDER<pre>",print_r($updated),"</pre>";
+            echo "<p>--------------------------------------------------</p>";
+            die();
         /*
         if($orders = $this->procTeamTimbuktuOrders($collected_orders))
         {
