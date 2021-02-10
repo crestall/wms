@@ -88,7 +88,7 @@ class Shopify{
             $new_params = array(
                 'ids'   => $order_id,
             );
-            $updated = $this->shopify->Order->get($params);
+            $updated = $this->shopify->Order->get();
             echo "<p>--------------------------------------------------</p>";
             echo "POST THE ORDER<pre>",print_r($updated),"</pre>";
             echo "<p>--------------------------------------------------</p>";
