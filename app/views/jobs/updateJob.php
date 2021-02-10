@@ -10,6 +10,7 @@ $date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value
 $designer = (!empty(Form::value('designer')))? Form::value('designer'):$job['designer'];
 $description = (!empty(Form::value('description')))? Form::value('description'):$job['description'];
 $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
+$delivery_notes = (!empty(Form::value('delivery_notes')))? Form::value('delivery_notes'):$job['delivery_notes'];
 $customer_name = (!empty(Form::value('customer_name')))? Form::value('customer_name'):$customer['name'];
 $customer_contact = (!empty(Form::value('customer_contact')))? Form::value('customer_contact'):$customer['contact'];
 $customer_email = (!empty(Form::value('customer_email')))? Form::value('customer_email'):$customer['email'];
@@ -175,6 +176,12 @@ while($f < $finisher_count)
                                 <label class="col-md-4">Notes/Comments</label>
                                 <div class="col-md-8">
                                     <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo $notes;?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Delivery Notes/Comments</label>
+                                <div class="col-md-8">
+                                    <textarea name="delivery_notes" id="delivery_notes" class="form-control" rows="3"><?php echo $delivery_notes;?></textarea>
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
