@@ -76,7 +76,15 @@ class Shopify{
                 "fulfillment_status" => "fulfilled",
             );
             echo "<p>Will Try and update status for $order_id</p>";
-            $this->shopify->Order($order_id)->put($updateInfo);
+            //$this->shopify->Order($order_id)->put($updateInfo);
+
+            $this->shopify->Order($order_id)->Fulfillment->post([
+                            "location_id" => $this->shopify->Location->get()[0]['id'],
+                            "tracking_number" => null,
+                            "tracking_urls" => [],
+                            "notify_customer" => false
+            ]);
+
             $new_params = array(
                 'ids'   => $order_id,
             );
