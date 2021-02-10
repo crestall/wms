@@ -75,8 +75,8 @@ class Shopify{
             $updateInfo = array (
                 "fulfillment_status" => "fulfilled",
             );
-            echo "<p>Will Try and update status</p>";
-            $this->shopify->Order($order->order_id)->put($updateInfo);
+            echo "<p>Will Try and update status for $order_id</p>";
+            $this->shopify->Order($order_id)->put($updateInfo);
             $new_params = array(
                 'ids'   => $order_id,
             );
