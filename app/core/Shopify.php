@@ -44,8 +44,7 @@ class Shopify{
         $this->shopify = new PHPShopify\ShopifySDK($config);
         $collected_orders = array();
         $params = array(
-            'status'    => 'open',
-            'fields'    => 'id,created_at,email,note,total_weight,phone,order_number,line_items,shipping_address, shipping_lines'
+            'status'    => 'open'
         );
         try {
           $collected_orders = $this->shopify->Order->get($params);
@@ -80,7 +79,6 @@ class Shopify{
             $this->shopify->Order($order_id)->put($updateInfo);
             $new_params = array(
                 'ids'   => $order_id,
-                'fields'    => 'id,created_at,email,note,total_weight,phone,order_number,line_items,shipping_address, shipping_lines'
             );
             $updated = $this->shopify->Order->get($new_params);
             echo "<p>--------------------------------------------------</p>";
