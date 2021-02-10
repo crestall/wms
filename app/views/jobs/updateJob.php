@@ -181,7 +181,7 @@ while($f < $finisher_count)
                             <div class="form-group row">
                                 <label class="col-md-4">Delivery Notes/Comments</label>
                                 <div class="col-md-8">
-                                    <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo $delivery_notes;?></textarea>
+                                    <textarea name="delivery_notes" id="delivery_notes" class="form-control" rows="3"><?php echo $delivery_notes;?></textarea>
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
