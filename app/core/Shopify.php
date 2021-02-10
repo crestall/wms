@@ -80,15 +80,15 @@ class Shopify{
 
             $this->shopify->Order($order_id)->Fulfillment->post([
                             "location_id" => $this->shopify->Location->get()[0]['id'],
-                            "tracking_number" => null,
-                            "tracking_urls" => [],
-                            "notify_customer" => false
+                            "tracking_number" => "FSGTEST",
+                            "tracking_urls" => ["https:wms.fsg.com.au"],
+                            "notify_customer" => true
             ]);
 
             $new_params = array(
                 'ids'   => $order_id,
             );
-            $updated = $this->shopify->Order->get();
+            $updated = $this->shopify->Order($order_id)->get();
             echo "<p>--------------------------------------------------</p>";
             echo "POST THE ORDER<pre>",print_r($updated),"</pre>";
             echo "<p>--------------------------------------------------</p>";
