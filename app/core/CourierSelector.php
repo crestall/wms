@@ -124,13 +124,13 @@
             $order_values['eparcel_shipment_id'] = $sResponse['shipments'][0]['shipment_id'];;
             $order_values['consignment_id'] = $sResponse['shipments'][0]['items'][0]['tracking_details']['consignment_id'];
             $order_values['handling_charge'] = $this->handling_charge;
-            $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.35 * 1.1 , 2);
+            $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.35 , 2);
             $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
             $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
             /*********** charge FREEDOM more *******************/
                 if($this->order_details['client_id'] == 7)
                 {
-                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.4 * 1.1 , 2);
+                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.4 , 2);
                     $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
                     $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                 }
@@ -138,7 +138,7 @@
             /*********** special deals for OnePlate *******************/
                 if($this->order_details['client_id'] == 82)
                 {
-                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1 , 2);
+                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.1 , 2);
                     $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
                     $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                 }
@@ -147,7 +147,7 @@
                 if($this->order_details['client_id'] == 86)
                 {
                     $order_values['handling_charge'] = $this->handling_charge;
-                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.3 , 2);
+                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.3 , 2);
                     $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
                     $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                 }
@@ -156,7 +156,7 @@
                 if($this->order_details['client_id'] == 87)
                 {
                     $order_values['handling_charge'] = $this->handling_charge;
-                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.3 , 2);
+                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.3 , 2);
                     $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
                     $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                 }
