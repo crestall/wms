@@ -26,7 +26,7 @@
                         $.fn.dataTable.ext.order['dom-select'] = function  ( settings, col )
                         {
                             return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
-                                return $('select', td).val();
+                                return $('select', td).data("ranking");
                             } );
                         }
                         var paging = $('input#complete').val() == 1;
