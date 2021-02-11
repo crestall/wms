@@ -461,7 +461,7 @@
                                             }
                                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Updating Priorities...</h1></div>' });
                                             var data = {jobids: ids};
-                                            $.post('/ajaxfunctions/update-job-priorities', data, function(d){
+                                            $.post('/ajaxfunctions/update-jobs-priority', data, function(d){
                                                 location.reload();
                                             });
                                         });
