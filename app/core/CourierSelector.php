@@ -152,6 +152,15 @@
                     $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                 }
             /*********** end BDS Calculations *******************/
+            /*********** PBA Calculations *******************/
+                if($this->order_details['client_id'] == 87)
+                {
+                    $order_values['handling_charge'] = $this->handling_charge;
+                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.3 , 2);
+                    $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                    $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                }
+            /*********** end PBA Calculations *******************/
             $order_values['charge_code'] = $sResponse['shipments'][0]['items'][0]['product_id'];
             $order_values['labels'] = count($eparcel_details['items']);
             $order_values['courier_id'] = $courier_id;
@@ -266,6 +275,15 @@
                         $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                     }
                 /*********** end BDS Calculations *******************/
+                /*********** PBA Calculations *******************/
+                    if($this->order_details['client_id'] == 87)
+                    {
+                        $order_values['handling_charge'] = $this->handling_charge;
+                        $postage = $order_values['postage_charge'] = round($consignment['TotalCharge'] * 1.3 * DF_FUEL_SURCHARGE , 2);
+                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    }
+                /*********** end PBA Calculations *******************/
                 $order_values['courier_id'] = $this->controller->courier->directFreightId;
                 $order_values['label_url'] = $response['LabelURL'];
                 if($this->addBubblewrap())
