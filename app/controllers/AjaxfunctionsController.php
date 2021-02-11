@@ -61,6 +61,7 @@ class ajaxfunctionsController extends Controller
             'updateOrderComments',
             'updateStockMovementReason',
             'updateWarningLevel',
+            'updateJobsPriority',
             'updateJobStatus'
         ];
         $this->Security->config("validateForm", false);
@@ -75,6 +76,16 @@ class ajaxfunctionsController extends Controller
             $this->productionfinisher->deactivateFinisher($finisher_id);
         }
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Finisher(s) Have Been Deleted</h2>");
+    }
+
+    public function updateJobsPriority()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data['jobids'] as $pupdate)
+        {
+            $this->productionjob->updateJobPriority($pupdate['jobid'], $pupdate['priority']);
+        }
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Priorities have been updated</h2>");
     }
 
     public function updateJobStatus()
