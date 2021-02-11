@@ -80,7 +80,7 @@ class ajaxfunctionsController extends Controller
 
     public function updateJobsPriority()
     {
-        echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
         foreach($this->request->data['jobids'] as $pupdate)
         {
             $this->productionjob->updateJobPriority($pupdate['jobid'], $pupdate['priority']);
