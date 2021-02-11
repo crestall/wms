@@ -1005,25 +1005,41 @@ class ajaxfunctionsController extends Controller
         else
         {
             $eparcel_express_charge = ($express)?
-                "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35 * 1.1, 2) :
+                "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35, 2) :
                 "<div class='errorbox'><p>Dangerous Goods Cannot Go Express</p></div>";
-            $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35 * 1.1, 2);
+            $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35, 2);
             /*********** charge FREEDOM more *******************/
                 if($od['client_id'] == 7)
                 {
                     if($express)
-                        $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.4 * 1.1, 2);
-                    $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.4 * 1.1, 2);
+                        $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.4 , 2);
+                    $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.4 , 2);
                 }
             /*********** charge FREEDOM more *******************/
             /*********** special deals for OnePlate *******************/
                 if($od['client_id'] == 82)
                 {
                     if($express)
-                        $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1, 2);
-                    $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1 * 1.1, 2);
+                        $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1 , 2);
+                    $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.1, 2);
                 }
             /*********** special deals for OnePlate *******************/
+            /*********** BDS Calculations *******************/
+                if($od['client_id'] == 86)
+                {
+                    if($express)
+                        $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.3, 2);
+                    $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.3, 2);
+                }
+            /*********** end BDS Calculations *******************/
+            /*********** PBA Calculations *******************/
+                if($od['client_id'] == 87)
+                {
+                    if($express)
+                        $eparcel_express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.3, 2);
+                    $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.3, 2);
+                }
+            /*********** end PBA Calculations *******************/
         }
         if($this->courierselector->chooseEparcel($od))
         {
@@ -1051,6 +1067,18 @@ class ajaxfunctionsController extends Controller
                         $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
                     }
                 /*********** charge FREEDOM more *******************/
+                /*********** BDS Calculations *******************/
+                    if($od['client_id'] == 86)
+                    {
+                        $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.3 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    }
+                /*********** end BDS Calculations *******************/
+                /*********** PBA Calculations *******************/
+                    if($od['client_id'] == 87)
+                    {
+                        $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.3 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    }
+                /*********** end PBA Calculations *******************/
             }
             else
             {
