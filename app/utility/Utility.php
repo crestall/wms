@@ -116,6 +116,22 @@ class Utility{
         return $return_string;
     }
 
+    public static function getPrioritySelect($selected = false)
+    {
+        $return_string = "";
+        $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        for($p = 1; $p <= 10; $p++)
+        {
+        	$return_string .= "<option value='$p'";
+        	if($selected && $selected == $p)
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+        	$return_string .= ">".$f->format($p)."</option>";
+        }
+        return $return_string;
+    }
+
     public static function randomNumber($length = 6)
     {
         $result = mt_rand(1, 9);
