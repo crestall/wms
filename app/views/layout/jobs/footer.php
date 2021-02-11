@@ -23,6 +23,12 @@
                                 return ((str1 < str2) ? 1 : ((str1 > str2) ? -1 : 0));
                             }
                         });
+                        $.fn.dataTable.ext.order['dom-select'] = function  ( settings, col )
+                        {
+                            return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
+                                return $('select', td).val();
+                            } );
+                        }
                         var paging = $('input#complete').val() == 1;
                         var table = dataTable.init($('table#production_jobs_table'), {
                             //No pagination for this table
@@ -41,6 +47,9 @@
                                 }
                             ],
                             "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">tp>',
+                            "columns":[
+                                null,{ "orderDataType": "dom-select" },null,null 
+                            ]
                         });
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
