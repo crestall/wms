@@ -35,6 +35,10 @@
                             "paging":   paging,
                             //No initial sort,
                             "order": [],
+                            //do sorting based on select values
+                            "columns":[
+                                null,{ "orderDataType": "dom-select" },null,null,null,null,null,null,null,null,null,null,null
+                            ],
                             //but blanks on the bottom when sorting
                             columnDefs: [
                                 {
@@ -42,15 +46,12 @@
                                     targets: 1 //priority is the second column
                                 },
                                 {
-                                    type: "orderDataType",
-                                    targets: 1
-                                },
-                                {
                                     orderable: false,
                                     targets: "no-sort"
                                 }
                             ],
                             "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">tp>',
+
                         });
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
