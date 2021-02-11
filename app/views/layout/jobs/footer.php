@@ -445,9 +445,22 @@
                                     buttons: true,
                                     dangerMode: true
                                 }).then( function(changePriority) {
-                                    if(changeStatus)
+                                    if(changePriority)
                                     {
-
+                                        var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            if($(this).prop('checked') )
+                                            {
+                                                var job_id = $(this).data('jobid');
+                                                var status_id = $('select#priority_'+job_id).val();
+                                                var ent = {
+                                                    jobid: job_id,
+                                                    priority: priority
+                                                }
+                                                ids.push(ent);
+                                            }
+                                            console.log("ids: "+ids);
+                                        });
                                     }
                                 });
                             }
