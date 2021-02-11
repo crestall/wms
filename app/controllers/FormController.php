@@ -1397,7 +1397,7 @@ class FormController extends Controller {
 
     public function procAddProductionJob()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -1487,13 +1487,6 @@ class FormController extends Controller {
         }
         if(!isset($held_in_store))
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
-        if($this->dataSubbed($priority))
-        {
-            if(filter_var($priority, FILTER_VALIDATE_INT) === false || $priority <= 0)
-            {
-                Form::setError('priority', 'Only positive whole numbers please');
-            }
-        }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
