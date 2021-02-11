@@ -35,15 +35,16 @@
                             "paging":   paging,
                             //No initial sort,
                             "order": [],
-                            //do sorting based on select values
-                            "columns":[
-                                null,{ "orderDataType": "dom-select" },null,null,null,null,null,null,null,null,null,null,null
-                            ],
+
                             //but blanks on the bottom when sorting
                             columnDefs: [
                                 {
                                     type: 'non-empty-string',
                                     targets: 1 //priority is the second column
+                                },
+                                {
+                                    orderDataType: "dom-select",
+                                    targets: 1
                                 },
                                 {
                                     orderable: false,
