@@ -46,7 +46,7 @@
                     <?php endif;?>
                 </td>
                 <td data-label="Priority">
-                    <select class="selectpicker priority"  id="priority_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo Utility::getPrioritySelect($job['priority']);?></select>
+                    <select class="selectpicker priority"  id="priority_<?php echo $job['id'];?>" data-ranking="<?php echo ($job['priority'] > 0)? $job['priority'] : "";?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo Utility::getPrioritySelect($job['priority']);?></select>
                 </td>
                 <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                 <td data-label="Client">
