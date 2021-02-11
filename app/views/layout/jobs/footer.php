@@ -452,7 +452,7 @@
                                             if($(this).prop('checked') )
                                             {
                                                 var job_id = $(this).data('jobid');
-                                                var status_id = $('select#priority_'+job_id).val();
+                                                var priority = $('select#priority_'+job_id).val();
                                                 var ent = {
                                                     jobid: job_id,
                                                     priority: priority
