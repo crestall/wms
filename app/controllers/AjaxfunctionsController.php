@@ -81,9 +81,12 @@ class ajaxfunctionsController extends Controller
     public function updateJobsPriority()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
-        foreach($this->request->data['jobids'] as $pupdate)
+        if(isset($this->request->data['jobids']))
         {
-            $this->productionjob->updateJobPriority($pupdate['jobid'], $pupdate['priority']);
+            foreach($this->request->data['jobids'] as $pupdate)
+            {
+                $this->productionjob->updateJobPriority($pupdate['jobid'], $pupdate['priority']);
+            }
         }
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Priorities have been updated</h2>");
     }
