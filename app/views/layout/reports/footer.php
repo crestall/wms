@@ -78,7 +78,7 @@
                             var data = {
                                 from: $('#date_from_value').val(),
                                 to:   $('#date_to_value').val(),
-                                client_id: $('#client_id').val(),
+                                client_id: $('#client_selector').val(),
                                 csrf_token: config.csrfToken
                             }
                             var url = "/downloads/stockMovementCSV";
