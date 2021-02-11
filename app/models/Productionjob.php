@@ -280,6 +280,13 @@ class Productionjob extends Model{
         return true;
     }
 
+    public function updateJobPriority($job_id, $priority)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table,"priority",$priority,$job_id);
+        return true;
+    }
+
     public function updateJobFinisherId($job_id, $finisher_id, $finisher_number = "")
     {
         $db = Database::openConnection();

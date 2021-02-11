@@ -113,9 +113,9 @@ while($f < $finisher_count)
                             <div class="form-group row">
                                 <label class="col-md-4">Priority</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="priority" id="priority" value="<?php echo $priority;?>" />
+                                    <select id="priority" class="form-control selectpicker" name="priority" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo Utility::getPrioritySelect($priority);?></select>
+                                    <?php echo Form::displayError('priority');?>
                                 </div>
-                                <?php echo Form::displayError('priority');?>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Status</label>

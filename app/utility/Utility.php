@@ -127,7 +127,7 @@ class Utility{
         	{
         		$return_string .= "selected='selected' ";
         	}
-        	$return_string .= ">".$f->format($p)."</option>";
+        	$return_string .= ">".ucwords($f->format($p))."</option>";
         }
         return $return_string;
     }

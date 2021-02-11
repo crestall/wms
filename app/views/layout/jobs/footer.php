@@ -23,12 +23,19 @@
                                 return ((str1 < str2) ? 1 : ((str1 > str2) ? -1 : 0));
                             }
                         });
+                        $.fn.dataTable.ext.order['dom-select'] = function  ( settings, col )
+                        {
+                            return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
+                                return $('select', td).data("ranking");
+                            } );
+                        }
                         var paging = $('input#complete').val() == 1;
                         var table = dataTable.init($('table#production_jobs_table'), {
                             //No pagination for this table
                             "paging":   paging,
                             //No initial sort,
                             "order": [],
+
                             //but blanks on the bottom when sorting
                             columnDefs: [
                                 {
@@ -36,11 +43,16 @@
                                     targets: 1 //priority is the second column
                                 },
                                 {
+                                    orderDataType: "dom-select",
+                                    targets: 1
+                                },
+                                {
                                     orderable: false,
                                     targets: "no-sort"
                                 }
                             ],
                             "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">tp>',
+
                         });
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
@@ -413,6 +425,49 @@
                                 window.open('','runsheetformresult');
                                 form.submit();
                             });
+                        });
+                        //update job priority
+                        $('button#priority_change').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Jobs Selected",
+                                    text: "Please select at least one job to update its priority",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                swal({
+                                    title: "Update the Priority?",
+                                    text: "This can only be undone by changing it back",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(changePriority) {
+                                    if(changePriority)
+                                    {
+                                        var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            if($(this).prop('checked') )
+                                            {
+                                                var job_id = $(this).data('jobid');
+                                                var priority = $('select#priority_'+job_id).val();
+                                                var ent = {
+                                                    jobid: job_id,
+                                                    priority: priority
+                                                }
+                                                ids.push(ent);
+                                            }
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Updating Priorities...</h1></div>' });
+                                            var data = {jobids: ids};
+                                            $.post('/ajaxfunctions/update-jobs-priority', data, function(d){
+                                                location.reload();
+                                            });
+                                        });
+                                    }
+                                });
+                            }
                         });
                         //update job status
                         $('button#status').click(function(e){
