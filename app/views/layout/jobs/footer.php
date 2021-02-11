@@ -449,8 +449,9 @@
                                     {
 
                                     }
+                                });
                             }
-                        }
+                        });
                         //update job status
                         $('button#status').click(function(e){
                             if(!$('input.select:checked').length)
