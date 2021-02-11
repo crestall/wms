@@ -48,7 +48,7 @@
                             ],
                             "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">tp>',
                             "columns":[
-                                null,{ "orderDataType": "dom-select" },null,null 
+                                null,{ "orderDataType": "dom-select" },null,null,null,null,null,null,null,null,null,null,null 
                             ]
                         });
                         table.on( 'draw', function () {
