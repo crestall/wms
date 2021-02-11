@@ -119,7 +119,7 @@ class Utility{
     public static function getPrioritySelect($selected = false)
     {
         $return_string = "";
-        $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        //$f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
         for($p = 1; $p <= 10; $p++)
         {
         	$return_string .= "<option value='$p'";
@@ -128,7 +128,7 @@ class Utility{
         		$return_string .= "selected='selected' ";
         	}
         	//$return_string .= ">".ucwords($f->format($p))."</option>";
-            $return_string .= ">$p</option>"; 
+            $return_string .= ">$p</option>";
         }
         return $return_string;
     }
