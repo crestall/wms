@@ -426,6 +426,31 @@
                                 form.submit();
                             });
                         });
+                        //update job priority
+                        $('button#priority_change').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Jobs Selected",
+                                    text: "Please select at least one job to update its priority",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                swal({
+                                    title: "Update the Priority?",
+                                    text: "This can only be undone by changing it back",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(changePriority) {
+                                    if(changeStatus)
+                                    {
+
+                                    }
+                            }
+                        }
                         //update job status
                         $('button#status').click(function(e){
                             if(!$('input.select:checked').length)
