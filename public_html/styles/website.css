@@ -226,6 +226,37 @@ table#client_orders_table div.item_list span.icount{
 table#client_orders_table div.item_list span.ilocation{
     white-space: nowrap;
 }
+/*****
+View Jobs
+*****/
+table#production_jobs_table div.notes{
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-radius: .25rem
+}
+
+table#production_jobs_table div.notes h5{
+    margin-top: 0;
+    margin-bottom: .25rem
+}
+
+table#production_jobs_table div.notes_info{
+    border-color: #5bc0de;
+}
+
+table#production_jobs_table div.notes_info h5{
+    color:#5bc0de;
+}
+
+table#production_jobs_table div.notes_warning{
+    border-color: #f0ad4e;
+}
+
+table#production_jobs_table div.notes_warning h5{
+    color:#f0ad4e;
+}
 
     /*only for bigger sizes*/
     @media screen and (min-width: 768px){
@@ -738,7 +769,7 @@ highlighting sections
 }
 
 /********
-bootsrap adjustments
+bootstrap adjustments
 ********/
     /** Breadcrumbs **/
     .breadcrumb-item + .breadcrumb-item::before{
