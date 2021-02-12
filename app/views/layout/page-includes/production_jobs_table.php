@@ -60,12 +60,12 @@
                 </td>
                 <td data-label="Description"><?php echo $job['description'];?></td>
                 <td data-label="Notes">
-                    <div class="border-bottom border-secondary border-bottom-dashed mb-3">
-                        <p class="font-weight-bold text-uppercase mb-0">Production Notes:</p>
+                    <div class="bd-callout bd-callout-info">
+                        <h4>Production Notes:</h4>
                         <?php echo $job['notes'];?>
                     </div>
-                    <div class="border-bottom border-secondary border-bottom-dashed mb-3">
-                        <p class="font-weight-bold text-uppercase mb-0">Delivery Notes:</p>
+                    <div class="bd-callout bd-callout-warning">
+                        <h5>Delivery Notes:</h5>
                         <?php echo $job['delivery_notes'];?>
                     </div
                 </td>
