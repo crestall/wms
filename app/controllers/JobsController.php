@@ -99,7 +99,7 @@ class JobsController extends Controller
     public function viewJobs()
     {
         //echo "<pre>",print_r($this->request->params),"</pre>";die();
-        $head = "Viewing Incomplete Production Jobs";
+        $head = "Viewing Current Production Jobs";
         $completed = (isset($this->request->params['args']['completed']))? 1 : 0;
         $cancelled = (isset($this->request->params['args']['cancelled']))? 1 : 0;
         $customer_ids = isset($this->request->params['args']['customer_ids'])? explode(',',$this->request->params['args']['customer_ids']): array();

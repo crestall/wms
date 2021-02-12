@@ -396,10 +396,11 @@ class Order extends Model{
                 client_id = :client_id AND id >= 83706
             ORDER BY
                 date_fulfilled DESC
-        "; */
+        ";
         $array = array(
             'client_id' => 	$client_id
         );
+        */ 
         $orders = $db->queryData($query, $array);
         $return = array();
         foreach($orders as $co)

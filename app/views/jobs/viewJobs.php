@@ -16,7 +16,7 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View All Cancelled Jobs</a></div>
             <?php endif;?>
             <?php if($cancelled == 1 || $completed == 1):?>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View All Incompleted Jobs</a></div>
+                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View All Current Jobs</a></div>
             <?php endif;?>
         </div>
         <div class="border border-secondary p-3 m-3 rounded bg-light">
@@ -68,8 +68,9 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-primary" id="runsheet"><i class="fas fa-truck"></i> Add Selected to Chosen Day's Runsheet</button></div>
                 <?php endif;?>
                 <?php if($can_change_status):?>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-secondary" id="status"><i class="fal fa-file-check"></i> Update Status for Selected</button></div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-fsg" id="status"><i class="fal fa-file-check"></i> Update Status for Selected</button></div>
                 <?php endif;?>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-secondary" id="priority_change"><i class="fal fa-file-plus"></i> Update Priority for Selected</button></div>
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
                        <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>

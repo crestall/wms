@@ -6,7 +6,7 @@
     <thead>
         <tr>
             <th class="no-sort">Job Number</th>
-            <th>Priority</th>
+            <th nowwrap>Priority<br /><select id="priority_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo Utility::getPrioritySelect();?></select>&nbsp;<em><small>(all)</small></em></th>
             <th class="no-sort">Related Job</th>
             <th class="no-sort">Client</th>
             <th class="no-sort">Description</th>
@@ -45,10 +45,8 @@
                         <?php echo $job['job_id'];?>
                     <?php endif;?>
                 </td>
-                <td data-label="Priority" class="number">
-                    <?php if($job['priority'] > 0)
-                        echo $job['priority'];
-                    ?>
+                <td data-label="Priority">
+                    <select class="selectpicker priority"  id="priority_<?php echo $job['id'];?>" data-ranking="<?php echo ($job['priority'] > 0)? $job['priority'] : "";?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo Utility::getPrioritySelect($job['priority']);?></select>
                 </td>
                 <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                 <td data-label="Client">

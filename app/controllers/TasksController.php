@@ -93,6 +93,7 @@ class TasksController extends Controller
 
                     $rows = array();
                     $extra_cols = 0;
+                    $close = true;
                     foreach($orders as $o)
                     {
                         $row = array(
@@ -138,9 +139,19 @@ class TasksController extends Controller
                         'cols'  => $cols,
                         'rows'  => $rows
                     );
-                    $this->BdsFTP->uploadCSVFile($csvData);
+                    if( !$this->BdsFTP->uploadCSVFile($csvData) )
+                    {
+                        $close = false;
+                    }
                 }
-                $this->BdsFTP->closeConnection();
+                if($close)
+                {
+                    $this->BdsFTP->closeConnection();
+                }
+                else
+                {
+                    die("cannot close connection");
+                }
             }
             //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "bsd_dispatch_report_".date("Ymd")]);
         }
