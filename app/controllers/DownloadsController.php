@@ -704,7 +704,7 @@ class DownloadsController extends Controller {
             "Number Out",
             "Reason",
             "Reference/FSG Order Number",
-            "Client Order Number"
+            "Client Order Number",
             "Location",
             "Entered By"
         );
