@@ -37,7 +37,8 @@
                                     <th>Number In</th>
                                     <th>Number Out</th>
                                     <th>Reason</th>
-                                    <th>Reference<br/><?php echo $h;?></th>
+                                    <th>Reference<br>FSG Order Number</th>
+                                    <th>Client Order Number</th>
                                     <th>Location</th>
                                     <th>Entered by</th>
                                 </tr>
@@ -52,6 +53,7 @@
                                     <td data-label="Number Out"><?php echo $sm['qty_out'];?></td>
                                     <td data-label="Reason"><?php echo $sm['reason'];?></td>
                                     <td data-label="Reference/Order Number"><?php echo $sm['order_number'];?></td>
+                                    <td data-label="Client Order Number"><?php echo $sm['client_order_id'];?></td>
                                     <td data-label="Location"><?php echo $sm['location'];?></td>
                                     <td data-label="Entered By"><?php echo $sm['entered_by'];?></td>
                                 </tr>
