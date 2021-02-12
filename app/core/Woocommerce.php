@@ -37,22 +37,7 @@ class Woocommerce{
 
     public function testPBAShipping()
     {
-        $this->woocommerce = new Client(
-            'https://golfperformancestore.com.au',
-            Config::get('PBAWOOCONSUMERRKEY'),
-            Config::get('PBAWOOCONSUMERSECRET'),
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-                'query_string_auth' => true
-            ]
-        );
-        //get tracking providers for order id = 13330
-        try{
-            $providers = $this->woocommerce->get('/wp-json/wc-shipment-tracking/v3/')
-        } catch(HttpClientException $e) {
-            echo "<pre>",print_r($e),"</pre>";
-        }
+
     }
 
     public function getPBAOrders()
