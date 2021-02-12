@@ -703,7 +703,8 @@ class DownloadsController extends Controller {
             "Number In",
             "Number Out",
             "Reason",
-            "Reference/Order Number",
+            "Reference/FSG Order Number",
+            "Client Order Number"
             "Location",
             "Entered By"
         );
@@ -718,6 +719,7 @@ class DownloadsController extends Controller {
                 $m['qty_out'],
                 $m['reason'],
                 $m['order_number'],
+                $m['client_order_id'],
                 $m['location'],
                 $m['entered_by']
             );
