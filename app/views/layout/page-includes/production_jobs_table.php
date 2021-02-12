@@ -59,7 +59,16 @@
                     </span>
                 </td>
                 <td data-label="Description"><?php echo $job['description'];?></td>
-                <td data-label="Notes"><?php echo $job['notes'];?></td>
+                <td data-label="Notes">
+                    <div class="border-bottom border-secondary border-bottom-dashed mb-3">
+                        <p class="font-weight-bold text-uppercase mb-0">Production Notes:</p>
+                        <?php echo $job['notes'];?>
+                    </div>
+                    <div class="border-bottom border-secondary border-bottom-dashed mb-3">
+                        <p class="font-weight-bold text-uppercase mb-0">Delivery Notes:</p>
+                        <?php echo $job['delivery_notes'];?>
+                    </div
+                </td>
                 <td data-label="Status"
                 <?php if(!empty($job['status_colour'])):?>
                     style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
