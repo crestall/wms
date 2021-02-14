@@ -950,7 +950,8 @@ class Woocommerce{
                 'suburb'                => $o['suburb'],
                 'postcode'              => $o['postcode'],
                 'country'               => $o['country'],
-                'contact_phone'         => $o['contact_phone']
+                'contact_phone'         => $o['contact_phone'],
+                'is_woocommerce'        => 1
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
