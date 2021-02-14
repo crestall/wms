@@ -30,12 +30,12 @@ class Curl{
         return self::sendPostRequest($url, $data, $method);
     }
 
-    public function sendStandardGetRequest($url, $data)
+    public static function sendStandardGetRequest($url, $data)
     {
         return self::sendGetRequest($url, $data);
     }
 
-    public function sendSecureGetRequest($url, $data, $user, $pass)
+    public static function sendSecureGetRequest($url, $data, $user, $pass)
     {
         $headers = array(
             'Authorization: Basic '. base64_encode($user.":".$pass),
