@@ -24,6 +24,12 @@ class TasksController extends Controller
         ]);
     }
 
+    public function PBATestTask()
+    {
+        $carriers = $this->woocommerce->testPBAShipping();
+        echo "The Carriers<pre>",print_r($carriers),"</pre>";
+    }
+
     public function BDSCollectionTask()
     {
         if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
