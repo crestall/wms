@@ -139,8 +139,8 @@ class Woocommerce{
             }
             else
             {
-                $this->return_array['import_error'] = true;
-                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                //$this->return_array['import_error'] = true;
+                //$this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
                 return $this->return_array;
             }
         }
