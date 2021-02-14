@@ -11,14 +11,57 @@
 
 class Curl{
 
+    private static $curl_options = array(
+        CURLOPT_RETURNTRANSFER  => true,
+        CURLOPT_ENCODING        => "",
+        CURLOPT_MAXREDIRS       => 10,
+        CURLOPT_TIMEOUT         => 0,
+        CURLOPT_FOLLOWLOCATION  => true,
+        CURLOPT_HTTP_VERSION    => CURL_HTTP_VERSION_1_1
+    );
     /**
      * Constructor
      *
      */
     private function __construct(){}
 
+    public static function sendStandardPostRequest($url, array $data, $method = '')
+    {
+        return self::sendPostRequest($url, $data, $method);
+    }
 
-    public static function sendPostRequest($url,  array $data, $method = '')
+    public function sendStandardGetRequest($url, $data)
+    {
+        return self::sendGetRequest($url, $data);
+    }
+
+    public function sendSecureGetRequest($url, $data, $user, $pass)
+    {
+        $headers = array(
+            'Authorization: Basic '. base64_encode($user.":".$pass),
+            'Content-Type: application/json',
+            'Cache-Control: no-cache',
+        );
+        $curl_opts = array(
+            CURLOPT_URL             => $url,
+            CURLOPT_CUSTOMREQUEST   => 'GET',
+            CURLOPT_HTTPHEADER      => $headers
+        );
+        self::$curl_options = array_merge(self::$curl_options, $curl_opts);
+        return self::sendGetRequest($url, $data);
+    }
+
+    private static function sendGetRequest($url, $data)
+    {
+        $ch = curl_init();
+        curl_setopt_array($ch, self::$curl_options);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        echo $response;
+        die();
+    }
+
+    private static function sendPostRequest($url, $data, $method)
     {
         $ch = curl_init();
 
