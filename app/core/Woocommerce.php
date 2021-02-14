@@ -43,7 +43,7 @@ class Woocommerce{
             Config::get('PBAWOOCONSUMERRKEY'),
             Config::get('PBAWOOCONSUMERSECRET')
         );
-        echo "The Carriers<pre>",print_r($carriers),"</pre>";
+        return $carriers;
     }
 
     public function getPBAOrders()
