@@ -57,8 +57,7 @@ class Curl{
         curl_setopt_array($ch, self::$curl_options);
         $response = curl_exec($ch);
         curl_close($ch);
-        echo $response;
-        die();
+        return $response;
     }
 
     private static function sendPostRequest($url, $data, $method)
