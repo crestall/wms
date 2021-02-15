@@ -55,8 +55,18 @@ class Curl{
     private static function sendGetRequest($url, $data)
     {
         $ch = curl_init();
+        $verbose = fopen('php://temp', 'w+');
         curl_setopt_array($ch, self::$curl_options);
+        curl_setopt($ch, CURLOPT_STDERR, $verbose);
         $response = curl_exec($ch);
+        if ($result === FALSE) {
+            printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
+                   htmlspecialchars(curl_error($ch)));
+            rewind($verbose);
+            $verboseLog = stream_get_contents($verbose);
+            echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
+            die();
+        }
         curl_close($ch);
         return $response;
     }
