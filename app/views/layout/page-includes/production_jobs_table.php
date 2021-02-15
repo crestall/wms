@@ -5,9 +5,8 @@
 <table class="table-striped table-hover" id="production_jobs_table">
     <thead>
         <tr>
+            <th nowwrap>Priority<br /><select id="priority_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect();?></select>&nbsp;<em><small>(all)</small></em></th>
             <th class="no-sort">Job Number</th>
-            <th nowwrap>Priority<br /><select id="priority_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo Utility::getPrioritySelect();?></select>&nbsp;<em><small>(all)</small></em></th>
-            <th class="no-sort">Related Job</th>
             <th class="no-sort">Client</th>
             <th class="no-sort">Description</th>
             <th class="no-sort">Notes</th>
@@ -18,6 +17,10 @@
             <?php endif;?>
             <th>FSG Contact</th>
             <th class="no-sort">Finisher(s)</th>
+            <?php if($can_do_runsheets):?>
+                <th>Runsheet Day</th>
+            <?php endif;?>
+            <th>Due Date</th>
             <?php if($need_checkbox):?>
                 <th nowrap class="no-sort">
                     Select
@@ -27,28 +30,25 @@
                     </div>
                 </th>
             <?php endif;?>
-            <?php if($can_do_runsheets):?>
-                <th>Runsheet Day</th>
-            <?php endif;?>
-            <th>Date Entered</th>
-            <th>Due Date</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach($jobs as $job):
             $add_to_runsheet = true;?>
             <tr id="tr_<?php echo $job['id'];?>">
+                <td data-label="Priority">
+                    <select class="selectpicker priority"  id="priority_<?php echo $job['id'];?>" data-ranking="<?php echo ($job['priority'] > 0)? $job['priority'] : "";?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect($job['priority']);?></select>
+                </td>
                 <td data-label="Job Number" class="number">
                     <?php if($user_role == "production_admin" ||  $user_role == "production"):?>
                         <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a>
                     <?php else:?>
                         <?php echo $job['job_id'];?>
                     <?php endif;?>
+                    <?php if(!empty($job['previous_job_id'])):?>
+                        <p><?php echo $job['previous_job_id'];?></p>
+                    <?php endif;?>
                 </td>
-                <td data-label="Priority">
-                    <select class="selectpicker priority"  id="priority_<?php echo $job['id'];?>" data-ranking="<?php echo ($job['priority'] > 0)? $job['priority'] : "";?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo Utility::getPrioritySelect($job['priority']);?></select>
-                </td>
-                <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                 <td data-label="Client">
                     <span style="font-size: larger">
                         <?php if($user_role == "production_admin"):?>
@@ -93,14 +93,6 @@
                         <?php endif;?>
                     <?php endfor;?>
                 </td>
-                <?php if($need_checkbox):?>
-                    <td data-label="Select" class="chkbox">
-                        <div class="checkbox checkbox-default">
-                            <input type="checkbox" class="select styled" data-jobid='<?php echo $job['id'];?>' name="select_<?php echo $job['id'];?>" id="select_<?php echo $job['id'];?>" />
-                            <label for="select_<?php echo $job['id'];?>"></label>
-                        </div>
-                    </td>
-                <?php endif;?>
                 <?php if($can_do_runsheets):?>
                     <td data-label="Runsheet Day">
                         <?php if($job['runsheet_id'] > 0):
@@ -134,7 +126,6 @@
                         <?php endif;?>
                     </td>
                 <?php endif; ?>
-                <td data-label="Date Entered"><?php echo date("d/m/Y", $job['created_date']);?></td>
                 <td data-label="Due Date"
                 <?php if($job['strict_dd'] > 0):?>
                     <?php if( ($job['due_date'] < $today) ):?>
@@ -150,6 +141,14 @@
                     <?php endif;?>
                 <?php endif;?>
                 ><?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?></td>
+                <?php if($need_checkbox):?>
+                    <td data-label="Select" class="chkbox">
+                        <div class="checkbox checkbox-default">
+                            <input type="checkbox" class="select styled" data-jobid='<?php echo $job['id'];?>' name="select_<?php echo $job['id'];?>" id="select_<?php echo $job['id'];?>" />
+                            <label for="select_<?php echo $job['id'];?>"></label>
+                        </div>
+                    </td>
+                <?php endif;?>
             </tr>
         <?php endforeach;?>
     </tbody>

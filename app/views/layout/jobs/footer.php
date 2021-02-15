@@ -40,11 +40,11 @@
                             columnDefs: [
                                 {
                                     type: 'non-empty-string',
-                                    targets: 1 //priority is the second column
+                                    targets: 0 //priority is the second column
                                 },
                                 {
                                     orderDataType: "dom-select",
-                                    targets: 1
+                                    targets: 0
                                 },
                                 {
                                     orderable: false,
