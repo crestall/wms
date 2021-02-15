@@ -237,7 +237,7 @@ table#production_jobs_table div.notes{
     border-radius: .25rem
 }
 
-table#production_jobs_table div.notes h5{
+table#production_jobs_table div.notes h6{
     margin-top: 0;
     margin-bottom: .25rem
 }
@@ -246,7 +246,7 @@ table#production_jobs_table div.notes-info{
     border-color: #5bc0de;
 }
 
-table#production_jobs_table div.notes-info h5{
+table#production_jobs_table div.notes-info h6{
     color:#5bc0de;
 }
 
@@ -254,8 +254,14 @@ table#production_jobs_table div.notes-warning{
     border-color: #f0ad4e;
 }
 
-table#production_jobs_table div.notes-warning h5{
+table#production_jobs_table div.notes-warning h6{
     color:#f0ad4e;
+}
+
+/*hover over these*/
+table#production_jobs_table div.notes:hover,
+table#production_jobs_table div.notes:hover h6{
+    color:#fff;
 }
 
     /*only for bigger sizes*/
