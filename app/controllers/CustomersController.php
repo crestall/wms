@@ -74,10 +74,10 @@ class CustomersController extends Controller
         //render the page
         Config::setJsConfig('curPage', "view-customer");
         Config::set('curPage', "view-customer");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/customers/", Config::get('VIEWS_PATH') . 'customers/viewCustomers.php', [
-            'page_title'    =>  "View Production Customers",
-            'pht'           =>  ": Production Customers",
-            'customers'     =>  $customers
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/customers/", Config::get('VIEWS_PATH') . 'customers/viewCustomer.php', [
+            'page_title'    =>  "Viewing ".$customer_info['name'],
+            'pht'           =>  ": ".$customer_info['name'],
+            'customer'     =>  $customer_info
         ]);
     }
 
