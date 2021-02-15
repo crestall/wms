@@ -60,14 +60,18 @@
                 </td>
                 <td data-label="Description"><?php echo $job['description'];?></td>
                 <td data-label="Notes">
-                    <div class="notes notes-info">
-                        <h6>Production Notes:</h6>
-                        <?php echo $job['notes'];?>
-                    </div>
-                    <div class="notes notes-warning">
-                        <h6>Delivery Notes:</h6>
-                        <?php echo $job['delivery_notes'];?>
-                    </div
+                    <?php if(!empty($job['notes'])):?>
+                        <div class="notes notes-info">
+                            <h6>Production Notes:</h6>
+                            <?php echo $job['notes'];?>
+                        </div>
+                    <?php endif;?>
+                    <?php if(!empty($job['delivery_notes'])):?>
+                        <div class="notes notes-warning">
+                            <h6>Delivery Notes:</h6>
+                            <?php echo $job['delivery_notes'];?>
+                        </div>
+                    <?php endif;?>
                 </td>
                 <td data-label="Status"
                 <?php if(!empty($job['status_colour'])):?>
