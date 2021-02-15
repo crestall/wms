@@ -175,6 +175,10 @@ $prod = array(
         'view-customers'    => array(
             'display'   => true,
             'icon'      => $fontastic_icons['customers']['view-customers']
+        ),
+        'view-customer'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'finishers' => array(
