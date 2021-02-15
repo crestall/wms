@@ -21,9 +21,7 @@
                                 <th>Customer Name</th>
                                 <th>Contact Details</th>
                                 <th>Address Details</th>
-                                 <?php if($role == "production admin"):?>
-                                    <th></th>
-                                <?php endif;?>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,11 +64,12 @@
                                 <td data-label="Supplier Name"><?php echo $c['name'];?></td>
                                 <td data-label="Contact Details"><?php echo $contact_string;?></td>
                                 <td data-label="Address Details" class="text-right"><?php echo $address_string;?></td>
-                                <?php if($role == "production admin"):?>
-                                    <td>
+                                <td>
+                                    <?php if($role == "production admin"):?>
                                         <p><a class="btn btn-outline-secondary" href="/customers/edit-customer/customer=<?php echo $c['id'];?>" >Edit Details</a></p>
-                                    </td>
-                                <?php endif;?>
+                                    <?php endif;?>
+                                    <p><a class="btn btn-outline-fsg" href="/customers/view-customer/customer=<?php echo $c['id'];?>" >View/Print Details</a></p>
+                                </td>
                             </tr>
                         <?php ++$i; endforeach;?>
                         </tbody>
