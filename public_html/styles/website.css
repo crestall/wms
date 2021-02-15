@@ -264,6 +264,11 @@ table#production_jobs_table div.notes:hover h6{
     color:#fff;
 }
 
+table#production_jobs_table div.notes-warning:hover{
+    border-color: #fff;
+    background-color: #f0ad4e;
+}
+
     /*only for bigger sizes*/
     @media screen and (min-width: 768px){
         div.view-orders-buttons div a{
