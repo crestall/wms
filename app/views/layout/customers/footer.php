@@ -47,10 +47,15 @@
                         } );
                     }
                 },
+                'view-customer':{
+                    init: function(){
+
+                    }
+                },
                 'edit-customer':{
                     init: function(){
                         actions.common.init();
-                        actions.common.addContact(); 
+                        actions.common.addContact();
                         $('form#edit_production_customer').submit(function(e){
                             if($(this).valid())
                             {
