@@ -5,8 +5,8 @@
 <table class="table-striped table-hover" id="production_jobs_table">
     <thead>
         <tr>
-            <th class="no-sort">Job Number</th>
             <th nowwrap>Priority<br /><select id="priority_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect();?></select>&nbsp;<em><small>(all)</small></em></th>
+            <th class="no-sort">Job Number</th>
             <th class="no-sort">Related Job</th>
             <th class="no-sort">Client</th>
             <th class="no-sort">Description</th>
@@ -38,15 +38,15 @@
         <?php foreach($jobs as $job):
             $add_to_runsheet = true;?>
             <tr id="tr_<?php echo $job['id'];?>">
+                <td data-label="Priority">
+                    <select class="selectpicker priority"  id="priority_<?php echo $job['id'];?>" data-ranking="<?php echo ($job['priority'] > 0)? $job['priority'] : "";?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect($job['priority']);?></select>
+                </td>
                 <td data-label="Job Number" class="number">
                     <?php if($user_role == "production_admin" ||  $user_role == "production"):?>
                         <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a>
                     <?php else:?>
                         <?php echo $job['job_id'];?>
                     <?php endif;?>
-                </td>
-                <td data-label="Priority">
-                    <select class="selectpicker priority"  id="priority_<?php echo $job['id'];?>" data-ranking="<?php echo ($job['priority'] > 0)? $job['priority'] : "";?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect($job['priority']);?></select>
                 </td>
                 <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                 <td data-label="Client">
