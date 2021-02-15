@@ -53,8 +53,8 @@ class Curl{
         $verbose = fopen('php://temp', 'w+');
         curl_setopt_array($ch, self::$curl_options);
         curl_setopt($ch, CURLOPT_STDERR, $verbose);
-        curl_setopt($ch, CURL_URL, $url);
-        curl_setopt($ch, CURL_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_HTTPHEADER, self::$headers);
 
         $response = curl_exec($ch);
