@@ -258,11 +258,11 @@ table#production_jobs_table div.notes-warning h6{
     color:#f0ad4e;
 }
 
-/*hover over these*/
+/*hover over these
 table#production_jobs_table div.notes:hover,
 table#production_jobs_table div.notes:hover h6{
     color:#fff;
-}
+} */
 
 table#production_jobs_table div.notes-warning:hover{
     border-color: #fff;
