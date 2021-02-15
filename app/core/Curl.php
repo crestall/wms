@@ -19,6 +19,7 @@ class Curl{
         CURLOPT_FOLLOWLOCATION  => true,
         CURLOPT_HTTP_VERSION    => CURL_HTTP_VERSION_1_1
     );
+    private static $headers = array();
     /**
      * Constructor
      *
@@ -37,18 +38,12 @@ class Curl{
 
     public static function sendSecureGetRequest($url, $data, $user, $pass)
     {
-        $headers = array(
+        self::$headers = array(
             'Authorization: Basic '. base64_encode($user.":".$pass),
             'Content-Type: application/json',
             'Cache-Control: no-cache',
         );
-        //echo "<pre>",print_r($headers),"</pre>";die();
-        $curl_opts = array(
-            CURLOPT_URL             => $url,
-            CURLOPT_CUSTOMREQUEST   => 'GET',
-            CURLOPT_HTTPHEADER      => $headers
-        );
-        self::$curl_options = array_merge(self::$curl_options, $curl_opts);
+
         return self::sendGetRequest($url, $data);
     }
 
@@ -58,6 +53,10 @@ class Curl{
         $verbose = fopen('php://temp', 'w+');
         curl_setopt_array($ch, self::$curl_options);
         curl_setopt($ch, CURLOPT_STDERR, $verbose);
+        curl_setopt($ch, CURL_URL, $url);
+        curl_setopt($ch, CURL_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, self::$headers);
+
         $response = curl_exec($ch);
         if ($response === FALSE) {
             printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
