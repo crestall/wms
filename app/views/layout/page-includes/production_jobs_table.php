@@ -49,7 +49,6 @@
                         <p><?php echo $job['previous_job_id'];?></p>
                     <?php endif;?>
                 </td>
-                <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
                 <td data-label="Client">
                     <span style="font-size: larger">
                         <?php if($user_role == "production_admin"):?>
