@@ -27,7 +27,7 @@ class TasksController extends Controller
     public function PBATestTask()
     {
         $carriers = $this->woocommerce->testPBAShipping();
-        echo "The Carriers<pre>",print_r(json_decode(json_encode($carriers),true)),"</pre>";
+        echo "The Carriers<pre>",print_r(json_decode(json_encode($carriers)),true),"</pre>";
     }
 
     public function BDSCollectionTask()
