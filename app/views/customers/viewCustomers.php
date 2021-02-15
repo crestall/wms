@@ -14,7 +14,7 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-12">
-                    <table id="customer_list_table" class="table-striped table-hover">
+                    <table id="customer_list_table" class="table-striped table-hover" style="width:100%">
                         <thead>
                         	<tr>
                                 <th></th>
