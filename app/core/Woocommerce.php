@@ -38,7 +38,7 @@ class Woocommerce{
     public function testPBAShipping()
     {
         $carriers = Curl::sendSecureGetRequest(
-            'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/13330/shipment-trackings/providers',
+            'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/14705/shipment-trackings/providers',
             array(),
             Config::get('PBAWOOCONSUMERRKEY'),
             Config::get('PBAWOOCONSUMERSECRET')
