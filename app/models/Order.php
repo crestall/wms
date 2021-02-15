@@ -263,6 +263,10 @@ class Order extends Model{
         );
         if(isset($data['backorder_items']))
             $o_values['backorder_items'] = 1;
+        if(isset($data['is_woocommerce']))
+            $o_values['is_woocommerce'] = 1;
+        if(isset($data['is_shopify']))
+            $o_values['is_shopify'] = 1;
         if(!empty($data['client_order_id']))
             $o_values['client_order_id'] = $data['client_order_id'];
         if(!empty($data['company_name']))
