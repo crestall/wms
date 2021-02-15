@@ -7,7 +7,6 @@
         <tr>
             <th nowwrap>Priority<br /><select id="priority_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect();?></select>&nbsp;<em><small>(all)</small></em></th>
             <th class="no-sort">Job Number</th>
-            <th class="no-sort">Related Job</th>
             <th class="no-sort">Client</th>
             <th class="no-sort">Description</th>
             <th class="no-sort">Notes</th>
@@ -45,6 +44,9 @@
                         <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a>
                     <?php else:?>
                         <?php echo $job['job_id'];?>
+                    <?php endif;?>
+                    <?php if(!empty($job['previous_job_id'])):?>
+                        <p><?php echo $job['previous_job_id'];?></p>
                     <?php endif;?>
                 </td>
                 <td data-label="Related Job" class="number"><?php echo $job['previous_job_id'];?></td>
