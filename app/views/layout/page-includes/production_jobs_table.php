@@ -46,7 +46,10 @@
                         <?php echo $job['job_id'];?>
                     <?php endif;?>
                     <?php if(!empty($job['previous_job_id'])):?>
-                        <p><?php echo $job['previous_job_id'];?></p>
+                        <p class="border-top border-secondary border-top-dashed pt-3">
+                            Previous Jobs<br>
+                            <?php echo $job['previous_job_id'];?>
+                        </p>
                     <?php endif;?>
                 </td>
                 <td data-label="Client">
