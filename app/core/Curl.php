@@ -28,6 +28,21 @@ class Curl{
 
     public static function sendStandardPostRequest($url, array $data, $method = '')
     {
+        self::$headers = array(
+            'Content-Type: application/json',
+            'Cache-Control: no-cache',
+        );
+        return self::sendPostRequest($url, $data, $method);
+    }
+
+    public static function sendSecurePOSTRequest($url, $data, $user, $pass, $method = '')
+    {
+        self::$headers = array(
+            'Authorization: Basic '. base64_encode($user.":".$pass),
+            'Content-Type: application/json',
+            'Cache-Control: no-cache',
+        );
+
         return self::sendPostRequest($url, $data, $method);
     }
 
@@ -76,11 +91,6 @@ class Curl{
 
         if($method == 'form')
         {
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                "Content-Type: application/x-www-form-urlencoded",
-                "cache-control: no-cache"
-                )
-            );
             $fields_string = '';
             foreach($data as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
             rtrim($fields_string, '&');
@@ -89,21 +99,13 @@ class Curl{
         else //json by default
         {
             $data_string = json_encode($data);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Cache-Control: no-cache',
-                'Content-Length: ' . strlen($data_string)
-                )
-            );
+            self::$headers[] =  'Content-Length: ' . strlen($data_string);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         }
+        curl_setopt_array($ch, self::$curl_options);
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_ENCODING, "");
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, self::$headers);
 
         $result = curl_exec($ch);
         $err = curl_error($ch);
