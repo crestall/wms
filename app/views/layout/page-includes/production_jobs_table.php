@@ -61,11 +61,11 @@
                 <td data-label="Description"><?php echo $job['description'];?></td>
                 <td data-label="Notes">
                     <div class="notes notes-info">
-                        <h5>Production Notes:</h5>
+                        <h6>Production Notes:</h6>
                         <?php echo $job['notes'];?>
                     </div>
                     <div class="notes notes-warning">
-                        <h5>Delivery Notes:</h5>
+                        <h6>Delivery Notes:</h6>
                         <?php echo $job['delivery_notes'];?>
                     </div
                 </td>
