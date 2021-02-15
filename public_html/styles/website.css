@@ -800,6 +800,9 @@ bootstrap adjustments
     .border-bottom-dashed{
         border-bottom-style: dashed !important;
     }
+    .border-top-dashed{
+        border-top-style: dashed !important;
+    }
     /** Checkboxes  */
     div.custom-control-right {
         padding-right: 24px;
