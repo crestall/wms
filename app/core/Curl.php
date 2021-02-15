@@ -42,7 +42,7 @@ class Curl{
             'Content-Type: application/json',
             'Cache-Control: no-cache',
         );
-        echo "<pre>",print_r($headers),"</pre>";die();
+        //echo "<pre>",print_r($headers),"</pre>";die();
         $curl_opts = array(
             CURLOPT_URL             => $url,
             CURLOPT_CUSTOMREQUEST   => 'GET',
