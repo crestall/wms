@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="row" id="table_holder" style="display:none">
-                <div class="col-md-12">
+                <div class="col-12">
                     <table id="customer_list_table" class="table-striped table-hover">
                         <thead>
                         	<tr>
