@@ -232,7 +232,7 @@ View Jobs
 table#production_jobs_table div.notes{
     padding: 0.5rem;
     border: 1px solid #eee;
-    border-radius: .25rem
+    border-radius: 0.25rem
 }
 
 table#production_jobs_table div.notes h6{
@@ -242,7 +242,7 @@ table#production_jobs_table div.notes h6{
 
 table#production_jobs_table div.notes-info{
     border-color: #5bc0de;
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
 }
 
 table#production_jobs_table div.notes-info h6{
