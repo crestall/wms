@@ -226,6 +226,37 @@ table#client_orders_table div.item_list span.icount{
 table#client_orders_table div.item_list span.ilocation{
     white-space: nowrap;
 }
+/*****
+View Jobs
+*****/
+table#production_jobs_table div.notes{
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-radius: .25rem
+}
+
+table#production_jobs_table div.notes h5{
+    margin-top: 0;
+    margin-bottom: .25rem
+}
+
+table#production_jobs_table div.notes-info{
+    border-color: #5bc0de;
+}
+
+table#production_jobs_table div.notes-info h5{
+    color:#5bc0de;
+}
+
+table#production_jobs_table div.notes-warning{
+    border-color: #f0ad4e;
+}
+
+table#production_jobs_table div.notes-warning h5{
+    color:#f0ad4e;
+}
 
     /*only for bigger sizes*/
     @media screen and (min-width: 768px){
@@ -738,7 +769,7 @@ highlighting sections
 }
 
 /********
-bootsrap adjustments
+bootstrap adjustments
 ********/
     /** Breadcrumbs **/
     .breadcrumb-item + .breadcrumb-item::before{
@@ -830,7 +861,7 @@ bootsrap adjustments
     .show > .btn-outline-fsglight.dropdown-toggle:focus {
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
     }
-
+    /** Extra Big Container **/
     .container-xxl{
         width: 100%;
         padding-right: 15px;
@@ -844,6 +875,56 @@ bootsrap adjustments
         .container-xxl{
             max-width:1440px;
         }
+    }
+    /** Callouts **/
+    .bd-callout {
+        padding: 1.25rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
+        border: 1px solid #eee;
+        border-left-width: .25rem;
+        border-radius: .25rem
+    }
+
+    .bd-callout h4 {
+        margin-top: 0;
+        margin-bottom: .25rem
+    }
+
+    .bd-callout p:last-child {
+        margin-bottom: 0
+    }
+
+    .bd-callout code {
+        border-radius: .25rem
+    }
+
+    .bd-callout+.bd-callout {
+        margin-top: -.25rem
+    }
+
+    .bd-callout-info {
+        border-left-color: #5bc0de
+    }
+
+    .bd-callout-info h4 {
+        color: #5bc0de
+    }
+
+    .bd-callout-warning {
+        border-left-color: #f0ad4e
+    }
+
+    .bd-callout-warning h4 {
+        color: #f0ad4e
+    }
+
+    .bd-callout-danger {
+        border-left-color: #d9534f
+    }
+
+    .bd-callout-danger h4 {
+        color: #d9534f
     }
 
 /********

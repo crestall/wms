@@ -8,6 +8,10 @@
  
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
+
+use Automattic\WooCommerce\Client;
+use Automattic\WooCommerce\HttpClient\HttpClientException;
+
  class OrderFulfiller{
 
      protected $controller;
@@ -151,15 +155,62 @@
 
                 if( !empty($od['tracking_email']) )
                 {
-                    if(SITE_LIVE && $od['client_id'] != 87) //only send emails if we are live and not testing  and don't send for PBA
+                    if(SITE_LIVE) //only send emails if we are live and not testing
                     {
+                        if($od['client_id'] == 87)
+                        {
+                            //PBA
+                            if($od['is_woocommerce'] == 1)
+                            {
+                                $this->output .= "Sending DF Tracking info to woo-commerce".PHP_EOL;
+                                $woocommerce_id = $od['client_order_id'];
+                                $tracking = array(
+                                    "tracking_number"           => $od['consignment_id'],
+                                    "custom_tracking_provider"  => "Direct Freight Express",
+                                    "custom_tracking_link"      => "https:://directfreight.com.au"
+                                );
+                                if(
+                                    Curl::sendSecurePOSTRequest(
+                                        'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/'.$woocommerce_id.'/shipment-trackings',
+                                        $tracking,
+                                        Config::get('PBAWOOCONSUMERRKEY'),
+                                        Config::get('PBAWOOCONSUMERSECRET')
+                                    )
+                                )
+                                {
+                                    //tracking updated, close the order in woo-commerce
+                                    $this->output .= "Trying to complete order in woo-commerce".PHP_EOL;
+                                    $woo = new Client(
+                                        'https://golfperformancestore.com.au',
+                                        Config::get('PBAWOOCONSUMERRKEY'),
+                                        Config::get('PBAWOOCONSUMERSECRET'),
+                                        [
+                                            'wp_api' => true,
+                                            'version' => 'wc/v3',
+                                            'query_string_auth' => true
+                                        ]
+                                    );
+                                    try{
+                                        $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
+                                    }
+                                    catch (HttpClientException $e) {
+                                        $output =  $e->getMessage() .PHP_EOL;
+                                        //$output .=  $e->getRequest() .PHP_EOL;
+                                        $output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                                        die($output);
+                                    }
+                                }
+                            }
+                        }
                         if($od['client_id'] == 59)
                         {
+                            //NOA
                             $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
                             Email::sendNoaConfirmEmail($od['id']);
                         }
                         elseif($od['client_id'] == 82)
                         {
+                            //OnePlate
                             $this->output .= "Sending One Plate confirmation".PHP_EOL;
                             Email::sendOnePlateTrackingEmail($od['id']);
                         }
@@ -282,9 +333,53 @@
                     $od = $this->controller->order->getOrderDetail($id);
                     if( !empty($od['tracking_email']) )
                     {
-                        if(SITE_LIVE && $od['client_id'] != 87) //only send emails if we are live and not testing  and don't send for PBA
+                        if(SITE_LIVE) //only send emails if we are live and not testing
                         {
-                             if($od['client_id'] == 82)
+                            if($od['client_id'] == 87)
+                            {
+                                //PBA
+                                if($od['is_woocommerce'] == 1)
+                                {
+                                    $this->output .= "Sending Eparcel Tracking info to woo-commerce".PHP_EOL;
+                                    $woocommerce_id = $od['client_order_id'];
+                                    $tracking = array(
+                                        "tracking_number"   => $od['consignment_id'],
+                                        "tracking_provider" => "Australia Post"
+                                    );
+                                    if(
+                                        Curl::sendSecurePOSTRequest(
+                                            'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/'.$woocommerce_id.'/shipment-trackings',
+                                            $tracking,
+                                            Config::get('PBAWOOCONSUMERRKEY'),
+                                            Config::get('PBAWOOCONSUMERSECRET')
+                                        )
+                                    )
+                                    {
+                                        //tracking updated, close the order in woo-commerce
+                                        $this->output .= "Trying to complete order in woo-commerce".PHP_EOL;
+                                        $woo = new Client(
+                                            'https://golfperformancestore.com.au',
+                                            Config::get('PBAWOOCONSUMERRKEY'),
+                                            Config::get('PBAWOOCONSUMERSECRET'),
+                                            [
+                                                'wp_api' => true,
+                                                'version' => 'wc/v3',
+                                                'query_string_auth' => true
+                                            ]
+                                        );
+                                        try{
+                                            $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
+                                        }
+                                        catch (HttpClientException $e) {
+                                            $output =  $e->getMessage() .PHP_EOL;
+                                            //$output .=  $e->getRequest() .PHP_EOL;
+                                            $output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                                            die($output);
+                                        }
+                                    }
+                                }
+                            }
+                            if($od['client_id'] == 82)
                             {
                                 $this->output .= "Sending One Plate confirmation".PHP_EOL;
                                 Email::sendOnePlateTrackingEmail($od['id']);
