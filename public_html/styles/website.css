@@ -266,13 +266,13 @@ table#production_jobs_table div.notes:hover h6{
 
 table#production_jobs_table div.notes-warning:hover{
     color:#fff;
-    background-color: #5bc0de;
+    background-color: #f0ad4e;
     border-color: #eb9114;
 }
 
 table#production_jobs_table div.notes-info:hover{
     color:#fff;
-    background-color: #f0ad4e;
+    background-color: #5bc0de;
     border-color: #2bacd4;
 }
 
