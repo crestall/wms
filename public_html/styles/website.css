@@ -230,9 +230,7 @@ table#client_orders_table div.item_list span.ilocation{
 View Jobs
 *****/
 table#production_jobs_table div.notes{
-    padding: 1.25rem;
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
+    padding: 0.5rem;
     border: 1px solid #eee;
     border-radius: .25rem
 }
@@ -244,6 +242,7 @@ table#production_jobs_table div.notes h6{
 
 table#production_jobs_table div.notes-info{
     border-color: #5bc0de;
+    margin-bottom: 1rem;
 }
 
 table#production_jobs_table div.notes-info h6{
