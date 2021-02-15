@@ -59,7 +59,7 @@ class Curl{
         curl_setopt_array($ch, self::$curl_options);
         curl_setopt($ch, CURLOPT_STDERR, $verbose);
         $response = curl_exec($ch);
-        if ($result === FALSE) {
+        if ($response === FALSE) {
             printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
                    htmlspecialchars(curl_error($ch)));
             rewind($verbose);
