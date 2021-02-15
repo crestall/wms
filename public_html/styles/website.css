@@ -267,7 +267,7 @@ table#production_jobs_table div.notes:hover h6{
 table#production_jobs_table div.notes-warning:hover{
     color:#fff;
     background-color: #f0ad4e;
-    border-color: #f9deb9;
+    border-color: #eb9114;
 }
 
     /*only for bigger sizes*/
