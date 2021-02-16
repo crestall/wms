@@ -132,7 +132,7 @@ class pdfController extends Controller
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $job_ids_string  = implode(",",$this->request->data['orderids']);
-        $jobs = $this->productionjob->getJobsForPDF($job_ids_string);die() ;
+        $jobs = $this->productionjob->getJobsForPDF($job_ids_string);
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/printjobstable.php', [
             'jobs'    => $jobs
         ]);
