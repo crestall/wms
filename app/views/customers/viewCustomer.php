@@ -81,30 +81,30 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
                                 <div class="card-body">
                                     <div class="row">
                                         <label class="col-5">Name</label>
-                                        <div class="col-7"><?php echo $customer['name'];?></div>
+                                        <div class="col-7"><?php echo $contact['name'];?></div>
                                     </div>
-                                    <?php if(!empty($customer['role'])):?>
+                                    <?php if(!empty($contact['role'])):?>
                                         <div class="row">
                                             <label class="col-5">Role</label>
-                                            <div class="col-7"><?php echo $customer['role'];?></div>
+                                            <div class="col-7"><?php echo $contact['role'];?></div>
                                         </div>
                                     <?php endif;?>
-                                    <?php if(!empty($customer['phone'])):?>
+                                    <?php if(!empty($contact['phone'])):?>
                                         <div class="row">
                                             <label class="col-5">Phone</label>
-                                            <div class="col-7"><?php echo $customer['phone'];?></div>
+                                            <div class="col-7"><?php echo $contact['phone'];?></div>
                                         </div>
                                     <?php endif;?>
-                                    <?php if(!empty($customer['email'])):?>
+                                    <?php if(!empty($contact['email'])):?>
                                         <div class="row">
                                             <label class="col-5">Email</label>
-                                            <div class="col-7"><?php echo $customer['email'];?></div>
+                                            <div class="col-7"><?php echo $contact['email'];?></div>
                                         </div>
                                     <?php endif;?>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach;?>
+                    <?php ++$cc; endforeach;?>
                 </div>
         <?php endif;?>
     </div>
