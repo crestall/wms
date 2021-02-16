@@ -136,7 +136,7 @@ class pdfController extends Controller
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/printjobstable.php', [
             'jobs'    => $jobs
         ]);
-        $stylesheet = file_get_contents(STYLES."pickslip.css");
+        $stylesheet = file_get_contents(STYLES."jobstable.css");
         $pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
         $pdf->Output();
