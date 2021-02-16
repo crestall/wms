@@ -106,6 +106,12 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
                         </div>
                     <?php ++$cc; endforeach;?>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col text-right">
+                    <button class="btn btn-outline-fsg" id="print">Print These Details</button>
+                </div>
+            </div>
         <?php endif;?>
     </div>
 </div>
