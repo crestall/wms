@@ -30,7 +30,7 @@
                     </div>
                 <?php endif;?>
                 <div class="col-12">
-                    <table id="finisher_list_table" class="table-striped table-hover" style="width:90%">
+                    <table id="finisher_list_table" class="table-striped table-hover" style="width:100%">
                         <thead>
                         	<tr>
                                 <th></th>
