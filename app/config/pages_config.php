@@ -190,6 +190,10 @@ $prod = array(
         'view-finishers'    => array(
             'display'   => true,
             'icon'      => $fontastic_icons['finishers']['view-finishers']
+        ),
+        'view-finisher'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'fsg-contacts'    => array(
