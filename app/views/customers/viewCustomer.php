@@ -1,8 +1,8 @@
 <?php
 $contact_array = array();
-if(!empty($contacts))
+if(!empty($customer['contacts']))
 {
-    $ca = explode("|", $contacts);
+    $ca = explode("|", $customer['contacts']);
     foreach($ca as $c)
     {
         list($a['contact_id'], $a['name'],$a['email'],$a['phone'],$a['role']) = explode(',', $c);
