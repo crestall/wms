@@ -49,7 +49,11 @@
                 },
                 'view-customer':{
                     init: function(){
-
+                        $('button#print').click(function(e){
+                        	$("div#print_this").printArea({
+                                    //put some options in
+                            });;
+                        });
                     }
                 },
                 'edit-customer':{
