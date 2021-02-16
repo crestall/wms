@@ -114,7 +114,7 @@ class pdfController extends Controller
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $order_ids  = $this->request->data['items'];
-        $orders = $this->productionjob->getJobsForPDF($order_ids);die();
+        ;
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/pickslip.php', [
             'orders_ids'    =>  $order_ids
         ]);
@@ -132,9 +132,9 @@ class pdfController extends Controller
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $order_ids_string  = implode(",",$this->request->data['orderids']);
-
+        $orders = $this->productionjob->getJobsForPDF($order_ids_string);die()
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/pickslip.php', [
-            'orders_ids'    =>  $order_ids
+            
         ]);
     }
 
