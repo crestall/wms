@@ -101,6 +101,17 @@ class Productionjob extends Model{
         return $db->queryData($q);
     }
 
+    public function getJobsForPDF($ids)
+    {
+        $db = Database::openConnection();
+        $q = $this->getJobQuery();
+        $q .= "
+            WHERE pj.id IN($ids)
+            ORDER BY pj.created_date DESC
+        ";
+        return $db->queryData($q);
+    }
+
     public function getJobsForDisplay($args)
     {
         $db = Database::openConnection();

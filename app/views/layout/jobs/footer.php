@@ -426,6 +426,41 @@
                                 form.submit();
                             });
                         });
+                        //create pdf of table
+                        $('button#create_pdf').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Jobs Selected",
+                                    text: "Please select at least one job to create the PDF",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                var ids = [];
+                                $('input.select').each(function(i,e){
+                                    if($(this).prop('checked') )
+                                    {
+                                        ids.push($(this).data('jobid'));
+                                    }
+                                });
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/pdf/printJobsTable");
+                                form.setAttribute("target", "printjobsformresult");
+                                $.each( ids, function( index, value ) {
+                                    var hiddenField = document.createElement("input");
+                                    hiddenField.setAttribute("type", "hidden");
+                                    hiddenField.setAttribute("name", "orderids[]");
+                                    hiddenField.setAttribute("value", value);
+                                    form.appendChild(hiddenField);
+                                });
+                                document.body.appendChild(form);
+                                window.open('','printjobsformresult');
+                                form.submit();
+                            }
+                        })
                         //update job priority
                         $('button#priority_change').click(function(e){
                             if(!$('input.select:checked').length)
