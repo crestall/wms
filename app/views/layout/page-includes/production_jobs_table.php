@@ -77,7 +77,7 @@
                             <?php echo $job['delivery_notes'];?>
                         </div>
                     <?php endif;?>
-                    <p><button data-jobid="<?php echo $job['id'];?>" class="btn btn-sm btn-block btn-outline-info delivery_docket">Create Delivery Docket</button></p>
+                    <p><a class="btn btn-sm btn-block btn-outline-info delivery_docket" href="/jobs/create-delivery-docket/job=<?php echo $job['id'];?>">Create Delivery Docket</a></p>
                 </td>
                 <td data-label="Status"
                 <?php if(!empty($job['status_colour'])):?>
