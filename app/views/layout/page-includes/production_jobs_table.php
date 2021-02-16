@@ -9,7 +9,7 @@
             <th class="no-sort">Job Number</th>
             <th class="no-sort">Client</th>
             <th class="no-sort">Description</th>
-            <th class="no-sort">Notes</th>
+            <th class="no-sort">Delivery</th>
             <?php if($can_change_status):?>
                 <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
             <?php else:?>
@@ -61,20 +61,23 @@
                         <?php endif;?>
                     </span>
                 </td>
-                <td data-label="Description"><?php echo $job['description'];?></td>
-                <td data-label="Notes">
+                <td data-label="Description">
+                    <?php echo $job['description'];?>
                     <?php if(!empty($job['notes'])):?>
                         <div class="notes notes-info">
                             <h6>Production Notes:</h6>
                             <?php echo $job['notes'];?>
                         </div>
                     <?php endif;?>
+                </td>
+                <td data-label="Delivery">
                     <?php if(!empty($job['delivery_notes'])):?>
                         <div class="notes notes-warning">
                             <h6>Delivery Notes:</h6>
                             <?php echo $job['delivery_notes'];?>
                         </div>
                     <?php endif;?>
+                    <p><button data-jobid="<?php echo $job['id'];?>" class="btn btn-sm btn-block btn-outline-info delivery_docket">Create Delivery Docket</button></p>
                 </td>
                 <td data-label="Status"
                 <?php if(!empty($job['status_colour'])):?>
