@@ -110,7 +110,7 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
             <div class="row">
                 <?php if($role == "production admin"):?>
                     <div class="col-6">
-                        <a class="btn btn-outline-secondary" href="/customers/edit-finisher/finisher=<?php echo $finisher['id'];?>" >Edit These Details</a>
+                        <a class="btn btn-outline-secondary" href="/finishers/edit-finisher/finisher=<?php echo $finisher['id'];?>" >Edit These Details</a>
                     </div>
                 <?php endif;?>
                 <div class="col text-right">
