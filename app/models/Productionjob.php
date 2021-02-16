@@ -109,7 +109,7 @@ class Productionjob extends Model{
             WHERE pj.id IN($ids)
             ORDER BY pj.created_date DESC
         ";
-        die($q);
+        return $db->queryData($q);
     }
 
     public function getJobsForDisplay($args)
