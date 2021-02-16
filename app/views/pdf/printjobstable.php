@@ -1,6 +1,7 @@
 <?php
 
 ?>
+<h1>Jobs List Generated on <?php echo date("d/m/Y");?></h1>
 <table width="100%">
     <thead>
         <tr>
