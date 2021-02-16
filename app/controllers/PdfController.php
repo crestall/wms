@@ -124,6 +124,11 @@ class pdfController extends Controller
         $pdf->Output();
     }
 
+    public function printJobsTable()
+    {
+        echo "<pre>",print_r($this->request),"</pre>";die();
+    }
+
     public function printInvoices()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
