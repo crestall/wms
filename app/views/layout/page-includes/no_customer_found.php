@@ -6,9 +6,9 @@
                     <i class="fad fa-exclamation-triangle fa-6x"></i>
                 </div>
                 <div class="col-8">
-                    <h2>No Customer Found</h2>
-                    <p>No customer was found with that ID</p>
-                    <p><a href="/customers/view-customers">Please click here to view all customers to choose from</a></p>
+                    <h2>No Finisher Found</h2>
+                    <p>No finisher was found with that ID</p>
+                    <p><a href="/finishers/view-finishers">Please click here to view all finishers to choose from</a></p>
                 </div>
             </div>
         </div>
