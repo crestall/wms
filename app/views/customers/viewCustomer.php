@@ -108,6 +108,11 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
                 </div>
             </div>
             <div class="row">
+                <?php if($role == "production admin"):?>
+                    <div class="col-6">
+                        <a class="btn btn-outline-secondary" href="/customers/edit-customer/customer=<?php echo $customer['id'];?>" >Edit These Details</a>
+                    </div>
+                <?php endif;?>
                 <div class="col text-right">
                     <button class="btn btn-outline-fsg" id="print">Print These Details</button>
                 </div>
