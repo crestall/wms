@@ -763,6 +763,11 @@
                         actions.common.jobsTable();
                         actions.common.selectAll();
                     }
+                },
+                'create-delivery-docket':{
+                    init: function(){
+
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);
