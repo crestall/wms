@@ -131,11 +131,15 @@ class pdfController extends Controller
 
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
-        $order_ids_string  = implode(",",$this->request->data['orderids']);
-        $orders = $this->productionjob->getJobsForPDF($order_ids_string);die() ;
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/pickslip.php', [
-
+        $job_ids_string  = implode(",",$this->request->data['orderids']);
+        $jobs = $this->productionjob->getJobsForPDF($job_ids_string);die() ;
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/printjobstable.php', [
+            'jobs'    => $jobs
         ]);
+        $stylesheet = file_get_contents(STYLES."pickslip.css");
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
     }
 
     public function printInvoices()
