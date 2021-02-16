@@ -18,12 +18,6 @@
             <tr>
                 <td>
                     <?php echo $job['job_id'];?>
-                    <?php if(!empty($job['previous_job_id'])):?>
-                        <p class="border-top border-secondary border-top-dashed pt-3">
-                            Previous Jobs<br>
-                            <?php echo $job['previous_job_id'];?>
-                        </p>
-                    <?php endif;?>
                 </td>
                 <td><?php echo $job['customer_name'];?></td>
                 <td><?php echo $job['description'];?></td>
