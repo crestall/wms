@@ -24,6 +24,11 @@ class JobsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function createDeliveryDocket()
+    {
+        
+    }
+
     public function addJob()
     {
         //render the page
