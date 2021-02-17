@@ -14,7 +14,7 @@ class pdfController extends Controller
         parent::beforeAction();
         $action = $this->request->param('action');
         $post_actions = array(
-
+            "createDeliveryDocket"
         );
         $this->Security->requirePost($post_actions);
         if(in_array($action, $post_actions))
@@ -25,6 +25,11 @@ class pdfController extends Controller
         {
            $this->Security->config("validateForm", false);
         }
+    }
+
+    public function createDeliveryDocket()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
     }
 
     public function printRunsheet()
