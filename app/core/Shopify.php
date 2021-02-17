@@ -36,8 +36,6 @@ class Shopify{
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
-        $scopes = 'read_products,write_products,read_script_tags,write_script_tags';
-        $accessToken = \PHPShopify\AuthHelper::createAuthRequest($scopes);
         $config = array(
             'ShopUrl'        => 'https://perfectpracticegolf.com.au/',
             'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
@@ -48,6 +46,9 @@ class Shopify{
         } catch (HttpClientException $e) {
                 echo "<pre>",print_r($e),"</pre>";die();
         }
+        $scopes = 'read_products,write_products,read_script_tags,write_script_tags';
+        $accessToken = \PHPShopify\AuthHelper::createAuthRequest($scopes);
+        echo "Access Token: ".$accessToken; die();
         //$this->shopify = new PHPShopify\ShopifySDK($config);
         $collected_orders = array();
         $params = array(
