@@ -42,15 +42,15 @@ class Shopify{
             'SharedSecret'   => Config::get('PBASHOPIFYSHAREDSECRET')
         );
         //echo "<pre>",print_r($config),"</pre>";die();
-        try {
-            $this->shopify = new PHPShopify\ShopifySDK($config);
-        } catch (HttpClientException $e) {
-                echo "<pre>",print_r($e),"</pre>";die();
-        }
+        PHPShopify\ShopifySDK($config);
         $scopes = 'read_products,write_products,read_script_tags,write_script_tags';
         $accessToken = \PHPShopify\AuthHelper::createAuthRequest($scopes);
-        echo "Access Token: ".$accessToken; die();
-        //$this->shopify = new PHPShopify\ShopifySDK($config);
+        $new_config = array(
+            'ShopUrl'       => 'https://perfectpracticegolf.com.au/',
+            'AccessToken'   => $accessToken
+        );
+        //echo "Access Token: ".$accessToken; die();
+        $this->shopify = new PHPShopify\ShopifySDK($new_config);
         $collected_orders = array();
         $params = array(
             'status'    => 'open'
