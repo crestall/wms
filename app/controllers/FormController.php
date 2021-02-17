@@ -7115,7 +7115,7 @@ class FormController extends Controller {
     /*******************************************************************
     ** validates addresses
     ********************************************************************/
-    private function validateAddress($address, $suburb, $state, $postcode, $country, $ignore_address_error, $prefix = "", $session_var = false)
+    public function validateAddress($address, $suburb, $state, $postcode, $country, $ignore_address_error, $prefix = "", $session_var = false)
     {
         if( !$this->dataSubbed($address) )
         {
@@ -7205,7 +7205,7 @@ class FormController extends Controller {
     /*******************************************************************
     ** validates empty data fields
     ********************************************************************/
-	protected function dataSubbed($data)
+	public function dataSubbed($data)
 	{
 		if(!$data || strlen($data = trim($data)) == 0)
 		{
@@ -7220,7 +7220,7 @@ class FormController extends Controller {
     /*******************************************************************
    ** validates email addresses
    ********************************************************************/
-	private function emailValid($email)
+	public function emailValid($email)
 	{
 		if(!$email || strlen($email = trim($email)) == 0)
 		{
