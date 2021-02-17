@@ -37,7 +37,7 @@ class Shopify{
         $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $config = array(
-            'ShopUrl'   => 'https://rukket.myshopify.com/',
+            'ShopUrl'   => 'https://perfectpracticegolf.com.au/',
             'ApiKey'    => Config::get('PBASHOPIFYAPIKEY'),
             'Password'  => Config::get('PBASHOPIFYAPIPASS')
         );
@@ -65,8 +65,8 @@ class Shopify{
             }
         }
 
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
-        foreach($collected_orders as $order)
+        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        /*foreach($collected_orders as $order)
         {
             echo "<p>--------------------------------------------------</p>";
             echo "PRE THE ORDER<pre>",print_r($order),"</pre>";
