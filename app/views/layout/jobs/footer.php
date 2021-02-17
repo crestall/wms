@@ -767,10 +767,10 @@
                 'create-delivery-docket':{
                     init: function(){
                         $("input#per_box").keyup(function(e){
-                            actions['create-delivery-docket']['box-count-calcs'];
+                            actions['create-delivery-docket']['box-count-calcs']();
                         });
                         $("input#quantity").keyup(function(e){
-                            actions['create-delivery-docket']['box-count-calcs'];
+                            actions['create-delivery-docket']['box-count-calcs']();
                         });
                     },
                     'box-count-calcs': function(){
