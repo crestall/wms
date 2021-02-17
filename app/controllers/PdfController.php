@@ -49,6 +49,17 @@ class pdfController extends Controller
         }
         //echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
         FormValidator::validateAddress($address, $suburb, $state, $postcode, 'AU', isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            return $this->redirector->to(PUBLIC_ROOT."jobs/create-delivery-docket/job=$job_id");
+        }
+        else
+        {
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+
+        }
         echo "<pre>",print_r(Form::getErrorArray()),"</pre>";
     }
 
