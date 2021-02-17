@@ -47,7 +47,8 @@ class pdfController extends Controller
                 }
             }
         }
-        echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
+        //echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
+        FormValidator::validateAddress($address, $suburb, $state, $postcode, 'AU', isset($ignore_address_error));
     }
 
     public function printRunsheet()
