@@ -766,7 +766,7 @@
                 },
                 'create-delivery-docket':{
                     init: function(){
-                        $("input#per_box").mouseup(function(e){
+                        $("input#per_box").keyup(function(e){
                             var pb = parseInt($(this).val()) || 0;
                             var q = parseInt($('#quantity').val()) || 0;
                             console.log("pb: "+pb);
