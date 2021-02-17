@@ -1,5 +1,5 @@
 <?php
-$ship_to = (empty(Form::value('ship_to')))? $job['ship_to'];
+$ship_to = (empty(Form::value('ship_to')))? $job['ship_to']:Form::value('ship_to');
 $attention = Form::value('attention');
 $address = Form::value('address');
 $address2 = Form::value('address2');
