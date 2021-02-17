@@ -82,7 +82,7 @@ $job_title = empty(Form::value('job_title'))? $job['description'] : Form::value(
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
-                <div class="col-md-4 offset-md-4">
+                <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-outline-secondary" id="submitter">Create Docket</button>
                 </div>
             </div>
