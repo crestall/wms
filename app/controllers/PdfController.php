@@ -29,7 +29,7 @@ class pdfController extends Controller
 
     public function createDeliveryDocket()
     {
-        echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -57,10 +57,10 @@ class pdfController extends Controller
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            //gonna make the pdf
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
 
         }
-        echo "<pre>",print_r(Form::getErrorArray()),"</pre>";
     }
 
     public function printRunsheet()
