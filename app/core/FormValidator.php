@@ -19,7 +19,7 @@ class FormValidator{
     ********************************************************************/
     public static function validateAddress($address, $suburb, $state, $postcode, $country, $ignore_address_error, $prefix = "", $session_var = false)
     {
-        if( !$this->dataSubbed($address) )
+        if( !self::dataSubbed($address) )
         {
             if($session_var)
             {
@@ -38,7 +38,7 @@ class FormValidator{
                 Form::setError($prefix.'address', 'The address must include both letters and numbers');
             }
         }
-        if(!$this->dataSubbed($postcode))
+        if(!self::dataSubbed($postcode))
         {
             if($session_var)
             {
@@ -46,7 +46,7 @@ class FormValidator{
             }
             Form::setError($prefix.'postcode', "A delivery postcode is required");
         }
-        if(!$this->dataSubbed($country))
+        if(!self::dataSubbed($country))
         {
             if($session_var)
             {
@@ -64,7 +64,7 @@ class FormValidator{
         }
         elseif($country == "AU")
         {
-            if(!$this->dataSubbed($suburb))
+            if(!self::->dataSubbed($suburb))
     		{
     		    if($session_var)
                 {
@@ -72,7 +72,7 @@ class FormValidator{
                 }
     			Form::setError($prefix.'suburb', "A delivery suburb is required for Australian addresses");
     		}
-    		if(!$this->dataSubbed($state))
+    		if(!self::->dataSubbed($state))
     		{
     		    if($session_var)
                 {
