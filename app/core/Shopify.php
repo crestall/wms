@@ -39,9 +39,9 @@ class Shopify{
         $config = array(
             'ShopUrl'        => 'https://perfectpracticegolf.com.au/',
             'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
-            'ShardedSecret'  => Config::get('PBASHOPIFYSHAREDSECRET')
+            'SharedSecret'   => Config::get('PBASHOPIFYSHAREDSECRET')
         );
-        echo "<pre>",print_r($config),"</pre>";die();
+        //echo "<pre>",print_r($config),"</pre>";die();
         try {
             $this->shopify = new PHPShopify\ShopifySDK($config);
         } catch (HttpClientException $e) {
