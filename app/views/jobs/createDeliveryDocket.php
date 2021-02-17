@@ -8,12 +8,13 @@ $postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::val
 $country    = empty(Form::value('country'))?    $job['country']      : Form::value('country');
 $delivery_instructions = empty(Form::value('delivery_instructions'))? $job['delivery_instructions'] : Form::value('delivery_instructions');
 $attention = empty(Form::value('attention'))? $job['attention'] : Form::value('attention');
+$job_title = empty(Form::value('job_title'))? $job['decription'] : Form::value('job_title');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <?php echo "<pre>",print_r($job),"</pre>";?>
+        <?php //echo "<pre>",print_r($job),"</pre>";?>
         <form id="create_delivery_docket" method="post" action="/pdf/createDeliveryDocket">
             <div class="form-group row">
                 <label class="col-md-3">Send As</label>
@@ -42,6 +43,18 @@ $attention = empty(Form::value('attention'))? $job['attention'] : Form::value('a
                 </div>
             </div>
             <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
+            <div class="form-group row">
+                <label class="col-md-3">Purchase Order Number</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="po_number" id="po_number" value="<?php echo Form::value('po_number');?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Job Title</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="job_title" id="job_title" value="<?php echo $job_title;?>" />
+                </div>
+            </div>
         </form>
     </div>
 </div>
