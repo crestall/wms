@@ -55,6 +55,24 @@ $job_title = empty(Form::value('job_title'))? $job['description'] : Form::value(
                     <input type="text" class="form-control" name="job_title" id="job_title" value="<?php echo $job_title;?>" />
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-md-3">Quantity</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control number" name="quantity" id="quantity" value="<?php echo Form::value('quantity');?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Quantity Per Box</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control number" name="per_box" id="per_box" value="<?php echo Form::value('per_box');?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Box Count</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control number" readonly name="box_count" id="box_count" value="<?php echo Form::value('box_count');?>" />
+                </div>
+            </div>
         </form>
     </div>
 </div>
