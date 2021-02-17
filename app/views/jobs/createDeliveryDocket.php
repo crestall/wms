@@ -15,7 +15,7 @@ $job_title = empty(Form::value('job_title'))? $job['description'] : Form::value(
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //echo "<pre>",print_r($job),"</pre>";?>
-        <form id="create_delivery_docket" method="post" action="/pdf/createDeliveryDocket">
+        <form id="create_delivery_docket" target="_blank" method="post" action="/pdf/createDeliveryDocket">
             <div class="form-group row">
                 <label class="col-md-3">Send As</label>
                 <div class="col-md-4">
@@ -78,6 +78,12 @@ $job_title = empty(Form::value('job_title'))? $job['description'] : Form::value(
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="packed_as" id="packed_as" value="<?php echo Form::value('packed_as');?>" />
                     <span class="inst">(eg cartons, pallets, skids, etc)</span>
+                </div>
+            </div>
+            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+            <div class="form-group row">
+                <div class="col-md-4 offset-md-4">
+                    <button type="submit" class="btn btn-outline-secondary" id="submitter">Create Docket</button>
                 </div>
             </div>
         </form>
