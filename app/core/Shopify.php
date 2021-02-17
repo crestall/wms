@@ -36,10 +36,12 @@ class Shopify{
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
+        $scopes = 'read_products,write_products,read_script_tags,write_script_tags';
+        $accessToken = \PHPShopify\AuthHelper::createAuthRequest($scopes);
         $config = array(
-            'ShopUrl'   => 'https://perfectpracticegolf.com.au/',
-            'ApiKey'    => Config::get('PBASHOPIFYAPIKEY'),
-            'Password'  => Config::get('PBASHOPIFYAPIPASS')
+            'ShopUrl'        => 'https://perfectpracticegolf.com.au/',
+            'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
+            'ShardedSecret'  => Config::get('PBASHOPIFYSHAREDSECRET')
         );
         $this->shopify = new PHPShopify\ShopifySDK($config);
         $collected_orders = array();
