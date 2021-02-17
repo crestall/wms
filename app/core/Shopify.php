@@ -41,6 +41,7 @@ class Shopify{
             'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
             'ShardedSecret'  => Config::get('PBASHOPIFYSHAREDSECRET')
         );
+        echo "<pre>",print_r($config),"</pre>";die();
         try {
             $this->shopify = new PHPShopify\ShopifySDK($config);
         } catch (HttpClientException $e) {
