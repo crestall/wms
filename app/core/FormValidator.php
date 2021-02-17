@@ -72,7 +72,7 @@ class FormValidator{
                 }
     			Form::setError($prefix.'suburb', "A delivery suburb is required for Australian addresses");
     		}
-    		if(!self:>dataSubbed($state))
+    		if(!self::dataSubbed($state))
     		{
     		    if($session_var)
                 {
