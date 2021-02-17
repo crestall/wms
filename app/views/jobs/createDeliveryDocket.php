@@ -8,7 +8,7 @@ $postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::val
 $country    = empty(Form::value('country'))?    $job['country']      : Form::value('country');
 $delivery_instructions = empty(Form::value('delivery_instructions'))? $job['delivery_instructions'] : Form::value('delivery_instructions');
 $attention = empty(Form::value('attention'))? $job['attention'] : Form::value('attention');
-$job_title = empty(Form::value('job_title'))? $job['decription'] : Form::value('job_title');
+$job_title = empty(Form::value('job_title'))? $job['description'] : Form::value('job_title');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
