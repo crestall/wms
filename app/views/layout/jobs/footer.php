@@ -769,9 +769,12 @@
                         $("input#per_box").mouseup(function(e){
                             var pb = parseInt($(this).val()) || 0;
                             var q = parseInt($('#quantity').val()) || 0;
+                            console.log("pb: "+pb);
+                            console.log("q: "+q);
                             if(pb > 0)
                             {
                                 var bc = Math.ceil(q/bc);
+                                console.log("bc: "+bc);
                                 $("#box_count").val(bc);
                             }
                             else
