@@ -11,7 +11,7 @@ class FormValidator{
     /* Class constructor */
     public function __construct(Controller $controller)
     {
-        self::$controller = $controller
+        self::$controller = $controller;
     }
 
     /*******************************************************************
