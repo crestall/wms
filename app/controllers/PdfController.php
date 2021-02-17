@@ -49,6 +49,10 @@ class pdfController extends Controller
         }
         //echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
         FormValidator::validateAddress($address, $suburb, $state, $postcode, 'AU', isset($ignore_address_error));
+        if(!FormValidator::dataSubbed($ship_to))
+        {
+            Form::setError('ship_to', "A Deliver To Name is required");
+        }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);

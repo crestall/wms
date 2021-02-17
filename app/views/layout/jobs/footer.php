@@ -766,7 +766,20 @@
                 },
                 'create-delivery-docket':{
                     init: function(){
-
+                        $("input#per_box").mouseup(function(e){
+                            var pb = parseInt($(this).val()) || 0;
+                            console.log pb;
+                            var q = parseInt($('#quantity').val()) || 0;
+                            if(pb > 0)
+                            {
+                                var bc = Math.ceil(q/bc);
+                                $("#box_count").val(bc);
+                            }
+                            else
+                            {
+                                $("#box_count").val('');
+                            }
+                        });
                     }
                 }
             }
