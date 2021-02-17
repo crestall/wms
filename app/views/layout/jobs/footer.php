@@ -768,7 +768,6 @@
                     init: function(){
                         $("input#per_box").mouseup(function(e){
                             var pb = parseInt($(this).val()) || 0;
-                            console.log pb;
                             var q = parseInt($('#quantity').val()) || 0;
                             if(pb > 0)
                             {
