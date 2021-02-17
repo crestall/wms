@@ -43,7 +43,12 @@ class Shopify{
             'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
             'ShardedSecret'  => Config::get('PBASHOPIFYSHAREDSECRET')
         );
-        $this->shopify = new PHPShopify\ShopifySDK($config);
+        try {
+            $this->shopify = new PHPShopify\ShopifySDK($config);
+        } catch (HttpClientException $e) {
+                echo "<pre>",print_r($e),"</pre>";die();
+        }
+        //$this->shopify = new PHPShopify\ShopifySDK($config);
         $collected_orders = array();
         $params = array(
             'status'    => 'open'
