@@ -773,7 +773,7 @@
                             console.log("q: "+q);
                             if(pb > 0)
                             {
-                                var bc = Math.ceil(q/bc);
+                                var bc = Math.ceil(q/pb);
                                 console.log("bc: "+bc);
                                 $("#box_count").val(bc);
                             }
