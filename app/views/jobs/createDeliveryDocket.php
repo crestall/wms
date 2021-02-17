@@ -1,12 +1,13 @@
 <?php
-$ship_to = (empty(Form::value('ship_to')))? $job['ship_to']:Form::value('ship_to');
-$attention = Form::value('attention');
-$address = Form::value('address');
-$address2 = Form::value('address2');
-$suburb = Form::value('suburb');
-$state = Form::value('state');
-$postcode = Form::value('postcode');
-$country = (empty(Form::value('country')))? "AU" : Form::value('country');
+$ship_to    = (empty(Form::value('ship_to')))?  $job['ship_to']      : Form::value('ship_to');
+$address    = empty(Form::value('address'))?    $job['address']      : Form::value('address');
+$address2   = empty(Form::value('address2'))?   $job['address_2']    : Form::value('address2');
+$suburb     = empty(Form::value('suburb'))?     $job['suburb']       : Form::value('suburb');
+$state      = empty(Form::value('state'))?      $job['state']        : Form::value('state');
+$postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::value('postcode');
+$country    = empty(Form::value('country'))?    $job['country']      : Form::value('country');
+$delivery_instructions = empty(Form::value('delivery_instructions'))? $job['delivery_instructions'] : Form::value('delivery_instructions');
+$attention = empty(Form::value('attention'))? $job['attention'] : Form::value('attention');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
