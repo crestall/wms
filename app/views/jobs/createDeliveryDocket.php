@@ -74,9 +74,9 @@ $job_title = empty(Form::value('job_title'))? $job['description'] : Form::value(
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3">Supplied As</label>
+                <label class="col-md-3">Packed As</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="supplied_as" id="supplied_as" value="<?php echo Form::value('supplied_as');?>" />
+                    <input type="text" class="form-control" name="packed_as" id="packed_as" value="<?php echo Form::value('packed_as');?>" />
                     <span class="inst">(eg cartons, pallets, skids, etc)</span>
                 </div>
             </div>
