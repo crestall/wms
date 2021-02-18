@@ -103,7 +103,7 @@ class Shopify{
         if($orders = $this->procPBAOrders($collected_orders))
         {
             //echo "<pre>",print_r($this->teamtimbuktuoitems),"</pre>";die();
-            $this->addTeamTibuktuOrders($orders);
+            $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/tt_aust', $this->output); //die();
         //if (php_sapi_name() !='cli')
@@ -111,17 +111,17 @@ class Shopify{
         {
             return $this->return_array;
         }
-
+        echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
-    private function addTeamTibuktuOrders($orders)
+    private function addPBAOrders($orders)
     {
         foreach($orders as $o)
         {
             //check for errors first
             $item_error = false;
             $error_string = "";
-            foreach($this->teamtimbuktuoitems[$o['client_order_id']] as $item)
+            foreach($this->pbaoitems[$o['client_order_id']] as $item)
             {
                 if($item['item_error'])
                 {
@@ -180,15 +180,17 @@ class Shopify{
                 'suburb'                => $o['suburb'],
                 'postcode'              => $o['postcode'],
                 'country'               => $o['country'],
-                'contact_phone'         => $o['contact_phone']
+                'contact_phone'         => $o['contact_phone'],
+                'is_shopify'            => 1,
+                'shopify_id'            => $o['shopify_id']
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
-            $itp = array($this->teamtimbuktuoitems[$o['client_order_id']]);
+            $itp = array($this->pbaoitems[$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
-            $this->output .= print_r($this->teamtimbuktuoitems[$o['client_order_id']], true).PHP_EOL;
+            $this->output .= print_r($this->pbaoitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
         }
     }
@@ -197,7 +199,7 @@ class Shopify{
     private function procPBAOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
-        //echo "<pre>",print_r($collected_orders),"</pre>";//die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
         //echo $_SERVER['HTTP_USER_AGENT'];
         $orders = array();
         if(count($collected_orders))
@@ -215,7 +217,7 @@ class Shopify{
                     'error_string'          => '',
                     'items'                 => array(),
                     'ref2'                  => '',
-                    'client_order_id'       => $o['order_id'],
+                    'client_order_id'       => $o['order_number'],
                     'errors'                => 0,
                     'tracking_email'        => $o['email'],
                     'ship_to'               => $o['shipping_address']['first_name']." ".$o['shipping_address']['last_name'],
@@ -363,9 +365,9 @@ class Shopify{
                     $orders[] = $order;
                 }
             }//endforeach order
-            echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
+            //echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
             $this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
-            echo "ORDERS ITEMS<pre>",$this->pbaotitems,"</pre>";die();
+            //echo "ORDERS ITEMS<pre>",print_r($this->pbaoitems),"</pre>";die();
             return $orders;
         }//end if count orders
         else
