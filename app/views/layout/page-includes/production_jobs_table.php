@@ -80,10 +80,16 @@
                     <p><a class="btn btn-sm btn-block btn-outline-info delivery_docket" href="/jobs/create-delivery-docket/job=<?php echo $job['id'];?>">Create Delivery Docket</a></p>
                 </td>
                 <td data-label="Status"
-                <?php if(!empty($job['status_colour'])):?>
-                    style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
-                <?php endif;?>
-                ><select class="selectpicker status" <?php if(!$can_change_status) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select></td>
+                    <?php if(!empty($job['status_colour'])):?>
+                        style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
+                    <?php endif;?>
+                    ><select class="selectpicker status" <?php if(!$can_change_status) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select>
+                    <?php if($job['status_change_time'] > 0)
+                    {
+                        echo "<p>Status Changed: ".date("d/m/Y", $job['status_change_time'])."</p>";
+                    }
+                    ?>
+                </td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
                 <td data-label="Finisher(s)">
                     <?php for($f = 1; $f <= 3; $f++):
