@@ -41,15 +41,6 @@ class Shopify{
             'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
             'Password'       => Config::get('PBASHOPIFYAPIPASS')
         );
-        //echo "<pre>",print_r($config),"</pre>";die();
-        //$ashopify = new PHPShopify\ShopifySDK($config);
-        //$scopes = 'read_products,write_products,read_script_tags,write_script_tags';
-        //$accessToken = \PHPShopify\AuthHelper::createAuthRequest($scopes);
-        //$new_config = array(
-            //'ShopUrl'       => 'https://perfectpracticegolf.com.au/',
-            //'AccessToken'   => $accessToken
-        //);
-        //echo "Access Token: ".$accessToken; die();
         try{
             $this->shopify = new PHPShopify\ShopifySDK($config);
         } catch(Exception $e){
@@ -79,7 +70,7 @@ class Shopify{
             }
         }
 
-        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
         /*foreach($collected_orders as $order)
         {
             echo "<p>--------------------------------------------------</p>";
@@ -108,8 +99,8 @@ class Shopify{
             echo "<p>--------------------------------------------------</p>";
             die();
         }
-        /*
-        if($orders = $this->procTeamTimbuktuOrders($collected_orders))
+        /* */
+        if($orders = $this->procPBAOrders($collected_orders))
         {
             //echo "<pre>",print_r($this->teamtimbuktuoitems),"</pre>";die();
             $this->addTeamTibuktuOrders($orders);
@@ -120,7 +111,7 @@ class Shopify{
         {
             return $this->return_array;
         }
-        */
+
     }
 
     private function addTeamTibuktuOrders($orders)
@@ -203,7 +194,7 @@ class Shopify{
     }
 
 
-    private function procTeamTimbuktuOrders($collected_orders)
+    private function procPBAOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
         //echo "<pre>",print_r($collected_orders),"</pre>";//die();
@@ -224,7 +215,7 @@ class Shopify{
                     'error_string'          => '',
                     'items'                 => array(),
                     'ref2'                  => '',
-                    'client_order_id'       => $o['order_number'],
+                    'client_order_id'       => $o['id'],
                     'errors'                => 0,
                     'tracking_email'        => $o['email'],
                     'ship_to'               => $o['shipping_address']['first_name']." ".$o['shipping_address']['last_name'],
@@ -295,7 +286,7 @@ class Shopify{
                     $order['errors'] = 1;
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
-                $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
+                //$order['sort_order'] = ($ad['country'] == "AU")? 2:1;
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {
@@ -332,7 +323,7 @@ class Shopify{
                     $delivery_instructions = $o['note'];
                 }
                 $order['instructions'] = $delivery_instructions;
-                //echo "<pre>",print_r($order),"</pre>";die();
+                echo "THE ORDER<pre>",print_r($order),"</pre>";die();
                 if($items_errors)
                 {
                     $message = "<p>There was a problem with some items</p>";
