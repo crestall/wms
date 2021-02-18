@@ -37,7 +37,7 @@ class Shopify{
         $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $config = array(
-            'ShopUrl'        => 'https://perfectpracticegolf.com.au/',
+            'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
             'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
             'Password'       => Config::get('PBASHOPIFYAPIPASS')
         );
