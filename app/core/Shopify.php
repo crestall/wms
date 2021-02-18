@@ -8,7 +8,7 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-use Automattic\WooCommerce\HttpClient\HttpClientException;
+use PHPShopify\Exception\CurlException;
 
 class Shopify{
 
@@ -50,14 +50,19 @@ class Shopify{
             //'AccessToken'   => $accessToken
         //);
         //echo "Access Token: ".$accessToken; die();
-        $this->shopify = new PHPShopify\ShopifySDK($config);
+        try{
+            $this->shopify = new PHPShopify\ShopifySDK($config);
+        } catch(Exception $e){
+            var_dump($e);
+        }
+
         $collected_orders = array();
         $params = array(
             'status'    => 'open'
         );
         try {
           $collected_orders = $this->shopify->Order->get($params);
-        } catch (HttpClientException $e) {
+        } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
