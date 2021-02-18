@@ -201,6 +201,17 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                                     }
                                 }
                             }
+                            elseif($od['is_shopify'] == 1)
+                            {
+                                $order_id = $od['shopify_id'];
+                                $this->output .= "Sending Eparcel Tracking info to shopify".PHP_EOL;
+                                $this->shopify->Order($order_id)->Fulfillment->post([
+                                    "location_id" => $this->shopify->Location->get()[0]['id'],
+                                    "tracking_number" => $od['consignment_id'],
+                                    "tracking_urls" => ["https:://directfreight.com.au"],
+                                    "notify_customer" => true
+                                ]);
+                            }
                         }
                         if($od['client_id'] == 59)
                         {
@@ -377,6 +388,17 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                                             die($output);
                                         }
                                     }
+                                }
+                                elseif($od['is_shopify'] == 1)
+                                {
+                                    $order_id = $od['shopify_id'];
+                                    $this->output .= "Sending Eparcel Tracking info to shopify".PHP_EOL;
+                                    $this->shopify->Order($order_id)->Fulfillment->post([
+                                        "location_id" => $this->shopify->Location->get()[0]['id'],
+                                        "tracking_number" => $od['consignment_id'],
+                                        "tracking_urls" => ["https://auspost.com.au/track/".$od['consignment_id']],
+                                        "notify_customer" => true
+                                    ]);
                                 }
                             }
                             if($od['client_id'] == 82)
