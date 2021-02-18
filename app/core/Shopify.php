@@ -39,18 +39,18 @@ class Shopify{
         $config = array(
             'ShopUrl'        => 'https://perfectpracticegolf.com.au/',
             'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
-            'SharedSecret'   => Config::get('PBASHOPIFYSHAREDSECRET')
+            'Password'       => Config::get('PBASHOPIFYAPIPASS')
         );
-        //echo "<pre>",print_r($config),"</pre>";die();
-        $ashopify = new PHPShopify\ShopifySDK($config);
-        $scopes = 'read_products,write_products,read_script_tags,write_script_tags';
-        $accessToken = \PHPShopify\AuthHelper::createAuthRequest($scopes);
-        $new_config = array(
-            'ShopUrl'       => 'https://perfectpracticegolf.com.au/',
-            'AccessToken'   => $accessToken
-        );
+        echo "<pre>",print_r($config),"</pre>";die();
+        //$ashopify = new PHPShopify\ShopifySDK($config);
+        //$scopes = 'read_products,write_products,read_script_tags,write_script_tags';
+        //$accessToken = \PHPShopify\AuthHelper::createAuthRequest($scopes);
+        //$new_config = array(
+            //'ShopUrl'       => 'https://perfectpracticegolf.com.au/',
+            //'AccessToken'   => $accessToken
+        //);
         //echo "Access Token: ".$accessToken; die();
-        $this->shopify = new PHPShopify\ShopifySDK($new_config);
+        $this->shopify = new PHPShopify\ShopifySDK($config);
         $collected_orders = array();
         $params = array(
             'status'    => 'open'
