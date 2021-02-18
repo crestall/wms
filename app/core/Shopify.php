@@ -163,9 +163,10 @@ class Shopify{
                 continue;
             }
             //insert the order
+            $client_id = $this->controller->client->getClientId('Performance Brands Australia');
             $vals = array(
                 'client_order_id'       => $o['client_order_id'],
-                'client_id'             => 69,
+                'client_id'             => $client_id,
                 'deliver_to'            => $o['ship_to'],
                 'company_name'          => $o['company_name'],
                 'date_ordered'          => $o['date_ordered'],
