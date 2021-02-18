@@ -41,7 +41,7 @@ class Shopify{
             'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
             'Password'       => Config::get('PBASHOPIFYAPIPASS')
         );
-        echo "<pre>",print_r($config),"</pre>";die();
+        //echo "<pre>",print_r($config),"</pre>";die();
         //$ashopify = new PHPShopify\ShopifySDK($config);
         //$scopes = 'read_products,write_products,read_script_tags,write_script_tags';
         //$accessToken = \PHPShopify\AuthHelper::createAuthRequest($scopes);
