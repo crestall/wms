@@ -14,7 +14,7 @@ class Shopify{
 
     private $output;
     private $shopify;
-    private $teamtimbuktuoitems;
+    private $pbaoitems;
     private $return_array = array(
         'import_count'          => 0,
         'import_error'          => false,
@@ -215,7 +215,7 @@ class Shopify{
                     'error_string'          => '',
                     'items'                 => array(),
                     'ref2'                  => '',
-                    'client_order_id'       => $o['id'],
+                    'client_order_id'       => $o['order_id'],
                     'errors'                => 0,
                     'tracking_email'        => $o['email'],
                     'ship_to'               => $o['shipping_address']['first_name']." ".$o['shipping_address']['last_name'],
@@ -226,7 +226,9 @@ class Shopify{
                     'signature_req'         => 0,
                     'contact_phone'         => $o['shipping_address']['phone'],
                     'import_error'          => false,
-                    'import_error_string'   => ''
+                    'import_error_string'   => '',
+                    'is_shopify'            => 1,
+                    'shopify_id'            => $o['id']
                 );
                 //if(strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
                 if(isset($o['shipping_lines'][0]) && strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
@@ -323,7 +325,7 @@ class Shopify{
                     $delivery_instructions = $o['note'];
                 }
                 $order['instructions'] = $delivery_instructions;
-                echo "THE ORDER<pre>",print_r($order),"</pre>";die();
+                //echo "THE ORDER<pre>",print_r($order),"</pre>";die();
                 if($items_errors)
                 {
                     $message = "<p>There was a problem with some items</p>";
@@ -361,9 +363,9 @@ class Shopify{
                     $orders[] = $order;
                 }
             }//endforeach order
-            //echo "<pre>",print_r($orders),"</pre>";//die();
-            $this->teamtimbuktuoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
-
+            echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
+            $this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            echo "ORDERS ITEMS<pre>",$this->pbaotitems,"</pre>";die();
             return $orders;
         }//end if count orders
         else
