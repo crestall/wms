@@ -42,7 +42,7 @@ class Shopify{
             'SharedSecret'   => Config::get('PBASHOPIFYSHAREDSECRET')
         );
         //echo "<pre>",print_r($config),"</pre>";die();
-        PHPShopify\ShopifySDK($config);
+        $ashopify = new PHPShopify\ShopifySDK($config);
         $scopes = 'read_products,write_products,read_script_tags,write_script_tags';
         $accessToken = \PHPShopify\AuthHelper::createAuthRequest($scopes);
         $new_config = array(
