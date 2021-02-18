@@ -105,13 +105,12 @@ class Shopify{
             //echo "<pre>",print_r($this->teamtimbuktuoitems),"</pre>";die();
             $this->addPBAOrders($orders);
         }
-        Logger::logOrderImports('order_imports/tt_aust', $this->output); //die();
-        //if (php_sapi_name() !='cli')
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        Logger::logOrderImports('order_imports/pba', $this->output); //die();
+        if (php_sapi_name() !='cli')
         {
             return $this->return_array;
         }
-        echo "<pre>",print_r($this->return_array),"</pre>";
+        //echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
     private function addPBAOrders($orders)
@@ -143,8 +142,7 @@ class Shopify{
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
                 $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                //if (php_sapi_name() !='cli')
-                if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+                if (php_sapi_name() !='cli')
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
@@ -152,7 +150,6 @@ class Shopify{
                 else
                 {
                     //Email::sendBBImportError($message);
-
                 }
                 continue;
             }
@@ -343,10 +340,9 @@ class Shopify{
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
                     $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                    //if (php_sapi_name() == 'cli')
-                    if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+                    if (php_sapi_name() == 'cli')
                     {
-                        Email::sendTTImportError($message);
+                        //Email::sendTTImportError($message);
                     }
                     else
                     {
