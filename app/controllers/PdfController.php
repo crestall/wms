@@ -14,7 +14,7 @@ class pdfController extends Controller
         parent::beforeAction();
         $action = $this->request->param('action');
         $post_actions = array(
-
+            "createDeliveryDocket"
         );
         $this->Security->requirePost($post_actions);
         if(in_array($action, $post_actions))
@@ -24,6 +24,46 @@ class pdfController extends Controller
         else
         {
            $this->Security->config("validateForm", false);
+        }
+    }
+
+    public function createDeliveryDocket()
+    {
+        //echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
+        FormValidator::validateAddress($address, $suburb, $state, $postcode, 'AU', isset($ignore_address_error));
+        if(!FormValidator::dataSubbed($ship_to))
+        {
+            Form::setError('ship_to', "A Deliver To Name is required");
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            return $this->redirector->to(PUBLIC_ROOT."jobs/create-delivery-docket/job=$job_id");
+        }
+        else
+        {
+            //gonna make the pdf
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+
         }
     }
 

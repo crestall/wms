@@ -763,6 +763,32 @@
                         actions.common.jobsTable();
                         actions.common.selectAll();
                     }
+                },
+                'create-delivery-docket':{
+                    init: function(){
+                        $("input#per_box").keyup(function(e){
+                            actions['create-delivery-docket']['box-count-calcs']();
+                        });
+                        $("input#quantity").keyup(function(e){
+                            actions['create-delivery-docket']['box-count-calcs']();
+                        });
+                    },
+                    'box-count-calcs': function(){
+                        var pb = parseInt($('#per_box').val()) || 0;
+                        var q = parseInt($('#quantity').val()) || 0;
+                        console.log("pb: "+pb);
+                        console.log("q: "+q);
+                        if(pb > 0 && q > 0)
+                        {
+                            var bc = Math.ceil(q/pb);
+                            console.log("bc: "+bc);
+                            $("#box_count").val(bc);
+                        }
+                        else
+                        {
+                            $("#box_count").val('');
+                        }
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);

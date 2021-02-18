@@ -23,10 +23,10 @@
     </div>
 </div>
 <div class="form-group row">
-    <label class="col-md-3">State</label>
+    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> State</label>
     <div class="col-md-4">
-        <input type="text" class="form-control" name="state" id="state" value="<?php echo $state;?>" />
-        <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+        <input type="text" class="form-control required" name="state" id="state" value="<?php echo $state;?>" />
+        <span class="inst">Use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
         <?php echo Form::displayError('state');?>
     </div>
 </div>
@@ -35,13 +35,5 @@
     <div class="col-md-4">
         <input type="text" class="form-control required" name="postcode" id="postcode" value="<?php echo $postcode;?>" />
         <?php echo Form::displayError('postcode');?>
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Country</label>
-    <div class="col-md-4">
-        <input type="text" class="form-control required" name="country" id="country" value="<?php echo $country;?>" />
-        <span class="inst">use the 2 letter ISO code</span>
-        <?php echo Form::displayError('country');?>
     </div>
 </div>

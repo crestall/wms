@@ -238,12 +238,10 @@ table#production_jobs_table div.notes{
 
 table#production_jobs_table div.notes h6{
     margin-top: 0;
-    margin-bottom: 0.25rem
 }
 
 table#production_jobs_table div.notes-info{
     border-color: #5bc0de;
-    margin-bottom: 0.25rem;
 }
 
 table#production_jobs_table div.notes-info h6{
@@ -252,6 +250,7 @@ table#production_jobs_table div.notes-info h6{
 
 table#production_jobs_table div.notes-warning{
     border-color: #f0ad4e;
+    margin-bottom: 0.25rem;
 }
 
 table#production_jobs_table div.notes-warning h6{
