@@ -1459,6 +1459,7 @@ class FormController extends Controller {
             }
         }
         //customer address checking
+        if(!isset($country)) $country = "AU";
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) )
         {
             $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, 'AU', isset($ignore_customer_address_error), "customer_", "show_customer_address");
@@ -1479,7 +1480,7 @@ class FormController extends Controller {
             $this->validateAddress($finisher3_address, $finisher3_suburb, $finisher3_state, $finisher3_postcode, 'AU', isset($ignore_finisher3_address_error), "finisher3_", "show_finisher3_address");
         }
         if(!isset($held_in_store))
-            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+            $this->validateAddress($address, $suburb, $state, $postcode, "AU", isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);

@@ -37,3 +37,4 @@
         <?php echo Form::displayError('postcode');?>
     </div>
 </div>
+<input type="hidden" name="country" value = "AU">
