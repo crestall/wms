@@ -37,7 +37,7 @@ class TasksController extends Controller
             $this->shopify->getPBAOrders();
         }
         */
-        $this->shopify->fulfillAnOrder();
+        //$this->shopify->fulfillAnOrder();
         echo "done";
     }
 
