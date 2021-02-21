@@ -31,6 +31,27 @@ class Shopify{
         $this->controller = $controller;
     }
 
+    public function fulfillAnOrder()
+    {
+        $config = array(
+            'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
+            'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
+            'Password'       => Config::get('PBASHOPIFYAPIPASS')
+        );
+        try{
+            $this->shopify = new PHPShopify\ShopifySDK($config);
+        } catch(Exception $e){
+            var_dump($e);
+        }
+        $this->shopify->Order('2679941988514')->Fulfillment->post([
+            "location_id" => $this->shopify->Location->get()[0]['id'],
+            "tracking_number" => "ZQD5009720",
+            "tracking_urls" => ["https://auspost.com.au/track/ZQD5009720"],
+            "notify_customer" => true
+        ]);
+        return true;
+    }
+
     public function getPBAOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
@@ -102,7 +123,6 @@ class Shopify{
         /* */
         if($orders = $this->procPBAOrders($collected_orders))
         {
-            //echo "<pre>",print_r($this->teamtimbuktuoitems),"</pre>";die();
             $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
