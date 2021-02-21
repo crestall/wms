@@ -199,8 +199,9 @@
         $db = Database::openConnection();
         Session::set('showcourierfeedback', true);
         $order_values = array(
-            'courier_id'    => $this->controller->courier->localId,
-            'courier_name'  => $courier_name
+            'courier_id'        => $this->controller->courier->localId,
+            'courier_name'      => $courier_name,
+            'handling_charge'   => $this->handling_charge
         );
         if($this->addBubblewrap())
             $order_values['bubble_wrap'] = 1;

@@ -24,6 +24,30 @@ class JobsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function createDeliveryDocket()
+    {
+        if(!isset($this->request->params['args']['job']))
+        {
+            //no job id to update
+            return (new ErrorsController())->error(400)->send();
+        }
+        $job_id = $this->request->params['args']['job'];
+        $job_info = $this->productionjob->getJobById($job_id);
+        if(empty($job_info))
+        {
+            //no job data found
+            return (new ErrorsController())->error(404)->send();
+        }
+        //render the page
+        Config::setJsConfig('curPage', "create-delivery-docket");
+        Config::set('curPage', "create-delivery-docket");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/createDeliveryDocket.php', [
+            'page_title'    => "Create Delivery Docket For Job: ".$job_info['job_id'],
+            'pht'           => ": Create Delivery Docket",
+            'job'           => $job_info
+        ]);
+    }
+
     public function addJob()
     {
         //render the page

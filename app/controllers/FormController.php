@@ -1454,12 +1454,13 @@ class FormController extends Controller {
             }
         }
         //customer address checking
+        if(!isset($country)) $country = "AU";
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) )
         {
             $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, 'AU', isset($ignore_customer_address_error), "customer_", "show_customer_address");
         }
         if(!isset($held_in_store))
-            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+            $this->validateAddress($address, $suburb, $state, $postcode, "AU", isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
@@ -7047,7 +7048,7 @@ class FormController extends Controller {
     /*******************************************************************
     ** validates addresses
     ********************************************************************/
-    private function validateAddress($address, $suburb, $state, $postcode, $country, $ignore_address_error, $prefix = "", $session_var = false)
+    public function validateAddress($address, $suburb, $state, $postcode, $country, $ignore_address_error, $prefix = "", $session_var = false)
     {
         if( !$this->dataSubbed($address) )
         {
@@ -7137,7 +7138,7 @@ class FormController extends Controller {
     /*******************************************************************
     ** validates empty data fields
     ********************************************************************/
-	protected function dataSubbed($data)
+	public function dataSubbed($data)
 	{
 		if(!$data || strlen($data = trim($data)) == 0)
 		{
@@ -7152,7 +7153,7 @@ class FormController extends Controller {
     /*******************************************************************
    ** validates email addresses
    ********************************************************************/
-	private function emailValid($email)
+	public function emailValid($email)
 	{
 		if(!$email || strlen($email = trim($email)) == 0)
 		{

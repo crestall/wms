@@ -71,6 +71,7 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-fsg" id="status"><i class="fal fa-file-check"></i> Update Status for Selected</button></div>
                 <?php endif;?>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-secondary" id="priority_change"><i class="fal fa-file-plus"></i> Update Priority for Selected</button></div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-success" id="create_pdf"><i class="fal fa-file-pdf"></i> Create PDF for Selected</button></div> 
                 <div class="col-12">
                     <?php if(isset($_SESSION['feedback'])) :?>
                        <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>

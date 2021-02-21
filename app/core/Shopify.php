@@ -8,13 +8,13 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-use Automattic\WooCommerce\HttpClient\HttpClientException;
+use PHPShopify\Exception\CurlException;
 
 class Shopify{
 
     private $output;
     private $shopify;
-    private $teamtimbuktuoitems;
+    private $pbaoitems;
     private $return_array = array(
         'import_count'          => 0,
         'import_error'          => false,
@@ -31,24 +31,50 @@ class Shopify{
         $this->controller = $controller;
     }
 
+    public function fulfillAnOrder()
+    {
+        $config = array(
+            'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
+            'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
+            'Password'       => Config::get('PBASHOPIFYAPIPASS')
+        );
+        try{
+            $this->shopify = new PHPShopify\ShopifySDK($config);
+        } catch(Exception $e){
+            var_dump($e);
+        }
+        $this->shopify->Order('2679941988514')->Fulfillment->post([
+            "location_id" => $this->shopify->Location->get()[0]['id'],
+            "tracking_number" => "ZQD5009720",
+            "tracking_urls" => ["https://auspost.com.au/track/ZQD5009720"],
+            "notify_customer" => true
+        ]);
+        return true;
+    }
+
     public function getPBAOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $config = array(
-            'ShopUrl'   => 'https://rukket.myshopify.com/',
-            'ApiKey'    => Config::get('PBASHOPIFYAPIKEY'),
-            'Password'  => Config::get('PBASHOPIFYAPIPASS')
+            'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
+            'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
+            'Password'       => Config::get('PBASHOPIFYAPIPASS')
         );
-        $this->shopify = new PHPShopify\ShopifySDK($config);
+        try{
+            $this->shopify = new PHPShopify\ShopifySDK($config);
+        } catch(Exception $e){
+            var_dump($e);
+        }
+
         $collected_orders = array();
         $params = array(
             'status'    => 'open'
         );
         try {
           $collected_orders = $this->shopify->Order->get($params);
-        } catch (HttpClientException $e) {
+        } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
@@ -66,7 +92,7 @@ class Shopify{
         }
 
         //echo "<pre>",print_r($collected_orders),"</pre>";die();
-        foreach($collected_orders as $order)
+        /*foreach($collected_orders as $order)
         {
             echo "<p>--------------------------------------------------</p>";
             echo "PRE THE ORDER<pre>",print_r($order),"</pre>";
@@ -94,29 +120,27 @@ class Shopify{
             echo "<p>--------------------------------------------------</p>";
             die();
         }
-        /*
-        if($orders = $this->procTeamTimbuktuOrders($collected_orders))
+        /* */
+        if($orders = $this->procPBAOrders($collected_orders))
         {
-            //echo "<pre>",print_r($this->teamtimbuktuoitems),"</pre>";die();
-            $this->addTeamTibuktuOrders($orders);
+            $this->addPBAOrders($orders);
         }
-        Logger::logOrderImports('order_imports/tt_aust', $this->output); //die();
-        //if (php_sapi_name() !='cli')
-        if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+        Logger::logOrderImports('order_imports/pba', $this->output); //die();
+        if (php_sapi_name() !='cli')
         {
             return $this->return_array;
         }
-        */
+        //echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
-    private function addTeamTibuktuOrders($orders)
+    private function addPBAOrders($orders)
     {
         foreach($orders as $o)
         {
             //check for errors first
             $item_error = false;
             $error_string = "";
-            foreach($this->teamtimbuktuoitems[$o['client_order_id']] as $item)
+            foreach($this->pbaoitems[$o['client_order_id']] as $item)
             {
                 if($item['item_error'])
                 {
@@ -138,8 +162,7 @@ class Shopify{
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
                 $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                //if (php_sapi_name() !='cli')
-                if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
+                if (php_sapi_name() !='cli')
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
@@ -147,7 +170,6 @@ class Shopify{
                 else
                 {
                     //Email::sendBBImportError($message);
-
                 }
                 continue;
             }
@@ -158,9 +180,10 @@ class Shopify{
                 continue;
             }
             //insert the order
+            $client_id = $this->controller->client->getClientId('Performance Brands Australia');
             $vals = array(
                 'client_order_id'       => $o['client_order_id'],
-                'client_id'             => 69,
+                'client_id'             => $client_id,
                 'deliver_to'            => $o['ship_to'],
                 'company_name'          => $o['company_name'],
                 'date_ordered'          => $o['date_ordered'],
@@ -175,24 +198,26 @@ class Shopify{
                 'suburb'                => $o['suburb'],
                 'postcode'              => $o['postcode'],
                 'country'               => $o['country'],
-                'contact_phone'         => $o['contact_phone']
+                'contact_phone'         => $o['contact_phone'],
+                'is_shopify'            => 1,
+                'shopify_id'            => $o['shopify_id']
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
-            $itp = array($this->teamtimbuktuoitems[$o['client_order_id']]);
+            $itp = array($this->pbaoitems[$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
-            $this->output .= print_r($this->teamtimbuktuoitems[$o['client_order_id']], true).PHP_EOL;
+            $this->output .= print_r($this->pbaoitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
         }
     }
 
 
-    private function procTeamTimbuktuOrders($collected_orders)
+    private function procPBAOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
-        //echo "<pre>",print_r($collected_orders),"</pre>";//die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
         //echo $_SERVER['HTTP_USER_AGENT'];
         $orders = array();
         if(count($collected_orders))
@@ -221,7 +246,9 @@ class Shopify{
                     'signature_req'         => 0,
                     'contact_phone'         => $o['shipping_address']['phone'],
                     'import_error'          => false,
-                    'import_error_string'   => ''
+                    'import_error_string'   => '',
+                    'is_shopify'            => 1,
+                    'shopify_id'            => $o['id']
                 );
                 //if(strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
                 if(isset($o['shipping_lines'][0]) && strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
@@ -281,7 +308,7 @@ class Shopify{
                     $order['errors'] = 1;
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
-                $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
+                //$order['sort_order'] = ($ad['country'] == "AU")? 2:1;
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {
@@ -318,7 +345,7 @@ class Shopify{
                     $delivery_instructions = $o['note'];
                 }
                 $order['instructions'] = $delivery_instructions;
-                //echo "<pre>",print_r($order),"</pre>";die();
+                //echo "THE ORDER<pre>",print_r($order),"</pre>";die();
                 if($items_errors)
                 {
                     $message = "<p>There was a problem with some items</p>";
@@ -333,10 +360,9 @@ class Shopify{
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
                     $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                    //if (php_sapi_name() == 'cli')
-                    if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+                    if (php_sapi_name() == 'cli')
                     {
-                        Email::sendTTImportError($message);
+                        //Email::sendTTImportError($message);
                     }
                     else
                     {
@@ -356,9 +382,9 @@ class Shopify{
                     $orders[] = $order;
                 }
             }//endforeach order
-            //echo "<pre>",print_r($orders),"</pre>";//die();
-            $this->teamtimbuktuoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
-
+            //echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
+            $this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            //echo "ORDERS ITEMS<pre>",print_r($this->pbaoitems),"</pre>";die();
             return $orders;
         }//end if count orders
         else

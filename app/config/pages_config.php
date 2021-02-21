@@ -153,6 +153,11 @@ $prod = array(
             'display'   => false,
             'icon'      => ''
         ),
+        'create-delivery-docket'    => array
+        (
+            'display'   => false,
+            'icon'      => ''
+        ),
         'view-jobs' => array(
             'display'   => true,
             'icon'      => $fontastic_icons['jobs']['view-jobs']
@@ -214,6 +219,11 @@ $prod_sales = array(
         'default-icon'  => array(
             'display'   => false,
             'icon'      => $fontastic_icons['jobs']['default']
+        ),
+        'create-delivery-docket'    => array
+        (
+            'display'   => false,
+            'icon'      => ''
         ),
         'view-jobs' => array(
             'display'   => true,
@@ -284,6 +294,11 @@ $prod_sales_admin = array(
         'job-search' => array(
             'display'   => true,
             'icon'      => $fontastic_icons['jobs']['job-search']
+        ),
+        'create-delivery-docket'    => array
+        (
+            'display'   => false,
+            'icon'      => ''
         ),
         'job-search-results'    => array(
             'display'   => false,
@@ -429,6 +444,11 @@ $admin = array(
         'default-icon'  => array(
             'display'   => false,
             'icon'      => $fontastic_icons['jobs']['default']
+        ),
+        'create-delivery-docket'    => array
+        (
+            'display'   => false,
+            'icon'      => ''
         ),
         'view-jobs' => array(
             'display'   => true,

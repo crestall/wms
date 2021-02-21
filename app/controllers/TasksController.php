@@ -26,8 +26,19 @@ class TasksController extends Controller
 
     public function PBATestTask()
     {
-        $carriers = json_decode( $this->woocommerce->testPBAShipping(), true );
-        echo "The Carriers<pre>",print_r( $carriers ),"</pre>";
+        /*carriers = json_decode( $this->woocommerce->testPBAShipping(), true );
+        //echo "The Carriers<pre>",print_r( $carriers ),"</pre>";
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->shopify->getPBAOrders();
+        }
+        */
+        //$this->shopify->fulfillAnOrder();
+        echo "done";
     }
 
     public function BDSCollectionTask()
