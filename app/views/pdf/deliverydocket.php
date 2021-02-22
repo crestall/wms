@@ -20,7 +20,6 @@ $attention = (!empty($dd_details['attention']))?
                 <td class="right-align sender-address"><?php echo $sender_details['address'];?></td>
             </tr>
         </table>
-        mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
         <table class="address_details">
             <tr>
                 <td style="width: 125mm">
@@ -39,8 +38,7 @@ $attention = (!empty($dd_details['attention']))?
     </div>
     <div id="divider">
         <p>-------------------------------------------------------------------------------------------------------------------------------<br>
-        <span class="inst">[Detach Here]</span</p>
-        mamamamamamam
+        <span class="inst">[Detach Here]mmmmm</span</p>
         <h2>Delivery Docket</h2>
         <h4>Sender's Copy</h4>
     </div>
