@@ -20,11 +20,13 @@ $address_string .= "<br>".$dd_details['suburb']." ".$dd_details['state']." ".$dd
                     <table>
                         <tr>
                             <td>Delivery To:</td>
+                            <td style="width:5mm"></td>
                             <td><?php echo $address_string;?></td>
                         </tr>
                         <tr>
                             <td>Att:</td>
-                            <td></td>
+                            <td style="width:5mm"></td>
+                            <td><?php echo $dd_details['attention'];?></td>
                         </tr>
                     </table>
                 </td>
