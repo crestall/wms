@@ -6,7 +6,7 @@
         <table id="page_head">
             <tr>
                 <td><img src="/images/deliver_docket_logos/<?php echo $sender_details['logo'];?>"></td>
-                <td class="left-align"><?php echo $sender_details['address'];?></td>
+                <td class="right-align"><?php echo $sender_details['address'];?></td>
             </tr>
         </table>
     </div>
