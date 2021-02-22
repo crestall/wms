@@ -43,6 +43,20 @@ $attention = (!empty($dd_details['attention']))?
         <h4>Sender's Copy</h4>
     </div>
     <div id="bottom_half">
-
+        <table class="address_details">
+            <tr>
+                <td style="width: 125mm">
+                    <table>
+                        <tr>
+                            <td>Delivery To:</td>
+                            <td style="width:5mm"></td>
+                            <td><?php echo $address_string;?></td>
+                        </tr>
+                            <?php echo $attention;?>
+                    </table>
+                </td>
+                <td class="right-align">Date: <strong><?php echo date("d/m/Y");?></strong></td>
+            </tr>
+        </table>
     </div>
 </div>
