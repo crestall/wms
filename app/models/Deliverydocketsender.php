@@ -54,5 +54,11 @@ class Deliverydocketsender extends Model{
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return true;
     }
+
+    public function getSenderById($id = 0)
+    {
+        $db = Database::openConnection();
+        return $db->&queryByID($this->table, $id);
+    }
 }
 ?>
