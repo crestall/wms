@@ -3,12 +3,31 @@
     clear: both;
 }
 
-#runsheet_body {
+#dd_body {
     margin: 0;
     padding: 0;
     background: none;
-    width: 297mm;
-    height: 210mm;
+    width: 210mm;
+    height: 297mm;
+}
+
+#top_half,
+#bottom_half{
+    height: 145mm;
+}
+
+#divider{
+    height: 3mm;
+    padding-top:3mm
+}
+
+#divider{
+    text-align: center;
+}
+
+#divider .inst{
+    font-style: italic;
+    font-size: .7em;
 }
 
 div#page_top{
