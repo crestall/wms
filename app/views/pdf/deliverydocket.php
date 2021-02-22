@@ -4,7 +4,13 @@ $address_string = $dd_details['ship_to'];
 $address_string .= "<br>".$dd_details['address'];
 if(!empty($dd_details['address2'])) $address_string .= "<br>".$dd_details['address2'];
 $address_string .= "<br>".$dd_details['suburb']." ".$dd_details['state']." ".$dd_details['postcode'];
-
+$attention = (!empty($dd_details['attention']))?
+    "<tr>
+        <td>Attention</td>
+        <td style='width:5mm'></td>
+        <td>{$dd_details['attention']</td>
+    </tr>":
+    "";
 ?>
 <div id="dd_body">
     <div id="top_half">
@@ -23,11 +29,7 @@ $address_string .= "<br>".$dd_details['suburb']." ".$dd_details['state']." ".$dd
                             <td style="width:5mm"></td>
                             <td><?php echo $address_string;?></td>
                         </tr>
-                        <tr>
-                            <td>Att:</td>
-                            <td style="width:5mm"></td>
-                            <td><?php echo $dd_details['attention'];?></td>
-                        </tr>
+                            <?php echo $attention;?>
                     </table>
                 </td>
                 <td class="right-align">Date: <strong><?php echo date("d/m/Y");?></strong></td>
