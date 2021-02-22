@@ -39,6 +39,7 @@ td{
 }
 #divider h4{
     color:#CCC;
+    text-transform: uppercase;
 }
 
 td.right-align{
