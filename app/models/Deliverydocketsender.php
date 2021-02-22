@@ -58,7 +58,7 @@ class Deliverydocketsender extends Model{
     public function getSenderById($id = 0)
     {
         $db = Database::openConnection();
-        return $db->&queryByID($this->table, $id);
+        return $db->queryByID($this->table, $id);
     }
 }
 ?>
