@@ -8,7 +8,7 @@ $attention = (!empty($dd_details['attention']))?
     "<tr>
         <td>Attention</td>
         <td style='width:5mm'></td>
-        <td>{$dd_details['attention']</td>
+        <td>{$dd_details['attention']}</td>
     </tr>":
     "";
 ?>
