@@ -47,7 +47,7 @@ img {
     border-style: none;
 }
 
-table#address_details{
+table.address_details{
     margin-top:15mm;
 }
 
