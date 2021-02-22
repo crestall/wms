@@ -34,6 +34,10 @@ td.right-align{
     text-align:right;
 }
 
+td.sender-address{
+    font-size:0.8em;
+}
+
 img {
     vertical-align: middle;
     border-style: none;
