@@ -73,7 +73,7 @@ class pdfController extends Controller
                 'job_details'       => $job_details,
                 'dd_details'        => $post_data
             ]);
-            $stylesheet = file_get_contents(STYLES."runsheets.css");
+            $stylesheet = file_get_contents(STYLES."deliverydoket.css");
             $pdf->WriteHTML($stylesheet,1);
             $pdf->WriteHTML($html, 2);
             $pdf->Output();
