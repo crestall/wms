@@ -18,10 +18,8 @@
 
 #divider{
     height: 7mm;
-    padding-top:3mm
-}
-
-#divider{
+    padding-top:3mm;
+    box-sizing: border-box
     text-align: center;
 }
 
@@ -29,6 +27,7 @@
     font-style: italic;
     font-size: .7em;
     margin-top:0;
+    padding-top:0;
 }
 
 div#page_top{
