@@ -11,6 +11,13 @@ $attention = (!empty($dd_details['attention']))?
         <td>{$dd_details['attention']}</td>
     </tr>":
     "";
+$job_no = ($sender_details['send_job_no'] == 1)?
+    "<tr>
+        <td>Job No.</td>
+        <td style='width:5mm'></td>
+        <td>{$job_details['job_id']}</td>
+    </tr>":
+    "";
 ?>
 <div id="dd_body">
     <div id="top_half">
@@ -29,7 +36,8 @@ $attention = (!empty($dd_details['attention']))?
                             <td style="width:5mm"></td>
                             <td><?php echo $address_string;?></td>
                         </tr>
-                            <?php echo $attention;?>
+                        <?php echo $attention;?>
+                        <?php echo $job_no;?>
                     </table>
                 </td>
                 <td class="right-align">Date: <strong><?php echo date("d/m/Y");?></strong></td>
@@ -52,7 +60,8 @@ $attention = (!empty($dd_details['attention']))?
                             <td style="width:5mm"></td>
                             <td><?php echo $address_string;?></td>
                         </tr>
-                            <?php echo $attention;?>
+                        <?php echo $attention;?>
+                        <?php echo $job_no;?>
                     </table>
                 </td>
                 <td class="right-align">Date: <strong><?php echo date("d/m/Y");?></strong></td>
