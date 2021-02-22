@@ -63,13 +63,15 @@ class pdfController extends Controller
         {
             //gonna make the pdf
             echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $sender_details = $this->deliverydocketsender->getSenderById($post_data['sender_id']);
+            $job_details = $this->productiojob->getJobById($post_data['job_id']);
 
             $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'P']);
             $pdf->SetDisplayMode('fullpage');
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/deliverydocket.php', [
-                'driver'        => $driver,
-                'table_body'    => $table_body,
-                'runsheet_day'  => date("jS M, Y", $runsheet_day)
+                'sender_details'    => $sender_details,
+                'job_details'       => $job_details,
+                'dd_details'        => $post_data
             ]);
             $stylesheet = file_get_contents(STYLES."runsheets.css");
             $pdf->WriteHTML($stylesheet,1);
