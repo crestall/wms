@@ -62,7 +62,7 @@ class pdfController extends Controller
         else
         {
             //gonna make the pdf
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $sender_details = $this->deliverydocketsender->getSenderById($post_data['sender_id']);
             $job_details = $this->productiojob->getJobById($post_data['job_id']);
 
