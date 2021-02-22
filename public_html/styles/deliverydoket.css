@@ -47,6 +47,10 @@ img {
     border-style: none;
 }
 
+table#address_details{
+    margin-top:15mm;
+}
+
 #page_body table,
 #page_body table th,
 #page_body table td{
