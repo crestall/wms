@@ -5,7 +5,7 @@
     <div id="top_half">
         <table id="page_head">
             <tr>
-                <td><img src="/images/delivery_docket_logos/<?php echo $sender_details['logo'];?>"></td>
+                <td><img src="https://wms.fsg.com.au/images/delivery_docket_logos/<?php echo $sender_details['logo'];?>"></td>
                 <td class="right-align"><?php echo $sender_details['address'];?></td>
             </tr>
         </table>
