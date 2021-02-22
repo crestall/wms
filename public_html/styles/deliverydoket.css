@@ -28,6 +28,7 @@
 #divider .inst{
     font-style: italic;
     font-size: .7em;
+    margin-top:0;
 }
 
 div#page_top{
