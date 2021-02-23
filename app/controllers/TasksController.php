@@ -225,7 +225,7 @@ class TasksController extends Controller
 
     public function PBAWooTask()
     {
-        if(!isset($this->request->params['args']) || !($this->request->params['args']['ua'] !== "FSG" || $this->request->params['args']['ua'] !== "CRON"))
+        if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] !== "FSG" || $this->request->params['args']['ua'] !== "CRON"))
         {
             return $this->error(403);
         }
