@@ -246,6 +246,49 @@
         }
     }
 
+    public static function sendPBAImportError($message)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pbaimporterror.html");
+            $replace_array = array("{CONTENT}");
+            $replace_with_array = array($message);
+            $body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+
+            $mail->AddAdress('Clint Rice','clint@performancebrandsaustralia.com');
+
+            $mail->Subject = "Order with item error for Performance Brands Australia";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+            $mail->MsgHTML($body);
+
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent ");
+            }
+        }
+        catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+    }
+
      public static function sendBDSImportFeedback($feedback)
     {
         $mail = new PHPMailer();
@@ -354,29 +397,36 @@
     public static function sendCronError($e, $client)
     {
         $mail = new PHPMailer();
-
-        $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."cronerror.html");
-        $replace_array = array("{CONTENT}", "{CLIENT}");
-		$replace_with_array = array(print_r($e, true), $client);
-		$body = str_replace($replace_array, $replace_with_array, $body);
-
-        $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-
-		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-
-        //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-
-		$mail->Subject = "Cron Import Error";
-
-       $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
-
-		$mail->MsgHTML($body);
-
-        if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-            throw new Exception("Email couldn't be sent ");
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."cronerror.html");
+            $replace_array = array("{CONTENT}", "{CLIENT}");
+    		$replace_with_array = array(print_r($e, true), $client);
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->Subject = "Cron Import Error";
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "email_logo.png");
+            $mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent ");
+            }
         }
+        catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+
     }
 
     public static function sendLowStockWarning($item_name, $email, $name)
@@ -687,7 +737,7 @@
             $replace_array = array("{NAME}");
 		    $replace_with_array = array($name);
     		$body = str_replace($replace_array, $replace_with_array, $body);
-            $mail->AddEmbeddedImage(IMAGES."backgrounds/FSG_logo.png", "emailfoot", "email_logo.png");
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "email_logo.png");
             $mail->addAttachment(Config::get('EMAIL_ATTACHMENTS_PATH')."WMS Instructions.docx", 'wms_instructions.docx');
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
             $mail->Subject = "Access Instructions For FSG WMS";
