@@ -208,6 +208,7 @@ class JobsController extends Controller
         //warehouse users
         Permission::allow(['admin', 'super admin'], $resource, array(
             'index',
+            'createDeliveryDocket',
             'viewJobs'
         ));
         //production sales users

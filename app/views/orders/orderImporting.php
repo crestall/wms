@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 mb-3">
+            <!--div class="col-sm-12 col-md-6 mb-3">
                 <div class="card">
                     <a name="pba-woo"></a>
                     <h4 class="card-header">Performance Brands Woo-Commerce Orders</h4>
@@ -139,7 +139,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div-->
             <?php if($user_role == "super admin"):?>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card">

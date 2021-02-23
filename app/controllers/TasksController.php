@@ -26,8 +26,6 @@ class TasksController extends Controller
 
     public function PBATestTask()
     {
-        /*carriers = json_decode( $this->woocommerce->testPBAShipping(), true );
-        //echo "The Carriers<pre>",print_r( $carriers ),"</pre>";
         if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
@@ -36,8 +34,6 @@ class TasksController extends Controller
         {
             $this->shopify->getPBAOrders();
         }
-        */
-        //$this->shopify->fulfillAnOrder();
         echo "done";
     }
 
@@ -227,9 +223,9 @@ class TasksController extends Controller
         }
     }
 
-    public function pbaTask()
+    public function PBAWooTask()
     {
-        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
         {
             return $this->error(403);
         }
@@ -241,7 +237,7 @@ class TasksController extends Controller
 
     public function PBAShopifyTask()
     {
-        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
+        if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
         {
             return $this->error(403);
         }
