@@ -62,7 +62,21 @@ class pdfController extends Controller
         else
         {
             //gonna make the pdf
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $sender_details = $this->deliverydocketsender->getSenderById($post_data['sender_id']);
+            $job_details = $this->productionjob->getJobById($post_data['job_id']);
+
+            $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'P']);
+            $pdf->SetDisplayMode('fullpage');
+            $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/deliverydocket.php', [
+                'sender_details'    => $sender_details,
+                'job_details'       => $job_details,
+                'dd_details'        => $post_data
+            ]);
+            $stylesheet = file_get_contents(STYLES."deliverydoket.css");
+            $pdf->WriteHTML($stylesheet,1);
+            $pdf->WriteHTML($html, 2);
+            $pdf->Output();
 
         }
     }

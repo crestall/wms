@@ -19,6 +19,7 @@ class Woocommerce{
     private $oneplateoitems;
     private $pbaoitems;
     private $woocommerce;
+    private $ua;
     private $return_array = array(
         'import_count'          => 0,
         'import_error'          => false,
@@ -48,6 +49,8 @@ class Woocommerce{
 
     public function getPBAOrders()
     {
+        //die($this->controller->request->params['args']['ua']);
+        $this->ua = $this->controller->request->params['args']['ua'];
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "PBA ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
@@ -78,7 +81,7 @@ class Woocommerce{
             $this->output .=  $e->getMessage() .PHP_EOL;
             //$output .=  $e->getRequest() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-            if (php_sapi_name() !='cli')
+            if ($this->ua == "CRON" )
             //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
             {
                 Email::sendCronError($e, "Performance Brands Australia");
@@ -100,7 +103,7 @@ class Woocommerce{
             $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
-        if (php_sapi_name() !='cli')
+        if ($this->ua != "CRON" )
         //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
         {
             return $this->return_array;
@@ -142,7 +145,7 @@ class Woocommerce{
             $this->output .=  $e->getMessage() .PHP_EOL;
             //$output .=  $e->getRequest() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-            if (php_sapi_name() !='cli')
+            if ($this->ua == "CRON" )
             //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
             {
                 Email::sendCronError($e, "Performance Brands Australia");
@@ -164,7 +167,7 @@ class Woocommerce{
             $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
-        if (php_sapi_name() !='cli')
+        if ($this->ua != "CRON" )
         //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
         {
             return $this->return_array;
@@ -640,7 +643,7 @@ class Woocommerce{
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
                 $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                if (php_sapi_name() !='cli')
+                if ($this->ua != "CRON" )
                 //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
                 {
                     ++$this->return_array['error_count'];

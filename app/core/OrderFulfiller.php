@@ -194,10 +194,11 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                                         $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
                                     }
                                     catch (HttpClientException $e) {
-                                        $output =  $e->getMessage() .PHP_EOL;
+                                        $this->output .= "ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".PHP_EOL;
+                                        $this->output .=  $e->getMessage() .PHP_EOL;
                                         //$output .=  $e->getRequest() .PHP_EOL;
-                                        $output .=  print_r($e->getResponse(), true) .PHP_EOL;
-                                        die($output);
+                                        $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                                        //die($output);
                                     }
                                 }
                             }
@@ -382,10 +383,11 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                                             $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
                                         }
                                         catch (HttpClientException $e) {
-                                            $output =  $e->getMessage() .PHP_EOL;
+                                            $this->output .= "ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".PHP_EOL;
+                                            $this->output .=  $e->getMessage() .PHP_EOL;
                                             //$output .=  $e->getRequest() .PHP_EOL;
-                                            $output .=  print_r($e->getResponse(), true) .PHP_EOL;
-                                            die($output);
+                                            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                                            //die($output);
                                         }
                                     }
                                 }
