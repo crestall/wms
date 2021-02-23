@@ -48,7 +48,7 @@ class Woocommerce{
 
     public function getPBAOrders()
     {
-        die($this->request->params['args']['ua']);
+        die($this->controller->request->params['args']['ua']);
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "PBA ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
