@@ -542,6 +542,10 @@ ul#fileList {
 /*****
 Standard Tables
 ******/
+div.dataTables_info{
+    padding-left: 1rem;
+}
+
 table{
     margin:10px auto;
     border-bottom:solid 2px #106ea4;

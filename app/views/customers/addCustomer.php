@@ -19,12 +19,6 @@ $country = Form::value('country');
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3">Contact</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" name="contact" id="contact" value="<?php echo Form::value('contact');?>" />
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="col-md-3">Phone</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="phone" id="phone" value="<?php echo Form::value('phone');?>" />
@@ -35,6 +29,41 @@ $country = Form::value('country');
                 <div class="col-md-4">
                     <input type="text" class="form-control email" name="email" id="email" value="<?php echo Form::value('email');?>" />
                     <?php echo Form::displayError('email');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Website</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="website" id="website" value="<?php echo Form::value('website');?>" />
+                </div>
+            </div>
+            <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
+                <div class="row mb-0">
+                    <div class="col-md-4">
+                        <h4>Contacts</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <a class="add-contact" style="cursor:pointer" title="Add Another Contact"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                    </div>
+                    <div class="col-md-4">
+                        <a id="remove-all-contacts" style="cursor:pointer" title="Leave Only First"><h4><i class="fad fa-times-square text-danger"></i> Leave only one contact</a></h4>
+                    </div>
+                </div>
+                <div id="contacts_holder">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <span class="inst">At least one contact name is required</span>
+                        </div>
+                    </div>
+                    <?php //echo "<pre>",print_r(Form::value('contacts')),"</pre>";//die(); ?>
+                    <?php if(!empty(Form::value('contacts'))):
+                        foreach(Form::value('contacts') as $i => $d)
+                        {
+                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_production_contact.php");
+                        }
+                    else:
+                       include(Config::get('VIEWS_PATH')."layout/page-includes/add_production_contact.php");
+                    endif;?>
                 </div>
             </div>
             <?php include(Config::get('VIEWS_PATH')."forms/address_nr.php");?>

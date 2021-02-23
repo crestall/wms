@@ -63,6 +63,24 @@ class CustomersController extends Controller
         ]);
     }
 
+    public function viewCustomer()
+    {
+        if(!isset($this->request->params['args']['customer']))
+        {
+            return (new ErrorsController())->error(404)->send();
+        }
+        $customer_id = $this->request->params['args']['customer'];
+        $customer_info = $this->productioncustomer->getCustomerById($customer_id);
+        //render the page
+        Config::setJsConfig('curPage', "view-customer");
+        Config::set('curPage', "view-customer");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/customers/", Config::get('VIEWS_PATH') . 'customers/viewCustomer.php', [
+            'page_title'    =>  "Viewing ".$customer_info['name'],
+            'pht'           =>  ": ".$customer_info['name'],
+            'customer'     =>  $customer_info
+        ]);
+    }
+
     public function isAuthorized()
     {
         $action = $this->request->param('action');
@@ -75,12 +93,14 @@ class CustomersController extends Controller
         //view only permissions
         Permission::allow('production', $resource,[
             'index',
-            'viewCustomers'
+            'viewCustomers',
+            'viewCustomer'
         ]);
         //view edit and add permissions
         Permission::allow(['production sales admin', 'production sales'], $resource, array(
             "index",
             "viewCustomers",
+            "viewCustomer",
             "editCustomer",
             "addCustomer",
         ));
