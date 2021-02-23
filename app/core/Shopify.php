@@ -93,43 +93,12 @@ class Shopify{
                 return $this->return_array;
             }
         }
-
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
-        /*foreach($collected_orders as $order)
-        {
-            echo "<p>--------------------------------------------------</p>";
-            echo "PRE THE ORDER<pre>",print_r($order),"</pre>";
-            echo "<p>--------------------------------------------------</p>";
-            $order_id = $order['id'];
-            $updateInfo = array (
-                "fulfillment_status" => "fulfilled",
-            );
-            echo "<p>Will Try and update status for $order_id</p>";
-            //$this->shopify->Order($order_id)->put($updateInfo);
-
-            $this->shopify->Order($order_id)->Fulfillment->post([
-                            "location_id" => $this->shopify->Location->get()[0]['id'],
-                            "tracking_number" => "FSGTEST",
-                            "tracking_urls" => ["https:wms.fsg.com.au"],
-                            "notify_customer" => true
-            ]);
-
-            $new_params = array(
-                'ids'   => $order_id,
-            );
-            $updated = $this->shopify->Order($order_id)->get();
-            echo "<p>--------------------------------------------------</p>";
-            echo "POST THE ORDER<pre>",print_r($updated),"</pre>";
-            echo "<p>--------------------------------------------------</p>";
-            die();
-        }
-        /* */
         if($orders = $this->procPBAOrders($collected_orders))
         {
             $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
-        if (php_sapi_name() !='cli')
+        if ($this->ua == "CRON" )
         {
             return $this->return_array;
         }
@@ -165,14 +134,15 @@ class Shopify{
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
                 $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                if (php_sapi_name() !='cli')
+                //if (php_sapi_name() !='cli')
+                if ($this->ua != "CRON" )
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
                 }
                 else
                 {
-                    //Email::sendBBImportError($message);
+                    Email::sendPBAImportError($message);
                 }
                 continue;
             }
@@ -362,10 +332,10 @@ class Shopify{
                     $message .= "<p>{$ad['state']}</p>";
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
-                    $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                    if (php_sapi_name() == 'cli')
+                    //if (php_sapi_name() == 'cli')
+                    if ($this->ua == "CRON" )
                     {
-                        //Email::sendTTImportError($message);
+                        Email::sendPBAImportError($message);
                     }
                     else
                     {
