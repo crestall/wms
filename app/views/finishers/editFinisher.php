@@ -81,10 +81,10 @@ else
                     if(!empty($contact_array)):
                         foreach($contact_array as $i => $d)
                         {
-                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_production_contact.php");
+                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
                         }
                     else:
-                        include(Config::get('VIEWS_PATH')."layout/page-includes/add_production_contact.php");
+                        include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
                     endif;?>
                 </div>
             </div>

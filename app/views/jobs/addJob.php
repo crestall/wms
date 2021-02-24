@@ -19,6 +19,26 @@ else
     $customer_collapse = "collapse";
     $customer_aria_expanded = "false";
 }
+//Finisher Stuff
+$finisher_count = 3;
+$f = 0;
+$nf = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+while($f < $finisher_count)
+{
+    $fn = ($f > 0)? $f + 1 : "";
+    ${'date_ed'.$fn} = (empty(Form::value('date_ed'.$fn.'_value')))? "" : date('d/m/Y', Form::value('date_ed'.$fn.'_value'));
+    if(Session::getAndDestroy('show_finisher'.$fn.'_address'))
+    {
+        ${'finisher'.$fn.'_collapse'} = "collapse show";
+        ${'finisher'.$fn.'_aria_expanded'} = "true";
+    }
+    else
+    {
+        ${'finisher'.$fn.'_collapse'} = "collapse";
+        ${'finisher'.$fn.'_aria_expanded'} = "false";
+    }
+    ++$f;
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -38,15 +58,9 @@ else
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3">Previous Job Id</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-md-3">Related Job Id</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="related_job_id" id="related_job_id" value="<?php echo Form::value('related_job_id');?>" />
+                        <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -138,53 +152,19 @@ else
                         <?php echo Form::displayError('customer_name');?>
                     </div>
                 </div>
-                <div class="form-group row custom-control custom-checkbox custom-control-right">
-                    <input class="custom-control-input send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" />
-                    <label class="custom-control-label col-md-3" for="send_to_customer">Send Job To Customer</label>
-                </div>
-                <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
-                    <div class="form-group row">
-                        <h4 class="col-md-4">Contact Details</h4>
+                <div class="form-group row ">
+                    <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
+                    <div class="col-lg-3 col-md-4">
+                        <input type="text" class="form-control customer" name="customer_contact" id="customer_contact" value="<?php echo Form::value('customer_contact');?>" />
                     </div>
-                    <div class="form-group row" id="contact_chooser">
-                        <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="0" >
+                    <label class="col-lg-1 col-md-2">Email</label>
+                    <div class="col-lg-3 col-md-4">
+                        <input type="text" class="form-control customer email" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
+                        <?php echo Form::displayError('customer_email');?>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 mb-3">Contact Name</label>
-                        <div class="col-md-4 mb-3">
-                            <input type="text" class="form-control customer_contact" name="customer_contact_name" id="customer_contact_name" value="<?php echo Form::value('customer_contact_name');?>" >
-                        </div>
-                        <label class="col-md-2 mb-3">Contact Role</label>
-                        <div class="col-md-4 mb-3">
-                            <input type="text" class="form-control customer_contact" name="customer_contact_role" id="customer_contact_role" value="<?php echo Form::value('customer_contact_role');?>" >
-                        </div>
-                        <label class="col-md-2 mb-3">Contact Email</label>
-                        <div class="col-md-4 mb-3">
-                            <input type="text" class="form-control customer_contact email" name="customer_contact_email" id="customer_contact_email" value="<?php echo Form::value('customer_contact_email');?>" >
-                            <?php echo Form::displayError('customer_contact_email');?>
-                        </div>
-                        <label class="col-md-2 mb-3">Contact Phone</label>
-                        <div class="col-md-4 mb-3">
-                            <input type="text" class="form-control customer_contact" name="customer_contact_phone" id="customer_contact_phone" value="<?php echo Form::value('customer_contact_phonel');?>" >
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">Business Email</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control email" name="customer_email" id="customer_email" value="<?php echo Form::value('customer_email');?>" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">Business Phone</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_email');?>" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label">Business Website</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="customer_website" id="customer_website" value="<?php echo Form::value('customer_website');?>" />
+                    <label class="col-lg-1 col-md-2">Phone</label>
+                    <div class="col-lg-3 col-md-4">
+                        <input type="text" class="form-control customer" name="customer_phone" id="customer_phone" value="<?php echo Form::value('customer_phone');?>" />
                     </div>
                 </div>
                 <div class="row">
@@ -242,29 +222,12 @@ else
                     </div>
                 </div>
             </div>
-<!------------------------------------------------------------------------------------------------------------------------------------------->
-<!-------------------------------------------------     The Finishers     ---------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="border border-secondary p-3 m-3 rounded bg-light">
-                <div class="row mb-0">
-                    <div class="col-md-8">
-                        <h3>Finisher(s) Details</h3>
-                    </div>
-                    <div class="col-md-4">
-                        <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add A Finisher</a></h4>
-                    </div>
-                </div>
-                <div id="finishers_holder"></div>
-            </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="border border-secondary p-3 m-3 rounded bg-light">
                 <h3>Delivery Details</h3>
-                <div class="form-group row custom-control custom-checkbox custom-control-right">
-                    <input class="custom-control-input send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
-                    <label class="custom-control-label col-md-3" for="held_in_store">Hold Job In Store</label>
-                </div>
+                 <?php include(Config::get('VIEWS_PATH')."forms/delivery_destinations.php");?>
                 <div id="delivery_address_holder">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
@@ -289,8 +252,112 @@ else
                 </div>
             </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-<!-------------------------------------------------     Form Submission     ---------------------------------------------------------------->
+<!-------------------------------------------------     The Finishers     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
+            <?php
+            $f = 0;
+            while($f < $finisher_count):
+                $fn = ($f > 0)? ($f + 1) : "";
+                $fwn = ucwords($nf->format($f+1));?>
+                <div class="border border-secondary p-3 m-3 rounded bg-light">
+                    <h3>Finisher <?php echo $fwn;?> Details</h3>
+                    <div class="row form-group">
+                        <label class="col-md-3 col-form-label">Expected Delivery Date</label>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="date_ed<?php echo $fn;?>" id="date_ed<?php echo $fn;?>" value="<?php echo ${'date_ed'.$fn};?>" />
+                                <div class="input-group-append">
+                                    <span id="date_ed<?php echo $fn;?>_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="date_ed<?php echo $fn;?>_value" id="date_ed<?php echo $fn;?>_value" value="<?php echo Form::value('date_ed'.$fn.'_value');?>" />
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label class="col-md-3">Finisher Name</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="finisher<?php echo $fn;?>_name" id="finisher<?php echo $fn;?>_name" value="<?php echo Form::value('finisher'.$fn.'_name');?>" />
+                            <input type="hidden" name="finisher<?php echo $fn;?>_id" id="finisher<?php echo $fn;?>_id" value="0" />
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label class="col-md-3">Purchase Order No.</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="finisher<?php echo $fn;?>_po" id="finisher<?php echo $fn;?>_po" value="<?php echo Form::value('finisher'.$fn.'_po');?>" />
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+                        <label class="col-lg-1 col-md-2 mb-md-3">Contact</label>
+                        <div class="col-lg-3 col-md-4">
+                            <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_contact" id="finisher<?php echo $fn;?>_contact" value="<?php echo Form::value('finisher'.$fn.'_contact');?>" />
+                        </div>
+                        <label class="col-lg-1 col-md-2">Email</label>
+                        <div class="col-lg-3 col-md-4">
+                            <input type="text" class="form-control finisher<?php echo $fn;?> email" name="finisher<?php echo $fn;?>_email" id="finisher<?php echo $fn;?>_email" value="<?php echo Form::value('finisher{$fn}_email');?>" />
+                            <?php echo Form::displayError('finisher{$fn}_email');?>
+                        </div>
+                        <label class="col-lg-1 col-md-2">Phone</label>
+                        <div class="col-lg-3 col-md-4">
+                            <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_phone" id="finisher<?php echo $fn;?>_phone" value="<?php echo Form::value('finisher{$fn}_phone');?>" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-right">
+                            <a  id="finisher<?php echo $fn;?>_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#finisher<?php echo $fn;?>_address_holder" role="button" aria-expanded="<?php echo ${'finisher'.$fn.'_aria_expanded'};?>" aria-controls="finisher<?php echo $fn;?>_address_holder"> </a>
+                        </div>
+                    </div>
+                    <div id="finisher<?php echo $fn;?>_address_holder" class="<?php echo $finisher2_collapse;?> mt-3">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Address Line 1</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_address" id="finisher<?php echo $fn;?>_address" value="<?php echo Form::value('finisher{$fn}_address');?>" />
+                                <?php echo Form::displayError('finisher{$fn}_address');?>
+                            </div>
+                            <div class="col-md-3 checkbox checkbox-default">
+                                <input class="form-check-input styled" type="checkbox" id="ignore_finisher<?php echo $fn;?>_address_error" name="ignore_finisher<?php echo $fn;?>_address_error" />
+                                <label for="ignore_finisher<?php echo $fn;?>_address_error">No need for a number</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Address Line 2</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_address2" id="finisher<?php echo $fn;?>_address2" value="<?php echo Form::value('finisher{$fn}_address2');?>" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Suburb/Town</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_suburb" id="finisher<?php echo $fn;?>_suburb" value="<?php echo Form::value('finisher{$fn}_suburb');?>" />
+                                <?php echo Form::displayError('finisher{$fn}_suburb');?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">State</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_state" id="finisher<?php echo $fn;?>_state" value="<?php echo Form::value('finisher{$fn}_state');?>" />
+                                <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                <?php echo Form::displayError('finisher{$fn}_state');?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Postcode</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_postcode" id="finisher<?php echo $fn;?>_postcode" value="<?php echo Form::value('finisher{$fn}_postcode');?>" />
+                                <?php echo Form::displayError('finisher{$fn}_postcode');?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Country</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control finisher<?php echo $fn;?>" name="finisher<?php echo $fn;?>_country" id="finisher<?php echo $fn;?>_country" value="<?php echo Form::value('finisher{$fn}_country');?>" />
+                                <span class="inst">use the 2 letter ISO code</span>
+                                <?php echo Form::displayError('finisher{$fn}_country');?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php ++$f;
+            endwhile;?>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <div class="col-md-4 offset-6 offset-md-8">
