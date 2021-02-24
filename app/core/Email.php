@@ -352,7 +352,7 @@
             if(!$mail->Send())
             {
                 Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-                throw new Exception("Email couldn't be sent to ". $name);
+                throw new Exception("Email couldn't be sent");
                 return false;
             }
         } catch (phpmailerException $e) {
@@ -367,7 +367,6 @@
     {
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        extract($feedback);
         try{
             $mail->Host = "smtp.office365.com";
             $mail->Port = Config::get('EMAIL_PORT');
@@ -394,7 +393,48 @@
             if(!$mail->Send())
             {
                 Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-                throw new Exception("Email couldn't be sent to ". $name);
+                throw new Exception("Email couldn't be sent");
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        return true;
+    }
+
+    public static function sendBDSNoOrdersFeedback()
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsnoordersfeedback.html");
+            //$replace_array = array("{ORDER_COUNT}");
+            //$replace_with_array = array($count);
+            //$body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+    		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+
+    		$mail->Subject = "BDS No Orders";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+    		$mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent");
                 return false;
             }
         } catch (phpmailerException $e) {
