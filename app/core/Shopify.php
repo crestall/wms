@@ -56,7 +56,7 @@ class Shopify{
     public function getPBAOrders()
     {
         //die($this->controller->request->params['args']['ua']);
-        $this->ua = $this->controller->request->params['args']['ua'];
+        $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;

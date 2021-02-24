@@ -358,6 +358,7 @@ while($f < $finisher_count)
                 </div>
                 <?php ++$f;
             endwhile;?>
+            
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <div class="col-md-4 offset-6 offset-md-8">
