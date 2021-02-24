@@ -134,7 +134,7 @@ $html = "
 <h1>FSG Picking Slip Summary</h1>
 <p>Printed : ".date("h:i a d/m/Y")."</p>
 $barcode_html
-<table class='pickslip'>
+<table class='pickslip' width='100%'>
     <tr>
         <th>Location</th>
         <th>Items</th>
