@@ -204,8 +204,14 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                             }
                             elseif($od['is_shopify'] == 1)
                             {
+                                $config = array(
+                                    'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
+                                    'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
+                                    'Password'       => Config::get('PBASHOPIFYAPIPASS')
+                                );
+                                $shopify = new PHPShopify\ShopifySDK($config);
                                 $order_id = $od['shopify_id'];
-                                $this->output .= "Sending Eparcel Tracking info to shopify".PHP_EOL;
+                                $this->output .= "Sending Direct Freight Tracking info to shopify".PHP_EOL;
                                 $this->shopify->Order($order_id)->Fulfillment->post([
                                     "location_id" => $this->shopify->Location->get()[0]['id'],
                                     "tracking_number" => $od['consignment_id'],
@@ -393,9 +399,15 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                                 }
                                 elseif($od['is_shopify'] == 1)
                                 {
+                                    $config = array(
+                                        'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
+                                        'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
+                                        'Password'       => Config::get('PBASHOPIFYAPIPASS')
+                                    );
+                                    $shopify = new PHPShopify\ShopifySDK($config);
                                     $order_id = $od['shopify_id'];
                                     $this->output .= "Sending Eparcel Tracking info to shopify".PHP_EOL;
-                                    $this->shopify->Order($order_id)->Fulfillment->post([
+                                    $shopify->Order($order_id)->Fulfillment->post([
                                         "location_id" => $this->shopify->Location->get()[0]['id'],
                                         "tracking_number" => $od['consignment_id'],
                                         "tracking_urls" => ["https://auspost.com.au/track/".$od['consignment_id']],
