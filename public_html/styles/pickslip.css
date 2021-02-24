@@ -82,7 +82,8 @@ tr.total td{
 }
 
 div.pickslip{
-	width:148mm;
+	width:200mm;
+    margin: 2mm auto;
 }
 
 table.pickslip td{
