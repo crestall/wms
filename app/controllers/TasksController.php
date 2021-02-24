@@ -72,7 +72,7 @@ class TasksController extends Controller
 
     public function BDSCompletionTask()
     {
-        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
@@ -84,6 +84,7 @@ class TasksController extends Controller
                 $client_id = 86;
                 $orders = $this->order->getUnFTPedOrdersArray($client_id);
                 //echo "<pre>",print_r($orders),"</pre>"; die();
+
                 if(count($orders))
                 {
                     $cols = array(
@@ -165,6 +166,7 @@ class TasksController extends Controller
                 {
                     die("cannot close connection");
                 }
+                Email::sendBDSFinaliseFeedback(count($orders));
             }
             //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "bsd_dispatch_report_".date("Ymd")]);
         }
