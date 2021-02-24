@@ -51,6 +51,7 @@ foreach($orders_ids as $id):
         <tr>
             <th>Item</th>
             <th>SKU</th>
+            <th>Barcode</th>
             <th>Location</th>
             <th>Quantity</th>
             <th>Image</th>
@@ -107,6 +108,7 @@ foreach($orders_ids as $id):
             <tr>
                	<td><?php echo $i['name'];?></td>
                 <td><?php echo $i['sku'];?></td>
+                <td><?php echo $i['barcode'];?></td>
                 <td><?php echo $location;?></td>
                 <td class='number bold'><?php echo $i['qty'];?></td>
                 <td><?php echo $image;?></td>
@@ -114,9 +116,9 @@ foreach($orders_ids as $id):
                 <td class='centre'><span class='check_box'></span></td>
             </tr>
         <?php endforeach;?>
-        <tr><td align='right' colspan='4'><?php echo $courier;?></td><td align='right' colspan='3'><?php echo $express;?></td></tr>
-        <tr><td align='center' colspan='7'><?php echo $od['3pl_comments'];?></td></tr>
-        <tr><td align='center' colspan='7'><?php echo $od['pick_notices'];?></td></tr>
+        <tr><td align='right' colspan='5'><?php echo $courier;?></td><td align='right' colspan='3'><?php echo $express;?></td></tr>
+        <tr><td align='center' colspan='8'><?php echo $od['3pl_comments'];?></td></tr>
+        <tr><td align='center' colspan='8'><?php echo $od['pick_notices'];?></td></tr>
         </table>
     </div>
     <pagebreak />
