@@ -7,10 +7,6 @@ td{
     vertical-align: top;
 }
 
-td.quantity{
-    line-height: 5em;
-}
-
 #dd_body {
     margin: 0;
     padding: 0;
@@ -18,6 +14,17 @@ td.quantity{
     background: none;
     width: 210mm;
     height: 297mm;
+}
+
+#dd_body table,
+#dd_body table th,
+#dd_body table td{
+   border-collapse: collapse;
+   line-height:1.3em;
+}
+
+#dd_body table{
+    font-size: 0.9em;
 }
 
 #top_half{
@@ -63,15 +70,4 @@ img {
 table.address_details{
     margin-top: 15mm;
     margin-bottom: 20mm;
-}
-
-#page_body table,
-#page_body table th,
-#page_body table td{
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
-#dd_body table{
-    font-size: 0.9em;
 }
