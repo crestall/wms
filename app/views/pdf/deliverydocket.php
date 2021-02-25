@@ -105,6 +105,14 @@ $delivery_details .= "
                 <td class="w50"></td>
                 <td class="right-align w50"><strong>Received in good order and conditions</strong></td>
             </tr>
+            <tr>
+                <td>Delivered by:__________________</td>
+                <td>Print name:____________________</td>
+            </tr>
+            <tr>
+                <td>Date: <?php echo date("d/m/Y/");?>&nbsp;&nbsp;Time:____________</td>
+                <td>Signature:_____________________</td>
+            </tr>
         </table>
     </div>
 </div>
