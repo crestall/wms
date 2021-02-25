@@ -28,7 +28,7 @@ td{
 }
 
 #dd_body table.delivery_details{
-    background: linear-gradient(top, #c7cdde, #f0f2ff);
+    background: linear-gradient(top, #f0f2ff,#c7cdde) ;
 }
 
 #dd_body table.delivery_details td
