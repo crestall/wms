@@ -27,9 +27,13 @@ td{
     font-size: 0.9em;
 }
 
+#dd_body table.delivery{
+    background-color: #ccc;
+}
+
 #dd_body table.delivery_details td
 {
-    padding: 2mm;
+    padding: 3mm;
 }
 
 #top_half{
