@@ -7,6 +7,10 @@ td{
     vertical-align: top;
 }
 
+td.quantity{
+    line-height: 5em;
+}
+
 #dd_body {
     margin: 0;
     padding: 0;
