@@ -36,6 +36,11 @@ td{
     padding: 3mm;
 }
 
+table#signatures{
+    margin-top:10mm;
+    width: 100%;
+}
+
 #top_half{
     height: 130mm;
 }
