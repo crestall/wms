@@ -67,6 +67,10 @@ td.right-align{
     text-align:right;
 }
 
+td.w50{
+    width: 50%;
+}
+
 td.sender-address{
     font-size:0.8em;
 }
