@@ -102,7 +102,7 @@ $delivery_details .= "
         <?php echo $delivery_details;?>
         <table id="signatures">
             <tr>
-                <td sclass="w50"></td>
+                <td class="w50"></td>
                 <td class="right-align w50"><strong>Received in good order and conditions</strong></td>
             </tr>
         </table>
