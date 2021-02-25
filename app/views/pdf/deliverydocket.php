@@ -107,11 +107,11 @@ $delivery_details .= "
             </tr>
             <tr>
                 <td>Delivered by:__________________</td>
-                <td>Print name:____________________</td>
+                <td class="right-align">Print name:____________________</td>
             </tr>
             <tr>
                 <td>Date: <?php echo date("d/m/Y/");?>&nbsp;&nbsp;Time:____________</td>
-                <td>Signature:_____________________</td>
+                <td class="right-align">Signature:_____________________</td>
             </tr>
         </table>
     </div>
