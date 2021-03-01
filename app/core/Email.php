@@ -268,7 +268,7 @@
 
             $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
 
-            $mail->AddAdress('Clint Rice','clint@performancebrandsaustralia.com');
+            $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
 
             $mail->Subject = "Order with item error for Performance Brands Australia";
 
@@ -343,6 +343,7 @@
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
     		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
 
     		$mail->Subject = "BDS Order Import Summary";
 
@@ -376,14 +377,25 @@
             $mail->Username = Config::get('EMAIL_UNAME');
             $mail->Password = Config::get('EMAIL_PWD');
 
+            if($count == 1)
+            {
+                $replace = "One order has been";
+            }
+            else
+            {
+                $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+                $replace = $f->format($count)." orders have been";
+            }
+
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsfinalisefeedback.html");
             $replace_array = array("{ORDER_COUNT}");
-            $replace_with_array = array($count);
+            $replace_with_array = array($replace);
             $body = str_replace($replace_array, $replace_with_array, $body);
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
     		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
 
     		$mail->Subject = "BDS Order Finalise Summary";
 
