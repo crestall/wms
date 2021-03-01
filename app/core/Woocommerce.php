@@ -50,7 +50,7 @@ class Woocommerce{
     public function getPBAOrders()
     {
         //die($this->controller->request->params['args']['ua']);
-        $this->ua = $this->controller->request->params['args']['ua'];
+        $this->ua = isset($this->controller->request->params['args']['ua'])? $this->controller->request->params['args']['ua'] : "FSG" ;
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "PBA ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
@@ -651,8 +651,7 @@ class Woocommerce{
                 }
                 else
                 {
-                    Email::sendBBImportError($message);
-
+                    Email::sendPBAImportError($message);
                 }
                 continue;
             }
