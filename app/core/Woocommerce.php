@@ -1069,13 +1069,13 @@ class Woocommerce{
                         Email::sendPBAImportError($message);
                         $this->return_array['error_string'] .= $message;
                         ++$this->return_array['error_count'];
-                        $this->return_array['error_orders'][] = $o['client_order_id'];
+                        $this->return_array['error_orders'][] = $order['client_order_id'];
                     }
                     else
                     {
                         $this->return_array['error_string'] .= $message;
                         ++$this->return_array['error_count'];
-                        $this->return_array['error_orders'][] = $o['client_order_id'];
+                        $this->return_array['error_orders'][] = $order['client_order_id'];
                     }
                     //echo $message;
                 }
