@@ -41,9 +41,16 @@ $address_details = "
                         $job_no
                     </table>
                 </td>
-                <td class='right-align'>Date: <strong>".date("d/m/Y")."</strong></td>
+                <td class='right-align'>
+                    <table>
+                        <tr>
+                            <td>Date:</td>
+                            <td><strong>".date("d/m/Y")."</strong></td>
+                        </tr>
+                        ".$inst."
+                    </table>
+                </td>
             </tr>
-            ".$inst."
         </table>
 ";
 
