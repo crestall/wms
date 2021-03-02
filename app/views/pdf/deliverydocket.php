@@ -43,13 +43,16 @@ $address_details = "
                         <tr>
                             <td>Date:</td>
                             <td><strong>".date("d/m/Y")."</strong></td>
-                        </tr>
-                        ".$inst."
-                    </table>
+                        </tr>";
+$address_details_lower = $address_details.$inst;
+$address_details_upper = $address_details;
+$more_address_details = "</table>
                 </td>
             </tr>
         </table>
 ";
+$address_details_upper .= $more_address_details;
+$address_details_lower .= $more_address_details;
 
 $delivery_details = "
     <table class='delivery_details'>
@@ -74,7 +77,7 @@ else
 }
 $delivery_details .= "
     <td class='quantity'>
-        Quantity<br>
+        Quantity:<br>
         <strong>".$dd_details['quantity']."</strong>
 ";
 if(!empty($dd_details['box_count']))
@@ -84,7 +87,7 @@ if(!empty($dd_details['packed_as']))
 $delivery_details .= "
     </td>
     <td class='job_title'>
-        Job Title<br>
+        Job Title:<br>
         <strong>".$dd_details['job_title']."</strong>
     </td>
 ";
@@ -104,7 +107,7 @@ $delivery_details .= "
                     <td class="right-align sender-address"><?php echo $sender_details['address'];?></td>
                 </tr>
             </table>
-            <?php echo $address_details;?>
+            <?php echo $address_details_upper;?>
             <?php echo $delivery_details;?>
         </div>
         <div id="divider">
@@ -113,7 +116,7 @@ $delivery_details .= "
             <h4>Sender's Copy</h4>
         </div>
         <div id="bottom_half">
-            <?php echo $address_details;?>
+            <?php echo $address_details_lower;?>
             <?php echo $delivery_details;?>
             <table id="signatures">
                 <tr>
