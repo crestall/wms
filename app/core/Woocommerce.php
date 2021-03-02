@@ -111,7 +111,7 @@ class Woocommerce{
         }
         else
         {
-            Email::sendPBAImportSummary($this->return_array);
+            Email::sendPBAWooImportSummary($this->return_array);
         }
     }
 
