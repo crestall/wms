@@ -18,7 +18,15 @@ $job_no = ($sender_details['send_job_no'] == 1)?
         <td>{$job_details['job_id']}</td>
     </tr>":
     "";
-
+$inst = ((!empty($dd_details['delivery_instructions'])))?
+    "<tr>
+        <td>&nbsp;</td>
+        <td>
+            Instructions For Driver:<br>
+            ".$dd_details['delivery_instructions']."
+        </td>
+    </tr>":
+    "";
 $address_details = "
     <table class='address_details'>
             <tr>
@@ -35,6 +43,7 @@ $address_details = "
                 </td>
                 <td class='right-align'>Date: <strong>".date("d/m/Y")."</strong></td>
             </tr>
+            ".$inst."
         </table>
 ";
 
