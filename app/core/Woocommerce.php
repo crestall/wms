@@ -22,7 +22,7 @@ class Woocommerce{
     private $ua;
     private $return_array = array(
         'import_count'          => 0,
-        'imported orders'       => array(),
+        'imported_orders'       => array(),
         'error_orders'          => array(),
         'import_error'          => false,
         'error'                 => false,
