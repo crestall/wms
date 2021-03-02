@@ -1,9 +1,5 @@
 <?php
 //echo "<pre>",print_r($dd_details),"</pre>";
-
-//The setup
-
-//Send to address string
 $address_string = $dd_details['ship_to'];
 $address_string .= "<br>".$dd_details['address'];
 if(!empty($dd_details['address2'])) $address_string .= "<br>".$dd_details['address2'];
@@ -15,89 +11,48 @@ $attention = (!empty($dd_details['attention']))?
         <td>{$dd_details['attention']}</td>
     </tr>":
     "";
-
-//Instructions for Driver
+$job_no = ($sender_details['send_job_no'] == 1)?
+    "<tr>
+        <td>Job No.</td>
+        <td style='width:5mm'></td>
+        <td>{$job_details['job_id']}</td>
+    </tr>":
+    "";
 $inst = ((!empty($dd_details['delivery_instructions'])))?
     "<tr>
         <td>Delivery Instructions:</td>
         <td><strong>".$dd_details['delivery_instructions']." </strong></td>
     </tr>":
     "";
-
-//The Job Number
-$job_no =
-    "<tr>
-        <td>Job No.</td>
-        <td style='width:5mm'></td>
-        <td>{$job_details['job_id']}</td>
-    </tr>";
-
-//The Purchase Order Number
-$po_no =
-    "<tr>
-        <td>Order No.</td>
-        <td style='width:5mm'></td>
-        <td>{$dd_details['po_number']}</td>
-    </tr>";
-
-$address_table_class = "address_details";
-$address_padding_cell_width = "5mm";
-$address_cell_width = "105mm";
-$date_cell_width = "65mm";
-
-$address_details_upper = "
-    <table class='".$address_table_class."'>
-        <tr>
-            <td style='width: ".$address_cell_width."'>
-                <table>
-                    <tr>
-                        <td>Delivery To:</td>
-                        <td style='width:".$address_padding_cell_width."'></td>
-                        <td>".$address_string."</td>
-                    </tr>
-                    ".$attention;
-$address_details_upper .= ($sender_details['send_job_no'] == 1)? $job_no : $po_no;
-$address_details_upper .= "
-                </table>
-            </td>
-            <td style='width:".$date_cell_width."' class='right-align'>
-                <table>
-                    <tr>
-                        <td>Date:</td>
-                        <td><strong>".date("d/m/Y")."</strong></td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+$address_details = "
+    <table class='address_details'>
+            <tr>
+                <td style='width: 105mm'>
+                    <table>
+                        <tr>
+                            <td>Delivery To:</td>
+                            <td style='width:5mm'></td>
+                            <td>".$address_string."</td>
+                        </tr>
+                        $attention
+                        $job_no
+                    </table>
+                </td>
+                <td style='width:65mm' class='right-align'>
+                    <table>
+                        <tr>
+                            <td>Date:</td>
+                            <td><strong>".date("d/m/Y")."</strong></td>
+                        </tr>";
+$address_details_lower = $address_details.$inst;
+$address_details_upper = $address_details;
+$more_address_details = "</table>
+                </td>
+            </tr>
+        </table>
 ";
-
-$address_details_lower = "
-    <table class='".$address_table_class."'>
-        <tr>
-            <td style='width: ".$address_cell_width."'>
-                <table>
-                    <tr>
-                        <td>Delivery To:</td>
-                        <td style='width:".$address_padding_cell_width."'></td>
-                        <td>".$address_string."</td>
-                    </tr>
-                    $attention
-                    $job_no
-                </table>
-            </td>
-            <td style='width:".$date_cell_width."' class='right-align'>
-                <table>
-                    <tr>
-                        <td>Date:</td>
-                        <td><strong>".date("d/m/Y")."</strong></td>
-                    </tr>
-                    $inst
-                </table>
-            </td>
-        </tr>
-    </table>
-";
+$address_details_upper .= $more_address_details;
+$address_details_lower .= $more_address_details;
 
 $delivery_details = "
     <table class='delivery_details'>
