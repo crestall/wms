@@ -36,6 +36,7 @@ td{
 
 #dd_body table.delivery_details{
     background: linear-gradient(top, #f0f2ff,#c7cdde) ;
+    width: 100%;
 }
 
 #dd_body table.delivery_details td
