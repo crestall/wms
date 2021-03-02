@@ -38,7 +38,7 @@ $address_details = "
                         $job_no
                     </table>
                 </td>
-                <td class='right-align'>
+                <td style='width:65mm' class='right-align'>
                     <table>
                         <tr>
                             <td>Date:</td>
