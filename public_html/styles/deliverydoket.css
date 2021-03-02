@@ -8,6 +8,8 @@ td{
 }
 
 #dd_body {
+    font-family: "Roboto";
+    font-style: normal;
     margin: 0;
     padding: 0;
     line-height:1.5em;
