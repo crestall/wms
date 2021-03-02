@@ -3,13 +3,16 @@
     clear: both;
 }
 
+body{
+    font-family: "Roboto";
+    font-style: normal;
+}
+
 td{
     vertical-align: top;
 }
 
 #dd_body {
-    font-family: "Roboto";
-    font-style: normal;
     margin: 0;
     padding: 0;
     line-height:1.5em;
@@ -17,6 +20,8 @@ td{
     width: 210mm;
     height: 297mm;
 }
+
+
 
 #dd_body table,
 #dd_body table th,
