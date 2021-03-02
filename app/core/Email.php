@@ -267,7 +267,7 @@
             {
                 $error_numbers = implode(", ", $ret_array['error_orders']);
                 $import_errors = "
-                    <h3 class='error'>The following orders numbers have <strong>NOT</strong> benn imported due to inventory or SKU errors</h3>
+                    <h3 class='error'>The following orders numbers have <strong>NOT</strong> been imported due to inventory or SKU errors</h3>
                     <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
                         <tr>
                             <td style='padding: 20px;'>$error_numbers</td>
@@ -280,7 +280,7 @@
             {
                 $import_numbers = implode(", ", $ret_array['imported_orders']);
                 $imports = "
-                    <h3 class='success'>The Following Feedback Has Been Supplied Regarding Successful Imports</h3>
+                    <h3 class='success'>The following order numbers have been successfuly import and will be picked and packed shortly</h3>
                     <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #ccebd6;border: 3px solid #009933;color: #009933;'>
                         <tr>
                             <td style='padding: 20px;'>$import_numbers</td>
@@ -288,7 +288,6 @@
                     </table>
                 ";
             }
-
 
             $replace_array = array("{IMPORT_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{IMPORTS}");
             $replace_with_array = array($ret_array['error_count'], $ret_array['import_count'], $import_errors, $imports);
