@@ -27,7 +27,7 @@ $inst = ((!empty($dd_details['delivery_instructions'])))?
 $address_details = "
     <table class='address_details'>
             <tr>
-                <td style='width: 125mm'>
+                <td style='width: 105mm'>
                     <table>
                         <tr>
                             <td>Delivery To:</td>
