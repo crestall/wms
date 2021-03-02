@@ -9,6 +9,7 @@ if(Session::getIsLoggedIn()):
     if( Session::isProductionUser() )
         $app_type = "Production";
     $user_role = str_replace(" ","_", $user_role);
+    $super_admin = (Session::getUserRole() == "super admin");
     //echo strtoupper($user_role."_PAGES");
     $pages = Config::getPages(strtoupper($user_role."_PAGES"));
     $user_info = $this->controller->user->getProfileInfo(Session::getUserId());
