@@ -22,6 +22,7 @@ class Woocommerce{
     private $ua;
     private $return_array = array(
         'import_count'          => 0,
+        'imported orders'       => array(),
         'import_error'          => false,
         'error'                 => false,
         'error_count'           => 0,
@@ -104,11 +105,13 @@ class Woocommerce{
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
         if ($this->ua != "CRON" )
-        //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
         {
             return $this->return_array;
         }
-
+        else
+        {
+            Email::sendPBAImportSummary($this->return_array);
+        }
     }
 
     public function getPBAOrder($wcorder_id = false)
@@ -690,6 +693,7 @@ class Woocommerce{
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($this->pbaoitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
+            $this->return_array['imported_orders'][] = $o['client_order_id'];
              /*change status in woocommerce
             $this->output .= "Updating woocommerce status to completed fo order id ".$o['client_order_id'].PHP_EOL;
             try{
@@ -1055,10 +1059,10 @@ class Woocommerce{
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
                     $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                    if (php_sapi_name() == 'cli')
+                    if ($this->ua == "CRON" )
                     //if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
                     {
-                        Email::sendTTImportError($message);
+                        Email::sendPBAImportError($message);
                     }
                     else
                     {

@@ -98,6 +98,7 @@
                 <h2>This is Done Automatically Now</h2>
                 <p>press any buttons with caution!</p>
                 <p>and check for double ups!</p>
+                <h3>Should be OK to press if <strong>NO</strong> Performance Brands Orders are in the system</h3>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card">
                         <a name="pba-woo"></a>

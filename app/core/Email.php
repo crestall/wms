@@ -246,6 +246,11 @@
         }
     }
 
+    public static function sendPBAImportSummary($ret_array)
+    {
+        echo "<pre>",print_r($ret_array),"</pre>"; die();
+    }
+
     public static function sendPBAImportError($message)
     {
         $mail = new PHPMailer();
@@ -266,9 +271,10 @@
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+            //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
 
-            $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
+            //$mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
 
             $mail->Subject = "Order with item error for Performance Brands Australia";
 
