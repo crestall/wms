@@ -20,7 +20,7 @@ $job_no = ($sender_details['send_job_no'] == 1)?
     "";
 $inst = ((!empty($dd_details['delivery_instructions'])))?
     "<tr>
-        <td>Instructions For Driver:</td>
+        <td>Delivery Instructions:</td>
         <td><strong>".$dd_details['delivery_instructions']." </strong></td>
     </tr>":
     "";
