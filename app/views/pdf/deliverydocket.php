@@ -95,8 +95,7 @@ $delivery_details .= "
             <?php echo $delivery_details;?>
         </div>
         <div id="divider">
-            <p>-------------------------------------------------------------------------------------------------------------------------------<br>
-            <span class="inst">[Detach Here]</span></p>
+            <span class="inst">[Detach Here]</span>
             <h2>Delivery Docket</h2>
             <h4>Sender's Copy</h4>
         </div>

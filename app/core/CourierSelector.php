@@ -131,34 +131,64 @@
                 if($this->order_details['client_id'] == 7)
                 {
                     $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.4 , 2);
-                    $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                    $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    if($this->order_details['country'] == "AU")
+                    {
+                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    }
+                    else
+                    {
+                        $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
+                        $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
+                    }
                 }
             /*********** end charge FREEDOM more *******************/
             /*********** special deals for OnePlate *******************/
                 if($this->order_details['client_id'] == 82)
                 {
                     $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.1 , 2);
-                    $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                    $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    if($this->order_details['country'] == "AU")
+                    {
+                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    }
+                    else
+                    {
+                        $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
+                        $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
+                    }
                 }
             /*********** special deals for OnePlate *******************/
             /*********** BDS Calculations *******************/
                 if($this->order_details['client_id'] == 86)
                 {
-                    $order_values['handling_charge'] = $this->handling_charge;
                     $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.3 , 2);
-                    $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                    $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    if($this->order_details['country'] == "AU")
+                    {
+                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    }
+                    else
+                    {
+                        $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
+                        $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
+                    }
                 }
             /*********** end BDS Calculations *******************/
             /*********** PBA Calculations *******************/
                 if($this->order_details['client_id'] == 87)
                 {
-                    $order_values['handling_charge'] = $this->handling_charge;
                     $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.3 , 2);
-                    $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                    $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    if($this->order_details['country'] == "AU")
+                    {
+                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+                    }
+                    else
+                    {
+                        $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
+                        $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
+                    }
                 }
             /*********** end PBA Calculations *******************/
             $order_values['charge_code'] = $sResponse['shipments'][0]['items'][0]['product_id'];
