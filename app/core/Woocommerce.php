@@ -23,6 +23,7 @@ class Woocommerce{
     private $return_array = array(
         'import_count'          => 0,
         'imported orders'       => array(),
+        'error_orders'          => array(),
         'import_error'          => false,
         'error'                 => false,
         'error_count'           => 0,
@@ -654,6 +655,9 @@ class Woocommerce{
                 }
                 elseif(SITE_LIVE)
                 {
+                    ++$this->return_array['error_count'];
+                    $this->return_array['error_string'] .= $message;
+                    $this->return_array['error_orders'][] = $o['client_order_id'];
                     Email::sendPBAImportError($message);
                 }
                 continue;
@@ -1063,11 +1067,15 @@ class Woocommerce{
                     //if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
                     {
                         Email::sendPBAImportError($message);
+                        $this->return_array['error_string'] .= $message;
+                        ++$this->return_array['error_count'];
+                        $this->return_array['error_orders'][] = $o['client_order_id'];
                     }
                     else
                     {
                         $this->return_array['error_string'] .= $message;
                         ++$this->return_array['error_count'];
+                        $this->return_array['error_orders'][] = $o['client_order_id'];
                     }
                     //echo $message;
                 }
