@@ -1,5 +1,5 @@
 <?php
-echo "<pre>",print_r($dd_details),"</pre>";
+//echo "<pre>",print_r($dd_details),"</pre>";
 $address_string = $dd_details['ship_to'];
 $address_string .= "<br>".$dd_details['address'];
 if(!empty($dd_details['address2'])) $address_string .= "<br>".$dd_details['address2'];
@@ -100,5 +100,19 @@ $delivery_details .= "
     <div id="bottom_half">
         <?php echo $address_details;?>
         <?php echo $delivery_details;?>
+        <table id="signatures">
+            <tr>
+                <td class="w50"></td>
+                <td class="right-align w50"><strong>Received in good order and conditions</strong></td>
+            </tr>
+            <tr>
+                <td>Delivered by:__________________</td>
+                <td class="right-align">Print name:____________________</td>
+            </tr>
+            <tr>
+                <td>Date: <?php echo date("d/m/Y/");?>&nbsp;&nbsp;Time:____________</td>
+                <td class="right-align">Signature:_____________________</td>
+            </tr>
+        </table>
     </div>
 </div>

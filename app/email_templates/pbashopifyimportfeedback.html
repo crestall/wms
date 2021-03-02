@@ -116,10 +116,14 @@ div.feedbackbox{
 </head>
 <body>
 	<div id="main_body">
-        <h2>The BDS Order Finalisation Has Been Completed</h2>
+        <h2>The Perfect Practice Golf Shopify Order Import Has Been Completed</h2>
         <div class="inset">
-            <p>{ORDER_COUNT} finalised and details uploaded to the FTP server</p>
+            <p>{IMPORT_ERROR_COUNT} generated an error on import</p>
+            <p>{IMPORT_COUNT} orders that have been successfully added to the system.</p>
         </div>
+        <hr/>
+            {IMPORT_ERRORS}
+            {IMPORTS}
 		<p>Thankyou</p>
         <p class="italic"><span class="bold">The FSG Customer Service Team</span></p>
         <img src="cid:emailfoot" />

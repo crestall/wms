@@ -18,6 +18,8 @@ class Shopify{
     private $ua;
     private $return_array = array(
         'import_count'          => 0,
+        'imported_orders'       => array(),
+        'error_orders'          => array(),
         'import_error'          => false,
         'error'                 => false,
         'error_count'           => 0,
@@ -81,9 +83,9 @@ class Shopify{
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-            if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+            if ($this->ua == "CRON" )
             {
-                Email::sendCronError($e, "Big Bottle");
+                Email::sendCronError($e, "Perfect Practice Golf");
                 return;
             }
             else
@@ -98,9 +100,13 @@ class Shopify{
             $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
-        if ($this->ua == "CRON" )
+        if ($this->ua != "CRON" )
         {
             return $this->return_array;
+        }
+        else
+        {
+            Email::sendPBAShopifyImportSummary($this->return_array);
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
@@ -134,14 +140,17 @@ class Shopify{
                 $message .= "<p>{$o['postcode']}</p>";
                 $message .= "<p>{$o['country']}</p>";
                 $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                //if (php_sapi_name() !='cli')
+
                 if ($this->ua != "CRON" )
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
                 }
-                else
+                elseif(SITE_LIVE)
                 {
+                    ++$this->return_array['error_count'];
+                    $this->return_array['error_string'] .= $message;
+                    $this->return_array['error_orders'][] = $o['client_order_id'];
                     Email::sendPBAImportError($message);
                 }
                 continue;
@@ -183,6 +192,7 @@ class Shopify{
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($this->pbaoitems[$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
+            $this->return_array['imported_orders'][] = $o['client_order_id'];
         }
     }
 
@@ -332,15 +342,18 @@ class Shopify{
                     $message .= "<p>{$ad['state']}</p>";
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
-                    //if (php_sapi_name() == 'cli')
-                    if ($this->ua == "CRON" )
+                    if ($this->ua == "CRON" && SITE_LIVE )
                     {
                         Email::sendPBAImportError($message);
+                        $this->return_array['error_string'] .= $message;
+                        ++$this->return_array['error_count'];
+                        $this->return_array['error_orders'][] = $order['client_order_id'];
                     }
                     else
                     {
                         $this->return_array['error_string'] .= $message;
                         ++$this->return_array['error_count'];
+                        $this->return_array['error_orders'][] = $order['client_order_id'];
                     }
                     //echo $message;
                 }
