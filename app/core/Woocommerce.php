@@ -652,7 +652,7 @@ class Woocommerce{
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
                 }
-                else
+                elseif(SITE_LIVE)
                 {
                     Email::sendPBAImportError($message);
                 }
@@ -1059,7 +1059,7 @@ class Woocommerce{
                     $message .= "<p>{$ad['postcode']}</p>";
                     $message .= "<p>{$ad['country']}</p>";
                     $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-                    if ($this->ua == "CRON" )
+                    if ($this->ua == "CRON" && SITE_LIVE )
                     //if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
                     {
                         Email::sendPBAImportError($message);
