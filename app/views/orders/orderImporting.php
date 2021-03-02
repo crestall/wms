@@ -94,11 +94,7 @@
                     </div>
                 </div>
             </div>
-            <div class="errorbox col-12">
-                <h2>This is Done Automatically Now</h2>
-                <p>press any buttons with caution!</p>
-                <p>and check for double ups!</p>
-                <h3>Should be OK to press if <strong>NO</strong> Performance Brands Orders are in the system</h3>
+            <?php if($super_admin):?>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card">
                         <a name="pba-woo"></a>
@@ -145,8 +141,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <?php if($user_role == "super admin"):?>
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card">
                         <a name="freedom"></a>

@@ -3,6 +3,11 @@
     clear: both;
 }
 
+body{
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+
 td{
     vertical-align: top;
 }
@@ -15,6 +20,8 @@ td{
     width: 210mm;
     height: 297mm;
 }
+
+
 
 #dd_body table,
 #dd_body table th,
@@ -46,7 +53,7 @@ table#signatures td{
 }
 
 #top_half{
-    height: 110mm;
+    height: 134mm;
 }
 
 #divider{
@@ -54,6 +61,7 @@ table#signatures td{
     padding-top:3mm;
     box-sizing: border-box;
     text-align: center;
+    border-top:thin dashed #ccc;
 }
 
 #divider .inst{
@@ -64,12 +72,14 @@ table#signatures td{
 }
 
 #divider h2{
-    margin-bottom: 0;
-    padding-bottom:0;
+    margin: 0;
+    padding:0;
 }
 #divider h4{
     color:#CCC;
     text-transform: uppercase;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 td.right-align{

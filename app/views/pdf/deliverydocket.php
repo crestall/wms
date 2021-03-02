@@ -80,39 +80,42 @@ $delivery_details .= "
     </table>
 ";
 ?>
-<div id="dd_body">
-    <div id="top_half">
-        <table id="page_head">
-            <tr>
-                <td  style="width: 125mm"><img style="height:18mm;width:auto;" src="https://wms.fsg.com.au/images/delivery_docket_logos/<?php echo $sender_details['logo'];?>"></td>
-                <td class="right-align sender-address"><?php echo $sender_details['address'];?></td>
-            </tr>
-        </table>
-        <?php echo $address_details;?>
-        <?php echo $delivery_details;?>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<body>
+    <div id="dd_body">
+        <div id="top_half">
+            <table id="page_head">
+                <tr>
+                    <td  style="width: 125mm"><img style="height:18mm;width:auto;" src="https://wms.fsg.com.au/images/delivery_docket_logos/<?php echo $sender_details['logo'];?>"></td>
+                    <td class="right-align sender-address"><?php echo $sender_details['address'];?></td>
+                </tr>
+            </table>
+            <?php echo $address_details;?>
+            <?php echo $delivery_details;?>
+        </div>
+        <div id="divider">
+            <span class="inst">[Detach Here]</span>
+            <h2>Delivery Docket</h2>
+            <h4>Sender's Copy</h4>
+        </div>
+        <div id="bottom_half">
+            <?php echo $address_details;?>
+            <?php echo $delivery_details;?>
+            <table id="signatures">
+                <tr>
+                    <td class="w50"></td>
+                    <td class="right-align w50"><strong>Received in good order and conditions</strong></td>
+                </tr>
+                <tr>
+                    <td>Delivered by:__________________</td>
+                    <td class="right-align">Print name:____________________</td>
+                </tr>
+                <tr>
+                    <td>Date: <?php echo date("d/m/Y/");?>&nbsp;&nbsp;Time:____________</td>
+                    <td class="right-align">Signature:_____________________</td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div id="divider">
-        <p>-------------------------------------------------------------------------------------------------------------------------------<br>
-        <span class="inst">[Detach Here]</span></p>
-        <h2>Delivery Docket</h2>
-        <h4>Sender's Copy</h4>
-    </div>
-    <div id="bottom_half">
-        <?php echo $address_details;?>
-        <?php echo $delivery_details;?>
-        <table id="signatures">
-            <tr>
-                <td class="w50"></td>
-                <td class="right-align w50"><strong>Received in good order and conditions</strong></td>
-            </tr>
-            <tr>
-                <td>Delivered by:__________________</td>
-                <td class="right-align">Print name:____________________</td>
-            </tr>
-            <tr>
-                <td>Date: <?php echo date("d/m/Y/");?>&nbsp;&nbsp;Time:____________</td>
-                <td class="right-align">Signature:_____________________</td>
-            </tr>
-        </table>
-    </div>
-</div>
+</body>

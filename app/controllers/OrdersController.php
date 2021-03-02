@@ -298,8 +298,14 @@ class OrdersController extends Controller
         ini_set('memory_limit', '2048M');
         $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
         $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
-        //echo "<pre>",print_r($invoices),"</pre>"; //die();
-        echo "<hr/>";
+        /*foreach($invoices as $i)
+        {
+            echo "<h1>".$i['Customer_Name']."</h1>";
+            echo "<h2>",$i['Invoice_Number']."</h2>";
+            echo "<pre>",print_r($i['ItemsPurchased']),"</pre>"; //die();
+            echo "<hr/>";
+        }
+        die();*/
         $result = $this->FreedomMYOB->processOrders($invoices);
         echo "<pre>",print_r($result),"</pre>";
         die();
