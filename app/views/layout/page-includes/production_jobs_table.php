@@ -6,8 +6,8 @@
     <thead>
         <tr>
             <th nowwrap>Priority<br /><select id="priority_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect();?></select>&nbsp;<em><small>(all)</small></em></th>
-            <th class="no-sort">Job Number</th>
-            <th class="no-sort">Client</th>
+            <th>Job Number</th>
+            <th>Client</th>
             <th class="no-sort" style="width:250px">Description</th>
             <th class="no-sort" style="width:250px">Delivery</th>
             <?php if($can_change_status):?>
