@@ -36,7 +36,7 @@
                             //No initial sort,
                             "order": [],
                             //search highlighting
-                            searchHighlight: true,
+                            mark: true,
                             //but blanks on the bottom when sorting
                             columnDefs: [
                                 {
