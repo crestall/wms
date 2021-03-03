@@ -35,7 +35,8 @@
                             "paging":   paging,
                             //No initial sort,
                             "order": [],
-
+                            //search highlighting
+                            mark: true,
                             //but blanks on the bottom when sorting
                             columnDefs: [
                                 {
