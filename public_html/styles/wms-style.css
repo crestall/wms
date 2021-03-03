@@ -472,8 +472,10 @@ table.dataTable thead > tr > th{
  */
 
 mark {
-  padding: 0.4em;
-  background-color: yellow;
+    padding: .1em;
+    background-color: yellow;
+    border: thin solid;
+    border-radius: .2em;
 }
 
 /*********
