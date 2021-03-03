@@ -7,10 +7,12 @@
         <tr>
             <th>Job Number</th>
             <th>Client</th>
+            <th>Status</th>
             <th>Description</th>
             <th>Notes</th>
             <th>FSG Contact</th>
             <th>Finisher(s)</th>
+            <th>Due Date</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +22,7 @@
                     <?php echo $job['job_id'];?>
                 </td>
                 <td><?php echo $job['customer_name'];?></td>
+                <td><?php echo $job['status'];?></td>
                 <td><?php echo $job['description'];?></td>
                 <td>
                     <?php if(!empty($job['notes'])):?>
@@ -45,6 +48,11 @@
                             </p>
                         <?php endif;?>
                     <?php endfor;?>
+                </td>
+                <td>
+                    <?php if($job['strict_dd'] > 0):?>
+                        <?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?>
+                    <?php endif;?>
                 </td>
             </tr>
         <?php endforeach;?>
