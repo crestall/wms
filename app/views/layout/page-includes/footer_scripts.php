@@ -17,6 +17,8 @@
         <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
         <script src="//cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
         <script src="//cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+        <script src="//cdn.datatables.net/plug-ins/1.10.22/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
+        <script src="//bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
         <!-- Block UI JavaScript -->
         <script src="/scripts/jquery.blockUI.js"></script>
         <!-- Print Area Javascript -->
