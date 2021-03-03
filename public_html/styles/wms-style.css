@@ -467,17 +467,6 @@ table.dataTable thead > tr > th{
 	background-color: #fff;
 }
 
-/**
- * Styles for datatables.mark.js
- */
-
-mark {
-    padding: .1em;
-    background-color: yellow;
-    border: thin solid;
-    border-radius: .2em;
-}
-
 /*********
 checkboxes
 **********/

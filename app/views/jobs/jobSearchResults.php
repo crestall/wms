@@ -43,6 +43,12 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                 </div>
             </div>
             <div class="row mt-4" id="table_holder" style="display:none">
+                <div class="row">
+                    <label class="col-md-2 mb-3">Live Filter Text</label>
+                    <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control" id="live-filter-text" >
+                    </div>
+                </div>
                 <div class="col-12">
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/production_jobs_table.php");?>
                 </div>
