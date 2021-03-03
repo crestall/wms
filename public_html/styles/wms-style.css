@@ -471,7 +471,7 @@ table.dataTable thead > tr > th{
  * Styles for datatables.mark.js
  */
 
-.mark {
+mark {
   padding: 0.4;
   background-color: yellow;
 }
