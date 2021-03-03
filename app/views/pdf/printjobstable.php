@@ -12,6 +12,7 @@
             <th>Notes</th>
             <th>FSG Contact</th>
             <th>Finisher(s)</th>
+            <th>Due Date</th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +48,11 @@
                             </p>
                         <?php endif;?>
                     <?php endfor;?>
+                </td>
+                <td>
+                    <?php if($job['strict_dd'] > 0):?>
+                        <?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?>
+                    <?php endif;?>
                 </td>
             </tr>
         <?php endforeach;?>
