@@ -472,7 +472,7 @@ table.dataTable thead > tr > th{
  */
 
 mark {
-  padding: 0.4;
+  padding: 0.4em;
   background-color: yellow;
 }
 
