@@ -40,11 +40,13 @@ $po_no =
         <td>{$dd_details['po_number']}</td>
     </tr>";
 
+//Address Table Constants
 $address_table_class = "address_details";
 $address_padding_cell_width = "5mm";
 $address_cell_width = "105mm";
 $date_cell_width = "65mm";
 
+//Receivers Address Table
 $address_details_upper = "
     <table class='".$address_table_class."'>
         <tr>
@@ -71,7 +73,7 @@ $address_details_upper .= "
         </tr>
     </table>
 ";
-
+//Drivers Address Table
 $address_details_lower = "
     <table class='".$address_table_class."'>
         <tr>
@@ -98,13 +100,16 @@ $address_details_lower = "
         </tr>
     </table>
 ";
+//Delivery Table Constants
+$delivery_table_class = "delivery_details";
 
-$delivery_details = "
-    <table class='delivery_details'>
+//Receiver Delivery Details
+$delivery_details_upper = "
+    <table class='".$delivery_table_class."'>
         <tr>";
 if($sender_details['send_job_no'] == 1)
 {
-    $delivery_details .= "
+    $delivery_details_upper .= "
       <td class='job_no'>
         Job Number:<br>
         ".$job_details['job_id']."
@@ -113,32 +118,57 @@ if($sender_details['send_job_no'] == 1)
 }
 else
 {
-    $delivery_details .= "
+    $delivery_details_upper .= "
         <td class='job_no'>
             Order Number:<br>
             ".$dd_details['po_number']."
         </td>
     ";
 }
-$delivery_details .= "
+$delivery_details_upper .= "
     <td class='quantity'>
         Quantity:<br>
         <strong>".$dd_details['quantity']."</strong>
 ";
 if(!empty($dd_details['box_count']))
-    $delivery_details .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
+    $delivery_details_upper .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
 if(!empty($dd_details['packed_as']))
-    $delivery_details .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
-$delivery_details .= "
+    $delivery_details_upper .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
+$delivery_details_upper .= "
     </td>
     <td class='job_title'>
         Job Title:<br>
         <strong>".$dd_details['job_title']."</strong>
     </td>
 ";
-$delivery_details .= "
+$delivery_details_upper .= "
         </tr>
     </table>
+";
+//Drivers Delivery Details
+$delivery_details_lower = "
+        <table class='".$delivery_table_class."'>
+                <tr>
+                    <td class='job_no'>
+                        Job Number:<br>
+                        ".$dd_details['job_id']."
+                    </td>
+                    <td class='quantity'>
+                        Quantity:<br>
+                        <strong>".$dd_details['quantity']."</strong>
+";
+if(!empty($dd_details['box_count']))
+        $delivery_details_lower .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
+if(!empty($dd_details['packed_as']))
+        $delivery_details_lower .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
+$delivery_details_lower .= "
+        </td>
+        <td class='job_title'>
+                Job Title:<br>
+                <strong>".$dd_details['job_title']."</strong>
+        </td>
+    </tr>
+</table>
 ";
 ?>
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -153,7 +183,7 @@ $delivery_details .= "
                 </tr>
             </table>
             <?php echo $address_details_upper;?>
-            <?php echo $delivery_details;?>
+            <?php echo $delivery_details_upper;?>
         </div>
         <div id="divider">
             <span class="inst">[Detach Here]</span>
@@ -162,7 +192,7 @@ $delivery_details .= "
         </div>
         <div id="bottom_half">
             <?php echo $address_details_lower;?>
-            <?php echo $delivery_details;?>
+            <?php echo $delivery_details_lower;?>
             <table id="signatures">
                 <tr>
                     <td class="w50"></td>
