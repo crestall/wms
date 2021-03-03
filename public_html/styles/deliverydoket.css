@@ -62,7 +62,6 @@ table#signatures td{
     padding-top:3mm;
     box-sizing: border-box;
     text-align: center;
-    border-top:thin dashed #ccc;
 }
 
 #divider .inst{
