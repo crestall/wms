@@ -151,7 +151,7 @@ $delivery_details_lower = "
                 <tr>
                     <td class='job_no'>
                         Job Number:<br>
-                        ".$dd_details['job_id']."
+                        ".$job_details['job_id']."
                     </td>
                     <td class='quantity'>
                         Quantity:<br>
