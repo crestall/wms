@@ -503,7 +503,10 @@
             //return 'AIR8';
             //return 'PTI7'; //signature
             //return 'PTI8'; //no signature
-            return 'ECM8';
+            //return 'ECM8';
+            if($weight < 2)
+                return 'RPI8';
+            return 'PTI7';
         }
     }
 

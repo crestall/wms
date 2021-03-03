@@ -246,6 +246,160 @@
         }
     }
 
+    public static function sendPBAShopifyImportSummary($ret_array)
+    {
+        //echo "<pre>",print_r($ret_array),"</pre>"; die();
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pbashopifyimportfeedback.html");
+
+            $import_errors = "";
+            if($ret_array['error_count'] > 0)
+            {
+                $error_numbers = implode(", ", $ret_array['error_orders']);
+                $import_errors = "
+                    <h3 class='error'>The following orders numbers have <strong>NOT</strong> been imported due to inventory or SKU errors</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                        <tr>
+                            <td style='padding: 20px;'>$error_numbers</td>
+                        </tr>
+                    </table>
+                ";
+            }
+            $imports = "";
+            if($ret_array['import_count'] > 0)
+            {
+                $import_numbers = implode(", ", $ret_array['imported_orders']);
+                $imports = "
+                    <h3 class='success'>The following order numbers have been successfuly import and will be picked and packed shortly</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #ccebd6;border: 3px solid #009933;color: #009933;'>
+                        <tr>
+                            <td style='padding: 20px;'>$import_numbers</td>
+                        </tr>
+                    </table>
+                ";
+            }
+
+            $replace_array = array("{IMPORT_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{IMPORTS}");
+            $replace_with_array = array($ret_array['error_count'], $ret_array['import_count'], $import_errors, $imports);
+            $body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            if(SITE_LIVE)
+            {
+                $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+                $mail->AddBCC('tim@fsg.com.au', 'MTim Swanton');
+                $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
+            }
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            $mail->Subject = "WooCommerce Order Import Summarry for Performance Brands Australia";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+            $mail->MsgHTML($body);
+
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent ");
+            }
+        }
+        catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+    }
+
+    public static function sendPBAWooImportSummary($ret_array)
+    {
+        //echo "<pre>",print_r($ret_array),"</pre>"; die();
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pbawooimportfeedback.html");
+
+            $import_errors = "";
+            if($ret_array['error_count'] > 0)
+            {
+                $error_numbers = implode(", ", $ret_array['error_orders']);
+                $import_errors = "
+                    <h3 class='error'>The following orders numbers have <strong>NOT</strong> been imported due to inventory or SKU errors</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                        <tr>
+                            <td style='padding: 20px;'>$error_numbers</td>
+                        </tr>
+                    </table>
+                ";
+            }
+            $imports = "";
+            if($ret_array['import_count'] > 0)
+            {
+                $import_numbers = implode(", ", $ret_array['imported_orders']);
+                $imports = "
+                    <h3 class='success'>The following order numbers have been successfuly import and will be picked and packed shortly</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #ccebd6;border: 3px solid #009933;color: #009933;'>
+                        <tr>
+                            <td style='padding: 20px;'>$import_numbers</td>
+                        </tr>
+                    </table>
+                ";
+            }
+
+            $replace_array = array("{IMPORT_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{IMPORTS}");
+            $replace_with_array = array($ret_array['error_count'], $ret_array['import_count'], $import_errors, $imports);
+            $body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            if(SITE_LIVE)
+            {
+                $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+                $mail->AddBCC('tim@fsg.com.au', 'MTim Swanton');
+                $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
+            }
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            $mail->Subject = "WooCommerce Order Import Summarry for Performance Brands Australia";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+            $mail->MsgHTML($body);
+
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent ");
+            }
+        }
+        catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+    }
+
     public static function sendPBAImportError($message)
     {
         $mail = new PHPMailer();
@@ -266,9 +420,10 @@
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+            //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
 
-            $mail->AddAdress('Clint Rice','clint@performancebrandsaustralia.com');
+            //$mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
 
             $mail->Subject = "Order with item error for Performance Brands Australia";
 
@@ -289,7 +444,7 @@
         }
     }
 
-     public static function sendBDSImportFeedback($feedback)
+    public static function sendBDSImportFeedback($feedback)
     {
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -343,6 +498,7 @@
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
     		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
 
     		$mail->Subject = "BDS Order Import Summary";
 
@@ -352,7 +508,100 @@
             if(!$mail->Send())
             {
                 Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-                throw new Exception("Email couldn't be sent to ". $name);
+                throw new Exception("Email couldn't be sent");
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        return true;
+    }
+
+    public static function sendBDSFinaliseFeedback($count = 0)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            if($count == 1)
+            {
+                $replace = "One order has been";
+            }
+            else
+            {
+                $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+                $replace = $f->format($count)." orders have been";
+            }
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsfinalisefeedback.html");
+            $replace_array = array("{ORDER_COUNT}");
+            $replace_with_array = array($replace);
+            $body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+    		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
+
+    		$mail->Subject = "BDS Order Finalise Summary";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+    		$mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent");
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        return true;
+    }
+
+    public static function sendBDSNoOrdersFeedback()
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsnoordersfeedback.html");
+            //$replace_array = array("{ORDER_COUNT}");
+            //$replace_with_array = array($count);
+            //$body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+    		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+
+    		$mail->Subject = "BDS No Orders";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+    		$mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent");
                 return false;
             }
         } catch (phpmailerException $e) {

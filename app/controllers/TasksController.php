@@ -49,22 +49,30 @@ class TasksController extends Controller
             {
                 $responses = array();
                 $files = $this->BdsFTP->getFileNames();
+                $files_processed = 0;
                 foreach($files as $file)
                 {
                     if($this->BdsFTP->getFileSize($file) === -1)
                         continue;
-                    echo "<p>Will now process - $file</p>";
+                    //echo "<p>Will now process - $file</p>";
                     $responses[] = $this->BdsFTP->collectOrders($file);
-                    echo "<p>Have now processed - $file</p>";
+                    ++$files_processed;
+                    //echo "<p>Have now processed - $file</p>";
                     $this->BdsFTP->renameFile($file, 'collected_orders/'.$file);
                 }
                 $this->BdsFTP->closeConnection();
-                //$file = $files[0]; //there should now be only one
-                //echo "IN TASKS CONTROLLER<pre>",var_dump($responses),"<pre>"; //die();
-                foreach($responses as $response)
+                if($files_processed > 0)
                 {
-                    Email::sendBDSImportFeedback($response);
+                    foreach($responses as $response)
+                    {
+                        Email::sendBDSImportFeedback($response);
+                    }
                 }
+                else
+                {
+                    Email::sendBDSNoOrdersFeedback();
+                }
+
                 exit();
             }
         }
@@ -72,7 +80,7 @@ class TasksController extends Controller
 
     public function BDSCompletionTask()
     {
-        if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
         {
             return $this->error(403);
         }
@@ -84,6 +92,7 @@ class TasksController extends Controller
                 $client_id = 86;
                 $orders = $this->order->getUnFTPedOrdersArray($client_id);
                 //echo "<pre>",print_r($orders),"</pre>"; die();
+                $close = true;
                 if(count($orders))
                 {
                     $cols = array(
@@ -106,7 +115,6 @@ class TasksController extends Controller
 
                     $rows = array();
                     $extra_cols = 0;
-                    $close = true;
                     foreach($orders as $o)
                     {
                         $row = array(
@@ -165,6 +173,7 @@ class TasksController extends Controller
                 {
                     die("cannot close connection");
                 }
+                Email::sendBDSFinaliseFeedback(count($orders));
             }
             //$this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "bsd_dispatch_report_".date("Ymd")]);
         }

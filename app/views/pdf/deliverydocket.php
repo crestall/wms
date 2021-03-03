@@ -1,5 +1,9 @@
 <?php
-echo "<pre>",print_r($dd_details),"</pre>";
+//echo "<pre>",print_r($dd_details),"</pre>";
+
+//The setup
+
+//Send to address string
 $address_string = $dd_details['ship_to'];
 $address_string .= "<br>".$dd_details['address'];
 if(!empty($dd_details['address2'])) $address_string .= "<br>".$dd_details['address2'];
@@ -11,39 +15,101 @@ $attention = (!empty($dd_details['attention']))?
         <td>{$dd_details['attention']}</td>
     </tr>":
     "";
-$job_no = ($sender_details['send_job_no'] == 1)?
+
+//Instructions for Driver
+$inst = ((!empty($dd_details['delivery_instructions'])))?
+    "<tr>
+        <td>Delivery Instructions:</td>
+        <td><strong>".$dd_details['delivery_instructions']." </strong></td>
+    </tr>":
+    "";
+
+//The Job Number
+$job_no =
     "<tr>
         <td>Job No.</td>
         <td style='width:5mm'></td>
         <td>{$job_details['job_id']}</td>
-    </tr>":
-    "";
+    </tr>";
 
-$address_details = "
-    <table class='address_details'>
-            <tr>
-                <td style='width: 125mm'>
-                    <table>
-                        <tr>
-                            <td>Delivery To:</td>
-                            <td style='width:5mm'></td>
-                            <td>".$address_string."</td>
-                        </tr>
-                        $attention
-                        $job_no
-                    </table>
-                </td>
-                <td class='right-align'>Date: <strong>".date("d/m/Y")."</strong></td>
-            </tr>
-        </table>
+//The Purchase Order Number
+$po_no =
+    "<tr>
+        <td>Order No.</td>
+        <td style='width:5mm'></td>
+        <td>{$dd_details['po_number']}</td>
+    </tr>";
+
+//Address Table Constants
+$address_table_class = "address_details";
+$address_padding_cell_width = "5mm";
+$address_cell_width = "105mm";
+$date_cell_width = "65mm";
+
+//Receivers Address Table
+$address_details_upper = "
+    <table class='".$address_table_class."'>
+        <tr>
+            <td style='width: ".$address_cell_width."'>
+                <table>
+                    <tr>
+                        <td>Delivery To:</td>
+                        <td style='width:".$address_padding_cell_width."'></td>
+                        <td>".$address_string."</td>
+                    </tr>
+                    ".$attention;
+$address_details_upper .= ($sender_details['send_job_no'] == 1)? $job_no : $po_no;
+$address_details_upper .= "
+                </table>
+            </td>
+            <td style='width:".$date_cell_width."' class='right-align'>
+                <table>
+                    <tr>
+                        <td>Date:</td>
+                        <td><strong>".date("d/m/Y")."</strong></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 ";
+//Drivers Address Table
+$address_details_lower = "
+    <table class='".$address_table_class."'>
+        <tr>
+            <td style='width: ".$address_cell_width."'>
+                <table>
+                    <tr>
+                        <td>Delivery To:</td>
+                        <td style='width:".$address_padding_cell_width."'></td>
+                        <td>".$address_string."</td>
+                    </tr>
+                    $attention
+                    $job_no
+                </table>
+            </td>
+            <td style='width:".$date_cell_width."' class='right-align'>
+                <table>
+                    <tr>
+                        <td>Date:</td>
+                        <td><strong>".date("d/m/Y")."</strong></td>
+                    </tr>
+                    $inst
+                </table>
+            </td>
+        </tr>
+    </table>
+";
+//Delivery Table Constants
+$delivery_table_class = "delivery_details";
 
-$delivery_details = "
-    <table class='delivery_details'>
+//Receiver Delivery Details
+$delivery_details_upper = "
+    <table class='".$delivery_table_class."'>
         <tr>";
 if($sender_details['send_job_no'] == 1)
 {
-    $delivery_details .= "
+    $delivery_details_upper .= "
       <td class='job_no'>
         Job Number:<br>
         ".$job_details['job_id']."
@@ -52,53 +118,95 @@ if($sender_details['send_job_no'] == 1)
 }
 else
 {
-    $delivery_details .= "
+    $delivery_details_upper .= "
         <td class='job_no'>
             Order Number:<br>
             ".$dd_details['po_number']."
         </td>
     ";
 }
-$delivery_details .= "
+$delivery_details_upper .= "
     <td class='quantity'>
-        Quantity<br>
+        Quantity:<br>
         <strong>".$dd_details['quantity']."</strong>
 ";
 if(!empty($dd_details['box_count']))
-    $delivery_details .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
+    $delivery_details_upper .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
 if(!empty($dd_details['packed_as']))
-    $delivery_details .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
-$delivery_details .= "
+    $delivery_details_upper .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
+$delivery_details_upper .= "
     </td>
     <td class='job_title'>
-        Job Title<br>
+        Job Title:<br>
         <strong>".$dd_details['job_title']."</strong>
     </td>
 ";
-$delivery_details .= "
+$delivery_details_upper .= "
         </tr>
     </table>
 ";
+//Drivers Delivery Details
+$delivery_details_lower = "
+        <table class='".$delivery_table_class."'>
+                <tr>
+                    <td class='job_no'>
+                        Job Number:<br>
+                        ".$job_details['job_id']."
+                    </td>
+                    <td class='quantity'>
+                        Quantity:<br>
+                        <strong>".$dd_details['quantity']."</strong>
+";
+if(!empty($dd_details['box_count']))
+        $delivery_details_lower .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
+if(!empty($dd_details['packed_as']))
+        $delivery_details_lower .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
+$delivery_details_lower .= "
+        </td>
+        <td class='job_title'>
+                Job Title:<br>
+                <strong>".$dd_details['job_title']."</strong>
+        </td>
+    </tr>
+</table>
+";
 ?>
-<div id="dd_body">
-    <div id="top_half">
-        <table id="page_head">
-            <tr>
-                <td  style="width: 125mm"><img style="height:18mm;width:auto;" src="https://wms.fsg.com.au/images/delivery_docket_logos/<?php echo $sender_details['logo'];?>"></td>
-                <td class="right-align sender-address"><?php echo $sender_details['address'];?></td>
-            </tr>
-        </table>
-        <?php echo $address_details;?>
-        <?php echo $delivery_details;?>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<body>
+    <div id="dd_body">
+        <div id="top_half">
+            <table id="page_head">
+                <tr>
+                    <td  style="width: 125mm"><img style="height:18mm;width:auto;" src="https://wms.fsg.com.au/images/delivery_docket_logos/<?php echo $sender_details['logo'];?>"></td>
+                    <td class="right-align sender-address"><?php echo $sender_details['address'];?></td>
+                </tr>
+            </table>
+            <?php echo $address_details_upper;?>
+            <?php echo $delivery_details_upper;?>
+        </div>
+        <div id="divider">
+            <span class="inst">[Detach Here]</span>
+            <h2>Delivery Docket</h2>
+            <h4>Sender's Copy</h4>
+        </div>
+        <div id="bottom_half">
+            <?php echo $address_details_lower;?>
+            <?php echo $delivery_details_lower;?>
+            <table id="signatures">
+                <tr>
+                    <td class="w50"></td>
+                    <td class="right-align w50"><strong>Received in good order and conditions</strong></td>
+                </tr>
+                <tr>
+                    <td>Delivered by:__________________</td>
+                    <td class="right-align">Print name:____________________</td>
+                </tr>
+                <tr>
+                    <td>Date: <?php echo date("d/m/Y/");?>&nbsp;&nbsp;Time:____________</td>
+                    <td class="right-align">Signature:_____________________</td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div id="divider">
-        <p>-------------------------------------------------------------------------------------------------------------------------------<br>
-        <span class="inst">[Detach Here]</span></p>
-        <h2>Delivery Docket</h2>
-        <h4>Sender's Copy</h4>
-    </div>
-    <div id="bottom_half">
-        <?php echo $address_details;?>
-        <?php echo $delivery_details;?>
-    </div>
-</div>
+</body>

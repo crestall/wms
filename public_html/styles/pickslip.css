@@ -6,7 +6,6 @@ table{
 	margin:10px auto;
 	border-bottom:solid 2px #106ea4;
 	font-size:12px;
-	width:90%;
 }
 
 table.pickslip{
@@ -83,7 +82,8 @@ tr.total td{
 }
 
 div.pickslip{
-	width:148mm;
+	width:200mm;
+    margin: 2mm auto;
 }
 
 table.pickslip td{

@@ -3,6 +3,11 @@
     clear: both;
 }
 
+body{
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+
 td{
     vertical-align: top;
 }
@@ -10,13 +15,46 @@ td{
 #dd_body {
     margin: 0;
     padding: 0;
+    line-height:1.5em;
     background: none;
     width: 210mm;
     height: 297mm;
 }
 
+
+
+#dd_body table,
+#dd_body table th,
+#dd_body table td{
+   border-collapse: collapse;
+   line-height:1.3em;
+}
+
+#dd_body table{
+    font-size: 0.9em;
+}
+
+#dd_body table.delivery_details{
+    background: linear-gradient(top, #f0f2ff,#c7cdde) ;
+    width: 100%;
+}
+
+#dd_body table.delivery_details td
+{
+    padding: 3mm;
+}
+
+table#signatures{
+    margin-top:10mm;
+    width: 100%;
+}
+
+table#signatures td{
+    padding:3mm;
+}
+
 #top_half{
-    height: 130mm;
+    height: 134mm;
 }
 
 #divider{
@@ -34,16 +72,22 @@ td{
 }
 
 #divider h2{
-    margin-bottom: 0;
-    padding-bottom:0;
+    margin: 0;
+    padding:0;
 }
 #divider h4{
     color:#CCC;
     text-transform: uppercase;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 td.right-align{
     text-align:right;
+}
+
+td.w50{
+    width: 50%;
 }
 
 td.sender-address{
@@ -56,16 +100,6 @@ img {
 }
 
 table.address_details{
-    margin-top:15mm;
-}
-
-#page_body table,
-#page_body table th,
-#page_body table td{
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
-#dd_body table{
-    font-size: 0.9em;
+    margin-top: 5mm;
+    margin-bottom: 8mm;
 }
