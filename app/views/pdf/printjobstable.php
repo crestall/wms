@@ -7,6 +7,7 @@
         <tr>
             <th>Job Number</th>
             <th>Client</th>
+            <th>Status</th>
             <th>Description</th>
             <th>Notes</th>
             <th>FSG Contact</th>
@@ -20,6 +21,7 @@
                     <?php echo $job['job_id'];?>
                 </td>
                 <td><?php echo $job['customer_name'];?></td>
+                <td><?php echo $job['status'];?></td>
                 <td><?php echo $job['description'];?></td>
                 <td>
                     <?php if(!empty($job['notes'])):?>
