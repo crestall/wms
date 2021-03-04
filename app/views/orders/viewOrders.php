@@ -158,12 +158,21 @@
                     <?php $c = 0; foreach($orders as $co):
                         $add_to_runsheet = true;
                         ++$c;
-
+                        /*
                         if(empty($co['ship_to']))
                         {
                             //$customer = $db->queryRow("SELECT * FROM customers WHERE id = {$co['customer_id']}");
                             //$ship_to = ucwords($customer['name']);
                             $ship_to = "";
+                        }
+                        else
+                        {
+                            $ship_to = $co['ship_to'];
+                        }
+                        */
+                        if(!empty($co['company_name']))
+                        {
+                            $ship_to = $co['company_name']."<br>Attn:".$co['ship_to'];
                         }
                         else
                         {
