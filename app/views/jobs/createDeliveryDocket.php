@@ -84,8 +84,11 @@ $po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form:
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="job_id" id="job_id" value="<?php echo $job['id'];?>" >
             <div class="form-group row">
-                <div class="col-md-4 offset-md-3">
-                    <button type="submit" class="btn btn-outline-fsg" id="submitter">Create Docket</button>
+                <div class="col-md-4 offset-md-2">
+                    <button type="submit" class="btn btn-outline-info" id="label_submitter">Create Labels</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-outline-fsg" id="docket_submitter">Create Delivery Docket</button>
                 </div>
             </div>
         </form>
