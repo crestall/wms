@@ -16,7 +16,7 @@ $po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form:
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //echo "<pre>",print_r($job),"</pre>";?>
-        <form id="create_delivery_docket" target="_blank" method="post" action="/pdf/createDeliveryDocket">
+        <form id="create_delivery_docket" target="_blank" method="post">
             <div class="form-group row">
                 <label class="col-md-3">Send As</label>
                 <div class="col-md-4">
@@ -82,10 +82,13 @@ $po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form:
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <input type="hidden" name="job_id" id="job_id" value="<?php echo $job['id'];?>" >
+            <input type="hidden" name="job_id" id="job_id" value="<?php echo $job['job_id'];?>" >
             <div class="form-group row">
-                <div class="col-md-4 offset-md-3">
-                    <button type="submit" class="btn btn-outline-fsg" id="submitter">Create Docket</button>
+                <div class="col-md-4 offset-md-2">
+                    <button type="submit" class="btn btn-outline-info" id="label_submitter" formaction="/pdf/createDeliveryLabels">Create Labels</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-outline-fsg" id="docket_submitter" formaction="/pdf/createDeliveryDocket">Create Delivery Docket</button>
                 </div>
             </div>
         </form>

@@ -61,6 +61,10 @@ if(!$error)
                                 <div class="col-7"><?php echo $order['ship_to'];?></div>
                             </div>
                             <div class="row">
+                                <label class="col-5">Company:</label>
+                                <div class="col-7"><?php echo $order['company_name'];?></div>
+                            </div>
+                            <div class="row">
                                 <label class="col-5">Address:</label>
                                 <div class="col-7"><?php echo $order['address'];?></div>
                             </div>
