@@ -85,7 +85,7 @@ $po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form:
             <input type="hidden" name="job_id" id="job_id" value="<?php echo $job['id'];?>" >
             <div class="form-group row">
                 <div class="col-md-4 offset-md-2">
-                    <button type="submit" class="btn btn-outline-info" id="label_submitter">Create Labels</button>
+                    <button type="submit" class="btn btn-outline-info" id="label_submitter" formaction="/pdf/createDeliveryLabels">Create Labels</button>
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-outline-fsg" id="docket_submitter" formaction="/pdf/createDeliveryDocket">Create Delivery Docket</button>
