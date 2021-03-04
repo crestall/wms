@@ -58,7 +58,7 @@ while($f < $finisher_count)
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3">Related Job Id</label>
+                    <label class="col-md-3">Previous Job Id</label>
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
                     </div>
