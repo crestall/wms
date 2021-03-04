@@ -44,9 +44,9 @@ else
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3">Related Job Id</label>
+                    <label class="col-md-3">Customer PO Number</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="related_job_id" id="related_job_id" value="<?php echo Form::value('related_job_id');?>" />
+                        <input type="text" class="form-control" name="customer_po_number" id="customer_po_number" value="<?php echo Form::value('customer_po_number');?>" />
                     </div>
                 </div>
                 <div class="form-group row">

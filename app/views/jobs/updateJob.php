@@ -2,6 +2,7 @@
 $job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
 $strict_dd = (empty(Form::value('job_id')) && $job['strict_dd'] == 0)? false : (!empty(Form::value('job_id')) && $job['strict_dd'] == 1)?  true : ($job['strict_dd'] == 1)? true : false;
 $previous_job_id = (!empty(Form::value('previous_job_id')))? Form::value('previous_job_id'):$job['previous_job_id'];
+$customer_po_number = (!empty(Form::value('customer_po_number')))? Form::value('customer_po_number'):$job['customer_po_number']; 
 $priority = (!empty(Form::value('priority')))? Form::value('priority'):$job['priority'];
 $status_id = (!empty(Form::value('status_id')))? Form::value('status_id'):$job['status_id'];
 $salesrep_id = (!empty(Form::value('salesrep_id')))? Form::value('salesrep_id'):$job['salesrep_id'];
@@ -109,6 +110,12 @@ while($f < $finisher_count)
                                 <label class="col-md-4">Related Job Id</label>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo $previous_job_id;?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Customer PO Number</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="customer_po_number" id="customer_po_number" value="<?php echo $customer_po_number;?>" />
                                 </div>
                             </div>
                             <div class="form-group row">

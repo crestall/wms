@@ -9,13 +9,13 @@ foreach($orders_ids as $id):
     $courier = $this->controller->courier->getCourierName($od['courier_id']);
     $client_name = $this->controller->client->getClientName($od['client_id']);
     $delivery_address = $this->controller->address->getAddressStringForOrder($id);
-    if(empty($od['ship_to']))
+    if(!empty($od['company_name']))
     {
-        $ship_to = $this->controller->customer->getCustomerName($od['customer_id']) ;
+        $ship_to = $od['company_name']."<br>Attn:".$od['ship_to'];
     }
     else
     {
-        $ship_to =  $od['ship_to'];
+        $ship_to = $od['ship_to'];
     }
     if(!empty($od['contact_phone']))
     {

@@ -374,7 +374,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddBCC('tim@fsg.com.au', 'MTim Swanton');
+                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
             }
             else
@@ -420,10 +420,16 @@
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
-            //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-            $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-
-            //$mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
+            if(SITE_LIVE)
+            {
+                $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
+                $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
+            }
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
 
             $mail->Subject = "Order with item error for Performance Brands Australia";
 

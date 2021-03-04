@@ -14,7 +14,8 @@ class pdfController extends Controller
         parent::beforeAction();
         $action = $this->request->param('action');
         $post_actions = array(
-            "createDeliveryDocket"
+            "createDeliveryDocket",
+            "createDeliveryLabels"
         );
         $this->Security->requirePost($post_actions);
         if(in_array($action, $post_actions))
@@ -25,6 +26,29 @@ class pdfController extends Controller
         {
            $this->Security->config("validateForm", false);
         }
+    }
+
+    public function createDeliveryLabels()
+    {
+        echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
     }
 
     public function createDeliveryDocket()

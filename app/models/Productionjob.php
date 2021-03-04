@@ -214,6 +214,7 @@ class Productionjob extends Model{
         if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
         if(!empty($data['delivery_notes'])) $vals['delivery_notes'] = $data['delivery_notes'];
         if(!empty($data['priority'])) $vals['priority'] = $data['priority'];
+        if(!empty($data['customer_po_number'])) $vals['customer_po_number'] = $data['customer_po_number'];
         $id = $db->insertQuery($this->table, $vals);
         if(isset($data['finishers']) && is_array($data['finishers']))
         {
@@ -238,14 +239,15 @@ class Productionjob extends Model{
         //echo "<pre>",print_r($data),"</pre>"; die();
         $db = Database::openConnection();
         $vals = array(
-            'job_id'            => $data['job_id'],
-            'description'       => $data['description'],
-            'created_date'      => $data['date_entered_value'],
-            'due_date'          => 0,
-            'status_id'         => $data['status_id'],
-            'priority'          => 0,
-            'notes'             => null,
-            'delivery_notes'    => null
+            'job_id'                => $data['job_id'],
+            'description'           => $data['description'],
+            'created_date'          => $data['date_entered_value'],
+            'due_date'              => 0,
+            'status_id'             => $data['status_id'],
+            'priority'              => 0,
+            'notes'                 => null,
+            'delivery_notes'        => null,
+            'customer_po_number'    => null
         );
         $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
@@ -255,6 +257,7 @@ class Productionjob extends Model{
         if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
         if(!empty($data['delivery_notes'])) $vals['delivery_notes'] = $data['delivery_notes'];
         if(!empty($data['priority'])) $vals['priority'] = $data['priority'];
+        if(!empty($data['customer_po_number'])) $vals['customer_po_number'] = $data['customer_po_number'];
         $id = $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return $id;
     }

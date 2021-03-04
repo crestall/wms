@@ -977,3 +977,14 @@ Colorpicker adjustments
     width: 24px;
     height: 24px;
 }
+
+/**
+ * Styles for datatables.mark.js
+ */
+
+mark {
+    padding: .1em;
+    background-color: yellow;
+    border: thin solid;
+    border-radius: .2em;
+}
