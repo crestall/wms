@@ -16,7 +16,7 @@ $po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form:
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //echo "<pre>",print_r($job),"</pre>";?>
-        <form id="create_delivery_docket" method="post">
+        <form id="create_delivery_docket" target="_blank" method="post">
             <div class="form-group row">
                 <label class="col-md-3">Send As</label>
                 <div class="col-md-4">
@@ -88,7 +88,7 @@ $po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form:
                     <button type="submit" class="btn btn-outline-info" id="label_submitter">Create Labels</button>
                 </div>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-outline-fsg" id="docket_submitter" formaction="/pdf/createDeliveryDocket" target="_blank">Create Delivery Docket</button>
+                    <button type="submit" class="btn btn-outline-fsg" id="docket_submitter" formaction="/pdf/createDeliveryDocket">Create Delivery Docket</button>
                 </div>
             </div>
         </form>
