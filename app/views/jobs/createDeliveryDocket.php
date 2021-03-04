@@ -9,6 +9,7 @@ $country    = empty(Form::value('country'))?    $job['country']      : Form::val
 $delivery_instructions = empty(Form::value('delivery_instructions'))? $job['delivery_instructions'] : Form::value('delivery_instructions');
 $attention = empty(Form::value('attention'))? $job['attention'] : Form::value('attention');
 $job_title = empty(Form::value('job_title'))? $job['description'] : Form::value('job_title');
+$po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form::value('po_number');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -44,9 +45,9 @@ $job_title = empty(Form::value('job_title'))? $job['description'] : Form::value(
             </div>
             <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
             <div class="form-group row">
-                <label class="col-md-3">Purchase Order Number</label>
+                <label class="col-md-3">Customer PO Number</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="po_number" id="po_number" value="<?php echo Form::value('po_number');?>" />
+                    <input type="text" class="form-control" name="po_number" id="po_number" value="<?php echo $po_number;?>" />
                 </div>
             </div>
             <div class="form-group row">
