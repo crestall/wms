@@ -219,6 +219,7 @@ class Productionjob extends Model{
         if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
         if(!empty($data['delivery_notes'])) $vals['delivery_notes'] = $data['delivery_notes'];
         if(!empty($data['priority'])) $vals['priority'] = $data['priority'];
+        if(!empty($data['customer_po_number'])) $vals['customer_po_number'] = $data['customer_po_number'];
         $id = $db->insertQuery($this->table, $vals);
         return $id;
     }
