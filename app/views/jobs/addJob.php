@@ -64,6 +64,12 @@ while($f < $finisher_count)
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-md-3">Customer PO Number</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="customer_po_number" id="customer_po_number" value="<?php echo Form::value('customer_po_number');?>" />
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-md-3">Priority</label>
                     <div class="col-md-4">
                         <select id="priority" class="form-control selectpicker" name="priority" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo Utility::getPrioritySelect(Form::value('priority'));?></select>
