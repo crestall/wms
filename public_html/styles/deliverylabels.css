@@ -18,7 +18,8 @@ td.spacer{
 
 div.dl_body {
     position:absolute;
-    left: 60mm;
+    left: 55mm;
+    margin:0;
     rotate: 90;
     padding: 0;
     line-height:1.5em;
