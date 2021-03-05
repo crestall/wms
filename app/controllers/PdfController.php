@@ -110,7 +110,6 @@ class pdfController extends Controller
             $pdf->SetDisplayMode('fullpage');
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/deliverydocket.php', [
                 'sender_details'    => $sender_details,
-                'job_details'       => $job_details,
                 'dd_details'        => $post_data
             ]);
             $stylesheet = file_get_contents(STYLES."deliverydoket.css");
