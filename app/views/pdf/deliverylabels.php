@@ -6,11 +6,11 @@ if(!empty($dl_details['address2'])) $address_string .= "<br>".$dl_details['addre
 $address_string .= "<br>".$dl_details['suburb']." ".$dl_details['state']." ".$dl_details['postcode'];
 $bc = (!empty($dl_details['box_count']))? $dl_details['box_count'] : 1;
 $job_number = $dl_details['job_number'];
-$job_number_label = "Job Number";
+$job_number_label = "Job Number:";
 if($sender_details['send_job_no'] != 1)
 {
     $job_number = $dl_details['po_number'];
-    $job_number_label = "Order Number";
+    $job_number_label = "Order Number:";
 }
 $tb = 1;
 ?>
@@ -28,7 +28,7 @@ $tb = 1;
         </table>
         <table class="label_details">
             <tr>
-                <td class="w30">Reference</td>
+                <td class="w30">Reference:</td>
                 <td class="spacer">&nbsp;</td>
                 <td><?php echo $dl_details['job_title'];?></td>
             </tr>

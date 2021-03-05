@@ -24,13 +24,13 @@ div.dl_body {
     position:absolute;
     left: 55mm;
     margin:0;
-    rotate: 90;
+    rotate: -90;
     padding: 0;
     line-height:1.5em;
     background: none;
     width: 210mm;
     height: 99mm;
-    border: thin dashed #dedede;
+    border: thin dashed #fff;
 }
 
 table.address_details{
