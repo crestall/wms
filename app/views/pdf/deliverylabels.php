@@ -1,9 +1,9 @@
 <?php
-$address_string = $dd_details['ship_to'];
-if(!empty($dd_details['attention'])) $address_string .= "<br>".$dd_details['attention'];
-$address_string .= "<br>".$dd_details['address'];
-if(!empty($dd_details['address2'])) $address_string .= "<br>".$dd_details['address2'];
-$address_string .= "<br>".$dd_details['suburb']." ".$dd_details['state']." ".$dd_details['postcode'];
+$address_string = $dl_details['ship_to'];
+if(!empty($dl_details['attention'])) $address_string .= "<br>".$dl_details['attention'];
+$address_string .= "<br>".$dl_details['address'];
+if(!empty($dl_details['address2'])) $address_string .= "<br>".$dl_details['address2'];
+$address_string .= "<br>".$dl_details['suburb']." ".$dl_details['state']." ".$dl_details['postcode'];
 $bc = (!empty($dl_details['box_count']))? $dl_details['box_count'] : 1;
 $tb = 1;
 ?>
