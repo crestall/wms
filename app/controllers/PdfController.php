@@ -30,7 +30,7 @@ class pdfController extends Controller
 
     public function createDeliveryLabels()
     {
-        echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -48,7 +48,23 @@ class pdfController extends Controller
                 }
             }
         }
-        echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
+        //echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
+        FormValidator::validateAddress($address, $suburb, $state, $postcode, 'AU', isset($ignore_address_error));
+        if(!FormValidator::dataSubbed($ship_to))
+        {
+            Form::setError('ship_to', "A Deliver To Name is required");
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            return $this->redirector->to(PUBLIC_ROOT."jobs/create-delivery-docket/job=$job_id");
+        }
+        else
+        {
+            //gonna make the pdf
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+        }
     }
 
     public function createDeliveryDocket()
