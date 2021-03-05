@@ -20,4 +20,5 @@ table.dl_body {
     width: 210mm;
     height: 99mm;
     rotate: 90;
+    border: thin solid black;
 }
