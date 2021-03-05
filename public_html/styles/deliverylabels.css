@@ -17,13 +17,14 @@ td.spacer{
 }
 
 div.dl_body {
+    position:absolute;
+    rotate: 90;
     margin: 0, auto;
     padding: 0;
     line-height:1.5em;
     background: none;
     width: 210mm;
     height: 99mm;
-    rotate: 90;
     border: thin solid black;
 }
 
