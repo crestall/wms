@@ -16,6 +16,10 @@ td.spacer{
     width:5mm;
 }
 
+td.w30{
+    width:30mm;
+}
+
 div.dl_body {
     position:absolute;
     left: 55mm;
@@ -32,4 +36,9 @@ div.dl_body {
 table.address_details{
     margin-left:50mm;
     margin-top: 22mm;
+}
+
+table.label_details{
+    margin-left:50mm;
+    margin-top: 12mm
 }
