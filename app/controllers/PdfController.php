@@ -64,6 +64,17 @@ class pdfController extends Controller
         {
             //gonna make the pdf
             echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $sender_details = $this->deliverydocketsender->getSenderById($post_data['sender_id']);
+            $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'P']);
+            $pdf->SetDisplayMode('fullpage');
+            $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/deliverylabels.php', [
+                'sender_details'    => $sender_details,
+                'dl_details'        => $post_data
+            ]);
+            $stylesheet = file_get_contents(STYLES."deliverylabels.css");
+            $pdf->WriteHTML($stylesheet,1);
+            $pdf->WriteHTML($html, 2);
+            $pdf->Output();
         }
     }
 
@@ -104,7 +115,6 @@ class pdfController extends Controller
             //gonna make the pdf
             //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $sender_details = $this->deliverydocketsender->getSenderById($post_data['sender_id']);
-            $job_details = $this->productionjob->getJobById($post_data['job_id']);
 
             $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'P']);
             $pdf->SetDisplayMode('fullpage');

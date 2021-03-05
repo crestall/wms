@@ -1,0 +1,23 @@
+@charset "utf-8";
+.clear{
+    clear: both;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+
+td{
+    vertical-align: top;
+}
+
+table.dl_body {
+    margin: 0, auto;
+    padding: 0;
+    line-height:1.5em;
+    background: none;
+    width: 210mm;
+    height: 99mm;
+    rotate: 90;
+}
