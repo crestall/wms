@@ -7,7 +7,7 @@ $address_string .= "<br>".$dl_details['suburb']." ".$dl_details['state']." ".$dl
 $bc = (!empty($dl_details['box_count']))? $dl_details['box_count'] : 1;
 $job_number = $dl_details['job_number'];
 $job_number_label = "Job Number";
-if($sender_details['send_job_no'] == 1)
+if($sender_details['send_job_no'] != 1)
 {
     $job_number = $dl_details['po_number'];
     $job_number_label = "Order Number";
