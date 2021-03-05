@@ -12,7 +12,11 @@ td{
     vertical-align: top;
 }
 
-table.dl_body {
+td.spacer{
+    width:5mm;
+}
+
+div.dl_body {
     margin: 0, auto;
     padding: 0;
     line-height:1.5em;
@@ -21,4 +25,9 @@ table.dl_body {
     height: 99mm;
     rotate: 90;
     border: thin solid black;
+}
+
+table.address_details{
+    margin-left:50mm;
+    margin-top: 22mm;
 }
