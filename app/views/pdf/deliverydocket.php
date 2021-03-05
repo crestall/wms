@@ -29,7 +29,7 @@ $job_no =
     "<tr>
         <td>Job No.</td>
         <td style='width:5mm'></td>
-        <td>{$job_details['job_id']}</td>
+        <td>{$dd_details['job_number']}</td>
     </tr>";
 
 //The Purchase Order Number
@@ -112,7 +112,7 @@ if($sender_details['send_job_no'] == 1)
     $delivery_details_upper .= "
       <td class='job_no'>
         Job Number:<br>
-        ".$job_details['job_id']."
+        ".$dd_details['job_number']."
       </td>
     ";
 }
@@ -151,7 +151,7 @@ $delivery_details_lower = "
                 <tr>
                     <td class='job_no'>
                         Job Number:<br>
-                        ".$job_details['job_id']."
+                        ".$dd_details['job_number']."
                     </td>
                     <td class='quantity'>
                         Quantity:<br>

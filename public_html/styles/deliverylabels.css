@@ -1,0 +1,44 @@
+@charset "utf-8";
+.clear{
+    clear: both;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+
+td{
+    vertical-align: top;
+}
+
+td.spacer{
+    width:5mm;
+}
+
+td.w30{
+    width:30mm;
+}
+
+div.dl_body {
+    position:absolute;
+    left: 55mm;
+    margin:0;
+    rotate: 90;
+    padding: 0;
+    line-height:1.5em;
+    background: none;
+    width: 210mm;
+    height: 99mm;
+    border: thin dashed #dedede;
+}
+
+table.address_details{
+    margin-left:50mm;
+    margin-top: 22mm;
+}
+
+table.label_details{
+    margin-left:50mm;
+    margin-top: 12mm
+}
