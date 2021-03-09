@@ -39,7 +39,7 @@ class ProductsController extends Controller
         $sis = 0;
         if(!empty($this->request->params['args']))
         {
-            if(isset($this->params['args']['client']))
+            if(isset($this->request->params['args']['client']))
             {
                 $client_id = $this->request->params['args']['client'];
                 $client_name = $this->client->getClientName($client_id);
