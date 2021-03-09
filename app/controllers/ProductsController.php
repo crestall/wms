@@ -39,23 +39,26 @@ class ProductsController extends Controller
         $sis = 0;
         if(!empty($this->request->params['args']))
         {
-            if(isset($this->request->params['args']['product']))
+            if(isset($this->params['args']['client']))
             {
-                $item_id = $this->request->params['args']['product'];
-                $item_details = $this->item->getItemById($item_id);
-                $items = $this->item->getCollectionDetails($item_id);
-                if(count($items))
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+                if(isset($this->request->params['args']['product']))
                 {
-                    $sis = '';
-                    foreach($items as $i):
-                        $sis .= $i['linked_item_id'].",";
-                    endforeach;
-                    $sis = rtrim($sis, ",");
+                    $item_id = $this->request->params['args']['product'];
+                    $item_details = $this->item->getItemById($item_id);
+                    $items = $this->item->getCollectionDetails($item_id);
+                    if(count($items))
+                    {
+                        $sis = '';
+                        foreach($items as $i):
+                            $sis .= $i['linked_item_id'].",";
+                        endforeach;
+                        $sis = rtrim($sis, ",");
+                    }
                 }
-                $client_id = $item_details['client_id'];
             }
         }
-
         //render the page
         Config::setJsConfig('curPage', "collections-edit");
         Config::set('curPage', "collections-edit");
