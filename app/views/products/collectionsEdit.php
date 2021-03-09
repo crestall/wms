@@ -17,7 +17,7 @@
             <div class="row mb-3">
                 <label class="col-md-3">Select a Product</label>
                 <div class="col-md-4">
-                    <select id="product_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">Select</option><?php echo $this->controller->item->getSelectCollectionItems($item_id);?></select>
+                    <select id="product_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">Select</option><?php echo $this->controller->item->getSelectCollectionItemsByClient($client_id,$item_id);?></select>
                 </div>
             </div>
             <?php if($item_id > 0):?>
