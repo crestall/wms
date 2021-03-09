@@ -30,7 +30,7 @@ class pdfController extends Controller
 
     public function createDeliveryLabels()
     {
-        echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -48,7 +48,44 @@ class pdfController extends Controller
                 }
             }
         }
-        echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
+        //echo "POSTDATA<pre>",print_r($post_data),"</pre>"; die();
+        FormValidator::validateAddress($address, $suburb, $state, $postcode, 'AU', isset($ignore_address_error));
+        if(!FormValidator::dataSubbed($ship_to))
+        {
+            Form::setError('ship_to', "A Deliver To Name is required");
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            return $this->redirector->to(PUBLIC_ROOT."jobs/create-delivery-docket/job=$job_id");
+        }
+        else
+        {
+            //gonna make the pdf
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $sender_details = $this->deliverydocketsender->getSenderById($post_data['sender_id']);
+            $pdf = new Mympdf([
+                'mode'          => 'utf-8',
+                'format'        => 'A4',
+                'orientation'   => 'P',
+                'margin_left'   => 0,
+                'margin_right'  => 0,
+                'margin_top'    => 0,
+                'margin_bottom' => 0,
+                'margin_header' => 0,
+                'margin_footer' => 0,
+            ]);
+            $pdf->SetDisplayMode('fullpage');
+            $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/deliverylabels.php', [
+                'sender_details'    => $sender_details,
+                'dl_details'        => $post_data
+            ]);
+            $stylesheet = file_get_contents(STYLES."deliverylabels.css");
+            $pdf->WriteHTML($stylesheet,1);
+            $pdf->WriteHTML($html, 2);
+            $pdf->Output();
+        }
     }
 
     public function createDeliveryDocket()
@@ -88,13 +125,11 @@ class pdfController extends Controller
             //gonna make the pdf
             //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $sender_details = $this->deliverydocketsender->getSenderById($post_data['sender_id']);
-            $job_details = $this->productionjob->getJobById($post_data['job_id']);
 
             $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'P']);
             $pdf->SetDisplayMode('fullpage');
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/deliverydocket.php', [
                 'sender_details'    => $sender_details,
-                'job_details'       => $job_details,
                 'dd_details'        => $post_data
             ]);
             $stylesheet = file_get_contents(STYLES."deliverydoket.css");

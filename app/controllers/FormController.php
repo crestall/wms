@@ -4857,7 +4857,7 @@ class FormController extends Controller {
             $this->item->updateCollection($this->request->data['items'], $item_id);
             Session::set('feedback', 'Those details have been updated');
         }
-        return $this->redirector->to(PUBLIC_ROOT."products/collections-edit/product=$item_id");
+        return $this->redirector->to(PUBLIC_ROOT."products/collections-edit/client=$client_id/product=$item_id");
     }
 
     public function procAddLocation()

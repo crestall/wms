@@ -297,7 +297,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddBCC('tim@fsg.com.au', 'MTim Swanton');
+                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
             }
             else

@@ -81,8 +81,16 @@
                         $('#product_selector').change(function(e){
                             if($(this).val() > 0)
                             {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Details...</h2></div>' });
-                                window.location.href = "/products/collections-edit/product=" + $(this).val();
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Collection Details...</h2></div>' });
+                                var client_id = $('#client_selector').val();
+                                window.location.href = "/products/collections-edit/client=" + client_id + "/product=" + $(this).val();
+                            }
+                        });
+                        $('#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Client Collections...</h2></div>' });
+                                window.location.href = "/products/collections-edit/client=" + $(this).val();
                             }
                         });
                         autoCompleter.itemAutoComplete($('#item_searcher'), selectCallback, changeCallback, false);
@@ -122,7 +130,7 @@
                             }
                         }
                         itemsUpdater.itemDelete();
-                        $("form#pack_item_edit").submit(function(e){
+                        $("form#collection_edit").submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Details...</h2></div>' });
