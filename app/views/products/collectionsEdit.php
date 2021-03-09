@@ -1,6 +1,5 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
-        <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row mb-3">
             <label class="col-md-3">Select a Client</label>
@@ -78,6 +77,7 @@
                                 </div>
                                 <input type="hidden" name="selected_items" id="selected_items" value="<?php echo $sis;?>" />
                                 <input type="hidden" name="item_id" id="item_id" value="<?php echo $item_id;?>" />
+                                <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
                                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">&nbsp;</label>
