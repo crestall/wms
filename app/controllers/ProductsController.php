@@ -46,7 +46,7 @@ class ProductsController extends Controller
                 if(isset($this->request->params['args']['product']))
                 {
                     $item_id = $this->request->params['args']['product'];
-                    $item_details = $this->item->getItemById($item_id);
+                    //$item_details = $this->item->getItemById($item_id);
                     $items = $this->item->getCollectionDetails($item_id);
                     if(count($items))
                     {
@@ -69,8 +69,7 @@ class ProductsController extends Controller
             'item_id'       =>  $item_id,
             'sis'           =>  $sis,
             'client_id'     =>  $client_id,
-            'client_name'   => $client_name,
-            'item_details'  => $item_details
+            'client_name'   => $client_name
         ]);
     }
 
