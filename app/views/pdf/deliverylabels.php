@@ -40,7 +40,12 @@ $tb = 1;
             <tr>
                 <td class="w30"></td>
                 <td class="spacer">&nbsp;</td>
-                <td>Box <?php echo $tb;?> of <?php echo $bc;?></td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        <table class="box_details">
+            <tr>
+                <td class="right-align">Box <?php echo $tb;?> of <?php echo $bc;?></td>
             </tr>
         </table>
     </div>
