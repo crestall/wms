@@ -64,12 +64,13 @@ class ProductsController extends Controller
         Config::set('curPage', "collections-edit");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/collectionsEdit.php',
         [
-            'page_title'  =>  "Collection Update",
-            'items'       =>  $items,
-            'item_id'     =>  $item_id,
-            'sis'         =>  $sis,
-            'client_id'   =>  $client_id,
-            'item_details'
+            'page_title'    =>  "Collection Update",
+            'items'         =>  $items,
+            'item_id'       =>  $item_id,
+            'sis'           =>  $sis,
+            'client_id'     =>  $client_id,
+            'client_name'   => $client_name,
+            'item_details'  => $item_details
         ]);
     }
 
