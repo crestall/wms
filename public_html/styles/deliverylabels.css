@@ -46,3 +46,9 @@ table.label_details{
     margin-left:50mm;
     margin-top: 12mm
 }
+
+table.box_details{
+    margin-left: 50mm;
+    margin-top:10mm;
+    text-align: right;
+}
