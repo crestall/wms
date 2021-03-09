@@ -55,7 +55,10 @@ $r = 1;
                             <?php foreach($configuration_names as $c):?>
                                 <tr>
                                     <td class="number"><?php echo $r;?></td>
-                                    <td><?php echo $c['name'];?></td>
+                                    <td>
+                                        <?php echo $c['name'];?>
+                                        <?php //echo $c['name']." : ".Config::get($c['name']);?>
+                                    </td>
                                     <td><button class="btn btn-danger delete" data-configurationid="<?php echo $c['id'];?>">REMOVE</button></td>
                                 </tr>
                             <?php ++$r; endforeach;?>
