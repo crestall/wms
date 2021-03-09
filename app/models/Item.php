@@ -619,6 +619,32 @@ class Item extends Model{
         return $return_string;
     }
 
+    public function getSelectCollectionItemsByClient($client_id = 0,$selected = false)
+    {
+        $db = Database::openConnection();
+        $return_string = "";
+        $items = $db->queryData("
+            SELECT
+                i.id, i.name, i.sku
+            FROM
+                items i JOIN clients c ON i.client_id = c.id
+            WHERE
+                i.collection = 1 AND i.active = 1 AND c.active = 1 AND i.client_id = $client_id
+            ORDER BY
+                i.name
+        ");
+        foreach($items as $i)
+        {
+            $return_string .= "<option value='{$i['id']}'";
+            if($selected && $selected == $i['id'])
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+            $return_string .= ">{$i['name']} ({$i['sku']})</option>";
+        }
+        return $return_string;
+    }
+
     public function getPackItemDetails($item_id)
     {
         $db = Database::openConnection();
