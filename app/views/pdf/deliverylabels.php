@@ -18,7 +18,7 @@ if(!empty($dl_details['per_box']))
 {
     $per_box = "
         <tr>
-            <td class='right-align'>{$dl_details['per_box']} items per box</td>
+            <td class='right-align'><strong>{$dl_details['per_box']} items</strong> per box</td>
         </tr>
     ";
 }
@@ -55,7 +55,7 @@ $tb = 1;
         </table>
         <table class="box_details">
             <tr>
-                <td class="right-align">Box <?php echo $tb;?> of <?php echo $bc;?></td>
+                <td class="right-align">Box <strong><?php echo $tb;?></strong> of <?php echo $bc;?></td>
             </tr>
             <?php echo $per_box;?>
         </table>
