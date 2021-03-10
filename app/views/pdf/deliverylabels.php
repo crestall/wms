@@ -1,5 +1,5 @@
 <?php
-echo "<pre>",print_r($dl_details),"</pre>";
+//echo "<pre>",print_r($dl_details),"</pre>";
 $address_string = $dl_details['ship_to'];
 if(!empty($dl_details['attention'])) $address_string .= "<br>".$dl_details['attention'];
 $address_string .= "<br>".$dl_details['address'];
@@ -12,6 +12,15 @@ if($sender_details['send_job_no'] != 1)
 {
     $job_number = $dl_details['po_number'];
     $job_number_label = "Order Number:";
+}
+$per_box = "";
+if(!empty($dl_details['per_box']))
+{
+    $per_box = "
+        <tr>
+            <td class='right-align>{$dl_details['per_box']} items per box</td>
+        </tr>
+    ";
 }
 $tb = 1;
 ?>
@@ -48,9 +57,7 @@ $tb = 1;
             <tr>
                 <td class="right-align">Box <?php echo $tb;?> of <?php echo $bc;?></td>
             </tr>
-            <tr>
-                <td class="right-align">Box <?php echo $tb;?> of <?php echo $bc;?></td>
-            </tr>
+            <?php echo $per_box;?>
         </table>
     </div>
     <?php if($tb < $bc):?>
