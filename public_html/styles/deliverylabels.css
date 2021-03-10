@@ -51,7 +51,7 @@ table.label_details{
 
 table.box_details{
     margin-left: 50mm;
-    margin-top:3mm;
+    margin-top:0;
     width: 100mm;
     text-align: right;
 }
