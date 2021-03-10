@@ -18,7 +18,7 @@ if(!empty($dl_details['per_box']))
 {
     $per_box = "
         <tr>
-            <td class='right-align>{$dl_details['per_box']} items per box</td>
+            <td class='right-align'>{$dl_details['per_box']} items per box</td>
         </tr>
     ";
 }
