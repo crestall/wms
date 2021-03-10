@@ -55,7 +55,7 @@ $tb = 1;
         </table>
         <table class="box_details">
             <tr>
-                <td class="right-align">Box <strong><?php echo $tb;?></strong> of <?php echo $bc;?></td>
+                <td class="right-align">Box <strong><?php echo $tb;?></strong> of <strong><?php echo $bc;?></strong></td>
             </tr>
             <?php echo $per_box;?>
         </table>
