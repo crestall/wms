@@ -34,7 +34,7 @@ div.dl_body {
     background: none;
     width: 210mm;
     height: 99mm;
-    border: thin dashed #fff;
+    border: thin dashed #ccc;
 }
 
 table.address_details{
