@@ -55,7 +55,7 @@ $tb = 1;
             </tr>
             <?php if(!empty($dl_details['per_box'])):?>
                 <tr>
-                    <td class="right-align"><strong><?php ($tb < $bc)? echo $dl_details['per_box']: echo $lb;?></strong> items in box</td>
+                    <td class="right-align"><strong><?php if($tb < $bc) echo $dl_details['per_box']; else echo $lb;?></strong> items in box</td>
                 </tr>
             <?php endif;?>
         </table>
