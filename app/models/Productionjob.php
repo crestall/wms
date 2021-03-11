@@ -440,7 +440,7 @@ class Productionjob extends Model{
                 js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking,
                 IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day, IFNULL(rs.runsheet_completed, 0) AS runsheet_completed, rs.driver_id
             FROM
-                `production_jobs` pj LEFT JOIN
+                (SELECT `production_jobs`.*, `users`.`name` AS `status_change_name` FROM `production_jobs` JOIN `users` ON `production_jobs`.`status_change_by` = `users`.`id`) pj LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
                 `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
                 `production_finishers` pf ON pj.finisher_id = pf.id LEFT JOIN
