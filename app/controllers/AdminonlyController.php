@@ -21,6 +21,15 @@ class AdminOnlyController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function dataTablesTesting()
+    {
+        Config::setJsConfig('curPage', "data-tables-testing");
+        Config::set('curPage', "data-tables-testing");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/dataTablesTesting.php', [
+            'page_title'    =>  "Data Tables Testing"
+        ]);
+    }
+
     public function reeceDataTidy()
     {
         Config::setJsConfig('curPage', "reece-data-tidy");
