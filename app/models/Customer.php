@@ -32,5 +32,24 @@ class Customer extends Model{
         $db = Database::openConnection();
         return $db->queryValue($this->table, array('id' => $c_id), 'email');
     }
+
+    public function addCustomer($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'name'      =>  $data['name'],
+            'client_id' => $data['client_id']
+        );
+        if(!empty($data['company_name'])) $vals['company'] = $data['company_name'];
+        if(!empty($data['tracking_email'])) $vals['email'] = $data['tracking_email'];
+        if(!empty($data['address'])) $vals['address'] = $data['address'];
+        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
+        if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
+        if(!empty($data['state'])) $vals['state'] = $data['state'];
+        if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
+        if(!empty($data['country'])) $vals['country'] = $data['country'];
+        $id = $db->insertQuery($this->table, $vals);
+        return $id;
+    }
 }
 ?>
