@@ -577,7 +577,7 @@ var autoCompleter = {
         element.autocomplete({
             source: function(req, response){
             	var url = "/ajaxfunctions/getCustomers?term="+req.term+"&clientid="+$('#client_id').val();
-                console.log(url);
+                //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);
             	});
