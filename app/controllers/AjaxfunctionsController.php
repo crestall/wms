@@ -1423,14 +1423,14 @@ class ajaxfunctionsController extends Controller
     public function getSuburbs()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->Postcode->getAutocompleteSuburb($this->request->query['term'];
+        $data = $this->Postcode->getAutocompleteSuburb($this->request->query['term']);
         $this->view->renderJson($data);
     }
 
     public function getCustomers()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
-        $data = $this->customer->getAutocompleteCustomers($this->request->query['term'], $this->request->query['client_id']));
+        $data = $this->customer->getAutocompleteCustomers($this->request->query['term'], $this->request->query['client_id']);
         $this->view->renderJson($data);
     }
 
