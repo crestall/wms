@@ -86,7 +86,7 @@ class Productioncustomer extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'          =>  $data['deliver_to']
+            'name'          =>  $data['name']
         );
         if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['contact'])) $vals['contact'] = $data['contact'];
