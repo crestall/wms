@@ -793,7 +793,7 @@
                     init: function(){
                         autoCompleter.customerAutoComplete($(this), selectCallback, changeCallback);
                         function selectCallback(event, ui){
-
+                            $('#customer_id').val(ui.item.customer_id);
                         }
                         function changeCallback(event, ui)
                         {
