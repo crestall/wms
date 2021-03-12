@@ -776,8 +776,8 @@
                             }
                         });
                         actions.common['add-item']();
-                        actions.common['remove-all-items']();
                         actions['item-searcher'].init();
+                        actions['customer-searcher'].init();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         itemsUpdater.itemDelete();
@@ -787,6 +787,30 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
                             }
                         });
+                    }
+                },
+                'customer-searcher':{
+                    init: function(){
+                        autoCompleter.customerAutoComplete($("input#deliver_to"), selectCallback, changeCallback);
+                        function selectCallback(event, ui){
+                            $('#customer_id').val(ui.item.customer_id);
+                            $('#address').val(ui.item.address).valid();
+                            $('#suburb').val(ui.item.suburb).valid();
+                            $('#postcode').val(ui.item.postcode).valid();
+                            $('#country').val(ui.item.country).valid();
+                            if(ui.item.address_2)
+                                $('#address_2').val(ui.item.address_2).valid();
+                            if(ui.item.state)
+                                $('#state').val(ui.item.state).valid();
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                	            $('#customer_id').val('0');
+                                return false;
+                            }
+                        }
                     }
                 },
                 'view-storeorders' : {

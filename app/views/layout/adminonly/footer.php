@@ -10,6 +10,11 @@
 
                     }
                 },
+                'data-tables-testing':{
+                    init: function(){
+
+                    }
+                },
                 'api-tester' :{
                     init: function()
                     {

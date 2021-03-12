@@ -297,6 +297,8 @@ class Order extends Model{
             $o_values['contact_phone'] = $data['contact_phone'];
         if(!empty($data['errors']))
             $o_values['errors'] = $data['errors'];
+        if(!empty($data['customer_id']))
+            $o_values['customer_id'] = $data['customer_id'];
         if(!empty($data['error_string']))
             $o_values['error_string'] = $data['error_string'];
         if(isset($data['b2b']))
