@@ -29,7 +29,8 @@ class Customer extends Model{
         foreach($rows as $row)
         {
             $row_array                  = array();
-            $row_array['value']         = ucwords($row['name']);
+            $row_array['label']         = ucwords($row['name']."-".$row['suburb']);
+            $row_array['value']         = ucwords($row['name'];
             $row_array['email']         = $row['email'];
             $row_array['phone']         = $row['phone'];
             $row_array['address']       = $row['address'];
