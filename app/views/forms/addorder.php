@@ -178,6 +178,7 @@ $client_id = (!empty(Form::value('client_id')))? (int)Form::value('client_id') :
             <input type="hidden" name="selected_items" id="selected_items" />
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="submitted" value="1" />
+            <input type="hidden" name="customer_id" id="customer_id" value="0" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
