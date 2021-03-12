@@ -1427,6 +1427,13 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function getCustomers()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";
+        $data = $this->customer->getAutocompleteCustomers($this->request->query['term']);
+        $this->view->renderJson($data);
+    }
+
     public function getUnfulfilledAdmin()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
