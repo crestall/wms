@@ -1429,7 +1429,7 @@ class ajaxfunctionsController extends Controller
 
     public function getCustomers()
     {
-        echo "<pre>",print_r($this->request),"</pre>";
+        echo "<pre>",print_r($this->request),"</pre>";die();
         $data = $this->customer->getAutocompleteCustomers($this->request->query['term'], $this->request->query['client_id']);
         $this->view->renderJson($data);
     }
