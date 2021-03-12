@@ -37,7 +37,7 @@ class Customer extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'name'      =>  $data['name'],
+            'name'      =>  $data['deliver_to'],
             'client_id' => $data['client_id']
         );
         if(!empty($data['company_name'])) $vals['company'] = $data['company_name'];
