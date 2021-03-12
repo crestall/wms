@@ -795,12 +795,19 @@
                         function selectCallback(event, ui){
                             $('#customer_id').val(ui.item.customer_id);
                             $('#address').val(ui.item.address).valid();
+                            $('#suburb').val(ui.item.suburb).valid();
+                            $('#postcode').val(ui.item.postcode).valid();
+                            $('#country').val(ui.item.country).valid();
+                            if(ui.item.address_2)
+                                $('#address_2').val(ui.item.address_2).valid();
+                            if(ui.item.state)
+                                $('#state').val(ui.item.state).valid();
                         }
                         function changeCallback(event, ui)
                         {
                             if (!ui.item)
                 	        {
-                                $(event.target).val("");
+                	            $('#customer_id').val('0');
                                 return false;
                             }
                         }
