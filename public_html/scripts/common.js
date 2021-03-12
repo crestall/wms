@@ -572,6 +572,25 @@ var shippingQuote = {
 * Some Autocompleters
 ************/
 var autoCompleter = {
+    customerAutoComplete: function(element, selectCallback, changeCallback)
+    {
+        element.autocomplete({
+            source: function(req, response){
+            	var url = "/ajaxfunctions/getCustomers?term="+req.term;
+                //console.log(url);
+            	$.getJSON(url, function(data){
+            		response(data);
+            	});
+            },
+            select: function(event, ui) {
+                selectCallback(event, ui);
+            },
+            change: function (event, ui) {
+                changeCallback(event, ui);
+            },
+            minLength: 2
+        });
+    }
     suburbAutocomplete: function(element, selectCallback, changeCallback)
     {
         element.autocomplete({
