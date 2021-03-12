@@ -6214,15 +6214,16 @@ class FormController extends Controller {
             if($customer_id == 0)
             {
                 //add the customer
+                $post_data['customer_id'] = $this->customer->addCustomer($post_data);
             }
             else
             {
                 //edit the customer
             }
+            //add the order
             $order_number = $this->order->addOrder($post_data, $oitems);
             Session::set('feedback', "An order with number: <strong>$order_number</strong> has been created");
         }
-        //return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
         return $this->redirector->to(PUBLIC_ROOT."orders/add-order");
     }
 
