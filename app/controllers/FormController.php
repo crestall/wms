@@ -6210,8 +6210,15 @@ class FormController extends Controller {
         else
         {
             //all good, add details
-            //echo "<pre>oitems",print_r($oitems),"</pre>";die();
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            //deal with the customer
+            if($customer_id == 0)
+            {
+                //add the customer
+            }
+            else
+            {
+                //edit the customer
+            }
             $order_number = $this->order->addOrder($post_data, $oitems);
             Session::set('feedback', "An order with number: <strong>$order_number</strong> has been created");
         }
