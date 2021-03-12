@@ -16,15 +16,15 @@ class Customer extends Model{
         if (!$q) return;
 
         $rows = $db->queryData("
-            SELECT * FROM {$this->table} WHERE ((`suburb` LIKE :term1) OR (`company` LIKE :term2)) AND `client_id` = $client_id
+            SELECT * FROM {$this->table} WHERE ((`name` LIKE :term1) OR (`company` LIKE :term2)) AND `client_id` = $client_id
             ",
             array(
                 'term1' => '%'.$q.'%',
                 'term2' => '%'.$q.'%'
             )
         );
-        echo "SELECT * FROM {$this->table} WHERE ((`suburb` LIKE :term1) OR (`company` LIKE :term2)) AND `client_id` = $client_id";
-        print_r($rows);die();
+        //echo "SELECT * FROM {$this->table} WHERE ((`name` LIKE :term1) OR (`company` LIKE :term2)) AND `client_id` = $client_id";
+        //print_r($rows);die();
         $return_array = array();
         foreach($rows as $row)
         {
