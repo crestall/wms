@@ -6219,6 +6219,7 @@ class FormController extends Controller {
             else
             {
                 //edit the customer
+                $this->customer->editCustomer($post_data);
             }
             //add the order
             $order_number = $this->order->addOrder($post_data, $oitems);
