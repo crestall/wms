@@ -576,7 +576,7 @@ var autoCompleter = {
     {
         element.autocomplete({
             source: function(req, response){
-            	var url = "/ajaxfunctions/getCustomers?term="+req.term;
+            	var url = "/ajaxfunctions/getCustomers?term="+req.term+"&clientid="+$('#client_id').val();
                 //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);
@@ -590,12 +590,12 @@ var autoCompleter = {
             },
             minLength: 2
         });
-    }
+    },
     suburbAutocomplete: function(element, selectCallback, changeCallback)
     {
         element.autocomplete({
             source: function(req, response){
-            	var url = "/ajaxfunctions/getCustomers?term="+req.term+"&clientid="+$('#client_id').val();
+            	var url = "/ajaxfunctions/getCustomers?term="+req.term;
                 //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);
