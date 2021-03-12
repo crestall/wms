@@ -9,6 +9,42 @@
 
 class Customer extends Model{
 
+    public function getAutocompleteCustomers($term, $client_id)
+    {
+        $db = Database::openConnection();
+        $q = strtoupper($term);
+        if (!$q) return;
+
+        $rows = $db->queryData("
+            SELECT * FROM {$this->table} WHERE ((`suburb` LIKE :term1) OR (`company` LIKE :term2)) AND `client_id` = $client_id
+            ",
+            array(
+                'term1' => '%'.$q.'%',
+                'term2' => '%'.$q.'%'
+            )
+        );
+        //echo $q;
+        //print_r($rows);die();
+        $return_array = array();
+        foreach($rows as $row)
+        {
+            $row_array                  = array();
+            $row_array['value']         = ucwords($row['name']);
+            $row_array['email']         = $row['email'];
+            $row_array['phone']         = $row['phone'];
+            $row_array['address']       = $row['address'];
+            $row_array['address_2']     = $row['address_2'];
+            $row_array['suburb']        = $row['suburb'];
+            $row_array['state']         = $row['state'];
+            $row_array['postcode']      = $row['postcode'];
+            $row_array['country']       = $row['country'];
+            $row_array['customer_id']   = $row['id'];
+
+            array_push($return_array,$row_array);
+        }
+        return $return_array;
+    }
+
     public function getCustomerInfo($c_id)
     {
         $db = Database::openConnection();

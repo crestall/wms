@@ -776,8 +776,8 @@
                             }
                         });
                         actions.common['add-item']();
-                        actions.common['remove-all-items']();
                         actions['item-searcher'].init();
+                        actions['customer-searcher'].init();
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         itemsUpdater.itemDelete();
@@ -787,6 +787,22 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Processing form...</h2></div>' });
                             }
                         });
+                    }
+                },
+                'customer-searcher':{
+                    init: function(){
+                        autoCompleter.customerAutoComplete($(this), selectCallback, changeCallback);
+                        function selectCallback(event, ui){
+
+                        }
+                        function changeCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $(event.target).val("");
+                                return false;
+                            }
+                        }
                     }
                 },
                 'view-storeorders' : {
