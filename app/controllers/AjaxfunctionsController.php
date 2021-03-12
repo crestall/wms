@@ -1431,6 +1431,7 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
         $data = $this->customer->getAutocompleteCustomers($this->request->query['term'], $this->request->query['clientid']);
+        echo "<pre>",print_r($data),"</pre>";//die();
         $this->view->renderJson($data);
     }
 
