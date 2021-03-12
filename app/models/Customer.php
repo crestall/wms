@@ -23,8 +23,8 @@ class Customer extends Model{
                 'term2' => '%'.$q.'%'
             )
         );
-        //echo $q;
-        //print_r($rows);die();
+        echo $q;
+        print_r($rows);die();
         $return_array = array();
         foreach($rows as $row)
         {
