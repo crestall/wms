@@ -23,7 +23,7 @@ class Customer extends Model{
                 'term2' => '%'.$q.'%'
             )
         );
-        echo $q;
+        echo "SELECT * FROM {$this->table} WHERE ((`suburb` LIKE :term1) OR (`company` LIKE :term2)) AND `client_id` = $client_id";
         print_r($rows);die();
         $return_array = array();
         foreach($rows as $row)
