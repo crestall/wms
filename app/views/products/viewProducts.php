@@ -44,6 +44,7 @@
                                     <th>Dimensions</th>
                                     <th>Weight</th>
                                     <th>Pallet Item</th>
+                                    <th>Boxed Item</th>
                                     <th>Requires Bubblewrap</th>
                                     <th style="width:200px">Product Image</th>
                                 </tr>
@@ -68,6 +69,7 @@
                                         <td data-label="Dimensions"><?php echo $p['width']."X".$p['depth']."X".$p['height'];?></td>
                                         <td data-label="Weight" class="number"><?php echo $p['weight'];?> kg</td>
                                         <td data-label="Pallet Item" class='text-center'><?php if($p['palletized'] > 0) echo "Yes"; else echo "No";?></td>
+                                        <td data-label="Boxed Item" class='text-center'><?php if($p['boxed_item'] > 0) echo "Yes"; else echo "No";?></td> 
                                         <td data-label="Requires Bubblewrap" class='text-center'><?php if($p['requires_bubblewrap'] > 0) echo "Yes"; else echo "No";?></td>
                                         <td data-label="Product Image"><?php echo $image;?></td>
                                     </tr>
