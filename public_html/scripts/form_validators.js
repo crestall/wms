@@ -903,6 +903,9 @@ $(document).ready(function() {
     		},
             eximage:{
                 required: function(){ return $("#external_image").is(":checked"); }
+            },
+            weight:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
             }
     	},
 		messages:{
