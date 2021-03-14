@@ -127,6 +127,10 @@ else
                             <input type="text" class="form-control number" name="per_box" id="per_box" value="<?php echo $per_box;?>" />
                         </div>
                     </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="boxed_item" name="boxed_item" <?php if($product['boxed_item'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="boxed_item">Boxed Item</label>
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-3">Weight</label>
                         <div class="col-md-4">
