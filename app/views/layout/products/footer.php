@@ -11,9 +11,9 @@
                             $('input.product_image').toggle();
                             $('input#eximage').valid();
                         });
-                        $'input#boxed_item').click(function(e){
+                        $('input#boxed_item').click(function(e){
                             $('input#weight').valid();
-                        })
+                        });
                     }
                 },
                 'edit-product': {
