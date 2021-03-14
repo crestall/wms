@@ -923,6 +923,9 @@ $(document).ready(function() {
 			},
             eximage:{
                 required: "This is required"
+            },
+            weight:{
+                required: "These inputs are required for boxed items"
             }
 		}
 	});
