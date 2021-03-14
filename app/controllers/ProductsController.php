@@ -85,6 +85,7 @@ class ProductsController extends Controller
         [
             'product'       =>  $product_info,
             'page_title'    =>  "Edit Product",
+            'pht'           =>  ": Editing ".$product_info['name'],
             'packing_types' =>  $packing_types
         ]);
     }
