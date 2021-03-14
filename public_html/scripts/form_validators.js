@@ -906,6 +906,15 @@ $(document).ready(function() {
             },
             weight:{
                 required: function(){ return $("#boxed_item").is(":checked"); }
+            },
+            width:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
+            },
+            depth:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
+            },
+            height:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
             }
     	},
 		messages:{
@@ -925,6 +934,15 @@ $(document).ready(function() {
                 required: "This is required"
             },
             weight:{
+                required: "These inputs are required for boxed items"
+            },
+            width:{
+                required: "These inputs are required for boxed items"
+            },
+            depth:{
+                required: "These inputs are required for boxed items"
+            },
+            height:{
                 required: "These inputs are required for boxed items"
             }
 		}
