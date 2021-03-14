@@ -109,6 +109,7 @@ class ProductsController extends Controller
         Config::set('curPage', "view-products");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/viewProducts.php',[
             'page_title'    =>  'View Products',
+            'pht'           =>  ": View Products",
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
             'products'      =>  $products,
