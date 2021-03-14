@@ -13,6 +13,9 @@
                         });
                         $('input#boxed_item').click(function(e){
                             $('input#weight').valid();
+                            $('input#width').valid();
+                            $('input#depth').valid();
+                            $('input#height').valid();
                         });
                     }
                 },
