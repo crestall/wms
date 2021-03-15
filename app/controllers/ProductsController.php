@@ -26,7 +26,8 @@ class ProductsController extends Controller
         Config::setJsConfig('curPage', "add-product");
         Config::set('curPage', "add-product");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/addProduct.php',[
-            'page_title'    =>  'Add Product'
+            'page_title'    =>  'Add Product',
+            'pht'           =>  ": Add Product",
         ]);
     }
 
