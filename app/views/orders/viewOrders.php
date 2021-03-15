@@ -263,7 +263,7 @@
                                 <?php if($package_count > 0):?>
                                      class="number"><?php echo $package_count;?>
                                 <?php elseif($item_count == 1 && $ifo[0]['boxed_item'] == 1):?>
-                                    >Auto Packaging Available
+                                    ><span class="text-success">Auto Packaging Available</span>
                                 <?php else:?>
                                      class="number"><?php echo $package_count;?>
                                 <?php endif;?>
