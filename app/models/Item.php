@@ -878,7 +878,8 @@ class Item extends Model{
             'last_activity'		            =>	time(),
             'client_id'			            =>	$client_id,
             'preferred_pick_location_id'    =>  $preferred_pick_location_id,
-            'palletized'                    =>  $palletized
+            'palletized'                    =>  $palletized,
+            'boxed_item'                    =>  $boxed_item
         );
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
