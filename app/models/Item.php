@@ -920,6 +920,7 @@ class Item extends Model{
             'trigger_point'	                =>	$trigger_point,
             'last_activity'		            =>	time(),
             'palletized'                    =>  $palletized,
+            'boxed_item'                    =>  $boxed_item,
             'price'                         =>  0.00,
             'solar_type_id'                 =>  0,
             'barcode'                       =>  NULL,
