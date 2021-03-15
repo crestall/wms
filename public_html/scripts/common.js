@@ -5,11 +5,13 @@ var time = new Date().getTime();
 var refresh_rate = 300000; //milliseconds
 $('form').attr('autocomplete','off');
 refresh();
-$(document).bind("mousemove keypress", function(e) {
-    time = new Date().getTime();
-    refresh();
+$(document).ready(function(e){
+    console.log( "ready!" );
+    $(document).bind("mousemove keypress", function(e) {
+        time = new Date().getTime();
+        refresh();
+    });
 });
-
 function refresh() {
     var now = new Date().getTime();
     if (now - time >= refresh_rate)

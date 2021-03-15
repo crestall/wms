@@ -151,6 +151,8 @@ class Item extends Model{
     {
         $items = $this->getClientInventory($client_id, $active);
         $rows = array();
+        $c = 1;
+        Logger::logDataTablesCalls("datatables_test", "Starting foreach items at ".date("H:i:s"));
         foreach($items as $i)
         {
             //if(is_null($i['location_id']))
@@ -182,7 +184,10 @@ class Item extends Model{
             $rows[$i['item_id']]['locations'][$i['location_id']]['allocated'] = $i['allocated'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['qc_count'] = $i['qc_count'];
             $rows[$i['item_id']]['locations'][$i['location_id']]['oversize'] = $i['oversize'];
+            Logger::logDataTablesCalls("datatables_test", date("H:i:s")." row $c done");
+            ++$c;
         }
+        Logger::logDataTablesCalls("datatables_test", date("H:i:s")." will return all rows");
         return $rows;
     }
 
