@@ -228,9 +228,28 @@ else
                                             </div>
                                         </div>
                                     </div>
-
                                 <?php ++$pc;
                                 endforeach;?>
+                            <?php elseif(count($order_items) == 1 && $order_items[0]['boxed_item'] == 1 && $order_items[0]['qty'] == 1):?>
+                                <h6 class="card-subtitle">The Following Package Will Be Auto-Submitted</h6>
+                                <div class="container-fluid">
+                                    <div class="row border-bottom border-top my-3 py-3">
+                                        <div class="col">
+                                            <div class="row">
+                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Width</label>
+                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $order_items[0]['width'];?> cm</div>
+                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Depth</label>
+                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $order_items[0]['depth'];?> cm</div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Height</label>
+                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $order_items[0]['height'];?> cm</div>
+                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Weight</label>
+                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $order_items[0]['weight'];?> kg</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php else:?>
                                 <h6 class="card-subtitle">No Packages or Pallets Listed</h6>
                             <?php endif;?>

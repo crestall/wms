@@ -825,7 +825,8 @@ class Woocommerce{
                     if(!$product)
                     {
                         $items_errors = true;
-                        $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        $is = (empty($item['sku']))? "NO SKU SENT" : $item['sku'];
+                        $mm .= "<li>Could not find {$item['name']} in WMS based on $is</li>";
                     }
                     else
                     {
@@ -1019,7 +1020,8 @@ class Woocommerce{
                     if(!$product)
                     {
                         $items_errors = true;
-                        $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        $is = (empty($item['sku']))? "NO SKU SENT" : $item['sku'];
+                        $mm .= "<li>Could not find {$item['name']} in WMS based on $is</li>";
                     }
                     else
                     {

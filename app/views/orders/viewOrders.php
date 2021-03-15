@@ -259,7 +259,15 @@
         					<td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $co['date_ordered']);?></td>
         					<!--td data-label="Status"><?php echo $order_status;?></td-->
         					<td data-label="Slip printed"><?php echo $slip_printed; ?></td>
-                            <td data-label="Package Entered" class="number"><?php echo $package_count;?></td>
+                            <td data-label="Package Entered"
+                                <?php if($package_count > 0):?>
+                                     class="number"><?php echo $package_count;?>
+                                <?php elseif($item_count == 1 && $ifo[0]['boxed_item'] == 1):?>
+                                    ><span class="text-success">Auto Packaging Available</span>
+                                <?php else:?>
+                                     class="number"><?php echo $package_count;?>
+                                <?php endif;?>
+                            </td>
                             <!--td data-label="Ignore Price Restriction" class="chkbox">
                                 <div class="checkbox checkbox-default">
                                     <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select_np styled" data-orderid='<?php echo $co['id'];?>' name="ignoreprice_<?php echo $co['id'];?>" id="ignoreprice_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />

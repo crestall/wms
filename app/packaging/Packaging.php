@@ -14,6 +14,9 @@ class Packaging{
 
     public static function getPackingForOrder($od, $items, $packages, $val = 0)
     {
+        //echo "ORDER<pre>",print_r($od),"</pre>";
+        //echo "ITEMS<pre>",print_r($items),"</pre>";
+        //echo "PACKAGES<pre>",print_r($packages),"</pre>";//die();
         $return = array();
         $small_satchels = 0;
         $large_satchels = 0;
@@ -210,30 +213,46 @@ class Packaging{
         //item specific packages
         else
         {
-            $weight = 0;
-            foreach($items as $i)
+            if( count($items) == 1 && $items[0]['qty'] == 1 && $items[0]['boxed_item'] == 1)  //single order items with recorded weights and dimensions
             {
-                if($i['hunters_goods_type'] == 20)
+                //echo "<p>Can be auto done</p>";
+                $array['width'] = $items[0]['width'];
+                $array['height'] = $items[0]['height'];
+                $array['depth'] = $items[0]['depth'];
+                $array['weight'] = $items[0]['weight'];
+                $array['pieces'] = 1;
+                $array['type_code'] = 'ITEM';
+                $array['item_reference'] = $items[0]['id'];
+                $return[] = $array;
+            }
+            else
+            {
+                //echo "<p>CANNOT be auto done</p>";
+                $weight = 0;
+                foreach($items as $i)
                 {
-                    $do_satchels = true;
-                    $description = (empty($i['description']))? $i['name']: $i['description'];
-                    $description = mb_strimwidth( $description , 0 , 40 ); //auspost will not allow this to be more than 40 characters
-                    $val = ($i['price'] == 0)? 1.00 : $i['price'];
-                    $weight += $i['weight'] * $i['qty'];
-                    if( !empty($i['satchel_large']) )  $large_satchels += $i['satchel_large'];
-                    if( !empty($i['satchel_small']) )  $small_satchels += $i['satchel_small'];
-                    continue;
-                }
-                else
-                {
-                    $array['width'] = $i['width'];
-                    $array['height'] = $i['height'];
-                    $array['depth'] = $i['depth'];
-                    $array['weight'] = $i['weight'] * $i['qty'];
-                    $array['item_reference'] = $i['item_id'];
-                    $array['type_code'] = 'ITEM';
-                    $array['pieces'] = $i['qty'];
-                    $return[] = $array;
+                    if($i['hunters_goods_type'] == 20)
+                    {
+                        $do_satchels = true;
+                        $description = (empty($i['description']))? $i['name']: $i['description'];
+                        $description = mb_strimwidth( $description , 0 , 40 ); //auspost will not allow this to be more than 40 characters
+                        $val = ($i['price'] == 0)? 1.00 : $i['price'];
+                        $weight += $i['weight'] * $i['qty'];
+                        if( !empty($i['satchel_large']) )  $large_satchels += $i['satchel_large'];
+                        if( !empty($i['satchel_small']) )  $small_satchels += $i['satchel_small'];
+                        continue;
+                    }
+                    else
+                    {
+                        $array['width'] = $i['width'];
+                        $array['height'] = $i['height'];
+                        $array['depth'] = $i['depth'];
+                        $array['weight'] = $i['weight'] * $i['qty'];
+                        $array['item_reference'] = $i['item_id'];
+                        $array['type_code'] = 'ITEM';
+                        $array['pieces'] = $i['qty'];
+                        $return[] = $array;
+                    }
                 }
             }
             if($do_satchels)
@@ -276,7 +295,7 @@ class Packaging{
 
             }
         }
-
+        //echo "WILL RETURN <pre>",print_r($return),"</pre>";die();
         return $return;
     }
 

@@ -857,7 +857,19 @@ $(document).ready(function() {
     		},
 			client_id:{
     			notNone: true
-    		}
+    		},
+            weight:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
+            },
+            width:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
+            },
+            depth:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
+            },
+            height:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
+            }
     	},
 		messages:{
 			sku: {
@@ -874,7 +886,19 @@ $(document).ready(function() {
 			},
 			client_id:{
 				notNone: "A Client must be chosen"
-			}
+			},
+            weight:{
+                required: "These inputs are required for boxed items"
+            },
+            width:{
+                required: "These inputs are required for boxed items"
+            },
+            depth:{
+                required: "These inputs are required for boxed items"
+            },
+            height:{
+                required: "These inputs are required for boxed items"
+            }
 		}
 	});
     ///////////////////////////////////////////////////////////////////////////////
@@ -903,6 +927,18 @@ $(document).ready(function() {
     		},
             eximage:{
                 required: function(){ return $("#external_image").is(":checked"); }
+            },
+            weight:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
+            },
+            width:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
+            },
+            depth:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
+            },
+            height:{
+                required: function(){ return $("#boxed_item").is(":checked"); }
             }
     	},
 		messages:{
@@ -920,6 +956,18 @@ $(document).ready(function() {
 			},
             eximage:{
                 required: "This is required"
+            },
+            weight:{
+                required: "These inputs are required for boxed items"
+            },
+            width:{
+                required: "These inputs are required for boxed items"
+            },
+            depth:{
+                required: "These inputs are required for boxed items"
+            },
+            height:{
+                required: "These inputs are required for boxed items"
             }
 		}
 	});

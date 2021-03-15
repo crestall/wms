@@ -26,7 +26,8 @@ class ProductsController extends Controller
         Config::setJsConfig('curPage', "add-product");
         Config::set('curPage', "add-product");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/addProduct.php',[
-            'page_title'    =>  'Add Product'
+            'page_title'    =>  'Add Product',
+            'pht'           =>  ": Add Product",
         ]);
     }
 
@@ -85,6 +86,7 @@ class ProductsController extends Controller
         [
             'product'       =>  $product_info,
             'page_title'    =>  "Edit Product",
+            'pht'           =>  ": Editing ".$product_info['name'],
             'packing_types' =>  $packing_types
         ]);
     }
@@ -109,6 +111,7 @@ class ProductsController extends Controller
         Config::set('curPage', "view-products");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/viewProducts.php',[
             'page_title'    =>  'View Products',
+            'pht'           =>  ": View Products",
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
             'products'      =>  $products,

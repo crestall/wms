@@ -6806,6 +6806,8 @@ class FormController extends Controller {
         }
         $palletizedd = (isset($palletized))? 1:0;
         $post_data['palletized'] = $palletizedd;
+        $boxed_itemd = (isset($boxed_item))? 1:0;
+        $post_data['boxed_item'] = $boxed_itemd;
         //image uploads
         $field = "image";
         if($_FILES[$field]["size"] > 0)
@@ -7030,6 +7032,8 @@ class FormController extends Controller {
         }
         $palletizedd = (isset($palletized))? 1:0;
         $post_data['palletized'] = $palletizedd;
+        $boxed_itemd = (isset($boxed_item))? 1:0;
+        $post_data['boxed_item'] = $boxed_itemd;
         //image uploads
         $field = "image";
         if($_FILES[$field]["size"] > 0)
