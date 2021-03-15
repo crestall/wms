@@ -233,7 +233,7 @@ else
                             <?php elseif(count($order_items) == 1 && $order_items[0]['boxed_item'] == 1 && $order_items[0]['qty'] == 1):?>
                                 <h6 class="card-subtitle">The Following Package Will Be Auto-Submitted</h6>
                                 <div class="container-fluid">
-                                    <div class="row border-bottom mb-3">
+                                    <div class="row border-bottom border-top my-3 py-3">
                                         <div class="col">
                                             <div class="row">
                                                 <label class="col-lg-3 col-md-7 col-sm-9 col-9">Width</label>
