@@ -78,7 +78,7 @@ class Logger{
     // testing time between calls
     public static function logDataTablesCalls($file, $content)
     {
-        if(SITE_LIVE)
+        //if(SITE_LIVE)
             return;
         $file .= date('Ymd').'.txt';
         $logfile = APP . "logs/datatables/".$file;
