@@ -38,9 +38,9 @@ class AdminOnlyController extends Controller
         $production_customers = $this->productioncustomer->getAllCustomers();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/productionDatabaseTablesUpdate.php', [
             'page_title'    =>  "Production Database Tables Update",
-            'pht'           =>  "Production Database Tables Update",
-            'production_finishers'  => $produsction_finishers,
-            'production_customers'  => $produsction_customers
+            'pht'           =>  ": Production Database Tables Update",
+            'production_finishers'  => $production_finishers,
+            'production_customers'  => $production_customers
         ]);
     }
 
