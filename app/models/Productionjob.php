@@ -108,6 +108,7 @@ class Productionjob extends Model{
         $q = $this->getJobQuery();
         $q .= "
             WHERE pj.id IN($ids)
+            GROUP BY pj.id
             ORDER BY pj.created_date DESC
         ";
         return $db->queryData($q);
@@ -163,6 +164,8 @@ class Productionjob extends Model{
         }
 
         $q .= "
+            GROUP BY
+                pj.id
             ORDER BY
                 js.ranking ASC, pj.created_date DESC, pj.job_id DESC
         ";
@@ -432,6 +435,10 @@ class Productionjob extends Model{
             $st_ids = implode(',',$status_ids);
             $query .= " AND (pj.status_id IN( $st_ids))";
         }
+        $query .= "
+            GROUP BY
+                pj.id
+        ";
         //print_r($array);
         //die($query);
         return $jobs = $db->queryData($query, $array);
