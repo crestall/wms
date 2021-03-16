@@ -30,6 +30,16 @@ class AdminOnlyController extends Controller
         ]);
     }
 
+    public function updateProductionDatabaseTables()
+    {
+        Config::setJsConfig('curPage', "production-database-tables-update");
+        Config::set('curPage', "production-database-tables-update");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/productionDatabaseTablesUpdate.php', [
+            'page_title'    =>  "Production Database Tables Update",
+            'pht'           =>  "Production Database Tables Update"
+        ]);
+    }
+
     public function reeceDataTidy()
     {
         Config::setJsConfig('curPage', "reece-data-tidy");

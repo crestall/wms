@@ -729,6 +729,10 @@ $admin = array(
         'data-tables-testing'   => array(
             'display'   => true,
             'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
+        ),
+        'update-production-database-tables'   => array(
+            'display'   => true,
+            'icon'      => "<i class='fas fa-database fa-3x'></i>"
         )
     )
 );
