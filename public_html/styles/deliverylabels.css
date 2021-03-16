@@ -40,16 +40,18 @@ div.dl_body {
 table.address_details{
     margin-left:50mm;
     margin-top: 22mm;
+    margin-bottom: 0;
 }
 
 table.label_details{
     margin-left:50mm;
-    margin-top: 12mm
+    margin-top: 8mm;
+    margin-bottom: 0;
 }
 
 table.box_details{
     margin-left: 50mm;
-    margin-top:3mm;
+    margin-top:0;
     width: 100mm;
     text-align: right;
 }

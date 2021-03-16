@@ -108,8 +108,8 @@ class Allocations{
                                     if($available < $left)
                                     {
                                         //echo "<p>available < pickcount</p>";
-                                        if($l['preferred'] == 1 && !$store_order)
-                                            $order_error_string .= "<p>$item_name picked from non preferred location</p>";
+                                        //if($l['preferred'] == 1 && !$store_order)
+                                            //$order_error_string .= "<p>$item_name picked from non preferred location</p>";
                                         $f_locations[] = array(
                                             'location_id'           =>  $l['location_id'],
                                             'qty'                   =>  $available,
@@ -189,8 +189,8 @@ class Allocations{
                                     if($available < $left)
                                     {
                                         //echo "<p>available < pickcount</p>";
-                                        if($l['preferred'] == 1 && !$store_order)
-                                            $order_error_string .= "<p>$item_name picked from non preferred location</p>";
+                                        //if($l['preferred'] == 1 && !$store_order)
+                                            //$order_error_string .= "<p>$item_name picked from non preferred location</p>";
                                         $f_locations[] = array(
                                             'location_id'           =>  $l['location_id'],
                                             'qty'                   =>  $available,

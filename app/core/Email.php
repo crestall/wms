@@ -298,7 +298,7 @@
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
                 $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
-                $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
+                $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
             }
             else
             {
@@ -375,7 +375,7 @@
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
                 $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
-                $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
+                $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
             }
             else
             {
@@ -424,7 +424,7 @@
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
                 $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
-                $mail->AddAddress('Clint Rice','clint@performancebrandsaustralia.com');
+                $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
             }
             else
             {

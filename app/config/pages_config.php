@@ -725,6 +725,10 @@ $admin = array(
         'runsheet-completion-tidy'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>'
+        ),
+        'data-tables-testing'   => array(
+            'display'   => true,
+            'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
         )
     )
 );

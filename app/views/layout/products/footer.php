@@ -11,6 +11,12 @@
                             $('input.product_image').toggle();
                             $('input#eximage').valid();
                         });
+                        $('input#boxed_item').click(function(e){
+                            $('input#weight').valid();
+                            $('input#width').valid();
+                            $('input#depth').valid();
+                            $('input#height').valid();
+                        });
                     }
                 },
                 'edit-product': {
@@ -51,7 +57,7 @@
 
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [7,8,9] }
+                                { "orderable": false, "targets": [7,8,9,10] }
                             ]
                         } );
 

@@ -67,6 +67,10 @@ $client_id = Form::value('client_id');
                             <input type="text" class="form-control" name="per_box" id="per_box" value="<?php echo Form::value('per_box');?>" />
                         </div>
                     </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="boxed_item" name="boxed_item" <?php if(!empty(Form::value('boxed_item'))) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="boxed_item">Boxed Item</label>
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-3">Weight</label>
                         <div class="col-md-4">

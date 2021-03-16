@@ -378,7 +378,7 @@ class Database {
 		  //$this->beginTransaction();
           //echo "INSERT INTO $tablename (`".implode("`,`",$fields)."`) VALUES (".implode(",",$place_holders).")";
           //echo "<pre>",print_r($params),"</pre>";
-          //die();
+          //die(); 
           $this->query("INSERT INTO $tablename (`".implode("`,`",$fields)."`) VALUES (".implode(",",$place_holders).")", $params );
           $id = $this->pdo->lastInsertId();
 		  if($id <= 0)
