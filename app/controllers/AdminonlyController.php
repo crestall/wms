@@ -34,9 +34,13 @@ class AdminOnlyController extends Controller
     {
         Config::setJsConfig('curPage', "production-database-tables-update");
         Config::set('curPage', "production-database-tables-update");
+        $production_finishers = $this->productionfinisher->getAllFinishers();
+        $production_customers = $this->productioncustomer->getAllCustomers();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/productionDatabaseTablesUpdate.php', [
             'page_title'    =>  "Production Database Tables Update",
-            'pht'           =>  "Production Database Tables Update"
+            'pht'           =>  "Production Database Tables Update",
+            'production_finishers'  => $produsction_finishers,
+            'production_customers'  => $produsction_customers
         ]);
     }
 
