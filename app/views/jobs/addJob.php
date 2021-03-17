@@ -271,48 +271,54 @@ else
                         </div>
                     </div>
                 </div>
-        </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="border border-secondary p-3 m-3 rounded bg-light">
-                <h3>Delivery Details</h3>
-                <div class="form-group row custom-control custom-checkbox custom-control-right">
-                    <input class="custom-control-input send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
-                    <label class="custom-control-label col-md-3" for="held_in_store">Hold Job In Store</label>
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <div class="card h-100 border-secondary order-card" id="deliverydetails">
+                        <div class="card-header bg-secondary text-white">
+                            Delivery Details
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                <input class="custom-control-input send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
+                                <label class="custom-control-label col-md-4" for="held_in_store">Hold Job In Store</label>
+                            </div>
+                            <div id="delivery_address_holder">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
+                                        <?php echo Form::displayError('ship_to');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Attention</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="attention" id="attention" value="<?php echo $attention;?>" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Delivery Instructions</label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Instructions For Driver"><?php echo Form::value('delivery_instructions');?></textarea>
+                                    </div>
+                                </div>
+                                <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="delivery_address_holder">
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
-                            <?php echo Form::displayError('ship_to');?>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Attention</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="attention" id="attention" value="<?php echo $attention;?>" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Delivery Instructions</label>
-                        <div class="col-md-4">
-                            <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Instructions For Driver"><?php echo Form::value('delivery_instructions');?></textarea>
-                        </div>
-                    </div>
-                    <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
-                </div>
-            </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Form Submission     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <div class="form-group row">
-                <div class="col-md-4 offset-6 offset-md-8">
-                    <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter">Add This Job</button>
+                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                <div class="form-group row">
+                    <div class="col-md-4 offset-6 offset-md-8">
+                        <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter">Add This Job</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
