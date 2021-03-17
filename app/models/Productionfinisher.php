@@ -131,13 +131,15 @@ class Productionfinisher extends Model{
         $vals = array(
             'name'          =>  $data['name']
         );
+        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
+        if(!empty($data['website'])) $vals['website'] = $data['website'];
+        if(!empty($data['email'])) $vals['email'] = $data['email'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
         if(!empty($data['state'])) $vals['state'] = $data['state'];
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
-        if(!empty($data['website'])) $vals['website'] = $data['website'];
         $id = $db->insertQuery($this->table, $vals);
         if(isset($data['categories']) && is_array($data['categories']))
         {
