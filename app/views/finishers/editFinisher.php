@@ -1,6 +1,8 @@
 <?php
 $name       = empty(Form::value('name'))?       $finisher['name']         : Form::value('name');
 
+$email      = empty(Form::value('email'))?      $finisher['email']        : Form::value('email');
+$phone      = empty(Form::value('phone'))?      $finisher['phone']        : Form::value('phone');
 $address    = empty(Form::value('address'))?    $finisher['address']      : Form::value('address');
 $address2   = empty(Form::value('address2'))?   $finisher['address_2']    : Form::value('address2');
 $suburb     = empty(Form::value('suburb'))?     $finisher['suburb']       : Form::value('suburb');
@@ -50,6 +52,19 @@ else
                 <label class="col-md-3">Category</label>
                 <div class="col-md-4">
                     <select id="category" name="categories[]" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" data-actions-box="true" multiple title="Choose all that are relevent..."><?php echo $this->controller->finishercategories->getMultiSelectFinisherCategories($cat_ids);?></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Phone</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="phone" id="phone" value="<?php echo $phone;?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Email</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control email" name="email" id="email" value="<?php echo $email;?>" />
+                    <?php echo Form::displayError('email');?>
                 </div>
             </div>
             <div class="form-group row">
