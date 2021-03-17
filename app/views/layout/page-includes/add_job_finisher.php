@@ -25,7 +25,7 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
     <div class="this_finisher_details" style="display:none;">
         <div class="form-group row custom-control custom-checkbox custom-control-right">
             <input class="custom-control-input send_to_address send_to_finisher" data-finisher="<?php echo $i;?>" type="checkbox" id="send_to_finisher_<?php echo $i;?>" name="send_to_finisher_<?php echo $i;?>" />
-            <label class="custom-control-label col-md-3 send_to_finisher" for="send_to_finisher_<?php echo $i;?>">Send Job To This Finisher</label>
+            <label class="custom-control-label col-md-6 send_to_finisher" for="send_to_finisher_<?php echo $i;?>">Send Job To This Finisher</label>
         </div>
         <div id="contact_selector_<?php echo $i;?>" class="form-group row contact_selector"></div>
         <div class="form-group row">
