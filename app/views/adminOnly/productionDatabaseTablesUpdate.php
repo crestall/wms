@@ -20,6 +20,8 @@
                                 'finisher_id'   => $pf['id']
                             );
                             echo "<pre>",print_r($data),"</pre>";
+                            $this->controller->productioncontact->addContact($data);
+                            echo "<p>Done</p>";
                         }
                         else
                         {
