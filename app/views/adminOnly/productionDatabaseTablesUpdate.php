@@ -8,29 +8,29 @@
         <?php //echo "CUSTOMERS<pre>",print_r($production_customers)."</pre>";?>
         <div class="row">
             <div class="col">
-                <?php foreach($production_finishers as $pf)
+                <?php foreach($production_customers as $pc)
                 {
-                    if(empty(trim($pf['contacts'])))
+                    if(empty(trim($pc['contacts'])))
                     {
-                        if(!empty($pf['contact']))
+                        if(!empty($pc['contact']))
                         {
-                            echo "<p>Will Add ".$pf['contact']." for ".$pf['name']." (".$pf['id'].")</p>";
+                            echo "<p>Will Add ".$pc['contact']." for ".$pc['name']." (".$pc['id'].")</p>";
                             $data = array(
-                                'name'          => $pf['contact'],
-                                'finisher_id'   => $pf['id']
+                                'name'          => $pc['contact'],
+                                'finisher_id'   => $pc['id']
                             );
                             echo "<pre>",print_r($data),"</pre>";
-                            $this->controller->productioncontact->addContact($data);
+                            //$this->controller->productioncontact->addContact($data);
                             echo "<p>Done</p>";
                         }
                         else
                         {
-                            echo "<p>No contact listed for ".$pf['name']." (".$pf['id'].")</p>";
+                            echo "<p>No contact listed for ".$pc['name']." (".$pc['id'].")</p>";
                         }
                     }
                     else
                     {
-                        echo "<p>Contacts already listed for ".$pf['name']." (".$pf['id'].") - ".$pf['contacts']."</p>";
+                        echo "<p>Contacts already listed for ".$pc['name']." (".$pc['id'].") - ".$pc['contacts']."</p>";
                     }
                     echo "<p>-------------------------------------------------------------------------------------</p>";
                 }
