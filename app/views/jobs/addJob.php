@@ -24,107 +24,116 @@ else
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <form id="add_production_job" method="post" action="/form/procAddProductionJob">
+        <div class="row">
+            <form id="add_production_job" method="post" action="/form/procAddProductionJob">
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Job Details     --------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="border border-secondary p-3 m-3 rounded bg-light">
-                <h3>Job Details</h3>
-                <div class="form-group row">
-                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo Form::value('job_id');?>" />
-                        <?php echo Form::displayError('job_id');?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3">Previous Job Id</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3">Customer PO Number</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="customer_po_number" id="customer_po_number" value="<?php echo Form::value('customer_po_number');?>" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3">Priority</label>
-                    <div class="col-md-4">
-                        <select id="priority" class="form-control selectpicker" name="priority" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo Utility::getPrioritySelect(Form::value('priority'));?></select>
-                        <?php echo Form::displayError('priority');?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Status</label>
-                    <div class="col-md-4">
-                        <select id="status_id" class="form-control selectpicker" name="status_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->jobstatus->getSelectJobStatus(Form::value('status_id'));?></select>
-                        <?php echo Form::displayError('status_id');?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> FSG Contact</label>
-                    <div class="col-md-4">
-                        <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
-                        <?php echo Form::displayError('salesrep_id');?>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Entered</label>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <input type="text" class="required form-control" name="date_entered" id="date_entered" value="<?php echo date('d/m/Y', $date_entered);?>" />
-                            <div class="input-group-append">
-                                <span id="date_entered_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                <div class="col-sm-12 col-md-6 mb-3" id="jobdetails">
+                    <div class="card h-100 border-secondary order-card">
+                        <div class="card-header bg-secondary text-white">
+                            Job Details
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo Form::value('job_id');?>" />
+                                    <?php echo Form::displayError('job_id');?>
+                                </div>
                             </div>
-                            <?php echo Form::displayError('date_entered');?>
+                            <div class="form-group row">
+                                <label class="col-md-4">Previous Job Id</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="previous_job_id" id="previous_job_id" value="<?php echo Form::value('previous_job_id');?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Customer PO Number</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="customer_po_number" id="customer_po_number" value="<?php echo Form::value('customer_po_number');?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Priority</label>
+                                <div class="col-md-8">
+                                    <select id="priority" class="form-control selectpicker" name="priority" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo Utility::getPrioritySelect(Form::value('priority'));?></select>
+                                    <?php echo Form::displayError('priority');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Status</label>
+                                <div class="col-md-8">
+                                    <select id="status_id" class="form-control selectpicker" name="status_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->jobstatus->getSelectJobStatus(Form::value('status_id'));?></select>
+                                    <?php echo Form::displayError('status_id');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> FSG Contact</label>
+                                <div class="col-md-8">
+                                    <select id="salesrep_id" class="form-control selectpicker" name="salesrep_id" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->salesrep->getSelectSalesReps(Form::value('salesrep_id'));?></select>
+                                    <?php echo Form::displayError('salesrep_id');?>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Entered</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input type="text" class="required form-control" name="date_entered" id="date_entered" value="<?php echo date('d/m/Y', $date_entered);?>" />
+                                        <div class="input-group-append">
+                                            <span id="date_entered_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                        </div>
+                                        <?php echo Form::displayError('date_entered');?>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                                        <div class="input-group-append">
+                                            <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
+                            </div>
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />
+                                <label class="custom-control-label col-md-4" for="strict_dd">Strict Due Date</label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Designer</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="designer" id="designer" value="<?php echo Form::value('designer');?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
+                                <div class="col-md-8">
+                                    <textarea name="description" id="description" class="form-control required" rows="4"><?php echo Form::value('description');?></textarea>
+                                    <?php echo Form::displayError('description');?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Notes/Comments</label>
+                                <div class="col-md-8">
+                                    <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo Form::value('notes');?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Delivery Notes/Comments</label>
+                                <div class="col-md-8">
+                                    <textarea name="delivery_notes" id="delivery_notes" class="form-control" rows="3"><?php echo Form::value('delivery_notes');?></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                 </div>
-                <div class="row form-group">
-                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
-                            <div class="input-group-append">
-                                <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
-                </div>
-                <div class="form-group row custom-control custom-checkbox custom-control-right">
-                    <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />
-                    <label class="custom-control-label col-md-3" for="strict_dd">Strict Due Date</label>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3">Designer</label>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="designer" id="designer" value="<?php echo Form::value('designer');?>" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Description</label>
-                    <div class="col-md-4">
-                        <textarea name="description" id="description" class="form-control required" rows="4"><?php echo Form::value('description');?></textarea>
-                        <?php echo Form::displayError('description');?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3">Notes/Comments</label>
-                    <div class="col-md-4">
-                        <textarea name="notes" id="notes" class="form-control" rows="3"><?php echo Form::value('notes');?></textarea>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3">Delivery Notes/Comments</label>
-                    <div class="col-md-4">
-                        <textarea name="delivery_notes" id="delivery_notes" class="form-control" rows="3"><?php echo Form::value('delivery_notes');?></textarea>
-                    </div>
-                </div>
-            </div>
+        </div>
+
             <div class="border border-secondary p-3 m-3 rounded bg-light">
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Customer Details     ---------------------------------------------------------------->
