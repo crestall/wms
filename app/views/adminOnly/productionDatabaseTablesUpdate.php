@@ -48,26 +48,29 @@
                     if($pj['finisher_id'] > 0)
                     {
                         $data = array(
-                            'purchase_order'    => $pj['finisher_po']
+                            'purchase_order'    => $pj['finisher_po'],
+                            'finisher_id'       => $pj['finisher_id']
                         );
                         echo "<p>Will enter<pre>",print_r($data),"</pre> into production jobs finishers table</p>";
-                        $this->controller->productionjob->addFinisherToJob($pj['finisher_id'], $data);
+                        $this->controller->productionjob->addFinisherToJob($pj['id'], $data);
                     }
                     if($pj['finisher2_id'] > 0)
                     {
                         $data = array(
-                            'purchase_order'    => $pj['finisher2_po']
+                            'purchase_order'    => $pj['finisher2_po'],
+                            'finisher_id'       => $pj['finisher2_id']
                         );
                         echo "<p>Will enter<pre>",print_r($data),"</pre> into production jobs finishers table</p>";
-                        $this->controller->productionjob->addFinisherToJob($pj['finisher2_id'], $data);
+                        $this->controller->productionjob->addFinisherToJob($pj['id'], $data);
                     }
                     if($pj['finisher3_id'] > 0)
                     {
                         $data = array(
-                            'purchase_order'    => $pj['finisher3_po']
+                            'purchase_order'    => $pj['finisher3_po'],
+                            'finisher_id'       => $pj['finisher3_id']
                         );
                         echo "<p>Will enter<pre>",print_r($data),"</pre> into production jobs finishers table</p>";
-                        $this->controller->productionjob->addFinisherToJob($pj['finisher3_id'], $data);
+                        $this->controller->productionjob->addFinisherToJob($pj['id'], $data);
                     }
                     echo "<p>-------------------------------------------------------------------------------------</p>";
                 }
