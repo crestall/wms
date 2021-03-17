@@ -43,7 +43,7 @@
                 <h1>Add Finishers To Jobs</h1>
                 <?php //echo "JOBS<pre>",print_r($production_jobs)."</pre>";?>
                 <?php
-                foreach($production_jobs as $pj)
+                /*foreach($production_jobs as $pj)
                 {
                     if($pj['finisher_id'] > 0)
                     {
@@ -74,7 +74,7 @@
                     }
                     echo "<p>-------------------------------------------------------------------------------------</p>";
                 }
-                ?>
+                */?>
             </div>
         </div>
     </div>
