@@ -313,11 +313,9 @@ else
 <!-------------------------------------------------     Form Submission     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                <div class="form-group row">
                     <div class="col-md-4 offset-6 offset-md-8">
                         <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter">Add This Job</button>
                     </div>
-                </div>
             </div>
         </form>
     </div>
