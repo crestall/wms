@@ -8,7 +8,8 @@
         <?php //echo "CUSTOMERS<pre>",print_r($production_customers)."</pre>";?>
         <div class="row">
             <div class="col">
-                <?php foreach($production_customers as $pc)
+                <h1>Finishers and Customers</h1>
+                <?php /* foreach($production_customers as $pc)
                 {
                     if(empty(trim($pc['contacts'])))
                     {
@@ -34,7 +35,12 @@
                     }
                     echo "<p>-------------------------------------------------------------------------------------</p>";
                 }
-                ?>
+                */?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Add Finishers To Jobs</h1>
             </div>
         </div>
     </div>
