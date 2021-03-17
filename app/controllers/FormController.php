@@ -1715,9 +1715,19 @@ class FormController extends Controller {
         {
             Form::setError('name', 'The Finishers name is required');
         }
-        if(!$this->dataSubbed($contact))
+        foreach($post_data['contacts'] as $ind => $cd)
         {
-            Form::setError('contact', 'A contact name is required');
+            if(!$this->dataSubbed($cd['name']))
+            {
+                Form::setError('contactname_'.$ind, 'A contact name is required');
+            }
+            if($this->dataSubbed($cd['email']))
+            {
+                if(!$this->emailValid($cd['email']))
+                {
+                    Form::setError('contactemail_'.$ind, 'The email is not valid');
+                }
+            }
         }
         if($this->dataSubbed($email))
         {
