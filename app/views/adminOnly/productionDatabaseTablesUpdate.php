@@ -17,7 +17,7 @@
                             echo "<p>Will Add ".$pc['contact']." for ".$pc['name']." (".$pc['id'].")</p>";
                             $data = array(
                                 'name'          => $pc['contact'],
-                                'finisher_id'   => $pc['id']
+                                'customer_id'   => $pc['id']
                             );
                             echo "<pre>",print_r($data),"</pre>";
                             //$this->controller->productioncontact->addContact($data);
