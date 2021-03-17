@@ -10,7 +10,7 @@
             <div class="col">
                 <?php foreach($production_finishers as $pf)
                 {
-                    if(!empty($pf['contacts']))
+                    if(!empty(trim($pf['contacts'])))
                     {
                         if(!empty($pf['contact']))
                         {
