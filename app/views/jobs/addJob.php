@@ -264,7 +264,7 @@ else
                             Finisher(s) Details
                         </div>
                         <div class="card-body">
-                            <div class="col-md-4 offset-md-8">
+                            <div class="col">
                                 <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add A Finisher</a></h4>
                             </div>
                             <div id="finishers_holder"></div>
