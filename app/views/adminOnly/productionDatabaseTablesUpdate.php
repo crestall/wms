@@ -20,7 +20,7 @@
                                 'customer_id'   => $pc['id']
                             );
                             echo "<pre>",print_r($data),"</pre>";
-                            $this->controller->productioncontact->addContact($data);
+                            //$this->controller->productioncontact->addContact($data);
                             echo "<p>Done</p>";
                         }
                         else
