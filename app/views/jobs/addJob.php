@@ -24,8 +24,8 @@ else
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <div class="row">
-            <form id="add_production_job" method="post" action="/form/procAddProductionJob">
+        <form id="add_production_job" method="post" action="/form/procAddProductionJob">
+            <div class="row">
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Job Details     --------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
@@ -318,7 +318,7 @@ else
                         <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter">Add This Job</button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
