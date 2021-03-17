@@ -225,8 +225,7 @@ class Productionjob extends Model{
             {
                 $ed_date = (empty($finisher['ed_date_value']))? 0 : $finisher['ed_date_value'];
                 $po = (empty($finisher['purchase_order']))? NULL : $finisher['purchase_order'];
-                $db->insertQuery($this->finishers_table, array(
-                    'job_id'            => $id,
+                $this->addFinisherToJob($id, array(
                     'finisher_id'       => $finisher['finisher_id'],
                     'contact_id'        => $finisher['contact_id'],
                     'purchase_order'    => $po,
@@ -235,6 +234,21 @@ class Productionjob extends Model{
             }
         }
         return $id;
+    }
+
+    public function addFinisherToJob($job_id, $data)
+    {
+        $db = Database::openConnection();
+        $ed_date = ( isset($data['ed_date_value']) && !empty($data['ed_date_value']) )? $data['ed_date_value'] : 0;
+        $contact_id = ( isset($data['contact_id']) && !empty($data['contact_id']) )? $data['contact_id'] : 0;
+        $po = ( isset($data['purchase_order']) && !empty($data['purchase_order']))? $data['purchase_order'] : NULL ;
+        $db->insertQuery($this->finishers_table, array(
+            'job_id'            => $job_id,
+            'finisher_id'       => $data['finisher_id'],
+            'contact_id'        => $contact_id,
+            'purchase_order'    => $po,
+            'ed_date'           => $ed_date
+        ));
     }
 
     public function updateJobDetails($data)
