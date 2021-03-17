@@ -306,11 +306,11 @@ else
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <input type="text" class="form-control required" name="address" id="address" value="<?php echo $address;?>" />
                                         <?php echo Form::displayError('address');?>
                                     </div>
-                                    <div class="custom-control custom-checkbox col-md-1">
+                                    <div class="custom-control custom-checkbox col-md-8 offset-md-4">
                                         <input type="checkbox" class="custom-control-input" id="ignore_address_error" name="ignore_address_error" <?php if(!empty(Form::value('ignore_address_error'))) echo 'checked';?> />
                                         <label class="custom-control-label" for="ignore_address_error">No need for a number</label>
                                     </div>
