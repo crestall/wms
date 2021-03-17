@@ -5,8 +5,8 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 ?>
 <div id="finisher_<?php echo $i;?>" class="p-3 mid-grey mb-3 afinisher">
     <div class="form-group row">
-        <h4 class="col-md-5 finisher_title">Finisher <?php echo ucwords($f->format($this_finisher));?>'s Details</h4>
-        <div class="col-md-7">
+        <h4 class="col-md-6 finisher_title">Finisher <?php echo ucwords($f->format($this_finisher));?>'s Details</h4>
+        <div class="col-md-6">
             <h5><a data-finisher="<?php echo $i;?>" class="remove-finisher" style="cursor:pointer" title="Remove Finisher"><i class="fad fa-times-square text-danger"></i> Remove This Finisher</a></h5>
         </div>
     </div>
