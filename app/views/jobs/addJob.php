@@ -255,26 +255,23 @@ else
                         </div>
                     </div>
                 </div>
-        </div>
-
-            <div class="border border-secondary p-3 m-3 rounded bg-light">
-
-                <h3>Customer Details</h3>
-
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     The Finishers     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="border border-secondary p-3 m-3 rounded bg-light">
-                <div class="row mb-0">
-                    <div class="col-md-8">
-                        <h3>Finisher(s) Details</h3>
-                    </div>
-                    <div class="col-md-4">
-                        <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add A Finisher</a></h4>
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <div class="card h-100 border-secondary order-card" id="finishersdetails">
+                        <div class="card-header bg-secondary text-white">
+                            Finisher(s) Details
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-4 offset-md-8">
+                                <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add A Finisher</a></h4>
+                            </div>
+                            <div id="finishers_holder"></div>
+                        </div>
                     </div>
                 </div>
-                <div id="finishers_holder"></div>
-            </div>
+        </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
