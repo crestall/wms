@@ -15,6 +15,11 @@
                         if(!empty($pf['contact']))
                         {
                             echo "<p>Will Add ".$pf['contact']." for ".$pf['name']." (".$pf['id'].")</p>";
+                            $data = array(
+                                'name'          => $pf['contact'],
+                                'finisher_id'   => $pf['id']
+                            );
+                            echo "<pre>",print_r($data),"</pre>";
                         }
                         else
                         {
