@@ -41,7 +41,37 @@
         <div class="row">
             <div class="col">
                 <h1>Add Finishers To Jobs</h1>
-                <?php echo "JOBS<pre>",print_r($production_jobs)."</pre>";?>
+                <?php //echo "JOBS<pre>",print_r($production_jobs)."</pre>";?>
+                <?php
+                foreach($production_jobs as $pj)
+                {
+                    if($pj['finisher_id'] > 0)
+                    {
+                        $data = array(
+                            'purchase_order'    => $pj['finisher_po']
+                        );
+                        echo "<p>Will enter<pre>",print_r($data),"</pre> into production jobs finishers table</p>";
+                        //$this->controller->productionjob->addFinisherToJob($pj['finisher_id'], $data);
+                    }
+                    if($pj['finisher2_id'] > 0)
+                    {
+                        $data = array(
+                            'purchase_order'    => $pj['finisher2_po']
+                        );
+                        echo "<p>Will enter<pre>",print_r($data),"</pre> into production jobs finishers table</p>";
+                        //$this->controller->productionjob->addFinisherToJob($pj['finisher2_id'], $data);
+                    }
+                    if($pj['finisher3_id'] > 0)
+                    {
+                        $data = array(
+                            'purchase_order'    => $pj['finisher3_po']
+                        );
+                        echo "<p>Will enter<pre>",print_r($data),"</pre> into production jobs finishers table</p>";
+                        //$this->controller->productionjob->addFinisherToJob($pj['finisher3_id'], $data);
+                    }
+                    echo "<p>-------------------------------------------------------------------------------------</p>";
+                }
+                ?>
             </div>
         </div>
     </div>
