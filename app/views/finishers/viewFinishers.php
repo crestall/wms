@@ -59,6 +59,15 @@
                             if(!empty($s['country'])) $address_string .= "<br/>".$s['country'];
                             if(!empty($s['postcode'])) $address_string .= "<br/>".$s['postcode'];
                             $contact_string = "";
+                            if(!(empty($c['email']) && empty($c['phone']) && empty($c['website'])))
+                            {
+                                $contact_string .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3 pb-3'>";
+                                $contact_string .= "<span class='font-weight-bold'>Company Contact</span>";
+                                if(!empty($c['email'])) $contact_string .= "<br><a href='mailto:".$c['email']."'>".$c['email']."</a>";
+                                if(!empty($c['phone'])) $contact_string .= "<br>".$c['phone'];
+                                if(!empty($c['website'])) $contact_string .= "<br/><a href='http://".$c['website']."' target='_blank'>".$c['website']."</a>";
+                                $contact_string .= "</div>";
+                            }
                             if(!empty($s['contacts']))
                             {
                                 $contacts = explode("|", $s['contacts']);
@@ -75,7 +84,6 @@
                                 }
 
                             }
-                            if(!empty($s['website'])) $contact_string .= "<br/><a href='http://".$s['website']."' target='_blank'>".$s['website']."</a>";
                             ?>
                         	<tr>
                                 <td><?php echo $i;?></td>
