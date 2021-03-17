@@ -41,6 +41,7 @@
         <div class="row">
             <div class="col">
                 <h1>Add Finishers To Jobs</h1>
+                <?php echo "JOBS<pre>",print_r($production_jobs)."</pre>";?>
             </div>
         </div>
     </div>
