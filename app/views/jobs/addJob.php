@@ -161,20 +161,20 @@ else
                                     <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="0" >
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-2 mb-3">Contact Name</label>
+                                    <label class="col-md-4 mb-3">Contact Name</label>
                                     <div class="col-md-8 mb-3">
                                         <input type="text" class="form-control customer_contact" name="customer_contact_name" id="customer_contact_name" value="<?php echo Form::value('customer_contact_name');?>" >
                                     </div>
-                                    <label class="col-md-2 mb-3">Contact Role</label>
+                                    <label class="col-md-4 mb-3">Contact Role</label>
                                     <div class="col-md-8 mb-3">
                                         <input type="text" class="form-control customer_contact" name="customer_contact_role" id="customer_contact_role" value="<?php echo Form::value('customer_contact_role');?>" >
                                     </div>
-                                    <label class="col-md-2 mb-3">Contact Email</label>
+                                    <label class="col-md-4 mb-3">Contact Email</label>
                                     <div class="col-md-8 mb-3">
                                         <input type="text" class="form-control customer_contact email" name="customer_contact_email" id="customer_contact_email" value="<?php echo Form::value('customer_contact_email');?>" >
                                         <?php echo Form::displayError('customer_contact_email');?>
                                     </div>
-                                    <label class="col-md-2 mb-3">Contact Phone</label>
+                                    <label class="col-md-4 mb-3">Contact Phone</label>
                                     <div class="col-md-8 mb-3">
                                         <input type="text" class="form-control customer_contact" name="customer_contact_phone" id="customer_contact_phone" value="<?php echo Form::value('customer_contact_phonel');?>" >
                                     </div>
