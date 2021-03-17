@@ -27,6 +27,19 @@ $categories = (is_array(Form::value('categories')))? Form::value('categories') :
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-md-3">Phone</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="phone" id="phone" value="<?php echo Form::value('phone');?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Email</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control email" name="email" id="email" value="<?php echo Form::value('email');?>" />
+                    <?php echo Form::displayError('email');?>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-3">Website</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="website" id="website" value="<?php echo Form::value('website');?>" />
