@@ -466,7 +466,24 @@ class Productionjob extends Model{
                 pc.id AS customer_id, pc.name AS customer_name, pc.email AS customer_email, pc.phone AS customer_phone,
                 pcc.name AS contact_name, pcc.email AS contact_email, pcc.phone AS contact_phone, pcc.role AS contact_role,
                 sr.id as salesrep_id, sr.name AS salesrep_name,
-                GROUP_CONCAT( IFNULL(pf.name,''),',',IFNULL(pf.email,''),',',IFNULL(pf.phone,''),',',',',IFNULL(pfc.name,''),',',IFNULL(pfc.email,''),',',IFNULL(pfc.phone,''),',',IFNULL(pfc.role,''),',',IFNULL(pjf.purchase_order,''),',',IFNULL(pjf.ed_date,'')  SEPARATOR '|' ) AS finishers,
+                GROUP_CONCAT(
+                    IFNULL(pf.name,''),',',
+                    IFNULL(pf.email,''),',',
+                    IFNULL(pf.phone,''),',',
+                    IFNULL(pf.address_2,''),',',
+                    IFNULL(pf.phone,''),',',
+                    IFNULL(pf.suburb,''),',',
+                    IFNULL(pf.state,''),',',
+                    IFNULL(pf.postcode,''),',',
+                    IFNULL(pf.country,''),',',
+                    IFNULL(pfc.name,''),',',
+                    IFNULL(pfc.email,''),',',
+                    IFNULL(pfc.phone,''),',',
+                    IFNULL(pfc.role,''),',',
+                    IFNULL(pjf.purchase_order,''),',',
+                    IFNULL(pjf.ed_date,'')
+                    SEPARATOR '|'
+                ) AS finishers,
                 js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking,
                 IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day, IFNULL(rs.runsheet_completed, 0) AS runsheet_completed, rs.driver_id
             FROM
