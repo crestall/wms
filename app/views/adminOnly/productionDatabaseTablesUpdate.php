@@ -51,7 +51,7 @@
                             'purchase_order'    => $pj['finisher_po']
                         );
                         echo "<p>Will enter<pre>",print_r($data),"</pre> into production jobs finishers table</p>";
-                        //$this->controller->productionjob->addFinisherToJob($pj['finisher_id'], $data);
+                        $this->controller->productionjob->addFinisherToJob($pj['finisher_id'], $data);
                     }
                     if($pj['finisher2_id'] > 0)
                     {
@@ -59,7 +59,7 @@
                             'purchase_order'    => $pj['finisher2_po']
                         );
                         echo "<p>Will enter<pre>",print_r($data),"</pre> into production jobs finishers table</p>";
-                        //$this->controller->productionjob->addFinisherToJob($pj['finisher2_id'], $data);
+                        $this->controller->productionjob->addFinisherToJob($pj['finisher2_id'], $data);
                     }
                     if($pj['finisher3_id'] > 0)
                     {
@@ -67,7 +67,7 @@
                             'purchase_order'    => $pj['finisher3_po']
                         );
                         echo "<p>Will enter<pre>",print_r($data),"</pre> into production jobs finishers table</p>";
-                        //$this->controller->productionjob->addFinisherToJob($pj['finisher3_id'], $data);
+                        $this->controller->productionjob->addFinisherToJob($pj['finisher3_id'], $data);
                     }
                     echo "<p>-------------------------------------------------------------------------------------</p>";
                 }
