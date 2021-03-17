@@ -172,7 +172,7 @@ class Productionfinisher extends Model{
             'country'       =>  null,
             'website'       =>  null,
             'phone'         => null,
-            'email'         => mull
+            'email'         => null
         );
         $vals['active'] = isset($data['active'])? 1 : 0;
         if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
