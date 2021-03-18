@@ -23,7 +23,7 @@ else
     $tfd = "none";
     $finisher_id = 0;
 }
-
+echo "<pre>",print_r($tfa),"</pre>";die();
 $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::value('finishers['.$i.'][name]');
 $po = empty(Form::value('finishers['.$i.'][purchase_order]'))?  $tfa['purchase_order'] : Form::value('finishers['.$i.'][purchase_order]');
 $ed_date = empty(Form::value('finishers['.$i.'][ed_date]'))?  $tfa['ed_date'] : Form::value('finishers['.$i.'][ed_date]');
