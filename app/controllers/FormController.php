@@ -938,6 +938,14 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
         }
         echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
         $date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
