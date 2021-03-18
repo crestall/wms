@@ -969,11 +969,12 @@ class FormController extends Controller {
             if(!isset($finishers))
             {
                 //echo "<p>Will remove all finishers</p>";
+                $this->productionjob-> removeFinishersFromJob($id);
                 Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>All Finisher have emoved</h3><p>They should <strong>NOT</strong> be showing below</p>");
             }
             else
             {
-                //echo "Will update JOB: $id to<pre>",print_r($finishers),"</pre>";
+                echo "Will update JOB: $id to<pre>",print_r($finishers),"</pre>";die();
                 Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job's Finisher Details Have Been Updated</h3><p>The changes should be showing below</p>");
             }
         }
