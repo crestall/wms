@@ -722,6 +722,7 @@
                         actions.common.doDates();
                         actions.common.autoComplete();
                         actions.common.addFinisher();
+                        actions.common.removeFinisher();
                         actions.common.customerAutoComplete();
                         jobDeliveryDestinations.updateEvents();
                         actions.common.finisherExpectedDeliveryDates();
