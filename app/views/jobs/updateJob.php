@@ -292,7 +292,7 @@ $f = 0;
 <!-------------------------------------------------     Finisher Details     ------------------------------------------------------------>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="col-sm-12 col-md-6 mb-3">
-                <div class="card h-100 border-secondary order-card" id="finishersdetails">
+                <div class="card h-100 border-secondary order-card" id="finisherdetails">
                     <div class="card-header bg-secondary text-white">
                         Finisher(s) Details
                     </div>
