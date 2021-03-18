@@ -308,12 +308,12 @@ var jobDeliveryDestinations = {
                     var this_finisher_ind  = $this.data("finisher");
                     $('#ship_to').val($('input[name="finishers['+this_finisher_ind+'][name]"]').val()).valid();
                     $('#attention').val($('select[name="finishers['+this_finisher_ind+'][contact_id]"]').find('option:selected[value!=0]').text());
-                    $('#address').val($('input[name="finishers['+this_finisher_ind+'][finisher_address]"]').val()).valid();
-                    $('#address2').val($('input[name="finishers['+this_finisher_ind+'][finisher_address2]"]').val());
-                    $('#suburb').val($('input[name="finishers['+this_finisher_ind+'][finisher_suburb]"]').val()).valid();
-                    $('#state').val($('input[name="finishers['+this_finisher_ind+'][finisher_state]"]').val()).valid();
-                    $('#postcode').val($('input[name="finishers['+this_finisher_ind+'][finisher_postcode]"]').val()).valid();
-                    $('#country').val($('input[name="finishers['+this_finisher_ind+'][finisher_country]"]').val()).valid();
+                    $('#address').val($('input[name="finishers['+this_finisher_ind+'][address]"]').val()).valid();
+                    $('#address2').val($('input[name="finishers['+this_finisher_ind+'][address2]"]').val());
+                    $('#suburb').val($('input[name="finishers['+this_finisher_ind+'][suburb]"]').val()).valid();
+                    $('#state').val($('input[name="finishers['+this_finisher_ind+'][state]"]').val()).valid();
+                    $('#postcode').val($('input[name="finishers['+this_finisher_ind+'][postcode]"]').val()).valid();
+                    $('#country').val($('input[name="finishers['+this_finisher_ind+'][country]"]').val()).valid();
                 }
             });
         });
