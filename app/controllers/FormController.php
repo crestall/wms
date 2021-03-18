@@ -947,66 +947,13 @@ class FormController extends Controller {
         }
         echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
         $date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
-        if($this->dataSubbed($finisher_email))
+        if(isset($finishers))
         {
-            if(!$this->emailValid($finisher_email))
+            foreach($finishers as $ind => $finisher)
             {
-                Form::setError('finisher_email', 'The email is not valid');
-            }
-        }
-        if(!empty($finisher_address) || !empty($finisher_suburb) || !empty($finisher_state) || !empty($finisher_postcode) || !empty($finisher_country))
-        {
-            //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
-            $finisher_country = strtoupper($finisher_country);
-            if( !$this->dataSubbed($finisher_address) )
-            {
-                Form::setError('finisher_address', 'An address is required');
-            }
-            elseif( !isset($ignore_finisher_address_error) )
-            {
-                if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $finisher_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $finisher_address)) )
+                if(!$this->dataSubbed($finisher['name']))
                 {
-                    Form::setError('finisher_address', 'The address must include both letters and numbers');
-                }
-            }
-            if(!$this->dataSubbed($finisher_postcode))
-            {
-                Form::setError('finisher_postcode', "A postcode is required");
-            }
-            if(!$this->dataSubbed($finisher_country))
-            {
-                Form::setError('finisher_country', "A country is required");
-            }
-            elseif(strlen($finisher_country) > 2)
-            {
-                Form::setError('finisher_country', "Please use the two letter ISO code");
-            }
-            elseif($finisher_country == "AU")
-            {
-                if(!$this->dataSubbed($finisher_suburb))
-        		{
-        		    Form::setError('finisher_suburb', "A delivery suburb is required for Australian addresses");
-        		}
-        		if(!$this->dataSubbed($finisher_state))
-        		{
-        		    Form::setError('finisher_state', "A delivery state is required for Australian addresses");
-        		}
-                $aResponse = $this->Eparcel->ValidateSuburb($finisher_suburb, $finisher_state, str_pad($finisher_postcode,4,'0',STR_PAD_LEFT));
-                $error_string = "";
-                if(isset($aResponse['errors']))
-                {
-                    foreach($aResponse['errors'] as $e)
-                    {
-                        $error_string .= $e['message']." ";
-                    }
-                }
-                elseif($aResponse['found'] === false)
-                {
-                    $error_string .= "Postcode does not match suburb or state";
-                }
-                if(strlen($error_string))
-                {
-                    Form::setError('finisher_postcode', $error_string);
+                    Form::setError('finishername_'.$ind, 'A Finisher Name is required');
                 }
             }
         }
@@ -1014,7 +961,7 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            Session::set('jobfinisher'.$fn.'detailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
+            Session::set('jobfinisherdetailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
         }
         else
         {
@@ -1065,7 +1012,7 @@ class FormController extends Controller {
                 Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher Has Been Removed From This Job</h3>");
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#finisher{$fn}details");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#finisherdetails");
     }
 
     public function procJobCustomerUpdate()

@@ -300,6 +300,12 @@ $f = 0;
                         <div class="col">
                             <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add A Finisher</a></h4>
                         </div>
+                        <?php if(isset($_SESSION['jobcustomerdetailsfeedback'])) :?>
+                            <div class='feedbackbox'><?php echo Session::getAndDestroy('jobfinisherdetailsfeedback');?></div>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['jobcustomerdetailserrorfeedback'])) :?>
+                            <div class='errorbox'><?php echo Session::getAndDestroy('jobfinisherdetailserrorfeedback');?></div>
+                        <?php endif; ?>
                         <form id="finisher_details_update" method="post" action="/form/procJobfinisherUpdate">
                             <div id="finishers_holder">
                                 <?php $i = 0;
