@@ -929,7 +929,6 @@ class FormController extends Controller {
     {
         echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
-        $fn = ($this->request->data['finisher_number'] == 1)? "" : $this->request->data['finisher_number'];
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
