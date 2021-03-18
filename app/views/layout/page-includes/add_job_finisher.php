@@ -5,6 +5,7 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 if(isset($tfa))
 {
     $tfd = "block";
+    $finisher_id = $tfa['id'];
 }
 else
 {
@@ -12,6 +13,7 @@ else
         'name'  => ''
     );
     $tfd = "none";
+    $finisher_id = 0;
 }
 
 $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::value('finishers['.$i.'][name]');
@@ -48,7 +50,13 @@ $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::val
             <input class="custom-control-input send_to_address send_to_finisher" data-finisher="<?php echo $i;?>" type="checkbox" id="send_to_finisher_<?php echo $i;?>" name="send_to_finisher_<?php echo $i;?>" />
             <label class="custom-control-label col-md-6 send_to_finisher" for="send_to_finisher_<?php echo $i;?>">Send Job To This Finisher</label>
         </div>
-        <div id="contact_selector_<?php echo $i;?>" class="form-group row contact_selector"></div>
+        <div id="contact_selector_<?php echo $i;?>" class="form-group row contact_selector">
+            <?php if($finisher_id > 0)
+            {
+                $finisher_index = $i;
+                include(Config::get('VIEWS_PATH')."layout/page-includes/finisher_contact_selector.php");
+            }?>
+        </div>
         <div class="form-group row">
             <label class="col-md-4">Purchase Order Number</label>
             <div class="col-md-8">
