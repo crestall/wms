@@ -53,7 +53,7 @@ else
 {
     $finisher_array = $finishers;
 }
-//echo "<pre>",print_r($finisher_array),"</pre>";die();
+echo "<pre>",print_r($finisher_array),"</pre>";die();
 $finisher_count = count($finisher_array);
 $f = 0;
 ?>
