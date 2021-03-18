@@ -122,7 +122,7 @@
                     },
                     finisherAutocomplete: function(){
                         $("div#finishers_holder div.afinisher").each(function(i,e){
-                            var $this_input = $(this).find("input.finisher_name");
+                            var $this_input = $(this).find("input.finisher_name:not(.no-autocomplete)");
                             var $this_finisher_details = $(this).find("div.this_finisher_details");
                             if($this_input.data('ui-autocomplete') != undefined)
                             {
