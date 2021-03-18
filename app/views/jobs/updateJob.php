@@ -301,14 +301,16 @@ $f = 0;
                             <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add A Finisher</a></h4>
                         </div>
                         <div id="finishers_holder">
-                            <?php $i = 0;
-                            while($i < $finisher_count):
-                                foreach($finisher_array as $tfa)
-                                {
-                                    include(Config::get('VIEWS_PATH')."layout/page-includes/add_job_finisher.php");
-                                    ++$i;
-                                }
-                            endwhile;?>
+                            <form id="finisher_details_update" method="post" action="/form/procJobfinisherUpdate">
+                                <?php $i = 0;
+                                while($i < $finisher_count):
+                                    foreach($finisher_array as $tfa)
+                                    {
+                                        include(Config::get('VIEWS_PATH')."layout/page-includes/add_job_finisher.php");
+                                        ++$i;
+                                    }
+                                endwhile;?>
+                            </form>
                         </div>
                     </div>
                     <div class="card-footer text-right">
