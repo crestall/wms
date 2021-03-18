@@ -27,12 +27,12 @@ else
 $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::value('finishers['.$i.'][name]');
 $po = empty(Form::value('finishers['.$i.'][purchase_order]'))?  $tfa['purchase_order'] : Form::value('finishers['.$i.'][purchase_order]');
 $ed_date = empty(Form::value('finishers['.$i.'][ed_date]'))?  $tfa['ed_date'] : Form::value('finishers['.$i.'][ed_date]');
-$address = empty(Form::value('finishers['.$i.'][address]'))?  $tfa['address'] : Form::value('finishers['.$i.'][address]');
-$address_2 = empty(Form::value('finishers['.$i.'][address_2]'))?  $tfa['address_2'] : Form::value('finishers['.$i.'][address_2]');
-$suburb = empty(Form::value('finishers['.$i.'][suburb]'))?  $tfa['suburb'] : Form::value('finishers['.$i.'][suburb]');
-$state = empty(Form::value('finishers['.$i.'][state]'))?  $tfa['state'] : Form::value('finishers['.$i.'][state]');
-$postcode = empty(Form::value('finishers['.$i.'][postcode]'))?  $tfa['postcode'] : Form::value('finishers['.$i.'][postcode]');
-$country = empty(Form::value('finishers['.$i.'][country]'))?  $tfa['country'] : Form::value('finishers['.$i.'][country]');
+$address = empty(Form::value('finishers['.$i.'][finisher_address]'))?  $tfa['address'] : Form::value('finishers['.$i.'][finisher_address]');
+$address_2 = empty(Form::value('finishers['.$i.'][finisher_address_2]'))?  $tfa['address_2'] : Form::value('finishers['.$i.'][finisher_address_2]');
+$suburb = empty(Form::value('finishers['.$i.'][finisher_suburb]'))?  $tfa['suburb'] : Form::value('finishers['.$i.'][finisher_suburb]');
+$state = empty(Form::value('finishers['.$i.'][finisher_state]'))?  $tfa['state'] : Form::value('finishers['.$i.'][finisher_state]');
+$postcode = empty(Form::value('finishers['.$i.'][finisher_postcode]'))?  $tfa['postcode'] : Form::value('finishers['.$i.'][finisher_postcode]');
+$country = empty(Form::value('finishers['.$i.'][finisher_country]'))?  $tfa['country'] : Form::value('finishers['.$i.'][finisher_country]');
 ?>
 <div id="finisher_<?php echo $i;?>" class="p-3 mid-grey mb-3 afinisher">
     <div class="form-group row">
