@@ -20,7 +20,7 @@
                                 actions.common.finisherAutocomplete();
                                 $([document.documentElement, document.body]).animate({
                                     scrollTop: $("#finisher_"+finisher_count).offset().top
-                                }, 2000);
+                                }, 1000);
                             });
                         });
                     },
