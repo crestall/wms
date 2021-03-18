@@ -720,6 +720,7 @@
                         actions.common.autoComplete();
                         actions.common.addFinisher();
                         jobDeliveryDestinations.updateEvents();
+                        actions.common.finisherExpectedDeliveryDates();
                         $('button#job_details_update_submitter').click(function(e){
                             $('form#job_details_update').submit();
                         });
