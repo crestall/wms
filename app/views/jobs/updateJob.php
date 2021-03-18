@@ -60,9 +60,9 @@ $f = 0;
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <?php echo "JOB<pre>",print_r($job),"</pre>";?>
-        <?php echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
-        <?php echo "CUSTOMER CONTACTS<pre>",print_r($customer_contacts),"</pre>";?>
+        <?php //echo "JOB<pre>",print_r($job),"</pre>";?>
+        <?php //echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
+        <?php //echo "CUSTOMER CONTACTS<pre>",print_r($customer_contacts),"</pre>";?>
         <?php //echo "finisher<pre>",print_r($finisher),"</pre>";?>
         <?php //echo "SESSION<pre>",print_r($_SESSION),"</pre>";?>
         <div class="row">
@@ -209,6 +209,10 @@ $f = 0;
                                     <?php echo Form::displayError('customer_name');?>
                                 </div>
                             </div>
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                <input class="custom-control-input send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" />
+                                <label class="custom-control-label col-md-4" for="send_to_customer">Send Job To Customer</label>
+                            </div>
                             <div class="form-group row ">
                                 <label class="col-md-4">Contact</label>
                                 <div class="col-md-8">
@@ -328,7 +332,6 @@ $f = 0;
                             <div class='errorbox'><?php echo Session::getAndDestroy('jobdeliverydetailserrorfeedback');?></div>
                         <?php endif; ?>
                         <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
-                            <?php include(Config::get('VIEWS_PATH')."forms/delivery_destinations.php");?>
                             <div id="delivery_address_holder">
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
