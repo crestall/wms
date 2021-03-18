@@ -6,7 +6,7 @@ $tfa = (isset($finisher_array))? $finisher_array : array(
     'name'  => ''
 );
 
-$name = empty(Form::value('finishers['.$i.'][name']))? $tfa['name'];
+$name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::value('finishers['.$i.'][name]');
 ?>
 <div id="finisher_<?php echo $i;?>" class="p-3 mid-grey mb-3 afinisher">
     <div class="form-group row">
