@@ -310,6 +310,8 @@ $f = 0;
                                         ++$i;
                                     }
                                 endwhile;?>
+                                <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                                <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
                             </form>
                         </div>
                     </div>
