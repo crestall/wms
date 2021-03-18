@@ -945,7 +945,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
         //$date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
         if(isset($finishers))
         {
@@ -983,7 +983,7 @@ class FormController extends Controller {
                             'ed_date_value'     => $finisher['ed_date_value'],
                             'contact_id'        => $finisher['contact_id'],
                             'purchase_order'    => $finisher['purchase_order'],
-                            'finisher_id'       => $finisher['id']
+                            'finisher_id'       => $finisher['finisher_id']
                         ));
                     }
                 }
