@@ -965,6 +965,7 @@ class FormController extends Controller {
         }
         else
         {
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>";die();
             Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#finisherdetails");
