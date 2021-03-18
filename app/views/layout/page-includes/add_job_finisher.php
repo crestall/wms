@@ -71,7 +71,7 @@ $ed_date = empty(Form::value('finishers['.$i.'][ed_date]'))?  $tfa['ed_date'] : 
             <label class="col-md-4 col-form-label">Expected Delivery Date</label>
             <div class="col-md-8">
                 <div class="input-group">
-                    <input type="text" class="form-control finisher_ed_date" name="finishers[<?php echo $i;?>][ed_date]" value="<?php if(!empty($ed_date) echo date('d/m/Y', $ed_date);?>">
+                    <input type="text" class="form-control finisher_ed_date" name="finishers[<?php echo $i;?>][ed_date]" value="<?php if(!empty($ed_date)) echo date('d/m/Y', $ed_date);?>">
                     <div class="input-group-append">
                         <span class="input-group-text calendar_icon"><i class="fad fa-calendar-alt"></i></span>
                     </div>
