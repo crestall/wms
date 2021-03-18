@@ -12,7 +12,7 @@ else
     $tfa = array(
         'name'              => '',
         'purchase_order'    => '',
-        'ed_date'           => '',
+        'ed_date_value'     => '',
         'address'           => '',
         'address_2'         => '',
         'suburb'            => '',
@@ -26,7 +26,7 @@ else
 
 $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::value('finishers['.$i.'][name]');
 $po = empty(Form::value('finishers['.$i.'][purchase_order]'))?  $tfa['purchase_order'] : Form::value('finishers['.$i.'][purchase_order]');
-$ed_date = empty(Form::value('finishers['.$i.'][ed_date]'))?  $tfa['ed_date'] : Form::value('finishers['.$i.'][ed_date]');
+$ed_date_vale = empty(Form::value('finishers['.$i.'][ed_date_value]'))?  $tfa['ed_date_value'] : Form::value('finishers['.$i.'][ed_date_value]');
 $address = empty(Form::value('finishers['.$i.'][address]'))?  $tfa['address'] : Form::value('finishers['.$i.'][address]');
 $address_2 = empty(Form::value('finishers['.$i.'][address_2]'))?  $tfa['address_2'] : Form::value('finishers['.$i.'][address_2]');
 $suburb = empty(Form::value('finishers['.$i.'][suburb]'))?  $tfa['suburb'] : Form::value('finishers['.$i.'][suburb]');
