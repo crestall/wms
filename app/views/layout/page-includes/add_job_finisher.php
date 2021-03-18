@@ -19,7 +19,7 @@ $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::val
         <?php if( !empty($tfa['name'])):?>
             <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Finisher Name</label>
             <div class="col-md-8">
-                <input type="text" class="form-control finisher_name required" data-finisher="<?php echo $i;?>" name="finishers[<?php echo $i;?>][name]" value="<?php echo $name;?>">
+                <input type="text" class="form-control required" data-finisher="<?php echo $i;?>" name="finishers[<?php echo $i;?>][name]" value="<?php echo $name;?>">
                 <?php echo Form::displayError('finishername_'.$i);?>
             </div>
         <?php else:?>
