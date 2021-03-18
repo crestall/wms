@@ -300,8 +300,8 @@ $f = 0;
                         <div class="col">
                             <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add A Finisher</a></h4>
                         </div>
-                        <div id="finishers_holder">
-                            <form id="finisher_details_update" method="post" action="/form/procJobfinisherUpdate">
+                        <form id="finisher_details_update" method="post" action="/form/procJobfinisherUpdate">
+                            <div id="finishers_holder">
                                 <?php $i = 0;
                                 while($i < $finisher_count):
                                     foreach($finisher_array as $tfa)
@@ -312,8 +312,8 @@ $f = 0;
                                 endwhile;?>
                                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                 <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-footer text-right">
                         <button id="finisher_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
