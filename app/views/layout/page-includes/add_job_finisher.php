@@ -93,7 +93,7 @@ $country = empty(Form::value('finishers['.$i.'][country]'))?  $tfa['country'] : 
         </div>
     </div>
     <div class="this_finisher_hidden_details">
-        <input type="hidden" class="finisher_id" name="finishers[<?php echo $i;?>][finisher_id]" value="<?php echo $finisher_id;?>">
+        <input type="hidden" class="finisher_id" name="finishers[<?php echo $i;?>][id]" value="<?php echo $finisher_id;?>">
         <input type="hidden" class="finisher_address" name="finishers[<?php echo $i;?>][finisher_address]" value="<?php echo $address;?>">
         <input type="hidden" class="finisher_address_2" name="finishers[<?php echo $i;?>][finisher_address2]" value="<?php echo $address_2;?>">
         <input type="hidden" class="finisher_suburb" name="finishers[<?php echo $i;?>][finisher_suburb]" value="<?php echo $suburb;?>">
