@@ -33,7 +33,7 @@ $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::val
                 </span>
                 <?php echo Form::displayError('finishername_'.$i);?>
             </div>
-        <?php //endif;?>
+        <?php endif;?>
     </div>
     <div class="this_finisher_details" style="display:none;">
         <div class="form-group row custom-control custom-checkbox custom-control-right">
