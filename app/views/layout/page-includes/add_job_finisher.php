@@ -11,7 +11,8 @@ else
 {
     $tfa = array(
         'name'              => '',
-        'purchase_order'    => ''
+        'purchase_order'    => '',
+        'ed_date'           => ''
     );
     $tfd = "none";
     $finisher_id = 0;
@@ -19,6 +20,7 @@ else
 
 $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::value('finishers['.$i.'][name]');
 $po = empty(Form::value('finishers['.$i.'][purchase_order]'))?  $tfa['purchase_order'] : Form::value('finishers['.$i.'][purchase_order]');
+$ed_date = empty(Form::value('finishers['.$i.'][ed_date]'))?  $tfa['ed_date'] : Form::value('finishers['.$i.'][ed_date]');
 ?>
 <div id="finisher_<?php echo $i;?>" class="p-3 mid-grey mb-3 afinisher">
     <div class="form-group row">
@@ -69,17 +71,17 @@ $po = empty(Form::value('finishers['.$i.'][purchase_order]'))?  $tfa['purchase_o
             <label class="col-md-4 col-form-label">Expected Delivery Date</label>
             <div class="col-md-8">
                 <div class="input-group">
-                    <input type="text" class="form-control finisher_ed_date" name="finishers[<?php echo $i;?>][ed_date]">
+                    <input type="text" class="form-control finisher_ed_date" name="finishers[<?php echo $i;?>][ed_date]" value="<?php if(!empty($ed_date) echo date('d/m/Y', $ed_date);?>">
                     <div class="input-group-append">
                         <span class="input-group-text calendar_icon"><i class="fad fa-calendar-alt"></i></span>
                     </div>
                 </div>
             </div>
-            <input type="hidden" class="finisher_ed_date_value" name="finishers[<?php echo $i;?>][ed_date_value]">
+            <input type="hidden" class="finisher_ed_date_value" name="finishers[<?php echo $i;?>][ed_date_value]" value="<?php echo $ed_date;?>">
         </div>
     </div>
     <div class="this_finisher_hidden_details">
-        <input type="hidden" class="finisher_id" name="finishers[<?php echo $i;?>][finisher_id]">
+        <input type="hidden" class="finisher_id" name="finishers[<?php echo $i;?>][finisher_id]" value="<?php echo $finisher_id;?>">
         <input type="hidden" class="finisher_address" name="finishers[<?php echo $i;?>][finisher_address]">
         <input type="hidden" class="finisher_address_2" name="finishers[<?php echo $i;?>][finisher_address2]">
         <input type="hidden" class="finisher_suburb" name="finishers[<?php echo $i;?>][finisher_suburb]">
