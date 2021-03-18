@@ -334,7 +334,7 @@ $f = 0;
                         <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
-                                <label class="custom-control-label col-md-4" for="held_in_store">Hold Job In Store</label>
+                                <label class="custom-control-label col-md-6" for="held_in_store">Hold Job In Store</label>
                             </div>
                             <div id="delivery_address_holder">
                                 <div class="form-group row">
