@@ -968,14 +968,14 @@ class FormController extends Controller {
             //echo "ALL GOOD<pre>",print_r($post_data),"</pre>";die();
             if(!isset($finishers))
             {
-                echo "<p>Will remove all finishers</p>";
+                //echo "<p>Will remove all finishers</p>";
+                Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>All Finisher have emoved</h3><p>They should <strong>NOT</strong> be showing below</p>");
             }
             else
             {
-                echo "Will update JOB: $id to<pre>",print_r($finishers),"</pre>";
+                //echo "Will update JOB: $id to<pre>",print_r($finishers),"</pre>";
+                Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job's Finisher Details Have Been Updated</h3><p>The changes should be showing below</p>");
             }
-            die();
-            Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#finisherdetails");
     }
