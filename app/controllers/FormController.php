@@ -1012,7 +1012,7 @@ class FormController extends Controller {
                 Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher Has Been Removed From This Job</h3>");
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#finisherdetails");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#finisherdetails");
     }
 
     public function procJobCustomerUpdate()
