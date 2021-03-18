@@ -12,7 +12,13 @@ else
     $tfa = array(
         'name'              => '',
         'purchase_order'    => '',
-        'ed_date'           => ''
+        'ed_date'           => '',
+        'address'           => '',
+        'address_2'         => '',
+        'suburb'            => '',
+        'state'             => '',
+        'postcode'          => '',
+        'country'           => 'AU'
     );
     $tfd = "none";
     $finisher_id = 0;
@@ -21,6 +27,12 @@ else
 $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::value('finishers['.$i.'][name]');
 $po = empty(Form::value('finishers['.$i.'][purchase_order]'))?  $tfa['purchase_order'] : Form::value('finishers['.$i.'][purchase_order]');
 $ed_date = empty(Form::value('finishers['.$i.'][ed_date]'))?  $tfa['ed_date'] : Form::value('finishers['.$i.'][ed_date]');
+$address = empty(Form::value('finishers['.$i.'][address]'))?  $tfa['address'] : Form::value('finishers['.$i.'][address]');
+$address_2 = empty(Form::value('finishers['.$i.'][address_2]'))?  $tfa['address_2'] : Form::value('finishers['.$i.'][address_2]');
+$suburb = empty(Form::value('finishers['.$i.'][suburb]'))?  $tfa['suburb'] : Form::value('finishers['.$i.'][suburb]');
+$state = empty(Form::value('finishers['.$i.'][state]'))?  $tfa['state'] : Form::value('finishers['.$i.'][state]');
+$postcode = empty(Form::value('finishers['.$i.'][postcode]'))?  $tfa['postcode'] : Form::value('finishers['.$i.'][postcode]');
+$country = empty(Form::value('finishers['.$i.'][country]'))?  $tfa['country'] : Form::value('finishers['.$i.'][country]');
 ?>
 <div id="finisher_<?php echo $i;?>" class="p-3 mid-grey mb-3 afinisher">
     <div class="form-group row">
@@ -82,11 +94,11 @@ $ed_date = empty(Form::value('finishers['.$i.'][ed_date]'))?  $tfa['ed_date'] : 
     </div>
     <div class="this_finisher_hidden_details">
         <input type="hidden" class="finisher_id" name="finishers[<?php echo $i;?>][finisher_id]" value="<?php echo $finisher_id;?>">
-        <input type="hidden" class="finisher_address" name="finishers[<?php echo $i;?>][finisher_address]">
-        <input type="hidden" class="finisher_address_2" name="finishers[<?php echo $i;?>][finisher_address2]">
-        <input type="hidden" class="finisher_suburb" name="finishers[<?php echo $i;?>][finisher_suburb]">
-        <input type="hidden" class="finisher_state" name="finishers[<?php echo $i;?>][finisher_state]">
-        <input type="hidden" class="finisher_postcode" name="finishers[<?php echo $i;?>][finisher_postcode]">
-        <input type="hidden" class="finisher_country" name="finishers[<?php echo $i;?>][finisher_country]">
+        <input type="hidden" class="finisher_address" name="finishers[<?php echo $i;?>][finisher_address]" value="<?php echo $address;?>">
+        <input type="hidden" class="finisher_address_2" name="finishers[<?php echo $i;?>][finisher_address2]" value="<?php echo $address_2;?>">
+        <input type="hidden" class="finisher_suburb" name="finishers[<?php echo $i;?>][finisher_suburb]" value="<?php echo $suburb;?>">
+        <input type="hidden" class="finisher_state" name="finishers[<?php echo $i;?>][finisher_state]" value="<?php echo $state;?>">
+        <input type="hidden" class="finisher_postcode" name="finishers[<?php echo $i;?>][finisher_postcode]" value="<?php echo $postcode;?>">
+        <input type="hidden" class="finisher_country" name="finishers[<?php echo $i;?>][finisher_country]" value="<?php echo $country;?>">
     </div>
 </div>
