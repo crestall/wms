@@ -18,6 +18,9 @@
                                 $('div#finishers_holder').append(d.html);
                                 actions.common.removeFinisher();
                                 actions.common.finisherAutocomplete();
+                                $([document.documentElement, document.body]).animate({
+                                    scrollTop: $("#finisher_"+finisher_count).offset().top
+                                }, 2000);
                             });
                         });
                     },
@@ -719,7 +722,7 @@
                         actions.common.doDates();
                         actions.common.autoComplete();
                         actions.common.addFinisher();
-                        actions.common.customerAutoComplete(); 
+                        actions.common.customerAutoComplete();
                         jobDeliveryDestinations.updateEvents();
                         actions.common.finisherExpectedDeliveryDates();
                         $('button#job_details_update_submitter').click(function(e){
