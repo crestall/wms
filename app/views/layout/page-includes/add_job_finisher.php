@@ -2,7 +2,7 @@
 $i = (isset($i))? $i : 0;
 $this_finisher = $i + 1;
 $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-$tfa = (isset($finisher_array))? $finisher_array : array(
+$tfa = (isset($tfa))? $tfa : array(
     'name'  => ''
 );
 
