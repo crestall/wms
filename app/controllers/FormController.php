@@ -974,7 +974,23 @@ class FormController extends Controller {
             }
             else
             {
-                echo "Will update JOB: $id to<pre>",print_r($finishers),"</pre>";die();
+                //echo "Will update JOB: $id to<pre>",print_r($finishers),"</pre>";die();
+                if($this->productionjob-> removeFinishersFromJob($id))
+                {
+                    foreach($finishers as $finisher)
+                    {
+                        $this->productionjob->addFinisherToJob($id, array(
+                            'ed_date_value'     => $finisher['ed_date_vale'],
+                            'contact_id'        => $finisher['contact_id'],
+                            'purchase_order'    => $finisher['purchase_order'],
+                            'finisher_id'       => $finisher['id']
+                        ));
+                    }
+                }
+                else
+                {
+                    die('database error');
+                }
                 Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job's Finisher Details Have Been Updated</h3><p>The changes should be showing below</p>");
             }
         }
