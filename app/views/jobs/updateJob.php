@@ -301,8 +301,8 @@ $f = 0;
                             foreach($finisher_array as $tfa)
                             {
                                 include(Config::get('VIEWS_PATH')."layout/page-includes/add_job_finisher.php");
+                                ++$i;
                             }
-                            ++$i;
                         endwhile;?>
                     </div>
                     <div class="card-footer text-right">
