@@ -332,6 +332,10 @@ $f = 0;
                             <div class='errorbox'><?php echo Session::getAndDestroy('jobdeliverydetailserrorfeedback');?></div>
                         <?php endif; ?>
                         <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                <input class="custom-control-input send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
+                                <label class="custom-control-label col-md-4" for="held_in_store">Hold Job In Store</label>
+                            </div>
                             <div id="delivery_address_holder">
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
