@@ -296,14 +296,16 @@ $f = 0;
                         <div class="col">
                             <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add A Finisher</a></h4>
                         </div>
-                        <?php $i = 0;
-                        while($i < $finisher_count):
-                            foreach($finisher_array as $tfa)
-                            {
-                                include(Config::get('VIEWS_PATH')."layout/page-includes/add_job_finisher.php");
-                                ++$i;
-                            }
-                        endwhile;?>
+                        <div id="finishers_holder">
+                            <?php $i = 0;
+                            while($i < $finisher_count):
+                                foreach($finisher_array as $tfa)
+                                {
+                                    include(Config::get('VIEWS_PATH')."layout/page-includes/add_job_finisher.php");
+                                    ++$i;
+                                }
+                            endwhile;?>
+                        </div>
                     </div>
                     <div class="card-footer text-right">
                         <button id="finisher_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
