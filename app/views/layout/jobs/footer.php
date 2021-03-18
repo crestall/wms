@@ -719,6 +719,7 @@
                         actions.common.doDates();
                         actions.common.autoComplete();
                         actions.common.addFinisher();
+                        actions.common.customerAutoComplete(); 
                         jobDeliveryDestinations.updateEvents();
                         actions.common.finisherExpectedDeliveryDates();
                         $('button#job_details_update_submitter').click(function(e){
