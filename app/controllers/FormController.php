@@ -965,52 +965,7 @@ class FormController extends Controller {
         }
         else
         {
-            $finisher_data = array();
-            if($this->dataSubbed($finisher_name))
-            {
-                $finisher_data = array(
-                    'name'  => $finisher_name
-                );
-                if($this->dataSubbed($finisher_phone)) $finisher_data['phone'] = $finisher_phone;
-                if($this->dataSubbed($finisher_contact)) $finisher_data['contact'] = $finisher_contact;
-                if($this->dataSubbed($finisher_email)) $finisher_data['email'] = $finisher_email;
-                if($this->dataSubbed($finisher_address)) $finisher_data['address'] = $finisher_address;
-                if($this->dataSubbed($finisher_address2)) $finisher_data['address2'] = $finisher_address2;
-                if($this->dataSubbed($finisher_suburb)) $finisher_data['suburb'] = $finisher_suburb;
-                if($this->dataSubbed($finisher_state)) $finisher_data['state'] = $finisher_state;
-                if($this->dataSubbed($finisher_postcode)) $finisher_data['postcode'] = $finisher_postcode;
-                if($this->dataSubbed($finisher_country)) $finisher_data['country'] = $finisher_country;
-                //Need to add the finisher?
-                if($finisher_id == 0)
-                {
-                    $finisher_id = $this->productionfinisher->addfinisher($finisher_data);
-                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                else
-                {
-                    $finisher_data['finisher_id'] = $finisher_id;
-                    $finisher_data['active'] = 1;
-                    $this->productionfinisher->editfinisher($finisher_data);
-                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                $this->productionjob->updateJobfinisherId($job_id, $finisher_id, $fn);
-                if($this->dataSubbed($finisher_po))
-                {
-                    $this->productionjob->updateJobFinisherPo($job_id, $finisher_po, $fn);
-                }
-                else
-                {
-                    $this->productionjob->removeFinisherPo($job_id, $fn);
-                }
-                $this->productionjob->updateExpectedDeliveryDate($job_id, $date_ed_value, $fn);
-                Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
-            }
-            else
-            {
-                $this->productionjob->removeFinisher($job_id, $fn);
-                $this->productionjob->updateExpectedDeliveryDate($job_id, 0, $fn);
-                Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher Has Been Removed From This Job</h3>");
-            }
+
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#finisherdetails");
     }
