@@ -980,7 +980,7 @@ class FormController extends Controller {
                     foreach($finishers as $finisher)
                     {
                         $this->productionjob->addFinisherToJob($id, array(
-                            'ed_date_value'     => $finisher['ed_date_vale'],
+                            'ed_date_value'     => $finisher['ed_date_value'],
                             'contact_id'        => $finisher['contact_id'],
                             'purchase_order'    => $finisher['purchase_order'],
                             'finisher_id'       => $finisher['id']
