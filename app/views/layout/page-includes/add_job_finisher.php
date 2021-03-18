@@ -10,13 +10,15 @@ if(isset($tfa))
 else
 {
     $tfa = array(
-        'name'  => ''
+        'name'              => '',
+        'purchase_order'    => ''
     );
     $tfd = "none";
     $finisher_id = 0;
 }
 
 $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::value('finishers['.$i.'][name]');
+$po = empty(Form::value('finishers['.$i.'][purchase_order]'))?  $tfa['purchase_order'] : Form::value('finishers['.$i.'][purchase_order]');
 ?>
 <div id="finisher_<?php echo $i;?>" class="p-3 mid-grey mb-3 afinisher">
     <div class="form-group row">
@@ -60,7 +62,7 @@ $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::val
         <div class="form-group row">
             <label class="col-md-4">Purchase Order Number</label>
             <div class="col-md-8">
-                <input type="text" class="form-control finisher_po" name="finishers[<?php echo $i;?>][purchase_order]">
+                <input type="text" class="form-control finisher_po" name="finishers[<?php echo $i;?>][purchase_order]" value="<?php echo $po;?>">
             </div>
         </div>
         <div class="row form-group">
