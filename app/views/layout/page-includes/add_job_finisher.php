@@ -2,9 +2,17 @@
 $i = (isset($i))? $i : 0;
 $this_finisher = $i + 1;
 $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-$tfa = (isset($tfa))? $tfa : array(
-    'name'  => ''
-);
+if(isset($tfa))
+{
+    $tfd = "block";
+}
+else
+{
+    $tfa = array(
+        'name'  => ''
+    );
+    $tfd = "none";
+}
 
 $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::value('finishers['.$i.'][name]');
 ?>
@@ -35,7 +43,7 @@ $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::val
             </div>
         <?php endif;?>
     </div>
-    <div class="this_finisher_details" style="display:none;">
+    <div class="this_finisher_details" style="display:<?php echo $tfd;?>;">
         <div class="form-group row custom-control custom-checkbox custom-control-right">
             <input class="custom-control-input send_to_address send_to_finisher" data-finisher="<?php echo $i;?>" type="checkbox" id="send_to_finisher_<?php echo $i;?>" name="send_to_finisher_<?php echo $i;?>" />
             <label class="custom-control-label col-md-6 send_to_finisher" for="send_to_finisher_<?php echo $i;?>">Send Job To This Finisher</label>
