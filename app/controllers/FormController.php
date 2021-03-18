@@ -972,7 +972,7 @@ class FormController extends Controller {
             }
             else
             {
-                echo "Will update to<pre>",print_r($finishers),"</pre>";
+                echo "Will update JOB: $id to<pre>",print_r($finishers),"</pre>";
             }
             die();
             Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
