@@ -927,7 +927,7 @@ class FormController extends Controller {
 
     public function procJobfinisherUpdate()
     {
-        echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -945,8 +945,8 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
-        $date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
+        //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        //$date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
         if(isset($finishers))
         {
             foreach($finishers as $ind => $finisher)
