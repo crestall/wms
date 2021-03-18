@@ -251,6 +251,13 @@ class Productionjob extends Model{
         ));
     }
 
+    public function removeFinishersFromJob($job_id)
+    {
+        $db = Database::openConnection();
+        $db->deleteQuery($this->finishers_table, $job_id, 'job_id');
+        return true;
+    }
+
     public function updateJobDetails($data)
     {
         //echo "<pre>",print_r($data),"</pre>"; die();
