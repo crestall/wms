@@ -467,6 +467,7 @@ class Productionjob extends Model{
                 pcc.name AS contact_name, pcc.email AS contact_email, pcc.phone AS contact_phone, pcc.role AS contact_role,
                 sr.id as salesrep_id, sr.name AS salesrep_name,
                 GROUP_CONCAT(
+                    IFNULL(pf.id,''),',',
                     IFNULL(pf.name,''),',',
                     IFNULL(pf.email,''),',',
                     IFNULL(pf.phone,''),',',
