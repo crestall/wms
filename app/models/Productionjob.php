@@ -484,6 +484,7 @@ class Productionjob extends Model{
                     IFNULL(pf.state,''),',',
                     IFNULL(pf.postcode,''),',',
                     IFNULL(pf.country,''),',',
+                    IFNULL(pfc.id,''),',',
                     IFNULL(pfc.name,''),',',
                     IFNULL(pfc.email,''),',',
                     IFNULL(pfc.phone,''),',',

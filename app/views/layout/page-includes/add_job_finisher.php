@@ -18,6 +18,7 @@ else
         'suburb'            => '',
         'state'             => '',
         'postcode'          => '',
+        'contact_id'        => 0,
         'country'           => 'AU'
     );
     $tfd = "none";
@@ -33,6 +34,7 @@ $suburb = empty(Form::value('finishers['.$i.'][suburb]'))?  $tfa['suburb'] : For
 $state = empty(Form::value('finishers['.$i.'][state]'))?  $tfa['state'] : Form::value('finishers['.$i.'][state]');
 $postcode = empty(Form::value('finishers['.$i.'][postcode]'))?  $tfa['postcode'] : Form::value('finishers['.$i.'][postcode]');
 $country = empty(Form::value('finishers['.$i.'][country]'))?  $tfa['country'] : Form::value('finishers['.$i.'][country]');
+$contact_id = empty(Form::value('finishers['.$i.'][contact_id]'))?  $tfa['contact_id'] : Form::value('finishers['.$i.'][contact_id]');
 ?>
 <div id="finisher_<?php echo $i;?>" class="p-3 mid-grey mb-3 afinisher">
     <div class="form-group row">
