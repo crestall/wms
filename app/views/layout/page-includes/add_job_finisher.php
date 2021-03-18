@@ -95,7 +95,7 @@ $contact_id = empty(Form::value('finishers['.$i.'][contact_id]'))?  $tfa['contac
         </div>
     </div>
     <div class="this_finisher_hidden_details">
-        <input type="hidden" class="finisher_id" name="finishers[<?php echo $i;?>][id]" value="<?php echo $finisher_id;?>">
+        <input type="hidden" class="finisher_id" name="finishers[<?php echo $i;?>][finisher_id]" value="<?php echo $finisher_id;?>">
         <input type="hidden" class="finisher_address" name="finishers[<?php echo $i;?>][address]" value="<?php echo $address;?>">
         <input type="hidden" class="finisher_address_2" name="finishers[<?php echo $i;?>][address_2]" value="<?php echo $address_2;?>">
         <input type="hidden" class="finisher_suburb" name="finishers[<?php echo $i;?>][suburb]" value="<?php echo $suburb;?>">
