@@ -48,7 +48,7 @@ $name = empty(Form::value('finishers['.$i.'][name]'))?  $tfa['name'] : Form::val
     <div class="this_finisher_details" style="display:<?php echo $tfd;?>;">
         <div class="form-group row custom-control custom-checkbox custom-control-right">
             <input class="custom-control-input send_to_address send_to_finisher" data-finisher="<?php echo $i;?>" type="checkbox" id="send_to_finisher_<?php echo $i;?>" name="send_to_finisher_<?php echo $i;?>" />
-            <label class="custom-control-label col-md-6 send_to_finisher" for="send_to_finisher_<?php echo $i;?>">Send Job To This Finisher</label>
+            <label class="custom-control-label col-md-7 send_to_finisher" for="send_to_finisher_<?php echo $i;?>">Send Job To This Finisher</label>
         </div>
         <div id="contact_selector_<?php echo $i;?>" class="form-group row contact_selector">
             <?php if($finisher_id > 0)
