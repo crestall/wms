@@ -229,6 +229,7 @@
                                         $(this).find("input.finisher_name").data("finisher", i);
                                         $(this).find("input.finisher_name").attr("name", "finishers["+i+"][name]");
                                         $(this).find("input.finisher_po").attr("name", "finishers["+i+"][purchase_order]");
+                                        $(this).find("input.finisher_id").attr("name", "finishers["+i+"][finisher_id]");
                                         $(this).find("select.finisher_contact_id").attr("name", "finishers["+i+"][contact_id]");
                                         $(this).find("input.finisher_ed_date").attr("name", "finishers["+i+"][ed_date]");
                                         $(this).find("input.finisher_ed_date_value").attr("name", "finishers["+i+"][ed_date_value]");
