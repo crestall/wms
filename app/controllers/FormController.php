@@ -945,7 +945,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
         //$date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
         if(isset($finishers))
         {
