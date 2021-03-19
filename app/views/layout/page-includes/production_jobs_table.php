@@ -120,7 +120,7 @@
                                     <?php echo ucwords($fin['name']);?>
                                 <?php endif;?>
                             </p>
-                        <?php end foreach;
+                        <?php endforeach;
                     endif;?>
                 </td>
                 <?php if($can_do_runsheets):?>
