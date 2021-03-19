@@ -2,7 +2,7 @@
 $i = (isset($i))? $i : 0;
 $this_finisher = $i + 1;
 $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-if(isset($tfa))
+if( !empty($tfa['name']) )
 {
     $tfd = "block";
     $finisher_id = $tfa['id'];
@@ -48,17 +48,6 @@ $contact_id = empty(Form::value('finishers['.$i.'][contact_id]'))?  $tfa['contac
             <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Finisher Name</label>
             <div class="col-md-8">
                 <input type="text" class="form-control finisher_name no-autocomplete" data-finisher="<?php echo $i;?>" name="finishers[<?php echo $i;?>][name]" value="<?php echo $name;?>">
-                <?php echo Form::displayError('finishername_'.$i);?>
-            </div>
-        <?php else:?>
-            <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Finisher Name</label>
-            <div class="col-md-8">
-                <input type="text" class="form-control finisher_name" data-finisher="<?php echo $i;?>" name="finishers[<?php echo $i;?>][name]" value="<?php echo $name;?>">
-                <span class="inst">
-                    Start typing a name and choose a finisher from the list<br>
-                    Only finishers already in the system can be chosen here<br>
-                    <a href="/finishers/add-finisher" target="_blank" title="opens in new window">Click here to add a new finisher <i class="fal fa-external-link"></i></a>
-                </span>
                 <?php echo Form::displayError('finishername_'.$i);?>
             </div>
         <?php endif;?>
