@@ -23,6 +23,7 @@ class Productionjob extends Model{
 
     public function updateJobAddress($data)
     {
+        echo "<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'delivery_instructions' => NULL,
