@@ -1,5 +1,5 @@
 <?php
-
+$contact_id = (isset($contact_id))? $contact_id : 0;
 ?>
 <label class="col-md-4">Finisher Contact</label>
 <div class="col-md-8">
