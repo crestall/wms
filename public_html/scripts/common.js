@@ -261,11 +261,11 @@ var barcodeScanner = {
 var jobDeliveryDestinations = {
     updateEvents: function(){
         var $checkboxes = $("input.send_to_address");
-        $checkboxes.click(function(){
+        $checkboxes.off('click').click(function(){
             //console.log('click');
             $checkboxes.not(this).prop('checked', false).change();
         });
-        $('input#held_in_store').change(function(e){
+        $('input#held_in_store').off('change').change(function(e){
             if($('input#held_in_store').prop('checked'))
             {
                 //console.log('will disable everything');
@@ -286,57 +286,36 @@ var jobDeliveryDestinations = {
                 });
             }
         });
-        $('input#send_to_customer').change(function(e){
+        $('input#send_to_customer').off('change').change(function(e){
             if($('input#send_to_customer').prop('checked'))
             {
-                $('#ship_to').val($('#customer_name').val());
-                $('#address').val($('#customer_address').val());
+                $('#ship_to').val($('#customer_name').val()).valid();
+                $('#attention').val($('#customer_contact_name').val()).valid();
+                $('#address').val($('#customer_address').val()).valid();
                 $('#address2').val($('#customer_address2').val());
-                $('#suburb').val($('#customer_suburb').val());
-                $('#state').val($('#customer_state').val());
-                $('#postcode').val($('#customer_postcode').val());
-                $('#country').val($('#customer_country').val());
+                $('#suburb').val($('#customer_suburb').val()).valid();
+                $('#state').val($('#customer_state').val()).valid();
+                $('#postcode').val($('#customer_postcode').val()).valid();
+                $('#country').val($('#customer_country').val()).valid();
                 $('#ignore_address_error').prop('checked', $('#ignore_customer_address_error').prop('checked' )).change();
             }
         });
-        $('input#send_to_finisher').change(function(e){
-            if($('input#send_to_finisher').prop('checked'))
-            {
-                $('#ship_to').val($('#finisher_name').val());
-                $('#address').val($('#finisher_address').val());
-                $('#address2').val($('#finisher_address2').val());
-                $('#suburb').val($('#finisher_suburb').val());
-                $('#state').val($('#finisher_state').val());
-                $('#postcode').val($('#finisher_postcode').val());
-                $('#country').val($('#finisher_country').val());
-                $('#ignore_address_error').prop('checked', $('#ignore_finisher_address_error').prop('checked' )).change();
-            }
-        });
-        $('input#send_to_finisher2').change(function(e){
-            if($('input#send_to_finisher2').prop('checked'))
-            {
-                $('#ship_to').val($('#finisher2_name').val());
-                $('#address').val($('#finisher2_address').val());
-                $('#address2').val($('#finisher2_address2').val());
-                $('#suburb').val($('#finisher2_suburb').val());
-                $('#state').val($('#finisher2_state').val());
-                $('#postcode').val($('#finisher2_postcode').val());
-                $('#country').val($('#finisher2_country').val());
-                $('#ignore_address_error').prop('checked', $('#ignore_finisher2_address_error').prop('checked' )).change();
-            }
-        });
-        $('input#send_to_finisher3').change(function(e){
-            if($('input#send_to_finisher3').prop('checked'))
-            {
-                $('#ship_to').val($('#finisher3_name').val());
-                $('#address').val($('#finisher3_address').val());
-                $('#address2').val($('#finisher3_address2').val());
-                $('#suburb').val($('#finisher3_suburb').val());
-                $('#state').val($('#finisher3_state').val());
-                $('#postcode').val($('#finisher3_postcode').val());
-                $('#country').val($('#finisher3_country').val());
-                $('#ignore_address_error').prop('checked', $('#ignore_finisher3_address_error').prop('checked' )).change();
-            }
+        $('input.send_to_finisher').each(function(i,e){
+            var $this = $(this);
+            $this.off("change").change(function(e){
+                if($this.prop('checked'))
+                {
+                    var this_finisher_ind  = $this.data("finisher");
+                    $('#ship_to').val($('input[name="finishers['+this_finisher_ind+'][name]"]').val()).valid();
+                    $('#attention').val($('select[name="finishers['+this_finisher_ind+'][contact_id]"]').find('option:selected[value!=0]').text());
+                    $('#address').val($('input[name="finishers['+this_finisher_ind+'][address]"]').val()).valid();
+                    $('#address2').val($('input[name="finishers['+this_finisher_ind+'][address2]"]').val());
+                    $('#suburb').val($('input[name="finishers['+this_finisher_ind+'][suburb]"]').val()).valid();
+                    $('#state').val($('input[name="finishers['+this_finisher_ind+'][state]"]').val()).valid();
+                    $('#postcode').val($('input[name="finishers['+this_finisher_ind+'][postcode]"]').val()).valid();
+                    $('#country').val($('input[name="finishers['+this_finisher_ind+'][country]"]').val()).valid();
+                }
+            });
         });
     }
 }
@@ -1108,3 +1087,16 @@ var helpers = {
     }
 
 };
+
+// Convert numbers to words
+// copyright 25th July 2006, by Stephen Chapman http://javascript.about.com
+// permission to use this Javascript on your web page is granted
+// provided that all of the code (including this copyright notice) is
+// used exactly as shown (you can change the numbering system if you wish)
+
+// American Numbering System
+//var th = ['','thousand','million', 'billion','trillion'];
+// uncomment this line for English Number System
+var th = ['','thousand','million', 'milliard','billion'];
+
+var dg = ['zero','one','two','three','four', 'five','six','seven','eight','nine']; var tn = ['ten','eleven','twelve','thirteen', 'fourteen','fifteen','sixteen', 'seventeen','eighteen','nineteen']; var tw = ['twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety']; function toWords(s){s = s.toString(); s = s.replace(/[\, ]/g,''); if (s != parseFloat(s)) return 'not a number'; var x = s.indexOf('.'); if (x == -1) x = s.length; if (x > 15) return 'too big'; var n = s.split(''); var str = ''; var sk = 0; for (var i=0; i < x; i++) {if ((x-i)%3==2) {if (n[i] == '1') {str += tn[Number(n[i+1])] + ' '; i++; sk=1;} else if (n[i]!=0) {str += tw[n[i]-2] + ' ';sk=1;}} else if (n[i]!=0) {str += dg[n[i]] +' '; if ((x-i)%3==0) str += 'hundred ';sk=1;} if ((x-i)%3==1) {if (sk) str += th[(x-i-1)/3] + ' ';sk=0;}} if (x != s.length) {var y = s.length; str += 'point '; for (var i=x+1; i<y; i++) str += dg[n[i]] +' ';} return str.replace(/\s+/g,' ');}

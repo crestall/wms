@@ -34,6 +34,27 @@ class Productionfinisher extends Model{
         return true;
     }
 
+    public function getSelectFinisherContacts($finisher_id = 0, $selected = false)
+    {
+        $db = Database::openConnection();
+
+        $check = "";
+        $ret_string = "";
+        $q = "SELECT id, name FROM {$this->contacts_table} WHERE finisher_id = $finisher_id ORDER BY name";
+        $reps = $db->queryData($q);
+        foreach($reps as $r)
+        {
+            $label = ucwords($r['name']);
+            $value = $r['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function getSelectFinishers($selected = false)
     {
         $db = Database::openConnection();
@@ -110,13 +131,15 @@ class Productionfinisher extends Model{
         $vals = array(
             'name'          =>  $data['name']
         );
+        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
+        if(!empty($data['website'])) $vals['website'] = $data['website'];
+        if(!empty($data['email'])) $vals['email'] = $data['email'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
         if(!empty($data['state'])) $vals['state'] = $data['state'];
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
-        if(!empty($data['website'])) $vals['website'] = $data['website'];
         $id = $db->insertQuery($this->table, $vals);
         if(isset($data['categories']) && is_array($data['categories']))
         {
@@ -147,16 +170,20 @@ class Productionfinisher extends Model{
             'state'         =>  null,
             'postcode'      =>  null,
             'country'       =>  null,
-            'website'       =>  null
+            'website'       =>  null,
+            'phone'         => null,
+            'email'         => null
         );
         $vals['active'] = isset($data['active'])? 1 : 0;
+        if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
+        if(!empty($data['website'])) $vals['website'] = $data['website'];
+        if(!empty($data['email'])) $vals['email'] = $data['email'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
         if(!empty($data['state'])) $vals['state'] = $data['state'];
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
-        if(!empty($data['website'])) $vals['website'] = $data['website'];
         $db->updateDatabaseFields($this->table, $vals, $data['finisher_id']);
         if(isset($data['categories']) && is_array($data['categories']))
         {
@@ -202,19 +229,19 @@ class Productionfinisher extends Model{
         $rows = $db->queryData($query, $array);
         foreach($rows as $row)
         {
-            $row_array                  = array();
-            $row_array['value']         = ucwords($row['name']);
-            $row_array['contact']       = $row['contact'];
-            $row_array['email']         = $row['email'];
-            $row_array['website']       = $row['website'];
-            $row_array['phone']         = $row['phone'];
-            $row_array['address']       = $row['address'];
-            $row_array['address_2']     = $row['address_2'];
-            $row_array['suburb']        = $row['suburb'];
-            $row_array['state']         = $row['state'];
-            $row_array['postcode']      = $row['postcode'];
-            $row_array['country']       = $row['country'];
-            $row_array['finisher_id']   = $row['id'];
+            $row_array                          = array();
+            $row_array['value']                 = ucwords($row['name']);
+            $row_array['finisher_contact']      = $row['contact'];
+            $row_array['finisher_email']        = $row['email'];
+            $row_array['finisher_website']      = $row['website'];
+            $row_array['finisher_phone']        = $row['phone'];
+            $row_array['finisher_address']      = $row['address'];
+            $row_array['finisher_address_2']    = $row['address_2'];
+            $row_array['finisher_suburb']       = $row['suburb'];
+            $row_array['finisher_state']        = $row['state'];
+            $row_array['finisher_postcode']     = $row['postcode'];
+            $row_array['finisher_country']      = $row['country'];
+            $row_array['finisher_id']           = $row['id'];
 
             array_push($return_array,$row_array);
         }
@@ -226,7 +253,7 @@ class Productionfinisher extends Model{
         return "
             SELECT
                 pf.*,
-                GROUP_CONCAT(pc.id,',',pc.name,',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
+                GROUP_CONCAT(pc.id,',',IFNULL(pc.name,''),',',IFNULL(pc.email,''),',',IFNULL(pc.phone,''),',',IFNULL(pc.role,'') SEPARATOR '|') AS contacts
             FROM
                 {$this->table} pf LEFT JOIN
                 {$this->contacts_table} pc ON pf.id = pc.finisher_id

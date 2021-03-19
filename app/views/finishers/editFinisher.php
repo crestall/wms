@@ -1,6 +1,8 @@
 <?php
 $name       = empty(Form::value('name'))?       $finisher['name']         : Form::value('name');
 
+$email      = empty(Form::value('email'))?      $finisher['email']        : Form::value('email');
+$phone      = empty(Form::value('phone'))?      $finisher['phone']        : Form::value('phone');
 $address    = empty(Form::value('address'))?    $finisher['address']      : Form::value('address');
 $address2   = empty(Form::value('address2'))?   $finisher['address_2']    : Form::value('address2');
 $suburb     = empty(Form::value('suburb'))?     $finisher['suburb']       : Form::value('suburb');
@@ -53,6 +55,19 @@ else
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-md-3">Phone</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="phone" id="phone" value="<?php echo $phone;?>" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Email</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control email" name="email" id="email" value="<?php echo $email;?>" />
+                    <?php echo Form::displayError('email');?>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-3">Website</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="website" id="website" value="<?php echo $website;?>" />
@@ -81,10 +96,10 @@ else
                     if(!empty($contact_array)):
                         foreach($contact_array as $i => $d)
                         {
-                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
+                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_production_contact.php");
                         }
                     else:
-                        include(Config::get('VIEWS_PATH')."layout/page-includes/add_finisher_contact.php");
+                        include(Config::get('VIEWS_PATH')."layout/page-includes/add_production_contact.php");
                     endif;?>
                 </div>
             </div>

@@ -180,6 +180,10 @@ $prod = array(
         'view-customers'    => array(
             'display'   => true,
             'icon'      => $fontastic_icons['customers']['view-customers']
+        ),
+        'view-customer'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'finishers' => array(
@@ -191,6 +195,10 @@ $prod = array(
         'view-finishers'    => array(
             'display'   => true,
             'icon'      => $fontastic_icons['finishers']['view-finishers']
+        ),
+        'view-finisher'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'fsg-contacts'    => array(
@@ -721,6 +729,10 @@ $admin = array(
         'data-tables-testing'   => array(
             'display'   => true,
             'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
+        ),
+        'update-production-database-tables'   => array(
+            'display'   => true,
+            'icon'      => "<i class='fas fa-database fa-3x'></i>"
         )
     )
 );
@@ -904,6 +916,7 @@ $client = array(
 //merge and tidy page arrays
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
+$padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
 
 $admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);

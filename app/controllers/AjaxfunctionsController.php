@@ -16,6 +16,7 @@ class ajaxfunctionsController extends Controller
         $actions = [
             'adjustAllocationForm',
             'addJobRunsheets',
+            'addFinisherContact',
             'addQuotePackage',
             'bulkMoveStock',
             'calcOriginPick',
@@ -124,8 +125,40 @@ class ajaxfunctionsController extends Controller
             'feedback'  =>  '',
             'html'      =>  ''
         );
-        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_finisher_contact.php', [
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_production_contact.php', [
             'i'     =>  $i
+        ]);
+        $data['html'] = $html;
+        $this->view->renderJson($data);
+    }
+
+    public function addJobFinisher()
+    {
+        $i = $this->request->data['i'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_job_finisher.php', [
+            'i'     =>  $i
+        ]);
+        $data['html'] = $html;
+        $this->view->renderJson($data);
+    }
+
+    public function makeFinisherContactSelect()
+    {
+        $finisher_id = $this->request->data['finisher_id'];
+        $finisher_index = $this->request->data['finisher_ind'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/finisher_contact_selector.php', [
+            'finisher_id'     =>  $finisher_id,
+            'finisher_index'  =>  $finisher_index
         ]);
         $data['html'] = $html;
         $this->view->renderJson($data);
