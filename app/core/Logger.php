@@ -75,4 +75,14 @@ class Logger{
         $logfile = APP . "logs/".$file;
         file_put_contents($logfile, $content, FILE_APPEND);
     }
+    // testing time between calls
+    public static function logDataTablesCalls($file, $content)
+    {
+        //if(SITE_LIVE)
+            return;
+        $file .= date('Ymd').'.txt';
+        $logfile = APP . "logs/datatables/".$file;
+        $message = $content . PHP_EOL."*********************************************".PHP_EOL;
+        file_put_contents($logfile, $message, FILE_APPEND);
+    }
  }

@@ -6,6 +6,248 @@
             //the actions for each page
             var actions = {
                 common: {
+                    addFinisher: function(){
+                        $("a.add-finisher").click(function(e){
+                            e.preventDefault();
+                            var finisher_count = $("div#finishers_holder div.afinisher").length;
+                            //console.log('packages: '+contact_count);
+                            var data = {
+                                i: finisher_count
+                            }
+                            $.post('/ajaxfunctions/addJobFinisher', data, function(d){
+                                $('div#finishers_holder').append(d.html);
+                                actions.common.removeFinisher();
+                                actions.common.finisherAutocomplete();
+                                $([document.documentElement, document.body]).animate({
+                                    scrollTop: $("#finisher_"+finisher_count).offset().top
+                                }, 1000);
+                            });
+                        });
+                    },
+                    customerAutoComplete: function(){
+                        autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
+                        autoCompleter.suburbAutoComplete($('#customer_suburb'), 'customer_');
+                        autoCompleter.productionJobCustomerAutoComplete($('input#customer_name'), selectCustomerCallback, changeCustomerCallback);
+                        function selectCustomerCallback(event, ui)
+                        {
+                            $('input#customer_email').val(ui.item.email);
+                            $('input#customer_phone').val(ui.item.phone);
+                            $('input#customer_id').val(ui.item.customer_id);
+                            $('input#customer_address').val(ui.item.address);
+                            $('input#customer_address2').val(ui.item.address_2);
+                            $('input#customer_suburb').val(ui.item.suburb);
+                            $('input#customer_state').val(ui.item.state);
+                            $('input#customer_country').val(ui.item.country);
+                            $('input#customer_postcode').val(ui.item.postcode);
+                            $('input#customer_website').val(ui.item.website);
+                            if($('#send_to_customer').prop('checked'))
+                            {
+                                $('input#ship_to').val(ui.item.value).valid();
+                                $('input#address').val(ui.item.address).valid();
+                                $('input#address2').val(ui.item.address_2);
+                                $('input#suburb').val(ui.item.suburb).valid();
+                                $('input#state').val(ui.item.state).valid();
+                                $('input#country').val(ui.item.country).valid();
+                                $('input#postcode').val(ui.item.postcode).valid();
+                            }
+                            //contacts
+                            if(ui.item.contacts)
+                            {
+                                var contacts =  (ui.item.contacts).split('|');
+                                if(contacts.length > 1)
+                                {
+                                    $('input.customer_contact').each(function(i,e){
+                                        $(this).val('');
+                                    });
+                                    var html = "<label class='col-md-3 col-form-label'>Job Contact</label>";
+                                    html += "<div class='col-md-4'>";
+                                    html += "<select id='customer_contact_id' class='form-control selectpicker' name='customer_contact_id' data-style='btn-outline-secondary'>";
+                                    html += "<option value='0'>Choose a Contact</option>";
+                                    $.each(contacts, function(i,v){
+                                        var contact = contacts[i].split(',');
+                                        html += "<option value='"+contact[0]+"' data-contactemail='"+contact[2]+"' data-contactphone='"+contact[3]+"' data-contactrole='"+contact[4]+"'>"+contact[1]+"</option>";
+                                    });
+                                    html += "</select></div>";
+                                    $('div#contact_chooser').html(html);
+                                    $('.selectpicker').selectpicker();
+                                    $('select#customer_contact_id').change(function(e){
+                                        if($(this).val() != 0)
+                                        {
+                                            $('input#customer_contact_name').val($(this).find(":selected").text()).valid();
+                                            $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
+                                            $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
+                                            $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
+                                        }
+                                        else
+                                        {
+                                            $('input#customer_contact_name').val('').valid();
+                                            $('input#customer_contact_email').val('');
+                                            $('input#customer_contact_role').val('');
+                                            $('input#customer_contact_phone').val('');
+                                        }
+                                        if($('#send_to_customer').prop('checked'))
+                                        {
+                                            $('input#attention').val($('input#customer_contact_name').val());
+                                        }
+                                    });
+                                }
+                                else
+                                {
+                                    $('select#customer_contact_id').off('change');
+                                    var contact = contacts[0].split(',');
+                                    $('div#contact_chooser').html('<input type="hidden" id="customer_contact_id" name="customer_contact_id" value="'+contact[0]+'" > ');
+                                    $('input#customer_contact_name').val(contact[1]).valid();
+                                    $('input#customer_contact_email').val(contact[2]);
+                                    $('input#customer_contact_role').val(contact[4]);
+                                    $('input#customer_contact_phone').val(contact[3]);
+                                    if($('#send_to_customer').prop('checked'))
+                                    {
+                                        $('input#attention').val(contact[1]);
+                                    }
+                                }
+                            }
+                            return false;
+                        }
+                        function changeCustomerCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                $('input#customer_id').val(0);
+                                $('input.customer').each(function(element, index){
+                                    $(this).val("");
+                                })
+                                return false;
+                            }
+                        }
+                    },
+                    finisherAutocomplete: function(){
+                        $("div#finishers_holder div.afinisher").each(function(i,e){
+                            var $this_input = $(this).find("input.finisher_name:not(.no-autocomplete)");
+                            var $this_finisher_details = $(this).find("div.this_finisher_details");
+                            if($this_input.data('ui-autocomplete') != undefined)
+                            {
+                                $this_input.autocomplete("destroy" );
+                            }
+                            autoCompleter.productionJobFinisherAutoComplete($this_input, selectFinisherCallback, changeFinisherCallback);
+                        });
+                        function selectFinisherCallback(event, ui)
+                        {
+                            var $target = $(event.target)
+                            var $this_finisher = $target.closest("div.afinisher");
+                            var this_finisher_ind  = $target.data("finisher");
+                            $this_finisher.find("div.this_finisher_details").show();
+                            var $this_finisher_details = $this_finisher.find("div.this_finisher_hidden_details");
+                            $this_finisher_details.find("input").each(function(element, index){
+                                var fclass = $(this).attr("class");
+                                $(this).val(ui.item[fclass]);
+                            });
+                            actions.common.finisherExpectedDeliveryDates();
+                            jobDeliveryDestinations.updateEvents();
+                            var data = {
+                                finisher_id : ui.item.finisher_id,
+                                finisher_ind : this_finisher_ind
+                            }
+                            $.post('/ajaxfunctions/makeFinisherContactSelect', data, function(d){
+                                $('div#contact_selector_'+this_finisher_ind).html(d.html);
+                                $('.selectpicker').selectpicker();
+                            });
+                            return false;
+                        }
+                        function changeFinisherCallback(event, ui)
+                        {
+                            if (!ui.item)
+                	        {
+                                var $target = $(event.target)
+                                var $this_finisher = $target.closest("div.afinisher");
+                                $this_finisher.find("div.this_finisher_details").hide();
+                                $target.val("");
+                                var $this_finisher_details = $this_finisher.find("div.this_finisher_hidden_details");
+                                $this_finisher_details.find("input").each(function(element, index){
+                                    $(this).val("");
+                                });
+                                return false;
+                            }
+                        }
+                    },
+                    finisherExpectedDeliveryDates: function(){
+                        $("div#finishers_holder div.afinisher").each(function(i,e){
+                            var $this_input = $(this).find("input.finisher_ed_date");
+                            var $this_value_input = $(this).find("input.finisher_ed_date_value");
+                            var $this_calendar_icon = $(this).find("span.calendar_icon");
+                            $this_calendar_icon.css('cursor', 'pointer').click(function(e){
+                                $this_input.focus();
+                                console.log('this input is ' + $this_input);
+                            });
+                            if(!$this_input.hasClass("hasDatepicker"))
+                            {
+                                $this_input.datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: "dd/mm/yy",
+                                    onClose: function(selectedDate){
+                                        //console.log('selecteddate: '+ selectedDate);
+                                        if(selectedDate == "")
+                                        {
+                                            $this_value_input.val('');
+                                            $this_input.val('');
+                                        }
+                                        else
+                                        {
+                                            var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2\/$1\/$3") );
+                                            s = d.valueOf()/1000;
+                                            $this_value_input.val(s);
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    removeFinisher: function(){
+                        $("a.remove-finisher").off('click').click(function(e){
+                            e.preventDefault();
+                            var $this = $(this);
+                            swal({
+                                title: "Really Remove This Finisher?",
+                                text: "Make sure to check the delivery details are not affected by this",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then( function(removeFinisher) {
+                                if(removeFinisher)
+                                {
+                                    var this_finisher = $this.data('finisher');
+                                    $("div#finisher_"+this_finisher).remove();
+                                    //redo indexing of finishers
+                                    $("div#finishers_holder div.afinisher").each(function(i,e){
+                                        $(this).attr("id", "finisher_"+i);
+                                        var plusi = i + 1;
+                                        var new_num = toWords(plusi);
+                                        var uc_new_num = new_num.charAt(0).toUpperCase() + new_num.slice(1)
+                                        $(this).find("h4.finisher_title").text("Finisher "+uc_new_num+"'s Details");
+                                        $(this).find("a.remove-finisher").data("finisher", i);
+                                        $(this).find("input.send_to_finisher").data("finisher", i);
+                                        $(this).find("input.finisher_name").data("finisher", i);
+                                        $(this).find("input.finisher_name").attr("name", "finishers["+i+"][name]");
+                                        $(this).find("input.finisher_po").attr("name", "finishers["+i+"][purchase_order]");
+                                        $(this).find("input.finisher_id").attr("name", "finishers["+i+"][finisher_id]");
+                                        $(this).find("select.finisher_contact_id").attr("name", "finishers["+i+"][contact_id]");
+                                        $(this).find("input.finisher_ed_date").attr("name", "finishers["+i+"][ed_date]");
+                                        $(this).find("input.finisher_ed_date_value").attr("name", "finishers["+i+"][ed_date_value]");
+                                        $(this).find("input.send_to_finisher").attr("name", "send_to_finisher_"+i);
+                                        $(this).find("input.send_to_finisher").attr("id", "send_to_finisher_"+i);
+                                        $(this).find("div.contact_selector").attr("id", "contact_selector_"+i);
+                                        $(this).find("label.send_to_finisher").attr("for", "send_to_finisher_"+i);
+                                        var $this_finisher_details = $(this).find("div.this_finisher_hidden_details");
+                                        //$this_finisher_details.find('input.finisher_id').val(ui.item.finisher_id);
+                                        $this_finisher_details.find("input").each(function(element, index){
+                                            var fclass = $(this).attr("class");
+                                            $(this).attr("name", "finishers["+i+"]["+fclass+"]");
+                                        });
+                                    });
+                                }
+                            });
+                        });
+                    },
                     jobsTable: function(){
                         jQuery.extend( jQuery.fn.dataTableExt.oSort, {
                             "non-empty-string-asc": function (str1, str2) {
@@ -137,254 +379,19 @@
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_due').focus();
                         });
-                        $( "#date_ed" ).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "dd/mm/yy",
-                            onClose: function(selectedDate){
-                                //console.log('selecteddate: '+ selectedDate);
-                                if(selectedDate == "")
-                                {
-                                    $('#date_ed_value').val('');
-                                    $('#date_ded').val('');
-                                }
-                                else
-                                {
-                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                    s = d.valueOf()/1000;
-                                    $('#date_ed_value').val(s);
-                                }
-                            }
-                        });
-                        $('#date_ed_calendar').css('cursor', 'pointer').click(function(e){
-                            $('input#date_ed').focus();
-                        });
-                        $( "#date_ed2" ).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "dd/mm/yy",
-                            onClose: function(selectedDate){
-                                //console.log('selecteddate: '+ selectedDate);
-                                if(selectedDate == "")
-                                {
-                                    $('#date_ed2_value').val('');
-                                    $('#date_ded2').val('');
-                                }
-                                else
-                                {
-                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                    s = d.valueOf()/1000;
-                                    $('#date_ed2_value').val(s);
-                                }
-                            }
-                        });
-                        $('#date_ed3_calendar').css('cursor', 'pointer').click(function(e){
-                            $('input#date_ed3').focus();
-                        });
-                        $( "#date_ed3" ).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "dd/mm/yy",
-                            onClose: function(selectedDate){
-                                //console.log('selecteddate: '+ selectedDate);
-                                if(selectedDate == "")
-                                {
-                                    $('#date_ed3_value').val('');
-                                    $('#date_ded3').val('');
-                                }
-                                else
-                                {
-                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                    s = d.valueOf()/1000;
-                                    $('#date_ed3_value').val(s);
-                                }
-                            }
-                        });
-                        $('#date_ed2_calendar').css('cursor', 'pointer').click(function(e){
-                            $('input#date_ed2').focus();
-                        });
                     },
                     autoComplete: function(){
-                        autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
-                        autoCompleter.suburbAutoComplete($('#customer_suburb'), 'customer_');
-                        $("input#customer_name").each(function(i,e){
-                            if($(this).data('ui-autocomplete') != undefined)
-                            {
-                                $(this).autocomplete( "destroy" );
-                            }
-                            autoCompleter.productionJobCustomerAutoComplete($(this), selectCustomerCallback, changeCustomerCallback);
-                        });
-                        function selectCustomerCallback(event, ui)
-                        {
-                            $('input#customer_contact').val(ui.item.contact);
-                            $('input#customer_email').val(ui.item.email);
-                            $('input#customer_phone').val(ui.item.phone);
-                            $('input#customer_id').val(ui.item.customer_id);
-                            $('input#customer_address').val(ui.item.address);
-                            $('input#customer_address2').val(ui.item.address_2);
-                            $('input#customer_suburb').val(ui.item.suburb);
-                            $('input#customer_state').val(ui.item.state);
-                            $('input#customer_country').val(ui.item.country);
-                            $('input#customer_postcode').val(ui.item.postcode);
-                            if($('#send_to_customer').prop('checked'))
-                            {
-                                $('input#address').val(ui.item.address).valid();
-                                $('input#address2').val(ui.item.address_2);
-                                $('input#suburb').val(ui.item.suburb).valid();
-                                $('input#state').val(ui.item.state).valid();
-                                $('input#country').val(ui.item.country).valid();
-                                $('input#postcode').val(ui.item.postcode).valid();
-                            }
-                            return false;
-                        }
-                        function changeCustomerCallback(event, ui)
-                        {
-                            if (!ui.item)
-                	        {
-                                $('input#customer_id').val(0);
-                                $('input.customer').each(function(element, index){
-                                    $(this).val("");
-                                })
-                                return false;
-                            }
-                        }
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
-                        autoCompleter.addressAutoComplete($('#finisher_address'), 'finisher_');
-                        autoCompleter.suburbAutoComplete($('#finisher_suburb'), 'finisher_');
-                        $("input#finisher_name").each(function(i,e){
-                            if($(this).data('ui-autocomplete') != undefined)
-                            {
-                                $(this).autocomplete( "destroy" );
-                            }
-                            autoCompleter.productionJobFinisherAutoComplete($(this), selectFinisherCallback, changeFinisherCallback);
-                        });
-                        function selectFinisherCallback(event, ui)
-                        {
-                            $('input#finisher_contact').val(ui.item.contact);
-                            $('input#finisher_email').val(ui.item.email);
-                            $('input#finisher_phone').val(ui.item.phone);
-                            $('input#finisher_id').val(ui.item.finisher_id);
-                            $('input#finisher_address').val(ui.item.address);
-                            $('input#finisher_address2').val(ui.item.address_2);
-                            $('input#finisher_suburb').val(ui.item.suburb);
-                            $('input#finisher_state').val(ui.item.state);
-                            $('input#finisher_country').val(ui.item.country);
-                            $('input#finisher_postcode').val(ui.item.postcode);
-                            if($('#send_to_finisher').prop('checked'))
-                            {
-                                $('input#address').val(ui.item.address).valid();
-                                $('input#address2').val(ui.item.address_2);
-                                $('input#suburb').val(ui.item.suburb).valid();
-                                $('input#state').val(ui.item.state).valid();
-                                $('input#country').val(ui.item.country).valid();
-                                $('input#postcode').val(ui.item.postcode).valid();
-                            }
-                            return false;
-                        }
-                        function changeFinisherCallback(event, ui)
-                        {
-                            if (!ui.item)
-                	        {
-                                $('input#finisher_id').val(0);
-                                $('input.finisher').each(function(element, index){
-                                    $(this).val("");
-                                })
-                                return false;
-                            }
-                        }
-                        autoCompleter.addressAutoComplete($('#finisher2_address'), 'finisher2_');
-                        autoCompleter.suburbAutoComplete($('#finisher2_suburb'), 'finisher2_');
-                        $("input#finisher2_name").each(function(i,e){
-                            if($(this).data('ui-autocomplete') != undefined)
-                            {
-                                $(this).autocomplete( "destroy" );
-                            }
-                            autoCompleter.productionJobFinisherAutoComplete($(this), selectFinisher2Callback, changeFinisher2Callback);
-                        });
-                        function selectFinisher2Callback(event, ui)
-                        {
-                            $('input#finisher2_contact').val(ui.item.contact);
-                            $('input#finisher2_email').val(ui.item.email);
-                            $('input#finisher2_phone').val(ui.item.phone);
-                            $('input#finisher2_id').val(ui.item.finisher_id);
-                            $('input#finisher2_address').val(ui.item.address);
-                            $('input#finisher2_address2').val(ui.item.address_2);
-                            $('input#finisher2_suburb').val(ui.item.suburb);
-                            $('input#finisher2_state').val(ui.item.state);
-                            $('input#finisher2_country').val(ui.item.country);
-                            $('input#finisher2_postcode').val(ui.item.postcode);
-                            if($('#send_to_finisher2').prop('checked'))
-                            {
-                                $('input#address').val(ui.item.address).valid();
-                                $('input#address2').val(ui.item.address_2);
-                                $('input#suburb').val(ui.item.suburb).valid();
-                                $('input#state').val(ui.item.state).valid();
-                                $('input#country').val(ui.item.country).valid();
-                                $('input#postcode').val(ui.item.postcode).valid();
-                            }
-                            return false;
-                        }
-                        function changeFinisher2Callback(event, ui)
-                        {
-                            if (!ui.item)
-                	        {
-                                $('input#finisher2_id').val(0);
-                                $('input.finisher2').each(function(element, index){
-                                    $(this).val("");
-                                })
-                                return false;
-                            }
-                        }
-                        autoCompleter.addressAutoComplete($('#finisher3_address'), 'finisher3_');
-                        autoCompleter.suburbAutoComplete($('#finisher3_suburb'), 'finisher3_');
-                        $("input#finisher3_name").each(function(i,e){
-                            if($(this).data('ui-autocomplete') != undefined)
-                            {
-                                $(this).autocomplete( "destroy" );
-                            }
-                            autoCompleter.productionJobFinisherAutoComplete($(this), selectFinisher3Callback, changeFinisher3Callback);
-                        });
-                        function selectFinisher3Callback(event, ui)
-                        {
-                            $('input#finisher3_contact').val(ui.item.contact);
-                            $('input#finisher3_email').val(ui.item.email);
-                            $('input#finisher3_phone').val(ui.item.phone);
-                            $('input#finisher3_id').val(ui.item.finisher_id);
-                            $('input#finisher3_address').val(ui.item.address);
-                            $('input#finisher3_address2').val(ui.item.address_2);
-                            $('input#finisher3_suburb').val(ui.item.suburb);
-                            $('input#finisher3_state').val(ui.item.state);
-                            $('input#finisher3_country').val(ui.item.country);
-                            $('input#finisher3_postcode').val(ui.item.postcode);
-                            if($('#send_to_finisher3').prop('checked'))
-                            {
-                                $('input#address').val(ui.item.address).valid();
-                                $('input#address2').val(ui.item.address_2);
-                                $('input#suburb').val(ui.item.suburb).valid();
-                                $('input#state').val(ui.item.state).valid();
-                                $('input#country').val(ui.item.country).valid();
-                                $('input#postcode').val(ui.item.postcode).valid();
-                            }
-                            return false;
-                        }
-                        function changeFinisher3Callback(event, ui)
-                        {
-                            if (!ui.item)
-                	        {
-                                $('input#finisher3_id').val(0);
-                                $('input.finisher3').each(function(element, index){
-                                    $(this).val("");
-                                })
-                                return false;
-                            }
-                        }
                     }
                 },
                 'add-job':{
                     init: function(){
                         actions.common.autoComplete();
+                        actions.common.customerAutoComplete();
                         actions.common.doDates();
+                        actions.common.addFinisher();
+                        jobDeliveryDestinations.updateEvents();
                         $("form#add_production_job").submit(function(e){
                             if($(this).valid())
                             {
@@ -394,7 +401,6 @@
                         $('select#status_id, #state, #postcode, #suburb, #country, select#salesrep_id').change(function(e){
                             $(this).valid();
                         });
-                        jobDeliveryDestinations.updateEvents();
                     }
                 },
                 'view-jobs':{
@@ -716,7 +722,11 @@
                     init: function(){
                         actions.common.doDates();
                         actions.common.autoComplete();
+                        actions.common.addFinisher();
+                        actions.common.removeFinisher();
+                        actions.common.customerAutoComplete();
                         jobDeliveryDestinations.updateEvents();
+                        actions.common.finisherExpectedDeliveryDates();
                         $('button#job_details_update_submitter').click(function(e){
                             $('form#job_details_update').submit();
                         });
@@ -729,13 +739,7 @@
                         $('button#finisher_details_update_submitter').click(function(e){
                             $('form#finisher_details_update').submit();
                         });
-                        $('button#finisher2_details_update_submitter').click(function(e){
-                            $('form#finisher2_details_update').submit();
-                        });
-                        $('button#finisher3_details_update_submitter').click(function(e){
-                            $('form#finisher3_details_update').submit();
-                        });
-                        $('form#job_details_update, form#customer_details_update, form#finisher_details_update, form#finisher2_details_update, form#finisher3_details_update, form#delivery_details_update').submit(function(e){
+                        $('form#job_details_update, form#customer_details_update, form#finisher_details_update, form#delivery_details_update').submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Details...</h2></div>' });

@@ -11,16 +11,7 @@ if(!$error)
     $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form::value('local_charge');
     $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:Form::value('direct_charge');
 }
-if(!empty($order['company_name']))
-{
-    $deliver_to = $order['company_name'];
-    $attention = $order['ship_to'];
-}
-else
-{
-    $deliver_to = $order['ship_to'];
-    $attention = "";
-}
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -67,11 +58,7 @@ else
                         <div class="card-body">
                             <div class="row">
                                 <label class="col-5">Deliver To:</label>
-                                <div class="col-7"><?php echo $deliver_to;?></div>
-                            </div>
-                            <div class="row">
-                                <label class="col-5">Attention:</label>
-                                <div class="col-7"><?php echo $attention;?></div>
+                                <div class="col-7"><?php echo $order['ship_to'];?></div>
                             </div>
                             <div class="row">
                                 <label class="col-5">Address:</label>

@@ -60,6 +60,15 @@
                         });
                     }
                 },
+                'view-finisher':{
+                    init: function(){
+                        $('button#print').click(function(e){
+                        	$("div#print_this").printArea({
+                                    //put some options in
+                            });;
+                        });
+                    }
+                },
                 'view-finishers':{
                     init: function(){
                         actions.common.selectAll();

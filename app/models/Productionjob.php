@@ -19,9 +19,11 @@
 
 class Productionjob extends Model{
     public $table = "production_jobs";
+    public $finishers_table = "production_jobs_finishers";
 
     public function updateJobAddress($data)
     {
+        //echo "<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'delivery_instructions' => NULL,
@@ -107,6 +109,7 @@ class Productionjob extends Model{
         $q = $this->getJobQuery();
         $q .= "
             WHERE pj.id IN($ids)
+            GROUP BY pj.id
             ORDER BY pj.created_date DESC
         ";
         return $db->queryData($q);
@@ -162,6 +165,8 @@ class Productionjob extends Model{
         }
 
         $q .= "
+            GROUP BY
+                pj.id
             ORDER BY
                 js.ranking ASC, pj.created_date DESC, pj.job_id DESC
         ";
@@ -177,6 +182,8 @@ class Productionjob extends Model{
         $q .= "
             WHERE
                 pj.id = $id
+            GROUP BY
+                pjf.job_id
         ";
         return $db->queryRow($q);
     }
@@ -204,16 +211,8 @@ class Productionjob extends Model{
         if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
         if(!empty($data['country'])) $vals['country'] = $data['country'];
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
-        if(!empty($data['date_ed_value'])) $vals['ed_date'] = $data['date_ed_value'];
-        if(!empty($data['date_ed2_value'])) $vals['ed2_date'] = $data['date_ed2_value'];
-        if(!empty($data['date_ed3_value'])) $vals['ed3_date'] = $data['date_ed3_value'];
-        if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
-        if(!empty($data['finisher_id'])) $vals['finisher_id'] = $data['finisher_id'];
-        if(!empty($data['finisher_po'])) $vals['finisher_po'] = $data['finisher_po'];
-        if(!empty($data['finisher2_id'])) $vals['finisher2_id'] = $data['finisher2_id'];
-        if(!empty($data['finisher2_po'])) $vals['finisher2_po'] = $data['finisher2_po'];
-        if(!empty($data['finisher3_id'])) $vals['finisher3_id'] = $data['finisher3_id'];
-        if(!empty($data['finisher3_po'])) $vals['finisher3_po'] = $data['finisher3_po'];
+        if(!empty($data['related_job_id'])) $vals['related_job_id'] = $data['related_job_id'];
+        if(isset($data['customer_contact_id']) && $data['customer_contact_id'] > 0) $vals['customer_contact_id'] = $data['customer_contact_id'];
         if(!empty($data['salesrep_id'])) $vals['salesrep_id'] = $data['salesrep_id'];
         if(!empty($data['designer'])) $vals['designer'] = $data['designer'];
         if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
@@ -221,7 +220,43 @@ class Productionjob extends Model{
         if(!empty($data['priority'])) $vals['priority'] = $data['priority'];
         if(!empty($data['customer_po_number'])) $vals['customer_po_number'] = $data['customer_po_number'];
         $id = $db->insertQuery($this->table, $vals);
+        if(isset($data['finishers']) && is_array($data['finishers']))
+        {
+            foreach($data['finishers'] as $finisher)
+            {
+                $ed_date = (empty($finisher['ed_date_value']))? 0 : $finisher['ed_date_value'];
+                $po = (empty($finisher['purchase_order']))? NULL : $finisher['purchase_order'];
+                $this->addFinisherToJob($id, array(
+                    'finisher_id'       => $finisher['finisher_id'],
+                    'contact_id'        => $finisher['contact_id'],
+                    'purchase_order'    => $po,
+                    'ed_date'           => $ed_date
+                ));
+            }
+        }
         return $id;
+    }
+
+    public function addFinisherToJob($job_id, $data)
+    {
+        $db = Database::openConnection();
+        $ed_date = ( isset($data['ed_date_value']) && !empty($data['ed_date_value']) )? $data['ed_date_value'] : 0;
+        $contact_id = ( isset($data['contact_id']) && !empty($data['contact_id']) )? $data['contact_id'] : 0;
+        $po = ( isset($data['purchase_order']) && !empty($data['purchase_order']))? $data['purchase_order'] : NULL ;
+        $db->insertQuery($this->finishers_table, array(
+            'job_id'            => $job_id,
+            'finisher_id'       => $data['finisher_id'],
+            'contact_id'        => $contact_id,
+            'purchase_order'    => $po,
+            'ed_date'           => $ed_date
+        ));
+    }
+
+    public function removeFinishersFromJob($job_id)
+    {
+        $db = Database::openConnection();
+        $db->deleteQuery($this->finishers_table, $job_id, 'job_id');
+        return true;
     }
 
     public function updateJobDetails($data)
@@ -422,6 +457,10 @@ class Productionjob extends Model{
             $st_ids = implode(',',$status_ids);
             $query .= " AND (pj.status_id IN( $st_ids))";
         }
+        $query .= "
+            GROUP BY
+                pj.id
+        ";
         //print_r($array);
         //die($query);
         return $jobs = $db->queryData($query, $array);
@@ -432,20 +471,39 @@ class Productionjob extends Model{
         return "
             SELECT
                 pj.*,
-                pc.id AS customer_id, pc.name AS customer_name, pc.contact AS customer_contact, pc.email AS customer_email, pc.phone AS customer_phone,
+                pc.id AS customer_id, pc.name AS customer_name, pc.email AS customer_email, pc.phone AS customer_phone,
+                pcc.name AS contact_name, pcc.email AS contact_email, pcc.phone AS contact_phone, pcc.role AS contact_role,
                 sr.id as salesrep_id, sr.name AS salesrep_name,
-                pf.id as finisher_id, pf.name AS finisher_name, pf.contact AS finisher_contact, pf.email AS finisher_email, pf.phone AS finisher_phone,
-                pf2.id as finisher2_id, pf2.name AS finisher2_name, pf2.contact AS finisher2_contact, pf2.email AS finisher2_email, pf2.phone AS finisher2_phone,
-                pf3.id as finisher3_id, pf3.name AS finisher3_name, pf3.contact AS finisher3_contact, pf3.email AS finisher3_email, pf3.phone AS finisher3_phone,
+                GROUP_CONCAT(
+                    IFNULL(pf.id,''),',',
+                    IFNULL(pf.name,''),',',
+                    IFNULL(pf.email,''),',',
+                    IFNULL(pf.phone,''),',',
+                    IFNULL(pf.address,''),',',
+                    IFNULL(pf.address_2,''),',',
+                    IFNULL(pf.suburb,''),',',
+                    IFNULL(pf.state,''),',',
+                    IFNULL(pf.postcode,''),',',
+                    IFNULL(pf.country,''),',',
+                    IFNULL(pfc.id,''),',',
+                    IFNULL(pfc.name,''),',',
+                    IFNULL(pfc.email,''),',',
+                    IFNULL(pfc.phone,''),',',
+                    IFNULL(pfc.role,''),',',
+                    IFNULL(pjf.purchase_order,''),',',
+                    IFNULL(pjf.ed_date,'')
+                    SEPARATOR '|'
+                ) AS finishers,
                 js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking,
                 IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day, IFNULL(rs.runsheet_completed, 0) AS runsheet_completed, rs.driver_id
             FROM
                 (SELECT `production_jobs`.*, `users`.`name` AS `status_change_name` FROM `production_jobs` LEFT JOIN `users` ON `production_jobs`.`status_change_by` = `users`.`id`) pj LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
+                `production_contacts` pcc ON pj.customer_contact_id = pcc.id LEFT JOIN
+                `production_jobs_finishers` pjf ON pj.id = pjf.job_id LEFT JOIN
+                `production_finishers` pf ON pjf.finisher_id = pf.id LEFT JOIN
+                `production_contacts` pfc ON pjf.contact_id = pfc.id LEFT JOIN
                 `sales_reps` sr ON pj.salesrep_id = sr.id LEFT JOIN
-                `production_finishers` pf ON pj.finisher_id = pf.id LEFT JOIN
-                `production_finishers` pf2 ON pj.finisher2_id = pf2.id LEFT JOIN
-                `production_finishers` pf3 ON pj.finisher3_id = pf3.id LEFT JOIN
                 job_status js ON pj.status_id = js.id LEFT JOIN
                 (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.job_id, runsheets.runsheet_day, runsheet_tasks.driver_id, runsheet_tasks.completed AS runsheet_completed FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
         ";

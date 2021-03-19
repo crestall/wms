@@ -579,7 +579,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $this->productionjob->updateJobAddress($post_data);
             Session::set('jobdeliverydetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
@@ -929,78 +929,31 @@ class FormController extends Controller {
     {
         //echo "<pre>DATA",print_r($this->request->data),"</pre>"; //die();
         $post_data = array();
-        $fn = ($this->request->data['finisher_number'] == 1)? "" : $this->request->data['finisher_number'];
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
             {
-                $field = str_replace("finisher".$fn, "finisher", $field);
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
         }
         //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
-        $date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
-        if($this->dataSubbed($finisher_email))
+        //$date_ed_value = (!empty($date_ed_value))? $date_ed_value: 0;
+        if(isset($finishers))
         {
-            if(!$this->emailValid($finisher_email))
+            foreach($finishers as $ind => $finisher)
             {
-                Form::setError('finisher_email', 'The email is not valid');
-            }
-        }
-        if(!empty($finisher_address) || !empty($finisher_suburb) || !empty($finisher_state) || !empty($finisher_postcode) || !empty($finisher_country))
-        {
-            //$this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
-            $finisher_country = strtoupper($finisher_country);
-            if( !$this->dataSubbed($finisher_address) )
-            {
-                Form::setError('finisher_address', 'An address is required');
-            }
-            elseif( !isset($ignore_finisher_address_error) )
-            {
-                if( (!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $finisher_address)) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $finisher_address)) )
+                if(!$this->dataSubbed($finisher['name']))
                 {
-                    Form::setError('finisher_address', 'The address must include both letters and numbers');
-                }
-            }
-            if(!$this->dataSubbed($finisher_postcode))
-            {
-                Form::setError('finisher_postcode', "A postcode is required");
-            }
-            if(!$this->dataSubbed($finisher_country))
-            {
-                Form::setError('finisher_country', "A country is required");
-            }
-            elseif(strlen($finisher_country) > 2)
-            {
-                Form::setError('finisher_country', "Please use the two letter ISO code");
-            }
-            elseif($finisher_country == "AU")
-            {
-                if(!$this->dataSubbed($finisher_suburb))
-        		{
-        		    Form::setError('finisher_suburb', "A delivery suburb is required for Australian addresses");
-        		}
-        		if(!$this->dataSubbed($finisher_state))
-        		{
-        		    Form::setError('finisher_state', "A delivery state is required for Australian addresses");
-        		}
-                $aResponse = $this->Eparcel->ValidateSuburb($finisher_suburb, $finisher_state, str_pad($finisher_postcode,4,'0',STR_PAD_LEFT));
-                $error_string = "";
-                if(isset($aResponse['errors']))
-                {
-                    foreach($aResponse['errors'] as $e)
-                    {
-                        $error_string .= $e['message']." ";
-                    }
-                }
-                elseif($aResponse['found'] === false)
-                {
-                    $error_string .= "Postcode does not match suburb or state";
-                }
-                if(strlen($error_string))
-                {
-                    Form::setError('finisher_postcode', $error_string);
+                    Form::setError('finishername_'.$ind, 'A Finisher Name is required');
                 }
             }
         }
@@ -1008,58 +961,40 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            Session::set('jobfinisher'.$fn.'detailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
+            Session::set('jobfinisherdetailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
         }
         else
         {
-            $finisher_data = array();
-            if($this->dataSubbed($finisher_name))
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>";die();
+            if(!isset($finishers))
             {
-                $finisher_data = array(
-                    'name'  => $finisher_name
-                );
-                if($this->dataSubbed($finisher_phone)) $finisher_data['phone'] = $finisher_phone;
-                if($this->dataSubbed($finisher_contact)) $finisher_data['contact'] = $finisher_contact;
-                if($this->dataSubbed($finisher_email)) $finisher_data['email'] = $finisher_email;
-                if($this->dataSubbed($finisher_address)) $finisher_data['address'] = $finisher_address;
-                if($this->dataSubbed($finisher_address2)) $finisher_data['address2'] = $finisher_address2;
-                if($this->dataSubbed($finisher_suburb)) $finisher_data['suburb'] = $finisher_suburb;
-                if($this->dataSubbed($finisher_state)) $finisher_data['state'] = $finisher_state;
-                if($this->dataSubbed($finisher_postcode)) $finisher_data['postcode'] = $finisher_postcode;
-                if($this->dataSubbed($finisher_country)) $finisher_data['country'] = $finisher_country;
-                //Need to add the finisher?
-                if($finisher_id == 0)
-                {
-                    $finisher_id = $this->productionfinisher->addfinisher($finisher_data);
-                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                else
-                {
-                    $finisher_data['finisher_id'] = $finisher_id;
-                    $finisher_data['active'] = 1;
-                    $this->productionfinisher->editfinisher($finisher_data);
-                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                $this->productionjob->updateJobfinisherId($job_id, $finisher_id, $fn);
-                if($this->dataSubbed($finisher_po))
-                {
-                    $this->productionjob->updateJobFinisherPo($job_id, $finisher_po, $fn);
-                }
-                else
-                {
-                    $this->productionjob->removeFinisherPo($job_id, $fn);
-                }
-                $this->productionjob->updateExpectedDeliveryDate($job_id, $date_ed_value, $fn);
-                Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher's Details Have Been Updated</h3><p>The changes should be showing below</p>");
+                //echo "<p>Will remove all finishers</p>";
+                $this->productionjob-> removeFinishersFromJob($id);
+                Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>All Finisher have Removed</h3><p>They should <strong>NOT</strong> be showing below</p>");
             }
             else
             {
-                $this->productionjob->removeFinisher($job_id, $fn);
-                $this->productionjob->updateExpectedDeliveryDate($job_id, 0, $fn);
-                Session::set('jobfinisher'.$fn.'detailsfeedback',"<h3><i class='far fa-check-circle'></i>The Finisher Has Been Removed From This Job</h3>");
+                //echo "Will update JOB: $id to<pre>",print_r($finishers),"</pre>";die();
+                if($this->productionjob-> removeFinishersFromJob($id))
+                {
+                    foreach($finishers as $finisher)
+                    {
+                        $this->productionjob->addFinisherToJob($id, array(
+                            'ed_date_value'     => $finisher['ed_date_value'],
+                            'contact_id'        => $finisher['contact_id'],
+                            'purchase_order'    => $finisher['purchase_order'],
+                            'finisher_id'       => $finisher['finisher_id']
+                        ));
+                    }
+                }
+                else
+                {
+                    die('database error');
+                }
+                Session::set('jobfinisherdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job's Finisher Details Have Been Updated</h3><p>The changes should be showing below</p>");
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#finisher{$fn}details");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#finisherdetails");
     }
 
     public function procJobCustomerUpdate()
@@ -1399,7 +1334,16 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
         }
+        //echo "FINISHERS<pre>",print_r($finishers),"</pre>"; die();
         //Required Fields
         if(!$this->dataSubbed($job_id))
         {
@@ -1437,25 +1381,11 @@ class FormController extends Controller {
                 Form::setError('customer_email', 'The email is not valid');
             }
         }
-        if($this->dataSubbed($finisher_email))
+        if($this->dataSubbed($customer_contact_email))
         {
-            if(!$this->emailValid($finisher_email))
+            if(!$this->emailValid($customer_contact_email))
             {
-                Form::setError('finisher_email', 'The email is not valid');
-            }
-        }
-        if($this->dataSubbed($finisher2_email))
-        {
-            if(!$this->emailValid($finisher2_email))
-            {
-                Form::setError('finisher2_email', 'The email is not valid');
-            }
-        }
-        if($this->dataSubbed($finisher3_email))
-        {
-            if(!$this->emailValid($finisher3_email))
-            {
-                Form::setError('finisher3_email', 'The email is not valid');
+                Form::setError('customer_contact_email', 'The email is not valid');
             }
         }
         //customer address checking
@@ -1463,21 +1393,6 @@ class FormController extends Controller {
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) )
         {
             $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, 'AU', isset($ignore_customer_address_error), "customer_", "show_customer_address");
-        }
-        //finisher one address checking
-        if(!empty($finisher_address) || !empty($finisher_suburb) || !empty($finisher_state) || !empty($finisher_postcode)  )
-        {
-            $this->validateAddress($finisher_address, $finisher_suburb, $finisher_state, $finisher_postcode, 'AU', isset($ignore_finisher_address_error), "finisher_", "show_finisher_address");
-        }
-        //finisher two address checking
-        if(!empty($finisher2_address) || !empty($finisher2_suburb) || !empty($finisher2_state) || !empty($finisher2_postcode) )
-        {
-            $this->validateAddress($finisher2_address, $finisher2_suburb, $finisher2_state, $finisher2_postcode, 'AU', isset($ignore_finisher2_address_error), "finisher2_", "show_finisher2_address");
-        }
-        //finisher three address checking
-        if(!empty($finisher3_address) || !empty($finisher3_suburb) || !empty($finisher3_state) || !empty($finisher3_postcode) )
-        {
-            $this->validateAddress($finisher3_address, $finisher3_suburb, $finisher3_state, $finisher3_postcode, 'AU', isset($ignore_finisher3_address_error), "finisher3_", "show_finisher3_address");
         }
         if(!isset($held_in_store))
             $this->validateAddress($address, $suburb, $state, $postcode, "AU", isset($ignore_address_error));
@@ -1494,7 +1409,7 @@ class FormController extends Controller {
                 'name'  => $customer_name
             );
             if($this->dataSubbed($customer_phone)) $customer_data['phone'] = $customer_phone;
-            if($this->dataSubbed($customer_contact)) $customer_data['contact'] = $customer_contact;
+            if($this->dataSubbed($customer_website)) $customer_data['website'] = $customer_website;
             if($this->dataSubbed($customer_email)) $customer_data['email'] = $customer_email;
             if($this->dataSubbed($customer_address)) $customer_data['address'] = $customer_address;
             if($this->dataSubbed($customer_address2)) $customer_data['address2'] = $customer_address2;
@@ -1502,119 +1417,28 @@ class FormController extends Controller {
             if($this->dataSubbed($customer_state)) $customer_data['state'] = $customer_state;
             if($this->dataSubbed($customer_postcode)) $customer_data['postcode'] = $customer_postcode;
             if($this->dataSubbed($customer_country)) $customer_data['country'] = $customer_country;
+            if($this->dataSubbed($customer_contact_id) && $customer_contact_id > 0) $post_data['customer_contact_id'] = $customer_contact_id;
             //Need to add the customer?
             if($customer_id == 0)
             {
+                if($this->dataSubbed($customer_contact_name)) $customer_data['contacts'][0]['name'] = $customer_contact_name;
+                if($this->dataSubbed($customer_contact_role)) $customer_data['contacts'][0]['role'] = $customer_contact_role;
+                if($this->dataSubbed($customer_contact_email)) $customer_data['contacts'][0]['email'] = $customer_contact_email;
+                if($this->dataSubbed($customer_contact_phone)) $customer_data['contacts'][0]['phone'] = $customer_contact_phone;
                 $customer_id = $this->productioncustomer->addCustomer($customer_data);
                 //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
                 $customer_data['customer_id'] = $customer_id;
                 $post_data['customer_id'] = $customer_id;
+                //this new customer will only have one contact
+                $pcont = new Productioncontact();
+                $post_data['customer_contact_id'] = $pcont->getCustomerContactIDs($customer_id, true);
             }
             else
             {
                 $customer_data['customer_id'] = $customer_id;
-                $this->productioncustomer->editCustomer($customer_data);
-                //echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
+                //$this->productioncustomer->editCustomer($customer_data);
             }
-            //finisher one details
-            $finisher_data = array();
-            if($this->dataSubbed($finisher_name))
-            {
-                $finisher_data['name'] = $finisher_name;
-                if($this->dataSubbed($finisher_phone)) $finisher_data['phone'] = $finisher_phone;
-                if($this->dataSubbed($finisher_contact)) $finisher_data['contact'] = $finisher_contact;
-                if($this->dataSubbed($finisher_email)) $finisher_data['email'] = $finisher_email;
-                if($this->dataSubbed($finisher_address)) $finisher_data['address'] = $finisher_address;
-                if($this->dataSubbed($finisher_address2)) $finisher_data['address2'] = $finisher_address2;
-                if($this->dataSubbed($finisher_suburb)) $finisher_data['suburb'] = $finisher_suburb;
-                if($this->dataSubbed($finisher_state)) $finisher_data['state'] = $finisher_state;
-                if($this->dataSubbed($finisher_postcode)) $finisher_data['postcode'] = $finisher_postcode;
-                if($this->dataSubbed($finisher_country)) $finisher_data['country'] = $finisher_country;
-            }
-            if(count($finisher_data))
-            {
-                if($finisher_id == 0)
-                {
-                    //add new finisher
-                    $finisher_id = $this->productionfinisher->addFinisher($finisher_data);
-                    $finisher_data['finisher_id'] = $finisher_id;
-                    $post_data['finisher_id'] = $finisher_id;
-                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                else
-                {
-                    $finisher_data['finisher_id'] = $finisher_id;
-                    $finisher_data['active'] = 1;
-                    $this->productionfinisher->editFinisher($finisher_data);
-                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-            }
-            //finisher two details
-            $finisher2_data = array();
-            if($this->dataSubbed($finisher2_name))
-            {
-                $finisher2_data['name'] = $finisher2_name;
-                if($this->dataSubbed($finisher2_phone)) $finisher2_data['phone'] = $finisher2_phone;
-                if($this->dataSubbed($finisher2_contact)) $finisher2_data['contact'] = $finisher2_contact;
-                if($this->dataSubbed($finisher2_email)) $finisher2_data['email'] = $finisher2_email;
-                if($this->dataSubbed($finisher2_address)) $finisher2_data['address'] = $finisher2_address;
-                if($this->dataSubbed($finisher2_address2)) $finisher2_data['address2'] = $finisher2_address2;
-                if($this->dataSubbed($finisher2_suburb)) $finisher2_data['suburb'] = $finisher2_suburb;
-                if($this->dataSubbed($finisher2_state)) $finisher2_data['state'] = $finisher2_state;
-                if($this->dataSubbed($finisher2_postcode)) $finisher2_data['postcode'] = $finisher2_postcode;
-                if($this->dataSubbed($finisher2_country)) $finisher2_data['country'] = $finisher2_country;
-            }
-            if(count($finisher2_data))
-            {
-                if($finisher2_id == 0)
-                {
-                    //add new finisher
-                    $finisher2_id = $this->productionfinisher->addFinisher($finisher2_data);
-                    $finisher2_data['finisher_id'] = $finisher2_id;
-                    $post_data['finisher2_id'] = $finisher2_id;
-                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                else
-                {
-                    $finisher2_data['finisher_id'] = $finisher2_id;
-                    $finisher2_data['active'] = 1;
-                    $this->productionfinisher->editFinisher($finisher2_data);
-                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-            }
-            //finisher three details
-            $finisher3_data = array();
-            if($this->dataSubbed($finisher3_name))
-            {
-                $finisher3_data['name'] = $finisher3_name;
-                if($this->dataSubbed($finisher3_phone)) $finisher3_data['phone'] = $finisher3_phone;
-                if($this->dataSubbed($finisher3_contact)) $finisher3_data['contact'] = $finisher3_contact;
-                if($this->dataSubbed($finisher3_email)) $finisher3_data['email'] = $finisher3_email;
-                if($this->dataSubbed($finisher3_address)) $finisher3_data['address'] = $finisher3_address;
-                if($this->dataSubbed($finisher3_address2)) $finisher3_data['address2'] = $finisher3_address2;
-                if($this->dataSubbed($finisher3_suburb)) $finisher3_data['suburb'] = $finisher3_suburb;
-                if($this->dataSubbed($finisher3_state)) $finisher3_data['state'] = $finisher3_state;
-                if($this->dataSubbed($finisher3_postcode)) $finisher3_data['postcode'] = $finisher3_postcode;
-                if($this->dataSubbed($finisher3_country)) $finisher3_data['country'] = $finisher3_country;
-            }
-            if(count($finisher3_data))
-            {
-                if($finisher3_id == 0)
-                {
-                    //add new finisher
-                    $finisher3_id = $this->productionfinisher->addFinisher($finisher3_data);
-                    $finisher3_data['finisher_id'] = $finisher3_id;
-                    $post_data['finisher3_id'] = $finisher3_id;
-                    //echo "Will add finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-                else
-                {
-                    $finisher3_data['finisher_id'] = $finisher3_id;
-                    $finisher3_data['active'] = 1;
-                    $this->productionfinisher->editFinisher($finisher3_data);
-                    //echo "Will edit finisher data<pre>",print_r($finisher_data),"</pre>";
-                }
-            }
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $id = $this->productionjob->addJob($post_data);
             Session::set('feedback', "That job has been added to the system.<br/>The details can be edited <a href='/jobs/update-job/job=".$id."'>HERE</a>");
         }
@@ -1632,6 +1456,13 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                }
+            }
         }
         if(!$this->dataSubbed($name))
         {
@@ -1642,6 +1473,20 @@ class FormController extends Controller {
             if(!$this->emailValid($email))
             {
                 Form::setError('email', 'The email is not valid');
+            }
+        }
+        foreach($post_data['contacts'] as $ind => $cd)
+        {
+            if(!$this->dataSubbed($cd['name']))
+            {
+                Form::setError('contactname_'.$ind, 'A contact name is required');
+            }
+            if($this->dataSubbed($cd['email']))
+            {
+                if(!$this->emailValid($cd['email']))
+                {
+                    Form::setError('contactemail_'.$ind, 'The email is not valid');
+                }
             }
         }
         if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
@@ -1673,6 +1518,14 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    ${$field[$key]} = $avalue;
+                    $post_data[$field][$key] = $avalue;
+                }
+            }
         }
         if(!$this->dataSubbed($name))
         {
@@ -1683,6 +1536,20 @@ class FormController extends Controller {
             if(!$this->emailValid($email))
             {
                 Form::setError('email', 'The email is not valid');
+            }
+        }
+        foreach($post_data['contacts'] as $ind => $cd)
+        {
+            if(!$this->dataSubbed($cd['name']))
+            {
+                Form::setError('contactname_'.$ind, 'A contact name is required');
+            }
+            if($this->dataSubbed($cd['email']))
+            {
+                if(!$this->emailValid($cd['email']))
+                {
+                    Form::setError('contactemail_'.$ind, 'The email is not valid');
+                }
             }
         }
         if(!empty($address) || !empty($suburb) || !empty($state) || !empty($postcode) || !empty($country))
@@ -1783,9 +1650,19 @@ class FormController extends Controller {
         {
             Form::setError('name', 'The Finishers name is required');
         }
-        if(!$this->dataSubbed($contact))
+        foreach($post_data['contacts'] as $ind => $cd)
         {
-            Form::setError('contact', 'A contact name is required');
+            if(!$this->dataSubbed($cd['name']))
+            {
+                Form::setError('contactname_'.$ind, 'A contact name is required');
+            }
+            if($this->dataSubbed($cd['email']))
+            {
+                if(!$this->emailValid($cd['email']))
+                {
+                    Form::setError('contactemail_'.$ind, 'The email is not valid');
+                }
+            }
         }
         if($this->dataSubbed($email))
         {

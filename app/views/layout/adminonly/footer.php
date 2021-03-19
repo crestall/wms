@@ -15,6 +15,11 @@
 
                     }
                 },
+                'production-database-tables-update':{
+                    init: function(){
+
+                    }
+                },
                 'api-tester' :{
                     init: function()
                     {

@@ -719,15 +719,15 @@ class Woocommerce{
         $shipping_ids = array(
             8168
         );
-		if(count($the_orders) == 0)
-			return false;
+        if(count($the_orders) == 0)
+            return false;
         $orders = array();
         if(!isset($the_orders[0]))
             $collected_orders[] = $the_orders;
         else
             $collected_orders = $the_orders;
-		
-		//echo "<pre>",print_r($the_orders),"</pre>";die();
+
+        //echo "<pre>",print_r($the_orders),"</pre>";die();
         if(count($collected_orders) > 0)
         {
             $allocations = array();

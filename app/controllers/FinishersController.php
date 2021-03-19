@@ -73,6 +73,24 @@ class FinishersController extends Controller
         ]);
     }
 
+    public function viewFinisher()
+    {
+        if(!isset($this->request->params['args']['finisher']))
+        {
+            return (new ErrorsController())->error(404)->send();
+        }
+        $finisher_id = $this->request->params['args']['finisher'];
+        $finisher_info = $this->productionfinisher->getFinisherById($finisher_id);
+        //render the page
+        Config::setJsConfig('curPage', "view-finisher");
+        Config::set('curPage', "view-finisher");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/finishers/", Config::get('VIEWS_PATH') . 'finishers/viewFinisher.php', [
+            'page_title'    =>  "Viewing ".$finisher_info['name'],
+            'pht'           =>  ": ".$finisher_info['name'],
+            'finisher'     =>  $finisher_info
+        ]);
+    }
+
     public function isAuthorized()
     {
         $action = $this->request->param('action');
