@@ -34,7 +34,20 @@
     </thead>
     <tbody>
         <?php foreach($jobs as $job):
-            $add_to_runsheet = true;?>
+            $add_to_runsheet = true;
+            //create finisher array
+            $finisher_array = array();
+            if(!empty($finishers))
+            {
+                $fa = explode("|", $job['finishers']);
+                foreach($fa as $f)
+                {
+                    list($a['id'], $a['name'],$a['email'],$a['phone'],$a['address'],$a['address_2'],$a['suburb'],$a['state'],$a['postcode'],$a['country'],$a['contact_id'],$a['contact_name'],$a['contact_email'],$a['contact_phone'], $a['contact_role'],$a['purchase_order'],$a['ed_date_value']) = explode(',', $f);
+                    if(!empty($a['id']))
+                        $finisher_array[] = $a;
+                }
+            }
+            ?>
             <tr id="tr_<?php echo $job['id'];?>">
                 <td data-label="Priority">
                     <select class="selectpicker priority"  id="priority_<?php echo $job['id'];?>" data-ranking="<?php echo ($job['priority'] > 0)? $job['priority'] : "";?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect($job['priority']);?></select>
@@ -97,18 +110,10 @@
                 </td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
                 <td data-label="Finisher(s)">
-                    <?php for($f = 1; $f <= 3; $f++):
-                        $tf = ($f == 1)? "": $f;
-                        if(!(empty($job['finisher'.$tf.'_name']))):?>
-                            <p class="border-bottom border-secondary border-bottom-dashed mb-3">
-                                <?php if($user_role == "production_admin"):?>
-                                    <a href="/finishers/edit-finisher/finisher=<?php echo $job['finisher'.$tf.'_id'];?>"><?php echo ucwords($job['finisher'.$tf.'_name']);?></a>
-                                <?php else:?>
-                                    <?php echo ucwords($job['finisher'.$tf.'_name']);?>
-                                <?php endif;?>
-                            </p>
-                        <?php endif;?>
-                    <?php endfor;?>
+                    <?php if(count($finisher_array))
+                    {
+                        echo "<pre>",print_r($finisher_array),"</pre>";
+                    }?>
                 </td>
                 <?php if($can_do_runsheets):?>
                     <td data-label="Runsheet Day">
