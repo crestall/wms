@@ -37,21 +37,22 @@ $country = empty(Form::value('finishers['.$i.'][country]'))?  $tfa['country'] : 
 $contact_id = empty(Form::value('finishers['.$i.'][contact_id]'))?  $tfa['contact_id'] : Form::value('finishers['.$i.'][contact_id]');
 ?>
 <div id="finisher_<?php echo $i;?>" class="p-3 mid-grey mb-3 afinisher">
-    <div class="form-group row">
-        <h4 class="col-md-6 finisher_title">Finisher <?php echo ucwords($f->format($this_finisher));?>'s Details</h4>
-        <div class="col-md-6">
-            <h5><a data-finisher="<?php echo $i;?>" class="remove-finisher" style="cursor:pointer" title="Remove Finisher"><i class="fad fa-times-square text-danger"></i> Remove This Finisher</a></h5>
+    <?php if( !empty($tfa['name'])):?>
+        <div class="form-group row">
+            <h4 class="col-md-6 finisher_title">Finisher <?php echo ucwords($f->format($this_finisher));?>'s Details</h4>
+            <div class="col-md-6">
+                <h5><a data-finisher="<?php echo $i;?>" class="remove-finisher" style="cursor:pointer" title="Remove Finisher"><i class="fad fa-times-square text-danger"></i> Remove This Finisher</a></h5>
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <?php if( !empty($tfa['name'])):?>
+        <div class="form-group row">
             <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Finisher Name</label>
             <div class="col-md-8">
                 <input type="text" class="form-control finisher_name no-autocomplete" data-finisher="<?php echo $i;?>" name="finishers[<?php echo $i;?>][name]" value="<?php echo $name;?>">
                 <?php echo Form::displayError('finishername_'.$i);?>
             </div>
-        <?php endif;?>
-    </div>
+
+        </div>
+    <?php endif;?>
     <div class="this_finisher_details" style="display:<?php echo $tfd;?>;">
         <div class="form-group row custom-control custom-checkbox custom-control-right">
             <input class="custom-control-input send_to_address send_to_finisher" data-finisher="<?php echo $i;?>" type="checkbox" id="send_to_finisher_<?php echo $i;?>" name="send_to_finisher_<?php echo $i;?>" />
