@@ -111,7 +111,7 @@
                 </td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
                 <td data-label="Finisher(s)">
-                    <?php echo "<pre>FINISHERS",print_r($finisher_array),"</pre>"; ?>
+                    <?php if(!empty($finisher_array)) echo "<pre>FINISHERS",print_r($finisher_array),"</pre>"; ?>
                 </td>
                 <?php if($can_do_runsheets):?>
                     <td data-label="Runsheet Day">
