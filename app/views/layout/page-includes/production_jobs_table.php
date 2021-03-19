@@ -111,7 +111,17 @@
                 </td>
                 <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
                 <td data-label="Finisher(s)">
-                    <?php if(!empty($finisher_array)) echo "<pre>FINISHERS",print_r($finisher_array),"</pre>"; ?>
+                    <?php if(!empty($finisher_array)):
+                        foreach($finisher_array as $fin):?>
+                            <p class="border-bottom border-secondary border-bottom-dashed mb-3">
+                                <?php if($user_role == "production_admin"):?>
+                                    <a href="/finishers/edit-finisher/finisher=<?php echo $fin['id'];?>"><?php echo ucwords($fin['name']);?></a>
+                                <?php else:?>
+                                    <?php echo ucwords($fin['name']);?>
+                                <?php endif;?>
+                            </p>
+                        <?php end foreach;
+                    endif;?>
                 </td>
                 <?php if($can_do_runsheets):?>
                     <td data-label="Runsheet Day">
