@@ -1,7 +1,7 @@
 <?php
   $today = strtotime('today');
   //echo "<p>User Role: $user_role</p>";
-  echo "<pre>",print_r($jobs),"</pre>";
+  //echo "<pre>",print_r($jobs),"</pre>";
 ?>
 <table class="table-striped table-hover" id="production_jobs_table">
     <thead>
@@ -38,7 +38,7 @@
             $add_to_runsheet = true;
             //create finisher array
             $finisher_array = array();
-            if(!empty($finishers))
+            if(!empty($job['finishers']))
             {
                 $fa = explode("|", $job['finishers']);
                 foreach($fa as $f)
