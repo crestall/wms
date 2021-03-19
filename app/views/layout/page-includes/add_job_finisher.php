@@ -53,7 +53,7 @@ $fcontact_id = empty(Form::value('finishers['.$i.'][contact_id]'))?  $tfa['conta
         <?php else:?>
             <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Finisher Name</label>
             <div class="col-md-8">
-                <input type="text" class="form-control finisher_name" data-finisher="<?php echo $i;?>" name="finishers[<?php echo $i;?>][name]" value="<?php echo $name;?>">
+                <input type="text" class="form-control finisher_name" data-finisher="<?php echo $i;?>" name="finishers[<?php echo $i;?>][name]" value="<?php echo $fname;?>">
                 <span class="inst">
                     Start typing a name and choose a finisher from the list<br>
                     Only finishers already in the system can be chosen here<br>
