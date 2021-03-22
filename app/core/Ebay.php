@@ -109,7 +109,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
             'Content-Type: application/x-www-form-urlencoded',
             'Authorization: Basic '.$codeAuth
         ));
-        curl_setopt($ch, CURLHEADER_SEPARATE, true);
+        //curl_setopt($ch, CURLHEADER_SEPARATE, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -135,7 +135,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
             'Authorization: Basic '.$codeAuth
         ));
         //echo $this->refreshToken;
-        curl_setopt($ch, CURLHEADER_SEPARATE, true);
+        //curl_setopt($ch, CURLHEADER_SEPARATE, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POST, 1);
