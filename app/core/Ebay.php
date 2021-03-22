@@ -124,6 +124,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
         {
             if(isset($json['error']))
             {
+                echo "<pre>",print_r($json),"</pre>";
                 die("ebay token error");
             }
             else
