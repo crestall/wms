@@ -162,7 +162,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
         curl_close($ch);
         if($json != null)
         {
-            $this->authToken = $json["access_token"];
+            //$this->authToken = $json["access_token"];
         }
         echo "<pre>",print_r($json),"</pre>";
         die("did a refresh");
