@@ -131,7 +131,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
             {
                 $this->authToken = $json["access_token"];
                 $this->refreshToken = $json["refresh_token"];
-                $db->updateDatabaseFields($this->table, array(
+                $db->updateDatabaseFields("ebay_access_tokens", array(
                     'access_token'      => $json['access_token'],
                     'access_expires'    => time() + $json['expires_in'],
                     'refresh_token'     => $json['refresh_token'],
