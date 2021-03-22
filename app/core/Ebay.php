@@ -135,7 +135,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
                     'access_token'      => $json['access_token'],
                     'access_expires'    => time() + $json['expires_in'],
                     'refresh_token'     => $json['refresh_token'],
-                    'refresh_expires'   => $json['refresh_token_expires_in']
+                    'refresh_expires'   => time() + $json['refresh_token_expires_in']
                 ), 1);
             }
         }
