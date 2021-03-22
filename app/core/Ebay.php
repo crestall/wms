@@ -102,6 +102,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
 
     public function authorizationToken()
     {
+        $db = Database::openConnection();
         $link = $this->serverUrl."/identity/v1/oauth2/token";
         $codeAuth = base64_encode($this->clientID.':'.$this->certID);
         $ch = curl_init($link);
@@ -116,13 +117,26 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=authorization_code&code=".$this->authCode."&redirect_uri=".$this->ruName);
         $response = curl_exec($ch);
         $json = json_decode($response, true);
-        echo "<pre>",print_r($json),"</pre>"; die();
+        //echo "<pre>",print_r($json),"</pre>"; die();
         $info = curl_getinfo($ch);
         curl_close($ch);
         if($json != null)
         {
-            $this->authToken = $json["access_token"];
-            $this->refreshToken = $json["refresh_token"];
+            if(isset($json['error']))
+            {
+                die("ebay token error");
+            }
+            else
+            {
+                $this->authToken = $json["access_token"];
+                $this->refreshToken = $json["refresh_token"];
+                $db->updateDatabaseFields($this->table, array(
+                    'access_token'      => $json['access_token'],
+                    'access_expires'    => time() + $json['expires_in'],
+                    'refresh_token'     => $json['refresh_token'],
+                    'refresh_expires'   => $json['refresh_token_expires_in']
+                ), 1);
+            }
         }
     }
 
