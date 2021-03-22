@@ -116,6 +116,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=authorization_code&code=".$this->authCode."&redirect_uri=".$this->ruName);
         $response = curl_exec($ch);
         $json = json_decode($response, true);
+        echo "<pre>",print_r($json),"</pre>"; die();
         $info = curl_getinfo($ch);
         curl_close($ch);
         if($json != null)
