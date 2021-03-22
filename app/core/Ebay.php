@@ -164,5 +164,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
         {
             $this->authToken = $json["access_token"];
         }
+        echo "<pre>",print_r($json),"</pre>";
+        die("did a refresh");
     }
 }//end class
