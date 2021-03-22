@@ -70,7 +70,7 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
             $this->refreshToken = $access_tokens['refresh_token'];
             if( time() >= $access_tokens['refresh_expires'] )
             {
-                $this->firstAuthAppToken();
+                $this->authorizationToken();
             }
             elseif( time() >= $access_tokens['access_expires'] )
             {
