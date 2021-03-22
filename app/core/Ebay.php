@@ -86,6 +86,9 @@ https://auth.sandbox.ebay.com/oauth2/authorize?client_id=MarkSoll-PBAFSG-SBX-a41
         $db = Database::openConnection();
 
         $url = $this->authURL."/oauth2/authorize?client_id=".$this->clientID."&response_type=code&redirect_uri=".$this->ruName."&scope=".$this->scope;
+
+        die($url);
+
         $url_components = parse_url($url);
         parse_str($url_components['query'], $params);
         $this->authCode = $params['code'];
