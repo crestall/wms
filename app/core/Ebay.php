@@ -176,7 +176,6 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
                     'access_expires'    => time() + $json['expires_in']
                 ), 1);
             }
-
         }
         echo "<pre>",print_r($json),"</pre>";
         die("did a refresh");
