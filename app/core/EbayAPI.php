@@ -79,7 +79,47 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
         }
         //die( "current: ".time()." expires: ".$access_tokens['access_expires']);
         //$this->paypalEmailAddress= 'PAYPAL_EMAIL_ADDRESS';
+    }
 
+//Publicly Callable Functions
+    public function getCurrentOrders()
+    {
+        $s_action = "sell/v1/order?filter=orderfulfillmentstatus:%%7BNOT_STARTED%7CIN_PROGRESS%7D";
+        $response = $this->sendGetRequest($s_action);
+        return json_decode($response, true);
+    }
+
+
+
+
+//Background Helper Functions
+
+    protected function sendGetRequest($s_action)
+    {
+        $url = $this->serverUrl."/".$s_action;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_ENCODING, "");
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $codeAuth = base64_encode($this->clientID.':'.$this->certID);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/x-www-form-urlencoded',
+            'Authorization: Basic '.$codeAuth
+        ));
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        if ($err)
+        {
+            die('Could not write to Eparcel API '.$err);
+        }
+        else
+        {
+            return $result;
+        }
     }
 
     private function firstAuthAppToken() {
