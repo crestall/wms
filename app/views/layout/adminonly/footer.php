@@ -26,6 +26,12 @@
 
                     }
                 },
+                'ebay-api-testing' :{
+                    init: function()
+                    {
+
+                    }
+                },
                 'runsheet-completion-tidy':{
                     init: function(){
                         $('form#runsheet_completion_updater').submit(function(){

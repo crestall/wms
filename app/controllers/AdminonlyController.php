@@ -30,6 +30,15 @@ class AdminOnlyController extends Controller
         ]);
     }
 
+    public function ebayAPITesting()
+    {
+        Config::setJsConfig('curPage', "ebay-api-testing");
+        Config::set('curPage', "ebay-api-testing");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/ebayApiTesting.php', [
+            'page_title'    =>  "eBay API Testing"
+        ]);
+    }
+    /*
     public function updateProductionDatabaseTables()
     {
         Config::setJsConfig('curPage', "production-database-tables-update");
@@ -45,7 +54,7 @@ class AdminOnlyController extends Controller
             'production_jobs'       => $production_jobs
         ]);
     }
-
+    */
     public function reeceDataTidy()
     {
         Config::setJsConfig('curPage', "reece-data-tidy");
