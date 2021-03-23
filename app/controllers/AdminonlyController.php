@@ -34,8 +34,10 @@ class AdminOnlyController extends Controller
     {
         Config::setJsConfig('curPage', "ebay-api-testing");
         Config::set('curPage', "ebay-api-testing");
+        $orders = $this->ebayapi->getCurrentOrders();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/ebayApiTesting.php', [
-            'page_title'    =>  "eBay API Testing"
+            'page_title'    =>  "eBay API Testing",
+            'orders'        => $orders
         ]);
     }
     /*
