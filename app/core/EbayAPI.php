@@ -103,10 +103,10 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-        $codeAuth = base64_encode($this->clientID.':'.$this->certID);
+        $codeAuth = base64_encode($this->authCode);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/x-www-form-urlencoded',
-            'Authorization: Bearer '.$this->authCode
+            'Authorization: Bearer '.$codeAuth
         ));
         $result = curl_exec($ch);
         $err = curl_error($ch);
@@ -171,6 +171,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
             {
                 $this->authToken = $json["access_token"];
                 $this->refreshToken = $json["refresh_token"];
+                $this->authToken = $access_tokens["access_token"];
                 $db->updateDatabaseFields($this->table, array(
                     'access_token'      => $json['access_token'],
                     'access_expires'    => time() + $json['expires_in'],
