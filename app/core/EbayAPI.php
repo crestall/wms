@@ -84,7 +84,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
 //Publicly Callable Functions
     public function getCurrentOrders()
     {
-        $s_action = "sell/v1/order?filter=orderfulfillmentstatus:%%7BNOT_STARTED%7CIN_PROGRESS%7D";
+        $s_action = "sell/v1/order?filter=orderfulfillmentstatus:%7BNOT_STARTED%7CIN_PROGRESS%7D";
         $response = $this->sendGetRequest($s_action);
         return json_decode($response, true);
     }
