@@ -28,8 +28,8 @@
     protected $scope;
     protected $authCode;
 
-    private $isLive = true;
-    private $table = "ebay_access_tokens";
+    private $isLive = false;
+    private $table = "";
 
     public function __construct(Controller $controller)
     {
@@ -38,7 +38,8 @@
         $access_tokens = $db->queryByID($this->table, 1) ;
         if($this->isLive)
         {
-            $this->devID    = 'beaed030-6fea-4467-aafb-2b415518d84c'; // these prod keys are different from sandbox keys
+            $this->table    = "ebay_access_tokens";
+            $this->devID    = 'beaed030-6fea-4467-aafb-2b415518d84c';
             $this->appID    = 'MarkSoll-PBAFSG-PRD-5418204ca-f642538e';
             $this->certID   = 'PRD-418204ca8801-818f-4441-94d4-d28c';
             $this->clientID = 'MarkSoll-PBAFSG-PRD-5418204ca-f642538e';
@@ -50,6 +51,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
         }
         else
         {
+            $this->table    = "ebay_access_tokens_sb";
             $this->devID    = 'beaed030-6fea-4467-aafb-2b415518d84c';
             $this->appID    = 'MarkSoll-PBAFSG-SBX-a4198d68c-6ede1508';
             $this->certID   = 'SBX-4198d68c17e5-d20b-413a-9a6a-b93e';
@@ -122,6 +124,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
         }
     }
 
+//Authorisation Functions
     private function firstAuthAppToken() {
         $db = Database::openConnection();
 
@@ -217,7 +220,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
                 ), 1);
             }
         }
-        echo "<pre>",print_r($json),"</pre>";
-        die("did a refresh");
+        //echo "<pre>",print_r($json),"</pre>";
+        //die("did a refresh");
     }
 }//end class
