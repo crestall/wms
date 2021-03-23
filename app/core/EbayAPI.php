@@ -62,7 +62,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
         }
         if(empty($access_tokens['code']))
         {
-            $this->firstAuthAppToken();
+            die('An eBay AuthCode is Required');
         }
         else
         {
@@ -77,8 +77,8 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
                 $this->refreshToken();
             }
         }
-        die( "current: ".time()." expires: ".$access_tokens['access_expires']);
-        $this->paypalEmailAddress= 'PAYPAL_EMAIL_ADDRESS';
+        //die( "current: ".time()." expires: ".$access_tokens['access_expires']);
+        //$this->paypalEmailAddress= 'PAYPAL_EMAIL_ADDRESS';
 
     }
 
