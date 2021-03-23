@@ -106,7 +106,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
         $codeAuth = base64_encode($this->clientID.':'.$this->certID);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/x-www-form-urlencoded',
-            'Authorization: Bearer '.$codeAuth
+            'Authorization: Bearer '.$this->authCode
         ));
         $result = curl_exec($ch);
         $err = curl_error($ch);
