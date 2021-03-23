@@ -99,11 +99,9 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
         $url = $this->serverUrl."/".$s_action;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_ENCODING, "");
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_GET, 1);
         $codeAuth = base64_encode($this->clientID.':'.$this->certID);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/x-www-form-urlencoded',
@@ -111,10 +109,11 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
         ));
         $result = curl_exec($ch);
         $err = curl_error($ch);
+        $info = curl_getinfo($ch);
         curl_close($ch);
         if ($err)
         {
-            die('Could not write to Eparcel API '.$err);
+            die('Could not write to eBay API '.$err);
         }
         else
         {
