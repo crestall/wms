@@ -97,6 +97,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
     protected function sendGetRequest($s_action)
     {
         $url = $this->serverUrl."/".$s_action;
+        die($url);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
