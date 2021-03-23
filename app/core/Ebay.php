@@ -162,12 +162,21 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
         curl_close($ch);
         if($json != null)
         {
-            $this->authToken = $json["access_token"];
-            $db = Database::openConnection();
-            $db->updateDatabaseFields("ebay_access_tokens", array(
-                'access_token'      => $json['access_token'],
-                'access_expires'    => time() + $json['expires_in']
-            ), 1);
+            if(isset($json['error']))
+            {
+                echo "<pre>",print_r($json),"</pre>";
+                die("ebay token error");
+            }
+            else
+            {
+                $this->authToken = $json["access_token"];
+                $db = Database::openConnection();
+                $db->updateDatabaseFields("ebay_access_tokens", array(
+                    'access_token'      => $json['access_token'],
+                    'access_expires'    => time() + $json['expires_in']
+                ), 1);
+            }
+
         }
         echo "<pre>",print_r($json),"</pre>";
         die("did a refresh");
