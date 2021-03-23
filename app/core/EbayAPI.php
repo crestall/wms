@@ -9,7 +9,7 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
- class Ebay
+ class EbayAPI
  {
     public $userToken;
     public $controller;

@@ -93,7 +93,7 @@ class Controller {
         $this->orderfulfiller      =  new OrderFulfiller($this);
         $this->emailordersparser   =  new EmailOrdersParser($this);
         $this->formvalidator       =  new FormValidator($this);
-        $this->ebay                =  new Ebay($this);
+        $this->ebayapi             =  new EbayAPI($this);
 
     }
 
