@@ -147,6 +147,53 @@ class Item extends Model{
         }
     }
 
+    public function getClientInventoryLocationCounts($client_id, $active = 1)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, IFNULL(b.allocated,0) AS allocated,
+                a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize, a.image,
+                GROUP_CONCAT(
+                    IFNULL(a.location_id,0),',',
+                    IFNULL(a.qty,''),',',
+                    IFNULL(a.qc_count,''),',',
+                    IFNULL(b.allocated,''),','
+                    SEPARATOR '|'
+                ) AS locations,
+            FROM
+                (
+                    SELECT
+                        l.id AS location_id, il.qty, il.qc_count, i.client_product_id, i.id AS item_id,
+                        i.name, i.sku, i.barcode, l.location, i.pack_item, i.width, i.depth, i.height, i.weight, i.low_stock_warning, l.oversize, i.image
+                    FROM
+                        items i LEFT JOIN
+                        items_locations il ON i.id = il.item_id LEFT JOIN
+                        locations l ON il.location_id = l.id
+                    WHERE
+                        i.client_id = $client_id AND i.active = $active
+                ) a
+                LEFT JOIN
+                (
+                    SELECT
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                    FROM
+                        orders_items oi JOIN
+                        orders o ON oi.order_id = o.id JOIN
+                        items i ON oi.item_id = i.id
+                    WHERE
+                        o.status_id != 4
+                    GROUP BY
+                    oi.location_id, oi.item_id
+                ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
+            GROUP BY
+                a.location_id
+            ORDER BY
+                a.name
+        ";
+        return $db->queryData($q);
+    }
+
     public function getClientInventoryArray($client_id, $active = 1)
     {
         Logger::logDataTablesCalls("datatables_test", "Starting getting the items at ".date("H:i:s"));
