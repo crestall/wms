@@ -203,6 +203,8 @@ class Productionfinisher extends Model{
             $pcontact->removeFinisherContacts($data['finisher_id']);
             foreach($data['contacts'] as $contact)
             {
+                if(isset($contact['role']))
+                    $contact['role'] = str_replace("|", "/", $contact['role']);
                 $contact['finisher_id'] = $data['finisher_id'];
                 $pcontact->addContact($contact);
             }
