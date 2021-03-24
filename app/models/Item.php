@@ -187,7 +187,7 @@ class Item extends Model{
                     oi.location_id, oi.item_id
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
             GROUP BY
-                a.item_id, a.location_id
+                a.item_id
             ORDER BY
                 a.name
         ";
