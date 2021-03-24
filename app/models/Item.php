@@ -152,6 +152,8 @@ class Item extends Model{
         $db = Database::openConnection();
         $q = "
             SELECT
+                IFNULL( SUM(a.qty),0) as on_hand,
+                IFNULL( SUM(a.qc_count), 0) AS qc_count,
                 a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.location_id, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize, a.image,
                 GROUP_CONCAT(
                     IFNULL(a.location_id,0),',',
