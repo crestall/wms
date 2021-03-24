@@ -152,7 +152,7 @@ class Item extends Model{
         $db = Database::openConnection();
         $q = "
             SELECT
-                a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize, a.image,
+                a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.location_id, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize, a.image,
                 GROUP_CONCAT(
                     IFNULL(a.location_id,0),',',
                     IFNULL(a.location,''),',',
