@@ -28,7 +28,7 @@
     protected $scope;
     protected $authCode;
 
-    private $isLive = true;
+    private $isLive = false;
     private $table = "";
 
     public function __construct(Controller $controller)
