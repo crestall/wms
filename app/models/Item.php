@@ -149,7 +149,9 @@ class Item extends Model{
 
     public function getClientInventoryArray($client_id, $active = 1)
     {
+        Logger::logDataTablesCalls("datatables_test", "Starting getting the items at ".date("H:i:s"));
         $items = $this->getClientInventory($client_id, $active);
+        Logger::logDataTablesCalls("datatables_test", "Got the items at ".date("H:i:s"));
         $rows = array();
         $c = 1;
         Logger::logDataTablesCalls("datatables_test", "Starting foreach items at ".date("H:i:s"));
