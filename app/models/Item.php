@@ -152,10 +152,10 @@ class Item extends Model{
         $db = Database::openConnection();
         $q = "
             SELECT
-                a.location_id, IFNULL(a.qty,0) as qty, IFNULL(a.qc_count, 0) AS qc_count, IFNULL(b.allocated,0) AS allocated,
                 a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.location, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize, a.image,
                 GROUP_CONCAT(
                     IFNULL(a.location_id,0),',',
+                    IFNULL(a.location,''),',',
                     IFNULL(a.qty,''),',',
                     IFNULL(a.qc_count,''),',',
                     IFNULL(b.allocated,''),','
@@ -187,7 +187,7 @@ class Item extends Model{
                     oi.location_id, oi.item_id
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
             GROUP BY
-                a.location_id, a.item_id
+                a.item_id, a.location_id
             ORDER BY
                 a.name
         ";
