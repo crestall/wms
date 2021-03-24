@@ -160,7 +160,7 @@ class Item extends Model{
                     IFNULL(a.qc_count,''),',',
                     IFNULL(b.allocated,''),','
                     SEPARATOR '|'
-                ) AS locations,
+                ) AS locations
             FROM
                 (
                     SELECT
@@ -187,7 +187,7 @@ class Item extends Model{
                     oi.location_id, oi.item_id
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
             GROUP BY
-                a.location_id
+                a.location_id, a.item_id
             ORDER BY
                 a.name
         ";
