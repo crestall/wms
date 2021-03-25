@@ -24,6 +24,10 @@ td.right-align{
     text-align:right;
 }
 
+td.po_number{
+    color: #999;
+}
+
 div.dl_body {
     position:absolute;
     left: 55mm;
