@@ -13,6 +13,7 @@ class AdminOnlyController extends Controller
     {
         parent::beforeAction();
     }
+    
 
     public function index()
     {

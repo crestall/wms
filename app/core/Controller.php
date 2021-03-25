@@ -94,7 +94,6 @@ class Controller {
         $this->emailordersparser   =  new EmailOrdersParser($this);
         $this->formvalidator       =  new FormValidator($this);
         $this->ebayapi             =  new EbayAPI($this);
-
     }
 
     /**

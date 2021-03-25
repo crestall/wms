@@ -25,7 +25,7 @@
                     {
 
                     }
-                },
+                }, 
                 'ebay-api-testing' :{
                     init: function()
                     {
