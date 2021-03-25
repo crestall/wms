@@ -41,6 +41,10 @@ div.dl_body {
     border: thin dashed #fff;
 }
 
+table.cprc{
+    margin-left: 90mm;
+}
+
 table.address_details{
     margin-left:50mm;
     margin-top: 22mm;
