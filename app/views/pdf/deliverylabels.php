@@ -18,9 +18,9 @@ elseif(!empty($dl_details['po_number']))
 {
     $po_string = "
             <tr>
-                <td class='w30'>Purchase Order</td>
+                <td class='w30'>&nbsp;</td>
                 <td class='spacer'>&nbsp;</td>
-                <td>{$dl_details['po_number']}</td>
+                <td class='po_number'>PO: {$dl_details['po_number']}</td>
             </tr>
     ";
 }
@@ -65,7 +65,7 @@ $tb = 1;
             <tr>
                 <td class="right-align">Box <strong><?php echo $tb;?></strong> of <strong><?php echo $bc;?></strong></td>
                 <?php if(!empty($dl_details['per_box'])):?>
-                    <td class="right-align"><strong>( <?php if($tb < $bc) echo $dl_details['per_box']; else echo $lb;?></strong> items in box )</td>
+                    <td class="right-align">( <strong><?php if($tb < $bc) echo $dl_details['per_box']; else echo $lb;?></strong> items in box )</td>
                 <?php endif;?>
             </tr>
 
