@@ -36,13 +36,11 @@ class DataTablesSS{
     * Constructor
     *
     * @param Controller $controller
-    * @param array      $config user-provided config
     */
-    public function __construct(Controller $controller, array $config = [])
+    public function __construct(Controller $controller)
     {
         $this->controller = $controller;
         $this->request    = $controller->request;
-        $this->config     = array_merge($this->config, $config);
     }
 }
 ?>
