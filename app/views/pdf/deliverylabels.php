@@ -50,7 +50,7 @@ $tb = 1;
             </table>
             <table class="cprc_bc">
                 <tr>
-                    <td class="right-align">Box <?php echo $tb;?> of <?php echo $bc;?></td>
+                    <td>Box <?php echo $tb;?> of <?php echo $bc;?></td>
                 </tr>
             </table>
         <?php else:?>
