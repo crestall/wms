@@ -34,7 +34,6 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
-        $db = Database::openConnection();
         if($this->isLive)
         {
             $this->table    = "ebay_access_tokens";
@@ -61,27 +60,6 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
             $this->scope    = '
 https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.order.readonly https://api.ebay.com/oauth/api_scope/buy.guest.order https://api.ebay.com/oauth/api_scope/sell.marketing.readonly https://api.ebay.com/oauth/api_scope/sell.marketing https://api.ebay.com/oauth/api_scope/sell.inventory.readonly https://api.ebay.com/oauth/api_scope/sell.inventory https://api.ebay.com/oauth/api_scope/sell.account.readonly https://api.ebay.com/oauth/api_scope/sell.account https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly https://api.ebay.com/oauth/api_scope/sell.fulfillment https://api.ebay.com/oauth/api_scope/sell.analytics.readonly https://api.ebay.com/oauth/api_scope/sell.marketplace.insights.readonly https://api.ebay.com/oauth/api_scope/commerce.catalog.readonly https://api.ebay.com/oauth/api_scope/buy.shopping.cart https://api.ebay.com/oauth/api_scope/buy.offer.auction https://api.ebay.com/oauth/api_scope/commerce.identity.readonly https://api.ebay.com/oauth/api_scope/commerce.identity.email.readonly https://api.ebay.com/oauth/api_scope/commerce.identity.phone.readonly https://api.ebay.com/oauth/api_scope/commerce.identity.address.readonly https://api.ebay.com/oauth/api_scope/commerce.identity.name.readonly https://api.ebay.com/oauth/api_scope/commerce.identity.status.readonly https://api.ebay.com/oauth/api_scope/sell.finances https://api.ebay.com/oauth/api_scope/sell.item.draft https://api.ebay.com/oauth/api_scope/sell.payment.dispute https://api.ebay.com/oauth/api_scope/sell.item https://api.ebay.com/oauth/api_scope/sell.reputation https://api.ebay.com/oauth/api_scope/sell.reputation.readonly';
         }
-        $access_tokens = $db->queryByID($this->table, 1) ;
-        if(empty($access_tokens['code']))
-        {
-            die('An eBay AuthCode is Required');
-        }
-        else
-        {
-            $this->authCode = $access_tokens['code'];
-            $this->authToken = $access_tokens["access_token"];
-            $this->refreshToken = $access_tokens['refresh_token'];
-            if( time() >= $access_tokens['refresh_expires'] )
-            {
-                $this->authorizationToken();
-            }
-            elseif( time() >= $access_tokens['access_expires'] )
-            {
-                $this->refreshToken();
-            }
-        }
-        //die( "current: ".time()." expires: ".$access_tokens['access_expires']);
-        //$this->paypalEmailAddress= 'PAYPAL_EMAIL_ADDRESS';
     }
 
 //Publicly Callable Functions
@@ -125,6 +103,32 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
     }
 
 //Authorisation Functions
+    public function init()
+    {
+        $db = Database::openConnection();
+        $access_tokens = $db->queryByID($this->table, 1) ;
+        if(empty($access_tokens['code']))
+        {
+            die('An eBay AuthCode is Required');
+        }
+        else
+        {
+            $this->authCode = $access_tokens['code'];
+            $this->authToken = $access_tokens["access_token"];
+            $this->refreshToken = $access_tokens['refresh_token'];
+            if( time() >= $access_tokens['refresh_expires'] )
+            {
+                $this->authorizationToken();
+            }
+            elseif( time() >= $access_tokens['access_expires'] )
+            {
+                $this->refreshToken();
+            }
+        }
+        //die( "current: ".time()." expires: ".$access_tokens['access_expires']);
+        //$this->paypalEmailAddress= 'PAYPAL_EMAIL_ADDRESS';
+    }
+
     private function firstAuthAppToken() {
         $db = Database::openConnection();
 
