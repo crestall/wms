@@ -42,7 +42,8 @@ div.dl_body {
 }
 
 table.cprc{
-    margin-left: 90mm;
+    margin-left: 40mm;
+    font-weight: bold;
 }
 
 table.address_details{
