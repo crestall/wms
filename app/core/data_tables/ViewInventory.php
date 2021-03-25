@@ -24,7 +24,8 @@
             array( 'db' => 'allocated', 'dt'=> 5),
             array( 'db' => 'qc_count', 'dt'=> 6),
             array( 'db' => 'available', 'dt'=> 7),
-            array( 'db' => 'locations', 'dt'=> 8)
+            array( 'db' => 'locations', 'dt'=> 8),
+            array( 'db' => '', 'dt' => 9)
         );
     }
  }
