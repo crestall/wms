@@ -58,7 +58,12 @@ $address_details_upper = "
                         <td>".$address_string."</td>
                     </tr>
                     ".$attention;
-$address_details_upper .= ($sender_details['send_job_no'] == 1)? $job_no : $po_no;
+if($sender_details['send_job_no'] == 1)
+{
+    $address_details_upper .= $job_no;
+    if(!empty($dd_details['po_number']))
+        $address_details_upper .= $po_no;
+}
 $address_details_upper .= "
                 </table>
             </td>
@@ -86,6 +91,10 @@ $address_details_lower = "
                     </tr>
                     $attention
                     $job_no
+";
+if(!empty($dd_details['po_number']))
+        $address_details_lower .= $po_no;
+$address_details_lower .= "
                 </table>
             </td>
             <td style='width:".$date_cell_width."' class='right-align'>
@@ -112,9 +121,8 @@ if($sender_details['send_job_no'] == 1)
     $delivery_details_upper .= "
       <td class='job_no'>
         Job Number:<br>
-        ".$dd_details['job_number']."
-      </td>
-    ";
+        ".$dd_details['job_number']."</td>"
+    ;
 }
 else
 {
