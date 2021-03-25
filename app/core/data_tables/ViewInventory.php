@@ -5,7 +5,7 @@
  *
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
- class ViewInventry extends DataTablesSS
+ class ViewInventory extends DataTablesSS
  {
     private $return_array       = array();
     private $table              = "items_locations";

@@ -160,6 +160,13 @@ class Controller {
         ]);
     }
 
+    public function loadDataTablesClasses()
+    {
+        $this->loadDataTablesInstances([
+            'ViewInventory'
+        ]);
+    }
+
     /**
      * Load the eParcel api location classes
      *
@@ -203,6 +210,22 @@ class Controller {
         foreach($locations as $location)
         {
             $class = $location . "FTP";
+            $this->{$class} = new $class($this);
+            $this->{$class}->init();
+        }
+    }
+
+    /**
+     * Load any DataTables ServerSide instance classes
+     *
+     * @param array $locations
+     */
+    public function loadDataTablesInstances(array $instances)
+    {
+        $this->datatablesss = new DataTablesSS($this);
+        foreach($instances as $instance)
+        {
+            $class = $instance;
             $this->{$class} = new $class($this);
             $this->{$class}->init();
         }
