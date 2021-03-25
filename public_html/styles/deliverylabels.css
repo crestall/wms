@@ -44,6 +44,20 @@ div.dl_body {
 table.cprc{
     margin-left: 40mm;
     font-weight: bold;
+    font-size: 18px;
+}
+
+table.cprc_bc{
+    margin-top: 30mm;
+    width: 150mm;
+}
+
+table.cprc td{
+    height: 15mm;
+}
+
+table.cprc td.cp_po_number{
+    font-size: 30px;
 }
 
 table.address_details{
