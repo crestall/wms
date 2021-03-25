@@ -126,7 +126,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/buy.or
             }
         }
         //die( "current: ".time()." expires: ".$access_tokens['access_expires']);
-        //$this->paypalEmailAddress= 'PAYPAL_EMAIL_ADDRESS';
+        $this->paypalEmailAddress= 'PAYPAL_EMAIL_ADDRESS';
     }
 
     private function firstAuthAppToken() {
