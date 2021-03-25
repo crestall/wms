@@ -8,10 +8,21 @@ $address_string .= "<br>".$dl_details['suburb']." ".$dl_details['state']." ".$dl
 $bc = (!empty($dl_details['box_count']))? $dl_details['box_count'] : 1;
 $job_number = $dl_details['job_number'];
 $job_number_label = "Job Number:";
+$po_string = "";
 if($sender_details['send_job_no'] != 1)
 {
     $job_number = $dl_details['po_number'];
     $job_number_label = "Order Number:";
+}
+elseif(!empty($dl_details['po_number']))
+{
+    $po_string = "
+            <tr>
+                <td class='w30'>Purchase Order</td>
+                <td class='spacer'>&nbsp;</td>
+                <td>{$dl_details['po_number']}</td>
+            </tr>
+    ";
 }
 $lb = 0;
 if(!empty($dl_details['per_box']))
@@ -43,6 +54,7 @@ $tb = 1;
                 <td class="spacer">&nbsp;</td>
                 <td><?php echo $job_number;?></td>
             </tr>
+            <?php echo $po_string;?>
             <tr>
                 <td class="w30"></td>
                 <td class="spacer">&nbsp;</td>
