@@ -733,6 +733,10 @@ $admin = array(
         'update-production-database-tables'   => array(
             'display'   => true,
             'icon'      => "<i class='fas fa-database fa-3x'></i>"
+        ),
+        'ebay-api-testing'   => array(
+            'display'   => true,
+            'icon'      => "<i class='fad fa-server fa-3x'></i>"
         )
     )
 );

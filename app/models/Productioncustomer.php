@@ -108,6 +108,8 @@ class Productioncustomer extends Model{
             foreach($data['contacts'] as $contact)
             {
                 $contact['customer_id'] = $id;
+                if(isset($contact['role']))
+                    $contact['role'] = str_replace("|", "/", $contact['role']);
                 $pcontact = new Productioncontact();
                 $pcontact->addContact($contact);
             }
@@ -148,6 +150,8 @@ class Productioncustomer extends Model{
             foreach($data['contacts'] as $contact)
             {
                 $contact['customer_id'] = $data['customer_id'];
+                if(isset($contact['role']))
+                    $contact['role'] = str_replace("|", "/", $contact['role']);
                 $pcontact->addContact($contact);
             }
         }

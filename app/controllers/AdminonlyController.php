@@ -14,6 +14,7 @@ class AdminOnlyController extends Controller
         parent::beforeAction();
     }
 
+
     public function index()
     {
         //set the page name for menu display
@@ -25,11 +26,25 @@ class AdminOnlyController extends Controller
     {
         Config::setJsConfig('curPage', "data-tables-testing");
         Config::set('curPage', "data-tables-testing");
+        $products = $this->item->getClientInventoryLocationCounts(86, 1);
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/dataTablesTesting.php', [
-            'page_title'    =>  "Data Tables Testing"
+            'page_title'    =>  "Data Tables Testing",
+            'products'      => $products
         ]);
     }
 
+    public function ebayAPITesting()
+    {
+        Config::setJsConfig('curPage', "ebay-api-testing");
+        Config::set('curPage', "ebay-api-testing");
+        $this->ebayapi->init();
+        $orders = $this->ebayapi->getCurrentOrders();
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/ebayApiTesting.php', [
+            'page_title'    =>  "eBay API Testing",
+            'orders'        => $orders
+        ]);
+    }
+    /*
     public function updateProductionDatabaseTables()
     {
         Config::setJsConfig('curPage', "production-database-tables-update");
@@ -45,7 +60,8 @@ class AdminOnlyController extends Controller
             'production_jobs'       => $production_jobs
         ]);
     }
-
+    */
+    
     public function reeceDataTidy()
     {
         Config::setJsConfig('curPage', "reece-data-tidy");
