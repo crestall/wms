@@ -64,12 +64,11 @@ $tb = 1;
         <table class="box_details">
             <tr>
                 <td class="right-align">Box <strong><?php echo $tb;?></strong> of <strong><?php echo $bc;?></strong></td>
+                <?php if(!empty($dl_details['per_box'])):?>
+                    <td class="right-align"><strong>( <?php if($tb < $bc) echo $dl_details['per_box']; else echo $lb;?></strong> items in box )</td>
+                <?php endif;?>
             </tr>
-            <?php if(!empty($dl_details['per_box'])):?>
-                <tr>
-                    <td class="right-align"><strong><?php if($tb < $bc) echo $dl_details['per_box']; else echo $lb;?></strong> items in box</td>
-                </tr>
-            <?php endif;?>
+
         </table>
     </div>
     <?php if($tb < $bc):?>
