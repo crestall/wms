@@ -338,7 +338,17 @@ class Productionjob extends Model{
             $jd = $db->queryByID('production_jobs', $job_id);
             Email::notifyStatusChange($jd['job_id'], ucwords($sd['name']), Session::getUsersName());
         }
-
+        if($status_id == 8 || $status_id == 26 || $status_id == 22 || $status_id == 24)
+        {
+            //notify FSG contact of status change
+            $sd = $db->queryByID('job_status', $status_id);
+            $jd = $db->queryByID('production_jobs', $job_id);
+            if( $jd['salesrep_id'] > 0 )
+            {
+                $pcd = $db->queryById('sales_reps', $jd['salesrep_id']);
+                Email::notifyProdContactOfStatusChange($jd['job_id'], ucwords($sd['name']), $pcd['email'], ucwords($pcd['name']));
+            }
+        }
         return true;
     }
 
