@@ -346,7 +346,8 @@ class Productionjob extends Model{
             if( $jd['salesrep_id'] > 0 )
             {
                 $pcd = $db->queryById('sales_reps', $jd['salesrep_id']);
-                Email::notifyProdContactOfStatusChange($jd['job_id'], ucwords($sd['name']), $pcd['email'], ucwords($pcd['name']));
+                $cd = $db->queryById('production_customers', $jd['customer_id']);
+                Email::notifyProdContactOfStatusChange($jd['job_id'],ucwords($cd['name']), ucwords($sd['name']), $pcd['email'], ucwords($pcd['name']));
             }
         }
         return true;
