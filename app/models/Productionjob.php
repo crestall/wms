@@ -327,6 +327,9 @@ class Productionjob extends Model{
             'status_change_by'      => Session::getUserId()
         );
         $db->updateDatabaseFields($this->table, $new_vals, $job_id);
+        $sd = $db->queryByID('job_status', $status_id);
+        $jd = $db->queryByID('production_jobs', $job_id);
+        Email::notifyStatusChange($jd['job_id'], ucwords($sd['name']), Session::getUsersName());
         return true;
     }
 
