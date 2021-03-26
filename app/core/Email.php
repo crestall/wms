@@ -1038,7 +1038,7 @@
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pc_status_change.html");
 
             $replace_array = array("{JOB_NO}", "{NEW_STATUS}", "{CHANGE_TIME}");
-            $replace_with_array = array($job_no, $new_status, $changer_name, date("F j, Y, g:i a"));
+            $replace_with_array = array($job_no, $new_status, date("F j, Y, g:i a"));
     		$body = str_replace($replace_array, $replace_with_array, $body);
             $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "email_logo.png");
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
