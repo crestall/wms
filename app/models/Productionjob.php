@@ -263,13 +263,17 @@ class Productionjob extends Model{
     public function updateJobDetails($data)
     {
         //echo "<pre>",print_r($data),"</pre>"; die();
+        $current_statusid = $this->getJobStatusId($data['id']);
+        if($current_statusid != $data['status_id'])
+        {
+            $this->updateJobStatus($data['id'], $data['status_id']);
+        }
         $db = Database::openConnection();
         $vals = array(
             'job_id'                => $data['job_id'],
             'description'           => $data['description'],
             'created_date'          => $data['date_entered_value'],
             'due_date'              => 0,
-            'status_id'             => $data['status_id'],
             'priority'              => 0,
             'notes'                 => null,
             'delivery_notes'        => null,
@@ -327,9 +331,14 @@ class Productionjob extends Model{
             'status_change_by'      => Session::getUserId()
         );
         $db->updateDatabaseFields($this->table, $new_vals, $job_id);
-        $sd = $db->queryByID('job_status', $status_id);
-        $jd = $db->queryByID('production_jobs', $job_id);
-        Email::notifyStatusChange($jd['job_id'], ucwords($sd['name']), Session::getUsersName());
+        if( !(Session::getUserId() == 176 || Session::getUserId() == 178) )
+        {
+            //If Andrea or Megan didn't do the change, notify them of it
+            $sd = $db->queryByID('job_status', $status_id);
+            $jd = $db->queryByID('production_jobs', $job_id);
+            Email::notifyStatusChange($jd['job_id'], ucwords($sd['name']), Session::getUsersName());
+        }
+
         return true;
     }
 
@@ -468,6 +477,12 @@ class Productionjob extends Model{
         //print_r($array);
         //die($query);
         return $jobs = $db->queryData($query, $array);
+    }
+
+    public function getJobStatusId($job_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $job_id), 'status_id');
     }
 
     private function getJobQuery()
