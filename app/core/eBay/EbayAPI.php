@@ -67,7 +67,10 @@
     }
 
 //Authorisation Functions
-    private function firstAuthAppToken() {
+    /* This one doesn't work
+
+
+    protected function firstAuthAppToken() {
         $db = Database::openConnection();
 
         $url = $this->authURL."/oauth2/authorize?client_id=".$this->clientID."&response_type=code&redirect_uri=".$this->ruName."&scope=".$this->scope;
@@ -85,7 +88,10 @@
         ), 1);
     }
 
-    public function authorizationToken()
+    
+    */
+
+    protected function authorizationToken()
     {
         $db = Database::openConnection();
         $link = $this->serverUrl."/identity/v1/oauth2/token";
@@ -126,7 +132,7 @@
         }
     }
 
-    public function refreshToken()
+    protected function refreshToken()
     {
         $link = $this->serverUrl."/identity/v1/oauth2/token";
         $codeAuth = base64_encode($this->clientID.':'.$this->certID);
