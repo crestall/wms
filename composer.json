@@ -30,6 +30,8 @@
                 "app/core/financial_apis/MYOB_accounts/",
                 "app/core/FTP/",
                 "app/core/FTP/FTP_clients/",
+                "app/core/eBay/",
+                "app/core/eBay_clients/",
                 "app/models/",
                 "app/packaging/",
                 "app/utility/"
