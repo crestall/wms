@@ -83,7 +83,7 @@
                             <?php echo $job['notes'];?>
                         </div>
                     <?php endif;?>
-                    <p class="text-right"><button class="btn btn-sm btn-outline-fsg btn-bottom delivery_note" data-jobid="<?php echo $job['id'];?>">Add Delivery Note</button></p>
+                    <p class="text-right"><button class="btn btn-sm btn-outline-fsg production_note" data-jobid="<?php echo $job['id'];?>">Add Delivery Note</button></p>
                 </td>
                 <td data-label="Delivery">
                     <?php if(!empty($job['delivery_notes'])):?>
