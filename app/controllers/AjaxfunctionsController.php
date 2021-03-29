@@ -79,6 +79,16 @@ class ajaxfunctionsController extends Controller
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Finisher(s) Have Been Deleted</h2>");
     }
 
+    public function deleteCustomers()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data['customerids'] as $customer_id)
+        {
+            $this->productioncustomer->deactivateCustomer($customer_id);
+        }
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Customer(s) Have Been Deleted</h2>");
+    }
+
     public function updateJobsPriority()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
