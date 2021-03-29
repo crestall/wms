@@ -20,7 +20,7 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
             <?php endif;?>
         </div>
         <div class="border border-secondary p-3 m-3 rounded bg-light">
-            <h3>Filter These Jobs</h3>
+            <h3>Filter <?php echo $filter;?> Jobs</h3>
             <div class="form-group row">
                 <label class="col-md-2 mb-3">Filter By Customer</label>
                 <div class="col-md-4 mb-3">
