@@ -94,7 +94,7 @@
                                     <?php endif;?>
                                     <p><a class="btn btn-outline-fsg" href="/customers/view-customer/customer=<?php echo $c['id'];?>" >View/Print Details</a></p>
                                 </td>
-                                <?php if($role == "production admin" || $role == "production sales admin"):?>
+                                <?php if($role == "production admin" || $role == "production sales admin" || $role == "production sales"):?>
                                     <td data-label="Select" class="chkbox">
                                         <div class="checkbox checkbox-default">
                                             <input type="checkbox" class="select styled" data-customerid='<?php echo $c['id'];?>' name="select_<?php echo $c['id'];?>" id="select_<?php echo $c['id'];?>" />
