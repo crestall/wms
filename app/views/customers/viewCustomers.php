@@ -37,7 +37,7 @@
                                 <th>Contact Details</th>
                                 <th>Address Details</th>
                                 <th></th>
-                                <?php if($role == "production admin" || $role == "production sales admin"):?>
+                                <?php if($role == "production admin" || $role == "production sales admin" || $role == "production sales"):?>
                                     <th nowrap>
                                         Select
                                         <div class="checkbox checkbox-default">
