@@ -20,6 +20,20 @@ class Productioncustomer extends Model{
     public $table = "production_customers";
     public $contacts_table = "production_contacts";
 
+    public function deactivateCustomer($customer_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'active', 0, $customer_id);
+        return true;
+    }
+
+    public function reactivateCustomer($customer_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'active', 1, $customer_id);
+        return true;
+    }
+
     public function getSelectCustomers($selected = false)
     {
         $db = Database::openConnection();
