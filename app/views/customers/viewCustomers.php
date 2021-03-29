@@ -13,6 +13,11 @@
                 </div>
             </div>
             <div class="row" id="table_holder" style="display:none">
+                <?php if($role == "production admin" || $role == "production sales admin"):?>
+                    <div class="col-12">
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-danger" id="deactivate"><i class="fal fa-times-circle"></i> Delete Selected Customers</button></div>
+                    </div>
+                <?php endif;?>
                 <div class="col-12">
                     <table id="customer_list_table" class="table-striped table-hover" style="width:100%">
                         <thead>
