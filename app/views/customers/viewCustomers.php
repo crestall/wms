@@ -82,8 +82,8 @@
                                 <?php if($role == "production admin" || $role == "production sales admin"):?>
                                     <td data-label="Select" class="chkbox">
                                         <div class="checkbox checkbox-default">
-                                            <input type="checkbox" class="select styled" data-finisherid='<?php echo $s['id'];?>' name="select_<?php echo $s['id'];?>" id="select_<?php echo $s['id'];?>" />
-                                            <label for="select_<?php echo $s['id'];?>"></label>
+                                            <input type="checkbox" class="select styled" data-finisherid='<?php echo $c['id'];?>' name="select_<?php echo $c['id'];?>" id="select_<?php echo $c['id'];?>" />
+                                            <label for="select_<?php echo $c['id'];?>"></label>
                                         </div>
                                     </td>
                                 <?php endif;?>
