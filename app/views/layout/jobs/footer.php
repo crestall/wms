@@ -408,6 +408,14 @@
                         actions.common.jobsTable();
                         actions.common.selectAll();
                         actions.common.doDates();
+
+                        $('button.production_note').click(function(e){
+                            var job_id = $(this).data('jobid');
+                            console.log("will add a note to job id: "+job_id) ;
+                        });
+
+
+
                         $('button.print-sheet').each(function(i,e){
                             $(this).click(function(e){
                                 var runsheet_id = $(this).data('runsheetid');
