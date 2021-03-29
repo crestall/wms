@@ -78,12 +78,12 @@
                 <td data-label="Description">
                     <?php echo $job['description'];?>
                     <?php if(!empty($job['notes'])):?>
-                        <div class="notes notes-info">
+                        <div class="notes notes-info mt-3">
                             <h6>Production Notes:</h6>
                             <?php echo $job['notes'];?>
                         </div>
                     <?php endif;?>
-                    <p class="text-right"><button class="btn btn-sm btn-outline-fsg production_note" data-jobid="<?php echo $job['id'];?>">Add Note For Production</button></p>
+                    <p class="text-right mt-3"><button class="btn btn-sm btn-outline-fsg production_note" data-jobid="<?php echo $job['id'];?>">Add Note For Production</button></p>
                 </td>
                 <td data-label="Delivery">
                     <?php if(!empty($job['delivery_notes'])):?>
@@ -93,7 +93,6 @@
                         </div>
                     <?php endif;?>
                     <p><a class="btn btn-sm btn-block btn-outline-info delivery_docket" href="/jobs/create-delivery-docket/job=<?php echo $job['id'];?>">Create Delivery Docket</a></p>
-
                 </td>
                 <td data-label="Status"
                     <?php if(!empty($job['status_colour'])):?>
