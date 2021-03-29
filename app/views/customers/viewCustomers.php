@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="row" id="table_holder" style="display:none">
-                <?php if($role == "production admin" || $role == "production sales admin"):?>
+                <?php echo $role; if($role == "production admin" || $role == "production sales admin" || $role == "production sales"):?>
                     <div class="col-12">
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-danger" id="deactivate"><i class="fal fa-times-circle"></i> Delete Selected Customers</button></div>
                     </div>
