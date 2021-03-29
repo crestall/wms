@@ -54,6 +54,44 @@
                         dataTable.init($('table#customer_list_table'), {
                             "order": []
                         } );
+                        $('button#deactivate').click(function(e){
+                            if(!$('input.select:checked').length)
+                            {
+                                swal({
+                                    title: "No Customers Selected",
+                                    text: "Please select at least one customer to delete",
+                                    icon: "error"
+                                });
+                            }
+                            else
+                            {
+                                swal({
+                                    title: "Really Delete Customers(s)?",
+                                    text: "This cannot be undone without manually altering database values",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then( function(deactivateFinisher) {
+                                    if(deactivateFinisher)
+                                    {
+                                        var ids = [];
+                                        $('input.select').each(function(i,e){
+                                            if($(this).prop('checked') )
+                                            {
+                                                var customer_id = $(this).data('customerid');
+                                                ids.push(customer_id);
+                                            }
+                                        });
+                                        console.log('ids: '+ids);
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deleting Customers...</h1></div>' });
+                                        var data = {customerids: ids};
+                                        $.post('/ajaxfunctions/delete-customers', data, function(d){
+                                            location.reload();
+                                        });
+                                    }
+                                });
+                            }
+                        });
                     }
                 },
                 'view-customer':{
