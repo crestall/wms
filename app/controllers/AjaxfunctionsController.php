@@ -1166,6 +1166,14 @@ class ajaxfunctionsController extends Controller
         ]);
     }
 
+    public function addProductionJobNoteForm()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_production_job_note.php', [
+            'job_id' =>  $this->request->data['job_id']
+        ]);
+    }
+
     public function addOrderPackageForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
