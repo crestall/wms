@@ -93,7 +93,6 @@ class Controller {
         $this->orderfulfiller      =  new OrderFulfiller($this);
         $this->emailordersparser   =  new EmailOrdersParser($this);
         $this->formvalidator       =  new FormValidator($this);
-        $this->ebayapi             =  new EbayAPI($this);
     }
 
     /**
@@ -111,6 +110,7 @@ class Controller {
         $this->loadCourierClasses();
         $this->loadFinancialClasses();
         $this->loadFTPClasses();
+        $this->loadEBAYClasses();
 
         $this->beforeAction();
 
@@ -160,6 +160,13 @@ class Controller {
         ]);
     }
 
+    public function loadEBAYClasses()
+    {
+        $this->loadEBAYInstances([
+            'PBA'
+        ]);
+    }
+
     /**
      * Load the eParcel api location classes
      *
@@ -203,6 +210,22 @@ class Controller {
         foreach($locations as $location)
         {
             $class = $location . "FTP";
+            $this->{$class} = new $class($this);
+            $this->{$class}->init();
+        }
+    }
+
+    /**
+     * Load any eBay instance classes
+     *
+     * @param array $locations
+     */
+    public function loadEBAYInstances(array $locations)
+    {
+        $this->ebayapi =  new EbayAPI($this);;
+        foreach($locations as $location)
+        {
+            $class = $location . "eBay";
             $this->{$class} = new $class($this);
             $this->{$class}->init();
         }
