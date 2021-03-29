@@ -58,10 +58,11 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
         $collected_orders = json_decode($response, true);
         //return json_decode($response, true);
         $orders = $this->processOrders($collected_orders);
+        return $orders;
     }
 
     private function processOrders($collected_orders)
     {
-
+        return $collected_orders;
     }
  }
