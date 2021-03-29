@@ -92,7 +92,7 @@
                         </div>
                     <?php endif;?>
                     <p><a class="btn btn-sm btn-block btn-outline-info delivery_docket" href="/jobs/create-delivery-docket/job=<?php echo $job['id'];?>">Create Delivery Docket</a></p>
-                    <p><button class="btn btn-sm btn-outline-fsg btn-bottom delivery_note" data-jobid="<?php echo $job['id'];?>">Add Delivery Note</button></p>
+                    <p class="text-right"><button class="btn btn-sm btn-outline-fsg delivery_note" data-jobid="<?php echo $job['id'];?>">Add Delivery Note</button></p>
                 </td>
                 <td data-label="Status"
                     <?php if(!empty($job['status_colour'])):?>
