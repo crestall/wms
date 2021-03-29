@@ -145,7 +145,7 @@ class JobsController extends Controller
             $filter = "Completed";
         elseif($cancelled == 1)
             $filter = "Cancelled";
-        $head = "Viewing $filter Production Jobs"
+        $head = "Viewing $filter Production Jobs";
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
