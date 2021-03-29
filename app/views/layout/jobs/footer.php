@@ -415,7 +415,7 @@
                             $('<div id="note_pop" title="Add Note For Production">').appendTo($('body'));
                             $('#note_pop')
                                 .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
-                                .load('/ajaxfunctions/addPackageForm',{order_ids: job_id, client_id: 87},
+                                .load('/ajaxfunctions/addProductionJobNoteForm',{job_id: job_id},
                                     function(responseText, textStatus, XMLHttpRequest){
                                         if(textStatus == 'error') {
                                             $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
