@@ -569,12 +569,6 @@ td{
     border-right:thin dotted #106ea4;
     border-bottom:solid 1px #106ea4;
     box-sizing: content-box;
-    position: relative;
-}
-
-td button.btn-bottom{
-    position: absolute;
-    bottom: 3px;
 }
 
 table.pickslip td{
