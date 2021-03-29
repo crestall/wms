@@ -455,7 +455,7 @@
                                     },
                                     open: function(){
                                         $('.ui-widget-overlay').bind('click',function(){
-                                            $('#quote_pop').dialog('close');
+                                            $('#note_pop').dialog('close');
                                         });
                                     }
                             });
