@@ -572,6 +572,11 @@ td{
     position: relative;
 }
 
+td button.btn-bottom{
+    position: absolute;
+    bottom: 3px;
+}
+
 table.pickslip td{
     vertical-align:middle;
 }
