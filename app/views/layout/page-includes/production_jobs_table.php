@@ -164,9 +164,7 @@
                     <?php elseif( ($job['due_date'] - $today) <= (24 * 60 * 60)):?>
                         style="background-color: #FF0000; color:#FFF"
                     <?php elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60)):?>
-                        style="background-color: #cc3300; color:#FFF"
-                    <?php elseif( ($job['due_date'] - $today) <= (5 * 24 * 60 * 60)):?>
-                        style="background-color: #e6e600"
+                        style="background-color: #e6e600; color:#FFF"
                     <?php else: ?>
                         style="background-color: #66ff66;"
                     <?php endif;?>
