@@ -55,6 +55,13 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
     {
         $s_action = "sell/fulfillment/v1/order?filter=orderfulfillmentstatus:%7BNOT_STARTED%7CIN_PROGRESS%7D";
         $response = $this->sendGetRequest($s_action);
-        return json_decode($response, true);
+        $collected_orders = json_decode($response, true);
+        //return json_decode($response, true);
+        $orders = $this->processOrders($collected_orders);
+    }
+
+    private function processOrders($collected_orders)
+    {
+
     }
  }

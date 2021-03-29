@@ -26,7 +26,7 @@ class Productioncustomer extends Model{
 
         $check = "";
         $ret_string = "";
-        $q = "SELECT id, name FROM {$this->table} ORDER BY name";
+        $q = "SELECT id, name FROM {$this->table} WHERE active = 1 ORDER BY name";
         $reps = $db->queryData($q);
         foreach($reps as $r)
         {
@@ -46,7 +46,7 @@ class Productioncustomer extends Model{
         $db = Database::openConnection();
 
         $ret_string = "";
-        $q = "SELECT id, name FROM {$this->table} ORDER BY name";
+        $q = "SELECT id, name FROM {$this->table} WHERE active = 1 ORDER BY name";
         $reps = $db->queryData($q);
         foreach($reps as $r)
         {
@@ -62,11 +62,11 @@ class Productioncustomer extends Model{
         return $ret_string;
     }
 
-    public function getAllCustomers()
+    public function getAllCustomers($active = 1)
     {
         $db = Database::openConnection();
         $q = $this->generateQuery();
-        $q .= " GROUP BY c.id ORDER BY c.name";
+        $q .= " WHERE c.active = $active GROUP BY c.id ORDER BY c.name";
         return $db->queryData($q);
     }
 
@@ -167,7 +167,7 @@ class Productioncustomer extends Model{
         $query = $this->generateQuery();
         $query .= "
             WHERE
-                c.name LIKE :term
+                c.name LIKE :term AND c.active = 1
             GROUP BY
                 c.id
         ";
