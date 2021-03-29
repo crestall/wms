@@ -411,7 +411,25 @@
 
                         $('button.production_note').click(function(e){
                             var job_id = $(this).data('jobid');
-                            console.log("will add a note to job id: "+job_id) ;
+                            //console.log("will add a note to job id: "+job_id) ;
+                            $('<div id="note_pop" title="Add Note For Production">').appendTo($('body'));
+                            $('#note_pop')
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addPackageForm',{order_ids: ids, client_id: client_id},
+                                        function(responseText, textStatus, XMLHttpRequest){
+                                        if(textStatus == 'error') {
+                                            $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                        }
+                                        $('form#orders-add-package').submit(function(e){
+                                            if($(this).valid())
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                e.preventDefault();
+                                            }
+                                        });
                         });
 
 
