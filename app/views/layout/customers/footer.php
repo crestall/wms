@@ -10,6 +10,14 @@
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                     },
+                    selectAll: function(){
+                        $('#select_all').click(function(e){
+                            var checked = this.checked;
+                             $('.select').each(function(e){
+                                this.checked =  checked;
+                             })
+                        });
+                    },
                     addContact: function(){
                         $("a.add-contact").click(function(e){
                             e.preventDefault();
@@ -42,6 +50,7 @@
                 },
                 'view-customers':{
                     init: function(){
+                        actions.common.selectAll();
                         dataTable.init($('table#customer_list_table'), {
                             "order": []
                         } );
