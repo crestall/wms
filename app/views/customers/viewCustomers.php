@@ -22,6 +22,15 @@
                                 <th>Contact Details</th>
                                 <th>Address Details</th>
                                 <th></th>
+                                <?php if($role == "production admin" || $role == "production sales admin"):?>
+                                    <th nowrap>
+                                        Select
+                                        <div class="checkbox checkbox-default">
+                                            <input id="select_all" class="styled" type="checkbox">
+                                            <label for="select_all"><em><small>(all)</small></em></label>
+                                        </div>
+                                    </th>
+                                <?php endif;?>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,6 +79,14 @@
                                     <?php endif;?>
                                     <p><a class="btn btn-outline-fsg" href="/customers/view-customer/customer=<?php echo $c['id'];?>" >View/Print Details</a></p>
                                 </td>
+                                <?php if($role == "production admin" || $role == "production sales admin"):?>
+                                    <td data-label="Select" class="chkbox">
+                                        <div class="checkbox checkbox-default">
+                                            <input type="checkbox" class="select styled" data-finisherid='<?php echo $s['id'];?>' name="select_<?php echo $s['id'];?>" id="select_<?php echo $s['id'];?>" />
+                                            <label for="select_<?php echo $s['id'];?>"></label>
+                                        </div>
+                                    </td>
+                                <?php endif;?>
                             </tr>
                         <?php ++$i; endforeach;?>
                         </tbody>
