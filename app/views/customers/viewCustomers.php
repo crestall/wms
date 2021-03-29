@@ -4,6 +4,16 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div class="row">
+            <div class="col-12">
+                <?php if(isset($_SESSION['feedback'])) :?>
+                   <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>
+                <?php endif; ?>
+                <?php if(isset($_SESSION['errorfeedback'])) :?>
+                   <div class='errorbox'><?php echo Session::getAndDestroy('errorfeedback');?></div>
+                <?php endif; ?>
+            </div>
+        </div>
         <?php if(count($customers)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
