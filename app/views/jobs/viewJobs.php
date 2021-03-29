@@ -18,6 +18,7 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
             <?php if($cancelled == 1 || $completed == 1):?>
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View All Active Jobs</a></div>
             <?php endif;?>
+            <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/job-search">Search All Jobs</a></div>
         </div>
         <div class="border border-secondary p-3 m-3 rounded bg-light">
             <h3>Filter <?php echo $filter;?> Jobs</h3>
