@@ -42,6 +42,10 @@ else
                     <?php echo Form::displayError('name');?>
                 </div>
             </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="active" name="active" <?php if($customer['active'] > 0) echo "checked";?> />
+                <label class="custom-control-label col-md-3" for="active">Active</label>
+            </div>
             <div class="form-group row">
                 <label class="col-md-3">Phone</label>
                 <div class="col-md-4">
