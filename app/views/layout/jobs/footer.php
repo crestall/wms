@@ -416,22 +416,53 @@
                             $('#note_pop')
                                 .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
                                 .load('/ajaxfunctions/addPackageForm',{order_ids: ids, client_id: client_id},
-                                        function(responseText, textStatus, XMLHttpRequest){
-                                            if(textStatus == 'error') {
-                                                $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
-                                            }
-                                            $('form#orders-add-package').submit(function(e){
-                                                if($(this).valid())
-                                                {
-
-                                                }
-                                                else
-                                                {
-                                                    e.preventDefault();
-                                                }
-                                            });
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                        if(textStatus == 'error') {
+                                            $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
                                         }
+                                        $('form#orders-add-package').submit(function(e){
+                                            if($(this).valid())
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                e.preventDefault();
+                                            }
+                                        });
+                                    }
                                 );
+                            dialog = $("#note_pop").dialog({
+                                    draggable: true,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: "auto",
+                                    width: "auto",
+                                    buttons:{
+                                        'Add Package': function(){
+                                            $('form#orders-add-package').submit();
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Packages...</h2></div>' });
+                                        }
+                                    },
+                                    create: function( event, ui ) {
+                                        // Set maxWidth
+                                        $(this).css("maxWidth", "660px");
+                                    },
+                                    close: function(){
+                                        $("#note_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#quote_pop').dialog('close');
+                                        });
+                                    }
+                            });
+                            $("#note_pop").dialog('open');
+                            form = dialog.find( "form" ).on( "submit", function( e ) {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Adding Packages...</h2></div>', baseZ: 2000 });
+                            });
                         });
 
 
