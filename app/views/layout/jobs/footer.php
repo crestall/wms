@@ -417,19 +417,21 @@
                                 .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
                                 .load('/ajaxfunctions/addPackageForm',{order_ids: ids, client_id: client_id},
                                         function(responseText, textStatus, XMLHttpRequest){
-                                        if(textStatus == 'error') {
-                                            $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
-                                        }
-                                        $('form#orders-add-package').submit(function(e){
-                                            if($(this).valid())
-                                            {
+                                            if(textStatus == 'error') {
+                                                $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                            }
+                                            $('form#orders-add-package').submit(function(e){
+                                                if($(this).valid())
+                                                {
 
-                                            }
-                                            else
-                                            {
-                                                e.preventDefault();
-                                            }
-                                        });
+                                                }
+                                                else
+                                                {
+                                                    e.preventDefault();
+                                                }
+                                            });
+                                        }
+                                );
                         });
 
 
