@@ -1169,8 +1169,11 @@ class ajaxfunctionsController extends Controller
     public function addProductionJobNoteForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $job_id = s->request->data['job_id'];
+        $jd = $this->productionjob->getJobById($job_id);
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_production_job_note.php', [
-            'job_id' =>  $this->request->data['job_id']
+            'job_id' => $job_id,
+            'job'    => $jd
         ]);
     }
 
