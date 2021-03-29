@@ -133,6 +133,7 @@ class Productioncustomer extends Model{
             'country'       =>  null,
             'website'       =>  null
         );
+        $vals['active'] = isset($data['active'])? 1 : 0;
         if(!empty($data['email'])) $vals['email'] = $data['email'];
         if(!empty($data['phone'])) $vals['phone'] = $data['phone'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
