@@ -1008,8 +1008,16 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
         }
-        //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
         if(!$this->dataSubbed($customer_name))
         {
             Form::setError('customer_name', 'A Customer Name is required');
@@ -1092,7 +1100,7 @@ class FormController extends Controller {
                 'name'  => $customer_name
             );
             if($this->dataSubbed($customer_phone)) $customer_data['phone'] = $customer_phone;
-            if($this->dataSubbed($customer_contact)) $customer_data['contact'] = $customer_contact;
+            //if($this->dataSubbed($customer_contact)) $customer_data['contact'] = $customer_contact;
             if($this->dataSubbed($customer_email)) $customer_data['email'] = $customer_email;
             if($this->dataSubbed($customer_address)) $customer_data['address'] = $customer_address;
             if($this->dataSubbed($customer_address2)) $customer_data['address2'] = $customer_address2;
