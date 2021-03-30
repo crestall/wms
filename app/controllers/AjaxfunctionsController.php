@@ -1173,7 +1173,8 @@ class ajaxfunctionsController extends Controller
         $jd = $this->productionjob->getJobById($job_id);
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_production_job_note.php', [
             'job_id' => $job_id,
-            'job'    => $jd
+            'job'    => $jd,
+            'note'  => $jd['notes']
         ]);
     }
 
