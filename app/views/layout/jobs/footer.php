@@ -92,7 +92,7 @@
                                     html += "</select></div>";
                                     $('div#contact_chooser').html(html);
                                     $('.selectpicker').selectpicker();
-                                    action.common.customerContactChange();
+                                    actions.common.customerContactChange();
                                 }
                                 else
                                 {
@@ -789,7 +789,7 @@
                         actions.common.customerAutoComplete();
                         jobDeliveryDestinations.updateEvents();
                         actions.common.finisherExpectedDeliveryDates();
-                        action.common.customerContactChange();
+                        actions.common.customerContactChange();
                         $('button#job_details_update_submitter').click(function(e){
                             $('form#job_details_update').submit();
                         });
