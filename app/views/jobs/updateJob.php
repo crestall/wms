@@ -102,7 +102,7 @@ $f = 0;
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php //echo "JOB<pre>",print_r($job),"</pre>";?>
         <?php //echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
-        <?php echo "CUSTOMER CONTACTS<pre>",print_r($customer_contacts),"</pre>";?>
+        <?php //echo "CUSTOMER CONTACTS<pre>",print_r($customer_contacts),"</pre>";?>
         <?php //echo "finisher<pre>",print_r($finisher),"</pre>";?>
         <?php //echo "SESSION<pre>",print_r($_SESSION),"</pre>";?>
         <div class="row">
@@ -234,8 +234,8 @@ $f = 0;
                         Customer Details
                     </div>
                     <div class="card-body">
-                        <?php echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
-                        <?php echo "JOB<pre>",print_r($job),"</pre>";?>
+                        <?php //echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
+                        <?php //echo "JOB<pre>",print_r($job),"</pre>";?>
                         <?php if(isset($_SESSION['jobcustomerdetailsfeedback'])) :?>
                             <div class='feedbackbox'><?php echo Session::getAndDestroy('jobcustomerdetailsfeedback');?></div>
                         <?php endif; ?>
@@ -365,57 +365,6 @@ $f = 0;
                                         <span class="inst">use the 2 letter ISO code</span>
                                         <?php echo Form::displayError('customer_country');?>
                                     </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Address Line 1</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_address" id="customer_address" value="<?php echo $customer_address;?>" /><br>
-                                    <div class="checkbox checkbox-default" style="margin-left:20px;margin-top:-25px">
-                                        <input class="form-check-input styled" type="checkbox" id="ignore_customer_address_error" name="ignore_customer_address_error" />
-                                        <label for="ignore_customer_address_error"><span class="inst">No need for a number</span></label>
-                                    </div>
-                                    <?php echo Form::displayError('customer_address');?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Address Line 2</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_address2" id="customer_address2" value="<?php echo $customer_address2;?>" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Suburb/Town</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_suburb" id="customer_suburb" value="<?php echo $customer_suburb;?>" />
-                                    <?php echo Form::displayError('customer_suburb');?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">State</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_state" id="customer_state" value="<?php echo $customer_state;?>" />
-                                    <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
-                                    <?php echo Form::displayError('customer_state');?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Postcode</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_postcode" id="customer_postcode" value="<?php echo $customer_postcode;?>" />
-                                    <?php echo Form::displayError('customer_postcode');?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Country</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_country" id="customer_country" value="<?php echo $customer_country;?>" />
-                                    <span class="inst">use the 2 letter ISO code</span>
-                                    <?php echo Form::displayError('customer_country');?>
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
