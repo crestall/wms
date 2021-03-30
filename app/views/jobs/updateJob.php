@@ -205,6 +205,8 @@ $f = 0;
                         Customer Details
                     </div>
                     <div class="card-body">
+                        <?php echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
+                        <?php echo "JOB<pre>",print_r($job),"</pre>";?> 
                         <?php if(isset($_SESSION['jobcustomerdetailsfeedback'])) :?>
                             <div class='feedbackbox'><?php echo Session::getAndDestroy('jobcustomerdetailsfeedback');?></div>
                         <?php endif; ?>
