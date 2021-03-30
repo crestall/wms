@@ -44,6 +44,10 @@ if(!empty($customer['contacts']))
                 $selected_contact = $b;
         }
     }
+    if($selected_contact['id'] == 0 && count($customer_contacts) == 1)
+    {
+        $selected_contact = $customer_contacts[0];
+    }
 }
 $customer_contact_name = (!empty(Form::value('customer_contact_name')))? Form::value('customer_contact_name'): $selected_contact['name'];
 $customer_contact_email = (!empty(Form::value('customer_contact_email')))? Form::value('customer_contact_email'): $selected_contact['email'];
@@ -265,7 +269,7 @@ $f = 0;
                                             </select>
                                         </div>
                                     <?php elseif( count($customer_contacts) == 1 ):?>
-                                        <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="<?php echo $job['customer_contact_id'];?>" >
+                                        <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="<?php echo $customer_contacts[0]['id'];?>" >
                                     <?php else:?>
                                         <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="0" >
                                     <?php endif;?>
