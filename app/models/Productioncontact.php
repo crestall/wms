@@ -28,7 +28,7 @@ class Productioncontact extends Model{
             {
                 $check = ($value == $selected)? "selected='selected'" : "";
             }
-            $ret_string .= "<option $check value='$value' data-contactemail='{$r['email']} data-contactphone='{$r['phone']} data-contactrole='{$r['role']}'>$label</option>";
+            $ret_string .= "<option $check value='$value' data-contactemail='{$r['email']}' data-contactphone='{$r['phone']}' data-contactrole='{$r['role']}'>$label</option>";
         }
         return $ret_string;
     }
