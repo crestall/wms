@@ -379,7 +379,7 @@ class Productionjob extends Model{
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table, 'customer_id', $customer_id, $job_id);
         if( $customer_contact_id > 0 )
-            $db->updateDatabaseField($this->table, 'customer_contact__id', $customer_contact_id, $job_id);
+            $db->updateDatabaseField($this->table, 'customer_contact_id', $customer_contact_id, $job_id);
         return true;
     }
 
