@@ -15,6 +15,7 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
 $delivery_notes = (!empty(Form::value('delivery_notes')))? Form::value('delivery_notes'):$job['delivery_notes'];
 //CUSTOMER DETAILS
 $customer_name = (!empty(Form::value('customer_name')))? Form::value('customer_name'):$customer['name'];
+$customer_id = (!empty(Form::value('customer_id')))? Form::value('customer_id'):$customer['id'];
 $customer_email = (!empty(Form::value('customer_email')))? Form::value('customer_email'):$customer['email'];
 $customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer_phone'):$customer['phone'];
 $customer_address = (!empty(Form::value('customer_address')))? Form::value('customer_address'):$customer['address'];
