@@ -7,15 +7,15 @@
                 <h2>Products for <?php echo $client_name;?></h2>
             </div>
         </div>
-        <div id="waiting" class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Drawing Table..</h2>
-                <p>May take a few moments</p>
-                <img class='loading' src='/images/preloader.gif' alt='loading...' />
+        <?php if(count($products)):?>
+            <div id="waiting" class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Drawing Table..</h2>
+                    <p>May take a few moments</p>
+                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                </div>
             </div>
-        </div>
-        <div class="row" id="table_holder" style="display:none">
-            <?php if(count($products)):?>
+            <div class="row" id="table_holder" style="display:none">
                 <div class="col-md-12">
                     <table class="table-striped table-hover" id="client_inventory_table">
                         <thead>
@@ -67,16 +67,15 @@
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
-
                     </table>
                 </div>
-            <?php else:?>
-                <div class="col-lg-12">
-                    <div class="errorbox">
-                        <p>No products listed for <?php echo $client_name;?></p>
-                    </div>
+            </div>
+        <?php else:?>
+            <div class="col-lg-12">
+                <div class="errorbox">
+                    <p>No products listed for <?php echo $client_name;?></p>
                 </div>
-            <?php endif;?>
-        </div>
+            </div>
+        <?php endif;?>
     </div>
 </div>

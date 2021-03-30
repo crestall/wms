@@ -256,7 +256,19 @@ $f = 0;
                                     <h4 class="col-md-8">Contact Details</h4>
                                 </div>
                                 <div class="form-group row" id="contact_chooser">
-                                    <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="0" >
+                                    <?php if( count($customer_contacts) > 1 ):?>
+                                        <label class="col-md-4 mb-3">Job Contact</label>
+                                        <div class="col-md-8 mb-3">
+                                            <select id='customer_contact_id' class='form-control selectpicker' name='customer_contact_id' data-style='btn-outline-secondary'>
+                                                <option value='0'>Choose a Contact</option>
+                                                <?php echo $this->controller->productioncontact->getSelectContacts(0, $job['customer_id'],$$job['customer_contact_id']);?>
+                                            </select>
+                                        </div>
+                                    <?php elseif( count($customer_contacts) == 1 ):?>
+                                        <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="<?php echo $job['customer_contact_id'];?>" >
+                                    <?php else:?>
+                                        <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="0" >
+                                    <?php endif;?>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 mb-3">Contact Name</label>

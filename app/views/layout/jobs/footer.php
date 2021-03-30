@@ -59,8 +59,8 @@
                                     $('input.customer_contact').each(function(i,e){
                                         $(this).val('');
                                     });
-                                    var html = "<label class='col-md-3 col-form-label'>Job Contact</label>";
-                                    html += "<div class='col-md-4'>";
+                                    var html = "<label class='col-md-4 col-form-label'>Job Contact</label>";
+                                    html += "<div class='col-md-8'>";
                                     html += "<select id='customer_contact_id' class='form-control selectpicker' name='customer_contact_id' data-style='btn-outline-secondary'>";
                                     html += "<option value='0'>Choose a Contact</option>";
                                     $.each(contacts, function(i,v){
