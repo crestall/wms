@@ -13,6 +13,26 @@
 class Productioncontact extends Model{
     public $table = "production_contacts";
 
+    public function getSelectContacts($finisher_id = 0, $customer_id = 0,$selected = false)
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $q = "SELECT * FROM {$this->table} WHERE finisher_id = $finisher_id AND customer_id = $customer_id ORDER BY name";
+        $reps = $db->queryData($q);
+        foreach($reps as $r)
+        {
+            $label = ucwords($r['name']);
+            $value = $r['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value' data-contactemail='{$r['email']}' data-contactphone='{$r['phone']}' data-contactrole='{$r['role']}'>$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function addContact($data)
     {
         //echo "productioncontact <pre>",print_r($data),"</pre>";die();

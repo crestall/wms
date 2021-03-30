@@ -89,7 +89,7 @@
                                 <td data-label="Contact Details"><?php echo $contact_string;?></td>
                                 <td data-label="Address Details" class="text-right"><?php echo $address_string;?></td>
                                 <td>
-                                    <?php if($role == "production admin"):?>
+                                    <?php if($role == "production admin" || $role == "production sales admin" || $role == "production sales"):?>
                                         <p><a class="btn btn-outline-secondary" href="/customers/edit-customer/customer=<?php echo $c['id'];?>" >Edit Details</a></p>
                                     <?php endif;?>
                                     <p><a class="btn btn-outline-fsg" href="/customers/view-customer/customer=<?php echo $c['id'];?>" >View/Print Details</a></p>

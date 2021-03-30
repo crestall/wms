@@ -2,6 +2,7 @@
   $today = strtotime('today');
   //echo "<p>User Role: $user_role</p>";
   //echo "<pre>",print_r($jobs),"</pre>";
+  $can_do_runsheets = false;
 ?>
 <table class="table-striped table-hover" id="production_jobs_table">
     <thead>
@@ -10,18 +11,15 @@
             <th>Job Number</th>
             <th>Client</th>
             <th class="no-sort" style="width:250px">Description</th>
-            <th class="no-sort" style="width:250px">Delivery</th>
+            <th class="no-sort">Finisher(s)</th>
+            <th>FSG Contact</th>
             <?php if($can_change_status):?>
                 <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
             <?php else:?>
                 <th>Status</th>
             <?php endif;?>
-            <th>FSG Contact</th>
-            <th class="no-sort">Finisher(s)</th>
-            <?php if($can_do_runsheets):?>
-                <th>Runsheet Day</th>
-            <?php endif;?>
             <th>Due Date</th>
+            <th class="no-sort" style="width:250px">Delivery</th>
             <?php if($need_checkbox):?>
                 <th nowrap class="no-sort">
                     Select
@@ -30,6 +28,9 @@
                         <label for="select_all"><em><small>(all)</small></em></label>
                     </div>
                 </th>
+            <?php endif;?>
+            <?php if($can_do_runsheets):?>
+                <th>Runsheet Day</th>
             <?php endif;?>
         </tr>
     </thead>
@@ -78,22 +79,27 @@
                 <td data-label="Description">
                     <?php echo $job['description'];?>
                     <?php if(!empty($job['notes'])):?>
-                        <div class="notes notes-info">
+                        <div class="notes notes-info mt-3">
                             <h6>Production Notes:</h6>
                             <?php echo $job['notes'];?>
                         </div>
                     <?php endif;?>
+                    <p class="text-right mt-3"><button class="btn btn-sm btn-outline-fsg production_note" data-jobid="<?php echo $job['id'];?>">Add Note For Production</button></p>
                 </td>
-                <td data-label="Delivery">
-                    <?php if(!empty($job['delivery_notes'])):?>
-                        <div class="notes notes-warning">
-                            <h6>Delivery Notes:</h6>
-                            <?php echo $job['delivery_notes'];?>
-                        </div>
-                    <?php endif;?>
-                    <p><a class="btn btn-sm btn-block btn-outline-info delivery_docket" href="/jobs/create-delivery-docket/job=<?php echo $job['id'];?>">Create Delivery Docket</a></p>
-                    <p><button class="btn btn-sm btn-block btn-outline-fsg delivery_note" data-jobid="<?php echo $job['id'];?>">Add Delivery Note</button></p>
+                <td data-label="Finisher(s)">
+                    <?php if(!empty($finisher_array)):
+                        foreach($finisher_array as $fin):?>
+                            <p class="border-bottom border-secondary border-bottom-dashed mb-3">
+                                <?php if($user_role == "production_admin"):?>
+                                    <a href="/finishers/edit-finisher/finisher=<?php echo $fin['id'];?>"><?php echo ucwords($fin['name']);?></a>
+                                <?php else:?>
+                                    <?php echo ucwords($fin['name']);?>
+                                <?php endif;?>
+                            </p>
+                        <?php endforeach;
+                    endif;?>
                 </td>
+                <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
                 <td data-label="Status"
                     <?php if(!empty($job['status_colour'])):?>
                         style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
@@ -110,20 +116,37 @@
                     }
                     ?>
                 </td>
-                <td data-label="FSG Contact"><?php echo ucwords($job['salesrep_name']);?></td>
-                <td data-label="Finisher(s)">
-                    <?php if(!empty($finisher_array)):
-                        foreach($finisher_array as $fin):?>
-                            <p class="border-bottom border-secondary border-bottom-dashed mb-3">
-                                <?php if($user_role == "production_admin"):?>
-                                    <a href="/finishers/edit-finisher/finisher=<?php echo $fin['id'];?>"><?php echo ucwords($fin['name']);?></a>
-                                <?php else:?>
-                                    <?php echo ucwords($fin['name']);?>
-                                <?php endif;?>
-                            </p>
-                        <?php endforeach;
-                    endif;?>
+                <td data-label="Due Date"
+                    <?php if($job['strict_dd'] > 0):?>
+                        <?php if( ($job['due_date'] < $today) ):?>
+                            style="background-color: #222; color:#FFF"
+                        <?php elseif( ($job['due_date'] - $today) <= (24 * 60 * 60)):?>
+                            style="background-color: #FF0000; color:#FFF"
+                        <?php elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60)):?>
+                            style="background-color: #e6e600;"
+                        <?php else: ?>
+                            style="background-color: #66ff66;"
+                        <?php endif;?>
+                    <?php endif;?>
+                    ><?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?>
                 </td>
+                <td data-label="Delivery">
+                    <?php if(!empty($job['delivery_notes'])):?>
+                        <div class="notes notes-warning">
+                            <h6>Delivery Notes:</h6>
+                            <?php echo $job['delivery_notes'];?>
+                        </div>
+                    <?php endif;?>
+                    <p><a class="btn btn-sm btn-block btn-outline-info delivery_docket" href="/jobs/create-delivery-docket/job=<?php echo $job['id'];?>">Create Delivery Docket</a></p>
+                </td>
+                <?php if($need_checkbox):?>
+                    <td data-label="Select" class="chkbox">
+                        <div class="checkbox checkbox-default">
+                            <input type="checkbox" class="select styled" data-jobid='<?php echo $job['id'];?>' name="select_<?php echo $job['id'];?>" id="select_<?php echo $job['id'];?>" />
+                            <label for="select_<?php echo $job['id'];?>"></label>
+                        </div>
+                    </td>
+                <?php endif;?>
                 <?php if($can_do_runsheets):?>
                     <td data-label="Runsheet Day">
                         <?php if($job['runsheet_id'] > 0):
@@ -157,29 +180,6 @@
                         <?php endif;?>
                     </td>
                 <?php endif; ?>
-                <td data-label="Due Date"
-                <?php if($job['strict_dd'] > 0):?>
-                    <?php if( ($job['due_date'] < $today) ):?>
-                        style="background-color: #222; color:#FFF"
-                    <?php elseif( ($job['due_date'] - $today) <= (24 * 60 * 60)):?>
-                        style="background-color: #FF0000; color:#FFF"
-                    <?php elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60)):?>
-                        style="background-color: #cc3300; color:#FFF"
-                    <?php elseif( ($job['due_date'] - $today) <= (5 * 24 * 60 * 60)):?>
-                        style="background-color: #e6e600"
-                    <?php else: ?>
-                        style="background-color: #66ff66;"
-                    <?php endif;?>
-                <?php endif;?>
-                ><?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?></td>
-                <?php if($need_checkbox):?>
-                    <td data-label="Select" class="chkbox">
-                        <div class="checkbox checkbox-default">
-                            <input type="checkbox" class="select styled" data-jobid='<?php echo $job['id'];?>' name="select_<?php echo $job['id'];?>" id="select_<?php echo $job['id'];?>" />
-                            <label for="select_<?php echo $job['id'];?>"></label>
-                        </div>
-                    </td>
-                <?php endif;?>
             </tr>
         <?php endforeach;?>
     </tbody>

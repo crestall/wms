@@ -16,11 +16,12 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View All Cancelled Jobs</a></div>
             <?php endif;?>
             <?php if($cancelled == 1 || $completed == 1):?>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View All Current Jobs</a></div>
+                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View All Active Jobs</a></div>
             <?php endif;?>
+            <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/job-search">Search All Jobs</a></div>
         </div>
         <div class="border border-secondary p-3 m-3 rounded bg-light">
-            <h3>Filter These Jobs</h3>
+            <h3>Filter <?php echo $filter;?> Jobs</h3>
             <div class="form-group row">
                 <label class="col-md-2 mb-3">Filter By Customer</label>
                 <div class="col-md-4 mb-3">

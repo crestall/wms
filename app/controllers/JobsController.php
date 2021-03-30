@@ -123,7 +123,7 @@ class JobsController extends Controller
     public function viewJobs()
     {
         //echo "<pre>",print_r($this->request->params),"</pre>";die();
-        $head = "Viewing Current Production Jobs";
+        $filter = "Active";
         $completed = (isset($this->request->params['args']['completed']))? 1 : 0;
         $cancelled = (isset($this->request->params['args']['cancelled']))? 1 : 0;
         $customer_ids = isset($this->request->params['args']['customer_ids'])? explode(',',$this->request->params['args']['customer_ids']): array();
@@ -142,9 +142,10 @@ class JobsController extends Controller
         ));
         //render the page
         if($completed == 1)
-            $head = "Viewing Completed Production Jobs";
+            $filter = "Completed";
         elseif($cancelled == 1)
-            $head = "Viewing Cancelled Production Jobs";
+            $filter = "Cancelled";
+        $head = "Viewing $filter Production Jobs";
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
@@ -153,6 +154,7 @@ class JobsController extends Controller
             'jobs'              =>  $jobs,
             'completed'         =>  $completed,
             'cancelled'         =>  $cancelled,
+            'filter'            =>  $filter,
             'customer_ids'      =>  (array)$customer_ids,
             'finisher_ids'      =>  (array)$finisher_ids,
             'salesrep_ids'      =>  (array)$salesrep_ids,

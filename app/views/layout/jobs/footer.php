@@ -24,6 +24,28 @@
                             });
                         });
                     },
+                    customerContactChange: function(){
+                        $('select#customer_contact_id').change(function(e){
+                            if($(this).val() != 0)
+                            {
+                                $('input#customer_contact_name').val($(this).find(":selected").text()).valid();
+                                $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
+                                $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
+                                $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
+                            }
+                            else
+                            {
+                                $('input#customer_contact_name').val('').valid();
+                                $('input#customer_contact_email').val('');
+                                $('input#customer_contact_role').val('');
+                                $('input#customer_contact_phone').val('');
+                            }
+                            if($('#send_to_customer').prop('checked'))
+                            {
+                                $('input#attention').val($('input#customer_contact_name').val());
+                            }
+                        });
+                    },
                     customerAutoComplete: function(){
                         autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
                         autoCompleter.suburbAutoComplete($('#customer_suburb'), 'customer_');
@@ -59,8 +81,8 @@
                                     $('input.customer_contact').each(function(i,e){
                                         $(this).val('');
                                     });
-                                    var html = "<label class='col-md-3 col-form-label'>Job Contact</label>";
-                                    html += "<div class='col-md-4'>";
+                                    var html = "<label class='col-md-4 col-form-label'>Job Contact</label>";
+                                    html += "<div class='col-md-8'>";
                                     html += "<select id='customer_contact_id' class='form-control selectpicker' name='customer_contact_id' data-style='btn-outline-secondary'>";
                                     html += "<option value='0'>Choose a Contact</option>";
                                     $.each(contacts, function(i,v){
@@ -70,26 +92,7 @@
                                     html += "</select></div>";
                                     $('div#contact_chooser').html(html);
                                     $('.selectpicker').selectpicker();
-                                    $('select#customer_contact_id').change(function(e){
-                                        if($(this).val() != 0)
-                                        {
-                                            $('input#customer_contact_name').val($(this).find(":selected").text()).valid();
-                                            $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
-                                            $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
-                                            $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
-                                        }
-                                        else
-                                        {
-                                            $('input#customer_contact_name').val('').valid();
-                                            $('input#customer_contact_email').val('');
-                                            $('input#customer_contact_role').val('');
-                                            $('input#customer_contact_phone').val('');
-                                        }
-                                        if($('#send_to_customer').prop('checked'))
-                                        {
-                                            $('input#attention').val($('input#customer_contact_name').val());
-                                        }
-                                    });
+                                    actions.common.customerContactChange();
                                 }
                                 else
                                 {
@@ -408,6 +411,65 @@
                         actions.common.jobsTable();
                         actions.common.selectAll();
                         actions.common.doDates();
+
+                        $('button.production_note').click(function(e){
+                            var job_id = $(this).data('jobid');
+                            //console.log("will add a note to job id: "+job_id) ;
+                            $('<div id="note_pop" title="Add Note For Production">').appendTo($('body'));
+                            $('#note_pop')
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addProductionJobNoteForm',{job_id: job_id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                        if(textStatus == 'error') {
+                                            $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                        }
+                                        $('form#orders-add-package').submit(function(e){
+                                            if($(this).valid())
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                e.preventDefault();
+                                            }
+                                        });
+                                    }
+                                );
+                            dialog = $("#note_pop").dialog({
+                                    draggable: true,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: "auto",
+                                    width: "auto",
+                                    buttons:{
+                                        'Update Notes': function(){
+                                            $('form#orders-add-package').submit();
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Notes...</h2></div>' });
+                                        }
+                                    },
+                                    create: function( event, ui ) {
+                                        // Set maxWidth
+                                        $(this).css("maxWidth", "660px");
+                                    },
+                                    close: function(){
+                                        $("#note_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#note_pop').dialog('close');
+                                        });
+                                    }
+                            });
+                            $("#note_pop").dialog('open');
+                            form = dialog.find( "form" ).on( "submit", function( e ) {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Notes...</h2></div>', baseZ: 2000 });
+                            });
+                        });
+
+
+
                         $('button.print-sheet').each(function(i,e){
                             $(this).click(function(e){
                                 var runsheet_id = $(this).data('runsheetid');
@@ -727,6 +789,7 @@
                         actions.common.customerAutoComplete();
                         jobDeliveryDestinations.updateEvents();
                         actions.common.finisherExpectedDeliveryDates();
+                        actions.common.customerContactChange();
                         $('button#job_details_update_submitter').click(function(e){
                             $('form#job_details_update').submit();
                         });
