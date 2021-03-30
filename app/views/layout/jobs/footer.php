@@ -24,6 +24,28 @@
                             });
                         });
                     },
+                    customerContactChange: function(){
+                        $('select#customer_contact_id').change(function(e){
+                            if($(this).val() != 0)
+                            {
+                                $('input#customer_contact_name').val($(this).find(":selected").text()).valid();
+                                $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
+                                $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
+                                $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
+                            }
+                            else
+                            {
+                                $('input#customer_contact_name').val('').valid();
+                                $('input#customer_contact_email').val('');
+                                $('input#customer_contact_role').val('');
+                                $('input#customer_contact_phone').val('');
+                            }
+                            if($('#send_to_customer').prop('checked'))
+                            {
+                                $('input#attention').val($('input#customer_contact_name').val());
+                            }
+                        });
+                    },
                     customerAutoComplete: function(){
                         autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
                         autoCompleter.suburbAutoComplete($('#customer_suburb'), 'customer_');
@@ -70,26 +92,7 @@
                                     html += "</select></div>";
                                     $('div#contact_chooser').html(html);
                                     $('.selectpicker').selectpicker();
-                                    $('select#customer_contact_id').change(function(e){
-                                        if($(this).val() != 0)
-                                        {
-                                            $('input#customer_contact_name').val($(this).find(":selected").text()).valid();
-                                            $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
-                                            $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
-                                            $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
-                                        }
-                                        else
-                                        {
-                                            $('input#customer_contact_name').val('').valid();
-                                            $('input#customer_contact_email').val('');
-                                            $('input#customer_contact_role').val('');
-                                            $('input#customer_contact_phone').val('');
-                                        }
-                                        if($('#send_to_customer').prop('checked'))
-                                        {
-                                            $('input#attention').val($('input#customer_contact_name').val());
-                                        }
-                                    });
+                                    action.common.customerContactChange();
                                 }
                                 else
                                 {
@@ -786,6 +789,7 @@
                         actions.common.customerAutoComplete();
                         jobDeliveryDestinations.updateEvents();
                         actions.common.finisherExpectedDeliveryDates();
+                        action.common.customerContactChange();
                         $('button#job_details_update_submitter').click(function(e){
                             $('form#job_details_update').submit();
                         });
