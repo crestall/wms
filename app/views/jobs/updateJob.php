@@ -15,7 +15,6 @@ $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
 $delivery_notes = (!empty(Form::value('delivery_notes')))? Form::value('delivery_notes'):$job['delivery_notes'];
 //CUSTOMER DETAILS
 $customer_name = (!empty(Form::value('customer_name')))? Form::value('customer_name'):$customer['name'];
-$customer_contact = (!empty(Form::value('customer_contact')))? Form::value('customer_contact'):$customer['contact'];
 $customer_email = (!empty(Form::value('customer_email')))? Form::value('customer_email'):$customer['email'];
 $customer_phone = (!empty(Form::value('customer_phone')))? Form::value('customer_phone'):$customer['phone'];
 $customer_address = (!empty(Form::value('customer_address')))? Form::value('customer_address'):$customer['address'];
@@ -24,6 +23,32 @@ $customer_suburb = (!empty(Form::value('customer_suburb')))? Form::value('custom
 $customer_state = (!empty(Form::value('customer_state')))? Form::value('customer_state'):$customer['state'];
 $customer_postcode = (!empty(Form::value('customer_postcode')))? Form::value('customer_postcode'):$customer['postcode'];
 $customer_country = (!empty(Form::value('customer_country')))? Form::value('customer_country'):$customer['country'];
+$selected_contact = array(
+    'id'    => 0,
+    'name'  => '',
+    'email' => '',
+    'phone' => '',
+    'role'  => ''
+);
+$customer_contacts = array();
+if(!empty($customer['contacts']))
+{
+    $cca = explode("|", $customer['contacts']);
+    foreach($cca as $c)
+    {
+        list($b['id'], $b['name'], $b['email'], $b['phone'],$b['role']) = explode(",", $c);
+        if(!empty($b['id']))
+        {
+            $customer_contacts[] = $b;
+            if($b['id'] == $job['customer_contact_id'])
+                $selected_contact = $b;
+        }
+    }
+}
+$customer_contact_name = (!empty(Form::value('customer_contact_name')))? Form::value('customer_contact_name'): $selected_contact['name'];
+$customer_contact_email = (!empty(Form::value('customer_contact_email')))? Form::value('customer_contact_email'): $selected_contact['email'];
+$customer_contact_phone = (!empty(Form::value('customer_contact_phone')))? Form::value('customer_contact_phone'): $selected_contact['phone'];
+$customer_contact_role = (!empty(Form::value('customer_contact_role')))? Form::value('customer_contact_role'): $selected_contact['role'];
 //DELIVERY DETAILS
 $ship_to    = (empty(Form::value('ship_to')))?  $job['ship_to']      : Form::value('ship_to');
 $address    = empty(Form::value('address'))?    $job['address']      : Form::value('address');
@@ -206,7 +231,7 @@ $f = 0;
                     </div>
                     <div class="card-body">
                         <?php echo "CUSTOMER<pre>",print_r($customer),"</pre>";?>
-                        <?php echo "JOB<pre>",print_r($job),"</pre>";?> 
+                        <?php echo "JOB<pre>",print_r($job),"</pre>";?>
                         <?php if(isset($_SESSION['jobcustomerdetailsfeedback'])) :?>
                             <div class='feedbackbox'><?php echo Session::getAndDestroy('jobcustomerdetailsfeedback');?></div>
                         <?php endif; ?>
@@ -236,20 +261,20 @@ $f = 0;
                                 <div class="form-group row">
                                     <label class="col-md-4 mb-3">Contact Name</label>
                                     <div class="col-md-8 mb-3">
-                                        <input type="text" class="form-control customer_contact" name="customer_contact_name" id="customer_contact_name" value="<?php echo Form::value('customer_contact_name');?>" >
+                                        <input type="text" class="form-control customer_contact" name="customer_contact_name" id="customer_contact_name" value="<?php echo $customer_contact_name;?>" >
                                     </div>
                                     <label class="col-md-4 mb-3">Contact Role</label>
                                     <div class="col-md-8 mb-3">
-                                        <input type="text" class="form-control customer_contact" name="customer_contact_role" id="customer_contact_role" value="<?php echo Form::value('customer_contact_role');?>" >
+                                        <input type="text" class="form-control customer_contact" name="customer_contact_role" id="customer_contact_role" value="<?php echo $customer_contact_role;?>" >
                                     </div>
                                     <label class="col-md-4 mb-3">Contact Email</label>
                                     <div class="col-md-8 mb-3">
-                                        <input type="text" class="form-control customer_contact email" name="customer_contact_email" id="customer_contact_email" value="<?php echo Form::value('customer_contact_email');?>" >
+                                        <input type="text" class="form-control customer_contact email" name="customer_contact_email" id="customer_contact_email" value="<?php echo $customer_contact_email;?>" >
                                         <?php echo Form::displayError('customer_contact_email');?>
                                     </div>
                                     <label class="col-md-4 mb-3">Contact Phone</label>
                                     <div class="col-md-8 mb-3">
-                                        <input type="text" class="form-control customer_contact" name="customer_contact_phone" id="customer_contact_phone" value="<?php echo Form::value('customer_contact_phonel');?>" >
+                                        <input type="text" class="form-control customer_contact" name="customer_contact_phone" id="customer_contact_phone" value="<?php echo $customer_contact_phone;?>" >
                                     </div>
                                 </div>
                             </div>
