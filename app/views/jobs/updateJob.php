@@ -261,7 +261,7 @@ $f = 0;
                                         <div class="col-md-8 mb-3">
                                             <select id='customer_contact_id' class='form-control selectpicker' name='customer_contact_id' data-style='btn-outline-secondary'>
                                                 <option value='0'>Choose a Contact</option>
-                                                <?php echo $this->controller->productioncontact->getSelectContacts(0, $job['customer_id'],$$job['customer_contact_id']);?>
+                                                <?php echo $this->controller->productioncontact->getSelectContacts(0, $job['customer_id'],$job['customer_contact_id']);?>
                                             </select>
                                         </div>
                                     <?php elseif( count($customer_contacts) == 1 ):?>
