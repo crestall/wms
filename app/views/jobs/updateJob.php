@@ -55,6 +55,16 @@ else
     $finisher_array = $finishers;
 }
 //echo "<pre>",print_r($finisher_array),"</pre>";die();
+if(Session::getAndDestroy('show_customer_address'))
+{
+    $customer_collapse = "collapse show";
+    $customer_aria_expanded = "true";
+}
+else
+{
+    $customer_collapse = "collapse";
+    $customer_aria_expanded = "false";
+}
 $finisher_count = count($finisher_array);
 $f = 0;
 ?>
@@ -214,25 +224,110 @@ $f = 0;
                                 <input class="custom-control-input send_to_address" type="checkbox" id="send_to_customer" name="send_to_customer" />
                                 <label class="custom-control-label col-md-4" for="send_to_customer">Send Job To Customer</label>
                             </div>
-                            <div class="form-group row ">
-                                <label class="col-md-4">Contact</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control customer" name="customer_contact" id="customer_contact" value="<?php echo $customer_contact;?>" />
+                            <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
+                                <div class="form-group row">
+                                    <h4 class="col-md-8">Contact Details</h4>
+                                </div>
+                                <div class="form-group row" id="contact_chooser">
+                                    <input type="hidden" id="customer_contact_id" name="customer_contact_id" value="0" >
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 mb-3">Contact Name</label>
+                                    <div class="col-md-8 mb-3">
+                                        <input type="text" class="form-control customer_contact" name="customer_contact_name" id="customer_contact_name" value="<?php echo Form::value('customer_contact_name');?>" >
+                                    </div>
+                                    <label class="col-md-4 mb-3">Contact Role</label>
+                                    <div class="col-md-8 mb-3">
+                                        <input type="text" class="form-control customer_contact" name="customer_contact_role" id="customer_contact_role" value="<?php echo Form::value('customer_contact_role');?>" >
+                                    </div>
+                                    <label class="col-md-4 mb-3">Contact Email</label>
+                                    <div class="col-md-8 mb-3">
+                                        <input type="text" class="form-control customer_contact email" name="customer_contact_email" id="customer_contact_email" value="<?php echo Form::value('customer_contact_email');?>" >
+                                        <?php echo Form::displayError('customer_contact_email');?>
+                                    </div>
+                                    <label class="col-md-4 mb-3">Contact Phone</label>
+                                    <div class="col-md-8 mb-3">
+                                        <input type="text" class="form-control customer_contact" name="customer_contact_phone" id="customer_contact_phone" value="<?php echo Form::value('customer_contact_phonel');?>" >
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row ">
-                                <label class="col-md-4">Email</label>
+                                <label class="col-md-4">Business Email</label>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control customer email" name="customer_email" id="customer_email" value="<?php echo $customer_email;?>" />
                                     <?php echo Form::displayError('customer_email');?>
                                 </div>
                             </div>
                             <div class="form-group row ">
-                                <label class="col-md-4">Phone</label>
+                                <label class="col-md-4">Business Phone</label>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control customer" name="customer_phone" id="customer_phone" value="<?php echo $customer_phone;?>" />
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Business Website</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="customer_website" id="customer_website" value="<?php echo Form::value('customer_website');?>" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <a  id="customer_address_toggle" class="btn btn-outline-secondary" data-toggle="collapse" href="#customer_address_holder" role="button" aria-expanded="<?php echo $customer_aria_expanded;?>" aria-controls="customer_address_holder"> </a>
+                                </div>
+                            </div>
+                            <div id="customer_address_holder" class="<?php echo $customer_collapse;?> mt-3">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Address Line 1</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control customer" name="customer_address" id="customer_address" value="<?php echo $customer_address?>" />
+                                        <?php echo Form::displayError('customer_address');?>
+                                    </div>
+                                    <div class="col-md-4 checkbox checkbox-default">
+                                        <input class="form-check-input styled" type="checkbox" id="ignore_customer_address_error" name="ignore_customer_address_error" />
+                                        <label for="ignore_customer_address_error">No need for a number</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Address Line 2</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control customer" name="customer_address2" id="customer_address2" value="<?php echo $customer_address2;?>" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Suburb/Town</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control customer" name="customer_suburb" id="customer_suburb" value="<?php echo $customer_suburb;?>" />
+                                        <?php echo Form::displayError('customer_suburb');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">State</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control customer" name="customer_state" id="customer_state" value="<?php echo $customer_state;?>" />
+                                        <span class="inst">for AU addresses use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                        <?php echo Form::displayError('customer_state');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Postcode</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control customer" name="customer_postcode" id="customer_postcode" value="<?php echo $customer_postcode;?>" />
+                                        <?php echo Form::displayError('customer_postcode');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Country</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control customer" name="customer_country" id="customer_country" value="<?php echo $customer_country;;?>" />
+                                        <span class="inst">use the 2 letter ISO code</span>
+                                        <?php echo Form::displayError('customer_country');?>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Address Line 1</label>
                                 <div class="col-md-8">
@@ -282,6 +377,7 @@ $f = 0;
                             </div>
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <input type="hidden" name="id" value="<?php echo $job['id'];?>" >
+                            <input type="hidden" name="active" value="1" >
                         </form>
                     </div>
                     <div class="card-footer text-right">
