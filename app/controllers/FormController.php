@@ -1017,7 +1017,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
         if(!$this->dataSubbed($customer_name))
         {
             Form::setError('customer_name', 'A Customer Name is required');
@@ -1028,6 +1028,13 @@ class FormController extends Controller {
             if(!$this->emailValid($customer_email))
             {
                 Form::setError('customer_email', 'The email is not valid');
+            }
+        }
+        if($this->dataSubbed($customer_contact_email))
+        {
+            if(!$this->emailValid($customer_contact_email))
+            {
+                Form::setError('customer_contact_email', 'The email is not valid');
             }
         }
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
@@ -1108,19 +1115,35 @@ class FormController extends Controller {
             if($this->dataSubbed($customer_state)) $customer_data['state'] = $customer_state;
             if($this->dataSubbed($customer_postcode)) $customer_data['postcode'] = $customer_postcode;
             if($this->dataSubbed($customer_country)) $customer_data['country'] = $customer_country;
+            if($this->dataSubbed($customer_contact_id) && $customer_contact_id > 0)
+            {
+                $post_data['customer_contact_id'] = $customer_contact_id;
+            }
+            else
+            {
+                $post_data['customer_contact_id'] = 0;
+            }
             //Need to add the customer?
             if($customer_id == 0)
             {
+                if($this->dataSubbed($customer_contact_name)) $customer_data['contacts'][0]['name'] = $customer_contact_name;
+                if($this->dataSubbed($customer_contact_role)) $customer_data['contacts'][0]['role'] = $customer_contact_role;
+                if($this->dataSubbed($customer_contact_email)) $customer_data['contacts'][0]['email'] = $customer_contact_email;
+                if($this->dataSubbed($customer_contact_phone)) $customer_data['contacts'][0]['phone'] = $customer_contact_phone;
                 $customer_id = $this->productioncustomer->addCustomer($customer_data);
-                //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
+                $customer_data['customer_id'] = $customer_id;
+                $post_data['customer_id'] = $customer_id;
+                //this new customer will only have one contact
+                $pcont = new Productioncontact();
+                $post_data['customer_contact_id'] = $pcont->getCustomerContactIDs($customer_id, true);
             }
             else
             {
                 $customer_data['customer_id'] = $customer_id;
-                $this->productioncustomer->editCustomer($customer_data);
+                //$this->productioncustomer->editCustomer($customer_data);
                 //echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
             }
-            $this->productionjob->updateJobCustomerId($id, $customer_id);
+            $this->productionjob->updateJobCustomerId($id, $customer_id, $post_data['customer_contact_id']);
             Session::set('jobcustomerdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Customer Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#customerdetails");
