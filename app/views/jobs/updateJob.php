@@ -248,7 +248,7 @@ $f = 0;
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
                                 <div class="col-md-8">
                                     <input type="text" class="required form-control" name="customer_name" id="customer_name" value="<?php echo $customer_name;?>" />
-                                    <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $customer['id'];?>" />
+                                    <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $customer_id;?>" />
                                     <?php echo Form::displayError('customer_name');?>
                                 </div>
                             </div>
