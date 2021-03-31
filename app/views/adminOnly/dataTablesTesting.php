@@ -7,6 +7,7 @@
         <div class="row">
             <div class="col">
                 <?php //echo "<pre>",print_r($products),"</pre>";?>
+                <?php echo "Client ID: ".$this->controller->ViewInventory->client_id;?>
             </div>
         </div>
         <div id="waiting" class="row">
