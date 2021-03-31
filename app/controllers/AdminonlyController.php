@@ -27,7 +27,7 @@ class AdminOnlyController extends Controller
         Config::setJsConfig('curPage', "data-tables-testing");
         Config::set('curPage', "data-tables-testing");
         $client_id = 7;
-        $this->viewinventory->client_id = 7;
+        $this->ViewInventory->client_id = 7;
         //$products = $this->item->getClientInventoryLocationCounts(86, 1);
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/dataTablesTesting.php', [
             'page_title'    => "Data Tables Testing",
