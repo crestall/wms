@@ -140,10 +140,17 @@
                 <td data-label="Delivery">
                     <?php if(!empty($job['delivery_notes'])):?>
                         <div class="notes notes-warning">
-                            <h6>Delivery Notes:</h6>
-                            <?php echo $job['delivery_notes'];?>
+                            <h6>Delivery Notes:</h6> 
+                            <?php $note = nl2br($job['delivery_notes']); echo $note;?>
                         </div>
                     <?php endif;?>
+                    <?php if(isset($_SESSION['deliveryfeedback_'.$job['id']])) :?>
+                       <div class='feedbackbox'><?php echo Session::getAndDestroy('deliveryfeedback_'.$job['id']);?></div>
+                    <?php endif; ?>
+                    <?php if(isset($_SESSION['deliveryerrorfeedback_'.$job['id']])) :?>
+                       <div class='errorbox'><?php echo Session::getAndDestroy('deliveryerrorfeedback_'.$job['id']);?></div>
+                    <?php endif; ?>
+                    <p class="text-right mt-3 mb-3"><button class="btn btn-sm btn-outline-fsg delivery_note" data-jobid="<?php echo $job['id'];?>" data-jobno="<?php echo $job['job_id'];?>">Add Note For Delivery</button></p>
                     <p><a class="btn btn-sm btn-block btn-outline-info delivery_docket" href="/jobs/create-delivery-docket/job=<?php echo $job['id'];?>">Create Delivery Docket</a></p>
                 </td>
                 <?php if($need_checkbox):?>

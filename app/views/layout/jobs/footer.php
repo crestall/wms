@@ -469,6 +469,63 @@
                             });
                         });
 
+                        $('button.delivery_note').click(function(e){
+                            var job_id = $(this).data('jobid');
+                            var job_no = $(this).data('jobno');
+                            //console.log("will add a note to job id: "+job_id) ;
+                            $('<div id="delivery_note_pop" title="Add Note For Delivery">').appendTo($('body'));
+                            $('#delivery_note_pop')
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addProductionJobDeliveryNoteForm',{job_id: job_id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                        if(textStatus == 'error') {
+                                            $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                        }
+                                        $('form#jobs-add-production-delivery-note').submit(function(e){
+                                            if($(this).valid())
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                e.preventDefault();
+                                            }
+                                        });
+                                    }
+                                );
+                            dialog = $("#delivery_note_pop").dialog({
+                                    draggable: true,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: "auto",
+                                    width: "auto",
+                                    buttons:{
+                                        'Update Notes': function(){
+                                            $('form#jobs-add-production-delivery-note').submit();
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Delivery Notes...</h2></div>' });
+                                        }
+                                    },
+                                    create: function( event, ui ) {
+                                        // Set maxWidth
+                                        $(this).css("maxWidth", "660px");
+                                    },
+                                    close: function(){
+                                        $("#note_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#delivery_note_pop').dialog('close');
+                                        });
+                                    }
+                            });
+                            $("#delivery_note_pop").dialog('open');
+                            form = dialog.find( "form" ).on( "submit", function( e ) {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Delivery Notes...</h2></div>', baseZ: 2000 });
+                            });
+                        });
+
 
 
                         $('button.print-sheet').each(function(i,e){

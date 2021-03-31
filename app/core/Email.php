@@ -1022,6 +1022,52 @@
         return true;
     }
 
+    public static function notifyProdOfDeliveryNoteChange($job_no, $new_note, $changer_name)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."delivery_note_change.html");
+
+            $replace_array = array("{JOB_NO}", "{NEW_NOTE}", "{NOTE_CHANGER}", "{CHANGE_TIME}");
+            $replace_with_array = array($job_no, $new_note, $changer_name, date("F j, Y, g:i a"));
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "email_logo.png");
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->Subject = "Production Job Delivery Notes Updated";
+            if(SITE_LIVE)
+            {
+    		    $mail->AddAddress('mike@fsg.com.au', 'Mike Bond');
+            }
+
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            $mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent");
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
+    }
+
     public static function notifyProdAdminOfNoteChange($job_no, $new_note, $changer_name)
     {
         $mail = new PHPMailer();
