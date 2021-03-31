@@ -1722,6 +1722,30 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."finishers/add-finisher");
     }
 
+    public function procAddProductionNote()
+    {
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    ${$field[$key]} = $avalue;
+                    $post_data[$field][$key] = $avalue;
+                }
+            }
+        }
+        $this->productionjob->updateJobFieldValue($job_id, 'notes', $notes);
+        Session::set('feedback', "That information has been updated.");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/view-jobs");
+    }
+
     public function procAddPackages()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
