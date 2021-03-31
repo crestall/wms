@@ -111,6 +111,7 @@ class Controller {
         $this->loadCourierClasses();
         $this->loadFinancialClasses();
         $this->loadFTPClasses();
+        $this->loadDataTablesClasses();
 
         $this->beforeAction();
 
