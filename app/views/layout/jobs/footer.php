@@ -414,6 +414,7 @@
 
                         $('button.production_note').click(function(e){
                             var job_id = $(this).data('jobid');
+                            var job_no = $(this).data('jobno');
                             //console.log("will add a note to job id: "+job_id) ;
                             $('<div id="note_pop" title="Add Note For Production">').appendTo($('body'));
                             $('#note_pop')

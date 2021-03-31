@@ -90,7 +90,7 @@
                     <?php if(isset($_SESSION['noteerrorfeedback_'.$job['id']])) :?>
                        <div class='errorbox'><?php echo Session::getAndDestroy('noteerrorfeedback_'.$job['id']);?></div>
                     <?php endif; ?>
-                    <p class="text-right mt-3"><button class="btn btn-sm btn-outline-fsg production_note" data-jobid="<?php echo $job['id'];?>">Add Note For Production</button></p>
+                    <p class="text-right mt-3"><button class="btn btn-sm btn-outline-fsg production_note" data-jobid="<?php echo $job['id'];?>" data-jobno="<?php echo $job['job_id'];?>">Add Note For Production</button></p>
                 </td>
                 <td data-label="Finisher(s)">
                     <?php if(!empty($finisher_array)):
