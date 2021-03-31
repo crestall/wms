@@ -414,6 +414,7 @@
                 'add-job':{
                     init: function(){
                         actions.common.autoComplete();
+                        actions.common.deliverToAutoCompleteCustomer();
                         actions.common.customerAutoComplete();
                         actions.common.doDates();
                         actions.common.addFinisher();
