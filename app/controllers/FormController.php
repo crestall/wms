@@ -1744,7 +1744,8 @@ class FormController extends Controller {
         if($this->productionjob->updateJobFieldValue($job_id, 'notes', $notes))
         {
             Session::set('notefeedback_'.$job_id, "That note has been updated.");
-            Email::notifyProdAdminOfNoteChange($job_no, $notes, Session::getUsersName());
+            $email_note = nl2br($notes);
+            Email::notifyProdAdminOfNoteChange($job_no, $email_note, Session::getUsersName());
         }
         else
         {
