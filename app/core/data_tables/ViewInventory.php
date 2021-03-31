@@ -12,7 +12,8 @@
     private $locations_table    = "locations";
     private $items_table        = "items";
     private $columns            = array();
-    private $client_id;
+
+    protected $client_id;
 
     public function init()
     {
