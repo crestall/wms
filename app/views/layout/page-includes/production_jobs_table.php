@@ -66,6 +66,7 @@
                             <?php echo $job['previous_job_id'];?>
                         </p>
                     <?php endif;?>
+                    <?php echo "<p>Created: ".date("d/m/Y", $job['created_date'])."</p>"; ?>
                 </td>
                 <td data-label="Client">
                     <span style="font-size: larger">
