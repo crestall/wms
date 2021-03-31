@@ -21,6 +21,13 @@ class Productionjob extends Model{
     public $table = "production_jobs";
     public $finishers_table = "production_jobs_finishers";
 
+    public function updateJobFieldValue($job_id, $field, $value)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, $field, $value, $job_id);
+        return true;
+    }
+
     public function updateJobAddress($data)
     {
         //echo "<pre>",print_r($data),"</pre>";die();

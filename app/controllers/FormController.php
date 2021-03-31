@@ -1722,6 +1722,38 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."finishers/add-finisher");
     }
 
+    public function procAddProductionNote()
+    {
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    ${$field[$key]} = $avalue;
+                    $post_data[$field][$key] = $avalue;
+                }
+            }
+        }
+        if($this->productionjob->updateJobFieldValue($job_id, 'notes', $notes))
+        {
+            Session::set('notefeedback_'.$job_id, "That note has been updated.");
+            $email_note = nl2br($notes);
+            Email::notifyProdAdminOfNoteChange($job_no, $email_note, Session::getUsersName());
+        }
+        else
+        {
+            Session::set('noteerrorfeedback_'.$job_id, "There has been a database error.<br>That note has <strong>NOT</strong> been updated.");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/view-jobs#tr_".$job_id);
+    }
+
     public function procAddPackages()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();

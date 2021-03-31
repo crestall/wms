@@ -414,6 +414,7 @@
 
                         $('button.production_note').click(function(e){
                             var job_id = $(this).data('jobid');
+                            var job_no = $(this).data('jobno');
                             //console.log("will add a note to job id: "+job_id) ;
                             $('<div id="note_pop" title="Add Note For Production">').appendTo($('body'));
                             $('#note_pop')
@@ -423,7 +424,7 @@
                                         if(textStatus == 'error') {
                                             $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
                                         }
-                                        $('form#orders-add-package').submit(function(e){
+                                        $('form#jobs-add-production-note').submit(function(e){
                                             if($(this).valid())
                                             {
 
@@ -445,7 +446,7 @@
                                     width: "auto",
                                     buttons:{
                                         'Update Notes': function(){
-                                            $('form#orders-add-package').submit();
+                                            $('form#jobs-add-production-note').submit();
                                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Notes...</h2></div>' });
                                         }
                                     },
