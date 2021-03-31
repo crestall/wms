@@ -55,7 +55,6 @@
                             $('input#address2').val(ui.item.address_2);
                             $('input#suburb').val(ui.item.suburb).valid();
                             $('input#state').val(ui.item.state).valid();
-                            $('input#country').val(ui.item.country).valid();
                             $('input#postcode').val(ui.item.postcode).valid();
                             if(ui.item.contacts)
                             {
