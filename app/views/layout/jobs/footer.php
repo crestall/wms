@@ -474,7 +474,7 @@
                             var job_no = $(this).data('jobno');
                             //console.log("will add a note to job id: "+job_id) ;
                             $('<div id="delivery_note_pop" title="Add Note For Delivery">').appendTo($('body'));
-                            $('#note_pop')
+                            $('#delivery_note_pop')
                                 .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
                                 .load('/ajaxfunctions/addProductionJobDeliveryNoteForm',{job_id: job_id},
                                     function(responseText, textStatus, XMLHttpRequest){
