@@ -84,13 +84,13 @@
                             <?php $note = nl2br($job['notes']); echo $note;?>
                         </div>
                     <?php endif;?>
-                    <p class="text-right mt-3"><button class="btn btn-sm btn-outline-fsg production_note" data-jobid="<?php echo $job['id'];?>">Add Note For Production</button></p>
                     <?php if(isset($_SESSION['notefeedback_'.$job['id']])) :?>
                        <div class='feedbackbox'><?php echo Session::getAndDestroy('notefeedback_'.$job['id']);?></div>
                     <?php endif; ?>
                     <?php if(isset($_SESSION['noteerrorfeedback_'.$job['id']])) :?>
                        <div class='errorbox'><?php echo Session::getAndDestroy('noteerrorfeedback_'.$job['id']);?></div>
                     <?php endif; ?>
+                    <p class="text-right mt-3"><button class="btn btn-sm btn-outline-fsg production_note" data-jobid="<?php echo $job['id'];?>">Add Note For Production</button></p>
                 </td>
                 <td data-label="Finisher(s)">
                     <?php if(!empty($finisher_array)):
