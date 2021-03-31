@@ -140,8 +140,8 @@
                 <td data-label="Delivery">
                     <?php if(!empty($job['delivery_notes'])):?>
                         <div class="notes notes-warning">
-                            <h6>Delivery Notes:</h6>
-                            <?php echo $job['delivery_notes'];?>
+                            <h6>Delivery Notes:</h6> 
+                            <?php $note = nl2br($job['delivery_notes']); echo $note;?>
                         </div>
                     <?php endif;?>
                     <?php if(isset($_SESSION['deliveryfeedback_'.$job['id']])) :?>
