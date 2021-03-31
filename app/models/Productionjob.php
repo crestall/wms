@@ -25,6 +25,7 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table, $field, $value, $job_id);
+        return true;
     }
 
     public function updateJobAddress($data)

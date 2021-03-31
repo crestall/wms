@@ -1741,8 +1741,15 @@ class FormController extends Controller {
                 }
             }
         }
-        $this->productionjob->updateJobFieldValue($job_id, 'notes', $notes);
-        Session::set('notefeedback_'.$job_id, "That note has been updated.");
+        if($this->productionjob->updateJobFieldValue($job_id, 'notes', $notes))
+        {
+            Session::set('notefeedback_'.$job_id, "That note has been updated.");
+            Email::notifyProdAdminOfNoteChange($job_no, $notes, Session::getUsersName());
+        }
+        else
+        {
+            Session::set('noteerrorfeedback_'.$job_id, "There has been a database error.<br>That note has <strong>NOT</strong> been updated.");
+        }
         return $this->redirector->to(PUBLIC_ROOT."jobs/view-jobs#tr_".$job_id);
     }
 
