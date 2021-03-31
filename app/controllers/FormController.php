@@ -1743,7 +1743,7 @@ class FormController extends Controller {
         }
         $this->productionjob->updateJobFieldValue($job_id, 'notes', $notes);
         Session::set('feedback', "That information has been updated.");
-        return $this->redirector->to(PUBLIC_ROOT."jobs/view-jobs");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/view-jobs#tr_".$job_id);
     }
 
     public function procAddPackages()
