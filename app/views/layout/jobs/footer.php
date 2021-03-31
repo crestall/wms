@@ -46,6 +46,28 @@
                             }
                         });
                     },
+                    deliverToAutoCompleteCustomer: function(){
+                        autoCompleter.productionJobCustomerAutoComplete($('input#ship_to'), selectDeliveryCallback, changeDeliveryCallback);
+                        function selectDeliveryCallback(event, ui)
+                        {
+                            $('input#ship_to').val(ui.item.value).valid();
+                            $('input#address').val(ui.item.address).valid();
+                            $('input#address2').val(ui.item.address_2);
+                            $('input#suburb').val(ui.item.suburb).valid();
+                            $('input#state').val(ui.item.state).valid();
+                            $('input#postcode').val(ui.item.postcode).valid();
+                            if(ui.item.contacts)
+                            {
+                                var contacts =  (ui.item.contacts).split('|');
+                                var contact = contacts[0].split(',');
+                                $('input#attention').val(contact[1]);
+                            }
+                        }
+                        function changeDeliveryCallback(event, ui)
+                        {
+                            return false;
+                        }
+                    },
                     customerAutoComplete: function(){
                         autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
                         autoCompleter.suburbAutoComplete($('#customer_suburb'), 'customer_');
@@ -391,6 +413,7 @@
                 'add-job':{
                     init: function(){
                         actions.common.autoComplete();
+                        actions.common.deliverToAutoCompleteCustomer();
                         actions.common.customerAutoComplete();
                         actions.common.doDates();
                         actions.common.addFinisher();
