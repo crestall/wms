@@ -1188,7 +1188,7 @@ class ajaxfunctionsController extends Controller
             'job_id'    => $job_id,
             'job_no'    => $jd['job_id'],
             'job'       => $jd,
-            'note'      => $jd['notes']
+            'note'      => $jd['delivery_notes']
         ]);
     }
 
