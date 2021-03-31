@@ -81,7 +81,7 @@
                     <?php if(!empty($job['notes'])):?>
                         <div class="notes notes-info mt-3">
                             <h6>Production Notes:</h6>
-                            <?php echo $job['notes'];?>
+                            <?php $note = nl2br($job['notes']) echo $note;?>
                         </div>
                     <?php endif;?>
                     <p class="text-right mt-3"><button class="btn btn-sm btn-outline-fsg production_note" data-jobid="<?php echo $job['id'];?>">Add Note For Production</button></p>
