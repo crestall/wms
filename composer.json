@@ -25,6 +25,7 @@
                 "app/controllers/",
                 "app/core/",
                 "app/core/components/",
+                "app/core/data_tables/",
                 "app/core/eparcel_accounts/",
                 "app/core/financial_apis/",
                 "app/core/financial_apis/MYOB_accounts/",
