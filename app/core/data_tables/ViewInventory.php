@@ -35,6 +35,8 @@
     //public collection method
     public static function collectData( $request )
     {
+        //the database object
+        $db = Database::openConnection();
         // Build the SQL query string from the request
         $limit = self::limit( $request );
         $order = self::order( $request, self::$columns);
@@ -47,6 +49,11 @@
         $query .= $limit;
 
         return $query;;
+
+
+
+
+
 
     }
 
@@ -87,6 +94,12 @@
                     IFNULL(b.allocated,''),','
                     SEPARATOR '|'
                 ) AS locations
+        ".self::from();
+    }
+
+    private static function from()
+    {
+        return "
             FROM
                 (
                     SELECT
