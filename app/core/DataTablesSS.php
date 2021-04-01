@@ -55,8 +55,8 @@ class DataTablesSS{
                         }
                     }
                 }
-                $out[] = $row;
             }
+            $out[] = $row;
         }
 
         return $out;
