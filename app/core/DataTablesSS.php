@@ -29,10 +29,10 @@ class DataTablesSS{
             $row = array();
             for ( $i=0, $ien=count($array) ; $i<$ien ; $i++ )
             {
-                echo "<p>Doing result ".$array[$i]."</p>";
+                //echo "<p>Doing result ".$array[$i]."</p>";
                 for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ )
                 {
-                    echo "<p>Doing column ".$columns[$j]."</p>";
+                    //echo "<p>Doing column ".$columns[$j]."</p>";
                     $column = $columns[$j];
                     // Is there a formatter?
                     if ( isset( $column['formatter'] ) )
