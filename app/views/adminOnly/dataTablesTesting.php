@@ -10,22 +10,7 @@
                 <?php echo "Client ID: ".ViewInventory::getClientId();?>
                 <?php echo ViewInventory::collectData(array(
                     'start' => 0,
-                    'length'    => 25,
-                    'search'    => array(
-                        'value' => 'Jesus'
-                    ),
-                    'columns' => array(
-                        array( 'db' => 'name', 'dt' => 0 ),
-                        array( 'db' => 'sku',  'dt' => 1 ),
-                        array( 'db' => 'barcode',   'dt' => 2 ),
-                        array( 'db' => 'client_product_id', 'dt' => 3 ),
-                        array( 'db' => 'on_hand', 'dt' => 4 ),
-                        array( 'db' => 'allocated', 'dt'=> 5),
-                        array( 'db' => 'qc_count', 'dt'=> 6),
-                        array( 'db' => 'available', 'dt'=> 7),
-                        array( 'db' => 'locations', 'dt'=> 8),
-                        array( 'db' => '', 'dt' => 9)
-                    )
+                    'length'    => 25
                 ));?>
             </div>
         </div>
