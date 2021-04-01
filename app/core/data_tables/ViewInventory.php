@@ -48,13 +48,26 @@
         $query .= $order;
         $query .= $limit;
 
-        return $query;;
+        //return $query;;
+        // Main query to actually get the data
+        $data = $db->queryData($query, self::$db_array);
 
+        // Data set length after filtering
+        $resFilterLength = $db->query("SELECT count(*)".self::from().$where, self::$db_array);
+        $recordsFiltered = $resFilterLength[0][0];
 
+        // Total data set length
+        $resTotalLength = $db->query("SELECT count(*)".self::from());
+        $recordsTotal = $resTotalLength[0][0];
 
-
-
-
+        return array(
+            "draw"            => isset ( $request['draw'] ) ?
+                intval( $request['draw'] ) :
+                0,
+            "recordsTotal"    => intval( $recordsTotal ),
+            "recordsFiltered" => intval( $recordsFiltered ),
+            "data"            => self::data_output( $columns, $data )
+        );
     }
 
     // Public Getters and Setters
