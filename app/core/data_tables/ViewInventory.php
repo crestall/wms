@@ -51,7 +51,7 @@
         //return $query;;
         // Main query to actually get the data
         $data = $db->queryData($query, self::$db_array);
-        echo "<pre>",print_r($data),"</pre>";die();
+        //echo "<pre>",print_r($data),"</pre>";die();
 
         // Data set length after filtering
         $resFilterLength = $db->queryRow("SELECT count(*)".self::from().$where, self::$db_array);
