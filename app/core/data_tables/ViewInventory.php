@@ -7,17 +7,17 @@
  */
  class ViewInventory extends DataTablesSS
  {
-    private $return_array       = array();
-    private $table              = "items_locations";
-    private $locations_table    = "locations";
-    private $items_table        = "items";
-    private $columns            = array();
+    private static $return_array       = array();
+    private static $table              = "items_locations";
+    private static $locations_table    = "locations";
+    private static $items_table        = "items";
+    private static $columns            = array();
 
-    protected $client_id;
+    private static $client_id        = 0;
 
-    public function init()
+    public static function __construct()
     {
-        $this->columns = array(
+        self::$columns = array(
             array( 'db' => 'name', 'dt' => 0 ),
             array( 'db' => 'sku',  'dt' => 1 ),
             array( 'db' => 'barcode',   'dt' => 2 ),
@@ -31,7 +31,17 @@
         );
     }
 
-    private function queryDatabase($client_id, $active = 1)
+    public static function getClientId()
+    {
+        return self::$client_id;
+    }
+
+    public static function setClientId($value)
+    {
+        self::$client_id = $value;
+    }
+
+    private static function queryDatabase($active = 1)
     {
         $db = Database::openConnection();
         $q = "
@@ -58,7 +68,7 @@
                         items_locations il ON i.id = il.item_id LEFT JOIN
                         locations l ON il.location_id = l.id
                     WHERE
-                        i.client_id = $client_id AND i.active = $active
+                        i.client_id = ".self::$client_id." AND i.active = $active
                 ) a
                 LEFT JOIN
                 (
