@@ -54,7 +54,8 @@
 
         // Data set length after filtering
         $resFilterLength = $db->queryRow("SELECT count(*)".self::from().$where, self::$db_array);
-        $recordsFiltered = $resFilterLength['count'];
+        echo "<pre>",print_r($resFilterLength),"</pre>";die();
+        //$recordsFiltered = $resFilterLength['count'];
 
         // Total data set length
         $resTotalLength = $db->queryRow("SELECT count(*)".self::from());
