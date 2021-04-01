@@ -85,7 +85,7 @@
                 IFNULL( SUM(a.qty),0) as on_hand,
                 IFNULL( SUM(a.qc_count), 0) AS qc_count,
                 IFNULL( SUM(b.allocated), 0) AS allocated,
-                a.name, a.client_product_id, a.sku, a.barcode, a.item_id, a.pack_item, a.width, a.depth, a.height, a.weight, a.low_stock_warning, a.oversize, a.image,
+                a.name ,a.sku, a.barcode, a.client_product_id, a.sku, a.item_id,
                 GROUP_CONCAT(
                     IFNULL(a.location_id,0),',',
                     IFNULL(a.location,''),',',
