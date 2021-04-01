@@ -25,11 +25,14 @@ class DataTablesSS{
         $out = array();
         foreach($data as $key => $array)
         {
+            echo "Doing db result $key<pre>",print_r($array),"</pre>";
             $row = array();
             for ( $i=0, $ien=count($array) ; $i<$ien ; $i++ )
             {
+                echo "<p>Doing result ".$array[$i]."</p>";
                 for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ )
                 {
+                    echo "<p>Doing column ".$columns[$j]."</p>";
                     $column = $columns[$j];
                     // Is there a formatter?
                     if ( isset( $column['formatter'] ) )
@@ -56,9 +59,9 @@ class DataTablesSS{
                     }
                 }
             }
-            $out[] = $row;
+            $out[$key] = $row;
         }
-
+        die();
         return $out;
     }
 
