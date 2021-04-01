@@ -53,12 +53,12 @@
         $data = $db->queryData($query, self::$db_array);
 
         // Data set length after filtering
-        $resFilterLength = $db->query("SELECT count(*)".self::from().$where, self::$db_array);
-        $recordsFiltered = $resFilterLength[0][0];
+        $resFilterLength = $db->queryRow("SELECT count(*)".self::from().$where, self::$db_array);
+        $recordsFiltered = $resFilterLength['count'];
 
         // Total data set length
-        $resTotalLength = $db->query("SELECT count(*)".self::from());
-        $recordsTotal = $resTotalLength[0][0];
+        $resTotalLength = $db->queryRow("SELECT count(*)".self::from());
+        $recordsTotal = $resTotalLength['count'];
 
         return array(
             "draw"            => isset ( $request['draw'] ) ?
