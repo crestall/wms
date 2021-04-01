@@ -8,6 +8,13 @@
             <div class="col">
                 <?php //echo "<pre>",print_r($products),"</pre>";?>
                 <?php echo "Client ID: ".ViewInventory::getClientId();?>
+                <?php echo ViewInventory::collectData(array(
+                    'start' => 0,
+                    'length'    => 25,
+                    'search'    => array(
+                        'value' => 'Jesus'
+                    )
+                ));?>
             </div>
         </div>
         <div id="waiting" class="row">
