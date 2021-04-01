@@ -23,38 +23,42 @@ class DataTablesSS{
     protected static function dataOutput($columns, $data)
     {
         $out = array();
-        for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ )
+        foreach($data as $key => $array)
         {
-            $row = array();
-            for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ )
+            for ( $i=0, $ien=count($array) ; $i<$ien ; $i++ )
             {
-                $column = $columns[$j];
-                // Is there a formatter?
-                if ( isset( $column['formatter'] ) )
+                $row = array();
+                for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ )
                 {
-                    if(empty($column['db']))
+                    $column = $columns[$j];
+                    // Is there a formatter?
+                    if ( isset( $column['formatter'] ) )
                     {
-                        $row[ $column['dt'] ] = $column['formatter']( $data[$i] );
+                        if(empty($column['db']))
+                        {
+                            $row[ $column['dt'] ] = $column['formatter']( $array[$i] );
+                        }
+                        else
+                        {
+                            $row[ $column['dt'] ] = $column['formatter']( $array[$i][ $column['db'] ], $array[$i] );
+                        }
                     }
                     else
                     {
-                        $row[ $column['dt'] ] = $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
+                        if(!empty($column['db']))
+                        {
+                            $row[ $column['dt'] ] = $array[$i][ $columns[$j]['db'] ];
+                        }
+                        else
+                        {
+                            $row[ $column['dt'] ] = "";
+                        }
                     }
                 }
-                else
-                {
-                    if(!empty($column['db']))
-                    {
-                        $row[ $column['dt'] ] = $data[$i][ $columns[$j]['db'] ];
-                    }
-                    else
-                    {
-                        $row[ $column['dt'] ] = "";
-                    }
-                }
+                $out[] = $row;
             }
-            $out[] = $row;
         }
+
         return $out;
     }
 
