@@ -15,7 +15,7 @@
 
     private static $client_id        = 0;
 
-    public function __construct()
+    private function __construct()
     {
         self::$columns = array(
             array( 'db' => 'name', 'dt' => 0 ),

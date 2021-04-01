@@ -22,14 +22,13 @@ class DataTablesSS{
     * @var array
     */
     protected $config = [];
-
      /**
-    * Constructor
-    *
-    * @param Controller $controller
-    */
-    public function __construct()
-    {}
+      * This is the constructor for DataTables Server Side Object object.
+      *
+      * @access private
+      */
+    private function __construct(){
+    }
 
     /**
      * Create the data output array for the DataTables rows
