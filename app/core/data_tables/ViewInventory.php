@@ -66,7 +66,7 @@
                 0,
             "recordsTotal"    => intval( $recordsTotal ),
             "recordsFiltered" => intval( $recordsFiltered ),
-            "data"            => self::data_output( $columns, $data )
+            "data"            => self::dataOutput( self::$columns, $data )
         );
     }
 
