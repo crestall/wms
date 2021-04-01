@@ -25,9 +25,9 @@ class DataTablesSS{
         $out = array();
         foreach($data as $key => $array)
         {
+            $row = array();
             for ( $i=0, $ien=count($array) ; $i<$ien ; $i++ )
             {
-                $row = array();
                 for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ )
                 {
                     $column = $columns[$j];
