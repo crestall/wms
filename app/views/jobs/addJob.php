@@ -9,6 +9,7 @@ $postcode = Form::value('postcode');
 $country = (empty(Form::value('country')))? "AU" : Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
 $date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
+$customer_id = ( empty(Form::value('customer_id')) )? 0 : Form::value('customer_id');
 if(Session::getAndDestroy('show_customer_address'))
 {
     $customer_collapse = "collapse show";
@@ -145,7 +146,7 @@ else
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Customer Name</label>
                                 <div class="col-md-8">
                                     <input type="text" class="required form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
-                                    <input type="hidden" name="customer_id" id="customer_id" value="0" />
+                                    <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $customer_id;?>" />
                                     <?php echo Form::displayError('customer_name');?>
                                 </div>
                             </div>
