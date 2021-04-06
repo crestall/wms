@@ -504,7 +504,11 @@
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
     		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-            $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
+            if(SITE_LIVE)
+            {
+                $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
+            }
+
 
     		$mail->Subject = "BDS Order Import Summary";
 
@@ -556,7 +560,10 @@
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
     		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-            $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
+            if(SITE_LIVE)
+            {
+                $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
+            }
 
     		$mail->Subject = "BDS Order Finalise Summary";
 
