@@ -15,11 +15,7 @@
                         dataTable.init($('table#view_items_table'), {
                             "processing": true,
                             "serverSide": true,
-                            "ajax": "/ajaxfunctions/data-tables/class=ViewInventory",
-                            "columnDefs": [
-                                { "orderable": false, "targets": [8,9] }
-                            ],
-                            "order": []
+                            "ajax": "/ajaxfunctions/data-tables/class=ViewInventory"
                         } );
                     }
                 },
