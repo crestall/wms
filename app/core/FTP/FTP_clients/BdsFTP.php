@@ -224,18 +224,23 @@ class BdsFTP extends FTP
                 do
                 {
                     echo "<p>Doing line $line</p>";
-                    echo "<p>i : $i</p>";
-                    $cpi = $o[$i];
-                    ++$i;
-                    echo "<p>i : $i</p>";
-                    $iqty = $o[$i];
-                    ++$i;
-                    echo "<p>i : $i</p>";
-                    $client_item_id = $o[$i];
-                    //++$i;
-                    //$pod_id = (isset($o[$i]))? $o[$i] : NULL;
+                    try{
+                        echo "<p>i : $i</p>";
+                        $cpi = $o[$i];
+                        ++$i;
+                        echo "<p>i : $i</p>";
+                        $iqty = $o[$i];
+                        ++$i;
+                        echo "<p>i : $i</p>";
+                        $client_item_id = $o[$i];
+                        //++$i;
+                        //$pod_id = (isset($o[$i]))? $o[$i] : NULL;
 
-                    //echo "<p>i : $i</p>";
+                        //echo "<p>i : $i</p>";
+                    } catch (Exception $e) {
+                        echo "<p>Caught the sucker: ".$e->getMessage()."</p>";
+                    }
+
 
 
                     continue;
@@ -261,6 +266,7 @@ class BdsFTP extends FTP
                     ++$i;
                 }
                 while(!empty($o[$i]));
+                die('got thru');
                 if(empty($o[12]))
                 {
                     $delivery_instructions =  "Please leave in a safe place out of the weather";
