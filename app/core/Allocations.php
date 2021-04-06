@@ -89,7 +89,7 @@ class Allocations{
                         }
                         if( $total_available < $pick_count)
                         {
-                            if(in_array($ci['client_id'], $this->backorder_clients))
+                            if( in_array($ci['client_id'], $this->backorder_clients) && $item['is_pod'] == 1 )
                             {
                                 $allocations[$id] += $total_available; // reserve available for this order
                                 //$left = $total_available;
