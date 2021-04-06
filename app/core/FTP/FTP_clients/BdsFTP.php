@@ -225,25 +225,29 @@ class BdsFTP extends FTP
                 {
                     echo "<p>Doing line $line</p>";
                     try{
-                        echo "<p>i : $i</p>";
-                        $cpi = $o[$i];
-                        ++$i;
-                        echo "<p>i : $i</p>";
-                        $iqty = $o[$i];
-                        ++$i;
-                        echo "<p>i : $i</p>";
-                        $client_item_id = $o[$i];
-                        //++$i;
-                        //$pod_id = (isset($o[$i]))? $o[$i] : NULL;
 
-                        //echo "<p>i : $i</p>";
+                        $cpi = $o[$i];
+                        echo "<p>i : $i <br> cpi : $cpi</p>";
+                        ++$i;
+
+                        $iqty = $o[$i];
+                        echo "<p>i : $i <br> iqty = $iqty</p>";
+                        ++$i;
+
+                        $client_item_id = $o[$i];
+                        echo "<p>i : $i <br> client_item_id : $client_item_id</p>";
+                        ++$i;
+
+                        $pod_id = (isset($o[$i]))? $o[$i] : NULL;
+                        echo "<p>i : $i <br> pod_id : $pod_id</p>";
+                        
                     } catch (Exception $e) {
                         echo "<p>Caught the sucker: ".$e->getMessage()."</p>";
                     }
 
 
 
-                    continue;
+                    //continue;
                     $item = $this->controller->item->getItemByClientProductId($cpi);
                     if(!$item)
                     {
@@ -266,7 +270,7 @@ class BdsFTP extends FTP
                     ++$i;
                 }
                 while(!empty($o[$i]));
-                die('got thru');
+                //die('got thru');
                 if(empty($o[12]))
                 {
                     $delivery_instructions =  "Please leave in a safe place out of the weather";
