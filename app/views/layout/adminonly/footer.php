@@ -12,10 +12,14 @@
                 },
                 'data-tables-testing':{
                     init: function(){
-                        $('#view_items_table').DataTable( {
+                        dataTable.init($('table#view_items_table'), {
                             "processing": true,
                             "serverSide": true,
-                            "ajax": "/ajaxfunctions/data-tables/class=ViewInventory"
+                            "ajax": "/ajaxfunctions/data-tables/class=ViewInventory",
+                            "columnDefs": [
+                                { "orderable": false, "targets": [4,5] }
+                            ],
+                            "order": []
                         } );
                     }
                 },
