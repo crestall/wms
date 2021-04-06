@@ -58,7 +58,7 @@ class Allocations{
                             'location_id'           =>  0,
                             'qty'                   =>  $details['qty'],
                             'client_order_item_id'  =>  $client_order_item_id,
-                            'pod_id'                =>  $pod_id
+                            'pod_id'                =>  $pod_id,
                             'is_kit'                =>  1
                         );
                         $add_collection = true;
@@ -130,7 +130,7 @@ class Allocations{
                                         'location_id'           =>  $this->controller->location->backorders_id,
                                         'qty'                   =>  $left,
                                         'client_order_item_id'  =>  $client_order_item_id,
-                                        'pod_id'                =>  $pod_id
+                                        'pod_id'                =>  $pod_id,
                                         'backorder'             =>  true
                                     );
                                 }
