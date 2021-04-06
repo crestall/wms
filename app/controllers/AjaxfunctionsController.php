@@ -69,6 +69,13 @@ class ajaxfunctionsController extends Controller
         $this->Security->requireAjax($actions);
     }
 
+    public function dataTables()
+    {
+        $class = $this->request->data['class'];
+        $data = ViewInventory::collectData($_GET);
+        $this->view->renderJson($data);
+    }
+
     public function deleteFinishers()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();

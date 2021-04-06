@@ -12,7 +12,11 @@
                 },
                 'data-tables-testing':{
                     init: function(){
-
+                        $('#view_items_table').DataTable( {
+                            "processing": true,
+                            "serverSide": true,
+                            "ajax": "/ajaxfunctions/data-tables/class=ViewInventory"
+                        } );
                     }
                 },
                 'production-database-tables-update':{

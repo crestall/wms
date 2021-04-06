@@ -23,7 +23,7 @@ class DataTablesSS{
     protected static function dataOutput($columns, $data)
     {
         $out = array();
-            echo "DATA<pre>",print_r($data),"</pre>";
+            //echo "DATA<pre>",print_r($data),"</pre>";
             $row = array();
             for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ )
             {
@@ -57,8 +57,8 @@ class DataTablesSS{
                 }
                 $out[] = $row;
             }
-            echo "OUT<pre>",print_r($out),"</pre>";
-        die();
+            //echo "OUT<pre>",print_r($out),"</pre>";
+        //die();
         return $out;
     }
 
