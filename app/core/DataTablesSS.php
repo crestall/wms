@@ -23,16 +23,13 @@ class DataTablesSS{
     protected static function dataOutput($columns, $data)
     {
         $out = array();
-        foreach($data as $key => $array)
-        {
-            echo "Doing db result $key<pre>",print_r($array),"</pre>";
+            echo "DATA<pre>",print_r($data),"</pre>";
             $row = array();
-            for ( $i=0, $ien=count($array) ; $i<$ien ; $i++ )
+            for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ )
             {
-                //echo "<p>Doing result ".$array[$i]."</p>";
+                $row = array();
                 for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ )
                 {
-                    //echo "<p>Doing column ".$columns[$j]."</p>";
                     $column = $columns[$j];
                     // Is there a formatter?
                     if ( isset( $column['formatter'] ) )
@@ -58,9 +55,9 @@ class DataTablesSS{
                         }
                     }
                 }
+                $out[] = $row;
             }
-            $out[$key] = $row;
-        }
+            echo "OUT<pre>",print_r($out),"</pre>";
         die();
         return $out;
     }
