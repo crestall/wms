@@ -17,7 +17,7 @@
                             "serverSide": true,
                             "ajax": "/ajaxfunctions/data-tables/class=ViewInventory",
                             "columnDefs": [
-                                { "orderable": false, "targets": [4,5] }
+                                { "orderable": false, "targets": [8,9] }
                             ],
                             "order": []
                         } );
