@@ -228,8 +228,11 @@ class BdsFTP extends FTP
                     $iqty = $o[$i];
                     ++$i;
                     $client_item_id = $o[$i];
-                    ++$i;
-                    $pod_id = $o[$i];
+                    if(!empty($o[$i+1]))
+                    {
+                        ++$i;
+                        $pod_id = $o[$i];
+                    }
                     $item = $this->controller->item->getItemByClientProductId($cpi);
                     if(!$item)
                     {
