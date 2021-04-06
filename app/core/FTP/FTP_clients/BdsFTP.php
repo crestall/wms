@@ -254,7 +254,7 @@ class BdsFTP extends FTP
                     }
                     ++$i;
                 }
-                while(!empty($o[$i]));
+                while(isset($o[$i]));
                 if(empty($o[12]))
                 {
                     $delivery_instructions =  "Please leave in a safe place out of the weather";
