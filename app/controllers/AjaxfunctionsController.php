@@ -71,6 +71,7 @@ class ajaxfunctionsController extends Controller
 
     public function dataTables()
     {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
         $class = $this->request->data['class'];
         $data = ViewInventory::collectData($_GET);
         $this->view->renderJson($data);
