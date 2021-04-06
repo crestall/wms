@@ -329,7 +329,8 @@ class Order extends Model{
                                 'location_id'           => $il['location_id'],
                                 'qty'                   => $il['qty'],
                                 'order_id'              => $order_id,
-                                'client_order_item_id'  => $il['client_order_item_id']
+                                'client_order_item_id'  => $il['client_order_item_id'],
+                                'pod_id'                => $il['pod_id']
                             );
                             $db->insertQuery('orders_items', $vals);
                         }
@@ -341,6 +342,7 @@ class Order extends Model{
                                 'qty'                   => $item['collection_item']['qty'],
                                 'order_id'              => $order_id,
                                 'client_order_item_id'  => $item['collection_item']['client_order_item_id'],
+                                'pod_id'                => $item['collection_item']['pod_id'],
                                 'is_kit'                => 1
                             );
                             $db->insertQuery('orders_items', $cvals);

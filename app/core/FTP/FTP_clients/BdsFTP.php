@@ -299,8 +299,8 @@ class BdsFTP extends FTP
                 ++$line;
             }//end foreach orders
             $this->order_items = $this->controller->allocations->createOrderItemsArray($orders_items);
-            echo "<pre>ORDER ITEMS",print_r($this->order_items),"</pre>";//die();
-            echo "<pre>ORDERS",print_r($orders),"</pre>";die();
+            //echo "<pre>ORDER ITEMS",print_r($this->order_items),"</pre>";//die();
+            //echo "<pre>ORDERS",print_r($orders),"</pre>";die();
             return $orders;
         }
         else
