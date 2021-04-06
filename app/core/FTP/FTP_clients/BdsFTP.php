@@ -228,11 +228,8 @@ class BdsFTP extends FTP
                     $iqty = $o[$i];
                     ++$i;
                     $client_item_id = $o[$i];
-                    if(!empty($o[$i+1]))
-                    {
-                        ++$i;
-                        $pod_id = $o[$i];
-                    }
+                    ++$i;
+                    $pod_id = (isset($o[$i]))? $o[$i] : NULL;
                     $item = $this->controller->item->getItemByClientProductId($cpi);
                     if(!$item)
                     {
@@ -254,7 +251,7 @@ class BdsFTP extends FTP
                     }
                     ++$i;
                 }
-                while(isset($o[$i]));
+                while(!empty($o[$i]));
                 if(empty($o[12]))
                 {
                     $delivery_instructions =  "Please leave in a safe place out of the weather";
