@@ -131,7 +131,7 @@ class BdsFTP extends FTP
             foreach($collected_orders as $o)
             {
                 //echo "<pre>",print_r($row),"</pre>";continue;
-                $i = 1;
+                $line = 1;
                 if($skip_first)
                 {
                     $skip_first = false;
@@ -223,13 +223,22 @@ class BdsFTP extends FTP
                 $i = 15;
                 do
                 {
+                    echo "<p>Doing line $line</p>";
+                    echo "<p>i : $i</p>";
                     $cpi = $o[$i];
                     ++$i;
+                    echo "<p>i : $i</p>";
                     $iqty = $o[$i];
                     ++$i;
+                    echo "<p>i : $i</p>";
                     $client_item_id = $o[$i];
-                    ++$i;
-                    $pod_id = (isset($o[$i]))? $o[$i] : NULL;
+                    //++$i;
+                    //$pod_id = (isset($o[$i]))? $o[$i] : NULL;
+
+                    //echo "<p>i : $i</p>";
+
+
+                    continue;
                     $item = $this->controller->item->getItemByClientProductId($cpi);
                     if(!$item)
                     {
@@ -292,6 +301,7 @@ class BdsFTP extends FTP
                     $order = array_merge($order, $ad);
                     $orders[] = $order;
                 }
+                ++$line;
             }//end foreach orders
             $this->order_items = $this->controller->allocations->createOrderItemsArray($orders_items);
             echo "<pre>ORDER ITEMS",print_r($this->order_items),"</pre>";//die();
