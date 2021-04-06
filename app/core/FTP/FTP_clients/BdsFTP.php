@@ -103,15 +103,16 @@ class BdsFTP extends FTP
         [15] => Item_1_sku
         [16] => Item_1_qty
         [17] => Item_1_id
-        [18] => Item_2_sku
-        [19] => Item_2_qty
-        [20] => Item_2_id
-        [21] => Item_3_sku
-        [22] => Item_3_qty
-        [23] => Item_3_id
-        [24] => Item_4_sku
-        [25] => Item_4_qty
-        [26] => Item_4_id
+        [18] => pod_2_id
+        [19] => Item_2_sku
+        [20] => Item_2_qty
+        [21] => Item_2_id
+        [22] => pod_2_id
+        [23] => Item_3_sku
+        [24] => Item_3_qty
+        [25] => Item_3_id
+        [26] => pod_3_id
+        etc
         */
         if(count($the_orders) == 0)
             return false;
@@ -227,6 +228,8 @@ class BdsFTP extends FTP
                     $iqty = $o[$i];
                     ++$i;
                     $client_item_id = $o[$i];
+                    ++$i;
+                    $pod_id = $o[$i];
                     $item = $this->controller->item->getItemByClientProductId($cpi);
                     if(!$item)
                     {
@@ -240,7 +243,8 @@ class BdsFTP extends FTP
                         $items[] = array(
                             'qty'               =>  $iqty,
                             'id'                =>  $item_id,
-                            'client_item_id'    => $client_item_id
+                            'client_item_id'    => $client_item_id,
+                            'pod_id'            => $pod_id
                         );
                         $qty += $iqty;
                         $weight += $item['weight'] * $iqty;
@@ -290,8 +294,8 @@ class BdsFTP extends FTP
                 }
             }//end foreach orders
             $this->order_items = $this->controller->allocations->createOrderItemsArray($orders_items);
-            //echo "<pre>ORDER ITEMS",print_r($this->order_items),"</pre>";//die();
-            //echo "<pre>ORDERS",print_r($orders),"</pre>";die();
+            echo "<pre>ORDER ITEMS",print_r($this->order_items),"</pre>";//die();
+            echo "<pre>ORDERS",print_r($orders),"</pre>";die();
             return $orders;
         }
         else
