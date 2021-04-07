@@ -21,6 +21,7 @@ class ajaxfunctionsController extends Controller
             'bulkMoveStock',
             'calcOriginPick',
             'consolidateOrders',
+            'dataTablesViewInventory',
             'deactivateUser',
             'deleteClientLocation',
             'deleteConfiguration',
@@ -73,6 +74,12 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $class = $this->request->params['args']['class'];
+        $data = ViewInventory::collectData($_GET);
+        $this->view->renderJson($data);
+    }
+
+    public function dataTablesViewInventory()
+    {
         $data = ViewInventory::collectData($_GET);
         $this->view->renderJson($data);
     }
