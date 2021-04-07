@@ -12,10 +12,15 @@
                 },
                 'data-tables-testing':{
                     init: function(){
-                        dataTable.init($('table#view_items_table'), {
+                        var table = dataTable.init($('table#view_items_table'), {
                             "processing": true,
                             "serverSide": true,
                             "ajax": "/ajaxfunctions/dataTablesViewInventory"
+                        } );
+
+                        table.on( 'xhr', function () {
+                            var json = table.ajax.json();
+                            alert( json.data.length +' row(s) were loaded' );
                         } );
                     }
                 },
