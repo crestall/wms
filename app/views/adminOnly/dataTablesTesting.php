@@ -11,7 +11,7 @@
                 <?php echo "<pre>",print_r(ViewInventory::collectData(array(
                     'start' => 0,
                     'length'    => 25
-                ))),"</pre>" ;?>
+                ),ViewInventory::getClientId())),"</pre>" ;?>
             </div>
         </div>
         <div id="waiting" class="row">
