@@ -33,12 +33,41 @@
             array( 'db' => 'allocated', 'dt'=> 5),
             array( 'db' => 'qc_count', 'dt'=> 6),
             array( 'db' => 'available', 'dt'=> 7),
-            array( 'db' => 'locations', 'dt'=> 8),
+            array(
+                'db'    => 'locations',
+                'dt'    => 8,
+                'formatter' => function( $d ){
+                    $locations = array();
+                    $ret = "";
+                    if( !empty($d) )
+                    {
+                        $la = explode("|", $d);
+                        foreach($la as $location)
+                        {
+                            list( $l['id'], $l['name'], $l['onhand'], $l['qc'], $l['allocated']) = explode(",", $location);
+                            if(!empty($l['id']))
+                                $locations[] = $l;
+                        }
+                        foreach($locations as $ind => $l)
+                        {
+                            ++$ind;
+                            $ret .= $l['name']." (".$l['onhand'].")";
+                            if(!empty($l['allocated']))
+                                $ret .= " - ".$l['allocated']." allocated";
+                            if(!empty($l['qc']))
+                                $ret .= " and ".$l['qc']." unavailable";
+                            if($ind < count($locations))
+                                $ret .= "<br>";
+                        }
+                        return $ret
+                    }
+                }
+            ),
             array(
                 'db' => '',
                 'dt' => 9,
-                'formatter' => function( $d, $row ) {
-                    return '<a href="more_log.php?more=' . '$d' . '">' . $d . '</a>';
+                'formatter' => function( $d ) {
+                    return '<a href="more_log.php?more=' . '$d' . '">MORE</a>';
                 }
             )
         );
