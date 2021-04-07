@@ -34,7 +34,13 @@
             array( 'db' => 'qc_count', 'dt'=> 6),
             array( 'db' => 'available', 'dt'=> 7),
             array( 'db' => 'locations', 'dt'=> 8),
-            array( 'db' => '', 'dt' => 9)
+            array(
+                'db' => '',
+                'dt' => 9,
+                'formatter' => function( $d, $row ) {
+                    return '<a href="more_log.php?more=' . '$d' . '">' . $d . '</a>';
+                }
+            )
         );
         // Build the SQL query string from the request
         self::$client_id = $client_id;
