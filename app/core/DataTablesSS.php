@@ -75,7 +75,7 @@ class DataTablesSS{
         $limit = '';
         if ( isset($request['start']) && $request['length'] != -1 )
         {
-            $limit = "LIMIT ".intval($request['start']).", ".intval($request['length']);
+            $limit = " LIMIT ".intval($request['start']).", ".intval($request['length']);
         }
         return $limit;
     }
@@ -111,7 +111,7 @@ class DataTablesSS{
                 }
             }
             if ( count( $orderBy ) ) {
-                $order = 'ORDER BY '.implode(', ', $orderBy);
+                $order = ' ORDER BY '.implode(', ', $orderBy);
             }
         }
         return $order;
