@@ -37,6 +37,7 @@
             array( 'db' => '', 'dt' => 9)
         );
         // Build the SQL query string from the request
+        self::$client_id = $request['client_id'];
         $limit = self::limit( $request );
         $order = self::order( $request, self::$columns);
         $where = self::filter( $request, self::$columns );
