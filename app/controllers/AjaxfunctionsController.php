@@ -81,8 +81,8 @@ class ajaxfunctionsController extends Controller
     public function dataTablesViewInventory()
     {
         $data = ViewInventory::collectData($_GET, 7);
-        echo json_encode($data);
-        //$this->view->renderJson($data);
+        //echo json_encode($data);
+        $this->view->renderJson($data);
     }
 
     public function deleteFinishers()
