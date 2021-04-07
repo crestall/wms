@@ -59,7 +59,7 @@
                             if($ind < count($locations))
                                 $ret .= "<br>";
                         }
-                        return $ret
+                        return $ret;
                     }
                 }
             ),
