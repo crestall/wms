@@ -80,8 +80,7 @@ class ajaxfunctionsController extends Controller
 
     public function dataTablesViewInventory()
     {
-        $_GET['client_id'] = ViewInventory::getClientId();
-        $data = ViewInventory::collectData($_GET);
+        $data = ViewInventory::collectData($_GET, ViewInventory::getClientId());
         echo json_encode($data);
         //$this->view->renderJson($data);
     }

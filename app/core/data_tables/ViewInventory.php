@@ -19,7 +19,7 @@
     private function __construct(){}
 
     //public collection method
-    public static function collectData( $request )
+    public static function collectData( $request, $client_id )
     {
         //the database object
         $db = Database::openConnection();
@@ -37,7 +37,7 @@
             array( 'db' => '', 'dt' => 9)
         );
         // Build the SQL query string from the request
-        self::$client_id = $request['client_id'];
+        self::$client_id = $client_id;
         $limit = self::limit( $request );
         $order = self::order( $request, self::$columns);
         $where = self::filter( $request, self::$columns );
