@@ -34,7 +34,14 @@ class DataTablesSS{
                     // Is there a formatter?
                     if ( isset( $column['formatter'] ) )
                     {
-                        $row[ $column['dt'] ] = $column['formatter']( $data[$i][ $columns[$j]['db'] ] );
+                        if(!empty($column['db']))
+                        {
+                            $row[ $column['dt'] ] = $column['formatter']( $data[$i][ $columns[$j]['db'] ] );
+                        }
+                        else
+                        {
+                            $row[ $column['dt'] ] = $column['formatter']();
+                        }
                     }
                     else
                     {

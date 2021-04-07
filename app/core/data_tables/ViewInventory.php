@@ -66,8 +66,8 @@
             array(
                 'db' => '',
                 'dt' => 9,
-                'formatter' => function( $d ) {
-                    return '<a href="more_log.php?more=' . '$d' . '">MORE</a>';
+                'formatter' => function() {
+                    return '<a href="more_log.php?more=1">MORE</a>';
                 }
             )
         );
