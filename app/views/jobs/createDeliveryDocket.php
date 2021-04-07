@@ -54,7 +54,7 @@ $po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form:
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Delivery Instructions</label>
                 <div class="col-md-4">
-                    <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Instructions For Driver"><?php echo Form::value('delivery_instructions');?></textarea>
+                    <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Instructions For Driver"><?php echo $delivery_instructions;?></textarea>
                 </div>
             </div>
             <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
