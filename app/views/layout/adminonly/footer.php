@@ -44,7 +44,8 @@
                                 { "data": "allocated" },
                                 { "data": "under_qc" },
                                 { "data": "available" },
-                                { "data": "locations" }
+                                { "data": "locations" },
+                                { "data": "" }
                             ],
                             "createdRow": function( row, data, dataIndex, cells ) {
 
