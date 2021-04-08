@@ -25,6 +25,9 @@
                                 { "orderable": false, "targets": [9] }
                             ],
                             "processing": true,
+                            "language": {
+                                processing: 'Fetching the updated results.....'
+                            },
                             "serverSide": true,
                             "ajax": {
                                 "url": "/ajaxfunctions/dataTablesViewInventory",
