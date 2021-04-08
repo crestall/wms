@@ -26,7 +26,7 @@
                             ],
                             "processing": true,
                             "language": {
-                                processing: 'Fetching the updated results.....'
+                                processing: 'Fetching results and updating the table.....'
                             },
                             "serverSide": true,
                             "ajax": {
