@@ -12,6 +12,13 @@
                 },
                 'data-tables-testing':{
                     init: function(){
+                        $('#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Products...</h2></div>' });
+                                window.location.href = "/inventory/view-inventory/client=" + $(this).val();
+                            }
+                        });
                         var table = dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
                                 { "searchable": false, "targets": [4,5,6,7,9] },
