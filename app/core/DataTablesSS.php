@@ -130,7 +130,7 @@ class DataTablesSS{
      *  @param  array $columns Column information array
      *  @return string SQL where clause
      */
-    static function filter ( $request, $columns  )
+    static function whereFilter ( $request, $columns  )
     {
         $globalSearch = array();
         $columnSearch = array();
@@ -147,8 +147,6 @@ class DataTablesSS{
                 {
                     if(!empty($column['db']))
                     {
-                        //$binding = self::bind( $bindings, '%'.$str.'%', PDO::PARAM_STR );
-                        //$globalSearch[] = "`".$column['db']."` LIKE ".$binding;
                         $globalSearch[] = "`".$column['db']."` LIKE :gterm".$i;
                         self::$db_array['gterm'.$i] = "%".$str."%";
                     }
@@ -164,12 +162,9 @@ class DataTablesSS{
                 $columnIdx = array_search( $requestColumn['data'], $dtColumns );
                 $column = $columns[ $columnIdx ];
                 $str = $requestColumn['search']['value'];
-
                 if ( $requestColumn['searchable'] == 'true' && $str != '' )
                 {
                     if(!empty($column['db'])){
-                        //$binding = self::bind( $bindings, '%'.$str.'%', PDO::PARAM_STR );
-                        //$columnSearch[] = "`".$column['db']."` LIKE ".$binding;
                         $columnSearch[] = "`".$column['db']."` LIKE :cterm".$i;
                         self::$db_array['cterm'.$i] = "%".$str."%";
                     }
@@ -190,6 +185,63 @@ class DataTablesSS{
             $where = 'WHERE '.$where;
         }
         return $where;
+    }
+
+    static function havingFilter ( $request, $columns  )
+    {
+        $globalSearch = array();
+        $columnSearch = array();
+        $dtColumns = self::pluck( $columns, 'dt' );
+        if ( isset($request['search']) && $request['search']['value'] != '' )
+        {
+            $str = $request['search']['value'];
+            for ( $i=0, $ien=count($request['columns']) ; $i<$ien ; $i++ )
+            {
+                $requestColumn = $request['columns'][$i];
+                $columnIdx = array_search( $requestColumn['data'], $dtColumns );
+                $column = $columns[ $columnIdx ];
+                if ( $requestColumn['searchable'] == 'true' )
+                {
+                    if(!empty($column['db']))
+                    {
+                        $globalSearch[] = "`".$column['db']."` LIKE :gterm".$i;
+                        self::$db_array['gterm'.$i] = "%".$str."%";
+                    }
+                }
+            }
+        }
+        // Individual column filtering
+        if ( isset( $request['columns'] ) )
+        {
+            for ( $i=0, $ien=count($request['columns']) ; $i<$ien ; $i++ )
+            {
+                $requestColumn = $request['columns'][$i];
+                $columnIdx = array_search( $requestColumn['data'], $dtColumns );
+                $column = $columns[ $columnIdx ];
+                $str = $requestColumn['search']['value'];
+                if ( $requestColumn['searchable'] == 'true' && $str != '' )
+                {
+                    if(!empty($column['db'])){
+                        $columnSearch[] = "`".$column['db']."` LIKE :cterm".$i;
+                        self::$db_array['cterm'.$i] = "%".$str."%";
+                    }
+                }
+            }
+        }
+        // Combine the filters into a single string
+        $having = '';
+        if ( count( $globalSearch ) ) {
+            $having = '('.implode(' OR ', $globalSearch).')';
+        }
+        if ( count( $columnSearch ) ) {
+            $having = $having === '' ?
+                implode(' AND ', $columnSearch) :
+                $having .' AND '. implode(' AND ', $columnSearch);
+        }
+        if ( $having !== '' ) {
+            $having = 'HAVING '.$having;
+        }
+        return $having;
     }
 
     /**

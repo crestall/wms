@@ -75,12 +75,11 @@
         self::$client_id = $client_id;
         $limit = self::limit( $request );
         $order = self::order( $request, self::$columns);
-        $where = self::filter( $request, self::$columns );
+        $having = self::havingFilter( $request, self::$columns );
 
         $query = self::createQuery();
         $query .= " GROUP BY a.name ";
-        //PUT THE HAVING CLAUSE HERE ??????????
-        $query .= $where;
+        $query .= $having;
         $query .= $order;
         $query .= $limit;
 
@@ -178,75 +177,6 @@
                     oi.location_id, oi.item_id
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
         ";
-    }
-
-    /**
-     * Searching / Filtering
-     *
-     * Construct the WHERE clause for server-side processing SQL query.
-     *
-     * NOTE this does not match the built-in DataTables filtering which does it
-     * word by word on any field. It's possible to do here performance on large
-     * databases would be very poor
-     *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array $columns Column information array
-     *  @return string SQL where clause
-     */
-    static function filter ( $request, $columns  )
-    {
-        $globalSearch = array();
-        $columnSearch = array();
-        $dtColumns = self::pluck( $columns, 'dt' );
-        if ( isset($request['search']) && $request['search']['value'] != '' )
-        {
-            $str = $request['search']['value'];
-            for ( $i=0, $ien=count($request['columns']) ; $i<$ien ; $i++ )
-            {
-                $requestColumn = $request['columns'][$i];
-                $columnIdx = array_search( $requestColumn['data'], $dtColumns );
-                $column = $columns[ $columnIdx ];
-                if ( $requestColumn['searchable'] == 'true' )
-                {
-                    if(!empty($column['db']))
-                    {
-                        $globalSearch[] = " HAVING `".$column['db']."` LIKE :gterm".$i;
-                        self::$db_array['gterm'.$i] = "%".$str."%";
-                    }
-                }
-            }
-        }
-        // Individual column filtering
-        if ( isset( $request['columns'] ) )
-        {
-            for ( $i=0, $ien=count($request['columns']) ; $i<$ien ; $i++ )
-            {
-                $requestColumn = $request['columns'][$i];
-                $columnIdx = array_search( $requestColumn['data'], $dtColumns );
-                $column = $columns[ $columnIdx ];
-                $str = $requestColumn['search']['value'];
-
-                if ( $requestColumn['searchable'] == 'true' && $str != '' )
-                {
-                    if(!empty($column['db'])){
-                        $columnSearch[] = " HAVING `".$column['db']."` LIKE :cterm".$i;
-                        self::$db_array['cterm'.$i] = "%".$str."%";
-                    }
-                }
-            }
-        }
-        // Combine the filters into a single string
-        $where = '';
-        if ( count( $globalSearch ) ) {
-            $where = '('.implode(' OR ', $globalSearch).')';
-        }
-        if ( count( $columnSearch ) ) {
-            $where = $where === '' ?
-                implode(' AND ', $columnSearch) :
-                $where .' AND '. implode(' AND ', $columnSearch);
-        }
-        
-        return $where;
     }
  }
 ?>
