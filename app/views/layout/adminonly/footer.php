@@ -26,7 +26,7 @@
                             ],
                             "processing": true,
                             "language": {
-                                processing: 'Fetching results and updating the table.....'
+                                processing: 'Fetching results and updating the display.....'
                             },
                             "serverSide": true,
                             "ajax": {
@@ -34,6 +34,20 @@
                                 "data": function( d ){
                                     d.clientID = $("#client_id").val();
                                 }
+                            },
+                            "columns": [
+                                { "data": "name" },
+                                { "data": "sku" },
+                                { "data": "barcode" },
+                                { "data": "client_product_id" },
+                                { "data": "on_hand" },
+                                { "data": "allocated" },
+                                { "data": "under_qc" },
+                                { "data": "available" },
+                                { "data": "locations" }
+                            ],
+                            "createdRow": function( row, data, dataIndex, cells ) {
+
                             }
                         } );
 
