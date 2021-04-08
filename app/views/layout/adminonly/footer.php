@@ -13,6 +13,9 @@
                 'data-tables-testing':{
                     init: function(){
                         var table = dataTable.init($('table#view_items_table'), {
+                            "columnDefs": [
+                                { "searchable": false, "targets": [4,5,6,7,9] }
+                            ],
                             "processing": true,
                             "language": {
                                 processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
