@@ -332,9 +332,10 @@ var dataTable = {
                 $("div#table_holder").show();
                 $(".dataTables_length select").addClass("form-control selectpicker");
                 $(".dataTables_filter input").addClass("form-control");
-                $(".dataTables_filter").addClass("form-group")
+                $(".dataTables_filter").addClass("form-group");
+                $('.selectpicker').selectpicker('refresh');
             },
-            "dom" : '<<"row"<"col-lg-3"f><"col-lg-3"l>><"row"i>tp>',
+            "dom" : '<<"row"<"col-lg-3"f><"col-lg-3"l>><"row"i>rptp>',
             "oLanguage": {
                 "sLengthMenu": "Rows to Show _MENU_"
             },
