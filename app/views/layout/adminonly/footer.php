@@ -14,7 +14,8 @@
                     init: function(){
                         var table = dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
-                                { "searchable": false, "targets": [4,5,6,7,9] }
+                                { "searchable": false, "targets": [4,5,6,7,9] },
+                                { "orderable": false, "targets": [9] }
                             ],
                             "processing": true,
                             "language": {
