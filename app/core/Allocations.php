@@ -125,7 +125,8 @@ class Allocations{
                                 if($left > 0)
                                 {
                                     $item_backorder = true;
-                                    $item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
+                                    //$item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
+                                    $item_backorder_string .= "<li>Item $item_name ($item_sku) is awaiting delivery of $pick_count in $pod_id</li>";
                                     $f_locations[] = array(
                                         'location_id'           =>  $this->controller->location->backorders_id,
                                         'qty'                   =>  $left,

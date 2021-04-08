@@ -480,8 +480,8 @@
             if($backorder)
             {
                 $backorders .= "
-                    <h3 class='error'>The Following Feedback Has Been Supplied Regarding Backorders</h3>
-                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                    <h3 class='backorder'>The Following Feedback Has Been Supplied Regarding Backorders</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #e6f2ff;border: 3px solid #007bff;color: #007bff;'>
                         <tr>
                             <td style='padding: 20px;'>$backorder_string</td>
                         </tr>
