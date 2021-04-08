@@ -200,7 +200,7 @@ class DataTablesSS{
      *  @param  string $prop Property to read
      *  @return array        Array of property values
      */
-    private static function pluck ( $a, $prop )
+    protected static function pluck ( $a, $prop )
     {
         $out = array();
         for ( $i=0, $len=count($a) ; $i<$len ; $i++ )
@@ -222,7 +222,7 @@ class DataTablesSS{
      * @param  string $join Glue for the concatenation
      * @return string Joined string
      */
-    private static function _flatten ( $a, $join = ' AND ' )
+    protected static function _flatten ( $a, $join = ' AND ' )
     {
         if ( ! $a )
             return '';
