@@ -79,6 +79,10 @@
 
         $query = self::createQuery();
         $query .= " GROUP BY a.name ";
+        // Total Data Set length
+        $resTotalLength = $db->queryData($query);
+        $recordsTotal = count($resTotalLength);
+        // Filtering
         $query .= $having;
         // Data Set length after filtering
         $resFilterLength = $db->queryData($query, self::$db_array);
@@ -88,9 +92,6 @@
         $query .= $limit;
         // Data for display
         $data = $db->queryData($query, self::$db_array);
-        // Total data set length
-        $resTotalLength = $db->queryRow("SELECT count(*)".self::from()." GROUP BY a.name ");
-        $recordsTotal = $resTotalLength['count(*)'];
 
         return array(
             "draw"            => isset ( $request['draw'] ) ?
