@@ -80,22 +80,14 @@
         $query = self::createQuery();
         $query .= " GROUP BY a.name ";
         $query .= $having;
+        // Data Set length after filtering
         $resFilterLength = $db->queryData($query, self::$db_array);
         $recordsFiltered = count($resFilterLength);
+        // Order and limit for display
         $query .= $order;
         $query .= $limit;
-
-        //return $query;;
-        // Main query to actually get the data
+        // Data for display
         $data = $db->queryData($query, self::$db_array);
-        //echo "<pre>",print_r($data),"</pre>";die();
-
-        // Data set length after filtering
-        //$resFilterLength = $db->queryRow("SELECT count(*)".self::from().$having, self::$db_array);
-        //echo "<pre>",print_r($resFilterLength),"</pre>";die();
-        //$recordsFiltered = $resFilterLength['count(*)'];
-        //$recordsFiltered = count($data);
-
         // Total data set length
         $resTotalLength = $db->queryRow("SELECT count(*)".self::from()." GROUP BY a.name ");
         $recordsTotal = $resTotalLength['count(*)'];
