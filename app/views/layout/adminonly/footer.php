@@ -36,16 +36,16 @@
                                 }
                             },
                             "columns": [
-                                { "data": "name" },
-                                { "data": "sku" },
-                                { "data": "barcode" },
-                                { "data": "client_product_id" },
-                                { "data": "on_hand" },
-                                { "data": "allocated" },
-                                { "data": "under_qc" },
-                                { "data": "available" },
-                                { "data": "locations" },
-                                { "data": "" }
+                                { data: "name" },
+                                { data: "sku" },
+                                { data: "barcode" },
+                                { data: "client_product_id" },
+                                { data: "on_hand" },
+                                { data: "allocated" },
+                                { data: "under_qc" },
+                                { data: "available" },
+                                { data: "locations" },
+                                { data: "buttons" }
                             ]
                         } );
 
