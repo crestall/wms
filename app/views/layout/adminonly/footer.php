@@ -52,7 +52,7 @@
                         table.on( 'xhr', function () {
                             var json = table.ajax.json();
                             //alert( json.data.length +' row(s) were loaded' );
-                            //console.log('json: ' + json.data);
+                            console.log('json: ' + json.data);
                         } );
                     }
                 },
