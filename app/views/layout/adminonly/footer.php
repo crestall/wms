@@ -36,7 +36,7 @@
                                 }
                             },
                             "columns": [
-                                { data: "name" },
+                                { data: "item_name" },
                                 { data: "sku" },
                                 { data: "barcode" },
                                 { data: "client_product_id" },
