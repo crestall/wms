@@ -97,7 +97,7 @@
         //$recordsFiltered = count($data);
 
         // Total data set length
-        $resTotalLength = $db->queryRow("SELECT count(*)".self::from());
+        $resTotalLength = $db->queryRow("SELECT count(*)".self::from()." GROUP BY a.name ");
         $recordsTotal = $resTotalLength['count(*)'];
 
         return array(
