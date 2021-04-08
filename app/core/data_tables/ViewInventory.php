@@ -132,11 +132,15 @@
     {
         return "
             SELECT
-                IFNULL( SUM(a.qty),0) as on_hand,
+                IFNULL( SUM(a.qty),0) AS on_hand,
                 IFNULL( SUM(a.qc_count), 0) AS qc_count,
                 IFNULL( SUM(b.allocated), 0) AS allocated,
                 ( IFNULL( SUM(a.qty),0) - IFNULL( SUM(a.qc_count), 0) - IFNULL( SUM(b.allocated), 0) ) AS available,
-                a.name ,a.sku, a.barcode, a.client_product_id, a.sku, a.item_id,
+                a.name AS name,
+                a.sku AS sku,
+                a.barcode AS barcode,
+                a.client_product_id AS client_product_id,
+                a.item_id AS item_id,
                 GROUP_CONCAT(
                     IFNULL(a.location_id,0),',',
                     IFNULL(a.location,''),',',
