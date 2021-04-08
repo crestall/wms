@@ -16,7 +16,7 @@
                             if($(this).val() > 0)
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Products...</h2></div>' });
-                                window.location.href = "/inventory/view-inventory/client=" + $(this).val();
+                                window.location.href = "/admin-only/data-tables-testing/client=" + $(this).val();
                             }
                         });
                         var table = dataTable.init($('table#view_items_table'), {
