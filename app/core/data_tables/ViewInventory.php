@@ -19,7 +19,7 @@
     private function __construct(){}
 
     //public collection method
-    public static function collectData( $request, $client_id )
+    public static function collectData( $request )
     {
         //the database object
         $db = Database::openConnection();
@@ -72,7 +72,7 @@
             )
         );
         // Build the SQL query string from the request
-        self::$client_id = $client_id;
+        self::$client_id = $request['clientID'];
         $limit = self::limit( $request );
         $order = self::order( $request, self::$columns);
         $having = self::havingFilter( $request, self::$columns );
