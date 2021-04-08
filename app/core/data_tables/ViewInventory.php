@@ -25,7 +25,7 @@
         $db = Database::openConnection();
         //the columns setup
         self::$columns = array(
-            array( 'db' => 'name', 'dt' => 0 ),
+            array( 'db' => 'item_name', 'dt' => 0 ),
             array( 'db' => 'sku',  'dt' => 1 ),
             array( 'db' => 'barcode',   'dt' => 2 ),
             array( 'db' => 'client_product_id', 'dt' => 3 ),
@@ -89,9 +89,10 @@
         //echo "<pre>",print_r($data),"</pre>";die();
 
         // Data set length after filtering
-        $resFilterLength = $db->queryRow("SELECT count(*)".self::from().$having, self::$db_array);
+        //$resFilterLength = $db->queryRow("SELECT count(*)".self::from().$having, self::$db_array);
         //echo "<pre>",print_r($resFilterLength),"</pre>";die();
-        $recordsFiltered = $resFilterLength['count(*)'];
+        //$recordsFiltered = $resFilterLength['count(*)'];
+        $recordsFiltered = count($data);
 
         // Total data set length
         $resTotalLength = $db->queryRow("SELECT count(*)".self::from());
@@ -136,7 +137,7 @@
                 IFNULL( SUM(a.qc_count), 0) AS qc_count,
                 IFNULL( SUM(b.allocated), 0) AS allocated,
                 ( IFNULL( SUM(a.qty),0) - IFNULL( SUM(a.qc_count), 0) - IFNULL( SUM(b.allocated), 0) ) AS available,
-                a.name AS name,
+                a.name AS item_name,
                 a.sku AS sku,
                 a.barcode AS barcode,
                 a.client_product_id AS client_product_id,
