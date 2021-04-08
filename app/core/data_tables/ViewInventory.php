@@ -210,7 +210,7 @@
                 {
                     if(!empty($column['db']))
                     {
-                        $globalSearch[] = "`".$column['db']."` HAVING :gterm".$i;
+                        $globalSearch[] = " HAVING `".$column['db']."` LIKE :gterm".$i;
                         self::$db_array['gterm'.$i] = "%".$str."%";
                     }
                 }
@@ -229,7 +229,7 @@
                 if ( $requestColumn['searchable'] == 'true' && $str != '' )
                 {
                     if(!empty($column['db'])){
-                        $columnSearch[] = "`".$column['db']."` HAVING :cterm".$i;
+                        $columnSearch[] = " HAVING `".$column['db']."` LIKE :cterm".$i;
                         self::$db_array['cterm'.$i] = "%".$str."%";
                     }
                 }
@@ -245,9 +245,7 @@
                 implode(' AND ', $columnSearch) :
                 $where .' AND '. implode(' AND ', $columnSearch);
         }
-        if ( $where !== '' ) {
-            $where = 'WHERE '.$where;
-        }
+        
         return $where;
     }
  }
