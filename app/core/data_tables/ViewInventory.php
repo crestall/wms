@@ -35,7 +35,24 @@
                     return 'row_'.$d;
                 }
             ),
-            array( 'db' => 'item_name', 'dt' => 0 ),
+            array(
+                'db' => 'item_name',
+                'dt' => 0,
+                'formatter' => function( $d, $row ){
+                    $image = "";
+                    if(preg_match('/https?/i', $row['image']))
+                    {
+                        $image = "<br><img src='".$row['image']."' class='img-thumbnail img-fluid'>";
+                    }
+                    elseif(!empty($row['image']))
+                    {
+                        $image = "<br><img src='/images/products/tn_".$row['image']."' class='img-fluid img-thumbnail'>";
+                    }
+                    return '
+                      <a href="/products/edit-product/product='.$row['item_id'].'">'.$d.'</a><?php echo $image;?>
+                    ';
+                }
+            ),
             array( 'db' => 'sku',  'dt' => 1 ),
             array( 'db' => 'barcode',   'dt' => 2 ),
             array( 'db' => 'client_product_id', 'dt' => 3 ),
