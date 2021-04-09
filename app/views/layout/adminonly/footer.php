@@ -25,7 +25,6 @@
                                 { "orderable": false, "targets": [9] }
                             ],
                             "processing": true,
-                            "rowId": 'item_id',
                             "language": {
                                 processing: 'Fetching results and updating the display.....'
                             },
