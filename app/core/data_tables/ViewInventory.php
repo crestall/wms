@@ -50,7 +50,7 @@
                     }
                     return '
                       <a href="/products/edit-product/product='.$row['item_id'].'">'.$d.'</a>'.$image
-                    ';
+                    ;
                 }
             ),
             array( 'db' => 'sku',  'dt' => 1 ),
