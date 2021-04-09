@@ -152,6 +152,7 @@
                             ],
                             "processing": true,
                             "mark": true,
+                            responsive: true,
                             "language": {
                                 processing: 'Fetching results and updating the display.....'
                             },
