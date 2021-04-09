@@ -77,7 +77,11 @@
                 'db' => '',
                 'dt' => 9,
                 'formatter' => function( $row ) {
-                    return '<a href="more_log.php?more=1">MORE - '.$row['item_id'].'</a>';
+                    return '
+                        <p><a class="btn btn-outline-secondary" href="/inventory/add-subtract-stock/product='.$row['item_id'].'">Add/Subtract Stock</a></p>
+                        <p><a class="btn btn-outline-secondary" href="/inventory/move-stock/product='.$row['item_id'].'">Move Stock</a></p>
+                        <p><a class="btn btn-outline-secondary" href="/inventory/quality-control/product='.$row['item_id'].'">Quality Control</a>  </p>
+                    ';
                 }
             )
         );
