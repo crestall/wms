@@ -35,24 +35,16 @@
                                     d.clientID = $("#client_id").val();
                                 }
                             },
-                            "columns": [
-                                { data: "item_name" },
-                                { data: "sku" },
-                                { data: "barcode" },
-                                { data: "client_product_id" },
-                                { data: "on_hand" },
-                                { data: "allocated" },
-                                { data: "under_qc" },
-                                { data: "available" },
-                                { data: "locations" },
-                                { data: "buttons" }
-                            ]
+                            "createdRow": function( row, data, dataIndex, cells ){
+                                console.log("data: "+ data);
+                                console.log("cells: "+cells);
+                            }
                         } );
 
                         table.on( 'xhr', function () {
                             var json = table.ajax.json();
                             //alert( json.data.length +' row(s) were loaded' );
-                            console.log('json: ' + json.data);
+                            //console.log('json: ' + json.data);
                         } );
                     }
                 },
