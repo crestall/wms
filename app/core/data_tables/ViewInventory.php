@@ -25,6 +25,16 @@
         $db = Database::openConnection();
         //the columns setup
         self::$columns = array(
+            array(
+                'db' => 'item_id',
+                'dt' => 'DT_RowId',
+                'formatter' => function( $d, $row ) {
+                    // Technically a DOM id cannot start with an integer, so we prefix
+                    // a string. This can also be useful if you have multiple tables
+                    // to ensure that the id is unique with a different prefix
+                    return 'row_'.$d;
+                }
+            ),
             array( 'db' => 'item_name', 'dt' => 0 ),
             array( 'db' => 'sku',  'dt' => 1 ),
             array( 'db' => 'barcode',   'dt' => 2 ),
