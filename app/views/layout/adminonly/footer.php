@@ -25,6 +25,7 @@
                                 { "orderable": false, "targets": [9] }
                             ],
                             "processing": true,
+                            "rowId": 'item_id',
                             "language": {
                                 processing: 'Fetching results and updating the display.....'
                             },
@@ -36,9 +37,7 @@
                                 }
                             },
                             "createdRow": function( row, data, dataIndex, cells ){
-                                console.log("data: "+ data);
-                                console.log("cells: "+cells);
-                                $( cells[0] ).data("label", "Name");
+                                $( cells[0] ).attr("data-label", "Name");
                             }
                         } );
 
