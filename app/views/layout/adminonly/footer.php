@@ -38,6 +38,7 @@
                             "createdRow": function( row, data, dataIndex, cells ){
                                 console.log("data: "+ data);
                                 console.log("cells: "+cells);
+                                $( cells[0] ).data("label", "Name");
                             }
                         } );
 
