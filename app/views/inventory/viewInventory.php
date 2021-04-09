@@ -12,12 +12,6 @@
             </div>
         </div>
         <?php if($client_id > 0):?>
-            <div class="row">
-                <div class="col">
-                    <?php //echo "<pre>",print_r($products),"</pre>";?>
-                    <?php echo "Client ID: ".ViewInventory::getClientId();?>
-                </div>
-            </div>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Drawing Table..</h2>

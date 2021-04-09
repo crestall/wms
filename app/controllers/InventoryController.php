@@ -320,7 +320,6 @@ class InventoryController extends Controller
         $client_id = 0;
         $active = 1;
         $client_name = "";
-        $products = array();
         if(!empty($this->request->params['args']))
         {
             $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
@@ -328,18 +327,16 @@ class InventoryController extends Controller
             {
                 $client_id = $this->request->params['args']['client'];
                 $client_name = $this->client->getClientName($client_id);
-                //$products = $this->item->getItemsForClient($client_id, $active);
-                $products = $this->item->getClientInventoryArray($client_id, $active);
+                ViewInventory::setClientId($client_id);
             }
         }
         Config::setJsConfig('curPage', "view-inventory");
         Config::set('curPage', "view-inventory");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/viewInventory.php',[
-            'page_title'    =>  'View Inventory',
-            'client_id'     =>  $client_id,
-            'client_name'   =>  $client_name,
-            'products'      =>  $products,
-            'active'        =>  $active
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/dataTablesTesting.php', [
+            'page_title'    => "Data Tables Testing",
+            'client_id'     => $client_id,
+            'client_name'	=> $client_name,
+            'active'		=> $active
         ]);
     }
 
