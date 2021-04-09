@@ -691,6 +691,17 @@ Data Tables/Pagination Overrides
     color:#222;
 }
 
+.page-item:last-child .page-link {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
 /****
 Table Live Filter
 *****/
