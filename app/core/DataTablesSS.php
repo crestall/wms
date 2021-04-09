@@ -36,11 +36,11 @@ class DataTablesSS{
                     {
                         if(!empty($column['db']))
                         {
-                            $row[ $column['dt'] ] = $column['formatter']( $data[$i][ $columns[$j]['db'] ] );
+                            $row[ $column['dt'] ] = $column['formatter']( $data[$i][ $columns[$j]['db'] ], $data[$i] );
                         }
                         else
                         {
-                            $row[ $column['dt'] ] = $column['formatter']();
+                            $row[ $column['dt'] ] = $column['formatter']( $data[$i] );
                         }
                     }
                     else
