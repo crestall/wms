@@ -28,7 +28,7 @@
             array(
                 'db' => 'item_id',
                 'dt' => 'DT_RowId',
-                'formatter' => function( $d ) {
+                'formatter' => function( $d, $row ) {
                     // Technically a DOM id cannot start with an integer, so we prefix
                     // a string. This can also be useful if you have multiple tables
                     // to ensure that the id is unique with a different prefix
@@ -46,7 +46,7 @@
             array(
                 'db'    => 'locations',
                 'dt'    => 8,
-                'formatter' => function( $d ){
+                'formatter' => function( $d, $row ){
                     $locations = array();
                     $ret = "";
                     if( !empty($d) )
@@ -76,8 +76,8 @@
             array(
                 'db' => '',
                 'dt' => 9,
-                'formatter' => function() {
-                    return '<a href="more_log.php?more=1">MORE</a>';
+                'formatter' => function( $row ) {
+                    return '<a href="more_log.php?more=1">MORE - '.$row['item_id'].'</a>';
                 }
             )
         );
