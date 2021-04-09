@@ -168,6 +168,7 @@
                 a.barcode AS barcode,
                 a.client_product_id AS client_product_id,
                 a.item_id AS item_id,
+                a.image,
                 GROUP_CONCAT(
                     IFNULL(a.location_id,0),',',
                     IFNULL(a.location,''),',',
