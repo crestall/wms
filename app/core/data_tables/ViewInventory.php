@@ -49,7 +49,7 @@
                         $image = "<br><img src='/images/products/tn_".$row['image']."' class='img-fluid img-thumbnail'>";
                     }
                     return '
-                      <a href="/products/edit-product/product='.$row['item_id'].'">'.$d.'</a><?php echo $image;?>
+                      <a href="/products/edit-product/product='.$row['item_id'].'">'.$d.'</a>'.$image
                     ';
                 }
             ),
