@@ -673,6 +673,20 @@ Data Tables Overrides
 }
 
 /****
+Data Tables/Pagination Overrides
+*****/
+.page-item.active .page-link{
+    color: #222;
+    background-color: #eaeaea;
+    border-color: #aeaeae;
+}
+
+.page_link{
+    color: #888;
+    border: 1px solid #eaeaea;
+}
+
+/****
 Table Live Filter
 *****/
 .filter-table .quick { margin-left: 0.5em; font-size: 0.8em; text-decoration: none; }
