@@ -684,6 +684,11 @@ Data Tables/Pagination Overrides
 .page-link{
     color: #888;
     border: 1px solid #eaeaea;
+    margin-left:0;
+}
+
+.page-link:hover{
+    color:#222;
 }
 
 /****
