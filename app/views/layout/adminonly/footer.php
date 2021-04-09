@@ -37,18 +37,7 @@
                             },
                             "createdRow": function( row, data, dataIndex, cells ){
                                 $( cells[0] ).attr("data-label", "Name");
-                            },
-                            "columns": [
-                                { "data": "name" },
-                                { "data": "sku" },
-                                { "data": "barcode" },
-                                { "data": "client_product_id" },
-                                { "data": "on_hand" },
-                                { "data": "allocated" },
-                                { "data": "under_qc" },
-                                { "data": "available" },
-                                { "data": "buttons" },  
-                            ]
+                            }
                         } );
 
                         table.on( 'xhr', function () {

@@ -35,17 +35,17 @@
                     return 'row_'.$d;
                 }
             ),
-            array( 'db' => 'item_name', 'dt' => 'name' ),
-            array( 'db' => 'sku',  'dt' => 'sku' ),
-            array( 'db' => 'barcode',   'dt' => 'barcode' ),
-            array( 'db' => 'client_product_id', 'dt' => 'client_product_id' ),
-            array( 'db' => 'on_hand', 'dt' => 'on_hand' ),
-            array( 'db' => 'allocated', 'dt'=> 'allocated'),
-            array( 'db' => 'qc_count', 'dt'=> 'under_qc'),
-            array( 'db' => 'available', 'dt'=> 'available'),
+            array( 'db' => 'item_name', 'dt' => 0 ),
+            array( 'db' => 'sku',  'dt' => 1 ),
+            array( 'db' => 'barcode',   'dt' => 2 ),
+            array( 'db' => 'client_product_id', 'dt' => 3 ),
+            array( 'db' => 'on_hand', 'dt' => 4 ),
+            array( 'db' => 'allocated', 'dt'=> 5),
+            array( 'db' => 'qc_count', 'dt'=> 6),
+            array( 'db' => 'available', 'dt'=> 7),
             array(
                 'db'    => 'locations',
-                'dt'    => 'locations',
+                'dt'    => 8,
                 'formatter' => function( $d ){
                     $locations = array();
                     $ret = "";
@@ -75,7 +75,7 @@
             ),
             array(
                 'db' => '',
-                'dt' => 'buttons',
+                'dt' => 9,
                 'formatter' => function() {
                     return '<a href="more_log.php?more=1">MORE</a>';
                 }
