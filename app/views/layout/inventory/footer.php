@@ -147,8 +147,23 @@
                         });
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [8,9] }
-                            ]
+                                { "searchable": false, "targets": [4,5,6,7,9] },
+                                { "orderable": false, "targets": [9] }
+                            ],
+                            "processing": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesViewInventory",
+                                "data": function( d ){
+                                    d.clientID = $("#client_id").val();
+                                }
+                            },
+                            "createdRow": function( row, data, dataIndex, cells ){
+                                $( cells[0] ).attr("data-label", "Name");
+                            }
                         } );
                     }
                 },
