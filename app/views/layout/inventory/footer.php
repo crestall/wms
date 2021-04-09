@@ -151,6 +151,7 @@
                                 { "orderable": false, "targets": [9] }
                             ],
                             "processing": true,
+                            "mark": true,
                             "language": {
                                 processing: 'Fetching results and updating the display.....'
                             },
