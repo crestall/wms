@@ -332,7 +332,7 @@ class InventoryController extends Controller
         }
         Config::setJsConfig('curPage', "view-inventory");
         Config::set('curPage', "view-inventory");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/dataTablesTesting.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/viewInventory.php', [
             'page_title'    => "View Inventory",
             'client_id'     => $client_id,
             'client_name'	=> $client_name,
