@@ -341,6 +341,7 @@ var dataTable = {
             },
             "lengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
             "pageLength": 25,
+            "responsive": true,
             "fnDrawCallback": function() {
                 $table = $(this);
                 if ($table.closest(".datatable-multi-row").length) {
