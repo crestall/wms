@@ -668,6 +668,10 @@ Data Tables Overrides
     font-size: 2em;
 }
 
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    padding: 0;
+}
+
 /****
 Table Live Filter
 *****/
