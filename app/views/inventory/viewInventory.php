@@ -24,7 +24,7 @@
                     <table class="table-striped table-hover" id="view_items_table" width="100%">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th data-priority="1">Name</th>
                                 <th>SKU</th>
                                 <th>Barcode</th>
                                 <th>Client Product ID</th>
@@ -33,7 +33,7 @@
                                 <th>Under Quality Control</th>
                                 <th>Available</th>
                                 <th>Locations</th>
-                                <th></th>
+                                <th data-priority="1"></th>
                             </tr>
                         </thead>
                     </table>
