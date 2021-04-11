@@ -21,7 +21,7 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-md-12">
-                    <table class="table-striped table-hover" id="view_items_table">
+                    <table class="table-striped table-hover" id="view_items_table" width="100%">
                         <thead>
                             <tr>
                                 <th>Name</th>
