@@ -148,8 +148,7 @@
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
                                 { "searchable": false, "targets": [4,5,6,7,9] },
-                                { "orderable": false, "targets": [9] },
-                                { "responsivePriority" : 1, "targets": [1, 9]}
+                                { "orderable": false, "targets": [9] }
                             ],
                             "processing": true,
                             "mark": true,
