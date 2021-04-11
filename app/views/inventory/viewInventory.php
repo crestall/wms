@@ -28,11 +28,11 @@
                                 <th>SKU</th>
                                 <th>Barcode</th>
                                 <th>Client Product ID</th>
-                                <th>On Hand</th>
-                                <th>Allocated</th>
+                                <th data-priority="2">On Hand</th>
+                                <th data-priority="4">Allocated</th>
                                 <th>Under Quality Control</th>
-                                <th>Available</th>
-                                <th>Locations</th>
+                                <th data-priority="1">Available</th>
+                                <th data-priority="3">Locations</th>
                                 <th data-priority="1"></th>
                             </tr>
                         </thead>
