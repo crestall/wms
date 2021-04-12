@@ -199,9 +199,9 @@ class Item extends Model{
 
     public function getClientInventoryArray($client_id, $active = 1)
     {
-        Logger::logDataTablesCalls("datatables_test", "Starting getting the items at ".date("H:i:s"));
+        //Logger::logDataTablesCalls("datatables_test", "Starting getting the items at ".date("H:i:s"));
         $items = $this->getClientInventory($client_id, $active);
-        Logger::logDataTablesCalls("datatables_test", "Got the items at ".date("H:i:s"));
+        //Logger::logDataTablesCalls("datatables_test", "Got the items at ".date("H:i:s"));
         $rows = array();
         $c = 1;
         Logger::logDataTablesCalls("datatables_test", "Starting foreach items at ".date("H:i:s"));
@@ -239,7 +239,7 @@ class Item extends Model{
             //Logger::logDataTablesCalls("datatables_test", date("H:i:s")." row $c done");
             ++$c;
         }
-        Logger::logDataTablesCalls("datatables_test", date("H:i:s")." will return all rows");
+        //Logger::logDataTablesCalls("datatables_test", date("H:i:s")." will return all rows");
         return $rows;
     }
 
