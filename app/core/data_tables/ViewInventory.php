@@ -32,6 +32,86 @@
                     return 'row_'.$d;
                 }
             ),
+            array(
+                'db' => 'item_name',
+                'dt' => 0,
+                'formatter' => function( $d, $row ){
+                        $image = "";
+                        if(preg_match('/https?/i', $row['image']))
+                        {
+                                $image = "<br><img src='".$row['image']."' class='img-thumbnail img-fluid'>";
+                        }
+                        elseif(!empty($row['image']))
+                        {
+                                $image = "<br><img src='/images/products/tn_".$row['image']."' class='img-fluid img-thumbnail'>";
+                        }
+                        return $d.'</a>'.$image ;
+                }
+            ),
+            array( 'db' => 'sku',  'dt' => 1 ),
+            array(
+                'db' => '',
+                'dt' => 2,
+                'formatter' => function($row){
+                    $details = "";
+                    if(!empty($row['width'])) $details .= "Width: ".$row['width']."cm<br/>";
+                    if(!empty($row['depth'])) $details .= "Depth: ".$row['depth']."cm<br/>";
+                    if(!empty($row['height'])) $details .= "Height: ".$row['height']."cm<br/>";
+                    if(!empty($row['weight'])) $details .= "Weight: ".$row['weight']."kg";
+                    return $details;
+                }
+            ),
+            array( 'db' => 'on_hand', 'dt' => 3 ),
+            array( 'db' => 'allocated', 'dt'=> 4),
+            array( 'db' => 'qc_count', 'dt'=> 5),
+            array( 'db' => 'available', 'dt'=> 6),
+            array(
+                'db' => '',
+                'dt' => 7,
+                'formatter' => function($row){
+                    $location_string = ($row['bays'] > 0)? $row['bays']." Full Pallet Bays<br/>" : "";
+                    $location_string .= ($row['trays'] > 0)? $row['trays']." Tray Spaces (9 per pallet bay)" : "";
+                    $location_string = rtrim($location_string, "<br/>");
+                    return $location_string;
+                }
+            ),
+            array(
+                'db' => '',
+                'dt' => 8,
+                'formatter' => function($row){
+                    return "Form goes here";
+                }
+            )
+        );
+        // Build the SQL query string from the request
+        self::$client_id = $request['clientID'];
+        $limit = self::limit( $request );
+        $order = self::order( $request, self::$columns);
+        $having = self::havingFilter( $request, self::$columns );
+
+        $query = self::createQuery();
+        $query .= " GROUP BY a.name ";
+        // Total Data Set length
+        $resTotalLength = $db->queryData($query);
+        $recordsTotal = count($resTotalLength);
+        // Filtering
+        $query .= $having;
+        // Data Set length after filtering
+        $resFilterLength = $db->queryData($query, self::$db_array);
+        $recordsFiltered = count($resFilterLength);
+        // Order and limit for display
+        $query .= $order;
+        $query .= $limit;
+        // Data for display
+        $data = $db->queryData($query, self::$db_array);
+
+        return array(
+            "draw"            => isset ( $request['draw'] ) ?
+                intval( $request['draw'] ) :
+                0,
+            "recordsTotal"    => intval( $recordsTotal ),
+            "recordsFiltered" => intval( $recordsFiltered ),
+            "data"            => self::dataOutput( self::$columns, $data )
         );
     }
 

@@ -161,9 +161,6 @@
                                 "data": function( d ){
                                     d.clientID = $("#client_id").val();
                                 }
-                            },
-                            "createdRow": function( row, data, dataIndex, cells ){
-                                $( cells[0] ).attr("data-label", "Name");
                             }
                         } );
                     }
@@ -483,14 +480,22 @@
                 },
                 'client-inventory' : {
                     init: function(){
-                        dataTable.init($('table#client_inventory_table'), {
+                        dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [6,7] }
+                                { "searchable": false, "targets": [4,5,6,7,9] },
+                                { "orderable": false, "targets": [9] }
                             ],
-                            "drawCallback": function( settings ) {
-                                $('button.update_product').click(function(e){
-                                    actions.update.click(this);
-                                });
+                            "processing": true,
+                            "mark": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesClientsViewInventory",
+                                "data": function( d ){
+                                    d.clientID = $("#client_id").val();
+                                }
                             }
                         } );
 
