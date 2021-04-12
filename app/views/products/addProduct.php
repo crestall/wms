@@ -143,6 +143,10 @@ $client_id = Form::value('client_id');
                         <input class="custom-control-input" type="checkbox" id="palletized" name="palletized" <?php if(!empty(Form::value('palletized'))) echo "palletized";?> />
                         <label class="custom-control-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
                     </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="is_pod" name="is_pod" <?php if(!empty(Form::value('is_pod'))) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="is_pod">Print on Demand</label>
+                    </div>
                     <div id="type_holder"></div>
                     <div class="row">
                         <div class="col-lg-12">
