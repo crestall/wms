@@ -104,7 +104,8 @@ class ProductsController extends Controller
             {
                 $client_id = $this->request->params['args']['client'];
                 $client_name = $this->client->getClientName($client_id);
-                $products = $this->item->getItemsForClient($client_id, $active);
+                ViewProducts::setClientId($client_id);
+                ViewProducts::setActive($active);
             }
         }
         Config::setJsConfig('curPage', "view-products");
@@ -114,7 +115,6 @@ class ProductsController extends Controller
             'pht'           =>  ": View Products",
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
-            'products'      =>  $products,
             'active'        =>  $active
         ]);
     }

@@ -57,6 +57,31 @@
 
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
+                                { "searchable": false, "targets": [2,3,4,5,6,7,8] },
+                                { "orderable": false, "targets": [2,7,8] }
+                            ],
+                            "processing": true,
+                            "mark": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesViewProducts",
+                                "data": function( d ){
+                                    d.clientID = $("#client_id").val();
+                                    d.active = $("#active").val();
+                                }
+                            },
+                            "drawCallback": function( settings ) {
+                                $('button.update_product').click(function(e) {
+                                    actions.update.click(this);
+                                })
+                            }
+                        } );
+
+                        dataTable.init($('table#view_items_table'), {
+                            "columnDefs": [
                                 { "orderable": false, "targets": [7,8,9,10] }
                             ]
                         } );
