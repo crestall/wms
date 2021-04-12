@@ -21,7 +21,9 @@ class ajaxfunctionsController extends Controller
             'bulkMoveStock',
             'calcOriginPick',
             'consolidateOrders',
+            'dataTablesClientsViewInventory',
             'dataTablesViewInventory',
+            'dataTablesViewProducts'
             'deactivateUser',
             'deleteClientLocation',
             'deleteConfiguration',

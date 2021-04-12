@@ -15,45 +15,43 @@
                     <h2>Products for <?php echo $client_name;?></h2>
                 </div>
             </div>
-            <?php if(count($products)):?>
-                <div id="waiting" class="row">
-                    <div class="col-lg-12 text-center">
-                        <h2>Drawing Table..</h2>
-                        <p>May take a few moments</p>
-                        <img class='loading' src='/images/preloader.gif' alt='loading...' />
-                    </div>
+            <div id="waiting" class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Drawing Table..</h2>
+                    <p>May take a few moments</p>
+                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <?php if($active == 1):?>
-                            <p class="text-right"><a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>/active=0">View Inactive Products</a></p>
-                        <?php else:?>
-                            <p class="text-right"><a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>">View Active Products</a></p>
-                        <?php endif;?>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <?php if($active == 1):?>
+                        <p class="text-right"><a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>/active=0">View Inactive Products</a></p>
+                    <?php else:?>
+                        <p class="text-right"><a class="btn btn-outline-fsg" href="/products/view-products/client=<?php echo $client_id;?>">View Active Products</a></p>
+                    <?php endif;?>
                 </div>
-                <div class="row" id="table_holder" style="display:none">
-                    <div class="col-lg-12">
-                        <table width="100%" class="table-striped table-hover" id="view_items_table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>SKU</th>
-                                    <th>Client Product ID</th>
-                                    <th>Barcode</th>
-                                    <th data-priority="10002">Supplier</th>
-                                    <th data-priority="10001">Dimensions</th>
-                                    <th>Weight</th>
-                                    <th>Pallet Item</th>
-                                    <th>Boxed Item</th>
-                                    <th>Dangerous Goods</th>
-                                    <th>Print On Demand</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+            </div>
+            <div class="row" id="table_holder" style="display:none">
+                <div class="col-lg-12">
+                    <table width="100%" class="table-striped table-hover" id="view_items_table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>SKU</th>
+                                <th>Client Product ID</th>
+                                <th>Barcode</th>
+                                <th data-priority="10002">Supplier</th>
+                                <th data-priority="10001">Dimensions</th>
+                                <th>Weight</th>
+                                <th>Pallet Item</th>
+                                <th>Boxed Item</th>
+                                <th>Dangerous Goods</th>
+                                <th>Print On Demand</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
+            </div>
         <?php endif;?>
     </div>
 </div>
-
