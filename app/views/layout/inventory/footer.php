@@ -480,10 +480,10 @@
                 },
                 'client-inventory' : {
                     init: function(){
-                        dataTable.init($('table#view_items_table'), {
+                        dataTable.init($('table#client_inventory_table'), {
                             "columnDefs": [
-                                { "searchable": false, "targets": [4,5,6,7,9] },
-                                { "orderable": false, "targets": [9] }
+                                { "searchable": false, "targets": [3,4,5,6,8] },
+                                { "orderable": false, "targets": [7,8] }
                             ],
                             "processing": true,
                             "mark": true,
