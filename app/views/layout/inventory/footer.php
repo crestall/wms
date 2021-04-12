@@ -482,8 +482,8 @@
                     init: function(){
                         dataTable.init($('table#client_inventory_table'), {
                             "columnDefs": [
-                                { "searchable": false, "targets": [3,4,5,6,8] },
-                                { "orderable": false, "targets": [7,8] }
+                                { "searchable": false, "targets": [2,3,4,5,6,7,8] },
+                                { "orderable": false, "targets": [2,7,8] }
                             ],
                             "processing": true,
                             "mark": true,
