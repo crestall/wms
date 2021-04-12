@@ -314,7 +314,8 @@ class Item extends Model{
     public function updateWarningLevel($data)
     {
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'low_stock_warning', $data['value'], $data['product_id']);
+        $val = ($data['value'] == 0)? NULL: $data['value'];
+        $db->updateDatabaseField($this->table, 'low_stock_warning', $val, $data['product_id']);
         return true;
     }
 
