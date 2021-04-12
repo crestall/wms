@@ -496,12 +496,13 @@
                                 "data": function( d ){
                                     d.clientID = $("#client_id").val();
                                 }
+                            },
+                            "drawCallback": function( settings ) {
+                                $('button.update_product').click(function(e) {
+                                    actions.update.click(this);
+                                })
                             }
                         } );
-
-                        $('button.update_product').click(function(e) {
-                            actions.update.click(this);
-                        });
                     }
                 },
                 'expected-shipments' : {
