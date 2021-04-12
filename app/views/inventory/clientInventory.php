@@ -17,7 +17,7 @@
         <div class="row" id="table_holder" style="display:none">
             <?php if(count($products)):?>
                 <div class="col-md-12">
-                    <table class="table-striped table-hover" id="client_inventory_table">
+                    <table class="table-striped table-hover" id="client_inventory_table" width="100%">
                         <thead>
                             <tr>
                                 <th data-priority="1">Name</th>
