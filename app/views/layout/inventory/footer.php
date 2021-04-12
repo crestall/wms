@@ -522,7 +522,7 @@
                         $errorbox.slideUp('slow');
                         if(value != "")
                         {
-                            if( (!isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))) && value > 0 )
+                            if( (!isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))) && value >= 0 )
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Records...</h2></div>' });
                                 url = "/ajaxfunctions/updateWarningLevel";
