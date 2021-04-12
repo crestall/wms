@@ -18,8 +18,8 @@
 
     private function __construct(){}
 
-    //public collection method
-    public static function collectData( $request )
+    //public collection methods
+    public static function collectDataForWarehouse( $request )
     {
         //the database object
         $db = Database::openConnection();

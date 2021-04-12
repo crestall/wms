@@ -70,17 +70,9 @@ class ajaxfunctionsController extends Controller
         $this->Security->requireAjax($actions);
     }
 
-    public function dataTables()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $class = $this->request->params['args']['class'];
-        $data = ViewInventory::collectData($_GET);
-        $this->view->renderJson($data);
-    }
-
     public function dataTablesViewInventory()
     {
-        $data = ViewInventory::collectData($_GET, 7);
+        $data = ViewInventory::collectDataForWarehouse($_GET );
         //echo json_encode($data);
         $this->view->renderJson($data);
     }
