@@ -332,14 +332,16 @@ var dataTable = {
                 $("div#table_holder").show();
                 $(".dataTables_length select").addClass("form-control selectpicker");
                 $(".dataTables_filter input").addClass("form-control");
-                $(".dataTables_filter").addClass("form-group")
+                $(".dataTables_filter").addClass("form-group");
+                $('.selectpicker').selectpicker('refresh');
             },
-            "dom" : '<<"row"<"col-lg-3"f><"col-lg-3"l>><"row"i>tp>',
+            "dom" : '<<"row"<"col-lg-3"f><"col-lg-3"l>><"row"i>rptp>',
             "oLanguage": {
                 "sLengthMenu": "Rows to Show _MENU_"
             },
             "lengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
             "pageLength": 25,
+            "responsive": true,
             "fnDrawCallback": function() {
                 $table = $(this);
                 if ($table.closest(".datatable-multi-row").length) {

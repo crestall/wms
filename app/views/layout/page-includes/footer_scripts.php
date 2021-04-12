@@ -14,9 +14,10 @@
         <!-- Menu JavaScript -->
         <!--script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.8/metisMenu.min.js"></script-->
         <!-- DataTables JavaScript -->
-        <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
         <script src="//cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-        <script src="//cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+        <!--script src="//cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script-->
         <script src="//cdn.jsdelivr.net/mark.js/8.6.0/jquery.mark.min.js"></script>
         <script src="//cdn.jsdelivr.net/datatables.mark.js/2.0.0/datatables.mark.min.js"></script>
         <!-- Block UI JavaScript -->

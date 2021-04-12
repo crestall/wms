@@ -24,12 +24,26 @@ class AdminOnlyController extends Controller
 
     public function dataTablesTesting()
     {
+        $client_id = 0;
+        $active = 1;
+        $client_name = "";
+        if(!empty($this->request->params['args']))
+        {
+            $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+                ViewInventory::setClientId($client_id);
+            }
+        }
         Config::setJsConfig('curPage', "data-tables-testing");
         Config::set('curPage', "data-tables-testing");
-        $products = $this->item->getClientInventoryLocationCounts(86, 1);
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/dataTablesTesting.php', [
-            'page_title'    =>  "Data Tables Testing",
-            'products'      => $products
+            'page_title'    => "Data Tables Testing",
+            'client_id'     => $client_id,
+            'client_name'	=> $client_name,
+            'active'		=> $active
         ]);
     }
 

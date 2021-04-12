@@ -147,8 +147,21 @@
                         });
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [8,9] }
-                            ]
+                                { "searchable": false, "targets": [4,5,6,7,9] },
+                                { "orderable": false, "targets": [9] }
+                            ],
+                            "processing": true,
+                            "mark": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesViewInventory",
+                                "data": function( d ){
+                                    d.clientID = $("#client_id").val();
+                                }
+                            }
                         } );
                     }
                 },
@@ -469,18 +482,27 @@
                     init: function(){
                         dataTable.init($('table#client_inventory_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [6,7] }
+                                { "searchable": false, "targets": [2,3,4,5,6,7,8] },
+                                { "orderable": false, "targets": [2,7,8] }
                             ],
+                            "processing": true,
+                            "mark": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesClientsViewInventory",
+                                "data": function( d ){
+                                    d.clientID = $("#client_id").val();
+                                }
+                            },
                             "drawCallback": function( settings ) {
-                                $('button.update_product').click(function(e){
+                                $('button.update_product').click(function(e) {
                                     actions.update.click(this);
-                                });
+                                })
                             }
                         } );
-
-                        $('button.update_product').click(function(e) {
-                            actions.update.click(this);
-                        });
                     }
                 },
                 'expected-shipments' : {
@@ -500,7 +522,7 @@
                         $errorbox.slideUp('slow');
                         if(value != "")
                         {
-                            if( (!isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))) && value > 0 )
+                            if( (!isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))) && value >= 0 )
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Records...</h2></div>' });
                                 url = "/ajaxfunctions/updateWarningLevel";
