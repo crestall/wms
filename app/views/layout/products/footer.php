@@ -80,12 +80,6 @@
                             }
                         } );
 
-                        dataTable.init($('table#view_items_table'), {
-                            "columnDefs": [
-                                { "orderable": false, "targets": [7,8,9,10] }
-                            ]
-                        } );
-
                         $('button.update_product').click(function(e) {
                             actions.update.click(this);
                         });
