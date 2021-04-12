@@ -23,7 +23,7 @@ class ajaxfunctionsController extends Controller
             'consolidateOrders',
             'dataTablesClientsViewInventory',
             'dataTablesViewInventory',
-            'dataTablesViewProducts'
+            'dataTablesViewProducts',
             'deactivateUser',
             'deleteClientLocation',
             'deleteConfiguration',
