@@ -336,7 +336,8 @@ class InventoryController extends Controller
             'page_title'    => "View Inventory",
             'client_id'     => $client_id,
             'client_name'	=> $client_name,
-            'active'		=> $active
+            'active'		=> $active,
+            'pht'           =>  ": View Inventory",
         ]);
     }
 
@@ -354,7 +355,8 @@ class InventoryController extends Controller
             'page_title'    =>  'Current Inventory',
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
-            'products'      =>  $products
+            'products'      =>  $products,
+            'pht'           =>  ": View Inventory",
         ]);
     }
 
