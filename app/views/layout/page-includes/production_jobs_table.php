@@ -3,14 +3,14 @@
   //echo "<p>User Role: $user_role</p>";
   //echo "<pre>",print_r($jobs),"</pre>";
 ?>
-<table class="table-striped table-hover" id="production_jobs_table">
+<table class="table-striped table-hover" id="production_jobs_table" width="100%">
     <thead>
         <tr>
-            <th nowwrap>Priority<br /><select id="priority_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect();?></select>&nbsp;<em><small>(all)</small></em></th>
-            <th>Job Number</th>
-            <th>Client</th>
-            <th class="no-sort" style="width:250px">Description</th>
-            <th class="no-sort" style="width:250px">Delivery</th>
+            <th nowwrap data-priority="1001">Priority<br /><select id="priority_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect();?></select>&nbsp;<em><small>(all)</small></em></th>
+            <th data-priority="1">Job Number</th>
+            <th data-priority="1">Client</th>
+            <th class="no-sort">Description</th>
+            <th class="no-sort">Delivery</th>
             <?php if($can_change_status):?>
                 <th nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
             <?php else:?>
@@ -23,7 +23,7 @@
             <?php endif;?>
             <th>Due Date</th>
             <?php if($need_checkbox):?>
-                <th nowrap class="no-sort">
+                <th data-priority="1" nowrap class="no-sort">
                     Select
                     <div class="checkbox checkbox-default">
                         <input id="select_all" class="styled" type="checkbox">
