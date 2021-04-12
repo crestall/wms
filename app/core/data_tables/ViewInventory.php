@@ -19,6 +19,22 @@
     private function __construct(){}
 
     //public collection methods
+    public static function collectDataForClient( $request )
+    {
+        //the database object
+        $db = Database::openConnection();
+        //the columns setup
+        self::$columns = array(
+            array(
+                'db' => 'item_id',
+                'dt' => 'DT_RowId',
+                'formatter' => function( $d, $row ) {
+                    return 'row_'.$d;
+                }
+            ),
+        );
+    }
+
     public static function collectDataForWarehouse( $request )
     {
         //the database object
@@ -29,9 +45,6 @@
                 'db' => 'item_id',
                 'dt' => 'DT_RowId',
                 'formatter' => function( $d, $row ) {
-                    // Technically a DOM id cannot start with an integer, so we prefix
-                    // a string. This can also be useful if you have multiple tables
-                    // to ensure that the id is unique with a different prefix
                     return 'row_'.$d;
                 }
             ),
@@ -169,6 +182,9 @@
                 a.client_product_id AS client_product_id,
                 a.item_id AS item_id,
                 a.image,
+                a.width,
+                a.depth,
+                a.weight,
                 GROUP_CONCAT(
                     IFNULL(a.location_id,0),',',
                     IFNULL(a.location,''),',',
@@ -176,7 +192,9 @@
                     IFNULL(a.qc_count,''),',',
                     IFNULL(b.allocated,''),','
                     SEPARATOR '|'
-                ) AS locations
+                ) AS locations,
+                (SELECT COUNT(*) FROM items_locations JOIN locations ON locations.id = items_locations.location_id WHERE item_id = a.item_id AND locations.tray = 0) AS bays,
+                (SELECT COUNT(*) FROM items_locations JOIN locations ON locations.id = items_locations.location_id WHERE item_id = a.item_id AND locations.tray = 1) AS trays
         ".self::from();
     }
 
