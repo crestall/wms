@@ -80,10 +80,10 @@
                 'dt' => 8,
                 'formatter' => function($row){
                     return "
-                        <p><input type='text' class='form-control number ml-auto' id='lowstock_{$row['item_id'}' name='lowstock_{$row['item_id'}' value='{$row['low_stock_warning'}' style=1max-width: 80px1 /></p>
-                        <p class='text-right'><button class='btn btn-outline-secondary btn-sm update_product' data-productid='{$row['item_id'}'>Update</button> </p>
-                        <div class='errorbox' style='display:none;' id='error_{$row['item_id'}'>Only input whole, positive numbers please</div>
-                        <div class='feedbackbox' style='display:none;' id='feedback_<{$row['item_id'}'>Product warning level updated</div>
+                        <p><input type='text' class='form-control number ml-auto' id='lowstock_{$row['item_id']}' name='lowstock_{$row['item_id']}' value='{$row['low_stock_warning']}' style=1max-width: 80px1 /></p>
+                        <p class='text-right'><button class='btn btn-outline-secondary btn-sm update_product' data-productid='{$row['item_id']}'>Update</button> </p>
+                        <div class='errorbox' style='display:none;' id='error_{$row['item_id']}'>Only input whole, positive numbers please</div>
+                        <div class='feedbackbox' style='display:none;' id='feedback_<{$row['item_id']}'>Product warning level updated</div>
                     ";
                 }
             )
