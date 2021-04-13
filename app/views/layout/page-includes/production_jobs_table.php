@@ -10,6 +10,8 @@
         <tr>
             <th data-priority="10001" nowwrap>Priority</th>
             <th data-priority="1">Job Number</th>
+            <th data-priority="1">Client</th>
+            
         </tr>
     </thead>
 </table>
