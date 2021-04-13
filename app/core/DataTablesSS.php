@@ -239,7 +239,7 @@ class DataTablesSS{
                 $having .' AND '. implode(' AND ', $columnSearch);
         }
         if ( $having !== '' ) {
-            $having = 'HAVING '.$having;
+            $having = ' HAVING '.$having;
         }
         return $having;
     }
