@@ -25,7 +25,7 @@
         //the columns setup
         self::$columns = array(
             array(
-                'db' => 'item_id',
+                'db' => 'id',
                 'dt' => 'DT_RowId',
                 'formatter' => function( $d, $row ) {
                     return 'row_'.$d;
@@ -151,7 +151,7 @@
     //private helper methods
     private static function createQuery()
     {
-        return "SELECT  * items WHERE `client_id` = ".self::$client_id." AND `active` = ".self::$active;
+        return "SELECT * FROM items WHERE `client_id` = ".self::$client_id." AND `active` = ".self::$active;
     }
 
  }
