@@ -298,10 +298,20 @@
                         }
                         var paging = $('input#completed').val() == 1;
                         var table = dataTable.init($('table#production_jobs_table'), {
+                            "processing": true,
+                            "mark": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesViewProductionJobs",
+                                "data": function( d ){
+                                    d.clientID = $("#client_id").val();
+                                }
+                            },
                             //No pagination for this table
                             "paging":   paging,
-                            //No initial sort,
-                            "order": [],
                             //search highlighting
                             mark: true,
                             //but blanks on the bottom when sorting
