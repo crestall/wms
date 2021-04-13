@@ -21,6 +21,9 @@ class ajaxfunctionsController extends Controller
             'bulkMoveStock',
             'calcOriginPick',
             'consolidateOrders',
+            'dataTablesClientsViewInventory',
+            'dataTablesViewInventory',
+            'dataTablesViewProducts',
             'deactivateUser',
             'deleteClientLocation',
             'deleteConfiguration',
@@ -67,6 +70,27 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function dataTablesViewInventory()
+    {
+        $data = ViewInventory::collectDataForWarehouse($_GET );
+        //echo json_encode($data);
+        $this->view->renderJson($data);
+    }
+
+    public function dataTablesViewProducts()
+    {
+        $data = ViewProducts::collectData($_GET );
+        //echo json_encode($data);
+        $this->view->renderJson($data);
+    }
+
+    public function dataTablesClientsViewInventory()
+    {
+        $data = ViewInventory::collectDataForClient($_GET );
+        //echo json_encode($data);
+        $this->view->renderJson($data);
     }
 
     public function deleteFinishers()

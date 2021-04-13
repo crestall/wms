@@ -12,7 +12,40 @@
                 },
                 'data-tables-testing':{
                     init: function(){
+                        $('#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Products...</h2></div>' });
+                                window.location.href = "/admin-only/data-tables-testing/client=" + $(this).val();
+                            }
+                        });
+                        var table = dataTable.init($('table#view_items_table'), {
+                            "columnDefs": [
+                                { "searchable": false, "targets": [4,5,6,7,9] },
+                                { "orderable": false, "targets": [9] }
+                            ],
+                            "processing": true,
+                            "mark": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesViewInventory",
+                                "data": function( d ){
+                                    d.clientID = $("#client_id").val();
+                                }
+                            },
+                            "createdRow": function( row, data, dataIndex, cells ){
+                                $( cells[0] ).attr("data-label", "Name");
+                            }
+                        } );
 
+                        table.on( 'xhr', function () {
+                            var json = table.ajax.json();
+                            //alert( json.data.length +' row(s) were loaded' );
+                            //console.log('json: ' + json.data);
+                        } );
                     }
                 },
                 'production-database-tables-update':{
