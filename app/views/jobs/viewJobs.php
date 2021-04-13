@@ -1,5 +1,5 @@
 <?php
-$can_do_runsheets  = Permission::canDoRunsheets($user_role);
+$can_do_runsheets  = false;
 $can_change_status = Permission::canChangeStatus($user_role);
 $need_checkbox = ($can_do_runsheets || $can_change_status);
 ?>
