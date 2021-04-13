@@ -110,7 +110,7 @@ class Controller {
         $this->loadCourierClasses();
         $this->loadFinancialClasses();
         $this->loadFTPClasses();
-        $this->loadEBAYClasses();
+        //$this->loadEBAYClasses();
 
         $this->beforeAction();
 
