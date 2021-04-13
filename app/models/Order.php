@@ -1103,6 +1103,7 @@ class Order extends Model{
                 oi.location_id,
                 oi.item_id,
                 oi.id AS line_id,
+                oi.pod_id,
                 l.location
             FROM
                 orders_items oi
