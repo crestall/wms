@@ -76,7 +76,7 @@
                                             <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                                 <p><span class="iname"><?php echo $i['name'];?></span><br>
                                                 <span class="icount font-weight-bold">Required: <?php echo $required;?></span><br>
-                                                <span class="bo_pod bold">Awaiting: <?php echo $i['pod_id'];?></span></p>
+                                                <span class="bo_pod font-weight-bold">Awaiting: <?php echo $i['pod_id'];?></span></p>
                                             </div>
                                             <div class="item_total text-right font-weight-bold">
                                                 Total Available: <?php echo $available;?>
