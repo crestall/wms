@@ -19,6 +19,7 @@
     {
         //the database object
         $db = Database::openConnection();
+        $user_role = $request['userRole'];
         //the columns setup
         self::$columns = array(
             array(
