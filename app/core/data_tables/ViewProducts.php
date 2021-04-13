@@ -155,7 +155,7 @@
         return "SELECT
                     id, name, sku, client_product_id, barcode, supplier, image,
                     CONCAT(width,'X',depth,'X',height) AS dimensions, weight,
-                    palletized, boxed_item,is_dangerous_good, is_pod, collection,
+                    palletized, boxed_item,is_dangerous_good, is_pod, collection
                 FROM items WHERE `client_id` = ".self::$client_id." AND `active` = ".self::$active;
     }
 
