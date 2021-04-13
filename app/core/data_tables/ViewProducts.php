@@ -32,7 +32,7 @@
                 }
             ),
             array(
-                'db' => 'item_name',
+                'db' => 'name',
                 'dt' => 0,
                 'formatter' => function( $d, $row ){
                     $image = "";
