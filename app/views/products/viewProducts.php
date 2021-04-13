@@ -36,7 +36,7 @@
                     <table width="100%" class="table-striped table-hover" id="view_items_table">
                         <thead>
                             <tr>
-                                <th style="max-width: 120px;">Name</th>
+                                <th style="max-width: 150px;">Name</th>
                                 <th>SKU</th>
                                 <th>Client Product ID</th>
                                 <th>Barcode</th>
