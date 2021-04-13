@@ -53,13 +53,7 @@
             array( 'db' => 'client_product_id', 'dt' => 2 ),
             array( 'db' => 'barcode',   'dt' => 3 ),
             array( 'db' => 'supplier', 'dt' => 4),
-            array(
-                'db' => '',
-                'dt' => '5',
-                'formatter' => function( $row ){
-                    return $row['width']."X".$row['depth']."X".$row['height'];
-                }
-            ),
+            array( 'db' => 'dimensions','dt' => '5'),
             array(
                 'db' => 'weight',
                 'dt' => '6',
