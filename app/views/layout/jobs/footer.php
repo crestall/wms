@@ -307,7 +307,7 @@
                             "ajax": {
                                 "url": "/ajaxfunctions/dataTablesViewProductionJobs",
                                 "data": function( d ){
-                                    d.clientID = $("#client_id").val();
+                                    d.userRole = $("#user_role").val();
                                 }
                             },
                             //No pagination for this table
