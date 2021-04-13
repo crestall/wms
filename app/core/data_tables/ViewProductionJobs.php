@@ -19,7 +19,7 @@
     {
         //the database object
         $db = Database::openConnection();
-        $user_role = $request['userRole'];
+
         //the columns setup
         self::$columns = array(
             array(
@@ -43,6 +43,7 @@
                 'db' => 'job_id',
                 'dt' => 1,
                 'formatter' => function( $d, $row ){
+                    $user_role = $request['userRole'];
                     $ret = ($user_role == "production_admin" ||  $user_role == "production")?
                         "<a href='/jobs/update-job/job=".$row['id'].">".$d."</a>":
                         $d;
