@@ -4,6 +4,7 @@ $can_change_status = Permission::canChangeStatus($user_role);
 $need_checkbox = ($can_do_runsheets || $can_change_status);
 ?>
 <div id="page-wrapper">
+    <?php echo "<p>USERROLE: $user_role</p>"; ?>
     <input type="hidden" id="completed" value="<?php echo $completed;?>" >
     <input type="hidden" id="cancelled" value="<?php echo $cancelled;?>" >
     <div id="page_container" class="container-xxl">
