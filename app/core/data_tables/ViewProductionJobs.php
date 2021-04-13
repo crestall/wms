@@ -37,6 +37,25 @@
                       <select class='selectpicker priority'  id='priority_{$row['id']}' data-ranking='".$ranking."' data-style='btn-outline-secondary btn-sm' data-width='fit'><option value=-0'>--</option>".Utility::getPrioritySelect($d)."</select>
                     ";
                 }
+            ),
+            array(
+                'db' => 'job_id',
+                'dt' => 1,
+                'formatter' => function( $d, $row ){
+                    $ret = ($user_role == "production_admin" ||  $user_role == "production")?
+                        "<a href='/jobs/update-job/job=".$row['id'].">".$d."</a>":
+                        $d;
+                    if(!empty($row['previous_job_id']))
+                    {
+                        $ret .= "
+                           <p class='border-top border-secondary border-top-dashed pt-3'>
+                                Previous<br>".$row['previous_job_id']."
+                            </p>
+                        ";
+                    }
+                    $ret .= "<p>Created: ".date("d/m/Y", $row['created_date'])."</p>";
+                    return $ret;
+                }
             )
         );
         // Build the SQL query string from the request
