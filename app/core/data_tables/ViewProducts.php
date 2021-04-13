@@ -152,7 +152,7 @@
     private static function createQuery()
     {
         return "SELECT
-                    id, name, sku, client_product_id, barcode, supplier, image
+                    id, name, sku, client_product_id, barcode, supplier, image,
                     CONCAT(width,'X',depth,'X',height) AS dimensions, weight,
                     palletized, boxed_item,is_dangerous_good, is_pod
                 FROM items WHERE `client_id` = ".self::$client_id." AND `active` = ".self::$active;
