@@ -101,14 +101,14 @@
         self::$active = $request['active'];
         $limit = self::limit( $request );
         $order = self::order( $request, self::$columns);
-        $where = self::whereFilter( $request, self::$columns );
+        $having = self::havingFilter( $request, self::$columns );
 
         $query = self::createQuery();
         // Total Data Set length
         $resTotalLength = $db->queryData($query);
         $recordsTotal = count($resTotalLength);
         // Filtering
-        $query .= $where;
+        $query .= $having;
         // Data Set length after filtering
         $resFilterLength = $db->queryData($query, self::$db_array);
         $recordsFiltered = count($resFilterLength);
@@ -151,7 +151,11 @@
     //private helper methods
     private static function createQuery()
     {
-        return "SELECT * FROM items WHERE `client_id` = ".self::$client_id." AND `active` = ".self::$active;
+        return "SELECT
+                    id, name, sku, client_product_id, barcode, supplier,
+                    CONCAT(width,'X',depth,'X',height) AS dimensions, weight,
+                    palletized, boxed_item,is_dangerous_good, is_pod
+                FROM items WHERE `client_id` = ".self::$client_id." AND `active` = ".self::$active;
     }
 
  }
