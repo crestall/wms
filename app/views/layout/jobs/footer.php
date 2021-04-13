@@ -329,7 +329,7 @@
                                     targets: "no-sort"
                                 }
                             ],
-                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">tp>',
+                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">rptp>'
 
                         });
                         table.on( 'draw', function () {
