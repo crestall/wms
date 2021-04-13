@@ -43,7 +43,8 @@
                 'db' => 'job_id',
                 'dt' => 1,
                 'formatter' => function( $d, $row ){
-                    $user_role = $request['userRole'];
+                    $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+                    $user_role = str_replace(" ","_", $user_role);
                     $ret = ($user_role == "production_admin" ||  $user_role == "production")?
                         "<a href='/jobs/update-job/job=".$row['id'].">".$d."</a>":
                         $d;
