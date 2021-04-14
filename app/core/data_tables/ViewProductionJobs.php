@@ -47,6 +47,13 @@
                 }
             ),
             array(
+                'db' => 'status_colour',
+                'dt' => 'DT_StatusColour',
+                'formatter' => function( $d, $row ) {
+                    return 'row_'.$d;
+                }
+            ),
+            array(
                 'db' => 'priority',
                 'dt' => 0,
                 'formatter' => function( $d, $row ){
