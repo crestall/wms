@@ -47,7 +47,7 @@
                 'dt' => 1,
                 'formatter' => function( $d, $row ){
                     $ret = (self::$user_role == "production_admin" ||  self::$user_role == "production" || self::$user_role == "production_sales")?
-                        "<a href='/jobs/update-job/job=".$row['id'].">".$d."</a>":
+                        "<a href='/jobs/update-job/job=".$row['id']."'>".$d."</a>":
                         $d;
                     if(!empty($row['previous_job_id']))
                     {
