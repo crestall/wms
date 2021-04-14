@@ -82,7 +82,7 @@
                     $ret = $d;
                     if(!empty($row['notes']))
                     {
-                        $note = nl2br($row['notes'];
+                        $note = nl2br($row['notes']);
                         $ret .= "
                              <div class='notes notes-info mt-3'>
                                 <h6>Production Notes:</h6>
