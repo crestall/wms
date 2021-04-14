@@ -11,7 +11,7 @@
             <th data-priority="10001" nowwrap>Priority</th>
             <th data-priority="1">Job Number</th>
             <th data-priority="1">Client</th>
-            
+            <th data-priority="2" style="max-width: 250px;">Description</th>
         </tr>
     </thead>
 </table>
