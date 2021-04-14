@@ -166,6 +166,8 @@
                     if(!self::$can_change_status)
                         $ret .= " disabled ";
                     $ret .= "><option value='0'>--Select One--</option>";
+                    $js = new Jobstatus();
+                    $ret .= $js->getSelectJobStatus($row['status_id']);
                     $ret .= "</select>";
                     return $ret;
                 }
