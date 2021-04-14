@@ -15,6 +15,7 @@ $s_ids_string = implode(",", $status_ids);
     <input type="hidden" id="customer_ids" value="<?php echo $c_ids_string;?>" >
     <input type="hidden" id="finisher_ids" value="<?php echo $f_ids_string;?>" >
     <input type="hidden" id="status_ids" value="<?php echo $s_ids_string;?>" >
+    <input type="hidden" id="salesrep_ids" value="<?php echo $sr_ids_string;?>" >
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
