@@ -84,12 +84,42 @@
                     {
                         $note = nl2br($row['notes']);
                         $ret .= "
-                             <div class='notes notes-info mt-3'>
+                            <div class='notes notes-info mt-3'>
                                 <h6>Production Notes:</h6>
                                 $note
                             </div>
+                            <p class='text-right mt-3'><button class='btn btn-sm btn-outline-fsg production_note' data-jobid='{$row['id']}' data-jobno='{$row['job_id']}'>Add Note For Production</button></p>
                         ";
                     }
+                    return $ret;
+                }
+            ),
+            array(
+                'db' => 'finishers',
+                'dt' => 4,
+                'formatter' => function( $d, $row ){
+                    $finisher_array = array();
+                    $ret = "";
+                    if(!empty($row['finishers']))
+                    {
+                        $fa = explode("|", $row['finishers']);
+                        foreach($fa as $f)
+                        {
+                            list($a['id'], $a['name'],$a['email'],$a['phone'],$a['address'],$a['address_2'],$a['suburb'],$a['state'],$a['postcode'],$a['country'],$a['contact_id'],$a['contact_name'],$a['contact_email'],$a['contact_phone'], $a['contact_role'],$a['purchase_order'],$a['ed_date_value']) = explode(',', $f);
+                            if(!empty($a['id']))
+                                $finisher_array[] = $a;
+                        }
+                    }
+                    if(!empty($finisher_array)):
+                        foreach($finisher_array as $fin):
+                            $ret .= "<p class='border-bottom border-secondary border-bottom-dashed mb-3'>";
+                                if(self::$user_role == "production_admin")
+                                    $ret .= "<a href='/finishers/edit-finisher/finisher={$fin['id']}'>".ucwords($fin['name'])."</a>";
+                                else
+                                    $ret .= ucwords($fin['name']);
+                            $ret .= "</p>";
+                        endforeach;
+                    endif;
                     return $ret;
                 }
             )
