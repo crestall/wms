@@ -145,7 +145,7 @@
                 }
             ),
             array(
-                'db' => 'status',
+                'db' => 'status_colour',
                 'dt' => 6,
                 'formatter' => function( $d, $row ){
                     return $d;
