@@ -102,6 +102,7 @@ $s_ids_string = implode(",", $status_ids);
                             <?php else:?>
                                 <th data-priority="2">Status</th>
                             <?php endif;?>
+                            <th>Due Date</th>
                         </tr>
                     </thead>
                 </table>
