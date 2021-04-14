@@ -308,6 +308,9 @@
                                 "url": "/ajaxfunctions/dataTablesViewProductionJobs",
                                 "data": function( d ){
                                     d.userRole = $("#user_role").val();
+                                    d.customerIds = $("#customer_ids").val();
+                                    d.finisherIds = $("#finisher_ids").val();
+                                    d.salesrepIds = $("#salesrep_ids").val();
                                 }
                             },
                             //No pagination for this table
