@@ -125,7 +125,7 @@
             ),
             array(
                 'db' => 'salesrep_name',
-                'dt' => 6,
+                'dt' => 5,
                 'formatter' => function( $d, $row ){
                     return ucwords($d);
                 }
