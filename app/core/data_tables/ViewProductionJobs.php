@@ -171,6 +171,13 @@
                     $ret .= "</select>";
                     return $ret;
                 }
+            ),
+            array(
+                'db' => 'due_date',
+                'dt' => 7,
+                'formatter' => function( $d, $row ){
+                    return date("d/m/Y", $d);
+                }
             )
         );
         // Build the SQL query string from the request
