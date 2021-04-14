@@ -311,6 +311,9 @@
                                     d.customerIds = $("#customer_ids").val();
                                     d.finisherIds = $("#finisher_ids").val();
                                     d.salesrepIds = $("#salesrep_ids").val();
+                                    d.statusIds = $("#status_ids").val();
+                                    d.completed = $("#completed").val();
+                                    d.cancelled = $("#cancelled").val();
                                 }
                             },
                             //No pagination for this table
