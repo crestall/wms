@@ -22,6 +22,7 @@
         $db = Database::openConnection();
         //other stuff from the request
         self::$user_role = $request['userRole'];
+        return self::$user_role;
         //the columns setup
         self::$columns = array(
             array(
@@ -45,7 +46,7 @@
                 'db' => 'job_id',
                 'dt' => 1,
                 'formatter' => function( $d, $row ){
-                    $ret = (self::$user_role == "production_admin" ||  self::$user_role == "production")?
+                    $ret = (self::$user_role == "production_admin" ||  self::$user_role == "production"||  self::$user_role == "production_sales")?
                         "<a href='/jobs/update-job/job=".$row['id'].">".$d."</a>":
                         $d;
                     if(!empty($row['previous_job_id']))
