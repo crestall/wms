@@ -145,7 +145,7 @@
                 }
             ),
             array(
-                'db' => 'status_name',
+                'db' => 'status',
                 'dt' => 6,
                 'formatter' => function( $d, $row ){
                     return $d;
