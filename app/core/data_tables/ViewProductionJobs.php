@@ -122,6 +122,13 @@
                     endif;
                     return $ret;
                 }
+            ),
+            array(
+                'db' => 'salesrep_name',
+                'dt' => 6,
+                'formatter' => function( $d, $row ){
+                    return ucwords($d);
+                }
             )
         );
         // Build the SQL query string from the request

@@ -13,6 +13,7 @@
             <th data-priority="1">Client</th>
             <th data-priority="2" style="max-width: 250px;">Description</th>
             <th>Finisher(s)</th>
+            <th>FSG Contact</th>
         </tr>
     </thead>
 </table>
