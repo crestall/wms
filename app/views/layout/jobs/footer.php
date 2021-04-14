@@ -326,7 +326,12 @@
                                 { "orderDataType": "dom-select", "targets": [0]},
                                 { "orderable": false, "targets": [3,4] },
                                 { "createdCell": function(td, cellData, rowData, row, col){
-                                        console.log("rowData.DT_StatusColour: " + rowData.DT_StatusColour);
+                                        //console.log("rowData.DT_StatusColour: " + rowData.DT_StatusColour);
+                                        if(rowData.DT_StatusColour)
+                                        {
+                                            $(td).css('backgroundColor', rowData.DT_StatusColour);   
+                                        }
+
                                     },
                                   "targets": [6]
                                 }
