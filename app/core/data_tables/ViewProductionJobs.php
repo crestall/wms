@@ -12,6 +12,12 @@
     private static $columns            = array();
     private static $query              = "";
     private static $user_role          = "";
+    private static $cancelled          = "";
+    private static $completed          = "";
+    private static $customer_ids       = "";
+    private static $finisher_ids       = "";
+    private static $salesrep_ids       = "";
+    private static $status_ids         = "";
 
     private function __construct(){}
 
@@ -22,6 +28,12 @@
         $db = Database::openConnection();
         //other stuff from the request
         self::$user_role = $request['userRole'];
+        self::$cancelled = $request['cancelled'];
+        self::$completed = $request['completed'];
+        self::$customer_ids = $request['customerIds'];
+        self::$finisher_ids = $request['finisherIds'];
+        self::$status_ids = $request['statusIds'];
+        self::$salesrep_ids = $request['salesrepIds'];
         //return self::$user_role;
         //the columns setup
         self::$columns = array(
@@ -257,14 +269,43 @@
                 $having .' AND '. implode(' AND ', $columnSearch);
         }
         if ( $having !== '' ) {
-            $having = ' HAVING '.$having;
+            $having = ' HAVING '.$having.' AND ';
         }
         else
         {
-            $having = ' HAVING (pj.status_id != 9 AND pj.status_id != 11)';
+            $having = ' HAVING ';
+        }
+        if(self::$completed)
+        {
+            $having .= " pj.status_id = 9";
+            self::$status_ids = "";
+        }
+        elseif(self::$cancelled)
+        {
+            $having .= " pj.status_id = 11";
+            self::$status_ids = "";
+        }
+        elseif(!empty(self::$status_ids))
+        {
+            $having .= " pj.status_id IN(".self::$status_ids.")";
+        }
+        else
+        {
+            $having .= " pj.status_id != 9 AND pj.status_id != 11";
+        }
+        if(!empty(self::$customer_ids))
+        {
+            $having .= " AND pj.customer_id IN(".self::$customer_ids.")";
+        }
+        if(!empty(self::$finisher_ids))
+        {
+            $having .= " AND pj.finisher_id IN(".self::$finisher_ids.")";
+        }
+        if(count(self::$salesrep_ids))
+        {
+            $having .= " AND pj.salesrep_id IN(".self::$salesrep_ids.")";
         }
         return $having;
     }
-
  }
 ?>
