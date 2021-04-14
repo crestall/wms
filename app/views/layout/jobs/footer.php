@@ -339,8 +339,10 @@
                                   "targets": [6]
                                 },
                                 { "createdCell": function(td, cellData, rowData, row, col){
+                                    console.log("cellData: "+cellData);
                                         var d = new Date();
                                         var n = d.getTime()/1000;
+                                        console.log("n: "+n);
                                         if( (cellData < n) )
                                             $(td).css({'backgroundColor':'#222', 'color':'#fff'});
                                         else if( ( (cellData - n) < (24 * 60 * 60) ) )
