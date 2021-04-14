@@ -326,7 +326,7 @@
                                 { "orderDataType": "dom-select", "targets": [0]},
                                 { "orderable": false, "targets": [3,4] },
                                 { "createdCell": function(td, cellData, rowData, row, col){
-                                        console.log("rowData: ", rowData);
+                                        console.log("rowData.DT_StatusColour: " + rowData.DT_StatusColour);
                                     },
                                   "targets": [6]
                                 }
