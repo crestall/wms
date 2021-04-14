@@ -97,6 +97,11 @@ $s_ids_string = implode(",", $status_ids);
                             <th data-priority="2" style="max-width: 250px;">Description</th>
                             <th>Finisher(s)</th>
                             <th>FSG Contact</th>
+                            <?php if($can_change_status):?>
+                                <th data-priority="2" nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
+                            <?php else:?>
+                                <th data-priority="2">Status</th>
+                            <?php endif;?>
                         </tr>
                     </thead>
                 </table>

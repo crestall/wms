@@ -325,6 +325,11 @@
                                 { "type": 'non-empty-string', "targets": [0]},
                                 { "orderDataType": "dom-select", "targets": [0]},
                                 { "orderable": false, "targets": [3,4] }
+                                { "createdCell": function(td, cellData, rowData, row, col){
+                                        console.log("cellData: "+cellData);
+                                    },
+                                  "targets": [6]
+                                }
                             ],
                             "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">rptp>'
 

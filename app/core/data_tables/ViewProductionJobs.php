@@ -18,6 +18,7 @@
     private static $finisher_ids       = "";
     private static $salesrep_ids       = "";
     private static $status_ids         = "";
+    private static $can_change_status  = false;
 
     private function __construct(){}
 
@@ -34,6 +35,7 @@
         self::$finisher_ids = $request['finisherIds'];
         self::$status_ids = $request['statusIds'];
         self::$salesrep_ids = $request['salesrepIds'];
+        self::$can_change_status = Permission::canChangeStatus(self::$user_role);
         //return self::$user_role;
         //the columns setup
         self::$columns = array(
@@ -140,6 +142,13 @@
                 'dt' => 5,
                 'formatter' => function( $d, $row ){
                     return ucwords($d);
+                }
+            ),
+            array(
+                'db' => 'status_name',
+                'dt' => 6,
+                'formatter' => function( $d, $row ){
+                    return $d;
                 }
             )
         );
