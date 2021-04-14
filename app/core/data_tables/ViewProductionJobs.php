@@ -301,7 +301,7 @@
         {
             $having .= " AND pj.finisher_id IN(".self::$finisher_ids.")";
         }
-        if(count(self::$salesrep_ids))
+        if(!empty(self::$salesrep_ids))
         {
             $having .= " AND pj.salesrep_id IN(".self::$salesrep_ids.")";
         }
