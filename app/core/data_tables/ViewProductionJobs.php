@@ -162,7 +162,12 @@
                 'db' => 'status',
                 'dt' => 6,
                 'formatter' => function( $d, $row ){
-                    return $d;
+                    $ret = "<select class='selectpicker status' id='status_{$row['id']}' data-style='btn-outline-secondary btn-sm' data-width='fit'";
+                    if(!self::$can_change_status)
+                        $ret .= " disabled ";
+                    $ret .= "><option value='0'>--Select One--</option>";
+                    $ret .= "</select">;
+                    return $ret;
                 }
             )
         );

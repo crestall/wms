@@ -329,9 +329,12 @@
                                         //console.log("rowData.DT_StatusColour: " + rowData.DT_StatusColour);
                                         if(rowData.DT_StatusColour)
                                         {
-                                            $(td).css('backgroundColor', rowData.DT_StatusColour);   
+                                            $(td).css('backgroundColor', rowData.DT_StatusColour);
                                         }
-
+                                        if(rowData.DT_StatusTextColour)
+                                        {
+                                            $(td).css('color', rowData.DT_StatusTextColour);
+                                        }
                                     },
                                   "targets": [6]
                                 }
