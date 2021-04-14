@@ -337,6 +337,20 @@
                                         }
                                     },
                                   "targets": [6]
+                                },
+                                { "createdCell": function(td, cellData, rowData, row, col){
+                                        var d = new Date();
+                                        var n = d.getTime()/1000;
+                                        if( (cellData < n) )
+                                            $(td).css({'backgroundColor':'#222', 'color':'#fff'});
+                                        else if( ( (cellData - n) < (24 * 60 * 60) ) )
+                                            $(td).css({'backgroundColor':'#FF0000', 'color':'#fff'});
+                                        else if( ( (cellData - n) < (2 * 24 * 60 * 60) ) )
+                                            $(td).css({'backgroundColor':'#e6e600'});
+                                        else
+                                            $(td).css({'backgroundColor':'#66ff66'});
+                                    },
+                                    "targets": [7]
                                 }
                             ],
                             "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">rptp>'
