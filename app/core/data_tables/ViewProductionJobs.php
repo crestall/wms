@@ -166,7 +166,7 @@
                     if(!self::$can_change_status)
                         $ret .= " disabled ";
                     $ret .= "><option value='0'>--Select One--</option>";
-                    $ret .= "</select">;
+                    $ret .= "</select>";
                     return $ret;
                 }
             )
