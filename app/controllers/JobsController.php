@@ -219,6 +219,7 @@ class JobsController extends Controller
             'createDeliveryDocket',
             'jobSearch',
             'jobSearchResults',
+            'updateJob'
             'viewJobs'
         ));
 
