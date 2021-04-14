@@ -50,7 +50,14 @@
                 'db' => 'status_colour',
                 'dt' => 'DT_StatusColour',
                 'formatter' => function( $d, $row ) {
-                    return 'row_'.$d;
+                    return $d;
+                }
+            ),
+            array(
+                'db' => 'status_text_colour',
+                'dt' => 'DT_StatusTextColour',
+                'formatter' => function( $d, $row ) {
+                    return $d;
                 }
             ),
             array(
@@ -152,7 +159,7 @@
                 }
             ),
             array(
-                'db' => 'status_colour',
+                'db' => 'status',
                 'dt' => 6,
                 'formatter' => function( $d, $row ){
                     return $d;
