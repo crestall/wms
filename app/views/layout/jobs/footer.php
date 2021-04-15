@@ -371,19 +371,13 @@
                     },
                     selectAll: function(){
                         $('#select_all').click(function(e){
+                            console.log("select click");
                             var checked = this.checked;
                              $('.select').each(function(e){
                                 this.checked =  checked;
                              })
                         });
-                        $('#status_all').change(function(e){
-                            e.stopPropagation();
-                            var c = $(this).val();
-                            $("select.status").each(function(i,e){
-                                $(this).val(c).change();
-                            });
-                        });
-                        $('#status_all, ul.dropdown-menu').click(function(e){
+                        $('#status_all').click(function(e){
                             console.log("click");
                             e.stopPropagation();
                             if(e.isPropagationStopped())
@@ -394,6 +388,13 @@
                             {
                                 console.log("is not stopped");
                             }
+                        });
+                        $('#status_all').change(function(e){
+                            e.stopPropagation();
+                            var c = $(this).val();
+                            $("select.status").each(function(i,e){
+                                $(this).val(c).change();
+                            });
                         });
                     },
                     doDates: function(){
