@@ -402,6 +402,16 @@
 
                     }
                 },
+                production_sales: {
+                    init: function(){
+
+                    }
+                },
+                production_sales_admin: {
+                    init: function(){
+
+                    }
+                },
                 warehouse: {
                     init: function(){
                         actions.common.init();
