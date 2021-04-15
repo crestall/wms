@@ -377,6 +377,7 @@
                              })
                         });
                         $('#status_all').change(function(e){
+                            e.stopPropagation();
                             var c = $(this).val();
                             $("select.status").each(function(i,e){
                                 $(this).val(c).change();
