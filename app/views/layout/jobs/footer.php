@@ -383,7 +383,16 @@
                             });
                         });
                         $('#status_all').click(function(e){
+                            console.log("click");
                             e.stopPropagation();
+                            if(e.isPropagationStopped())
+                            {
+                                console.log("is stopped");
+                            }
+                            else
+                            {
+                                console.log("is not stopped");
+                            }
                         });
                     },
                     doDates: function(){
