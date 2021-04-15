@@ -376,15 +376,15 @@
                                 this.checked =  checked;
                              })
                         });
+                        $('#status_all').change(function(e){
+                            var c = $(this).val();
+                            $("select.status").each(function(i,e){
+                                $(this).val(c).change();
+                            });
+                        });
                         $('#status_all').click(function(e){
                             e.stopPropagation();
-                            $(this).change(function(e){
-                                var c = $(this).val();
-                                $("select.status").each(function(i,e){
-                                    $(this).val(c).change();
-                                });
-                            })
-                        });
+                        }
                     },
                     doDates: function(){
                         $( "#date_entered" ).datepicker({
