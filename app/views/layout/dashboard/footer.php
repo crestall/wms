@@ -20,7 +20,146 @@
                     },
                     loadProductionCharts: function(){
                         $('div#job_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
-                        
+                        google.charts.load('current', {'packages':['corechart']});
+                        google.charts.setOnLoadCallback(drawProductionCharts);
+                        function drawProductionCharts()
+                        {
+                            var data = [];
+                            var options = [];
+                            var num_jobs = 0;
+                            $.ajax({
+                    			url: "/ajaxfunctions/getWeeklyProductionJobTrends",
+                    			dataType:"json",
+                    			type: 'post',
+                                success: function(jsonData)
+                                {
+                                    //var jData =  $.parseJSON(jsonData);
+                            		data[0] = google.visualization.arrayToDataTable(jsonData);
+                                    num_jobs = jsonData.length - 1;
+                                    nextProductionAjaxCall();
+                                }
+                            });
+                            function nextProductionAjaxCall(){
+                                $.ajax({
+                        			url: "/ajaxfunctions/getDailyProductionJobTrends",
+                        			dataType:"json",
+                        			type: 'post',
+                                    success: function(jsonData)
+                                    {
+                                        //var jData =  $.parseJSON(jsonData);
+                                		data[1] = google.visualization.arrayToDataTable(jsonData);
+                                        productionAjaxDone();
+                                    }
+                                });
+                            }
+                            function productionAjaxDone(){
+                                //console.log('num_orders: '+num_orders);
+                                //console.log('data: '+data);
+                                if(num_jobs > 0)
+                                {
+                                    options[0] = {
+                            		    animation:{
+                            		        duration: 1000,
+                                            easing: 'out',
+                                        },
+                            			hAxis: {
+                            				title: 'Week Beginning',
+                            				showTextEvery: 1,
+                            				slantedText:true,
+                            				slantedTextAngle:-45
+                            			},
+                            			vAxes: {
+                            				0: {
+                            					title: 'Job Count',
+                            					viewWindow: {
+                            						min: 0
+                            					}
+                            				}
+                            			},
+                            			legend: {
+                            				position: 'top'
+                            			},
+                            			height: 450,
+                            			series: {
+                            				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
+                                            1:{type: "line", targetAxisIndex:0}
+                            			},
+                                        title: "Weekly Jobs: Totals/Averages Last Six Months",
+                                        titleTextStyle: {
+                        					fontSize: 20,
+                        					color: '##5F5F5E;',
+                        					bold: false,
+                        					italic: false,
+                        					marginBottom: 20
+                                        },
+                            		};
+                                    options[1] = {
+                            		    animation:{
+                            		        duration: 1000,
+                                            easing: 'out',
+                                        },
+                            			hAxis: {
+                            				title: 'Day',
+                            				slantedText:true,
+                            				slantedTextAngle:-45
+                            			},
+                            			vAxes: {
+                            				0: {
+                            					title: 'Job Count',
+                            					viewWindow: {
+                            						min: 0
+                            					}
+                            				}
+                            			},
+                            			legend: {
+                            				position: 'top'
+                            			},
+                            			height: 450,
+                            			series: {
+                            				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
+                                            1:{type: "line", targetAxisIndex:0}
+                            			},
+                                        title: "Daily Jobs: Totals/Averages Last Six Months",
+                                        titleTextStyle: {
+                        					fontSize: 20,
+                        					color: '##5F5F5E;',
+                        					bold: false,
+                        					italic: false,
+                        					marginBottom: 20
+                                        },
+                            		};
+                                    var chart = new google.visualization.LineChart(document.getElementById('job_activity_chart'));
+                                    var button = document.getElementById('chart_button_1');
+                                    var current = 0;
+                                    function drawChart(){
+                                        // Disabling the button while the chart is drawing.
+                                        button.disabled = true;
+                                        button.style.display = "none";
+                                        google.visualization.events.addListener(chart, 'ready',
+                                                function() {
+                                                    button.disabled = false;
+                                                    button.textContent = 'Switch to ' + (current ? 'Weekly' : 'Daily');
+                                                    button.style.display = "inline";
+                                                });
+
+                                        chart.draw(data[current], options[current]);
+                                    }
+                                    drawChart();
+                                    button.onclick = function() {
+                                        current = 1 - current;
+                                        drawChart();
+                                    }
+                                    //redraw chart when window resize is completed
+                                    $(window).on('resizeEnd', function() {
+                                        drawChart();
+                                    });
+                                }
+                                else
+                                {
+                                    $('div#job_activity_chart').html("<div class='errorbox'><h2>No Jobs Created</h2><p>There have been no jobs created in the last six months</p></div>");
+                                }
+                            }
+                        }
                     },
                     loadWarehouseCharts: function(){
                         $('div#order_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
