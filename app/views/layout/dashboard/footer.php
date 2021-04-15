@@ -397,6 +397,11 @@
 
                     }
                 },
+                production: {
+                    init: function(){
+
+                    }
+                },
                 warehouse: {
                     init: function(){
                         actions.common.init();
