@@ -384,7 +384,7 @@
                         });
                         $('#status_all').click(function(e){
                             e.stopPropagation();
-                        }
+                        });
                     },
                     doDates: function(){
                         $( "#date_entered" ).datepicker({
