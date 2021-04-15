@@ -383,7 +383,7 @@
                                 $(this).val(c).change();
                             });
                         });
-                        $('#status_all').click(function(e){
+                        $('#status_all, ul.dropdown-menu').click(function(e){
                             console.log("click");
                             e.stopPropagation();
                             if(e.isPropagationStopped())
