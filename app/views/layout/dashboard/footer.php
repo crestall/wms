@@ -18,7 +18,7 @@
                             }, 500);
                         });
                     },
-                    loadAdminCharts: function(){
+                    loadWarehouseCharts: function(){
                         $('div#order_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                         google.charts.load('current', {'packages':['corechart']});
                         google.charts.setOnLoadCallback(drawAdminCharts);
@@ -389,33 +389,37 @@
                 admin: {
                     init: function(){
                         actions.common.init();
-                        actions.common.loadAdminCharts();
+                        actions.common.loadWarehouseCharts();
                     }
                 },
                 production_admin: {
                     init: function(){
-
+                        actions.common.init();
+                        actions.common.loadProductionCharts();
                     }
                 },
                 production: {
                     init: function(){
-
+                        actions.common.init();
+                        actions.common.loadProductionCharts();
                     }
                 },
                 production_sales: {
                     init: function(){
-
+                        actions.common.init();
+                        actions.common.loadProductionCharts();
                     }
                 },
                 production_sales_admin: {
                     init: function(){
-
+                        actions.common.init();
+                        actions.common.loadProductionCharts();
                     }
                 },
                 warehouse: {
                     init: function(){
                         actions.common.init();
-                        actions.common.loadAdminCharts();
+                        actions.common.loadWarehouseCharts();
                     }
                 },
                 'dashboard':{
