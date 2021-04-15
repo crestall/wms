@@ -271,7 +271,7 @@
                                 return $('select', td).data("ranking");
                             } );
                         }
-                        var paging = $('input#complete').val() == 1;
+                        var paging = $('input#completed').val() == 1;
                         var table = dataTable.init($('table#production_jobs_table'), {
                             //No pagination for this table
                             "paging":   paging,
