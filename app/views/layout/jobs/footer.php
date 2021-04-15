@@ -339,18 +339,21 @@
                                   "targets": [6]
                                 },
                                 { "createdCell": function(td, cellData, rowData, row, col){
-                                    console.log("cellData: "+cellData);
-                                        var d = new Date();
-                                        var n = d.getTime()/1000;
-                                        console.log("n: "+n);
-                                        if( (cellData < n) )
-                                            $(td).css({'backgroundColor':'#222', 'color':'#fff'});
-                                        else if( ( (cellData - n) < (24 * 60 * 60) ) )
-                                            $(td).css({'backgroundColor':'#FF0000', 'color':'#fff'});
-                                        else if( ( (cellData - n) < (2 * 24 * 60 * 60) ) )
-                                            $(td).css({'backgroundColor':'#e6e600'});
-                                        else
-                                            $(td).css({'backgroundColor':'#66ff66'});
+                                        //console.log("cellData: "+cellData);
+                                        if(rowData.DT_DueDateColour > 0)
+                                        {
+                                            var d = new Date();
+                                            var n = d.getTime()/1000;
+                                            //console.log("n: "+n);
+                                            if( (rowData.DT_DueDateColour < n) )
+                                                $(td).css({'backgroundColor':'#222', 'color':'#fff'});
+                                            else if( ( (rowData.DT_DueDateColour - n) < (24 * 60 * 60) ) )
+                                                $(td).css({'backgroundColor':'#FF0000', 'color':'#fff'});
+                                            else if( ( (rowData.DT_DueDateColour - n) < (2 * 24 * 60 * 60) ) )
+                                                $(td).css({'backgroundColor':'#e6e600'});
+                                            else
+                                                $(td).css({'backgroundColor':'#66ff66'});
+                                        }
                                     },
                                     "targets": [7]
                                 }

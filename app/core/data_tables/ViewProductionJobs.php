@@ -61,6 +61,13 @@
                 }
             ),
             array(
+                'db' => 'due_date',
+                'dt' => 'DT_DueDateColour',
+                'formatter' => function( $d, $row ){
+                    return ($row['strict_dd'] > 0)? $d : 0;
+                }
+            ),
+            array(
                 'db' => 'priority',
                 'dt' => 0,
                 'formatter' => function( $d, $row ){
