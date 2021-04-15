@@ -208,6 +208,19 @@
                     return $ret;
                 }
             ),
+            array(
+                'db' => '',
+                'dt' => 9,
+                'formatter' => function( $row ){
+                    return (self::$can_change_status)? "
+                        <div class='checkbox checkbox-default'>
+                            <input type='checkbox' class='select styled' data-jobid='{$row['id']}' name='select_{$row['id']}' id='select_{$row['id']}' />
+                            <label for='select_{$row['id']}'></label>
+                        </div>
+                    ":
+                    "";
+                }
+            )
         );
         // Build the SQL query string from the request
         $limit = self::limit( $request );

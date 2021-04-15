@@ -104,6 +104,15 @@ $s_ids_string = implode(",", $status_ids);
                             <?php endif;?>
                             <th>Due Date</th>
                             <th data-priority="3" style="max-width: 250px;">Delivery</th>
+                            <?php if($need_checkbox):?>
+                                <th data-priority="1" nowrap>
+                                    Select
+                                    <div class="checkbox checkbox-default">
+                                        <input id="select_all" class="styled" type="checkbox">
+                                        <label for="select_all"><em><small>(all)</small></em></label>
+                                    </div>
+                                </th>
+                            <?php endif;?>
                         </tr>
                     </thead>
                 </table>
