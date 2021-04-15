@@ -123,9 +123,9 @@
                                 <h6>Production Notes:</h6>
                                 $note
                             </div>
-                            <p class='text-right mt-3'><button class='btn btn-sm btn-outline-fsg production_note' data-jobid='{$row['id']}' data-jobno='{$row['job_id']}'>Add Note For Production</button></p>
                         ";
                     }
+                    $ret .= "<p class='text-right mt-3'><button class='btn btn-sm btn-outline-fsg production_note' data-jobid='{$row['id']}' data-jobno='{$row['job_id']}'>Add Note For Production</button></p>";
                     return $ret;
                 }
             ),
@@ -185,7 +185,29 @@
                 'formatter' => function( $d, $row ){
                     return ($d > 0)? date("d/m/Y", $d): "";
                 }
-            )
+            ),
+            array(
+                'db' => 'delivery_notes',
+                'dt' => 8,
+                'formatter' => function( $d, $row ){
+                    $ret = "";
+                    if(!empty($d))
+                    {
+                        $note = nl2br($d);
+                        $ret .= "
+                            <div class='notes notes-warning'>
+                                <h6>Delivery Notes:</h6>
+                                $note
+                            </div>
+                        ";
+                    }
+                    $ret .= "
+                        <p class='text-right mt-3 mb-3'><button class='btn btn-sm btn-outline-fsg delivery_note' data-jobid='{$row['id']}' data-jobno='{$row['job_id']}'>Add Note For Delivery</button></p>
+                        <p><a class='btn btn-sm btn-block btn-outline-info delivery_docket' href='/jobs/create-delivery-docket/job={$row['id']}'>Create Delivery Docket</a></p>
+                    ";
+                    return $ret;
+                }
+            ),
         );
         // Build the SQL query string from the request
         $limit = self::limit( $request );

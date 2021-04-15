@@ -94,7 +94,7 @@ $s_ids_string = implode(",", $status_ids);
                             <th data-priority="10001" nowwrap>Priority</th>
                             <th data-priority="1">Job Number</th>
                             <th data-priority="1">Client</th>
-                            <th data-priority="2" style="max-width: 250px;">Description</th>
+                            <th data-priority="3" style="max-width: 250px;">Description</th>
                             <th>Finisher(s)</th>
                             <th>FSG Contact</th>
                             <?php if($can_change_status):?>
@@ -103,6 +103,7 @@ $s_ids_string = implode(",", $status_ids);
                                 <th data-priority="2">Status</th>
                             <?php endif;?>
                             <th>Due Date</th>
+                            <th data-priority="3" style="max-width: 250px;">Delivery</th>
                         </tr>
                     </thead>
                 </table>
