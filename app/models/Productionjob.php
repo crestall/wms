@@ -505,6 +505,125 @@ class Productionjob extends Model{
         return $db->queryValue($this->table, array('id' => $job_id), 'status_id');
     }
 
+    public function getWeeklyJobTrends()
+    {
+        $from = strtotime('yesterday', strtotime('-6 months'));
+        $to = strtotime("tomorrow", strtotime('this Friday'));
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                date(a.date_index - interval weekday(a.date_index) day) AS week_start,
+                a.total_jobs,
+                ROUND(AVG(b.total_jobs), 1) AS job_average
+            FROM
+            (
+                SELECT
+                    count(*) as total_jobs,
+                    pj.created_date,
+                    DATE(FROM_UNIXTIME(pj.created_date)) AS 'date_index'
+                FROM
+                    production_jobs pj
+                WHERE
+                    pj.created_date >= $from AND pj.created_date <= $to
+                GROUP BY
+                    WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+            )a JOIN
+            (
+                SELECT
+                    count(*) as total_jobs,
+                    pj.created_date
+                FROM
+                    production_jobs pj
+                WHERE
+                    pj.created_date >= (($from) - (90*24*60*60)) AND (pj.created_date <= $to)
+                GROUP BY
+                    WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+
+            ) b ON b.created_date <= a.created_date
+            GROUP BY
+                a.created_date
+        ";
+        $jobs = $db->queryData($q);
+
+        $return_array = array(
+            array(
+                'Week Beginning',
+                'Total Jobs Per Week',
+                '6 Month Weekly Average'
+            )
+        );
+        foreach($jobs as $o)
+        {
+            $row_array = array();
+            $row_array[0] = $o['week_start'];
+            $row_array[1] = (int)$o['total_jobs'];
+            $row_array[2] = (float)$o['job_average'];
+            $return_array[] = $row_array;
+        }
+        //print_r($return_array);
+        return $return_array;
+    }
+
+    public function getDailyJobTrends()
+    {
+        $from = strtotime('yesterday', strtotime('-6 months'));
+        $to = strtotime("tomorrow", strtotime('this Friday'));
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                date(a.date_index) AS day,
+                a.total_jobs,
+                ROUND(AVG(b.total_jobs), 1) AS job_average
+            FROM
+            (
+                SELECT
+                    count(*) as total_jobs,
+                    pj.created_date,
+                    DATE(FROM_UNIXTIME(pj.created_date)) AS 'date_index'
+                FROM
+                    production_jobs pj
+                WHERE
+                    pj.created_date >= $from AND pj.created_date <= $to
+                GROUP BY
+                    DAY(DATE(FROM_UNIXTIME(pj.created_date))), WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+            )a JOIN
+            (
+                SELECT
+                    count(*) as total_jobs,
+                    pj.created_date
+                FROM
+                    production_jobs pj
+                WHERE
+                    pj.created_date >= (($from) - (90*24*60*60)) AND (pj.created_date <= $to)
+                GROUP BY
+                    DAY(DATE(FROM_UNIXTIME(pj.created_date))), WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+
+            ) b ON b.created_date <= a.created_date
+            GROUP BY
+                a.created_date
+            ";
+        $jobs = $db->queryData($q);
+
+        $return_array = array(
+            array(
+                'Date',
+                'Total Jobs Per Day',
+                '6 Month Average'
+            )
+        );
+        foreach($jobs as $o)
+        {
+            $row_array = array();
+            $row_array[0] = $o['day'];
+            $row_array[1] = (int)$o['total_jobs'];
+            $row_array[2] = (float)$o['job_average'];
+            $return_array[] = $row_array;
+        }
+        //print_r($return_array);
+        return $return_array;
+    }
+
+
     private function getJobQuery()
     {
         return "
