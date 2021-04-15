@@ -1554,6 +1554,18 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function getWeeklyProductionJobTrends()
+    {
+        $data = $this->productionjob->getWeeklyJobTrends();
+        $this->view->renderJson($data);
+    }
+
+    public function getDailyProductionJobTrends()
+    {
+        $data = $this->productionjob->getDailyJobTrends();
+        $this->view->renderJson($data);
+    }
+
     public function getPickErrors()
     {
         $data = $this->order->getPickErrors($this->request->data['from'], $this->request->data['to']);
