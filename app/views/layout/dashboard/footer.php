@@ -168,12 +168,6 @@
                         }
                     }
                 },
-                admin: {
-                    init: function(){
-                        actions.common.init();
-                        actions.common.loadAdminCharts();
-                    }
-                },
                 client: {
                     init: function(){
                         actions.common.init();
@@ -390,6 +384,17 @@
                                 }
                     		});
                     	}
+                    }
+                },
+                admin: {
+                    init: function(){
+                        actions.common.init();
+                        actions.common.loadAdminCharts();
+                    }
+                },
+                production_admin: {
+                    init: function(){
+
                     }
                 },
                 warehouse: {
