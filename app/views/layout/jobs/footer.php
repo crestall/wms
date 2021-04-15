@@ -389,11 +389,10 @@
                                 console.log("is not stopped");
                             }
                         });
-                        $('#status_all').change(function(e){
+                        $('#status_all').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
                             e.stopPropagation();
-                            var c = $(this).val();
                             $("select.status").each(function(i,e){
-                                $(this).val(c).change();
+                                $(this).val(isSelected).change();
                             });
                         });
                     },
