@@ -183,7 +183,7 @@
                 'db' => 'due_date',
                 'dt' => 7,
                 'formatter' => function( $d, $row ){
-                    return date("d/m/Y", $d);
+                    return ($d > 0)? date("d/m/Y", $d): "";
                 }
             )
         );
