@@ -18,6 +18,9 @@
                             }, 500);
                         });
                     },
+                    loadProductionCharts: function(){
+
+                    },
                     loadWarehouseCharts: function(){
                         $('div#order_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                         google.charts.load('current', {'packages':['corechart']});
