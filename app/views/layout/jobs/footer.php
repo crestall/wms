@@ -377,22 +377,10 @@
                                 this.checked =  checked;
                              })
                         });
-                        $('#status_all').click(function(e){
-                            console.log("click");
-                            e.stopPropagation();
-                            if(e.isPropagationStopped())
-                            {
-                                console.log("is stopped");
-                            }
-                            else
-                            {
-                                console.log("is not stopped");
-                            }
-                        });
-                        $('#status_all').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
-                            e.stopPropagation();
+                        $('#status_all').change(function(e){
+                            var c = $(this).val();
                             $("select.status").each(function(i,e){
-                                $(this).val(isSelected).change();
+                                $(this).val(c).change();
                             });
                         });
                     },
