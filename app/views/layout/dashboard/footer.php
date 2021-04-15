@@ -19,7 +19,8 @@
                         });
                     },
                     loadProductionCharts: function(){
-
+                        $('div#job_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
+                        
                     },
                     loadWarehouseCharts: function(){
                         $('div#order_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
