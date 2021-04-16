@@ -296,25 +296,19 @@
                                 return $('select', td).data("ranking");
                             } );
                         }
-                        var is_serverside = $('input#completed').val() == 1;
+                        var paging = $('input#completed').val() == 1;
                         var options = {
                             "processing": true,
                             "mark": true,
                             "language": {
                                 processing: 'Fetching results and updating the display.....'
                             },
-                            "serverSide": is_serverside,
-                            "paging":   is_serverside,
+                            "serverSide": true,
+                            "paging":   paging,
                             "columnDefs": [
                                 { "type": 'non-empty-string', "targets": [0]},
                                 { "orderDataType": "dom-select", "targets": [0]},
-                                { "orderable": false, "targets": [3,4,8,9] }
-                            ],
-                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">rptp>'
-                        }
-                        if(is_serverside)
-                        {
-                            var extraColumnDefs = [
+                                { "orderable": false, "targets": [3,4,8,9] },
                                 { "createdCell": function(td, cellData, rowData, row, col){
                                         //console.log("rowData.DT_StatusColour: " + rowData.DT_StatusColour);
                                         if(rowData.DT_StatusColour)
@@ -347,25 +341,22 @@
                                     },
                                     "targets": [7]
                                 }
-                            ];
-                            $.extend( options.columnDefs, extraColumnDefs );
-                            var ss_options = {
-                                "ajax": {
-                                    "url": "/ajaxfunctions/dataTablesViewProductionJobs",
-                                    "data": function( d ){
-                                        d.userRole = $("#user_role").val();
-                                        d.customerIds = $("#customer_ids").val();
-                                        d.finisherIds = $("#finisher_ids").val();
-                                        d.salesrepIds = $("#salesrep_ids").val();
-                                        d.statusIds = $("#status_ids").val();
-                                        d.completed = $("#completed").val();
-                                        d.cancelled = $("#cancelled").val();
-                                    }
+                            ],
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesViewProductionJobs",
+                                "data": function( d ){
+                                    d.userRole = $("#user_role").val();
+                                    d.customerIds = $("#customer_ids").val();
+                                    d.finisherIds = $("#finisher_ids").val();
+                                    d.salesrepIds = $("#salesrep_ids").val();
+                                    d.statusIds = $("#status_ids").val();
+                                    d.completed = $("#completed").val();
+                                    d.cancelled = $("#cancelled").val();
                                 }
-                            };
-                            $.extend( options, ss_options );
-                        }
-                        var table = dataTable.init($('table#production_jobs_table'), options);
+                            },
+                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">rptp>'
+                        };
+                        var table = dataTable.init($('table#production_jobs_table'), options );
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
                             $('.selectpicker').selectpicker();
