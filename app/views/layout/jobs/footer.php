@@ -304,6 +304,7 @@
                                 processing: 'Fetching results and updating the display.....'
                             },
                             "serverSide": true,
+                            "deferRender": true,
                             "paging":   paging,
                             "columnDefs": [
                                 { "type": 'non-empty-string', "targets": [0]},
