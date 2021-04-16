@@ -296,71 +296,76 @@
                                 return $('select', td).data("ranking");
                             } );
                         }
-                        var paging = $('input#completed').val() == 1;
-                        var table = dataTable.init($('table#production_jobs_table'), {
+                        var is_serverside = $('input#completed').val() == 1;
+                        var options = {
                             "processing": true,
                             "mark": true,
                             "language": {
                                 processing: 'Fetching results and updating the display.....'
                             },
-                            "serverSide": true,
-                            "ajax": {
-                                "url": "/ajaxfunctions/dataTablesViewProductionJobs",
-                                "data": function( d ){
-                                    d.userRole = $("#user_role").val();
-                                    d.customerIds = $("#customer_ids").val();
-                                    d.finisherIds = $("#finisher_ids").val();
-                                    d.salesrepIds = $("#salesrep_ids").val();
-                                    d.statusIds = $("#status_ids").val();
-                                    d.completed = $("#completed").val();
-                                    d.cancelled = $("#cancelled").val();
-                                }
-                            },
-                            //No pagination for this table
-                            "paging":   paging,
-                            //search highlighting
-                            mark: true,
-                            //but blanks on the bottom when sorting
-                            columnDefs: [
+                            "serverSide": is_serverside,
+                            "paging":   is_serverside,
+                            "columnDefs": [
                                 { "type": 'non-empty-string', "targets": [0]},
                                 { "orderDataType": "dom-select", "targets": [0]},
-                                { "orderable": false, "targets": [3,4,8,9] },
+                                { "orderable": false, "targets": [3,4,8,9] }
+                            ],
+                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">rptp>'
+                        }
+                        if(is_serverside)
+                        {
+                            var extraColumnDefs = [
                                 { "createdCell": function(td, cellData, rowData, row, col){
                                         //console.log("rowData.DT_StatusColour: " + rowData.DT_StatusColour);
                                         if(rowData.DT_StatusColour)
                                         {
-                                            $(td).css('backgroundColor', rowData.DT_StatusColour);
+                                                $(td).css('backgroundColor', rowData.DT_StatusColour);
                                         }
                                         if(rowData.DT_StatusTextColour)
                                         {
-                                            $(td).css('color', rowData.DT_StatusTextColour);
+                                                $(td).css('color', rowData.DT_StatusTextColour);
                                         }
                                     },
-                                  "targets": [6]
+                                    "targets": [6]
                                 },
                                 { "createdCell": function(td, cellData, rowData, row, col){
                                         //console.log("cellData: "+cellData);
                                         if(rowData.DT_DueDateColour > 0)
                                         {
-                                            var d = new Date();
-                                            var n = d.getTime()/1000;
-                                            //console.log("n: "+n);
-                                            if( (rowData.DT_DueDateColour < n) )
-                                                $(td).css({'backgroundColor':'#222', 'color':'#fff'});
-                                            else if( ( (rowData.DT_DueDateColour - n) < (24 * 60 * 60) ) )
-                                                $(td).css({'backgroundColor':'#FF0000', 'color':'#fff'});
-                                            else if( ( (rowData.DT_DueDateColour - n) < (2 * 24 * 60 * 60) ) )
-                                                $(td).css({'backgroundColor':'#e6e600'});
-                                            else
-                                                $(td).css({'backgroundColor':'#66ff66'});
+                                                var d = new Date();
+                                                var n = d.getTime()/1000;
+                                                //console.log("n: "+n);
+                                                if( (rowData.DT_DueDateColour < n) )
+                                                        $(td).css({'backgroundColor':'#222', 'color':'#fff'});
+                                                else if( ( (rowData.DT_DueDateColour - n) < (24 * 60 * 60) ) )
+                                                        $(td).css({'backgroundColor':'#FF0000', 'color':'#fff'});
+                                                else if( ( (rowData.DT_DueDateColour - n) < (2 * 24 * 60 * 60) ) )
+                                                        $(td).css({'backgroundColor':'#e6e600'});
+                                                else
+                                                        $(td).css({'backgroundColor':'#66ff66'});
                                         }
                                     },
                                     "targets": [7]
                                 }
-                            ],
-                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">rptp>'
-
-                        });
+                            ];
+                            $.extend( options.columnDefs, extraColumnDefs );
+                            var ss_options = {
+                                "ajax": {
+                                    "url": "/ajaxfunctions/dataTablesViewProductionJobs",
+                                    "data": function( d ){
+                                        d.userRole = $("#user_role").val();
+                                        d.customerIds = $("#customer_ids").val();
+                                        d.finisherIds = $("#finisher_ids").val();
+                                        d.salesrepIds = $("#salesrep_ids").val();
+                                        d.statusIds = $("#status_ids").val();
+                                        d.completed = $("#completed").val();
+                                        d.cancelled = $("#cancelled").val();
+                                    }
+                                }
+                            };
+                            $.extend( options, ss_options );
+                        }
+                        var table = dataTable.init($('table#production_jobs_table'), options);
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
                             $('.selectpicker').selectpicker();
@@ -371,7 +376,6 @@
                     },
                     selectAll: function(){
                         $('#select_all').click(function(e){
-                            console.log("select click");
                             var checked = this.checked;
                              $('.select').each(function(e){
                                 this.checked =  checked;
