@@ -27,7 +27,7 @@ class Orderreturn extends Model{
     {
         $db = Database::openConnection();
         $query = "
-            SELECT r.*, i.name, o.order_number, o.client_order_id
+            SELECT r.*, i.name, i.client_product_id, i.sku, o.order_number, o.client_order_id
             FROM returns r JOIN items i ON i.id = r.item_id JOIN orders o ON o.id = r.order_id
             WHERE r.client_id = :client_id AND date >= :from AND date <= :to ORDER BY date DESC
         ";
@@ -50,6 +50,9 @@ class Orderreturn extends Model{
             $row = array(
                 'return_date'           => date('d/m/Y', $r['date']),
                 'item_name'             => $r['name'],
+                'client_product_id'     => $r['client_product_id'],
+                'sku'                   => $r['sku'],
+                'qty_returned'          => $r['qty_returned'],
                 'order_number'          => $r['order_number'],
                 'client_order_number'   => $r['client_order_id'],
                 'reason'                => $r['reason'],
