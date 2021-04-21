@@ -480,8 +480,8 @@
             if($backorder)
             {
                 $backorders .= "
-                    <h3 class='error'>The Following Feedback Has Been Supplied Regarding Backorders</h3>
-                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                    <h3 class='backorder'>The Following Feedback Has Been Supplied Regarding Backorders</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #e6f2ff;border: 3px solid #007bff;color: #007bff;'>
                         <tr>
                             <td style='padding: 20px;'>$backorder_string</td>
                         </tr>
@@ -504,7 +504,11 @@
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
     		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-            $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
+            if(SITE_LIVE)
+            {
+                $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
+            }
+
 
     		$mail->Subject = "BDS Order Import Summary";
 
@@ -556,7 +560,10 @@
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
     		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-            $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
+            if(SITE_LIVE)
+            {
+                $mail->AddAddress('bds@bahai.org.au', 'Michael Cohen');
+            }
 
     		$mail->Subject = "BDS Order Finalise Summary";
 
@@ -964,6 +971,191 @@
             {
                 Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
                 throw new Exception("Email couldn't be sent to ". $name);
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
+    }
+
+    public static function notifyStatusChange($job_no, $new_status, $changer_name)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."status_change.html");
+
+            $replace_array = array("{JOB_NO}", "{NEW_STATUS}", "{STATUS_CHANGER}", "{CHANGE_TIME}");
+            $replace_with_array = array($job_no, $new_status, $changer_name, date("F j, Y, g:i a"));
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "email_logo.png");
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->Subject = "Production Job Status Change";
+            if(SITE_LIVE)
+            {
+    		    $mail->AddAddress('production@fsg.com.au', 'Andrea DiPrima');
+                $mail->AddAddress('megan@fsg.com.au', 'Megan Low');
+            }
+
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            $mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent");
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
+    }
+
+    public static function notifyProdOfDeliveryNoteChange($job_no, $new_note, $changer_name)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."delivery_note_change.html");
+
+            $replace_array = array("{JOB_NO}", "{NEW_NOTE}", "{NOTE_CHANGER}", "{CHANGE_TIME}");
+            $replace_with_array = array($job_no, $new_note, $changer_name, date("F j, Y, g:i a"));
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "email_logo.png");
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->Subject = "Production Job Delivery Notes Updated";
+            if(SITE_LIVE)
+            {
+    		    $mail->AddAddress('mike@fsg.com.au', 'Mike Bond');
+            }
+
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            $mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent");
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
+    }
+
+    public static function notifyProdAdminOfNoteChange($job_no, $new_note, $changer_name)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."note_change.html");
+
+            $replace_array = array("{JOB_NO}", "{NEW_NOTE}", "{NOTE_CHANGER}", "{CHANGE_TIME}");
+            $replace_with_array = array($job_no, $new_note, $changer_name, date("F j, Y, g:i a"));
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "email_logo.png");
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->Subject = "Production Job Notes Updated";
+            if(SITE_LIVE)
+            {
+    		    $mail->AddAddress('production@fsg.com.au', 'Andrea DiPrima');
+                $mail->AddAddress('megan@fsg.com.au', 'Megan Low');
+            }
+
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            $mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent");
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
+    }
+
+    public static function notifyProdContactOfStatusChange($job_no, $job_client, $new_status, $pc_email, $pc_name)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pc_status_change.html");
+
+            $replace_array = array("{JOB_NO}", "{JOB_CLIENT}", "{NEW_STATUS}", "{CHANGE_TIME}");
+            $replace_with_array = array($job_no, $job_client, $new_status, date("F j, Y, g:i a"));
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "email_logo.png");
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->Subject = "Production Job Status Change";
+            if(SITE_LIVE)
+            {
+    		    $mail->AddAddress($pc_email, $pc_name);
+            }
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            $mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent");
                 return false;
             }
         } catch (phpmailerException $e) {

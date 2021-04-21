@@ -936,13 +936,14 @@ class Item extends Model{
             'last_activity'		            =>	time(),
             'client_id'			            =>	$client_id,
             'preferred_pick_location_id'    =>  $preferred_pick_location_id,
-            'palletized'                    =>  $palletized,
-            'boxed_item'                    =>  $boxed_item
+            'palletized'                    =>  $palletized
         );
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
+        $item_values['boxed_item'] = (isset($boxed_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (!empty($per_pallet))? $per_pallet : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
+        $item_values['is_pod'] = (isset($is_pod))? 1 : 0;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
         if(!empty($price)) $item_values['price'] = $price;
         if(isset($supplier)) $item_values['supplier'] = $supplier;
@@ -1004,6 +1005,7 @@ class Item extends Model{
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (isset($per_pallet))? $per_pallet : 0;
+        $item_values['is_pod'] = (isset($is_pod))? 1 : 0;
         if(!isset($delete_image))
         {
             if(isset($image_name)) $item_values['image'] = $image_name.".jpg";

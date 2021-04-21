@@ -143,7 +143,6 @@
                         <?php elseif($user_role == "warehouse"):?>
                             <th>Courier</th>
                         <?php endif;?>
-                        <th>Runsheet Day</th>
                         <th></th>
                         <th nowrap>
                             Select
@@ -288,31 +287,6 @@
                                     <p><select name="courier" class="selectpicker courier" id="courier_<?php echo $co['id'];?>" disabled><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                 </td>
                             <?php endif;?>
-                            <td data-label="Runsheet Day">
-                                <?php if($co['runsheet_id'] > 0):
-                                    $add_to_runsheet = false;?>
-                                    <p>This Job is on the runsheet for <strong><?php echo date('l jS \of F',$co['runsheet_day']);?></strong></p>
-                                    <?php if($co['printed'] == 0):?>
-                                        <p class="text-center"><button class="btn btn-outline-danger remove-from-runsheet" data-orderid="<?php echo $co['id'];?>" data-runsheetid="<?php echo $co['runsheet_id'];?>">Remove It</button></p>
-                                    <?php elseif($co['runsheet_completed'] == 0):?>
-                                        <p><a class='btn btn-sm btn-outline-success' href='/runsheets/finalise-runsheet/runsheet=<?php echo $co['runsheet_id'];?>/driver=<?php echo $co['driver_id'];?>'>Finalise Runsheet</a></p>
-                                    <?php endif;?>
-                                    <?php if($co['runsheet_completed'] == 1):
-                                        $add_to_runsheet = true;?>
-                                        <p class="text-center">The runsheet has been completed</p>
-                                    <?php endif;?>
-                                <?php endif;?>
-                                <?php if($add_to_runsheet):
-                                    $date = strtotime("today");?>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control runsheet_day" name="runsheet_daydate_<?php echo $co['id'];?>" id="runsheet_daydate_<?php echo $co['id'];?>" value="<?php echo date('d/m/Y',$date);?>" />
-                                        <input type="hidden" name="runsheet_daydate_value_<?php echo $co['id'];?>" id="runsheet_daydate_value_<?php echo $co['id'];?>" value="<?php echo $date;?>" />
-                                        <div class="input-group-append">
-                                            <span id="runsheet_daydate_calendar_<?php echo $co['id'];?>" class="input-group-text runsheet_calendar"><i class="fad fa-calendar-alt"></i></span>
-                                        </div>
-                                    </div>
-                                <?php endif;?>
-                            </td>
                             <td><?php echo $invoice; ?><br/><?php echo $ps; ?></td>
         					<td data-label="Select" class="chkbox">
                                 <div class="checkbox checkbox-default">

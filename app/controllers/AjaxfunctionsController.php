@@ -21,7 +21,9 @@ class ajaxfunctionsController extends Controller
             'bulkMoveStock',
             'calcOriginPick',
             'consolidateOrders',
+            'dataTablesClientsViewInventory',
             'dataTablesViewInventory',
+            'dataTablesViewProducts',
             'deactivateUser',
             'deleteClientLocation',
             'deleteConfiguration',
@@ -77,6 +79,20 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function dataTablesViewProductionJobs()
+    {
+        $data = ViewProductionJobs::collectData($_GET );
+        //echo json_encode($data);
+        $this->view->renderJson($data);
+    }
+
+    public function dataTablesViewProducts()
+    {
+        $data = ViewProducts::collectData($_GET );
+        //echo json_encode($data);
+        $this->view->renderJson($data);
+    }
+
     public function dataTablesClientsViewInventory()
     {
         $data = ViewInventory::collectDataForClient($_GET );
@@ -92,6 +108,16 @@ class ajaxfunctionsController extends Controller
             $this->productionfinisher->deactivateFinisher($finisher_id);
         }
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Finisher(s) Have Been Deleted</h2>");
+    }
+
+    public function deleteCustomers()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data['customerids'] as $customer_id)
+        {
+            $this->productioncustomer->deactivateCustomer($customer_id);
+        }
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Customer(s) Have Been Deleted</h2>");
     }
 
     public function updateJobsPriority()
@@ -1171,6 +1197,32 @@ class ajaxfunctionsController extends Controller
         ]);
     }
 
+    public function addProductionJobNoteForm()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $job_id = $this->request->data['job_id'];
+        $jd = $this->productionjob->getJobById($job_id);
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_production_job_note.php', [
+            'job_id'    => $job_id,
+            'job_no'    => $jd['job_id'],
+            'job'       => $jd,
+            'note'      => $jd['notes']
+        ]);
+    }
+
+    public function addProductionJobDeliveryNoteForm()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $job_id = $this->request->data['job_id'];
+        $jd = $this->productionjob->getJobById($job_id);
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_production_delivery_note.php', [
+            'job_id'    => $job_id,
+            'job_no'    => $jd['job_id'],
+            'job'       => $jd,
+            'note'      => $jd['delivery_notes']
+        ]);
+    }
+
     public function addOrderPackageForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
@@ -1506,6 +1558,18 @@ class ajaxfunctionsController extends Controller
     public function getDailyOrderTrends()
     {
         $data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        $this->view->renderJson($data);
+    }
+
+    public function getWeeklyProductionJobTrends()
+    {
+        $data = $this->productionjob->getWeeklyJobTrends();
+        $this->view->renderJson($data);
+    }
+
+    public function getDailyProductionJobTrends()
+    {
+        $data = $this->productionjob->getDailyJobTrends();
         $this->view->renderJson($data);
     }
 

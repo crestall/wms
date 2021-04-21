@@ -1008,6 +1008,14 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
         }
         //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
         if(!$this->dataSubbed($customer_name))
@@ -1020,6 +1028,13 @@ class FormController extends Controller {
             if(!$this->emailValid($customer_email))
             {
                 Form::setError('customer_email', 'The email is not valid');
+            }
+        }
+        if($this->dataSubbed($customer_contact_email))
+        {
+            if(!$this->emailValid($customer_contact_email))
+            {
+                Form::setError('customer_contact_email', 'The email is not valid');
             }
         }
         if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country))
@@ -1092,7 +1107,7 @@ class FormController extends Controller {
                 'name'  => $customer_name
             );
             if($this->dataSubbed($customer_phone)) $customer_data['phone'] = $customer_phone;
-            if($this->dataSubbed($customer_contact)) $customer_data['contact'] = $customer_contact;
+            //if($this->dataSubbed($customer_contact)) $customer_data['contact'] = $customer_contact;
             if($this->dataSubbed($customer_email)) $customer_data['email'] = $customer_email;
             if($this->dataSubbed($customer_address)) $customer_data['address'] = $customer_address;
             if($this->dataSubbed($customer_address2)) $customer_data['address2'] = $customer_address2;
@@ -1100,19 +1115,35 @@ class FormController extends Controller {
             if($this->dataSubbed($customer_state)) $customer_data['state'] = $customer_state;
             if($this->dataSubbed($customer_postcode)) $customer_data['postcode'] = $customer_postcode;
             if($this->dataSubbed($customer_country)) $customer_data['country'] = $customer_country;
+            if($this->dataSubbed($customer_contact_id) && $customer_contact_id > 0)
+            {
+                $post_data['customer_contact_id'] = $customer_contact_id;
+            }
+            else
+            {
+                $post_data['customer_contact_id'] = 0;
+            }
             //Need to add the customer?
             if($customer_id == 0)
             {
+                if($this->dataSubbed($customer_contact_name)) $customer_data['contacts'][0]['name'] = $customer_contact_name;
+                if($this->dataSubbed($customer_contact_role)) $customer_data['contacts'][0]['role'] = $customer_contact_role;
+                if($this->dataSubbed($customer_contact_email)) $customer_data['contacts'][0]['email'] = $customer_contact_email;
+                if($this->dataSubbed($customer_contact_phone)) $customer_data['contacts'][0]['phone'] = $customer_contact_phone;
                 $customer_id = $this->productioncustomer->addCustomer($customer_data);
-                //echo "Will add customer data<pre>",print_r($customer_data),"</pre>";
+                $customer_data['customer_id'] = $customer_id;
+                $post_data['customer_id'] = $customer_id;
+                //this new customer will only have one contact
+                $pcont = new Productioncontact();
+                $post_data['customer_contact_id'] = $pcont->getCustomerContactIDs($customer_id, true);
             }
             else
             {
                 $customer_data['customer_id'] = $customer_id;
-                $this->productioncustomer->editCustomer($customer_data);
+                //$this->productioncustomer->editCustomer($customer_data);
                 //echo "Will edit customer data<pre>",print_r($customer_data),"</pre>";
             }
-            $this->productionjob->updateJobCustomerId($id, $customer_id);
+            $this->productionjob->updateJobCustomerId($id, $customer_id, $post_data['customer_contact_id']);
             Session::set('jobcustomerdetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Customer Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$id}#customerdetails");
@@ -1689,6 +1720,70 @@ class FormController extends Controller {
             Session::set('feedback', "That Finisher has been added to the system.<br/>The details can be edited <a href='/finishers/edit-finisher/finisher=".$id."'>HERE</a>");
         }
         return $this->redirector->to(PUBLIC_ROOT."finishers/add-finisher");
+    }
+
+    public function procAddProductionNote()
+    {
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    ${$field[$key]} = $avalue;
+                    $post_data[$field][$key] = $avalue;
+                }
+            }
+        }
+        if($this->productionjob->updateJobFieldValue($job_id, 'notes', $notes))
+        {
+            Session::set('notefeedback_'.$job_id, "That note has been updated.");
+            $email_note = nl2br($notes);
+            Email::notifyProdAdminOfNoteChange($job_no, $email_note, Session::getUsersName());
+        }
+        else
+        {
+            Session::set('noteerrorfeedback_'.$job_id, "There has been a database error.<br>That note has <strong>NOT</strong> been updated.");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/view-jobs#tr_".$job_id);
+    }
+
+    public function procAddProductionDeliveryNote()
+    {
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    ${$field[$key]} = $avalue;
+                    $post_data[$field][$key] = $avalue;
+                }
+            }
+        }
+        if($this->productionjob->updateJobFieldValue($job_id, 'delivery_notes', $delivery_notes))
+        {
+            Session::set('deliveryfeedback_'.$job_id, "That note has been updated.");
+            $email_note = nl2br($delivery_notes);
+            Email::notifyProdOfDeliveryNoteChange($job_no, $email_note, Session::getUsersName());
+        }
+        else
+        {
+            Session::set('deliveryerrorfeedback_'.$job_id, "There has been a database error.<br>That note has <strong>NOT</strong> been updated.");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/view-jobs#tr_".$job_id);
     }
 
     public function procAddPackages()

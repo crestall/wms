@@ -21,6 +21,13 @@ class Productionjob extends Model{
     public $table = "production_jobs";
     public $finishers_table = "production_jobs_finishers";
 
+    public function updateJobFieldValue($job_id, $field, $value)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, $field, $value, $job_id);
+        return true;
+    }
+
     public function updateJobAddress($data)
     {
         //echo "<pre>",print_r($data),"</pre>";die();
@@ -263,13 +270,17 @@ class Productionjob extends Model{
     public function updateJobDetails($data)
     {
         //echo "<pre>",print_r($data),"</pre>"; die();
+        $current_statusid = $this->getJobStatusId($data['id']);
+        if($current_statusid != $data['status_id'])
+        {
+            $this->updateJobStatus($data['id'], $data['status_id']);
+        }
         $db = Database::openConnection();
         $vals = array(
             'job_id'                => $data['job_id'],
             'description'           => $data['description'],
             'created_date'          => $data['date_entered_value'],
             'due_date'              => 0,
-            'status_id'             => $data['status_id'],
             'priority'              => 0,
             'notes'                 => null,
             'delivery_notes'        => null,
@@ -327,6 +338,25 @@ class Productionjob extends Model{
             'status_change_by'      => Session::getUserId()
         );
         $db->updateDatabaseFields($this->table, $new_vals, $job_id);
+        if( !(Session::getUserId() == 176 || Session::getUserId() == 178) )
+        {
+            //If Andrea or Megan didn't do the change, notify them of it
+            $sd = $db->queryByID('job_status', $status_id);
+            $jd = $db->queryByID('production_jobs', $job_id);
+            Email::notifyStatusChange($jd['job_id'], ucwords($sd['name']), Session::getUsersName());
+        }
+        if($status_id == 8 || $status_id == 26 || $status_id == 22 || $status_id == 24)
+        {
+            //notify FSG contact of status change
+            $sd = $db->queryByID('job_status', $status_id);
+            $jd = $db->queryByID('production_jobs', $job_id);
+            if( $jd['salesrep_id'] > 0 )
+            {
+                $pcd = $db->queryById('sales_reps', $jd['salesrep_id']);
+                $cd = $db->queryById('production_customers', $jd['customer_id']);
+                Email::notifyProdContactOfStatusChange($jd['job_id'],ucwords($cd['name']), ucwords($sd['name']), $pcd['email'], ucwords($pcd['name']));
+            }
+        }
         return true;
     }
 
@@ -351,10 +381,12 @@ class Productionjob extends Model{
         return true;
     }
 
-    public function updateJobCustomerId($job_id, $customer_id)
+    public function updateJobCustomerId($job_id, $customer_id, $customer_contact_id = 0)
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table, 'customer_id', $customer_id, $job_id);
+        if( $customer_contact_id > 0 )
+            $db->updateDatabaseField($this->table, 'customer_contact_id', $customer_contact_id, $job_id);
         return true;
     }
 
@@ -466,6 +498,131 @@ class Productionjob extends Model{
         //die($query);
         return $jobs = $db->queryData($query, $array);
     }
+
+    public function getJobStatusId($job_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $job_id), 'status_id');
+    }
+
+    public function getWeeklyJobTrends()
+    {
+        $from = strtotime('yesterday', strtotime('-6 months'));
+        $to = strtotime("tomorrow", strtotime('this Friday'));
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                date(a.date_index - interval weekday(a.date_index) day) AS week_start,
+                a.total_jobs,
+                ROUND(AVG(b.total_jobs), 1) AS job_average
+            FROM
+            (
+                SELECT
+                    count(*) as total_jobs,
+                    pj.created_date,
+                    DATE(FROM_UNIXTIME(pj.created_date)) AS 'date_index'
+                FROM
+                    production_jobs pj
+                WHERE
+                    pj.created_date >= $from AND pj.created_date <= $to
+                GROUP BY
+                    WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+            )a JOIN
+            (
+                SELECT
+                    count(*) as total_jobs,
+                    pj.created_date
+                FROM
+                    production_jobs pj
+                WHERE
+                    pj.created_date >= (($from) - (90*24*60*60)) AND (pj.created_date <= $to)
+                GROUP BY
+                    WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+
+            ) b ON b.created_date <= a.created_date
+            GROUP BY
+                a.created_date
+        ";
+        $jobs = $db->queryData($q);
+
+        $return_array = array(
+            array(
+                'Week Beginning',
+                'Total Jobs Per Week',
+                '6 Month Weekly Average'
+            )
+        );
+        foreach($jobs as $o)
+        {
+            $row_array = array();
+            $row_array[0] = $o['week_start'];
+            $row_array[1] = (int)$o['total_jobs'];
+            $row_array[2] = (float)$o['job_average'];
+            $return_array[] = $row_array;
+        }
+        //print_r($return_array);
+        return $return_array;
+    }
+
+    public function getDailyJobTrends()
+    {
+        $from = strtotime('yesterday', strtotime('-6 months'));
+        $to = strtotime("tomorrow", strtotime('this Friday'));
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                date(a.date_index) AS day,
+                a.total_jobs,
+                ROUND(AVG(b.total_jobs), 1) AS job_average
+            FROM
+            (
+                SELECT
+                    count(*) as total_jobs,
+                    pj.created_date,
+                    DATE(FROM_UNIXTIME(pj.created_date)) AS 'date_index'
+                FROM
+                    production_jobs pj
+                WHERE
+                    pj.created_date >= $from AND pj.created_date <= $to
+                GROUP BY
+                    DAY(DATE(FROM_UNIXTIME(pj.created_date))), WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+            )a JOIN
+            (
+                SELECT
+                    count(*) as total_jobs,
+                    pj.created_date
+                FROM
+                    production_jobs pj
+                WHERE
+                    pj.created_date >= (($from) - (90*24*60*60)) AND (pj.created_date <= $to)
+                GROUP BY
+                    DAY(DATE(FROM_UNIXTIME(pj.created_date))), WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+
+            ) b ON b.created_date <= a.created_date
+            GROUP BY
+                a.created_date
+            ";
+        $jobs = $db->queryData($q);
+
+        $return_array = array(
+            array(
+                'Date',
+                'Total Jobs Per Day',
+                '6 Month Average'
+            )
+        );
+        foreach($jobs as $o)
+        {
+            $row_array = array();
+            $row_array[0] = $o['day'];
+            $row_array[1] = (int)$o['total_jobs'];
+            $row_array[2] = (float)$o['job_average'];
+            $return_array[] = $row_array;
+        }
+        //print_r($return_array);
+        return $return_array;
+    }
+
 
     private function getJobQuery()
     {

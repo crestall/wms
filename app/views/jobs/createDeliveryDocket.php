@@ -14,6 +14,20 @@ $po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form:
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="noticebox">
+                    <h4>When delivering a job, please make sure to</h4>
+                    <ul>
+                        <li>Print out a DELIVERY DOCKET.</li>
+                        <li>Write your name and the date of delivery on the JOB BAG.</li>
+                        <li>Place the JOB BAG in the DESPATCH tray (warehouse).</li>
+                        <li>Mark the JOB STATUS as DELIVERING in the system.</li>
+                        <li>Once delivered, return the SIGNED DELIVERY DOCKET and place it in the tray (warehouse).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //echo "<pre>",print_r($job),"</pre>";?>
         <form id="create_delivery_docket" target="_blank" method="post">

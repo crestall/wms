@@ -24,6 +24,50 @@
                             });
                         });
                     },
+                    customerContactChange: function(){
+                        $('select#customer_contact_id').change(function(e){
+                            if($(this).val() != 0)
+                            {
+                                $('input#customer_contact_name').val($(this).find(":selected").text()).valid();
+                                $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
+                                $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
+                                $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
+                            }
+                            else
+                            {
+                                $('input#customer_contact_name').val('').valid();
+                                $('input#customer_contact_email').val('');
+                                $('input#customer_contact_role').val('');
+                                $('input#customer_contact_phone').val('');
+                            }
+                            if($('#send_to_customer').prop('checked'))
+                            {
+                                $('input#attention').val($('input#customer_contact_name').val());
+                            }
+                        });
+                    },
+                    deliverToAutoCompleteCustomer: function(){
+                        autoCompleter.productionJobCustomerAutoComplete($('input#ship_to'), selectDeliveryCallback, changeDeliveryCallback);
+                        function selectDeliveryCallback(event, ui)
+                        {
+                            $('input#ship_to').val(ui.item.value).valid();
+                            $('input#address').val(ui.item.address).valid();
+                            $('input#address2').val(ui.item.address_2);
+                            $('input#suburb').val(ui.item.suburb).valid();
+                            $('input#state').val(ui.item.state).valid();
+                            $('input#postcode').val(ui.item.postcode).valid();
+                            if(ui.item.contacts)
+                            {
+                                var contacts =  (ui.item.contacts).split('|');
+                                var contact = contacts[0].split(',');
+                                $('input#attention').val(contact[1]);
+                            }
+                        }
+                        function changeDeliveryCallback(event, ui)
+                        {
+                            return false;
+                        }
+                    },
                     customerAutoComplete: function(){
                         autoCompleter.addressAutoComplete($('#customer_address'), 'customer_');
                         autoCompleter.suburbAutoComplete($('#customer_suburb'), 'customer_');
@@ -59,8 +103,8 @@
                                     $('input.customer_contact').each(function(i,e){
                                         $(this).val('');
                                     });
-                                    var html = "<label class='col-md-3 col-form-label'>Job Contact</label>";
-                                    html += "<div class='col-md-4'>";
+                                    var html = "<label class='col-md-4 col-form-label'>Job Contact</label>";
+                                    html += "<div class='col-md-8'>";
                                     html += "<select id='customer_contact_id' class='form-control selectpicker' name='customer_contact_id' data-style='btn-outline-secondary'>";
                                     html += "<option value='0'>Choose a Contact</option>";
                                     $.each(contacts, function(i,v){
@@ -70,26 +114,7 @@
                                     html += "</select></div>";
                                     $('div#contact_chooser').html(html);
                                     $('.selectpicker').selectpicker();
-                                    $('select#customer_contact_id').change(function(e){
-                                        if($(this).val() != 0)
-                                        {
-                                            $('input#customer_contact_name').val($(this).find(":selected").text()).valid();
-                                            $('input#customer_contact_email').val($(this).find(":selected").data("contactemail"));
-                                            $('input#customer_contact_role').val($(this).find(":selected").data("contactrole"));
-                                            $('input#customer_contact_phone').val($(this).find(":selected").data("contactphone"));
-                                        }
-                                        else
-                                        {
-                                            $('input#customer_contact_name').val('').valid();
-                                            $('input#customer_contact_email').val('');
-                                            $('input#customer_contact_role').val('');
-                                            $('input#customer_contact_phone').val('');
-                                        }
-                                        if($('#send_to_customer').prop('checked'))
-                                        {
-                                            $('input#attention').val($('input#customer_contact_name').val());
-                                        }
-                                    });
+                                    actions.common.customerContactChange();
                                 }
                                 else
                                 {
@@ -272,31 +297,67 @@
                             } );
                         }
                         var paging = $('input#completed').val() == 1;
-                        var table = dataTable.init($('table#production_jobs_table'), {
-                            //No pagination for this table
+                        var options = {
+                            "processing": true,
+                            "mark": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "deferRender": true,
                             "paging":   paging,
-                            //No initial sort,
-                            "order": [],
-                            //search highlighting
-                            mark: true,
-                            //but blanks on the bottom when sorting
-                            columnDefs: [
-                                {
-                                    type: 'non-empty-string',
-                                    targets: 0 //priority is the second column
+                            "columnDefs": [
+                                { "type": 'non-empty-string', "targets": [0]},
+                                { "orderDataType": "dom-select", "targets": [0]},
+                                { "orderable": false, "targets": [3,4,8,9] },
+                                { "createdCell": function(td, cellData, rowData, row, col){
+                                        //console.log("rowData.DT_StatusColour: " + rowData.DT_StatusColour);
+                                        if(rowData.DT_StatusColour)
+                                        {
+                                                $(td).css('backgroundColor', rowData.DT_StatusColour);
+                                        }
+                                        if(rowData.DT_StatusTextColour)
+                                        {
+                                                $(td).css('color', rowData.DT_StatusTextColour);
+                                        }
+                                    },
+                                    "targets": [6]
                                 },
-                                {
-                                    orderDataType: "dom-select",
-                                    targets: 0
-                                },
-                                {
-                                    orderable: false,
-                                    targets: "no-sort"
+                                { "createdCell": function(td, cellData, rowData, row, col){
+                                        //console.log("cellData: "+cellData);
+                                        if(rowData.DT_DueDateColour > 0)
+                                        {
+                                                var d = new Date();
+                                                var n = d.getTime()/1000;
+                                                //console.log("n: "+n);
+                                                if( (rowData.DT_DueDateColour < n) )
+                                                        $(td).css({'backgroundColor':'#222', 'color':'#fff'});
+                                                else if( ( (rowData.DT_DueDateColour - n) < (24 * 60 * 60) ) )
+                                                        $(td).css({'backgroundColor':'#FF0000', 'color':'#fff'});
+                                                else if( ( (rowData.DT_DueDateColour - n) < (2 * 24 * 60 * 60) ) )
+                                                        $(td).css({'backgroundColor':'#e6e600'});
+                                                else
+                                                        $(td).css({'backgroundColor':'#66ff66'});
+                                        }
+                                    },
+                                    "targets": [7]
                                 }
                             ],
-                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">tp>',
-
-                        });
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesViewProductionJobs",
+                                "data": function( d ){
+                                    d.userRole = $("#user_role").val();
+                                    d.customerIds = $("#customer_ids").val();
+                                    d.finisherIds = $("#finisher_ids").val();
+                                    d.salesrepIds = $("#salesrep_ids").val();
+                                    d.statusIds = $("#status_ids").val();
+                                    d.completed = $("#completed").val();
+                                    d.cancelled = $("#cancelled").val();
+                                }
+                            },
+                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">rptp>'
+                        };
+                        var table = dataTable.init($('table#production_jobs_table'), options );
                         table.on( 'draw', function () {
                             //console.log( 'Redraw occurred at: '+new Date().getTime() );
                             $('.selectpicker').selectpicker();
@@ -388,6 +449,7 @@
                 'add-job':{
                     init: function(){
                         actions.common.autoComplete();
+                        actions.common.deliverToAutoCompleteCustomer();
                         actions.common.customerAutoComplete();
                         actions.common.doDates();
                         actions.common.addFinisher();
@@ -408,6 +470,123 @@
                         actions.common.jobsTable();
                         actions.common.selectAll();
                         actions.common.doDates();
+
+                        $('button.production_note').click(function(e){
+                            var job_id = $(this).data('jobid');
+                            var job_no = $(this).data('jobno');
+                            //console.log("will add a note to job id: "+job_id) ;
+                            $('<div id="note_pop" title="Add Note For Production">').appendTo($('body'));
+                            $('#note_pop')
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addProductionJobNoteForm',{job_id: job_id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                        if(textStatus == 'error') {
+                                            $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                        }
+                                        $('form#jobs-add-production-note').submit(function(e){
+                                            if($(this).valid())
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                e.preventDefault();
+                                            }
+                                        });
+                                    }
+                                );
+                            dialog = $("#note_pop").dialog({
+                                    draggable: true,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: "auto",
+                                    width: "auto",
+                                    buttons:{
+                                        'Update Notes': function(){
+                                            $('form#jobs-add-production-note').submit();
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Notes...</h2></div>' });
+                                        }
+                                    },
+                                    create: function( event, ui ) {
+                                        // Set maxWidth
+                                        $(this).css("maxWidth", "660px");
+                                    },
+                                    close: function(){
+                                        $("#note_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#note_pop').dialog('close');
+                                        });
+                                    }
+                            });
+                            $("#note_pop").dialog('open');
+                            form = dialog.find( "form" ).on( "submit", function( e ) {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Notes...</h2></div>', baseZ: 2000 });
+                            });
+                        });
+
+                        $('button.delivery_note').click(function(e){
+                            var job_id = $(this).data('jobid');
+                            var job_no = $(this).data('jobno');
+                            //console.log("will add a note to job id: "+job_id) ;
+                            $('<div id="delivery_note_pop" title="Add Note For Delivery">').appendTo($('body'));
+                            $('#delivery_note_pop')
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addProductionJobDeliveryNoteForm',{job_id: job_id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                        if(textStatus == 'error') {
+                                            $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                        }
+                                        $('form#jobs-add-production-delivery-note').submit(function(e){
+                                            if($(this).valid())
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                e.preventDefault();
+                                            }
+                                        });
+                                    }
+                                );
+                            dialog = $("#delivery_note_pop").dialog({
+                                    draggable: true,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: "auto",
+                                    width: "auto",
+                                    buttons:{
+                                        'Update Notes': function(){
+                                            $('form#jobs-add-production-delivery-note').submit();
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Delivery Notes...</h2></div>' });
+                                        }
+                                    },
+                                    create: function( event, ui ) {
+                                        // Set maxWidth
+                                        $(this).css("maxWidth", "660px");
+                                    },
+                                    close: function(){
+                                        $("#note_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#delivery_note_pop').dialog('close');
+                                        });
+                                    }
+                            });
+                            $("#delivery_note_pop").dialog('open');
+                            form = dialog.find( "form" ).on( "submit", function( e ) {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Updating Delivery Notes...</h2></div>', baseZ: 2000 });
+                            });
+                        });
+
+
+
                         $('button.print-sheet').each(function(i,e){
                             $(this).click(function(e){
                                 var runsheet_id = $(this).data('runsheetid');
@@ -727,6 +906,7 @@
                         actions.common.customerAutoComplete();
                         jobDeliveryDestinations.updateEvents();
                         actions.common.finisherExpectedDeliveryDates();
+                        actions.common.customerContactChange();
                         $('button#job_details_update_submitter').click(function(e){
                             $('form#job_details_update').submit();
                         });

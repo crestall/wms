@@ -1,11 +1,21 @@
 <?php
-$can_do_runsheets  = Permission::canDoRunsheets($user_role);
+$today = strtotime('today');
+$can_do_runsheets  = false;
 $can_change_status = Permission::canChangeStatus($user_role);
 $need_checkbox = ($can_do_runsheets || $can_change_status);
+$c_ids_string = implode(",", $customer_ids);
+$f_ids_string = implode(",", $finisher_ids);
+$sr_ids_string = implode(",", $salesrep_ids);
+$s_ids_string = implode(",", $status_ids);
 ?>
 <div id="page-wrapper">
     <input type="hidden" id="completed" value="<?php echo $completed;?>" >
+    <input type="hidden" id="user_role" value="<?php echo $user_role;?>" >
     <input type="hidden" id="cancelled" value="<?php echo $cancelled;?>" >
+    <input type="hidden" id="customer_ids" value="<?php echo $c_ids_string;?>" >
+    <input type="hidden" id="finisher_ids" value="<?php echo $f_ids_string;?>" >
+    <input type="hidden" id="status_ids" value="<?php echo $s_ids_string;?>" >
+    <input type="hidden" id="salesrep_ids" value="<?php echo $sr_ids_string;?>" >
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
@@ -16,11 +26,12 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
                 <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs/cancelled=1">View All Cancelled Jobs</a></div>
             <?php endif;?>
             <?php if($cancelled == 1 || $completed == 1):?>
-                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View All Current Jobs</a></div>
+                <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/view-jobs">View All Active Jobs</a></div>
             <?php endif;?>
+            <div class="col-md-4 mb-3 text-center"><a class="btn btn-outline-fsg" href="/jobs/job-search">Search All Jobs</a></div>
         </div>
         <div class="border border-secondary p-3 m-3 rounded bg-light">
-            <h3>Filter These Jobs</h3>
+            <h3>Filter <?php echo $filter;?> Jobs</h3>
             <div class="form-group row">
                 <label class="col-md-2 mb-3">Filter By Customer</label>
                 <div class="col-md-4 mb-3">
@@ -54,44 +65,58 @@ $need_checkbox = ($can_do_runsheets || $can_change_status);
             </div>
         </div>
         <?php //echo "<pre>",print_r($status_ids),"</pre>";?>
-        <?php if(count($jobs)):?>
-            <div id="waiting" class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Drawing Table..</h2>
-                    <p>May take a few moments</p>
-                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
-                </div>
+        <div id="waiting" class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Drawing Table..</h2>
+                <p>May take a few moments</p>
+                <img class='loading' src='/images/preloader.gif' alt='loading...' />
             </div>
-            <div class="row mt-4" id="table_holder" style="display:none">
-                <?php //echo "<pre>",print_r($jobs),"</pre>";?>
-                <?php if($can_do_runsheets):?>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-primary" id="runsheet"><i class="fas fa-truck"></i> Add Selected to Chosen Day's Runsheet</button></div>
-                <?php endif;?>
-                <?php if($can_change_status):?>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-fsg" id="status"><i class="fal fa-file-check"></i> Update Status for Selected</button></div>
-                <?php endif;?>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-secondary" id="priority_change"><i class="fal fa-file-plus"></i> Update Priority for Selected</button></div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-success" id="create_pdf"><i class="fal fa-file-pdf"></i> Create PDF for Selected</button></div> 
-                <div class="col-12">
-                    <?php if(isset($_SESSION['feedback'])) :?>
-                       <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>
-                    <?php endif; ?>
-                    <?php if(isset($_SESSION['errorfeedback'])) :?>
-                       <div class='errorbox'><?php echo Session::getAndDestroy('errorfeedback');?></div>
-                    <?php endif; ?>
-                </div>
-                <div class="col-12">
-                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/production_jobs_table.php");?>
-                </div>
+        </div>
+        <div class="row mt-4" id="table_holder" style="display:none">
+            <?php //echo "<pre>",print_r($jobs),"</pre>";?>
+            <?php if($can_change_status):?>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-fsg" id="status"><i class="fal fa-file-check"></i> Update Status for Selected</button></div>
+            <?php endif;?>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-secondary" id="priority_change"><i class="fal fa-file-plus"></i> Update Priority for Selected</button></div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3"><button class="btn btn-sm btn-block btn-outline-success" id="create_pdf"><i class="fal fa-file-pdf"></i> Create PDF for Selected</button></div>
+            <div class="col-12">
+                <?php if(isset($_SESSION['feedback'])) :?>
+                   <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>
+                <?php endif; ?>
+                <?php if(isset($_SESSION['errorfeedback'])) :?>
+                   <div class='errorbox'><?php echo Session::getAndDestroy('errorfeedback');?></div>
+                <?php endif; ?>
             </div>
-        <?php else:?>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="errorbox">
-                            <h2><i class="fas fa-exclamation-triangle"></i> No Jobs Listed</h2>
-                        </div>
-                    </div>
-                </div>
-        <?php endif;?>
+            <div class="col-12">
+                <table class="table-striped table-hover" id="production_jobs_table" width="100%">
+                    <thead>
+                        <tr>
+                            <th data-priority="10001" nowwrap>Priority</th>
+                            <th data-priority="1">Job Number</th>
+                            <th data-priority="1">Client</th>
+                            <th data-priority="3" style="max-width: 250px;">Description</th>
+                            <th>Finisher(s)</th>
+                            <th>FSG Contact</th>
+                            <?php if($can_change_status):?>
+                                <th data-priority="2" nowrap>Status<br /><select id="status_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus(false, 1, true);?></select>&nbsp;<em><small>(all)</small></em></th>
+                            <?php else:?>
+                                <th data-priority="2">Status</th>
+                            <?php endif;?>
+                            <th>Due Date</th>
+                            <th data-priority="3" style="max-width: 250px;">Delivery</th>
+                            <?php if($need_checkbox):?>
+                                <th data-priority="1" nowrap>
+                                    Select
+                                    <div class="checkbox checkbox-default">
+                                        <input id="select_all" class="styled" type="checkbox">
+                                        <label for="select_all"><em><small>(all)</small></em></label>
+                                    </div>
+                                </th>
+                            <?php endif;?>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

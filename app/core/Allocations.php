@@ -41,6 +41,7 @@ class Allocations{
                 $item_error_string = "<ul>";
                 $item_backorder_string = "<ul>";
                 $client_order_item_id = (isset($details['client_item_id']))? $details['client_item_id'] : NULL;
+                $pod_id = (isset($details['pod_id']))? $details['pod_id'] : NULL;
                 $item = $this->controller->item->getItemById($i_id);
                 if(filter_var($details['qty'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
                 {
@@ -57,6 +58,7 @@ class Allocations{
                             'location_id'           =>  0,
                             'qty'                   =>  $details['qty'],
                             'client_order_item_id'  =>  $client_order_item_id,
+                            'pod_id'                =>  $pod_id,
                             'is_kit'                =>  1
                         );
                         $add_collection = true;
@@ -89,7 +91,7 @@ class Allocations{
                         }
                         if( $total_available < $pick_count)
                         {
-                            if(in_array($ci['client_id'], $this->backorder_clients))
+                            if( in_array($ci['client_id'], $this->backorder_clients) && $item['is_pod'] == 1 )
                             {
                                 $allocations[$id] += $total_available; // reserve available for this order
                                 //$left = $total_available;
@@ -113,7 +115,8 @@ class Allocations{
                                         $f_locations[] = array(
                                             'location_id'           =>  $l['location_id'],
                                             'qty'                   =>  $available,
-                                            'client_order_item_id'  => $client_order_item_id
+                                            'client_order_item_id'  => $client_order_item_id,
+                                            'pod_id'                => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -122,11 +125,13 @@ class Allocations{
                                 if($left > 0)
                                 {
                                     $item_backorder = true;
-                                    $item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
+                                    //$item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
+                                    $item_backorder_string .= "<li>Item $item_name ($item_sku) is awaiting delivery of $pick_count in $pod_id</li>";
                                     $f_locations[] = array(
                                         'location_id'           =>  $this->controller->location->backorders_id,
                                         'qty'                   =>  $left,
                                         'client_order_item_id'  =>  $client_order_item_id,
+                                        'pod_id'                =>  $pod_id,
                                         'backorder'             =>  true
                                     );
                                 }
@@ -161,7 +166,8 @@ class Allocations{
                                         $f_locations[] = array(
                                             'location_id'           =>  $l['location_id'],
                                             'qty'                   =>  $available,
-                                            'client_order_item_id'  => $client_order_item_id
+                                            'client_order_item_id'  => $client_order_item_id,
+                                            'pod_id'                => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -194,7 +200,8 @@ class Allocations{
                                         $f_locations[] = array(
                                             'location_id'           =>  $l['location_id'],
                                             'qty'                   =>  $available,
-                                            'client_order_item_id'  => $client_order_item_id
+                                            'client_order_item_id'  => $client_order_item_id,
+                                            'pod_id'                => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -207,7 +214,8 @@ class Allocations{
                                         $f_locations[] = array(
                                             'location_id'           =>  $l['location_id'],
                                             'qty'                   =>  $left,
-                                            'client_order_item_id'  => $client_order_item_id
+                                            'client_order_item_id'  => $client_order_item_id,
+                                            'pod_id'                => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $left;
                                         break;

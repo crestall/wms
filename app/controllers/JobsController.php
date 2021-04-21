@@ -123,7 +123,7 @@ class JobsController extends Controller
     public function viewJobs()
     {
         //echo "<pre>",print_r($this->request->params),"</pre>";die();
-        $head = "Viewing Current Production Jobs";
+        $filter = "Active";
         $completed = (isset($this->request->params['args']['completed']))? 1 : 0;
         $cancelled = (isset($this->request->params['args']['cancelled']))? 1 : 0;
         $customer_ids = isset($this->request->params['args']['customer_ids'])? explode(',',$this->request->params['args']['customer_ids']): array();
@@ -132,6 +132,7 @@ class JobsController extends Controller
         $status_ids = isset($this->request->params['args']['status_ids'])? explode(',',$this->request->params['args']['status_ids']): array();
         if($completed || $cancelled)
             $status_ids = array();
+        /*
         $jobs = $this->productionjob->getJobsForDisplay(array(
             'completed'         =>  $completed,
             'cancelled'         =>  $cancelled,
@@ -140,19 +141,21 @@ class JobsController extends Controller
             'salesrep_ids'      =>  (array)$salesrep_ids,
             'status_ids'        =>  (array)$status_ids,
         ));
+        */
         //render the page
         if($completed == 1)
-            $head = "Viewing Completed Production Jobs";
+            $filter = "Completed";
         elseif($cancelled == 1)
-            $head = "Viewing Cancelled Production Jobs";
+            $filter = "Cancelled";
+        $head = "Viewing $filter Production Jobs";
         Config::setJsConfig('curPage', "view-jobs");
         Config::set('curPage', "view-jobs");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
             'page_title'        =>  $head,
             'pht'               =>  ": Production Jobs",
-            'jobs'              =>  $jobs,
             'completed'         =>  $completed,
             'cancelled'         =>  $cancelled,
+            'filter'            =>  $filter,
             'customer_ids'      =>  (array)$customer_ids,
             'finisher_ids'      =>  (array)$finisher_ids,
             'salesrep_ids'      =>  (array)$salesrep_ids,
@@ -217,6 +220,7 @@ class JobsController extends Controller
             'createDeliveryDocket',
             'jobSearch',
             'jobSearchResults',
+            'updateJob',
             'viewJobs'
         ));
 
