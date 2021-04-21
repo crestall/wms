@@ -4303,12 +4303,13 @@ class FormController extends Controller {
                     if(($details['qty']) > 0)
                     {
                         $this->orderreturn->recordData(array(
-                            'reason'    =>  'Return To Sender',
-                            'item_id'   =>  $item_id,
-                            'order_id'  =>  $order_id,
-                            'client_id' =>  $client_id,
-                            'entered_by'=>  Session::getUserId(),
-                            'date'      =>  time()
+                            'reason'        =>  'Return To Sender',
+                            'item_id'       =>  $item_id,
+                            'qty_returned'  => $details['qty'],
+                            'order_id'      =>  $order_id,
+                            'client_id'     =>  $client_id,
+                            'entered_by'    =>  Session::getUserId(),
+                            'date'          =>  time()
                         ));
 
                         $this->itemmovement->recordData(array(

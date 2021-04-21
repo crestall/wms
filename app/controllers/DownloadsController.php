@@ -782,6 +782,7 @@ class DownloadsController extends Controller {
         $cols = array(
             "Date Returned",
             "Item",
+            "Number Returned",
             "WMS Order Number",
             "Your Order Number",
             "Reason",
@@ -790,9 +791,15 @@ class DownloadsController extends Controller {
         $rows = array();
         foreach($returns as $o)
         {
+            $item_name = $o['item_name'];
+            if(!empty($o['client_product_id']))
+                $item_name .= " [".$o['client_product_id']."]";
+            elseif(!empty($o['sku']))
+                $item_name .= " [".$o['sku']."]";
             $row = array(
                 $o['return_date'],
-                $o['item_name'],
+                $item_name,
+                $o['qty_returned'],
                 $o['order_number'],
                 $o['client_order_number'],
                 $o['reason'],
