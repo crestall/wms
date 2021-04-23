@@ -17,7 +17,7 @@
     private static $active             = 1;
 
     private function __construct(){}
-
+    
     //public collection methods
     public static function collectDataForClient( $request )
     {
@@ -95,7 +95,7 @@
         $having = self::havingFilter( $request, self::$columns );
 
         $query = self::createQuery();
-        $query .= " GROUP BY a.name ";
+        $query .= " GROUP BY a.item_id ";
         // Total Data Set length
         $resTotalLength = $db->queryData($query);
         $recordsTotal = count($resTotalLength);
@@ -207,7 +207,7 @@
         $having = self::havingFilter( $request, self::$columns );
 
         $query = self::createQuery();
-        $query .= " GROUP BY a.name ";
+        $query .= " GROUP BY a.item_id ";
         // Total Data Set length
         $resTotalLength = $db->queryData($query);
         $recordsTotal = count($resTotalLength);
