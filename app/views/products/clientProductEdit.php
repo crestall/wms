@@ -15,7 +15,7 @@ $product_name = (!empty(Form::value('name')))? Form::value('name'):$product['nam
                     <form id="client_edit_product"  method="post" action="/form/procClientProductEdit">
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <input type="text" class="form-control required" name="name" id="name" value="<?php echo $product_name;?>" />
                                 <?php echo Form::displayError('name');?>
                             </div>
@@ -26,8 +26,8 @@ $product_name = (!empty(Form::value('name')))? Form::value('name'):$product['nam
                         <input type="hidden" name="client_id" value="<?php echo $product['client_id'];?>" />
                         <!-- Hidden Inputs -->
                         <div class="form-group row">
-                            <div class="col-md-4 offset-md-3">
-                                <button type="submit" class="btn btn-fsg">Update Product</button>
+                            <div class="col-md-6 offset-md-3">
+                                <button type="submit" class="btn btn-outline-secondary">Update Product</button>
                             </div>
                         </div>
                     </form>
