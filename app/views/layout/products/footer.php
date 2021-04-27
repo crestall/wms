@@ -19,6 +19,11 @@
                         });
                     }
                 },
+                'client-product-edit': {
+                    init: function(){
+
+                    }
+                },
                 'edit-product': {
                     init: function()
                     {

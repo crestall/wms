@@ -91,6 +91,21 @@ class ProductsController extends Controller
         ]);
     }
 
+    public function clientProductEdit()
+    {
+        $product_id = $this->request->params['args']['product'];
+        $product_info = $this->item->getItemById($product_id);
+        //render the page
+        Config::setJsConfig('curPage', "client-product-edit");
+        Config::set('curPage', "client-product-edit");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/clientProductEdit.php',
+        [
+            'product'       =>  $product_info,
+            'page_title'    =>  "Update Product",
+            'pht'           =>  ": Updating ".$product_info['name']
+        ]);
+    }
+
     public function viewProducts()
     {
         $client_id = 0;
@@ -132,6 +147,11 @@ class ProductsController extends Controller
             "addProduct",
             "viewProducts",
             "editProduct"
+        ));
+
+        //client users
+        Permission::allow('client', $resource, array(
+            'clientProductEdit'
         ));
 
         return Permission::check($role, $resource, $action);
