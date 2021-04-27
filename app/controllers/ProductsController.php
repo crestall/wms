@@ -93,8 +93,20 @@ class ProductsController extends Controller
 
     public function clientProductEdit()
     {
+        if(!isset($this->request->params['args']['products']))
+        {
+            //no product id to update
+            return (new ErrorsController())->error(400)->send();
+        }
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
         $product_id = $this->request->params['args']['product'];
         $product_info = $this->item->getItemById($product_id);
+        if(empty($product_info))
+        {
+            //no job data found
+            return (new ErrorsController())->error(404)->send();
+        }
         //render the page
         Config::setJsConfig('curPage', "client-product-edit");
         Config::set('curPage', "client-product-edit");
