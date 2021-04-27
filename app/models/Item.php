@@ -89,7 +89,7 @@ class Item extends Model{
             'image' =>  NULL
         );
         if(!empty($client_product_id)) $item_values['client_product_id'] = $client_product_id;
-        if(!empty($image)) $item_values['$image'] = $image;
+        if(!empty($image)) $item_values['image'] = $image;
         $db->updateDatabaseFields('items', $item_values, $item_id);
         return true;
     }
