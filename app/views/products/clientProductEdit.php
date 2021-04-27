@@ -8,18 +8,21 @@ if( !is_null($product['image']) && !empty($product['image']) )
     if(preg_match('/https?/i', $product['image']))
     {
         $image = "<img src='{$product['image']}' class='thumbnail' />";
-        $image_text = "This Is The Image Currently In Use.<br>It Is On An External Website";
+        $image_text = "This Is The Image Currently In Use.<br>It Is On An External Server";
+        $image_url = (!empty(Form::value('image')))? Form::value('image'):$product['image'];
     }
     else
     {
         $image = "<img src='/images/products/tn_{$product['image']}' class='thumbnail' />";
-        $image_text = "This Is The Image Currently In Use.<br>It Has Been Stored On The Server.";
+        $image_text = "This Is The Image Currently In Use.<br>It Is On This Server.";
+        $image_url = (!empty(Form::value('image')))? Form::value('image'):"";
     }
 }
 else
 {
     $image = "";
     $image_text = "No Image Currently Listed";
+    $image_url = (!empty(Form::value('image')))? Form::value('image'):"";
 }
 
 ?>
@@ -50,7 +53,7 @@ else
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Image URL</label>
                             <div class="col-md-6">
-                                <input type="text" class="product_image form-control" name="eximage" id="eximage" value="<?php echo $product['image'];?>">
+                                <input type="text" class="product_image form-control" name="image" id="image" value="<?php echo $image_url;?>">
                             </div>
                         </div>
                         <div class="form-group row">
