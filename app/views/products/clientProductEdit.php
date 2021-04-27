@@ -8,12 +8,12 @@ if( !is_null($product['image']) && !empty($product['image']) )
     if(preg_match('/https?/i', $product['image']))
     {
         $image = "<img src='{$product['image']}' class='thumbnail' />";
-        $image_text = "This Image Is On An External Website";
+        $image_text = "This Is The Image Currently In Use.<br>It Is On An External Website";
     }
     else
     {
         $image = "<img src='/images/products/tn_{$product['image']}' class='thumbnail' />";
-        $image_text = "This Image Has Been Uploaded To The Server";
+        $image_text = "This Is The Image Currently In Use.<br>It Has Been Stored On The Server.";
     }
 }
 else
