@@ -173,7 +173,7 @@ class FormController extends Controller {
         {
             Form::setError('name', 'A product name is required');
         }
-        if(preg_match('/https?/i', $image))
+        if(!preg_match('/https?/i', $image))
         {
             Form::setError('image', 'There is in error in the format of this URL');
         }
