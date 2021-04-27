@@ -914,6 +914,17 @@ $client = array(
             'display'   => false,
             'icon'      => ''
         )
+    ),
+    'products' => array(
+        'products-index'   => false,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'client-product-edit' => array(
+            'display'   => false,
+            'icon'      => ''
+        )
     )
 );
 

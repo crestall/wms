@@ -874,3 +874,7 @@ div#coming-soon img{
     width: 100%;
     height: auto;
 }
+
+img.thumbnail{
+    max-width: 150px;
+}
