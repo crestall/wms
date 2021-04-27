@@ -2,7 +2,7 @@
 $client_id = $product['client_id'];
 $product_name = (!empty(Form::value('name')))? Form::value('name'):$product['name'];
 $client_product_id = (!empty(Form::value('client_product_id')))? Form::value('client_product_id'):$product['client_product_id'];
-
+$image_inst = "Use a fully formed URL, including the http(s) part";
 if( !is_null($product['image']) && !empty($product['image']) )
 {
     if(preg_match('/https?/i', $product['image']))
@@ -17,6 +17,7 @@ if( !is_null($product['image']) && !empty($product['image']) )
         $image_text = "This Is The Image Currently In Use.<br>It Is On This Server.";
         $image_url = (!empty(Form::value('image')))? Form::value('image'):"";
     }
+    $image_inst .="<br>To remove the image completey, leave this blank";
 }
 else
 {
@@ -54,7 +55,7 @@ else
                             <label class="col-md-3 col-form-label">Image URL</label>
                             <div class="col-md-6">
                                 <input type="text" class="product_image form-control url" name="image" id="image" value="<?php echo $image_url;?>">
-                                <span class="inst">Use a fully formed URL, including the http(s) part<br>To remove the image completey, leave this blank</span>
+                                <span class="inst"><?php echo $image_inst;?></span>
                                 <?php echo Form::displayError('image');?>
                             </div>
                         </div>
