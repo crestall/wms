@@ -723,10 +723,11 @@ class Item extends Model{
         $return_array = array();
         $q = $data["item"];
         $client_id = $data['clientid'];
-        $query = "SELECT * FROM items WHERE active = 1 AND (name LIKE :term1 OR sku LIKE :term2) AND client_id = $client_id ORDER BY name";
+        $query = "SELECT * FROM items WHERE active = 1 AND (name LIKE :term1 OR sku LIKE :term2  OR client_product_id LIKE :term3) AND client_id = $client_id ORDER BY name";
         $array = array(
             'term1' =>  '%'.$q.'%',
-            'term2' =>  '%'.$q.'%'
+            'term2' =>  '%'.$q.'%',
+            'term3' =>  '%'.$q.'%'
         );
         //echo $query;die();
         $rows = $db->queryData($query, $array);
