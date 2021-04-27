@@ -27,6 +27,12 @@ $client_product_id = (!empty(Form::value('client_product_id')))? Form::value('cl
                                 <input type="text" class="form-control" name="client_product_id" id="client_product_id" value="<?php echo $client_product_id;?>" />
                             </div>
                         </div>
+                        <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Image URL</label>
+                            <div class="col-md-6">
+                                <input type="text" class="product_image form-control" name="eximage" id="eximage" value="<?php echo $product['image'];?>">
+                            </div>
+                        </div>
                         <!-- Hidden Inputs -->
                         <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <input type="hidden" name="item_id" value="<?php echo $product['id'];?>" />
