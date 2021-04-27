@@ -1,6 +1,7 @@
 <?php
 $client_id = $product['client_id'];
 $product_name = (!empty(Form::value('name')))? Form::value('name'):$product['name'];
+$client_product_id = (!empty(Form::value('client_product_id')))? Form::value('client_product_id'):$product['client_product_id'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -20,6 +21,12 @@ $product_name = (!empty(Form::value('name')))? Form::value('name'):$product['nam
                                 <?php echo Form::displayError('name');?>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Your Product ID/SKU</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="client_product_id" id="client_product_id" value="<?php echo $client_product_id;?>" />
+                            </div>
+                        </div>
                         <!-- Hidden Inputs -->
                         <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <input type="hidden" name="item_id" value="<?php echo $product['id'];?>" />
@@ -27,7 +34,7 @@ $product_name = (!empty(Form::value('name')))? Form::value('name'):$product['nam
                         <!-- Hidden Inputs -->
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-3">
-                                <button type="submit" class="btn btn-outline-secondary">Update Product</button>
+                                <button type="submit" class="btn btn-outline-fsg">Update Product</button>
                             </div>
                         </div>
                     </form>
