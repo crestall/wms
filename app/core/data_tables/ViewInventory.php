@@ -47,7 +47,7 @@
                         }
                         //return $d.'</a>'.$image ;
                         return '
-                            <a href="/products/client-product-edit/product='.$row['item_id'].'">'.$d.'</a>'.$image
+                            <a href="/products/client-product-edit/product='.$row['item_id'].'">'.$d.$image.'</a>'
                         ;
                 }
             ),
