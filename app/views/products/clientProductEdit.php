@@ -8,12 +8,12 @@ if( !is_null($product['image']) && !empty($product['image']) )
     if(preg_match('/https?/i', $product['image']))
     {
         $image = "<img src='{$product['image']}' class='thumbnail' />";
-        $image_text = "This Image Has Been Uploaded To The Server";
+        $image_text = "This Image Is On An External Website";
     }
     else
     {
         $image = "<img src='/images/products/tn_{$product['image']}' class='thumbnail' />";
-        $image_text = "This Image Is On An External Website";
+        $image_text = "This Image Has Been Uploaded To The Server";
     }
 }
 else
@@ -54,9 +54,9 @@ else
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md3 col-form-label">Current Image</label>
+                            <label class="col-md-3 col-form-label">Current Image</label>
                             <div class="col-md-6">
-                                <?php echo $image;?>
+                                <?php echo $image;?><br>
                                 <span class="inst"><?php echo $image_text;?></span>
                             </div>
                         </div>
