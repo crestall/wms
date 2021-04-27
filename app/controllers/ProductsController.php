@@ -122,8 +122,8 @@ class ProductsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/clientProductEdit.php',
         [
             'product'       => $product_info,
-            'page_title'    => "Update Product",
-            'pht'           => ": Updating ".$product_info['name'],
+            'page_title'    => "Update Product: ".$product_name,
+            'pht'           => ": Updating ".$product_name,
             'error'         => $error
         ]);
     }
