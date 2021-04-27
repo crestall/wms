@@ -54,7 +54,7 @@ else
                             <label class="col-md-3 col-form-label">Image URL</label>
                             <div class="col-md-6">
                                 <input type="text" class="product_image form-control url" name="image" id="image" value="<?php echo $image_url;?>">
-                                <span class="inst">Use a fully formed URL, including the http(s) part</span>
+                                <span class="inst">Use a fully formed URL, including the http(s) part<br>To remove the image completey, leave this blank</span>
                                 <?php echo Form::displayError('image');?>
                             </div>
                         </div>
