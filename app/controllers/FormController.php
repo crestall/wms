@@ -66,6 +66,7 @@ class FormController extends Controller {
             'procClientAdd',
             'procClientDailyReports',
             'procClientEdit',
+            'procClientProductEdit',
             'procCompletRunsheetTasks',
             'procContainerUnload',
             'procCourierAdd',
@@ -143,6 +144,58 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procClientProductEdit()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        echo "<pre>",print_r($post_data),"</pre>"; die();
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name', 'A product name is required');
+        }
+
+
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, update details
+            if($this->item->editItem($post_data))
+            {
+                $this->item->addPackingTypesForItem($package_types, $item_id);
+                Session::set('feedback', "{$name}'s details have been updated in the system");
+            }
+            else
+            {
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+
+
+        }
+        return $this->redirector->to(PUBLIC_ROOT."products/edit-product/product=$item_id");
     }
 
     public function procAddMiscTask()
