@@ -2,6 +2,26 @@
 $client_id = $product['client_id'];
 $product_name = (!empty(Form::value('name')))? Form::value('name'):$product['name'];
 $client_product_id = (!empty(Form::value('client_product_id')))? Form::value('client_product_id'):$product['client_product_id'];
+
+if( !is_null($product['image']) && !empty($product['image']) )
+{
+    if(preg_match('/https?/i', $product['image']))
+    {
+        $image = "<img src='{$product['image']}' class='thumbnail' />";
+        $image_text = "This Image Has Been Uploaded To The Server";
+    }
+    else
+    {
+        $image = "<img src='/images/products/tn_{$product['image']}' class='thumbnail' />";
+        $image_text = "This Image Is On An External Website";
+    }
+}
+else
+{
+    $image = "";
+    $image_text = "No Image Currently Listed";
+}
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -28,9 +48,16 @@ $client_product_id = (!empty(Form::value('client_product_id')))? Form::value('cl
                             </div>
                         </div>
                         <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Image URL</label>
+                            <label class="col-md-3 col-form-label">Image URL</label>
                             <div class="col-md-6">
                                 <input type="text" class="product_image form-control" name="eximage" id="eximage" value="<?php echo $product['image'];?>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md3 col-form-label">Current Image</label>
+                            <div class="col-md-6">
+                                <?php echo $image;?>
+                                <span class="inst"><?php echo $image_text;?></span>
                             </div>
                         </div>
                         <!-- Hidden Inputs -->
