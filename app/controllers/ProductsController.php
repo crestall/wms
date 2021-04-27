@@ -93,7 +93,7 @@ class ProductsController extends Controller
 
     public function clientProductEdit()
     {
-        if(!isset($this->request->params['args']['products']))
+        if(!isset($this->request->params['args']['product']))
         {
             //no product id to update
             return (new ErrorsController())->error(400)->send();
