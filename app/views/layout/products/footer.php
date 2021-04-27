@@ -21,7 +21,12 @@
                 },
                 'client-product-edit': {
                     init: function(){
-
+                        $('form#client_edit_product').submit(function(){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
+                            }
+                        });
                     }
                 },
                 'edit-product': {
