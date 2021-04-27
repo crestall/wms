@@ -93,10 +93,14 @@ class ProductsController extends Controller
 
     public function clientProductEdit()
     {
+        $error = false;
+        $product_info = array();
+        $product_name = "";
         if(!isset($this->request->params['args']['product']))
         {
             //no product id to update
-            return (new ErrorsController())->error(400)->send();
+            //return (new ErrorsController())->error(400)->send();
+            $error = "no_product_id";
         }
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
@@ -105,16 +109,22 @@ class ProductsController extends Controller
         if(empty($product_info))
         {
             //no job data found
-            return (new ErrorsController())->error(404)->send();
+            //return (new ErrorsController())->error(404)->send();
+            $error = "no_product";
+        }
+        else
+        {
+            $product_name = $product_info['name'];
         }
         //render the page
         Config::setJsConfig('curPage', "client-product-edit");
         Config::set('curPage', "client-product-edit");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/clientProductEdit.php',
         [
-            'product'       =>  $product_info,
-            'page_title'    =>  "Update Product",
-            'pht'           =>  ": Updating ".$product_info['name']
+            'product'       => $product_info,
+            'page_title'    => "Update Product",
+            'pht'           => ": Updating ".$product_info['name'],
+            'error'         => $error
         ]);
     }
 
