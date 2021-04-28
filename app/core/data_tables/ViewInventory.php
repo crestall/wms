@@ -17,7 +17,7 @@
     private static $active             = 1;
 
     private function __construct(){}
-
+    
     //public collection methods
     public static function collectDataForClient( $request )
     {
@@ -45,7 +45,6 @@
                         {
                                 $image = "<br><img src='/images/products/tn_".$row['image']."' class='img-fluid img-thumbnail'>";
                         }
-                        //return $d.'</a>'.$image ;
                         return '
                             <a href="/products/client-product-edit/product='.$row['item_id'].'">'.$d.$image.'</a>'
                         ;
