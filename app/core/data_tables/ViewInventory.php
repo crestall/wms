@@ -45,7 +45,9 @@
                         {
                                 $image = "<br><img src='/images/products/tn_".$row['image']."' class='img-fluid img-thumbnail'>";
                         }
-                        return $d.'</a>'.$image ;
+                        return '
+                            <a href="/products/client-product-edit/product='.$row['item_id'].'">'.$d.$image.'</a>'
+                        ;
                 }
             ),
             array( 'db' => 'sku',  'dt' => 1 ),
