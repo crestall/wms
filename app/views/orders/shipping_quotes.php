@@ -21,7 +21,7 @@
                     $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);?>
                     <div class="row">
                         <label class="col-8">Quoted Price</label>
-                        <div class="col-4">
+                        <div class="col-4 text-right">
                             <?php echo $eparcel_charge;?>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     $express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'], 2);?>
                     <div class="row">
                         <label class="col-8">Quoted Price</label>
-                        <div class="col-4">
+                        <div class="col-4 text-right">
                             <?php echo $express_charge;?>
                         </div>
                     </div>
@@ -60,11 +60,22 @@
             <div class="card-body">
                 <?php //echo "<pre>",print_r($df_response),"</pre>"; die();?>
                 <?php if($df_response['ResponseCode'] == 300):
-                    $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);?>
+                    $surcharges = Utility::getDFSurcharges($df_response['df_items']);
+                    $surcharges = number_format($surcharges * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    $df_charge = number_format($df_response['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);
+                    $total = $surcharges + $df_charge;?>
                     <div class="row">
-                        <label class="col-8">Quoted Price</label>
-                        <div class="col-4">
-                            <?php echo $df_charge;?>
+                        <label class="col-8">Shipping Price</label>
+                        <div class="col-4 text-right">
+                            <?php echo "$".$df_charge;?>
+                        </div>
+                        <label class="col-8">Surcharges</label>
+                        <div class="col-4 text-right">
+                            <?php echo "$".$surcharges;?>
+                        </div>
+                        <label class="col-8">Total</label>
+                        <div class="col-4 text-right">
+                            <?php echo '$'.$total;?>
                         </div>
                     </div>
                 <?php else:?>
