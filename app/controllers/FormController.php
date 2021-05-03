@@ -66,6 +66,7 @@ class FormController extends Controller {
             'procClientAdd',
             'procClientDailyReports',
             'procClientEdit',
+            'procClientProductEdit',
             'procCompletRunsheetTasks',
             'procContainerUnload',
             'procCourierAdd',
@@ -143,6 +144,59 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procClientProductEdit()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
+        if( !$this->dataSubbed($name) )
+        {
+            Form::setError('name', 'A product name is required');
+        }
+        if(!preg_match('/https?/i', $image))
+        {
+            Form::setError('image', 'There is in error in the format of this URL');
+        }
+
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good, update details
+            if($this->item->clientEditItem($post_data))
+            {
+                Session::set('feedback', "{$name}'s details have been updated in the system<br>The changes should be showing below");
+            }
+            else
+            {
+                Session::set('value_array', $_POST);
+                Session::set('errorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."products/client-product-edit/product=$item_id");
     }
 
     public function procAddMiscTask()
@@ -1421,12 +1475,12 @@ class FormController extends Controller {
         }
         //customer address checking
         if(!isset($country)) $country = "AU";
-        if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) )
+        if(!empty($customer_address) || !empty($customer_suburb) || !empty($customer_state) || !empty($customer_postcode) || !empty($customer_country) )
         {
-            $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, 'AU', isset($ignore_customer_address_error), "customer_", "show_customer_address");
+            $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, $customer_country, isset($ignore_customer_address_error), "customer_", "show_customer_address");
         }
         if(!isset($held_in_store))
-            $this->validateAddress($address, $suburb, $state, $postcode, "AU", isset($ignore_address_error));
+            $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);

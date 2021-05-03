@@ -38,10 +38,12 @@ endif;
                         if(Session::getUserRole() != "super admin")
                             continue;
                     }
-                    $Section = ucwords(str_replace("-", " ", $section));?>
-                    <li id="<?php echo $section;?>" class="nav-item">
-                        <a href="<?php echo "/$section/";?>" class="nav-link"><?php echo $Section;?></a>
-                    </li>
+                    if($pages[$section][$section."-index"]):
+                        $Section = ucwords(str_replace("-", " ", $section));?>
+                        <li id="<?php echo $section;?>" class="nav-item">
+                            <a href="<?php echo "/$section/";?>" class="nav-link"><?php echo $Section;?></a>
+                        </li>
+                    <?php endif;?>
                 <?php endforeach;?>
             <?php endif;?>
         </ul>
