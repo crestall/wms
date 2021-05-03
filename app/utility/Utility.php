@@ -617,6 +617,8 @@ class Utility{
         $surcharges = 0;
         foreach($items as $i)
         {
+            if(!isset($i['Kgs']))
+                $i['Kgs'] = $i['KGS'];
             if( $i['Kgs'] > 30 )
             {
                 $w = $i['Kgs'] - 30;

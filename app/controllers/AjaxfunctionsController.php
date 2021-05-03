@@ -1133,32 +1133,36 @@ class ajaxfunctionsController extends Controller
             //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
             $df_r = $this->directfreight->getQuote($df_details);
             $df_response = json_decode($df_r,true);
+            $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
             //echo "<pre>",var_dump($df_response),"</pre>"; die();
             if($df_response['ResponseCode'] == 300)
             {
-                $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
+                echo "<p>Surcharge: $surcharges</p>";
+                //$surcharges = number_format($surcharges * 1.1 * DF_FUEL_SURCHARGE, 2);
+                $df_charge = "$".number_format( ($df_response['TotalFreightCharge'] + $surcharges) * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2);
                 /*********** special deals for OnePlate *******************/
                     if($od['client_id'] == 82)
                     {
-                        $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                        $df_charge = "$".number_format( ($df_response['TotalFreightCharge'] + $surcharges) * 1.1 * 1.1 * DF_FUEL_SURCHARGE, 2);
                     }
                 /*********** special deals for OnePlate *******************/
                 /*********** charge FREEDOM more *******************/
                     if($od['client_id'] == 7)
                     {
-                        $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                        $df_charge = "$".number_format( ($df_response['TotalFreightCharge'] + $surcharges) * 1.4 * 1.1 * DF_FUEL_SURCHARGE, 2);
                     }
                 /*********** charge FREEDOM more *******************/
                 /*********** BDS Calculations *******************/
                     if($od['client_id'] == 86)
                     {
-                        $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.3 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                        $df_charge = "$".number_format( ($df_response['TotalFreightCharge'] + $surcharges) * 1.3 * 1.1 * DF_FUEL_SURCHARGE, 2);
                     }
                 /*********** end BDS Calculations *******************/
                 /*********** PBA Calculations *******************/
                     if($od['client_id'] == 87)
                     {
-                        $df_charge = "$".number_format($df_response['TotalFreightCharge'] * 1.3 * 1.1 * DF_FUEL_SURCHARGE, 2);
+                        $df_charge = "$".number_format( ($df_response['TotalFreightCharge'] + $surcharges) * 1.3 * 1.1 * DF_FUEL_SURCHARGE, 2);
                     }
                 /*********** end PBA Calculations *******************/
             }
