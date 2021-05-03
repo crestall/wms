@@ -344,7 +344,14 @@ else
                                         <?php echo Form::displayError('postcode');?>
                                     </div>
                                 </div>
-                                <input type="hidden" name="country" value = "AU">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Country</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control customer" name="country" id="country" value="<?php echo $country;?>" />
+                                        <span class="inst">use the 2 letter ISO code</span>
+                                        <?php echo Form::displayError('country');?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1050,3 +1050,7 @@ mark {
     border: thin solid;
     border-radius: .2em;
 }
+
+img.thumbnail{
+    max-width: 150px;
+}

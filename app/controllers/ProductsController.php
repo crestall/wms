@@ -91,6 +91,43 @@ class ProductsController extends Controller
         ]);
     }
 
+    public function clientProductEdit()
+    {
+        $error = false;
+        $product_info = array();
+        $product_name = "";
+        if(!isset($this->request->params['args']['product']))
+        {
+            //no product id to update
+            //return (new ErrorsController())->error(400)->send();
+            $error = "no_product_id";
+        }
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        $product_id = $this->request->params['args']['product'];
+        $product_info = $this->item->getItemById($product_id);
+        if(empty($product_info))
+        {
+            //no job data found
+            //return (new ErrorsController())->error(404)->send();
+            $error = "no_product";
+        }
+        else
+        {
+            $product_name = $product_info['name'];
+        }
+        //render the page
+        Config::setJsConfig('curPage', "client-product-edit");
+        Config::set('curPage', "client-product-edit");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/products/", Config::get('VIEWS_PATH') . 'products/clientProductEdit.php',
+        [
+            'product'       => $product_info,
+            'page_title'    => "Update Product: ".$product_name,
+            'pht'           => ": Updating ".$product_name,
+            'error'         => $error
+        ]);
+    }
+
     public function viewProducts()
     {
         $client_id = 0;
@@ -132,6 +169,11 @@ class ProductsController extends Controller
             "addProduct",
             "viewProducts",
             "editProduct"
+        ));
+
+        //client users
+        Permission::allow('client', $resource, array(
+            'clientProductEdit'
         ));
 
         return Permission::check($role, $resource, $action);

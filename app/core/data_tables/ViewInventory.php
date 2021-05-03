@@ -17,7 +17,7 @@
     private static $active             = 1;
 
     private function __construct(){}
-
+    
     //public collection methods
     public static function collectDataForClient( $request )
     {
@@ -45,13 +45,17 @@
                         {
                                 $image = "<br><img src='/images/products/tn_".$row['image']."' class='img-fluid img-thumbnail'>";
                         }
-                        return $d.'</a>'.$image ;
+                        return '
+                            <a href="/products/client-product-edit/product='.$row['item_id'].'">'.$d.$image.'</a>'
+                        ;
                 }
             ),
             array( 'db' => 'sku',  'dt' => 1 ),
+            array( 'db' => 'client_product_id', 'dt' => 2 ),
+            array( 'db' => 'barcode',   'dt' => 3 ),
             array(
                 'db' => '',
-                'dt' => 2,
+                'dt' => 4,
                 'formatter' => function($row){
                     $details = "";
                     if(!empty($row['width'])) $details .= "Width: ".$row['width']."cm<br/>";
@@ -61,13 +65,13 @@
                     return $details;
                 }
             ),
-            array( 'db' => 'on_hand', 'dt' => 3 ),
-            array( 'db' => 'allocated', 'dt'=> 4),
-            array( 'db' => 'qc_count', 'dt'=> 5),
-            array( 'db' => 'available', 'dt'=> 6),
+            array( 'db' => 'on_hand', 'dt' => 5 ),
+            array( 'db' => 'allocated', 'dt'=> 6),
+            array( 'db' => 'qc_count', 'dt'=> 7),
+            array( 'db' => 'available', 'dt'=> 8),
             array(
                 'db' => '',
-                'dt' => 7,
+                'dt' => 9,
                 'formatter' => function($row){
                     $location_string = ($row['bays'] > 0)? $row['bays']." Full Pallet Bays<br/>" : "";
                     $location_string .= ($row['trays'] > 0)? $row['trays']." Tray Spaces (9 per pallet bay)" : "";
@@ -77,7 +81,7 @@
             ),
             array(
                 'db' => '',
-                'dt' => 8,
+                'dt' => 10,
                 'formatter' => function($row){
                     return "
                         <p><input type='text' class='form-control number ml-auto' id='lowstock_{$row['item_id']}' name='lowstock_{$row['item_id']}' value='{$row['low_stock_warning']}' style=1max-width: 80px1 /></p>

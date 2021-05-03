@@ -77,9 +77,9 @@
                                                 <p><span class="iname"><?php echo $i['name'];?></span><br>
                                                 <span class="icount font-weight-bold">Required: <?php echo $required;?></span><br>
                                                 <span class="bo_pod font-weight-bold">Awaiting: <?php echo $i['pod_id'];?></span></p>
-                                            </div>
-                                            <div class="item_total text-right font-weight-bold">
-                                                Total Available: <?php echo $available;?>
+                                                <div class="item_total text-right font-weight-bold">
+                                                    Total Available: <?php echo $available;?>
+                                                </div>
                                             </div>
                                         <?php endforeach;?>
                                     </td>

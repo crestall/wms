@@ -44,7 +44,7 @@ $padmin = array(
             'display'   => false,
             'icon'      => ''
         )
-    ),
+    ),/*
     'runsheets' => array(
         'runsheets-index'   => true,
         'default-icon'      => array(
@@ -79,7 +79,7 @@ $padmin = array(
             'display'   => false,
             'icon'      => ''
         )
-    ),
+    ),*/
     'production-reports'    => array(
         'production-reports-index'  => true,
         'default-icon'  => array(
@@ -455,7 +455,7 @@ $admin = array(
             'icon'      => $fontastic_icons['jobs']['view-jobs']
         )
     ),
-    'runsheets' => array(),
+    //'runsheets' => array(),
     'clients'	=> array(
         'clients-index' => true,
         'default-icon'  => array(
@@ -914,6 +914,17 @@ $client = array(
             'display'   => false,
             'icon'      => ''
         )
+    ),
+    'products' => array(
+        'products-index'   => false,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'client-product-edit' => array(
+            'display'   => false,
+            'icon'      => ''
+        )
     )
 );
 
@@ -922,7 +933,7 @@ $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
 
-$admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
+//$admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 
 $prod_admin = array_merge($prod, $padmin);

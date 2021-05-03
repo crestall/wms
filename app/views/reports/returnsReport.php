@@ -25,6 +25,7 @@
                         	<tr>
                                 <th>Date</th>
                                 <th>Item</th>
+                                <th>Number Returned</th>
                                 <th>WMS Order Number</th>
                                 <th>Client Order Number</th>
                                 <th>Reason</th>
@@ -32,10 +33,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($returns as $r):?>
+                        <?php foreach($returns as $r):
+                            $item_name = $r['item_name'];
+                            if(!empty($r['client_product_id']))
+                                $item_name .= " [".$r['client_product_id']."]";
+                            elseif(!empty($r['sku']))
+                                $item_name .= " [".$r['sku']."]";?>
                         	<tr>
                                 <td data-label="Date" class="number nowrap"><?php echo $r['return_date'];?></td>
-                                <td data-label="Item"><?php echo $r['item_name'];?></td>
+                                <td data-label="Item"><?php echo $item_name;?></td>
+                                <td class="number"><?php echo $r['qty_returned'];?></td>
                                 <td data-label="WMS Order Number" class="number"><?php echo $r['order_number'];?></td>
                                 <td data-label="Client Order Number" class="number"><?php echo $r['client_order_number'];?></td>
                                 <td data-label="Reason"><?php echo $r['reason'];?></td>
