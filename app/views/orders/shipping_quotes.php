@@ -21,7 +21,7 @@
                     $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);?>
                     <div class="row">
                         <label class="col-8">Quoted Price</label>
-                        <div class="col-4">
+                        <div class="col-4 text-right">
                             <?php echo $eparcel_charge;?>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     $express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'], 2);?>
                     <div class="row">
                         <label class="col-8">Quoted Price</label>
-                        <div class="col-4">
+                        <div class="col-4 text-right">
                             <?php echo $express_charge;?>
                         </div>
                     </div>
