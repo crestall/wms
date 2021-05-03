@@ -1138,7 +1138,7 @@ class ajaxfunctionsController extends Controller
             if($df_response['ResponseCode'] == 300)
             {
                 $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
-                echo "<p>Surcharge: $surcharges</p>";
+                //echo "<p>Surcharge: $surcharges</p>";
                 //$surcharges = number_format($surcharges * 1.1 * DF_FUEL_SURCHARGE, 2);
                 $df_charge = "$".number_format( ($df_response['TotalFreightCharge'] + $surcharges) * 1.35 * 1.1 * DF_FUEL_SURCHARGE, 2);
                 /*********** special deals for OnePlate *******************/
