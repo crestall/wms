@@ -93,15 +93,15 @@
                     $total = $surcharges + $df_charge;?>
                     <div class="row">
                         <label class="col-8">Shipping Price</label>
-                        <div class="col-4">
+                        <div class="col-4 text-right">
                             <?php echo "$".$df_charge;?>
                         </div>
                         <label class="col-8">Surcharges</label>
-                        <div class="col-4">
+                        <div class="col-4 text-right">
                             <?php echo "$".$surcharges;?>
                         </div>
                         <label class="col-8">Total</label>
-                        <div class="col-4">
+                        <div class="col-4 text-right">
                             <?php echo '$'.$total;?>
                         </div>
                     </div>
