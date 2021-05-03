@@ -320,6 +320,7 @@ class ajaxfunctionsController extends Controller
             $express_response = $this->Eparcel->GetQuote($express_shipments);
             $df_r = $this->directfreight->getQuote($direct_freight_shipment);
             $df_response = json_decode($df_r,true);
+            $df_response['df_items'] = $df_items;
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'orders/shipping_quotes.php', [
                 'eparcel_response'  => $eparcel_response,
                 'df_response'       => $df_response,
