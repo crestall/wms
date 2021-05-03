@@ -1133,7 +1133,6 @@ class ajaxfunctionsController extends Controller
             //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
             $df_r = $this->directfreight->getQuote($df_details);
             $df_response = json_decode($df_r,true);
-            $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
             //echo "<pre>",var_dump($df_response),"</pre>"; die();
             if($df_response['ResponseCode'] == 300)
             {
