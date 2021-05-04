@@ -54,7 +54,11 @@ endif;
                 <img class="img-user" src="<?php echo $image;?>" /><br/>
                 <strong><?php echo Session::getUsersName(); ?></strong>
             </a>
-            <div id="countdown" class="text-white">Page will not refresh anymore<span></span></div>
+            <?php if(Config::get('curPage') == "dashboard"):?>
+                <div id="countdown" class="text-white">Page will refresh in <span></span></div>
+            <?php else:?>
+                <div id="countdown" class="text-white">This page does not refresh<span></span></div>
+            <?php endif;?>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a href="/user/profile" class="dropdown-item"><i class="fa fa-user fa-fw"></i> Profile</a>
                 <a href="/login/logOut" class="dropdown-item"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
