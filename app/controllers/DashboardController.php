@@ -30,6 +30,7 @@ class DashboardController extends Controller
             $client_id = $this->user->getUserClientId( Session::getUserId() );
         }
         Config::setJsConfig('curPage', "dashboard");
+        Config::set('curPage', "dashboard");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dashboard/", Config::get('VIEWS_PATH') . 'dashboard/index.php',[
             'pht'                   =>  ": Home Page",
             'client_id'             =>  $client_id,
