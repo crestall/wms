@@ -50,6 +50,7 @@ class FormController extends Controller {
             'procAddProductionCustomer',
             'procAddProductionFinisher',
             'procAddProductionJob',
+            'procAddPurchaseOrder',
             'procAddressUpdate',
             'procAddServiceJob',
             'procAddSerials',
@@ -146,11 +147,68 @@ class FormController extends Controller {
         $this->Security->requirePost($actions);
     }
 
+    public function procAddPurchaseOrder()
+    {
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
+        //required fields
+        if($finisher_id == 0)
+        {
+            Form::setError('finisher_name', 'The Supplier Name is required');
+        }
+        if(!$this->dataSubbed($date))
+        {
+            Form::setError('date', 'The date for this purchase order is required');
+        }
+        if(!$this->dataSubbed($required_date))
+        {
+            Form::setError('required_date', 'Please indicate when this is required');
+        }
+        foreach($poitems as $i => $array)
+        {
+            if(!$this->dataSubbed($array['qty']))
+            {
+                Form::setError('poitem_qty_'.$i, 'The quantity of each item is required');
+            }
+            if(!$this->dataSubbed($array['description']))
+            {
+                Form::setError('poitem_description_'.$i, 'Please enter a description for this item');
+            }
+        }
+
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //all good add the purchase order
+            $po_id = $this->purchaseorder->addPurchaseOrder($post_data);
+            Session::set('feedback', "That Purchase Order has been added to the system.<br/>It can be viewed/edited <a href='/purchase-orders/view-update-po/po=".$po_id."'>HERE</a>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."purchase-orders/add-purchase-order");
+    }
+
     public function procClientProductEdit()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
-        $post_data = array();
-        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -4457,9 +4515,10 @@ class FormController extends Controller {
         {
             //$ip = (isset($ignore_pc))? 1 : 0;    deprecated functionality
             $courier_name = !$this->dataSubbed($courier_name)? "":$courier_name;
+            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1);
+            Session::set('showcourierfeedback', true);
             Session::set('courierfeedback',"<h3><i class='far fa-check-circle'></i>Courier has been assigned</h3>");
             Session::set('couriererrorfeedback', "");
-            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1);
         }
         if(Session::getAndDestroy('showcouriererrorfeedback') == false)
         {
