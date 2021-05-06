@@ -116,7 +116,6 @@ div.feedbackbox{
     width:720px;
 }
 </style>
-
 </head>
 <body>
 	<div id="main_body">
@@ -124,12 +123,14 @@ div.feedbackbox{
         <div class="inset">
             <p>{TOTAL_IMPORT} total orders were collected</p>
             <p>{IMPORT_ERROR_COUNT} generated an error on import</p>
+            <p>{INVENTORY_ERROR_COUNT} generated an inventory error on import</p>
             <p>{BACKORDER_COUNT} have been placed on backorder</p>
             <p>{IMPORT_COUNT} orders that have been successfully added to the system including those requiring to be held pending Print On Demand Items</p>
         </div>
         <hr/>
             {IMPORT_ERRORS}
             {BACKORDERS}
+            {INVENTORY_ERRORS}
             {IMPORTS}
 		<p>Thankyou</p>
         <p class="italic"><span class="bold">The FSG Customer Service Team</span></p>
