@@ -287,6 +287,10 @@ $prod_sales_admin = array(
             'display'   => false,
             'icon'      => $fontastic_icons['jobs']['default']
         ),
+        'add-job'   => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['jobs']['add-job']
+        ),
         'view-jobs' => array(
             'display'   => true,
             'icon'      => $fontastic_icons['jobs']['view-jobs']
