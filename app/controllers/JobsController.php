@@ -213,8 +213,18 @@ class JobsController extends Controller
             'createDeliveryDocket',
             'viewJobs'
         ));
+        //production sales admin users
+        Permission::allow(['production sales admin'], $resource, array(
+            'index',
+            'addJob',
+            'createDeliveryDocket',
+            'jobSearch',
+            'jobSearchResults',
+            'updateJob',
+            'viewJobs'
+        ));
         //production sales users
-        Permission::allow(['production sales admin', 'production sales'], $resource, array(
+        Permission::allow(['production sales'], $resource, array(
             'index',
             'createDeliveryDocket',
             'jobSearch',
