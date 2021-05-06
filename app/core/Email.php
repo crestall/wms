@@ -480,10 +480,22 @@
             if($backorder)
             {
                 $backorders .= "
-                    <h3 class='backorder'>The Following Feedback Has Been Supplied Regarding Backorders</h3>
+                    <h3 class='backorder'>The Following Feedback Has Been Supplied Regarding Print On Demand Orders</h3>
                     <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #e6f2ff;border: 3px solid #007bff;color: #007bff;'>
                         <tr>
                             <td style='padding: 20px;'>$backorder_string</td>
+                        </tr>
+                    </table>
+                ";
+            }
+            $inventory_errors = "";
+            if($inventory_error)
+            {
+                $inventory_errors .= "
+                    <h3 class='backorder'>The Following Feedback Has Been Supplied Regarding Inventory Errors</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                        <tr>
+                            <td style='padding: 20px;'>$inventory_error_string</td>
                         </tr>
                     </table>
                 ";
@@ -497,8 +509,8 @@
                 </table>
             ";
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsimportfeedback.html");
-            $replace_array = array("{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{BACKORDER_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{BACKORDERS}","{IMPORTS}");
-		    $replace_with_array = array($total_import, $import_error_count, $backorder_count, $import_count,$import_errors,$backorders,$imports);
+            $replace_array = array("{INVENTORY_ERROR_COUNT}","{INVENTORY_ERRORS}","{TOTAL_IMPORT}","{IMPORT_ERROR_COUNT}","{BACKORDER_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{BACKORDERS}","{IMPORTS}");
+		    $replace_with_array = array($inventory_error_count, $inventory_errors, $total_import, $import_error_count, $backorder_count, $import_count,$import_errors,$backorders,$imports);
 		    $body = str_replace($replace_array, $replace_with_array, $body);
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
