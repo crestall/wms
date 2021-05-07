@@ -327,6 +327,11 @@
                         });
                     }
                 },
+                "receive-pod-stock": {
+                    init: function(){
+                        
+                    }
+                },
                 "scan-to-inventory": {
                     init: function(){
 
