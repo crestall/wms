@@ -123,6 +123,20 @@ class Order extends Model{
         return $db->queryValue('orders_items', array('order_id' => $order_id), 'pod_id');
     }
 
+    public function getPODItemsForPODId($pod_id)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                *
+            FROM
+                orders_items oi
+            WHERE
+                oi.pod_id = $pod_id
+        ";
+        return $db->queryData($q);
+    }
+
     public function getBackorders($client_id = 0)
     {
         $db = Database::openConnection();
