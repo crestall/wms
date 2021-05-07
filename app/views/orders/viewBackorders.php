@@ -56,7 +56,7 @@
                                     $ship_to = "<p class='font-weight-bold'>".$bo['ship_to']."</p>";
                                 }
                 				$ship_to .= $this->controller->address->getAddressStringForOrder($bo['id']);
-                                $boifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
+                                //$boifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
                                 $can_fulfill = true;
                                 $item_count = $this->controller->order->getItemCountForOrder($bo['id']);
                                 $ifo = $this->controller->order->getItemsForOrder($bo['id']);
@@ -70,26 +70,20 @@
                                     <td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $bo['date_ordered']);?></td>
                                     <td data-label="Ship To" class="filterable"><?php echo $ship_to;?></td>
                                     <td data-label="Items">
-                                        <?php foreach($boifo as $i):
-                                            $available = $this->controller->item->getAvailableStock($i['id'], $this->controller->order->fulfilled_id);
-                                            $required = $i['required'];
-                                            if($available < $required)
-                                                $can_fulfill = false;?>
+                                        <?php foreach($ifo as $i):
+                                            $available = (empty($i['location_qty']))? 0 ; $i['location_qty'];?>
                                             <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                                 <p><span class="iname"><?php echo $i['name'];?></span><br>
-                                                <span class="icount font-weight-bold">Required: <?php echo $required;?></span><br>
-                                                <span class="bo_pod font-weight-bold">Awaiting: <?php echo $i['pod_id'];?></span></p>
+                                                <span class="icount font-weight-bold">Required: <?php echo $i['qty'];?></span>
+                                                <?php if(!empty($i['pod_id'])):?>
+                                                    <br><span class="bo_pod font-weight-bold">Awaiting: <?php echo $i['pod_id'];?></span>
+                                                <?php endif;?>
+                                                </p>
                                                 <div class="item_total text-right font-weight-bold">
-                                                    Total Available: <?php echo $available;?>
+                                                    Available: <?php echo $available;?>
                                                 </div>
                                             </div>
                                         <?php endforeach;?>
-                                        <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
-                                            <?php foreach($ifo as $i):?>
-                                                <pre><?php print_r($i);?></pre>
-                                                <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
-                                            <?php endforeach;?>
-                                        </div>
                                         <div class="item_total text-right">
                                             Total Items: <?php echo $item_count;?>
                                         </div>
