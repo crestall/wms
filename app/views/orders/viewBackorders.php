@@ -71,7 +71,7 @@
                                     <td data-label="Ship To" class="filterable"><?php echo $ship_to;?></td>
                                     <td data-label="Items">
                                         <?php foreach($ifo as $i):
-                                            $available = (empty($i['location_qty']))? 0 ; $i['location_qty'];?>
+                                            $available = (empty($i['location_qty']))? 0 : $i['location_qty'];?>
                                             <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                                 <p><span class="iname"><?php echo $i['name'];?></span><br>
                                                 <span class="icount font-weight-bold">Required: <?php echo $i['qty'];?></span>
