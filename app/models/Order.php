@@ -101,8 +101,10 @@ class Order extends Model{
             FROM
                 orders_items oi
             WHERE
-                oi.pod_id IS NOT NULL OR
+                oi.pod_id IS NOT NULL AND
                 oi.pod_id != ''
+            ORDER BY
+                oi.id
         ");
         foreach($pods as $p)
         {
