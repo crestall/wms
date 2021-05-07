@@ -58,7 +58,7 @@
                 				$ship_to .= $this->controller->address->getAddressStringForOrder($bo['id']);
                                 $boifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
                                 $can_fulfill = true;
-                                $item_count = $this->controller->order->getItemCountForOrder($bo['id']); 
+                                $item_count = $this->controller->order->getItemCountForOrder($bo['id']);
                                 $ifo = $this->controller->order->getItemsForOrder($bo['id']);
                                 ?>
                                 <tr>
@@ -86,6 +86,7 @@
                                         <?php endforeach;?>
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                             <?php foreach($ifo as $i):?>
+                                                <pre><?php print_r($i);?></pre>
                                                 <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
                                             <?php endforeach;?>
                                         </div>
