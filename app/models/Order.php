@@ -120,7 +120,7 @@ class Order extends Model{
     public function getPODIdForOrder($order_id)
     {
         $db = Database::openConnection();
-        return $db->queryValue('orders_items', array('order_id' => $order_id), 'pod_id');
+        return $db->queryValue('orders_items', array('order_id' => $order_id, 'location_id' => 2914), 'pod_id');
     }
 
     public function getPODItemsForPODId($pod_id)
