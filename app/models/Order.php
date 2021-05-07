@@ -135,7 +135,7 @@ class Order extends Model{
                 oi.pod_id = :pod_id
         ";
         if($order_id > 0)
-            $q += " AND oi.order_id = $order_id";
+            $q .= " AND oi.order_id = $order_id";
         $array = array('pod_id' => $pod_id);
         return $db->queryData($q, $array);
     }
