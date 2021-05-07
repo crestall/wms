@@ -123,7 +123,7 @@ class Order extends Model{
         return $db->queryValue('orders_items', array('order_id' => $order_id, 'location_id' => 2914), 'pod_id');
     }
 
-    public function getPODItemsForPODId($pod_id)
+    public function getPODItemsForPODId($pod_id, $order_id = 0)
     {
         $db = Database::openConnection();
         $q = "
@@ -134,6 +134,8 @@ class Order extends Model{
             WHERE
                 oi.pod_id = :pod_id
         ";
+        if($order_id > 0)
+            $q += " AND oi.order_id = $order_id";
         $array = array('pod_id' => $pod_id);
         return $db->queryData($q, $array);
     }
