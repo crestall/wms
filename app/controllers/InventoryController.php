@@ -145,7 +145,13 @@ class InventoryController extends Controller
         $pod_items = array();
         if(isset($this->request->params['args']['order']))
         {
-            $pod_id = $this->order->getPODIdForOrder($this->request->params['args']['order']);
+            $order_id = $this->request->params['args']['order'];
+            $pod_id = $this->order->getPODIdForOrder($order_id);
+            $pod_items = $this->order->getPODItemsForPODId($pod_id, $order_id);
+        }
+        if(isset($this->request->params['args']['pod']))
+        {
+            $pod_id = $this->request->params['args']['pod'];
             $pod_items = $this->order->getPODItemsForPODId($pod_id);
         }
         Config::setJsConfig('curPage', "receive-pod-stock");
