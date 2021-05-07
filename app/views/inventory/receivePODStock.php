@@ -36,7 +36,7 @@
             <input type="hidden" name="order_id" id="order_id" value="<?php echo $order_id; ?>" />
             <div class="form-group row">
                 <div class="col-md-4 offset-md-3">
-                    <button type="submit" class="btn btn-outline-fsg" disabled>Receive Stock</button>
+                    <button type="submit" class="btn btn-outline-fsg" disabled="disabled">Receive Stock</button>
                 </div>
             </div>
         </form>
