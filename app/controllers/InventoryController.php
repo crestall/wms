@@ -139,6 +139,11 @@ class InventoryController extends Controller
         ]);
     }
 
+    public function receivePodStock()
+    {
+
+    }
+
     public function scanToInventory()
     {
         $client_id = 0;
@@ -374,7 +379,8 @@ class InventoryController extends Controller
             "scanToInventory",
             "goodsIn",
             "goodsOut",
-            "packItemsManage"
+            "packItemsManage",
+            "receivePodStock"
         ));
 
         //client users
