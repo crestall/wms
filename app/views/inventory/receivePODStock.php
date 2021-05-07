@@ -6,6 +6,9 @@
             <div class="col-md-4">
                 <select id="pod_invoice_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">Select</option><?php echo $this->controller->order->getPODIdSelect($pod_id);?></select>
             </div>
+            <?php if(!empty($pod_id)):?>
+
+            <?php endif;?>
         </div>
     </div>
 </div>
