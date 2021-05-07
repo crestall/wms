@@ -115,6 +115,12 @@ class Order extends Model{
         return $ret_string;
     }
 
+    public function getPODIdForOrder($order_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue('orders_items', array('order_id' => $order_id), 'pod_id');
+    }
+
     public function getBackorders($client_id = 0)
     {
         $db = Database::openConnection();
