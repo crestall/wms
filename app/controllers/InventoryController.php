@@ -142,6 +142,12 @@ class InventoryController extends Controller
     public function receivePodStock()
     {
 
+        Config::setJsConfig('curPage', "receive-pod-stock");
+        Config::set('curPage', "receive-pod-stock");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/receivePODStock.php',[
+            'page_title'    =>  'Enter Print On Demand Products',
+            'pht'           =>  ': Enter Print On Demand Products'
+        ]};
     }
 
     public function scanToInventory()
