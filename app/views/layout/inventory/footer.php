@@ -329,7 +329,9 @@
                 },
                 "receive-pod-stock": {
                     init: function(){
-                        
+                        $('button#get_item').click(function(e){
+                            e.preventDefault();
+                        });
                     }
                 },
                 "scan-to-inventory": {
