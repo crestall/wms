@@ -132,10 +132,10 @@ class Order extends Model{
             FROM
                 orders_items oi
             WHERE
-                oi.pod_id = $pod_id
+                oi.pod_id = :pod_id
         ";
-        return $q;
-        return $db->queryData($q);
+        $array = array('pod_id' => $pod_id);
+        return $db->queryData($q, $array);
     }
 
     public function getBackorders($client_id = 0)
