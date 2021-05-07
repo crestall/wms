@@ -58,10 +58,12 @@
                 				$ship_to .= $this->controller->address->getAddressStringForOrder($bo['id']);
                                 $boifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
                                 $can_fulfill = true;
+                                $item_count = $this->controller->order->getItemCountForOrder($bo['id']); 
+                                $ifo = $this->controller->order->getItemsForOrder($bo['id']);
                                 ?>
                                 <tr>
                                     <td class="filterable number" data-label="Order Number">
-                                        <a href="/orders/order-update/order=<?php echo $bo['id'];?>"><?php echo $bo['order_number'];?></a>
+                                        <a href="/inventory/receive-pod-stock/order=<?php echo $bo['id'];?>"><?php echo $bo['order_number'];?></a>
                                     </td>
                                     <td data-label="Client Name"><?php echo $client_name;?></td>
                                     <td class="filterable number" data-label="Client Order Number"><?php echo $bo['client_order_id'];?></td>
@@ -82,18 +84,20 @@
                                                 </div>
                                             </div>
                                         <?php endforeach;?>
+                                        <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                            <?php foreach($ifo as $i):?>
+                                                <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                            <?php endforeach;?>
+                                        </div>
+                                        <div class="item_total text-right">
+                                            Total Items: <?php echo $item_count;?>
+                                        </div>
                                     </td>
                                     <td>
                                         <?php if($user_role == "admin" || $user_role == "super admin"):?>
                                             <p>
                                                 <a class="btn btn-sm btn-block btn-outline-danger cancel-order" data-orderid="<?php echo $bo['id'];?>"><i class="fas fa-ban"></i> Cancel This Order</a>
                                                 <span class="inst">This will make all items in this order available again</span>
-                                            </p>
-                                        <?php endif;?>
-                                        <?php if($can_fulfill):?>
-                                            <p>
-                                                <a class="btn btn-sm btn-block btn-outline-success fill-backorder" data-orderid="<?php echo $bo['id'];?>"><i class="far fa-check"></i> Fill This Backorder</a>
-                                                <span class="inst">This will move this order from this list to the general list</span>
                                             </p>
                                         <?php endif;?>
                                     </td>
