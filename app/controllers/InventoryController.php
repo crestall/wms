@@ -141,12 +141,17 @@ class InventoryController extends Controller
 
     public function receivePodStock()
     {
-
+        $pod_id = "";
+        if(isset($this->request->params['args']['order']))
+        {
+            $pod_id = $this->order->getPODIdForOrder($this->request->params['args']['order']);
+        }
         Config::setJsConfig('curPage', "receive-pod-stock");
         Config::set('curPage', "receive-pod-stock");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/receivePODStock.php',[
             'page_title'    =>  'Enter Print On Demand Products',
-            'pht'           =>  ': Enter Print On Demand Products'
+            'pht'           =>  ': Enter Print On Demand Products',
+            'pod_id'        =>  $pod_id
         ]);
     }
 
