@@ -329,13 +329,7 @@
                 },
                 "receive-pod-stock": {
                     init: function(){
-                        $('#pod_invoice_selector').change(function(e){
-                            if($(this).val() != "0")
-                            {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting POD Data...</h2></div>' });
-                                window.location.href = "/inventory/receive-pod-stock/pod=" + $(this).val();
-                            }
-                        });
+                        
                     }
                 },
                 "scan-to-inventory": {
