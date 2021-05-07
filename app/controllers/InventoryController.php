@@ -147,7 +147,7 @@ class InventoryController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/receivePODStock.php',[
             'page_title'    =>  'Enter Print On Demand Products',
             'pht'           =>  ': Enter Print On Demand Products'
-        ]};
+        ]);
     }
 
     public function scanToInventory()
