@@ -90,6 +90,31 @@ class Order extends Model{
         $this->getStatusses();
     }
 
+    public function getPODIdSelect($selected = false)
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $pods = $db->queryData("
+            SELECT DISTINCT
+                oi.pod_id
+            FROM
+                orders_items oi
+            WHERE
+                oi.pod_id IS NOT NULL OR
+                oi.pod_id != ''
+        ");
+        foreach($pods as $p)
+        {
+            if($selected)
+            {
+                $check = ($p['pod_id'] == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check>{$p['pod_id']}</option>";
+        }
+        return $ret_string;
+    }
+
     public function getBackorders($client_id = 0)
     {
         $db = Database::openConnection();
