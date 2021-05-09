@@ -331,6 +331,9 @@
                     init: function(){
                         $('button#get_item').click(function(e){
                             e.preventDefault();
+                            var barcode = $("#item_barcode").val();
+                            var data = {barcode: barcode, pod_invoice: $('#pod_invoice_selector').val()};
+                            var url = "/ajaxfunctions/get-pod-item-by-barcode";
                         });
                     }
                 },

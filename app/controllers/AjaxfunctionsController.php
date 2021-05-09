@@ -979,6 +979,23 @@ class ajaxfunctionsController extends Controller
         ]);
     }
 
+    public function getPodItemByBarcode()
+    {
+        echo "<pre>",print_r($this->request),"</pre>"; die();
+        $barcode = $this->request->data['barcode'];
+        $item = $this->item->getItemForClientByBarcode(array(
+            'barcode'   => $barcode,
+            'sku'       => $barcode,
+            'client_id' => $this->request->data['client_id']
+        ));
+
+        $this->view->render(Config::get('VIEWS_PATH') . 'forms/scantoinventory.php', [
+            'item'        =>  $item,
+            'barcode'     =>  $barcode,
+            'client_id'   =>  $this->request->data['client_id']
+        ]);
+    }
+
     public function updateLocation()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
