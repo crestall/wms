@@ -79,7 +79,7 @@
                                                     <br><span class="bo_pod font-weight-bold">Awaiting: <?php echo $i['pod_id'];?></span>
                                                 <?php endif;?>
                                                 </p>
-                                                <div class="item_total text-right font-weight-bold <?php if($available < $i['qty']) echo "danger;?>">
+                                                <div class="item_total text-right font-weight-bold <?php if($available < $i['qty']) echo "danger";?>">
                                                     Available: <?php echo $available;?>
                                                 </div>
                                             </div>
