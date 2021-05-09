@@ -392,11 +392,10 @@ class Item extends Model{
         $db = Database::openConnection();
 
         $item = $db->queryRow(
-            "SELECT * FROM items WHERE (barcode = :barcode OR sku = :sku) AND client_id = :client_id AND active = 1",
+            "SELECT * FROM items WHERE (barcode = :barcode OR sku = :sku) AND is_pod = 1 AND active = 1",
             array(
                 'barcode'   =>  $array['barcode'],
-                'sku'       =>  $array['barcode'],
-                'client_id' =>  $array['client_id']
+                'sku'       =>  $array['barcode']
             )
         );
 
