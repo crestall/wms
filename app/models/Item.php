@@ -387,6 +387,22 @@ class Item extends Model{
         return $item;
     }
 
+    public function getPodItemForClientByBarcode($array)
+    {
+        $db = Database::openConnection();
+
+        $item = $db->queryRow(
+            "SELECT * FROM items WHERE (barcode = :barcode OR sku = :sku) AND client_id = :client_id AND active = 1",
+            array(
+                'barcode'   =>  $array['barcode'],
+                'sku'       =>  $array['barcode'],
+                'client_id' =>  $array['client_id']
+            )
+        );
+
+        return $item;
+    }
+
     public function makePacks($data, $items)
     {
         $db = Database::openConnection();
