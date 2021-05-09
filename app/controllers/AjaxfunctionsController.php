@@ -984,12 +984,12 @@ class ajaxfunctionsController extends Controller
         echo "<pre>",print_r($this->request),"</pre>"; die();
         $barcode = $this->request->data['barcode'];
         $item = $this->item->getItemForClientByBarcode(array(
-            'barcode'   => $barcode,
-            'sku'       => $barcode,
-            'client_id' => $this->request->data['client_id']
+            'barcode'       => $barcode,
+            'sku'           => $barcode,
+            'pod_invoice'   => $this->request->data['pod_invoice']
         ));
 
-        $this->view->render(Config::get('VIEWS_PATH') . 'forms/scantoinventory.php', [
+        $this->view->render(Config::get('VIEWS_PATH') . 'forms/scanpodtoinventory.php', [
             'item'        =>  $item,
             'barcode'     =>  $barcode,
             'client_id'   =>  $this->request->data['client_id']
