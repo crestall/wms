@@ -36,6 +36,7 @@
     getOrderCountForSummary($summary_id)
     getOrderDetail($id)
     getOrderDispatchByConId($con_id)
+    getOrderNumber($id);
     getOrdersForClient($client_id, $from, $to)
     getOrderTrends($from, $to, $client_id)
     getPackagesForOrder($id)
@@ -88,6 +89,12 @@ class Order extends Model{
         $this->packed_id    = $this->getStatusId('packed');
         $this->fulfilled_id = $this->getStatusId('fulfilled');
         $this->getStatusses();
+    }
+
+    public function getOrderNumber($id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $id), 'order_number');
     }
 
     public function getPODIdSelect($selected = false)
