@@ -387,7 +387,7 @@ class Item extends Model{
         return $item;
     }
 
-    public function getPodItemForClientByBarcode($array)
+    public function getPodItemsForClientByBarcode($array)
     {
         $db = Database::openConnection();
 
@@ -409,9 +409,9 @@ class Item extends Model{
             'sku'       => $array['barcode'],
             'pod_id'    => $array['pod_invoice']
         );
-        $item = $db->queryRow($q, $bindings);
+        $items = $db->queryData($q, $bindings);
 
-        return $item;
+        return $items;
     }
 
     public function makePacks($data, $items)
