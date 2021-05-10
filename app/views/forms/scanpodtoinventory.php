@@ -30,9 +30,9 @@ echo "<p>ORDER ID: $order_id</p>";
                         }
                         ?>
                         <tr>
-                            <td style="max-width: 150px;"><?php echo $i['name'].$image;?></td>
-                            <td><?php echo $i['client_order_id'];?></td>
-                            <td><?php echo $i['order_number'];?></td>
+                            <td style="max-width: 175px;"><?php echo $i['name'].$image;?></td>
+                            <td class="number"><?php echo $i['client_order_id'];?></td>
+                            <td class="number"><?php echo $i['order_number'];?></td>
                             <td class="number"><?php echo $i['qty'];?></td>
                             <td></td>
                             <td></td>
