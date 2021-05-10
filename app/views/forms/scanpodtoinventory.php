@@ -9,7 +9,7 @@ echo "<p>ORDER ID: $order_id</p>";
             <table class="table-striped table-hover" id="receive_pod_items">
                 <thead>
                     <tr>
-                        <th style="max-width: 150px;">Item</th>
+                        <th>Item</th>
                         <th>Client Order ID</th>
                         <th>WMS Order No</th>
                         <th>Number Required</th>
@@ -30,7 +30,7 @@ echo "<p>ORDER ID: $order_id</p>";
                         }
                         ?>
                         <tr>
-                            <td><?php echo $i['name'].$image;?></td>
+                            <td style="max-width: 150px;"><?php echo $i['name'].$image;?></td>
                             <td></td>
                             <td></td>
                             <td></td>
