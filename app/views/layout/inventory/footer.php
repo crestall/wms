@@ -353,7 +353,15 @@
                                         {
                                             console.log("received: "+num_received);
                                             console.log("required: "+num_required);
-                                            $("span#errortext_"+order_item_id).text("");
+
+                                            if(num_received != num_required)
+                                            {
+                                                $("span#errortext_"+order_item_id).text("Can only be processed if received is equal to required");
+                                            }
+                                            else
+                                            {
+                                                $("span#errortext_"+order_item_id).text("");
+                                            }
                                         }
                                         else
                                         {
