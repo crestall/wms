@@ -6,6 +6,18 @@ echo "<p>ORDER ID: $order_id</p>";
     <div class="row">
         <div class="col-12">
             <?php echo "<pre>",print_r($items),"</pre>";?>
+            <table class="table-striped table-hover" id="receive_pod_items">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Client Order ID</th>
+                        <th>WMS Order No</th>
+                        <th>Number Required</th>
+                        <th>Number Received</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 <?php else:?>
