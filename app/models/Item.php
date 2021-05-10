@@ -394,16 +394,16 @@ class Item extends Model{
         $q = "
             SELECT
                 i.name, i.client_product_id, i.sku, i.barcode, i.image,
-                oi.qty, oi.order_id,
+                oi.qty, oi.order_id, oi.pod_id,
                 o.order_number, o.client_order_id
             FROM
                 items i JOIN
                 orders_items oi ON i.id = oi.item_id JOIN
                 orders o ON oi.order_id = o.id
             WHERE
-                (barcode = :barcode OR sku = :sku) AND
-                is_pod = 1 AND
-                active = 1 AND
+                (i.barcode = :barcode OR i.sku = :sku) AND
+                i.is_pod = 1 AND
+                i.active = 1 AND
                 oi.pod_id = :pod_id
         ";
         $bindings = array(
