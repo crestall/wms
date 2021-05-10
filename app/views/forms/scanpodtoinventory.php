@@ -34,7 +34,7 @@ echo "<p>ORDER ID: $order_id</p>";
                             <td class="number"><?php echo $i['client_order_id'];?></td>
                             <td class="number"><?php echo $i['order_number'];?></td>
                             <td class="number required_<?php echo $i['order_item_id'];?>"><?php echo $i['qty'];?></td>
-                            <td><input type="text" class="form-control number" name="received_<?php echo $i['order_item_id'];?>" id="received_<?php echo $i['order_item_id'];?>"</td>
+                            <td class="number"><input type="text" class="form-control number" name="received_<?php echo $i['order_item_id'];?>" id="received_<?php echo $i['order_item_id'];?>"</td>
                             <td></td>
                         </tr>
                     <?php endforeach;?>
