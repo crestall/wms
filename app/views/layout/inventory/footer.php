@@ -349,7 +349,7 @@
                                         var order_item_id = $(this).data("orderitemid");
                                         var num_received = $("input#received_"+order_item_id).val();
                                         var num_required = $("input#required_"+order_item_id).val();
-                                        if(num_received)
+                                        if(num_received && !isNaN(num_received) && (function(x) { return (x | 0) === x; })(parseFloat(num_received)))
                                         {
                                             console.log("received: "+num_received);
                                             console.log("required: "+num_required);
