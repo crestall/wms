@@ -984,7 +984,7 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $barcode = $this->request->data['barcode'];
-        $order_id = $this->request->data['order_id']
+        $order_id = $this->request->data['order_id'];
         $items = $this->item->getPodItemsForClientByBarcode(array(
             'barcode'       => $barcode,
             'sku'           => $barcode,
