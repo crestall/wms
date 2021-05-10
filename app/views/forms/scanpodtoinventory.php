@@ -38,7 +38,7 @@
                             </td>
                             <td class="number">
                                 <input type="text" class="form-control number" name="received_<?php echo $i['order_item_id'];?>" id="received_<?php echo $i['order_item_id'];?>">
-                                <span class="text-danger font-italic errortext_<?php echo $i['order_item_id'];?>" style="font-size: smaller"></span>
+                                <span class="text-danger font-italic" id="errortext_<?php echo $i['order_item_id'];?>" style="font-size: smaller"></span>
                             </td>
                             <td><button class="btn btn-sm btn-outline-fsg receive_pod_item" data-itemid="<?php echo $i['item_id'];?>" data-orderitemid="<?php echo $i['order_item_id'];?>" data-orderid="<?php echo $i['order_id'];?>">Record</button></td>
                         </tr>
