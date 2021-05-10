@@ -1,4 +1,6 @@
 <?php
+echo "<p>POD INVOICE: $pod_invoice</p>";
+echo "<p>ORDER ID: $order_id</p>";
 ?>
 <?php if(!empty($items)): ?>
     <div class="row">
