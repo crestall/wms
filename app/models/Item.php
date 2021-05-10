@@ -391,13 +391,25 @@ class Item extends Model{
     {
         $db = Database::openConnection();
 
-        $item = $db->queryRow(
-            "SELECT * FROM items WHERE (barcode = :barcode OR sku = :sku) AND is_pod = 1 AND active = 1",
-            array(
-                'barcode'   =>  $array['barcode'],
-                'sku'       =>  $array['barcode']
-            )
+        $q = "
+            SELECT
+                i.name, i.client_product_id, i.sku, i.barcode,
+                oi.qty
+            FROM
+                items i JOIN
+                orders_items oi ON i.id = oi.item_id
+            WHERE
+                (barcode = :barcode OR sku = :sku) AND
+                is_pod = 1 AND
+                active = 1 AND
+                oi.pod_id = :pod_id
+        ";
+        $bindings = array(
+            'barcode'   => $array['barcode'],
+            'sku'       => $array['barcode'],
+            'pod_id'    => $array['pod_invoice']
         );
+        $item = $db->queryRow($q, $bindings);
 
         return $item;
     }
