@@ -91,7 +91,7 @@ class Order extends Model{
         $this->getStatusses();
     }
 
-    public function getOrderNumber($id)
+    public function getOrderNumberForOrder($id)
     {
         $db = Database::openConnection();
         return $db->queryValue($this->table, array('id' => $id), 'order_number');
