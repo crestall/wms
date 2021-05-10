@@ -992,9 +992,11 @@ class ajaxfunctionsController extends Controller
         ));
 
         $this->view->render(Config::get('VIEWS_PATH') . 'forms/scanpodtoinventory.php', [
-            'items'       =>  $items,
-            'barcode'     =>  $barcode,
-            'pod_invoice'   => $this->request->data['pod_invoice']
+            'items'         =>  $items,
+            'barcode'       =>  $barcode,
+            'pod_invoice'   => $this->request->data['pod_invoice'],
+            'order_id'      => $this->request->data['order_id']
+
         ]);
     }
 
