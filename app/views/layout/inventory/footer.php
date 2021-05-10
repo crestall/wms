@@ -338,7 +338,7 @@
                                 order_id: $('#order_id').val()
                             };
                             var url = "/ajaxfunctions/get-pod-item-by-barcode";
-                            if( barcode != "")
+                            if( barcode != "" && $('#pod_invoice_selector').val() != 0)
                             {
                                 $("div#pod_details")
                                 .html("<div class='row'><div class='col-md-12'><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Finding Item...</p></div></div>")
