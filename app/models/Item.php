@@ -393,7 +393,7 @@ class Item extends Model{
 
         $q = "
             SELECT
-                i.name, i.client_product_id, i.sku, i.barcode,
+                i.name, i.client_product_id, i.sku, i.barcode, i.image,
                 oi.qty, oi.order_id,
                 o.order_number, o.client_order_id
             FROM
