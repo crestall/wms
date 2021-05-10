@@ -29,7 +29,7 @@ echo "<p>ORDER ID: $order_id</p>";
                                 $image = "<br><img src='/images/products/tn_".$i['image']."' class='img-fluid img-thumbnail'>";
                         }
                         ?>
-                        <tr>
+                        <tr id="<?php echo $i['order_item_id'];?>">
                             <td style="max-width: 175px;"><?php echo $i['name'].$image;?></td>
                             <td class="number"><?php echo $i['client_order_id'];?></td>
                             <td class="number"><?php echo $i['order_number'];?></td>
