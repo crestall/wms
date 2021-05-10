@@ -984,14 +984,14 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $barcode = $this->request->data['barcode'];
-        $item = $this->item->getPodItemsForClientByBarcode(array(
+        $items = $this->item->getPodItemsForClientByBarcode(array(
             'barcode'       => $barcode,
             'sku'           => $barcode,
             'pod_invoice'   => $this->request->data['pod_invoice']
         ));
 
         $this->view->render(Config::get('VIEWS_PATH') . 'forms/scanpodtoinventory.php', [
-            'item'        =>  $item,
+            'items'       =>  $items,
             'barcode'     =>  $barcode,
             'pod_invoice'   => $this->request->data['pod_invoice']
         ]);
