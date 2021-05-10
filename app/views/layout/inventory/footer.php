@@ -353,10 +353,11 @@
                                         {
                                             console.log("received: "+num_received);
                                             console.log("required: "+num_required);
+                                            $("span#errortext_"+order_item_id).text("");
                                         }
                                         else
                                         {
-                                            
+                                            $("span#errortext_"+order_item_id).text("Only enter positive whole numbers");
                                         }
                                     });
                                 });
