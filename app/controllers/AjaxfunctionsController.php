@@ -997,7 +997,7 @@ class ajaxfunctionsController extends Controller
             'items'         =>  $items,
             'barcode'       =>  $barcode,
             'pod_invoice'   => $this->request->data['pod_invoice'],
-            'order_id'      => $order_id
+            'order_id'      => $order_id,
             'order_number'  => $order_number
         ]);
     }
