@@ -411,6 +411,13 @@ class Item extends Model{
             'sku'       => $array['barcode'],
             'pod_id'    => $array['pod_invoice']
         );
+        if($array['order_id'] > 0)
+        {
+            $q .= "
+                AND oi.order_id = :order_id
+            ";
+            $bindings['order_id'] = $array['order_id'];
+        }
         $items = $db->queryData($q, $bindings);
 
         return $items;
