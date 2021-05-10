@@ -991,7 +991,7 @@ class ajaxfunctionsController extends Controller
             'pod_invoice'   => $this->request->data['pod_invoice'],
             'order_id'      => $order_id
         ));
-        $order_number = $this->order->getOrderNumber($order_id);
+        $order_number = $this->order->getOrderNumberForOrder($order_id);
 
         $this->view->render(Config::get('VIEWS_PATH') . 'forms/scanpodtoinventory.php', [
             'items'         =>  $items,
