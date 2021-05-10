@@ -348,9 +348,9 @@
                                         var order_id = $(this).data("orderid");
                                         var order_item_id = $(this).data("orderitemid");
                                         var num_received = $("input#received_"+order_item_id).val();
-                                        var num_expected = $("input#expected_"+order_item_id).val();
+                                        var num_required = $("input#required_"+order_item_id).val();
                                         console.log("received: "+num_received);
-                                        console.log("expected: "+num_expected);
+                                        console.log("required: "+num_required);
                                     });
                                 });
                             }
