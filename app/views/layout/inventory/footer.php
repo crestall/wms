@@ -347,7 +347,9 @@
                                         var item_id = $(this).data("itemid");
                                         var order_id = $(this).data("orderid");
                                         var order_item_id = $(this).data("orderitemid");
-                                        console.log("item_id: "+item_id);
+                                        var num_received = $("input#received_"+order_item_id).val();
+                                        console.log("received: "+num_received);
+
                                     });
                                 });
                             }
