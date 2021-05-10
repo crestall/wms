@@ -33,8 +33,12 @@
                             <td style="max-width: 175px;"><?php echo $i['name'].$image;?></td>
                             <td class="number"><?php echo $i['client_order_id'];?></td>
                             <td class="number"><?php echo $i['order_number'];?></td>
-                            <td class="number required_<?php echo $i['order_item_id'];?>"><?php echo $i['qty'];?></td>
-                            <td class="number"><input type="text" class="form-control number" name="received_<?php echo $i['order_item_id'];?>" id="received_<?php echo $i['order_item_id'];?>"</td>
+                            <td class="number required_<?php echo $i['order_item_id'];?>">
+                                <input type="text" class="form-control number" name="required_<?php echo $i['order_item_id'];?>" id="required_<?php echo $i['order_item_id'];?>" value="<?php echo $i['qty'];?>" readonly>
+                            </td>
+                            <td class="number">
+                                <input type="text" class="form-control number" name="received_<?php echo $i['order_item_id'];?>" id="received_<?php echo $i['order_item_id'];?>">
+                            </td>
                             <td><button class="btn btn-sm btn-outline-fsg receive_pod_item" data-itemid="<?php echo $i['item_id'];?>" data-orderitemid="<?php echo $i['order_item_id'];?>" data-orderid="<?php echo $i['order_id'];?>">Record</button></td>
                         </tr>
                     <?php endforeach;?>
