@@ -354,6 +354,10 @@
                                             console.log("received: "+num_received);
                                             console.log("required: "+num_required);
                                         }
+                                        else
+                                        {
+                                            
+                                        }
                                     });
                                 });
                             }
