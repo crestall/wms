@@ -15,7 +15,9 @@ echo "<p>ORDER ID: $order_id</p>";
                 <p>Possible reasons are</p>
                 <ul>
                     <li>The item is not associated with POD invoice: <?php echo $pod_invoice;?></li>
-                    <li>The item is associated with that POD invoice, but not the order</li>
+                    <?php if($order_number):?>
+                        <li>The item is associated with that POD invoice, but not the WMS order <?php echo $order_number;?></li>
+                    <?php endif;?>
                     <li>The item is not classified as a Print On Demand item</li>
                 </ul>
                 <p>Please check the order id, POD invoice, and barcode and try again</p>
