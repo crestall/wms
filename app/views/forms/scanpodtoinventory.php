@@ -5,11 +5,11 @@ echo "<p>ORDER ID: $order_id</p>";
 <?php if(!empty($items)): ?>
     <div class="row">
         <div class="col-12">
-            <?php echo "<pre>",print_r($items),"</pre>";?>
+            <?php //echo "<pre>",print_r($items),"</pre>";?>
             <table class="table-striped table-hover" id="receive_pod_items">
                 <thead>
                     <tr>
-                        <th>Item</th>
+                        <th style="max-width: 150px;">Item</th>
                         <th>Client Order ID</th>
                         <th>WMS Order No</th>
                         <th>Number Required</th>
@@ -17,6 +17,28 @@ echo "<p>ORDER ID: $order_id</p>";
                         <th></th>
                     </tr>
                 </thead>
+                <tbody>
+                    <?php foreach($items as $i):
+                        $image = "";
+                        if(preg_match('/https?/i', $i['image']))
+                        {
+                                $image = "<br><img src='".$i['image']."' class='img-thumbnail img-fluid'>";
+                        }
+                        elseif(!empty($i['image']))
+                        {
+                                $image = "<br><img src='/images/products/tn_".$i['image']."' class='img-fluid img-thumbnail'>";
+                        }
+                        ?>
+                        <tr>
+                            <td><?php echo $i['name'].$image;?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <?php endforeach;?>
+                </tbody>
             </table>
         </div>
     </div>
