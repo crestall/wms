@@ -394,10 +394,12 @@ class Item extends Model{
         $q = "
             SELECT
                 i.name, i.client_product_id, i.sku, i.barcode,
-                oi.qty
+                oi.qty, oi.order_id,
+                o.order_number, o.client_order_id
             FROM
                 items i JOIN
-                orders_items oi ON i.id = oi.item_id
+                orders_items oi ON i.id = oi.item_id JOIN
+                orders o ON oi.order_id = o.id
             WHERE
                 (barcode = :barcode OR sku = :sku) AND
                 is_pod = 1 AND
