@@ -5,7 +5,7 @@ echo "<p>ORDER ID: $order_id</p>";
 <?php if(!empty($items)): ?>
     <div class="row">
         <div class="col-12">
-            <?php //echo "<pre>",print_r($items),"</pre>";?>
+            <?php echo "<pre>",print_r($items),"</pre>";?>
             <table class="table-striped table-hover" id="receive_pod_items">
                 <thead>
                     <tr>
