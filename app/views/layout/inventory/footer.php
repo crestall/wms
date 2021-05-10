@@ -343,7 +343,12 @@
                                 $("div#pod_details")
                                 .html("<div class='row'><div class='col-md-12'><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Finding Item...</p></div></div>")
                                 .load(url, data, function(d){
-
+                                    $('button.receive_pod_item').click(function(e){
+                                        var item_id = $(this).data("itemid");
+                                        var order_id = $(this).data("orderid");
+                                        var order_item_id = $(this).data("orderitemid");
+                                        console.log("item_id: "+item_id);
+                                    });
                                 });
                             }
                         });
