@@ -1,9 +1,9 @@
 <?php
 ?>
-<?php if(!empty($item)): ?>
+<?php if(!empty($items)): ?>
     <div class="row">
         <div class="col-12">
-            <?php echo "<pre>",print_r($item),"</pre>";?>
+            <?php echo "<pre>",print_r($items),"</pre>";?>
         </div>
     </div>
 <?php else:?>
