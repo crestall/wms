@@ -393,8 +393,8 @@ class Item extends Model{
 
         $q = "
             SELECT
-                i.name, i.client_product_id, i.sku, i.barcode, i.image,
-                oi.qty, oi.order_id, oi.pod_id,
+                i.id as item_id, i.name, i.client_product_id, i.sku, i.barcode, i.image,
+                oi.id AS order_item_id, oi.qty, oi.order_id, oi.pod_id,
                 o.order_number, o.client_order_id
             FROM
                 items i JOIN
