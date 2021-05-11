@@ -172,6 +172,7 @@ class Order extends Model{
 
     public function isBackorder($order_id = 0)
     {
+        $db = Database::openConnection();
         if($order_id == 0)
             return false;
         //return ( $db->queryValue($this->table, array('id' => $order_id), 'backorder_items') == 1 );   Check the actual order items instead
