@@ -56,44 +56,43 @@
                                     $ship_to = "<p class='font-weight-bold'>".$bo['ship_to']."</p>";
                                 }
                 				$ship_to .= $this->controller->address->getAddressStringForOrder($bo['id']);
-                                $boifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
+                                //$boifo = $this->controller->order->getBackorderItemsForOrder($bo['id']);
                                 $can_fulfill = true;
+                                $item_count = $this->controller->order->getItemCountForOrder($bo['id']);
+                                $ifo = $this->controller->order->getItemsForOrder($bo['id']);
                                 ?>
                                 <tr>
                                     <td class="filterable number" data-label="Order Number">
-                                        <a href="/orders/order-update/order=<?php echo $bo['id'];?>"><?php echo $bo['order_number'];?></a>
+                                        <a href="/inventory/receive-pod-stock/order=<?php echo $bo['id'];?>"><?php echo $bo['order_number'];?></a>
                                     </td>
                                     <td data-label="Client Name"><?php echo $client_name;?></td>
                                     <td class="filterable number" data-label="Client Order Number"><?php echo $bo['client_order_id'];?></td>
                                     <td data-label="Date Ordered" nowrap><?php echo date('d-m-Y', $bo['date_ordered']);?></td>
                                     <td data-label="Ship To" class="filterable"><?php echo $ship_to;?></td>
                                     <td data-label="Items">
-                                        <?php foreach($boifo as $i):
-                                            $available = $this->controller->item->getAvailableStock($i['id'], $this->controller->order->fulfilled_id);
-                                            $required = $i['required'];
-                                            if($available < $required)
-                                                $can_fulfill = false;?>
+                                        <?php foreach($ifo as $i):
+                                            $available = (empty($i['location_qty']))? 0 : $i['location_qty'];?>
                                             <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                                 <p><span class="iname"><?php echo $i['name'];?></span><br>
-                                                <span class="icount font-weight-bold">Required: <?php echo $required;?></span><br>
-                                                <span class="bo_pod font-weight-bold">Awaiting: <?php echo $i['pod_id'];?></span></p>
-                                                <div class="item_total text-right font-weight-bold">
-                                                    Total Available: <?php echo $available;?>
+                                                <span class="icount font-weight-bold">Required: <?php echo $i['qty'];?></span>
+                                                <?php if(!empty($i['pod_id'])):?>
+                                                    <br><span class="bo_pod font-weight-bold">Awaiting: <?php echo $i['pod_id'];?></span>
+                                                <?php endif;?>
+                                                </p>
+                                                <div class="item_total text-right font-weight-bold <?php if($available < $i['qty']) echo "text-danger";?>">
+                                                    Available: <?php echo $available;?>
                                                 </div>
                                             </div>
                                         <?php endforeach;?>
+                                        <div class="item_total text-right">
+                                            Total Items: <?php echo $item_count;?>
+                                        </div>
                                     </td>
                                     <td>
                                         <?php if($user_role == "admin" || $user_role == "super admin"):?>
                                             <p>
                                                 <a class="btn btn-sm btn-block btn-outline-danger cancel-order" data-orderid="<?php echo $bo['id'];?>"><i class="fas fa-ban"></i> Cancel This Order</a>
                                                 <span class="inst">This will make all items in this order available again</span>
-                                            </p>
-                                        <?php endif;?>
-                                        <?php if($can_fulfill):?>
-                                            <p>
-                                                <a class="btn btn-sm btn-block btn-outline-success fill-backorder" data-orderid="<?php echo $bo['id'];?>"><i class="far fa-check"></i> Fill This Backorder</a>
-                                                <span class="inst">This will move this order from this list to the general list</span>
                                             </p>
                                         <?php endif;?>
                                     </td>

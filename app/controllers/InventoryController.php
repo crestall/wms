@@ -139,6 +139,25 @@ class InventoryController extends Controller
         ]);
     }
 
+    public function receivePodStock()
+    {
+        $pod_id = "";
+        $order_id = 0;
+        if(isset($this->request->params['args']['order']))
+        {
+            $order_id = $this->request->params['args']['order'];
+            $pod_id = $this->order->getPODIdForOrder($order_id);
+        }
+        Config::setJsConfig('curPage', "receive-pod-stock");
+        Config::set('curPage', "receive-pod-stock");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/receivePODStock.php',[
+            'page_title'    =>  'Enter Print On Demand Products',
+            'pht'           =>  ': Enter Print On Demand Products',
+            'pod_id'        =>  $pod_id,
+            'order_id'      =>  $order_id
+        ]);
+    }
+
     public function scanToInventory()
     {
         $client_id = 0;
@@ -374,7 +393,8 @@ class InventoryController extends Controller
             "scanToInventory",
             "goodsIn",
             "goodsOut",
-            "packItemsManage"
+            "packItemsManage",
+            "receivePodStock"
         ));
 
         //client users

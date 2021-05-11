@@ -36,6 +36,7 @@
     getOrderCountForSummary($summary_id)
     getOrderDetail($id)
     getOrderDispatchByConId($con_id)
+    getOrderNumber($id);
     getOrdersForClient($client_id, $from, $to)
     getOrderTrends($from, $to, $client_id)
     getPackagesForOrder($id)
@@ -90,6 +91,73 @@ class Order extends Model{
         $this->getStatusses();
     }
 
+    public function getOrderNumberForOrder($id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $id), 'order_number');
+    }
+
+    public function updateOrderItemsLocations($line_id, $new_location_id, $pod = false)
+    {
+        $db = Database::openConnection();
+        if($pod)
+            $db->updateDatabaseFields('orders_items', array('location_id' => $new_location_id, 'pod_id' => NULL), $line_id);
+        else
+            $db->updateDatabaseField('orders_items', 'location_id', $new_location_id, $line_id);
+
+        return true;
+    }
+
+    public function getPODIdSelect($selected = false)
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $pods = $db->queryData("
+            SELECT DISTINCT
+                oi.pod_id
+            FROM
+                orders_items oi
+            WHERE
+                oi.pod_id IS NOT NULL AND
+                oi.pod_id != ''
+            ORDER BY
+                oi.id
+        ");
+        foreach($pods as $p)
+        {
+            if($selected)
+            {
+                $check = ($p['pod_id'] == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check>{$p['pod_id']}</option>";
+        }
+        return $ret_string;
+    }
+
+    public function getPODIdForOrder($order_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue('orders_items', array('order_id' => $order_id, 'location_id' => 2914), 'pod_id');
+    }
+
+    public function getPODItemsForPODId($pod_id, $order_id = 0)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                *
+            FROM
+                orders_items oi
+            WHERE
+                oi.pod_id = :pod_id
+        ";
+        if($order_id > 0)
+            $q .= " AND oi.order_id = $order_id";
+        $array = array('pod_id' => $pod_id);
+        return $db->queryData($q, $array);
+    }
+
     public function getBackorders($client_id = 0)
     {
         $db = Database::openConnection();
@@ -100,6 +168,17 @@ class Order extends Model{
         }
         $q .= " ORDER BY date_ordered ASC";
         return $db->queryData($q);
+    }
+
+    public function isBackorder($order_id = 0)
+    {
+        $db = Database::openConnection();
+        if($order_id == 0)
+            return false;
+        //return ( $db->queryValue($this->table, array('id' => $order_id), 'backorder_items') == 1 );   Check the actual order items instead
+        $l = new location();
+        $orders = $db->queryData("SELECT id FROM `orders_items` WHERE `location_id` = {$l->backorders_id} AND `order_id` = $order_id");
+        return ( count($orders) > 0 );
     }
 
     public function consolidateOrders($old_id, $new_id)
@@ -1063,7 +1142,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $q = "
-            SELECT i.*, SUM(oi.qty) AS qty, oi.location_id, oi.item_id, oi.id AS line_id, il.qty AS location_qty, l.location
+            SELECT i.*, SUM(oi.qty) AS qty, oi.location_id, oi.item_id, oi.id AS line_id, oi.pod_id, il.qty AS location_qty, l.location
             FROM orders_items oi JOIN items i ON oi.item_id = i.id LEFT JOIN items_locations il on oi.location_id = il.location_id AND il.item_id = i.id JOIN locations l ON oi.location_id = l.id
             WHERE oi.order_id = $order_id
         ";
