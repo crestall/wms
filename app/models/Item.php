@@ -387,6 +387,42 @@ class Item extends Model{
         return $item;
     }
 
+    public function getPodItemsForClientByBarcode($array)
+    {
+        $db = Database::openConnection();
+
+        $q = "
+            SELECT
+                i.id as item_id, i.name, i.client_product_id, i.sku, i.barcode, i.image,
+                oi.id AS order_item_id, oi.qty, oi.order_id, oi.pod_id,
+                o.order_number, o.client_order_id
+            FROM
+                items i JOIN
+                orders_items oi ON i.id = oi.item_id JOIN
+                orders o ON oi.order_id = o.id
+            WHERE
+                (i.barcode = :barcode OR i.sku = :sku) AND
+                i.is_pod = 1 AND
+                i.active = 1 AND
+                oi.pod_id = :pod_id
+        ";
+        $bindings = array(
+            'barcode'   => $array['barcode'],
+            'sku'       => $array['barcode'],
+            'pod_id'    => $array['pod_invoice']
+        );
+        if($array['order_id'] > 0)
+        {
+            $q .= "
+                AND oi.order_id = :order_id
+            ";
+            $bindings['order_id'] = $array['order_id'];
+        }
+        $items = $db->queryData($q, $bindings);
+
+        return $items;
+    }
+
     public function makePacks($data, $items)
     {
         $db = Database::openConnection();

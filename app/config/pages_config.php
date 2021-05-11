@@ -520,6 +520,10 @@ $admin = array(
             'display'   => true,
             'icon'      => '<i class="fad fa-scanner fa-3x"></i>'
         ),
+        'receive-pod-stock'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fal fa-scanner fa-flip-horizontal fa-3x"></i>'
+        ),
         'product-movement'    => array(
             'display'   => false,
             'icon'      => ''

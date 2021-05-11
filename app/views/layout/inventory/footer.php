@@ -327,6 +327,107 @@
                         });
                     }
                 },
+                "receive-pod-stock": {
+                    init: function(){
+                        barcodeScanner.init({
+                            onComplete: function(barcode, qty){
+                        	    //console.log('barcode: '+barcode);
+                                if(!barcodeScanner.checkEan(barcode))
+                                {
+                                    swal({
+                                        title: "Scanning Error!",
+                                        text: "The barcode will need to be rescanned",
+                                        icon: "error",
+                                    });
+                                    $.playSound("/sounds/bff-strike.wav");
+                                    return;
+                                }
+                                $("#item_barcode").val(barcode);
+                                $('button#get_item').click();
+                            }
+                        });
+                        
+                        $('button#get_item').click(function(e){
+                            e.preventDefault();
+                            var barcode = $("#item_barcode").val();
+                            var data = {
+                                barcode: barcode,
+                                pod_invoice: $('#pod_invoice_selector').val(),
+                                order_id: $('#order_id').val()
+                            };
+                            var url = "/ajaxfunctions/get-pod-item-by-barcode";
+                            if( barcode != "" && $('#pod_invoice_selector').val() != 0)
+                            {
+                                $("div#pod_details")
+                                .html("<div class='row'><div class='col-md-12'><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Finding Item...</p></div></div>")
+                                .load(url, data, function(d){
+                                    $('button.receive_pod_item').off("click").click(function(e){
+                                        var item_id = $(this).data("itemid");
+                                        var order_id = $(this).data("orderid");
+                                        var order_item_id = $(this).data("orderitemid");
+                                        var num_received = $("input#received_"+order_item_id).val();
+                                        var num_required = $("input#required_"+order_item_id).val();
+                                        if(num_received && !isNaN(num_received) && (function(x) { return (x | 0) === x; })(parseFloat(num_received)))
+                                        {
+                                            if(num_received != num_required)
+                                            {
+                                                $("span#errortext_"+order_item_id).text("Can only be processed if received is equal to required");
+                                            }
+                                            else
+                                            {
+                                                $("span#errortext_"+order_item_id).text("");
+                                                //OK Update the system
+                                                var url = "/ajaxfunctions/receive-pod-items";
+                                                var data = {
+                                                    item_id         : item_id,
+                                                    order_id        : order_id,
+                                                    order_item_id   : order_item_id,
+                                                    num_received    : num_received,
+                                                    num_required    : num_required
+                                                };
+                                                $.ajax({
+                                                    url: url,
+                                                    type:"post",
+                                                    data: data,
+                                                    beforeSend: function(){
+                                                        $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating the system...</h2></div>' });
+                                                    },
+                                                    success: function(d){
+                                                        if(d.error)
+                                                        {
+                                                            $("div#feedback_holder")
+                                                                .hide()
+                                                                .removeClass()
+                                                                .addClass("errorbox")
+                                                                .slideDown()
+                                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>" + d.html);
+                                                        }
+                                                        else
+                                                        {
+                                                            $("input#item_barcode").val("");
+                                                            $("div#pod_details").empty();
+                                                            $("div#feedback_holder")
+                                                                .hide()
+                                                                .removeClass()
+                                                                .addClass("feedbackbox")
+                                                                .slideDown()
+                                                                .html("<h2><i class='far fa-check-circle'></i>The system has been updated</h2>" + d.html);
+                                                        }
+                                                        $.unblockUI();
+                                                    }
+                                                });
+                                            }
+                                        }
+                                        else
+                                        {
+                                            $("span#errortext_"+order_item_id).text("Only enter positive whole numbers");
+                                        }
+                                    });
+                                });
+                            }
+                        });
+                    }
+                },
                 "scan-to-inventory": {
                     init: function(){
 

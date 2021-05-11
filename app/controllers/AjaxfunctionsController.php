@@ -39,6 +39,7 @@ class ajaxfunctionsController extends Controller
             'getItems',
             'getItemsInLocation',
             'getOrderByConID',
+            'getPodItemByBarcode',
             'getScannedItem',
             'getSuburbs',
             'getUnfulfilledAdmin',
@@ -55,6 +56,7 @@ class ajaxfunctionsController extends Controller
             'checkLocations',
             'procGetQuotes',
             'reactivateUser',
+            'receivePodItems',
             'recordDispatch',
             'removeCourier',
             'removeJobFromRunsheet',
@@ -70,6 +72,38 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function receivePodItems()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $data = array(
+            'error'     =>  false,
+            'html'      =>  ''
+        );
+        //receive number received into receiving
+        $add_data = array(
+            'add_product_id'    => $this->request->data['item_id'],
+            'add_to_location'   => $this->location->receiving_id,
+            'reason_id'         => $this->stockmovementlabels->getLabelId("New Stock"),
+            'reference'         => 'Receiving POD for order id: '.$this->request->data['order_id'],
+            'qty_add'           => $this->request->data['num_received']
+        );
+        if( !$this->location->addToLocation($add_data) )
+        {
+            $data['error'] = true;
+            $data['html'] .= "<p>Database error when adding new stock to receiving</p>";
+        }
+        //update orders_items with new location
+        $this->order->updateOrderItemsLocations($this->request->data['order_item_id'], $this->location->receiving_id, true);
+        //end of bacordr items?
+        if( !$this->order->isBackorder($this->request->data['order_id']) )
+        {
+            $this->order->updateOrderValue('backorder_items', 0, $this->request->data['order_id']);
+            $data['html'] .= "<p>There are no more POD items fo this order<br>It should now be showing in the current orders list</p>";
+        }
+
+        $this->view->renderJson($data);
     }
 
     public function dataTablesViewInventory()
@@ -976,6 +1010,28 @@ class ajaxfunctionsController extends Controller
             'item'        =>  $item,
             'barcode'     =>  $barcode,
             'client_id'   =>  $this->request->data['client_id']
+        ]);
+    }
+
+    public function getPodItemByBarcode()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $barcode = $this->request->data['barcode'];
+        $order_id = $this->request->data['order_id'];
+        $items = $this->item->getPodItemsForClientByBarcode(array(
+            'barcode'       => $barcode,
+            'sku'           => $barcode,
+            'pod_invoice'   => $this->request->data['pod_invoice'],
+            'order_id'      => $order_id
+        ));
+        $order_number = $this->order->getOrderNumberForOrder($order_id);
+
+        $this->view->render(Config::get('VIEWS_PATH') . 'forms/scanpodtoinventory.php', [
+            'items'         =>  $items,
+            'barcode'       =>  $barcode,
+            'pod_invoice'   => $this->request->data['pod_invoice'],
+            'order_id'      => $order_id,
+            'order_number'  => $order_number
         ]);
     }
 
