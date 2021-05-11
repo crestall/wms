@@ -100,7 +100,7 @@ class ajaxfunctionsController extends Controller
         if( !$this->order->isBackorder($this->request->data['order_id']) )
         {
             $this->order->updateOrderValue('backorder_items', 0, $this->request->data['order_id']);
-            $data['html'] .= "<p>There are no more POD items fo theis order<br>It should now be showing in the cureent orders list</p>";
+            $data['html'] .= "<p>There are no more POD items fo this order<br>It should now be showing in the current orders list</p>";
         }
 
         $this->view->renderJson($data);

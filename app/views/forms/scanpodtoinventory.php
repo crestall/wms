@@ -54,6 +54,7 @@
                 <p>Possible reasons are</p>
                 <ul>
                     <li>The item is not associated with POD invoice: <?php echo $pod_invoice;?></li>
+                    <li>The item has already been received and scanned in for this POD invoice</li>
                     <?php if($order_number):?>
                         <li>The item is associated with that POD invoice, but not the WMS order <?php echo $order_number;?></li>
                     <?php endif;?>
