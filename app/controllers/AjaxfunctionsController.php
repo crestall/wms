@@ -86,7 +86,8 @@ class ajaxfunctionsController extends Controller
             'add_product_id'    => $this->request->data['item_id'],
             'add_to_location'   => $this->location->receiving_id,
             'reason_id'         => $this->stockmovementlabels->getLabelId("New Stock"),
-            'reference'         => 'Receiving POD for order id: '.$this->request->data['order_id']
+            'reference'         => 'Receiving POD for order id: '.$this->request->data['order_id'],
+            'qty_add'           => $this->request->data['num_received']
         );
         if( !$this->location->addToLocation($add_data) )
         {
