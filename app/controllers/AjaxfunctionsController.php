@@ -56,6 +56,7 @@ class ajaxfunctionsController extends Controller
             'checkLocations',
             'procGetQuotes',
             'reactivateUser',
+            'receivePodItems',
             'recordDispatch',
             'removeCourier',
             'removeJobFromRunsheet',
@@ -71,6 +72,16 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function receivePodItems()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $data = array(
+            'error'     =>  false,
+            'html'      =>  ''
+        );
+        $this->view->renderJson($data);
     }
 
     public function dataTablesViewInventory()
