@@ -395,6 +395,7 @@
                                                                 .slideDown()
                                                                 .html("<h2><i class='far fa-check-circle'></i>The system has been updated</h2>" + d.html);
                                                         }
+                                                        $.unblockUI();
                                                     }
                                                 });
                                             }
