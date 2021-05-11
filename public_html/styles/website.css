@@ -571,7 +571,12 @@ td{
     box-sizing: content-box;
 }
 
-table.pickslip td{
+table#receive_pod_items{
+    font-size: 1rem
+}
+
+table.pickslip td,
+table#receive_pod_items td{
     vertical-align:middle;
 }
 
