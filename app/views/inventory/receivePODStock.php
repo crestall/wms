@@ -12,12 +12,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <?php if(isset($_SESSION['feedback'])) :?>
-                   <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('feedback');?></div>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['errorfeedback'])) :?>
-                   <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('errorfeedback');?></div>
-                <?php endif; ?>
+                <div id="feedback_holder"></div>
             </div>
         </div>
         <div class="form-group row">

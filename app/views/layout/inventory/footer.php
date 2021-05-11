@@ -343,7 +343,7 @@
                                 $("div#pod_details")
                                 .html("<div class='row'><div class='col-md-12'><p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Finding Item...</p></div></div>")
                                 .load(url, data, function(d){
-                                    $('button.receive_pod_item').click(function(e){
+                                    $('button.receive_pod_item').off("click").click(function(e){
                                         var item_id = $(this).data("itemid");
                                         var order_id = $(this).data("orderid");
                                         var order_item_id = $(this).data("orderitemid");
@@ -351,8 +351,6 @@
                                         var num_required = $("input#required_"+order_item_id).val();
                                         if(num_received && !isNaN(num_received) && (function(x) { return (x | 0) === x; })(parseFloat(num_received)))
                                         {
-                                            //console.log("received: "+num_received);
-                                            //console.log("required: "+num_required);
                                             if(num_received != num_required)
                                             {
                                                 $("span#errortext_"+order_item_id).text("Can only be processed if received is equal to required");
@@ -360,6 +358,46 @@
                                             else
                                             {
                                                 $("span#errortext_"+order_item_id).text("");
+                                                //OK Update the system
+
+                                                var url = "/ajaxfunctions/receive-pod-items";
+                                                var data = {
+                                                    item_id         : item_id,
+                                                    order_id        : order_id,
+                                                    order_item_id   : order_item_id,
+                                                    num_received    : num_received,
+                                                    num_required    : num_required
+                                                };
+                                                $.ajax({
+                                                    url: url,
+                                                    type:"post",
+                                                    data: data,
+                                                    beforeSend: function(){
+                                                        $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating the system...</h2></div>' });
+                                                    },
+                                                    success: function(d){
+                                                        if(d.error)
+                                                        {
+                                                            $("div#feedback_holder")
+                                                                .hide()
+                                                                .removeClass()
+                                                                .addClass("errorbox")
+                                                                .slideDown()
+                                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>" + d.html);
+                                                        }
+                                                        else
+                                                        {
+                                                            $("input#item_barcode").val("");
+                                                            $("div#pod_details").empty();
+                                                            $("div#feedback_holder")
+                                                                .hide()
+                                                                .removeClass()
+                                                                .addClass("feedbackbox")
+                                                                .slideDown()
+                                                                .html("<h2><i class='far fa-check-circle'></i>The system has been updated</h2>" + d.html);
+                                                        }
+                                                    }
+                                                });
                                             }
                                         }
                                         else
