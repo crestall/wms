@@ -159,6 +159,16 @@ class Order extends Model{
         return $db->queryData($q);
     }
 
+    public function isBackorder($order_id = 0)
+    {
+        if($order_id == 0)
+            return false;
+        //return ( $db->queryValue($this->table, array('id' => $order_id), 'backorder_items') == 1 );   Check the actual order items instead
+        $l = new location();
+        $orders = $db->queryData("SELECT id FROM `orders_items` WHERE `location_id` = {$l->backorders_id} AND `order_id` = $order_id");
+        return ( count($orders) > 0 );
+    }
+
     public function consolidateOrders($old_id, $new_id)
     {
         $db = Database::openConnection();

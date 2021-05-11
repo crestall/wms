@@ -351,9 +351,8 @@
                                         var num_required = $("input#required_"+order_item_id).val();
                                         if(num_received && !isNaN(num_received) && (function(x) { return (x | 0) === x; })(parseFloat(num_received)))
                                         {
-                                            console.log("received: "+num_received);
-                                            console.log("required: "+num_required);
-
+                                            //console.log("received: "+num_received);
+                                            //console.log("required: "+num_required);
                                             if(num_received != num_required)
                                             {
                                                 $("span#errortext_"+order_item_id).text("Can only be processed if received is equal to required");
@@ -371,8 +370,6 @@
                                 });
                             }
                         });
-
-
                     }
                 },
                 "scan-to-inventory": {
