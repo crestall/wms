@@ -81,7 +81,27 @@ class ajaxfunctionsController extends Controller
             'error'     =>  false,
             'html'      =>  ''
         );
-        //is ite
+        //receive number received into receiving
+        $add_data = array(
+            'add_product_id'    => $this->request->data['item_id'],
+            'add_to_location'   => $this->location->receiving_id,
+            'reason_id'         => $this->stockmovementlabels->getLabelId("New Stock"),
+            'reference'         => 'Receiving POD for order id: '.$this->request->data['order_id']
+        );
+        if( !$this->location->addToLocation($add_data) )
+        {
+            $data['error'] = true;
+            $data['html'] .= "<p>Database error when adding new stock to receiving</p>";
+        }
+        //update orders_items with new location
+        $this->order->updateOrderItemsLocations($this->request->data['order_item_id'], $this->location->receiving_id, true);
+        //end of bacordr items?
+        if( !$this->order->isBackorder($this->request->data['order_id']) )
+        {
+            $this->order->updateOrderValue('backorder_items', 0, $this->request->data['order_id']);
+            $data['html'] .= "<p>There are no more POD items fo theis order<br>It should now be showing in the cureent orders list</p>";
+        }
+
         $this->view->renderJson($data);
     }
 

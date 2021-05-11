@@ -97,6 +97,17 @@ class Order extends Model{
         return $db->queryValue($this->table, array('id' => $id), 'order_number');
     }
 
+    public function updateOrderItemsLocations($line_id, $new_location_id, $pod = false)
+    {
+        $db = Database::openConnection();
+        if($pod)
+            $db->updateDatabaseFields('orders_items', array('location_id' => $new_location_id, 'pod_id' => NULL), $line_id);
+        else
+            $db->updateDatabaseField('orders_items', 'location_id', $new_location_id, $line_id);
+
+        return true;
+    }
+
     public function getPODIdSelect($selected = false)
     {
         $db = Database::openConnection();
