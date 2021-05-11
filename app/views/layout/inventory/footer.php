@@ -359,7 +359,6 @@
                                             {
                                                 $("span#errortext_"+order_item_id).text("");
                                                 //OK Update the system
-
                                                 var url = "/ajaxfunctions/receive-pod-items";
                                                 var data = {
                                                     item_id         : item_id,
