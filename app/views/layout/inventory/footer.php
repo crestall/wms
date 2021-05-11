@@ -329,6 +329,24 @@
                 },
                 "receive-pod-stock": {
                     init: function(){
+                        barcodeScanner.init({
+                            onComplete: function(barcode, qty){
+                        	    //console.log('barcode: '+barcode);
+                                if(!barcodeScanner.checkEan(barcode))
+                                {
+                                    swal({
+                                        title: "Scanning Error!",
+                                        text: "The barcode will need to be rescanned",
+                                        icon: "error",
+                                    });
+                                    $.playSound("/sounds/bff-strike.wav");
+                                    return;
+                                }
+                                $("#item_barcode").val(barcode);
+                                $('button#get_item').click();
+                            }
+                        });
+                        
                         $('button#get_item').click(function(e){
                             e.preventDefault();
                             var barcode = $("#item_barcode").val();
