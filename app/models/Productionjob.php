@@ -230,7 +230,7 @@ class Productionjob extends Model{
         $id = $db->insertQuery($this->table, $vals);
         if(isset($data['finishers']) && is_array($data['finishers']))
         {
-            foreach($data['finishers'] as $finisher)
+            foreach($data['finishers'] as $i => $finisher)
             {
                 $ed_date = (empty($finisher['ed_date_value']))? 0 : $finisher['ed_date_value'];
                 $po = (empty($finisher['purchase_order']))? NULL : $finisher['purchase_order'];
@@ -238,6 +238,7 @@ class Productionjob extends Model{
                     'finisher_id'       => $finisher['finisher_id'],
                     'contact_id'        => $finisher['contact_id'],
                     'purchase_order'    => $po,
+                    'finisher_order'    => $i,
                     'ed_date'           => $ed_date
                 ));
             }
@@ -256,6 +257,7 @@ class Productionjob extends Model{
             'finisher_id'       => $data['finisher_id'],
             'contact_id'        => $contact_id,
             'purchase_order'    => $po,
+            'finisher_order'    => $finisher_order,
             'ed_date'           => $ed_date
         ));
     }
