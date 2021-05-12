@@ -652,7 +652,7 @@ class Productionjob extends Model{
                     IFNULL(pfc.role,''),',',
                     IFNULL(pjf.purchase_order,''),',',
                     IFNULL(pjf.ed_date,'')
-                    ORDER BY pjf.finisher_order
+                    ORDER BY pjf.finisher_order, pjf.id DESC
                     SEPARATOR '|'
                 ) AS finishers,
                 js.name AS `status`, js.colour AS status_colour, js.text_colour AS status_text_colour, js.ranking,
