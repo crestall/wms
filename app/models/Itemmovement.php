@@ -126,6 +126,7 @@ class Itemmovement extends Model{
             }
             $row['reason'] = $db->queryValue('stock_movement_labels', array('id'=>$sm['reason_id']), 'name');
             $row['sku'] = $sm['sku'];
+            $row['client_product_id'] = $sm['client_product_id'];
             $row['name'] = $sm['name'];
             $row['qty_in']  = $sm['qty_in'];
             $row['qty_out'] = $sm['qty_out'];
