@@ -15,7 +15,7 @@ class Itemmovement extends Model{
         $exids = (count($exc))? "AND reason_id NOT IN (".implode(",", $exc).")" : "";
         $query = "
             SELECT
-                i.name, i.sku, im.*, l.location
+                i.name, i.sku, i.client_product_id, im.*, l.location
             FROM
                 items i JOIN items_movement im ON i.id = im.item_id JOIN locations l ON im.location_id = l.id
             WHERE
