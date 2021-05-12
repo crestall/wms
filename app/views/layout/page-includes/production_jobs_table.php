@@ -23,10 +23,10 @@
             $finisher_array = array();
             if(!empty($job['finishers']))
             {
-                $fa = explode("|", $job['finishers']);
+                $fa = explode("~", $job['finishers']);
                 foreach($fa as $f)
                 {
-                    list($a['id'], $a['name'],$a['email'],$a['phone'],$a['address'],$a['address_2'],$a['suburb'],$a['state'],$a['postcode'],$a['country'],$a['contact_id'],$a['contact_name'],$a['contact_email'],$a['contact_phone'], $a['contact_role'],$a['purchase_order'],$a['ed_date_value']) = explode(',', $f);
+                    list($a['id'], $a['name'],$a['email'],$a['phone'],$a['address'],$a['address_2'],$a['suburb'],$a['state'],$a['postcode'],$a['country'],$a['contact_id'],$a['contact_name'],$a['contact_email'],$a['contact_phone'], $a['contact_role'],$a['purchase_order'],$a['ed_date_value']) = explode('|', $f);
                     if(!empty($a['id']))
                         $finisher_array[] = $a;
                 }
