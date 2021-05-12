@@ -15,7 +15,7 @@ class Itemmovement extends Model{
         $exids = (count($exc))? "AND reason_id NOT IN (".implode(",", $exc).")" : "";
         $query = "
             SELECT
-                i.name, i.sku, im.*, l.location
+                i.name, i.sku, i.client_product_id, im.*, l.location
             FROM
                 items i JOIN items_movement im ON i.id = im.item_id JOIN locations l ON im.location_id = l.id
             WHERE
@@ -126,6 +126,7 @@ class Itemmovement extends Model{
             }
             $row['reason'] = $db->queryValue('stock_movement_labels', array('id'=>$sm['reason_id']), 'name');
             $row['sku'] = $sm['sku'];
+            $row['client_product_id'] = $sm['client_product_id'];
             $row['name'] = $sm['name'];
             $row['qty_in']  = $sm['qty_in'];
             $row['qty_out'] = $sm['qty_out'];

@@ -34,6 +34,7 @@
                                     <th>Date</th>
                                     <th>SKU</th>
                                     <th>Product</th>
+                                    <th>Client Product ID</th>
                                     <th>Number In</th>
                                     <th>Number Out</th>
                                     <th>Reason</th>
@@ -49,6 +50,7 @@
                                 	<td data-label="Date" class="nowrap"><?php echo $sm['date'];?></td>
                                     <td data-label="SKU"><?php echo $sm['sku'];?></td>
                                     <td data-label="Product"><?php echo $sm['name'];?></td>
+                                    <td data-label="Client Product ID"><?php echo $sm['client_product_id'];?></td>
                                     <td data-label="Number In"><?php echo $sm['qty_in'];?></td>
                                     <td data-label="Number Out"><?php echo $sm['qty_out'];?></td>
                                     <td data-label="Reason"><?php echo $sm['reason'];?></td>
