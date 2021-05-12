@@ -61,7 +61,7 @@
                         });
                         dataTable.init($('table#stock_movement_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [0,3,8] }
+                                { "orderable": false, "targets": [0,6] }
                             ],
                             "order": []
                         } );
