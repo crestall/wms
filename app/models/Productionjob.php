@@ -257,7 +257,7 @@ class Productionjob extends Model{
             'finisher_id'       => $data['finisher_id'],
             'contact_id'        => $contact_id,
             'purchase_order'    => $po,
-            'finisher_order'    => $finisher_order,
+            'finisher_order'    => $data['finisher_order'],
             'ed_date'           => $ed_date
         ));
     }
