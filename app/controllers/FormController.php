@@ -1089,12 +1089,13 @@ class FormController extends Controller {
                 //echo "Will update JOB: $id to<pre>",print_r($finishers),"</pre>";die();
                 if($this->productionjob-> removeFinishersFromJob($id))
                 {
-                    foreach($finishers as $finisher)
+                    foreach($finishers as $f => $finisher)
                     {
                         $this->productionjob->addFinisherToJob($id, array(
                             'ed_date_value'     => $finisher['ed_date_value'],
                             'contact_id'        => $finisher['contact_id'],
                             'purchase_order'    => $finisher['purchase_order'],
+                            'finisher_order'    => $f,
                             'finisher_id'       => $finisher['finisher_id']
                         ));
                     }
