@@ -10,6 +10,16 @@ $country = (empty(Form::value('country')))? "AU" : Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
 $date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
 $customer_id = ( empty(Form::value('customer_id')) )? 0 : Form::value('customer_id');
+//FINISHER DETAILS
+$finisher_array = array();
+if(!empty(Form::value('finishers')))
+{
+    foreach(Form::value('finishers') as $f)
+    {
+        $finisher_array[] = $f;
+    }
+}
+$finisher_count = count($finisher_array);
 if(Session::getAndDestroy('show_customer_address'))
 {
     $customer_collapse = "collapse show";
@@ -25,6 +35,7 @@ else
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php //echo "<pre>",print_r(Form::$values),"</pre>"; die();?>
         <form id="add_production_job" method="post" action="/form/procAddProductionJob">
             <div class="row">
 <!------------------------------------------------------------------------------------------------------------------------------------------->
@@ -268,7 +279,16 @@ else
                             <div class="col">
                                 <a class="add-finisher" style="cursor:pointer" title="Add Another Finisher"><h4><i class="fad fa-plus-square text-success"></i> Add A Finisher</a></h4>
                             </div>
-                            <div id="finishers_holder"></div>
+                            <div id="finishers_holder">
+                                <?php $i = 0;
+                                while($i < $finisher_count):
+                                    foreach($finisher_array as $tfa)
+                                    {
+                                        include(Config::get('VIEWS_PATH')."layout/page-includes/add_job_finisher.php");
+                                        ++$i;
+                                    }
+                                endwhile;?>
+                            </div>
                         </div>
                     </div>
                 </div>

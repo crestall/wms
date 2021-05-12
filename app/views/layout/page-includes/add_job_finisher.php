@@ -5,7 +5,7 @@ $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 if(isset($tfa))
 {
     $tfd = "block";
-    $finisher_id = $tfa['id'];
+    $finisher_id = isset($tfa['id'])? $tfa['id']: $tfa['finisher_id'];
 }
 else
 {
