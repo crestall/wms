@@ -35,6 +35,7 @@ else
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <?php //echo "<pre>",print_r(Form::$values),"</pre>"; die();?>
         <form id="add_production_job" method="post" action="/form/procAddProductionJob">
             <div class="row">
 <!------------------------------------------------------------------------------------------------------------------------------------------->
