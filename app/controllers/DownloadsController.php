@@ -20,6 +20,7 @@ class DownloadsController extends Controller {
             'stockMovementCSV',
             'clientBayUsageCSV',
             'clientDispatchReportCSV',
+            'clientInventoryCSV',
             'clientStockMovementCSV',
             'clientStockSummaryCSV',
             'dispatchReportCSV',
@@ -45,6 +46,47 @@ class DownloadsController extends Controller {
         //set the page name for menu display
         Config::setJsConfig('curPage', 'downloads-index');
         parent::displayIndex(get_class());
+    }
+
+    public function clientInventoryCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $items = $this->item->getClientInventoryArray($client_id);
+        $cols = array(
+            "Name",
+            "SKU",
+            "Client Product ID",
+            "Barcode",
+            "On Hand",
+            "Allocated",
+            "Damaged/Unsuitable",
+            "Available"
+        );
+        $rows = array();
+        foreach($items as $item_id => $i)
+        {
+            $available = $i['onhand'] - $i['allocated'] - $i['qc_count'];
+            $row = array(
+                $i['name'],
+                $i['sku'],
+                $i['client_product_id'],
+                $i['barcode'],
+                $i['onhand'],
+                $i['allocated'],
+                $i['qc_count'],
+                $available
+            );
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "inventory_".date("Ymd")]);
     }
 
     public function clientBaysUsageCSV()
@@ -1192,6 +1234,7 @@ class DownloadsController extends Controller {
         //client users
         Permission::allow('client', $resource, array(
             "clientDispatchReportCSV",
+            "clientInventoryCSV",
             "returnsReportCSV",
             "clientStockMovementCSV",
             "clientStockSummaryCSV",
