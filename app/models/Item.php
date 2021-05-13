@@ -206,7 +206,7 @@ class Item extends Model{
         //Logger::logDataTablesCalls("datatables_test", "Got the items at ".date("H:i:s"));
         $rows = array();
         $c = 1;
-        Logger::logDataTablesCalls("datatables_test", "Starting foreach items at ".date("H:i:s"));
+        //Logger::logDataTablesCalls("datatables_test", "Starting foreach items at ".date("H:i:s"));
         foreach($items as $i)
         {
             //if(is_null($i['location_id']))
