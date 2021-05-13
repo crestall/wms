@@ -112,7 +112,7 @@
                     <?php if(!empty($job['status_colour'])):?>
                         style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
                     <?php endif;?>
-                    ><select class="selectpicker status" <?php if(!$can_change_status) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select>
+                    ><select class="selectpicker status" <?php if(!$can_change_status) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-light btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select>
                     <?php if($job['status_change_time'] > 0)
                     {
                         echo "<p>Status Changed: ".date("d/m/Y", $job['status_change_time']);
