@@ -86,7 +86,7 @@ class DownloadsController extends Controller {
         }
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
-        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "inventory_".date("YmdHis")]);
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "inventory_".date("Ymd")]);
     }
 
     public function clientBaysUsageCSV()
