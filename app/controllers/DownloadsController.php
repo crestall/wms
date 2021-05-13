@@ -20,6 +20,7 @@ class DownloadsController extends Controller {
             'stockMovementCSV',
             'clientBayUsageCSV',
             'clientDispatchReportCSV',
+            'clientInventoryCSV',
             'clientStockMovementCSV',
             'clientStockSummaryCSV',
             'dispatchReportCSV',
@@ -45,6 +46,18 @@ class DownloadsController extends Controller {
         //set the page name for menu display
         Config::setJsConfig('curPage', 'downloads-index');
         parent::displayIndex(get_class());
+    }
+
+    public function clientInventoryCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $items = $this->item->getClientInventoryArray($client_id);
     }
 
     public function clientBaysUsageCSV()
