@@ -1205,6 +1205,7 @@ class DownloadsController extends Controller {
         //client users
         Permission::allow('client', $resource, array(
             "clientDispatchReportCSV",
+            "clientInventoryCSV",
             "returnsReportCSV",
             "clientStockMovementCSV",
             "clientStockSummaryCSV",
