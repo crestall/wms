@@ -12,14 +12,14 @@
                     <img class='loading' src='/images/preloader.gif' alt='loading...' />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="text-right">
-                        <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
-                    </p>
-                </div>
-            </div>
             <div class="row" id="table_holder" style="display:none">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="text-right">
+                            <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
+                        </p>
+                    </div>
+                </div>
                 <div class="col-lg-12">
                     <table id="client_stock_movement_summary_table" class="table-striped table-hover" width="100%">
                         <thead>
