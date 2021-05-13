@@ -71,13 +71,13 @@ class DownloadsController extends Controller {
         $rows = array();
         foreach($items as $item_id => $i)
         {
-            $available = $i['qty'] - $i['allocated'] - $i['qc_count'];
+            $available = $i['onhand'] - $i['allocated'] - $i['qc_count'];
             $row = array(
                 $i['name'],
                 $i['sku'],
                 $i['client_product_id'],
                 $i['barcode'],
-                $i['qty'],
+                $i['onhand'],
                 $i['allocated'],
                 $i['qc_count'],
                 $available
