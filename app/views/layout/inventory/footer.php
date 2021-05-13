@@ -604,6 +604,14 @@
                                 })
                             }
                         } );
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                client_id: $("#client_id").val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/clientInventoryCSV";
+                            fileDownload.download(url, data);
+                        });
                     }
                 },
                 'expected-shipments' : {
