@@ -58,6 +58,26 @@ class DownloadsController extends Controller {
             }
         }
         $items = $this->item->getClientInventoryArray($client_id);
+        $cols = array(
+            "Name",
+            "SKU",
+            "Client Product ID",
+            "Barcode"
+        );
+        $rows = array();
+        foreach($items as $item_id => $i)
+        {
+            $row = array(
+                $i['name'],
+                $i['sku'],
+                $i['client_product_id'],
+                $i['barcode']
+            );
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "inventory_".date("Ymd")]);
     }
 
     public function clientBaysUsageCSV()
