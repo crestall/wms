@@ -4,19 +4,19 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <!--div class="row">
+        <div class="row">
             <div class="col">
-                <p><a class="btn btn-primary" href="#nuchev">Nuchev</a></p>
-            </div>
-            <div class="col">
-                <p><a class="btn btn-primary" href="#oneplate">One Plate</a></p>
+                <p><a class="btn btn-primary" href="#woocommerce">Woocommerce Orders</a></p>
             </div>
             <?php if($user_role == "super admin"):?>
+                <div class="col">
+                    <p><a class="btn btn-primary" href="#shopify">Shopify Orders</a></p>
+                </div>
                 <div class="col-md-2">
-                    <p><a class="btn btn-primary" href="#freedom">Freedom</a></p>
+                    <p><a class="btn btn-primary" href="#myob">MYOB Orders</a></p>
                 </div>
             <?php endif;?>
-        </div-->
+        </div>
         <div class="row">
             <div class="col">
                 <?php if(isset($_SESSION['feedback'])) :?>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 mb-3">
+            <div id="woocommerce" class="col-12 mb-3 border-top border-secondary pt-3">
                 <h2>Woo Commerce Order Importing</h2>
             </div>
         </div>
@@ -134,7 +134,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 mb-3">
+            <div id="shopify" class="col-12 mb-3 border-top border-secondary pt-3">
                 <h2>Shopify Order Importing</h2>
             </div>
         </div>
@@ -169,7 +169,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 mb-3 border-top border-secondary pt-3">
+            <div id="myob" class="col-12 mb-3 border-top border-secondary pt-3">
                 <h2>MYOB Order Importing</h2>
             </div>
         </div>
