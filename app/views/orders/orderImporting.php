@@ -8,7 +8,7 @@
             <div class="col">
                 <p><a class="btn btn-primary" href="#woocommerce">Woocommerce Orders</a></p>
             </div>
-            <?php if($user_role == "super admin"):?>
+            <?php if($super_admin):?>
                 <div class="col">
                     <p><a class="btn btn-primary" href="#shopify">Shopify Orders</a></p>
                 </div>
