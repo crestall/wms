@@ -182,10 +182,10 @@ class OrdersController extends Controller
     public function importBBShopifyOrders()
     {
        $response = $this->BuzzBeeShopify->getOrders();
-       foreach($response as $i => $r)
+       foreach($response as $a => $r)
        {
             if( isset($r['shipping_address']) && !preg_match( "/FSG/i", $r['shipping_address']['code'] ) )
-                unset($response[$i]) ;
+                unset($response[$a]) ;
 
        }
        echo "<pre>",print_r($response),"</pre>"; die();
