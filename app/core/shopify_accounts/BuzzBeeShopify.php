@@ -91,10 +91,12 @@ class BuzzBeeShopify extends Shopify
         //return $collected_orders;
         if($orders = $this->procOrders($collected_orders))
         {
+            $this->output .= "===========================   Sending Orders  =========================".PHP_EOL;
             Logger::logOrderImports('order_imports/bba', $this->output);
             return $orders;
             //$this->addPBAOrders($orders);
         }
+        $this->output .= "===========================   Falsy  =========================".PHP_EOL;
         Logger::logOrderImports('order_imports/bba', $this->output); //die();
     }
 
