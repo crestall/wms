@@ -1,0 +1,105 @@
+<?php
+/**
+ * BuzzBee location for the shopify class.
+ *
+ *
+ * @author     Mark Solly <mark.solly@fsg.com.au>
+ */
+
+class BuzzBeeShopify extends Shopify
+{
+    private $client_id = 89;
+    private $from_address_array = array();
+    private $config = array();
+
+    private $output;
+    private $shopify;
+    private $ua;
+    private $return_array = array(
+        'import_count'          => 0,
+        'imported_orders'       => array(),
+        'error_orders'          => array(),
+        'import_error'          => false,
+        'error'                 => false,
+        'error_count'           => 0,
+        'error_string'          => '',
+        'import_error_string'   => ''
+    );
+
+    private $bboitems;
+
+    public function init()
+    {
+        //parent::__construct($controller);
+        $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
+        $this->config = array(
+            'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
+            'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
+            'Password'       => Config::get('BBSHOPIFYAPIPASS')
+        );
+
+        $from_address = Config::get("FSG_ADDRESS");
+        $this->from_address_array = array(
+            'name'      =>  'Freedom Publishing Books (via FSG 3PL)',
+            'lines'		=>	array($from_address['address']),
+            'suburb'	=>	$from_address['suburb'],
+            'postcode'	=>	$from_address['postcode'],
+            'state'		=>	$from_address['state'],
+            'country'	=>  $from_address['country']
+        );
+
+        try{
+            $this->shopify = new PHPShopify\ShopifySDK($this->config);
+        } catch (Exception $e) {
+            echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if ($this->ua == "CRON" )
+            {
+                Email::sendCronError($e, "Buzz Bee Australia");
+                return;
+            }
+            else
+            {
+                $this->return_array['import_error'] = true;
+                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                return $this->return_array;
+            }
+        }
+    }
+
+    public function getOrders()
+    {
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "Buzz Bee Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+
+        $collected_orders = array();
+        $params = array(
+                'status'    => 'open'
+        );
+        try {
+            $collected_orders = $this->shopify->Order->get($params);
+        } catch (Exception $e) {
+            echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if ($this->ua == "CRON" )
+            {
+                    Email::sendCronError($e, "Buzz Bee Australia");
+                    return;
+            }
+            else
+            {
+                    $this->return_array['import_error'] = true;
+                    $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                    return $this->return_array;
+            }
+        }
+        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        return $collected_orders;
+    }
+
+
+} // end class
+ ?>
