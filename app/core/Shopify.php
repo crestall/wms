@@ -215,7 +215,7 @@ class Shopify{
                 if(isset($o['shipping_address']))
                     echo "<pre>",print_r($o['shipping_address']),"</pre>";
                 else
-                    echo "<p>No shipping address for order $i</p>";
+                    echo "No shipping address for order $i : <pre>",print_r($o),"</pre>";
                 continue;
                 $items_errors = false;
                 $weight = 0;
