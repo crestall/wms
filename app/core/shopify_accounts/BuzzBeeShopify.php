@@ -88,9 +88,9 @@ class BuzzBeeShopify extends Shopify
             }
         }
         //BUZZBEE has it in grams!!!
-        foreach($collected_orders as $co)
+        foreach($collected_orders as $coi => $co)
         {
-            $co['total_weight'] = $co['total_weight']/1000;
+            $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
         }
 
         echo "<pre>",print_r($collected_orders),"</pre>"; die();
