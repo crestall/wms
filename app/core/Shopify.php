@@ -212,11 +212,11 @@ class Shopify{
             $orders_items = array();
             foreach($collected_orders as $i => $o)
             {
-                if(isset($o['shipping_address']))
+                /*if(isset($o['shipping_address']))
                     echo "<pre>",print_r($o['shipping_address']),"</pre>";
                 else
                     echo "No shipping address for order $i : <pre>",print_r($o),"</pre>";
-                continue;
+                continue; */
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
