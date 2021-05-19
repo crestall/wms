@@ -109,6 +109,7 @@ class Controller {
         $this->loadFinancialClasses();
         $this->loadFTPClasses();
         $this->loadEBAYClasses();
+        $this->loadShopifyClasses();
 
         $this->beforeAction();
 
