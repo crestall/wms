@@ -92,8 +92,7 @@ class BuzzBeeShopify extends Shopify
         {
             $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
         }
-
-        echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
         //return $collected_orders;
         if($orders = $this->procOrders($collected_orders))
         {
