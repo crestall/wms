@@ -28,7 +28,7 @@ class BuzzBeeShopify extends Shopify
 
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
-            'name'      =>  'Freedom Publishing Books (via FSG 3PL)',
+            'name'      =>  'Buzz Bee Australia (via FSG 3PL)',
             'lines'		=>	array($from_address['address']),
             'suburb'	=>	$from_address['suburb'],
             'postcode'	=>	$from_address['postcode'],
@@ -88,11 +88,44 @@ class BuzzBeeShopify extends Shopify
             }
         }
         //BUZZBEE has it in grams!!!
+        //Also need to check for customer collect and no FSG handling
         foreach($collected_orders as $coi => $co)
         {
             $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
+            if(preg_match("/FSG/i", $co['shipping_lines'][0]['code']))
+            {
+                if(!isset($co['shipping_address']))
+                {
+                    $collected_orders[$coi]['shipping_address'] = array(
+                        'first_name'    => $co['customer']['first_name'],
+                        'address1'      => $this->from_address_array['lines'],
+                        'phone'         => $co['customer']['phone'],
+                        'city'          => $this->from_address_array['suburb'],
+                        'zip'           => $this->from_address_array['postcode'],
+                        'province'      => $this->from_address_array['state'],
+                        'country'       => $this->from_address_array['country'],
+                        'last_name'     => $co['customer']['last_name'],
+                        'address2'      => '',
+                        'company'       => $co['customer']['default_address']['company'],
+                        'latitude'      => '',
+                        'longitude'     => '',
+                        'name'          => $co['customer']['default_address']['name'],
+                        'country_code'  => $this->from_address_array['country'],
+                        'province_code' => $this->from_address_array['state']
+                    );
+                    $collected_orders[$coi]['pickup'] = 1;
+                }
+                else
+                {
+                    $collected_orders[$coi]['pickup'] = 0;
+                }
+            }
+            else
+            {
+                unset($collected_orders[$coi]);
+            }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        echo "<pre>",print_r($collected_orders),"</pre>"; die();
         //return $collected_orders;
         if($orders = $this->procOrders($collected_orders))
         {
