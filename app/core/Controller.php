@@ -231,7 +231,7 @@ class Controller {
         $this->shopify =  new Shopify($this);
         foreach($locations as $location)
         {
-            $class = $location . "BuzzBee";
+            $class = $location . "Shopify";
             $this->{$class} = new $class($this);
             $this->{$class}->init();
         }
