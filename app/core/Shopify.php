@@ -203,15 +203,20 @@ class Shopify{
     protected function procOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
-        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";die();
         //echo $_SERVER['HTTP_USER_AGENT'];
         $orders = array();
         if(count($collected_orders))
         {
             $allocations = array();
             $orders_items = array();
-            foreach($collected_orders as $o)
+            foreach($collected_orders as $i => $o)
             {
+                if(isset($o['shipping_address']))
+                    echo "<pre>",print_r($o['shipping_address']),"</pre>";
+                else
+                    echo "<p>No shipping address for order $i</p>";
+                continue;
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
