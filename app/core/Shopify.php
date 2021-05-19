@@ -12,11 +12,8 @@ use PHPShopify\Exception\CurlException;
 
 class Shopify{
 
-    private $output;
-    private $shopify;
-    private $pbaoitems;
-    private $ua;
-    private $return_array = array(
+    protected $output;
+    protected $return_array = array(
         'import_count'          => 0,
         'imported_orders'       => array(),
         'error_orders'          => array(),
@@ -26,6 +23,10 @@ class Shopify{
         'error_string'          => '',
         'import_error_string'   => ''
     );
+    protected $ua;
+
+    private $shopify;
+    private $pbaoitems;
 
     public $controller;
 
@@ -33,6 +34,8 @@ class Shopify{
     {
         $this->controller = $controller;
     }
+
+    public function init(){}
 
     public function fulfillAnOrder()
     {
@@ -197,7 +200,7 @@ class Shopify{
     }
 
 
-    private function procPBAOrders($collected_orders)
+    protected function procOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
         //echo "<pre>",print_r($collected_orders),"</pre>";die();
@@ -369,7 +372,7 @@ class Shopify{
                 }
             }//endforeach order
             //echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
-            $this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            //$this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
             //echo "ORDERS ITEMS<pre>",print_r($this->pbaoitems),"</pre>";die();
             return $orders;
         }//end if count orders

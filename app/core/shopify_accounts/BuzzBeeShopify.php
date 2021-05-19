@@ -12,19 +12,7 @@ class BuzzBeeShopify extends Shopify
     private $from_address_array = array();
     private $config = array();
 
-    private $output;
     private $shopify;
-    private $ua;
-    private $return_array = array(
-        'import_count'          => 0,
-        'imported_orders'       => array(),
-        'error_orders'          => array(),
-        'import_error'          => false,
-        'error'                 => false,
-        'error_count'           => 0,
-        'error_string'          => '',
-        'import_error_string'   => ''
-    );
 
     private $bboitems;
 
@@ -97,8 +85,17 @@ class BuzzBeeShopify extends Shopify
             }
         }
         //echo "<pre>",print_r($collected_orders),"</pre>"; die();
-        return $collected_orders;
+        //return $collected_orders;
+        if($orders = $this->procOrders($collected_orders))
+        {
+            Logger::logOrderImports('order_imports/bba', $this->output);
+            return $orders;
+            //$this->addPBAOrders($orders);
+        }
+        Logger::logOrderImports('order_imports/bba', $this->output); //die();
     }
+
+
 
 
 } // end class
