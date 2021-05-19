@@ -67,7 +67,7 @@ class BuzzBeeShopify extends Shopify
             'status'                => 'open',
             'financial_status'      => 'paid',
             'fulfillment_status'    => 'unshipped',
-            'fields'                => 'id,created_at,order_number,email,shipping_address,line_items,shipping_lines'
+            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines'
         );
         try {
             $collected_orders = $this->shopify->Order->get($params);
@@ -87,6 +87,8 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
+        //BUZZBEE has it in grams!!!
+        $collected_orders['total_weight'] = $collected_orders['total_weight']/1000;
         //echo "<pre>",print_r($collected_orders),"</pre>"; die();
         //return $collected_orders;
         if($orders = $this->procOrders($collected_orders))
