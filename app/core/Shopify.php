@@ -379,6 +379,7 @@ class Shopify{
             //echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
             //$this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
             //echo "ORDERS ITEMS<pre>",print_r($this->pbaoitems),"</pre>";die();
+            $this->output .= "===========================   Gonna send em back  =========================".PHP_EOL;
             return $orders;
         }//end if count orders
         else
