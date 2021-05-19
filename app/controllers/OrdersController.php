@@ -185,7 +185,7 @@ class OrdersController extends Controller
        foreach($response as $i => $r)
        {
             if( isset($r['shipping_address']) && !preg_match( "/FSG/i", $r['shipping_address']['code'] ) )
-                unset $response[$i];
+                unset($response[$i]) ;
 
        }
        echo "<pre>",print_r($response),"</pre>"; die();
