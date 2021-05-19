@@ -203,7 +203,7 @@ class Shopify{
     protected function procOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        echo "<pre>",print_r($collected_orders),"</pre>";die();
         //echo $_SERVER['HTTP_USER_AGENT'];
         $orders = array();
         if(count($collected_orders))
