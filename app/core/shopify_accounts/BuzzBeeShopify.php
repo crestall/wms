@@ -67,7 +67,7 @@ class BuzzBeeShopify extends Shopify
             'status'                => 'open',
             'financial_status'      => 'paid',
             'fulfillment_status'    => 'unshipped',
-            'fields'                => 'id,created_at,order_number,shipping_address,line_items,shipping_lines'
+            'fields'                => 'id,created_at,order_number,email,shipping_address,line_items,shipping_lines'
         );
         try {
             $collected_orders = $this->shopify->Order->get($params);
