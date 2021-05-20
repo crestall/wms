@@ -113,11 +113,12 @@ class BuzzBeeShopify extends Shopify
                     $inventory_item_id = $variant['inventory_item_id'];
                     try{
                         $inventory_levels = $this->shopify->InventoryLevel->get(array('inventory_item_id' => $inventory_item_id));
+                        echo "INVENTORY LEVELS<pre>",print_r($inventory_levels),"</pre>";
                     } catch(Exception $e){
-                        echo "Error<pre>",print_r($e),"</pre>";//die();
+                        echo "Inventory levels Error<pre>",print_r($e),"</pre>";//die();
                     }
                 } catch(Exception $e){
-                    echo "Error<pre>",print_r($e),"</pre>";//die();
+                    echo "Variant Error<pre>",print_r($e),"</pre>";//die();
                 }
 
 
