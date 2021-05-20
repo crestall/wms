@@ -94,7 +94,7 @@ class BuzzBeeShopify extends Shopify
         foreach($collected_orders as $coi => $co)
         {
             echo "<p>Doing order: ".$co['order_number']."</p>";
-            echo "<pre>",print_r($co['line_items']),"</pre>";
+            //echo "<pre>",print_r($co['line_items']),"</pre>";
             foreach($co['line_items'] as $li)
             {
                 echo "<p>Doing Item: ".$li['name']." (".$li['product_id'].")</p>";
