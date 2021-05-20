@@ -114,6 +114,11 @@ class BuzzBeeShopify extends Shopify
                     try{
                         $inventory_levels = $this->shopify->InventoryLevel->get(array('inventory_item_ids' => $inventory_item_id));
                         echo "INVENTORY LEVELS<pre>",print_r($inventory_levels),"</pre>";
+
+                        $location_id = $inventory_levels[0]['location_id'];
+
+                        $location = $this->shopify->Location($location_id)->get();
+                        echo "LOCATION<pre>",print_r($location),"</pre>";
                     } catch(Exception $e){
                         echo "Inventory levels Error<pre>",print_r($e),"</pre>";//die();
                     }
