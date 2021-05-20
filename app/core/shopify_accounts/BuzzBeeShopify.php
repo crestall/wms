@@ -91,12 +91,12 @@ class BuzzBeeShopify extends Shopify
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
         echo "<h1>Collected $order_count Orders</h1>";
-        try{
+        /*try{
             $locations = $this->shopify->Location->get();
         } catch(Exception $e){
             echo "Error<pre>",print_r($e),"</pre>";die();
         }
-        echo "<pre>",print_r($locations),"</pre>";
+        echo "<pre>",print_r($locations),"</pre>";*/
         foreach($collected_orders as $coi => $co)
         {
             echo "<p>Doing order: ".$co['order_number']."</p>";
@@ -104,7 +104,11 @@ class BuzzBeeShopify extends Shopify
             foreach($co['line_items'] as $li)
             {
                 echo "<p>Doing Item: ".$li['name']." (".$li['product_id'].")</p>";
-                echo "<pre>",print_r($li),"</pre>";
+                //echo "<pre>",print_r($li),"</pre>";
+                $variant_id = $li['variant_id'];
+                echo "<p> Doing Variant ".$li['variant_title']."</p>";
+                $variant = $this->shopify->ProductVariant($variant_id)->get();
+                echo "<pre>",print_r($variant),"</pre>";
                 echo "<p>--------------------------------------------</p>";
                 /*
                 try {
