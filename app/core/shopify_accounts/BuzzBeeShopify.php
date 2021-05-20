@@ -89,6 +89,8 @@ class BuzzBeeShopify extends Shopify
         }
         //BUZZBEE has it in grams!!!
         //Also need to check for customer collect and no FSG handling
+        $order_count = count($collected_orders);
+        echo "<h1>Collected $order_count Orders</h1>";
         foreach($collected_orders as $coi => $co)
         {
             echo "<p>Doing order: ".$co['order_number']."</p>";
