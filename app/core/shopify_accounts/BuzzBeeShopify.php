@@ -91,6 +91,10 @@ class BuzzBeeShopify extends Shopify
         //Also need to check for customer collect and no FSG handling
         foreach($collected_orders as $coi => $co)
         {
+            echo "<p>Doing order: ".$co['order_number']."</p>";
+            echo "<pre>",print_r($co['line_items']),"</pre>";
+            echo "<p>=========================================</p>";
+            /*
             $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
             if( isset($co['shipping_lines']) && !empty($co['shipping_lines']) )
             {
@@ -131,8 +135,10 @@ class BuzzBeeShopify extends Shopify
             {
                 unset($collected_orders[$coi]);
             }
+            */
         }
-        echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        //echo "<pre>",print_r($collected_orders),"</pre>";
+        die();
         //return $collected_orders;
         if($orders = $this->procOrders($collected_orders))
         {
