@@ -100,7 +100,7 @@ class BuzzBeeShopify extends Shopify
                     {
                         $collected_orders[$coi]['shipping_address'] = array(
                             'first_name'    => $co['customer']['first_name'],
-                            'address1'      => $this->from_address_array['lines'],
+                            'address1'      => $this->from_address_array['lines'][0],
                             'phone'         => $co['customer']['phone'],
                             'city'          => $this->from_address_array['suburb'],
                             'zip'           => $this->from_address_array['postcode'],
