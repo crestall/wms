@@ -97,15 +97,15 @@ class BuzzBeeShopify extends Shopify
             echo "<pre>",print_r($co['line_items']),"</pre>";
             foreach($co['line_items'] as $li)
             {
-                echo "<p>Doing Item: ".$li['name']." (".$li['id'].")</p>";
-                /*
+                echo "<p>Doing Item: ".$li['name']." (".$li['product_id'].")</p>";
+                /* */
                 try {
-                    $item = $this->shopify->Product($li['id'])->get();
+                    $item = $this->shopify->Product($li['product_id'])->get();
                 } catch (Exception $e) {
                     echo "Error<pre>",print_r($e),"</pre>";die();
                 }
                 echo "<pre>",print_r($item),"</pre>";
-                */
+
             }
             echo "<p>=========================================</p>";
             /*
