@@ -91,6 +91,12 @@ class BuzzBeeShopify extends Shopify
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
         echo "<h1>Collected $order_count Orders</h1>";
+        try{
+            $locations = $this->shopify->Location->get();
+        } catch(Exception $e){
+            echo "Error<pre>",print_r($e),"</pre>";die();
+        }
+        echo "<pre>",print_r($locations),"</pre>";
         foreach($collected_orders as $coi => $co)
         {
             echo "<p>Doing order: ".$co['order_number']."</p>";
