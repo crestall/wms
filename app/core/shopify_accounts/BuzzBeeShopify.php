@@ -92,7 +92,7 @@ class BuzzBeeShopify extends Shopify
         foreach($collected_orders as $coi => $co)
         {
             $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
-            if( isset($co['shipping_lines']) && is_array($co['shipping_lines']) )
+            if( isset($co['shipping_lines']) && !empty($co['shipping_lines']) )
             {
                 if(preg_match("/FSG/i", $co['shipping_lines'][0]['code']))
                 {
