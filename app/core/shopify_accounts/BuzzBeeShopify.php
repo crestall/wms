@@ -107,7 +107,12 @@ class BuzzBeeShopify extends Shopify
                 //echo "<pre>",print_r($li),"</pre>";
                 $variant_id = $li['variant_id'];
                 echo "<p> Doing Variant ".$li['variant_title']."</p>";
-                $variant = $this->shopify->ProductVariant($variant_id)->get();
+                try{
+                    $variant = $this->shopify->ProductVariant($variant_id)->get();
+                } catch(Exception $e){
+                    echo "Error<pre>",print_r($e),"</pre>";die();
+                }
+
                 echo "<pre>",print_r($variant),"</pre>";
                 echo "<p>--------------------------------------------</p>";
                 /*
