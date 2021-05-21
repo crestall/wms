@@ -105,11 +105,13 @@ class BuzzBeeShopify extends Shopify
             {
                 echo "<p>Doing Item: ".$li['name']." (".$li['product_id'].")</p>";
                 //echo "<pre>",print_r($li),"</pre>";
-                $variant_id = $li['variant_id'];
-                echo "<p> Doing Variant ".$li['variant_title']." ($variant_id)</p>";
+                $product_id = $li['product_id'];
+                echo "<p> Doing Product ".$li['name']." ($product_id)</p>";
                 try{
+                    $product = $this->shopify->Product($product_id)->get();
+                    //echo "THE PRODUCT<pre>",print_r($product),"</pre>";
+                    $variant_id = $product['variants'][0]['id'];
                     $variant = $this->shopify->ProductVariant($variant_id)->get();
-                    echo "THE VARIANT<pre>",print_r($variant),"</pre>";
                     $inventory_item_id = $variant['inventory_item_id'];
                     try{
                         $inventory_levels = $this->shopify->InventoryLevel->get(array('inventory_item_ids' => $inventory_item_id));
