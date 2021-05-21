@@ -99,46 +99,11 @@ class BuzzBeeShopify extends Shopify
         echo "<pre>",print_r($locations),"</pre>";*/
         foreach($collected_orders as $coi => $co)
         {
-            echo "<p>Doing order: ".$co['order_number']."</p>";
+            $order_id = $co['id'];
+            $order_number = $co['order_number'];
+            echo "<p>Doing order: $order_number ($order_id)</p>";
             //echo "<pre>",print_r($co['line_items']),"</pre>";
-            foreach($co['line_items'] as $li)
-            {
-                echo "<p>Doing Item: ".$li['name']." (".$li['product_id'].")</p>";
-                //echo "<pre>",print_r($li),"</pre>";
-                $product_id = $li['product_id'];
-                echo "<p> Doing Product ".$li['name']." ($product_id)</p>";
-                try{
-                    $product = $this->shopify->Product($product_id)->get();
-                    //echo "THE PRODUCT<pre>",print_r($product),"</pre>";
-                    $variant_id = $product['variants'][0]['id'];
-                    $variant = $this->shopify->ProductVariant($variant_id)->get();
-                    $inventory_item_id = $variant['inventory_item_id'];
-                    try{
-                        $inventory_levels = $this->shopify->InventoryLevel->get(array('inventory_item_ids' => $inventory_item_id));
-                        echo "INVENTORY LEVELS<pre>",print_r($inventory_levels),"</pre>";
-
-                        $location_id = $inventory_levels[0]['location_id'];
-
-                        $location = $this->shopify->Location($location_id)->get();
-                        echo "LOCATION<pre>",print_r($location),"</pre>";
-                    } catch(Exception $e){
-                        echo "Inventory levels Error<pre>",print_r($e),"</pre>";//die();
-                    }
-                } catch(Exception $e){
-                    echo "Variant Error<pre>",print_r($e),"</pre>";//die();
-                }
-
-
-                echo "<p>--------------------------------------------</p>";
-                /*
-                try {
-                    $item = $this->shopify->Product($li['product_id'])->Metafield->get();
-                } catch (Exception $e) {
-                    echo "Error<pre>",print_r($e),"</pre>";die();
-                }
-                echo "<pre>",print_r($item),"</pre>";
-                */
-            }
+            
             echo "<p>=========================================</p>";
             /*
             $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
