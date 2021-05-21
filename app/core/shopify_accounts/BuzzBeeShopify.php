@@ -101,10 +101,10 @@ class BuzzBeeShopify extends Shopify
             echo "THE ORDER<pre>",print_r($co),"</pre>";
             echo "<p>=========================================</p>";
             $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
-            echo "The Fulfillments<pre>",print_r($order_fulfillments),"</pre>";
-            /*foreach($order_fulfillments as $of)
+            //echo "The Fulfillments<pre>",print_r($order_fulfillments),"</pre>";
+            foreach($order_fulfillments as $of)
             {
-                if(!preg_match("/FSG/i", $of['assigned_location']))
+                if(!preg_match("/FSG/i", $of['assigned_location']['name']))
                 {
                     foreach($of['line_items'] as $ofli)
                     {
