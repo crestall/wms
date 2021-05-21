@@ -71,7 +71,7 @@ class BuzzBeeShopify extends Shopify
         );
         try {
             $order_id = "3859592249495";
-            $collected_orders[] = $this->shopify->Order($order_id)->get();
+            $collected_orders[] = $this->shopify->Order($order_id)->get($params);
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
