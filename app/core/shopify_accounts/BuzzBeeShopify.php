@@ -91,24 +91,20 @@ class BuzzBeeShopify extends Shopify
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
         echo "<h1>Collected $order_count Orders</h1>";
-        /*try{
-            $locations = $this->shopify->Location->get();
-        } catch(Exception $e){
-            echo "Error<pre>",print_r($e),"</pre>";die();
-        }
-        echo "<pre>",print_r($locations),"</pre>";*/
+
         foreach($collected_orders as $coi => $co)
         {
             $order_id = $co['id'];
             $order_number = $co['order_number'];
             echo "<p>Doing order: $order_number ($order_id)</p>";
-            //echo "<pre>",print_r($co['line_items']),"</pre>";
+            echo "<pre>",print_r($co),"</pre>";
+            echo "<p>=========================================</p>";
             try{
                 $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
-                echo "<pre>",print_r($order_fulfillments),"</pre>";
             } catch(Exception $e){
                 echo "Error<pre>",print_r($e),"</pre>";die();
             }
+            echo "<pre>",print_r($order_fulfillments),"</pre>";
             echo "<p>=========================================</p>";
             /*
             $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
@@ -167,7 +163,10 @@ class BuzzBeeShopify extends Shopify
         Logger::logOrderImports('order_imports/bba', $this->output); //die();
     }
 
+    private function isFSGOrder()
+    {
 
+    }
 
 
 } // end class
