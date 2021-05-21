@@ -101,7 +101,8 @@ class BuzzBeeShopify extends Shopify
             echo "THE ORDER<pre>",print_r($co),"</pre>";
             echo "<p>=========================================</p>";
             $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
-            foreach($order_fulfillments as $of)
+            echo "The Fulfillments<pre>",print_r($order_fulfillments),"</pre>";
+            /*foreach($order_fulfillments as $of)
             {
                 if(!preg_match("/FSG/i", $of['assigned_location']))
                 {
@@ -113,8 +114,8 @@ class BuzzBeeShopify extends Shopify
                     }
                 }
             }
-            //echo "The Fulfillments<pre>",print_r($order_fulfillments),"</pre>";
-            /*
+            //
+
             try{
 
             } catch(Exception $e){
