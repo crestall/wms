@@ -110,8 +110,9 @@ class BuzzBeeShopify extends Shopify
                     {
                         $line_item_id = $ofli['line_item_id'];
                         echo "<p>$line_item_id does not belong</p>";
-                        $olii = array_search($line_item_id, $co['line_items']);
-                        echo "<p>Gonna delete line_itemm with index $olii</p>";
+                        //$olii = array_search($line_item_id, $co['line_items']);
+                        $key = array_search($line_item_id, array_column($co['line_items'], 'id'));
+                        echo "<p>Gonna delete line_itemm with index $key</p>";
                     }
                 }
             }
