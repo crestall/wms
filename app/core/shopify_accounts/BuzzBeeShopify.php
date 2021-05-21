@@ -109,19 +109,13 @@ class BuzzBeeShopify extends Shopify
                     foreach($of['line_items'] as $ofli)
                     {
                         $line_item_id = $ofli['line_item_id'];
-                        echo "<p>$line_item_id does not belong</p>";
+                        //echo "<p>$line_item_id does not belong</p>";
                         //$olii = array_search($line_item_id, $co['line_items']);
                         $key = array_search($line_item_id, array_column($co['line_items'], 'id'));
-                        echo "<p>Gonna delete line_itemm with index $key</p>";
+                        unset($collected_orders[$coi]['line_items'][$key]);
+                        //echo "<p>Gonna delete line_itemm with index $key</p>";
                     }
                 }
-            }
-            //
-
-            try{
-
-            } catch(Exception $e){
-                echo "Error<pre>",print_r($e),"</pre>";die();
             }
 
             echo "<p>=========================================</p>";
@@ -168,7 +162,7 @@ class BuzzBeeShopify extends Shopify
             }
             */
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>";
+        echo "AFTER<pre>",print_r($collected_orders),"</pre>";
         die();
         //return $collected_orders;
         if($orders = $this->procOrders($collected_orders))
