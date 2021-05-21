@@ -97,14 +97,14 @@ class BuzzBeeShopify extends Shopify
             $order_id = $co['id'];
             $order_number = $co['order_number'];
             echo "<p>Doing order: $order_number ($order_id)</p>";
-            echo "<pre>",print_r($co),"</pre>";
+            echo "THE ORDER<pre>",print_r($co),"</pre>";
             echo "<p>=========================================</p>";
             try{
                 $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
             } catch(Exception $e){
                 echo "Error<pre>",print_r($e),"</pre>";die();
             }
-            echo "<pre>",print_r($order_fulfillments),"</pre>";
+            echo "The Fulfillments<pre>",print_r($order_fulfillments),"</pre>";
             echo "<p>=========================================</p>";
             /*
             $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
