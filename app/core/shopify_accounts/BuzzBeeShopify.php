@@ -92,7 +92,11 @@ class BuzzBeeShopify extends Shopify
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
         echo "<h1>Collected $order_count Orders</h1>";
+        $filtered_orders = $this->filterForFSG($collected_orders);
+        $filtered_count = count($filtered_orders);
+        echo "<h1>There are $filtered_count Orders Left</h1>";
 
+        /*
         foreach($collected_orders as $coi => $co)
         {
             $order_id = $co['id'];
@@ -167,10 +171,9 @@ class BuzzBeeShopify extends Shopify
             {
                 unset($collected_orders[$coi]);
             }
-            */
+
         }
-        $order_count = count($collected_orders);
-        echo "<h1>Collected $order_count Orders</h1>";
+        */
         die();
         //return $collected_orders;
         if($orders = $this->procOrders($collected_orders))
@@ -184,9 +187,32 @@ class BuzzBeeShopify extends Shopify
         Logger::logOrderImports('order_imports/bba', $this->output); //die();
     }
 
-    private function isFSGOrder()
+    private function filterForFSG($collected_orders)
     {
-
+        foreach($collected_orders as $coi => $co)
+        {
+            $order_id = $co['id'];
+            $order_number = $co['order_number'];
+            $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
+            foreach($order_fulfillments as $of)
+            {
+                if(!preg_match("/FSG/i", $of['assigned_location']['name']))
+                {
+                    foreach($of['line_items'] as $ofli)
+                    {
+                        $line_item_id = $ofli['line_item_id'];
+                        $key = array_search($line_item_id, array_column($co['line_items'], 'id'));
+                        unset($collected_orders[$coi]['line_items'][$key]);
+                    }
+                }
+            }
+            $item_count = count($collected_orders[$coi]['line_items']);
+            if( $item_count == 0 )
+            {
+                unset($collected_orders[$coi]);
+            }
+        }
+        return $collected_orders;
     }
 
 
