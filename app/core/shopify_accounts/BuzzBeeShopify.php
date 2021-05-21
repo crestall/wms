@@ -70,7 +70,7 @@ class BuzzBeeShopify extends Shopify
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
         );
         try {
-            $collected_orders = $this->shopify->Order(3859592249495)->get();
+            $collected_orders = $this->shopify->Order("3859592249495")->get();
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
