@@ -98,8 +98,10 @@ class BuzzBeeShopify extends Shopify
             $order_id = $co['id'];
             $order_number = $co['order_number'];
             echo "<p>Doing order: $order_number ($order_id)</p>";
-            echo "THE ORDER<pre>",print_r($co),"</pre>";
+            //echo "THE ORDER<pre>",print_r($co),"</pre>";
             echo "<p>=========================================</p>";
+            $item_count = count($collected_orders[$coi]['line_items']);
+            echo "<p>ITEM COUNT IS $item_count</p>";
             $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
             //echo "The Fulfillments<pre>",print_r($order_fulfillments),"</pre>";
             foreach($order_fulfillments as $of)
@@ -117,7 +119,12 @@ class BuzzBeeShopify extends Shopify
                     }
                 }
             }
-
+            $item_count = count($collected_orders[$coi]['line_items']);
+            echo "<p>ITEM COUNT IS NOW $item_count</p>";
+            if( $item_count == 0 )
+            {
+                unset($collected_orders[$coi]);
+            }
             echo "<p>=========================================</p>";
             /*
             $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
@@ -162,7 +169,7 @@ class BuzzBeeShopify extends Shopify
             }
             */
         }
-        echo "AFTER<pre>",print_r($collected_orders),"</pre>";
+        //echo "AFTER<pre>",print_r($collected_orders),"</pre>";
         die();
         //return $collected_orders;
         if($orders = $this->procOrders($collected_orders))
