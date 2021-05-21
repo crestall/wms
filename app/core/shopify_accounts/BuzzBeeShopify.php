@@ -100,12 +100,27 @@ class BuzzBeeShopify extends Shopify
             echo "<p>Doing order: $order_number ($order_id)</p>";
             echo "THE ORDER<pre>",print_r($co),"</pre>";
             echo "<p>=========================================</p>";
+            $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
+            foreach($order_fulfillments as $of)
+            {
+                if(!preg_match("/FSG/i", $of['assigned_location']))
+                {
+                    foreach($of['line_items'] as $ofli)
+                    {
+                        $line_item_id = $ofli['line_item_id'];
+                        $olii = array_search($line_item_id, $co['line_items']);
+                        echo "<p>Gonna delete line_itemm with index $olii</p>";
+                    }
+                }
+            }
+            //echo "The Fulfillments<pre>",print_r($order_fulfillments),"</pre>";
+            /*
             try{
-                $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
+
             } catch(Exception $e){
                 echo "Error<pre>",print_r($e),"</pre>";die();
             }
-            echo "The Fulfillments<pre>",print_r($order_fulfillments),"</pre>";
+
             echo "<p>=========================================</p>";
             /*
             $collected_orders[$coi]['total_weight'] = $co['total_weight']/1000;
