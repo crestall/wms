@@ -105,6 +105,7 @@ class BuzzBeeShopify extends Shopify
             //echo "<pre>",print_r($co['line_items']),"</pre>";
             try{
                 $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
+                echo "<pre>",print_r($order_fulfillments),"</pre>";
             } catch(Exception $e){
                 echo "Error<pre>",print_r($e),"</pre>";die();
             }
