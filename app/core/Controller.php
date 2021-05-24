@@ -86,8 +86,6 @@ class Controller {
         $this->redirector          =  new Redirector();
         $this->woocommerce         =  new Woocommerce($this);
         $this->directfreight       =  new Directfreight($this);
-        $this->squarespace         =  new Squarespace($this);
-        $this->shopify             =  new Shopify($this);
         $this->allocations         =  new Allocations($this);
         $this->courierselector     =  new CourierSelector($this);
         $this->orderfulfiller      =  new OrderFulfiller($this);
@@ -110,7 +108,8 @@ class Controller {
         $this->loadCourierClasses();
         $this->loadFinancialClasses();
         $this->loadFTPClasses();
-        //$this->loadEBAYClasses();
+        $this->loadEBAYClasses();
+        $this->loadShopifyClasses();
 
         $this->beforeAction();
 
@@ -157,6 +156,13 @@ class Controller {
     {
         $this->loadFTPInstances([
             'Bds'
+        ]);
+    }
+
+    public function loadShopifyClasses()
+    {
+        $this->loadShopifyInstances([
+            'BuzzBee'
         ]);
     }
 
@@ -210,6 +216,22 @@ class Controller {
         foreach($locations as $location)
         {
             $class = $location . "FTP";
+            $this->{$class} = new $class($this);
+            $this->{$class}->init();
+        }
+    }
+
+    /**
+     * Load any Shopify instance classes
+     *
+     * @param array $locations
+     */
+    public function loadShopifyInstances(array $locations)
+    {
+        $this->shopify =  new Shopify($this);
+        foreach($locations as $location)
+        {
+            $class = $location . "Shopify";
             $this->{$class} = new $class($this);
             $this->{$class}->init();
         }
