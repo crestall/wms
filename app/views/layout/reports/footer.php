@@ -598,7 +598,7 @@
                         dataTable.init($('table#sad_table'), {
                             "order": [],
                             "columDefs": [
-                                {"type": "numeric", "targets": 0}
+                                {"type": "num", "targets": 0}
                             ]
                         } );
                         $('button#csv_download').click(function(e) {
