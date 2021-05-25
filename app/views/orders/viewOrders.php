@@ -268,53 +268,86 @@
                                 </div>
                             </td>
         				</tr>
-                        <?php if($errors):
-                            $dec = $c + 0.1;
-                            $ondec = $co['order_number'] + 0.1;
-                            $cod = $co['client_order_id']."a";?>
+                        <?php if($errors):?>
                             <tr class="table-warning">
                                 <td class="d-none"><?php echo $c;?></td>
                                 <td class="d-none"><?php echo $co['order_number'];?></td>
                                 <td class="d-none"><?php echo $co['client_order_id'];?></td>
                                 <td class="d-none"></td>
-                                <td class="filterable d-none"><?php echo $ship_to;?></td>
+                                <td class="d-none"><?php echo $ship_to;?></td>
+                                <td class="d-none"><?php echo $address;?></td>
+                                <td class="d-none">
+                                    <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                        <?php foreach($ifo as $i):?>
+                                            <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                        <?php endforeach;?>
+                                    </div>
+                                    <div class="item_total text-right">
+                                        Total Items: <?php echo $item_count;?>
+                                    </div>
+                                </td>
+                                <td class="d-none"><?php echo date('d-m-Y', $co['date_ordered']);?></td>
+            					<td class="d-none"><?php echo $slip_printed; ?></td>
+                                <td class="d-none"><?php echo $package_count;?></td>
                                 <td colspan="13">
                                     <?php echo $co['error_string'];?>
                                     <p><a class="btn btn-outline-fsg" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                 </td>
-                                <?php for($i=1; $i<8; ++$i):?>
+                                <?php for($i=1; $i<3; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
                         <?php endif;?>
-                        <?php if($comments):
-                            $dec = $c + 0.2;
-                            $ondec = $co['order_number'] + 0.2;
-                            $cod = $co['client_order_id']."b";?>
+                        <?php if($comments):?>
                             <tr class="table-info">
                                 <td class="d-none"><?php echo $c;?></td>
                                 <td class="d-none"><?php echo $co['order_number'];?></td>
                                 <td class="d-none"><?php echo $co['client_order_id'];?></td>
                                 <td class="d-none"></td>
-                                <td class="filterable d-none"><?php echo $ship_to;?></td>
+                                <td class="d-none"><?php echo $ship_to;?></td>
+                                <td class="d-none"><?php echo $address;?></td>
+                                <td class="d-none">
+                                    <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                        <?php foreach($ifo as $i):?>
+                                            <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                        <?php endforeach;?>
+                                    </div>
+                                    <div class="item_total text-right">
+                                        Total Items: <?php echo $item_count;?>
+                                    </div>
+                                </td>
+                                <td class="d-none"><?php echo date('d-m-Y', $co['date_ordered']);?></td>
+            					<td class="d-none"><?php echo $slip_printed; ?></td>
+                                <td class="d-none"><?php echo $package_count;?></td>
                                 <td colspan="13"><?php echo $co['3pl_comments'];?></td>
-                                <?php for($i=1; $i<8; ++$i):?>
+                                <?php for($i=1; $i<3; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
                         <?php endif;?>
-                        <?php if($pick_notice):
-                            $dec = $c + 0.3;
-                            $ondec = $co['order_number'] + 0.3;
-                            $cod = $co['client_order_id']."c";?>
+                        <?php if($pick_notice):?>
                             <tr class="table-info">
                                 <td class="filterable d-none"><?php echo $c;?></td>
                                 <td class="filterable d-none"><?php echo $co['order_number'];?></td>
                                 <td class="filterable d-none"><?php echo $co['client_order_id'];?></td>
                                 <td class="d-none"></td>
-                                <td class="filterable d-none"><?php echo $ship_to;?></td>
-                                <td colspan="8"><?php echo $co['pick_notices'];?></td>
-                                <?php for($i=1; $i<10; ++$i):?>
+                                <td class="d-none"><?php echo $ship_to;?></td>
+                                <td class="d-none"><?php echo $address;?></td>
+                                <td class="d-none">
+                                    <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                        <?php foreach($ifo as $i):?>
+                                            <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                        <?php endforeach;?>
+                                    </div>
+                                    <div class="item_total text-right">
+                                        Total Items: <?php echo $item_count;?>
+                                    </div>
+                                </td>
+                                <td class="d-none"><?php echo date('d-m-Y', $co['date_ordered']);?></td>
+            					<td class="d-none"><?php echo $slip_printed; ?></td>
+                                <td class="d-none"><?php echo $package_count;?></td>
+                                <td colspan="13"><?php echo $co['pick_notices'];?></td>
+                                <?php for($i=1; $i<3; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
