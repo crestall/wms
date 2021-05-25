@@ -596,7 +596,10 @@
                             }
                         });
                         dataTable.init($('table#sad_table'), {
-                            "order": []
+                            "order": [],
+                            "columDefs": [
+                                {"type": "numeric", "targets": 0}
+                            ]
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
