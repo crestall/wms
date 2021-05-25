@@ -218,7 +218,7 @@
         	        	<tr id="tr_<?php echo $co['id'];?>" <?php echo $row_class;?> >
                             <td class="number" data-label="Count"><?php echo $c;?></td>
         	            	<td class="filterable number" data-label="Order Number">
-                                <a href="<?php echo $link;?>"><?php echo str_pad($co['order_number'],8,'0',STR_PAD_LEFT);?></a> 
+                                <a href="<?php echo $link;?>"><?php echo str_pad($co['order_number'],8,'0',STR_PAD_LEFT);?></a>
                             </td>
                             <td class="filterable number" data-label="Client Order Number"><?php echo $co['client_order_id'];?></td>
         					<td data-label="Client Name"><?php echo $client_name;?></td>
@@ -269,34 +269,40 @@
                             </td>
         				</tr>
                         <?php if($errors):
-                            $dec = $c + 0.1; ?>
+                            $dec = $c + 0.1;
+                            $ondec = $co['order_number'] + 0.1; ?>
                             <tr class="table-warning">
                                 <td class="d-none"><?php echo $dec;?></td>
+                                <td class="d-none"><?php echo $ondec;?></td>
                                 <td colspan="13">
                                     <?php echo $co['error_string'];?>
                                     <p><a class="btn btn-outline-fsg" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                 </td>
-                                <?php for($i=1; $i<12; ++$i):?>
+                                <?php for($i=1; $i<11; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
                         <?php endif;?>
                         <?php if($comments):
-                            $dec = $c + 0.2; ?>
+                            $dec = $c + 0.2;
+                            $ondec = $co['order_number'] + 0.2; ?>
                             <tr class="table-info">
                                 <td class="d-none"><?php echo $dec;?></td>
+                                <td class="d-none"><?php echo $ondec;?></td>
                                 <td colspan="13"><?php echo $co['3pl_comments'];?></td>
-                                <?php for($i=1; $i<12; ++$i):?>
+                                <?php for($i=1; $i<11; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
                         <?php endif;?>
                         <?php if($pick_notice):
-                            $dec = $c + 0.3; ?>
+                            $dec = $c + 0.3;
+                            $ondec = $co['order_number'] + 0.3; ?>
                             <tr class="table-info">
                                 <td class="d-none"><?php echo $dec;?></td>
+                                <td class="d-none"><?php echo $ondec;?></td>
                                 <td colspan="13"><?php echo $co['pick_notices'];?></td>
-                                <?php for($i=1; $i<12; ++$i):?>
+                                <?php for($i=1; $i<11; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
