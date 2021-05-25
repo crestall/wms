@@ -985,9 +985,6 @@
                         actions.common['select-all']();
                         actions.common['cancel-orders']();
                         actions.common['adjust-allocations']();
-                        dataTable.init($('table#client_orders_table'), {
-                            "order": []
-                        } );
                         $('#client_selector, #courier_selector, #state_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
                             var href = '/orders/view-orders';
@@ -1019,21 +1016,20 @@
                             	    $(this).val(c).change();
                             });
                         });
-                        /*
+                        /* */
                         dataTable.init($('table#client_orders_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [0,3,5,7,8,9,10,11,12,13] }
+                                { "orderable": false, "targets": [3,6,10,11,12] }
                             ],
                             "order": []
                         } );
-                        */
-
+                        /*
                         $('table#client_orders_table').filterTable({
                             inputSelector: '#table_searcher',
                             minRows: 2,
                             ignoreColumns: [3,7,8,9,10,11,12]
                         });
-
+                        */
                         //$('table#client_orders_table').stickyTableHeaders();
 
                         $('a.consolidate-orders').click(function(e){
