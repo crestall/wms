@@ -273,7 +273,7 @@
                             $ondec = $co['order_number'] + 0.1;
                             $cod = $co['client_order_id']."a";?>
                             <tr class="table-warning">
-                                <td class="d-none"><?php echo $dec;?></td>
+                                <td class="d-none"><?php echo $c;?></td>
                                 <td class="d-none"><?php echo $ondec;?></td>
                                 <td class="d-none"><?php echo $cod;?></td>
                                 <td class="d-none"></td>
@@ -292,7 +292,7 @@
                             $ondec = $co['order_number'] + 0.2;
                             $cod = $co['client_order_id']."b";?>
                             <tr class="table-info">
-                                <td class="d-none"><?php echo $dec;?></td>
+                                <td class="d-none"><?php echo $c;?></td>
                                 <td class="d-none"><?php echo $ondec;?></td>
                                 <td class="d-none"><?php echo $cod;?></td>
                                 <td class="d-none"></td>
@@ -308,7 +308,7 @@
                             $ondec = $co['order_number'] + 0.3;
                             $cod = $co['client_order_id']."c";?>
                             <tr class="table-info">
-                                <td class="d-none"><?php echo $dec;?></td>
+                                <td class="d-none"><?php echo $c;?></td>
                                 <td class="d-none"><?php echo $ondec;?></td>
                                 <td class="d-none"><?php echo $cod;?></td>
                                 <td class="d-none"></td>
