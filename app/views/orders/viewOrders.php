@@ -276,11 +276,13 @@
                                 <td class="d-none"><?php echo $dec;?></td>
                                 <td class="d-none"><?php echo $ondec;?></td>
                                 <td class="d-none"><?php echo $cod;?></td>
+                                <td class="d-none"></td>
+                                <td class="filterable d-none"><?php echo $ship_to;?></td>
                                 <td colspan="13">
                                     <?php echo $co['error_string'];?>
                                     <p><a class="btn btn-outline-fsg" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                 </td>
-                                <?php for($i=1; $i<10; ++$i):?>
+                                <?php for($i=1; $i<8; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
@@ -293,8 +295,10 @@
                                 <td class="d-none"><?php echo $dec;?></td>
                                 <td class="d-none"><?php echo $ondec;?></td>
                                 <td class="d-none"><?php echo $cod;?></td>
+                                <td class="d-none"></td>
+                                <td class="filterable d-none"><?php echo $ship_to;?></td>
                                 <td colspan="13"><?php echo $co['3pl_comments'];?></td>
-                                <?php for($i=1; $i<10; ++$i):?>
+                                <?php for($i=1; $i<8; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
@@ -307,7 +311,9 @@
                                 <td class="d-none"><?php echo $dec;?></td>
                                 <td class="d-none"><?php echo $ondec;?></td>
                                 <td class="d-none"><?php echo $cod;?></td>
-                                <td colspan="13"><?php echo $co['pick_notices'];?></td>
+                                <td class="d-none"></td>
+                                <td class="filterable d-none"><?php echo $ship_to;?></td>
+                                <td colspan="8"><?php echo $co['pick_notices'];?></td>
                                 <?php for($i=1; $i<10; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
