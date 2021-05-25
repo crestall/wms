@@ -274,7 +274,7 @@
                                     <?php echo $co['error_string'];?>
                                     <p><a class="btn btn-outline-fsg" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                 </td>
-                                <?php for($i=1; $i<13; ++$i;):?>
+                                <?php for($i=1; $i<13; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
@@ -282,7 +282,7 @@
                         <?php if($comments):?>
                             <tr class="table-info">
                                 <td colspan="13"><?php echo $co['3pl_comments'];?></td>
-                                <?php for($i=1; $i<13; ++$i;):?>
+                                <?php for($i=1; $i<13; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
@@ -290,7 +290,7 @@
                         <?php if($pick_notice):?>
                             <tr class="table-info">
                                 <td colspan="13"><?php echo $co['pick_notices'];?></td>
-                                <?php for($i=1; $i<13; ++$i;):?>
+                                <?php for($i=1; $i<13; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
