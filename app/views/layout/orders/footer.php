@@ -1021,7 +1021,9 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [3,6,10,11,12] }
                             ],
-                            "order": []
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6">><"row">t>'
                         } );
                         /*
                         $('table#client_orders_table').filterTable({
