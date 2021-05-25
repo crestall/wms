@@ -132,6 +132,7 @@ class JobsController extends Controller
         $status_ids = isset($this->request->params['args']['status_ids'])? explode(',',$this->request->params['args']['status_ids']): array();
         if($completed || $cancelled)
             $status_ids = array();
+        /*
         $jobs = $this->productionjob->getJobsForDisplay(array(
             'completed'         =>  $completed,
             'cancelled'         =>  $cancelled,
@@ -140,6 +141,7 @@ class JobsController extends Controller
             'salesrep_ids'      =>  (array)$salesrep_ids,
             'status_ids'        =>  (array)$status_ids,
         ));
+        */
         //render the page
         if($completed == 1)
             $filter = "Completed";
@@ -151,7 +153,6 @@ class JobsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/viewJobs.php', [
             'page_title'        =>  $head,
             'pht'               =>  ": Production Jobs",
-            'jobs'              =>  $jobs,
             'completed'         =>  $completed,
             'cancelled'         =>  $cancelled,
             'filter'            =>  $filter,

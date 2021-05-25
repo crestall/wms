@@ -36,10 +36,10 @@
                     <table width="100%" class="table-striped table-hover" id="view_items_table">
                         <thead>
                             <tr>
-                                <th style="max-width: 150px;">Name</th>
-                                <th>SKU</th>
-                                <th>Client Product ID</th>
-                                <th>Barcode</th>
+                                <th data-priroity="1" style="max-width: 150px;">Name</th>
+                                <th data-priroity="1">SKU</th>
+                                <th data-priroity="2">Client Product ID</th>
+                                <th data-priroity="2">Barcode</th>
                                 <th data-priority="10002">Supplier</th>
                                 <th data-priority="10001">Dimensions</th>
                                 <th>Weight</th>
@@ -47,6 +47,7 @@
                                 <th>Boxed Item</th>
                                 <th>Dangerous Goods</th>
                                 <th>Print On Demand</th>
+                                <th data-priroity="3">Collection Item</th>
                             </tr>
                         </thead>
                     </table>

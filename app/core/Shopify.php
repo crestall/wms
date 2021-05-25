@@ -12,11 +12,8 @@ use PHPShopify\Exception\CurlException;
 
 class Shopify{
 
-    private $output;
-    private $shopify;
-    private $pbaoitems;
-    private $ua;
-    private $return_array = array(
+    protected $output;
+    protected $return_array = array(
         'import_count'          => 0,
         'imported_orders'       => array(),
         'error_orders'          => array(),
@@ -26,6 +23,10 @@ class Shopify{
         'error_string'          => '',
         'import_error_string'   => ''
     );
+    protected $ua;
+
+    private $shopify;
+    private $pbaoitems;
 
     public $controller;
 
@@ -33,6 +34,8 @@ class Shopify{
     {
         $this->controller = $controller;
     }
+
+    public function init(){}
 
     public function fulfillAnOrder()
     {
@@ -197,7 +200,7 @@ class Shopify{
     }
 
 
-    private function procPBAOrders($collected_orders)
+    protected function procOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
         //echo "<pre>",print_r($collected_orders),"</pre>";die();
@@ -207,8 +210,13 @@ class Shopify{
         {
             $allocations = array();
             $orders_items = array();
-            foreach($collected_orders as $o)
+            foreach($collected_orders as $i => $o)
             {
+                /*if(isset($o['shipping_address']))
+                    echo "<pre>",print_r($o['shipping_address']),"</pre>";
+                else
+                    echo "No shipping address for order $i : <pre>",print_r($o),"</pre>";
+                continue; */
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
@@ -369,8 +377,9 @@ class Shopify{
                 }
             }//endforeach order
             //echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
-            $this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            //$this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
             //echo "ORDERS ITEMS<pre>",print_r($this->pbaoitems),"</pre>";die();
+            $this->output .= "===========================   Gonna send em back  =========================".PHP_EOL;
             return $orders;
         }//end if count orders
         else

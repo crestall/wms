@@ -88,6 +88,13 @@
                 'formatter' => function( $d, $row ){
                     return ($d > 0)? "Yes":"No";
                 }
+            ),
+            array(
+                'db' => 'collection',
+                'dt' => '11',
+                'formatter' => function( $d, $row ){
+                    return ($d > 0)? "Yes":"No";
+                }
             )
         );
         // Build the SQL query string from the request
@@ -148,7 +155,7 @@
         return "SELECT
                     id, name, sku, client_product_id, barcode, supplier, image,
                     CONCAT(width,'X',depth,'X',height) AS dimensions, weight,
-                    palletized, boxed_item,is_dangerous_good, is_pod
+                    palletized, boxed_item,is_dangerous_good, is_pod, collection
                 FROM items WHERE `client_id` = ".self::$client_id." AND `active` = ".self::$active;
     }
 

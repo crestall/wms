@@ -734,7 +734,7 @@ var autoCompleter = {
                 var data = {
                     streetAddress: req.term,
                     formatCase: true,
-                    apiKey: "b445fee0-4ffa-4ad4-84f3-050d0a170d10"
+                    apiKey: "6a910634-a492-4d51-bf32-0eb2bbecf1b9"
                 }
                 $.ajax({
                     url: "https://mappify.io/api/rpc/address/autocomplete",
