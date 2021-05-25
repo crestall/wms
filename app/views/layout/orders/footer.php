@@ -1019,7 +1019,8 @@
                         /* */
                         var dt_options = {
                             "columnDefs": [
-                                { "orderable": false, "targets": [3,6,10,11,12] }
+                                { "orderable": false, "targets": [3,6,10,11,12] },
+                                { "searchable": false, "targets": [3,10,11,12]}
                             ],
                             "paging": false,
                             "order": [],
