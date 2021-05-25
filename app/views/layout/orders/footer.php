@@ -1017,22 +1017,17 @@
                             });
                         });
                         /* */
-                        dataTable.init($('table#client_orders_table'), {
+                        var dt_options = {
                             "columnDefs": [
                                 { "orderable": false, "targets": [3,6,10,11,12] }
                             ],
                             "paging": false,
                             "order": [],
-                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6">><"row">t>'
+                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6">><"row">t>'                        }
+                        var table = dataTable.init($('table#client_orders_table'), dt_options );
+                        $('#table_searcher').on( 'keyup', function () {
+                            table.search( this.value ).draw();
                         } );
-                        /*
-                        $('table#client_orders_table').filterTable({
-                            inputSelector: '#table_searcher',
-                            minRows: 2,
-                            ignoreColumns: [3,7,8,9,10,11,12]
-                        });
-                        */
-                        //$('table#client_orders_table').stickyTableHeaders();
 
                         $('a.consolidate-orders').click(function(e){
                             e.preventDefault();
