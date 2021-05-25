@@ -298,64 +298,27 @@
                         }
                         var paging = $('input#completed').val() == 1;
                         var options = {
-                            "processing": true,
-                            "mark": true,
-                            "language": {
-                                processing: 'Fetching results and updating the display.....'
-                            },
-                            "serverSide": true,
-                            "deferRender": true,
                             "paging":   paging,
-                            "columnDefs": [
-                                { "type": 'non-empty-string', "targets": [0]},
-                                { "orderDataType": "dom-select", "targets": [0]},
-                                { "orderable": false, "targets": [3,4,8,9] },
-                                { "createdCell": function(td, cellData, rowData, row, col){
-                                        //console.log("rowData.DT_StatusColour: " + rowData.DT_StatusColour);
-                                        if(rowData.DT_StatusColour)
-                                        {
-                                                $(td).css('backgroundColor', rowData.DT_StatusColour);
-                                        }
-                                        if(rowData.DT_StatusTextColour)
-                                        {
-                                                $(td).css('color', rowData.DT_StatusTextColour);
-                                        }
-                                    },
-                                    "targets": [6]
+                            //No initial sort,
+                            "order": [],
+                            //search highlighting
+                            mark: true,
+                            //but blanks on the bottom when sorting
+                            columnDefs: [
+                                {
+                                    type: 'non-empty-string',
+                                    targets: 0 //priority is the second column
                                 },
-                                { "createdCell": function(td, cellData, rowData, row, col){
-                                        //console.log("cellData: "+cellData);
-                                        if(rowData.DT_DueDateColour > 0)
-                                        {
-                                                var d = new Date();
-                                                var n = d.getTime()/1000;
-                                                //console.log("n: "+n);
-                                                if( (rowData.DT_DueDateColour < n) )
-                                                        $(td).css({'backgroundColor':'#222', 'color':'#fff'});
-                                                else if( ( (rowData.DT_DueDateColour - n) < (24 * 60 * 60) ) )
-                                                        $(td).css({'backgroundColor':'#FF0000', 'color':'#fff'});
-                                                else if( ( (rowData.DT_DueDateColour - n) < (2 * 24 * 60 * 60) ) )
-                                                        $(td).css({'backgroundColor':'#e6e600'});
-                                                else
-                                                        $(td).css({'backgroundColor':'#66ff66'});
-                                        }
-                                    },
-                                    "targets": [7]
+                                {
+                                    orderDataType: "dom-select",
+                                    targets: 0
+                                },
+                                {
+                                    orderable: false,
+                                    targets: "no-sort"
                                 }
                             ],
-                            "ajax": {
-                                "url": "/ajaxfunctions/dataTablesViewProductionJobs",
-                                "data": function( d ){
-                                    d.userRole = $("#user_role").val();
-                                    d.customerIds = $("#customer_ids").val();
-                                    d.finisherIds = $("#finisher_ids").val();
-                                    d.salesrepIds = $("#salesrep_ids").val();
-                                    d.statusIds = $("#status_ids").val();
-                                    d.completed = $("#completed").val();
-                                    d.cancelled = $("#cancelled").val();
-                                }
-                            },
-                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">rptp>'
+                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6"l>><"row">tp>',
                         };
                         var table = dataTable.init($('table#production_jobs_table'), options );
                         table.on( 'draw', function () {
