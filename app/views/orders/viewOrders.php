@@ -268,29 +268,35 @@
                                 </div>
                             </td>
         				</tr>
-                        <?php if($errors):?>
+                        <?php if($errors):
+                            $dec = $c + 0.1; ?>
                             <tr class="table-warning">
+                                <td class="d-none"><?php echo $dec;?></td>
                                 <td colspan="13">
                                     <?php echo $co['error_string'];?>
                                     <p><a class="btn btn-outline-fsg" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                 </td>
-                                <?php for($i=1; $i<13; ++$i):?>
+                                <?php for($i=1; $i<12; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
                         <?php endif;?>
-                        <?php if($comments):?>
+                        <?php if($comments):
+                            $dec = $c + 0.2; ?>
                             <tr class="table-info">
+                                <td class="d-none"><?php echo $dec;?></td>
                                 <td colspan="13"><?php echo $co['3pl_comments'];?></td>
-                                <?php for($i=1; $i<13; ++$i):?>
+                                <?php for($i=1; $i<12; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
                         <?php endif;?>
-                        <?php if($pick_notice):?>
+                        <?php if($pick_notice):
+                            $dec = $c + 0.3; ?>
                             <tr class="table-info">
+                                <td class="d-none"><?php echo $dec;?></td>
                                 <td colspan="13"><?php echo $co['pick_notices'];?></td>
-                                <?php for($i=1; $i<13; ++$i):?>
+                                <?php for($i=1; $i<12; ++$i):?>
                                     <td class="d-none"></td>
                                 <?php endfor;?>
                             </tr>
