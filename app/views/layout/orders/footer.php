@@ -985,53 +985,6 @@
                         actions.common['select-all']();
                         actions.common['cancel-orders']();
                         actions.common['adjust-allocations']();
-                        $('button.remove-from-runsheet').click(function(e){
-                            var order_id = $(this).data('orderid');
-                            var runsheet_id = $(this).data('runsheetid');
-                            swal({
-                                    title: "Really remove this order from the runsheet?",
-                                    text: "This cannot be undone",
-                                    icon: "warning",
-                                    buttons: true,
-                                    dangerMode: true
-                                }).then( function(removeFromSheet) {
-                                    if(removeFromSheet)
-                                    {
-                                        //console.log('job id: '+job_id);
-                                        //console.log('runsheet id: '+runsheet_id);
-                                        $.ajax({
-                                            url: '/ajaxfunctions/remove-order-from-runsheet',
-                                            method: 'post',
-                                            data: {
-                                                order_id: order_id,
-                                                runsheet_id: runsheet_id
-                                            },
-                                            dataType: 'json',
-                                            beforeSend: function(){
-                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing From Runsheet...</h1></div>' });
-                                            },
-                                            success: function(d){
-                                                if(d.error)
-                                                {
-                                                    $.unblockUI();
-                                                    alert('error');
-                                                }
-                                                else
-                                                {
-                                                    location.reload(true);
-                                                    //window.location.href = "http://stackoverflow.com";
-                                                }
-                                            },
-                                            error: function(jqXHR, textStatus, errorThrown){
-                                                $.unblockUI();
-                                                document.open();
-                                                document.write(jqXHR.responseText);
-                                                document.close();
-                                            }
-                                        });
-                                    }
-                                });
-                        });
                         $('#client_selector, #courier_selector, #state_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
                             var href = '/orders/view-orders';
@@ -1063,22 +1016,21 @@
                             	    $(this).val(c).change();
                             });
                         });
-                        /*
-                        dataTable.init($('table#client_orders_table'), {
+                        /* */
+                        var dt_options = {
                             "columnDefs": [
-                                { "orderable": false, "targets": [0,3,5,7,8,9,10,11,12,13] }
+                                { "orderable": false, "targets": [3,6,10,11,12] },
+                                { "searchable": false, "targets": [3,10,11,12]}
                             ],
-                            "order": []
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#client_orders_table'), dt_options );
+                        $('#table_searcher').on( 'keyup', function () {
+                            table.search( this.value ).draw();
                         } );
-                        */
-
-                        $('table#client_orders_table').filterTable({
-                            inputSelector: '#table_searcher',
-                            minRows: 2,
-                            ignoreColumns: [3,7,8,9,10,11,12]
-                        });
-
-                        //$('table#client_orders_table').stickyTableHeaders();
 
                         $('a.consolidate-orders').click(function(e){
                             e.preventDefault();

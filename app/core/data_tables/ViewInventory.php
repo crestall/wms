@@ -97,7 +97,6 @@
         $limit = self::limit( $request );
         $order = self::order( $request, self::$columns);
         $having = self::havingFilter( $request, self::$columns );
-
         $query = self::createQuery();
         $query .= " GROUP BY a.item_id ";
         // Total Data Set length
