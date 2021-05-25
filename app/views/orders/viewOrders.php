@@ -274,8 +274,8 @@
                             $cod = $co['client_order_id']."a";?>
                             <tr class="table-warning">
                                 <td class="d-none"><?php echo $c;?></td>
-                                <td class="d-none"><?php echo $ondec;?></td>
-                                <td class="d-none"><?php echo $cod;?></td>
+                                <td class="d-none"><?php echo $co['order_number'];?></td>
+                                <td class="d-none"><?php echo $co['client_order_id'];?></td>
                                 <td class="d-none"></td>
                                 <td class="filterable d-none"><?php echo $ship_to;?></td>
                                 <td colspan="13">
@@ -293,8 +293,8 @@
                             $cod = $co['client_order_id']."b";?>
                             <tr class="table-info">
                                 <td class="d-none"><?php echo $c;?></td>
-                                <td class="d-none"><?php echo $ondec;?></td>
-                                <td class="d-none"><?php echo $cod;?></td>
+                                <td class="d-none"><?php echo $co['order_number'];?></td>
+                                <td class="d-none"><?php echo $co['client_order_id'];?></td>
                                 <td class="d-none"></td>
                                 <td class="filterable d-none"><?php echo $ship_to;?></td>
                                 <td colspan="13"><?php echo $co['3pl_comments'];?></td>
@@ -308,9 +308,9 @@
                             $ondec = $co['order_number'] + 0.3;
                             $cod = $co['client_order_id']."c";?>
                             <tr class="table-info">
-                                <td class="d-none"><?php echo $c;?></td>
-                                <td class="d-none"><?php echo $ondec;?></td>
-                                <td class="d-none"><?php echo $cod;?></td>
+                                <td class="filterable d-none"><?php echo $c;?></td>
+                                <td class="filterable d-none"><?php echo $co['order_number'];?></td>
+                                <td class="filterable d-none"><?php echo $co['client_order_id'];?></td>
                                 <td class="d-none"></td>
                                 <td class="filterable d-none"><?php echo $ship_to;?></td>
                                 <td colspan="8"><?php echo $co['pick_notices'];?></td>
