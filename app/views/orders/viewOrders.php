@@ -115,7 +115,7 @@
         </div>
     </div>
     <?php if(count($orders)):?>
-    <div class="row">
+    <div class="row" id="table_holder" style="display:none">
         <div class="col-xl-12">
             <table class="table-striped table-hover" id="client_orders_table">
                 <thead>

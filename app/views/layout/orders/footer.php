@@ -985,53 +985,9 @@
                         actions.common['select-all']();
                         actions.common['cancel-orders']();
                         actions.common['adjust-allocations']();
-                        $('button.remove-from-runsheet').click(function(e){
-                            var order_id = $(this).data('orderid');
-                            var runsheet_id = $(this).data('runsheetid');
-                            swal({
-                                    title: "Really remove this order from the runsheet?",
-                                    text: "This cannot be undone",
-                                    icon: "warning",
-                                    buttons: true,
-                                    dangerMode: true
-                                }).then( function(removeFromSheet) {
-                                    if(removeFromSheet)
-                                    {
-                                        //console.log('job id: '+job_id);
-                                        //console.log('runsheet id: '+runsheet_id);
-                                        $.ajax({
-                                            url: '/ajaxfunctions/remove-order-from-runsheet',
-                                            method: 'post',
-                                            data: {
-                                                order_id: order_id,
-                                                runsheet_id: runsheet_id
-                                            },
-                                            dataType: 'json',
-                                            beforeSend: function(){
-                                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Removing From Runsheet...</h1></div>' });
-                                            },
-                                            success: function(d){
-                                                if(d.error)
-                                                {
-                                                    $.unblockUI();
-                                                    alert('error');
-                                                }
-                                                else
-                                                {
-                                                    location.reload(true);
-                                                    //window.location.href = "http://stackoverflow.com";
-                                                }
-                                            },
-                                            error: function(jqXHR, textStatus, errorThrown){
-                                                $.unblockUI();
-                                                document.open();
-                                                document.write(jqXHR.responseText);
-                                                document.close();
-                                            }
-                                        });
-                                    }
-                                });
-                        });
+                        dataTable.init($('table#client_orders_table'), {
+                            "order": []
+                        } );
                         $('#client_selector, #courier_selector, #state_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
                             var href = '/orders/view-orders';
