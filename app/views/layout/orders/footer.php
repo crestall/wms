@@ -1024,7 +1024,7 @@
                             ],
                             "paging": false,
                             "order": [],
-                            "dom" : '<<"row"<"col-lg-4"i><"col-lg-6">><"row">t>',
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
                             "mark": true
                         }
                         var table = dataTable.init($('table#client_orders_table'), dt_options );
