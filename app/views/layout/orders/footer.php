@@ -1019,10 +1019,7 @@
                         /* */
                        jQuery.extend(jQuery.fn.dataTableExt.oSort, {
                             "extract-date-pre": function(value) {
-                                console.log("value: "+value) ;
-                                return;
-                                var date = $(value, 'span')[0].innerHTML;
-                                date = date.split('/');
+                                date = value.split('-');
                                 return Date.parse(date[1] + '/' + date[0] + '/' + date[2])
                             },
                             "extract-date-asc": function(a, b) {
