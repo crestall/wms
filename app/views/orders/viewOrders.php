@@ -127,10 +127,10 @@
                 <table class="table-striped table-hover" id="client_orders_table">
                     <thead>
             	    	<tr>
-                            <th data-priority="1002"></th>
+                            <th data-priority="10002"></th>
             	        	<th data-priority="1">Order No</th>
                             <th>Client Order<br/>Number</th>
-            				<th data-priority="1001">Client</th>
+            				<th data-priority="10001">Client</th>
             				<th>Deliver To</th>
             				<th>Items</th>
             				<th>Date<br/>Ordered</th>
