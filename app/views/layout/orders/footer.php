@@ -2124,7 +2124,7 @@
                         });
                         var dt_options = {
                             "columnDefs": [
-                                { "orderable": false, "targets": [1,6] },
+                                { "orderable": false, "targets": [1,5,6] },
                                 { "searchable": false, "targets": [1,6]},
                                 { "type": 'extract-date', "targets" : [3]}
                             ],
