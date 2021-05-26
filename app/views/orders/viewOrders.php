@@ -131,15 +131,15 @@
             	        	<th data-priority="1">Order No</th>
                             <th>Client Order<br/>Number</th>
             				<th data-priority="10001">Client</th>
-            				<th>Deliver To</th>
+            				<th data-priority="3">Deliver To</th>
             				<th>Items</th>
             				<th>Date<br/>Ordered</th>
             				<th>Slip<br/>Printed</th>
                             <th>Packages<br/>Entered</th>
                             <?php if($user_role == "admin" || $user_role == "super admin"):?>
-            				    <th nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
+            				    <th data-priority="1" nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
                             <?php elseif($user_role == "warehouse"):?>
-                                <th>Courier</th>
+                                <th data-priority="1">Courier</th>
                             <?php endif;?>
                             <th data-priority="2"></th>
                             <th nowrap data-priority="1">
