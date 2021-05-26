@@ -278,8 +278,7 @@
                                     <td class="d-none"><?php echo $co['order_number'];?></td>
                                     <td class="d-none"><?php echo $co['client_order_id'];?></td>
                                     <td class="d-none"></td>
-                                    <td class="d-none"><?php echo $ship_to;?></td>
-                                    <td class="d-none"><?php echo $address;?></td>
+                                    <td class="d-none"><p><?php echo $ship_to;?></p><p><?php echo $address;?></p></td>
                                     <td class="d-none">
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                             <?php foreach($ifo as $i):?>
@@ -293,7 +292,7 @@
                                     <td class="d-none"><?php echo date('d-m-Y', $co['date_ordered']);?></td>
                 					<td class="d-none"><?php echo $slip_printed; ?></td>
                                     <td class="d-none"><?php echo $package_count;?></td>
-                                    <td colspan="13">
+                                    <td colspan="12">
                                         <?php echo $co['error_string'];?>
                                         <p><a class="btn btn-outline-fsg" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                     </td>
@@ -308,8 +307,7 @@
                                     <td class="d-none"><?php echo $co['order_number'];?></td>
                                     <td class="d-none"><?php echo $co['client_order_id'];?></td>
                                     <td class="d-none"></td>
-                                    <td class="d-none"><?php echo $ship_to;?></td>
-                                    <td class="d-none"><?php echo $address;?></td>
+                                    <td class="d-none"><p><?php echo $ship_to;?></p><p><?php echo $address;?></p></td>
                                     <td class="d-none">
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                             <?php foreach($ifo as $i):?>
@@ -323,7 +321,7 @@
                                     <td class="d-none"><?php echo date('d-m-Y', $co['date_ordered']);?></td>
                 					<td class="d-none"><?php echo $slip_printed; ?></td>
                                     <td class="d-none"><?php echo $package_count;?></td>
-                                    <td colspan="13"><?php echo $co['3pl_comments'];?></td>
+                                    <td colspan="12"><?php echo $co['3pl_comments'];?></td>
                                     <?php for($i=1; $i<3; ++$i):?>
                                         <td class="d-none"></td>
                                     <?php endfor;?>
@@ -335,8 +333,7 @@
                                     <td class="filterable d-none"><?php echo $co['order_number'];?></td>
                                     <td class="filterable d-none"><?php echo $co['client_order_id'];?></td>
                                     <td class="d-none"></td>
-                                    <td class="d-none"><?php echo $ship_to;?></td>
-                                    <td class="d-none"><?php echo $address;?></td>
+                                    <td class="d-none"><p><?php echo $ship_to;?></p><p><?php echo $address;?></p></td>
                                     <td class="d-none">
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                             <?php foreach($ifo as $i):?>
@@ -350,7 +347,7 @@
                                     <td class="d-none"><?php echo date('d-m-Y', $co['date_ordered']);?></td>
                 					<td class="d-none"><?php echo $slip_printed; ?></td>
                                     <td class="d-none"><?php echo $package_count;?></td>
-                                    <td colspan="13"><?php echo $co['pick_notices'];?></td>
+                                    <td colspan="12"><?php echo $co['pick_notices'];?></td>
                                     <?php for($i=1; $i<3; ++$i):?>
                                         <td class="d-none"></td>
                                     <?php endfor;?>
