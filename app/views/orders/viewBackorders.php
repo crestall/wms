@@ -29,7 +29,14 @@
             </div>
         </div>
         <?php if(count($orders)):?>
-            <div class="row">
+            <div id="waiting" class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Drawing Table..</h2>
+                    <p>May take a few moments</p>
+                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                </div>
+            </div>
+            <div class="row" id="table_holder" style="display:none">
                 <?php //echo "<pre>",print_r($orders),"</pre>";?>
                 <div class="col-xl-12">
                     <table class="table-striped table-hover" id="back_orders_table">
