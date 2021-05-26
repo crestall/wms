@@ -228,7 +228,9 @@
                                 </td>
                                 <td class="filterable number" data-label="Client Order Number"><?php echo $co['client_order_id'];?></td>
             					<td data-label="Client Name"><?php echo $client_name;?></td>
-            	                <td class="filterable" data-label="Ship To"><p><?php echo $ship_to;?></p><p><?php echo $address;?></p></td>
+            	                <td class="filterable" data-label="Ship To">
+            	                    <p class='font-weight-bold'><?php echo $ship_to;?></p>
+                                    <p><?php echo $address;?></p></td>
                                 <td data-label="Items">
                                     <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                         <?php foreach($ifo as $i):?>
