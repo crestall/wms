@@ -42,13 +42,13 @@
                     <table class="table-striped table-hover" id="back_orders_table">
                         <thead>
                             <tr>
-                                <th>WMS Number</th>
-                                <th>Client</th>
-                                <th>Client Order Number</th>
-                                <th>Date Ordered</th>
-                                <th>Ship To</th>
-                                <th>Backordered Items</th>
-                                <th></th>
+                                <th data-priority="2">WMS Number</th>
+                                <th data-priority="10002">Client</th>
+                                <th data-priority="1">Client Order Number</th>
+                                <th data-priority="10001">Date Ordered</th>
+                                <th data-priority="1">Ship To</th>
+                                <th data-priority="2">Backordered Items</th>
+                                <th data-priority="1"></th>
                             </tr>
                         </thead>
                         <tbody>
