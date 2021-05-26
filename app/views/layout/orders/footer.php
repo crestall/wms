@@ -1017,10 +1017,23 @@
                             });
                         });
                         /* */
+                       jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+                        "extract-date-pre": function(value) {
+                            var date = $(value, 'span')[0].innerHTML;
+                            date = date.split('/');
+                            return Date.parse(date[1] + '/' + date[0] + '/' + date[2])
+                        },
+                        "extract-date-asc": function(a, b) {
+                            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+                        },
+                        "extract-date-desc": function(a, b) {
+                            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+                        });
                         var dt_options = {
                             "columnDefs": [
                                 { "orderable": false, "targets": [3,5,9,10,11] },
-                                { "searchable": false, "targets": [3,9,10,11]}
+                                { "searchable": false, "targets": [3,9,10,11]},
+                                { "type": 'extract-date', "targets" : [6]}
                             ],
                             "paging": false,
                             "order": [],
