@@ -127,12 +127,11 @@
                 <table class="table-striped table-hover" id="client_orders_table">
                     <thead>
             	    	<tr>
-                            <th></th>
-            	        	<th>Order No</th>
+                            <th data-priority="1002"></th>
+            	        	<th data-priority="1">Order No</th>
                             <th>Client Order<br/>Number</th>
-            				<th>Client</th>
+            				<th data-priority="1001">Client</th>
             				<th>Deliver To</th>
-            				<th>Delivery<br/>Address</th>
             				<th>Items</th>
             				<th>Date<br/>Ordered</th>
             				<th>Slip<br/>Printed</th>
@@ -142,8 +141,8 @@
                             <?php elseif($user_role == "warehouse"):?>
                                 <th>Courier</th>
                             <?php endif;?>
-                            <th></th>
-                            <th nowrap>
+                            <th data-priority="2"></th>
+                            <th nowrap data-priority="1">
                                 Select
                                 <div class="checkbox checkbox-default">
                                     <input id="select_all" class="styled" type="checkbox">
@@ -229,9 +228,7 @@
                                 </td>
                                 <td class="filterable number" data-label="Client Order Number"><?php echo $co['client_order_id'];?></td>
             					<td data-label="Client Name"><?php echo $client_name;?></td>
-            	                <td class="filterable" data-label="Ship To"><?php echo $ship_to;?></td>
-            					<td data-label="Delivery Address" class="filterable"><?php echo $address;?></td>
-            					<!--td data-label="Items" class="number"><?php //echo $item_count;?></td-->
+            	                <td class="filterable" data-label="Ship To"><p><?php echo $ship_to;?></p><p><?php echo $address;?></p></td>
                                 <td data-label="Items">
                                     <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                         <?php foreach($ifo as $i):?>
