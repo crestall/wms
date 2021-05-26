@@ -382,6 +382,7 @@
                         $( "#date_due" ).datepicker({
                             //showButtonPanel: true,
                             //closeText: 'Clear',
+                            constrainInput: false,
                             changeMonth: true,
                             changeYear: true,
                             dateFormat: "dd/mm/yy",
