@@ -329,6 +329,18 @@ var jobDeliveryDestinations = {
 ************/
 var dataTable = {
     init: function(el, options){
+        jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+            "extract-date-pre": function(value) {
+                date = value.split('-');
+                return Date.parse(date[1] + '/' + date[0] + '/' + date[2])
+            },
+            "extract-date-asc": function(a, b) {
+                return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+            },
+            "extract-date-desc": function(a, b) {
+                return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+            }
+        });
         //console.log('init');
         var opts = {
             "initComplete": function( settings, json ) {

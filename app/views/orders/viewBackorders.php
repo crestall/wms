@@ -29,19 +29,26 @@
             </div>
         </div>
         <?php if(count($orders)):?>
-            <div class="row">
+            <div id="waiting" class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Drawing Table..</h2>
+                    <p>May take a few moments</p>
+                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                </div>
+            </div>
+            <div class="row" id="table_holder" style="display:none">
                 <?php //echo "<pre>",print_r($orders),"</pre>";?>
                 <div class="col-xl-12">
                     <table class="table-striped table-hover" id="back_orders_table">
                         <thead>
                             <tr>
-                                <th>WMS Number</th>
-                                <th>Client</th>
-                                <th>Client Order Number</th>
-                                <th>Date Ordered</th>
-                                <th>Ship To</th>
-                                <th>Backordered Items</th>
-                                <th></th>
+                                <th data-priority="2">WMS Number</th>
+                                <th data-priority="10002">Client</th>
+                                <th data-priority="1">Client Order Number</th>
+                                <th data-priority="10001">Date Ordered</th>
+                                <th data-priority="1">Ship To</th>
+                                <th data-priority="2">Backordered Items</th>
+                                <th data-priority="1"></th>
                             </tr>
                         </thead>
                         <tbody>
