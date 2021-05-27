@@ -122,7 +122,7 @@ else
                                 <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                             </div>
                             <div class="row form-group">
-                                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
+                                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Dispatch By Date</label>
                                 <div class="col-md-4">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
