@@ -126,7 +126,7 @@ else
                                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Dispatch By Date</label>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
+                                        <input type="text" class="required form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
                                         <div class="input-group-append">
                                             <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
