@@ -388,22 +388,24 @@
                             dateFormat: "dd/mm/yy",
                             onClose: function(selectedDate){
                                 //console.log('selecteddate: '+ selectedDate);
-                                if(selectedDate == "")
+                                var patt = new RegExp(/\d{2}[-/]\d{2}[-/]\d{4}/);
+                                if( patt.test(selectedDate) )
                                 {
-                                    $('#date_due_value').val('');
-                                    $('#date_due').val('');
+                                    //console.log("true");
+                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2\/$1\/$3") );
+                                    s = d.valueOf()/1000;
+                                    $('#date_due_value').val(s);
                                 }
                                 else
                                 {
-                                    var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
-                                    s = d.valueOf()/1000;
-                                    $('#date_due_value').val(s);
+                                    //console.log("false");
+                                    $('#date_due_value').val('');
                                 }
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_due').focus();
-                        });
+                        }); 
                     },
                     autoComplete: function(){
                         autoCompleter.addressAutoComplete($('#address'));
