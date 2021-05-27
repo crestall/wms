@@ -8,11 +8,12 @@ $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = (empty(Form::value('country')))? "AU" : Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
-$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
+//$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
 
 if( empty(Form::value('date_due')) )
 {
-    $date_due_value = $date_due = "";
+    $date_due_value = strtotime('+7 days');
+    $date_due = date('d/m/Y', $date_due_value);
 }
 else
 {
