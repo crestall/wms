@@ -1509,7 +1509,7 @@ class FormController extends Controller {
         {
             Form::setError('date_entered', 'Please supply the date the job was entered');
         }
-        if(!$this->dataSubbed($date_due))
+        if( !$this->dataSubbed($date_due) && isset($strict_dd) )
         {
             Form::setError('date_due', 'Please indicate when this should be dispatched');
         }
