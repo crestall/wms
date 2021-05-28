@@ -157,7 +157,7 @@ $f = 0;
                             <div class="form-group row">
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Job Id</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control required" name="job_id" id="job_id" value="<?php echo $job_id;?>" />
+                                    <input type="text" class="form-control required" name="job_id" id="p_job_id" value="<?php echo $job_id;?>" />
                                     <input type="hidden" name="current_jobid" id="current_jobid" value="<?php echo $job_id;?>" >
                                     <?php echo Form::displayError('job_id');?>
                                 </div>
