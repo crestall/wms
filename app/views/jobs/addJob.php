@@ -130,6 +130,7 @@ else
                                         <div class="input-group-append">
                                             <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
+                                        <?php echo Form::displayError('date_due');?>
                                     </div>
                                 </div>
                                 <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due_value;?>" />
