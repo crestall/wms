@@ -124,7 +124,7 @@
                     ?>
                 </td>
                 <td data-label="Due Date"
-                    <?php if($job['strict_dd'] > 0):?>
+                    <?php if( $job['strict_dd'] > 0 && (filter_var($job['due_date'], FILTER_VALIDATE_INT)) ):?>
                         <?php if( ($job['due_date'] < $today) ):?>
                             style="background-color: #222; color:#FFF"
                         <?php elseif( ($job['due_date'] - $today) <= (24 * 60 * 60)):?>
