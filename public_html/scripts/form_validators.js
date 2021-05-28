@@ -198,7 +198,7 @@ $(document).ready(function() {
 				remote: 'This Job Id is already in use. Job Ids must be unique'
 			},
             date_due:{
-                required: 'This is required for strict due date '
+                required: 'This is required for strict dispatch date '
             }
 		}
     });
