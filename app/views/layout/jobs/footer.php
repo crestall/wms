@@ -401,6 +401,7 @@
                                     //console.log("false");
                                     $('#date_due_value').val('');
                                 }
+                                $(this).valid();
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
