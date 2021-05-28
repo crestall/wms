@@ -404,7 +404,11 @@
                             }
                         });
                         $('#strict_dd').click(function(e){
-                            $('#rdd').toggle();    
+                            if($(this).prop('checked'))
+                            {
+                                $('#date_due').valid();
+                            }
+                            $('#rdd').toggle();
                         })
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_due').focus();
