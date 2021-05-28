@@ -401,9 +401,11 @@
                                     //console.log("false");
                                     $('#date_due_value').val('');
                                 }
-                                $(this).valid();
                             }
                         });
+                        $('#strict_dd').click(function(e){
+                            $('#rdd').toggle();    
+                        })
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_due').focus();
                         }); 
