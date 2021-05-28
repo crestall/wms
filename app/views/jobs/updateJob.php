@@ -196,7 +196,7 @@ $f = 0;
                             </div>
                             <div class="row form-group">
                                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Entered</label>
-                                <div class="col-md-8">
+                                <div class="col-md-5">
                                     <div class="input-group">
                                         <input type="text" class="required form-control" name="date_entered" id="date_entered" value="<?php echo date('d/m/Y', $date_entered);?>" />
                                         <div class="input-group-append">
@@ -209,7 +209,7 @@ $f = 0;
                             </div>
                             <div class="row form-group">
                                 <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
-                                <div class="col-md-8">
+                                <div class="col-md-5">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
                                         <div class="input-group-append">
