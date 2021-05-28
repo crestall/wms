@@ -208,8 +208,14 @@ class Productionjob extends Model{
             'date'          => time()
         );
         $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
+
+        if(empty($data['date_due_value']))
+            $vals['due_date'] = $data['date_due'];
+        else
+            $vals['due_date'] = $data['date_due_value'];
+
         if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
-        if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
+        //if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
         if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
         if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
         if(!empty($data['address'])) $vals['address'] = $data['address'];
