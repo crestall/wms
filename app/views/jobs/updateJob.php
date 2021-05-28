@@ -8,7 +8,38 @@ $priority = (!empty(Form::value('priority')))? Form::value('priority'):$job['pri
 $status_id = (!empty(Form::value('status_id')))? Form::value('status_id'):$job['status_id'];
 $salesrep_id = (!empty(Form::value('salesrep_id')))? Form::value('salesrep_id'):$job['salesrep_id'];
 $date_entered = (!empty(Form::value('date_entered_value')))? Form::value('date_entered_value'): $job['created_date'];
-$date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value'): $job['due_date'];
+
+//$date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value'): $job['due_date'];
+
+if( empty(Form::value('date_due')) )
+{
+    if (filter_var($job['due_date'], FILTER_VALIDATE_INT))
+    {
+        $date_due_value = $job['due_date'];
+        $date_due = date('d/m/Y', $date_due_value);
+    }
+    else
+    {
+        $date_due_value = '';
+        $date_due = $job['due_date'];
+    }
+}
+else
+{
+    if (filter_var(Form::value('date_due_value'), FILTER_VALIDATE_INT))
+    {
+        $date_due_value = Form::value('date_due_value');
+        $date_due = date('d/m/Y', $date_due_value);
+    }
+    else
+    {
+        $date_due_value = '';
+        $date_due = Form::value('date_due');
+    }
+}
+
+
+
 $designer = (!empty(Form::value('designer')))? Form::value('designer'):$job['designer'];
 $description = (!empty(Form::value('description')))? Form::value('description'):$job['description'];
 $notes = (!empty(Form::value('notes')))? Form::value('notes'):$job['notes'];
@@ -180,13 +211,13 @@ $f = 0;
                                 <label class="col-md-4 col-form-label">Due Date</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php if(!empty($date_due)) echo date('d/m/Y', $date_due);?>" />
+                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
                                         <div class="input-group-append">
                                             <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
+                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due_value;?>" />
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd" <?php if($strict_dd) echo "checked";?>  />
