@@ -18,7 +18,7 @@
             <?php else:?>
                 <th data-priority="2">Status</th>
             <?php endif;?>
-            <th>Due Date</th>
+            <th>Dispatch Date</th>
             <th class="no-sort" style="max-width: 250px;">Delivery</th>
             <?php if($need_checkbox):?>
                 <th data-priority="1" nowrap class="no-sort">
