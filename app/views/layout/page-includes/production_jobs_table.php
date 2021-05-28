@@ -135,7 +135,13 @@
                             style="background-color: #66ff66;"
                         <?php endif;?>
                     <?php endif;?>
-                    ><?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?>
+                >
+                    <?php
+                    if( ($job['due_date'] > 0) && filter_var($job['due_date'], FILTER_VALIDATE_INT)  )
+                        echo date("d/m/Y", $job['due_date']);
+                    elseif( $job['due_date'] != 0 )
+                        echo $job['due_date'];
+                    ?>
                 </td>
                 <td data-label="Delivery">
                     <?php if(!empty($job['delivery_notes'])):?>
