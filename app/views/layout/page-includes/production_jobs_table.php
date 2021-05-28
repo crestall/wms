@@ -18,7 +18,7 @@
             <?php else:?>
                 <th data-priority="2">Status</th>
             <?php endif;?>
-            <th>Due Date</th>
+            <th>Dispatch Date</th>
             <th class="no-sort" style="max-width: 250px;">Delivery</th>
             <?php if($need_checkbox):?>
                 <th data-priority="1" nowrap class="no-sort">
@@ -111,7 +111,7 @@
                     <?php if(!empty($job['status_colour'])):?>
                         style="background-color:<?php echo $job['status_colour'];?>; color:<?php echo $job['status_text_colour'];?>"
                     <?php endif;?>
-                    ><select class="selectpicker status" <?php if(!$can_change_status) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select>
+                    ><select class="selectpicker status" <?php if(!$can_change_status) echo "disabled"; ?> id="status_<?php echo $job['id'];?>" data-style="btn-light btn-sm" data-width="fit"><option value="0">--Select One--</option><?php echo $this->controller->jobstatus->getSelectJobStatus($job['status_id']);?></select>
                     <?php if($job['status_change_time'] > 0)
                     {
                         echo "<p>Status Changed: ".date("d/m/Y", $job['status_change_time']);
@@ -124,7 +124,7 @@
                     ?>
                 </td>
                 <td data-label="Due Date"
-                    <?php if($job['strict_dd'] > 0):?>
+                    <?php if( $job['strict_dd'] > 0 && (filter_var($job['due_date'], FILTER_VALIDATE_INT)) ):?>
                         <?php if( ($job['due_date'] < $today) ):?>
                             style="background-color: #222; color:#FFF"
                         <?php elseif( ($job['due_date'] - $today) <= (24 * 60 * 60)):?>
@@ -135,7 +135,17 @@
                             style="background-color: #66ff66;"
                         <?php endif;?>
                     <?php endif;?>
-                    ><?php if($job['due_date'] > 0) echo date("d/m/Y", $job['due_date']);?>
+                >
+                    <?php
+                    if( $job['due_date'] !== 0 )
+                    {
+                        if( filter_var($job['due_date'], FILTER_VALIDATE_INT)  )
+                            echo date("d/m/Y", $job['due_date']);
+                        else
+                            echo $job['due_date'];
+                    }
+
+                    ?>
                 </td>
                 <td data-label="Delivery">
                     <?php if(!empty($job['delivery_notes'])):?>

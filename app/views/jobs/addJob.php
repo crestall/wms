@@ -8,7 +8,29 @@ $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = (empty(Form::value('country')))? "AU" : Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
-$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
+//$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
+
+if( empty(Form::value('date_due')) )
+{
+    $date_due_value = strtotime('+7 days');
+    $date_due = date('d/m/Y', $date_due_value);
+}
+else
+{
+    if (filter_var(Form::value('date_due_value'), FILTER_VALIDATE_INT))
+    {
+        $date_due_value = Form::value('date_due_value');
+        $date_due = date('d/m/Y', $date_due_value);
+    }
+    else
+    {
+        $date_due_value = '';
+        $date_due = Form::value('date_due');
+    }
+}
+
+
+
 $customer_id = ( empty(Form::value('customer_id')) )? 0 : Form::value('customer_id');
 //FINISHER DETAILS
 $finisher_array = array();
@@ -89,7 +111,7 @@ else
                             </div>
                             <div class="row form-group">
                                 <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Entered</label>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="input-group">
                                         <input type="text" class="required form-control" name="date_entered" id="date_entered" value="<?php echo date('d/m/Y', $date_entered);?>" />
                                         <div class="input-group-append">
@@ -101,20 +123,21 @@ else
                                 <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                             </div>
                             <div class="row form-group">
-                                <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Due Date</label>
-                                <div class="col-md-4">
+                                <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
+                                <div class="col-md-5">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
                                         <div class="input-group-append">
                                             <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
+                                        <?php echo Form::displayError('date_due');?>
                                     </div>
                                 </div>
-                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
+                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due_value;?>" />
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />
-                                <label class="custom-control-label col-md-4" for="strict_dd">Strict Due Date</label>
+                                <label class="custom-control-label col-md-5" for="strict_dd">Strict Dispatch Date</label>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4">Designer</label>

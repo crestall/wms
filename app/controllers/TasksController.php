@@ -196,25 +196,30 @@ class TasksController extends Controller
             $output .= "=========================================================================================================".PHP_EOL;
             foreach($dd_jobs as $job)
             {
-                if( ($job['due_date'] < $today) )
+                if( filter_var($job['due_date'], FILTER_VALIDATE_INT) )
                 {
-                    //echo "<p>Will send the 'You Fucked Up email</p>";
-                }
-                elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60))
-                {
-                    if(Email::sendProductionJobReminder($job))
+                    if( ($job['due_date'] < $today) )
                     {
-                        $output .= "Email sent for JOB: ".$job['job_id'].PHP_EOL;
+                        //echo "<p>Will send the 'You Fucked Up email</p>";
+                    }
+                    elseif( ($job['due_date'] - $today) <= (2 * 24 * 60 * 60))
+                    {
+                        if(Email::sendProductionJobReminder($job))
+                        {
+                            $output .= "Email sent for JOB: ".$job['job_id'].PHP_EOL;
+                        }
+                        else
+                        {
+                            $output .= "Email failed to sent for JOB: ".$job['job_id'].PHP_EOL;
+                        }
                     }
                     else
                     {
-                        $output .= "Email failed to sent for JOB: ".$job['job_id'].PHP_EOL;
+                        $output .= "No email required for  for JOB: ".$job['job_id'].PHP_EOL;
                     }
                 }
-                else
-                {
-                    $output .= "No email required for  for JOB: ".$job['job_id'].PHP_EOL;
-                }
+                $output .= "Text based due date for JOB: ".$job['job_id'].". No email can be sent.".PHP_EOL;
+
             }
             Logger::logRemindersSent('sent_emails/log', $output);
         }
