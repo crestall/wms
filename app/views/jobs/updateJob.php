@@ -208,7 +208,7 @@ $f = 0;
                                 <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                             </div>
                             <div class="row form-group">
-                                <label class="col-md-4 col-form-label">Due Date</label>
+                                <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
@@ -221,7 +221,7 @@ $f = 0;
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd" <?php if($strict_dd) echo "checked";?>  />
-                                <label class="custom-control-label col-md-4" for="strict_dd">Strict Due Date</label>
+                                <label class="custom-control-label col-md-f" for="strict_dd">Strict Dispatch Date</label>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4">Designer</label>
