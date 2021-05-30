@@ -24,6 +24,7 @@ class Shopify{
         'import_error_string'   => ''
     );
     protected $ua;
+    protected $order_items;
 
     public $controller;
 
@@ -225,8 +226,8 @@ class Shopify{
                     $order['quantity'] = $qty;
                     $order['weight'] = $o['total_weight'];
                     //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
-                    $order['items'] = $items;
-                    $orders_items[$o['order_number']] = $items;
+                    $order['items'][$o['order_number']] = $items;
+                    //$orders_items[$o['order_number']] = $items;
                     $order = array_merge($order, $ad);
                     $orders[] = $order;
                 }

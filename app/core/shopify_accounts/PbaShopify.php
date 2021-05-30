@@ -14,8 +14,6 @@ class PbaShopify extends Shopify
 
     private $shopify;
 
-    private $pbaoitems;
-
     public function init()
     {
         //parent::__construct($controller);
@@ -110,7 +108,8 @@ class PbaShopify extends Shopify
             //check for errors first
             $item_error = false;
             $error_string = "";
-            foreach($this->pbaoitems[$o['client_order_id']] as $item)
+            //foreach($this->pbaoitems[$o['client_order_id']] as $item)
+            foreach($o['items'][$o['client_order_id']] as $item)
             {
                 if($item['item_error'])
                 {
@@ -178,11 +177,12 @@ class PbaShopify extends Shopify
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
-            $itp = array($this->pbaoitems[$o['client_order_id']]);
+            //$itp = array($this->pbaoitems[$o['client_order_id']]);
+            $itp = array($o['items'][$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
-            $this->output .= print_r($this->pbaoitems[$o['client_order_id']], true).PHP_EOL;
+            $this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
             ++$this->return_array['import_count'];
             $this->return_array['imported_orders'][] = $o['client_order_id'];
         }
