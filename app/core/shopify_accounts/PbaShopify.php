@@ -87,7 +87,7 @@ class PbaShopify extends Shopify
                     }
             }
             //echo "<pre>",print_r($collected_orders),"</pre>"; die();
-            if($orders = $this->procPBAOrders($collected_orders))
+            if($orders = $this->procOrders($collected_orders))
             {
                     $this->addPBAOrders($orders);
             }
@@ -154,7 +154,7 @@ class PbaShopify extends Shopify
                 continue;
             }
             //insert the order
-            $client_id = $this->controller->client->getClientId('Performance Brands Australia');
+            $client_id = $this->client_id;
             $vals = array(
                 'client_order_id'       => $o['client_order_id'],
                 'client_id'             => $client_id,
