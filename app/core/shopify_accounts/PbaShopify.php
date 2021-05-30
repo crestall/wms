@@ -87,7 +87,7 @@ class PbaShopify extends Shopify
                     }
             }
             //echo "<pre>",print_r($collected_orders),"</pre>"; die();
-            if($orders = $this->procPBAOrders($collected_orders))
+            if($orders = $this->procOrders($collected_orders))
             {
                     $this->addPBAOrders($orders);
             }
