@@ -20,7 +20,7 @@ class PbaShopify extends Shopify
     {
         //parent::__construct($controller);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
-        $config = array(
+        $this->config = array(
             'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
             'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
             'Password'       => Config::get('PBASHOPIFYAPIPASS')
@@ -86,7 +86,7 @@ class PbaShopify extends Shopify
                             return $this->return_array;
                     }
             }
-            echo "<pre>",print_r($collected_orders,"</pre>"; die();
+            echo "<pre>",print_r($collected_orders),"</pre>"; die();
             if($orders = $this->procPBAOrders($collected_orders))
             {
                     $this->addPBAOrders($orders);
