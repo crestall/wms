@@ -257,7 +257,7 @@ class TasksController extends Controller
         }
         else
         {
-            $this->shopify->getPBAOrders();
+            $this->PbaShopify->getPBAOrders();
         }
     }
 

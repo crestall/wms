@@ -162,7 +162,8 @@ class Controller {
     public function loadShopifyClasses()
     {
         $this->loadShopifyInstances([
-            'BuzzBee'
+            'BuzzBee',
+            'Pba'
         ]);
     }
 
