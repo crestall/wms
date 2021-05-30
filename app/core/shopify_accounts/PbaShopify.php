@@ -63,11 +63,6 @@ class PbaShopify extends Shopify
             $this->output = "=========================================================================================================".PHP_EOL;
             $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
             $this->output .= "=========================================================================================================".PHP_EOL;
-            try{
-                    $this->shopify = new PHPShopify\ShopifySDK($config);
-            } catch(Exception $e){
-                    var_dump($e);
-            }
 
             $collected_orders = array();
             $params = array(
