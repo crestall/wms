@@ -60,6 +60,8 @@ class Shopify{
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
         //echo "<pre>",print_r($collected_orders),"</pre>";die();
         //echo $_SERVER['HTTP_USER_AGENT'];
+        $client_id = $collected_orders['client_id'];
+        unset($collected_orders['client_id']);
         $orders = array();
         if(count($collected_orders))
         {

@@ -85,8 +85,7 @@ class PbaShopify extends Shopify
                             $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
                             return $this->return_array;
                     }
-            }
-            $collected_orders['client_id'] = $this->client_id;
+            } 
             //echo "<pre>",print_r($collected_orders),"</pre>"; die();
             if($orders = $this->procOrders($collected_orders))
             {
