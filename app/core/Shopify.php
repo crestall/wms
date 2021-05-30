@@ -25,9 +25,6 @@ class Shopify{
     );
     protected $ua;
 
-    private $shopify;
-    private $pbaoitems;
-
     public $controller;
 
     public function __construct(Controller $controller)
@@ -113,7 +110,7 @@ class Shopify{
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
-    
+
     protected function procOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
