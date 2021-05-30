@@ -127,7 +127,6 @@ class BuzzBeeShopify extends Shopify
         echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
         die();
         //return $collected_orders;
-        $collected_orders['client_id'] = $this->client_id;
         if($orders = $this->procOrders($collected_orders))
         {
             $this->output .= "===========================   Sending Orders  =========================".PHP_EOL;
