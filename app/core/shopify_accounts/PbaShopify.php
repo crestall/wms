@@ -64,8 +64,8 @@ class PbaShopify extends Shopify
 
         $collected_orders = array();
         $params = array(
-            'status'    => 'open',
-            'financial_status'      => 'paid',
+            'status'            => 'open',
+            'financial_status'  => 'paid',
         );
         try {
             $collected_orders = $this->shopify->Order->get($params);
