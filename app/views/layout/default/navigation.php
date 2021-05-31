@@ -54,7 +54,7 @@ endif;
                 <img class="img-user" src="<?php echo $image;?>" /><br/>
                 <strong><?php echo Session::getUsersName(); ?></strong>
             </a>
-            <?php if(Config::get('curPage') == "dashboard"):?>
+            <?php if(Config::get('curPage') == "dashboard" || Config::get('curPage') == "view-jobs" ):?>
                 <div id="countdown" class="text-white">Page will refresh in <span></span></div>
             <?php else:?>
                 <div id="countdown" class="text-white">This page does not refresh<span></span></div>
