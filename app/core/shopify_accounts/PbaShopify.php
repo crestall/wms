@@ -182,8 +182,8 @@ class PbaShopify extends Shopify
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
-            //$itp = array($this->pbaoitems[$o['client_order_id']]);
-            $itp = array($o['items'][$o['client_order_id']]);
+            $itp = array($pbaoitems[$o['client_order_id']]);
+            //$itp = array($o['items'][$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
