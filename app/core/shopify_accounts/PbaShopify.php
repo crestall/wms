@@ -56,49 +56,50 @@ class PbaShopify extends Shopify
 
     public function getPBAOrders()
     {
-            //die($this->controller->request->params['args']['ua']);
-            $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
-            $this->output = "=========================================================================================================".PHP_EOL;
-            $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
-            $this->output .= "=========================================================================================================".PHP_EOL;
+        //die($this->controller->request->params['args']['ua']);
+        $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
 
-            $collected_orders = array();
-            $params = array(
-                    'status'    => 'open'
-            );
-            try {
-                $collected_orders = $this->shopify->Order->get($params);
-            } catch (Exception $e) {
-                    echo "<pre>",print_r($e),"</pre>";die();
-                    $this->output .=  $e->getMessage() .PHP_EOL;
-                    $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-                    if ($this->ua == "CRON" )
-                    {
-                            Email::sendCronError($e, "Perfect Practice Golf");
-                            return;
-                    }
-                    else
-                    {
-                            $this->return_array['import_error'] = true;
-                            $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
-                            return $this->return_array;
-                    }
-            }
-            //echo "<pre>",print_r($collected_orders),"</pre>"; die();
-            if($orders = $this->procOrders($collected_orders))
-            {
-                    $this->addPBAOrders($orders);
-            }
-            Logger::logOrderImports('order_imports/pba', $this->output); //die();
-            if ($this->ua != "CRON" )
-            {
-                    return $this->return_array;
-            }
-            else
-            {
-                    Email::sendPBAShopifyImportSummary($this->return_array);
-            }
-            //echo "<pre>",print_r($this->return_array),"</pre>";
+        $collected_orders = array();
+        $params = array(
+            'status'    => 'open',
+            'financial_status'      => 'paid',
+        );
+        try {
+            $collected_orders = $this->shopify->Order->get($params);
+        } catch (Exception $e) {
+                echo "<pre>",print_r($e),"</pre>";die();
+                $this->output .=  $e->getMessage() .PHP_EOL;
+                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                if ($this->ua == "CRON" )
+                {
+                        Email::sendCronError($e, "Perfect Practice Golf");
+                        return;
+                }
+                else
+                {
+                        $this->return_array['import_error'] = true;
+                        $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                        return $this->return_array;
+                }
+        }
+        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        if($orders = $this->procOrders($collected_orders))
+        {
+                $this->addPBAOrders($orders);
+        }
+        Logger::logOrderImports('order_imports/pba', $this->output); //die();
+        if ($this->ua != "CRON" )
+        {
+                return $this->return_array;
+        }
+        else
+        {
+                Email::sendPBAShopifyImportSummary($this->return_array);
+        }
+        //echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
     private function addPBAOrders($orders)
