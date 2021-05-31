@@ -103,14 +103,19 @@ class PbaShopify extends Shopify
 
     private function addPBAOrders($orders)
     {
+        $pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
+        unset($orders['orders_items']);
+        
         foreach($orders as $o)
         {
             //check for errors first
             $item_error = false;
             $error_string = "";
-            //foreach($this->pbaoitems[$o['client_order_id']] as $item)
-            foreach($o['items'][$o['client_order_id']] as $item)
+
+            foreach($pbaoitems[$o['client_order_id']] as $item)
+            //foreach($o['items'][$o['client_order_id']] as $item)
             {
+
                 if($item['item_error'])
                 {
                     $item_error = true;
