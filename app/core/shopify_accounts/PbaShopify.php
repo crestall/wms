@@ -105,6 +105,7 @@ class PbaShopify extends Shopify
     {
         $pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
         unset($orders['orders_items']);
+        
         foreach($orders as $o)
         {
             //check for errors first
