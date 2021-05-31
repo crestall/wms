@@ -232,7 +232,7 @@ class Shopify{
                     $orders[] = $order;
                 }
             }//endforeach order
-            $order['orders_items'] = $orders_items;
+            $orders['orders_items'] = $orders_items;
             //echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
             //$this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
             //echo "ORDERS ITEMS<pre>",print_r($this->pbaoitems),"</pre>";die();
