@@ -227,11 +227,12 @@ class Shopify{
                     $order['weight'] = $o['total_weight'];
                     //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
                     $order['items'][$o['order_number']] = $items;
-                    //$orders_items[$o['order_number']] = $items;
+                    $orders_items[$o['order_number']] = $items;
                     $order = array_merge($order, $ad);
                     $orders[] = $order;
                 }
             }//endforeach order
+            $order['orders_items'] = $orders_items;
             //echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
             //$this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
             //echo "ORDERS ITEMS<pre>",print_r($this->pbaoitems),"</pre>";die();
