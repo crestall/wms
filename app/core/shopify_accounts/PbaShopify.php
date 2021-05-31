@@ -103,7 +103,7 @@ class PbaShopify extends Shopify
 
     private function addPBAOrders($orders)
     {
-        $this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
+        $pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
         unset($orders['orders_items']);
         foreach($orders as $o)
         {
@@ -111,7 +111,7 @@ class PbaShopify extends Shopify
             $item_error = false;
             $error_string = "";
 
-            foreach($this->pbaoitems[$o['client_order_id']] as $item)
+            foreach($pbaoitems[$o['client_order_id']] as $item)
             //foreach($o['items'][$o['client_order_id']] as $item)
             {
 
