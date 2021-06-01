@@ -5,6 +5,7 @@
  *
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
+use PHPShopify\Exception\CurlException;
 
 class BuzzBeeShopify extends Shopify
 {
