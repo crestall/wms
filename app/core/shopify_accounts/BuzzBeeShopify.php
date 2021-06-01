@@ -6,6 +6,7 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 use PHPShopify\Exception\CurlException;
+use PHPShopify\Exception\ApiException;
 
 class BuzzBeeShopify extends Shopify
 {
@@ -69,7 +70,7 @@ class BuzzBeeShopify extends Shopify
         //echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die();
         try {
             $collected_orders = $this->shopify->Order->get($params);
-        } catch (Throwable $e) {
+        } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
