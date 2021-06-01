@@ -55,12 +55,12 @@ class BuzzBeeShopify extends Shopify
             }
         }
         try{
-            $shop = $this->shopify->Shop->get();
+            $products = $this->shopify->Product->get();
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
         }
 
-        echo "BUZZ BEE<pre>",print_r($shop),"</pre>";die();
+        echo "BUZZ BEE<pre>",print_r($products),"</pre>";die();
     }
 
     public function getOrders()
