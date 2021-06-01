@@ -1,6 +1,6 @@
 <?php
 /**
- * BuzzBee location for the shopify class.
+ * PBA perfect practice golf location for the shopify class.
  *
  *
  * @author     Mark Solly <mark.solly@fsg.com.au>
