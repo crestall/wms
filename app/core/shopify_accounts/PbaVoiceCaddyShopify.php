@@ -64,7 +64,7 @@ class PbaVoiceCaddyShopify extends Shopify
 
         $collected_orders = array();
         $params = array(
-            'status'            => 'any',
+            'status'            => 'open',
             'financial_status'  => 'paid',
         );
         try {
