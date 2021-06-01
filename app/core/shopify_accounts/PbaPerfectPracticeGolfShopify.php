@@ -12,7 +12,7 @@ class PbaPerfectPracticeGolfShopify extends Shopify
     private $from_address_array = array();
     private $config = array();
 
-    private $shopify;
+    //private $shopify;
 
     public function init()
     {
