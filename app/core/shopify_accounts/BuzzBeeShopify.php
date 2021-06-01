@@ -5,8 +5,7 @@
  *
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
-use PHPShopify\Exception\CurlException;
-use PHPShopify\Exception\ApiException;
+use PHPShopify\Exception;
 
 class BuzzBeeShopify extends Shopify
 {
@@ -21,7 +20,7 @@ class BuzzBeeShopify extends Shopify
         //parent::__construct($controller);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
         $this->config = array(
-            'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
+            'ShopUrl'        => 'https://buzzybeeaustralia.myshopify.com/',
             'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
             'Password'       => Config::get('BBSHOPIFYAPIPASS')
         );
