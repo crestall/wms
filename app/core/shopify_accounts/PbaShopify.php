@@ -54,7 +54,7 @@ class PbaShopify extends Shopify
         }
     }
 
-    public function getPBAOrders()
+    public function getOrders()
     {
         //die($this->controller->request->params['args']['ua']);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";

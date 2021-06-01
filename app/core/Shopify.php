@@ -36,26 +36,7 @@ class Shopify{
 
     public function init(){}
 
-    public function fulfillAnOrder()
-    {
-        $config = array(
-            'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
-            'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
-            'Password'       => Config::get('PBASHOPIFYAPIPASS')
-        );
-        try{
-            $this->shopify = new PHPShopify\ShopifySDK($config);
-        } catch(Exception $e){
-            var_dump($e);
-        }
-        $this->shopify->Order('2679941988514')->Fulfillment->post([
-            "location_id" => $this->shopify->Location->get()[0]['id'],
-            "tracking_number" => "ZQD5009720",
-            "tracking_urls" => ["https://auspost.com.au/track/ZQD5009720"],
-            "notify_customer" => true
-        ]);
-        return true;
-    }
+    public function getOrders(){}
 
     protected function procOrders($collected_orders)
     {
