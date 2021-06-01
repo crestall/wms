@@ -20,7 +20,7 @@ class BuzzBeeShopify extends Shopify
         //parent::__construct($controller);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
         $this->config = array(
-            'ShopUrl'        => 'https://buzzybeeaustralia.myshopify.com/',
+            'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
             'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
             'Password'       => Config::get('BBSHOPIFYAPIPASS')
         );
