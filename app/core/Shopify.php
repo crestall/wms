@@ -39,6 +39,16 @@ class Shopify{
 
     public function getOrders(){}
 
+    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)
+    {
+        $this->shopify->Order($order_id)->Fulfillment->post([
+            "location_id" => $this->shopify->Location->get()[0]['id'],
+            "tracking_number" => $consignment_id,
+            "tracking_urls" => [$tracking_url],
+            "notify_customer" => true
+        ]);
+    }
+
     protected function procOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
