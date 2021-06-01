@@ -60,11 +60,12 @@ class BuzzBeeShopify extends Shopify
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Buzz Bee Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
-        echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
+        //echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
         $collected_orders = array();
         $params = array(
             'status'                => 'open'
         );
+        echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die(); 
         try {
             $collected_orders = $this->shopify->Order->get($params);
         } catch (Exception $e) {
