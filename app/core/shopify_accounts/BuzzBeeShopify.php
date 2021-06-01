@@ -62,7 +62,9 @@ class BuzzBeeShopify extends Shopify
         $this->output .= "=========================================================================================================".PHP_EOL;
 
         $collected_orders = array();
-        
+        $params = array(
+
+        );
         try {
             $collected_orders = $this->shopify->Order->get($params);
         } catch (Exception $e) {
