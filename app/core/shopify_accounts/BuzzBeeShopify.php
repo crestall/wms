@@ -54,6 +54,7 @@ class BuzzBeeShopify extends Shopify
                 return $this->return_array;
             }
         }
+        /*
         try{
             $products = $this->shopify->Product->get();
         } catch (Exception $e) {
@@ -61,6 +62,7 @@ class BuzzBeeShopify extends Shopify
         }
 
         echo "BUZZ BEE<pre>",print_r($products),"</pre>";die();
+        */
     }
 
     public function getOrders()
@@ -71,7 +73,7 @@ class BuzzBeeShopify extends Shopify
         //echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
         $collected_orders = array();
         $params = array(
-            'status'                => 'open'
+            'status'                => 'any'
         );
         //echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die();
         try {
