@@ -85,7 +85,7 @@ class PbaPerfectPracticeGolfShopify extends Shopify
                         return $this->return_array;
                 }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        echo "<pre>",print_r($collected_orders),"</pre>"; die();
         if($orders = $this->procOrders($collected_orders))
         {
                 $this->addPBAOrders($orders);

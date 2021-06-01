@@ -261,7 +261,7 @@ class TasksController extends Controller
         }
     }
 
-    public function PBAShopifyTask()
+    public function PBAPerfectPracticeGolfShopifyTask()
     {
         if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
         {
@@ -269,7 +269,7 @@ class TasksController extends Controller
         }
         else
         {
-            $this->PbaShopify->getOrders();
+            $this->PbaPerfectPracticeGolfShopify->getOrders();
         }
     }
 
