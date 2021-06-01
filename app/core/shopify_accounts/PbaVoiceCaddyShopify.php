@@ -12,7 +12,7 @@ class PbaVoiceCaddyShopify extends Shopify
     private $from_address_array = array();
     private $config = array();
 
-    protected $shopify;
+    //protected $shopify;
 
     public function init()
     {
