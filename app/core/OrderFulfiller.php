@@ -152,13 +152,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 $items = $this->controller->order->getItemsForOrder($id);
                 $this->output .= "Reducing Stock and recording movement for order id: ".$id.PHP_EOL;
                 $this->removeStock($items, $id);
-                if($od['is_shopify'] == 1)
-                {
-                    if($od['is_voicecaddy'] == 1)
-                    {
-                        $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https:://directfreight.com.au");
-                    }
-                }
+
                 if( !empty($od['tracking_email']) )
                 {
                     if(SITE_LIVE) //only send emails if we are live and not testing
@@ -210,20 +204,14 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                             }
                             elseif($od['is_shopify'] == 1)
                             {
-                                $config = array(
-                                    'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
-                                    'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
-                                    'Password'       => Config::get('PBASHOPIFYAPIPASS')
-                                );
-                                $shopify = new PHPShopify\ShopifySDK($config);
-                                $order_id = $od['shopify_id'];
-                                $this->output .= "Sending Direct Freight Tracking info to shopify".PHP_EOL;
-                                $shopify->Order($order_id)->Fulfillment->post([
-                                    "location_id" => $shopify->Location->get()[0]['id'],
-                                    "tracking_number" => $od['consignment_id'],
-                                    "tracking_urls" => ["https:://directfreight.com.au"],
-                                    "notify_customer" => true
-                                ]);
+                                if($od['is_voicecaddy'] == 1)
+                                {
+                                    $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https:://directfreight.com.au");
+                                }
+                                else
+                                {
+                                    $this->controller->PbaPerfectPracticeGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https:://directfreight.com.au");
+                                }
                             }
                         }
                         if($od['client_id'] == 59)
@@ -356,13 +344,6 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 
                     $od = $this->controller->order->getOrderDetail($id);
 
-                    if($od['is_shopify'] == 1)
-                    {
-                        if($od['is_voicecaddy'] == 1)
-                        {
-                            $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https://auspost.com.au/track/".$od['consignment_id']);
-                        }
-                    }
                     if( !empty($od['tracking_email']) )
                     {
                         if(SITE_LIVE) //only send emails if we are live and not testing
@@ -413,20 +394,14 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                                 }
                                 elseif($od['is_shopify'] == 1)
                                 {
-                                    $config = array(
-                                        'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
-                                        'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
-                                        'Password'       => Config::get('PBASHOPIFYAPIPASS')
-                                    );
-                                    $shopify = new PHPShopify\ShopifySDK($config);
-                                    $order_id = $od['shopify_id'];
-                                    $this->output .= "Sending Eparcel Tracking info to shopify".PHP_EOL;
-                                    $shopify->Order($order_id)->Fulfillment->post([
-                                        "location_id" => $shopify->Location->get()[0]['id'],
-                                        "tracking_number" => $od['consignment_id'],
-                                        "tracking_urls" => ["https://auspost.com.au/track/".$od['consignment_id']],
-                                        "notify_customer" => true
-                                    ]);
+                                    if($od['is_voicecaddy'] == 1)
+                                    {
+                                        $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https:://directfreight.com.au");
+                                    }
+                                    else
+                                    {
+                                        $this->controller->PbaPerfectPracticeGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https:://directfreight.com.au");
+                                    }
                                 }
                             }
                             if($od['client_id'] == 82)
