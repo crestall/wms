@@ -65,7 +65,7 @@ class BuzzBeeShopify extends Shopify
         $params = array(
             'status'                => 'open'
         );
-        echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die(); 
+        //echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die(); 
         try {
             $collected_orders = $this->shopify->Order->get($params);
         } catch (Exception $e) {
