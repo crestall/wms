@@ -63,8 +63,7 @@ class BuzzBeeShopify extends Shopify
 
         $collected_orders = array();
         $params = array(
-            'status'                => 'open',
-            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
+            'status'                => 'open'
         );
         try {
             $collected_orders = $this->shopify->Order->get($params);
