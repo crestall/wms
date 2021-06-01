@@ -19,9 +19,9 @@ class PbaPerfectPracticeGolfShopify extends Shopify
         //parent::__construct($controller);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
         $this->config = array(
-            'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
-            'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
-            'Password'       => Config::get('PBASHOPIFYAPIPASS')
+            'ShopUrl'        => 'https://voice-caddie-au.myshopify.com',
+            'ApiKey'         => Config::get('PBAVOICECADDYSHOPIFYAPIKEY'),
+            'Password'       => Config::get('PBAVOICECADDYSHOPIFYAPIPASS')
         );
 
         $from_address = Config::get("FSG_ADDRESS");
@@ -85,7 +85,7 @@ class PbaPerfectPracticeGolfShopify extends Shopify
                         return $this->return_array;
                 }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        echo "<pre>",print_r($collected_orders),"</pre>"; die();
         if($orders = $this->procOrders($collected_orders))
         {
                 $this->addPBAOrders($orders);
