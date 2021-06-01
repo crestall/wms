@@ -73,11 +73,16 @@ class BuzzBeeShopify extends Shopify
         //echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
         $collected_orders = array();
         $params = array(
-            'status'                => 'any'
+            'status'                => 'open',
+            'financial_status'      => 'paid',
+            'fulfillment_status'    => 'unshipped',
+            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
         );
         //echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die();
         try {
-            $collected_orders = $this->shopify->Order->get($params);
+            $order_id = "3859592249495";
+            $collected_orders[] = $this->shopify->Order($order_id)->get($params);
+            //$collected_orders = $this->shopify->Order->get($params);
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
