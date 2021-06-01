@@ -1,12 +1,12 @@
 <?php
 /**
- * PBA perfect practice golf location for the shopify class.
+ * PBA voice caddy location for the shopify class.
  *
  *
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-class PbaPerfectPracticeGolfShopify extends Shopify
+class PbaVoiceCaddyShopify extends Shopify
 {
     private $client_id = 87;
     private $from_address_array = array();
