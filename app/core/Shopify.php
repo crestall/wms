@@ -4,6 +4,7 @@
  * Shopify class.
  *
  * Interacts with the shopify api
+ * Individual shopify accounts are handled in the extending classes
 
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
