@@ -64,7 +64,7 @@ class PbaPerfectPracticeGolfShopify extends Shopify
 
         $collected_orders = array();
         $params = array(
-            'status'            => 'open',
+            'status'            => 'any',
             'financial_status'  => 'paid',
         );
         try {
