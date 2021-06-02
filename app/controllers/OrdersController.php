@@ -164,10 +164,10 @@ class OrdersController extends Controller
        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
     }
 
-    public function importPBAShopifyOrders()
+    public function importPBAPPGShopifyOrders()
     {
-       $response = $this->shopify->getPBAOrders();
-       $feedback = "<h2><i class='far fa-check-circle'></i>Performance Brands Shopify Orders Imported</h2>";
+       $response = $this->PbaPerfectPracticeGolfShopify->getOrders();
+       $feedback = "<h2><i class='far fa-check-circle'></i>PBA Perfect Practice Golf Shopify Orders Imported</h2>";
        $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
        if($response['error_count'] > 0)
        {

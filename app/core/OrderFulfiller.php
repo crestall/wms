@@ -90,33 +90,9 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
         $this->output .= "Reducing Stock and recording movement fo order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
         $this->removeStock($items, $this->controller->request->data['order_ids']);
-
-        if( !empty($od['tracking_email']) )
+        if(SITE_LIVE) //only send emails if we are live and not testing
         {
-            if(SITE_LIVE && $od['client_id'] != 87) //only send emails if we are live and not testing  and don't send for PBA
-            {
-                if($od['client_id'] == 59)
-                {
-                    $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
-                    Email::sendNoaConfirmEmail($od['id']);
-                }
-                elseif($od['client_id'] == 82)
-                {
-                    $this->output .= "Sending One Plate confirmation".PHP_EOL;
-                    Email::sendOnePlateTrackingEmail($od['id']);
-                }
-                elseif($od['client_id'] == 86)
-                {
-                    //Do SFA
-                    $this->output .= "Not Sending confirmation for BDS".PHP_EOL;
-                }
-                else
-                {
-                     $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-                    //$mailer->sendTrackingEmail($id);
-                    Email::sendTrackingEmail($od['id']);
-                }
-            }
+            $this->sendTrackingEmails($od);
         }
         $this->recordOutput('order_fulfillment/local');
         Session::set('showfeedback', true);
@@ -152,90 +128,53 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 $items = $this->controller->order->getItemsForOrder($id);
                 $this->output .= "Reducing Stock and recording movement for order id: ".$id.PHP_EOL;
                 $this->removeStock($items, $id);
-
-                if( !empty($od['tracking_email']) )
+                if(SITE_LIVE) //only send emails if we are live and not testing
                 {
-                    if(SITE_LIVE) //only send emails if we are live and not testing
+                    $this->sendTrackingEmails($od);
+                }
+                if($od['is_shopify'] == 1)
+                {
+                    $this->updateShopify($od, "https:://directfreight.com.au");
+                }
+                if($od['is_woocommerce'] == 1)
+                {
+                    $this->output .= "Sending DF Tracking info to woo-commerce".PHP_EOL;
+                    $woocommerce_id = $od['client_order_id'];
+                    $tracking = array(
+                        "tracking_number"           => $od['consignment_id'],
+                        "custom_tracking_provider"  => "Direct Freight Express",
+                        "custom_tracking_link"      => "https:://directfreight.com.au"
+                    );
+                    if(
+                        Curl::sendSecurePOSTRequest(
+                            'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/'.$woocommerce_id.'/shipment-trackings',
+                            $tracking,
+                            Config::get('PBAWOOCONSUMERRKEY'),
+                            Config::get('PBAWOOCONSUMERSECRET')
+                        )
+                    )
                     {
-                        if($od['client_id'] == 87)
-                        {
-                            //PBA
-                            if($od['is_woocommerce'] == 1)
-                            {
-                                $this->output .= "Sending DF Tracking info to woo-commerce".PHP_EOL;
-                                $woocommerce_id = $od['client_order_id'];
-                                $tracking = array(
-                                    "tracking_number"           => $od['consignment_id'],
-                                    "custom_tracking_provider"  => "Direct Freight Express",
-                                    "custom_tracking_link"      => "https:://directfreight.com.au"
-                                );
-                                if(
-                                    Curl::sendSecurePOSTRequest(
-                                        'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/'.$woocommerce_id.'/shipment-trackings',
-                                        $tracking,
-                                        Config::get('PBAWOOCONSUMERRKEY'),
-                                        Config::get('PBAWOOCONSUMERSECRET')
-                                    )
-                                )
-                                {
-                                    //tracking updated, close the order in woo-commerce
-                                    $this->output .= "Trying to complete order in woo-commerce".PHP_EOL;
-                                    $woo = new Client(
-                                        'https://golfperformancestore.com.au',
-                                        Config::get('PBAWOOCONSUMERRKEY'),
-                                        Config::get('PBAWOOCONSUMERSECRET'),
-                                        [
-                                            'wp_api' => true,
-                                            'version' => 'wc/v3',
-                                            'query_string_auth' => true
-                                        ]
-                                    );
-                                    try{
-                                        $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
-                                    }
-                                    catch (HttpClientException $e) {
-                                        $this->output .= "ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".PHP_EOL;
-                                        $this->output .=  $e->getMessage() .PHP_EOL;
-                                        //$output .=  $e->getRequest() .PHP_EOL;
-                                        $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-                                        //die($output);
-                                    }
-                                }
-                            }
-                            elseif($od['is_shopify'] == 1)
-                            {
-                                if($od['is_voicecaddy'] == 1)
-                                {
-                                    $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https:://directfreight.com.au");
-                                }
-                                else
-                                {
-                                    $this->controller->PbaPerfectPracticeGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https:://directfreight.com.au");
-                                }
-                            }
+                        //tracking updated, close the order in woo-commerce
+                        $this->output .= "Trying to complete order in woo-commerce".PHP_EOL;
+                        $woo = new Client(
+                            'https://golfperformancestore.com.au',
+                            Config::get('PBAWOOCONSUMERRKEY'),
+                            Config::get('PBAWOOCONSUMERSECRET'),
+                            [
+                                'wp_api' => true,
+                                'version' => 'wc/v3',
+                                'query_string_auth' => true
+                            ]
+                        );
+                        try{
+                            $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
                         }
-                        if($od['client_id'] == 59)
-                        {
-                            //NOA
-                            $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
-                            Email::sendNoaConfirmEmail($od['id']);
-                        }
-                        elseif($od['client_id'] == 82)
-                        {
-                            //OnePlate
-                            $this->output .= "Sending One Plate confirmation".PHP_EOL;
-                            Email::sendOnePlateTrackingEmail($od['id']);
-                        }
-                        elseif($od['client_id'] == 86)
-                        {
-                            //Do SFA
-                            $this->output .= "Not Sending confirmation for BDS".PHP_EOL;
-                        }
-                        else
-                        {
-                             $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-                            //$mailer->sendTrackingEmail($id);
-                            Email::sendTrackingEmail($od['id']);
+                        catch (HttpClientException $e) {
+                            $this->output .= "ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".PHP_EOL;
+                            $this->output .=  $e->getMessage() .PHP_EOL;
+                            //$output .=  $e->getRequest() .PHP_EOL;
+                            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                            //die($output);
                         }
                     }
                 }
@@ -343,86 +282,56 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         			$db->updateDatabaseFields('orders', $o_values, $id);
 
                     $od = $this->controller->order->getOrderDetail($id);
-
-                    if( !empty($od['tracking_email']) )
+                    if(SITE_LIVE) //only send emails if we are live and not testing
                     {
-                        if(SITE_LIVE) //only send emails if we are live and not testing
+                        $this->sendTrackingEmails($od);
+                    }
+                    if($od['is_shopify'] == 1)
+                    {
+                        $this->updateShopify($od, "https://auspost.com.au/track/".$od['consignment_id']);
+                    }
+                    if($od['is_woocommerce'] == 1)
+                    {
+                        $this->output .= "Sending Eparcel Tracking info to woo-commerce".PHP_EOL;
+                        $woocommerce_id = $od['client_order_id'];
+                        $tracking = array(
+                            "tracking_number"   => $od['consignment_id'],
+                            "tracking_provider" => "Australia Post"
+                        );
+                        if(
+                            Curl::sendSecurePOSTRequest(
+                                'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/'.$woocommerce_id.'/shipment-trackings',
+                                $tracking,
+                                Config::get('PBAWOOCONSUMERRKEY'),
+                                Config::get('PBAWOOCONSUMERSECRET')
+                            )
+                        )
                         {
-                            if($od['client_id'] == 87)
-                            {
-                                //PBA
-                                if($od['is_woocommerce'] == 1)
-                                {
-                                    $this->output .= "Sending Eparcel Tracking info to woo-commerce".PHP_EOL;
-                                    $woocommerce_id = $od['client_order_id'];
-                                    $tracking = array(
-                                        "tracking_number"   => $od['consignment_id'],
-                                        "tracking_provider" => "Australia Post"
-                                    );
-                                    if(
-                                        Curl::sendSecurePOSTRequest(
-                                            'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/'.$woocommerce_id.'/shipment-trackings',
-                                            $tracking,
-                                            Config::get('PBAWOOCONSUMERRKEY'),
-                                            Config::get('PBAWOOCONSUMERSECRET')
-                                        )
-                                    )
-                                    {
-                                        //tracking updated, close the order in woo-commerce
-                                        $this->output .= "Trying to complete order in woo-commerce".PHP_EOL;
-                                        $woo = new Client(
-                                            'https://golfperformancestore.com.au',
-                                            Config::get('PBAWOOCONSUMERRKEY'),
-                                            Config::get('PBAWOOCONSUMERSECRET'),
-                                            [
-                                                'wp_api' => true,
-                                                'version' => 'wc/v3',
-                                                'query_string_auth' => true
-                                            ]
-                                        );
-                                        try{
-                                            $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
-                                        }
-                                        catch (HttpClientException $e) {
-                                            $this->output .= "ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".PHP_EOL;
-                                            $this->output .=  $e->getMessage() .PHP_EOL;
-                                            //$output .=  $e->getRequest() .PHP_EOL;
-                                            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-                                            //die($output);
-                                        }
-                                    }
-                                }
-                                elseif($od['is_shopify'] == 1)
-                                {
-                                    if($od['is_voicecaddy'] == 1)
-                                    {
-                                        $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https:://directfreight.com.au");
-                                    }
-                                    else
-                                    {
-                                        $this->controller->PbaPerfectPracticeGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], "https:://directfreight.com.au");
-                                    }
-                                }
+                            //tracking updated, close the order in woo-commerce
+                            $this->output .= "Trying to complete order in woo-commerce".PHP_EOL;
+                            $woo = new Client(
+                                'https://golfperformancestore.com.au',
+                                Config::get('PBAWOOCONSUMERRKEY'),
+                                Config::get('PBAWOOCONSUMERSECRET'),
+                                [
+                                    'wp_api' => true,
+                                    'version' => 'wc/v3',
+                                    'query_string_auth' => true
+                                ]
+                            );
+                            try{
+                                $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
                             }
-                            if($od['client_id'] == 82)
-                            {
-                                $this->output .= "Sending One Plate confirmation".PHP_EOL;
-                                Email::sendOnePlateTrackingEmail($od['id']);
+                            catch (HttpClientException $e) {
+                                $this->output .= "ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".PHP_EOL;
+                                $this->output .=  $e->getMessage() .PHP_EOL;
+                                //$output .=  $e->getRequest() .PHP_EOL;
+                                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                                //die($output);
                             }
-                            elseif($od['client_id'] == 86)
-                            {
-                                //Do SFA
-                                $this->output .= "Not Sending confirmation for BDS".PHP_EOL;
-                            }
-                            else
-                            {
-                                Email::sendTrackingEmail($id);
-                                $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
-
-                            }
-                            $this->controller->order->updateOrderValue('customer_emailed', 1, $id);
                         }
                     }
+
                     if($od['client_id'] == 7)
                     {
                         //FREEDOM
@@ -501,9 +410,49 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         }
     }
 
-    private function sendTrackingEmail()
+    private function sendTrackingEmails($od)
+    {
+        if( !empty($od['tracking_email']) )
+        {
+            if($od['client_id'] == 59) //NOA
+            {
+                $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
+                Email::sendNoaConfirmEmail($od['id']);
+            }
+            elseif($od['client_id'] == 82) //Oneplate
+            {
+                $this->output .= "Sending One Plate confirmation".PHP_EOL;
+                Email::sendOnePlateTrackingEmail($od['id']);
+            }
+            elseif($od['client_id'] == 86 || $od['client_id'] == 87) //BDS and PBA
+            {
+                //Do SFA
+                $this->output .= "Not Sending confirmation for BDS or PBA".PHP_EOL;
+            }
+            else
+            {
+                 $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                Email::sendTrackingEmail($od['id']);
+            }
+            $this->controller->order->updateOrderValue('customer_emailed', 1, $od['id']);
+        }
+    }
+
+    private function updateWooCommerce()
     {
 
+    }
+
+    private function updateShopify($od, $tracking_url)
+    {
+        if($od['is_voicecaddy'] == 1)
+        {
+            $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+        }
+        else
+        {
+            $this->controller->PbaPerfectPracticeGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+        }
     }
 
     private function recordOutput($file)
