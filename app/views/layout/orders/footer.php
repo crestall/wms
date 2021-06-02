@@ -2044,7 +2044,7 @@
                 },
                 'order-importing': {
                     init:function(){
-                        $("button#oneplate_full_import, button#nuchev_full_import, button#freedom_full_import, button#pbawoocommerce_full_import, button#pbashopify_full_import, button#bbshopify_full_import").click(function(e){
+                        $("button#oneplate_full_import, button#nuchev_full_import, button#freedom_full_import, button#pbawoocommerce_full_import, button#pbashopify_full_import, button#pbappgshopify_full_import, button#pbavcshopify_full_import").click(function(e){
                             var action = $(this).data('function');
                             swal({
                                 title: "Really run a full import?",

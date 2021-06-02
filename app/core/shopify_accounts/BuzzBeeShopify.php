@@ -12,9 +12,7 @@ class BuzzBeeShopify extends Shopify
     private $from_address_array = array();
     private $config = array();
 
-    private $shopify;
-
-    private $bboitems;
+    //private $shopify;
 
     public function init()
     {
@@ -38,6 +36,7 @@ class BuzzBeeShopify extends Shopify
 
         try{
             $this->shopify = new PHPShopify\ShopifySDK($this->config);
+            //echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
@@ -54,6 +53,15 @@ class BuzzBeeShopify extends Shopify
                 return $this->return_array;
             }
         }
+        /*
+        try{
+            $products = $this->shopify->Product->get();
+        } catch (Exception $e) {
+            echo "<pre>",print_r($e),"</pre>";die();
+        }
+
+        echo "BUZZ BEE<pre>",print_r($products),"</pre>";die();
+        */
     }
 
     public function getOrders()
@@ -61,7 +69,7 @@ class BuzzBeeShopify extends Shopify
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Buzz Bee Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
-
+        //echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
         $collected_orders = array();
         $params = array(
             'status'                => 'open',
@@ -69,9 +77,11 @@ class BuzzBeeShopify extends Shopify
             'fulfillment_status'    => 'unshipped',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
         );
+        //echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die();
         try {
             $order_id = "3859592249495";
-            $collected_orders = $this->shopify->Order->get($params);
+            $collected_orders[] = $this->shopify->Order($order_id)->get($params);
+            //$collected_orders = $this->shopify->Order->get($params);
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;

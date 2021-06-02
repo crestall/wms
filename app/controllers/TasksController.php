@@ -24,6 +24,18 @@ class TasksController extends Controller
         ]);
     }
 
+    public function BBShopifyTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->BuzzBeeShopify->getOrders();
+        }
+    }
+
     public function PBATestTask()
     {
         if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
@@ -249,7 +261,7 @@ class TasksController extends Controller
         }
     }
 
-    public function PBAShopifyTask()
+    public function PBAPerfectPracticeGolfShopifyTask()
     {
         if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
         {
@@ -257,7 +269,19 @@ class TasksController extends Controller
         }
         else
         {
-            $this->PbaShopify->getPBAOrders();
+            $this->PbaPerfectPracticeGolfShopify->getOrders();
+        }
+    }
+
+    public function PBAVoiceCaddyShopifyTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->PbaVoiceCaddyShopify->getOrders();
         }
     }
 

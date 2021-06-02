@@ -4,6 +4,7 @@
  * Shopify class.
  *
  * Interacts with the shopify api
+ * Individual shopify accounts are handled in the extending classes
 
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
@@ -25,6 +26,7 @@ class Shopify{
     );
     protected $ua;
     protected $order_items;
+    protected $shopify;
 
     public $controller;
 
@@ -35,25 +37,16 @@ class Shopify{
 
     public function init(){}
 
-    public function fulfillAnOrder()
+    public function getOrders(){}
+
+    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)
     {
-        $config = array(
-            'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
-            'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
-            'Password'       => Config::get('PBASHOPIFYAPIPASS')
-        );
-        try{
-            $this->shopify = new PHPShopify\ShopifySDK($config);
-        } catch(Exception $e){
-            var_dump($e);
-        }
-        $this->shopify->Order('2679941988514')->Fulfillment->post([
+        $this->shopify->Order($order_id)->Fulfillment->post([
             "location_id" => $this->shopify->Location->get()[0]['id'],
-            "tracking_number" => "ZQD5009720",
-            "tracking_urls" => ["https://auspost.com.au/track/ZQD5009720"],
+            "tracking_number" => $consignment_id,
+            "tracking_urls" => [$tracking_url],
             "notify_customer" => true
         ]);
-        return true;
     }
 
     protected function procOrders($collected_orders)

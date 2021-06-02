@@ -1,18 +1,18 @@
 <?php
 /**
- * BuzzBee location for the shopify class.
+ * PBA perfect practice golf location for the shopify class.
  *
  *
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-class PbaShopify extends Shopify
+class PbaPerfectPracticeGolfShopify extends Shopify
 {
     private $client_id = 87;
     private $from_address_array = array();
     private $config = array();
 
-    private $shopify;
+    //private $shopify;
 
     public function init()
     {
@@ -54,7 +54,7 @@ class PbaShopify extends Shopify
         }
     }
 
-    public function getPBAOrders()
+    public function getOrders()
     {
         //die($this->controller->request->params['args']['ua']);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
