@@ -285,18 +285,6 @@ class TasksController extends Controller
         }
     }
 
-    public function PBAVoiceCaddyShopifyTask()
-    {
-        if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
-        {
-            return $this->error(403);
-        }
-        else
-        {
-            $this->PbaVoiceCaddyShopify->getOrders();
-        }
-    }
-
     public function nuchevTask()
     {
         if(!isset($this->request->params['args']['ua']) || $this->request->params['args']['ua'] !== "FSG")

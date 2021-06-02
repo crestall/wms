@@ -98,7 +98,7 @@ class PbaPerfectPracticeGolfShopify extends Shopify
         //else
         //{
             echo "<p>Gonna send the email</p>";
-            Email::sendPBAShopifyImportSummary($this->return_array,"PPG Site");
+            Email::sendPBAShopifyImportSummary($this->return_array,"PerfectPractice Golf);
             echo "<p>Sent the email</p>";die();
         //}
         //echo "<pre>",print_r($this->return_array),"</pre>";
