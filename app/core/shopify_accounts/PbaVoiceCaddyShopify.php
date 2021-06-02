@@ -97,7 +97,7 @@ class PbaVoiceCaddyShopify extends Shopify
         }
         else
         {
-                Email::sendPBAShopifyImportSummary($this->return_array);
+                Email::sendPBAShopifyImportSummary($this->return_array, "Voice Caddy");
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
