@@ -97,7 +97,7 @@ class PbaPerfectPracticeGolfShopify extends Shopify
         }
         else
         {
-            Email::sendPBAShopifyImportSummary($this->return_array, "Perfect Practice Golf");
+            Email::sendPBAShopifyImportSummary($this->return_array);
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
