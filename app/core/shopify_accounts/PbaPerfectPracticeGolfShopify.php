@@ -93,11 +93,11 @@ class PbaPerfectPracticeGolfShopify extends Shopify
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
         if ($this->ua != "CRON" )
         {
-                return $this->return_array;
+            return $this->return_array;
         }
         else
         {
-                Email::sendPBAShopifyImportSummary($this->return_array);
+            Email::sendPBAShopifyImportSummary($this->return_array, "Perfect Practice Golf");
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
