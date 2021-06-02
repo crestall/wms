@@ -91,18 +91,15 @@ class PbaPerfectPracticeGolfShopify extends Shopify
                 $this->addPBAOrders($orders);
         }
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
-        //if ($this->ua != "CRON" )
-        //{
-            //return $this->return_array;
-        //}
-        //else
-        //{
-            echo "<p>Gonna send the email</p>";
-            Email::sendPBAShopifyImportSummary($this->return_array,"PerfectPractice Golf);
-            echo "<p>Sent the email</p>";die();
-        //}
-        //echo "<pre>",print_r($this->return_array),"</pre>";
-        //echo "<pre>",print_r($this->return_array),"</pre>";
+        if ($this->ua != "CRON" )
+        {
+            return $this->return_array;
+        }
+        else
+        {
+            Email::sendPBAShopifyImportSummary($this->return_array,"PerfectPractice Golf");
+        }
+        //echo "<pre>",print_r($this->return_array),"</pre>"; 
     }
 
     private function addPBAOrders($orders)
