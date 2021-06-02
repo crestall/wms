@@ -246,7 +246,7 @@
         }
     }
 
-    public static function sendPBAShopifyImportSummary($ret_array)
+    public static function sendPBAShopifyImportSummary($ret_array, $site = "Perfect Practice Golf")
     {
         //echo "<pre>",print_r($ret_array),"</pre>"; die();
         $mail = new PHPMailer();
@@ -289,8 +289,8 @@
                 ";
             }
 
-            $replace_array = array("{IMPORT_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{IMPORTS}");
-            $replace_with_array = array($ret_array['error_count'], $ret_array['import_count'], $import_errors, $imports);
+            $replace_array = array("{IMPORT_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{IMPORTS}", "{SITE}");
+            $replace_with_array = array($ret_array['error_count'], $ret_array['import_count'], $import_errors, $imports, $site);
             $body = str_replace($replace_array, $replace_with_array, $body);
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
