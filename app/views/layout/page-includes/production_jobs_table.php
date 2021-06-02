@@ -134,6 +134,8 @@
                         <?php else: ?>
                             style="background-color: #66ff66;"
                         <?php endif;?>
+                    <?php elseif(preg_match("/^asap$/i", $job['due_date'])):?>
+                        style="background-color: #FF0000; color:#FFF"
                     <?php endif;?>
                 >
                     <?php
