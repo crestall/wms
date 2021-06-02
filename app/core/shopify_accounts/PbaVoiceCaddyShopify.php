@@ -75,7 +75,7 @@ class PbaVoiceCaddyShopify extends Shopify
                 $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
                 if ($this->ua == "CRON" )
                 {
-                        Email::sendCronError($e, "Perfect Practice Golf");
+                        Email::sendCronError($e, "Voice Caddy");
                         return;
                 }
                 else
