@@ -29,6 +29,7 @@ class Shopify{
     protected $shopify;
 
     public $controller;
+    public $shop_name;
 
     public function __construct(Controller $controller)
     {

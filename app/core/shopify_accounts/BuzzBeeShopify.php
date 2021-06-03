@@ -18,6 +18,7 @@ class BuzzBeeShopify extends Shopify
     {
         //parent::__construct($controller);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
+        $this->shop_name = "BUZZ BEE";
         $this->config = array(
             'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
             'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
