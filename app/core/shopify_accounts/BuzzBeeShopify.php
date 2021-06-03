@@ -39,9 +39,9 @@ class BuzzBeeShopify extends Shopify
 
         try{
             $this->bbshopify = new PHPShopify\ShopifySDK($this->config);
-            echo "BUZZ BEE<pre>",print_r($this->bbshopify->$config),"</pre>";//die();
+            echo "BUZZ BEE<pre>",print_r($this->bbshopify->config),"</pre>";//die();
         } catch (Exception $e) {
-            echo "BUZZ BEE in create shopify<pre>",print_r($this->bbshopify->$config),"</pre>";
+            echo "BUZZ BEE in create shopify<pre>",print_r($this->bbshopify->config),"</pre>";
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
@@ -87,7 +87,7 @@ class BuzzBeeShopify extends Shopify
             $collected_orders[] = $this->bbshopify->Order($order_id)->get($params);
             //$collected_orders = $this->shopify->Order->get($params);
         } catch (Exception $e) {
-            echo "BUZZ BEE in getOrders<pre>",print_r($this->bbshopify->$config),"</pre>";
+            echo "BUZZ BEE in getOrders<pre>",print_r($this->bbshopify->config),"</pre>";
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
