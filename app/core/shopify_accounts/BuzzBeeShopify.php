@@ -159,7 +159,12 @@ class BuzzBeeShopify extends Shopify
         {
             $order_id = $co['id'];
             $order_number = $co['order_number'];
-            $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
+            try {
+                $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
+            } catch (Exception $e) {
+                echo "In the Filter<pre>",print_r($e),"</pre>";die();
+            }
+
             foreach($order_fulfillments as $of)
             {
                 if(!preg_match("/FSG/i", $of['assigned_location']['name']))
