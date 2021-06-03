@@ -87,8 +87,6 @@ class BuzzBeeShopify extends Shopify
             //$order_id = "3859592249495";
             //$collected_orders[] = $this->shopify->Order($order_id)->get($params);
             $collected_orders = $shopify->Order->get($params);
-            $adminURL = PHPShopify\ShopifySDK::getAdminUrl();
-            echo "<p>BUZZ BEE $adminURL</p>";die();
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
