@@ -33,25 +33,6 @@ class PbaPerfectPracticeGolfShopify extends Shopify
             'state'		=>	$from_address['state'],
             'country'	=>  $from_address['country']
         );
-
-        try{
-            $this->shopify = new PHPShopify\ShopifySDK($this->config);
-        } catch (Exception $e) {
-            echo "<pre>",print_r($e),"</pre>";die();
-            $this->output .=  $e->getMessage() .PHP_EOL;
-            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-            if ($this->ua == "CRON" )
-            {
-                Email::sendCronError($e, "Perfect Practice Golf");
-                return;
-            }
-            else
-            {
-                $this->return_array['import_error'] = true;
-                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
-                return $this->return_array;
-            }
-        }
     }
 
     public function getOrders()
@@ -61,14 +42,14 @@ class PbaPerfectPracticeGolfShopify extends Shopify
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Performance Brands Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
-
+        $shopify = $this->resetConfig($this->config);
         $collected_orders = array();
         $params = array(
             'status'            => 'open',
             'financial_status'  => 'paid',
         );
         try {
-            $collected_orders = $this->shopify->Order->get($params);
+            $collected_orders = $shopify->Order->get($params);
         } catch (Exception $e) {
                 echo "<pre>",print_r($e),"</pre>";die();
                 $this->output .=  $e->getMessage() .PHP_EOL;
