@@ -39,7 +39,7 @@ class BuzzBeeShopify extends Shopify
 
         try{
             $this->shopify = new PHPShopify\ShopifySDK($this->config);
-            //echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
+            echo "BUZZ BEE<pre>",print_r($this->shopify::$config),"</pre>";die();
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
