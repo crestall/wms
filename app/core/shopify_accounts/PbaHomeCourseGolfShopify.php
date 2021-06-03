@@ -26,7 +26,7 @@ class PbaHomeCourseGolfShopify extends Shopify
 
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
-            'name'      =>  'Perfect Practice Golf (via FSG 3PL)',
+            'name'      =>  'Home Course Golf (via FSG 3PL)',
             'lines'		=>	array($from_address['address']),
             'suburb'	=>	$from_address['suburb'],
             'postcode'	=>	$from_address['postcode'],
@@ -42,7 +42,7 @@ class PbaHomeCourseGolfShopify extends Shopify
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             if ($this->ua == "CRON" )
             {
-                Email::sendCronError($e, "Perfect Practice Golf");
+                Email::sendCronError($e, "Home Course Golf");
                 return;
             }
             else
