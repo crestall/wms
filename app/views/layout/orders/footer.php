@@ -2046,7 +2046,8 @@
                     init:function(){
                         //$("button#oneplate_full_import, button#nuchev_full_import, button#freedom_full_import, button#pbawoocommerce_full_import, button#pbashopify_full_import, button#pbappgshopify_full_import, button#pbavcshopify_full_import, button#pbahcgshopify_full_import, button#bbshopify_full_import")
                         $('button.shopify_import').each(function(i,e){
-                            $(this).click(function(e){
+                            $(this).click(function(ev){
+                                console.log(ev.target.id + " clicked");
                                 var action = $(this).data('function');
                                 console.log("action: "+action);
                                 swal({
