@@ -457,6 +457,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         {
             $this->controller->PbaPerfectPracticeGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
         }
+        $this->output .= "Fullfilled order id: {$od['id']} in shopify".PHP_EOL;
     }
 
     private function recordOutput($file)
