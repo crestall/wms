@@ -41,7 +41,7 @@ class BuzzBeeShopify extends Shopify
             $this->shopify = new PHPShopify\ShopifySDK($this->config);
             //echo "BUZZ BEE<pre>",print_r($this->shopify::$config),"</pre>";die();
         } catch (Exception $e) {
-            echo "BUZZ BEE in catch<pre>",print_r($this->shopify::$config),"</pre>";
+            echo "BUZZ BEE in new shopify<pre>",print_r($this->shopify::$config),"</pre>";
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
@@ -88,6 +88,7 @@ class BuzzBeeShopify extends Shopify
             //$collected_orders = $this->shopify->Order->get($params);
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
+            echo "BUZZ BEE in getOrders<pre>",print_r($this->shopify::$config),"</pre>";
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             if ($this->ua == "CRON" )
