@@ -218,6 +218,7 @@ class OrdersController extends Controller
                 unset($response[$a]) ;
 
        }
+       echo "<p>Shop name: ".$this->BuzzBeeShopify->shop_name."</p>";
        echo "<pre>",print_r($response),"</pre>"; die();
 
 
