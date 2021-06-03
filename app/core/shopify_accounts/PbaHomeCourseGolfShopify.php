@@ -179,7 +179,7 @@ class PbaHomeCourseGolfShopify extends Shopify
                 'country'               => $o['country'],
                 'contact_phone'         => $o['contact_phone'],
                 'is_shopify'            => 1,
-                'is_voicecaddy'         => 1,
+                'is_homescoursegolf'    => 1,
                 'shopify_id'            => $o['shopify_id']
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;

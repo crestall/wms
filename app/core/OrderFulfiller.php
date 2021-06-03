@@ -449,6 +449,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         {
             $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
         }
+        elseif($od['is_homecoursegolf'] == 1)
+        {
+            $this->controller->PbaHomeCourseGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+        }
         else
         {
             $this->controller->PbaPerfectPracticeGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
