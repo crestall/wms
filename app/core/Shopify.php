@@ -36,8 +36,6 @@ class Shopify{
         $this->controller = $controller;
     }
 
-    public function init(){}
-
     public function getOrders(){}
 
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)

@@ -14,9 +14,9 @@ class PbaPerfectPracticeGolfShopify extends Shopify
 
     //private $shopify;
 
-    public function init()
+    public function __construct($controller)
     {
-        //parent::__construct($controller);
+        parent::__construct($controller);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
         $this->config = array(
             'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
