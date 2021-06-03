@@ -26,7 +26,7 @@ class Shopify{
     );
     protected $ua;
     protected $order_items;
-    protected $shopify;
+    //protected $shopify;
 
     public $controller;
     public $shop_name;
