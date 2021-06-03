@@ -12,7 +12,7 @@ class BuzzBeeShopify extends Shopify
     private $from_address_array = array();
     private $config = array();
 
-    private $shopify;
+    private $bbshopify;
 
     public function __construct($controller)
     {
@@ -39,9 +39,9 @@ class BuzzBeeShopify extends Shopify
 
         try{
             $this->shopify = new PHPShopify\ShopifySDK($this->config);
-            echo "BUZZ BEE<pre>",print_r($this->shopify::$config),"</pre>";//die();
+            echo "BUZZ BEE<pre>",print_r($this->bbshopify::$config),"</pre>";//die();
         } catch (Exception $e) {
-            echo "BUZZ BEE in create shopify<pre>",print_r($this->shopify::$config),"</pre>";
+            echo "BUZZ BEE in create shopify<pre>",print_r($this->bbshopify::$config),"</pre>";
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
@@ -84,10 +84,10 @@ class BuzzBeeShopify extends Shopify
         //echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die();
         try {
             $order_id = "3859592249495";
-            $collected_orders[] = $this->shopify->Order($order_id)->get($params);
+            $collected_orders[] = $this->bbshopify->Order($order_id)->get($params);
             //$collected_orders = $this->shopify->Order->get($params);
         } catch (Exception $e) {
-            echo "BUZZ BEE in getOrders<pre>",print_r($this->shopify::$config),"</pre>";
+            echo "BUZZ BEE in getOrders<pre>",print_r($this->bbshopify::$config),"</pre>";
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
