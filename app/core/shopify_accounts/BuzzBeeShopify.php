@@ -77,7 +77,7 @@ class BuzzBeeShopify extends Shopify
         $collected_orders = array();
         $params = array(
             'status'                => 'open',
-            'financial_status'      => 'paid',
+            'financial_status'      => 'any',
             'fulfillment_status'    => 'unshipped',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
         );
