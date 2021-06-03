@@ -147,7 +147,7 @@
                         <div class="form-group row full_import">
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
-                                <button class="btn btn-outline-secondary" id="pbappgshopify_full_import" data-function="importPBAPPGShopifyOrders">Run It</button>
+                                <button class="btn btn-outline-secondary shopify_import" id="pbappgshopify_full_import" data-function="importPBAPPGShopifyOrders">Run It</button>
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                         <div class="form-group row full_import">
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
-                                <button class="btn btn-outline-secondary" id="pbavcshopify_full_import" data-function="importPBAVCShopifyOrders">Run It</button>
+                                <button class="btn btn-outline-secondary shopify_import" id="pbavcshopify_full_import" data-function="importPBAVCShopifyOrders">Run It</button>
                             </div>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                         <div class="form-group row full_import">
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
-                                <button class="btn btn-outline-secondary" id="pbahcgshopify_full_import" data-function="importPBAHCGShopifyOrders">Run It</button>
+                                <button class="btn btn-outline-secondary shopify_import" id="pbahcgshopify_full_import" data-function="importPBAHCGShopifyOrders">Run It</button>
                             </div>
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                         <div class="form-group row full_import">
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
-                                <button class="btn btn-outline-secondary" id="bbshopify_full_import" data-function="importBBShopifyOrders">Run It</button>
+                                <button class="btn btn-outline-secondary shopify_import" id="bbshopify_full_import" data-function="importBBShopifyOrders">Run It</button>
                             </div>
                         </div>
                     </div>
