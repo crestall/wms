@@ -41,7 +41,8 @@ class BuzzBeeShopify extends Shopify
 
         try{
             $this->shopify = new PHPShopify\ShopifySDK($this->config);
-            //echo "BUZZ BEE<pre>",print_r($this->shopify::$config),"</pre>";die();
+            $adminURL = PHPShopify\ShopifySDK::getAdminUrl();
+            echo "<p>BUZZ BEE $adminURL</p>";die();
         } catch (Exception $e) {
             //echo "BUZZ BEE in create shopify<pre>",print_r($this->shopify->config),"</pre>";
             echo "<pre>",print_r($e),"</pre>";die();
