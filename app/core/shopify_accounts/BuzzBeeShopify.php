@@ -12,17 +12,22 @@ class BuzzBeeShopify extends Shopify
     private $from_address_array = array();
     private $config = array();
 
-    //private $shopify;
+    private $shopify;
 
-    public function init()
+    public $shop_name;
+
+    public function __construct($controller)
     {
-        //parent::__construct($controller);
+        parent::__construct($controller);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
+        $this->shop_name = "BUZZ BEE";
         $this->config = array(
             'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
             'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
             'Password'       => Config::get('BBSHOPIFYAPIPASS')
         );
+
+        //echo "BUZZBEE<pre>",print_r($this->config),"</pre>";die();
 
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
@@ -33,11 +38,11 @@ class BuzzBeeShopify extends Shopify
             'state'		=>	$from_address['state'],
             'country'	=>  $from_address['country']
         );
-
+        /*
         try{
             $this->shopify = new PHPShopify\ShopifySDK($this->config);
-            //echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
         } catch (Exception $e) {
+            //echo "BUZZ BEE in create shopify<pre>",print_r($this->shopify->config),"</pre>";
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
@@ -53,7 +58,7 @@ class BuzzBeeShopify extends Shopify
                 return $this->return_array;
             }
         }
-        /*
+
         try{
             $products = $this->shopify->Product->get();
         } catch (Exception $e) {
@@ -69,7 +74,7 @@ class BuzzBeeShopify extends Shopify
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Buzz Bee Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
-        //echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
+        echo "<p>getting BUZZ bee orders</p>";
         $collected_orders = array();
         $params = array(
             'status'                => 'open',
@@ -77,11 +82,11 @@ class BuzzBeeShopify extends Shopify
             'fulfillment_status'    => 'unshipped',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
         );
-        //echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die();
+        $shopify = $this->resetConfig($this->config);
         try {
-            $order_id = "3859592249495";
-            $collected_orders[] = $this->shopify->Order($order_id)->get($params);
-            //$collected_orders = $this->shopify->Order->get($params);
+            //$order_id = "3859592249495";
+            //$collected_orders[] = $this->shopify->Order($order_id)->get($params);
+            $collected_orders = $shopify->Order->get($params);
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
@@ -150,11 +155,17 @@ class BuzzBeeShopify extends Shopify
 
     private function filterForFSG($collected_orders)
     {
+        $shopify = $this->resetConfig($this->config);
         foreach($collected_orders as $coi => $co)
         {
             $order_id = $co['id'];
             $order_number = $co['order_number'];
-            $order_fulfillments = $this->shopify->Order($order_id)->FulfillmentOrder->get();
+            try {
+                $order_fulfillments = $shopify->Order($order_id)->FulfillmentOrder->get();
+            } catch (Exception $e) {
+                echo "In the Filter<pre>",print_r($e),"</pre>";die();
+            }
+
             foreach($order_fulfillments as $of)
             {
                 if(!preg_match("/FSG/i", $of['assigned_location']['name']))

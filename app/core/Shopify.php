@@ -26,16 +26,15 @@ class Shopify{
     );
     protected $ua;
     protected $order_items;
-    protected $shopify;
+    //protected $shopify;
 
     public $controller;
+    public $shop_name;
 
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
     }
-
-    public function init(){}
 
     public function getOrders(){}
 
@@ -47,6 +46,11 @@ class Shopify{
             "tracking_urls" => [$tracking_url],
             "notify_customer" => true
         ]);
+    }
+
+    protected function resetConfig($config)
+    {
+        return PHPShopify\ShopifySDK::config($config);
     }
 
     protected function procOrders($collected_orders)

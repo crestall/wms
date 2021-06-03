@@ -58,7 +58,7 @@ class Controller {
 
     public $directfreight;
 
-    public $shopify;
+    //public $shopify;
 
     public $squarespace;
 
@@ -231,12 +231,12 @@ class Controller {
      */
     public function loadShopifyInstances(array $locations)
     {
-        $this->shopify =  new Shopify($this);
+        //$this->shopify =  new Shopify($this);
         foreach($locations as $location)
         {
             $class = $location . "Shopify";
             $this->{$class} = new $class($this);
-            $this->{$class}->init();
+            //$this->{$class}->init();
         }
     }
 
