@@ -38,7 +38,7 @@ class BuzzBeeShopify extends Shopify
             'state'		=>	$from_address['state'],
             'country'	=>  $from_address['country']
         );
-
+        /*
         try{
             $this->shopify = new PHPShopify\ShopifySDK($this->config);
         } catch (Exception $e) {
@@ -58,7 +58,7 @@ class BuzzBeeShopify extends Shopify
                 return $this->return_array;
             }
         }
-        /*
+
         try{
             $products = $this->shopify->Product->get();
         } catch (Exception $e) {
@@ -82,11 +82,11 @@ class BuzzBeeShopify extends Shopify
             'fulfillment_status'    => 'unshipped',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
         );
-        //echo "BUZZ BEE<pre>",var_dump($params),"</pre>";die();
+        $shopify = $this->resetConfig($this->config);
         try {
             //$order_id = "3859592249495";
             //$collected_orders[] = $this->shopify->Order($order_id)->get($params);
-            $collected_orders = $this->shopify->Order->get($params);
+            $collected_orders = $shopify->Order->get($params);
             $adminURL = PHPShopify\ShopifySDK::getAdminUrl();
             echo "<p>BUZZ BEE $adminURL</p>";die();
         } catch (Exception $e) {
