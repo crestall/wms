@@ -25,7 +25,7 @@ class BuzzBeeShopify extends Shopify
             'Password'       => Config::get('BBSHOPIFYAPIPASS')
         );
 
-        echo "BUZZBEE<pre>",print_r($this->config),"</pre>";die();
+        //echo "BUZZBEE<pre>",print_r($this->config),"</pre>";die();
 
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
