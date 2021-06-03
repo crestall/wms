@@ -38,15 +38,7 @@ class Shopify{
 
     public function getOrders(){}
 
-    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)
-    {
-        $this->shopify->Order($order_id)->Fulfillment->post([
-            "location_id" => $this->shopify->Location->get()[0]['id'],
-            "tracking_number" => $consignment_id,
-            "tracking_urls" => [$tracking_url],
-            "notify_customer" => true
-        ]);
-    }
+    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url){}
 
     protected function resetConfig($config)
     {
@@ -55,9 +47,6 @@ class Shopify{
 
     protected function procOrders($collected_orders)
     {
-        //$this->output .= print_r($collected_orders,true).PHP_EOL;
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
-        //echo $_SERVER['HTTP_USER_AGENT'];
         $orders = array();
         if(count($collected_orders))
         {
@@ -65,11 +54,6 @@ class Shopify{
             $orders_items = array();
             foreach($collected_orders as $i => $o)
             {
-                /*if(isset($o['shipping_address']))
-                    echo "<pre>",print_r($o['shipping_address']),"</pre>";
-                else
-                    echo "No shipping address for order $i : <pre>",print_r($o),"</pre>";
-                continue; */
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
@@ -119,7 +103,6 @@ class Shopify{
                     }
                     $aResponse = $this->controller->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
 
-                    //echo "<pre>",print_r($aResponse),"</pre>";
                     if(isset($aResponse['errors']))
                     {
                         $order['errors'] = 1;
@@ -189,7 +172,6 @@ class Shopify{
                     $delivery_instructions = $o['note'];
                 }
                 $order['instructions'] = $delivery_instructions;
-                //echo "THE ORDER<pre>",print_r($order),"</pre>";die();
                 if($items_errors)
                 {
                     $message = "<p>There was a problem with some items</p>";
@@ -216,7 +198,6 @@ class Shopify{
                         ++$this->return_array['error_count'];
                         $this->return_array['error_orders'][] = $order['client_order_id'];
                     }
-                    //echo $message;
                 }
                 else
                 {
@@ -230,9 +211,6 @@ class Shopify{
                 }
             }//endforeach order
             $orders['orders_items'] = $orders_items;
-            //echo "ORDERS<pre>",print_r($orders),"</pre>";//die();
-            //$this->pbaoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
-            //echo "ORDERS ITEMS<pre>",print_r($this->pbaoitems),"</pre>";die();
             $this->output .= "===========================   Gonna send em back  =========================".PHP_EOL;
             return $orders;
         }//end if count orders

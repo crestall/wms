@@ -83,6 +83,17 @@ class PbaHomeCourseGolfShopify extends Shopify
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
+    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)
+    {
+        $shopify = $this->resetConfig($this->config);
+        $shopify->Order($order_id)->Fulfillment->post([
+            "location_id" => $shopify->Location->get()[0]['id'],
+            "tracking_number" => $consignment_id,
+            "tracking_urls" => [$tracking_url],
+            "notify_customer" => true
+        ]);
+    }
+
     private function addPBAOrders($orders)
     {
         $pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);

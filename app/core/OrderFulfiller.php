@@ -416,22 +416,22 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         {
             if($od['client_id'] == 59) //NOA
             {
-                $this->output .= "Sending Noa Sleep confirmation".PHP_EOL;
+                $this->output .= "Sending Noa Sleep confirmation for order id: ".$od['id'].PHP_EOL;
                 Email::sendNoaConfirmEmail($od['id']);
             }
             elseif($od['client_id'] == 82) //Oneplate
             {
-                $this->output .= "Sending One Plate confirmation".PHP_EOL;
+                $this->output .= "Sending One Plate confirmation for order id: ".$od['id'].PHP_EOL;
                 Email::sendOnePlateTrackingEmail($od['id']);
             }
             elseif($od['client_id'] == 86 || $od['client_id'] == 87) //BDS and PBA
             {
                 //Do SFA
-                $this->output .= "Not Sending confirmation for BDS or PBA".PHP_EOL;
+                $this->output .= "Not Sending confirmation for BDS or PBA for order id: ".$od['id'].PHP_EOL;
             }
             else
             {
-                 $this->output .= "Sending tracking email for {$od['order_number']}".PHP_EOL;
+                 $this->output .= "Sending tracking email for {$od['order_number']} for order id: ".$od['id'].PHP_EOL;
                 Email::sendTrackingEmail($od['id']);
             }
             $this->controller->order->updateOrderValue('customer_emailed', 1, $od['id']);
