@@ -48,6 +48,11 @@ class Shopify{
         ]);
     }
 
+    protected function resetConfig($config)
+    {
+        return PHPShopify\ShopifySDK::config($config);
+    }
+
     protected function procOrders($collected_orders)
     {
         //$this->output .= print_r($collected_orders,true).PHP_EOL;
