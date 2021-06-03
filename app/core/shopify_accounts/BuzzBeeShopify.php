@@ -76,8 +76,8 @@ class BuzzBeeShopify extends Shopify
         //echo "BUZZ BEE<pre>",var_dump($this->shopify),"</pre>";die();
         $collected_orders = array();
         $params = array(
-            'status'                => 'open',
-            'financial_status'      => 'any',
+            'status'                => 'any',
+            'financial_status'      => 'paid',
             'fulfillment_status'    => 'unshipped',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
         );
