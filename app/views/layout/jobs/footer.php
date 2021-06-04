@@ -137,10 +137,12 @@
                         {
                             if (!ui.item)
                 	        {
+                	            var $target = $(event.target);
                                 $('input#customer_id').val(0);
                                 $('input.customer').each(function(element, index){
                                     $(this).val("");
-                                })
+                                });
+                                $target.val("");
                                 return false;
                             }
                         }
