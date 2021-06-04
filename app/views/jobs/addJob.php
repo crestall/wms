@@ -181,6 +181,11 @@ else
                                 <div class="col-md-8">
                                     <input type="text" class="required form-control" name="customer_name" id="customer_name" value="<?php echo Form::value('customer_name');?>" />
                                     <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $customer_id;?>" />
+                                    <span class="inst">
+                                        Start typing a name and choose a customer from the list<br>
+                                        Only customers already in the system can be chosen here<br>
+                                        <a href="/customers/add-customer" target="_blank" title="opens in new window">Click here to add a new customer <i class="fal fa-external-link"></i></a>
+                                    </span>
                                     <?php echo Form::displayError('customer_name');?>
                                 </div>
                             </div>
