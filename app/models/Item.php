@@ -245,6 +245,65 @@ class Item extends Model{
         return $rows;
     }
 
+    public function getClientInventoryForCSV($client_id, $active = 1)
+    {
+        $db = Database::openConnection();
+
+        $q = "
+            SELECT
+                IFNULL( SUM(a.qty),0) AS on_hand,
+                IFNULL( SUM(a.qc_count), 0) AS qc_count,
+                IFNULL( SUM(b.allocated), 0) AS allocated,
+                ( IFNULL( SUM(a.qty),0) - IFNULL( SUM(a.qc_count), 0) - IFNULL( SUM(b.allocated), 0) ) AS available,
+                a.name AS item_name,
+                a.sku AS sku,
+                a.barcode AS barcode,
+                a.client_product_id AS client_product_id,
+                a.item_id AS item_id,
+                a.image,
+                a.width,
+                a.depth,
+                a.weight,
+                a.low_stock_warning,
+                GROUP_CONCAT(
+                    IFNULL(a.location_id,0),',',
+                    IFNULL(a.location,''),',',
+                    IFNULL(a.qty,''),',',
+                    IFNULL(a.qc_count,''),',',
+                    IFNULL(b.allocated,''),','
+                    SEPARATOR '|'
+                ) AS locations,
+                (SELECT COUNT(*) FROM items_locations JOIN locations ON locations.id = items_locations.location_id WHERE item_id = a.item_id AND locations.tray = 0) AS bays,
+                (SELECT COUNT(*) FROM items_locations JOIN locations ON locations.id = items_locations.location_id WHERE item_id = a.item_id AND locations.tray = 1) AS trays
+            FROM
+                (
+                    SELECT
+                        l.id AS location_id, il.qty, il.qc_count, i.client_product_id, i.id AS item_id,
+                        i.name, i.sku, i.barcode, l.location, i.pack_item, i.width, i.depth, i.height, i.weight, i.low_stock_warning, l.oversize, i.image
+                    FROM
+                        items i LEFT JOIN
+                        items_locations il ON i.id = il.item_id LEFT JOIN
+                        locations l ON il.location_id = l.id
+                    WHERE
+                        i.client_id = $client_id AND i.active = $active
+                ) a
+                LEFT JOIN
+                (
+                    SELECT
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                    FROM
+                        orders_items oi JOIN
+                        orders o ON oi.order_id = o.id JOIN
+                        items i ON oi.item_id = i.id
+                    WHERE
+                        o.status_id != 4
+                    GROUP BY
+                    oi.location_id, oi.item_id
+                ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
+            GROUP BY a.item_id
+        ";
+    }
+
     public function getClientInventory($client_id, $active = 1)
     {
         $db = Database::openConnection();

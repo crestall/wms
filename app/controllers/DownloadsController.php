@@ -57,7 +57,7 @@ class DownloadsController extends Controller {
                 ${$field} = $value;
             }
         }
-        $items = $this->item->getClientInventoryArray($client_id);
+        $items = $this->item->getClientInventoryForCSV($client_id);
         $cols = array(
             "Name",
             "SKU",
@@ -66,21 +66,21 @@ class DownloadsController extends Controller {
             "On Hand",
             "Allocated",
             "Damaged/Unsuitable",
-            "Available"
+            "Available",
+            "Pallet Bays Used"
         );
         $rows = array();
         foreach($items as $item_id => $i)
         {
-            $available = $i['onhand'] - $i['allocated'] - $i['qc_count'];
             $row = array(
-                $i['name'],
+                $i['item_name'],
                 $i['sku'],
                 $i['client_product_id'],
                 $i['barcode'],
                 $i['onhand'],
                 $i['allocated'],
                 $i['qc_count'],
-                $available
+                $i['available']
             );
             $rows[] = $row;
         }
