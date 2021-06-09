@@ -302,6 +302,7 @@ class Item extends Model{
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
             GROUP BY a.item_id
         ";
+        return $db->queryData($q); 
     }
 
     public function getClientInventory($client_id, $active = 1)

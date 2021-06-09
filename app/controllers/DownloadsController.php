@@ -70,17 +70,18 @@ class DownloadsController extends Controller {
             "Pallet Bays Used"
         );
         $rows = array();
-        foreach($items as $item_id => $i)
+        foreach($items as $i)
         {
             $row = array(
                 $i['item_name'],
                 $i['sku'],
                 $i['client_product_id'],
                 $i['barcode'],
-                $i['onhand'],
+                $i['on_hand'],
                 $i['allocated'],
                 $i['qc_count'],
-                $i['available']
+                $i['available'],
+                $i['bays']
             );
             $rows[] = $row;
         }
