@@ -469,7 +469,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $cmodel = new Courier();
-        /*$query = "
+        $query = "
             SELECT
                 o.*
             FROM
@@ -483,7 +483,7 @@ class Order extends Model{
             'client_id' => 	$client_id,
             'status_id' =>  $this->fulfilled_id
         );
-        */
+        /*
         $query = "
             SELECT
                 o.*
@@ -497,7 +497,7 @@ class Order extends Model{
         $array = array(
             'client_id' => 	$client_id
         );
-
+        */
         $orders = $db->queryData($query, $array);
         $return = array();
         foreach($orders as $co)
