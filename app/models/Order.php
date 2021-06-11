@@ -519,6 +519,8 @@ class Order extends Model{
 
             $products = $this->getItemsCountForOrder($co['id']);
 
+            echo "PRODUCTS<pre>",print_r($products),"</pre>";
+
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
             {
