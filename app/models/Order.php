@@ -483,20 +483,21 @@ class Order extends Model{
             'client_id' => 	$client_id,
             'status_id' =>  $this->fulfilled_id
         );
-        /*$query = "
+        /*
+        $query = "
             SELECT
                 o.*
             FROM
                 orders o
             WHERE
-                client_id = :client_id AND id >= 83706
+                client_id = :client_id AND id = 88034
             ORDER BY
                 date_fulfilled DESC
         ";
         $array = array(
             'client_id' => 	$client_id
         );
-        */ 
+        */
         $orders = $db->queryData($query, $array);
         $return = array();
         foreach($orders as $co)
@@ -517,6 +518,8 @@ class Order extends Model{
             $shipped_to .= $address;
 
             $products = $this->getItemsCountForOrder($co['id']);
+
+            echo "PRODUCTS<pre>",print_r($products),"</pre>";
 
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
@@ -1248,7 +1251,7 @@ class Order extends Model{
             SELECT i.*, SUM(oi.qty) AS qty, oi.client_order_item_id, oi.is_kit
             FROM orders_items oi JOIN items i ON oi.item_id = i.id
             WHERE oi.order_id = $order_id
-            GROUP BY i.id
+            GROUP BY oi.client_order_item_id, i.id
         ";
         if($picked === 1)
             $q .= " AND oi.picked = 1";
