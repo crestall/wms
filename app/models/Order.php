@@ -1251,7 +1251,7 @@ class Order extends Model{
             SELECT i.*, SUM(oi.qty) AS qty, oi.client_order_item_id, oi.is_kit
             FROM orders_items oi JOIN items i ON oi.item_id = i.id
             WHERE oi.order_id = $order_id
-            GROUP BY i.id
+            GROUP BY oi.client_order_item_id, i.id
         ";
         if($picked === 1)
             $q .= " AND oi.picked = 1";
