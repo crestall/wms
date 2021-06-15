@@ -187,6 +187,16 @@ class BuzzBeeShopify extends Shopify
         return $collected_orders;
     }
 
+    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)
+    {
+        $shopify = $this->resetConfig($this->config);
+        $shopify->Order($order_id)->Fulfillment->post([
+            "location_id" => 54288547991,               //Get this from elsewhere in case it changes
+            "tracking_number" => $consignment_id,
+            "tracking_urls" => [$tracking_url],
+            "notify_customer" => true
+        ]);
+    }
 
 } // end class
  ?>
