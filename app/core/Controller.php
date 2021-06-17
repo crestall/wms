@@ -165,6 +165,7 @@ class Controller {
             'BuzzBee',
             'PbaHomeCourseGolf',
             'PbaPerfectPracticeGolf',
+            'PbaSuperspeedGolf',
             'PbaVoiceCaddy'
         ]);
     }
