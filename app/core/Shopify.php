@@ -80,6 +80,8 @@ class Shopify{
                 );
                 //if(strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
                 if(isset($o['shipping_lines'][0]) && strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
+                if( isset($o['pickup']) )
+                    $order['pickup'] = 1;
                 if( !filter_var($o['email'], FILTER_VALIDATE_EMAIL) )
                 {
                     $order['errors'] = 1;
