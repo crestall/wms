@@ -105,10 +105,6 @@ class BuzzBeeShopify extends Shopify
                 );
                 $filtered_orders[$foi]['pickup'] = 1;
             }
-            else
-            {
-                $filtered_orders[$foi]['pickup'] = 0;
-            }
         }
         //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
         //die();
