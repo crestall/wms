@@ -209,6 +209,21 @@ class OrdersController extends Controller
        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
     }
 
+    public function importPBASSGShopifyOrders()
+    {
+       $response = $this->PbaSuperspeedGolfShopify->getOrders();
+       $feedback = "<h2><i class='far fa-check-circle'></i>PBA Super SpeedGolf Shopify Orders Imported</h2>";
+       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
+       if($response['error_count'] > 0)
+       {
+           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
+           $feedback .= "<p>The error response is listed below</p>";
+           $feedback .= $response['error_string'];
+       }
+       Session::set('feedback', $feedback);
+       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
+    }
+
     public function importBBShopifyOrders()
     {
        echo "<p>Shop name: ".$this->BuzzBeeShopify->shop_name."</p>";
