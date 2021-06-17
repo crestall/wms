@@ -38,35 +38,6 @@ class BuzzBeeShopify extends Shopify
             'state'		=>	$from_address['state'],
             'country'	=>  $from_address['country']
         );
-        /*
-        try{
-            $this->shopify = new PHPShopify\ShopifySDK($this->config);
-        } catch (Exception $e) {
-            //echo "BUZZ BEE in create shopify<pre>",print_r($this->shopify->config),"</pre>";
-            echo "<pre>",print_r($e),"</pre>";die();
-            $this->output .=  $e->getMessage() .PHP_EOL;
-            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-            if ($this->ua == "CRON" )
-            {
-                Email::sendCronError($e, "Buzz Bee Australia");
-                return;
-            }
-            else
-            {
-                $this->return_array['import_error'] = true;
-                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
-                return $this->return_array;
-            }
-        }
-
-        try{
-            $products = $this->shopify->Product->get();
-        } catch (Exception $e) {
-            echo "<pre>",print_r($e),"</pre>";die();
-        }
-
-        echo "BUZZ BEE<pre>",print_r($products),"</pre>";die();
-        */
     }
 
     public function getOrders()
@@ -139,15 +110,20 @@ class BuzzBeeShopify extends Shopify
                 $filtered_orders[$foi]['pickup'] = 0;
             }
         }
-        echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
-        die();
+        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
+        //die();
         //return $collected_orders;
-        if($orders = $this->procOrders($collected_orders))
+        if($orders = $this->procOrders($filtered_orders))
         {
+            echo "ORDERS<pre>",print_r($orders),"</pre>"; die();
             $this->output .= "===========================   Sending Orders  =========================".PHP_EOL;
             Logger::logOrderImports('order_imports/bba', $this->output);
             return $orders;
             //$this->addPBAOrders($orders);
+        }
+        else
+        {
+            die();
         }
         $this->output .= "===========================   Falsy  =========================".PHP_EOL;
         Logger::logOrderImports('order_imports/bba', $this->output); //die();
