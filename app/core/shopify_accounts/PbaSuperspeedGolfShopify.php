@@ -78,7 +78,7 @@ class PbaSuperspeedGolfShopify extends Shopify
         }
         else
         {
-                Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
+                Email::sendPBAShopifyImportSummary($this->return_array,"Super Speed Golf");
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
