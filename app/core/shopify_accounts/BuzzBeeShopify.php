@@ -215,6 +215,7 @@ class BuzzBeeShopify extends Shopify
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
+                    $this->return_array['error_orders'][] = $o['client_order_id'];
                 }
                 //elseif(SITE_LIVE)
                 else
