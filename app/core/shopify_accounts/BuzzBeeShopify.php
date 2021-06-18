@@ -123,7 +123,7 @@ class BuzzBeeShopify extends Shopify
         }
         else
         {
-                Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
+                Email::sendBuzzBeeShopifyImportSummary($this->return_array);
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
@@ -215,12 +215,13 @@ class BuzzBeeShopify extends Shopify
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
                 }
-                elseif(SITE_LIVE)
+                //elseif(SITE_LIVE)
+                else
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
                     $this->return_array['error_orders'][] = $o['client_order_id'];
-                    Email::sendPBAImportError($message);
+                    Email::sendBBImportError($message);
                 }
                 continue;
             }
