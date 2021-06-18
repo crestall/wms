@@ -53,7 +53,7 @@ class BuzzBeeShopify extends Shopify
             'financial_status'      => 'paid',
             'fulfillment_status'    => 'unfulfilled',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
-            'ids'					=> $ids
+            //'ids'					=> $ids
         );
         $shopify = $this->resetConfig($this->config);
         try {
