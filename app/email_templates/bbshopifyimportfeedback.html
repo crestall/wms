@@ -4,12 +4,16 @@
 body{
 	margin:20px;
 	font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 14px;
     color: #000;
 }
-div{
+div#main_body{
 	width:720px;
 	background:#FFF;
+}
+
+div.inset{
+    margin-left: 15px;
 }
 
 .clear {
@@ -57,6 +61,14 @@ h3 {
     line-height: normal;
 }
 
+h3.error{
+    color: #ff3333;
+}
+
+h3.success{
+    color: #009933;
+}
+
 hr
 {
 	height: 1px;
@@ -83,13 +95,35 @@ div.foot{
 span.bold{
 	font-weight:bold;
 }
+
+div.errorbox{
+	border: 3px solid #ff3333;
+    color: #ff3333;
+    margin-bottom: 10px;
+    padding: 20px;
+    width:720px;
+}
+
+div.feedbackbox{
+    border: 3px solid #009933;
+    color: #009933;
+    margin-bottom: 10px;
+    padding: 20px;
+    width:720px;
+}
 </style>
 
 </head>
 <body>
-	<div>
-    	<h2>There has been an error for some BuzzBee Australia items</h2>
-        {CONTENT}
+	<div id="main_body">
+        <h2>The Shopify Order Import Has Been Completed</h2>
+        <div class="inset">
+            <p>{IMPORT_ERROR_COUNT} generated an error on import</p>
+            <p>{IMPORT_COUNT} orders that have been successfully added to the system.</p>
+        </div>
+        <hr/>
+            {IMPORT_ERRORS}
+            {IMPORTS}
 		<p>Thankyou</p>
         <p class="italic"><span class="bold">The FSG Customer Service Team</span></p>
         <img src="cid:emailfoot" />

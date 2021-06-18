@@ -53,7 +53,8 @@ class BuzzBeeShopify extends Shopify
             'financial_status'      => 'paid',
             'fulfillment_status'    => 'unfulfilled',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
-            'ids'					=> $ids
+            //'ids'					=> $ids,
+            'since_id'              => '3670246097047'
         );
         $shopify = $this->resetConfig($this->config);
         try {
@@ -115,7 +116,7 @@ class BuzzBeeShopify extends Shopify
         {
             $this->addBuzzBeeOrders($orders);;
         }
-        echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
+        //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
         Logger::logOrderImports('order_imports/bba', $this->output); //die();
         if ($this->ua != "CRON" )
         {
@@ -123,7 +124,7 @@ class BuzzBeeShopify extends Shopify
         }
         else
         {
-                Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
+                Email::sendBuzzBeeShopifyImportSummary($this->return_array);
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
@@ -214,13 +215,15 @@ class BuzzBeeShopify extends Shopify
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
+                    $this->return_array['error_orders'][] = $o['client_order_id'];
                 }
-                elseif(SITE_LIVE)
+                //elseif(SITE_LIVE)
+                else
                 {
                     ++$this->return_array['error_count'];
                     $this->return_array['error_string'] .= $message;
                     $this->return_array['error_orders'][] = $o['client_order_id'];
-                    Email::sendPBAImportError($message);
+                    Email::sendBBImportError($message);
                 }
                 continue;
             }
