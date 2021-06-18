@@ -47,7 +47,7 @@ class BuzzBeeShopify extends Shopify
         $this->output .= "=========================================================================================================".PHP_EOL;
         //echo "<p>getting BUZZ bee orders</p>";
         $collected_orders = array();
-        $ids = "3888625451159, 3899189788823, 3899170783383";
+        $ids = "3899189788823, 3899170783383";
         $params = array(
             'status'                => 'open',
             'financial_status'      => 'paid',
