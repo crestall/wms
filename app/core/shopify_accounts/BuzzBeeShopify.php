@@ -251,7 +251,7 @@ class BuzzBeeShopify extends Shopify
                 'country'               => $o['country'],
                 'contact_phone'         => $o['contact_phone'],
                 'is_shopify'            => 1,
-                'is_homecoursegolf'    => 1,
+                'is_buzzbee'            => 1,
                 'shopify_id'            => $o['shopify_id']
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
