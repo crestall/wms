@@ -51,7 +51,7 @@ class BuzzBeeShopify extends Shopify
         $params = array(
             'status'                => 'open',
             'financial_status'      => 'paid',
-            'fulfillment_status'    => 'unshipped',
+            'fulfillment_status'    => 'unfulfilled',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
             //'ids'					=> $ids
         );
@@ -76,7 +76,7 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
-        echo "COLLECTED<pre>",print_r($collected_orders),"</pre>"; 
+        echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
         echo "<h1>Collected $order_count Orders</h1>";
