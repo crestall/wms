@@ -490,7 +490,7 @@
             $mail->Username = Config::get('EMAIL_UNAME');
             $mail->Password = Config::get('EMAIL_PWD');
 
-            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pbaimporterror.html");
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bbimporterror.html");
             $replace_array = array("{CONTENT}");
             $replace_with_array = array($message);
             $body = str_replace($replace_array, $replace_with_array, $body);
