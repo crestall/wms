@@ -45,13 +45,15 @@ class BuzzBeeShopify extends Shopify
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Buzz Bee Australia ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
-        echo "<p>getting BUZZ bee orders</p>";
+        //echo "<p>getting BUZZ bee orders</p>";
         $collected_orders = array();
+        $ids = "3857080909975, 3885771194519";
         $params = array(
             'status'                => 'open',
             'financial_status'      => 'paid',
             'fulfillment_status'    => 'unshipped',
-            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
+            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
+            'ids'					=> $ids
         );
         $shopify = $this->resetConfig($this->config);
         try {
@@ -77,10 +79,10 @@ class BuzzBeeShopify extends Shopify
         //BUZZBEE has it in grams!!!
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
-        echo "<h1>Collected $order_count Orders</h1>";
+        //echo "<h1>Collected $order_count Orders</h1>";
         $filtered_orders = $this->filterForFSG($collected_orders);
         $filtered_count = count($filtered_orders);
-        echo "<h1>There are $filtered_count Orders Left</h1>";
+        //echo "<h1>There are $filtered_count Orders Left</h1>";
 
         foreach($filtered_orders as $foi => $fo)
         {
@@ -174,7 +176,7 @@ class BuzzBeeShopify extends Shopify
     private function addBuzzBeeOrders($orders)
     {
         $bboitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
-        echo "BBOTEMS<pre>",print_r($bboitems),"</pre>";die();
+        //echo "BBOTEMS<pre>",print_r($bboitems),"</pre>";die();
         unset($orders['orders_items']);
 
         foreach($orders as $o)
@@ -253,6 +255,8 @@ class BuzzBeeShopify extends Shopify
                 'shopify_id'            => $o['shopify_id']
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
+            if(isset($o['pickup']) )
+                $vals['pickup'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
             $itp = array($bboitems[$o['client_order_id']]);
             //$itp = array($o['items'][$o['client_order_id']]);
