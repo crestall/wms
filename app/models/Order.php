@@ -352,6 +352,8 @@ class Order extends Model{
             $o_values['is_homecoursegolf'] = 1;
         if(isset($data['is_superspeedgolf']))
             $o_values['is_superspeedgolf'] = 1;
+        if(isset($data['is_buzzbee']))
+            $o_values['is_buzzbee'] = 1;
         if(isset($data['shopify_id']))
             $o_values['shopify_id'] = $data['shopify_id'];
         if(!empty($data['client_order_id']))
