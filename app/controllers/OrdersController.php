@@ -226,7 +226,7 @@ class OrdersController extends Controller
 
     public function importBBShopifyOrders()
     {
-       echo "<p>Shop name: ".$this->BuzzBeeShopify->shop_name."</p>";
+       //echo "<p>Shop name: ".$this->BuzzBeeShopify->shop_name."</p>";
        $response = $this->BuzzBeeShopify->getOrders();
        echo "<pre>",print_r($response),"</pre>"; die();
 
