@@ -53,7 +53,7 @@ class BuzzBeeShopify extends Shopify
             'financial_status'      => 'paid',
             'fulfillment_status'    => 'unfulfilled',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
-            'ids'					=> $ids
+            //'ids'					=> $ids
         );
         $shopify = $this->resetConfig($this->config);
         try {
@@ -79,7 +79,7 @@ class BuzzBeeShopify extends Shopify
         //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
-        echo "<h1>Collected $order_count Orders</h1>";
+        //echo "<h1>Collected $order_count Orders</h1>";
         $filtered_orders = $this->filterForFSG($collected_orders);
         $filtered_count = count($filtered_orders);
         //echo "<h1>There are $filtered_count Orders Left</h1>";
@@ -108,8 +108,8 @@ class BuzzBeeShopify extends Shopify
                 $filtered_orders[$foi]['pickup'] = 1;
             }
         }
-        echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
-        die();
+        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
+        //die();
         //return $collected_orders;
         if($orders = $this->procOrders($filtered_orders))
         {
