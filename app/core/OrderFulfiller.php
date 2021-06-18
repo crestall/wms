@@ -453,9 +453,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         {
             $this->controller->PbaHomeCourseGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
         }
-        elseif($od['isbuzzbee'] == 1)
+        elseif($od['is_buzzbee'] == 1)
         {
             $this->controller->BuzzBeeShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+            $this->output .= "Fullfilled order id: {$od['id']} in shopify for BUZZBEE".PHP_EOL;
         }
         else
         {
