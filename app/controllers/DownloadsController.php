@@ -673,7 +673,7 @@ class DownloadsController extends Controller {
                 'country'   =>  $o['country']
             );
             $date_ordered = date("d/m/Y", $o['date_ordered']);
-            $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
+            $eb = $db->queryValue('users', array('id' => $o['entered_by']), 'name');
             if(empty($eb))
             {
                 $eb = "Automatically Imported";
@@ -697,7 +697,7 @@ class DownloadsController extends Controller {
                 $courier_name = $db->queryValue('couriers', array('id' => $o['courier_id']), 'name');
                 if($courier_name == "Local")
                 {
-                    $courier_name = $co['courier_name'];
+                    $courier_name = $o['courier_name'];
                 }
             }
             else
