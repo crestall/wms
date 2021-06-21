@@ -638,6 +638,7 @@ class DownloadsController extends Controller {
     public function clientOrdersCSV()
     {
         $client_id = Session::getUserClientId();
+        $db = Database::openConnection();
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         foreach($this->request->data as $field => $value)
         {
