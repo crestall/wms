@@ -226,7 +226,7 @@ class Shopify{
         return false;
     }
 
-    protected function sendItemErrorEmail(array $args = array())
+    protected function sendItemErrorEmail(array $args)
     {
         $defaults = array(
             'import_error'  => false,
