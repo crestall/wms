@@ -136,7 +136,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 {
                     $this->updateShopify($od, "https:://directfreight.com.au");
                 }
-                if($od['is_woocommerce'] == 1)
+                if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                 {
                     $this->output .= "Sending DF Tracking info to woo-commerce".PHP_EOL;
                     $woocommerce_id = $od['client_order_id'];
