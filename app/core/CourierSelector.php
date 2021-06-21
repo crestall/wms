@@ -20,6 +20,7 @@
      protected $client_details;
      protected $items;
      protected $item_count;
+     protected $weight;
      protected $handling_charge;
 
      /**
@@ -39,6 +40,13 @@
         $this->client_details = $this->controller->client->getClientInfo($this->order_details['client_id']);
         $this->items =  $this->controller->order->getItemsForOrder($order_id);
         $this->item_count = $this->controller->order->getItemCountForOrder($order_id);
+        $packages = $this->controller->order->getPackagesForOrder($order_id);
+        $parcels = Packaging::getPackingForOrder($this->order_details,$this->items,$packages);
+        $this->weight = 0;
+        foreach($parcels as $parc)
+        {
+            $this->weight += $parc['weight'];
+        }
         $this->handling_charge = $this->getHandlingCharge($this->order_details['client_id']);
         if($this->order_details['eparcel_express'] > 0 && $courier_id == $this->controller->courier->eParcelId)
         {
@@ -416,7 +424,16 @@
                 return 5;
             return 10;
         }
-
+        //BuzzBee
+        if($client_id == 89)
+        {
+            if($this->weight < 5)
+                return 3;
+            if($this->weight < 20)
+                return 5;
+            if($this->weight >= 20)
+                return 10;
+        }
         return 0;
     }
 
