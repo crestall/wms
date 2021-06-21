@@ -246,14 +246,14 @@ class Shopify{
         if($item_error)
             $message .= $item_error_string;
         $message .= "<p>Orders with these items will not be processed at the moment</p>";
-        $message .= "<p>Order ID: {$o['client_order_id']}</p>";
-        $message .= "<p>Customer: {$o['ship_to']}</p>";
-        $message .= "<p>Address: {$o['address']}</p>";
-        $message .= "<p>{$o['address_2']}</p>";
-        $message .= "<p>{$o['suburb']}</p>";
-        $message .= "<p>{$o['state']}</p>";
-        $message .= "<p>{$o['postcode']}</p>";
-        $message .= "<p>{$o['country']}</p>";
+        $message .= "<p>Order ID: {$od['client_order_id']}</p>";
+        $message .= "<p>Customer: {$od['ship_to']}</p>";
+        $message .= "<p>Address: {$od['address']}</p>";
+        $message .= "<p>{$od['address_2']}</p>";
+        $message .= "<p>{$od['suburb']}</p>";
+        $message .= "<p>{$od['state']}</p>";
+        $message .= "<p>{$od['postcode']}</p>";
+        $message .= "<p>{$od['country']}</p>";
 
         Email::{$email_function}($message);
     }
