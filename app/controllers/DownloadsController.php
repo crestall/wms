@@ -712,7 +712,7 @@ class DownloadsController extends Controller {
                 $eb,
                 $date_despatched,
                 $o['order_number'],
-                $o['client_order_number'],
+                $o['client_order_id'],
                 str_replace("<br/>", ", ",$shipped_to),
                 str_replace("<br/>", "",$items),
                 $num_items,
