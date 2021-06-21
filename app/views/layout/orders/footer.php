@@ -1867,6 +1867,16 @@
                             var to = $('#date_to_value').val();
                             window.location.href = "/orders/client-orders/from="+from+"/to="+to;
                         });
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/clientOrdersCSV";
+                            fileDownload.download(url, data);
+                        });
                     }
                 },
                 'order-tracking' : {
