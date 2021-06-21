@@ -686,6 +686,7 @@ class DownloadsController extends Controller {
             $shipped_to .= $address;
             $num_items = 0;
             $items = "";
+            $products = $this->order->getItemsCountForOrder($o['id']);
             foreach($products as $p)
             {
                 $items .= $p['name']." (".$p['qty']."),<br/>";
