@@ -946,6 +946,11 @@
                             $("#box_count").val('');
                         }
                     }
+                },
+                'get-shipping-quotes':{
+                    init: function(){
+                        shippingEstimates();
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);

@@ -232,73 +232,7 @@
                 },
                 'get-quotes': {
                     init: function(){
-                        autoCompleter.suburbAutoCompleteSelect($('#suburb'));
-                        autoCompleter.suburbAutoCompleteSelect($('#postcode'));
-                        $('select#state, #postcode').change(function(e){
-                            $(this).valid();
-                        });
-                        $('form#get_quotes').submit(function(e){
-                            //if($(this).valid())
-                            //{
-                                //$.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Contacted Couriers and Getting Prices...</h2></div>' });
-                                e.preventDefault();
-                                var data = $(this).serialize();
-                                $.ajax({
-                                    url: "/ajaxfunctions/procGetQuotes",
-                                    data: data,
-                                    method: "post",
-                                    beforeSend: function(){
-                                        $("div#feedback_holder")
-                                        .slideDown()
-                                        .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Contacting Couriers...</p>");
-                                    },
-                                    success: function(d){
-                                        if(d.error)
-                                        {
-                                            $("div#feedback_holder")
-                                                .hide()
-                                                .removeClass()
-                                                .addClass("errorbox")
-                                                .slideDown()
-                                                .html("<h2><i class='far fa-times-circle'></i>There has been an error with how the form was filled in</h2><p>Please see below"+d.feedback);
-                                        }
-                                        else
-                                        {
-                                            $("div#feedback_holder")
-                                                .hide()
-                                                .removeClass()
-                                                .addClass("feedbackbox")
-                                                .html(d.html)
-                                                .slideDown();
-                                        }
-                                        var $nav = $("nav.fixed-top");
-                                        var scrollSpot = $("h2#page_header").offset().top - $nav.height();
-                                        $('html, body').animate({
-                                            scrollTop: scrollSpot
-                                        }, 1000);
-                                    },
-                                    error: function(xhr, e){
-                                        console.log('xhr: ' + JSON.stringify(xhr, null, 4));
-                                        console.log('error: ' + e);
-                                    }
-                                });
-                            //}
-                        });
-                        $("a.add-package").click(function(e){
-                            e.preventDefault();
-                            var package_count = $("div#packages_holder div.apackage").length;
-                            //console.log('packages: '+package_count);
-                            var data = {
-                                i: package_count
-                            }
-                            $.post('/ajaxfunctions/addQuotePackage', data, function(d){
-                                $('div#packages_holder').append(d.html);
-                            });
-                        });
-                        $("a#remove-all-packages").click(function(e){
-                            e.preventDefault();
-                            $('div#packages_holder div.apackage').not(':first').remove();
-                        });
+                        shippingEstimates();
                     }
                 },
                 'add-bulk-orders': {
