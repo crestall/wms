@@ -395,7 +395,7 @@ class OrdersController extends Controller
         //only visible for client users
         $client_id = Session::getUserClientId();
         $client = $this->client->getClientInfo($client_id);
-        $orders = $this->order->getOrdersForClient($clientd_id, $from, $to);
+        $orders = $this->order->getOrdersForClient($client_id, $from, $to);
         //render the page
         Config::setJsConfig('curPage', "client-orders");
         Config::set('curPage', "client-orders");
