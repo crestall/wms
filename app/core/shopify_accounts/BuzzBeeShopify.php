@@ -188,7 +188,6 @@ class BuzzBeeShopify extends Shopify
             $error_string = "";
             $import_error = false;
             $import_error_string = "";
-
             foreach($bboitems[$o['client_order_id']] as $item)
             {
                 if($item['item_error'])
@@ -202,7 +201,6 @@ class BuzzBeeShopify extends Shopify
                     $import_error_string .= $item['import_error_string'];
                 }
             }
-
             if($o['items_errors'] || $item_error || $import_error)
             {
                 $args = array(
@@ -210,20 +208,13 @@ class BuzzBeeShopify extends Shopify
                     'import_error_string'   => $import_error_string,
                     'item_error'            => $item_error,
                     'item_error_string'     => $error_string,
-                    'email_function'        => "sendPBAImportError",
+                    'email_function'        => "sendBBImportError",
                     'od'                    => $o
                 );
                 $this->sendItemErrorEmail($args);
+                continue;                
             }
             die("No Errors ?!");
-
-
-            if($o['items_errors'])
-            {
-                //$this->return_array['import_error'] = true;
-                //$this->return_array['import_error_string'] = $o['import_error_string'];
-                continue;
-            }
             //insert the order
             $client_id = $this->client_id;
             $vals = array(

@@ -236,13 +236,15 @@ class Shopify{
             'email_function'        => false
         );
         $args = array_merge($defaults, $args);
-        echo "<pre>",print_r($args),"</pre>";die();
+        //echo "<pre>",print_r($args),"</pre>";die();
         extract($args);
         if( !$email_function )
             return;
-
         $message = "<p>There was a problem with some items</p>";
-        //$message .= $error_string;
+        if($import_error)
+            $message .= $import_error_string;
+        if($item_error)
+            $message .= $item_error_string;
         $message .= "<p>Orders with these items will not be processed at the moment</p>";
         $message .= "<p>Order ID: {$o['client_order_id']}</p>";
         $message .= "<p>Customer: {$o['ship_to']}</p>";
@@ -252,7 +254,6 @@ class Shopify{
         $message .= "<p>{$o['state']}</p>";
         $message .= "<p>{$o['postcode']}</p>";
         $message .= "<p>{$o['country']}</p>";
-        $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
     }
 
 }
