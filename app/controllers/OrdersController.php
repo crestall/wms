@@ -393,8 +393,9 @@ class OrdersController extends Controller
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('last monday');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         //only visible for client users
-        $client = $this->client->getClientInfo(Session::getUserClientId());
-        $orders = $this->order->getOrdersForClient(Session::getUserClientId(), $from, $to);
+        $client_id = Session::getUserClientId();
+        $client = $this->client->getClientInfo($client_id);
+        $orders = $this->order->getOrdersForClient($clientd_id, $from, $to);
         //render the page
         Config::setJsConfig('curPage', "client-orders");
         Config::set('curPage', "client-orders");
@@ -402,6 +403,7 @@ class OrdersController extends Controller
             'pht'           =>  ": Orders-".$client['client_name'],
             'page_title'    =>  "Orders For ".$client['client_name'],
             'client'        =>  $client,
+            'client_id'     =>  $client_id,
             'orders'        =>  $orders,
             'from'          =>  $from,
             'to'            =>  $to
