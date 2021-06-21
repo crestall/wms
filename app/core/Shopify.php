@@ -74,7 +74,7 @@ class Shopify{
                     'signature_req'         => 0,
                     'contact_phone'         => $o['shipping_address']['phone'],
                     'items_errors'          => false,
-                    'items_errors_string'   => '',
+                    'items_errors_string'   => '<ul>',
                     'is_shopify'            => 1,
                     'shopify_id'            => $o['id']
                 );
@@ -174,6 +174,7 @@ class Shopify{
                     $delivery_instructions = $o['note'];
                 }
                 $order['instructions'] = $delivery_instructions;
+                $order['items_errors_string'] .= "</ul>";
                 if($items_errors)
                 {
                     $message = "<p>There was a problem with some items</p>";
@@ -223,6 +224,35 @@ class Shopify{
             $this->output .= "=========================================================================================================".PHP_EOL;
         }
         return false;
+    }
+
+    protected function sendItemErrorEmail(array $args = array())
+    {
+        $defaults = array(
+            'import_error'  => false,
+            'import_error_string'   => '',
+            'item_error'            => false,
+            'item_error_string'     => '',
+            'email_function'        => false
+        );
+        $args = array_merge($defaults, $args);
+        echo "<pre>",print_r($args),"</pre>";die();
+        extract($args);
+        if( !$email_function )
+            return;
+
+        $message = "<p>There was a problem with some items</p>";
+        //$message .= $error_string;
+        $message .= "<p>Orders with these items will not be processed at the moment</p>";
+        $message .= "<p>Order ID: {$o['client_order_id']}</p>";
+        $message .= "<p>Customer: {$o['ship_to']}</p>";
+        $message .= "<p>Address: {$o['address']}</p>";
+        $message .= "<p>{$o['address_2']}</p>";
+        $message .= "<p>{$o['suburb']}</p>";
+        $message .= "<p>{$o['state']}</p>";
+        $message .= "<p>{$o['postcode']}</p>";
+        $message .= "<p>{$o['country']}</p>";
+        $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
     }
 
 }

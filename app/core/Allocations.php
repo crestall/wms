@@ -40,13 +40,14 @@ class Allocations{
                 $i_id = $details['id'];
                 $item_error_string = "<ul>";
                 $item_backorder_string = "<ul>";
+                $import_error_string = "<ul>";
                 $client_order_item_id = (isset($details['client_item_id']))? $details['client_item_id'] : NULL;
                 $pod_id = (isset($details['pod_id']))? $details['pod_id'] : NULL;
                 $item = $this->controller->item->getItemById($i_id);
                 if(filter_var($details['qty'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
                 {
                     $import_error = true;
-                    $import_error_string .= "Only whole positive numbers can be selected for pick quantities. ";
+                    $import_error_string .= "<li>Only whole positive numbers can be selected for pick quantities.</li>";
                 }
                 else
                 {
@@ -227,7 +228,7 @@ class Allocations{
                         if(empty($f_locations))
                         {
                             $import_error = true;
-                            $import_error_string .= "Could not find a location for $item_name for a quantity of $pick_count. ";
+                            $import_error_string .= "<li>Could not find a location for $item_name for a quantity of $pick_count.</li>";
                         }
                         $varray = array(
                             'item_id'               => $id,
@@ -248,7 +249,7 @@ class Allocations{
                         if($import_error)
                         {
                             $varray['import_error'] = true;
-                            $varray['import_error_string'] = $import_error_string;
+                            $varray['import_error_string'] = $import_error_string."</ul>";
                         }
                         $values[] = $varray;
                     }
