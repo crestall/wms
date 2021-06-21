@@ -114,6 +114,7 @@ class BuzzBeeShopify extends Shopify
         //return $collected_orders;
         if($orders = $this->procOrders($filtered_orders))
         {
+            echo "processed orders<pre>",print_r($orders),"</pre>"; die();
             $this->addBuzzBeeOrders($orders);;
         }
         //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();

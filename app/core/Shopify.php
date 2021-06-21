@@ -73,8 +73,8 @@ class Shopify{
                     'eparcel_express'       => 0,
                     'signature_req'         => 0,
                     'contact_phone'         => $o['shipping_address']['phone'],
-                    'import_error'          => false,
-                    'import_error_string'   => '',
+                    'items_errors'          => false,
+                    'items_errors_string'   => '',
                     'is_shopify'            => 1,
                     'shopify_id'            => $o['id']
                 );
@@ -144,8 +144,8 @@ class Shopify{
                     $product = $this->controller->item->getItemBySku($item['sku']);
                     if(!$product)
                     {
-                        $items_errors = true;
-                        $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        $order['items_errors'] = true;
+                        $order['items_errors_string'] .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
                     }
                     else
                     {
