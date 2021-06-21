@@ -169,6 +169,10 @@ $prod = array(
         'job-search-results'    => array(
             'display'   => false,
             'icon'      => ''
+        ),
+        'get-shipping-quotes'   => array(
+            'display'   => true,
+            'icon'      => '<i class="fal fa-file-invoice-dollar fa-3x"></i>'
         )
     ),
     'customers' => array(
