@@ -24,6 +24,11 @@ class JobsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function getShippingQuotes()
+    {
+
+    }
+
     public function createDeliveryDocket()
     {
         if(!isset($this->request->params['args']['job']))
@@ -218,6 +223,7 @@ class JobsController extends Controller
             'index',
             'addJob',
             'createDeliveryDocket',
+            'getShippingQuotes',
             'jobSearch',
             'jobSearchResults',
             'updateJob',
@@ -227,6 +233,7 @@ class JobsController extends Controller
         Permission::allow(['production sales'], $resource, array(
             'index',
             'createDeliveryDocket',
+            'getShippingQuotes',
             'jobSearch',
             'jobSearchResults',
             'updateJob',
