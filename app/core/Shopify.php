@@ -254,6 +254,8 @@ class Shopify{
         $message .= "<p>{$o['state']}</p>";
         $message .= "<p>{$o['postcode']}</p>";
         $message .= "<p>{$o['country']}</p>";
+
+        Email::{$email_function}($message);
     }
 
 }
