@@ -26,8 +26,15 @@ class JobsController extends Controller
 
     public function getShippingQuotes()
     {
-        $ordersController = new OrdersController();
-        $ordersController->getQuotes();
+        //$ordersController = new OrdersController();
+        //$ordersController->getQuotes();
+        //render the page
+        Config::setJsConfig('curPage', "get-shipping-quotes");
+        Config::set('curPage', "get-shipping-quotes");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/getQuotes.php', [
+            'page_title'        =>  "Get Shipping Estimates",
+            'pht'               =>  ":Get Shipping Estimates"
+        ]);
     }
 
     public function createDeliveryDocket()
