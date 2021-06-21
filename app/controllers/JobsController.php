@@ -26,7 +26,8 @@ class JobsController extends Controller
 
     public function getShippingQuotes()
     {
-
+        $ordersController = new OrdersController();
+        $ordersController->getQuotes();
     }
 
     public function createDeliveryDocket()
