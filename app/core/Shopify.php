@@ -73,8 +73,8 @@ class Shopify{
                     'eparcel_express'       => 0,
                     'signature_req'         => 0,
                     'contact_phone'         => $o['shipping_address']['phone'],
-                    'import_error'          => false,
-                    'import_error_string'   => '',
+                    'items_errors'          => false,
+                    'items_errors_string'   => '<ul>',
                     'is_shopify'            => 1,
                     'shopify_id'            => $o['id']
                 );
@@ -144,8 +144,8 @@ class Shopify{
                     $product = $this->controller->item->getItemBySku($item['sku']);
                     if(!$product)
                     {
-                        $items_errors = true;
-                        $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        $order['items_errors'] = true;
+                        $order['items_errors_string'] .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
                     }
                     else
                     {
@@ -174,6 +174,7 @@ class Shopify{
                     $delivery_instructions = $o['note'];
                 }
                 $order['instructions'] = $delivery_instructions;
+                $order['items_errors_string'] .= "</ul>";
                 if($items_errors)
                 {
                     $message = "<p>There was a problem with some items</p>";
@@ -223,6 +224,38 @@ class Shopify{
             $this->output .= "=========================================================================================================".PHP_EOL;
         }
         return false;
+    }
+
+    protected function sendItemErrorEmail($args)
+    {
+        $defaults = array(
+            'import_error'  => false,
+            'import_error_string'   => '',
+            'item_error'            => false,
+            'item_error_string'     => '',
+            'email_function'        => false
+        );
+        $args = array_merge($defaults, $args);
+        //echo "<pre>",print_r($args),"</pre>";die();
+        extract($args);
+        if( !$email_function )
+            return;
+        $message = "<p>There was a problem with some items</p>";
+        if($import_error)
+            $message .= $import_error_string;
+        if($item_error)
+            $message .= $item_error_string;
+        $message .= "<p>Orders with these items will not be processed at the moment</p>";
+        $message .= "<p>Order ID: {$od['client_order_id']}</p>";
+        $message .= "<p>Customer: {$od['ship_to']}</p>";
+        $message .= "<p>Address: {$od['address']}</p>";
+        $message .= "<p>{$od['address_2']}</p>";
+        $message .= "<p>{$od['suburb']}</p>";
+        $message .= "<p>{$od['state']}</p>";
+        $message .= "<p>{$od['postcode']}</p>";
+        $message .= "<p>{$od['country']}</p>";
+
+        Email::{$email_function}($message);
     }
 
 }
