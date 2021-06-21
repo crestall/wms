@@ -263,10 +263,5 @@ class BuzzBeeShopify extends Shopify
         }
     }
 
-    protected function sendItemErrorEmail()
-    {
-
-    }
-
 } // end class
  ?>
