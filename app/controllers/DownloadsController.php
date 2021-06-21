@@ -635,6 +635,96 @@ class DownloadsController extends Controller {
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "inventory_report"]);
     }
 
+    public function clientOrdersCSV()
+    {
+        $client_id = Session::getUserClientId();
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $orders = $this->order->getOrdersForClient($client_id, $from, $to);
+        $cols = array(
+            "Date Ordered",
+            "Entered By",
+            "Date Dispatched",
+            "WMS Order Number",
+            "Your Order Number",
+            "Shipped To",
+            "Items",
+            "total Items",
+            "Courier",
+            "Charge Code",
+            "Consignment ID"
+        );
+        $rows = array();
+        foreach($orders as $o)
+        {
+            $ad = array(
+                'address'   =>  $o['address'],
+                'address_2' =>  $o['address_2'],
+                'suburb'    =>  $o['suburb'],
+                'state'     =>  $o['state'],
+                'postcode'  =>  $o['postcode'],
+                'country'   =>  $o['country']
+            );
+            $date_ordered = date("d/m/Y", $o['date_ordered']);
+            $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
+            if(empty($eb))
+            {
+                $eb = "Automatically Imported";
+            }
+            $date_despatched = ($o['date_fulfilled'] > 0)? date("d/m/Y", $o['date_fulfilled']) : "Not Yet Dispatched";
+            $address = Utility::formatAddressCSV($ad);
+            $shipped_to = "";
+            if(!empty($o['company_name'])) $shipped_to .= $o['company_name']."<br/>";
+            if(!empty($o['ship_to'])) $shipped_to .= $o['ship_to']."<br/>";
+            $shipped_to .= $address;
+            $num_items = 0;
+            $items = "";
+            foreach($products as $p)
+            {
+                $items .= $p['name']." (".$p['qty']."),<br/>";
+                $num_items += $p['qty'];
+                $pallet = ($p['palletized'] && $p['qty'] == $p['per_pallet'])? 1 : "";
+            }
+            if($o['courier_id'] > 0)
+            {
+                $courier_name = $db->queryValue('couriers', array('id' => $o['courier_id']), 'name');
+                if($courier_name == "Local")
+                {
+                    $courier_name = $co['courier_name'];
+                }
+            }
+            else
+            {
+                $courier_name = "Not Yet Assigned";
+            }
+
+
+            $row = array(
+                $date_ordered,
+                $eb,
+                $date_despatched,
+                $o['order_number'],
+                $o['client_order_number'],
+                str_replace("<br/>", ", ",$shipped_to),
+                str_replace("<br/>", "",$items),
+                $num_items,
+                $courier_name,
+                $o['charge_code'],
+                $o['consignment_id']
+            );
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "orders"]);
+    }
+
     public function clientDispatchReportCSV()
     {
         $client_id = Session::getUserClientId();
