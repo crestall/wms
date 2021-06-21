@@ -104,50 +104,30 @@ class PbaPerfectPracticeGolfShopify extends Shopify
             //check for errors first
             $item_error = false;
             $error_string = "";
-
             foreach($pbaoitems[$o['client_order_id']] as $item)
-            //foreach($o['items'][$o['client_order_id']] as $item)
             {
-
                 if($item['item_error'])
                 {
                     $item_error = true;
                     $error_string .= $item['item_error_string'];
                 }
-            }
-            if($item_error)
-            {
-                $message = "<p>There was a problem with some items</p>";
-                $message .= $error_string;
-                $message .= "<p>Orders with these items will not be processed at the moment</p>";
-                $message .= "<p>Order ID: {$o['client_order_id']}</p>";
-                $message .= "<p>Customer: {$o['ship_to']}</p>";
-                $message .= "<p>Address: {$o['address']}</p>";
-                $message .= "<p>{$o['address_2']}</p>";
-                $message .= "<p>{$o['suburb']}</p>";
-                $message .= "<p>{$o['state']}</p>";
-                $message .= "<p>{$o['postcode']}</p>";
-                $message .= "<p>{$o['country']}</p>";
-                $message .= "<p class='bold'>If you manually enter this order into the WMS, you will need to update its status in woo-commerce, so it does not get imported tomorrow</p>";
-
-                if ($this->ua != "CRON" )
+                if($item['import_error'])
                 {
-                    ++$this->return_array['error_count'];
-                    $this->return_array['error_string'] .= $message;
+                    $import_error = true;
+                    $import_error_string .= $item['import_error_string'];
                 }
-                elseif(SITE_LIVE)
-                {
-                    ++$this->return_array['error_count'];
-                    $this->return_array['error_string'] .= $message;
-                    $this->return_array['error_orders'][] = $o['client_order_id'];
-                    Email::sendPBAImportError($message);
-                }
-                continue;
             }
-            if($o['import_error'])
+            if($o['items_errors'] || $item_error || $import_error)
             {
-                $this->return_array['import_error'] = true;
-                $this->return_array['import_error_string'] = $o['import_error_string'];
+                $args = array(
+                    'import_error'          => $import_error,
+                    'import_error_string'   => $import_error_string,
+                    'item_error'            => $item_error,
+                    'item_error_string'     => $error_string,
+                    'email_function'        => "sendPBAImportError",
+                    'od'                    => $o
+                );
+                $this->sendItemErrorEmail($args);
                 continue;
             }
             //insert the order
