@@ -255,9 +255,9 @@ class Shopify{
         $message .= "<p>{$od['postcode']}</p>";
         $message .= "<p>{$od['country']}</p>";
 
-        echo "<pre>",print_r($args),"</pre>";
-        echo "<p>$message</p>";
-        die();
+        //echo "<pre>",print_r($args),"</pre>";
+        //echo "<p>$message</p>";
+        //die();
 
         Email::{$email_function}($message);
     }

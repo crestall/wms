@@ -83,7 +83,7 @@ class BuzzBeeShopify extends Shopify
         //echo "<h1>Collected $order_count Orders</h1>";
         $filtered_orders = $this->filterForFSG($collected_orders);
         $filtered_count = count($filtered_orders);
-        echo "<h1>There are $filtered_count Orders Left</h1>";
+        //echo "<h1>There are $filtered_count Orders Left</h1>";
 
         foreach($filtered_orders as $foi => $fo)
         {
@@ -190,7 +190,7 @@ class BuzzBeeShopify extends Shopify
             $import_error_string = "";
             foreach($bboitems[$o['client_order_id']] as $item)
             {
-                echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
+                //echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
                 if($item['item_error'])
                 {
                     $item_error = true;
@@ -212,11 +212,11 @@ class BuzzBeeShopify extends Shopify
                     'email_function'        => "sendBBImportError",
                     'od'                    => $o
                 );
-                echo "THE ARGS for {$o['client_order_id']}<pre>",print_r($args),"</pre>";
+                //echo "THE ARGS for {$o['client_order_id']}<pre>",print_r($args),"</pre>";
                 $this->sendItemErrorEmail($args);
                 continue;
             }
-            die("No Errors ?!");
+            //die("No Errors ?!");
             //insert the order
             $client_id = $this->client_id;
             $vals = array(
