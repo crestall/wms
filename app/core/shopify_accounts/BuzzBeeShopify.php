@@ -211,10 +211,11 @@ class BuzzBeeShopify extends Shopify
                     'email_function'        => "sendBBImportError",
                     'od'                    => $o
                 );
-                $this->sendItemErrorEmail($args);
+                echo "THE ARGS for {$o['client_order_id']}<pre>",print_r($args),"</pre>";
+                //$this->sendItemErrorEmail($args);
                 continue;
             }
-            //die("No Errors ?!");
+            die("No Errors ?!");
             //insert the order
             $client_id = $this->client_id;
             $vals = array(
