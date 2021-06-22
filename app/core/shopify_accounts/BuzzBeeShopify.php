@@ -213,7 +213,13 @@ class BuzzBeeShopify extends Shopify
                     'od'                    => $o
                 );
                 //echo "THE ARGS for {$o['client_order_id']}<pre>",print_r($args),"</pre>";
-                $this->sendItemErrorEmail($args);
+                ++$this->return_array['error_count'];
+                $this->return_array['error_string'] .= $message;
+                $this->return_array['error_orders'][] = $o['client_order_id'];
+                if ($this->ua == "CRON" )
+                {
+                    $this->sendItemErrorEmail($args);
+                }
                 continue;
             }
             //die("No Errors ?!");
