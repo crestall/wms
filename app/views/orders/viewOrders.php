@@ -124,7 +124,7 @@
         </div>
         <div class="row" id="table_holder" style="display:none">
             <div class="col-xl-12">
-                <table class="table-striped table-hover" id="client_orders_table">
+                <table class="table-striped table-hover" id="client_orders_table" style="width: 95%;margin: auto">
                     <thead>
             	    	<tr>
                             <th data-priority="10002"></th>
