@@ -62,10 +62,6 @@
                 'view-clients': {
                     init: function()
                     {
-                        dataTable.init($('table#client_list_table'), {
-                            "order": []
-                        } );
-
                         var dt_options = {
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,5] },
