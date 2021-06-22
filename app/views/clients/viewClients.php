@@ -20,7 +20,7 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-12">
-                    <table id="client_list_table" class="table-striped table-hover">
+                    <table id="client_list_table" class="table-striped table-hover" style="width: 95%;margin: auto">
                         <thead>
                         	<tr>
                                 <th></th>
