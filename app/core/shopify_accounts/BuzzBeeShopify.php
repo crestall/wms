@@ -220,6 +220,12 @@ class BuzzBeeShopify extends Shopify
                 {
                     $this->sendItemErrorEmail($args);
                 }
+                else
+                {
+                    $args['send_no_message'] = 1;
+                    $message = $this->sendItemErrorEmail($args);
+                    $this->return_array['error_string'] .= $message;
+                }
                 continue;
             }
             //die("No Errors ?!");
