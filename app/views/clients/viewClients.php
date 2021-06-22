@@ -23,11 +23,11 @@
                     <table id="client_list_table" class="table-striped table-hover" style="width: 95%;margin: auto">
                         <thead>
                         	<tr>
-                                <th></th>
-                                <th>Client Name</th>
-                                <th>Contact Name</th>
-                                <th>Contact Email</th>
-                                <th>Locked Orders</th>
+                                <th data-priority="10002"></th>
+                                <th data-priority="1">Client Name</th>
+                                <th data-priority="2">Contact Name</th>
+                                <th data-priority="2">Contact Email</th>
+                                <th data-priority="10001">Locked Orders</th>
                                 <th></th>
                             </tr>
                         </thead>
