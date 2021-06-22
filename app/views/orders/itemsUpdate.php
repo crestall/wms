@@ -13,6 +13,8 @@ $si_string = rtrim($si_string, ",");
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_id.php");?>
         <?php elseif(!$order || !count($order)):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_found.php");?>
+        <?php elseif( !$this->controller->client->canAdjustAllocations($order['client_id']) ):?>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/client_order_uneditable.php");?>
         <?php else:?>
             <div class="row">
                 <div class="col">

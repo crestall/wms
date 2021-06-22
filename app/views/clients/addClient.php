@@ -32,6 +32,10 @@ $country = Form::value('country');
                         </div>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="can_adjust" name="can_adjust" checked />
+                        <label class="custom-control-label col-md-3" for="can_adjust">Can Edit Order Items/Allocations</label>
+                    </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="has_reps" name="has_reps" />
                         <label class="custom-control-label col-md-3" for="has_reps">Manage Sales Reps</label>
                     </div>

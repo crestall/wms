@@ -44,6 +44,14 @@ class Client extends Model{
         return $db->queryValue($this->table, array('client_name' => $name));
     }
 
+    public function canAdjustAllocations($client_id = 0)
+    {
+        if($client_id == 0)
+            return dalse;
+        $db = Database::openConnection();
+        return ( $db->queryValue($this->table, array('id' => $client_id), 'can_adjust') > 0 );
+    }
+
     public function getEparcelClients()
     {
         $db = Database::openConnection();
@@ -76,6 +84,7 @@ class Client extends Model{
         if(!empty($data['pallet_charge'])) $client_values['pallet_charge'] = $data['pallet_charge'];
         if(isset($data['image_name'])) $client_values['logo'] = $data['image_name'].".jpg";
         if(isset($data['has_reps'])) $client_values['has_reps'] = 1;
+        $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
         $client_id = $db->insertQuery($this->table, $client_values);
         return $client_id;
@@ -148,6 +157,7 @@ class Client extends Model{
         $client_values['active'] = (isset($data['active']))? 1 : 0;
         $client_values['has_reps'] = (isset($data['has_reps']))? 1 : 0;
         $client_values['use_bubblewrap'] = (isset($data['use_bubblewrap']))? 1 : 0;
+        $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         if(!empty($data['contact_name'])) $client_values['contact_name'] = $data['contact_name'];
         if(!empty($data['carton_charge'])) $client_values['carton_charge'] = $data['carton_charge'];
         else $client_values['carton_charge'] = 5;

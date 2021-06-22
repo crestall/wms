@@ -62,9 +62,15 @@
                 'view-clients': {
                     init: function()
                     {
-                        dataTable.init($('table#client_list_table'), {
-                            "order": []
-                        } );
+                        var dt_options = {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [0,5] },
+                                { "searchable": false, "targets": [0,4,5]}
+                            ],
+                            "order": [],
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#client_list_table'), dt_options );
                     }
                 }
             }

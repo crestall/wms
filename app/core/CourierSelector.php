@@ -387,8 +387,6 @@
                 $cs = array(
                     $this->controller->courier->eParcelId           =>  $ep,
                     $this->controller->courier->directFreightId     =>  $df,
-                    //$this->controller->courier->huntersPluId =>  $hplu,
-                    //$this->controller->courier->huntersPalId =>  $hpal
                 );
 
                 //$min = min(array_filter(array($h3kg,$ep, $hplu, $hpal)));
@@ -399,6 +397,11 @@
                 $this->assignCourier($order_id, $courier_id);
             }
         }
+    }
+
+    private function getPostageCharge($od, $charge)
+    {
+
     }
 
     private function getHandlingCharge($client_id)
