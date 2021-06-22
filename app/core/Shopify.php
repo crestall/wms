@@ -260,6 +260,7 @@ class Shopify{
         //die();
 
         Email::{$email_function}($message);
+        return $message;
     }
 
 }
