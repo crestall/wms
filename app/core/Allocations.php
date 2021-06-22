@@ -229,7 +229,7 @@ class Allocations{
                         if(empty($f_locations))
                         {
                             $import_error = true;
-                            $import_error_string .= "<li>Could not find a location for $item_name for a quantity of $pick_count.</li>";
+                            $import_error_string .= "<li>Could not find a location for $item_name ($item_sku) for a quantity of $pick_count.</li>";
                         }
                         $varray = array(
                             'item_id'               => $id,
