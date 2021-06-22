@@ -229,7 +229,7 @@ class OrdersController extends Controller
        //echo "<p>Shop name: ".$this->BuzzBeeShopify->shop_name."</p>";
        $response = $this->BuzzBeeShopify->getOrders();
        //echo "<pre>",print_r($response),"</pre>"; die();
-       $feedback = "<h2><i class='far fa-check-circle'></i>Performance Brands Shopify Orders Imported</h2>";
+       $feedback = "<h2><i class='far fa-check-circle'></i>BuzzBee Shopify Orders Imported</h2>";
        $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
        if($response['error_count'] > 0)
        {
