@@ -127,7 +127,20 @@ class PbaSuperspeedGolfShopify extends Shopify
                     'email_function'        => "sendPBAImportError",
                     'od'                    => $o
                 );
-                $this->sendItemErrorEmail($args);
+                //echo "THE ARGS for {$o['client_order_id']}<pre>",print_r($args),"</pre>";
+                ++$this->return_array['error_count'];
+                //$this->return_array['error_string'] .= $message;
+                $this->return_array['error_orders'][] = $o['client_order_id'];
+                if ($this->ua == "CRON" )
+                {
+                    $this->sendItemErrorEmail($args);
+                }
+                else
+                {
+                    $args['send_no_message'] = 1;
+                    $message = $this->sendItemErrorEmail($args);
+                    $this->return_array['error_string'] .= $message;
+                }
                 continue;
             }
             //insert the order
