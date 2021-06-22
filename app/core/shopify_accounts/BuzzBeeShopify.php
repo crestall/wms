@@ -190,6 +190,7 @@ class BuzzBeeShopify extends Shopify
             $import_error_string = "";
             foreach($bboitems[$o['client_order_id']] as $item)
             {
+                echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
                 if($item['item_error'])
                 {
                     $item_error = true;
