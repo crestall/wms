@@ -188,6 +188,13 @@ class BuzzBeeShopify extends Shopify
             $error_string = "";
             $import_error = false;
             $import_error_string = "";
+            $items_errors = false;
+            $items_errors_string = "";
+            if($o['items_errors'])
+            {
+                $items_errors = true;
+                $items_errors_string .= $o['items_errors'];
+            }
             foreach($bboitems[$o['client_order_id']] as $item)
             {
                 //echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
@@ -202,13 +209,15 @@ class BuzzBeeShopify extends Shopify
                     $import_error_string .= $item['import_error_string'];
                 }
             }
-            if($o['items_errors'] || $item_error || $import_error)
+            if($items_errors || $item_error || $import_error)
             {
                 $args = array(
                     'import_error'          => $import_error,
                     'import_error_string'   => $import_error_string,
                     'item_error'            => $item_error,
                     'item_error_string'     => $error_string,
+                    'items_errors'          => $items_errors,
+                    'items_errors_string'   => $items_errors_string,
                     'email_function'        => "sendBBImportError",
                     'od'                    => $o
                 );

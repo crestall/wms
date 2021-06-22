@@ -233,6 +233,8 @@ class Shopify{
             'import_error_string'   => '',
             'item_error'            => false,
             'item_error_string'     => '',
+            'items_error'           => false,
+            'items_error_string'    => '',
             'email_function'        => false
         );
         $args = array_merge($defaults, $args);
@@ -245,6 +247,8 @@ class Shopify{
             $message .= $import_error_string;
         if($item_error)
             $message .= $item_error_string;
+        if($items_errors)
+            $message .= $items_errors_string;
         $message .= "<p>Orders with these items will not be processed at the moment</p>";
         $message .= "<p>Order ID: {$od['client_order_id']}</p>";
         $message .= "<p>Customer: {$od['ship_to']}</p>";
