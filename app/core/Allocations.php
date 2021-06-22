@@ -35,6 +35,7 @@ class Allocations{
             $item_backorder = false;
             //$item_error_string = "<ul>";
             $order_error_string = "";
+            $import_error = false;
             foreach($order_items as $details)
             {
                 $i_id = $details['id'];
