@@ -258,9 +258,10 @@ class Shopify{
         //echo "<pre>",print_r($args),"</pre>";
         //echo "<p>$message</p>";
         //die();
-
+        if(isset($send_no_message))
+           return $message;
         Email::{$email_function}($message);
-        return $message;
+        return true;
     }
 
 }
