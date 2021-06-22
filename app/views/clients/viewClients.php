@@ -28,7 +28,7 @@
                                 <th data-priority="2">Contact Name</th>
                                 <th data-priority="2">Contact Email</th>
                                 <th data-priority="10001">Locked Orders</th>
-                                <th></th>
+                                <th data-priority="1"></th>
                             </tr>
                         </thead>
                         <tbody>
