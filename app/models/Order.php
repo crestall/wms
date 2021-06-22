@@ -971,25 +971,32 @@ class Order extends Model{
 
     public function updateItemsForOrder(array $order_items, $order_id)
     {
-        //echo "<pre>",print_r($order_items),"</pre>";
         $db = Database::openConnection();
-        //delete the old ones
-        $db->deleteQuery('orders_items', $order_id, 'order_id');
-        //update with new data
-        foreach($order_items as $oi)
-        {
-            //echo "<pre>",print_r($oi['locations']),"</pre>";die();
-            foreach($oi['locations'] as $oil)
+        //This methods deletes them all and adds new ones in
+            //echo "<pre>",print_r($order_items),"</pre>";
+            //delete the old ones
+            $db->deleteQuery('orders_items', $order_id, 'order_id');
+            //update with new data
+            foreach($order_items as $oi)
             {
-                $vals = array(
-                    'order_id'      =>  $order_id,
-                    'item_id'       =>  $oi['item_id'],
-                    'location_id'   =>  $oil['location_id'],
-                    'qty'           =>  $oil['qty']
-                );
-                $db->insertQuery('orders_items', $vals);
+                //echo "<pre>",print_r($oi['locations']),"</pre>";die();
+                foreach($oi['locations'] as $oil)
+                {
+                    $vals = array(
+                        'order_id'      =>  $order_id,
+                        'item_id'       =>  $oi['item_id'],
+                        'location_id'   =>  $oil['location_id'],
+                        'qty'           =>  $oil['qty']
+                    );
+                    $db->insertQuery('orders_items', $vals);
+                }
             }
-        }
+        /*//This method updates the system
+            foreach($order_items as $oi)
+            {
+                if($updater = $db->queryValue('orders_items', array('order_id' => $order_id, 'item_id' => $oi['item_id'])))
+            }
+        */
         return true;
     }
 

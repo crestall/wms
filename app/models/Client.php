@@ -44,6 +44,14 @@ class Client extends Model{
         return $db->queryValue($this->table, array('client_name' => $name));
     }
 
+    public function canAdjustAllocations($client_id = 0)
+    {
+        if($client_id == 0)
+            return dalse;
+        $db = Database::openConnection();
+        return ( $db->queryValue($this->table, array('id' => $client_id), 'can_adjust') > 0 );
+    }
+
     public function getEparcelClients()
     {
         $db = Database::openConnection();
