@@ -40,6 +40,10 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                         <input class="custom-control-input" type="checkbox" id="use_bubblewrap" name="use_bubblewrap" <?php if($client['use_bubblewrap'] > 0) echo "checked";?> />
                         <label class="custom-control-label col-md-3" for="use_bubblewrap">Add Bubblewrap To Packing</label>
                     </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="can_adjust" name="can_adjust" <?php if($client['can_adjust'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="can_adjust">Can Edit Order Items/Allocations</label>
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Courier Reference</label>
                         <div class="col-md-4">
