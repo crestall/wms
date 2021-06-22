@@ -104,6 +104,8 @@ class PbaHomeCourseGolfShopify extends Shopify
             //check for errors first
             $item_error = false;
             $error_string = "";
+            $import_error = false;
+            $import_error_string = "";
             foreach($pbaoitems[$o['client_order_id']] as $item)
             {
                 if($item['item_error'])
