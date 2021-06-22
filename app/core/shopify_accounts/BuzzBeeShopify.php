@@ -224,7 +224,7 @@ class BuzzBeeShopify extends Shopify
                 {
                     $args['send_no_message'] = 1;
                     $message = $this->sendItemErrorEmail($args);
-                    $this->return_array['error_string'] .= $message;
+                    $this->return_array['item_error_string'] .= $message;
                 }
                 continue;
             }
