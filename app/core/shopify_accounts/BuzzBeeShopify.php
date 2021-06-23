@@ -193,7 +193,7 @@ class BuzzBeeShopify extends Shopify
             if($o['items_errors'])
             {
                 $items_errors = true;
-                $items_errors_string .= $o['items_errors'];
+                $items_errors_string .= $o['items_errors_string'];
             }
             foreach($bboitems[$o['client_order_id']] as $item)
             {
@@ -233,7 +233,7 @@ class BuzzBeeShopify extends Shopify
                 {
                     $args['send_no_message'] = 1;
                     $message = $this->sendItemErrorEmail($args);
-                    $this->return_array['item_error_string'] .= $message;
+                    $this->return_array['error_string'] .= $message;
                 }
                 continue;
             }
