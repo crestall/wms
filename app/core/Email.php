@@ -499,11 +499,11 @@
 
             if(SITE_LIVE)
             {
-                //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
-                //$mail->AddAddress('admin@buzzbee.com.au','Graham Abrey');
+                $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
+                $mail->AddAddress('admin@buzzbee.com.au','Graham Abrey');
 
-                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+                //$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
             }
             else
             {
