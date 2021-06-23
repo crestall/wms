@@ -297,6 +297,18 @@ class TasksController extends Controller
         }
     }
 
+    public function PBARukketGolfShopifyTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->PbaRukketGolfShopify->getOrders();
+        }
+    }
+
     public function PBAVoiceCaddyShopifyTask()
     {
         if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
