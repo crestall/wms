@@ -233,8 +233,8 @@ class Shopify{
             'import_error_string'   => '',
             'item_error'            => false,
             'item_error_string'     => '',
-            'items_error'           => false,
-            'items_error_string'    => '',
+            'items_errors'          => false,
+            'items_errors_string'   => '',
             'email_function'        => false
         );
         $args = array_merge($defaults, $args);
