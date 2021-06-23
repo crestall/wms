@@ -304,7 +304,7 @@
             {
                 $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
             }
-            $mail->Subject = "Shopify Order Import Summary for Performance Brands Australia";
+            $mail->Subject = "Shopify Order Import Summary for BuzzBee Australia";
 
             $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
