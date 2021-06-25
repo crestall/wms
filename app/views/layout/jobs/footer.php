@@ -409,13 +409,16 @@
 
                         });
                         $('#strict_dd').change(function(e){
-                           $('#asap').attr("checked", !($(this).attr("checked")));
+                            if($(this).attr("checked"))
+                            {
+                                $('#asap').attr("checked", false);
+                            }
                         });
                         $('#asap').change(function(e){
                             if($(this).attr("checked"))
                             {
                                 $('div#due_date_holder').hide();
-
+                                $('#strict_dd').attr("checked", false);
                             }
                             else
                             {
