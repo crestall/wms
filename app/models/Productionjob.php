@@ -197,7 +197,7 @@ class Productionjob extends Model{
 
     public function addJob($data)
     {
-        echo "<pre>",print_r($data),"</pre>"; die();
+        //echo "<pre>",print_r($data),"</pre>"; die();
         $db = Database::openConnection();
         $vals = array(
             'job_id'        => $data['job_id'],
@@ -209,8 +209,8 @@ class Productionjob extends Model{
         );
         $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
 
-        if(empty($data['date_due_value']))
-            $vals['due_date'] = $data['date_due'];
+        if(isset($data['asap']))
+            $vals['due_date'] = "ASAP";
         else
             $vals['due_date'] = $data['date_due_value'];
 
