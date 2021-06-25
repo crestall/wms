@@ -406,7 +406,7 @@
                         $('#strict_dd').click(function(e){
                             $('#rdd').toggle();
                             $('#date_due').valid();
-                            $('#assap').attr("checked", !($(this).atrr("checked")));
+                            $('#assap').attr("checked", !($(this).attr("checked")));
                         });
                         $('#asap').change(function(e){
                             if($(this).attr("checked"))
