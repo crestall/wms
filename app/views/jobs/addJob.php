@@ -121,23 +121,23 @@ else
                                 <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                             </div>
                             <div id="due_date_holder">
-                            <div class="row form-group">
-                                <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
-                                <div class="col-md-5">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
-                                        <div class="input-group-append">
-                                            <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                <div class="row form-group">
+                                    <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                                            <div class="input-group-append">
+                                                <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php echo Form::displayError('date_due');?>
                                         </div>
-                                        <?php echo Form::displayError('date_due');?>
                                     </div>
+                                    <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                                 </div>
-                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
-                            </div>
-                            <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />
-                                <label class="custom-control-label col-md-5" for="strict_dd">Strict Dispatch Date</label>
-                            </div>
+                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />
+                                    <label class="custom-control-label col-md-5" for="strict_dd">Strict Dispatch Date</label>
+                                </div>
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="asap" name="asap"  />
