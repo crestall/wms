@@ -120,6 +120,7 @@ else
                                 </div>
                                 <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                             </div>
+                            <div id="due_date_holder">
                             <div class="row form-group">
                                 <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
                                 <div class="col-md-5">
@@ -136,6 +137,7 @@ else
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />
                                 <label class="custom-control-label col-md-5" for="strict_dd">Strict Dispatch Date</label>
+                            </div>
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="asap" name="asap"  />

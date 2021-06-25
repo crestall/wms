@@ -406,7 +406,19 @@
                         $('#strict_dd').click(function(e){
                             $('#rdd').toggle();
                             $('#date_due').valid();
-                        })
+                            $('#assap').attr("checked", !($(this).atrr("checked")));
+                        });
+                        $('#asap').change(function(e){
+                            if($(this).attr("checked"))
+                            {
+                                $('div#due_date_holder').hide();
+
+                            }
+                            else
+                            {
+                                $('div#due_date_holder').show();
+                            }
+                        });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_due').focus();
                         }); 
