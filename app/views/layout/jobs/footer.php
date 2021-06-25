@@ -406,8 +406,11 @@
                         $('#strict_dd').click(function(e){
                             $('#rdd').toggle();
                             $('#date_due').valid();
-                            $('#asap').attr("checked", !($(this).attr("checked")));
+
                         });
+                        $('#strict_dd').change(function(e){
+                           $('#asap').attr("checked", !($(this).attr("checked")));
+                        }
                         $('#asap').change(function(e){
                             if($(this).attr("checked"))
                             {
