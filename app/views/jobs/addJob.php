@@ -8,8 +8,8 @@ $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = (empty(Form::value('country')))? "AU" : Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
-//$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
-
+$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
+/*
 if( empty(Form::value('date_due')) )
 {
     $date_due_value = strtotime('+7 days');
@@ -28,9 +28,7 @@ else
         $date_due = Form::value('date_due');
     }
 }
-
-
-
+*/
 $customer_id = ( empty(Form::value('customer_id')) )? 0 : Form::value('customer_id');
 //FINISHER DETAILS
 $finisher_array = array();
@@ -126,14 +124,14 @@ else
                                 <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
                                 <div class="col-md-5">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
+                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
                                         <div class="input-group-append">
                                             <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                         </div>
                                         <?php echo Form::displayError('date_due');?>
                                     </div>
                                 </div>
-                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due_value;?>" />
+                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />

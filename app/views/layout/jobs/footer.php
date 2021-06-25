@@ -382,9 +382,7 @@
                             $('input#runsheet_daydate_'+job_id).focus();
                         });
                         $( "#date_due" ).datepicker({
-                            //showButtonPanel: true,
-                            //closeText: 'Clear',
-                            constrainInput: false,
+                            constrainInput: true,
                             changeMonth: true,
                             changeYear: true,
                             dateFormat: "dd/mm/yy",
