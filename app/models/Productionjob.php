@@ -197,7 +197,7 @@ class Productionjob extends Model{
 
     public function addJob($data)
     {
-        echo "<pre>",print_r($data),"</pre>"; die();
+        //echo "<pre>",print_r($data),"</pre>"; die();
         $db = Database::openConnection();
         $vals = array(
             'job_id'        => $data['job_id'],
