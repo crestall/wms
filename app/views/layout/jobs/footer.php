@@ -414,7 +414,7 @@
                                 $('#asap').attr("checked", false);
                             }
                         });
-                        $('#asap').change(function(e){
+                        $('#asap').click(function(e){
                             if($(this).attr("checked"))
                             {
                                 $('div#due_date_holder').hide();
