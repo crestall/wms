@@ -410,7 +410,7 @@
                         });
                         $('#strict_dd').change(function(e){
                            $('#asap').attr("checked", !($(this).attr("checked")));
-                        }
+                        });
                         $('#asap').change(function(e){
                             if($(this).attr("checked"))
                             {
