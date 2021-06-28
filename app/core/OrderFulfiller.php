@@ -290,7 +290,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                     {
                         $this->updateShopify($od, "https://auspost.com.au/track/".$od['consignment_id']);
                     }
-                    if($od['is_woocommerce'] == 1)
+                    if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                     {
                         $this->output .= "Sending Eparcel Tracking info to woo-commerce".PHP_EOL;
                         $woocommerce_id = $od['client_order_id'];
@@ -329,6 +329,11 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                                 $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
                                 //die($output);
                             }
+                        }
+                        else
+                        {
+                            $this->output .= "ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".PHP_EOL;
+                            $this->output .= "COULD NOT CHANGE STATUS FOR ".$woocommerce_id.PHP_EOL;
                         }
                     }
 

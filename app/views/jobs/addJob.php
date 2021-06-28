@@ -8,8 +8,8 @@ $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = (empty(Form::value('country')))? "AU" : Form::value('country');
 $date_entered = (empty(Form::value('date_entered_value')))? time() : Form::value('date_entered_value');
-//$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
-
+$date_due = (empty(Form::value('date_due_value')))? strtotime('+7 days') : Form::value('date_due_value');
+/*
 if( empty(Form::value('date_due')) )
 {
     $date_due_value = strtotime('+7 days');
@@ -28,9 +28,7 @@ else
         $date_due = Form::value('date_due');
     }
 }
-
-
-
+*/
 $customer_id = ( empty(Form::value('customer_id')) )? 0 : Form::value('customer_id');
 //FINISHER DETAILS
 $finisher_array = array();
@@ -122,22 +120,28 @@ else
                                 </div>
                                 <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                             </div>
-                            <div class="row form-group">
-                                <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
-                                <div class="col-md-5">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
-                                        <div class="input-group-append">
-                                            <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                            <div id="due_date_holder">
+                                <div class="row form-group">
+                                    <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
+                                            <div class="input-group-append">
+                                                <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php echo Form::displayError('date_due');?>
                                         </div>
-                                        <?php echo Form::displayError('date_due');?>
                                     </div>
+                                    <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                                 </div>
-                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due_value;?>" />
+                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />
+                                    <label class="custom-control-label col-md-5" for="strict_dd">Strict Dispatch Date</label>
+                                </div>
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd"  />
-                                <label class="custom-control-label col-md-5" for="strict_dd">Strict Dispatch Date</label>
+                                <input class="custom-control-input" type="checkbox" id="asap" name="asap"  />
+                                <label class="custom-control-label col-md-5" for="asap">Dispatch ASAP</label>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4">Designer</label>

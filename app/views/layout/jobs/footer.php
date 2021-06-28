@@ -382,9 +382,7 @@
                             $('input#runsheet_daydate_'+job_id).focus();
                         });
                         $( "#date_due" ).datepicker({
-                            //showButtonPanel: true,
-                            //closeText: 'Clear',
-                            constrainInput: false,
+                            constrainInput: true,
                             changeMonth: true,
                             changeYear: true,
                             dateFormat: "dd/mm/yy",
@@ -408,7 +406,25 @@
                         $('#strict_dd').click(function(e){
                             $('#rdd').toggle();
                             $('#date_due').valid();
-                        })
+
+                        });
+                        $('#strict_dd').change(function(e){
+                            if(this.checked)
+                            {
+                                $('#asap').attr("checked", false);
+                            }
+                        });
+                        $('#asap').change(function(e){
+                            if(this.checked)
+                            {
+                                $('div#due_date_holder').hide();
+                                $('#strict_dd').attr("checked", false);
+                            }
+                            else
+                            {
+                                $('div#due_date_holder').show();
+                            }
+                        });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
                             $('input#date_due').focus();
                         }); 
