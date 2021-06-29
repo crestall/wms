@@ -397,7 +397,7 @@
                                 }
                                 else
                                 {
-                                    //console.log("false");
+                                    $(this).val('');
                                     $('#date_due_value').val('');
                                 }
                             }

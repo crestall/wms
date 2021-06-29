@@ -224,7 +224,7 @@ $f = 0;
                                 </div>
                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
                                     <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd" <?php if($strict_dd) echo "checked";?>  />
-                                    <label class="custom-control-label col-md-f" for="strict_dd">Strict Dispatch Date</label>
+                                    <label class="custom-control-label col-md-5" for="strict_dd">Strict Dispatch Date</label>
                                 </div>
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
