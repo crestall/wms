@@ -382,7 +382,6 @@
                             $('input#runsheet_daydate_'+job_id).focus();
                         });
                         $( "#date_due" ).datepicker({
-                            constrainInput: true,
                             changeMonth: true,
                             changeYear: true,
                             dateFormat: "dd/mm/yy",
@@ -398,7 +397,7 @@
                                 }
                                 else
                                 {
-                                    //console.log("false");
+                                    $(this).val('');
                                     $('#date_due_value').val('');
                                 }
                             }
@@ -419,10 +418,19 @@
                             {
                                 $('div#due_date_holder').hide();
                                 $('#strict_dd').attr("checked", false);
+                                $('#date_due, #date_due_value').val('');
                             }
                             else
                             {
                                 $('div#due_date_holder').show();
+                                var plusSeven = Date.now() + 7 * 24 * 60 * 60 * 1000;
+                                var d = new Date(plusSeven);
+                                var date = d.getDate();
+                                var month = d.getMonth() + 1;
+                                var year = d.getFullYear();
+                                var dateString = (date <= 9 ? '0' + date : date) + '/' + (month <= 9 ? '0' + month : month) + '/' + year;
+                                $('#date_due_value').val(Math.floor(plusSeven/1000));
+                                $('#date_due').val(dateString);
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){

@@ -10,32 +10,23 @@ $salesrep_id = (!empty(Form::value('salesrep_id')))? Form::value('salesrep_id'):
 $date_entered = (!empty(Form::value('date_entered_value')))? Form::value('date_entered_value'): $job['created_date'];
 
 //$date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value'): $job['due_date'];
+$is_asap = (empty(Form::value('asap')))? $job['due_date'] == "ASAP" : true;
 
-if( empty(Form::value('date_due')) )
+if( empty(Form::value('date_due_value')) )
 {
     if (filter_var($job['due_date'], FILTER_VALIDATE_INT))
     {
-        $date_due_value = $job['due_date'];
-        $date_due = date('d/m/Y', $date_due_value);
+        $date_due = $job['due_date'];
+        //$date_due = date('d/m/Y', $date_due_value);
     }
     else
     {
-        $date_due_value = '';
-        $date_due = $job['due_date'];
+        $date_due = '';
     }
 }
 else
 {
-    if (filter_var(Form::value('date_due_value'), FILTER_VALIDATE_INT))
-    {
-        $date_due_value = Form::value('date_due_value');
-        $date_due = date('d/m/Y', $date_due_value);
-    }
-    else
-    {
-        $date_due_value = '';
-        $date_due = Form::value('date_due');
-    }
+    $date_due = Form::value('date_due_value');
 }
 
 
@@ -207,22 +198,28 @@ $f = 0;
                                 </div>
                                 <input type="hidden" name="date_entered_value" id="date_entered_value" value="<?php echo $date_entered;?>" />
                             </div>
-                            <div class="row form-group">
-                                <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
-                                <div class="col-md-5">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
-                                        <div class="input-group-append">
-                                            <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                            <div id="due_date_holder" style="display:<?php echo ($is_asap)? "none": "block";?>">
+                                <div class="row form-group">
+                                    <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="date_due" id="date_due" value="<?php if(!empty($date_due)) echo date('d/m/Y', $date_due);?>" />
+                                            <div class="input-group-append">
+                                                <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php echo Form::displayError('date_due');?>
                                         </div>
-                                        <?php echo Form::displayError('date_due');?> 
                                     </div>
+                                    <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                                 </div>
-                                <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due_value;?>" />
+                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd" <?php if($strict_dd) echo "checked";?>  />
+                                    <label class="custom-control-label col-md-5" for="strict_dd">Strict Dispatch Date</label>
+                                </div>
                             </div>
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd" <?php if($strict_dd) echo "checked";?>  />
-                                <label class="custom-control-label col-md-f" for="strict_dd">Strict Dispatch Date</label>
+                                <input class="custom-control-input" type="checkbox" id="asap" name="asap" <?php if($is_asap) echo "checked";?>  />
+                                <label class="custom-control-label col-md-5" for="asap">Dispatch ASAP</label>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4">Designer</label>
