@@ -428,7 +428,7 @@
                                 var date = d.getDate();
                                 var month = d.getMonth() + 1;
                                 var year = d.getFullYear();
-                                var dateString = (date <= 9 ? '0' + date : date) + '-' + (month <= 9 ? '0' + month : month) + '-' + year;
+                                var dateString = (date <= 9 ? '0' + date : date) + '/' + (month <= 9 ? '0' + month : month) + '/' + year;
                                 $('#date_due_value').val(Math.floor(plusSeven/1000));
                                 $('#date_due').val(dateString);
                             }
