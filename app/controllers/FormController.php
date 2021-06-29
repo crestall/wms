@@ -1274,7 +1274,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        //echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
+        echo "<pre>POST DATA",print_r($post_data),"</pre>"; die();
         if(!$this->dataSubbed($job_id))
         {
             Form::setError('job_id', 'The job id is required');
