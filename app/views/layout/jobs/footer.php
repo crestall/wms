@@ -425,8 +425,12 @@
                                 $('div#due_date_holder').show();
                                 var plusSeven = Date.now() + 7 * 24 * 60 * 60 * 1000;
                                 var d = new Date(plusSeven);
+                                var date = d.getDate();
+                                var month = d.getMonth() + 1;
+                                var year = d.getFullYear();
+                                var dateString = (date <= 9 ? '0' + date : date) + '-' + (month <= 9 ? '0' + month : month) + '-' + year;
                                 $('#date_due_value').val(Math.floor(plusSeven/1000));
-                                $('#date_due').val(d.toLocaleDateString);
+                                $('#date_due').val(dateString);
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
