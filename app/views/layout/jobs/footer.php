@@ -426,7 +426,7 @@
                                 var plusSeven = Date.now() + 7 * 24 * 60 * 60 * 1000;
                                 var d = new Date(plusSeven);
                                 $('#date_due_value').val(Math.floor(plusSeven/1000));
-                                $('#date_due').val(d);
+                                $('#date_due').val(d.format('DD/MM/YYYY'));
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
