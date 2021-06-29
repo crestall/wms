@@ -425,7 +425,7 @@
                                 $('div#due_date_holder').show();
                                 var d = new Date();
                                 var plusSeven = d.setDate(d.getDate() + 7);
-                                $('#date_due').val(plusSeven);
+                                $('#date_due_value').val(plusSeven/1000);
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
