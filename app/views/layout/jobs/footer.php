@@ -418,10 +418,14 @@
                             {
                                 $('div#due_date_holder').hide();
                                 $('#strict_dd').attr("checked", false);
+                                $('#date_due, #date_due_value').val('');
                             }
                             else
                             {
                                 $('div#due_date_holder').show();
+                                var d = new Date();
+                                var plusSeven = d.setDate(d.getDate() + 7);
+                                $('#date_due').val(plusSeven);
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
