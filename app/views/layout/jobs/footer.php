@@ -423,9 +423,10 @@
                             else
                             {
                                 $('div#due_date_holder').show();
-                                var d = new Date();
-                                var plusSeven = d.setDate(d.getDate() + 7);
-                                $('#date_due_value').val(plusSeven/1000);
+                                var plusSeven = Date.now() + 7 * 24 * 60 * 60 * 1000;
+                                var d = new Date(plusSeven);
+                                $('#date_due_value').val(Math.floor(plusSeven/1000));
+                                $('#date_due').val(d);
                             }
                         });
                         $('#date_due_calendar').css('cursor', 'pointer').click(function(e){
