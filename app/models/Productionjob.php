@@ -297,9 +297,10 @@ class Productionjob extends Model{
         $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
         if(!empty($data['previous_job_id'])) $vals['previous_job_id'] = $data['previous_job_id'];
 
-        //if(!empty($data['date_due_value'])) $vals['due_date'] = $data['date_due_value'];
-        if(empty($data['date_due_value']))
-            $vals['due_date'] = $data['date_due'];
+        $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
+
+        if(isset($data['asap']))
+            $vals['due_date'] = "ASAP";
         else
             $vals['due_date'] = $data['date_due_value'];
 
