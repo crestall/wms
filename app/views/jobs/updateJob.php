@@ -12,31 +12,21 @@ $date_entered = (!empty(Form::value('date_entered_value')))? Form::value('date_e
 //$date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value'): $job['due_date'];
 $is_asap = (empty(Form::value('asap')))? $job['due_date'] == "ASAP" : true;
 
-if( empty(Form::value('date_due')) )
+if( empty(Form::value('date_due_value')) )
 {
     if (filter_var($job['due_date'], FILTER_VALIDATE_INT))
     {
-        $date_due_value = $job['due_date'];
-        $date_due = date('d/m/Y', $date_due_value);
+        $date_due = $job['due_date'];
+        //$date_due = date('d/m/Y', $date_due_value);
     }
     else
     {
-        $date_due_value = '';
-        $date_due = $job['due_date'];
+        $date_due = '';
     }
 }
 else
 {
-    if (filter_var(Form::value('date_due_value'), FILTER_VALIDATE_INT))
-    {
-        $date_due_value = Form::value('date_due_value');
-        $date_due = date('d/m/Y', $date_due_value);
-    }
-    else
-    {
-        $date_due_value = '';
-        $date_due = Form::value('date_due');
-    }
+    $date_due = Form::value('date_due_value');
 }
 
 
@@ -213,14 +203,14 @@ $f = 0;
                                     <label class="col-md-4 col-form-label"><span id="rdd" style="display:none"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> </span>Dispatch By Date</label>
                                     <div class="col-md-5">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo $date_due;?>" />
+                                            <input type="text" class="form-control" name="date_due" id="date_due" value="<?php echo date('d/m/Y', $date_due);?>" />
                                             <div class="input-group-append">
                                                 <span id="date_due_calendar" class="input-group-text"><i class="fad fa-calendar-alt"></i></span>
                                             </div>
                                             <?php echo Form::displayError('date_due');?>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due_value;?>" />
+                                    <input type="hidden" name="date_due_value" id="date_due_value" value="<?php echo $date_due;?>" />
                                 </div>
                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
                                     <input class="custom-control-input" type="checkbox" id="strict_dd" name="strict_dd" <?php if($strict_dd) echo "checked";?>  />
