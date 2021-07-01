@@ -199,7 +199,11 @@ class FormController extends Controller {
                     'sku'       => $row[0],
                     'client_id' => $client_id
                 ));
-                echo "<pre>",print_r($item),"</pre";
+                //echo "<pre>",print_r($item),"</pre";
+                if(!$item)
+                {
+                    echo "<p>Need to check ".$row[1]."( ".$row[0]." )</p>";
+                }
                 echo "<p>-------------------------------------------</p>";
             }
         }
