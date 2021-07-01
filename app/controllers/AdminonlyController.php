@@ -27,6 +27,7 @@ class AdminOnlyController extends Controller
         $client_id = 0;
         $active = 1;
         $client_name = "";
+        echo "<pre>",print_r($this->request->params),"</pre>";die();
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['client']))
