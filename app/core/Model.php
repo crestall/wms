@@ -25,10 +25,6 @@ class Model {
      */
     protected $errors = [];
 
-    protected $ignored_ips = array(
-        "61.69.45.158"
-    );
-
     /**
      * Constructor
      *
