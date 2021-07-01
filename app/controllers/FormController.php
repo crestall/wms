@@ -185,7 +185,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($csv_array),"</pre>";//die();
+            //echo "<pre>",print_r($csv_array),"</pre>";//die();
             /*
             [0] => SKU
             [1] => Name
