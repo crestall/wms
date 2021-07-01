@@ -11,12 +11,12 @@ echo $client_id;
             </div>
         </div>
         <?php if($client_id > 0):?>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-lg-12 text-center">
                     <h2>Inventory Comparing For <?php echo ucwords($client_name);?></h2>
                 </div>
             </div>
-            <form id="inventory-compare" method="post" action="/form/procInventoryCompare" enctype="multipart/form-data">
+            <form id="inventory-compare" method="post" action="/form/procInventoryCompare" enctype="multipart/form-data" class="p-3 border border-rounded">
                 <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> CSV File</label>
                     <div class="col-md-4">
@@ -30,7 +30,7 @@ echo $client_id;
                 </div>
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="form-group row">
-                    <div class="col-md-4 offset-md-4">
+                    <div class="col-md-4 offset-md-3">
                         <button type="submit" class="btn btn-outline-secondary">Check</button>
                     </div>
                 </div>
