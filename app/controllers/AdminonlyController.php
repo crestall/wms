@@ -27,7 +27,7 @@ class AdminOnlyController extends Controller
         $client_id = 0;
         $active = 1;
         $client_name = "";
-        echo "<pre>",print_r($this->request->params),"</pre>";die();
+        //echo "<pre>",print_r($this->request->params),"</pre>";die();
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['client']))
@@ -41,6 +41,8 @@ class AdminOnlyController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/inventoryCompare.php', [
             'page_title'    => "Inventory Comparing",
             'pht'           =>  ": Inventory Comparing",
+            'client_id'     => $client_id;
+            'client_name'   => $client_name
         ]);
     }
 
