@@ -16,7 +16,7 @@ echo $client_id;
                     <h2>Inventory Comparing For <?php echo ucwords($client_name);?></h2>
                 </div>
             </div>
-            <form id="inventory-compare" method="post" action="/form/procInventoryCompare" enctype="multipart/form-data" class="p-3 border border-rounded">
+            <form id="inventory-compare" method="post" action="/form/procInventoryCompare" enctype="multipart/form-data" class="p-3 border border-secondary rounded">
                 <div class="form-group row">
                     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> CSV File</label>
                     <div class="col-md-4">
