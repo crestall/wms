@@ -41,7 +41,7 @@ class AdminOnlyController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/inventoryCompare.php', [
             'page_title'    => "Inventory Comparing",
             'pht'           =>  ": Inventory Comparing",
-            'client_id'     => $client_id;
+            'client_id'     => $client_id,
             'client_name'   => $client_name
         ]);
     }
