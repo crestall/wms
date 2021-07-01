@@ -12,7 +12,13 @@
                 },
                 'inventory-comparing' : {
                     init: function(){
-                        
+                        $('#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Setting Up...</h2></div>' });
+                                window.location.href = "/admin-only/inventory-comparing/client=" + $(this).val();
+                            }
+                        });
                     }
                 },
                 'data-tables-testing':{
