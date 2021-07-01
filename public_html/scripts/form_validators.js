@@ -124,6 +124,20 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#inventory-compare").validate({
+        rules:{
+            csv_file:{
+    			extension: "csv",
+                required: true
+    		}
+        },
+		messages:{
+			csv_file:{
+				extension: "Only upload csv files here"
+			}
+		}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("form#client_edit_product").validate({
 
 	});
