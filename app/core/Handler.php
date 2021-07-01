@@ -63,7 +63,8 @@ class Handler{
      * @throws ErrorException
      */
     public static function handleError($errno, $errmsg, $filename, $linenum, $vars){
-        throw new ErrorException($errmsg, 0, $errno, $filename, $linenum);
+        if(error_reporting() !== 0) //check for stfu instruction
+            throw new ErrorException($errmsg, 0, $errno, $filename, $linenum);
     }
 
     /**
