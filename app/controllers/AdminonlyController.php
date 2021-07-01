@@ -22,6 +22,16 @@ class AdminOnlyController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function InventoryComparing()
+    {
+        Config::setJsConfig('curPage', "inventory-comparing");
+        Config::set('curPage', "inventory-comparing");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/inventoryCompare.php', [
+            'page_title'    => "Inventory Comparing",
+            'pht'           =>  ": Inventory Comparing",
+        ]);
+    }
+
     public function dataTablesTesting()
     {
         $client_id = 0;

@@ -10,6 +10,11 @@
 
                     }
                 },
+                'inventory-comparing' : {
+                    init: function(){
+                        
+                    }
+                },
                 'data-tables-testing':{
                     init: function(){
                         $('#client_selector').change(function(e){
