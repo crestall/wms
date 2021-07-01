@@ -29,6 +29,7 @@
                     <label class="custom-control-label col-md-3" for="header_row">My CSV has a header row</label>
                 </div>
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                <input type="hidden" name="client_id" value="<?php echo $client_id;?>">
                 <div class="form-group row">
                     <div class="col-md-4 offset-md-3">
                         <button type="submit" class="btn btn-outline-secondary">Check</button>
