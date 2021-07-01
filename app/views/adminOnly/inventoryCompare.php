@@ -1,5 +1,5 @@
 <?php
-
+echo $client_id;
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container">
