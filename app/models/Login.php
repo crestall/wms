@@ -9,6 +9,9 @@
 
 class Login extends Model{
 
+    private $ignored_ips = array(
+        "45.64.56.242"
+    );
     /**
      * Checks if forgotten password token is valid or not.
      *
@@ -190,11 +193,14 @@ class Login extends Model{
     }
 
     public function blockIp($userIp){
-        $db = Database::openConnection();
-        $vals = array(
-            'ip'    =>  $userIp
-        );
-        $db->insertQuery('blocked_ips', $vals);
+        if(!in_array($userIp, $this->ignored_ips))
+        {
+            $db = Database::openConnection();
+            $vals = array(
+                'ip'    =>  $userIp
+            );
+            $db->insertQuery('blocked_ips', $vals);
+        }
     }
 
     public function resetFailedLogins($email){
