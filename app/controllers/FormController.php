@@ -211,8 +211,10 @@ class FormController extends Controller {
                 if(!$item)
                 {
                     echo "<p>Need to check ".$row[1]."( ".$row[0]." ) on line: $line</p>";
+                    echo "<p>-------------------------------------------</p>";
                 }
-                echo "<p>-------------------------------------------</p>";
+
+                ++$line;
             }
         }
     }
