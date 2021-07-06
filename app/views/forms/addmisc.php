@@ -33,7 +33,7 @@ elseif( strtoupper($order['country']) == "AU" )
 }
 else
 {
-    $gst_check = "checked";
+    $gst_check = "";
 }
 $pallets = (empty(Form::value('pallets')))? $order['pallets']:Form::value('pallets');
 $satchels = (empty(Form::value('satchels')))? $order['satchels']:Form::value('satchels');
