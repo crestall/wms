@@ -23,6 +23,18 @@ else
 {
     $bubble_check = "";
 }
+if(!empty(Form::value('inc_gst')))
+{
+    $gst_check = "checked";
+}
+elseif( strtoupper($order['country']) == "AU" )
+{
+    $gst_check = "checked";
+}
+else
+{
+    $gst_check = "checked";
+}
 $pallets = (empty(Form::value('pallets')))? $order['pallets']:Form::value('pallets');
 $satchels = (empty(Form::value('satchels')))? $order['satchels']:Form::value('satchels');
 $handling_charge = (empty(Form::value('handling_charge')))? $order['handling_charge']:Form::value('handling_charge');
@@ -47,6 +59,10 @@ $postage_charge = (empty(Form::value('postage_charge')))? $order['postage_charge
         <div class="form-group row custom-control custom-checkbox custom-control-right">
             <input class="custom-control-input col" type="checkbox" id="bubble_wrap" name="bubble_wrap" <?php echo $bubble_check;?> />
             <label class="custom-control-label col" for="bubble_wrap">Bubble Wrap</label>
+        </div>
+        <div class="form-group row custom-control custom-checkbox custom-control-right">
+            <input class="custom-control-input col" type="checkbox" id="inc_gst" name="inc_gst" <?php echo $gst_check;?> />
+            <label class="custom-control-label col" for="inc_gst">Add GST To Postage</label>
         </div>
         <div class="form-group row">
             <label class="col">Pallets</label>

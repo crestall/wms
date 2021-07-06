@@ -83,7 +83,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
             'status_id'			=>	$this->controller->order->fulfilled_id,
             'date_fulfilled'	=>	time(),
             'consignment_id'    =>  $this->controller->request->data['consignment_id'],
-            'total_cost'        =>  $this->controller->request->data['local_charge']
+            'postage_charge'    =>  $this->controller->request->data['local_charge']
         );
         $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
         //order is now fulfilled, reduce stock
