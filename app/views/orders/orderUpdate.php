@@ -436,8 +436,8 @@ if(!$error)
                                                     </div>
                                                 </div>
                                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                                    <input class="custom-control-input col" type="checkbox" id="inc_gst" name="inc_gst" <?php echo $gst_check;?> />
-                                                    <label class="custom-control-label col" for="inc_gst">Add GST To Postage<br><span class="inst">Uncheck for international orders</span></label>
+                                                    <input class="custom-control-input col" type="checkbox" id="inc_pgst" name="inc_pgst" <?php echo $gst_check;?> />
+                                                    <label class="custom-control-label col" for="inc_pgst">Add GST To Postage<br><span class="inst">Uncheck for international orders</span></label>
                                                 </div>
                                             </form>
                                         <?php endif;?>
