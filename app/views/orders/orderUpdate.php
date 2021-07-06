@@ -13,15 +13,15 @@ if(!$error)
     $direct_charge = (empty(Form::value('direct_charge')))? $order['postage_charge']:Form::value('direct_charge');
     if(!empty(Form::value('inc_gst')))
     {
-        $gst_check = "checked";
+        $pgst_check = "checked";
     }
     elseif( strtoupper($order['country']) == "AU" )
     {
-        $gst_check = "checked";
+        $pgst_check = "checked";
     }
     else
     {
-        $gst_check = "checked";
+        $pgst_check = "";
     }
 }
 
@@ -436,7 +436,7 @@ if(!$error)
                                                     </div>
                                                 </div>
                                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                                    <input class="custom-control-input col" type="checkbox" id="inc_pgst" name="inc_pgst" <?php echo $gst_check;?> />
+                                                    <input class="custom-control-input col" type="checkbox" id="inc_pgst" name="inc_pgst" <?php echo $pgst_check;?> />
                                                     <label class="custom-control-label col" for="inc_pgst">Add GST To Postage<br><span class="inst">Uncheck for international orders</span></label>
                                                 </div>
                                             </form>
