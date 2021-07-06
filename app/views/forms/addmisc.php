@@ -62,7 +62,7 @@ $postage_charge = (empty(Form::value('postage_charge')))? $order['postage_charge
         </div>
         <div class="form-group row custom-control custom-checkbox custom-control-right">
             <input class="custom-control-input col" type="checkbox" id="inc_gst" name="inc_gst" <?php echo $gst_check;?> />
-            <label class="custom-control-label col" for="inc_gst">Add GST To Postage</label>
+            <label class="custom-control-label col" for="inc_gst">Add GST To Postage<br><span class="inst">Uncheck for international orders</span></label>
         </div>
         <div class="form-group row">
             <label class="col">Pallets</label>
