@@ -206,7 +206,7 @@ class FormController extends Controller {
                     'barcode'   => $row[0],
                     'sku'       => $row[0],
                     'client_id' => $client_id
-                ));
+                ), -1);
                 //echo "<pre>",print_r($item),"</pre";
                 if(!$item)
                 {
