@@ -4567,7 +4567,10 @@ class FormController extends Controller {
         $postage_charge = (empty($postage_charge))? 0 : $postage_charge;
         $pallets = ($this->dataSubbed($pallets))? $pallets: 0;
         $satchels = ($this->dataSubbed($satchels))? $satchels: 0;
-        $gst = ($handling_charge + $postage_charge) * 0.1;
+        if(isset($inc_gst))
+            $gst = ($handling_charge + $postage_charge) * 0.1;
+        else
+            $gst = $handling_charge + 0.1;
         $total_cost = $handling_charge + $postage_charge + $gst;
         $vals = array(
             'pallets'           => $pallets,

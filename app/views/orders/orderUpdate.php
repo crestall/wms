@@ -7,10 +7,22 @@ $p_count = (empty(Form::value('count')))? 1:Form::value('count');
 $can_adjust = $this->controller->client->canAdjustAllocations($order['client_id']);
 if(!$error)
 {
-    $truck_charge = (empty(Form::value('truck_charge')))? $order['total_cost']:Form::value('truck_charge');
+    $truck_charge = (empty(Form::value('truck_charge')))? $order['postage_charge']:Form::value('truck_charge');
     $courier_name = (empty(Form::value('courier_name')))? $order['courier_name']:Form::value('courier_name');
-    $local_charge = (empty(Form::value('local_charge')))? $order['total_cost']:Form::value('local_charge');
-    $direct_charge = (empty(Form::value('direct_charge')))? $order['total_cost']:Form::value('direct_charge');
+    $local_charge = (empty(Form::value('local_charge')))? $order['postage_charge']:Form::value('local_charge');
+    $direct_charge = (empty(Form::value('direct_charge')))? $order['postage_charge']:Form::value('direct_charge');
+    if(!empty(Form::value('inc_gst')))
+    {
+        $gst_check = "checked";
+    }
+    elseif( strtoupper($order['country']) == "AU" )
+    {
+        $gst_check = "checked";
+    }
+    else
+    {
+        $gst_check = "checked";
+    }
 }
 
 ?>
@@ -347,6 +359,9 @@ if(!$error)
                                         <?php elseif($order['courier_id'] == $this->controller->courier->fsgId):?>
                                             <form id="our_truck">
                                                 <h5 class="card-subtitle">FSG Delivery</h5>
+                                                <p class="inst text-danger">
+                                                    All Charges Are GST Exclusive
+                                                </p>
                                                 <div class="form-group row">
                                                     <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Consignment ID</label>
                                                     <div class="col">
@@ -391,6 +406,9 @@ if(!$error)
                                         <?php elseif($order['courier_id'] == $this->controller->courier->localId):?>
                                             <form id="local_courier">
                                                 <h5 class="card-subtitle">Local Courier</h5>
+                                                <p class="inst text-danger">
+                                                    All Charges Are GST Exclusive
+                                                </p>
                                                 <div class="form-group row">
                                                     <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier Name</label>
                                                     <div class="col">
@@ -406,7 +424,7 @@ if(!$error)
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col">Charge Amount</label>
+                                                    <label class="col">Postage Amount</label>
                                                     <div class="col">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -416,6 +434,10 @@ if(!$error)
                                                         </div>
                                                         <?php echo Form::displayError('local_charge');?>
                                                     </div>
+                                                </div>
+                                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                                    <input class="custom-control-input col" type="checkbox" id="inc_gst" name="inc_gst" <?php echo $gst_check;?> />
+                                                    <label class="custom-control-label col" for="inc_gst">Add GST To Postage<br><span class="inst">Uncheck for international orders</span></label>
                                                 </div>
                                             </form>
                                         <?php endif;?>
