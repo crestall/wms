@@ -76,14 +76,23 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         $this->output .= "FULFILLING LOCAL COURIER ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $db = Database::openConnection();
-        echo "<pre>",print_r($this->controller->request->data),"</pre>";die();
+        //echo "<pre>",print_r($this->controller->request->data),"</pre>";die();
         $od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
 
+        $postage_charge = $this->controller->request->data['local_charge'];
+        $handling_charge = $od['handling_charge'];
+        if($this->controller->request->data['inc_gst'] > 0)
+            $gst = ($handling_charge + $postage_charge) * 0.1;
+        else
+            $gst = $handling_charge + 0.1;
+        $total_cost = $handling_charge + $postage_charge + $gst;
         $o_values = array(
             'status_id'			=>	$this->controller->order->fulfilled_id,
             'date_fulfilled'	=>	time(),
             'consignment_id'    =>  $this->controller->request->data['consignment_id'],
-            'postage_charge'    =>  $this->controller->request->data['local_charge']
+            'postage_charge'    =>  $postage_charge,
+            'gst'               =>  $gst,
+            'total_cost'        =>  $total_cost
         );
         $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
         //order is now fulfilled, reduce stock
