@@ -498,7 +498,7 @@
                                 {
                                     consignment_id = $('#consignment_id').val();
                                     local_charge = $('#local_charge').val();
-                                    if( $("#inc_gst").prop("checked") )
+                                    if( $("#inc_pgst").prop("checked") )
                                         inc_gst = 1;
                                     if(consignment_id == "")
                                     {
