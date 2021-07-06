@@ -434,13 +434,15 @@ class Item extends Model{
     public function getItemForClientByBarcode($array)
     {
         $db = Database::openConnection();
-
+        if(!isset($array['active']))
+            $array['active'] = 1;
         $item = $db->queryRow(
-            "SELECT * FROM items WHERE (barcode = :barcode OR sku = :sku) AND client_id = :client_id AND active = 1",
+            "SELECT * FROM items WHERE (barcode = :barcode OR sku = :sku) AND client_id = :client_id AND active = :active",
             array(
                 'barcode'   =>  $array['barcode'],
                 'sku'       =>  $array['barcode'],
-                'client_id' =>  $array['client_id']
+                'client_id' =>  $array['client_id'],
+                'active'    =>  $array['active']
             )
         );
 
