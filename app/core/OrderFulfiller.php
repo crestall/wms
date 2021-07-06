@@ -76,7 +76,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         $this->output .= "FULFILLING LOCAL COURIER ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $db = Database::openConnection();
-        //echo "<pre>",print_r($this->controller->request->data),"</pre>";die();
+        echo "<pre>",print_r($this->controller->request->data),"</pre>";die();
         $od = $this->controller->order->getOrderDetail($this->controller->request->data['order_ids']);
 
         $o_values = array(
