@@ -464,6 +464,7 @@
                             var pallet_count = 0;
                             var truck_charge = 0;
                             var local_charge = 0;
+                            var inc_gst = 0;
                             if(courier_id == $('#fsg_id').val())
                             {
                                 //$("#our_truck").validate().element('#consignment_id');
@@ -497,6 +498,8 @@
                                 {
                                     consignment_id = $('#consignment_id').val();
                                     local_charge = $('#local_charge').val();
+                                    if( $("#inc_gst").prop("checked") )
+                                        inc_gst = 1;
                                     if(consignment_id == "")
                                     {
                                         valid = false;
@@ -576,7 +579,8 @@
                                                     consignment_id : consignment_id,
                                                     pallet_count: pallet_count,
                                                     truck_charge: truck_charge,
-                                                    local_charge: local_charge
+                                                    local_charge: local_charge,
+                                                    inc_gst: inc_gst
                                                 },
                                                 dataType: 'json',
                                                 beforeSend: function(){
