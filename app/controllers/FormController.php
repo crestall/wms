@@ -191,17 +191,32 @@ class FormController extends Controller {
             [1] => Name
             [2] => Count
             */
-            $line = 0;
+            //$line = 0;
             $skip_first = isset($header_row);
+            $feedback_string = "<ul>";
+            //Set up csv file
+            $cols = array(
+                "ISBN",
+                "Name",
+                "MYOB On Hand",
+                "WMS On Hand",
+                "Comments"
+            );
+            $rows = array();
             foreach($csv_array as $row)
             {
                 if($skip_first)
                 {
                     $skip_first = false;
-                    ++$line;
+                    //++$line;
                     continue;
                 }
                 //echo "<p>Checking ".$row[1]."</p>";
+                $line = array(
+                    $row[0],
+                    $row[1],
+                    $row[2]
+                );
                 $item = $this->item->getItemForClientByBarcode(array(
                     'barcode'   => $row[0],
                     'sku'       => $row[0],
@@ -210,12 +225,23 @@ class FormController extends Controller {
                 //echo "<pre>",print_r($item),"</pre";
                 if(!$item)
                 {
-                    echo "<p>Need to check ".$row[1]."( ".$row[0]." ) on line: $line</p>";
-                    echo "<p>-------------------------------------------</p>";
+                    $line[] = "-";
+                    $line[] = "Not Found In WMS";
+                    //echo "<p>Need to check ".$row[1]."( ".$row[0]." ) on line: $line</p>";
+                    //echo "<p>-------------------------------------------</p>";
                 }
-
-                ++$line;
+                else
+                {
+                    $wms_count = $this->item->getStockOnHand($item['id']);
+                    $line[] = $wms_count;
+                }
+                $rows[] = $line;
+                //++$line;
             }
+            //echo "Rows<pre>",print_r($rows),"</pre>";
+            $expire=time()+60;
+            setcookie("fileDownload", "true", $expire, "/");
+            $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "freedom_stock_compare".date("Ymd")]);
         }
     }
 
