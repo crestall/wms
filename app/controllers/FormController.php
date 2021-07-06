@@ -201,7 +201,7 @@ class FormController extends Controller {
                     ++$line;
                     continue;
                 }
-                echo "<p>Checking ".$row[1]."</p>";
+                //echo "<p>Checking ".$row[1]."</p>";
                 $item = $this->item->getItemForClientByBarcode(array(
                     'barcode'   => $row[0],
                     'sku'       => $row[0],
