@@ -191,8 +191,16 @@ class FormController extends Controller {
             [1] => Name
             [2] => Count
             */
+            $line = 0;
+            $skip_first = isset($header_row);
             foreach($csv_array as $row)
             {
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    ++$line;
+                    continue;
+                }
                 echo "<p>Checking ".$row[1]."</p>";
                 $item = $this->item->getItemForClientByBarcode(array(
                     'barcode'   => $row[0],
@@ -202,7 +210,7 @@ class FormController extends Controller {
                 //echo "<pre>",print_r($item),"</pre";
                 if(!$item)
                 {
-                    echo "<p>Need to check ".$row[1]."( ".$row[0]." )</p>";
+                    echo "<p>Need to check ".$row[1]."( ".$row[0]." ) on line: $line</p>";
                 }
                 echo "<p>-------------------------------------------</p>";
             }
