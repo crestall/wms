@@ -84,7 +84,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         if($this->controller->request->data['inc_gst'] > 0)
             $gst = ($handling_charge + $postage_charge) * 0.1;
         else
-            $gst = $handling_charge + 0.1;
+            $gst = $handling_charge * 0.1;
         $total_cost = $handling_charge + $postage_charge + $gst;
         $o_values = array(
             'status_id'			=>	$this->controller->order->fulfilled_id,
