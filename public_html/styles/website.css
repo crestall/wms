@@ -540,6 +540,7 @@ p.inst, span.inst{
     font-size:12px;
     font-style:italic;
     line-height:normal;
+    font-weight: normal;
 }
 
 ul#fileList {
