@@ -19,6 +19,12 @@
                                 window.location.href = "/admin-only/inventory-comparing/client=" + $(this).val();
                             }
                         });
+                        $('form#inventory-compare').submit(function(){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Uploading and Comparing Counts...</h2></div>' });
+                            }
+                        });
                     }
                 },
                 'data-tables-testing':{
