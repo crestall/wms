@@ -751,12 +751,16 @@ $admin = array(
             'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
         ),
         'update-production-database-tables'   => array(
-            'display'   => true,
+            'display'   => false,
             'icon'      => "<i class='fas fa-database fa-3x'></i>"
         ),
         'ebay-api-testing'   => array(
             'display'   => true,
             'icon'      => "<i class='fad fa-server fa-3x'></i>"
+        ),
+        'inventory-comparing'   => array(
+            'display'   => true,
+            'icon'      => "<i class='fal fa-warehouse fa-3x'></i>"
         )
     )
 );

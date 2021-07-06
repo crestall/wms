@@ -84,6 +84,7 @@ class FormController extends Controller {
             'procForgotPassword',
             'procGoodsIn',
             'procGoodsOut',
+            'procInventoryCompare',
             'procItemsUpdate',
             'procFinisherCategoryAdd',
             'procFinisherCategoryEdit',
@@ -145,6 +146,77 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procInventoryCompare()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if($_FILES['csv_file']["size"] > 0)
+        {
+            if ($_FILES['csv_file']['error']  === UPLOAD_ERR_OK)
+            {
+                $tmp_name = $_FILES['csv_file']['tmp_name'];
+                $csv_array = array_map('str_getcsv', file($tmp_name));
+                //echo "<pre>",print_r($csv_array),"</pre>"; die();
+            }
+            else
+            {
+            	$error_message = $this->file_upload_error_message($_FILES[$field]['error']);
+                Form::setError('csv_file', $error_message);
+            }
+        }
+        else
+        {
+            Form::setError('csv_file', 'please select a file to upload');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "<pre>",print_r($csv_array),"</pre>";//die();
+            /*
+            [0] => SKU
+            [1] => Name
+            [2] => Count
+            */
+            $line = 0;
+            $skip_first = isset($header_row);
+            foreach($csv_array as $row)
+            {
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    ++$line;
+                    continue;
+                }
+                //echo "<p>Checking ".$row[1]."</p>";
+                $item = $this->item->getItemForClientByBarcode(array(
+                    'barcode'   => $row[0],
+                    'sku'       => $row[0],
+                    'client_id' => $client_id
+                ), -1);
+                //echo "<pre>",print_r($item),"</pre";
+                if(!$item)
+                {
+                    echo "<p>Need to check ".$row[1]."( ".$row[0]." ) on line: $line</p>";
+                    echo "<p>-------------------------------------------</p>";
+                }
+
+                ++$line;
+            }
+        }
     }
 
     public function procAddPurchaseOrder()
