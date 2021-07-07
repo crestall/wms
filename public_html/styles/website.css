@@ -536,7 +536,8 @@ input.digits{
 ul.inst,
 ol.inst,
 p.inst,
-span.inst{
+span.inst,
+div.inst_holder p{
     margin-top:2px;
     margin-bottom:2px;
     color:#221111;
