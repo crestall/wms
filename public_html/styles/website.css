@@ -888,6 +888,11 @@ bootstrap adjustments
         left: initial;
     }
 
+    /** FSG border colour **/
+    .border-fsg{
+        border-color: #030c57 !important;
+    }
+
     /** FSG button type - outline only */
     .btn-outline-fsg {
         color: #030c57;
