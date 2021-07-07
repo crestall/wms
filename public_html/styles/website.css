@@ -445,6 +445,14 @@ label.error{
     font-style: italic;
 }
 
+input.loading {
+    background-color: #ffffff;
+    background-image: url("images/loading.gif");
+    background-size: 25px 25px;
+    background-position:right center;
+    background-repeat: no-repeat;
+}
+
 /*****
 Error Pages
 ******/
