@@ -82,9 +82,16 @@ class ajaxfunctionsController extends Controller
             'error'     =>  false,
             'sku'      =>  ''
         );
-        $val = $this->request->data['value'];
+        $sku = $val = $this->request->data['value'];
 
-        $data['sku'] = $val;
+        $upcount = 1;
+        while( $this->item->skuTaken($sku) )
+        {
+            $sku = $sku."_".$upcount;
+            ++$upcount;
+        }
+
+        $data['sku'] = $sku;
 
         $this->view->renderJson($data);
     }
