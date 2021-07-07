@@ -5,7 +5,8 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form method="post" action="/form/procRegisterNewStock" id="register_new_stock"  autocomplete="off" class="p-3 border border-fsg rounded">
             <div class="form-group row inst_holder p-3 w-75 mx-auto">
-                <p class="inst">The intructions</p>
+                <p>At lease one of Your Product ID/SKU or Barcode is required</p>
+                <p>A unique FSG SKU is generated from these</p>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
