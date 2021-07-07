@@ -4,7 +4,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form method="post" action="/form/procRegisterNewStock" id="register_new_stock"  autocomplete="off" class="p-3 border border-fsg rounded">
-            <div class="form-group row inst_holder p-3">
+            <div class="form-group row inst_holder p-3 w-75 mx-auto">
                 <p class="inst">The intructions</p>
             </div>
             <div class="form-group row">
