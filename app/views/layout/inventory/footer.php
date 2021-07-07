@@ -62,6 +62,36 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Data...</h2></div>' });
                             }
                         });
+                        $('#client_product_id, #barcode').change(function(ev){
+                            if($('#sku').val() == "")
+                            {
+                                var val = "";
+                                if($("#client_product_id").val() != "")
+                                {
+                                    val = $("#client_product_id").val();
+                                }
+                                else if($("#barcode").val() != "")
+                                {
+                                    val = $("#barcode").val('<span class="spinner-border spinner-border-sm"></span>');
+                                }
+                                if(val != "")
+                                {
+                                    $.ajax({
+                                        url: "/ajaxfunctions/create-sku",
+                                        data: {
+                                            value: val
+                                        },
+                                        dataType: 'json',
+                                        beforeSend: function(){
+                                            $('#sku').addClass('waiting');
+                                        },
+                                        success: function(d){
+
+                                        }
+                                    });
+                                }
+                            }
+                        });
                     }
                 },
                 'add-subtract-stock' : {
