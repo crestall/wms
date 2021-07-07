@@ -54,7 +54,7 @@
 
                     }
                 },
-                'record-new-stock': {
+                'record-new-product': {
                     init: function(){
                         $('form#register_new_stock').submit(function(e){
                             if($(this).valid())
