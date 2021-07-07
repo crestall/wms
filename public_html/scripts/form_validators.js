@@ -130,9 +130,23 @@ $(document).ready(function() {
                 require_from_group: [1, ".sku_calc"]
             },
             barcode:{
-                require_from_group: [1, ".sku_calc"]
+                require_from_group: [1, ".sku_calc"],
+				remote: {
+                    url: '/ajaxfunctions/checkBarcodes'
+                }
             }
-    	}
+    	},
+        messages:{
+			barcode: {
+				remote: 'This barcode is already in use. Barcodes must be unique'
+			}
+        },
+        invalidHandler(ev, v){
+            if(!v.element("#barcode"))
+            {
+                $("#sku").val("");
+            }
+        }
 	});
     ///////////////////////////////////////////////////////////////////////////////
     $("form#inventory-compare").validate({
