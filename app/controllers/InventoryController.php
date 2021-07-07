@@ -61,8 +61,8 @@ class InventoryController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        Config::setJsConfig('curPage', "register-new-stock");
-        Config::set('curPage', "register-new-stock");
+        Config::setJsConfig('curPage', "record-new-product");
+        Config::set('curPage', "record-new-product");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/registerNewStock.php',[
             'page_title'    =>  'Record A New Product',
             'client_id'     =>  $client_id,
