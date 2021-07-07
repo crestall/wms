@@ -543,6 +543,12 @@ p.inst, span.inst{
     font-weight: normal;
 }
 
+div.inst_holder{
+    background-color: rgb(23,162,184);
+    border-radius: .25rem !important;
+    border: thin solid #17a2b8;
+}
+
 ul#fileList {
     list-style: none;
     margin-left: 0;
