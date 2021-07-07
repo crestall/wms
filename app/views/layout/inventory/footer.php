@@ -72,7 +72,7 @@
                                 }
                                 else if($("#barcode").val() != "")
                                 {
-                                    val = $("#barcode").val('<span class="spinner-border spinner-border-sm"></span>');
+                                    val = $("#barcode").val();
                                 }
                                 if(val != "")
                                 {
