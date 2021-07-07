@@ -83,10 +83,10 @@
                                         },
                                         dataType: 'json',
                                         beforeSend: function(){
-                                            $('#sku').addClass('waiting');
+                                            $('#sku').addClass('loading');
                                         },
                                         success: function(d){
-
+                                            $('#sku').removeClass('loading');
                                         }
                                     });
                                 }
