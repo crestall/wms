@@ -533,7 +533,10 @@ input.digits{
     text-align: right;
 }
 
-p.inst, span.inst{
+ul.inst,
+ol.inst,
+p.inst,
+span.inst{
     margin-top:2px;
     margin-bottom:2px;
     color:#221111;
