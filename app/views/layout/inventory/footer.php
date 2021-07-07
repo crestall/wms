@@ -78,6 +78,7 @@
                                 {
                                     $.ajax({
                                         url: "/ajaxfunctions/create-sku",
+                                        method: 'post',
                                         data: {
                                             value: val
                                         },
