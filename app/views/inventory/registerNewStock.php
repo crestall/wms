@@ -31,10 +31,11 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Expected Quantity</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control digits required" name="qty" id="qty" value="<?php echo Form::value('qty');?>" />
-                    <?php echo Form::displayError('qty');?>
+                <label class="col-md-3 col-form-label">Image URL</label>
+                <div class="col-md-6">
+                    <input type="text" class="product_image form-control url" name="image" id="image" value="<?php echo Form::value('image');?>">
+                    <span class="inst">Use a fully formed URL, including the http(s) part</span>
+                    <?php echo Form::displayError('image');?>
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
@@ -42,7 +43,7 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-outline-secondary">Record Info</button>
+                    <button type="submit" class="btn btn-outline-fsg">Record Info</button>
                 </div>
             </div>
         </form>
