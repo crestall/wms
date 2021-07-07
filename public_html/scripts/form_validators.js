@@ -141,10 +141,15 @@ $(document).ready(function() {
 				remote: 'This barcode is already in use. Barcodes must be unique'
 			}
         },
-        invalidHandler(ev, v){
+        showErrors(em, el){
             if(!v.element("#barcode"))
             {
+                console.log('it aint valid');
                 $("#sku").val("");
+            }
+            else
+            {
+                console.log('it is');
             }
         }
 	});
