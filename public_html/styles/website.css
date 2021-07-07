@@ -544,7 +544,7 @@ p.inst, span.inst{
 }
 
 div.inst_holder{
-    background-color: rgb(23,162,184);
+    background-color: rgba(23,162,184,0.1);
     border-radius: .25rem !important;
     border: thin solid #17a2b8;
 }
