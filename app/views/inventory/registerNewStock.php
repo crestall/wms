@@ -3,8 +3,7 @@
         <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <div class="row">
-            <div class="col-md-12">
+
                 <form method="post" action="/form/procRegisterNewStock" id="register_new_stock" autocomplete="off">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
@@ -42,7 +41,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
+
     </div>
 </div>
