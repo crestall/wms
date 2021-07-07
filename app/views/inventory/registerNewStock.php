@@ -20,13 +20,13 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Your Product ID/SKU</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="client_product_id" id="client_product_id" value="<?php echo Form::value('client_product_id');?>" />
+                    <input type="text" class="form-control sku_calc" name="client_product_id" id="client_product_id" value="<?php echo Form::value('client_product_id');?>" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Barcode or ISBN</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="supplier" id="supplier" value="<?php echo Form::value('supplier');?>" />
+                    <input type="text" class="form-control sku_calc" name="barcode" id="barcode" value="<?php echo Form::value('barcode');?>" />
                 </div>
             </div>
             <div class="form-group row">
