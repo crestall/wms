@@ -32,7 +32,7 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">FSG SKU</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control readonly" name="sku" id="sku" value="<?php echo Form::value('sku');?>" />
+                    <input type="text" class="form-control" readonly name="sku" id="sku" value="<?php echo Form::value('sku');?>" />
                     <?php echo Form::displayError('sku');?>
                 </div>
             </div>
