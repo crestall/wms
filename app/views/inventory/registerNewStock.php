@@ -7,7 +7,7 @@
             <div class="form-group row">
                 <div class="inst_holder p-3 w-75 mx-auto">
                     <p class="mb-1">At lease one of Your Product ID/SKU or Barcode is required</p>
-                    <p>A unique FSG SKU is generated from these</p>
+                    <p>A unique FSG SKU is generated from these - you cannot edit this</p>
                 </div>
             </div>
             <div class="form-group row">
