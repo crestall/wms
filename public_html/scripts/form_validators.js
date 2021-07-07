@@ -124,6 +124,17 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    $("#register_new_stock").validate({
+        rules:{
+            client_producr_id:{
+                require_from_group: [1, ".sku_calc"]
+            },
+            barcode:{
+                require_from_group: [1, ".sku_calc"]
+            }
+    	}
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("form#inventory-compare").validate({
         rules:{
             csv_file:{
