@@ -77,7 +77,7 @@ class ajaxfunctionsController extends Controller
 
     public function createSku()
     {
-        echo "<pre>",print_r($this->request),"</pre>";
+        //echo "<pre>",print_r($this->request),"</pre>";
         $data = array(
             'error'     =>  false,
             'sku'      =>  ''
