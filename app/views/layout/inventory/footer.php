@@ -88,7 +88,9 @@
                                                 .val('Calculating the new SKU');
                                         },
                                         success: function(d){
-                                            $('#sku').removeClass('loading');
+                                            $('#sku')
+                                                .removeClass('loading')
+                                                .val(d.sku);
                                         }
                                     });
                                 }
