@@ -6,7 +6,7 @@
         <form method="post" action="/form/procRegisterNewStock" id="register_new_stock"  autocomplete="off" class="p-3 border border-fsg rounded">
             <div class="form-group row">
                 <div class="inst_holder p-3 w-75 mx-auto">
-                    <p>At lease one of Your Product ID/SKU or Barcode is required</p>
+                    <p class="mb-1">At lease one of Your Product ID/SKU or Barcode is required</p>
                     <p>A unique FSG SKU is generated from these</p>
                 </div>
             </div>
@@ -30,9 +30,9 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> FSG SKU</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control required" name="sku" id="sku" value="<?php echo Form::value('sku');?>" />
+                <label class="col-md-3 col-form-label">FSG SKU</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control readonly" name="sku" id="sku" value="<?php echo Form::value('sku');?>" />
                     <?php echo Form::displayError('sku');?>
                 </div>
             </div>
