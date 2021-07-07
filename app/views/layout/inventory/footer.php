@@ -83,7 +83,9 @@
                                         },
                                         dataType: 'json',
                                         beforeSend: function(){
-                                            $('#sku').addClass('loading');
+                                            $('#sku')
+                                                .addClass('loading')
+                                                .val('Calculating the new SKU');
                                         },
                                         success: function(d){
                                             $('#sku').removeClass('loading');
