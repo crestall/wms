@@ -21,6 +21,7 @@ class ajaxfunctionsController extends Controller
             'bulkMoveStock',
             'calcOriginPick',
             'consolidateOrders',
+            'createSku',
             'dataTablesClientsViewInventory',
             'dataTablesViewInventory',
             'dataTablesViewProducts',
@@ -72,6 +73,19 @@ class ajaxfunctionsController extends Controller
         ];
         $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function createSku()
+    {
+        $data = array(
+            'error'     =>  false,
+            'sku'      =>  ''
+        );
+        $val = $this->request->data['value'];
+
+        $data['sku'] = $val;
+
+        $this->view->renderJson($data);
     }
 
     public function receivePodItems()
