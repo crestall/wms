@@ -402,7 +402,7 @@ class InventoryController extends Controller
             'index',
             "clientInventory",
             'expectedShipments',
-            'registerNewStock'
+            'recordNewProduct'
         ));
 
         return Permission::check($role, $resource, $action);
