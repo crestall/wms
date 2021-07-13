@@ -63,9 +63,10 @@
                             }
                         });
                         $('#client_product_id, #barcode').change(function(ev){
-
-                                var val = $(this).val();
-                                if(val != "")
+                            var val = $(this).val();
+                            if(val != "")
+                            {
+                                if( this.id != 'barcode' || ( this.id == 'barcode' && $('#sku').val() == '' ) )
                                 {
                                     $.ajax({
                                         url: "/ajaxfunctions/create-sku",
@@ -86,7 +87,7 @@
                                         }
                                     });
                                 }
-
+                            }
                         });
                     }
                 },
