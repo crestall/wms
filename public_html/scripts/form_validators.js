@@ -134,6 +134,9 @@ $(document).ready(function() {
 				remote: {
                     url: '/ajaxfunctions/checkBarcodes'
                 }
+            },
+            image:{
+                url: true
             }
     	},
         messages:{
@@ -142,11 +145,7 @@ $(document).ready(function() {
 			}
         },
         showErrors(em, el){
-            console.log("error Map");
-            console.log(em);
-            console.log("error List");
-            console.log(el);
-            if(em.barcode)
+            if(em.barcode || em.client_product_id)
             {
                 $('#sku').val('');
             }
