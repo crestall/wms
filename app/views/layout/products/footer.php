@@ -7,7 +7,7 @@
             var actions = {
                 common: {
                     init: function(){
-                        $('input#external_image').click(function(e){
+                        $('input#external_image').change(function(e){
                             $('input.product_image').toggle();
                             $('input#eximage').valid();
                         });
