@@ -142,7 +142,11 @@ $(document).ready(function() {
 			}
         },
         showErrors(em, el){
-            this.defaultShowErrors();    
+            console.log("error Map");
+            console.log(em);
+            console.log("error List");
+            console.log(el);
+            this.defaultShowErrors();
         }
 	});
     ///////////////////////////////////////////////////////////////////////////////
