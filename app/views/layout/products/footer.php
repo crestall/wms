@@ -9,7 +9,8 @@
                     init: function(){
                         $('input#external_image').change(function(e){
                             $('input.product_image').toggle();
-                            $('input#eximage').valid();
+                            if($(this).is(":checked"))
+                                $('input#eximage').valid();
                         });
                         $('input#boxed_item').click(function(e){
                             $('input#weight').valid();
