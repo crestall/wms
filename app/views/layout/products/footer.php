@@ -21,10 +21,9 @@
                             $('input#height').valid();
                         });
                         $('input#barcode').change(function(ev){
-                            var val = $(this).val();
+                            var val = $(this).val().replace(/\D/g, "");
                             console.log('Old '+val);
-                            val.replace(/\D/g, "");
-                            console.log('New '+val); 
+                            console.log('New '+val);
                             $(this).val(val);
                         })
                     }
