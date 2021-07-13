@@ -3617,7 +3617,7 @@ class FormController extends Controller {
             if($this->dataSubbed($image))
                 $array['image'] = $image;
             $item_id = $this->item->recordData($array);
-            Session::set("feedback", "<h2><i class='far fa-check-circle'></i>New Item Recorded</h2><p>An email will be sent when the item arrives and is scanned into the system</p>");
+            Session::set("feedback", "<h2><i class='far fa-check-circle'></i>{$name}'s Details Recorded</h2><p>Thankyou/p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/record-new-product");
     }
