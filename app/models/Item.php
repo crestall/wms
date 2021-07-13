@@ -1042,6 +1042,7 @@ class Item extends Model{
             'boxed_item'                    =>  $boxed_item
         );
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
+        if(!empty($client_product_id)) $item_values['client_product_id'] = $client_product_id;
         //$item_values['boxed_item'] = (isset($boxed_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (!empty($per_pallet))? $per_pallet : 0;
