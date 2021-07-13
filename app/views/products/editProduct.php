@@ -78,7 +78,7 @@ else
                         ?>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Current Image</label>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="col-md-4">
                                     <?php echo $image;?><br>
                                     <span class="inst"><?php echo $image_text;?></span>
