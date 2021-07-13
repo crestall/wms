@@ -64,12 +64,24 @@ else
                             <?php echo Form::displayError('image');?>
                         </div>
                     </div>
-                    <?php if( !is_null($product['image']) && !empty($product['image']) ) :?>
+                    <?php if( !is_null($product['image']) && !empty($product['image']) ) :
+                        if(preg_match('/https?/i', $product['image']))
+                        {
+                            $image = "<img src='{$product['image']}' class='thumbnail' />";
+                            $image_text = "This Is The Image Currently In Use.<br>It Is On An External Server";
+                        }
+                        else
+                        {
+                            $image = "<img src='/images/products/tn_{$product['image']}' class='thumbnail' />";
+                            $image_text = "This Is The Image Currently In Use.<br>It Is On This Server.";
+                        }
+                        ?>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Current Image</label>
                             <div class="col-md-4">
                                 <div class="col-md-4">
-                                    <img src="/images/products/tn_<?php echo $product['image'];?>" class="thumbnail" />
+                                    <?php echo $image;?><br>
+                                    <span class="inst"><?php echo $image_text;?></span>
                                 </div>
                                 <div class="col-md-6 checkbox checkbox-default">
                                     <input class="form-check-input styled" type="checkbox" id="delete_image" name="delete_image" />
