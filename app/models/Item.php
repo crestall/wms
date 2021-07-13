@@ -1048,6 +1048,7 @@ class Item extends Model{
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['is_pod'] = (isset($is_pod))? 1 : 0;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
+        if(isset($external_image)) $item_values['image'] = $eximage;
         if(!empty($price)) $item_values['price'] = $price;
         if(isset($supplier)) $item_values['supplier'] = $supplier;
         if(isset($solar_type_id)) $item_values['solar_type_id'] = $solar_type_id;
