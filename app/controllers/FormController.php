@@ -3555,7 +3555,7 @@ class FormController extends Controller {
 
     public function procRegisterNewStock()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -3564,10 +3564,29 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
         }
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name', 'A product name is required');
+        }
+        if( !($this->dataSubbed($barcode) || $this->dataSubbed($client_product_id)))
+        {
+            Form::setError('counter', "At least one of these is required");
+        }
+        elseif( $this->dataSubbed($barcode) )
+        {
+            if($this->item->barcodeTaken($barcode))
+            {
+                Form::setError('barcode', 'This barcode is already in use');
+            }
         }
         if( !$this->dataSubbed($sku) )
         {
@@ -3577,10 +3596,8 @@ class FormController extends Controller {
         {
             Form::setError('sku', 'This SKU is already in use');
         }
-        if(filter_var($qty, FILTER_VALIDATE_INT) === false && $qty <= 0)
-        {
-            Form::setError('qty', 'Please enter only positive whole numbers');
-        }
+
+
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
