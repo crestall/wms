@@ -22,7 +22,9 @@
                         });
                         $('input#barcode').change(function(ev){
                             var val = $(this).val();
+                            console.log('Old '+val);
                             val.replace(/\D/g, "");
+                            console.log('New '+val); 
                             $(this).val(val);
                         })
                     }
