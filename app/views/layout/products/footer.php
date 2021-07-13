@@ -20,6 +20,11 @@
                             $('input#depth').valid();
                             $('input#height').valid();
                         });
+                        $('input#barcode').change(function(ev){
+                            var val = $(this).val();
+                            val.replace(/\D/g, "");
+                            $(this).val(val);
+                        })
                     }
                 },
                 'client-product-edit': {
