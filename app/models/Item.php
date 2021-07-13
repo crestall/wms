@@ -85,9 +85,11 @@ class Item extends Model{
         }
         $db = Database::openConnection();
         $item_values = array(
-        	'name'	=>	$name,
-            'image' =>  NULL
+        	'name'	    =>	$name,
+            'image'     =>  NULL,
+            'is_pod'    => 0
         );
+        if( isset($is_pod) ) $item_values['is_pod'] = 1;
         if(!empty($client_product_id)) $item_values['client_product_id'] = $client_product_id;
         if(!empty($image)) $item_values['image'] = $image;
         $db->updateDatabaseFields('items', $item_values, $item_id);
