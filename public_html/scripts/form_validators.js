@@ -146,6 +146,10 @@ $(document).ready(function() {
             console.log(em);
             console.log("error List");
             console.log(el);
+            if(em.barcode)
+            {
+                $('#sku').val('');
+            }
             this.defaultShowErrors();
         }
 	});
