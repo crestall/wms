@@ -8,6 +8,7 @@
                 <div class="inst_holder p-3 w-75 mx-auto">
                     <p class="mb-1">At lease one of Your Product ID/SKU or Barcode is required</p>
                     <p>A unique FSG SKU is generated from these - you cannot edit this</p>
+                    <p>The Print on Demand checkbox <strong>must</strong> be checked for all print on demand items</p>
                 </div>
             </div>
             <div class="form-group row">
@@ -16,6 +17,10 @@
                     <input type="text" class="form-control required" name="name" id="name" value="<?php echo Form::value('name');?>" />
                     <?php echo Form::displayError('name');?>
                 </div>
+            </div>
+            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                <input class="custom-control-input" type="checkbox" id="is_pod" name="is_pod" <?php if( !empty(Form::value('is_pod'))) echo "checked";?> />
+                <label class="custom-control-label col-md-3" for="is_pod">Print on Demand Product</label>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Your Product ID/SKU</label>
