@@ -33,13 +33,6 @@ else
                             <?php echo Form::displayError('name');?>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Image</label>
-                        <div class="col-md-4">
-                            <input type="file" name="image" id="image" />
-                            <?php echo Form::displayError('image');?>
-                        </div>
-                    </div>
 
 
                     <div class="form-group row">
