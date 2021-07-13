@@ -124,6 +124,35 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    $("#register_new_stock").validate({
+        rules:{
+            client_product_id:{
+                require_from_group: [1, ".sku_calc"]
+            },
+            barcode:{
+                require_from_group: [1, ".sku_calc"],
+				remote: {
+                    url: '/ajaxfunctions/checkBarcodes'
+                }
+            },
+            image:{
+                url: true
+            }
+    	},
+        messages:{
+			barcode: {
+				remote: 'This barcode is already in use. Barcodes must be unique'
+			}
+        },
+        showErrors(em, el){
+            if(em.barcode || em.client_product_id)
+            {
+                $('#sku').val('');
+            }
+            this.defaultShowErrors();
+        }
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("form#inventory-compare").validate({
         rules:{
             csv_file:{
@@ -343,21 +372,6 @@ $(document).ready(function() {
             }
         });
     });
-    ///////////////////////////////////////////////////////////////////////////////
-	$("#register_new_stock").validate({
-    	rules:{
-    		sku: {
-				remote: {
-                    url: '/ajaxfunctions/checkSkus'
-                }
-			}
-    	},
-		messages:{
-			sku: {
-				remote: 'This SKU is already in use. SKUs must be unique'
-			}
-		}
-	});
     ///////////////////////////////////////////////////////////////////////////////
     $("#make_pack_items").validate({
          rules:{
@@ -873,6 +887,9 @@ $(document).ready(function() {
     		image:{
     			accept: "image/*"
     		},
+            eximage:{
+                required: function(){ return $("#external_image").is(":checked"); }
+            },
 			client_id:{
     			notNone: true
     		},
@@ -902,6 +919,9 @@ $(document).ready(function() {
 			image:{
 				accept: "Only upload image files here"
 			},
+            eximage:{
+                required: "This is required"
+            },
 			client_id:{
 				notNone: "A Client must be chosen"
 			},

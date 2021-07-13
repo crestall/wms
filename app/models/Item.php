@@ -1038,15 +1038,18 @@ class Item extends Model{
             'last_activity'		            =>	time(),
             'client_id'			            =>	$client_id,
             'preferred_pick_location_id'    =>  $preferred_pick_location_id,
-            'palletized'                    =>  $palletized
+            'palletized'                    =>  $palletized,
+            'boxed_item'                    =>  $boxed_item
         );
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
-        $item_values['boxed_item'] = (isset($boxed_item))? 1 : 0;
+        if(!empty($client_product_id)) $item_values['client_product_id'] = $client_product_id;
+        //$item_values['boxed_item'] = (isset($boxed_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['per_pallet'] = (!empty($per_pallet))? $per_pallet : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['is_pod'] = (isset($is_pod))? 1 : 0;
         if(isset($image_name)) $item_values['image'] = $image_name.".jpg";
+        if(isset($external_image)) $item_values['image'] = $eximage;
         if(!empty($price)) $item_values['price'] = $price;
         if(isset($supplier)) $item_values['supplier'] = $supplier;
         if(isset($solar_type_id)) $item_values['solar_type_id'] = $solar_type_id;

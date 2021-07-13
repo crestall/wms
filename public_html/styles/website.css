@@ -445,6 +445,14 @@ label.error{
     font-style: italic;
 }
 
+input.loading {
+    background-color: #ffffff;
+    background-image: url("images/loading.gif");
+    background-size: 25px 25px;
+    background-position:right center;
+    background-repeat: no-repeat;
+}
+
 /*****
 Error Pages
 ******/
@@ -533,7 +541,11 @@ input.digits{
     text-align: right;
 }
 
-p.inst, span.inst{
+ul.inst,
+ol.inst,
+p.inst,
+span.inst,
+div.inst_holder p{
     margin-top:2px;
     margin-bottom:2px;
     color:#221111;
@@ -541,6 +553,12 @@ p.inst, span.inst{
     font-style:italic;
     line-height:normal;
     font-weight: normal;
+}
+
+div.inst_holder{
+    background-color: rgba(23,162,184,0.1);
+    border-radius: .25rem !important;
+    border: thin solid #17a2b8;
 }
 
 ul#fileList {
@@ -886,6 +904,11 @@ bootstrap adjustments
     div.custom-control-right .custom-control-label::after{
         right: -1.5rem;
         left: initial;
+    }
+
+    /** FSG border colour **/
+    .border-fsg{
+        border-color: #030c57 !important;
     }
 
     /** FSG button type - outline only */

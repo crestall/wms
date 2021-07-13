@@ -7,9 +7,12 @@
             var actions = {
                 common: {
                     init: function(){
-                        $('input#external_image').click(function(e){
+                        $('input#external_image').change(function(e){
                             $('input.product_image').toggle();
-                            $('input#eximage').valid();
+                            if($(this).is(":checked"))
+                                $('input#eximage').valid();
+                            else
+                                $('em#eximage-error').remove();
                         });
                         $('input#boxed_item').click(function(e){
                             $('input#weight').valid();
@@ -17,6 +20,10 @@
                             $('input#depth').valid();
                             $('input#height').valid();
                         });
+                        $('input#barcode').change(function(ev){
+                            var val = $(this).val().replace(/\D/g, ""); 
+                            $(this).val(val);
+                        })
                     }
                 },
                 'client-product-edit': {

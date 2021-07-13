@@ -899,7 +899,7 @@ $client = array(
             'display'   => true,
             'icon'      => '<i class="fad fa-shipping-timed fa-3x"></i>'
         ),
-        'register-new-stock'    => array(
+        'record-new-product'    => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-clipboard-check fa-3x"></i>'
         )

@@ -57,14 +57,14 @@ class InventoryController extends Controller
         ]);
     }
 
-    public function registerNewStock()
+    public function recordNewProduct()
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        Config::setJsConfig('curPage', "register-new-stock");
-        Config::set('curPage', "register-new-stock");
+        Config::setJsConfig('curPage', "record-new-product");
+        Config::set('curPage', "record-new-product");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/registerNewStock.php',[
-            'page_title'    =>  'Register New Stock',
+            'page_title'    =>  'Record A New Product',
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name
         ]);
@@ -402,7 +402,7 @@ class InventoryController extends Controller
             'index',
             "clientInventory",
             'expectedShipments',
-            'registerNewStock'
+            'recordNewProduct'
         ));
 
         return Permission::check($role, $resource, $action);

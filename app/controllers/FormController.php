@@ -3564,10 +3564,29 @@ class FormController extends Controller {
                 ${$field} = $value;
                 $post_data[$field] = $value;
             }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
         }
         if( !$this->dataSubbed($name) )
         {
             Form::setError('name', 'A product name is required');
+        }
+        if( !($this->dataSubbed($barcode) || $this->dataSubbed($client_product_id)))
+        {
+            Form::setError('counter', "At least one of these is required");
+        }
+        elseif( $this->dataSubbed($barcode) )
+        {
+            if($this->item->barcodeTaken($barcode))
+            {
+                Form::setError('barcode', 'This barcode is already in use');
+            }
         }
         if( !$this->dataSubbed($sku) )
         {
@@ -3576,10 +3595,6 @@ class FormController extends Controller {
         elseif($this->item->skuTaken($sku))
         {
             Form::setError('sku', 'This SKU is already in use');
-        }
-        if(filter_var($qty, FILTER_VALIDATE_INT) === false && $qty <= 0)
-        {
-            Form::setError('qty', 'Please enter only positive whole numbers');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -3593,21 +3608,18 @@ class FormController extends Controller {
                 'sku'       => $sku,
                 'client_id' => $client_id
             );
-            if($this->dataSubbed($supplier))
-                $array['supplier'] = $supplier;
+            if($this->dataSubbed($is_pod))
+                $array['is_pod'] = 1;
+            if($this->dataSubbed($client_product_id))
+                $array['client_product_id'] = $client_product_id;
+            if($this->dataSubbed($barcode))
+                $array['barcode'] = $barcode;
+            if($this->dataSubbed($image))
+                $array['image'] = $image;
             $item_id = $this->item->recordData($array);
-            $this->newstock->recordData(
-                array(
-                    'client_id'     => $client_id,
-                    'item_id'       => $item_id,
-                    'qty'           => $qty,
-                    'entered'       => time(),
-                    'entered_by'    => Session::getUserId()
-                )
-            );
-            Session::set("feedback", "<h2><i class='far fa-check-circle'></i>New Item Recorded</h2><p>An email will be sent when the item arrives and is scanned into the system</p>");
+            Session::set("feedback", "<h2><i class='far fa-check-circle'></i>{$name}'s Details Recorded</h2><p>Thankyou</p>");
         }
-        return $this->redirector->to(PUBLIC_ROOT."inventory/register-new-stock");
+        return $this->redirector->to(PUBLIC_ROOT."inventory/record-new-product");
     }
 
     public function procRecordPickup()
