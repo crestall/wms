@@ -3555,7 +3555,7 @@ class FormController extends Controller {
 
     public function procRegisterNewStock()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -3596,8 +3596,6 @@ class FormController extends Controller {
         {
             Form::setError('sku', 'This SKU is already in use');
         }
-
-
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
@@ -3610,21 +3608,18 @@ class FormController extends Controller {
                 'sku'       => $sku,
                 'client_id' => $client_id
             );
-            if($this->dataSubbed($supplier))
-                $array['supplier'] = $supplier;
+            if($this->dataSubbed($is_pod))
+                $array['is_pod'] = $is_pod;
+            if($this->dataSubbed($client_product_id))
+                $array['client_product_id'] = $client_product_id;
+            if($this->dataSubbed($barcode))
+                $array['barcode'] = $barcode;
+            if($this->dataSubbed($image))
+                $array['image'] = $image;
             $item_id = $this->item->recordData($array);
-            $this->newstock->recordData(
-                array(
-                    'client_id'     => $client_id,
-                    'item_id'       => $item_id,
-                    'qty'           => $qty,
-                    'entered'       => time(),
-                    'entered_by'    => Session::getUserId()
-                )
-            );
             Session::set("feedback", "<h2><i class='far fa-check-circle'></i>New Item Recorded</h2><p>An email will be sent when the item arrives and is scanned into the system</p>");
         }
-        return $this->redirector->to(PUBLIC_ROOT."inventory/register-new-stock");
+        return $this->redirector->to(PUBLIC_ROOT."inventory/record-new-product");
     }
 
     public function procRecordPickup()
