@@ -3,6 +3,7 @@ $client_id = $product['client_id'];
 $product_name = (!empty(Form::value('name')))? Form::value('name'):$product['name'];
 $client_product_id = (!empty(Form::value('client_product_id')))? Form::value('client_product_id'):$product['client_product_id'];
 $image_inst = "Use a fully formed URL, including the http(s) part";
+$is_pod = (!empty(Form::value('is_pod')))? true : $product['is_pod'] > 0;
 if( !is_null($product['image']) && !empty($product['image']) )
 {
     if(preg_match('/https?/i', $product['image']))
@@ -44,6 +45,10 @@ else
                                 <input type="text" class="form-control required" name="name" id="name" value="<?php echo $product_name;?>" />
                                 <?php echo Form::displayError('name');?>
                             </div>
+                        </div>
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="is_pod" name="is_pod" <?php if( $is_pod ) echo "checked";?> />
+                            <label class="custom-control-label col-md-3" for="is_pod">Print on Demand Product</label>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Your Product ID/SKU</label>
