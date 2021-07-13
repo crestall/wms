@@ -3609,7 +3609,7 @@ class FormController extends Controller {
                 'client_id' => $client_id
             );
             if($this->dataSubbed($is_pod))
-                $array['is_pod'] = $is_pod;
+                $array['is_pod'] = 1;
             if($this->dataSubbed($client_product_id))
                 $array['client_product_id'] = $client_product_id;
             if($this->dataSubbed($barcode))
