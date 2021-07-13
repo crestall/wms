@@ -63,17 +63,8 @@
                             }
                         });
                         $('#client_product_id, #barcode').change(function(ev){
-                            if($('#sku').val() == "")
-                            {
-                                var val = "";
-                                if($("#client_product_id").val() != "")
-                                {
-                                    val = $("#client_product_id").val();
-                                }
-                                else if($("#barcode").val() != "")
-                                {
-                                    val = $("#barcode").val();
-                                }
+
+                                var val = $(this).val();
                                 if(val != "")
                                 {
                                     $.ajax({
@@ -95,7 +86,7 @@
                                         }
                                     });
                                 }
-                            }
+
                         });
                     }
                 },
