@@ -140,6 +140,9 @@ $(document).ready(function() {
 			barcode: {
 				remote: 'This barcode is already in use. Barcodes must be unique'
 			}
+        },
+        showErrors(em, el){
+            this.defaultShowErrors();    
         }
 	});
     ///////////////////////////////////////////////////////////////////////////////
