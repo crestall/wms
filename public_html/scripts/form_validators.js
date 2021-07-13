@@ -887,9 +887,6 @@ $(document).ready(function() {
     		image:{
     			accept: "image/*"
     		},
-            eximage:{
-                required: function(){ return $("#external_image").is(":checked"); }
-            },
 			client_id:{
     			notNone: true
     		},
@@ -918,10 +915,7 @@ $(document).ready(function() {
 			},
 			image:{
 				accept: "Only upload image files here"
-			},
-            eximage:{
-                required: "This is required"
-            },
+			}, 
 			client_id:{
 				notNone: "A Client must be chosen"
 			},
