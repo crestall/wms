@@ -32,6 +32,7 @@
                 <label class="col-md-3 col-form-label">Barcode or ISBN</label>
                 <div class="col-md-6">
                     <input type="text" class="form-control sku_calc" name="barcode" id="barcode" value="<?php echo Form::value('barcode');?>" />
+                    <?php echo Form::displayError('counter');?>
                 </div>
             </div>
             <div class="form-group row">
