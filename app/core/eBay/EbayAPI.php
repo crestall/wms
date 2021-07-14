@@ -140,7 +140,7 @@
         echo "ARGS<pre>",print_r($args),"</pre>";
         extract($args);
         $link = $this->serverUrl."/identity/v1/oauth2/token";
-        echo "<p>Link: $link</p>"; die();
+        echo "<p>Link: $link</p>"; //die();
         $codeAuth = base64_encode($clientID.':'.$certID);
         $ch = curl_init($link);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -165,7 +165,7 @@
         }
 
 
-        //echo "response<pre>",print_r($response),"</pre>";
+        echo "response<pre>",print_r($response),"</pre>"; die();
         $json = json_decode($response, true);
         $info = curl_getinfo($ch);
         curl_close($ch);
