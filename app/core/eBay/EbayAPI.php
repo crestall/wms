@@ -187,8 +187,8 @@
                 return $json['access_token'];
             }
         }
-        //echo "JSON<pre>",print_r($json),"</pre>";
-        //die("did a refresh");
+        echo "JSON<pre>",print_r($json),"</pre>";
+        die("did a refresh");
         return false;
     }
 }//end class
