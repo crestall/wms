@@ -43,6 +43,7 @@
     {
         $url = $this->serverUrl."/".$s_action;
         //die($url);
+        die("authToken: ".$authToken);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -50,7 +51,7 @@
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         $codeAuth = base64_encode($authToken);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer '.$codeAuth
+            'Authorization: Bearer '.$authToken
         ));
         $result = curl_exec($ch);
         $err = curl_error($ch);
