@@ -75,7 +75,7 @@ class AdminOnlyController extends Controller
     {
         Config::setJsConfig('curPage', "ebay-api-testing");
         Config::set('curPage', "ebay-api-testing");
-        $this->ebayapi->firstAuthAppToken();
+        //$this->ebayapi->firstAuthAppToken();
         $this->PBAeBay->connect();
         //die('connected');
         $orders = $this->PBAeBay->getCurrentOrders();
