@@ -254,7 +254,7 @@ class Controller {
         {
             $class = $location . "eBay";
             $this->{$class} = new $class($this);
-            $this->{$class}->init();
+            //$this->{$class}->init();
         }
     }
 

@@ -14,23 +14,19 @@
     public $userToken;
     public $controller;
 
-    protected $devID;
-    protected $appID;
-    protected $certID;
-    protected $clientID;
-    protected $serverUrl;
-    protected $authURL;
-    protected $paypalEmailAddress;
-    protected $ruName;
-    protected $APIHost;
-    protected $authToken;
-    protected $refreshToken;
-    protected $scope;
-    protected $authCode;
-
-    protected $isLive;
-    protected $table;
-    protected $line_id;
+    protected $output;
+    protected $return_array = array(
+        'import_count'          => 0,
+        'imported_orders'       => array(),
+        'error_orders'          => array(),
+        'import_error'          => false,
+        'error'                 => false,
+        'error_count'           => 0,
+        'error_string'          => '',
+        'import_error_string'   => ''
+    );
+    protected $ua;
+    protected $order_items;
 
     public function __construct(Controller $controller)
     {

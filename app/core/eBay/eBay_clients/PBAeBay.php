@@ -10,7 +10,25 @@
  {
     private $client_id = 87;
 
-    public function init()
+    protected $devID;
+    protected $appID;
+    protected $certID;
+    protected $clientID;
+    protected $serverUrl;
+    protected $authURL;
+    protected $paypalEmailAddress;
+    protected $ruName;
+    protected $APIHost;
+    protected $authToken;
+    protected $refreshToken;
+    protected $scope;
+    protected $authCode;
+
+    protected $isLive;
+    protected $table;
+    protected $line_id;
+
+    public function __construct()
     {
         $this->table    = "ebay_access_tokens";
         $this->devID    = 'beaed030-6fea-4467-aafb-2b415518d84c';
