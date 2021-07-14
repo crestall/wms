@@ -152,6 +152,17 @@
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=refresh_token&refresh_token=".$refreshToken."&scope=".$scope);
         $response = curl_exec($ch);
+
+        if ($response === FALSE) {
+            printf("cUrl error (#%d): %s<br>\n", curl_errno($ch),
+                   htmlspecialchars(curl_error($ch)));
+            rewind($verbose);
+            $verboseLog = stream_get_contents($verbose);
+            echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
+            die();
+        }
+
+
         echo "response<pre>",print_r($response),"</pre>";
         $json = json_decode($response, true);
         $info = curl_getinfo($ch);
