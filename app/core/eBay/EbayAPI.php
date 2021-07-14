@@ -50,7 +50,7 @@
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         $codeAuth = base64_encode($authToken);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer '.$authToken
+            'Authorization: Bearer '.$codeAuth
         ));
         $result = curl_exec($ch);
         $err = curl_error($ch);
