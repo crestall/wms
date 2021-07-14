@@ -136,6 +136,7 @@
 
     protected function refreshToken(array $args)
     {
+        echo "ARGS<pre>",print_r($args),"</pre>";
         extract($args);
         $link = $this->serverUrl."/identity/v1/oauth2/token";
         $codeAuth = base64_encode($clientID.':'.$certID);
