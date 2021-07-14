@@ -142,6 +142,7 @@
         $link = $this->serverUrl."/identity/v1/oauth2/token";
         //echo "<p>Link: $link</p>"; //die();
         $codeAuth = base64_encode($clientID.':'.$certID);
+        /*
         $ch = curl_init($link);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/x-www-form-urlencoded',
@@ -151,8 +152,25 @@
         //curl_setopt($ch, CURLHEADER_SEPARATE, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=refresh_token&refresh_token=".$refreshToken."&scope=".$scope);
+        */
+        $ch = curl_init();
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => $link,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => 'grant_type=refresh_token&refresh_token='.$refreshToken.'&scope='.$scope,
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Basic '.$codeAuth,
+                'Content-Type: application/x-www-form-urlencoded'
+            ),
+        ));
         $response = curl_exec($ch);
 
         if ($response === FALSE) {
