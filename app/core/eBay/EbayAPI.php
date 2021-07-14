@@ -14,8 +14,8 @@
     public $userToken;
     public $controller;
 
-    protected $serverUrl;
-    protected $authURL;
+    protected $serverUrl = 'https://api.ebay.com';
+    protected $authURL = 'https://auth.ebay.com';
     protected $output;
     protected $return_array = array(
         'import_count'          => 0,
@@ -33,8 +33,6 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
-        $this->serverUrl  = 'https://api.ebay.com';
-        $this->authURL = 'https://auth.ebay.com';
     }
 
 //Background Helper Functions
