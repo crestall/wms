@@ -73,7 +73,8 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
                 ));
             }
         }
-        //die( "current: ".time()." expires: ".$access_tokens['access_expires']);
+        echo "<p>authToken: ".$this->authToken."</p>";
+        die( "current: ".time()." expires: ".$access_tokens['access_expires']);
         $this->paypalEmailAddress= 'PAYPAL_EMAIL_ADDRESS';
     }
 
