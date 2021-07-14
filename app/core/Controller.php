@@ -70,7 +70,7 @@ class Controller {
 
     public $formvalidator;
 
-    public $ebay;
+    public $ebayapi;
 
     /**
      * Constructor
