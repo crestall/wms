@@ -39,7 +39,7 @@
 
 //Background Helper Functions
 
-    protected function sendGetRequest($s_action)
+    protected function sendGetRequest($s_action, $authToken)
     {
         $url = $this->serverUrl."/".$s_action;
         //die($url);
@@ -48,9 +48,9 @@
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-        $codeAuth = base64_encode($this->authToken);
+        $codeAuth = base64_encode($authToken);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer '.$this->authToken
+            'Authorization: Bearer '.$authToken
         ));
         $result = curl_exec($ch);
         $err = curl_error($ch);
@@ -96,7 +96,7 @@
         extract($args);
         $db = Database::openConnection();
         $link = $this->serverUrl."/identity/v1/oauth2/token";
-        $codeAuth = base64_encode($this->clientID.':'.$this->certID);
+        $codeAuth = base64_encode($this->clientID.':'.$certID);
         $ch = curl_init($link);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/x-www-form-urlencoded',
@@ -106,7 +106,7 @@
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=authorization_code&code=".$this->authCode."&redirect_uri=".$this->ruName);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=authorization_code&code=".$authCode."&redirect_uri=".$ruName);
         $response = curl_exec($ch);
         $json = json_decode($response, true);
         //echo "<pre>",print_r($json),"</pre>"; die();
@@ -162,15 +162,17 @@
             }
             else
             {
-                $this->authToken = $json["access_token"];
+                //$this->authToken = $json["access_token"];
                 $db = Database::openConnection();
                 $db->updateDatabaseFields($this->table, array(
                     'access_token'      => $json['access_token'],
                     'access_expires'    => time() + $json['expires_in']
                 ), $this->line_id);
+                return $json['access_token'];
             }
         }
         //echo "<pre>",print_r($json),"</pre>";
         //die("did a refresh");
+        return false;
     }
 }//end class

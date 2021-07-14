@@ -56,11 +56,16 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
             $this->refreshToken = $access_tokens['refresh_token'];
             if( time() >= $access_tokens['refresh_expires'] )
             {
-                $this->authorizationToken();//need to send an email so this works
+                $this->authorizationToken(array(
+                    'clientID'      => $this->clientID,
+                    'certID'        => $this->certID,
+                    'refreshToken'  => $this->refreshToken,
+                    'scope'         => $this->scope
+                ));//need to send an email so this works
             }
             elseif( time() >= $access_tokens['access_expires'] )
             {
-                $this->refreshToken(array(
+                $this->authToken = $this->refreshToken(array(
                     'clientID'      => $this->clientID,
                     'certID'        => $this->certID,
                     'refreshToken'  => $this->refreshToken,
@@ -75,7 +80,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
     public function getCurrentOrders()
     {
         $s_action = "sell/fulfillment/v1/order?filter=orderfulfillmentstatus:%7BNOT_STARTED%7CIN_PROGRESS%7D";
-        $response = $this->sendGetRequest($s_action);
+        $response = $this->sendGetRequest($s_action, $this->authToken);
         $collected_orders = json_decode($response, true);
         //return json_decode($response, true);
         $orders = $this->processOrders($collected_orders);
