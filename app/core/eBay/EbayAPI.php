@@ -151,6 +151,7 @@
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=refresh_token&refresh_token=".$refreshToken."&scope=".$scope);
         $response = curl_exec($ch);
+        echo "response<pre>",print_r($response),"</pre>";
         $json = json_decode($response, true);
         $info = curl_getinfo($ch);
         curl_close($ch);
