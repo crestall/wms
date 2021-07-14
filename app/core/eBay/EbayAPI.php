@@ -14,6 +14,8 @@
     public $userToken;
     public $controller;
 
+    protected $serverUrl;
+    protected $authURL;
     protected $output;
     protected $return_array = array(
         'import_count'          => 0,
@@ -31,6 +33,8 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
+        $this->serverUrl  = 'https://api.ebay.com';
+        $this->authURL = 'https://auth.ebay.com';
     }
 
 //Background Helper Functions
@@ -87,8 +91,9 @@
     
     */
 
-    protected function authorizationToken()
+    protected function authorizationToken(array $args)
     {
+        extract($args);
         $db = Database::openConnection();
         $link = $this->serverUrl."/identity/v1/oauth2/token";
         $codeAuth = base64_encode($this->clientID.':'.$this->certID);
@@ -128,10 +133,11 @@
         }
     }
 
-    protected function refreshToken()
+    protected function refreshToken(array $args)
     {
+        extract($args);
         $link = $this->serverUrl."/identity/v1/oauth2/token";
-        $codeAuth = base64_encode($this->clientID.':'.$this->certID);
+        $codeAuth = base64_encode($clientID.':'.$certID);
         $ch = curl_init($link);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/x-www-form-urlencoded',
@@ -142,7 +148,7 @@
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=refresh_token&refresh_token=".$this->refreshToken."&scope=".$this->scope);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=refresh_token&refresh_token=".$refreshToken."&scope=".$scope);
         $response = curl_exec($ch);
         $json = json_decode($response, true);
         $info = curl_getinfo($ch);

@@ -14,8 +14,7 @@
     protected $appID;
     protected $certID;
     protected $clientID;
-    protected $serverUrl;
-    protected $authURL;
+
     protected $paypalEmailAddress;
     protected $ruName;
     protected $APIHost;
@@ -36,8 +35,7 @@
         $this->certID   = 'PRD-418204ca8801-818f-4441-94d4-d28c';
         $this->clientID = 'MarkSoll-PBAFSG-PRD-5418204ca-f642538e';
         $this->ruName   = 'Mark_Solly-MarkSoll-PBAFSG-xuwmap';
-        $this->serverUrl  = 'https://api.ebay.com';
-        $this->authURL = 'https://auth.ebay.com';
+
         $this->scope    = '
 https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.marketing.readonly https://api.ebay.com/oauth/api_scope/sell.marketing https://api.ebay.com/oauth/api_scope/sell.inventory.readonly https://api.ebay.com/oauth/api_scope/sell.inventory https://api.ebay.com/oauth/api_scope/sell.account.readonly https://api.ebay.com/oauth/api_scope/sell.account https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly https://api.ebay.com/oauth/api_scope/sell.fulfillment https://api.ebay.com/oauth/api_scope/sell.analytics.readonly https://api.ebay.com/oauth/api_scope/sell.finances https://api.ebay.com/oauth/api_scope/sell.payment.dispute https://api.ebay.com/oauth/api_scope/commerce.identity.readonly';
     }
@@ -62,7 +60,12 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
             }
             elseif( time() >= $access_tokens['access_expires'] )
             {
-                $this->refreshToken();
+                $this->refreshToken(array(
+                    'clientID'      => $this->clientID,
+                    'certID'        => $this->certID,
+                    'refreshToken'  => $this->refreshToken,
+                    'scope'         => $this->scope
+                ));
             }
         }
         //die( "current: ".time()." expires: ".$access_tokens['access_expires']);
