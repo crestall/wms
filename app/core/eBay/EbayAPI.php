@@ -41,7 +41,7 @@
     {
         $url = $this->serverUrl."/".$s_action;
         //die($url);
-        die("authToken: ".$authToken);
+        //die("authToken: ".$authToken);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -108,7 +108,7 @@
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=authorization_code&code=".$authCode."&redirect_uri=".$ruName);
         $response = curl_exec($ch);
         $json = json_decode($response, true);
-        //echo "<pre>",print_r($json),"</pre>"; die();
+        echo "<pre>",print_r($json),"</pre>"; die();
         $info = curl_getinfo($ch);
         curl_close($ch);
         if($json != null)
@@ -134,10 +134,10 @@
 
     protected function refreshToken(array $args)
     {
-        echo "ARGS<pre>",print_r($args),"</pre>";
+        //echo "ARGS<pre>",print_r($args),"</pre>";
         extract($args);
         $link = $this->serverUrl."/identity/v1/oauth2/token";
-        echo "<p>Link: $link</p>";
+        //echo "<p>Link: $link</p>";
         $codeAuth = base64_encode($clientID.':'.$certID);
         $ch = curl_init($link);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -162,7 +162,7 @@
         }
 
 
-        echo "response<pre>",print_r($response),"</pre>";
+        //echo "response<pre>",print_r($response),"</pre>";
         $json = json_decode($response, true);
         $info = curl_getinfo($ch);
         curl_close($ch);
@@ -184,8 +184,8 @@
                 return $json['access_token'];
             }
         }
-        echo "JSON<pre>",print_r($json),"</pre>";
-        die("did a refresh");
+        //echo "JSON<pre>",print_r($json),"</pre>";
+        //die("did a refresh");
         return false;
     }
 }//end class

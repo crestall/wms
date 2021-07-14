@@ -45,7 +45,7 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
         $db = Database::openConnection();
         $this->line_id = $db->queryValue($this->table, array('client_id' => $this->client_id));
         $access_tokens = $db->queryByID($this->table, $this->line_id) ;
-        echo "<pre>",print_r($access_tokens),"</pre>";
+        //echo "<pre>",print_r($access_tokens),"</pre>";
         if(empty($access_tokens['code']))
         {
             die('An eBay AuthCode is Required');
@@ -61,7 +61,9 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
                     'clientID'      => $this->clientID,
                     'certID'        => $this->certID,
                     'refreshToken'  => $this->refreshToken,
-                    'scope'         => $this->scope
+                    'scope'         => $this->scope,
+                    'authCode'      => $this->authCode,
+                    'ruName'        => $this->ruName
                 ));//need to send an email so this works
             }
             elseif( time() >= $access_tokens['access_expires'] )
@@ -70,12 +72,14 @@ https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.m
                     'clientID'      => $this->clientID,
                     'certID'        => $this->certID,
                     'refreshToken'  => $this->refreshToken,
-                    'scope'         => $this->scope
+                    'scope'         => $this->scope,
+                    'authCode'      => $this->authCode,
+                    'ruName'        => $this->ruName
                 ));
             }
         }
-        echo "<p>authToken: ".$this->authToken."</p>";
-        die( "current: ".time()." expires: ".$access_tokens['access_expires']);
+        //echo "<p>authToken: ".$this->authToken."</p>";
+        //die( "current: ".time()." expires: ".$access_tokens['access_expires']);
         $this->paypalEmailAddress= 'PAYPAL_EMAIL_ADDRESS';
     }
 
