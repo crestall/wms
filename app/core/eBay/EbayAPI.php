@@ -139,6 +139,7 @@
         echo "ARGS<pre>",print_r($args),"</pre>";
         extract($args);
         $link = $this->serverUrl."/identity/v1/oauth2/token";
+        echo "<p>Link: $link</p>";
         $codeAuth = base64_encode($clientID.':'.$certID);
         $ch = curl_init($link);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
