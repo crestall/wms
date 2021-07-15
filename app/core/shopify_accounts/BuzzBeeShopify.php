@@ -145,8 +145,9 @@ class BuzzBeeShopify extends Shopify
 
             foreach($order_fulfillments as $of)
             {
-                if(!preg_match("/FSG/i", $of['assigned_location']['name']))
+                if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
                 {
+                    //Not For FSG or already closed the fulfillment
                     foreach($of['line_items'] as $ofli)
                     {
                         $line_item_id = $ofli['line_item_id'];
