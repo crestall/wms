@@ -100,7 +100,7 @@ foreach($orders_ids as $id):
             {
                 $image = "<img src='".$i['image']."' class='img-thumbnail img-fluid'>";
             }
-            elseif(!empty($details['image']))
+            elseif(!empty($i['image']))
             {
                 $image = "<img src='/images/products/tn_".$i['image']."' class='img-fluid img-thumbnail'>";
             }
