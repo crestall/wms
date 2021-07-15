@@ -145,28 +145,14 @@ class BuzzBeeShopify extends Shopify
 
             foreach($order_fulfillments as $of)
             {
-                if(!preg_match("/FSG/i", $of['assigned_location']['name']))
+                if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
                 {
-                    //Not For FSG
+                    //Not For FSG or already closed the fulfillment
                     foreach($of['line_items'] as $ofli)
                     {
                         $line_item_id = $ofli['line_item_id'];
                         $key = array_search($line_item_id, array_column($co['line_items'], 'id'));
                         unset($collected_orders[$coi]['line_items'][$key]);
-                    }
-                }
-                else
-                {
-                    //Check If FSG has already Fulfilled it
-                    foreach($of['line_items'] as $ofli)
-                    {
-                        if($ofli['fulfillable_quantity'] == 0)
-                        {
-                            $line_item_id = $ofli['line_item_id'];
-                            $key = array_search($line_item_id, array_column($co['line_items'], 'id'));
-                            unset($collected_orders[$coi]['line_items'][$key]);
-                        }
-
                     }
                 }
             }
