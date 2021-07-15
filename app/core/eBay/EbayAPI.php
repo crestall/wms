@@ -141,7 +141,7 @@
         extract($args);
 
         //ebay are a PACK!!!!!!!!!
-        $scope = html_encode($scope);
+        $scope = urlencode($scope);
 
 
         $link = $this->serverUrl."/identity/v1/oauth2/token";
