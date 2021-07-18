@@ -370,10 +370,9 @@ if(!$error)
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col">Pallets</label>
+                                                    <label class="col">&nbsp;</label>
                                                     <div class="col">
-                                                        <input type="text" class="form-control required digits" data-rule-min="1" name="truck_pallets" id="truck_pallets" value="<?php echo $truck_pallets;?>" />
-                                                        <?php echo Form::displayError('pallets');?>
+                                                        <button class="btn-outline-fsg btn" id="delivery_docket" data-orderid="<?php echo $order_id;?>" data-courierid="<?php echo $order['courier_id'];?>">Print Delivery Docket</button> 
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
