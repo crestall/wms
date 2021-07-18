@@ -370,12 +370,6 @@ if(!$error)
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col">&nbsp;</label>
-                                                    <div class="col">
-                                                        <button class="btn-outline-fsg btn" id="delivery_docket" data-orderid="<?php echo $order_id;?>" data-courierid="<?php echo $order['courier_id'];?>">Print Delivery Docket</button> 
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
                                                     <label class="col">Charge Amount</label>
                                                     <div class="col">
                                                         <div class="input-group">
@@ -385,6 +379,12 @@ if(!$error)
                                                             <input type="text" class="form-control number" name="truck_charge" id="truck_charge" value="<?php echo $truck_charge;?>" />
                                                         </div>
                                                         <?php echo Form::displayError('truck_charge');?>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col">&nbsp;</label>
+                                                    <div class="col">
+                                                        <button class="btn-outline-fsg btn" id="delivery_docket" data-orderid="<?php echo $order_id;?>" data-courierid="<?php echo $order['courier_id'];?>">Print Delivery Docket</button>
                                                     </div>
                                                 </div>
                                             </form>
