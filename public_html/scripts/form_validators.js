@@ -180,7 +180,7 @@ $(document).ready(function() {
             pallet_count:{
                 require_from_group: [1, ".count"]
             },
-            carton_count:{
+            box_count:{
                 require_from_group: [1, ".count"]
             }
         }
