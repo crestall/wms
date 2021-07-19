@@ -14,6 +14,11 @@ if($sender_details['send_job_no'] != 1)
     $job_number = $dl_details['po_number'];
     $job_number_label = "Order Number:";
 }
+elseif(isset($dl_details['order_number']))
+{
+    $job_number = $dl_details['Order Number'];
+    $job_number_label = "WMS Order Number:";
+}
 elseif(!empty($dl_details['po_number']))
 {
     $po_string = "
@@ -28,6 +33,11 @@ $lb = 0;
 if(!empty($dl_details['per_box']))
 {
     $lb = $dl_details['quantity'] - ( ($bc - 1) * $dl_details['per_box'] );
+}
+else
+{
+    $lb += $dl_details['box_count'];
+    $lb += $dl_details['pallet_count']; 
 }
 $tb = 1;
 ?>

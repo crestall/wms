@@ -613,7 +613,7 @@
                 },
                 'create-delivery-docket':{
                     init: function(){
-                        
+
                     }
                 },
                 'item-searcher':{
