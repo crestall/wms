@@ -1,5 +1,5 @@
 <?php
-//echo "<pre>",print_r($dd_details),"</pre>";
+echo "<pre>",print_r($dd_details),"</pre>";
 
 //The setup
 
