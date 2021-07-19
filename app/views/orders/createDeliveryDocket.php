@@ -16,14 +16,14 @@ $state      = empty(Form::value('state'))?      $order['state']        : Form::v
 $postcode   = empty(Form::value('postcode'))?   $order['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $order['country']      : Form::value('country');
 $delivery_instructions = empty(Form::value('delivery_instructions'))? $order['instructions'] : Form::value('delivery_instructions');
-$job_number = empty(Form::value('job_number'))? $order['order_number'] : Form::value('job_number');
+$job_number = Form::value('job_number');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //echo "<pre>",print_r($order),"</pre>";?>
-        <form id="create_warehouse_delivery_docket" target="_blank" method="post">
+        <form id="create_warehouse_delivery_docket" method="post">
             <input type="hidden" name="sender_id" id="sender_id" value="1">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
@@ -52,9 +52,10 @@ $job_number = empty(Form::value('job_number'))? $order['order_number'] : Form::v
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3">Quantity</label>
+                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control number" name="quantity" id="quantity" value="<?php echo Form::value('quantity');?>" />
+                    <input type="text" class="form-control required number" name="quantity" id="quantity" value="<?php echo Form::value('quantity');?>" />
+                    <?php echo Form::displayError('quantity');?>
                 </div>
             </div>
             <div class="form-group row">
