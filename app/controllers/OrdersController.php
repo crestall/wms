@@ -22,6 +22,30 @@ class OrdersController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function createDeliveryDocket()
+    {
+        if(!isset($this->request->params['args']['order']))
+        {
+            //no job id to update
+            return (new ErrorsController())->error(400)->send();
+        }
+        $order_id = $this->request->params['args']['order'];
+        $order = $this->order->getOrderDetail($job_id);
+        if(empty($order))
+        {
+            //no job data found
+            return (new ErrorsController())->error(404)->send();
+        }
+        //render the page
+        Config::setJsConfig('curPage', "create-delivery-docket");
+        Config::set('curPage', "create-delivery-docket");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/createDeliveryDocket.php', [
+            'page_title'    => "Create Delivery Docket For Order: ".$order['order_number'],
+            'pht'           => ": Create Delivery Docket",
+            'order'           => $order
+        ]);
+    }
+
     public function viewBackorders()
     {
         $client_name = "All Clients";
