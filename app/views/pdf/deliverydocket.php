@@ -25,11 +25,16 @@ $inst = ((!empty($dd_details['delivery_instructions'])))?
     "";
 
 //The Job Number
-$job_no =
+$job_no = (isset($dd_details['order_number']))?
     "<tr>
         <td>Job No.</td>
         <td style='width:5mm'></td>
         <td>{$dd_details['job_number']}</td>
+    </tr>":
+    "<tr>
+        <td>WMS Order No.</td>
+        <td style='width:5mm'></td>
+        <td>{$dd_details['order_number']}</td>
     </tr>";
 
 //The Purchase Order Number
