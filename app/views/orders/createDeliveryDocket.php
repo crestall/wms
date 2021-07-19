@@ -23,7 +23,7 @@ $job_number = empty(Form::value('job_number'))? $order['job_number'] : Form::val
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //echo "<pre>",print_r($order),"</pre>";?>
-        <form id="create_delivery_docket" target="_blank" method="post">
+        <form id="create_warehouse_delivery_docket" target="_blank" method="post">
             <input type="hidden" name="sender_id" id="sender_id" value="1">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
@@ -58,13 +58,13 @@ $job_number = empty(Form::value('job_number'))? $order['job_number'] : Form::val
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3">Quantity Per Box</label>
+                <label class="col-md-3">Box Count</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control number" name="per_box" id="per_box" value="<?php echo Form::value('per_box');?>" />
+                    <input type="text" class="form-control number" readonly name="box_count" id="box_count" value="<?php echo Form::value('box_count');?>" />
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3">Box Count</label>
+                <label class="col-md-3">Pallet Count</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control number" readonly name="box_count" id="box_count" value="<?php echo Form::value('box_count');?>" />
                 </div>
