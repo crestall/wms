@@ -1,5 +1,6 @@
 <?php
-echo "<pre>",print_r($dl_details),"</pre>";
+echo "dl_details<pre>",print_r($dl_details),"</pre>";
+echo "sender_details<pre>",print_r($sender_details),"</pre>"; 
 $address_string = $dl_details['ship_to'];
 if(!empty($dl_details['attention'])) $address_string .= "<br>".$dl_details['attention'];
 $address_string .= "<br>".$dl_details['address'];
@@ -16,7 +17,7 @@ if($sender_details['send_job_no'] != 1)
 }
 elseif(isset($dl_details['order_number']))
 {
-    $job_number = $dl_details['Order Number'];
+    $job_number = $dl_details['order_number'];
     $job_number_label = "WMS Order Number:";
 }
 elseif(!empty($dl_details['po_number']))
@@ -37,7 +38,7 @@ if(!empty($dl_details['per_box']))
 else
 {
     $lb += $dl_details['box_count'];
-    $lb += $dl_details['pallet_count']; 
+    $lb += $dl_details['pallet_count'];
 }
 $tb = 1;
 ?>
