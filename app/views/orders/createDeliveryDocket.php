@@ -16,7 +16,7 @@ $state      = empty(Form::value('state'))?      $order['state']        : Form::v
 $postcode   = empty(Form::value('postcode'))?   $order['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $order['country']      : Form::value('country');
 $delivery_instructions = empty(Form::value('delivery_instructions'))? $order['instructions'] : Form::value('delivery_instructions');
-$job_number = empty(Form::value('job_number'))? $order['job_number'] : Form::value('job_number');
+$job_number = empty(Form::value('job_number'))? $order['order_number'] : Form::value('job_number');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
