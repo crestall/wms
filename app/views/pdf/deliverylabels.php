@@ -33,7 +33,7 @@ elseif(!empty($dl_details['po_number']))
 {
     $po_string = "
             <tr>
-                <td class='w30'>&nbsp;</td>
+                <td class='w50'>&nbsp;</td>
                 <td class='spacer'>&nbsp;</td>
                 <td class='po_number'>PO: {$dl_details['po_number']}</td>
             </tr>
@@ -78,18 +78,18 @@ $tb = 1;
             </table>
             <table class="label_details">
                 <tr>
-                    <td class="w30">Reference:</td>
+                    <td class="w50">Reference:</td>
                     <td class="spacer">&nbsp;</td>
                     <td><?php echo $dl_details['job_title'];?></td>
                 </tr>
                 <tr>
-                    <td class="w30"><?php echo $job_number_label;?></td>
+                    <td class="w50"><?php echo $job_number_label;?></td>
                     <td class="spacer">&nbsp;</td>
                     <td><?php echo $job_number;?></td>
                 </tr>
                 <?php echo $po_string;?>
                 <tr>
-                    <td class="w30"></td>
+                    <td class="w50"></td>
                     <td class="spacer">&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
