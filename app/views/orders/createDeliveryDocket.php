@@ -78,7 +78,7 @@ $job_number = empty(Form::value('job_number'))? $order['order_number'] : Form::v
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="order_id" id="order_id" value="<?php echo $order['id'];?>" >
-                <input type="hidden" name="order_number" id="order_number" value="<?php echo $order['order_id'];?>" >
+                <input type="hidden" name="order_number" id="order_number" value="<?php echo $order['order_number'];?>" >
             <div class="form-group row">
                 <div class="col-md-4 offset-md-3">
                     <button type="submit" class="btn btn-outline-fsg" id="docket_submitter" formaction="/pdf/createDeliveryDocket">Create Delivery Docket</button>
