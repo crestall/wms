@@ -175,6 +175,17 @@ $(document).ready(function() {
 
 	});
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#create_warehouse_delivery_docket").validate({
+        rules:{
+            pallet_count:{
+                require_from_group: [1, ".count"]
+            },
+            carton_count:{
+                require_from_group: [1, ".count"]
+            }
+        }
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("form#add_misc_task_to_runsheet").validate({
 
 	});
