@@ -167,12 +167,19 @@ $delivery_details_upper .= "
 //Drivers Delivery Details
 $delivery_details_lower = "
         <table class='".$delivery_table_class."'>
-                <tr>
-                    <td class='job_no'>
+                <tr>";
+                if(isset($dd_details['order_number'])):
+                    $delivery_details_lower .= "<td class='job_no'>
+                        WMS Order Number:<br>
+                        ".$dd_details['order_number']."
+                    </td>";
+                else:
+                    $delivery_details_lower .= "<td class='job_no'>
                         Job Number:<br>
                         ".$dd_details['job_number']."
-                    </td>
-                    <td class='quantity'>
+                    </td>";
+                endif;
+                    $delivery_details_lower .= "<td class='quantity'>
                         Quantity:<br>
                         <strong>".$dd_details['quantity']."</strong>
 ";
