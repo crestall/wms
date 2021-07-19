@@ -384,7 +384,7 @@ if(!$error)
                                                 <div class="form-group row">
                                                     <label class="col">&nbsp;</label>
                                                     <div class="col">
-                                                        <a href="/orders/create-delivery-docket/order=<?php echo $order_id;?>" class="btn-outline-fsg btn" id="delivery_docket" data-orderid="<?php echo $order_id;?>" data-courierid="<?php echo $order['courier_id'];?>">Print Delivery Docket</button>
+                                                        <a href="/orders/create-delivery-docket/order=<?php echo $order_id;?>" class="btn-outline-fsg btn" id="delivery_docket" data-orderid="<?php echo $order_id;?>" data-courierid="<?php echo $order['courier_id'];?>">Print Delivery Docket</a>
                                                     </div>
                                                 </div>
                                             </form>
