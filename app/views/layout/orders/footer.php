@@ -448,9 +448,6 @@
                             document.body.appendChild(form);
                             form.submit();
                         });
-                        $('button#delivery_docket').click(function(ev){
-                            ev.preventDefault();
-                        })
 
 
                         $('button#order_fulfill').click(function(e){
