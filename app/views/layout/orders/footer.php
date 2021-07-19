@@ -611,6 +611,16 @@
                         });
                     }
                 },
+                'create-delivery-docket':{
+                    init: function(){
+                        $("form#create_warehouse_delivery_docket").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Creating Docket...</h2></div>' });
+                            }
+                        });
+                    }
+                },
                 'item-searcher':{
                     init: function(){
                         $("input.item-searcher").each(function(i,e){
