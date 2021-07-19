@@ -139,22 +139,14 @@
     {
        //echo "ARGS<pre>",print_r($args),"</pre>";
         extract($args);
+
+        //ebay are a PACK!!!!!!!!!
+        $scope = urlencode($scope);
+
+
         $link = $this->serverUrl."/identity/v1/oauth2/token";
         //echo "<p>Link: $link</p>"; //die();
         $codeAuth = base64_encode($clientID.':'.$certID);
-        /*
-        $ch = curl_init($link);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/x-www-form-urlencoded',
-            'Authorization: Basic '.$codeAuth
-        ));
-        //echo $this->refreshToken;
-        //curl_setopt($ch, CURLHEADER_SEPARATE, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=refresh_token&refresh_token=".$refreshToken."&scope=".$scope);
-        */
         $ch = curl_init();
         curl_setopt_array($ch, array(
             CURLOPT_URL => $link,
@@ -182,7 +174,6 @@
             die();
         }
 
-
         //echo "response<pre>",print_r($response),"</pre>"; die();
         $json = json_decode($response, true);
         $info = curl_getinfo($ch);
@@ -196,7 +187,6 @@
             }
             else
             {
-                //$this->authToken = $json["access_token"];
                 $db = Database::openConnection();
                 $db->updateDatabaseFields($this->table, array(
                     'access_token'      => $json['access_token'],

@@ -25,11 +25,16 @@ $inst = ((!empty($dd_details['delivery_instructions'])))?
     "";
 
 //The Job Number
-$job_no =
+$job_no = (!isset($dd_details['order_number']))?
     "<tr>
         <td>Job No.</td>
         <td style='width:5mm'></td>
         <td>{$dd_details['job_number']}</td>
+    </tr>":
+    "<tr>
+        <td>WMS Order No.</td>
+        <td style='width:5mm'></td>
+        <td>{$dd_details['order_number']}</td>
     </tr>";
 
 //The Purchase Order Number
@@ -118,11 +123,22 @@ $delivery_details_upper = "
         <tr>";
 if($sender_details['send_job_no'] == 1)
 {
-    $delivery_details_upper .= "
-      <td class='job_no'>
-        Job Number:<br>
-        ".$dd_details['job_number']."</td>"
-    ;
+    if(isset($dd_details['order_number']))
+    {
+        $delivery_details_upper .= "
+            <td class='job_no'>
+                WMS Order Number:<br>
+                ".$dd_details['order_number']."</td>"
+        ;
+    }
+    else
+    {
+        $delivery_details_upper .= "
+          <td class='job_no'>
+            Job Number:<br>
+            ".$dd_details['job_number']."</td>"
+        ;
+    }
 }
 else
 {
@@ -136,10 +152,14 @@ else
 $delivery_details_upper .= "
     <td class='quantity'>
         Quantity:<br>
-        <strong>".$dd_details['quantity']."</strong>
+        <strong>".$dd_details['quantity']."</strong><br>
 ";
 if(!empty($dd_details['box_count']))
-    $delivery_details_upper .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
+    $delivery_details_upper .= " In <strong>".$dd_details['box_count']."</strong> boxes ";
+if(!empty($dd_details['box_count']) && !empty($dd_details['pallet_count']))
+    $delivery_details_upper .= "and";
+if(!empty($dd_details['pallet_count']))
+    $delivery_details_upper .= " In <strong>".$dd_details['pallet_count']."</strong> pallets ";
 if(!empty($dd_details['packed_as']))
     $delivery_details_upper .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
 $delivery_details_upper .= "
@@ -156,17 +176,28 @@ $delivery_details_upper .= "
 //Drivers Delivery Details
 $delivery_details_lower = "
         <table class='".$delivery_table_class."'>
-                <tr>
-                    <td class='job_no'>
+                <tr>";
+                if(isset($dd_details['order_number'])):
+                    $delivery_details_lower .= "<td class='job_no'>
+                        WMS Order Number:<br>
+                        ".$dd_details['order_number']."
+                    </td>";
+                else:
+                    $delivery_details_lower .= "<td class='job_no'>
                         Job Number:<br>
                         ".$dd_details['job_number']."
-                    </td>
-                    <td class='quantity'>
+                    </td>";
+                endif;
+                    $delivery_details_lower .= "<td class='quantity'>
                         Quantity:<br>
-                        <strong>".$dd_details['quantity']."</strong>
+                        <strong>".$dd_details['quantity']."</strong><br>In
 ";
 if(!empty($dd_details['box_count']))
-        $delivery_details_lower .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
+    $delivery_details_lower .= " In <strong>".$dd_details['box_count']."</strong> boxes ";
+if(!empty($dd_details['box_count']) && !empty($dd_details['pallet_count']))
+    $delivery_details_lower .= "and";
+if(!empty($dd_details['pallet_count']))
+    $delivery_details_lower .= " In <strong>".$dd_details['pallet_count']."</strong> pallets ";
 if(!empty($dd_details['packed_as']))
         $delivery_details_lower .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
 $delivery_details_lower .= "

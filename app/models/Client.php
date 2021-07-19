@@ -47,7 +47,7 @@ class Client extends Model{
     public function canAdjustAllocations($client_id = 0)
     {
         if($client_id == 0)
-            return dalse;
+            return false;
         $db = Database::openConnection();
         return ( $db->queryValue($this->table, array('id' => $client_id), 'can_adjust') > 0 );
     }
@@ -219,6 +219,14 @@ class Client extends Model{
             $ret_string .= "<option $check value='$value'>$label</option>";
         }
         return $ret_string;
+    }
+
+    public function isProductionClient($client_id = 0)
+    {
+        if($client_id == 0)
+            return false;
+        $db = Database::openConnection();
+        return ( $db->queryValue($this->table, array('id' => $client_id), 'production_client') > 0 );
     }
 }
 ?>
