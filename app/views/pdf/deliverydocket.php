@@ -118,11 +118,22 @@ $delivery_details_upper = "
         <tr>";
 if($sender_details['send_job_no'] == 1)
 {
-    $delivery_details_upper .= "
-      <td class='job_no'>
-        Job Number:<br>
-        ".$dd_details['job_number']."</td>"
-    ;
+    if(isset($dd_details['order_number']))
+    {
+        $delivery_details_upper .= "
+            <td class='job_no'>
+                WMS Order Number:<br>
+                ".$dd_details['order_number']."</td>"
+        ;
+    }
+    else
+    {
+        $delivery_details_upper .= "
+          <td class='job_no'>
+            Job Number:<br>
+            ".$dd_details['job_number']."</td>"
+        ;
+    }
 }
 else
 {
