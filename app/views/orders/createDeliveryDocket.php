@@ -16,7 +16,7 @@ $state      = empty(Form::value('state'))?      $order['state']        : Form::v
 $postcode   = empty(Form::value('postcode'))?   $order['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $order['country']      : Form::value('country');
 $delivery_instructions = empty(Form::value('delivery_instructions'))? $order['instructions'] : Form::value('delivery_instructions');
-$job_number = Form::value('job_number');
+$job_title = Form::value('job_title');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -48,7 +48,7 @@ $job_number = Form::value('job_number');
             <div class="form-group row">
                 <label class="col-md-3">Job Title</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="job_number" id="job_number" value="<?php echo $job_number;?>" />
+                    <input type="text" class="form-control" name="job_title" id="job_title" value="<?php echo $job_title;?>" />
                 </div>
             </div>
             <div class="form-group row">
