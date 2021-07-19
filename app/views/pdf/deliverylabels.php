@@ -1,12 +1,21 @@
 <?php
 echo "dl_details<pre>",print_r($dl_details),"</pre>";
-echo "sender_details<pre>",print_r($sender_details),"</pre>"; 
+echo "sender_details<pre>",print_r($sender_details),"</pre>";
 $address_string = $dl_details['ship_to'];
 if(!empty($dl_details['attention'])) $address_string .= "<br>".$dl_details['attention'];
 $address_string .= "<br>".$dl_details['address'];
 if(!empty($dl_details['address2'])) $address_string .= "<br>".$dl_details['address2'];
 $address_string .= "<br>".$dl_details['suburb']." ".$dl_details['state']." ".$dl_details['postcode'];
 $bc = (!empty($dl_details['box_count']))? $dl_details['box_count'] : 1;
+$pc = (!empty($dl_details['pallet_count']))? $dl_details['pallet_count'] : 0;
+$box_label = "Box";
+if(isset($dl_details['order_number']))
+{
+    $bc = (!empty($dl_details['box_count']))? $dl_details['box_count'] : 0;
+    $pc = (!empty($dl_details['pallet_count']))? $dl_details['pallet_count'] : 0;
+    $box_label = "Box/Pallet";
+}
+$bc += $pc;
 $job_number = $dl_details['job_number'];
 $job_number_label = "Job Number:";
 $po_string = "";
@@ -34,11 +43,6 @@ $lb = 0;
 if(!empty($dl_details['per_box']))
 {
     $lb = $dl_details['quantity'] - ( ($bc - 1) * $dl_details['per_box'] );
-}
-else
-{
-    $lb += $dl_details['box_count'];
-    $lb += $dl_details['pallet_count'];
 }
 $tb = 1;
 ?>
@@ -92,7 +96,7 @@ $tb = 1;
             </table>
             <table class="box_details">
                 <tr>
-                    <td class="right-align">Box <strong><?php echo $tb;?></strong> of <strong><?php echo $bc;?></strong></td>
+                    <td class="right-align"><?php echo $box_label;?> <strong><?php echo $tb;?></strong> of <strong><?php echo $bc;?></strong></td>
                     <?php if(!empty($dl_details['per_box'])):?>
                         <td class="right-align">( <strong><?php if($tb < $bc) echo $dl_details['per_box']; else echo $lb;?></strong> items in box )</td>
                     <?php endif;?>
