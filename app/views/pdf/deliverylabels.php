@@ -1,6 +1,6 @@
 <?php
-echo "dl_details<pre>",print_r($dl_details),"</pre>";
-echo "sender_details<pre>",print_r($sender_details),"</pre>";
+//echo "dl_details<pre>",print_r($dl_details),"</pre>";
+//echo "sender_details<pre>",print_r($sender_details),"</pre>";
 $address_string = $dl_details['ship_to'];
 if(!empty($dl_details['attention'])) $address_string .= "<br>".$dl_details['attention'];
 $address_string .= "<br>".$dl_details['address'];
