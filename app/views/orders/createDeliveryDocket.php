@@ -60,13 +60,13 @@ $job_number = empty(Form::value('job_number'))? $order['job_number'] : Form::val
             <div class="form-group row">
                 <label class="col-md-3">Box Count</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control number" name="box_count" id="box_count" value="<?php echo Form::value('box_count');?>" />
+                    <input type="text" class="form-control number count" name="box_count" id="box_count" value="<?php echo Form::value('box_count');?>" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3">Pallet Count</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control number" name="box_count" id="box_count" value="<?php echo Form::value('box_count');?>" />
+                    <input type="text" class="form-control number count" name="pallet_count" id="pallet_count" value="<?php echo Form::value('pallet_count');?>" />
                 </div>
             </div>
             <div class="form-group row">
