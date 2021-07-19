@@ -193,7 +193,7 @@ $delivery_details_lower = "
 if(!empty($dd_details['box_count']))
         $delivery_details_lower .= "In <strong>".$dd_details['box_count']."</strong> boxes";
 if(!empty($dd_details['pallet_count']))
-    $delivery_details_upper .= " In <strong>".$dd_details['pallet_count']."</strong> pallets";
+    $delivery_details_lower .= " In <strong>".$dd_details['pallet_count']."</strong> pallets";
 if(!empty($dd_details['packed_as']))
         $delivery_details_lower .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
 $delivery_details_lower .= "
