@@ -30,7 +30,7 @@ class OrdersController extends Controller
             return (new ErrorsController())->error(400)->send();
         }
         $order_id = $this->request->params['args']['order'];
-        $order = $this->order->getOrderDetail($job_id);
+        $order = $this->order->getOrderDetail($order_id);
         if(empty($order))
         {
             //no job data found
