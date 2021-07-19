@@ -83,16 +83,28 @@
 
     public function getCurrentOrders()
     {
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "Performance Brands Australia EBAY ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
         $s_action = "sell/fulfillment/v1/order?filter=orderfulfillmentstatus:%7BNOT_STARTED%7CIN_PROGRESS%7D";
+
         $response = $this->sendGetRequest($s_action, $this->authToken);
         $collected_orders = json_decode($response, true);
-        //return json_decode($response, true);
-        $orders = $this->processOrders($collected_orders);
-        return $orders;
-    }
 
-    private function processOrders($collected_orders)
-    {
-        return $collected_orders;
+        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        if($orders = $this->procOrders($collected_orders))
+        {
+            //$this->addPBAOrders($orders);
+        }
+        Logger::logOrderImports('order_imports/pba', $this->output); //die();
+        if ($this->ua != "CRON" )
+        {
+            //return $this->return_array;
+        }
+        else
+        {
+            //Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
+        }
+        echo "<pre>",print_r($this->return_array),"</pre>";
     }
  }
