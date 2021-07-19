@@ -23,7 +23,7 @@ $job_title = Form::value('job_title');
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //echo "<pre>",print_r($order),"</pre>";?>
-        <form id="create_warehouse_delivery_docket" method="post">
+        <form id="create_warehouse_delivery_docket" target="_blank" method="post">
             <input type="hidden" name="sender_id" id="sender_id" value="1">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
@@ -81,9 +81,18 @@ $job_title = Form::value('job_title');
             <input type="hidden" name="order_id" id="order_id" value="<?php echo $order['id'];?>" >
                 <input type="hidden" name="order_number" id="order_number" value="<?php echo $order['order_number'];?>" >
             <div class="form-group row">
-                <div class="col-md-4 offset-md-3">
+
+
+
+                <div class="col-md-4 offset-md-2">
+                    <button type="submit" class="btn btn-outline-info" id="label_submitter" formaction="/pdf/createDeliveryLabels">Create Labels</button>
+                </div>
+                <div class="col-md-4">
                     <button type="submit" class="btn btn-outline-fsg" id="docket_submitter" formaction="/pdf/createDeliveryDocket">Create Delivery Docket</button>
                 </div>
+
+
+
             </div>
         </form>
     </div>

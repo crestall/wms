@@ -1,11 +1,21 @@
 <?php
-//echo "<pre>",print_r($dl_details),"</pre>";
+//echo "dl_details<pre>",print_r($dl_details),"</pre>";
+//echo "sender_details<pre>",print_r($sender_details),"</pre>";
 $address_string = $dl_details['ship_to'];
 if(!empty($dl_details['attention'])) $address_string .= "<br>".$dl_details['attention'];
 $address_string .= "<br>".$dl_details['address'];
 if(!empty($dl_details['address2'])) $address_string .= "<br>".$dl_details['address2'];
 $address_string .= "<br>".$dl_details['suburb']." ".$dl_details['state']." ".$dl_details['postcode'];
 $bc = (!empty($dl_details['box_count']))? $dl_details['box_count'] : 1;
+$pc = (!empty($dl_details['pallet_count']))? $dl_details['pallet_count'] : 0;
+$box_label = "Box";
+if(isset($dl_details['order_number']))
+{
+    $bc = (!empty($dl_details['box_count']))? $dl_details['box_count'] : 0;
+    $pc = (!empty($dl_details['pallet_count']))? $dl_details['pallet_count'] : 0;
+    $box_label = "Box/Pallet";
+}
+$bc += $pc;
 $job_number = $dl_details['job_number'];
 $job_number_label = "Job Number:";
 $po_string = "";
@@ -14,11 +24,16 @@ if($sender_details['send_job_no'] != 1)
     $job_number = $dl_details['po_number'];
     $job_number_label = "Order Number:";
 }
+elseif(isset($dl_details['order_number']))
+{
+    $job_number = $dl_details['order_number'];
+    $job_number_label = "WMS Order Number:";
+}
 elseif(!empty($dl_details['po_number']))
 {
     $po_string = "
             <tr>
-                <td class='w30'>&nbsp;</td>
+                <td class='w50'>&nbsp;</td>
                 <td class='spacer'>&nbsp;</td>
                 <td class='po_number'>PO: {$dl_details['po_number']}</td>
             </tr>
@@ -63,25 +78,25 @@ $tb = 1;
             </table>
             <table class="label_details">
                 <tr>
-                    <td class="w30">Reference:</td>
+                    <td class="w50">Reference:</td>
                     <td class="spacer">&nbsp;</td>
                     <td><?php echo $dl_details['job_title'];?></td>
                 </tr>
                 <tr>
-                    <td class="w30"><?php echo $job_number_label;?></td>
+                    <td class="w50"><?php echo $job_number_label;?></td>
                     <td class="spacer">&nbsp;</td>
                     <td><?php echo $job_number;?></td>
                 </tr>
                 <?php echo $po_string;?>
                 <tr>
-                    <td class="w30"></td>
+                    <td class="w50"></td>
                     <td class="spacer">&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
             </table>
             <table class="box_details">
                 <tr>
-                    <td class="right-align">Box <strong><?php echo $tb;?></strong> of <strong><?php echo $bc;?></strong></td>
+                    <td class="right-align"><?php echo $box_label;?> <strong><?php echo $tb;?></strong> of <strong><?php echo $bc;?></strong></td>
                     <?php if(!empty($dl_details['per_box'])):?>
                         <td class="right-align">( <strong><?php if($tb < $bc) echo $dl_details['per_box']; else echo $lb;?></strong> items in box )</td>
                     <?php endif;?>

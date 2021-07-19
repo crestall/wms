@@ -20,6 +20,10 @@ td.w30{
     width:30mm;
 }
 
+td.w50{
+    width:50mm;
+}
+
 td.right-align{
     text-align:right;
 }
