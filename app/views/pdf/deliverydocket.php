@@ -152,10 +152,12 @@ else
 $delivery_details_upper .= "
     <td class='quantity'>
         Quantity:<br>
-        <strong>".$dd_details['quantity']."</strong>
+        <strong>".$dd_details['quantity']."</strong><br>
 ";
 if(!empty($dd_details['box_count']))
-    $delivery_details_upper .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
+    $delivery_details_upper .= " In <strong>".$dd_details['box_count']."</strong> boxes";
+if(!empty($dd_details['pallet_count']))
+    $delivery_details_upper .= " In <strong>".$dd_details['pallet_count']."</strong> pallets";
 if(!empty($dd_details['packed_as']))
     $delivery_details_upper .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
 $delivery_details_upper .= "
@@ -186,10 +188,12 @@ $delivery_details_lower = "
                 endif;
                     $delivery_details_lower .= "<td class='quantity'>
                         Quantity:<br>
-                        <strong>".$dd_details['quantity']."</strong>
+                        <strong>".$dd_details['quantity']."</strong><br>
 ";
 if(!empty($dd_details['box_count']))
-        $delivery_details_lower .= "<br>In <strong>".$dd_details['box_count']."</strong> boxes";
+        $delivery_details_lower .= "In <strong>".$dd_details['box_count']."</strong> boxes";
+if(!empty($dd_details['pallet_count']))
+    $delivery_details_upper .= " In <strong>".$dd_details['pallet_count']."</strong> pallets";
 if(!empty($dd_details['packed_as']))
         $delivery_details_lower .= "<br>Packed As <strong>".$dd_details['packed_as']."</strong>";
 $delivery_details_lower .= "
