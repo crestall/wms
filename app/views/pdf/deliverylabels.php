@@ -1,5 +1,5 @@
 <?php
-//echo "<pre>",print_r($dl_details),"</pre>";
+echo "<pre>",print_r($dl_details),"</pre>";
 $address_string = $dl_details['ship_to'];
 if(!empty($dl_details['attention'])) $address_string .= "<br>".$dl_details['attention'];
 $address_string .= "<br>".$dl_details['address'];
