@@ -119,7 +119,7 @@
                 );
                 if( isset($o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine2']) )
                     $ad['address_2'] = $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine2'];
-                echo "The address array<pre>",print_r($ad),"</pre>";
+                //echo "The address array<pre>",print_r($ad),"</pre>";
                 if($ad['country'] == "AU")
                 {
                     if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40)
@@ -127,7 +127,7 @@
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
                     }
-                    echo "<p>------------------------------------------------</p>";continue;
+                    //echo "<p>------------------------------------------------</p>";continue;
                     $aResponse = $this->controller->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
 
                     if(isset($aResponse['errors']))
@@ -226,7 +226,7 @@
                     $orders[] = $order;
                 }
             }//endforeach order
-            die("Endforeach");
+            //die("Endforeach");
             $orders['orders_items'] = $orders_items;
             $this->output .= "===========================   Gonna send em back  =========================".PHP_EOL;
             return $orders;
