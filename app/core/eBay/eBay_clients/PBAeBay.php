@@ -112,6 +112,7 @@
 
     private function addPBAOrders($orders)
     {
+        echo "addPBAOrders<pre>",print_r($orders),"</pre>";return;
         $pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
         unset($orders['orders_items']);
 
