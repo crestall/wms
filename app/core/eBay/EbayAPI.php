@@ -103,7 +103,7 @@
                     'is_ebay'               => 1,
                     'ebay_id'               => $o['orderId']
                 );
-                if( !filter_var($o['email'], FILTER_VALIDATE_EMAIL) )
+                if( !filter_var($email, FILTER_VALIDATE_EMAIL) )
                 {
                     $order['errors'] = 1;
                     $order['error_string'] = "<p>The customer email is not valid</p>";
