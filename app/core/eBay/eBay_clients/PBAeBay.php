@@ -27,8 +27,9 @@
     protected $table;
     protected $line_id;
 
-    public function __construct()
+    public function __construct($controller)
     {
+        parent::__construct($controller);
         $this->table    = "ebay_access_tokens";
         $this->devID    = 'beaed030-6fea-4467-aafb-2b415518d84c';
         $this->appID    = 'MarkSoll-PBAFSG-PRD-5418204ca-f642538e';
