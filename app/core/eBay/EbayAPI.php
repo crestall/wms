@@ -70,41 +70,38 @@
     {
         $orders = array();
         $the_orders = $collected_orders['orders'];
-        echo "<pre>",print_r($the_orders),"</pre>"; die();
-        if(count($collected_orders))
+        //echo "<pre>",print_r($the_orders),"</pre>"; die();
+        if(count($the_orders))
         {
             $allocations = array();
             $orders_items = array();
-            foreach($collected_orders as $i => $o)
+            foreach($the_orders as $i => $o)
             {
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
                 $items = array();
                 //$o = trimArray($o);
+                $email = ( isset($o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['email']) )? $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['email'] : NULL;
+                $phone = ( isset($o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['primaryPhone']['phoneNumber']) )? $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['primaryPhone']['phoneNumber'] : NULL;
                 $order = array(
                     'error_string'          => '',
                     'items'                 => array(),
                     'ref2'                  => '',
-                    'client_order_id'       => $o['order_number'],
+                    'client_order_id'       => $o['salesRecordReference'],
                     'errors'                => 0,
-                    'tracking_email'        => $o['email'],
-                    'ship_to'               => $o['shipping_address']['first_name']." ".$o['shipping_address']['last_name'],
-                    'company_name'          => $o['shipping_address']['company'],
-                    'date_ordered'          => strtotime( $o['created_at'] ),
+                    'tracking_email'        => $email,
+                    'ship_to'               => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['fullName'],
+                    'date_ordered'          => strtotime( $o['creationDate'] ),
                     'status_id'             => $this->controller->order->ordered_id,
                     'eparcel_express'       => 0,
                     'signature_req'         => 0,
-                    'contact_phone'         => $o['shipping_address']['phone'],
+                    'contact_phone'         => $phone,
                     'items_errors'          => false,
                     'items_errors_string'   => '<ul>',
-                    'is_shopify'            => 1,
-                    'shopify_id'            => $o['id']
+                    'is_ebay'               => 1,
+                    'ebay_id'               => $o['orderId']
                 );
-                //if(strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
-                if(isset($o['shipping_lines'][0]) && strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
-                if( isset($o['pickup']) )
-                    $order['pickup'] = 1;
                 if( !filter_var($o['email'], FILTER_VALIDATE_EMAIL) )
                 {
                     $order['errors'] = 1;
@@ -112,13 +109,15 @@
                 }
                 //validate address
                 $ad = array(
-                    'address'   => $o['shipping_address']['address1'],
-                    'address_2' => $o['shipping_address']['address2'],
-                    'suburb'    => $o['shipping_address']['city'],
-                    'state'     => $o['shipping_address']['province_code'],
-                    'postcode'  => $o['shipping_address']['zip'],
-                    'country'   => $o['shipping_address']['country_code']
+                    'address'   => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine1'],
+                    'address_2' => NULL,
+                    'suburb'    => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['city'],
+                    'state'     => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['stateOrProvince'],
+                    'postcode'  => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['postalCode'],
+                    'country'   => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['countryCode']
                 );
+                if( isset($o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine2']) )
+                    $ad['address_2'] = $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine2'];
                 if($ad['country'] == "AU")
                 {
                     if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40 || strlen($order['company_name'])  > 40)
@@ -164,11 +163,12 @@
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {
-                    $product = $this->controller->item->getItemBySku($item['sku']);
+                    $sku = ( isset($item['sku']) )? $item['sku'] : NULL;
+                    $product = $this->controller->item->getItemBySku($sku);
                     if(!$product)
                     {
                         $order['items_errors'] = true;
-                        $order['items_errors_string'] .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        $order['items_errors_string'] .= "<li>Could not find {$item['title']} in WMS based on {$sku}</li>";
                     }
                     else
                     {
@@ -184,19 +184,7 @@
                     }
 
                 }
-                if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
-                if(empty($o['note']))
-                {
-                    if( $qty > 1 || !empty($o['shipping_address']['company']) )
-                        $delivery_instructions =  "";
-                    else
-                        $delivery_instructions =  "Please leave in a safe place out of the weather";
-                }
-                else
-                {
-                    $delivery_instructions = $o['note'];
-                }
-                $order['instructions'] = $delivery_instructions;
+                $order['instructions'] = "Please leave in a safe place out of the weather";
                 $order['items_errors_string'] .= "</ul>";
                 if($items_errors)
                 {
@@ -229,9 +217,8 @@
                 {
                     $order['quantity'] = $qty;
                     $order['weight'] = $o['total_weight'];
-                    //if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;
-                    $order['items'][$o['order_number']] = $items;
-                    $orders_items[$o['order_number']] = $items;
+                    $order['items'][$o['salesRecordReference']] = $items;
+                    $orders_items[$o['salesRecordReference']] = $items;
                     $order = array_merge($order, $ad);
                     $orders[] = $order;
                 }
