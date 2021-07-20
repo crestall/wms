@@ -97,6 +97,7 @@
         if($orders = $this->procOrders($collected_orders))
         {
             $this->addPBAOrders($orders);
+            die('added orders');
         }
         Logger::logOrderImports('order_imports/pbaebay', $this->output); //die();
         if ($this->ua != "CRON" )
