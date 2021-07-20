@@ -108,12 +108,12 @@
         {
             //Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
         }
-        echo "<pre>",print_r($this->return_array),"</pre>";
+        echo "<pre>",print_r($this->return_array),"</pre>"; die();
     }
 
     private function addPBAOrders($orders)
     {
-        echo "addPBAOrders<pre>",print_r($orders),"</pre>";return;
+        //echo "addPBAOrders<pre>",print_r($orders),"</pre>";return;
         $pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
         unset($orders['orders_items']);
 

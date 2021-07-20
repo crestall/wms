@@ -4844,6 +4844,7 @@ class FormController extends Controller {
         $post_data['width'] = 0;
         $post_data['depth'] = 0;
         $post_data['height'] = 0;
+        $post_data['boxed_item'] = 0;
         $post_data['low_stock_warning'] = null;
         $post_data['trigger_point'] = 0;
         $product_id = $this->item->addItem($post_data);
