@@ -171,7 +171,10 @@
                     if(!$product)
                     {
                         $order['items_errors'] = true;
-                        $order['items_errors_string'] .= "<li>Could not find {$item['title']} in WMS based on {$sku}</li>";
+                        $items_errors = true;
+                        $is = (empty($item['sku']))? "NO SKU SENT" : $item['sku'];
+                        $mm .= "<li>Could not find {$item['name']} in WMS based on $is</li>";
+                        $order['items_errors_string'] .= "<li>Could not find {$item['title']} in WMS based on {$is}</li>";
                     }
                     else
                     {
