@@ -70,13 +70,14 @@
     {
         $orders = array();
         $the_orders = $collected_orders['orders'];
-        echo "<pre>",print_r($the_orders),"</pre>"; die();
+        //echo "<pre>",print_r($the_orders),"</pre>"; //die();
         if(count($the_orders))
         {
             $allocations = array();
             $orders_items = array();
             foreach($the_orders as $i => $o)
             {
+                echo "Order with index $i<pre>",print_r($the_orders),"</pre>";
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
@@ -118,6 +119,7 @@
                 );
                 if( isset($o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine2']) )
                     $ad['address_2'] = $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine2'];
+                echo "The address array<pre>",print_r($ad),"</pre>";continue;
                 if($ad['country'] == "AU")
                 {
                     if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40 || strlen($order['company_name'])  > 40)
@@ -223,6 +225,7 @@
                     $orders[] = $order;
                 }
             }//endforeach order
+            die("Endforeach");
             $orders['orders_items'] = $orders_items;
             $this->output .= "===========================   Gonna send em back  =========================".PHP_EOL;
             return $orders;
