@@ -69,7 +69,8 @@
     protected function procOrders($collected_orders)
     {
         $orders = array();
-        echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        $the_orders = $collected_orders['orders'];
+        echo "<pre>",print_r($the_orders),"</pre>"; die();
         if(count($collected_orders))
         {
             $allocations = array();
