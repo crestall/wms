@@ -70,7 +70,7 @@
     {
         $orders = array();
         $the_orders = $collected_orders['orders'];
-        //echo "<pre>",print_r($the_orders),"</pre>"; die();
+        echo "<pre>",print_r($the_orders),"</pre>"; die();
         if(count($the_orders))
         {
             $allocations = array();
