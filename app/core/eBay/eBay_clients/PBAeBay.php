@@ -83,6 +83,7 @@
 
     public function getCurrentOrders()
     {
+        $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Performance Brands Australia EBAY ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
@@ -96,7 +97,7 @@
         {
             //$this->addPBAOrders($orders);
         }
-        Logger::logOrderImports('order_imports/pba', $this->output); //die();
+        Logger::logOrderImports('order_imports/pbaebay', $this->output); //die();
         if ($this->ua != "CRON" )
         {
             //return $this->return_array;
