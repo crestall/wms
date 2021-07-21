@@ -164,7 +164,7 @@
                 }
                 //$order['sort_order'] = ($ad['country'] == "AU")? 2:1;
                 $qty = 0;
-                foreach($o['line_items'] as $item)
+                foreach($o['lineItems'] as $item)
                 {
                     $sku = ( isset($item['sku']) )? $item['sku'] : NULL;
                     $product = $this->controller->item->getItemBySku($sku);
