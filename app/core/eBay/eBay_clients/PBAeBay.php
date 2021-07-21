@@ -133,7 +133,7 @@
             }
             foreach($pbaoitems[$o['client_order_id']] as $item)
             {
-                //echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
+                echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
                 if($item['item_error'])
                 {
                     $item_error = true;
