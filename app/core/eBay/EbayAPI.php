@@ -77,7 +77,7 @@
             $orders_items = array();
             foreach($the_orders as $i => $o)
             {
-                //echo "Order with index $i<pre>",print_r($o),"</pre>";
+                echo "Order with index $i<pre>",print_r($o),"</pre>";
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";

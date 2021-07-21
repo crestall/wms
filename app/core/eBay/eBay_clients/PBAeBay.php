@@ -108,7 +108,7 @@
         {
             //Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
         }
-        echo "<pre>",print_r($this->return_array),"</pre>"; die();
+        echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
     }
 
     private function addPBAOrders($orders)
