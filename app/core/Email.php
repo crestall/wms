@@ -690,7 +690,7 @@
             else
             {
                 $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-                $replace = $f->format($count)." orders have been";
+                $replace = ucfirst($f->format($count))." orders have been";
             }
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."bdsfinalisefeedback.html");

@@ -249,7 +249,7 @@ class Controller {
      */
     public function loadEBAYInstances(array $locations)
     {
-        $this->ebayapi =  new EbayAPI($this);;
+        //$this->ebayapi =  new EbayAPI($this);;
         foreach($locations as $location)
         {
             $class = $location . "eBay";

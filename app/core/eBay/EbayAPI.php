@@ -35,8 +35,9 @@
         $this->controller = $controller;
     }
 
-//Background Helper Functions
+    public function getCurrentOrders(){}
 
+//Background Helper Functions
     protected function sendGetRequest($s_action, $authToken)
     {
         $url = $this->serverUrl."/".$s_action;
@@ -65,10 +66,185 @@
         }
     }
 
+    protected function procOrders($collected_orders)
+    {
+        $orders = array();
+        $the_orders = $collected_orders['orders'];
+        //echo "<pre>",print_r($the_orders),"</pre>"; //die();
+        if(count($the_orders))
+        {
+            $allocations = array();
+            $orders_items = array();
+            foreach($the_orders as $i => $o)
+            {
+                echo "Order with index $i<pre>",print_r($o),"</pre>";
+                $items_errors = false;
+                $weight = 0;
+                $mm = "";
+                $items = array();
+                //$o = trimArray($o);
+                $email = ( isset($o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['email']) )? $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['email'] : NULL;
+                $phone = ( isset($o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['primaryPhone']['phoneNumber']) )? $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['primaryPhone']['phoneNumber'] : NULL;
+                $order = array(
+                    'error_string'          => '',
+                    'items'                 => array(),
+                    'ref2'                  => '',
+                    'client_order_id'       => $o['salesRecordReference'],
+                    'errors'                => 0,
+                    'tracking_email'        => $email,
+                    'ship_to'               => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['fullName'],
+                    'date_ordered'          => strtotime( $o['creationDate'] ),
+                    'status_id'             => $this->controller->order->ordered_id,
+                    'eparcel_express'       => 0,
+                    'signature_req'         => 0,
+                    'contact_phone'         => $phone,
+                    'items_errors'          => false,
+                    'items_errors_string'   => '<ul>',
+                    'is_ebay'               => 1,
+                    'ebay_id'               => $o['orderId']
+                );
+                if( !filter_var($email, FILTER_VALIDATE_EMAIL) )
+                {
+                    $order['errors'] = 1;
+                    $order['error_string'] = "<p>The customer email is not valid</p>";
+                }
+                //validate address
+                $ad = array(
+                    'address'   => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine1'],
+                    'address_2' => NULL,
+                    'suburb'    => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['city'],
+                    'state'     => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['stateOrProvince'],
+                    'postcode'  => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['postalCode'],
+                    'country'   => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['countryCode']
+                );
+                if( isset($o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine2']) )
+                    $ad['address_2'] = $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine2'];
+                //echo "The address array<pre>",print_r($ad),"</pre>";
+                if($ad['country'] == "AU")
+                {
+                    if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
+                    }
+                    //echo "<p>------------------------------------------------</p>";continue;
+                    $aResponse = $this->controller->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
+
+                    if(isset($aResponse['errors']))
+                    {
+                        $order['errors'] = 1;
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $order['error_string'] .= "<p>{$e['message']}</p>";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Postcode does not match suburb or state</p>";
+                    }
+                }
+                else
+                {
+                    if( strlen( $ad['address'] ) > 50 || strlen( $ad['address_2'] ) > 50 )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
+                    }
+                    if( strlen($order['ship_to']) > 30 )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
+                    }
+                }
+                if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $ad['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $ad['address'])))
+                {
+                    $order['errors'] = 1;
+                    $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
+                }
+                //$order['sort_order'] = ($ad['country'] == "AU")? 2:1;
+                $qty = 0;
+                foreach($o['lineItems'] as $item)
+                {
+                    $sku = ( isset($item['sku']) )? $item['sku'] : NULL;
+                    $product = $this->controller->item->getItemBySku($sku);
+                    if(!$product)
+                    {
+                        $order['items_errors'] = true;
+                        $items_errors = true;
+                        $is = (empty($item['sku']))? "NO SKU SENT" : $item['sku'];
+                        $mm .= "<li>Could not find {$item['name']} in WMS based on $is</li>";
+                        $order['items_errors_string'] .= "<li>Could not find {$item['title']} in WMS based on {$is}</li>";
+                    }
+                    else
+                    {
+                        $n_name = $product['name'];
+                        $item_id = $product['id'];
+                        $items[] = array(
+                            'qty'           =>  $item['quantity'],
+                            'id'            =>  $item_id,
+                            'whole_pallet'  => false
+                        );
+                        $qty += $item['quantity'];
+                        $weight += $product['weight'] * $item['quantity'];
+                    }
+
+                }
+                $order['instructions'] = "Please leave in a safe place out of the weather";
+                $order['items_errors_string'] .= "</ul>";
+                if($items_errors)
+                {
+                    $message = "<p>There was a problem with some items</p>";
+                    $message .= "<ul>".$mm."</ul>";
+                    $message .= "<p>Orders with these items will not be processed at the moment</p>";
+                    $message .= "<p>Client Order ID: {$order['client_order_id']}</p>";
+                    $message .= "<p>Customer: {$order['ship_to']}</p>";
+                    $message .= "<p>Address: {$ad['address']}</p>";
+                    $message .= "<p>{$ad['address_2']}</p>";
+                    $message .= "<p>{$ad['suburb']}</p>";
+                    $message .= "<p>{$ad['state']}</p>";
+                    $message .= "<p>{$ad['postcode']}</p>";
+                    $message .= "<p>{$ad['country']}</p>";
+                    if ($this->ua == "CRON" && SITE_LIVE )
+                    {
+                        Email::sendPBAImportError($message);
+                        $this->return_array['error_string'] .= $message;
+                        ++$this->return_array['error_count'];
+                        $this->return_array['error_orders'][] = $order['client_order_id'];
+                    }
+                    else
+                    {
+                        $this->return_array['error_string'] .= $message;
+                        ++$this->return_array['error_count'];
+                        $this->return_array['error_orders'][] = $order['client_order_id'];
+                    }
+                }
+                else
+                {
+                    $order['quantity'] = $qty;
+                    $order['weight'] = $o['total_weight'];
+                    $order['items'][$o['salesRecordReference']] = $items;
+                    $orders_items[$o['salesRecordReference']] = $items;
+                    $order = array_merge($order, $ad);
+                    $orders[] = $order;
+                }
+            }//endforeach order
+            //die("Endforeach");
+            $orders['orders_items'] = $orders_items;
+            $this->output .= "===========================   Gonna send em back  =========================".PHP_EOL;
+            return $orders;
+        }//end if count orders
+        else
+        {
+            $this->output .= "=========================================================================================================".PHP_EOL;
+            $this->output .= "No New Orders";
+            $this->output .= "=========================================================================================================".PHP_EOL;
+        }
+        return false;
+    }
+
 //Authorisation Functions
     /* This one doesn't work*/
-
-
     public function firstAuthAppToken() {
         $db = Database::openConnection();
 
@@ -89,9 +265,6 @@
             'refresh_expires'    => time() + 60*60*24*365.25*1.5 //18 months
         ), 1);
     }
-
-
-
 
     protected function authorizationToken(array $args)
     {
@@ -139,10 +312,8 @@
     {
        //echo "ARGS<pre>",print_r($args),"</pre>";
         extract($args);
-
-        //ebay are a PACK!!!!!!!!!
+        //ebay are a PACK!!!!!!!!! url encoding is the key to making it work!!!!! Not mentioned in the docs anywhere!!!!!
         $scope = urlencode($scope);
-
 
         $link = $this->serverUrl."/identity/v1/oauth2/token";
         //echo "<p>Link: $link</p>"; //die();
