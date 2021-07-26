@@ -79,7 +79,7 @@
             {
                 if($o['orderPaymentStatus'] == "FULLY_REFUNDED")
                     continue;
-                echo "Order with index $i<pre>",print_r($o),"</pre>";
+                //echo "Order with index $i<pre>",print_r($o),"</pre>";
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
