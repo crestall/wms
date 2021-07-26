@@ -12,6 +12,9 @@
                 <div class="col">
                     <p><a class="btn btn-primary" href="#shopify">Shopify Orders</a></p>
                 </div>
+                <div class="col">
+                    <p><a class="btn btn-primary" href="#ebay">Ebay Orders</a></p>
+                </div>
                 <div class="col-md-2">
                     <p><a class="btn btn-primary" href="#myob">MYOB Orders</a></p>
                 </div>
@@ -218,6 +221,27 @@
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
                                 <button class="btn btn-outline-secondary shopify_import" id="bbshopify_full_import" data-function="importBBShopifyOrders">Run It</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="ebay" class="col-12 mb-3 border-top border-secondary pt-3">
+                <h2>EBAY Order Importing</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 mb-3">
+                <div class="card">
+                    <a name="pba-ebay"></a>
+                    <h4 class="card-header">PBA Ebay Orders</h4>
+                    <div class="card-body">
+                        <div class="form-group row full_import">
+                            <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
+                            <div class="col-7">
+                                <button class="btn btn-outline-secondary ebay_import" id="ebay_full_import" data-function="importPBAEbayOrders">Run It</button>
                             </div>
                         </div>
                     </div>
