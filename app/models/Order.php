@@ -346,6 +346,8 @@ class Order extends Model{
             $o_values['is_woocommerce'] = 1;
         if(isset($data['is_shopify']))
             $o_values['is_shopify'] = 1;
+        if(isset($data['is_ebay']))
+            $o_values['is_ebay'] = 1;
         if(isset($data['is_voicecaddy']))
             $o_values['is_voicecaddy'] = 1;
         if(isset($data['is_homecoursegolf']))
