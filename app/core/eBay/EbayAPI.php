@@ -194,7 +194,7 @@
                 }
                 $order['instructions'] = "Please leave in a safe place out of the weather";
                 if( isset($o['buyerCheckoutNotes']) && !empty($o['buyerCheckoutNotes']) )
-                    $order['instruction'] = $o['buyerCheckoutNotes'];
+                    $order['instructions'] = $o['buyerCheckoutNotes'];
                 $order['items_errors_string'] .= "</ul>";
                 if($items_errors)
                 {
