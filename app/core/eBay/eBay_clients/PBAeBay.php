@@ -102,7 +102,7 @@
         Logger::logOrderImports('order_imports/pbaebay', $this->output); //die();
         if ($this->ua != "CRON" )
         {
-            //return $this->return_array;
+            return $this->return_array;
         }
         else
         {
