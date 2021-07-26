@@ -115,7 +115,7 @@
     {
         //echo "orders[orders_items]<pre>",print_r($orders['orders_items']),"</pre>";return;
         $pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
-        echo "pbaoitems<pre>",print_r($pbaoitems),"</pre>";die();
+        //echo "pbaoitems<pre>",print_r($pbaoitems),"</pre>";die();
         unset($orders['orders_items']);
 
         foreach($orders as $o)
