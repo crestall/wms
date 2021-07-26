@@ -241,7 +241,7 @@
                         <div class="form-group row full_import">
                             <label class="col-5"><h5 class="card-title">Run Full Import</h5></label>
                             <div class="col-7">
-                                <button class="btn btn-outline-secondary ebay_import" id="ebay_full_import" data-function="importPBAEbayOrders">Run It</button>
+                                <button class="btn btn-outline-secondary ebay_import" id="PBAebay_full_import" data-function="importPBAEbayOrders">Run It</button>
                             </div>
                         </div>
                     </div>

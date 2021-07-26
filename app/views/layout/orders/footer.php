@@ -2014,6 +2014,25 @@
                                     }
                                 });
                             });
+                        });
+                        $('button.ebay_import').each(function(i,e){
+                            $(this).click(function(ev){
+                                //console.log(ev.target.id + " clicked");
+                                var action = $(this).data('function');
+                                //console.log("action: "+action);
+                                swal({
+                                    title: "Really run a full import?",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                }).then( function(willImport) {
+                                    if (willImport) {
+                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Contacting Server...</h1></div>' });
+                                        var url = "/orders/"+action;
+                                        window.location.href = url;
+                                    }
+                                });
+                            });
                         })
                         $('form#nuchev_single_import, form#oneplate_single_import').submit(function(e){
                             if($(this).valid())
