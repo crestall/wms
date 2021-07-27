@@ -25,8 +25,10 @@ class ProductionReportsController extends Controller
 
     public function warehouseOrders()
     {
+        $client_name = "All Clients";
+        $courier_id = -1;
         $client_id = 0;
-        $client_name = "";
+        $fulfilled = 0;
         $orders = array();
         if(!empty($this->request->params['args']))
         {
