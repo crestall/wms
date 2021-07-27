@@ -25,7 +25,25 @@ class ProductionReportsController extends Controller
 
     public function warehouseOrders()
     {
-
+        $client_id = 0;
+        $client_name = "";
+        $orders = array();
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+            }
+        }
+        Config::setJsConfig('curPage', "warehouse-orders");
+        Config::set('curPage', "warehouse-orders");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionreports/", Config::get('VIEWS_PATH') . 'productionreports/warehouseOrders.php',[
+            'page_title'    =>  'Production Jobs in Warehouse',
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name,
+            'orders'        =>  $orders
+        ]);
     }
 
     public function isAuthorized()
