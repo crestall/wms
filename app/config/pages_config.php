@@ -962,7 +962,7 @@ $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
 
 //share the reports
-$prod_sales_admin['production-reports'] = $prod_sales['production-reports'] = $prod['production-reports'] = $padmin['production-reports'];
+$prod_sales_admin['production-reports'] = $prod_sales['production-reports'] = $padmin['production-reports'];
 
 //$admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
