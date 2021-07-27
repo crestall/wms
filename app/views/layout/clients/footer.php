@@ -64,8 +64,8 @@
                     {
                         var dt_options = {
                             "columnDefs": [
-                                { "orderable": false, "targets": [0,5] },
-                                { "searchable": false, "targets": [0,4,5]}
+                                { "orderable": false, "targets": [0,6] },
+                                { "searchable": false, "targets": [0,4,5,6]}
                             ],
                             "order": [],
                             "mark": true
