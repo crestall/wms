@@ -25,7 +25,7 @@ class ProductionReportsController extends Controller
 
     public function warehouseOrders()
     {
-        
+
     }
 
     public function isAuthorized()
@@ -33,7 +33,7 @@ class ProductionReportsController extends Controller
         $action = $this->request->param('action');
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        $resource = "productionsettings";
+        $resource = "productionreports";
 
         //only for admin
         Permission::allow('production admin', $resource, "*");
