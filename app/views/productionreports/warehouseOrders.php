@@ -8,7 +8,7 @@
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
                     <label>Filter By Client</label>
-                    <select id="client_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">All Clients</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                    <select id="client_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">All Production Clients</option><?php echo $this->controller->client->getSelectProductionClients($client_id);?></select>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
