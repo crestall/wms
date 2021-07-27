@@ -23,6 +23,11 @@ class ProductionReportsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function warehouseOrders()
+    {
+        
+    }
+
     public function isAuthorized()
     {
         $action = $this->request->param('action');
