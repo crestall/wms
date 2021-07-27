@@ -85,6 +85,10 @@ $padmin = array(
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-chart-bar fa-2x"></i>'
+        ),
+        'warehouse-orders'  => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
         )
     ),
     'production-settings'   => array(
