@@ -2,7 +2,7 @@
 
 ?>
 <div id="page-wrapper">
-    <div id="page-container" class="container-xl">
+    <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
