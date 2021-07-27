@@ -33,8 +33,8 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                         <label class="custom-control-label col-md-3" for="active">Active</label>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="has_reps" name="has_reps" <?php if($client['has_reps'] > 0) echo "checked";?> />
-                        <label class="custom-control-label col-md-3" for="has_reps">Manage Sales Reps</label>
+                        <input class="custom-control-input" type="checkbox" id="production_client" name="production_client" <?php if($client['production_client'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="production_client">Production Client</label>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="use_bubblewrap" name="use_bubblewrap" <?php if($client['use_bubblewrap'] > 0) echo "checked";?> />
