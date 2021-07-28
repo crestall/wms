@@ -952,7 +952,7 @@ class OrdersController extends Controller
             "orderTracking",
             "orderDetail",
         );
-        Permission::allow(['production sales', 'production sales admin', 'production admin'], $resource, $allowed_resources);
+        //Permission::allow(['production sales', 'production sales admin', 'production admin'], $resource, $allowed_resources);
         //warehouse users
         Permission::allow('warehouse', $resource, array(
             "index",

@@ -57,6 +57,12 @@ class ProductionReportsController extends Controller
         ]);
     }
 
+    public function orderTracking()
+    {
+        $orders = new OrdersController();
+        return $orders->orderTracking();
+    }
+
     public function isAuthorized()
     {
         $action = $this->request->param('action');
