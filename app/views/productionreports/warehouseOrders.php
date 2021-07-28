@@ -35,7 +35,7 @@
             </div>
         </div>
         <?php if(count($orders)):?>
-
+            <?php echo "<pre>".print_r($orders),"</pre>";?>
         <?php else:?>
             <div class="row">
                 <div class="col-lg-12">
