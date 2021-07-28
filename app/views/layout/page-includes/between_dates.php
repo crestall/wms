@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 mb-2">
         <button id="change_dates" class="btn btn-small btn-outline-secondary">Change Dates</button>
     </div>
     <input type="hidden" id="date_from_value" name="date_from_value" value="<?php echo $from;?>" />
