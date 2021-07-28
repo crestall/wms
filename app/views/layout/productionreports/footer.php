@@ -19,9 +19,18 @@
                                 href += "/client="+$('#client_selector').val();
                             if($('#status_selector').val() != -1)
                                 href += "/status="+$('#status_selector').val();
+                            href += "/from="+$('#date_from_value').val();
+                            href += "/to="+$('#date_to_value').val(); 
                             window.location.href = href;
                         });
                         datePicker.betweenDates();
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            window.location.href = "/orders/client-orders/from="+from+"/to="+to;
+                        });
                     }
                 }
             }
