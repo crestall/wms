@@ -26,9 +26,8 @@ class ProductionReportsController extends Controller
     public function warehouseOrders()
     {
         $client_name = "All Production Clients";
-        $status_id = -1;
+        $status_id = 0;
         $client_id = 0;
-        $fulfilled = 0;
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $orders = array();
