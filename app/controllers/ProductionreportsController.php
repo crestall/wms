@@ -50,7 +50,7 @@ class ProductionReportsController extends Controller
             'page_title'    =>  'Orders in Warehouse For '.$client_name,
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
-            'status_id'     => $status,
+            'status_id'     => $status_id,
             'orders'        =>  $orders,
             'from'          => $from,
             'to'            => $to
