@@ -26,7 +26,7 @@ class ProductionReportsController extends Controller
     public function warehouseOrders()
     {
         $client_name = "All Production Clients";
-        $courier_id = -1;
+        $status_id = -1;
         $client_id = 0;
         $fulfilled = 0;
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month');
@@ -39,6 +39,10 @@ class ProductionReportsController extends Controller
                 $client_id = $this->request->params['args']['client'];
                 $client_name = $this->client->getClientName($client_id);
             }
+            if(isset($this->request->params['args']['status_id']))
+            {
+                $status_id = $this->request->params['args']['status_id'];
+            }
         }
         Config::setJsConfig('curPage', "warehouse-orders");
         Config::set('curPage', "warehouse-orders");
@@ -46,6 +50,7 @@ class ProductionReportsController extends Controller
             'page_title'    =>  'Orders in Warehouse For '.$client_name,
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
+            'status_id'     => $status,
             'orders'        =>  $orders,
             'from'          => $from,
             'to'            => $to
