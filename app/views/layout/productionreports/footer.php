@@ -49,6 +49,20 @@
                         console.log('href='+href );
                         window.location.href = href;
                     }
+                },
+                'order-tracking' : {
+                    init: function(){
+
+                    }
+                },
+                'order-detail' : {
+                    init: function(){
+                        $('button#print').click(function(e){
+                        	$("div#print_this").printArea({
+                                    //put some options in
+                            });;
+                        });
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);

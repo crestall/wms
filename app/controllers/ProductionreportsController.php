@@ -86,7 +86,7 @@ class ProductionReportsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "order-tracking");
         Config::set('curPage', "order-tracking");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderTracking.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionreports/", Config::get('VIEWS_PATH') . 'productionreports/orderTracking.php', [
             'page_title'    =>  "Tracking and Details for ".$order['order_number'],
             'pht'           =>  ": Order Tracking",
             'order_id'      =>  $order_id,
