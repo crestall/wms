@@ -22,6 +22,21 @@
                             $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
                             actions['warehouse-orders']['doUrl']();
                         });
+                        var dt_options = {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [5,6] },
+                                { "searchable": false, "targets": [6]},
+                                { "type": 'extract-date', "targets" : [2,3]}
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#production_orders_table'), dt_options );
+                        $('#table_searcher').on( 'keyup', function () {
+                            table.search( this.value ).draw();
+                        } );
                     },
                     doUrl: function(){
                         var href = '/production-reports/warehouse-orders';
