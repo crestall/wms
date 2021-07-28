@@ -59,8 +59,42 @@ class ProductionReportsController extends Controller
 
     public function orderTracking()
     {
-        $orders = new OrdersController();
-        $orders->orderTracking();
+        $order_id = 0;
+        $order = array();
+        $courier = $order_status = "";
+        $tracking = array();
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['order']))
+            {
+                $order_id = $this->request->params['args']['order'];
+                $order = $this->order->getOrderDetail($order_id);
+                $courier = $this->courier->getCourierName($order['courier_id']);
+                $order_status = $this->order->getStatusName($order['status_id']);
+                if($courier == "eParcel" || $courier == "eParcel Express")
+                {
+                    $eparcel = $this->client->getEparcelClass($order['client_id']);
+                    $tracking = $this->$eparcel->GetTracking($order['consignment_id']);
+                    //echo "eParcel<pre>",print_r($tracking),"</pre>";die();
+                }
+                elseif($courier == "Direct Freight")
+                {
+                    $tracking = $this->directfreight->trackConsignment($order['consignment_id']);
+                }
+            }
+        }
+        //render the page
+        Config::setJsConfig('curPage', "order-tracking");
+        Config::set('curPage', "order-tracking");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderTracking.php', [
+            'page_title'    =>  "Tracking and Details for ".$order['order_number'],
+            'pht'           =>  ": Order Tracking",
+            'order_id'      =>  $order_id,
+            'order'         =>  $order,
+            'courier'       =>  $courier,
+            'order_status'  =>  $order_status,
+            'tracking'      =>  $tracking
+        ]);
     }
 
     public function isAuthorized()
