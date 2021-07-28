@@ -14,7 +14,7 @@
                     init: function(){
                         $('#client_selector,  #status_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
-                            var href = actions. ['warehouse-orders'].doUrl;
+                            var href = actions['warehouse-orders'].doUrl;
                             window.location.href = href;
                         });
                         datePicker.betweenDates();
