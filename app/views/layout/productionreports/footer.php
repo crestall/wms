@@ -14,8 +14,8 @@
                     init: function(){
                         $('#client_selector,  #status_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
-                            var href = actions['warehouse-orders'].doUrl;
-                            window.location.href = href;
+                            actions['warehouse-orders'].doUrl;
+
                         });
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -34,7 +34,7 @@
                             href += "/status="+$('#status_selector').val();
                         href += "/from="+$('#date_from_value').val();
                         href += "/to="+$('#date_to_value').val();
-                        return href;
+                        window.location.href = href;
                     }
                 }
             }
