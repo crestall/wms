@@ -1324,6 +1324,26 @@ class Order extends Model{
         return ($db->queryData($q));
     }
 
+    public function getProductionOrders($client_id, $status_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM ORDERS";
+        $ws = "";
+        if($client_id != 0)
+        {
+           $ws .= (strlen($ws) > 0)? " AND client_id = $client_id" : " WHERE client_id = $client_id";
+        }
+        if($status_id != 0)
+        {
+           $ws .= (strlen($ws) > 0)? " AND status_id = $status_id" : " WHERE status_id = $status_id";
+        }
+        $ws .= (strlen($ws) > 0)? " AND date_ordered >= $from" : " WHERE date_ordered >= $from";
+        $ws .= (strlen($ws) > 0)? " AND date_ordered <= $to" : " WHERE date_ordered <= $to";
+        $q .= $ws." ORDER BY date_ordered DESC";
+        die($q);
+        return $db->queryData($q);
+    }
+
     public function getAllOrders($client_id, $courier_id = -1, $fulfilled = 0, $store_order = -1, $state = "")
     {
         $db = Database::openConnection();
