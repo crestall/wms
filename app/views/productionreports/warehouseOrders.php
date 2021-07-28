@@ -41,7 +41,7 @@
                 <div class="col-lg-12">
                     <div class="errorbox">
                         <h2><i class="fas fa-exclamation-triangle"></i> No Orders Listed</h2>
-                        <p>You may need to remove some filters</p>
+                        <p>You may need to remove some filters or change the date range</p>
                     </div>
                 </div>
             </div>
