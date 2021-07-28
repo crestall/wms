@@ -12,7 +12,16 @@
                 },
                 'warehouse-orders': {
                     init: function(){
-                        
+                        $('#client_selector,  #status_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
+                            var href = '/production-reports/warehouse-orders';
+                            if($('#client_selector').val() != 0)
+                                href += "/client="+$('#client_selector').val();
+                            if($('#status_selector').val() != -1)
+                                href += "/status="+$('#status_selector').val();
+                            window.location.href = href;
+                        });
+                        datePicker.betweenDates();
                     }
                 }
             }
