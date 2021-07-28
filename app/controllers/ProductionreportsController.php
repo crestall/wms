@@ -75,6 +75,7 @@ class ProductionReportsController extends Controller
         //production sales users
         Permission::allow(['production sales', 'production sales admin'], $resource, [
             'index',
+            'orderTracking',
             'warehouseOrders'
         ]);
         //production users not allowed
