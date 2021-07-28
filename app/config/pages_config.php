@@ -89,6 +89,10 @@ $padmin = array(
         'warehouse-orders'  => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
+        ),
+        'order-tracking'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'production-settings'   => array(
