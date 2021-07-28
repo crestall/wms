@@ -59,7 +59,7 @@
                         </thead>
                         <tbody>
                             <?php foreach($orders as $o):
-                                $fullfillment = ($o['date_fulfilled'] > 0)? date('d-m-Y', $o['date_fulfilled']) : "Not Yet Fulfilled";
+                                $fulfillment = ($o['date_fulfilled'] > 0)? date('d-m-Y', $o['date_fulfilled']) : "Not Yet Fulfilled";
                                 if(!empty($o['company_name']))
                                 {
                                     $ship_to = $o['company_name']."<br>Attn:".$o['ship_to'];
