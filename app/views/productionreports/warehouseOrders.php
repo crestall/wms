@@ -96,7 +96,12 @@
                                             Total Items: <?php echo $item_count;?>
                                         </div>
                                     </td>
-                                    <td></td>
+                                    <td class="nowrap">
+                                        <?php if( $o['courier_id'] != 4 || $o['courier_id'] != 0 ):?>
+                                            <p><a class="btn btn-outline-fsg btn-sm" href="/orders/order-tracking/order=<?php echo $o['id'];?>">Track Order</a></p>
+                                        <?php endif;?>
+                                        <p><a class="btn btn-outline-fsg btn-sm" href="/orders/order-detail/order=<?php echo $o['id'];?>">View Details</a></p>
+                                    </td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
