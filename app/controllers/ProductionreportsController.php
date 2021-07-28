@@ -40,7 +40,7 @@ class ProductionReportsController extends Controller
             }
             if(isset($this->request->params['args']['status_id']))
             {
-                $status_id = $this->request->params['args']['status_id'];
+                $status_id = $this->request->params['args']['status'];
             }
         }
         Config::setJsConfig('curPage', "warehouse-orders");
