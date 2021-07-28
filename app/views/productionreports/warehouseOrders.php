@@ -70,8 +70,8 @@
                                 }
                                 $address = $this->controller->address->getAddressStringForOrder($o['id']);
             				    $order_status = $this->controller->order->getStatusName($o['status_id']);
-                                $item_count = $this->controller->order->getItemCountForOrder($co['id']);
-                                $ifo = $this->controller->order->getItemsForOrder($co['id']);
+                                $item_count = $this->controller->order->getItemCountForOrder($o['id']);
+                                $ifo = $this->controller->order->getItemsForOrder($o['id']);
                                 ?>
                                 <tr id="tr_<?php echo $o['id'];?>">
                                     <td class="filterable number">
