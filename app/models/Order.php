@@ -91,6 +91,21 @@ class Order extends Model{
         $this->getStatusses();
     }
 
+    public function getSelectStatuses($selected = false)
+    {
+        $check = "";
+        $ret_string = "";
+        foreach($this->status as $value => $label )
+        {
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function getOrderNumberForOrder($id)
     {
         $db = Database::openConnection();
