@@ -1327,7 +1327,7 @@ class Order extends Model{
     public function getProductionOrders($client_id, $status_id, $from, $to)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM orders o LEFT JOIN clients c ON o.client_id = c.id";
+        $q = "SELECT o.*, c.client_name FROM orders o LEFT JOIN clients c ON o.client_id = c.id";
         $ws = " WHERE c.production_client = 1";
         if($client_id != 0)
         {
