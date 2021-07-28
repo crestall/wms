@@ -89,7 +89,7 @@
                                     <td>
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                             <?php foreach($ifo as $i):?>
-                                                <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                                <p><span class="iname"><?php echo $i['name'];?>:</span> <span class="icount font-weight-bold"><?php echo $i['qty'];?></p>
                                             <?php endforeach;?>
                                         </div>
                                         <div class="item_total text-right">
