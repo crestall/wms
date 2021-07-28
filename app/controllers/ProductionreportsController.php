@@ -43,7 +43,7 @@ class ProductionReportsController extends Controller
         Config::setJsConfig('curPage', "warehouse-orders");
         Config::set('curPage', "warehouse-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionreports/", Config::get('VIEWS_PATH') . 'productionreports/warehouseOrders.php',[
-            'page_title'    =>  'Orders in Warehouse For {$client_name}',
+            'page_title'    =>  'Orders in Warehouse For '.$client_name,
             'client_id'     =>  $client_id,
             'client_name'   =>  $client_name,
             'orders'        =>  $orders,
