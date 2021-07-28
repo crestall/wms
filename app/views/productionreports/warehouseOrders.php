@@ -32,10 +32,19 @@
                         <a href="/production-reports/warehouse-orders" class="w-100 btn btn-outline-danger" >Remove Filters</a>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
+        <?php if(count($orders)):?>
+
+        <?php else:?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="errorbox">
+                        <h2><i class="fas fa-exclamation-triangle"></i> No Orders Listed</h2>
+                        <p>You may need to remove some filters</p>
+                    </div>
+                </div>
+            </div>
+        <?php endif;?>
     </div>
 </div>
