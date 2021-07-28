@@ -38,7 +38,7 @@ class ProductionReportsController extends Controller
                 $client_id = $this->request->params['args']['client'];
                 $client_name = $this->client->getClientName($client_id);
             }
-            if(isset($this->request->params['args']['status_id']))
+            if(isset($this->request->params['args']['status']))
             {
                 $status_id = $this->request->params['args']['status'];
             }
