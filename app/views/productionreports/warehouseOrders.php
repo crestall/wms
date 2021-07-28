@@ -15,7 +15,7 @@
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
                     <label>Filter By Status</label>
-                    <select id="status_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">Any</option><?php echo $this->controller->order->getSelectStatuses($status_id);?></select>
+                    <select id="status_selector" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">All Status</option><?php echo $this->controller->order->getSelectStatuses($status_id);?></select>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
