@@ -4,7 +4,7 @@
     <div class="col-md-1">
         <label>From</label>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 mb-2">
         <div class="input-group">
             <input type="text" class="form-control" name="date_from" id="date_from" value="<?php echo date("d/m/Y", $from);;?>" />
             <div class="input-group-append">
@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-1 mb-2">
+    <div class="col-md-1">
         <label>To</label>
     </div>
     <div class="col-md-2 mb-2">
