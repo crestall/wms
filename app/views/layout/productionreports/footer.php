@@ -13,7 +13,7 @@
                 'warehouse-orders': {
                     init: function(){
                         $('#client_selector,  #status_selector').change(function(e){
-                            .blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
+                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
                             actions['warehouse-orders']['doUrl']();
                         });
                         datePicker.betweenDates();
