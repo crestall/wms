@@ -12,10 +12,10 @@
             </div>
         </div>
     </div>
-    <div class="col-md-1">
+    <div class="col-md-1 mb-2">
         <label>To</label>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 mb-2">
         <div class="input-group">
             <input type="text" class="form-control" name="date_to" id="date_to" value="<?php echo date("d/m/Y", $to);;?>" />
             <div class="input-group-append">
