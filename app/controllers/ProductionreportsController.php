@@ -60,7 +60,7 @@ class ProductionReportsController extends Controller
     public function orderTracking()
     {
         $orders = new OrdersController();
-        return $orders->orderTracking();
+        $orders->orderTracking();
     }
 
     public function isAuthorized()
