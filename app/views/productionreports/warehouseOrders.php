@@ -28,8 +28,8 @@
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                     <div class="form-group">
-                        <label>&nbsp;</label>
-                        <a href="/production-reports/warehouse-orders" class="btn btn-outline-danger" >Remove Filters</a>
+                        <label>Reset Filters</label>
+                        <a href="/production-reports/warehouse-orders" class="btn btn-outline-danger" >Reset</a>
                     </div>
                 </div>
 
