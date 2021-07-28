@@ -1340,7 +1340,7 @@ class Order extends Model{
         $ws .= (strlen($ws) > 0)? " AND date_ordered >= $from" : " WHERE date_ordered >= $from";
         $ws .= (strlen($ws) > 0)? " AND date_ordered <= $to" : " WHERE date_ordered <= $to";
         $q .= $ws." ORDER BY date_ordered DESC";
-        die($q);
+        //die($q);
         return $db->queryData($q);
     }
 
