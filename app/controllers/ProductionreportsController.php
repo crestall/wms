@@ -43,6 +43,7 @@ class ProductionReportsController extends Controller
                 $status_id = $this->request->params['args']['status'];
             }
         }
+        $orders = $this->order->getProductionOrders($client_id, $status_id, $from, $to);
         Config::setJsConfig('curPage', "warehouse-orders");
         Config::set('curPage', "warehouse-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionreports/", Config::get('VIEWS_PATH') . 'productionreports/warehouseOrders.php',[
