@@ -1653,7 +1653,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //customer details
             $customer_data = array(
                 'name'  => $customer_name
