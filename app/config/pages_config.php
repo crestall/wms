@@ -93,6 +93,10 @@ $padmin = array(
         'order-tracking'    => array(
             'display'   => false,
             'icon'      => ''
+        ),
+        'order-detail'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'production-settings'   => array(
