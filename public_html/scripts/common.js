@@ -279,7 +279,6 @@ var jobDeliveryDestinations = {
                     {
                         $( this ).prop( "disabled", true );
                         $( this ).val( "" );
-                        $(this).valid();
                     }
                 });
             }
