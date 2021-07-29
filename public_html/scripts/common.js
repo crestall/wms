@@ -291,6 +291,8 @@ var jobDeliveryDestinations = {
                 });
             }
         });
+        if($('input#held_in_store, input#hold_in_store').prop('checked'))
+            $(this).change();
         $('input#send_to_customer').off('change').change(function(e){
             if($('input#send_to_customer').prop('checked'))
             {
