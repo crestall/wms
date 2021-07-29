@@ -275,7 +275,10 @@
                             });
                         });
                     },
-                    jobsTable: function(){
+                    jobsTable: function(paging){
+                        if(paging === undefined) {
+                            paging = $('input#completed').val() == 1;
+                        }
                         jQuery.extend( jQuery.fn.dataTableExt.oSort, {
                             "non-empty-string-asc": function (str1, str2) {
                                 if(str1 == "")
@@ -298,7 +301,6 @@
                                 return $('select', td).data("ranking");
                             } );
                         }
-                        var paging = $('input#completed').val() == 1;
                         var options = {
                             "paging":   paging,
                             //No initial sort,
@@ -941,7 +943,7 @@
                 'job-search-results':{
                     init: function(){
                         actions['job-search'].init();
-                        actions.common.jobsTable();
+                        actions.common.jobsTable(true);
                         actions.common.selectAll();
                     }
                 },
