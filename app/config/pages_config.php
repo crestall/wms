@@ -16,6 +16,17 @@
 include(APP."/config/icons.php");
 $padmin = array(
     'jobs'  => array(), //merges with production later
+    'warehouse-orders'  => array(
+        'warehouse-orders-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-truck fa-2x"></i>'
+        ),
+        'view-orders' =>  array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
+        )
+    ),
     'customers' => array(
         'add-customer'  => array(
             'display'       => true,
