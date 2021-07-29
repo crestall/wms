@@ -1,4 +1,5 @@
 <?php
+//echo "<pre>",print_r(Form::$values),"</pre>";
 //JOB DETAILS
 $job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
 $strict_dd = (empty(Form::value('job_id')) && $job['strict_dd'] == 0)? false : (!empty(Form::value('job_id')) && $job['strict_dd'] == 1)?  true : ($job['strict_dd'] == 1)? true : false;
@@ -8,6 +9,18 @@ $priority = (!empty(Form::value('priority')))? Form::value('priority'):$job['pri
 $status_id = (!empty(Form::value('status_id')))? Form::value('status_id'):$job['status_id'];
 $salesrep_id = (!empty(Form::value('salesrep_id')))? Form::value('salesrep_id'):$job['salesrep_id'];
 $date_entered = (!empty(Form::value('date_entered_value')))? Form::value('date_entered_value'): $job['created_date'];
+$held_in_store = (!empty(Form::value('held_in_store')));
+if($job['hold_in_store'] > 0)
+{
+    if( empty(Form::value('hold_in_store')) && !empty(Form::value('job_id')))
+        $hold_in_store = false;
+    else
+        $hold_in_store = true;
+}
+else
+{
+    $hold_in_store = !empty( Form::value('hold_in_store') );
+}
 
 //$date_due = (!empty(Form::value('date_due_value')))? Form::value('date_due_value'): $job['due_date'];
 $is_asap = (empty(Form::value('asap')))? $job['due_date'] == "ASAP" : true;
@@ -462,8 +475,12 @@ $f = 0;
                         <?php endif; ?>
                         <form id="delivery_details_update" method="post" action="/form/procJobDeliveryUpdate">
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                <input class="custom-control-input send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
-                                <label class="custom-control-label col-md-6" for="held_in_store">Hold Job In Store</label>
+                                <input class="custom-control-input send_to_address" type="checkbox" id="hold_in_store" name="hold_in_store" <?php if($hold_in_store) echo "checked";?> />
+                                <label class="custom-control-label col-md-6" for="hold_in_store">Keep Stock in Warehouse</label>
+                            </div>
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                <input class="custom-control-input send_to_address" type="checkbox" id="held_in_store" name="held_in_store" <?php if($held_in_store) echo "checked";?> />
+                                <label class="custom-control-label col-md-6" for="held_in_store">No Delivery Required</label>
                             </div>
                             <div id="delivery_address_holder">
                                 <div class="form-group row">

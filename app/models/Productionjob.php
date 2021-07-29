@@ -41,17 +41,25 @@ class Productionjob extends Model{
             'suburb'                => NULL,
             'state'                 => NULL,
             'postcode'              => NULL,
-            'country'               => 'AU'
+            'country'               => 'AU',
+            'hold_in_store'         => 0
         );
-        if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
-        if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
-        if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
-        if(!empty($data['address'])) $vals['address'] = $data['address'];
-        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
-        if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
-        if(!empty($data['state'])) $vals['state'] = $data['state'];
-        if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
-        if(!empty($data['country'])) $vals['country'] = $data['country'];
+        if(isset($data['hold_in_store']))
+        {
+            $vals['hold_in_store'] = 1;
+        }
+        else
+        {
+            if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
+            if(!empty($data['ship_to'])) $vals['ship_to'] = $data['ship_to'];
+            if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
+            if(!empty($data['address'])) $vals['address'] = $data['address'];
+            if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
+            if(!empty($data['suburb'])) $vals['suburb'] = $data['suburb'];
+            if(!empty($data['state'])) $vals['state'] = $data['state'];
+            if(!empty($data['postcode'])) $vals['postcode'] = $data['postcode'];
+            if(!empty($data['country'])) $vals['country'] = $data['country'];
+        }
         $id = $db->updateDatabaseFields($this->table, $vals, $data['job_id']);
     }
 
@@ -208,7 +216,7 @@ class Productionjob extends Model{
             'date'          => time()
         );
         $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
-
+        if(isset($data['hold_in_store'])) $vals['hold_in_store'] = 1;
         if(isset($data['asap']))
             $vals['due_date'] = "ASAP";
         else
