@@ -270,8 +270,8 @@ var jobDeliveryDestinations = {
             //console.log('click');
             $checkboxes.not(this).prop('checked', false).change();
         });
-        $('input#held_in_store').off('change').change(function(e){
-            if($('input#held_in_store').prop('checked'))
+        $('input#held_in_store, input#hold_in_store').off('change').change(function(e){
+            if($(this).prop('checked'))
             {
                 //console.log('will disable everything');
                 $("div#delivery_address_holder input").each(function(i,e){
