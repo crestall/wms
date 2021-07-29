@@ -83,7 +83,7 @@ class Client extends Model{
         if(!empty($data['carton_charge'])) $client_values['carton_charge'] = $data['carton_charge'];
         if(!empty($data['pallet_charge'])) $client_values['pallet_charge'] = $data['pallet_charge'];
         if(isset($data['image_name'])) $client_values['logo'] = $data['image_name'].".jpg";
-        if(isset($data['has_reps'])) $client_values['has_reps'] = 1;
+        if(isset($data['production_client'])) $client_values['production_client'] = 1;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
         $client_id = $db->insertQuery($this->table, $client_values);
@@ -155,7 +155,7 @@ class Client extends Model{
             'country'           =>  $data['country']
         );
         $client_values['active'] = (isset($data['active']))? 1 : 0;
-        $client_values['has_reps'] = (isset($data['has_reps']))? 1 : 0;
+        $client_values['production_client'] = (isset($data['production_client']))? 1 : 0;
         $client_values['use_bubblewrap'] = (isset($data['use_bubblewrap']))? 1 : 0;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         if(!empty($data['contact_name'])) $client_values['contact_name'] = $data['contact_name'];
@@ -202,6 +202,31 @@ class Client extends Model{
         $check = "";
         $ret_string = "";
         $q = "SELECT id, client_name FROM clients WHERE active = 1 AND has_reps = 1";
+        if(strlen($exclude))
+        {
+            $q .= " AND id NOT IN($exclude)";
+        }
+        $q .= " ORDER BY client_name";
+        $clients = $db->queryData($q);
+        foreach($clients as $c)
+        {
+            $label = $c['client_name'];
+            $value = $c['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+    }
+
+    public function getSelectProductionClients($selected = false, $exclude = '')
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $q = "SELECT id, client_name FROM clients WHERE active = 1 AND production_client = 1";
         if(strlen($exclude))
         {
             $q .= " AND id NOT IN($exclude)";

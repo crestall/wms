@@ -36,8 +36,8 @@ $country = Form::value('country');
                         <label class="custom-control-label col-md-3" for="can_adjust">Can Edit Order Items/Allocations</label>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="has_reps" name="has_reps" />
-                        <label class="custom-control-label col-md-3" for="has_reps">Manage Sales Reps</label>
+                        <input class="custom-control-input" type="checkbox" id="production_client" name="production_client" />
+                        <label class="custom-control-label col-md-3" for="production_client">Production Client</label>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Courier Reference</label>

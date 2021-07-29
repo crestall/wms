@@ -10,7 +10,7 @@
                         $('input#external_image').change(function(e){
                             $('input.product_image').toggle();
                             if($(this).is(":checked"))
-                                $('input#eximage').valid();
+                                $('input#eximage').valid().focus();
                             else
                                 $('em#eximage-error').remove();
                         });
@@ -21,7 +21,7 @@
                             $('input#height').valid();
                         });
                         $('input#barcode').change(function(ev){
-                            var val = $(this).val().replace(/\D/g, ""); 
+                            var val = $(this).val().replace(/\D/g, "");
                             $(this).val(val);
                         })
                     }

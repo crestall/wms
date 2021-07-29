@@ -188,6 +188,22 @@ class OrdersController extends Controller
        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
     }
 
+    public function importPBAEbayOrders()
+    {
+        $this->PBAeBay->connect();
+       $response = $this->PBAeBay->getCurrentOrders();
+       $feedback = "<h2><i class='far fa-check-circle'></i>PBA Perfect Practice Golf eBay Orders Imported</h2>";
+       $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
+       if($response['error_count'] > 0)
+       {
+           $feedback .= "<p>".$response['error_count']." orders were not imported</p>";
+           $feedback .= "<p>The error response is listed below</p>";
+           $feedback .= $response['error_string'];
+       }
+       Session::set('feedback', $feedback);
+       return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
+    }
+
     public function importPBAPPGShopifyOrders()
     {
        $response = $this->PbaPerfectPracticeGolfShopify->getOrders();
@@ -931,7 +947,13 @@ class OrdersController extends Controller
         //only for admin
         Permission::allow('admin', $resource, "*");
         Permission::allow('super admin', $resource, "*");
-        //warhouse users
+        //production users
+        $allowed_resources = array(
+            "orderTracking",
+            "orderDetail",
+        );
+        //Permission::allow(['production sales', 'production sales admin', 'production admin'], $resource, $allowed_resources);
+        //warehouse users
         Permission::allow('warehouse', $resource, array(
             "index",
             "orderDispatching",

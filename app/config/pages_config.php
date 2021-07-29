@@ -85,6 +85,18 @@ $padmin = array(
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-chart-bar fa-2x"></i>'
+        ),
+        'warehouse-orders'  => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
+        ),
+        'order-tracking'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'order-detail'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'production-settings'   => array(
@@ -956,6 +968,9 @@ $client = array(
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
+
+//share the reports
+$prod_sales_admin['production-reports'] = $prod_sales['production-reports'] = $padmin['production-reports'];
 
 //$admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);

@@ -102,20 +102,20 @@
         Logger::logOrderImports('order_imports/pbaebay', $this->output); //die();
         if ($this->ua != "CRON" )
         {
-            //return $this->return_array;
+            return $this->return_array;
         }
         else
         {
-            //Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
+            Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
         }
-        echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
+        //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
     }
 
     private function addPBAOrders($orders)
     {
-        echo "orders[orders_items]<pre>",print_r($orders['orders_items']),"</pre>";return;
+        //echo "orders[orders_items]<pre>",print_r($orders['orders_items']),"</pre>";return;
         $pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
-        echo "pbaoitems<pre>",print_r($pbaoitems),"</pre>";die();
+        //echo "pbaoitems<pre>",print_r($pbaoitems),"</pre>";die();
         unset($orders['orders_items']);
 
         foreach($orders as $o)

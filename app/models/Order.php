@@ -91,6 +91,21 @@ class Order extends Model{
         $this->getStatusses();
     }
 
+    public function getSelectStatuses($selected = false)
+    {
+        $check = "";
+        $ret_string = "";
+        foreach($this->status as $value => $label )
+        {
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function getOrderNumberForOrder($id)
     {
         $db = Database::openConnection();
@@ -346,6 +361,8 @@ class Order extends Model{
             $o_values['is_woocommerce'] = 1;
         if(isset($data['is_shopify']))
             $o_values['is_shopify'] = 1;
+        if(isset($data['is_ebay']))
+            $o_values['is_ebay'] = 1;
         if(isset($data['is_voicecaddy']))
             $o_values['is_voicecaddy'] = 1;
         if(isset($data['is_homecoursegolf']))
@@ -1305,6 +1322,26 @@ class Order extends Model{
         }
         $q .= " ORDER BY date_ordered ASC";
         return ($db->queryData($q));
+    }
+
+    public function getProductionOrders($client_id, $status_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT o.*, c.client_name FROM orders o LEFT JOIN clients c ON o.client_id = c.id";
+        $ws = " WHERE c.production_client = 1";
+        if($client_id != 0)
+        {
+           $ws .= (strlen($ws) > 0)? " AND client_id = $client_id" : " WHERE client_id = $client_id";
+        }
+        if($status_id != 0)
+        {
+           $ws .= (strlen($ws) > 0)? " AND status_id = $status_id" : " WHERE status_id = $status_id";
+        }
+        $ws .= (strlen($ws) > 0)? " AND date_ordered >= $from" : " WHERE date_ordered >= $from";
+        $ws .= (strlen($ws) > 0)? " AND date_ordered <= $to" : " WHERE date_ordered <= $to";
+        $q .= $ws." ORDER BY date_ordered DESC";
+        //die($q);
+        return $db->queryData($q);
     }
 
     public function getAllOrders($client_id, $courier_id = -1, $fulfilled = 0, $store_order = -1, $state = "")

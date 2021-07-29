@@ -77,7 +77,9 @@
             $orders_items = array();
             foreach($the_orders as $i => $o)
             {
-                echo "Order with index $i<pre>",print_r($o),"</pre>";
+                if($o['orderPaymentStatus'] == "FULLY_REFUNDED")
+                    continue;
+                //echo "Order with index $i<pre>",print_r($o),"</pre>";
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
@@ -191,6 +193,8 @@
 
                 }
                 $order['instructions'] = "Please leave in a safe place out of the weather";
+                if( isset($o['buyerCheckoutNotes']) && !empty($o['buyerCheckoutNotes']) )
+                    $order['instructions'] = $o['buyerCheckoutNotes'];
                 $order['items_errors_string'] .= "</ul>";
                 if($items_errors)
                 {

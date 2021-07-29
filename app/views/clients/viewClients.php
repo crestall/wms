@@ -28,6 +28,7 @@
                                 <th data-priority="2">Contact Name</th>
                                 <th data-priority="2">Contact Email</th>
                                 <th data-priority="10001">Locked Orders</th>
+                                <th data-priority="10001">Production Client</th>
                                 <th data-priority="1"></th>
                             </tr>
                         </thead>
@@ -39,6 +40,7 @@
                                 <td data-label="Contact Name"><?php echo $c['contact_name'];?></td>
                                 <td data-label="Contact Email"><?php echo $c['billing_email'];?></td>
                                 <td data-label="Locked Orders"><?php echo ($c['can_adjust'] > 0)?  "No" : "Yes";?></td>
+                                <td data-label="Production Client"><?php echo ($c['production_client'] > 0)?  "Yes" : "No";?></td>
                                 <td>
                                     <p><a class="btn btn-outline-secondary" href="/clients/edit-client/client=<?php echo $c['id'];?>" >Edit Details</a></p>
                                 </td>
