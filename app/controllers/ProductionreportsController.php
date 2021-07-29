@@ -97,6 +97,37 @@ class ProductionReportsController extends Controller
         ]);
     }
 
+    public function orderDetail()
+    {
+        $order_id = 0;
+        $order = array();
+        $courier = $order_status = "";
+        $products = array();
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['order']))
+            {
+                $order_id = $this->request->params['args']['order'];
+                $order = $this->order->getOrderDetail($order_id);
+                $courier = $this->courier->getCourierName($order['courier_id']);
+                $order_status = $this->order->getStatusName($order['status_id']);
+                $products = $this->order->getItemsForOrder($order_id);
+            }
+        }
+        //render the page
+        Config::setJsConfig('curPage', "order-detail");
+        Config::set('curPage', "order-detail");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderDetail.php', [
+            'page_title'    =>  "Order Detail",
+            'pht'           =>  ": Order Detail",
+            'order_id'      =>  $order_id,
+            'order'         =>  $order,
+            'courier'       =>  $courier,
+            'order_status'  =>  $order_status,
+            'products'      =>  $products
+        ]);
+    }
+
     public function isAuthorized()
     {
         $action = $this->request->param('action');
@@ -109,6 +140,7 @@ class ProductionReportsController extends Controller
         //production sales users
         Permission::allow(['production sales', 'production sales admin'], $resource, [
             'index',
+            'orderDetail',
             'orderTracking',
             'warehouseOrders'
         ]);
