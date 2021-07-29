@@ -779,7 +779,8 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if(!isset($held_in_store))
+        //if(!isset($held_in_store))
+        if( !isset($held_in_store) && !isset($hold_in_store) )
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -794,6 +795,7 @@ class FormController extends Controller {
             Session::set('jobdeliverydetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#deliverydetails");
+        
     }
 
     public function procTransferLocation()
