@@ -986,7 +986,7 @@ $prod_sales_admin['production-reports'] = $prod_sales['production-reports'] = $p
 //$admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 
-$prod_admin = array_merge($prod, $padmin);
+$prod_admin = array_merge($padmin,$prod);
 //return the pages
 return array(
     "PRODUCTION_SALES_ADMIN_PAGES"    => $prod_sales_admin,
