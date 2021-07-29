@@ -11,7 +11,7 @@ $date_entered = (!empty(Form::value('date_entered_value')))? Form::value('date_e
 $held_in_store = (!empty(Form::value('held_in_store')));
 if($job['hold_in_store'] > 0)
 {
-    if(empty(Form::value('hold_in_store')))
+    if( empty(Form::value('hold_in_store')) && !empty(Form::value('job_id')))
         $hold_in_store = false;
     else
         $hold_in_store = true;
