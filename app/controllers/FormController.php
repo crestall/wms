@@ -795,7 +795,6 @@ class FormController extends Controller {
             Session::set('jobdeliverydetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Updated</h3><p>The changes should be showing below</p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/update-job/job={$job_id}#deliverydetails");
-        
     }
 
     public function procTransferLocation()
