@@ -334,8 +334,12 @@ else
                         </div>
                         <div class="card-body">
                             <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                <input class="custom-control-input send_to_address" type="checkbox" id="hold_in_store" name="hold_in_store" />
+                                <label class="custom-control-label col-md-6" for="hold_in_store">Hold Job In Store</label>
+                            </div>
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
                                 <input class="custom-control-input send_to_address" type="checkbox" id="held_in_store" name="held_in_store" />
-                                <label class="custom-control-label col-md-6" for="held_in_store">Hold Job In Store</label>
+                                <label class="custom-control-label col-md-6" for="held_in_store">No Delivery Required</label>
                             </div>
                             <div id="delivery_address_holder">
                                 <div class="form-group row">
