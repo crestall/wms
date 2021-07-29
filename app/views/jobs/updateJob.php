@@ -1,5 +1,5 @@
 <?php
-echo "<pre>",print_r(Form::$values),"</pre>";
+//echo "<pre>",print_r(Form::$values),"</pre>";
 //JOB DETAILS
 $job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
 $strict_dd = (empty(Form::value('job_id')) && $job['strict_dd'] == 0)? false : (!empty(Form::value('job_id')) && $job['strict_dd'] == 1)?  true : ($job['strict_dd'] == 1)? true : false;
@@ -13,17 +13,6 @@ $held_in_store = (!empty(Form::value('held_in_store')));
 if($job['hold_in_store'] > 0)
 {
     if( empty(Form::value('hold_in_store')) && !empty(Form::value('job_id')))
-        $hold_in_store = false;
-    else
-        $hold_in_store = true;
-}
-else
-{
-    $hold_in_store = !empty( Form::value('hold_in_store') );
-}
-if($job['hold_in_store'] > 0)
-{
-    if(empty(Form::value('hold_in_store')))
         $hold_in_store = false;
     else
         $hold_in_store = true;
