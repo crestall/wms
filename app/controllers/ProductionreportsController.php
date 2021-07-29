@@ -117,7 +117,7 @@ class ProductionReportsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "order-detail");
         Config::set('curPage', "order-detail");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderDetail.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/productionreports/", Config::get('VIEWS_PATH') . 'productionreports/orderDetail.php', [
             'page_title'    =>  "Order Detail",
             'pht'           =>  ": Order Detail",
             'order_id'      =>  $order_id,
