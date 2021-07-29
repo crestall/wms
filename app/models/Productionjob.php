@@ -208,7 +208,7 @@ class Productionjob extends Model{
             'date'          => time()
         );
         $vals['strict_dd'] = (isset($data['strict_dd']))? 1 : 0;
-
+        if(isset($data['hold_in_store'])) $vals['hold_in_store'] = 1;
         if(isset($data['asap']))
             $vals['due_date'] = "ASAP";
         else
