@@ -1644,7 +1644,7 @@ class FormController extends Controller {
         {
             $this->validateAddress($customer_address, $customer_suburb, $customer_state, $customer_postcode, $customer_country, isset($ignore_customer_address_error), "customer_", "show_customer_address");
         }
-        if(!isset($held_in_store))
+        if( !isset($held_in_store) || !isset($hold_in_store) )
             $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
