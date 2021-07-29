@@ -1,4 +1,5 @@
 <?php
+echo "<pre>",print_r(Form::$values),"</pre>";
 //JOB DETAILS
 $job_id = (!empty(Form::value('job_id')))? Form::value('job_id'):$job['job_id'];
 $strict_dd = (empty(Form::value('job_id')) && $job['strict_dd'] == 0)? false : (!empty(Form::value('job_id')) && $job['strict_dd'] == 1)?  true : ($job['strict_dd'] == 1)? true : false;
