@@ -25,7 +25,7 @@ class WarehouseOrdersController extends Controller
 
     public function viewOrders()
     {
-        echo "<pre>",print_r($this->request->params['args']),"</pre>";die(); 
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die(); 
         $client_name = "All Production Clients";
         $courier_id = -1;
         $client_id = 0;
