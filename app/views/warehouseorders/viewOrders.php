@@ -15,6 +15,7 @@
     <div id="page_container" class="container-xxl">
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+    <?php echo $user_role;?>
     <div class="row view-orders-buttons" >
         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
             <p><a class="btn btn-sm btn-block btn-outline-fsg slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
