@@ -691,7 +691,8 @@ class OrdersController extends Controller
     public function orderUpdate()
     {
         //echo "<p>In the orders controller</p>";
-        echo "<pre>",print_r($this->request),"</pre>";
+        //echo "<pre>",print_r($this->request),"</pre>";
+        $cont = (isset($this->request->data['link']))? $this->request->data['link']."-orders" : "orders";
         if(!isset($this->request->params['args']['order']))
         {
             $error = true;
@@ -742,7 +743,8 @@ class OrdersController extends Controller
             'truck_id'          =>  $truck_id,
             'local_id'          =>  $local_id,
             'address_string'    =>  $address_string,
-            'entered_by'        =>  $eb
+            'entered_by'        =>  $eb,
+            'cont'              =>  $cont
         ]);
     }
 
